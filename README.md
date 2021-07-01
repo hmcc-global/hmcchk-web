@@ -27,11 +27,11 @@ This HMCC HK's Web Repo built on SailsJS and React
 
 #### Branch Best Practices
 1. Branch naming convention: `(issueNumber)-(branchName)-description-of-task` (e.g `4-feature-anncmt-rest-api`)
-  - issueNumber: this can be found beside the issue title when you click into an issue, or the number at the end of the issue link (eg. https://github.com/hmcc-global/hmcchk-web/issues/8 <--- #8)
-    + This is helpful so that we can keep track of what issue a branch is working on without having to look up list of issues etc.
-  - branchName: refer to Branch Prefix Definitions
+    - issueNumber: this can be found beside the issue title when you click into an issue, or the number at the end of the issue link (eg. https://github.com/hmcc-global/hmcchk-web/issues/8 <--- #8)
+      + This is helpful so that we can keep track of what issue a branch is working on without having to look up list of issues etc.
+    - branchName: refer to Branch Prefix Definitions
 2. When working on your own `feature` branch, do not forget to periodically update your local branch with the `release` branch to reduce likelikehood/size of merge conflicts
-  - Instead of `git pull` we use `git pull --rebase` to pull changes from remote branch to our local branch. Rebasing helps to keep our Gitflow neat and linear which makes it easy to keep track of and trace
+    - Instead of `git pull` we use `git pull --rebase` to pull changes from remote branch to our local branch. Rebasing helps to keep our Gitflow neat and linear which makes it easy to keep track of and trace
 3. When all code changes have been finished in your `feature` branch, create a Pull Request and your peers review it before merging.
 4. Branch merge flow should be: `feature`->`release`->`master` - i.e `feature` branches should always Pull Request and merge into `release`
 
