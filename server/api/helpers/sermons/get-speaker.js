@@ -25,7 +25,7 @@ module.exports = {
     }
 
     try {
-      const data = await sails.helpers.getData(url, parameters = { 'per_page': 100 });
+      const data = await sails.helpers.getData(url);
       let transformedSpeaker = data.reduce((acc, {id, name}) => {
         acc[id] = name;
         return acc;
