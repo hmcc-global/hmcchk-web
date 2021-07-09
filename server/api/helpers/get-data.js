@@ -33,19 +33,40 @@ module.exports = {
 
   fn: async function({ url, parameters }, exits) {
 
-    const response = await axios.get(url, { params: parameters});
+    let pageNumber = 1;
+    let additionalParams = {
+      // eslint-disable-next-line camelcase
+      per_page: 100,
+      page: pageNumber,
+      ...parameters
+    };
+
+    let response = await axios.get(url, { params: additionalParams });
+    let data = response.data;
+    let totalPages = response.headers['x-wp-totalpages'];
+
+    while (totalPages > 1) {
+      additionalParams.page = ++pageNumber;
+      response = await axios.get(url, { params: additionalParams });
+      if (typeof(data) === 'string') {
+        data = data.substring(0, data.length-1).concat(response.data.replace('[',','));
+      } else {
+        data = [...data, ...response.data];
+      }
+      totalPages--;
+    }
 
     let parsedPayload;
     try {
-      if (typeof(response.data) === 'string') {
-        let payload = response.data.substring(1);
+      if (typeof(data) === 'string') {
+        let payload = data.substring(1);
         parsedPayload = JSON.parse(payload);
       } else {
-        parsedPayload = response.data;
+        parsedPayload = data;
       }
     } catch (unusedErr) {
       try {
-        parsedPayload = JSON.parse(response.data);
+        parsedPayload = JSON.parse(data);
       } catch (err) {
         sails.log.error(`Error calling API for data from ${url}`);
         sails.log(err);
