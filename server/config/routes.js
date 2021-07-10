@@ -18,16 +18,13 @@ module.exports.routes = {
    *                                                                          *
    ***************************************************************************/
 
-  "get /api/sermons/get-all-sermons": "sermons/get-all-sermons",
-  "get /api/sermons/get-sermon-by-id": "sermons/get-sermon-by-id",
-  "get /api/sermons/get-speaker": "sermons/get-speaker",
-  "get /api/sermons/get-sermon-series": "sermons/get-sermon-series",
-  "post /api/users/add-user": "users/add-user",
+  "post /api/auth/login": "auth/post-login",
   "post /api/auth/signup": "auth/post-signup",
   "get /api/sermons/get-all-sermons": "sermons/get-all-sermons",
   "get /api/sermons/get-sermon-by-id": "sermons/get-sermon-by-id",
   "get /api/sermons/get-speaker": "sermons/get-speaker",
   "get /api/sermons/get-sermon-series": "sermons/get-sermon-series",
+  "post /api/users/add-user": "users/add-user",
 
   /***************************************************************************
    *                                                                          *
