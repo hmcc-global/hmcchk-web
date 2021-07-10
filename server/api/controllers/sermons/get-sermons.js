@@ -1,14 +1,14 @@
 module.exports = {
-  
-  friendlyName: 'Get sermon series',
 
-  description: 'Get sermon series',
+  friendlyName: 'Get sermons',
+
+  description: 'Get sermons',
 
   inputs: {
     id: {
       required: false,
       type: 'number',
-      description: 'Id of sermon series'
+      description: 'Id of sermon'
     }
   },
 
@@ -19,21 +19,20 @@ module.exports = {
   },
 
   fn: async function({ id }, exits) {
-    sails.log.info(`Get sermon series..`);
+    sails.log.info(`Get sermons`);
 
     try {
-      let data = await sails.helpers.sermons.getSermonSeries();
-
-      sails.log(typeof data);
+      let data = await sails.helpers.sermons.getSermons();
       if (id) {
-        sails.log.info(`Get sermon series with id ${id}`);
+        sails.log.info(`Get sermon with id ${id}`);
         data = data.filter(d => d.id === id);
-
         if (data.length === 0) {
-          sails.log(`No sermon series with id ${id} found.`);
+          sails.log(`No sermon with id ${id} found.`);
           return exits.noData(data);
         }
+        return exits.success(data);
       }
+
       return exits.success(data);
     } catch (err) {
       sails.log(err);
@@ -41,4 +40,3 @@ module.exports = {
     }
   }
 };
-

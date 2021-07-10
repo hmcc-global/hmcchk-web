@@ -1,3 +1,4 @@
+const schedule = require('node-schedule');
 /**
  * Seed Function
  * (sails.config.bootstrap)
@@ -11,20 +12,17 @@
 
 module.exports.bootstrap = async function() {
 
-  // By convention, this is a good place to set up fake data during development.
-  //
-  // For example:
-  // ```
-  // // Set up fake development data (or if we already have some, avast)
-  // if (await User.count() > 0) {
-  //   return;
-  // }
-  //
-  // await User.createEach([
-  //   { emailAddress: 'ry@example.com', fullName: 'Ryan Dahl', },
-  //   { emailAddress: 'rachael@example.com', fullName: 'Rachael Shaw', },
-  //   // etc.
-  // ]);
-  // ```
+  sails.log('Initialising cache with stdTTL set to 24 hours expiry');
+  const NodeCache = require('node-cache');
+  sails.cache = new NodeCache({ stdTTL: 24 * 60 * 60 });
 
+  sails.log.info('Scheduling cache-latest for 9am of everyday');
+  // second minute hour dayOfTheMonth month dayOfTheWeek
+  schedule.scheduleJob(
+    '0 0 9 * * *',
+    async () => await sails.helpers.cache.cacheLatest()
+  );
+
+  sails.log.info('Getting cache-latest in 1 second');
+  setTimeout(async() => await sails.helpers.cache.cacheLatest(), 1000);
 };
