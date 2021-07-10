@@ -28,5 +28,9 @@ module.exports.custom = {
 
   sermonSeries: {
     host: 'https://hongkong.hmcc.net/wp-json/wp/v2/wpfc_sermon_series'
+  },
+
+  serviceTypes: {
+    host: 'https://hongkong.hmcc.net/wp-json/wp/v2/wpfc_service_type'
   }
 };

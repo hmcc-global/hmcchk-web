@@ -51,12 +51,18 @@ module.exports = {
       (result) => result.length > 0
     );
 
+    let pServiceTypes = retryUntilSuccess(
+      'Service Types',
+      () => sails.helpers.sermons.getServiceTypes(),
+      (result) => result.length > 0
+    );
+
     let pSermons = retryUntilSuccess(
       'Sermons',
       () => sails.helpers.sermons.getSermons(),
       (result) => result.length > 0
     );
 
-    await Promise.all([pSpeakers, pSermonSeries, pSermons]);
+    await Promise.all([pSpeakers, pSermonSeries, pServiceTypes, pSermons]);
   }
 };

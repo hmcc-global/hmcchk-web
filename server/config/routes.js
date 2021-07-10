@@ -21,6 +21,7 @@ module.exports.routes = {
   'get /api/sermons/get-sermons' : 'sermons/get-sermons',
   'get /api/sermons/get-speakers' : 'sermons/get-speakers',
   'get /api/sermons/get-sermon-series' : 'sermons/get-sermon-series',
+  'get /api/sermons/get-service-types' : 'sermons/get-service-types',
 
   "post /api/auth/login": "auth/post-login",
   "post /api/auth/signup": "auth/post-signup",
