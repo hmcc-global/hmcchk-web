@@ -58,7 +58,7 @@ module.exports = {
       const serviceTypesList = await sails.helpers.sermons.getServiceTypes();
       let transformedSermons = data.map((s) => transformSermon(s, speakersList, sermonSeriesList, serviceTypesList));
 
-      if (transformSermon.length > 0) {
+      if (transformedSermons.length > 0) {
         sails.cache.set(key, transformedSermons);
         sails.log.info('Cached sermons');
       }
