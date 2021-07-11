@@ -1,23 +1,28 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { withStyles } from '@material-ui/core/styles';
-import Form from "./Form";
 import axios from 'axios';
+import Form from "./Form";
 
 const styles = {
 };
 
 const FormCreator = props => {
-  const { formName, resetFormEditorCallback } = props;
+  const { formName, existingFormData, resetFormEditorCallback } = props;
   const [formData, setFormData] = useState([]);
   const [editData, setEditData] = useState(null);
   const [saveStatus, setSaveStatus] = useState(false);
   const { register, reset, watch, setValue, handleSubmit, formState } = useForm();
   const { errors } = formState;
 
+  useEffect(() => {
+    if (existingFormData) {
+      setFormData(existingFormData.formFields);
+    }
+  }, existingFormData);
+
   // Handler for when the form is submitted
   const onSubmit = (data, e) => {
-    console.log(data);
     // Format the data
     if (data.options) {
       data.options = data.options.split(";");
@@ -62,16 +67,32 @@ const FormCreator = props => {
     }
   };
 
+  const conductSavingOperation = async (formToSave) => {
+    if (existingFormData) {
+      const { status } = await axios.post("/api/forms/post-update-form", {
+        id: existingFormData.id,
+        formToSave: formToSave
+      });
+
+      return status;
+    }
+    else {
+      const { status } = await axios.post("/api/forms/post-create-form", {
+        formToSave: formToSave
+      });
+
+      return status;
+    }
+  };
+
   const onSaveToDB = async e => {
     setSaveStatus(true);
     try {
       let formToSave = {formName: formName, formFields: formData};
-      const { status } = await axios.post("/api/forms/post-create-form", {
-        formToSave: formToSave
-      });
-      if(status === 200) {
+      const statusCode = await conductSavingOperation(formToSave);
+      if( statusCode === 200) {
         setSaveStatus(false);
-        resetFormEditorCallback(formName)
+        resetFormEditorCallback(formName);
       }
     }
     catch (err) {
@@ -110,10 +131,10 @@ const FormCreator = props => {
           <div>
             <label>Options</label>
             <input id="options" {...register("options")}/>
-            <label for="options">Enter options separated by ;</label>
+            <label htmlFor="options">Enter options separated by ;</label>
           </div>
         )}
-        <label for="required">Required</label>
+        <label htmlFor="required">Required</label>
         <input id="required" type="checkbox" {...register("required")}/>      
         <br/>
         <input type="submit" value="Save Field Data" />

@@ -30,7 +30,7 @@ const Form = props => {
       let items = [];
 
       opts.map(option => {
-        let o = <option value={option}> {option} </option>
+        let o = <option key={fieldName + option} value={option}> {option} </option>
         items.push(o);
         return o;
       });
@@ -39,18 +39,19 @@ const Form = props => {
     }
     else if (fieldType === "radio") {
       opts.map(option => {
-        let o = <input {...register(fieldName, {required:required})} type="radio" id={fieldName+option} value={option} />
-        let l = <label for={fieldName+option}>{option}</label>
+        let o = <input key={fieldName + option} {...register(fieldName, {required:required})} type="radio" id={fieldName+option} value={option} />
+        let l = <label key={fieldName + option + "label"} htmlFor={fieldName+option}>{option}</label>
         inputField.push(o)
         inputField.push(l)
         return true
       });
     }
     else if (fieldType === "textarea") {
-      inputField.push(<textarea {...register(fieldName , {required:required})}/>);
+      inputField.push(<textarea key={fieldName}  {...register(fieldName , {required:required})}/>);
     }
     else {
       inputField.push(<input 
+        key={fieldName} 
         type= {fieldType}
         {...register(fieldName, {required:required})} />);
     }

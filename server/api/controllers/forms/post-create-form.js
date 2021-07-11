@@ -21,8 +21,13 @@ module.exports = {
   },
 
   fn: async function( { formToSave }, exits) {
-    const newForm = await Form.create(formToSave).fetch();
-    
-    return exits.success()
+    try {
+      const newForm = await Form.create(formToSave).fetch();
+      return exits.success();
+    }
+    catch (err) {
+      sails.log(err);
+      return exits.error(err);
+    }
   }
 };
