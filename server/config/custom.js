@@ -36,4 +36,8 @@ module.exports.custom = {
   media: {
     host: "https://hongkong.hmcc.net/wp-json/wp/v2/media",
   },
+
+  announcements: {
+    host: "https://hongkong.hmcc.net/wp-json/wp/v2/posts",
+  },
 };
