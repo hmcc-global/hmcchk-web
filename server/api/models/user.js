@@ -1,16 +1,13 @@
 module.exports = {
   attributes: {
-    id: {
+    username: {
       type: 'string',
-      columnName: '_id'
     },
-    createdAt: {
-      type: 'number',
-      autoCreatedAt: true,
+    password: {
+      type: 'string',
     },
-    updatedAt: {
-      type: 'number',
-      autoUpdatedAt: true,
+    accessType: {
+      type: 'string'
     },
     fullName: {
       type: 'string',
@@ -30,8 +27,11 @@ module.exports = {
       type: 'string',
       required: true
     },
+    LIFEgroup: {
+      type: 'string'
+    },
     isMember: {
-      type: 'ref',
+      type: 'boolean',
       defaultsTo: false
     },
     isBaptised: {
@@ -42,8 +42,20 @@ module.exports = {
       type: 'number',
       required: true
     },
+    classesTaken: {
+      type: 'json'
+    },
+    eventsJoined: {
+      type: 'json'
+    },
+    membershipID: {
+      type: 'ref'
+    },
+    baptismID: {
+      type: 'ref'
+    },
     financeID: {
-      type: 'number'
+      type: 'json'
     }
   },
 };
