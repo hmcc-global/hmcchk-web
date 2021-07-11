@@ -35,7 +35,11 @@ module.exports = {
   inputs: {
   },
 
-  exits: {},
+  exits: {
+    nonSuccess: {
+      description: 'Error'
+    },
+  },
 
   fn: async function(inputs, exits) {
     sails.log.info(`Get sermons..`);
@@ -66,7 +70,7 @@ module.exports = {
       return exits.success(transformedSermons);
     } catch (err) {
       sails.log(err);
-      return exits.success(err);
+      return exits.nonSuccess(err);
     }
   }
 

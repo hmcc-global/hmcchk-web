@@ -15,7 +15,10 @@ module.exports = {
   exits: {
     noData: {
       description: 'No data found'
-    }
+    },
+    nonSuccess: {
+      description: 'Error'
+    },
   },
 
   fn: async function({ id }, exits) {
@@ -36,7 +39,7 @@ module.exports = {
       return exits.success(data);
     } catch (err) {
       sails.log(err);
-      return exits.success(err);
+      return exits.nonSuccess(err);
     }
   }
 };

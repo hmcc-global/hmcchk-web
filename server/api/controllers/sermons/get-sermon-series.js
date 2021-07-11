@@ -15,7 +15,10 @@ module.exports = {
   exits: {
     noData: {
       description: 'No data found'
-    }
+    },
+    nonSuccess: {
+      description: 'Error'
+    },
   },
 
   fn: async function({ id }, exits) {
@@ -24,7 +27,6 @@ module.exports = {
     try {
       let data = await sails.helpers.sermons.getSermonSeries();
 
-      sails.log(typeof data);
       if (id) {
         sails.log.info(`Get sermon series with id ${id}`);
         data = data.filter(d => d.id === id);
@@ -37,7 +39,7 @@ module.exports = {
       return exits.success(data);
     } catch (err) {
       sails.log(err);
-      return exits.success(err);
+      return exits.nonSuccess(err);
     }
   }
 };
