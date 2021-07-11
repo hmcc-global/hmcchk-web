@@ -28,6 +28,7 @@ module.exports.routes = {
   'post /api/forms/create-form' : 'forms/create-form',
   'get /api/forms/get-all-forms' : 'forms/get-all-forms',
   'get /api/forms/get-form-by-id' : 'forms/get-form-by-id',
+  'post /api/forms/post-create-form' : 'forms/post-create-form',
 
   // Announcement APIs
   "get /api/announcements/get-announcements": "announcements/get-announcements",

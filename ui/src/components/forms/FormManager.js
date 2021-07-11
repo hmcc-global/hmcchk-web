@@ -19,24 +19,24 @@ const styles = {
 const FormManager = props => {
   const { classes } = props;
   const { register, reset, handleSubmit, formState } = useForm();
-  const [ formName, setFormName ] = useState(null)
-  const [ formList, setFormList ] = useState([])
+  const [ formName, setFormName ] = useState(null);
+  const [ formList, setFormList ] = useState([]);
 
   useEffect(() => {
     setFormList(["Form A", "Form B", "Form C"])
   }, []);
 
   const onSubmit = (data, e) => {
-    setFormName(data.formName)
-  }
+    setFormName(data.formName);
+  };
 
   const resetFormEditorCallback = (newFormData) => {
-    setFormName(null)
-    let temp = [...formList]
-    temp.push(newFormData)
-    setFormList(temp)
-    reset()
-  }
+    setFormName(null);
+    let temp = [...formList];
+    temp.push(newFormData);
+    setFormList(temp);
+    reset();
+  };
 
   return (
     <div className={classes.root}>  
@@ -61,6 +61,6 @@ const FormManager = props => {
       </ul>
     </div>
   );
-}
+};
 
 export default withStyles(styles)(FormManager);

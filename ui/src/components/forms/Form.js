@@ -12,30 +12,30 @@ const Form = props => {
 
   const validateDemoForm = (data, e) => {
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(data, null, 4));
-    reset()
+    reset();
 
-    return false
-  }
+    return false;
+  };
 
   // Helper function to create the input fields
   const createFormField = (fieldData) => {
-    let fieldName = fieldData.fieldName
-    let fieldType = fieldData.fieldType
-    let opts = fieldData.options
-    let required = fieldData.required
+    let fieldName = fieldData.fieldName;
+    let fieldType = fieldData.fieldType;
+    let opts = fieldData.options;
+    let required = fieldData.required;
 
-    let inputField = []
+    let inputField = [];
 
     if (fieldType === "select") {
-      let items = []
+      let items = [];
 
       opts.map(option => {
         let o = <option value={option}> {option} </option>
-        items.push(o)
-        return o
-      }) 
+        items.push(o);
+        return o;
+      });
       
-      inputField.push(<select {...register(fieldName, {required:required})}> {items} </select>)
+      inputField.push(<select {...register(fieldName, {required:required})}> {items} </select>);
     }
     else if (fieldType === "radio") {
       opts.map(option => {
@@ -44,24 +44,24 @@ const Form = props => {
         inputField.push(o)
         inputField.push(l)
         return true
-      }) 
+      });
     }
     else if (fieldType === "textarea") {
-      inputField.push(<textarea {...register(fieldName , {required:required})}/>)
+      inputField.push(<textarea {...register(fieldName , {required:required})}/>);
     }
     else {
       inputField.push(<input 
         type= {fieldType}
-        {...register(fieldName, {required:required})} />)
+        {...register(fieldName, {required:required})} />);
     }
 
     if (required === true) {
-      let errorElement = fieldName + " is required"
-      inputField.push(<span>{errors[fieldName] && errorElement}</span>)
+      let errorElement = fieldName + " is required";
+      inputField.push(<span>{errors[fieldName] && errorElement}</span>);
     }
 
-    return inputField
-  }
+    return inputField;
+  };
 
   return (
       <form onSubmit={handleSubmit(validateDemoForm)}>
@@ -76,6 +76,6 @@ const Form = props => {
       <input type="submit" />
     </form>
   );
-}
+};
 
 export default withStyles(styles)(Form);

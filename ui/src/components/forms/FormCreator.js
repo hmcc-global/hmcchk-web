@@ -2,70 +2,85 @@ import React, {useState} from "react";
 import { useForm } from "react-hook-form";
 import { withStyles } from '@material-ui/core/styles';
 import Form from "./Form";
+import axios from 'axios';
 
 const styles = {
 };
 
 const FormCreator = props => {
   const { formName, resetFormEditorCallback } = props;
-  const [formData, setFormData] = useState([])
-  const [editData, setEditData] = useState(null)
-  const { register, reset, watch, setValue, handleSubmit, formState } = useForm()
-  const { errors } = formState
+  const [formData, setFormData] = useState([]);
+  const [editData, setEditData] = useState(null);
+  const [saveStatus, setSaveStatus] = useState(false);
+  const { register, reset, watch, setValue, handleSubmit, formState } = useForm();
+  const { errors } = formState;
 
   // Handler for when the form is submitted
   const onSubmit = (data, e) => {
-    console.log(data)
+    console.log(data);
     // Format the data
     if (data.options) {
-      data.options = data.options.split(";")
+      data.options = data.options.split(";");
     }
-    let temp = [...formData]
+    let temp = [...formData];
 
     if(editData) {
-      temp.splice(editData, 1, data)
-      setEditData(null)
+      temp.splice(editData, 1, data);
+      setEditData(null);
     }
     else {
-      temp.push(data)
+      temp.push(data);
     }
-    setFormData(temp)
+    setFormData(temp);
 
-    reset()
-  }
+    reset();
+  };
 
   // Handler for field data edits
   const onEdit = e => {
-    const temp = formData[e.target.value]
-    setEditData(e.target.value)
-    setValue("fieldName", temp.fieldName)
-    setValue("fieldType", temp.fieldType)
+    const temp = formData[e.target.value];
+    setEditData(e.target.value);
+    setValue("fieldName", temp.fieldName);
+    setValue("fieldType", temp.fieldType);
     if (temp.options) {
-      setValue("options", temp.options.join(';'))
+      setValue("options", temp.options.join(';'));
     }
-    setValue("required", temp.required)
-  }
+    setValue("required", temp.required);
+  };
 
   // Handler for deletion of field data
   const onDelete = e => {
     if (editData) {
-      alert("Cannot delete while editing")
+      alert("Cannot delete while editing");
     }
     else {
       if (window.confirm("Are you sure you want to delete this?")) {
-        let temp = [...formData]
-        temp.splice(e.target.value, 1)
-        setFormData(temp)
+        let temp = [...formData];
+        temp.splice(e.target.value, 1);
+        setFormData(temp);
       }
     }
-  }
+  };
 
-  const onSaveToDB = e => {
-    resetFormEditorCallback(formName)
-  }
+  const onSaveToDB = async e => {
+    setSaveStatus(true);
+    try {
+      let formToSave = {formName: formName, formFields: formData};
+      const { status } = await axios.post("/api/forms/post-create-form", {
+        formToSave: formToSave
+      });
+      if(status === 200) {
+        setSaveStatus(false);
+        resetFormEditorCallback(formName)
+      }
+    }
+    catch (err) {
+      console.log(err);
+    }
+  };
 
   // Watch this to conditionally render custom things
-  const ft = watch("fieldType")
+  const ft = watch("fieldType");
    
   return (
     <div>
@@ -123,11 +138,12 @@ const FormCreator = props => {
         ))
       }
       <button onClick={onSaveToDB}>Save to DB</button>
+      {saveStatus && <div>Saving</div>}
 
       <h2>Form Preview</h2>
       <Form formData={formData}/>
     </div>
   );
-}
+};
 
 export default withStyles(styles)(FormCreator);
