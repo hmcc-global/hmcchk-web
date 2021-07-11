@@ -15,7 +15,10 @@ module.exports = {
   exits: {
     noData: {
       description: 'No data found'
-    }
+    },
+    nonSuccess: {
+      description: 'Error'
+    },
   },
 
   fn: async function({ id }, exits) {
@@ -26,9 +29,7 @@ module.exports = {
 
       if (id) {
         sails.log.info(`Get service types with id ${id}`);
-        data = data.filter(d => {
-          return d.id === id;
-        });
+        data = data.filter(d => d.id === id);
 
         if (data.length === 0) {
           sails.log(`No service types with id ${id} found.`);
@@ -38,7 +39,7 @@ module.exports = {
       return exits.success(data);
     } catch (err) {
       sails.log(err);
-      return exits.success(err);
+      return exits.nonSuccess(err);
     }
   }
 };

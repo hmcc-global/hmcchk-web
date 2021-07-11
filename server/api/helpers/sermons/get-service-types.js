@@ -7,7 +7,11 @@ module.exports = {
   inputs: {
   },
 
-  exits: {},
+  exits: {
+    nonSuccess: {
+      description: 'Error'
+    },
+  },
 
   fn: async function(inputs, exits) {
     sails.log.info(`Get service types..`);
@@ -39,7 +43,7 @@ module.exports = {
       return exits.success(transformedData);
     } catch (err) {
       sails.log(err);
-      return exits.success(err);
+      return exits.nonSuccess(err);
     }
   }
 
