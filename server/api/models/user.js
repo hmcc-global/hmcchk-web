@@ -7,7 +7,7 @@ module.exports = {
       type: 'string',
     },
     accessType: {
-      type: 'string'
+      type: 'string' //stewardship, admin, or member
     },
     fullName: {
       type: 'string',
@@ -27,7 +27,7 @@ module.exports = {
       type: 'string',
       required: true
     },
-    LIFEgroup: {
+    lifeGroup: {
       type: 'string'
     },
     isMember: {
@@ -48,13 +48,13 @@ module.exports = {
     eventsJoined: {
       type: 'json'
     },
-    membershipID: {
+    membershipId: {
       type: 'ref'
     },
-    baptismID: {
+    baptismId: {
       type: 'ref'
     },
-    financeID: {
+    financeId: {
       type: 'json'
     }
   },
