@@ -4,11 +4,18 @@ module.exports = {
   inputs: {
     user: {
       type: 'json',
-      required: 'true',
+      required: true,
       description: 'user object',
     }
   },
-  exits: {},
+  exits: {
+    success: {
+      description: "New user account was created successfully.",
+    },
+    invalid : {
+      description: "Failed to create new user account.",
+    }
+  },
   fn: async function( { user }, exits) {
     console.log(user)
     user.email = user.email.toLowerCase();

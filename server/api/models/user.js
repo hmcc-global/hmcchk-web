@@ -1,27 +1,25 @@
 module.exports = {
   attributes: {
-    username: {
-      type: 'string',
-    },
-    password: {
-      type: 'string',
-    },
-    accessType: {
-      type: 'string' //stewardship, admin, or member
-    },
-    fullName: {
-      type: 'string',
-      required: true
-    },
     email: {
       type: 'string',
       required: true,
       unique: true,
       isEmail: true
     },
-    campus: {
+    password: {
       type: 'string',
       required: true
+    },
+    accessType: {
+      type: 'string', //stewardship, admin, or member
+      required: true
+    },
+    fullName: {
+      type: 'string',
+      required: true
+    },
+    campus: {
+      type: 'string',
     },
     lifestage: {
       type: 'string',
