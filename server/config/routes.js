@@ -27,6 +27,8 @@ module.exports.routes = {
 
   "get /api/media/get-media": "media/get-media",
 
+  "get /api/sermons/get-all-announcements": "sermons/get-all-announcements",
+
   "post /api/auth/login": "auth/post-login",
   "post /api/auth/signup": "auth/post-signup",
   "post /api/auth/signup-google": "auth/post-signup-google",
