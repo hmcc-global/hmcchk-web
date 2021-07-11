@@ -12,7 +12,7 @@ module.exports = {
     },
     accessType: {
       type: 'string', //stewardship, admin, or member
-      required: true
+      defaultsTo: 'member'
     },
     fullName: {
       type: 'string',
