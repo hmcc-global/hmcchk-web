@@ -34,6 +34,18 @@ the account verification message.)`,
       example: "Frida Kahlo de Rivera",
       description: "The user's full name.",
     },
+
+    lifestage: {
+      required: true,
+      type: "string",
+      description: "The user's life stage.",
+    },
+
+    phoneNumber: {
+      required: true,
+      type: "number",
+      description: "The user's phone number.",
+    },
   },
 
   exits: {
@@ -54,9 +66,30 @@ the account verification message.)`,
       statusCode: 409,
       description: "The provided email address is already in use.",
     },
+
+    missingRequiredFields: {
+      statusCode: 409,
+      description: "Please fill in the required fields.",
+    },
   },
 
-  fn: async function ({ emailAddress, password, fullName }) {
+  fn: async function ({
+    emailAddress,
+    password,
+    fullName,
+    lifestage,
+    phoneNumber,
+  }) {
+    if (
+      emailAddress == null ||
+      password == null ||
+      fullName == null ||
+      lifestage == null ||
+      phoneNumber == null
+    ) {
+      throw "missingRequiredFields";
+    }
+
     const newEmailAddress = emailAddress.toLowerCase();
 
     // Build up data for the new user record and save it to the database.
@@ -64,9 +97,12 @@ the account verification message.)`,
     const newUserRecord = await User.create(
       _.extend(
         {
-          fullName,
           emailAddress: newEmailAddress,
           password: await sails.helpers.passwords.hashPassword(password),
+          accessType,
+          fullName,
+          lifestage,
+          phoneNumber,
         },
         sails.config.custom.verifyEmailAddresses
           ? {
