@@ -3,13 +3,6 @@ import { useForm } from "react-hook-form";
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
-  container: {
-    flex: 1 
-  },
-  button: {
-    backgroundColor: "#282c34",
-    color: "white",
-  }
 };
 
 const Form = props => {
@@ -19,6 +12,7 @@ const Form = props => {
 
   const validateDemoForm = (data, e) => {
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(data, null, 4));
+    reset()
 
     return false
   }

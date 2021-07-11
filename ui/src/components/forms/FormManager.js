@@ -4,6 +4,9 @@ import { withStyles } from '@material-ui/core/styles';
 import FormCreator from './FormCreator';
 
 const styles = {
+  root: {
+    color: "white"
+  },
   container: {
     flex: 1 
   },
@@ -14,8 +17,8 @@ const styles = {
 };
 
 const FormManager = props => {
-  const { register, reset, watch, setValue, handleSubmit, formState } = useForm();
-  const { errors } = formState;
+  const { classes } = props;
+  const { register, reset, handleSubmit, formState } = useForm();
   const [ formName, setFormName ] = useState(null)
   const [ formList, setFormList ] = useState([])
 
@@ -32,14 +35,11 @@ const FormManager = props => {
     let temp = [...formList]
     temp.push(newFormData)
     setFormList(temp)
-  }
-
-  const componentDidMount = () => {
-    console.log("form manager mounting")
+    reset()
   }
 
   return (
-    <div>  
+    <div className={classes.root}>  
       <h1>Form Management System</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>

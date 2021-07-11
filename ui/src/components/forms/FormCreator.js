@@ -4,13 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Form from "./Form";
 
 const styles = {
-    container: {
-        flex: 1 
-    },
-    button: {
-        backgroundColor: "#282c34",
-        color: "white",
-    }
 };
 
 const FormCreator = props => {
