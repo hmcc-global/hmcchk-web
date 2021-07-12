@@ -1,19 +1,21 @@
 module.exports = {
-    friendlyName: 'View users',
+  friendlyName: 'View users',
 
-    description: '',
+  description: '',
 
-    inputs: {},
+  inputs: {
+    userId: {
+      required: false,
+      type: 'string'
+    }
+  },
 
-    exits: {
-      success: {
-        description: "User account returned successfully",
-      },
-      invalid : {
-        description: "Failed to retrieve user account",
-      }
+  exits: {
+    success: {
+      description: "User account returned successfully",
     },
     fn: async function(inputs, exits) {
       console.log(inputs);
     }
   }
+}
