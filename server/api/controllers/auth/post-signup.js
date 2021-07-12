@@ -114,26 +114,26 @@ the account verification message.)`,
 
     // In case there was an existing session (e.g. if we allow users to go to the signup page
     // when they're already logged in), broadcast a message that we can display in other open tabs.
-    if (sails.hooks.sockets) {
-      await sails.helpers.broadcastSessionChange(this.req);
-    }
+    // if (sails.hooks.sockets) {
+    //   await sails.helpers.broadcastSessionChange(this.req);
+    // }
 
-    if (sails.config.custom.verifyEmailAddresses) {
-      // Send "confirm account" email
-      await sails.helpers.sendTemplateEmail.with({
-        to: newEmailAddress,
-        subject: "Please confirm your account",
-        template: "email-verify-account",
-        templateData: {
-          fullName,
-          token: newUserRecord.emailProofToken,
-        },
-      });
-    } else {
-      sails.log.info(
-        "Skipping new account email verification... (since `verifyEmailAddresses` is disabled)"
-      );
-    }
+    // if (sails.config.custom.verifyEmailAddresses) {
+    //   // Send "confirm account" email
+    //   await sails.helpers.sendTemplateEmail.with({
+    //     to: newEmailAddress,
+    //     subject: "Please confirm your account",
+    //     template: "email-verify-account",
+    //     templateData: {
+    //       fullName,
+    //       token: newUserRecord.emailProofToken,
+    //     },
+    //   });
+    // } else {
+    //   sails.log.info(
+    //     "Skipping new account email verification... (since `verifyEmailAddresses` is disabled)"
+    //   );
+    // }
 
     sails.log.info(`New user signup for ${emailAddress}.`);
   },
