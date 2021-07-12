@@ -4,9 +4,9 @@ module.exports = {
   description: '',
 
   inputs: {
-    userId: {
+    params: {
       required: false,
-      type: 'string'
+      type: 'json'
     }
   },
 
@@ -14,8 +14,11 @@ module.exports = {
     success: {
       description: "User account returned successfully",
     },
-    fn: async function(inputs, exits) {
-      console.log(inputs);
+    invalid : {
+      description: "Failed to retrieve user account",
     }
+  },
+  fn: async function({ userId }, exits) {
+    User.updateOne(params.id, params)
   }
 }
