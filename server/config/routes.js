@@ -45,7 +45,14 @@ module.exports.routes = {
   "post /api/auth/login": "auth/post-login",
   "post /api/auth/signup": "auth/post-signup",
   "post /api/auth/signup-google": "auth/post-signup-google",
+<<<<<<< HEAD
   "get /email/confirm/": "auth/email-confirm",
+=======
+  
+  "get /api/users/view-user": "users/view-user",
+  "put /api/users/update-user": "users/update-user",
+  "put /api/users/delete-user": "users/delete-user"
+>>>>>>> e101984... CRUD user API done
 
   /***************************************************************************
    *                                                                          *
