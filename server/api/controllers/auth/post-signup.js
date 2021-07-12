@@ -35,6 +35,13 @@ the account verification message.)`,
       description: "The user's full name.",
     },
 
+    nationality: {
+      required: true,
+      type: "string",
+      example: "Hong Kong",
+      description: "The user's nationality or country of origin"
+    },
+
     lifestage: {
       required: true,
       type: "string",
@@ -77,6 +84,7 @@ the account verification message.)`,
     emailAddress,
     password,
     fullName,
+    nationality,
     lifestage,
     phoneNumber,
   }) {
@@ -90,6 +98,7 @@ the account verification message.)`,
           email: newEmailAddress,
           password: await sails.helpers.passwords.hashPassword(password),
           fullName,
+          nationality,
           lifestage,
           phoneNumber,
         },

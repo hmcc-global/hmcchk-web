@@ -17,6 +17,10 @@ module.exports = {
       type: "string",
       required: true,
     },
+    nationality: {
+      type: 'string',
+      required: true
+    },
     campus: {
       type: "string",
     },
