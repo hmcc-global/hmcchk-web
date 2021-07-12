@@ -35,6 +35,13 @@ the account verification message.)`,
       description: "The user's full name.",
     },
 
+    nationality: {
+      required: true,
+      type: "string",
+      example: "Hong Kong",
+      description: "The user's nationality or country of origin"
+    },
+
     lifestage: {
       required: true,
       type: "string",
@@ -73,35 +80,38 @@ the account verification message.)`,
     },
   },
 
-  fn: async function (
-    { emailAddress, password, fullName, lifestage, phoneNumber },
-    exits
-  ) {
-    try {
-      const newEmailAddress = emailAddress.toLowerCase();
+  fn: async function ({
+    emailAddress,
+    password,
+    fullName,
+    nationality,
+    lifestage,
+    phoneNumber,
+  }) {
+    const newEmailAddress = emailAddress.toLowerCase();
 
-      // Build up data for the new user record and save it to the database.
-      // (Also use `fetch` to retrieve the new ID so that we can use it below.)
-      const newUserRecord = await User.create(
-        _.extend(
-          {
-            email: newEmailAddress,
-            password: await sails.helpers.passwords.hashPassword(password),
-            fullName,
-            lifestage,
-            phoneNumber,
-          },
-          sails.config.custom.verifyEmailAddresses
-            ? {
-                emailProofToken: await sails.helpers.strings.random(
-                  "url-friendly"
-                ),
-                emailProofTokenExpiresAt:
-                  Date.now() + sails.config.custom.emailProofTokenTTL,
-                emailStatus: "unconfirmed",
-              }
-            : {}
-        )
+    // Build up data for the new user record and save it to the database.
+    // (Also use `fetch` to retrieve the new ID so that we can use it below.)
+    const newUserRecord = await User.create(
+      _.extend(
+        {
+          email: newEmailAddress,
+          password: await sails.helpers.passwords.hashPassword(password),
+          fullName,
+          nationality,
+          lifestage,
+          phoneNumber,
+        },
+        sails.config.custom.verifyEmailAddresses
+          ? {
+              emailProofToken: await sails.helpers.strings.random(
+                "url-friendly"
+              ),
+              emailProofTokenExpiresAt:
+                Date.now() + sails.config.custom.emailProofTokenTTL,
+              emailStatus: "unconfirmed",
+            }
+          : {}
       )
         .intercept("E_UNIQUE", "emailAlreadyInUse")
         .intercept({ name: "UsageError" }, "invalid")
