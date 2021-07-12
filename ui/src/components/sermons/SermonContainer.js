@@ -43,8 +43,9 @@ const SermonContainer = (props) => {
 
   const getData = async () => {
     try {
-      const { data } = await axios.get('/api/sermons/get-all-sermons');
-      setSermons(data);
+      const { data } = await axios.get('/api/sermons/get-sermons');
+      console.log(data);
+      // setSermons(data);
     } catch (err) {
       console.log(err);
     }
@@ -57,7 +58,7 @@ const SermonContainer = (props) => {
   return (
     <div className={classes.app}>
       <Paper className={classes.paper}>
-        {
+        {/* {
           sermons.map(s => (
             <Card key={s.id}>
               <CardContent>
@@ -81,7 +82,7 @@ const SermonContainer = (props) => {
               </CardActions>
             </Card>
           ))
-        }
+        } */}
       </Paper>
     </div>
   );

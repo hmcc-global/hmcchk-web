@@ -12,6 +12,8 @@
     "grunt": "1.0.4",
     "he": "^1.2.0",
     "luxon": "^1.27.0",
+    "node-cache": "^5.1.2",
+    "node-schedule": "^2.0.0",
     "sails": "^1.4.3",
     "sails-hook-grunt": "^4.0.0",
     "sails-hook-organics": "^2.2.0",

@@ -1,14 +1,14 @@
 module.exports = {
   
-  friendlyName: 'Get sermon series',
+  friendlyName: 'Get service types',
 
-  description: 'Get sermon series',
+  description: 'Get service types',
 
   inputs: {
     id: {
       required: false,
       type: 'number',
-      description: 'Id of sermon series'
+      description: 'Id of service types'
     }
   },
 
@@ -22,17 +22,17 @@ module.exports = {
   },
 
   fn: async function({ id }, exits) {
-    sails.log.info(`Get sermon series..`);
+    sails.log.info(`Get service types..`);
 
     try {
-      let data = await sails.helpers.sermons.getSermonSeries();
+      let data = await sails.helpers.sermons.getServiceTypes();
 
       if (id) {
-        sails.log.info(`Get sermon series with id ${id}`);
+        sails.log.info(`Get service types with id ${id}`);
         data = data.filter(d => d.id === id);
 
         if (data.length === 0) {
-          sails.log(`No sermon series with id ${id} found.`);
+          sails.log(`No service types with id ${id} found.`);
           return exits.noData(data);
         }
       }
