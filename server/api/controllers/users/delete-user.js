@@ -4,18 +4,18 @@ module.exports = {
   description: '',
 
   inputs: {
-    params: {
-      required: false,
-      type: 'json'
+    userId: {
+      required: true,
+      type: 'string'
     }
   },
 
   exits: {
     success: {
-      description: "User account updated successfully",
+      description: "User account deleted successfully",
     },
     invalid : {
-      description: "Failed to update user account",
+      description: "Failed to delete user account",
     },
 
     missingRequiredFields: {
@@ -24,10 +24,10 @@ module.exports = {
     },
   },
 
-  fn: async function({ params }, exits) {
-    if (params.id) {
+  fn: async function({ userId }, exits) {
+    if (userId) {
       try {
-        let data = await User.updateOne(params.id, params);
+        let data = await User.updateOne(userId).set({isDelete: true});
         sails.log(data);
         return exits.success(data);
       } catch (err) {
