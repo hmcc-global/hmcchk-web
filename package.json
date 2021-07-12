@@ -1,0 +1,7 @@
+{
+  "name": "hmcchk-web",
+  "private": true,
+  "devDependencies": {
+    "prettier": "2.3.2"
+  }
+}
