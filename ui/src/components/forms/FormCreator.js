@@ -67,7 +67,7 @@ const FormCreator = props => {
     }
   };
 
-  const conductSavingOperation = async (formToSave) => {
+  const saveFormToDB = async (formToSave) => {
     if (existingFormData) {
       const { status } = await axios.post("/api/forms/post-update-form", {
         id: existingFormData.id,
@@ -89,7 +89,7 @@ const FormCreator = props => {
     setSaveStatus(true);
     try {
       let formToSave = {formName: formName, formFields: formData};
-      const statusCode = await conductSavingOperation(formToSave);
+      const statusCode = await saveFormToDB(formToSave);
       if( statusCode === 200) {
         setSaveStatus(false);
         resetFormEditorCallback(formName);
@@ -125,6 +125,7 @@ const FormCreator = props => {
             <option value="checkbox">Checkbox</option>
             <option value="radio">Radio</option>
             <option value="textarea">Text Area</option>
+            <option value="date">Datepicker</option>
           </select>
         </div>
         {(ft === "select" || ft === "radio") && (
