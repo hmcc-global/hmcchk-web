@@ -49,7 +49,7 @@ module.exports.routes = {
   "get /email/confirm/": "auth/email-confirm",
 =======
   
-  "get /api/users/view-user": "users/view-user",
+  "get /api/users/get-user": "users/get-user",
   "put /api/users/update-user": "users/update-user",
   "put /api/users/delete-user": "users/delete-user"
 >>>>>>> e101984... CRUD user API done
