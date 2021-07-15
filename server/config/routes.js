@@ -23,10 +23,10 @@ module.exports.routes = {
   "get /api/sermons/get-sermon-series": "sermons/get-sermon-series",
   "get /api/sermons/get-service-types": "sermons/get-service-types",
 
+  "get /api/media/get-media": "media/get-media",
+
   "post /api/auth/login": "auth/post-login",
   "post /api/auth/signup": "auth/post-signup",
-
-  "get /api/media/get-media": "media/get-media",
 
   /***************************************************************************
    *                                                                          *

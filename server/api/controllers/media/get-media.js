@@ -15,6 +15,9 @@ module.exports = {
     noData: {
       description: "No data found",
     },
+    noSuccess: {
+      description: "Error",
+    },
   },
 
   fn: async function ({ id }, exits) {
