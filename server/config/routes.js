@@ -10,27 +10,23 @@
 
 module.exports.routes = {
   /***************************************************************************
-  *                                                                          *
-  * Make the view located at `views/homepage.ejs` your home page.            *
-  *                                                                          *
-  * (Alternatively, remove this and add an `index.html` file in your         *
-  * `assets` directory)                                                      *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Make the view located at `views/homepage.ejs` your home page.            *
+   *                                                                          *
+   * (Alternatively, remove this and add an `index.html` file in your         *
+   * `assets` directory)                                                      *
+   *                                                                          *
+   ***************************************************************************/
 
-  'get /api/sermons/get-sermons' : 'sermons/get-sermons',
-  'get /api/sermons/get-speakers' : 'sermons/get-speakers',
-  'get /api/sermons/get-sermon-series' : 'sermons/get-sermon-series',
-  'get /api/sermons/get-service-types' : 'sermons/get-service-types',
+  "get /api/sermons/get-sermons": "sermons/get-sermons",
+  "get /api/sermons/get-speakers": "sermons/get-speakers",
+  "get /api/sermons/get-sermon-series": "sermons/get-sermon-series",
+  "get /api/sermons/get-service-types": "sermons/get-service-types",
 
   "post /api/auth/login": "auth/post-login",
   "post /api/auth/signup": "auth/post-signup",
 
-  "get /api/sermons/get-all-sermons": "sermons/get-all-sermons",
-  "get /api/sermons/get-sermon-by-id": "sermons/get-sermon-by-id",
-  "get /api/sermons/get-speaker": "sermons/get-speaker",
-  "get /api/sermons/get-sermon-series": "sermons/get-sermon-series",
-  "post /api/users/add-user": "users/add-user",
+  "get /api/media/get-media": "media/get-media",
 
   /***************************************************************************
    *                                                                          *
