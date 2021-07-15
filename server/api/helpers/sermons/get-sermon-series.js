@@ -1,44 +1,51 @@
 module.exports = {
+  friendlyName: "Get sermon series",
 
-  friendlyName: 'Get sermon series',
+  description: "Get sermon series",
 
-  description: 'Get sermon series',
-
-  inputs: {
-  },
+  inputs: {},
 
   exits: {
     nonSuccess: {
-      description: 'Error'
+      description: "Error",
     },
   },
 
-  fn: async function(inputs, exits) {
+  fn: async function (inputs, exits) {
     sails.log.info(`Get sermon series..`);
 
-    const key = 'sermonSeries';
+    const key = "sermonSeries";
     let result = sails.cache.get(key);
     if (result) {
-      sails.log.info('Returning sermon series from cache');
+      sails.log.info("Returning sermon series from cache");
       return exits.success(result);
     }
 
     let url = sails.config.custom.sermonSeries.host;
 
     try {
-      const data = await sails.helpers.getData(url, parameters = { 'per_page': 100 });
-      let transformedData = data.reduce((acc, {id, name, sermon_series_image_id: sermonSeriesImageId}) => {
-        acc.push({
-          id: id,
-          name: name,
-          imageId: sermonSeriesImageId
-        });
-        return acc;
-      }, []);
+      const data = await sails.helpers.getData(
+        url,
+        (parameters = { per_page: 100 })
+      );
+      const media = await sails.helpers.media.getMedia();
+      let transformedData = data.reduce(
+        (acc, { id, name, sermon_series_image_id: sermonSeriesImageId }) => {
+          sermonSeriesImageId = parseInt(sermonSeriesImageId);
+          let imageObj = media.find((m) => m.id === sermonSeriesImageId);
+          acc.push({
+            id: id,
+            name: name,
+            image: imageObj || null,
+          });
+          return acc;
+        },
+        []
+      );
 
       if (transformedData.length > 0) {
         sails.cache.set(key, transformedData);
-        sails.log.info('Cached sermon series');
+        sails.log.info("Cached sermon series");
       }
 
       return exits.success(transformedData);
@@ -46,7 +53,5 @@ module.exports = {
       sails.log(err);
       return exits.nonSuccess(err);
     }
-  }
-
+  },
 };
-
