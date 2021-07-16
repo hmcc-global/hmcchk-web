@@ -77,6 +77,12 @@ module.exports = {
       (result) => result.length > 0
     );
 
+    let pAnnouncements = retryUntilSuccess(
+      "Announcements",
+      () => sails.helpers.sermons.getAnnouncements(),
+      (result) => result.length > 0
+    );
+
     return exits.success("Cache function");
   },
 };
