@@ -131,5 +131,4 @@ lib-cov
 *.log
 *.out
 *.pid
-
-config/keys.js
+*.env
