@@ -8,61 +8,75 @@ const retryUntilSuccess = async (cacheName, toTry, checkFunc, tries = 1) => {
     try {
       const result = await toTry();
       if (!checkFunc(result)) {
-        throw 'retry';
+        throw "retry";
       }
       sails.log.info(`Loaded ${cacheName}`);
     } catch (unusedErr) {
       const timeout = tries < FAST_TRIES ? TRY_TIMEOUT : SLOW_TIMEOUT;
-      sails.log.info(`Failed to load ${cacheName} (try ${tries} out of ${MAX_TRIES}), will retry after ${timeout / 1000} secs`);
-      setTimeout(async() => await retryUntilSuccess(cacheName, toTry, checkFunc, tries + 1), timeout);
+      sails.log.info(
+        `Failed to load ${cacheName} (try ${tries} out of ${MAX_TRIES}), will retry after ${
+          timeout / 1000
+        } secs`
+      );
+      setTimeout(
+        async () =>
+          await retryUntilSuccess(cacheName, toTry, checkFunc, tries + 1),
+        timeout
+      );
     }
   } else {
-    sails.log.error(`Failed to retrieve cache for ${cacheName}. Please investigate...`);
+    sails.log.error(
+      `Failed to retrieve cache for ${cacheName}. Please investigate...`
+    );
   }
 };
 
 module.exports = {
-  
-  friendlyName: 'cache latest data',
+  friendlyName: "cache latest data",
 
-  description: 'Store latest data in cache',
+  description: "Store latest data in cache",
 
-  inputs: {
-
-  },
+  inputs: {},
 
   exits: {
-
+    nonSuccess: {
+      description: "Error",
+    },
   },
 
   fn: async function (inputs, exits) {
-
     sails.log.info(`System: Attempting to store latest data in cache`);
 
-    let pSpeakers = retryUntilSuccess(
-      'Speakers',
+    let pSpeakers = await retryUntilSuccess(
+      "Speakers",
       () => sails.helpers.sermons.getSpeakers(),
       (result) => result.length > 0
     );
 
-    let pSermonSeries = retryUntilSuccess(
-      'Sermon Series',
+    let pMedia = await retryUntilSuccess(
+      "Media",
+      () => sails.helpers.media.getMedia(),
+      (result) => result.length > 0
+    );
+
+    let pSermonSeries = await retryUntilSuccess(
+      "Sermon Series",
       () => sails.helpers.sermons.getSermonSeries(),
       (result) => result.length > 0
     );
 
-    let pServiceTypes = retryUntilSuccess(
-      'Service Types',
+    let pServiceTypes = await retryUntilSuccess(
+      "Service Types",
       () => sails.helpers.sermons.getServiceTypes(),
       (result) => result.length > 0
     );
 
-    let pSermons = retryUntilSuccess(
-      'Sermons',
+    let pSermons = await retryUntilSuccess(
+      "Sermons",
       () => sails.helpers.sermons.getSermons(),
       (result) => result.length > 0
     );
 
-    await Promise.all([pSpeakers, pSermonSeries, pServiceTypes, pSermons]);
-  }
+    return exits.success("Cache function");
+  },
 };
