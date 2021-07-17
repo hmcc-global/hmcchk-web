@@ -18,6 +18,8 @@ module.exports.routes = {
    *                                                                          *
    ***************************************************************************/
 
+  "get /api/cache/refresh-cache": "cache/refresh-cache",
+
   "get /api/sermons/get-sermons": "sermons/get-sermons",
   "get /api/sermons/get-speakers": "sermons/get-speakers",
   "get /api/sermons/get-sermon-series": "sermons/get-sermon-series",
