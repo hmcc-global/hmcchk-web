@@ -1,59 +1,58 @@
 module.exports = {
   attributes: {
     email: {
-      type: 'string',
+      type: "string",
       required: true,
       unique: true,
-      isEmail: true
+      isEmail: true,
     },
     password: {
-      type: 'string',
-      required: true
+      type: "string",
     },
     accessType: {
-      type: 'string', //stewardship, admin, or member
-      defaultsTo: 'member'
+      type: "string", //stewardship, admin, or member
+      defaultsTo: "member",
     },
     fullName: {
-      type: 'string',
-      required: true
+      type: "string",
+      required: true,
     },
     campus: {
-      type: 'string',
+      type: "string",
     },
     lifestage: {
-      type: 'string',
-      required: true
+      type: "string",
+      required: true,
     },
     lifeGroup: {
-      type: 'string'
+      type: "string",
     },
     isMember: {
-      type: 'boolean',
-      defaultsTo: false
+      type: "boolean",
+      defaultsTo: false,
     },
     isBaptised: {
-      type: 'boolean',
-      defaultsTo: false
+      type: "boolean",
+      defaultsTo: false,
     },
     phoneNumber: {
-      type: 'number',
-      required: true
+      type: "number",
+      required: true,
     },
     classesTaken: {
-      type: 'json'
+      type: "json",
     },
     eventsJoined: {
-      type: 'json'
+      type: "json",
     },
     membershipId: {
-      type: 'ref'
+      type: "ref",
     },
     baptismId: {
-      type: 'ref'
+      type: "ref",
     },
     financeId: {
-      type: 'json'
-    }
+      type: "json",
+    },
   },
 };

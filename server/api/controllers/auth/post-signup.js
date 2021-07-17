@@ -80,16 +80,6 @@ the account verification message.)`,
     lifestage,
     phoneNumber,
   }) {
-    if (
-      emailAddress == null ||
-      password == null ||
-      fullName == null ||
-      lifestage == null ||
-      phoneNumber == null
-    ) {
-      throw "missingRequiredFields";
-    }
-
     const newEmailAddress = emailAddress.toLowerCase();
 
     // Build up data for the new user record and save it to the database.
@@ -97,9 +87,8 @@ the account verification message.)`,
     const newUserRecord = await User.create(
       _.extend(
         {
-          emailAddress: newEmailAddress,
+          email: newEmailAddress,
           password: await sails.helpers.passwords.hashPassword(password),
-          accessType,
           fullName,
           lifestage,
           phoneNumber,
