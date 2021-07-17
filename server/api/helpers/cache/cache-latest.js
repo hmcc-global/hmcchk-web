@@ -38,7 +38,11 @@ module.exports = {
 
   inputs: {},
 
-  exits: {},
+  exits: {
+    nonSuccess: {
+      description: "Error",
+    },
+  },
 
   fn: async function (inputs, exits) {
     sails.log.info(`System: Attempting to store latest data in cache`);
@@ -73,12 +77,6 @@ module.exports = {
       (result) => result.length > 0
     );
 
-    await Promise.all([
-      pSpeakers,
-      pMedia,
-      pSermonSeries,
-      pServiceTypes,
-      pSermons,
-    ]);
+    return exits.success("Cache function");
   },
 };
