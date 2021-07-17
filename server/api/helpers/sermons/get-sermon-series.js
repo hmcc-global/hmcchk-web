@@ -24,10 +24,7 @@ module.exports = {
     let url = sails.config.custom.sermonSeries.host;
 
     try {
-      const data = await sails.helpers.getData(
-        url,
-        (parameters = { per_page: 100 })
-      );
+      const data = await sails.helpers.getData(url);
       const media = await sails.helpers.media.getMedia();
       let transformedData = data.reduce(
         (acc, { id, name, sermon_series_image_id: sermonSeriesImageId }) => {

@@ -27,9 +27,9 @@ const transformMedia = (media) => {
 };
 
 module.exports = {
-  friendlyName: "Get sermons",
+  friendlyName: "Get media",
 
-  description: "Get all sermons",
+  description: "Get all media",
 
   inputs: {},
 
