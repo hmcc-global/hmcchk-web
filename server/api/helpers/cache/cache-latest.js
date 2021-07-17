@@ -79,7 +79,7 @@ module.exports = {
 
     let pAnnouncements = retryUntilSuccess(
       "Announcements",
-      () => sails.helpers.sermons.getAnnouncements(),
+      () => sails.helpers.announcements.getAnnouncements(),
       (result) => result.length > 0
     );
 

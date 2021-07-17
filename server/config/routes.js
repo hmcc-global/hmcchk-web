@@ -20,18 +20,22 @@ module.exports.routes = {
 
   "get /api/cache/refresh-cache": "cache/refresh-cache",
 
+  // Announcement APIs
+  "get /api/announcements/get-announcements": "announcements/get-announcements",
+
+  // Sermon APIs
   "get /api/sermons/get-sermons": "sermons/get-sermons",
   "get /api/sermons/get-speakers": "sermons/get-speakers",
   "get /api/sermons/get-sermon-series": "sermons/get-sermon-series",
   "get /api/sermons/get-service-types": "sermons/get-service-types",
 
+  // Media APIs
   "get /api/media/get-media": "media/get-media",
 
+  // Auth APIs
   "post /api/auth/login": "auth/post-login",
   "post /api/auth/signup": "auth/post-signup",
   "post /api/auth/signup-google": "auth/post-signup-google",
-
-  "get /api/sermons/get-announcements": "sermons/get-announcements",
 
   /***************************************************************************
    *                                                                          *
