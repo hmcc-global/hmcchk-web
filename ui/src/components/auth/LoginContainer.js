@@ -23,22 +23,16 @@ const LoginContainer = (props) => {
     }
   };
 
-  useEffect(() => {
-    //postLogin();
-  }, []);
+  useEffect(() => {}, []);
 
-  const responseGoogle = async (response) => {
-    // console.log(test);
-    const basicProfile = response.getBasicProfile();
-    // console.log(basicProfile);
-    const email = basicProfile.getEmail();
-    // console.log(email);
-    //https://developers.google.com/identity/sign-in/web/backend-auth
-    //const { id_token } = response.getAuthResponse();
-
+  const onGoogleSuccess = async ({ tokenId }) => {
     const { data } = await axios.post("/api/auth/signup-google", {
-      idToken: email,
+      tokenId: tokenId,
     });
+  };
+
+  const onGoogleFailure = ({ error }) => {
+    console.log(error);
   };
 
   return (
@@ -47,10 +41,10 @@ const LoginContainer = (props) => {
         <Card>hello login</Card>
         <Card>
           <GoogleLogin
-            clientId="99075377276-tklfjgh5rf0fp60bo9olmv78aa0chngu.apps.googleusercontent.com"
+            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
             buttonText="Login"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
+            onSuccess={onGoogleSuccess}
+            onFailure={onGoogleFailure}
             cookiePolicy={"single_host_origin"}
           />
         </Card>

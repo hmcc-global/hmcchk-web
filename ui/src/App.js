@@ -1,16 +1,16 @@
-import { BrowserRouter } from 'react-router-dom';
-import withStyles from '@material-ui/core/styles/withStyles';
-import MainContainer from './components/MainContainer';
+import { BrowserRouter } from "react-router-dom";
+import withStyles from "@material-ui/core/styles/withStyles";
+import MainContainer from "./components/MainContainer";
 
 const styles = {
   root: {
     flexGrow: 1,
     zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
-    display: 'flex',
-    height: '100vh'
-  }
+    overflow: "hidden",
+    position: "relative",
+    display: "flex",
+    height: "100vh",
+  },
 };
 
 const App = (props) => {

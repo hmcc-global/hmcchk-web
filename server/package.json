@@ -9,6 +9,7 @@
     "@sailshq/lodash": "^3.10.3",
     "@sailshq/socket.io-redis": "^5.2.0",
     "axios": "^0.21.1",
+    "dotenv": "^10.0.0",
     "google-auth-library": "^7.3.0",
     "grunt": "1.0.4",
     "he": "^1.2.0",
