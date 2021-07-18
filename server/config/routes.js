@@ -23,6 +23,9 @@ module.exports.routes = {
   // Announcement APIs
   "get /api/announcements/get-announcements": "announcements/get-announcements",
 
+  // Pages APIs
+  "get /api/pages/get-pages": "pages/get-pages",
+
   // Sermon APIs
   "get /api/sermons/get-sermons": "sermons/get-sermons",
   "get /api/sermons/get-speakers": "sermons/get-speakers",
