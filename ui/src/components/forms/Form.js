@@ -1,17 +1,17 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 
-const styles = {
-};
+const styles = {};
 
-const Form = props => {
+const Form = (props) => {
   const { formData } = props;
-  const { register, reset, watch, setValue, handleSubmit, formState } = useForm();
+  const { register, reset, watch, setValue, handleSubmit, formState } =
+    useForm();
   const { errors } = formState;
 
   const validateDemoForm = (data, e) => {
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(data, null, 4));
+    alert("SUCCESS!! :-)\n\n" + JSON.stringify(data, null, 4));
     reset();
 
     return false;
@@ -29,31 +29,61 @@ const Form = props => {
     if (fieldType === "select") {
       let items = [];
 
-      opts.map(option => {
-        let o = <option key={fieldName + option} value={option}> {option} </option>
+      opts.map((option) => {
+        let o = (
+          <option key={fieldName + option} value={option}>
+            {" "}
+            {option}{" "}
+          </option>
+        );
         items.push(o);
         return o;
       });
-      
-      inputField.push(<select {...register(fieldName, {required:required})}> {items} </select>);
-    }
-    else if (fieldType === "radio") {
-      opts.map(option => {
-        let o = <input key={fieldName + option} {...register(fieldName, {required:required})} type="radio" id={fieldName+option} value={option} />
-        let l = <label key={fieldName + option + "label"} htmlFor={fieldName+option}>{option}</label>
-        inputField.push(o)
-        inputField.push(l)
-        return true
+
+      inputField.push(
+        <select {...register(fieldName, { required: required })}>
+          {" "}
+          {items}{" "}
+        </select>
+      );
+    } else if (fieldType === "radio") {
+      opts.map((option) => {
+        let o = (
+          <input
+            key={fieldName + option}
+            {...register(fieldName, { required: required })}
+            type="radio"
+            id={fieldName + option}
+            value={option}
+          />
+        );
+        let l = (
+          <label
+            key={fieldName + option + "label"}
+            htmlFor={fieldName + option}
+          >
+            {option}
+          </label>
+        );
+        inputField.push(o);
+        inputField.push(l);
+        return true;
       });
-    }
-    else if (fieldType === "textarea") {
-      inputField.push(<textarea key={fieldName}  {...register(fieldName , {required:required})}/>);
-    }
-    else {
-      inputField.push(<input 
-        key={fieldName} 
-        type= {fieldType}
-        {...register(fieldName, {required:required})} />);
+    } else if (fieldType === "textarea") {
+      inputField.push(
+        <textarea
+          key={fieldName}
+          {...register(fieldName, { required: required })}
+        />
+      );
+    } else {
+      inputField.push(
+        <input
+          key={fieldName}
+          type={fieldType}
+          {...register(fieldName, { required: required })}
+        />
+      );
     }
 
     if (required === true) {
@@ -65,15 +95,13 @@ const Form = props => {
   };
 
   return (
-      <form onSubmit={handleSubmit(validateDemoForm)}>
-      {
-        formData.map( (fieldData, i) => (
-          <div> 
-            <label>{ fieldData.fieldName }</label>
-            {createFormField(fieldData)} 
-          </div>
-        ))
-      }
+    <form onSubmit={handleSubmit(validateDemoForm)}>
+      {formData.map((fieldData, i) => (
+        <div>
+          <label>{fieldData.fieldName}</label>
+          {createFormField(fieldData)}
+        </div>
+      ))}
       <input type="submit" />
     </form>
   );

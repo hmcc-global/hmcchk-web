@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { withStyles } from '@material-ui/core/styles';
-import axios from 'axios';
+import { withStyles } from "@material-ui/core/styles";
+import axios from "axios";
 import Form from "./Form";
 
-const styles = {
-};
+const styles = {};
 
-const FormCreator = props => {
+const FormCreator = (props) => {
   const { formName, existingFormData, resetFormEditorCallback } = props;
   const [formData, setFormData] = useState([]);
   const [editData, setEditData] = useState(null);
   const [saveStatus, setSaveStatus] = useState(false);
-  const { register, reset, watch, setValue, handleSubmit, formState } = useForm();
+  const { register, reset, watch, setValue, handleSubmit, formState } =
+    useForm();
   const { errors } = formState;
 
   useEffect(() => {
@@ -29,11 +29,10 @@ const FormCreator = props => {
     }
     let temp = [...formData];
 
-    if(editData) {
+    if (editData) {
       temp.splice(editData, 1, data);
       setEditData(null);
-    }
-    else {
+    } else {
       temp.push(data);
     }
     setFormData(temp);
@@ -42,23 +41,22 @@ const FormCreator = props => {
   };
 
   // Handler for field data edits
-  const onEdit = e => {
+  const onEdit = (e) => {
     const temp = formData[e.target.value];
     setEditData(e.target.value);
     setValue("fieldName", temp.fieldName);
     setValue("fieldType", temp.fieldType);
     if (temp.options) {
-      setValue("options", temp.options.join(';'));
+      setValue("options", temp.options.join(";"));
     }
     setValue("required", temp.required);
   };
 
   // Handler for deletion of field data
-  const onDelete = e => {
+  const onDelete = (e) => {
     if (editData) {
       alert("Cannot delete while editing");
-    }
-    else {
+    } else {
       if (window.confirm("Are you sure you want to delete this?")) {
         let temp = [...formData];
         temp.splice(e.target.value, 1);
@@ -71,46 +69,46 @@ const FormCreator = props => {
     if (existingFormData) {
       const { status } = await axios.post("/api/forms/post-update-form", {
         id: existingFormData.id,
-        formToSave: formToSave
+        formToSave: formToSave,
       });
 
       return status;
-    }
-    else {
+    } else {
       const { status } = await axios.post("/api/forms/post-create-form", {
-        formToSave: formToSave
+        formToSave: formToSave,
       });
 
       return status;
     }
   };
 
-  const onSaveToDB = async e => {
+  const onSaveToDB = async (e) => {
     setSaveStatus(true);
     try {
-      let formToSave = {formName: formName, formFields: formData};
+      let formToSave = { formName: formName, formFields: formData };
       const statusCode = await saveFormToDB(formToSave);
-      if( statusCode === 200) {
+      if (statusCode === 200) {
         setSaveStatus(false);
         resetFormEditorCallback(formName);
       }
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
   };
 
   // Watch this to conditionally render custom things
   const ft = watch("fieldType");
-   
+
   return (
     <div>
-      <h1>Creating/Editing form { formName }</h1>
+      <h1>Creating/Editing form {formName}</h1>
       <h2>Form Editor</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         {editData && (
           <div>
-            <label>Currently editing field: {formData[editData].fieldName} </label>
+            <label>
+              Currently editing field: {formData[editData].fieldName}{" "}
+            </label>
           </div>
         )}
         <div>
@@ -131,39 +129,33 @@ const FormCreator = props => {
         {(ft === "select" || ft === "radio") && (
           <div>
             <label>Options</label>
-            <input id="options" {...register("options")}/>
+            <input id="options" {...register("options")} />
             <label htmlFor="options">Enter options separated by ;</label>
           </div>
         )}
         <label htmlFor="required">Required</label>
-        <input id="required" type="checkbox" {...register("required")}/>      
-        <br/>
+        <input id="required" type="checkbox" {...register("required")} />
+        <br />
         <input type="submit" value="Save Field Data" />
       </form>
-      
+
       <h2>Created Form Fields</h2>
-      {
-        formData.map( (fieldData, i) => (
-          <div>
-            {fieldData.fieldName}
-            <button href="" 
-              value={i}
-              onClick={onEdit}>
-                Edit
-            </button>
-            <button href="" 
-              value={i} 
-              onClick={onDelete}>
-                Delete
-            </button>
-          </div>
-        ))
-      }
+      {formData.map((fieldData, i) => (
+        <div>
+          {fieldData.fieldName}
+          <button href="" value={i} onClick={onEdit}>
+            Edit
+          </button>
+          <button href="" value={i} onClick={onDelete}>
+            Delete
+          </button>
+        </div>
+      ))}
       <button onClick={onSaveToDB}>Save to DB</button>
       {saveStatus && <div>Saving</div>}
 
       <h2>Form Preview</h2>
-      <Form formData={formData}/>
+      <Form formData={formData} />
     </div>
   );
 };

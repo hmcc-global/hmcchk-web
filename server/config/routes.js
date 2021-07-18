@@ -19,18 +19,18 @@ module.exports.routes = {
    ***************************************************************************/
 
   "get /api/cache/refresh-cache": "cache/refresh-cache",
-  
-  'get /api/sermons/get-sermons' : 'sermons/get-sermons',
-  'get /api/sermons/get-speakers' : 'sermons/get-speakers',
-  'get /api/sermons/get-sermon-series' : 'sermons/get-sermon-series',
-  'get /api/sermons/get-service-types' : 'sermons/get-service-types',
-  'post /api/users/add-user': 'users/add-user',
-  'post /api/forms/create-form' : 'forms/create-form',
-  'get /api/forms/get-all-forms' : 'forms/get-all-forms',
-  'get /api/forms/get-form-by-id' : 'forms/get-form-by-id',
-  'post /api/forms/post-create-form' : 'forms/post-create-form',
-  'post /api/forms/post-update-form' : 'forms/post-update-form',
-  'post /api/forms/post-delete-form' : 'forms/post-delete-form',
+
+  "get /api/sermons/get-sermons": "sermons/get-sermons",
+  "get /api/sermons/get-speakers": "sermons/get-speakers",
+  "get /api/sermons/get-sermon-series": "sermons/get-sermon-series",
+  "get /api/sermons/get-service-types": "sermons/get-service-types",
+  "post /api/users/add-user": "users/add-user",
+  "post /api/forms/create-form": "forms/create-form",
+  "get /api/forms/get-all-forms": "forms/get-all-forms",
+  "get /api/forms/get-form-by-id": "forms/get-form-by-id",
+  "post /api/forms/post-create-form": "forms/post-create-form",
+  "post /api/forms/post-update-form": "forms/post-update-form",
+  "post /api/forms/post-delete-form": "forms/post-delete-form",
 
   // Announcement APIs
   "get /api/announcements/get-announcements": "announcements/get-announcements",

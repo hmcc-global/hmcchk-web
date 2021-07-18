@@ -1,11 +1,11 @@
 module.exports = {
   attributes: {
     formName: {
-      type: 'string',
+      type: "string",
       required: true,
     },
     formFields: {
-      type: 'json',
-    }
-  }
+      type: "json",
+    },
+  },
 };
