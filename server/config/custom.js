@@ -40,4 +40,8 @@ module.exports.custom = {
   announcements: {
     host: "https://hongkong.hmcc.net/wp-json/wp/v2/posts",
   },
+
+  pages: {
+    host: "http://hongkong.hmcc.net/wp-json/wp/v2/pages",
+  },
 };
