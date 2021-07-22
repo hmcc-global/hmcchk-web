@@ -1,28 +1,28 @@
 module.exports = {
-  friendlyName: 'View users',
+  friendlyName: "View users",
 
-  description: '',
+  description: "",
 
   inputs: {
     userId: {
       required: false,
-      type: 'string'
-    }
+      type: "string",
+    },
   },
 
   exits: {
     success: {
       description: "User account returned successfully",
     },
-    invalid : {
+    invalid: {
       description: "Failed to retrieve user account",
-    }
+    },
   },
-  fn: async function({ userId }, exits) {
+  fn: async function ({ userId }, exits) {
     try {
       if (userId) {
         let data = await User.find(userId);
-        if (data.length === 0) throw('user not found');
+        if (data.length === 0) throw "user not found";
         return exits.success(data);
       }
 
@@ -32,5 +32,5 @@ module.exports = {
       sails.log(err);
       return exits.invalid(err);
     }
-  }
-}
+  },
+};

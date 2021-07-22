@@ -1,20 +1,20 @@
 module.exports = {
-  friendlyName: 'Update users',
+  friendlyName: "Update users",
 
-  description: '',
+  description: "",
 
   inputs: {
     params: {
       required: false,
-      type: 'json'
-    }
+      type: "json",
+    },
   },
 
   exits: {
     success: {
       description: "User account updated successfully",
     },
-    invalid : {
+    invalid: {
       description: "Failed to update user account",
     },
 
@@ -22,12 +22,19 @@ module.exports = {
       statusCode: 409,
       description: "Please fill in the required fields.",
     },
+
+    invalidUserId: {
+      statusCode: 409,
+      description: "Invalid user id.",
+    },
   },
 
-  fn: async function({ params }, exits) {
+  fn: async function ({ params }, exits) {
+    sails.log(params);
     if (params.id) {
       try {
         let data = await User.updateOne(params.id, params);
+
         sails.log(data);
         return exits.success(data);
       } catch (err) {
@@ -35,7 +42,8 @@ module.exports = {
         return exits.invalid();
       }
     } else {
+      sails.log("error");
       throw "missingRequiredFields";
     }
-  }
-}
+  },
+};

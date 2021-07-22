@@ -1,20 +1,20 @@
 module.exports = {
-  friendlyName: 'View users',
+  friendlyName: "View users",
 
-  description: '',
+  description: "",
 
   inputs: {
     userId: {
       required: true,
-      type: 'string'
-    }
+      type: "string",
+    },
   },
 
   exits: {
     success: {
       description: "User account deleted successfully",
     },
-    invalid : {
+    invalid: {
       description: "Failed to delete user account",
     },
 
@@ -24,10 +24,10 @@ module.exports = {
     },
   },
 
-  fn: async function({ userId }, exits) {
+  fn: async function ({ userId }, exits) {
     if (userId) {
       try {
-        let data = await User.updateOne(userId).set({isDelete: true});
+        let data = await User.updateOne(userId).set({ isDeleted: true });
         sails.log(data);
         return exits.success(data);
       } catch (err) {
@@ -37,5 +37,5 @@ module.exports = {
     } else {
       throw "missingRequiredFields";
     }
-  }
-}
+  },
+};
