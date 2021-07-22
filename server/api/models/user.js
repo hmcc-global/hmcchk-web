@@ -18,8 +18,13 @@ module.exports = {
       required: true,
     },
     nationality: {
+<<<<<<< HEAD
       type: "string",
       required: true,
+=======
+      type: 'string',
+      required: true
+>>>>>>> 7737213a820b65013d4eb59906db101cc8d74d67
     },
     campus: {
       type: "string",
