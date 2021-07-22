@@ -21,12 +21,12 @@ module.exports = {
   fn: async function ({ userId }, exits) {
     try {
       if (userId) {
-        let data = await User.find(userId);
+        let data = await User.find({ userId, isDeleted: false });
         if (data.length === 0) throw "user not found";
         return exits.success(data);
       }
 
-      let data = await User.find();
+      let data = await User.find({ isDeleted: false });
       return exits.success(data);
     } catch (err) {
       sails.log(err);
