@@ -25,24 +25,30 @@ module.exports = {
 
     invalidUserId: {
       statusCode: 409,
-      description: "Invalid user id.",
+      description: "The user id is invalid",
     },
   },
 
   fn: async function ({ params }, exits) {
-    sails.log(params);
     if (params.id) {
+      let userId = params.id;
       try {
-        let data = await User.updateOne(params.id, params);
-
-        sails.log(data);
-        return exits.success(data);
+        delete params.id;
+        let data = await User.updateOne({ _id: userId, isDeleted: false }).set(
+          params
+        );
+        if (data != null) {
+          return exits.success(data);
+        }
+        return exits.invalid();
       } catch (err) {
+        if ((err.code = "E_CANNOT_INTERPRET_AS_OBJECTID")) {
+          throw "invalidUserId";
+        }
         sails.log(err);
         return exits.invalid();
       }
     } else {
-      sails.log("error");
       throw "missingRequiredFields";
     }
   },

@@ -27,10 +27,17 @@ module.exports = {
   fn: async function ({ userId }, exits) {
     if (userId) {
       try {
-        let data = await User.updateOne(userId).set({ isDeleted: true });
-        sails.log(data);
-        return exits.success(data);
+        let data = await User.updateOne({ _id: userId, isDeleted: false }).set({
+          isDeleted: true,
+        });
+        if (data != null) {
+          return exits.success(data);
+        }
+        return exits.invalid();
       } catch (err) {
+        if ((err.code = "E_CANNOT_INTERPRET_AS_OBJECTID")) {
+          throw "invalidUserId";
+        }
         sails.log(err);
         return exits.invalid();
       }
