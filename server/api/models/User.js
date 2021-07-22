@@ -28,6 +28,10 @@ email status until they click the link in the confirmation email.`,
       type: "string",
       required: true,
     },
+    nationality: {
+      type: "string",
+      required: true,
+    },
     campus: {
       type: "string",
     },
