@@ -1,12 +1,12 @@
 module.exports = {
-  friendlyName: "Get form by id",
+  friendlyName: "Get form",
 
-  description: "Get form by id",
+  description:
+    "Gets all forms if id is not specified, finds a specific one otherwise.",
 
   inputs: {
     id: {
       type: "string",
-      required: true,
       description: "Id of form",
     },
   },
@@ -15,7 +15,9 @@ module.exports = {
 
   fn: async function ({ id }, exits) {
     try {
-      const data = await Form.find(id);
+      console.log("Id:", id);
+      const data = await Form.find().where({ id: id, isDeleted: false });
+      console.log(data);
       return exits.success(data);
     } catch (err) {
       sails.log(err);

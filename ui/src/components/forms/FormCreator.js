@@ -92,6 +92,7 @@ const FormCreator = (props) => {
         resetFormEditorCallback(formName);
       }
     } catch (err) {
+      setSaveStatus(false);
       console.log(err);
     }
   };

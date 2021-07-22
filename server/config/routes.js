@@ -20,9 +20,8 @@ module.exports.routes = {
 
   "get /api/cache/refresh-cache": "cache/refresh-cache",
 
-  "post /api/forms/create-form": "forms/create-form",
-  "get /api/forms/get-all-forms": "forms/get-all-forms",
-  "get /api/forms/get-form-by-id": "forms/get-form-by-id",
+  // Forms APIs
+  "get /api/forms/get-form": "forms/get-form",
   "post /api/forms/post-create-form": "forms/post-create-form",
   "post /api/forms/post-update-form": "forms/post-update-form",
   "post /api/forms/post-delete-form": "forms/post-delete-form",

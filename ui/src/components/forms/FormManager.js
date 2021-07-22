@@ -36,7 +36,7 @@ const FormManager = (props) => {
   const onEdit = async (e) => {
     try {
       const formId = String(e.target.value);
-      const { data, status } = await axios.get("/api/forms/get-form-by-id", {
+      const { data, status } = await axios.get("/api/forms/get-form", {
         params: { id: formId },
       });
       setFormName(data[0].formName);
@@ -67,7 +67,7 @@ const FormManager = (props) => {
 
   const getFormListFromDatabase = async () => {
     try {
-      const { data, status } = await axios.get("/api/forms/get-all-forms");
+      const { data, status } = await axios.get("/api/forms/get-form");
       setFormList(data);
     } catch (err) {
       console.log(err);

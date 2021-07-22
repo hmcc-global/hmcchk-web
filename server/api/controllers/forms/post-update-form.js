@@ -21,6 +21,9 @@ module.exports = {
   fn: async function ({ id, formToSave }, exits) {
     try {
       const updatedForm = await Form.updateOne(id).set(formToSave);
+      if (!updatedForm) {
+        return exits.error("Invalid id");
+      }
       return exits.success(updatedForm);
     } catch (err) {
       sails.log(err);
