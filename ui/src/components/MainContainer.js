@@ -7,7 +7,7 @@ import { MuiPickersUtilsProvider } from "material-ui-pickers";
 import SermonContainer from "./sermons/SermonContainer";
 import SermonCard from "./sermons/SermonCard";
 import LoginContainer from "./auth/LoginContainer";
-import FormManager from './forms/FormManager';
+import FormManager from "./forms/FormManager";
 
 const styles = (theme) => ({
   content: {

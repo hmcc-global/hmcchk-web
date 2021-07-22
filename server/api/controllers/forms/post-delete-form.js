@@ -20,8 +20,8 @@ module.exports = {
         return exits.error("Invalid id");
       }
 
-      temp = temp[0]
-      temp = { formName: temp.formName, formFields: temp.formFields};
+      temp = temp[0];
+      temp = { formName: temp.formName, formFields: temp.formFields };
       temp.isDeleted = true;
       const data = await Form.updateOne(id).set(temp);
 
