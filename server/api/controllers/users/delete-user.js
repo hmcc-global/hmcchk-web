@@ -1,5 +1,5 @@
 module.exports = {
-  friendlyName: "View users",
+  friendlyName: "Delete users",
 
   description: "",
 
