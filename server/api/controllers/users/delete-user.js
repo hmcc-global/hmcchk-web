@@ -35,11 +35,8 @@ module.exports = {
         }
         return exits.invalid();
       } catch (err) {
-        if ((err.code = "E_CANNOT_INTERPRET_AS_OBJECTID")) {
-          throw "invalidUserId";
-        }
-        sails.log(err);
-        return exits.invalid();
+        sails.log.error(err);
+        return exits.error(err);
       }
     } else {
       throw "missingRequiredFields";

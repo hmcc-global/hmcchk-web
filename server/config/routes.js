@@ -56,6 +56,7 @@ module.exports.routes = {
 >>>>>>> e101984... CRUD user API done
 =======
 
+  // User APIs
   "get /api/users/get": "users/get-user",
   "put /api/users/update": "users/update-user",
   "put /api/users/delete": "users/delete-user",
