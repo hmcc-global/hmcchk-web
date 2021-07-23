@@ -64,7 +64,8 @@ email status until they click the link in the confirmation email.`,
       type: "ref",
     },
     baptismId: {
-      type: "ref",
+      collection: "Baptism",
+      via: "userId",
     },
     financeId: {
       type: "json",

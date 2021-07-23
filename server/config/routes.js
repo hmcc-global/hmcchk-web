@@ -46,6 +46,7 @@ module.exports.routes = {
   "post /api/auth/signup": "auth/post-signup",
   "post /api/auth/signup-google": "auth/post-signup-google",
 <<<<<<< HEAD
+<<<<<<< HEAD
   "get /email/confirm/": "auth/email-confirm",
 =======
   
@@ -53,6 +54,15 @@ module.exports.routes = {
   "put /api/users/update-user": "users/update-user",
   "put /api/users/delete-user": "users/delete-user"
 >>>>>>> e101984... CRUD user API done
+=======
+
+  "get /api/users/get": "users/get-user",
+  "put /api/users/update": "users/update-user",
+  "put /api/users/delete": "users/delete-user",
+
+  // Baptism APIs
+  "post /api/baptism/create": "baptisms/create-baptism",
+>>>>>>> ba6f87a... testing baptism model
 
   /***************************************************************************
    *                                                                          *
