@@ -56,11 +56,12 @@ module.exports.custom = {
   },
 
   pages: {
-    host: "http://hongkong.hmcc.net/wp-json/wp/v2/pages",
+    host: "https://hongkong.hmcc.net/wp-json/wp/v2/pages",
   },
 
   // Whether to require proof of email address ownership any time a new user
   // signs up, or when an existing user attempts to change their email address.
   verifyEmailAddresses: true,
   emailProofTokenTTL: 60 * 60 * 1000, // 1 hour
+  tokenExpiryHours: 1,
 };
