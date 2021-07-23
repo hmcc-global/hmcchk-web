@@ -1,6 +1,9 @@
 import { BrowserRouter } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import MainContainer from "./components/MainContainer";
+import { store, persistor } from "./store";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 const styles = {
   root: {
@@ -15,14 +18,18 @@ const styles = {
 
 const App = (props) => {
   const { classes } = props;
-
+  console.log(store);
   return (
     <div className={classes.root}>
-      <BrowserRouter>
-        <>
-          <MainContainer />
-        </>
-      </BrowserRouter>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter>
+            <>
+              <MainContainer />
+            </>
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
     </div>
   );
 };
