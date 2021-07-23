@@ -40,9 +40,12 @@ module.exports.routes = {
   "post /api/auth/signup": "auth/post-signup",
   "post /api/auth/signup-google": "auth/post-signup-google",
 
-  "get /api/users/get-user": "users/get-user",
-  "put /api/users/update-user": "users/update-user",
-  "put /api/users/delete-user": "users/delete-user",
+  "get /api/users/get": "users/get-user",
+  "put /api/users/update": "users/update-user",
+  "put /api/users/delete": "users/delete-user",
+
+  // Baptism APIs
+  "post /api/baptism/create": "baptisms/create-baptism",
 
   /***************************************************************************
    *                                                                          *

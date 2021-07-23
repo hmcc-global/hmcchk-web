@@ -53,7 +53,8 @@ module.exports = {
       type: "ref",
     },
     baptismId: {
-      type: "ref",
+      collection: "Baptism",
+      via: "userId",
     },
     financeId: {
       type: "json",
