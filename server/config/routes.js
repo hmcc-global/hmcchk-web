@@ -63,7 +63,13 @@ module.exports.routes = {
 
   // Baptism APIs
   "post /api/baptism/create": "baptisms/create-baptism",
+<<<<<<< HEAD
 >>>>>>> ba6f87a... testing baptism model
+=======
+  "get /api/baptism/get": "baptisms/get-baptism",
+  "put /api/baptism/update": "baptisms/update-baptism",
+  "put /api/baptism/delete": "baptisms/delete-baptism",
+>>>>>>> 4f3c36f... updated comments and created CRUD baptisms
 
   /***************************************************************************
    *                                                                          *

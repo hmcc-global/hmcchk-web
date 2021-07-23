@@ -1,3 +1,5 @@
+const user = require("../../models/user");
+
 module.exports = {
   friendlyName: "Create baptisms",
 
@@ -8,6 +10,18 @@ module.exports = {
       type: "string",
     },
     userId: {
+      type: "string",
+    },
+    classDate: {
+      type: "json",
+    },
+    classAttendance: {
+      type: "json",
+    },
+    baptismDate: {
+      type: "string",
+    },
+    baptismPlace: {
       type: "string",
     },
   },
@@ -27,14 +41,17 @@ module.exports = {
     },
   },
 
-  fn: async function ({
-    officialName,
-    userId,
-    classDate,
-    classAttendance,
-    baptismDate,
-    baptismPlace,
-  }) {
+  fn: async function (
+    {
+      officialName,
+      userId,
+      classDate,
+      classAttendance,
+      baptismDate,
+      baptismPlace,
+    },
+    exits
+  ) {
     try {
       const newBaptism = await Baptism.create({
         officialName,
@@ -45,13 +62,17 @@ module.exports = {
         baptismPlace,
       });
 
-      sails.log(newBaptism);
-      if (newBaptism) {
-        return exits.success(newBaptism);
+      // update user if baptised
+      if (baptismDate != null && baptismPlace != "") {
+        await User.updateOne({ id: userId, isDelete: false }).set({
+          isBaptised: true,
+        });
       }
-      return exits.invalid();
+
+      return exits.success(newBaptism);
     } catch (err) {
-      return exits.invalid();
+      sails.log.error(err);
+      return exits.error(err);
     }
   },
 };
