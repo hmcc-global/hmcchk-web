@@ -84,6 +84,23 @@ the account verification message.)`,
       // Store the user's new id in their session.
       this.req.session.userId = newUserRecord.id;
 
+      if (sails.config.custom.verifyEmailAddresses) {
+        // Send "confirm account" email
+        await sails.helpers.sendTemplateEmail.with({
+          to: newEmailAddress,
+          subject: "Please confirm your account",
+          template: "email-verify-account",
+          templateData: {
+            fullName,
+            token: newUserRecord.emailProofToken,
+          },
+        });
+      } else {
+        sails.log.info(
+          "Skipping new account email verification... (since `verifyEmailAddresses` is disabled)"
+        );
+      }
+
       return exits.success("signup with google success");
     } catch (err) {
       sails.log(err);
