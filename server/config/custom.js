@@ -68,4 +68,5 @@ module.exports.custom = {
   verifyEmailAddresses: true,
   emailProofTokenTTL: 60 * 60 * 1000, // 1 hour
   passwordResetTokenTTL: 60 * 60 * 1000, // 1 hour
+  tokenExpiryHours: 1,
 };
