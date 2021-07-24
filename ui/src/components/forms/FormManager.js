@@ -8,6 +8,7 @@ const FormManager = (props) => {
   const { register, reset, handleSubmit, formState } = useForm();
   const [formName, setFormName] = useState(null);
   const [formDescription, setFormDescription] = useState(null);
+  const [formImage, setFormImage] = useState(null);
   const [editFormData, setEditFormData] = useState(null);
   const [formList, setFormList] = useState([]);
 
@@ -18,9 +19,14 @@ const FormManager = (props) => {
   }, []);
 
   const onSubmit = (data, e) => {
+    setValue("formName", data.formName);
+    setValue("formDescription", data.formDescription);
+    setValue("formImage", data.formImage);
+    
+    // Update React State for child props
     setFormName(data.formName);
     setFormDescription(data.formDescription);
-    setEditFormData(null);
+    setFormImage(data.formImage);
   };
 
   const onEdit = async (e) => {
@@ -29,8 +35,12 @@ const FormManager = (props) => {
       const { data, status } = await axios.get("/api/forms/get-form", {
         params: { id: formId },
       });
+      setValue("formName", data[0].formName);
+      setValue("formDescription", data[0].formDescription);
+      setValue("formImage", data[0].formImage);
       setFormName(data[0].formName);
       setFormDescription(data[0].formDescription);
+      setFormImage(data[0].formImage);
       setEditFormData(data[0]);
     } catch (err) {
       console.log(err);
@@ -49,8 +59,13 @@ const FormManager = (props) => {
     }
   };
 
-  const resetFormEditorCallback = (newFormData) => {
+  const resetFormEditorCallback = () => {
+    setValue("formName", null);
+    setValue("formDescription", null);
+    setValue("formImage", null);
     setFormName(null);
+    setFormDescription(null);
+    setFormImage(null);
     setEditFormData(null);
     getFormListFromDatabase();
     reset();
@@ -86,23 +101,28 @@ const FormManager = (props) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>Form Name</label>
-          <input {...register("formName", { required: true })} />
+          <input id="formName" {...register("formName", { required: true })} />
           <span>{errors["formName"] && "Form name is required"}</span>
         </div>
         <div>
           <label>Form Description</label>
-          <input {...register("formDescription", { required: true })} />
+          <input id="formDescription" {...register("formDescription", { required: true })} />
           <span>
             {errors["formDescription"] && "Form description is required"}
           </span>
         </div>
-        <input type="submit" value="Create Form" />
+        <div>
+          <label>Form Image</label>
+          <input id="formImage" {...register("formImage")} />
+        </div>
+        <input type="submit" value="Create/Update Form" />
       </form>
 
       {formName && (
         <FormCreator
           formName={formName}
           formDescription={formDescription}
+          formImage={formImage}
           existingFormData={editFormData}
           resetFormEditorCallback={resetFormEditorCallback}
         />

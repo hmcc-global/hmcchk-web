@@ -7,6 +7,7 @@ const FormCreator = (props) => {
   const {
     formName,
     formDescription,
+    formImage,
     existingFormData,
     resetFormEditorCallback,
   } = props;
@@ -91,6 +92,7 @@ const FormCreator = (props) => {
       let formToSave = {
         formName: formName,
         formDescription: formDescription,
+        formImage: formImage,
         formFields: formData,
       };
       const statusCode = await saveFormToDB(formToSave);
@@ -176,6 +178,7 @@ const FormCreator = (props) => {
       <Form
         formName={formName}
         formDescription={formDescription}
+        formImage={formImage}
         formData={formData}
       />
     </div>
