@@ -9,7 +9,7 @@ module.exports = {
     emailStatus: {
       type: "string",
       isIn: ["unconfirmed", "change-requested", "confirmed"],
-      defaultsTo: "confirmed",
+      defaultsTo: "unconfirmed",
       description: "The confirmation status of the user's email address.",
       extendedDescription: `Users might be created as "unconfirmed" (e.g. normal signup) or as "confirmed" (e.g. hard-coded
 admin users).  When the email verification feature is enabled, new users created via the
