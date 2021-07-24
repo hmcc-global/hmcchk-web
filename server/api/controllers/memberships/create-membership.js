@@ -10,11 +10,8 @@ module.exports = {
     userId: {
       type: "string",
     },
-    classDate: {
-      type: "json",
-    },
     classAttendance: {
-      type: "boolean",
+      type: "json",
     },
     recognitionDate: {
       type: "string",
@@ -43,7 +40,6 @@ module.exports = {
     {
       officialName,
       userId,
-      classDate,
       classAttendance,
       recognitionDate,
       recommitmentDate,
@@ -54,7 +50,6 @@ module.exports = {
       const newMembership = await Membership.create({
         officialName,
         userId,
-        classDate,
         classAttendance,
         recognitionDate,
         recommitmentDate,
@@ -62,7 +57,7 @@ module.exports = {
 
       // update user if member
       if (recognitionDate != null) {
-        await User.updateOne({ id: userId, isDelete: false }).set({
+        await User.updateOne({ id: userId, isDeleted: false }).set({
           isMember: true,
         });
       }

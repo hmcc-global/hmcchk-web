@@ -7,14 +7,9 @@ module.exports = {
     officialName: {
       type: "String",
     },
-    classDate: {
-      type: "json",
-      columnType: "array",
-      defaultsTo: [],
-    },
     classAttendance: {
-      type: "boolean",
-      defaultsTo: false,
+      type: "json",
+      defaultsTo: { yyyymmdd: false },
     },
     recognitionDate: {
       type: "ref",
@@ -22,9 +17,9 @@ module.exports = {
       defaultsTo: null,
     },
     recommitmentDate: {
-      type: "ref",
-      columnType: "datetime",
-      defaultsTo: null,
+      type: "json",
+      columnType: "array",
+      defaultsTo: [],
     },
   },
 };

@@ -7,14 +7,9 @@ module.exports = {
     officialName: {
       type: "String",
     },
-    classDate: {
-      type: "json",
-      columnType: "array",
-      defaultsTo: [],
-    },
     classAttendance: {
       type: "json",
-      defaultsTo: { part1: false, part2: false },
+      defaultsTo: { yyyymmdd: false },
     },
     baptismDate: {
       type: "ref",

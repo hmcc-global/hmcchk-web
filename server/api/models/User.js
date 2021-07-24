@@ -35,6 +35,11 @@ email status until they click the link in the confirmation email.`,
     address: {
       type: "string",
     },
+    birthday: {
+      type: "ref",
+      columnType: "datetime",
+      required: true,
+    },
     campus: {
       type: "string",
     },
@@ -52,6 +57,9 @@ email status until they click the link in the confirmation email.`,
     isBaptised: {
       type: "boolean",
       defaultsTo: false,
+    },
+    ministryTeam: {
+      type: "string",
     },
     phoneNumber: {
       type: "number",

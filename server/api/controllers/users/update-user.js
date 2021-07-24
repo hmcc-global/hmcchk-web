@@ -45,8 +45,8 @@ module.exports = {
         sails.log.error(err);
         return exits.error(err);
       }
-    } else {
-      throw "missingRequiredFields";
     }
+    sails.log.error("missingRequiredFields");
+    return exits.invalid();
   },
 };

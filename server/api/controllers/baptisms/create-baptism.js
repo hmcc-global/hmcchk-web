@@ -10,9 +10,6 @@ module.exports = {
     userId: {
       type: "string",
     },
-    classDate: {
-      type: "json",
-    },
     classAttendance: {
       type: "json",
     },
@@ -40,21 +37,13 @@ module.exports = {
   },
 
   fn: async function (
-    {
-      officialName,
-      userId,
-      classDate,
-      classAttendance,
-      baptismDate,
-      baptismPlace,
-    },
+    { officialName, userId, classAttendance, baptismDate, baptismPlace },
     exits
   ) {
     try {
       const newBaptism = await Baptism.create({
         officialName,
         userId,
-        classDate,
         classAttendance,
         baptismDate,
         baptismPlace,
@@ -62,7 +51,7 @@ module.exports = {
 
       // update user if baptised
       if (baptismDate != null && baptismPlace != "") {
-        await User.updateOne({ id: userId, isDelete: false }).set({
+        await User.updateOne({ id: userId, isDeleted: false }).set({
           isBaptised: true,
         });
       }
