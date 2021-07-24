@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 
 const Form = (props) => {
   const { formName, formDescription, formImage, formData } = props;
-  const { register, reset, watch, setValue, handleSubmit, formState } =
+  const { register, reset, handleSubmit, formState } =
     useForm();
   const { errors } = formState;
 
@@ -95,9 +95,7 @@ const Form = (props) => {
 
   return (
     <form onSubmit={handleSubmit(validateDemoForm)}>
-      {formImage !== "" && (
-        <img src={formImage}/>
-      )}
+      {formImage !== "" && <img src={formImage} />}
       <h1>{formName}</h1>
       <p>{formDescription}</p>
       {formData.map((fieldData, i) => (
