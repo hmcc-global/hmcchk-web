@@ -53,7 +53,7 @@ module.exports = {
         await sails.helpers.sendTemplateEmail.with({
           to: user.email,
           subject: "Welcome to HMCC!",
-          template: "welcome-new-account",
+          template: "email-welcome-new-account",
           templateData: {
             fullName: user.fullName,
             token: user.emailProofToken,

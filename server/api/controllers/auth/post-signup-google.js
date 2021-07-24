@@ -90,7 +90,7 @@ the account verification message.)`,
       await sails.helpers.sendTemplateEmail.with({
         to: newEmailAddress,
         subject: "Welcome to HMCC!",
-        template: "welcome-new-account",
+        template: "email-welcome-new-account",
         templateData: {
           fullName,
           token: newUserRecord.emailProofToken,
