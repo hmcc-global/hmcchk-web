@@ -4,7 +4,7 @@ import axios from "axios";
 import Form from "./Form";
 
 const FormCreator = (props) => {
-  const { formName, existingFormData, resetFormEditorCallback } = props;
+  const { formName, formDescription, existingFormData, resetFormEditorCallback } = props;
   const [formData, setFormData] = useState([]);
   const [editData, setEditData] = useState(null);
   const [saveStatus, setSaveStatus] = useState(false);
@@ -43,6 +43,7 @@ const FormCreator = (props) => {
     setEditData(e.target.value);
     setValue("fieldName", temp.fieldName);
     setValue("fieldType", temp.fieldType);
+    setValue("fieldDescription", temp.fieldDescription);
     if (temp.options) {
       setValue("options", temp.options.join(";"));
     }
@@ -82,7 +83,7 @@ const FormCreator = (props) => {
   const onSaveToDB = async (e) => {
     setSaveStatus(true);
     try {
-      let formToSave = { formName: formName, formFields: formData };
+      let formToSave = { formName: formName, formDescription: formDescription, formFields: formData };
       const statusCode = await saveFormToDB(formToSave);
       if (statusCode === 200) {
         setSaveStatus(false);
@@ -110,7 +111,7 @@ const FormCreator = (props) => {
           </div>
         )}
         <div>
-          <label>Field Name</label>
+          <label>{ft === "header" ? "Header Text" : "Field Name"}</label>
           <input {...register("fieldName")} />
         </div>
         <div>
@@ -122,7 +123,13 @@ const FormCreator = (props) => {
             <option value="radio">Radio</option>
             <option value="textarea">Text Area</option>
             <option value="date">Datepicker</option>
+            <option value="header">Header</option>
           </select>
+        </div>
+        <div>
+          <label>Field Description (describe what this field is for)</label>
+          <input {...register("fieldDescription")} />
+          <label>Leave blank if not needed</label>
         </div>
         {(ft === "select" || ft === "radio") && (
           <div>
@@ -131,9 +138,13 @@ const FormCreator = (props) => {
             <label htmlFor="options">Enter options separated by ;</label>
           </div>
         )}
-        <label htmlFor="required">Required</label>
-        <input id="required" type="checkbox" {...register("required")} />
-        <br />
+        {(ft !== "header") && (
+          <div>
+            <label htmlFor="required">Required</label>
+            <input id="required" type="checkbox" {...register("required")} />
+            <br />
+          </div>
+        )}
         <input type="submit" value="Save Field Data" />
       </form>
 
@@ -153,7 +164,7 @@ const FormCreator = (props) => {
       {saveStatus && <div>Saving</div>}
 
       <h2>Form Preview</h2>
-      <Form formData={formData} />
+      <Form formName={formName} formDescription={formDescription} formData={formData} />
     </div>
   );
 };

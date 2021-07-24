@@ -7,8 +7,11 @@ import { Box } from "@chakra-ui/react";
 const FormManager = (props) => {
   const { register, reset, handleSubmit, formState } = useForm();
   const [formName, setFormName] = useState(null);
+  const [formDescription, setFormDescription] = useState(null);
   const [editFormData, setEditFormData] = useState(null);
   const [formList, setFormList] = useState([]);
+
+  const { errors } = formState;
 
   useEffect(() => {
     getFormListFromDatabase();
@@ -16,6 +19,7 @@ const FormManager = (props) => {
 
   const onSubmit = (data, e) => {
     setFormName(data.formName);
+    setFormDescription(data.formDescription);
     setEditFormData(null);
   };
 
@@ -26,6 +30,7 @@ const FormManager = (props) => {
         params: { id: formId },
       });
       setFormName(data[0].formName);
+      setFormDescription(data[0].formDescription);
       setEditFormData(data[0]);
     } catch (err) {
       console.log(err);
@@ -81,7 +86,13 @@ const FormManager = (props) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>Form Name</label>
-          <input {...register("formName")} />
+          <input {...register("formName", { required: true })} />
+          <span>{errors["formName"] && "Form name is required"}</span>
+        </div>
+        <div>
+          <label>Form Description</label>
+          <input {...register("formDescription", { required: true })} />
+          <span>{errors["formDescription"] && "Form description is required"}</span>
         </div>
         <input type="submit" value="Create Form" />
       </form>
@@ -89,6 +100,7 @@ const FormManager = (props) => {
       {formName && (
         <FormCreator
           formName={formName}
+          formDescription={formDescription}
           existingFormData={editFormData}
           resetFormEditorCallback={resetFormEditorCallback}
         />

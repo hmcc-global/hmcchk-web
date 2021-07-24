@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const Form = (props) => {
-  const { formData } = props;
+  const { formName, formDescription, formData } = props;
   const { register, reset, watch, setValue, handleSubmit, formState } =
     useForm();
   const { errors } = formState;
@@ -73,6 +73,10 @@ const Form = (props) => {
           {...register(fieldName, { required: required })}
         />
       );
+    } else if (fieldType === "header") {
+      inputField.push(
+        <h3>{fieldName}</h3>
+      )
     } else {
       inputField.push(
         <input
@@ -93,10 +97,17 @@ const Form = (props) => {
 
   return (
     <form onSubmit={handleSubmit(validateDemoForm)}>
+      <h1>{formName}</h1>
+      <p>{formDescription}</p>
       {formData.map((fieldData, i) => (
         <div>
-          <label>{fieldData.fieldName}</label>
+          {fieldData.fieldType !== "header" && (
+            <label>{fieldData.fieldName}</label>
+          )}
           {createFormField(fieldData)}
+          {fieldData.fieldDescription !== "" && (
+            <label>{fieldData.fieldDescription}</label>
+          )}
         </div>
       ))}
       <input type="submit" />
