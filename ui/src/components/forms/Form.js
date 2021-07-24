@@ -74,9 +74,7 @@ const Form = (props) => {
         />
       );
     } else if (fieldType === "header") {
-      inputField.push(
-        <h3>{fieldName}</h3>
-      )
+      inputField.push(<h3>{fieldName}</h3>);
     } else {
       inputField.push(
         <input

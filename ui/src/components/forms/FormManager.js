@@ -92,7 +92,9 @@ const FormManager = (props) => {
         <div>
           <label>Form Description</label>
           <input {...register("formDescription", { required: true })} />
-          <span>{errors["formDescription"] && "Form description is required"}</span>
+          <span>
+            {errors["formDescription"] && "Form description is required"}
+          </span>
         </div>
         <input type="submit" value="Create Form" />
       </form>

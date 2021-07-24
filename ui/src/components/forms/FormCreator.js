@@ -4,7 +4,12 @@ import axios from "axios";
 import Form from "./Form";
 
 const FormCreator = (props) => {
-  const { formName, formDescription, existingFormData, resetFormEditorCallback } = props;
+  const {
+    formName,
+    formDescription,
+    existingFormData,
+    resetFormEditorCallback,
+  } = props;
   const [formData, setFormData] = useState([]);
   const [editData, setEditData] = useState(null);
   const [saveStatus, setSaveStatus] = useState(false);
@@ -83,7 +88,11 @@ const FormCreator = (props) => {
   const onSaveToDB = async (e) => {
     setSaveStatus(true);
     try {
-      let formToSave = { formName: formName, formDescription: formDescription, formFields: formData };
+      let formToSave = {
+        formName: formName,
+        formDescription: formDescription,
+        formFields: formData,
+      };
       const statusCode = await saveFormToDB(formToSave);
       if (statusCode === 200) {
         setSaveStatus(false);
@@ -138,7 +147,7 @@ const FormCreator = (props) => {
             <label htmlFor="options">Enter options separated by ;</label>
           </div>
         )}
-        {(ft !== "header") && (
+        {ft !== "header" && (
           <div>
             <label htmlFor="required">Required</label>
             <input id="required" type="checkbox" {...register("required")} />
@@ -164,7 +173,11 @@ const FormCreator = (props) => {
       {saveStatus && <div>Saving</div>}
 
       <h2>Form Preview</h2>
-      <Form formName={formName} formDescription={formDescription} formData={formData} />
+      <Form
+        formName={formName}
+        formDescription={formDescription}
+        formData={formData}
+      />
     </div>
   );
 };
