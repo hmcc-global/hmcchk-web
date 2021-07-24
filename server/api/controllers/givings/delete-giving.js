@@ -1,42 +1,38 @@
 module.exports = {
-  friendlyName: "Update memberships",
+  friendlyName: "Delete membership",
 
-  description: "Update memberships",
+  description: "Delete membership",
 
   inputs: {
-    params: {
-      required: false,
-      type: "json",
+    membershipId: {
+      required: true,
+      type: "string",
     },
   },
 
   exits: {
     success: {
-      description: "Membership records updated successfully",
+      description: "Membership record deleted successfully",
     },
     invalid: {
-      description: "Failed to update membership record",
+      description: "Failed to delete membership record",
     },
 
     missingRequiredFields: {
       statusCode: 409,
       description: "Please fill in the required fields.",
     },
-
-    invalidBaptismId: {
-      statusCode: 409,
-      description: "The membershipId is invalid",
-    },
   },
 
-  fn: async function ({ params }, exits) {
-    const { id: membershipId, ...toUpdate } = params;
+  fn: async function ({ membershipId }, exits) {
     if (membershipId) {
       try {
         let data = await Membership.updateOne({
           _id: membershipId,
           isDeleted: false,
-        }).set(toUpdate);
+        }).set({
+          isDeleted: true,
+        });
         if (data != null) {
           return exits.success(data);
         }
@@ -45,8 +41,8 @@ module.exports = {
         sails.log.error(err);
         return exits.error(err);
       }
-    } else {
-      throw "missingRequiredFields";
     }
+    sails.log.error("missingRequiredFields");
+    return exits.invalid();
   },
 };

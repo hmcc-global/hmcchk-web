@@ -30,13 +30,13 @@ module.exports = {
   },
 
   fn: async function ({ params }, exits) {
-    if (params.id) {
-      let userId = params.id;
+    const { id: userId, ...toUpdate } = params;
+    if (userId) {
       try {
-        delete params.id;
-        let data = await User.updateOne({ _id: userId, isDeleted: false }).set(
-          params
-        );
+        let data = await User.updateOne({
+          _id: userId,
+          isDeleted: false,
+        }).set(toUpdate);
         if (data != null) {
           return exits.success(data);
         }

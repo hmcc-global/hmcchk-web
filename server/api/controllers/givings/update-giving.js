@@ -1,7 +1,7 @@
 module.exports = {
-  friendlyName: "Update baptisms",
+  friendlyName: "Update memberships",
 
-  description: "Update baptisms",
+  description: "Update memberships",
 
   inputs: {
     params: {
@@ -12,10 +12,10 @@ module.exports = {
 
   exits: {
     success: {
-      description: "Baptism records updated successfully",
+      description: "Membership records updated successfully",
     },
     invalid: {
-      description: "Failed to update baptism record",
+      description: "Failed to update membership record",
     },
 
     missingRequiredFields: {
@@ -25,18 +25,19 @@ module.exports = {
 
     invalidBaptismId: {
       statusCode: 409,
-      description: "The baptismId is invalid",
+      description: "The membershipId is invalid",
     },
   },
 
   fn: async function ({ params }, exits) {
-    const { id: baptismId, ...toUpdate } = params;
-    if (baptismId) {
+    if (params.id) {
+      let membershipId = params.id;
       try {
-        let data = await Baptism.updateOne({
-          _id: baptismId,
+        delete params.id;
+        let data = await Membership.updateOne({
+          _id: membershipId,
           isDeleted: false,
-        }).set(toUpdate);
+        }).set(params);
         if (data != null) {
           return exits.success(data);
         }

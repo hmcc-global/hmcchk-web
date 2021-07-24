@@ -1,6 +1,9 @@
 module.exports = {
   attributes: {
-    //userId: {},
+    userId: {
+      model: "User",
+      unique: true,
+    },
     tithely: {
       type: "json",
       columnType: "array",
