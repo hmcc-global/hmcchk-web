@@ -73,68 +73,71 @@ the account verification message.)`,
     },
   },
 
-  fn: async function ({
-    emailAddress,
-    password,
-    fullName,
-    lifestage,
-    phoneNumber,
-  }) {
-    const newEmailAddress = emailAddress.toLowerCase();
+  fn: async function (
+    { emailAddress, password, fullName, lifestage, phoneNumber },
+    exits
+  ) {
+    try {
+      const newEmailAddress = emailAddress.toLowerCase();
 
-    // Build up data for the new user record and save it to the database.
-    // (Also use `fetch` to retrieve the new ID so that we can use it below.)
-    const newUserRecord = await User.create(
-      _.extend(
-        {
-          email: newEmailAddress,
-          password: await sails.helpers.passwords.hashPassword(password),
-          fullName,
-          lifestage,
-          phoneNumber,
-        },
-        sails.config.custom.verifyEmailAddresses
-          ? {
-              emailProofToken: await sails.helpers.strings.random(
-                "url-friendly"
-              ),
-              emailProofTokenExpiresAt:
-                Date.now() + sails.config.custom.emailProofTokenTTL,
-              emailStatus: "unconfirmed",
-            }
-          : {}
+      // Build up data for the new user record and save it to the database.
+      // (Also use `fetch` to retrieve the new ID so that we can use it below.)
+      const newUserRecord = await User.create(
+        _.extend(
+          {
+            email: newEmailAddress,
+            password: await sails.helpers.passwords.hashPassword(password),
+            fullName,
+            lifestage,
+            phoneNumber,
+          },
+          sails.config.custom.verifyEmailAddresses
+            ? {
+                emailProofToken: await sails.helpers.strings.random(
+                  "url-friendly"
+                ),
+                emailProofTokenExpiresAt:
+                  Date.now() + sails.config.custom.emailProofTokenTTL,
+                emailStatus: "unconfirmed",
+              }
+            : {}
+        )
       )
-    )
-      .intercept("E_UNIQUE", "emailAlreadyInUse")
-      .intercept({ name: "UsageError" }, "invalid")
-      .fetch();
+        .intercept("E_UNIQUE", "emailAlreadyInUse")
+        .intercept({ name: "UsageError" }, "invalid")
+        .fetch();
 
-    // Store the user's new id in their session.
-    this.req.session.userId = newUserRecord.id;
+      // Store the user's new id in their session.
+      this.req.session.userId = newUserRecord.id;
 
-    // In case there was an existing session (e.g. if we allow users to go to the signup page
-    // when they're already logged in), broadcast a message that we can display in other open tabs.
-    if (sails.hooks.sockets) {
-      await sails.helpers.broadcastSessionChange(this.req);
+      // In case there was an existing session (e.g. if we allow users to go to the signup page
+      // when they're already logged in), broadcast a message that we can display in other open tabs.
+      if (sails.hooks.sockets) {
+        await sails.helpers.broadcastSessionChange(this.req);
+      }
+
+      if (sails.config.custom.verifyEmailAddresses) {
+        // Send "confirm account" email
+        await sails.helpers.sendTemplateEmail.with({
+          to: newEmailAddress,
+          subject: "Please confirm your account",
+          template: "email-verify-account",
+          templateData: {
+            fullName,
+            token: newUserRecord.emailProofToken,
+          },
+        });
+      } else {
+        sails.log.info(
+          "Skipping new account email verification... (since `verifyEmailAddresses` is disabled)"
+        );
+      }
+
+      sails.log.info(`New user signup for ${emailAddress}.`);
+      return exits.success();
+    } catch (err) {
+      sails.log(err);
+      return exits.error(err);
     }
-
-    if (sails.config.custom.verifyEmailAddresses) {
-      // Send "confirm account" email
-      await sails.helpers.sendTemplateEmail.with({
-        to: newEmailAddress,
-        subject: "Please confirm your account",
-        template: "email-verify-account",
-        templateData: {
-          fullName,
-          token: newUserRecord.emailProofToken,
-        },
-      });
-    } else {
-      sails.log.info(
-        "Skipping new account email verification... (since `verifyEmailAddresses` is disabled)"
-      );
-    }
-
-    sails.log.info(`New user signup for ${emailAddress}.`);
   },
 };
