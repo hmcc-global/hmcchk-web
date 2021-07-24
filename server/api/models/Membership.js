@@ -1,9 +1,9 @@
 module.exports = {
   attributes: {
-    // userId: {
-    //   model: "User",
-    //   unique: true,
-    // },
+    userId: {
+      model: "User",
+      unique: true,
+    },
     officialName: {
       type: "String",
     },

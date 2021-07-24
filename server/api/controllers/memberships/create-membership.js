@@ -60,10 +60,6 @@ module.exports = {
         recommitmentDate,
       });
 
-      // connecting
-      // let temp = await Baptism.find({ userId: userId });
-      // await User.updateOne({ _id: userId }).set({ baptismId: temp._id });
-
       // update user if member
       if (recognitionDate != null) {
         await User.updateOne({ id: userId, isDelete: false }).set({

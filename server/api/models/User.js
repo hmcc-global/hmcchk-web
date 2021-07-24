@@ -32,6 +32,9 @@ email status until they click the link in the confirmation email.`,
       type: "string",
       required: true,
     },
+    address: {
+      type: "string",
+    },
     campus: {
       type: "string",
     },
@@ -54,22 +57,24 @@ email status until they click the link in the confirmation email.`,
       type: "number",
       required: true,
     },
-    classesTaken: {
+    formSubmitted: {
+      //one-to-many
       type: "json",
     },
-    eventsJoined: {
-      type: "json",
+    membershipInfo: {
+      //one-to-one
+      collection: "Membership",
+      via: "userId",
     },
-    membershipId: {
-      type: "ref",
+    baptismInfo: {
+      //one-to-one
+      collection: "Baptism",
+      via: "userId",
     },
-    baptismId: {
-      model: "Baptism",
-      // collection: "Baptism",
-      // via: "userId",
-    },
-    financeId: {
-      type: "json",
+    givingInfo: {
+      //one-to-one
+      collection: "Giving",
+      via: "userId",
     },
     emailProofToken: {
       type: "string",

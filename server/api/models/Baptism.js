@@ -2,7 +2,7 @@ module.exports = {
   attributes: {
     userId: {
       model: "User",
-      // unique: true,
+      unique: true,
     },
     officialName: {
       type: "String",

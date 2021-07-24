@@ -21,14 +21,14 @@ module.exports = {
   fn: async function ({ userId }, exits) {
     try {
       if (userId) {
-        let data = await User.find({ userId, isDeleted: false }).populate(
-          "baptismId"
-        );
+        let data = await User.find({ userId, isDeleted: false }).populateAll();
         if (data.length === 0) throw "user not found";
         return exits.success(data);
       }
 
-      let data = await User.find({ isDeleted: false }).populate("baptismId");
+      //let data = await User.find({ isDeleted: false }).populate("baptismInfo");
+      let data = await User.find({ isDeleted: false }).populateAll();
+
       return exits.success(data);
     } catch (err) {
       sails.log(err);

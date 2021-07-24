@@ -60,10 +60,6 @@ module.exports = {
         baptismPlace,
       });
 
-      // connecting models
-      let temp = await Baptism.find({ userId: userId });
-      await User.updateOne({ _id: userId }).set({ baptismId: temp._id });
-
       // update user if baptised
       if (baptismDate != null && baptismPlace != "") {
         await User.updateOne({ id: userId, isDelete: false }).set({
