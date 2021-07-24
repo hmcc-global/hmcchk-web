@@ -1,6 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import MainContainer from "./components/MainContainer";
+import NavBar from './components/NavigationBar/NavBar';
 
 const styles = {
   root: {
@@ -20,6 +21,7 @@ const App = (props) => {
     <div className={classes.root}>
       <BrowserRouter>
         <>
+          <NavBar />
           <MainContainer />
         </>
       </BrowserRouter>

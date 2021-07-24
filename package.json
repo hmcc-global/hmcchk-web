@@ -3,5 +3,11 @@
   "private": true,
   "devDependencies": {
     "prettier": "2.3.2"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^1.6.5",
+    "@emotion/react": "^11.4.0",
+    "@emotion/styled": "^11.3.0",
+    "framer-motion": "^4.1.17"
   }
 }
