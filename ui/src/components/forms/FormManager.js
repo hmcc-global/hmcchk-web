@@ -22,7 +22,7 @@ const FormManager = (props) => {
     setValue("formName", data.formName);
     setValue("formDescription", data.formDescription);
     setValue("formImage", data.formImage);
-    
+
     // Update React State for child props
     setFormName(data.formName);
     setFormDescription(data.formDescription);
@@ -106,7 +106,10 @@ const FormManager = (props) => {
         </div>
         <div>
           <label>Form Description</label>
-          <input id="formDescription" {...register("formDescription", { required: true })} />
+          <input
+            id="formDescription"
+            {...register("formDescription", { required: true })}
+          />
           <span>
             {errors["formDescription"] && "Form description is required"}
           </span>
