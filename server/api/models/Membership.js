@@ -1,9 +1,9 @@
 module.exports = {
   attributes: {
-    userId: {
-      model: "User",
-      // unique: true,
-    },
+    // userId: {
+    //   model: "User",
+    //   unique: true,
+    // },
     officialName: {
       type: "String",
     },
@@ -13,17 +13,18 @@ module.exports = {
       defaultsTo: [],
     },
     classAttendance: {
-      type: "json",
-      defaultsTo: { part1: false, part2: false },
+      type: "boolean",
+      defaultsTo: false,
     },
-    baptismDate: {
+    recognitionDate: {
       type: "ref",
       columnType: "datetime",
       defaultsTo: null,
     },
-    baptismPlace: {
-      type: "string",
-      defaultsTo: "",
+    recommitmentDate: {
+      type: "ref",
+      columnType: "datetime",
+      defaultsTo: null,
     },
   },
 };

@@ -1,7 +1,7 @@
 module.exports = {
   friendlyName: "Get users",
 
-  description: "",
+  description: "Get users",
 
   inputs: {
     userId: {
@@ -21,12 +21,14 @@ module.exports = {
   fn: async function ({ userId }, exits) {
     try {
       if (userId) {
-        let data = await User.find({ userId, isDeleted: false });
+        let data = await User.find({ userId, isDeleted: false }).populate(
+          "baptismId"
+        );
         if (data.length === 0) throw "user not found";
         return exits.success(data);
       }
 
-      let data = await User.find({ isDeleted: false });
+      let data = await User.find({ isDeleted: false }).populate("baptismId");
       return exits.success(data);
     } catch (err) {
       sails.log(err);

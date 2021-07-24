@@ -71,6 +71,12 @@ module.exports.routes = {
   "put /api/baptism/delete": "baptisms/delete-baptism",
 >>>>>>> 4f3c36f... updated comments and created CRUD baptisms
 
+  // Membership APIs
+  "post /api/membership/create": "memberships/create-membership",
+  "get /api/membership/get": "memberships/get-membership",
+  "put /api/membership/update": "memberships/update-membership",
+  "put /api/membership/delete": "memberships/delete-membership",
+
   /***************************************************************************
    *                                                                          *
    * More custom routes here...                                               *

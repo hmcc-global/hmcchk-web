@@ -1,10 +1,10 @@
 module.exports = {
-  friendlyName: "Delete users",
+  friendlyName: "Delete membership",
 
-  description: "Delete users",
+  description: "Delete membership",
 
   inputs: {
-    userId: {
+    membershipId: {
       required: true,
       type: "string",
     },
@@ -12,10 +12,10 @@ module.exports = {
 
   exits: {
     success: {
-      description: "User account deleted successfully",
+      description: "Membership record deleted successfully",
     },
     invalid: {
-      description: "Failed to delete user account",
+      description: "Failed to delete membership record",
     },
 
     missingRequiredFields: {
@@ -24,10 +24,13 @@ module.exports = {
     },
   },
 
-  fn: async function ({ userId }, exits) {
-    if (userId) {
+  fn: async function ({ membershipId }, exits) {
+    if (membershipId) {
       try {
-        let data = await User.updateOne({ _id: userId, isDeleted: false }).set({
+        let data = await Membership.updateOne({
+          _id: membershipId,
+          isDeleted: false,
+        }).set({
           isDeleted: true,
         });
         if (data != null) {

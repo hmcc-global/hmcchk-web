@@ -1,7 +1,7 @@
 module.exports = {
-  friendlyName: "Create baptisms",
+  friendlyName: "Create memberships",
 
-  description: "Create a baptism record",
+  description: "Create a member record",
 
   inputs: {
     officialName: {
@@ -14,23 +14,23 @@ module.exports = {
       type: "json",
     },
     classAttendance: {
-      type: "json",
+      type: "boolean",
     },
-    baptismDate: {
+    recognitionDate: {
       type: "string",
     },
-    baptismPlace: {
+    recommitmentDate: {
       type: "string",
     },
   },
 
   exits: {
     success: {
-      description: "Baptism record created successfully",
+      description: "Membership record created successfully",
     },
     invalid: {
       responseType: "badRequest",
-      description: "Failed to create baptism record",
+      description: "Failed to create membership record",
     },
 
     duplicateRecords: {
@@ -45,33 +45,33 @@ module.exports = {
       userId,
       classDate,
       classAttendance,
-      baptismDate,
-      baptismPlace,
+      recognitionDate,
+      recommitmentDate,
     },
     exits
   ) {
     try {
-      const newBaptism = await Baptism.create({
+      const newMembership = await Membership.create({
         officialName,
         userId,
         classDate,
         classAttendance,
-        baptismDate,
-        baptismPlace,
+        recognitionDate,
+        recommitmentDate,
       });
 
-      // connecting models
-      let temp = await Baptism.find({ userId: userId });
-      await User.updateOne({ _id: userId }).set({ baptismId: temp._id });
+      // connecting
+      // let temp = await Baptism.find({ userId: userId });
+      // await User.updateOne({ _id: userId }).set({ baptismId: temp._id });
 
-      // update user if baptised
-      if (baptismDate != null && baptismPlace != "") {
+      // update user if member
+      if (recognitionDate != null) {
         await User.updateOne({ id: userId, isDelete: false }).set({
-          isBaptised: true,
+          isMember: true,
         });
       }
 
-      return exits.success(newBaptism);
+      return exits.success(newMembership);
     } catch (err) {
       sails.log.error(err);
       return exits.error(err);

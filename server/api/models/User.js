@@ -21,7 +21,7 @@ email status until they click the link in the confirmation email.`,
       type: "string",
     },
     accessType: {
-      type: "string", //stewardship, admin, or member
+      type: "string", //stewardship, admin, alumni, signed, unsigned
       defaultsTo: "member",
     },
     fullName: {
@@ -64,8 +64,9 @@ email status until they click the link in the confirmation email.`,
       type: "ref",
     },
     baptismId: {
-      collection: "Baptism",
-      via: "userId",
+      model: "Baptism",
+      // collection: "Baptism",
+      // via: "userId",
     },
     financeId: {
       type: "json",
