@@ -19,12 +19,9 @@ module.exports = {
 
   fn: async function ({ req }) {
     // If there's no sessionID, we don't need to broadcase a message about the old session.
-    console.log("broadcast session change fn");
     if (!req.sessionID) {
       return;
     }
-    console.log("req.sessionID");
-    console.log(req.sessionID);
 
     let roomName = `session${_.deburr(req.sessionID)}`;
     let messageText = `You have signed out or signed into a different session in another tab or window. Reload the page to refresh your session.`;

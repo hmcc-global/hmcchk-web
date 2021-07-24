@@ -183,7 +183,7 @@ module.exports = {
     var htmlEmailContents = await sails
       .renderView(
         emailTemplatePath,
-        _.extend({ layout: false, url, util }, templateData)
+        _.extend({ layout: emailTemplateLayout, url, util }, templateData)
       )
       .intercept((err) => {
         err.message =
@@ -229,13 +229,16 @@ module.exports = {
     } else {
       // Otherwise, continue to actually send the email.
 
-      // TODO: use OAuth2 instead of user/pass
       const transporter = nodemailer.createTransport({
-        service: "gmail",
         host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
         auth: {
+          type: "OAuth2",
           user: process.env.EMAIL_FROM,
-          pass: process.env.EMAIL_FROM_PASSWORD, // use app password
+          clientId: process.env.GOOGLE_CLIENT_ID,
+          clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+          refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
         },
       });
 
@@ -255,11 +258,10 @@ module.exports = {
 
       transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
-          console.log("send email error");
-          console.log(error);
+          sails.log(error);
         } else {
-          console.log("Email sent: " + info.response);
-          console.log("successfully sent email!");
+          sails.log("Email sent: " + info.response);
+          sails.log("successfully sent email!");
         }
       });
     }
