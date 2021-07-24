@@ -86,22 +86,16 @@ the account verification message.)`,
         await sails.helpers.broadcastSessionChange(this.req);
       }
 
-      if (sails.config.custom.verifyEmailAddresses) {
-        // Send "confirm account" email
-        await sails.helpers.sendTemplateEmail.with({
-          to: newEmailAddress,
-          subject: "Please confirm your account",
-          template: "email-verify-account",
-          templateData: {
-            fullName,
-            token: newUserRecord.emailProofToken,
-          },
-        });
-      } else {
-        sails.log.info(
-          "Skipping new account email verification... (since `verifyEmailAddresses` is disabled)"
-        );
-      }
+      // Send "welcome" email
+      await sails.helpers.sendTemplateEmail.with({
+        to: newEmailAddress,
+        subject: "Welcome to HMCC!",
+        template: "welcome-new-account",
+        templateData: {
+          fullName,
+          token: newUserRecord.emailProofToken,
+        },
+      });
 
       return exits.success("signup with google success");
     } catch (err) {
