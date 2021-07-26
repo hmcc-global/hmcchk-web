@@ -14,6 +14,7 @@ import ConfirmEmailPage from "./email/ConfirmEmailPage";
 import UserProfileContainer from "./userProfile/UserProfileContainer";
 import CompleteUserProfileContainer from "./userProfile/CompleteUserProfile";
 import ClearCache from "./helpers/ClearCache";
+import UserFormContainer from "./forms/UserFormContainer";
 
 const MainContainer = () => {
   return (
@@ -49,12 +50,12 @@ const MainContainer = () => {
           permissions={["admin", "stewardship"]}
           component={FormManager}
         />
-        {/* <PrivateRoute
+        <PrivateRoute
           exact
           path="/forms/:id"
           permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
-          component={FormManager}
-        /> */}
+          component={UserFormContainer}
+        />
         <PrivateRoute
           exact
           path="/events/"
