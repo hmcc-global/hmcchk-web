@@ -69,6 +69,7 @@ const FormCreator = (props) => {
     }
   };
 
+  // Write form data to DB
   const saveFormToDB = async (formToSave) => {
     if (existingFormData) {
       const { status } = await axios.post("/api/forms/post-update-form", {
@@ -104,6 +105,13 @@ const FormCreator = (props) => {
       setSaveStatus(false);
       console.log(err);
     }
+  };
+
+  const validateDemoForm = (data, e) => {
+    alert("SUCCESS!! :-)\n\n" + JSON.stringify(data, null, 4));
+    reset();
+
+    return false;
   };
 
   // Watch this to conditionally render custom things
@@ -180,6 +188,7 @@ const FormCreator = (props) => {
         formDescription={formDescription}
         formImage={formImage}
         formData={formData}
+        submitHandler={validateDemoForm}
       />
     </div>
   );

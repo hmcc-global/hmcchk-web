@@ -2,17 +2,10 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const Form = (props) => {
-  const { formName, formDescription, formImage, formData } = props;
-  const { register, reset, handleSubmit, formState } =
-    useForm();
+  const { formName, formDescription, formImage, formData, submitHandler } =
+    props;
+  const { register, reset, handleSubmit, formState } = useForm();
   const { errors } = formState;
-
-  const validateDemoForm = (data, e) => {
-    alert("SUCCESS!! :-)\n\n" + JSON.stringify(data, null, 4));
-    reset();
-
-    return false;
-  };
 
   // Helper function to create the input fields
   const createFormField = (fieldData) => {
@@ -94,7 +87,7 @@ const Form = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(validateDemoForm)}>
+    <form onSubmit={handleSubmit(submitHandler)}>
       {formImage !== "" && <img src={formImage} />}
       <h1>{formName}</h1>
       <p>{formDescription}</p>

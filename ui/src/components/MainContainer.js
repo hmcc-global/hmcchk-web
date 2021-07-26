@@ -21,6 +21,7 @@ import AdminGiving from "./admin/AdminGiving";
 import FooterContainer from "./footer/FooterContainer";
 import NoMatch from "./errors/NoMatch";
 import ConnectFloatButton from "./connect-float/ConnectFloatButton";
+import UserFormContainer from "./forms/UserFormContainer";
 
 const MainContainer = () => {
   return (
@@ -62,12 +63,12 @@ const MainContainer = () => {
           permissions={["admin", "stewardship"]}
           component={FormManager}
         />
-        {/* <PrivateRoute
+        <PrivateRoute
           exact
           path="/forms/:id"
           permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
-          component={FormManager}
-        /> */}
+          component={UserFormContainer}
+        />
         <PrivateRoute
           exact
           path="/events/"
