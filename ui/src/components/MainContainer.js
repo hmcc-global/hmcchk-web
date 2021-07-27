@@ -46,7 +46,7 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/forms/"
+          path="/form-manager"
           permissions={["admin", "stewardship"]}
           component={FormManager}
         />

@@ -13,8 +13,9 @@ const UserFormContainer = (props) => {
   const populateData = async () => {
     const { id } = props.match.params;
     console.log(id);
-    const { data } = await axios.get("/api/forms/get-form", { id: id });
-    console.log(data);
+    const { data } = await axios.get("/api/forms/get-form", {
+      params: { id: id },
+    });
     try {
       setFormData(data[0]);
     } catch (err) {

@@ -11,6 +11,7 @@ const FormManager = (props) => {
   const [formImage, setFormImage] = useState(null);
   const [editFormData, setEditFormData] = useState(null);
   const [formList, setFormList] = useState([]);
+  const history = useHistory();
 
   const { errors } = formState;
 
@@ -45,6 +46,10 @@ const FormManager = (props) => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const onClickRedirect = async (e) => {
+    history.push("/forms/" + e.target.value);
   };
 
   const onDelete = async (e) => {
@@ -93,6 +98,9 @@ const FormManager = (props) => {
             </button>
             <button onClick={onDelete} value={formItem.id}>
               Delete
+            </button>
+            <button onClick={onClickRedirect} value={formItem.id}>
+              Public Link
             </button>
           </li>
         ))}
