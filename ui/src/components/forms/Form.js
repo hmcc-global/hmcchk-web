@@ -7,6 +7,14 @@ const Form = (props) => {
   const { register, reset, handleSubmit, formState } = useForm();
   const { errors } = formState;
 
+  const camelize = (str) => {
+    return str
+      .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+        return index === 0 ? word.toLowerCase() : word.toUpperCase();
+      })
+      .replace(/\s+/g, "");
+  };
+
   // Helper function to create the input fields
   const createFormField = (fieldData) => {
     let fieldName = fieldData.fieldName;
@@ -21,7 +29,7 @@ const Form = (props) => {
 
       opts.map((option) => {
         let o = (
-          <option key={fieldName + option} value={option}>
+          <option key={camelize(fieldName + option)} value={option}>
             {" "}
             {option}{" "}
           </option>
@@ -31,7 +39,10 @@ const Form = (props) => {
       });
 
       inputField.push(
-        <select {...register(fieldName, { required: required })}>
+        <select
+          key={camelize(fieldName)}
+          {...register(fieldName, { required: required })}
+        >
           {" "}
           {items}{" "}
         </select>
@@ -40,7 +51,7 @@ const Form = (props) => {
       opts.map((option) => {
         let o = (
           <input
-            key={fieldName + option}
+            key={camelize(fieldName + option)}
             {...register(fieldName, { required: required })}
             type="radio"
             id={fieldName + option}
@@ -49,8 +60,8 @@ const Form = (props) => {
         );
         let l = (
           <label
-            key={fieldName + option + "label"}
-            htmlFor={fieldName + option}
+            key={camelize(fieldName + option + "label")}
+            htmlFor={camelize(fieldName + option)}
           >
             {option}
           </label>
@@ -62,7 +73,7 @@ const Form = (props) => {
     } else if (fieldType === "textarea") {
       inputField.push(
         <textarea
-          key={fieldName}
+          key={camelize(fieldName)}
           {...register(fieldName, { required: required })}
         />
       );
@@ -71,7 +82,7 @@ const Form = (props) => {
     } else {
       inputField.push(
         <input
-          key={fieldName}
+          key={camelize(fieldName)}
           type={fieldType}
           {...register(fieldName, { required: required })}
         />
@@ -92,13 +103,17 @@ const Form = (props) => {
       <h1>{formName}</h1>
       <p>{formDescription}</p>
       {formData.map((fieldData, i) => (
-        <div>
+        <div key={fieldData.fieldName + i}>
           {fieldData.fieldType !== "header" && (
-            <label>{fieldData.fieldName}</label>
+            <label key={camelize(fieldData.fieldName + "label")}>
+              {fieldData.fieldName}
+            </label>
           )}
           {createFormField(fieldData)}
           {fieldData.fieldDescription !== "" && (
-            <label>{fieldData.fieldDescription}</label>
+            <label key={camelize(fieldData.fieldName + "description")}>
+              {fieldData.fieldDescription}
+            </label>
           )}
         </div>
       ))}
