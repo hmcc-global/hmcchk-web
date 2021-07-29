@@ -61,8 +61,13 @@ const FormCreator = (props) => {
     };
 
     let temp = [...formData];
-    let spliceAmount = temp[0].fieldType === "prefill" ? 1 : 0;
-    temp.splice(0, spliceAmount, dataObject);
+    try {
+      let spliceAmount = temp[0].fieldType === "prefill" ? 1 : 0;
+      temp.splice(0, spliceAmount, dataObject);
+    } catch (err) {
+      temp.push(dataObject);
+    }
+
     setFormData(temp);
   };
 
@@ -147,13 +152,6 @@ const FormCreator = (props) => {
       setSaveStatus(false);
       console.log(err);
     }
-  };
-
-  const validateDemoForm = (data, e) => {
-    alert("SUCCESS!! :-)\n\n" + JSON.stringify(data, null, 4));
-    reset();
-
-    return false;
   };
 
   // Watch this to conditionally render custom things
@@ -285,11 +283,11 @@ const FormCreator = (props) => {
 
       <h2>Form Preview</h2>
       <Form
+        formId={null}
         formName={formName}
         formDescription={formDescription}
         formImage={formImage}
         formData={formData}
-        submitHandler={validateDemoForm}
       />
     </div>
   );

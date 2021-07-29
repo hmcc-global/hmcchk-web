@@ -28,6 +28,9 @@ module.exports.routes = {
   "post /api/forms/post-delete-form": "forms/post-delete-form",
   "post /api/forms/connect-with-us": "forms/post-contact-us-form",
 
+  // Submission APIs
+  "post /api/forms/post-create-submission": "forms/post-create-submission",
+
   // Announcement APIs
   "get /api/announcements/get-announcements": "announcements/get-announcements",
 

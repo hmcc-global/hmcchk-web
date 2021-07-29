@@ -1,11 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const Form = (props) => {
-  const { formName, formDescription, formImage, formData, submitHandler } =
+  const { formId, formName, formDescription, formImage, formData, submitHandler } =
     props;
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
+
+  const [submissionData, setSubmissionData] = useState(null);
+
+  // Handle a form submission event
+  const handleSubmitForm = (data, e) => {
+    if (formId) setSubmissionData(data);
+    else console.log("this form doesn't support submission")
+  }
+
+  const postSubmission = async (formId, data, userId) => {
+    try {
+      const { status } = await axios.post("/api/forms/post-create-submission", {
+        formId: formId,
+        submissionData: data,
+        userId: userId,
+      });
+      if (status === 200) {
+        alert("Submission successful")
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (submissionData) {
+      postSubmission(formId, submissionData, "")
+    }
+  }, submissionData);
 
   // String conversion tools
   const camelize = (str) => {
@@ -184,7 +214,7 @@ const Form = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submitHandler)}>
+    <form onSubmit={handleSubmit(handleSubmitForm)} >
       {formImage !== "" && <img src={formImage} />}
       <h1>{formName}</h1>
       <p>{formDescription}</p>
