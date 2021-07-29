@@ -10,7 +10,6 @@ const UserFormContainer = (props) => {
 
   const populateData = async () => {
     const { id } = props.match.params;
-    console.log(id);
     const { data } = await axios.get("/api/forms/get-form", {
       params: { id: id },
     });
@@ -21,10 +20,6 @@ const UserFormContainer = (props) => {
     }
   };
 
-  const handleSubmitForm = (data, e) => {
-    alert(JSON.stringify(data, null, 4));
-  };
-
   useEffect(() => {
     populateData();
   }, []);
@@ -33,11 +28,11 @@ const UserFormContainer = (props) => {
     <div>
       {formData && (
         <Form
+          formId={formData.id}
           formName={formData.formName}
           formDescription={formData.formDescription}
           formImage={formData.formImage}
           formData={formData.formFields}
-          submitHandler={handleSubmitForm}
         />
       )}
     </div>
