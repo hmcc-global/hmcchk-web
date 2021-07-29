@@ -14,18 +14,60 @@ const FormCreator = (props) => {
   const [formData, setFormData] = useState([]);
   const [editData, setEditData] = useState(null);
   const [saveStatus, setSaveStatus] = useState(false);
-  const { register, reset, watch, setValue, handleSubmit, formState } =
-    useForm();
-  const { errors } = formState;
+  const {
+    register,
+    reset,
+    watch,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const {
+    register: registerPrefill,
+    reset: resetPrefill,
+    setValue: setValuePrefill,
+    handleSubmit: handleSubmitPrefill,
+  } = useForm();
 
   useEffect(() => {
     if (existingFormData) {
+      console.log(existingFormData.formFields[0]);
+      if (existingFormData.formFields[0].fieldType === "prefill") {
+        console.log("prefill detected");
+        let fields = existingFormData.formFields[0].options;
+        fields.forEach((field) => {
+          console.log(field + "Checkbox");
+          setValuePrefill(field + "Checkbox", true);
+        });
+      }
       setFormData(existingFormData.formFields);
     }
   }, existingFormData);
 
-  // Handler for when the form is submitted
-  const onSubmit = (data, e) => {
+  // Handler for prefillable form arguments
+  const onPrefillableSubmit = (data, e) => {
+    let chosenFields = [];
+    for (let [_, value] of Object.entries(data)) {
+      if (value) chosenFields.push(value);
+    }
+
+    const dataObject = {
+      fieldName: "prefill",
+      fieldType: "prefill",
+      options: chosenFields,
+      fieldDescription: "",
+      required: true,
+    };
+
+    let temp = [...formData];
+    let spliceAmount = temp[0].fieldType === "prefill" ? 1 : 0;
+    temp.splice(0, spliceAmount, dataObject);
+    setFormData(temp);
+  };
+
+  // Handler for new custom field submissions
+  const onCustomSubmit = (data, e) => {
     // Format the data
     if (data.options) {
       data.options = data.options.split(";");
@@ -121,7 +163,58 @@ const FormCreator = (props) => {
     <div>
       <h1>Creating/Editing form {formName}</h1>
       <h2>Form Editor</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmitPrefill(onPrefillableSubmit)}>
+        <h3>Prefillable Fields</h3>
+        <div>
+          <label htmlFor="fullNameCheckbox">Name</label>
+          <input
+            id="fullNameCheckbox"
+            type="checkbox"
+            value="fullName"
+            {...registerPrefill("fullNameCheckbox")}
+          />
+        </div>
+        <div>
+          <label htmlFor="phoneNumberCheckbox">Phone Number</label>
+          <input
+            id="phoneNumberCheckbox"
+            type="checkbox"
+            value="phoneNumber"
+            {...registerPrefill("phoneNumberCheckbox")}
+          />
+        </div>
+        <div>
+          <label htmlFor="emailCheckbox">Email</label>
+          <input
+            id="emailCheckbox"
+            type="checkbox"
+            value="email"
+            {...registerPrefill("emailCheckbox")}
+          />
+        </div>
+        <div>
+          <label htmlFor="lifeGroupCheckbox">LIFE Group</label>
+          <input
+            id="lifeGroupCheckbox"
+            type="checkbox"
+            value="lifeGroup"
+            {...registerPrefill("lifeGroupCheckbox")}
+          />
+        </div>
+        <div>
+          <label htmlFor="addressCheckbox">Address</label>
+          <input
+            id="addressCheckbox"
+            type="checkbox"
+            value="address"
+            {...registerPrefill("addressCheckbox")}
+          />
+        </div>
+        <input type="submit" value="Save Prefilled Fields" />
+      </form>
+
+      <form onSubmit={handleSubmit(onCustomSubmit)}>
+        <h3>Custom Fields</h3>
         {editData && (
           <div>
             <label>
@@ -168,17 +261,25 @@ const FormCreator = (props) => {
       </form>
 
       <h2>Created Form Fields</h2>
-      {formData.map((fieldData, i) => (
-        <div>
-          {fieldData.fieldName}
-          <button href="" value={i} onClick={onEdit}>
-            Edit
-          </button>
-          <button href="" value={i} onClick={onDelete}>
-            Delete
-          </button>
-        </div>
-      ))}
+      {formData
+        .filter((obj) => {
+          if (obj.fieldType === "prefill") {
+            return;
+          } else {
+            return obj;
+          }
+        })
+        .map((fieldData, i) => (
+          <div>
+            {fieldData.fieldName}
+            <button href="" value={i} onClick={onEdit}>
+              Edit
+            </button>
+            <button href="" value={i} onClick={onDelete}>
+              Delete
+            </button>
+          </div>
+        ))}
       <button onClick={onSaveToDB}>Save to DB</button>
       {saveStatus && <div>Saving</div>}
 
