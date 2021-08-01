@@ -2,6 +2,10 @@ import { BrowserRouter } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import MainContainer from "./components/MainContainer";
 import NavBar from './components/NavigationBar/NavBar';
+import {
+	Flex,
+	CSSReset
+} from '@chakra-ui/react';
 
 const styles = {
   root: {
@@ -21,8 +25,12 @@ const App = (props) => {
     <div className={classes.root}>
       <BrowserRouter>
         <>
-          <NavBar />
+        <Flex direction='column' align='center' justify='center' >
+					<NavBar h='12.5vh' />
+					<Flex w='100%' minHeight='87.5vh'>
           <MainContainer />
+					</Flex>
+				</Flex>
         </>
       </BrowserRouter>
     </div>
