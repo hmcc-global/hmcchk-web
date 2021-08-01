@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { Flex } from "@chakra-ui/react";
 import NavBar from "./components/NavigationBar/NavBar";
+import { Flex, CSSReset } from "@chakra-ui/react";
 
 const App = () => {
   return (
@@ -13,8 +14,12 @@ const App = () => {
         <PersistGate loading={null} persistor={persistor}>
           <BrowserRouter>
             <>
-              <NavBar />
-              <MainContainer />
+              <Flex direction="column" align="center" justify="center">
+                <NavBar h="12.5vh" />
+                <Flex w="100%" minHeight="87.5vh">
+                  <MainContainer />
+                </Flex>
+              </Flex>
             </>
           </BrowserRouter>
         </PersistGate>
