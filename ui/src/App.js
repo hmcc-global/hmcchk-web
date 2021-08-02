@@ -2,6 +2,7 @@ import { BrowserRouter } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import MainContainer from "./components/MainContainer";
 import NavBar from './components/NavigationBar/NavBar';
+import  FooterContainer   from "./components/footer/FooterContainer"
 import {
 	Flex,
 	CSSReset
@@ -29,6 +30,7 @@ const App = (props) => {
 					<NavBar h='12.5vh' />
 					<Flex w='100%' minHeight='87.5vh'>
           <MainContainer />
+          <FooterContainer />
 					</Flex>
 				</Flex>
         </>
