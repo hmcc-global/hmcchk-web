@@ -3,8 +3,7 @@ import MainContainer from "./components/MainContainer";
 import { store, persistor } from "./store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { Flex } from "@chakra-ui/react";
-import NavBar from "./components/NavigationBar/NavBar";
+import FooterContainer from "./components/footer/FooterContainer";
 import { Flex, CSSReset } from "@chakra-ui/react";
 
 const App = () => {
@@ -18,6 +17,7 @@ const App = () => {
                 <NavBar h="12.5vh" />
                 <Flex w="100%" minHeight="87.5vh">
                   <MainContainer />
+                  <FooterContainer />
                 </Flex>
               </Flex>
             </>
