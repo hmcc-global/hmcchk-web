@@ -2,7 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import FormCreator from "./FormCreator";
-import { Box } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  Button,
+  Input,
+  Heading,
+  Container,
+  List,
+  ListItem,
+  Box,
+  Text,
+} from "@chakra-ui/react";
 
 const FormManager = (props) => {
   const { register, reset, handleSubmit, formState } = useForm();
@@ -86,48 +98,76 @@ const FormManager = (props) => {
   };
 
   return (
-    <Box color="white">
-      <h1>Form Management System</h1>
-      <h2>Existing Forms</h2>
-      <ul>
-        {formList.map((formItem, i) => (
-          <li key={formItem.id}>
-            {formItem.formName}
-            <button onClick={onEdit} value={formItem.id}>
-              Edit
-            </button>
-            <button onClick={onDelete} value={formItem.id}>
-              Delete
-            </button>
-            <button onClick={onClickRedirect} value={formItem.id}>
-              Public Link
-            </button>
-          </li>
-        ))}
-      </ul>
-      <h2>Create A New Form</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Form Name</label>
-          <input id="formName" {...register("formName", { required: true })} />
-          <span>{errors["formName"] && "Form name is required"}</span>
-        </div>
-        <div>
-          <label>Form Description</label>
-          <input
-            id="formDescription"
-            {...register("formDescription", { required: true })}
-          />
-          <span>
-            {errors["formDescription"] && "Form description is required"}
-          </span>
-        </div>
-        <div>
-          <label>Form Image</label>
-          <input id="formImage" {...register("formImage")} />
-        </div>
-        <input type="submit" value="Create/Update Form" />
-      </form>
+    <Container className={classes.root}>
+      <Heading as="h1" size="xl">
+        Form Management System
+      </Heading>
+      <Box color="white" borderRadius="lg" p="5" mt="5" borderWidth="1px">
+        <Heading mb="2" as="h2" size="lg">
+          Existing Forms
+        </Heading>
+        <List>
+          {formList.map((formItem, i) => (
+            <ListItem key={formItem.id}>
+              <Box p="2" mb="2" borderRadius="lg" borderWidth="1px">
+                <Text>{formItem.formName}</Text>
+                <Button
+                  ml="1"
+                  colorScheme="teal"
+                  onClick={onEdit}
+                  value={formItem.id}
+                >
+                  Edit
+                </Button>
+                <Button
+                  ml="1"
+                  colorScheme="teal"
+                  onClick={onDelete}
+                  value={formItem.id}
+                >
+                  Delete
+                </Button>
+                <Button
+                  ml="1"
+                  colorScheme="teal"
+                  onClick={onClickRedirect}
+                  value={formItem.id}
+                >
+                  Public Link
+                </Button>
+              </Box>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+      <Box color="white" borderRadius="lg" p="5" mt="3" borderWidth="1px">
+        <Heading as="h2" size="lg">
+          Create A New Form
+        </Heading>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormControl isInvalid={errors["formName"]}>
+            <FormLabel>Form Name</FormLabel>
+            <Input
+              id="formName"
+              {...register("formName", { required: "Form name is required" })}
+            />
+            <FormErrorMessage>
+              {errors["formName"] && "Form name is required"}
+            </FormErrorMessage>
+          </FormControl>
+          <FormControl isInvalid={errors["formDescription"]}>
+            <FormLabel>Form Description</FormLabel>
+            <Input id="formDescription" {...register("formDescription")} />
+          </FormControl>
+          <FormControl isInvalid={errors["formImage"]}>
+            <FormLabel>Form Image</FormLabel>
+            <Input id="formImage" {...register("formImage")} />
+          </FormControl>
+          <Button mt={4} colorScheme="teal" type="submit">
+            Create/Update Form
+          </Button>
+        </form>
+      </Box>
 
       {formName && (
         <FormCreator
@@ -138,7 +178,7 @@ const FormManager = (props) => {
           resetFormEditorCallback={resetFormEditorCallback}
         />
       )}
-    </Box>
+    </Container>
   );
 };
 

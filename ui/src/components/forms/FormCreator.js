@@ -1,7 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import Form from "./Form";
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  Button,
+  Input,
+  Checkbox,
+  Heading,
+  Text,
+  Box,
+  Select,
+} from "@chakra-ui/react";
 
 const FormCreator = (props) => {
   const {
@@ -20,6 +33,8 @@ const FormCreator = (props) => {
     watch,
     setValue,
     handleSubmit,
+    getValues,
+    control,
     formState: { errors },
   } = useForm();
 
@@ -28,6 +43,8 @@ const FormCreator = (props) => {
     reset: resetPrefill,
     setValue: setValuePrefill,
     handleSubmit: handleSubmitPrefill,
+    getValues: getValuesPrefill,
+    control: controlPrefill,
   } = useForm();
 
   useEffect(() => {
@@ -37,7 +54,6 @@ const FormCreator = (props) => {
         console.log("prefill detected");
         let fields = existingFormData.formFields[0].options;
         fields.forEach((field) => {
-          console.log(field + "Checkbox");
           setValuePrefill(field + "Checkbox", true);
         });
       }
@@ -48,8 +64,8 @@ const FormCreator = (props) => {
   // Handler for prefillable form arguments
   const onPrefillableSubmit = (data, e) => {
     let chosenFields = [];
-    for (let [_, value] of Object.entries(data)) {
-      if (value) chosenFields.push(value);
+    for (let [key, value] of Object.entries(data)) {
+      if (value) chosenFields.push(key.replace("Checkbox", ""));
     }
 
     const dataObject = {
@@ -158,130 +174,196 @@ const FormCreator = (props) => {
   const ft = watch("fieldType");
 
   return (
-    <div>
-      <h1>Creating/Editing form {formName}</h1>
-      <h2>Form Editor</h2>
-      <form onSubmit={handleSubmitPrefill(onPrefillableSubmit)}>
-        <h3>Prefillable Fields</h3>
-        <div>
-          <label htmlFor="fullNameCheckbox">Name</label>
-          <input
-            id="fullNameCheckbox"
-            type="checkbox"
-            value="fullName"
-            {...registerPrefill("fullNameCheckbox")}
-          />
-        </div>
-        <div>
-          <label htmlFor="phoneNumberCheckbox">Phone Number</label>
-          <input
-            id="phoneNumberCheckbox"
-            type="checkbox"
-            value="phoneNumber"
-            {...registerPrefill("phoneNumberCheckbox")}
-          />
-        </div>
-        <div>
-          <label htmlFor="emailCheckbox">Email</label>
-          <input
-            id="emailCheckbox"
-            type="checkbox"
-            value="email"
-            {...registerPrefill("emailCheckbox")}
-          />
-        </div>
-        <div>
-          <label htmlFor="lifeGroupCheckbox">LIFE Group</label>
-          <input
-            id="lifeGroupCheckbox"
-            type="checkbox"
-            value="lifeGroup"
-            {...registerPrefill("lifeGroupCheckbox")}
-          />
-        </div>
-        <div>
-          <label htmlFor="addressCheckbox">Address</label>
-          <input
-            id="addressCheckbox"
-            type="checkbox"
-            value="address"
-            {...registerPrefill("addressCheckbox")}
-          />
-        </div>
-        <input type="submit" value="Save Prefilled Fields" />
-      </form>
+    <Box color="white" borderRadius="lg" p="5" mt="3" borderWidth="1px">
+      <Heading as="h1" size="xl">
+        Form Editor
+      </Heading>
+      <Text>Creating/Editing form {formName}</Text>
+      <Box mt="3" mb="3">
+        <form onSubmit={handleSubmitPrefill(onPrefillableSubmit)}>
+          <Heading as="h3" size="md">
+            Prefillable Fields
+          </Heading>
+          <FormControl>
+            <Controller
+              control={controlPrefill}
+              name="fullNameCheckbox"
+              key="fullNameCheckbox"
+              defaultValue={false}
+              render={({ field: { onChange, value, ref } }) => (
+                <Checkbox onChange={onChange} ref={ref} isChecked={value}>
+                  Full Name
+                </Checkbox>
+              )}
+            />
+          </FormControl>
+          <FormControl>
+            <Controller
+              control={controlPrefill}
+              name="phoneNumberCheckbox"
+              key="phoneNumberCheckbox"
+              defaultValue={false}
+              render={({ field: { onChange, value, ref } }) => (
+                <Checkbox onChange={onChange} ref={ref} isChecked={value}>
+                  Phone Number
+                </Checkbox>
+              )}
+            />
+          </FormControl>
+          <FormControl>
+            <Controller
+              control={controlPrefill}
+              name="emailCheckbox"
+              key="emailCheckbox"
+              defaultValue={false}
+              render={({ field: { onChange, value, ref } }) => (
+                <Checkbox onChange={onChange} ref={ref} isChecked={value}>
+                  Checkbox
+                </Checkbox>
+              )}
+            />
+          </FormControl>
+          <FormControl>
+            <Controller
+              control={controlPrefill}
+              name="lifeGroupCheckbox"
+              key="lifeGroupCheckbox"
+              defaultValue={false}
+              render={({ field: { onChange, value, ref } }) => (
+                <Checkbox onChange={onChange} ref={ref} isChecked={value}>
+                  LIFE Group
+                </Checkbox>
+              )}
+            />
+          </FormControl>
+          <FormControl>
+            <Controller
+              control={controlPrefill}
+              name="addressCheckbox"
+              key="addressCheckbox"
+              defaultValue={false}
+              render={({ field: { onChange, value, ref } }) => (
+                <Checkbox onChange={onChange} ref={ref} isChecked={value}>
+                  Address
+                </Checkbox>
+              )}
+            />
+          </FormControl>
+          <Button mt={4} colorScheme="teal" type="submit">
+            Save Prefilled Fields
+          </Button>
+        </form>
+      </Box>
 
-      <form onSubmit={handleSubmit(onCustomSubmit)}>
-        <h3>Custom Fields</h3>
-        {editData && (
-          <div>
-            <label>
+      <Box mt="3" mb="3">
+        <form onSubmit={handleSubmit(onCustomSubmit)}>
+          <Heading as="h3" size="md">
+            Custom Fields
+          </Heading>
+          {editData && (
+            <Text>
               Currently editing field: {formData[editData].fieldName}{" "}
-            </label>
-          </div>
-        )}
-        <div>
-          <label>{ft === "header" ? "Header Text" : "Field Name"}</label>
-          <input {...register("fieldName")} />
-        </div>
-        <div>
-          <label>Field Type</label>
-          <select {...register("fieldType")}>
-            <option value="text">Text</option>
-            <option value="select">Select</option>
-            <option value="checkbox">Checkbox</option>
-            <option value="radio">Radio</option>
-            <option value="textarea">Text Area</option>
-            <option value="date">Datepicker</option>
-            <option value="header">Header</option>
-          </select>
-        </div>
-        <div>
-          <label>Field Description (describe what this field is for)</label>
-          <input {...register("fieldDescription")} />
-          <label>Leave blank if not needed</label>
-        </div>
-        {(ft === "select" || ft === "radio") && (
-          <div>
-            <label>Options</label>
-            <input id="options" {...register("options")} />
-            <label htmlFor="options">Enter options separated by ;</label>
-          </div>
-        )}
-        {ft !== "header" && (
-          <div>
-            <label htmlFor="required">Required</label>
-            <input id="required" type="checkbox" {...register("required")} />
-            <br />
-          </div>
-        )}
-        <input type="submit" value="Save Field Data" />
-      </form>
+            </Text>
+          )}
+          <FormControl isInvalid={errors["fieldName"]}>
+            <FormLabel>
+              {ft === "header" ? "Header Text" : "Field Name"}
+            </FormLabel>
+            <Input {...register("fieldName", {required: true})} />
+            <FormErrorMessage>
+              {errors["fieldName"] && "Field name is required"}
+            </FormErrorMessage>
+          </FormControl>
+          <FormControl isInvalid={errors["fieldType"]}>
+            <FormLabel>Field Type</FormLabel>
+            <Select {...register("fieldType", {required: true})}>
+              <option value="text">Text</option>
+              <option value="select">Select</option>
+              <option value="checkbox">Checkbox</option>
+              <option value="radio">Radio</option>
+              <option value="textarea">Text Area</option>
+              <option value="date">Datepicker</option>
+              <option value="header">Header</option>
+            </Select>
+            <FormErrorMessage>
+              {errors["fieldType"] && "Field type is required"}
+            </FormErrorMessage>
+          </FormControl>
+          <FormControl>
+            <FormLabel>
+              Field Description (describe what this field is for)
+            </FormLabel>
+            <Input {...register("fieldDescription")} />
+            <FormHelperText>Leave blank if not needed</FormHelperText>
+          </FormControl>
+          {(ft === "select" || ft === "radio") && (
+            <FormControl>
+              <FormLabel>Options</FormLabel>
+              <Input id="options" {...register("options")} />
+              <FormHelperText htmlFor="options">
+                Enter options separated by ;
+              </FormHelperText>
+            </FormControl>
+          )}
+          {ft !== "header" && (
+            <FormControl>
+              <FormLabel>Do you want this field to be required?</FormLabel>
+              <Controller
+                control={control}
+                name="required"
+                key="required"
+                defaultValue={false}
+                render={({ field: { onChange, value, ref } }) => (
+                  <Checkbox onChange={onChange} ref={ref} isChecked={value}>
+                    Required
+                  </Checkbox>
+                )}
+              />
+            </FormControl>
+          )}
+          <Button mt={4} colorScheme="teal" type="submit">
+            Save Field Data
+          </Button>
+        </form>
+      </Box>
 
-      <h2>Created Form Fields</h2>
-      {formData
-        .filter((obj) => {
-          if (obj.fieldType === "prefill") {
-            return;
-          } else {
-            return obj;
-          }
-        })
-        .map((fieldData, i) => (
-          <div>
-            {fieldData.fieldName}
-            <button href="" value={i} onClick={onEdit}>
-              Edit
-            </button>
-            <button href="" value={i} onClick={onDelete}>
-              Delete
-            </button>
-          </div>
-        ))}
-      <button onClick={onSaveToDB}>Save to DB</button>
-      {saveStatus && <div>Saving</div>}
+      <Box mt="3" mb="3">
+        <Heading as="h3" size="md">
+          Created Form Fields
+        </Heading>
+        {formData
+          .filter((obj) => {
+            if (obj.fieldType === "prefill") {
+              return;
+            } else {
+              return obj;
+            }
+          })
+          .map((fieldData, i) => (
+            <FormControl>
+              {fieldData.fieldName}
+              <Button mt={4} colorScheme="teal" value={i + 1} onClick={onEdit}>
+                Edit
+              </Button>
+              <Button mt={4} colorScheme="teal" onClick={onDelete}>
+                Delete
+              </Button>
+            </FormControl>
+          ))}
+        <Button
+          isLoading={saveStatus}
+          loadingText="Saving"
+          mt={4}
+          colorScheme="teal"
+          onClick={onSaveToDB}
+        >
+          Save to DB
+        </Button>
+      </Box>
 
-      <h2>Form Preview</h2>
+      <Heading as="h2" size="lg">
+        Form Preview
+      </Heading>
       <Form
         formId={null}
         formName={formName}
@@ -289,7 +371,7 @@ const FormCreator = (props) => {
         formImage={formImage}
         formData={formData}
       />
-    </div>
+    </Box>
   );
 };
 
