@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import Form from "./Form";
+import { Container } from "@chakra-ui/react";
 
 const styles = {};
 
@@ -25,7 +26,7 @@ const UserFormContainer = (props) => {
   }, []);
 
   return (
-    <div>
+    <Container maxW="container.md">
       {formData && (
         <Form
           formId={formData.id}
@@ -35,7 +36,7 @@ const UserFormContainer = (props) => {
           formData={formData.formFields}
         />
       )}
-    </div>
+    </Container>
   );
 };
 
