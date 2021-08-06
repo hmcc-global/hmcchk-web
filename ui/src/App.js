@@ -5,7 +5,8 @@ import NavBar from './components/NavigationBar/NavBar';
 import  FooterContainer   from "./components/footer/FooterContainer"
 import {
 	Flex,
-	CSSReset
+	CSSReset,
+  VStack
 } from '@chakra-ui/react';
 
 const styles = {
@@ -28,8 +29,11 @@ const App = (props) => {
         <>
         <Flex direction='column' align='center' justify='center' >
 					<NavBar h='12.5vh' />
-					<Flex direction='column' w='100%' minHeight='87.5vh'>
-            <MainContainer />
+					<Flex w='100vw' minHeight='87.5vh'>
+            <VStack w ='100vw'>
+              <MainContainer />
+              <FooterContainer />
+            </VStack>
 					</Flex>
 				</Flex>
         </>

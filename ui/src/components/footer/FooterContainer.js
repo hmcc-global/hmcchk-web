@@ -13,6 +13,7 @@ export default function FooterContainer(){
     py="12"
     bg="#222222"
     color="white"
+    marginTop='0px !important' 
     px={{
       base: '4',
       md: '8',
