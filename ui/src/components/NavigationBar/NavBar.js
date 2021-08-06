@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {
 	Flex,
+	Center,
 	Stack,
 	Box,
 	Image,
@@ -53,11 +54,13 @@ const Navigationbar = () => {
 				h='7vh'
 				p={2}>
 				<Flex w='100vw' justify='space-around'>
-					<Box>
-						<Link href='/'>
-							<Image h='4vh' src='hmcc-logo.svg' alt='Logo of HMCC' />
-						</Link>
-					</Box> 
+					<Center>
+						<Box position='relative'>
+							<Link href='/'>
+								<Image h='4vh' src='hmcc-logo.svg' alt='Logo of HMCC' />
+							</Link>
+						</Box> 
+					</Center>
 					<Stack
 						spacing={8}
 						color="black"
@@ -174,19 +177,14 @@ const Navigationbar = () => {
       >
 			<DrawerOverlay />
 			<DrawerContent>
-				<DrawerCloseButton />
+				<DrawerCloseButton position='absolute' right='5%' top='5%' />
 				<DrawerHeader />
 				<DrawerBody>
-					<MainMenu />
+					<MainMenu login = {loggedIn}/>
 				</DrawerBody>
-				<DrawerFooter>
-					<Button variant="outline" mr={3} onClick={onClose}>
-						Cancel
-					</Button>
-					<Button colorScheme="blue">Save</Button>
-				</DrawerFooter>
+				<DrawerFooter />
 			</DrawerContent>
-        </Drawer>
+    </Drawer>
 		</>
 	);
 };

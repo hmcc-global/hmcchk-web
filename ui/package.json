@@ -26,6 +26,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "redux-persist": "^6.0.0",
+    "react-social-icons": "^5.5.1",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
