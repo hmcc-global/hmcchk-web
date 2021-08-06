@@ -1,16 +1,15 @@
-import { Box, Stack, LinkBox, StackDivider, Image, Text, HStack,Flex, Spacer, VStack} from '@chakra-ui/react'
-import { SocialMediaLinks } from './SocialMediaLinks'
-import { Heading, useColorModeValue } from '@chakra-ui/react'
-import { Link, SimpleGrid } from '@chakra-ui/react'
+import { Box, Stack, StackDivider, HStack} from '@chakra-ui/react';
+import { SocialMediaLinks } from './SocialMediaLinks';
+import { Link, SimpleGrid } from '@chakra-ui/react';
 import { requirePropFactory } from '@material-ui/core';
-
+import { LinkGrid } from './LinkGrid';
 export default function FooterContainer(){
   return(
   <Box
     as="footer"
     role="contentinfo"
     mx="auto"
-    maxW="7xl"
+    w="7xl"
     py="12"
     bg="#222222"
     color="white"
@@ -23,9 +22,7 @@ export default function FooterContainer(){
       <center>
         <SocialMediaLinks />
       </center>
-        <HStack height="120px" w="90%" bg="#222222">
-          <ChurchAppDownloadButton />
-          <SoapAppDownloadButton />
+        <HStack height="120px" w="100%" bg="#222222">
 
         </HStack>
       <Stack
@@ -66,83 +63,3 @@ export default function FooterContainer(){
 };
       
 
-function FooterHeading(){
-  return (
-  <Heading
-    as="h4"
-    color={useColorModeValue('gray.600', 'gray.400')}
-    fontSize="sm"
-    fontWeight="semibold"
-    textTransform="uppercase"
-    letterSpacing="wider"
-  />
-  );
-};
-
-function LinkGrid() {
-  return (
-  <SimpleGrid columns={5}>
-    <Box minW="130px">
-      <FooterHeading mb="4">ABOUT</FooterHeading>
-      <Stack>
-        <Link>Who we are</Link>
-        <Link>Beliefs</Link>
-        <Link>Staff</Link>
-        <Link>BOLD Vision</Link>
-        <Link>Harvest Mission International</Link>
-      </Stack>
-    </Box>
-    <Box minW="130px">
-      <FooterHeading mb="4">GET INVOLVED</FooterHeading>
-      <Stack>
-        <Link>Sunday Celebration</Link>
-        <Link>Upcoming Events</Link>
-        <Link>LIFE Group</Link>
-        <Link>Life Stage Ministries</Link>
-      </Stack>
-    </Box>
-    <Box minW="130px">
-      <FooterHeading mb="4">SERMONS</FooterHeading>
-      <Stack>
-        <Link>Recordings</Link>
-      </Stack>
-    </Box>
-    <Box minW="130px">
-      <FooterHeading mb="4">GIVE</FooterHeading>
-      <Stack>
-        <Link>Ways to give</Link>
-      </Stack>
-    </Box>
-    <Box minW="130px">
-      <FooterHeading mb="4">VISIT US</FooterHeading>
-      <Stack>
-        <Link>Get directions here</Link>
-        <Link>hongkong@hmcc.net</Link>
-        <Link>Feedbacks/Comments</Link>
-      </Stack>
-    </Box>
-  </SimpleGrid>
-);
-  };
-  function ChurchAppDownloadButton() {
-    return (
-      <VStack>
-        <Box  height="25px"><Text color="white" fontSize="md">GET OUR CHURCH APP</Text></Box>
-        <HStack>
-          <Image h="40px" href="https://tithely.app.link/harvest-mission-community-church-hong-kong" objectFit="cover" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/135px-Download_on_the_App_Store_Badge.svg.png"/>
-          <Image h="40px" href="https://tithely.app.link/harvest-mission-community-church-hong-kong"  objectFit="cover" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/320px-Google_Play_Store_badge_EN.svg.png"/>
-        </HStack>
-      </VStack>
-  );
-    };
-    function SoapAppDownloadButton() {
-      return (
-        <VStack>
-          <Box  height="25px"><Text color="white" fontSize="md">GET OUR SOAP APP</Text></Box>
-          <HStack >
-            <Image h="40px"  href="https://play.google.com/store/apps/details?id=net.hmcc.hongkong.dailysoap" objectFit="cover" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/135px-Download_on_the_App_Store_Badge.svg.png"/>
-            <Image h="40px" href="https://apps.apple.com/hk/app/daily-soap-bible-reading-app/id1448825436"  objectFit="cover" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/320px-Google_Play_Store_badge_EN.svg.png"/>
-          </HStack>
-        </VStack>
-    );
-      };

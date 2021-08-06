@@ -7,19 +7,25 @@ import SermonCard from "./sermons/SermonCard";
 import LoginContainer from "./auth/LoginContainer";
 import FormManager from "./forms/FormManager";
 import EventsPage from "./events/EventsPage";
+import FooterContainer from "./footer/FooterContainer";
 
 const MainContainer = () => {
   return (
-    <chakra.main flexGrow={1} bg="#282c34" overflowY="auto">
-      <Switch>
-        <Route exact path="/login" component={LoginContainer} />
-        <Route exact path="/sermons" component={SermonContainer} />
-        <Route exact path="/sermons/:id" component={SermonCard} />
-        <Route exact path="/forms/" component={FormManager} />
-        <Route exact path="/events/" component={EventsPage} />
-        <Redirect to="/sermons" />
-      </Switch>
-    </chakra.main>
+    <>
+      <chakra.main flexGrow={1} bg="#282c34" overflowY="auto">
+        <Switch>
+          <Route exact path="/login" component={LoginContainer} />
+          <Route exact path="/sermons" component={SermonContainer} />
+          <Route exact path="/sermons/:id" component={SermonCard} />
+          <Route exact path="/forms/" component={FormManager} />
+          <Route exact path="/events/" component={EventsPage} />
+          <Redirect to="/sermons" />
+        </Switch>
+      </chakra.main>
+      <box w="100%" minHeight="200px">
+        <FooterContainer />
+      </box>
+    </>
   );
 };
 

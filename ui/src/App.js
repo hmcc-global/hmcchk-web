@@ -15,9 +15,8 @@ const App = () => {
             <>
               <Flex direction="column" align="center" justify="center">
                 <NavBar h="12.5vh" />
-                <Flex w="100%" minHeight="87.5vh">
+                <Flex direction="column" w="100%" minHeight="87.5vh">
                   <MainContainer />
-                  <FooterContainer />
                 </Flex>
               </Flex>
             </>
