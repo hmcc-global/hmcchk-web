@@ -7,6 +7,7 @@ import { MuiPickersUtilsProvider } from "material-ui-pickers";
 import SermonContainer from "./sermons/SermonContainer";
 import SermonCard from "./sermons/SermonCard";
 import LoginContainer from "./auth/LoginContainer";
+import FooterContainer from "./footer/FooterContainer";
 
 const styles = (theme) => ({
   content: {
@@ -35,6 +36,9 @@ const MainContainer = (props) => {
           <Redirect to="/sermons" />
         </Switch>
       </MuiPickersUtilsProvider>
+      <box w='100%' minHeight='200px'>
+              <FooterContainer />
+            </box>
     </main>
   );
 };
