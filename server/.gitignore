@@ -133,3 +133,4 @@ lib-cov
 *.pid
 *.env
 client/*
+config/keys.js
