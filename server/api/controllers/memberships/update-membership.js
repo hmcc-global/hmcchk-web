@@ -22,11 +22,6 @@ module.exports = {
       statusCode: 409,
       description: "Please fill in the required fields.",
     },
-
-    invalidBaptismId: {
-      statusCode: 409,
-      description: "The membershipId is invalid",
-    },
   },
 
   fn: async function ({ params }, exits) {

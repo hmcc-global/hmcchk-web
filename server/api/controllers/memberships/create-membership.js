@@ -27,10 +27,6 @@ module.exports = {
     success: {
       description: "Membership record created successfully",
     },
-    invalid: {
-      responseType: "badRequest",
-      description: "Failed to create membership record",
-    },
   },
 
   fn: async function (

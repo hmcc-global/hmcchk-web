@@ -27,10 +27,6 @@ module.exports = {
     success: {
       description: "Baptism record created successfully",
     },
-    invalid: {
-      responseType: "badRequest",
-      description: "Failed to create baptism record",
-    },
   },
 
   fn: async function (
