@@ -14,8 +14,10 @@ import ConfirmEmailPage from "./email/ConfirmEmailPage";
 import UserProfileContainer from "./userProfile/UserProfileContainer";
 import CompleteUserProfileContainer from "./userProfile/CompleteUserProfile";
 import ClearCache from "./helpers/ClearCache";
-import UserFormContainer from "./forms/UserFormContainer";
-import NoMatch from "./errors/NoMatch";
+import AdminLoginContainer from "./admin/AdminLoginContainer";
+import AdminHome from "./admin/AdminHome";
+import AdminUser from "./admin/AdminUser";
+import AdminForm from "./admin/AdminForm";
 
 const MainContainer = () => {
   return (
@@ -86,6 +88,24 @@ const MainContainer = () => {
           path="/profile"
           permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
           component={UserProfileContainer}
+          path="/admin"
+          permissions={["admin", "stewardship"]}
+          component={AdminLoginContainer}
+        />
+        <PrivateRoute
+          path="/admin/home"
+          permissions={["admin", "stewardship"]}
+          component={AdminHome}
+        />
+        <PrivateRoute
+          path="/admin/users"
+          permissions={["admin", "stewardship"]}
+          component={AdminUser}
+        />
+        <PrivateRoute
+          path="/admin/forms"
+          permissions={["admin", "stewardship"]}
+          component={AdminForm}
         />
         <PrivateRoute
           exact
