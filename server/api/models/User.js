@@ -22,7 +22,7 @@ email status until they click the link in the confirmation email.`,
     },
     accessType: {
       type: "string", //stewardship, admin, alumni, signed, unsigned
-      defaultsTo: "member",
+      defaultsTo: "unsigned",
     },
     fullName: {
       type: "string",

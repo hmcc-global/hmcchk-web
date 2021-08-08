@@ -6,9 +6,11 @@ module.exports = {
   inputs: {
     officialName: {
       type: "string",
+      required: true,
     },
     userId: {
       type: "string",
+      required: true,
     },
     classAttendance: {
       type: "json",
@@ -28,11 +30,6 @@ module.exports = {
     invalid: {
       responseType: "badRequest",
       description: "Failed to create baptism record",
-    },
-
-    duplicateRecords: {
-      statusCode: 409,
-      description: "There is a duplicate record",
     },
   },
 

@@ -39,7 +39,7 @@ the account verification message.)`,
       required: true,
       type: "string",
       example: "Hong Kong",
-      description: "The user's nationality or country of origin"
+      description: "The user's nationality or country of origin",
     },
 
     lifestage: {
@@ -92,26 +92,28 @@ the account verification message.)`,
 
     // Build up data for the new user record and save it to the database.
     // (Also use `fetch` to retrieve the new ID so that we can use it below.)
-    const newUserRecord = await User.create(
-      _.extend(
-        {
-          email: newEmailAddress,
-          password: await sails.helpers.passwords.hashPassword(password),
-          fullName,
-          nationality,
-          lifestage,
-          phoneNumber,
-        },
-        sails.config.custom.verifyEmailAddresses
-          ? {
-              emailProofToken: await sails.helpers.strings.random(
-                "url-friendly"
-              ),
-              emailProofTokenExpiresAt:
-                Date.now() + sails.config.custom.emailProofTokenTTL,
-              emailStatus: "unconfirmed",
-            }
-          : {}
+    try {
+      const newUserRecord = await User.create(
+        _.extend(
+          {
+            email: newEmailAddress,
+            password: await sails.helpers.passwords.hashPassword(password),
+            fullName,
+            nationality,
+            lifestage,
+            phoneNumber,
+          },
+          sails.config.custom.verifyEmailAddresses
+            ? {
+                emailProofToken: await sails.helpers.strings.random(
+                  "url-friendly"
+                ),
+                emailProofTokenExpiresAt:
+                  Date.now() + sails.config.custom.emailProofTokenTTL,
+                emailStatus: "unconfirmed",
+              }
+            : {}
+        )
       )
         .intercept("E_UNIQUE", "emailAlreadyInUse")
         .intercept({ name: "UsageError" }, "invalid")

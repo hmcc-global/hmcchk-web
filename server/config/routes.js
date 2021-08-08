@@ -45,16 +45,11 @@ module.exports.routes = {
   "post /api/auth/login": "auth/post-login",
   "post /api/auth/signup": "auth/post-signup",
   "post /api/auth/signup-google": "auth/post-signup-google",
-<<<<<<< HEAD
-<<<<<<< HEAD
   "get /email/confirm/": "auth/email-confirm",
-=======
-  
+
   "get /api/users/get-user": "users/get-user",
   "put /api/users/update-user": "users/update-user",
-  "put /api/users/delete-user": "users/delete-user"
->>>>>>> e101984... CRUD user API done
-=======
+  "put /api/users/delete-user": "users/delete-user",
 
   // User APIs
   "get /api/users/get": "users/get-user",
@@ -63,13 +58,9 @@ module.exports.routes = {
 
   // Baptism APIs
   "post /api/baptism/create": "baptisms/create-baptism",
-<<<<<<< HEAD
->>>>>>> ba6f87a... testing baptism model
-=======
   "get /api/baptism/get": "baptisms/get-baptism",
   "put /api/baptism/update": "baptisms/update-baptism",
   "put /api/baptism/delete": "baptisms/delete-baptism",
->>>>>>> 4f3c36f... updated comments and created CRUD baptisms
 
   // Membership APIs
   "post /api/membership/create": "memberships/create-membership",
