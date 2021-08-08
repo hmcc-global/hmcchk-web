@@ -12,7 +12,14 @@ import ConnectPage from "./connect/ConnectPage";
 import PrivateRoute from "./helpers/PrivateRoute";
 import Signup from "./auth/Signup";
 import HomeContainer from "./home/HomeContainer";
+<<<<<<< 31-feature-NavBar-Footer
 import FooterContainer from "./footer/FooterContainer";
+=======
+import AdminLoginContainer from "./admin/AdminLoginContainer";
+import AdminHome from "./admin/AdminHome";
+import AdminUser from "./admin/AdminUser";
+import AdminForm from "./admin/AdminForm";
+>>>>>>> user table roughly done
 
 const MainContainer = () => {
   return (
@@ -77,6 +84,27 @@ const MainContainer = () => {
           path="/connect"
           permissions={["public"]}
           component={ConnectPage}
+        />
+        <PrivateRoute
+          exact
+          path="/admin"
+          permissions={["admin", "stewardship"]}
+          component={AdminLoginContainer}
+        />
+        <PrivateRoute
+          path="/admin/home"
+          permissions={["admin", "stewardship"]}
+          component={AdminHome}
+        />
+        <PrivateRoute
+          path="/admin/users"
+          permissions={["admin", "stewardship"]}
+          component={AdminUser}
+        />
+        <PrivateRoute
+          path="/admin/forms"
+          permissions={["admin", "stewardship"]}
+          component={AdminForm}
         />
       </Switch>
       <FooterContainer />

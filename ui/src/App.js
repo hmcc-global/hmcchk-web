@@ -6,6 +6,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import NavBar from "./components/NavigationBar/NavBar";
 import FooterContainer from "./components/footer/FooterContainer";
 import { Flex, CSSReset, VStack, Box } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const App = () => {
   return (
@@ -15,7 +16,9 @@ const App = () => {
           <BrowserRouter>
             <>
               <NavBar />
-              <MainContainer />
+              <ChakraProvider>
+                <MainContainer />
+              </ChakraProvider>
             </>
           </BrowserRouter>
         </PersistGate>
