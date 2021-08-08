@@ -21,11 +21,23 @@ email status until they click the link in the confirmation email.`,
       type: "string",
     },
     accessType: {
-      type: "string", //stewardship, admin, or member
-      defaultsTo: "member",
+      type: "string", //stewardship, admin, alumni, signed, unsigned
+      defaultsTo: "unsigned",
     },
     fullName: {
       type: "string",
+      required: true,
+    },
+    nationality: {
+      type: "string",
+      required: true,
+    },
+    address: {
+      type: "string",
+    },
+    birthday: {
+      type: "ref",
+      columnType: "datetime",
       required: true,
     },
     campus: {
@@ -46,24 +58,34 @@ email status until they click the link in the confirmation email.`,
       type: "boolean",
       defaultsTo: false,
     },
+    ministryTeam: {
+      type: "string",
+    },
     phoneNumber: {
       type: "number",
       required: true,
     },
-    classesTaken: {
+    formSubmitted: {
+      //one-to-many
       type: "json",
     },
-    eventsJoined: {
+    membershipInfo: {
+      //one-to-one
+      collection: "Membership",
+      via: "userId",
+    },
+    baptismInfo: {
+      //one-to-one
+      collection: "Baptism",
+      via: "userId",
+    },
+    givingInfo: {
+      //one-to-one
+      //collection: "Giving",
+      //via: "userId",
       type: "json",
-    },
-    membershipId: {
-      type: "ref",
-    },
-    baptismId: {
-      type: "ref",
-    },
-    financeId: {
-      type: "json",
+      columnType: "array",
+      defaultsTo: [],
     },
     emailProofToken: {
       type: "string",

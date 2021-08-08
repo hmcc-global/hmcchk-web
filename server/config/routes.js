@@ -47,6 +47,27 @@ module.exports.routes = {
   "post /api/auth/signup-google": "auth/post-signup-google",
   "get /email/confirm/": "auth/email-confirm",
 
+  "get /api/users/get-user": "users/get-user",
+  "put /api/users/update-user": "users/update-user",
+  "put /api/users/delete-user": "users/delete-user",
+
+  // User APIs
+  "get /api/users/get": "users/get-user",
+  "put /api/users/update": "users/update-user",
+  "put /api/users/delete": "users/delete-user",
+
+  // Baptism APIs
+  "post /api/baptism/create": "baptisms/create-baptism",
+  "get /api/baptism/get": "baptisms/get-baptism",
+  "put /api/baptism/update": "baptisms/update-baptism",
+  "put /api/baptism/delete": "baptisms/delete-baptism",
+
+  // Membership APIs
+  "post /api/membership/create": "memberships/create-membership",
+  "get /api/membership/get": "memberships/get-membership",
+  "put /api/membership/update": "memberships/update-membership",
+  "put /api/membership/delete": "memberships/delete-membership",
+
   /***************************************************************************
    *                                                                          *
    * More custom routes here...                                               *
