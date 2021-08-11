@@ -19,6 +19,7 @@ import {
   Td,
   TableCaption,
   chakra,
+  Stack,
 } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy } from "react-table";
@@ -137,6 +138,7 @@ export default function App(props) {
                       </chakra.span>
                     </Th>
                   ))}
+                  <Th>Actions</Th>
                 </Tr>
               ))}
             </Thead>
@@ -153,6 +155,15 @@ export default function App(props) {
                         {cell.render("Cell")}
                       </Td>
                     ))}
+                    <Td>
+                      <Stack spacing={2} direction="row" align="center">
+                        <Button size="sm">View</Button>
+                        <Button size="sm">Edit</Button>
+                        <Button colorScheme="red" size="sm">
+                          Delete
+                        </Button>
+                      </Stack>
+                    </Td>
                   </Tr>
                 );
               })}
