@@ -68,9 +68,9 @@ and exposed as \`req.me\`.)`,
 
     // In case there was an existing session (e.g. if we allow users to go to the login page
     // when they're already logged in), broadcast a message that we can display in other open tabs.
-    if (sails.hooks.sockets) {
-      await sails.helpers.broadcastSessionChange(this.req);
-    }
+    // if (sails.hooks.sockets) {
+    //   await sails.helpers.broadcastSessionChange(this.req);
+    // }
 
     sails.log.info(`${emailAddress} logged in.`);
   },
