@@ -15,16 +15,16 @@ const LoginContainer = (props) => {
   const user = useSelector((state) => state.user);
 
   const postLogin = async () => {
-    try {
-      const { data } = await axios.post("/api/auth/login", {
-        emailAddress: "albert@test.com",
-        password: "testing",
-      });
-      dispatch(signin(data));
-      console.log(user);
-    } catch (err) {
-      console.log(err);
-    }
+    // try {
+    //   const { data } = await axios.post("/api/auth/login", {
+    //     emailAddress: "albert@test.com",
+    //     password: "testing",
+    //   });
+    //   dispatch(signin(data));
+    //   console.log(user);
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   useEffect(async () => {
@@ -32,9 +32,9 @@ const LoginContainer = (props) => {
   }, []);
 
   const onGoogleSuccess = async ({ tokenId }) => {
-    const { data } = await axios.post("/api/auth/signup-google", {
-      tokenId: tokenId,
-    });
+    // const { data } = await axios.post("/api/auth/signup-google", {
+    //   tokenId: tokenId,
+    // });
   };
 
   const onGoogleFailure = ({ error }) => {
@@ -44,7 +44,7 @@ const LoginContainer = (props) => {
   return (
     <div className={classes.app}>
       <Paper className={classes.paper}>
-        <Card>{user.email}</Card>
+        {/* <Card>{user.email}</Card>
         <Card>
           <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
@@ -53,7 +53,7 @@ const LoginContainer = (props) => {
             onFailure={onGoogleFailure}
             cookiePolicy={"single_host_origin"}
           />
-        </Card>
+        </Card> */}
       </Paper>
     </div>
   );
