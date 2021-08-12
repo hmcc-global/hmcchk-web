@@ -22,7 +22,9 @@ email status until they click the link in the confirmation email.`,
     },
     accessType: {
       type: "string", //stewardship, admin, alumni, signed, unsigned
+      isIn: ["stewardship", "admin", "alumni", "signed", "unsigned"],
       defaultsTo: "unsigned",
+      description: "The account types of the user and what access do they have",
     },
     fullName: {
       type: "string",
@@ -59,6 +61,16 @@ email status until they click the link in the confirmation email.`,
     },
     ministryTeam: {
       type: "string",
+      isIn: [
+        "Intercessory Prayer Team",
+        "Creatives",
+        "Hospitality",
+        "Band",
+        "Audio/Visual",
+        "Creatives Worship",
+        "Multimedia",
+        "Building Blocks",
+      ],
     },
     phoneNumber: {
       type: "number",
