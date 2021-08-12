@@ -82,12 +82,13 @@ const EventCard = (props) => {
         shadow="lg"
         p="5"
         onClick={onOpen}
+        isTruncated
       >
         <AspectRatio mb="5" width="100%" ratio={16 / 9}>
           <Image borderRadius="20" src={eventData.imageUrl} objectFit="cover" />
         </AspectRatio>
         <Box minHeight="250">
-          <Heading as="h4" mb="5" size="lg">
+          <Heading as="h4" mb="5" size="lg" isTruncated>
             {eventData.title}
           </Heading>
           {eventData.startDate && eventData.endDate && eventData.recurrence && (
@@ -157,7 +158,7 @@ const EventCard = (props) => {
           </AspectRatio>
           <ModalCloseButton />
           {eventData.title && (
-            <ModalHeader fontWeight="bold" fontSize={40}>
+            <ModalHeader fontWeight="bold" fontSize={40} >
               {eventData.title}
             </ModalHeader>
           )}
