@@ -8,6 +8,7 @@ import SermonContainer from "./sermons/SermonContainer";
 import SermonCard from "./sermons/SermonCard";
 import LoginContainer from "./auth/LoginContainer";
 import FormManager from "./forms/FormManager";
+import EventsPage from "./events/EventsPage";
 
 const styles = (theme) => ({
   content: {
@@ -34,6 +35,7 @@ const MainContainer = (props) => {
           <Route exact path="/sermons" component={SermonContainer} />
           <Route exact path="/sermons/:id" component={SermonCard} />
           <Route exact path="/forms/" component={FormManager} />
+          <Route exact path="/events/" component={EventsPage} />
           <Redirect to="/sermons" />
         </Switch>
       </MuiPickersUtilsProvider>
