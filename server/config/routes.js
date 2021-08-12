@@ -1,3 +1,4 @@
+let path = require("path");
 /**
  * Route Mappings
  * (sails.config.routes)
@@ -67,6 +68,14 @@ module.exports.routes = {
   "get /api/membership/get": "memberships/get-membership",
   "put /api/membership/update": "memberships/update-membership",
   "put /api/membership/delete": "memberships/delete-membership",
+
+  // UI
+  "get /*": {
+    skipAssets: true,
+    fn: function (req, res) {
+      res.sendFile(path.join(__dirname + "/../client/index.html"));
+    },
+  },
 
   /***************************************************************************
    *                                                                          *
