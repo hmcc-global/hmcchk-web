@@ -38,7 +38,6 @@ email status until they click the link in the confirmation email.`,
     birthday: {
       type: "ref",
       columnType: "datetime",
-      required: true,
     },
     campus: {
       type: "string",

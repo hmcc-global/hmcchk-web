@@ -18,7 +18,6 @@ const styles = {
 
 const App = (props) => {
   const { classes } = props;
-  console.log(store);
   return (
     <div className={classes.root}>
       <Provider store={store}>
