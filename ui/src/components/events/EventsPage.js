@@ -10,6 +10,10 @@ const EventsPage = (props) => {
 
   useEffect(() => {
     getEventsListFromDatabase();
+    const id = props.match.params;
+    if (id != null) {
+      // call function to open eventcard
+    }
   }, []);
 
   const getEventsListFromDatabase = async () => {
@@ -28,9 +32,9 @@ const EventsPage = (props) => {
         } else return false;
       });
       filtered.sort((a, b) => (a.renderDate > b.renderDate ? 1 : -1))
-      console.log(filtered)
+      // console.log(filtered)
       setEventsList([...filtered]);
-      console.log(eventsList);
+      // console.log(eventsList);
     } catch (err) {
       console.log(err);
     }
@@ -44,7 +48,7 @@ const EventsPage = (props) => {
       <Text textAlign="center">
         Check out what's happening at HMCC of Hong Kong!
       </Text>
-      <Grid mt="12" templateColumns="repeat(2, 1fr)" gap={6}>
+      <Grid mt="12" templateColumns={{sm: "repeat(1, 1fr)", md: "repeat(2, 1fr)"}} gap={6}>
         {eventsList.length > 0 &&
           eventsList.map((event, i) => (
             <EventCard key={"event" + i} eventData={event} />

@@ -1,4 +1,5 @@
 import {
+  Icon,
   AspectRatio,
   Box,
   Heading,
@@ -18,7 +19,11 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  ButtonGroup,
 } from "@chakra-ui/react";
+import { RiCalendarEventFill } from "react-icons/ri";
+import { BsClockFill } from "react-icons/bs";
+import { ImLocation2 } from "react-icons/im";
 import { useEffect, useState } from "react";
 import { getRenderDate } from "../helpers/eventsHelpers";
 import { DateTime } from "luxon";
@@ -29,10 +34,8 @@ const EventCard = (props) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  // const { isOpen, onOpen, onClose } = useDisclosure();
-
   const onOpen = (e) => {
-    if(!e.target.href) {
+    if (!e.target.href) {
       setIsOpen(true);
     }
   };
@@ -44,10 +47,10 @@ const EventCard = (props) => {
   const options = {
     replace: (domNode) => {
       if (domNode.name === "p") {
-        return <Text mb="1">{domToReact(domNode.children, options)}</Text>;
+        return <Text mb="2">{domToReact(domNode.children, options)}</Text>;
       } else if (domNode.name === "ul") {
         return (
-          <UnorderedList mb="1">
+          <UnorderedList mb="2">
             {domToReact(domNode.children, options)}
           </UnorderedList>
         );
@@ -89,6 +92,7 @@ const EventCard = (props) => {
           </Heading>
           {eventData.startDate && eventData.endDate && eventData.recurrence && (
             <Text fontSize="18" fontWeight="bold">
+              <Icon mr={2} as={RiCalendarEventFill} />
               Date:{" "}
               {eventData.renderDate
                 ? eventData.renderDate.toLocaleString(
@@ -101,19 +105,16 @@ const EventCard = (props) => {
                   ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
             </Text>
           )}
-          {eventData.location && (
-            <Text fontSize="18" fontWeight="bold">
-              Location:{" "}
-              {eventData.mapLink ? (
-                <Link href={eventData.mapLink}>{eventData.location}</Link>
-              ) : (
-                eventData.location
-              )}
-            </Text>
-          )}
           {eventData.time && (
             <Text fontSize="18" fontWeight="bold">
+              <Icon mr={2} as={BsClockFill} />
               Time: {eventData.time}
+            </Text>
+          )}
+          {eventData.location && (
+            <Text fontSize="18" fontWeight="bold">
+              <Icon mr={2} as={ImLocation2} />
+              Location: {eventData.location}
             </Text>
           )}
           <Text fontSize="14" mt="5" noOfLines="4">
@@ -121,20 +122,112 @@ const EventCard = (props) => {
           </Text>
         </Box>
         <Stack mt="5" direction="row" justifyContent="center" spacing={2}>
-          <Button size="sm" w="50%" as={Link}>
+          <Button
+            flex={1}
+            as={Link}
+            size="sm"
+            target="_blank"
+            href={eventData.signUpLink ? eventData.signUpLink : false}
+            isDisabled={eventData.signUpLink.length <= 0}
+          >
+            Sign up
+          </Button>
+          <Button
+            flex={1}
+            as={Link}
+            size="sm"
+            target="_blank"
+            href={false}
+            isDisabled={true}
+          >
             Add to Calendar
           </Button>
-          {eventData.signUpLink && (
-            <Button size="sm" w="50%" as={Link} href={eventData.signUpLink}>
-              Sign Up
-            </Button>
-          )}
         </Stack>
       </Box>
       <Modal size="xl" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
-          {eventData.title && <ModalHeader>{eventData.title}</ModalHeader>}
+        <ModalContent borderRadius="20">
+          <AspectRatio mb="5" width="100%" ratio={16 / 9}>
+            <Image
+              borderTopLeftRadius="20"
+              borderTopRightRadius="20"
+              src={eventData.imageUrl}
+              objectFit="cover"
+            />
+          </AspectRatio>
+          <ModalCloseButton />
+          {eventData.title && (
+            <ModalHeader fontWeight="bold" fontSize={40}>
+              {eventData.title}
+            </ModalHeader>
+          )}
+          <ModalBody>
+            <Box>
+              {eventData.startDate &&
+                eventData.endDate &&
+                eventData.recurrence && (
+                  <Text fontSize="14" fontWeight="bold">
+                    <Icon mr={2} as={RiCalendarEventFill} />
+                    Date:{" "}
+                    {eventData.renderDate
+                      ? eventData.renderDate.toLocaleString(
+                          DateTime.DATE_MED_WITH_WEEKDAY
+                        )
+                      : getRenderDate(
+                          eventData.startDate,
+                          eventData.endDate,
+                          eventData.recurrence
+                        ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
+                  </Text>
+                )}
+              {eventData.time && (
+                <Text fontSize="14" fontWeight="bold">
+                  <Icon mr={2} as={BsClockFill} />
+                  Time: {eventData.time}
+                </Text>
+              )}
+              {eventData.location && (
+                <Text fontSize="14" fontWeight="bold">
+                  <Icon mr={2} as={ImLocation2} />
+                  Location: {eventData.location}
+                </Text>
+              )}
+            </Box>
+            <Text fontSize="14" mt="5">
+              {parse(eventData.description, options)}
+            </Text>
+          </ModalBody>
+          <ModalFooter>
+            <ButtonGroup w="100%" variant="outline" colorScheme="gray">
+              <Button
+                flex={1}
+                as={Link}
+                target="_blank"
+                href={eventData.mapLink ? eventData.mapLink : false}
+                isDisabled={eventData.mapLink.length <= 0}
+              >
+                Directions
+              </Button>
+              <Button
+                flex={1}
+                as={Link}
+                target="_blank"
+                href={eventData.signUpLink ? eventData.signUpLink : false}
+                isDisabled={eventData.signUpLink.length <= 0}
+              >
+                Sign up
+              </Button>
+              <Button
+                flex={1}
+                as={Link}
+                target="_blank"
+                href={false}
+                isDisabled={true}
+              >
+                Add to Calendar
+              </Button>
+            </ButtonGroup>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
