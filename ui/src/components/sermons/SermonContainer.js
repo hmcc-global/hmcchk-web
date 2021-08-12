@@ -1,27 +1,35 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
-import { Paper, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { withStyles } from "@material-ui/core/styles";
+import {
+  Paper,
+  Card,
+  CardActions,
+  CardContent,
+  Button,
+  Typography,
+} from "@material-ui/core";
+import { useSelector } from "react-redux";
 
-const styles = theme => ({
+const styles = (theme) => ({
   app: {
-    backgroundColor: '#282c34',
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: 'calc(10px + 2vmin)',
-    color: 'white'
+    backgroundColor: "#282c34",
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "calc(10px + 2vmin)",
+    color: "white",
   },
   root: {
     minWidth: 275,
   },
   bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)",
   },
   title: {
     fontSize: 14,
@@ -40,16 +48,18 @@ const styles = theme => ({
 const SermonContainer = (props) => {
   const { classes } = props;
   const [sermons, setSermons] = useState([]);
+  const user = useSelector((state) => state.user);
 
   const getData = async () => {
     try {
-      const { data } = await axios.get('/api/sermons/get-sermons');
+      const { data } = await axios.get("/api/sermons/get-sermons");
       console.log(data);
+      console.log(user);
       // setSermons(data);
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
     getData();
@@ -86,6 +96,6 @@ const SermonContainer = (props) => {
       </Paper>
     </div>
   );
-}
+};
 
 export default withStyles(styles)(SermonContainer);

@@ -80,14 +80,10 @@ the account verification message.)`,
     },
   },
 
-  fn: async function ({
-    emailAddress,
-    password,
-    fullName,
-    nationality,
-    lifestage,
-    phoneNumber,
-  }) {
+  fn: async function (
+    { emailAddress, password, fullName, nationality, lifestage, phoneNumber },
+    exits
+  ) {
     const newEmailAddress = emailAddress.toLowerCase();
 
     // Build up data for the new user record and save it to the database.
