@@ -9,6 +9,20 @@
  */
 
 module.exports.custom = {
+  /**************************************************************************
+   *                                                                         *
+   * The base URL to use during development.                                 *
+   *                                                                         *
+   * • No trailing slash at the end                                          *
+   * • `http://` or `https://` at the beginning.                             *
+   *                                                                         *
+   * > This is for use in custom logic that builds URLs.                     *
+   * > It is particularly handy for building dynamic links in emails,        *
+   * > but it can also be used for user-uploaded images, webhooks, etc.      *
+   *                                                                         *
+   **************************************************************************/
+  baseUrl: "http://localhost:1337",
+
   /***************************************************************************
    *                                                                          *
    * Any other custom config this Sails app should use during development.    *
@@ -44,4 +58,9 @@ module.exports.custom = {
   pages: {
     host: "http://hongkong.hmcc.net/wp-json/wp/v2/pages",
   },
+
+  // Whether to require proof of email address ownership any time a new user
+  // signs up, or when an existing user attempts to change their email address.
+  verifyEmailAddresses: true,
+  emailProofTokenTTL: 60 * 60 * 1000, // 1 hour
 };

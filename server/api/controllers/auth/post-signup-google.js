@@ -34,10 +34,6 @@ the account verification message.)`,
     success: {
       description: "New user account was created successfully.",
     },
-
-    nonSuccess: {
-      description: "Error",
-    },
   },
 
   fn: async function ({ tokenId }, exits) {
@@ -84,10 +80,27 @@ the account verification message.)`,
       // Store the user's new id in their session.
       this.req.session.userId = newUserRecord.id;
 
+      // In case there was an existing session (e.g. if we allow users to go to the signup page
+      // when they're already logged in), broadcast a message that we can display in other open tabs.
+      if (sails.hooks.sockets) {
+        await sails.helpers.broadcastSessionChange(this.req);
+      }
+
+      // Send "welcome" email
+      await sails.helpers.sendTemplateEmail.with({
+        to: newEmailAddress,
+        subject: "Welcome to HMCC!",
+        template: "email-welcome-new-account",
+        templateData: {
+          fullName,
+          token: newUserRecord.emailProofToken,
+        },
+      });
+
       return exits.success("signup with google success");
     } catch (err) {
       sails.log(err);
-      return exits.nonSuccess(err);
+      return exits.error(err);
     }
   },
 };

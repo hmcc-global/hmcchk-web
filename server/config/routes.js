@@ -1,3 +1,4 @@
+let path = require("path");
 /**
  * Route Mappings
  * (sails.config.routes)
@@ -20,6 +21,12 @@ module.exports.routes = {
 
   "get /api/cache/refresh-cache": "cache/refresh-cache",
 
+  // Forms APIs
+  "get /api/forms/get-form": "forms/get-form",
+  "post /api/forms/post-create-form": "forms/post-create-form",
+  "post /api/forms/post-update-form": "forms/post-update-form",
+  "post /api/forms/post-delete-form": "forms/post-delete-form",
+
   // Announcement APIs
   "get /api/announcements/get-announcements": "announcements/get-announcements",
 
@@ -39,6 +46,36 @@ module.exports.routes = {
   "post /api/auth/login": "auth/post-login",
   "post /api/auth/signup": "auth/post-signup",
   "post /api/auth/signup-google": "auth/post-signup-google",
+  "get /email/confirm/": "auth/email-confirm",
+
+  "get /api/users/get-user": "users/get-user",
+  "put /api/users/update-user": "users/update-user",
+  "put /api/users/delete-user": "users/delete-user",
+
+  // User APIs
+  "get /api/users/get": "users/get-user",
+  "put /api/users/update": "users/update-user",
+  "put /api/users/delete": "users/delete-user",
+
+  // Baptism APIs
+  "post /api/baptism/create": "baptisms/create-baptism",
+  "get /api/baptism/get": "baptisms/get-baptism",
+  "put /api/baptism/update": "baptisms/update-baptism",
+  "put /api/baptism/delete": "baptisms/delete-baptism",
+
+  // Membership APIs
+  "post /api/membership/create": "memberships/create-membership",
+  "get /api/membership/get": "memberships/get-membership",
+  "put /api/membership/update": "memberships/update-membership",
+  "put /api/membership/delete": "memberships/delete-membership",
+
+  // UI
+  "get /*": {
+    skipAssets: true,
+    fn: function (req, res) {
+      res.sendFile(path.join(__dirname + "/../client/index.html"));
+    },
+  },
 
   /***************************************************************************
    *                                                                          *
