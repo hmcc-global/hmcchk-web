@@ -50,13 +50,13 @@ const EventCard = (props) => {
         return <Text mb="2">{domToReact(domNode.children, options)}</Text>;
       } else if (domNode.name === "ul") {
         return (
-          <UnorderedList mb="2">
+          <UnorderedList marginInlineStart="1.25em" mb="2">
             {domToReact(domNode.children, options)}
           </UnorderedList>
         );
       } else if (domNode.name === "ol") {
         return (
-          <OrderedList mb="2">
+          <OrderedList marginInlineStart="1.25em" mb="2">
             {domToReact(domNode.children, options)}
           </OrderedList>
         );
@@ -117,9 +117,9 @@ const EventCard = (props) => {
               Location: {eventData.location}
             </Text>
           )}
-          <Text fontSize={["xs", "md"]} mt="5" noOfLines="4">
+          <Box fontSize={["xs", "md"]} mt="5" noOfLines="4">
             {parse(eventData.description, options)}
-          </Text>
+          </Box>
         </Box>
         <Stack mt="5" direction="row" justifyContent="center" spacing={2}>
           <Button
@@ -200,9 +200,9 @@ const EventCard = (props) => {
                 </Text>
               )}
             </Box>
-            <Text fontSize={["sm", "sm"]} mt="5">
+            <Box fontSize="sm" mt="5">
               {parse(eventData.description, options)}
-            </Text>
+            </Box>
           </ModalBody>
           <ModalFooter ml={[0, 16]} mr={[0, 16]}>
             <ButtonGroup
