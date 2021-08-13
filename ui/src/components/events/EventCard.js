@@ -27,6 +27,7 @@ import { useState } from "react";
 import { getRenderDate } from "../helpers/eventsHelpers";
 import { DateTime } from "luxon";
 import parse, { domToReact, attributesToProps } from "html-react-parser";
+import { generateGoogleCalendarLink } from "../helpers/eventsHelpers";
 
 const EventCard = (props) => {
   const { eventData } = props;
@@ -79,7 +80,7 @@ const EventCard = (props) => {
         overflow="hidden"
         bg="white"
         shadow="lg"
-        p="5"
+        p={[4, 10]}
         onClick={onOpen}
       >
         <AspectRatio mb="5" width="100%" ratio={16 / 9}>
@@ -137,8 +138,8 @@ const EventCard = (props) => {
             as={Link}
             size="sm"
             target="_blank"
-            href={false}
-            isDisabled={true}
+            href={generateGoogleCalendarLink(eventData)}
+            isDisabled={generateGoogleCalendarLink(eventData) ? false : true}
             fontSize={["xs", "sm"]}
           >
             Add to Calendar
@@ -236,8 +237,10 @@ const EventCard = (props) => {
                 mt={[2, 0]}
                 as={Link}
                 target="_blank"
-                href={false}
-                isDisabled={true}
+                href={generateGoogleCalendarLink(eventData)}
+                isDisabled={
+                  generateGoogleCalendarLink(eventData) ? false : true
+                }
               >
                 Add to Calendar
               </Button>
