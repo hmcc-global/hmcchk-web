@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { withStyles } from "@material-ui/core/styles";
-
-const styles = {};
 
 const Form = (props) => {
   const { formData } = props;
@@ -107,4 +104,4 @@ const Form = (props) => {
   );
 };
 
-export default withStyles(styles)(Form);
+export default Form;

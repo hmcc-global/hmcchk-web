@@ -1,24 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import FormCreator from "./FormCreator";
-
-const styles = {
-  root: {
-    color: "white",
-  },
-  container: {
-    flex: 1,
-  },
-  button: {
-    backgroundColor: "#282c34",
-    color: "white",
-  },
-};
+import { Box } from "@chakra-ui/react";
 
 const FormManager = (props) => {
-  const { classes } = props;
   const { register, reset, handleSubmit, formState } = useForm();
   const [formName, setFormName] = useState(null);
   const [editFormData, setEditFormData] = useState(null);
@@ -75,7 +61,7 @@ const FormManager = (props) => {
   };
 
   return (
-    <div className={classes.root}>
+    <Box color="white">
       <h1>Form Management System</h1>
       <h2>Existing Forms</h2>
       <ul>
@@ -107,8 +93,8 @@ const FormManager = (props) => {
           resetFormEditorCallback={resetFormEditorCallback}
         />
       )}
-    </div>
+    </Box>
   );
 };
 
-export default withStyles(styles)(FormManager);
+export default FormManager;
