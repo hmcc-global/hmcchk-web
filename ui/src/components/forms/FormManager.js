@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import FormCreator from "./FormCreator";
 import {
@@ -17,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 
 const FormManager = (props) => {
-  const { register, reset, handleSubmit, formState } = useForm();
+  const { register, reset, handleSubmit, setValue, formState } = useForm();
   const [formName, setFormName] = useState(null);
   const [formDescription, setFormDescription] = useState(null);
   const [formImage, setFormImage] = useState(null);
@@ -98,11 +99,11 @@ const FormManager = (props) => {
   };
 
   return (
-    <Container className={classes.root}>
+    <Container>
       <Heading as="h1" size="xl">
         Form Management System
       </Heading>
-      <Box color="white" borderRadius="lg" p="5" mt="5" borderWidth="1px">
+      <Box borderRadius="lg" p="5" mt="5" borderWidth="1px">
         <Heading mb="2" as="h2" size="lg">
           Existing Forms
         </Heading>
@@ -140,7 +141,7 @@ const FormManager = (props) => {
           ))}
         </List>
       </Box>
-      <Box color="white" borderRadius="lg" p="5" mt="3" borderWidth="1px">
+      <Box borderRadius="lg" p="5" mt="3" borderWidth="1px">
         <Heading as="h2" size="lg">
           Create A New Form
         </Heading>

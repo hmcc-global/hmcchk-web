@@ -264,12 +264,12 @@ const Form = (props) => {
   };
 
   return (
-    <Box color="white">
+    <Box pt="12">
       <form onSubmit={handleSubmit(handleSubmitForm)}>
         {formImage !== "" && (
-          <Image boxSize="100%" objectFit="cover" src={formImage} />
+          <Image boxSize="100%" objectFit="cover" mb="" src={formImage} />
         )}
-        <Heading textAlign="center" as="h1" size="xl">
+        <Heading fontWeight="bold" mt="6" textAlign="center" as="h1" size="xl">
           {formName}
         </Heading>
         <Text textAlign="center" mb="4">
@@ -279,7 +279,6 @@ const Form = (props) => {
           {formData && createPrefillFormFields(formData[0])}
           {formData.map((fieldData, i) => (
             <FormControl
-              // mt={5}
               key={fieldData.fieldName + i}
               isInvalid={errors[fieldData.fieldName]}
             >
