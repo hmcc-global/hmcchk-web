@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import withStyles from "@material-ui/core/styles/withStyles";
-import { Card, Paper } from "@material-ui/core";
 import GoogleLogin from "react-google-login";
 import { useSelector, useDispatch } from "react-redux";
 import { signin } from "../../reducers/userSlice";
-
-const styles = (theme) => ({});
+import { Box } from "@chakra-ui/react";
 
 const LoginContainer = (props) => {
   const { classes } = props;
@@ -42,21 +39,22 @@ const LoginContainer = (props) => {
   // };
 
   return (
-    <div className={classes.app}>
-      {/* <Paper className={classes.paper}>
-        <Card>{user.email}</Card>
-        <Card>
-          <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-            buttonText="Login"
-            onSuccess={onGoogleSuccess}
-            onFailure={onGoogleFailure}
-            cookiePolicy={"single_host_origin"}
-          />
-        </Card>
-      </Paper> */}
-    </div>
+    <Box>
+      <Box color="white"></Box>
+    </Box>
+    // {/* <Paper className={classes.paper}>
+    //   <Card>{user.email}</Card>
+    //   <Card>
+    //     <GoogleLogin
+    //       clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+    //       buttonText="Login"
+    //       onSuccess={onGoogleSuccess}
+    //       onFailure={onGoogleFailure}
+    //       cookiePolicy={"single_host_origin"}
+    //     />
+    //   </Card>
+    // </Paper> */}
   );
 };
 
-export default withStyles(styles)(LoginContainer);
+export default LoginContainer;

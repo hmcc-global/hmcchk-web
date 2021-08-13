@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import Form from "./Form";
-
-const styles = {};
 
 const FormCreator = (props) => {
   const { formName, existingFormData, resetFormEditorCallback } = props;
@@ -161,4 +158,4 @@ const FormCreator = (props) => {
   );
 };
 
-export default withStyles(styles)(FormCreator);
+export default FormCreator;
