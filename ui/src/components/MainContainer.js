@@ -19,6 +19,7 @@ import AdminUser from "./admin/users/AdminUser";
 import AdminForm from "./admin/AdminForm";
 import AdminGiving from "./admin/AdminGiving";
 import FooterContainer from "./footer/FooterContainer";
+import NoMatch from "./errors/NoMatch";
 
 const MainContainer = () => {
   return (
@@ -114,6 +115,7 @@ const MainContainer = () => {
           permissions={["stewardship"]}
           component={AdminGiving}
         />
+        <PrivateRoute path="*" permissions={["public"]} component={NoMatch} />
       </Switch>
       <FooterContainer />
     </chakra.main>
