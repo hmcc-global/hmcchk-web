@@ -24,6 +24,7 @@ import ConnectFloatButton from "./connect-float/ConnectFloatButton";
 import UserFormContainer from "./forms/UserFormContainer";
 import UserProfileContainer from "./userProfile/UserProfileContainer";
 import CompleteUserProfileContainer from "./userProfile/CompleteUserProfile";
+import NoMatch from "./errors/NoMatch";
 
 const MainContainer = () => {
   return (
@@ -138,6 +139,7 @@ const MainContainer = () => {
           permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
           component={UserProfileContainer}
         />
+        <PrivateRoute path="*" permissions={["public"]} component={NoMatch} />
       </Switch>
       <FooterContainer />
       <ConnectFloatButton />
