@@ -18,16 +18,16 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useDisclosure,
   ButtonGroup,
 } from "@chakra-ui/react";
 import { RiCalendarEventFill } from "react-icons/ri";
 import { BsClockFill } from "react-icons/bs";
 import { ImLocation2 } from "react-icons/im";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getRenderDate } from "../helpers/eventsHelpers";
 import { DateTime } from "luxon";
 import parse, { domToReact, attributesToProps } from "html-react-parser";
+import { generateGoogleCalendarLink } from "../helpers/eventsHelpers";
 
 const EventCard = (props) => {
   const { eventData } = props;
@@ -50,13 +50,13 @@ const EventCard = (props) => {
         return <Text mb="2">{domToReact(domNode.children, options)}</Text>;
       } else if (domNode.name === "ul") {
         return (
-          <UnorderedList mb="2">
+          <UnorderedList marginInlineStart="1.25em" mb="2">
             {domToReact(domNode.children, options)}
           </UnorderedList>
         );
       } else if (domNode.name === "ol") {
         return (
-          <OrderedList mb="2">
+          <OrderedList marginInlineStart="1.25em" mb="2">
             {domToReact(domNode.children, options)}
           </OrderedList>
         );
@@ -80,19 +80,18 @@ const EventCard = (props) => {
         overflow="hidden"
         bg="white"
         shadow="lg"
-        p="5"
+        p={[4, 10]}
         onClick={onOpen}
-        isTruncated
       >
         <AspectRatio mb="5" width="100%" ratio={16 / 9}>
           <Image borderRadius="20" src={eventData.imageUrl} objectFit="cover" />
         </AspectRatio>
-        <Box minHeight="250">
-          <Heading as="h4" mb="5" size="lg" isTruncated>
+        <Box minHeight={["150", "280"]}>
+          <Heading as="h4" mb="5" size="lg" fontWeight="900" isTruncated>
             {eventData.title}
           </Heading>
           {eventData.startDate && eventData.endDate && eventData.recurrence && (
-            <Text fontSize="18" fontWeight="bold">
+            <Text fontSize={["sm", "lg"]} fontWeight="bold">
               <Icon mr={2} as={RiCalendarEventFill} />
               Date:{" "}
               {eventData.renderDate
@@ -107,20 +106,20 @@ const EventCard = (props) => {
             </Text>
           )}
           {eventData.time && (
-            <Text fontSize="18" fontWeight="bold">
+            <Text fontSize={["sm", "lg"]} fontWeight="bold">
               <Icon mr={2} as={BsClockFill} />
               Time: {eventData.time}
             </Text>
           )}
           {eventData.location && (
-            <Text fontSize="18" fontWeight="bold">
+            <Text fontSize={["sm", "lg"]} fontWeight="bold">
               <Icon mr={2} as={ImLocation2} />
               Location: {eventData.location}
             </Text>
           )}
-          <Text fontSize="14" mt="5" noOfLines="4">
+          <Box fontSize={["xs", "md"]} mt="5" noOfLines="4">
             {parse(eventData.description, options)}
-          </Text>
+          </Box>
         </Box>
         <Stack mt="5" direction="row" justifyContent="center" spacing={2}>
           <Button
@@ -130,6 +129,7 @@ const EventCard = (props) => {
             target="_blank"
             href={eventData.signUpLink ? eventData.signUpLink : false}
             isDisabled={eventData.signUpLink.length <= 0}
+            fontSize={["xs", "sm"]}
           >
             Sign up
           </Button>
@@ -138,14 +138,15 @@ const EventCard = (props) => {
             as={Link}
             size="sm"
             target="_blank"
-            href={false}
-            isDisabled={true}
+            href={generateGoogleCalendarLink(eventData)}
+            isDisabled={generateGoogleCalendarLink(eventData) ? false : true}
+            fontSize={["xs", "sm"]}
           >
             Add to Calendar
           </Button>
         </Stack>
       </Box>
-      <Modal size="xl" isOpen={isOpen} onClose={onClose}>
+      <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent borderRadius="20">
           <AspectRatio mb="5" width="100%" ratio={16 / 9}>
@@ -158,16 +159,21 @@ const EventCard = (props) => {
           </AspectRatio>
           <ModalCloseButton />
           {eventData.title && (
-            <ModalHeader fontWeight="bold" fontSize={40} >
+            <ModalHeader
+              ml={[0, 16]}
+              mr={[0, 16]}
+              fontWeight="900"
+              fontSize={["2xl", "3xl"]}
+            >
               {eventData.title}
             </ModalHeader>
           )}
-          <ModalBody>
+          <ModalBody ml={[0, 16]} mr={[0, 16]}>
             <Box>
               {eventData.startDate &&
                 eventData.endDate &&
                 eventData.recurrence && (
-                  <Text fontSize="14" fontWeight="bold">
+                  <Text fontSize={["sm", "md"]} fontWeight="bold">
                     <Icon mr={2} as={RiCalendarEventFill} />
                     Date:{" "}
                     {eventData.renderDate
@@ -182,26 +188,33 @@ const EventCard = (props) => {
                   </Text>
                 )}
               {eventData.time && (
-                <Text fontSize="14" fontWeight="bold">
+                <Text fontSize={["sm", "md"]} fontWeight="bold">
                   <Icon mr={2} as={BsClockFill} />
                   Time: {eventData.time}
                 </Text>
               )}
               {eventData.location && (
-                <Text fontSize="14" fontWeight="bold">
+                <Text fontSize={["sm", "md"]} fontWeight="bold">
                   <Icon mr={2} as={ImLocation2} />
                   Location: {eventData.location}
                 </Text>
               )}
             </Box>
-            <Text fontSize="14" mt="5">
+            <Box fontSize="sm" mt="5">
               {parse(eventData.description, options)}
-            </Text>
+            </Box>
           </ModalBody>
-          <ModalFooter>
-            <ButtonGroup w="100%" variant="outline" colorScheme="gray">
+          <ModalFooter ml={[0, 16]} mr={[0, 16]}>
+            <ButtonGroup
+              size="md"
+              flexDirection={["column", "row"]}
+              spacing={[0, 2]}
+              w="100%"
+              variant="outline"
+              colorScheme="gray"
+            >
               <Button
-                flex={1}
+                flex={[false, 1]}
                 as={Link}
                 target="_blank"
                 href={eventData.mapLink ? eventData.mapLink : false}
@@ -210,7 +223,8 @@ const EventCard = (props) => {
                 Directions
               </Button>
               <Button
-                flex={1}
+                flex={[false, 1]}
+                mt={[2, 0]}
                 as={Link}
                 target="_blank"
                 href={eventData.signUpLink ? eventData.signUpLink : false}
@@ -219,11 +233,14 @@ const EventCard = (props) => {
                 Sign up
               </Button>
               <Button
-                flex={1}
+                flex={[false, 1]}
+                mt={[2, 0]}
                 as={Link}
                 target="_blank"
-                href={false}
-                isDisabled={true}
+                href={generateGoogleCalendarLink(eventData)}
+                isDisabled={
+                  generateGoogleCalendarLink(eventData) ? false : true
+                }
               >
                 Add to Calendar
               </Button>
