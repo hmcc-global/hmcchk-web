@@ -21,10 +21,8 @@ const MainContainer = () => {
           <Route exact path="/events/" component={EventsPage} />
           <Redirect to="/sermons" />
         </Switch>
-      </chakra.main>
-      <box w="100%" minHeight="200px">
         <FooterContainer />
-      </box>
+      </chakra.main>
     </>
   );
 };
