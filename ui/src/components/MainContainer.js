@@ -7,6 +7,7 @@ import SermonCard from "./sermons/SermonCard";
 import LoginContainer from "./auth/LoginContainer";
 import FormManager from "./forms/FormManager";
 import EventsPage from "./events/EventsPage";
+import VisitUsPage from "./visit-us/VisitUsPage";
 
 const MainContainer = () => {
   return (
@@ -17,6 +18,7 @@ const MainContainer = () => {
         <Route exact path="/sermons/:id" component={SermonCard} />
         <Route exact path="/forms/" component={FormManager} />
         <Route exact path="/events/" component={EventsPage} />
+        <Route exact path="/visit-us" component={VisitUsPage} />
         <Redirect to="/sermons" />
       </Switch>
     </chakra.main>
