@@ -14,6 +14,8 @@ import {
   Text,
   Box,
   Select,
+  ButtonGroup,
+  Stack,
 } from "@chakra-ui/react";
 
 const FormCreator = (props) => {
@@ -33,25 +35,19 @@ const FormCreator = (props) => {
     watch,
     setValue,
     handleSubmit,
-    getValues,
     control,
     formState: { errors },
   } = useForm();
 
   const {
-    register: registerPrefill,
-    reset: resetPrefill,
     setValue: setValuePrefill,
     handleSubmit: handleSubmitPrefill,
-    getValues: getValuesPrefill,
     control: controlPrefill,
   } = useForm();
 
   useEffect(() => {
     if (existingFormData) {
-      console.log(existingFormData.formFields[0]);
       if (existingFormData.formFields[0].fieldType === "prefill") {
-        console.log("prefill detected");
         let fields = existingFormData.formFields[0].options;
         fields.forEach((field) => {
           setValuePrefill(field + "Checkbox", true);
@@ -269,14 +265,14 @@ const FormCreator = (props) => {
             <FormLabel>
               {ft === "header" ? "Header Text" : "Field Name"}
             </FormLabel>
-            <Input {...register("fieldName", {required: true})} />
+            <Input {...register("fieldName", { required: true })} />
             <FormErrorMessage>
               {errors["fieldName"] && "Field name is required"}
             </FormErrorMessage>
           </FormControl>
           <FormControl isInvalid={errors["fieldType"]}>
             <FormLabel>Field Type</FormLabel>
-            <Select {...register("fieldType", {required: true})}>
+            <Select {...register("fieldType", { required: true })}>
               <option value="text">Text</option>
               <option value="select">Select</option>
               <option value="checkbox">Checkbox</option>
@@ -334,20 +330,22 @@ const FormCreator = (props) => {
         {formData
           .filter((obj) => {
             if (obj.fieldType === "prefill") {
-              return;
+              return false;
             } else {
               return obj;
             }
           })
           .map((fieldData, i) => (
-            <FormControl>
+            <FormControl key={fieldData.fieldName}>
               {fieldData.fieldName}
-              <Button mt={4} colorScheme="teal" value={i + 1} onClick={onEdit}>
-                Edit
-              </Button>
-              <Button mt={4} colorScheme="teal" onClick={onDelete}>
-                Delete
-              </Button>
+              <ButtonGroup ml={4} colorScheme="teal">
+                <Button mt={4} value={i + 1} onClick={onEdit}>
+                  Edit
+                </Button>
+                <Button mt={4} onClick={onDelete}>
+                  Delete
+                </Button>
+              </ButtonGroup>
             </FormControl>
           ))}
         <Button

@@ -49,6 +49,11 @@ const FormManager = (props) => {
       const { data, status } = await axios.get("/api/forms/get-form", {
         params: { id: formId },
       });
+
+      if (status !== 200) {
+        alert("There was an issue with the request, please talk to a DB manager")
+      }
+
       setValue("formName", data[0].formName);
       setValue("formDescription", data[0].formDescription);
       setValue("formImage", data[0].formImage);
@@ -68,7 +73,7 @@ const FormManager = (props) => {
   const onDelete = async (e) => {
     try {
       const formId = String(e.target.value);
-      const { data, status } = await axios.post("/api/forms/post-delete-form", {
+      await axios.post("/api/forms/post-delete-form", {
         id: formId,
       });
       getFormListFromDatabase();
@@ -77,7 +82,7 @@ const FormManager = (props) => {
     }
   };
 
-  const resetFormEditorCallback = () => {
+  const resetFormEditorCallback = async () => {
     setValue("formName", null);
     setValue("formDescription", null);
     setValue("formImage", null);
@@ -85,13 +90,16 @@ const FormManager = (props) => {
     setFormDescription(null);
     setFormImage(null);
     setEditFormData(null);
-    getFormListFromDatabase();
+    await getFormListFromDatabase();
     reset();
   };
 
   const getFormListFromDatabase = async () => {
     try {
       const { data, status } = await axios.get("/api/forms/get-form");
+      if (status !== 200) {
+        throw Error("Something went wrong with the request")
+      }
       setFormList(data);
     } catch (err) {
       console.log(err);
@@ -108,7 +116,7 @@ const FormManager = (props) => {
           Existing Forms
         </Heading>
         <List>
-          {formList.map((formItem, i) => (
+          {formList.map((formItem) => (
             <ListItem key={formItem.id}>
               <Box p="2" mb="2" borderRadius="lg" borderWidth="1px">
                 <Text>{formItem.formName}</Text>
