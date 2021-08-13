@@ -10,7 +10,7 @@ import EventsPage from "./events/EventsPage";
 
 const MainContainer = () => {
   return (
-    <chakra.main flexGrow={1} bg="#282c34" overflowY="auto">
+    <chakra.main flexGrow={1} bg="#ffffff" overflowY="auto">
       <Switch>
         <Route exact path="/login" component={LoginContainer} />
         <Route exact path="/sermons" component={SermonContainer} />

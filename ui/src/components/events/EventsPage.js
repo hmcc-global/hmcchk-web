@@ -41,7 +41,7 @@ const EventsPage = (props) => {
   };
 
   return (
-    <Container maxW="container.xl" bg="white">
+    <Container maxW="container.xl">
       <Heading
         as="h2"
         mb="2"
@@ -57,6 +57,7 @@ const EventsPage = (props) => {
       </Text>
       <Grid
         mt="12"
+        mb="12"
         templateColumns={{ sm: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
         gap={[3, 6]}
       >
