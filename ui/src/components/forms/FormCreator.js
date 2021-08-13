@@ -174,7 +174,7 @@ const FormCreator = (props) => {
   const ft = watch("fieldType");
 
   return (
-    <Box color="white" borderRadius="lg" p="5" mt="3" borderWidth="1px">
+    <Box borderRadius="lg" p="5" mt="3" borderWidth="1px">
       <Heading as="h1" size="xl">
         Form Editor
       </Heading>
