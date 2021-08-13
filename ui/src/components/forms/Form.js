@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
+import { camelize, sentencize } from "../helpers/formsHelpers";
 import {
   FormControl,
   FormLabel,
@@ -22,14 +23,7 @@ import {
 } from "@chakra-ui/react";
 
 const Form = (props) => {
-  const {
-    formId,
-    formName,
-    formDescription,
-    formImage,
-    formData,
-    submitHandler,
-  } = props;
+  const { formId, formName, formDescription, formImage, formData } = props;
   const { register, handleSubmit, control, formState } = useForm();
   const { errors } = formState;
 
@@ -63,43 +57,6 @@ const Form = (props) => {
     }
   }, submissionData);
 
-  // String conversion tools
-  const camelize = (str) => {
-    return str
-      .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
-        return index === 0 ? word.toLowerCase() : word.toUpperCase();
-      })
-      .replace(/\s+/g, "");
-  };
-
-  function sentencize(str) {
-    return str
-      .split(/([A-Z]|\d)/)
-      .map((v, i, arr) => {
-        // If first block then capitalise 1st letter regardless
-        if (!i) return v.charAt(0).toUpperCase() + v.slice(1);
-        // Skip empty blocks
-        if (!v) return v;
-        // Underscore substitution
-        if (v === "_") return " ";
-        // We have a capital or number
-        if (v.length === 1 && v === v.toUpperCase()) {
-          const previousCapital = !arr[i - 1] || arr[i - 1] === "_";
-          const nextWord =
-            i + 1 < arr.length && arr[i + 1] && arr[i + 1] !== "_";
-          const nextTwoCapitalsOrEndOfString =
-            i + 3 > arr.length || (!arr[i + 1] && !arr[i + 3]);
-          // Insert space
-          if (!previousCapital || nextWord) v = " " + v;
-          // Start of word or single letter word
-          if (nextWord || (!previousCapital && !nextTwoCapitalsOrEndOfString))
-            v = v.toLowerCase();
-        }
-        return v;
-      })
-      .join("");
-  }
-
   // Helper function to create the input fields
   const createFormField = (fieldData) => {
     let fieldName = fieldData.fieldName;
@@ -109,77 +66,91 @@ const Form = (props) => {
 
     let inputField = [];
 
-    if (fieldType === "prefill") {
-      return;
-    } else if (fieldType === "select") {
-      let items = [];
+    switch (fieldType) {
+      case "prefill":
+        break;
+      case "select":
+        let items = [];
 
-      opts.map((option) => {
-        let o = (
-          <option id={camelize(fieldName + option)} value={option}>
-            {" "}
-            {option}{" "}
-          </option>
-        );
-        items.push(o);
-        return o;
-      });
+        opts.map((option) => {
+          let o = (
+            <option
+              key={fieldName + option}
+              id={camelize(fieldName + option)}
+              value={option}
+            >
+              {" "}
+              {option}{" "}
+            </option>
+          );
+          items.push(o);
+          return o;
+        });
 
-      inputField.push(
-        <Select
-          id={camelize(fieldName)}
-          {...register(fieldName, { required: required })}
-        >
-          {" "}
-          {items}{" "}
-        </Select>
-      );
-    } else if (fieldType === "radio") {
-      let radioOptions = [];
-      opts.map((option) => {
-        let o = (
-          <Radio
-            id={camelize(fieldName + option)}
+        inputField.push(
+          <Select
+            id={camelize(fieldName)}
+            key={fieldName}
             {...register(fieldName, { required: required })}
-            type="radio"
-            value={option}
           >
-            {option}
-          </Radio>
+            {" "}
+            {items}{" "}
+          </Select>
         );
-        radioOptions.push(o);
-        return true;
-      });
-      inputField.push(
-        <Controller
-          control={control}
-          name={camelize(fieldName)}
-          render={({ field: { onChange } }) => (
-            <RadioGroup onChange={onChange}>
-              <Stack direction="row">{radioOptions}</Stack>
-            </RadioGroup>
-          )}
-        />
-      );
-    } else if (fieldType === "textarea") {
-      inputField.push(
-        <Textarea
-          id={camelize(fieldName)}
-          {...register(fieldName, { required: required })}
-        />
-      );
-    } else if (fieldType === "header") {
-      inputField.push(
-        <Heading as="h3" size="md">
-          {fieldName}
-        </Heading>
-      );
-    } else if (fieldType === "checkbox") {
-      inputField.push(<Checkbox>{fieldName}</Checkbox>);
-    } else {
-      inputField.push(
-        createGeneralInputField(fieldName, fieldType, { required: required })
-      );
+        break;
+      case "radio":
+        let radioOptions = [];
+        opts.map((option) => {
+          let o = (
+            <Radio
+              id={camelize(fieldName + option)}
+              key={fieldName + option}
+              {...register(fieldName, { required: required })}
+              type="radio"
+              value={option}
+            >
+              {option}
+            </Radio>
+          );
+          radioOptions.push(o);
+          return true;
+        });
+        inputField.push(
+          <Controller
+            control={control}
+            name={camelize(fieldName)}
+            render={({ field: { onChange } }) => (
+              <RadioGroup key={fieldName} onChange={onChange}>
+                <Stack direction="row">{radioOptions}</Stack>
+              </RadioGroup>
+            )}
+          />
+        );
+        break;
+      case "textarea":
+        inputField.push(
+          <Textarea
+            id={camelize(fieldName)}
+            key={fieldName}
+            {...register(fieldName, { required: required })}
+          />
+        );
+        break;
+      case "header":
+        inputField.push(
+          <Heading key={fieldName} as="h3" size="md">
+            {fieldName}
+          </Heading>
+        );
+        break;
+      case "checkbox":
+        inputField.push(<Checkbox key={fieldName}>{fieldName}</Checkbox>);
+        break;
+      default:
+        inputField.push(
+          createGeneralInputField(fieldName, fieldType, { required: required })
+        );
+        break;
     }
 
     if (required === true) {
@@ -207,9 +178,9 @@ const Form = (props) => {
     opts.forEach((fieldName) => {
       // Generate a label
       let label = (
-        <FormLabel id={fieldName + "label"}>
+        <FormLabel key={fieldName + "label"} id={fieldName + "label"}>
           {sentencize(fieldName)}{" "}
-          <Text as="span" color="red">
+          <Text key={fieldName + "alert"} as="span" color="red">
             *
           </Text>
         </FormLabel>
@@ -220,7 +191,7 @@ const Form = (props) => {
       if (fieldName === "address") {
         field = (
           <Textarea
-            key={camelize(fieldName)}
+            key={fieldName}
             {...register(fieldName, { required: true })}
           />
         );
@@ -232,7 +203,10 @@ const Form = (props) => {
       let error = createErrorNotifier(fieldName);
 
       result.push(
-        <FormControl isInvalid={errors[fieldName]}>
+        <FormControl
+          key={fieldName + "Controller"}
+          isInvalid={errors[fieldName]}
+        >
           {label}
           {field}
           {error}
@@ -248,6 +222,7 @@ const Form = (props) => {
     // console.log(errors[fieldName], fieldName);
     return (
       <FormErrorMessage>
+        key={fieldName + "errorMessage"}
         {errors[fieldName] && "This field is required"}
       </FormErrorMessage>
     );
@@ -256,7 +231,7 @@ const Form = (props) => {
   const createGeneralInputField = (fieldName, fieldType, validation) => {
     return (
       <Input
-        key={camelize(fieldName)}
+        key={fieldName}
         type={fieldType}
         {...register(fieldName, validation)}
       />
@@ -264,15 +239,28 @@ const Form = (props) => {
   };
 
   return (
-    <Box pt="12">
+    <Box mt="12" mb="12">
       <form onSubmit={handleSubmit(handleSubmitForm)}>
         {formImage !== "" && (
-          <Image boxSize="100%" objectFit="cover" mb="" src={formImage} />
+          <Image
+            key="formImage"
+            boxSize="100%"
+            objectFit="cover"
+            mb=""
+            src={formImage}
+          />
         )}
-        <Heading fontWeight="bold" mt="6" textAlign="center" as="h1" size="xl">
+        <Heading
+          key="formName"
+          fontWeight="bold"
+          mt="6"
+          textAlign="center"
+          as="h1"
+          size="xl"
+        >
           {formName}
         </Heading>
-        <Text textAlign="center" mb="4">
+        <Text key="formDescription" textAlign="center" mb="8">
           {formDescription}
         </Text>
         <Stack direction="column" spacing={5}>
@@ -285,10 +273,17 @@ const Form = (props) => {
               {!["header", "prefill", "checkbox"].includes(
                 fieldData.fieldType
               ) && (
-                <FormLabel id={camelize(fieldData.fieldName + "label")}>
+                <FormLabel
+                  key={fieldData.fieldName + "label"}
+                  id={camelize(fieldData.fieldName + "label")}
+                >
                   {fieldData.fieldName}{" "}
                   {fieldData.required && (
-                    <Text as="span" color="red">
+                    <Text
+                      key={fieldData.fieldName + "alert"}
+                      as="span"
+                      color="red"
+                    >
                       *
                     </Text>
                   )}
@@ -297,6 +292,7 @@ const Form = (props) => {
               {createFormField(fieldData)}
               {fieldData.fieldDescription !== "" && (
                 <FormHelperText
+                  key={fieldData.fieldName + "description"}
                   id={camelize(fieldData.fieldName + "description")}
                 >
                   {fieldData.fieldDescription}
@@ -310,7 +306,7 @@ const Form = (props) => {
             mt={4}
             width="25%"
             variant="outline"
-            colorScheme="whiteAlpha"
+            colorScheme="blackAlpha"
             type="submit"
           >
             Submit
