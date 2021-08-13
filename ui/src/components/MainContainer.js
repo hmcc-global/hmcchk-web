@@ -15,6 +15,7 @@ import UserProfileContainer from "./userProfile/UserProfileContainer";
 import CompleteUserProfileContainer from "./userProfile/CompleteUserProfile";
 import ClearCache from "./helpers/ClearCache";
 import UserFormContainer from "./forms/UserFormContainer";
+import NoMatch from "./errors/NoMatch";
 
 const MainContainer = () => {
   return (
@@ -92,6 +93,7 @@ const MainContainer = () => {
           permissions={["admin", "stewardship"]}
           component={ClearCache}
         />
+        <PrivateRoute path="*" permissions={["public"]} component={NoMatch} />
       </Switch>
     </chakra.main>
   );
