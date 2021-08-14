@@ -1,28 +1,13 @@
-import { withStyles } from '@material-ui/core/styles';
+import { Box } from "@chakra-ui/react";
 
-const styles = {
-  container: {
-    flex: 1
-  },
-  audio: {
-    overflow: "hidden",
-    paddingBottom: "56.25%",
-    position: "relative",
-    height: 0
-  }
-};
+const AudioEmbed = (props) => {
+  const { audioUrl } = props;
 
-const AudioEmbed = props => {
-  const { classes, audioUrl } = props;
-  
   return (
-    <div className={classes.audio}>
-      <audio 
-        controls
-        src={audioUrl}
-      />
-    </div>
+    <Box overflow="hidden" pb="56.25%" pos="relative" h={10}>
+      <audio controls src={audioUrl} />
+    </Box>
   );
 };
 
-export default withStyles(styles)(AudioEmbed);
+export default AudioEmbed;
