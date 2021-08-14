@@ -213,7 +213,7 @@ const FormCreator = (props) => {
               defaultValue={false}
               render={({ field: { onChange, value, ref } }) => (
                 <Checkbox onChange={onChange} ref={ref} isChecked={value}>
-                  Checkbox
+                  Email
                 </Checkbox>
               )}
             />
