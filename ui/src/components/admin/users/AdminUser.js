@@ -20,11 +20,23 @@ import {
   TableCaption,
   chakra,
   Stack,
+  useDisclosure,
+} from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy } from "react-table";
 //import Header from "./navigation/Header";
-import SidebarWithHeader from "./navigation/Sidebar";
+import SidebarWithHeader from "../navigation/Sidebar";
+import ViewUser from "./ViewUserComponent";
+import EditUser from "./EditUserComponent";
 
 const smVariant = { navigation: "drawer", navigationButton: true };
 const mdVariant = { navigation: "sidebar", navigationButton: false };
@@ -35,14 +47,15 @@ export default function App(props) {
 
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
+  //Getting information from API
   const { classes } = props;
-  const [users, setUsers] = useState([]);
+  const [user, setUsers] = useState([]);
 
   const getData = async () => {
     try {
       const { data } = await axios.get("/api/users/get");
       console.log(data);
-      // setUsers(data);
+      setUsers(data);
     } catch (err) {
       console.log(err);
     }
@@ -52,31 +65,21 @@ export default function App(props) {
     getData();
   }, []);
 
-  const data = React.useMemo(
-    () => [
-      {
-        name: "a full name",
-        email: "email@email.com",
-        lifestage: "Single Adult",
-        phone: "12345678",
-        birthday: "21 January 1999",
-      },
-      {
-        name: "full name",
-        email: "email1@email.com",
-        lifestage: "CUHK",
-        phone: "87654321",
-        birthday: "5 December 2000",
-      },
-    ],
-    []
-  );
+  const data = user;
+
+  //View User Component
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  //const [showUser, setShowUser] = useState(false);
+
+  // const viewUser = () => {
+  //   this.setState({ viewUser: !this.state.viewUser });
+  // };
 
   const columns = React.useMemo(
     () => [
       {
         Header: "Name",
-        accessor: "name",
+        accessor: "fullName",
       },
       {
         Header: "Email",
@@ -88,11 +91,11 @@ export default function App(props) {
       },
       {
         Header: "Phone Number",
-        accessor: "phone",
+        accessor: "phoneNumber",
       },
       {
-        Header: "Birthday",
-        accessor: "birthday",
+        Header: "Nationality",
+        accessor: "nationality",
       },
     ],
     []
@@ -108,11 +111,7 @@ export default function App(props) {
         isOpen={isSidebarOpen}
         onClose={toggleSidebar}
       >
-        <Flex
-          height="85vh"
-          bg={useColorModeValue("gray.200")}
-          justifyContent="center"
-        >
+        <Flex bg={useColorModeValue("gray.200")} justifyContent="center">
           <Table
             variant="striped"
             colorScheme="blackAlpha"
@@ -157,8 +156,8 @@ export default function App(props) {
                     ))}
                     <Td>
                       <Stack spacing={2} direction="row" align="center">
-                        <Button size="sm">View</Button>
-                        <Button size="sm">Edit</Button>
+                        <ViewUser props={data._id} />
+                        <EditUser></EditUser>
                         <Button colorScheme="red" size="sm">
                           Delete
                         </Button>

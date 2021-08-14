@@ -16,7 +16,7 @@ import CompleteUserProfileContainer from "./userProfile/CompleteUserProfile";
 import ClearCache from "./helpers/ClearCache";
 import AdminLoginContainer from "./admin/AdminLoginContainer";
 import AdminHome from "./admin/AdminHome";
-import AdminUser from "./admin/AdminUser";
+import AdminUser from "./admin/users/AdminUser";
 import AdminForm from "./admin/AdminForm";
 
 const MainContainer = () => {

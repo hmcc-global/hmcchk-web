@@ -35,7 +35,7 @@ import {
   FiChevronDown,
   FiAperture,
 } from "react-icons/fi";
-import AdminUser from "../AdminUser";
+import AdminUser from "../users/AdminUser";
 
 //import { Switch, Route, Redirect } from "react-router-dom";
 //import { IconType } from "react-icons";
