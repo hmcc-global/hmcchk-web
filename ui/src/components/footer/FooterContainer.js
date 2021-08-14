@@ -12,7 +12,6 @@ import {
   Divider,
   Box,
 } from "@chakra-ui/react";
-import { requirePropFactory } from "@material-ui/core";
 import { Copyright } from "./Copyright";
 import { LinkGrid } from "./LinkGrid";
 import { SoapAppDownloadButton } from "./SoapDownloadButton";

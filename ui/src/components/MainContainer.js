@@ -5,11 +5,8 @@ import { chakra } from "@chakra-ui/react";
 import SermonContainer from "./sermons/SermonContainer";
 import SermonCard from "./sermons/SermonCard";
 import LoginContainer from "./auth/LoginContainer";
-<<<<<<< HEAD
-=======
 import FormManager from "./forms/FormManager";
 import EventsPage from "./events/EventsPage";
->>>>>>> 80e2fd6ac471f2dc433aa8bc7b6ef92e321c85b0
 import FooterContainer from "./footer/FooterContainer";
 
 const MainContainer = () => {
@@ -24,26 +21,9 @@ const MainContainer = () => {
           <Route exact path="/events/" component={EventsPage} />
           <Redirect to="/sermons" />
         </Switch>
-<<<<<<< HEAD
-      </MuiPickersUtilsProvider>
-<<<<<<< Updated upstream
-      <box w='100%' minHeight='200px'>
-              <FooterContainer />
-            </box>
-=======
-<<<<<<< Updated upstream
-=======
-            <box w='100%' minHeight='200px'>
-              <FooterContainer />
-            </box>
->>>>>>> Stashed changes
->>>>>>> Stashed changes
-    </main>
-=======
         <FooterContainer />
       </chakra.main>
     </>
->>>>>>> 80e2fd6ac471f2dc433aa8bc7b6ef92e321c85b0
   );
 };
 
