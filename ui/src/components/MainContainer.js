@@ -117,6 +117,12 @@ const MainContainer = () => {
           component={AdminGiving}
         />
         <PrivateRoute path="*" permissions={["public"]} component={NoMatch} />
+        <PrivateRoute
+          exact
+          path="/connect"
+          permissions={["public"]}
+          component={ConnectPage}
+        />
       </Switch>
       <FooterContainer />
       <ConnectFloatButton />
