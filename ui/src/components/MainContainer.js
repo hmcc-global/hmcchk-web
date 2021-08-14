@@ -18,6 +18,7 @@ import AdminHome from "./admin/AdminHome";
 import AdminUser from "./admin/users/AdminUser";
 import AdminForm from "./admin/AdminForm";
 import AdminGiving from "./admin/AdminGiving";
+import FooterContainer from "./footer/FooterContainer";
 
 const MainContainer = () => {
   return (
