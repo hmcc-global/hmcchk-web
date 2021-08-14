@@ -36,9 +36,18 @@ const MainContainer = (props) => {
           <Redirect to="/sermons" />
         </Switch>
       </MuiPickersUtilsProvider>
+<<<<<<< Updated upstream
       <box w='100%' minHeight='200px'>
               <FooterContainer />
             </box>
+=======
+<<<<<<< Updated upstream
+=======
+            <box w='100%' minHeight='200px'>
+              <FooterContainer />
+            </box>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     </main>
   );
 };
