@@ -11,6 +11,7 @@ import VisitUsPage from "./visit-us/VisitUsPage";
 import PrivateRoute from "./helpers/PrivateRoute";
 import Signup from "./auth/Signup";
 import HomeContainer from "./home/HomeContainer";
+import FooterContainer from "./footer/FooterContainer";
 
 const MainContainer = () => {
   return (
@@ -71,6 +72,7 @@ const MainContainer = () => {
           component={VisitUsPage}
         />
       </Switch>
+      <FooterContainer />
     </chakra.main>
   );
 };
