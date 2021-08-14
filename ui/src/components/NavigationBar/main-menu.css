@@ -1,0 +1,22 @@
+.chakra-slide{
+  background: url('./ripple.png') !important;
+  background-repeat: no-repeat !important;
+  background-color: #2C5282 !important;
+  background-size: 70% !important;
+  background-position-x: 120%  !important;
+  background-position-y: 75%  !important;
+}
+
+.chakra-button{
+  -webkit-margin-start: 0 !important;
+  margin-inline-start: 0 !important;
+}
+
+h1{
+  font-weight: bold !important;
+  font-size: 40px !important;
+}
+
+h3{
+  font-size: 18px !important;
+}
