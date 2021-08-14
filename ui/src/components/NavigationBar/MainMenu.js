@@ -79,6 +79,7 @@ const MainMenu = ({login, view}) => {
 								<Button width='100%'>Prayer Requests</Button>
 							</ButtonGroup>}
           </Box>
+
           <Box className="other-links" position='relative' top='15%' right='43%'>
             <VStack alignItems="center" fontSize="sm">
 							<h2>Ann Arbor</h2>
@@ -89,7 +90,7 @@ const MainMenu = ({login, view}) => {
               <h2>Tangerang</h2>
             </VStack>
           </Box>
-          <Box className="social-media" position='relative' top='20%' right='10%'>	
+          <Box className="social-media" position='relative' top='25%' right='10%'>	
 						<Center h="100%" w="100%" color="white">
 								<SocialIcon bgColor="transparent" fgColor="#ffffff" size='50%' url="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q" />
 								<SocialIcon bgColor="transparent" fgColor="#ffffff" url="https://www.instagram.com/hmcc_hk/?hl=en" />

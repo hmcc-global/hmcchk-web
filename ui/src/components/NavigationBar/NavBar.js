@@ -187,7 +187,7 @@ const Navigationbar = () => {
 				<DrawerCloseButton position='absolute' right='5%' top='5%' color='white' />
 				<DrawerHeader />
 				<DrawerBody>
-					<MainMenu login = {loggedIn}/>
+					<MainMenu login = {loggedIn} />
 				</DrawerBody>
 				<DrawerFooter fontSize='sm' color='white' justifyContent='center' >Harvest Mission Community Church 2021</DrawerFooter>
 			</DrawerContent>

@@ -7,9 +7,14 @@
   background-position-y: 75%  !important;
 }
 
+<<<<<<< HEAD
+.chakra-modal__close-button{
+  margin-top: 10px !important;
+=======
 .chakra-button{
   -webkit-margin-start: 0 !important;
   margin-inline-start: 0 !important;
+>>>>>>> 80e2fd6ac471f2dc433aa8bc7b6ef92e321c85b0
 }
 
 h1{
