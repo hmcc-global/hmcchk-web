@@ -1,8 +1,10 @@
+import { Flex } from "@chakra-ui/react";
+
 const LifeGroupSection = () => {
   return (
-    <>
-      <h1>LIFE Group</h1>
-    </>
+    <Flex w="full" h="100vh" bgColor="lightblue">
+      <h1 color="black">LIFE Group Section</h1>
+    </Flex>
   );
 };
 
