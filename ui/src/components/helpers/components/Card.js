@@ -14,6 +14,7 @@ const Card = (props) => {
       justifyContent="center"
       alignItems="center"
       background={color}
+<<<<<<< 54-homepage
       _hover={{
         background: "rgba(0, 0, 0, 0.2)",
       }}
@@ -28,6 +29,15 @@ const Card = (props) => {
             fontSize={["xs", "1em"]}
             color={textColor}
           >
+=======
+    >
+      <Container>
+        <VStack>
+          <Heading size="2xl" color={titleColor}>
+            {title}
+          </Heading>
+          <Text textAlign="center" color={textColor}>
+>>>>>>> Finish About Us Section
             {text}
           </Text>
         </VStack>
