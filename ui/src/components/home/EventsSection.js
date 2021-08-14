@@ -1,8 +1,10 @@
+import { Flex } from "@chakra-ui/react";
+
 const EventsSection = () => {
   return (
-    <>
-      <h1>Events</h1>
-    </>
+    <Flex w="full" h="100vh">
+      <h1 color="black">Events</h1>
+    </Flex>
   );
 };
 
