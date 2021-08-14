@@ -1,10 +1,10 @@
 .chakra-slide{
   background: url('./ripple.png') !important;
   background-repeat: no-repeat !important;
-  background-color: white !important;
-  background-size: 80% !important;
-  background-position-x: 185%  !important;
-  background-position-y: 65%  !important;
+  background-color: #2C5282 !important;
+  background-size: 70% !important;
+  background-position-x: 120%  !important;
+  background-position-y: 75%  !important;
 }
 
 .chakra-button{
