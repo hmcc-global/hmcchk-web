@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { camelize, sentencize } from "../helpers/formsHelpers";
-import { useSelector, useDispatch } from "react-redux";
-// import { signin } from "../../reducers/userSlice";
+import { useSelector } from "react-redux";
 import {
   FormControl,
   FormLabel,
@@ -38,34 +37,10 @@ const Form = (props) => {
   const { register, handleSubmit, control, formState, setValue } = useForm();
   const { errors } = formState;
   const user = useSelector((state) => state.user);
-  // const dispatch = useDispatch();
 
   const [submissionData, setSubmissionData] = useState(null);
   const [submitStatus, setSubmitStatus] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-
-  // const temporaryLogin = async () => {
-  //   try {
-  //     // const { data } = await axios.post("/api/auth/signup", {
-  //     //   emailAddress: "ghost@test.com",
-  //     //   password: "testing",
-  //     //   fullName: "Simon Riley",
-  //     //   nationality: "British",
-  //     //   lifestage: "Focus",
-  //     //   phoneNumber: "123124124",
-  //     // });
-  //     // console.log(data);
-
-  //     const { data } = await axios.post("/api/auth/login", {
-  //       emailAddress: "ghost@test.com",
-  //       password: "testing",
-  //     });
-  //     dispatch(signin(data));
-  //     console.log(user);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
   const onModalClose = (e) => {
     setModalOpen(false);
