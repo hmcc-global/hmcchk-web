@@ -1,4 +1,3 @@
-import { Box, Stack, StackDivider, HStack } from "@chakra-ui/react";
 import { SocialMediaLinks } from "./SocialMediaLinks";
 import {
   Link,
@@ -10,6 +9,8 @@ import {
   Button,
   Flex,
   Spacer,
+  Divider,
+  Box,
 } from "@chakra-ui/react";
 import { requirePropFactory } from "@material-ui/core";
 import { Copyright } from "./Copyright";
@@ -67,6 +68,7 @@ export default function FooterContainer() {
         <Spacer />
         <VStack spacing="10">
           <LinkGrid />
+          <Divider w={["100%", "100%", "0%"]} />
           <Box minW="100%">
             <Text>Contact Us</Text>
             <Text fontWeight="bold">hongkong@hmcc.net</Text>
