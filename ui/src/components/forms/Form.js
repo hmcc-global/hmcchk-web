@@ -55,7 +55,7 @@ const Form = (props) => {
     if (submissionData) {
       postSubmission(formId, submissionData, "");
     }
-  }, submissionData);
+  }, [submissionData, formId]);
 
   // Helper function to create the input fields
   const createFormField = (fieldData) => {
@@ -117,10 +117,11 @@ const Form = (props) => {
         });
         inputField.push(
           <Controller
+            key={fieldName}
             control={control}
             name={camelize(fieldName)}
             render={({ field: { onChange } }) => (
-              <RadioGroup key={fieldName} onChange={onChange}>
+              <RadioGroup onChange={onChange}>
                 <Stack direction="row">{radioOptions}</Stack>
               </RadioGroup>
             )}
@@ -170,7 +171,7 @@ const Form = (props) => {
     let opts = fieldData.options;
     let result = [];
     result.push(
-      <Heading as="h3" mb="2" size="md">
+      <Heading key="personalInfoHeading" as="h3" mb="2" size="md">
         Personal Information
       </Heading>
     );
@@ -218,11 +219,8 @@ const Form = (props) => {
   };
 
   const createErrorNotifier = (fieldName) => {
-    // let errorElement = sentencize(fieldName) + " is required";
-    // console.log(errors[fieldName], fieldName);
     return (
-      <FormErrorMessage>
-        key={fieldName + "errorMessage"}
+      <FormErrorMessage key={fieldName + "errorMessage"}>
         {errors[fieldName] && "This field is required"}
       </FormErrorMessage>
     );

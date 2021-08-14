@@ -9,21 +9,21 @@ const styles = {};
 const UserFormContainer = (props) => {
   const [formData, setFormData] = useState(null);
 
-  const populateData = async () => {
-    const { id } = props.match.params;
-    const { data } = await axios.get("/api/forms/get-form", {
-      params: { id: id },
-    });
-    try {
-      setFormData(data[0]);
-    } catch (err) {
-      console.log("Error retrieving form data");
-    }
-  };
-
   useEffect(() => {
+    const populateData = async () => {
+      const { id } = props.match.params;
+      const { data } = await axios.get("/api/forms/get-form", {
+        params: { id: id },
+      });
+      try {
+        setFormData(data[0]);
+      } catch (err) {
+        console.log("Error retrieving form data");
+      }
+    };
+
     populateData();
-  }, []);
+  }, [props]);
 
   return (
     <Container maxW="container.md">

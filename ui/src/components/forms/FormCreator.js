@@ -15,7 +15,6 @@ import {
   Box,
   Select,
   ButtonGroup,
-  Stack,
 } from "@chakra-ui/react";
 
 const FormCreator = (props) => {
@@ -55,7 +54,7 @@ const FormCreator = (props) => {
       }
       setFormData(existingFormData.formFields);
     }
-  }, existingFormData);
+  }, [existingFormData, setValuePrefill]);
 
   // Handler for prefillable form arguments
   const onPrefillableSubmit = (data, e) => {
