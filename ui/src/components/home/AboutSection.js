@@ -8,6 +8,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import Card from "../helpers/components/Card";
+import CustomButton from "../helpers/components/CustomButton";
 
 const aboutUrl =
   "https://hongkong.hmcc.net/wp-content/uploads/2021_07_11_Membership_Recognition_Prayer_1-scaled.jpg";
@@ -46,7 +47,7 @@ const AboutSection = () => {
           justify="center"
           display="flex"
         >
-          <VStack w="full" justify="center" spacing={4}>
+          <VStack w="full" justify="center" spacing={8}>
             <Heading color="white" as="h2" fontSize="3vw" alignSelf="baseline">
               {about.title}
             </Heading>
@@ -71,6 +72,19 @@ const AboutSection = () => {
                 textColor="white"
               />
             </HStack>
+            <CustomButton
+              alignSelf="flex-end"
+              bg="rgb(0, 0, 0, 0)"
+              variant="outline"
+              color="white"
+              w="23.5%"
+              _hover={{
+                bg: "white",
+                color: "#1A365D",
+                borderColor: "#1A365D",
+              }}
+              text="More about us >"
+            />
           </VStack>
         </Container>
       </Flex>
