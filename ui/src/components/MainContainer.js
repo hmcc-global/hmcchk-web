@@ -17,7 +17,7 @@ import FooterContainer from "./footer/FooterContainer";
 =======
 import AdminLoginContainer from "./admin/AdminLoginContainer";
 import AdminHome from "./admin/AdminHome";
-import AdminUser from "./admin/AdminUser";
+import AdminUser from "./admin/users/AdminUser";
 import AdminForm from "./admin/AdminForm";
 >>>>>>> user table roughly done
 
