@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { camelize, sentencize } from "../helpers/formsHelpers";
 import { useSelector, useDispatch } from "react-redux";
-import { signin } from "../../reducers/userSlice";
+// import { signin } from "../../reducers/userSlice";
 import {
   FormControl,
   FormLabel,
@@ -38,34 +38,34 @@ const Form = (props) => {
   const { register, handleSubmit, control, formState, setValue } = useForm();
   const { errors } = formState;
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [submissionData, setSubmissionData] = useState(null);
   const [submitStatus, setSubmitStatus] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const temporaryLogin = async () => {
-    try {
-      // const { data } = await axios.post("/api/auth/signup", {
-      //   emailAddress: "ghost@test.com",
-      //   password: "testing",
-      //   fullName: "Simon Riley",
-      //   nationality: "British",
-      //   lifestage: "Focus",
-      //   phoneNumber: "123124124",
-      // });
-      // console.log(data);
+  // const temporaryLogin = async () => {
+  //   try {
+  //     // const { data } = await axios.post("/api/auth/signup", {
+  //     //   emailAddress: "ghost@test.com",
+  //     //   password: "testing",
+  //     //   fullName: "Simon Riley",
+  //     //   nationality: "British",
+  //     //   lifestage: "Focus",
+  //     //   phoneNumber: "123124124",
+  //     // });
+  //     // console.log(data);
 
-      const { data } = await axios.post("/api/auth/login", {
-        emailAddress: "ghost@test.com",
-        password: "testing",
-      });
-      dispatch(signin(data));
-      console.log(user);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //     const { data } = await axios.post("/api/auth/login", {
+  //       emailAddress: "ghost@test.com",
+  //       password: "testing",
+  //     });
+  //     dispatch(signin(data));
+  //     console.log(user);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const onModalClose = (e) => {
     setModalOpen(false);
@@ -73,7 +73,6 @@ const Form = (props) => {
 
   // Handle a form submission event
   const handleSubmitForm = (data, e) => {
-    console.log(user.id);
     if (formId) setSubmissionData(data);
     else console.log("this form doesn't support submission");
   };
@@ -134,15 +133,31 @@ const Form = (props) => {
 
       // Generate the field itself
       let field = null;
-      if (fieldName === "address") {
-        field = (
-          <Textarea
-            key={fieldName}
-            {...register(fieldName, { required: true })}
-          />
-        );
-      } else {
-        field = createGeneralInputField(fieldName, "text", { required: true });
+      switch (fieldName) {
+        case "address":
+          field = (
+            <Textarea
+              key={fieldName}
+              {...register(fieldName, { required: true })}
+            />
+          );
+          break;
+        case "email":
+          field = (
+            <Input
+              key={fieldName}
+              {...register(fieldName, {
+                required: true,
+                pattern: /^\S+@\S+$/i,
+              })}
+            />
+          );
+          break;
+        default:
+          field = createGeneralInputField(fieldName, "text", {
+            required: true,
+          });
+          break;
       }
 
       // Generate validation errors
@@ -280,7 +295,7 @@ const Form = (props) => {
   const createErrorNotifier = (fieldName) => {
     return (
       <FormErrorMessage key={fieldName + "errorMessage"}>
-        {errors[fieldName] && "This field is required"}
+        {errors[fieldName] && "Please fill in this field correctly"}
       </FormErrorMessage>
     );
   };
@@ -392,7 +407,6 @@ const Form = (props) => {
           </Button>
         </Center>
       </form>
-      <Button onClick={temporaryLogin}>LOGIN</Button>
     </Box>
   );
 };
