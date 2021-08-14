@@ -7,6 +7,7 @@ import LoginContainer from "./auth/LoginContainer";
 import FormManager from "./forms/FormManager";
 import EventsPage from "./events/EventsPage";
 import VisitUsPage from "./visit-us/VisitUsPage";
+import ConnectPage from "./connect/ConnectPage";
 import PrivateRoute from "./helpers/PrivateRoute";
 import HomeContainer from "./home/HomeContainer";
 import ConfirmEmailPage from "./email/ConfirmEmailPage";
@@ -69,6 +70,12 @@ const MainContainer = () => {
           path="/visit-us"
           permissions={["public"]}
           component={VisitUsPage}
+        />
+        <PrivateRoute
+          exact
+          path="/connect"
+          permissions={["public"]}
+          component={ConnectPage}
         />
         <PrivateRoute
           exact
