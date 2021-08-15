@@ -25,7 +25,11 @@
     "react-google-button": "^0.7.2",
     "react-google-login": "^5.2.2",
     "react-google-recaptcha": "^2.1.0",
+<<<<<<< HEAD
     "react-hook-form": "^7.12.2",
+=======
+    "react-hook-form": "^7.10.1",
+>>>>>>> 3c564d8... GH-54: Add connect with us page and API
     "react-icons": "^4.2.0",
     "react-property": "^1.0.1",
     "react-redux": "^7.2.4",
