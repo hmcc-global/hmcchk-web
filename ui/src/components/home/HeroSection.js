@@ -16,7 +16,7 @@ const heroUrl =
   "https://hongkong.hmcc.net/wp-content/uploads/2021_Apr_4_Easter_Celebration_Worship_Wide_2-1-min.jpg";
 const heroText = "Transforming Lives,\nTransforming the World";
 const worshipText = "WORSHIP IN-PERSON >";
-const churchText = "CHURCH ONLINE>";
+const churchText = "CHURCH ONLINE >";
 
 const HeroSection = () => {
   return (
@@ -30,7 +30,7 @@ const HeroSection = () => {
     >
       <Container
         maxW={["container.md", "container.lg"]}
-        justify="center"
+        justifyContent="center"
         display="flex"
       >
         <VStack

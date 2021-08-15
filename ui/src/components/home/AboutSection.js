@@ -44,7 +44,7 @@ const AboutSection = () => {
       >
         <Container
           maxW={["container.md", "container.lg"]}
-          justify="center"
+          justifyContent="center"
           display="flex"
         >
           <VStack w="full" justify="center" spacing={8}>
@@ -53,6 +53,7 @@ const AboutSection = () => {
             </Heading>
             <Text color="white">{about.text}</Text>
             <HStack w="full" justify="center">
+              {/* on hover darken */}
               <Card
                 width="full"
                 height={250}
