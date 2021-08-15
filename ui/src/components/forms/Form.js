@@ -128,9 +128,9 @@ const Form = (props) => {
       let field = null;
       switch (fieldName) {
         case "address":
-          field = [
-            <VStack>
-              <HStack w="100%">
+          field = (
+            <Stack direction={"column"}>
+              <Stack direction={["column", "row"]} w="100%">
                 <Box flex={1}>
                   <Input
                     placeholder="Floor/Level"
@@ -143,8 +143,8 @@ const Form = (props) => {
                     {...register("addressFlat", { required: true })}
                   />
                 </Box>
-              </HStack>
-              <HStack w="100%">
+              </Stack>
+              <Stack direction={["column", "row"]} w="100%">
                 <Box flex={1}>
                   <Input
                     placeholder="Street Address"
@@ -158,18 +158,13 @@ const Form = (props) => {
                   >
                     <option value="Kowloon">Kowloon</option>
                     <option value="Hong Kong Island">Hong Kong Island</option>
-                    <option value="New Territories">Kowloon</option>
+                    <option value="New Territories">New Territories</option>
                   </Select>
                 </Box>
-              </HStack>
-            </VStack>,
-          ];
-          // field = (
-          //   <Textarea
-          //     key={fieldName}
-          //     {...register(fieldName, { required: true })}
-          //   />
-          // );
+              </Stack>
+            </Stack>
+          );
+
           break;
         case "email":
           field = (

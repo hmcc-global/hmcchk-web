@@ -51,7 +51,9 @@ const FormManager = (props) => {
       });
 
       if (status !== 200) {
-        alert("There was an issue with the request, please talk to a DB manager")
+        alert(
+          "There was an issue with the request, please talk to a DB manager"
+        );
       }
 
       setValue("formName", data[0].formName);
@@ -98,7 +100,7 @@ const FormManager = (props) => {
     try {
       const { data, status } = await axios.get("/api/forms/get-form");
       if (status !== 200) {
-        throw Error("Something went wrong with the request")
+        throw Error("Something went wrong with the request");
       }
       setFormList(data);
     } catch (err) {
