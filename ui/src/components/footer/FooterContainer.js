@@ -47,7 +47,11 @@ export default function FooterContainer() {
       >
         <VStack spacing="10">
           <Link href="/">
-            <Image h="4vh" src=".\hmcc-logo.svg" alt="Logo of HMCC" />
+            <Image
+              h="4vh"
+              src={process.env.PUBLIC_URL + "/ripple.svg"}
+              alt="Logo of HMCC"
+            />
           </Link>
           <Button
             colorScheme="teal"
