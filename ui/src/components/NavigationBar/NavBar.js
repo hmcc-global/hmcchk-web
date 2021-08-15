@@ -53,7 +53,6 @@ const Navigationbar = () => {
           justify="space-around"
           background="linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.5) 100%, rgba(255, 255, 255, 0.9) 100%)"
           backdrop-filter="blur(39px)"
-          fontFamily="inter"
           align="center"
           fontSize={{ md: "xs", lg: "sm", xl: "md" }}
           h="10.5vh"
