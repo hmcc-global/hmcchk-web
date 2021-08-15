@@ -30,6 +30,7 @@ import {
   ModalContent,
   ModalFooter,
   VStack,
+  HStack,
 } from "@chakra-ui/react";
 
 const Form = (props) => {
@@ -48,7 +49,22 @@ const Form = (props) => {
 
   // Handle a form submission event
   const handleSubmitForm = (data, e) => {
-    if (formId) setSubmissionData(data);
+    let address = {
+      flat: data.addressFlat,
+      floor: data.addressFloor,
+      street: data.addressStreet,
+      district: data.addressDistrict,
+    };
+
+    let modifiedData = data;
+    modifiedData["address"] = address;
+
+    delete modifiedData["addressFlat"];
+    delete modifiedData["addressFloor"];
+    delete modifiedData["addressStreet"];
+    delete modifiedData["addressDistrict"];
+
+    if (formId) setSubmissionData(modifiedData);
     else console.log("this form doesn't support submission");
   };
 
@@ -110,12 +126,48 @@ const Form = (props) => {
       let field = null;
       switch (fieldName) {
         case "address":
-          field = (
-            <Textarea
-              key={fieldName}
-              {...register(fieldName, { required: true })}
-            />
-          );
+          field = [
+            <VStack>
+              <HStack w="100%">
+                <Box flex={1}>
+                  <Input
+                    placeholder="Floor/Level"
+                    {...register("addressFloor", { required: true })}
+                  />
+                </Box>
+                <Box flex={1}>
+                  <Input
+                    placeholder="Room/Flat/Unit/Suite"
+                    {...register("addressFlat", { required: true })}
+                  />
+                </Box>
+              </HStack>
+              <HStack w="100%">
+                <Box flex={1}>
+                  <Input
+                    placeholder="Street Address"
+                    {...register("addressStreet", { required: true })}
+                  />
+                </Box>
+                <Box flex={1}>
+                  <Select
+                    placeholder="District"
+                    {...register("addressDistrict", { required: true })}
+                  >
+                    <option value="Kowloon">Kowloon</option>
+                    <option value="Hong Kong Island">Hong Kong Island</option>
+                    <option value="New Territories">Kowloon</option>
+                  </Select>
+                </Box>
+              </HStack>
+            </VStack>,
+          ];
+          // field = (
+          //   <Textarea
+          //     key={fieldName}
+          //     {...register(fieldName, { required: true })}
+          //   />
+          // );
           break;
         case "email":
           field = (
@@ -138,16 +190,40 @@ const Form = (props) => {
       // Generate validation errors
       let error = createErrorNotifier(fieldName);
 
-      result.push(
-        <FormControl
-          key={fieldName + "Controller"}
-          isInvalid={errors[fieldName]}
-        >
-          {label}
-          {field}
-          {error}
-        </FormControl>
-      );
+      if (fieldName === "address") {
+        result.push(
+          <FormControl
+            key={fieldName + "Controller"}
+            isInvalid={
+              errors["addressFloor"] ||
+              errors["addressFlat"] ||
+              errors["addressStreet"] ||
+              errors["addressDistrict"]
+            }
+          >
+            {label}
+            {field}
+            <FormErrorMessage key={fieldName + "errorMessage"}>
+              {(errors["addressFloor"] ||
+                errors["addressFlat"] ||
+                errors["addressStreet"] ||
+                errors["addressDistrict"]) &&
+                "Please fill in all of the fields!"}
+            </FormErrorMessage>
+          </FormControl>
+        );
+      } else {
+        result.push(
+          <FormControl
+            key={fieldName + "Controller"}
+            isInvalid={errors[fieldName]}
+          >
+            {label}
+            {field}
+            {error}
+          </FormControl>
+        );
+      }
     });
 
     return result;
