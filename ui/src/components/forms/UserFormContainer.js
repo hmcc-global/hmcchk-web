@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import Form from "./Form";
 import { Container } from "@chakra-ui/react";
@@ -40,4 +39,4 @@ const UserFormContainer = (props) => {
   );
 };
 
-export default withStyles(styles)(UserFormContainer);
+export default UserFormContainer;

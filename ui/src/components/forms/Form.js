@@ -3,6 +3,8 @@ import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { camelize, sentencize } from "../helpers/formsHelpers";
 import { useSelector } from "react-redux";
+import { CheckCircleIcon } from "@chakra-ui/icons";
+
 import {
   FormControl,
   FormLabel,
@@ -363,11 +365,14 @@ const Form = (props) => {
               fontWeight="700"
               mt={6}
               flex={1}
+              textAlign="center"
             >
               Submitted successfully
             </Text>
             <Box flex={4}>
-              <Image src={process.env.PUBLIC_URL + "/big-green-check.png"} />
+              <Center w="100%" h="100%">
+                <CheckCircleIcon mt={5} w="70%" h="70%" color="#79B71A" />
+              </Center>
             </Box>
           </VStack>
           <ModalFooter />
