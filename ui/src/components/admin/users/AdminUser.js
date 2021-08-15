@@ -22,21 +22,14 @@ import {
   Stack,
   useDisclosure,
 } from "@chakra-ui/react";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-} from "@chakra-ui/react";
+
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy } from "react-table";
 //import Header from "./navigation/Header";
 import SidebarWithHeader from "../navigation/Sidebar";
 import ViewUser from "./ViewUserComponent";
 import EditUser from "./EditUserComponent";
+import DeleteUser from "./DeleteUserComponent";
 
 const smVariant = { navigation: "drawer", navigationButton: true };
 const mdVariant = { navigation: "sidebar", navigationButton: false };
@@ -68,7 +61,6 @@ export default function App(props) {
   const data = user;
 
   //View User Component
-  const { isOpen, onOpen, onClose } = useDisclosure();
   //const [showUser, setShowUser] = useState(false);
 
   // const viewUser = () => {
@@ -158,9 +150,7 @@ export default function App(props) {
                       <Stack spacing={2} direction="row" align="center">
                         <ViewUser props={data._id} />
                         <EditUser></EditUser>
-                        <Button colorScheme="red" size="sm">
-                          Delete
-                        </Button>
+                        <DeleteUser></DeleteUser>
                       </Stack>
                     </Td>
                   </Tr>
