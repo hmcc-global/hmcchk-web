@@ -221,12 +221,12 @@ const FormCreator = (props) => {
           <FormControl>
             <Controller
               control={controlPrefill}
-              name="lifeGroupCheckbox"
-              key="lifeGroupCheckbox"
+              name="addressCheckbox"
+              key="addressCheckbox"
               defaultValue={false}
               render={({ field: { onChange, value, ref } }) => (
                 <Checkbox onChange={onChange} ref={ref} isChecked={value}>
-                  LIFE Group
+                  Address
                 </Checkbox>
               )}
             />
@@ -234,12 +234,25 @@ const FormCreator = (props) => {
           <FormControl>
             <Controller
               control={controlPrefill}
-              name="addressCheckbox"
-              key="addressCheckbox"
+              name="countryOfOriginCheckbox"
+              key="countryOfOriginCheckbox"
               defaultValue={false}
               render={({ field: { onChange, value, ref } }) => (
                 <Checkbox onChange={onChange} ref={ref} isChecked={value}>
-                  Address
+                  Country of Origin
+                </Checkbox>
+              )}
+            />
+          </FormControl>
+          <FormControl>
+            <Controller
+              control={controlPrefill}
+              name="lifeGroupCheckbox"
+              key="lifeGroupCheckbox"
+              defaultValue={false}
+              render={({ field: { onChange, value, ref } }) => (
+                <Checkbox onChange={onChange} ref={ref} isChecked={value}>
+                  LIFE Group
                 </Checkbox>
               )}
             />
