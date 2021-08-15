@@ -17,7 +17,7 @@ const colorfulString = (text, colorArray) => {
   let result = [];
   for (let i = 0; i < text.length; i++) {
     result[i] = (
-      <span id={i} style={{ color: colorArray[i] }}>
+      <span key={i} style={{ color: colorArray[i] }}>
         {text[i]}
       </span>
     );
@@ -37,7 +37,7 @@ const LifeGroupSection = () => {
     <Flex w="full" h="100vh">
       <Container
         maxW={["container.md", "container.lg"]}
-        justify="center"
+        justifyContent="center"
         display="flex"
       >
         <HStack w="100%">
