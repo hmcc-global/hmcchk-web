@@ -1,5 +1,7 @@
 import { Box, Container, Heading, Text, VStack } from "@chakra-ui/react";
 import ExperienceHmcc from "./ExperienceHmcc";
+import Faq from "./Faq";
+import OurMinistries from "./OurMinistries";
 
 const ConnectPage = (props) => {
   return (
@@ -24,6 +26,8 @@ const ConnectPage = (props) => {
           </Heading>
         </Box>
         <ExperienceHmcc />
+        <OurMinistries />
+        <Faq />
       </VStack>
     </Container>
   );
