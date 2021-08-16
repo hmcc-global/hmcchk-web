@@ -11,6 +11,7 @@ import VisitUsPage from "./visit-us/VisitUsPage";
 import PrivateRoute from "./helpers/PrivateRoute";
 import HomeContainer from "./home/HomeContainer";
 import ConfirmEmailPage from "./email/ConfirmEmailPage";
+import UserProfileContainer from "./userProfile/UserProfileContainer";
 
 const MainContainer = () => {
   return (
@@ -69,6 +70,12 @@ const MainContainer = () => {
           path="/email/confirm/:token"
           permissions={["public"]}
           component={ConfirmEmailPage}
+        />
+        <PrivateRoute
+          exact
+          path="/profile"
+          permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
+          component={UserProfileContainer}
         />
       </Switch>
     </chakra.main>
