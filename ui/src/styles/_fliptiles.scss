@@ -3,24 +3,26 @@
 
   /* This container is needed to position the front and back side */
   .flipper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.8s;
+    transition: transform 0.4s;
     transform-style: preserve-3d;
 
     /* Position the front and back side */
     .front,
     .back {
       position: absolute;
-      width: 100%;
-      height: 100%;
       -webkit-backface-visibility: hidden; /* Safari */
       backface-visibility: hidden;
     }
 
+    /* Style the front side */
+    .front {
+      z-index: 2;
+      transform: rotateY(0);
+    }
+
     /* Style the back side */
     .back {
+      z-index: 1;
       transform: rotateY(180deg);
     }
   }
