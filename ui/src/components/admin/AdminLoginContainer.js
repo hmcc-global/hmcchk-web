@@ -34,7 +34,7 @@ const AdminLoginContainer = (props) => {
   useEffect(() => {}, []);
 
   return (
-    <Flex height="85vh" alignItems="center" justifyContent="center">
+    <Flex alignItems="center" justifyContent="center">
       <Flex direction="column" bg={formBackground} p={12} rounded={6}>
         <Heading mb={6} alignItems="center">
           HMCC-HK Admin

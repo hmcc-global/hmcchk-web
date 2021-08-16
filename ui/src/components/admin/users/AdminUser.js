@@ -58,6 +58,10 @@ export default function App(props) {
     getData();
   }, []);
 
+  const refreshHandler = () => {
+    getData();
+  };
+
   const data = user;
 
   //View User Component
@@ -103,6 +107,10 @@ export default function App(props) {
         isOpen={isSidebarOpen}
         onClose={toggleSidebar}
       >
+        <Stack mb={3} direction="row">
+          <Button onClick={() => refreshHandler()}>Refresh</Button>
+          <Button>Export</Button>
+        </Stack>
         <Flex bg={useColorModeValue("gray.200")} justifyContent="center">
           <Table
             variant="striped"
