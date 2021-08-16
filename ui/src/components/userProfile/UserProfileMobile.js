@@ -8,7 +8,10 @@ import {
   TabPanel,
   FormControl,
   FormLabel,
+<<<<<<< HEAD
   FormHelperText,
+=======
+>>>>>>> e4173e6c (GH-57 80% functioning desktop view user page)
   Input,
   InputGroup,
   Button,
