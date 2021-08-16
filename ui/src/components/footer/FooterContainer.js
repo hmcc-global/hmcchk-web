@@ -28,7 +28,7 @@ export default function FooterContainer() {
       bg="#222222"
       color="white"
     >
-      <Container maxW="container.xl">
+      <Container maxW="container.lg">
         <Flex
           direction={["column", "column", "row"]}
           w={("80%", "80%", "100%")}
@@ -37,7 +37,12 @@ export default function FooterContainer() {
           <VStack spacing="10">
             <Link href="/">
               <Image
-                h="4vh"
+                h={{
+                  base: "3.5vh",
+                  sm: "4vh",
+                  md: "4.5vh",
+                  lg: "5vh",
+                }}
                 src={process.env.PUBLIC_URL + "/ripple.svg"}
                 alt="Logo of HMCC"
               />
@@ -70,10 +75,11 @@ export default function FooterContainer() {
             </Box>
           </VStack>
         </Flex>
+
+        <Center py="5vh">
+          <Copyright />
+        </Center>
       </Container>
-      <Center padding="10">
-        <Copyright />
-      </Center>
     </Box>
   );
 }
