@@ -81,13 +81,29 @@ const EditUser = (props) => {
     getData();
   }, []);
 
-  const data = user;
+  const refreshHandler = () => {
+    getData();
+  };
+
+  let data = user;
+  data.isMember = data.isMember.toString();
+  data.isBaptised = data.isBaptised.toString();
 
   const onUpdateSubmit = async (data, e) => {
     // Format the data
     setEditData(data);
 
     data.accessType = data.accessType.toLowerCase();
+    if (data.isDeleted == "true") {
+      data.isDeleted = true;
+    } else if (data.isDeleted == "false") {
+      data.isDeleted = false;
+    }
+    if (data.isBaptised == "true") {
+      data.isBaptised = true;
+    } else if (data.isBaptised == "false") {
+      data.isBaptised = false;
+    }
 
     const status = await axios.put("/api/users/update", {
       params: data,
@@ -237,7 +253,11 @@ const EditUser = (props) => {
             </ModalBody>
 
             <ModalFooter>
-              <Button variant="ghost" mr={3} onClick={onClose}>
+              <Button
+                variant="ghost"
+                mr={3}
+                onClick={(() => refreshHandler(), onClose)}
+              >
                 Cancel
               </Button>
               <Button colorScheme="teal" type="submit">

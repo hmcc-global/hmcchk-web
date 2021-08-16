@@ -34,6 +34,10 @@ const DeleteUser = ({ props }) => {
     getData();
   }, []);
 
+  const refreshHandler = () => {
+    getData();
+  };
+
   const data = user;
 
   const onDeleteSubmit = async (data, e) => {

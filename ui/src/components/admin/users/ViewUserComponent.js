@@ -33,6 +33,10 @@ const ViewUser = ({ props }) => {
     getData();
   }, []);
 
+  const refreshHandler = () => {
+    getData();
+  };
+
   const data = user;
   console.log(data);
 
