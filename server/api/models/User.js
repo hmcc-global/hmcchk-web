@@ -28,12 +28,12 @@ email status until they click the link in the confirmation email.`,
       type: "string",
       required: true,
     },
-    nationality: {
+    countryOfOrigin: {
       type: "string",
       required: true,
     },
     address: {
-      type: "string",
+      type: "json",
     },
     birthday: {
       type: "ref",
