@@ -4,9 +4,11 @@ import {
   Center,
   Stack,
   Box,
+  Text,
   Image,
   Button,
   Menu,
+  Container,
   MenuButton,
   MenuList,
   MenuItem,
@@ -26,7 +28,7 @@ import MainMenu from "./MainMenu";
 const Navigationbar = () => {
   const [loggedIn, setLoggedIn] = useState(true);
   const username = "name";
-  const welcomeMsg = ["Login or Sign up", `Hi ${username}`];
+  const welcomeMsg = ["Login or Sign up", `Hi, ${username}`];
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const liveScStyle = {
@@ -57,105 +59,117 @@ const Navigationbar = () => {
           fontSize={{ md: "xs", lg: "sm", xl: "md" }}
           h="10.5vh"
         >
-          <Center>
-            <Box position="relative">
-              <Link href="/">
-                <Image
-                  h={{
-                    base: "3.5vh",
-                    sm: "4vh",
-                    md: "4.5vh",
-                    lg: "5vh",
-                    xl: "6vh",
-                  }}
-                  src={process.env.PUBLIC_URL + "/ripple_black.svg"}
-                  alt="Logo of HMCC"
-                />
-              </Link>
-            </Box>
-          </Center>
-          <Stack
-            fontWeight="600"
-            spacing={10}
-            color="black"
-            justify="center"
-            align="center"
-            display={{ base: "none", md: "flex" }}
-            marginLeft="40px"
-            isInline
-          >
-            <Box position="relative">
-              <Link href="/visit">
-                <a>VISIT</a>
-              </Link>
-            </Box>
-            <Box position="relative">
-              <Link href="/about">
-                <a>ABOUT</a>
-              </Link>
-            </Box>
-            <Box position="relative">
-              <Link href="/connect">
-                <a>CONNECT</a>
-              </Link>
-            </Box>
-            <Box position="relative">
-              <Link href="/event">
-                <a>EVENTS</a>
-              </Link>
-            </Box>
-            <Box position="relative">
-              <Link href="/sermon">
-                <a>SERMONS</a>
-              </Link>
-            </Box>
-            <Box position="relative">
-              <Link href="/give">
-                <a>GIVE</a>
-              </Link>
-            </Box>
-          </Stack>
-          <Stack
-            spacing={8}
-            color="black"
-            justify="right"
-            align="right"
-            alignItems="center"
-            isInline
-          >
-            <Box
-              fontWeight="600"
-              color="#1A365D"
-              display={{ base: "none", md: "flex" }}
+          <Container maxW="container.lg">
+            <Flex
+              justify="space-around"
+              align="center"
+              fontSize={{ md: "xs", lg: "sm", xl: "md" }}
+              h="10.5vh"
             >
-              {loggedIn ? (
-                <Menu>
-                  <MenuButton>{welcomeMsg[1]}</MenuButton>
-                  <MenuList>
-                    <MenuItem href="/">View Profile</MenuItem>
-                    <MenuItem href="/">Log Out</MenuItem>
-                  </MenuList>
-                </Menu>
-              ) : (
-                <Link href="/">{welcomeMsg[0]}</Link>
-              )}
-            </Box>
-            <Box>
-              <Button
-                ref={btnRef}
-                onClick={onOpen}
-                style={{ background: "none" }}
+              <Box position="relative">
+                <Link href="/">
+                  <Image
+                    h={{
+                      base: "3.5vh",
+                      sm: "4vh",
+                      md: "4.5vh",
+                      lg: "5vh",
+                    }}
+                    src={process.env.PUBLIC_URL + "/ripple_black.svg"}
+                    alt="Logo of HMCC"
+                  />
+                </Link>
+              </Box>
+
+              <Stack
+                fontWeight="600"
+                spacing={10}
+                color="black"
+                justify="center"
+                align="center"
+                display={{ base: "none", md: "flex" }}
+                marginLeft="40px"
+                isInline
               >
-                <Image
-                  h="5vh"
-                  src={process.env.PUBLIC_URL + "/menu.svg"}
-                  alt="Menu Button"
-                />
-              </Button>
-            </Box>
-          </Stack>
+                <Box position="relative">
+                  <Link href="/visit">
+                    <a>VISIT</a>
+                  </Link>
+                </Box>
+                <Box position="relative">
+                  <Link href="/about">
+                    <a>ABOUT</a>
+                  </Link>
+                </Box>
+                <Box position="relative">
+                  <Link href="/connect">
+                    <a>CONNECT</a>
+                  </Link>
+                </Box>
+                <Box position="relative">
+                  <Link href="/event">
+                    <a>EVENTS</a>
+                  </Link>
+                </Box>
+                <Box position="relative">
+                  <Link href="/sermon">
+                    <a>SERMONS</a>
+                  </Link>
+                </Box>
+                <Box position="relative">
+                  <Link href="/give">
+                    <a>GIVE</a>
+                  </Link>
+                </Box>
+              </Stack>
+              <Stack
+                spacing={8}
+                color="black"
+                justify="right"
+                align="right"
+                alignItems="center"
+                isInline
+              >
+                <Box
+                  fontWeight="600"
+                  color="#1A365D"
+                  display={{ base: "none", md: "flex" }}
+                >
+                  {loggedIn ? (
+                    <Menu>
+                      <MenuButton>
+                        <Text fontWeight="600">{welcomeMsg[1]}</Text>
+                      </MenuButton>
+                      <MenuList>
+                        <MenuItem href="/">View Profile</MenuItem>
+                        <MenuItem href="/">Log Out</MenuItem>
+                      </MenuList>
+                    </Menu>
+                  ) : (
+                    <Link href="/">
+                      <Text fontWeight="600">{welcomeMsg[0]}</Text>
+                    </Link>
+                  )}
+                </Box>
+                <Box>
+                  <Button
+                    ref={btnRef}
+                    onClick={onOpen}
+                    style={{ background: "none" }}
+                  >
+                    <Image
+                      h="3vh"
+                      src={process.env.PUBLIC_URL + "/menu.svg"}
+                      alt="Menu Button"
+                    />
+                  </Button>
+                </Box>
+              </Stack>
+            </Flex>
+          </Container>
         </Flex>
       </Flex>
+
       {currDate == "Tue" ? (
         <Flex
           w="100vw"
