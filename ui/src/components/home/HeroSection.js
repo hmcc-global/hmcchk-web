@@ -28,11 +28,7 @@ const HeroSection = () => {
       bgPosition="center center"
       justify="center"
     >
-      <Container
-        maxW={["container.md", "container.lg"]}
-        justifyContent="center"
-        display="flex"
-      >
+      <Container maxW="container.lg" justifyContent="center" display="flex">
         <VStack
           w="full"
           justify="center"
