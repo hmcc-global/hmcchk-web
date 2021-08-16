@@ -35,11 +35,11 @@ the account verification message.)`,
       description: "The user's full name.",
     },
 
-    nationality: {
+    countryOfOrigin: {
       required: true,
       type: "string",
       example: "Hong Kong",
-      description: "The user's nationality or country of origin",
+      description: "The user's country of origin",
     },
 
     lifestage: {
@@ -81,7 +81,14 @@ the account verification message.)`,
   },
 
   fn: async function (
-    { emailAddress, password, fullName, nationality, lifestage, phoneNumber },
+    {
+      emailAddress,
+      password,
+      fullName,
+      countryOfOrigin,
+      lifestage,
+      phoneNumber,
+    },
     exits
   ) {
     const newEmailAddress = emailAddress.toLowerCase();
@@ -95,7 +102,7 @@ the account verification message.)`,
             email: newEmailAddress,
             password: await sails.helpers.passwords.hashPassword(password),
             fullName,
-            nationality,
+            countryOfOrigin,
             lifestage,
             phoneNumber,
           },
