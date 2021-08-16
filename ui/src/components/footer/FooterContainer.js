@@ -88,9 +88,6 @@ export default function FooterContainer() {
           <Copyright />
         </Center>
       </Container>
-      <Center padding="10">
-        <Copyright />
-      </Center>
     </Box>
   );
 }
