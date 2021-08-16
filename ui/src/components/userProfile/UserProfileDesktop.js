@@ -32,13 +32,13 @@ import {
 
 const UserProfileDesktop = (props) => {
   const user = useSelector((state) => state.user);
-  const { register, reset, control, handleSubmit, setValue, formState } =
+  const { register, control, handleSubmit, setValue, formState } =
     useForm();
   const [userData, setUserData] = useState(null);
 
+  // Only allow setting field values that are defined here
   const settableDataFields = [
     "email",
-    "nationality",
     "countryOfOrigin",
     "birthday",
     "campus",
@@ -65,18 +65,20 @@ const UserProfileDesktop = (props) => {
   };
 
   const handleEditUserInformation = async (data, e) => {
-    data.address =
-      data["addressFloor"] +
-      " " +
-      data["addressFlat"] +
-      " " +
-      data["addressStreet"] +
-      " " +
-      data["addressDistrict"];
+    data.address = {
+      floor: data["addressFloor"],
+      flat: data["addressFlat"],
+      street: data["addressStreet"],
+      district: data["addressDistrict"],
+    };
+
+    // Sanitize input
     delete data["addressFloor"];
     delete data["addressFlat"];
     delete data["addressStreet"];
     delete data["addressDistrict"];
+
+    // Don't allow email to be reset or changed!
     delete data["email"];
 
     data.fullName = data.firstName + " " + data.lastName;
@@ -86,8 +88,6 @@ const UserProfileDesktop = (props) => {
         delete data[key];
       }
     }
-
-    console.log(data);
 
     data.id = user.id;
 
@@ -109,6 +109,14 @@ const UserProfileDesktop = (props) => {
             let firstName = nameParts.join(" ");
             setValue("firstName", firstName);
             setValue("lastName", lastName);
+          case "address":
+            if (userData[key]) {
+              setValue("addressFloor", userData[key]["floor"]);
+              setValue("addressFlat", userData[key]["flat"]);
+              setValue("addressStreet", userData[key]["street"]);
+              setValue("addressDistrict", userData[key]["district"]);
+            }
+
           default:
             setValue(key, userData[key]);
             break;
@@ -241,7 +249,7 @@ const UserProfileDesktop = (props) => {
                     <Input
                       size="sm"
                       borderRadius="5"
-                      {...register("nationality", { required: true })}
+                      {...register("countryOfOrigin", { required: true })}
                     />
                   </FormControl>
                   <FormControl>
