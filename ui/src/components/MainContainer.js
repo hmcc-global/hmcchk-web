@@ -22,6 +22,7 @@ import FooterContainer from "./footer/FooterContainer";
 import NoMatch from "./errors/NoMatch";
 import ConnectFloatButton from "./connect-float/ConnectFloatButton";
 import UserFormContainer from "./forms/UserFormContainer";
+import UserProfileContainer from "./userProfile/UserProfileContainer";
 
 const MainContainer = () => {
   return (
@@ -123,6 +124,12 @@ const MainContainer = () => {
           path="/connect"
           permissions={["public"]}
           component={ConnectPage}
+        />
+        <PrivateRoute
+          exact
+          path="/profile"
+          permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
+          component={UserProfileContainer}
         />
       </Switch>
       <FooterContainer />
