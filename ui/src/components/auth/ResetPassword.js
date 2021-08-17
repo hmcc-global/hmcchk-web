@@ -66,8 +66,9 @@ const ResetPassword = (props) => {
     boxSizing: "border-box",
     borderRadius: "6px",
     padding: "3px",
-    width: { sm: "200px", md: "300px" },
+    width: "300px",
     color: "black",
+    paddingLeft: "5px",
   };
 
   const submitBoxStyle = {
@@ -79,6 +80,7 @@ const ResetPassword = (props) => {
     boxSizing: "border-box",
     backdropFilter: "blur(6px)",
     borderRadius: "10px",
+    height: "40px",
     width: "250px",
     fontWeight: "bold",
   };
@@ -99,99 +101,80 @@ const ResetPassword = (props) => {
   return (
     <>
       <Stack background="#2C5282" color="white" h="100vh">
-        <Container maxW="container.lg">
-          <Flex w="100vw">
-            <Box>
-              <Link>
-                <ChevronLeftIcon boxSize={10} />
-                Return to hongkong.hmcc.net
-              </Link>
-            </Box>
-          </Flex>
-          <Flex justifyContent="center">
-            <VStack justify="center" align="center" spacing={["3vh"]} py="5vh">
-              <Image
-                h={{
-                  base: "3.5vh",
-                  sm: "4vh",
-                  md: "4.5vh",
-                  lg: "5vh",
-                  xl: "6vh",
-                }}
-                src={`${process.env.PUBLIC_URL}/images/ripple.png`}
-                alt="Logo of HMCC"
-              />
-              <Text
-                fontSize={[24, 24, 28, 32]}
-                fontWeight="bold"
-                textAlign="center"
-              >
-                Hi name, you seem to have forgotten your password please enter
-                your new password below.
-              </Text>
-              <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-                <VStack>
-                  <Text>Enter Your New Password</Text>
-                  <input
-                    type="password"
-                    {...register("password", {
-                      required: "You must specify a password",
-                      minLength: {
-                        value: 8,
-                        message: "Password must have at least 8 characters",
-                      },
-                    })}
-                  />
+        <Flex w="100vw">
+          <Box>
+            <Link>
+              <ChevronLeftIcon boxSize={10} />
+              Return to hongkong.hmcc.net
+            </Link>
+          </Box>
+        </Flex>
+        <Flex justifyContent="center">
+          <VStack justify="center" align="center" spacing={["3vh"]} py="5vh">
+            <Image
+              marginBottom="15px"
+              h={{ base: "6vh", sm: "8vh", md: "10vh", lg: "12vh", xl: "15vh" }}
+              src={`${process.env.PUBLIC_URL}/images/ripple.png`}
+              alt="Logo of HMCC"
+            />
+            <Text
+              fontSize={[24, 24, 28, 32]}
+              fontWeight="bold"
+              textAlign="center"
+            >
+              Hi name, you seem to have forgotten your password please enter
+              your new password below.
+            </Text>
+            <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+              <VStack>
+                <Text>Enter Your New Password</Text>
+                <input
+                  type="password"
+                  {...register("password", { required: true })}
+                  placeholder="Password"
+                  style={inputBoxStyle}
+                />
 
-                  <Center>
-                    <Box maxW="174">
-                      <Text
-                        color="#FED7D7"
-                        w="50vw"
-                        fontSize={[12, 12, 12, 14]}
-                      >
-                        Your new password should consist of:
-                      </Text>
-                      <UnorderedList
-                        color="#FED7D7"
-                        w="50vw"
-                        fontSize={[12, 12, 12, 14]}
-                      >
-                        <ListItem>At least 8 characters in length</ListItem>
-                        <ListItem>
-                          Mixture of both uppercase and lowercase characters
-                        </ListItem>
-                        <ListItem>Contains at least one number</ListItem>
-                        <ListItem>
-                          Contains at least one special character
-                        </ListItem>
-                      </UnorderedList>
-                    </Box>
-                  </Center>
-                  <Text>Re-enter Your New Password</Text>
-                  <input
-                    type="password"
-                    {...register("password", {
-                      required: "You must specify a password",
-                      minLength: {
-                        value: 8,
-                        message: "Password must have at least 8 characters",
-                      },
-                    })}
-                  />
-                  <Box py="3vh">
-                    <input
-                      type="submit"
-                      name="change password"
-                      value="Change Password"
-                      style={submitBoxStyle}
-                    />
+                <Center>
+                  <Box maxW="300">
+                    <Text color="#FED7D7" w="50vw" fontSize={[12, 12, 12, 14]}>
+                      Your new password should consist of:
+                    </Text>
+                    <UnorderedList
+                      color="#FED7D7"
+                      w="300"
+                      fontSize={[12, 12, 12, 14]}
+                    >
+                      <ListItem>At least 8 characters in length</ListItem>
+                      <ListItem>
+                        Mixture of both uppercase and lowercase characters
+                      </ListItem>
+                      <ListItem>Contains at least one number</ListItem>
+                      <ListItem>
+                        Contains at least one special character
+                      </ListItem>
+                    </UnorderedList>
                   </Box>
-                </VStack>
-              </form>
-            </VStack>
-          </Flex>
-        </Container>
+                </Center>
+                <Text>Re-enter Your New Password</Text>
+                <input
+                  type="password"
+                  {...register("password", { required: true })}
+                  placeholder="Password"
+                  style={inputBoxStyle}
+                />
+                <Box py="3vh">
+                  <input
+                    type="submit"
+                    name="change password"
+                    value="Change Password"
+                    style={submitBoxStyle}
+                  />
+                </Box>
+              </VStack>
+            </form>
+          </VStack>
+        </Flex>
       </Stack>
       {/* { <Paper className={classes.paper}>
         <Card>{user.email}</Card>

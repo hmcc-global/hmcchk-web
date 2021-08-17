@@ -22,7 +22,7 @@ import {
 } from "@chakra-ui/react";
 import { SocialIcon } from "react-social-icons";
 
-const RecoverPassword = (props) => {
+const PasswordSubmitted = (props) => {
   const { classes } = props;
   const [token, setToken] = useState("null token");
   const dispatch = useDispatch();
@@ -99,59 +99,31 @@ const RecoverPassword = (props) => {
   return (
     <>
       <Stack background="#2C5282" color="white" h="100vh">
-        <Container maxW="container.lg">
-          <Flex w="100vw">
-            <Box>
-              <Link>
-                <ChevronLeftIcon boxSize={10} />
-                Return to hongkong.hmcc.net
-              </Link>
-            </Box>
-          </Flex>
-          <Flex justifyContent="center">
-            <VStack justify="center" align="center" spacing={["3vh"]} py="5vh">
-              <Image
-                marginBottom="15px"
-                h={{
-                  base: "6vh",
-                  sm: "8vh",
-                  md: "10vh",
-                  lg: "12vh",
-                  xl: "15vh",
-                }}
-                src={`${process.env.PUBLIC_URL}/images/ripple.png`}
-                alt="Logo of HMCC"
-              />
-              <Text fontSize={[24, 24, 28, 32]} fontWeight="bold">
-                Recover Password
-              </Text>
-              <Text fontSize={[14, 14, 20, 24]} fontWeight="semibold">
-                Please verify your email for us. Once you do, we'll send
-                instructions to reset your password
-              </Text>
-              <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-                <VStack spacing={["3vh"]}>
-                  <input
-                    {...register("email", { required: true })}
-                    placeholder="Email"
-                    style={inputBoxStyle}
-                  />
-                  <Text color="#FED7D7" w="50vw" fontSize={[12, 12, 12, 14]}>
-                    Please input the email you used to create your HMCC account
-                    This will only be applicable if you signed up using your
-                    personal email
-                  </Text>
-                  <input
-                    type="submit"
-                    name="email link"
-                    value="Email me a recovery link"
-                    style={submitBoxStyle}
-                  />
-                </VStack>
-              </form>
-            </VStack>
-          </Flex>
-        </Container>
+        <Flex w="100vw">
+          <Box>
+            <Link>
+              <ChevronLeftIcon boxSize={10} />
+              Return to hongkong.hmcc.net
+            </Link>
+          </Box>
+        </Flex>
+        <Flex justifyContent="center">
+          <VStack justify="center" align="center" spacing={["3vh"]} py="5vh">
+            <Image
+              marginBottom="15px"
+              h={{ base: "6vh", sm: "8vh", md: "10vh", lg: "12vh", xl: "15vh" }}
+              src={`${process.env.PUBLIC_URL}/images/ripple.png`}
+              alt="Logo of HMCC"
+            />
+            <Text fontSize={[24, 24, 28, 32]} fontWeight="bold">
+              You're all set!
+            </Text>
+            <Text fontSize={[14, 14, 20, 24]} fontWeight="semibold">
+              If an account under your email address exists, an email will be
+              sent with further instructions.
+            </Text>
+          </VStack>
+        </Flex>
       </Stack>
       {/* { <Paper className={classes.paper}>
         <Card>{user.email}</Card>
@@ -169,4 +141,4 @@ const RecoverPassword = (props) => {
   );
 };
 
-export default RecoverPassword;
+export default PasswordSubmitted;
