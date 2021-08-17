@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
 import { useForm } from "react-hook-form";
@@ -29,7 +29,12 @@ const ResetPassword = (props) => {
   const [token, setToken] = useState("null token");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    watch,
+  } = useForm();
   const [result, setResult] = useState("");
   const onSubmit = (data) => setResult(JSON.stringify(data));
 
@@ -98,6 +103,9 @@ const ResetPassword = (props) => {
     fontWeight: "bold",
   };
 
+  const password = useRef({});
+  password.current = watch("password", "");
+
   return (
     <>
       <Stack background="#2C5282" color="white" h="100vh">
@@ -129,12 +137,25 @@ const ResetPassword = (props) => {
               <VStack>
                 <Text>Enter Your New Password</Text>
                 <input
+                  id="password"
+                  {...register("password", {
+                    required: "required",
+                    pattern: {
+                      value:
+                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                      message: "Your Password does not fulfill the criteria", // JS only: <p>error message</p> TS only support string
+                    },
+                  })}
                   type="password"
-                  {...register("password", { required: true })}
+                  name="password"
                   placeholder="Password"
                   style={inputBoxStyle}
                 />
-
+                {errors.password && (
+                  <Text color="red" fontSize={[12, 12, 12, 14]}>
+                    {errors.password.message}
+                  </Text>
+                )}
                 <Center>
                   <Box maxW="300">
                     <Text color="#FED7D7" w="50vw" fontSize={[12, 12, 12, 14]}>
@@ -158,11 +179,24 @@ const ResetPassword = (props) => {
                 </Center>
                 <Text>Re-enter Your New Password</Text>
                 <input
+                  id="password_repeat"
+                  name="password_repeat"
+                  {...register("password_repeat", {
+                    required: "required",
+                    validate: (value) =>
+                      value === password.current ||
+                      "The passwords do not match",
+                  })}
                   type="password"
-                  {...register("password", { required: true })}
                   placeholder="Password"
                   style={inputBoxStyle}
                 />
+
+                {errors.password_repeat && (
+                  <Text color="red" fontSize={[12, 12, 12, 14]}>
+                    {errors.password_repeat.message}
+                  </Text>
+                )}
                 <Box py="3vh">
                   <input
                     type="submit"
