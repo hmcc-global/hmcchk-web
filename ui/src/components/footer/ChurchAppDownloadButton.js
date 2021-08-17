@@ -8,14 +8,14 @@ export function ChurchAppDownloadButton() {
         </Text>
       </Box>
       <HStack>
-        <Link href="https://tithely.app.link/harvest-mission-community-church-hong-kong">
+        <Link target='_blank' href="https://tithely.app.link/harvest-mission-community-church-hong-kong">
           <Image
             h="40px"
             objectFit="cover"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/135px-Download_on_the_App_Store_Badge.svg.png"
           />
         </Link>
-        <Link href="https://tithely.app.link/harvest-mission-community-church-hong-kong">
+        <Link target='_blank' href="https://tithely.app.link/harvest-mission-community-church-hong-kong">
           <Image
             h="40px"
             objectFit="cover"

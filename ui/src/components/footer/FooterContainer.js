@@ -43,7 +43,7 @@ export default function FooterContainer() {
                   md: "4.5vh",
                   lg: "5vh",
                 }}
-                src={process.env.PUBLIC_URL + "/ripple.svg"}
+                src={process.env.PUBLIC_URL + "/images/ripple.svg"}
                 alt="Logo of HMCC"
               />
             </Link>
