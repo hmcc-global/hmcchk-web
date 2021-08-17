@@ -4,16 +4,13 @@ import {
   Center,
   Flex,
   Heading,
-  Icon,
   Image,
-  Link,
   LinkBox,
   LinkOverlay,
   SimpleGrid,
   Spacer,
   Stack,
   Text,
-  VStack,
 } from "@chakra-ui/react";
 import { AiOutlineInstagram } from "react-icons/ai";
 
