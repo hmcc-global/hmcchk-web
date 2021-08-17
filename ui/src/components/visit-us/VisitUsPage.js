@@ -1,12 +1,15 @@
 import {
   AspectRatio,
   Box,
+  Center,
   Container,
   Flex,
   Heading,
   Icon,
   Link,
-  Stack,
+  LinkBox,
+  LinkOverlay,
+  Spacer,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -15,22 +18,23 @@ import Faq from "./Faq";
 
 const VisitUsPage = (props) => {
   return (
-    <Container maxW="container.xl" py={10}>
-      <VStack spacing={[4, 12]} align="stretch">
+    <Container maxW="container.lg" py={10}>
+      <VStack spacing={[4, 10]} align="stretch">
         <Box
           borderWidth="1px"
           borderRadius="20"
           bgImage={`url('${process.env.PUBLIC_URL}/images/visitus/header-banner.jpg')`}
           bgPosition="center"
           bgSize="cover"
-          px={[8, 16, 36]}
+          px={[6, 12, 36]}
           py={[8, 16, 20]}
           mb={[4, 0]}
         >
           <Heading
             as="h2"
-            fontSize={["2.25em", "4em"]}
+            fontSize={["5xl", "6xl"]}
             fontWeight={700}
+            lineHeight={1}
             color="white"
             textAlign="center"
             mb={5}
@@ -39,65 +43,93 @@ const VisitUsPage = (props) => {
           </Heading>
           <Text
             color="white"
-            fontSize={["0.875em", "1.5em"]}
+            fontSize={["md", "xl"]}
             fontWeight={600}
             textAlign="center"
             mb={[0, 5]}
           >
             is HMCC’s weekend gathering where everyone in the church comes
-            together to worship God and celebrate His work in our lives.
-            Everybody’s welcome! Come out to be encouraged through worship,
-            message, and fellowship!
+            together to{" "}
+            <span style={{ color: "#F6E05E" }}>
+              receive God’s message, worship in community and enjoy fellowship.
+            </span>
+            <br />
+            Everybody’s welcome!
           </Text>
         </Box>
-        <Box px={8} pb={[10, 0]}>
+        <Box pb={[4, 0]}>
           <Heading
             as="h3"
-            fontSize={["2em", "3em"]}
+            fontSize={["2em", "5xl"]}
             fontWeight={800}
             textAlign="center"
-            mb={[6, 10]}
+            mb={[2, 10]}
           >
             Ways to enjoy Sunday Celebration
           </Heading>
-          <Flex>
-            <Stack flex="4.25" textAlign={["center", "left"]} mr={[0, 6]}>
-              <Heading as="h3" fontSize={["2em", "3em"]} fontWeight={800}>
+          <Flex flexDir={["column", "row"]}>
+            <VStack
+              flex={4.25}
+              align="stretch"
+              textAlign={["center", "left"]}
+              mr={[0, 6]}
+              mb={[6, 0]}
+            >
+              <Heading
+                as="h3"
+                fontSize={["2em", "5xl"]}
+                fontWeight={800}
+                mt={4}
+              >
                 In-person <Icon as={RiArrowRightLine} />
               </Heading>
-              <Text fontSize={["1.5em", "2em"]} fontWeight={700}>
+              <Text fontSize={["2xl", "2em"]} fontWeight={700}>
                 Sundays @ 10 AM
               </Text>
-              <Text fontSize={["1.125em", "1.5em"]} fontWeight={700}>
+              <Text
+                fontSize={["1.125em", "2xl"]}
+                fontWeight={700}
+                px={[6, 0]}
+                pb={4}
+              >
                 Manulife Financial Centre Tower A, Shop 13, 1/F, Tower A, Kwun
                 Tong
-              </Text>
-              <Link
-                href="https://bit.ly/directions-organize"
-                color="#0E66CC"
-                fontSize={["1.125em", "1.5em"]}
-                fontWeight={700}
-                pb={4}
-                isExternal
-              >
-                <Text as="u">bit.ly/directions-organize</Text>
-              </Link>
-              <Text
-                fontSize={["0.875em", "1.125em"]}
-                lineHeight={["1.5em", "2em"]}
-              >
-                Our services are primarily for the campus students, working
-                adults and families.
                 <br />
-                There’s something for your little one(s) too!{" "}
-                <Link href="https://hongkong.hmcc.net/building-blocks/">
-                  <Text as="u" fontWeight={700}>
-                    LEARN MORE
-                  </Text>
+                <Link
+                  href="https://bit.ly/directions-organize"
+                  color="#0E66CC"
+                  isExternal
+                >
+                  <Text as="u">bit.ly/directions-organize</Text>
                 </Link>
               </Text>
-            </Stack>
-            <AspectRatio flex={[0, 5.75]} ratio={16 / 9}>
+              <Spacer />
+              <Center w="100%" px={1}>
+                <LinkBox
+                  style={{ backgroundOrigin: "border-box" }}
+                  as="button"
+                  transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
+                  boxShadow="2px 1000px 1px #fff inset"
+                  boxSizing="border-box"
+                  border="solid 3px transparent"
+                  borderRadius={10}
+                  backgroundImage="linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(to right, #00B5D8, #F6AD55)"
+                  backgroundClip="content-box, border-box"
+                  py={3}
+                  w="100%"
+                  fontSize={["md", "lg"]}
+                  _hover={{ boxShadow: "none", color: "#fff" }}
+                >
+                  <LinkOverlay href="https://bit.ly/hmcc-sc-registration">
+                    Sign Up for In-person Sunday Celebration
+                  </LinkOverlay>
+                </LinkBox>
+              </Center>
+              <Text textAlign="center" fontSize="sm">
+                *Pre-registration opens every Monday at 8PM
+              </Text>
+            </VStack>
+            <AspectRatio flex={5.75} ratio={16 / 9}>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.2102241954112!2d114.22135071553005!3d22.307887848255323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404014806001b5d%3A0x895969fc5cf86457!2sOrganize%20Kwun%20Tong!5e0!3m2!1sen!2shk!4v1628957852778!5m2!1sen!2shk"
                 allowfullscreen=""
@@ -112,25 +144,24 @@ const VisitUsPage = (props) => {
           bgImage={`url('${process.env.PUBLIC_URL}/images/visitus/join-us-online.png')`}
           bgPosition="center"
           bgSize="cover"
-          pl={[8, 16]}
-          pt={[4, 16]}
-          pr={8}
-          pb={3}
+          px={6}
+          pt={[4, 6]}
+          pb={4}
         >
-          <VStack align="stretch" spacing={6}>
+          <VStack align="stretch" spacing={12}>
             <Heading
               as="h3"
-              fontSize={["1.5em", "3em"]}
+              fontSize={["2xl", "4xl"]}
               fontWeight={[400, 700]}
               color="white"
-              maxW={550}
+              maxW={650}
               textAlign={["center", "initial"]}
             >
-              We hope to see you in person, until then...
+              If you are not able to join in-person, you could also...
             </Heading>
             <Heading
               as="h3"
-              fontSize={["2em", "3em"]}
+              fontSize={["2xl", "4xl"]}
               color="white"
               textAlign={["center", "right"]}
             >
@@ -143,14 +174,14 @@ const VisitUsPage = (props) => {
         <Box>
           <Heading
             as="h3"
-            fontSize={["1.5em", "3em"]}
+            fontSize={["2xl", "4xl"]}
             fontWeight={800}
             textAlign="center"
           >
             Got Queries? hongkong@hmcc.net <Icon as={RiChat1Line} ml={1} />
           </Heading>
         </Box>
-        <Box p={8}>
+        <Box pt={4}>
           <Faq />
         </Box>
       </VStack>
