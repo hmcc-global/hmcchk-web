@@ -8,12 +8,13 @@ import {
   TabPanel,
   FormControl,
   FormLabel,
+  FormHelperText,
+  FormErrorMessage,
   Input,
   InputGroup,
   Button,
   Stack,
   Center,
-  FormHelperText,
   Switch,
   InputRightAddon,
   Select,
@@ -21,13 +22,13 @@ import {
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
-import axios from "axios";
 import {
   ministryTeamList,
   lifegroupList,
   districtList,
   campusList,
   lifestageList,
+  countryList,
 } from "../helpers/lists";
 import {
   settableDataFields,
@@ -38,6 +39,7 @@ import {
 
 const UserProfileMobile = (props) => {
   const { register, control, handleSubmit, setValue, formState } = useForm();
+  const { errors } = formState;
   const [userData, setUserData] = useState(null);
   const user = useSelector((state) => state.user);
 
@@ -71,7 +73,24 @@ const UserProfileMobile = (props) => {
               setValue("addressDistrict", userData[key]["district"]);
             }
             break;
-
+          case "baptismInfo":
+            if (userData[key]) {
+              setValue("baptismDate", userData[key][0]["baptismDate"]);
+              setValue("baptismPlace", userData[key][0]["baptismPlace"]);
+            }
+            break;
+          case "membershipInfo":
+            if (userData[key]) {
+              setValue(
+                "membershipRecognitionDate",
+                userData[key][0]["recognitionDate"]
+              );
+              setValue(
+                "membershipRecommitmentDate",
+                userData[key][0]["recommitmentDate"]
+              );
+            }
+            break;
           default:
             setValue(key, userData[key]);
             break;
@@ -93,6 +112,12 @@ const UserProfileMobile = (props) => {
     }
   };
 
+  const createErrorNotifier = (fieldName) => {
+    <FormErrorMessage key={fieldName + "errorMessage"}>
+      {errors[fieldName] && "This field cannot be left blank"}
+    </FormErrorMessage>;
+  };
+
   useEffect(async () => {
     await fetchUserData();
   }, []);
@@ -103,9 +128,9 @@ const UserProfileMobile = (props) => {
         <Text color="#065666" as="span">
           Hi
         </Text>{" "}
-        {user.fullName && (
+        {userData && userData.fullName && (
           <>
-            ,&nbsp;<u>{user.fullName.split(" ")[0]}!</u>
+            ,&nbsp;<u>{userData.fullName.split(" ")[0]}!</u>
           </>
         )}
       </Center>
@@ -187,6 +212,8 @@ const UserProfileMobile = (props) => {
                     size="sm"
                     borderRadius="5"
                     {...register("firstName", { required: true })}
+                    isInvalid={errors["firstName"]}
+                    placeholder="Please fill in this field"
                   />
                 </FormControl>
                 <FormControl>
@@ -195,6 +222,8 @@ const UserProfileMobile = (props) => {
                     size="sm"
                     borderRadius="5"
                     {...register("lastName", { required: true })}
+                    isInvalid={errors["lastName"]}
+                    placeholder="Please fill in this field"
                   />
                   <FormHelperText>
                     Enter "N/A" if not applicable for you
@@ -203,11 +232,17 @@ const UserProfileMobile = (props) => {
 
                 <FormControl>
                   <FormLabel color="#2C5282">Country of Origin</FormLabel>
-                  <Input
+                  <Select
                     size="sm"
                     borderRadius="5"
                     {...register("countryOfOrigin", { required: true })}
-                  />
+                    isInvalid={errors["countryOfOrigin"]}
+                    placeholder="Please fill in this field"
+                  >
+                    {countryList.map((item) => {
+                      return <option key={"co" + item}>{item}</option>;
+                    })}
+                  </Select>
                 </FormControl>
                 <FormControl>
                   <FormLabel color="#2C5282">Lifestage</FormLabel>
@@ -216,6 +251,8 @@ const UserProfileMobile = (props) => {
                     borderRadius="5"
                     {...register("lifestage", { required: true })}
                     pointerEvents="none"
+                    isInvalid={errors["lifestage"]}
+                    placeholder="Please fill in this field"
                   >
                     {lifestageList.map((item) => {
                       return <option key={"life" + item}>{item}</option>;
@@ -243,6 +280,8 @@ const UserProfileMobile = (props) => {
                     size="sm"
                     borderRadius="5"
                     {...register("phoneNumber", { required: true })}
+                    isInvalid={errors["phoneNumber"]}
+                    placeholder="Please fill in this field"
                   />
                 </FormControl>
 
@@ -298,18 +337,6 @@ const UserProfileMobile = (props) => {
               </Stack>
             </TabPanel>
             <TabPanel p="7%">
-              <Center mb="7%">
-                <Button
-                  size="md"
-                  color="#0628A3"
-                  borderColor="#0628A3"
-                  borderRadius="10"
-                  variant="outline"
-                  type="submit"
-                >
-                  Edit Information
-                </Button>
-              </Center>
               <Stack spacing="7%">
                 <FormControl>
                   <FormLabel color="#2C5282">Life Group</FormLabel>
@@ -378,7 +405,13 @@ const UserProfileMobile = (props) => {
                   <FormControl>
                     <FormLabel color="#2C5282">Recognition Date</FormLabel>
                     <InputGroup size="sm">
-                      <Input type="date" borderRadius="5" isReadOnly />
+                      <Input
+                        size="sm"
+                        type="date"
+                        borderRadius="5"
+                        {...register("membershipRecognitionDate")}
+                        isReadOnly
+                      />
                       <InputRightAddon borderRadius="5">Date</InputRightAddon>
                     </InputGroup>
                   </FormControl>
@@ -387,7 +420,13 @@ const UserProfileMobile = (props) => {
                       Last Recommitment Date
                     </FormLabel>
                     <InputGroup size="sm">
-                      <Input type="date" borderRadius="5" isReadOnly />
+                      <Input
+                        size="sm"
+                        type="date"
+                        borderRadius="5"
+                        {...register("membershipRecommitmentDate")}
+                        isReadOnly
+                      />
                       <InputRightAddon borderRadius="5">Date</InputRightAddon>
                     </InputGroup>
                   </FormControl>
@@ -426,12 +465,23 @@ const UserProfileMobile = (props) => {
                 >
                   <FormControl>
                     <FormLabel color="#2C5282">Baptism Place</FormLabel>
-                    <Input size="sm" borderRadius="5" isReadOnly />
+                    <Input
+                      size="sm"
+                      borderRadius="5"
+                      {...register("baptismPlace")}
+                      isReadOnly
+                    />
                   </FormControl>
                   <FormControl>
                     <FormLabel color="#2C5282">Baptism Date</FormLabel>
                     <InputGroup size="sm">
-                      <Input type="date" borderRadius="5" isReadOnly />
+                      <Input
+                        size="sm"
+                        type="date"
+                        borderRadius="5"
+                        {...register("baptismDate")}
+                        isReadOnly
+                      />
                       <InputRightAddon borderRadius="5">Date</InputRightAddon>
                     </InputGroup>
                   </FormControl>
