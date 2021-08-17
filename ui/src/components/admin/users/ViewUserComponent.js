@@ -57,7 +57,7 @@ const ViewUser = ({ props }) => {
               <ListItem>Full Name: {data.fullName}</ListItem>
               <ListItem>Email: {data.email}</ListItem>
               <ListItem>Access Type: {data.accessType}</ListItem>
-              <ListItem>Country of Origin: {data.nationality}</ListItem>
+              <ListItem>Country of Origin: {data.countryOfOrigin}</ListItem>
               <ListItem>Campus: {data.campus}</ListItem>
               <ListItem>Life Stage: {data.lifestage}</ListItem>
               <ListItem>LIFE Group: {data.lifeGroup}</ListItem>

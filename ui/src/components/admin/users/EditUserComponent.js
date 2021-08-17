@@ -24,53 +24,49 @@ import {
   Radio,
   RadioGroup,
   VisuallyHiddenInput,
+  useToast,
+  Switch,
+  Checkbox,
 } from "@chakra-ui/react";
+import {
+  accessTypes,
+  campuses,
+  lifestages,
+  ministryTeams,
+} from "../../helpers/UserConstants";
 
 const EditUser = (props) => {
-  const accessTypes = ["Unsigned", "Signed", "Alumni", "Admin", "Stewardship"];
+  const toast = useToast();
+
   const makeAccessTypes = function (x) {
     return <option>{x}</option>;
   };
-  const campuses = [
-    "CUHK",
-    "HKUST",
-    "HKU",
-    "PolyU",
-    "CityU",
-    "BU",
-    "EduU",
-    "Lingnan",
-  ];
   const makeCampuses = function (x) {
     return <option>{x}</option>;
   };
-  const lifestages = ["Student", "Single Adult", "Married"];
   const makeLifestages = function (x) {
     return <option>{x}</option>;
   };
-  const ministryTeams = [
-    "Intercessory Prayer Team",
-    "Creatives",
-    "Hospitality",
-    "Band",
-    "Audio/Visual",
-    "Creatives Worship",
-    "Multimedia",
-    "Building Blocks",
-  ];
   const makeMinistryTeams = function (x) {
     return <option>{x}</option>;
   };
 
-  const { handleSubmit, register } = useForm();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
 
   const [user, setUsers] = useState([]);
   const [editData, setEditData] = useState(null);
+  const [message, setMessage] = useState();
 
   const getData = async () => {
     try {
       const id = props;
       const { data } = await axios.get("/api/users/get", { userId: id });
+      // data[0].isMember = data[0].isMember.toString();
+      // data[0].isBaptised = data[0].isBaptised.toString();
       setUsers(data[0]);
     } catch (err) {
       console.log(err);
@@ -86,24 +82,12 @@ const EditUser = (props) => {
   };
 
   let data = user;
-  data.isMember = data.isMember.toString();
-  data.isBaptised = data.isBaptised.toString();
 
   const onUpdateSubmit = async (data, e) => {
     // Format the data
     setEditData(data);
 
     data.accessType = data.accessType.toLowerCase();
-    if (data.isDeleted == "true") {
-      data.isDeleted = true;
-    } else if (data.isDeleted == "false") {
-      data.isDeleted = false;
-    }
-    if (data.isBaptised == "true") {
-      data.isBaptised = true;
-    } else if (data.isBaptised == "false") {
-      data.isBaptised = false;
-    }
 
     const status = await axios.put("/api/users/update", {
       params: data,
@@ -113,18 +97,23 @@ const EditUser = (props) => {
     console.log(status.status);
 
     if (status.status === 200) {
-      return (
-        <>
-          <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent>
-              <ModalCloseButton />
-              <ModalHeader>Success!</ModalHeader>
-              <ModalBody> User information updated! </ModalBody>
-            </ModalContent>
-          </Modal>
-        </>
-      );
+      toast({
+        title: "Success!",
+        description: "User information updated.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+      // <>
+      //   <Modal isOpen={isOpen} onClose={onClose}>
+      //     <ModalOverlay />
+      //     <ModalContent>
+      //       <ModalCloseButton />
+      //       <ModalHeader>Success!</ModalHeader>
+      //       <ModalBody> User information updated! </ModalBody>
+      //     </ModalContent>
+      //   </Modal>
+      // </>
     }
 
     return status;
@@ -149,7 +138,7 @@ const EditUser = (props) => {
                   <VisuallyHiddenInput
                     defaultValue={data.id}
                     {...register("id")}
-                  ></VisuallyHiddenInput>
+                  />
                   <FormLabel>Full name</FormLabel>
                   <Input
                     defaultValue={data.fullName}
@@ -168,14 +157,15 @@ const EditUser = (props) => {
                   >
                     {accessTypes.map(makeAccessTypes)}
                   </Select>
-                  <FormLabel>Country of origin</FormLabel>
+                  <FormLabel>Country of Origin</FormLabel>
                   <Select
-                    defaultValue={data.nationality}
-                    {...register("nationality")}
+                    defaultValue={data.countryOfOrigin}
+                    {...register("countryOfOrigin")}
                   >
                     <option>United Arab Emirates</option>
                     <option>Nigeria</option>
                     <option>Hong Kong</option>
+                    <option>United States</option>
                   </Select>
                   <FormLabel>Campus</FormLabel>
                   <Select
@@ -228,36 +218,24 @@ const EditUser = (props) => {
                     defaultValue={data.birthday}
                     {...register("birthday")}
                   ></Input>
-                  <FormLabel>Member</FormLabel>
-                  <RadioGroup
-                    defaultValue={data.isMember}
-                    {...register("isMember")}
-                  >
-                    <Stack spacing={2} direction="row">
-                      <Radio value="true">Yes</Radio>
-                      <Radio value="false">No</Radio>
-                    </Stack>
-                  </RadioGroup>
-                  <FormLabel>Baptised</FormLabel>
-                  <RadioGroup
-                    defaultValue={data.isBaptised}
-                    {...register("isBaptised")}
-                  >
-                    <Stack spacing={2} direction="row">
-                      <Radio value="true">Yes</Radio>
-                      <Radio value="false">No</Radio>
-                    </Stack>
-                  </RadioGroup>
+                  <Stack direction="row">
+                    <FormLabel>Member</FormLabel>
+                    <Switch
+                      defaultValue={data.isMember}
+                      {...register("isMember")}
+                    />
+                    <FormLabel>Baptised</FormLabel>
+                    <Switch
+                      defaultValue={data.isBaptised}
+                      {...register("isBaptised")}
+                    />
+                  </Stack>
                 </Stack>
               </FormControl>
             </ModalBody>
 
             <ModalFooter>
-              <Button
-                variant="ghost"
-                mr={3}
-                onClick={(() => refreshHandler(), onClose)}
-              >
+              <Button variant="ghost" mr={3} onClick={onClose}>
                 Cancel
               </Button>
               <Button colorScheme="teal" type="submit">

@@ -30,6 +30,7 @@ import SidebarWithHeader from "../navigation/Sidebar";
 import ViewUser from "./ViewUserComponent";
 import EditUser from "./EditUserComponent";
 import DeleteUser from "./DeleteUserComponent";
+import ArrayToExcelButton from "../ArrayToExcelButton";
 
 const smVariant = { navigation: "drawer", navigationButton: true };
 const mdVariant = { navigation: "sidebar", navigationButton: false };
@@ -90,8 +91,12 @@ export default function App(props) {
         accessor: "phoneNumber",
       },
       {
-        Header: "Nationality",
-        accessor: "nationality",
+        Header: "Country of Origin",
+        accessor: "countryOfOrigin",
+      },
+      {
+        Header: "LIFE Group",
+        accessor: "lifeGroup",
       },
     ],
     []
@@ -109,7 +114,11 @@ export default function App(props) {
       >
         <Stack mb={3} direction="row">
           <Button onClick={() => refreshHandler()}>Refresh</Button>
-          <Button>Export</Button>
+          <ArrayToExcelButton
+            apiArray={data}
+            fileName={"UserData.xlsx"}
+            buttonTitle={"Export"}
+          ></ArrayToExcelButton>
         </Stack>
         <Flex bg={useColorModeValue("gray.200")} justifyContent="center">
           <Table
