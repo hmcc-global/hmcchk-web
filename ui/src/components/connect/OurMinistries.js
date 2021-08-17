@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Heading,
-  Link,
-  SimpleGrid,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Center, Heading, Link, SimpleGrid, Text } from "@chakra-ui/react";
 import "../../styles/_fliptiles.scss";
 
 const OurMinistries = (props) => {
@@ -15,7 +6,7 @@ const OurMinistries = (props) => {
     <Box>
       <Heading
         as="h2"
-        fontSize={["2.25em", "4em"]}
+        fontSize={["2.25em", "3m", "4em"]}
         fontWeight={800}
         textAlign="center"
         mb={[0, 2]}
@@ -28,82 +19,124 @@ const OurMinistries = (props) => {
         adults, and families.
       </Text>
       <SimpleGrid columns={[2, 4]} spacing={4}>
-        <Center
-          h={[180, 300]}
-          p={8}
-          borderWidth="1px"
-          borderRadius="20"
-          bgImage={` linear-gradient(180deg, rgba(118, 228, 247, 0.7) 0%, rgba(44, 82, 130, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/2019_Mar_AllNightPrayer_Worshiptogether_Shouldertoshoulder_Closeup.png')`}
-          bgPosition="center"
-          bgSize="cover"
-          shadow="lg"
-          textAlign="center"
-          color="white"
-        >
-          <Heading as="h4" fontSize={["1.5em", "2em"]} fontWeight={700}>
-            CAMPUS
-          </Heading>
-        </Center>
-        <div className="flip-container">
+        <Box className="flip-container">
           <Center
-            h={[180, 300]}
+            h={[180, 250]}
+            p={12}
             borderWidth="1px"
             borderRadius="20"
-            bgImage={`linear-gradient(180deg, rgba(198, 246, 213, 0.7) 0%, rgba(39, 103, 73, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/2020_June_FOCUSGetaway_Game_Fun_Group_Community_Smile_Happy_Closeup.jpg')`}
+            bgImage={` linear-gradient(180deg, rgba(118, 228, 247, 0.7) 0%, rgba(44, 82, 130, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/campus-ministry.jpg')`}
             bgPosition="center"
             bgSize="cover"
             shadow="lg"
-            textAlign="center"
             color="white"
             className="flipper"
           >
             <Heading
               as="h4"
-              fontSize={["1.5em", "2em"]}
+              fontSize={["1.5em", "1.5em", "2em"]}
               fontWeight={700}
+              textAlign="center"
+              className="front"
+            >
+              CAMPUS
+            </Heading>
+            <Box className="back" fontWeight={600}>
+              Reaching the college students in the university campuses of Hong
+              Kong because we believe that college is a pivotal time for people
+              to discover their God-given destiny.
+            </Box>
+          </Center>
+        </Box>
+        <Box className="flip-container">
+          <Center
+            h={[180, 250]}
+            p={12}
+            borderWidth="1px"
+            borderRadius="20"
+            bgImage={`linear-gradient(180deg, rgba(198, 246, 213, 0.7) 0%, rgba(39, 103, 73, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/focus-ministry.jpg')`}
+            bgPosition="center"
+            bgSize="cover"
+            shadow="lg"
+            color="white"
+            className="flipper"
+          >
+            <Heading
+              as="h4"
+              fontSize={["1.5em", "1.5em", "2em"]}
+              fontWeight={700}
+              textAlign="center"
               className="front"
             >
               SINGLE ADULTS
             </Heading>
-            <div className="back">
-              We want to reach college students in the university campuses
-              around Hong Kong because we believe that college is a pivotal time
-              for people to discover their God-given destiny.
-            </div>
+            <Box className="back" fontWeight={600}>
+              Creating an avenue for single working adults to fellowship and
+              learn how to best exercise their God-given influence in their
+              respective schools and workplaces.
+            </Box>
           </Center>
-        </div>
-        <Center
-          h={[180, 300]}
-          p={8}
-          borderWidth="1px"
-          borderRadius="20"
-          bgImage={`linear-gradient(180deg, rgba(252, 129, 129, 0.7) 0%, rgba(151, 38, 109, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/2016_July_Mens_Womens_Getaway_Covenant_Group.jpg')`}
-          bgPosition="center"
-          bgSize="cover"
-          shadow="lg"
-          textAlign="center"
-          color="white"
-        >
-          <Heading as="h4" fontSize={["1.5em", "2em"]} fontWeight={700}>
-            MARRIED COUPLES
-          </Heading>
-        </Center>
-        <Center
-          h={[180, 300]}
-          p={8}
-          borderWidth="1px"
-          borderRadius="20"
-          bgImage={`linear-gradient(180deg, rgba(254, 252, 191, 0.7) 0%, rgba(246, 173, 85, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/2017_may_mothersday_buildingblockspresentation_sing_buildingblocks_side_34776427395_o.jpg')`}
-          bgPosition="center"
-          bgSize="cover"
-          shadow="lg"
-          textAlign="center"
-          color="white"
-        >
-          <Heading as="h4" fontSize={["1.5em", "2em"]} fontWeight={700}>
-            CHILDREN
-          </Heading>
-        </Center>
+        </Box>
+        <Box className="flip-container">
+          <Center
+            h={[180, 250]}
+            p={12}
+            borderWidth="1px"
+            borderRadius="20"
+            bgImage={`linear-gradient(180deg, rgba(252, 129, 129, 0.7) 0%, rgba(151, 38, 109, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/married-couples-ministry.jpg')`}
+            bgPosition="center"
+            bgSize="cover"
+            shadow="lg"
+            color="white"
+            className="flipper"
+          >
+            <Heading
+              as="h4"
+              fontSize={["1.5em", "1.5em", "2em"]}
+              fontWeight={700}
+              textAlign="center"
+              className="front"
+            >
+              MARRIED COUPLES
+            </Heading>
+            <Box className="back" fontWeight={600}>
+              Bringing together Godly families that will love on and impact the
+              next generation of their families and city.
+            </Box>
+          </Center>
+        </Box>
+        <Box className="flip-container">
+          <Center
+            h={[180, 250]}
+            p={12}
+            borderWidth="1px"
+            borderRadius="20"
+            bgImage={`linear-gradient(180deg, rgba(254, 252, 191, 0.7) 0%, rgba(246, 173, 85, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/children-ministry.jpg')`}
+            bgPosition="center"
+            bgSize="cover"
+            shadow="lg"
+            color="white"
+            className="flipper"
+          >
+            <Heading
+              as="h4"
+              fontSize={["1.5em", "1.5em", "2em"]}
+              fontWeight={700}
+              textAlign="center"
+              className="front"
+            >
+              CHILDREN
+            </Heading>
+            <Box className="back" fontWeight={600}>
+              Building Blocks is HMCC’s Children Ministry, learn more about it{" "}
+              <Text as="u">
+                <Link href="https://hongkong.hmcc.net/building-blocks/">
+                  here ➔
+                </Link>
+              </Text>
+            </Box>
+          </Center>
+        </Box>
       </SimpleGrid>
     </Box>
   );
