@@ -25,7 +25,7 @@ import {
 import { Link } from "react-router-dom";
 import MainMenu from "./MainMenu";
 
-const Navigationbar = () => {
+const NavBar = () => {
   const [loggedIn, setLoggedIn] = useState(true);
   const username = "name";
   const welcomeMsg = ["Login or Sign up", `Hi, ${username}`];
@@ -67,7 +67,7 @@ const Navigationbar = () => {
               h="10.5vh"
             >
               <Box position="relative">
-                <Link href="/">
+                <Link to="/sermons">
                   <Image
                     h={{
                       base: "3.5vh",
@@ -75,7 +75,7 @@ const Navigationbar = () => {
                       md: "4.5vh",
                       lg: "5vh",
                     }}
-                    src={process.env.PUBLIC_URL + "/ripple_black.svg"}
+                    src={process.env.PUBLIC_URL + "/images/ripple_black.svg"}
                     alt="Logo of HMCC"
                   />
                 </Link>
@@ -92,33 +92,33 @@ const Navigationbar = () => {
                 isInline
               >
                 <Box position="relative">
-                  <Link href="/visit">
-                    <a>VISIT</a>
+                  <Link href="/visit" target='_blank'>
+                    VISIT
                   </Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/about">
-                    <a>ABOUT</a>
+                  <Link to={{ pathname:"https://hongkong.hmcc.net/about/who-we-are/"}} target='_blank'>
+                    ABOUT
                   </Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/connect">
-                    <a>CONNECT</a>
+                  <Link to={{pathname:"https://hongkong.hmcc.net/new/"}} target='_blank'>
+                    CONNECT
                   </Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/event">
-                    <a>EVENTS</a>
+                  <Link to="/events">
+                    EVENTS
                   </Link>
                 </Box>
                 <Box position="relative">
                   <Link href="/sermon">
-                    <a>SERMONS</a>
+                    SERMONS
                   </Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/give">
-                    <a>GIVE</a>
+                  <Link to={{pathname:"https://hongkong.hmcc.net/give/"}} target='_blank'>
+                    GIVE
                   </Link>
                 </Box>
               </Stack>
@@ -159,7 +159,7 @@ const Navigationbar = () => {
                   >
                     <Image
                       h="3vh"
-                      src={process.env.PUBLIC_URL + "/menu.svg"}
+                      src={process.env.PUBLIC_URL + "/images/menu.svg"}
                       alt="Menu Button"
                     />
                   </Button>
@@ -170,7 +170,7 @@ const Navigationbar = () => {
         </Flex>
       </Flex>
 
-      {currDate == "Tue" ? (
+      {currDate == "Sun" ? (
         <Flex
           w="100vw"
           background="#ffffff"
@@ -187,7 +187,7 @@ const Navigationbar = () => {
           <Flex w="100vw" justify="space-around">
             <Stack justify="center" align="center" isInline>
               <Center>
-                <Link href="/live" style={{ lineHeight: "0" }}>
+                <Link to={{pathname:"https://hongkong.hmcc.net/online/"}} target='_blank' style={{ lineHeight: "0" }}>
                   <Button
                     h="3.5vh"
                     style={liveScStyle}
@@ -203,31 +203,38 @@ const Navigationbar = () => {
           </Flex>
         </Flex>
       ) : null}
-      <Drawer
-        isOpen={isOpen}
-        size="full"
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton
-            position="absolute"
-            right="5%"
-            top="5%"
-            color="white"
-          />
-          <DrawerHeader />
-          <DrawerBody>
-            <MainMenu login={loggedIn} />
-          </DrawerBody>
-          <DrawerFooter fontSize="sm" color="white" justifyContent="center">
-            Harvest Mission Community Church 2021
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+      <Flex>
+        <Drawer
+          isOpen={isOpen}
+          size="full"
+          onClose={onClose}
+          finalFocusRef={btnRef}
+        >
+          <DrawerOverlay />
+          <DrawerContent   
+            background= "url('/images/ripple_bg.png')"
+            backgroundRepeat= 'no-repeat'
+            backgroundColor= '#2c5282'
+            backgroundSize= '70%'
+            backgroundPosition = '120% 75%'>
+            <DrawerCloseButton
+              position="absolute"
+              right="5%"
+              top="5%"
+              color="white"
+            />
+            <DrawerHeader />
+            <DrawerBody>
+              <MainMenu login={loggedIn} />
+            </DrawerBody>
+            <DrawerFooter fontSize="sm" color="white" justifyContent="center">
+              Harvest Mission Community Church 2021
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      </Flex>
     </>
   );
 };
 
-export default Navigationbar;
+export default NavBar;
