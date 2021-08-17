@@ -20,7 +20,7 @@ const VisitUsPage = (props) => {
         <Box
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`url('${process.env.PUBLIC_URL}/images/2020_Oct_Welcome Home_Sermon_PSeth_Wide.jpg')`}
+          bgImage={`url('${process.env.PUBLIC_URL}/images/visitus/header-banner.jpg')`}
           bgPosition="center"
           bgSize="cover"
           px={[8, 16, 36]}
@@ -109,7 +109,7 @@ const VisitUsPage = (props) => {
         <Box
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`url('${process.env.PUBLIC_URL}/images/20200830 IYKYK OCR 2020 Kickoff Group Photo.png')`}
+          bgImage={`url('${process.env.PUBLIC_URL}/images/visitus/join-us-online.png')`}
           bgPosition="center"
           bgSize="cover"
           pl={[8, 16]}
