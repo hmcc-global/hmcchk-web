@@ -18,10 +18,9 @@ import {
   InputRightAddon,
   Select,
 } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { useSelector } from "react-redux";
-import axios from "axios";
 import {
   ministryTeamList,
   lifegroupList,
@@ -29,73 +28,26 @@ import {
   campusList,
   lifestageList,
 } from "../helpers/lists";
+import {
+  settableDataFields,
+  userDataCleanup,
+  getUserDataRequest,
+  updateUserDataRequest,
+} from "../helpers/userInformationHelpers";
 
 const UserProfileDesktop = (props) => {
-  const user = useSelector((state) => state.user);
-  const { register, control, handleSubmit, setValue, formState } =
-    useForm();
+  const { register, control, handleSubmit, setValue, formState } = useForm();
   const [userData, setUserData] = useState(null);
-
-  // Only allow setting field values that are defined here
-  const settableDataFields = [
-    "email",
-    "countryOfOrigin",
-    "birthday",
-    "campus",
-    "lifestage",
-    "isMember",
-    "isBaptised",
-    "ministryTeam",
-    "phoneNumber",
-    "fullName",
-    "address",
-  ];
+  const user = useSelector((state) => state.user);
 
   const fetchUserData = async () => {
     if (user.id) {
-      const { data, status } = await axios.get("/api/users/get", {
-        userId: user.id,
-      });
+      const { data, status } = await getUserDataRequest(user.id);
 
       if (status === 200) {
         setUserData(data[0]);
+        setUserInformationFields(data[0]);
       }
-      setUserInformationFields(data[0]);
-    }
-  };
-
-  const handleEditUserInformation = async (data, e) => {
-    data.address = {
-      floor: data["addressFloor"],
-      flat: data["addressFlat"],
-      street: data["addressStreet"],
-      district: data["addressDistrict"],
-    };
-
-    // Sanitize input
-    delete data["addressFloor"];
-    delete data["addressFlat"];
-    delete data["addressStreet"];
-    delete data["addressDistrict"];
-
-    // Don't allow email to be reset or changed!
-    delete data["email"];
-
-    data.fullName = data.firstName + " " + data.lastName;
-
-    for (let key in data) {
-      if (!settableDataFields.includes(key)) {
-        delete data[key];
-      }
-    }
-
-    data.id = user.id;
-
-    const { res, status } = await axios.put("/api/users/update", {
-      params: data,
-    });
-    if (status === 200) {
-      fetchUserData();
     }
   };
 
@@ -109,6 +61,7 @@ const UserProfileDesktop = (props) => {
             let firstName = nameParts.join(" ");
             setValue("firstName", firstName);
             setValue("lastName", lastName);
+            break;
           case "address":
             if (userData[key]) {
               setValue("addressFloor", userData[key]["floor"]);
@@ -116,12 +69,26 @@ const UserProfileDesktop = (props) => {
               setValue("addressStreet", userData[key]["street"]);
               setValue("addressDistrict", userData[key]["district"]);
             }
+            break;
 
           default:
             setValue(key, userData[key]);
             break;
         }
       }
+    }
+  };
+
+  // Implementation needs some component specific customization
+  const handleEditUserInformation = async (data, e) => {
+    userDataCleanup(data);
+
+    // set user id
+    data.id = user.id;
+
+    const { status } = await updateUserDataRequest(data);
+    if (status === 200) {
+      fetchUserData();
     }
   };
 
@@ -213,7 +180,6 @@ const UserProfileDesktop = (props) => {
                 borderColor="#0628A3"
                 borderRadius="10"
                 variant="outline"
-                type="submit"
               >
                 Change Password
               </Button>
@@ -309,7 +275,6 @@ const UserProfileDesktop = (props) => {
                       size="sm"
                       borderRadius="5"
                       {...register("phoneNumber", { required: true })}
-                      isReadOnly
                     />
                   </FormControl>
                 </Stack>
