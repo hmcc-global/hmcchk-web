@@ -5,7 +5,7 @@ const ExperienceHmcc = (props) => {
     <Box>
       <Heading
         as="h2"
-        fontSize={["2.25em", "4em"]}
+        fontSize={["2.25em", "3em", "4em"]}
         fontWeight={800}
         textAlign="center"
         mb={[0, 4]}
@@ -17,13 +17,14 @@ const ExperienceHmcc = (props) => {
           flex={1}
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${process.env.PUBLIC_URL}/images/2021_07_11_Membership_Recognition_Prayer_2.jpg')`}
+          bgImage={`linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${process.env.PUBLIC_URL}/images/connect/2021_07_11_Membership_Recognition_Prayer_2.jpg')`}
           bgPosition="center"
           bgSize="cover"
           shadow="lg"
           color="white"
           textAlign="center"
-          p={[8, 24]}
+          px={[8, 10]}
+          py={[8, 16]}
           m={2}
         >
           <Text fontSize={["0.75em", "1.5em"]} fontWeight={600}>
@@ -51,13 +52,14 @@ const ExperienceHmcc = (props) => {
           flex={1}
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${process.env.PUBLIC_URL}/images/2016_Apr_EOY_Celebration_Group_Cheering_higher.jpg')`}
+          bgImage={`linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${process.env.PUBLIC_URL}/images/connect/2016_Apr_EOY_Celebration_Group_Cheering_higher.jpg')`}
           bgPosition="center"
           bgSize="cover"
           shadow="lg"
           color="white"
           textAlign="center"
-          p={[8, 24]}
+          px={[8, 10]}
+          py={[8, 16]}
           m={2}
         >
           <Text fontSize={["0.75em", "1.5em"]} fontWeight={600}>
