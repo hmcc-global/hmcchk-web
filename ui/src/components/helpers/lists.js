@@ -43,4 +43,10 @@ const campusList = [
   "Lingnan University",
 ];
 
-export { lifestageList, ministryTeamList, lifegroupList, districtList, campusList };
+export {
+  lifestageList,
+  ministryTeamList,
+  lifegroupList,
+  districtList,
+  campusList,
+};
