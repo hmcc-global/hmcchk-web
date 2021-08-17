@@ -13,9 +13,11 @@ import {
   ModalBody,
   ModalCloseButton,
   VisuallyHiddenInput,
+  useToast,
 } from "@chakra-ui/react";
 
 const DeleteUser = ({ props }) => {
+  const toast = useToast();
   const [user, setUsers] = useState([]);
   const [editData, setEditData] = useState(null);
   const { handleSubmit, register } = useForm();
@@ -56,18 +58,13 @@ const DeleteUser = ({ props }) => {
     console.log(status.status);
 
     if (status.status === 200) {
-      return (
-        <>
-          <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent>
-              <ModalCloseButton />
-              <ModalHeader>Success!</ModalHeader>
-              <ModalBody> User information deleted! </ModalBody>
-            </ModalContent>
-          </Modal>
-        </>
-      );
+      toast({
+        title: "Success!",
+        description: "User deleted",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
