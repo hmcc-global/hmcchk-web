@@ -12,6 +12,8 @@ const settableDataFields = [
   "phoneNumber",
   "fullName",
   "address",
+  "membershipInfo",
+  "baptismInfo",
 ];
 
 const userDataCleanup = (data) => {
@@ -28,8 +30,16 @@ const userDataCleanup = (data) => {
   delete data["addressStreet"];
   delete data["addressDistrict"];
 
-  // Don't allow email to be reset or changed!
+  // Don't allow these fields to be reset or changed through here
   delete data["email"];
+  delete data["isMember"];
+  delete data["isBaptised"];
+  delete data["baptismDate"];
+  delete data["baptismPlace"];
+  delete data["membershipRecognitionDate"];
+  delete data["membershipRecommitmentDate"];
+  delete data["membershipInfo"];
+  delete data["baptismInfo"];
 
   data.fullName = data.firstName + " " + data.lastName;
 

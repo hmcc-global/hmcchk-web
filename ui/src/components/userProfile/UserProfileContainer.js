@@ -1,9 +1,8 @@
 import { Container, Image, Button } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import UserProfileDesktop from "./UserProfileDesktop";
 import UserProfileMobile from "./UserProfileMobile";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signin } from "../../reducers/userSlice";
 
 const UserProfileContainer = (props) => {
