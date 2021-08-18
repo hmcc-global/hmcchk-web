@@ -47,14 +47,16 @@ const HeroSection = () => {
             >
               {heroText}
             </Heading>
-            <ButtonGroup
-              bg="rgb(0, 0, 0, 0)"
-              variant="outline"
-              color="white"
-              w="100%"
-              flexDirection={["column", "row"]}
+            <Stack
+              direction={["column", "row"]}
+              w="90%"
+              alignItems={["center"]}
             >
               <Button
+                bg="rgb(0, 0, 0, 0)"
+                variant="outline"
+                color="white"
+                w="full"
                 _hover={{
                   bg: "white",
                   color: "#1A365D",
@@ -68,6 +70,10 @@ const HeroSection = () => {
                 {worshipText}
               </Button>
               <Button
+                bg="rgb(0, 0, 0, 0)"
+                variant="outline"
+                color="white"
+                w="full"
                 _hover={{
                   bg: "white",
                   color: "#1A365D",
@@ -80,7 +86,7 @@ const HeroSection = () => {
               >
                 {churchText}
               </Button>
-            </ButtonGroup>
+            </Stack>
           </Stack>
         </VStack>
       </Container>
