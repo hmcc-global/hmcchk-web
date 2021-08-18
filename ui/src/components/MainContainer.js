@@ -161,6 +161,7 @@ const MainContainer = () => {
           component={AdminContainer}
         />
       </Switch>
+      <ConnectFloatButton />
     </chakra.main>
   );
 };
