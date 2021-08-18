@@ -82,13 +82,10 @@ const Login = (props) => {
 
   return (
     <>
-      <Stack background="#2C5282" color="white" padding="20px" h="100vh">
+      <Stack background="#2C5282" color="white" padding="20px">
         <Flex>
           <Box>
-            <Link
-              to={{ pathname: "https://hongkong.hmcc.net" }}
-              target="_blank"
-            >
+            <Link href="../sermons">
               <ChevronLeftIcon boxSize={10} />
               Return to hongkong.hmcc.net
             </Link>
