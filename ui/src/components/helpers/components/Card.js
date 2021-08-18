@@ -14,15 +14,12 @@ const Card = (props) => {
       justifyContent="center"
       alignItems="center"
       background={color}
-<<<<<<< 54-homepage
-<<<<<<< 54-homepage
       _hover={{
         background: "rgba(0, 0, 0, 0.2)",
       }}
     >
       <Container>
         <VStack>
-<<<<<<< 54-homepage
           <Heading fontSize={["1em", "3em"]} color={titleColor}>
             {title}
           </Heading>
@@ -31,30 +28,6 @@ const Card = (props) => {
             fontSize={["xs", "1em"]}
             color={textColor}
           >
-=======
-=======
-      _hover={{
-        background: "rgba(0, 0, 0, 0.2)",
-      }}
->>>>>>> GH-54: Complete functionality, started mobile
-    >
-      <Container>
-        <VStack>
-          <Heading size="2xl" color={titleColor}>
-            {title}
-          </Heading>
-          <Text textAlign="center" color={textColor}>
->>>>>>> Finish About Us Section
-=======
-          <Heading size={["sm", "2xl"]} color={titleColor}>
-            {title}
-          </Heading>
-          <Text
-            textAlign="center"
-            fontSize={["0.3em", "1em"]}
-            color={textColor}
-          >
->>>>>>> GH-54: Mobilise all
             {text}
           </Text>
         </VStack>

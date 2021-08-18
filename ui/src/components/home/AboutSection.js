@@ -72,25 +72,11 @@ const AboutSection = () => {
                 width="full"
                 height={["6em", "15em"]}
                 color="rgba(255, 255, 255, 0.2)"
-                _hover={{
-                  background: "rgba(0, 0, 0, 0.2)",
-                }}
-              >
-                <Container>
-                  <VStack>
-                    <Heading size={["sm", "2xl"]} color="#63B3ED">
-                      {vision.title}
-                    </Heading>
-                    <Text
-                      textAlign="center"
-                      fontSize={["0.3em", "1em"]}
-                      color="white"
-                    >
-                      {vision.text}
-                    </Text>
-                  </VStack>
-                </Container>
-              </Box>
+                title={vision.title}
+                titleColor="#63B3ED"
+                text={vision.text}
+                textColor="white"
+              />
               <Card
                 width="full"
                 height={["6em", "15em"]}

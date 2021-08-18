@@ -22,10 +22,7 @@ const FeaturedEvent = (props) => {
           w="full"
           direction={["column", "row"]}
           alignItems="center"
-<<<<<<< 54-homepage
           fontWeight="bold"
-=======
->>>>>>> GH-54: Mobilise all
         >
           <Text fontSize={["0.7em", "1em"]} color="white">
             {scEventText}
