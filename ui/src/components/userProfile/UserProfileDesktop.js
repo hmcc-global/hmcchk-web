@@ -319,7 +319,6 @@ const UserProfileDesktop = (props) => {
                       size="sm"
                       borderRadius="5"
                       {...register("campus")}
-                      isReadOnly
                       pointerEvents="none"
                     >
                       {campusList.map((item) => {
@@ -411,7 +410,7 @@ const UserProfileDesktop = (props) => {
                 variant="outline"
                 type="submit"
               >
-                Edit Information
+                Save Information
               </Button>
             </TabPanel>
             <TabPanel p="7%">
@@ -434,7 +433,6 @@ const UserProfileDesktop = (props) => {
                   <Select
                     size="sm"
                     borderRadius="5"
-                    isReadOnly
                     pointerEvents="none"
                     {...register("ministryTeam")}
                   >

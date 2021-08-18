@@ -45,14 +45,13 @@ import {
   splitFullName,
   updateUserDataRequest,
 } from "../helpers/userInformationHelpers";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const CompleteUserProfileContainer = (props) => {
   const formLabelColor = "#2C5282";
   const formValidation = { required: true };
   const user = useSelector((state) => state.user);
-  const history = useHistory();
+  const { history } = props;
   const [tabIndex, setTabIndex] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -150,9 +149,7 @@ const CompleteUserProfileContainer = (props) => {
   let isBaptised = watchB("isBaptised");
 
   useEffect(() => {
-    if (!user.id) {
-      history.push("/login");
-    } else {
+    if (user.id) {
       let { firstName, lastName } = splitFullName(user.fullName);
       setValueA("firstName", firstName);
       setValueA("lastName", lastName);
@@ -175,7 +172,7 @@ const CompleteUserProfileContainer = (props) => {
           </ModalHeader>
 
           <ModalBody>
-            <Center fontsize="md" fontWeight="600" color="#171923">
+            <Center fontSize="md" fontWeight="600" color="#171923">
               Your HMCC Profile is all set
             </Center>
             <Center fontSize="sm" color="#718096" textAlign="center">

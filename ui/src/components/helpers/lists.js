@@ -72,6 +72,7 @@ const campusList = [
   "City University of Hong Kong",
   "The Education University of Hong Kong",
   "Lingnan University",
+  "Others",
 ];
 
 const countryList = [

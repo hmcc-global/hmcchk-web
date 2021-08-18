@@ -231,7 +231,7 @@ const UserProfileMobile = (props) => {
                   variant="outline"
                   type="submit"
                 >
-                  Edit Information
+                  Save Information
                 </Button>
               </Center>
 
@@ -298,7 +298,6 @@ const UserProfileMobile = (props) => {
                     size="sm"
                     borderRadius="5"
                     {...register("campus")}
-                    isReadOnly
                     pointerEvents="none"
                   >
                     {campusList.map((item) => {
@@ -400,7 +399,6 @@ const UserProfileMobile = (props) => {
                   <Select
                     size="sm"
                     borderRadius="5"
-                    isReadOnly
                     pointerEvents="none"
                     {...register("ministryTeam")}
                   >
