@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router";
 import {
   IconButton,
   Avatar,
@@ -97,12 +98,6 @@ export default SidebarWithHeader;
 //   onClose: () => void;
 // }
 
-const onLogout = (props) => {
-  const { history } = props;
-  localStorage.clear();
-  history.push("/admin/");
-};
-
 const SidebarContent = ({ onClose, ...rest }) => {
   const { toggleColorMode } = useColorMode();
 
@@ -184,6 +179,13 @@ const NavItem = ({ icon, children, ...rest }) => {
 //   onOpen: () => void;
 // }
 const MobileNav = ({ onOpen, ...rest }) => {
+  let history = useHistory();
+
+  const onLogout = () => {
+    localStorage.clear();
+    history.push("/admin/");
+  };
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -256,7 +258,6 @@ const MobileNav = ({ onOpen, ...rest }) => {
             >
               <MenuItem>Profile</MenuItem>
               <MenuItem>Settings</MenuItem>
-              <MenuDivider />
               <MenuItem onClick={onLogout}>Log out</MenuItem>
             </MenuList>
           </Menu>
