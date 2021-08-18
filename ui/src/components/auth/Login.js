@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
-import GoogleButton from "react-google-button";
 import { useForm } from "react-hook-form";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
-import Signup from "./Signup";
 import {
   Box,
   Card,
@@ -26,21 +24,23 @@ const Login = (props) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [result, setResult] = useState("");
 
   const onSubmit = (data) => {
     props.postLogin(data.email, data.password);
   };
 
   const onGoogleSuccess = async ({ tokenId }) => {
-    const { data } = await axios.post("/api/auth/signup-google", {
+    const { data } = await axios.post("/api/auth/login-google", {
       tokenId: tokenId,
     });
+    console.log(data);
+    dispatch(signin(data));
   };
 
   const onGoogleFailure = ({ error }) => {
     console.log(error);
   };
+
 
   const inputBoxStyle = {
     background: "#ffffff",
@@ -154,7 +154,6 @@ const Login = (props) => {
                   </Text>
                 </Link>
               </VStack>
-              <p>{result}</p>
               <VStack spacing={5} marginTop="25px">
                 <Button type="submit" style={submitBoxStyle}>
                   Login
