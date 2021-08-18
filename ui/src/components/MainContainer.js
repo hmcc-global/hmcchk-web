@@ -20,6 +20,7 @@ import AdminForm from "./admin/AdminForm";
 import AdminGiving from "./admin/AdminGiving";
 import FooterContainer from "./footer/FooterContainer";
 import NoMatch from "./errors/NoMatch";
+import ConnectFloatButton from "./connect-float/ConnectFloatButton";
 
 const MainContainer = () => {
   return (
@@ -118,6 +119,7 @@ const MainContainer = () => {
         <PrivateRoute path="*" permissions={["public"]} component={NoMatch} />
       </Switch>
       <FooterContainer />
+      <ConnectFloatButton />
     </chakra.main>
   );
 };
