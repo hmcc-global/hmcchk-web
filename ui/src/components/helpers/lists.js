@@ -1,3 +1,5 @@
+const accessTypeList = ["Unsigned", "Signed", "Alumni", "Admin", "Stewardship"];
+
 const lifestageList = [
   "Building Blocks",
   "Undergraduate",
@@ -29,7 +31,28 @@ const lifegroupList = [
   "SWAT",
 ];
 
-const districtList = ["Kowloon", "New Territories", "Hong Kong Island"];
+const districtList = [
+  "Islands",
+  "Kwai Tsing",
+  "North",
+  "Sai Kung",
+  "Sha Tin",
+  "Tai Po",
+  "Tsuen Wan",
+  "Tuen Mun",
+  "Yuen Long",
+  "Kowloon City",
+  "Kwun Tong",
+  "Sham Shui Po",
+  "Wong Tai Sin",
+  "Yau Tsim Mong",
+  "Central and Western",
+  "Eastern",
+  "Southern",
+  "Wan Chai",
+];
+
+const regionList = ["Kowloon", "New Territories", "Hong Kong Island"];
 
 const campusList = [
   "Not Applicable",
@@ -291,10 +314,12 @@ const countryList = [
 ];
 
 export {
+  accessTypeList,
   lifestageList,
   ministryTeamList,
   lifegroupList,
   districtList,
+  regionList,
   campusList,
   countryList,
 };
