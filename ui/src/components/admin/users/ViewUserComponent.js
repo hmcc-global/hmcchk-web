@@ -23,6 +23,11 @@ const ViewUser = ({ props }) => {
     try {
       const id = props;
       const { data } = await axios.get("/api/users/get", { userId: id });
+      data[0].addressFlat = data[0].address.flat;
+      data[0].addressFloor = data[0].address.floor;
+      data[0].addressStreet = data[0].address.street;
+      data[0].addressDistrict = data[0].address.district;
+      data[0].addressRegion = data[0].address.region;
       setUsers(data[0]);
     } catch (err) {
       console.log(err);
@@ -61,7 +66,14 @@ const ViewUser = ({ props }) => {
               <ListItem>Campus: {data.campus}</ListItem>
               <ListItem>Life Stage: {data.lifestage}</ListItem>
               <ListItem>LIFE Group: {data.lifeGroup}</ListItem>
-              <ListItem>Address: {data.address}</ListItem>
+              <List>
+                Address:
+                <ListItem>{data.addressFlat}</ListItem>
+                <ListItem>{data.addressFloor}</ListItem>
+                <ListItem>{data.addressStreet}</ListItem>
+                <ListItem>{data.addressDistrict}</ListItem>
+                <ListItem>{data.addressRegion}</ListItem>
+              </List>
               <ListItem>Phone Number: {data.phoneNumber}</ListItem>
               <ListItem>Birthday: {data.birthday}</ListItem>
               <ListItem>Member: {data.isMember}</ListItem>

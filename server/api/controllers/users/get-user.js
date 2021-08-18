@@ -28,6 +28,7 @@ module.exports = {
 
       //let data = await User.find({ isDeleted: false }).populate("baptismInfo");
       let data = await User.find({ isDeleted: false }).populateAll();
+      sails.log.info("Retrieving users");
 
       return exits.success(data);
     } catch (err) {
