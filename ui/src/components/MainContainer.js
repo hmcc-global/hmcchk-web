@@ -115,6 +115,11 @@ const MainContainer = () => {
           component={ClearCache}
         />
         <PrivateRoute path="*" permissions={["public"]} component={NoMatch} />
+        <PrivateRoute
+          path="/admin/giving"
+          permissions={["stewardship"]}
+          component={AdminGiving}
+        />
       </Switch>
     </chakra.main>
   );

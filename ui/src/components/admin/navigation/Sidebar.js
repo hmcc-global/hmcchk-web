@@ -97,6 +97,12 @@ export default SidebarWithHeader;
 //   onClose: () => void;
 // }
 
+const onLogout = (props) => {
+  const { history } = props;
+  localStorage.clear();
+  history.push("/admin/");
+};
+
 const SidebarContent = ({ onClose, ...rest }) => {
   const { toggleColorMode } = useColorMode();
 
@@ -250,9 +256,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
             >
               <MenuItem>Profile</MenuItem>
               <MenuItem>Settings</MenuItem>
-              <MenuItem>Billing</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem onClick={onLogout}>Log out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
