@@ -47,7 +47,6 @@ import {
 } from "../helpers/userInformationHelpers";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { RiTruckLine } from "react-icons/ri";
 
 const CompleteUserProfileContainer = (props) => {
   const formLabelColor = "#2C5282";
@@ -111,7 +110,6 @@ const CompleteUserProfileContainer = (props) => {
 
       // set user id
       data.id = user.id;
-      console.log(data);
       const { status } = await updateUserDataRequest(data);
 
       if (status === 200) setModalOpen(true);
@@ -177,7 +175,9 @@ const CompleteUserProfileContainer = (props) => {
           </ModalHeader>
 
           <ModalBody>
-            <Center fontsize="md" fontWeight="600" color="#171923">Your HMCC Profile is all set</Center>
+            <Center fontsize="md" fontWeight="600" color="#171923">
+              Your HMCC Profile is all set
+            </Center>
             <Center fontSize="sm" color="#718096" textAlign="center">
               Thanks for sharing your information with us, welcome onboard!
             </Center>
