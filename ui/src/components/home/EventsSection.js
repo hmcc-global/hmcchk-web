@@ -7,6 +7,8 @@ import {
   Image,
   Text,
   VStack,
+  Heading,
+  Link,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { DateTime } from "luxon";
@@ -15,9 +17,10 @@ import { getRenderDate } from "../helpers/eventsHelpers";
 import EventsSectionCard from "./EventsSectionCards";
 import FeaturedEvent from "./FeaturedEvent";
 
+const allEventsText = "all events >";
+
 const EventsSection = () => {
   const [events, setEvents] = useState([]);
-  const [images, setImages] = useState([]);
 
   const populateData = async () => {
     try {
@@ -38,12 +41,7 @@ const EventsSection = () => {
       });
       filtered.sort((a, b) => (a.renderDate > b.renderDate ? 1 : -1));
       let upcoming = filtered.slice(0, 5);
-      setEvents([...upcoming]);
-      let imagesLink = [];
-      upcoming.forEach((u) => {
-        imagesLink.push(u.imageUrl);
-      });
-      setImages(imagesLink);
+      setEvents(upcoming);
     } catch (err) {
       console.log(err);
     }
@@ -53,7 +51,6 @@ const EventsSection = () => {
     populateData();
   }, []);
 
-  console.log(images);
   return (
     <Flex w="full" h="100vh" direction="column">
       <Container
@@ -66,22 +63,43 @@ const EventsSection = () => {
           <FeaturedEvent />
         </VStack>
       </Container>
+      <Container maxW="container.lg" justifyContent="center" display="flex">
+        <VStack w="full">
+          <HStack w="full" whiteSpace="nowrap" height="10vh">
+            <Heading color="black">Upcoming Events</Heading>
+            <chakra.hr
+              width="full"
+              color="black"
+              border="none"
+              height="2px"
+              bgColor="black"
+            />
+            <Text color="black">
+              <Link target="_blank" href="/events">
+                {allEventsText}
+              </Link>
+            </Text>
+          </HStack>
+        </VStack>
+      </Container>
       <Box
         w="full"
-        height="50vh"
         display="flex"
         justifyContent="flex-start"
-        overflowX="auto"
+        overflowX="hidden"
         overflowY="hidden"
         whiteSpace="nowrap"
+        _hover={{
+          overflowX: "auto",
+        }}
       >
         <HStack spacing={4} padding={5} justifyContent="flex-start">
-          {images.length > 0 &&
-            images.map((img, i) => (
+          {events.length > 0 &&
+            events.map((event, i) => (
               <EventsSectionCard
                 width="500px"
                 height="auto"
-                url={img}
+                event={event}
                 key={"event" + i}
               />
             ))}
