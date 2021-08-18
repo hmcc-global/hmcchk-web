@@ -3,23 +3,32 @@ import {useForm} from 'react-hook-form';
 import { ChevronLeftIcon, EmailIcon, LockIcon } from '@chakra-ui/icons';
 import Country from './country.json';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { Box, Card, Paper, VStack, Flex, Image, Text, Stack, HStack, Button, Link } from "@chakra-ui/react";
+import { Box, Center, UnorderedList, ListItem,Card, Paper, VStack, Flex, Image, Text, Stack, HStack, Button, Link } from "@chakra-ui/react";
 
 const Signup = () => {
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, watch, formState:{errors} } = useForm();
   const [result, setResult] = useState("");
   const onSubmit = (data) => setResult(JSON.stringify(data));
   const onChangeReCAPTCHA = (value) => {console.log("Captcha value:", value);}
 
   const inputBox = {
-    color:'black'
+    color:'black',
+    background: '#FFFFFF',
+    border: '1px solid #E2E8F0',
+    boxSizing: 'border-box',
+    borderRadius: '6px',
+    flex: 'none',
+    alignSelf: 'stretch',
+    flexGrow: '0',
+    margin: '8px 0px',
+    padding:'3px 10px',
   }
 
   const submitBoxStyle = {
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '3px 19px',
+    padding: '6px 19px',
     background: 'rgba(0, 0, 0, 0.04)',
     border: '1px solid #FFFFFF',
     boxSizing: 'border-box',
@@ -27,6 +36,7 @@ const Signup = () => {
     borderRadius: '10px',
     width:'250px',
     fontWeight:'bold',
+    marginTop:'20px',
     marginBottom:'20px'
   };
 
@@ -65,7 +75,7 @@ const Signup = () => {
 
   return(
     <>
-      <Stack background='#2C5282' color='white' w='100vw' padding='20px' fontFamily='inter'>
+      <Stack background='#2C5282' color='white' padding='20px' fontFamily='inter'>
         <Flex>
         <Box>
             <Link href='/login'>
@@ -77,18 +87,21 @@ const Signup = () => {
         <Flex justifyContent='center'>
           <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
             <VStack justify='center' align='center'>
-              <Image 
-                marginBottom='15px'
-                h={{base:'5vh', sm:'5.5vh', md:'6.5vh',lg:'7vh',xl:'8vh'}} 
+              <Image
+                marginTop = {{base:'30px', md:'none'}}
+                marginBottom={{base:'15px', md:"40px"}}
+                h={{ base: "6vh", sm: "8vh", md: "10vh", lg: "12vh", xl: "15vh" }}
                 src={`${process.env.PUBLIC_URL}/images/ripple.png`}
-                alt='Logo of HMCC' /> 
-              <HStack>
-                <Text>Sign Up</Text>
+                alt="Logo of HMCC"
+              />
+              <Text fontWeight="bold" fontSize="2xl" display={{base:'flex', md:'none'}}>Sign Up</Text>
+              <HStack spacing={{base:'none',md:'8'}}>
+                <Text fontWeight="bold" fontSize="2xl" display={{base:'none', md:'flex'}}>Sign Up</Text>
                 <Image 
-                  h='20vh'
+                  h='85vh'
                   src={`${process.env.PUBLIC_URL}/images/HLine.svg`}
                   alt='Horizontal Line' /> 
-                <VStack alignItems='flex-start'>
+                <VStack alignItems='flex-start' marginLeft={{base:'20px', md:'none'}}>
                   <Input 
                     label='Enter Your Email Address' 
                     name='email'
@@ -103,7 +116,27 @@ const Signup = () => {
                     placeholder='Password' 
                     register = {register} 
                     required />
-                  <Text>Password should</Text>
+                  <Center>
+                  <Box maxW="300">
+                    <Text color="#FED7D7" w="50vw" fontSize={[12, 12, 12, 14]}>
+                      Your new password should consist of:
+                    </Text>
+                    <UnorderedList
+                      color="#FED7D7"
+                      w="300"
+                      fontSize={[12, 12, 12, 14]}
+                    >
+                      <ListItem>At least 8 characters in length</ListItem>
+                      <ListItem>
+                        Mixture of both uppercase and lowercase characters
+                      </ListItem>
+                      <ListItem>Contains at least one number</ListItem>
+                      <ListItem>
+                        Contains at least one special character
+                      </ListItem>
+                    </UnorderedList>
+                  </Box>
+                </Center>
                   <Input 
                     label='Re-enter Your Account Password' 
                     name= 'repassword'
@@ -146,6 +179,7 @@ const Signup = () => {
                 </VStack>
               </HStack>
               <ReCAPTCHA
+                style={{left:'5%', position:'relative', marginTop:'20px'}}
                 sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                 onChange={onChangeReCAPTCHA}  
               />

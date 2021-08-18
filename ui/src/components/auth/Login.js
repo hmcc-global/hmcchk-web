@@ -23,7 +23,10 @@ import { Route } from "react-router";
 const Login = (props) => {
   const { register, handleSubmit } = useForm();
   const [result, setResult] = useState("");
-  const onSubmit = (data) => setResult(JSON.stringify(data));
+
+  const onSubmit = (data) => {
+    props.postLogin(data.email, data.password);
+  };
 
   const onGoogleSuccess = async ({ tokenId }) => {
     const { data } = await axios.post("/api/auth/signup-google", {
@@ -40,7 +43,7 @@ const Login = (props) => {
     border: "1px solid #000000",
     boxSizing: "border-box",
     borderRadius: "6px",
-    padding: "3px",
+    padding: "3px 10px",
     width: "300px",
     color: "black",
     paddingLeft: "5px",
@@ -75,13 +78,11 @@ const Login = (props) => {
 
   return (
     <>
-      <Route exact path="/login/signup" component={Signup} />
       <Stack
         background="#2C5282"
         color="white"
-        h="100vh"
-        w="100vw"
         padding="20px"
+        h='100vh'
       >
         <Flex>
           <Box>
@@ -94,6 +95,7 @@ const Login = (props) => {
         <Flex justifyContent="center">
           <VStack justify="center" align="center">
             <Image
+              marginTop = {{base:'30px', md:'none'}}
               marginBottom="15px"
               h={{ base: "6vh", sm: "8vh", md: "10vh", lg: "12vh", xl: "15vh" }}
               src={`${process.env.PUBLIC_URL}/images/ripple.png`}
@@ -124,12 +126,9 @@ const Login = (props) => {
               </VStack>
               <p>{result}</p>
               <VStack spacing={5} marginTop="25px">
-                <input
-                  type="submit"
-                  name="Login"
-                  value="Login"
-                  style={submitBoxStyle}
-                />
+                <Button type='submit' style={submitBoxStyle}>
+                  Login
+                </Button>
                 <GoogleLogin
                   clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                   render={(renderProps) => (
@@ -169,9 +168,9 @@ const Login = (props) => {
                 />
               </Flex>
             </HStack>
-            <HStack display={{ base: "none", md: "flex" }}>
-              <Button style={signupBoxStyle} marginRight="20px">
-                <Link href="/login/signup">
+            <Stack direction={{base:'column', md:'row'}} spacing={5}>
+              <Button style={signupBoxStyle}>
+                <Link href="/signup">
                   Sign up with your personal email
                 </Link>
               </Button>
@@ -195,7 +194,7 @@ const Login = (props) => {
                 onFailure={onGoogleFailure}
                 cookiePolicy={"single_host_origin"}
               />
-            </HStack>
+            </Stack>
           </VStack>
         </Flex>
       </Stack>
