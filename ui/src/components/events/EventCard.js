@@ -86,7 +86,7 @@ const EventCard = (props) => {
         <AspectRatio mb="5" width="100%" ratio={16 / 9}>
           <Image borderRadius="20" src={eventData.imageUrl} objectFit="cover" />
         </AspectRatio>
-        <Box minHeight={["150", "280"]}>
+        <Box height={["200", "280"]} overflow="hidden" position="relative">
           <Heading as="h4" mb="5" size="lg" fontWeight="900" isTruncated>
             {eventData.title}
           </Heading>
@@ -117,33 +117,44 @@ const EventCard = (props) => {
               Location: {eventData.location}
             </Text>
           )}
-          <Box fontSize={["xs", "md"]} mt="5" noOfLines="4">
+          <Text fontSize={["xs", "md"]} mt="5">
             {parse(eventData.description, options)}
-          </Box>
+          </Text>
+          <Box
+            position="absolute"
+            bottom="0"
+            left="0"
+            w="100%"
+            h="25%"
+            background="linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); "
+          ></Box>
         </Box>
         <Stack mt="5" direction="row" justifyContent="center" spacing={2}>
-          <Button
-            flex={1}
-            as={Link}
-            size="sm"
-            target="_blank"
-            href={eventData.signUpLink ? eventData.signUpLink : false}
-            isDisabled={eventData.signUpLink.length <= 0}
-            fontSize={["xs", "sm"]}
-          >
-            Sign up
-          </Button>
-          <Button
-            flex={1}
-            as={Link}
-            size="sm"
-            target="_blank"
-            href={generateGoogleCalendarLink(eventData)}
-            isDisabled={generateGoogleCalendarLink(eventData) ? false : true}
-            fontSize={["xs", "sm"]}
-          >
-            Add to Calendar
-          </Button>
+          {eventData.signUpLink.length > 0 && (
+            <Button
+              flex={1}
+              as={Link}
+              size="sm"
+              target="_blank"
+              href={eventData.signUpLink ? eventData.signUpLink : null}
+              isDisabled={eventData.signUpLink.length <= 0}
+              fontSize={["xs", "sm"]}
+            >
+              Sign up
+            </Button>
+          )}
+          {generateGoogleCalendarLink(eventData) && (
+            <Button
+              flex={1}
+              as={Link}
+              size="sm"
+              target="_blank"
+              href={generateGoogleCalendarLink(eventData)}
+              fontSize={["xs", "sm"]}
+            >
+              Add to Calendar
+            </Button>
+          )}
         </Stack>
       </Box>
       <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
@@ -213,37 +224,39 @@ const EventCard = (props) => {
               variant="outline"
               colorScheme="gray"
             >
-              <Button
-                flex={[false, 1]}
-                as={Link}
-                target="_blank"
-                href={eventData.mapLink ? eventData.mapLink : false}
-                isDisabled={eventData.mapLink.length <= 0}
-              >
-                Directions
-              </Button>
-              <Button
-                flex={[false, 1]}
-                mt={[2, 0]}
-                as={Link}
-                target="_blank"
-                href={eventData.signUpLink ? eventData.signUpLink : false}
-                isDisabled={eventData.signUpLink.length <= 0}
-              >
-                Sign up
-              </Button>
-              <Button
-                flex={[false, 1]}
-                mt={[2, 0]}
-                as={Link}
-                target="_blank"
-                href={generateGoogleCalendarLink(eventData)}
-                isDisabled={
-                  generateGoogleCalendarLink(eventData) ? false : true
-                }
-              >
-                Add to Calendar
-              </Button>
+              {eventData.mapLink.length > 0 && (
+                <Button
+                  flex={[false, 1]}
+                  as={Link}
+                  target="_blank"
+                  href={eventData.mapLink ? eventData.mapLink : null}
+                >
+                  Directions
+                </Button>
+              )}
+              {eventData.signUpLink.length > 0 && (
+                <Button
+                  flex={[false, 1]}
+                  mt={[2, 0]}
+                  as={Link}
+                  target="_blank"
+                  href={eventData.signUpLink ? eventData.signUpLink : null}
+                >
+                  Sign up
+                </Button>
+              )}
+
+              {generateGoogleCalendarLink(eventData) && (
+                <Button
+                  flex={[false, 1]}
+                  mt={[2, 0]}
+                  as={Link}
+                  target="_blank"
+                  href={generateGoogleCalendarLink(eventData)}
+                >
+                  Add to Calendar
+                </Button>
+              )}
             </ButtonGroup>
           </ModalFooter>
         </ModalContent>

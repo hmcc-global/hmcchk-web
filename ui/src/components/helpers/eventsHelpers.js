@@ -21,7 +21,7 @@ const filterISOStringForGoogleCalendar = (isoString) => {
 };
 
 const generateGoogleCalendarLink = (eventData) => {
-  if (!eventData.time || !eventData.title) return false;
+  if (!eventData.time || !eventData.title) return null;
   let eventTime = eventData.time;
   const baseLink = "https://calendar.google.com/calendar/r/eventedit?";
   const eventTitle = "text=" + encodeURIComponent(eventData.title);
