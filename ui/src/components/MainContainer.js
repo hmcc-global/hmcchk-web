@@ -18,6 +18,7 @@ import AdminLoginContainer from "./admin/AdminLoginContainer";
 import AdminHome from "./admin/AdminHome";
 import AdminUser from "./admin/users/AdminUser";
 import AdminForm from "./admin/AdminForm";
+import AdminGiving from "./admin/AdminGiving";
 
 const MainContainer = () => {
   return (

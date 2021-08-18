@@ -41,7 +41,7 @@ const AdminLoginContainer = (props) => {
           result.data.accessType == "admin" ||
           result.data.accessType == "stewardship"
         ) {
-          return <Redirect to="/admin/home" />;
+          props.history.push("/admin/home");
         } else {
           toast({
             title: "Access denied.",

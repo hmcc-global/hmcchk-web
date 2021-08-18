@@ -35,7 +35,7 @@ import ArrayToExcelButton from "../ArrayToExcelButton";
 const smVariant = { navigation: "drawer", navigationButton: true };
 const mdVariant = { navigation: "sidebar", navigationButton: false };
 
-export default function App(props) {
+export default function AdminUser(props) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
 

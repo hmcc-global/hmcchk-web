@@ -10,7 +10,6 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-//import Header from "./navigation/Header";
 import SidebarWithHeader from "./navigation/Sidebar";
 
 const smVariant = { navigation: "drawer", navigationButton: true };
