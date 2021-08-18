@@ -15,6 +15,7 @@ const Card = (props) => {
       alignItems="center"
       background={color}
 <<<<<<< 54-homepage
+<<<<<<< 54-homepage
       _hover={{
         background: "rgba(0, 0, 0, 0.2)",
       }}
@@ -30,6 +31,11 @@ const Card = (props) => {
             color={textColor}
           >
 =======
+=======
+      _hover={{
+        background: "rgba(0, 0, 0, 0.2)",
+      }}
+>>>>>>> GH-54: Complete functionality, started mobile
     >
       <Container>
         <VStack>
