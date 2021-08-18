@@ -89,7 +89,7 @@ const MainContainer = () => {
           permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
           component={UserProfileContainer}
           path="/admin"
-          permissions={["admin", "stewardship"]}
+          permissions={["noUser"]}
           component={AdminLoginContainer}
         />
         <PrivateRoute
