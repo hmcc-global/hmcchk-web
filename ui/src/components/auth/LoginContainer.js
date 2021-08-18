@@ -29,7 +29,7 @@ const LoginContainer = (props) => {
   // }, []);
 
   const onGoogleSuccess = async ({ tokenId }) => {
-    const { data } = await axios.post("/api/auth/signup-google", {
+    const { data } = await axios.post("/api/auth/login-google", {
       tokenId: tokenId,
     });
     console.log(data);

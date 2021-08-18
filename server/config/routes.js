@@ -44,6 +44,7 @@ module.exports.routes = {
 
   // Auth APIs
   "post /api/auth/login": "auth/post-login",
+  "post /api/auth/login-google": "auth/post-login-google",
   "post /api/auth/signup": "auth/post-signup",
   "post /api/auth/signup-google": "auth/post-signup-google",
   "get /email/confirm/": "auth/email-confirm",
