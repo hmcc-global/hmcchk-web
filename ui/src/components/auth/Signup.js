@@ -362,7 +362,7 @@ const Signup = () => {
               </HStack>
               <ReCAPTCHA
                 style={{ left: "5%", position: "relative", marginTop: "20px" }}
-                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                sitekey="6Leaj_0bAAAAAMkeVQHfoO7fhkyv5Za8lBzRoNc0"
                 onChange={onChangeReCAPTCHA}
               />
               <input

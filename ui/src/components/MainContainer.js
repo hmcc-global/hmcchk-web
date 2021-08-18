@@ -8,6 +8,7 @@ import EventsPage from "./events/EventsPage";
 import VisitUsPage from "./visit-us/VisitUsPage";
 import ConnectPage from "./connect/ConnectPage";
 import PrivateRoute from "./helpers/PrivateRoute";
+import Signup from "./auth/Signup";
 import HomeContainer from "./home/HomeContainer";
 import FooterContainer from "./footer/FooterContainer";
 import ConfirmEmailPage from "./email/ConfirmEmailPage";
@@ -38,6 +39,12 @@ const MainContainer = () => {
           path="/login"
           permissions={["noUser"]}
           component={LoginContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/signup"
+          permissions={["noUser"]}
+          component={Signup}
         />
         <PrivateRoute
           exact
