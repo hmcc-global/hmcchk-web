@@ -231,16 +231,18 @@ const UserProfileDesktop = (props) => {
                   {...register("email")}
                 />
               </FormControl>
-              <Button
-                size="sm"
-                mt="8"
-                color="#0628A3"
-                borderColor="#0628A3"
-                borderRadius="10"
-                variant="outline"
-              >
-                Change Password
-              </Button>
+              {user.password !== "" && (
+                <Button
+                  size="sm"
+                  mt="8"
+                  color="#0628A3"
+                  borderColor="#0628A3"
+                  borderRadius="10"
+                  variant="outline"
+                >
+                  Change Password
+                </Button>
+              )}
             </TabPanel>
             <TabPanel p="7%">
               <Stack spacing="2%">
