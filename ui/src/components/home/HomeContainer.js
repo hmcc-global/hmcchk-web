@@ -4,7 +4,7 @@ import axios from "axios";
 const HomeContainer = (props) => {
   const { classes } = props;
   return (
-    <div className={classes.app}>
+    <div>
       <h1>HOME</h1>
     </div>
   );
