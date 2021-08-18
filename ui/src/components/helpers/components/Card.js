@@ -22,6 +22,7 @@ const Card = (props) => {
     >
       <Container>
         <VStack>
+<<<<<<< 54-homepage
           <Heading fontSize={["1em", "3em"]} color={titleColor}>
             {title}
           </Heading>
@@ -44,6 +45,16 @@ const Card = (props) => {
           </Heading>
           <Text textAlign="center" color={textColor}>
 >>>>>>> Finish About Us Section
+=======
+          <Heading size={["sm", "2xl"]} color={titleColor}>
+            {title}
+          </Heading>
+          <Text
+            textAlign="center"
+            fontSize={["0.3em", "1em"]}
+            color={textColor}
+          >
+>>>>>>> GH-54: Mobilise all
             {text}
           </Text>
         </VStack>
