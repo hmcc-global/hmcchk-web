@@ -12,6 +12,7 @@ import PrivateRoute from "./helpers/PrivateRoute";
 import HomeContainer from "./home/HomeContainer";
 import ConfirmEmailPage from "./email/ConfirmEmailPage";
 import UserProfileContainer from "./userProfile/UserProfileContainer";
+import CompleteUserProfileContainer from "./userProfile/CompleteUserProfile";
 
 const MainContainer = () => {
   return (
@@ -70,6 +71,12 @@ const MainContainer = () => {
           path="/email/confirm/:token"
           permissions={["public"]}
           component={ConfirmEmailPage}
+        />
+        <PrivateRoute
+          exact
+          path="/complete-profile"
+          permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
+          component={CompleteUserProfileContainer}
         />
         <PrivateRoute
           exact

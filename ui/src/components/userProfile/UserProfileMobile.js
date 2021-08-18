@@ -135,7 +135,7 @@ const UserProfileMobile = (props) => {
         )}
       </Center>
       <form onSubmit={handleSubmit(handleEditUserInformation)}>
-        <Tabs mt="7%" orientation="horizontal" variant="line">
+        <Tabs mt="7%" orientation="horizontal" variant="line" mb="12%">
           <TabList justifyContent="space-between">
             <Tab
               p="0.5"
