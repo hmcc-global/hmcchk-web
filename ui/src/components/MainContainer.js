@@ -105,7 +105,7 @@ const MainContainer = () => {
           component={AdminForm}
         />
         <PrivateRoute
-          path="/admin/forms"
+          path="/admin/giving"
           permissions={["stewardship"]}
           component={AdminGiving}
         />
