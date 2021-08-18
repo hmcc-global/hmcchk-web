@@ -18,7 +18,14 @@ import {
   Switch,
   InputRightAddon,
   Select,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalFooter,
+  VStack,
+  ModalCloseButton,
 } from "@chakra-ui/react";
+import { CheckCircleIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
@@ -29,6 +36,7 @@ import {
   campusList,
   lifestageList,
   countryList,
+  regionList,
 } from "../helpers/lists";
 import {
   settableDataFields,
@@ -40,8 +48,13 @@ import {
 const UserProfileMobile = (props) => {
   const { register, control, handleSubmit, setValue, formState } = useForm();
   const { errors } = formState;
-  const [userData, setUserData] = useState(null);
   const user = useSelector((state) => state.user);
+  const [userData, setUserData] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const onModalClose = (e) => {
+    setModalOpen(false);
+  };
 
   const fetchUserData = async () => {
     if (user.id) {
@@ -71,16 +84,17 @@ const UserProfileMobile = (props) => {
               setValue("addressFlat", userData[key]["flat"]);
               setValue("addressStreet", userData[key]["street"]);
               setValue("addressDistrict", userData[key]["district"]);
+              setValue("addressRegion", userData[key]["region"]);
             }
             break;
           case "baptismInfo":
-            if (userData[key]) {
+            if (userData[key] && userData[key][0]) {
               setValue("baptismDate", userData[key][0]["baptismDate"]);
               setValue("baptismPlace", userData[key][0]["baptismPlace"]);
             }
             break;
           case "membershipInfo":
-            if (userData[key]) {
+            if (userData[key] && userData[key][0]) {
               setValue(
                 "membershipRecognitionDate",
                 userData[key][0]["recognitionDate"]
@@ -108,14 +122,9 @@ const UserProfileMobile = (props) => {
 
     const { status } = await updateUserDataRequest(data);
     if (status === 200) {
+      setModalOpen(true);
       fetchUserData();
     }
-  };
-
-  const createErrorNotifier = (fieldName) => {
-    <FormErrorMessage key={fieldName + "errorMessage"}>
-      {errors[fieldName] && "This field cannot be left blank"}
-    </FormErrorMessage>;
   };
 
   useEffect(async () => {
@@ -124,6 +133,30 @@ const UserProfileMobile = (props) => {
 
   return (
     <>
+      <Modal isOpen={modalOpen} onClose={onModalClose}>
+        <ModalOverlay />
+        <ModalContent borderRadius="20">
+          <ModalCloseButton />
+          <VStack>
+            <Text
+              color="#0628A3"
+              fontSize="2xl"
+              fontWeight="700"
+              mt={6}
+              flex={1}
+              textAlign="center"
+            >
+              Edited successfully
+            </Text>
+            <Box flex={4}>
+              <Center w="100%" h="100%">
+                <CheckCircleIcon mt={5} w="50%" h="50%" color="#0628A3" />
+              </Center>
+            </Box>
+          </VStack>
+          <ModalFooter />
+        </ModalContent>
+      </Modal>
       <Center mt="7%" fontWeight="900" fontSize="36">
         <Text color="#065666" as="span">
           Hi
@@ -331,6 +364,18 @@ const UserProfileMobile = (props) => {
                   >
                     {districtList.map((item) => {
                       return <option key={"di" + item}>{item}</option>;
+                    })}
+                  </Select>
+                </FormControl>
+                <FormControl>
+                  <FormLabel color="#2C5282">Address: Region</FormLabel>
+                  <Select
+                    size="sm"
+                    borderRadius="5"
+                    {...register("addressRegion")}
+                  >
+                    {regionList.map((item) => {
+                      return <option key={"re" + item}>{item}</option>;
                     })}
                   </Select>
                 </FormControl>

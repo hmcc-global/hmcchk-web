@@ -9,6 +9,7 @@ const lifestageList = [
 ];
 
 const ministryTeamList = [
+  "Not Applicable",
   "Intercessory Prayer Team",
   "Creatives",
   "Hospitality",
@@ -20,6 +21,7 @@ const ministryTeamList = [
 ];
 
 const lifegroupList = [
+  "Not in a LIFE Group",
   "BBB",
   "DONKI",
   "Drippin",
@@ -32,6 +34,7 @@ const lifegroupList = [
 ];
 
 const districtList = [
+  "Not Applicable",
   "Islands",
   "Kwai Tsing",
   "North",
@@ -52,7 +55,12 @@ const districtList = [
   "Wan Chai",
 ];
 
-const regionList = ["Kowloon", "New Territories", "Hong Kong Island"];
+const regionList = [
+  "Not Applicable",
+  "Kowloon",
+  "New Territories",
+  "Hong Kong Island",
+];
 
 const campusList = [
   "Not Applicable",
