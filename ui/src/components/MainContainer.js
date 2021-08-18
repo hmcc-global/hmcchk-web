@@ -9,6 +9,7 @@ import FormManager from "./forms/FormManager";
 import EventsPage from "./events/EventsPage";
 import VisitUsPage from "./visit-us/VisitUsPage";
 import PrivateRoute from "./helpers/PrivateRoute";
+import Signup from "./auth/Signup";
 import HomeContainer from "./home/HomeContainer";
 
 const MainContainer = () => {
@@ -26,6 +27,12 @@ const MainContainer = () => {
           path="/login"
           permissions={["noUser"]}
           component={LoginContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/signup"
+          permissions={["noUser"]}
+          component={Signup}
         />
         <PrivateRoute
           exact
