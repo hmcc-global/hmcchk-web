@@ -136,7 +136,7 @@ const EventCard = (props) => {
               as={Link}
               size="sm"
               target="_blank"
-              href={eventData.signUpLink ? eventData.signUpLink : false}
+              href={eventData.signUpLink ? eventData.signUpLink : null}
               isDisabled={eventData.signUpLink.length <= 0}
               fontSize={["xs", "sm"]}
             >
@@ -229,7 +229,7 @@ const EventCard = (props) => {
                   flex={[false, 1]}
                   as={Link}
                   target="_blank"
-                  href={eventData.mapLink ? eventData.mapLink : false}
+                  href={eventData.mapLink ? eventData.mapLink : null}
                 >
                   Directions
                 </Button>
@@ -240,7 +240,7 @@ const EventCard = (props) => {
                   mt={[2, 0]}
                   as={Link}
                   target="_blank"
-                  href={eventData.signUpLink ? eventData.signUpLink : false}
+                  href={eventData.signUpLink ? eventData.signUpLink : null}
                 >
                   Sign up
                 </Button>

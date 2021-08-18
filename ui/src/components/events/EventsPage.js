@@ -21,27 +21,31 @@ const EventsPage = (props) => {
       const { data, status } = await axios.get(
         "/api/announcements/get-announcements"
       );
-      const filtered = data.filter((item) => {
-        if (item.endDate) {
-          const endDate = new DateTime.fromISO(item.endDate);
-          const renderDate = getRenderDate(
-            item.startDate,
-            item.endDate,
-            item.recurrence
-          );
-          item.renderDate = renderDate;
-          return endDate > DateTime.now();
-        } else return false;
-      });
-      filtered.sort((a, b) => (a.renderDate > b.renderDate ? 1 : -1));
-      setEventsList([...filtered]);
+      if (status === 200) {
+        const filtered = data.filter((item) => {
+          if (item.endDate) {
+            const endDate = new DateTime.fromISO(item.endDate);
+            const renderDate = getRenderDate(
+              item.startDate,
+              item.endDate,
+              item.recurrence
+            );
+            item.renderDate = renderDate;
+            return endDate > DateTime.now();
+          } else return false;
+        });
+        filtered.sort((a, b) => (a.renderDate > b.renderDate ? 1 : -1));
+        setEventsList([...filtered]);
+      } else {
+        throw Error("Something went wrong with the requesy")
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
   return (
-    <Container maxW="container.xl">
+    <Container maxW="container.lg">
       <Heading
         as="h2"
         mb="2"
