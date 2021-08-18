@@ -21,7 +21,11 @@ import {
 import { Route } from "react-router";
 
 const Login = (props) => {
-  const { register, handleSubmit, formState:{errors} } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [result, setResult] = useState("");
 
   const onSubmit = (data) => {
@@ -78,14 +82,13 @@ const Login = (props) => {
 
   return (
     <>
-      <Stack
-        background="#2C5282"
-        color="white"
-        padding="20px"
-      >
+      <Stack background="#2C5282" color="white" padding="20px" h="100vh">
         <Flex>
           <Box>
-            <Link href="../sermons">
+            <Link
+              to={{ pathname: "https://hongkong.hmcc.net" }}
+              target="_blank"
+            >
               <ChevronLeftIcon boxSize={10} />
               Return to hongkong.hmcc.net
             </Link>
@@ -94,7 +97,7 @@ const Login = (props) => {
         <Flex justifyContent="center">
           <VStack justify="center" align="center">
             <Image
-              marginTop = {{base:'30px', md:'none'}}
+              marginTop={{ base: "30px", md: "none" }}
               marginBottom="15px"
               h={{ base: "6vh", sm: "8vh", md: "10vh", lg: "12vh", xl: "15vh" }}
               src={`${process.env.PUBLIC_URL}/images/ripple.png`}
@@ -105,22 +108,27 @@ const Login = (props) => {
             </Text>
             <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
               <VStack align="stretch" marginTop="40px">
-              <input 
-                    id='email'
-                    name = 'email'
-                    type='email' 
-                    placeholder='Email' 
-                    style={inputBoxStyle}
-                    {...register('email', {
-                      required: "Required",  
-                      pattern:{
-                        value:/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/ ,
-                        message: "Invalid email address"
-                      }
-                    })} 
-                  />
-                  {errors.email  && (
-                  <Text color="#FED7D7" fontWeight='bold' fontSize={[12, 12, 12, 14]}>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  style={inputBoxStyle}
+                  {...register("email", {
+                    required: "Required",
+                    pattern: {
+                      value:
+                        /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
+                      message: "Invalid email address",
+                    },
+                  })}
+                />
+                {errors.email && (
+                  <Text
+                    color="#FED7D7"
+                    fontWeight="bold"
+                    fontSize={[12, 12, 12, 14]}
+                  >
                     {errors.email.message}
                   </Text>
                 )}
@@ -135,7 +143,11 @@ const Login = (props) => {
                   })}
                 />
                 {errors.password && (
-                  <Text color="#FED7D7" fontWeight='bold' fontSize={[12, 12, 12, 14]}>
+                  <Text
+                    color="#FED7D7"
+                    fontWeight="bold"
+                    fontSize={[12, 12, 12, 14]}
+                  >
                     {errors.password.message}
                   </Text>
                 )}
@@ -147,7 +159,7 @@ const Login = (props) => {
               </VStack>
               <p>{result}</p>
               <VStack spacing={5} marginTop="25px">
-                <Button type='submit' style={submitBoxStyle}>
+                <Button type="submit" style={submitBoxStyle}>
                   Login
                 </Button>
                 <GoogleLogin
@@ -189,11 +201,9 @@ const Login = (props) => {
                 />
               </Flex>
             </HStack>
-            <Stack direction={{base:'column', md:'row'}} spacing={5}>
+            <Stack direction={{ base: "column", md: "row" }} spacing={5}>
               <Button style={signupBoxStyle}>
-                <Link href="/signup">
-                  Sign up with your personal email
-                </Link>
+                <Link href="/signup">Sign up with your personal email</Link>
               </Button>
               <GoogleLogin
                 clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}

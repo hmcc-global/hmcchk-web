@@ -111,7 +111,10 @@ const ResetPassword = (props) => {
       <Stack background="#2C5282" color="white" h="100vh">
         <Flex w="100vw">
           <Box>
-            <Link>
+            <Link
+              to={{ pathname: "https://hongkong.hmcc.net" }}
+              target="_blank"
+            >
               <ChevronLeftIcon boxSize={10} />
               Return to hongkong.hmcc.net
             </Link>
@@ -135,6 +138,11 @@ const ResetPassword = (props) => {
             </Text>
             <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
               <VStack>
+                {errors.password && (
+                  <Text color="#F6AD55" fontSize={[12, 12, 12, 14]}>
+                    {errors.password.message}
+                  </Text>
+                )}
                 <Text>Enter Your New Password</Text>
                 <input
                   id="password"
@@ -142,8 +150,8 @@ const ResetPassword = (props) => {
                     required: "required",
                     pattern: {
                       value:
-                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                      message: "Your Password does not fulfill the criteria", // JS only: <p>error message</p> TS only support string
+                        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+                      message: "Your Password isn't quite there yet", // JS only: <p>error message</p> TS only support string
                     },
                   })}
                   type="password"
@@ -151,11 +159,7 @@ const ResetPassword = (props) => {
                   placeholder="Password"
                   style={inputBoxStyle}
                 />
-                {errors.password && (
-                  <Text color="red" fontSize={[12, 12, 12, 14]}>
-                    {errors.password.message}
-                  </Text>
-                )}
+
                 <Center>
                   <Box maxW="300">
                     <Text color="#FED7D7" w="50vw" fontSize={[12, 12, 12, 14]}>
@@ -193,7 +197,7 @@ const ResetPassword = (props) => {
                 />
 
                 {errors.password_repeat && (
-                  <Text color="red" fontSize={[12, 12, 12, 14]}>
+                  <Text color="#F6AD55" fontSize={[12, 12, 12, 14]}>
                     {errors.password_repeat.message}
                   </Text>
                 )}
