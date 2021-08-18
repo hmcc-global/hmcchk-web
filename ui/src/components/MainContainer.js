@@ -12,14 +12,12 @@ import ConnectPage from "./connect/ConnectPage";
 import PrivateRoute from "./helpers/PrivateRoute";
 import Signup from "./auth/Signup";
 import HomeContainer from "./home/HomeContainer";
-<<<<<<< 31-feature-NavBar-Footer
 import FooterContainer from "./footer/FooterContainer";
-=======
 import AdminLoginContainer from "./admin/AdminLoginContainer";
 import AdminHome from "./admin/AdminHome";
 import AdminUser from "./admin/users/AdminUser";
 import AdminForm from "./admin/AdminForm";
->>>>>>> user table roughly done
+import AdminGiving from "./admin/AdminGiving";
 
 const MainContainer = () => {
   return (
@@ -105,6 +103,11 @@ const MainContainer = () => {
           path="/admin/forms"
           permissions={["admin", "stewardship"]}
           component={AdminForm}
+        />
+        <PrivateRoute
+          path="/admin/forms"
+          permissions={["stewardship"]}
+          component={AdminGiving}
         />
       </Switch>
       <FooterContainer />
