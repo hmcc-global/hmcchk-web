@@ -6,6 +6,8 @@ import {
   useColorMode,
   useColorModeValue,
   useToast,
+  Center,
+  Stack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -86,9 +88,11 @@ const AdminLoginContainer = (props) => {
             type="password"
             {...register("password")}
           ></Input>
-          <Button mb={6} colorScheme="teal" type="submit">
-            Log in
-          </Button>
+          <Center>
+            <Button mb={6} colorScheme="teal" type="submit">
+              Log in
+            </Button>
+          </Center>
         </form>
         <Button onClick={toggleColorMode}>Toggle Color Mode</Button>
       </Flex>

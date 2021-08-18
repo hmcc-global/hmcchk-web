@@ -124,61 +124,66 @@ export default function AdminUser(props) {
           bg={useColorModeValue("gray.200")}
           justifyContent="center"
           display={{ md: "flex" }}
+          overflowX="auto"
         >
-          <Table
-            variant="striped"
-            colorScheme="blackAlpha"
-            {...getTableProps()}
-          >
-            <Thead>
-              {headerGroups.map((headerGroup) => (
-                <Tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column) => (
-                    <Th
-                      {...column.getHeaderProps(column.getSortByToggleProps())}
-                      isNumeric={column.isNumeric}
-                    >
-                      {column.render("Header")}
-                      <chakra.span pl="4">
-                        {column.isSorted ? (
-                          column.isSortedDesc ? (
-                            <TriangleDownIcon aria-label="sorted descending" />
-                          ) : (
-                            <TriangleUpIcon aria-label="sorted ascending" />
-                          )
-                        ) : null}
-                      </chakra.span>
-                    </Th>
-                  ))}
-                  <Th>Actions</Th>
-                </Tr>
-              ))}
-            </Thead>
-            <Tbody {...getTableBodyProps()}>
-              {rows.map((row) => {
-                prepareRow(row);
-                return (
-                  <Tr {...row.getRowProps()}>
-                    {row.cells.map((cell) => (
-                      <Td
-                        {...cell.getCellProps()}
-                        isNumeric={cell.column.isNumeric}
+          <Box overflowX="auto">
+            <Table
+              variant="striped"
+              colorScheme="blackAlpha"
+              {...getTableProps()}
+            >
+              <Thead>
+                {headerGroups.map((headerGroup) => (
+                  <Tr {...headerGroup.getHeaderGroupProps()}>
+                    {headerGroup.headers.map((column) => (
+                      <Th
+                        {...column.getHeaderProps(
+                          column.getSortByToggleProps()
+                        )}
+                        isNumeric={column.isNumeric}
                       >
-                        {cell.render("Cell")}
-                      </Td>
+                        {column.render("Header")}
+                        <chakra.span pl="4">
+                          {column.isSorted ? (
+                            column.isSortedDesc ? (
+                              <TriangleDownIcon aria-label="sorted descending" />
+                            ) : (
+                              <TriangleUpIcon aria-label="sorted ascending" />
+                            )
+                          ) : null}
+                        </chakra.span>
+                      </Th>
                     ))}
-                    <Td>
-                      <Stack spacing={2} direction="row" align="center">
-                        <ViewUser props={data._id} />
-                        <EditUser></EditUser>
-                        <DeleteUser></DeleteUser>
-                      </Stack>
-                    </Td>
+                    <Th>Actions</Th>
                   </Tr>
-                );
-              })}
-            </Tbody>
-          </Table>
+                ))}
+              </Thead>
+              <Tbody {...getTableBodyProps()}>
+                {rows.map((row) => {
+                  prepareRow(row);
+                  return (
+                    <Tr {...row.getRowProps()}>
+                      {row.cells.map((cell) => (
+                        <Td
+                          {...cell.getCellProps()}
+                          isNumeric={cell.column.isNumeric}
+                        >
+                          {cell.render("Cell")}
+                        </Td>
+                      ))}
+                      <Td>
+                        <Stack spacing={2} direction="row" align="center">
+                          <ViewUser props={data._id} />
+                          <EditUser></EditUser>
+                          <DeleteUser></DeleteUser>
+                        </Stack>
+                      </Td>
+                    </Tr>
+                  );
+                })}
+              </Tbody>
+            </Table>
+          </Box>
         </Flex>
       </SidebarWithHeader>
     </>

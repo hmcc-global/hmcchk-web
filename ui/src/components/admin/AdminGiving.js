@@ -8,6 +8,12 @@ import {
   Heading,
   useBreakpointValue,
   useColorModeValue,
+  Table,
+  Thead,
+  Th,
+  Tbody,
+  Td,
+  Tr,
 } from "@chakra-ui/react";
 
 import SidebarWithHeader from "./navigation/Sidebar";
@@ -21,6 +27,8 @@ export default function AdminGiving() {
 
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
+  const columns = Array.from({ length: 100 });
+
   return (
     <>
       <SidebarWithHeader
@@ -33,11 +41,25 @@ export default function AdminGiving() {
           bg={useColorModeValue("gray.200")}
           justifyContent="center"
         >
-          <Flex direction="column" p={12} rounded={6}>
+          <Box p={12} rounded={6} overflowX="auto">
             <Heading mb={6} alignItems="center">
               Giving
             </Heading>
-          </Flex>
+            <Table>
+              <Thead>
+                {columns.map((col, i) => (
+                  <Th>{`Th ${i + 1}`}</Th>
+                ))}
+              </Thead>
+              <Tbody>
+                <Tr>
+                  {columns.map((col, i) => (
+                    <Td>{`Td ${i + 1}`}</Td>
+                  ))}
+                </Tr>
+              </Tbody>
+            </Table>
+          </Box>
         </Flex>
       </SidebarWithHeader>
     </>
