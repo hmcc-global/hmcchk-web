@@ -51,53 +51,20 @@ the account verification message.)`,
 
       const newEmailAddress = emailAddress.toLowerCase();
 
-      // Build up data for the new user record and save it to the database.
-      // (Also use `fetch` to retrieve the new ID so that we can use it below.)
-      const newUserRecord = await User.create(
-        _.extend(
-          {
-            email: newEmailAddress,
-            fullName,
-            lifestage: "Focus",
-            phoneNumber: 51747089,
-          },
-          sails.config.custom.verifyEmailAddresses
-            ? {
-                emailProofToken: await sails.helpers.strings.random(
-                  "url-friendly"
-                ),
-                emailProofTokenExpiresAt:
-                  Date.now() + sails.config.custom.emailProofTokenTTL,
-                emailStatus: "unconfirmed",
-              }
-            : {}
-        )
-      )
-        .intercept("E_UNIQUE", "emailAlreadyInUse")
-        .intercept({ name: "UsageError" }, "invalid")
-        .fetch();
-
-      // Store the user's new id in their session.
-      this.req.session.userId = newUserRecord.id;
-
-      // In case there was an existing session (e.g. if we allow users to go to the signup page
-      // when they're already logged in), broadcast a message that we can display in other open tabs.
-      if (sails.hooks.sockets) {
-        await sails.helpers.broadcastSessionChange(this.req);
-      }
-
-      // Send "welcome" email
-      await sails.helpers.sendTemplateEmail.with({
-        to: newEmailAddress,
-        subject: "Welcome to HMCC!",
-        template: "email-welcome-new-account",
-        templateData: {
-          fullName,
-          token: newUserRecord.emailProofToken,
-        },
+      const userRecord = await User.findOne({
+        email: newEmailAddress,
       });
 
-      return exits.success("signup with google success");
+      if (userRecord) {
+        throw "Unable to sign up, email already exists!";
+      }
+
+      const payload = {
+        email: data.email,
+        fullName: data.name,
+      };
+
+      return exits.success(payload);
     } catch (err) {
       sails.log(err);
       return exits.error(err);

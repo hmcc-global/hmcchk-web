@@ -21,7 +21,6 @@ the account verification message.)`,
     },
 
     password: {
-      required: true,
       type: "string",
       maxLength: 200,
       example: "passwordlol",
@@ -100,7 +99,10 @@ the account verification message.)`,
         _.extend(
           {
             email: newEmailAddress,
-            password: await sails.helpers.passwords.hashPassword(password),
+            password:
+              password !== ""
+                ? await sails.helpers.passwords.hashPassword(password)
+                : password,
             fullName,
             countryOfOrigin,
             lifestage,
