@@ -28,30 +28,31 @@ const LoginContainer = (props) => {
   //   await postLogin();
   // }, []);
 
-  // const onGoogleSuccess = async ({ tokenId }) => {
-  //   const { data } = await axios.post("/api/auth/signup-google", {
-  //     tokenId: tokenId,
-  //   });
-  // };
+  const onGoogleSuccess = async ({ tokenId }) => {
+    const { data } = await axios.post("/api/auth/signup-google", {
+      tokenId: tokenId,
+    });
+    console.log(data);
+  };
 
-  // const onGoogleFailure = ({ error }) => {
-  //   console.log(error);
-  // };
+  const onGoogleFailure = ({ error }) => {
+    console.log(error);
+  };
 
   return (
     <Box>
       <Box color="white"></Box>
+      <GoogleLogin
+        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+        buttonText="Login"
+        onSuccess={onGoogleSuccess}
+        onFailure={onGoogleFailure}
+        cookiePolicy={"single_host_origin"}
+      />
     </Box>
     // {/* <Paper className={classes.paper}>
     //   <Card>{user.email}</Card>
     //   <Card>
-    //     <GoogleLogin
-    //       clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-    //       buttonText="Login"
-    //       onSuccess={onGoogleSuccess}
-    //       onFailure={onGoogleFailure}
-    //       cookiePolicy={"single_host_origin"}
-    //     />
     //   </Card>
     // </Paper> */}
   );
