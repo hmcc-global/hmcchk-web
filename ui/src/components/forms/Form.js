@@ -23,16 +23,11 @@ import {
   Radio,
   Stack,
   Center,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalFooter,
   VStack,
-  HStack,
 } from "@chakra-ui/react";
 
 const Form = (props) => {
@@ -56,6 +51,7 @@ const Form = (props) => {
       floor: data.addressFloor,
       street: data.addressStreet,
       district: data.addressDistrict,
+      region: data.addressRegion,
     };
 
     let modifiedData = data;
@@ -65,6 +61,7 @@ const Form = (props) => {
     delete modifiedData["addressFloor"];
     delete modifiedData["addressStreet"];
     delete modifiedData["addressDistrict"];
+    delete modifiedData["addressRegion"];
 
     if (formId) setSubmissionData(modifiedData);
     else console.log("this form doesn't support submission");
@@ -156,11 +153,23 @@ const Form = (props) => {
                     placeholder="District"
                     {...register("addressDistrict", { required: true })}
                   >
+                    <option value="Yau Tsim Mong">Yau Tsim Mong</option>
+                    <option value="Islands">Islands</option>
+                  </Select>
+                </Box>
+              </Stack>
+              <Stack direction={["column", "row"]} w="100%">
+                <Box flex={1}>
+                  <Select
+                    placeholder="Region"
+                    {...register("addressRegion", { required: true })}
+                  >
                     <option value="Kowloon">Kowloon</option>
                     <option value="Hong Kong Island">Hong Kong Island</option>
                     <option value="New Territories">New Territories</option>
                   </Select>
                 </Box>
+                <Box flex={1} display={["none", "flex"]}></Box>
               </Stack>
             </Stack>
           );
@@ -195,7 +204,8 @@ const Form = (props) => {
               errors["addressFloor"] ||
               errors["addressFlat"] ||
               errors["addressStreet"] ||
-              errors["addressDistrict"]
+              errors["addressDistrict"] ||
+              errors["addressRegion"]
             }
           >
             {label}
@@ -204,7 +214,8 @@ const Form = (props) => {
               {(errors["addressFloor"] ||
                 errors["addressFlat"] ||
                 errors["addressStreet"] ||
-                errors["addressDistrict"]) &&
+                errors["addressDistrict"] ||
+                errors["addressRegion"]) &&
                 "Please fill in all of the fields!"}
             </FormErrorMessage>
           </FormControl>
@@ -373,16 +384,6 @@ const Form = (props) => {
           <ModalFooter />
         </ModalContent>
       </Modal>
-
-      {!user.id && (
-        <Alert status="error">
-          <AlertIcon />
-          <AlertTitle>You aren't logged in!</AlertTitle>
-          <AlertDescription>
-            You need to sign in before you can fill in this form
-          </AlertDescription>
-        </Alert>
-      )}
       <form onSubmit={handleSubmit(handleSubmitForm)}>
         {formImage !== "" && (
           <Image
