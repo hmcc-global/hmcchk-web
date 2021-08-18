@@ -101,7 +101,10 @@ const PasswordSubmitted = (props) => {
       <Stack background="#2C5282" color="white" h="100vh">
         <Flex w="100vw">
           <Box>
-            <Link>
+            <Link
+              to={{ pathname: "https://hongkong.hmcc.net" }}
+              target="_blank"
+            >
               <ChevronLeftIcon boxSize={10} />
               Return to hongkong.hmcc.net
             </Link>
