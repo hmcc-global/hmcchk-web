@@ -12,6 +12,8 @@ import {
   ModalBody,
   ModalCloseButton,
   Stack,
+  HStack,
+  VStack,
   Input,
   Form,
   FormControl,
@@ -29,25 +31,20 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 import {
-  accessTypes,
-  campuses,
-  lifestages,
-  ministryTeams,
+  accessTypeList,
+  lifestageList,
+  ministryTeamList,
+  lifegroupList,
+  districtList,
+  regionList,
+  campusList,
+  countryList,
 } from "../../helpers/UserConstants";
 
 const EditUser = (props) => {
   const toast = useToast();
 
-  const makeAccessTypes = function (x) {
-    return <option>{x}</option>;
-  };
-  const makeCampuses = function (x) {
-    return <option>{x}</option>;
-  };
-  const makeLifestages = function (x) {
-    return <option>{x}</option>;
-  };
-  const makeMinistryTeams = function (x) {
+  const arrayToOptions = function (x) {
     return <option>{x}</option>;
   };
 
@@ -65,8 +62,12 @@ const EditUser = (props) => {
     try {
       const id = props;
       const { data } = await axios.get("/api/users/get", { userId: id });
-      // data[0].isMember = data[0].isMember.toString();
-      // data[0].isBaptised = data[0].isBaptised.toString();
+      data[0].addressFlat = data[0].address.flat;
+      data[0].addressFloor = data[0].address.floor;
+      data[0].addressStreet = data[0].address.street;
+      data[0].addressDistrict = data[0].address.district;
+      data[0].addressRegion = data[0].address.region;
+      console.log(data[0]);
       setUsers(data[0]);
     } catch (err) {
       console.log(err);
@@ -87,6 +88,22 @@ const EditUser = (props) => {
     // Format the data
     setEditData(data);
 
+    let address = {
+      flat: data.addressFlat,
+      floor: data.addressFloor,
+      street: data.addressStreet,
+      district: data.addressDistrict,
+      region: data.addressRegion,
+    };
+
+    data.address = address;
+
+    delete data["addressFlat"];
+    delete data["addressFloor"];
+    delete data["addressStreet"];
+    delete data["addressDistrict"];
+    delete data["addressRegion"];
+
     data.accessType = data.accessType.toLowerCase();
 
     const status = await axios.put("/api/users/update", {
@@ -104,16 +121,6 @@ const EditUser = (props) => {
         duration: 3000,
         isClosable: true,
       });
-      // <>
-      //   <Modal isOpen={isOpen} onClose={onClose}>
-      //     <ModalOverlay />
-      //     <ModalContent>
-      //       <ModalCloseButton />
-      //       <ModalHeader>Success!</ModalHeader>
-      //       <ModalBody> User information updated! </ModalBody>
-      //     </ModalContent>
-      //   </Modal>
-      // </>
     }
 
     return status;
@@ -155,17 +162,14 @@ const EditUser = (props) => {
                     defaultValue={data.accessType}
                     {...register("accessType")}
                   >
-                    {accessTypes.map(makeAccessTypes)}
+                    {accessTypeList.map(arrayToOptions)}
                   </Select>
                   <FormLabel>Country of Origin</FormLabel>
                   <Select
                     defaultValue={data.countryOfOrigin}
                     {...register("countryOfOrigin")}
                   >
-                    <option>United Arab Emirates</option>
-                    <option>Nigeria</option>
-                    <option>Hong Kong</option>
-                    <option>United States</option>
+                    {countryList.map(arrayToOptions)}
                   </Select>
                   <FormLabel>Campus</FormLabel>
                   <Select
@@ -173,14 +177,14 @@ const EditUser = (props) => {
                     defaultValue={data.campus}
                     {...register("campus")}
                   >
-                    {campuses.map(makeCampuses)}
+                    {campusList.map(arrayToOptions)}
                   </Select>
                   <FormLabel>Life stage</FormLabel>
                   <Select
                     defaultValue={data.lifestage}
                     {...register("lifestage")}
                   >
-                    {lifestages.map(makeLifestages)}
+                    {lifestageList.map(arrayToOptions)}
                   </Select>
                   <FormLabel>LIFE Group</FormLabel>
                   <Select
@@ -188,9 +192,7 @@ const EditUser = (props) => {
                     defaultValue={data.lifeGroup}
                     {...register("lifeGroup")}
                   >
-                    <option>DRIPPIN'</option>
-                    <option>Yeet Hay</option>
-                    <option>Glow Up</option>
+                    {lifegroupList.map(arrayToOptions)}
                   </Select>
                   <FormLabel>Ministry Team</FormLabel>
                   <Select
@@ -198,11 +200,43 @@ const EditUser = (props) => {
                     placeholder="Select Ministry Teams"
                     {...register("ministryTeam")}
                   >
-                    {ministryTeams.map(makeMinistryTeams)}
+                    {ministryTeamList.map(arrayToOptions)}
                   </Select>
                   <FormLabel>Address</FormLabel>
-                  <Input defaultValue={data.address} {...register("address")} />
-                  <FormLabel>Phone number</FormLabel>
+                  <HStack>
+                    <Input
+                      defaultValue={data.addressFlat}
+                      placeholder="Room/Flat/Unit/Suite"
+                      {...register("addressFlat")}
+                    />
+                    <Input
+                      defaultValue={data.addressFloor}
+                      placeholder="Floor/Level"
+                      {...register("addressFloor")}
+                    />
+                  </HStack>
+                  <HStack>
+                    <Input
+                      defaultValue={data.addressStreet}
+                      placeholder="Street Address"
+                      {...register("addressStreet")}
+                    />
+                    <Select
+                      defaultValue={data.addressDistrict}
+                      placeholder="District"
+                      {...register("addressDistrict")}
+                    >
+                      {districtList.map(arrayToOptions)}
+                    </Select>
+                  </HStack>
+                  <Select
+                    defaultValue={data.addressRegion}
+                    placeholder="Region"
+                    {...register("addressRegion")}
+                  >
+                    {regionList.map(arrayToOptions)}
+                  </Select>
+                  <FormLabel>Phone Number</FormLabel>
                   <InputGroup>
                     <InputLeftAddon children="+852" />
                     <Input

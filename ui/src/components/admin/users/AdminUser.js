@@ -120,7 +120,11 @@ export default function App(props) {
             buttonTitle={"Export"}
           ></ArrayToExcelButton>
         </Stack>
-        <Flex bg={useColorModeValue("gray.200")} justifyContent="center">
+        <Flex
+          bg={useColorModeValue("gray.200")}
+          justifyContent="center"
+          display={{ md: "flex" }}
+        >
           <Table
             variant="striped"
             colorScheme="blackAlpha"

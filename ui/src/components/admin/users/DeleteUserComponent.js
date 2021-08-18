@@ -46,7 +46,7 @@ const DeleteUser = ({ props }) => {
     // Format the data
     setEditData(data);
 
-    if (data.isDeleted == "true") {
+    if (data.isDeleted === "true") {
       data.isDeleted = true;
     }
 
