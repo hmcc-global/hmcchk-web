@@ -14,6 +14,9 @@ const Card = (props) => {
       justifyContent="center"
       alignItems="center"
       background={color}
+      _hover={{
+        background: "rgba(0, 0, 0, 0.2)",
+      }}
     >
       <Container>
         <VStack>

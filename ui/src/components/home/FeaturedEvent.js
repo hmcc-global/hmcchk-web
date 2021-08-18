@@ -7,6 +7,7 @@ import {
   Image,
   Text,
   chakra,
+  Link,
 } from "@chakra-ui/react";
 
 const scEventText = "Sunday Celebration: 10AM HKT in-person & Online";
@@ -26,22 +27,11 @@ const FeaturedEvent = (props) => {
           borderWidth={1}
           borderColor="white"
           mt={5}
-          w="auto"
-          h="50vh"
+          w="full"
+          h="auto"
           src="https://hongkong.hmcc.net/wp-content/uploads/whats-new-sss-final.png"
           alt="Featured Event"
         />
-        <HStack marginTop="9vh" whiteSpace="nowrap">
-          <Heading color="black">Upcoming Events</Heading>
-          <chakra.hr
-            width="full"
-            color="black"
-            border="none"
-            height="2px"
-            bgColor="black"
-          />
-          <Text color="black">{allEventsText}</Text>
-        </HStack>
       </Box>
     </Flex>
   );

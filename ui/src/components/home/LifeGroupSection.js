@@ -5,6 +5,7 @@ import {
   Heading,
   HStack,
   Image,
+  Link,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -59,6 +60,9 @@ const LifeGroupSection = () => {
                 borderColor: "white",
               }}
               text={buttonText}
+              as={Link}
+              target="_blank"
+              href="/connect"
             />
           </VStack>
           <Image src={lgUrl} w="50%" />

@@ -3,6 +3,7 @@ import {
   Flex,
   Heading,
   HStack,
+  Link,
   Stack,
   Text,
   VStack,
@@ -53,7 +54,6 @@ const AboutSection = () => {
             </Heading>
             <Text color="white">{about.text}</Text>
             <HStack w="full" justify="center">
-              {/* on hover darken */}
               <Card
                 width="full"
                 height={250}
@@ -84,6 +84,9 @@ const AboutSection = () => {
                 color: "#1A365D",
                 borderColor: "#1A365D",
               }}
+              as={Link}
+              target="_blank"
+              href="https://hongkong.hmcc.net/about/who-we-are"
               text="More about us >"
             />
           </VStack>

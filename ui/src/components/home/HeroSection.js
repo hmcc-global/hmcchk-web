@@ -2,10 +2,12 @@ import {
   Flex,
   VStack,
   Stack,
+  Link,
   useBreakpointValue,
   Heading,
   ButtonGroup,
   Container,
+  Button,
 } from "@chakra-ui/react";
 import CustomButton from "../helpers/components/CustomButton";
 
@@ -38,7 +40,7 @@ const HeroSection = () => {
             <Heading
               color="white"
               as="h1"
-              fontSize="4vw"
+              fontSize={["1.9em", "4em"]}
               textAlign="center"
               whiteSpace="pre-wrap"
               alignSelf="center"
@@ -50,25 +52,34 @@ const HeroSection = () => {
               variant="outline"
               color="white"
               w="100%"
+              flexDirection={["column", "row"]}
             >
-              <CustomButton
+              <Button
                 _hover={{
                   bg: "white",
                   color: "#1A365D",
                   borderColor: "#1A365D",
                 }}
-                text={worshipText}
                 w="inherit"
-              />
-              <CustomButton
+                as={Link}
+                target="_blank"
+                href="/visit-us"
+              >
+                {worshipText}
+              </Button>
+              <Button
                 _hover={{
                   bg: "white",
                   color: "#1A365D",
                   borderColor: "#1A365D",
                 }}
-                text={churchText}
                 w="inherit"
-              />
+                as={Link}
+                target="_blank"
+                href="https://www.hongkong.hmcc.net/online"
+              >
+                {churchText}
+              </Button>
             </ButtonGroup>
           </Stack>
         </VStack>
