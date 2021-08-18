@@ -60,7 +60,7 @@ const NewHereSection = () => {
     <>
       <Flex
         w="full"
-        h={["100vh", "62vh"]}
+        h={["100vh", "100vh", "100vh", "100vh", "62vh"]}
         bgImage={`linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${newHereUrl})`}
         bgSize="cover"
         bgPosition="center center"
