@@ -79,16 +79,24 @@ const EventsSectionCard = (props) => {
           <AspectRatio mb="5" width="full" ratio={16 / 9}>
             <Image borderRadius={10} objectFit="cover" src={event.imageUrl} />
           </AspectRatio>
-          <HStack direction="space-between" spacing={6}>
+          <HStack direction="space-between" spacing={[2, 6]}>
             <Button
               as={Link}
               target="_blank"
               href={event.signUpLink ? event.signUpLink : null}
               isDisabled={event.signUpLink.length <= 0}
+              w={["8em", "10em"]}
+              fontSize={["0.8em", "1.3em"]}
             >
               SIGN UP
             </Button>
-            <Button onClick={onOpen}>LEARN MORE</Button>
+            <Button
+              onClick={onOpen}
+              w={["8em", "10em"]}
+              fontSize={["0.8em", "1.3em"]}
+            >
+              LEARN MORE
+            </Button>
           </HStack>
         </VStack>
       </Box>

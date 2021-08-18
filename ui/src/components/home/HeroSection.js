@@ -61,6 +61,7 @@ const HeroSection = () => {
                   bg: "white",
                   color: "#1A365D",
                   borderColor: "#1A365D",
+                  textDecoration: "none",
                 }}
                 w="inherit"
                 as={Link}
@@ -78,6 +79,7 @@ const HeroSection = () => {
                   bg: "white",
                   color: "#1A365D",
                   borderColor: "#1A365D",
+                  textDecoration: "none",
                 }}
                 w="inherit"
                 as={Link}

@@ -1,4 +1,5 @@
 import {
+  Box,
   Container,
   Flex,
   FormControl,
@@ -39,14 +40,12 @@ const NewHereSection = () => {
         email: email,
         notes: notes,
       });
-      console.log(data);
       setSubmitted(true);
       setTimeout(() => {
         resetForm();
       }, 2000);
       return;
     }
-    console.log("pls you are a bot");
   };
 
   const resetForm = () => {
@@ -61,7 +60,7 @@ const NewHereSection = () => {
     <>
       <Flex
         w="full"
-        h="62vh"
+        h={["100vh", "62vh"]}
         bgImage={`linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${newHereUrl})`}
         bgSize="cover"
         bgPosition="center center"
@@ -74,16 +73,14 @@ const NewHereSection = () => {
           background='linear-gradient(90deg, rgba(6, 40, 163, 0.6) 0%, rgba(196, 241, 249, 0.6) 100%);"    '
           style={{ backdropFilter: "blur(7px)" }}
         >
-          <Container
-            maxW={["container.md", "container.lg"]}
-            justifyContent="center"
-            display="flex"
-          >
-            <VStack color="white" justify="center" spacing={4}>
-              <Heading>New here? Connect with us</Heading>
+          <Container maxW="container.lg" justifyContent="center" display="flex">
+            <VStack color="white" justify="center" spacing={6}>
+              <Heading fontSize={["1.3em", "3em"]}>
+                New here? Connect with us
+              </Heading>
               <form onSubmit={onSubmit}>
-                <VStack spacing={4}>
-                  <FormControl id="name" isRequired>
+                <VStack spacing={[4, 8]} alignItems="center">
+                  <FormControl id="name" isRequired w={["85%", "100%"]}>
                     <Input
                       variant="flushed"
                       type="name"
@@ -91,7 +88,7 @@ const NewHereSection = () => {
                       onChange={(e) => setName(e.target.value)}
                     />
                   </FormControl>
-                  <FormControl id="email" isRequired>
+                  <FormControl id="email" isRequired w={["85%", "100%"]}>
                     <Input
                       variant="flushed"
                       type="email"
@@ -99,7 +96,7 @@ const NewHereSection = () => {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </FormControl>
-                  <FormControl id="notes">
+                  <FormControl id="notes" w={["85%", "100%"]}>
                     <Input
                       type="notes"
                       placeholder="Notes and remarks (Optional)"
@@ -110,10 +107,12 @@ const NewHereSection = () => {
                       }}
                     />
                   </FormControl>
-                  <ReCAPTCHA
-                    sitekey={process.env.REACT_APP_CAPTCHA}
-                    onChange={onChange}
-                  />
+                  <Box transform={["scale(0.77)", "scale(1)"]}>
+                    <ReCAPTCHA
+                      sitekey={process.env.REACT_APP_CAPTCHA}
+                      onChange={onChange}
+                    />
+                  </Box>
                   <CustomButton
                     bg="rgb(0, 0, 0, 0)"
                     variant="outline"
