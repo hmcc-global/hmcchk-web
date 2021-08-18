@@ -37,7 +37,7 @@ const EventsPage = (props) => {
         filtered.sort((a, b) => (a.renderDate > b.renderDate ? 1 : -1));
         setEventsList([...filtered]);
       } else {
-        throw Error("Something went wrong with the requesy")
+        throw Error("Something went wrong with the request");
       }
     } catch (err) {
       console.log(err);
