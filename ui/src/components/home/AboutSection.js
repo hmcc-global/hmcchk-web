@@ -1,4 +1,6 @@
 import {
+  Box,
+  Button,
   Container,
   Flex,
   Heading,
@@ -49,46 +51,81 @@ const AboutSection = () => {
           display="flex"
         >
           <VStack w="full" justify="center" spacing={8}>
-            <Heading color="white" as="h2" fontSize="3vw" alignSelf="baseline">
+            <Heading
+              color="white"
+              as="h2"
+              fontSize={["2em", "5em"]}
+              alignSelf="baseline"
+            >
               {about.title}
             </Heading>
-            <Text color="white">{about.text}</Text>
-            <HStack w="full" justify="center">
-              <Card
-                width="full"
-                height={250}
+            <Text fontSize={["0.9em", "1em"]} color="white" textAlign="justify">
+              {about.text}
+            </Text>
+            <Stack
+              w="full"
+              justify="center"
+              direction={("column", "row")}
+              alignItems="center"
+            >
+              <Box
+                w="full"
+                height={["5em", "full"]}
+                borderWidth={1}
+                borderColor="white"
+                borderRadius={10}
+                display="flex"
+                flexDir="column"
+                justifyContent="center"
+                alignItems="center"
                 color="rgba(255, 255, 255, 0.2)"
-                title={vision.title}
-                titleColor="#63B3ED"
-                text={vision.text}
-                textColor="white"
-              />
+                _hover={{
+                  background: "rgba(0, 0, 0, 0.2)",
+                }}
+              >
+                <Container>
+                  <VStack>
+                    <Heading size={["sm", "2xl"]} color="#63B3ED">
+                      {vision.title}
+                    </Heading>
+                    <Text
+                      textAlign="center"
+                      fontSize={["0.3em", "1em"]}
+                      color="white"
+                    >
+                      {vision.text}
+                    </Text>
+                  </VStack>
+                </Container>
+              </Box>
               <Card
                 width="full"
-                height={250}
+                height={["5em", "full"]}
                 color="rgba(255, 255, 255, 0.2)"
                 title={mission.title}
                 titleColor="#63B3ED"
                 text={mission.text}
                 textColor="white"
               />
-            </HStack>
-            <CustomButton
-              alignSelf="flex-end"
+            </Stack>
+            <Button
+              alignSelf={["center", "flex-end"]}
               bg="rgb(0, 0, 0, 0)"
               variant="outline"
               color="white"
-              w="23.5%"
+              w={["full", "23.5%"]}
               _hover={{
                 bg: "white",
                 color: "#1A365D",
                 borderColor: "#1A365D",
+                textDecoration: "none",
               }}
               as={Link}
               target="_blank"
               href="https://hongkong.hmcc.net/about/who-we-are"
-              text="More about us >"
-            />
+            >
+              {"More about us >"}
+            </Button>
           </VStack>
         </Container>
       </Flex>

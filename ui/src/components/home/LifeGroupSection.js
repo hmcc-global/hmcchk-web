@@ -6,6 +6,7 @@ import {
   HStack,
   Image,
   Link,
+  Stack,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -36,37 +37,47 @@ const buttonText = "LEARN MORE >";
 const LifeGroupSection = () => {
   return (
     <Flex w="full" h="100vh">
-      <Container
-        maxW={["container.md", "container.lg"]}
-        justifyContent="center"
-        display="flex"
-      >
-        <HStack w="100%">
-          <VStack w="50%" align="baseline" spacing={12}>
-            <Heading as="h1" fontSize="4em">
+      <Container maxW="container.lg" justifyContent="center" display="flex">
+        <Stack
+          w="100%"
+          direction={["column", "row"]}
+          justify="center"
+          alignItems="center"
+          spacing={[6, null]}
+        >
+          <VStack
+            w={["100%", "50%"]}
+            align={["center", "baseline"]}
+            spacing={[6, 12]}
+          >
+            <Heading as="h1" fontSize={["2em", "4.5em"]}>
               {lg.title} GROUPS
             </Heading>
-            <Text>{lg.text}</Text>
-            <CustomButton
-              alignSelf="baseline"
+            <Text fontSize={["0.9em", "1.5em"]} textAlign={["justify", "left"]}>
+              {lg.text}
+            </Text>
+            <Button
+              alignSelf={["center", "baseline"]}
               bg="rgb(0, 0, 0, 0)"
               variant="outline"
               color="#0628A3"
               borderColor="#0628A3"
-              w="38.2%"
+              w={["85%", "38.2%"]}
               _hover={{
                 bg: "#0628A3",
                 color: "white",
                 borderColor: "white",
+                textDecoration: "none",
               }}
-              text={buttonText}
               as={Link}
               target="_blank"
               href="/connect"
-            />
+            >
+              {buttonText}
+            </Button>
           </VStack>
-          <Image src={lgUrl} w="50%" />
-        </HStack>
+          <Image src={lgUrl} w={["90%", "50%"]} />
+        </Stack>
       </Container>
     </Flex>
   );

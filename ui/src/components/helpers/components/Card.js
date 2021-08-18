@@ -20,10 +20,14 @@ const Card = (props) => {
     >
       <Container>
         <VStack>
-          <Heading size="2xl" color={titleColor}>
+          <Heading size={["sm", "2xl"]} color={titleColor}>
             {title}
           </Heading>
-          <Text textAlign="center" color={textColor}>
+          <Text
+            textAlign="center"
+            fontSize={["0.3em", "1em"]}
+            color={textColor}
+          >
             {text}
           </Text>
         </VStack>
