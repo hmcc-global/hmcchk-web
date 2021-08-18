@@ -42,9 +42,15 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/forms/"
-          permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
+          permissions={["admin", "stewardship"]}
           component={FormManager}
         />
+        {/* <PrivateRoute
+          exact
+          path="/forms/:id"
+          permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
+          component={FormManager}
+        /> */}
         <PrivateRoute
           exact
           path="/events/"
