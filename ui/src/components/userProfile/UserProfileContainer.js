@@ -1,12 +1,8 @@
 import { Container, Image, Button } from "@chakra-ui/react";
 import UserProfileDesktop from "./UserProfileDesktop";
 import UserProfileMobile from "./UserProfileMobile";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { signin } from "../../reducers/userSlice";
 
 const UserProfileContainer = (props) => {
-  const dispatch = useDispatch();
   return (
     <>
       <Image
@@ -18,17 +14,6 @@ const UserProfileContainer = (props) => {
         src={process.env.PUBLIC_URL + "/userProfile/hmcc-ripple-white.png"}
         display={["none", "block"]}
       />
-      <Button
-        onClick={async () => {
-          const { data } = await axios.post("/api/auth/login", {
-            emailAddress: "ghost@test.com",
-            password: "passwordlol",
-          });
-          dispatch(signin(data));
-        }}
-      >
-        HELP
-      </Button>
       <Container
         maxW="container.lg"
         zIndex="2"
