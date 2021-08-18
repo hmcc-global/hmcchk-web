@@ -3,13 +3,13 @@ import axios from "axios";
 import GoogleLogin from "react-google-login";
 import { useSelector, useDispatch } from "react-redux";
 import { signin } from "../../reducers/userSlice";
-import { Box } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 
 const LoginContainer = (props) => {
   const { classes } = props;
   // const [token, setToken] = useState("null token");
-  // const dispatch = useDispatch();
-  // const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   // const postLogin = async () => {
   //   try {
@@ -33,6 +33,7 @@ const LoginContainer = (props) => {
       tokenId: tokenId,
     });
     console.log(data);
+    dispatch(signin(data));
   };
 
   const onGoogleFailure = ({ error }) => {
