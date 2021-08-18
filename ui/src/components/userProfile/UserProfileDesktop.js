@@ -9,7 +9,6 @@ import {
   FormControl,
   FormLabel,
   FormHelperText,
-  FormErrorMessage,
   Input,
   InputGroup,
   Button,
@@ -18,7 +17,14 @@ import {
   Switch,
   InputRightAddon,
   Select,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalFooter,
+  VStack,
+  ModalCloseButton,
 } from "@chakra-ui/react";
+import { CheckCircleIcon } from "@chakra-ui/icons";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
@@ -29,6 +35,7 @@ import {
   campusList,
   lifestageList,
   countryList,
+  regionList,
 } from "../helpers/lists";
 import {
   settableDataFields,
@@ -40,8 +47,13 @@ import {
 const UserProfileDesktop = (props) => {
   const { register, control, handleSubmit, setValue, formState } = useForm();
   const { errors } = formState;
-  const [userData, setUserData] = useState(null);
   const user = useSelector((state) => state.user);
+  const [userData, setUserData] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const onModalClose = (e) => {
+    setModalOpen(false);
+  };
 
   const fetchUserData = async () => {
     if (user.id) {
@@ -71,16 +83,17 @@ const UserProfileDesktop = (props) => {
               setValue("addressFlat", userData[key]["flat"]);
               setValue("addressStreet", userData[key]["street"]);
               setValue("addressDistrict", userData[key]["district"]);
+              setValue("addressRegion", userData[key]["region"]);
             }
             break;
           case "baptismInfo":
-            if (userData[key]) {
+            if (userData[key] && userData[key][0]) {
               setValue("baptismDate", userData[key][0]["baptismDate"]);
               setValue("baptismPlace", userData[key][0]["baptismPlace"]);
             }
             break;
           case "membershipInfo":
-            if (userData[key]) {
+            if (userData[key] && userData[key][0]) {
               setValue(
                 "membershipRecognitionDate",
                 userData[key][0]["recognitionDate"]
@@ -108,6 +121,7 @@ const UserProfileDesktop = (props) => {
 
     const { status } = await updateUserDataRequest(data);
     if (status === 200) {
+      setModalOpen(true);
       fetchUserData();
     }
   };
@@ -118,6 +132,30 @@ const UserProfileDesktop = (props) => {
 
   return (
     <>
+      <Modal isOpen={modalOpen} onClose={onModalClose}>
+        <ModalOverlay />
+        <ModalContent borderRadius="20">
+          <ModalCloseButton />
+          <VStack>
+            <Text
+              color="#0628A3"
+              fontSize="2xl"
+              fontWeight="700"
+              mt={6}
+              flex={1}
+              textAlign="center"
+            >
+              Edited successfully
+            </Text>
+            <Box flex={4}>
+              <Center w="100%" h="100%">
+                <CheckCircleIcon mt={5} w="50%" h="50%" color="#0628A3" />
+              </Center>
+            </Box>
+          </VStack>
+          <ModalFooter />
+        </ModalContent>
+      </Modal>
       <Center mt="7%" fontWeight="900" fontSize="64">
         <Text color="#065666" as="span">
           Hi
@@ -334,7 +372,7 @@ const UserProfileDesktop = (props) => {
                   </FormControl>
                 </Stack>
                 <Stack direction={["column", "row"]} spacing="7%">
-                  <FormControl>
+                  <FormControl flex={1}>
                     <FormLabel color="#2C5282">Address: District</FormLabel>
                     <Select
                       size="sm"
@@ -346,14 +384,22 @@ const UserProfileDesktop = (props) => {
                       })}
                     </Select>
                   </FormControl>
-                  <FormControl opacity="0">
-                    <Input
+                  <Box flex={1}></Box>
+                </Stack>
+                <Stack direction={["column", "row"]} spacing="7%">
+                  <FormControl flex={1}>
+                    <FormLabel color="#2C5282">Address: Region</FormLabel>
+                    <Select
                       size="sm"
                       borderRadius="5"
-                      cursor="default"
-                      isReadOnly
-                    />
+                      {...register("addressRegion")}
+                    >
+                      {regionList.map((item) => {
+                        return <option key={"re" + item}>{item}</option>;
+                      })}
+                    </Select>
                   </FormControl>
+                  <Box flex={1}></Box>
                 </Stack>
               </Stack>
               <Button
