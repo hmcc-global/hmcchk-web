@@ -20,11 +20,12 @@ const LoginContainer = (props) => {
   const postLogin = async () => {
     try {
       const { data } = await axios.post("/api/auth/login", {
-        emailAddress: "albert@test.com",
-        password: "testing",
+        emailAddress: {email},
+        password: {password},
       });
        dispatch(signin(data));
       console.log(user);
+      console.log(email);
     } catch (err) {
       console.log(err);
     }
