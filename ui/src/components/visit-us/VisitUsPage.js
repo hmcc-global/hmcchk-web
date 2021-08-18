@@ -16,6 +16,11 @@ import {
 import { RiArrowRightLine, RiChat1Line } from "react-icons/ri";
 import Faq from "./Faq";
 
+const SUNDAY_CELEBRATION_LOCATION =
+  "Manulife Financial Centre Tower A, Shop 13, 1/F, Tower A, Kwun Tong";
+const SUNDAY_CELEBRATION_GOOGLE_MAPS_EMBED =
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.2102241954112!2d114.22135071553005!3d22.307887848255323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404014806001b5d%3A0x895969fc5cf86457!2sOrganize%20Kwun%20Tong!5e0!3m2!1sen!2shk!4v1628957852778!5m2!1sen!2shk";
+
 const VisitUsPage = (props) => {
   return (
     <Container maxW="container.lg" py={10}>
@@ -32,7 +37,7 @@ const VisitUsPage = (props) => {
         >
           <Heading
             as="h2"
-            fontSize={["5xl", "6xl"]}
+            fontSize={["4xl", "6xl"]}
             fontWeight={700}
             lineHeight={1}
             color="white"
@@ -77,7 +82,7 @@ const VisitUsPage = (props) => {
             >
               <Heading
                 as="h3"
-                fontSize={["2em", "5xl"]}
+                fontSize={["3xl", "5xl"]}
                 fontWeight={800}
                 mt={4}
               >
@@ -92,8 +97,7 @@ const VisitUsPage = (props) => {
                 px={[6, 0]}
                 pb={4}
               >
-                Manulife Financial Centre Tower A, Shop 13, 1/F, Tower A, Kwun
-                Tong
+                {SUNDAY_CELEBRATION_LOCATION}
                 <br />
                 <Link
                   href="https://bit.ly/directions-organize"
@@ -120,7 +124,10 @@ const VisitUsPage = (props) => {
                   fontSize={["md", "lg"]}
                   _hover={{ boxShadow: "none", color: "#fff" }}
                 >
-                  <LinkOverlay href="https://bit.ly/hmcc-sc-registration">
+                  <LinkOverlay
+                    href="https://bit.ly/hmcc-sc-registration"
+                    isExternal
+                  >
                     Sign Up for In-person Sunday Celebration
                   </LinkOverlay>
                 </LinkBox>
@@ -131,8 +138,8 @@ const VisitUsPage = (props) => {
             </VStack>
             <AspectRatio flex={5.75} ratio={16 / 9}>
               <iframe
-                title="Organize Kwun Tong - Google Maps"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.2102241954112!2d114.22135071553005!3d22.307887848255323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404014806001b5d%3A0x895969fc5cf86457!2sOrganize%20Kwun%20Tong!5e0!3m2!1sen!2shk!4v1628957852778!5m2!1sen!2shk"
+                title="Sunday Celebration location - Google Maps"
+                src={SUNDAY_CELEBRATION_GOOGLE_MAPS_EMBED}
                 loading="lazy"
               ></iframe>
             </AspectRatio>
@@ -165,7 +172,7 @@ const VisitUsPage = (props) => {
               color="white"
               textAlign={["center", "right"]}
             >
-              <Link href="/online">
+              <Link href="https://hongkong.hmcc.net/online/" isExternal>
                 Join us Online <Icon as={RiArrowRightLine} />
               </Link>
             </Heading>
@@ -178,7 +185,10 @@ const VisitUsPage = (props) => {
             fontWeight={800}
             textAlign="center"
           >
-            Got Queries? hongkong@hmcc.net <Icon as={RiChat1Line} ml={1} />
+            Got Queries?{" "}
+            <Link href="mailto:hongkong@hmcc.net">
+              hongkong@hmcc.net <Icon as={RiChat1Line} ml={1} />
+            </Link>
           </Heading>
         </Box>
         <Box pt={4}>
