@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {customAxios as axios} from "../helpers/customAxios";
+import { customAxios as axios } from "../helpers/customAxios";
 import GoogleLogin from "react-google-login";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,7 +21,7 @@ import {
 } from "@chakra-ui/react";
 
 const LoginContainer = (props) => {
-  const [invalidLogin, setInvalidLogin] = useState("")
+  const [invalidLogin, setInvalidLogin] = useState("");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const { history } = props;
@@ -37,28 +37,28 @@ const LoginContainer = (props) => {
         emailAddress: email,
         password: password,
       });
-       dispatch(signin(data));
-       setInvalidLogin("");
-      console.log(user);
+      dispatch(signin(data));
+      setInvalidLogin("");
+      window.location.reload();
     } catch (err) {
-      if(err.response.status === 500){
-        setInvalidLogin("Invalid email or wrong password")
+      if (err.response.status === 500) {
+        setInvalidLogin("Invalid email or wrong password");
       }
       console.log(err);
     }
   };
 
   const onGoogleSuccessSignup = async ({ tokenId }) => {
-    try{
+    try {
       const { data } = await axios.post("/api/auth/signup-google", {
         tokenId: tokenId,
       });
       history.push({
-        pathname:'/signup',
-        state: data
-      })
+        pathname: "/signup",
+        state: data,
+      });
     } catch (err) {
-      setInvalidLogin("Account already exist!")
+      setInvalidLogin("Account already exist!");
     }
   };
 
@@ -69,18 +69,19 @@ const LoginContainer = (props) => {
     console.log(data);
     dispatch(signin(data));
     setInvalidLogin("");
+    window.location.reload();
   };
 
   const onGoogleFailure = ({ error }) => {
-    if(error.response.status === 500){
-      setInvalidLogin("Invalid email or wrong password")
+    if (error.response.status === 500) {
+      setInvalidLogin("Invalid email or wrong password");
     }
     console.log(error);
   };
   const onSubmit = (data) => {
     postLogin(data.email, data.password);
   };
-  const location = useLocation();
+  // const location = useLocation();
 
   const inputBoxStyle = {
     background: "#ffffff",
@@ -121,7 +122,7 @@ const LoginContainer = (props) => {
 
   return (
     <>
-      <Stack background="#2C5282" color="white" padding="20px" h='100vh'>
+      <Stack background="#2C5282" color="white" padding="20px" h="100vh">
         <Flex>
           <Box>
             <Link href="../">
@@ -142,13 +143,13 @@ const LoginContainer = (props) => {
             <Text fontWeight="bold" fontSize="2xl">
               Log In
             </Text>
-            <Box paddingTop="1vh">
+            {/* <Box paddingTop="1vh">
               {location.state.detail && (
                 <Text fontSize={[16, 16, 16]} fontWeight="semibold">
                   Your account is succesfully registered. Please try logging in!
                 </Text>
               )}
-            </Box>
+            </Box> */}
             <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
               <VStack align="stretch">
                 <input

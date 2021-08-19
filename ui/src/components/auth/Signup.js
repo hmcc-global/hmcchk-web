@@ -21,6 +21,7 @@ import {
   HStack,
   Button,
   Link,
+  Input,
 } from "@chakra-ui/react";
 
 const Signup = (props) => {
@@ -28,6 +29,7 @@ const Signup = (props) => {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors, touchedFields },
   } = useForm();
   const onSubmit = (data) => {
@@ -39,6 +41,8 @@ const Signup = (props) => {
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [error, setError] = useState("");
+
   useEffect(() => {
     if (googleEmail) {
       let firstname = googleFullName.split(" ").slice(0, -1).join(" ");
@@ -89,22 +93,21 @@ const Signup = (props) => {
   const handleSignup = async (data) => {
     try {
       const payload = await axios.post("/api/auth/signup", {
-        password: data.password,
+        password: data.password ? data.password : "",
         emailAddress: data.email,
         fullName: data.firstName + " " + data.lastName,
         countryOfOrigin: data.countryOfOrigin,
         lifestage: data.lifestage,
         phoneNumber: data.phoneNumber,
       });
-      console.log(payload);
       history.push("/login");
     } catch (err) {
       if (err.response && err.response.status === 409) {
         console.log("EMAIL already exists");
-        seterror("Email already exists, please try with another email");
+        setError("Email already exists, please try with another email");
       } else if (err.response && err.response.status === 422) {
         console.log("Required fields not filled");
-        seterror("Required fields not filled");
+        setError("Required fields not filled");
       }
     }
     // Error
