@@ -73,7 +73,7 @@ the account verification message.)`,
     },
 
     missingRequiredFields: {
-      statusCode: 409,
+      statusCode: 422,
       description: "Please fill in the required fields.",
     },
   },
