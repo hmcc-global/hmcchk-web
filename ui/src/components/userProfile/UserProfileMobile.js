@@ -47,7 +47,7 @@ import {
 const UserProfileMobile = (props) => {
   const { register, control, handleSubmit, setValue, formState } = useForm();
   const { errors } = formState;
-  const user = useSelector((state) => state.user);
+  const { user } = props;
   const [userData, setUserData] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
 

@@ -3,6 +3,7 @@ import UserProfileDesktop from "./UserProfileDesktop";
 import UserProfileMobile from "./UserProfileMobile";
 
 const UserProfileContainer = (props) => {
+  const { user } = props;
   return (
     <>
       <Image
@@ -20,7 +21,7 @@ const UserProfileContainer = (props) => {
         position="relative"
         display={{ base: "none", md: "block" }}
       >
-        <UserProfileDesktop />
+        <UserProfileDesktop user={user} />
       </Container>
 
       <Container
@@ -29,7 +30,7 @@ const UserProfileContainer = (props) => {
         position="relative"
         display={{ base: "block", md: "none" }}
       >
-        <UserProfileMobile />
+        <UserProfileMobile user={user}/>
       </Container>
     </>
   );

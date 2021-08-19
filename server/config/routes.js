@@ -54,7 +54,7 @@ module.exports.routes = {
     "auth/post-change-password-recovery",
 
   // User APIs
-  "get /api/users/get": "users/get-user",
+  "post /api/users/get": "users/get-user",
   "put /api/users/update": "users/update-user",
   "put /api/users/delete": "users/delete-user",
   "post /api/users/change-password": "users/post-change-password",

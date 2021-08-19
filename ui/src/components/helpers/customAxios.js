@@ -4,7 +4,7 @@ export let customAxios;
 
 export let updateAxiosClient = (token) => {
   customAxios = axios.create({
-    headers: { Authorization: "Bearer " + token },
+    headers: { Authorisation: "Bearer " + token },
   });
 
   customAxios.interceptors.response.use(

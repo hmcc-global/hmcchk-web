@@ -45,12 +45,12 @@ import {
   splitFullName,
   updateUserDataRequest,
 } from "../helpers/userInformationHelpers";
-import axios from "axios";
+import { customAxios as axios } from "../helpers/customAxios";
 
 const CompleteUserProfileContainer = (props) => {
   const formLabelColor = "#2C5282";
   const formValidation = { required: true };
-  const user = useSelector((state) => state.user);
+  const { user } = props;
   const { history } = props;
   const [tabIndex, setTabIndex] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);

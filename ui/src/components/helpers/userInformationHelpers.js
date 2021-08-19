@@ -1,4 +1,4 @@
-import axios from "axios";
+import { customAxios as axios } from "../helpers/customAxios";
 // Only allow setting field values that are defined here
 const settableDataFields = [
   "email",
@@ -73,7 +73,7 @@ const userDataCleanup = (data) => {
 };
 
 const getUserDataRequest = async (uid) => {
-  return await axios.get("/api/users/get", {
+  return await axios.post("/api/users/get", {
     userId: uid,
   });
 };

@@ -21,7 +21,7 @@ module.exports = {
   fn: async function ({ userId }, exits) {
     try {
       if (userId) {
-        let data = await User.find({ userId, isDeleted: false }).populateAll();
+        let data = await User.find({ id: userId, isDeleted: false }).populateAll();
         if (data.length === 0) throw "user not found";
         return exits.success(data);
       }
