@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Flex,
   Center,
@@ -23,11 +23,13 @@ import {
   Img,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import MainMenu from "./MainMenu";
 
 const NavBar = () => {
-  const [loggedIn, setLoggedIn] = useState(true);
-  const username = "name";
+  const [loggedIn, setLoggedIn] = useState(false);
+  const user = useSelector((state) => state.user);
+  const [username, setUsername] = useState('');
   const welcomeMsg = ["Login or Sign up", `Hi, ${username}`];
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
@@ -41,9 +43,18 @@ const NavBar = () => {
     align: "center",
   };
 
-  const handleLogin = () => {
-    //waiting for login cookie
-  };
+    useEffect(() => {
+      if(loggedIn){
+        setUsername(user.fullName);
+        let names = username.split(' ');
+        setUsername(names[0])
+      }
+      if(user.id){
+        setLoggedIn(true)
+      } else{
+        setLoggedIn(false)
+      }
+    }, [user]);
 
   let currDate = new Date().toDateString().substr(0, 3);
 
@@ -151,7 +162,7 @@ const NavBar = () => {
                       </MenuList>
                     </Menu>
                   ) : (
-                    <Link href="/">
+                    <Link to="/login">
                       <Text fontWeight="600">{welcomeMsg[0]}</Text>
                     </Link>
                   )}
