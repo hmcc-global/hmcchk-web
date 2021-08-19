@@ -68,12 +68,8 @@ const DailyBrp = () => {
 
   // even (year one) : true, odd (year two) : false
   // fetch the asset, unpack it, and then determine the correct brp string
-<<<<<<< HEAD
 
   fetch(`${process.env.PUBLIC_URL}/assets/brp_year_${whichYear}.json`)
-=======
-  fetch(`./assets/brp_year_${year}.json`)
->>>>>>> 66cd9ef3 (GH-31: fix daily brp component, ran prettifier)
     .then((res) => res.json())
     .then((data) => {
       setBrpString(determinePassage(data));
