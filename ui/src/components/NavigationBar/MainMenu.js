@@ -319,7 +319,7 @@ const MainMenu = ({ login, onClose }) => {
                     </AccordionButton>
                   </AccordionItem>
                   <AccordionItem borderStyle="none">
-                    <AccordionButton>
+                  <AccordionButton>
                       <Box
                         flex="1"
                         textAlign="left"
