@@ -15,7 +15,7 @@ import SidebarWithHeader from "./navigation/Sidebar";
 const smVariant = { navigation: "drawer", navigationButton: true };
 const mdVariant = { navigation: "sidebar", navigationButton: false };
 
-export default function App() {
+export default function App(props) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
 
@@ -24,6 +24,7 @@ export default function App() {
   return (
     <>
       <SidebarWithHeader
+        {...props}
         variant={variants?.navigation}
         isOpen={isSidebarOpen}
         onClose={toggleSidebar}

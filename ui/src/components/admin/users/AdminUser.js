@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import { customAxios as axios } from "../../helpers/customAxios";
 import { useEffect, useState } from "react";
 import {
   Input,
