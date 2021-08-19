@@ -25,7 +25,7 @@ const Card = (props) => {
           </Heading>
           <Text
             textAlign="center"
-            fontSize={["0.3em", "1em"]}
+            fontSize={["xs", "1em"]}
             color={textColor}
           >
             {text}

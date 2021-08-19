@@ -67,6 +67,7 @@ const HeroSection = () => {
                 as={Link}
                 target="_blank"
                 href="/visit-us"
+                fontSize={["sm", "md"]}
               >
                 {worshipText}
               </Button>
@@ -85,6 +86,7 @@ const HeroSection = () => {
                 as={Link}
                 target="_blank"
                 href="https://www.hongkong.hmcc.net/online"
+                fontSize={["sm", "md"]}
               >
                 {churchText}
               </Button>

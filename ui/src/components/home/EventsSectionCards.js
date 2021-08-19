@@ -86,16 +86,34 @@ const EventsSectionCard = (props) => {
               href={event.signUpLink ? event.signUpLink : null}
               isDisabled={event.signUpLink.length <= 0}
               w={["8em", "10em"]}
-              fontSize={["0.8em", "1.3em"]}
+              fontSize={["0.8em", "1.2em"]}
+              size="sm"
+              variant="outline"
+              borderColor="#062A83"
+              color="#062A83"
+              _hover={{
+                borderColor: "#FFFFFF",
+                color: "#FFFFFF",
+                background: "#062A83",
+              }}
             >
-              SIGN UP
+              Sign up
             </Button>
             <Button
               onClick={onOpen}
               w={["8em", "10em"]}
-              fontSize={["0.8em", "1.3em"]}
+              fontSize={["0.8em", "1.2em"]}
+              size="sm"
+              variant="outline"
+              borderColor="#062A83"
+              color="#062A83"
+              _hover={{
+                borderColor: "#FFFFFF",
+                color: "#FFFFFF",
+                background: "#062A83",
+              }}
             >
-              LEARN MORE
+              Learn more
             </Button>
           </HStack>
         </VStack>
@@ -171,6 +189,7 @@ const EventsSectionCard = (props) => {
                 target="_blank"
                 href={event.mapLink ? event.mapLink : null}
                 isDisabled={event.mapLink.length <= 0}
+                size="sm"
               >
                 Directions
               </Button>
@@ -181,6 +200,7 @@ const EventsSectionCard = (props) => {
                 target="_blank"
                 href={event.signUpLink ? event.signUpLink : null}
                 isDisabled={event.signUpLink.length <= 0}
+                size="sm"
               >
                 Sign up
               </Button>
@@ -191,6 +211,7 @@ const EventsSectionCard = (props) => {
                 target="_blank"
                 href={generateGoogleCalendarLink(event)}
                 isDisabled={generateGoogleCalendarLink(event) ? false : true}
+                size="sm"
               >
                 Add to Calendar
               </Button>

@@ -79,7 +79,7 @@ const NewHereSection = () => {
                 New here? Connect with us
               </Heading>
               <form onSubmit={onSubmit}>
-                <VStack spacing={[4, 8]} alignItems="center">
+                <VStack spacing={[8, 4]} alignItems="center">
                   <FormControl id="name" isRequired w={["85%", "100%"]}>
                     <Input
                       variant="flushed"
