@@ -18,7 +18,14 @@ import {
 } from "@chakra-ui/react";
 import { SocialIcon } from "react-social-icons";
 
-const MainMenu = ({ login, view }) => {
+const MainMenu = ({ login, view }, props) => {
+
+  const onLogout = () => {
+    const { history } = props;
+    localStorage.clear();
+    history.push("/");
+  };
+
   const WebView = () => {
     return (
       <Container maxW="container.lg">
@@ -140,6 +147,7 @@ const MainMenu = ({ login, view }) => {
                       My Profile
                     </Button>
                     <Button
+                      onClick={onLogout}
                       marginBottom="5"
                       width="100%"
                       style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
@@ -348,7 +356,7 @@ const MainMenu = ({ login, view }) => {
                       <Button marginBottom="5" width="100%">
                         My Profile
                       </Button>
-                      <Button marginBottom="5" width="100%" style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}>
+                      <Button onClick={onLogout} marginBottom="5" width="100%" style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}>
                         Log Out
                       </Button>
                       <Button width="100%" style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}>Prayer Requests</Button>
