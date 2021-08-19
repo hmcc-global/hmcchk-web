@@ -82,6 +82,14 @@ and exposed as \`req.me\`.)`,
         emailProofToken,
         ...result
       } = userRecord;
+
+      const token = await sails.helpers.generateJwt(
+        result.id,
+        emailAddress,
+        result.accessType
+      );
+      localStorage.setItem("token", token); // write
+
       return exits.success(result);
     } catch (err) {
       sails.log.error(err);

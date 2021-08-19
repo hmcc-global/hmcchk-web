@@ -8,15 +8,18 @@
  * https://sailsjs.com/docs/concepts/policies
  */
 
+const isAuthenticated = require("../api/policies/isAuthenticated");
+
 module.exports.policies = {
-
   /***************************************************************************
-  *                                                                          *
-  * Default policy for all controllers and actions, unless overridden.       *
-  * (`true` allows public access)                                            *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Default policy for all controllers and actions, unless overridden.       *
+   * (`true` allows public access)                                            *
+   *                                                                          *
+   ***************************************************************************/
 
-  // '*': true,
-
+  "*": true,
+  memberships: {
+    "create-membership": "isAuthenticated",
+  },
 };
