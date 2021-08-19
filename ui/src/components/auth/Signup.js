@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
@@ -30,10 +30,21 @@ const Signup = (props) => {
     watch,
     formState: { errors, touchedFields },
   } = useForm();
-  const [result, setResult] = useState("");
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  const googleEmail = props.history.location.state?.email;
+  const googleFullName = props.history.location.state?.fullName
+  
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  useEffect (() => {
+    if(googleEmail){ 
+      setFirstName(googleFullName.split(' ').slice(0, -1).join(' '))
+      setLastName(googleFullName.split(' ').slice(-1).join(' '))
+    }
+  },[])
 
   const onChangeReCAPTCHA = (value) => {
     console.log("Captcha value:", value);
@@ -66,48 +77,6 @@ const Signup = (props) => {
     marginTop: "20px",
     marginBottom: "20px",
   };
-
-  const SelectCountry = React.forwardRef(({ onChange, name, label }, ref) => (
-    <>
-      <Text>{label}</Text>
-      <select style={inputBox} name={name} ref={ref} onChange={onChange}>
-        <option
-          style={{ color: "color: rgba(0, 0, 0, 0.36)" }}
-          value=""
-          selected
-          disabled
-        >
-          Select Country
-        </option>
-        {Country.map((result) => {
-          return result.country.map((result) => {
-            return <option value={result}>{result}</option>;
-          });
-        })}
-      </select>
-    </>
-  ));
-
-  const SelectLifestage = React.forwardRef(({ onChange, name, label }, ref) => (
-    <>
-      <Text>{label}</Text>
-      <select style={inputBox} name={name} ref={ref} onChange={onChange}>
-        <option
-          style={{ color: "color: rgba(0, 0, 0, 0.36)" }}
-          value=""
-          selected
-          disabled
-        >
-          Select Lifestage
-        </option>
-        {Country.map((result) => {
-          return result.country.map((result) => {
-            return <option value={result}>{result}</option>;
-          });
-        })}
-      </select>
-    </>
-  ));
 
   const password = useRef({});
   password.current = watch("password", "");
@@ -210,6 +179,8 @@ const Signup = (props) => {
                     id="email"
                     name="email"
                     type="email"
+                    value={googleEmail ? googleEmail : ""}
+                    disabled = {googleEmail ? true : false}
                     placeholder="e.g. chantaiman@gmail.com"
                     style={inputBox}
                     {...register("email", {
@@ -221,7 +192,7 @@ const Signup = (props) => {
                       },
                     })}
                   />
-                  {errors.email && (
+                  {errors.email && !googleEmail && (
                     <Text
                       color="#FED7D7"
                       fontWeight="bold"
@@ -230,11 +201,13 @@ const Signup = (props) => {
                       {errors.email.message}
                     </Text>
                   )}
+                  {googleEmail ? null : <>
                   <Text>Enter Your Account Password</Text>
                   <input
                     id="password"
                     type="password"
                     name="password"
+                    disabled = {googleEmail ? true : false}
                     placeholder="Password"
                     style={inputBox}
                     {...register("password", {
@@ -285,6 +258,7 @@ const Signup = (props) => {
                     id="rePassword"
                     type="password"
                     name="rePassword"
+                    disabled = {googleEmail ? true : false}
                     placeholder="Re-enter Password"
                     style={inputBox}
                     {...register("rePassword", {
@@ -303,11 +277,14 @@ const Signup = (props) => {
                       {errors.rePassword.message}
                     </Text>
                   )}
+                  </> }
                   <Text>First Name (and Middle Name)</Text>
                   <input
                     id="firstName"
                     type="text"
                     name="firstName"
+                    value={googleEmail?firstName:""}
+                    disabled = {googleEmail ? true : false}
                     placeholder="First name"
                     style={inputBox}
                     {...register("firstName", { required: "Required" })}
@@ -326,6 +303,8 @@ const Signup = (props) => {
                     id="lastName"
                     type="text"
                     name="lastName"
+                    value={googleEmail?lastName:""}
+                    disabled = {googleEmail ? true : false}
                     placeholder="Last Name"
                     style={inputBox}
                     {...register("lastName", { required: "Required" })}
@@ -365,8 +344,12 @@ const Signup = (props) => {
                   )}
                   <Text>Country </Text>
                   <Select
-                    size="sm"
-                    borderRadius="5"
+                    color='black'
+                    bg='white'
+                    border= "1px solid #E2E8F0"
+                    boxSizing= "border-box"
+                    borderRadius= "6px"
+                    size='sm'
                     {...register("countryOfOrigin")}
                     isInvalid={errors["countryOfOrigin"]}
                     placeholder="Please fill in this field"
@@ -389,8 +372,12 @@ const Signup = (props) => {
                   )}
                   <Text>Lifestage </Text>
                   <Select
-                    size="sm"
-                    borderRadius="5"
+                    color='black'
+                    bg='white'
+                    border= "1px solid #E2E8F0"
+                    boxSizing= "border-box"
+                    borderRadius= "6px"
+                    size='sm'
                     {...register("lifestage")}
                     isInvalid={errors["lifestage"]}
                     placeholder="Please fill in this field"
