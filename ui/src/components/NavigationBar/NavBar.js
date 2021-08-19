@@ -24,12 +24,13 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { customAxios as axios } from "../helpers/customAxios";
 import MainMenu from "./MainMenu";
 
 const NavBar = (props) => {
-  const [loggedIn, setLoggedIn] = useState(true);
-  const {user} = props;
-  const [username, setUsername] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
+  const user = useSelector((state) => state.user);
+  const [username, setUsername] = useState("");
   const welcomeMsg = ["Login or Sign up", `Hi, ${username}`];
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
@@ -44,23 +45,29 @@ const NavBar = (props) => {
   };
 
   const onLogout = () => {
-    const { history } = props;
     localStorage.clear();
-    history.push("/");
+    window.location.reload();
   };
 
-    useEffect(() => {
-      if(loggedIn){
-        setUsername(user.fullName);
-        let names = username.split(' ');
-        setUsername(names[0])
-      }
-      if(user.id){
-        setLoggedIn(true)
-      } else{
-        setLoggedIn(false)
-      }
-    }, [user]);
+  const getUserObj = async (token) => {
+    console.log(token);
+    const { data } = await axios.post("/api/auth/verify-token", {
+      token: token,
+    });
+    return data;
+  };
+
+  useEffect(async () => {
+    const userObj = await getUserObj(user);
+    if (userObj) {
+      const { fullName } = userObj;
+      setUsername(fullName.split(" ")[0]);
+      setLoggedIn(true);
+      console.log(userObj);
+    } else {
+      setLoggedIn(false);
+    }
+  }, []);
 
   let currDate = new Date().toDateString().substr(0, 3);
 
@@ -84,7 +91,7 @@ const NavBar = (props) => {
               h="10.5vh"
             >
               <Box position="relative">
-                <Link to="/home">
+                <Link to="/">
                   <Image
                     h={{
                       base: "3.5vh",
@@ -122,17 +129,18 @@ const NavBar = (props) => {
                   </Link>
                 </Box>
                 <Box position="relative">
-                  <Link
-                    to="/connect"
-                  >
-                    CONNECT
-                  </Link>
+                  <Link to="/connect">CONNECT</Link>
                 </Box>
                 <Box position="relative">
                   <Link to="/events">EVENTS</Link>
                 </Box>
                 <Box position="relative">
-                  <Link to="/sermons">SERMONS</Link>
+                  <Link
+                    to={{ pathname: "https://hongkong.hmcc.net/sermons" }}
+                    target="_blank"
+                  >
+                    SERMONS
+                  </Link>
                 </Box>
                 <Box position="relative">
                   <Link
@@ -162,8 +170,10 @@ const NavBar = (props) => {
                         <Text fontWeight="600">{welcomeMsg[1]}</Text>
                       </MenuButton>
                       <MenuList>
-                        <MenuItem href="/">View Profile</MenuItem>
-                        <MenuItem onClick={onLogout} href="/">Log Out</MenuItem>
+                        <MenuItem>
+                          <Link to="/profile">View Profile</Link>
+                        </MenuItem>
+                        <MenuItem onClick={onLogout}>Log Out</MenuItem>
                       </MenuList>
                     </Menu>
                   ) : (
