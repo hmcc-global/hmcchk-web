@@ -26,8 +26,8 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import MainMenu from "./MainMenu";
 
-const NavBar = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
+const NavBar = (props) => {
+  const [loggedIn, setLoggedIn] = useState(true);
   const user = useSelector((state) => state.user);
   const [username, setUsername] = useState('');
   const welcomeMsg = ["Login or Sign up", `Hi, ${username}`];
@@ -41,6 +41,12 @@ const NavBar = () => {
     justify: "center",
     fontWeight: "600",
     align: "center",
+  };
+
+  const onLogout = () => {
+    const { history } = props;
+    localStorage.clear();
+    history.push("/");
   };
 
     useEffect(() => {
@@ -158,7 +164,7 @@ const NavBar = () => {
                       </MenuButton>
                       <MenuList>
                         <MenuItem href="/">View Profile</MenuItem>
-                        <MenuItem href="/">Log Out</MenuItem>
+                        <MenuItem onClick={onLogout} href="/">Log Out</MenuItem>
                       </MenuList>
                     </Menu>
                   ) : (
