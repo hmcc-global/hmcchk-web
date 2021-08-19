@@ -48,6 +48,7 @@ module.exports.routes = {
   "post /api/auth/signup": "auth/post-signup",
   "post /api/auth/signup-google": "auth/post-signup-google",
   "get /email/confirm/": "auth/email-confirm",
+  "post /api/auth/verify-token/": "auth/verify-token",
 
   "get /api/users/get-user": "users/get-user",
   "put /api/users/update-user": "users/update-user",

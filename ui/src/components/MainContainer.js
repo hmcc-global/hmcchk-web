@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Switch, Redirect } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import { chakra } from "@chakra-ui/react";
 import SermonContainer from "./sermons/SermonContainer";
 import SermonCard from "./sermons/SermonCard";
@@ -66,10 +66,6 @@ const MainContainer = () => {
       </Switch>
     </chakra.main>
   );
-};
-
-MainContainer.propTypes = {
-  classes: PropTypes.object.isRequired,
 };
 
 export default MainContainer;

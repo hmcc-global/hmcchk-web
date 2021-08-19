@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { customAxios as axios } from "../helpers/customAxios";
 import { Container, Grid, Heading, Text } from "@chakra-ui/react";
 import EventCard from "./EventCard";
 import { DateTime } from "luxon";
 import { getRenderDate } from "../helpers/eventsHelpers";
 
 const EventsPage = (props) => {
+  const { user } = props;
   const [eventsList, setEventsList] = useState([]);
 
   useEffect(() => {

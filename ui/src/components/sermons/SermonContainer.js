@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import { Box } from "@chakra-ui/react";
+import { customAxios as axios } from "../helpers/customAxios";
+import { signin } from "../../reducers/userSlice";
+import { Box, Button } from "@chakra-ui/react";
 
 const SermonContainer = (props) => {
   const [sermons, setSermons] = useState([]);
-  const user = useSelector((state) => state.user);
 
   const getData = async () => {
     try {
@@ -20,39 +19,15 @@ const SermonContainer = (props) => {
     getData();
   }, []);
 
+  const onClickHandler = () => {
+    const { history } = props;
+    history.push("/events");
+  };
+
   return (
-    sermons && sermons.length > 0 && <Box color="white">{sermons[0].title}</Box>
-    // <div className={classes.app}>
-    //   <Paper className={classes.paper}>
-    //     {sermons.map((s) => (
-    //       <Card key={s.id}>
-    //         <CardContent>
-    //           <Typography
-    //             className={classes.title}
-    //             color="textSecondary"
-    //             gutterBottom
-    //           >
-    //             {s.sermonSeries}
-    //           </Typography>
-    //           <Typography variant="h5" component="h2">
-    //             {`${s.title}`}
-    //           </Typography>
-    //           <Typography className={classes.pos} color="textSecondary">
-    //             {s.speaker[0]}
-    //           </Typography>
-    //           <Typography variant="body2" component="p">
-    //             {s.sermonDesc}
-    //           </Typography>
-    //         </CardContent>
-    //         <CardActions>
-    //           <Button size="small">
-    //             <Link to={"/sermons/" + s.id.toString()}>Learn More</Link>
-    //           </Button>
-    //         </CardActions>
-    //       </Card>
-    //     ))}
-    //   </Paper>
-    // </div>
+    <div>
+      <Button onClick={onClickHandler}>TEST</Button>
+    </div>
   );
 };
 

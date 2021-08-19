@@ -13,6 +13,7 @@
     "google-auth-library": "^7.3.0",
     "grunt": "1.0.4",
     "he": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
     "luxon": "^1.27.0",
     "node-cache": "^5.1.2",
     "node-schedule": "^2.0.0",
