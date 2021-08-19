@@ -47,9 +47,9 @@ module.exports.routes = {
   "post /api/auth/login-google": "auth/post-login-google",
   "post /api/auth/signup": "auth/post-signup",
   "post /api/auth/signup-google": "auth/post-signup-google",
-  "get /email/confirm/": "auth/email-confirm",
+  "post /api/auth/confirm-email": "auth/post-confirm-email",
   "post /api/auth/verify-token/": "auth/verify-token",
-  "get /api/auth/is-forget-token-valid": "auth/post-is-forget-token-valid",
+  "post /api/auth/forgot-password": "auth/post-forgot-password",
   "post /api/auth/generate-forget-token": "auth/post-generate-forget-token",
   "post /api/auth/change-password": "auth/post-change-password",
 
