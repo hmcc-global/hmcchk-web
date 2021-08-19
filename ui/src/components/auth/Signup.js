@@ -1,10 +1,13 @@
 import React, { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
+import { Redirect } from "react-router-dom";
+import axios from "axios";
 import { ChevronLeftIcon, EmailIcon, LockIcon } from "@chakra-ui/icons";
 import Country from "./country.json";
 import ReCAPTCHA from "react-google-recaptcha";
 import {
   Box,
+  Select,
   Center,
   UnorderedList,
   ListItem,
@@ -20,7 +23,7 @@ import {
   Link,
 } from "@chakra-ui/react";
 
-const Signup = () => {
+const Signup = (props) => {
   const {
     register,
     handleSubmit,
@@ -28,7 +31,10 @@ const Signup = () => {
     formState: { errors, touchedFields },
   } = useForm();
   const [result, setResult] = useState("");
-  const onSubmit = (data) => setResult(JSON.stringify(data));
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   const onChangeReCAPTCHA = (value) => {
     console.log("Captcha value:", value);
   };
@@ -106,6 +112,43 @@ const Signup = () => {
   const password = useRef({});
   password.current = watch("password", "");
 
+  const { history } = props;
+
+  const handleSignup = async (data) => {
+    await axios
+      .post("/api/auth/signup", {
+        password: data.password,
+        emailAddress: data.email,
+        fullName: data.firstName + " " + data.lastName,
+        countryOfOrigin: data.countryOfOrigin,
+        lifestage: data.lifestage,
+        phoneNumber: data.phoneNumber,
+      })
+      .then((response) => {
+        history.push("/login");
+      })
+      .catch((error) => {
+        // Error
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          // console.log(error.response.data);
+          // console.log(error.response.status);
+          // console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the
+          // browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+      });
+  };
+
   return (
     <>
       <Stack
@@ -123,7 +166,7 @@ const Signup = () => {
           </Box>
         </Flex>
         <Flex justifyContent="center">
-          <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+          <form onSubmit={handleSubmit(handleSignup)} autoComplete="off">
             <VStack justify="center" align="center">
               <Image
                 marginTop={{ base: "30px", md: "none" }}
@@ -320,16 +363,21 @@ const Signup = () => {
                       {errors.phoneNumber.message}
                     </Text>
                   )}
-                  <SelectCountry
-                    label="Country of Origin"
-                    name="country"
-                    id="country"
-                    {...register("country", {
-                      required: "Please select your country of origin",
-                      validate: (value) =>
-                        value === "" || "Please select your country of origin",
+                  <Text>Country </Text>
+                  <Select
+                    size="sm"
+                    borderRadius="5"
+                    {...register("countryOfOrigin")}
+                    isInvalid={errors["countryOfOrigin"]}
+                    placeholder="Please fill in this field"
+                  >
+                    {Country.map((result) => {
+                      return result.country.map((result) => {
+                        return <option value={result}>{result}</option>;
+                      });
                     })}
-                  />
+                  </Select>
+
                   {errors.country && (
                     <Text
                       color="#FED7D7"
@@ -339,16 +387,20 @@ const Signup = () => {
                       {errors.country.message}
                     </Text>
                   )}
-                  <SelectLifestage
-                    label="Lifestage"
-                    id="lifestage"
-                    name="lifestage"
-                    {...register("lifestage", {
-                      required: "Please select your lifestage",
-                      validate: (value) =>
-                        value === "" || "Please select your lifestage",
+                  <Text>Lifestage </Text>
+                  <Select
+                    size="sm"
+                    borderRadius="5"
+                    {...register("lifestage")}
+                    isInvalid={errors["lifestage"]}
+                    placeholder="Please fill in this field"
+                  >
+                    {Country.map((result) => {
+                      return result.country.map((result) => {
+                        return <option value={result}>{result}</option>;
+                      });
                     })}
-                  />
+                  </Select>
                   {errors.lifestage && (
                     <Text
                       color="#FED7D7"
@@ -362,7 +414,7 @@ const Signup = () => {
               </HStack>
               <ReCAPTCHA
                 style={{ left: "5%", position: "relative", marginTop: "20px" }}
-                sitekey="6Leaj_0bAAAAAMkeVQHfoO7fhkyv5Za8lBzRoNc0"
+                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                 onChange={onChangeReCAPTCHA}
               />
               <input
