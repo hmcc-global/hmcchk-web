@@ -103,5 +103,10 @@ email status until they click the link in the confirmation email.`,
       description:
         "A pseudorandom, probabilistically-unique token for use in our account verification emails.",
     },
+    hasFilledProfileForm: {
+      type: "boolean",
+      description:
+        "A flag to indicate whether a user has completed the profile form",
+    },
   },
 };

@@ -109,6 +109,7 @@ const CompleteUserProfileContainer = (props) => {
 
       // set user id
       data.id = user.id;
+      data.hasFilledProfileForm = true;
       const { status } = await updateUserDataRequest(data);
 
       if (status === 200) setModalOpen(true);
@@ -194,7 +195,7 @@ const CompleteUserProfileContainer = (props) => {
                 history.push("/");
               }}
             >
-              Return To Homepage
+              Return to Homepage
             </Button>
           </ModalFooter>
         </ModalContent>
