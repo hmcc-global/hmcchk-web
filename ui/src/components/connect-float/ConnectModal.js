@@ -30,7 +30,12 @@ const ConnectModal = ({ isOpen, onClose }) => {
   const [isBot, setIsBot] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const onSubmit = useCallback(async (e) => {
+  const onCloseCustom = (e) => {
+    setIsSubmitted(false);
+    onClose(e);
+  };
+
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (!isBot) {
       const payload = {
@@ -42,93 +47,77 @@ const ConnectModal = ({ isOpen, onClose }) => {
       };
       await axios.post("/api/forms/connect-with-us", payload);
       setIsSubmitted(true);
-      setTimeout(() => {
-        resetForm();
-      }, 2000);
     }
-  }, []);
+  };
 
-  const resetForm = useCallback(() => {
-    setName("");
-    setEmail("");
-    setPhoneNumber("");
-    setNotes("");
-    setPrayer("");
-    setIsBot(true);
-    setIsSubmitted(false);
-  }, []);
-
-  const renderForm = useCallback(
-    () => (
-      <form onSubmit={onSubmit}>
-        <VStack align="stretch" spacing={6}>
-          <Heading size="lg" textAlign="center">
-            We'd love to connect with you!
-          </Heading>
-          <VStack align="stretch" spacing={3} px={[0, 24]}>
-            <FormControl id="name" isRequired>
-              <FormLabel>Name</FormLabel>
-              <Input
-                backgroundColor="#fff"
-                color="#000"
-                type="text"
-                placeholder="e.g. Chan Tai Man"
-                onChange={(e) => setName(e.target.value)}
-              />
-            </FormControl>
-            <FormControl id="email" isRequired>
-              <FormLabel>Preferred Email Address</FormLabel>
-              <Input
-                backgroundColor="#fff"
-                color="#000"
-                type="email"
-                placeholder="e.g. chantaiman@gmail.com"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </FormControl>
-            <FormControl id="phoneNumber">
-              <FormLabel>Preferred Phone Number</FormLabel>
-              <Input
-                backgroundColor="#fff"
-                color="#000"
-                type="text"
-                placeholder="e.g. +85255555555"
-                onChange={(e) => setPhoneNumber(e.target.value)}
-              />
-            </FormControl>
-            <FormControl id="notes">
-              <FormLabel>Notes/Comments</FormLabel>
-              <Textarea
-                backgroundColor="#fff"
-                color="#000"
-                onChange={(e) => setNotes(e.target.value)}
-              />
-            </FormControl>
-            <FormControl id="prayerRequests">
-              <FormLabel>Any Prayer Requests?</FormLabel>
-              <Input
-                backgroundColor="#fff"
-                color="#000"
-                type="text"
-                onChange={(e) => setPrayer(e.target.value)}
-              />
-            </FormControl>
-          </VStack>
-          <Box align="center" pt={2} transform="scale(0.9)">
-            <ReCAPTCHA
-              sitekey={process.env.REACT_APP_CAPTCHA}
-              onChange={() => setIsBot(false)}
+  const renderForm = () => (
+    <form onSubmit={onSubmit}>
+      <VStack align="stretch" spacing={6}>
+        <Heading size="lg" textAlign="center">
+          We'd love to connect with you!
+        </Heading>
+        <VStack align="stretch" spacing={3} px={[0, 24]}>
+          <FormControl id="name" isRequired>
+            <FormLabel>Name</FormLabel>
+            <Input
+              backgroundColor="#fff"
+              color="#000"
+              type="text"
+              placeholder="e.g. Chan Tai Man"
+              onChange={(e) => setName(e.target.value)}
             />
-          </Box>
-          <Center>
-            <Button w="9em" variant="outline" type="submit">
-              Submit
-            </Button>
-          </Center>
+          </FormControl>
+          <FormControl id="email" isRequired>
+            <FormLabel>Preferred Email Address</FormLabel>
+            <Input
+              backgroundColor="#fff"
+              color="#000"
+              type="email"
+              placeholder="e.g. chantaiman@gmail.com"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </FormControl>
+          <FormControl id="phoneNumber">
+            <FormLabel>Preferred Phone Number</FormLabel>
+            <Input
+              backgroundColor="#fff"
+              color="#000"
+              type="text"
+              placeholder="e.g. +85255555555"
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+          </FormControl>
+          <FormControl id="notes">
+            <FormLabel>Notes/Comments</FormLabel>
+            <Textarea
+              backgroundColor="#fff"
+              color="#000"
+              onChange={(e) => setNotes(e.target.value)}
+            />
+          </FormControl>
+          <FormControl id="prayerRequests">
+            <FormLabel>Any Prayer Requests?</FormLabel>
+            <Input
+              backgroundColor="#fff"
+              color="#000"
+              type="text"
+              onChange={(e) => setPrayer(e.target.value)}
+            />
+          </FormControl>
         </VStack>
-      </form>
-    ),
-    []
+        <Box align="center" pt={2} transform="scale(0.9)">
+          <ReCAPTCHA
+            sitekey={process.env.REACT_APP_CAPTCHA}
+            onChange={() => setIsBot(false)}
+          />
+        </Box>
+        <Center>
+          <Button w="9em" variant="outline" type="submit">
+            Submit
+          </Button>
+        </Center>
+      </VStack>
+    </form>
   );
 
   const renderFormSubmitted = useCallback(
@@ -150,7 +139,7 @@ const ConnectModal = ({ isOpen, onClose }) => {
   );
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="xl">
+    <Modal isOpen={isOpen} onClose={onCloseCustom} size="xl">
       <ModalOverlay />
       <ModalContent
         background="linear-gradient(90deg, rgba(6, 40, 163, 0.9) 0%, rgba(145, 219, 240, 0.9) 100%)"

@@ -49,7 +49,6 @@ const ConnectFloatButton = (props) => {
         onMouseOut={() => setIsHover(false)}
         className="connect-float-btn"
       ></IconButton>
-
       <ConnectModal isOpen={isOpen} onClose={onClose} />
     </Box>
   );
