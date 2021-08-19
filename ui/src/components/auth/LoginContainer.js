@@ -4,6 +4,7 @@ import GoogleLogin from "react-google-login";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { signin, signup } from "../../reducers/userSlice";
+import { useLocation } from "react-router-dom";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import {
   Box,
@@ -20,10 +21,10 @@ import {
 } from "@chakra-ui/react";
 
 const LoginContainer = (props) => {
-  const [invalidLogin, setInvalidLogin] = useState(false)
+  const [invalidLogin, setInvalidLogin] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const {history} = props;
+  const { history } = props;
   const {
     register,
     handleSubmit,
@@ -36,12 +37,12 @@ const LoginContainer = (props) => {
         emailAddress: email,
         password: password,
       });
-       dispatch(signin(data));
-       setInvalidLogin(false);
+      dispatch(signin(data));
+      setInvalidLogin(false);
       console.log(user);
     } catch (err) {
-      if(err.response.status === 500){
-        setInvalidLogin(true)
+      if (err.response.status === 500) {
+        setInvalidLogin(true);
       }
       console.log(err);
     }
@@ -52,9 +53,9 @@ const LoginContainer = (props) => {
       tokenId: tokenId,
     });
     history.push({
-      pathname:'/signup',
-      state: data
-    })
+      pathname: "/signup",
+      state: data,
+    });
   };
 
   const onGoogleSuccessLogin = async ({ tokenId }) => {
@@ -67,14 +68,15 @@ const LoginContainer = (props) => {
   };
 
   const onGoogleFailure = ({ error }) => {
-    if(error.response.status === 500){
-      setInvalidLogin(true)
+    if (error.response.status === 500) {
+      setInvalidLogin(true);
     }
     console.log(error);
   };
   const onSubmit = (data) => {
     postLogin(data.email, data.password);
   };
+  const location = useLocation();
 
   const inputBoxStyle = {
     background: "#ffffff",
@@ -88,29 +90,29 @@ const LoginContainer = (props) => {
   };
 
   const submitBoxStyle = {
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '3px 19px',
-    background: 'rgba(0, 0, 0, 0.04)',
-    border: '1px solid #FFFFFF',
-    boxSizing: 'border-box',
-    backdropFilter: 'blur(6px)',
-    borderRadius: '10px',
-    width:'250px',
-    fontWeight:'bold'
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "3px 19px",
+    background: "rgba(0, 0, 0, 0.04)",
+    border: "1px solid #FFFFFF",
+    boxSizing: "border-box",
+    backdropFilter: "blur(6px)",
+    borderRadius: "10px",
+    width: "250px",
+    fontWeight: "bold",
   };
 
   const signupBoxStyle = {
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '3px 19px',
-    background: 'rgba(0, 0, 0, 0.04)',
-    border: '1px solid #FFFFFF',
-    boxSizing: 'border-box',
-    backdropFilter: 'blur(6px)',
-    borderRadius: '10px',
-    width:'300px',
-    fontWeight:'bold'
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "3px 19px",
+    background: "rgba(0, 0, 0, 0.04)",
+    border: "1px solid #FFFFFF",
+    boxSizing: "border-box",
+    backdropFilter: "blur(6px)",
+    borderRadius: "10px",
+    width: "300px",
+    fontWeight: "bold",
   };
 
   return (
@@ -136,8 +138,15 @@ const LoginContainer = (props) => {
             <Text fontWeight="bold" fontSize="2xl">
               Log In
             </Text>
+            <Box paddingTop="1vh">
+              {location.state.detail && (
+                <Text fontSize={[16, 16, 16]} fontWeight="semibold">
+                  Your account is succesfully registered. Please try logging in!
+                </Text>
+              )}
+            </Box>
             <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-              <VStack align="stretch" marginTop="40px">
+              <VStack align="stretch">
                 <input
                   id="email"
                   name="email"
@@ -153,6 +162,7 @@ const LoginContainer = (props) => {
                     },
                   })}
                 />
+
                 {errors.email && (
                   <Text
                     color="#FED7D7"
@@ -181,7 +191,7 @@ const LoginContainer = (props) => {
                     {errors.password.message}
                   </Text>
                 )}
-                {invalidLogin ? 
+                {invalidLogin ? (
                   <Text
                     color="#FED7D7"
                     fontWeight="bold"
@@ -189,7 +199,7 @@ const LoginContainer = (props) => {
                   >
                     Invalid email or wrong password
                   </Text>
-                : null }
+                ) : null}
                 <Link>
                   <Text textAlign="right" fontSize="xs" position="relative">
                     Forgot Password?
