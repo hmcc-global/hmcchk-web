@@ -3,7 +3,7 @@ import axios from "axios";
 import GoogleLogin from "react-google-login";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { signin } from "../../reducers/userSlice";
+import { signin, signup } from "../../reducers/userSlice";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import {
   Box,
@@ -20,40 +20,37 @@ import {
 } from "@chakra-ui/react";
 
 const LoginContainer = (props) => {
-  const { classes } = props;
   const [token, setToken] = useState("null token");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const {history} = props;
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const postLogin = async () => {
+  const postLogin = async (email, password) => {
     try {
       const { data } = await axios.post("/api/auth/login", {
-        emailAddress: {email},
-        password: {password},
+        emailAddress: email,
+        password: password,
       });
        dispatch(signin(data));
       console.log(user);
-      console.log(email);
     } catch (err) {
       console.log(err);
     }
   };
 
-  useEffect(async () => {
-    await postLogin();
-  }, []);
-
   const onGoogleSuccessSignup = async ({ tokenId }) => {
     const { data } = await axios.post("/api/auth/signup-google", {
       tokenId: tokenId,
     });
-    console.log(data);
-    dispatch(signin(data));
+    history.push({
+      pathname:'/signup',
+      state: data
+    })
   };
 
   const onGoogleSuccessLogin = async ({ tokenId }) => {
@@ -113,7 +110,7 @@ const LoginContainer = (props) => {
       <Stack background="#2C5282" color="white" padding="20px">
         <Flex>
           <Box>
-            <Link href="../sermons">
+            <Link href="../">
               <ChevronLeftIcon boxSize={10} />
               Return to hongkong.hmcc.net
             </Link>
@@ -196,6 +193,7 @@ const LoginContainer = (props) => {
                           alt="Google"
                         />
                       }
+                      onClick={renderProps.onClick}
                       style={submitBoxStyle}
                     >
                       Login with Google
