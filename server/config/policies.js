@@ -8,8 +8,6 @@
  * https://sailsjs.com/docs/concepts/policies
  */
 
-const isAuthenticated = require("../api/policies/isAuthenticated");
-
 module.exports.policies = {
   /***************************************************************************
    *                                                                          *
@@ -17,9 +15,29 @@ module.exports.policies = {
    * (`true` allows public access)                                            *
    *                                                                          *
    ***************************************************************************/
+  "*": "isLoggedIn",
 
-  "*": true,
-  memberships: {
-    "create-membership": "isAuthenticated",
-  },
+  // Public controllers
+
+  // Announcements
+  "announcements/*": true,
+
+  // Auth
+  "auth/post-login": true,
+  "auth/post-login-google": true,
+  "auth/post-signup": true,
+  "auth/post-signup-google": true,
+  "auth/verify-token": true,
+
+  // Cache
+  "cache/*": ["isLoggedIn", "isAdmin"],
+
+  // Media
+  "media/*": true,
+
+  // Pages
+  "pages/*": true,
+
+  // Sermons
+  "sermons/*": true,
 };

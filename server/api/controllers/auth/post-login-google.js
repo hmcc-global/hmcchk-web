@@ -53,14 +53,13 @@ module.exports = {
 
       sails.log.info(`${emailAddress} logged in.`);
 
-      const {
-        createdAt,
-        updatedAt,
-        password: userPassword,
-        emailProofToken,
-        ...result
-      } = userRecord;
-      return exits.success(result);
+      const token = await sails.helpers.auth.generateJwt(
+        userRecord.id,
+        userRecord.email,
+        userRecord.accessType
+      );
+
+      return exits.success(token);
     } catch (err) {
       sails.log.error(err);
       return exits.error(err);

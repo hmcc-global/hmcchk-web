@@ -65,7 +65,7 @@ and exposed as \`req.me\`.)`,
 
       // Modify the active session instance.
       // (This will be persisted when the response is sent.)
-      this.req.session.userId = userRecord.id;
+      // this.req.session.userId = userRecord.id;
 
       // In case there was an existing session (e.g. if we allow users to go to the login page
       // when they're already logged in), broadcast a message that we can display in other open tabs.
@@ -75,22 +75,13 @@ and exposed as \`req.me\`.)`,
 
       sails.log.info(`${emailAddress} logged in.`);
 
-      const {
-        createdAt,
-        updatedAt,
-        password: userPassword,
-        emailProofToken,
-        ...result
-      } = userRecord;
-
-      const token = await sails.helpers.generateJwt(
-        result.id,
-        emailAddress,
-        result.accessType
+      const token = await sails.helpers.auth.generateJwt(
+        userRecord.id,
+        userRecord.email,
+        userRecord.accessType
       );
-      localStorage.setItem("token", token); // write
 
-      return exits.success(result);
+      return exits.success(token);
     } catch (err) {
       sails.log.error(err);
       return exits.error(err);
