@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {customAxios as axios} from "../helpers/customAxios";
+import { customAxios as axios } from "../helpers/customAxios";
 import GoogleLogin from "react-google-login";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { signin, signup } from "../../reducers/userSlice";
+import { useLocation } from "react-router-dom";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import {
   Box,
@@ -20,10 +21,10 @@ import {
 } from "@chakra-ui/react";
 
 const LoginContainer = (props) => {
-  const [invalidLogin, setInvalidLogin] = useState("")
+  const [invalidLogin, setInvalidLogin] = useState("");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const {history} = props;
+  const { history } = props;
   const {
     register,
     handleSubmit,
@@ -36,28 +37,28 @@ const LoginContainer = (props) => {
         emailAddress: email,
         password: password,
       });
-       dispatch(signin(data));
-       setInvalidLogin("");
-      console.log(user);
+      dispatch(signin(data));
+      setInvalidLogin("");
+      window.location.reload();
     } catch (err) {
-      if(err.response.status === 500){
-        setInvalidLogin("Invalid email or wrong password")
+      if (err.response.status === 500) {
+        setInvalidLogin("Invalid email or wrong password");
       }
       console.log(err);
     }
   };
 
   const onGoogleSuccessSignup = async ({ tokenId }) => {
-    try{
+    try {
       const { data } = await axios.post("/api/auth/signup-google", {
         tokenId: tokenId,
       });
       history.push({
-        pathname:'/signup',
-        state: data
-      })
+        pathname: "/signup",
+        state: data,
+      });
     } catch (err) {
-      setInvalidLogin("Account already exist!")
+      setInvalidLogin("Account already exist!");
     }
   };
 
@@ -68,17 +69,19 @@ const LoginContainer = (props) => {
     console.log(data);
     dispatch(signin(data));
     setInvalidLogin("");
+    window.location.reload();
   };
 
   const onGoogleFailure = ({ error }) => {
-    if(error.response.status === 500){
-      setInvalidLogin("Invalid email or wrong password")
+    if (error.response.status === 500) {
+      setInvalidLogin("Invalid email or wrong password");
     }
     console.log(error);
   };
   const onSubmit = (data) => {
     postLogin(data.email, data.password);
   };
+  // const location = useLocation();
 
   const inputBoxStyle = {
     background: "#ffffff",
@@ -86,40 +89,40 @@ const LoginContainer = (props) => {
     boxSizing: "border-box",
     borderRadius: "6px",
     padding: "3px 10px",
-    width: "300px",
+    width: "250px",
     color: "black",
     paddingLeft: "5px",
   };
 
   const submitBoxStyle = {
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '3px 19px',
-    background: 'rgba(0, 0, 0, 0.04)',
-    border: '1px solid #FFFFFF',
-    boxSizing: 'border-box',
-    backdropFilter: 'blur(6px)',
-    borderRadius: '10px',
-    width:'250px',
-    fontWeight:'bold'
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "3px 19px",
+    background: "rgba(0, 0, 0, 0.04)",
+    border: "1px solid #FFFFFF",
+    boxSizing: "border-box",
+    backdropFilter: "blur(6px)",
+    borderRadius: "10px",
+    width: "250px",
+    fontWeight: "bold",
   };
 
   const signupBoxStyle = {
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '3px 19px',
-    background: 'rgba(0, 0, 0, 0.04)',
-    border: '1px solid #FFFFFF',
-    boxSizing: 'border-box',
-    backdropFilter: 'blur(6px)',
-    borderRadius: '10px',
-    width:'300px',
-    fontWeight:'bold'
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "3px 19px",
+    background: "rgba(0, 0, 0, 0.04)",
+    border: "1px solid #FFFFFF",
+    boxSizing: "border-box",
+    backdropFilter: "blur(6px)",
+    borderRadius: "10px",
+    width: "300px",
+    fontWeight: "bold",
   };
 
   return (
     <>
-      <Stack background="#2C5282" color="white" padding="20px" h='100vh'>
+      <Stack background="#2C5282" color="white" padding="20px">
         <Flex>
           <Box>
             <Link href="../">
@@ -140,23 +143,32 @@ const LoginContainer = (props) => {
             <Text fontWeight="bold" fontSize="2xl">
               Log In
             </Text>
+            {/* <Box paddingTop="1vh">
+              {location.state.detail && (
+                <Text fontSize={[16, 16, 16]} fontWeight="semibold">
+                  Your account is succesfully registered. Please try logging in!
+                </Text>
+              )}
+            </Box> */}
             <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-              <VStack align="stretch" marginTop="40px">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="Email"
-                  style={inputBoxStyle}
-                  {...register("email", {
-                    required: "Required",
-                    pattern: {
-                      value:
-                        /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
-                      message: "Invalid email address",
-                    },
-                  })}
-                />
+              <VStack align="stretch">
+                <Flex alignItems="center" justifyContent="center">
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Email"
+                    style={inputBoxStyle}
+                    {...register("email", {
+                      required: "Required",
+                      pattern: {
+                        value:
+                          /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
+                        message: "Invalid email address",
+                      },
+                    })}
+                  />
+                </Flex>
                 {errors.email && (
                   <Text
                     color="#FED7D7"
@@ -166,16 +178,18 @@ const LoginContainer = (props) => {
                     {errors.email.message}
                   </Text>
                 )}
-                <input
-                  id="password"
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  style={inputBoxStyle}
-                  {...register("password", {
-                    required: "Required",
-                  })}
-                />
+                <Flex alignItems="center" justifyContent="center">
+                  <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    style={inputBoxStyle}
+                    {...register("password", {
+                      required: "Required",
+                    })}
+                  />
+                </Flex>
                 {errors.password && (
                   <Text
                     color="#FED7D7"
@@ -185,7 +199,7 @@ const LoginContainer = (props) => {
                     {errors.password.message}
                   </Text>
                 )}
-                {invalidLogin ? 
+                {invalidLogin ? (
                   <Text
                     color="#FED7D7"
                     fontWeight="bold"
@@ -193,7 +207,7 @@ const LoginContainer = (props) => {
                   >
                     {invalidLogin}
                   </Text>
-                : null }
+                ) : null}
                 <Link>
                   <Text textAlign="right" fontSize="xs" position="relative">
                     Forgot Password?
