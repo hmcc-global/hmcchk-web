@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 
 const LoginContainer = (props) => {
-  const [token, setToken] = useState("null token");
+  const [invalidLogin, setInvalidLogin] = useState(false)
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const {history} = props;
@@ -37,8 +37,12 @@ const LoginContainer = (props) => {
         password: password,
       });
        dispatch(signin(data));
+       setInvalidLogin(false);
       console.log(user);
     } catch (err) {
+      if(err.response.status === 500){
+        setInvalidLogin(true)
+      }
       console.log(err);
     }
   };
@@ -59,9 +63,13 @@ const LoginContainer = (props) => {
     });
     console.log(data);
     dispatch(signin(data));
+    setInvalidLogin(false);
   };
 
   const onGoogleFailure = ({ error }) => {
+    if(error.response.status === 500){
+      setInvalidLogin(true)
+    }
     console.log(error);
   };
   const onSubmit = (data) => {
@@ -173,6 +181,15 @@ const LoginContainer = (props) => {
                     {errors.password.message}
                   </Text>
                 )}
+                {invalidLogin ? 
+                  <Text
+                    color="#FED7D7"
+                    fontWeight="bold"
+                    fontSize={[12, 12, 12, 14]}
+                  >
+                    Invalid email or wrong password
+                  </Text>
+                : null }
                 <Link>
                   <Text textAlign="right" fontSize="xs" position="relative">
                     Forgot Password?
