@@ -13,8 +13,27 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { AiOutlineInstagram } from "react-icons/ai";
+import Slider from "react-slick";
+import TestimonyCard from "./TestimonyCard";
+import testimoniesList from "./testimonies.json";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./_connect.scss";
 
 const LifeGroups = (props) => {
+  const sliderSettings = {
+    adaptiveHeight: true,
+    arrows: false,
+    centerMode: true,
+    dots: false,
+    focusOnSelect: true,
+    infinite: false,
+    slidesPerRow: 1,
+    speed: 500,
+    swipeToSlide: true,
+    variableWidth: true,
+  };
+
   return (
     <Box>
       <Heading
@@ -396,14 +415,23 @@ const LifeGroups = (props) => {
       </Box>
       <Heading
         as="h2"
-        fontSize={["2.25em", "3em", "4em"]}
+        fontSize={["2xl", "3xl", "5xl"]}
         fontWeight={800}
         textAlign="center"
-        mb={[0, 4]}
+        px={[4, 16]}
+        mb={4}
       >
         What our members have to say about LIFE Groups
       </Heading>
-      carousel
+      <Slider {...sliderSettings} className="full-width">
+        {testimoniesList.length > 0 &&
+          testimoniesList.map((testimonyInfo, i) => (
+            <TestimonyCard
+              key={"testimony" + i}
+              testimonyInfo={testimonyInfo}
+            />
+          ))}
+      </Slider>
     </Box>
   );
 };
