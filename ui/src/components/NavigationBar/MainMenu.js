@@ -22,34 +22,58 @@ const MainMenu = ({ login, view }) => {
   const WebView = () => {
     return (
       <Container maxW="container.lg">
-        <HStack
-          display={{ base: "none", md: "flex" }}
-          color="white"
-        >
+        <HStack display={{ base: "none", md: "flex" }} color="white">
           <Flex marginTop="30px">
             <VStack alignItems="flex-start">
-              <Text fontWeight = 'bold' fontSize = '40px' >Visit</Text>
-              <Link to={{pathname:'https://hongkong.hmcc.net/online/'}} target='_blank'>
-                <Text fontSize= '18px'>Church online</Text>
+              <Text fontWeight="bold" fontSize="40px">
+                Visit
+              </Text>
+              <Link
+                to={{ pathname: "https://hongkong.hmcc.net/online/" }}
+                target="_blank"
+              >
+                <Text fontSize="18px">Church online</Text>
               </Link>
-              <Text fontWeight = 'bold' fontSize = '40px'>About</Text>
-              <Link to={{pathname:'https://hongkong.hmcc.net/about/who-we-are/'}} target='_blank'>
-                <Text fontSize= '18px'>Who we are</Text>
+              <Text fontWeight="bold" fontSize="40px">
+                About
+              </Text>
+              <Link
+                to={{ pathname: "https://hongkong.hmcc.net/about/who-we-are/" }}
+                target="_blank"
+              >
+                <Text fontSize="18px">Who we are</Text>
               </Link>
-              <Link to={{pathname:'https://hongkong.hmcc.net/about/beliefs/'}} target='_blank'>
-                <Text fontSize= '18px'>Beliefs</Text>
+              <Link
+                to={{ pathname: "https://hongkong.hmcc.net/about/beliefs/" }}
+                target="_blank"
+              >
+                <Text fontSize="18px">Beliefs</Text>
               </Link>
-              <Link to={{pathname:'https://hongkong.hmcc.net/about/who-we-are/'}} target='_blank'>
-                <Text fontSize= '18px'>Our values</Text>
+              <Link
+                to={{ pathname: "https://hongkong.hmcc.net/about/who-we-are/" }}
+                target="_blank"
+              >
+                <Text fontSize="18px">Our values</Text>
               </Link>
-              <Link to={{pathname:'https://hongkong.hmcc.net/about/beliefs/'}} target='_blank'>
-                <Text fontSize= '18px'>Statement of Faith</Text>
+              <Link
+                to={{ pathname: "https://hongkong.hmcc.net/about/beliefs/" }}
+                target="_blank"
+              >
+                <Text fontSize="18px">Statement of Faith</Text>
               </Link>
-              <Link to={{pathname:'https://hongkong.hmcc.net/about/bold-vision/'}} target='_blank'>
-                <Text fontSize= '18px'>Bold Vision</Text>
+              <Link
+                to={{
+                  pathname: "https://hongkong.hmcc.net/about/bold-vision/",
+                }}
+                target="_blank"
+              >
+                <Text fontSize="18px">Bold Vision</Text>
               </Link>
-              <Link to={{pathname:'https://hongkong.hmcc.net/about/hmi/'}} target='_blank'>
-                <Text fontSize= '18px'>Harvest Mission International</Text>
+              <Link
+                to={{ pathname: "https://hongkong.hmcc.net/about/hmi/" }}
+                target="_blank"
+              >
+                <Text fontSize="18px">Harvest Mission International</Text>
               </Link>
             </VStack>
             <VStack
@@ -57,21 +81,44 @@ const MainMenu = ({ login, view }) => {
               position="relative"
               left={{ md: "10%", lg: "30%", xl: "40%" }}
             >
-              <Text fontWeight = 'bold' fontSize = '40px'>Connect</Text>
-              <Link to={{pathname:'https://hongkong.hmcc.net/ministries/campus-ministry/'}} target='_blank'>
-                <Text fontSize= '18px'>Ministries</Text>
+              <Text fontWeight="bold" fontSize="40px">
+                Connect
+              </Text>
+              <Link
+                to={{
+                  pathname:
+                    "https://hongkong.hmcc.net/ministries/campus-ministry/",
+                }}
+                target="_blank"
+              >
+                <Text fontSize="18px">Ministries</Text>
               </Link>
-              <Link to={{pathname:'https://hongkong.hmcc.net/get-involved/life-group/'}} target='_blank'>
-                <Text fontSize= '18px'>LIFE Groups</Text>
+              <Link
+                to={{
+                  pathname:
+                    "https://hongkong.hmcc.net/get-involved/life-group/",
+                }}
+                target="_blank"
+              >
+                <Text fontSize="18px">LIFE Groups</Text>
               </Link>
-              <Link to='/events' target='_blank'>
-                <Text fontWeight = 'bold' fontSize = '40px'>Events</Text>
+              <Link to="/events" target="_blank">
+                <Text fontWeight="bold" fontSize="40px">
+                  Events
+                </Text>
               </Link>
-              <Link to='/sermons' target='_blank'>
-                <Text fontWeight = 'bold' fontSize = '40px'>Sermons</Text>
+              <Link to="/sermons" target="_blank">
+                <Text fontWeight="bold" fontSize="40px">
+                  Sermons
+                </Text>
               </Link>
-              <Link to={{pathname:'https://hongkong.hmcc.net/give/'}} target='_blank'>
-                <Text fontWeight = 'bold' fontSize = '40px'>Give</Text>
+              <Link
+                to={{ pathname: "https://hongkong.hmcc.net/give/" }}
+                target="_blank"
+              >
+                <Text fontWeight="bold" fontSize="40px">
+                  Give
+                </Text>
               </Link>
             </VStack>
           </Flex>
@@ -92,10 +139,19 @@ const MainMenu = ({ login, view }) => {
                     <Button marginBottom="5" width="100%">
                       My Profile
                     </Button>
-                    <Button marginBottom="5" width="100%" style={{WebkitMarginStart:'0', marginInlineStart:'0'}}>
+                    <Button
+                      marginBottom="5"
+                      width="100%"
+                      style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
+                    >
                       Log Out
                     </Button>
-                    <Button width="100%" style={{WebkitMarginStart:'0', marginInlineStart:'0'}}>Prayer Requests</Button>
+                    <Button
+                      width="100%"
+                      style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
+                    >
+                      Prayer Requests
+                    </Button>
                   </ButtonGroup>
                 ) : (
                   <ButtonGroup
@@ -123,12 +179,12 @@ const MainMenu = ({ login, view }) => {
                 right="43%"
               >
                 <VStack alignItems="center" fontSize="sm">
-                  <Link href='https://annarbor.hmcc.net/'>Ann Arbor</Link>
-                  <Link href='https://austin.hmcc.net/'>Austin</Link>
-                  <Link href='https://detroit.hmcc.net/'>Detroit</Link>
+                  <Link href="https://annarbor.hmcc.net/">Ann Arbor</Link>
+                  <Link href="https://austin.hmcc.net/">Austin</Link>
+                  <Link href="https://detroit.hmcc.net/">Detroit</Link>
                   <Link style={{ fontWeight: "bolder" }}>HONG KONG</Link>
-                  <Link href='https://jakarta.hmcc.net/'>Jakrta</Link>
-                  <Link href='https://tangerang.hmcc.net/'>Tangerang</Link>
+                  <Link href="https://jakarta.hmcc.net/">Jakrta</Link>
+                  <Link href="https://tangerang.hmcc.net/">Tangerang</Link>
                 </VStack>
               </Box>
               <Box
@@ -187,31 +243,31 @@ const MainMenu = ({ login, view }) => {
               <VStack alignItems="flex-start">
                 <Accordion allowMultiple>
                   <AccordionItem borderStyle="none">
-                      <AccordionButton>
-                        <Box
-                          textAlign="left"
-                          marginRight="5px"
-                          fontWeight="bold"
-                          fontSize="2xl"
-                        >
-                          Visit
-                        </Box>
-                        <AccordionIcon alignItems="flex-start" />
-                      </AccordionButton>
+                    <AccordionButton>
+                      <Box
+                        textAlign="left"
+                        marginRight="5px"
+                        fontWeight="bold"
+                        fontSize="2xl"
+                      >
+                        Visit
+                      </Box>
+                      <AccordionIcon alignItems="flex-start" />
+                    </AccordionButton>
                     <AccordionPanel pb={4}>Church online</AccordionPanel>
                   </AccordionItem>
                   <AccordionItem borderStyle="none">
-                      <AccordionButton>
-                        <Box
-                          marginRight="5px"
-                          textAlign="left"
-                          fontWeight="bold"
-                          fontSize="2xl"
-                        >
-                          About
-                        </Box>
-                        <AccordionIcon />
-                      </AccordionButton>
+                    <AccordionButton>
+                      <Box
+                        marginRight="5px"
+                        textAlign="left"
+                        fontWeight="bold"
+                        fontSize="2xl"
+                      >
+                        About
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
                     <AccordionPanel pb={4}>Who we are</AccordionPanel>
                     <AccordionPanel pb={4}>Beliefs</AccordionPanel>
                     <AccordionPanel pb={4}>Our values</AccordionPanel>
@@ -222,55 +278,55 @@ const MainMenu = ({ login, view }) => {
                     </AccordionPanel>
                   </AccordionItem>
                   <AccordionItem borderStyle="none">
-                      <AccordionButton>
-                        <Box
-                          marginRight="5px"
-                          textAlign="left"
-                          fontWeight="bold"
-                          fontSize="2xl"
-                        >
-                          Connect
-                        </Box>
-                        <AccordionIcon />
-                      </AccordionButton>
+                    <AccordionButton>
+                      <Box
+                        marginRight="5px"
+                        textAlign="left"
+                        fontWeight="bold"
+                        fontSize="2xl"
+                      >
+                        Connect
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
                     <AccordionPanel pb={4}>Ministries</AccordionPanel>
                     <AccordionPanel pb={4}>LIFE Groups</AccordionPanel>
                   </AccordionItem>
                   <AccordionItem borderStyle="none">
-                      <AccordionButton>
-                        <Box
-                          flex="1"
-                          textAlign="left"
-                          fontWeight="bold"
-                          fontSize="2xl"
-                        >
-                          Events
-                        </Box>
-                      </AccordionButton>
+                    <AccordionButton>
+                      <Box
+                        flex="1"
+                        textAlign="left"
+                        fontWeight="bold"
+                        fontSize="2xl"
+                      >
+                        Events
+                      </Box>
+                    </AccordionButton>
                   </AccordionItem>
                   <AccordionItem borderStyle="none">
-                      <AccordionButton>
-                        <Box
-                          flex="1"
-                          textAlign="left"
-                          fontWeight="bold"
-                          fontSize="2xl"
-                        >
-                          Sermons
-                        </Box>
-                      </AccordionButton>
+                    <AccordionButton>
+                      <Box
+                        flex="1"
+                        textAlign="left"
+                        fontWeight="bold"
+                        fontSize="2xl"
+                      >
+                        Sermons
+                      </Box>
+                    </AccordionButton>
                   </AccordionItem>
                   <AccordionItem borderStyle="none">
-                      <AccordionButton>
-                        <Box
-                          flex="1"
-                          textAlign="left"
-                          fontWeight="bold"
-                          fontSize="2xl"
-                        >
-                          Give
-                        </Box>
-                      </AccordionButton>
+                    <AccordionButton>
+                      <Box
+                        flex="1"
+                        textAlign="left"
+                        fontWeight="bold"
+                        fontSize="2xl"
+                      >
+                        Give
+                      </Box>
+                    </AccordionButton>
                   </AccordionItem>
                 </Accordion>
               </VStack>
@@ -315,17 +371,17 @@ const MainMenu = ({ login, view }) => {
                 <Box className="other-links" position="relative">
                   <Accordion allowMultiple marginTop="20px">
                     <AccordionItem borderStyle="none">
-                        <AccordionButton>
-                          <Box
-                            textAlign="center"
-                            fontWeight="bold"
-                            fontSize="xl"
-                            marginRight="5px"
-                          >
-                            HONG KONG
-                          </Box>
-                          <AccordionIcon />
-                        </AccordionButton>
+                      <AccordionButton>
+                        <Box
+                          textAlign="center"
+                          fontWeight="bold"
+                          fontSize="xl"
+                          marginRight="5px"
+                        >
+                          HONG KONG
+                        </Box>
+                        <AccordionIcon />
+                      </AccordionButton>
                       <AccordionPanel pb={4} textAlign="center">
                         Ann Arbor
                       </AccordionPanel>
