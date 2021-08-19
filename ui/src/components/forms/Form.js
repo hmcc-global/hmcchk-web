@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
-import axios from "axios";
+import { customAxios as axios } from "../helpers/customAxios";
 import { camelize, sentencize } from "../helpers/formsHelpers";
 import { useSelector } from "react-redux";
 import { CheckCircleIcon } from "@chakra-ui/icons";
@@ -34,7 +34,7 @@ const Form = (props) => {
   const { formId, formName, formDescription, formImage, formData } = props;
   const { register, handleSubmit, control, formState, setValue } = useForm();
   const { errors } = formState;
-  const user = useSelector((state) => state.user);
+  const { user } = props;
 
   const [submissionData, setSubmissionData] = useState(null);
   const [submitStatus, setSubmitStatus] = useState(false);
@@ -68,6 +68,7 @@ const Form = (props) => {
   };
 
   const postSubmission = async (formId, data, userId) => {
+    console.log(data);
     if (!userId) return;
     setSubmitStatus(true);
     try {
@@ -325,7 +326,19 @@ const Form = (props) => {
         );
         break;
       case "checkbox":
-        inputField.push(<Checkbox key={fieldName}>{fieldName}</Checkbox>);
+        inputField.push(
+          <Controller
+            control={control}
+            name={fieldName}
+            key={fieldName}
+            defaultValue={false}
+            render={({ field: { onChange, value, ref } }) => (
+              <Checkbox onChange={onChange} ref={ref} isChecked={value}>
+                {fieldName}
+              </Checkbox>
+            )}
+          />
+        );
         break;
       default:
         inputField.push(

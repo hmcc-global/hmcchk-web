@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
+import { customAxios as axios } from "../helpers/customAxios";
 import FormCreator from "./FormCreator";
 import {
   FormControl,
@@ -25,6 +25,7 @@ const FormManager = (props) => {
   const [editFormData, setEditFormData] = useState(null);
   const [formList, setFormList] = useState([]);
   const history = useHistory();
+  const { user } = props;
 
   const { errors } = formState;
 
@@ -187,6 +188,7 @@ const FormManager = (props) => {
           formImage={formImage}
           existingFormData={editFormData}
           resetFormEditorCallback={resetFormEditorCallback}
+          user={user}
         />
       )}
     </Container>
