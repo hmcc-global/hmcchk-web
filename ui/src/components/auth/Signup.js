@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Redirect } from "react-router-dom";
-import axios from "axios";
-import { ChevronLeftIcon, EmailIcon, LockIcon } from "@chakra-ui/icons";
+import {customAxios as axios} from "../helpers/customAxios";
+import { ChevronLeftIcon } from "@chakra-ui/icons";
 import Country from "./country.json";
 import ReCAPTCHA from "react-google-recaptcha";
 import {
@@ -11,15 +11,13 @@ import {
   Center,
   UnorderedList,
   ListItem,
-  Card,
-  Paper,
   VStack,
   Flex,
   Image,
   Text,
   Stack,
   HStack,
-  Button,
+  Input,
   Link,
 } from "@chakra-ui/react";
 
@@ -28,6 +26,7 @@ const Signup = (props) => {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors, touchedFields },
   } = useForm();
   const onSubmit = (data) => {
@@ -41,8 +40,11 @@ const Signup = (props) => {
   const [lastName, setLastName] = useState('')
   useEffect (() => {
     if(googleEmail){ 
-      setFirstName(googleFullName.split(' ').slice(0, -1).join(' '))
-      setLastName(googleFullName.split(' ').slice(-1).join(' '))
+      let firstname = googleFullName.split(' ').slice(0, -1).join(' ')
+      let lastname = googleFullName.split(' ').slice(-1).join(' ')
+      setValue("email", googleEmail);
+      setValue("firstName", firstname);
+      setValue("lastName", lastname);
     }
   },[])
 
@@ -84,9 +86,10 @@ const Signup = (props) => {
   const { history } = props;
 
   const handleSignup = async (data) => {
+    console.log(data)
     await axios
       .post("/api/auth/signup", {
-        password: data.password,
+        password: data.password ? data.password : "",
         emailAddress: data.email,
         fullName: data.firstName + " " + data.lastName,
         countryOfOrigin: data.countryOfOrigin,
@@ -166,7 +169,7 @@ const Signup = (props) => {
                   Sign Up
                 </Text>
                 <Image
-                  h="85vh"
+                  h={googleEmail? "60vh" :"85vh"}
                   src={`${process.env.PUBLIC_URL}/images/HLine.svg`}
                   alt="Horizontal Line"
                 />
@@ -175,12 +178,11 @@ const Signup = (props) => {
                   marginLeft={{ base: "20px", md: "none" }}
                 >
                   <Text>Enter Your Email Address</Text>
-                  <input
+                  <Input
                     id="email"
                     name="email"
                     type="email"
-                    value={googleEmail ? googleEmail : ""}
-                    disabled = {googleEmail ? true : false}
+                    isReadOnly = {googleEmail ? true : false}
                     placeholder="e.g. chantaiman@gmail.com"
                     style={inputBox}
                     {...register("email", {
@@ -203,7 +205,7 @@ const Signup = (props) => {
                   )}
                   {googleEmail ? null : <>
                   <Text>Enter Your Account Password</Text>
-                  <input
+                  <Input
                     id="password"
                     type="password"
                     name="password"
@@ -254,7 +256,7 @@ const Signup = (props) => {
                     </Box>
                   </Center>
                   <Text>Re-enter Your Account Password</Text>
-                  <input
+                  <Input
                     id="rePassword"
                     type="password"
                     name="rePassword"
@@ -279,12 +281,11 @@ const Signup = (props) => {
                   )}
                   </> }
                   <Text>First Name (and Middle Name)</Text>
-                  <input
+                  <Input
                     id="firstName"
                     type="text"
                     name="firstName"
-                    value={googleEmail?firstName:""}
-                    disabled = {googleEmail ? true : false}
+                    isReadOnly = {googleEmail ? true : false}
                     placeholder="First name"
                     style={inputBox}
                     {...register("firstName", { required: "Required" })}
@@ -299,12 +300,11 @@ const Signup = (props) => {
                     </Text>
                   )}
                   <Text>Last Name</Text>
-                  <input
+                  <Input
                     id="lastName"
                     type="text"
                     name="lastName"
-                    value={googleEmail?lastName:""}
-                    disabled = {googleEmail ? true : false}
+                    isReadOnly = {googleEmail ? true : false}
                     placeholder="Last Name"
                     style={inputBox}
                     {...register("lastName", { required: "Required" })}
@@ -319,7 +319,7 @@ const Signup = (props) => {
                     </Text>
                   )}
                   <Text>Phone Number</Text>
-                  <input
+                  <Input
                     id="phoneNumber"
                     type="number"
                     name="password"
@@ -382,11 +382,11 @@ const Signup = (props) => {
                     isInvalid={errors["lifestage"]}
                     placeholder="Please fill in this field"
                   >
-                    {Country.map((result) => {
-                      return result.country.map((result) => {
-                        return <option value={result}>{result}</option>;
-                      });
-                    })}
+                    <option value="Undergraduate">Undergraduate</option>
+                    <option value="Postgraduate">Postgraduate</option>
+                    <option value="Single Adult">Single Adult</option>
+                    <option value="Married Couple">Married Couple</option>
+
                   </Select>
                   {errors.lifestage && (
                     <Text
@@ -401,10 +401,10 @@ const Signup = (props) => {
               </HStack>
               <ReCAPTCHA
                 style={{ left: "5%", position: "relative", marginTop: "20px" }}
-                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                sitekey={process.env.REACT_APP_CAPTCHA}
                 onChange={onChangeReCAPTCHA}
               />
-              <input
+              <Input
                 type="submit"
                 name="Login"
                 value="Register"

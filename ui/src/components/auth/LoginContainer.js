@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import {customAxios as axios} from "../helpers/customAxios";
 import GoogleLogin from "react-google-login";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 
 const LoginContainer = (props) => {
-  const [invalidLogin, setInvalidLogin] = useState(false)
+  const [invalidLogin, setInvalidLogin] = useState("")
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const {history} = props;
@@ -37,24 +37,28 @@ const LoginContainer = (props) => {
         password: password,
       });
        dispatch(signin(data));
-       setInvalidLogin(false);
+       setInvalidLogin("");
       console.log(user);
     } catch (err) {
       if(err.response.status === 500){
-        setInvalidLogin(true)
+        setInvalidLogin("Invalid email or wrong password")
       }
       console.log(err);
     }
   };
 
   const onGoogleSuccessSignup = async ({ tokenId }) => {
-    const { data } = await axios.post("/api/auth/signup-google", {
-      tokenId: tokenId,
-    });
-    history.push({
-      pathname:'/signup',
-      state: data
-    })
+    try{
+      const { data } = await axios.post("/api/auth/signup-google", {
+        tokenId: tokenId,
+      });
+      history.push({
+        pathname:'/signup',
+        state: data
+      })
+    } catch (err) {
+      setInvalidLogin("Account already exist!")
+    }
   };
 
   const onGoogleSuccessLogin = async ({ tokenId }) => {
@@ -63,12 +67,12 @@ const LoginContainer = (props) => {
     });
     console.log(data);
     dispatch(signin(data));
-    setInvalidLogin(false);
+    setInvalidLogin("");
   };
 
   const onGoogleFailure = ({ error }) => {
     if(error.response.status === 500){
-      setInvalidLogin(true)
+      setInvalidLogin("Invalid email or wrong password")
     }
     console.log(error);
   };
@@ -115,7 +119,7 @@ const LoginContainer = (props) => {
 
   return (
     <>
-      <Stack background="#2C5282" color="white" padding="20px">
+      <Stack background="#2C5282" color="white" padding="20px" h='100vh'>
         <Flex>
           <Box>
             <Link href="../">
@@ -187,7 +191,7 @@ const LoginContainer = (props) => {
                     fontWeight="bold"
                     fontSize={[12, 12, 12, 14]}
                   >
-                    Invalid email or wrong password
+                    {invalidLogin}
                   </Text>
                 : null }
                 <Link>
