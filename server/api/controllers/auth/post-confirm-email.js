@@ -61,15 +61,13 @@ module.exports = {
         });
 
         sails.log.info(`${user.email} confirmed.`);
-        if (this.req.wantsJSON) {
-          return;
-        } else {
-          // TODO: redirect to the correct page
-          throw { redirect: "/email/confirmed" };
-        }
+        return exits.success(true);
       }
+
+      return exits.success(true);
     } catch (err) {
-      return exits.error(err);
+      sails.log(err);
+      return exits.error(false);
     }
   },
 };

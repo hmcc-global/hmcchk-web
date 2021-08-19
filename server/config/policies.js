@@ -28,6 +28,7 @@ module.exports.policies = {
   "auth/post-signup": true,
   "auth/post-signup-google": true,
   "auth/verify-token": true,
+  "auth/post-confirm-email": true,
 
   // Cache
   "cache/*": ["isLoggedIn", "isAdmin"],

@@ -10,6 +10,7 @@ import EventsPage from "./events/EventsPage";
 import VisitUsPage from "./visit-us/VisitUsPage";
 import PrivateRoute from "./helpers/PrivateRoute";
 import HomeContainer from "./home/HomeContainer";
+import ConfirmEmailPage from "./email/ConfirmEmailPage";
 
 const MainContainer = () => {
   return (
@@ -62,6 +63,12 @@ const MainContainer = () => {
           path="/visit-us"
           permissions={["public"]}
           component={VisitUsPage}
+        />
+        <PrivateRoute
+          exact
+          path="/email/confirm/:token"
+          permissions={["public"]}
+          component={ConfirmEmailPage}
         />
       </Switch>
     </chakra.main>
