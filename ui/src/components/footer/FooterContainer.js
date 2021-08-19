@@ -16,7 +16,7 @@ import { Copyright } from "./Copyright";
 import { LinkGrid } from "./LinkGrid";
 import { SoapAppDownloadButton } from "./SoapDownloadButton";
 import { ChurchAppDownloadButton } from "./ChurchAppDownloadButton";
-import GetDailyBrp from '../helpers/GetDailyBrp';
+import DailyBrp from "../helpers/DailyBrp";
 
 export default function FooterContainer() {
   return (
@@ -53,7 +53,9 @@ export default function FooterContainer() {
               variant="outline"
               _hover={{ bg: "teal.600" }}
             >
-              <Text color="white">{`Today's BRP : ${GetDailyBrp()}`}</Text>
+              <Text color="white">
+                Today's BRP : <DailyBrp />
+              </Text>
             </Button>
             <Text fontWeight="bold">
               Harvest Mission Community Church(Hong Kong)

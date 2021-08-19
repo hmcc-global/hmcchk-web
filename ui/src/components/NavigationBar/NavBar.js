@@ -92,32 +92,37 @@ const NavBar = () => {
                 isInline
               >
                 <Box position="relative">
-                  <Link href="/visit" target='_blank'>
-                    VISIT
-                  </Link>
+                  <Link href="/visit">VISIT</Link>
                 </Box>
                 <Box position="relative">
-                  <Link to={{ pathname:"https://hongkong.hmcc.net/about/who-we-are/"}} target='_blank'>
+                  <Link
+                    to={{
+                      pathname: "https://hongkong.hmcc.net/about/who-we-are/",
+                    }}
+                    target="_blank"
+                  >
                     ABOUT
                   </Link>
                 </Box>
                 <Box position="relative">
-                  <Link to={{pathname:"https://hongkong.hmcc.net/new/"}} target='_blank'>
+                  <Link
+                    to={{ pathname: "https://hongkong.hmcc.net/new/" }}
+                    target="_blank"
+                  >
                     CONNECT
                   </Link>
                 </Box>
                 <Box position="relative">
-                  <Link to="/events">
-                    EVENTS
-                  </Link>
+                  <Link to="/events">EVENTS</Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/sermon">
-                    SERMONS
-                  </Link>
+                  <Link to="/sermon">SERMONS</Link>
                 </Box>
                 <Box position="relative">
-                  <Link to={{pathname:"https://hongkong.hmcc.net/give/"}} target='_blank'>
+                  <Link
+                    to={{ pathname: "https://hongkong.hmcc.net/give/" }}
+                    target="_blank"
+                  >
                     GIVE
                   </Link>
                 </Box>
@@ -187,7 +192,11 @@ const NavBar = () => {
           <Flex w="100vw" justify="space-around">
             <Stack justify="center" align="center" isInline>
               <Center>
-                <Link to={{pathname:"https://hongkong.hmcc.net/online/"}} target='_blank' style={{ lineHeight: "0" }}>
+                <Link
+                  to={{ pathname: "https://hongkong.hmcc.net/online/" }}
+                  target="_blank"
+                  style={{ lineHeight: "0" }}
+                >
                   <Button
                     h="3.5vh"
                     style={liveScStyle}
@@ -211,12 +220,13 @@ const NavBar = () => {
           finalFocusRef={btnRef}
         >
           <DrawerOverlay />
-          <DrawerContent   
-            background= "url('/images/ripple_bg.png')"
-            backgroundRepeat= 'no-repeat'
-            backgroundColor= '#2c5282'
-            backgroundSize= '70%'
-            backgroundPosition = '120% 75%'>
+          <DrawerContent
+            background="url('/images/ripple_bg.png')"
+            backgroundRepeat="no-repeat"
+            backgroundColor="#2c5282"
+            backgroundSize="70%"
+            backgroundPosition="120% 75%"
+          >
             <DrawerCloseButton
               position="absolute"
               right="5%"

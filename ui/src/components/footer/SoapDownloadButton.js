@@ -9,14 +9,20 @@ export function SoapAppDownloadButton() {
         </Text>
       </Box>
       <HStack>
-        <Link target='_blank' href="https://apps.apple.com/hk/app/daily-soap-bible-reading-app/id1448825436">
+        <Link
+          target="_blank"
+          href="https://apps.apple.com/hk/app/daily-soap-bible-reading-app/id1448825436"
+        >
           <Image
             h="40px"
             objectFit="cover"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/135px-Download_on_the_App_Store_Badge.svg.png"
           />
         </Link>
-        <Link target='_blank' href="https://play.google.com/store/apps/details?id=net.hmcc.hongkong.dailysoap">
+        <Link
+          target="_blank"
+          href="https://play.google.com/store/apps/details?id=net.hmcc.hongkong.dailysoap"
+        >
           <Image
             h="40px"
             objectFit="cover"
