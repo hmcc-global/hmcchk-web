@@ -57,9 +57,14 @@ export default function FooterContainer() {
                 Today's BRP : <DailyBrp />
               </Text>
             </Button>
-            <Text fontWeight="bold">
-              Harvest Mission Community Church(Hong Kong)
-            </Text>
+            <Box>
+              <Text fontWeight="bold" align='center'>
+                Harvest Mission Community Church
+              </Text>
+              <Text fontWeight="bold" align='center'>
+                (Hong Kong)
+              </Text>
+            </Box>
             <ChurchAppDownloadButton />
             <SoapAppDownloadButton />
           </VStack>

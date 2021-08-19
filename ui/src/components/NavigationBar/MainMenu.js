@@ -39,7 +39,7 @@ const MainMenu = ({ login, view }, props) => {
                 to={{ pathname: "https://hongkong.hmcc.net/online/" }}
                 target="_blank"
               >
-                <Text fontSize="18px">Church online</Text>
+                <Text fontSize="18px">Church Online</Text>
               </Link>
               <Text fontWeight="bold" fontSize="40px">
                 About
@@ -48,7 +48,7 @@ const MainMenu = ({ login, view }, props) => {
                 to={{ pathname: "https://hongkong.hmcc.net/about/who-we-are/" }}
                 target="_blank"
               >
-                <Text fontSize="18px">Who we are</Text>
+                <Text fontSize="18px">Who We Are</Text>
               </Link>
               <Link
                 to={{ pathname: "https://hongkong.hmcc.net/about/beliefs/" }}
@@ -60,7 +60,7 @@ const MainMenu = ({ login, view }, props) => {
                 to={{ pathname: "https://hongkong.hmcc.net/about/who-we-are/" }}
                 target="_blank"
               >
-                <Text fontSize="18px">Our values</Text>
+                <Text fontSize="18px">Our Values</Text>
               </Link>
               <Link
                 to={{ pathname: "https://hongkong.hmcc.net/about/beliefs/" }}
@@ -74,7 +74,7 @@ const MainMenu = ({ login, view }, props) => {
                 }}
                 target="_blank"
               >
-                <Text fontSize="18px">Bold Vision</Text>
+                <Text fontSize="18px">BOLD Vision</Text>
               </Link>
               <Link
                 to={{ pathname: "https://hongkong.hmcc.net/about/hmi/" }}
@@ -144,7 +144,9 @@ const MainMenu = ({ login, view }, props) => {
                     width="200px"
                   >
                     <Button marginBottom="5" width="100%">
-                      My Profile
+                      <Link to='/profile'>
+                        My Profile
+                      </Link>
                     </Button>
                     <Button
                       onClick={onLogout}
@@ -158,7 +160,9 @@ const MainMenu = ({ login, view }, props) => {
                       width="100%"
                       style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
                     >
-                      Prayer Requests
+                      <Link to='/'>
+                        Prayer Requests
+                      </Link>
                     </Button>
                   </ButtonGroup>
                 ) : (
@@ -173,7 +177,9 @@ const MainMenu = ({ login, view }, props) => {
                     width="200px"
                   >
                     <Button marginBottom="5" width="100%">
-                      Login or Sign up
+                      <Link to='/login' target='_blank'>
+                        Login or Sign up
+                      </Link>
                     </Button>
                     <Button width="100%" style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}>Prayer Requests</Button>
                   </ButtonGroup>
@@ -187,12 +193,44 @@ const MainMenu = ({ login, view }, props) => {
                 right="43%"
               >
                 <VStack alignItems="center" fontSize="sm">
-                  <Link href="https://annarbor.hmcc.net/">Ann Arbor</Link>
-                  <Link href="https://austin.hmcc.net/">Austin</Link>
-                  <Link href="https://detroit.hmcc.net/">Detroit</Link>
-                  <Link style={{ fontWeight: "bolder" }}>HONG KONG</Link>
-                  <Link href="https://jakarta.hmcc.net/">Jakrta</Link>
-                  <Link href="https://tangerang.hmcc.net/">Tangerang</Link>
+                  <Link to={{
+                      pathname: "https://annarbor.hmcc.net/",
+                    }}
+                    target="_blank"
+                  >
+                    Ann Arbor
+                  </Link>
+                  <Link to={{
+                      pathname: "https://austin.hmcc.net/",
+                    }}
+                    target="_blank"
+                  >
+                    Austin
+                  </Link>
+                  <Link to={{
+                      pathname: "https://detroit.hmcc.net/",
+                    }}
+                    target="_blank"
+                  >
+                    Detroit
+                  </Link>
+                  <Link style={{ fontWeight: "bolder" }}>
+                  HONG KONG
+                  </Link>
+                  <Link to={{
+                      pathname: "https://jakarta.hmcc.net/",
+                    }}
+                    target="_blank"
+                  >
+                    Jakarta
+                  </Link>
+                  <Link to={{
+                      pathname: "https://tangerang.hmcc.net/",
+                    }}
+                    target="_blank"
+                  >
+                    Tangerang
+                  </Link>
                 </VStack>
               </Box>
               <Box
@@ -262,7 +300,14 @@ const MainMenu = ({ login, view }, props) => {
                       </Box>
                       <AccordionIcon alignItems="flex-start" />
                     </AccordionButton>
-                    <AccordionPanel pb={4}>Church online</AccordionPanel>
+                    <AccordionPanel pb={4}>
+                    <Link
+                      to={{ pathname: "https://hongkong.hmcc.net/online/" }}
+                      target="_blank"
+                    >
+                      Church Online
+                    </Link>
+                    </AccordionPanel>
                   </AccordionItem>
                   <AccordionItem borderStyle="none">
                     <AccordionButton>
@@ -276,13 +321,55 @@ const MainMenu = ({ login, view }, props) => {
                       </Box>
                       <AccordionIcon />
                     </AccordionButton>
-                    <AccordionPanel pb={4}>Who we are</AccordionPanel>
-                    <AccordionPanel pb={4}>Beliefs</AccordionPanel>
-                    <AccordionPanel pb={4}>Our values</AccordionPanel>
-                    <AccordionPanel pb={4}>Statement of Faith</AccordionPanel>
-                    <AccordionPanel pb={4}>Bold Vision</AccordionPanel>
                     <AccordionPanel pb={4}>
-                      Harvest Mission International
+                      <Link
+                        to={{ pathname: "https://hongkong.hmcc.net/about/who-we-are/" }}
+                        target="_blank"
+                      >
+                        Who We Are
+                      </Link>
+                    </AccordionPanel>
+                    <AccordionPanel pb={4}>
+                      <Link
+                        to={{ pathname: "https://hongkong.hmcc.net/about/beliefs/" }}
+                        target="_blank"
+                      >
+                        Beliefs
+                      </Link>
+                    </AccordionPanel>
+                    <AccordionPanel pb={4}>
+                      <Link
+                        to={{ pathname: "https://hongkong.hmcc.net/about/who-we-are/" }}
+                        target="_blank"
+                      >
+                        Our Values
+                      </Link>
+                    </AccordionPanel>
+                    <AccordionPanel pb={4}>
+                      <Link
+                        to={{ pathname: "https://hongkong.hmcc.net/about/beliefs/" }}
+                        target="_blank"
+                      >
+                        Statement of Faith
+                      </Link>
+                    </AccordionPanel>
+                    <AccordionPanel pb={4}>
+                      <Link
+                        to={{
+                          pathname: "https://hongkong.hmcc.net/about/bold-vision/",
+                        }}
+                        target="_blank"
+                      >
+                        BOLD Vision
+                      </Link>
+                    </AccordionPanel>
+                    <AccordionPanel pb={4}>
+                      <Link
+                        to={{ pathname: "https://hongkong.hmcc.net/about/hmi/" }}
+                        target="_blank"
+                      >
+                        Harvest Mission International
+                      </Link>
                     </AccordionPanel>
                   </AccordionItem>
                   <AccordionItem borderStyle="none">
@@ -293,22 +380,46 @@ const MainMenu = ({ login, view }, props) => {
                         fontWeight="bold"
                         fontSize="2xl"
                       >
-                        Connect
+                        <Link to='/connect'>
+                          Connect
+                        </Link>
                       </Box>
                       <AccordionIcon />
                     </AccordionButton>
-                    <AccordionPanel pb={4}>Ministries</AccordionPanel>
-                    <AccordionPanel pb={4}>LIFE Groups</AccordionPanel>
+                    <AccordionPanel pb={4}>
+                      <Link
+                        to={{
+                          pathname:
+                            "https://hongkong.hmcc.net/ministries/campus-ministry/",
+                        }}
+                        target="_blank"
+                      >
+                        Ministries
+                      </Link>
+                    </AccordionPanel>
+                    <AccordionPanel pb={4}>
+                      <Link
+                        to={{
+                          pathname:
+                            "https://hongkong.hmcc.net/get-involved/life-group/",
+                        }}
+                        target="_blank"
+                      >
+                        LIFE Groups
+                      </Link>
+                    </AccordionPanel>
                   </AccordionItem>
                   <AccordionItem borderStyle="none">
-                    <AccordionButton>
+                  <AccordionButton>
                       <Box
                         flex="1"
                         textAlign="left"
                         fontWeight="bold"
                         fontSize="2xl"
                       >
-                        Events
+                        <Link to="/events" target="_blank">
+                          Events
+                        </Link>
                       </Box>
                     </AccordionButton>
                   </AccordionItem>
@@ -320,7 +431,9 @@ const MainMenu = ({ login, view }, props) => {
                         fontWeight="bold"
                         fontSize="2xl"
                       >
-                        Sermons
+                        <Link to="/sermons" target="_blank">
+                          Sermons
+                        </Link>
                       </Box>
                     </AccordionButton>
                   </AccordionItem>
@@ -332,7 +445,12 @@ const MainMenu = ({ login, view }, props) => {
                         fontWeight="bold"
                         fontSize="2xl"
                       >
-                        Give
+                        <Link
+                          to={{ pathname: "https://hongkong.hmcc.net/give/" }}
+                          target="_blank"
+                        >
+                          Give
+                        </Link>
                       </Box>
                     </AccordionButton>
                   </AccordionItem>
@@ -354,7 +472,9 @@ const MainMenu = ({ login, view }, props) => {
                       width="200px"
                     >
                       <Button marginBottom="5" width="100%">
-                        My Profile
+                        <Link to='/profile'>
+                          My Profile
+                        </Link>
                       </Button>
                       <Button onClick={onLogout} marginBottom="5" width="100%" style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}>
                         Log Out
@@ -370,7 +490,9 @@ const MainMenu = ({ login, view }, props) => {
                       width="200px"
                     >
                       <Button marginBottom="5" width="100%">
-                        Login or Sign up
+                        <Link to='/login'>
+                          Login or Sign up
+                        </Link>
                       </Button>
                       <Button width="100%" style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}>Prayer Requests</Button>
                     </ButtonGroup>
@@ -391,22 +513,57 @@ const MainMenu = ({ login, view }, props) => {
                         <AccordionIcon />
                       </AccordionButton>
                       <AccordionPanel pb={4} textAlign="center">
-                        Ann Arbor
+                        <Link 
+                          to={{
+                            pathname: "https://annarbor.hmcc.net/",
+                          }}
+                          target="_blank"
+                        >
+                          Ann Arbor
+                        </Link>
                       </AccordionPanel>
                       <AccordionPanel pb={4} textAlign="center">
-                        Austin
+                        <Link 
+                          to={{
+                            pathname: "https://austin.hmcc.net/",
+                          }}
+                          target="_blank"
+                        >
+                          Austin
+                        </Link>
                       </AccordionPanel>
                       <AccordionPanel pb={4} textAlign="center">
-                        Detroit
+                        <Link 
+                          to={{
+                            pathname: "https://detroit.hmcc.net/",
+                          }}
+                          target="_blank"
+                        >
+                          Detroit
+                        </Link>
                       </AccordionPanel>
                       <AccordionPanel pb={4} textAlign="center">
-                        Jakarta
+                        <Link 
+                          to={{
+                            pathname: "https://jakarta.hmcc.net/",
+                          }}
+                          target="_blank"
+                        >
+                          Jakarta
+                        </Link>
                       </AccordionPanel>
                       <AccordionPanel pb={4} textAlign="center">
                         Hong Kong
                       </AccordionPanel>
                       <AccordionPanel pb={4} textAlign="center">
-                        Tangerang
+                        <Link 
+                          to={{
+                            pathname: "https://tangerang.hmcc.net/",
+                          }}
+                          target="_blank"
+                        >
+                          Tangerang
+                        </Link>
                       </AccordionPanel>
                     </AccordionItem>
                   </Accordion>

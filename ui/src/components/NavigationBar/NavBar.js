@@ -28,7 +28,7 @@ import MainMenu from "./MainMenu";
 
 const NavBar = (props) => {
   const [loggedIn, setLoggedIn] = useState(true);
-  const user = useSelector((state) => state.user);
+  const {user} = props;
   const [username, setUsername] = useState('');
   const welcomeMsg = ["Login or Sign up", `Hi, ${username}`];
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -84,7 +84,7 @@ const NavBar = (props) => {
               h="10.5vh"
             >
               <Box position="relative">
-                <Link to="/sermons">
+                <Link to="/home">
                   <Image
                     h={{
                       base: "3.5vh",
@@ -109,7 +109,7 @@ const NavBar = (props) => {
                 isInline
               >
                 <Box position="relative">
-                  <Link href="/visit">VISIT</Link>
+                  <Link to="/visit-us">VISIT</Link>
                 </Box>
                 <Box position="relative">
                   <Link
@@ -123,8 +123,7 @@ const NavBar = (props) => {
                 </Box>
                 <Box position="relative">
                   <Link
-                    to={{ pathname: "https://hongkong.hmcc.net/new/" }}
-                    target="_blank"
+                    to="/connect"
                   >
                     CONNECT
                   </Link>
@@ -133,7 +132,7 @@ const NavBar = (props) => {
                   <Link to="/events">EVENTS</Link>
                 </Box>
                 <Box position="relative">
-                  <Link to="/sermon">SERMONS</Link>
+                  <Link to="/sermons">SERMONS</Link>
                 </Box>
                 <Box position="relative">
                   <Link
