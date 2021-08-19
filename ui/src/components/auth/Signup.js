@@ -11,13 +11,15 @@ import {
   Center,
   UnorderedList,
   ListItem,
+  Card,
+  Paper,
   VStack,
   Flex,
   Image,
   Text,
   Stack,
   HStack,
-  Input,
+  Button,
   Link,
 } from "@chakra-ui/react";
 
@@ -26,7 +28,6 @@ const Signup = (props) => {
     register,
     handleSubmit,
     watch,
-    setValue,
     formState: { errors, touchedFields },
   } = useForm();
   const onSubmit = (data) => {
@@ -88,20 +89,22 @@ const Signup = (props) => {
   const handleSignup = async (data) => {
     try {
       const payload = await axios.post("/api/auth/signup", {
-        password: data.password ? data.password : "",
+        password: data.password,
         emailAddress: data.email,
         fullName: data.firstName + " " + data.lastName,
         countryOfOrigin: data.countryOfOrigin,
         lifestage: data.lifestage,
         phoneNumber: data.phoneNumber,
       });
-      history.push({
-        pathname: "/login",
-        state: { detail: "registrationSuccess" },
-      });
+      console.log(payload);
+      history.push("/login");
     } catch (err) {
       if (err.response && err.response.status === 409) {
         console.log("EMAIL already exists");
+        seterror("Email already exists, please try with another email");
+      } else if (err.response && err.response.status === 422) {
+        console.log("Required fields not filled");
+        seterror("Required fields not filled");
       }
     }
     // Error
@@ -178,7 +181,7 @@ const Signup = (props) => {
                   marginLeft={{ base: "20px", md: "none" }}
                 >
                   <Text>Enter Your Email Address</Text>
-                  <Input
+                  <input
                     id="email"
                     name="email"
                     type="email"
@@ -284,7 +287,7 @@ const Signup = (props) => {
                     </>
                   )}
                   <Text>First Name (and Middle Name)</Text>
-                  <Input
+                  <input
                     id="firstName"
                     type="text"
                     name="firstName"
@@ -303,7 +306,7 @@ const Signup = (props) => {
                     </Text>
                   )}
                   <Text>Last Name</Text>
-                  <Input
+                  <input
                     id="lastName"
                     type="text"
                     name="lastName"
@@ -322,7 +325,7 @@ const Signup = (props) => {
                     </Text>
                   )}
                   <Text>Phone Number</Text>
-                  <Input
+                  <input
                     id="phoneNumber"
                     type="number"
                     name="password"
@@ -403,20 +406,20 @@ const Signup = (props) => {
               </HStack>
               <ReCAPTCHA
                 style={{ left: "5%", position: "relative", marginTop: "20px" }}
-                sitekey={process.env.REACT_APP_CAPTCHA}
+                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                 onChange={onChangeReCAPTCHA}
               />
-              <Input
+              {error && (
+                <Text color="#F6AD55" fontSize={[14, 14, 14, 16]}>
+                  {error}
+                </Text>
+              )}
+              <input
                 type="submit"
                 name="Login"
                 value="Register"
                 style={submitBoxStyle}
               />
-              {error && (
-                <Text color="#F6AD55" fontSize={[12, 12, 12, 14]}>
-                  {errors}
-                </Text>
-              )}
             </VStack>
           </form>
         </Flex>
