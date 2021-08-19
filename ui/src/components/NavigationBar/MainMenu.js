@@ -167,7 +167,7 @@ const MainMenu = ({ login, view }) => {
                     <Button marginBottom="5" width="100%">
                       Login or Sign up
                     </Button>
-                    <Button width="100%">Prayer Requests</Button>
+                    <Button width="100%" style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}>Prayer Requests</Button>
                   </ButtonGroup>
                 )}
               </Box>
@@ -348,10 +348,10 @@ const MainMenu = ({ login, view }) => {
                       <Button marginBottom="5" width="100%">
                         My Profile
                       </Button>
-                      <Button marginBottom="5" width="100%">
+                      <Button marginBottom="5" width="100%" style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}>
                         Log Out
                       </Button>
-                      <Button width="100%">Prayer Requests</Button>
+                      <Button width="100%" style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}>Prayer Requests</Button>
                     </ButtonGroup>
                   ) : (
                     <ButtonGroup
@@ -364,7 +364,7 @@ const MainMenu = ({ login, view }) => {
                       <Button marginBottom="5" width="100%">
                         Login or Sign up
                       </Button>
-                      <Button width="100%">Prayer Requests</Button>
+                      <Button width="100%" style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}>Prayer Requests</Button>
                     </ButtonGroup>
                   )}
                 </Box>
