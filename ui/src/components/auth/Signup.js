@@ -35,16 +35,17 @@ const Signup = (props) => {
   };
 
   const googleEmail = props.history.location.state?.email;
-  const googleFullName = props.history.location.state?.fullName
-  
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  useEffect (() => {
-    if(googleEmail){ 
-      setFirstName(googleFullName.split(' ').slice(0, -1).join(' '))
-      setLastName(googleFullName.split(' ').slice(-1).join(' '))
+  const googleFullName = props.history.location.state?.fullName;
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [error, seterror] = useState(null);
+  useEffect(() => {
+    if (googleEmail) {
+      setFirstName(googleFullName.split(" ").slice(0, -1).join(" "));
+      setLastName(googleFullName.split(" ").slice(-1).join(" "));
     }
-  },[])
+  }, []);
 
   const onChangeReCAPTCHA = (value) => {
     console.log("Captcha value:", value);
@@ -94,11 +95,15 @@ const Signup = (props) => {
         phoneNumber: data.phoneNumber,
       })
       .then((response) => {
-        history.push("/login");
+        history.push({
+          pathname: "/login",
+          state: { detail: "registrationSuccess" },
+        });
       })
       .catch((error) => {
         // Error
         if (error.response) {
+          seterror(error.response.data);
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
           // console.log(error.response.data);
@@ -120,12 +125,7 @@ const Signup = (props) => {
 
   return (
     <>
-      <Stack
-        background="#2C5282"
-        color="white"
-        padding="20px"
-        fontFamily="inter"
-      >
+      <Stack background="#2C5282" color="white" padding="20px">
         <Flex>
           <Box>
             <Link href="/login">
@@ -179,8 +179,8 @@ const Signup = (props) => {
                     id="email"
                     name="email"
                     type="email"
-                    value={googleEmail ? googleEmail : ""}
-                    disabled = {googleEmail ? true : false}
+                    value={googleEmail ? googleEmail : null}
+                    disabled={googleEmail ? true : false}
                     placeholder="e.g. chantaiman@gmail.com"
                     style={inputBox}
                     {...register("email", {
@@ -201,90 +201,93 @@ const Signup = (props) => {
                       {errors.email.message}
                     </Text>
                   )}
-                  {googleEmail ? null : <>
-                  <Text>Enter Your Account Password</Text>
-                  <input
-                    id="password"
-                    type="password"
-                    name="password"
-                    disabled = {googleEmail ? true : false}
-                    placeholder="Password"
-                    style={inputBox}
-                    {...register("password", {
-                      required: "Required",
-                      pattern: {
-                        value:
-                          /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-                        message: "Your Password does not fulfill the criteria", // JS only: <p>error message</p> TS only support string
-                      },
-                    })}
-                  />
-                  {errors.password && (
-                    <Text
-                      color="#FED7D7"
-                      fontWeight="bold"
-                      fontSize={[12, 12, 12, 14]}
-                    >
-                      {errors.password.message}
-                    </Text>
+                  {googleEmail ? null : (
+                    <>
+                      <Text>Enter Your Account Password</Text>
+                      <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        disabled={googleEmail ? true : false}
+                        placeholder="Password"
+                        style={inputBox}
+                        {...register("password", {
+                          required: "Required",
+                          pattern: {
+                            value:
+                              /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+                            message:
+                              "Your Password does not fulfill the criteria", // JS only: <p>error message</p> TS only support string
+                          },
+                        })}
+                      />
+                      {errors.password && (
+                        <Text
+                          color="#FED7D7"
+                          fontWeight="bold"
+                          fontSize={[12, 12, 12, 14]}
+                        >
+                          {errors.password.message}
+                        </Text>
+                      )}
+                      <Center>
+                        <Box maxW="300">
+                          <Text
+                            color="#FED7D7"
+                            w="50vw"
+                            fontSize={[12, 12, 12, 14]}
+                          >
+                            Your new password should consist of:
+                          </Text>
+                          <UnorderedList
+                            w="300"
+                            color="#FED7D7"
+                            fontSize={[12, 12, 12, 14]}
+                          >
+                            <ListItem>At least 8 characters in length</ListItem>
+                            <ListItem>
+                              Mixture of both uppercase and lowercase characters
+                            </ListItem>
+                            <ListItem>Contains at least one number</ListItem>
+                            <ListItem>
+                              Contains at least one special character
+                            </ListItem>
+                          </UnorderedList>
+                        </Box>
+                      </Center>
+                      <Text>Re-enter Your Account Password</Text>
+                      <input
+                        id="rePassword"
+                        type="password"
+                        name="rePassword"
+                        disabled={googleEmail ? true : false}
+                        placeholder="Re-enter Password"
+                        style={inputBox}
+                        {...register("rePassword", {
+                          required: "Required",
+                          validate: (value) =>
+                            value === password.current ||
+                            "The passwords do not match",
+                        })}
+                      />
+                      {errors.rePassword && (
+                        <Text
+                          color="#FED7D7"
+                          fontWeight="bold"
+                          fontSize={[12, 12, 12, 14]}
+                        >
+                          {errors.rePassword.message}
+                        </Text>
+                      )}
+                    </>
                   )}
-                  <Center>
-                    <Box maxW="300">
-                      <Text
-                        color="#FED7D7"
-                        w="50vw"
-                        fontSize={[12, 12, 12, 14]}
-                      >
-                        Your new password should consist of:
-                      </Text>
-                      <UnorderedList
-                        w="300"
-                        color="#FED7D7"
-                        fontSize={[12, 12, 12, 14]}
-                      >
-                        <ListItem>At least 8 characters in length</ListItem>
-                        <ListItem>
-                          Mixture of both uppercase and lowercase characters
-                        </ListItem>
-                        <ListItem>Contains at least one number</ListItem>
-                        <ListItem>
-                          Contains at least one special character
-                        </ListItem>
-                      </UnorderedList>
-                    </Box>
-                  </Center>
-                  <Text>Re-enter Your Account Password</Text>
-                  <input
-                    id="rePassword"
-                    type="password"
-                    name="rePassword"
-                    disabled = {googleEmail ? true : false}
-                    placeholder="Re-enter Password"
-                    style={inputBox}
-                    {...register("rePassword", {
-                      required: "Required",
-                      validate: (value) =>
-                        value === password.current ||
-                        "The passwords do not match",
-                    })}
-                  />
-                  {errors.rePassword && (
-                    <Text
-                      color="#FED7D7"
-                      fontWeight="bold"
-                      fontSize={[12, 12, 12, 14]}
-                    >
-                      {errors.rePassword.message}
-                    </Text>
-                  )}
-                  </> }
                   <Text>First Name (and Middle Name)</Text>
                   <input
                     id="firstName"
                     type="text"
                     name="firstName"
-                    value={googleEmail?firstName:""}
-                    disabled = {googleEmail ? true : false}
+                    value={googleEmail ? firstName : null}
+                    disabled={googleEmail ? true : false}
                     placeholder="First name"
                     style={inputBox}
                     {...register("firstName", { required: "Required" })}
@@ -303,8 +306,8 @@ const Signup = (props) => {
                     id="lastName"
                     type="text"
                     name="lastName"
-                    value={googleEmail?lastName:""}
-                    disabled = {googleEmail ? true : false}
+                    value={googleEmail ? lastName : null}
+                    disabled={googleEmail ? true : false}
                     placeholder="Last Name"
                     style={inputBox}
                     {...register("lastName", { required: "Required" })}
@@ -344,12 +347,12 @@ const Signup = (props) => {
                   )}
                   <Text>Country </Text>
                   <Select
-                    color='black'
-                    bg='white'
-                    border= "1px solid #E2E8F0"
-                    boxSizing= "border-box"
-                    borderRadius= "6px"
-                    size='sm'
+                    color="black"
+                    bg="white"
+                    border="1px solid #E2E8F0"
+                    boxSizing="border-box"
+                    borderRadius="6px"
+                    size="sm"
                     {...register("countryOfOrigin")}
                     isInvalid={errors["countryOfOrigin"]}
                     placeholder="Please fill in this field"
@@ -372,12 +375,12 @@ const Signup = (props) => {
                   )}
                   <Text>Lifestage </Text>
                   <Select
-                    color='black'
-                    bg='white'
-                    border= "1px solid #E2E8F0"
-                    boxSizing= "border-box"
-                    borderRadius= "6px"
-                    size='sm'
+                    color="black"
+                    bg="white"
+                    border="1px solid #E2E8F0"
+                    boxSizing="border-box"
+                    borderRadius="6px"
+                    size="sm"
                     {...register("lifestage")}
                     isInvalid={errors["lifestage"]}
                     placeholder="Please fill in this field"
@@ -410,6 +413,11 @@ const Signup = (props) => {
                 value="Register"
                 style={submitBoxStyle}
               />
+              {error && (
+                <Text color="#F6AD55" fontSize={[12, 12, 12, 14]}>
+                  {errors}
+                </Text>
+              )}
             </VStack>
           </form>
         </Flex>
