@@ -11,6 +11,7 @@ import CompleteUserProfileContainer from "../userProfile/CompleteUserProfile";
 
 const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
   const user = useSelector((state) => state.user);
+  console.log(user);
   const [userObj, setUserObj] = useState(null);
 
   const checkIfTokenExists = async (toVerify) => {
@@ -62,13 +63,13 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
           } else if (access) {
             switch (props.location.pathname) {
               case "/complete-profile":
-                if (user.hasFilledProfileForm) {
+                if (userObj.hasFilledProfileForm) {
                   props.history.push("/profile");
                   return <UserProfileContainer {...props} user={userObj} />;
                 }
                 break;
               case "/profile":
-                if (!user.hasFilledProfileForm) {
+                if (!userObj.hasFilledProfileForm) {
                   props.history.push("/complete-profile");
                   return (
                     <CompleteUserProfileContainer {...props} user={userObj} />
@@ -76,6 +77,7 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
                 }
                 break;
             }
+            console.log("2x");
 
             return <Component {...props} user={userObj} />;
           } else {

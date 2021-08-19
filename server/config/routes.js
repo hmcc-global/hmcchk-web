@@ -55,7 +55,7 @@ module.exports.routes = {
   "post /api/auth/verify-token/": "auth/verify-token",
 
   // User APIs
-  "get /api/users/get": "users/get-user",
+  "post /api/users/get": "users/get-user",
   "put /api/users/update": "users/update-user",
   "put /api/users/delete": "users/delete-user",
 
