@@ -12,7 +12,6 @@ import ConnectPage from "./connect/ConnectPage";
 import PrivateRoute from "./helpers/PrivateRoute";
 import Signup from "./auth/Signup";
 import HomeContainer from "./home/HomeContainer";
-import FooterContainer from "./footer/FooterContainer";
 import AdminLoginContainer from "./admin/AdminLoginContainer";
 import AdminHome from "./admin/AdminHome";
 import AdminUser from "./admin/users/AdminUser";

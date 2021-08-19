@@ -7,9 +7,6 @@ import NavBar from "./components/NavigationBar/NavBar";
 import FooterContainer from "./components/footer/FooterContainer";
 import { Flex, CSSReset, VStack, Box } from "@chakra-ui/react";
 import { ChakraProvider } from "@chakra-ui/react";
-import NavBar from "./components/NavigationBar/NavBar";
-import FooterContainer from "./components/footer/FooterContainer";
-import { Flex, CSSReset, VStack, Box } from "@chakra-ui/react";
 
 const App = () => {
   return (
