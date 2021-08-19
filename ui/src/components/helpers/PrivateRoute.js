@@ -37,7 +37,7 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
       (p) =>
         userObj != null &&
         Object.keys(userObj).length !== 0 &&
-        p === user.accessType
+        p === userObj.accessType
     );
 
   return (
