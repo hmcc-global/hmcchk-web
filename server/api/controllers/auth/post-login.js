@@ -1,3 +1,5 @@
+const generateJwt = require("../../helpers/generate-jwt");
+
 module.exports = {
   friendlyName: "Post login",
 
