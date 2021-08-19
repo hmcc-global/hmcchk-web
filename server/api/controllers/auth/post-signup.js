@@ -152,7 +152,7 @@ the account verification message.)`,
       sails.log.info(`New user signup for ${emailAddress}.`);
       return exits.success();
     } catch (err) {
-      sails.log(err);
+      if (err.raw === "emailAlreadyInUse") return exits.emailAlreadyInUse();
       return exits.error(err);
     }
   },
