@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
-import axios from "axios";
+import { customAxios as axios } from "../helpers/customAxios";
 import Form from "./Form";
 import {
   FormControl,
@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 
 const FormCreator = (props) => {
+  const { user } = props;
   const {
     formName,
     formDescription,
@@ -380,6 +381,7 @@ const FormCreator = (props) => {
         formDescription={formDescription}
         formImage={formImage}
         formData={formData}
+        user={user}
       />
     </Box>
   );

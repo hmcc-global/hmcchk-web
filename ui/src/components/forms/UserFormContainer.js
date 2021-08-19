@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { customAxios as axios } from "../helpers/customAxios";
 import Form from "./Form";
 import { Container } from "@chakra-ui/react";
 
@@ -7,6 +7,7 @@ const styles = {};
 
 const UserFormContainer = (props) => {
   const [formData, setFormData] = useState(null);
+  const { user } = props;
 
   useEffect(() => {
     const populateData = async () => {
@@ -33,6 +34,7 @@ const UserFormContainer = (props) => {
           formDescription={formData.formDescription}
           formImage={formData.formImage}
           formData={formData.formFields}
+          user={user}
         />
       )}
     </Container>
