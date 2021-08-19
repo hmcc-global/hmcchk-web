@@ -24,7 +24,6 @@ import ConnectFloatButton from "./connect-float/ConnectFloatButton";
 import UserFormContainer from "./forms/UserFormContainer";
 import UserProfileContainer from "./userProfile/UserProfileContainer";
 import CompleteUserProfileContainer from "./userProfile/CompleteUserProfile";
-import NoMatch from "./errors/NoMatch";
 
 const MainContainer = () => {
   return (
