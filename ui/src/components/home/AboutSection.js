@@ -70,7 +70,7 @@ const AboutSection = () => {
             >
               <Card
                 width="full"
-                height={["5em", "15em"]}
+                height={["6em", "15em"]}
                 color="rgba(255, 255, 255, 0.2)"
                 title={vision.title}
                 titleColor="#63B3ED"
@@ -79,7 +79,7 @@ const AboutSection = () => {
               />
               <Card
                 width="full"
-                height={["5em", "15em"]}
+                height={["6em", "15em"]}
                 color="rgba(255, 255, 255, 0.2)"
                 title={mission.title}
                 titleColor="#63B3ED"

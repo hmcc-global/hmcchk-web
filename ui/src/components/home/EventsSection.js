@@ -54,7 +54,7 @@ const EventsSection = () => {
   }, []);
 
   return (
-    <Flex w="full" h="100vh" direction="column">
+    <Flex w="full" h={["100vh", "150vh"]} direction="column">
       <Container
         maxW="container.lg"
         justifyContent="center"
@@ -79,7 +79,7 @@ const EventsSection = () => {
               bgColor="black"
               display={["none", "block"]}
             />
-            <Text color="black" display={["none", "block"]}>
+            <Text color="black" display={["none", "block"]} fontWeight="900">
               <Link target="_blank" href="/events">
                 {allEventsText}
               </Link>
@@ -116,6 +116,7 @@ const EventsSection = () => {
         color="white"
         bgColor="black"
         alignSelf="center"
+        mt="5%"
       >
         <LinkOverlay href="/events">All events</LinkOverlay>
       </Button>

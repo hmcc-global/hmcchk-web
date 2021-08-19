@@ -22,6 +22,7 @@ const FeaturedEvent = (props) => {
           w="full"
           direction={["column", "row"]}
           alignItems="center"
+          fontWeight="bold"
         >
           <Text fontSize={["0.7em", "1em"]} color="white">
             {scEventText}
