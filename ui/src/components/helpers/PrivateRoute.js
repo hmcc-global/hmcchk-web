@@ -77,7 +77,6 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
                 }
                 break;
             }
-            console.log("2x");
 
             return <Component {...props} user={userObj} />;
           } else {

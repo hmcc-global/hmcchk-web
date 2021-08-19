@@ -119,7 +119,6 @@ const MainContainer = () => {
           permissions={["stewardship"]}
           component={AdminGiving}
         />
-        <PrivateRoute path="*" permissions={["public"]} component={NoMatch} />
         <PrivateRoute
           exact
           path="/connect"
