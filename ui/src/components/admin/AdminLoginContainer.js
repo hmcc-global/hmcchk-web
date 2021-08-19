@@ -11,7 +11,9 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import { customAxios as axios } from "../helpers/customAxios";
+import { useSelector, useDispatch } from "react-redux";
+import { signin } from "../../reducers/userSlice";
 import { Redirect } from "react-router";
 import GoogleLogin from "react-google-login";
 
@@ -19,9 +21,8 @@ const AdminLoginContainer = (props) => {
   const { toggleColorMode } = useColorMode();
   const formBackground = useColorModeValue("gray.100", "gray.700");
   const toast = useToast();
+  const dispatch = useDispatch();
 
-  const { classes } = props;
-  const [token, setToken] = useState(null);
   const {
     handleSubmit,
     register,
@@ -39,19 +40,15 @@ const AdminLoginContainer = (props) => {
       console.log(result);
 
       if (result.status === 200) {
-        if (
-          result.data.accessType == "admin" ||
-          result.data.accessType == "stewardship"
-        ) {
-          props.history.push("/admin/home");
-        } else {
-          toast({
-            title: "Access denied.",
-            status: "error",
-            duration: 3000,
-            isClosable: true,
-          });
-        }
+        dispatch(signin(result.data));
+        props.history.push("/admin/home");
+      } else {
+        toast({
+          title: "Access denied.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
       }
     } catch (err) {
       toast({
@@ -70,10 +67,10 @@ const AdminLoginContainer = (props) => {
   return (
     <Flex height="85vh" alignItems="center" justifyContent="center">
       <Flex direction="column" bg={formBackground} p={12} rounded={6}>
+        <Heading mb={6} alignItems="center">
+          HMCC-HK Admin
+        </Heading>
         <form onSubmit={handleSubmit(postLogin)}>
-          <Heading mb={6} alignItems="center">
-            HMCC-HK Admin
-          </Heading>
           <Input
             placeholder="Email"
             variant="filled"

@@ -94,16 +94,19 @@ const MainContainer = () => {
           component={AdminLoginContainer}
         />
         <PrivateRoute
+          exact
           path="/admin/home"
           permissions={["admin", "stewardship"]}
           component={AdminHome}
         />
         <PrivateRoute
+          exact
           path="/admin/users"
           permissions={["admin", "stewardship"]}
           component={AdminUser}
         />
         <PrivateRoute
+          exact
           path="/admin/forms"
           permissions={["admin", "stewardship"]}
           component={AdminForm}

@@ -59,17 +59,19 @@ const LinkItems = [
   { name: "Settings", icon: FiSettings, path: "/admin/settings" },
 ];
 
-const SidebarWithHeader = ({ children }) => {
+const SidebarWithHeader = ({ children, ...rest }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     // <Box>
     <>
       <SidebarContent
+        {...rest}
         onClose={() => onClose}
         display={{ base: "none", md: "block" }}
       />
       <Drawer
+        {...rest}
         autoFocus={true}
         isOpen={isOpen}
         placement="left"
@@ -78,13 +80,13 @@ const SidebarWithHeader = ({ children }) => {
         onOverlayClick={onClose}
         size="full"
       >
-        <DrawerContent>
-          <SidebarContent onClose={onClose} />
+        <DrawerContent {...rest}>
+          <SidebarContent {...rest} onClose={onClose} />
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
-      <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
+      <MobileNav onOpen={onOpen} {...rest} />
+      <Box {...rest} ml={{ base: 0, md: 60 }} p="4">
         {children}
       </Box>
     </>
@@ -179,9 +181,9 @@ const NavItem = ({ icon, children, ...rest }) => {
 //   onOpen: () => void;
 // }
 const MobileNav = ({ onOpen, ...rest }) => {
-  let history = useHistory();
-
   const onLogout = () => {
+    console.log(rest);
+    const { history } = rest;
     localStorage.clear();
     history.push("/admin/");
   };

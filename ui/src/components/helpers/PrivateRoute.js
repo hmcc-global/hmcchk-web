@@ -1,6 +1,7 @@
 import { Route } from "react-router-dom";
 import NoMatch from "../errors/NoMatch";
 import HomeContainer from "../home/HomeContainer";
+import AdminHome from "../admin/AdminHome";
 import { useSelector } from "react-redux";
 import { updateAxiosClient } from "./customAxios";
 import axios from "axios";
@@ -55,6 +56,11 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
           if (noUser) {
             if (noTokenExists) return <Component {...props} />;
             else {
+              console.log(props);
+              // if (props.location.pathname.includes("/admin")) {
+              //   props.history.push("/admin/home");
+              //   return <AdminHome {...props} user={userObj} />;
+              // }
               props.history.push("/");
               return <HomeContainer {...props} user={userObj} />;
             }
