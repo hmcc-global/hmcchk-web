@@ -50,7 +50,8 @@ module.exports.routes = {
   "post /api/auth/confirm-email": "auth/post-confirm-email",
   "post /api/auth/verify-token/": "auth/verify-token",
   "post /api/auth/forgot-password": "auth/post-forgot-password",
-  "post /api/auth/change-password": "auth/post-change-password",
+  "post /api/auth/change-password-recovery":
+    "auth/post-change-password-recovery",
 
   // User APIs
   "get /api/users/get": "users/get-user",
