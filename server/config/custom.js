@@ -63,5 +63,5 @@ module.exports.custom = {
   // signs up, or when an existing user attempts to change their email address.
   verifyEmailAddresses: true,
   emailProofTokenTTL: 60 * 60 * 1000, // 1 hour
-  tokenExpiryHours: 1,
+  passwordResetTokenTTL: 60 * 60 * 1000, // 1 hour
 };
