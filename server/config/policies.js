@@ -30,6 +30,7 @@ module.exports.policies = {
   "auth/verify-token": true,
   "auth/post-confirm-email": true,
   "auth/post-forgot-password": true,
+  "auth/post-change-password-recovery": true,
 
   // Cache
   "cache/*": ["isLoggedIn", "isAdmin"],
