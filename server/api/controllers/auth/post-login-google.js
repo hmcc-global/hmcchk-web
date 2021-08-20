@@ -27,6 +27,11 @@ module.exports = {
       description:
         "The requesting user agent has been successfully logged in using Google.",
     },
+    badCombo: {
+      description: `The provided email and password combination does not
+      match any user in the database.`,
+      responseType: "unauthorized",
+    },
   },
 
   fn: async function ({ tokenId }, exits) {
@@ -38,7 +43,7 @@ module.exports = {
 
     try {
       const data = await verify(client, tokenId);
-      if (!data) throw "Error verifying";
+      if (!data) throw new Error("Error verifying");
 
       const { email: emailAddress } = data;
 
@@ -48,7 +53,7 @@ module.exports = {
 
       // If there was no matching user, respond thru the "badCombo" exit.
       if (!userRecord || userRecord.password !== "") {
-        throw "badCombo";
+        return exits.badCombo();
       }
 
       sails.log.info(`${emailAddress} logged in.`);
