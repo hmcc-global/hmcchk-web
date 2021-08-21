@@ -84,6 +84,12 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
+          path="/forms/:id"
+          permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
+          component={UserFormContainer}
+        />
+        <PrivateRoute
+          exact
           path="/events/"
           permissions={["public"]}
           component={EventsPage}
@@ -161,6 +167,7 @@ const MainContainer = () => {
           component={AdminContainer}
         />
       </Switch>
+      <FooterContainer />
       <ConnectFloatButton />
     </chakra.main>
   );
