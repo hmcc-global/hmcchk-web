@@ -112,7 +112,8 @@ const Signup = (props) => {
     }
     // Error
     // console.log(error);
-    // if (error.response) {    //   seterror(error.response.data);
+    // if (error.response) {
+    //   seterror(error.response.data);
     //   // The request was made and the server responded with a status code
     //   // that falls out of the range of 2xx
     //   // console.log(error.response.data);
@@ -408,7 +409,7 @@ const Signup = (props) => {
               </HStack>
               <ReCAPTCHA
                 style={{ left: "5%", position: "relative", marginTop: "20px" }}
-                sitekey={process.env.REACT_APP_CAPTCHA}
+                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                 onChange={onChangeReCAPTCHA}
               />
               {error && (
