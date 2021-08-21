@@ -35,7 +35,7 @@ const LifeGroups = (props) => {
   };
 
   return (
-    <Box>
+    <Box id="#lifegroup">
       <Heading
         as="h2"
         fontSize={["2.25em", "3em", "4em"]}
