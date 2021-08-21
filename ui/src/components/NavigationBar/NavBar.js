@@ -19,10 +19,10 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  Link,
   useDisclosure,
   Img,
 } from "@chakra-ui/react";
-import { HashLink as Link } from 'react-router-hash-link';
 import { useSelector } from "react-redux";
 import { customAxios as axios } from "../helpers/customAxios";
 import MainMenu from "./MainMenu";
@@ -91,7 +91,7 @@ const NavBar = (props) => {
               h="10.5vh"
             >
               <Box position="relative">
-                <Link to="/">
+                <Link href="/">
                   <Image
                     h={{
                       base: "3.5vh",
@@ -116,36 +116,31 @@ const NavBar = (props) => {
                 isInline
               >
                 <Box position="relative">
-                  <Link to="/visit-us">VISIT</Link>
+                  <Link href="/visit-us">VISIT</Link>
                 </Box>
                 <Box position="relative">
                   <Link
-                    to={{
-                      pathname: "https://hongkong.hmcc.net/about/who-we-are/",
-                    }}
-                    target="_blank"
+                    href="https://hongkong.sub.hmcc.net/about/who-we-are/"
                   >
                     ABOUT
                   </Link>
                 </Box>
                 <Box position="relative">
-                  <Link to="/connect">CONNECT</Link>
+                  <Link href="/connect">CONNECT</Link>
                 </Box>
                 <Box position="relative">
-                  <Link to="/events">EVENTS</Link>
+                  <Link href="/events">EVENTS</Link>
                 </Box>
                 <Box position="relative">
                   <Link
-                    to={{ pathname: "https://hongkong.hmcc.net/sermons" }}
-                    target="_blank"
+                    href="https://hongkong.sub.sub.hmcc.net/sermons"
                   >
                     SERMONS
                   </Link>
                 </Box>
                 <Box position="relative">
                   <Link
-                    to={{ pathname: "https://hongkong.hmcc.net/give/" }}
-                    target="_blank"
+                    href="https://hongkong.sub.hmcc.net/give/"
                   >
                     GIVE
                   </Link>
@@ -171,13 +166,13 @@ const NavBar = (props) => {
                       </MenuButton>
                       <MenuList>
                         <MenuItem>
-                          <Link to="/profile">View Profile</Link>
+                          <Link href="/profile">View Profile</Link>
                         </MenuItem>
-                        <MenuItem onClick={onLogout}>Log Out</MenuItem>
+                        <MenuItem href="/" onClick={onLogout}>Log Out</MenuItem>
                       </MenuList>
                     </Menu>
                   ) : (
-                    <Link to="/login">
+                    <Link href="/login">
                       <Text fontWeight="600">{welcomeMsg[0]}</Text>
                     </Link>
                   )}
@@ -219,7 +214,7 @@ const NavBar = (props) => {
             <Stack justify="center" align="center" isInline>
               <Center>
                 <Link
-                  to={{ pathname: "https://hongkong.hmcc.net/online/" }}
+                  href="https://hongkong.sub.hmcc.net/online/"
                   target="_blank"
                   style={{ lineHeight: "0" }}
                 >
@@ -238,12 +233,12 @@ const NavBar = (props) => {
           </Flex>
         </Flex>
       ) : null}
-      <Flex>
         <Drawer
           isOpen={isOpen}
           size="full"
           onClose={onClose}
           finalFocusRef={btnRef}
+          placement= "top"
         >
           <DrawerOverlay />
           <DrawerContent
@@ -252,6 +247,9 @@ const NavBar = (props) => {
             backgroundColor="#2c5282"
             backgroundSize="70%"
             backgroundPosition="120% 75%"
+            width={{base:'100%', md:'70%'}}
+            style={{position:'absolute'}}
+            marginLeft={{base:'none', md:'15%'}}
           >
             <DrawerCloseButton
               position="absolute"
@@ -261,14 +259,13 @@ const NavBar = (props) => {
             />
             <DrawerHeader />
             <DrawerBody>
-              <MainMenu login={loggedIn} />
+              <MainMenu login={loggedIn} onClose={onClose} />
             </DrawerBody>
             <DrawerFooter fontSize="sm" color="white" justifyContent="center">
               Harvest Mission Community Church 2021
             </DrawerFooter>
           </DrawerContent>
         </Drawer>
-      </Flex>
     </>
   );
 };
