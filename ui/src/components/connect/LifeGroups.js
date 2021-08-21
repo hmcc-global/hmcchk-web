@@ -89,8 +89,9 @@ const LifeGroups = (props) => {
               w={["95%", 350]}
               fontSize={["0.75em", "1.125em"]}
               _hover={{ boxShadow: "none", color: "#fff" }}
+              target="_blank"
             >
-              <LinkOverlay href="https://tinyurl.com/t2muez3u">
+              <LinkOverlay href="https://tinyurl.com/t2muez3u" target="_blank">
                 SIGN UP FOR LIFE GROUPS NOW!
               </LinkOverlay>
             </LinkBox>

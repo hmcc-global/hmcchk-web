@@ -39,7 +39,7 @@ const ExperienceHmcc = (props) => {
           <Button
             as={Link}
             size="sm"
-            href="/about-us"
+            href="/visit-us"
             variant="outline"
             w={[200, 240]}
             borderRadius={10}
