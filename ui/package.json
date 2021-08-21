@@ -29,7 +29,6 @@
     "react-property": "^1.0.1",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
-    "react-router-hash-link": "^2.4.3",
     "react-scripts": "4.0.3",
     "react-social-icons": "^5.5.1",
     "react-slick": "^0.28.1",
