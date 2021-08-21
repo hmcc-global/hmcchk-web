@@ -66,14 +66,14 @@ export function LinkGrid() {
           </Link>
           <Link
             href=
-               "https://hongkong.sub.hmcc.net/about/who-we-are/"
+              "https://hongkong.sub.hmcc.net/about/beliefs/"
             
           >
             <Text>Statement of Faith</Text>
           </Link>
           <Link
             href=
-              "https://hongkong.sub.hmcc.net/about/beliefs/"
+              "https://hongkong.sub.hmcc.net/about/bold-vision/"
             
           >
             <Text>Bold Vision</Text>
@@ -92,7 +92,7 @@ export function LinkGrid() {
           <Link href="/events" >
             <Text fontWeight="bold">Events</Text>
           </Link>
-          <Link href="/sermons" >
+          <Link href="https://hongkong.sub.hmcc.net/sermons/" >
             <Text fontWeight="bold">Sermons</Text>
           </Link>
           <Link
