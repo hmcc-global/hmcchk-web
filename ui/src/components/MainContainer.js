@@ -154,6 +154,36 @@ const MainContainer = () => {
           permissions={["admin", "stewardship"]}
           component={ClearCache}
         />
+        {/* <PrivateRoute
+          exact
+          path="/admin"
+          permissions={["admin", "stewardship"]}
+          component={AdminLoginContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/home"
+          permissions={["admin", "stewardship"]}
+          component={AdminHome}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/users"
+          permissions={["admin", "stewardship"]}
+          component={AdminUser}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/forms"
+          permissions={["admin", "stewardship"]}
+          component={AdminForm}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/giving"
+          permissions={["stewardship"]}
+          component={AdminGiving}
+        /> */}
         <PrivateRoute
           exact
           path="/admin/login"
