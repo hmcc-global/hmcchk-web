@@ -409,7 +409,7 @@ const Signup = (props) => {
               </HStack>
               <ReCAPTCHA
                 style={{ left: "5%", position: "relative", marginTop: "20px" }}
-                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                sitekey={process.env.REACT_APP_CAPTCHA}
                 onChange={onChangeReCAPTCHA}
               />
               {error && (
