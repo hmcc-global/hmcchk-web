@@ -96,6 +96,10 @@ const AboutSection = () => {
                 textDecoration: "none",
               }}
               as={Link}
+<<<<<<< HEAD
+=======
+              target="_blank"
+>>>>>>> 3a598a6c (GH-54: Replace links, fix some margin stuff)
               href="https://hongkong.sub.hmcc.net/about/who-we-are"
             >
               {"More about us >"}

@@ -79,6 +79,10 @@ const HeroSection = () => {
                 }}
                 w="inherit"
                 as={Link}
+<<<<<<< HEAD
+=======
+                target="_blank"
+>>>>>>> 3a598a6c (GH-54: Replace links, fix some margin stuff)
                 href="https://www.hongkong.sub.hmcc.net/online"
                 fontSize={["sm", "md"]}
               >
