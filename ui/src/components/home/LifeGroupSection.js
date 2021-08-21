@@ -71,7 +71,6 @@ const LifeGroupSection = () => {
                 textDecoration: "none",
               }}
               as={Link}
-              target="_blank"
               href="/connect"
             >
               {buttonText}

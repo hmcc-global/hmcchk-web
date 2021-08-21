@@ -85,9 +85,7 @@ const EventsSection = () => {
               display={["none", "block"]}
             />
             <Text color="black" display={["none", "block"]} fontWeight="900">
-              <Link target="_blank" href="/events">
-                {allEventsText}
-              </Link>
+              <Link href="/events">{allEventsText}</Link>
             </Text>
           </HStack>
         </VStack>
