@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
-import {customAxios as axios} from "../helpers/customAxios";
+import { customAxios as axios } from "../helpers/customAxios";
 import GoogleLogin from "react-google-login";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { signin } from "../../reducers/userSlice";
 import { ChevronLeftIcon, EmailIcon, LockIcon } from "@chakra-ui/icons";
+
 import {
   Box,
   Card,
@@ -22,7 +22,6 @@ import {
   Button,
   Link,
 } from "@chakra-ui/react";
-import { SocialIcon } from "react-social-icons";
 
 const ResetPassword = (props) => {
   const { classes } = props;
@@ -38,33 +37,7 @@ const ResetPassword = (props) => {
   const [result, setResult] = useState("");
   const onSubmit = (data) => setResult(JSON.stringify(data));
 
-  const postLogin = async () => {
-    try {
-      const { data } = await axios.post("/api/auth/login", {
-        emailAddress: "albert@test.com",
-        password: "testing",
-      });
-      dispatch(signin(data));
-      console.log(user);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(async () => {
-    await postLogin();
-  }, []);
-
-  const onGoogleSuccess = async ({ tokenId }) => {
-    const { data } = await axios.post("/api/auth/signup-google", {
-      tokenId: tokenId,
-    });
-  };
-
-  const onGoogleFailure = ({ error }) => {
-    console.log(error);
-  };
-
+  const [userData, setUserData] = useState(null);
   const inputBoxStyle = {
     background: "#ffffff",
     border: "1px solid #000000",
@@ -128,13 +101,14 @@ const ResetPassword = (props) => {
               src={`${process.env.PUBLIC_URL}/images/ripple.png`}
               alt="Logo of HMCC"
             />
+
             <Text
               fontSize={[24, 24, 28, 32]}
               fontWeight="bold"
               textAlign="center"
             >
-              Hi name, you seem to have forgotten your password please enter
-              your new password below.
+              Hi, you seem to have forgotten your password please enter your new
+              password below.
             </Text>
             <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
               <VStack>

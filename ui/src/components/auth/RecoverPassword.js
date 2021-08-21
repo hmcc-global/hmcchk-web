@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {customAxios as axios} from "../helpers/customAxios";
+import { customAxios as axios } from "../helpers/customAxios";
 import GoogleLogin from "react-google-login";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,7 +20,6 @@ import {
   Button,
   Link,
 } from "@chakra-ui/react";
-import { SocialIcon } from "react-social-icons";
 
 const RecoverPassword = (props) => {
   const { classes } = props;
@@ -30,33 +29,6 @@ const RecoverPassword = (props) => {
   const { register, handleSubmit } = useForm();
   const [result, setResult] = useState("");
   const onSubmit = (data) => setResult(JSON.stringify(data));
-
-  const postLogin = async () => {
-    try {
-      const { data } = await axios.post("/api/auth/login", {
-        emailAddress: "albert@test.com",
-        password: "testing",
-      });
-      dispatch(signin(data));
-      console.log(user);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(async () => {
-    await postLogin();
-  }, []);
-
-  const onGoogleSuccess = async ({ tokenId }) => {
-    const { data } = await axios.post("/api/auth/signup-google", {
-      tokenId: tokenId,
-    });
-  };
-
-  const onGoogleFailure = ({ error }) => {
-    console.log(error);
-  };
 
   const inputBoxStyle = {
     background: "#ffffff",

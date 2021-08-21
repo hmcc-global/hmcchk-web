@@ -42,6 +42,24 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
+          path="/password/recover"
+          permissions={["public"]}
+          component={RecoverPassword}
+        />
+        <PrivateRoute
+          exact
+          path="/password/new"
+          permissions={["public"]}
+          component={ResetPassword}
+        />
+        <PrivateRoute
+          exact
+          path="/password/submitted"
+          permissions={["public"]}
+          component={PasswordSubmitted}
+        />
+        <PrivateRoute
+          exact
           path="/signup"
           permissions={["noUser"]}
           component={Signup}
@@ -98,7 +116,19 @@ const MainContainer = () => {
           exact
           path="/email/confirm/:token"
           permissions={["public"]}
-          component={ConfirmEmailPage}
+          component={ConnectPage}
+        />
+        <PrivateRoute
+          exact
+          path="/complete-profile"
+          permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
+          component={CompleteUserProfileContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/profile"
+          permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
+          component={UserProfileContainer}
         />
         <PrivateRoute
           exact
@@ -132,6 +162,7 @@ const MainContainer = () => {
         />
       </Switch>
       <FooterContainer />
+      <ConnectFloatButton />
     </chakra.main>
   );
 };
