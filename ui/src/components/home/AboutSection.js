@@ -1,20 +1,15 @@
 import {
-  Box,
   Button,
   Container,
   Flex,
   Heading,
-  HStack,
   Link,
   Stack,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import Card from "../helpers/components/Card";
-import CustomButton from "../helpers/components/CustomButton";
 
-const aboutUrl =
-  "https://hongkong.sub.hmcc.net/wp-content/uploads/2021_07_11_Membership_Recognition_Prayer_1-scaled.jpg";
 const about = {
   title: "About us",
   text: "Harvest Mission Community Church of Hong Kong is an international church that was planted in 2015, when a team of 20 people came to Hong Kong with a vision to reach this great city and be a 1st-century church in the 21st century. We value transculturalism and we are actively reaching out to people from all walks of life, specifically college students, working adults, and families.",
@@ -35,7 +30,9 @@ const AboutSection = () => {
       w="full"
       h="100vh"
       justify="center"
-      bgImage={`linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${aboutUrl})`}
+      bgImage={`linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${
+        process.env.PUBLIC_URL + "/images/home/about.png"
+      })`}
       bgSize="cover"
       bgPosition="center center"
     >

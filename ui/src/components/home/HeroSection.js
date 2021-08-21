@@ -14,8 +14,6 @@ import CustomButton from "../helpers/components/CustomButton";
 // TODO figure out a way to have a central location to edit photo url, blurbs etc.
 // sm = 30em, md = 48em, lg = 62em, xl = 80em, 2xl = "96em"
 // sm = 480px, md = 768px, lg = 992px, xl = 1280px, 2xl = "1536px"
-const heroUrl =
-  "https://hongkong.sub.hmcc.net/wp-content/uploads/2021_Apr_4_Easter_Celebration_Worship_Wide_2-1-min.jpg";
 const heroText = "Transforming Lives,\nTransforming the World";
 const worshipText = "WORSHIP IN-PERSON >";
 const churchText = "CHURCH ONLINE >";
@@ -25,7 +23,9 @@ const HeroSection = () => {
     <Flex
       w="full"
       h="100vh"
-      bgImage={`linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${heroUrl})`}
+      bgImage={`linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${
+        process.env.PUBLIC_URL + "/images/home/hero.png"
+      })`}
       bgSize="cover"
       bgPosition="center center"
       justify="center"

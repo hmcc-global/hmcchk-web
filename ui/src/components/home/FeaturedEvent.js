@@ -1,18 +1,6 @@
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-  HStack,
-  Image,
-  Text,
-  chakra,
-  Link,
-  Stack,
-} from "@chakra-ui/react";
+import { Box, Flex, Image, Text, chakra, Stack } from "@chakra-ui/react";
 
 const scEventText = "Sunday Celebration: 10AM HKT in-person & Online";
-const allEventsText = "all events >";
 const FeaturedEvent = (props) => {
   return (
     <Flex w="full" h="full" justify="center">
@@ -43,7 +31,7 @@ const FeaturedEvent = (props) => {
           mt={5}
           w={["100vw", "100vw", "100vw", "65vw", "100vw", "100vw"]}
           h="auto"
-          src="https://hongkong.sub.hmcc.net/wp-content/uploads/whats-new-sss-final.png"
+          src={process.env.PUBLIC_URL + "/images/home/featured.png"}
           alt="Featured Event"
         />
       </Box>
