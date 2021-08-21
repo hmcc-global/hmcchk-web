@@ -147,7 +147,7 @@ const MainMenu = ({ login, onClose }) => {
                       width="100%"
                       style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
                     >
-                      <Link href="/">Prayer Requests</Link>
+                      <Link href="https://forms.gle/6jasxuLNZt5MVXAy8" target="_blank">Prayer Requests</Link>
                     </Button>
                   </ButtonGroup>
                 ) : (
@@ -170,7 +170,7 @@ const MainMenu = ({ login, onClose }) => {
                       width="100%"
                       style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
                     >
-                      <Link href="/">Prayer Requests</Link>
+                      <Link href="https://forms.gle/6jasxuLNZt5MVXAy8" target="_blank">Prayer Requests</Link>
                     </Button>
                   </ButtonGroup>
                 )}
@@ -477,7 +477,7 @@ const MainMenu = ({ login, onClose }) => {
                           marginInlineStart: "0",
                         }}
                       >
-                        <Link href="/" onClick={onClose}>
+                        <Link href="https://forms.gle/6jasxuLNZt5MVXAy8" target="_blank" onClick={onClose}>
                           Prayer Requests
                         </Link>
                       </Button>
@@ -500,7 +500,7 @@ const MainMenu = ({ login, onClose }) => {
                           marginInlineStart: "0",
                         }}
                       >
-                        <Link href="/" onClick={onClose}>
+                        <Link href="https://forms.gle/6jasxuLNZt5MVXAy8" target="_blank" onClick={onClose}>
                           Prayer Requests
                         </Link>
                       </Button>

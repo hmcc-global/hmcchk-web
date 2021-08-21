@@ -40,7 +40,9 @@ export function LinkGrid() {
       </Box>
       <Box>
         <Stack>
+          <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
           <Text fontWeight="bold">About</Text>
+          </Link>
           <Link
             href=
                "https://hongkong.sub.hmcc.net/about/who-we-are/"
@@ -71,7 +73,7 @@ export function LinkGrid() {
           </Link>
           <Link
             href=
-               "https://hongkong.sub.hmcc.net/about/bold-vision/"
+              "https://hongkong.sub.hmcc.net/about/beliefs/"
             
           >
             <Text>Bold Vision</Text>
