@@ -22,6 +22,7 @@ import { SocialIcon } from "react-social-icons";
 //import "./removeScrollbar.css"
 
 const MainMenu = ({ login, onClose }) => {
+
   const onLogout = () => {
     localStorage.clear();
     window.location.reload();
@@ -140,7 +141,9 @@ const MainMenu = ({ login, onClose }) => {
                       width="100%"
                       style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
                     >
-                      Log Out
+                      <Link href='/'>
+                        Log Out
+                      </Link>
                     </Button>
                     <Button
                       width="100%"

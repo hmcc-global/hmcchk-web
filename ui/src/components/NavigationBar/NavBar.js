@@ -168,7 +168,7 @@ const NavBar = (props) => {
                         <MenuItem>
                           <Link href="/profile">View Profile</Link>
                         </MenuItem>
-                        <MenuItem href="/" onClick={onLogout}>Log Out</MenuItem>
+                        <MenuItem onClick={onLogout}><Link href="/">Log Out</Link></MenuItem>
                       </MenuList>
                     </Menu>
                   ) : (
