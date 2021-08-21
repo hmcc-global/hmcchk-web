@@ -27,7 +27,8 @@ const colorfulString = (text, colorArray) => {
   return result;
 };
 
-const lgUrl = "https://hongkong.hmcc.net/wp-content/uploads/Group-33-min.png";
+const lgUrl =
+  "https://hongkong.sub.hmcc.net/wp-content/uploads/Group-33-min.png";
 const lg = {
   title: colorfulString("LIFE", ["#FD7B7E", "#43B77B", "#7DABFC", "#FEDD64"]),
   text: "There is no better way to get a taste of who we are and what we believe in then to check out one of our LIFE Groups. This is an opportunity to experience the life-changing power of Biblical community.",

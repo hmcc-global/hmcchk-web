@@ -43,7 +43,7 @@ const FeaturedEvent = (props) => {
           mt={5}
           w={["100vw", "100vw", "100vw", "65vw", "100vw", "100vw"]}
           h="auto"
-          src="https://hongkong.hmcc.net/wp-content/uploads/whats-new-sss-final.png"
+          src="https://hongkong.sub.hmcc.net/wp-content/uploads/whats-new-sss-final.png"
           alt="Featured Event"
         />
       </Box>

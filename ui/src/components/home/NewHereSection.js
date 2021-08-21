@@ -14,7 +14,7 @@ import { useState } from "react";
 import axios from "axios";
 
 const newHereUrl =
-  "https://hongkong.hmcc.net/wp-content/uploads/2020_Jun_WelcomeHomeSundayCelebration_Talk_Closeup-min-scaled.jpg";
+  "https://hongkong.sub.hmcc.net/wp-content/uploads/2020_Jun_WelcomeHomeSundayCelebration_Talk_Closeup-min-scaled.jpg";
 
 const NewHereSection = () => {
   const [name, setName] = useState("");
@@ -60,7 +60,7 @@ const NewHereSection = () => {
     <>
       <Flex
         w="full"
-        h={["100vh", "100vh", "100vh", "100vh", "62vh"]}
+        h={["100vh", "100vh", "100vh", "100vh", "75vh"]}
         bgImage={`linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${newHereUrl})`}
         bgSize="cover"
         bgPosition="center center"

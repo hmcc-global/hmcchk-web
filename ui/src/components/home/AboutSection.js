@@ -14,7 +14,7 @@ import Card from "../helpers/components/Card";
 import CustomButton from "../helpers/components/CustomButton";
 
 const aboutUrl =
-  "https://hongkong.hmcc.net/wp-content/uploads/2021_07_11_Membership_Recognition_Prayer_1-scaled.jpg";
+  "https://hongkong.sub.hmcc.net/wp-content/uploads/2021_07_11_Membership_Recognition_Prayer_1-scaled.jpg";
 const about = {
   title: "About us",
   text: "Harvest Mission Community Church of Hong Kong is an international church that was planted in 2015, when a team of 20 people came to Hong Kong with a vision to reach this great city and be a 1st-century church in the 21st century. We value transculturalism and we are actively reaching out to people from all walks of life, specifically college students, working adults, and families.",
@@ -101,7 +101,7 @@ const AboutSection = () => {
               }}
               as={Link}
               target="_blank"
-              href="https://hongkong.hmcc.net/about/who-we-are"
+              href="https://hongkong.sub.hmcc.net/about/who-we-are"
             >
               {"More about us >"}
             </Button>

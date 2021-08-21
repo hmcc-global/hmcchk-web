@@ -15,7 +15,7 @@ import CustomButton from "../helpers/components/CustomButton";
 // sm = 30em, md = 48em, lg = 62em, xl = 80em, 2xl = "96em"
 // sm = 480px, md = 768px, lg = 992px, xl = 1280px, 2xl = "1536px"
 const heroUrl =
-  "https://hongkong.hmcc.net/wp-content/uploads/2021_Apr_4_Easter_Celebration_Worship_Wide_2-1-min.jpg";
+  "https://hongkong.sub.hmcc.net/wp-content/uploads/2021_Apr_4_Easter_Celebration_Worship_Wide_2-1-min.jpg";
 const heroText = "Transforming Lives,\nTransforming the World";
 const worshipText = "WORSHIP IN-PERSON >";
 const churchText = "CHURCH ONLINE >";
@@ -65,7 +65,6 @@ const HeroSection = () => {
                 }}
                 w="inherit"
                 as={Link}
-                target="_blank"
                 href="/visit-us"
                 fontSize={["sm", "md"]}
               >
@@ -85,7 +84,7 @@ const HeroSection = () => {
                 w="inherit"
                 as={Link}
                 target="_blank"
-                href="https://www.hongkong.hmcc.net/online"
+                href="https://www.hongkong.sub.hmcc.net/online"
                 fontSize={["sm", "md"]}
               >
                 {churchText}

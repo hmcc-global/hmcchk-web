@@ -54,7 +54,7 @@ const EventsSection = () => {
   }, []);
 
   return (
-    <Flex w="full" h={["100vh", "150vh"]} direction="column">
+    <Flex w="full" h="auto" direction="column">
       <Container
         maxW="container.lg"
         justifyContent="center"
@@ -65,7 +65,12 @@ const EventsSection = () => {
           <FeaturedEvent />
         </VStack>
       </Container>
-      <Container maxW="container.lg" justifyContent="center" display="flex">
+      <Container
+        maxW="container.lg"
+        justifyContent="center"
+        display="flex"
+        marginTop="2em"
+      >
         <VStack w="full" alignItems={["flex-start", null]}>
           <HStack w={[null, "full"]} whiteSpace="nowrap" height="10vh">
             <Heading fontSize={["2em", "5xl"]} color="black">
@@ -94,6 +99,7 @@ const EventsSection = () => {
         overflowX={["auto", "auto", "auto", "auto", "hidden"]}
         overflowY="hidden"
         whiteSpace="nowrap"
+        marginBottom="2em"
         _hover={{
           overflowX: "auto",
         }}
