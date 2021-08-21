@@ -3,7 +3,7 @@ import "../../styles/_fliptiles.scss";
 
 const OurMinistries = (props) => {
   return (
-    <Box>
+    <Box id="ministries">
       <Heading
         as="h2"
         fontSize={["2.25em", "3m", "4em"]}
