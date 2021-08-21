@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { HashLink as Link } from 'react-router-hash-link';
 import {
   Flex,
   Box,
@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { SocialIcon } from "react-social-icons";
 
-const MainMenu = ({ login, view }, props) => {
+const MainMenu = ({ login }) => {
   const onLogout = () => {
     const { history } = props;
     localStorage.clear();
@@ -31,52 +31,59 @@ const MainMenu = ({ login, view }, props) => {
         <HStack display={{ base: "none", md: "flex" }} color="white">
           <Flex marginTop="30px">
             <VStack alignItems="flex-start">
-              <Text fontWeight="bold" fontSize="40px">
-                Visit
-              </Text>
+              <Link to="/visit-us">
+                <Text fontWeight="bold" fontSize="40px">
+                  Visit
+                </Text>
+              </Link>
               <Link
-                to={{ pathname: "https://hongkong.hmcc.net/online/" }}
+                to={{ pathname: "https://hongkong.sub.hmcc.net/online/" }}
                 target="_blank"
               >
                 <Text fontSize="18px">Church Online</Text>
               </Link>
-              <Text fontWeight="bold" fontSize="40px">
-                About
-              </Text>
               <Link
-                to={{ pathname: "https://hongkong.hmcc.net/about/who-we-are/" }}
+                to={{ pathname: "https://hongkong.sub.hmcc.net/about/who-we-are/" }}
+                target="_blank"
+              >
+                <Text fontWeight="bold" fontSize="40px">
+                  About
+                </Text>
+              </Link>
+              <Link
+                to={{ pathname: "https://hongkong.sub.hmcc.net/about/who-we-are/" }}
                 target="_blank"
               >
                 <Text fontSize="18px">Who We Are</Text>
               </Link>
               <Link
-                to={{ pathname: "https://hongkong.hmcc.net/about/beliefs/" }}
+                to={{ pathname: "https://hongkong.sub.hmcc.net/about/beliefs/" }}
                 target="_blank"
               >
                 <Text fontSize="18px">Beliefs</Text>
               </Link>
               <Link
-                to={{ pathname: "https://hongkong.hmcc.net/about/who-we-are/" }}
+                to={{ pathname: "https://hongkong.sub.hmcc.net/about/who-we-are/" }}
                 target="_blank"
               >
                 <Text fontSize="18px">Our Values</Text>
               </Link>
               <Link
-                to={{ pathname: "https://hongkong.hmcc.net/about/beliefs/" }}
+                to={{ pathname: "https://hongkong.sub.hmcc.net/about/beliefs/" }}
                 target="_blank"
               >
                 <Text fontSize="18px">Statement of Faith</Text>
               </Link>
               <Link
                 to={{
-                  pathname: "https://hongkong.hmcc.net/about/bold-vision/",
+                  pathname: "https://hongkong.sub.hmcc.net/about/bold-vision/",
                 }}
                 target="_blank"
               >
                 <Text fontSize="18px">BOLD Vision</Text>
               </Link>
               <Link
-                to={{ pathname: "https://hongkong.hmcc.net/about/hmi/" }}
+                to={{ pathname: "https://hongkong.sub.hmcc.net/about/hmi/" }}
                 target="_blank"
               >
                 <Text fontSize="18px">Harvest Mission International</Text>
@@ -87,25 +94,15 @@ const MainMenu = ({ login, view }, props) => {
               position="relative"
               left={{ md: "10%", lg: "30%", xl: "40%" }}
             >
-              <Text fontWeight="bold" fontSize="40px">
-                Connect
-              </Text>
-              <Link
-                to={{
-                  pathname:
-                    "https://hongkong.hmcc.net/ministries/campus-ministry/",
-                }}
-                target="_blank"
-              >
+              <Link to="/connect">
+                <Text fontWeight="bold" fontSize="40px">
+                  Connect
+                </Text>
+              </Link>
+              <Link to="/connect#ministries">
                 <Text fontSize="18px">Ministries</Text>
               </Link>
-              <Link
-                to={{
-                  pathname:
-                    "https://hongkong.hmcc.net/get-involved/life-group/",
-                }}
-                target="_blank"
-              >
+              <Link to="/connect#lifegroup">
                 <Text fontSize="18px">LIFE Groups</Text>
               </Link>
               <Link to="/events" target="_blank">
@@ -119,7 +116,7 @@ const MainMenu = ({ login, view }, props) => {
                 </Text>
               </Link>
               <Link
-                to={{ pathname: "https://hongkong.hmcc.net/give/" }}
+                to={{ pathname: "https://hongkong.sub.hmcc.net/give/" }}
                 target="_blank"
               >
                 <Text fontWeight="bold" fontSize="40px">
@@ -305,7 +302,7 @@ const MainMenu = ({ login, view }, props) => {
                     </AccordionButton>
                     <AccordionPanel pb={4}>
                       <Link
-                        to={{ pathname: "https://hongkong.hmcc.net/online/" }}
+                        to={{ pathname: "https://hongkong.sub.hmcc.net/online/" }}
                         target="_blank"
                       >
                         Church Online
@@ -328,7 +325,7 @@ const MainMenu = ({ login, view }, props) => {
                       <Link
                         to={{
                           pathname:
-                            "https://hongkong.hmcc.net/about/who-we-are/",
+                            "https://hongkong.sub.hmcc.net/about/who-we-are/",
                         }}
                         target="_blank"
                       >
@@ -338,7 +335,7 @@ const MainMenu = ({ login, view }, props) => {
                     <AccordionPanel pb={4}>
                       <Link
                         to={{
-                          pathname: "https://hongkong.hmcc.net/about/beliefs/",
+                          pathname: "https://hongkong.sub.hmcc.net/about/beliefs/",
                         }}
                         target="_blank"
                       >
@@ -349,7 +346,7 @@ const MainMenu = ({ login, view }, props) => {
                       <Link
                         to={{
                           pathname:
-                            "https://hongkong.hmcc.net/about/who-we-are/",
+                            "https://hongkong.sub.hmcc.net/about/who-we-are/",
                         }}
                         target="_blank"
                       >
@@ -359,7 +356,7 @@ const MainMenu = ({ login, view }, props) => {
                     <AccordionPanel pb={4}>
                       <Link
                         to={{
-                          pathname: "https://hongkong.hmcc.net/about/beliefs/",
+                          pathname: "https://hongkong.sub.hmcc.net/about/beliefs/",
                         }}
                         target="_blank"
                       >
@@ -370,7 +367,7 @@ const MainMenu = ({ login, view }, props) => {
                       <Link
                         to={{
                           pathname:
-                            "https://hongkong.hmcc.net/about/bold-vision/",
+                            "https://hongkong.sub.hmcc.net/about/bold-vision/",
                         }}
                         target="_blank"
                       >
@@ -380,7 +377,7 @@ const MainMenu = ({ login, view }, props) => {
                     <AccordionPanel pb={4}>
                       <Link
                         to={{
-                          pathname: "https://hongkong.hmcc.net/about/hmi/",
+                          pathname: "https://hongkong.sub.hmcc.net/about/hmi/",
                         }}
                         target="_blank"
                       >
@@ -404,7 +401,7 @@ const MainMenu = ({ login, view }, props) => {
                       <Link
                         to={{
                           pathname:
-                            "https://hongkong.hmcc.net/ministries/campus-ministry/",
+                            "https://hongkong.sub.hmcc.net/ministries/campus-ministry/",
                         }}
                         target="_blank"
                       >
@@ -415,7 +412,7 @@ const MainMenu = ({ login, view }, props) => {
                       <Link
                         to={{
                           pathname:
-                            "https://hongkong.hmcc.net/get-involved/life-group/",
+                            "https://hongkong.sub.hmcc.net/get-involved/life-group/",
                         }}
                         target="_blank"
                       >
@@ -460,7 +457,7 @@ const MainMenu = ({ login, view }, props) => {
                         fontSize="2xl"
                       >
                         <Link
-                          to={{ pathname: "https://hongkong.hmcc.net/give/" }}
+                          to={{ pathname: "https://hongkong.sub.hmcc.net/give/" }}
                           target="_blank"
                         >
                           Give
