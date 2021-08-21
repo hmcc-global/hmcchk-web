@@ -27,11 +27,9 @@ module.exports = {
       }
 
       // Get the user with the matching email token.
-      sails.log(token);
       var user = await User.findOne({ emailProofToken: token });
 
       // If no such user exists, or their token is expired, bail.
-      sails.log(user);
       if (!user || user.emailProofTokenExpiresAt <= Date.now()) {
         throw "invalidOrExpiredToken";
       }
