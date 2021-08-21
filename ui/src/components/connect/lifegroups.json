@@ -1,0 +1,58 @@
+[
+  {
+    "name": "CITYU",
+    "fullname": "City University of Hong Kong",
+    "igLink": "https://www.instagram.com/lifeatcityu/",
+    "igHandle": "@LIFEATCITYU",
+    "imgPath": "images/connect/cityu.jpg"
+  },
+  {
+    "name": "CUHK",
+    "fullname": "The Chinese University of Hong Kong",
+    "igLink": "https://www.instagram.com/lifeatcuhk/",
+    "igHandle": "@LIFEATCUHK",
+    "imgPath": "images/connect/cuhk.jpg"
+  },
+  {
+    "name": "HKBU",
+    "fullname": "Hong Kong Baptist University",
+    "igLink": "https://www.instagram.com/lifeathkbu/",
+    "igHandle": "@LIFEATHKBU",
+    "imgPath": "images/connect/hkbu.jpg"
+  },
+  {
+    "name": "HKU",
+    "fullname": "The University of Hong Kong",
+    "igLink": "https://www.instagram.com/lifeathku/",
+    "igHandle": "@LIFEATHKU",
+    "imgPath": "images/connect/hku.jpg"
+  },
+  {
+    "name": "HKUST",
+    "fullname": "The Hong Kong University of Science and Technology",
+    "igLink": "https://www.instagram.com/lifeathkust/",
+    "igHandle": "@LIFEATHKUST",
+    "imgPath": "images/connect/hkust.jpg"
+  },
+  {
+    "name": "POLYU",
+    "fullname": "The Hong Kong Polytechnic University",
+    "igLink": "https://www.instagram.com/lifeatpolyu/",
+    "igHandle": "@LIFEATPOLYU",
+    "imgPath": "images/connect/polyu.jpg"
+  },
+  {
+    "name": "FOCUS",
+    "fullname": "Single and Working Adults",
+    "igLink": "https://www.instagram.com/lifeathk/",
+    "igHandle": "@LIFEATHK",
+    "imgPath": "images/connect/focus.jpg"
+  },
+  {
+    "name": "COVENANT",
+    "fullname": "Married Couples and Families",
+    "igLink": "https://www.instagram.com/lifeathk/",
+    "igHandle": "@LIFEATHK",
+    "imgPath": "images/connect/covenant.jpg"
+  }
+]
