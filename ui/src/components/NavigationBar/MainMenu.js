@@ -27,6 +27,7 @@ import { SocialIcon } from "react-social-icons";
 
 const MainMenu = ({ login, onClose }) => {
   const onLogout = () => {
+    onClose();
     localStorage.clear();
     window.location.reload();
   };
@@ -149,6 +150,7 @@ const MainMenu = ({ login, onClose }) => {
                     width="100%"
                     style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
                   >
+<<<<<<< HEAD
                     <LinkOverlay href="/">Log Out</LinkOverlay>
                   </Button>
                   <Button
@@ -158,6 +160,24 @@ const MainMenu = ({ login, onClose }) => {
                     <LinkOverlay
                       href="https://forms.gle/6jasxuLNZt5MVXAy8"
                       target="_blank"
+=======
+                    <Button marginBottom="5" width="100%">
+                      <Link href="/profile" onClick={onClose}>
+                        My Profile
+                      </Link>
+                    </Button>
+                    <Button
+                      onClick={onLogout}
+                      marginBottom="5"
+                      width="100%"
+                      style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
+                    >
+                      <Link href="/">Log Out</Link>
+                    </Button>
+                    <Button
+                      width="100%"
+                      style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
+>>>>>>> 8ae3401 (fix logout in mainmenu)
                     >
                       Prayer Requests
                     </LinkOverlay>
