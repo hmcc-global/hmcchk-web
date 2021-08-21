@@ -72,7 +72,7 @@ const RecoverPassword = (props) => {
     <>
       <Stack background="#2C5282" color="white" h="100vh">
         <Container maxW="container.lg">
-          <Flex w="100vw">
+          <Flex w="100%">
             <Box>
               <Link
                 to={{ pathname: "https://hongkong.hmcc.net" }}
