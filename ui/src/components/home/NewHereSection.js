@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Container,
   Flex,
   FormControl,
@@ -8,13 +9,9 @@ import {
   Input,
   VStack,
 } from "@chakra-ui/react";
-import CustomButton from "../helpers/components/CustomButton";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useState } from "react";
 import axios from "axios";
-
-const newHereUrl =
-  "https://hongkong.sub.hmcc.net/wp-content/uploads/2020_Jun_WelcomeHomeSundayCelebration_Talk_Closeup-min-scaled.jpg";
 
 const NewHereSection = () => {
   const [name, setName] = useState("");
@@ -30,12 +27,7 @@ const NewHereSection = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     if (!isBot) {
-      let payload = {
-        name,
-        email,
-        notes,
-      };
-      const { data } = await axios.post("/api/forms/connect-with-us", {
+      await axios.post("/api/forms/connect-with-us", {
         name: name,
         email: email,
         notes: notes,
@@ -115,7 +107,7 @@ const NewHereSection = () => {
                       onChange={onChange}
                     />
                   </Box>
-                  <CustomButton
+                  <Button
                     bg="rgb(0, 0, 0, 0)"
                     variant="outline"
                     color="white"
@@ -124,9 +116,11 @@ const NewHereSection = () => {
                       color: "#1A365D",
                       borderColor: "#1A365D",
                     }}
-                    text="Connect with us >"
                     type="submit"
-                  />
+                    borderRadius={10}
+                  >
+                    {"Connect with us >"}
+                  </Button>
                   <FormLabel visibility={submitted ? "visible" : "hidden"}>
                     Thank you. We will be in touch soon!
                   </FormLabel>

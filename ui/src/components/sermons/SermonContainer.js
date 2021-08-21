@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { customAxios as axios } from "../helpers/customAxios";
-import { signin } from "../../reducers/userSlice";
-import { Box, Button } from "@chakra-ui/react";
+// import { signin } from "../../reducers/userSlice";
+import { Button } from "@chakra-ui/react";
 
 const SermonContainer = (props) => {
   const [sermons, setSermons] = useState([]);
@@ -22,6 +22,7 @@ const SermonContainer = (props) => {
   const onClickHandler = () => {
     const { history } = props;
     history.push("/events");
+    console.log(sermons);
   };
 
   return (

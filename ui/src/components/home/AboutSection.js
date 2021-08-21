@@ -22,7 +22,6 @@ const mission = {
   title: "MISSION",
   text: "To transform lost people into Christ’s disciples who will then transform the world.",
 };
-const moreAboutUs = "More about us >";
 
 const AboutSection = () => {
   return (

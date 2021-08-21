@@ -1,26 +1,26 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import VideoEmbed from "../helpers/VideoEmbed";
-import AudioEmbed from "../helpers/AudioEmbed";
+// import axios from "axios";
+// import { useEffect, useState } from "react";
+// import VideoEmbed from "../helpers/VideoEmbed";
+// import AudioEmbed from "../helpers/AudioEmbed";
 
 const SermonCard = (props) => {
-  const [sermon, setSermon] = useState(null);
+  // const [sermon, setSermon] = useState(null);
 
-  const populateData = async () => {
-    const { id } = props.match.params;
-    const { data } = await axios.get("/api/sermons/get-sermon-by-id", {
-      params: { id },
-    });
-    setSermon(data[0]);
-  };
+  // const populateData = async () => {
+  //   const { id } = props.match.params;
+  //   const { data } = await axios.get("/api/sermons/get-sermon-by-id", {
+  //     params: { id },
+  //   });
+  //   setSermon(data[0]);
+  // };
 
-  useEffect(() => {
-    populateData();
-  }, []);
+  // useEffect(() => {
+  //   populateData();
+  // }, []);
 
-  const refreshHandler = () => {
-    populateData();
-  };
+  // const refreshHandler = () => {
+  //   populateData();
+  // };
 
   // title: he.decode(sermon.title.rendered),
   // speaker: getSpeakers(sermon.wpfc_preacher, speakers),

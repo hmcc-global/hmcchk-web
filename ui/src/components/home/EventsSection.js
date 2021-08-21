@@ -4,7 +4,6 @@ import {
   Container,
   Flex,
   HStack,
-  Image,
   Text,
   VStack,
   Heading,
@@ -26,9 +25,7 @@ const EventsSection = () => {
 
   const populateData = async () => {
     try {
-      const { data, status } = await axios.get(
-        "/api/announcements/get-announcements"
-      );
+      const { data } = await axios.get("/api/announcements/get-announcements");
       const filtered = data.filter((item) => {
         if (item.endDate) {
           const endDate = new DateTime.fromISO(item.endDate);

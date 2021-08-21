@@ -5,11 +5,9 @@ import {
   Link,
   useBreakpointValue,
   Heading,
-  ButtonGroup,
   Container,
   Button,
 } from "@chakra-ui/react";
-import CustomButton from "../helpers/components/CustomButton";
 
 // TODO figure out a way to have a central location to edit photo url, blurbs etc.
 // sm = 30em, md = 48em, lg = 62em, xl = 80em, 2xl = "96em"
@@ -56,7 +54,6 @@ const HeroSection = () => {
                 bg="rgb(0, 0, 0, 0)"
                 variant="outline"
                 color="white"
-                w="full"
                 _hover={{
                   bg: "white",
                   color: "#1A365D",
@@ -74,7 +71,6 @@ const HeroSection = () => {
                 bg="rgb(0, 0, 0, 0)"
                 variant="outline"
                 color="white"
-                w="full"
                 _hover={{
                   bg: "white",
                   color: "#1A365D",
