@@ -133,7 +133,7 @@ const NavBar = (props) => {
                 </Box>
                 <Box position="relative">
                   <Link
-                    href="https://hongkong.sub.sub.hmcc.net/sermons"
+                    href="https://hongkong.sub.hmcc.net/sermons"
                   >
                     SERMONS
                   </Link>
@@ -147,7 +147,7 @@ const NavBar = (props) => {
                 </Box>
               </Stack>
               <Stack
-                spacing={8}
+                spacing={1}
                 color="black"
                 justify="right"
                 align="right"
@@ -162,7 +162,7 @@ const NavBar = (props) => {
                   {loggedIn ? (
                     <Menu>
                       <MenuButton>
-                        <Text fontWeight="600">{welcomeMsg[1]}</Text>
+                        <Text marginLeft='10px' fontWeight="600">{welcomeMsg[1]}</Text>
                       </MenuButton>
                       <MenuList>
                         <MenuItem>
@@ -173,7 +173,7 @@ const NavBar = (props) => {
                     </Menu>
                   ) : (
                     <Link href="/login">
-                      <Text fontWeight="600">{welcomeMsg[0]}</Text>
+                      <Text fontWeight="600" marginLeft='10px'>{welcomeMsg[0]}</Text>
                     </Link>
                   )}
                 </Box>
