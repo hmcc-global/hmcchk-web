@@ -50,7 +50,7 @@ const LifeGroups = (props) => {
       </Heading>
       <AspectRatio maxW="100%" ratio={16 / 9} mb={10}>
         <iframe
-          src="https://www.youtube.com/embed/PEhrbDCj_Ec"
+          src="https://www.youtube.com/embed/tainVHwAWt0"
           title="YouTube video player"
           allowFullScreen
         />
