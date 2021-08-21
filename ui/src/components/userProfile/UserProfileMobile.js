@@ -210,7 +210,7 @@ const UserProfileMobile = (props) => {
                   />
                 </FormControl>
               </Center>
-              <Button
+              {/* <Button
                 size="sm"
                 mt="8"
                 color="#0628A3"
@@ -219,7 +219,7 @@ const UserProfileMobile = (props) => {
                 variant="outline"
               >
                 Change Password
-              </Button>
+              </Button> */}
             </TabPanel>
             <TabPanel p="7%">
               <Center mb="5%">

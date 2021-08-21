@@ -192,10 +192,10 @@ const CompleteUserProfileContainer = (props) => {
                 background: "#062286",
               }}
               onClick={() => {
-                history.push("/");
+                history.push("/profile");
               }}
             >
-              Return to Homepage
+              Go to your profile
             </Button>
           </ModalFooter>
         </ModalContent>
