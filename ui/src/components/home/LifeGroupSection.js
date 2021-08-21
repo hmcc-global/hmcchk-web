@@ -4,11 +4,11 @@ import {
   Flex,
   Heading,
   Image,
-  Link,
   Stack,
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 const colorfulString = (text, colorArray) => {
   if (colorArray.length !== text.length) {
@@ -66,10 +66,10 @@ const LifeGroupSection = () => {
                 borderColor: "white",
                 textDecoration: "none",
               }}
-              as={Link}
-              href="/connect/#lifegroup"
             >
-              {buttonText}
+              <Link to={{ pathname: "/connect", hash: "#lifegroup" }}>
+                {buttonText}
+              </Link>
             </Button>
           </VStack>
           <Image
