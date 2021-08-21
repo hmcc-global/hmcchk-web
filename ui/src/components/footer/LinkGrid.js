@@ -1,5 +1,6 @@
-import { Box, Link, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { Box, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import * as React from "react";
+import { HashLink as Link } from "react-router-hash-link";
 
 export function LinkGrid() {
   return (
@@ -11,51 +12,106 @@ export function LinkGrid() {
     >
       <Box>
         <Stack>
-          <Text fontWeight="bold">Visit</Text>
-          <Link href="https://hongkong.hmcc.net/online/">Church online</Link>
+          <Link to="/visit-us">
+            <Text fontWeight="bold">Visit</Text>
+          </Link>
+
+          <Link
+            to={{
+              pathname: "https://hongkong.sub.hmcc.net/online/",
+            }}
+            target="_blank"
+          >
+            Church online
+          </Link>
         </Stack>
       </Box>
       <Box>
         <Stack>
-          <Text fontWeight="bold">Connect</Text>
-          <Link href="https://hongkong.hmcc.net/ministries/campus-ministry/">
+          <Link to="/connect">
+            <Text fontWeight="bold">Connect</Text>
+          </Link>
+          <Link
+            to={{
+              pathname:
+                "https://hongkong.sub.hmcc.net/ministries/campus-ministry/",
+            }}
+            target="_blank"
+          >
             Ministries
           </Link>
-          <Link href="https://hongkong.hmcc.net/get-involved/life-group/">
-            LIFE Groups
+          <Link to="/connect#lifegroup">
+            <Text>LIFE Groups</Text>
           </Link>
         </Stack>
       </Box>
       <Box>
         <Stack>
           <Text fontWeight="bold">About</Text>
-          <Link href="https://hongkong.hmcc.net/about/who-we-are/">
-            Who we are
+          <Link
+            to={{
+              pathname: "https://hongkong.sub.hmcc.net/about/who-we-are/",
+            }}
+            target="_blank"
+          >
+            <Text>Who We Are</Text>
           </Link>
-          <Link href="https://hongkong.hmcc.net/about/beliefs/">Beliefs</Link>
-          <Link href="https://hongkong.hmcc.net/about/who-we-are/">
-            Our Values
+          <Link
+            to={{
+              pathname: "https://hongkong.sub.hmcc.net/about/beliefs/",
+            }}
+            target="_blank"
+          >
+            <Text>Beliefs</Text>
           </Link>
-          <Link href="https://hongkong.hmcc.net/about/beliefs/">
-            Statement of Faith
+          <Link
+            to={{
+              pathname: "https://hongkong.sub.hmcc.net/about/who-we-are/",
+            }}
+            target="_blank"
+          >
+            <Text>Our Values</Text>
           </Link>
-          <Link href="https://hongkong.hmcc.net/about/bold-vision/">
-            Bold Vision
+          <Link
+            to={{
+              pathname: "https://hongkong.sub.hmcc.net/about/who-we-are/",
+            }}
+            target="_blank"
+          >
+            <Text>Statement of Faith</Text>
           </Link>
-          <Link href="https://hongkong.hmcc.net/about/hmi/">HMI</Link>
+          <Link
+            to={{
+              pathname: "https://hongkong.sub.hmcc.net/about/bold-vision/",
+            }}
+            target="_blank"
+          >
+            <Text>Bold Vision</Text>
+          </Link>
+          <Link
+            to={{
+              pathname: "https://hongkong.sub.hmcc.net/about/hmi/",
+            }}
+            target="_blank"
+          >
+            <Text>HMI</Text>
+          </Link>
         </Stack>
       </Box>
 
       <Box>
         <Stack>
-          <Link href="/events" fontWeight="bold">
-            Events
+          <Link to="/events" target="_blank">
+            <Text fontWeight="bold">Events</Text>
           </Link>
-          <Link href="/sermons" fontWeight="bold">
-            Sermons
+          <Link to="/sermons" target="_blank">
+            <Text fontWeight="bold">Sermons</Text>
           </Link>
-          <Link href="https://hongkong.hmcc.net/give/" fontWeight="bold">
-            Give
+          <Link
+            to={{ pathname: "https://hongkong.sub.hmcc.net/give/" }}
+            target="_blank"
+          >
+            <Text fontWeight="bold">Give</Text>
           </Link>
         </Stack>
       </Box>
