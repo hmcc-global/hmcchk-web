@@ -22,7 +22,7 @@ const OurMinistries = (props) => {
         <Box className="flip-container">
           <Center
             h={[180, 250]}
-            p={12}
+            p={[4, 12]}
             borderWidth="1px"
             borderRadius="20"
             bgImage={` linear-gradient(180deg, rgba(118, 228, 247, 0.7) 0%, rgba(44, 82, 130, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/campus-ministry.jpg')`}
@@ -41,7 +41,7 @@ const OurMinistries = (props) => {
             >
               CAMPUS
             </Heading>
-            <Box className="back" fontWeight={600}>
+            <Box className="back" fontWeight={600} fontSize={["xs", "md"]}>
               Reaching the college students in the university campuses of Hong
               Kong because we believe that college is a pivotal time for people
               to discover their God-given destiny.
@@ -51,7 +51,7 @@ const OurMinistries = (props) => {
         <Box className="flip-container">
           <Center
             h={[180, 250]}
-            p={12}
+            p={[4, 12]}
             borderWidth="1px"
             borderRadius="20"
             bgImage={`linear-gradient(180deg, rgba(198, 246, 213, 0.7) 0%, rgba(39, 103, 73, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/focus-ministry.jpg')`}
@@ -70,7 +70,7 @@ const OurMinistries = (props) => {
             >
               SINGLE ADULTS
             </Heading>
-            <Box className="back" fontWeight={600}>
+            <Box className="back" fontWeight={600} fontSize={["xs", "md"]}>
               Creating an avenue for single working adults to fellowship and
               learn how to best exercise their God-given influence in their
               respective schools and workplaces.
@@ -80,7 +80,7 @@ const OurMinistries = (props) => {
         <Box className="flip-container">
           <Center
             h={[180, 250]}
-            p={12}
+            p={[4, 12]}
             borderWidth="1px"
             borderRadius="20"
             bgImage={`linear-gradient(180deg, rgba(252, 129, 129, 0.7) 0%, rgba(151, 38, 109, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/married-couples-ministry.jpg')`}
@@ -99,7 +99,7 @@ const OurMinistries = (props) => {
             >
               MARRIED COUPLES
             </Heading>
-            <Box className="back" fontWeight={600}>
+            <Box className="back" fontWeight={600} fontSize={["sm", "md"]}>
               Bringing together Godly families that will love on and impact the
               next generation of their families and city.
             </Box>
@@ -108,7 +108,7 @@ const OurMinistries = (props) => {
         <Box className="flip-container">
           <Center
             h={[180, 250]}
-            p={12}
+            p={[4, 12]}
             borderWidth="1px"
             borderRadius="20"
             bgImage={`linear-gradient(180deg, rgba(254, 252, 191, 0.7) 0%, rgba(246, 173, 85, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/children-ministry.jpg')`}
@@ -127,7 +127,7 @@ const OurMinistries = (props) => {
             >
               CHILDREN
             </Heading>
-            <Box className="back" fontWeight={600}>
+            <Box className="back" fontWeight={600} fontSize={["sm", "md"]}>
               Building Blocks is HMCC’s Children Ministry, learn more about it{" "}
               <Text as="u">
                 <Link href="https://hongkong.hmcc.net/building-blocks/">
