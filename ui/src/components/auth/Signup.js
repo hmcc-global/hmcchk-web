@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { Redirect } from "react-router-dom";
 import { customAxios as axios } from "../helpers/customAxios";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
-import Country from "./country.json";
 import ReCAPTCHA from "react-google-recaptcha";
 import {
   Box,
@@ -23,6 +22,7 @@ import {
   Link,
   Input,
 } from "@chakra-ui/react";
+import { lifestageList, countryList } from "../helpers/lists";
 
 const Signup = (props) => {
   const {
@@ -363,11 +363,9 @@ const Signup = (props) => {
                     isInvalid={errors["countryOfOrigin"]}
                     placeholder="Please fill in this field"
                   >
-                    {Country.map((result) => {
-                      return result.country.map((result) => {
-                        return <option value={result}>{result}</option>;
-                      });
-                    })}
+                    {countryList.map((result) => (
+                      <option value={result}>{result}</option>
+                    ))}
                   </Select>
 
                   {errors.country && (
@@ -391,10 +389,11 @@ const Signup = (props) => {
                     isInvalid={errors["lifestage"]}
                     placeholder="Please fill in this field"
                   >
-                    <option value="Undergraduate">Undergraduate</option>
-                    <option value="Postgraduate">Postgraduate</option>
-                    <option value="Single Adult">Single Adult</option>
-                    <option value="Married Couple">Married Couple</option>
+                    {
+                    lifestageList.map((lifestage) => (
+                      <option value={lifestage}>{lifestage}</option>
+                    ))
+                    }
                   </Select>
                   {errors.lifestage && (
                     <Text

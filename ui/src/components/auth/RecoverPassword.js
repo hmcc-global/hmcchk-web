@@ -12,6 +12,7 @@ import {
   Stack,
   Link,
   useToast,
+  Button,
 } from "@chakra-ui/react";
 
 const RecoverPassword = (props) => {
@@ -75,8 +76,7 @@ const RecoverPassword = (props) => {
           <Flex w="100%">
             <Box>
               <Link
-                to={{ pathname: "https://hongkong.hmcc.net" }}
-                target="_blank"
+                href="/"
               >
                 <ChevronLeftIcon boxSize={10} />
                 Return to hongkong.hmcc.net
@@ -116,12 +116,13 @@ const RecoverPassword = (props) => {
                     This will only be applicable if you signed up using your
                     personal email
                   </Text>
-                  <input
+                  <Button
                     type="submit"
                     name="email link"
-                    value="Email me a recovery link"
                     style={submitBoxStyle}
-                  />
+                    >
+                    Send Recovery Link
+                    </Button>
                 </VStack>
               </form>
             </VStack>

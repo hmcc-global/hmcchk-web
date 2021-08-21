@@ -208,7 +208,7 @@ const LoginContainer = (props) => {
                     {invalidLogin}
                   </Text>
                 ) : null}
-                <Link href="/password/recovery">
+                <Link href="/password/recover">
                   <Text textAlign="right" fontSize="xs" position="relative">
                     Forgot Password?
                   </Text>
