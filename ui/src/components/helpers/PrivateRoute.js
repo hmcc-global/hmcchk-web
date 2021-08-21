@@ -10,7 +10,6 @@ import CompleteUserProfileContainer from "../userProfile/CompleteUserProfile";
 
 const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
   const user = useSelector((state) => state.user);
-  console.log(user);
   const [userObj, setUserObj] = useState(null);
 
   const checkIfTokenExists = async (toVerify) => {
@@ -76,7 +75,6 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
                 }
                 break;
             }
-            console.log("2x");
 
             return <Component {...props} user={userObj} />;
           } else {

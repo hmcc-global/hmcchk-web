@@ -50,7 +50,6 @@ const NavBar = (props) => {
   };
 
   const getUserObj = async (token) => {
-    console.log(token);
     const { data } = await axios.post("/api/auth/verify-token", {
       token: token,
     });
@@ -63,7 +62,6 @@ const NavBar = (props) => {
       const { fullName } = userObj;
       setUsername(fullName.split(" ")[0]);
       setLoggedIn(true);
-      console.log(userObj);
     } else {
       setLoggedIn(false);
     }
