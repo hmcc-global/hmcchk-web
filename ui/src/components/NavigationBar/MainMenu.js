@@ -26,6 +26,7 @@ import { SocialIcon } from "react-social-icons";
 //import "./removeScrollbar.css"
 
 const MainMenu = ({ login, onClose }) => {
+
   const onLogout = () => {
     localStorage.clear();
     window.location.reload();
