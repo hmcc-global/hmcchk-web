@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link as HashLink } from 'react-router-dom'
 import {
   Flex,
@@ -16,7 +16,6 @@ import {
   AccordionPanel,
   Container,
   AccordionIcon,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { SocialIcon } from "react-social-icons";
 //import "./removeScrollbar.css"
@@ -91,10 +90,10 @@ const MainMenu = ({ login, onClose }) => {
                   Connect
                 </Text>
               </Link>
-              <HashLink href="/connect#ministries" onClick={onClose}>
+              <HashLink to={{pathname:"/connect", hash:"#ministries" }} onClick={onClose}>
                 <Text fontSize="18px">Ministries</Text>
               </HashLink>
-              <HashLink href="/connect#lifegroup" onClick={onClose}>
+              <HashLink to={{pathname:"/connect", hash:"#lifegroup" }} onClick={onClose}>
                 <Text fontSize="18px">LIFE Groups</Text>
               </HashLink>
               <Link href="/events" onClick={onClose}>
@@ -102,14 +101,13 @@ const MainMenu = ({ login, onClose }) => {
                   Events
                 </Text>
               </Link>
-              <Link href="https://hongkong.sub.hmcc.net/sermons/" target="_blank">
+              <Link href="https://hongkong.sub.hmcc.net/sermons/">
                 <Text fontWeight="bold" fontSize="40px">
                   Sermons
                 </Text>
               </Link>
               <Link
                 href= "https://hongkong.sub.hmcc.net/give/"
-                target="_blank"
               >
                 <Text fontWeight="bold" fontSize="40px">
                   Give

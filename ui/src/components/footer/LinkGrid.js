@@ -1,4 +1,5 @@
 import { Box, SimpleGrid, Stack, Link, Text } from "@chakra-ui/react";
+import {Link as HashLink} from "react-router-dom";
 import * as React from "react"; 
 
 export function LinkGrid() {
@@ -11,13 +12,12 @@ export function LinkGrid() {
     >
       <Box>
         <Stack>
-          <Link to="/visit-us">
+          <Link href="/visit-us">
             <Text fontWeight="bold">Visit</Text>
           </Link>
 
           <Link
-            href=
-               "https://hongkong.sub.hmcc.net/online/"
+            href="https://hongkong.sub.hmcc.net/online/"
             
           >
             Church online
@@ -26,19 +26,16 @@ export function LinkGrid() {
       </Box>
       <Box>
         <Stack>
-          <Link to="/connect">
+          <Link href="/connect">
             <Text fontWeight="bold">Connect</Text>
           </Link>
-          <Link
-            href=
-                "https://hongkong.sub.hmcc.net/ministries/campus-ministry/"
-            
+          <HashLink to={{pathname:"/connect", hash:"#ministries" }}
           >
             Ministries
-          </Link>
-          <Link to="/connect#lifegroup">
+          </HashLink>
+          <HashLink to={{pathname:"/connect", hash:"#lifegroup" }}>
             <Text>LIFE Groups</Text>
-          </Link>
+          </HashLink>
         </Stack>
       </Box>
       <Box>
@@ -82,7 +79,6 @@ export function LinkGrid() {
           <Link
             href=
                "https://hongkong.sub.hmcc.net/about/hmi/"
-            
           >
             <Text>HMI</Text>
           </Link>
@@ -91,10 +87,10 @@ export function LinkGrid() {
 
       <Box>
         <Stack>
-          <Link to="/events" >
+          <Link href="/events" >
             <Text fontWeight="bold">Events</Text>
           </Link>
-          <Link to="/sermons" >
+          <Link href="/sermons" >
             <Text fontWeight="bold">Sermons</Text>
           </Link>
           <Link

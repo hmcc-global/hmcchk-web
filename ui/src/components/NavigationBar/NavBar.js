@@ -21,7 +21,6 @@ import {
   DrawerCloseButton,
   Link,
   useDisclosure,
-  Img,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { customAxios as axios } from "../helpers/customAxios";
@@ -147,7 +146,7 @@ const NavBar = (props) => {
                 </Box>
               </Stack>
               <Stack
-                spacing={1}
+                spacing={2}
                 color="black"
                 justify="right"
                 align="right"
