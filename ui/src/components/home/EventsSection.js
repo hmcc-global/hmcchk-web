@@ -28,7 +28,7 @@ const EventsSection = () => {
       const { data } = await axios.get("/api/announcements/get-announcements");
       const filtered = data.filter((item) => {
         if (item.endDate) {
-          const endDate = new DateTime.fromISO(item.endDate);
+          let endDate = new DateTime.fromISO(item.endDate).plus({ days: 1 });
           const renderDate = getRenderDate(
             item.startDate,
             item.endDate,
