@@ -27,9 +27,11 @@ module.exports = {
       }
 
       // Get the user with the matching email token.
+      sails.log(token);
       var user = await User.findOne({ emailProofToken: token });
 
       // If no such user exists, or their token is expired, bail.
+      sails.log(user);
       if (!user || user.emailProofTokenExpiresAt <= Date.now()) {
         throw "invalidOrExpiredToken";
       }
@@ -61,14 +63,16 @@ module.exports = {
         });
 
         sails.log.info(`${user.email} confirmed.`);
-        if (this.req.wantsJSON) {
-          return;
-        } else {
-          // TODO: redirect to the correct page
-          throw { redirect: "/email/confirmed" };
-        }
+        return exits.success("Email confirmed");
+        // if (this.req.wantsJSON) {
+        //   return exits.success("Email confirmed");
+        // } else {
+        //   // TODO: redirect to the correct page
+        //   throw { redirect: "/email/confirmed" };
+        // }
       }
     } catch (err) {
+      sails.log("ERR");
       return exits.error(err);
     }
   },
