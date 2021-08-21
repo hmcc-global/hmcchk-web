@@ -20,6 +20,7 @@ module.exports = {
   },
 
   fn: async function ({ token }, exits) {
+    console.log("HERE");
     try {
       // If no token was provided, this is automatically invalid.
       if (!token) {
@@ -30,7 +31,7 @@ module.exports = {
       var user = await User.findOne({ emailProofToken: token });
 
       // If no such user exists, or their token is expired, bail.
-      if (!user || user.emailProofTokenExpiresAt <= Date.now()) {
+      if (!user) {
         throw "invalidOrExpiredToken";
       }
 
