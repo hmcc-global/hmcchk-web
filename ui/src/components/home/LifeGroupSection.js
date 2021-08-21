@@ -67,7 +67,7 @@ const LifeGroupSection = () => {
                 textDecoration: "none",
               }}
               as={Link}
-              href="/connect"
+              href="/connect/#lifegroup"
             >
               {buttonText}
             </Button>

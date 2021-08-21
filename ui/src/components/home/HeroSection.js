@@ -79,7 +79,6 @@ const HeroSection = () => {
                 }}
                 w="inherit"
                 as={Link}
-                target="_blank"
                 href="https://www.hongkong.sub.hmcc.net/online"
                 fontSize={["sm", "md"]}
               >

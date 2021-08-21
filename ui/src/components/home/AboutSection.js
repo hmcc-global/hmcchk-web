@@ -96,7 +96,6 @@ const AboutSection = () => {
                 textDecoration: "none",
               }}
               as={Link}
-              target="_blank"
               href="https://hongkong.sub.hmcc.net/about/who-we-are"
             >
               {"More about us >"}
