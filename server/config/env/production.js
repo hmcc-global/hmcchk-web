@@ -336,7 +336,7 @@ module.exports = {
    *                                                                         *
    ***************************************************************************/
   custom: {
-    baseUrl: "https://example.com",
+    baseUrl: "https://hongkong.hmcc.net",
     internalEmailAddress: "support@example.com",
 
     // sendgridSecret: 'SG.fake.3e0Bn0qSQVnwb1E4qNPz9JZP5vLZYqjh7sn8S93oSHU',
