@@ -1,34 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { customAxios as axios } from "../helpers/customAxios";
-import GoogleLogin from "react-google-login";
 import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
-import { signin } from "../../reducers/userSlice";
-import { ChevronLeftIcon, EmailIcon, LockIcon } from "@chakra-ui/icons";
+import { ChevronLeftIcon } from "@chakra-ui/icons";
 import {
   Box,
-  Card,
   Container,
-  Paper,
-  Center,
   VStack,
   Flex,
   Image,
   Text,
   Stack,
-  HStack,
-  Button,
   Link,
+  useToast,
 } from "@chakra-ui/react";
 
 const RecoverPassword = (props) => {
-  const { classes } = props;
-  const [token, setToken] = useState("null token");
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
   const { register, handleSubmit } = useForm();
-  const [result, setResult] = useState("");
-  const onSubmit = (data) => setResult(JSON.stringify(data));
+  const toast = useToast();
+  const onSubmit = async (data) => {
+    const isSuccess = await axios.post("/api/auth/forgot-password", data);
+
+    // Send toast regardless to prevent email sniffing.
+    toast({
+      title: "Password Recovery.",
+      description: "Email Sent!.",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
+  };
 
   const inputBoxStyle = {
     background: "#ffffff",

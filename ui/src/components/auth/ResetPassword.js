@@ -1,43 +1,82 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useRef } from "react";
 import { customAxios as axios } from "../helpers/customAxios";
-import GoogleLogin from "react-google-login";
 import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
-import { ChevronLeftIcon, EmailIcon, LockIcon } from "@chakra-ui/icons";
+import { ChevronLeftIcon } from "@chakra-ui/icons";
 
 import {
   Box,
-  Card,
-  Container,
   UnorderedList,
   ListItem,
-  Paper,
   Center,
   VStack,
   Flex,
   Image,
   Text,
   Stack,
-  HStack,
-  Button,
   Link,
+  useToast,
 } from "@chakra-ui/react";
+import { useLocation } from "react-router-dom";
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
 const ResetPassword = (props) => {
-  const { classes } = props;
-  const [token, setToken] = useState("null token");
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
   const {
     register,
     formState: { errors },
     handleSubmit,
     watch,
   } = useForm();
-  const [result, setResult] = useState("");
-  const onSubmit = (data) => setResult(JSON.stringify(data));
+  const query = useQuery();
+  const toast = useToast();
 
-  const [userData, setUserData] = useState(null);
+  const onSubmit = async (data) => {
+    try {
+      const token = query.get("token");
+      const params = {
+        token,
+        password: data.password,
+      };
+      const isSuccess = await axios.post(
+        "/api/auth/change-password-recovery",
+        params
+      );
+
+      if (isSuccess) {
+        toast({
+          title: "Password Reset.",
+          description: "Password successfully reset! Please login again.",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+
+        props.history.push("/login");
+      } else {
+        toast({
+          title: "Password Reset.",
+          description: "Password could not be reset.",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      }
+    } catch (err) {
+      if (err.response?.status == 498) {
+        // invalid token error code
+        toast({
+          title: "Password Reset.",
+          description: "Password reset token invalid or expired.",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      }
+    }
+  };
+
   const inputBoxStyle = {
     background: "#ffffff",
     border: "1px solid #000000",
