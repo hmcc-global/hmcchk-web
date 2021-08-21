@@ -172,7 +172,7 @@ const VisitUsPage = (props) => {
               color="white"
               textAlign={["center", "right"]}
             >
-              <Link href="https://hongkong.hmcc.net/online/" isExternal>
+              <Link href="https://hongkong.sub.hmcc.net/online/" isExternal>
                 Join us Online <Icon as={RiArrowRightLine} />
               </Link>
             </Heading>

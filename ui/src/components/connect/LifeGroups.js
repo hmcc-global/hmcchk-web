@@ -1,4 +1,5 @@
 import {
+  AspectRatio,
   Box,
   Center,
   Flex,
@@ -47,7 +48,13 @@ const LifeGroups = (props) => {
         <span style={{ color: "#7DABFC" }}>F</span>
         <span style={{ color: "#FEDD64" }}>E</span> GROUPS
       </Heading>
-      <Box>Life group video</Box>
+      <AspectRatio maxW="100%" ratio={16 / 9} mb={10}>
+        <iframe
+          src="https://www.youtube.com/embed/PEhrbDCj_Ec"
+          title="YouTube video player"
+          allowFullScreen
+        />
+      </AspectRatio>
       <Flex
         flexDirection={props.isLargerThan768 ? "row" : "column-reverse"}
         mb={4}

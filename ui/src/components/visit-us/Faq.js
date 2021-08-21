@@ -133,7 +133,7 @@ const Faq = (props) => {
           interact with one another and the teachers over a time of worship,
           Bible story and activities. For more information, please visit the{" "}
           <Link
-            href="https://hongkong.hmcc.net/building-blocks/"
+            href="https://hongkong.sub.hmcc.net/building-blocks/"
             color="#0E66CC"
           >
             Building Block’s page
