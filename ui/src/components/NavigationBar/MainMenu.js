@@ -1,5 +1,5 @@
 import React from "react";
-import { Link as HashLink } from 'react-router-dom'
+import { Link as HashLink } from "react-router-dom";
 import {
   Flex,
   Box,
@@ -21,7 +21,6 @@ import { SocialIcon } from "react-social-icons";
 //import "./removeScrollbar.css"
 
 const MainMenu = ({ login, onClose }) => {
-
   const onLogout = () => {
     localStorage.clear();
     window.location.reload();
@@ -38,45 +37,30 @@ const MainMenu = ({ login, onClose }) => {
                   Visit
                 </Text>
               </Link>
-              <Link href= "https://hongkong.sub.hmcc.net/online/">
+              <Link href="https://hongkong.sub.hmcc.net/online/">
                 <Text fontSize="18px">Church Online</Text>
               </Link>
-              <Link
-                href="https://hongkong.sub.hmcc.net/about/who-we-are/"
-              >
+              <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
                 <Text fontWeight="bold" fontSize="40px">
                   About
                 </Text>
               </Link>
-              <Link
-                href= "https://hongkong.sub.hmcc.net/about/who-we-are/"
-              >
+              <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
                 <Text fontSize="18px">Who We Are</Text>
               </Link>
-              <Link
-                href= "https://hongkong.sub.hmcc.net/about/beliefs/"
-              >
+              <Link href="https://hongkong.sub.hmcc.net/about/beliefs/">
                 <Text fontSize="18px">Beliefs</Text>
               </Link>
-              <Link
-                href= "https://hongkong.sub.hmcc.net/about/who-we-are/"
-              >
+              <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
                 <Text fontSize="18px">Our Values</Text>
               </Link>
-              <Link
-                href= "https://hongkong.sub.hmcc.net/about/beliefs/"
-              >
+              <Link href="https://hongkong.sub.hmcc.net/about/beliefs/">
                 <Text fontSize="18px">Statement of Faith</Text>
               </Link>
-              <Link
-                href=
-                   "https://hongkong.sub.hmcc.net/about/bold-vision/"
-              >
+              <Link href="https://hongkong.sub.hmcc.net/about/bold-vision/">
                 <Text fontSize="18px">BOLD Vision</Text>
               </Link>
-              <Link
-                href= "https://hongkong.sub.hmcc.net/about/hmi/"
-              >
+              <Link href="https://hongkong.sub.hmcc.net/about/hmi/">
                 <Text fontSize="18px">Harvest Mission International</Text>
               </Link>
             </VStack>
@@ -90,10 +74,16 @@ const MainMenu = ({ login, onClose }) => {
                   Connect
                 </Text>
               </Link>
-              <HashLink to={{pathname:"/connect", hash:"#ministries" }} onClick={onClose}>
+              <HashLink
+                to={{ pathname: "/connect", hash: "#ministries" }}
+                onClick={onClose}
+              >
                 <Text fontSize="18px">Ministries</Text>
               </HashLink>
-              <HashLink to={{pathname:"/connect", hash:"#lifegroup" }} onClick={onClose}>
+              <HashLink
+                to={{ pathname: "/connect", hash: "#lifegroup" }}
+                onClick={onClose}
+              >
                 <Text fontSize="18px">LIFE Groups</Text>
               </HashLink>
               <Link href="/events" onClick={onClose}>
@@ -106,16 +96,14 @@ const MainMenu = ({ login, onClose }) => {
                   Sermons
                 </Text>
               </Link>
-              <Link
-                href= "https://hongkong.sub.hmcc.net/give/"
-              >
+              <Link href="https://hongkong.sub.hmcc.net/give/">
                 <Text fontWeight="bold" fontSize="40px">
                   Give
                 </Text>
               </Link>
             </VStack>
           </Flex>
-          <Flex position="relative" left={{ md: "10%",  xl: "25%" }}>
+          <Flex position="relative" left={{ md: "10%", xl: "25%" }}>
             <VStack className="third-column-mainmenu" alignItems="flex-end">
               <Box className="sign-up-button" position="relative">
                 {login ? (
@@ -130,7 +118,9 @@ const MainMenu = ({ login, onClose }) => {
                     width="200px"
                   >
                     <Button marginBottom="5" width="100%">
-                      <Link href="/profile" onClick={onClose}>My Profile</Link>
+                      <Link href="/profile" onClick={onClose}>
+                        My Profile
+                      </Link>
                     </Button>
                     <Button
                       onClick={onLogout}
@@ -139,15 +129,18 @@ const MainMenu = ({ login, onClose }) => {
                       width="100%"
                       style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
                     >
-                      <Link href='/'>
-                        Log Out
-                      </Link>
+                      <Link href="/">Log Out</Link>
                     </Button>
                     <Button
                       width="100%"
                       style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
                     >
-                      <Link href="https://forms.gle/6jasxuLNZt5MVXAy8" target="_blank">Prayer Requests</Link>
+                      <Link
+                        href="https://forms.gle/6jasxuLNZt5MVXAy8"
+                        target="_blank"
+                      >
+                        Prayer Requests
+                      </Link>
                     </Button>
                   </ButtonGroup>
                 ) : (
@@ -170,7 +163,12 @@ const MainMenu = ({ login, onClose }) => {
                       width="100%"
                       style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
                     >
-                      <Link href="https://forms.gle/6jasxuLNZt5MVXAy8" target="_blank">Prayer Requests</Link>
+                      <Link
+                        href="https://forms.gle/6jasxuLNZt5MVXAy8"
+                        target="_blank"
+                      >
+                        Prayer Requests
+                      </Link>
                     </Button>
                   </ButtonGroup>
                 )}
@@ -183,40 +181,20 @@ const MainMenu = ({ login, onClose }) => {
                 right="43%"
               >
                 <VStack alignItems="center" fontSize="sm">
-                  <Link
-                    href=
-                       "https://annarbor.hmcc.net/"
-                    target="_blank"
-                  >
+                  <Link href="https://annarbor.hmcc.net/" target="_blank">
                     Ann Arbor
                   </Link>
-                  <Link
-                    href=
-                       "https://austin.hmcc.net/"
-                    target="_blank"
-                  >
+                  <Link href="https://austin.hmcc.net/" target="_blank">
                     Austin
                   </Link>
-                  <Link
-                    href=
-                       "https://detroit.hmcc.net/"
-                    target="_blank"
-                  >
+                  <Link href="https://detroit.hmcc.net/" target="_blank">
                     Detroit
                   </Link>
                   <Link style={{ fontWeight: "bolder" }}>HONG KONG</Link>
-                  <Link
-                    href=
-                       "https://jakarta.hmcc.net/"
-                    target="_blank"
-                  >
+                  <Link href="https://jakarta.hmcc.net/" target="_blank">
                     Jakarta
                   </Link>
-                  <Link
-                    href=
-                       "https://tangerang.hmcc.net/"
-                    target="_blank"
-                  >
+                  <Link href="https://tangerang.hmcc.net/" target="_blank">
                     Tangerang
                   </Link>
                 </VStack>
@@ -281,23 +259,22 @@ const MainMenu = ({ login, onClose }) => {
           <VStack color="white" alignItems="flex-start">
             <Flex marginTop="30px" direction="column">
               <VStack alignItems="flex-start">
-                <Accordion allowMultiple>
+                <Accordion allowMultiple index={[0]}>
                   <AccordionItem borderStyle="none">
                     <AccordionButton>
                       <Box
+                        flex="1"
                         textAlign="left"
-                        marginRight="5px"
                         fontWeight="bold"
                         fontSize="2xl"
                       >
-                        Visit
+                        <Link href="/visit-us" onClick={onClose}>
+                          Visit
+                        </Link>
                       </Box>
-                      <AccordionIcon alignItems="flex-start" />
                     </AccordionButton>
                     <AccordionPanel pb={4}>
-                      <Link
-                        href= "https://hongkong.sub.hmcc.net/online/"
-                      >
+                      <Link href="https://hongkong.sub.hmcc.net/online/">
                         Church Online
                       </Link>
                     </AccordionPanel>
@@ -310,57 +287,14 @@ const MainMenu = ({ login, onClose }) => {
                         fontWeight="bold"
                         fontSize="2xl"
                       >
-                        About
+                        <Link
+                          href="https://hongkong.sub.hmcc.net/about/who-we-are/"
+                          onClick={onClose}
+                        >
+                          About
+                        </Link>
                       </Box>
-                      <AccordionIcon />
                     </AccordionButton>
-                    <AccordionPanel pb={4}>
-                      <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
-                        Who We Are
-                      </Link>
-                    </AccordionPanel>
-                    <AccordionPanel pb={4}>
-                      <Link
-                        href=
-                           "https://hongkong.sub.hmcc.net/about/beliefs/"
-                      >
-                        Beliefs
-                      </Link>
-                    </AccordionPanel>
-                    <AccordionPanel pb={4}>
-                      <Link
-                        href=
-                          
-                            "https://hongkong.sub.hmcc.net/about/who-we-are/"
-                      >
-                        Our Values
-                      </Link>
-                    </AccordionPanel>
-                    <AccordionPanel pb={4}>
-                      <Link
-                        href=
-                           "https://hongkong.sub.hmcc.net/about/beliefs/"
-                      >
-                        Statement of Faith
-                      </Link>
-                    </AccordionPanel>
-                    <AccordionPanel pb={4}>
-                      <Link
-                        href=
-                          
-                            "https://hongkong.sub.hmcc.net/about/bold-vision/"
-                      >
-                        BOLD Vision
-                      </Link>
-                    </AccordionPanel>
-                    <AccordionPanel pb={4}>
-                      <Link
-                        href=
-                           "https://hongkong.sub.hmcc.net/about/hmi/"
-                      >
-                        Harvest Mission International
-                      </Link>
-                    </AccordionPanel>
                   </AccordionItem>
                   <AccordionItem borderStyle="none">
                     <AccordionButton>
@@ -370,29 +304,11 @@ const MainMenu = ({ login, onClose }) => {
                         fontWeight="bold"
                         fontSize="2xl"
                       >
-                        Connect
+                        <Link href="/connect#ministries" onClick={onClose}>
+                          Connect
+                        </Link>
                       </Box>
-                      <AccordionIcon />
                     </AccordionButton>
-                    <AccordionPanel pb={4}>
-                      <Link
-                        href=
-                          
-                            "/connect#ministries"
-                        onClick={onClose}
-                      >
-                        Ministries
-                      </Link>
-                    </AccordionPanel>
-                    <AccordionPanel pb={4}>
-                      <Link
-                        href=
-                            "/connect#lifegroup"
-                        onClick={onClose}
-                      >
-                        LIFE Groups
-                      </Link>
-                    </AccordionPanel>
                   </AccordionItem>
                   <AccordionItem borderStyle="none">
                     <AccordionButton>
@@ -430,9 +346,7 @@ const MainMenu = ({ login, onClose }) => {
                         fontWeight="bold"
                         fontSize="2xl"
                       >
-                        <Link
-                          href= "https://hongkong.sub.hmcc.net/give/"
-                        >
+                        <Link href="https://hongkong.sub.hmcc.net/give/">
                           Give
                         </Link>
                       </Box>
@@ -456,7 +370,9 @@ const MainMenu = ({ login, onClose }) => {
                       width="200px"
                     >
                       <Button marginBottom="5" width="100%">
-                        <Link href="/profile" onClick={onClose}>My Profile</Link>
+                        <Link href="/profile" onClick={onClose}>
+                          My Profile
+                        </Link>
                       </Button>
                       <Button
                         onClick={onLogout}
@@ -477,7 +393,11 @@ const MainMenu = ({ login, onClose }) => {
                           marginInlineStart: "0",
                         }}
                       >
-                        <Link href="https://forms.gle/6jasxuLNZt5MVXAy8" target="_blank" onClick={onClose}>
+                        <Link
+                          href="https://forms.gle/6jasxuLNZt5MVXAy8"
+                          target="_blank"
+                          onClick={onClose}
+                        >
                           Prayer Requests
                         </Link>
                       </Button>
@@ -491,7 +411,9 @@ const MainMenu = ({ login, onClose }) => {
                       width="200px"
                     >
                       <Button marginBottom="5" width="100%">
-                        <Link href="/login" onClick={onClose}>Login or Sign up</Link>
+                        <Link href="/login" onClick={onClose}>
+                          Login or Sign up
+                        </Link>
                       </Button>
                       <Button
                         width="100%"
@@ -500,7 +422,11 @@ const MainMenu = ({ login, onClose }) => {
                           marginInlineStart: "0",
                         }}
                       >
-                        <Link href="https://forms.gle/6jasxuLNZt5MVXAy8" target="_blank" onClick={onClose}>
+                        <Link
+                          href="https://forms.gle/6jasxuLNZt5MVXAy8"
+                          target="_blank"
+                          onClick={onClose}
+                        >
                           Prayer Requests
                         </Link>
                       </Button>
@@ -522,38 +448,22 @@ const MainMenu = ({ login, onClose }) => {
                         <AccordionIcon />
                       </AccordionButton>
                       <AccordionPanel pb={4} textAlign="center">
-                        <Link
-                          href=
-                             "https://annarbor.hmcc.net/"
-                          target="_blank"
-                        >
+                        <Link href="https://annarbor.hmcc.net/" target="_blank">
                           Ann Arbor
                         </Link>
                       </AccordionPanel>
                       <AccordionPanel pb={4} textAlign="center">
-                        <Link
-                          href=
-                             "https://austin.hmcc.net/"
-                          target="_blank"
-                        >
+                        <Link href="https://austin.hmcc.net/" target="_blank">
                           Austin
                         </Link>
                       </AccordionPanel>
                       <AccordionPanel pb={4} textAlign="center">
-                        <Link
-                          href=
-                             "https://detroit.hmcc.net/"
-                          target="_blank"
-                        >
+                        <Link href="https://detroit.hmcc.net/" target="_blank">
                           Detroit
                         </Link>
                       </AccordionPanel>
                       <AccordionPanel pb={4} textAlign="center">
-                        <Link
-                          href=
-                             "https://jakarta.hmcc.net/"
-                          target="_blank"
-                        >
+                        <Link href="https://jakarta.hmcc.net/" target="_blank">
                           Jakarta
                         </Link>
                       </AccordionPanel>
@@ -562,8 +472,7 @@ const MainMenu = ({ login, onClose }) => {
                       </AccordionPanel>
                       <AccordionPanel pb={4} textAlign="center">
                         <Link
-                          href=
-                             "https://tangerang.hmcc.net/"
+                          href="https://tangerang.hmcc.net/"
                           target="_blank"
                         >
                           Tangerang

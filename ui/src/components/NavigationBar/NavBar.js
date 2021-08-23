@@ -75,7 +75,7 @@ const NavBar = (props) => {
       <Flex w="100vw" background="rgba(0, 0, 0, 0.4)" justify="center">
         <Flex
           w="100vw"
-          justify="space-around"
+          justify={["space-between", "space-around"]}
           background="linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.5) 100%, rgba(255, 255, 255, 0.9) 100%)"
           backdrop-filter="blur(39px)"
           align="center"
@@ -118,9 +118,7 @@ const NavBar = (props) => {
                   <Link href="/visit-us">VISIT</Link>
                 </Box>
                 <Box position="relative">
-                  <Link
-                    href="https://hongkong.sub.hmcc.net/about/who-we-are/"
-                  >
+                  <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
                     ABOUT
                   </Link>
                 </Box>
@@ -131,18 +129,12 @@ const NavBar = (props) => {
                   <Link href="/events">EVENTS</Link>
                 </Box>
                 <Box position="relative">
-                  <Link
-                    href="https://hongkong.sub.hmcc.net/sermons"
-                  >
+                  <Link href="https://hongkong.sub.hmcc.net/sermons">
                     SERMONS
                   </Link>
                 </Box>
                 <Box position="relative">
-                  <Link
-                    href="https://hongkong.sub.hmcc.net/give/"
-                  >
-                    GIVE
-                  </Link>
+                  <Link href="https://hongkong.sub.hmcc.net/give/">GIVE</Link>
                 </Box>
               </Stack>
               <Stack
@@ -161,18 +153,24 @@ const NavBar = (props) => {
                   {loggedIn ? (
                     <Menu>
                       <MenuButton>
-                        <Text marginLeft='10px' fontWeight="600">{welcomeMsg[1]}</Text>
+                        <Text marginLeft="10px" fontWeight="600">
+                          {welcomeMsg[1]}
+                        </Text>
                       </MenuButton>
                       <MenuList>
                         <MenuItem>
                           <Link href="/profile">View Profile</Link>
                         </MenuItem>
-                        <MenuItem onClick={onLogout}><Link href="/">Log Out</Link></MenuItem>
+                        <MenuItem onClick={onLogout}>
+                          <Link href="/">Log Out</Link>
+                        </MenuItem>
                       </MenuList>
                     </Menu>
                   ) : (
                     <Link href="/login">
-                      <Text fontWeight="600" marginLeft='10px'>{welcomeMsg[0]}</Text>
+                      <Text fontWeight="600" marginLeft="10px">
+                        {welcomeMsg[0]}
+                      </Text>
                     </Link>
                   )}
                 </Box>
@@ -232,39 +230,39 @@ const NavBar = (props) => {
           </Flex>
         </Flex>
       ) : null}
-        <Drawer
-          isOpen={isOpen}
-          size="full"
-          onClose={onClose}
-          finalFocusRef={btnRef}
-          placement= "top"
+      <Drawer
+        isOpen={isOpen}
+        size="full"
+        onClose={onClose}
+        finalFocusRef={btnRef}
+        placement="top"
+      >
+        <DrawerOverlay />
+        <DrawerContent
+          background="url('/images/ripple_bg.png')"
+          backgroundRepeat="no-repeat"
+          backgroundColor="#2c5282"
+          backgroundSize="70%"
+          backgroundPosition="120% 75%"
+          width={{ base: "100%", md: "70%" }}
+          style={{ position: "absolute" }}
+          marginLeft={{ base: "none", md: "15%" }}
         >
-          <DrawerOverlay />
-          <DrawerContent
-            background="url('/images/ripple_bg.png')"
-            backgroundRepeat="no-repeat"
-            backgroundColor="#2c5282"
-            backgroundSize="70%"
-            backgroundPosition="120% 75%"
-            width={{base:'100%', md:'70%'}}
-            style={{position:'absolute'}}
-            marginLeft={{base:'none', md:'15%'}}
-          >
-            <DrawerCloseButton
-              position="absolute"
-              right="5%"
-              top="5%"
-              color="white"
-            />
-            <DrawerHeader />
-            <DrawerBody>
-              <MainMenu login={loggedIn} onClose={onClose} />
-            </DrawerBody>
-            <DrawerFooter fontSize="sm" color="white" justifyContent="center">
-              Harvest Mission Community Church 2021
-            </DrawerFooter>
-          </DrawerContent>
-        </Drawer>
+          <DrawerCloseButton
+            position="absolute"
+            right="5%"
+            top="5%"
+            color="white"
+          />
+          <DrawerHeader />
+          <DrawerBody>
+            <MainMenu login={loggedIn} onClose={onClose} />
+          </DrawerBody>
+          <DrawerFooter fontSize="sm" color="white" justifyContent="center">
+            Harvest Mission Community Church 2021
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </>
   );
 };
