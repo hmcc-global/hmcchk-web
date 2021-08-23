@@ -16,6 +16,8 @@ import axios from "axios";
 const NewHereSection = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [lifestage, setLifestage] = useState("");
   const [notes, setNotes] = useState("");
   const [isBot, setIsBot] = useState(true);
   const [submitted, setSubmitted] = useState(false);
@@ -31,6 +33,8 @@ const NewHereSection = () => {
         name: name,
         email: email,
         notes: notes,
+        phoneNumber: phoneNumber,
+        lifestage: lifestage,
       });
       setSubmitted(true);
       setTimeout(() => {
@@ -73,7 +77,7 @@ const NewHereSection = () => {
                 New here? Connect with us
               </Heading>
               <form onSubmit={onSubmit}>
-                <VStack spacing={[8, 4]} alignItems="center">
+                <VStack spacing={[6, 4]} alignItems="center">
                   <FormControl id="name" isRequired w={["85%", "100%"]}>
                     <Input
                       variant="flushed"
@@ -90,10 +94,24 @@ const NewHereSection = () => {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </FormControl>
-                  <FormControl id="notes" w={["85%", "100%"]}>
+                  <FormControl id="phoneNumber" isRequired w={["85%", "100%"]}>
+                    <Input
+                      variant="flushed"
+                      placeholder="Phone Number"
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                    />
+                  </FormControl>
+                  <FormControl id="lifestage" isRequired w={["85%", "100%"]}>
+                    <Input
+                      variant="flushed"
+                      placeholder="Campus/Lifestage"
+                      onChange={(e) => setLifestage(e.target.value)}
+                    />
+                  </FormControl>
+                  <FormControl id="notes" isRequired w={["85%", "100%"]}>
                     <Input
                       type="notes"
-                      placeholder="Notes and remarks (Optional)"
+                      placeholder="Notes and remarks"
                       variant="flushed"
                       onChange={(e) => setNotes(e.target.value)}
                       _autofill={{

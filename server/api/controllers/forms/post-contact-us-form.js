@@ -16,15 +16,26 @@ module.exports = {
       type: "string",
       required: true,
     },
+    phoneNumber: {
+      description: "phone number of the person filling the form",
+      type: "string",
+      required: true,
+    },
+    lifestage: {
+      description: "campus/lifestage of the person filling the form",
+      type: "string",
+      required: true,
+    },
     notes: {
       description: "additional notes",
       type: "string",
+      required: true,
     },
   },
 
   exits: {},
 
-  fn: async function ({ email, name, notes }, exits) {
+  fn: async function ({ email, name, phoneNumber, lifestage, notes }, exits) {
     try {
       await sails.helpers.sendTemplateEmail.with({
         to: sails.config.custom.admin.email,
@@ -33,6 +44,8 @@ module.exports = {
         templateData: {
           fullName: name,
           email: email,
+          phoneNumber: phoneNumber,
+          lifestage: lifestage,
           notes: notes,
         },
       });
