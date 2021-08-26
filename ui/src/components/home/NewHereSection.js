@@ -50,6 +50,8 @@ const NewHereSection = () => {
     setPhoneNumber("");
     setLifestage("");
     setNotes("");
+    setPhoneNumber("");
+    setLifestage("");
     setIsBot(true);
     setSubmitted(false);
   };

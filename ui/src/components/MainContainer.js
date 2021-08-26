@@ -106,7 +106,7 @@ const MainContainer = () => {
           permissions={["public"]}
           component={ConnectPage}
         />
-        <PrivateRoute
+        {/* <PrivateRoute
           exact
           path="/give"
           permissions={["public"]}
