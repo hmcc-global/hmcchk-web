@@ -47,6 +47,8 @@ const NewHereSection = () => {
   const resetForm = () => {
     setName("");
     setEmail("");
+    setPhoneNumber("");
+    setLifestage("");
     setNotes("");
     setIsBot(true);
     setSubmitted(false);
@@ -56,7 +58,7 @@ const NewHereSection = () => {
     <>
       <Flex
         w="full"
-        h={["100vh", "100vh", "100vh", "100vh", "75vh"]}
+        h={["100vh", "100vh", "100vh", "100vh", "80vh"]}
         bgImage={`linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${
           process.env.PUBLIC_URL + "/images/home/connect.png"
         })`}
@@ -72,12 +74,12 @@ const NewHereSection = () => {
           style={{ backdropFilter: "blur(7px)" }}
         >
           <Container maxW="container.lg" justifyContent="center" display="flex">
-            <VStack color="white" justify="center" spacing={6}>
+            <VStack color="white" justify="center" spacing={5}>
               <Heading fontSize={["1.3em", "3em"]}>
                 New here? Connect with us
               </Heading>
               <form onSubmit={onSubmit}>
-                <VStack spacing={[6, 4]} alignItems="center">
+                <VStack spacing={[4, 2.5]} alignItems="center">
                   <FormControl id="name" isRequired w={["85%", "100%"]}>
                     <Input
                       variant="flushed"
