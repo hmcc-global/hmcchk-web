@@ -20,6 +20,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Link,
+  LinkOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
@@ -90,7 +91,7 @@ const NavBar = (props) => {
               h="10.5vh"
             >
               <Box position="relative">
-                <Link href="/">
+                <LinkOverlay href="/">
                   <Image
                     h={{
                       base: "3.5vh",
@@ -101,7 +102,7 @@ const NavBar = (props) => {
                     src={process.env.PUBLIC_URL + "/images/ripple_black.svg"}
                     alt="Logo of HMCC"
                   />
-                </Link>
+                </LinkOverlay>
               </Box>
 
               <Stack
