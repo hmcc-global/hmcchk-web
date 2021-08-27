@@ -85,7 +85,7 @@ const NavBar = (props) => {
         >
           <Container maxW="container.lg">
             <Flex
-              justify="space-around"
+              justify={["space-between", "space-around"]}
               align="center"
               fontSize={{ md: "xs", lg: "sm", xl: "md" }}
               h="10.5vh"
