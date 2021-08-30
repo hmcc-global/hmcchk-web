@@ -36,7 +36,8 @@ const generateGoogleCalendarLink = (eventData) => {
 
   let eventDate = DateTime.fromISO(eventData.renderDate.toISO());
 
-  let parsed = DateTime.fromFormat(eventTime, "hh:mm a");
+  let parsed = DateTime.fromFormat(eventTime, "t");
+
   let today = DateTime.now().startOf("day");
   let timeOfDay = parsed.diff(today);
 
