@@ -100,11 +100,11 @@ const VisitUsPage = (props) => {
                 {SUNDAY_CELEBRATION_LOCATION}
                 <br />
                 <Link
-                  href="https://bit.ly/directions-organize"
+                  href="https://tinyurl.com/directions-organize"
                   color="#0E66CC"
                   isExternal
                 >
-                  <Text as="u">bit.ly/directions-organize</Text>
+                  <Text as="u">tinyurl.com/directions-organize</Text>
                 </Link>
               </Text>
               <Spacer />
