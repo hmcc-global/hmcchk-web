@@ -74,9 +74,7 @@ const userDataCleanup = (data) => {
 };
 
 const getUserDataRequest = async (uid) => {
-  return await axios.get("/api/users/get", {
-    userId: uid,
-  });
+  return await axios.get("/api/users/get", { params: { userId: uid } });
 };
 
 const updateUserDataRequest = async (data) => {

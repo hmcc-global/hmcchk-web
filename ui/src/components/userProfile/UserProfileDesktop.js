@@ -69,7 +69,6 @@ const UserProfileDesktop = (props) => {
   const setUserInformationFields = (userData) => {
     for (let key in userData) {
       if (settableDataFields.includes(key)) {
-        console.log(key, userData[key]);
         switch (key) {
           case "fullName":
             let nameParts = userData.fullName.split(" ");
