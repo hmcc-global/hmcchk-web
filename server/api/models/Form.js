@@ -7,6 +7,10 @@ module.exports = {
     formFields: {
       type: "json",
     },
+    isPublished: {
+      type: "boolean",
+      defaultsTo: false,
+    },
     isDeleted: {
       type: "boolean",
       defaultsTo: false,

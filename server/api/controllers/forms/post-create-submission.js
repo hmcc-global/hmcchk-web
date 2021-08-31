@@ -35,19 +35,25 @@ module.exports = {
       // Only do if there is userID
       if (userId) {
         // Update existing submission if it's there
-        let res = await Submission.updateOne({
-          formId: formId,
-          userId: userId,
-        }).set({ submissionData: submissionData });
+        // let res = await Submission.updateOne({
+        //   formId: formId,
+        //   userId: userId,
+        // }).set({ submissionData: submissionData });
 
         // If not, create new submission
-        if (!res) {
-          res = await Submission.create({
-            formId: formId,
-            userId: userId,
-            submissionData: submissionData,
-          }).fetch();
-        }
+        // if (!res) {
+        //   res = await Submission.create({
+        //     formId: formId,
+        //     userId: userId,
+        //     submissionData: submissionData,
+        //   }).fetch();
+        // }
+
+        let res = await Submission.create({
+          formId: formId,
+          userId: userId,
+          submissionData: submissionData,
+        }).fetch();
 
         // Create object and bind it to user
         const submissionObject = {
@@ -61,17 +67,17 @@ module.exports = {
         let temp = user.formSubmitted;
 
         // Check if this is an update operation
-        if (temp) {
-          for (let i in temp) {
-            let item = temp[i];
-            if (
-              item.formId === submissionObject.formId &&
-              item.submissionId === submissionObject.submissionId
-            ) {
-              return exits.success();
-            }
-          }
-        }
+        // if (temp) {
+        //   for (let i in temp) {
+        //     let item = temp[i];
+        //     if (
+        //       item.formId === submissionObject.formId &&
+        //       item.submissionId === submissionObject.submissionId
+        //     ) {
+        //       return exits.success();
+        //     }
+        //   }
+        // }
 
         // Create the submission instead
         if (temp) {
@@ -85,11 +91,28 @@ module.exports = {
           isDeleted: false,
         }).set({ formSubmitted: temp });
 
-        if (updateUserSubmissions != null) {
-          return exits.success();
-        }
+        if (updateUserSubmissions === null) return exits.invalid();
 
-        return exits.invalid();
+        const formRecord = await Form.find().where({
+          id: formId,
+          isDeleted: false,
+          isPublished: true,
+        });
+
+        if (formRecord === null) return exits.invalid();
+
+        // Send confirmation email
+        await sails.helpers.sendTemplateEmail.with({
+          to: user.email,
+          subject: "Successful Submission for " + formRecord[0].formName,
+          template: "email-successful-form-submission",
+          templateData: {
+            fullName: user.fullName,
+            formName: formRecord[0].formName,
+          },
+        });
+
+        return exits.success();
       } else {
         return exits.error("missing user id");
       }

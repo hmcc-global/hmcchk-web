@@ -7,7 +7,7 @@ const styles = {};
 
 const UserFormContainer = (props) => {
   const [formData, setFormData] = useState(null);
-  const { user } = props;
+  const { user, history } = props;
 
   useEffect(() => {
     const populateData = async () => {
@@ -35,6 +35,7 @@ const UserFormContainer = (props) => {
           formImage={formData.formImage}
           formData={formData.formFields}
           user={user}
+          history={history}
         />
       )}
     </Container>

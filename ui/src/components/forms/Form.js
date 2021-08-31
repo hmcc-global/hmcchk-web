@@ -34,7 +34,7 @@ const Form = (props) => {
   const { formId, formName, formDescription, formImage, formData } = props;
   const { register, handleSubmit, control, formState, setValue } = useForm();
   const { errors } = formState;
-  const { user } = props;
+  const { user, history} = props;
 
   const [submissionData, setSubmissionData] = useState(null);
   const [submitStatus, setSubmitStatus] = useState(false);
@@ -77,7 +77,12 @@ const Form = (props) => {
         submissionData: data,
         userId: userId,
       });
-      if (status === 200) setModalOpen(true);
+      if (status === 200) {
+        setModalOpen(true);
+        setTimeout(() => {
+          history.push("/profile");
+        }, 5000);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -90,7 +95,15 @@ const Form = (props) => {
     } else if (!submissionData && user.id && formData.length > 0) {
       if (formData[0].fieldType === "prefill") {
         formData[0].options.forEach((field) => {
-          setValue(field, user[field]);
+          if (field === "address") {
+            setValue("addressFloor", user["address"]["floor"]);
+            setValue("addressFlat", user["address"]["flat"]);
+            setValue("addressStreet", user["address"]["street"]);
+            setValue("addressDistrict", user["address"]["district"]);
+            setValue("addressRegion", user["address"]["region"]);
+          } else {
+            setValue(field, user[field]);
+          }
         });
       }
     }
@@ -386,7 +399,7 @@ const Form = (props) => {
               flex={1}
               textAlign="center"
             >
-              Submitted successfully
+              Submitted successfully, redirecting to profile page soon.
             </Text>
             <Box flex={4}>
               <Center w="100%" h="100%">

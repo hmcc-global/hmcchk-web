@@ -248,6 +248,19 @@ const FormCreator = (props) => {
           <FormControl>
             <Controller
               control={controlPrefill}
+              name="lifestageCheckbox"
+              key="lifestageCheckbox"
+              defaultValue={false}
+              render={({ field: { onChange, value, ref } }) => (
+                <Checkbox onChange={onChange} ref={ref} isChecked={value}>
+                  Lifestage
+                </Checkbox>
+              )}
+            />
+          </FormControl>
+          <FormControl>
+            <Controller
+              control={controlPrefill}
               name="lifeGroupCheckbox"
               key="lifeGroupCheckbox"
               defaultValue={false}

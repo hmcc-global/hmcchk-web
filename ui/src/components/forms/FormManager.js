@@ -15,6 +15,8 @@ import {
   ListItem,
   Box,
   Text,
+  Stack,
+  Badge,
 } from "@chakra-ui/react";
 
 const FormManager = (props) => {
@@ -85,6 +87,20 @@ const FormManager = (props) => {
     }
   };
 
+  const onPublish = async (e) => {
+    try {
+      const formId = String(e.target.value);
+      const formData = formList.find((form) => form.id === formId);
+      await axios.post("/api/forms/post-update-form", {
+        id: formId,
+        formToSave: { isPublished: !formData.isPublished },
+      });
+      getFormListFromDatabase();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const resetFormEditorCallback = async () => {
     setValue("formName", null);
     setValue("formDescription", null);
@@ -121,8 +137,14 @@ const FormManager = (props) => {
         <List>
           {formList.map((formItem) => (
             <ListItem key={formItem.id}>
-              <Box p="2" mb="2" borderRadius="lg" borderWidth="1px">
-                <Text>{formItem.formName}</Text>
+              <Box p="5" mb="2" borderRadius="lg" borderWidth="1px">
+                <Text mb="3">
+                  {" "}
+                  <Badge colorScheme={formItem.isPublished ? "green" : "red"}>
+                    {formItem.isPublished ? "LIVE" : "PRIVATE"}
+                  </Badge>{" "}
+                  {formItem.formName}
+                </Text>
                 <Button
                   ml="1"
                   colorScheme="teal"
@@ -134,10 +156,10 @@ const FormManager = (props) => {
                 <Button
                   ml="1"
                   colorScheme="teal"
-                  onClick={onDelete}
+                  onClick={onPublish}
                   value={formItem.id}
                 >
-                  Delete
+                  {formItem.isPublished ? "Unpublish" : "Publish"}
                 </Button>
                 <Button
                   ml="1"
@@ -146,6 +168,14 @@ const FormManager = (props) => {
                   value={formItem.id}
                 >
                   Public Link
+                </Button>
+                <Button
+                  ml="1"
+                  colorScheme="red"
+                  onClick={onDelete}
+                  value={formItem.id}
+                >
+                  Delete
                 </Button>
               </Box>
             </ListItem>
