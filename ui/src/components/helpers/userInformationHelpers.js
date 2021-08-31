@@ -14,6 +14,7 @@ const settableDataFields = [
   "address",
   "membershipInfo",
   "baptismInfo",
+  "lifeGroup",
 ];
 
 const fixAddress = (data) => {
@@ -73,7 +74,7 @@ const userDataCleanup = (data) => {
 };
 
 const getUserDataRequest = async (uid) => {
-  return await axios.post("/api/users/get", {
+  return await axios.get("/api/users/get", {
     userId: uid,
   });
 };
