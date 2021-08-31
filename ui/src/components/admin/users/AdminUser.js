@@ -31,6 +31,7 @@ import ViewUser from "./ViewUserComponent";
 import EditUser from "./EditUserComponent";
 import DeleteUser from "./DeleteUserComponent";
 import ArrayToExcelButton from "../ArrayToExcelButton";
+import { useDispatch } from "react-redux";
 
 const smVariant = { navigation: "drawer", navigationButton: true };
 const mdVariant = { navigation: "sidebar", navigationButton: false };
@@ -38,6 +39,7 @@ const mdVariant = { navigation: "sidebar", navigationButton: false };
 export default function AdminUser(props) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
+  const dispatch = useDispatch();
 
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 

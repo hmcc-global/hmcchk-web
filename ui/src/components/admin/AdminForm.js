@@ -9,15 +9,17 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
 
 import SidebarWithHeader from "./navigation/Sidebar";
 
 const smVariant = { navigation: "drawer", navigationButton: true };
 const mdVariant = { navigation: "sidebar", navigationButton: false };
 
-export default function AdminForm() {
+export default function AdminForm(props) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
+  const dispatch = useDispatch();
 
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
