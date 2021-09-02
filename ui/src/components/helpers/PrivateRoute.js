@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { updateAxiosClient } from "./customAxios";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import UserProfileContainer from "../userProfile/UserProfileContainer";
+import CompleteUserProfileContainer from "../userProfile/CompleteUserProfile";
 
 const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
   const user = useSelector((state) => state.user);
@@ -52,6 +54,23 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
               return <HomeContainer {...props} user={userObj} />;
             }
           } else if (access) {
+            switch (props.location.pathname) {
+              case "/complete-profile":
+                if (userObj.hasFilledProfileForm) {
+                  props.history.push("/profile");
+                  return <UserProfileContainer {...props} user={userObj} />;
+                }
+                break;
+              case "/profile":
+                if (!userObj.hasFilledProfileForm) {
+                  props.history.push("/complete-profile");
+                  return (
+                    <CompleteUserProfileContainer {...props} user={userObj} />
+                  );
+                }
+                break;
+            }
+
             return <Component {...props} user={userObj} />;
           } else {
             return <NoMatch user={userObj} />;

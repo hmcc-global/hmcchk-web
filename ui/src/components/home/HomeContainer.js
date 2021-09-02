@@ -14,7 +14,6 @@ const HomeContainer = (props) => {
   return (
     <div>
       <h1>HOME</h1>
-
       <Button onClick={onLogout}>LOGOUT</Button>
     </div>
   );
