@@ -25,7 +25,6 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { CheckCircleIcon } from "@chakra-ui/icons";
-import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import {
@@ -42,6 +41,8 @@ import {
   userDataCleanup,
   getUserDataRequest,
   updateUserDataRequest,
+  getPublicFormsRequest,
+  generatePublishedFormLinks,
 } from "../helpers/userInformationHelpers";
 
 const UserProfileDesktop = (props) => {
@@ -49,6 +50,7 @@ const UserProfileDesktop = (props) => {
   const { errors } = formState;
   const { user } = props;
   const [userData, setUserData] = useState(null);
+  const [formList, setFormList] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
 
   const onModalClose = (e) => {
@@ -63,6 +65,14 @@ const UserProfileDesktop = (props) => {
         setUserData(data[0]);
         setUserInformationFields(data[0]);
       }
+    }
+  };
+
+  const fetchPublishedForms = async () => {
+    const { data, status } = await getPublicFormsRequest();
+
+    if (status === 200) {
+      setFormList([...data]);
     }
   };
 
@@ -128,6 +138,7 @@ const UserProfileDesktop = (props) => {
 
   useEffect(async () => {
     await fetchUserData();
+    await fetchPublishedForms();
   }, []);
 
   return (
@@ -182,7 +193,7 @@ const UserProfileDesktop = (props) => {
                   },
                 }}
               >
-                Account Information
+                Manage Account
               </Tab>
               <Tab
                 w="fit-content"
@@ -220,18 +231,27 @@ const UserProfileDesktop = (props) => {
             borderRadius="4px"
           >
             <TabPanel p="7%">
-              <FormControl>
-                <FormLabel color="#2C5282">
-                  Your Registered Email Address
-                </FormLabel>
-                <Input
-                  size="sm"
-                  borderRadius="5"
-                  readOnly
-                  {...register("email")}
-                />
-              </FormControl>
-              {/* {user.password !== "" && (
+              <Stack direction="column" spacing="5">
+                <FormControl>
+                  <FormLabel color="#2C5282">
+                    Your Registered Email Address
+                  </FormLabel>
+                  <Input
+                    size="sm"
+                    borderRadius="5"
+                    readOnly
+                    {...register("email")}
+                  />
+                </FormControl>
+                {formList && formList.length > 0 && (
+                  <Box>
+                    <Text fontWeight="500" color="#2C5282">
+                      Available Signup Links
+                    </Text>
+                    {generatePublishedFormLinks(formList)}
+                  </Box>
+                )}
+                {/* {user.password !== "" && (
                 <Button
                   size="sm"
                   mt="8"
@@ -243,6 +263,7 @@ const UserProfileDesktop = (props) => {
                   Change Password
                 </Button>
               )} */}
+              </Stack>
             </TabPanel>
             <TabPanel p="7%">
               <Stack spacing="2%">

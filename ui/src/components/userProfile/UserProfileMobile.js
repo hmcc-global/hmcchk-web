@@ -42,6 +42,8 @@ import {
   userDataCleanup,
   getUserDataRequest,
   updateUserDataRequest,
+  getPublicFormsRequest,
+  generatePublishedFormLinks,
 } from "../helpers/userInformationHelpers";
 
 const UserProfileMobile = (props) => {
@@ -49,6 +51,7 @@ const UserProfileMobile = (props) => {
   const { errors } = formState;
   const { user } = props;
   const [userData, setUserData] = useState(null);
+  const [formList, setFormList] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
 
   const onModalClose = (e) => {
@@ -63,6 +66,14 @@ const UserProfileMobile = (props) => {
         setUserData(data[0]);
         setUserInformationFields(data[0]);
       }
+    }
+  };
+
+  const fetchPublishedForms = async () => {
+    const { data, status } = await getPublicFormsRequest();
+
+    if (status === 200) {
+      setFormList([...data]);
     }
   };
 
@@ -128,6 +139,7 @@ const UserProfileMobile = (props) => {
 
   useEffect(async () => {
     await fetchUserData();
+    await fetchPublishedForms();
   }, []);
 
   return (
@@ -175,7 +187,7 @@ const UserProfileMobile = (props) => {
               fontWeight="500"
               _selected={{ borderColor: "#0628A3", color: "#0628A3" }}
             >
-              Account Information
+              Manage Account
             </Tab>
             <Tab
               p="0.5"
@@ -197,29 +209,39 @@ const UserProfileMobile = (props) => {
 
           <TabPanels>
             <TabPanel p="7%">
-              <Center mt="15%">
-                <FormControl>
-                  <FormLabel color="#2C5282">
-                    Your Registered Email Address
-                  </FormLabel>
-                  <Input
-                    size="sm"
-                    borderRadius="5"
-                    readOnly
-                    {...register("email")}
-                  />
-                </FormControl>
-              </Center>
-              {/* <Button
-                size="sm"
-                mt="8"
-                color="#0628A3"
-                borderColor="#0628A3"
-                borderRadius="10"
-                variant="outline"
-              >
-                Change Password
-              </Button> */}
+              <Stack direction="column" spacing="5">
+                <Center mt="15%">
+                  <FormControl>
+                    <FormLabel color="#2C5282">
+                      Your Registered Email Address
+                    </FormLabel>
+                    <Input
+                      size="sm"
+                      borderRadius="5"
+                      readOnly
+                      {...register("email")}
+                    />
+                  </FormControl>
+                </Center>
+                {formList && formList.length > 0 && (
+                  <Box>
+                    <Text fontWeight="500" color="#2C5282">
+                      Available Signup Links
+                    </Text>
+                    {generatePublishedFormLinks(formList)}
+                  </Box>
+                )}
+                {/* <Button
+                  size="sm"
+                  mt="8"
+                  color="#0628A3"
+                  borderColor="#0628A3"
+                  borderRadius="10"
+                  variant="outline"
+                >
+                  Change Password
+                </Button> */}
+              </Stack>
             </TabPanel>
             <TabPanel p="7%">
               <Center mb="5%">

@@ -115,7 +115,7 @@ const FormManager = (props) => {
 
   const getFormListFromDatabase = async () => {
     try {
-      const { data, status } = await axios.get("/api/forms/get-form");
+      const { data, status } = await axios.get("/api/forms/admin-get-form");
       if (status !== 200) {
         throw Error("Something went wrong with the request");
       }
@@ -126,7 +126,7 @@ const FormManager = (props) => {
   };
 
   return (
-    <Container>
+    <Container size="container.xl">
       <Heading as="h1" size="xl">
         Form Management System
       </Heading>

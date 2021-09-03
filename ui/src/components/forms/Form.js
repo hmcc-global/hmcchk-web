@@ -29,12 +29,20 @@ import {
   ModalFooter,
   VStack,
 } from "@chakra-ui/react";
+import {
+  campusList,
+  countryList,
+  districtList,
+  lifegroupList,
+  lifestageList,
+  regionList,
+} from "../helpers/lists";
 
 const Form = (props) => {
   const { formId, formName, formDescription, formImage, formData } = props;
   const { register, handleSubmit, control, formState, setValue } = useForm();
   const { errors } = formState;
-  const { user, history} = props;
+  const { user, history } = props;
 
   const [submissionData, setSubmissionData] = useState(null);
   const [submitStatus, setSubmitStatus] = useState(false);
@@ -95,7 +103,7 @@ const Form = (props) => {
     } else if (!submissionData && user.id && formData.length > 0) {
       if (formData[0].fieldType === "prefill") {
         formData[0].options.forEach((field) => {
-          if (field === "address") {
+          if (field === "address" && user["address"]) {
             setValue("addressFloor", user["address"]["floor"]);
             setValue("addressFlat", user["address"]["flat"]);
             setValue("addressStreet", user["address"]["street"]);
@@ -138,6 +146,45 @@ const Form = (props) => {
       // Generate the field itself
       let field = null;
       switch (fieldName) {
+        case "countryOfOrigin":
+          field = (
+            <Select
+              placeholder="Country of Origin"
+              {...register("countryOfOrigin", { required: true })}
+            >
+              {countryList.map((item) => {
+                return <option key={"co" + item}>{item}</option>;
+              })}
+            </Select>
+          );
+          break;
+        case "lifestage":
+          field = (
+            <Select {...register("lifestage", { required: true })}>
+              {lifestageList.map((item) => {
+                return <option key={"li" + item}>{item}</option>;
+              })}
+            </Select>
+          );
+          break;
+        case "campus":
+          field = (
+            <Select {...register("campus", { required: true })}>
+              {campusList.map((item) => {
+                return <option key={"ca" + item}>{item}</option>;
+              })}
+            </Select>
+          );
+          break;
+        case "lifeGroup":
+          field = (
+            <Select {...register("lifeGroup", { required: true })}>
+              {lifegroupList.map((item) => {
+                return <option key={"lg" + item}>{item}</option>;
+              })}
+            </Select>
+          );
+          break;
         case "address":
           field = (
             <Stack direction={"column"}>
@@ -167,8 +214,9 @@ const Form = (props) => {
                     placeholder="District"
                     {...register("addressDistrict", { required: true })}
                   >
-                    <option value="Yau Tsim Mong">Yau Tsim Mong</option>
-                    <option value="Islands">Islands</option>
+                    {districtList.map((item) => {
+                      return <option key={"di" + item}>{item}</option>;
+                    })}
                   </Select>
                 </Box>
               </Stack>
@@ -178,9 +226,9 @@ const Form = (props) => {
                     placeholder="Region"
                     {...register("addressRegion", { required: true })}
                   >
-                    <option value="Kowloon">Kowloon</option>
-                    <option value="Hong Kong Island">Hong Kong Island</option>
-                    <option value="New Territories">New Territories</option>
+                    {regionList.map((item) => {
+                      return <option key={"re" + item}>{item}</option>;
+                    })}
                   </Select>
                 </Box>
                 <Box flex={1} display={["none", "flex"]}></Box>

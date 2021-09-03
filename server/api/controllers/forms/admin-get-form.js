@@ -2,7 +2,7 @@ module.exports = {
   friendlyName: "Get form route for public use",
 
   description:
-    "Gets all forms if id is not specified, finds a specific one otherwise but checks if the form is published",
+    "Gets all forms if id is not specified, finds a specific one otherwise",
 
   inputs: {
     id: {
@@ -17,7 +17,6 @@ module.exports = {
     try {
       const data = await sails.helpers.forms.getForm({
         id: id,
-        isPublished: true,
         isDeleted: false,
       });
       return exits.success(data);
