@@ -76,7 +76,6 @@ const Form = (props) => {
   };
 
   const postSubmission = async (formId, data, userId) => {
-    console.log(data);
     if (!userId) return;
     setSubmitStatus(true);
     try {
@@ -89,7 +88,7 @@ const Form = (props) => {
         setModalOpen(true);
         setTimeout(() => {
           history.push("/profile");
-        }, 5000);
+        }, 3000);
       }
     } catch (err) {
       console.log(err);
@@ -445,6 +444,7 @@ const Form = (props) => {
               fontWeight="700"
               mt={6}
               flex={1}
+              p={5}
               textAlign="center"
             >
               Submitted successfully, redirecting to profile page soon.

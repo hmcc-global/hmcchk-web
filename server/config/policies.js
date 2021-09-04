@@ -40,6 +40,7 @@ module.exports.policies = {
   "/forms/post-update-form": ["isLoggedIn", "isAdmin"],
   "/forms/post-delete-form": ["isLoggedIn", "isAdmin"],
   "/forms/admin-get-form": ["isAdmin"],
+  "/forms/get-submission": ["isAdmin"],
 
   // Media
   "media/*": true,

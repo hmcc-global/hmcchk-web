@@ -31,6 +31,7 @@ module.exports.routes = {
 
   // Submission APIs
   "post /api/forms/post-create-submission": "forms/post-create-submission",
+  "get /api/forms/get-submission": "forms/get-submission",
 
   // Announcement APIs
   "get /api/announcements/get-announcements": "announcements/get-announcements",

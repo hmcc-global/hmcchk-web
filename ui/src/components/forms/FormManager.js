@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { customAxios as axios } from "../helpers/customAxios";
 import FormCreator from "./FormCreator";
+import { arrayToExcel } from "../helpers/arrayToExcel";
+import { DateTime } from "luxon";
 import {
   FormControl,
   FormLabel,
@@ -101,6 +103,39 @@ const FormManager = (props) => {
     }
   };
 
+  const onDownload = async (e) => {
+    try {
+      const formId = String(e.target.value);
+      const res = await axios.get("/api/forms/get-submission", {
+        params: { formId: formId },
+      });
+      let reconstructedData = res.data.map((formItem) => {
+        let rowObj = {
+          _submissionTime: DateTime.fromISO(formItem.createdAt).toLocaleString(
+            DateTime.DATETIME_FULL
+          ),
+        };
+        for (let key in formItem.submissionData) {
+          let fieldData = formItem.submissionData[key];
+          if (key === "address") {
+            fieldData = [
+              fieldData.flat,
+              fieldData.floor,
+              fieldData.street,
+              fieldData.district,
+              fieldData.region,
+            ].join(" ");
+          }
+          rowObj[key] = fieldData;
+        }
+        return rowObj;
+      });
+      arrayToExcel.convertArrayToTable(reconstructedData, "output.xls");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const resetFormEditorCallback = async () => {
     setValue("formName", null);
     setValue("formDescription", null);
@@ -126,7 +161,7 @@ const FormManager = (props) => {
   };
 
   return (
-    <Container size="container.xl">
+    <Container maxW="container.lg">
       <Heading as="h1" size="xl">
         Form Management System
       </Heading>
@@ -168,6 +203,14 @@ const FormManager = (props) => {
                   value={formItem.id}
                 >
                   Public Link
+                </Button>
+                <Button
+                  ml="1"
+                  colorScheme="teal"
+                  onClick={onDownload}
+                  value={formItem.id}
+                >
+                  Download Data
                 </Button>
                 <Button
                   ml="1"
