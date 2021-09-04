@@ -17,8 +17,8 @@ import {
   ListItem,
   Box,
   Text,
-  Stack,
   Badge,
+  Stack,
 } from "@chakra-ui/react";
 
 const FormManager = (props) => {
@@ -51,7 +51,7 @@ const FormManager = (props) => {
   const onEdit = async (e) => {
     try {
       const formId = String(e.target.value);
-      const { data, status } = await axios.get("/api/forms/get-form", {
+      const { data, status } = await axios.get("/api/forms/admin-get-form", {
         params: { id: formId },
       });
 
@@ -161,7 +161,7 @@ const FormManager = (props) => {
   };
 
   return (
-    <Container maxW="container.lg">
+    <Container maxW="container.lg" pt={10}>
       <Heading as="h1" size="xl">
         Form Management System
       </Heading>
@@ -180,46 +180,43 @@ const FormManager = (props) => {
                   </Badge>{" "}
                   {formItem.formName}
                 </Text>
-                <Button
-                  ml="1"
-                  colorScheme="teal"
-                  onClick={onEdit}
-                  value={formItem.id}
-                >
-                  Edit
-                </Button>
-                <Button
-                  ml="1"
-                  colorScheme="teal"
-                  onClick={onPublish}
-                  value={formItem.id}
-                >
-                  {formItem.isPublished ? "Unpublish" : "Publish"}
-                </Button>
-                <Button
-                  ml="1"
-                  colorScheme="teal"
-                  onClick={onClickRedirect}
-                  value={formItem.id}
-                >
-                  Public Link
-                </Button>
-                <Button
-                  ml="1"
-                  colorScheme="teal"
-                  onClick={onDownload}
-                  value={formItem.id}
-                >
-                  Download Data
-                </Button>
-                <Button
-                  ml="1"
-                  colorScheme="red"
-                  onClick={onDelete}
-                  value={formItem.id}
-                >
-                  Delete
-                </Button>
+                <Stack direction={["column", "row"]} spacing={1}>
+                  <Button
+                    colorScheme="teal"
+                    onClick={onEdit}
+                    value={formItem.id}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    colorScheme="teal"
+                    onClick={onPublish}
+                    value={formItem.id}
+                  >
+                    {formItem.isPublished ? "Unpublish" : "Publish"}
+                  </Button>
+                  <Button
+                    colorScheme="teal"
+                    onClick={onClickRedirect}
+                    value={formItem.id}
+                  >
+                    Public Link
+                  </Button>
+                  <Button
+                    colorScheme="teal"
+                    onClick={onDownload}
+                    value={formItem.id}
+                  >
+                    Download Data
+                  </Button>
+                  <Button
+                    colorScheme="red"
+                    onClick={onDelete}
+                    value={formItem.id}
+                  >
+                    Delete
+                  </Button>
+                </Stack>
               </Box>
             </ListItem>
           ))}

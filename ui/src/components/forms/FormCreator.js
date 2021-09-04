@@ -381,7 +381,7 @@ const FormCreator = (props) => {
                 <Button mt={4} value={i + 1} onClick={onEdit}>
                   Edit
                 </Button>
-                <Button mt={4} onClick={onDelete}>
+                <Button mt={4} value={i + 1} onClick={onDelete}>
                   Delete
                 </Button>
               </ButtonGroup>
