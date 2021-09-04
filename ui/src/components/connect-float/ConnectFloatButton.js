@@ -23,7 +23,7 @@ const ConnectFloatButton = (props) => {
         icon={
           <HStack
             position="absolute"
-            right={-95}
+            right={-100}
             className="content"
             transition="all 0.7s"
           >
