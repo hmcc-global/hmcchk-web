@@ -65,7 +65,7 @@ module.exports.custom = {
 
   // Whether to require proof of email address ownership any time a new user
   // signs up, or when an existing user attempts to change their email address.
-  verifyEmailAddresses: true,
+  verifyEmailAddresses: false,
   emailProofTokenTTL: 60 * 60 * 1000, // 1 hour
   passwordResetTokenTTL: 60 * 60 * 1000, // 1 hour
   tokenExpiryHours: 1,
