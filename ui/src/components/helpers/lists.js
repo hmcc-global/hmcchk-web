@@ -22,15 +22,17 @@ const ministryTeamList = [
 
 const lifegroupList = [
   "Not in a LIFE Group",
-  "BBB",
-  "DONKI",
-  "Drippin",
-  "Yeet Hay",
-  "GLOW UP",
-  "WASABAE",
-  "Refresh",
-  "GnT",
-  "SWAT",
+  "HKUST Tuesday (Charissa)",
+  "HKUST Tuesday (Yuk)",
+  "HKUST Wednesday",
+  "PolyU Tuesday",
+  "PolyU Wednesday",
+  "HKU", 
+  "CUHK",
+  "BCTU",
+  "Focus Tuesday (Central)",
+  "Focus Tuesday (Jordan)",
+  "Focus Wednesday",
 ];
 
 const districtList = [
