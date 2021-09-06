@@ -21,7 +21,12 @@ import {
   Button,
   Link,
   Input,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalFooter,
 } from "@chakra-ui/react";
+import { CheckCircleIcon } from "@chakra-ui/icons";
 import { lifestageList, countryList } from "../helpers/lists";
 
 const Signup = (props) => {
@@ -32,16 +37,12 @@ const Signup = (props) => {
     setValue,
     formState: { errors, touchedFields },
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-  };
 
   const googleEmail = props.history.location.state?.email;
   const googleFullName = props.history.location.state?.fullName;
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [error, setError] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     if (googleEmail) {
@@ -54,7 +55,7 @@ const Signup = (props) => {
   }, []);
 
   const onChangeReCAPTCHA = (value) => {
-    console.log("Captcha value:", value);
+    console.log("Captcha cleared");
   };
 
   const inputBox = {
@@ -100,7 +101,13 @@ const Signup = (props) => {
         lifestage: data.lifestage,
         phoneNumber: data.phoneNumber,
       });
-      history.push("/login");
+      if (payload.status === 200) {
+        setModalOpen(true);
+        setTimeout(() => {
+          history.push("/login");
+        }, 3000);
+      }
+      // history.push("/login");
     } catch (err) {
       if (err.response && err.response.status === 409) {
         console.log("EMAIL already exists");
@@ -134,6 +141,31 @@ const Signup = (props) => {
 
   return (
     <>
+      <Modal isOpen={modalOpen}>
+        <ModalOverlay />
+        <ModalContent borderRadius="20">
+          <VStack>
+            <Text
+              color="#79B71A"
+              fontSize="2xl"
+              fontWeight="700"
+              mt={6}
+              flex={1}
+              p={5}
+              textAlign="center"
+            >
+              Account created successfully, redirecting you to the login page.
+              You can now try to login!
+            </Text>
+            <Box flex={4}>
+              <Center w="100%" h="100%">
+                <CheckCircleIcon mt={5} w="70%" h="70%" color="#79B71A" />
+              </Center>
+            </Box>
+          </VStack>
+          <ModalFooter />
+        </ModalContent>
+      </Modal>
       <Stack background="#2C5282" color="white" padding="20px">
         <Flex>
           <Box>
@@ -351,7 +383,7 @@ const Signup = (props) => {
                       {errors.phoneNumber.message}
                     </Text>
                   )}
-                  <Text>Country </Text>
+                  <Text>Country of Origin</Text>
                   <Select
                     color="black"
                     bg="white"
@@ -389,11 +421,9 @@ const Signup = (props) => {
                     isInvalid={errors["lifestage"]}
                     placeholder="Please fill in this field"
                   >
-                    {
-                    lifestageList.map((lifestage) => (
+                    {lifestageList.map((lifestage) => (
                       <option value={lifestage}>{lifestage}</option>
-                    ))
-                    }
+                    ))}
                   </Select>
                   {errors.lifestage && (
                     <Text
