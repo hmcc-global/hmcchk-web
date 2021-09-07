@@ -8,7 +8,7 @@ module.exports = {
       type: "string",
       required: true,
     },
-    params: {
+    timeRange: {
       type: "json",
     },
   },
@@ -26,9 +26,21 @@ module.exports = {
     },
   },
 
-  fn: async function ({ formId, params }, exits) {
+  fn: async function ({ formId, timeRange }, exits) {
     try {
-      const data = await Submission.find({ formId: formId, isDeleted: false })
+      let whereClause = {
+        formId: formId,
+        isDeleted: false,
+      };
+      if (timeRange) {
+        let tr = JSON.parse(timeRange);
+        whereClause["createdAt"] = {
+          ">=": new Date(tr.start),
+          "<=": new Date(tr.end),
+        };
+      }
+
+      const data = await Submission.find(whereClause);
       return exits.success(data);
     } catch (err) {
       sails.log(err);

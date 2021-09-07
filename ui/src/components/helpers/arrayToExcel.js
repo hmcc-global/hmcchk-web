@@ -2,33 +2,33 @@ export const arrayToExcel = (function () {
   //STEP 2: Append Table data to Spreadsheet XML Template.
   const createXMLTable = (table, fileName) => {
     const xmlTable = `
-        <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"
-            xmlns="http://www.w3.org/TR/REC-html40"
-        >
-           <meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"/>
-           <head>
-              <xml>
-                <x:ExcelWorkbook>
-                    <x:ExcelWorksheets>
-                        <x:ExcelWorksheet>
-                            <x:Name>${fileName}</x:Name>
-                            <x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions>
-                        </x:ExcelWorksheet>
-                    </x:ExcelWorksheets>
-                </x:ExcelWorkbook>
-              </xml>
-           </head>
-           <body>
-             ${table}
-           </body>
-        </html> `;
+      <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns="http://www.w3.org/TR/REC-html40"
+      >
+        <meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"/>
+        <head>
+          <xml>
+            <x:ExcelWorkbook>
+              <x:ExcelWorksheets>
+                <x:ExcelWorksheet>
+                  <x:Name>${fileName}</x:Name>
+                  <x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions>
+                </x:ExcelWorksheet>
+              </x:ExcelWorksheets>
+            </x:ExcelWorkbook>
+          </xml>
+        </head>
+        <body>
+          ${table}
+        </body>
+      </html> `;
     return xmlTable;
   };
 
   //STEP 3: Create fileURL from XML template for download
   const createFileUrl = (xmlTable) => {
     const tableBlob = new Blob([xmlTable], {
-      type: "application/vnd.ms-excel;base64,",
+      type: "application/vnd.ms-excel;utf-8,",
     });
     const downloadURL = URL.createObjectURL(tableBlob);
     return downloadURL;
@@ -38,7 +38,7 @@ export const arrayToExcel = (function () {
   const downloadFile = (downloadURL, fileName) => {
     const downloadLink = document.createElement("a");
     document.body.appendChild(downloadLink);
-    downloadLink.download = fileName;
+    downloadLink.download = fileName + ".xls";
     downloadLink.href = downloadURL;
     downloadLink.click();
   };

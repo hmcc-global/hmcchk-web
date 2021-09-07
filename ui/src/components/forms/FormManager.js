@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { customAxios as axios } from "../helpers/customAxios";
 import FormCreator from "./FormCreator";
-import { arrayToExcel } from "../helpers/arrayToExcel";
-import { DateTime } from "luxon";
 import {
   FormControl,
   FormLabel,
@@ -20,13 +18,18 @@ import {
   Badge,
   Stack,
 } from "@chakra-ui/react";
+import FormDataDownloader from "./FormDataDownloader";
 
 const FormManager = (props) => {
   const { register, reset, handleSubmit, setValue, formState } = useForm();
+
   const [formName, setFormName] = useState(null);
   const [formDescription, setFormDescription] = useState(null);
   const [formImage, setFormImage] = useState(null);
   const [editFormData, setEditFormData] = useState(null);
+  const [formId, setFormId] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formList, setFormList] = useState([]);
   const history = useHistory();
   const { user } = props;
@@ -50,9 +53,9 @@ const FormManager = (props) => {
 
   const onEdit = async (e) => {
     try {
-      const formId = String(e.target.value);
+      setIsLoading(true);
       const { data, status } = await axios.get("/api/forms/admin-get-form", {
-        params: { id: formId },
+        params: { id: e.target.value },
       });
 
       if (status !== 200) {
@@ -68,6 +71,7 @@ const FormManager = (props) => {
       setFormDescription(data[0].formDescription);
       setFormImage(data[0].formImage);
       setEditFormData(data[0]);
+      setIsLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -79,11 +83,14 @@ const FormManager = (props) => {
 
   const onDelete = async (e) => {
     try {
-      const formId = String(e.target.value);
-      await axios.post("/api/forms/post-delete-form", {
-        id: formId,
-      });
-      getFormListFromDatabase();
+      setIsLoading(true);
+      if (window.confirm("Are you sure you want to delete this?")) {
+        await axios.post("/api/forms/post-delete-form", {
+          id: e.target.value,
+        });
+        getFormListFromDatabase();
+      }
+      setIsLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -91,49 +98,23 @@ const FormManager = (props) => {
 
   const onPublish = async (e) => {
     try {
-      const formId = String(e.target.value);
-      const formData = formList.find((form) => form.id === formId);
+      setIsLoading(true);
+      const id = e.target.value;
+      const formData = formList.find((form) => form.id === id);
       await axios.post("/api/forms/post-update-form", {
-        id: formId,
+        id: id,
         formToSave: { isPublished: !formData.isPublished },
       });
       getFormListFromDatabase();
+      setIsLoading(false);
     } catch (err) {
       console.log(err);
     }
   };
 
   const onDownload = async (e) => {
-    try {
-      const formId = String(e.target.value);
-      const res = await axios.get("/api/forms/get-submission", {
-        params: { formId: formId },
-      });
-      let reconstructedData = res.data.map((formItem) => {
-        let rowObj = {
-          _submissionTime: DateTime.fromISO(formItem.createdAt).toLocaleString(
-            DateTime.DATETIME_FULL
-          ),
-        };
-        for (let key in formItem.submissionData) {
-          let fieldData = formItem.submissionData[key];
-          if (key === "address") {
-            fieldData = [
-              fieldData.flat,
-              fieldData.floor,
-              fieldData.street,
-              fieldData.district,
-              fieldData.region,
-            ].join(" ");
-          }
-          rowObj[key] = fieldData;
-        }
-        return rowObj;
-      });
-      arrayToExcel.convertArrayToTable(reconstructedData, "output.xls");
-    } catch (err) {
-      console.log(err);
-    }
+    setIsOpen(true);
+    setFormId(e.target.value);
   };
 
   const resetFormEditorCallback = async () => {
@@ -162,6 +143,11 @@ const FormManager = (props) => {
 
   return (
     <Container maxW="container.lg" pt={10}>
+      <FormDataDownloader
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        formId={formId}
+      />
       <Heading as="h1" size="xl">
         Form Management System
       </Heading>
@@ -185,6 +171,7 @@ const FormManager = (props) => {
                     colorScheme="teal"
                     onClick={onEdit}
                     value={formItem.id}
+                    isLoading={isLoading}
                   >
                     Edit
                   </Button>
@@ -192,6 +179,7 @@ const FormManager = (props) => {
                     colorScheme="teal"
                     onClick={onPublish}
                     value={formItem.id}
+                    isLoading={isLoading}
                   >
                     {formItem.isPublished ? "Unpublish" : "Publish"}
                   </Button>
@@ -213,6 +201,7 @@ const FormManager = (props) => {
                     colorScheme="red"
                     onClick={onDelete}
                     value={formItem.id}
+                    isLoading={isLoading}
                   >
                     Delete
                   </Button>
