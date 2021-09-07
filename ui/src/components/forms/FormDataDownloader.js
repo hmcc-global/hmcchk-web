@@ -25,6 +25,7 @@ const FormDataDownloader = (props) => {
 
   const onClose = () => {
     setIsOpen(false);
+    reset();
   };
 
   const onDownload = async (data, e) => {
@@ -60,7 +61,7 @@ const FormDataDownloader = (props) => {
           rowObj[key] = fieldData;
         }
         return rowObj;
-      }); 
+      });
       if (reconstructedData.length)
         arrayToExcel.convertArrayToTable(reconstructedData, "output");
     } catch (err) {
@@ -80,7 +81,7 @@ const FormDataDownloader = (props) => {
             <Stack direction="column" spacing="4">
               <Text>
                 Date Range (leave blank or fill both start and end date). Leave
-                a day space on the end date, e.g.
+                a day space on the end date, e.g. from 15/09/2021 to 16/09/2021
               </Text>
               <FormControl>
                 <FormLabel>Start Date</FormLabel>
