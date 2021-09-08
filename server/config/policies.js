@@ -36,11 +36,11 @@ module.exports.policies = {
   "cache/*": ["isLoggedIn", "isAdmin"],
 
   // Forms
-  "/forms/post-create-form": ["isLoggedIn", "isAdmin"],
-  "/forms/post-update-form": ["isLoggedIn", "isAdmin"],
-  "/forms/post-delete-form": ["isLoggedIn", "isAdmin"],
-  "/forms/admin-get-form": ["isAdmin"],
-  "/forms/get-submission": ["isAdmin"],
+  "forms/post-create-form": ["isLoggedIn", "isAdmin"],
+  "forms/post-update-form": ["isLoggedIn", "isAdmin"],
+  "forms/post-delete-form": ["isLoggedIn", "isAdmin"],
+  "forms/admin-get-form": ["isLoggedIn", "isAdmin"],
+  "forms/get-submission": ["isLoggedIn", "isAdmin"],
 
   // Media
   "media/*": true,

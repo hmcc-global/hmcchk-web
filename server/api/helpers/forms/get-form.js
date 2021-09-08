@@ -16,7 +16,6 @@ module.exports = {
   fn: async function ({ params }, exits) {
     try {
       const data = await Form.find().where(params);
-      console.log(data);
       return exits.success(data);
     } catch (err) {
       sails.log(err);
