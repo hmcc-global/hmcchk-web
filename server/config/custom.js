@@ -32,31 +32,31 @@ module.exports.custom = {
   // stripeSecret: 'sk_test_Zzd814nldl91104qor5911gjald',
   // …
   sermons: {
-    host: "https://hongkong.hmcc.net/wp-json/wp/v2/wpfc_sermon",
+    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/wpfc_sermon",
   },
 
   speakers: {
-    host: "https://hongkong.hmcc.net/wp-json/wp/v2/wpfc_preacher",
+    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/wpfc_preacher",
   },
 
   sermonSeries: {
-    host: "https://hongkong.hmcc.net/wp-json/wp/v2/wpfc_sermon_series",
+    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/wpfc_sermon_series",
   },
 
   serviceTypes: {
-    host: "https://hongkong.hmcc.net/wp-json/wp/v2/wpfc_service_type",
+    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/wpfc_service_type",
   },
 
   media: {
-    host: "https://hongkong.hmcc.net/wp-json/wp/v2/media",
+    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/media",
   },
 
   announcements: {
-    host: "https://hongkong.hmcc.net/wp-json/wp/v2/posts",
+    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/posts",
   },
 
   pages: {
-    host: "https://hongkong.hmcc.net/wp-json/wp/v2/pages",
+    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/pages",
   },
 
   // Whether to require proof of email address ownership any time a new user

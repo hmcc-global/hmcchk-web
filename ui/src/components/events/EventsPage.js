@@ -25,7 +25,8 @@ const EventsPage = (props) => {
       if (status === 200) {
         const filtered = data.filter((item) => {
           if (item.endDate) {
-            const endDate = new DateTime.fromISO(item.endDate);
+            // Add one day to offset end date to end of day
+            let endDate = new DateTime.fromISO(item.endDate).plus({ days: 1 });
             const renderDate = getRenderDate(
               item.startDate,
               item.endDate,
