@@ -5,6 +5,7 @@ import {
   HStack,
   Image,
   VStack,
+  Heading,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -76,9 +77,12 @@ const EventsSectionCard = (props) => {
     <>
       <Box borderRadius={10} w={width} h={height} onClick={onOpen}>
         <VStack justifyContent="space-between">
-          <AspectRatio mb="5" width="full" ratio={16 / 9}>
+          <AspectRatio width="full" ratio={16 / 9}>
             <Image borderRadius={10} objectFit="cover" src={event.imageUrl} />
           </AspectRatio>
+          <Heading maxWidth={["3xs","lg"]} fontSize={["sm", "3xl"]} color="black" isTruncated>
+            {event.title}
+          </Heading>
           <HStack direction="space-between" spacing={[2, 6]}>
             <Button
               as={Link}

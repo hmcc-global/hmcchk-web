@@ -58,7 +58,7 @@ const NewHereSection = () => {
     <>
       <Flex
         w="full"
-        h={["100vh", "100vh", "100vh", "100vh", "80vh"]}
+        h="100vh"
         bgImage={`linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${
           process.env.PUBLIC_URL + "/images/home/connect.png"
         })`}
