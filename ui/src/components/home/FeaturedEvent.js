@@ -31,7 +31,7 @@ const FeaturedEvent = (props) => {
           mt={5}
           w={["100vw", "100vw", "100vw", "65vw", "100vw", "100vw"]}
           h="auto"
-          src={process.env.PUBLIC_URL + "/images/home/featured.png"}
+          src={process.env.PUBLIC_URL + "/images/home/featured.gif"}
           alt="Featured Event"
         />
       </Box>
