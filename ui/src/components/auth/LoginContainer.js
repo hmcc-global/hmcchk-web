@@ -66,7 +66,6 @@ const LoginContainer = (props) => {
     const { data } = await axios.post("/api/auth/login-google", {
       tokenId: tokenId,
     });
-    console.log(data);
     dispatch(signin(data));
     setInvalidLogin("");
     window.location.reload();

@@ -20,6 +20,10 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
       updateAxiosClient(toVerify);
       return data;
     } catch (err) {
+      if (err.response.data.raw === "token-expired") {
+        localStorage.clear();
+        window.location.reload();
+      }
       return {};
     }
   };
