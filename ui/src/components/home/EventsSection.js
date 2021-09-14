@@ -11,6 +11,9 @@ import {
   Button,
   LinkOverlay,
 } from "@chakra-ui/react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 import { DateTime } from "luxon";
 import { useEffect, useState } from "react";
@@ -22,6 +25,28 @@ const allEventsText = "all events >";
 
 const EventsSection = () => {
   const [events, setEvents] = useState([]);
+
+  const sliderSettings = {
+    adaptiveHeight: true,
+    arrows: false,
+    centerMode: true,
+    dots: false,
+    focusOnSelect: true,
+    infinite: false,
+    slidesPerRow: 1,
+    speed: 500,
+    swipeToSlide: true,
+    variableWidth: true,
+  };
+
+  const sliderStyle = {
+    width : "100%",
+    position : "relative",
+    left : "50%",
+    right : "50%",
+    marginLeft : "-50vw",
+    marginRight : "-50vw",
+  };
 
   const populateData = async () => {
     try {
@@ -68,8 +93,8 @@ const EventsSection = () => {
         marginTop="2em"
       >
         <VStack w="full" alignItems={["flex-start", null]}>
-          <HStack w={[null, "full"]} whiteSpace="nowrap" height="10vh">
-            <Heading fontSize={["2em", "5xl"]} color="black">
+          <HStack w={[null, "full"]} whiteSpace="nowrap" height="10vh" marginBottom="1em">
+            <Heading fontSize={["2em", "5xl"]} color="black" >
               Upcoming Events
             </Heading>
             <chakra.hr
@@ -90,15 +115,16 @@ const EventsSection = () => {
         w="full"
         display="flex"
         justifyContent="flex-start"
+        height="auto"
         overflowX={["auto", "auto", "auto", "auto", "hidden"]}
         overflowY="hidden"
         whiteSpace="nowrap"
-        marginBottom="1.5em"
+        marginBottom={["none", "1.5em"]}
         _hover={{
           overflowX: "auto",
         }}
       >
-        <HStack spacing={4} padding={5} justifyContent="flex-start">
+        <Slider {...sliderSettings} style={sliderStyle}>
           {events.length > 0 &&
             events.map((event, i) => (
               <EventsSectionCard
@@ -108,7 +134,7 @@ const EventsSection = () => {
                 key={"event" + i}
               />
             ))}
-        </HStack>
+        </Slider>
       </Box>
       <Button
         display={["block", "none"]}
