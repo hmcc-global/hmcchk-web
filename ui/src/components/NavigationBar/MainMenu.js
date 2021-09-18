@@ -267,106 +267,70 @@ const MainMenu = ({ login, onClose }) => {
           <VStack color="white" alignItems="flex-start">
             <Flex marginTop="30px" direction="column">
               <VStack alignItems="flex-start">
-                <Accordion allowMultiple>
-                  <AccordionItem borderStyle="none" mb="1vh">
-                    <HStack
-                      flex="1"
-                      textAlign="left"
-                      fontWeight="bold"
-                      fontSize="2xl"
-                      w="50px"
-                    >
-                      <Link href="/visit-us" onClick={onClose}>
-                        Visit
-                      </Link>
-                      <AccordionButton>
-                        <AccordionIcon />
-                      </AccordionButton>
-                    </HStack>
-
-                    <AccordionPanel pb={1} px="0">
+                <Accordion allowMultiple index={[0]}>
+                  <AccordionItem borderStyle="none">
+                    <AccordionButton>
+                      <Box
+                        flex="1"
+                        textAlign="left"
+                        fontWeight="bold"
+                        fontSize="2xl"
+                      >
+                        <Link href="/visit-us" onClick={onClose}>
+                          Visit
+                        </Link>
+                      </Box>
+                    </AccordionButton>
+                    <AccordionPanel pb={4}>
                       <Link href="https://hongkong.sub.hmcc.net/online/">
                         Church Online
                       </Link>
                     </AccordionPanel>
                   </AccordionItem>
-                  <AccordionItem borderStyle="none" mb="1vh">
-                    <HStack
-                      flex="1"
-                      textAlign="left"
-                      fontWeight="bold"
-                      fontSize="2xl"
-                    >
-                      <Link
-                        href="https://hongkong.sub.hmcc.net/about/who-we-are/"
-                        onClick={onClose}
+                  <AccordionItem borderStyle="none">
+                    <AccordionButton>
+                      <Box
+                        marginRight="5px"
+                        textAlign="left"
+                        fontWeight="bold"
+                        fontSize="2xl"
                       >
-                        About
-                      </Link>
-                      <AccordionButton>
-                        <AccordionIcon />
-                      </AccordionButton>
-                    </HStack>
-                    <AccordionPanel pb={1} px="0">
-                      <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
-                        Who We Are
-                      </Link>
-                    </AccordionPanel>
-                    <AccordionPanel pb={1} px="0">
-                      <Link href="https://hongkong.sub.hmcc.net/about/beliefs/">
-                        Beliefs
-                      </Link>
-                    </AccordionPanel>
-                    <AccordionPanel pb={1} px="0">
-                      <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
-                        Our Values
-                      </Link>
-                    </AccordionPanel>
-                    <AccordionPanel pb={1} px="0">
-                      <Link href="https://hongkong.sub.hmcc.net/about/beliefs/">
-                        Statement of Faith
-                      </Link>
-                    </AccordionPanel>
-                    <AccordionPanel pb={1} px="0">
-                      <Link href="https://hongkong.sub.hmcc.net/about/bold-vision/">
-                        BOLD Vision
-                      </Link>
-                    </AccordionPanel>
-                    <AccordionPanel pb={1} px="0">
-                      <Link href="https://hongkong.sub.hmcc.net/about/hmi/">
-                        Harvest Mission International
-                      </Link>
-                    </AccordionPanel>
+                        <Link
+                          href="https://hongkong.sub.hmcc.net/about/who-we-are/"
+                          onClick={onClose}
+                        >
+                          About
+                        </Link>
+                      </Box>
+                    </AccordionButton>
                   </AccordionItem>
-                  <AccordionItem borderStyle="none" mb="1vh">
-                    <HStack
-                      marginRight="5px"
-                      textAlign="left"
-                      fontWeight="bold"
-                      fontSize="2xl"
-                    >
-                      <Link href="/connect" onClick={onClose}>
-                        Connect
-                      </Link>
-                      <AccordionButton>
-                        <AccordionIcon />
-                      </AccordionButton>
-                    </HStack>
-                    <AccordionPanel pb={1} px="0">
-                      <HashLink
-                        to={{ pathname: "/connect", hash: "#ministries" }}
+                  <AccordionItem borderStyle="none">
+                    <AccordionButton>
+                      <Box
+                        marginRight="5px"
+                        textAlign="left"
+                        fontWeight="bold"
+                        fontSize="2xl"
                       >
-                        Ministries
-                      </HashLink>
-                    </AccordionPanel>
-                    <AccordionPanel pb={1} px="0">
-                      <HashLink
-                        to={{ pathname: "/connect", hash: "#lifegroup" }}
-                        onClick={onClose}
+                        <Link href="/connect#ministries" onClick={onClose}>
+                          Connect
+                        </Link>
+                      </Box>
+                    </AccordionButton>
+                  </AccordionItem>
+                  <AccordionItem borderStyle="none">
+                    <AccordionButton>
+                      <Box
+                        flex="1"
+                        textAlign="left"
+                        fontWeight="bold"
+                        fontSize="2xl"
                       >
-                        LIFE Groups
-                      </HashLink>
-                    </AccordionPanel>
+                        <Link href="/events" onClick={onClose}>
+                          Events
+                        </Link>
+                      </Box>
+                    </AccordionButton>
                   </AccordionItem>
 
                   <AccordionItem borderStyle="none">
@@ -377,40 +341,26 @@ const MainMenu = ({ login, onClose }) => {
                         fontWeight="bold"
                         fontSize="2xl"
                       >
-                        Upcoming Sunday Celebration
-                      </HashLink>
-                    </AccordionPanel>
-                    <AccordionPanel pb={1} px="0">
-                      <HashLink
-                        to={{ pathname: "/events", hash: "#churchActivities" }}
-                      >
-                        Church-wide Activities
-                      </HashLink>
-                    </AccordionPanel>
-                    <AccordionPanel pb={1} px="0">
-                      <HashLink to={{ pathname: "/events", hash: "#classes" }}>
-                        Upcoming Classes
-                      </HashLink>
-                    </AccordionPanel>
+                        <Link href="https://hongkong.sub.hmcc.net/sermons/">
+                          Sermons
+                        </Link>
+                      </Box>
+                    </AccordionButton>
                   </AccordionItem>
-                  <Box
-                    flex="1"
-                    textAlign="left"
-                    fontWeight="bold"
-                    fontSize="2xl"
-                  >
-                    <Link href="https://hongkong.sub.hmcc.net/sermons/">
-                      Sermons
-                    </Link>
-                  </Box>
-                  <Box
-                    flex="1"
-                    textAlign="left"
-                    fontWeight="bold"
-                    fontSize="2xl"
-                  >
-                    <Link href="https://hongkong.sub.hmcc.net/give/">Give</Link>
-                  </Box>
+                  <AccordionItem borderStyle="none">
+                    <AccordionButton>
+                      <Box
+                        flex="1"
+                        textAlign="left"
+                        fontWeight="bold"
+                        fontSize="2xl"
+                      >
+                        <Link href="https://hongkong.sub.hmcc.net/give/">
+                          Give
+                        </Link>
+                      </Box>
+                    </AccordionButton>
+                  </AccordionItem>
                 </Accordion>
               </VStack>
             </Flex>
