@@ -4,12 +4,16 @@ import {
   Flex,
   Box,
   HStack,
+  Spacer,
   Button,
   ButtonGroup,
   VStack,
   Text,
+  Divider,
   Center,
   Accordion,
+  LinkOverlay,
+  StackDivider,
   Link,
   AccordionItem,
   AccordionButton,
@@ -30,7 +34,7 @@ const MainMenu = ({ login, onClose }) => {
     return (
       <Container maxW="container.lg">
         <HStack display={{ base: "none", lg: "flex" }} color="white">
-          <Flex marginTop="30px">
+          <Flex marginTop="30px" minW="55%">
             <VStack alignItems="flex-start">
               <Link href="/visit-us" onClick={onClose}>
                 <Text fontWeight="bold" fontSize="40px">
@@ -64,11 +68,8 @@ const MainMenu = ({ login, onClose }) => {
                 <Text fontSize="18px">Harvest Mission International</Text>
               </Link>
             </VStack>
-            <VStack
-              alignItems="flex-start"
-              position="relative"
-              left={{ md: "10%", xl: "20%" }}
-            >
+            <Spacer />
+            <VStack alignItems="flex-start" left={{ md: "10%", xl: "20%" }}>
               <Link href="/connect" onClick={onClose}>
                 <Text fontWeight="bold" fontSize="40px">
                   Connect
@@ -121,150 +122,139 @@ const MainMenu = ({ login, onClose }) => {
               </Link>
             </VStack>
           </Flex>
-          <Flex position="relative" left={{ md: "10%", xl: "25%" }}>
-            <VStack className="third-column-mainmenu" alignItems="flex-end">
-              <Box className="sign-up-button" position="relative">
-                {login ? (
-                  <ButtonGroup
-                    position="relative"
-                    top="20%"
-                    right="30%"
-                    flexDirection="column"
-                    size="md"
-                    variant="outline"
-                    colorScheme="black"
-                    width="200px"
-                  >
-                    <Button marginBottom="5" width="100%">
-                      <Link href="/profile" onClick={onClose}>
-                        My Profile
-                      </Link>
-                    </Button>
-                    <Button
-                      onClick={onLogout}
-                      onClick={onClose}
-                      marginBottom="5"
-                      width="100%"
-                      style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
-                    >
-                      <Link href="/">Log Out</Link>
-                    </Button>
-                    <Button
-                      width="100%"
-                      style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
-                    >
-                      <Link
-                        href="https://forms.gle/6jasxuLNZt5MVXAy8"
-                        target="_blank"
-                      >
-                        Prayer Requests
-                      </Link>
-                    </Button>
-                  </ButtonGroup>
-                ) : (
-                  <ButtonGroup
-                    flexDirection="column"
-                    position="relative"
-                    right="30%"
-                    marginTop="20px"
-                    size="md"
-                    variant="outline"
-                    colorScheme="black"
-                    width="200px"
-                  >
-                    <Button marginBottom="5" width="100%">
-                      <Link href="/login" onClick={onClose}>
-                        Login or Sign up
-                      </Link>
-                    </Button>
-                    <Button
-                      width="100%"
-                      style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
-                    >
-                      <Link
-                        href="https://forms.gle/6jasxuLNZt5MVXAy8"
-                        target="_blank"
-                      >
-                        Prayer Requests
-                      </Link>
-                    </Button>
-                  </ButtonGroup>
-                )}
-              </Box>
+          <Spacer />
 
-              <Box
-                className="other-links"
-                position="relative"
-                top="15%"
-                right="43%"
-              >
-                <VStack alignItems="center" fontSize="sm">
-                  <Link href="https://annarbor.hmcc.net/" target="_blank">
-                    Ann Arbor
-                  </Link>
-                  <Link href="https://austin.hmcc.net/" target="_blank">
-                    Austin
-                  </Link>
-                  <Link href="https://detroit.hmcc.net/" target="_blank">
-                    Detroit
-                  </Link>
-                  <Link style={{ fontWeight: "bolder" }}>HONG KONG</Link>
-                  <Link href="https://jakarta.hmcc.net/" target="_blank">
-                    Jakarta
-                  </Link>
-                  <Link href="https://tangerang.hmcc.net/" target="_blank">
-                    Tangerang
-                  </Link>
-                </VStack>
-              </Box>
-              <Box
-                className="social-media"
-                position="relative"
-                top="20%"
-                right="10%"
-              >
-                <Center h="100%" w="100%" color="white">
-                  <SocialIcon
-                    bgColor="transparent"
-                    fgColor="#ffffff"
-                    size="50%"
-                    url="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q"
-                    target="_blank"
-                  />
-                  <SocialIcon
-                    bgColor="transparent"
-                    fgColor="#ffffff"
-                    url="https://www.instagram.com/hmcc_hk/?hl=en"
-                    target="_blank"
-                  />
-                  <SocialIcon
-                    bgColor="transparent"
-                    fgColor="#ffffff"
-                    url="https://open.spotify.com/playlist/51XNCkc3LyRAXCtuI3Wbch"
-                    target="_blank"
-                  />
-                  <SocialIcon
-                    bgColor="transparent"
-                    fgColor="#ffffff"
-                    url="https://www.facebook.com/hmccofhk/"
-                    target="_blank"
-                  />
-                  <SocialIcon
-                    bgColor="transparent"
-                    fgColor="#ffffff"
-                    url="https://twitter.com/hmcc_hk?lang=en"
-                    target="_blank"
-                  />
-                  <SocialIcon
-                    bgColor="transparent"
-                    fgColor="#ffffff"
-                    url="https://vimeo.com/hmcchk"
-                    target="_blank"
-                  />
-                </Center>
-              </Box>
-            </VStack>
-          </Flex>
+          <VStack className="third-column-mainmenu" h="100%" spacing={4}>
+            <Box className="sign-up-button">
+              {login ? (
+                <ButtonGroup
+                  top="20%"
+                  right="30%"
+                  flexDirection="column"
+                  size="md"
+                  variant="outline"
+                  colorScheme="black"
+                  width="200px"
+                >
+                  <Button marginBottom="5" width="100%">
+                    <LinkOverlay href="/profile" onClick={onClose}>
+                      My Profile
+                    </LinkOverlay>
+                  </Button>
+                  <Button
+                    onClick={onLogout}
+                    onClick={onClose}
+                    marginBottom="5"
+                    width="100%"
+                    style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
+                  >
+                    <LinkOverlay href="/">Log Out</LinkOverlay>
+                  </Button>
+                  <Button
+                    width="100%"
+                    style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
+                  >
+                    <LinkOverlay
+                      href="https://forms.gle/6jasxuLNZt5MVXAy8"
+                      target="_blank"
+                    >
+                      Prayer Requests
+                    </LinkOverlay>
+                  </Button>
+                </ButtonGroup>
+              ) : (
+                <ButtonGroup
+                  flexDirection="column"
+                  right="30%"
+                  marginTop="20px"
+                  size="md"
+                  variant="outline"
+                  colorScheme="black"
+                  width="200px"
+                >
+                  <Button marginBottom="5" width="100%">
+                    <LinkOverlay href="/login" onClick={onClose}>
+                      Login or Sign up
+                    </LinkOverlay>
+                  </Button>
+                  <Button
+                    width="100%"
+                    style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
+                  >
+                    <LinkOverlay
+                      href="https://forms.gle/6jasxuLNZt5MVXAy8"
+                      target="_blank"
+                    >
+                      Prayer Requests
+                    </LinkOverlay>
+                  </Button>
+                </ButtonGroup>
+              )}
+            </Box>
+            <Divider w="0" />
+            <Box className="other-links">
+              <VStack alignItems="center" fontSize="sm">
+                <Link href="https://annarbor.hmcc.net/" target="_blank">
+                  Ann Arbor
+                </Link>
+                <Link href="https://austin.hmcc.net/" target="_blank">
+                  Austin
+                </Link>
+                <Link href="https://detroit.hmcc.net/" target="_blank">
+                  Detroit
+                </Link>
+                <Link style={{ fontWeight: "bolder" }}>HONG KONG</Link>
+                <Link href="https://jakarta.hmcc.net/" target="_blank">
+                  Jakarta
+                </Link>
+                <Link href="https://tangerang.hmcc.net/" target="_blank">
+                  Tangerang
+                </Link>
+              </VStack>
+            </Box>
+            <Divider w="0" />
+            <Box className="social-media" top="20%" right="10%">
+              <Center h="100%" w="100%" color="white">
+                <SocialIcon
+                  bgColor="transparent"
+                  fgColor="#ffffff"
+                  size="50%"
+                  url="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q"
+                  target="_blank"
+                />
+                <SocialIcon
+                  bgColor="transparent"
+                  fgColor="#ffffff"
+                  url="https://www.instagram.com/hmcc_hk/?hl=en"
+                  target="_blank"
+                />
+                <SocialIcon
+                  bgColor="transparent"
+                  fgColor="#ffffff"
+                  url="https://open.spotify.com/playlist/51XNCkc3LyRAXCtuI3Wbch"
+                  target="_blank"
+                />
+                <SocialIcon
+                  bgColor="transparent"
+                  fgColor="#ffffff"
+                  url="https://www.facebook.com/hmccofhk/"
+                  target="_blank"
+                />
+                <SocialIcon
+                  bgColor="transparent"
+                  fgColor="#ffffff"
+                  url="https://twitter.com/hmcc_hk?lang=en"
+                  target="_blank"
+                />
+                <SocialIcon
+                  bgColor="transparent"
+                  fgColor="#ffffff"
+                  url="https://vimeo.com/hmcchk"
+                  target="_blank"
+                />
+              </Center>
+            </Box>
+          </VStack>
         </HStack>
       </Container>
     );
@@ -277,170 +267,110 @@ const MainMenu = ({ login, onClose }) => {
           <VStack color="white" alignItems="flex-start">
             <Flex marginTop="30px" direction="column">
               <VStack alignItems="flex-start">
-                <Accordion allowMultiple>
-                  <AccordionItem borderStyle="none" mb="1vh">
-                    <HStack
-                      flex="1"
-                      textAlign="left"
-                      fontWeight="bold"
-                      fontSize="2xl"
-                      w="50px"
-                    >
-                      <Link href="/visit-us" onClick={onClose}>
-                        Visit
-                      </Link>
-                      <AccordionButton>
-                        <AccordionIcon />
-                      </AccordionButton>
-                    </HStack>
-
-                    <AccordionPanel pb={1} px="0">
+                <Accordion allowMultiple index={[0]}>
+                  <AccordionItem borderStyle="none">
+                    <AccordionButton>
+                      <Box
+                        flex="1"
+                        textAlign="left"
+                        fontWeight="bold"
+                        fontSize="2xl"
+                      >
+                        <Link href="/visit-us" onClick={onClose}>
+                          Visit
+                        </Link>
+                      </Box>
+                    </AccordionButton>
+                    <AccordionPanel pb={4}>
                       <Link href="https://hongkong.sub.hmcc.net/online/">
                         Church Online
                       </Link>
                     </AccordionPanel>
                   </AccordionItem>
-                  <AccordionItem borderStyle="none" mb="1vh">
-                    <HStack
-                      flex="1"
-                      textAlign="left"
-                      fontWeight="bold"
-                      fontSize="2xl"
-                    >
-                      <Link
-                        href="https://hongkong.sub.hmcc.net/about/who-we-are/"
-                        onClick={onClose}
+                  <AccordionItem borderStyle="none">
+                    <AccordionButton>
+                      <Box
+                        marginRight="5px"
+                        textAlign="left"
+                        fontWeight="bold"
+                        fontSize="2xl"
                       >
-                        About
-                      </Link>
-                      <AccordionButton>
-                        <AccordionIcon />
-                      </AccordionButton>
-                    </HStack>
-                    <AccordionPanel pb={1} px="0">
-                      <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
-                        Who We Are
-                      </Link>
-                    </AccordionPanel>
-                    <AccordionPanel pb={1} px="0">
-                      <Link href="https://hongkong.sub.hmcc.net/about/beliefs/">
-                        Beliefs
-                      </Link>
-                    </AccordionPanel>
-                    <AccordionPanel pb={1} px="0">
-                      <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
-                        Our Values
-                      </Link>
-                    </AccordionPanel>
-                    <AccordionPanel pb={1} px="0">
-                      <Link href="https://hongkong.sub.hmcc.net/about/beliefs/">
-                        Statement of Faith
-                      </Link>
-                    </AccordionPanel>
-                    <AccordionPanel pb={1} px="0">
-                      <Link href="https://hongkong.sub.hmcc.net/about/bold-vision/">
-                        BOLD Vision
-                      </Link>
-                    </AccordionPanel>
-                    <AccordionPanel pb={1} px="0">
-                      <Link href="https://hongkong.sub.hmcc.net/about/hmi/">
-                        Harvest Mission International
-                      </Link>
-                    </AccordionPanel>
+                        <Link
+                          href="https://hongkong.sub.hmcc.net/about/who-we-are/"
+                          onClick={onClose}
+                        >
+                          About
+                        </Link>
+                      </Box>
+                    </AccordionButton>
                   </AccordionItem>
-                  <AccordionItem borderStyle="none" mb="1vh">
-                    <HStack
-                      marginRight="5px"
-                      textAlign="left"
-                      fontWeight="bold"
-                      fontSize="2xl"
-                    >
-                      <Link href="/connect" onClick={onClose}>
-                        Connect
-                      </Link>
-                      <AccordionButton>
-                        <AccordionIcon />
-                      </AccordionButton>
-                    </HStack>
-                    <AccordionPanel pb={1} px="0">
-                      <HashLink
-                        to={{ pathname: "/connect", hash: "#ministries" }}
+                  <AccordionItem borderStyle="none">
+                    <AccordionButton>
+                      <Box
+                        marginRight="5px"
+                        textAlign="left"
+                        fontWeight="bold"
+                        fontSize="2xl"
                       >
-                        Ministries
-                      </HashLink>
-                    </AccordionPanel>
-                    <AccordionPanel pb={1} px="0">
-                      <HashLink
-                        to={{ pathname: "/connect", hash: "#lifegroup" }}
-                        onClick={onClose}
-                      >
-                        LIFE Groups
-                      </HashLink>
-                    </AccordionPanel>
+                        <Link href="/connect#ministries" onClick={onClose}>
+                          Connect
+                        </Link>
+                      </Box>
+                    </AccordionButton>
                   </AccordionItem>
-                  <AccordionItem borderStyle="none" mb="1vh">
-                    <HStack
-                      marginRight="5px"
-                      textAlign="left"
-                      fontWeight="bold"
-                      fontSize="2xl"
-                    >
-                      <Link href="/events" onClick={onClose}>
-                        Events
-                      </Link>
-                      <AccordionButton>
-                        <AccordionIcon />
-                      </AccordionButton>
-                    </HStack>
-                    <AccordionPanel pb={1} px="0">
-                      <HashLink
-                        to={{ pathname: "/events", hash: "#sundayCelebration" }}
+                  <AccordionItem borderStyle="none">
+                    <AccordionButton>
+                      <Box
+                        flex="1"
+                        textAlign="left"
+                        fontWeight="bold"
+                        fontSize="2xl"
                       >
-                        Upcoming Sunday Celebration
-                      </HashLink>
-                    </AccordionPanel>
-                    <AccordionPanel pb={1} px="0">
-                      <HashLink
-                        to={{ pathname: "/events", hash: "#churchActivities" }}
-                      >
-                        Church-wide Activities
-                      </HashLink>
-                    </AccordionPanel>
-                    <AccordionPanel pb={1} px="0">
-                      <HashLink to={{ pathname: "/events", hash: "#classes" }}>
-                        Upcoming Classes
-                      </HashLink>
-                    </AccordionPanel>
+                        <Link href="/events" onClick={onClose}>
+                          Events
+                        </Link>
+                      </Box>
+                    </AccordionButton>
                   </AccordionItem>
-                  <Box
-                    flex="1"
-                    textAlign="left"
-                    fontWeight="bold"
-                    fontSize="2xl"
-                  >
-                    <Link href="https://hongkong.sub.hmcc.net/sermons/">
-                      Sermons
-                    </Link>
-                  </Box>
-                  <Box
-                    flex="1"
-                    textAlign="left"
-                    fontWeight="bold"
-                    fontSize="2xl"
-                  >
-                    <Link href="https://hongkong.sub.hmcc.net/give/">Give</Link>
-                  </Box>
+
+                  <AccordionItem borderStyle="none">
+                    <AccordionButton>
+                      <Box
+                        flex="1"
+                        textAlign="left"
+                        fontWeight="bold"
+                        fontSize="2xl"
+                      >
+                        <Link href="https://hongkong.sub.hmcc.net/sermons/">
+                          Sermons
+                        </Link>
+                      </Box>
+                    </AccordionButton>
+                  </AccordionItem>
+                  <AccordionItem borderStyle="none">
+                    <AccordionButton>
+                      <Box
+                        flex="1"
+                        textAlign="left"
+                        fontWeight="bold"
+                        fontSize="2xl"
+                      >
+                        <Link href="https://hongkong.sub.hmcc.net/give/">
+                          Give
+                        </Link>
+                      </Box>
+                    </AccordionButton>
+                  </AccordionItem>
                 </Accordion>
               </VStack>
             </Flex>
           </VStack>
           <VStack justifyContent="center" color="white" marginTop="30px">
-            <Flex position="relative">
+            <Flex>
               <VStack className="third-column-mainmenu">
-                <Box className="sign-up-button" position="relative">
+                <Box className="sign-up-button">
                   {login ? (
                     <ButtonGroup
-                      position="relative"
                       flexDirection="column"
                       size="md"
                       variant="outline"
@@ -511,7 +441,8 @@ const MainMenu = ({ login, onClose }) => {
                     </ButtonGroup>
                   )}
                 </Box>
-                <Box className="other-links" position="relative">
+
+                <Box className="other-links">
                   <Accordion allowMultiple marginTop="20px">
                     <AccordionItem borderStyle="none" mb="1vh">
                       <AccordionButton>
@@ -559,7 +490,7 @@ const MainMenu = ({ login, onClose }) => {
                     </AccordionItem>
                   </Accordion>
                 </Box>
-                <Box className="social-media" position="relative">
+                <Box className="social-media">
                   <Center h="100%" w="100%" color="white" marginTop="10px">
                     <SocialIcon
                       bgColor="transparent"
