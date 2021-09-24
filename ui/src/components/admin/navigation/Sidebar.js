@@ -1,5 +1,4 @@
 import React from "react";
-import { useHistory } from "react-router";
 import {
   IconButton,
   Avatar,
@@ -15,11 +14,8 @@ import {
   DrawerContent,
   Text,
   useDisclosure,
-  BoxProps,
-  FlexProps,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuItem,
   MenuList,
   Button,
@@ -34,9 +30,7 @@ import {
   FiMenu,
   FiBell,
   FiChevronDown,
-  FiAperture,
 } from "react-icons/fi";
-import AdminUser from "../users/AdminUser";
 
 //import { Switch, Route, Redirect } from "react-router-dom";
 //import { IconType } from "react-icons";
@@ -182,7 +176,6 @@ const NavItem = ({ icon, children, ...rest }) => {
 // }
 const MobileNav = ({ onOpen, ...rest }) => {
   const onLogout = () => {
-    console.log(rest);
     const { history } = rest;
     localStorage.clear();
     history.push("/admin/");

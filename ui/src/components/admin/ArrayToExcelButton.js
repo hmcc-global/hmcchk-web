@@ -17,10 +17,10 @@ import cloneDeep from "lodash.clonedeep";
 import { useDispatch } from "react-redux";
 
 const ArrayToExcelButton = ({ apiArray, fileName, buttonTitle }) => {
+  const dispatch = useDispatch();
   const [showDownloadModal, setShowDownloadModal] = useState(false);
   const [columnsType, setColumnsType] = useState("1");
   const [selectedColumns, setSelectedColumns] = useState([]);
-  const dispatch = useDispatch();
 
   const updateSelectedColumns = (e, column) => {
     if (e.target.checked) {

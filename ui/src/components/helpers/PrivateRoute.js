@@ -56,7 +56,6 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
           if (noUser) {
             if (noTokenExists) return <Component {...props} />;
             else {
-              console.log(props);
               // if (props.location.pathname.includes("/admin")) {
               //   props.history.push("/admin/home");
               //   return <AdminHome {...props} user={userObj} />;

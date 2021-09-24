@@ -103,6 +103,7 @@ const MainContainer = () => {
           exact
           path="/admin/users"
           permissions={["admin", "stewardship"]}
+          //permissions={["noUser"]}
           component={AdminUser}
         />
         <PrivateRoute
@@ -121,6 +122,7 @@ const MainContainer = () => {
         <PrivateRoute
           path="/admin/giving"
           permissions={["stewardship"]}
+          //permissions={["noUser"]}
           component={AdminGiving}
         />
       </Switch>

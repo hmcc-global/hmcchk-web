@@ -12,7 +12,6 @@ import {
   ModalCloseButton,
   List,
   ListItem,
-  OrderedList,
   UnorderedList,
 } from "@chakra-ui/react";
 
@@ -38,12 +37,7 @@ const ViewUser = ({ props }) => {
     getData();
   }, []);
 
-  const refreshHandler = () => {
-    getData();
-  };
-
   const data = user;
-  console.log(data);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 

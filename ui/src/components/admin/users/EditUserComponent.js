@@ -13,22 +13,15 @@ import {
   ModalCloseButton,
   Stack,
   HStack,
-  VStack,
   Input,
-  Form,
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   InputGroup,
   InputLeftAddon,
   Select,
-  Radio,
-  RadioGroup,
   VisuallyHiddenInput,
   useToast,
   Switch,
-  Checkbox,
 } from "@chakra-ui/react";
 import {
   accessTypeList,
@@ -56,7 +49,6 @@ const EditUser = (props) => {
 
   const [user, setUsers] = useState([]);
   const [editData, setEditData] = useState(null);
-  const [message, setMessage] = useState();
 
   const getData = async () => {
     try {
@@ -77,10 +69,6 @@ const EditUser = (props) => {
   useEffect(() => {
     getData();
   }, []);
-
-  const refreshHandler = () => {
-    getData();
-  };
 
   let data = user;
 
@@ -109,9 +97,6 @@ const EditUser = (props) => {
     const status = await axios.put("/api/users/update", {
       params: data,
     });
-
-    console.log(status);
-    console.log(status.status);
 
     if (status.status === 200) {
       toast({

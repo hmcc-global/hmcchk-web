@@ -7,15 +7,11 @@ import {
   useColorModeValue,
   useToast,
   Center,
-  Stack,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { customAxios as axios } from "../helpers/customAxios";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signin } from "../../reducers/userSlice";
-import { Redirect } from "react-router";
-import GoogleLogin from "react-google-login";
 
 const AdminLoginContainer = (props) => {
   const { toggleColorMode } = useColorMode();
@@ -30,14 +26,11 @@ const AdminLoginContainer = (props) => {
   } = useForm();
 
   const postLogin = async (user) => {
-    console.log(user);
-
     try {
       const result = await axios.post("/api/auth/login", {
         emailAddress: user.emailAddress,
         password: user.password,
       });
-      console.log(result);
 
       if (result.status === 200) {
         dispatch(signin(result.data));
@@ -58,11 +51,8 @@ const AdminLoginContainer = (props) => {
         duration: 3000,
         isClosable: true,
       });
-      console.log(err);
     }
   };
-
-  useEffect(() => {}, []);
 
   return (
     <Flex height="85vh" alignItems="center" justifyContent="center">

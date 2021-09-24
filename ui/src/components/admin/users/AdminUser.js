@@ -2,25 +2,20 @@ import React from "react";
 import { customAxios as axios } from "../../helpers/customAxios";
 import { useEffect, useState } from "react";
 import {
-  Input,
   Button,
-  toggleColorMode,
   Flex,
   Box,
-  Heading,
   useBreakpointValue,
   useColorModeValue,
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
-  TableCaption,
   chakra,
   Stack,
-  useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
@@ -38,22 +33,28 @@ const mdVariant = { navigation: "sidebar", navigationButton: false };
 
 export default function AdminUser(props) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [user, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
   const dispatch = useDispatch();
+  const toast = useToast();
 
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
-
-  //Getting information from API
-  const { classes } = props;
-  const [user, setUsers] = useState([]);
 
   const getData = async () => {
     try {
       const { data } = await axios.get("/api/users/get");
-      console.log(data);
       setUsers(data);
+      setLoading(false);
     } catch (err) {
       console.log(err);
+      toast({
+        title: "Something went wrong.",
+        description: "Try again.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
@@ -66,13 +67,6 @@ export default function AdminUser(props) {
   };
 
   const data = user;
-
-  //View User Component
-  //const [showUser, setShowUser] = useState(false);
-
-  // const viewUser = () => {
-  //   this.setState({ viewUser: !this.state.viewUser });
-  // };
 
   const columns = React.useMemo(
     () => [
@@ -116,11 +110,15 @@ export default function AdminUser(props) {
       >
         <Stack mb={3} direction="row">
           <Button onClick={() => refreshHandler()}>Refresh</Button>
-          <ArrayToExcelButton
-            apiArray={data}
-            fileName={"UserData.xlsx"}
-            buttonTitle={"Export"}
-          ></ArrayToExcelButton>
+          {loading ? (
+            <Button> Export </Button>
+          ) : (
+            <ArrayToExcelButton
+              apiArray={data}
+              fileName={"UserData.xlsx"}
+              buttonTitle={"Export"}
+            />
+          )}
         </Stack>
         <Flex
           bg={useColorModeValue("gray.200")}
@@ -175,7 +173,7 @@ export default function AdminUser(props) {
                       ))}
                       <Td>
                         <Stack spacing={2} direction="row" align="center">
-                          <ViewUser props={data._id} />
+                          <ViewUser props={data} />
                           <EditUser></EditUser>
                           <DeleteUser></DeleteUser>
                         </Stack>
