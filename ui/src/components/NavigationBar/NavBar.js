@@ -77,7 +77,7 @@ const NavBar = (props) => {
         <Flex
           w="100vw"
           justify={["space-between", "space-around"]}
-          background="linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.5) 100%, rgba(255, 255, 255, 0.9) 100%)"
+          backgroundColor="white"
           backdrop-filter="blur(39px)"
           align="center"
           fontSize={{ md: "xs", lg: "sm", xl: "md" }}
