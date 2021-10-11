@@ -21,6 +21,7 @@ module.exports.routes = {
 
   "get /api/cache/refresh-cache": "cache/refresh-cache",
   "get /api/misc/get-env": "misc/get-env",
+  "post /api/read-csv": "givings/read-csv",
 
   // Forms APIs
   "get /api/forms/get-form": "forms/get-form",

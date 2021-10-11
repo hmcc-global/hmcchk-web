@@ -20,13 +20,11 @@ import {
 
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy } from "react-table";
-//import Header from "./navigation/Header";
 import SidebarWithHeader from "../navigation/Sidebar";
 import ViewUser from "./ViewUserComponent";
 import EditUser from "./EditUserComponent";
 import DeleteUser from "./DeleteUserComponent";
 import ArrayToExcelButton from "../ArrayToExcelButton";
-import { useDispatch } from "react-redux";
 
 const smVariant = { navigation: "drawer", navigationButton: true };
 const mdVariant = { navigation: "sidebar", navigationButton: false };
@@ -36,7 +34,6 @@ export default function AdminUser(props) {
   const [user, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
-  const dispatch = useDispatch();
   const toast = useToast();
 
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);

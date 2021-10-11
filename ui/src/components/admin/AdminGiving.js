@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { customAxios as axios } from "../helpers/customAxios";
 import {
   Button,
@@ -16,8 +16,8 @@ import {
   Stack,
   chakra,
 } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
 import ArrayToExcelButton from "./ArrayToExcelButton";
+import FileUpload from "./FileUploadButton";
 import { useTable, useSortBy } from "react-table";
 import { TriangleDownIcon, TriangleUpIcon, AddIcon } from "@chakra-ui/icons";
 
@@ -29,7 +29,12 @@ const mdVariant = { navigation: "sidebar", navigationButton: false };
 export default function AdminGiving(props) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
-  const dispatch = useDispatch();
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
 
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
   const [user, setUsers] = useState([]);
@@ -43,6 +48,8 @@ export default function AdminGiving(props) {
       console.log(err);
     }
   };
+
+  const onSubmit = async () => {};
 
   useEffect(() => {
     getData();
@@ -90,9 +97,16 @@ export default function AdminGiving(props) {
             fileName={"UserData.xlsx"}
             buttonTitle={"Export"}
           />
-          <Button leftIcon={<AddIcon />} colorScheme="teal">
+          {/* <Input type="file" onChange={this.onFileChange}></Input>
+          <Button
+            leftIcon={<AddIcon />}
+            colorScheme="teal"
+            onClick={this.onFileUpload}
+          >
             Import
-          </Button>
+          </Button> */}
+
+          <FileUpload></FileUpload>
         </Stack>
         <Flex
           bg={useColorModeValue("gray.200")}

@@ -13,9 +13,7 @@ const App = () => {
         <PersistGate loading={null} persistor={persistor}>
           <BrowserRouter>
             <>
-            <ChakraProvider>
               <MainContainer />
-              </ChakraProvider>
             </>
           </BrowserRouter>
         </PersistGate>

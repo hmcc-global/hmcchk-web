@@ -32,14 +32,6 @@ import {
   FiChevronDown,
 } from "react-icons/fi";
 
-//import { Switch, Route, Redirect } from "react-router-dom";
-//import { IconType } from "react-icons";
-//import { ReactText } from "react";
-
-// interface LinkItemProps {
-//   name: string;
-//   icon: IconType;
-// }
 const LinkItems = [
   { name: "Home", icon: FiHome, path: "/admin/home" },
   {
@@ -51,48 +43,13 @@ const LinkItems = [
   { name: "Forms", icon: FiCompass, path: "/admin/forms" },
   { name: "Giving", icon: FiStar, path: "/admin/giving" },
   { name: "Settings", icon: FiSettings, path: "/admin/settings" },
+  {
+    name: "Log Out",
+    icon: FiSettings,
+    path: "/admin/logout",
+    component: "AdminLogout",
+  },
 ];
-
-const SidebarWithHeader = ({ children, ...rest }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  return (
-    // <Box>
-    <>
-      <SidebarContent
-        {...rest}
-        onClose={() => onClose}
-        display={{ base: "none", md: "block" }}
-      />
-      <Drawer
-        {...rest}
-        autoFocus={true}
-        isOpen={isOpen}
-        placement="left"
-        onClose={onClose}
-        returnFocusOnClose={false}
-        onOverlayClick={onClose}
-        size="full"
-      >
-        <DrawerContent {...rest}>
-          <SidebarContent {...rest} onClose={onClose} />
-        </DrawerContent>
-      </Drawer>
-      {/* mobilenav */}
-      <MobileNav onOpen={onOpen} {...rest} />
-      <Box {...rest} ml={{ base: 0, md: 60 }} p="4">
-        {children}
-      </Box>
-    </>
-    // {/* </Box> */}
-  );
-};
-
-export default SidebarWithHeader;
-
-// interface SidebarProps extends BoxProps {
-//   onClose: () => void;
-// }
 
 const SidebarContent = ({ onClose, ...rest }) => {
   const { toggleColorMode } = useColorMode();
@@ -131,10 +88,6 @@ const SidebarContent = ({ onClose, ...rest }) => {
   );
 };
 
-// interface NavItemProps extends FlexProps {
-//   icon: IconType;
-//   children: ReactText;
-// }
 const NavItem = ({ icon, children, ...rest }) => {
   return (
     <Link
@@ -171,10 +124,7 @@ const NavItem = ({ icon, children, ...rest }) => {
   );
 };
 
-// interface MobileProps extends FlexProps {
-//   onOpen: () => void;
-// }
-const MobileNav = ({ onOpen, ...rest }) => {
+const ProfileNav = ({ onOpen, ...rest }) => {
   const onLogout = () => {
     const { history } = rest;
     localStorage.clear();
@@ -261,3 +211,36 @@ const MobileNav = ({ onOpen, ...rest }) => {
     </Flex>
   );
 };
+
+export default function SidebarWithHeader({ children, ...rest }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  return (
+    // <Box>
+    <>
+      <SidebarContent
+        {...rest}
+        onClose={() => onClose}
+        display={{ base: "none", md: "block" }}
+      />
+      <Drawer
+        {...rest}
+        autoFocus={true}
+        isOpen={isOpen}
+        placement="left"
+        onClose={onClose}
+        returnFocusOnClose={false}
+        onOverlayClick={onClose}
+        size="full"
+      >
+        <DrawerContent {...rest}>
+          <SidebarContent {...rest} onClose={onClose} />
+        </DrawerContent>
+      </Drawer>
+      <Box {...rest} ml={{ base: 0, md: 60 }} p="4">
+        {children}
+      </Box>
+    </>
+    // {/* </Box> */}
+  );
+}

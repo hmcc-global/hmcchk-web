@@ -14,10 +14,8 @@ import {
 import { DownloadIcon } from "@chakra-ui/icons";
 import { arrayToExcel } from "../helpers/arrayToExcel";
 import cloneDeep from "lodash.clonedeep";
-import { useDispatch } from "react-redux";
 
 const ArrayToExcelButton = ({ apiArray, fileName, buttonTitle }) => {
-  const dispatch = useDispatch();
   const [showDownloadModal, setShowDownloadModal] = useState(false);
   const [columnsType, setColumnsType] = useState("1");
   const [selectedColumns, setSelectedColumns] = useState([]);
