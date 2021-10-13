@@ -13,6 +13,7 @@ import FooterContainer from "./footer/FooterContainer";
 import ConfirmEmailPage from "./email/ConfirmEmailPage";
 import UserProfileContainer from "./userProfile/UserProfileContainer";
 import CompleteUserProfileContainer from "./userProfile/CompleteUserProfile";
+import GivingPage from "./giving/GivingPage";
 import ClearCache from "./helpers/ClearCache";
 import UserFormContainer from "./forms/UserFormContainer";
 import NoMatch from "./errors/NoMatch";
@@ -73,6 +74,12 @@ const MainContainer = () => {
           path="/connect"
           permissions={["public"]}
           component={ConnectPage}
+        />
+        <PrivateRoute
+          exact
+          path="/giving"
+          permissions={["public"]}
+          component={GivingPage}
         />
         <PrivateRoute
           exact
