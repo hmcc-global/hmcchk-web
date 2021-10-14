@@ -1,63 +1,76 @@
-// import axios from "axios";
-// import { useEffect, useState } from "react";
-// import VideoEmbed from "../helpers/VideoEmbed";
-// import AudioEmbed from "../helpers/AudioEmbed";
+import {
+  Icon,
+  AspectRatio,
+  Box,
+  Heading,
+  Image,
+  Text,
+  UnorderedList,
+  OrderedList,
+  ListItem,
+  Button,
+  HStack,
+  VStack,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  ButtonGroup,
+} from "@chakra-ui/react";
+import { BsChevronCompactDown, BsClockFill } from "react-icons/bs";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { DateTime } from "luxon";
+import parse, { domToReact, attributesToProps } from "html-react-parser";
+import { DATE_FULL } from "luxon/src/impl/formats";
 
 const SermonCard = (props) => {
-  // const [sermon, setSermon] = useState(null);
+  const { sermonData } = props;
+  let sermonDate = DateTime.fromISO(sermonData.datePreached).toLocaleString(
+    DATE_FULL
+  );
 
-  // const populateData = async () => {
-  //   const { id } = props.match.params;
-  //   const { data } = await axios.get("/api/sermons/get-sermon-by-id", {
-  //     params: { id },
-  //   });
-  //   setSermon(data[0]);
-  // };
-
-  // useEffect(() => {
-  //   populateData();
-  // }, []);
-
-  // const refreshHandler = () => {
-  //   populateData();
-  // };
-
-  // title: he.decode(sermon.title.rendered),
-  // speaker: getSpeakers(sermon.wpfc_preacher, speakers),
-  // datePreached: DateTime.fromSeconds(sermon.sermon_date),
-  // sermonSeries: sermonSeries[sermon.wpfc_sermon_series[0]],
-  // sermonDesc: sermon.sermon_description,
-  // sermonAudioUrl: sermon.sermon_audio,
-  // sermonAudioDuration: sermon.sermon_audio_duration,
-  // sermonVideoUrl: sermon.sermon_video_url,
-  // status: sermon.status
-
-  // Can be extracted to a helper component
   return (
     <>
-      {/* {
-        sermon &&
-        <Paper className={classes.container}>
-          <Button className={classes.button} onClick={() => refreshHandler()} >
-            Refresh
-          </Button>
-          <Typography>
-            {sermon.title}
-          </Typography>
-          <Typography>
-            {sermon.speaker}
-          </Typography>
-          <Typography>
-            Date: {sermon.datePreached}
-          </Typography>
-          <Typography>
-            {sermon.sermonDesc}
-          </Typography>
-          <VideoEmbed videoUrl={sermon.sermonVideoUrl} />
-          <Divider />
-          <AudioEmbed audioUrl={sermon.sermonAudioUrl} />
-        </Paper>
-      } */}
+      <Box
+        borderWidth="1px"
+        borderRadius="20"
+        overflow="hidden"
+        h="auto"
+        bg="white"
+        shadow="lg"
+        p={[4, 10]}
+      >
+        <Box>
+          <Link
+            to={{ pathname: `/sermons/${sermonData.id}`, state: sermonData }}
+          >
+            <AspectRatio mb="5" width="100%" ratio={16 / 9}>
+              <Image
+                borderRadius="20"
+                src={sermonData.sermonSeries[0].image}
+                objectFit="cover"
+              />
+            </AspectRatio>
+          </Link>
+          <BsChevronCompactDown position="absolute" />
+        </Box>
+        <Box overflow="hidden" position="relative">
+          <VStack alignItems="left">
+            <Text as="h4" mb="5" size="lg" fontWeight="900" isTruncated>
+              {sermonData.title}
+            </Text>
+            <Text>{sermonData.sermonSeries[0].name}</Text>
+            <HStack>
+              <Text>{sermonData.speaker[0].name}</Text>
+              <Text align="right">{sermonDate}</Text>
+            </HStack>
+          </VStack>
+        </Box>
+      </Box>
     </>
   );
 };

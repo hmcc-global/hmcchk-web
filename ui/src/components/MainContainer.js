@@ -2,6 +2,7 @@ import React from "react";
 import { Switch } from "react-router-dom";
 import { chakra } from "@chakra-ui/react";
 import SermonContainer from "./sermons/SermonContainer";
+import SermonDetails from "./sermons/SermonDetails";
 import SermonCard from "./sermons/SermonCard";
 import LoginContainer from "./auth/LoginContainer";
 import EventsPage from "./events/EventsPage";
@@ -49,7 +50,7 @@ const MainContainer = () => {
           exact
           path="/sermons/:id"
           permissions={["public"]}
-          component={SermonCard}
+          component={SermonDetails}
         />
         <PrivateRoute
           exact
