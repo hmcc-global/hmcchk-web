@@ -25,81 +25,97 @@ import GivingCard from "./GivingCard.js";
 const GivingPage = (props) => {
   return (
     <Container maxW="container.lg">
-      <VStack w="100%" spacing="3vw">
-        <Box>
-          <Heading as="h1" size="4xl" paddingTop="4vw">
+      <VStack w="100%" spacing="3vw" py="3vw">
+        <Box
+          borderRadius="lg"
+          bgImage={`url('${process.env.PUBLIC_URL}/giving/Banner.png')`}
+          bgPosition="center"
+          bgSize="cover"
+        >
+          <Heading
+            as="h1"
+            size="4xl"
+            align="center"
+            paddingTop="1vw"
+            color="#319795"
+            fontWeight="bold"
+          >
             Giving
           </Heading>
-        </Box>
-        <Flex direction={["column", "column", "row"]}>
-          <Image
-            minW="50%"
-            src={process.env.PUBLIC_URL + "/giving/GivingStock.png"}
-          />
-
           <VStack px="3" py="6">
-            <Heading as="h4" size="lg" align="center">
+            <Heading
+              as="h4"
+              size="lg"
+              align="center"
+              color="#319795"
+              fontWeight="bold"
+            >
               God invites us to partner with Him in His ministry!
             </Heading>
-            <Text align="center">
+            <Text align="center" w="70%" fontWeight="bold">
               Your gift propels us towards our vision and enables our church to
               respond swiftly with obedience to God's calling. We invite you to
               contribute to this vision and play a vital role in what God is
               doing!
             </Text>
           </VStack>
-        </Flex>
-        <Box py="2vw">
-          <Heading as="h2" size="2xl" align="center" paddingBottom="2vw">
-            Ways to Give
-          </Heading>
-          <Center>
-            <Text align="center" maxW="80%">
-              When giving, please always use your legal name and provide the
-              same email address consistently. There are a few different ways
-              you can give to our church
-            </Text>
-          </Center>
         </Box>
       </VStack>
       <Center>
-        <Stack
+        <Flex
+          h={["100%", "100%", "13em"]}
           direction={["column", "column", "row"]}
-          maxW="99%"
-          minW="80%"
           paddingBottom="2"
+          minW="100%"
         >
+          <Box w={["100%", "100%", "32%"]} h="20%" borderRadius="lg">
+            <Heading as="h3" size="xl" paddingBottom="1vw" color="#319795">
+              Ways to Give:
+            </Heading>
+            <Text fontWeight="bold" paddingBottom="1vw">
+              There are a few different ways you can give to our church
+            </Text>
+            <Text color="#319795">
+              *When giving, please always use your legal name and provide the
+              same email address consistently.
+            </Text>
+          </Box>
+          <Spacer />
           <GivingCard
             text="FPS"
-            imageLink={process.env.PUBLIC_URL + "/giving/GivingFPS.png"}
+            imageLink={process.env.PUBLIC_URL + "/giving/FPS.png"}
           />
-
+          <Spacer />
           <GivingCard
             text="Bank Transfer"
-            imageLink={process.env.PUBLIC_URL + "/giving/GivingTransfer.png"}
+            imageLink={process.env.PUBLIC_URL + "/giving/Transfer.png"}
           />
+        </Flex>
+      </Center>
 
+      <Center paddingTop="1vw">
+        <Flex
+          direction={["column", "column", "row"]}
+          minW="100%"
+          h={["100%", "100%", "13em"]}
+        >
           <GivingCard
             text="Cash"
-            imageLink={process.env.PUBLIC_URL + "/giving/GivingCash.png"}
+            imageLink={process.env.PUBLIC_URL + "/giving/Cash.png"}
           />
-        </Stack>
-      </Center>
-
-      <Center>
-        <Stack direction={["column", "column", "row"]} maxW="90%" minW="80%">
+          <Spacer />
           <GivingCard
             text="Online Giving"
-            imageLink={process.env.PUBLIC_URL + "/giving/GivingOnline.png"}
+            imageLink={process.env.PUBLIC_URL + "/giving/Online.png"}
           />
-
+          <Spacer />
           <GivingCard
-            text="Check"
-            imageLink={process.env.PUBLIC_URL + "/giving/GivingCheck.png"}
+            text="Cheque"
+            imageLink={process.env.PUBLIC_URL + "/giving/Cheque.png"}
           />
-        </Stack>
+        </Flex>
       </Center>
-      <Box>
+      <Box paddingBottom="10vh">
         <Center>
           <Heading as="h1" size="3xl" py="4vw">
             Frequently Asked Question
