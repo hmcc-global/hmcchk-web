@@ -1,8 +1,7 @@
 module.exports = {
-  
-  friendlyName: 'Refresh cache on demand',
+  friendlyName: "Refresh cache on demand",
 
-  description: 'Refresh cache on demand',
+  description: "Refresh cache on demand",
 
   inputs: {
     // TODO have some sort of authentication so only allowableUsers can refresh cache
@@ -10,11 +9,11 @@ module.exports = {
 
   exits: {
     nonSuccess: {
-      description: 'Error'
+      description: "Error",
     },
   },
 
-  fn: async function(inputs, exits) {
+  fn: async function (inputs, exits) {
     sails.log.info(`Refreshing cache..`);
 
     try {
@@ -25,7 +24,5 @@ module.exports = {
       sails.log(err);
       return exits.nonSuccess(err);
     }
-  }
+  },
 };
-
-

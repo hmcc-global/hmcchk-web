@@ -13,6 +13,7 @@ import HomeContainer from "./home/HomeContainer";
 import ConfirmEmailPage from "./email/ConfirmEmailPage";
 import UserProfileContainer from "./userProfile/UserProfileContainer";
 import CompleteUserProfileContainer from "./userProfile/CompleteUserProfile";
+import ClearCache from "./helpers/ClearCache";
 
 const MainContainer = () => {
   return (
@@ -83,6 +84,12 @@ const MainContainer = () => {
           path="/profile"
           permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
           component={UserProfileContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/clear-cache/"
+          permissions={["admin", "stewardship"]}
+          component={ClearCache}
         />
       </Switch>
     </chakra.main>
