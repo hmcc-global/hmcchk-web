@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { customAxios as axios } from "../../helpers/customAxios";
 import {
@@ -34,48 +34,20 @@ import {
   countryList,
 } from "../../helpers/UserConstants";
 
-const EditUser = (props) => {
+const EditUser = ({ data: payload, row, refreshCallback }) => {
   const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const arrayToOptions = function (x) {
     return <option>{x}</option>;
   };
 
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm();
+  const { handleSubmit, register } = useForm();
 
-  const [user, setUsers] = useState([]);
-  const [editData, setEditData] = useState(null);
+  let data = payload[row];
 
-  const getData = async () => {
-    try {
-      const id = props;
-      const { data } = await axios.get("/api/users/get", { userId: id });
-      data[0].addressFlat = data[0].address.flat;
-      data[0].addressFloor = data[0].address.floor;
-      data[0].addressStreet = data[0].address.street;
-      data[0].addressDistrict = data[0].address.district;
-      data[0].addressRegion = data[0].address.region;
-      console.log(data[0]);
-      setUsers(data[0]);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  let data = user;
-
-  const onUpdateSubmit = async (data, e) => {
+  const onUpdateSubmit = async (data) => {
     // Format the data
-    setEditData(data);
-
     let address = {
       flat: data.addressFlat,
       floor: data.addressFloor,
@@ -106,12 +78,19 @@ const EditUser = (props) => {
         duration: 3000,
         isClosable: true,
       });
+    } else {
+      toast({
+        title: "Something went wrong.",
+        description: "Try again.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
-
+    onClose();
+    refreshCallback();
     return status;
   };
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>

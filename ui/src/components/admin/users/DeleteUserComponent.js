@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { render } from "react-dom";
-import { useForm } from "react-hook-form";
+import React from "react";
 import { customAxios as axios } from "../../helpers/customAxios";
 import {
   Button,
@@ -12,50 +10,22 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  VisuallyHiddenInput,
   useToast,
 } from "@chakra-ui/react";
 
-const DeleteUser = ({ props }) => {
+const DeleteUser = ({ data: payload, row, refreshCallback }) => {
   const toast = useToast();
-  const [user, setUsers] = useState([]);
-  const [editData, setEditData] = useState(null);
-  const { handleSubmit, register } = useForm();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const getData = async () => {
-    try {
-      const id = props;
-      const { data } = await axios.get("/api/users/get", { userId: id });
-      setUsers(data[0]);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const data = payload[row];
 
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const refreshHandler = () => {
-    getData();
-  };
-
-  const data = user;
-
-  const onDeleteSubmit = async (data, e) => {
+  const onDeleteSubmit = async () => {
     // Format the data
-    setEditData(data);
-
-    if (data.isDeleted === "true") {
-      data.isDeleted = true;
-    }
+    data.isDeleted = true;
 
     const status = await axios.put("/api/users/update", {
       params: data,
     });
-
-    console.log(status);
-    console.log(status.status);
 
     if (status.status === 200) {
       toast({
@@ -65,10 +35,18 @@ const DeleteUser = ({ props }) => {
         duration: 3000,
         isClosable: true,
       });
+    } else {
+      toast({
+        title: "Something went wrong.",
+        description: "Try again.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
+    onClose();
+    refreshCallback();
   };
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
@@ -77,26 +55,20 @@ const DeleteUser = ({ props }) => {
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <form onSubmit={handleSubmit(onDeleteSubmit)}>
-          <ModalContent>
-            <ModalHeader>Delete User</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              Are you sure you want to delete this user?
-              <VisuallyHiddenInput defaultValue={data.id} {...register("id")} />
-              <VisuallyHiddenInput value="true" {...register("isDeleted")} />
-            </ModalBody>
+        <ModalContent>
+          <ModalHeader>Delete User</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>Are you sure you want to delete this user?</ModalBody>
 
-            <ModalFooter>
-              <Button variant="ghost" mr={3} onClick={onClose}>
-                Cancel
-              </Button>
-              <Button colorScheme="red" type="submit">
-                Delete
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </form>
+          <ModalFooter>
+            <Button variant="ghost" mr={3} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button colorScheme="red" onClick={onDeleteSubmit}>
+              Delete
+            </Button>
+          </ModalFooter>
+        </ModalContent>
       </Modal>
     </>
   );

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { customAxios as axios } from "../../helpers/customAxios";
+import React from "react";
 import {
   Button,
   useDisclosure,
@@ -10,36 +9,20 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  List,
   ListItem,
   UnorderedList,
 } from "@chakra-ui/react";
 
-const ViewUser = ({ props }) => {
-  const [user, setUsers] = useState([]);
-
-  const getData = async () => {
-    try {
-      const id = props;
-      const { data } = await axios.get("/api/users/get", { userId: id });
-      data[0].addressFlat = data[0].address.flat;
-      data[0].addressFloor = data[0].address.floor;
-      data[0].addressStreet = data[0].address.street;
-      data[0].addressDistrict = data[0].address.district;
-      data[0].addressRegion = data[0].address.region;
-      setUsers(data[0]);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const data = user;
-
+const ViewUser = ({ data, row }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  if (data[row].address != null) {
+    data[row].addressFlat = data[row].address.flat;
+    data[row].addressFloor = data[row].address.floor;
+    data[row].addressStreet = data[row].address.street;
+    data[row].addressDistrict = data[row].address.district;
+    data[row].addressRegion = data[row].address.region;
+  }
 
   return (
     <>
@@ -53,25 +36,30 @@ const ViewUser = ({ props }) => {
           <ModalCloseButton />
           <ModalBody>
             <UnorderedList>
-              <ListItem>Full Name: {data.fullName}</ListItem>
-              <ListItem>Email: {data.email}</ListItem>
-              <ListItem>Access Type: {data.accessType}</ListItem>
-              <ListItem>Country of Origin: {data.countryOfOrigin}</ListItem>
-              <ListItem>Campus: {data.campus}</ListItem>
-              <ListItem>Life Stage: {data.lifestage}</ListItem>
-              <ListItem>LIFE Group: {data.lifeGroup}</ListItem>
-              <List>
+              <ListItem>Full Name: {data[row].fullName}</ListItem>
+              <ListItem>Email: {data[row].email}</ListItem>
+              <ListItem>Access Type: {data[row].accessType}</ListItem>
+              <ListItem>
+                Country of Origin: {data[row].countryOfOrigin}
+              </ListItem>
+              <ListItem>Campus: {data[row].campus}</ListItem>
+              <ListItem>Life Stage: {data[row].lifestage}</ListItem>
+              <ListItem>LIFE Group: {data[row].lifeGroup}</ListItem>
+              <ListItem>Ministry Team: {data[row].ministryTeam}</ListItem>
+              <ListItem>
                 Address:
-                <ListItem>{data.addressFlat}</ListItem>
-                <ListItem>{data.addressFloor}</ListItem>
-                <ListItem>{data.addressStreet}</ListItem>
-                <ListItem>{data.addressDistrict}</ListItem>
-                <ListItem>{data.addressRegion}</ListItem>
-              </List>
-              <ListItem>Phone Number: {data.phoneNumber}</ListItem>
-              <ListItem>Birthday: {data.birthday}</ListItem>
-              <ListItem>Member: {data.isMember}</ListItem>
-              <ListItem>Baptised: {data.isBaptised}</ListItem>
+                <UnorderedList>
+                  <ListItem>Flat: {data[row].addressFlat}</ListItem>
+                  <ListItem>Floor: {data[row].addressFloor}</ListItem>
+                  <ListItem>Street: {data[row].addressStreet}</ListItem>
+                  <ListItem>District: {data[row].addressDistrict}</ListItem>
+                  <ListItem>Region: {data[row].addressRegion}</ListItem>
+                </UnorderedList>
+              </ListItem>
+              <ListItem>Phone Number: {data[row].phoneNumber}</ListItem>
+              <ListItem>Birthday: {data[row].birthday}</ListItem>
+              <ListItem>Member: {data[row].isMember}</ListItem>
+              <ListItem>Baptised: {data[row].isBaptised}</ListItem>
             </UnorderedList>
           </ModalBody>
 

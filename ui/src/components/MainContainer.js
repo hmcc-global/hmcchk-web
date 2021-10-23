@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Switch } from "react-router-dom";
 import { chakra } from "@chakra-ui/react";
 import SermonContainer from "./sermons/SermonContainer";
@@ -11,14 +10,10 @@ import VisitUsPage from "./visit-us/VisitUsPage";
 import PrivateRoute from "./helpers/PrivateRoute";
 import HomeContainer from "./home/HomeContainer";
 import ConfirmEmailPage from "./email/ConfirmEmailPage";
-import UserProfileContainer from "./userProfile/UserProfileContainer";
 import CompleteUserProfileContainer from "./userProfile/CompleteUserProfile";
 import ClearCache from "./helpers/ClearCache";
 import AdminLoginContainer from "./admin/AdminLoginContainer";
-import AdminHome from "./admin/AdminHome";
-import AdminUser from "./admin/users/AdminUser";
-import AdminForm from "./admin/AdminForm";
-import AdminGiving from "./admin/AdminGiving";
+import AdminContainer from "./AdminContainer";
 
 const MainContainer = () => {
   return (
@@ -86,44 +81,15 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/profile"
-          permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
-          component={UserProfileContainer}
-          path="/admin"
+          path="/admin/login"
           permissions={["noUser"]}
           component={AdminLoginContainer}
         />
         <PrivateRoute
           exact
-          path="/admin/home"
+          path="/admin/:pageName"
           permissions={["admin", "stewardship"]}
-          component={AdminHome}
-        />
-        <PrivateRoute
-          exact
-          path="/admin/users"
-          permissions={["admin", "stewardship"]}
-          //permissions={["noUser"]}
-          component={AdminUser}
-        />
-        <PrivateRoute
-          exact
-          path="/admin/forms"
-          permissions={["admin", "stewardship"]}
-          component={AdminForm}
-        />
-        <PrivateRoute
-          exact
-          path="/clear-cache/"
-          permissions={["admin", "stewardship"]}
-          component={ClearCache}
-        />
-        <PrivateRoute path="*" permissions={["public"]} component={NoMatch} />
-        <PrivateRoute
-          path="/admin/giving"
-          permissions={["stewardship"]}
-          //permissions={["noUser"]}
-          component={AdminGiving}
+          component={AdminContainer}
         />
       </Switch>
     </chakra.main>

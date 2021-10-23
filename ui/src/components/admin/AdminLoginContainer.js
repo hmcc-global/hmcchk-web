@@ -19,11 +19,7 @@ const AdminLoginContainer = (props) => {
   const toast = useToast();
   const dispatch = useDispatch();
 
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm();
+  const { handleSubmit, register } = useForm();
 
   const postLogin = async (user) => {
     try {
