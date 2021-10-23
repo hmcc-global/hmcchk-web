@@ -5,6 +5,7 @@ import {
   Heading,
   Text,
   Container,
+  Link,
   Spacer,
   LinkOverlay,
   useDisclosure,
@@ -12,6 +13,7 @@ import {
   HStack,
   Divider,
   Flex,
+  Stack,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -27,8 +29,8 @@ function RenderSwitch(param) {
   switch (param.param) {
     case "FPS":
       return (
-        <Flex>
-          <VStack>
+        <Flex direction={["column", "column", "row"]}>
+          <Stack>
             <Text fontWeight="bold">
               Open your mobile banking FPS interface and scan the QR code OR
               input the FPS identifier.
@@ -39,11 +41,13 @@ function RenderSwitch(param) {
               </Text>
               <Text fontWeight="bold">FPS ID: 167534304</Text>
             </Box>
-          </VStack>
+          </Stack>
           <Spacer />
+
           <Image
+            margin="auto"
             src={process.env.PUBLIC_URL + "/giving/FPSQR.png"}
-            boxSize="30%"
+            boxSize={["70%", "70%", "30%"]}
           />
         </Flex>
       );
@@ -81,7 +85,55 @@ function RenderSwitch(param) {
           </Text>
         </VStack>
       );
-
+    case "Cash":
+      return (
+        <Box>
+          <Text fontWeight="bold">
+            You may give to our church by cash or check in an offering envelope
+            at Sunday Celebration.
+          </Text>
+        </Box>
+      );
+    case "Online Giving":
+      return (
+        <Box>
+          <Text fontWeight="bold">
+            Kindly note that a portion of your giving will be deducted for
+            online credit card transactions (3.5% + HKD $2.35 processing fee).
+            If you wish for 100% of your contribution to go towards our church’s
+            ministry work, please consider selecting “cover fees” on the giving
+            site or give via cash or check.
+          </Text>
+          <Text fontWeight="bold">
+            Click{" "}
+            <Link
+              style={{
+                textDecoration: "underline",
+              }}
+              href="https://tithe.ly/give_new/www/#/tithely/give-one-time/645349"
+              color="#319795"
+            >
+              here
+            </Link>{" "}
+            to proceed with online credit card giving
+          </Text>
+        </Box>
+      );
+    case "Cheque":
+      return (
+        <Box>
+          <Text fontWeight="bold">All Checks should be made out to:</Text>
+          <Text fontWeight="bold">
+            “Harvest Mission Community Church (Hong Kong) Limited”
+          </Text>
+          <Text fontWeight="bold" paddingTop="1vw">
+            You may also mail your checks or donations to:
+          </Text>
+          <Text fontWeight="bold">
+            P.O. Box 50443 Sai Ying Pun Post Office Sai Ying Pun, Hong Kong
+          </Text>
+        </Box>
+      );
     default:
       return "not detected";
   }
@@ -93,6 +145,7 @@ export function GivingCard(cardinfo) {
     <Box
       w={["100%", "100%", "32%"]}
       borderRadius="lg"
+      my={["1vh", "1vh", "0"]}
       bgImage={cardinfo.imageLink}
       bgPosition="center"
       bgSize="cover"
@@ -108,17 +161,28 @@ export function GivingCard(cardinfo) {
           background: "rgba(0, 0, 0, 0.29)",
         }}
       >
-        <Box paddingTop="5vh">
-          <VStack spacing="2vh">
-            <Center>
-              <Heading as="h4" size="lg" color="white">
+        <Box py={["2vh", "2vh", "5vh"]} minH="10vh" minW="90%">
+          <Flex direction={["row", "row", "column"]}>
+            <Center paddingBottom={["0", "0", "2vh"]}>
+              <Heading
+                as="h4"
+                fontSize={["sm", "md", "xl"]}
+                color="white"
+                fontWeight="bold"
+              >
                 {cardinfo.text}
               </Heading>
             </Center>
+            <Spacer />
+
             <Center>
               <Box w="16vh">
                 <Button w="100%" variant="outline" onClick={onOpen}>
-                  <Text align="center" color="white">
+                  <Text
+                    align="center"
+                    fontSize={["sm", "md", "lg"]}
+                    color="white"
+                  >
                     Learn More
                   </Text>
                 </Button>
@@ -138,7 +202,7 @@ export function GivingCard(cardinfo) {
                 </Modal>
               </Box>
             </Center>
-          </VStack>
+          </Flex>
         </Box>
       </Flex>
     </Box>
