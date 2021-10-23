@@ -20,6 +20,7 @@ module.exports.routes = {
    ***************************************************************************/
 
   "get /api/cache/refresh-cache": "cache/refresh-cache",
+  "get /api/misc/get-env": "misc/get-env",
 
   // Forms APIs
   "get /api/forms/get-form": "forms/get-form",

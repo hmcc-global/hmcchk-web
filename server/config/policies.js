@@ -38,6 +38,9 @@ module.exports.policies = {
   // Media
   "media/*": true,
 
+  // Misc
+  "misc/get-env": true,
+
   // Pages
   "pages/*": true,
 
