@@ -88,7 +88,7 @@ const FormManager = (props) => {
         await axios.post("/api/forms/post-delete-form", {
           id: e.target.value,
         });
-        getFormListFromDatabase();
+        await getFormListFromDatabase();
       }
       setIsLoading(false);
     } catch (err) {
@@ -105,7 +105,7 @@ const FormManager = (props) => {
         id: id,
         formToSave: { isPublished: !formData.isPublished },
       });
-      getFormListFromDatabase();
+      await getFormListFromDatabase();
       setIsLoading(false);
     } catch (err) {
       console.log(err);

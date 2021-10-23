@@ -34,21 +34,6 @@ module.exports = {
     try {
       // Only do if there is userID
       if (userId) {
-        // Update existing submission if it's there
-        // let res = await Submission.updateOne({
-        //   formId: formId,
-        //   userId: userId,
-        // }).set({ submissionData: submissionData });
-
-        // If not, create new submission
-        // if (!res) {
-        //   res = await Submission.create({
-        //     formId: formId,
-        //     userId: userId,
-        //     submissionData: submissionData,
-        //   }).fetch();
-        // }
-
         let res = await Submission.create({
           formId: formId,
           userId: userId,
@@ -65,19 +50,6 @@ module.exports = {
 
         const user = (await sails.helpers.users.getUser(userId))[0];
         let temp = user.formSubmitted;
-
-        // Check if this is an update operation
-        // if (temp) {
-        //   for (let i in temp) {
-        //     let item = temp[i];
-        //     if (
-        //       item.formId === submissionObject.formId &&
-        //       item.submissionId === submissionObject.submissionId
-        //     ) {
-        //       return exits.success();
-        //     }
-        //   }
-        // }
 
         // Create the submission instead
         if (temp) {

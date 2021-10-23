@@ -25,7 +25,7 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { CheckCircleIcon } from "@chakra-ui/icons";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import {
   ministryTeamList,
@@ -52,29 +52,6 @@ const UserProfileDesktop = (props) => {
   const [userData, setUserData] = useState(null);
   const [formList, setFormList] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
-
-  const onModalClose = (e) => {
-    setModalOpen(false);
-  };
-
-  const fetchUserData = async () => {
-    if (user.id) {
-      const { data, status } = await getUserDataRequest(user.id);
-
-      if (status === 200) {
-        setUserData(data[0]);
-        setUserInformationFields(data[0]);
-      }
-    }
-  };
-
-  const fetchPublishedForms = async () => {
-    const { data, status } = await getPublicFormsRequest();
-
-    if (status === 200) {
-      setFormList([...data]);
-    }
-  };
 
   const setUserInformationFields = (userData) => {
     for (let key in userData) {
@@ -122,6 +99,29 @@ const UserProfileDesktop = (props) => {
     }
   };
 
+  const onModalClose = (e) => {
+    setModalOpen(false);
+  };
+
+  const fetchUserData = useCallback(async () => {
+    if (user.id) {
+      const { data, status } = await getUserDataRequest(user.id);
+
+      if (status === 200) {
+        setUserData(data[0]);
+        setUserInformationFields(data[0]);
+      }
+    }
+  }, [user.id]);
+
+  const fetchPublishedForms = useCallback(async () => {
+    const { data, status } = await getPublicFormsRequest();
+
+    if (status === 200) {
+      setFormList([...data]);
+    }
+  }, []);
+
   // Implementation needs some component specific customization
   const handleEditUserInformation = async (data, e) => {
     userDataCleanup(data);
@@ -136,10 +136,11 @@ const UserProfileDesktop = (props) => {
     }
   };
 
-  useEffect(async () => {
-    await fetchUserData();
-    await fetchPublishedForms();
-  }, []);
+  useEffect(() => {
+    fetchUserData();
+    fetchPublishedForms();
+    // console.log("executed")
+  }, [fetchUserData, fetchPublishedForms]);
 
   return (
     <>

@@ -7,7 +7,7 @@ const camelize = (str) => {
     .replace(/\s+/g, "");
 };
 
-function sentencize(str) {
+const sentencize = (str) => {
   return str
     .split(/([A-Z]|\d)/)
     .map((v, i, arr) => {

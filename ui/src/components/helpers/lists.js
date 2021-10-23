@@ -22,17 +22,17 @@ const ministryTeamList = [
 
 const lifegroupList = [
   "Not in a LIFE Group",
-  "HKUST Tuesday (Charissa)",
-  "HKUST Tuesday (Yuk)",
-  "HKUST Wednesday",
-  "PolyU Tuesday",
-  "PolyU Wednesday",
-  "HKU", 
-  "CUHK",
-  "BCTU",
-  "Focus Tuesday (Central)",
-  "Focus Tuesday (Jordan)",
-  "Focus Wednesday",
+  "Faith & Furious",
+  "P∞GU",
+  "BETTER",
+  "Eternals",
+  "Fortissimo",
+  "VLT",
+  "AAA",
+  "Jambalaya",
+  "Vortex",
+  "Ginseng",
+  "JEEP",
 ];
 
 const districtList = [

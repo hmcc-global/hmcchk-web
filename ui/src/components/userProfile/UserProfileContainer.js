@@ -1,4 +1,4 @@
-import { Container, Image, Button } from "@chakra-ui/react";
+import { Container, Image } from "@chakra-ui/react";
 import UserProfileDesktop from "./UserProfileDesktop";
 import UserProfileMobile from "./UserProfileMobile";
 
@@ -30,7 +30,7 @@ const UserProfileContainer = (props) => {
         position="relative"
         display={{ base: "block", md: "none" }}
       >
-        <UserProfileMobile user={user}/>
+        <UserProfileMobile user={user} />
       </Container>
     </>
   );

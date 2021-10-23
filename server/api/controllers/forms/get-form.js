@@ -15,7 +15,7 @@ module.exports = {
 
   fn: async function ({ id }, exits) {
     try {
-      const data = await sails.helpers.forms.getForm({
+      const data = await Form.find({
         id: id,
         isPublished: true,
         isDeleted: false,

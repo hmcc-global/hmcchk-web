@@ -10,6 +10,7 @@ module.exports = {
     },
     timeRange: {
       type: "json",
+      description: "in YYYY-MM-DD format"
     },
   },
 

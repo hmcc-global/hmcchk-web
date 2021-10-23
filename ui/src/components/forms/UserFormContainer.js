@@ -3,8 +3,6 @@ import { customAxios as axios } from "../helpers/customAxios";
 import Form from "./Form";
 import { Container } from "@chakra-ui/react";
 
-const styles = {};
-
 const UserFormContainer = (props) => {
   const [formData, setFormData] = useState(null);
   const { user, history } = props;
