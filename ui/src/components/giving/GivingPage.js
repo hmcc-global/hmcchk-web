@@ -1,22 +1,14 @@
 import {
-  AspectRatio,
   Box,
   Center,
   Container,
   Flex,
-  Stack,
   Heading,
-  Icon,
   Accordion,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-  Link,
-  LinkBox,
-  LinkOverlay,
-  Divider,
-  Image,
   Spacer,
   Text,
   VStack,
@@ -139,7 +131,7 @@ const GivingPage = (props) => {
         <Text as="i">
           If you have any questions, please do not hesitate to contact us:&nbsp;
         </Text>
-        <Text as="i" fontWeight="bold" inline>
+        <Text as="i" fontWeight="bold">
           stewardship@hongkong.hmcc.net
         </Text>
       </Box>

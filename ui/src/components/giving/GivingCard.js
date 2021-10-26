@@ -4,29 +4,25 @@ import {
   Button,
   Heading,
   Text,
-  Container,
   Link,
   Spacer,
-  LinkOverlay,
   useDisclosure,
   VStack,
-  HStack,
-  Divider,
   Flex,
   Stack,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   Center,
   Image,
+  ModalFooter,
 } from "@chakra-ui/react";
 
 function RenderSwitch(param) {
-  switch (param.param) {
+  switch (param.ModalSelection) {
     case "FPS":
       return (
         <Flex direction={["column", "column", "row"]}>
@@ -196,8 +192,9 @@ export function GivingCard(cardinfo) {
                     </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                      <RenderSwitch param={cardinfo.text} />
+                      <RenderSwitch ModalSelection={cardinfo.text} />
                     </ModalBody>
+                    <ModalFooter></ModalFooter>
                   </ModalContent>
                 </Modal>
               </Box>
