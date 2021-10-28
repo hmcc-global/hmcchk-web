@@ -34,6 +34,9 @@ module.exports = {
     try {
       // Only do if there is userID
       if (userId) {
+        const user = (await sails.helpers.users.getUser(userId))[0];
+        if (user === null) return exits.invalid()
+
         let res = await Submission.create({
           formId: formId,
           userId: userId,
@@ -48,7 +51,6 @@ module.exports = {
           isCompleted: false,
         };
 
-        const user = (await sails.helpers.users.getUser(userId))[0];
         let temp = user.formSubmitted;
 
         // Create the submission instead

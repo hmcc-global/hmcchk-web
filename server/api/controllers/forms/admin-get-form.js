@@ -1,5 +1,5 @@
 module.exports = {
-  friendlyName: "Get form route for public use",
+  friendlyName: "Get form route for admin use",
 
   description:
     "Gets all forms if id is not specified, finds a specific one otherwise",

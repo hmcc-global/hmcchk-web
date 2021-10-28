@@ -10,7 +10,12 @@ module.exports = {
     },
     timeRange: {
       type: "json",
-      description: "in YYYY-MM-DD format"
+      description:
+        "is an object with a start and end, sample here: \
+      { \
+        start: YYYY-MM-DD, \
+        end: YYYY-MM-DD \
+      }",
     },
   },
 

@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { customAxios as axios } from "../helpers/customAxios";
 import { camelize, sentencize } from "../helpers/formsHelpers";
-import { useSelector } from "react-redux";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 
 import {

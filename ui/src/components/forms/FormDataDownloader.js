@@ -33,6 +33,11 @@ const FormDataDownloader = (props) => {
     try {
       let timeRange = null;
       if (data.startDate !== "" && data.endDate !== "") {
+        if (data.endDate < data.startDate) {
+          alert("Invalid date range");
+          setIsLoading(false);
+          return;
+        }
         timeRange = {
           start: data.startDate,
           end: data.endDate,
