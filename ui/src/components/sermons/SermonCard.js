@@ -1,34 +1,20 @@
 import {
-  Icon,
   AspectRatio,
   Box,
   Heading,
   Image,
   Text,
-  UnorderedList,
-  OrderedList,
-  ListItem,
   Button,
   HStack,
   VStack,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  ButtonGroup,
 } from "@chakra-ui/react";
-import { BsChevronCompactDown, BsClockFill } from "react-icons/bs";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { DateTime } from "luxon";
 import parse, { domToReact, attributesToProps } from "html-react-parser";
 import { DATE_FULL } from "luxon/src/impl/formats";
 
-const SermonCard = (props) => {
-  const { sermonData } = props;
+const SermonCard = ({ sermonData, allSermons }) => {
   let sermonDate = DateTime.fromISO(sermonData.datePreached).toLocaleString(
     DATE_FULL
   );
@@ -56,7 +42,6 @@ const SermonCard = (props) => {
               />
             </AspectRatio>
           </Link>
-          <BsChevronCompactDown position="absolute" />
         </Box>
         <Box overflow="hidden" position="relative">
           <VStack alignItems="left">

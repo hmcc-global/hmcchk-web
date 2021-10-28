@@ -8,46 +8,53 @@ import {HStack,
         Text,
         Container  
 } from "@chakra-ui/react";
+import {ChevronLeftIcon} from "@chakra-ui/icons";
+import RelatedSermonCard from "./RelatedSermonCard";
 import { DateTime } from "luxon";
 import { DATE_FULL } from "luxon/src/impl/formats";
-import React, {useEffect, useState} from "react";
-import { customAxios as axios } from "../helpers/customAxios";
+import React, {useState} from "react";
 
 const SermonDetails = (props) => {
-  const sermonData = props.location.state;
-
+  const sermonData = props.location.state.sermonData;
+  const allSermons = props.location.state.allSermons;
+  let relatedSermons = allSermons.filter(related => related.sermonSeries[0].name.includes(sermonData.sermonSeries[0].name) && related.id !== sermonData.id);
   let sermonDate = DateTime.fromISO(sermonData.datePreached).toLocaleString(DATE_FULL);
-  console.log(sermonData)
+  
   return (
     <>
       <Container maxW="container.lg">
         <Box>
-          <VStack>
+          <VStack alignItems="left" alignContent="left">
             <Link href="/sermons">
-            <Button>
-              Back
+            <Button variant="link" leftIcon={<ChevronLeftIcon />}>
+              See all past sermons
             </Button>
             </Link>
+            <Container maxW="container.md" alignSelf="center">
+            <HStack>
+              <Box w="20%" ></Box>
+            <VStack alignItems="left" alignContent="left">
             <AspectRatio mb="5" width="100%" ratio={16 / 9}>
                 <Image borderRadius="20" src={sermonData.sermonSeries[0].image} objectFit="cover" />
               </AspectRatio>
             <HStack>
               <Text>
-                {sermonData.title}
-                |
-                {sermonData.passage}
+                {`${sermonData.title} | ${sermonData.passage}`}
               </Text>
             </HStack>
             <HStack>
-              <Text>
-                Series: {sermonData.sermonSeries[0].name}
-              </Text>
-              <Text>
-                Date: {sermonDate}
-              </Text>
-              <Text>
-                Speaker: {sermonData.speaker[0].name}
-              </Text>
+              <HStack>
+                <Text>Series: </Text>
+                <Text>{sermonData.sermonSeries[0].name}</Text>
+              </HStack>
+              <HStack>
+                <Text>Date: </Text>
+                <Text>{sermonDate}</Text>
+              </HStack>
+              <HStack>
+                <Text>Speaker:</Text>
+                <Text>{sermonData.speaker[0].name}</Text>
+              </HStack>
             </HStack>
             <Text>
               Audio Sermon:
@@ -66,10 +73,16 @@ const SermonDetails = (props) => {
             <Text>
               More from this series: 
             </Text>
-            <p>test</p>
+            {relatedSermons.length >0 &&
+              relatedSermons.map((sermon, i) => (
+                <RelatedSermonCard key = {sermon.id} sermonData = {sermon} allSermons={allSermons}/>
+              ))}
             <Button>
               {`See all Sermon Videos >`}
             </Button>
+            </VStack>
+            </HStack>
+            </Container>
           </VStack>
         </Box>
       </Container>

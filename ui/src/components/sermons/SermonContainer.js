@@ -7,8 +7,6 @@ import CurrentSermon from "./CurrentSermon";
 
 const SermonContainer = (props) => {
   const [sermons, setSermons] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [sermonsPerPage, setSermonsPerPage] = useState(8);
 
   useEffect(() => {
     getData();
@@ -40,23 +38,25 @@ const SermonContainer = (props) => {
   console.log(sermons);
   return (
     <Container maxW="container.lg">
-      <Heading
-        as="h2"
-        mb="2"
-        size="2xl"
-        pt="20"
-        fontWeight="900"
+      <Box
+        marginTop="20px"
+        borderWidth="1px"
+        borderRadius="20"
+        bgImage={`url('${process.env.PUBLIC_URL}/images/sermons-banner.png')`}
+        bgPosition="center"
+        bgSize="cover"
+        flex={1}
         textAlign="center"
+        px={[8, 10]}
+        py={[8, 12]}
+        m={2}
       >
-        Sermons
-      </Heading>
+        <Heading size="2xl" color="white" fontWeight="900">
+          Sermons
+        </Heading>
+      </Box>
       <CurrentSermon currentSermon={sermons[0]} />
-      <SermonCardList allSermons={sermons} sermons={currentSermons} />
-      <Pagination
-        itemsPerPage={sermonsPerPage}
-        totalItems={sermons.length}
-        paginate={paginate}
-      />
+      <SermonCardList allSermons={sermons} />
     </Container>
   );
 };
