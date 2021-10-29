@@ -38,29 +38,31 @@ const SermonDetails = (props) => {
                 <Image borderRadius="20" src={sermonData.sermonSeries[0].image} objectFit="cover" />
               </AspectRatio>
             <HStack>
-              <Text>
+              <Text 
+                fontWeight="bold"
+							  fontSize="1.5em">
                 {`${sermonData.title} | ${sermonData.passage}`}
               </Text>
             </HStack>
             <HStack>
               <HStack>
-                <Text>Series: </Text>
+                <Text fontWeight="bold">Series: </Text>
                 <Text>{sermonData.sermonSeries[0].name}</Text>
               </HStack>
               <HStack>
-                <Text>Date: </Text>
+                <Text fontWeight="bold">Date: </Text>
                 <Text>{sermonDate}</Text>
               </HStack>
               <HStack>
-                <Text>Speaker:</Text>
+                <Text fontWeight="bold">Speaker:</Text>
                 <Text>{sermonData.speaker[0].name}</Text>
               </HStack>
             </HStack>
-            <Text>
+            <Text fontWeight="bold" color="#0628A3">
               Audio Sermon:
             </Text>
             <HStack>
-              <p>spotify</p>
+              <iframe src="https://open.spotify.com/embed/episode/0ZWPtJCohT0CBZmFzMz3Jy" width="100%%" height="232" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
             </HStack>
             <HStack>
               <Button>
@@ -70,7 +72,7 @@ const SermonDetails = (props) => {
                 Share
               </Button>
             </HStack>
-            <Text>
+            <Text fontWeight="bold" color="#0628A3">
               More from this series: 
             </Text>
             {relatedSermons.length >0 &&
