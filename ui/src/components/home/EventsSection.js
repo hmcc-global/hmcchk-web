@@ -12,8 +12,8 @@ import {
   LinkOverlay,
 } from "@chakra-ui/react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 import { DateTime } from "luxon";
 import { useEffect, useState } from "react";
@@ -40,12 +40,12 @@ const EventsSection = () => {
   };
 
   const sliderStyle = {
-    width : "100%",
-    position : "relative",
-    left : "50%",
-    right : "50%",
-    marginLeft : "-50vw",
-    marginRight : "-50vw",
+    width: "100%",
+    position: "relative",
+    left: "50%",
+    right: "50%",
+    marginLeft: "-50vw",
+    marginRight: "-50vw",
   };
 
   const populateData = async () => {
@@ -77,11 +77,7 @@ const EventsSection = () => {
 
   return (
     <Flex w="full" h={["95vh", "auto"]} direction="column">
-      <Container
-        maxW="container.lg"
-        justifyContent="center"
-        display="flex"
-      >
+      <Container maxW="container.lg" justifyContent="center" display="flex">
         <VStack>
           <FeaturedEvent />
         </VStack>
@@ -93,8 +89,13 @@ const EventsSection = () => {
         marginTop="2em"
       >
         <VStack w="full" alignItems={["flex-start", null]}>
-          <HStack w={[null, "full"]} whiteSpace="nowrap" height="10vh" marginBottom="1em">
-            <Heading fontSize={["2em", "5xl"]} color="black" >
+          <HStack
+            w={[null, "full"]}
+            whiteSpace="nowrap"
+            height="10vh"
+            marginBottom="1em"
+          >
+            <Heading fontSize={["2em", "5xl"]} color="black">
               Upcoming Events
             </Heading>
             <chakra.hr

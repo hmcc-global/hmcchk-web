@@ -10,8 +10,11 @@ import VisitUsPage from "./visit-us/VisitUsPage";
 import PrivateRoute from "./helpers/PrivateRoute";
 import HomeContainer from "./home/HomeContainer";
 import ConfirmEmailPage from "./email/ConfirmEmailPage";
+import UserProfileContainer from "./userProfile/UserProfileContainer";
 import CompleteUserProfileContainer from "./userProfile/CompleteUserProfile";
 import ClearCache from "./helpers/ClearCache";
+import UserFormContainer from "./forms/UserFormContainer";
+import NoMatch from "./errors/NoMatch";
 import AdminLoginContainer from "./admin/AdminLoginContainer";
 import AdminContainer from "./AdminContainer";
 
@@ -79,6 +82,19 @@ const MainContainer = () => {
           permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
           component={CompleteUserProfileContainer}
         />
+        <PrivateRoute
+          exact
+          path="/profile"
+          permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
+          component={UserProfileContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/clear-cache/"
+          permissions={["admin", "stewardship"]}
+          component={ClearCache}
+        />
+        <PrivateRoute path="*" permissions={["public"]} component={NoMatch} />
         <PrivateRoute
           exact
           path="/admin/login"

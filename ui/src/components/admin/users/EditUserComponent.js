@@ -32,7 +32,7 @@ import {
   regionList,
   campusList,
   countryList,
-} from "../../helpers/UserConstants";
+} from "../../helpers/lists";
 
 const EditUser = ({ data: payload, row, refreshCallback }) => {
   const toast = useToast();
