@@ -15,7 +15,6 @@ import {
   chakra,
 } from "@chakra-ui/react";
 import ArrayToExcelButton from "./ArrayToExcelButton";
-import FileUpload from "./FileUploadButton";
 import { useTable, useSortBy } from "react-table";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 
@@ -25,7 +24,6 @@ export default function AdminGiving(props) {
   const getData = async () => {
     try {
       const { data } = await axios.get("/api/users/get");
-      console.log(data);
       setUsers(data);
     } catch (err) {
       console.log(err);
@@ -73,16 +71,6 @@ export default function AdminGiving(props) {
           fileName={"UserData.xlsx"}
           buttonTitle={"Export"}
         />
-        {/* <Input type="file" onChange={this.onFileChange}></Input>
-          <Button
-            leftIcon={<AddIcon />}
-            colorScheme="teal"
-            onClick={this.onFileUpload}
-          >
-            Import
-          </Button> */}
-
-        <FileUpload></FileUpload>
       </Stack>
       <Flex
         bg={useColorModeValue("gray.200")}

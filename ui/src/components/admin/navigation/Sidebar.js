@@ -21,6 +21,7 @@ import {
   FiStar,
   FiSettings,
   FiMenu,
+  FiXCircle,
 } from "react-icons/fi";
 
 const LinkItems = [
@@ -35,7 +36,7 @@ const LinkItems = [
   { name: "Settings", icon: FiSettings, path: "/admin/settings" },
   {
     name: "Log Out",
-    icon: FiSettings,
+    icon: FiXCircle,
     path: "/admin/logout",
   },
 ];
@@ -113,7 +114,7 @@ const NavItem = ({ icon, children, ...rest }) => {
   );
 };
 
-const MobileNav = ({ onOpen, ...rest }) => {
+const MobileNav = ({ onOpen }) => {
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -124,7 +125,6 @@ const MobileNav = ({ onOpen, ...rest }) => {
       borderBottomWidth="1px"
       borderBottomColor={useColorModeValue("gray.200", "gray.700")}
       justifyContent={{ base: "space-between", md: "flex-end" }}
-      {...rest}
     >
       <IconButton
         display={{ base: "flex", md: "none" }}
@@ -147,18 +147,16 @@ const MobileNav = ({ onOpen, ...rest }) => {
 };
 
 export default function SidebarWithHeader(props) {
-  const { children, ...rest } = props;
+  const { children } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
       <SidebarContent
-        {...rest}
         onClose={() => onClose}
         display={{ base: "none", md: "block" }}
       />
       <Drawer
-        {...rest}
         autoFocus={true}
         isOpen={isOpen}
         placement="left"
@@ -167,12 +165,12 @@ export default function SidebarWithHeader(props) {
         onOverlayClick={onClose}
         size="full"
       >
-        <DrawerContent {...rest}>
-          <SidebarContent {...rest} onClose={onClose} />
+        <DrawerContent>
+          <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      <MobileNav onOpen={onOpen} {...rest} />
-      <Box {...rest} ml={{ base: 0, md: 60 }} p="4">
+      <MobileNav onOpen={onOpen} />
+      <Box ml={{ base: 0, md: 60 }} p="4">
         {children}
       </Box>
     </>

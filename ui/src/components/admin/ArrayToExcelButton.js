@@ -5,7 +5,6 @@ import { arrayToExcel } from "../helpers/arrayToExcel";
 const ArrayToExcelButton = ({ apiArray, fileName, buttonTitle }) => {
   const apiArrayToExcel = () => {
     const customArray = JSON.parse(JSON.stringify(apiArray));
-    console.log(customArray);
     customArray.map((obj) => {
       Object.keys(obj);
       delete obj["password"];

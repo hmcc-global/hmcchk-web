@@ -38,8 +38,8 @@ const EditUser = ({ data: payload, row, refreshCallback }) => {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const arrayToOptions = function (x) {
-    return <option>{x}</option>;
+  const arrayToOptions = function (x, i) {
+    return <option key={i}>{x}</option>;
   };
 
   const { handleSubmit, register } = useForm();

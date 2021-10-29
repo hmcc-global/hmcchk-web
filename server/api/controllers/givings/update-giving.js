@@ -30,14 +30,13 @@ module.exports = {
   },
 
   fn: async function ({ params }, exits) {
-    if (params.id) {
-      let givingId = params.id;
+    const { id: givingId, ...toUpdate } = params;
+    if (givingId) {
       try {
-        delete params.id;
         let data = await Giving.updateOne({
           _id: givingId,
           isDeleted: false,
-        }).set(params);
+        }).set(toUpdate);
         if (data != null) {
           return exits.success(data);
         }
@@ -46,8 +45,8 @@ module.exports = {
         sails.log.error(err);
         return exits.error(err);
       }
-    } else {
-      throw "missingRequiredFields";
     }
+    sails.log.error("missingRequiredFields");
+    return exits.invalid();
   },
 };

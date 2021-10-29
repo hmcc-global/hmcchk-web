@@ -21,8 +21,17 @@ const AdminLoginContainer = (props) => {
 
   const { handleSubmit, register } = useForm();
 
+  const getUser = async (email) => {
+    const { data } = await axios.get("/api/users/get");
+  };
+
   const postLogin = async (user) => {
     try {
+      const checkAccess = await axios.post("/api/auth/login", {
+        emailAddress: user.emailAddress,
+        password: user.password,
+      });
+
       const result = await axios.post("/api/auth/login", {
         emailAddress: user.emailAddress,
         password: user.password,

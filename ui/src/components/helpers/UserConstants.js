@@ -9,26 +9,31 @@ const lifestageList = [
 ];
 
 const ministryTeamList = [
-  "Intercessory Prayer Team",
-  "Creatives",
-  "Hospitality",
-  "Band",
+  "Not Applicable",
   "Audio/Visual",
-  "Creative Worship",
-  "Multimedia",
+  "Band",
   "Building Blocks",
+  "Creative Design",
+  "Creative Tech",
+  "Creative Worship",
+  "Hospitality",
+  "Intercessory Prayer Team",
+  "Multimedia",
 ];
 
 const lifegroupList = [
-  "BBB",
-  "DONKI",
-  "Drippin",
-  "Yeet Hay",
-  "GLOW UP",
-  "WASABAE",
-  "Refresh",
-  "GnT",
-  "SWAT",
+  "Not in a LIFE Group",
+  "Faith & Furious",
+  "P∞GU",
+  "BETTER",
+  "Eternals",
+  "Fortissimo",
+  "VLT",
+  "AAA",
+  "Jambalaya",
+  "Vortex",
+  "Ginseng",
+  "JEEP",
 ];
 
 const districtList = [
