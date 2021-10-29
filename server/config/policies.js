@@ -32,6 +32,9 @@ module.exports.policies = {
   "auth/post-forgot-password": true,
   "auth/post-change-password-recovery": true,
 
+  // Forms
+  "forms/post-contact-us-form": true,
+
   // Cache
   "cache/*": ["isLoggedIn", "isAdmin"],
 

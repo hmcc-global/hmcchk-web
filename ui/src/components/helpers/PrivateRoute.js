@@ -24,9 +24,14 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
     }
   };
 
-  useEffect(async () => {
-    let obj = await checkIfTokenExists(user);
-    setUserObj(obj);
+  useEffect(() => {
+    // useEffects are meant to be synchronous, this helps to remove the warning
+    async function fetch() {
+      let obj = await checkIfTokenExists(user);
+      setUserObj(obj);
+    }
+
+    fetch();
   }, [user]);
 
   // check if Token exists in redux store
