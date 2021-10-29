@@ -24,9 +24,14 @@ module.exports.routes = {
 
   // Forms APIs
   "get /api/forms/get-form": "forms/get-form",
+  "get /api/forms/admin-get-form": "forms/admin-get-form",
   "post /api/forms/post-create-form": "forms/post-create-form",
   "post /api/forms/post-update-form": "forms/post-update-form",
   "post /api/forms/post-delete-form": "forms/post-delete-form",
+
+  // Submission APIs
+  "post /api/forms/post-create-submission": "forms/post-create-submission",
+  "get /api/forms/get-submission": "forms/get-submission",
 
   // Announcement APIs
   "get /api/announcements/get-announcements": "announcements/get-announcements",

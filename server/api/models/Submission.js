@@ -1,15 +1,15 @@
 module.exports = {
   attributes: {
-    formName: {
+    formId: {
       type: "string",
       required: true,
     },
-    formFields: {
-      type: "json",
+    userId: {
+      type: "string",
     },
-    isPublished: {
-      type: "boolean",
-      defaultsTo: false,
+    submissionData: {
+      type: "json",
+      required: true,
     },
     isDeleted: {
       type: "boolean",

@@ -1,4 +1,6 @@
 import { customAxios as axios } from "../helpers/customAxios";
+import { UnorderedList, ListItem, Link } from "@chakra-ui/react";
+
 // Only allow setting field values that are defined here
 const settableDataFields = [
   "email",
@@ -83,13 +85,35 @@ const updateUserDataRequest = async (data) => {
   });
 };
 
+const getPublicFormsRequest = async () => {
+  return await axios.get("/api/forms/get-form");
+};
+
+const generatePublishedFormLinks = (forms) => {
+  if (forms) {
+    return (
+      <UnorderedList>
+        {forms.map((item) => {
+          return (
+            <ListItem key={"fl" + item["formName"]}>
+              <Link href={`/forms/${item["id"]}`}>{item["formName"]}</Link>
+            </ListItem>
+          );
+        })}
+      </UnorderedList>
+    );
+  } else return;
+};
+
 export {
   splitFullName,
   settableDataFields,
   userDataCleanup,
   getUserDataRequest,
   updateUserDataRequest,
+  getPublicFormsRequest,
   fixName,
   fixAddress,
   purgeFormFields,
+  generatePublishedFormLinks,
 };

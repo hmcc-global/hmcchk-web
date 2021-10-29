@@ -15,7 +15,7 @@ module.exports = {
 
   fn: async function ({ id }, exits) {
     try {
-      const data = await Form.updateOne("id").set({isDeleted: true});
+      const data = await Form.updateOne({id}).set({ isDeleted: true });
       if (!data) {
         return exits.error("Invalid id");
       }

@@ -61,7 +61,7 @@ and exposed as \`req.me\`.)`,
       // If the password doesn't match, then also exit thru "badCombo".
       await sails.helpers.passwords
         .checkPassword(password, userRecord.password)
-        .intercept("incorrect", exits.badCombo());
+        .intercept("incorrect", "badCombo");
 
       // Modify the active session instance.
       // (This will be persisted when the response is sent.)

@@ -22,15 +22,17 @@ const ministryTeamList = [
 
 const lifegroupList = [
   "Not in a LIFE Group",
-  "BBB",
-  "DONKI",
-  "Drippin",
-  "Yeet Hay",
-  "GLOW UP",
-  "WASABAE",
-  "Refresh",
-  "GnT",
-  "SWAT",
+  "Faith & Furious",
+  "P∞GU",
+  "BETTER",
+  "Eternals",
+  "Fortissimo",
+  "VLT",
+  "AAA",
+  "Jambalaya",
+  "Vortex",
+  "Ginseng",
+  "JEEP",
 ];
 
 const districtList = [

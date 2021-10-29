@@ -1,8 +1,8 @@
 module.exports = {
-  friendlyName: "Get form route for public use",
+  friendlyName: "Get form route for admin use",
 
   description:
-    "Gets all forms if id is not specified, finds a specific one otherwise but checks if the form is published",
+    "Gets all forms if id is not specified, finds a specific one otherwise",
 
   inputs: {
     id: {
@@ -17,7 +17,6 @@ module.exports = {
     try {
       const data = await Form.find({
         _id: id,
-        isPublished: true,
         isDeleted: false,
       });
       return exits.success(data);
