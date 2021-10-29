@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { customAxios as axios } from "../helpers/customAxios";
 import FormCreator from "./FormCreator";
@@ -17,15 +17,19 @@ import {
   Text,
   Badge,
   Stack,
+  Checkbox,
+  Switch,
 } from "@chakra-ui/react";
 import FormDataDownloader from "./FormDataDownloader";
 
 const FormManager = (props) => {
-  const { register, reset, handleSubmit, setValue, formState } = useForm();
+  const { register, reset, handleSubmit, setValue, control, formState } =
+    useForm();
 
   const [formName, setFormName] = useState(null);
   const [formDescription, setFormDescription] = useState(null);
   const [formImage, setFormImage] = useState(null);
+  const [requireLogin, setRequireLogin] = useState(true);
   const [editFormData, setEditFormData] = useState(null);
   const [formId, setFormId] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -40,15 +44,21 @@ const FormManager = (props) => {
     getFormListFromDatabase();
   }, []);
 
-  const onSubmit = (data, e) => {
+  const setFormManagerElements = (data) => {
     setValue("formName", data.formName);
     setValue("formDescription", data.formDescription);
     setValue("formImage", data.formImage);
+    setValue("requireLogin", data.requireLogin);
 
     // Update React State for child props
     setFormName(data.formName);
     setFormDescription(data.formDescription);
     setFormImage(data.formImage);
+    setRequireLogin(data.requireLogin);
+  };
+
+  const onSubmit = (data, e) => {
+    setFormManagerElements(data);
   };
 
   const onEdit = async (e) => {
@@ -64,12 +74,9 @@ const FormManager = (props) => {
         );
       }
 
-      setValue("formName", data[0].formName);
-      setValue("formDescription", data[0].formDescription);
-      setValue("formImage", data[0].formImage);
-      setFormName(data[0].formName);
-      setFormDescription(data[0].formDescription);
-      setFormImage(data[0].formImage);
+      console.log(data);
+
+      setFormManagerElements(data[0]);
       setEditFormData(data[0]);
       setIsLoading(false);
     } catch (err) {
@@ -118,15 +125,17 @@ const FormManager = (props) => {
   };
 
   const resetFormEditorCallback = async () => {
+    reset();
     setValue("formName", null);
     setValue("formDescription", null);
     setValue("formImage", null);
+    setValue("requireLogin", true);
     setFormName(null);
     setFormDescription(null);
     setFormImage(null);
+    setRequireLogin(true);
     setEditFormData(null);
     await getFormListFromDatabase();
-    reset();
   };
 
   const getFormListFromDatabase = async () => {
@@ -212,31 +221,52 @@ const FormManager = (props) => {
         </List>
       </Box>
       <Box borderRadius="lg" p="5" mt="3" borderWidth="1px">
-        <Heading as="h2" size="lg">
+        <Heading as="h2" mb="5" size="lg">
           Create A New Form
         </Heading>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormControl isInvalid={errors["formName"]}>
-            <FormLabel>Form Name</FormLabel>
-            <Input
-              id="formName"
-              {...register("formName", { required: "Form name is required" })}
-            />
-            <FormErrorMessage>
-              {errors["formName"] && "Form name is required"}
-            </FormErrorMessage>
-          </FormControl>
-          <FormControl isInvalid={errors["formDescription"]}>
-            <FormLabel>Form Description</FormLabel>
-            <Input id="formDescription" {...register("formDescription")} />
-          </FormControl>
-          <FormControl isInvalid={errors["formImage"]}>
-            <FormLabel>Form Image</FormLabel>
-            <Input id="formImage" {...register("formImage")} />
-          </FormControl>
-          <Button mt={4} colorScheme="teal" type="submit">
-            Create/Update Form
-          </Button>
+          <Stack spacing="5">
+            <FormControl isInvalid={errors["formName"]}>
+              <FormLabel>Form Name</FormLabel>
+              <Input
+                id="formName"
+                {...register("formName", { required: "Form name is required" })}
+              />
+              <FormErrorMessage>
+                {errors["formName"] && "Form name is required"}
+              </FormErrorMessage>
+            </FormControl>
+            <FormControl isInvalid={errors["formDescription"]}>
+              <FormLabel>Form Description</FormLabel>
+              <Input id="formDescription" {...register("formDescription")} />
+            </FormControl>
+            <FormControl isInvalid={errors["formImage"]}>
+              <FormLabel>Form Image</FormLabel>
+              <Input id="formImage" {...register("formImage")} />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Require login?</FormLabel>
+              <Controller
+                control={control}
+                name="requireLogin"
+                defaultValue={true}
+                render={({ field: { onChange, value, ref } }) => (
+                  <Switch onChange={onChange} ref={ref} isChecked={value}>
+                    {value ? "Yes" : "No"}
+                  </Switch>
+                )}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>
+                If you updated the 4 fields above please click here again before
+                saving to DB
+              </FormLabel>
+              <Button colorScheme="teal" type="submit">
+                Create/Update Form
+              </Button>
+            </FormControl>
+          </Stack>
         </form>
       </Box>
 
@@ -245,6 +275,7 @@ const FormManager = (props) => {
           formName={formName}
           formDescription={formDescription}
           formImage={formImage}
+          requireLogin={requireLogin}
           existingFormData={editFormData}
           resetFormEditorCallback={resetFormEditorCallback}
           user={user}

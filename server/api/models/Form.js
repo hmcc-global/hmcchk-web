@@ -15,5 +15,9 @@ module.exports = {
       type: "boolean",
       defaultsTo: false,
     },
+    requireLogin: {
+      type: "boolean",
+      defaultsTo: true,
+    },
   },
 };

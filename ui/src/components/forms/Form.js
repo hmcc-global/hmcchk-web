@@ -75,7 +75,7 @@ const Form = (props) => {
   };
 
   const postSubmission = async (formId, data, userId) => {
-    if (!userId) return;
+    const redirectTarget = userId ? "/profile" : "/";
     setSubmitStatus(true);
     try {
       const { status } = await axios.post("/api/forms/post-create-submission", {
@@ -86,7 +86,7 @@ const Form = (props) => {
       if (status === 200) {
         setModalOpen(true);
         setTimeout(() => {
-          history.push("/profile");
+          history.push(redirectTarget);
         }, 3000);
       }
     } catch (err) {
@@ -446,7 +446,7 @@ const Form = (props) => {
               p={5}
               textAlign="center"
             >
-              Submitted successfully, redirecting to profile page soon.
+              Submitted successfully, redirecting you soon.
             </Text>
             <Box flex={4}>
               <Center w="100%" h="100%">
