@@ -32,10 +32,18 @@ module.exports = {
 
   fn: async function ({ formId, userId, submissionData }, exits) {
     try {
+      const formRecord = await Form.find().where({
+        id: formId,
+        isDeleted: false,
+        isPublished: true,
+      });
+
+      if (formRecord === null) return exits.invalid();
+
       // Only do if there is userID
       if (userId) {
         const user = (await sails.helpers.users.getUser(userId))[0];
-        if (user === null) return exits.invalid()
+        if (user === null) return exits.invalid();
 
         let res = await Submission.create({
           formId: formId,
@@ -66,14 +74,6 @@ module.exports = {
         }).set({ formSubmitted: temp });
 
         if (updateUserSubmissions === null) return exits.invalid();
-
-        const formRecord = await Form.find().where({
-          id: formId,
-          isDeleted: false,
-          isPublished: true,
-        });
-
-        if (formRecord === null) return exits.invalid();
 
         // Send confirmation email
         await sails.helpers.sendTemplateEmail.with({

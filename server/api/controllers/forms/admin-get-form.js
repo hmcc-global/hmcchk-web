@@ -16,7 +16,7 @@ module.exports = {
   fn: async function ({ id }, exits) {
     try {
       const data = await Form.find({
-        id: id,
+        _id: id,
         isDeleted: false,
       });
       return exits.success(data);
