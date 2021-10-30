@@ -21,7 +21,7 @@ module.exports = {
   fn: async function ({ baptismId }, exits) {
     try {
       if (baptismId) {
-        let data = await Baptism.find({ baptismId, isDeleted: false });
+        let data = await Baptism.find({ _id: baptismId, isDeleted: false });
         if (data.length === 0) throw "baptism record not found";
         return exits.success(data);
       }

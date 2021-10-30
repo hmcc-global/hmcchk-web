@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Switch } from "react-router-dom";
 import { chakra } from "@chakra-ui/react";
 import SermonContainer from "./sermons/SermonContainer";
@@ -16,6 +15,8 @@ import CompleteUserProfileContainer from "./userProfile/CompleteUserProfile";
 import ClearCache from "./helpers/ClearCache";
 import UserFormContainer from "./forms/UserFormContainer";
 import NoMatch from "./errors/NoMatch";
+import AdminLoginContainer from "./admin/AdminLoginContainer";
+import AdminContainer from "./AdminContainer";
 
 const MainContainer = () => {
   return (
@@ -93,7 +94,18 @@ const MainContainer = () => {
           permissions={["admin", "stewardship"]}
           component={ClearCache}
         />
-        <PrivateRoute path="*" permissions={["public"]} component={NoMatch} />
+        <PrivateRoute
+          exact
+          path="/admin/login"
+          permissions={["noUser"]}
+          component={AdminLoginContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/:pageName"
+          permissions={["admin", "stewardship"]}
+          component={AdminContainer}
+        />
       </Switch>
     </chakra.main>
   );

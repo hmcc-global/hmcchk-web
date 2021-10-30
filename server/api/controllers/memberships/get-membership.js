@@ -21,8 +21,11 @@ module.exports = {
   fn: async function ({ membershipId }, exits) {
     try {
       if (membershipId) {
-        let data = await Membership.find({ membershipId, isDeleted: false });
-        if (data.length === 0) throw "baptism record not found";
+        let data = await Membership.find({
+          _id: membershipId,
+          isDeleted: false,
+        });
+        if (data.length === 0) throw "membership record not found";
         return exits.success(data);
       }
 

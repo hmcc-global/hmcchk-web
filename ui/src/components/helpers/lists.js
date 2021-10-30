@@ -1,4 +1,4 @@
-const accessTypeList = ["Unsigned", "Signed", "Alumni", "Admin", "Stewardship"];
+const accessTypeList = ["unsigned", "uigned", "alumni", "admin", "stewardship"];
 
 const lifestageList = [
   "Building Blocks",
@@ -10,14 +10,15 @@ const lifestageList = [
 
 const ministryTeamList = [
   "Not Applicable",
-  "Intercessory Prayer Team",
-  "Creatives",
-  "Hospitality",
-  "Band",
   "Audio/Visual",
-  "Creative Worship",
-  "Multimedia",
+  "Band",
   "Building Blocks",
+  "Creative Design",
+  "Creative Tech",
+  "Creative Worship",
+  "Hospitality",
+  "Intercessory Prayer Team",
+  "Multimedia",
 ];
 
 const lifegroupList = [

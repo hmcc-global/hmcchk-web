@@ -1,10 +1,10 @@
 module.exports = {
-  friendlyName: "Get memberships",
+  friendlyName: "Get giving",
 
-  description: "Get memberships",
+  description: "Get giving",
 
   inputs: {
-    membershipId: {
+    givingId: {
       required: false,
       type: "string",
     },
@@ -12,21 +12,21 @@ module.exports = {
 
   exits: {
     success: {
-      description: "Membership records returned successfully",
+      description: "Giving records returned successfully",
     },
     invalid: {
-      description: "Failed to retrieve membership record",
+      description: "Failed to retrieve giving record",
     },
   },
-  fn: async function ({ membershipId }, exits) {
+  fn: async function ({ givingId }, exits) {
     try {
-      if (membershipId) {
-        let data = await Membership.find({ membershipId, isDeleted: false });
-        if (data.length === 0) throw "baptism record not found";
+      if (givingId) {
+        let data = await Giving.find({ _id: givingId, isDeleted: false });
+        if (data.length === 0) throw "giving record not found";
         return exits.success(data);
       }
 
-      let data = await Membership.find({ isDeleted: false });
+      let data = await Giving.find({ isDeleted: false });
       return exits.success(data);
     } catch (err) {
       sails.log(err);
