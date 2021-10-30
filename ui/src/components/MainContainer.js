@@ -94,7 +94,6 @@ const MainContainer = () => {
           permissions={["admin", "stewardship"]}
           component={ClearCache}
         />
-        <PrivateRoute path="*" permissions={["public"]} component={NoMatch} />
         <PrivateRoute
           exact
           path="/admin/login"

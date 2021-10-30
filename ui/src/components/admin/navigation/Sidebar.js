@@ -43,7 +43,6 @@ const LinkItems = [
 
 const SidebarContent = ({ onClose, ...rest }) => {
   const { toggleColorMode } = useColorMode();
-
   return (
     <Box
       transition="3s ease"
@@ -78,13 +77,9 @@ const SidebarContent = ({ onClose, ...rest }) => {
   );
 };
 
-const NavItem = ({ icon, children, ...rest }) => {
+const NavItem = ({ icon, children, path, component }) => {
   return (
-    <Link
-      href={rest.path}
-      style={{ textDecoration: "none" }}
-      component={rest.component}
-    >
+    <Link href={path} style={{ textDecoration: "none" }} component={component}>
       <Flex
         align="center"
         p="4"
@@ -96,7 +91,6 @@ const NavItem = ({ icon, children, ...rest }) => {
           bg: "cyan.400",
           color: "white",
         }}
-        {...rest}
       >
         {icon && (
           <Icon
