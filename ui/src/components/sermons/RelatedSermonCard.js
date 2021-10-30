@@ -14,38 +14,40 @@ import {
   import parse, { domToReact, attributesToProps } from "html-react-parser";
   import { DATE_FULL } from "luxon/src/impl/formats";
   
-  const RelatedSermonCard = ({sermonData, allSermons}, props) => {
+  const RelatedSermonCard = ({sermonData, allSermons}) => {
     let sermonDate = DateTime.fromISO(sermonData.datePreached).toLocaleString(DATE_FULL);
-    
+    let sermonImage = "";
+    if(sermonData.sermonSeries[0].image !== null)
+      sermonImage = sermonData.sermonSeries[0].image.sourceUrl;
     return (
       <>
 			<Box
-          borderWidth="1px"
-          borderRadius="20"
-          overflow="hidden"
-          h="auto"
-          bg="white"
-          shadow="lg"
+
+        borderWidth="1px"
+        borderRadius="20"
+        overflow="hidden"
+        bg="white"
+        shadow="lg"
         >
 					<Stack direction="row">
-						<AspectRatio width="25%" ratio={1 / 1}>
-							<Link to={{pathname:`/sermons/${sermonData.id}`, state:{sermonData:sermonData, allSermons:allSermons}}}>	
-								<Image borderLeftRadius="20" src="https://bit.ly/sage-adebayo" objectFit="cover" />
-							</Link>
-						</AspectRatio>
-          <Box overflow="hidden" position="relative" p={[3,6]}>
+            <Link to={{pathname:`/sermons/${sermonData.id}`, state:{sermonData:sermonData, allSermons:allSermons}}}>	
+						  <AspectRatio w={{base:"105px", md:"150px"}} ratio={1}>
+								<Image borderLeftRadius="20" src={sermonImage} objectFit="cover" />
+						  </AspectRatio>
+            </Link>
+          <Box overflow="hidden" position="relative" p={[2,6]}>
             <VStack alignItems="left">
-              <Text as="h4" size="md" fontWeight="900" isTruncated>
+              <Text textShadow="1px 0px 0px black" fontSize={{base:"sm", md:"md"}}  isTruncated>
                 {sermonData.title}
               </Text> 
-              <Text>
+              <Text fontSize={{base:"xs", md:"md"}} isTruncated>
 								{sermonData.sermonSeries[0].name}
               </Text>
               <HStack>
-                <Text>
+                <Text fontSize={{base:"xs", md:"md"}} isTruncated> 
                   {sermonData.speaker[0].name}
                 </Text>
-                <Text align="right">
+                <Text alignSelf="flex-end" alignContent="flex-end" alignItems="flex-end" textAlign="right" fontSize={{base:"xs", md:"md"}} isTruncated>
                   {sermonDate}
                 </Text>
 						  </HStack>

@@ -7,6 +7,7 @@ import {
   Button,
   HStack,
   VStack,
+  Icon,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -18,7 +19,9 @@ const SermonCard = ({ sermonData, allSermons }) => {
   let sermonDate = DateTime.fromISO(sermonData.datePreached).toLocaleString(
     DATE_FULL
   );
-
+  let sermonImage = "";
+  if (sermonData.sermonSeries[0].image !== null)
+    sermonImage = sermonData.sermonSeries[0].image.sourceUrl;
   return (
     <>
       <Box
@@ -28,33 +31,59 @@ const SermonCard = ({ sermonData, allSermons }) => {
         h="auto"
         bg="white"
         shadow="lg"
-        p={[4, 10]}
       >
         <Box>
           <Link
-            to={{ pathname: `/sermons/${sermonData.id}`, state: sermonData }}
+            to={{
+              pathname: `/sermons/${sermonData.id}`,
+              state: { sermonData: sermonData, allSermons: allSermons },
+            }}
           >
-            <AspectRatio mb="5" width="100%" ratio={16 / 9}>
-              <Image
-                borderRadius="20"
-                src={sermonData.sermonSeries[0].image}
-                objectFit="cover"
-              />
+            <AspectRatio width="100%" ratio={16 / 9}>
+              <Image borderTopRadius="20" src={sermonImage} objectFit="cover" />
             </AspectRatio>
+            <Box position="absolute" left="100%" top="50%">
+              <AspectRatio width="20%" ratio={1 / 1}>
+                <Image
+                  borderRadius="100%"
+                  src={process.env.PUBLIC_URL + "/images/PlayButton.png"}
+                />
+              </AspectRatio>
+            </Box>
           </Link>
         </Box>
-        <Box overflow="hidden" position="relative">
-          <VStack alignItems="left">
-            <Text as="h4" mb="5" size="lg" fontWeight="900" isTruncated>
-              {sermonData.title}
-            </Text>
-            <Text>{sermonData.sermonSeries[0].name}</Text>
-            <HStack>
-              <Text>{sermonData.speaker[0].name}</Text>
-              <Text align="right">{sermonDate}</Text>
-            </HStack>
-          </VStack>
-        </Box>
+        <Link
+          to={{
+            pathname: `/sermons/${sermonData.id}`,
+            state: { sermonData: sermonData, allSermons: allSermons },
+          }}
+        >
+          <Box
+            overflow="hidden"
+            position="relative"
+            paddingLeft={[2, 4]}
+            paddingRight={[2, 4]}
+            paddingBottom={[2, 4]}
+            paddingTop={[1, 2]}
+          >
+            <VStack alignItems="left" spacing={1}>
+              <Text as="h4" size="lg" fontWeight="900" isTruncated>
+                {sermonData.title}
+              </Text>
+              <Text fontSize="sm" isTruncated>
+                {sermonData.sermonSeries[0].name}
+              </Text>
+              <HStack>
+                <Text fontSize="xs" isTruncated>
+                  {sermonData.speaker[0].name}
+                </Text>
+                <Text fontSize="xs" isTruncated>
+                  {sermonDate}
+                </Text>
+              </HStack>
+            </VStack>
+          </Box>
+        </Link>
       </Box>
     </>
   );

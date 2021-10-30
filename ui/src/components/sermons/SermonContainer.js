@@ -47,14 +47,25 @@ const SermonContainer = (props) => {
         bgSize="cover"
         flex={1}
         textAlign="center"
+        justifyContent="center"
         px={[8, 10]}
         py={[8, 12]}
         m={2}
+        display={{ base: "none", md: "flex" }}
       >
         <Heading size="2xl" color="white" fontWeight="900">
           Sermons
         </Heading>
       </Box>
+      <Heading
+        size="2xl"
+        color="black"
+        justifyContent="center"
+        fontWeight="900"
+        display={{ base: "flex", md: "none" }}
+      >
+        Sermons
+      </Heading>
       <CurrentSermon currentSermon={sermons[0]} />
       <SermonCardList allSermons={sermons} />
     </Container>

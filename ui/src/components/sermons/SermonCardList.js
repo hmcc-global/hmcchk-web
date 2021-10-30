@@ -7,9 +7,21 @@ import {Grid,
         Box,
         HStack,
         Select,
+        Drawer,
+        DrawerBody,
+        DrawerFooter,
+        DrawerHeader,
+        DrawerOverlay,
+        DrawerContent,
+        DrawerCloseButton,
+        Link,
+        LinkOverlay,
+        useDisclosure,
 } from "@chakra-ui/react";
 import Pagination from "../helpers/Pagination";
+import FilterSermon from "./FilterSermons";
 import SermonCard from "./SermonCard";
+import RelatedSermonCard from "./RelatedSermonCard";
 
 
 const SermonCardList = ({allSermons}, props) => {
@@ -20,15 +32,11 @@ const SermonCardList = ({allSermons}, props) => {
   const [filterSermonSeries, setFilterSermonSeries] = useState("");
   const [filterBook, setFilterBook] = useState("");
   const [filterServiceType, setFilterServiceType] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = React.useRef();
 
   //filter section
-  const uniqueSpeaker = [...new Set(allSermons.map((sermon)=>{if(sermon.speaker[0]!= null) return sermon.speaker[0].name}))]
-  const uniqueSermonSeries = [...new Set(allSermons.map((sermon)=>{if(sermon.sermonSeries[0] != null) return sermon.sermonSeries[0].name}))]
-  const uniqueBook = [...new Set(allSermons.map((sermon) => {if(!isNaN(sermon.passage[0])){return sermon.passage.split(" ").slice(0,2).join(" ");}
-                                                          else if(sermon.passage=="") {return null;}
-                                                          else {return sermon.passage.split(" ").slice(0,1).join(" ");}
-                                                         }))]
-  const uniqueServiceType = [...new Set(allSermons.map((sermon)=>{if(sermon.serviceType[0] != null) return sermon.serviceType[0].name}))]
+
   const filterSermon = (event) => {
     setCurrentPage(1);
     if(event.target.name == "speaker"){
@@ -57,77 +65,56 @@ const SermonCardList = ({allSermons}, props) => {
   const indexOfFirstSermon = indexOfLastSermon - sermonsPerPage;
   const currentSermons = sermons.slice(indexOfFirstSermon, indexOfLastSermon);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+console.log(allSermons)
   return (
     <>
       <Box>
-        <Heading>
-          Past Sermons
-        </Heading>
-        <HStack spacing="auto" alignItems="left">
-          <VStack alignItems="left">
-            <Text>
-              Speaker
-            </Text>
-            <Select style={{overflowY:"scroll"}} name="speaker" onChange={filterSermon}>
-              <option value="">Select Speaker</option>
-              {uniqueSpeaker.length > 0 &&
-                uniqueSpeaker.map((speaker, i) => {
-                  if(speaker != null) return <option value={speaker}>{speaker}</option>
-                })}
-            </Select>
-          </VStack>
-          <VStack alignItems="left">
-            <Text>
-              Sermon Series
-            </Text>
-              <Select style={{overflowY:"scroll"}} name="sermon" onChange={filterSermon}>
-              <option value="">Select Sermon Series</option>
-                {uniqueSermonSeries.length > 0 &&
-                  uniqueSermonSeries.map((sermonSeries, i) => {
-                    if(sermonSeries != null) return <option value={sermonSeries}>{sermonSeries}</option>
-                  })}
-              </Select>
-          </VStack>
-          <VStack alignItems="left">
-            <Text>
-              Book
-            </Text>
-              <Select style={{overflowY:"scroll"}} name="book" onChange={filterSermon}>
-              <option value="">Select Book</option>
-                {uniqueBook.length > 0 &&
-                  uniqueBook.map((book, i)=>{
-                    if(book != null) return (<option value={book} >{book}</option>)
-                  })}
-              </Select>
-          </VStack>
-          <VStack alignItems="left">
-            <Text>
-              Service Type
-            </Text>
-            <Select style={{overflowY:"scroll"}} name="service" onChange={filterSermon}>
-            <option value="">Select Service Type</option>
-              {uniqueServiceType.length > 0 &&
-                uniqueServiceType.map((service, i)=>{
-                  if(service != null) return <option value={service} >{service}</option>
-                })}
-            </Select>
-          </VStack>
+        <HStack marginTop={[4,8]} spacing="auto">
+          <Heading>
+            Past Sermons
+          </Heading>
+          <Button 
+            width="30vw"
+            display={{base:"flex", md:"none"}} 
+            background= "#0628A3"
+            backdropFilter= "blur(6px)"
+            borderRadius= "10px"
+            color="white"
+            ref={btnRef}
+            onClick={onOpen}>
+            Filter
+          </Button>
         </HStack>
-        <Box >
-          <Button variant="link" alignSelf={["center", "flex-end"]} onClick={clearFilter}>
+        <Box display={{base:"none", md:"flex"}}>
+          <FilterSermon allSermons={allSermons} filterSermon={filterSermon} />
+        </Box>
+        <Box>
+          <Button variant="link" alignSelf={["center", "flex-end"]} onClick={clearFilter} float="right" display={{base:"none", md:"flex"}}>
             Clear Filter
           </Button>
         </Box>  
         <Grid
-          mt="12"
-          mb="12"
-          templateColumns={{ sm: "repeat(1, 1fr)", md: "repeat(3, 1fr)" }}
+          mt={["6","12"]}
+          mb={["6","12"]}
+          templateColumns="repeat(3, 1fr)"
           gap={[3, 6]}
+          display={{base:"none",md:"grid"}}
         >
           {currentSermons.length > 0 &&  
             currentSermons.map((sermon, i) => (
                 <SermonCard key={sermon.id} sermonData={sermon} allSermons={sermons}/>
+            ))}
+        </Grid>
+        <Grid
+          mt={["6","12"]}
+          mb={["6","12"]}
+          templateColumns="repeat(1, 1fr)"
+          gap={[3, 6]}
+          display={{base:"grid",md:"none"}}
+        >
+          {currentSermons.length > 0 &&  
+            currentSermons.map((sermon, i) => (
+                <RelatedSermonCard key={sermon.id} sermonData={sermon} allSermons={sermons}/>
             ))}
         </Grid>
         <Pagination
@@ -136,7 +123,26 @@ const SermonCardList = ({allSermons}, props) => {
           paginate={paginate}
         />
       </Box>
-      </>
+      <Drawer
+        isOpen={isOpen}
+        size="full"
+        onClose={onClose}
+        finalFocusRef={btnRef}
+        placement="top"
+      >
+        <DrawerOverlay />
+        <DrawerContent paddingTop="10">
+          <DrawerCloseButton margin="5" />
+          <DrawerHeader />
+          <DrawerBody >
+            <FilterSermon allSermons={allSermons} filterSermon={filterSermon} clearFilter={clearFilter} onClose={onClose} />
+          </DrawerBody>
+          <DrawerFooter fontSize="sm" color="black" justifyContent="center">
+            Harvest Mission Community Church 2021
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    </>
   );
 };
 
