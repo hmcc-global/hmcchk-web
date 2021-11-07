@@ -94,12 +94,12 @@ const AboutUsContainer = (props) => {
           </HStack>
           {/* TODO-aparedan: navigation menu */}
         </Box>
-        {selected == 0 && <StorySection />}
-        {selected == 1 && <VisionMissionSection />}
+        {selected == 0 && <StorySection blurb={blurbs.story} />}
+        {selected == 1 && <VisionMissionSection blurb={blurbs.visionMission} />}
         {selected == 2 && <StrategySection />}
         {selected == 3 && <StaffSection />}
-        {selected == 4 && <BeliefsSection />}
-        {selected == 5 && <ValuesSection />}
+        {selected == 4 && <BeliefsSection blurb={blurbs.beliefs} />}
+        {selected == 5 && <ValuesSection blurb={blurbs.values} />}
       </VStack>
     </Container>
   );
