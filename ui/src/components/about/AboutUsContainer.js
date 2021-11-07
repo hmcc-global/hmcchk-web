@@ -13,7 +13,7 @@ import StrategySection from "./StrategySection";
 import ValuesSection from "./ValuesSection";
 import VisionMissionSection from "./VisionMissionSection";
 import blurbs from "./about.json";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 const sections = [
   "Our Story",
@@ -40,7 +40,7 @@ const AboutUsContainer = (props) => {
           bgSize="cover"
           px={[6, 12, 35]}
           py={[8, 16, 20]}
-          mb={[4, 0]}
+          mb={[4, 8]}
         >
           <Heading
             as="h2"
@@ -66,7 +66,7 @@ const AboutUsContainer = (props) => {
             {sections &&
               sections.map((e, i) => {
                 return (
-                  <>
+                  <Fragment key={i}>
                     <Text
                       color="white"
                       fontWeight={600}
@@ -88,13 +88,15 @@ const AboutUsContainer = (props) => {
                         &bull;
                       </Text>
                     ) : null}
-                  </>
+                  </Fragment>
                 );
               })}
           </HStack>
           {/* TODO-aparedan: navigation menu */}
         </Box>
-        {selected == 0 && <StorySection blurb={blurbs.story} />}
+        {selected == 0 && (
+          <StorySection blurb={blurbs.story} title={sections[selected]} />
+        )}
         {selected == 1 && <VisionMissionSection blurb={blurbs.visionMission} />}
         {selected == 2 && <StrategySection />}
         {selected == 3 && <StaffSection />}
