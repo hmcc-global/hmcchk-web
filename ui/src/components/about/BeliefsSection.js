@@ -9,11 +9,21 @@ import {
 } from "@chakra-ui/react";
 
 const BeliefsSection = (props) => {
+  const { title, blurb } = props;
   return (
     <Container maxW="container.lg">
       <Flex direction="column">
         <Center padding="5">
-          <Heading>Our Beliefs </Heading>
+          <Heading
+            as="h2"
+            fontSize={["4xl", "6xl"]}
+            fontWeight={700}
+            lineHeight={1}
+            textAlign="center"
+            mb={5}
+          >
+            {title}
+          </Heading>
         </Center>
         <SimpleGrid columns={[1, 1, 3]} spacingX="1" spacingY="1">
           <Box
@@ -24,18 +34,38 @@ const BeliefsSection = (props) => {
             px={[4, 8]}
             pt={[4, 6]}
             pb={[4, 6]}
-            m={4}
-            h={["7em", "18em"]}
-            w={["13em", "19em"]}
+            m={[0, 0, 4]}
+            h={["16em", "16em", "18em"]}
+            w={["full", "full", "19em"]}
           >
             <Box>
               <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                The Bible
+                {blurb.head[0]}
               </Text>
               <Text color="#2C5282" fontSize="sm">
-                We believe the Bible, both the Old and New Testaments, is the
-                only inspired, infallible, and authoritative Word of God. It is
-                the supreme source of truth for Christian faith and living.
+                {blurb.body[0]}
+              </Text>
+            </Box>
+          </Box>
+
+          <Box
+            borderWidth="1px"
+            borderRadius="20"
+            shadow="lg"
+            bg="#F8F8F8"
+            px={[4, 8]}
+            pt={[4, 6]}
+            pb={[4, 6]}
+            m={[0, 0, 4]}
+            h={["16em", "16em", "18em"]}
+            w={["full", "full", "19em"]}
+          >
+            <Box>
+              <Text fontWeight="bold" color="#2C5282" fontSize="xl">
+                {blurb.head[1]}
+              </Text>
+              <Text color="#2C5282" fontSize="sm">
+                {blurb.body[1]}
               </Text>
             </Box>
           </Box>
@@ -47,18 +77,16 @@ const BeliefsSection = (props) => {
             px={[4, 8]}
             pt={[4, 6]}
             pb={[4, 6]}
-            m={4}
-            h={["7em", "18em"]}
-            w={["13em", "19em"]}
+            m={[0, 0, 4]}
+            h={["16em", "16em", "18em"]}
+            w={["full", "full", "19em"]}
           >
             <Box>
               <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                God
+                {blurb.head[2]}
               </Text>
               <Text color="#2C5282" fontSize="sm">
-                We believe in one God, Creator of all things, infinitely perfect
-                and eternally existing in three persons: Father, Son, and Holy
-                Spirit.
+                {blurb.body[2]}
               </Text>
             </Box>
           </Box>
@@ -70,22 +98,16 @@ const BeliefsSection = (props) => {
             px={[4, 8]}
             pt={[4, 6]}
             pb={[4, 6]}
-            m={4}
-            h={["7em", "18em"]}
-            w={["13em", "19em"]}
+            m={[0, 0, 4]}
+            h={["16em", "16em", "18em"]}
+            w={["full", "full", "19em"]}
           >
             <Box>
               <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                Jesus Christ
+                {blurb.head[3]}
               </Text>
               <Text color="#2C5282" fontSize="sm">
-                We believe that Jesus Christ is true (fully) God and true
-                (fully) man, having been conceived of the Holy Spirit and born
-                of the virgin Mary. He died on the cross, the complete and final
-                sacrifice for our sins according to the Scriptures. He arose
-                bodily from the dead, and ascended into heaven where, at God’s
-                right hand, He intercedes for His people and rules as Lord over
-                all.
+                {blurb.body[3]}
               </Text>
             </Box>
           </Box>
@@ -97,20 +119,16 @@ const BeliefsSection = (props) => {
             px={[4, 8]}
             pt={[4, 6]}
             pb={[4, 6]}
-            m={4}
-            h={["7em", "18em"]}
-            w={["13em", "19em"]}
+            m={[0, 0, 4]}
+            h={["16em", "16em", "18em"]}
+            w={["full", "full", "19em"]}
           >
             <Box>
               <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                The Holy Spirit
+                {blurb.head[4]}
               </Text>
               <Text color="#2C5282" fontSize="sm">
-                We believe that the ministry of the Holy Spirit is to glorify
-                the Lord Jesus Christ, and during this age to convict the world
-                of sin. He also regenerates the believing sinner, indwelling,
-                guiding, instructing, and empowering us for godly living and
-                sacrifice.
+                {blurb.body[4]}
               </Text>
             </Box>
           </Box>
@@ -122,19 +140,16 @@ const BeliefsSection = (props) => {
             px={[4, 8]}
             pt={[4, 6]}
             pb={[4, 6]}
-            m={4}
-            h={["7em", "18em"]}
-            w={["13em", "19em"]}
+            m={[0, 0, 4]}
+            h={["16em", "16em", "18em"]}
+            w={["full", "full", "19em"]}
           >
             <Box>
               <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                Man
+                {blurb.head[5]}
               </Text>
               <Text color="#2C5282" fontSize="sm">
-                We believe that the man was created in the image of God, but
-                fell into sin and is therefore destined for eternal death. Only
-                through regeneration by the Holy Spirit can salvation and
-                spiritual life be obtained.
+                {blurb.body[5]}
               </Text>
             </Box>
           </Box>
@@ -146,20 +161,16 @@ const BeliefsSection = (props) => {
             px={[4, 8]}
             pt={[4, 6]}
             pb={[4, 6]}
-            m={4}
-            h={["7em", "18em"]}
-            w={["13em", "19em"]}
+            m={[0, 0, 4]}
+            h={["16em", "16em", "18em"]}
+            w={["full", "full", "19em"]}
           >
             <Box>
               <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                Salvation
+                {blurb.head[6]}
               </Text>
               <Text color="#2C5282" fontSize="sm">
-                We believe that the shed blood of Jesus Christ and His
-                resurrection provide the only grounds for justification and
-                salvation for all who believe, and only those who receive Jesus
-                Christ by faith are born of the Holy Spirit and thus become
-                children of God.
+                {blurb.body[6]}
               </Text>
             </Box>
           </Box>
@@ -171,22 +182,16 @@ const BeliefsSection = (props) => {
             px={[4, 8]}
             pt={[4, 6]}
             pb={[4, 6]}
-            m={4}
-            h={["7em", "18em"]}
-            w={["13em", "19em"]}
+            m={[0, 0, 4]}
+            h={["16em", "16em", "18em"]}
+            w={["full", "full", "19em"]}
           >
             <Box>
               <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                Future Events
+                {blurb.head[7]}
               </Text>
               <Text color="#2C5282" fontSize="sm">
-                We believe in the visible, personal, glorious, imminent return
-                of Jesus Christ, His bodily resurrection of the dead, the
-                judgment of the just and the unjust, and the fulfillment of
-                Christ’s Kingdom in the new heavens and the new earth. Then
-                shall the eager expectation of creation be fulfilled and the
-                whole earth shall proclaim the glory of God who makes all things
-                new.
+                {blurb.body[7]}
               </Text>
             </Box>
           </Box>
@@ -198,44 +203,16 @@ const BeliefsSection = (props) => {
             px={[4, 8]}
             pt={[4, 6]}
             pb={[4, 6]}
-            m={4}
-            h={["7em", "18em"]}
-            w={["13em", "19em"]}
+            m={[0, 0, 4]}
+            h={["16em", "16em", "18em"]}
+            w={["full", "full", "19em"]}
           >
             <Box>
               <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                The Church
+                {blurb.head[8]}
               </Text>
               <Text color="#2C5282" fontSize="sm">
-                We believe that the true Church is composed of all such persons
-                who through saving faith in Jesus Christ have been regenerated
-                by the Holy Spirit and are united together in the body of
-                Christ. We believe that Jesus Christ is the Head of the Church,
-                and that every local church has the right under Christ to decide
-                and govern its own affairs.
-              </Text>
-            </Box>
-          </Box>
-          <Box
-            borderWidth="1px"
-            borderRadius="20"
-            shadow="lg"
-            bg="#F8F8F8"
-            px={[4, 8]}
-            pt={[4, 6]}
-            pb={[4, 6]}
-            m={4}
-            h={["7em", "18em"]}
-            w={["13em", "19em"]}
-          >
-            <Box>
-              <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                Ordinances
-              </Text>
-              <Text color="#2C5282" fontSize="sm">
-                We believe that water baptism and the Lord’s Supper are
-                ordinances to be observed by the Church during the present age.
-                They are, however, not to be regarded as means of salvation.
+                {blurb.body[8]}
               </Text>
             </Box>
           </Box>

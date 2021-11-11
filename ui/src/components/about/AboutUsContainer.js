@@ -21,7 +21,7 @@ const sections = [
   "Our Strategy",
   "Our Staff",
   "Beliefs",
-  "Values",
+  "Our Values",
 ];
 
 const AboutUsContainer = (props) => {
@@ -100,8 +100,8 @@ const AboutUsContainer = (props) => {
         {selected == 1 && <VisionMissionSection blurb={blurbs.visionMission} />}
         {selected == 2 && <StrategySection />}
         {selected == 3 && <StaffSection />}
-        {selected == 4 && <BeliefsSection blurb={blurbs.beliefs} />}
-        {selected == 5 && <ValuesSection blurb={blurbs.values} />}
+        {selected == 4 && (<BeliefsSection blurb={blurbs.beliefs} title={sections[selected]} />)}
+        {selected == 5 && (<ValuesSection blurb={blurbs.values} title={sections[selected]} />)}
       </VStack>
     </Container>
   );
