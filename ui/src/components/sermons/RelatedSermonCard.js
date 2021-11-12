@@ -22,12 +22,12 @@ import {
     return (
       <>
 			<Box
-
         borderWidth="1px"
         borderRadius="20"
         overflow="hidden"
         bg="white"
         shadow="lg"
+        paddingRight="100"
         >
 					<Stack direction="row">
             <Link to={{pathname:`/sermons/${sermonData.id}`, state:{sermonData:sermonData, allSermons:allSermons}}}>	
@@ -35,24 +35,26 @@ import {
 								<Image borderLeftRadius="20" src={sermonImage} objectFit="cover" />
 						  </AspectRatio>
             </Link>
-          <Box overflow="hidden" position="relative" p={[2,6]}>
-            <VStack alignItems="left">
-              <Text textShadow="1px 0px 0px black" fontSize={{base:"sm", md:"md"}}  isTruncated>
-                {sermonData.title}
-              </Text> 
-              <Text fontSize={{base:"xs", md:"md"}} isTruncated>
-								{sermonData.sermonSeries[0].name}
-              </Text>
-              <HStack>
-                <Text fontSize={{base:"xs", md:"md"}} isTruncated> 
-                  {sermonData.speaker[0].name}
+          <Link to={{pathname:`/sermons/${sermonData.id}`, state:{sermonData:sermonData, allSermons:allSermons}}}>
+            <Box overflow="hidden" position="relative" p={[2,6]}>
+              <VStack alignItems="left">
+                <Text textShadow="1px 0px 0px black" fontSize={{base:"sm", md:"md"}}  isTruncated>
+                  {sermonData.title}
+                </Text> 
+                <Text fontSize={{base:"xs", md:"md"}} isTruncated>
+                  {sermonData.sermonSeries[0].name}
                 </Text>
-                <Text alignSelf="flex-end" alignContent="flex-end" alignItems="flex-end" textAlign="right" fontSize={{base:"xs", md:"md"}} isTruncated>
-                  {sermonDate}
-                </Text>
-						  </HStack>
-            </VStack>   
-          </Box>
+                <HStack>
+                  <Text fontSize={{base:"xs", md:"md"}} isTruncated> 
+                    {sermonData.speaker[0].name}
+                  </Text>
+                  <Text alignSelf="flex-end" alignContent="flex-end" alignItems="flex-end" textAlign="right" fontSize={{base:"xs", md:"md"}} isTruncated>
+                    {sermonDate}
+                  </Text>
+                </HStack>
+              </VStack>   
+            </Box>
+          </Link>
 					</Stack>
 				</Box>
       </>

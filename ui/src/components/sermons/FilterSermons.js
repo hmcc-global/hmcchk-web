@@ -18,6 +18,10 @@ const FilterSermon = ({allSermons, filterSermon, clearFilter, onClose}) =>{
                                                           else {return sermon.passage.split(" ").slice(0,1).join(" ");}
                                                          }))]
   const uniqueServiceType = [...new Set(allSermons.map((sermon)=>{if(sermon.serviceType[0] != null) return sermon.serviceType[0].name}))]
+                                                         
+  useEffect(() => {
+    
+  }, []);                                                   
 
   return(
     <>

@@ -81,17 +81,20 @@ const SermonDetails = (props) => {
                 Audio Sermon:
               </Text>
               <HStack>
-                <iframe 
+                <audio 
                   src={sermonData.sermonAudioUrl}
                   width="100%" 
                   height="232" 
                   frameBorder="0" 
+                  controls
                   allowfullscreen="" 
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" />
+                  allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture" />
               </HStack>
-              <Text fontWeight="bold" color="#0628A3" fontSize="xl">
-                More from this series: 
-              </Text>
+              {relatedSermons.length > 0 && 
+                <Text fontWeight="bold" color="#0628A3" fontSize="xl">
+                  More from this series: 
+                </Text>
+              }
             {relatedSermons.length > 0 &&
               relatedSermons.map((sermon, i) => (
                 <RelatedSermonCard key = {sermon.id} sermonData = {sermon} allSermons={allSermons}/>

@@ -49,7 +49,7 @@ const SermonCardList = ({allSermons}, props) => {
       setFilterServiceType(event.target.value)
     }
   }
-  const sermons = allSermons.filter(sermon => sermon.speaker[0].name.includes(filterSpeaker))
+  const sermons = allSermons.filter(sermon =>{if(sermon.speaker[0] != null) return sermon.speaker[0].name.includes(filterSpeaker)})
                             .filter((sermon) => {if(sermon.sermonSeries[0] != null) return sermon.sermonSeries[0].name.includes(filterSermonSeries)})
                             .filter((sermon) => {if(sermon.passage != null) return sermon.passage.includes(filterBook)})
                             .filter((sermon) => {if(sermon.serviceType[0] != null) return sermon.serviceType[0].name.includes(filterServiceType)});
@@ -65,7 +65,7 @@ const SermonCardList = ({allSermons}, props) => {
   const indexOfFirstSermon = indexOfLastSermon - sermonsPerPage;
   const currentSermons = sermons.slice(indexOfFirstSermon, indexOfLastSermon);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-console.log(allSermons)
+
   return (
     <>
       <Box>
