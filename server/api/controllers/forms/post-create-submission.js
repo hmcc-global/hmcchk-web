@@ -82,7 +82,7 @@ module.exports = {
 
       if (email) {
         await sails.helpers.sendTemplateEmail.with({
-          to: user.email ? user.emal : submissionData["email"],
+          to: user.email ? user.email : submissionData["email"],
           subject: "Successful Submission for " + formRecord[0].formName,
           template: "email-successful-form-submission",
           templateData: {
