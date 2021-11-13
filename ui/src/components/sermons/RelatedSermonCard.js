@@ -30,7 +30,7 @@ import {
         >
 					<Stack direction="row">
             <Link to={{pathname:`/sermons/${sermonData.id}`, state:{sermonData:sermonData, allSermons:allSermons}}}>	
-						  <AspectRatio w={{base:"162px", md:"324px"}} ratio={16/9}>
+						  <AspectRatio w={{base:"81px", md:"324px"}} ratio={16/9}>
 								<Image borderLeftRadius="20" src={sermonImage} objectFit="cover" />
 						  </AspectRatio>
             </Link>
