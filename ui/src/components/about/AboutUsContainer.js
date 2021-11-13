@@ -99,7 +99,7 @@ const AboutUsContainer = (props) => {
         )}
         {selected == 1 && <VisionMissionSection blurb={blurbs.visionMission} />}
         {selected == 2 && <StrategySection />}
-        {selected == 3 && <StaffSection />}
+        {selected == 3 && (<StaffSection blurb={blurbs.staff} title={sections[selected]}/>)}
         {selected == 4 && (<BeliefsSection blurb={blurbs.beliefs} title={sections[selected]} />)}
         {selected == 5 && (<ValuesSection blurb={blurbs.values} title={sections[selected]} />)}
       </VStack>
