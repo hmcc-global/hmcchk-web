@@ -41,10 +41,6 @@ module.exports = {
 
       if (formRecord === null) return exits.invalid();
 
-      // Init vars
-      let email = null;
-      let fullName = null;
-
       // Create the submission in DB
       let res = await Submission.create({
         formId: formId,
@@ -80,23 +76,19 @@ module.exports = {
         }).set({ formSubmitted: temp });
 
         if (updateUserSubmissions === null) return exits.invalid();
-
-        email = user.email;
-        fullName = user.fullName;
-      } else {
-        email = submissionData["email"];
-        fullName = submissionData["fullName"];
       }
 
       // Send confirmation email if there is email
 
       if (email) {
         await sails.helpers.sendTemplateEmail.with({
-          to: email,
+          to: user.email ? user.emal : submissionData["email"],
           subject: "Successful Submission for " + formRecord[0].formName,
           template: "email-successful-form-submission",
           templateData: {
-            fullName: fullName,
+            fullName: user.fullName
+              ? user.fullName
+              : submissionData["fullName"],
             formName: formRecord[0].formName,
           },
         });

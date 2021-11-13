@@ -74,8 +74,6 @@ const FormManager = (props) => {
         );
       }
 
-      console.log(data);
-
       setFormManagerElements(data[0]);
       setEditFormData(data[0]);
       setIsLoading(false);
