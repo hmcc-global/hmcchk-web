@@ -27,18 +27,17 @@ import {
         overflow="hidden"
         bg="white"
         shadow="lg"
-        paddingRight="100"
         >
 					<Stack direction="row">
             <Link to={{pathname:`/sermons/${sermonData.id}`, state:{sermonData:sermonData, allSermons:allSermons}}}>	
-						  <AspectRatio w={{base:"105px", md:"150px"}} ratio={1}>
+						  <AspectRatio w={{base:"162px", md:"324px"}} ratio={16/9}>
 								<Image borderLeftRadius="20" src={sermonImage} objectFit="cover" />
 						  </AspectRatio>
             </Link>
           <Link to={{pathname:`/sermons/${sermonData.id}`, state:{sermonData:sermonData, allSermons:allSermons}}}>
             <Box overflow="hidden" position="relative" p={[2,6]}>
               <VStack alignItems="left">
-                <Text textShadow="1px 0px 0px black" fontSize={{base:"sm", md:"md"}}  isTruncated>
+                <Text textShadow="1px 0px 0px black" fontSize={{base:"sm", md:"md"}} isTruncated>
                   {sermonData.title}
                 </Text> 
                 <Text fontSize={{base:"xs", md:"md"}} isTruncated>

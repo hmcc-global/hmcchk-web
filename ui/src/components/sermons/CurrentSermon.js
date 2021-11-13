@@ -27,10 +27,8 @@ const CurrentSermon = ({currentSermon}) =>{
 				<Stack direction={{base:"column", md:"row"}}>
 					<Stack alignItems="left" width="35vw" direction="column" display={{base:"none", md:"flex"}}>
 						<Text 
-							decoration="underline" 
-							fontWeight="medium"
+							fontWeight="bold"
 							fontSize="2em"
-							fontStyle="italic"
 							color="#0628A3"
 						>
 							Current Series
@@ -46,10 +44,8 @@ const CurrentSermon = ({currentSermon}) =>{
 						</Text>
 					</Stack>
           <Text 
-							decoration="underline" 
-							fontWeight="medium"
+							fontWeight="bold"
 							fontSize="2em"
-							fontStyle="italic"
 							color="#0628A3"
               display={{base:"flex", md:"none"}}
 						>
