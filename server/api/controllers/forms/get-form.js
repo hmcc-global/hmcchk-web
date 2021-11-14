@@ -20,19 +20,13 @@ module.exports = {
 
   fn: async function ({ id, isLoggedIn }, exits) {
     try {
-      let searchParams = {
+      const data = await Form.find({
         _id: id,
         isPublished: true,
         isDeleted: false,
-      };
+        requireLogin: !isLoggedIn ? isLoggedIn : [false, true],
+      });
 
-      // If user is not logged in, only allow them to retrieve non login forms
-      if (!isLoggedIn) {
-        searchParams["requireLogin"] = false;
-      }
-
-      const data = await Form.find(searchParams);
-      
       // If no form is found return error
       if (data === null) return exits.error("unauthorized access");
 
