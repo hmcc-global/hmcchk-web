@@ -32,6 +32,7 @@ module.exports = {
 
   fn: async function ({ formId, userId, submissionData }, exits) {
     try {
+      // Check if form actually exists
       const formRecord = await Form.find().where({
         id: formId,
         isDeleted: false,
@@ -40,18 +41,19 @@ module.exports = {
 
       if (formRecord === null) return exits.invalid();
 
+      // Create the submission in DB
+      let res = await Submission.create({
+        formId: formId,
+        userId: userId,
+        submissionData: submissionData,
+      }).fetch();
+
       // Only do if there is userID
       if (userId) {
         const user = (await sails.helpers.users.getUser(userId))[0];
         if (user === null) return exits.invalid();
 
-        let res = await Submission.create({
-          formId: formId,
-          userId: userId,
-          submissionData: submissionData,
-        }).fetch();
-
-        // Create object and bind it to user
+        // Create submission dict for binding to user
         const submissionObject = {
           formId: formId,
           submissionId: res.id,
@@ -61,7 +63,7 @@ module.exports = {
 
         let temp = user.formSubmitted;
 
-        // Create the submission instead
+        // Append to existing submissions of the user
         if (temp) {
           temp.push(submissionObject);
         } else {
@@ -74,22 +76,26 @@ module.exports = {
         }).set({ formSubmitted: temp });
 
         if (updateUserSubmissions === null) return exits.invalid();
+      }
 
-        // Send confirmation email
+      // Send confirmation email if there is email
+
+      if (email) {
         await sails.helpers.sendTemplateEmail.with({
-          to: user.email,
+          to: user.email ? user.email : submissionData["email"],
           subject: "Successful Submission for " + formRecord[0].formName,
           template: "email-successful-form-submission",
           templateData: {
-            fullName: user.fullName,
+            fullName: user.fullName
+              ? user.fullName
+              : submissionData["fullName"],
             formName: formRecord[0].formName,
           },
         });
-
-        return exits.success();
-      } else {
-        return exits.error("missing user id");
       }
+
+      // Successfully completed flow
+      return exits.success();
     } catch (err) {
       sails.log(err);
       return exits.error(err);

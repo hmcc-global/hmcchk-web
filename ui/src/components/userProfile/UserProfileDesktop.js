@@ -41,7 +41,7 @@ import {
   userDataCleanup,
   getUserDataRequest,
   updateUserDataRequest,
-  getPublicFormsRequest,
+  getLoginOnlyFormsRequest,
   generatePublishedFormLinks,
 } from "../helpers/userInformationHelpers";
 
@@ -115,7 +115,7 @@ const UserProfileDesktop = (props) => {
   }, [user.id]);
 
   const fetchPublishedForms = useCallback(async () => {
-    const { data, status } = await getPublicFormsRequest();
+    const { data, status } = await getLoginOnlyFormsRequest();
 
     if (status === 200) {
       setFormList([...data]);

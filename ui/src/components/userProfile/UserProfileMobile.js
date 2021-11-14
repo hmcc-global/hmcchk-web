@@ -41,7 +41,7 @@ import {
   userDataCleanup,
   getUserDataRequest,
   updateUserDataRequest,
-  getPublicFormsRequest,
+  getLoginOnlyFormsRequest,
   generatePublishedFormLinks,
 } from "../helpers/userInformationHelpers";
 
@@ -69,7 +69,7 @@ const UserProfileMobile = (props) => {
   };
 
   const fetchPublishedForms = async () => {
-    const { data, status } = await getPublicFormsRequest();
+    const { data, status } = await getLoginOnlyFormsRequest();
 
     if (status === 200) {
       setFormList([...data]);

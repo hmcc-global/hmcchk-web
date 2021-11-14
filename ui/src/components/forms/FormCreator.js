@@ -23,6 +23,7 @@ const FormCreator = (props) => {
     formName,
     formDescription,
     formImage,
+    requireLogin,
     existingFormData,
     resetFormEditorCallback,
   } = props;
@@ -153,12 +154,13 @@ const FormCreator = (props) => {
         formName: formName,
         formDescription: formDescription,
         formImage: formImage,
+        requireLogin: requireLogin,
         formFields: formData,
       };
       const statusCode = await saveFormToDB(formToSave);
       if (statusCode === 200) {
         setSaveStatus(false);
-        resetFormEditorCallback(formName);
+        resetFormEditorCallback();
       }
     } catch (err) {
       setSaveStatus(false);
