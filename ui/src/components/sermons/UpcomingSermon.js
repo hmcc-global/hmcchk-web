@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from "react";
-import he from "he";
 import { AspectRatio, Box, Button, CloseButton ,Stack, Image, UnorderedList , Text, OrderedList, ListItem } from "@chakra-ui/react";
 import {DateTime} from "luxon";
 import parse, { domToReact, attributesToProps } from "html-react-parser";
 
 const UpcomingSermon = ({upcoming}) => {
 
-  const [displayModal, setDisplayModal] = useState("");
+  const [displayModal, setDisplayModal] = useState("unset");
   let today = new Date().getTime();
   let upcomingSeries = "";
   let sermonImage = "";
@@ -45,20 +44,17 @@ const UpcomingSermon = ({upcoming}) => {
     //set display to none if date +7 from start date
     if(upcomingSeries != null){
       let startDateSeconds = DateTime.fromISO(upcomingSeries.startDate).toSeconds();
-      console.log(today/1000)
-console.log(startDateSeconds + 7*24*3600)
-      if((today/1000) >= (startDateSeconds + 7*24*3600)){
+      if((today/1000) >= (startDateSeconds + 70*24*3600)){
         setDisplayModal("none")
       }else
-      setDisplayModal("")
+      setDisplayModal("unset")
     }
     
-  }, [today])
+  }, [])
 
   const closeModal = () => {
     setDisplayModal("none");
   }
-console.log(upcomingSeries)
 
   return(
     <Box
