@@ -14,6 +14,7 @@ import ValuesSection from "./ValuesSection";
 import VisionMissionSection from "./VisionMissionSection";
 import blurbs from "./about.json";
 import { Fragment, useState } from "react";
+import { Select } from "@chakra-ui/select";
 
 const sections = [
   "Our Story",
@@ -28,6 +29,8 @@ const AboutUsContainer = (props) => {
   const [selected, setSelected] = useState(0);
   const banner = blurbs.banner;
 
+  const handleChange = (e) => setSelected(parseInt(e.target.value))
+
   return (
     <Container maxW="container.lg" py={10}>
       <VStack>
@@ -39,7 +42,7 @@ const AboutUsContainer = (props) => {
           bgPosition="center"
           bgSize="cover"
           px={[6, 12, 35]}
-          py={[8, 16, 20]}
+          py={5}
           mb={[4, 8]}
         >
           <Heading
@@ -49,7 +52,7 @@ const AboutUsContainer = (props) => {
             lineHeight={1}
             color="white"
             textAlign="center"
-            mb={5}
+            mb={12}
           >
             {banner.title}
           </Heading>
@@ -58,11 +61,11 @@ const AboutUsContainer = (props) => {
             fontSize={["sm", "md"]}
             fontWeight={600}
             textAlign="center"
-            mb={[0, 5]}
+            mb={[0, 10]}
           >
             {banner.blurb}
           </Text>
-          <HStack justifyContent="space-evenly">
+          <HStack justifyContent="space-evenly" display={{ base: "none", md: "flex"}}>
             {sections &&
               sections.map((e, i) => {
                 return (
@@ -92,16 +95,24 @@ const AboutUsContainer = (props) => {
                 );
               })}
           </HStack>
-          {/* TODO-aparedan: navigation menu */}
+          <Select  mt={4} variant="flushed" display={{ base: "block", md: "none" }} value={selected} onChange={(e) => handleChange(e)}>
+            {sections &&
+              sections.map((e, i) => {
+                return (
+                  <option value={i} key={i}>{e}</option>
+                )
+              })
+            }
+          </Select>
         </Box>
-        {selected == 0 && (
+        {selected === 0 && (
           <StorySection blurb={blurbs.story} title={sections[selected]} />
         )}
-        {selected == 1 && <VisionMissionSection blurb={blurbs.visionMission} />}
-        {selected == 2 && <StrategySection />}
-        {selected == 3 && (<StaffSection blurb={blurbs.staff} title={sections[selected]}/>)}
-        {selected == 4 && (<BeliefsSection blurb={blurbs.beliefs} title={sections[selected]} />)}
-        {selected == 5 && (<ValuesSection blurb={blurbs.values} title={sections[selected]} />)}
+        {selected === 1 && <VisionMissionSection blurb={blurbs.visionMission} />}
+        {selected === 2 && <StrategySection />}
+        {selected === 3 && (<StaffSection blurb={blurbs.staff} title={sections[selected]}/>)}
+        {selected === 4 && (<BeliefsSection blurb={blurbs.beliefs} title={sections[selected]} />)}
+        {selected === 5 && (<ValuesSection blurb={blurbs.values} title={sections[selected]} />)}
       </VStack>
     </Container>
   );
