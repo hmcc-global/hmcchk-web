@@ -79,17 +79,7 @@ export default function AdminGiving(props) {
           fileName={"UserData.xls"}
           buttonTitle={"Export"}
         />
-        {loading ? (
-          <FileUploadButton />
-        ) : (
-          <Modal onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent>
-              <ModalBody> Test </ModalBody>
-            </ModalContent>
-          </Modal>
-        )}
-        {/* <FileUploadButton /> */}
+        <FileUploadButton />
       </Stack>
       <Flex
         bg={useColorModeValue("gray.200")}
