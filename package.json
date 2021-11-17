@@ -5,7 +5,9 @@
     "prettier": "2.3.2"
   },
   "dependencies": {
+    "fast-levenshtein": "^3.0.0",
     "react-google-recaptcha": "^2.1.0",
+    "react-papaparse": "^3.17.2",
     "react-slick": "^0.28.1"
   }
 }

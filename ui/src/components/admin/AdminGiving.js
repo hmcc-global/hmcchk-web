@@ -17,6 +17,7 @@ import {
 import ArrayToExcelButton from "./ArrayToExcelButton";
 import { useTable, useSortBy } from "react-table";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
+import FileUploadButton from "./FileUploadButton";
 
 export default function AdminGiving(props) {
   const [user, setUsers] = useState([]);
@@ -71,6 +72,7 @@ export default function AdminGiving(props) {
           fileName={"UserData.xlsx"}
           buttonTitle={"Export"}
         />
+        <FileUploadButton />
       </Stack>
       <Flex
         bg={useColorModeValue("gray.200")}

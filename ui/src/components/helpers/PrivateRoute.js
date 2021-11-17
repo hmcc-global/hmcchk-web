@@ -47,6 +47,9 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
         p === userObj.accessType
     );
 
+  console.log(noUser);
+  console.log(access);
+  console.log(noTokenExists);
   return (
     userObj != null && (
       <Route
