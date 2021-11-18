@@ -18,18 +18,17 @@ import { Select } from "@chakra-ui/select";
 
 const sections = [
   "Our Story",
-  "Vision & Mission",
+  "Vision, Mission & Values",
   "Our Strategy",
   "Our Staff",
   "Beliefs",
-  "Our Values",
 ];
 
 const AboutUsContainer = (props) => {
   const [selected, setSelected] = useState(0);
   const banner = blurbs.banner;
 
-  const handleChange = (e) => setSelected(parseInt(e.target.value))
+  const handleChange = (e) => setSelected(parseInt(e.target.value));
 
   return (
     <Container maxW="container.lg" py={10}>
@@ -65,7 +64,10 @@ const AboutUsContainer = (props) => {
           >
             {banner.blurb}
           </Text>
-          <HStack justifyContent="space-evenly" display={{ base: "none", md: "flex"}}>
+          <HStack
+            justifyContent="space-evenly"
+            display={{ base: "none", md: "flex" }}
+          >
             {sections &&
               sections.map((e, i) => {
                 return (
@@ -95,24 +97,39 @@ const AboutUsContainer = (props) => {
                 );
               })}
           </HStack>
-          <Select  mt={4} variant="flushed" display={{ base: "block", md: "none" }} value={selected} onChange={(e) => handleChange(e)}>
+          <Select
+            mt={4}
+            variant="flushed"
+            display={{ base: "block", md: "none" }}
+            value={selected}
+            onChange={(e) => handleChange(e)}
+          >
             {sections &&
               sections.map((e, i) => {
                 return (
-                  <option value={i} key={i}>{e}</option>
-                )
-              })
-            }
+                  <option value={i} key={i}>
+                    {e}
+                  </option>
+                );
+              })}
           </Select>
         </Box>
         {selected === 0 && (
           <StorySection blurb={blurbs.story} title={sections[selected]} />
         )}
-        {selected === 1 && <VisionMissionSection blurb={blurbs.visionMission} />}
+        {selected === 1 && (
+          <ValuesSection
+            blurb={blurbs.visionMissionValues}
+            title={sections[selected]}
+          />
+        )}
         {selected === 2 && <StrategySection />}
-        {selected === 3 && (<StaffSection blurb={blurbs.staff} title={sections[selected]}/>)}
-        {selected === 4 && (<BeliefsSection blurb={blurbs.beliefs} title={sections[selected]} />)}
-        {selected === 5 && (<ValuesSection blurb={blurbs.values} title={sections[selected]} />)}
+        {selected === 3 && (
+          <StaffSection blurb={blurbs.staff} title={sections[selected]} />
+        )}
+        {selected === 4 && (
+          <BeliefsSection blurb={blurbs.beliefs} title={sections[selected]} />
+        )}
       </VStack>
     </Container>
   );
