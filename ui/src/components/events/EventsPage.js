@@ -45,7 +45,7 @@ const EventsPage = (props) => {
       console.log(err);
     }
   };
-
+console.log("test")
   return (
     <Container maxW="container.lg">
       <Heading

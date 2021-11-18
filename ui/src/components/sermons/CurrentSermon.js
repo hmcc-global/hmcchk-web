@@ -51,16 +51,28 @@ const CurrentSermon = ({currentSermon}) =>{
 						>
 							Current Series
 						</Text>
-					<AspectRatio mb="5" borderRadius="20px" width="80%" ratio={16 / 9}>
-						<iframe 
-						width="560" 
-						height="315" 
-						src= {`https://www.youtube.com/embed/${videoUrl}`}
-						title="YouTube video player" 
-						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-						allowfullscreen>
-						</iframe>
-					</AspectRatio>
+          <Stack alignContent="center" alignItems="center">
+            <AspectRatio borderRadius="20px" width="80%" ratio={16 / 9} display={{base:"unset", md:"none"}}>
+              <iframe 
+              width="560" 
+              height="315" 
+              src= {`https://www.youtube.com/embed/${videoUrl}`}
+              title="YouTube video player" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowFullScreen>
+              </iframe>
+            </AspectRatio>
+          </Stack>
+          <AspectRatio borderRadius="20px" width="80%" ratio={16 / 9} display={{base:"none", md:"usnet"}}>
+              <iframe 
+              width="560" 
+              height="315" 
+              src= {`https://www.youtube.com/embed/${videoUrl}`}
+              title="YouTube video player" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowFullScreen>
+              </iframe>
+            </AspectRatio>
           <Stack alignItems="left" direction="column" display={{base:"flex", md:"none"}}>
 						<Text
 							fontWeight="bold"

@@ -35,7 +35,7 @@ const FilterSermon = ({allSermons, filterSermon, clearFilter, onClose}) =>{
 							<option value="">Select Speaker</option>
 							{uniqueSpeaker.length > 0 &&
 								uniqueSpeaker.map((speaker, i) => {
-									if(speaker != null) return <option value={speaker}>{speaker}</option>
+									if(speaker != null) return <option key={i} value={speaker}>{speaker}</option>
 							})}
 							</Select>
 					</Stack>
@@ -47,7 +47,7 @@ const FilterSermon = ({allSermons, filterSermon, clearFilter, onClose}) =>{
 							<option value="">Select Sermon Series</option>
 								{uniqueSermonSeries.length > 0 &&
 									uniqueSermonSeries.map((sermonSeries, i) => {
-										if(sermonSeries != null) return <option value={sermonSeries}>{sermonSeries}</option>
+										if(sermonSeries != null) return <option key={i} value={sermonSeries}>{sermonSeries}</option>
 								})}
 						</Select>
 					</Stack>
@@ -59,7 +59,7 @@ const FilterSermon = ({allSermons, filterSermon, clearFilter, onClose}) =>{
 							<option value="">Select Book</option>
 								{uniqueBook.length > 0 &&
 									uniqueBook.map((book, i)=>{
-										if(book != null) return (<option value={book} >{book}</option>)
+										if(book != null) return (<option key={i} value={book} >{book}</option>)
 								})}
 						</Select>
 					</Stack>
@@ -71,7 +71,7 @@ const FilterSermon = ({allSermons, filterSermon, clearFilter, onClose}) =>{
 							<option value="">Select Service Type</option>
 							{uniqueServiceType.length > 0 &&
 								uniqueServiceType.map((service, i)=>{
-									if(service != null) return <option value={service} >{service}</option>
+									if(service != null) return <option key={i} value={service} >{service}</option>
 								})}
 						</Select>
 					</Stack>

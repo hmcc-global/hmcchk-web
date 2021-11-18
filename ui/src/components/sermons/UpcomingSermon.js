@@ -1,7 +1,21 @@
 import React, {useState, useEffect} from "react";
-import { AspectRatio, Box, Button, CloseButton ,Stack, Image, UnorderedList , Text, OrderedList, ListItem } from "@chakra-ui/react";
+import { AspectRatio, 
+         Box, 
+         Button, 
+         CloseButton ,
+         Stack, 
+         Image, 
+         Text, 
+         useDisclosure,
+         Modal,
+         ModalOverlay,
+         ModalContent,
+         ModalHeader,
+         ModalFooter,
+         ModalBody,
+         ModalCloseButton, } 
+from "@chakra-ui/react";
 import {DateTime} from "luxon";
-import parse, { domToReact, attributesToProps } from "html-react-parser";
 
 const UpcomingSermon = ({upcoming}) => {
 
@@ -18,46 +32,27 @@ const UpcomingSermon = ({upcoming}) => {
     }
   }
 
-  const options = {
-    replace: (domNode) => {
-      if (domNode.name === "p") {
-        return <Text mb="2">{domToReact(domNode.children, options)}</Text>;
-      } else if (domNode.name === "ul") {
-        return (
-          <UnorderedList marginInlineStart="1.25em" mb="2">
-            {domToReact(domNode.children, options)}
-          </UnorderedList>
-        );
-      } else if (domNode.name === "ol") {
-        return (
-          <OrderedList marginInlineStart="1.25em" mb="2">
-            {domToReact(domNode.children, options)}
-          </OrderedList>
-        );
-      } else if (domNode.name === "li") {
-        return <ListItem>{domToReact(domNode.children, options)}</ListItem>;
-      } 
-    },
-  };
-
   useEffect(() => {
     //set display to none if date +7 from start date
-    if(upcomingSeries != null){
+    if(upcoming != null && upcomingSeries != null){
       let startDateSeconds = DateTime.fromISO(upcomingSeries.startDate).toSeconds();
-      if((today/1000) >= (startDateSeconds + 70*24*3600)){
-        setDisplayModal("none")
-      }else
-      setDisplayModal("unset")
+      if((today/1000) >= (startDateSeconds + 7*24*3600)){
+        setDisplayModal("none");
+      }else{
+      setDisplayModal("unset");
     }
-    
-  }, [])
+    } else {
+      setDisplayModal("none");
+    }
+  }, [upcoming])
 
   const closeModal = () => {
     setDisplayModal("none");
   }
-
-  return(
-    <Box
+  
+  const WebView = () => {
+    return(
+      <Box
       position="absolute"
       right="25px"
       height="auto"
@@ -81,9 +76,7 @@ const UpcomingSermon = ({upcoming}) => {
             <Image src={sermonImage} />
           </AspectRatio>
           <Box maxW="55%">
-            <Text fontSize="sm" noOfLines={5}>
-              {parse(sermonDesc, options)}
-            </Text>
+            <Text fontSize="sm" noOfLines={5} dangerouslySetInnerHTML={{__html: sermonDesc}} />
           </Box>
         </Stack>
         <Button alignSelf="flex-end" background="#0628A3" color="#ffffff" width="30%" backdropFilter = "blur(6px)" borderRadius= "10px">
@@ -91,6 +84,48 @@ const UpcomingSermon = ({upcoming}) => {
         </Button>
       </Stack>
     </Box>
+    );
+  }
+  
+  const MobileView = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    useEffect(() => {
+      onOpen();
+    }, [])
+  return (
+      <Modal isOpen={isOpen} onClose={onClose} size="full" >
+        <ModalOverlay display ={{base:displayModal, md:"none"}} />
+        <ModalContent display ={{base:displayModal, md:"none"}} margin="0" padding="0">
+          <ModalHeader />
+          <ModalCloseButton />
+          <ModalBody>
+            <Stack direction="column" spacing={4}>
+              <Text color="#0628A3" fontWeight="bold" fontSize="xl" textAlign="center">
+                Upcoming Sermon Series!
+              </Text>
+              <AspectRatio ratio={16/9}>
+                <Image src={sermonImage} />
+              </AspectRatio>
+              <Text textAlign="center" fontSize="sm" dangerouslySetInnerHTML={{__html: sermonDesc}} />
+            </Stack>
+          </ModalBody>
+
+          <ModalFooter justifyContent="center">
+            <Button width="70vw" backgroundColor="#0628A3" color="white" borderRadius="10px">
+              Learn More
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+  )
+}
+
+  return(
+    <>
+      <WebView />
+      <MobileView />
+    </>
   );
 }
 

@@ -61,7 +61,7 @@ const SermonContainer = (props) => {
       console.log(err);
     }
   };
-
+console.log("test")
   return (
     <>
       <UpcomingSermon upcoming={events} />

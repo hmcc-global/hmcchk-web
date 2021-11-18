@@ -11,7 +11,6 @@ import {
   import { useState } from "react";
   import {Link} from "react-router-dom";
   import { DateTime } from "luxon";
-  import parse, { domToReact, attributesToProps } from "html-react-parser";
   import { DATE_FULL } from "luxon/src/impl/formats";
   
   const RelatedSermonCard = ({sermonData, allSermons}) => {
