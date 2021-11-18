@@ -5,38 +5,42 @@ import {
   Center,
   Box,
   SimpleGrid,
-  Container,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
 } from "@chakra-ui/react";
 
 const BeliefsSection = (props) => {
   const { title, blurb } = props;
   return (
-    <Container maxW="container.lg">
-      <Flex direction="column">
-        <Center padding="5">
-          <Heading
-            as="h2"
-            fontSize={["4xl", "6xl"]}
-            fontWeight={700}
-            lineHeight={1}
-            textAlign="center"
-            mb={5}
-          >
-            {title}
-          </Heading>
-        </Center>
+    <Flex direction="column">
+      <Center padding="5">
+        <Heading
+          as="h2"
+          fontSize={["4xl", "6xl"]}
+          fontWeight={700}
+          lineHeight={1}
+          textAlign="center"
+          mb={5}
+        >
+          {title}
+        </Heading>
+      </Center>
+      <Box display={{ base: "none", lg: "flex" }}>
         <SimpleGrid columns={[1, 1, 3]} spacingX="1" spacingY="1">
           <Box
             borderWidth="1px"
             borderRadius="20"
             shadow="lg"
             bg="#F8F8F8"
-            px={[4, 8]}
-            pt={[4, 6]}
-            pb={[4, 6]}
-            m={[0, 0, 4]}
-            h={["16em", "16em", "18em"]}
-            w={["full", "full", "19em"]}
+            px="8"
+            pt="6"
+            pb="6"
+            m="4"
+            h="18em"
+            w="19em"
           >
             <Box>
               <Text fontWeight="bold" color="#2C5282" fontSize="xl">
@@ -53,12 +57,12 @@ const BeliefsSection = (props) => {
             borderRadius="20"
             shadow="lg"
             bg="#F8F8F8"
-            px={[4, 8]}
-            pt={[4, 6]}
-            pb={[4, 6]}
-            m={[0, 0, 4]}
-            h={["16em", "16em", "18em"]}
-            w={["full", "full", "19em"]}
+            px="8"
+            pt="6"
+            pb="6"
+            m="4"
+            h="18em"
+            w="19em"
           >
             <Box>
               <Text fontWeight="bold" color="#2C5282" fontSize="xl">
@@ -74,12 +78,12 @@ const BeliefsSection = (props) => {
             borderRadius="20"
             shadow="lg"
             bg="#F8F8F8"
-            px={[4, 8]}
-            pt={[4, 6]}
-            pb={[4, 6]}
-            m={[0, 0, 4]}
-            h={["16em", "16em", "18em"]}
-            w={["full", "full", "19em"]}
+            px="8"
+            pt="6"
+            pb="6"
+            m="4"
+            h="18em"
+            w="19em"
           >
             <Box>
               <Text fontWeight="bold" color="#2C5282" fontSize="xl">
@@ -95,12 +99,12 @@ const BeliefsSection = (props) => {
             borderRadius="20"
             shadow="lg"
             bg="#F8F8F8"
-            px={[4, 8]}
-            pt={[4, 6]}
-            pb={[4, 6]}
-            m={[0, 0, 4]}
-            h={["16em", "16em", "18em"]}
-            w={["full", "full", "19em"]}
+            px="8"
+            pt="6"
+            pb="6"
+            m="4"
+            h="18em"
+            w="19em"
           >
             <Box>
               <Text fontWeight="bold" color="#2C5282" fontSize="xl">
@@ -116,12 +120,12 @@ const BeliefsSection = (props) => {
             borderRadius="20"
             shadow="lg"
             bg="#F8F8F8"
-            px={[4, 8]}
-            pt={[4, 6]}
-            pb={[4, 6]}
-            m={[0, 0, 4]}
-            h={["16em", "16em", "18em"]}
-            w={["full", "full", "19em"]}
+            px="8"
+            pt="6"
+            pb="6"
+            m="4"
+            h="18em"
+            w="19em"
           >
             <Box>
               <Text fontWeight="bold" color="#2C5282" fontSize="xl">
@@ -137,12 +141,12 @@ const BeliefsSection = (props) => {
             borderRadius="20"
             shadow="lg"
             bg="#F8F8F8"
-            px={[4, 8]}
-            pt={[4, 6]}
-            pb={[4, 6]}
-            m={[0, 0, 4]}
-            h={["16em", "16em", "18em"]}
-            w={["full", "full", "19em"]}
+            px="8"
+            pt="6"
+            pb="6"
+            m="4"
+            h="18em"
+            w="19em"
           >
             <Box>
               <Text fontWeight="bold" color="#2C5282" fontSize="xl">
@@ -158,12 +162,12 @@ const BeliefsSection = (props) => {
             borderRadius="20"
             shadow="lg"
             bg="#F8F8F8"
-            px={[4, 8]}
-            pt={[4, 6]}
-            pb={[4, 6]}
-            m={[0, 0, 4]}
-            h={["16em", "16em", "18em"]}
-            w={["full", "full", "19em"]}
+            px="8"
+            pt="6"
+            pb="6"
+            m="4"
+            h="18em"
+            w="19em"
           >
             <Box>
               <Text fontWeight="bold" color="#2C5282" fontSize="xl">
@@ -179,12 +183,12 @@ const BeliefsSection = (props) => {
             borderRadius="20"
             shadow="lg"
             bg="#F8F8F8"
-            px={[4, 8]}
-            pt={[4, 6]}
-            pb={[4, 6]}
-            m={[0, 0, 4]}
-            h={["16em", "16em", "18em"]}
-            w={["full", "full", "19em"]}
+            px="8"
+            pt="6"
+            pb="6"
+            m="4"
+            h="18em"
+            w="19em"
           >
             <Box>
               <Text fontWeight="bold" color="#2C5282" fontSize="xl">
@@ -200,12 +204,12 @@ const BeliefsSection = (props) => {
             borderRadius="20"
             shadow="lg"
             bg="#F8F8F8"
-            px={[4, 8]}
-            pt={[4, 6]}
-            pb={[4, 6]}
-            m={[0, 0, 4]}
-            h={["16em", "16em", "18em"]}
-            w={["full", "full", "19em"]}
+            px="8"
+            pt="6"
+            pb="6"
+            m="4"
+            h="18em"
+            w="19em"
           >
             <Box>
               <Text fontWeight="bold" color="#2C5282" fontSize="xl">
@@ -217,8 +221,130 @@ const BeliefsSection = (props) => {
             </Box>
           </Box>
         </SimpleGrid>
-      </Flex>
-    </Container>
+      </Box>
+      <Box>
+        <Accordion allowMultiple display={{ base: "block", lg: "none" }}>
+          <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+            <h2>
+              <AccordionButton>
+                <Box flex="1" textAlign="left" fontWeight="bold">
+                  <Text>{blurb.head[0]}</Text>
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel>
+              <Text>{blurb.body[0]}</Text>
+            </AccordionPanel>
+          </AccordionItem>
+
+          <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+            <h2>
+              <AccordionButton>
+                <Box flex="1" textAlign="left" fontWeight="bold">
+                  <Text>{blurb.head[1]}</Text>
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel>
+              <Text>{blurb.body[1]}</Text>
+            </AccordionPanel>
+          </AccordionItem>
+          <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+            <h2>
+              <AccordionButton>
+                <Box flex="1" textAlign="left" fontWeight="bold">
+                  <Text>{blurb.head[2]}</Text>
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel>
+              <Text>{blurb.body[2]}</Text>
+            </AccordionPanel>
+          </AccordionItem>
+          <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+            <h2>
+              <AccordionButton>
+                <Box flex="1" textAlign="left" fontWeight="bold">
+                  <Text>{blurb.head[3]}</Text>
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel>
+              <Text>{blurb.body[3]}</Text>
+            </AccordionPanel>
+          </AccordionItem>
+          <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+            <h2>
+              <AccordionButton>
+                <Box flex="1" textAlign="left" fontWeight="bold">
+                  <Text>{blurb.head[4]}</Text>
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel>
+              <Text>{blurb.body[4]}</Text>
+            </AccordionPanel>
+          </AccordionItem>
+          <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+            <h2>
+              <AccordionButton>
+                <Box flex="1" textAlign="left" fontWeight="bold">
+                  <Text>{blurb.head[5]}</Text>
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel>
+              <Text>{blurb.body[5]}</Text>
+            </AccordionPanel>
+          </AccordionItem>
+          <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+            <h2>
+              <AccordionButton>
+                <Box flex="1" textAlign="left" fontWeight="bold">
+                  <Text>{blurb.head[6]}</Text>
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel>
+              <Text>{blurb.body[6]}</Text>
+            </AccordionPanel>
+          </AccordionItem>
+          <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+            <h2>
+              <AccordionButton>
+                <Box flex="1" textAlign="left" fontWeight="bold">
+                  <Text>{blurb.head[7]}</Text>
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel>
+              <Text>{blurb.body[7]}</Text>
+            </AccordionPanel>
+          </AccordionItem>
+          <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+            <h2>
+              <AccordionButton>
+                <Box flex="1" textAlign="left" fontWeight="bold">
+                  <Text>{blurb.head[8]}</Text>
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel>
+              <Text>{blurb.body[8]}</Text>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
+      </Box>
+    </Flex>
   );
 };
 
