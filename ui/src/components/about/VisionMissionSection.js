@@ -10,12 +10,10 @@ import {
 const VisionMissionCard = ({ title, message }) => {
   return (
     <Box
-      w={["20em", "25em"]}
-      h={["15em", "10em"]}
+      w={["20em", "30em"]}
+      h={["15em", "13em"]}
       borderWidth="1px"
       borderRadius="20"
-      // TODO-aparedan: change bgimage
-      // bgImage={`url('${process.env.PUBLIC_URL}/images/visitus/header-banner.jpg')`}
       bgColor="#FFFFFF"
       bgPosition="center"
       bgSize="cover"
@@ -26,15 +24,16 @@ const VisionMissionCard = ({ title, message }) => {
     >
       <Heading
         as="h2"
-        fontSize={["2xl", "4xl"]}
-        fontWeight={700}
+        fontSize={["2xl", "5xl"]}
+        fontWeight={800}
         lineHeight={1}
         color="#0628A3"
         textAlign="center"
+        mb={1}
       >
         {title}
       </Heading>
-      <Text color="black" fontSize={["xs", "sm"]} textAlign="center">
+      <Text color="black" fontSize={["sm", "md"]} textAlign="center">
         {message}
       </Text>
     </Box>
@@ -49,7 +48,7 @@ const VisionMissionSection = (props) => {
       padding={0}
       maxW="unset"
       h={["100vh", "31.25vw"]}
-      bgImage={`url('${process.env.PUBLIC_URL}/images/visitus/header-banner.jpg')`}
+      bgImage={`url('${process.env.PUBLIC_URL}/images/about/visionMissionBg.png')`}
     >
       <VStack height="100%" justifyContent="center">
         <Stack

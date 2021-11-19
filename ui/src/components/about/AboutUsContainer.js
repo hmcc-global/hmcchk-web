@@ -36,8 +36,7 @@ const AboutUsContainer = (props) => {
         <Box
           borderWidth="1px"
           borderRadius="20"
-          // TODO-aparedan: change bgimage
-          bgImage={`url('${process.env.PUBLIC_URL}/images/visitus/header-banner.jpg')`}
+          bgImage={`url('${process.env.PUBLIC_URL}/images/about/headerBg.png')`}
           bgPosition="center"
           bgSize="cover"
           px={[6, 12, 35]}
@@ -86,7 +85,6 @@ const AboutUsContainer = (props) => {
                       <Text
                         mx={[3, 4]}
                         color="white"
-                        // display="inline-block"
                         fontSize={["md", "2xl"]}
                         verticalAlign="baseline"
                       >
