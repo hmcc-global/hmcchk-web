@@ -2,7 +2,7 @@ import { Box, Flex, Heading, Stack, VStack, Text } from "@chakra-ui/layout";
 
 const PictureStory = ({ image, text }) => {
   return (
-    <VStack h="100%">
+    <VStack h="100%" px={2}>
       <Box
         w="100%"
         h="13em"
@@ -42,8 +42,8 @@ const StorySection = (props) => {
         {blurb[0]}
       </Text>
       <Box
-        boxSize="md"
         w="100%"
+        h={["15em", "25em"]}
         borderWidth="1px"
         borderRadius="20"
         bgImage={`url('${process.env.PUBLIC_URL}/images/about/picture1.png')`}
