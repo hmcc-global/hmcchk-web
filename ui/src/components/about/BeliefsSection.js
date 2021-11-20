@@ -228,13 +228,13 @@ const BeliefsSection = (props) => {
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{blurb.head[0]}</Text>
+                  <Text color="black">{blurb.head[0]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{blurb.body[0]}</Text>
+              <Text color="black">{blurb.body[0]}</Text>
             </AccordionPanel>
           </AccordionItem>
 
@@ -242,104 +242,104 @@ const BeliefsSection = (props) => {
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{blurb.head[1]}</Text>
+                  <Text color="black">{blurb.head[1]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{blurb.body[1]}</Text>
+              <Text color="black">{blurb.body[1]}</Text>
             </AccordionPanel>
           </AccordionItem>
           <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{blurb.head[2]}</Text>
+                  <Text color="black">{blurb.head[2]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{blurb.body[2]}</Text>
+              <Text color="black">{blurb.body[2]}</Text>
             </AccordionPanel>
           </AccordionItem>
           <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{blurb.head[3]}</Text>
+                  <Text color="black">{blurb.head[3]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{blurb.body[3]}</Text>
+              <Text color="black">{blurb.body[3]}</Text>
             </AccordionPanel>
           </AccordionItem>
           <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{blurb.head[4]}</Text>
+                  <Text color="black">{blurb.head[4]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{blurb.body[4]}</Text>
+              <Text color="black">{blurb.body[4]}</Text>
             </AccordionPanel>
           </AccordionItem>
           <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{blurb.head[5]}</Text>
+                  <Text color="black">{blurb.head[5]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{blurb.body[5]}</Text>
+              <Text color="black">{blurb.body[5]}</Text>
             </AccordionPanel>
           </AccordionItem>
           <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{blurb.head[6]}</Text>
+                  <Text color="black">{blurb.head[6]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{blurb.body[6]}</Text>
+              <Text color="black">{blurb.body[6]}</Text>
             </AccordionPanel>
           </AccordionItem>
           <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{blurb.head[7]}</Text>
+                  <Text color="black">{blurb.head[7]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{blurb.body[7]}</Text>
+              <Text color="black">{blurb.body[7]}</Text>
             </AccordionPanel>
           </AccordionItem>
           <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{blurb.head[8]}</Text>
+                  <Text color="black">{blurb.head[8]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{blurb.body[8]}</Text>
+              <Text color="black">{blurb.body[8]}</Text>
             </AccordionPanel>
           </AccordionItem>
         </Accordion>
