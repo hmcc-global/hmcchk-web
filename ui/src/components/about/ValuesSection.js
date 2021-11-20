@@ -24,20 +24,21 @@ const ValuesSection = (props) => {
 
   return (
     <>
+      <Center padding="5">
+        <Heading
+          as="h2"
+          fontSize={["4xl", "6xl"]}
+          fontWeight={700}
+          color="#0628A3"
+          lineHeight={1}
+          textAlign="center"
+          mb={5}
+        >
+          {title}
+        </Heading>
+      </Center>
       <VisionMissionSection blurb={visionMission} />
       <Flex direction="column">
-        <Center padding="5">
-          <Heading
-            as="h2"
-            fontSize={["4xl", "6xl"]}
-            fontWeight={700}
-            lineHeight={1}
-            textAlign="center"
-            mb={5}
-          >
-            {title}
-          </Heading>
-        </Center>
         <Accordion allowMultiple>
           <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
             <h2>
