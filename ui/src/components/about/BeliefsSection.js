@@ -23,6 +23,7 @@ const BeliefsSection = (props) => {
           fontWeight={700}
           lineHeight={1}
           textAlign="center"
+          color="#062883"
           mb={5}
         >
           {title}
