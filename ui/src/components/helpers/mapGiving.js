@@ -1,8 +1,21 @@
 const levenshtein = require("fast-levenshtein");
 
+<<<<<<< HEAD
 function levenshteinFilter(source, index, maximum = 5) {
   let _source, matches, x, y;
 
+=======
+function levenshteinFilter(source, maximum = 5) {
+  let _source, matches, x, y, index;
+
+  //find column to match names
+  for (let i in source[0]) {
+    if (source[0][i] == "Name") {
+      index = i;
+    }
+  }
+
+>>>>>>> 3fd28bb... dynamic sort all columns
   _source = source.slice();
   matches = [];
   for (x = _source.length - 1; x >= 0; x--) {
