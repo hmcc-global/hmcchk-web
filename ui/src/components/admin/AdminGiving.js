@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { customAxios as axios } from "../helpers/customAxios";
 import {
+  useDisclosure,
   Button,
   Flex,
   Box,
@@ -13,6 +14,10 @@ import {
   Tr,
   Stack,
   chakra,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalBody,
 } from "@chakra-ui/react";
 import ArrayToExcelButton from "./ArrayToExcelButton";
 import { useTable, useSortBy } from "react-table";
@@ -21,6 +26,8 @@ import FileUploadButton from "./FileUploadButton";
 
 export default function AdminGiving(props) {
   const [user, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const getData = async () => {
     try {
@@ -69,10 +76,20 @@ export default function AdminGiving(props) {
         <Button onClick={() => refreshHandler()}>Refresh</Button>
         <ArrayToExcelButton
           apiArray={data}
-          fileName={"UserData.xlsx"}
+          fileName={"UserData.xls"}
           buttonTitle={"Export"}
         />
-        <FileUploadButton />
+        {loading ? (
+          <FileUploadButton />
+        ) : (
+          <Modal onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalBody> Test </ModalBody>
+            </ModalContent>
+          </Modal>
+        )}
+        {/* <FileUploadButton /> */}
       </Stack>
       <Flex
         bg={useColorModeValue("gray.200")}

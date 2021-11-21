@@ -1,13 +1,16 @@
 import React, { Component, useState } from "react";
 import { CSVReader } from "react-papaparse";
 import { mapGiving } from "../helpers/mapGiving";
+import { arrayToExcel } from "../helpers/arrayToExcel";
 
 const FileUploadButton = () => {
   const [csv, setCsv] = useState({});
 
   const handleOnDrop = (data) => {
     console.log(data);
-    mapGiving(data);
+    let givingArray = mapGiving(data);
+    // const customArray = JSON.parse(JSON.stringify(givingArray));
+    // arrayToExcel.convertArrayToTable(customArray, "test_giving.xls");
     setCsv(data);
   };
 

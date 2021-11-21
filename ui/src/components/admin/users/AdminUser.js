@@ -55,6 +55,7 @@ export default function AdminUser(props) {
   };
 
   const data = user;
+  console.log(data);
 
   const columns = React.useMemo(
     () => [

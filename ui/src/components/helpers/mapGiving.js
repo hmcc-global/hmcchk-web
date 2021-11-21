@@ -1,79 +1,21 @@
 const levenshtein = require("fast-levenshtein");
 
-function editDistance(s1, s2) {
-  s1 = s1.toLowerCase();
-  s2 = s2.toLowerCase();
-
-  var costs = new Array();
-  for (var i = 0; i <= s1.length; i++) {
-    var lastValue = i;
-    for (var j = 0; j <= s2.length; j++) {
-      if (i == 0) costs[j] = j;
-      else {
-        if (j > 0) {
-          var newValue = costs[j - 1];
-          if (s1.charAt(i - 1) != s2.charAt(j - 1))
-            newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
-          costs[j - 1] = lastValue;
-          lastValue = newValue;
-        }
-      }
-    }
-    if (i > 0) costs[s2.length] = lastValue;
-  }
-  return costs[s2.length];
-}
-
-function similarity(s1, s2) {
-  var longer = s1;
-  var shorter = s2;
-  if (s1.length < s2.length) {
-    longer = s2;
-    shorter = s1;
-  }
-  var longerLength = longer.length;
-  if (longerLength == 0) {
-    return 1.0;
-  }
-  return (
-    (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength)
-  );
-}
-
-// function groupBy(arr, criteria) {
-//   return arr.reduce(function (obj, item) {
-//     // Check if the criteria is a function to run on the item or a property of it
-//     let key = typeof criteria === "function" ? criteria(item) : item[criteria];
-
-//     // If the key doesn't exist yet, create it
-//     if (!Object.prototype.hasOwnProperty.call(obj, key)) {
-//       obj[key] = [];
-//     }
-
-//     // Push the value to the object
-//     obj[key].push(item);
-
-//     // Return the object to the next item in the loop
-//     return obj;
-//   }, {});
-// }
-
 function levenshteinFilter(source, maximum = 5) {
-  let _source, matches, x, y;
+  let _source, matches, x, y, index;
 
-  let names = source.map(function (value, index) {
-    return value[0];
-  });
-  let numbers = source.map(function (value, index) {
-    return value[1];
-  });
+  //find column to match names
+  for (let i in source[0]) {
+    if (source[0][i] == "Name") {
+      index = i;
+    }
+  }
 
-  _source = source.map((element) => element[0]).slice();
+  _source = source.slice();
   matches = [];
   for (x = _source.length - 1; x >= 0; x--) {
     let output = _source.splice(x, 1);
     for (y = _source.length - 1; y >= 0; y--) {
-      if (levenshtein.get(output[0], _source[y]) <= maximum) {
+      if (levenshtein.get(output[0][index], _source[y][index]) <= maximum) {
         output.push(_source[y]);
         _source.splice(y, 1);
         x--;
@@ -84,59 +26,104 @@ function levenshteinFilter(source, maximum = 5) {
   return matches;
 }
 
+function removeDuplicates(source) {
+  let clean = [];
+
+  for (let x = 0; x < source.length; x++) {
+    let temp = [];
+    let remove = source[x].filter(function (element) {
+      if (temp.indexOf(element.toString()) < 0) {
+        temp.push(element.toString());
+        return element;
+      }
+    });
+    clean.push(remove);
+  }
+
+  return clean;
+}
+
 const mapGiving = (array) => {
   console.log("this is mapGiving");
 
-  //find out which column are their first and last names
-  let firstNameIndex, lastNameIndex, userIDIndex;
+  console.log("raw", array[0].data);
 
-  for (let i in array[0].data) {
-    if (array[0].data[i] == "First Name") {
-      firstNameIndex = i;
-    } else if (array[0].data[i] == "Last Name") {
-      lastNameIndex = i;
-    } else if (array[0].data[i] == "User ID") {
-      userIDIndex = i;
-    }
+  let allNameArray = [];
+
+  for (let i = 0; i < array.length; i++) {
+    allNameArray.push(array[i].data);
   }
 
-  //clean up the name data
-  // let nameObj = new Array();
-  let nameArray = new Array();
+  // //find out which column are their first and last names
+  // let firstNameIndex, lastNameIndex, userIDIndex;
 
-  for (let j in array) {
-    if (j == 0) {
-      continue; //skip heading column
-    }
-    let temp = new Object();
-    temp["firstName"] = array[j].data[firstNameIndex];
-    temp["lastName"] = array[j].data[lastNameIndex];
-    temp["userId"] = array[j].data[userIDIndex];
-    // temp["fullName"] = temp["firstName"] + " " + temp["lastName"];
-    // nameObj.push(temp);
-
-    const fullName = temp["firstName"] + " " + temp["lastName"];
-    let result = [fullName, temp["userId"]];
-    nameArray.push(result);
-  }
-
-  console.log("nameArray", nameArray);
-
-  let output = levenshteinFilter(nameArray, 4);
-  console.log("output", output);
-
-  // console.log("test", similarity("Tamara Yustian", "Yustian Tamara"));
-
-  // for (let a in nameArray) {
-  //   for (let b in nameArray) {
-  //     let output = similarity(nameArray[a], nameArray[b]);
-  //     console.log(nameArray[a], "/", nameArray[b], ":", output);
+  // for (let i in array[0].data) {
+  //   if (array[0].data[i] == "First Name") {
+  //     firstNameIndex = i;
+  //   } else if (array[0].data[i] == "Last Name") {
+  //     lastNameIndex = i;
+  //   } else if (array[0].data[i] == "User ID") {
+  //     userIDIndex = i;
   //   }
   // }
 
-  // console.log("nameObj", nameObj);
+  // //add full name column
+  // allNameArray[0].push("fullName");
 
-  return array;
+  // for (let i in allNameArray) {
+  //   if (i == 0) {
+  //     continue; //skip heading column
+  //   }
+  //   firstName = array[i].data[firstNameIndex];
+  //   lastName = array[i].data[lastNameIndex];
+  //   const fullName = firstName + " " + lastName;
+  //   allNameArray[i].push(fullName)
+  // }
+
+  console.log("all", allNameArray);
+
+  //process and clean the data
+  let output = levenshteinFilter(allNameArray, 4);
+
+  console.log("output", output);
+  let clean = removeDuplicates(output);
+
+  for (let x = 0; x < clean.length; x++) {
+    if (clean[x].length > 1) {
+      for (let y = 0; y < clean[x].length; y++) {
+        for (let z = y + 1; z < clean[x].length; z++) {
+          //check for duplicates inside
+          if (clean[x][y][0] != clean[x][z][0]) {
+            clean.push(clean[x]);
+            clean[x].splice(y, 1);
+          }
+        }
+      }
+    }
+  }
+
+  // //add heading
+  // let headers = ["fullName", "userId"];
+  // clean.unshift(headers);
+
+  // let cleaner = removeDuplicates(clean);
+
+  // console.log("clean", cleaner);
+
+  // let collection = clean.slice(); // make a copy
+  // let keys = collection.shift();
+
+  // collection = collection.map(function (elem) {
+  //   let obj = {};
+  //   keys.forEach(function (key, i) {
+  //     obj[key] = elem[i];
+  //   });
+  //   return obj;
+  // });
+
+  // console.log("test", collection);
+
+  return;
 };
 
 export { mapGiving };
