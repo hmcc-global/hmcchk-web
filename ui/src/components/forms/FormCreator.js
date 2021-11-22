@@ -19,15 +19,9 @@ import {
 
 const FormCreator = (props) => {
   const { user } = props;
-  const {
-    formName,
-    formDescription,
-    formImage,
-    requireLogin,
-    existingFormData,
-    resetFormEditorCallback,
-  } = props;
-  const [formData, setFormData] = useState([]);
+  const { formInformation, existingFormFieldsData, resetFormEditorCallback } =
+    props;
+  const [formFields, setFormFields] = useState([]);
   const [editData, setEditData] = useState(null);
   const [saveStatus, setSaveStatus] = useState(false);
   const {
@@ -47,16 +41,16 @@ const FormCreator = (props) => {
   } = useForm();
 
   useEffect(() => {
-    if (existingFormData) {
-      if (existingFormData.formFields[0].fieldType === "prefill") {
-        let fields = existingFormData.formFields[0].options;
+    if (existingFormFieldsData) {
+      if (existingFormFieldsData.formFields[0].fieldType === "prefill") {
+        let fields = existingFormFieldsData.formFields[0].options;
         fields.forEach((field) => {
           setValuePrefill(field + "Checkbox", true);
         });
       }
-      setFormData(existingFormData.formFields);
+      setFormFields(existingFormFieldsData.formFields);
     }
-  }, [existingFormData, setValuePrefill]);
+  }, [existingFormFieldsData, setValuePrefill]);
 
   // Handler for prefillable form arguments
   const onPrefillableSubmit = (data, e) => {
@@ -73,7 +67,7 @@ const FormCreator = (props) => {
       required: true,
     };
 
-    let temp = [...formData];
+    let temp = [...formFields];
     try {
       let spliceAmount = temp[0].fieldType === "prefill" ? 1 : 0;
       temp.splice(0, spliceAmount, dataObject);
@@ -81,7 +75,7 @@ const FormCreator = (props) => {
       temp.push(dataObject);
     }
 
-    setFormData(temp);
+    setFormFields(temp);
   };
 
   // Handler for new custom field submissions
@@ -90,7 +84,7 @@ const FormCreator = (props) => {
     if (data.options) {
       data.options = data.options.split(";");
     }
-    let temp = [...formData];
+    let temp = [...formFields];
 
     if (editData) {
       temp.splice(editData, 1, data);
@@ -98,14 +92,14 @@ const FormCreator = (props) => {
     } else {
       temp.push(data);
     }
-    setFormData(temp);
+    setFormFields(temp);
 
     reset();
   };
 
   // Handler for field data edits
   const onEdit = (e) => {
-    const temp = formData[e.target.value];
+    const temp = formFields[e.target.value];
     setEditData(e.target.value);
     setValue("fieldName", temp.fieldName);
     setValue("fieldType", temp.fieldType);
@@ -122,18 +116,18 @@ const FormCreator = (props) => {
       alert("Cannot delete while editing");
     } else {
       if (window.confirm("Are you sure you want to delete this?")) {
-        let temp = [...formData];
+        let temp = [...formFields];
         temp.splice(e.target.value, 1);
-        setFormData(temp);
+        setFormFields(temp);
       }
     }
   };
 
   // Write form data to DB
   const saveFormToDB = async (formToSave) => {
-    if (existingFormData) {
+    if (existingFormFieldsData) {
       const { status } = await axios.post("/api/forms/post-update-form", {
-        id: existingFormData.id,
+        id: existingFormFieldsData.id,
         formToSave: formToSave,
       });
 
@@ -151,11 +145,12 @@ const FormCreator = (props) => {
     setSaveStatus(true);
     try {
       let formToSave = {
-        formName: formName,
-        formDescription: formDescription,
-        formImage: formImage,
-        requireLogin: requireLogin,
-        formFields: formData,
+        formName: formInformation.formName,
+        formDescription: formInformation.formDescription,
+        formImage: formInformation.formImage,
+        requireLogin: formInformation.requireLogin,
+        successEmailTemplate: formInformation.successEmailTemplate,
+        formFields: formFields,
       };
       const statusCode = await saveFormToDB(formToSave);
       if (statusCode === 200) {
@@ -176,7 +171,7 @@ const FormCreator = (props) => {
       <Heading as="h1" size="xl">
         Form Editor
       </Heading>
-      <Text>Creating/Editing form {formName}</Text>
+      <Text>Creating/Editing form {formInformation.formName}</Text>
       <Box mt="3" mb="3">
         <form onSubmit={handleSubmitPrefill(onPrefillableSubmit)}>
           <Heading as="h3" size="md">
@@ -299,7 +294,7 @@ const FormCreator = (props) => {
           </Heading>
           {editData && (
             <Text>
-              Currently editing field: {formData[editData].fieldName}{" "}
+              Currently editing field: {formFields[editData].fieldName}{" "}
             </Text>
           )}
           <FormControl isInvalid={errors["fieldName"]}>
@@ -368,7 +363,7 @@ const FormCreator = (props) => {
         <Heading as="h3" size="md">
           Created Form Fields
         </Heading>
-        {formData
+        {formFields
           .filter((obj) => {
             if (obj.fieldType === "prefill") {
               return false;
@@ -405,10 +400,10 @@ const FormCreator = (props) => {
       </Heading>
       <Form
         formId={null}
-        formName={formName}
-        formDescription={formDescription}
-        formImage={formImage}
-        formData={formData}
+        formName={formInformation.formName}
+        formDescription={formInformation.formDescription}
+        formImage={formInformation.formImage}
+        formFields={formFields}
         user={user}
       />
     </Box>

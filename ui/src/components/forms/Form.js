@@ -43,7 +43,7 @@ import {
 } from "../helpers/lists";
 
 const Form = (props) => {
-  const { formId, formName, formDescription, formImage, formData } = props;
+  const { formId, formName, formDescription, formImage, formFields } = props;
   const { register, handleSubmit, control, formState, setValue } = useForm();
   const { errors } = formState;
   const { user, history } = props;
@@ -103,9 +103,9 @@ const Form = (props) => {
   useEffect(() => {
     if (submissionData) {
       postSubmission(formId, submissionData, user.id);
-    } else if (!submissionData && user.id && formData.length > 0) {
-      if (formData[0].fieldType === "prefill") {
-        formData[0].options.forEach((field) => {
+    } else if (!submissionData && user.id && formFields.length > 0) {
+      if (formFields[0].fieldType === "prefill") {
+        formFields[0].options.forEach((field) => {
           if (field === "address" && user["address"]) {
             setValue("addressFloor", user["address"]["floor"]);
             setValue("addressFlat", user["address"]["flat"]);
@@ -118,7 +118,7 @@ const Form = (props) => {
         });
       }
     }
-  }, [submissionData, formId, user, formData, setValue]);
+  }, [submissionData, formId, user, formFields, setValue]);
 
   // Custom changes for prefill form fields
   const createPrefillFormFields = (fieldData) => {
@@ -490,8 +490,8 @@ const Form = (props) => {
           />
         </Box>
         <Stack direction="column" spacing={5}>
-          {formData && createPrefillFormFields(formData[0])}
-          {formData.map((fieldData, i) => (
+          {formFields && createPrefillFormFields(formFields[0])}
+          {formFields.map((fieldData, i) => (
             <FormControl
               key={fieldData.fieldName + i}
               isInvalid={errors[fieldData.fieldName]}

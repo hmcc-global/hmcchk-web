@@ -83,11 +83,11 @@ module.exports = {
 
       // Send confirmation email if there is email
 
-      if (user.email|| submissionData["email"]) {
+      if (user.email || submissionData["email"]) {
         await sails.helpers.sendTemplateEmail.with({
           to: user.email ? user.email : submissionData["email"],
           subject: "Successful Submission for " + formRecord[0].formName,
-          template: "email-successful-form-submission",
+          template: formRecord[0].successEmailTemplate,
           templateData: {
             fullName: user.fullName
               ? user.fullName

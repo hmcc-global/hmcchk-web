@@ -38,7 +38,7 @@ const UserFormContainer = (props) => {
           formName={formData.formName}
           formDescription={formData.formDescription}
           formImage={formData.formImage}
-          formData={formData.formFields}
+          formFields={formData.formFields}
           user={user}
           history={history}
         />

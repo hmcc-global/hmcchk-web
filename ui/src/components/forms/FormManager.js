@@ -20,6 +20,7 @@ import {
   Textarea,
   FormHelperText,
   Switch,
+  Select,
 } from "@chakra-ui/react";
 import FormDataDownloader from "./FormDataDownloader";
 
@@ -31,6 +32,8 @@ const FormManager = (props) => {
   const [formDescription, setFormDescription] = useState(null);
   const [formImage, setFormImage] = useState(null);
   const [requireLogin, setRequireLogin] = useState(true);
+  const [successEmailTemplate, setSuccessEmailTemplate] = useState(null);
+
   const [editFormData, setEditFormData] = useState(null);
   const [formId, setFormId] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -50,12 +53,14 @@ const FormManager = (props) => {
     setValue("formDescription", data.formDescription);
     setValue("formImage", data.formImage);
     setValue("requireLogin", data.requireLogin);
+    setValue("successEmailTemplate", data.successEmailTemplate);
 
     // Update React State for child props
     setFormName(data.formName);
     setFormDescription(data.formDescription);
     setFormImage(data.formImage);
     setRequireLogin(data.requireLogin);
+    setSuccessEmailTemplate(data.successEmailTemplate);
   };
 
   const onSubmit = (data, e) => {
@@ -129,11 +134,13 @@ const FormManager = (props) => {
     setValue("formDescription", null);
     setValue("formImage", null);
     setValue("requireLogin", true);
+    setValue("successEmailTemplate", null);
     setFormName(null);
     setFormDescription(null);
     setFormImage(null);
     setRequireLogin(true);
     setEditFormData(null);
+    setSuccessEmailTemplate(null);
     await getFormListFromDatabase();
   };
 
@@ -260,9 +267,19 @@ const FormManager = (props) => {
                 )}
               />
             </FormControl>
+            <FormControl isInvalid={errors["successEmailTemplate"]}>
+              <FormLabel>Select an email template</FormLabel>
+              <Select {...register("successEmailTemplate", { required: true })}>
+                <option value="form-default-success">Default</option>
+                <option value="form-retreat-success">Retreat</option>
+              </Select>
+              <FormErrorMessage>
+                {errors["successEmailTemplate"] && "Field type is required"}
+              </FormErrorMessage>
+            </FormControl>
             <FormControl>
               <FormLabel>
-                If you updated the 4 fields above please click here again before
+                If you updated the fields above please click here again before
                 saving to DB
               </FormLabel>
               <Button colorScheme="teal" type="submit">
@@ -275,11 +292,14 @@ const FormManager = (props) => {
 
       {formName && (
         <FormCreator
-          formName={formName}
-          formDescription={formDescription}
-          formImage={formImage}
-          requireLogin={requireLogin}
-          existingFormData={editFormData}
+          formInformation={{
+            formName: formName,
+            formDescription: formDescription,
+            formImage: formImage,
+            requireLogin: requireLogin,
+            successEmailTemplate: successEmailTemplate,
+          }}
+          existingFormFieldsData={editFormData}
           resetFormEditorCallback={resetFormEditorCallback}
           user={user}
         />
