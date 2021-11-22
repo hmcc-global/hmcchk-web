@@ -3,6 +3,8 @@ import { useForm, Controller } from "react-hook-form";
 import { customAxios as axios } from "../helpers/customAxios";
 import { camelize, sentencize } from "../helpers/formsHelpers";
 import { CheckCircleIcon } from "@chakra-ui/icons";
+import ReactMarkdown from "react-markdown";
+import ChakraUIRenderer from "chakra-ui-markdown-renderer";
 
 import {
   FormControl,
@@ -480,9 +482,13 @@ const Form = (props) => {
         >
           {formName}
         </Heading>
-        <Text key="formDescription" textAlign="center" mb="8">
-          {formDescription}
-        </Text>
+        <Box key="formDescription" textAlign="justify" mb="8">
+          <ReactMarkdown
+            components={ChakraUIRenderer()}
+            children={formDescription}
+            skipHtml
+          />
+        </Box>
         <Stack direction="column" spacing={5}>
           {formData && createPrefillFormFields(formData[0])}
           {formData.map((fieldData, i) => (

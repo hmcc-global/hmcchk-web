@@ -17,7 +17,8 @@ import {
   Text,
   Badge,
   Stack,
-  Checkbox,
+  Textarea,
+  FormHelperText,
   Switch,
 } from "@chakra-ui/react";
 import FormDataDownloader from "./FormDataDownloader";
@@ -236,7 +237,11 @@ const FormManager = (props) => {
             </FormControl>
             <FormControl isInvalid={errors["formDescription"]}>
               <FormLabel>Form Description</FormLabel>
-              <Input id="formDescription" {...register("formDescription")} />
+              <Textarea id="formDescription" {...register("formDescription")} />
+              <FormHelperText>
+                This field supports markdown. Just write it in somewhere else
+                and then paste it in and see the magic happen
+              </FormHelperText>
             </FormControl>
             <FormControl isInvalid={errors["formImage"]}>
               <FormLabel>Form Image</FormLabel>
