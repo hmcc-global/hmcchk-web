@@ -18,7 +18,7 @@ import { Select } from "@chakra-ui/select";
 
 const sections = [
   "Our Story",
-  "Vision, Mission & Values",
+  "Vision & Mission, Our Values",
   "Our Strategy",
   "Our Staff",
   "Beliefs",
@@ -121,7 +121,9 @@ const AboutUsContainer = (props) => {
             title={sections[selected]}
           />
         )}
-        {selected === 2 && <StrategySection />}
+        {selected === 2 && (
+          <StrategySection blurb={blurbs.strategy} title={sections[selected]} />
+        )}
         {selected === 3 && (
           <StaffSection blurb={blurbs.staff} title={sections[selected]} />
         )}

@@ -25,12 +25,35 @@
       },
       "body": {
         "0": "To be connected with God and anointed by His Spirit, in order to hear His direction and step out in faith to minister to His people with His power.",
-        "1": "To develop people to their full AC and in Christ-like character in order to impact their spheres of influence and increase the spread of the Gospel to future generations.",
+        "1": "To develop people to their full potential and in Christ-like character in order to impact their spheres of influence and increase the spread of the Gospel to future generations.",
         "2": "To make the decision to go through discomforts and difficulties, in order to develop understanding and delight in people from a different culture.",
         "3": "To willingly come together as a diverse group of people to experience and live out the Gospel, in order to fulfill God’s purposes.",
         "4": "To be a visible display and viable demonstration of God’s Kingdom by stewarding our God-given spiritual gift(s), resources and experiences to build God’s Church and transform the world.",
         "5": "To obey and fulfill the Great Commission through the local church, which God has established so that we can be witnesses and servants of His redemptive purpose."
       }
+    }
+  },
+  "strategy": {
+    "0": {
+      "title": "Gather",
+      "subtitle": "Corporate Gatherings & Community Gatherings",
+      "0": "We gather to foster a greater sense of unity and to continue to build up the church body:",
+      "1": "Corporate Gatherings are what we do together as the local body of Christ, such as Sunday Celebration, retreats, and baptism services.",
+      "2": "Community Gatherings are what we do in biblical community, specifically LIFE Group."
+    },
+    "1": {
+      "title": "Grow",
+      "subtitle": "Life-on-Life & Equipping",
+      "0": "We believe it is crucial that we do not grow stagnant in our faith, but that we are continually learning and being challenged:",
+      "1": "Life-on-Life involves intentional relationships like Life Change Groups (LCG) and discipleship, which allows us to sharpen each other as Christ-followers.",
+      "2": "Equipping entails purposeful investment in people to live a transformed life through opportunities such as Experiencing Classes, Freedom Class, ministry team service, and learning to study the Bible and pray."
+    },
+    "2": {
+      "title": "Go",
+      "subtitle": "Personal Mission & Team-Based Mission",
+      "0": "We have been called to go out and make disciples, by sharing the Good News and testifying of the work God has done in our lives:",
+      "1": "Personal Mission happens when an individual lives as the salt and light in our world, shares his/her faith with others and invites people into our community.",
+      "2": "Team-Based Mission happens when we partner together for God’s kingdom purposes through opportunities like missional initiatives, missions teams, and church plant teams."
     }
   },
   "beliefs": {
@@ -49,11 +72,11 @@
       "0": "We believe the Bible, both the Old and New Testaments, is the only inspired, infallible, and authoritative Word of God. It is the supreme source of truth for Christian faith and living.",
       "1": "We believe in one God, Creator of all things, infinitely perfect and eternally existing in three persons: Father, Son, and Holy Spirit.",
       "2": "We believe that Jesus Christ is true (fully) God and true (fully) man, having been conceived of the Holy Spirit and born of the virgin Mary. He died on the cross, the complete and final sacrifice for our sins according to the Scriptures. He arose bodily from the dead, and ascended into heaven where, at God’s right hand, He intercedes for His people and rules as Lord over all.",
-      "3": "We believe that the ministry of the Holy Spirit is to glorify the Lord Jesus Christ, and during this age to convict the world of sin. He also regenerates the believing sinner, indwelling,guiding, instructing, and empowering us for godly living and sacrifice.",
+      "3": "We believe that the ministry of the Holy Spirit is to glorify the Lord Jesus Christ, and during this age to convict the world of sin. He also regenerates the believing sinner, indwelling, guiding, instructing, and empowering us for godly living and sacrifice.",
       "4": "We believe that the man was created in the image of God, but fell into sin and is therefore destined for eternal death. Only through regeneration by the Holy Spirit can salvation and spiritual life be obtained.",
       "5": "We believe that the shed blood of Jesus Christ and His resurrection provide the only grounds for justification and salvation for all who believe, and only those who receive Jesus Christ by faith are born of the Holy Spirit and thus become children of God.",
       "6": "We believe in the visible, personal, glorious, imminent return of Jesus Christ, His bodily resurrection of the dead, the judgment of the just and the unjust, and the fulfillment of Christ’s Kingdom in the new heavens and the new earth. Then shall the eager expectation of creation be fulfilled and the whole earth shall proclaim the glory of God who makes all things new.",
-      "7": "We believe that the true Church is composed of all such persons who through saving faith in Jesus Christ have been regenerated by the Holy Spirit and are united together in the body of Christ. We believe that Jesus Christ is the Head of the Church, and that every local church has the right under Christ to decideand govern its own affairs.",
+      "7": "We believe that the true Church is composed of all such persons who through saving faith in Jesus Christ have been regenerated by the Holy Spirit and are united together in the body of Christ. We believe that Jesus Christ is the Head of the Church, and that every local church has the right under Christ to decide and govern its own affairs.",
       "8": "We believe that water baptism and the Lord’s Supper are ordinances to be observed by the Church during the present age. They are, however, not to be regarded as means of salvation."
     }
   },

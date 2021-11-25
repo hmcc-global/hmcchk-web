@@ -16,11 +16,8 @@ import {
 import VisionMissionSection from "./VisionMissionSection";
 
 const ValuesSection = (props) => {
-  // TODO-Randal: please replace with the comment below and rename your variable from blurb to values
-  // const { title, blurb } = props;
-  // const { visionMission, values } = blurb;
-  const { title, blurb: blurbs } = props;
-  const { visionMission, values: blurb } = blurbs;
+  const { title, blurb } = props;
+  const { visionMission, values } = blurb;
 
   return (
     <>
@@ -34,23 +31,34 @@ const ValuesSection = (props) => {
           textAlign="center"
           mb={5}
         >
-          {title}
+          {title.slice(0, 16)}
         </Heading>
       </Center>
       <VisionMissionSection blurb={visionMission} />
-      <Flex direction="column">
+      <Box w="90%">
+        <Heading
+          as="h2"
+          fontSize={["4xl", "6xl"]}
+          fontWeight={700}
+          color="#0628A3"
+          lineHeight={1}
+          textAlign="center"
+          mb={5}
+        >
+          {title.slice(17, 28)}
+        </Heading>
         <Accordion allowMultiple>
           <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{blurb.head[0]}</Text>
+                  <Text>{values.head[0]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{blurb.body[0]}</Text>
+              <Text>{values.body[0]}</Text>
             </AccordionPanel>
           </AccordionItem>
 
@@ -58,69 +66,69 @@ const ValuesSection = (props) => {
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{blurb.head[1]}</Text>
+                  <Text>{values.head[1]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{blurb.body[1]}</Text>
+              <Text>{values.body[1]}</Text>
             </AccordionPanel>
           </AccordionItem>
           <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{blurb.head[2]}</Text>
+                  <Text>{values.head[2]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{blurb.body[2]}</Text>
+              <Text>{values.body[2]}</Text>
             </AccordionPanel>
           </AccordionItem>
           <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{blurb.head[3]}</Text>
+                  <Text>{values.head[3]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{blurb.body[3]}</Text>
+              <Text>{values.body[3]}</Text>
             </AccordionPanel>
           </AccordionItem>
           <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{blurb.head[4]}</Text>
+                  <Text>{values.head[4]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{blurb.body[4]}</Text>
+              <Text>{values.body[4]}</Text>
             </AccordionPanel>
           </AccordionItem>
           <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{blurb.head[5]}</Text>
+                  <Text>{values.head[5]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{blurb.body[5]}</Text>
+              <Text>{values.body[5]}</Text>
             </AccordionPanel>
           </AccordionItem>
         </Accordion>
-      </Flex>
+      </Box>
     </>
   );
 };
