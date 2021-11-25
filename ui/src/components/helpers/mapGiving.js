@@ -72,36 +72,8 @@ const mapGiving = (array) => {
     }
   }
 
-  // //find out which column are their first and last names
-  // let firstNameIndex, lastNameIndex, userIDIndex;
-
-  // for (let i in array[0].data) {
-  //   if (array[0].data[i] == "First Name") {
-  //     firstNameIndex = i;
-  //   } else if (array[0].data[i] == "Last Name") {
-  //     lastNameIndex = i;
-  //   } else if (array[0].data[i] == "User ID") {
-  //     userIDIndex = i;
-  //   }
-  // }
-
-  // //add full name column
-  // allNameArray[0].push("fullName");
-
-  // for (let i in allNameArray) {
-  //   if (i == 0) {
-  //     continue; //skip heading column
-  //   }
-  //   firstName = array[i].data[firstNameIndex];
-  //   lastName = array[i].data[lastNameIndex];
-  //   const fullName = firstName + " " + lastName;
-  //   allNameArray[i].push(fullName)
-  // }
-
   //process and clean the data
   let clean = levenshteinFilter(allNameArray, index, 4);
-
-  console.log("clean", clean);
 
   //check for wrong matched up names inside
   for (let x = 0; x < clean.length; x++) {
@@ -120,8 +92,6 @@ const mapGiving = (array) => {
   //add heading
   clean.unshift(headers);
 
-  console.log("cleaner", clean);
-
   //turn array into a readable object for export
   let collection = [];
   for (let x = 0; x < clean.length; x++) {
@@ -137,9 +107,6 @@ const mapGiving = (array) => {
       collection.push(obj);
     }
   }
-
-  console.log("length of clean", clean.length);
-  console.log("length of collection", collection.length);
 
   return collection;
 };
