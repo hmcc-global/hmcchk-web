@@ -9,8 +9,8 @@ const FileUploadButton = () => {
   const handleOnDrop = (data) => {
     console.log(data);
     let givingArray = mapGiving(data);
-    // const customArray = JSON.parse(JSON.stringify(givingArray));
-    // arrayToExcel.convertArrayToTable(customArray, "test_giving.xls");
+    const customArray = JSON.parse(JSON.stringify(givingArray));
+    arrayToExcel.convertArrayToTable(givingArray, "test_giving.xls");
     setCsv(data);
   };
 
