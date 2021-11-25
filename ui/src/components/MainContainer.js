@@ -4,7 +4,6 @@ import { chakra } from "@chakra-ui/react";
 import SermonContainer from "./sermons/SermonContainer";
 import SermonCard from "./sermons/SermonCard";
 import LoginContainer from "./auth/LoginContainer";
-import FormManager from "./forms/FormManager";
 import EventsPage from "./events/EventsPage";
 import VisitUsPage from "./visit-us/VisitUsPage";
 import ConnectPage from "./connect/ConnectPage";
@@ -46,12 +45,6 @@ const MainContainer = () => {
           path="/sermons/:id"
           permissions={["public"]}
           component={SermonCard}
-        />
-        <PrivateRoute
-          exact
-          path="/form-manager"
-          permissions={["admin", "stewardship"]}
-          component={FormManager}
         />
         <PrivateRoute
           exact
