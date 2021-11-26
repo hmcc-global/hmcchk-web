@@ -112,9 +112,6 @@ const StaffSection = (props) => {
                 <Text color="white" fontSize="sm" paddingTop="1em">
                   {blurb.zhu[1]}
                 </Text>
-                <Text color="white" fontSize="sm" paddingTop="1em">
-                  {blurb.zhu[2]}
-                </Text>
               </Box>
             </Box>
           </Stack>
