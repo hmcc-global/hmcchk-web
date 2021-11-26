@@ -42,7 +42,7 @@ import {
                 <Text fontSize={{base:"xs", md:"md"}} isTruncated>
                   {sermonData.sermonSeries[0].name}
                 </Text>
-                <HStack>
+                <HStack spacing={8}>
                   <Text fontSize={{base:"xs", md:"md"}} isTruncated> 
                     {sermonData.speaker[0].name}
                   </Text>

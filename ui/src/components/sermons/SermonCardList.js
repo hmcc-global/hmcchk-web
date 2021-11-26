@@ -33,6 +33,7 @@ const SermonCardList = ({allSermons}, props) => {
   const [filterBook, setFilterBook] = useState("");
   const [filterServiceType, setFilterServiceType] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const filterData = [filterSpeaker, filterSermonSeries, filterBook, filterServiceType];
   const btnRef = React.useRef();
 
   //filter section
@@ -86,7 +87,7 @@ const SermonCardList = ({allSermons}, props) => {
           </Button>
         </HStack>
         <Box display={{base:"none", md:"flex"}}>
-          <FilterSermon allSermons={allSermons} filterSermon={filterSermon} />
+          <FilterSermon allSermons={allSermons} filterSermon={filterSermon} filterData={filterData} />
         </Box>
         <Box>
           <Button variant="link" alignSelf={["center", "flex-end"]} onClick={clearFilter} float="right" display={{base:"none", md:"flex"}}>

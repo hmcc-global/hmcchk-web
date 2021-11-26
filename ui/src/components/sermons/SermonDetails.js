@@ -45,9 +45,9 @@ const SermonDetails = (props) => {
                   height="315" 
                   src= {`https://www.youtube.com/embed/${sermonVideoCode}`}
                   title="YouTube video player" 
-                  frameborder="0" 
+                  frameBorder="0" 
                   allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowfullscreen>
+                  allowFullScreen>
               </iframe>
             </AspectRatio>
               <Text
@@ -87,7 +87,7 @@ const SermonDetails = (props) => {
                   height="232" 
                   frameBorder="0" 
                   controls
-                  allowfullscreen="" 
+                  allowFullScreen="" 
                   allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture" />
               </HStack>
               {relatedSermons.length > 0 && 

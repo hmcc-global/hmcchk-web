@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { customAxios as axios } from "../helpers/customAxios";
 import { Box, Container, Heading } from "@chakra-ui/react";
 import UpcomingSermon from "./UpcomingSermon";
@@ -10,6 +10,10 @@ import { getRenderDate } from "../helpers/eventsHelpers";
 const SermonContainer = (props) => {
   const [sermons, setSermons] = useState([]);
   const [events, setEvents] = useState([]);
+  const refSermon = useRef(null);
+  const [display, setDisplay] = useState("");
+  const prevScrollY = useRef(0);
+  const [goingUp, setGoingUp] = useState(false);
 
   useEffect(() => {
     getData();
@@ -20,10 +24,23 @@ const SermonContainer = (props) => {
     }
   }, []);
 
+  const onScroll = (e) =>{
+    const currentScrollY = e.target.scrollTop;
+    if (prevScrollY.current < currentScrollY && goingUp) {
+      setGoingUp(false);
+    }
+    if (prevScrollY.current > currentScrollY && !goingUp) {
+      setGoingUp(true);
+    }
+    prevScrollY.current = currentScrollY;
+    console.log(goingUp, currentScrollY);
+  }
+
   const getData = async () => {
     try {
       const { data, status } = await axios.get("/api/sermons/get-sermons");
       if (status === 200) {
+        
         setSermons([...data]);
       } else {
         throw Error("Something went wrong");
@@ -63,7 +80,7 @@ const SermonContainer = (props) => {
   };
 console.log("test")
   return (
-    <>
+    <Box onScroll={onScroll}>
       <UpcomingSermon upcoming={events} />
       <Container maxW="container.lg">
         <Box
@@ -97,7 +114,7 @@ console.log("test")
         <CurrentSermon currentSermon={sermons[0]} />
         <SermonCardList allSermons={sermons} />
       </Container>
-    </>
+    </Box>
   );
 };
 

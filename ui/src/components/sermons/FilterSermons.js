@@ -9,8 +9,7 @@ import {Stack,
 				Container,
 } from "@chakra-ui/react";
 
-const FilterSermon = ({allSermons, filterSermon, clearFilter, onClose}) =>{
-
+const FilterSermon = ({allSermons, filterSermon, clearFilter, filterData, onClose}) =>{
 	const uniqueSpeaker = [...new Set(allSermons.map((sermon)=>{if(sermon.speaker[0]!= null) return sermon.speaker[0].name}))]
   const uniqueSermonSeries = [...new Set(allSermons.map((sermon)=>{if(sermon.sermonSeries[0] != null) return sermon.sermonSeries[0].name}))]
   const uniqueBook = [...new Set(allSermons.map((sermon) => {if(!isNaN(sermon.passage[0])){return sermon.passage.split(" ").slice(0,2).join(" ");}
@@ -21,8 +20,7 @@ const FilterSermon = ({allSermons, filterSermon, clearFilter, onClose}) =>{
                                                          
   useEffect(() => {
     
-  }, []);                                                   
-
+  }, []);
   return(
     <>
 			<Container maxW="container.lg">
@@ -31,8 +29,7 @@ const FilterSermon = ({allSermons, filterSermon, clearFilter, onClose}) =>{
 						<Text color="#0628A3" fontWeight="bold">
 							Speaker
 						</Text>
-						<Select style={{overflowY:"scroll"}} name="speaker" onChange={filterSermon}>
-							<option value="">Select Speaker</option>
+						<Select style={{overflowY:"scroll"}} name="speaker" placeholder="Select Speaker" onChange={filterSermon} value={filterData[0]}>
 							{uniqueSpeaker.length > 0 &&
 								uniqueSpeaker.map((speaker, i) => {
 									if(speaker != null) return <option key={i} value={speaker}>{speaker}</option>
@@ -43,8 +40,7 @@ const FilterSermon = ({allSermons, filterSermon, clearFilter, onClose}) =>{
 						<Text color="#0628A3" fontWeight="bold">
 							Sermon Series
 						</Text>
-						<Select style={{overflowY:"scroll"}} name="sermon" onChange={filterSermon}>
-							<option value="">Select Sermon Series</option>
+						<Select style={{overflowY:"scroll"}} name="sermon" placeholder="Select Sermon Series" onChange={filterSermon} value={filterData[1]}>
 								{uniqueSermonSeries.length > 0 &&
 									uniqueSermonSeries.map((sermonSeries, i) => {
 										if(sermonSeries != null) return <option key={i} value={sermonSeries}>{sermonSeries}</option>
@@ -55,8 +51,7 @@ const FilterSermon = ({allSermons, filterSermon, clearFilter, onClose}) =>{
 						<Text color="#0628A3" fontWeight="bold">
 							Book
 						</Text>
-						<Select style={{overflowY:"scroll"}} name="book" onChange={filterSermon}>
-							<option value="">Select Book</option>
+						<Select style={{overflowY:"scroll"}} name="book" placeholder="Select Book" onChange={filterSermon} value={filterData[2]}>
 								{uniqueBook.length > 0 &&
 									uniqueBook.map((book, i)=>{
 										if(book != null) return (<option key={i} value={book} >{book}</option>)
@@ -67,8 +62,7 @@ const FilterSermon = ({allSermons, filterSermon, clearFilter, onClose}) =>{
 						<Text color="#0628A3" fontWeight="bold">
 							Service Type
 						</Text>
-						<Select style={{overflowY:"scroll"}} name="service" onChange={filterSermon}>
-							<option value="">Select Service Type</option>
+						<Select style={{overflowY:"scroll"}} name="service" placeholder="Select Service Type" onChange={filterSermon} value={filterData[3]}>
 							{uniqueServiceType.length > 0 &&
 								uniqueServiceType.map((service, i)=>{
 									if(service != null) return <option key={i} value={service} >{service}</option>

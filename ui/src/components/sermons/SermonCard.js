@@ -73,7 +73,7 @@ const SermonCard = ({ sermonData, allSermons }) => {
               <Text fontSize="sm" isTruncated>
                 {sermonData.sermonSeries[0].name}
               </Text>
-              <HStack>
+              <HStack spacing="auto">
                 <Text fontSize="xs" isTruncated>
                   {sermonData.speaker[0].name}
                 </Text>

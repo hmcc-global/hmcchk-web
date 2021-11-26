@@ -24,11 +24,13 @@ const UpcomingSermon = ({upcoming}) => {
   let upcomingSeries = "";
   let sermonImage = "";
   let sermonDesc = "";
+  let sermonTitle ="";
   if(upcoming != null){
     upcomingSeries = upcoming.filter((event) => {if(event.time == "10:00 AM") return event})[0];
     if(upcomingSeries != null){
       sermonImage = upcomingSeries.imageUrl;
       sermonDesc = upcomingSeries.description;
+      sermonTitle = upcomingSeries.title;
     }
   }
 
@@ -71,6 +73,9 @@ const UpcomingSermon = ({upcoming}) => {
         <Text color="#0628A3" fontWeight="bold">
           Upcoming Sermon Series!
         </Text>
+        <Text color="#0628A3">
+          {sermonTitle}
+        </Text>
         <Stack direction="row" >
           <AspectRatio width="45%" ratio={16 / 9}>
             <Image src={sermonImage} />
@@ -103,6 +108,9 @@ const UpcomingSermon = ({upcoming}) => {
               <Text color="#0628A3" fontWeight="bold" fontSize="xl" textAlign="center">
                 Upcoming Sermon Series!
               </Text>
+              <Text color="#0628A3" fontSize="xl" textAlign="center">
+                {sermonTitle}
+              </Text>
               <AspectRatio ratio={16/9}>
                 <Image src={sermonImage} />
               </AspectRatio>
@@ -120,7 +128,6 @@ const UpcomingSermon = ({upcoming}) => {
 
   )
 }
-
   return(
     <>
       <WebView />
