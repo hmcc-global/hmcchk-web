@@ -18,10 +18,12 @@ import UserFormContainer from "./forms/UserFormContainer";
 import NoMatch from "./errors/NoMatch";
 import AdminLoginContainer from "./admin/AdminLoginContainer";
 import AdminContainer from "./AdminContainer";
+import ScrollToTop from "./helpers/ScrollToTop";
 
 const MainContainer = () => {
   return (
     <chakra.main flexGrow={1} bg="#ffffff" overflowY="auto">
+      <ScrollToTop />
       <Switch>
         <PrivateRoute
           exact

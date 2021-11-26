@@ -48,9 +48,12 @@ module.exports = {
         submissionData: submissionData,
       }).fetch();
 
+      // Store the user object if any
+      let user = {};
+
       // Only do if there is userID
       if (userId) {
-        const user = (await sails.helpers.users.getUser(userId))[0];
+        user = (await sails.helpers.users.getUser(userId))[0];
         if (user === null) return exits.invalid();
 
         // Create submission dict for binding to user
@@ -80,7 +83,7 @@ module.exports = {
 
       // Send confirmation email if there is email
 
-      if (email) {
+      if (user.email|| submissionData["email"]) {
         await sails.helpers.sendTemplateEmail.with({
           to: user.email ? user.email : submissionData["email"],
           subject: "Successful Submission for " + formRecord[0].formName,

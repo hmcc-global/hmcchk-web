@@ -27,6 +27,9 @@ import {
   ModalContent,
   ModalFooter,
   VStack,
+  Alert,
+  AlertIcon,
+  Link,
 } from "@chakra-ui/react";
 import {
   campusList,
@@ -518,6 +521,19 @@ const Form = (props) => {
             </FormControl>
           ))}
         </Stack>
+        {!user.id && (
+          <Alert status="info">
+            <AlertIcon />
+            <Text>
+              This form submission will be a one-off entry. However, if you want
+              an auto-fill feature to be enabled for you for this and all future
+              church event forms,{" "}
+              <Link href="/login">
+                you can create an HMCC account right over here
+              </Link>
+            </Text>
+          </Alert>
+        )}
         <Center>
           <Button
             mt={4}
