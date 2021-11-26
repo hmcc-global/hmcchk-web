@@ -25,7 +25,6 @@ const StrategySection = (props) => {
     variableWidth: true,
   };
   const { title, blurb } = props;
-  console.log({ blurb });
   return (
     <Flex direction="column">
       <Box
@@ -53,7 +52,7 @@ const StrategySection = (props) => {
           {title}
         </Heading>
         <Container maxW="container.lg" py={4}>
-          <Stack direction={["column", "row"]} spacing="24px">
+          <Stack direction={{ base: "column", lg: "row" }} spacing="24px">
             <Box
               borderWidth="2px"
               borderRadius="5"
@@ -70,13 +69,19 @@ const StrategySection = (props) => {
                 {blurb[0].title}
               </Heading>
 
-              <Text alignText="center" fontWeight="bold" py="3" px="6">
+              <Text
+                alignText="center"
+                fontWeight="bold"
+                py="3"
+                px="6"
+                color="#000000"
+              >
                 {blurb[0].subtitle}
               </Text>
-              <Text>{blurb[0][0]}</Text>
+              <Text color="#000000">{blurb[0][0]}</Text>
               <UnorderedList>
-                <ListItem>{blurb[0][1]}</ListItem>
-                <ListItem>{blurb[0][2]}</ListItem>
+                <ListItem color="#000000">{blurb[0][1]}</ListItem>
+                <ListItem color="#000000">{blurb[0][2]}</ListItem>
               </UnorderedList>
             </Box>
             <Box
@@ -95,13 +100,19 @@ const StrategySection = (props) => {
                 {blurb[1].title}
               </Heading>
 
-              <Text alignText="center" fontWeight="bold" py="3" px="6">
+              <Text
+                alignText="center"
+                fontWeight="bold"
+                py="3"
+                px="6"
+                color="#000000"
+              >
                 {blurb[1].subtitle}
               </Text>
-              <Text>{blurb[1][0]}</Text>
+              <Text color="#000000">{blurb[1][0]}</Text>
               <UnorderedList>
-                <ListItem>{blurb[1][1]}</ListItem>
-                <ListItem>{blurb[1][2]}</ListItem>
+                <ListItem color="#000000">{blurb[1][1]}</ListItem>
+                <ListItem color="#000000">{blurb[1][2]}</ListItem>
               </UnorderedList>
             </Box>
             <Box
@@ -120,13 +131,19 @@ const StrategySection = (props) => {
                 {blurb[2].title}
               </Heading>
 
-              <Text alignText="center" fontWeight="bold" py="3" px="6">
+              <Text
+                alignText="center"
+                fontWeight="bold"
+                py="3"
+                px="6"
+                color="#000000"
+              >
                 {blurb[2].subtitle}
               </Text>
-              <Text>{blurb[2][0]}</Text>
+              <Text color="#000000">{blurb[2][0]}</Text>
               <UnorderedList>
-                <ListItem>{blurb[2][1]}</ListItem>
-                <ListItem>{blurb[2][2]}</ListItem>
+                <ListItem color="#000000">{blurb[2][1]}</ListItem>
+                <ListItem color="#000000">{blurb[2][2]}</ListItem>
               </UnorderedList>
             </Box>
           </Stack>

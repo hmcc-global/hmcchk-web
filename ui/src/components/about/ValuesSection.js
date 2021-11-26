@@ -52,13 +52,13 @@ const ValuesSection = (props) => {
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{values.head[0]}</Text>
+                  <Text color="#000000">{values.head[0]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{values.body[0]}</Text>
+              <Text color="#000000">{values.body[0]}</Text>
             </AccordionPanel>
           </AccordionItem>
 
@@ -66,65 +66,65 @@ const ValuesSection = (props) => {
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{values.head[1]}</Text>
+                  <Text color="#000000">{values.head[1]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{values.body[1]}</Text>
+              <Text color="#000000">{values.body[1]}</Text>
             </AccordionPanel>
           </AccordionItem>
           <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{values.head[2]}</Text>
+                  <Text color="#000000">{values.head[2]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{values.body[2]}</Text>
+              <Text color="#000000">{values.body[2]}</Text>
             </AccordionPanel>
           </AccordionItem>
           <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{values.head[3]}</Text>
+                  <Text color="#000000">{values.head[3]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{values.body[3]}</Text>
+              <Text color="#000000">{values.body[3]}</Text>
             </AccordionPanel>
           </AccordionItem>
           <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{values.head[4]}</Text>
+                  <Text color="#000000">{values.head[4]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{values.body[4]}</Text>
+              <Text color="#000000">{values.body[4]}</Text>
             </AccordionPanel>
           </AccordionItem>
           <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
             <h2>
               <AccordionButton>
                 <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text>{values.head[5]}</Text>
+                  <Text color="#000000">{values.head[5]}</Text>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <Text>{values.body[5]}</Text>
+              <Text color="#000000">{values.body[5]}</Text>
             </AccordionPanel>
           </AccordionItem>
         </Accordion>

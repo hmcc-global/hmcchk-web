@@ -47,12 +47,12 @@ const VisionMissionSection = (props) => {
       w="100vw"
       padding={0}
       maxW="unset"
-      h={["100vh", "31.25vw"]}
+      h={{ base: "100vh", md: "31.25vw" }}
       bgImage={`url('${process.env.PUBLIC_URL}/images/about/visionMissionBg.png')`}
     >
       <VStack height="100%" justifyContent="center">
         <Stack
-          direction={["column", "row"]}
+          direction={{ base: "column", md: "row" }}
           w="100%"
           height="100%"
           alignItems="center"
