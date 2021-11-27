@@ -18,6 +18,7 @@ import NoMatch from "./errors/NoMatch";
 import AdminLoginContainer from "./admin/AdminLoginContainer";
 import AdminContainer from "./AdminContainer";
 import ScrollToTop from "./helpers/ScrollToTop";
+import GivingTuesdayPage from "./givingTuesday/GivingTuesdayPage";
 
 const MainContainer = () => {
   return (
@@ -107,6 +108,12 @@ const MainContainer = () => {
           path="/admin/:pageName"
           permissions={["admin", "stewardship"]}
           component={AdminContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/giving-tuesday"
+          permissions={["public"]}
+          component={GivingTuesdayPage}
         />
       </Switch>
     </chakra.main>
