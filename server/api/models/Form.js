@@ -23,5 +23,8 @@ module.exports = {
       type: "string",
       defaultsTo: "form-default-success",
     },
+    customEmailSubject: {
+      type: "string",
+    },
   },
 };

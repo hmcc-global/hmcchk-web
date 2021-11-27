@@ -150,6 +150,7 @@ const FormCreator = (props) => {
         formImage: formInformation.formImage,
         requireLogin: formInformation.requireLogin,
         successEmailTemplate: formInformation.successEmailTemplate,
+        customEmailSubject: formInformation.customEmailSubject,
         formFields: formFields,
       };
       const statusCode = await saveFormToDB(formToSave);

@@ -33,6 +33,7 @@ const FormManager = (props) => {
   const [formImage, setFormImage] = useState(null);
   const [requireLogin, setRequireLogin] = useState(true);
   const [successEmailTemplate, setSuccessEmailTemplate] = useState(null);
+  const [customEmailSubject, setCustomEmailSubject] = useState(null);
 
   const [editFormData, setEditFormData] = useState(null);
   const [formId, setFormId] = useState(null);
@@ -54,6 +55,7 @@ const FormManager = (props) => {
     setValue("formImage", data.formImage);
     setValue("requireLogin", data.requireLogin);
     setValue("successEmailTemplate", data.successEmailTemplate);
+    setValue("customEmailSubject", data.customEmailSubject);
 
     // Update React State for child props
     setFormName(data.formName);
@@ -61,6 +63,7 @@ const FormManager = (props) => {
     setFormImage(data.formImage);
     setRequireLogin(data.requireLogin);
     setSuccessEmailTemplate(data.successEmailTemplate);
+    setCustomEmailSubject(data.customEmailSubject);
   };
 
   const onSubmit = (data, e) => {
@@ -135,12 +138,14 @@ const FormManager = (props) => {
     setValue("formImage", null);
     setValue("requireLogin", true);
     setValue("successEmailTemplate", null);
+    setValue("customEmailSubject", null);
     setFormName(null);
     setFormDescription(null);
     setFormImage(null);
     setRequireLogin(true);
     setEditFormData(null);
     setSuccessEmailTemplate(null);
+    setCustomEmailSubject(null);
     await getFormListFromDatabase();
   };
 
@@ -278,6 +283,13 @@ const FormManager = (props) => {
               </FormErrorMessage>
             </FormControl>
             <FormControl>
+              <FormLabel>Custom Email Subject</FormLabel>
+              <Input {...register("customEmailSubject")} />
+              <FormHelperText>
+                If you need a custom subject for the success email
+              </FormHelperText>
+            </FormControl>
+            <FormControl>
               <FormLabel>
                 If you updated the fields above please click here again before
                 saving to DB
@@ -298,6 +310,7 @@ const FormManager = (props) => {
             formImage: formImage,
             requireLogin: requireLogin,
             successEmailTemplate: successEmailTemplate,
+            customEmailSubject: customEmailSubject,
           }}
           existingFormFieldsData={editFormData}
           resetFormEditorCallback={resetFormEditorCallback}
