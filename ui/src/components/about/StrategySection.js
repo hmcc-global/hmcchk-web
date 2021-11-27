@@ -26,16 +26,16 @@ const StrategySection = (props) => {
   };
   const { title, blurb } = props;
   return (
-    <Flex direction="column">
+    <Flex w="100%" direction="column">
       <Box
         borderWidth="2px"
         borderRadius="5"
         shadow="lg"
         bg="#3182CE"
-        px={[4, 8]}
+        px={[0, 8]}
         pt={[4, 6]}
         pb={[4, 6]}
-        m={4}
+        w="100%"
         bgImage={`url('${process.env.PUBLIC_URL}/images/about-us/strategy.png')`}
         bgPosition="center"
         bgSize="cover"
@@ -52,100 +52,103 @@ const StrategySection = (props) => {
           {title}
         </Heading>
         <Container maxW="container.lg" py={4}>
-          <Stack direction={{ base: "column", lg: "row" }} spacing="24px">
-            <Box
+          <Stack direction={{ base: "column", lg: "row" }} spacing="10px">
+            <Flex
               borderWidth="2px"
               borderRadius="5"
               shadow="lg"
               bg="#FFFFFF"
-              px={[4, 8]}
-              pt={[4, 6]}
-              pb={[4, 6]}
+              px={[6, 6]}
+              pt={[6, 6]}
+              pb={[6, 6]}
               m={0}
-              h={["40em", "40em"]}
-              w={["13em", "25em"]}
+              h={["35em", "40em"]}
+              w={["full", "25em"]}
             >
-              <Heading color="#3182CE" textAlign="center">
-                {blurb[0].title}
-              </Heading>
+              <Box m="auto">
+                <Heading color="#3182CE" textAlign="center">
+                  {blurb[0].title}
+                </Heading>
 
-              <Text
-                alignText="center"
-                fontWeight="bold"
-                py="3"
-                px="6"
-                color="#000000"
-              >
-                {blurb[0].subtitle}
-              </Text>
-              <Text color="#000000">{blurb[0][0]}</Text>
-              <UnorderedList>
-                <ListItem color="#000000">{blurb[0][1]}</ListItem>
-                <ListItem color="#000000">{blurb[0][2]}</ListItem>
-              </UnorderedList>
-            </Box>
-            <Box
+                <Text
+                  textAlign="center"
+                  fontWeight="bold"
+                  py="3"
+                  color="#000000"
+                >
+                  {blurb[0].subtitle}
+                </Text>
+                <Text color="#000000">{blurb[0][0]}</Text>
+                <UnorderedList paddingTop="2">
+                  <ListItem color="#000000">{blurb[0][1]}</ListItem>
+                  <ListItem color="#000000">{blurb[0][2]}</ListItem>
+                </UnorderedList>
+              </Box>
+            </Flex>
+            <Flex
               borderWidth="2px"
               borderRadius="5"
               shadow="lg"
               bg="#FFFFFF"
-              px={[4, 8]}
-              pt={[4, 6]}
-              pb={[4, 6]}
-              m={4}
-              h={["50em", "40em"]}
-              w={["13em", "25em"]}
+              px={[6, 6]}
+              pt={[6, 6]}
+              pb={[6, 6]}
+              m={0}
+              h={["35em", "40em"]}
+              w={["full", "25em"]}
             >
-              <Heading color="#3182CE" textAlign="center">
-                {blurb[1].title}
-              </Heading>
+              <Box m="auto">
+                <Heading color="#3182CE" textAlign="center">
+                  {blurb[1].title}
+                </Heading>
 
-              <Text
-                alignText="center"
-                fontWeight="bold"
-                py="3"
-                px="6"
-                color="#000000"
-              >
-                {blurb[1].subtitle}
-              </Text>
-              <Text color="#000000">{blurb[1][0]}</Text>
-              <UnorderedList>
-                <ListItem color="#000000">{blurb[1][1]}</ListItem>
-                <ListItem color="#000000">{blurb[1][2]}</ListItem>
-              </UnorderedList>
-            </Box>
-            <Box
+                <Text
+                  textAlign="center"
+                  fontWeight="bold"
+                  py="3"
+                  color="#000000"
+                >
+                  {blurb[1].subtitle}
+                </Text>
+                <Text color="#000000">{blurb[1][0]}</Text>
+                <UnorderedList paddingTop="2">
+                  <ListItem color="#000000">{blurb[1][1]}</ListItem>
+                  <ListItem color="#000000">{blurb[1][2]}</ListItem>
+                </UnorderedList>
+              </Box>
+            </Flex>
+            <Flex
               borderWidth="2px"
               borderRadius="5"
               shadow="lg"
               bg="#FFFFFF"
-              px={[4, 8]}
-              pt={[4, 6]}
-              pb={[4, 6]}
-              m={4}
-              h={["50em", "40em"]}
-              w={["13em", "25em"]}
+              px={[6, 6]}
+              pt={[6, 6]}
+              pb={[6, 6]}
+              m={0}
+              h={["35em", "40em"]}
+              w={["full", "25em"]}
             >
-              <Heading color="#3182CE" textAlign="center">
-                {blurb[2].title}
-              </Heading>
+              <Box m="auto">
+                <Heading color="#3182CE" textAlign="center">
+                  {blurb[2].title}
+                </Heading>
 
-              <Text
-                alignText="center"
-                fontWeight="bold"
-                py="3"
-                px="6"
-                color="#000000"
-              >
-                {blurb[2].subtitle}
-              </Text>
-              <Text color="#000000">{blurb[2][0]}</Text>
-              <UnorderedList>
-                <ListItem color="#000000">{blurb[2][1]}</ListItem>
-                <ListItem color="#000000">{blurb[2][2]}</ListItem>
-              </UnorderedList>
-            </Box>
+                <Text
+                  textAlign="center"
+                  fontWeight="bold"
+                  py="3"
+                  color="#000000"
+                >
+                  {blurb[2].subtitle}
+                </Text>
+                <Text color="#000000">{blurb[2][0]}</Text>
+                <UnorderedList paddingTop="2">
+                  <ListItem color="#000000">{blurb[2][1]}</ListItem>
+                  <ListItem color="#000000">{blurb[2][2]}</ListItem>
+                </UnorderedList>
+              </Box>
+            </Flex>
           </Stack>
         </Container>
       </Box>

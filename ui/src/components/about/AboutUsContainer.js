@@ -95,9 +95,14 @@ const AboutUsContainer = (props) => {
                 );
               })}
           </HStack>
+
           <Select
             mt={4}
-            variant="flushed"
+            variant="outline"
+            borderWidth="2px"
+            borderRadius="5"
+            fontWeight="bold"
+            bgColor="white"
             display={{ base: "block", md: "none" }}
             value={selected}
             onChange={(e) => handleChange(e)}
