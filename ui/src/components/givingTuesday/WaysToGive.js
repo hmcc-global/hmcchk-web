@@ -202,7 +202,7 @@ const WaysToGive = (props) => {
   const { accentColor } = props;
   return (
     <Stack spacing={5} direction="column">
-      <Box pt={[2, 8]} textAlign="center">
+      <Box pt={[2, 2]} textAlign="center">
         <Text
           color={accentColor}
           fontWeight="800"

@@ -1,10 +1,4 @@
-import {
-  Stack,
-  Box,
-  Container,
-  Image,
-  Center,
-} from "@chakra-ui/react";
+import { Stack, Box, Container, Image, Center } from "@chakra-ui/react";
 import GivingCategories from "./GivingCategories";
 import HowToGive from "./HowToGive";
 import LastYearGivingTuesday from "./LastYearGivingTuesday";
@@ -34,10 +28,10 @@ const GivingTuesdayPage = (props) => {
             />
           </Center>
           <WhatIsGivingTuesday accentColor={accentColor} />
-          <LastYearGivingTuesday />
           <GivingCategories accentColor={accentColor} />
-          <HowToGive/>
+          <HowToGive />
           <WaysToGive accentColor={accentColor} />
+          <LastYearGivingTuesday />
         </Stack>
       </Container>
     </Box>

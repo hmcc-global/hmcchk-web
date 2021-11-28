@@ -37,7 +37,7 @@ const GivingCategories = (props) => {
 
   return (
     <Stack direction="column" spacing={0}>
-      <Box pt={[3, 8]} pb={[3, 8]} pl={[3, 38]} pr={[3, 38]} textAlign="center">
+      <Box pt={[3, 3]} pb={[3, 8]} pl={[3, 38]} pr={[3, 38]} textAlign="center">
         <Text
           color={accentColor}
           fontWeight="900"
