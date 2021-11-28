@@ -78,6 +78,10 @@ module.exports.routes = {
   "put /api/membership/update": "memberships/update-membership",
   "put /api/membership/delete": "memberships/delete-membership",
 
+  // Giving Tuesday APIs
+  "post /api/giving-tuesday/create": "giving-tuesday/post-gt-data",
+  "get /api/giving-tuesday/get": "giving-tuesday/get-gt-data",
+
   // UI
   "get /*": {
     skipAssets: true,

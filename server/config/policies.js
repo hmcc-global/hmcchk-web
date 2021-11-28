@@ -58,4 +58,7 @@ module.exports.policies = {
 
   // Sermons
   "sermons/*": true,
+
+  // Giving Tuesday
+  "giving-tuesday/*": true,
 };

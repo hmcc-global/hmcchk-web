@@ -40,8 +40,10 @@ const WhatIsGivingTuesday = (props) => {
 
         <Text px={[2, 0]} fontSize={["0.7rem", "md"]} mt={5}>
           <b>Giving Tuesday</b>{" "}
-          <Link href="www.givingtuesday.org">(www.givingtuesday.org)</Link> is a
-          global generosity movement unleashing the power of people and
+          <Link href="https://www.givingtuesday.org">
+            (www.givingtuesday.org)
+          </Link>{" "}
+          is a global generosity movement unleashing the power of people and
           organizations to transform their communities and the world. It started
           as a way to grow a heart for generosity as people are purchasing
           materials during Black Friday and Cyber Monday.
