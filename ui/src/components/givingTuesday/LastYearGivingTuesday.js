@@ -22,15 +22,15 @@ const LastYearGivingTuesday = (props) => {
       </Text>
       <Stack fontSize={["0.7rem", "md"]} pl={7} pr={7} spacing={[5, 3]}>
         <Text>
-          <b>111 person gave for a total of $192,331.09</b>
+          <b>111 person gave for a total of HK$192,331.09</b>
         </Text>
         <Box>
           <Text>
-            <b>$60k</b> total given to{" "}
+            <b>HK$60k</b> total given to{" "}
             <b>missionaries / missions organizations</b>:
           </Text>
           <Text>
-            $20k each to 1) HKCNP, 2) Christian Action, and 3) David Ro
+            HK$20k each to 1) HKCNP, 2) Christian Action, and 3) David Ro
           </Text>
         </Box>
       </Stack>
