@@ -117,7 +117,7 @@ const GivingCard = (cardinfo) => {
     <Box
       w={["100%", "100%", "32%"]}
       borderRadius="3xl"
-      my={["1vh", "1vh", "0"]}
+      my={["0", "0", "0"]}
       bgImage={cardinfo.imageLink}
       bgPosition="center"
       bgSize="cover"
@@ -143,7 +143,7 @@ const GivingCard = (cardinfo) => {
           verticalAlign="middle"
         >
           <Flex direction={["row", "row", "column"]}>
-            <Center paddingBottom={["0", "0", "3vh"]}>
+            <Center>
               <Heading
                 as="h2"
                 fontSize={["lg", "xl", "3xl"]}
