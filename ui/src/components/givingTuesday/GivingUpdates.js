@@ -63,21 +63,25 @@ const GivingUpdates = (props) => {
     }
   };
 
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   const cardData = [
     {
       iconLink: process.env.PUBLIC_URL + "/images/givingTuesday/1-church.png",
       text: ["Our Church Budget", "(BGT)"],
-      givingValue: givingData[0],
+      givingValue: numberWithCommas(givingData[0]),
     },
     {
       iconLink: process.env.PUBLIC_URL + "/images/givingTuesday/2-ngo.png",
       text: ["Partnering NGOs", "(NGO)"],
-      givingValue: givingData[1],
+      givingValue: numberWithCommas(givingData[1]),
     },
     {
       iconLink: process.env.PUBLIC_URL + "/images/givingTuesday/3-other.png",
       text: ["Churches affected", "by COVID (CHS)"],
-      givingValue: givingData[2],
+      givingValue: numberWithCommas(givingData[2]),
     },
   ];
   const givingSum = givingData[0] + givingData[1] + givingData[2];
@@ -119,7 +123,7 @@ const GivingUpdates = (props) => {
               Total Amount Raised
             </Text>
             <Text flex={1} textAlign={["right", "center"]}>
-              HKD {givingSum}
+              HKD {numberWithCommas(givingSum)}
             </Text>
           </Stack>
           <Stack direction={["row", "column"]} flex={1}>
