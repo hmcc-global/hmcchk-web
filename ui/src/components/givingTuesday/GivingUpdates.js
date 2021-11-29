@@ -97,11 +97,20 @@ const GivingUpdates = (props) => {
           {renderSwitch()}
         </Text>
         {eventStatus !== "after" && (
-          <Text mt={3} fontSize={["0.7rem", "md"]}>
-            Join us as we commit to spending 24 hours <b>this coming Tuesday</b>{" "}
-            to cultivate generous hearts and give towards the following causes
-            or categories:
-          </Text>
+          <>
+            <Text mt={3} fontSize={["0.7rem", "md"]}>
+              Join us as we commit to spending <b>this coming Tuesday</b> to
+              cultivate generous hearts and give towards the following causes or
+              categories:
+            </Text>
+            <Text
+              textAlign="center"
+              color="#bbbbbb"
+              fontSize={["0.5rem", "sm"]}
+            >
+              *Numbers will be updated at 13:00, 18:00, 23:00, 00:00
+            </Text>
+          </>
         )}
       </Box>
       {eventStatus !== "before" && (
