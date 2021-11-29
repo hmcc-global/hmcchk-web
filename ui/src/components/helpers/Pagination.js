@@ -20,7 +20,7 @@ const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
   return (
     <>
       <Box>
-        <HStack>
+        <HStack justifyContent={{base:"center", md:"flex-end"}}>
           <Button isDisabled={currentPage == 1} onClick={() => setCurrentPage(currentPage-1)} path='/sermons'>
             <ChevronLeftIcon />
           </Button>

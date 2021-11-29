@@ -55,6 +55,8 @@ const SermonDetails = (props) => {
                 fontSize={{base:"xl", md: "3xl"}}>
                 {sermonData.title}
               </Text>
+              <Stack spacing={8}>
+                <Box>
               <Stack spacing={{base:"normal", md:"auto"}} direction={{base:"column", md:"row"}}>
                 <HStack>
                   <Text fontWeight="bold">Series: </Text>
@@ -77,6 +79,8 @@ const SermonDetails = (props) => {
                   {sermonData.passage}
                 </Text>
               </HStack>
+              </Box>
+                <Box>
               <Text fontWeight="bold" color="#0628A3" fontSize="xl">
                 Audio Sermon:
               </Text>
@@ -90,6 +94,8 @@ const SermonDetails = (props) => {
                   allowFullScreen="" 
                   allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture" />
               </HStack>
+              </Box>
+              <Stack spacing={4}>
               {relatedSermons.length > 0 && 
                 <Text fontWeight="bold" color="#0628A3" fontSize="xl">
                   More from this series: 
@@ -99,7 +105,8 @@ const SermonDetails = (props) => {
               relatedSermons.map((sermon, i) => (
                 <RelatedSermonCard key = {sermon.id} sermonData = {sermon} allSermons={allSermons}/>
             ))}
-                
+            </Stack>
+            <Stack spacing={4}> 
             <Text fontWeight="bold" color="#0628A3" fontSize="xl">
               Other past sermons you might like:
             </Text>
@@ -107,6 +114,8 @@ const SermonDetails = (props) => {
                 randomSermons.map((sermon, i) => (
                   <RelatedSermonCard key = {sermon.id} sermonData= {sermon} allSermons={allSermons}/>
                 ))}
+              </Stack>
+            </Stack>
           </VStack>
         </Box>
       </Container>

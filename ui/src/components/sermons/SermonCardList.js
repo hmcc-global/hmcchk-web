@@ -86,11 +86,11 @@ const SermonCardList = ({allSermons}, props) => {
             Filter
           </Button>
         </HStack>
-        <Box display={{base:"none", md:"flex"}}>
+        <Box display={{base:"none", md:"flex"}} marginTop="10px">
           <FilterSermon allSermons={allSermons} filterSermon={filterSermon} filterData={filterData} />
         </Box>
         <Box>
-          <Button variant="link" alignSelf={["center", "flex-end"]} onClick={clearFilter} float="right" display={{base:"none", md:"flex"}}>
+          <Button variant="link" alignSelf={["center", "flex-end"]} onClick={clearFilter} float="right" display={{base:"none", md:"flex"}} marginTop="8px">
             Clear Filter
           </Button>
         </Box>  
@@ -136,7 +136,7 @@ const SermonCardList = ({allSermons}, props) => {
           <DrawerCloseButton margin="5" />
           <DrawerHeader />
           <DrawerBody >
-            <FilterSermon allSermons={allSermons} filterSermon={filterSermon} clearFilter={clearFilter} onClose={onClose} />
+            <FilterSermon allSermons={allSermons} filterSermon={filterSermon} filterData={filterData} clearFilter={clearFilter} onClose={onClose} />
           </DrawerBody>
           <DrawerFooter fontSize="sm" color="black" justifyContent="center">
             Harvest Mission Community Church 2021

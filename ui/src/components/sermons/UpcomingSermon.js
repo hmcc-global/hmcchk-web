@@ -26,7 +26,7 @@ const UpcomingSermon = ({upcoming}) => {
   let sermonDesc = "";
   let sermonTitle ="";
   if(upcoming != null){
-    upcomingSeries = upcoming.filter((event) => {if(event.time == "10:00 AM") return event})[0];
+    upcomingSeries = upcoming.filter((event) => {if(event.time == "10:00 AM" && event.title.replace(/ .*/,'')=="Sunday") return event})[0];
     if(upcomingSeries != null){
       sermonImage = upcomingSeries.imageUrl;
       sermonDesc = upcomingSeries.description;
@@ -38,7 +38,7 @@ const UpcomingSermon = ({upcoming}) => {
     //set display to none if date +7 from start date
     if(upcoming != null && upcomingSeries != null){
       let startDateSeconds = DateTime.fromISO(upcomingSeries.startDate).toSeconds();
-      if((today/1000) >= (startDateSeconds + 7*24*3600)){
+      if((today/1000) >= (startDateSeconds + 700*24*3600)){
         setDisplayModal("none");
       }else{
       setDisplayModal("unset");
@@ -69,8 +69,8 @@ const UpcomingSermon = ({upcoming}) => {
       zIndex="sticky"
     >
       <Stack direction="column">
-        <CloseButton alignSelf="flex-end" onClick={closeModal} size="sm" margin="0" />
-        <Text color="#0628A3" fontWeight="bold">
+        <CloseButton alignSelf="flex-end" onClick={closeModal} size="sm" />
+        <Text color="#0628A3" fontWeight="bold" fontSize="xl">
           Upcoming Sermon Series!
         </Text>
         <Text color="#0628A3">
@@ -84,7 +84,7 @@ const UpcomingSermon = ({upcoming}) => {
             <Text fontSize="sm" noOfLines={5} dangerouslySetInnerHTML={{__html: sermonDesc}} />
           </Box>
         </Stack>
-        <Button alignSelf="flex-end" background="#0628A3" color="#ffffff" width="30%" backdropFilter = "blur(6px)" borderRadius= "10px">
+        <Button alignSelf="flex-end" height="auto" p="2" background="#0628A3" color="#ffffff" width="30%" backdropFilter = "blur(6px)" borderRadius= "10px">
           Learn More
         </Button>
       </Stack>
@@ -105,7 +105,7 @@ const UpcomingSermon = ({upcoming}) => {
           <ModalCloseButton />
           <ModalBody>
             <Stack direction="column" spacing={4}>
-              <Text color="#0628A3" fontWeight="bold" fontSize="xl" textAlign="center">
+              <Text color="#0628A3" fontWeight="bold" fontSize="2xl" textAlign="center">
                 Upcoming Sermon Series!
               </Text>
               <Text color="#0628A3" fontSize="xl" textAlign="center">

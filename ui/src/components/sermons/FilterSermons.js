@@ -25,7 +25,7 @@ const FilterSermon = ({allSermons, filterSermon, clearFilter, filterData, onClos
     <>
 			<Container maxW="container.lg">
 				<Stack spacing={{base:"6", md:"auto"}} alignItems="left" direction={{base:"column", md:"row"}}>
-					<Stack alignItems="left">
+					<Stack alignItems="left" spacing={3}>
 						<Text color="#0628A3" fontWeight="bold">
 							Speaker
 						</Text>
@@ -36,7 +36,7 @@ const FilterSermon = ({allSermons, filterSermon, clearFilter, filterData, onClos
 							})}
 							</Select>
 					</Stack>
-					<Stack alignItems="left">
+					<Stack alignItems="left" spacing={3}>
 						<Text color="#0628A3" fontWeight="bold">
 							Sermon Series
 						</Text>
@@ -47,7 +47,7 @@ const FilterSermon = ({allSermons, filterSermon, clearFilter, filterData, onClos
 								})}
 						</Select>
 					</Stack>
-					<Stack alignItems="left">
+					<Stack alignItems="left" spacing={3}>
 						<Text color="#0628A3" fontWeight="bold">
 							Book
 						</Text>
@@ -58,7 +58,7 @@ const FilterSermon = ({allSermons, filterSermon, clearFilter, filterData, onClos
 								})}
 						</Select>
 					</Stack>
-					<Stack alignItems="left">
+					<Stack alignItems="left" spacing={3}>
 						<Text color="#0628A3" fontWeight="bold">
 							Service Type
 						</Text>

@@ -23,13 +23,15 @@ const CurrentSermon = ({currentSermon}) =>{
 				boxSizing= "border-box"
 				borderRadius= "20px"
 				marginTop="20px"
-				p={[4,8]}>
+				p={[4,8]}
+        paddingTop={[0,8]}>
 				<Stack direction={{base:"column", md:"row"}}>
 					<Stack alignItems="left" width="35vw" direction="column" display={{base:"none", md:"flex"}}>
 						<Text 
 							fontWeight="bold"
 							fontSize="2em"
 							color="#0628A3"
+              marginTop="-10px"
 						>
 							Current Series
 						</Text>
@@ -48,6 +50,7 @@ const CurrentSermon = ({currentSermon}) =>{
 							fontSize="2em"
 							color="#0628A3"
               display={{base:"flex", md:"none"}}
+              marginTop="0"
 						>
 							Current Series
 						</Text>

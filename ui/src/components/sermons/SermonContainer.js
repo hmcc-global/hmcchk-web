@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { customAxios as axios } from "../helpers/customAxios";
 import { Box, Container, Heading } from "@chakra-ui/react";
 import UpcomingSermon from "./UpcomingSermon";
@@ -10,9 +10,8 @@ import { getRenderDate } from "../helpers/eventsHelpers";
 const SermonContainer = (props) => {
   const [sermons, setSermons] = useState([]);
   const [events, setEvents] = useState([]);
-  const refSermon = useRef(null);
-  const [display, setDisplay] = useState("");
   const prevScrollY = useRef(0);
+  const [display, setDisplay] = useState("");
   const [goingUp, setGoingUp] = useState(false);
 
   useEffect(() => {
@@ -24,17 +23,24 @@ const SermonContainer = (props) => {
     }
   }, []);
 
-  const onScroll = (e) =>{
-    const currentScrollY = e.target.scrollTop;
-    if (prevScrollY.current < currentScrollY && goingUp) {
-      setGoingUp(false);
-    }
-    if (prevScrollY.current > currentScrollY && !goingUp) {
-      setGoingUp(true);
-    }
-    prevScrollY.current = currentScrollY;
-    console.log(goingUp, currentScrollY);
-  }
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (prevScrollY.current < currentScrollY && goingUp) {
+        setGoingUp(false);
+      }
+      if (prevScrollY.current > currentScrollY && !goingUp) {
+        setGoingUp(true);
+      }
+
+      prevScrollY.current = currentScrollY;
+      console.log(goingUp, currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [goingUp]);
 
   const getData = async () => {
     try {
@@ -79,8 +85,9 @@ const SermonContainer = (props) => {
     }
   };
 console.log("test")
+console.log(prevScrollY.current)
   return (
-    <Box onScroll={onScroll}>
+    <>
       <UpcomingSermon upcoming={events} />
       <Container maxW="container.lg">
         <Box
@@ -114,7 +121,7 @@ console.log("test")
         <CurrentSermon currentSermon={sermons[0]} />
         <SermonCardList allSermons={sermons} />
       </Container>
-    </Box>
+    </>
   );
 };
 
