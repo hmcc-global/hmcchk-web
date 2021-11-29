@@ -22,7 +22,7 @@ const LastYearGivingTuesday = (props) => {
       </Text>
       <Stack fontSize={["0.7rem", "md"]} pl={7} pr={7} spacing={[5, 3]}>
         <Text>
-          <b>111 person gave for a total of HK$192,331.09</b>
+          <b>111 people gave for a total of HK$192,331.09</b>
         </Text>
         <Box>
           <Text>
@@ -30,7 +30,8 @@ const LastYearGivingTuesday = (props) => {
             <b>missionaries / missions organizations</b>:
           </Text>
           <Text>
-            HK$20k each to 1) HKCNP, 2) Christian Action, and 3) David Ro
+            HK$20k each to 1) HKCNP, 2) Christian Action, and 3) Missionary
+            David Ro
           </Text>
         </Box>
       </Stack>
@@ -39,17 +40,17 @@ const LastYearGivingTuesday = (props) => {
         <Stack direction="row" w="fit-content">
           <Image
             h={["6vh", "10vh"]}
-            borderRadius="3xl"
+            borderRadius={["xl", "3xl"]}
             src={process.env.PUBLIC_URL + "/images/givingTuesday/last-1.png"}
           />
           <Image
             h={["6vh", "10vh"]}
-            borderRadius="3xl"
+            borderRadius={["xl", "3xl"]}
             src={process.env.PUBLIC_URL + "/images/givingTuesday/last-2.png"}
           />
           <Image
             h={["6vh", "10vh"]}
-            borderRadius="3xl"
+            borderRadius={["xl", "3xl"]}
             src={process.env.PUBLIC_URL + "/images/givingTuesday/last-3.png"}
           />
         </Stack>
