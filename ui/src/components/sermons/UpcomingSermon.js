@@ -4,22 +4,16 @@ import { AspectRatio,
          Button, 
          CloseButton ,
          Stack, 
+         Center,
          Image, 
          Text, 
-         useDisclosure,
-         Modal,
-         ModalOverlay,
-         ModalContent,
-         ModalHeader,
-         ModalFooter,
-         ModalBody,
-         ModalCloseButton, } 
+} 
 from "@chakra-ui/react";
 import {DateTime} from "luxon";
 
 const UpcomingSermon = ({upcoming}) => {
 
-  const [displayModal, setDisplayModal] = useState("unset");
+  const [displayModal, setDisplayModal] = useState("none");
   let today = new Date().getTime();
   let upcomingSeries = "";
   let sermonImage = "";
@@ -36,17 +30,23 @@ const UpcomingSermon = ({upcoming}) => {
 
   useEffect(() => {
     //set display to none if date +7 from start date
-    if(upcoming != null && upcomingSeries != null){
-      let startDateSeconds = DateTime.fromISO(upcomingSeries.startDate).toSeconds();
-      if((today/1000) >= (startDateSeconds + 700*24*3600)){
+    setTimeout(() => {
+      if(upcoming != null && upcomingSeries != null){
+        let startDateSeconds = DateTime.fromISO(upcomingSeries.startDate).toSeconds();
+        if((today/1000) >= (startDateSeconds + 7*24*3600)){
+          setDisplayModal("none");
+        }else{
+        setDisplayModal("unset");
+      }
+      } else {
         setDisplayModal("none");
-      }else{
-      setDisplayModal("unset");
-    }
-    } else {
-      setDisplayModal("none");
-    }
+      }
+    }, 5000);
   }, [upcoming])
+
+  useEffect(() => {
+    
+}, []);
 
   const closeModal = () => {
     setDisplayModal("none");
@@ -69,10 +69,12 @@ const UpcomingSermon = ({upcoming}) => {
       zIndex="sticky"
     >
       <Stack direction="column">
-        <CloseButton alignSelf="flex-end" onClick={closeModal} size="sm" />
-        <Text color="#0628A3" fontWeight="bold" fontSize="xl">
-          Upcoming Sermon Series!
-        </Text>
+        <Stack direction ="row" spacing="auto">
+          <Text color="#0628A3" fontWeight="bold" fontSize="xl" marginTop="10px">
+            Upcoming Sermon Series!
+          </Text>
+          <CloseButton onClick={closeModal} size="sm" />
+        </Stack>
         <Text color="#0628A3">
           {sermonTitle}
         </Text>
@@ -93,39 +95,39 @@ const UpcomingSermon = ({upcoming}) => {
   }
   
   const MobileView = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    useEffect(() => {
-      onOpen();
-    }, [])
   return (
-      <Modal isOpen={isOpen} onClose={onClose} size="full" >
-        <ModalOverlay display ={{base:displayModal, md:"none"}} />
-        <ModalContent display ={{base:displayModal, md:"none"}} margin="0" padding="0">
-          <ModalHeader />
-          <ModalCloseButton />
-          <ModalBody>
-            <Stack direction="column" spacing={4}>
-              <Text color="#0628A3" fontWeight="bold" fontSize="2xl" textAlign="center">
-                Upcoming Sermon Series!
-              </Text>
-              <Text color="#0628A3" fontSize="xl" textAlign="center">
-                {sermonTitle}
-              </Text>
-              <AspectRatio ratio={16/9}>
-                <Image src={sermonImage} />
-              </AspectRatio>
-              <Text textAlign="center" fontSize="sm" dangerouslySetInnerHTML={{__html: sermonDesc}} />
-            </Stack>
-          </ModalBody>
-
-          <ModalFooter justifyContent="center">
-            <Button width="70vw" backgroundColor="#0628A3" color="white" borderRadius="10px">
-              Learn More
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-
+      <Box
+      position="absolute"
+      minH="100vh"
+      height="auto"
+      width ="100vw"
+      background= "#FFFFFF"
+      display ={{base:displayModal, md: "none"}}
+      p="8"
+      zIndex="sticky"
+    >
+      <Stack direction="column">
+        
+        <Stack direction="column" spacing={4}>
+        <CloseButton onClick={closeModal} size="lg" alignSelf="flex-end" />
+          <Text color="#0628A3" fontWeight="900" fontSize="xl" align="center">
+            Upcoming Sermon Series!
+          </Text>
+          <Text color="#0628A3" fontSize="xl" textAlign="center">
+            {sermonTitle}
+          </Text>
+          <AspectRatio ratio={16/9}>
+            <Image src={sermonImage} />
+          </AspectRatio>
+          <Text textAlign="center" fontSize="sm" dangerouslySetInnerHTML={{__html: sermonDesc}} />
+        </Stack>
+        <Center>
+        <Button width="70vw" backgroundColor="#0628A3" color="white" borderRadius="10px" marginTop="20px">
+          Learn More
+        </Button>
+        </Center>
+      </Stack>
+    </Box>
   )
 }
   return(

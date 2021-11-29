@@ -25,7 +25,8 @@ import {
     overflow:"hidden",
     bg:"white",
     boxShadow:"0px 4px 8px rgba(0, 0, 0, 0.15)",
-    align:"stretch"
+    align:"stretch",
+    maxW:"100%",
   };
 
     return (
@@ -35,10 +36,10 @@ import {
         to={{pathname:`/sermons/${sermonData.id}`, state:{sermonData:sermonData, allSermons:allSermons}}}
         >
 					<Stack direction="row">
-						<AspectRatio w={{base:"105px", md:"160px"}} ratio={1}>
+						<AspectRatio minW={{base:"28%", md:"18%"}} ratio={1}>
 							<Image borderLeftRadius="20" src={sermonImage} objectFit="cover" />
 						</AspectRatio>
-              <Box overflow="hidden" position="relative" p={[2,6]}>
+              <Box overflow="hidden" p={[2,6]}  minW={{base:"72%", md:"82%"}}>
                 <VStack alignItems="left" spacing={{base:1, md: 2}}>
                   <Text textShadow="1px 0px 0px black" fontSize={{base:"sm", md:"md"}} isTruncated>
                     {sermonData.title}
