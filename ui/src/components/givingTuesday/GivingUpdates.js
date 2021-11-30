@@ -32,7 +32,7 @@ const CategoryCard = (props) => {
           <Center>{text[1]}</Center>
         </Stack>
       </Stack>
-      {eventStatus === "after" && (
+      {/* {eventStatus === "after" && (
         <Center
           background="#B1A38F"
           borderColor="#B1A38F"
@@ -44,7 +44,7 @@ const CategoryCard = (props) => {
             HKD {givingValue}
           </Text>
         </Center>
-      )}
+      )} */}
     </Stack>
   );
 };
