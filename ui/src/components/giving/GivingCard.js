@@ -20,8 +20,7 @@ import {
   Image,
   ModalFooter,
 } from "@chakra-ui/react";
-
-function RenderSwitch(param) {
+const RenderSwitch = (param) => {
   switch (param.ModalSelection) {
     case "FPS":
       return (
@@ -133,15 +132,15 @@ function RenderSwitch(param) {
     default:
       return "not detected";
   }
-}
+};
 
-export function GivingCard(cardinfo) {
+export const GivingCard = (cardinfo) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box
       w={["100%", "100%", "32%"]}
       borderRadius="lg"
-      my={["1vh", "1vh", "0"]}
+      my={["0.6em", "0.6em", "0"]}
       bgImage={cardinfo.imageLink}
       bgPosition="center"
       bgSize="cover"
@@ -204,5 +203,5 @@ export function GivingCard(cardinfo) {
       </Flex>
     </Box>
   );
-}
+};
 export default GivingCard;

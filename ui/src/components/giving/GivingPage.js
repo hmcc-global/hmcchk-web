@@ -8,6 +8,11 @@ import {
   AccordionItem,
   AccordionButton,
   AccordionPanel,
+  List,
+  ListItem,
+  ListIcon,
+  OrderedList,
+  UnorderedList,
   AccordionIcon,
   Spacer,
   Text,
@@ -71,7 +76,7 @@ const GivingPage = (props) => {
         <Flex
           h={["100%", "100%", "13em"]}
           direction={["column", "column", "row"]}
-          paddingBottom="2"
+          paddingBottom={[0, 0, "2vh"]}
           minW="100%"
         >
           <Box w={["100%", "100%", "32%"]} h="20%" borderRadius="lg">
@@ -99,7 +104,7 @@ const GivingPage = (props) => {
         </Flex>
       </Center>
 
-      <Center paddingTop="1vw">
+      <Center>
         <Flex
           direction={["column", "column", "row"]}
           minW="100%"
@@ -153,18 +158,36 @@ const GivingPage = (props) => {
               <AccordionButton>
                 <Box flex="1" textAlign="left">
                   <Heading as="h4" size="md" py="4" minw="100%">
-                    How does registration work?
+                    Giving Categories
                   </Heading>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              Pre-registrations for Sunday Celebration will open Mondays at 8
-              PM, and you can register by clicking on the “Sign Up for In-person
-              Sunday Celebration” button above and submitting the form. You
-              should receive an email confirmation shortly notifying you of a
-              successful / wait-listed registration.
+              When you give, you can give under any of the following categories:
+              <UnorderedList>
+                <ListItem>Tithe: 10% of your regular income</ListItem>
+                <ListItem>
+                  Weekly Offering: offering that you give exclusive of your
+                  tithe
+                </ListItem>
+                <ListItem>
+                  Thanksgiving Offering: offering given out of a thankful heart
+                  toward God
+                </ListItem>
+                <ListItem>
+                  HMI: General Missions Fund: Offering to our church’s efforts
+                  towards mission work
+                </ListItem>
+                <ListItem>
+                  HMI-P: Giving to a specific short-term missions project team
+                  or members
+                </ListItem>
+                <ListItem>
+                  Other: any other specific offering you would like to indicate
+                </ListItem>
+              </UnorderedList>
             </AccordionPanel>
           </AccordionItem>
 
@@ -173,59 +196,22 @@ const GivingPage = (props) => {
               <AccordionButton>
                 <Box flex="1" textAlign="left">
                   <Heading as="h4" size="md" py="4">
-                    What do I wear to church?
+                    Tax Exemption
                   </Heading>
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              No dress code in particular! However, we would suggest bringing a
-              light/thin jacket in case you get cold in our venue.
-            </AccordionPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <h2>
-              <AccordionButton>
-                <Box flex="1" textAlign="left">
-                  <Heading as="h4" size="md" py="4">
-                    COVID-19 guidelines
-                  </Heading>
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
-            <AccordionPanel pb={4}>
-              In light of current Covid-related exemption for religious
-              gatherings, we would need to facilitate Sunday Celebrations on a
-              pre-registration basis to ensure that we are abiding by
-              regulations set by the Prevention and Control of Disease
-              Ordinance, and ensure that everyone coming in-person will feel
-              safe.
-            </AccordionPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <h2>
-              <AccordionButton>
-                <Box flex="1" textAlign="left">
-                  <Heading as="h4" size="md" py="4">
-                    Weather Guidelines
-                  </Heading>
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
-            <AccordionPanel pb={4}>
-              T9 or T10 signals hoisted by the Hong Kong Observatory: Our
-              in-person gatherings will be postponed or canceled. Note that if
-              the signal is lowered to T8 before or at 8:30AM on Sunday morning,
-              we still have Sunday Celebration at 10AM as scheduled. Please
-              check our website or social media accounts for updates regarding
-              the latest information or online sermons. T8 signal hoisted by the
-              Hong Kong Observatory: We highly value both personal safety as
-              well as meeting together as the body of Christ on a consistent
-              basis. Therefore, if you are able to come safely, we will still
-              have our gatherings as scheduled.
+              Harvest Mission Community Church (Hong Kong) Limited is a
+              registered charity recognized by the Inland Revenue Department in
+              Hong Kong. Donations to “Harvest Mission Community Church (Hong
+              Kong) Limited” can be exempted from income tax in Hong Kong.
+              Giving receipts will be available to all donors who include their
+              personal details on the offering envelope or email us at
+              stewardship@hongkong.hmcc.net to request a receipt. Members will
+              receive their giving reports at the end of the Hong Kong fiscal
+              year in April, in compliance with the Hong Kong SAR government.
             </AccordionPanel>
           </AccordionItem>
         </Accordion>
