@@ -78,6 +78,10 @@ module.exports.routes = {
   "put /api/membership/update": "memberships/update-membership",
   "put /api/membership/delete": "memberships/delete-membership",
 
+  // Invoices APIs
+  "post /api/invoices/create": "invoices/create-invoice",
+  "get /api/invoices/get": "invoices/get-invoice",
+
   // UI
   "get /*": {
     skipAssets: true,

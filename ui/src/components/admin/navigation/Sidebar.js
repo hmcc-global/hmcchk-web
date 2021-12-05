@@ -22,6 +22,8 @@ import {
   FiSettings,
   FiMenu,
   FiXCircle,
+  FiFileText,
+  FiFile,
 } from "react-icons/fi";
 
 const LinkItems = [
@@ -33,6 +35,7 @@ const LinkItems = [
   },
   { name: "Forms", icon: FiCompass, path: "/admin/forms" },
   { name: "Giving", icon: FiStar, path: "/admin/giving" },
+  { name: "Invoices", icon: FiFileText, path: "/admin/invoice" },
   { name: "Settings", icon: FiSettings, path: "/admin/settings" },
   {
     name: "Log Out",

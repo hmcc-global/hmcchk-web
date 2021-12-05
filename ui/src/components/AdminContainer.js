@@ -4,6 +4,7 @@ import AdminHome from "./admin/AdminHome";
 import AdminUser from "./admin/users/AdminUser";
 import AdminForm from "./admin/AdminForm";
 import AdminGiving from "./admin/AdminGiving";
+import AdminInvoice from "./admin/invoices/AdminInvoice";
 import SidebarWithHeader from "./admin/navigation/Sidebar";
 import { useState } from "react";
 import AdminLogout from "./admin/AdminLogout";
@@ -32,6 +33,7 @@ const AdminContainer = (props) => {
             users: <AdminUser {...props} />,
             forms: <AdminForm {...props} />,
             giving: <AdminGiving {...props} />,
+            invoice: <AdminInvoice {...props} />,
             logout: <AdminLogout {...props} />,
           }[pageName]
         }

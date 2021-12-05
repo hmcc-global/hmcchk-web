@@ -8,6 +8,9 @@ module.exports = {
       type: "ref",
       columnType: "datetime",
     },
+    invoiceNumber: {
+      type: "string",
+    },
     items: {
       type: "json",
       columnType: "array",
@@ -33,6 +36,10 @@ module.exports = {
     paymentRecords: {
       type: "json",
       columnType: "array",
+    },
+    isDeleted: {
+      type: "boolean",
+      defaultsTo: false,
     },
   },
 };
