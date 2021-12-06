@@ -77,7 +77,7 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/giving"
+          path="/give"
           permissions={["public"]}
           component={GivingPage}
         />
