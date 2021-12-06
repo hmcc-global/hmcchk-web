@@ -1,6 +1,6 @@
 import { Box, SimpleGrid, Stack, Link, Text } from "@chakra-ui/react";
-import {Link as HashLink} from "react-router-dom";
-import * as React from "react"; 
+import { Link as HashLink } from "react-router-dom";
+import * as React from "react";
 
 export function LinkGrid() {
   return (
@@ -16,10 +16,7 @@ export function LinkGrid() {
             <Text fontWeight="bold">Visit</Text>
           </Link>
 
-          <Link
-            href="https://hongkong.sub.hmcc.net/online/"
-            
-          >
+          <Link href="https://hongkong.sub.hmcc.net/online/">
             Church online
           </Link>
         </Stack>
@@ -29,11 +26,10 @@ export function LinkGrid() {
           <Link href="/connect">
             <Text fontWeight="bold">Connect</Text>
           </Link>
-          <HashLink to={{pathname:"/connect", hash:"#ministries" }}
-          >
+          <HashLink to={{ pathname: "/connect", hash: "#ministries" }}>
             Ministries
           </HashLink>
-          <HashLink to={{pathname:"/connect", hash:"#lifegroup" }}>
+          <HashLink to={{ pathname: "/connect", hash: "#lifegroup" }}>
             <Text>LIFE Groups</Text>
           </HashLink>
         </Stack>
@@ -41,47 +37,24 @@ export function LinkGrid() {
       <Box>
         <Stack>
           <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
-          <Text fontWeight="bold">About</Text>
+            <Text fontWeight="bold">About</Text>
           </Link>
-          <Link
-            href=
-               "https://hongkong.sub.hmcc.net/about/who-we-are/"
-          
-          >
+          <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
             <Text>Who We Are</Text>
           </Link>
-          <Link
-            href=
-               "https://hongkong.sub.hmcc.net/about/beliefs/"
-            
-          >
+          <Link href="https://hongkong.sub.hmcc.net/about/beliefs/">
             <Text>Beliefs</Text>
           </Link>
-          <Link
-            href=
-               "https://hongkong.sub.hmcc.net/about/who-we-are/"
-            
-          >
+          <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
             <Text>Our Values</Text>
           </Link>
-          <Link
-            href=
-              "https://hongkong.sub.hmcc.net/about/beliefs/"
-            
-          >
+          <Link href="https://hongkong.sub.hmcc.net/about/beliefs/">
             <Text>Statement of Faith</Text>
           </Link>
-          <Link
-            href=
-              "https://hongkong.sub.hmcc.net/about/bold-vision/"
-            
-          >
+          <Link href="https://hongkong.sub.hmcc.net/about/bold-vision/">
             <Text>Bold Vision</Text>
           </Link>
-          <Link
-            href=
-               "https://hongkong.sub.hmcc.net/about/hmi/"
-          >
+          <Link href="https://hongkong.sub.hmcc.net/about/hmi/">
             <Text>HMI</Text>
           </Link>
         </Stack>
@@ -89,22 +62,16 @@ export function LinkGrid() {
 
       <Box>
         <Stack>
-          <Link href="/events" >
+          <Link href="/events">
             <Text fontWeight="bold">Events</Text>
           </Link>
-          <Link href="https://hongkong.sub.hmcc.net/sermons/" >
+          <Link href="https://hongkong.sub.hmcc.net/sermons/">
             <Text fontWeight="bold">Sermons</Text>
           </Link>
-          <Link
-            href=  "https://hongkong.sub.hmcc.net/give/" 
-            
-          >
+          <Link href="/give">
             <Text fontWeight="bold">Give</Text>
           </Link>
-          <Link
-            href=  "https://hongkong.sub.hmcc.net/privacy-policy-2/" 
-            
-          >
+          <Link href="https://hongkong.sub.hmcc.net/privacy-policy-2/">
             <Text fontWeight="bold">Privacy Policy</Text>
           </Link>
         </Stack>

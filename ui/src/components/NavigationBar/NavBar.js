@@ -135,7 +135,7 @@ const NavBar = (props) => {
                   </Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="https://hongkong.sub.hmcc.net/give/">GIVE</Link>
+                  <Link href="/give">GIVE</Link>
                 </Box>
               </Stack>
               <Stack
