@@ -81,22 +81,22 @@ const NavBar = (props) => {
           backdrop-filter="blur(39px)"
           align="center"
           fontSize={{ md: "xs", lg: "sm", xl: "md" }}
-          h="10.5vh"
+          h={{ md: "7vh", lg: "7vh", xl: "8.5vh" }}
         >
           <Container maxW="container.lg">
             <Flex
               justify={["space-between", "space-around"]}
               align="center"
               fontSize={{ md: "xs", lg: "sm", xl: "md" }}
-              h="10.5vh"
+              h={{ md: "7vh", lg: "7vh", xl: "8.5vh" }}
             >
               <Box position="relative">
                 <LinkOverlay href="/">
                   <Image
                     h={{
-                      base: "3.5vh",
-                      sm: "4vh",
-                      md: "4.5vh",
+                      base: "3vh",
+                      sm: "3vh",
+                      md: "3vh",
                       lg: "5vh",
                     }}
                     src={process.env.PUBLIC_URL + "/images/ripple_black.svg"}
@@ -182,7 +182,7 @@ const NavBar = (props) => {
                     style={{ background: "none" }}
                   >
                     <Image
-                      h="3vh"
+                      h="2.5vh"
                       src={process.env.PUBLIC_URL + "/images/menu.svg"}
                       alt="Menu Button"
                     />
