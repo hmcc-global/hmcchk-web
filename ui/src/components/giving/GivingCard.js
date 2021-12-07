@@ -177,7 +177,14 @@ export const GivingCard = (cardinfo) => {
 
             <Center>
               <Box w={["6em", "8em"]}>
-                <Button w="100%" variant="outline" onClick={onOpen}>
+                <Button
+                  w="100%"
+                  variant="outline"
+                  onClick={onOpen}
+                  _hover={{
+                    background: "rgba(128,128,128, 0.4)",
+                  }}
+                >
                   <Text
                     align="center"
                     fontSize={["sm", "md", "lg"]}
