@@ -9,6 +9,7 @@ import VisitUsPage from "./visit-us/VisitUsPage";
 import ConnectPage from "./connect/ConnectPage";
 import PrivateRoute from "./helpers/PrivateRoute";
 import HomeContainer from "./home/HomeContainer";
+import FooterContainer from "./footer/FooterContainer";
 import ConfirmEmailPage from "./email/ConfirmEmailPage";
 import UserProfileContainer from "./userProfile/UserProfileContainer";
 import CompleteUserProfileContainer from "./userProfile/CompleteUserProfile";
@@ -109,6 +110,7 @@ const MainContainer = () => {
           component={AdminContainer}
         />
       </Switch>
+      <FooterContainer />
     </chakra.main>
   );
 };
