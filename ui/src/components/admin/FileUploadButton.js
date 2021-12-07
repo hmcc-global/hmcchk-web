@@ -6,9 +6,9 @@ import { arrayToExcel } from "../helpers/arrayToExcel";
 const FileUploadButton = () => {
   const [csv, setCsv] = useState({});
 
-  const handleOnDrop = (data) => {
+  const handleOnDrop = async (data) => {
     console.log(data);
-    let givingArray = mapGiving(data);
+    let givingArray = await mapGiving(data);
     const customArray = JSON.parse(JSON.stringify(givingArray));
     arrayToExcel.convertArrayToTable(givingArray, "test_giving.xls");
     setCsv(data);

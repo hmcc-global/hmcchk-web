@@ -55,13 +55,17 @@ export default function AdminGiving(props) {
         Header: "Name",
         accessor: "fullName",
       },
-      {
-        Header: "Email",
-        accessor: "email",
-      },
+      // {
+      //   Header: "Email",
+      //   accessor: "email",
+      // },
       {
         Header: "Tithely IDs",
-        accessor: "givingInfo",
+        accessor: "givingInfo.tithely",
+      },
+      {
+        Header: "Known Aliases",
+        accessor: "givingInfo.aliases",
       },
     ],
     []
