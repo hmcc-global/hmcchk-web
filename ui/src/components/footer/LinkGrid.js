@@ -1,7 +1,6 @@
 import { Box, SimpleGrid, Stack, Link, Text } from "@chakra-ui/react";
 import { Link as HashLink } from "react-router-dom";
 import * as React from "react";
-import { HashLink as Link } from "react-router-hash-link";
 
 export function LinkGrid() {
   return (

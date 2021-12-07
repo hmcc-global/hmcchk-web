@@ -19,7 +19,6 @@ import UserFormContainer from "./forms/UserFormContainer";
 import NoMatch from "./errors/NoMatch";
 import AdminLoginContainer from "./admin/AdminLoginContainer";
 import AdminContainer from "./AdminContainer";
-import FooterContainer from "./footer/FooterContainer";
 import ScrollToTop from "./helpers/ScrollToTop";
 
 const MainContainer = () => {
