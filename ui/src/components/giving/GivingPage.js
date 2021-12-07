@@ -141,12 +141,18 @@ const GivingPage = (props) => {
         </Text>
       </Box>
       <Box paddingBottom="10vh">
-        <Box display={{ base: "none", lg: "block" }}>
-          <Heading as="h1" fontSize={["5xl", "5xl", "6xl"]} py="4vw" px="1vh">
+        <Box display={{ base: "none", md: "block", lg: "block" }}>
+          <Heading
+            as="h1"
+            fontSize="5xl"
+            paddingTop="4vw"
+            paddingBottom="1vw"
+            px="1vh"
+          >
             Frequently Asked Question
           </Heading>
         </Box>
-        <Box display={{ base: "block", lg: "none" }}>
+        <Box display={{ base: "block", md: "none", lg: "none" }}>
           <Heading as="h1" fontSize={["5xl", "5xl", "6xl"]} py="4vw" px="1vh">
             FAQs
           </Heading>

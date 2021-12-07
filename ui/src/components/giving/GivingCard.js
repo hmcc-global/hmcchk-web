@@ -156,9 +156,14 @@ export const GivingCard = (cardinfo) => {
           background: "rgba(0, 0, 0, 0.29)",
         }}
       >
-        <Box py={["2vh", "2vh", "5vh"]} minH="10vh" minW="90%">
+        <Box
+          py={["2vh", "3vh", null]}
+          m={[null, null, "auto"]}
+          minH="10vh"
+          minW="90%"
+        >
           <Flex direction={["row", "row", "column"]}>
-            <Center paddingBottom={["0", "0", "2vh"]}>
+            <Center paddingBottom={["0", "0", "2vh", "1.5vh"]}>
               <Heading
                 as="h4"
                 fontSize={["sm", "md", "xl"]}
@@ -171,7 +176,7 @@ export const GivingCard = (cardinfo) => {
             <Spacer />
 
             <Center>
-              <Box w="16vh">
+              <Box w={["6em", "8em"]}>
                 <Button w="100%" variant="outline" onClick={onOpen}>
                   <Text
                     align="center"
