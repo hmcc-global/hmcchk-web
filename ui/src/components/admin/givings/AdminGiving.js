@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { customAxios as axios } from "../helpers/customAxios";
+import { customAxios as axios } from "../../helpers/customAxios";
 import {
   useDisclosure,
   Button,
@@ -19,10 +19,11 @@ import {
   ModalContent,
   ModalBody,
 } from "@chakra-ui/react";
-import ArrayToExcelButton from "./ArrayToExcelButton";
+import ArrayToExcelButton from "../ArrayToExcelButton";
 import { useTable, useSortBy } from "react-table";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
-import FileUploadButton from "./FileUploadButton";
+import FileUploadButton from "../FileUploadButton";
+import AddGiving from "./AddGivingComponent";
 
 export default function AdminGiving(props) {
   const [user, setUsers] = useState([]);
@@ -55,10 +56,6 @@ export default function AdminGiving(props) {
         Header: "Name",
         accessor: "fullName",
       },
-      // {
-      //   Header: "Email",
-      //   accessor: "email",
-      // },
       {
         Header: "Tithely IDs",
         accessor: "givingInfo.tithely",
@@ -146,7 +143,10 @@ export default function AdminGiving(props) {
                     ))}
                     <Td>
                       <Stack spacing={2} direction="row" align="center">
-                        <Button colorScheme="teal">Add</Button>
+                        <AddGiving
+                          payload={data[row.id]}
+                          refreshCallback={refreshHandler}
+                        />
                         <Button>View</Button>
                       </Stack>
                     </Td>

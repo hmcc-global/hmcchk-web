@@ -79,6 +79,12 @@ module.exports.routes = {
   "put /api/membership/update": "memberships/update-membership",
   "put /api/membership/delete": "memberships/delete-membership",
 
+  // Giving APIs
+  "post /api/giving/create": "givings/create-giving",
+  "get /api/giving/get": "givings/get-giving",
+  "put /api/giving/update": "givings/update-giving",
+  "put /api/giving/delete": "givings/delete-giving",
+
   // UI
   "get /*": {
     skipAssets: true,
