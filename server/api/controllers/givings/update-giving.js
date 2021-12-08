@@ -34,7 +34,7 @@ module.exports = {
     if (givingId) {
       try {
         let data = await Giving.updateOne({
-          _id: givingId,
+          userId: givingId,
           isDeleted: false,
         }).set(toUpdate);
         if (data != null) {

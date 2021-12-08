@@ -6,7 +6,7 @@ module.exports = {
   inputs: {
     givingId: {
       required: false,
-      type: "string",
+      type: "ref",
     },
   },
 
@@ -20,14 +20,12 @@ module.exports = {
   },
   fn: async function ({ givingId }, exits) {
     try {
-      if (givingId) {
-        let data = await Giving.find({ _id: givingId, isDeleted: false });
-        if (data.length === 0) throw "giving record not found";
-        return exits.success(data);
-      }
-
-      let data = await Giving.find({ isDeleted: false });
+      let data = await Giving.find({ userId: givingId, isDeleted: false });
+      // if (data.length === 0) throw "giving record not found";
       return exits.success(data);
+
+      // let data = await Giving.find({ isDeleted: false });
+      // return exits.success(data);
     } catch (err) {
       sails.log(err);
       return exits.invalid(err);

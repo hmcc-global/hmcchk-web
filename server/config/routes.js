@@ -81,7 +81,7 @@ module.exports.routes = {
 
   // Giving APIs
   "post /api/giving/create": "givings/create-giving",
-  "get /api/giving/get": "givings/get-giving",
+  "post /api/giving/get": "givings/get-giving",
   "put /api/giving/update": "givings/update-giving",
   "put /api/giving/delete": "givings/delete-giving",
 

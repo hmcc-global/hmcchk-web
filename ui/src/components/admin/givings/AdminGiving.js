@@ -13,20 +13,32 @@ import {
   Tr,
   Stack,
   chakra,
+  Text,
 } from "@chakra-ui/react";
 import ArrayToExcelButton from "../ArrayToExcelButton";
 import { useTable, useSortBy } from "react-table";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import FileUploadButton from "../FileUploadButton";
-import AddGiving from "./AddGivingComponent";
 import ViewGiving from "./ViewGivingComponent";
+import EditGiving from "./EditGivingComponent";
 
 export default function AdminGiving(props) {
   const [user, setUsers] = useState([]);
+  // const [showGiving, setShowGiving] = useState(false);
 
   const getData = async () => {
     try {
       const { data } = await axios.get("/api/users/get");
+
+      for (let obj in data) {
+        if (data[obj].givingInfo.length > 0) {
+          data[obj].givingInfo.tithely =
+            data[obj].givingInfo[0].tithely.toString();
+          data[obj].givingInfo.aliases =
+            data[obj].givingInfo[0].aliases.toString();
+        }
+      }
+
       setUsers(data);
     } catch (err) {
       console.log(err);
@@ -127,7 +139,7 @@ export default function AdminGiving(props) {
                     ))}
                     <Td>
                       <Stack spacing={2} direction="row" align="center">
-                        <AddGiving
+                        <EditGiving
                           payload={data[row.id]}
                           refreshCallback={refreshHandler}
                         />

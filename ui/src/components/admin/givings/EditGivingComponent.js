@@ -15,11 +15,10 @@ import {
   Input,
   FormControl,
   FormLabel,
-  VisuallyHiddenInput,
   useToast,
 } from "@chakra-ui/react";
 
-const AddGiving = ({ payload, refreshCallback }) => {
+const EditGiving = ({ payload, refreshCallback }) => {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -27,17 +26,31 @@ const AddGiving = ({ payload, refreshCallback }) => {
 
   const onSubmit = async (data) => {
     // Format the data
+    data.tithely = data.tithely.replace(" ", "").split("/");
+    data.aliases = data.aliases.replace(" ", "").split("/");
 
-    data.tithely = data.tithely.replace(" ", "").split(",");
-    data.aliases = data.aliases.replace(" ", "").split(",");
-
-    const status = await axios.post("/api/giving/create", {
-      userId: payload.id,
-      tithely: data.tithely,
-      aliases: data.aliases,
+    const check = await axios.post("/api/giving/get", {
+      givingId: payload.id,
     });
 
-    if (status.status === 200) {
+    let status = {};
+
+    if (check.data.length > 0) {
+      const params = {
+        id: payload.id,
+        tithely: data.tithely,
+        aliases: data.aliases,
+      };
+      status = await axios.put("/api/giving/update", { params });
+    } else {
+      status = await axios.post("/api/giving/create", {
+        userId: payload.id,
+        tithely: data.tithely,
+        aliases: data.aliases,
+      });
+    }
+
+    if (status != {} && status.status === 200) {
       toast({
         title: "Success!",
         description: "Giving information created.",
@@ -62,25 +75,27 @@ const AddGiving = ({ payload, refreshCallback }) => {
   return (
     <>
       <Button colorScheme="teal" size="sm" onClick={onOpen}>
-        Add
+        Edit
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />
         <form onSubmit={handleSubmit(onSubmit)}>
           <ModalContent>
-            <ModalHeader>Add Giving Information</ModalHeader>
+            <ModalHeader>Edit Giving Information</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <FormControl>
                 <Stack>
-                  {/* <VisuallyHiddenInput
-                    defaultValue={payload.id}
-                    {...register("id")}
-                  /> */}
                   <FormLabel>Tithely IDs</FormLabel>
-                  <Input {...register("tithely")} />
+                  <Input
+                    defaultValue={payload.givingInfo.tithely}
+                    {...register("tithely")}
+                  />
                   <FormLabel>Known Aliases</FormLabel>
-                  <Input {...register("aliases")} />
+                  <Input
+                    defaultValue={payload.givingInfo.aliases}
+                    {...register("aliases")}
+                  />
                 </Stack>
               </FormControl>
             </ModalBody>
@@ -100,4 +115,4 @@ const AddGiving = ({ payload, refreshCallback }) => {
   );
 };
 
-export default AddGiving;
+export default EditGiving;

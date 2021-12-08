@@ -16,7 +16,6 @@ import {
 const ViewGiving = ({ payload }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  console.log(payload.givingInfo[0]);
   if (payload.givingInfo[0] != undefined) {
     payload.givingInfo.tithely = payload.givingInfo[0].tithely.toString();
     payload.givingInfo.aliases = payload.givingInfo[0].aliases.toString();
