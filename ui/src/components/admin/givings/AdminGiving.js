@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { customAxios as axios } from "../../helpers/customAxios";
 import {
-  useDisclosure,
   Button,
   Flex,
   Box,
@@ -14,21 +13,16 @@ import {
   Tr,
   Stack,
   chakra,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalBody,
 } from "@chakra-ui/react";
 import ArrayToExcelButton from "../ArrayToExcelButton";
 import { useTable, useSortBy } from "react-table";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import FileUploadButton from "../FileUploadButton";
 import AddGiving from "./AddGivingComponent";
+import ViewGiving from "./ViewGivingComponent";
 
 export default function AdminGiving(props) {
   const [user, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const getData = async () => {
     try {
@@ -80,17 +74,7 @@ export default function AdminGiving(props) {
           fileName={"UserData.xls"}
           buttonTitle={"Export"}
         />
-        {loading ? (
-          <FileUploadButton />
-        ) : (
-          <Modal onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent>
-              <ModalBody> Test </ModalBody>
-            </ModalContent>
-          </Modal>
-        )}
-        {/* <FileUploadButton /> */}
+        <FileUploadButton />
       </Stack>
       <Flex
         bg={useColorModeValue("gray.200")}
@@ -147,7 +131,7 @@ export default function AdminGiving(props) {
                           payload={data[row.id]}
                           refreshCallback={refreshHandler}
                         />
-                        <Button>View</Button>
+                        <ViewGiving payload={data[row.id]} />
                       </Stack>
                     </Td>
                   </Tr>

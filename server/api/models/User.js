@@ -94,11 +94,8 @@ email status until they click the link in the confirmation email.`,
     },
     givingInfo: {
       //one-to-one
-      //collection: "Giving",
-      //via: "userId",
-      type: "json",
-      columnType: "array",
-      defaultsTo: [],
+      collection: "Giving",
+      via: "userId",
     },
     emailProofToken: {
       type: "string",

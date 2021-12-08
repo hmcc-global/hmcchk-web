@@ -28,13 +28,13 @@ const AddGiving = ({ payload, refreshCallback }) => {
   const onSubmit = async (data) => {
     // Format the data
 
-    let tithely = data.tithely.replace(" ", "").split(",");
-    let aliases = data.aliases.replace(" ", "").split(",");
+    data.tithely = data.tithely.replace(" ", "").split(",");
+    data.aliases = data.aliases.replace(" ", "").split(",");
 
     const status = await axios.post("/api/giving/create", {
       userId: payload.id,
-      tithely: tithely,
-      aliases: aliases,
+      tithely: data.tithely,
+      aliases: data.aliases,
     });
 
     if (status.status === 200) {
@@ -61,7 +61,7 @@ const AddGiving = ({ payload, refreshCallback }) => {
 
   return (
     <>
-      <Button colorScheme="teal" onClick={onOpen}>
+      <Button colorScheme="teal" size="sm" onClick={onOpen}>
         Add
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
