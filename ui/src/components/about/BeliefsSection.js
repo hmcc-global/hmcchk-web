@@ -5,12 +5,39 @@ import {
   Center,
   Box,
   SimpleGrid,
+  HStack,
+  VStack,
   Accordion,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
+
+const BeliefsCard = ({ head, body }) => {
+  return (
+    <Box
+      borderWidth="1px"
+      borderRadius="20"
+      shadow="lg"
+      bg="#F8F8F8"
+      px="8"
+      pt="6"
+      pb="6"
+      h="100%"
+      w="19em"
+    >
+      <Box>
+        <Text fontWeight="bold" color="#2C5282" fontSize="xl">
+          {head}
+        </Text>
+        <Text color="#2C5282" fontSize="sm">
+          {body}
+        </Text>
+      </Box>
+    </Box>
+  );
+};
 
 const BeliefsSection = (props) => {
   const { title, blurb } = props;
@@ -30,198 +57,23 @@ const BeliefsSection = (props) => {
         </Heading>
       </Center>
       <Box display={{ base: "none", lg: "flex" }}>
-        <SimpleGrid columns={[1, 1, 3]} spacingX="1" spacingY="1">
-          <Box
-            borderWidth="1px"
-            borderRadius="20"
-            shadow="lg"
-            bg="#F8F8F8"
-            px="8"
-            pt="6"
-            pb="6"
-            m="4"
-            h="18em"
-            w="19em"
-          >
-            <Box>
-              <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                {blurb.head[0]}
-              </Text>
-              <Text color="#2C5282" fontSize="sm">
-                {blurb.body[0]}
-              </Text>
-            </Box>
-          </Box>
-
-          <Box
-            borderWidth="1px"
-            borderRadius="20"
-            shadow="lg"
-            bg="#F8F8F8"
-            px="8"
-            pt="6"
-            pb="6"
-            m="4"
-            h="18em"
-            w="19em"
-          >
-            <Box>
-              <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                {blurb.head[1]}
-              </Text>
-              <Text color="#2C5282" fontSize="sm">
-                {blurb.body[1]}
-              </Text>
-            </Box>
-          </Box>
-          <Box
-            borderWidth="1px"
-            borderRadius="20"
-            shadow="lg"
-            bg="#F8F8F8"
-            px="8"
-            pt="6"
-            pb="6"
-            m="4"
-            h="18em"
-            w="19em"
-          >
-            <Box>
-              <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                {blurb.head[2]}
-              </Text>
-              <Text color="#2C5282" fontSize="sm">
-                {blurb.body[2]}
-              </Text>
-            </Box>
-          </Box>
-          <Box
-            borderWidth="1px"
-            borderRadius="20"
-            shadow="lg"
-            bg="#F8F8F8"
-            px="8"
-            pt="6"
-            pb="6"
-            m="4"
-            h="18em"
-            w="19em"
-          >
-            <Box>
-              <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                {blurb.head[3]}
-              </Text>
-              <Text color="#2C5282" fontSize="sm">
-                {blurb.body[3]}
-              </Text>
-            </Box>
-          </Box>
-          <Box
-            borderWidth="1px"
-            borderRadius="20"
-            shadow="lg"
-            bg="#F8F8F8"
-            px="8"
-            pt="6"
-            pb="6"
-            m="4"
-            h="18em"
-            w="19em"
-          >
-            <Box>
-              <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                {blurb.head[4]}
-              </Text>
-              <Text color="#2C5282" fontSize="sm">
-                {blurb.body[4]}
-              </Text>
-            </Box>
-          </Box>
-          <Box
-            borderWidth="1px"
-            borderRadius="20"
-            shadow="lg"
-            bg="#F8F8F8"
-            px="8"
-            pt="6"
-            pb="6"
-            m="4"
-            h="18em"
-            w="19em"
-          >
-            <Box>
-              <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                {blurb.head[5]}
-              </Text>
-              <Text color="#2C5282" fontSize="sm">
-                {blurb.body[5]}
-              </Text>
-            </Box>
-          </Box>
-          <Box
-            borderWidth="1px"
-            borderRadius="20"
-            shadow="lg"
-            bg="#F8F8F8"
-            px="8"
-            pt="6"
-            pb="6"
-            m="4"
-            h="18em"
-            w="19em"
-          >
-            <Box>
-              <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                {blurb.head[6]}
-              </Text>
-              <Text color="#2C5282" fontSize="sm">
-                {blurb.body[6]}
-              </Text>
-            </Box>
-          </Box>
-          <Box
-            borderWidth="1px"
-            borderRadius="20"
-            shadow="lg"
-            bg="#F8F8F8"
-            px="8"
-            pt="6"
-            pb="6"
-            m="4"
-            h="18em"
-            w="19em"
-          >
-            <Box>
-              <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                {blurb.head[7]}
-              </Text>
-              <Text color="#2C5282" fontSize="sm">
-                {blurb.body[7]}
-              </Text>
-            </Box>
-          </Box>
-          <Box
-            borderWidth="1px"
-            borderRadius="20"
-            shadow="lg"
-            bg="#F8F8F8"
-            px="8"
-            pt="6"
-            pb="6"
-            m="4"
-            h="18em"
-            w="19em"
-          >
-            <Box>
-              <Text fontWeight="bold" color="#2C5282" fontSize="xl">
-                {blurb.head[8]}
-              </Text>
-              <Text color="#2C5282" fontSize="sm">
-                {blurb.body[8]}
-              </Text>
-            </Box>
-          </Box>
-        </SimpleGrid>
+        <VStack spacing="5" w="100%">
+          <HStack spacing="5" h="20em">
+            <BeliefsCard head={blurb.head[0]} body={blurb.body[0]} />
+            <BeliefsCard head={blurb.head[1]} body={blurb.body[1]} />
+            <BeliefsCard head={blurb.head[2]} body={blurb.body[2]} />
+          </HStack>
+          <HStack spacing="5" h="20em">
+            <BeliefsCard head={blurb.head[3]} body={blurb.body[3]} />
+            <BeliefsCard head={blurb.head[4]} body={blurb.body[4]} />
+            <BeliefsCard head={blurb.head[5]} body={blurb.body[5]} />
+          </HStack>
+          <HStack spacing="5" h="20em">
+            <BeliefsCard head={blurb.head[6]} body={blurb.body[6]} />
+            <BeliefsCard head={blurb.head[7]} body={blurb.body[7]} />
+            <BeliefsCard head={blurb.head[8]} body={blurb.body[8]} />
+          </HStack>
+        </VStack>
       </Box>
       <Center>
         <Box display={{ base: "block", lg: "none" }} w="90%">

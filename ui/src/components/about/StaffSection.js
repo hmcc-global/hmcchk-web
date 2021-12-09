@@ -73,12 +73,7 @@ const StaffSection = (props) => {
             </Box>
           </Stack>
         </Box>
-        <Box
-          bgColor="#2D4769"
-          w="100%"
-          minH={{ base: "40em", lg: "30em" }}
-          borderRadius="20px"
-        >
+        <Box bgColor="#2D4769" w="100%" borderRadius="20px">
           <Stack
             direction={{ base: "column", lg: "row" }}
             py={["2em", "2em", "4em"]}
