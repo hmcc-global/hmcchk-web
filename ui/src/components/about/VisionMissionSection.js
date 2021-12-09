@@ -56,7 +56,7 @@ const VisionMissionSection = (props) => {
           w="100%"
           height="100%"
           alignItems="center"
-          justifyContent="space-evenly"
+          justifyContent="center"
         >
           {blurb && blurb.vision && (
             <VisionMissionCard title="VISION" message={blurb.vision} />
