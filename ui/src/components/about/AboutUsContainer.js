@@ -29,6 +29,7 @@ const AboutUsContainer = (props) => {
   const banner = blurbs.banner;
 
   const handleChange = (e) => setSelected(parseInt(e.target.value));
+  //To do: implement navbar, menu and footer links to individual sections("our story", "vision mision" etc)
 
   return (
     <Container maxW="container.lg" py={10}>

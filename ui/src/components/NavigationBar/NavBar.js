@@ -119,9 +119,7 @@ const NavBar = (props) => {
                   <Link href="/visit-us">VISIT</Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
-                    ABOUT
-                  </Link>
+                  <Link href="/about-us">ABOUT</Link>
                 </Box>
                 <Box position="relative">
                   <Link href="/connect">CONNECT</Link>
