@@ -9,6 +9,11 @@ module.exports = {
     },
     tithely: {
       type: "json",
+      columnType: "array",
+    },
+    aliases: {
+      type: "json",
+      columnType: "array",
     },
   },
 
@@ -27,11 +32,12 @@ module.exports = {
     },
   },
 
-  fn: async function ({ userId, tithely }, exits) {
+  fn: async function ({ userId, tithely, aliases }, exits) {
     try {
       const newGiving = await Giving.create({
         userId,
         tithely,
+        aliases,
       });
 
       return exits.success(newGiving);

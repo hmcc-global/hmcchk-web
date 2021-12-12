@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { customAxios as axios } from "../helpers/customAxios";
+import { customAxios as axios } from "../../helpers/customAxios";
 import {
   Button,
   Flex,
@@ -13,17 +13,32 @@ import {
   Tr,
   Stack,
   chakra,
+  Text,
 } from "@chakra-ui/react";
-import ArrayToExcelButton from "./ArrayToExcelButton";
+import ArrayToExcelButton from "../ArrayToExcelButton";
 import { useTable, useSortBy } from "react-table";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
+import FileUploadButton from "../FileUploadButton";
+import ViewGiving from "./ViewGivingComponent";
+import EditGiving from "./EditGivingComponent";
 
 export default function AdminGiving(props) {
   const [user, setUsers] = useState([]);
+  // const [showGiving, setShowGiving] = useState(false);
 
   const getData = async () => {
     try {
       const { data } = await axios.get("/api/users/get");
+
+      for (let obj in data) {
+        if (data[obj].givingInfo.length > 0) {
+          data[obj].givingInfo.tithely =
+            data[obj].givingInfo[0].tithely.toString();
+          data[obj].givingInfo.aliases =
+            data[obj].givingInfo[0].aliases.toString();
+        }
+      }
+
       setUsers(data);
     } catch (err) {
       console.log(err);
@@ -48,12 +63,12 @@ export default function AdminGiving(props) {
         accessor: "fullName",
       },
       {
-        Header: "Email",
-        accessor: "email",
+        Header: "Tithely IDs",
+        accessor: "givingInfo.tithely",
       },
       {
-        Header: "Tithely IDs",
-        accessor: "givingInfo",
+        Header: "Known Aliases",
+        accessor: "givingInfo.aliases",
       },
     ],
     []
@@ -68,9 +83,10 @@ export default function AdminGiving(props) {
         <Button onClick={() => refreshHandler()}>Refresh</Button>
         <ArrayToExcelButton
           apiArray={data}
-          fileName={"UserData.xlsx"}
+          fileName={"UserData.xls"}
           buttonTitle={"Export"}
         />
+        <FileUploadButton />
       </Stack>
       <Flex
         bg={useColorModeValue("gray.200")}
@@ -123,8 +139,11 @@ export default function AdminGiving(props) {
                     ))}
                     <Td>
                       <Stack spacing={2} direction="row" align="center">
-                        <Button colorScheme="teal">Add</Button>
-                        <Button>View</Button>
+                        <EditGiving
+                          payload={data[row.id]}
+                          refreshCallback={refreshHandler}
+                        />
+                        <ViewGiving payload={data[row.id]} />
                       </Stack>
                     </Td>
                   </Tr>

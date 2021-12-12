@@ -9,5 +9,10 @@ module.exports = {
       columnType: "array",
       defaultsTo: [],
     },
+    aliases: {
+      type: "json",
+      columnType: "array",
+      defaultsTo: [],
+    },
   },
 };

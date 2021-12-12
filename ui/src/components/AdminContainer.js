@@ -3,7 +3,7 @@ import { chakra, useBreakpointValue } from "@chakra-ui/react";
 import AdminHome from "./admin/AdminHome";
 import AdminUser from "./admin/users/AdminUser";
 import AdminForm from "./admin/AdminForm";
-import AdminGiving from "./admin/AdminGiving";
+import AdminGiving from "./admin/givings/AdminGiving";
 import SidebarWithHeader from "./admin/navigation/Sidebar";
 import { useState } from "react";
 import AdminLogout from "./admin/AdminLogout";
