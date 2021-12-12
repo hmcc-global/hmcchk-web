@@ -24,7 +24,6 @@ module.exports = {
           formSubmitted,
           membershipInfo,
           baptismInfo,
-          givingInfo,
           emailProofToken,
           hasFilledProfileForm,
           emailStatus,

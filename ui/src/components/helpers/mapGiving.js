@@ -1,43 +1,5 @@
 import { customAxios as axios } from "./customAxios";
-
-const levenshtein = require("fast-levenshtein");
 const stringSimilarity = require("string-similarity");
-
-function levenshteinFilter(source, index, maximum = 4) {
-  let _source, matches, x, y;
-
-  _source = source.slice();
-  matches = [];
-  for (x = _source.length - 1; x >= 0; x--) {
-    // find similarities through levenshtein algorithm
-    let output = _source.splice(x, 1);
-    for (y = _source.length - 1; y >= 0; y--) {
-      let score = levenshtein.get(output[0][index], _source[y][index]);
-      if (score <= maximum) {
-        output.push(_source[y]);
-        _source.splice(y, 1);
-        x--;
-      }
-      // else {
-      //   //take into account flipped names
-      //   let lastIndex = index - 1;
-      //   let firstIndex = index - 2;
-      //   if (
-      //     _source[y][lastIndex] == output[0][firstIndex] &&
-      //     _source[y][firstIndex] == output[0][lastIndex]
-      //   ) {
-      //     console.log("source[y]", _source[y]);
-      //     console.log("output[0]", output[0]);
-      //     output.push(_source[y]);
-      //     _source.splice(y, 1);
-      //     x--;
-      //   }
-      // }
-    }
-    matches.push(output);
-  }
-  return matches;
-}
 
 function similarityFilter(source, index, minimum = 0.85) {
   let _source, matches, x, y;
@@ -125,12 +87,10 @@ const mapGiving = async (array) => {
     }
   }
 
-  //remove duplicates inside the arrays
+  //remove duplicates inside the grouped arrays
   clean = removeDuplicatesInside(clean);
 
-  console.log("clean length", clean.length);
-
-  //remove duplicates outside the arrays
+  //remove duplicates once again outside the arrays
   let unique = [];
   clean.forEach((element) => {
     if (!unique.includes(element[0])) {
@@ -138,57 +98,48 @@ const mapGiving = async (array) => {
     }
   });
 
-  console.log("unique length", unique.length);
-
-  //get user data from db
+  //get user data from db and split it to arrays
   const userData = await getUserDict();
 
-  //get array of fullnames
-  // let userFullNames = [];
-  // for (let i = 0; i < userData.length; i++) {
-  //   userFullNames.push(userData[i].fullName);
-  // }
-  let userFullNames = userData.map((obj) => obj.fullName);
+  let userFullNames = userData.map((obj) => {
+    return obj.fullName;
+  });
+
+  let userGivingInfos = userData.map((obj) => {
+    return obj.givingInfo;
+  });
 
   //find matches in db
   for (let i = 0; i < unique.length; i++) {
-    let match = stringSimilarity.findBestMatch(unique[i][index], userFullNames);
-    let info = userData[match.bestMatchIndex];
+    let info = [];
+    let temp = unique[i][index];
 
-    //if possible, find exact matches
-    // let info = userData.find((obj) => {
-    //   return obj.fullName == unique[i][index];
-    // });
-
-    // //else, find similarities
-    // if (info != undefined) {
-    //   for (let x = 0; x < userData.length; x++) {
-    //     // let score = levenshtein.get(unique[i][index], userData[x].fullName);
-    //     // if (score <= 4) {
-    //     //   info = userData[x];
-    //     // }
-    //     let score = stringSimilarity.compareTwoStrings(
-    //       unique[i][index],
-    //       userData[x].fullName
-    //     );
-
-    //     if (score >= 0.6 && score < 1) {
-    //       console.log(
-    //         unique[i][index] + " -- " + userData[x].fullName + " : " + score
-    //       );
-    //       info = userData[x];
-    //     } else if (unique[i][index].includes(userData[x].fullName)) {
-    //       console.log(
-    //         unique[i][index] + " -- " + userData[x].fullName + " : " + score
-    //       );
-    //       info = userData[x];
-    //     }
-    //   }
-    // }
+    if (userGivingInfos[i].length > 0) {
+      //if there are any giving info, then match with aliases or tithely
+      if (userGivingInfos[i][0].aliases.indexOf(temp) > 0) {
+        info = userData[i];
+      } else if (userGivingInfos[i][0].tithely.indexOf(unique[i][0]) > 0) {
+        info = userData[i];
+      } else {
+        //if there is no matching giving info, then find best match
+        let match = stringSimilarity.findBestMatch(temp, userFullNames);
+        if (match.bestMatch.rating > 0.5) {
+          info = userData[match.bestMatchIndex];
+        }
+      }
+    } else {
+      // if there is no giving info, find best match
+      let match = stringSimilarity.findBestMatch(temp, userFullNames);
+      console.log(match);
+      if (match.bestMatch.rating > 0.5) {
+        info = userData[match.bestMatchIndex];
+      }
+    }
 
     // if info is found, then push it to array
     if (info != undefined) {
       unique[i].push(
+        info["fullName"],
         info["campus"],
         info["lifestage"],
         info["lifeGroup"],
@@ -198,8 +149,15 @@ const mapGiving = async (array) => {
     }
   }
 
-  //add heading
-  headers.push("campus", "lifestage", "lifeGroup", "ministryTeam", "isMember");
+  //add heading row for csv
+  headers.push(
+    "fullName",
+    "campus",
+    "lifestage",
+    "lifeGroup",
+    "ministryTeam",
+    "isMember"
+  );
   unique.unshift(headers);
 
   //turn array into a readable object for export
