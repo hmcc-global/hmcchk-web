@@ -36,25 +36,25 @@ export function LinkGrid() {
       </Box>
       <Box>
         <Stack>
-          <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
+          <Link href="/about-us">
             <Text fontWeight="bold">About</Text>
           </Link>
-          <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
+          <Link href="/about-us">
             <Text>Who We Are</Text>
           </Link>
-          <Link href="https://hongkong.sub.hmcc.net/about/beliefs/">
+          <Link href="/about-us">
             <Text>Beliefs</Text>
           </Link>
-          <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
+          <Link href="/about-us">
             <Text>Our Values</Text>
           </Link>
-          <Link href="https://hongkong.sub.hmcc.net/about/beliefs/">
+          <Link href="/about-us">
             <Text>Statement of Faith</Text>
           </Link>
-          <Link href="https://hongkong.sub.hmcc.net/about/bold-vision/">
+          <Link href="/about-us">
             <Text>Bold Vision</Text>
           </Link>
-          <Link href="https://hongkong.sub.hmcc.net/about/hmi/">
+          <Link href="/about-us">
             <Text>HMI</Text>
           </Link>
         </Stack>

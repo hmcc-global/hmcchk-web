@@ -44,27 +44,27 @@ const MainMenu = ({ login, onClose }) => {
               <Link href="https://hongkong.sub.hmcc.net/online/">
                 <Text fontSize="18px">Church Online</Text>
               </Link>
-              <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
+              <Link href="/about-us">
                 <Text fontWeight="bold" fontSize="40px">
                   About
                 </Text>
               </Link>
-              <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
+              <Link href="/about-us">
                 <Text fontSize="18px">Who We Are</Text>
               </Link>
-              <Link href="https://hongkong.sub.hmcc.net/about/beliefs/">
+              <Link href="/about-us">
                 <Text fontSize="18px">Beliefs</Text>
               </Link>
-              <Link href="https://hongkong.sub.hmcc.net/about/who-we-are/">
+              <Link href="/about-us">
                 <Text fontSize="18px">Our Values</Text>
               </Link>
-              <Link href="https://hongkong.sub.hmcc.net/about/beliefs/">
+              <Link href="/about-us">
                 <Text fontSize="18px">Statement of Faith</Text>
               </Link>
-              <Link href="https://hongkong.sub.hmcc.net/about/bold-vision/">
+              <Link href="/about-us">
                 <Text fontSize="18px">BOLD Vision</Text>
               </Link>
-              <Link href="https://hongkong.sub.hmcc.net/about/hmi/">
+              <Link href="/about-us">
                 <Text fontSize="18px">Harvest Mission International</Text>
               </Link>
             </VStack>

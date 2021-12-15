@@ -20,6 +20,7 @@ import NoMatch from "./errors/NoMatch";
 import AdminLoginContainer from "./admin/AdminLoginContainer";
 import AdminContainer from "./AdminContainer";
 import ScrollToTop from "./helpers/ScrollToTop";
+import AboutUsContainer from "./about/AboutUsContainer";
 
 const MainContainer = () => {
   return (
@@ -79,6 +80,12 @@ const MainContainer = () => {
           path="/give"
           permissions={["public"]}
           component={GivingPage}
+        />
+        <PrivateRoute
+          exact
+          path="/about-us"
+          permissions={["public"]}
+          component={AboutUsContainer}
         />
         <PrivateRoute
           exact
