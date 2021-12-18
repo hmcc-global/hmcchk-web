@@ -2,7 +2,7 @@ import React from "react";
 import { chakra, useBreakpointValue } from "@chakra-ui/react";
 import AdminHome from "./admin/AdminHome";
 import AdminUser from "./admin/users/AdminUser";
-import AdminForm from "./admin/AdminForm";
+import FormManager from "./forms/FormManager";
 import AdminGiving from "./admin/AdminGiving";
 import SidebarWithHeader from "./admin/navigation/Sidebar";
 import { useState } from "react";
@@ -30,7 +30,7 @@ const AdminContainer = (props) => {
           {
             home: <AdminHome {...props} />,
             users: <AdminUser {...props} />,
-            forms: <AdminForm {...props} />,
+            forms: <FormManager {...props} />,
             giving: <AdminGiving {...props} />,
             logout: <AdminLogout {...props} />,
           }[pageName]
