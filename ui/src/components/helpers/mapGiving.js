@@ -61,7 +61,7 @@ const mapGiving = async (array) => {
   let allNameArray = [];
 
   for (let i = 0; i < array.length; i++) {
-    array[i].data.pop(); //delete GivingType
+    // array[i].data.pop(); //delete GivingType
     if (i == 0) {
       headers = array[i].data; //set headers for later
     } else {
