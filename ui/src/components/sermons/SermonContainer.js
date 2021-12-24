@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { customAxios as axios } from "../helpers/customAxios";
 import { Box, Container, Heading } from "@chakra-ui/react";
 import UpcomingSermon from "./UpcomingSermon";
@@ -10,44 +10,19 @@ import { getRenderDate } from "../helpers/eventsHelpers";
 const SermonContainer = (props) => {
   const [sermons, setSermons] = useState([]);
   const [events, setEvents] = useState([]);
-  const prevScrollY = useRef(0);
-  const [display, setDisplay] = useState("");
-  const [goingUp, setGoingUp] = useState(false);
+  const [currentSermon, setCurrentSermon] = useState();
 
   useEffect(() => {
     getData();
     getEvent();
-    const id = props.match.params;
-    if (id != null) {
-      // call function to open sermoncard
-    }
   }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (prevScrollY.current < currentScrollY && goingUp) {
-        setGoingUp(false);
-      }
-      if (prevScrollY.current > currentScrollY && !goingUp) {
-        setGoingUp(true);
-      }
-
-      prevScrollY.current = currentScrollY;
-      console.log(goingUp, currentScrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [goingUp]);
 
   const getData = async () => {
     try {
       const { data, status } = await axios.get("/api/sermons/get-sermons");
       if (status === 200) {
-        
         setSermons([...data]);
+        setCurrentSermon(data.find(({ nextSermon }) => nextSermon == null));
       } else {
         throw Error("Something went wrong");
       }
@@ -84,8 +59,7 @@ const SermonContainer = (props) => {
       console.log(err);
     }
   };
-console.log("test")
-console.log(prevScrollY.current)
+
   return (
     <>
       <UpcomingSermon upcoming={events} />
@@ -118,7 +92,7 @@ console.log(prevScrollY.current)
         >
           Sermons
         </Heading>
-        <CurrentSermon currentSermon={sermons[0]} />
+        <CurrentSermon currentSermon={currentSermon} />
         <SermonCardList allSermons={sermons} />
       </Container>
     </>

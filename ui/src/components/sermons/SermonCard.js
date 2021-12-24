@@ -1,23 +1,17 @@
 import {
   AspectRatio,
   Box,
-  Heading,
   Image,
   Text,
-  Button,
   HStack,
   VStack,
-  Icon,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { DateTime } from "luxon";
-import parse, { domToReact, attributesToProps } from "html-react-parser";
-import { DATE_FULL } from "luxon/src/impl/formats";
 
 const SermonCard = ({ sermonData, allSermons }) => {
-  let sermonDate = DateTime.fromISO(sermonData.datePreached).toLocaleString(
-    DATE_FULL
+  let sermonDate = DateTime.fromISO(sermonData.datePreached).toFormat(
+    "LLLL dd, yyyy"
   );
   let sermonImage = "";
   if (sermonData.sermonSeries[0].image !== null)
