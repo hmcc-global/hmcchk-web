@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { customAxios as axios } from "../helpers/customAxios";
 import GoogleLogin from "react-google-login";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { signin, signup } from "../../reducers/userSlice";
-import { useLocation } from "react-router-dom";
+import { signin } from "../../reducers/userSlice";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import {
   Box,
-  Card,
-  Paper,
   VStack,
   Flex,
   Image,
@@ -142,13 +139,6 @@ const LoginContainer = (props) => {
             <Text fontWeight="bold" fontSize="2xl">
               Log In
             </Text>
-            {/* <Box paddingTop="1vh">
-              {location.state.detail && (
-                <Text fontSize={[16, 16, 16]} fontWeight="semibold">
-                  Your account is succesfully registered. Please try logging in!
-                </Text>
-              )}
-            </Box> */}
             <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
               <VStack align="stretch">
                 <Flex alignItems="center" justifyContent="center">

@@ -110,7 +110,7 @@ const MainContainer = () => {
           permissions={["public"]}
           component={ConnectPage}
         />
-        {/* <PrivateRoute
+        <PrivateRoute
           exact
           path="/give"
           permissions={["public"]}
@@ -126,7 +126,7 @@ const MainContainer = () => {
           exact
           path="/email/confirm/:token"
           permissions={["public"]}
-          component={ConnectPage}
+          component={ConfirmEmailPage}
         />
         <PrivateRoute
           exact
@@ -152,13 +152,13 @@ const MainContainer = () => {
           permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
           component={UserProfileContainer}
         />
-        <PrivateRoute
+        {/* <PrivateRoute
           exact
           path="/clear-cache/"
           permissions={["admin", "stewardship"]}
           component={ClearCache}
         />
-        {/* <PrivateRoute
+        <PrivateRoute
           exact
           path="/admin"
           permissions={["admin", "stewardship"]}
@@ -187,7 +187,7 @@ const MainContainer = () => {
           path="/admin/giving"
           permissions={["stewardship"]}
           component={AdminGiving}
-        /> */}
+        /> 
         <PrivateRoute
           exact
           path="/admin/login"
@@ -199,7 +199,8 @@ const MainContainer = () => {
           path="/admin/:pageName"
           permissions={["admin", "stewardship"]}
           component={AdminContainer}
-        />
+        />*/}
+        <PrivateRoute path="*" permissions={["public"]} component={NoMatch} />
       </Switch>
       <FooterContainer />
       <ConnectFloatButton />

@@ -20,7 +20,6 @@ module.exports = {
   },
 
   fn: async function ({ token }, exits) {
-    console.log("HERE");
     try {
       // If no token was provided, this is automatically invalid.
       if (!token) {

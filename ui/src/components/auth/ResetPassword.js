@@ -102,19 +102,6 @@ const ResetPassword = (props) => {
     fontWeight: "bold",
   };
 
-  const signupBoxStyle = {
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "3px 19px",
-    background: "rgba(0, 0, 0, 0.04)",
-    border: "1px solid #FFFFFF",
-    boxSizing: "border-box",
-    backdropFilter: "blur(6px)",
-    borderRadius: "10px",
-    width: "300px",
-    fontWeight: "bold",
-  };
-
   const password = useRef({});
   password.current = watch("password", "");
 
@@ -227,18 +214,6 @@ const ResetPassword = (props) => {
           </VStack>
         </Flex>
       </Stack>
-      {/* { <Paper className={classes.paper}>
-        <Card>{user.email}</Card>
-        <Card>
-          <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-            buttonText="Login"
-            onSuccess={onGoogleSuccess}
-            onFailure={onGoogleFailure}
-            cookiePolicy={"single_host_origin"}
-          />
-        </Card>
-      </Paper> } */}
     </>
   );
 };

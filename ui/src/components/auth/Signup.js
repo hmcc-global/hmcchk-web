@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Redirect } from "react-router-dom";
 import { customAxios as axios } from "../helpers/customAxios";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -10,15 +9,12 @@ import {
   Center,
   UnorderedList,
   ListItem,
-  Card,
-  Paper,
   VStack,
   Flex,
   Image,
   Text,
   Stack,
   HStack,
-  Button,
   Link,
   Input,
   Modal,
@@ -53,10 +49,6 @@ const Signup = (props) => {
       setValue("lastName", lastname);
     }
   }, []);
-
-  const onChangeReCAPTCHA = (value) => {
-    console.log("Captcha cleared");
-  };
 
   const inputBox = {
     color: "black",
@@ -117,26 +109,6 @@ const Signup = (props) => {
         setError("Required fields not filled");
       }
     }
-    // Error
-    // console.log(error);
-    // if (error.response) {
-    //   seterror(error.response.data);
-    //   // The request was made and the server responded with a status code
-    //   // that falls out of the range of 2xx
-    //   // console.log(error.response.data);
-    //   // console.log(error.response.status);
-    //   // console.log(error.response.headers);
-    // } else if (error.request) {
-    //   // The request was made but no response was received
-    //   // `error.request` is an instance of XMLHttpRequest in the
-    //   // browser and an instance of
-    //   // http.ClientRequest in node.js
-    //   console.log(error.request);
-    // } else {
-    //   // Something happened in setting up the request that triggered an Error
-    //   console.log("Error", error.message);
-    // }
-    // console.log(error.config);
   };
 
   return (
@@ -439,7 +411,6 @@ const Signup = (props) => {
               <ReCAPTCHA
                 style={{ left: "5%", position: "relative", marginTop: "20px" }}
                 sitekey={process.env.REACT_APP_CAPTCHA}
-                onChange={onChangeReCAPTCHA}
               />
               {error && (
                 <Text color="#F6AD55" fontSize={[14, 14, 14, 16]}>

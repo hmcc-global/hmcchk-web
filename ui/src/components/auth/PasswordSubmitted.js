@@ -1,74 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { customAxios as axios } from "../helpers/customAxios";
-import GoogleLogin from "react-google-login";
-import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
-import { signin } from "../../reducers/userSlice";
-import { ChevronLeftIcon, EmailIcon, LockIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Card,
-  Container,
-  Paper,
-  Center,
-  VStack,
-  Flex,
-  Image,
-  Text,
-  Stack,
-  HStack,
-  Button,
-  Link,
-} from "@chakra-ui/react";
-import { SocialIcon } from "react-social-icons";
+import React from "react";
+import { ChevronLeftIcon } from "@chakra-ui/icons";
+import { Box, VStack, Flex, Image, Text, Stack, Link } from "@chakra-ui/react";
 
 const PasswordSubmitted = (props) => {
-  const { classes } = props;
-  const [token, setToken] = useState("null token");
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  const { register, handleSubmit } = useForm();
-  const [result, setResult] = useState("");
-  const onSubmit = (data) => setResult(JSON.stringify(data));
-
-  const inputBoxStyle = {
-    background: "#ffffff",
-    border: "1px solid #000000",
-    boxSizing: "border-box",
-    borderRadius: "6px",
-    padding: "3px",
-    width: "300px",
-    color: "black",
-    paddingLeft: "5px",
-  };
-
-  const submitBoxStyle = {
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "3px 19px",
-    background: "rgba(0, 0, 0, 0.04)",
-    border: "1px solid #FFFFFF",
-    boxSizing: "border-box",
-    backdropFilter: "blur(6px)",
-    borderRadius: "10px",
-    height: "40px",
-    width: "250px",
-    fontWeight: "bold",
-  };
-
-  const signupBoxStyle = {
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "3px 19px",
-    background: "rgba(0, 0, 0, 0.04)",
-    border: "1px solid #FFFFFF",
-    boxSizing: "border-box",
-    backdropFilter: "blur(6px)",
-    borderRadius: "10px",
-    width: "300px",
-    fontWeight: "bold",
-  };
-
   return (
     <>
       <Stack background="#2C5282" color="white" h="100vh">
@@ -101,18 +35,6 @@ const PasswordSubmitted = (props) => {
           </VStack>
         </Flex>
       </Stack>
-      {/* { <Paper className={classes.paper}>
-        <Card>{user.email}</Card>
-        <Card>
-          <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-            buttonText="Login"
-            onSuccess={onGoogleSuccess}
-            onFailure={onGoogleFailure}
-            cookiePolicy={"single_host_origin"}
-          />
-        </Card>
-      </Paper> } */}
     </>
   );
 };

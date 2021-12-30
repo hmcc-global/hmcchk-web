@@ -168,13 +168,6 @@ const FormCreator = (props) => {
     }
   };
 
-  const validateDemoForm = (data, e) => {
-    alert("SUCCESS!! :-)\n\n" + JSON.stringify(data, null, 4));
-    reset();
-
-    return false;
-  };
-
   // Watch this to conditionally render custom things
   const ft = watch("fieldType");
 

@@ -75,9 +75,7 @@ const RecoverPassword = (props) => {
         <Container maxW="container.lg">
           <Flex w="100%">
             <Box>
-              <Link
-                href="/"
-              >
+              <Link href="/">
                 <ChevronLeftIcon boxSize={10} />
                 Return to hongkong.hmcc.net
               </Link>
@@ -120,27 +118,15 @@ const RecoverPassword = (props) => {
                     type="submit"
                     name="email link"
                     style={submitBoxStyle}
-                    >
+                  >
                     Send Recovery Link
-                    </Button>
+                  </Button>
                 </VStack>
               </form>
             </VStack>
           </Flex>
         </Container>
       </Stack>
-      {/* { <Paper className={classes.paper}>
-        <Card>{user.email}</Card>
-        <Card>
-          <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-            buttonText="Login"
-            onSuccess={onGoogleSuccess}
-            onFailure={onGoogleFailure}
-            cookiePolicy={"single_host_origin"}
-          />
-        </Card>
-      </Paper> } */}
     </>
   );
 };
