@@ -16,6 +16,7 @@ const SermonCard = ({ sermonData, allSermons }) => {
   let sermonImage = "";
   if (sermonData.sermonSeries[0].image !== null)
     sermonImage = sermonData.sermonSeries[0].image.sourceUrl;
+  else sermonImage = process.env.PUBLIC_URL + "/images/ripple_black.svg";
   return (
     <>
       <Box

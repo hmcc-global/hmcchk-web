@@ -16,6 +16,7 @@ import { customAxios as axios } from "../helpers/customAxios";
 import { DateTime } from "luxon";
 import { DATE_FULL } from "luxon/src/impl/formats";
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 
 const SermonDetails = (props) => {
   const [sermon, setSermon] = useState();
@@ -25,6 +26,7 @@ const SermonDetails = (props) => {
   const [sermonDate, setSermonDate] = useState();
   const [randomSermons, setRandomSermons] = useState([]);
   const currId = props.match.params.id;
+  const history = useHistory();
 
   useEffect(() => {
     (async () => {
@@ -36,11 +38,9 @@ const SermonDetails = (props) => {
     try {
       const { data, status } = await axios.get("/api/sermons/get-sermons");
       if (status === 200) {
-        let currentSermon = data.find(({ id }) => id == parseInt(currId));
+        let currentSermon = data.find(({ id }) => id === parseInt(currId));
         if (!currentSermon) {
-          // TODO-richie
-          // redirect to 404 page
-          return;
+          history.push("/404");
         }
         setAllSermons([...data]);
         setSermon(currentSermon);

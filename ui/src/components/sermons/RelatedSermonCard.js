@@ -9,7 +9,7 @@ const RelatedSermonCard = ({ sermonData, allSermons }) => {
   let sermonImage = "";
   if (sermonData.sermonSeries[0].image !== null)
     sermonImage = sermonData.sermonSeries[0].image.sourceUrl;
-
+  else sermonImage = process.env.PUBLIC_URL + "/images/ripple_black.svg";
   const sermonCardStyle = {
     borderWidth: "1px",
     borderRadius: "20px",
