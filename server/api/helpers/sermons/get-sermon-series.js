@@ -1,3 +1,4 @@
+const he = require('he');
 module.exports = {
   friendlyName: "Get sermon series",
 
@@ -32,7 +33,7 @@ module.exports = {
           let imageObj = media.find((m) => m.id === sermonSeriesImageId);
           acc.push({
             id: id,
-            name: name,
+            name: he.decode(name),
             image: imageObj || null,
           });
           return acc;
