@@ -38,19 +38,16 @@ const UpcomingSermon = ({ upcoming }) => {
     //set display to none if date +7 from start date
     setTimeout(() => {
       if (upcoming != null && upcomingSeries != null) {
-        let startDateSeconds = DateTime.fromISO(
+        let upcomingSermonDateT7 = DateTime.fromISO(
           upcomingSeries.startDate
-        ).toSeconds();
-        if (today / 1000 >= startDateSeconds + 7 * 24 * 3600) {
-          setDisplayModal("none");
-        } else {
-          setDisplayModal("unset");
-        }
+        ).plus({ days: 7 });
+        let today = DateTime.now();
+        setDisplayModal(today >= upcomingSermonDateT7 ? "none" : "unset");
       } else {
         setDisplayModal("none");
       }
     }, 2000);
-  }, [upcoming]);
+  }, [upcoming, upcomingSeries]);
 
   const closeModal = () => {
     setDisplayModal("none");
