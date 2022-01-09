@@ -28,7 +28,7 @@ const VisitUsPage = (props) => {
         <Box
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`url('${process.env.PUBLIC_URL}/images/visitus/header-banner.jpg')`}
+          bgImage={`url('${process.env.PUBLIC_URL}/images/visitus/header-banner.jpeg')`}
           bgPosition="center"
           bgSize="cover"
           px={[6, 12, 36]}
