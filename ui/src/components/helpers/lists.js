@@ -1,5 +1,4 @@
 const accessTypeList = ["unsigned", "signed", "alumni", "admin", "stewardship"];
-
 const lifestageList = [
   "Building Blocks",
   "Undergraduate",
