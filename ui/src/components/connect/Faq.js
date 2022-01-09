@@ -27,7 +27,7 @@ const Faq = (props) => {
           </AccordionButton>
         </h4>
         <AccordionPanel pb={4}>
-          Life Groups happen every Tuesday or Wednesday nights across the city
+          LIFE Groups happen every Tuesday or Wednesday nights across the city
           and university campuses! If you would like to join us, please sign-up{" "}
           <Link
             href="https://tinyurl.com/t2muez3u"
@@ -43,7 +43,7 @@ const Faq = (props) => {
       <AccordionItem border="1px solid #E2E8F0">
         <AccordionButton fontWeight={700} fontSize="lg" p={4}>
           <Box flex="1" textAlign="left">
-            Can I join Sunday Celebration/Church Events/Life Groups if I'm not a
+            Can I join Sunday Celebration/Church Events/LIFE Groups if I'm not a
             Christian?
           </Box>
           <AccordionIcon as={AiFillPlusCircle} w={7} h={7} />
@@ -82,10 +82,10 @@ const Faq = (props) => {
         <AccordionPanel pb={4}>
           In the case that extreme weather condition signals are hoisted by Hong
           Kong Observatory (e.g. T8/9/10), please contact the respective leader
-          of each life group for more information.
+          of each LIFE Group for more information.
           <br />
           <br />
-          If you’re not sure who the leader of the life group is, please contact
+          If you’re not sure who the leader of the LIFE Group is, please contact
           us by dropping an email{" "}
           <Link
             href="mailto:support@hongkong.hmcc.net"
@@ -108,15 +108,15 @@ const Faq = (props) => {
           </AccordionButton>
         </h2>
         <AccordionPanel pb={4}>
-          Life groups will provide online methods of participation, and will
+          LIFE Groups will provide online methods of participation, and will
           practice social distancing guidelines for any in-person gatherings
           (practice good hygiene, wear masks as often as possible, use of hand
           sanitizers, and washing of hands frequently).
           <br />
           <br />
-          Please contact the leader of each life group for more information
+          Please contact the leader of each LIFE Group for more information
           about online arrangements. If you’re not sure who the leader of the
-          life group is, you can contact us by dropping an email{" "}
+          LIFE Group is, you can contact us by dropping an email{" "}
           <Link
             href="mailto:support@hongkong.hmcc.net"
             fontStyle="italic"

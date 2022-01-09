@@ -1,6 +1,8 @@
 import { Box, Flex, Image, Text, chakra, Stack } from "@chakra-ui/react";
 
-const scEventText = "Sunday Celebration: 10AM HKT in-person & Online";
+// const scEventText = "Sunday Celebration: 10AM HKT in-person & Online";
+const scEventText =
+  "Sunday Celebration: 10AM HKT Online only until further notice";
 const FeaturedEvent = (props) => {
   return (
     <Flex w="full" h="full" justify="center">
