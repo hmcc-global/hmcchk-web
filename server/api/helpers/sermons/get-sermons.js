@@ -3,8 +3,8 @@ const he = require('he');
 
 const arrayReducer = (id, list) => {
   return id.reduce((acc, s) => {
-    return [...acc, list.find(l => l.id === s)];
-  },[]);
+    return [...acc, list.find((l) => l.id === s)];
+  }, []);
 };
 
 const transformSermon = (sermon, speakers, sermonSeries, serviceTypes) => {
@@ -22,26 +22,30 @@ const transformSermon = (sermon, speakers, sermonSeries, serviceTypes) => {
     sermonVideoUrl: sermon.sermon_video_url,
     prevSermon: sermon.previous_sermon,
     nextSermon: sermon.next_sermon,
-    status: sermon.status
+    streamLink: sermon.acf.streaming_link,
+    sermonNotes: sermon.acf.tithely_sermon_notes,
+    streamTime:
+      sermon.acf && sermon.acf.time && sermon.acf.time !== ''
+        ? DateTime.fromFormat(sermon.acf.time, 'hh:mm:ss').toFormat('hh:mm a')
+        : '',
+    status: sermon.status,
   };
 };
 
 module.exports = {
-
   friendlyName: 'Get sermons',
 
   description: 'Get all sermons',
 
-  inputs: {
-  },
+  inputs: {},
 
   exits: {
     nonSuccess: {
-      description: 'Error'
+      description: 'Error',
     },
   },
 
-  fn: async function(inputs, exits) {
+  fn: async function (inputs, exits) {
     sails.log.info(`Get sermons..`);
 
     const key = 'sermons';
@@ -60,7 +64,9 @@ module.exports = {
       const speakersList = await sails.helpers.sermons.getSpeakers();
       const sermonSeriesList = await sails.helpers.sermons.getSermonSeries();
       const serviceTypesList = await sails.helpers.sermons.getServiceTypes();
-      let transformedSermons = data.map((s) => transformSermon(s, speakersList, sermonSeriesList, serviceTypesList));
+      let transformedSermons = data.map((s) =>
+        transformSermon(s, speakersList, sermonSeriesList, serviceTypesList)
+      );
 
       if (transformedSermons.length > 0) {
         sails.cache.set(key, transformedSermons);
@@ -72,6 +78,5 @@ module.exports = {
       sails.log(err);
       return exits.nonSuccess(err);
     }
-  }
-
+  },
 };

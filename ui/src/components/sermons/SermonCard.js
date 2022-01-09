@@ -8,15 +8,28 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { DateTime } from "luxon";
+import { useEffect, useState } from "react";
 
 const SermonCard = ({ sermonData, allSermons }) => {
-  let sermonDate = DateTime.fromISO(sermonData.datePreached).toFormat(
-    "LLLL dd, yyyy"
+  const [sermonImage, setSermonImage] = useState(
+    process.env.PUBLIC_URL + "/images/ripple_black.svg"
   );
-  let sermonImage = "";
-  if (sermonData.sermonSeries[0].image !== null)
-    sermonImage = sermonData.sermonSeries[0].image.sourceUrl;
-  else sermonImage = process.env.PUBLIC_URL + "/images/ripple_black.svg";
+  const [sermonDate, setSermonDate] = useState("");
+  const [onlineSermon, setOnlineSermon] = useState(false);
+
+  useEffect(() => {
+    if (sermonData) {
+      if (sermonData.sermonSeries && sermonData.sermonSeries[0].image !== null)
+        setSermonImage(sermonData.sermonSeries[0].image.sourceUrl);
+      if (sermonData.datePreached) {
+        setSermonDate(
+          DateTime.fromISO(sermonData.datePreached).toFormat("LLLL dd, yyyy")
+        );
+      }
+      setOnlineSermon(sermonData.streamLink !== "");
+    }
+  }, [sermonData]);
+
   return (
     <>
       <Box
@@ -35,7 +48,19 @@ const SermonCard = ({ sermonData, allSermons }) => {
             }}
           >
             <AspectRatio width="100%" ratio={16 / 9}>
-              <Image borderTopRadius="20" src={sermonImage} objectFit="cover" />
+              <>
+                <Image
+                  borderTopRadius="20"
+                  src={sermonImage}
+                  objectFit="cover"
+                />
+                {/* TODO-aparedan: Find a way to add a LIVE banner */}
+                {onlineSermon && (
+                  <Box>
+                    <Text>LIVE</Text>
+                  </Box>
+                )}
+              </>
             </AspectRatio>
             <Box position="absolute" left="100%" top="50%">
               <AspectRatio width="20%" ratio={1 / 1}>

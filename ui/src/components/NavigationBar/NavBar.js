@@ -128,9 +128,7 @@ const NavBar = (props) => {
                   <Link href="/events">EVENTS</Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="https://hongkong.sub.hmcc.net/sermons">
-                    SERMONS
-                  </Link>
+                  <Link href="/sermons">SERMONS</Link>
                 </Box>
                 <Box position="relative">
                   <Link href="/give">GIVE</Link>

@@ -1,18 +1,58 @@
-import React from "react";
-import { Stack, Text, Box, AspectRatio } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import {
+  Stack,
+  Text,
+  Box,
+  AspectRatio,
+  Image,
+  Button,
+  Link,
+} from "@chakra-ui/react";
+import { useHistory } from "react-router";
 
-const CurrentSermon = ({ currentSermon }) => {
-  let sermonSeriesName = "";
-  let sermonDesc = "";
-  let videoUrl = "";
-  if (currentSermon != null) {
-    sermonSeriesName = currentSermon.sermonSeries[0].name;
-    sermonDesc = currentSermon.sermonDesc;
-    videoUrl =
-      currentSermon.sermonVideoUrl.split("/")[
-        currentSermon.sermonVideoUrl.split("/").length - 1
-      ];
-  }
+const headers = ["Current Series", "HMCC is ONLINE"];
+
+const CurrentSermon = ({ currentSermon, isOnline }) => {
+  const [header, setHeader] = useState(headers[0]);
+  const [sermonSeriesName, setSermonSeriesName] = useState("");
+  const [sermonDesc, setSermonDesc] = useState("");
+  const [mediaUrl, setMediaUrl] = useState("");
+  const history = useHistory();
+
+  useEffect(() => {
+    if (currentSermon) {
+      currentSermon.sermonSeries[0] &&
+        setSermonSeriesName(currentSermon.sermonSeries[0].name);
+      setSermonDesc(currentSermon.sermonDesc);
+      if (isOnline) {
+        setMediaUrl(currentSermon.sermonSeries[0].image.sourceUrl);
+        setHeader(headers[1]);
+      } else {
+        setMediaUrl(
+          currentSermon.sermonVideoUrl.split("/")[
+            currentSermon.sermonVideoUrl.split("/").length - 1
+          ]
+        );
+      }
+    }
+  }, [currentSermon, isOnline]);
+
+  const onClickHandler = () => {
+    history.push(`/sermons/${currentSermon.id}`);
+  };
+
+  const WatchButton = () => {
+    return (
+      <>
+        {isOnline && (
+          <>
+            <div display={"flex"}></div>
+            <Button onClick={onClickHandler}>Watch Now</Button>
+          </>
+        )}
+      </>
+    );
+  };
 
   return (
     <>
@@ -37,12 +77,13 @@ const CurrentSermon = ({ currentSermon }) => {
               color="#0628A3"
               marginTop="-10px"
             >
-              Current Series
+              {header}
             </Text>
             <Text fontWeight="bold" fontSize="2em">
               {sermonSeriesName}
             </Text>
             <Text fontSize="sm">{sermonDesc}</Text>
+            <WatchButton />
           </Stack>
           <Text
             fontWeight="bold"
@@ -51,7 +92,7 @@ const CurrentSermon = ({ currentSermon }) => {
             display={{ base: "flex", md: "none" }}
             marginTop="0"
           >
-            Current Series
+            {header}
           </Text>
           <Stack alignContent="center" alignItems="center">
             <AspectRatio
@@ -60,14 +101,18 @@ const CurrentSermon = ({ currentSermon }) => {
               ratio={16 / 9}
               display={{ base: "unset", md: "none" }}
             >
-              <iframe
-                width="560"
-                height="315"
-                src={`https://www.youtube.com/embed/${videoUrl}`}
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+              {isOnline ? (
+                <Image src={mediaUrl} objectFit="cover" />
+              ) : (
+                <iframe
+                  width="560"
+                  height="315"
+                  src={`https://www.youtube.com/embed/${mediaUrl}`}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              )}
             </AspectRatio>
           </Stack>
           <AspectRatio
@@ -76,14 +121,18 @@ const CurrentSermon = ({ currentSermon }) => {
             ratio={16 / 9}
             display={{ base: "none", md: "usnet" }}
           >
-            <iframe
-              width="560"
-              height="315"
-              src={`https://www.youtube.com/embed/${videoUrl}`}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            {isOnline ? (
+              <Image src={mediaUrl} objectFit="cover" />
+            ) : (
+              <iframe
+                width="560"
+                height="315"
+                src={`https://www.youtube.com/embed/${mediaUrl}`}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            )}
           </AspectRatio>
           <Stack
             alignItems="left"
@@ -96,6 +145,7 @@ const CurrentSermon = ({ currentSermon }) => {
             <Text fontSize="sm" lineHeight="shorter">
               {sermonDesc}
             </Text>
+            <WatchButton />
           </Stack>
         </Stack>
       </Box>
