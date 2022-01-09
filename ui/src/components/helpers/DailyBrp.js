@@ -72,7 +72,7 @@ const DailyBrp = () => {
   fetch(`${process.env.PUBLIC_URL}/assets/brp_year_${whichYear}.json`)
     .then((res) => res.json())
     .then((data) => {
-      setBrpString(determinePassage(data));
+      setBrpString(determinePassage(data["plan"]["reading"]));
     })
     .catch(function (err) {
       console.log(err, " error");
