@@ -77,7 +77,6 @@ const LoginContainer = (props) => {
   const onSubmit = (data) => {
     postLogin(data.email, data.password);
   };
-  // const location = useLocation();
 
   const inputBoxStyle = {
     background: "#ffffff",

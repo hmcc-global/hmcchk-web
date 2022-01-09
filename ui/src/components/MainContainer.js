@@ -152,7 +152,7 @@ const MainContainer = () => {
           permissions={["unsigned", "signed", "alumni", "admin", "stewardship"]}
           component={UserProfileContainer}
         />
-        {/* <PrivateRoute
+        <PrivateRoute
           exact
           path="/clear-cache/"
           permissions={["admin", "stewardship"]}
@@ -164,7 +164,7 @@ const MainContainer = () => {
           permissions={["admin", "stewardship"]}
           component={AdminLoginContainer}
         />
-        <PrivateRoute
+        {/* <PrivateRoute
           exact
           path="/admin/home"
           permissions={["admin", "stewardship"]}
@@ -187,7 +187,7 @@ const MainContainer = () => {
           path="/admin/giving"
           permissions={["stewardship"]}
           component={AdminGiving}
-        /> 
+        />  */}
         <PrivateRoute
           exact
           path="/admin/login"
@@ -199,7 +199,7 @@ const MainContainer = () => {
           path="/admin/:pageName"
           permissions={["admin", "stewardship"]}
           component={AdminContainer}
-        />*/}
+        />
         <PrivateRoute path="*" permissions={["public"]} component={NoMatch} />
       </Switch>
       <FooterContainer />

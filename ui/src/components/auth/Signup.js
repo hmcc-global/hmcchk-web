@@ -99,7 +99,6 @@ const Signup = (props) => {
           history.push("/login");
         }, 3000);
       }
-      // history.push("/login");
     } catch (err) {
       if (err.response && err.response.status === 409) {
         console.log("EMAIL already exists");
