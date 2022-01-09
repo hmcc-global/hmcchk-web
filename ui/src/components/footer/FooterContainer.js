@@ -58,10 +58,10 @@ export default function FooterContainer() {
               </Text>
             </Button>
             <Box>
-              <Text fontWeight="bold" align='center'>
+              <Text fontWeight="bold" align="center">
                 Harvest Mission Community Church
               </Text>
-              <Text fontWeight="bold" align='center'>
+              <Text fontWeight="bold" align="center">
                 (Hong Kong)
               </Text>
             </Box>

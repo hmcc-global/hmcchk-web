@@ -23,9 +23,9 @@ const DailyBrp = () => {
 
     //check if its a leapyear
     intYear = today.toFormat("yyyy");
-    if (intYear % 4 == 0) {
-      if (intYear % 100 == 0) {
-        if (intYear % 400 == 0) {
+    if (intYear % 4 === 0) {
+      if (intYear % 100 === 0) {
+        if (intYear % 400 === 0) {
           leapYear = true;
         }
       } else {
@@ -36,16 +36,16 @@ const DailyBrp = () => {
     //if its a leap year
     if (leapYear) {
       if (daysPassed >= 58 && daysPassed <= 59) {
-        if (intYear % 2 == 0) {
-          if (daysPassed == 58) {
+        if (intYear % 2 === 0) {
+          if (daysPassed === 58) {
             return "Exodus 23";
-          } else if (daysPassed == 59) {
+          } else if (daysPassed === 59) {
             return "Exodus 24";
           }
-        } else if (intYear % 2 == 1) {
-          if (daysPassed == 58) {
+        } else if (intYear % 2 === 1) {
+          if (daysPassed === 58) {
             return "Psalms 63-64";
-          } else if (daysPassed == 59) {
+          } else if (daysPassed === 59) {
             return "Psalm 65";
           }
         }
@@ -63,7 +63,7 @@ const DailyBrp = () => {
 
   // alternate between two years
   let year = today.toFormat("yyyy");
-  if (year % 2 == 0) whichYear = "one";
+  if (year % 2 === 0) whichYear = "one";
   else whichYear = "two";
 
   // even (year one) : true, odd (year two) : false

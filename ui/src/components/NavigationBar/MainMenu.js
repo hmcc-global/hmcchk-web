@@ -20,12 +20,14 @@ import {
   AccordionPanel,
   Container,
   AccordionIcon,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { SocialIcon } from "react-social-icons";
 //import "./removeScrollbar.css"
 
 const MainMenu = ({ login, onClose }) => {
   const onLogout = () => {
+    onClose();
     localStorage.clear();
     window.location.reload();
   };
@@ -384,7 +386,6 @@ const MainMenu = ({ login, onClose }) => {
                       </Button>
                       <Button
                         onClick={onLogout}
-                        onClick={onClose}
                         marginBottom="5"
                         width="100%"
                         style={{

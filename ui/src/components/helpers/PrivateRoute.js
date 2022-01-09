@@ -20,6 +20,10 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
       updateAxiosClient(toVerify);
       return data;
     } catch (err) {
+      if (err.response.data.raw === "token-expired") {
+        localStorage.clear();
+        window.location.reload();
+      }
       return {};
     }
   };
@@ -55,6 +59,14 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
           if (noUser) {
             if (noTokenExists) return <Component {...props} />;
             else {
+              switch (props.location.pathname) {
+                case "/login":
+                  if (user) {
+                    props.history.push("/profile");
+                    return <UserProfileContainer {...props} user={userObj} />;
+                  }
+                  break;
+              }
               props.history.push("/");
               return <HomeContainer {...props} user={userObj} />;
             }

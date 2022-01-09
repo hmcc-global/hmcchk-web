@@ -39,6 +39,9 @@ module.exports = {
 
       return exits.success(result);
     } catch (err) {
+      if (err instanceof jwt.TokenExpiredError, err) {
+        return exits.invalid("token-expired")
+      }
       return exits.invalid(err);
     }
   },

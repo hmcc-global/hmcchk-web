@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { customAxios as axios } from "../helpers/customAxios";
 import { Box, Container, Text } from "@chakra-ui/react";
 
 const ConfirmEmailPage = (props) => {
@@ -8,9 +8,11 @@ const ConfirmEmailPage = (props) => {
   useEffect(async () => {
     const confirmEmail = async () => {
       try {
-        const { token } = props.match.params;
+        const search = props.location.search;
+        const token = search.replace("?token=", "");
+        console.log(token);
         const { data } = await axios.post("/api/auth/confirm-email", {
-          token,
+          token: token,
         });
         setIsConfirmed(data);
       } catch (err) {

@@ -6,7 +6,6 @@ module.exports = {
   extendedDescription: `This creates a new user record in the database, signs in the requesting user agent
 by modifying its [session](https://sailsjs.com/documentation/concepts/sessions), and
 (if emailing with Mailgun is enabled) sends an account verification email.
-
 If a verification email is sent, the new user's account is put in an "unconfirmed" state
 until they confirm they are using a legitimate email address (by clicking the link in
 the account verification message.)`,
@@ -74,7 +73,7 @@ the account verification message.)`,
     },
 
     missingRequiredFields: {
-      statusCode: 409,
+      statusCode: 422,
       description: "Please fill in the required fields.",
     },
   },
@@ -153,7 +152,7 @@ the account verification message.)`,
       sails.log.info(`New user signup for ${emailAddress}.`);
       return exits.success();
     } catch (err) {
-      sails.log(err);
+      if (err.raw === "emailAlreadyInUse") return exits.emailAlreadyInUse();
       return exits.error(err);
     }
   },
