@@ -5,18 +5,35 @@ import {
   Button,
   Stack,
   AspectRatio,
-  Image,
   Link,
   Text,
   Container,
-} from "@chakra-ui/react";
-import { ChevronLeftIcon } from "@chakra-ui/icons";
-import RelatedSermonCard from "./RelatedSermonCard";
-import { customAxios as axios } from "../helpers/customAxios";
-import { DateTime } from "luxon";
-import { DATE_FULL } from "luxon/src/impl/formats";
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router";
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Tabs,
+  Tab,
+  TabList,
+  TabPanels,
+  TabPanel,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from '@chakra-ui/react';
+import { ChevronLeftIcon } from '@chakra-ui/icons';
+import RelatedSermonCard from './RelatedSermonCard';
+import { customAxios as axios } from '../helpers/customAxios';
+import { DateTime } from 'luxon';
+import { DATE_FULL } from 'luxon/src/impl/formats';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
+import EventsPage from '../events/EventsPage';
 
 const SermonDetails = (props) => {
   const [sermon, setSermon] = useState();
@@ -27,8 +44,19 @@ const SermonDetails = (props) => {
   const [randomSermons, setRandomSermons] = useState([]);
   const [onlineSermon, setOnlineSermon] = useState(false);
   const [noteId, setNoteId] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
   const currId = props.match.params.id;
   const history = useHistory();
+
+  const onOpen = (e) => {
+    if (!e.target.href) {
+      setIsOpen(true);
+    }
+  };
+
+  const onClose = (e) => {
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     (async () => {
@@ -38,11 +66,11 @@ const SermonDetails = (props) => {
 
   const getData = async () => {
     try {
-      const { data, status } = await axios.get("/api/sermons/get-sermons");
+      const { data, status } = await axios.get('/api/sermons/get-sermons');
       if (status === 200) {
         let currentSermon = data.find(({ id }) => id === parseInt(currId));
         if (!currentSermon) {
-          history.push("/404");
+          history.push('/404');
         }
         setAllSermons([...data]);
         if (currentSermon.streamLink && currentSermon.sermonNotes) {
@@ -50,7 +78,7 @@ const SermonDetails = (props) => {
         }
         setSermon(currentSermon);
       } else {
-        throw Error("Something went wrong");
+        throw Error('Something went wrong');
       }
     } catch (err) {
       console.log(err);
@@ -89,10 +117,10 @@ const SermonDetails = (props) => {
   };
 
   const getVideoCode = () => {
-    if (sermon.streamLink === "") {
+    if (sermon.streamLink === '') {
       let sermonVideoCode =
-        sermon.sermonVideoUrl.split("/")[
-          sermon.sermonVideoUrl.split("/").length - 1
+        sermon.sermonVideoUrl.split('/')[
+          sermon.sermonVideoUrl.split('/').length - 1
         ];
       setSermonVideoCode(`https://www.youtube.com/embed/${sermonVideoCode}`);
     } else {
@@ -114,7 +142,7 @@ const SermonDetails = (props) => {
       (random) =>
         DateTime.fromISO(sermon.datePreached).hasSame(
           DateTime.fromISO(random.datePreached),
-          "year"
+          'year'
         ) && random.sermonSeries[0].name !== sermon.sermonSeries[0].name
     );
     let randomSermons = [];
@@ -135,26 +163,238 @@ const SermonDetails = (props) => {
   const OnlineSection = () => {
     return (
       <>
+        <HStack>
+          <Button width={'33%'} onClick={onOpen}>
+            Connection Issues
+          </Button>
+          <Modal size="2xl" isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalCloseButton />
+              <ModalHeader>Connection Issues</ModalHeader>
+              <ModalBody>
+                In cases where the livestream video is not working or sermon
+                notes are not up to date, please <u>hard refresh</u> using the
+                following commands: <br />
+                <br />
+                <b>On a PC:</b> Press CTRL + SHIFT + R <br />
+                <b>On a Mac (Chrome):</b> Press CMD + SHIFT + R <br />
+                <b>On a Mac (Safari):</b> Press CMD + OPTION + E (afterwards)
+                CMD + R
+                <br />
+                <br />
+                This refreshes your browser's content and ensures proper loading
+                of up-to-date page content Alternatively, you can choose to open
+                the site through Incognito browsing If you have issues loading
+                the video stream on this site, please try and access the stream
+                at{' '}
+                <Link
+                  href="http://youtube.com/c/hmcchk"
+                  fontStyle="italic"
+                  color="blue"
+                  target="_blank"
+                >
+                  http://youtube.com/c/hmcchk
+                </Link>
+                .
+              </ModalBody>
+              <ModalFooter />
+            </ModalContent>
+          </Modal>
+          <Button
+            variant="outline"
+            width={'33%'}
+            as="a"
+            href="https://bit.ly/hmcc-prayer"
+            target="_blank"
+          >
+            Need Prayer?
+          </Button>
+          <Button
+            width={'33%'}
+            bg="#0628A3"
+            color="white"
+            as="a"
+            href="/give"
+            target="_blank"
+          >
+            Giving
+          </Button>
+        </HStack>
         <Box bgColor="#F1F1F3" p={5} borderRadius={15}>
           <Text fontWeight="bold" color="#0628A3" fontSize="md">
             Description:
           </Text>
           <Text>{sermon.sermonDesc}</Text>
         </Box>
-        <HStack justifyContent="space-between">
-          <Text fontWeight="bold" color="#0628A3" fontSize="xl">
-            Sermon Notes
-          </Text>
-          <Button onClick={refreshSermonNotes}>Refresh Notes</Button>
-        </HStack>
-        <AspectRatio mb="5" width="100%" height={{ base: "100vh", md: "50vh" }}>
-          <iframe
-            key={noteId}
-            title="Sermon Notes"
-            class="resource-tab"
-            src={sermon.sermonNotes}
-          ></iframe>
-        </AspectRatio>
+        <Tabs align="center">
+          <TabList>
+            <Tab>Sermon Notes</Tab>
+            <Tab>Announcements</Tab>
+            <Tab>New to HMCC</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <Button
+                mb={3}
+                width="100%"
+                fontWeight="bold"
+                bg="#F1F1F3"
+                color="#0628A3"
+                fontSize="md"
+                onClick={refreshSermonNotes}
+              >
+                Refresh Notes
+              </Button>
+              <AspectRatio
+                mb="5"
+                width="100%"
+                height={{ base: '100vh', md: '50vh' }}
+              >
+                <iframe
+                  key={noteId}
+                  title="Sermon Notes"
+                  class="resource-tab"
+                  src={sermon.sermonNotes}
+                ></iframe>
+              </AspectRatio>
+            </TabPanel>
+            <TabPanel>
+              <AspectRatio
+                mb="5"
+                width="100%"
+                height={{ base: '100vh', md: '50vh' }}
+              >
+                <iframe src="/events"></iframe>
+                {/* <EventsPage props={props} /> */}
+              </AspectRatio>
+            </TabPanel>
+            <TabPanel>
+              <Accordion allowToggle allowMultiple>
+                <AccordionItem>
+                  <AccordionButton
+                    _expanded={{ bg: '#0628A3', color: 'white' }}
+                    justifyContent="space-between"
+                  >
+                    Join Our ZOOM Call!
+                    <AccordionIcon />
+                  </AccordionButton>
+                  <AccordionPanel>
+                    As a church, we believe that there is power when we worship
+                    together and can fellowship with one another in real-time.
+                    We encourage our LIFE Groups (small group communities) to
+                    zoom together LIVE during the Sunday Celebration to engage
+                    with each other for worship, discussion time, etc. If you
+                    are new and joining us for the first time or are not yet
+                    part of a LIFE Group, feel free to join this ZOOM link to
+                    worship together with some people in our welcoming team to
+                    get connected. <br />
+                    <br />
+                    <b>Join Zoom Meeting</b>
+                    <br />
+                    <Link
+                      href="https://us02web.zoom.us/j/87590888306?pwd=dG5lcUdta2liaVduZ2gwWDdTbndpZz09"
+                      fontStyle="bold"
+                      color="blue"
+                      target="_blank"
+                    >
+                      Meeting Link
+                    </Link>
+                    <br />
+                    <br />
+                    <b>Meeting ID:</b> 875 9088 8306
+                    <br />
+                    <b>Passcode:</b> 434106
+                  </AccordionPanel>
+                </AccordionItem>
+                <AccordionItem>
+                  <AccordionButton
+                    _expanded={{ bg: '#0628A3', color: 'white' }}
+                    justifyContent="space-between"
+                  >
+                    Who are we?
+                    <AccordionIcon />
+                  </AccordionButton>
+                  <AccordionPanel>
+                    Over 7 million people live in the city of Hong Kong, a
+                    fast-paced hub for people all over Asia. We believe that
+                    only the <b>power of the gospel</b> is able to{' '}
+                    <b>provide hope</b> to transform a life in a global city
+                    like Hong Kong. No matter what your cultural background,
+                    stage of life, field of study or profession is, and no
+                    matter where you are in your spiritual journey, we believe
+                    that you can experience the transforming power of God at
+                    Harvest Mission Community Church (HMCC). <br />
+                    <br />
+                    We hope that you will experience God as you worship with us
+                    and get connected to our community of faith. Through this,
+                    we pray that you will catch a glimpse of God’s desire to
+                    transform your life so that you can go out and transform the
+                    world.
+                  </AccordionPanel>
+                </AccordionItem>
+                <AccordionItem>
+                  <AccordionButton
+                    _expanded={{ bg: '#0628A3', color: 'white' }}
+                    justifyContent="space-between"
+                  >
+                    Vision and Mission
+                    <AccordionIcon />
+                  </AccordionButton>
+                  <AccordionPanel>
+                    <b>
+                      <u>Vision</u>
+                    </b>
+                    <br />
+                    Multiplying churches in campuses and cities to transform the
+                    next generation among the nations. <br />
+                    <br />
+                    <b>
+                      <u>Mission</u>
+                    </b>
+                    <br />
+                    To transform lost people into Christ's disciples who will
+                    then transform the world.
+                  </AccordionPanel>
+                </AccordionItem>
+                <AccordionItem>
+                  <AccordionButton
+                    _expanded={{ bg: '#0628A3', color: 'white' }}
+                    justifyContent="space-between"
+                  >
+                    Get Connected
+                    <AccordionIcon />
+                  </AccordionButton>
+                  <AccordionPanel>
+                    No matter what stage of life you’re in, you are not meant to
+                    experience life alone. At HMCC, we believe in the power of
+                    community and the fullness of life that it offers -- which
+                    is why we believe in <b>LIFE Groups</b>. <br />
+                    <br /> LIFE Group is{' '}
+                    <b>more than just a weekly Bible study</b>. It’s about
+                    loving one another, investing in the community, growing in
+                    our faith, and enjoying life together as a family living out
+                    the Gospel. If you are new to our church, the best way to
+                    get a taste of who we are and what we believe in is to check
+                    out one of our LIFE Groups! <br />
+                    <br />
+                    <b>
+                      Get connected and sign up{' '}
+                      <Link
+                        href="https://rebrand.ly/hmccLG2122"
+                        color="blue"
+                        target="_blank"
+                      >
+                        here
+                      </Link>
+                      !
+                    </b>
+                  </AccordionPanel>
+                </AccordionItem>
+              </Accordion>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
       </>
     );
   };
@@ -172,7 +412,7 @@ const SermonDetails = (props) => {
                   color="black"
                   justifyContent="left"
                   leftIcon={<ChevronLeftIcon />}
-                  display={{ base: "none", md: "flex" }}
+                  display={{ base: 'none', md: 'flex' }}
                 >
                   See all past sermons
                 </Button>
@@ -185,20 +425,20 @@ const SermonDetails = (props) => {
                   title="Video player"
                   frameBorder="0"
                   allow={`accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; ${
-                    sermon.streamLink ? "autoplay;" : ""
+                    sermon.streamLink ? 'autoplay;' : ''
                   }`}
                   allowFullScreen
                 ></iframe>
               </AspectRatio>
 
-              <Text fontWeight="bold" fontSize={{ base: "xl", md: "3xl" }}>
+              <Text fontWeight="bold" fontSize={{ base: 'xl', md: '3xl' }}>
                 {sermon.title}
               </Text>
               <Stack spacing={8}>
                 <Box>
                   <Stack
-                    spacing={{ base: "normal", md: "auto" }}
-                    direction={{ base: "column", md: "row" }}
+                    spacing={{ base: 'normal', md: 'auto' }}
+                    direction={{ base: 'column', md: 'row' }}
                   >
                     <HStack>
                       <Text fontWeight="bold">Speaker:</Text>
@@ -221,8 +461,8 @@ const SermonDetails = (props) => {
                     )}
                   </Stack>
                   <Stack
-                    spacing={{ base: "normal", md: "auto" }}
-                    direction={{ base: "column", md: "row" }}
+                    spacing={{ base: 'normal', md: 'auto' }}
+                    direction={{ base: 'column', md: 'row' }}
                   >
                     {sermon.streamTime ? (
                       <>
