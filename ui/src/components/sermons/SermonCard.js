@@ -11,8 +11,8 @@ import { Link } from 'react-router-dom';
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
 
-const CircleIcon = (props) => (
-  <Icon viewBox="0 0 200 200" {...props}>
+const CircleIcon = () => (
+  <Icon viewBox="0 0 200 200">
     <path
       fill="currentColor"
       d="M 75, 75 m -50, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
@@ -64,7 +64,6 @@ const SermonCard = ({ sermonData, allSermons }) => {
                   src={sermonImage}
                   objectFit="cover"
                 />
-                {/* TODO-aparedan: Find a way to add a LIVE banner */}
                 {onlineSermon && (
                   <Box pr={'65%'} pb={'40%'}>
                     <HStack
