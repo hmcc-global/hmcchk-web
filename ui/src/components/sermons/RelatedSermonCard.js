@@ -1,7 +1,7 @@
 import { AspectRatio, Box, Image, Text, Stack, VStack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { DateTime } from 'luxon';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const RelatedSermonCard = ({ sermonData, allSermons }) => {
   let sermonDate = DateTime.fromISO(sermonData.datePreached).toFormat(
@@ -11,13 +11,6 @@ const RelatedSermonCard = ({ sermonData, allSermons }) => {
   if (sermonData.sermonSeries[0].image !== null)
     sermonImage = sermonData.sermonSeries[0].image.sourceUrl;
   else sermonImage = process.env.PUBLIC_URL + '/images/ripple_black.svg';
-
-  const [onlineSermon, setOnlineSermon] = useState(false);
-  useEffect(() => {
-    if (sermonData) {
-      setOnlineSermon(sermonData.streamLink !== '');
-    }
-  });
 
   const sermonCardStyle = {
     borderWidth: '1px',

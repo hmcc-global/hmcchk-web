@@ -13,10 +13,16 @@ import {
   AccordionIcon,
   AspectRatio,
 } from '@chakra-ui/react';
-import { ChevronLeftIcon, RepeatIcon } from '@chakra-ui/icons';
+import { RepeatIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 
-const OnlinePageTabs = ({ noteId, sermonNotes, refreshCallback }) => {
+const OnlinePageTabs = ({ sermonNotes }) => {
+  const [noteId, setNoteId] = useState(0);
+
+  const refreshSermonNotes = () => {
+    setNoteId(noteId + 1);
+  }
+
   return (
     <Tabs isFitted>
       <TabList orientation="horizontal">
@@ -31,7 +37,7 @@ const OnlinePageTabs = ({ noteId, sermonNotes, refreshCallback }) => {
             bg="#F1F1F3"
             color="#0628A3"
             fontSize="md"
-            onClick={refreshCallback}
+            onClick={refreshSermonNotes}
           >
             <RepeatIcon />
           </Button>
