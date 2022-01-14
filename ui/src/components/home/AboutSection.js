@@ -96,7 +96,7 @@ const AboutSection = () => {
                 textDecoration: "none",
               }}
               as={Link}
-              href="https://hongkong.sub.hmcc.net/about/who-we-are"
+              href="/about-us"
             >
               {"More about us >"}
             </Button>

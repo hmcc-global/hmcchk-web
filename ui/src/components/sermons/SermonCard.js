@@ -5,18 +5,41 @@ import {
   Text,
   HStack,
   VStack,
-} from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import { DateTime } from "luxon";
+  Icon,
+} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import { DateTime } from 'luxon';
+import { useEffect, useState } from 'react';
+
+const CircleIcon = () => (
+  <Icon viewBox="0 0 200 200">
+    <path
+      fill="currentColor"
+      d="M 75, 75 m -50, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
+    />
+  </Icon>
+);
 
 const SermonCard = ({ sermonData, allSermons }) => {
-  let sermonDate = DateTime.fromISO(sermonData.datePreached).toFormat(
-    "LLLL dd, yyyy"
+  const [sermonImage, setSermonImage] = useState(
+    process.env.PUBLIC_URL + '/images/ripple_black.svg'
   );
-  let sermonImage = "";
-  if (sermonData.sermonSeries[0].image !== null)
-    sermonImage = sermonData.sermonSeries[0].image.sourceUrl;
-  else sermonImage = process.env.PUBLIC_URL + "/images/ripple_black.svg";
+  const [sermonDate, setSermonDate] = useState('');
+  const [onlineSermon, setOnlineSermon] = useState(false);
+
+  useEffect(() => {
+    if (sermonData) {
+      if (sermonData.sermonSeries && sermonData.sermonSeries[0].image !== null)
+        setSermonImage(sermonData.sermonSeries[0].image.sourceUrl);
+      if (sermonData.datePreached) {
+        setSermonDate(
+          DateTime.fromISO(sermonData.datePreached).toFormat('LLLL dd, yyyy')
+        );
+      }
+      setOnlineSermon(sermonData.streamLink !== '');
+    }
+  }, [sermonData]);
+
   return (
     <>
       <Box
@@ -35,13 +58,33 @@ const SermonCard = ({ sermonData, allSermons }) => {
             }}
           >
             <AspectRatio width="100%" ratio={16 / 9}>
-              <Image borderTopRadius="20" src={sermonImage} objectFit="cover" />
+              <>
+                <Image
+                  borderTopRadius="20"
+                  src={sermonImage}
+                  objectFit="cover"
+                />
+                {onlineSermon && (
+                  <Box pr={'65%'} pb={'40%'}>
+                    <HStack
+                      px={{ base: '0', md: '2', lg: '3' }}
+                      color="white"
+                      bg="red.500"
+                      boxShadow="dark-lg"
+                    >
+                      <Text fontWeight={'800'}>
+                        <CircleIcon /> LIVE
+                      </Text>
+                    </HStack>
+                  </Box>
+                )}
+              </>
             </AspectRatio>
             <Box position="absolute" left="100%" top="50%">
               <AspectRatio width="20%" ratio={1 / 1}>
                 <Image
                   borderRadius="100%"
-                  src={process.env.PUBLIC_URL + "/images/PlayButton.png"}
+                  src={process.env.PUBLIC_URL + '/images/PlayButton.png'}
                 />
               </AspectRatio>
             </Box>

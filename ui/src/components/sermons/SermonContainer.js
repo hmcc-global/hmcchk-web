@@ -11,6 +11,7 @@ const SermonContainer = (props) => {
   const [sermons, setSermons] = useState([]);
   const [events, setEvents] = useState([]);
   const [currentSermon, setCurrentSermon] = useState();
+  const [onlineSermon, setOnlineSermon] = useState(false);
 
   useEffect(() => {
     getData();
@@ -22,7 +23,14 @@ const SermonContainer = (props) => {
       const { data, status } = await axios.get("/api/sermons/get-sermons");
       if (status === 200) {
         setSermons([...data]);
-        setCurrentSermon(data.find(({ nextSermon }) => nextSermon == null));
+        let current = data.find(({ nextSermon }) => nextSermon == null);
+        if (
+          current.streamLink &&
+          current.sermonNotes &&
+          current.sermonSeries[0]
+        )
+          setOnlineSermon(true);
+        setCurrentSermon(current);
       } else {
         throw Error("Something went wrong");
       }
@@ -62,7 +70,7 @@ const SermonContainer = (props) => {
 
   return (
     <>
-      <UpcomingSermon upcoming={events} />
+      {!onlineSermon && <UpcomingSermon upcoming={events} />}
       <Container maxW="container.lg">
         <Box
           marginTop="20px"
@@ -92,7 +100,7 @@ const SermonContainer = (props) => {
         >
           Sermons
         </Heading>
-        <CurrentSermon currentSermon={currentSermon} />
+        <CurrentSermon currentSermon={currentSermon} isOnline={onlineSermon} />
         <SermonCardList allSermons={sermons} />
       </Container>
     </>
