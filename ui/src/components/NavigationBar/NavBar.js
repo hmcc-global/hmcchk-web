@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Flex,
   Center,
@@ -22,26 +22,26 @@ import {
   Link,
   LinkOverlay,
   useDisclosure,
-} from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import { customAxios as axios } from "../helpers/customAxios";
-import MainMenu from "./MainMenu";
+} from '@chakra-ui/react';
+import { useSelector } from 'react-redux';
+import { customAxios as axios } from '../helpers/customAxios';
+import MainMenu from './MainMenu';
 
 const NavBar = (props) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const user = useSelector((state) => state.user);
-  const [username, setUsername] = useState("");
-  const welcomeMsg = ["Login or Sign up", `Hi, ${username}`];
+  const [username, setUsername] = useState('');
+  const welcomeMsg = ['Login or Sign up', `Hi, ${username}`];
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const liveScStyle = {
-    border: "5px",
-    backgroundColor: "#EB4335",
-    color: "white",
-    fontSize: "xs",
-    justify: "center",
-    fontWeight: "600",
-    align: "center",
+    border: '5px',
+    backgroundColor: '#EB4335',
+    color: 'white',
+    fontSize: 'xs',
+    justify: 'center',
+    fontWeight: '600',
+    align: 'center',
   };
 
   const onLogout = () => {
@@ -50,7 +50,7 @@ const NavBar = (props) => {
   };
 
   const getUserObj = async (token) => {
-    const { data } = await axios.post("/api/auth/verify-token", {
+    const { data } = await axios.post('/api/auth/verify-token', {
       token: token,
     });
     return data;
@@ -60,7 +60,7 @@ const NavBar = (props) => {
     const userObj = await getUserObj(user);
     if (userObj) {
       const { fullName } = userObj;
-      setUsername(fullName.split(" ")[0]);
+      setUsername(fullName.split(' ')[0]);
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
@@ -74,30 +74,30 @@ const NavBar = (props) => {
       <Flex w="100vw" background="rgba(0, 0, 0, 0.4)" justify="center">
         <Flex
           w="100vw"
-          justify={["space-between", "space-around"]}
+          justify={['space-between', 'space-around']}
           backgroundColor="white"
           backdrop-filter="blur(39px)"
           align="center"
-          fontSize={{ md: "xs", lg: "sm", xl: "md" }}
-          h={{ md: "7vh", lg: "7vh", xl: "8.5vh" }}
+          fontSize={{ md: 'xs', lg: 'sm', xl: 'md' }}
+          h={{ md: '7vh', lg: '7vh', xl: '8.5vh' }}
         >
           <Container maxW="container.lg">
             <Flex
-              justify={["space-between", "space-around"]}
+              justify={['space-between', 'space-around']}
               align="center"
-              fontSize={{ md: "xs", lg: "sm", xl: "md" }}
-              h={{ md: "7vh", lg: "7vh", xl: "8.5vh" }}
+              fontSize={{ md: 'xs', lg: 'sm', xl: 'md' }}
+              h={{ md: '7vh', lg: '7vh', xl: '8.5vh' }}
             >
               <Box position="relative">
                 <LinkOverlay href="/">
                   <Image
                     h={{
-                      base: "3vh",
-                      sm: "3vh",
-                      md: "3vh",
-                      lg: "5vh",
+                      base: '3vh',
+                      sm: '3vh',
+                      md: '3vh',
+                      lg: '5vh',
                     }}
-                    src={process.env.PUBLIC_URL + "/images/ripple_black.svg"}
+                    src={process.env.PUBLIC_URL + '/images/ripple_black.svg'}
                     alt="Logo of HMCC"
                   />
                 </LinkOverlay>
@@ -109,7 +109,7 @@ const NavBar = (props) => {
                 color="black"
                 justify="center"
                 align="center"
-                display={{ base: "none", md: "flex" }}
+                display={{ base: 'none', md: 'flex' }}
                 marginLeft="40px"
                 isInline
               >
@@ -143,7 +143,7 @@ const NavBar = (props) => {
                 <Box
                   fontWeight="600"
                   color="#1A365D"
-                  display={{ base: "none", md: "flex" }}
+                  display={{ base: 'none', md: 'flex' }}
                 >
                   {loggedIn ? (
                     <Menu>
@@ -173,11 +173,11 @@ const NavBar = (props) => {
                   <Button
                     ref={btnRef}
                     onClick={onOpen}
-                    style={{ background: "none" }}
+                    style={{ background: 'none' }}
                   >
                     <Image
                       h="2.5vh"
-                      src={process.env.PUBLIC_URL + "/images/menu.svg"}
+                      src={process.env.PUBLIC_URL + '/images/menu.svg'}
                       alt="Menu Button"
                     />
                   </Button>
@@ -188,7 +188,7 @@ const NavBar = (props) => {
         </Flex>
       </Flex>
 
-      {currDate == "Sun" ? (
+      {currDate == 'Sun' ? (
         <Flex
           w="100vw"
           background="#ffffff"
@@ -206,9 +206,9 @@ const NavBar = (props) => {
             <Stack justify="center" align="center" isInline>
               <Center>
                 <Link
-                  href="https://hongkong.sub.hmcc.net/online/"
+                  href="/sermons"
                   target="_blank"
-                  style={{ lineHeight: "0" }}
+                  style={{ lineHeight: '0' }}
                 >
                   <Button
                     h="3.5vh"
@@ -239,9 +239,9 @@ const NavBar = (props) => {
           backgroundColor="#2c5282"
           backgroundSize="70%"
           backgroundPosition="120% 75%"
-          width={{ base: "100%", md: "70%" }}
-          style={{ position: "absolute" }}
-          marginLeft={{ base: "none", md: "15%" }}
+          width={{ base: '100%', md: '70%' }}
+          style={{ position: 'absolute' }}
+          marginLeft={{ base: 'none', md: '15%' }}
         >
           <DrawerCloseButton
             position="absolute"
