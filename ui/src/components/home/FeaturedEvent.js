@@ -1,6 +1,8 @@
-import { Box, Flex, Image, Text, chakra, Stack } from "@chakra-ui/react";
+import { Box, Flex, Image, Text, chakra, Stack, Link } from "@chakra-ui/react";
 
-const scEventText = "Sunday Celebration: 10AM HKT in-person & Online";
+// const scEventText = "Sunday Celebration: 10AM HKT in-person & Online";
+const scEventText =
+  "Sunday Celebration: 10AM HKT Online only until further notice";
 const FeaturedEvent = (props) => {
   return (
     <Flex w="full" h="full" justify="center">
@@ -24,6 +26,7 @@ const FeaturedEvent = (props) => {
           </Text>
         </Stack>
         {/* TODO figure out a way to put a placeholder container */}
+        {/* <Link href="/giving-tuesday"> */}
         <Image
           borderRadius={10}
           borderWidth={1}
@@ -31,9 +34,10 @@ const FeaturedEvent = (props) => {
           mt={5}
           w={["100vw", "100vw", "100vw", "65vw", "100vw", "100vw"]}
           h="auto"
-          src={process.env.PUBLIC_URL + "/images/home/featured.gif"}
+          src={process.env.PUBLIC_URL + "/images/home/featured.jpeg"}
           alt="Featured Event"
         />
+        {/* </Link> */}
       </Box>
     </Flex>
   );

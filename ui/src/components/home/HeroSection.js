@@ -15,6 +15,7 @@ import {
 const heroText = "Transforming Lives,\nTransforming the World";
 const worshipText = "WORSHIP IN-PERSON >";
 const churchText = "CHURCH ONLINE >";
+const covidText = "OUR LATEST COVID-19 POLICY >";
 
 const HeroSection = () => {
   return (
@@ -62,10 +63,11 @@ const HeroSection = () => {
                 }}
                 w="inherit"
                 as={Link}
-                href="/visit-us"
+                // href="/visit-us"
+                href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/"
                 fontSize={["sm", "md"]}
               >
-                {worshipText}
+                {covidText}
               </Button>
               <Button
                 bg="rgb(0, 0, 0, 0)"

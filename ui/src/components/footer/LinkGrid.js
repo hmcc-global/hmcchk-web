@@ -65,7 +65,7 @@ export function LinkGrid() {
           <Link href="/events">
             <Text fontWeight="bold">Events</Text>
           </Link>
-          <Link href="https://hongkong.sub.hmcc.net/sermons/">
+          <Link href="/sermons">
             <Text fontWeight="bold">Sermons</Text>
           </Link>
           <Link href="/give">

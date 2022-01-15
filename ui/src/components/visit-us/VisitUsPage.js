@@ -28,7 +28,7 @@ const VisitUsPage = (props) => {
         <Box
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`url('${process.env.PUBLIC_URL}/images/visitus/header-banner.jpg')`}
+          bgImage={`url('${process.env.PUBLIC_URL}/images/visitus/header-banner.jpeg')`}
           bgPosition="center"
           bgSize="cover"
           px={[6, 12, 36]}
@@ -68,11 +68,11 @@ const VisitUsPage = (props) => {
             fontSize={["2em", "5xl"]}
             fontWeight={800}
             textAlign="center"
-            mb={[2, 10]}
+            // mb={[2, 10]}
           >
             Ways to enjoy Sunday Celebration
           </Heading>
-          <Flex flexDir={["column", "row"]}>
+          {/* <Flex flexDir={["column", "row"]}>
             <VStack
               flex={4.25}
               align="stretch"
@@ -143,7 +143,7 @@ const VisitUsPage = (props) => {
                 loading="lazy"
               ></iframe>
             </AspectRatio>
-          </Flex>
+          </Flex> */}
         </Box>
         <Box
           borderWidth="1px"
@@ -164,7 +164,9 @@ const VisitUsPage = (props) => {
               maxW={650}
               textAlign={["center", "initial"]}
             >
-              If you are not able to join in-person, you could also...
+              {/* If you are not able to join in-person, you could also... */}
+              We are currently not meeting in-person due to COVID-19, so
+              please...
             </Heading>
             <Heading
               as="h3"

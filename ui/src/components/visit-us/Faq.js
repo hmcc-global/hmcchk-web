@@ -44,6 +44,14 @@ const Faq = (props) => {
           basis to ensure that we are abiding by regulations set by the
           Prevention and Control of Disease Ordinance, and ensure that everyone
           coming in-person will feel safe.
+          <br />
+          <br />
+          We are currently not meeting in-person due to COVID-19 and moving our
+          Sunday Celebration fully online. Please refer to our COVID-19 policy{" "}
+          <Link href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/">
+            here
+          </Link>
+          .
         </AccordionPanel>
       </AccordionItem>
 
@@ -62,6 +70,14 @@ const Faq = (props) => {
           Celebration” button above and submitting the form. You should receive
           an email confirmation shortly notifying you of a successful /{" "}
           wait-listed registration.
+          <br />
+          <br />
+          We are currently not meeting in-person due to COVID-19 and moving our
+          Sunday Celebration fully online. Please refer to our COVID-19 policy{" "}
+          <Link href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/">
+            here
+          </Link>
+          .
         </AccordionPanel>
       </AccordionItem>
 
@@ -80,6 +96,14 @@ const Faq = (props) => {
           apologize for the inconvenience that you may be experiencing. However,
           our lovely host team will continue to monitor registrations throughout
           the week and notify you if additional availability opens up.
+          <br />
+          <br />
+          We are currently not meeting in-person due to COVID-19 and moving our
+          Sunday Celebration fully online. Please refer to our COVID-19 policy{" "}
+          <Link href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/">
+            here
+          </Link>
+          .
         </AccordionPanel>
       </AccordionItem>
 
@@ -99,6 +123,14 @@ const Faq = (props) => {
           come join in worship. If there are any extenuating circumstances that
           prevent those pre-registered from joining in person, please notify us
           via email at hongkong@hmcc.net by the Friday (before) 11:59PM
+          <br />
+          <br />
+          We are currently not meeting in-person due to COVID-19 and moving our
+          Sunday Celebration fully online. Please refer to our COVID-19 policy{" "}
+          <Link href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/">
+            here
+          </Link>
+          .
         </AccordionPanel>
       </AccordionItem>
 
@@ -164,6 +196,31 @@ const Faq = (props) => {
           personal safety as well as meeting together as the body of Christ on a
           consistent basis. Therefore, if you are able to come safely, we will
           still have our gatherings as scheduled.
+        </AccordionPanel>
+      </AccordionItem>
+
+      <AccordionItem border="1px solid #E2E8F0">
+        <h2>
+          <AccordionButton fontWeight={700} fontSize="lg" p={4}>
+            <Box flex="1" textAlign="left">
+              What are the latest COVID-19 measures HMCC-HK is taking in light
+              of the recent changes?
+            </Box>
+            <AccordionIcon as={AiFillPlusCircle} w={7} h={7} />
+          </AccordionButton>
+        </h2>
+        <AccordionPanel pb={4}>
+          We remain committed to supporting the global efforts in preventing the
+          spread of the virus and caring for the holistic health of our members
+          and the community. Therefore, we are currently not meeting in-person
+          due to COVID-19 and moving our Sunday Celebration fully online.
+          <br />
+          <br />
+          Please refer to our COVID-19 policy{" "}
+          <Link href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/">
+            here
+          </Link>
+          .
         </AccordionPanel>
       </AccordionItem>
     </Accordion>

@@ -62,6 +62,7 @@ email status until they click the link in the confirmation email.`,
     ministryTeam: {
       type: "string",
       isIn: [
+        "Not Applicable",
         "Intercessory Prayer Team",
         "Creatives",
         "Hospitality",
