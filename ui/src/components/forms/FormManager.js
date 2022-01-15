@@ -17,8 +17,10 @@ import {
   Text,
   Badge,
   Stack,
-  Checkbox,
+  Textarea,
+  FormHelperText,
   Switch,
+  Select,
 } from "@chakra-ui/react";
 import FormDataDownloader from "./FormDataDownloader";
 
@@ -30,6 +32,9 @@ const FormManager = (props) => {
   const [formDescription, setFormDescription] = useState(null);
   const [formImage, setFormImage] = useState(null);
   const [requireLogin, setRequireLogin] = useState(true);
+  const [successEmailTemplate, setSuccessEmailTemplate] = useState(null);
+  const [customEmailSubject, setCustomEmailSubject] = useState(null);
+
   const [editFormData, setEditFormData] = useState(null);
   const [formId, setFormId] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -49,12 +54,16 @@ const FormManager = (props) => {
     setValue("formDescription", data.formDescription);
     setValue("formImage", data.formImage);
     setValue("requireLogin", data.requireLogin);
+    setValue("successEmailTemplate", data.successEmailTemplate);
+    setValue("customEmailSubject", data.customEmailSubject);
 
     // Update React State for child props
     setFormName(data.formName);
     setFormDescription(data.formDescription);
     setFormImage(data.formImage);
     setRequireLogin(data.requireLogin);
+    setSuccessEmailTemplate(data.successEmailTemplate);
+    setCustomEmailSubject(data.customEmailSubject);
   };
 
   const onSubmit = (data, e) => {
@@ -128,11 +137,15 @@ const FormManager = (props) => {
     setValue("formDescription", null);
     setValue("formImage", null);
     setValue("requireLogin", true);
+    setValue("successEmailTemplate", null);
+    setValue("customEmailSubject", null);
     setFormName(null);
     setFormDescription(null);
     setFormImage(null);
     setRequireLogin(true);
     setEditFormData(null);
+    setSuccessEmailTemplate(null);
+    setCustomEmailSubject(null);
     await getFormListFromDatabase();
   };
 
@@ -236,7 +249,11 @@ const FormManager = (props) => {
             </FormControl>
             <FormControl isInvalid={errors["formDescription"]}>
               <FormLabel>Form Description</FormLabel>
-              <Input id="formDescription" {...register("formDescription")} />
+              <Textarea id="formDescription" {...register("formDescription")} />
+              <FormHelperText>
+                This field supports markdown. Just write it in somewhere else
+                and then paste it in and see the magic happen
+              </FormHelperText>
             </FormControl>
             <FormControl isInvalid={errors["formImage"]}>
               <FormLabel>Form Image</FormLabel>
@@ -255,9 +272,26 @@ const FormManager = (props) => {
                 )}
               />
             </FormControl>
+            <FormControl isInvalid={errors["successEmailTemplate"]}>
+              <FormLabel>Select an email template</FormLabel>
+              <Select {...register("successEmailTemplate", { required: true })}>
+                <option value="form-default-success">Default</option>
+                <option value="form-retreat-success">Retreat</option>
+              </Select>
+              <FormErrorMessage>
+                {errors["successEmailTemplate"] && "Field type is required"}
+              </FormErrorMessage>
+            </FormControl>
+            <FormControl>
+              <FormLabel>Custom Email Subject</FormLabel>
+              <Input {...register("customEmailSubject")} />
+              <FormHelperText>
+                If you need a custom subject for the success email
+              </FormHelperText>
+            </FormControl>
             <FormControl>
               <FormLabel>
-                If you updated the 4 fields above please click here again before
+                If you updated the fields above please click here again before
                 saving to DB
               </FormLabel>
               <Button colorScheme="teal" type="submit">
@@ -270,11 +304,15 @@ const FormManager = (props) => {
 
       {formName && (
         <FormCreator
-          formName={formName}
-          formDescription={formDescription}
-          formImage={formImage}
-          requireLogin={requireLogin}
-          existingFormData={editFormData}
+          formInformation={{
+            formName: formName,
+            formDescription: formDescription,
+            formImage: formImage,
+            requireLogin: requireLogin,
+            successEmailTemplate: successEmailTemplate,
+            customEmailSubject: customEmailSubject,
+          }}
+          existingFormFieldsData={editFormData}
           resetFormEditorCallback={resetFormEditorCallback}
           user={user}
         />

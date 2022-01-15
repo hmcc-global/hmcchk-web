@@ -30,28 +30,35 @@ const UserFormContainer = (props) => {
     populateData();
   }, [props]);
 
+  // If there is a logged in user, check whether they filled or not
+  // Else default to true to allow public to access
+  const filledInProfileCheck = user.id ? user.hasFilledProfileForm : true;
+  let allowFormAccess = formData && filledInProfileCheck;
+
   return (
     <Container maxW="container.md">
-      {formData && (
+      {allowFormAccess && (
         <Form
           formId={formData.id}
           formName={formData.formName}
           formDescription={formData.formDescription}
           formImage={formData.formImage}
-          formData={formData.formFields}
+          formFields={formData.formFields}
           user={user}
           history={history}
         />
       )}
 
-      {!isLoading && !formData && (
-        <Center>
+      {!isLoading && !allowFormAccess && (
+        <Center h="100vh">
           <VStack>
             <Text fontSize={["xl", "3xl"]} spacing="5">
               Uh-oh!
             </Text>
             <Text fontSize={["lg", "2xl"]} spacing="5">
-              Looks like you can't access this form right now, try logging in!
+              {user.id && !user.hasFilledProfileForm
+                ? "Please complete your user profile first before signing up"
+                : "You need to be logged in to access this form or this form is currently unavailable!"}
             </Text>
           </VStack>
         </Center>

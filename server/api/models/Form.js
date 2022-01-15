@@ -19,5 +19,12 @@ module.exports = {
       type: "boolean",
       defaultsTo: true,
     },
+    successEmailTemplate: {
+      type: "string",
+      defaultsTo: "form-default-success",
+    },
+    customEmailSubject: {
+      type: "string",
+    },
   },
 };
