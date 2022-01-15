@@ -8,18 +8,8 @@ import {
   Link,
   Text,
   Container,
-  Tabs,
-  Tab,
-  TabList,
-  TabPanels,
-  TabPanel,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
 } from '@chakra-ui/react';
-import { ChevronLeftIcon, RepeatIcon } from '@chakra-ui/icons';
+import { ChevronLeftIcon } from '@chakra-ui/icons';
 import OnlinePageButtons from './OnlinePageButtons';
 import RelatedSermonCard from './RelatedSermonCard';
 import { customAxios as axios } from '../helpers/customAxios';
@@ -33,11 +23,10 @@ const SermonDetails = (props) => {
   const [sermon, setSermon] = useState();
   const [allSermons, setAllSermons] = useState([]);
   const [relatedSermons, setRelatedSermons] = useState([]);
-  const [sermonVideoCode, setSermonVideoCode] = useState();
+  const [sermonUrl, setSermonUrl] = useState();
   const [sermonDate, setSermonDate] = useState();
   const [randomSermons, setRandomSermons] = useState([]);
   const [onlineSermon, setOnlineSermon] = useState(false);
-  const [noteId, setNoteId] = useState(0);
   const currId = props.match.params.id;
   const history = useHistory();
 
@@ -102,10 +91,10 @@ const SermonDetails = (props) => {
   const getVideoCode = () => {
     if (sermon.streamLink === '') {
       let sermonVideoCode =
-        sermon.sermonUrl.split('/')[sermon.sermonUrl.split('/').length - 1];
-      setSermonVideoCode(`https://www.youtube.com/embed/${sermonVideoCode}`);
+        sermon.sermonVideoUrl.split('/')[sermon.sermonVideoUrl.split('/').length - 1];
+      setSermonUrl(`https://www.youtube.com/embed/${sermonVideoCode}`);
     } else {
-      setSermonVideoCode(sermon.streamLink);
+      setSermonUrl(sermon.streamLink);
     }
   };
 
@@ -137,10 +126,6 @@ const SermonDetails = (props) => {
     setRandomSermons(randomSermons);
   };
 
-  const refreshSermonNotes = () => {
-    setNoteId(noteId + 1);
-  };
-
   const OnlineSection = () => {
     return (
       <>
@@ -152,9 +137,7 @@ const SermonDetails = (props) => {
           <Text>{sermon.sermonDesc}</Text>
         </Box>
         <OnlinePageTabs
-          noteId={noteId}
           sermonNotes={sermon.sermonNotes}
-          refreshCallback={refreshSermonNotes}
         />
       </>
     );
@@ -182,7 +165,7 @@ const SermonDetails = (props) => {
                 <iframe
                   width="560"
                   height="315"
-                  src={sermonVideoCode}
+                  src={sermonUrl}
                   title="Video player"
                   frameBorder="0"
                   allow={`accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; ${
