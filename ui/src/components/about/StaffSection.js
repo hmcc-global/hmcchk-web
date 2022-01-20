@@ -80,7 +80,6 @@ const StaffSection = (props) => {
           >
             <Image
               src={process.env.PUBLIC_URL + "/images/about/ZhuFamily.png"}
-              w="90%"
               objectFit="cover"
               px={["0", "0", "1em"]}
               w={{ base: "90%", lg: "60em" }}

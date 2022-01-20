@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { customAxios as axios } from "../helpers/customAxios";
-import { ChevronLeftIcon } from "@chakra-ui/icons";
-import ReCAPTCHA from "react-google-recaptcha";
+import React, { useState, useRef, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { customAxios as axios } from '../helpers/customAxios';
+import { ChevronLeftIcon } from '@chakra-ui/icons';
+import ReCAPTCHA from 'react-google-recaptcha';
 import {
   Box,
   Select,
@@ -21,9 +21,9 @@ import {
   ModalOverlay,
   ModalContent,
   ModalFooter,
-} from "@chakra-ui/react";
-import { CheckCircleIcon } from "@chakra-ui/icons";
-import { lifestageList, countryList } from "../helpers/lists";
+} from '@chakra-ui/react';
+import { CheckCircleIcon } from '@chakra-ui/icons';
+import { lifestageList, countryList } from '../helpers/lists';
 
 const Signup = (props) => {
   const {
@@ -31,64 +31,64 @@ const Signup = (props) => {
     handleSubmit,
     watch,
     setValue,
-    formState: { errors, touchedFields },
+    formState: { errors },
   } = useForm();
 
   const googleEmail = props.history.location.state?.email;
   const googleFullName = props.history.location.state?.fullName;
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     if (googleEmail) {
-      let firstname = googleFullName.split(" ").slice(0, -1).join(" ");
-      let lastname = googleFullName.split(" ").slice(-1).join(" ");
-      setValue("email", googleEmail);
-      setValue("firstName", firstname);
-      setValue("lastName", lastname);
+      let firstname = googleFullName.split(' ').slice(0, -1).join(' ');
+      let lastname = googleFullName.split(' ').slice(-1).join(' ');
+      setValue('email', googleEmail);
+      setValue('firstName', firstname);
+      setValue('lastName', lastname);
     }
   }, []);
 
   const inputBox = {
-    color: "black",
-    background: "#FFFFFF",
-    border: "1px solid #E2E8F0",
-    boxSizing: "border-box",
-    borderRadius: "6px",
-    flex: "none",
-    alignSelf: "stretch",
-    flexGrow: "0",
-    margin: "8px 0px",
-    padding: "3px 10px",
+    color: 'black',
+    background: '#FFFFFF',
+    border: '1px solid #E2E8F0',
+    boxSizing: 'border-box',
+    borderRadius: '6px',
+    flex: 'none',
+    alignSelf: 'stretch',
+    flexGrow: '0',
+    margin: '8px 0px',
+    padding: '3px 10px',
   };
 
   const submitBoxStyle = {
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "6px 19px",
-    background: "rgba(0, 0, 0, 0.04)",
-    border: "1px solid #FFFFFF",
-    boxSizing: "border-box",
-    backdropFilter: "blur(6px)",
-    borderRadius: "10px",
-    width: "250px",
-    fontWeight: "bold",
-    marginTop: "20px",
-    marginBottom: "20px",
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '6px 19px',
+    background: 'rgba(0, 0, 0, 0.04)',
+    border: '1px solid #FFFFFF',
+    boxSizing: 'border-box',
+    backdropFilter: 'blur(6px)',
+    borderRadius: '10px',
+    width: '250px',
+    fontWeight: 'bold',
+    marginTop: '20px',
+    marginBottom: '20px',
   };
 
   const password = useRef({});
-  password.current = watch("password", "");
+  password.current = watch('password', '');
 
   const { history } = props;
 
   const handleSignup = async (data) => {
     try {
-      const payload = await axios.post("/api/auth/signup", {
-        password: data.password ? data.password : "",
+      const payload = await axios.post('/api/auth/signup', {
+        password: data.password ? data.password : '',
         emailAddress: data.email,
-        fullName: data.firstName + " " + data.lastName,
+        fullName: data.firstName + ' ' + data.lastName,
         countryOfOrigin: data.countryOfOrigin,
         lifestage: data.lifestage,
         phoneNumber: data.phoneNumber,
@@ -96,16 +96,16 @@ const Signup = (props) => {
       if (payload.status === 200) {
         setModalOpen(true);
         setTimeout(() => {
-          history.push("/login");
+          history.push('/login');
         }, 3000);
       }
     } catch (err) {
       if (err.response && err.response.status === 409) {
-        console.log("EMAIL already exists");
-        setError("Email already exists, please try with another email");
+        console.log('EMAIL already exists');
+        setError('Email already exists, please try with another email');
       } else if (err.response && err.response.status === 422) {
-        console.log("Required fields not filled");
-        setError("Required fields not filled");
+        console.log('Required fields not filled');
+        setError('Required fields not filled');
       }
     }
   };
@@ -150,14 +150,14 @@ const Signup = (props) => {
           <form onSubmit={handleSubmit(handleSignup)} autoComplete="off">
             <VStack justify="center" align="center">
               <Image
-                marginTop={{ base: "30px", md: "none" }}
-                marginBottom={{ base: "15px", md: "40px" }}
+                marginTop={{ base: '30px', md: 'none' }}
+                marginBottom={{ base: '15px', md: '40px' }}
                 h={{
-                  base: "6vh",
-                  sm: "8vh",
-                  md: "10vh",
-                  lg: "12vh",
-                  xl: "15vh",
+                  base: '6vh',
+                  sm: '8vh',
+                  md: '10vh',
+                  lg: '12vh',
+                  xl: '15vh',
                 }}
                 src={`${process.env.PUBLIC_URL}/images/ripple.png`}
                 alt="Logo of HMCC"
@@ -165,26 +165,26 @@ const Signup = (props) => {
               <Text
                 fontWeight="bold"
                 fontSize="2xl"
-                display={{ base: "flex", md: "none" }}
+                display={{ base: 'flex', md: 'none' }}
               >
                 Sign Up
               </Text>
-              <HStack spacing={{ base: "none", md: "8" }}>
+              <HStack spacing={{ base: 'none', md: '8' }}>
                 <Text
                   fontWeight="bold"
                   fontSize="2xl"
-                  display={{ base: "none", md: "flex" }}
+                  display={{ base: 'none', md: 'flex' }}
                 >
                   Sign Up
                 </Text>
                 <Image
-                  h={googleEmail ? "60vh" : "85vh"}
+                  h={googleEmail ? '60vh' : '85vh'}
                   src={`${process.env.PUBLIC_URL}/images/HLine.svg`}
                   alt="Horizontal Line"
                 />
                 <VStack
                   alignItems="flex-start"
-                  marginLeft={{ base: "20px", md: "none" }}
+                  marginLeft={{ base: '20px', md: 'none' }}
                 >
                   <Text>Enter Your Email Address</Text>
                   <input
@@ -194,12 +194,12 @@ const Signup = (props) => {
                     isReadOnly={googleEmail ? true : false}
                     placeholder="e.g. chantaiman@gmail.com"
                     style={inputBox}
-                    {...register("email", {
-                      required: "Required",
+                    {...register('email', {
+                      required: 'Required',
                       pattern: {
                         value:
                           /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
-                        message: "Invalid email address",
+                        message: 'Invalid email address',
                       },
                     })}
                   />
@@ -222,13 +222,13 @@ const Signup = (props) => {
                         disabled={googleEmail ? true : false}
                         placeholder="Password"
                         style={inputBox}
-                        {...register("password", {
-                          required: "Required",
+                        {...register('password', {
+                          required: 'Required',
                           pattern: {
                             value:
                               /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
                             message:
-                              "Your Password does not fulfill the criteria", // JS only: <p>error message</p> TS only support string
+                              'Your Password does not fulfill the criteria', // JS only: <p>error message</p> TS only support string
                           },
                         })}
                       />
@@ -274,11 +274,11 @@ const Signup = (props) => {
                         disabled={googleEmail ? true : false}
                         placeholder="Re-enter Password"
                         style={inputBox}
-                        {...register("rePassword", {
-                          required: "Required",
+                        {...register('rePassword', {
+                          required: 'Required',
                           validate: (value) =>
                             value === password.current ||
-                            "The passwords do not match",
+                            'The passwords do not match',
                         })}
                       />
                       {errors.rePassword && (
@@ -300,7 +300,7 @@ const Signup = (props) => {
                     isReadOnly={googleEmail ? true : false}
                     placeholder="First name"
                     style={inputBox}
-                    {...register("firstName", { required: "Required" })}
+                    {...register('firstName', { required: 'Required' })}
                   />
                   {errors.firstName && (
                     <Text
@@ -319,7 +319,7 @@ const Signup = (props) => {
                     isReadOnly={googleEmail ? true : false}
                     placeholder="Last Name"
                     style={inputBox}
-                    {...register("lastName", { required: "Required" })}
+                    {...register('lastName', { required: 'Required' })}
                   />
                   {errors.lastName && (
                     <Text
@@ -337,11 +337,11 @@ const Signup = (props) => {
                     name="password"
                     placeholder="Phone Number"
                     style={inputBox}
-                    {...register("phoneNumber", {
-                      required: "Required",
+                    {...register('phoneNumber', {
+                      required: 'Required',
                       maxLength: {
                         value: 16,
-                        message: "Phone number too long",
+                        message: 'Phone number too long',
                       },
                     })}
                   />
@@ -362,8 +362,8 @@ const Signup = (props) => {
                     boxSizing="border-box"
                     borderRadius="6px"
                     size="sm"
-                    {...register("countryOfOrigin")}
-                    isInvalid={errors["countryOfOrigin"]}
+                    {...register('countryOfOrigin')}
+                    isInvalid={errors['countryOfOrigin']}
                     placeholder="Please fill in this field"
                   >
                     {countryList.map((result) => (
@@ -388,8 +388,8 @@ const Signup = (props) => {
                     boxSizing="border-box"
                     borderRadius="6px"
                     size="sm"
-                    {...register("lifestage")}
-                    isInvalid={errors["lifestage"]}
+                    {...register('lifestage')}
+                    isInvalid={errors['lifestage']}
                     placeholder="Please fill in this field"
                   >
                     {lifestageList.map((lifestage) => (
@@ -408,7 +408,7 @@ const Signup = (props) => {
                 </VStack>
               </HStack>
               <ReCAPTCHA
-                style={{ left: "5%", position: "relative", marginTop: "20px" }}
+                style={{ left: '5%', position: 'relative', marginTop: '20px' }}
                 sitekey={process.env.REACT_APP_CAPTCHA}
               />
               {error && (

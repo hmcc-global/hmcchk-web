@@ -1,5 +1,5 @@
-import React from "react";
-import { Link as HashLink } from "react-router-dom";
+import React from 'react';
+import { Link as HashLink } from 'react-router-dom';
 import {
   Flex,
   Box,
@@ -13,17 +13,14 @@ import {
   Center,
   Accordion,
   LinkOverlay,
-  StackDivider,
   Link,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
   Container,
   AccordionIcon,
-  useDisclosure,
-} from "@chakra-ui/react";
-import { SocialIcon } from "react-social-icons";
-//import "./removeScrollbar.css"
+} from '@chakra-ui/react';
+import { SocialIcon } from 'react-social-icons';
 
 const MainMenu = ({ login, onClose }) => {
   const onLogout = () => {
@@ -35,7 +32,7 @@ const MainMenu = ({ login, onClose }) => {
   const WebView = () => {
     return (
       <Container maxW="container.lg">
-        <HStack display={{ base: "none", lg: "flex" }} color="white">
+        <HStack display={{ base: 'none', lg: 'flex' }} color="white">
           <Flex marginTop="30px" minW="55%">
             <VStack alignItems="flex-start">
               <Link href="/visit-us" onClick={onClose}>
@@ -43,7 +40,7 @@ const MainMenu = ({ login, onClose }) => {
                   Visit
                 </Text>
               </Link>
-              <Link href="https://hongkong.sub.hmcc.net/online/">
+              <Link href="/sermons">
                 <Text fontSize="18px">Church Online</Text>
               </Link>
               <Link href="/about-us">
@@ -71,20 +68,20 @@ const MainMenu = ({ login, onClose }) => {
               </Link>
             </VStack>
             <Spacer />
-            <VStack alignItems="flex-start" left={{ md: "10%", xl: "20%" }}>
+            <VStack alignItems="flex-start" left={{ md: '10%', xl: '20%' }}>
               <Link href="/connect" onClick={onClose}>
                 <Text fontWeight="bold" fontSize="40px">
                   Connect
                 </Text>
               </Link>
               <HashLink
-                to={{ pathname: "/connect", hash: "#ministries" }}
+                to={{ pathname: '/connect', hash: '#ministries' }}
                 onClick={onClose}
               >
                 <Text fontSize="18px">Ministries</Text>
               </HashLink>
               <HashLink
-                to={{ pathname: "/connect", hash: "#lifegroup" }}
+                to={{ pathname: '/connect', hash: '#lifegroup' }}
                 onClick={onClose}
               >
                 <Text fontSize="18px">LIFE Groups</Text>
@@ -95,29 +92,29 @@ const MainMenu = ({ login, onClose }) => {
                 </Text>
               </Link>
               <HashLink
-                to={{ pathname: "/events", hash: "#sundayCelebration" }}
+                to={{ pathname: '/events', hash: '#sundayCelebration' }}
                 onClick={onClose}
               >
                 <Text fontSize="18px">Upcoming Sunday Celebration</Text>
               </HashLink>
               <HashLink
-                to={{ pathname: "/events", hash: "#churchActivities" }}
+                to={{ pathname: '/events', hash: '#churchActivities' }}
                 onClick={onClose}
               >
                 <Text fontSize="18px">Church-wide Activities</Text>
               </HashLink>
               <HashLink
-                to={{ pathname: "/events", hash: "#classes" }}
+                to={{ pathname: '/events', hash: '#classes' }}
                 onClick={onClose}
               >
                 <Text fontSize="18px">Upcoming Classes</Text>
               </HashLink>
-              <Link href="https://hongkong.sub.hmcc.net/sermons/">
+              <Link href="/sermons">
                 <Text fontWeight="bold" fontSize="40px">
                   Sermons
                 </Text>
               </Link>
-              <Link href="https://hongkong.sub.hmcc.net/give/">
+              <Link href="/give">
                 <Text fontWeight="bold" fontSize="40px">
                   Give
                 </Text>
@@ -148,13 +145,13 @@ const MainMenu = ({ login, onClose }) => {
                     onClick={onClose}
                     marginBottom="5"
                     width="100%"
-                    style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
+                    style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
                   >
                     <LinkOverlay href="/">Log Out</LinkOverlay>
                   </Button>
                   <Button
                     width="100%"
-                    style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
+                    style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
                   >
                     <LinkOverlay
                       href="https://forms.gle/6jasxuLNZt5MVXAy8"
@@ -181,7 +178,7 @@ const MainMenu = ({ login, onClose }) => {
                   </Button>
                   <Button
                     width="100%"
-                    style={{ WebkitMarginStart: "0", marginInlineStart: "0" }}
+                    style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
                   >
                     <LinkOverlay
                       href="https://forms.gle/6jasxuLNZt5MVXAy8"
@@ -205,7 +202,7 @@ const MainMenu = ({ login, onClose }) => {
                 <Link href="https://detroit.hmcc.net/" target="_blank">
                   Detroit
                 </Link>
-                <Link style={{ fontWeight: "bolder" }}>HONG KONG</Link>
+                <Link style={{ fontWeight: 'bolder' }}>HONG KONG</Link>
                 <Link href="https://jakarta.hmcc.net/" target="_blank">
                   Jakarta
                 </Link>
@@ -233,7 +230,7 @@ const MainMenu = ({ login, onClose }) => {
                 <SocialIcon
                   bgColor="transparent"
                   fgColor="#ffffff"
-                  url="https://open.spotify.com/playlist/51XNCkc3LyRAXCtuI3Wbch"
+                  url="https://open.spotify.com/user/hmccofhk?si=bd64100596904a95"
                   target="_blank"
                 />
                 <SocialIcon
@@ -265,7 +262,7 @@ const MainMenu = ({ login, onClose }) => {
   const MobileView = () => {
     return (
       <Container maxW="container.lg">
-        <Flex direction="column" display={{ base: "flex", lg: "none" }}>
+        <Flex direction="column" display={{ base: 'flex', lg: 'none' }}>
           <VStack color="white" alignItems="flex-start">
             <Flex marginTop="30px" direction="column">
               <VStack alignItems="flex-start">
@@ -284,9 +281,7 @@ const MainMenu = ({ login, onClose }) => {
                       </Box>
                     </AccordionButton>
                     <AccordionPanel pb={4}>
-                      <Link href="https://hongkong.sub.hmcc.net/online/">
-                        Church Online
-                      </Link>
+                      <Link href="/sermons">Church Online</Link>
                     </AccordionPanel>
                   </AccordionItem>
                   <AccordionItem borderStyle="none">
@@ -297,10 +292,7 @@ const MainMenu = ({ login, onClose }) => {
                         fontWeight="bold"
                         fontSize="2xl"
                       >
-                        <Link
-                          href="https://hongkong.sub.hmcc.net/about/who-we-are/"
-                          onClick={onClose}
-                        >
+                        <Link href="/about-us" onClick={onClose}>
                           About
                         </Link>
                       </Box>
@@ -343,9 +335,7 @@ const MainMenu = ({ login, onClose }) => {
                         fontWeight="bold"
                         fontSize="2xl"
                       >
-                        <Link href="https://hongkong.sub.hmcc.net/sermons/">
-                          Sermons
-                        </Link>
+                        <Link href="/sermons">Sermons</Link>
                       </Box>
                     </AccordionButton>
                   </AccordionItem>
@@ -357,9 +347,7 @@ const MainMenu = ({ login, onClose }) => {
                         fontWeight="bold"
                         fontSize="2xl"
                       >
-                        <Link href="https://hongkong.sub.hmcc.net/give/">
-                          Give
-                        </Link>
+                        <Link href="/give">Give</Link>
                       </Box>
                     </AccordionButton>
                   </AccordionItem>
@@ -389,8 +377,8 @@ const MainMenu = ({ login, onClose }) => {
                         marginBottom="5"
                         width="100%"
                         style={{
-                          WebkitMarginStart: "0",
-                          marginInlineStart: "0",
+                          WebkitMarginStart: '0',
+                          marginInlineStart: '0',
                         }}
                       >
                         Log Out
@@ -398,8 +386,8 @@ const MainMenu = ({ login, onClose }) => {
                       <Button
                         width="100%"
                         style={{
-                          WebkitMarginStart: "0",
-                          marginInlineStart: "0",
+                          WebkitMarginStart: '0',
+                          marginInlineStart: '0',
                         }}
                       >
                         <Link
@@ -427,8 +415,8 @@ const MainMenu = ({ login, onClose }) => {
                       <Button
                         width="100%"
                         style={{
-                          WebkitMarginStart: "0",
-                          marginInlineStart: "0",
+                          WebkitMarginStart: '0',
+                          marginInlineStart: '0',
                         }}
                       >
                         <Link
@@ -508,7 +496,7 @@ const MainMenu = ({ login, onClose }) => {
                     <SocialIcon
                       bgColor="transparent"
                       fgColor="#ffffff"
-                      url="https://open.spotify.com/playlist/51XNCkc3LyRAXCtuI3Wbch"
+                      url="https://open.spotify.com/user/hmccofhk?si=bd64100596904a95"
                       target="_blank"
                     />
                     <SocialIcon

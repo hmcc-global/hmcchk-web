@@ -24,7 +24,7 @@ export function SocialMediaLinks() {
             target="_blank"
             bgColor="#222222"
             fgColor="white"
-            url="https://open.spotify.com/playlist/51XNCkc3LyRAXCtuI3Wbch"
+            url="https://open.spotify.com/user/hmccofhk?si=bd64100596904a95"
           />
           <SocialIcon
             target="_blank"

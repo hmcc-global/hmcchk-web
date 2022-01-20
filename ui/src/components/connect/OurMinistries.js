@@ -1,19 +1,19 @@
-import { Box, Center, Heading, Link, SimpleGrid, Text } from "@chakra-ui/react";
-import "../../styles/_fliptiles.scss";
+import { Box, Heading, Link, SimpleGrid, Text } from '@chakra-ui/react';
+import '../../styles/_fliptiles.scss';
 
 const OurMinistries = (props) => {
   return (
     <Box id="ministries">
       <Heading
         as="h2"
-        fontSize={["2.25em", "3m", "4em"]}
+        fontSize={['2.25em', '3m', '4em']}
         fontWeight={800}
         textAlign="center"
         mb={[0, 2]}
       >
         OUR MINISTRIES
       </Heading>
-      <Text fontSize={["0.75em", "1.5em"]} textAlign="center" mb={6}>
+      <Text fontSize={['0.75em', '1.5em']} textAlign="center" mb={6}>
         At Harvest Mission Community Church, we are actively reaching out to
         people from all walks of life, specifically college students, working
         adults, and families.
@@ -33,7 +33,7 @@ const OurMinistries = (props) => {
           >
             <Heading
               as="h4"
-              fontSize={["1.5em", "1.5em", "2em"]}
+              fontSize={['1.5em', '1.5em', '2em']}
               fontWeight={700}
               className="front"
             >
@@ -42,7 +42,7 @@ const OurMinistries = (props) => {
             <Box
               className="back"
               fontWeight={600}
-              fontSize={["xs", "sm", "md"]}
+              fontSize={['xs', 'sm', 'md']}
             >
               Reaching the college students in the university campuses of Hong
               Kong because we believe that college is a pivotal time for people
@@ -64,7 +64,7 @@ const OurMinistries = (props) => {
           >
             <Heading
               as="h4"
-              fontSize={["1.5em", "1.5em", "2em"]}
+              fontSize={['1.5em', '1.5em', '2em']}
               fontWeight={700}
               className="front"
             >
@@ -73,7 +73,7 @@ const OurMinistries = (props) => {
             <Box
               className="back"
               fontWeight={600}
-              fontSize={["xs", "sm", "md"]}
+              fontSize={['xs', 'sm', 'md']}
             >
               Creating an avenue for single working adults to fellowship and
               learn how to best exercise their God-given influence in their
@@ -95,7 +95,7 @@ const OurMinistries = (props) => {
           >
             <Heading
               as="h4"
-              fontSize={["1.5em", "1.5em", "2em"]}
+              fontSize={['1.5em', '1.5em', '2em']}
               fontWeight={700}
               className="front"
             >
@@ -104,7 +104,7 @@ const OurMinistries = (props) => {
             <Box
               className="back"
               fontWeight={600}
-              fontSize={["xs", "sm", "md"]}
+              fontSize={['xs', 'sm', 'md']}
             >
               Bringing together Godly families that will love on and impact the
               next generation of their families and city.
@@ -125,7 +125,7 @@ const OurMinistries = (props) => {
           >
             <Heading
               as="h4"
-              fontSize={["1.5em", "1.5em", "2em"]}
+              fontSize={['1.5em', '1.5em', '2em']}
               fontWeight={700}
               className="front"
             >
@@ -134,10 +134,10 @@ const OurMinistries = (props) => {
             <Box
               className="back"
               fontWeight={600}
-              fontSize={["xs", "sm", "md"]}
+              fontSize={['xs', 'sm', 'md']}
             >
               <Text>
-                Building Blocks is HMCC’s Children Ministry, learn more about it{" "}
+                Building Blocks is HMCC’s Children Ministry, learn more about it{' '}
                 <Text as="u">
                   <Link href="https://hongkong.hmcc.net/building-blocks/">
                     here ➔
