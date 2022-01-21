@@ -8,30 +8,28 @@ import {
   AccordionItem,
   AccordionButton,
   AccordionPanel,
-  List,
   ListItem,
-  ListIcon,
-  OrderedList,
   UnorderedList,
   AccordionIcon,
   Spacer,
   Text,
   VStack,
-} from "@chakra-ui/react";
-import GivingCard from "./GivingCard.js";
+} from '@chakra-ui/react';
+import GivingCard from './GivingCard.js';
+
 const GivingPage = (props) => {
   return (
     <Container maxW="container.lg">
       <VStack w="100%" spacing="3vw" py="3vw">
         <Box
           borderRadius="lg"
-          bgImage={`url('${process.env.PUBLIC_URL}/giving/Banner.png')`}
+          bgImage={`url('${process.env.PUBLIC_URL}/images/giving/Banner.png')`}
           bgPosition="center"
           bgSize="cover"
         >
           <Heading
             as="h1"
-            fontSize={["5xl", "5xl", "6xl"]}
+            fontSize={['5xl', '5xl', '6xl']}
             align="center"
             paddingTop="1vw"
             color="#319795"
@@ -42,7 +40,7 @@ const GivingPage = (props) => {
           <VStack px="3" py="6">
             <Heading
               as="h4"
-              fontSize={["md", "md", "lg"]}
+              fontSize={['md', 'md', 'lg']}
               align="center"
               color="#319795"
               fontWeight="bold"
@@ -51,8 +49,8 @@ const GivingPage = (props) => {
               always provide for that vision.
             </Heading>
 
-            <Text align="center" fontSize={["sm", "md", "md"]}>
-              {" "}
+            <Text align="center" fontSize={['sm', 'md', 'md']}>
+              {' '}
               <Text fontWeight="bold">
                 God invites us to partner with Him in His ministry of making
                 disciples and transforming the world.
@@ -63,7 +61,7 @@ const GivingPage = (props) => {
               church for His mission.
             </Text>
 
-            <Text align="center" fontSize={["sm", "md", "md"]}>
+            <Text align="center" fontSize={['sm', 'md', 'md']}>
               Your gift propels us towards our vision and enables our church to
               respond swiftly with obedience to God's calling. We invite you to
               contribute to this vision and play a vital role in what God is
@@ -74,12 +72,12 @@ const GivingPage = (props) => {
       </VStack>
       <Center>
         <Flex
-          h={["100%", "100%", "13em"]}
-          direction={["column", "column", "row"]}
-          paddingBottom={[0, 0, "2vh"]}
+          h={['100%', '100%', '13em']}
+          direction={['column', 'column', 'row']}
+          paddingBottom={[0, 0, '2vh']}
           minW="100%"
         >
-          <Box w={["100%", "100%", "32%"]} h="20%" borderRadius="lg">
+          <Box w={['100%', '100%', '32%']} h="20%" borderRadius="lg">
             <Heading as="h3" size="xl" paddingBottom="1vw" color="#319795">
               Ways to Give:
             </Heading>
@@ -94,35 +92,35 @@ const GivingPage = (props) => {
           <Spacer />
           <GivingCard
             text="FPS"
-            imageLink={process.env.PUBLIC_URL + "/giving/FPS.png"}
+            imageLink={process.env.PUBLIC_URL + '/images/giving/FPS.png'}
           />
           <Spacer />
           <GivingCard
             text="Bank Transfer"
-            imageLink={process.env.PUBLIC_URL + "/giving/Transfer.png"}
+            imageLink={process.env.PUBLIC_URL + '/images/giving/Transfer.png'}
           />
         </Flex>
       </Center>
 
       <Center>
         <Flex
-          direction={["column", "column", "row"]}
+          direction={['column', 'column', 'row']}
           minW="100%"
-          h={["100%", "100%", "13em"]}
+          h={['100%', '100%', '13em']}
         >
           <GivingCard
             text="Cash"
-            imageLink={process.env.PUBLIC_URL + "/giving/Cash.png"}
+            imageLink={process.env.PUBLIC_URL + '/images/giving/Cash.png'}
           />
           <Spacer />
           <GivingCard
             text="Online Giving"
-            imageLink={process.env.PUBLIC_URL + "/giving/Online.png"}
+            imageLink={process.env.PUBLIC_URL + '/images/giving/Online.png'}
           />
           <Spacer />
           <GivingCard
             text="Cheque"
-            imageLink={process.env.PUBLIC_URL + "/giving/Cheque.png"}
+            imageLink={process.env.PUBLIC_URL + '/images/giving/Cheque.png'}
           />
         </Flex>
       </Center>
@@ -141,7 +139,7 @@ const GivingPage = (props) => {
         </Text>
       </Box>
       <Box paddingBottom="10vh">
-        <Box display={{ base: "none", md: "block", lg: "block" }}>
+        <Box display={{ base: 'none', md: 'block', lg: 'block' }}>
           <Heading
             as="h1"
             fontSize="5xl"
@@ -152,8 +150,8 @@ const GivingPage = (props) => {
             Frequently Asked Question
           </Heading>
         </Box>
-        <Box display={{ base: "block", md: "none", lg: "none" }}>
-          <Heading as="h1" fontSize={["5xl", "5xl", "6xl"]} py="4vw" px="1vh">
+        <Box display={{ base: 'block', md: 'none', lg: 'none' }}>
+          <Heading as="h1" fontSize={['5xl', '5xl', '6xl']} py="4vw" px="1vh">
             FAQs
           </Heading>
         </Box>
