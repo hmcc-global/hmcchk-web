@@ -22,7 +22,7 @@ const CircleIcon = () => (
 
 const SermonCard = ({ sermonData, allSermons }) => {
   const [sermonImage, setSermonImage] = useState(
-    process.env.PUBLIC_URL + '/images/ripple_black.svg'
+    process.env.PUBLIC_URL + '/images/sermons/placeholder.svg'
   );
   const [sermonDate, setSermonDate] = useState('');
   const [onlineSermon, setOnlineSermon] = useState(false);
@@ -65,7 +65,10 @@ const SermonCard = ({ sermonData, allSermons }) => {
                   objectFit="cover"
                 />
                 {onlineSermon && (
-                  <Box pr={'65%'} pb={'40%'}>
+                  <Box
+                    pr={{ base: '0', md: '65%' }}
+                    pb={{ base: '0', md: '40%' }}
+                  >
                     <HStack
                       px={{ base: '0', md: '2', lg: '3' }}
                       color="white"

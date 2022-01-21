@@ -254,7 +254,7 @@ const NavBar = (props) => {
             <MainMenu login={loggedIn} onClose={onClose} />
           </DrawerBody>
           <DrawerFooter fontSize="sm" color="white" justifyContent="center">
-            Harvest Mission Community Church 2021
+            Harvest Mission Community Church {new Date().getFullYear()}
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
