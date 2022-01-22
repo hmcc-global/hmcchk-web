@@ -81,7 +81,7 @@ const HeroSection = () => {
                 }}
                 w="inherit"
                 as={Link}
-                href="/sermons"
+                href="/online"
                 fontSize={['sm', 'md']}
               >
                 {churchText}

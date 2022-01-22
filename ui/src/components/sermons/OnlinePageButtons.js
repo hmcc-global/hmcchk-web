@@ -45,16 +45,28 @@ const OnlinePageButtons = () => {
             <br />
             <br />
             This refreshes your browser's content and ensures proper loading of
-            up-to-date page content Alternatively, you can choose to open the
-            site through Incognito browsing If you have issues loading the video
-            stream on this site, please try and access the stream at{' '}
+            up-to-date page content. Alternatively, you can choose to open the
+            site through incognito browsing.
+            <br />
+            <br />
+            If you have issues loading the video stream on this site, please try
+            and access the stream at{' '}
             <Link
-              href="http://youtube.com/c/hmcchk"
+              href="https://youtube.com/c/hmcchk"
               fontStyle="italic"
               color="blue"
               target="_blank"
             >
-              http://youtube.com/c/hmcchk
+              https://youtube.com/c/hmcchk
+            </Link>{' '}
+            or on our secondary site at{' '}
+            <Link
+              href="https://hongkong.sub.hmcc.net/online"
+              fontStyle="italic"
+              color="blue"
+              target="_blank"
+            >
+              https://hongkong.sub.hmcc.net/online
             </Link>
             .
           </ModalBody>
