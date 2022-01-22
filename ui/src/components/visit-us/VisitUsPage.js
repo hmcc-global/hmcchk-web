@@ -12,14 +12,14 @@ import {
   Spacer,
   Text,
   VStack,
-} from "@chakra-ui/react";
-import { RiArrowRightLine, RiChat1Line } from "react-icons/ri";
-import Faq from "./Faq";
+} from '@chakra-ui/react';
+import { RiArrowRightLine, RiChat1Line } from 'react-icons/ri';
+import Faq from './Faq';
 
 const SUNDAY_CELEBRATION_LOCATION =
-  "Manulife Financial Centre Tower A, Shop 13, 1/F, Tower A, Kwun Tong";
+  'Manulife Financial Centre Tower A, Shop 13, 1/F, Tower A, Kwun Tong';
 const SUNDAY_CELEBRATION_GOOGLE_MAPS_EMBED =
-  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.2102241954112!2d114.22135071553005!3d22.307887848255323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404014806001b5d%3A0x895969fc5cf86457!2sOrganize%20Kwun%20Tong!5e0!3m2!1sen!2shk!4v1628957852778!5m2!1sen!2shk";
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.2102241954112!2d114.22135071553005!3d22.307887848255323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404014806001b5d%3A0x895969fc5cf86457!2sOrganize%20Kwun%20Tong!5e0!3m2!1sen!2shk!4v1628957852778!5m2!1sen!2shk';
 
 const VisitUsPage = (props) => {
   return (
@@ -37,7 +37,7 @@ const VisitUsPage = (props) => {
         >
           <Heading
             as="h2"
-            fontSize={["4xl", "6xl"]}
+            fontSize={['4xl', '6xl']}
             fontWeight={700}
             lineHeight={1}
             color="white"
@@ -48,14 +48,14 @@ const VisitUsPage = (props) => {
           </Heading>
           <Text
             color="white"
-            fontSize={["md", "xl"]}
+            fontSize={['md', 'xl']}
             fontWeight={600}
             textAlign="center"
             mb={[0, 5]}
           >
             is HMCC’s weekend gathering where everyone in the church comes
-            together to{" "}
-            <span style={{ color: "#F6E05E" }}>
+            together to{' '}
+            <span style={{ color: '#F6E05E' }}>
               receive God’s message, worship in community and enjoy fellowship.
             </span>
             <br />
@@ -65,7 +65,7 @@ const VisitUsPage = (props) => {
         <Box pb={[4, 0]}>
           <Heading
             as="h3"
-            fontSize={["2em", "5xl"]}
+            fontSize={['2em', '5xl']}
             fontWeight={800}
             textAlign="center"
             // mb={[2, 10]}
@@ -158,11 +158,11 @@ const VisitUsPage = (props) => {
           <VStack align="stretch" spacing={12}>
             <Heading
               as="h3"
-              fontSize={["2xl", "4xl"]}
+              fontSize={['2xl', '4xl']}
               fontWeight={[400, 700]}
               color="white"
               maxW={650}
-              textAlign={["center", "initial"]}
+              textAlign={['center', 'initial']}
             >
               {/* If you are not able to join in-person, you could also... */}
               We are currently not meeting in-person due to COVID-19, so
@@ -170,11 +170,11 @@ const VisitUsPage = (props) => {
             </Heading>
             <Heading
               as="h3"
-              fontSize={["2xl", "4xl"]}
+              fontSize={['2xl', '4xl']}
               color="white"
-              textAlign={["center", "right"]}
+              textAlign={['center', 'right']}
             >
-              <Link href="https://hongkong.sub.hmcc.net/online/" isExternal>
+              <Link href="https://hongkong.hmcc.net/online/" isExternal>
                 Join us Online <Icon as={RiArrowRightLine} />
               </Link>
             </Heading>
@@ -183,11 +183,11 @@ const VisitUsPage = (props) => {
         <Box>
           <Heading
             as="h3"
-            fontSize={["2xl", "4xl"]}
+            fontSize={['2xl', '4xl']}
             fontWeight={800}
             textAlign="center"
           >
-            Got Queries?{" "}
+            Got Queries?{' '}
             <Link href="mailto:hongkong@hmcc.net">
               hongkong@hmcc.net <Icon as={RiChat1Line} ml={1} />
             </Link>
