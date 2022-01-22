@@ -40,7 +40,7 @@ const MainMenu = ({ login, onClose }) => {
                   Visit
                 </Text>
               </Link>
-              <Link href="/sermons">
+              <Link href="/online">
                 <Text fontSize="18px">Church Online</Text>
               </Link>
               <Link href="/about-us">
@@ -281,7 +281,7 @@ const MainMenu = ({ login, onClose }) => {
                       </Box>
                     </AccordionButton>
                     <AccordionPanel pb={4}>
-                      <Link href="/sermons">Church Online</Link>
+                      <Link href="/online">Church Online</Link>
                     </AccordionPanel>
                   </AccordionItem>
                   <AccordionItem borderStyle="none">

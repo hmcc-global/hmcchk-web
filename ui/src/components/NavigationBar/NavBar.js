@@ -188,7 +188,7 @@ const NavBar = (props) => {
         </Flex>
       </Flex>
 
-      {currDate === 'Sun' ? (
+      {currDate === 'Sat' ? (
         <Flex
           w="100vw"
           background="#ffffff"
@@ -205,11 +205,7 @@ const NavBar = (props) => {
           <Flex w="100vw" justify="space-around">
             <Stack justify="center" align="center" isInline>
               <Center>
-                <Link
-                  href="/sermons"
-                  target="_blank"
-                  style={{ lineHeight: '0' }}
-                >
+                <Link href="/online" style={{ lineHeight: '0' }}>
                   <Button
                     h="3.5vh"
                     style={liveScStyle}

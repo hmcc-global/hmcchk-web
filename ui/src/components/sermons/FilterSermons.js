@@ -1,5 +1,5 @@
-import React from "react";
-import { Stack, Text, Button, Select, Container } from "@chakra-ui/react";
+import React from 'react';
+import { Stack, Text, Button, Select, Container } from '@chakra-ui/react';
 
 const FilterSermon = ({
   allSermons,
@@ -26,11 +26,11 @@ const FilterSermon = ({
     ...new Set(
       allSermons.map((sermon) => {
         if (!isNaN(sermon.passage[0])) {
-          return sermon.passage.split(" ").slice(0, 2).join(" ");
-        } else if (sermon.passage == "") {
+          return sermon.passage.split(' ').slice(0, 2).join(' ');
+        } else if (sermon.passage == '') {
           return null;
         } else {
-          return sermon.passage.split(" ").slice(0, 1).join(" ");
+          return sermon.passage.split(' ').slice(0, 1).join(' ');
         }
       })
     ),
@@ -45,18 +45,18 @@ const FilterSermon = ({
 
   return (
     <>
-      <Container maxW="container.lg">
+      <Container maxW="container.lg" p="0">
         <Stack
-          spacing={{ base: "6", md: "auto" }}
+          spacing={{ base: '6', md: 'auto' }}
           alignItems="left"
-          direction={{ base: "column", md: "row" }}
+          direction={{ base: 'column', md: 'row' }}
         >
           <Stack alignItems="left" spacing={3}>
             <Text color="#0628A3" fontWeight="bold">
               Speaker
             </Text>
             <Select
-              style={{ overflowY: "scroll" }}
+              style={{ overflowY: 'scroll' }}
               name="speaker"
               placeholder="Select Speaker"
               onChange={filterSermon}
@@ -78,7 +78,7 @@ const FilterSermon = ({
               Sermon Series
             </Text>
             <Select
-              style={{ overflowY: "scroll" }}
+              style={{ overflowY: 'scroll' }}
               name="sermon"
               placeholder="Select Sermon Series"
               onChange={filterSermon}
@@ -100,7 +100,7 @@ const FilterSermon = ({
               Book
             </Text>
             <Select
-              style={{ overflowY: "scroll" }}
+              style={{ overflowY: 'scroll' }}
               name="book"
               placeholder="Select Book"
               onChange={filterSermon}
@@ -122,7 +122,7 @@ const FilterSermon = ({
               Service Type
             </Text>
             <Select
-              style={{ overflowY: "scroll" }}
+              style={{ overflowY: 'scroll' }}
               name="service"
               placeholder="Select Service Type"
               onChange={filterSermon}
@@ -144,7 +144,7 @@ const FilterSermon = ({
           direction="row"
           spacing="auto"
           marginTop="75px"
-          display={{ base: "flex", md: "none" }}
+          display={{ base: 'flex', md: 'none' }}
         >
           <Button
             onClick={clearFilter}

@@ -26,6 +26,7 @@ import AdminLoginContainer from './admin/AdminLoginContainer';
 import AdminContainer from './AdminContainer';
 import ScrollToTop from './helpers/ScrollToTop';
 import AboutUsContainer from './about/AboutUsContainer';
+import ActiveSermonContainer from './sermons/ActiveSermonContainer';
 
 const MainContainer = () => {
   return (
@@ -70,7 +71,13 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path={['/sermons', '/online']}
+          path={['/online']}
+          permissions={['public']}
+          component={ActiveSermonContainer}
+        />
+        <PrivateRoute
+          exact
+          path={['/sermons']}
           permissions={['public']}
           component={SermonContainer}
         />

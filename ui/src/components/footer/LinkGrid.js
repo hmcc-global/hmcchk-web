@@ -16,7 +16,7 @@ export function LinkGrid() {
             <Text fontWeight="bold">Visit</Text>
           </Link>
 
-          <Link href="/sermons">Church online</Link>
+          <Link href="/online">Church online</Link>
         </Stack>
       </Box>
       <Box>
