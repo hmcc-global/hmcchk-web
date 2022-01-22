@@ -188,7 +188,7 @@ const NavBar = (props) => {
         </Flex>
       </Flex>
 
-      {currDate === 'Sat' ? (
+      {currDate === 'Sun' ? (
         <Flex
           w="100vw"
           background="#ffffff"
