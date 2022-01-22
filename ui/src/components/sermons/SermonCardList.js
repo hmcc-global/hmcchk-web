@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Grid,
   Heading,
-  VStack,
-  Text,
   Button,
   Box,
   HStack,
-  Select,
   Drawer,
   DrawerBody,
   DrawerFooter,
@@ -15,22 +12,20 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Link,
-  LinkOverlay,
   useDisclosure,
-} from "@chakra-ui/react";
-import Pagination from "../helpers/Pagination";
-import FilterSermon from "./FilterSermons";
-import SermonCard from "./SermonCard";
-import RelatedSermonCard from "./RelatedSermonCard";
+} from '@chakra-ui/react';
+import Pagination from '../helpers/Pagination';
+import FilterSermon from './FilterSermons';
+import SermonCard from './SermonCard';
+import RelatedSermonCard from './RelatedSermonCard';
 
 const SermonCardList = ({ allSermons }, props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const sermonsPerPage = 12;
-  const [filterSpeaker, setFilterSpeaker] = useState("");
-  const [filterSermonSeries, setFilterSermonSeries] = useState("");
-  const [filterBook, setFilterBook] = useState("");
-  const [filterServiceType, setFilterServiceType] = useState("");
+  const [filterSpeaker, setFilterSpeaker] = useState('');
+  const [filterSermonSeries, setFilterSermonSeries] = useState('');
+  const [filterBook, setFilterBook] = useState('');
+  const [filterServiceType, setFilterServiceType] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const filterData = [
     filterSpeaker,
@@ -44,13 +39,13 @@ const SermonCardList = ({ allSermons }, props) => {
 
   const filterSermon = (event) => {
     setCurrentPage(1);
-    if (event.target.name == "speaker") {
+    if (event.target.name == 'speaker') {
       setFilterSpeaker(event.target.value);
-    } else if (event.target.name == "sermon") {
+    } else if (event.target.name == 'sermon') {
       setFilterSermonSeries(event.target.value);
-    } else if (event.target.name == "book") {
+    } else if (event.target.name == 'book') {
       setFilterBook(event.target.value);
-    } else if (event.target.name == "service") {
+    } else if (event.target.name == 'service') {
       setFilterServiceType(event.target.value);
     }
   };
@@ -71,10 +66,10 @@ const SermonCardList = ({ allSermons }, props) => {
         return sermon.serviceType[0].name.includes(filterServiceType);
     });
   const clearFilter = () => {
-    setFilterSpeaker("");
-    setFilterSermonSeries("");
-    setFilterBook("");
-    setFilterServiceType("");
+    setFilterSpeaker('');
+    setFilterSermonSeries('');
+    setFilterBook('');
+    setFilterServiceType('');
   };
 
   //pagination section
@@ -90,7 +85,7 @@ const SermonCardList = ({ allSermons }, props) => {
           <Heading>Past Sermons</Heading>
           <Button
             width="30vw"
-            display={{ base: "flex", md: "none" }}
+            display={{ base: 'flex', md: 'none' }}
             background="#0628A3"
             backdropFilter="blur(6px)"
             borderRadius="10px"
@@ -101,7 +96,7 @@ const SermonCardList = ({ allSermons }, props) => {
             Filter
           </Button>
         </HStack>
-        <Box display={{ base: "none", md: "flex" }} marginTop="10px">
+        <Box display={{ base: 'none', md: 'flex' }} marginTop="10px">
           <FilterSermon
             allSermons={allSermons}
             filterSermon={filterSermon}
@@ -111,41 +106,25 @@ const SermonCardList = ({ allSermons }, props) => {
         <Box>
           <Button
             variant="link"
-            alignSelf={["center", "flex-end"]}
+            alignSelf={['center', 'flex-end']}
             onClick={clearFilter}
             float="right"
-            display={{ base: "none", md: "flex" }}
+            display={{ base: 'none', md: 'flex' }}
             marginTop="8px"
           >
             Clear Filter
           </Button>
         </Box>
         <Grid
-          mt={["6", "12"]}
-          mb={["6", "12"]}
-          templateColumns="repeat(3, 1fr)"
+          mt={['6', '12']}
+          mb={['6', '12']}
+          templateColumns={['repeat(1, 1fr)', 'repeat(3, 1fr)']}
           gap={[3, 6]}
-          display={{ base: "none", md: "grid" }}
+          // display={{ base: 'none', md: 'grid' }}
         >
           {currentSermons.length > 0 &&
             currentSermons.map((sermon, i) => (
               <SermonCard
-                key={sermon.id}
-                sermonData={sermon}
-                allSermons={sermons}
-              />
-            ))}
-        </Grid>
-        <Grid
-          mt={["6", "12"]}
-          mb={["6", "12"]}
-          templateColumns="repeat(1, 1fr)"
-          gap={[3, 6]}
-          display={{ base: "grid", md: "none" }}
-        >
-          {currentSermons.length > 0 &&
-            currentSermons.map((sermon, i) => (
-              <RelatedSermonCard
                 key={sermon.id}
                 sermonData={sermon}
                 allSermons={sermons}
@@ -179,7 +158,7 @@ const SermonCardList = ({ allSermons }, props) => {
             />
           </DrawerBody>
           <DrawerFooter fontSize="sm" color="black" justifyContent="center">
-            Harvest Mission Community Church 2021
+            Harvest Mission Community Church {new Date().getFullYear()}
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

@@ -11,7 +11,6 @@ import StaffSection from "./StaffSection";
 import StorySection from "./StorySection";
 import StrategySection from "./StrategySection";
 import ValuesSection from "./ValuesSection";
-import VisionMissionSection from "./VisionMissionSection";
 import blurbs from "./about.json";
 import { Fragment, useState } from "react";
 import { Select } from "@chakra-ui/select";

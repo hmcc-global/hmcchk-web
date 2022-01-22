@@ -1,6 +1,6 @@
-import { Box, SimpleGrid, Stack, Link, Text } from "@chakra-ui/react";
-import { Link as HashLink } from "react-router-dom";
-import * as React from "react";
+import { Box, SimpleGrid, Stack, Link, Text } from '@chakra-ui/react';
+import { Link as HashLink } from 'react-router-dom';
+import * as React from 'react';
 
 export function LinkGrid() {
   return (
@@ -8,7 +8,7 @@ export function LinkGrid() {
       columns={[2, 2, 4]}
       textAlign="left"
       minW="50%"
-      spacing={["2vh", "2vh", "2vw"]}
+      spacing={['2vh', '2vh', '2vw']}
     >
       <Box>
         <Stack>
@@ -16,9 +16,7 @@ export function LinkGrid() {
             <Text fontWeight="bold">Visit</Text>
           </Link>
 
-          <Link href="https://hongkong.sub.hmcc.net/online/">
-            Church online
-          </Link>
+          <Link href="/online">Church online</Link>
         </Stack>
       </Box>
       <Box>
@@ -26,10 +24,10 @@ export function LinkGrid() {
           <Link href="/connect">
             <Text fontWeight="bold">Connect</Text>
           </Link>
-          <HashLink to={{ pathname: "/connect", hash: "#ministries" }}>
+          <HashLink to={{ pathname: '/connect', hash: '#ministries' }}>
             Ministries
           </HashLink>
-          <HashLink to={{ pathname: "/connect", hash: "#lifegroup" }}>
+          <HashLink to={{ pathname: '/connect', hash: '#lifegroup' }}>
             <Text>LIFE Groups</Text>
           </HashLink>
         </Stack>

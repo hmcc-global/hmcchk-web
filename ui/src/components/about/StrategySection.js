@@ -4,12 +4,10 @@ import {
   Box,
   Container,
   Heading,
-  HStack,
   UnorderedList,
   ListItem,
-  Center,
   Stack,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const StrategySection = (props) => {
   const sliderSettings = {
@@ -42,7 +40,7 @@ const StrategySection = (props) => {
       >
         <Heading
           as="h3"
-          fontSize={["4xl", "6xl"]}
+          fontSize={['4xl', '6xl']}
           fontWeight={700}
           lineHeight={1}
           color="#000000"
@@ -53,7 +51,7 @@ const StrategySection = (props) => {
         </Heading>
         <Container maxW="container.lg" py={4}>
           <Stack
-            direction={{ base: "column", lg: "row" }}
+            direction={{ base: 'column', lg: 'row' }}
             spacing="10px"
             alignItems="center"
           >
@@ -66,8 +64,8 @@ const StrategySection = (props) => {
               pt={[6, 6]}
               pb={[6, 6]}
               m={0}
-              h={["35em", "40em"]}
-              w={["full", "25em"]}
+              h={['35em', '40em']}
+              w={['full', '25em']}
             >
               <Box m="auto">
                 <Heading color="#3182CE" textAlign="center">
@@ -98,8 +96,8 @@ const StrategySection = (props) => {
               pt={[6, 6]}
               pb={[6, 6]}
               m={0}
-              h={["35em", "40em"]}
-              w={["full", "25em"]}
+              h={['35em', '40em']}
+              w={['full', '25em']}
             >
               <Box m="auto">
                 <Heading color="#3182CE" textAlign="center">
@@ -130,8 +128,8 @@ const StrategySection = (props) => {
               pt={[6, 6]}
               pb={[6, 6]}
               m={0}
-              h={["35em", "40em"]}
-              w={["full", "25em"]}
+              h={['35em', '40em']}
+              w={['full', '25em']}
             >
               <Box m="auto">
                 <Heading color="#3182CE" textAlign="center">

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { customAxios as axios } from "../helpers/customAxios";
-import Form from "./Form";
-import { Container, Center, VStack, Text } from "@chakra-ui/react";
+import React, { useState, useEffect } from 'react';
+import { customAxios as axios } from '../helpers/customAxios';
+import Form from './Form';
+import { Container, Center, VStack, Text } from '@chakra-ui/react';
 
 const UserFormContainer = (props) => {
   const [formData, setFormData] = useState(null);
@@ -14,14 +14,14 @@ const UserFormContainer = (props) => {
 
       // Get form, also check whether user is logged in or not
       // to see if user can access this form.
-      const { data } = await axios.get("/api/forms/get-form", {
+      const { data } = await axios.get('/api/forms/get-form', {
         params: { id: id, isLoggedIn: user.id ? true : false },
       });
 
       try {
         setFormData(data[0]);
       } catch (err) {
-        console.log("Error retrieving form data");
+        console.log('Error retrieving form data');
       }
 
       setIsLoading(false);
@@ -52,13 +52,14 @@ const UserFormContainer = (props) => {
       {!isLoading && !allowFormAccess && (
         <Center h="100vh">
           <VStack>
-            <Text fontSize={["xl", "3xl"]} spacing="5">
-              Uh-oh!
+            <Text fontSize={['xl', '3xl']} spacing="5">
+              You are unable to access this form. Please see the message below
+              for instructions
             </Text>
-            <Text fontSize={["lg", "2xl"]} spacing="5">
+            <Text fontSize={['lg', '2xl']} spacing="5">
               {user.id && !user.hasFilledProfileForm
-                ? "Please complete your user profile first before signing up"
-                : "You need to be logged in to access this form or this form is currently unavailable!"}
+                ? 'Please complete your user profile first before signing up'
+                : 'You need to be logged in to access this form or this form is currently unavailable!'}
             </Text>
           </VStack>
         </Center>

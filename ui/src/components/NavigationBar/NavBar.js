@@ -188,7 +188,7 @@ const NavBar = (props) => {
         </Flex>
       </Flex>
 
-      {currDate == 'Sun' ? (
+      {currDate === 'Sun' ? (
         <Flex
           w="100vw"
           background="#ffffff"
@@ -205,11 +205,7 @@ const NavBar = (props) => {
           <Flex w="100vw" justify="space-around">
             <Stack justify="center" align="center" isInline>
               <Center>
-                <Link
-                  href="/sermons"
-                  target="_blank"
-                  style={{ lineHeight: '0' }}
-                >
+                <Link href="/online" style={{ lineHeight: '0' }}>
                   <Button
                     h="3.5vh"
                     style={liveScStyle}
@@ -254,7 +250,7 @@ const NavBar = (props) => {
             <MainMenu login={loggedIn} onClose={onClose} />
           </DrawerBody>
           <DrawerFooter fontSize="sm" color="white" justifyContent="center">
-            Harvest Mission Community Church 2021
+            Harvest Mission Community Church {new Date().getFullYear()}
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

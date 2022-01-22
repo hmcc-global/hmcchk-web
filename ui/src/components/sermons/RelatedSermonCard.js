@@ -10,7 +10,7 @@ const RelatedSermonCard = ({ sermonData, allSermons }) => {
   let sermonImage = '';
   if (sermonData.sermonSeries[0].image !== null)
     sermonImage = sermonData.sermonSeries[0].image.sourceUrl;
-  else sermonImage = process.env.PUBLIC_URL + '/images/ripple_black.svg';
+  else sermonImage = process.env.PUBLIC_URL + '/images/sermons/placeholder.svg';
 
   const sermonCardStyle = {
     borderWidth: '1px',
@@ -32,10 +32,10 @@ const RelatedSermonCard = ({ sermonData, allSermons }) => {
         }}
       >
         <Stack direction="row">
-          <AspectRatio minW={{ base: '28%', md: '18%' }} ratio={1}>
+          <AspectRatio minW={{ base: '33%', md: '18%' }} ratio={16 / 9}>
             <Image borderLeftRadius="20" src={sermonImage} objectFit="cover" />
           </AspectRatio>
-          <Box overflow="hidden" p={[2, 6]} minW={{ base: '72%', md: '82%' }}>
+          <Box overflow="hidden" p={[2, 6]} minW={{ base: '67%', md: '82%' }}>
             <VStack alignItems="left" spacing={{ base: 1, md: 2 }}>
               <Text
                 textShadow="1px 0px 0px black"

@@ -56,19 +56,6 @@ const RecoverPassword = (props) => {
     fontWeight: "bold",
   };
 
-  const signupBoxStyle = {
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "3px 19px",
-    background: "rgba(0, 0, 0, 0.04)",
-    border: "1px solid #FFFFFF",
-    boxSizing: "border-box",
-    backdropFilter: "blur(6px)",
-    borderRadius: "10px",
-    width: "300px",
-    fontWeight: "bold",
-  };
-
   return (
     <>
       <Stack background="#2C5282" color="white" h="100vh">

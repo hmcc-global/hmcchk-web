@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Box,
   Button,
@@ -19,12 +19,12 @@ import {
   Center,
   Image,
   ModalFooter,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 const RenderSwitch = (param) => {
   switch (param.ModalSelection) {
-    case "FPS":
+    case 'FPS':
       return (
-        <Flex direction={["column", "column", "row"]}>
+        <Flex direction={['column', 'column', 'row']}>
           <Stack>
             <Text fontWeight="bold">
               Open your mobile banking FPS interface and scan the QR code OR
@@ -41,12 +41,12 @@ const RenderSwitch = (param) => {
 
           <Image
             margin="auto"
-            src={process.env.PUBLIC_URL + "/giving/FPSQR.png"}
-            boxSize={["70%", "70%", "30%"]}
+            src={process.env.PUBLIC_URL + '/images/giving/FPSQR.png'}
+            boxSize={['70%', '70%', '30%']}
           />
         </Flex>
       );
-    case "Bank Transfer":
+    case 'Bank Transfer':
       return (
         <VStack spacing="3vh">
           <Box>
@@ -80,7 +80,7 @@ const RenderSwitch = (param) => {
           </Text>
         </VStack>
       );
-    case "Cash":
+    case 'Cash':
       return (
         <Box>
           <Text fontWeight="bold">
@@ -89,7 +89,7 @@ const RenderSwitch = (param) => {
           </Text>
         </Box>
       );
-    case "Online Giving":
+    case 'Online Giving':
       return (
         <Box>
           <Text fontWeight="bold">
@@ -100,21 +100,21 @@ const RenderSwitch = (param) => {
             site or give via cash or check.
           </Text>
           <Text fontWeight="bold">
-            Click{" "}
+            Click{' '}
             <Link
               style={{
-                textDecoration: "underline",
+                textDecoration: 'underline',
               }}
               href="https://tithe.ly/give_new/www/#/tithely/give-one-time/645349"
               color="#319795"
             >
               here
-            </Link>{" "}
+            </Link>{' '}
             to proceed with online credit card giving
           </Text>
         </Box>
       );
-    case "Cheque":
+    case 'Cheque':
       return (
         <Box>
           <Text fontWeight="bold">All Checks should be made out to:</Text>
@@ -130,7 +130,7 @@ const RenderSwitch = (param) => {
         </Box>
       );
     default:
-      return "not detected";
+      return 'not detected';
   }
 };
 
@@ -138,9 +138,9 @@ export const GivingCard = (cardinfo) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box
-      w={["100%", "100%", "32%"]}
+      w={['100%', '100%', '32%']}
       borderRadius="lg"
-      my={["0.6em", "0.6em", "0"]}
+      my={['0.6em', '0.6em', '0']}
       bgImage={cardinfo.imageLink}
       bgPosition="center"
       bgSize="cover"
@@ -152,21 +152,21 @@ export const GivingCard = (cardinfo) => {
         h="100%"
         justify="center"
         style={{
-          backdropFilter: "blur(4px)",
-          background: "rgba(0, 0, 0, 0.29)",
+          backdropFilter: 'blur(4px)',
+          background: 'rgba(0, 0, 0, 0.29)',
         }}
       >
         <Box
-          py={["2vh", "3vh", null]}
-          m={[null, null, "auto"]}
+          py={['2vh', '3vh', null]}
+          m={[null, null, 'auto']}
           minH="10vh"
           minW="90%"
         >
-          <Flex direction={["row", "row", "column"]}>
-            <Center paddingBottom={["0", "0", "2vh", "1.5vh"]}>
+          <Flex direction={['row', 'row', 'column']}>
+            <Center paddingBottom={['0', '0', '2vh', '1.5vh']}>
               <Heading
                 as="h4"
-                fontSize={["sm", "md", "xl"]}
+                fontSize={['sm', 'md', 'xl']}
                 color="white"
                 fontWeight="bold"
               >
@@ -176,24 +176,24 @@ export const GivingCard = (cardinfo) => {
             <Spacer />
 
             <Center>
-              <Box w={["6em", "8em"]}>
+              <Box w={['6em', '8em']}>
                 <Button
                   w="100%"
                   variant="outline"
                   onClick={onOpen}
                   _hover={{
-                    background: "rgba(128,128,128, 0.4)",
+                    background: 'rgba(128,128,128, 0.4)',
                   }}
                 >
                   <Text
                     align="center"
-                    fontSize={["sm", "md", "lg"]}
+                    fontSize={['sm', 'md', 'lg']}
                     color="white"
                   >
                     Learn More
                   </Text>
                 </Button>
-                <Modal isOpen={isOpen} size={"xl"} onClose={onClose}>
+                <Modal isOpen={isOpen} size={'xl'} onClose={onClose}>
                   <ModalOverlay />
                   <ModalContent>
                     <ModalHeader>

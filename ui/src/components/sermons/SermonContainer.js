@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { customAxios as axios } from "../helpers/customAxios";
-import { Box, Container, Heading } from "@chakra-ui/react";
-import UpcomingSermon from "./UpcomingSermon";
-import SermonCardList from "./SermonCardList";
-import CurrentSermon from "./CurrentSermon";
-import { DateTime } from "luxon";
-import { getRenderDate } from "../helpers/eventsHelpers";
+import { useEffect, useState } from 'react';
+import { customAxios as axios } from '../helpers/customAxios';
+import { Box, Container, Heading } from '@chakra-ui/react';
+import UpcomingSermon from './UpcomingSermon';
+import SermonCardList from './SermonCardList';
+import CurrentSermon from './CurrentSermon';
+import { DateTime } from 'luxon';
+import { getRenderDate } from '../helpers/eventsHelpers';
 
 const SermonContainer = (props) => {
   const [sermons, setSermons] = useState([]);
@@ -20,7 +20,7 @@ const SermonContainer = (props) => {
 
   const getData = async () => {
     try {
-      const { data, status } = await axios.get("/api/sermons/get-sermons");
+      const { data, status } = await axios.get('/api/sermons/get-sermons');
       if (status === 200) {
         setSermons([...data]);
         let current = data.find(({ nextSermon }) => nextSermon == null);
@@ -32,7 +32,7 @@ const SermonContainer = (props) => {
           setOnlineSermon(true);
         setCurrentSermon(current);
       } else {
-        throw Error("Something went wrong");
+        throw Error('Something went wrong');
       }
     } catch (err) {
       console.log(err);
@@ -42,7 +42,7 @@ const SermonContainer = (props) => {
   const getEvent = async () => {
     try {
       const { data, status } = await axios.get(
-        "/api/announcements/get-announcements"
+        '/api/announcements/get-announcements'
       );
       if (status === 200) {
         const filtered = data.filter((item) => {
@@ -61,7 +61,7 @@ const SermonContainer = (props) => {
         filtered.sort((a, b) => (a.renderDate > b.renderDate ? 1 : -1));
         setEvents([...filtered]);
       } else {
-        throw Error("Something went wrong");
+        throw Error('Something went wrong');
       }
     } catch (err) {
       console.log(err);
@@ -76,7 +76,7 @@ const SermonContainer = (props) => {
           marginTop="20px"
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`url('${process.env.PUBLIC_URL}/images/sermons-banner.png')`}
+          bgImage={`url('${process.env.PUBLIC_URL}/images/sermons/sermons-banner.png')`}
           bgPosition="center"
           bgSize="cover"
           flex={1}
@@ -85,7 +85,7 @@ const SermonContainer = (props) => {
           px={[8, 10]}
           py={[8, 12]}
           m={2}
-          display={{ base: "none", md: "flex" }}
+          display={{ base: 'none', md: 'flex' }}
         >
           <Heading size="2xl" color="white" fontWeight="900">
             Sermons
@@ -96,7 +96,7 @@ const SermonContainer = (props) => {
           color="black"
           justifyContent="center"
           fontWeight="900"
-          display={{ base: "flex", md: "none" }}
+          display={{ base: 'flex', md: 'none' }}
         >
           Sermons
         </Heading>

@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
-import { customAxios as axios } from "../helpers/customAxios";
-import { Container, Grid, Heading, Text } from "@chakra-ui/react";
-import EventCard from "./EventCard";
-import { DateTime } from "luxon";
-import { getRenderDate } from "../helpers/eventsHelpers";
+import { useEffect, useState } from 'react';
+import { customAxios as axios } from '../helpers/customAxios';
+import { Container, Grid, Heading, Text } from '@chakra-ui/react';
+import EventCard from './EventCard';
+import { DateTime } from 'luxon';
+import { getRenderDate } from '../helpers/eventsHelpers';
 
 const EventsPage = (props) => {
-  const { user } = props;
   const [eventsList, setEventsList] = useState([]);
 
   useEffect(() => {
@@ -15,12 +14,12 @@ const EventsPage = (props) => {
     if (id != null) {
       // call function to open eventcard
     }
-  }, []);
+  }, [props]);
 
   const getEventsListFromDatabase = async () => {
     try {
       const { data, status } = await axios.get(
-        "/api/announcements/get-announcements"
+        '/api/announcements/get-announcements'
       );
       if (status === 200) {
         const filtered = data.filter((item) => {
@@ -39,7 +38,7 @@ const EventsPage = (props) => {
         filtered.sort((a, b) => (a.renderDate > b.renderDate ? 1 : -1));
         setEventsList([...filtered]);
       } else {
-        throw Error("Something went wrong with the request");
+        throw Error('Something went wrong with the request');
       }
     } catch (err) {
       console.log(err);
@@ -57,18 +56,18 @@ const EventsPage = (props) => {
       >
         Events
       </Heading>
-      <Text fontSize={{ base: "sm", md: "md" }} textAlign="center">
+      <Text fontSize={{ base: 'sm', md: 'md' }} textAlign="center">
         Check out what's happening at HMCC of Hong Kong!
       </Text>
       <Grid
         mt="12"
         mb="12"
-        templateColumns={{ sm: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
+        templateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
         gap={[3, 6]}
       >
         {eventsList.length > 0 &&
           eventsList.map((event, i) => (
-            <EventCard key={"event" + i} eventData={event} />
+            <EventCard key={'event' + i} eventData={event} />
           ))}
       </Grid>
     </Container>

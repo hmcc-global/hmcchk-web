@@ -1,9 +1,5 @@
 import {
   Accordion,
-  Flex,
-  TextProps,
-  MinusIcon,
-  AddIcon,
   Text,
   Heading,
   Center,
@@ -12,8 +8,8 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-} from "@chakra-ui/react";
-import VisionMissionSection from "./VisionMissionSection";
+} from '@chakra-ui/react';
+import VisionMissionSection from './VisionMissionSection';
 
 const ValuesSection = (props) => {
   const { title, blurb } = props;
@@ -24,7 +20,7 @@ const ValuesSection = (props) => {
       <Center padding="5">
         <Heading
           as="h2"
-          fontSize={["4xl", "6xl"]}
+          fontSize={['4xl', '6xl']}
           fontWeight={700}
           color="#0628A3"
           lineHeight={1}
@@ -38,7 +34,7 @@ const ValuesSection = (props) => {
       <Box w="90%">
         <Heading
           as="h2"
-          fontSize={["4xl", "6xl"]}
+          fontSize={['4xl', '6xl']}
           fontWeight={700}
           color="#0628A3"
           lineHeight={1}

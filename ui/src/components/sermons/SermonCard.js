@@ -5,6 +5,7 @@ import {
   Text,
   HStack,
   VStack,
+  Stack,
   Icon,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
@@ -22,7 +23,7 @@ const CircleIcon = () => (
 
 const SermonCard = ({ sermonData, allSermons }) => {
   const [sermonImage, setSermonImage] = useState(
-    process.env.PUBLIC_URL + '/images/ripple_black.svg'
+    process.env.PUBLIC_URL + '/images/sermons/placeholder.svg'
   );
   const [sermonDate, setSermonDate] = useState('');
   const [onlineSermon, setOnlineSermon] = useState(false);
@@ -40,90 +41,91 @@ const SermonCard = ({ sermonData, allSermons }) => {
     }
   }, [sermonData]);
 
+  const sermonCardStyle = {
+    borderWidth: '1px',
+    borderRadius: '20px',
+    overflow: 'hidden',
+    bg: 'white',
+    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.15)',
+    align: 'stretch',
+    maxW: '100%',
+  };
+
   return (
-    <>
-      <Box
-        borderWidth="1px"
-        borderRadius="20"
-        overflow="hidden"
-        h="auto"
-        bg="white"
-        shadow="lg"
-      >
-        <Box>
-          <Link
-            to={{
-              pathname: `/sermons/${sermonData.id}`,
-              state: { sermonData: sermonData, allSermons: allSermons },
-            }}
-          >
-            <AspectRatio width="100%" ratio={16 / 9}>
-              <>
-                <Image
-                  borderTopRadius="20"
-                  src={sermonImage}
-                  objectFit="cover"
-                />
-                {onlineSermon && (
-                  <Box pr={'65%'} pb={'40%'}>
-                    <HStack
-                      px={{ base: '0', md: '2', lg: '3' }}
-                      color="white"
-                      bg="red.500"
-                      boxShadow="dark-lg"
-                    >
-                      <Text fontWeight={'800'}>
-                        <CircleIcon /> LIVE
-                      </Text>
-                    </HStack>
-                  </Box>
-                )}
-              </>
-            </AspectRatio>
-            <Box position="absolute" left="100%" top="50%">
-              <AspectRatio width="20%" ratio={1 / 1}>
-                <Image
-                  borderRadius="100%"
-                  src={process.env.PUBLIC_URL + '/images/PlayButton.png'}
-                />
-              </AspectRatio>
-            </Box>
-          </Link>
+    <Link
+      style={sermonCardStyle}
+      to={{
+        pathname: `/sermons/${sermonData.id}`,
+        state: { sermonData: sermonData, allSermons: allSermons },
+      }}
+    >
+      <Stack direction={['row', 'column']}>
+        <AspectRatio minW={{ base: '36%', md: '18%' }} ratio={16 / 9}>
+          <>
+            <Image
+              borderTopRadius={['0', '20']}
+              borderLeftRadius={['20', '0']}
+              src={sermonImage}
+              objectFit="cover"
+            />
+            {onlineSermon && (
+              <Box
+                pr={{ base: '42%', md: '65%' }}
+                pb={{ base: '40%', md: '40%' }}
+              >
+                <HStack
+                  px={{ base: '0', md: '2', lg: '3' }}
+                  color="white"
+                  bg="red.500"
+                  boxShadow="dark-lg"
+                >
+                  <Text fontSize={['xs', 'sm']} fontWeight={'800'} pr="0.5rem">
+                    <CircleIcon /> LIVE
+                  </Text>
+                </HStack>
+              </Box>
+            )}
+          </>
+        </AspectRatio>
+        <Box position="absolute" left="100%" top="50%">
+          <AspectRatio width="20%" ratio={1 / 1}>
+            <Image
+              borderRadius="100%"
+              src={process.env.PUBLIC_URL + '/images/PlayButton.png'}
+            />
+          </AspectRatio>
         </Box>
-        <Link
-          to={{
-            pathname: `/sermons/${sermonData.id}`,
-            state: { sermonData: sermonData, allSermons: allSermons },
-          }}
+        <Box
+          overflow="hidden"
+          position="relative"
+          paddingLeft={[2, 4]}
+          paddingRight={[2, 4]}
+          paddingBottom={[2, 4]}
+          paddingTop={[1, 2]}
         >
-          <Box
-            overflow="hidden"
-            position="relative"
-            paddingLeft={[2, 4]}
-            paddingRight={[2, 4]}
-            paddingBottom={[2, 4]}
-            paddingTop={[1, 2]}
-          >
-            <VStack alignItems="left" spacing={1}>
-              <Text as="h4" size="lg" fontWeight="900" isTruncated>
-                {sermonData.title}
+          <VStack alignItems="left" spacing={1}>
+            <Text
+              fontSize={{ base: 'sm', md: 'lg' }}
+              fontWeight={['600', '800']}
+              isTruncated
+            >
+              {sermonData.title}
+            </Text>
+            <Text fontSize={{ base: 'xs', md: 'sm' }} isTruncated>
+              {sermonData.sermonSeries[0].name}
+            </Text>
+            <Stack direction={['column', 'row']} spacing="auto">
+              <Text fontSize={{ base: 'xs', md: 'sm' }} isTruncated>
+                {sermonData.speaker[0].name}
               </Text>
-              <Text fontSize="sm" isTruncated>
-                {sermonData.sermonSeries[0].name}
+              <Text fontSize={{ base: 'xs', md: 'sm' }} isTruncated>
+                {sermonDate}
               </Text>
-              <HStack spacing="auto">
-                <Text fontSize="xs" isTruncated>
-                  {sermonData.speaker[0].name}
-                </Text>
-                <Text fontSize="xs" isTruncated>
-                  {sermonDate}
-                </Text>
-              </HStack>
-            </VStack>
-          </Box>
-        </Link>
-      </Box>
-    </>
+            </Stack>
+          </VStack>
+        </Box>
+      </Stack>
+    </Link>
   );
 };
 

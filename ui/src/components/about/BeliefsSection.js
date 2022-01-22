@@ -4,7 +4,6 @@ import {
   Heading,
   Center,
   Box,
-  SimpleGrid,
   HStack,
   VStack,
   Accordion,
@@ -12,7 +11,7 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const BeliefsCard = ({ head, body }) => {
   return (
@@ -46,7 +45,7 @@ const BeliefsSection = (props) => {
       <Center padding="5">
         <Heading
           as="h2"
-          fontSize={["4xl", "6xl"]}
+          fontSize={['4xl', '6xl']}
           fontWeight={700}
           lineHeight={1}
           textAlign="center"
@@ -56,7 +55,7 @@ const BeliefsSection = (props) => {
           {title}
         </Heading>
       </Center>
-      <Box display={{ base: "none", lg: "flex" }}>
+      <Box display={{ base: 'none', lg: 'flex' }}>
         <VStack spacing="5" w="100%">
           <HStack spacing="5" h="20em">
             <BeliefsCard head={blurb.head[0]} body={blurb.body[0]} />
@@ -76,7 +75,7 @@ const BeliefsSection = (props) => {
         </VStack>
       </Box>
       <Center>
-        <Box display={{ base: "block", lg: "none" }} w="90%">
+        <Box display={{ base: 'block', lg: 'none' }} w="90%">
           <Accordion allowMultiple>
             <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
               <h2>

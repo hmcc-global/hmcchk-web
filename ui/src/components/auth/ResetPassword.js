@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
-import { customAxios as axios } from "../helpers/customAxios";
-import { useForm } from "react-hook-form";
-import { ChevronLeftIcon } from "@chakra-ui/icons";
+import React, { useRef } from 'react';
+import { customAxios as axios } from '../helpers/customAxios';
+import { useForm } from 'react-hook-form';
+import { ChevronLeftIcon } from '@chakra-ui/icons';
 
 import {
   Box,
@@ -15,8 +15,8 @@ import {
   Stack,
   Link,
   useToast,
-} from "@chakra-ui/react";
-import { useLocation } from "react-router-dom";
+} from '@chakra-ui/react';
+import { useLocation } from 'react-router-dom';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -34,42 +34,42 @@ const ResetPassword = (props) => {
 
   const onSubmit = async (data) => {
     try {
-      const token = query.get("token");
+      const token = query.get('token');
       const params = {
         token,
         password: data.password,
       };
       const isSuccess = await axios.post(
-        "/api/auth/change-password-recovery",
+        '/api/auth/change-password-recovery',
         params
       );
 
       if (isSuccess) {
         toast({
-          title: "Password Reset.",
-          description: "Password successfully reset! Please login again.",
-          status: "success",
+          title: 'Password Reset.',
+          description: 'Password successfully reset! Please login again.',
+          status: 'success',
           duration: 9000,
           isClosable: true,
         });
 
-        props.history.push("/login");
+        props.history.push('/login');
       } else {
         toast({
-          title: "Password Reset.",
-          description: "Password could not be reset.",
-          status: "error",
+          title: 'Password Reset.',
+          description: 'Password could not be reset.',
+          status: 'error',
           duration: 9000,
           isClosable: true,
         });
       }
     } catch (err) {
-      if (err.response?.status == 498) {
+      if (err.response?.status === 498) {
         // invalid token error code
         toast({
-          title: "Password Reset.",
-          description: "Password reset token invalid or expired.",
-          status: "error",
+          title: 'Password Reset.',
+          description: 'Password reset token invalid or expired.',
+          status: 'error',
           duration: 9000,
           isClosable: true,
         });
@@ -78,32 +78,32 @@ const ResetPassword = (props) => {
   };
 
   const inputBoxStyle = {
-    background: "#ffffff",
-    border: "1px solid #000000",
-    boxSizing: "border-box",
-    borderRadius: "6px",
-    padding: "3px",
-    width: "300px",
-    color: "black",
-    paddingLeft: "5px",
+    background: '#ffffff',
+    border: '1px solid #000000',
+    boxSizing: 'border-box',
+    borderRadius: '6px',
+    padding: '3px',
+    width: '300px',
+    color: 'black',
+    paddingLeft: '5px',
   };
 
   const submitBoxStyle = {
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "3px 19px",
-    background: "rgba(0, 0, 0, 0.04)",
-    border: "1px solid #FFFFFF",
-    boxSizing: "border-box",
-    backdropFilter: "blur(6px)",
-    borderRadius: "10px",
-    height: "40px",
-    width: "250px",
-    fontWeight: "bold",
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '3px 19px',
+    background: 'rgba(0, 0, 0, 0.04)',
+    border: '1px solid #FFFFFF',
+    boxSizing: 'border-box',
+    backdropFilter: 'blur(6px)',
+    borderRadius: '10px',
+    height: '40px',
+    width: '250px',
+    fontWeight: 'bold',
   };
 
   const password = useRef({});
-  password.current = watch("password", "");
+  password.current = watch('password', '');
 
   return (
     <>
@@ -111,7 +111,7 @@ const ResetPassword = (props) => {
         <Flex w="100vw">
           <Box>
             <Link
-              to={{ pathname: "https://hongkong.hmcc.net" }}
+              to={{ pathname: 'https://hongkong.hmcc.net' }}
               target="_blank"
             >
               <ChevronLeftIcon boxSize={10} />
@@ -120,10 +120,10 @@ const ResetPassword = (props) => {
           </Box>
         </Flex>
         <Flex justifyContent="center">
-          <VStack justify="center" align="center" spacing={["3vh"]} py="5vh">
+          <VStack justify="center" align="center" spacing={['3vh']} py="5vh">
             <Image
               marginBottom="15px"
-              h={{ base: "6vh", sm: "8vh", md: "10vh", lg: "12vh", xl: "15vh" }}
+              h={{ base: '6vh', sm: '8vh', md: '10vh', lg: '12vh', xl: '15vh' }}
               src={`${process.env.PUBLIC_URL}/images/ripple.png`}
               alt="Logo of HMCC"
             />
@@ -146,8 +146,8 @@ const ResetPassword = (props) => {
                 <Text>Enter Your New Password</Text>
                 <input
                   id="password"
-                  {...register("password", {
-                    required: "required",
+                  {...register('password', {
+                    required: 'required',
                     pattern: {
                       value:
                         /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
@@ -185,11 +185,11 @@ const ResetPassword = (props) => {
                 <input
                   id="password_repeat"
                   name="password_repeat"
-                  {...register("password_repeat", {
-                    required: "required",
+                  {...register('password_repeat', {
+                    required: 'required',
                     validate: (value) =>
                       value === password.current ||
-                      "The passwords do not match",
+                      'The passwords do not match',
                   })}
                   type="password"
                   placeholder="Password"
