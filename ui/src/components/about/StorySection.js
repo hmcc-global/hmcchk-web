@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Stack, VStack, Text } from "@chakra-ui/layout";
+import { Box, Flex, Heading, Stack, VStack, Text } from '@chakra-ui/layout';
 
 const PictureStory = ({ image, text }) => {
   return (
@@ -29,7 +29,7 @@ const StorySection = (props) => {
     <Flex direction="column" maxW="container.lg">
       <Heading
         as="h2"
-        fontSize={["2xl", "6xl"]}
+        fontSize={['2xl', '6xl']}
         fontWeight={700}
         lineHeight={1}
         color="#0628A3"
@@ -43,7 +43,7 @@ const StorySection = (props) => {
       </Text>
       <Box
         w="100%"
-        h={["15em", "25em"]}
+        h={['15em', '25em']}
         borderWidth="1px"
         borderRadius="20"
         bgImage={`url('${process.env.PUBLIC_URL}/images/about/picture1.png')`}
@@ -58,7 +58,7 @@ const StorySection = (props) => {
         {blurb[1]}
       </Text>
       <Stack
-        direction={["column", "row"]}
+        direction={['column', 'row']}
         mt={[4, 8]}
         mb={[4, 8]}
         maxW="container.lg"
@@ -73,7 +73,7 @@ const StorySection = (props) => {
         />
         <PictureStory
           image={`url('${process.env.PUBLIC_URL}/images/about/picture4.png')`}
-          text="Inagural Sunday Celebration at Hong Kong in 2015"
+          text="Inaugural Sunday Celebration at Hong Kong in 2015"
         />
       </Stack>
       <Text color="black" textAlign="justify">
