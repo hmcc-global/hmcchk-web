@@ -1,6 +1,6 @@
-import * as React from "react";
-import { SocialIcon } from "react-social-icons";
-import { Box, Center, Text, VStack, HStack } from "@chakra-ui/react";
+import * as React from 'react';
+import { SocialIcon } from 'react-social-icons';
+import { Box, Text, HStack } from '@chakra-ui/react';
 
 export function SocialMediaLinks() {
   return (
