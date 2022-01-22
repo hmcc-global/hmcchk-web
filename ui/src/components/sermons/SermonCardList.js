@@ -2,12 +2,9 @@ import React, { useState, useEffect } from 'react';
 import {
   Grid,
   Heading,
-  VStack,
-  Text,
   Button,
   Box,
   HStack,
-  Select,
   Drawer,
   DrawerBody,
   DrawerFooter,
@@ -15,8 +12,6 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Link,
-  LinkOverlay,
   useDisclosure,
 } from '@chakra-ui/react';
 import Pagination from '../helpers/Pagination';
@@ -123,29 +118,13 @@ const SermonCardList = ({ allSermons }, props) => {
         <Grid
           mt={['6', '12']}
           mb={['6', '12']}
-          templateColumns="repeat(3, 1fr)"
+          templateColumns={['repeat(1, 1fr)', 'repeat(3, 1fr)']}
           gap={[3, 6]}
-          display={{ base: 'none', md: 'grid' }}
+          // display={{ base: 'none', md: 'grid' }}
         >
           {currentSermons.length > 0 &&
             currentSermons.map((sermon, i) => (
               <SermonCard
-                key={sermon.id}
-                sermonData={sermon}
-                allSermons={sermons}
-              />
-            ))}
-        </Grid>
-        <Grid
-          mt={['6', '12']}
-          mb={['6', '12']}
-          templateColumns="repeat(1, 1fr)"
-          gap={[3, 6]}
-          display={{ base: 'grid', md: 'none' }}
-        >
-          {currentSermons.length > 0 &&
-            currentSermons.map((sermon, i) => (
-              <RelatedSermonCard
                 key={sermon.id}
                 sermonData={sermon}
                 allSermons={sermons}
