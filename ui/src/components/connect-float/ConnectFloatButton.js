@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Box, HStack, IconButton, useDisclosure } from "@chakra-ui/react";
-import { IoChatbubblesSharp } from "react-icons/io5";
-import ConnectModal from "./ConnectModal";
-import "./connectfloat.css";
+import { useState } from 'react';
+import { Box, HStack, IconButton, useDisclosure } from '@chakra-ui/react';
+import { IoChatbubblesSharp } from 'react-icons/io5';
+import ConnectModal from './ConnectModal';
+import './connectfloat.css';
 
 const ConnectFloatButton = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -11,8 +11,8 @@ const ConnectFloatButton = (props) => {
   return (
     <Box
       position="absolute"
-      bottom={["2rem", "3rem"]}
-      right={["2rem", "3rem"]}
+      bottom={['2rem', '3rem']}
+      right={['2rem', '3rem']}
       overflow="hidden"
     >
       <IconButton
@@ -22,10 +22,9 @@ const ConnectFloatButton = (props) => {
         isRound
         icon={
           <HStack
-            position="absolute"
-            right={-100}
             className="content"
-            transition="all 0.7s"
+            transition="all 0.5s"
+            marginLeft={isHover ? '0%' : '240%'}
           >
             <IoChatbubblesSharp color="#fff" />
             <Box
@@ -39,11 +38,11 @@ const ConnectFloatButton = (props) => {
           </HStack>
         }
         onClick={onOpen}
-        transition="width 1.2s"
+        transition="width 0.5s"
         colorScheme="messenger"
         _hover={{
-          width: "175px",
-          transition: "width 0.6s",
+          width: '175px',
+          transition: 'width 0.5s',
         }}
         onMouseOver={() => setIsHover(true)}
         onMouseOut={() => setIsHover(false)}
