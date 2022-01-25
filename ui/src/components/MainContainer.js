@@ -30,7 +30,7 @@ import ActiveSermonContainer from './sermons/ActiveSermonContainer';
 
 const MainContainer = () => {
   return (
-    <chakra.main flexGrow={1} bg="#ffffff" overflowY="auto">
+    <chakra.main flexGrow={1} bg="#ffffff" overflowY="auto" id="main-container">
       <ScrollToTop />
       <Switch>
         <PrivateRoute
