@@ -21,7 +21,7 @@ const OnlinePageTabs = ({ sermonNotes }) => {
 
   const refreshSermonNotes = () => {
     setNoteId(noteId + 1);
-  }
+  };
 
   return (
     <Tabs isFitted>
@@ -55,41 +55,6 @@ const OnlinePageTabs = ({ sermonNotes }) => {
         </TabPanel>
         <TabPanel>
           <Accordion allowToggle allowMultiple>
-            <AccordionItem>
-              <AccordionButton
-                _expanded={{ bg: '#0628A3', color: 'white' }}
-                justifyContent="space-between"
-              >
-                Join Our ZOOM Call!
-                <AccordionIcon />
-              </AccordionButton>
-              <AccordionPanel>
-                As a church, we believe that there is power when we worship
-                together and can fellowship with one another in real-time. We
-                encourage our LIFE Groups (small group communities) to zoom
-                together LIVE during the Sunday Celebration to engage with each
-                other for worship, discussion time, etc. If you are new and
-                joining us for the first time or are not yet part of a LIFE
-                Group, feel free to join this ZOOM link to worship together with
-                some people in our welcoming team to get connected. <br />
-                <br />
-                <b>Join Zoom Meeting</b>
-                <br />
-                <Link
-                  href="https://us02web.zoom.us/j/87590888306?pwd=dG5lcUdta2liaVduZ2gwWDdTbndpZz09"
-                  fontStyle="bold"
-                  color="blue"
-                  target="_blank"
-                >
-                  Meeting Link
-                </Link>
-                <br />
-                <br />
-                <b>Meeting ID:</b> 875 9088 8306
-                <br />
-                <b>Passcode:</b> 434106
-              </AccordionPanel>
-            </AccordionItem>
             <AccordionItem>
               <AccordionButton
                 _expanded={{ bg: '#0628A3', color: 'white' }}
