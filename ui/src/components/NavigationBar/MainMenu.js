@@ -49,22 +49,22 @@ const MainMenu = ({ login, onClose }) => {
                 </Text>
               </Link>
               <Link href="/about-us">
-                <Text fontSize="18px">Who We Are</Text>
+                <Text fontSize="18px">Our Story</Text>
               </Link>
               <Link href="/about-us">
-                <Text fontSize="18px">Beliefs</Text>
+                <Text fontSize="18px">{'Vision & Mission'}</Text>
               </Link>
               <Link href="/about-us">
                 <Text fontSize="18px">Our Values</Text>
               </Link>
               <Link href="/about-us">
-                <Text fontSize="18px">Statement of Faith</Text>
+                <Text fontSize="18px">Our Strategy</Text>
               </Link>
               <Link href="/about-us">
-                <Text fontSize="18px">BOLD Vision</Text>
+                <Text fontSize="18px">Our Staff</Text>
               </Link>
               <Link href="/about-us">
-                <Text fontSize="18px">Harvest Mission International</Text>
+                <Text fontSize="18px">Beliefs</Text>
               </Link>
             </VStack>
             <Spacer />

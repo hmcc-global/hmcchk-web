@@ -18,7 +18,6 @@ const RelatedSermonCard = ({ sermonData, allSermons }) => {
     overflow: 'hidden',
     bg: 'white',
     boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.15)',
-    align: 'stretch',
     maxW: '100%',
   };
 
@@ -38,7 +37,7 @@ const RelatedSermonCard = ({ sermonData, allSermons }) => {
           <Box overflow="hidden" p={[2, 6]} minW={{ base: '67%', md: '82%' }}>
             <VStack alignItems="left" spacing={{ base: 1, md: 2 }}>
               <Text
-                textShadow="1px 0px 0px black"
+                fontWeight="600"
                 fontSize={{ base: 'sm', md: 'md' }}
                 isTruncated
               >

@@ -38,22 +38,22 @@ export function LinkGrid() {
             <Text fontWeight="bold">About</Text>
           </Link>
           <Link href="/about-us">
-            <Text>Who We Are</Text>
+            <Text>Our Story</Text>
           </Link>
           <Link href="/about-us">
-            <Text>Beliefs</Text>
+            <Text>{'Vision & Mission'}</Text>
           </Link>
           <Link href="/about-us">
             <Text>Our Values</Text>
           </Link>
           <Link href="/about-us">
-            <Text>Statement of Faith</Text>
+            <Text>Our Strategy</Text>
           </Link>
           <Link href="/about-us">
-            <Text>Bold Vision</Text>
+            <Text>Our Staff</Text>
           </Link>
           <Link href="/about-us">
-            <Text>HMI</Text>
+            <Text>Beliefs</Text>
           </Link>
         </Stack>
       </Box>
