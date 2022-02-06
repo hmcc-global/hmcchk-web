@@ -5,20 +5,20 @@ import '@fontsource/inter';
 const retreatTheme = extendTheme({
   textStyles: {
     title: {
-      fontFamily: 'Sora',
+      font: 'Sora',
       fontSize: '50px',
       fontWeight: 'normal',
       lineHeight: '95.5%',
     },
     subtitle: {
-      fontFamily: 'Sora',
+      font: 'Sora',
       fontSize: '25px',
       fontWeight: 'bold',
       lineHeight: '35px',
       letterSpacing: '-0.02em',
     },
     normal: {
-      fontFamily: 'Inter',
+      font: 'Inter',
       fontSize: '25px',
       fontWeight: 'normal',
     },
