@@ -4,8 +4,10 @@ import {
   Box,
   HStack,
   VStack,
+  Stack,
   Container,
   Button,
+  Image,
 } from '@chakra-ui/react';
 import retreatTheme from '../retreatTheme';
 import '@fontsource/sora';
@@ -21,7 +23,7 @@ const AboutContainer = () => {
         bgImage="linear-gradient(90deg, #0FB4BE 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(90deg, #FFDC82 66%, #F39371 66%)"
       >
         <Container
-          maxW={['container.xl']}
+          maxW={['container.lg']}
           justify="center"
           theme={retreatTheme}
         >
@@ -72,6 +74,34 @@ const AboutContainer = () => {
               >
                 Promo Video
               </Button>
+            </HStack>
+            <HStack justify="center" spacing={5}>
+              <Image
+                w={['30%']}
+                h="auto"
+                src={process.env.PUBLIC_URL + '/images/home/featured.jpeg'}
+                // src={`url('${process.env.PUBLIC_URL}/images/retreat/with-everything-retreat.png')`}
+              />
+              <Box
+                border="1px solid #000"
+                borderRadius="20px"
+                bg="white"
+                justify="center"
+                width={['35%']}
+                p={[7]}
+              >
+                <Text textStyle="inter" fontSize="sm">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+                  vel euismod leo. Donec iaculis turpis et molestie porttitor.
+                  Mauris eleifend eu velit nec tristique. Vestibulum ante ipsum
+                  primis in faucibus orci luctus et ultrices posuere cubilia
+                  curae; Proin nec nisi a risus mattis porta. In convallis magna
+                  venenatis metus luctus consectetur. Nam ullamcorper facilisis
+                  lacus, in dictum ligula. Curabitur pharetra mollis augue vel
+                  eleifend. Sed at imperdiet purus. Aliquam erat volutpat. Donec
+                  sodales gravida porttitor.
+                </Text>
+              </Box>
             </HStack>
           </VStack>
         </Container>
