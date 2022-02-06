@@ -1,15 +1,5 @@
-import { Box, Text, extendTheme } from '@chakra-ui/react';
-import '@fontsource/sora';
-
-const retreatTheme = extendTheme({
-  textStyles: {
-    title: {
-      fontSize: '50px',
-      fontWeight: 'normal',
-      lineHeight: '95.5%',
-    },
-  },
-});
+import { Box, Text } from '@chakra-ui/react';
+import { retreatTheme } from '../retreatTheme';
 
 const AboutSection = () => {
   return (
