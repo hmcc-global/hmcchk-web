@@ -27,6 +27,7 @@ import AdminContainer from './AdminContainer';
 import ScrollToTop from './helpers/ScrollToTop';
 import AboutUsContainer from './about/AboutUsContainer';
 import ActiveSermonContainer from './sermons/ActiveSermonContainer';
+import AboutContainer from './retreat/about/AboutContainer';
 
 const MainContainer = () => {
   return (
@@ -212,6 +213,12 @@ const MainContainer = () => {
           path="/admin/:pageName"
           permissions={['admin', 'stewardship']}
           component={AdminContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/with-everything/about"
+          permissions={['noUser']}
+          component={AboutContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={NoMatch} />
       </Switch>
