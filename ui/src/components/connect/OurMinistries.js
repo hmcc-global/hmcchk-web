@@ -98,8 +98,9 @@ const OurMinistries = (props) => {
               fontSize={['1.5em', '1.5em', '2em']}
               fontWeight={700}
               className="front"
+              p={[5, 10]}
             >
-              MARRIED COUPLES
+              MARRIED COUPLES AND FAMILY
             </Heading>
             <Box
               className="back"
