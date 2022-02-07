@@ -27,7 +27,7 @@ const AboutContainer = () => {
           justify="center"
           theme={retreatTheme}
         >
-          <VStack w="full" justify="center" spacing={6}>
+          <VStack w="full" justify="center" spacing={8}>
             <Box
               bg="white"
               borderRadius="20px"
@@ -74,34 +74,6 @@ const AboutContainer = () => {
               >
                 Promo Video
               </Button>
-            </HStack>
-            <HStack justify="center" spacing={5}>
-              <Image
-                w={['30%']}
-                h="auto"
-                src={process.env.PUBLIC_URL + '/images/home/featured.jpeg'}
-                // src={`url('${process.env.PUBLIC_URL}/images/retreat/with-everything-retreat.png')`}
-              />
-              <Box
-                border="1px solid #000"
-                borderRadius="20px"
-                bg="white"
-                justify="center"
-                width={['35%']}
-                p={[7]}
-              >
-                <Text textStyle="inter" fontSize="sm">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                  vel euismod leo. Donec iaculis turpis et molestie porttitor.
-                  Mauris eleifend eu velit nec tristique. Vestibulum ante ipsum
-                  primis in faucibus orci luctus et ultrices posuere cubilia
-                  curae; Proin nec nisi a risus mattis porta. In convallis magna
-                  venenatis metus luctus consectetur. Nam ullamcorper facilisis
-                  lacus, in dictum ligula. Curabitur pharetra mollis augue vel
-                  eleifend. Sed at imperdiet purus. Aliquam erat volutpat. Donec
-                  sodales gravida porttitor.
-                </Text>
-              </Box>
             </HStack>
           </VStack>
         </Container>
