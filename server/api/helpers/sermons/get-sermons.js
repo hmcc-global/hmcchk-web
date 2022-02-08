@@ -29,6 +29,7 @@ const transformSermon = (sermon, speakers, sermonSeries, serviceTypes) => {
         ? DateTime.fromFormat(sermon.acf.time, 'hh:mm:ss').toFormat('hh:mm a')
         : '',
     status: sermon.status,
+    protected: sermon.content.protected
   };
 };
 
@@ -60,7 +61,9 @@ module.exports = {
     const url = sails.config.custom.sermons.host;
 
     try {
-      const data = await sails.helpers.getData(url);
+      const data = await sails.helpers.getData(url, {
+        password: process.env.SERMON_PASS
+      });
       const speakersList = await sails.helpers.sermons.getSpeakers();
       const sermonSeriesList = await sails.helpers.sermons.getSermonSeries();
       const serviceTypesList = await sails.helpers.sermons.getServiceTypes();
