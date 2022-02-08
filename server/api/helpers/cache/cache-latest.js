@@ -77,7 +77,7 @@ module.exports = {
       (result) => result.length > 0
     );
 
-    let pAnnouncements = retryUntilSuccess(
+    let pAnnouncements = await retryUntilSuccess(
       "Announcements",
       () => sails.helpers.announcements.getAnnouncements(),
       (result) => result.length > 0

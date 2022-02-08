@@ -9,6 +9,11 @@ module.exports = {
       required: false,
       type: 'number',
       description: 'Id of sermon'
+    },
+    includeProtected: {
+      required: false,
+      type: 'boolean',
+      default: false
     }
   },
 
@@ -21,11 +26,14 @@ module.exports = {
     },
   },
 
-  fn: async function({ id }, exits) {
+  fn: async function({ id, includeProtected }, exits) {
     sails.log.info(`Get sermons`);
 
     try {
       let data = await sails.helpers.sermons.getSermons();
+      if (!includeProtected) {
+        data = data.filter(s => s.protected === false);
+      }
       if (id) {
         sails.log.info(`Get sermon with id ${id}`);
         data = data.filter(d => d.id === id);

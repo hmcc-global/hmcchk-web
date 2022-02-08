@@ -23,7 +23,8 @@ const SermonContainer = (props) => {
       const { data, status } = await axios.get('/api/sermons/get-sermons');
       if (status === 200) {
         setSermons([...data]);
-        let current = data.find(({ nextSermon }) => nextSermon == null);
+        // we can always assume the first sermon is the latest one since wpfc_sermon API sorts by datePreached
+        let current = data[0]
         if (
           current.streamLink &&
           current.sermonNotes &&
