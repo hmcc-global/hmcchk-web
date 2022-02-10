@@ -13,7 +13,12 @@ module.exports = {
     includeProtected: {
       required: false,
       type: 'boolean',
-      default: false
+      defaultsTo: false
+    },
+    includePublic: {
+      required: false,
+      type: 'boolean',
+      defaultsTo: true
     }
   },
 
@@ -26,13 +31,16 @@ module.exports = {
     },
   },
 
-  fn: async function({ id, includeProtected }, exits) {
+  fn: async function({ id, includeProtected, includePublic }, exits) {
     sails.log.info(`Get sermons`);
 
     try {
       let data = await sails.helpers.sermons.getSermons();
       if (!includeProtected) {
         data = data.filter(s => s.protected === false);
+      }
+      if (!includePublic) {
+        data = data.filter(s => s.protected === true);
       }
       if (id) {
         sails.log.info(`Get sermon with id ${id}`);
