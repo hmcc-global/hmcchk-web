@@ -100,7 +100,7 @@ const OurMinistries = (props) => {
               className="front"
               p={[5, 10]}
             >
-              MARRIED COUPLES AND FAMILY
+              MARRIED COUPLES AND FAMILIES
             </Heading>
             <Box
               className="back"
