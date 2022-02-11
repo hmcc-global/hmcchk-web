@@ -140,7 +140,7 @@ const OurMinistries = (props) => {
               <Text>
                 Building Blocks is HMCC’s Children Ministry, learn more about it{' '}
                 <Text as="u">
-                  <Link href="https://hongkong.hmcc.net/building-blocks/">
+                  <Link href="https://hongkong.sub.hmcc.net/building-blocks/">
                     here ➔
                   </Link>
                 </Text>
