@@ -13,7 +13,6 @@ import { ChevronLeftIcon } from '@chakra-ui/icons';
 import OnlinePageButtons from './StreamButtons';
 import { customAxios as axios } from '../../helpers/customAxios';
 import React, { useState, useEffect, useCallback } from 'react';
-// import retreatTheme from '../retreatTheme';
 import '@fontsource/sora';
 import '@fontsource/inter';
 
@@ -21,8 +20,7 @@ const StreamContainer = (props) => {
   const [title, setTitle] = useState("With Everything Congregational Retreat 2022")
   const [url, setUrl] = useState("");
 
-  // TODO-aparedan: getData should get all the online sermon info
-  // by default, should also just show a placeholder image if stream info doesn't exist yet
+  // TODO-aparedan: test with real data
   const getData = useCallback(async () => {
     try {
       const { data, status } = await axios.get('/api/sermons/get-sermons', {
@@ -63,7 +61,6 @@ const StreamContainer = (props) => {
       bgPosition="center center"
       justify="center"
     >
-      {/* <Container maxW="container.lg" theme={retreatTheme}> */}
       <Container maxW="container.lg">
         <Box mb="20px" mt="20px">
           <VStack alignItems="left" alignContent="left">
@@ -75,7 +72,7 @@ const StreamContainer = (props) => {
                 justifyContent="left"
                 leftIcon={<ChevronLeftIcon />}
                 display={{ base: 'none', md: 'flex' }}
-                textStyle="sora"
+                textStyle="inter"
               >
                 Retreat Homepage
               </Button>

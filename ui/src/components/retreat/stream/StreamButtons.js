@@ -10,7 +10,6 @@ import {
   ModalCloseButton,
   useDisclosure,
 } from '@chakra-ui/react';
-// import retreatTheme from '../retreatTheme';
 import '@fontsource/sora';
 import '@fontsource/inter';
 
@@ -19,19 +18,19 @@ const StreamButtons = () => {
 
   return (
     <>
-      {/* <Stack direction={['column', 'row']} marginTop={8} theme={retreatTheme}> */}
       <Stack direction={['column', 'row']} marginTop={[4, 8]}>
         <Button
           width='100%'
           bg="#6DCED3"
           color="white"
-          fontSize={['sm', 'md']}
+          fontSize={['md', 'xl']}
           as="a"
           // TODO-aparedan: Change link to resources page
           href="/give"
           target="_blank"
           padding={[4, 8]}
           borderRadius={17}
+          textStyle="sora"
         >
           Other resources
         </Button>
@@ -39,13 +38,14 @@ const StreamButtons = () => {
           width='100%'
           bg="#FFC632"
           color="white"
-          fontSize={['sm', 'md']}
+          fontSize={['md', 'xl']}
           as="a"
           // TODO-aparedan: change link to download pdf
           href={process.env.PUBLIC_URL + '/images/retreat/retreat.png'}
           target="_blank"
           padding={[4, 8]}
           borderRadius={17}
+          textStyle="sora"
         >
           Download Retreat Booklet
         </Button>
@@ -55,7 +55,7 @@ const StreamButtons = () => {
           width='100%'
           bg="#F39371"
           color="white"
-          fontSize={['sm', 'md']}
+          fontSize={['md', 'xl']}
           style={{
             whiteSpace: 'normal',
             wordWrap: 'break-word',
@@ -66,12 +66,13 @@ const StreamButtons = () => {
           target="_blank"
           padding={[4, 8]}
           borderRadius={17}
+          textStyle="sora"
         >
           Need Prayer?
         </Button>
         <Button
           width='100%'
-          fontSize={['sm', 'md']}
+          fontSize={['md', 'xl']}
           bg="#FFFFFF"
           color="black"
           style={{
@@ -81,6 +82,7 @@ const StreamButtons = () => {
           onClick={onOpen}
           padding={[4, 8]}
           borderRadius={17}
+          textStyle="sora"
         >
           Connection Issues
         </Button>
