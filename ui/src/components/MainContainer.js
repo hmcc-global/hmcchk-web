@@ -28,6 +28,7 @@ import ScrollToTop from './helpers/ScrollToTop';
 import AboutUsContainer from './about/AboutUsContainer';
 import ActiveSermonContainer from './sermons/ActiveSermonContainer';
 import AboutContainer from './retreat/about/AboutContainer';
+import StreamContainer from './retreat/stream/StreamContainer';
 
 const MainContainer = () => {
   return (
@@ -219,6 +220,12 @@ const MainContainer = () => {
           path="/with-everything/about"
           permissions={['public']}
           component={AboutContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/with-everything/stream"
+          permissions={['public']}
+          component={StreamContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={NoMatch} />
       </Switch>
