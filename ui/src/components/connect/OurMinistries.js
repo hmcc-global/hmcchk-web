@@ -100,7 +100,7 @@ const OurMinistries = (props) => {
               className="front"
               p={[5, 10]}
             >
-              MARRIED COUPLES AND FAMILY
+              MARRIED COUPLES AND FAMILIES
             </Heading>
             <Box
               className="back"
@@ -140,7 +140,7 @@ const OurMinistries = (props) => {
               <Text>
                 Building Blocks is HMCC’s Children Ministry, learn more about it{' '}
                 <Text as="u">
-                  <Link href="https://hongkong.hmcc.net/building-blocks/">
+                  <Link href="https://hongkong.sub.hmcc.net/building-blocks/">
                     here ➔
                   </Link>
                 </Text>
