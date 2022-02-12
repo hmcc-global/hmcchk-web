@@ -4,23 +4,24 @@ import {
   Box,
   HStack,
   VStack,
-  Stack,
   Container,
   Button,
-  Image,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import retreatTheme from '../retreatTheme';
 import '@fontsource/sora';
 import '@fontsource/inter';
 
 const AboutContainer = () => {
+  const buttonSize = useBreakpointValue(['sm', 'md']);
+
   return (
     <>
       <Flex
         w="full"
         h="100vh"
         justify="center"
-        bgImage="linear-gradient(90deg, #0FB4BE 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(90deg, #FFDC82 66%, #F39371 66%)"
+        bgImage="linear-gradient(90deg, #A9E0E3 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(90deg, #FFE9AF 66%, #F2BBA8 66%)"
       >
         <Container
           maxW={['container.lg']}
@@ -32,18 +33,26 @@ const AboutContainer = () => {
               bg="white"
               borderRadius="20px"
               marginTop="20px"
-              width={['60%']}
+              width={['95%', '70%']}
               height={['20%']}
               p={[7]}
             >
-              <Text textStyle="sora" fontSize="4xl">
+              <Text
+                textStyle="sora"
+                fontSize={['lg', '2xl', '4xl']}
+                textAlign="center"
+              >
                 <b>ABOUT THE RETREAT:</b>
               </Text>
-              <Text textStyle="sora" fontSize="3xl">
+              <Text
+                textStyle="sora"
+                fontSize={['md', 'xl', '3xl']}
+                textAlign="center"
+              >
                 <b> With Everything - Congregational Retreat 2022</b>
               </Text>
             </Box>
-            <HStack spacing={5}>
+            <HStack spacing={[2, 5]}>
               <Button
                 borderRadius="20px"
                 bg="#FFC93E"
@@ -51,8 +60,9 @@ const AboutContainer = () => {
                 justify="center"
                 boxShadow="lg"
                 textStyle="sora"
+                size={buttonSize}
               >
-                Our Vision for the Retreat
+                Theme
               </Button>
               <Button
                 borderRadius="20px"
@@ -61,6 +71,7 @@ const AboutContainer = () => {
                 justify="center"
                 boxShadow="lg"
                 textStyle="sora"
+                size={buttonSize}
               >
                 Speaker Profile
               </Button>
@@ -71,6 +82,7 @@ const AboutContainer = () => {
                 justify="center"
                 boxShadow="lg"
                 textStyle="sora"
+                size={buttonSize}
               >
                 Promo Video
               </Button>

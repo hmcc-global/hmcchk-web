@@ -4,12 +4,12 @@ const retreatTheme = extendTheme({
   textStyles: {
     sora: {
       fontFamily: 'Sora',
-      fontSize: '50px',
+      // fontSize: '50px',
       fontWeight: 'bold',
     },
     inter: {
       fontFamily: 'Inter',
-      fontSize: '25px',
+      // fontSize: '25px',
       fontWeight: 'normal',
     },
   },
