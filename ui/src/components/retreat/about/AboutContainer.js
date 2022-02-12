@@ -13,7 +13,7 @@ import '@fontsource/sora';
 import '@fontsource/inter';
 
 const AboutContainer = () => {
-  const buttonSize = useBreakpointValue(['sm', 'md']);
+  const buttonSize = useBreakpointValue(['xs', 'sm', 'md']);
 
   return (
     <>
