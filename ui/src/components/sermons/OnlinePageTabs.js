@@ -41,17 +41,19 @@ const OnlinePageTabs = ({ sermonNotes }) => {
           >
             <RepeatIcon />
           </Button>
-          <AspectRatio
-            mb="5"
-            width="100%"
-            height={{ base: '100vh', md: '50vh' }}
-          >
-            <iframe
-              key={noteId}
-              title="Sermon Notes"
-              src={sermonNotes}
-            ></iframe>
-          </AspectRatio>
+          { sermonNotes &&
+            <AspectRatio
+              mb="5"
+              width="100%"
+              height={{ base: '100vh', md: '50vh' }}
+            >
+              <iframe
+                key={noteId}
+                title="Sermon Notes"
+                src={sermonNotes}
+              ></iframe>
+            </AspectRatio>
+          }
         </TabPanel>
         <TabPanel>
           <Accordion allowToggle allowMultiple>
