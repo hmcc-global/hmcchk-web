@@ -217,7 +217,7 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/with-everything/about"
-          permissions={['noUser']}
+          permissions={['public']}
           component={AboutContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={NoMatch} />
