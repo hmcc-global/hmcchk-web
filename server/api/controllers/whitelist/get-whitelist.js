@@ -8,6 +8,7 @@ module.exports = {
     id: {
       type: 'string',
       description: 'Id of whitelist entry',
+      required: false,
     },
   },
 
