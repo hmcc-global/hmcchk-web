@@ -13,6 +13,16 @@ import {
 import retreatTheme from '../retreatTheme';
 import '@fontsource/sora';
 
+const ResourcesHeader = ({ color, title }) => {
+  return (
+    <Box bg={color} borderRadius="20px" width={'full'} p={[4]}>
+      <Text textStyle="sora" fontSize={['xl']} textAlign="center" color="white">
+        <b>{title}</b>
+      </Text>
+    </Box>
+  );
+};
+
 const ResourcesContainer = () => {
   const Notes = [
     { title: 'Pre-Conference Prompt', url: 'https://www.google.com' },
@@ -22,6 +32,7 @@ const ResourcesContainer = () => {
     { title: 'etc.', url: '' },
     { title: 'more links', url: '' },
   ];
+
   const RelevantLinks = [
     {
       title: '101 ways to not fall asleep in a virtual conference',
@@ -43,7 +54,7 @@ const ResourcesContainer = () => {
               bg="#A9E0E3"
               borderRadius="20px"
               marginTop="40px"
-              width={['50%']}
+              width={['80%', '80%', '50%']}
               height={['20%']}
               p={[7]}
             >
@@ -51,18 +62,12 @@ const ResourcesContainer = () => {
                 <b>Resources</b>
               </Text>
             </Box>
-            <Stack direction={'row'} w="full" width={['50%']}>
+            <Stack
+              direction={['column', 'column', 'row']}
+              width={['80%', '80%', '50%']}
+            >
               <VStack w="full">
-                <Box bg="#EE794E" borderRadius="20px" width="full" p={[4]}>
-                  <Text
-                    textStyle="sora"
-                    fontSize={['xl']}
-                    textAlign="center"
-                    color="white"
-                  >
-                    <b>Notes/Questionnaires</b>
-                  </Text>
-                </Box>
+                <ResourcesHeader color="#EE794E" title="Notes/Questionnaires" />
                 <Box bg="white" borderRadius="20px" width="full" p={[4]}>
                   <UnorderedList>
                     {Notes.map((item) => (
@@ -72,16 +77,7 @@ const ResourcesContainer = () => {
                     ))}
                   </UnorderedList>
                 </Box>
-                <Box bg="#FFC632" borderRadius="20px" width="full" p={[4]}>
-                  <Text
-                    textStyle="sora"
-                    fontSize={['xl']}
-                    textAlign="center"
-                    color="white"
-                  >
-                    <b>Relevant Links</b>
-                  </Text>
-                </Box>
+                <ResourcesHeader color="#FFC632" title="Relevant Links" />
                 <Box bg="white" borderRadius="20px" width="full" p={[4]}>
                   <UnorderedList>
                     {RelevantLinks.map((item) => (
@@ -93,16 +89,7 @@ const ResourcesContainer = () => {
                 </Box>
               </VStack>
               <VStack w="full">
-                <Box bg="#0FB4BE" borderRadius="20px" width="full" p={[4]}>
-                  <Text
-                    textStyle="sora"
-                    fontSize={['xl']}
-                    textAlign="center"
-                    color="white"
-                  >
-                    <b>Spotify Playlist</b>
-                  </Text>
-                </Box>
+                <ResourcesHeader color="#0FB4BE" title="Spotify Playlist" />
                 <Box>
                   <iframe
                     // style="border-radius:20px"
