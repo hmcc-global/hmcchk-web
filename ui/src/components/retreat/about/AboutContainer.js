@@ -9,8 +9,10 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import retreatTheme from '../retreatTheme';
+import ThemeSection from './ThemeSection';
 import '@fontsource/sora';
 import '@fontsource/inter';
+import { Link } from 'react-router-dom';
 
 const AboutContainer = () => {
   const buttonSize = useBreakpointValue(['xs', 'sm', 'md']);
@@ -19,7 +21,7 @@ const AboutContainer = () => {
     <>
       <Flex
         w="full"
-        h="100vh"
+        h={['230vh', '145vh', 'full']}
         justify="center"
         bgImage="linear-gradient(90deg, #A9E0E3 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(90deg, #FFE9AF 66%, #F2BBA8 66%)"
       >
@@ -52,41 +54,51 @@ const AboutContainer = () => {
                 <b> With Everything - Congregational Retreat 2022</b>
               </Text>
             </Box>
-            <HStack spacing={[2, 5]}>
-              <Button
-                borderRadius="20px"
-                bg="#FFC93E"
-                color="white"
-                justify="center"
-                boxShadow="lg"
-                textStyle="sora"
-                size={buttonSize}
-              >
-                Theme
-              </Button>
-              <Button
-                borderRadius="20px"
-                bg="#EE794E"
-                color="white"
-                justify="center"
-                boxShadow="lg"
-                textStyle="sora"
-                size={buttonSize}
-              >
-                Speaker Profile
-              </Button>
-              <Button
-                borderRadius="20px"
-                bg="#0FB4BE"
-                color="white"
-                justify="center"
-                boxShadow="lg"
-                textStyle="sora"
-                size={buttonSize}
-              >
-                Promo Video
-              </Button>
+            <HStack as="nav" spacing={[2, 5]}>
+              <Link to={'#theme'}>
+                <Button
+                  borderRadius="20px"
+                  bg="#FFC93E"
+                  color="white"
+                  justify="center"
+                  boxShadow="lg"
+                  textStyle="sora"
+                  size={buttonSize}
+                  variant="nav"
+                >
+                  Theme
+                </Button>
+              </Link>
+              <Link to={'#speaker'}>
+                <Button
+                  borderRadius="20px"
+                  bg="#EE794E"
+                  color="white"
+                  justify="center"
+                  boxShadow="lg"
+                  textStyle="sora"
+                  size={buttonSize}
+                  variant="nav"
+                >
+                  Speaker Profile
+                </Button>
+              </Link>
+              <Link to={'#promo'}>
+                <Button
+                  borderRadius="20px"
+                  bg="#0FB4BE"
+                  color="white"
+                  justify="center"
+                  boxShadow="lg"
+                  textStyle="sora"
+                  size={buttonSize}
+                  variant="nav"
+                >
+                  Promo Video
+                </Button>
+              </Link>
             </HStack>
+            <ThemeSection />
           </VStack>
         </Container>
       </Flex>
