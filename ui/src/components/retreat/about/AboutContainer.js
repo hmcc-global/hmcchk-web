@@ -14,6 +14,26 @@ import '@fontsource/sora';
 import '@fontsource/inter';
 import { Link } from 'react-router-dom';
 
+const NavButton = ({ to, color, name }) => {
+  const buttonSize = useBreakpointValue(['xs', 'sm', 'md']);
+  return (
+    <Link to={to}>
+      <Button
+        borderRadius="20px"
+        bg={color}
+        color="white"
+        justify="center"
+        boxShadow="lg"
+        textStyle="sora"
+        size={buttonSize}
+        variant="nav"
+      >
+        {name}
+      </Button>
+    </Link>
+  );
+};
+
 const AboutContainer = () => {
   const buttonSize = useBreakpointValue(['xs', 'sm', 'md']);
 
@@ -55,48 +75,9 @@ const AboutContainer = () => {
               </Text>
             </Box>
             <HStack as="nav" spacing={[2, 5]}>
-              <Link to={'#theme'}>
-                <Button
-                  borderRadius="20px"
-                  bg="#FFC93E"
-                  color="white"
-                  justify="center"
-                  boxShadow="lg"
-                  textStyle="sora"
-                  size={buttonSize}
-                  variant="nav"
-                >
-                  Theme
-                </Button>
-              </Link>
-              <Link to={'#speaker'}>
-                <Button
-                  borderRadius="20px"
-                  bg="#EE794E"
-                  color="white"
-                  justify="center"
-                  boxShadow="lg"
-                  textStyle="sora"
-                  size={buttonSize}
-                  variant="nav"
-                >
-                  Speaker Profile
-                </Button>
-              </Link>
-              <Link to={'#promo'}>
-                <Button
-                  borderRadius="20px"
-                  bg="#0FB4BE"
-                  color="white"
-                  justify="center"
-                  boxShadow="lg"
-                  textStyle="sora"
-                  size={buttonSize}
-                  variant="nav"
-                >
-                  Promo Video
-                </Button>
-              </Link>
+              <NavButton to="#theme" color="#FFC93E" name="Theme" />
+              <NavButton to="#speaker" color="#EE794E" name="Speaker Profile" />
+              <NavButton to="#promo" color="#0FB4BE" name="Promo Video" />
             </HStack>
             <ThemeSection />
           </VStack>
