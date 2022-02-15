@@ -5,13 +5,14 @@ import {
   Text,
   Stack,
   VStack,
-  HStack,
   UnorderedList,
   ListItem,
   Link,
+  HStack,
 } from '@chakra-ui/react';
 import retreatTheme from '../retreatTheme';
 import '@fontsource/sora';
+import { IoDocumentsSharp } from 'react-icons/io5';
 
 const ResourcesHeader = ({ color, title }) => {
   return (
@@ -19,6 +20,20 @@ const ResourcesHeader = ({ color, title }) => {
       <Text textStyle="sora" fontSize={['xl']} textAlign="center" color="white">
         <b>{title}</b>
       </Text>
+    </Box>
+  );
+};
+
+const ResourcesList = ({ list }) => {
+  return (
+    <Box bg="white" borderRadius="20px" width="full" p={[4]}>
+      <UnorderedList>
+        {list.map((item) => (
+          <ListItem>
+            <Link to={item.url}>{item.title}</Link>
+          </ListItem>
+        ))}
+      </UnorderedList>
     </Box>
   );
 };
@@ -58,9 +73,12 @@ const ResourcesContainer = () => {
               height={['20%']}
               p={[7]}
             >
-              <Text textStyle="sora" fontSize={['2xl']} textAlign="center">
-                <b>Resources</b>
-              </Text>
+              <HStack justify={'center'}>
+                <IoDocumentsSharp />
+                <Text textStyle="sora" fontSize={['2xl']} textAlign="center">
+                  <b>Resources</b>
+                </Text>
+              </HStack>
             </Box>
             <Stack
               direction={['column', 'column', 'row']}
@@ -68,25 +86,9 @@ const ResourcesContainer = () => {
             >
               <VStack w="full">
                 <ResourcesHeader color="#EE794E" title="Notes/Questionnaires" />
-                <Box bg="white" borderRadius="20px" width="full" p={[4]}>
-                  <UnorderedList>
-                    {Notes.map((item) => (
-                      <ListItem>
-                        <Link to={item.url}>{item.title}</Link>
-                      </ListItem>
-                    ))}
-                  </UnorderedList>
-                </Box>
+                <ResourcesList list={Notes} />
                 <ResourcesHeader color="#FFC632" title="Relevant Links" />
-                <Box bg="white" borderRadius="20px" width="full" p={[4]}>
-                  <UnorderedList>
-                    {RelevantLinks.map((item) => (
-                      <ListItem>
-                        <Link to={item.url}>{item.title}</Link>
-                      </ListItem>
-                    ))}
-                  </UnorderedList>
-                </Box>
+                <ResourcesList list={RelevantLinks} />
               </VStack>
               <VStack w="full">
                 <ResourcesHeader color="#0FB4BE" title="Spotify Playlist" />
