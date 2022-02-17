@@ -12,12 +12,17 @@ import {
 } from '@chakra-ui/react';
 import retreatTheme from '../retreatTheme';
 import '@fontsource/sora';
-import { IoDocumentsSharp } from 'react-icons/io5';
+import { IoDocumentsOutline } from 'react-icons/io5';
 
 const ResourcesHeader = ({ color, title }) => {
   return (
     <Box bg={color} borderRadius="20px" width={'full'} p={[4]}>
-      <Text textStyle="sora" fontSize={['xl']} textAlign="center" color="white">
+      <Text
+        textStyle="sora"
+        fontSize={['md', 'lg', 'xl']}
+        textAlign="center"
+        color="white"
+      >
         <b>{title}</b>
       </Text>
     </Box>
@@ -62,27 +67,32 @@ const ResourcesContainer = () => {
 
   return (
     <>
-      <Flex w="full" h="100vh" bg="#6DCED3">
+      <Flex flexWrap="flex" bg="#6DCED3">
         <Container maxW={['container.lg']} theme={retreatTheme}>
           <Stack align="center" spacing={5}>
             <Box
               bg="#A9E0E3"
               borderRadius="20px"
               marginTop="40px"
-              width={['80%', '80%', '50%']}
+              width={['80%', '80%', '80%', '60%']}
               height={['20%']}
               p={[7]}
             >
               <HStack justify={'center'}>
-                <IoDocumentsSharp />
-                <Text textStyle="sora" fontSize={['2xl']} textAlign="center">
+                <IoDocumentsOutline />
+                <Text
+                  textStyle="sora"
+                  fontSize={['lg', 'xl', '2xl']}
+                  textAlign="center"
+                >
                   <b>Resources</b>
                 </Text>
               </HStack>
             </Box>
             <Stack
               direction={['column', 'column', 'row']}
-              width={['80%', '80%', '50%']}
+              width={['80%', '80%', '80%', '60%']}
+              pb={[6]}
             >
               <VStack w="full">
                 <ResourcesHeader color="#EE794E" title="Notes/Questionnaires" />
