@@ -38,7 +38,7 @@ const AboutContainer = () => {
     <>
       <Flex
         w="full"
-        h={['230vh', '145vh', 'full']}
+        flexWrap="wrap"
         justify="center"
         bgImage="linear-gradient(90deg, #A9E0E3 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(90deg, #FFE9AF 66%, #F2BBA8 66%)"
       >
@@ -54,7 +54,7 @@ const AboutContainer = () => {
               marginTop="20px"
               width={['95%', '70%']}
               height={['20%']}
-              p={[7]}
+              p={[5, 7]}
             >
               <Text
                 textStyle="sora"
