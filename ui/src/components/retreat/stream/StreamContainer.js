@@ -10,14 +10,14 @@ import {
   Flex
 } from '@chakra-ui/react';
 import { ChevronLeftIcon } from '@chakra-ui/icons';
-import OnlinePageButtons from './StreamButtons';
+import StreamButtons from './StreamButtons';
 import { customAxios as axios } from '../../helpers/customAxios';
 import React, { useState, useEffect, useCallback } from 'react';
 import '@fontsource/sora';
 import '@fontsource/inter';
 
 const StreamContainer = (props) => {
-  const [title, setTitle] = useState("With Everything Congregational Retreat 2022")
+  const [title, setTitle] = useState("With Everything Church Wide Conference 2022")
   const [url, setUrl] = useState("");
 
   // TODO-aparedan: test with real data
@@ -47,7 +47,7 @@ const StreamContainer = (props) => {
   const OnlineSection = () => {
     return (
       <>
-        <OnlinePageButtons />
+        <StreamButtons />
       </>
     );
   };
@@ -55,7 +55,7 @@ const StreamContainer = (props) => {
   return (
     <Flex
       w="full"
-      h="100vh"
+      h="full"
       bgImage={process.env.PUBLIC_URL + '/images/retreat/retreat.png'}
       bgSize="cover"
       bgPosition="center center"
@@ -74,7 +74,7 @@ const StreamContainer = (props) => {
                 display={{ base: 'none', md: 'flex' }}
                 textStyle="inter"
               >
-                Retreat Homepage
+                CWC Homepage
               </Button>
             </Link>
             <AspectRatio mb="5" width="100%" ratio={16 / 9}>
