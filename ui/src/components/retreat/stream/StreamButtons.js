@@ -47,7 +47,7 @@ const StreamButtons = () => {
           borderRadius={17}
           textStyle="sora"
         >
-          Download Retreat Booklet
+          Download CWC Booklet
         </Button>
       </Stack>
       <Stack direction={['column', 'row']} marginTop={["0.5em !important", "1em !important"]}>
