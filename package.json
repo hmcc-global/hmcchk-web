@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "react-google-recaptcha": "^2.1.0",
+    "react-router-hash-link": "^2.4.3",
     "react-slick": "^0.28.1"
   }
 }

@@ -12,12 +12,12 @@ import retreatTheme from '../retreatTheme';
 import ThemeSection from './ThemeSection';
 import '@fontsource/sora';
 import '@fontsource/inter';
-import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 
 const NavButton = ({ to, color, name }) => {
   const buttonSize = useBreakpointValue(['xs', 'sm', 'md']);
   return (
-    <Link to={to}>
+    <HashLink smooth to={to}>
       <Button
         borderRadius="20px"
         bg={color}
@@ -26,17 +26,14 @@ const NavButton = ({ to, color, name }) => {
         boxShadow="lg"
         textStyle="sora"
         size={buttonSize}
-        variant="nav"
       >
         {name}
       </Button>
-    </Link>
+    </HashLink>
   );
 };
 
 const AboutContainer = () => {
-  const buttonSize = useBreakpointValue(['xs', 'sm', 'md']);
-
   return (
     <>
       <Flex
@@ -64,22 +61,34 @@ const AboutContainer = () => {
                 fontSize={['lg', '2xl', '4xl']}
                 textAlign="center"
               >
-                <b>ABOUT THE RETREAT:</b>
+                <b>ABOUT THE CONFERENCE</b>
               </Text>
               <Text
                 textStyle="sora"
                 fontSize={['md', 'xl', '3xl']}
                 textAlign="center"
               >
-                <b> With Everything - Congregational Retreat 2022</b>
+                <b> With Everything - Church-wide Conference 2022</b>
               </Text>
             </Box>
-            <HStack as="nav" spacing={[2, 5]}>
-              <NavButton to="#theme" color="#FFC93E" name="Theme" />
-              <NavButton to="#speaker" color="#EE794E" name="Speaker Profile" />
-              <NavButton to="#promo" color="#0FB4BE" name="Promo Video" />
+            <HStack spacing={[2, 5]}>
+              <NavButton
+                to="/with-everything/about#theme"
+                color="#FFC93E"
+                name="Theme"
+              />
+              <NavButton
+                to="/with-everything/about#speaker"
+                color="#EE794E"
+                name="Speaker Profile"
+              />
+              <NavButton
+                to="/with-everything/about#promo"
+                color="#0FB4BE"
+                name="Promo Video"
+              />
             </HStack>
-            <ThemeSection />
+            <ThemeSection id="theme" />
           </VStack>
         </Container>
       </Flex>
