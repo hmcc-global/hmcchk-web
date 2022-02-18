@@ -15,6 +15,10 @@ import ThemeSection from './ThemeSection';
 import '@fontsource/sora';
 import '@fontsource/inter';
 import { HashLink } from 'react-router-hash-link';
+import HorizontalScroll from 'react-scroll-horizontal';
+import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
+import Slider from 'react-slick';
+import React from 'react';
 
 const NavButton = ({ to, color, name }) => {
   const buttonSize = useBreakpointValue(['xs', 'sm', 'md']);
@@ -36,6 +40,28 @@ const NavButton = ({ to, color, name }) => {
 };
 
 const AboutContainer = () => {
+  const child = { width: `100%`, height: `100%` };
+
+  const sliderSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+    focusOnSelect: true,
+    centerMode: true,
+  };
+
+  const sliderStyle = {
+    width: '95%',
+    position: 'relative',
+    // left: '50%',
+    // right: '50%',
+    // marginLeft: '-50vw',
+    // marginRight: '-50vw',
+  };
+
   return (
     <Flex
       flexWrap="wrap"
