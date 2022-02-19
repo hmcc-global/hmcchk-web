@@ -12,6 +12,7 @@ import {
 import { ChevronLeftIcon } from '@chakra-ui/icons';
 import retreatTheme from '../retreatTheme';
 import ThemeSection from './ThemeSection';
+import SpeakerSection from './SpeakerSection';
 import '@fontsource/sora';
 import '@fontsource/inter';
 import { HashLink } from 'react-router-hash-link';
