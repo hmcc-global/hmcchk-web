@@ -25,8 +25,10 @@ const ThemeSection = ({ id }) => {
                 borderRadius="20px"
                 mx={[0, 0, 5]}
                 w={['80vw', '100vw', '100vw']}
-                src={process.env.PUBLIC_URL + '/images/home/featured.jpeg'}
-                // src={`url('${process.env.PUBLIC_URL}/images/retreat/with-everything-retreat.png')`}
+                src={
+                  process.env.PUBLIC_URL +
+                  '/images/retreat/with-everything-retreat.png'
+                }
               />
             </Box>
             <Box
