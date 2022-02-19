@@ -35,12 +35,9 @@ const SpeakerSection = ({ id }) => {
               borderRadius="20px"
               bg="white"
               w={['80vw', '80vw', '100vw']}
-              p={[3, 7, 8, 10]}
+              p={[5, 7, 8, 10]}
             >
-              <Text
-                textStyle="sora"
-                fontSize={['12px', '16px', '10px', 'xs', 'sm']}
-              >
+              <Text textStyle="sora" fontSize={['xs', 'sm', 'sm', 'md']}>
                 Brett Hilliard <br />
                 Senior Pastor @ Island ECC <br /> <br />
               </Text>

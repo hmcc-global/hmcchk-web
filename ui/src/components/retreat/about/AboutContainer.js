@@ -13,54 +13,55 @@ import { ChevronLeftIcon } from '@chakra-ui/icons';
 import retreatTheme from '../retreatTheme';
 import ThemeSection from './ThemeSection';
 import SpeakerSection from './SpeakerSection';
+import { useEffect, useState, useRef } from 'react';
 import '@fontsource/sora';
 import '@fontsource/inter';
-import { HashLink } from 'react-router-hash-link';
-import HorizontalScroll from 'react-scroll-horizontal';
-import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
-import Slider from 'react-slick';
-import React from 'react';
+import './fadeIn.css';
 
-const NavButton = ({ to, color, name }) => {
+const NavButton = ({ to, color, name, ...props }) => {
   const buttonSize = useBreakpointValue(['xs', 'sm', 'md']);
+
   return (
-    <HashLink smooth to={to}>
-      <Button
-        borderRadius="20px"
-        bg={color}
-        color="white"
-        justify="center"
-        boxShadow="lg"
-        textStyle="sora"
-        size={buttonSize}
-      >
-        {name}
-      </Button>
-    </HashLink>
+    <Button
+      borderRadius="20px"
+      bg={color}
+      color="white"
+      justify="center"
+      boxShadow="lg"
+      textStyle="sora"
+      size={buttonSize}
+      {...props}
+    >
+      {name}
+    </Button>
+  );
+};
+
+const FadeInSection = (props) => {
+  const [isVisible, setVisible] = useState(false);
+  const domRef = useRef();
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => setVisible(entry.isIntersecting));
+    });
+    observer.observe(domRef.current);
+  }, []);
+  return (
+    <div
+      className={`fade-in-section ${isVisible ? 'is-visible' : ''}`}
+      ref={domRef}
+    >
+      {props.children}
+    </div>
   );
 };
 
 const AboutContainer = () => {
-  const child = { width: `100%`, height: `100%` };
+  const [isTheme, setTheme] = useState(true);
+  const [isSpeaker, setSpeaker] = useState(false);
 
-  const sliderSettings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    swipeToSlide: true,
-    focusOnSelect: true,
-    centerMode: true,
-  };
-
-  const sliderStyle = {
-    width: '95%',
-    position: 'relative',
-    // left: '50%',
-    // right: '50%',
-    // marginLeft: '-50vw',
-    // marginRight: '-50vw',
+  const buttonHandler = () => {
+    setTheme((current) => !current);
   };
 
   return (
@@ -103,25 +104,59 @@ const AboutContainer = () => {
               fontSize={['md', 'xl', '3xl']}
               textAlign="center"
             >
-              <b> With Everything - Church-wide Conference 2022</b>
-            </Text>
-          </Box>
-          <HStack spacing={[2, 5]}>
-            <NavButton
-              to="/with-everything/about#theme"
-              color="#FFC93E"
-              name="Theme"
-            />
-            <NavButton
-              to="/with-everything/about#speaker"
-              color="#EE794E"
-              name="Speaker Profile"
-            />
-          </HStack>
-          <ThemeSection id="theme" />
-        </VStack>
-      </Container>
-    </Flex>
+              <Text
+                textStyle="sora"
+                fontSize={['lg', '2xl', '4xl']}
+                textAlign="center"
+              >
+                <b>ABOUT THE CONFERENCE</b>
+              </Text>
+              <Text
+                textStyle="sora"
+                fontSize={['md', 'xl', '3xl']}
+                textAlign="center"
+              >
+                <b> With Everything - Church-wide Conference 2022</b>
+              </Text>
+            </Box>
+            <HStack spacing={[2, 5]}>
+              <NavButton
+                to="/with-everything/about#theme"
+                color="#FFC93E"
+                name="Theme"
+                onClick={() => {
+                  setTheme(true);
+                  setSpeaker(false);
+                }}
+              />
+              <NavButton
+                to="/with-everything/about#speaker"
+                color="#EE794E"
+                name="Speaker Profile"
+                onClick={() => {
+                  setTheme(false);
+                  setSpeaker(true);
+                }}
+              />
+              <NavButton
+                to="/with-everything/about#promo"
+                color="#0FB4BE"
+                name="Promo Video"
+              />
+            </HStack>
+            {isTheme ? (
+              <FadeInSection>
+                <ThemeSection />
+              </FadeInSection>
+            ) : null}
+            {isSpeaker ? (
+              <FadeInSection>
+                <SpeakerSection />
+              </FadeInSection>
+            ) : null}
+          </VStack>
+        </Container>
+      </Flex>
   );
 };
 
