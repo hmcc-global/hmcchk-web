@@ -18,7 +18,7 @@ import '@fontsource/sora';
 import '@fontsource/inter';
 import './fadeIn.css';
 
-const NavButton = ({ to, color, name, ...props }) => {
+const NavButton = ({ color, name, ...props }) => {
   const buttonSize = useBreakpointValue(['xs', 'sm', 'md']);
 
   return (
@@ -121,7 +121,6 @@ const AboutContainer = () => {
             </Box>
             <HStack spacing={[2, 5]}>
               <NavButton
-                to="/with-everything/about#theme"
                 color="#FFC93E"
                 name="Theme"
                 onClick={() => {
@@ -130,7 +129,6 @@ const AboutContainer = () => {
                 }}
               />
               <NavButton
-                to="/with-everything/about#speaker"
                 color="#EE794E"
                 name="Speaker Profile"
                 onClick={() => {
@@ -138,11 +136,7 @@ const AboutContainer = () => {
                   setSpeaker(true);
                 }}
               />
-              <NavButton
-                to="/with-everything/about#promo"
-                color="#0FB4BE"
-                name="Promo Video"
-              />
+              <NavButton color="#0FB4BE" name="Promo Video" />
             </HStack>
             {isTheme ? (
               <FadeInSection>
