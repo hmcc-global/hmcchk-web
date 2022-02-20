@@ -1,9 +1,9 @@
-import retreatTheme from '../retreatTheme';
+import retreatTheme from './retreatTheme';
 import '@fontsource/sora';
 import '@fontsource/inter';
 import { Box, Container } from '@chakra-ui/react';
 
-const RetreatHomeContainer = () => {
+const NoAccessRetreat = () => {
   return (
     <>
       <Container
@@ -21,4 +21,4 @@ const RetreatHomeContainer = () => {
   );
 };
 
-export default RetreatHomeContainer;
+export default NoAccessRetreat;

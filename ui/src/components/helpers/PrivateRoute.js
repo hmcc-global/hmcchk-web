@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import UserProfileContainer from '../userProfile/UserProfileContainer';
 import CompleteUserProfileContainer from '../userProfile/CompleteUserProfile';
+import NoAccessRetreat from '../retreat/NoAccess';
 
 const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
   const user = useSelector((state) => state.user);
@@ -91,7 +92,7 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
                 if (userObj.whitelisted) {
                   return <Component {...props} user={userObj} />;
                 } else {
-                  return <NoMatch user={userObj} />;
+                  return <NoAccessRetreat user={userObj} />;
                 }
             }
 
