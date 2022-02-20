@@ -1,0 +1,256 @@
+import {
+  Button,
+  Container,
+  Flex,
+  Heading,
+  Image,
+  Spacer,
+  SimpleGrid,
+  Stack,
+  Text,
+  Box,
+  VStack,
+  Icon,
+  Modal,
+  ModalOverlay,
+  Textarea,
+  useDisclosure,
+  ModalContent,
+  ModalHeader,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  FormControl,
+  FormLabel,
+  Input,
+  FormHelperText,
+  FormErrorMessage,
+  ModalFooter,
+  CloseButton,
+  Wrap,
+  WrapItem,
+  ModalBody,
+  ModalCloseButton,
+  Center,
+} from '@chakra-ui/react';
+import { AddIcon } from '@chakra-ui/icons';
+import { BiNote } from 'react-icons/bi';
+
+import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { customAxios as axios } from '../../helpers/customAxios';
+
+const PraiseCard = ({ cardcolor, message }) => {
+  return (
+    <Box
+      bg={cardcolor}
+      minH="80px"
+      borderRadius="20"
+      shadow="lg"
+      overflow="True"
+    >
+      <Text p="0.5em" align="center" verticalAlign="center">
+        {message}
+      </Text>
+    </Box>
+  );
+};
+const AlertMessage = () => {
+  const [show, setShow] = useState(true);
+  useEffect(() => {
+    const timeId = setTimeout(() => {
+      setShow(false);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timeId);
+    };
+  }, []);
+
+  if (!show) {
+    return null;
+  }
+
+  return (
+    <Alert status="success">
+      <AlertIcon />
+      <AlertDescription>Praise submitted successfully!</AlertDescription>
+    </Alert>
+  );
+};
+
+const PraiseWall = (props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [input, setInput] = useState('');
+  const { user } = props;
+  const handleInputChange = (e) => setInput(e.target.value);
+
+  const [praiseList, setPraiseList] = useState([]);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const { handleSubmit, register } = useForm();
+
+  const cardBgColors = ['#6dced3', '#ffdc82', '#f39371', '#ffdc82'];
+  const eventCategory = 'CWC 2022';
+
+  const getPraise = async () => {
+    try {
+      const { data, status } = await axios.get('/api/praises/get');
+
+      if (status === 200) {
+        data.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
+        setPraiseList([...data]);
+      } else {
+        throw Error('Something went wrong');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const postPraise = async ({ message }) => {
+    try {
+      const { data } = await axios.post('/api/praises/create', {
+        fullName: 'test',
+        message: message,
+        category: eventCategory,
+      });
+      setFormSubmitted(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getPraise();
+    const interval = setInterval(() => getPraise(), 30000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  return (
+    <Box justify="center">
+      {formSubmitted && <AlertMessage />}
+      <Box borderRadius="20" bgColor="#ebebeb">
+        <VStack>
+          <Flex
+            w="100%"
+            direction={['column', 'column', 'row']}
+            shadow="sm"
+            borderRadius="20"
+            bgColor="white"
+            h={['9em', '9em', '5em']}
+          >
+            <Flex
+              w={['90%', '90%', '60%']}
+              align="left"
+              px="2em"
+              direction="column"
+            >
+              <Flex direction="row">
+                <Icon as={BiNote} w={6} h={6} my="auto" />
+                <Text
+                  fontWeight="bold"
+                  fontSize="2xl"
+                  textAlign="left"
+                  paddingLeft="0.3em"
+                >
+                  PRAISE WALL
+                </Text>
+              </Flex>
+
+              <Text fontWeight="bold" fontSize="sm" textAlign="left">
+                Share praises with the church throughout the conference!
+              </Text>
+            </Flex>
+            <Spacer />
+            <Button
+              my={['1em', '1em', 'auto']}
+              mx="2em"
+              colorScheme="teal"
+              borderRadius="20"
+              shadow="lg"
+              onClick={onOpen}
+            >
+              <AddIcon w={3} h={3} mx="1" />
+              Submit A Praise
+            </Button>
+            <Modal isOpen={isOpen} onClose={onClose} size="xl">
+              <ModalOverlay />
+              <ModalContent borderRadius="20">
+                <ModalHeader fontWeight="bold" borderRadius="20">
+                  <Icon as={BiNote} w={5} h={5} my="auto" />
+                  Submit A Praise!
+                  <Text fontSize="sm">
+                    Share praises with the church throughout the conference!{' '}
+                  </Text>
+                </ModalHeader>
+                <ModalCloseButton />
+                <form onSubmit={handleSubmit(postPraise)}>
+                  <ModalBody bgColor="#ebebeb">
+                    <Textarea
+                      placeholder="Type your praise here..."
+                      id="message"
+                      size="xl"
+                      h="10em"
+                      value={input}
+                      {...register('message')}
+                      onChange={handleInputChange}
+                    />
+                  </ModalBody>
+
+                  <ModalFooter bgColor="#ebebeb" borderBottomRadius="20">
+                    <Button
+                      colorScheme="teal"
+                      mx="1em"
+                      borderRadius="20"
+                      shadow="lg"
+                      onClick={onClose}
+                      m="auto"
+                      w="10em"
+                      type="submit"
+                    >
+                      <AddIcon w={3} h={3} mx="1" />
+                      Submit Praise
+                    </Button>
+                  </ModalFooter>
+                </form>
+              </ModalContent>
+            </Modal>
+          </Flex>
+          <Box
+            overflow="auto"
+            w="100%"
+            h="50vh"
+            css={{
+              '&::-webkit-scrollbar': {
+                display: 'none',
+              },
+            }}
+          >
+            <SimpleGrid
+              columns={[2, 3]}
+              spacingX="1em"
+              spacingY="1em"
+              py="1em"
+              w="95%"
+              m="auto"
+            >
+              {praiseList
+                .filter((praise) => praise.category == eventCategory)
+                .map((filteredPraise, i) => (
+                  <PraiseCard
+                    message={filteredPraise.message}
+                    cardcolor={cardBgColors[i % cardBgColors.length]}
+                  />
+                ))}
+            </SimpleGrid>
+          </Box>
+        </VStack>
+      </Box>
+    </Box>
+  );
+};
+
+export default PraiseWall;

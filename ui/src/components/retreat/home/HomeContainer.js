@@ -4,6 +4,7 @@ import '@fontsource/inter';
 import { Box, Container } from '@chakra-ui/react';
 import HomeDesktop from './HomeDesktop';
 import HomeMobile from './HomeMobile';
+import PraiseWall from './PraiseWall';
 
 import { useState, useEffect } from 'react';
 import { NextEvent } from './Schedule';
