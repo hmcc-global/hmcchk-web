@@ -15,7 +15,7 @@ const RetreatHomeContainer = () => {
         bgAttachment="fixed"
         justify="center"
       >
-        {/* <Box h="500vh">HELLO THERE</Box> */}
+        <Box h="500vh">HELLO THERE</Box>
       </Container>
     </>
   );
