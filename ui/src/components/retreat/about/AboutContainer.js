@@ -82,11 +82,6 @@ const AboutContainer = () => {
                 color="#EE794E"
                 name="Speaker Profile"
               />
-              <NavButton
-                to="/with-everything/about#promo"
-                color="#0FB4BE"
-                name="Promo Video"
-              />
             </HStack>
             <ThemeSection id="theme" />
           </VStack>
