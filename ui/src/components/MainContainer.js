@@ -241,6 +241,12 @@ const MainContainer = () => {
           permissions={['public']}
           component={ResourcesContainer}
         />
+        <PrivateRoute
+          exact
+          path="/wit-everything/home"
+          permissions={['public']}
+          component={RetreatHomeContainer}
+        />
         <PrivateRoute path="*" permissions={['public']} component={NoMatch} />
       </Switch>
       <FooterContainer />
