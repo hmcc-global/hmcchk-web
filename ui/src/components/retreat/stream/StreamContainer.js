@@ -75,7 +75,6 @@ const StreamContainer = (props) => {
                 color="white"
                 justifyContent="left"
                 leftIcon={<ChevronLeftIcon />}
-                display={{ base: 'none', md: 'flex' }}
                 textStyle="inter"
               >
                 CWC Homepage
