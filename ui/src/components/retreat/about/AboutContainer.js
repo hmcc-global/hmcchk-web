@@ -7,7 +7,9 @@ import {
   Container,
   Button,
   useBreakpointValue,
+  Link,
 } from '@chakra-ui/react';
+import { ChevronLeftIcon } from '@chakra-ui/icons';
 import retreatTheme from '../retreatTheme';
 import ThemeSection from './ThemeSection';
 import '@fontsource/sora';
@@ -41,11 +43,23 @@ const AboutContainer = () => {
       bgImage="linear-gradient(90deg, #A9E0E3 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(90deg, #FFE9AF 66%, #F2BBA8 66%)"
     >
       <Container maxW={['container.lg']} justify="center" theme={retreatTheme}>
-        <VStack justify="center" spacing={8}>
+        <Link href="/with-everything">
+          <Button
+            variant="link"
+            fontSize={['xs', 'md', 'lg']}
+            color="black"
+            justifyContent="left"
+            leftIcon={<ChevronLeftIcon />}
+            textStyle="inter"
+            marginTop="20px"
+          >
+            CWC Homepage
+          </Button>
+        </Link>
+        <VStack spacing={8} marginTop="20px">
           <Box
             bg="white"
             borderRadius="20px"
-            marginTop="20px"
             width={['95%', '70%']}
             height={['20%']}
             p={[5, 7]}
