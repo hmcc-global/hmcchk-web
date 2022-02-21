@@ -50,11 +50,11 @@ const ResourcesList = ({ list }) => {
 const ResourcesContainer = () => {
   const Notes = [
     {
-      title: 'Post Reflection Questions',
+      title: 'Post-Conference Reflection Guide',
       url: 'https://hongkong.sub.hmcc.net/wp-content/uploads/cwc-post-reflection-questions.pdf',
     },
     {
-      title: 'Workshop Test',
+      title: 'Fivefold Ministry Workshop Test',
       url: 'https://hongkong.sub.hmcc.net/wp-content/uploads/cwc-workshop-questions-paste.pdf',
     },
   ];
@@ -66,7 +66,7 @@ const ResourcesContainer = () => {
     },
     {
       title: 'Easy coffee recipes to do with your group',
-      url: 'www.medium.com',
+      url: 'https://www.google.com',
     },
     { title: 'etc.', url: '' },
   ];
