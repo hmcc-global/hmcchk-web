@@ -43,5 +43,4 @@ const RetreatHomeContainer = () => {
     </Box>
   );
 };
-
-export default RetreatHomeContainer;
+export default HomeContainer;
