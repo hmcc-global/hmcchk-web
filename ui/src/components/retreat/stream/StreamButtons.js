@@ -41,8 +41,7 @@ const StreamButtons = () => {
           color="white"
           fontSize={['md', 'xl']}
           as="a"
-          // TODO-aparedan: change link to download pdf
-          href={process.env.PUBLIC_URL + '/images/retreat/retreat.png'}
+          href="https://hongkong.sub.hmcc.net/wp-content/uploads/booklet.pdf"
           target="_blank"
           padding={[4, 8]}
           borderRadius={17}

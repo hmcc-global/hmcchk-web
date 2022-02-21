@@ -96,8 +96,7 @@ const StreamContainer = (props) => {
                       textAlign="center"
                       fontWeight={700}
                     >
-                      Our next session is on Zoom, please click the button
-                      below!
+                      Our session is on Zoom, please click the button below!
                     </Text>
                     <Button
                       bg="#6DCED3"
@@ -116,11 +115,6 @@ const StreamContainer = (props) => {
                   </VStack>
                 </Center>
               ) : (
-                // <iframe
-                //   src="https://hkust.zoom.us/j/95848566431?pwd=VVJBUHZ3dzBDOE1sY3VVWkhlazIvQT09"
-                //   title="Zoom site"
-                //   frameBorder="0"
-                // ></iframe>
                 <iframe
                   width="560"
                   height="315"
