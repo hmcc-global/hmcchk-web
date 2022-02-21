@@ -10,6 +10,7 @@ import {
   HStack,
   Link,
   VStack,
+  Button,
 } from '@chakra-ui/react';
 
 import { FaRainbow } from 'react-icons/fa';
@@ -47,16 +48,17 @@ const HomeMobile = () => {
           </GridItem>
           <Link
             bg="#0FB4BE"
+            w="100%"
             textStyle="sora"
-            color="white"
             fontWeight="700"
             fontSize="xl"
+            color="white"
             p="1.75rem 0"
             borderRadius="xl"
-            w="100%"
+            boxShadow="lg"
             href="/with-everything/stream"
             mb="5"
-            boxShadow="lg"
+            _hover={{ opacity: '0.9', transform: 'scale(1.025)' }}
           >
             <Center>
               <HStack>
@@ -89,22 +91,36 @@ const HomeMobile = () => {
             fontWeight="700"
             fontSize="xl"
           >
-            <Center p="1.25rem 0" bg="#EE794E" borderRadius="xl" boxShadow="lg">
-              <Link href="/with-everything/about">
+            <Link
+              href="/with-everything/about"
+              p="1.25rem 0"
+              bg="#EE794E"
+              borderRadius="xl"
+              boxShadow="lg"
+              _hover={{ opacity: '0.9', transform: 'scale(1.025)' }}
+            >
+              <Center>
                 <VStack>
                   <FaRainbow size="30" />
                   <Text mt="0">About CWC</Text>
                 </VStack>
-              </Link>
-            </Center>
-            <Center p="1.25rem 0" bg="#FFC632" borderRadius="xl" boxShadow="lg">
-              <Link href="/with-everything/resources">
+              </Center>
+            </Link>
+            <Link
+              href="/with-everything/resources"
+              p="1.25rem 0"
+              bg="#FFC632"
+              borderRadius="xl"
+              boxShadow="lg"
+              _hover={{ opacity: '0.9', transform: 'scale(1.025)' }}
+            >
+              <Center>
                 <VStack>
                   <IoDocumentsOutline size="30" />
                   <Text mt="0">Resources</Text>
                 </VStack>
-              </Link>
-            </Center>
+              </Center>
+            </Link>
           </Grid>
         </Center>
       </GridItem>

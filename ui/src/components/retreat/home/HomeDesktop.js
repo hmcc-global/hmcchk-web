@@ -51,22 +51,36 @@ const HomeDesktop = () => {
             fontSize="xl"
             mb="4"
           >
-            <Center p="1.75rem 0" bg="#EE794E" borderRadius="xl" boxShadow="xl">
-              <Link href="/with-everything/about">
+            <Link
+              href="/with-everything/about"
+              p="1.75rem 0"
+              bg="#EE794E"
+              borderRadius="xl"
+              boxShadow="xl"
+              _hover={{ opacity: '0.9', transform: 'scale(1.025)' }}
+            >
+              <Center>
                 <HStack>
                   <FaRainbow mt="0.5rem" />
                   <Text>About CWC</Text>
                 </HStack>
-              </Link>
-            </Center>
-            <Center p="1.75rem 0" bg="#FFC632" borderRadius="xl" boxShadow="xl">
-              <Link href="/with-everything/resources">
+              </Center>
+            </Link>
+            <Link
+              href="/with-everything/resources"
+              p="1.75rem 0"
+              bg="#FFC632"
+              borderRadius="xl"
+              boxShadow="xl"
+              _hover={{ opacity: '0.9', transform: 'scale(1.025)' }}
+            >
+              <Center>
                 <HStack>
                   <IoDocumentsOutline />
                   <Text>Resources</Text>
                 </HStack>
-              </Link>
-            </Center>
+              </Center>
+            </Link>
           </Grid>
           <Link
             bg="#0FB4BE"
@@ -80,6 +94,7 @@ const HomeDesktop = () => {
             href="/with-everything/stream"
             mb="4"
             boxShadow="xl"
+            _hover={{ opacity: '0.9', transform: 'scale(1.025)' }}
           >
             <Center>
               <HStack>
