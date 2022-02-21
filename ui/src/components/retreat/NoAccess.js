@@ -12,7 +12,9 @@ import {
 } from '@chakra-ui/react';
 import { HiOutlineKey } from 'react-icons/hi';
 
-const NoAccessRetreat = () => {
+const NoAccessRetreat = (props) => {
+  const { user } = props;
+
   return (
     <Box
       minH="100vh"
@@ -53,41 +55,60 @@ const NoAccessRetreat = () => {
             CHURCH-WIDE <br />
             CONFERENCE 2022
           </Text>
-          <Center
-            bg="#A9E0E3"
-            borderRadius="17px"
-            p={['2rem 1.2rem', '1rem 3rem']}
-            flexDirection="column"
-            mt="10"
-          >
-            <HStack
-              textStyle="inter"
-              textAlign="center"
-              fontWeight={700}
-              fontSize="md"
-              mb={['3', '5']}
-              alignItems="center"
-              spacing={['1', '2']}
+          {user.id ? (
+            <Center
+              bg="#A9E0E3"
+              borderRadius="17px"
+              p={['2rem 1.2rem', '1rem 3rem']}
+              flexDirection="column"
+              mt="10"
             >
-              <HiOutlineKey size={24} mt="0.5rem" />
-              <Text fontSize={['sm', 'md']}>
-                Login with your HMCC Account to access
+              <Text
+                fontSize={['sm', 'md']}
+                textStyle="inter"
+                textAlign="center"
+                fontWeight={700}
+              >
+                We're sorry, this event is only for registered participants!
               </Text>
-            </HStack>
-            <Link
-              borderRadius="20px"
-              bg="#FFE9AF"
-              boxShadow="xl"
-              textStyle="sora"
-              textAlign="center"
-              fontWeight={700}
-              fontSize={['xl', '2xl']}
-              p="0.3rem 3rem"
-              href="/login"
+            </Center>
+          ) : (
+            <Center
+              bg="#A9E0E3"
+              borderRadius="17px"
+              p={['2rem 1.2rem', '1rem 3rem']}
+              flexDirection="column"
+              mt="10"
             >
-              Login here
-            </Link>
-          </Center>
+              <HStack
+                textStyle="inter"
+                textAlign="center"
+                fontWeight={700}
+                fontSize="md"
+                mb={['3', '5']}
+                alignItems="center"
+                spacing={['1', '2']}
+              >
+                <HiOutlineKey size={24} mt="0.5rem" />
+                <Text fontSize={['sm', 'md']}>
+                  Login with your HMCC Account to access
+                </Text>
+              </HStack>
+              <Link
+                borderRadius="20px"
+                bg="#FFE9AF"
+                boxShadow="xl"
+                textStyle="sora"
+                textAlign="center"
+                fontWeight={700}
+                fontSize={['xl', '2xl']}
+                p="0.3rem 3rem"
+                href="/login"
+              >
+                Login here
+              </Link>
+            </Center>
+          )}
         </Center>
       </Container>
     </Box>
