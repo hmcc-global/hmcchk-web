@@ -89,7 +89,7 @@ const StreamContainer = (props) => {
             >
               {isZoom ? (
                 <Center>
-                  <VStack p={5}>
+                  <VStack p={5} spacing={5}>
                     <Text
                       color="white"
                       textStyle="sora"
@@ -109,7 +109,7 @@ const StreamContainer = (props) => {
                       padding={[4, 8]}
                       borderRadius={17}
                       textStyle="sora"
-                      _hover={{ opacity: '0.8' }}
+                      _hover={{ opacity: '0.9', transform: 'scale(1.1)' }}
                     >
                       Zoom Link
                     </Button>

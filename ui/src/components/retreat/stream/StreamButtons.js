@@ -31,7 +31,7 @@ const StreamButtons = () => {
           padding={[4, 8]}
           borderRadius={17}
           textStyle="sora"
-          _hover={{ opacity: '0.8' }}
+          _hover={{ opacity: '0.9', transform: 'scale(1.0125)' }}
         >
           Other resources
         </Button>
@@ -47,7 +47,7 @@ const StreamButtons = () => {
           padding={[4, 8]}
           borderRadius={17}
           textStyle="sora"
-          _hover={{ opacity: '0.8' }}
+          _hover={{ opacity: '0.9', transform: 'scale(1.0125)' }}
         >
           Download CWC Booklet
         </Button>
@@ -72,7 +72,7 @@ const StreamButtons = () => {
           padding={[4, 8]}
           borderRadius={17}
           textStyle="sora"
-          _hover={{ opacity: '0.8' }}
+          _hover={{ opacity: '0.9', transform: 'scale(1.0125)' }}
         >
           Need Prayer?
         </Button>
@@ -89,7 +89,7 @@ const StreamButtons = () => {
           padding={[4, 8]}
           borderRadius={17}
           textStyle="sora"
-          _hover={{ opacity: '0.8' }}
+          _hover={{ opacity: '0.9', transform: 'scale(1.0125)' }}
         >
           Connection Issues
         </Button>
