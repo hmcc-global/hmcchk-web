@@ -43,6 +43,7 @@ const NoAccessRetreat = () => {
             }
           />
           <Text
+            mt="-1.5rem"
             textAlign="center"
             textStyle="sora"
             color="white"

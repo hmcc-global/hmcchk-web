@@ -1,0 +1,119 @@
+import '@fontsource/sora';
+import '@fontsource/inter';
+import {
+  Box,
+  Center,
+  Grid,
+  GridItem,
+  Image,
+  Text,
+  HStack,
+  Link,
+  VStack,
+} from '@chakra-ui/react';
+
+import { FaRainbow } from 'react-icons/fa';
+import { IoDocumentsOutline } from 'react-icons/io5';
+import { RiComputerLine } from 'react-icons/ri';
+import { GrCircleInformation } from 'react-icons/gr';
+
+const HomeMobile = () => {
+  return (
+    <Grid minH="50vh" templateColumns={'repeat(1, 1fr)'} gap={5}>
+      <GridItem w="100%">
+        <Center flexDirection="column">
+          <Image
+            w="90%"
+            src={
+              process.env.PUBLIC_URL +
+              '/images/retreat/with-everything-text.png'
+            }
+          />
+          <Text
+            mt="-1.5rem"
+            textAlign="center"
+            textStyle="sora"
+            color="white"
+            fontWeight={700}
+            fontSize={['xl', '3xl']}
+            w="70%"
+            lineHeight="1.3rem"
+            mb="5"
+          >
+            CHURCH-WIDE CONFERENCE 2022
+          </Text>
+          <GridItem mb="5" bg="blue" boxShadow="lg" w="100%">
+            SPACE FOR SCHEDULE
+          </GridItem>
+          <Link
+            bg="#0FB4BE"
+            textStyle="sora"
+            color="white"
+            fontWeight="700"
+            fontSize="xl"
+            p="1.75rem 0"
+            borderRadius="xl"
+            w="100%"
+            href="/with-everything/stream"
+            mb="5"
+            boxShadow="lg"
+          >
+            <Center>
+              <HStack>
+                <RiComputerLine size="30" />
+                <Text>Session Stream</Text>
+              </HStack>
+            </Center>
+          </Link>
+          <Box
+            w="100%"
+            bg="#A9E0E3"
+            textStyle="inter"
+            fontWeight="700"
+            p="0.8rem 1rem"
+            borderRadius="xl"
+            mb="5"
+            boxShadow="lg"
+          >
+            <HStack>
+              <GrCircleInformation size="20" />
+              <Text>Next session starting at 20:00</Text>
+            </HStack>
+          </Box>
+          <Grid
+            w="100%"
+            templateColumns="repeat(2, 1fr)"
+            gap={5}
+            textStyle="sora"
+            color="white"
+            fontWeight="700"
+            fontSize="xl"
+          >
+            <Center p="1.25rem 0" bg="#EE794E" borderRadius="xl" boxShadow="lg">
+              <Link href="/with-everything/about">
+                <VStack>
+                  <FaRainbow size="30" />
+                  <Text mt="0">About CWC</Text>
+                </VStack>
+              </Link>
+            </Center>
+            <Center p="1.25rem 0" bg="#FFC632" borderRadius="xl" boxShadow="lg">
+              <Link href="/with-everything/resources">
+                <VStack>
+                  <IoDocumentsOutline size="30" />
+                  <Text mt="0">Resources</Text>
+                </VStack>
+              </Link>
+            </Center>
+          </Grid>
+        </Center>
+      </GridItem>
+      <GridItem bg="beige" minH="40vh">
+        {' '}
+        space for praise wall
+      </GridItem>
+    </Grid>
+  );
+};
+
+export default HomeMobile;
