@@ -35,59 +35,52 @@ const NavButton = ({ to, color, name }) => {
 
 const AboutContainer = () => {
   return (
-    <>
-      <Flex
-        w="full"
-        flexWrap="wrap"
-        justify="center"
-        bgImage="linear-gradient(90deg, #A9E0E3 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(90deg, #FFE9AF 66%, #F2BBA8 66%)"
-      >
-        <Container
-          maxW={['container.lg']}
-          justify="center"
-          theme={retreatTheme}
-        >
-          <VStack w="full" justify="center" spacing={8}>
-            <Box
-              bg="white"
-              borderRadius="20px"
-              marginTop="20px"
-              width={['95%', '70%']}
-              height={['20%']}
-              p={[5, 7]}
+    <Flex
+      flexWrap="wrap"
+      justify="center"
+      bgImage="linear-gradient(90deg, #A9E0E3 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(90deg, #FFE9AF 66%, #F2BBA8 66%)"
+    >
+      <Container maxW={['container.lg']} justify="center" theme={retreatTheme}>
+        <VStack justify="center" spacing={8}>
+          <Box
+            bg="white"
+            borderRadius="20px"
+            marginTop="20px"
+            width={['95%', '70%']}
+            height={['20%']}
+            p={[5, 7]}
+          >
+            <Text
+              textStyle="sora"
+              fontSize={['lg', '2xl', '4xl']}
+              textAlign="center"
             >
-              <Text
-                textStyle="sora"
-                fontSize={['lg', '2xl', '4xl']}
-                textAlign="center"
-              >
-                <b>ABOUT THE CONFERENCE</b>
-              </Text>
-              <Text
-                textStyle="sora"
-                fontSize={['md', 'xl', '3xl']}
-                textAlign="center"
-              >
-                <b> With Everything - Church-wide Conference 2022</b>
-              </Text>
-            </Box>
-            <HStack spacing={[2, 5]}>
-              <NavButton
-                to="/with-everything/about#theme"
-                color="#FFC93E"
-                name="Theme"
-              />
-              <NavButton
-                to="/with-everything/about#speaker"
-                color="#EE794E"
-                name="Speaker Profile"
-              />
-            </HStack>
-            <ThemeSection id="theme" />
-          </VStack>
-        </Container>
-      </Flex>
-    </>
+              <b>ABOUT THE CONFERENCE</b>
+            </Text>
+            <Text
+              textStyle="sora"
+              fontSize={['md', 'xl', '3xl']}
+              textAlign="center"
+            >
+              <b> With Everything - Church-wide Conference 2022</b>
+            </Text>
+          </Box>
+          <HStack spacing={[2, 5]}>
+            <NavButton
+              to="/with-everything/about#theme"
+              color="#FFC93E"
+              name="Theme"
+            />
+            <NavButton
+              to="/with-everything/about#speaker"
+              color="#EE794E"
+              name="Speaker Profile"
+            />
+          </HStack>
+          <ThemeSection id="theme" />
+        </VStack>
+      </Container>
+    </Flex>
   );
 };
 
