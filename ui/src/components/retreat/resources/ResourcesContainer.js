@@ -9,7 +9,9 @@ import {
   ListItem,
   Link,
   HStack,
+  Button,
 } from '@chakra-ui/react';
+import { ChevronLeftIcon } from '@chakra-ui/icons';
 import retreatTheme from '../retreatTheme';
 import '@fontsource/sora';
 import { IoDocumentsOutline } from 'react-icons/io5';
@@ -75,13 +77,26 @@ const ResourcesContainer = () => {
     <>
       <Flex flexWrap="flex" bg="#6DCED3">
         <Container maxW={['container.lg']} theme={retreatTheme}>
+          <Link href="/with-everything">
+            <Button
+              variant="link"
+              fontSize={['xs', 'md', 'lg']}
+              color="black"
+              justifyContent="left"
+              leftIcon={<ChevronLeftIcon />}
+              textStyle="inter"
+              marginTop="20px"
+            >
+              CWC Homepage
+            </Button>
+          </Link>
           <Stack align="center" spacing={5}>
             <Box
               bg="#A9E0E3"
               borderRadius="20px"
-              marginTop="40px"
               width={['80%', '80%', '80%', '60%']}
               height={['20%']}
+              marginTop="20px"
               p={[7]}
             >
               <HStack justify={'center'}>
