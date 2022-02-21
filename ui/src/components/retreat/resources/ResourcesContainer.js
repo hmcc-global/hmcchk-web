@@ -35,7 +35,11 @@ const ResourcesList = ({ list }) => {
       <UnorderedList>
         {list.map((item) => (
           <ListItem>
-            <Link to={item.url}>{item.title}</Link>
+            <Link href={item.url} isExternal>
+              <Text textStyle="inter_bold" fontSize={['sm', 'md']}>
+                {item.title}
+              </Text>
+            </Link>
           </ListItem>
         ))}
       </UnorderedList>
@@ -45,12 +49,14 @@ const ResourcesList = ({ list }) => {
 
 const ResourcesContainer = () => {
   const Notes = [
-    { title: 'Pre-Conference Prompt', url: 'https://www.google.com' },
-    { title: 'APEPT Test', url: 'www.medium.com' },
-    { title: 'APEPT Reflection Question', url: '' },
-    { title: 'Post-Conference Pronpt', url: '' },
-    { title: 'etc.', url: '' },
-    { title: 'more links', url: '' },
+    {
+      title: 'Post Reflection Questions',
+      url: 'https://hongkong.sub.hmcc.net/wp-content/uploads/cwc-post-reflection-questions.pdf',
+    },
+    {
+      title: 'Workshop Test',
+      url: 'https://hongkong.sub.hmcc.net/wp-content/uploads/cwc-workshop-questions-paste.pdf',
+    },
   ];
 
   const RelevantLinks = [
@@ -102,12 +108,17 @@ const ResourcesContainer = () => {
               </VStack>
               <VStack w="full">
                 <ResourcesHeader color="#0FB4BE" title="Spotify Playlist" />
-                <Box>
+                <Box
+                  width="100%"
+                  borderRadius="17px"
+                  transform="translateZ(0px)"
+                  display="block"
+                  overflow="hidden"
+                >
                   <iframe
-                    // style="border-radius:20px"
                     src="https://open.spotify.com/embed/playlist/5FPvYiVrOl0acNUEBKkGSe?utm_source=generator"
                     width="100%"
-                    height="400"
+                    height="300"
                     frameBorder="10"
                     allowfullscreen=""
                     allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
