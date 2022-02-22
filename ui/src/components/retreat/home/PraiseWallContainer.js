@@ -23,20 +23,26 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import { BiNote } from 'react-icons/bi';
-import { useSelector } from 'react-redux';
 
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { customAxios as axios } from '../../helpers/customAxios';
 import PraiseCard from './PraiseCard';
 
+const whiteListWords = [
+  'God',
+  'Hell'
+];
+
 const PraiseWallContainer = ({ userObj }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [praiseList, setPraiseList] = useState([]);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  var Filter = require('bad-words'),
+  let Filter = require('bad-words'),
     filter = new Filter();
+
+  filter.removeWords(...whiteListWords);
 
   const cardBgColors = ['#6dced3', '#ffdc82', '#f39371', '#ffdc82', '#6dced3'];
   const eventCategory = 'CWC 2022';
