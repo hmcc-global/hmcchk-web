@@ -54,14 +54,14 @@ const HomeMobile = () => {
           </Text>
           <GridItem mb="5" boxShadow="lg" w="100%">
             <ScheduleHeader onClick={onOpen}/>
-            <Modal size={{base: 'sm', sm: 'md'}} isOpen={isOpen} onClose={onClose}>
+            <Modal size='md' isOpen={isOpen} onClose={onClose}>
               <ModalOverlay />
               <ModalContent borderRadius={17}>
                 <ModalHeader>
                   <ModalCloseButton size='sm' position='absolute' zIndex={1000}/>
                   <ScheduleHeader />
                 </ModalHeader>
-                <ModalBody>
+                <ModalBody padding={0}>
                   <Schedule maxH={700} minW='100%' withoutHeader={true} />
                 </ModalBody>
                 <ModalFooter />

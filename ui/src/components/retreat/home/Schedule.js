@@ -12,8 +12,8 @@ const DaySchedule = ({dateString, item}) => {
   const DayDateElement = () => {
     return (
       <Flex flexDirection='column' paddingY={{md: 2, lg: 4}} paddingLeft={{md: 2, lg: 4}} width='20%'>
-        <Text fontWeight={800} fontSize={{ md: 9, lg: 12}} textAlign='left'>{scheduleDay}</Text>
-        <Text as='b' fontSize={{ md: 25, lg: 35}} marginTop='-10px' textAlign='left'>{scheduleDate}</Text>
+        <Text fontWeight={800} fontSize={{ base: 12, md: 9, lg: 12}} textAlign='left'>{scheduleDay}</Text>
+        <Text as='b' fontSize={{ base: 30, md: 25, lg: 35}} marginTop='-10px' textAlign='left'>{scheduleDate}</Text>
       </Flex>
     );
   }
@@ -22,8 +22,8 @@ const DaySchedule = ({dateString, item}) => {
     return (
       <Box bg={(color !== '' ? color : '')} borderRadius={8.54} marginBottom={4} border='2px solid #85CCD1'>
         <Flex flexDir='row' justifyContent='space-between'>
-          <Text as='b' padding={4} fontSize={{md: '0.8em', lg: '1em'}}>{title}</Text>
-          <Text as='b' padding={4} fontSize={{md: '0.8em', lg: '1em'}}>{time}</Text>
+          <Text as='b' padding={4} fontSize={{base: 15, md: '0.8em', lg: '1em'}}>{title}</Text>
+          <Text as='b' padding={4} fontSize={{base: 15, md: '0.8em', lg: '1em'}}>{time}</Text>
         </Flex>
       </Box>
     )
