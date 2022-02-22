@@ -39,7 +39,6 @@ const HomeDesktop = (props) => {
             fontWeight={700}
             fontSize={['xl', '3xl']}
             w="50%"
-            lineHeight="2.2rem"
             mb="9"
           >
             CHURCH-WIDE CONFERENCE 2022
@@ -108,7 +107,7 @@ const HomeDesktop = (props) => {
           </Link>
           <Box
             w="100%"
-            bg={ sessionText.startsWith('Session') ? "#F2BBA8" : "#A9E0E3"}
+            bg={sessionText.startsWith('Session') ? '#F2BBA8' : '#A9E0E3'}
             textStyle="inter"
             fontWeight="700"
             p="0.8rem 1rem"
@@ -123,7 +122,7 @@ const HomeDesktop = (props) => {
         </Center>
       </GridItem>
       <GridItem colSpan={5} marginTop={30}>
-        <Schedule maxH={700} minW='100%' />
+        <Schedule maxH={700} minW="100%" />
       </GridItem>
       <GridItem colSpan={12} bg="beige" minH="40vh">
         {' '}
