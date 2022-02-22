@@ -12,30 +12,58 @@ import {
 import { ChevronLeftIcon } from '@chakra-ui/icons';
 import retreatTheme from '../retreatTheme';
 import ThemeSection from './ThemeSection';
+import SpeakerSection from './SpeakerSection';
+import { useEffect, useState, useRef } from 'react';
 import '@fontsource/sora';
 import '@fontsource/inter';
-import { HashLink } from 'react-router-hash-link';
+import './fadeIn.css';
 
-const NavButton = ({ to, color, name }) => {
+const NavButton = ({ color, name, ...props }) => {
   const buttonSize = useBreakpointValue(['xs', 'sm', 'md']);
+
   return (
-    <HashLink smooth to={to}>
-      <Button
-        borderRadius="20px"
-        bg={color}
-        color="white"
-        justify="center"
-        boxShadow="lg"
-        textStyle="sora"
-        size={buttonSize}
-      >
-        {name}
-      </Button>
-    </HashLink>
+    <Button
+      borderRadius="20px"
+      bg={color}
+      color="white"
+      justify="center"
+      boxShadow="lg"
+      textStyle="sora"
+      size={buttonSize}
+      {...props}
+    >
+      {name}
+    </Button>
+  );
+};
+
+const FadeInSection = (props) => {
+  const [isVisible, setVisible] = useState(false);
+  const domRef = useRef();
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => setVisible(entry.isIntersecting));
+    });
+    observer.observe(domRef.current);
+  }, []);
+  return (
+    <div
+      className={`fade-in-section ${isVisible ? 'is-visible' : ''}`}
+      ref={domRef}
+    >
+      {props.children}
+    </div>
   );
 };
 
 const AboutContainer = () => {
+  const [isTheme, setTheme] = useState(true);
+  const [isSpeaker, setSpeaker] = useState(false);
+
+  const buttonHandler = () => {
+    setTheme((current) => !current);
+  };
+
   return (
     <Flex
       flexWrap="wrap"
@@ -81,17 +109,32 @@ const AboutContainer = () => {
           </Box>
           <HStack spacing={[2, 5]}>
             <NavButton
-              to="/with-everything/about#theme"
               color="#FFC93E"
               name="Theme"
+              onClick={() => {
+                setTheme(true);
+                setSpeaker(false);
+              }}
             />
             <NavButton
-              to="/with-everything/about#speaker"
               color="#EE794E"
               name="Speaker Profile"
+              onClick={() => {
+                setTheme(false);
+                setSpeaker(true);
+              }}
             />
           </HStack>
-          <ThemeSection id="theme" />
+          {isTheme ? (
+            <FadeInSection>
+              <ThemeSection />
+            </FadeInSection>
+          ) : null}
+          {isSpeaker ? (
+            <FadeInSection>
+              <SpeakerSection />
+            </FadeInSection>
+          ) : null}
         </VStack>
       </Container>
     </Flex>

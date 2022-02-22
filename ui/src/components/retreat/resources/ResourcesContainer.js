@@ -63,14 +63,25 @@ const ResourcesContainer = () => {
 
   const RelevantLinks = [
     {
-      title: '101 ways to not fall asleep in a virtual conference',
-      url: 'https://www.google.com',
+      title: 'PASTE Workshop: Prophetic Gifting',
+      url: 'bit.ly/PropheticGifting',
     },
     {
-      title: 'Easy coffee recipes to do with your group',
-      url: 'https://www.google.com',
+      title: 'PASTE Workshop: Apostle Gifting',
+      url: 'bit.ly/ApostleGifting',
     },
-    { title: 'etc.', url: '' },
+    {
+      title: 'PASTE Workshop: Shepherd Gifting',
+      url: 'bit.ly/ShepherdGifting',
+    },
+    {
+      title: 'PASTE Workshop: Teaching Gifting',
+      url: 'bit.ly/TeachingGifting',
+    },
+    {
+      title: 'PASTE Workshop: Evangelistic Gifting',
+      url: 'bit.ly/EvangelisticGifting',
+    },
   ];
 
   return (
