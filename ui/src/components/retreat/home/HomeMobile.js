@@ -24,6 +24,7 @@ import { FaRainbow } from 'react-icons/fa';
 import { IoDocumentsOutline } from 'react-icons/io5';
 import { RiComputerLine } from 'react-icons/ri';
 import { GrCircleInformation } from 'react-icons/gr';
+import PraiseWallContainer from './PraiseWallContainer';
 import { Schedule, ScheduleHeader } from './Schedule';
 
 const HomeMobile = (props) => {
@@ -151,9 +152,8 @@ const HomeMobile = (props) => {
           </Grid>
         </Center>
       </GridItem>
-      <GridItem bg="beige" minH="40vh">
-        {' '}
-        space for praise wall
+      <GridItem minH="40vh">
+        <PraiseWallContainer userObj={props.userObj} />
       </GridItem>
     </Grid>
   );

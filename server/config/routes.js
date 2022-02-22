@@ -83,6 +83,10 @@ module.exports.routes = {
   'post /api/whitelist/create': 'whitelist/post-create-whitelist',
   'post /api/whitelist/update': 'whitelist/post-update-whitelist',
 
+  // Praises APIs
+  'post /api/praises/create': 'praises/create-praises',
+  'get /api/praises/get': 'praises/get-praises',
+
   // UI
   'get /*': {
     skipAssets: true,

@@ -231,6 +231,12 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
+          path="/with-everything"
+          permissions={['noUser']}
+          component={RetreatHomeContainer}
+        />
+        <PrivateRoute
+          exact
           path="/with-everything/stream"
           permissions={['public']}
           component={StreamContainer}
