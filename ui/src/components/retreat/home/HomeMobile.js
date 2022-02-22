@@ -152,7 +152,7 @@ const HomeMobile = (props) => {
           </Grid>
         </Center>
       </GridItem>
-      <GridItem minH="40vh">
+      <GridItem minH="40vh" mb={10}>
         <PraiseWallContainer userObj={props.userObj} />
       </GridItem>
     </Grid>
