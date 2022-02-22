@@ -1,6 +1,5 @@
 import {
   Button,
-  Container,
   Flex,
   Spacer,
   Text,
@@ -32,14 +31,15 @@ import PraiseCard from './PraiseCard';
 
 const PraiseWallContainer = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { user } = props;
-
   const [praiseList, setPraiseList] = useState([]);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const cardBgColors = ['#6dced3', '#ffdc82', '#f39371', '#ffdc82', '#6dced3'];
   const eventCategory = 'CWC 2022';
 
+  useEffect(() => {
+    GetPraise();
+  }, []);
   const SplitToChunks = (array, parts) => {
     let result = [];
 
@@ -48,12 +48,13 @@ const PraiseWallContainer = (props) => {
     }
     return result;
   };
-  const InputModal = () => {
+  const InputModal = (props) => {
+    const { user } = props;
     const PostPraise = async ({ message }) => {
       try {
         onClose();
         const { data } = await axios.post('/api/praises/create', {
-          fullName: user.fullName,
+          fullName: 'user',
           message: message,
           category: eventCategory,
         });
@@ -125,7 +126,7 @@ const PraiseWallContainer = (props) => {
       return null;
     }
     return (
-      <Alert status="success">
+      <Alert status="success" borderRadius="20">
         <AlertIcon />
         <AlertDescription>Praise submitted successfully!</AlertDescription>
       </Alert>
@@ -157,10 +158,11 @@ const PraiseWallContainer = (props) => {
             ),
             2
           ).map((filteredPraise, i) => (
-            <VStack align="start" w="10em">
+            <VStack key={i} align="start" w="40vw">
               {filteredPraise.map((praise, index) => (
                 <PraiseCard
                   message={praise.message}
+                  key={i * 100 + index}
                   cardColor={cardBgColors[(i % 3) + (index % 3)]}
                 />
               ))}
@@ -180,9 +182,10 @@ const PraiseWallContainer = (props) => {
             ),
             3
           ).map((filteredPraise, i) => (
-            <VStack align="start" w="18em" px="0.3em">
+            <VStack key={i} align="start" w="19em" px="0.3em">
               {filteredPraise.map((praise, index) => (
                 <PraiseCard
+                  key={i * 100 + index}
                   message={praise.message}
                   cardColor={cardBgColors[(i % 3) + (index % 3)]}
                 />
@@ -193,90 +196,85 @@ const PraiseWallContainer = (props) => {
       </Center>
     );
   };
-  const PraiseWall = (props) => {
+  const PraiseWall = () => {
     useEffect(() => {
       const interval = setInterval(() => GetPraise(), 30000);
       return () => {
         clearInterval(interval);
       };
     }, []);
-
     return (
-      <Container maxW="container.lg">
-        <Box justify="center">
-          {formSubmitted && <AlertMessage />}
-          <Box borderRadius="20" bgColor="#ebebeb">
-            <VStack>
+      <Box justify="center">
+        {formSubmitted && <AlertMessage />}
+        <Box borderRadius="20" bgColor="#ebebeb" paddingBottom="3">
+          <VStack>
+            <Flex
+              w="100%"
+              direction={['column', 'column', 'row']}
+              shadow="sm"
+              borderRadius="20"
+              bgColor="white"
+              h={['9em', '9em', '5em']}
+            >
               <Flex
-                w="100%"
-                direction={['column', 'column', 'row']}
-                shadow="sm"
-                borderRadius="20"
-                bgColor="white"
-                h={['9em', '9em', '5em']}
+                w={['90%', '90%', '60%']}
+                align="left"
+                px="2em"
+                direction="column"
               >
-                <Flex
-                  w={['90%', '90%', '60%']}
-                  align="left"
-                  px="2em"
-                  direction="column"
-                >
-                  <Flex direction="row">
-                    <Icon as={BiNote} w={6} h={6} my="auto" />
-                    <Text
-                      fontWeight="bold"
-                      fontSize="2xl"
-                      textAlign="left"
-                      paddingLeft="0.3em"
-                    >
-                      PRAISE WALL
-                    </Text>
-                  </Flex>
-
-                  <Text fontWeight="bold" fontSize="sm" textAlign="left">
-                    Share praises with the church throughout the conference!
+                <Flex direction="row">
+                  <Icon as={BiNote} w={6} h={6} my="auto" />
+                  <Text
+                    fontWeight="bold"
+                    fontSize="2xl"
+                    textAlign="left"
+                    paddingLeft="0.3em"
+                  >
+                    PRAISE WALL
                   </Text>
                 </Flex>
-                <Spacer />
-                <Button
-                  my={['1em', '1em', 'auto']}
-                  mx="2em"
-                  colorScheme="teal"
-                  borderRadius="20"
-                  shadow="lg"
-                  onClick={onOpen}
-                >
-                  <AddIcon w={3} h={3} mx="1" />
-                  Submit A Praise
-                </Button>
+
+                <Text fontWeight="bold" fontSize="sm" textAlign="left">
+                  Share praises with the church throughout the conference!
+                </Text>
               </Flex>
-              <Box
-                overflow="auto"
-                w="100%"
-                h="50vh"
-                css={{
-                  '&::-webkit-scrollbar': {
-                    display: 'none',
-                  },
-                  'scrollbar-width': 'none',
-                }}
+              <Spacer />
+              <Button
+                my={['1em', '1em', 'auto']}
+                mx="2em"
+                colorScheme="teal"
+                borderRadius="20"
+                shadow="lg"
+                onClick={onOpen}
               >
-                <MobileView />
-                <DesktopView />
-              </Box>
-            </VStack>
-          </Box>
+                <AddIcon w={3} h={3} mx="1" />
+                Submit A Praise
+              </Button>
+            </Flex>
+            <Box
+              overflow="auto"
+              w="100%"
+              h="40vh"
+              css={{
+                '&::-webkit-scrollbar': {
+                  display: 'none',
+                },
+                scrollbarWidth: 'none',
+              }}
+            >
+              <MobileView />
+              <DesktopView />
+            </Box>
+          </VStack>
         </Box>
-      </Container>
+      </Box>
     );
   };
-  useEffect(() => {
-    GetPraise();
-  }, []);
+
   return (
     <Box>
-      <PraiseWall props={props} />
-      <InputModal />
+      <PraiseWall />
+      <InputModal props={props} />
     </Box>
   );
 };

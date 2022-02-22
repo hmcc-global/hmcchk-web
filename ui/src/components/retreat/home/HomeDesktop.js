@@ -15,6 +15,7 @@ import { FaRainbow } from 'react-icons/fa';
 import { IoDocumentsOutline } from 'react-icons/io5';
 import { RiComputerLine } from 'react-icons/ri';
 import { GrCircleInformation } from 'react-icons/gr';
+import PraiseWallContainer from './PraiseWallContainer';
 import { Schedule } from './Schedule';
 
 const HomeDesktop = (props) => {
@@ -125,9 +126,8 @@ const HomeDesktop = (props) => {
       <GridItem colSpan={5} marginTop={30}>
         <Schedule maxH={700} minW='100%' />
       </GridItem>
-      <GridItem colSpan={12} bg="beige" minH="40vh">
-        {' '}
-        space for praise wall
+      <GridItem colSpan={12} minH="40vh">
+        <PraiseWallContainer />
       </GridItem>
     </Grid>
   );
