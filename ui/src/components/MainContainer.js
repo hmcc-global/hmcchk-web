@@ -30,6 +30,7 @@ import ActiveSermonContainer from './sermons/ActiveSermonContainer';
 import AboutContainer from './retreat/about/AboutContainer';
 import StreamContainer from './retreat/stream/StreamContainer';
 import RetreatHomeContainer from './retreat/home/HomeContainer';
+import ResourcesContainer from './retreat/resources/ResourcesContainer';
 
 const MainContainer = () => {
   return (
@@ -233,6 +234,12 @@ const MainContainer = () => {
           path="/with-everything/stream"
           permissions={['public']}
           component={StreamContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/with-everything/resources"
+          permissions={['public']}
+          component={ResourcesContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={NoMatch} />
       </Switch>
