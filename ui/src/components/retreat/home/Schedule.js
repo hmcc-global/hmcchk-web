@@ -1,7 +1,7 @@
 import { Box, Container, Flex, Heading, Text } from '@chakra-ui/layout';
 import { RetreatSchedule } from './RetreatSchedule';
 import { MdOutlineEvent } from 'react-icons/md';
-import { Icon } from '@chakra-ui/react';
+import { Button, Icon } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 
 const DaySchedule = ({dateString, item}) => {
@@ -11,19 +11,19 @@ const DaySchedule = ({dateString, item}) => {
   
   const DayDateElement = () => {
     return (
-      <Flex flexDirection='column' padding={5} width='20%'>
-        <Text fontWeight={800} fontSize={10} textAlign='left'>{scheduleDay}</Text>
-        <Text as='b' fontSize={25} marginTop='-10px' textAlign='left'>{scheduleDate}</Text>
+      <Flex flexDirection='column' paddingY={{md: 2, lg: 4}} paddingLeft={{md: 2, lg: 4}} width='20%'>
+        <Text fontWeight={800} fontSize={{ md: 9, lg: 12}} textAlign='left'>{scheduleDay}</Text>
+        <Text as='b' fontSize={{ md: 25, lg: 35}} marginTop='-10px' textAlign='left'>{scheduleDate}</Text>
       </Flex>
     );
   }
 
   const EventItem = ({title, time, color}) => {
     return (
-      <Box bg={(color !== '' ? color : '')} borderRadius={8.54} marginBottom={5} border='2px solid #85CCD1'>
+      <Box bg={(color !== '' ? color : '')} borderRadius={8.54} marginBottom={4} border='2px solid #85CCD1'>
         <Flex flexDir='row' justifyContent='space-between'>
-          <Text as='b' padding={5}>{title}</Text>
-          <Text as='b' padding={5}>{time}</Text>
+          <Text as='b' padding={4} fontSize={{md: '0.8em', lg: '1em'}}>{title}</Text>
+          <Text as='b' padding={4} fontSize={{md: '0.8em', lg: '1em'}}>{time}</Text>
         </Flex>
       </Box>
     )
@@ -31,7 +31,7 @@ const DaySchedule = ({dateString, item}) => {
 
   const ScheduleBox = () => {
     return (
-      <Flex flexDir='column' padding={5} width='80%'>
+      <Flex flexDir='column' padding={4} width='80%'>
         {item.map((event, i) => (
           <EventItem key={i} title={event.title} time={event.startTime} color={event.color} />
         ))}
@@ -45,30 +45,33 @@ const DaySchedule = ({dateString, item}) => {
         <DayDateElement />
         <ScheduleBox />
       </Flex>
-      <Box bg='#FFDC82' marginX={5} marginBottom={5}><br/></Box>
+      <Box bg='#FFDC82' marginX={4} marginBottom={4}><br/></Box>
     </Flex>
   );
 };
 
-export const Schedule = (props) => {
-  const ScheduleHeader = () => {
-    return (
-      <Box
-        borderRadius={17}
-        bg='#FFFFFF'
-      >
-        <Flex flexDir='row'>
-          <Icon as={MdOutlineEvent} padding={5} fontSize={85} />
-          <Heading as='h2' padding={5} lineHeight='inherit'> SCHEDULE </Heading>
-        </Flex>
-      </Box>
-    )
+export const ScheduleHeader = (onClick) => {
+  return (
+    <Button
+      borderRadius={17}
+      bg='#FFFFFF'
+      width='100%'
+      height='100%'
+      justifyContent={{base: 'center', md: 'flex-start'}}
+      {...onClick}
+    >
+      <Icon as={MdOutlineEvent} paddingY={4} paddingX={{base: 0, md: 4}} fontSize='4.5em' />
+      <Heading as='h2' paddingY={4} paddingX={{base: 0, md: 4}} lineHeight='inherit' fontSize='1.8em'> SCHEDULE </Heading>
+    </Button>
+  )
   }
 
+export const Schedule = (props) => {
+  const { withoutHeader, ...properties } = props;
   return (
     <Container>
       <Box
-        borderRadius={17}
+        borderRadius={ !withoutHeader ? 17 : 0}
         bg='rgba(255,255,255,0.8)'
         overflow='auto'
         css={{
@@ -79,9 +82,11 @@ export const Schedule = (props) => {
             height: '0px',
           },
         }}
-        {...props}
+        {...properties}
       >
-        <ScheduleHeader />
+        { !withoutHeader &&
+          <ScheduleHeader />
+        }
         {Object.keys(RetreatSchedule).map((schedule, i) => (
           <DaySchedule key={i} dateString={schedule} item={RetreatSchedule[schedule]}/>
         ))}
