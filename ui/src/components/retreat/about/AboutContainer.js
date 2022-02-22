@@ -104,53 +104,40 @@ const AboutContainer = () => {
               fontSize={['md', 'xl', '3xl']}
               textAlign="center"
             >
-              <Text
-                textStyle="sora"
-                fontSize={['lg', '2xl', '4xl']}
-                textAlign="center"
-              >
-                <b>ABOUT THE CONFERENCE</b>
-              </Text>
-              <Text
-                textStyle="sora"
-                fontSize={['md', 'xl', '3xl']}
-                textAlign="center"
-              >
-                <b> With Everything - Church-wide Conference 2022</b>
-              </Text>
-            </Box>
-            <HStack spacing={[2, 5]}>
-              <NavButton
-                color="#FFC93E"
-                name="Theme"
-                onClick={() => {
-                  setTheme(true);
-                  setSpeaker(false);
-                }}
-              />
-              <NavButton
-                color="#EE794E"
-                name="Speaker Profile"
-                onClick={() => {
-                  setTheme(false);
-                  setSpeaker(true);
-                }}
-              />
-              <NavButton color="#0FB4BE" name="Promo Video" />
-            </HStack>
-            {isTheme ? (
-              <FadeInSection>
-                <ThemeSection />
-              </FadeInSection>
-            ) : null}
-            {isSpeaker ? (
-              <FadeInSection>
-                <SpeakerSection />
-              </FadeInSection>
-            ) : null}
-          </VStack>
-        </Container>
-      </Flex>
+              <b> With Everything - Church-wide Conference 2022</b>
+            </Text>
+          </Box>
+          <HStack spacing={[2, 5]}>
+            <NavButton
+              color="#FFC93E"
+              name="Theme"
+              onClick={() => {
+                setTheme(true);
+                setSpeaker(false);
+              }}
+            />
+            <NavButton
+              color="#EE794E"
+              name="Speaker Profile"
+              onClick={() => {
+                setTheme(false);
+                setSpeaker(true);
+              }}
+            />
+          </HStack>
+          {isTheme ? (
+            <FadeInSection>
+              <ThemeSection />
+            </FadeInSection>
+          ) : null}
+          {isSpeaker ? (
+            <FadeInSection>
+              <SpeakerSection />
+            </FadeInSection>
+          ) : null}
+        </VStack>
+      </Container>
+    </Flex>
   );
 };
 

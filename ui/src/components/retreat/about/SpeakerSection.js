@@ -24,7 +24,7 @@ const SpeakerSection = ({ id }) => {
               <Image
                 borderRadius="20px"
                 mx={[0, 0, 5]}
-                w={['80vw', '100vw', '100vw']}
+                w={['100%']}
                 src={
                   process.env.PUBLIC_URL + '/images/retreat/pastor-brett.png'
                 }
@@ -34,7 +34,7 @@ const SpeakerSection = ({ id }) => {
               border="1px solid #000"
               borderRadius="20px"
               bg="white"
-              w={['80vw', '80vw', '100vw']}
+              w={['100%']}
               p={[5, 7, 8, 10]}
             >
               <Text textStyle="sora" fontSize={['xs', 'sm', 'sm', 'md']}>
