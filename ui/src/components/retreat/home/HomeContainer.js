@@ -6,15 +6,18 @@ import HomeDesktop from './HomeDesktop';
 import HomeMobile from './HomeMobile';
 
 import { useState, useEffect } from 'react';
+import { NextEvent } from './Schedule';
 
 const RetreatHomeContainer = () => {
   const [width, setWidth] = useState(window.innerWidth);
+  const [sessionText, setSessionText] = useState('');
 
   const handleWindowSizeChange = () => {
     setWidth(window.innerWidth);
   };
   useEffect(() => {
     window.addEventListener('resize', handleWindowSizeChange);
+    setSessionText(NextEvent());
     return () => {
       window.removeEventListener('resize', handleWindowSizeChange);
     };
@@ -34,7 +37,7 @@ const RetreatHomeContainer = () => {
       theme={retreatTheme}
     >
       <Container maxW={['container.lg']} minH="100vh">
-        {isMobile ? <HomeMobile /> : <HomeDesktop />}
+        {isMobile ? <HomeMobile sessionText={sessionText} /> : <HomeDesktop sessionText={sessionText} />}
       </Container>
     </Box>
   );

@@ -25,8 +25,7 @@ const StreamButtons = () => {
           color="white"
           fontSize={['md', 'xl']}
           as="a"
-          // TODO-aparedan: Change link to resources page
-          href="/give"
+          href="/with-everything/resources"
           target="_blank"
           padding={[4, 8]}
           borderRadius={17}

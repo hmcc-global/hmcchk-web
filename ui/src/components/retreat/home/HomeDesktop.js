@@ -15,11 +15,14 @@ import { FaRainbow } from 'react-icons/fa';
 import { IoDocumentsOutline } from 'react-icons/io5';
 import { RiComputerLine } from 'react-icons/ri';
 import { GrCircleInformation } from 'react-icons/gr';
+import { Schedule } from './Schedule';
 
-const HomeDesktop = () => {
+const HomeDesktop = (props) => {
+  const { sessionText } = props;
+
   return (
     <Grid minH="50vh" templateColumns={'repeat(12, 1fr)'} gap={4}>
-      <GridItem colSpan={7} w="100%">
+      <GridItem colSpan={7} w="100%" marginTop={35}>
         <Center flexDirection="column">
           <Image
             w="75%"
@@ -105,7 +108,7 @@ const HomeDesktop = () => {
           </Link>
           <Box
             w="100%"
-            bg="#A9E0E3"
+            bg={ sessionText.startsWith('Session') ? "#F2BBA8" : "#A9E0E3"}
             textStyle="inter"
             fontWeight="700"
             p="0.8rem 1rem"
@@ -114,13 +117,13 @@ const HomeDesktop = () => {
           >
             <HStack>
               <GrCircleInformation />
-              <Text>Next session starting at 20:00</Text>
+              <Text>{sessionText}</Text>
             </HStack>
           </Box>
         </Center>
       </GridItem>
-      <GridItem colSpan={5} bg="blue">
-        SPACE FOR SCHEDULE
+      <GridItem colSpan={5} marginTop={30}>
+        <Schedule maxH={700} minW='100%' />
       </GridItem>
       <GridItem colSpan={12} bg="beige" minH="40vh">
         {' '}

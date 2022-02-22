@@ -10,15 +10,26 @@ import {
   HStack,
   Link,
   VStack,
-  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure
 } from '@chakra-ui/react';
 
 import { FaRainbow } from 'react-icons/fa';
 import { IoDocumentsOutline } from 'react-icons/io5';
 import { RiComputerLine } from 'react-icons/ri';
 import { GrCircleInformation } from 'react-icons/gr';
+import { Schedule, ScheduleHeader } from './Schedule';
 
-const HomeMobile = () => {
+const HomeMobile = (props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { sessionText } = props;
+
   return (
     <Grid minH="50vh" templateColumns={'repeat(1, 1fr)'} gap={5}>
       <GridItem w="100%">
@@ -43,8 +54,21 @@ const HomeMobile = () => {
           >
             CHURCH-WIDE CONFERENCE 2022
           </Text>
-          <GridItem mb="5" bg="blue" boxShadow="lg" w="100%">
-            SPACE FOR SCHEDULE
+          <GridItem mb="5" boxShadow="lg" w="100%">
+            <ScheduleHeader onClick={onOpen}/>
+            <Modal size='md' isOpen={isOpen} onClose={onClose}>
+              <ModalOverlay />
+              <ModalContent borderRadius={17}>
+                <ModalHeader>
+                  <ModalCloseButton size='sm' position='absolute' zIndex={1000}/>
+                  <ScheduleHeader />
+                </ModalHeader>
+                <ModalBody padding={0}>
+                  <Schedule maxH={700} minW='100%' withoutHeader={true} />
+                </ModalBody>
+                <ModalFooter />
+              </ModalContent>
+            </Modal>
           </GridItem>
           <Link
             bg="#0FB4BE"
@@ -69,7 +93,7 @@ const HomeMobile = () => {
           </Link>
           <Box
             w="100%"
-            bg="#A9E0E3"
+            bg={ sessionText.startsWith('Session') ? "#F2BBA8" : "#A9E0E3"}
             textStyle="inter"
             fontWeight="700"
             p="0.8rem 1rem"
@@ -79,7 +103,7 @@ const HomeMobile = () => {
           >
             <HStack>
               <GrCircleInformation size="20" />
-              <Text>Next session starting at 20:00</Text>
+              <Text>{sessionText}</Text>
             </HStack>
           </Box>
           <Grid
