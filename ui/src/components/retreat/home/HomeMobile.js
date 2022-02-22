@@ -17,7 +17,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  useDisclosure
+  useDisclosure,
 } from '@chakra-ui/react';
 
 import { FaRainbow } from 'react-icons/fa';
@@ -49,22 +49,25 @@ const HomeMobile = (props) => {
             fontWeight={700}
             fontSize={['xl', '3xl']}
             w="70%"
-            lineHeight="1.3rem"
             mb="5"
           >
             CHURCH-WIDE CONFERENCE 2022
           </Text>
           <GridItem mb="5" boxShadow="lg" w="100%">
-            <ScheduleHeader onClick={onOpen}/>
-            <Modal size='md' isOpen={isOpen} onClose={onClose}>
+            <ScheduleHeader onClick={onOpen} />
+            <Modal size="md" isOpen={isOpen} onClose={onClose}>
               <ModalOverlay />
               <ModalContent borderRadius={17}>
                 <ModalHeader>
-                  <ModalCloseButton size='sm' position='absolute' zIndex={1000}/>
+                  <ModalCloseButton
+                    size="sm"
+                    position="absolute"
+                    zIndex={1000}
+                  />
                   <ScheduleHeader />
                 </ModalHeader>
                 <ModalBody padding={0}>
-                  <Schedule maxH={700} minW='100%' withoutHeader={true} />
+                  <Schedule maxH={700} minW="100%" withoutHeader={true} />
                 </ModalBody>
                 <ModalFooter />
               </ModalContent>
@@ -93,7 +96,7 @@ const HomeMobile = (props) => {
           </Link>
           <Box
             w="100%"
-            bg={ sessionText.startsWith('Session') ? "#F2BBA8" : "#A9E0E3"}
+            bg={sessionText.startsWith('Session') ? '#F2BBA8' : '#A9E0E3'}
             textStyle="inter"
             fontWeight="700"
             p="0.8rem 1rem"
