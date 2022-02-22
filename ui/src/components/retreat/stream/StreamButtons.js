@@ -20,7 +20,7 @@ const StreamButtons = () => {
     <>
       <Stack direction={['column', 'row']} marginTop={[4, 8]}>
         <Button
-          width='100%'
+          width="100%"
           bg="#6DCED3"
           color="white"
           fontSize={['md', 'xl']}
@@ -31,28 +31,32 @@ const StreamButtons = () => {
           padding={[4, 8]}
           borderRadius={17}
           textStyle="sora"
+          _hover={{ opacity: '0.9', transform: 'scale(1.0125)' }}
         >
           Other resources
         </Button>
         <Button
-          width='100%'
+          width="100%"
           bg="#FFC632"
           color="white"
           fontSize={['md', 'xl']}
           as="a"
-          // TODO-aparedan: change link to download pdf
-          href={process.env.PUBLIC_URL + '/images/retreat/retreat.png'}
+          href="https://hongkong.sub.hmcc.net/wp-content/uploads/booklet.pdf"
           target="_blank"
           padding={[4, 8]}
           borderRadius={17}
           textStyle="sora"
+          _hover={{ opacity: '0.9', transform: 'scale(1.0125)' }}
         >
           Download CWC Booklet
         </Button>
       </Stack>
-      <Stack direction={['column', 'row']} marginTop={["0.5em !important", "1em !important"]}>
+      <Stack
+        direction={['column', 'row']}
+        marginTop={['0.5em !important', '1em !important']}
+      >
         <Button
-          width='100%'
+          width="100%"
           bg="#F39371"
           color="white"
           fontSize={['md', 'xl']}
@@ -67,11 +71,12 @@ const StreamButtons = () => {
           padding={[4, 8]}
           borderRadius={17}
           textStyle="sora"
+          _hover={{ opacity: '0.9', transform: 'scale(1.0125)' }}
         >
           Need Prayer?
         </Button>
         <Button
-          width='100%'
+          width="100%"
           fontSize={['md', 'xl']}
           bg="#FFFFFF"
           color="black"
@@ -83,6 +88,7 @@ const StreamButtons = () => {
           padding={[4, 8]}
           borderRadius={17}
           textStyle="sora"
+          _hover={{ opacity: '0.9', transform: 'scale(1.0125)' }}
         >
           Connection Issues
         </Button>
@@ -92,19 +98,18 @@ const StreamButtons = () => {
             <ModalCloseButton />
             <ModalHeader>Connection Issues</ModalHeader>
             <ModalBody>
-              In cases where the livestream video is not working,
-              please <u>hard refresh</u> using the following
-              commands: <br />
+              In cases where the livestream video is not working, please{' '}
+              <u>hard refresh</u> using the following commands: <br />
               <br />
               <b>On a PC:</b> Press CTRL + SHIFT + R <br />
               <b>On a Mac (Chrome):</b> Press CMD + SHIFT + R <br />
-              <b>On a Mac (Safari):</b> Press CMD + OPTION + E (afterwards) CMD +
-              R
+              <b>On a Mac (Safari):</b> Press CMD + OPTION + E (afterwards) CMD
+              + R
               <br />
               <br />
-              This refreshes your browser's content and ensures proper loading of
-              up-to-date page content. Alternatively, you can choose to open the
-              site through incognito browsing.
+              This refreshes your browser's content and ensures proper loading
+              of up-to-date page content. Alternatively, you can choose to open
+              the site through incognito browsing.
             </ModalBody>
             <ModalFooter />
           </ModalContent>
@@ -115,4 +120,3 @@ const StreamButtons = () => {
 };
 
 export default StreamButtons;
-
