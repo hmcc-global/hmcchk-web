@@ -5,7 +5,7 @@ import { Button, Icon } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 
 export const NextEvent = () => {
-  const defaultText = 'Please refer to Schedule for next session!'
+  const defaultText = 'Please refer to the schedule for next session!'
   const current = DateTime.local();
   const dateNow = current.toFormat('yyyy-MM-dd');
 
@@ -102,8 +102,8 @@ export const Schedule = (props) => {
         bg='rgba(255,255,255,0.8)'
         overflow='auto'
         css={{
-          'scrollbar-width': 'none',
-          '-ms-overflow-style': 'none',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
           '&::-webkit-scrollbar': {
             width: '0px',
             height: '0px',
