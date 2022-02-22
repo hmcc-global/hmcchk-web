@@ -2,11 +2,7 @@ import {
   Button,
   Container,
   Flex,
-  Heading,
-  Image,
   Spacer,
-  SimpleGrid,
-  Stack,
   Text,
   Box,
   VStack,
@@ -19,18 +15,9 @@ import {
   ModalHeader,
   Alert,
   AlertIcon,
-  AlertTitle,
   AlertDescription,
-  FormControl,
-  FormLabel,
-  Input,
-  FormHelperText,
-  FormErrorMessage,
   HStack,
   ModalFooter,
-  CloseButton,
-  Wrap,
-  WrapItem,
   ModalBody,
   ModalCloseButton,
   Center,
@@ -42,27 +29,6 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { customAxios as axios } from '../../helpers/customAxios';
 import PraiseCard from './PraiseCard';
-
-const AlertMessage = () => {
-  const [show, setShow] = useState(true);
-  useEffect(() => {
-    const timeId = setTimeout(() => {
-      setShow(false);
-    }, 5000);
-    return () => {
-      clearTimeout(timeId);
-    };
-  }, []);
-  if (!show) {
-    return null;
-  }
-  return (
-    <Alert status="success">
-      <AlertIcon />
-      <AlertDescription>Praise submitted successfully!</AlertDescription>
-    </Alert>
-  );
-};
 
 const PraiseWall = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -79,15 +45,39 @@ const PraiseWall = (props) => {
 
   const SplitToChunks = (array, parts) => {
     let result = [];
+
     for (let i = parts; i > 0; i--) {
       result.push(array.splice(0, Math.ceil(array.length / i)));
     }
+    console.log(result);
     return result;
   };
-
+  const AlertMessage = () => {
+    const [show, setShow] = useState(true);
+    useEffect(() => {
+      const timeId = setTimeout(() => {
+        setShow(false);
+        setFormSubmitted(false);
+      }, 5000);
+      return () => {
+        clearTimeout(timeId);
+      };
+    }, []);
+    if (!show) {
+      return null;
+    }
+    return (
+      <Alert status="success">
+        <AlertIcon />
+        <AlertDescription>Praise submitted successfully!</AlertDescription>
+      </Alert>
+    );
+  };
   const GetPraise = async () => {
     try {
-      const { data, status } = await axios.get('/api/praises/get');
+      const { data, status } = await axios.get('/api/praises/get', {
+        params: { category: eventCategory },
+      });
 
       if (status === 200) {
         data.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
@@ -103,7 +93,7 @@ const PraiseWall = (props) => {
   const PostPraise = async ({ message }) => {
     try {
       const { data } = await axios.post('/api/praises/create', {
-        fullName: user.fullName,
+        fullName: 'user.fullName',
         message: message,
         category: eventCategory,
       });
@@ -118,15 +108,16 @@ const PraiseWall = (props) => {
       <Center display={{ base: 'flex', lg: 'none' }}>
         <HStack align="start" spacing="5">
           {SplitToChunks(
-            praiseList.filter((praise) => praise.category == eventCategory),
+            praiseList.filter(
+              (partitionedList) => partitionedList.category == eventCategory
+            ),
             2
           ).map((filteredPraise, i) => (
-            <VStack align="start" key={i} w="12em">
+            <VStack align="start" w="10em">
               {filteredPraise.map((praise, index) => (
                 <PraiseCard
                   message={praise.message}
                   cardColor={cardBgColors[(i % 3) + (index % 3)]}
-                  key={i}
                 />
               ))}
             </VStack>
@@ -140,15 +131,16 @@ const PraiseWall = (props) => {
       <Center display={{ base: 'none', lg: 'flex' }}>
         <HStack align="start" spacing="5">
           {SplitToChunks(
-            praiseList.filter((praise) => praise.category == eventCategory),
+            praiseList.filter(
+              (partitionedList) => partitionedList.category == eventCategory
+            ),
             3
           ).map((filteredPraise, i) => (
-            <VStack align="start" key={i} w="12em">
+            <VStack align="start" w="19em">
               {filteredPraise.map((praise, index) => (
                 <PraiseCard
                   message={praise.message}
                   cardColor={cardBgColors[(i % 3) + (index % 3)]}
-                  key={i}
                 />
               ))}
             </VStack>
