@@ -72,7 +72,6 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
               return <HomeContainer {...props} user={userObj} />;
             }
           } else if (access) {
-            console.log(props.location.pathname);
             switch (props.location.pathname) {
               case '/complete-profile':
                 if (userObj.hasFilledProfileForm) {

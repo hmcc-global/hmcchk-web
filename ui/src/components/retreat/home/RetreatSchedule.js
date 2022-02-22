@@ -7,7 +7,7 @@
 
 // export const RetreatSchedule: Record<string, ScheduleItem[]> = {
 export const RetreatSchedule = {
-  "25-02-2022": [
+  "2022-02-25": [
     {
       title: 'Welcoming Activity',
       startTime: '19:30',
@@ -21,7 +21,7 @@ export const RetreatSchedule = {
       color: '#A9E0E3'
     }
   ],
-  "26-02-2022": [
+  "2022-02-26": [
     {
       title: 'Breakfast/QT',
       startTime: '09:00',
@@ -66,18 +66,12 @@ export const RetreatSchedule = {
     },
     {
       title: 'Session 3',
-      startTime: '19:00',
+      startTime: '19:30',
       endTime: '23:00',
       color: '#A9E0E3'
     },
   ],
-  "27-02-2022": [
-    {
-      title: 'Breakfast/QT',
-      startTime: '09:00',
-      endTime: '10:00',
-      color: ''
-    },
+  "2022-02-27": [
     {
       title: 'Sunday Celebration',
       startTime: '10:00',

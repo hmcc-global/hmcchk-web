@@ -4,8 +4,35 @@ import { MdOutlineEvent } from 'react-icons/md';
 import { Button, Icon } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 
+export const NextEvent = () => {
+  const defaultText = 'Please refer to Schedule for next session!'
+  const current = DateTime.local();
+  const dateNow = current.toFormat('yyyy-MM-dd');
+
+  const todaySchedule = RetreatSchedule[dateNow];
+  if (!todaySchedule) return defaultText;
+
+  const nextSession = todaySchedule.find(s => {
+    if (!s.title.includes('Session')) return false;
+    const startTime = DateTime.fromISO(`${dateNow}T${s.startTime}`);
+    const endTime = DateTime.fromISO(`${dateNow}T${s.endTime}`);
+    
+    if (startTime > current || endTime > current) return true;
+    return false;
+  })
+  
+  if (!nextSession) return defaultText;
+
+  const startTime = DateTime.fromISO(`${dateNow}T${nextSession.startTime}`);
+  const endTime = DateTime.fromISO(`${dateNow}T${nextSession.endTime}`);
+  if (startTime > current)
+    return `Next session is starting at ${nextSession.startTime}`;
+  else if (endTime > current)
+    return `${nextSession.title} IS STREAMING LIVE NOW`;
+}
+
 const DaySchedule = ({dateString, item}) => {
-  const dateObj = DateTime.fromFormat(dateString, 'dd-MM-yyyy');
+  const dateObj = DateTime.fromFormat(dateString, 'yyyy-MM-dd');
   const scheduleDate = dateObj.toFormat('dd');
   const scheduleDay = dateObj.toFormat('cccc');
   
@@ -45,7 +72,7 @@ const DaySchedule = ({dateString, item}) => {
         <DayDateElement />
         <ScheduleBox />
       </Flex>
-      <Box bg='#FFDC82' marginX={4} marginBottom={4}><br/></Box>
+      <Box bg='#FFDC82' marginRight={4} marginLeft={{md: 2, lg: 4}} marginBottom={4}><br/></Box>
     </Flex>
   );
 };
