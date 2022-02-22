@@ -60,6 +60,6 @@ module.exports.policies = {
   'sermons/*': true,
 
   //retreat
-  'praises/get-praises': true,
-  'praises/create-praises': true,
+  'praises/get-praises': ['isLoggedIn'],
+  'praises/create-praises': ['isLoggedIn'],
 };

@@ -23,16 +23,20 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import { BiNote } from 'react-icons/bi';
+import { useSelector } from 'react-redux';
 
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { customAxios as axios } from '../../helpers/customAxios';
 import PraiseCard from './PraiseCard';
 
-const PraiseWallContainer = (props) => {
+const PraiseWallContainer = ({ userObj }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [praiseList, setPraiseList] = useState([]);
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  var Filter = require('bad-words'),
+    filter = new Filter();
 
   const cardBgColors = ['#6dced3', '#ffdc82', '#f39371', '#ffdc82', '#6dced3'];
   const eventCategory = 'CWC 2022';
@@ -48,20 +52,22 @@ const PraiseWallContainer = (props) => {
     }
     return result;
   };
-  const InputModal = (props) => {
-    const { user } = props;
+  const InputModal = ({ userObj }) => {
     const PostPraise = async ({ message }) => {
-      try {
-        onClose();
-        const { data } = await axios.post('/api/praises/create', {
-          fullName: 'user',
-          message: message,
-          category: eventCategory,
-        });
-        setFormSubmitted(true);
-        GetPraise();
-      } catch (err) {
-        console.log(err);
+      if (!filter.isProfane(message)) {
+        try {
+          onClose();
+
+          const { data } = await axios.post('/api/praises/create', {
+            fullName: userObj.fullName,
+            message: message,
+            category: eventCategory,
+          });
+          setFormSubmitted(true);
+          GetPraise();
+        } catch (err) {
+          console.log(err);
+        }
       }
     };
 
@@ -274,7 +280,7 @@ const PraiseWallContainer = (props) => {
   return (
     <Box>
       <PraiseWall />
-      <InputModal props={props} />
+      <InputModal userObj={userObj} />
     </Box>
   );
 };

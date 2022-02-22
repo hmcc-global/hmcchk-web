@@ -8,7 +8,7 @@ import HomeMobile from './HomeMobile';
 import { useState, useEffect } from 'react';
 import { NextEvent } from './Schedule';
 
-const RetreatHomeContainer = () => {
+const RetreatHomeContainer = (props) => {
   const [width, setWidth] = useState(window.innerWidth);
   const [sessionText, setSessionText] = useState('');
 
@@ -37,7 +37,7 @@ const RetreatHomeContainer = () => {
       theme={retreatTheme}
     >
       <Container maxW={['container.lg']} minH="100vh">
-        {isMobile ? <HomeMobile sessionText={sessionText} /> : <HomeDesktop sessionText={sessionText} />}
+        {isMobile ? <HomeMobile sessionText={sessionText} userObj={props.user} /> : <HomeDesktop sessionText={sessionText} userObj={props.user} />}
       </Container>
     </Box>
   );

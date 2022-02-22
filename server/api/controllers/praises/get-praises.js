@@ -23,12 +23,10 @@ module.exports = {
   fn: async function ({ category }, exits) {
     try {
       let data = await Praises.find();
-      if (category) {
-        sails.log.info(`Getting praise card with category: ${category}`);
-        data = data.filter((d) => d.category === category);
-      }
 
+      sails.log.info(`Getting praise card with category: ${category}`);
       if (data === null) return exits.error('no data retrieved');
+      data = data.filter((d) => d.category === category);
 
       return exits.success(data);
     } catch (err) {
