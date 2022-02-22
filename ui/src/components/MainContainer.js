@@ -29,6 +29,7 @@ import AboutUsContainer from './about/AboutUsContainer';
 import ActiveSermonContainer from './sermons/ActiveSermonContainer';
 import AboutContainer from './retreat/about/AboutContainer';
 import StreamContainer from './retreat/stream/StreamContainer';
+import RetreatHomeContainer from './retreat/home/HomeContainer';
 
 const MainContainer = () => {
   return (
@@ -214,6 +215,12 @@ const MainContainer = () => {
           path="/admin/:pageName"
           permissions={['admin', 'stewardship']}
           component={AdminContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/with-everything/"
+          permissions={['public']}
+          component={RetreatHomeContainer}
         />
         <PrivateRoute
           exact
