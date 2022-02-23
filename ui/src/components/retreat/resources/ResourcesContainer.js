@@ -62,23 +62,23 @@ const ResourcesContainer = () => {
   const RelevantLinks = [
     {
       title: 'PASTE Workshop: Prophetic Gifting',
-      url: 'bit.ly/PropheticGifting',
+      url: 'https://bit.ly/PropheticGifting',
     },
     {
       title: 'PASTE Workshop: Apostle Gifting',
-      url: 'bit.ly/ApostleGifting',
+      url: 'https://bit.ly/ApostleGifting',
     },
     {
       title: 'PASTE Workshop: Shepherd Gifting',
-      url: 'bit.ly/ShepherdGifting',
+      url: 'https://bit.ly/ShepherdGifting',
     },
     {
       title: 'PASTE Workshop: Teaching Gifting',
-      url: 'bit.ly/TeachingGifting',
+      url: 'https://bit.ly/TeachingGifting',
     },
     {
       title: 'PASTE Workshop: Evangelistic Gifting',
-      url: 'bit.ly/EvangelisticGifting',
+      url: 'https://bit.ly/EvangelisticGifting',
     },
   ];
 
