@@ -12,8 +12,6 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { ChevronLeftIcon } from '@chakra-ui/icons';
-import retreatTheme from '../retreatTheme';
-import '@fontsource/sora';
 import { IoDocumentsOutline } from 'react-icons/io5';
 
 const ResourcesHeader = ({ color, title }) => {
@@ -87,7 +85,7 @@ const ResourcesContainer = () => {
   return (
     <>
       <Flex flexWrap="flex" bg="#6DCED3">
-        <Container maxW={['container.lg']} theme={retreatTheme}>
+        <Container maxW={['container.xl']}>
           <Link href="/with-everything">
             <Button
               variant="link"

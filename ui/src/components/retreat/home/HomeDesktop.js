@@ -1,5 +1,3 @@
-import '@fontsource/sora';
-import '@fontsource/inter';
 import {
   Box,
   Center,
@@ -39,7 +37,7 @@ const HomeDesktop = (props) => {
             color="white"
             fontWeight={700}
             fontSize={['xl', '3xl']}
-            w="50%"
+            w="60%"
             mb="9"
           >
             CHURCH-WIDE CONFERENCE 2022

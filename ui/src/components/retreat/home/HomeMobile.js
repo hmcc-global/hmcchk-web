@@ -1,5 +1,3 @@
-import '@fontsource/sora';
-import '@fontsource/inter';
 import {
   Box,
   Center,

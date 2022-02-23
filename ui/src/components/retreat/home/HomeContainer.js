@@ -1,6 +1,3 @@
-import retreatTheme from '../retreatTheme';
-import '@fontsource/sora';
-import '@fontsource/inter';
 import { Box, Container } from '@chakra-ui/react';
 import HomeDesktop from './HomeDesktop';
 import HomeMobile from './HomeMobile';
@@ -34,10 +31,13 @@ const RetreatHomeContainer = (props) => {
       bgPosition="center center"
       bgAttachment="fixed"
       justify="center"
-      theme={retreatTheme}
     >
       <Container maxW={['container.lg']} minH="100vh">
-        {isMobile ? <HomeMobile sessionText={sessionText} userObj={props.user} /> : <HomeDesktop sessionText={sessionText} userObj={props.user} />}
+        {isMobile ? (
+          <HomeMobile sessionText={sessionText} userObj={props.user} />
+        ) : (
+          <HomeDesktop sessionText={sessionText} userObj={props.user} />
+        )}
       </Container>
     </Box>
   );
