@@ -103,7 +103,7 @@ const ResourcesContainer = () => {
             <Box
               bg="#A9E0E3"
               borderRadius="20px"
-              width={['80%', '80%', '80%', '60%']}
+              width={['90%', '90%', '80%', '60%']}
               height={['20%']}
               marginTop="20px"
               p={[7]}
@@ -121,7 +121,7 @@ const ResourcesContainer = () => {
             </Box>
             <Stack
               direction={['column', 'column', 'row']}
-              width={['80%', '80%', '80%', '60%']}
+              width={['90%', '90%', '80%', '60%']}
               pb={[6]}
             >
               <VStack w="full">

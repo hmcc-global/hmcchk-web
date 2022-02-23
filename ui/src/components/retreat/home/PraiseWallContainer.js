@@ -29,10 +29,7 @@ import { useForm } from 'react-hook-form';
 import { customAxios as axios } from '../../helpers/customAxios';
 import PraiseCard from './PraiseCard';
 
-const whiteListWords = [
-  'God',
-  'Hell'
-];
+const whiteListWords = ['God', 'Hell'];
 
 const PraiseWallContainer = ({ userObj }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -234,11 +231,11 @@ const PraiseWallContainer = ({ userObj }) => {
                 px="2em"
                 direction="column"
               >
-                <Flex direction="row">
+                <Flex direction="row" pt={['1rem', '0.3em']} spacing={0}>
                   <Icon as={BiNote} w={6} h={6} my="auto" />
                   <Text
                     fontWeight="bold"
-                    fontSize="2xl"
+                    fontSize={['xl', '3xl']}
                     textAlign="left"
                     paddingLeft="0.3em"
                   >
