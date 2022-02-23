@@ -66,7 +66,7 @@ const HomeMobile = (props) => {
                   <ScheduleHeader />
                 </ModalHeader>
                 <ModalBody padding={0}>
-                  <Schedule maxH={700} minW="100%" withoutHeader={true} />
+                  <Schedule maxH={610} minW="100%" withoutHeader={true} />
                 </ModalBody>
                 <ModalFooter />
               </ModalContent>

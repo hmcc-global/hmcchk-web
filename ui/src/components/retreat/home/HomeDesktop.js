@@ -121,7 +121,7 @@ const HomeDesktop = (props) => {
         </Center>
       </GridItem>
       <GridItem colSpan={5} marginTop={30}>
-        <Schedule maxH={700} minW="100%" />
+        <Schedule maxH={610} minW="100%" />
       </GridItem>
       <GridItem colSpan={12} minH="40vh" mb={10}>
         <PraiseWallContainer userObj={props.userObj} />

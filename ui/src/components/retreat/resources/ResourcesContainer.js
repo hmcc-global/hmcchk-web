@@ -18,12 +18,12 @@ const ResourcesHeader = ({ color, title }) => {
   return (
     <Box bg={color} borderRadius="20px" width={'full'} p={[4]}>
       <Text
-        textStyle="sora"
+        textStyle="sora_bolder"
         fontSize={['md', 'lg', 'xl']}
         textAlign="center"
         color="white"
       >
-        <b>{title}</b>
+        {title}
       </Text>
     </Box>
   );
@@ -109,13 +109,13 @@ const ResourcesContainer = () => {
               p={[7]}
             >
               <HStack justify={'center'}>
-                <IoDocumentsOutline />
+                <IoDocumentsOutline size={28} />
                 <Text
-                  textStyle="sora"
-                  fontSize={['lg', 'xl', '2xl']}
+                  textStyle="sora_bolder"
+                  fontSize={['xl', '3xl']}
                   textAlign="center"
                 >
-                  <b>Resources</b>
+                  Resources
                 </Text>
               </HStack>
             </Box>

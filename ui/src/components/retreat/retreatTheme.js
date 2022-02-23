@@ -6,6 +6,10 @@ const retreatTheme = extendTheme({
       fontFamily: 'Sora',
       fontWeight: 'bold',
     },
+    sora_bolder: {
+      fontFamily: 'Sora',
+      fontWeight: '900',
+    },
     inter: {
       fontFamily: 'Inter',
       fontWeight: 'normal',
