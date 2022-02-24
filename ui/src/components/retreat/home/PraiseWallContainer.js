@@ -154,7 +154,7 @@ const PraiseWallContainer = ({ userObj }) => {
       return null;
     }
     return (
-      <Alert status="success" borderRadius="20">
+      <Alert status="success" borderRadius="20" mb="3">
         <AlertIcon />
         <AlertDescription>Praise submitted successfully!</AlertDescription>
       </Alert>
@@ -285,7 +285,6 @@ const PraiseWallContainer = ({ userObj }) => {
               >
                 <AddIcon w={3} h={3} mx="1" />
                 <Text textStyle="sora-bolder" fontWeight={['800', '700']}>
-                  {' '}
                   Submit A Praise
                 </Text>
               </Button>

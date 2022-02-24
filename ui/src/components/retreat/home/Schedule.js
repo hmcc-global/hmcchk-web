@@ -77,7 +77,7 @@ const DaySchedule = ({ whichDay, dateString, item }) => {
             as="b"
             padding={3}
             fontSize={{ base: 15, md: '0.8em', lg: '0.95em' }}
-            fontWeight="800"
+            fontWeight={['800', '700']}
             textStyle="sora-bolder"
           >
             {title}
@@ -86,7 +86,7 @@ const DaySchedule = ({ whichDay, dateString, item }) => {
             as="b"
             padding={3}
             fontSize={{ base: 15, md: '0.8em', lg: '0.95em' }}
-            fontWeight="800"
+            fontWeight={['800', '700']}
             textStyle="sora-bolder"
           >
             {time}
