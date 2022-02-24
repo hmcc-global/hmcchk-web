@@ -289,7 +289,7 @@ const PraiseWallContainer = ({ userObj }) => {
             <Box
               overflow="auto"
               w="100%"
-              h="40vh"
+              h="60vh"
               css={{
                 '&::-webkit-scrollbar': {
                   display: 'none',

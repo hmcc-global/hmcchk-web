@@ -1,5 +1,6 @@
 import {
   VStack,
+  HStack,
   Box,
   Button,
   Stack,
@@ -9,13 +10,13 @@ import {
   Container,
   Flex,
   Center,
+  Icon,
 } from '@chakra-ui/react';
 import { ChevronLeftIcon } from '@chakra-ui/icons';
+import { GrCircleInformation } from 'react-icons/gr';
 import StreamButtons from './StreamButtons';
 import { customAxios as axios } from '../../helpers/customAxios';
 import React, { useState, useEffect, useCallback } from 'react';
-import '@fontsource/sora';
-import '@fontsource/inter';
 
 const StreamContainer = (props) => {
   const [title, setTitle] = useState(
@@ -86,7 +87,34 @@ const StreamContainer = (props) => {
               ratio={16 / 9}
               background="#333333"
             >
-              {isZoom ? (
+              {url === '' ? (
+                <Box>
+                  <Box
+                    w="75%"
+                    bg="#A9E0E3"
+                    textStyle="inter-bold"
+                    fontWeight="700"
+                    p="0.8rem 1rem"
+                    borderRadius="xl"
+                    boxShadow="xl"
+                    fontSize={['sm', 'md']}
+                  >
+                    <HStack spacing={4}>
+                      <Icon
+                        as={GrCircleInformation}
+                        fontWeight="700"
+                        fontSize={['1.5em', '1.25em']}
+                      />
+                      <Text>
+                        Session not started.
+                        <br />
+                        Please refer to the schedule on the homepage for the
+                        next session!
+                      </Text>
+                    </HStack>
+                  </Box>
+                </Box>
+              ) : isZoom ? (
                 <Center>
                   <VStack p={5} spacing={5}>
                     <Text
