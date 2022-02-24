@@ -86,16 +86,13 @@ const PraiseWallContainer = ({ userObj }) => {
         <ModalOverlay />
         <ModalContent borderRadius="20">
           <ModalHeader fontWeight="bold" borderRadius="20">
-            <Icon
-              as={BiNote}
-              w={5}
-              h={5}
-              my="auto"
-              textStyle="sora"
-              fontWeight="bold"
-            />
-            Submit A Praise!
-            <Text fontSize="sm" textStyle="inter" fontWeight="bold">
+            <HStack spacing="1">
+              <Icon as={BiNote} w={5} h={5} />
+              <Text fontWeight="bold" textStyle="Sora">
+                Submit A Praise!
+              </Text>
+            </HStack>
+            <Text fontSize="sm" textStyle="Inter" fontWeight="bold">
               Share praises with the church throughout the conference!{' '}
             </Text>
           </ModalHeader>
