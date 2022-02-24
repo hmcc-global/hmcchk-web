@@ -22,6 +22,9 @@ const LoginContainer = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const { history } = props;
+  const searchParams = new URLSearchParams(props.location.search);
+  const redirect = searchParams.get("redirect");
+
   const {
     register,
     handleSubmit,
@@ -36,6 +39,11 @@ const LoginContainer = (props) => {
       });
       dispatch(signin(data));
       setInvalidLogin("");
+
+      if (redirect)
+        history.push({
+          pathname: redirect
+        });
       window.location.reload();
     } catch (err) {
       if (err.response.status === 500) {
@@ -65,6 +73,10 @@ const LoginContainer = (props) => {
     });
     dispatch(signin(data));
     setInvalidLogin("");
+    if (redirect)
+      history.push({
+        pathname: redirect
+      });
     window.location.reload();
   };
 
