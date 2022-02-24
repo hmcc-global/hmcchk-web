@@ -146,6 +146,8 @@ export const ScheduleHeader = (onClick) => {
       justifyContent={{ base: 'center', md: 'flex-start' }}
       {...onClick}
       _hover={{}}
+      position="sticky"
+      top={0}
     >
       <Icon
         as={MdOutlineEvent}
