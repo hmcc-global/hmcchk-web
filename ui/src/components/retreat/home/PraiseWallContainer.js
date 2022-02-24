@@ -88,11 +88,11 @@ const PraiseWallContainer = ({ userObj }) => {
           <ModalHeader fontWeight="bold" borderRadius="20">
             <HStack spacing="1">
               <Icon as={BiNote} w={5} h={5} />
-              <Text fontWeight="bold" textStyle="Sora">
+              <Text fontWeight="bold" textStyle="sora_bolder">
                 Submit A Praise!
               </Text>
             </HStack>
-            <Text fontSize="sm" textStyle="Inter" fontWeight="bold">
+            <Text fontSize="sm" textStyle="inter_bold" fontWeight="bold">
               Share praises with the church throughout the conference!{' '}
             </Text>
           </ModalHeader>
@@ -128,7 +128,7 @@ const PraiseWallContainer = ({ userObj }) => {
                 type="submit"
               >
                 <AddIcon w={3} h={3} mx="1" />
-                <Text textStyle="inter">Submit Praise</Text>
+                <Text textStyle="sora_bolder">Submit Praise</Text>
               </Button>
             </ModalFooter>
           </form>

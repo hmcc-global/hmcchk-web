@@ -1,6 +1,3 @@
-import retreatTheme from './retreatTheme';
-import '@fontsource/sora';
-import '@fontsource/inter';
 import {
   Box,
   Center,
@@ -24,13 +21,12 @@ const NoAccessRetreat = (props) => {
       bgPosition="center center"
       bgAttachment="fixed"
       justify="center"
-      theme={retreatTheme}
     >
       <Container maxW={['container.lg']} minH="100vh">
         <Center mt="-10" minH="100vh" flexDirection="column">
           <Text
             textAlign="center"
-            textStyle="sora"
+            textStyle="sora_bolder"
             color="white"
             fontWeight={700}
             fontSize={['2xl', '4xl']}
@@ -47,7 +43,7 @@ const NoAccessRetreat = (props) => {
           <Text
             mt="-1.5rem"
             textAlign="center"
-            textStyle="sora"
+            textStyle="sora_bolder"
             color="white"
             fontWeight={700}
             fontSize={['2xl', '4xl']}
@@ -65,7 +61,7 @@ const NoAccessRetreat = (props) => {
             >
               <Text
                 fontSize={['sm', 'md']}
-                textStyle="inter"
+                textStyle="inter_bold"
                 textAlign="center"
                 fontWeight={700}
               >
@@ -81,7 +77,7 @@ const NoAccessRetreat = (props) => {
               mt="10"
             >
               <HStack
-                textStyle="inter"
+                textStyle="inter_bold"
                 textAlign="center"
                 fontWeight={700}
                 fontSize="md"
@@ -98,7 +94,7 @@ const NoAccessRetreat = (props) => {
                 borderRadius="20px"
                 bg="#FFE9AF"
                 boxShadow="xl"
-                textStyle="sora"
+                textStyle="sora_bolder"
                 textAlign="center"
                 fontWeight={700}
                 fontSize={['xl', '2xl']}
