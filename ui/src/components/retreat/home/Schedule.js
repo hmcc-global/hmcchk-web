@@ -31,7 +31,7 @@ export const NextEvent = () => {
     return `${nextSession.title} IS STREAMING LIVE NOW`;
 };
 
-const DaySchedule = ({ dateString, item }) => {
+const DaySchedule = ({ whichDay, dateString, item }) => {
   const dateObj = DateTime.fromFormat(dateString, 'yyyy-MM-dd');
   const scheduleDate = dateObj.toFormat('dd');
   const scheduleDay = dateObj.toFormat('cccc');
@@ -40,12 +40,12 @@ const DaySchedule = ({ dateString, item }) => {
     return (
       <Flex
         flexDirection="column"
-        paddingY={{ md: 2, lg: 4 }}
-        paddingLeft={{ md: 2, lg: 4 }}
+        paddingY={[0, 4]}
+        paddingLeft={[0, 4]}
         width="20%"
       >
         <Text
-          fontWeight={800}
+          fontWeight="800"
           fontSize={{ base: 12, md: 9, lg: 12 }}
           textAlign="left"
         >
@@ -74,15 +74,19 @@ const DaySchedule = ({ dateString, item }) => {
         <Flex flexDir="row" justifyContent="space-between">
           <Text
             as="b"
-            padding={4}
-            fontSize={{ base: 15, md: '0.8em', lg: '1em' }}
+            padding={3}
+            fontSize={{ base: 15, md: '0.8em', lg: '0.95em' }}
+            fontWeight="800"
+            textStyle="sora-bolder"
           >
             {title}
           </Text>
           <Text
             as="b"
-            padding={4}
-            fontSize={{ base: 15, md: '0.8em', lg: '1em' }}
+            padding={3}
+            fontSize={{ base: 15, md: '0.8em', lg: '0.95em' }}
+            fontWeight="800"
+            textStyle="sora-bolder"
           >
             {time}
           </Text>
@@ -93,7 +97,7 @@ const DaySchedule = ({ dateString, item }) => {
 
   const ScheduleBox = () => {
     return (
-      <Flex flexDir="column" padding={4} width="80%">
+      <Flex flexDir="column" px={[0, 4]} pt={[0, 4]} pb={0} width="80%">
         {item.map((event, i) => (
           <EventItem
             key={i}
@@ -112,14 +116,20 @@ const DaySchedule = ({ dateString, item }) => {
         <DayDateElement />
         <ScheduleBox />
       </Flex>
-      <Box
-        bg="#FFDC82"
-        marginRight={4}
-        marginLeft={{ md: 2, lg: 4 }}
-        marginBottom={4}
-      >
-        <br />
-      </Box>
+
+      {whichDay === 2 ? (
+        <></>
+      ) : (
+        <Box
+          bg="#FFDC82"
+          marginRight={{ md: 2, lg: 4 }}
+          marginLeft={{ md: 2, lg: 4 }}
+          marginBottom={[4, 0]}
+          h={3}
+        >
+          <br />
+        </Box>
+      )}
     </Flex>
   );
 };
@@ -130,27 +140,27 @@ export const ScheduleHeader = (onClick) => {
       borderRadius={17}
       bg="#FFFFFF"
       width="100%"
-      height="100%"
+      height={['60%', '100%']}
       justifyContent={{ base: 'center', md: 'flex-start' }}
       {...onClick}
       _hover={{}}
     >
       <Icon
         as={MdOutlineEvent}
-        paddingY={4}
-        paddingX={{ base: 0, md: 4 }}
-        fontSize="4.5em"
+        paddingY={[0, 4]}
+        mr={[2, 0]}
+        fontSize={['1.75em', '4.5em']}
       />
-      <Heading
-        as="h2"
+      <Text
         paddingY={4}
-        paddingX={{ base: 0, md: 4 }}
         lineHeight="inherit"
         fontSize="1.8em"
+        textStyle="sora-bolder"
+        fontWeight={['800', '700']}
+        fontSize={['xl', '3xl']}
       >
-        {' '}
-        SCHEDULE{' '}
-      </Heading>
+        SCHEDULE
+      </Text>
     </Button>
   );
 };
@@ -177,6 +187,7 @@ export const Schedule = (props) => {
         {Object.keys(RetreatSchedule).map((schedule, i) => (
           <DaySchedule
             key={i}
+            whichDay={i}
             dateString={schedule}
             item={RetreatSchedule[schedule]}
           />

@@ -30,7 +30,7 @@ const HomeMobile = (props) => {
   const { sessionText } = props;
 
   return (
-    <Grid minH="50vh" templateColumns={'repeat(1, 1fr)'} gap={5}>
+    <Grid minH="50vh" templateColumns={'repeat(1, 1fr)'} gap={3}>
       <GridItem w="100%">
         <Center flexDirection="column">
           <Image
@@ -48,15 +48,21 @@ const HomeMobile = (props) => {
             fontWeight={700}
             fontSize={['xl', '3xl']}
             w="70%"
-            mb="5"
+            mb="3"
           >
             CHURCH-WIDE CONFERENCE 2022
           </Text>
-          <GridItem mb="5" boxShadow="lg" w="100%">
+          <GridItem mb="3" boxShadow="lg" w="100%">
             <ScheduleHeader onClick={onOpen} />
-            <Modal size="md" isOpen={isOpen} onClose={onClose}>
+            <Modal
+              size="full"
+              isOpen={isOpen}
+              onClose={onClose}
+              blockScrollOnMount={true}
+              scrollBehavior="inside"
+            >
               <ModalOverlay />
-              <ModalContent borderRadius={17}>
+              <ModalContent>
                 <ModalHeader>
                   <ModalCloseButton
                     size="sm"
@@ -66,9 +72,9 @@ const HomeMobile = (props) => {
                   <ScheduleHeader />
                 </ModalHeader>
                 <ModalBody padding={0}>
-                  <Schedule maxH={610} minW="100%" withoutHeader={true} />
+                  <Schedule maxH="100vh" minW="100%" withoutHeader={true} />
                 </ModalBody>
-                <ModalFooter />
+                {/* <ModalFooter /> */}
               </ModalContent>
             </Modal>
           </GridItem>
@@ -83,7 +89,7 @@ const HomeMobile = (props) => {
             borderRadius="xl"
             boxShadow="lg"
             href="/with-everything/stream"
-            mb="5"
+            mb="3"
             _hover={{ opacity: '0.9', transform: 'scale(1.025)' }}
           >
             <Center>
@@ -100,7 +106,7 @@ const HomeMobile = (props) => {
             fontWeight="700"
             p="0.8rem 1rem"
             borderRadius="xl"
-            mb="5"
+            mb="3"
             boxShadow="lg"
           >
             <HStack>
@@ -111,7 +117,7 @@ const HomeMobile = (props) => {
           <Grid
             w="100%"
             templateColumns="repeat(2, 1fr)"
-            gap={5}
+            gap={3}
             textStyle="sora"
             color="white"
             fontWeight="700"

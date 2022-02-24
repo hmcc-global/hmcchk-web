@@ -255,6 +255,7 @@ const PraiseWallContainer = ({ userObj }) => {
                 borderRadius="20"
                 shadow="lg"
                 onClick={onOpen}
+                _hover={{ opacity: '0.9', transform: 'scale(1.025)' }}
               >
                 <AddIcon w={3} h={3} mx="1" />
                 Submit A Praise

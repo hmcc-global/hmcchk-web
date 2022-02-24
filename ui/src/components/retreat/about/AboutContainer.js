@@ -30,6 +30,7 @@ const NavButton = ({ color, name, ...props }) => {
       boxShadow="lg"
       textStyle="sora"
       size={buttonSize}
+      _hover={{ opacity: '0.9', transform: 'scale(1.025)' }}
       {...props}
     >
       {name}
