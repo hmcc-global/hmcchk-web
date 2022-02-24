@@ -168,7 +168,7 @@ export const ScheduleHeader = (onClick) => {
 export const Schedule = (props) => {
   const { withoutHeader, ...properties } = props;
   return (
-    <Container>
+    <Container px={[4, 0]}>
       <Box
         borderRadius={!withoutHeader ? 17 : 0}
         bg="rgba(255,255,255,0.8)"

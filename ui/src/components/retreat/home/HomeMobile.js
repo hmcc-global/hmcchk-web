@@ -34,7 +34,7 @@ const HomeMobile = (props) => {
       <GridItem w="100%">
         <Center flexDirection="column">
           <Image
-            w="90%"
+            w="100%"
             src={
               process.env.PUBLIC_URL +
               '/images/retreat/with-everything-text.png'
@@ -43,10 +43,11 @@ const HomeMobile = (props) => {
           <Text
             mt="-1.5rem"
             textAlign="center"
-            textStyle="sora"
+            textStyle="sora-bolder"
             color="white"
-            fontWeight={700}
-            fontSize={['xl', '3xl']}
+            fontWeight="700"
+            fontSize="2xl"
+            lineHeight="1.25em"
             w="70%"
             mb="3"
           >
@@ -81,7 +82,7 @@ const HomeMobile = (props) => {
           <Link
             bg="#0FB4BE"
             w="100%"
-            textStyle="sora"
+            textStyle="sora-bolder"
             fontWeight="700"
             fontSize="xl"
             color="white"
@@ -102,8 +103,9 @@ const HomeMobile = (props) => {
           <Box
             w="100%"
             bg={sessionText.startsWith('Session') ? '#F2BBA8' : '#A9E0E3'}
-            textStyle="inter"
-            fontWeight="700"
+            textStyle="inter-bold"
+            fontSize="sm"
+            fontWeight="800"
             p="0.8rem 1rem"
             borderRadius="xl"
             mb="3"
@@ -118,7 +120,7 @@ const HomeMobile = (props) => {
             w="100%"
             templateColumns="repeat(2, 1fr)"
             gap={3}
-            textStyle="sora"
+            textStyle="sora-bolder"
             color="white"
             fontWeight="700"
             fontSize="xl"

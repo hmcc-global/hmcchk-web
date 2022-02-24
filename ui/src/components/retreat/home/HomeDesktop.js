@@ -33,10 +33,11 @@ const HomeDesktop = (props) => {
           <Text
             mt="-1.5rem"
             textAlign="center"
-            textStyle="sora"
+            textStyle="sora-bolder"
             color="white"
-            fontWeight={700}
+            fontWeight="800"
             fontSize={['xl', '3xl']}
+            lineHeight="1.25em"
             w="60%"
             mb="9"
           >
@@ -46,7 +47,7 @@ const HomeDesktop = (props) => {
             w="100%"
             templateColumns="repeat(2, 1fr)"
             gap={4}
-            textStyle="sora"
+            textStyle="sora-bolder"
             color="white"
             fontWeight="700"
             fontSize="xl"
@@ -85,7 +86,7 @@ const HomeDesktop = (props) => {
           </Grid>
           <Link
             bg="#0FB4BE"
-            textStyle="sora"
+            textStyle="sora-bolder"
             color="white"
             fontWeight="700"
             fontSize="xl"
@@ -107,7 +108,7 @@ const HomeDesktop = (props) => {
           <Box
             w="100%"
             bg={sessionText.startsWith('Session') ? '#F2BBA8' : '#A9E0E3'}
-            textStyle="inter"
+            textStyle="inter-bold"
             fontWeight="700"
             p="0.8rem 1rem"
             borderRadius="xl"
