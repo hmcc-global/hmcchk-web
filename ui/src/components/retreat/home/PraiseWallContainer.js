@@ -23,7 +23,7 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import { BiNote } from 'react-icons/bi';
-
+import PinterestGrid from 'rc-pinterest-grid';
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { customAxios as axios } from '../../helpers/customAxios';
@@ -179,48 +179,30 @@ const PraiseWallContainer = ({ userObj }) => {
   const MobileView = () => {
     return (
       <Center display={{ base: 'flex', lg: 'none' }}>
-        <HStack align="start" spacing="5">
-          {SplitToChunks(
-            praiseList.filter(
-              (partitionedList) => partitionedList.category == eventCategory
-            ),
-            2
-          ).map((filteredPraise, i) => (
-            <VStack key={i} align="start" w="40vw">
-              {filteredPraise.map((praise, index) => (
-                <PraiseCard
-                  message={praise.message}
-                  key={i * 100 + index}
-                  cardColor={cardBgColors[(i % 3) + (index % 3)]}
-                />
-              ))}
-            </VStack>
+        <PinterestGrid columns={2} columnWidth={150}>
+          {praiseList.map((praise, index) => (
+            <PraiseCard
+              message={praise.message}
+              key={index}
+              cardColor={cardBgColors[index % 5]}
+            />
           ))}
-        </HStack>
+        </PinterestGrid>
       </Center>
     );
   };
   const DesktopView = () => {
     return (
       <Center display={{ base: 'none', lg: 'flex' }}>
-        <HStack align="start" spacing="1">
-          {SplitToChunks(
-            praiseList.filter(
-              (partitionedList) => partitionedList.category == eventCategory
-            ),
-            3
-          ).map((filteredPraise, i) => (
-            <VStack key={i} align="start" w="19em" px="0.3em">
-              {filteredPraise.map((praise, index) => (
-                <PraiseCard
-                  key={i * 100 + index}
-                  message={praise.message}
-                  cardColor={cardBgColors[(i % 3) + (index % 3)]}
-                />
-              ))}
-            </VStack>
+        <PinterestGrid columns={3} columnWidth={300} gutterHeight={15}>
+          {praiseList.map((praise, index) => (
+            <PraiseCard
+              message={praise.message}
+              key={index}
+              cardColor={cardBgColors[index % 5]}
+            />
           ))}
-        </HStack>
+        </PinterestGrid>
       </Center>
     );
   };
