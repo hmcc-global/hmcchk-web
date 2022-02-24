@@ -85,17 +85,17 @@ const PraiseWallContainer = ({ userObj }) => {
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent borderRadius="20">
-          <ModalHeader fontWeight="bold" borderRadius="20" textStyle="Sora">
+          <ModalHeader fontWeight="bold" borderRadius="20">
             <Icon
               as={BiNote}
               w={5}
               h={5}
               my="auto"
-              textStyle="Sora"
+              textStyle="sora"
               fontWeight="bold"
             />
             Submit A Praise!
-            <Text fontSize="sm" textStyle="Sora" fontWeight="bold">
+            <Text fontSize="sm" textStyle="inter" fontWeight="bold">
               Share praises with the church throughout the conference!{' '}
             </Text>
           </ModalHeader>
@@ -112,7 +112,7 @@ const PraiseWallContainer = ({ userObj }) => {
                 onChange={handleInputChange}
               />
               {filter.isProfane(value) && (
-                <Text textStyle="Inter" color="red.500">
+                <Text textStyle="inter" color="red.500">
                   Profanity Detected
                 </Text>
               )}
@@ -120,16 +120,18 @@ const PraiseWallContainer = ({ userObj }) => {
 
             <ModalFooter bgColor="#ebebeb" borderBottomRadius="20">
               <Button
-                colorScheme="teal"
+                bg="#3DC78B"
+                color="white"
                 mx="1em"
                 borderRadius="20"
                 shadow="lg"
                 m="auto"
                 w="10em"
+                _hover={{ opacity: '0.9', transform: 'scale(1.025)' }}
                 type="submit"
               >
                 <AddIcon w={3} h={3} mx="1" />
-                <Text textStyle="Inter">Submit Praise</Text>
+                <Text textStyle="inter">Submit Praise</Text>
               </Button>
             </ModalFooter>
           </form>
@@ -245,22 +247,22 @@ const PraiseWallContainer = ({ userObj }) => {
               shadow="sm"
               borderRadius="20"
               bgColor="white"
-              h={['9em', '9em', '5em']}
+              pb={[0, 3]}
             >
               <Flex
-                w={['90%', '90%', '60%']}
+                w={['100%', '60%']}
                 align="left"
                 px="2em"
                 direction="column"
               >
                 <Flex direction="row" pt={['1rem', '0.3em']} spacing={0}>
-                  <Icon as={BiNote} w={6} h={6} my="auto" />
+                  <Icon as={BiNote} w={[6, 8]} h={[6, 8]} my="auto" />
                   <Text
-                    fontWeight="bold"
                     fontSize={['xl', '3xl']}
+                    fontWeight={['800', '700']}
                     textAlign="left"
                     paddingLeft="0.3em"
-                    textStyle="Sora"
+                    textStyle="sora-bolder"
                   >
                     PRAISE WALL
                   </Text>
@@ -270,7 +272,7 @@ const PraiseWallContainer = ({ userObj }) => {
                   fontWeight="bold"
                   fontSize="sm"
                   textAlign="left"
-                  textStyle="Sora"
+                  textStyle="inter"
                 >
                   Share praises with the church throughout the conference!
                 </Text>
@@ -279,14 +281,15 @@ const PraiseWallContainer = ({ userObj }) => {
               <Button
                 my={['1em', '1em', 'auto']}
                 mx="2em"
-                colorScheme="teal"
+                bg="#3DC78B"
+                color="white"
                 borderRadius="20"
                 shadow="lg"
                 onClick={onOpen}
                 _hover={{ opacity: '0.9', transform: 'scale(1.025)' }}
               >
                 <AddIcon w={3} h={3} mx="1" />
-                <Text textStyle="Sora"> Submit A Praise</Text>
+                <Text textStyle="sora"> Submit A Praise</Text>
               </Button>
             </Flex>
             <Box
