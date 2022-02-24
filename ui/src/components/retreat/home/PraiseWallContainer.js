@@ -95,6 +95,9 @@ const PraiseWallContainer = ({ userObj }) => {
             <Text fontSize="sm" textStyle="inter_bold" fontWeight="bold">
               Share praises with the church throughout the conference!{' '}
             </Text>
+            <Text fontSize={12} textStyle="inter_bold" fontWeight="bold">
+              (Max 500 characters)
+            </Text>
           </ModalHeader>
           <ModalCloseButton />
           <form onSubmit={handleSubmit(PostPraise)}>
