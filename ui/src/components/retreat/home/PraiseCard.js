@@ -9,7 +9,13 @@ const PraiseCard = ({ cardColor, message }) => {
       w="100%"
       overflow="True"
     >
-      <Text p="0.5em" align="center" verticalAlign="center">
+      <Text
+        fontWeight="normal"
+        textStyle="Inter"
+        p="0.5em"
+        align="center"
+        verticalAlign="center"
+      >
         {message}
       </Text>
     </Box>

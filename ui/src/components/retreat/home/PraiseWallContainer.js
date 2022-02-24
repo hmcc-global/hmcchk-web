@@ -76,15 +76,26 @@ const PraiseWallContainer = ({ userObj }) => {
 
     const [value, setValue] = useState('');
     const { handleSubmit, register } = useForm();
+    let handleInputChange = (e) => {
+      let inputValue = e.target.value;
+      setValue(inputValue);
+    };
 
     return (
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent borderRadius="20">
           <ModalHeader fontWeight="bold" borderRadius="20">
-            <Icon as={BiNote} w={5} h={5} my="auto" />
+            <Icon
+              as={BiNote}
+              w={5}
+              h={5}
+              my="auto"
+              textStyle="sora"
+              fontWeight="bold"
+            />
             Submit A Praise!
-            <Text fontSize="sm">
+            <Text fontSize="sm" textStyle="inter" fontWeight="bold">
               Share praises with the church throughout the conference!{' '}
             </Text>
           </ModalHeader>
@@ -96,23 +107,31 @@ const PraiseWallContainer = ({ userObj }) => {
                 id="message"
                 size="xl"
                 h="10em"
+                maxLength="500"
                 {...register('message')}
-                onChange={setValue}
+                onChange={handleInputChange}
               />
+              {filter.isProfane(value) && (
+                <Text textStyle="inter" color="red.500">
+                  Profanity Detected
+                </Text>
+              )}
             </ModalBody>
 
             <ModalFooter bgColor="#ebebeb" borderBottomRadius="20">
               <Button
-                colorScheme="teal"
+                bg="#3DC78B"
+                color="white"
                 mx="1em"
                 borderRadius="20"
                 shadow="lg"
                 m="auto"
                 w="10em"
+                _hover={{ opacity: '0.9', transform: 'scale(1.025)' }}
                 type="submit"
               >
                 <AddIcon w={3} h={3} mx="1" />
-                Submit Praise
+                <Text textStyle="inter">Submit Praise</Text>
               </Button>
             </ModalFooter>
           </form>
@@ -207,7 +226,12 @@ const PraiseWallContainer = ({ userObj }) => {
   };
   const PraiseWall = () => {
     useEffect(() => {
-      const interval = setInterval(() => GetPraise(), 30000);
+      const interval = setInterval(() => {
+        // Dont getpraise and rerender if input modal open
+        if (!isOpen) {
+          GetPraise();
+        }
+      }, 30000);
       return () => {
         clearInterval(interval);
       };
@@ -223,42 +247,47 @@ const PraiseWallContainer = ({ userObj }) => {
               shadow="sm"
               borderRadius="20"
               bgColor="white"
-              h={['9em', '9em', '5em']}
+              pb={[0, 3]}
+              px={['1em', '2em']}
             >
-              <Flex
-                w={['90%', '90%', '60%']}
-                align="left"
-                px="2em"
-                direction="column"
-              >
+              <Flex w={['100%', '60%']} align="left" direction="column">
                 <Flex direction="row" pt={['1rem', '0.3em']} spacing={0}>
-                  <Icon as={BiNote} w={6} h={6} my="auto" />
+                  <Icon as={BiNote} w={[6, 8]} h={[6, 8]} my="auto" />
                   <Text
-                    fontWeight="bold"
                     fontSize={['xl', '3xl']}
+                    fontWeight={['800', '700']}
                     textAlign="left"
                     paddingLeft="0.3em"
+                    textStyle="sora-bolder"
                   >
                     PRAISE WALL
                   </Text>
                 </Flex>
 
-                <Text fontWeight="bold" fontSize="sm" textAlign="left">
+                <Text
+                  fontWeight="bold"
+                  fontSize="sm"
+                  textAlign="left"
+                  textStyle="inter-bold"
+                >
                   Share praises with the church throughout the conference!
                 </Text>
               </Flex>
               <Spacer />
               <Button
                 my={['1em', '1em', 'auto']}
-                mx="2em"
-                colorScheme="teal"
+                bg="#3DC78B"
+                color="white"
                 borderRadius="20"
                 shadow="lg"
                 onClick={onOpen}
                 _hover={{ opacity: '0.9', transform: 'scale(1.025)' }}
               >
                 <AddIcon w={3} h={3} mx="1" />
-                Submit A Praise
+                <Text textStyle="sora-bolder" fontWeight={['800', '700']}>
+                  {' '}
+                  Submit A Praise
+                </Text>
               </Button>
             </Flex>
             <Box
