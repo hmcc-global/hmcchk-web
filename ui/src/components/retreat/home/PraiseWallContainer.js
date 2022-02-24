@@ -255,7 +255,7 @@ const PraiseWallContainer = ({ userObj }) => {
                   <Icon as={BiNote} w={[6, 8]} h={[6, 8]} my="auto" />
                   <Text
                     fontSize={['xl', '3xl']}
-                    fontWeight={['800', '700']}
+                    fontWeight="700"
                     textAlign="left"
                     paddingLeft="0.3em"
                     textStyle="sora-bolder"
@@ -284,7 +284,7 @@ const PraiseWallContainer = ({ userObj }) => {
                 _hover={{ opacity: '0.9', transform: 'scale(1.025)' }}
               >
                 <AddIcon w={3} h={3} mx="1" />
-                <Text textStyle="sora-bolder" fontWeight={['800', '700']}>
+                <Text textStyle="sora-bolder" fontWeight="700">
                   Submit A Praise
                 </Text>
               </Button>

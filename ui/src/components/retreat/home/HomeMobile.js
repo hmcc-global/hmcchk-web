@@ -105,7 +105,7 @@ const HomeMobile = (props) => {
             bg={sessionText.startsWith('Session') ? '#F2BBA8' : '#A9E0E3'}
             textStyle="inter-bold"
             fontSize="sm"
-            fontWeight="800"
+            fontWeight="700"
             p="0.8rem 1rem"
             borderRadius="xl"
             mb="3"

@@ -35,7 +35,7 @@ const HomeDesktop = (props) => {
             textAlign="center"
             textStyle="sora-bolder"
             color="white"
-            fontWeight="800"
+            fontWeight="700"
             fontSize={['xl', '3xl']}
             lineHeight="1.25em"
             w="60%"

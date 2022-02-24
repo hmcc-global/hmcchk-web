@@ -77,7 +77,7 @@ const DaySchedule = ({ whichDay, dateString, item }) => {
             as="b"
             padding={3}
             fontSize={{ base: 15, md: '0.8em', lg: '0.95em' }}
-            fontWeight={['800', '700']}
+            fontWeight="700"
             textStyle="sora-bolder"
           >
             {title}
@@ -86,7 +86,7 @@ const DaySchedule = ({ whichDay, dateString, item }) => {
             as="b"
             padding={3}
             fontSize={{ base: 15, md: '0.8em', lg: '0.95em' }}
-            fontWeight={['800', '700']}
+            fontWeight="700"
             textStyle="sora-bolder"
           >
             {time}
@@ -158,7 +158,7 @@ export const ScheduleHeader = (onClick) => {
         lineHeight="inherit"
         fontSize="1.8em"
         textStyle="sora-bolder"
-        fontWeight={['800', '700']}
+        fontWeight="700"
         fontSize={['xl', '3xl']}
       >
         SCHEDULE
