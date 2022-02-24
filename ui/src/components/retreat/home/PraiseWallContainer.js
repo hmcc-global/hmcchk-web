@@ -76,15 +76,26 @@ const PraiseWallContainer = ({ userObj }) => {
 
     const [value, setValue] = useState('');
     const { handleSubmit, register } = useForm();
+    let handleInputChange = (e) => {
+      let inputValue = e.target.value;
+      setValue(inputValue);
+    };
 
     return (
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent borderRadius="20">
-          <ModalHeader fontWeight="bold" borderRadius="20">
-            <Icon as={BiNote} w={5} h={5} my="auto" />
+          <ModalHeader fontWeight="bold" borderRadius="20" textStyle="Sora">
+            <Icon
+              as={BiNote}
+              w={5}
+              h={5}
+              my="auto"
+              textStyle="Sora"
+              fontWeight="bold"
+            />
             Submit A Praise!
-            <Text fontSize="sm">
+            <Text fontSize="sm" textStyle="Sora" fontWeight="bold">
               Share praises with the church throughout the conference!{' '}
             </Text>
           </ModalHeader>
@@ -96,9 +107,15 @@ const PraiseWallContainer = ({ userObj }) => {
                 id="message"
                 size="xl"
                 h="10em"
+                maxLength="500"
                 {...register('message')}
-                onChange={setValue}
+                onChange={handleInputChange}
               />
+              {filter.isProfane(value) && (
+                <Text textStyle="Inter" color="red.500">
+                  Profanity Detected
+                </Text>
+              )}
             </ModalBody>
 
             <ModalFooter bgColor="#ebebeb" borderBottomRadius="20">
@@ -112,7 +129,7 @@ const PraiseWallContainer = ({ userObj }) => {
                 type="submit"
               >
                 <AddIcon w={3} h={3} mx="1" />
-                Submit Praise
+                <Text textStyle="Inter">Submit Praise</Text>
               </Button>
             </ModalFooter>
           </form>
@@ -207,7 +224,12 @@ const PraiseWallContainer = ({ userObj }) => {
   };
   const PraiseWall = () => {
     useEffect(() => {
-      const interval = setInterval(() => GetPraise(), 30000);
+      const interval = setInterval(() => {
+        // Dont getpraise and rerender if input modal open
+        if (!isOpen) {
+          GetPraise();
+        }
+      }, 30000);
       return () => {
         clearInterval(interval);
       };
@@ -238,12 +260,18 @@ const PraiseWallContainer = ({ userObj }) => {
                     fontSize={['xl', '3xl']}
                     textAlign="left"
                     paddingLeft="0.3em"
+                    textStyle="Sora"
                   >
                     PRAISE WALL
                   </Text>
                 </Flex>
 
-                <Text fontWeight="bold" fontSize="sm" textAlign="left">
+                <Text
+                  fontWeight="bold"
+                  fontSize="sm"
+                  textAlign="left"
+                  textStyle="Sora"
+                >
                   Share praises with the church throughout the conference!
                 </Text>
               </Flex>
@@ -258,7 +286,7 @@ const PraiseWallContainer = ({ userObj }) => {
                 _hover={{ opacity: '0.9', transform: 'scale(1.025)' }}
               >
                 <AddIcon w={3} h={3} mx="1" />
-                Submit A Praise
+                <Text textStyle="Sora"> Submit A Praise</Text>
               </Button>
             </Flex>
             <Box
