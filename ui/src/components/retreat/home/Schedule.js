@@ -63,13 +63,14 @@ const DaySchedule = ({ whichDay, dateString, item }) => {
     );
   };
 
-  const EventItem = ({ title, time, color }) => {
+  const EventItem = ({ title, time, color, stroke }) => {
     return (
       <Box
         bg={color !== '' ? color : ''}
         borderRadius={8.54}
         marginBottom={4}
-        border="2px solid #85CCD1"
+        border="2px solid"
+        borderColor={stroke !== '' ? stroke : '#85CCD1'}
       >
         <Flex flexDir="row" justifyContent="space-between">
           <Text
@@ -104,6 +105,7 @@ const DaySchedule = ({ whichDay, dateString, item }) => {
             title={event.title}
             time={event.startTime}
             color={event.color}
+            stroke={event.stroke}
           />
         ))}
       </Flex>
