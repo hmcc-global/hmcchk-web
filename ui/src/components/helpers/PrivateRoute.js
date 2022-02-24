@@ -91,7 +91,7 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
                 if (userObj.whitelisted) {
                   return <Component {...props} user={userObj} />;
                 } else {
-                  return <NoAccessRetreat user={userObj} />;
+                  return <NoAccessRetreat user={userObj} redirectLink={props.location.pathname}/>;
                 }
             }
 

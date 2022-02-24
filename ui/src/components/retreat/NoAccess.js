@@ -13,7 +13,7 @@ import {
 import { HiOutlineKey } from 'react-icons/hi';
 
 const NoAccessRetreat = (props) => {
-  const { user } = props;
+  const { user, redirectLink } = props;
 
   return (
     <Box
@@ -103,7 +103,7 @@ const NoAccessRetreat = (props) => {
                 fontWeight={700}
                 fontSize={['xl', '2xl']}
                 p="0.3rem 3rem"
-                href="/login"
+                href={`/login?redirect=${redirectLink}`}
               >
                 Login here
               </Link>
