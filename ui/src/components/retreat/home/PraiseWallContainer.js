@@ -248,13 +248,9 @@ const PraiseWallContainer = ({ userObj }) => {
               borderRadius="20"
               bgColor="white"
               pb={[0, 3]}
+              px={['1em', '2em']}
             >
-              <Flex
-                w={['100%', '60%']}
-                align="left"
-                px="2em"
-                direction="column"
-              >
+              <Flex w={['100%', '60%']} align="left" direction="column">
                 <Flex direction="row" pt={['1rem', '0.3em']} spacing={0}>
                   <Icon as={BiNote} w={[6, 8]} h={[6, 8]} my="auto" />
                   <Text
@@ -272,7 +268,7 @@ const PraiseWallContainer = ({ userObj }) => {
                   fontWeight="bold"
                   fontSize="sm"
                   textAlign="left"
-                  textStyle="inter"
+                  textStyle="inter-bold"
                 >
                   Share praises with the church throughout the conference!
                 </Text>
@@ -280,7 +276,6 @@ const PraiseWallContainer = ({ userObj }) => {
               <Spacer />
               <Button
                 my={['1em', '1em', 'auto']}
-                mx="2em"
                 bg="#3DC78B"
                 color="white"
                 borderRadius="20"
