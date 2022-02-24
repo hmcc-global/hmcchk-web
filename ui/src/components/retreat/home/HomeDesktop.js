@@ -33,7 +33,7 @@ const HomeDesktop = (props) => {
           <Text
             mt="-1.5rem"
             textAlign="center"
-            textStyle="sora-bolder"
+            textStyle="sora_bolder"
             color="white"
             fontWeight="700"
             fontSize={['xl', '3xl']}
@@ -47,7 +47,7 @@ const HomeDesktop = (props) => {
             w="100%"
             templateColumns="repeat(2, 1fr)"
             gap={4}
-            textStyle="sora-bolder"
+            textStyle="sora_bolder"
             color="white"
             fontWeight="700"
             fontSize="xl"
@@ -86,7 +86,7 @@ const HomeDesktop = (props) => {
           </Grid>
           <Link
             bg="#0FB4BE"
-            textStyle="sora-bolder"
+            textStyle="sora_bolder"
             color="white"
             fontWeight="700"
             fontSize="xl"

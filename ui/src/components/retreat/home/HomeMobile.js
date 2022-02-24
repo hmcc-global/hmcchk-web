@@ -14,7 +14,6 @@ import {
   ModalCloseButton,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   useDisclosure,
 } from '@chakra-ui/react';
 
@@ -43,12 +42,12 @@ const HomeMobile = (props) => {
           <Text
             mt="-1.5rem"
             textAlign="center"
-            textStyle="sora-bolder"
+            textStyle="sora_bolder"
             color="white"
             fontWeight="700"
             fontSize="2xl"
             lineHeight="1.25em"
-            w="70%"
+            w="80%"
             mb="3"
           >
             CHURCH-WIDE CONFERENCE 2022
@@ -82,9 +81,9 @@ const HomeMobile = (props) => {
           <Link
             bg="#0FB4BE"
             w="100%"
-            textStyle="sora-bolder"
+            textStyle="sora_bolder"
             fontWeight="700"
-            fontSize="xl"
+            fontSize="lg"
             color="white"
             p="1.75rem 0"
             borderRadius="xl"
@@ -120,10 +119,10 @@ const HomeMobile = (props) => {
             w="100%"
             templateColumns="repeat(2, 1fr)"
             gap={3}
-            textStyle="sora-bolder"
+            textStyle="sora_bolder"
             color="white"
             fontWeight="700"
-            fontSize="xl"
+            fontSize="lg"
           >
             <Link
               href="/with-everything/about"

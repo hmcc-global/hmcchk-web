@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Heading, Text } from '@chakra-ui/layout';
+import { Box, Container, Flex, Text } from '@chakra-ui/layout';
 import { RetreatSchedule } from './RetreatSchedule';
 import { MdOutlineEvent } from 'react-icons/md';
 import { Button, Icon } from '@chakra-ui/react';
@@ -78,7 +78,7 @@ const DaySchedule = ({ whichDay, dateString, item }) => {
             padding={3}
             fontSize={{ base: 15, md: '0.8em', lg: '0.95em' }}
             fontWeight="700"
-            textStyle="sora-bolder"
+            textStyle="sora_bolder"
           >
             {title}
           </Text>
@@ -87,7 +87,7 @@ const DaySchedule = ({ whichDay, dateString, item }) => {
             padding={3}
             fontSize={{ base: 15, md: '0.8em', lg: '0.95em' }}
             fontWeight="700"
-            textStyle="sora-bolder"
+            textStyle="sora_bolder"
           >
             {time}
           </Text>
@@ -157,8 +157,8 @@ export const ScheduleHeader = (onClick) => {
         paddingY={4}
         lineHeight="inherit"
         fontSize="1.8em"
-        textStyle="sora-bolder"
-        fontWeight="700"
+        textStyle="sora_bolder"
+        fontWeight="900"
         fontSize={['xl', '3xl']}
       >
         SCHEDULE
