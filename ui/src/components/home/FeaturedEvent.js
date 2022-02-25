@@ -36,6 +36,7 @@ const FeaturedEvent = (props) => {
             h="auto"
             src={process.env.PUBLIC_URL + '/images/home/featured.jpeg'}
             alt="Featured Event"
+            _hover={{ transform: 'scale(1.01)' }}
           />
         </Link>
       </Box>
