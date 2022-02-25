@@ -80,6 +80,34 @@ const ResourcesContainer = () => {
       title: 'PASTE Workshop: Evangelistic Gifting',
       url: 'https://bit.ly/EvangelisticGifting',
     },
+    {
+      title: 'Life Stage Time: Focus Life Stage',
+      url: 'https://bit.ly/FocusLifeStage',
+    },
+    {
+      title: 'Life Stage Time: Covenant Life Stage',
+      url: 'https://bit.ly/CovenantLifeStage',
+    },
+    {
+      title: 'Life Stage Time: Year 1',
+      url: 'https://bit.ly/CWCYear1',
+    },
+    {
+      title: 'Life Stage Time: Year 2',
+      url: 'https://bit.ly/CWCYear2',
+    },
+    {
+      title: 'Life Stage Time: Year 3',
+      url: 'https://bit.ly/CWCYear3',
+    },
+    {
+      title: 'Life Stage Time: Year 4',
+      url: 'https://bit.ly/CWCYear4',
+    },
+    {
+      title: 'Life Stage Time: Year 5',
+      url: 'https://bit.ly/CWCYear5',
+    },
   ];
 
   return (
