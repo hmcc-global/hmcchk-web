@@ -50,12 +50,12 @@ const ResourcesList = ({ list }) => {
 const ResourcesContainer = () => {
   const Notes = [
     {
-      title: 'Post-Conference Reflection Guide',
-      url: 'https://hongkong.sub.hmcc.net/wp-content/uploads/cwc-post-reflection-questions.pdf',
-    },
-    {
       title: 'Fivefold Ministry Workshop Test',
       url: 'https://hongkong.sub.hmcc.net/wp-content/uploads/cwc-workshop-questions-paste.pdf',
+    },
+    {
+      title: 'Post-Conference Reflection Guide',
+      url: 'https://hongkong.sub.hmcc.net/wp-content/uploads/cwc-post-reflection-questions.pdf',
     },
   ];
 
