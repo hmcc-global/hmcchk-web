@@ -179,7 +179,7 @@ const PraiseWallContainer = ({ userObj }) => {
   const MobileView = () => {
     return (
       <Center display={{ base: 'flex', lg: 'none' }}>
-        <PinterestGrid columns={2} columnWidth={150}>
+        <PinterestGrid columns={2} columnWidth={135}>
           {praiseList.map((praise, index) => (
             <PraiseCard
               message={praise.message}
