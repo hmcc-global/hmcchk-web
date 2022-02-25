@@ -167,6 +167,8 @@ const PraiseWallContainer = ({ userObj }) => {
       });
       if (status === 200) {
         data.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
+        if (praiseList[0] && praiseList[0].id === data[0].id)
+          return;
         setPraiseList([...data]);
       } else {
         throw Error('Something went wrong');
