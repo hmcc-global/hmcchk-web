@@ -42,6 +42,12 @@ This HMCC HK's Web Repo built on SailsJS and React
 3. When all code changes have been finished in your `feature` branch, create a Pull Request and your peers review it before merging.
 4. Branch merge flow should be: `feature`->`release`->`master` - i.e `feature` branches should always Pull Request and merge into `release`
 
+## Commit Practices
+1. Attach Issue number to the commit message
+    - e.g. Issue number = #8
+    - commit message: "GH-8: Some commit message"
+    - note that issue number must be prefixed with 'GH-' in order to properly connect commit messages with issues
+
 ### Contributors
 
 Jesus' disciples
