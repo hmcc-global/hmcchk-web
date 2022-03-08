@@ -80,7 +80,6 @@ module.exports.routes = {
 
   // UI
   "get /*": {
-    skipAssets: true,
     fn: function (req, res) {
       res.sendFile(path.join(__dirname + "/../client/index.html"));
     },
