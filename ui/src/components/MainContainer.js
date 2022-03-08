@@ -27,6 +27,7 @@ import AdminContainer from './AdminContainer';
 import ScrollToTop from './helpers/ScrollToTop';
 import AboutUsContainer from './about/AboutUsContainer';
 import OnlineSermonContainer from './sermons/OnlineSermonContainer';
+import EasterContainer from './easter';
 
 const MainContainer = () => {
   return (
@@ -212,6 +213,12 @@ const MainContainer = () => {
           path="/admin/:pageName"
           permissions={['admin', 'stewardship']}
           component={AdminContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/easter"
+          permissions={['public']}
+          component={EasterContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={NoMatch} />
       </Switch>
