@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'NextSoutherlandSerif';
+  src: local('NextSoutherlandSerif'), url('./fonts/NextSoutherlandSerif.ttf') format('truetype');
+  font-weight: normal;
+}
