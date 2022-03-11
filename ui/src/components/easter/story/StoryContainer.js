@@ -14,7 +14,7 @@ const StoryContainer = () => {
   return (
     <>
       <Center>
-        <VStack justify="center" w={['50%']}>
+        <VStack justify="center" w={['90%', '80%', '70%', '50%']}>
           <Text textStyle="Quicksand">Story</Text>
           <Box>
             <Flex>
@@ -22,7 +22,11 @@ const StoryContainer = () => {
                 boxSize={['25%']}
                 src={process.env.PUBLIC_URL + '/images/easter/birds2.png'}
               />
-              <Text textStyle="Quicksand" color="#754156">
+              <Text
+                textStyle="Quicksand"
+                color="#754156"
+                fontSize={['10px', 'sm', 'md', 'md']}
+              >
                 <p align="center">
                   A lot of people, if not most people, in this world go through
                   every day on autopilot <b>without</b> knowing why we do what
@@ -45,7 +49,11 @@ const StoryContainer = () => {
               h="auto"
             >
               <GridItem colSpan={4} colStart={2}>
-                <Text textStyle="Quicksand" color="#685255">
+                <Text
+                  textStyle="Quicksand"
+                  color="#685255"
+                  fontSize={['10px', 'sm', 'md', 'md']}
+                >
                   <p align="center">
                     Life becomes <b>mundane</b> because we are{' '}
                     <b>not inspired</b> or motivated by something greater and
@@ -69,7 +77,11 @@ const StoryContainer = () => {
               h="auto"
             >
               <GridItem colSpan={6} colStart={2} mb={5}>
-                <Text textStyle="Quicksand" color="#147076">
+                <Text
+                  textStyle="Quicksand"
+                  color="#147076"
+                  fontSize={['10px', 'sm', 'md', 'md']}
+                >
                   <p align="center">
                     When we <b>seek</b> to know the reason and purpose behind
                     things, we open doors to deeper connections, desires,
@@ -93,7 +105,11 @@ const StoryContainer = () => {
               h="auto"
             >
               <GridItem colSpan={6} colStart={2}>
-                <Text textStyle="Quicksand" color="#00367A">
+                <Text
+                  textStyle="Quicksand"
+                  color="#00367A"
+                  fontSize={['10px', 'sm', 'md', 'md']}
+                >
                   <p align="center">
                     We want to keep emphasizing that the <b>reason</b> we do
                     anything is the <b>GOSPEL</b> and it revolves around{' '}
