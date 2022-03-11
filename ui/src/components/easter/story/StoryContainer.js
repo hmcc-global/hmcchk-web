@@ -1,4 +1,13 @@
-import { VStack, Text, Image, Box, Stack, Flex } from '@chakra-ui/react';
+import {
+  VStack,
+  Text,
+  Image,
+  Box,
+  Stack,
+  Flex,
+  Grid,
+  GridItem,
+} from '@chakra-ui/react';
 
 const StoryContainer = () => {
   return (
@@ -19,7 +28,7 @@ const StoryContainer = () => {
               </p>
             </Text>
             <Image
-              boxSize={['25%']}
+              boxSize={['20%']}
               src={process.env.PUBLIC_URL + '/images/easter/birds1.png'}
             />
           </Flex>
@@ -28,40 +37,75 @@ const StoryContainer = () => {
           />
         </Box>
         <Box>
-          <Text textStyle="Quicksand" color="#685255">
-            <p align="center">
-              Life becomes <b>mundane</b> because we are <b>not inspired</b> or
-              motivated by something greater and beyond ourselves.
-            </p>
-          </Text>
-          <Image
-            src={process.env.PUBLIC_URL + '/images/easter/story2-notext.png'}
-          />
+          <Grid
+            templateRows="repeat(1, 1fr)"
+            templateColumns="repeat(7, 1fr)"
+            h="auto"
+          >
+            <GridItem colSpan={4} colStart={2}>
+              <Text textStyle="Quicksand" color="#685255">
+                <p align="center">
+                  Life becomes <b>mundane</b> because we are <b>not inspired</b>{' '}
+                  or motivated by something greater and beyond ourselves.
+                </p>
+              </Text>
+            </GridItem>
+            <GridItem colSpan={7} colEnd={9}>
+              <Image
+                src={
+                  process.env.PUBLIC_URL + '/images/easter/story2-notext.png'
+                }
+              />
+            </GridItem>
+          </Grid>
         </Box>
         <Box>
-          <Text textStyle="Quicksand" color="#147076">
-            <p align="center">
-              When we <b>seek</b> to know the reason and purpose behind things,
-              we open doors to deeper connections, desires, motivations, and
-              stories <b>beyond the surface</b>.
-            </p>
-          </Text>
-          <Image
-            src={process.env.PUBLIC_URL + '/images/easter/story3-notext.png'}
-          />
+          <Grid
+            templateRows="repeat(1, 1fr)"
+            templateColumns="repeat(8, 1fr)"
+            h="auto"
+          >
+            <GridItem colSpan={6} colStart={2}>
+              <Text textStyle="Quicksand" color="#147076">
+                <p align="center">
+                  When we <b>seek</b> to know the reason and purpose behind
+                  things, we open doors to deeper connections, desires,
+                  motivations, and stories <b>beyond the surface</b>.
+                </p>
+              </Text>
+            </GridItem>
+            <GridItem colSpan={10}>
+              <Image
+                src={
+                  process.env.PUBLIC_URL + '/images/easter/story3-notext.png'
+                }
+              />
+            </GridItem>
+          </Grid>
         </Box>
         <Box>
-          <Text textStyle="Quicksand" color="#00367A">
-            <p align="center">
-              We want to keep emphasizing that the <b>reason</b> we do anything
-              is the
-              <b></b>GOSPEL and it revolves around{' '}
-              <b>who Jesus is and what He has done</b>.
-            </p>
-          </Text>
-          <Image
-            src={process.env.PUBLIC_URL + '/images/easter/story4-notext.png'}
-          />
+          <Grid
+            templateRows="repeat(1, 1fr)"
+            templateColumns="repeat(8, 1fr)"
+            h="auto"
+          >
+            <GridItem colSpan={6} colStart={2}>
+              <Text textStyle="Quicksand" color="#00367A">
+                <p align="center">
+                  We want to keep emphasizing that the <b>reason</b> we do
+                  anything is the <b>GOSPEL</b> and it revolves around{' '}
+                  <b>who Jesus is and what He has done</b>.
+                </p>
+              </Text>
+            </GridItem>
+            <GridItem colSpan={10}>
+              <Image
+                src={
+                  process.env.PUBLIC_URL + '/images/easter/story4-notext.png'
+                }
+              />
+            </GridItem>
+          </Grid>
         </Box>
       </VStack>
     </>
