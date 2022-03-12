@@ -1,11 +1,76 @@
+import * as React from 'react';
 import { 
   Button, 
   Heading, 
   Text, 
   HStack, 
   Container, 
-  Link } from "@chakra-ui/react";
+  Link,
+  Center,
+  Image,
+  Stack,
+  Flex,
+} from "@chakra-ui/react";
 import { generateGoogleCalendarLink } from "../../helpers/eventsHelpers";
+import { useMediaQuery } from '@chakra-ui/media-query';
+import Invitation1 from './blie.png';
+import Invitation2 from './red.png';
+
+const InvitationSection = () => {
+  
+  const [isNotSmallerScreen] = useMediaQuery("(min-width:600px)");
+  console.log(isNotSmallerScreen);
+  return (
+    <Center maxW="auto" mx="auto">
+      <Stack spacing={1}>
+        <Text 
+          textStyle='NextSoutherlandSerif'
+          textAlign='center'
+          fontSize='32px'>
+          INVITE YOUR FRIENDS!
+        </Text>
+        <Text fontSize='20px'
+          textStyle='Quicksand'
+          textAlign='center'>
+          {isNotSmallerScreen ? "Save these invites and share them with your friends and loved ones." : 
+          "Press-and-hold these invites below to share/save them to your friends and loved ones."}
+          </Text>  
+        <Flex gap='20px' direction={isNotSmallerScreen ? "row" : "column"}>
+            <Image p={6}
+              boxSize={['50%, 60%, 70%, 80%, 90%']}
+              objectFit="cover"
+              src={Invitation2} 
+              alt='random'
+              alignSelf="center"
+            />
+            <Image p={6}
+              boxSize={['50%,60%,70%,80%, 90%']}
+              objectFit="cover"
+              src={Invitation1}
+              alt='random' 
+              alignSelf="center"
+            />
+        </Flex>
+        <Text 
+          fontSize='32px'
+          textStyle='NextSoutherlandSerif'
+          textAlign='center'> 
+            CHECK OUT{' '}
+            <Link style={{textDecoration: 'underline', textUnderlineOffset: '5px'}} color='blue.700' href='/connect'>
+              WHAT ELSE {<br />} IS HAPPENING IN HMCC!
+            </Link>
+        </Text> 
+        <Text 
+          textStyle='Quicksand'
+          fontSize='20px'
+          textAlign='center'
+          paddingBottom={20}>
+          (click!)
+        </Text>
+      </Stack>
+    </Center>
+  );
+}
 
 function Event_details({header , sub_header , sentence , date , time , location , eventData}) {
   let hColor , backgroundColor , borderColor , hoverColor;
@@ -123,9 +188,11 @@ const InvitationContainer = () => {
           location = {celebration.location}
           eventData={celebration}
           />
+        <InvitationSection />
       </HStack>
     </>
   )
 }
+
 
 export default InvitationContainer;
