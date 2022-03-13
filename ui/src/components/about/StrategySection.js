@@ -51,7 +51,7 @@ const StrategySection = (props) => {
         </Heading>
         <Container maxW="container.lg" py={4}>
           <Stack
-            direction={{ base: 'column', lg: 'row' }}
+            direction='row'
             spacing="10px"
             alignItems="center"
           >
