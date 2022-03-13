@@ -26,6 +26,7 @@ import {
 import { useSelector } from 'react-redux';
 import { customAxios as axios } from '../helpers/customAxios';
 import MainMenu from './MainMenu';
+import EasterBanner from '../easter/EasterBanner';
 
 const NavBar = (props) => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -188,6 +189,7 @@ const NavBar = (props) => {
         </Flex>
       </Flex>
 
+      <EasterBanner />
       {currDate === 'Sun' ? (
         <Flex
           w="100vw"
@@ -198,7 +200,6 @@ const NavBar = (props) => {
           align="center"
           color="gray.100"
           justify="center"
-          align="center"
           h="6vh"
           p={2}
         >
