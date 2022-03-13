@@ -15,7 +15,7 @@ const EasterBanner = () => {
     <Flex
     w="100vw"
     bgImage={`url(${
-        process.env.PUBLIC_URL + "/images/easter/EasterBanner.png"
+        process.env.PUBLIC_URL + "/images/easter/easter-banner.gif"
     })`}
     h="6vh"
     p={2}
@@ -32,9 +32,13 @@ const EasterBanner = () => {
               lineHeight="0"
               w="95%"
               p={5}
-              border="0px"
               backgroundColor="rgba(0,0,0,0)"
               color="black"
+              borderRadius={0}
+              _hover={{
+                borderBottom: "2px",
+                // width: "94%"
+              }}
             >
               <Box as='span'textStyle="NextSoutherlandSerif" fontSize={[10, 18]} whiteSpace="pre">
                 {"CHECK OUT EASTER "}
