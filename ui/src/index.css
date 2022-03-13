@@ -17,3 +17,9 @@ code {
   src: local('NextSoutherlandSerif'), url('./fonts/NextSoutherlandSerif.ttf') format('truetype');
   font-weight: normal;
 }
+
+@font-face {
+  font-family: 'FogtwoNo5';
+  src: local('FogtwoNo5'), url('./fonts/FogtwoNo5.ttf') format('truetype');
+  font-weight: normal;
+}
