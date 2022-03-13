@@ -1,51 +1,72 @@
-const axios = require('axios');
+const axios = require("axios");
 
 module.exports = {
-  
-  friendlyName: 'Get Data from REST API',
+  friendlyName: "Get Data from REST API",
 
-  description: 'Get Data from REST API',
+  description: "Get Data from REST API",
 
   inputs: {
     url: {
       required: true,
-      type: 'string',
-      description: 'URL of REST API'
+      type: "string",
+      description: "URL of REST API",
     },
     parameters: {
       required: false,
-      type: 'json',
-      description: 'Parameters of REST API'
-    }
+      type: "json",
+      description: "Parameters of REST API",
+    },
   },
 
   exits: {
     targetErr: {
-      description: 'Encountered error calling target'
+      description: "Encountered error calling target",
     },
     nonSuccess: {
-      description: 'Response does not indicate success'
+      description: "Response does not indicate success",
     },
     noData: {
-      description: 'No Data returned'
-    }
+      description: "No Data returned",
+    },
   },
 
-  fn: async function({ url, parameters }, exits) {
+  fn: async function ({ url, parameters }, exits) {
+    let pageNumber = 1;
+    let additionalParams = {
+      // eslint-disable-next-line camelcase
+      per_page: 100,
+      page: pageNumber,
+      ...parameters,
+    };
 
-    const response = await axios.get(url, { params: parameters});
+    let response = await axios.get(url, { params: additionalParams });
+    let data = response.data;
+    let totalPages = response.headers["x-wp-totalpages"];
+
+    while (totalPages > 1) {
+      additionalParams.page = ++pageNumber;
+      response = await axios.get(url, { params: additionalParams });
+      if (typeof data === "string") {
+        data = data
+          .substring(0, data.length - 1)
+          .concat(response.data.replace("[", ","));
+      } else {
+        data = [...data, ...response.data];
+      }
+      totalPages--;
+    }
 
     let parsedPayload;
     try {
-      if (typeof(response.data) === 'string') {
-        let payload = response.data.substring(1);
+      if (typeof data === "string") {
+        let payload = data.substring(1);
         parsedPayload = JSON.parse(payload);
       } else {
-        parsedPayload = response.data;
+        parsedPayload = data;
       }
     } catch (unusedErr) {
       try {
-        parsedPayload = JSON.parse(response.data);
+        parsedPayload = JSON.parse(data);
       } catch (err) {
         sails.log.error(`Error calling API for data from ${url}`);
         sails.log(err);
@@ -66,10 +87,9 @@ module.exports = {
 
     if (!(parsedPayload instanceof Array)) {
       sails.log(parsedPayload);
-      sails.log('Made into array');
+      sails.log("Made into array");
       parsedPayload = [parsedPayload];
     }
     return exits.success(parsedPayload);
-  }
-
+  },
 };

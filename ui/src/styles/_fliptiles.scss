@@ -1,0 +1,50 @@
+.flip-container {
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+
+  /* This container is needed to position the front and back side */
+  .flipper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    transition: transform 0.4s;
+    transform-style: preserve-3d;
+
+    /* Position the front and back side */
+    .front,
+    .back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden; /* Safari */
+      backface-visibility: hidden;
+    }
+
+    /* Style the front side */
+    .front {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 2;
+      text-align: center;
+      transform: rotateY(0);
+    }
+
+    /* Style the back side */
+    .back {
+      position: relative;
+      z-index: 1;
+      transform: rotateY(180deg);
+    }
+  }
+
+  /* Do an horizontal flip when you move the mouse over the flip box container */
+  &:hover .flipper,
+  &:focus .flipper,
+  &:active .flipper {
+    transform: rotateY(180deg);
+  }
+}
