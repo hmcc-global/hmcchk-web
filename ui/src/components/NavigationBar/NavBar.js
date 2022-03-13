@@ -26,11 +26,9 @@ import {
 import { useSelector } from 'react-redux';
 import { customAxios as axios } from '../helpers/customAxios';
 import MainMenu from './MainMenu';
-import { useHistory } from 'react-router-dom';
 import EasterBanner from '../easter/EasterBanner';
 
 const NavBar = (props) => {
-  const isOnlineSermon = useHistory().location.pathname.includes("online");
   const [loggedIn, setLoggedIn] = useState(false);
   const user = useSelector((state) => state.user);
   const [username, setUsername] = useState('');
@@ -192,7 +190,7 @@ const NavBar = (props) => {
       </Flex>
 
       <EasterBanner />
-      {currDate === 'Sun' && !isOnlineSermon ? (
+      {currDate === 'Sun' ? (
         <Flex
           w="100vw"
           background="#ffffff"
