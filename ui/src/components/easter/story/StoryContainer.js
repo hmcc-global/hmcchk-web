@@ -18,7 +18,7 @@ let options = {
   threshold: 1.0,
 };
 
-const FadeInSection1 = (props) => {
+const FadeInSection = (props) => {
   const [isVisible, setVisible] = useState(false);
   const domRef = useRef();
 
@@ -32,29 +32,7 @@ const FadeInSection1 = (props) => {
   }, []);
   return (
     <div
-      className={`fade-in-section1 ${isVisible ? 'is-visible' : ''}`}
-      ref={domRef}
-    >
-      {props.children}
-    </div>
-  );
-};
-
-const FadeInSection2 = (props) => {
-  const [isVisible, setVisible] = useState(false);
-  const domRef = useRef();
-
-  let callback = (entries) => {
-    entries.forEach((entry) => setVisible(entry.isIntersecting));
-  };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(callback, options);
-    observer.observe(domRef.current);
-  }, []);
-  return (
-    <div
-      className={`fade-in-section2 ${isVisible ? 'is-visible' : ''}`}
+      className={`${props.classToUse} ${isVisible ? 'is-visible' : ''}`}
       ref={domRef}
     >
       {props.children}
@@ -74,7 +52,7 @@ const StoryContainer = () => {
                 boxSize={['25%']}
                 src={process.env.PUBLIC_URL + '/images/easter/birds2.png'}
               />
-              <FadeInSection2>
+              <FadeInSection classToUse="fade-in-section2">
                 <Text
                   textStyle="Quicksand"
                   color="#754156"
@@ -86,19 +64,19 @@ const StoryContainer = () => {
                     do what we do.
                   </p>
                 </Text>
-              </FadeInSection2>
+              </FadeInSection>
               <Image
                 boxSize={['20%']}
                 src={process.env.PUBLIC_URL + '/images/easter/birds1.png'}
               />
             </Flex>
-            <FadeInSection1>
+            <FadeInSection classToUse="fade-in-section1">
               <Image
                 src={
                   process.env.PUBLIC_URL + '/images/easter/story1-notext.png'
                 }
               />
-            </FadeInSection1>
+            </FadeInSection>
           </Box>
           <Box>
             <Grid
@@ -107,7 +85,7 @@ const StoryContainer = () => {
               h="auto"
             >
               <GridItem colSpan={5} colStart={2}>
-                <FadeInSection2>
+                <FadeInSection classToUse="fade-in-section2">
                   <Text
                     textStyle="Quicksand"
                     color="#685255"
@@ -119,17 +97,17 @@ const StoryContainer = () => {
                       beyond ourselves.
                     </p>
                   </Text>
-                </FadeInSection2>
+                </FadeInSection>
               </GridItem>
               <GridItem colSpan={7} colEnd={9} mb={5}>
-                <FadeInSection1>
+                <FadeInSection classToUse="fade-in-section1">
                   <Image
                     src={
                       process.env.PUBLIC_URL +
                       '/images/easter/story2-notext.png'
                     }
                   />
-                </FadeInSection1>
+                </FadeInSection>
               </GridItem>
             </Grid>
           </Box>
@@ -141,7 +119,7 @@ const StoryContainer = () => {
               h="auto"
             >
               <GridItem colSpan={6} colStart={2} mb={5}>
-                <FadeInSection2>
+                <FadeInSection classToUse="fade-in-section2">
                   <Text
                     textStyle="Quicksand"
                     color="#147076"
@@ -153,17 +131,17 @@ const StoryContainer = () => {
                       motivations, and stories <b>beyond the surface</b>.
                     </p>
                   </Text>
-                </FadeInSection2>
+                </FadeInSection>
               </GridItem>
               <GridItem colSpan={10} mb={5}>
-                <FadeInSection1>
+                <FadeInSection classToUse="fade-in-section1">
                   <Image
                     src={
                       process.env.PUBLIC_URL +
                       '/images/easter/story3-notext.png'
                     }
                   />
-                </FadeInSection1>
+                </FadeInSection>
               </GridItem>
             </Grid>
           </Box>
@@ -175,7 +153,7 @@ const StoryContainer = () => {
               h="auto"
             >
               <GridItem colSpan={6} colStart={2}>
-                <FadeInSection2>
+                <FadeInSection classToUse="fade-in-section2">
                   <Text
                     textStyle="Quicksand"
                     color="#00367A"
@@ -187,18 +165,18 @@ const StoryContainer = () => {
                       <b>who Jesus is and what He has done</b>.
                     </p>
                   </Text>
-                </FadeInSection2>
+                </FadeInSection>
               </GridItem>
 
               <GridItem colSpan={10}>
-                <FadeInSection1>
+                <FadeInSection classToUse="fade-in-section1">
                   <Image
                     src={
                       process.env.PUBLIC_URL +
                       '/images/easter/story4-notext.png'
                     }
                   />
-                </FadeInSection1>
+                </FadeInSection>
               </GridItem>
             </Grid>
           </Box>
