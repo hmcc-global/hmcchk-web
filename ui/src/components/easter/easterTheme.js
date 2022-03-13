@@ -7,6 +7,10 @@ const easterTheme = extendTheme({
       fontFamily: 'NextSoutherlandSerif',
       fontWeight: 400,
     },
+    FogtwoNo5: {
+      fontFamily: 'FogtwoNo5',
+      fontWeight: 400
+    },
     Quicksand: {
       fontFamily: 'Quicksand',
       fontWeight: 400,

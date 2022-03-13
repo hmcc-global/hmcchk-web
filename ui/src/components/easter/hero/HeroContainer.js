@@ -3,8 +3,8 @@ import { Text } from "@chakra-ui/react";
 const HeroContainer = () => {
   return (
     <>
-      <Text textStyle='NextSoutherlandSerif'>
-        Hero
+      <Text textStyle='FogtwoNo5' fontSize={38}>
+        2022
       </Text>
     </>
   )
