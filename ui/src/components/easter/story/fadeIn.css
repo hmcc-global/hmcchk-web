@@ -6,11 +6,6 @@
     visibility 3000ms ease-out;
   will-change: opacity, transform, visibility;
 }
-.fade-in-section1.is-visible {
-  opacity: 1;
-  transform: none;
-  visibility: visible;
-}
 
 .fade-in-section2 {
   opacity: 0;
@@ -20,6 +15,8 @@
     visibility 2000ms ease-out;
   will-change: opacity, transform, visibility;
 }
+
+.fade-in-section1.is-visible,
 .fade-in-section2.is-visible {
   opacity: 1;
   transform: none;
