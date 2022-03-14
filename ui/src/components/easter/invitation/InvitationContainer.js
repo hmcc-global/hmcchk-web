@@ -19,40 +19,40 @@ import Invitation2 from './red.png';
 const InvitationSection = () => {
   
   const [isNotSmallerScreen] = useMediaQuery("(min-width:600px)");
-  console.log(isNotSmallerScreen);
   return (
     <Center maxW="auto" mx="auto">
       <Stack spacing={1}>
         <Text 
           textStyle='NextSoutherlandSerif'
           textAlign='center'
-          fontSize='32px'>
+          fontSize={isNotSmallerScreen ? '32px':'18x'}>
           INVITE YOUR FRIENDS!
         </Text>
-        <Text fontSize='20px'
+        <Text
+          fontSize={isNotSmallerScreen ? '20px':'13px'}
           textStyle='Quicksand'
           textAlign='center'>
-          {isNotSmallerScreen ? "Save these invites and share them with your friends and loved ones." : 
-          "Press-and-hold these invites below to share/save them to your friends and loved ones."}
+          {isNotSmallerScreen ? 'Save these invites and share them with your friends and loved ones.' : 
+          'Press-and-hold these invites below to share/save them to your friends and loved ones.'}
           </Text>  
         <Flex gap='20px' direction={isNotSmallerScreen ? "row" : "column"}>
             <Image p={6}
               boxSize={['50%, 60%, 70%, 80%, 90%']}
               objectFit="cover"
-              src={Invitation2} 
+              src={"/images/easter/redinvitation.png"} 
               alt='random'
               alignSelf="center"
             />
             <Image p={6}
               boxSize={['50%,60%,70%,80%, 90%']}
               objectFit="cover"
-              src={Invitation1}
+              src={"/images/easter/blueinvitation.png"}
               alt='random' 
               alignSelf="center"
             />
         </Flex>
         <Text 
-          fontSize='32px'
+          fontSize={isNotSmallerScreen ? '32px':'22px'}
           textStyle='NextSoutherlandSerif'
           textAlign='center'> 
             CHECK OUT{' '}
@@ -62,7 +62,7 @@ const InvitationSection = () => {
         </Text> 
         <Text 
           textStyle='Quicksand'
-          fontSize='20px'
+          fontSize={isNotSmallerScreen ? '20px':'13px'}
           textAlign='center'
           paddingBottom={20}>
           (click!)
