@@ -8,6 +8,7 @@ import BackgroundElements from './BackgroundElements';
 const EasterContainer = (props) => {
   return (
     <>
+    <ParallaxProvider>
       <HeroContainer />
       {/* relative positioning to stack the elements */}
       <Box w="100vw" minH="350vh" position="relative">
