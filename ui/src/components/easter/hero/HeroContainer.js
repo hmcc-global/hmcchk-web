@@ -131,4 +131,3 @@ const HeroContainer = () => {
 }
 
 export default HeroContainer;
-
