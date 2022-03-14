@@ -18,7 +18,7 @@ import Invitation2 from './red.png';
 
 const InvitationSection = () => {
   
-  const [isNotSmallerScreen] = useMediaQuery("(min-width:600px)");
+  const [isNotSmallerScreen] = useMediaQuery("(min-width:768px)");
   return (
     <Center maxW="auto" mx="auto">
       <Stack spacing={1}>
