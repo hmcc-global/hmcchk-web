@@ -4,56 +4,24 @@ import {
   Text, 
   HStack, 
   Container, 
-  useMediaQuery,
-  UnorderedList,
-  OrderedList,
-  ListItem,
   Link } from "@chakra-ui/react";
 import { generateGoogleCalendarLink } from "../../helpers/eventsHelpers";
-import { domToReact, attributesToProps } from "html-react-parser";
 
 function Event_details({header , sub_header , sentence , date , time , location , eventData}) {
   let hColor , backgroundColor , borderColor , hoverColor;
-  if(header == "Good Friday"){
+  if(header === "Good Friday"){
     [hColor , backgroundColor , borderColor, hoverColor] = ["#A6657A" , "#F1D8DE" , "#C69494" , "#D28F8F"] ; 
   }
   else{
     [hColor , backgroundColor , borderColor, hoverColor] = ["#436EA0" , "#E0EDFF" , "#6E7F98" , "#7F99C0"]
   } 
-  
-  const options = {
-    replace: (domNode) => {
-      if (domNode.name === "p") {
-        return <Text mb="2">{domToReact(domNode.children, options)}</Text>;
-      } else if (domNode.name === "ul") {
-        return (
-          <UnorderedList marginInlineStart="1.25em" mb="2">
-            {domToReact(domNode.children, options)}
-          </UnorderedList>
-        );
-      } else if (domNode.name === "ol") {
-        return (
-          <OrderedList marginInlineStart="1.25em" mb="2">
-            {domToReact(domNode.children, options)}
-          </OrderedList>
-        );
-      } else if (domNode.name === "li") {
-        return <ListItem>{domToReact(domNode.children, options)}</ListItem>;
-      } else if (domNode.name === "a") {
-        return (
-          <Link color="teal.500" {...attributesToProps(domNode.attribs)}>
-            {domToReact(domNode.children, options)}
-          </Link>
-        );
-      }
-    },
-  };
 
   return (
     <Container
       p = {4}
       m = {1}
-      flex = {'1 1'}
+      maxWidth = {[ '270px' ,'280px' , '290px' , '301px' ]}
+      flexShrink = {0}
       
     >
       <Heading 
@@ -61,7 +29,7 @@ function Event_details({header , sub_header , sentence , date , time , location 
         fontFamily= {'NextSoutherlandSerif'} 
         lineHeight = {'53.44px'} 
         fontWeight = {400} 
-        fontSize = {'32px'}
+        fontSize = {[ '160%' ,  '170%' ,  '180%' , '200%']}
         textColor = {hColor}
         >
           {header} <br/> {sub_header}
@@ -69,17 +37,17 @@ function Event_details({header , sub_header , sentence , date , time , location 
       <Text 
         paddingBottom = {3} 
         fontFamily = {'Quicksand'} 
-        fontSize = {20} 
+        fontSize = {{lg: '140%' , md: '120%' , sm: '100%'}} 
         fontWeight = {400}
-        lineHeight = {2}
+        lineHeight = {['25px']}
         textColor = {hColor}
         >
           Because <u>{sentence}</u>
       </Text>
 
-      <Text fontFamily = {'Quicksand'} lineHeight = {'25px'} fontWeight={400} fontSize={20}>{date}</Text>
-      <Text fontFamily = {'Quicksand'} lineHeight = {'25px'} fontWeight={400} fontSize={20}>{time}</Text>
-      <Text fontFamily = {'Quicksand'} lineHeight = {'25px'} fontWeight={400} fontSize={20}>{location}</Text>
+      <Text fontFamily = {'Quicksand'} lineHeight = {'25px'} fontWeight={400} fontSize={{lg: '140%' , md: '120%' , sm: '100%'}}>{date}</Text>
+      <Text fontFamily = {'Quicksand'} lineHeight = {'25px'} fontWeight={400} fontSize={{lg: '140%' , md: '120%' , sm: '100%'}}>{time}</Text>
+      <Text fontFamily = {'Quicksand'} lineHeight = {'25px'} fontWeight={400} fontSize={{lg: '140%' , md: '120%' , sm: '100%'}}>{location}</Text>
       <br/>
       {generateGoogleCalendarLink(eventData) && (
         <Button 
@@ -90,7 +58,7 @@ function Event_details({header , sub_header , sentence , date , time , location 
           borderWidth = {'1px'}
           borderRadius={'10px'}
           boxShadow = {'1px 3px 4px 0px #00000040'} 
-          width = {'257px'}
+          width = {'100%'}
           height = {'43px'} 
           blendMode = {'pass through'}
           backgroundColor={backgroundColor}
@@ -126,18 +94,16 @@ const InvitationContainer = () => {
     endDate: '2022-04-17T00:00:00.000+08:00', 
     recurrence: "7",
     location: "Online"};
-  
-  //const [isSmaller] = useMediaQuery('(flexFlow : row)'); 
+   
 
   return (
     <>
       <HStack
-       width = {'70%'}
+       columnGap = {{lg: '125px' ,  md: '110px' , sm: '100px'}}
        justifyContent = 'center'
        textAlign = 'center'
        flexFlow = 'row wrap'
-       marginLeft = {'15%'}
-       marginRight = {'15%'}
+       margin = '0 10%'
        >
         <Event_details
           header = 'Good Friday'  
