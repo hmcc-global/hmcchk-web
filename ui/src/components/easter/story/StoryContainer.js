@@ -7,7 +7,6 @@ import {
   Grid,
   GridItem,
   Center,
-  Fade,
 } from '@chakra-ui/react';
 import { useEffect, useState, useRef } from 'react';
 import './fadeIn.css';
