@@ -1,3 +1,4 @@
+import BecauseJesus from './BecauseJesus';
 import {
   VStack,
   Text,
@@ -180,6 +181,8 @@ const StoryContainer = () => {
           </Box>
         </VStack>
       </Center>
+      <Text textStyle="Quicksand">Story</Text>
+      <BecauseJesus />
     </>
   );
 };
