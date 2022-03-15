@@ -35,10 +35,9 @@ const BecauseJesus = (props) => {
           paddingTop="8em"
           bgImage={process.env.PUBLIC_URL + '/images/easter/EasterCross.png'}
           bgSize="auto"
-          bgPosition="center center"
+          bgPosition="center 70%"
           bgAttachment={` ${isVisible ? 'scroll' : 'fixed'}`}
           bgRepeat="no-repeat"
-          justify="center"
         >
           <SlideFade in={isVisible} direction="top">
             <Box>
