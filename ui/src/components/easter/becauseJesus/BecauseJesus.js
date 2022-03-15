@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 
 let options = {
   root: document.querySelector('#scrollArea'),
-  rootMargin: '-5% 0% -5% 0%',
+  rootMargin: '-10% 0% -10% 0%',
   threshold: 1,
 };
 
@@ -30,14 +30,15 @@ const BecauseJesus = (props) => {
     <div ref={domRef}>
       <Center>
         <Box
-          h={['25em', '30em']}
-          w={['25em', '40em']}
-          paddingTop={['6em', '0']}
+          h={['30em', '40em']}
+          w={['20em', '40em']}
+          paddingTop="8em"
           bgImage={process.env.PUBLIC_URL + '/images/easter/EasterCross.png'}
-          bgSize={['25em', 'auto']}
-          bgPosition={['center 80%', 'center 90%']}
+          bgSize="auto"
+          bgPosition="center center"
           bgAttachment={` ${isVisible ? 'scroll' : 'fixed'}`}
           bgRepeat="no-repeat"
+          justify="center"
         >
           <SlideFade in={isVisible} direction="top">
             <Box>
@@ -45,7 +46,7 @@ const BecauseJesus = (props) => {
                 textStyle="NextSoutherlandSerif"
                 textAlign="center"
                 fontSize={['3xl', '5xl']}
-                marginTop={['-2em', '0']}
+                marginTop={['-2em', '-2em']}
               >
                 Because, Jesus.
               </Text>
