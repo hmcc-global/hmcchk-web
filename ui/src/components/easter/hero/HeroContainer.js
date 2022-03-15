@@ -15,13 +15,13 @@ const HeroContainer = () => {
       marginTop ='10'
       bgColor='white'
       paddingBottom='40%'
-      bgImage={{base: `url('${process.env.PUBLIC_URL}/images/heroeaster/HeroLandingMobile.png')`,sm:`url('${process.env.PUBLIC_URL}/images/heroeaster/HeroLandingBackground.png')`}}
+      bgImage={{base: `url('${process.env.PUBLIC_URL}/images/easter/HeroLandingMobile.png')`,sm:`url('${process.env.PUBLIC_URL}/images/easter/HeroLandingBackground-min.png')`}}
       bgPosition='bottom'>
       
       <Container maxW="container.lg" py={10}>
         <VStack spacing={[1, 1]} align="stretch">
           <Box
-                bgImage={`url('${process.env.PUBLIC_URL}/images/heroeaster/HeroBecauseJESUScroptransparent.gif')`}
+                bgImage={`url('${process.env.PUBLIC_URL}/images/easter/HeroBecauseJESUScroptransparent-min.gif')`}
                 bgPosition={"left"}
                 bgSize="100%"
                 // px={[0, 0, 0]}
@@ -39,7 +39,7 @@ const HeroContainer = () => {
           
           {'Mobile Picture GIF'}
           
-          <Box  bgImage={`url('${process.env.PUBLIC_URL}/images/heroeaster/HeroBecauseJESUSMobileCropped.gif')`}
+          <Box  bgImage={`url('${process.env.PUBLIC_URL}/images/easter/HeroBecauseJESUSMobileCropped.gif')`}
               bgPosition='top'
               bgSize= '99%'
               backgroundRepeat='no-repeat'
