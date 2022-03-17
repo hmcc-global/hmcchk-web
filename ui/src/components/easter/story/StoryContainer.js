@@ -44,7 +44,6 @@ const StoryContainer = () => {
     <>
       <Center>
         <VStack justify="center" w={['90%', '80%', '70%', '50%']}>
-          <Text textStyle="Quicksand">Story</Text>
           <Box>
             <Flex>
               <Image
