@@ -180,7 +180,6 @@ const StoryContainer = () => {
           </Box>
         </VStack>
       </Center>
-      <Text textStyle="Quicksand">Story</Text>
     </>
   );
 };
