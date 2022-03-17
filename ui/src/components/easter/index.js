@@ -12,7 +12,11 @@ const EasterContainer = (props) => {
     <>
       <HeroContainer />
       {/* relative positioning to stack the elements */}
-      <Box w="100vw" minH={['500vh', '450vh']} position="relative">
+      <Box
+        w="100vw"
+        minH={['500vh', '400vh', '350vh', '400vh']}
+        position="relative"
+      >
         {/* z index is 0, appear behind */}
         <BackgroundElements />
 
