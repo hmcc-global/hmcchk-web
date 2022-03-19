@@ -1,94 +1,105 @@
 import 'react-modal-video/scss/modal-video.scss';
-import React,{Fragment, useState} from "react";
+import React, { Fragment, useState } from 'react';
 import ModalVideo from 'react-modal-video';
-import { 
-  Container, 
-  Text, 
-  Box, 
-  Flex, 
-  VStack, 
-  Icon, 
-  LinkOverlay, 
-  _hover, 
-  LinkBox} from "@chakra-ui/react";
+import {
+  Container,
+  Text,
+  Box,
+  Flex,
+  VStack,
+  Icon,
+  LinkOverlay,
+  _hover,
+  LinkBox,
+} from '@chakra-ui/react';
 
- 
- 
 const HeroContainer = () => {
-  const [isOpen, setOpen] = useState(false)
+  const [isOpen, setOpen] = useState(false);
   return (
     <Box>
-      <Box bgColor='white' height = 'auto'>
-    </Box>
-    
-  <Box 
-     
-      backgroundRepeat='no-repeat'
-      bgSize= '100%'
-      justifyContent={'bottom'}
-      height={{base:'2xl', sm:'3xl', md:'fit-content'}}
-      marginTop ='10'
-      bgColor='white'
-      width='full'
-      paddingBottom={{base:'40%',sm:'80%',md:'40%',lg:'36%'}}
-      bgImage={{base: `url('${process.env.PUBLIC_URL}/images/easter/HeroLandingMobile.png')`, sm: `url('${process.env.PUBLIC_URL}/images/easter/HeroLandingBackground-min.png')`,md:`url('${process.env.PUBLIC_URL}/images/easter/HeroLandingBackground-min.png')`}}
-      bgPosition='bottom'>
+      <Box bgColor="white" height="auto"></Box>
 
-    <Box          
-      bgImage={`url('${process.env.PUBLIC_URL}/images/easter/HeroBecauseJESUSCroptransparent-min.gif')`}
-      bgPosition={'center'}
-      justifyContent={"center"}
-      bgSize="85%"
-      bgColor='none'
-      height = "fit-content"
-      paddingLeft = "10"
-      width='100%'
-      paddingBottom="10%"
-      backgroundRepeat={'no-repeat'}
-      display={['none','none','block']}
-        >
-    </Box>
-      
-    <Container maxW="100%" py={10}>
-      <VStack spacing={[1, 1]} align="stretch">
-        <Box  bgImage={`url('${process.env.PUBLIC_URL}/images/easter/HeroBecauseJESUSMobileCropped.gif')`}
-            bgPosition='top'
-            bgSize= '99%'
-            backgroundRepeat='no-repeat'
-            justifyContent={'space-between'}
-            paddingRight = "30em"
-            paddingLeft = "30em"
-            paddingBottom='10%'
-            
-            px={[50, 50, 0]}
-            py={[20, 100, 0]}
-            mb={[8, 4, 0]}
-            display={['block', 'block','none']}
-        >
-        </Box>
+      <Box
+        backgroundRepeat="no-repeat"
+        bgSize="100%"
+        justifyContent={'bottom'}
+        height={{ base: '2xl', sm: '3xl', md: 'fit-content' }}
+        marginTop="10"
+        bgColor="white"
+        width="full"
+        paddingBottom={{ base: '40%', sm: '80%', md: '40%', lg: '36%' }}
+        bgImage={{
+          base: `url('${process.env.PUBLIC_URL}/images/easter/HeroLandingMobile.png')`,
+          sm: `url('${process.env.PUBLIC_URL}/images/easter/HeroLandingBackground-min.png')`,
+          md: `url('${process.env.PUBLIC_URL}/images/easter/HeroLandingBackground-min.png')`,
+        }}
+        bgPosition="bottom"
+      >
         <Box
-          bgcolor='white'
-          height={{md:'5%',lg:'5%'}}
-        >   
-        </Box> 
-      
-        <Flex alignContent={'center'} justifyContent={'space-between'} spacing='0px' flexDirection={{base: 'column', sm: 'column', md: 'row'}}>
-          <Box 
-            bg='none'
-            height='4em'
-            display='flex'
-            paddingLeft={{base: "2%", sm: "0%",md:"8%"}}
-            justifyContent={{base: 'center', sm: 'center', md: 'left'}}
-            paddingBottom={{base:'10',sm:'6em'}}
+          bgImage={`url('${process.env.PUBLIC_URL}/images/easter/HeroBecauseJESUSCropTransparent-min.gif')`}
+          bgPosition={'center'}
+          justifyContent={'center'}
+          bgSize="85%"
+          bgColor="none"
+          height="fit-content"
+          paddingLeft="10"
+          width="100%"
+          paddingBottom="10%"
+          backgroundRepeat={'no-repeat'}
+          display={['none', 'none', 'block']}
+        ></Box>
+
+        <Container maxW="100%" py={10}>
+          <VStack spacing={[1, 1]} align="stretch">
+            <Box
+              bgImage={`url('${process.env.PUBLIC_URL}/images/easter/HeroBecauseJESUSMobileCropped.gif')`}
+              bgPosition="top"
+              bgSize="99%"
+              backgroundRepeat="no-repeat"
+              justifyContent={'space-between'}
+              paddingRight="30em"
+              paddingLeft="30em"
+              paddingBottom="10%"
+              px={[50, 50, 0]}
+              py={[20, 100, 0]}
+              mb={[8, 4, 0]}
+              display={['block', 'block', 'none']}
+            ></Box>
+            <Box bgcolor="white" height={{ md: '5%', lg: '5%' }}></Box>
+
+            <Flex
+              alignContent={'center'}
+              justifyContent={'space-between'}
+              spacing="0px"
+              flexDirection={{ base: 'column', sm: 'column', md: 'row' }}
             >
-            <Text textStyle='NextSoutherlandSerif' fontSize={{base: 15, sm: 28}} textColor='#558EC5' paddingTop = {{base: 1.5, sm: 2.5}}>
-              EASTER 
-            </Text>
-            <Text fontSize={{base: 23, sm:43}} textStyle='FogtwoNo5' textColor='#558EC5' justifyContent='center' paddingLeft= {{base: 1, sm: 2}} >
-              2022
-            </Text>
-          </Box>
-          {/* <Box paddingRight = {{sm:'0',md: '10%',lg:'10%'}} display='flex' bg='none' height={{base: '2.5em', sm: '3em', md: '4em'}}  justifyContent={{base: 'center', sm: 'center', md: 'left'}} >     
+              <Box
+                bg="none"
+                height="4em"
+                display="flex"
+                paddingLeft={{ base: '2%', sm: '0%', md: '8%' }}
+                justifyContent={{ base: 'center', sm: 'center', md: 'left' }}
+                paddingBottom={{ base: '10', sm: '6em' }}
+              >
+                <Text
+                  textStyle="NextSoutherlandSerif"
+                  fontSize={{ base: 15, sm: 28 }}
+                  textColor="#558EC5"
+                  paddingTop={{ base: 1.5, sm: 2.5 }}
+                >
+                  EASTER
+                </Text>
+                <Text
+                  fontSize={{ base: 23, sm: 43 }}
+                  textStyle="FogtwoNo5"
+                  textColor="#558EC5"
+                  justifyContent="center"
+                  paddingLeft={{ base: 1, sm: 2 }}
+                >
+                  2022
+                </Text>
+              </Box>
+              {/* <Box paddingRight = {{sm:'0',md: '10%',lg:'10%'}} display='flex' bg='none' height={{base: '2.5em', sm: '3em', md: '4em'}}  justifyContent={{base: 'center', sm: 'center', md: 'left'}} >     
               <LinkBox
                   justifyContent={{base: 'center', sm: 'center', md: 'left'}}
                   width = {{base: '30%', sm: 'center', md: 'left'}}
@@ -122,13 +133,12 @@ const HeroContainer = () => {
               </LinkBox>
               <ModalVideo channel='youtube' allowFullScreen = 'true' autoplay isOpen={isOpen} videoId="Zp6aygmvzM4" onClose={() => setOpen(false)} />
           </Box> */}
-        </Flex>
-      </VStack>
-    </Container>
+            </Flex>
+          </VStack>
+        </Container>
+      </Box>
     </Box>
-    
-  </Box>
-  )
-}
+  );
+};
 
 export default HeroContainer;
