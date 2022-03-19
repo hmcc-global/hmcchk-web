@@ -28,7 +28,7 @@ const HeroContainer = () => {
       bgPosition='bottom'>
 
     <Box
-                bgImage={`url('${process.env.PUBLIC_URL}/images/easter/HeroBecauseJESUScroptransparent-min.gif')`}
+                bgImage={`url('${process.env.PUBLIC_URL}/images/easter/HeroBecauseJESUSCroptransparent-min.gif')`}
                 bgPosition={'center'}
                 justifyContent={"center"}
                 bgSize="85%"
