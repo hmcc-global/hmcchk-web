@@ -14,7 +14,7 @@ const EasterContainer = (props) => {
       {/* relative positioning to stack the elements */}
       <Box
         w="100vw"
-        minH={['500vh', '400vh', '350vh', '400vh']}
+        minH="200em"
         position="relative"
       >
         {/* z index is 0, appear behind */}
