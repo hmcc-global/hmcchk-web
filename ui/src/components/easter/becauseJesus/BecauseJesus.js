@@ -30,11 +30,11 @@ const BecauseJesus = (props) => {
     <div ref={domRef}>
       <Center>
         <Box
-          h={['30em', '30em']}
-          w={['20em', '40em']}
+          h={['25em', '30em']}
+          w={['25em', '40em']}
           paddingTop={['6em', '0']}
           bgImage={process.env.PUBLIC_URL + '/images/easter/EasterCross.png'}
-          bgSize="auto"
+          bgSize={['25em', 'auto']}
           bgPosition={['center 80%', 'center 90%']}
           bgAttachment={` ${isVisible ? 'scroll' : 'fixed'}`}
           bgRepeat="no-repeat"
