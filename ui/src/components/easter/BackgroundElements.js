@@ -6,7 +6,7 @@ const BackgroundElements = () => {
       {/* Desktop */}
       <Image
         position="absolute"
-        top="90vh"
+        top="17em"
         right="0"
         src={`${process.env.PUBLIC_URL}/images/easter/background/blue-gradient-desktop.svg`}
         w="40%"
@@ -14,7 +14,7 @@ const BackgroundElements = () => {
       />
       <Image
         position="absolute"
-        top="140vh"
+        top="50em"
         left="0"
         w="50%"
         src={`${process.env.PUBLIC_URL}/images/easter/background/pink-gradient-desktop.svg`}
@@ -24,7 +24,7 @@ const BackgroundElements = () => {
         position="absolute"
         bottom="0"
         right="0"
-        w="45%"
+        w="35%"
         src={`${process.env.PUBLIC_URL}/images/easter/background/yellow-gradient-desktop.svg`}
         display={['none', 'block']}
       />
@@ -32,7 +32,7 @@ const BackgroundElements = () => {
       {/* Mobile */}
       <Image
         position="absolute"
-        top="70vh"
+        top="30em"
         right="0"
         src={`${process.env.PUBLIC_URL}/images/easter/background/blue-gradient-mobile.svg`}
         w="40%"
@@ -40,7 +40,7 @@ const BackgroundElements = () => {
       />
       <Image
         position="absolute"
-        top="115vh"
+        top="45em"
         left="0"
         w="70%"
         src={`${process.env.PUBLIC_URL}/images/easter/background/pink-gradient-mobile.svg`}
