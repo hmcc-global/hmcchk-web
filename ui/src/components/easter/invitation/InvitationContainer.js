@@ -32,13 +32,13 @@ const InvitationSection = () => {
           textAlign="center"
         >
           {isNotSmallerScreen
-            ? 'Save these invites and share them with your friends and loved ones.'
-            : 'Press-and-hold these invites below to share/save them to your friends and loved ones.'}
+            ? 'Save the invite and share it with your friends and loved ones.'
+            : 'Press-and-hold the invite below to share/save it to your friends and loved ones.'}
         </Text>
         <Flex gap="20px" direction="column">
           <Image
             p={6}
-            w={['95%', '45%']}
+            w={['90%', '45%']}
             objectFit="cover"
             src={`${process.env.PUBLIC_URL}/images/easter/final_invite-min.png`}
             alt="random"
