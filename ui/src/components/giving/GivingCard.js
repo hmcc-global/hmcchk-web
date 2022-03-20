@@ -49,7 +49,7 @@ const RenderSwitch = (param) => {
     case 'Bank Transfer':
       return (
         <VStack spacing="3vh">
-          <Box>
+          <Box py="1em">
             <Text fontWeight="bold">
               You may use the following information:
             </Text>
@@ -59,9 +59,9 @@ const RenderSwitch = (param) => {
             <Text fontWeight="bold">Bank Code: 009</Text>
             <Text fontWeight="bold">Branch Code: 845</Text>
             <Text fontWeight="bold">
-              Account Name: Harvest Mission Community Church (Hong Kong)
+              Account Name: Harvest Mission Community Church (Hong Kong) Limited
             </Text>
-            <Text fontWeight="bold">Limited Account Number: 13012090</Text>
+            <Text fontWeight="bold"> Account Number: 13012090</Text>
             <Text fontWeight="bold">
               Transfer Remarks: Please indicate the giving type (Weekly
               Offering, Tithe, HMI, or Other) and write down the giving date
