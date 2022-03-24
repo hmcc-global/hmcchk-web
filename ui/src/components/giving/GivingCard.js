@@ -61,7 +61,7 @@ const RenderSwitch = (param) => {
             <Text fontWeight="bold">
               Account Name: Harvest Mission Community Church (Hong Kong) Limited
             </Text>
-            <Text fontWeight="bold"> Account Number: 13012090</Text>
+            <Text fontWeight="bold"> Account Number: 013012090</Text>
             <Text fontWeight="bold">
               Transfer Remarks: Please indicate the giving type (Weekly
               Offering, Tithe, HMI, or Other) and write down the giving date
