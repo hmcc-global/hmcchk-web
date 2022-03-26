@@ -9,64 +9,75 @@ import {
   Center,
   Image,
   Stack,
+  Box,
   Flex,
 } from '@chakra-ui/react';
 import { generateGoogleCalendarLink } from '../../helpers/eventsHelpers';
 import { useMediaQuery } from '@chakra-ui/media-query';
-
+import { EmbedSocial } from '../embedSocial';
 const InvitationSection = () => {
   const [isNotSmallerScreen] = useMediaQuery('(min-width:992px)');
   return (
-    <Center maxW="auto" mx="auto" paddingY={35}>
+    <Center>
       <Stack spacing={1}>
-        <Text
-          textStyle="NextSoutherlandSerif"
-          textAlign="center"
-          fontSize={isNotSmallerScreen ? '32px' : '18x'}
-        >
-          INVITE YOUR FRIENDS!
-        </Text>
-        <Text
-          fontSize={isNotSmallerScreen ? '20px' : '13px'}
-          textStyle="Quicksand"
-          textAlign="center"
-        >
-          {isNotSmallerScreen
-            ? 'Save the invite and share it with your friends and loved ones.'
-            : 'Press-and-hold the invite below to share/save it to your friends and loved ones.'}
-        </Text>
-        <Flex gap="20px" direction="column">
-          <Image
-            p={6}
-            w={['90%', '45%']}
-            objectFit="cover"
-            src={`${process.env.PUBLIC_URL}/images/easter/final_invite-min.png`}
-            alt="random"
-            alignSelf="center"
-          />
-        </Flex>
-        <Text
-          fontSize={isNotSmallerScreen ? '32px' : '22px'}
-          textStyle="NextSoutherlandSerif"
-          textAlign="center"
-        >
-          CHECK OUT{' '}
-          <Link
-            style={{ textDecoration: 'underline', textUnderlineOffset: '5px' }}
-            color="blue.700"
-            href="/connect"
+        <Box>
+          <Text
+            textStyle="NextSoutherlandSerif"
+            textAlign="center"
+            fontSize={isNotSmallerScreen ? '32px' : '18x'}
           >
-            WHAT ELSE {<br />} IS HAPPENING IN HMCC!
-          </Link>
-        </Text>
-        <Text
-          textStyle="Quicksand"
-          fontSize={isNotSmallerScreen ? '20px' : '13px'}
-          textAlign="center"
-          paddingBottom={15}
-        >
-          (click!)
-        </Text>
+            INVITE YOUR FRIENDS!
+          </Text>
+        </Box>
+        <Box>
+          <Text
+            fontSize={isNotSmallerScreen ? '20px' : '13px'}
+            textStyle="Quicksand"
+            textAlign="center"
+          >
+            {isNotSmallerScreen
+              ? 'Save the invite and share it with your friends and loved ones.'
+              : 'Press-and-hold the invite below to share/save it to your friends and loved ones.'}
+          </Text>
+          <Flex gap="20px" direction="column">
+            <Image
+              p={6}
+              w={['90%', '45%']}
+              objectFit="cover"
+              src={`${process.env.PUBLIC_URL}/images/easter/final_invite-min.png`}
+              alt="random"
+              alignSelf="center"
+            />
+          </Flex>
+        </Box>
+        <EmbedSocial />
+        <Box>
+          <Text
+            fontSize={isNotSmallerScreen ? '32px' : '22px'}
+            textStyle="NextSoutherlandSerif"
+            textAlign="center"
+          >
+            CHECK OUT{' '}
+            <Link
+              style={{
+                textDecoration: 'underline',
+                textUnderlineOffset: '5px',
+              }}
+              color="blue.700"
+              href="/connect"
+            >
+              WHAT ELSE {<br />} IS HAPPENING IN HMCC!
+            </Link>
+          </Text>
+          <Text
+            textStyle="Quicksand"
+            fontSize={isNotSmallerScreen ? '20px' : '13px'}
+            textAlign="center"
+            paddingBottom={15}
+          >
+            (click!)
+          </Text>
+        </Box>
       </Stack>
     </Center>
   );

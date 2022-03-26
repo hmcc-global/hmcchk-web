@@ -6,6 +6,7 @@ import React from 'react';
 import BackgroundElements from './BackgroundElements';
 import BecauseJesus from './becauseJesus/BecauseJesus';
 import BecauseJesusAnimation from './becauseJesus/BecauseJesusAnimation';
+import { EmbedSocial } from './embedSocial';
 
 const EasterContainer = (props) => {
   return (
@@ -14,7 +15,8 @@ const EasterContainer = (props) => {
       {/* relative positioning to stack the elements */}
       <Box
         w="100vw"
-        minH={['190em', '212em', '230em', '215em', '212em']}
+        //TODO: height still needs adjusting fort mobile
+        minH={['300em', '270em', '230em', '215em', '270em']}
         position="relative"
       >
         {/* z index is 0, appear behind */}
