@@ -88,7 +88,7 @@ const HeroContainer = () => {
               2022
             </Text>
           </Box>
-          {/* <Box paddingRight = {{sm:'0',md: '10%',lg:'10%'}} display='flex' bg='none' height={{base: '2.5em', sm: '3em', md: '4em'}}  justifyContent={{base: 'center', sm: 'center', md: 'left'}} >     
+          <Box paddingRight = {{sm:'0',md: '10%',lg:'10%'}} display='flex' bg='none' height={{base: '2.5em', sm: '3em', md: '4em'}}  justifyContent={{base: 'center', sm: 'center', md: 'left'}} >     
               <LinkBox
                   justifyContent={{base: 'center', sm: 'center', md: 'left'}}
                   width = {{base: '30%', sm: 'center', md: 'left'}}
@@ -120,8 +120,8 @@ const HeroContainer = () => {
                   </Flex>
                 </LinkOverlay>
               </LinkBox>
-              <ModalVideo channel='youtube' allowFullScreen = 'true' autoplay isOpen={isOpen} videoId="Zp6aygmvzM4" onClose={() => setOpen(false)} />
-          </Box> */}
+              <ModalVideo channel='youtube' allowFullScreen = 'true' autoplay isOpen={isOpen} videoId="cD44_n7mt-o" onClose={() => setOpen(false)} />
+          </Box>
         </Flex>
       </VStack>
     </Container>
