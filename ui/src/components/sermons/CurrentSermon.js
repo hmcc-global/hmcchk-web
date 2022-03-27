@@ -38,7 +38,7 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
   }, [currentSermon, isOnline]);
 
   const onClickHandler = () => {
-    history.push(`/sermons/${currentSermon.id}`);
+    history.push('/online');
   };
 
   const WatchButton = () => {
