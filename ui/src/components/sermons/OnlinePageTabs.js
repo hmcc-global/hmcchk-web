@@ -11,7 +11,7 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-  AspectRatio,
+  Box,
 } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
@@ -30,7 +30,7 @@ const OnlinePageTabs = ({ sermonNotes }) => {
         <Tab>New to HMCC</Tab>
       </TabList>
       <TabPanels>
-        <TabPanel>
+        <TabPanel h="100%">
           <Button
             mb={3}
             fontWeight="bold"
@@ -41,17 +41,17 @@ const OnlinePageTabs = ({ sermonNotes }) => {
           >
             <RepeatIcon />
           </Button>
-          <AspectRatio
-            mb="5"
-            width="100%"
-            height={{ base: '100vh', md: '50vh' }}
-          >
+          <Box mb={5}>
             <iframe
               key={noteId}
               title="Sermon Notes"
               src={sermonNotes}
+              style={{
+                height: '100vh',
+                width: '100%'
+              }}
             ></iframe>
-          </AspectRatio>
+          </Box>
         </TabPanel>
         <TabPanel>
           <Accordion allowToggle allowMultiple>

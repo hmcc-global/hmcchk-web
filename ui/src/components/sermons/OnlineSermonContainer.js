@@ -66,8 +66,8 @@ const OnlineSermonContainer = (props) => {
   return (
     <>
       { onlineSermon && (
-        <Container maxW="container.lg">
-          <Box mb="20px" mt="20px">
+        <Container maxW="100%" display="flex" flexDirection={{base: 'column', lg: 'row'}} alignItems={{base: 'center', lg: 'unset'}}>
+          <Box m="20px" w={{base: '100%', lg: '60%'}}>
             <VStack alignItems="left" alignContent="left">
               <Link href="/sermons">
                 <Button
@@ -136,11 +136,13 @@ const OnlineSermonContainer = (props) => {
                   </Text>
                   <Text>{onlineSermon.sermonDesc}</Text>
                 </Box>
-                <OnlinePageTabs
-                  sermonNotes={onlineSermon.sermonNotes}
-                />
               </Stack>
             </VStack>
+          </Box>
+          <Box m="20px" w={{base: '100%', lg: '40%'}} overflowY="auto">
+            <OnlinePageTabs
+              sermonNotes={onlineSermon.sermonNotes}
+            />
           </Box>
         </Container>
       )}
