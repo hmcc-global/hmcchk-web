@@ -1,11 +1,8 @@
 import {
-  AspectRatio,
   Box,
   Button,
   ButtonGroup,
   Flex,
-  Icon,
-  Image,
   Link,
   Modal,
   ModalBody,

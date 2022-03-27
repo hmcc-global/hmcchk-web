@@ -6,7 +6,6 @@ import {
   AspectRatio,
   Image,
   Button,
-  Link,
 } from "@chakra-ui/react";
 import { useHistory } from "react-router";
 

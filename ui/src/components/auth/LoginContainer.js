@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { customAxios as axios } from "../helpers/customAxios";
 import GoogleLogin from "react-google-login";
 import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signin } from "../../reducers/userSlice";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import {
@@ -20,7 +20,6 @@ import {
 const LoginContainer = (props) => {
   const [invalidLogin, setInvalidLogin] = useState("");
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
   const { history } = props;
   const {
     register,

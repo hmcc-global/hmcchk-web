@@ -1,5 +1,4 @@
 import React from "react";
-import { customAxios as axios } from "../helpers/customAxios";
 import { useForm } from "react-hook-form";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import {
@@ -19,8 +18,6 @@ const RecoverPassword = (props) => {
   const { register, handleSubmit } = useForm();
   const toast = useToast();
   const onSubmit = async (data) => {
-    const isSuccess = await axios.post("/api/auth/forgot-password", data);
-
     // Send toast regardless to prevent email sniffing.
     toast({
       title: "Password Recovery.",

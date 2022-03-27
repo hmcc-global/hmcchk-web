@@ -56,16 +56,18 @@ const NavBar = (props) => {
     return data;
   };
 
-  useEffect(async () => {
-    const userObj = await getUserObj(user);
-    if (userObj) {
-      const { fullName } = userObj;
-      setUsername(fullName.split(' ')[0]);
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
-    }
-  }, []);
+  useEffect(() => {
+    (async () => {
+      const userObj = await getUserObj(user);
+      if (userObj) {
+        const { fullName } = userObj;
+        setUsername(fullName.split(' ')[0]);
+        setLoggedIn(true);
+      } else {
+        setLoggedIn(false);
+      }
+    })();
+  }, [user]);
 
   let currDate = new Date().toDateString().substr(0, 3);
 
@@ -198,7 +200,6 @@ const NavBar = (props) => {
           align="center"
           color="gray.100"
           justify="center"
-          align="center"
           h="6vh"
           p={2}
         >

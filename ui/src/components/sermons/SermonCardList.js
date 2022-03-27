@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Grid,
   Heading,
@@ -17,7 +17,6 @@ import {
 import Pagination from '../helpers/Pagination';
 import FilterSermon from './FilterSermons';
 import SermonCard from './SermonCard';
-import RelatedSermonCard from './RelatedSermonCard';
 
 const SermonCardList = ({ allSermons }, props) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,13 +38,13 @@ const SermonCardList = ({ allSermons }, props) => {
 
   const filterSermon = (event) => {
     setCurrentPage(1);
-    if (event.target.name == 'speaker') {
+    if (event.target.name === 'speaker') {
       setFilterSpeaker(event.target.value);
-    } else if (event.target.name == 'sermon') {
+    } else if (event.target.name === 'sermon') {
       setFilterSermonSeries(event.target.value);
-    } else if (event.target.name == 'book') {
+    } else if (event.target.name === 'book') {
       setFilterBook(event.target.value);
-    } else if (event.target.name == 'service') {
+    } else if (event.target.name === 'service') {
       setFilterServiceType(event.target.value);
     }
   };

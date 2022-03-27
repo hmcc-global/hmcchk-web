@@ -13,7 +13,7 @@ import {
 // sm = 30em, md = 48em, lg = 62em, xl = 80em, 2xl = "96em"
 // sm = 480px, md = 768px, lg = 992px, xl = 1280px, 2xl = "1536px"
 const heroText = 'Transforming Lives,\nTransforming the World';
-const worshipText = 'WORSHIP IN-PERSON >';
+// const worshipText = 'WORSHIP IN-PERSON >';
 const churchText = 'CHURCH ONLINE >';
 const covidText = 'OUR LATEST COVID-19 POLICY >';
 

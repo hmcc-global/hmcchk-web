@@ -8,7 +8,7 @@ import {
   Box,
   Heading,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React from 'react';
 
 const StaffSection = (props) => {
   const { title, blurb } = props;
