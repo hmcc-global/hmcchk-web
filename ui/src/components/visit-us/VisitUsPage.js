@@ -1,25 +1,14 @@
 import {
-  AspectRatio,
   Box,
-  Center,
   Container,
-  Flex,
   Heading,
   Icon,
   Link,
-  LinkBox,
-  LinkOverlay,
-  Spacer,
   Text,
   VStack,
 } from '@chakra-ui/react';
 import { RiArrowRightLine, RiChat1Line } from 'react-icons/ri';
 import Faq from './Faq';
-
-const SUNDAY_CELEBRATION_LOCATION =
-  'Manulife Financial Centre Tower A, Shop 13, 1/F, Tower A, Kwun Tong';
-const SUNDAY_CELEBRATION_GOOGLE_MAPS_EMBED =
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.2102241954112!2d114.22135071553005!3d22.307887848255323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404014806001b5d%3A0x895969fc5cf86457!2sOrganize%20Kwun%20Tong!5e0!3m2!1sen!2shk!4v1628957852778!5m2!1sen!2shk';
 
 const VisitUsPage = (props) => {
   return (

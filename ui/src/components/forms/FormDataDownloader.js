@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { useForm } from "react-hook-form";
 import {
   Modal,
@@ -20,6 +20,7 @@ import { DateTime } from "luxon";
 
 const FormDataDownloader = (props) => {
   const { isOpen, setIsOpen, formId } = props;
+  // eslint-disable-next-line no-unused-vars
   const { register, reset, handleSubmit, setValue, formState } = useForm();
   const [isLoading, setIsLoading] = useState(false);
 

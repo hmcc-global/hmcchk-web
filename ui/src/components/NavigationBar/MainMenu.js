@@ -142,7 +142,6 @@ const MainMenu = ({ login, onClose }) => {
                   </Button>
                   <Button
                     onClick={onLogout}
-                    onClick={onClose}
                     marginBottom="5"
                     width="100%"
                     style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}

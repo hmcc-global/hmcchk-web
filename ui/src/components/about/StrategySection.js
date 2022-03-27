@@ -10,18 +10,6 @@ import {
 } from '@chakra-ui/react';
 
 const StrategySection = (props) => {
-  const sliderSettings = {
-    adaptiveHeight: true,
-    arrows: false,
-    centerMode: true,
-    dots: false,
-    focusOnSelect: true,
-    infinite: false,
-    slidesPerRow: 1,
-    speed: 500,
-    swipeToSlide: true,
-    variableWidth: true,
-  };
   const { title, blurb } = props;
   return (
     <Flex w="100%" direction="column">

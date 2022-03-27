@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text, chakra, Stack, Link } from "@chakra-ui/react";
+import { Box, Flex, Image, Text, chakra, Stack } from "@chakra-ui/react";
 
 // const scEventText = "Sunday Celebration: 10AM HKT in-person & Online";
 const scEventText =

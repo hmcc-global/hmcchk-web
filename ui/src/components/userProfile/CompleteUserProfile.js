@@ -27,7 +27,6 @@ import {
 } from "@chakra-ui/react";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import {
   campusList,

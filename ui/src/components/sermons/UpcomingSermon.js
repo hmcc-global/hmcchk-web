@@ -14,7 +14,6 @@ import { DateTime } from "luxon";
 
 const UpcomingSermon = ({ upcoming }) => {
   const [displayModal, setDisplayModal] = useState("none");
-  let today = DateTime.now();
   let upcomingSeries = "";
   let sermonImage = "";
   let sermonDesc = "";
@@ -22,8 +21,8 @@ const UpcomingSermon = ({ upcoming }) => {
   if (upcoming != null) {
     upcomingSeries = upcoming.filter((event) => {
       if (
-        event.time == "10:00 AM" &&
-        event.title.replace(/ .*/, "") == "Sunday"
+        event.time === "10:00 AM" &&
+        event.title.replace(/ .*/, "") === "Sunday"
       )
         return event;
     })[0];
