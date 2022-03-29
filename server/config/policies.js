@@ -15,47 +15,51 @@ module.exports.policies = {
    * (`true` allows public access)                                            *
    *                                                                          *
    ***************************************************************************/
-  "*": "isLoggedIn",
+  '*': 'isLoggedIn',
 
   // Public controllers
 
   // Announcements
-  "announcements/*": true,
+  'announcements/*': true,
 
   // Auth
-  "auth/post-login": true,
-  "auth/post-login-google": true,
-  "auth/post-signup": true,
-  "auth/post-signup-google": true,
-  "auth/verify-token": true,
-  "auth/post-confirm-email": true,
-  "auth/post-forgot-password": true,
-  "auth/post-change-password-recovery": true,
+  'auth/post-login': true,
+  'auth/post-login-google': true,
+  'auth/post-signup': true,
+  'auth/post-signup-google': true,
+  'auth/verify-token': true,
+  'auth/post-confirm-email': true,
+  'auth/post-forgot-password': true,
+  'auth/post-change-password-recovery': true,
 
   // Forms
-  "forms/post-contact-us-form": true,
+  'forms/post-contact-us-form': true,
 
   // Cache
-  "cache/*": ["isLoggedIn", "isAdmin"],
+  'cache/*': ['isLoggedIn', 'isAdmin'],
 
   // Forms
-  "forms/post-create-form": ["isLoggedIn", "isAdmin"],
-  "forms/post-update-form": ["isLoggedIn", "isAdmin"],
-  "forms/post-delete-form": ["isLoggedIn", "isAdmin"],
-  "forms/admin-get-form": ["isLoggedIn", "isAdmin"],
-  "forms/get-form": true,
-  "forms/post-create-submission": true,
-  "forms/get-submission": ["isLoggedIn", "isAdmin"],
+  'forms/post-create-form': ['isLoggedIn', 'isAdmin'],
+  'forms/post-update-form': ['isLoggedIn', 'isAdmin'],
+  'forms/post-delete-form': ['isLoggedIn', 'isAdmin'],
+  'forms/admin-get-form': ['isLoggedIn', 'isAdmin'],
+  'forms/get-form': true,
+  'forms/post-create-submission': true,
+  'forms/get-submission': ['isLoggedIn', 'isAdmin'],
 
   // Media
-  "media/*": true,
+  'media/*': true,
 
   // Misc
-  "misc/get-env": true,
+  'misc/get-env': true,
 
   // Pages
-  "pages/*": true,
+  'pages/*': true,
 
   // Sermons
-  "sermons/*": true,
+  'sermons/*': true,
+  //socialembed
+  //retreat
+  'socialembed/create-social-key': true,
+  'socialembed/get-social-key': true,
 };
