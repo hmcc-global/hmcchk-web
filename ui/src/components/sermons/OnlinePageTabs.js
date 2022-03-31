@@ -37,7 +37,7 @@ const OnlinePageTabs = ({ sermonNotes }) => {
         <Tab>New to HMCC</Tab>
       </TabList>
       <TabPanels h="100%">
-        <TabPanel h="100%" paddingBottom={0}>
+        <TabPanel h="100%">
           <Button
             mb={3}
             fontWeight="bold"
@@ -48,7 +48,7 @@ const OnlinePageTabs = ({ sermonNotes }) => {
           >
             <RepeatIcon />
           </Button>
-          <Box mb={5} height="100%">
+          <Box height="90%" paddingBottom={15}>
             <iframe
               key={noteId}
               title="Sermon Notes"
