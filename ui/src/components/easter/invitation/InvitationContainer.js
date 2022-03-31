@@ -50,7 +50,9 @@ const InvitationSection = () => {
             />
           </Flex>
         </Box>
-        <EmbedSocial />
+        <div id="SocialEmbed">
+        <EmbedSocial/>
+        </div>
         <Box>
           <Text
             fontSize={isNotSmallerScreen ? '32px' : '22px'}
