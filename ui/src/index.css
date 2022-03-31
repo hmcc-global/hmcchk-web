@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+html {
+  scroll-behavior: smooth !important;
+}
+
+
 @font-face {
   font-family: 'NextSoutherlandSerif';
   src: local('NextSoutherlandSerif'), url('./fonts/NextSoutherlandSerif.ttf') format('truetype');
