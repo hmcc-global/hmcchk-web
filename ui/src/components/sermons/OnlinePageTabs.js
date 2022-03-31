@@ -12,25 +12,32 @@ import {
   AccordionPanel,
   AccordionIcon,
   Box,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 
 const OnlinePageTabs = ({ sermonNotes }) => {
   const [noteId, setNoteId] = useState(0);
+  const [tab, setTab] = useState(0);
+  const isMobile = useBreakpointValue({ base: true, lg: false});
 
   const refreshSermonNotes = () => {
     setNoteId(noteId + 1);
   };
 
   return (
-    <Tabs isFitted>
+    <Tabs
+      isFitted
+      h="100%"
+      onChange={(i) => setTab(i)} overflowY={(tab ? 'auto' : 'hidden')}
+    >
       <TabList orientation="horizontal">
         <Tab>Sermon Notes</Tab>
         <Tab>New to HMCC</Tab>
       </TabList>
-      <TabPanels>
-        <TabPanel h="100%">
+      <TabPanels h="100%">
+        <TabPanel h="100%" paddingBottom={0}>
           <Button
             mb={3}
             fontWeight="bold"
@@ -41,14 +48,16 @@ const OnlinePageTabs = ({ sermonNotes }) => {
           >
             <RepeatIcon />
           </Button>
-          <Box mb={5}>
+          <Box mb={5} height="100%">
             <iframe
               key={noteId}
               title="Sermon Notes"
               src={sermonNotes}
-              style={{
+              width="100%"
+              style={ isMobile ? {
                 height: '100vh',
-                width: '100%'
+              } : {
+                height: '100%'
               }}
             ></iframe>
           </Box>

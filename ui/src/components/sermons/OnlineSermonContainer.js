@@ -139,10 +139,12 @@ const OnlineSermonContainer = (props) => {
               </Stack>
             </VStack>
           </Box>
-          <Box m="20px" w={{base: '100%', lg: '40%'}} overflowY="auto">
-            <OnlinePageTabs
-              sermonNotes={onlineSermon.sermonNotes}
-            />
+          <Box m="20px" w={{base: '100%', lg: '40%'}} overflowY="auto" position="relative">
+            <Box position={{base: 'unset', lg: 'absolute '}} top={{base: 'unset', lg: 0 }} left={{base: 'unset', lg: 0 }} w="100%" h="100%">
+              <OnlinePageTabs
+                sermonNotes={onlineSermon.sermonNotes}
+              />
+            </Box>
           </Box>
         </Container>
       )}
