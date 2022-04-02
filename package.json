@@ -6,8 +6,6 @@
   },
   "dependencies": {
     "react-google-recaptcha": "^2.1.0",
-    "react-scroll": "^1.8.6",
-    "react-scroll-to-component": "^1.0.2",
     "react-slick": "^0.28.1"
   }
 }
