@@ -55,7 +55,7 @@ const SermonCard = ({ sermonData, allSermons }) => {
     <Link
       style={sermonCardStyle}
       to={{
-        pathname: `/sermons/${sermonData.id}`,
+        pathname: (onlineSermon ? '/online' : `/sermons/${sermonData.id}`),
         state: { sermonData: sermonData, allSermons: allSermons },
       }}
     >
