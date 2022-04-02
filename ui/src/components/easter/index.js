@@ -16,7 +16,7 @@ const EasterContainer = (props) => {
       <Box
         w="100vw"
         //TODO: height still needs adjusting fort mobile
-        minH={['300em', '270em', '230em', '215em', '270em']}
+        minH={['480em', '290em', '360em', '215em', '270em']}
         position="relative"
       >
         {/* z index is 0, appear behind */}
