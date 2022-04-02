@@ -40,13 +40,13 @@ const EasterBanner = () => {
                 // width: "94%"
               }}
             >
-              <Box as='span'textStyle="NextSoutherlandSerif" fontSize={[10, 18]} whiteSpace="pre">
+              <Box as='span' textStyle="NextSoutherlandSerif" fontSize={[10, 18]} whiteSpace="pre">
                 {"CHECK OUT EASTER "}
               </Box>
-              <Box as='span'textStyle="FogtwoNo5" fontSize={[15, 26]} whiteSpace="pre" marginTop={[0, 0.5]}>
+              <Box as='span' textStyle="FogtwoNo5" fontSize={[15, 26]} whiteSpace="pre" marginTop={[0, 0.5]}>
                 2022
               </Box>
-              <Box as='span'textStyle="NextSoutherlandSerif" fontSize={[10, 18]} whiteSpace="pre">
+              <Box as='span' textStyle="NextSoutherlandSerif" fontSize={[10, 18]} whiteSpace="pre">
                 {" : BECAUSE "}
               </Box>
               <Box

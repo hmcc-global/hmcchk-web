@@ -28,8 +28,14 @@ import ScrollToTop from './helpers/ScrollToTop';
 import AboutUsContainer from './about/AboutUsContainer';
 import OnlineSermonContainer from './sermons/OnlineSermonContainer';
 import EasterContainer from './easter';
+import GoodFridayStreamContainer from './easter/streaming/GoodFridayStreamContainer';
+import { DateTime } from 'luxon';
 
 const MainContainer = () => {
+  const now = DateTime.local();
+  const goodFriDateStart = DateTime.local(2022, 4, 15);
+  const goodFriDateEnd = DateTime.local(2022, 4, 15, 23, 59, 59);
+
   return (
     <chakra.main
       maxH="100vh"
@@ -80,7 +86,7 @@ const MainContainer = () => {
           exact
           path={['/online']}
           permissions={['public']}
-          component={OnlineSermonContainer}
+          component={now > goodFriDateStart && now < goodFriDateEnd ? GoodFridayStreamContainer : OnlineSermonContainer}
         />
         <PrivateRoute
           exact
