@@ -1,4 +1,4 @@
-let path = require("path");
+let path = require('path');
 /**
  * Route Mappings
  * (sails.config.routes)
@@ -19,70 +19,70 @@ module.exports.routes = {
    *                                                                          *
    ***************************************************************************/
 
-  "get /api/cache/refresh-cache": "cache/refresh-cache",
-  "get /api/misc/get-env": "misc/get-env",
+  'get /api/cache/refresh-cache': 'cache/refresh-cache',
+  'get /api/misc/get-env': 'misc/get-env',
 
   // Forms APIs
-  "get /api/forms/get-form": "forms/get-form",
-  "get /api/forms/admin-get-form": "forms/admin-get-form",
-  "post /api/forms/post-create-form": "forms/post-create-form",
-  "post /api/forms/post-update-form": "forms/post-update-form",
-  "post /api/forms/post-delete-form": "forms/post-delete-form",
-  "post /api/forms/connect-with-us": "forms/post-contact-us-form",
+  'get /api/forms/get-form': 'forms/get-form',
+  'get /api/forms/admin-get-form': 'forms/admin-get-form',
+  'post /api/forms/post-create-form': 'forms/post-create-form',
+  'post /api/forms/post-update-form': 'forms/post-update-form',
+  'post /api/forms/post-delete-form': 'forms/post-delete-form',
+  'post /api/forms/connect-with-us': 'forms/post-contact-us-form',
 
   // Submission APIs
-  "post /api/forms/post-create-submission": "forms/post-create-submission",
-  "get /api/forms/get-submission": "forms/get-submission",
+  'post /api/forms/post-create-submission': 'forms/post-create-submission',
+  'get /api/forms/get-submission': 'forms/get-submission',
 
   // Announcement APIs
-  "get /api/announcements/get-announcements": "announcements/get-announcements",
+  'get /api/announcements/get-announcements': 'announcements/get-announcements',
 
   // Pages APIs
-  "get /api/pages/get-pages": "pages/get-pages",
+  'get /api/pages/get-pages': 'pages/get-pages',
 
   // Sermon APIs
-  "get /api/sermons/get-sermons": "sermons/get-sermons",
-  "get /api/sermons/get-speakers": "sermons/get-speakers",
-  "get /api/sermons/get-sermon-series": "sermons/get-sermon-series",
-  "get /api/sermons/get-service-types": "sermons/get-service-types",
+  'get /api/sermons/get-sermons': 'sermons/get-sermons',
+  'get /api/sermons/get-speakers': 'sermons/get-speakers',
+  'get /api/sermons/get-sermon-series': 'sermons/get-sermon-series',
+  'get /api/sermons/get-service-types': 'sermons/get-service-types',
 
   // Media APIs
-  "get /api/media/get-media": "media/get-media",
+  'get /api/media/get-media': 'media/get-media',
 
   // Auth APIs
-  "post /api/auth/login": "auth/post-login",
-  "post /api/auth/login-google": "auth/post-login-google",
-  "post /api/auth/signup": "auth/post-signup",
-  "post /api/auth/signup-google": "auth/post-signup-google",
-  "post /api/auth/confirm-email": "auth/post-confirm-email",
-  "post /api/auth/verify-token/": "auth/verify-token",
-  "post /api/auth/forgot-password": "auth/post-forgot-password",
-  "post /api/auth/change-password-recovery":
-    "auth/post-change-password-recovery",
+  'post /api/auth/login': 'auth/post-login',
+  'post /api/auth/login-google': 'auth/post-login-google',
+  'post /api/auth/signup': 'auth/post-signup',
+  'post /api/auth/signup-google': 'auth/post-signup-google',
+  'post /api/auth/confirm-email': 'auth/post-confirm-email',
+  'post /api/auth/verify-token/': 'auth/verify-token',
+  'post /api/auth/forgot-password': 'auth/post-forgot-password',
+  'post /api/auth/change-password-recovery':
+    'auth/post-change-password-recovery',
 
   // User APIs
-  "get /api/users/get": "users/get-user",
-  "put /api/users/update": "users/update-user",
-  "put /api/users/delete": "users/delete-user",
-  "post /api/users/change-password": "users/post-change-password",
+  'get /api/users/get': 'users/get-user',
+  'put /api/users/update': 'users/update-user',
+  'put /api/users/delete': 'users/delete-user',
+  'post /api/users/change-password': 'users/post-change-password',
 
   // Baptism APIs
-  "post /api/baptism/create": "baptisms/create-baptism",
-  "get /api/baptism/get": "baptisms/get-baptism",
-  "put /api/baptism/update": "baptisms/update-baptism",
-  "put /api/baptism/delete": "baptisms/delete-baptism",
+  'post /api/baptism/create': 'baptisms/create-baptism',
+  'get /api/baptism/get': 'baptisms/get-baptism',
+  'put /api/baptism/update': 'baptisms/update-baptism',
+  'put /api/baptism/delete': 'baptisms/delete-baptism',
 
   // Membership APIs
-  "post /api/membership/create": "memberships/create-membership",
-  "get /api/membership/get": "memberships/get-membership",
-  "put /api/membership/update": "memberships/update-membership",
-  "put /api/membership/delete": "memberships/delete-membership",
+  'post /api/membership/create': 'memberships/create-membership',
+  'get /api/membership/get': 'memberships/get-membership',
+  'put /api/membership/update': 'memberships/update-membership',
+  'put /api/membership/delete': 'memberships/delete-membership',
 
   // UI
-  "get /*": {
+  'get /*': {
     skipAssets: true,
     fn: function (req, res) {
-      res.sendFile(path.join(__dirname + "/../client/index.html"));
+      res.sendFile(path.join(__dirname + '/../client/index.html'));
     },
   },
 
