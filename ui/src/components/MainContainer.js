@@ -29,13 +29,27 @@ import AboutUsContainer from './about/AboutUsContainer';
 import OnlineSermonContainer from './sermons/OnlineSermonContainer';
 import EasterContainer from './easter';
 import GoodFridayStreamContainer from './easter/streaming/GoodFridayStreamContainer';
+import EasterStreamContainer from './easter/streaming/EasterStreamContainer';
 import { DateTime } from 'luxon';
 
-const MainContainer = () => {
+const getStreamContainer = (props) => {
   const now = DateTime.local();
   const goodFriDateStart = DateTime.local(2022, 4, 15);
   const goodFriDateEnd = DateTime.local(2022, 4, 15, 23, 59, 59);
 
+  const easterDateStart = DateTime.local(2022, 4, 17);
+  const easterDateEnd = DateTime.local(2022, 4, 17, 23, 59, 59);
+
+  if (now > goodFriDateStart && now < goodFriDateEnd) {
+    return GoodFridayStreamContainer;
+  } else if (now > easterDateStart && now < easterDateEnd) {
+    return EasterStreamContainer;
+  } else {
+    return OnlineSermonContainer;
+  }
+}
+
+const MainContainer = () => {
   return (
     <chakra.main
       maxH="100vh"
@@ -86,7 +100,7 @@ const MainContainer = () => {
           exact
           path={['/online']}
           permissions={['public']}
-          component={now > goodFriDateStart && now < goodFriDateEnd ? GoodFridayStreamContainer : OnlineSermonContainer}
+          component={getStreamContainer()}
         />
         <PrivateRoute
           exact
