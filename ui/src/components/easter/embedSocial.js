@@ -17,7 +17,7 @@ export const EmbedSocial = () => {
       <Box py="20px">
         <div
           class="embedsocial-hashtag"
-          data-ref="53b27a9390cbc945fc10174a67bec1b831b8b6ef"
+          data-ref="f88a3629618d517950b0e599bf2dec4a37d00511"
         ></div>
       </Box>
     </>
