@@ -78,10 +78,6 @@ module.exports.routes = {
   'put /api/membership/update': 'memberships/update-membership',
   'put /api/membership/delete': 'memberships/delete-membership',
 
-  //Social embed APIs
-  'post /api/socialembed/create': 'socialembed/create-social-key',
-  'get /api/socialembed/get': 'socialembed/get-social-key',
-
   // UI
   'get /*': {
     skipAssets: true,
