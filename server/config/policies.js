@@ -58,8 +58,4 @@ module.exports.policies = {
 
   // Sermons
   'sermons/*': true,
-  //socialembed
-  //retreat
-  'socialembed/create-social-key': true,
-  'socialembed/get-social-key': true,
 };
