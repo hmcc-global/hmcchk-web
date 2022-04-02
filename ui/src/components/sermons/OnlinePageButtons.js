@@ -12,12 +12,16 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-const OnlinePageButtons = () => {
+const OnlinePageButtons = (props) => {
+  const { isGoodFri } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  return (
-    <Stack direction={['column', 'row']}>
+  const GFConnectionButton = () => {
+    return (
       <Button
+        variant="outline"
+        bg="white"
+        color="#935963"
         width={['100%', '25%']}
         fontSize={['sm', 'md']}
         style={{
@@ -25,9 +29,56 @@ const OnlinePageButtons = () => {
           wordWrap: 'break-word',
         }}
         onClick={onOpen}
+        flex="auto"
+        textStyle="Quicksand"
       >
         Connection Issues
       </Button>
+    )
+  }
+
+  const GFPrayerButton = () => {
+    return (
+      <Button
+        bg="white"
+        variant="outline"
+        width={['100%', '25%']}
+        fontSize={['sm', 'md']}
+        style={{
+          whiteSpace: 'normal',
+          wordWrap: 'break-word',
+        }}
+        align="center"
+        as="a"
+        href="https://bit.ly/hmcc-prayer"
+        target="_blank"
+        flex="auto"
+        color="#935963"
+        textStyle="Quicksand"
+      >
+        Need Prayer?
+      </Button>
+    );
+  }
+
+
+  return (
+    <Stack direction={['column', 'row']}>
+      { isGoodFri ? (
+        <GFConnectionButton />
+      ) : (
+        <Button
+          width={['100%', '25%']}
+          fontSize={['sm', 'md']}
+          style={{
+            whiteSpace: 'normal',
+            wordWrap: 'break-word',
+          }}
+          onClick={onOpen}
+        >
+          Connection Issues
+        </Button>
+      )}
       <Modal size="2xl" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -63,43 +114,67 @@ const OnlinePageButtons = () => {
           <ModalFooter />
         </ModalContent>
       </Modal>
-      <Button
-        variant="outline"
-        width={['100%', '25%']}
-        fontSize={['sm', 'md']}
-        style={{
-          whiteSpace: 'normal',
-          wordWrap: 'break-word',
-        }}
-        align="center"
-        as="a"
-        href="https://bit.ly/hmcc-prayer"
-        target="_blank"
-      >
-        Need Prayer?
-      </Button>
-      <Button
-        width={['100%', '25%']}
-        bg="#0628A3"
-        color="white"
-        fontSize={['sm', 'md']}
-        as="a"
-        href="/give"
-        target="_blank"
-      >
-        Giving
-      </Button>
-      <Button
-        width={['100%', '25%']}
-        color="#0628A3"
-        fontSize={['sm', 'md']}
-        as="a"
-        href="/events"
-        target="_blank"
-        isTruncated
-      >
-        Events
-      </Button>
+      { isGoodFri ? (
+        <GFPrayerButton />
+      ) : (
+        <Button
+          variant="outline"
+          width={['100%', '25%']}
+          fontSize={['sm', 'md']}
+          style={{
+            whiteSpace: 'normal',
+            wordWrap: 'break-word',
+          }}
+          align="center"
+          as="a"
+          href="https://bit.ly/hmcc-prayer"
+          target="_blank"
+        >
+          Need Prayer?
+        </Button>
+      )}
+      { isGoodFri ? (
+        <Button
+          variant="outline"
+          width={['100%', '25%']}
+          color="#935963"
+          fontSize={['sm', 'md']}
+          as="a"
+          // TODO-aparedan: Put link to response form
+          href="/give"
+          target="_blank"
+          flex="auto"
+          textStyle="Quicksand"
+          bg="white"
+        >
+          Response Card
+        </Button>
+      ) : (
+        <>
+          <Button
+            width={['100%', '25%']}
+            bg="#0628A3"
+            color="white"
+            fontSize={['sm', 'md']}
+            as="a"
+            href="/give"
+            target="_blank"
+          >
+            Giving
+          </Button>
+          <Button
+            width={['100%', '25%']}
+            color="#0628A3"
+            fontSize={['sm', 'md']}
+            as="a"
+            href="/events"
+            target="_blank"
+            isTruncated
+          >
+            Events
+          </Button>
+        </>
+      )}
     </Stack>
   );
 };
