@@ -108,6 +108,7 @@ const GoodFridayStreamContainer = (props) => {
                 <Box position={{base: 'unset', lg: 'absolute '}} top={{base: 'unset', lg: 0 }} left={{base: 'unset', lg: 0 }} w="100%" h="100%">
                   <OnlinePageTabs
                     sermonNotes={onlineSermon.sermonNotes}
+                    isGoodFri
                   />
                 </Box>
               </Box>
