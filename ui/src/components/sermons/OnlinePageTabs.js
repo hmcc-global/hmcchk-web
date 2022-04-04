@@ -16,8 +16,10 @@ import {
 } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
+import GoodFridaySchedule from './schedules/GoodFridaySchedule';
+import EasterSchedule from './schedules/EasterSchedule';
 
-const OnlinePageTabs = ({ sermonNotes }) => {
+const OnlinePageTabs = ({ sermonNotes, isGoodFri, isEaster }) => {
   const [noteId, setNoteId] = useState(0);
   const [tab, setTab] = useState(0);
   const isMobile = useBreakpointValue({ base: true, lg: false});
@@ -25,6 +27,14 @@ const OnlinePageTabs = ({ sermonNotes }) => {
   const refreshSermonNotes = () => {
     setNoteId(noteId + 1);
   };
+
+  const renderScheduleTab = () => {
+    if (isGoodFri) {
+      return <GoodFridaySchedule />;
+    } else if (isEaster) {
+      return <EasterSchedule />;
+    }
+  }
 
   return (
     <Tabs
@@ -35,6 +45,7 @@ const OnlinePageTabs = ({ sermonNotes }) => {
       <TabList orientation="horizontal">
         <Tab>Sermon Notes</Tab>
         <Tab>New to HMCC</Tab>
+        {(isGoodFri || isEaster) && <Tab>Schedule</Tab>}
       </TabList>
       <TabPanels h="100%">
         <TabPanel h="100%">
@@ -146,6 +157,11 @@ const OnlinePageTabs = ({ sermonNotes }) => {
               </AccordionPanel>
             </AccordionItem>
           </Accordion>
+        </TabPanel>
+        <TabPanel h="100%">
+          <Box height="90%" paddingBottom={15}>
+            {(isGoodFri || isEaster) && renderScheduleTab()}
+          </Box>
         </TabPanel>
       </TabPanels>
     </Tabs>
