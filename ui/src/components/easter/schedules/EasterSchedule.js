@@ -34,7 +34,7 @@ const EasterSchedule = () => {
   ]
 
   return (
-    <Box>
+    <Box paddingBottom={2}>
       <Box textAlign="center">
         <Text
           color="#538EC7"
