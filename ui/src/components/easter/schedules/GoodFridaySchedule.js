@@ -14,7 +14,7 @@ const GoodFridaySchedule = () => {
   ]
 
   return (
-    <Box>
+    <Box paddingBottom={2}>
       <Box textAlign="center">
         <Text
           color="#935963"

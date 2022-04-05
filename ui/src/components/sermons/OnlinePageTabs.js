@@ -16,8 +16,8 @@ import {
 } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
-import GoodFridaySchedule from './schedules/GoodFridaySchedule';
-import EasterSchedule from './schedules/EasterSchedule';
+import GoodFridaySchedule from '../easter/schedules/GoodFridaySchedule';
+import EasterSchedule from '../easter/schedules/EasterSchedule';
 
 const OnlinePageTabs = ({ sermonNotes, isGoodFri, isEaster }) => {
   const [noteId, setNoteId] = useState(0);

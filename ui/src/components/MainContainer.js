@@ -32,7 +32,7 @@ import GoodFridayStreamContainer from './easter/streaming/GoodFridayStreamContai
 import EasterStreamContainer from './easter/streaming/EasterStreamContainer';
 import { DateTime } from 'luxon';
 
-const getStreamContainer = (props) => {
+const getStreamContainer = () => {
   const now = DateTime.local();
   const goodFriDateStart = DateTime.local(2022, 4, 15);
   const goodFriDateEnd = DateTime.local(2022, 4, 15, 23, 59, 59);
