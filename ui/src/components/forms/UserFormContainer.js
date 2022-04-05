@@ -37,7 +37,15 @@ const UserFormContainer = (props) => {
   let allowFormAccess = formData && filledInProfileCheck;
 
   return (
-    <Box w="100%" background="white">
+    <Box
+      w="100%"
+      background={
+        formData && formData.formName === 'Easter Celebration Response Form'
+          ? `url('${process.env.PUBLIC_URL}/images/easter/response/form-background.svg')`
+          : 'white'
+      }
+      bgPos="top"
+    >
       <Container maxW="container.md">
         {allowFormAccess &&
           (formData.formName === 'Easter Celebration Response Form' ? (

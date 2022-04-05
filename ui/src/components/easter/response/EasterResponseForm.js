@@ -1,68 +1,36 @@
 import {
   Box,
-  Text,
   Image,
   VStack,
-  Button,
   Input,
-  Select,
-  Checkbox,
-  Textarea,
+  FormErrorMessage,
   FormControl,
-  FormLabel,
+  Text,
 } from '@chakra-ui/react';
-import { useState, useEffect } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { customAxios as axios } from '../../helpers/customAxios';
-import { camelize, sentencize } from '../../helpers/formsHelpers';
-import { lifegroupList } from '../../helpers/lists';
+import { useState } from 'react';
+import ResponseForm from './ResponseForm';
 
 const EasterResponseForm = (props) => {
-  const { formId, formName, user, history } = props;
-  const { register, handleSubmit, reset, formState, setValue } = useForm();
-  const { errors } = formState;
+  const { formId, formName, user } = props;
+  const [passwordChecked, setPasswordChecked] = useState(false);
+  const [password, setPassword] = useState('');
+  const [isInvalid, setIsInvalid] = useState(false);
 
-  const [submissionData, setSubmissionData] = useState(null);
-  const [submitting, setSubmitting] = useState(false);
-
-  // Handle a form submission event
-  const handleSubmitForm = (data) => {
-    setSubmitting(true);
-    if (formId) setSubmissionData(data);
-    else console.log("this form doesn't support submission");
-  };
-
-  const postSubmission = async (formId, data, userId) => {
-    try {
-      const { status } = await axios.post('/api/forms/post-create-submission', {
-        formId: formId,
-        submissionData: data,
-        userId: userId,
-      });
-      if (status === 200) {
-        alert('Submission successful');
-        reset();
-        setSubmitting(false);
-      }
-    } catch (err) {
-      console.log(err);
-      setSubmitting(false);
+  const handlePasswordCheck = (e) => {
+    e.preventDefault();
+    if (password === 'becauseHelives') {
+      setIsInvalid(false);
+      setPasswordChecked(true);
+    } else {
+      setIsInvalid(true);
     }
   };
 
-  useEffect(() => {
-    if (submissionData) {
-      postSubmission(formId, submissionData, user.id);
-    } else if (!submissionData && user.id) {
-      setValue('fullName', user['fullName']);
-      setValue('email', user['email']);
-      setValue('lifeGroup', user['lifeGroup']);
-    }
-  }, [user, submissionData, formId, setValue]);
+  const handleChange = (e) => setPassword(e.target.value);
 
   return (
-    <Box pt="12" pb="12">
-      <VStack spacing={5}>
+    <Box pt="12" pb="12" minH="90vh">
+      <VStack spacing={7}>
         <Image
           key="formImage"
           boxSize="90%"
@@ -71,145 +39,45 @@ const EasterResponseForm = (props) => {
           src={`${process.env.PUBLIC_URL}/images/easter/response/because-ad-compressed.png`}
           borderRadius="3xl"
         />
-        <Box
-          fontSize={'2xl'}
-          textAlign="center"
-          color="#538EC7"
-          textStyle="NextSoutherlandSerif"
-          fontWeight="700"
-        >
-          {formName}
-        </Box>
-        <form
-          onSubmit={handleSubmit(handleSubmitForm)}
-          style={{ width: '100%' }}
-        >
-          <VStack spacing={5} w="100%" fontWeight="500">
-            <VStack w="100%">
-              <Text w="100%">I want to...</Text>
-              <VStack
-                w="100%"
-                bg="white"
-                borderRadius="md"
-                border="2px solid #E2E8F0"
-                p={[3, 7]}
-                align="left"
-                spacing={[3, 1]}
-              >
-                <Checkbox {...register('checkCommit')}>
-                  Commit to following Jesus Christ as my Lord and Savior for the
-                  first time
-                </Checkbox>
-                <Checkbox {...register('checkRecommit')}>
-                  Recommit to following and living for Jesus Christ
-                </Checkbox>
-                <Checkbox {...register('checkJoinHMCC')}>
-                  Sign-up for a LIFE Group and learn more about HMCC
-                </Checkbox>
-                <Checkbox {...register('checkInvestLG')}>
-                  Commit to investing in building up my LIFE Group
-                </Checkbox>
-                <Checkbox {...register('checkServeCity')}>
-                  Proactively find ways to serve the people in our city
-                </Checkbox>
-              </VStack>
-            </VStack>
-            <VStack w="100%">
-              <Text w="100%">
-                This is an open-ended response. For example: "Because God is
-                loving, I commit to sharing God's love with others in my
-                workplace."
-              </Text>
-              <VStack
-                w="100%"
-                bg="white"
-                borderRadius="md"
-                border="2px solid #E2E8F0"
-                px={['2%', '15%']}
-                py={['1%', '4%']}
-                fontWeight="500"
-                align="left"
-              >
-                <Textarea
-                  border="none"
-                  resize="none"
-                  defaultValue="Because __________ (character of God), I commit to __________ (action) in __________ (context)"
-                  _focus={{ border: '0px' }}
-                  {...register('openResponse')}
-                ></Textarea>
-              </VStack>
-            </VStack>
-            <VStack w="100%" spacing="5">
-              <FormControl isInvalid={errors['fullName']}>
-                <FormLabel>
-                  Full Name{' '}
-                  <Text as="span" color="red">
-                    *
-                  </Text>
-                </FormLabel>
-                <Input
-                  size="sm"
-                  borderRadius="md"
-                  fontWeight="700"
-                  {...register('fullName', {
-                    required: true,
-                  })}
-                />
-              </FormControl>
-              <FormControl isInvalid={errors['email']}>
-                <FormLabel>
-                  Email Address{' '}
-                  <Text as="span" color="red">
-                    *
-                  </Text>
-                </FormLabel>
-                <Input
-                  size="sm"
-                  borderRadius="md"
-                  fontWeight="700"
-                  {...register('email', {
-                    required: true,
-                    pattern: /^\S+@\S+$/i,
-                  })}
-                />
-              </FormControl>
-              <FormControl isInvalid={errors['lifeGroup']}>
-                <FormLabel>
-                  LIFE Group{' '}
-                  <Text as="span" color="red">
-                    *
-                  </Text>
-                </FormLabel>
-                <Select
-                  size="sm"
-                  borderRadius="md"
-                  fontWeight="700"
-                  {...register('lifeGroup', { required: true })}
-                >
-                  {lifegroupList.map((item) => {
-                    return <option key={'lg' + item}>{item}</option>;
-                  })}
-                </Select>
-              </FormControl>
-            </VStack>
-            <Button
-              px="10%"
-              py="3%"
-              type="submit"
-              isLoading={submitting}
-              border="1px solid #6E7F98"
-              bg="#E0EDFF"
+        {passwordChecked ? (
+          <ResponseForm formId={formId} formName={formName} user={user} />
+        ) : (
+          <>
+            <Box
+              fontSize={'2xl'}
+              textAlign="center"
+              color="#538EC7"
+              textStyle="NextSoutherlandSerif"
               fontWeight="700"
-              _hover={{
-                bg: '#004B81',
-                border: '1px solid #E0EDFF',
-                color: 'white',
-              }}
             >
-              SUBMIT
-            </Button>
-          </VStack>
-        </form>
+              Enter Password:
+            </Box>
+            <form onSubmit={handlePasswordCheck} style={{ width: '100%' }}>
+              <VStack w="100%">
+                <FormControl
+                  w="50%"
+                  textAlign="center"
+                  color="#538EC7"
+                  fontWeight="500"
+                >
+                  <Input
+                    variant="flushed"
+                    textAlign="center"
+                    fontWeight="500"
+                    borderColor="#538EC7"
+                    onChange={handleChange}
+                    mb={3}
+                  />
+                  {isInvalid ? (
+                    <Text>Please enter the correct password!</Text>
+                  ) : (
+                    <Text>(key in password and hit 'Enter')</Text>
+                  )}
+                </FormControl>
+              </VStack>
+            </form>
+          </>
+        )}
       </VStack>
     </Box>
   );
