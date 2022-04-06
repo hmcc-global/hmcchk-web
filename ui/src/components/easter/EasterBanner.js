@@ -96,17 +96,18 @@ const EasterBanner = () => {
               <Box
                 as="span"
                 textStyle="NextSoutherlandSerif"
-                fontSize={['xx-small', 'xs']}
-                fontWeight="bold"
+                fontSize={['xx-small', 'xs', 'small']}
+                fontWeight="extrabold"
               >
                 {currMode.content1}
               </Box>
               <Box
                 as="span"
                 textStyle="FogtwoNo5"
-                fontSize={['small', 'lg']}
+                fontSize={['sm', 'medium', 'lg']}
+                fontWeight="extrabold"
                 whiteSpace="pre"
-                paddingTop="0.15em"
+                paddingTop={['0em', '0.15em', '0.15em']}
                 display={isDisplay ? 'flex' : 'none'}
               >
                 {currMode.content2}
@@ -114,8 +115,8 @@ const EasterBanner = () => {
               <Box
                 as="span"
                 textStyle="NextSoutherlandSerif"
-                fontSize={['xx-small', 'xs']}
-                fontWeight="bold"
+                fontSize={['xx-small', 'xs', 'small']}
+                fontWeight="extrabold"
                 whiteSpace="pre"
               >
                 {currMode.content3}
@@ -123,8 +124,8 @@ const EasterBanner = () => {
               <Box
                 as="span"
                 textStyle="NextSoutherlandSerif"
-                fontSize={['xx-small', 'xs']}
-                fontWeight="bold"
+                fontSize={['xx-small', 'xs', 'small']}
+                fontWeight="extrabold"
                 whiteSpace="pre"
                 textDecoration={'underline'}
                 textUnderlineOffset={'0.2em'}
