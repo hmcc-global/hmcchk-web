@@ -1,71 +1,142 @@
-import {
-  Flex,
-  Center,
-  Button,
-  Link,
-  Box
-} from '@chakra-ui/react';
-import { useHistory } from "react-router-dom";
+import { Flex, Center, Button, Link, Box, HStack } from '@chakra-ui/react';
+import { useHistory } from 'react-router-dom';
 
+let IsSite = (array) => {
+  const Site = useHistory().location.pathname.includes(array.site);
+  return Site;
+};
 
 const EasterBanner = () => {
-  const isEasterSite = useHistory().location.pathname.includes("easter");
+  const isEasterSite = useHistory().location.pathname.includes('easter');
+  let currDate = new Date().toDateString().substr(0, 10);
+  const bannerMode = {
+    easter: {
+      background: '/images/easter/easter-banner.gif',
+      site: 'easter',
+      link: '/easter',
+      buttonColor: '',
+      hovertextColor: '',
+      hoverbgColor: '',
+      content1: 'CHECK OUT EASTER',
+      content2: '2022',
+      content3: ' : BECAUSE ',
+      content4: '              ',
+    },
+    GF: {
+      background: '/images/easter/GF-banner.gif',
+      site: 'good-friday',
+      link: '/good-friday',
+      buttonColor: '#7E465E',
+      hovertextColor: '#FFFFFF',
+      hoverbgColor: '#7E465E',
+      content1: 'Good Friday SERVICE ',
+      content2: ' ',
+      content3: ' : BECAUSE ',
+      content4: 'HE DIED',
+    },
 
+    EC: {
+      background: '/images/easter/EC-banner.gif',
+      site: 'easter-celebration',
+      link: '/easter-celebration',
+      buttonColor: '#004B81',
+      hovertextColor: '#FFFFFF',
+      hoverbgColor: '#004B81',
+      content1: 'EASTER CELEBRATION',
+      content2: ' ',
+      content3: ' : BECAUSE ',
+      content4: 'HE LIVES',
+    },
+  };
+  let currMode;
+  let isDisplay = false;
+
+  if (currDate === 'Sun Apr 17') {
+    currMode = bannerMode['EC'];
+  } else if (currDate === 'Fri Apr 15') {
+    currMode = bannerMode['GF'];
+  } else {
+    currMode = bannerMode['easter'];
+    isDisplay = true;
+  }
   return (
     <Flex
-    w="100vw"
-    bgImage={`url(${
-        process.env.PUBLIC_URL + "/images/easter/easter-banner.gif"
-    })`}
-    h="6vh"
-    p={2}
-    bgPosition="center"
-    bgSize="cover"
-    justify="center"
-    display={(isEasterSite) ? "none" : "flex"}
-  >
-    <Flex w="100vw" justify="space-around">
+      w="100vw"
+      bgImage={`url(${process.env.PUBLIC_URL + currMode.background})`}
+      h="6vh"
+      p={2}
+      bgPosition="center"
+      bgSize="cover"
+      justify="center"
+      display={IsSite(currMode) ? 'none' : 'flex'}
+    >
+      <Flex w="100vw" justify="space-around">
         <Center>
-          <Link href="/easter" style={{ lineHeight: '0', textDecoration: 'none' }}>
-            <Button
-              h="3.5vh"
-              lineHeight="0"
-              w="95%"
-              p={5}
-              backgroundColor="rgba(0,0,0,0)"
-              color="black"
-              borderRadius={0}
-              _hover={{
-                borderBottom: "2px",
-                // width: "94%"
-              }}
-            >
-              <Box as='span'textStyle="NextSoutherlandSerif" fontSize={[10, 18]} whiteSpace="pre">
-                {"CHECK OUT EASTER "}
-              </Box>
-              <Box as='span'textStyle="FogtwoNo5" fontSize={[15, 26]} whiteSpace="pre" marginTop={[0, 0.5]}>
-                2022
-              </Box>
-              <Box as='span'textStyle="NextSoutherlandSerif" fontSize={[10, 18]} whiteSpace="pre">
-                {" : BECAUSE "}
+          <Link href={currMode.link} _hover={{ borderBottom: '1px' }}>
+            <HStack h="100%" spacing="1">
+              <Button
+                size={['xx-small', 'xs']}
+                padding={1.5}
+                textStyle="NextSoutherlandSerif"
+                fontSize={['xx-small', 'xs']}
+                marginRight={'0.4em'}
+                backgroundColor={'transparent'}
+                borderColor={currMode.buttonColor}
+                textColor={currMode.buttonColor}
+                borderWidth={2}
+                borderRadius={'0.8em'}
+                display={isDisplay ? 'none' : 'flex'}
+                _hover={{
+                  backgroundColor: currMode.hoverbgColor,
+                  textColor: currMode.hovertextColor,
+                }}
+              >
+                WATCH NOW
+              </Button>
+              <Box
+                as="span"
+                textStyle="NextSoutherlandSerif"
+                fontSize={['xx-small', 'xs']}
+                fontWeight="bold"
+              >
+                {currMode.content1}
               </Box>
               <Box
-                as='span'
-                textStyle="NextSoutherlandSerif"
-                fontSize={18}
+                as="span"
+                textStyle="FogtwoNo5"
+                fontSize={['small', 'lg']}
                 whiteSpace="pre"
-                borderBottom="1px solid black"
-                position="relative"
-                top={2}
+                paddingTop="0.15em"
+                display={isDisplay ? 'flex' : 'none'}
               >
-                {"           "}
+                {currMode.content2}
               </Box>
-            </Button>
+              <Box
+                as="span"
+                textStyle="NextSoutherlandSerif"
+                fontSize={['xx-small', 'xs']}
+                fontWeight="bold"
+                whiteSpace="pre"
+              >
+                {currMode.content3}
+              </Box>
+              <Box
+                as="span"
+                textStyle="NextSoutherlandSerif"
+                fontSize={['xx-small', 'xs']}
+                fontWeight="bold"
+                whiteSpace="pre"
+                textDecoration={'underline'}
+                textUnderlineOffset={'0.2em'}
+              >
+                <u>{currMode.content4}</u>
+              </Box>
+            </HStack>
           </Link>
         </Center>
+      </Flex>
     </Flex>
-  </Flex>
-  )
-}
+  );
+};
 
 export default EasterBanner;
