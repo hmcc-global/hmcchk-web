@@ -1,24 +1,16 @@
-import {
-  Box,
-  Image,
-  VStack,
-  Input,
-  FormErrorMessage,
-  FormControl,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Image, VStack, Input, FormControl, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 import ResponseForm from './ResponseForm';
 
 const EasterResponseForm = (props) => {
-  const { formId, formName, user } = props;
+  const { formId, formName, user, history } = props;
   const [passwordChecked, setPasswordChecked] = useState(false);
   const [password, setPassword] = useState('');
   const [isInvalid, setIsInvalid] = useState(false);
 
   const handlePasswordCheck = (e) => {
     e.preventDefault();
-    if (password === 'becauseHelives') {
+    if (password === 'BHL2022') {
       setIsInvalid(false);
       setPasswordChecked(true);
     } else {
@@ -40,7 +32,12 @@ const EasterResponseForm = (props) => {
           borderRadius="3xl"
         />
         {passwordChecked ? (
-          <ResponseForm formId={formId} formName={formName} user={user} />
+          <ResponseForm
+            formId={formId}
+            formName={formName}
+            user={user}
+            history={history}
+          />
         ) : (
           <>
             <Box
