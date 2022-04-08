@@ -1,18 +1,23 @@
 import { Flex, Center, Button, Link, Box, HStack } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
+import { DateTime } from 'luxon';
 
-let IsSite = (array) => {
-  const Site = useHistory().location.pathname.includes(array.site);
-  return Site;
-};
+const IsSite = (array) => useHistory().location.pathname.includes(array.site);
 
 const EasterBanner = () => {
-  let currDate = new Date().toDateString().substr(0, 10);
+  const currDate = DateTime.local();
+
+  const goodFriDateStart = DateTime.local(2022, 4, 15);
+  const goodFriDateEnd = DateTime.local(2022, 4, 15, 23, 59, 59);
+
+  const easterDateStart = DateTime.local(2022, 4, 17);
+  const easterDateEnd = DateTime.local(2022, 4, 17, 23, 59, 59);
+
   const bannerMode = {
     easter: {
       background: '/images/easter/easter-banner.gif',
-      site: 'easter',
-      link: '/easter',
+      site: 'online',
+      link: '/online',
       buttonColor: '',
       hovertextColor: '',
       hoverbgColor: '',
@@ -23,8 +28,8 @@ const EasterBanner = () => {
     },
     GF: {
       background: '/images/easter/GF-banner.gif',
-      site: 'good-friday',
-      link: '/good-friday',
+      site: 'online',
+      link: '/online',
       buttonColor: '#7E465E',
       hovertextColor: '#FFFFFF',
       hoverbgColor: '#7E465E',
@@ -50,9 +55,9 @@ const EasterBanner = () => {
   let currMode;
   let isDisplay = false;
 
-  if (currDate === 'Sun Apr 17') {
+  if (currDate > easterDateStart && currDate < easterDateEnd) {
     currMode = bannerMode['EC'];
-  } else if (currDate === 'Fri Apr 15') {
+  } else if (currDate > goodFriDateStart && currDate < goodFriDateEnd) {
     currMode = bannerMode['GF'];
   } else {
     currMode = bannerMode['easter'];
