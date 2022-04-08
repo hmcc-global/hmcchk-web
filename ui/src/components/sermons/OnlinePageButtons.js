@@ -10,11 +10,17 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  OrderedList,
+  ListItem,
+  HStack,
+  Image,
+  useMediaQuery
 } from '@chakra-ui/react';
 
 const OnlinePageButtons = (props) => {
   const { isGoodFri, isEaster } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isDesktopMode] = useMediaQuery('(min-width:992px)');
 
   const GFConnectionButton = () => {
     return (
@@ -62,22 +68,76 @@ const OnlinePageButtons = (props) => {
   }
 
   const GFResponseCardButton = () => {
+    const { isOpen: isGFResponseOpen, onOpen: onGFResponseOpen, onClose: onGFResponseClose } = useDisclosure();
     return (
+      <>
+      <Modal size="6xl" isOpen={isGFResponseOpen} onClose={onGFResponseClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalCloseButton />
+          <ModalHeader textStyle="Quicksand">Good Friday: Response Time Instructions</ModalHeader>
+          <ModalBody textStyle="Quicksand">
+            In this response time, we will be using Miro - an online collaborative whiteboard platform!
+            <br/>
+
+            { !isDesktopMode && (
+              <span><b>NOTICE: </b> this response time is best experienced over a desktop!<br/></span>
+            )}
+
+            <br/>
+            <OrderedList>
+              <ListItem>
+                Please read this after the pastors give instructions. In the meantime, enjoy the Good Friday Service.
+              </ListItem>
+              <ListItem>
+                As we are going to the response time, please listen carefully to the stream for the instructions on how to
+                access the Miro board in your LIFE Group Gather and what you will be doing on Miro.
+              </ListItem>
+              <ListItem>
+                Here are some tips on how to navigate Miro: 
+                <OrderedList listStyleType="lower-alpha">
+                  <ListItem>
+                    Press N to get a Sticky Note
+                  </ListItem>
+                  <ListItem>
+                    Pick a color / Press directly on the board to paste a sticky note with a default color
+                  </ListItem>
+                  <ListItem>
+                    Press S to get a Shape
+                  </ListItem>
+                  <ListItem>
+                    Pick a shape of your choice and click on the board to paste it
+                  </ListItem>
+                </OrderedList>
+              </ListItem>
+            </OrderedList>
+
+            <br/>
+            { isDesktopMode && (
+              <HStack justifyContent="space-around">
+                <Image src={`${process.env.PUBLIC_URL}/images/easter/response/1.png`} width="14em" height="auto" />
+                <Image src={`${process.env.PUBLIC_URL}/images/easter/response/2.png`} width="14em" height="auto" />
+                <Image src={`${process.env.PUBLIC_URL}/images/easter/response/3.png`} width="14em" height="auto" />
+                <Image src={`${process.env.PUBLIC_URL}/images/easter/response/4.png`} width="14em" height="auto" />
+              </HStack>
+            )}
+          </ModalBody>
+          <ModalFooter />
+        </ModalContent>
+      </Modal>
       <Button
           variant="outline"
           width={['100%', '25%']}
           color="#935963"
           fontSize={['sm', 'md']}
-          as="a"
-          // TODO-aparedan: Put link to response form
-          href="/give"
-          target="_blank"
+          onClick={onGFResponseOpen}
           flex="auto"
           textStyle="Quicksand"
           bg="white"
         >
           Response Card
       </Button>
+      </>
     )
   }
 
