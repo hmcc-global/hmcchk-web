@@ -87,26 +87,32 @@ const OnlinePageButtons = (props) => {
             <br/>
             <OrderedList>
               <ListItem>
-                Please read this after the pastors give instructions. In the meantime, enjoy the Good Friday Service.
+                <b>Please read this after the pastors give instructions.</b> In the meantime, enjoy the Good Friday Service.
               </ListItem>
               <ListItem>
-                As we are going to the response time, please listen carefully to the stream for the instructions on how to
-                access the Miro board in your LIFE Group Gather and what you will be doing on Miro.
+                As we are going to the response time, <b>please listen carefully to the stream</b> for the instructions on how to 
+                <b> access the Miro board in your LIFE Group Gather</b> and <b>what you will be doing on Miro.</b>
               </ListItem>
               <ListItem>
-                Here are some tips on how to navigate Miro: 
-                <OrderedList listStyleType="lower-alpha">
+                <b>Here are some tips on how to navigate Miro:</b> 
+                <OrderedList listStyleType="circle">
                   <ListItem>
-                    Press N to get a Sticky Note
+                    To <b>zoom in/out</b> on the board, pinch your <b>trackpad</b> OR scroll on your <b>mouse.</b>
                   </ListItem>
                   <ListItem>
-                    Pick a color / Press directly on the board to paste a sticky note with a default color
+                    To <b>move around</b> on the board, hold the <b>spacebar</b> and <b>drag your cursor</b> around.
                   </ListItem>
                   <ListItem>
-                    Press S to get a Shape
+                    Press <b>N</b> to get a <b>Sticky Note.</b>
                   </ListItem>
                   <ListItem>
-                    Pick a shape of your choice and click on the board to paste it
+                    Pick a <b>color</b> and <b>click on the board</b> to paste the sticky note.
+                  </ListItem>
+                  <ListItem>
+                    Press <b>S</b> to get a <b>Shape.</b>
+                  </ListItem>
+                  <ListItem>
+                    Pick a shape of your choice and click on the board to paste it.
                   </ListItem>
                 </OrderedList>
               </ListItem>
