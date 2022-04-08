@@ -71,7 +71,7 @@ const OnlinePageButtons = (props) => {
     const { isOpen: isGFResponseOpen, onOpen: onGFResponseOpen, onClose: onGFResponseClose } = useDisclosure();
     return (
       <>
-      <Modal size="6xl" isOpen={isGFResponseOpen} onClose={onGFResponseClose}>
+      <Modal size="4xl" isOpen={isGFResponseOpen} onClose={onGFResponseClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
@@ -108,23 +108,15 @@ const OnlinePageButtons = (props) => {
                   <ListItem>
                     Pick a <b>color</b> and <b>click on the board</b> to paste the sticky note.
                   </ListItem>
-                  <ListItem>
-                    Press <b>S</b> to get a <b>Shape.</b>
-                  </ListItem>
-                  <ListItem>
-                    Pick a shape of your choice and click on the board to paste it.
-                  </ListItem>
                 </OrderedList>
               </ListItem>
             </OrderedList>
 
             <br/>
             { isDesktopMode && (
-              <HStack justifyContent="space-around">
-                <Image src={`${process.env.PUBLIC_URL}/images/easter/response/1.png`} width="14em" height="auto" />
-                <Image src={`${process.env.PUBLIC_URL}/images/easter/response/2.png`} width="14em" height="auto" />
-                <Image src={`${process.env.PUBLIC_URL}/images/easter/response/3.png`} width="14em" height="auto" />
-                <Image src={`${process.env.PUBLIC_URL}/images/easter/response/4.png`} width="14em" height="auto" />
+              <HStack justifyContent="space-evenly">
+                <Image src={`${process.env.PUBLIC_URL}/images/easter/response/1.png`} width="20em" height="auto" />
+                <Image src={`${process.env.PUBLIC_URL}/images/easter/response/2.png`} width="20em" height="auto" />
               </HStack>
             )}
           </ModalBody>
