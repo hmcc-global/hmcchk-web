@@ -191,8 +191,7 @@ const NavBar = (props) => {
         </Flex>
       </Flex>
 
-      {/* TODO-aparedan: Don't show Easter banner on GF Streaming page */}
-      {/* <EasterBanner /> */}
+      <EasterBanner />
       {currDate === 'Sun' && !isOnlineSermon ? (
         <Flex
           w="100vw"
