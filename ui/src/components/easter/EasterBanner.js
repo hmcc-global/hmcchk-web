@@ -10,8 +10,8 @@ const EasterBanner = () => {
   const goodFriDateStart = DateTime.local(2022, 4, 15);
   const goodFriDateEnd = DateTime.local(2022, 4, 15, 23, 59, 59);
 
-  const easterDateStart = DateTime.local(2022, 4, 9);
-  const easterDateEnd = DateTime.local(2022, 4, 9, 23, 59, 59);
+  const easterDateStart = DateTime.local(2022, 4, 17);
+  const easterDateEnd = DateTime.local(2022, 4, 17, 23, 59, 59);
 
   const bannerMode = {
     easter: {
