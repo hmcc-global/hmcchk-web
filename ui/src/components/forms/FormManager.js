@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { useHistory } from "react-router-dom";
-import { customAxios as axios } from "../helpers/customAxios";
-import FormCreator from "./FormCreator";
+import React, { useState, useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
+import { customAxios as axios } from '../helpers/customAxios';
+import FormCreator from './FormCreator';
 import {
   FormControl,
   FormLabel,
@@ -21,8 +21,8 @@ import {
   FormHelperText,
   Switch,
   Select,
-} from "@chakra-ui/react";
-import FormDataDownloader from "./FormDataDownloader";
+} from '@chakra-ui/react';
+import FormDataDownloader from './FormDataDownloader';
 
 const FormManager = (props) => {
   const { register, reset, handleSubmit, setValue, control, formState } =
@@ -50,12 +50,12 @@ const FormManager = (props) => {
   }, []);
 
   const setFormManagerElements = (data) => {
-    setValue("formName", data.formName);
-    setValue("formDescription", data.formDescription);
-    setValue("formImage", data.formImage);
-    setValue("requireLogin", data.requireLogin);
-    setValue("successEmailTemplate", data.successEmailTemplate);
-    setValue("customEmailSubject", data.customEmailSubject);
+    setValue('formName', data.formName);
+    setValue('formDescription', data.formDescription);
+    setValue('formImage', data.formImage);
+    setValue('requireLogin', data.requireLogin);
+    setValue('successEmailTemplate', data.successEmailTemplate);
+    setValue('customEmailSubject', data.customEmailSubject);
 
     // Update React State for child props
     setFormName(data.formName);
@@ -73,13 +73,13 @@ const FormManager = (props) => {
   const onEdit = async (e) => {
     try {
       setIsLoading(true);
-      const { data, status } = await axios.get("/api/forms/admin-get-form", {
+      const { data, status } = await axios.get('/api/forms/admin-get-form', {
         params: { id: e.target.value },
       });
 
       if (status !== 200) {
         alert(
-          "There was an issue with the request, please talk to a DB manager"
+          'There was an issue with the request, please talk to a DB manager'
         );
       }
 
@@ -92,14 +92,14 @@ const FormManager = (props) => {
   };
 
   const onClickRedirect = async (e) => {
-    history.push("/forms/" + e.target.value);
+    history.push('/forms/' + e.target.value);
   };
 
   const onDelete = async (e) => {
     try {
       setIsLoading(true);
-      if (window.confirm("Are you sure you want to delete this?")) {
-        await axios.post("/api/forms/post-delete-form", {
+      if (window.confirm('Are you sure you want to delete this?')) {
+        await axios.post('/api/forms/post-delete-form', {
           id: e.target.value,
         });
         await getFormListFromDatabase();
@@ -115,7 +115,7 @@ const FormManager = (props) => {
       setIsLoading(true);
       const id = e.target.value;
       const formData = formList.find((form) => form.id === id);
-      await axios.post("/api/forms/post-update-form", {
+      await axios.post('/api/forms/post-update-form', {
         id: id,
         formToSave: { isPublished: !formData.isPublished },
       });
@@ -133,12 +133,12 @@ const FormManager = (props) => {
 
   const resetFormEditorCallback = async () => {
     reset();
-    setValue("formName", null);
-    setValue("formDescription", null);
-    setValue("formImage", null);
-    setValue("requireLogin", true);
-    setValue("successEmailTemplate", null);
-    setValue("customEmailSubject", null);
+    setValue('formName', null);
+    setValue('formDescription', null);
+    setValue('formImage', null);
+    setValue('requireLogin', true);
+    setValue('successEmailTemplate', null);
+    setValue('customEmailSubject', null);
     setFormName(null);
     setFormDescription(null);
     setFormImage(null);
@@ -151,9 +151,9 @@ const FormManager = (props) => {
 
   const getFormListFromDatabase = async () => {
     try {
-      const { data, status } = await axios.get("/api/forms/admin-get-form");
+      const { data, status } = await axios.get('/api/forms/admin-get-form');
       if (status !== 200) {
-        throw Error("Something went wrong with the request");
+        throw Error('Something went wrong with the request');
       }
       setFormList(data);
     } catch (err) {
@@ -180,13 +180,13 @@ const FormManager = (props) => {
             <ListItem key={formItem.id}>
               <Box p="5" mb="2" borderRadius="lg" borderWidth="1px">
                 <Text mb="3">
-                  {" "}
-                  <Badge colorScheme={formItem.isPublished ? "green" : "red"}>
-                    {formItem.isPublished ? "LIVE" : "PRIVATE"}
-                  </Badge>{" "}
+                  {' '}
+                  <Badge colorScheme={formItem.isPublished ? 'green' : 'red'}>
+                    {formItem.isPublished ? 'LIVE' : 'PRIVATE'}
+                  </Badge>{' '}
                   {formItem.formName}
                 </Text>
-                <Stack direction={["column", "row"]} spacing={1}>
+                <Stack direction={['column', 'row']} spacing={1}>
                   <Button
                     colorScheme="teal"
                     onClick={onEdit}
@@ -201,7 +201,7 @@ const FormManager = (props) => {
                     value={formItem.id}
                     isLoading={isLoading}
                   >
-                    {formItem.isPublished ? "Unpublish" : "Publish"}
+                    {formItem.isPublished ? 'Unpublish' : 'Publish'}
                   </Button>
                   <Button
                     colorScheme="teal"
@@ -237,27 +237,27 @@ const FormManager = (props) => {
         </Heading>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing="5">
-            <FormControl isInvalid={errors["formName"]}>
+            <FormControl isInvalid={errors['formName']}>
               <FormLabel>Form Name</FormLabel>
               <Input
                 id="formName"
-                {...register("formName", { required: "Form name is required" })}
+                {...register('formName', { required: 'Form name is required' })}
               />
               <FormErrorMessage>
-                {errors["formName"] && "Form name is required"}
+                {errors['formName'] && 'Form name is required'}
               </FormErrorMessage>
             </FormControl>
-            <FormControl isInvalid={errors["formDescription"]}>
+            <FormControl isInvalid={errors['formDescription']}>
               <FormLabel>Form Description</FormLabel>
-              <Textarea id="formDescription" {...register("formDescription")} />
+              <Textarea id="formDescription" {...register('formDescription')} />
               <FormHelperText>
                 This field supports markdown. Just write it in somewhere else
                 and then paste it in and see the magic happen
               </FormHelperText>
             </FormControl>
-            <FormControl isInvalid={errors["formImage"]}>
+            <FormControl isInvalid={errors['formImage']}>
               <FormLabel>Form Image</FormLabel>
-              <Input id="formImage" {...register("formImage")} />
+              <Input id="formImage" {...register('formImage')} />
             </FormControl>
             <FormControl>
               <FormLabel>Require login?</FormLabel>
@@ -267,24 +267,25 @@ const FormManager = (props) => {
                 defaultValue={true}
                 render={({ field: { onChange, value, ref } }) => (
                   <Switch onChange={onChange} ref={ref} isChecked={value}>
-                    {value ? "Yes" : "No"}
+                    {value ? 'Yes' : 'No'}
                   </Switch>
                 )}
               />
             </FormControl>
-            <FormControl isInvalid={errors["successEmailTemplate"]}>
+            <FormControl isInvalid={errors['successEmailTemplate']}>
               <FormLabel>Select an email template</FormLabel>
-              <Select {...register("successEmailTemplate", { required: true })}>
+              <Select {...register('successEmailTemplate', { required: true })}>
                 <option value="form-default-success">Default</option>
                 <option value="form-retreat-success">Retreat</option>
+                <option value="form-ignite-success">!gnite</option>
               </Select>
               <FormErrorMessage>
-                {errors["successEmailTemplate"] && "Field type is required"}
+                {errors['successEmailTemplate'] && 'Field type is required'}
               </FormErrorMessage>
             </FormControl>
             <FormControl>
               <FormLabel>Custom Email Subject</FormLabel>
-              <Input {...register("customEmailSubject")} />
+              <Input {...register('customEmailSubject')} />
               <FormHelperText>
                 If you need a custom subject for the success email
               </FormHelperText>
