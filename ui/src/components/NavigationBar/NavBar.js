@@ -28,6 +28,7 @@ import { customAxios as axios } from '../helpers/customAxios';
 import MainMenu from './MainMenu';
 import { useHistory } from 'react-router-dom';
 import EasterBanner from '../easter/EasterBanner';
+import { DateTime } from 'luxon';
 
 const NavBar = (props) => {
   const isOnlineSermon = useHistory().location.pathname.includes("online");
@@ -70,7 +71,10 @@ const NavBar = (props) => {
     }
   }, []);
 
-  let currDate = new Date().toDateString().substr(0, 3);
+  const currDate = new DateTime.local();
+  const easterDateStart = DateTime.local(2022, 4, 17);
+  const easterDateEnd = DateTime.local(2022, 4, 17, 23, 59, 59);
+  const isEaster = currDate > easterDateStart && currDate < easterDateEnd;
 
   return (
     <>
@@ -191,8 +195,8 @@ const NavBar = (props) => {
         </Flex>
       </Flex>
 
-      <EasterBanner />
-      {currDate === 'Sun' && !isOnlineSermon ? (
+      { !isOnlineSermon && currDate < easterDateStart && <EasterBanner /> }
+      {currDate.weekdayShort === 'Sun' && !isOnlineSermon && !isEaster ? (
         <Flex
           w="100vw"
           background="#ffffff"
