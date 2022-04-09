@@ -7,10 +7,10 @@ const IsSite = (array) => useHistory().location.pathname.includes(array.site);
 const EasterBanner = () => {
   const currDate = DateTime.local();
 
-  const goodFriDateStart = DateTime.local(2022, 4, 15);
+  const goodFriDateStart = DateTime.local(2022, 4, 15, 19, 30);
   const goodFriDateEnd = DateTime.local(2022, 4, 15, 23, 59, 59);
 
-  const easterDateStart = DateTime.local(2022, 4, 17);
+  const easterDateStart = DateTime.local(2022, 4, 17, 10);
   const easterDateEnd = DateTime.local(2022, 4, 17, 23, 59, 59);
 
   const bannerMode = {
