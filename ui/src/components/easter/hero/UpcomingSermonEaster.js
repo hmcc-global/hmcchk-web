@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   AspectRatio,
   Box,
@@ -9,20 +9,18 @@ import {
   Image,
   Link,
   Text,
-} from "@chakra-ui/react";
-import { DateTime } from "luxon";
+} from '@chakra-ui/react';
+import { DateTime } from 'luxon';
 
 const UpcomingSermonEaster = ({ upcoming }) => {
-  
-  const [displayModal, setDisplayModal] = useState("none");
+  const [displayModal, setDisplayModal] = useState('none');
   let today = DateTime.now();
-  
-  
+
   //let goodFriday = DateTime("04/15/2022 19:25 AM")
-  let upcomingSeries = "Series";
-  let sermonImage = "Image";
-  let sermonDesc = "Desc";
-  let sermonTitle = "Title";
+  let upcomingSeries = 'Series';
+  let sermonImage = 'Image';
+  let sermonDesc = 'Desc';
+  let sermonTitle = 'Title';
   if (upcoming != null) {
     // upcomingSeries = upcoming.filter((event) => {
     //   if (
@@ -46,15 +44,15 @@ const UpcomingSermonEaster = ({ upcoming }) => {
           upcomingSeries.startDate
         ).plus({ days: 7 });
         let today = DateTime.now();
-        setDisplayModal(today >= upcomingSermonDateT7 ? "none" : "unset");
+        setDisplayModal(today >= upcomingSermonDateT7 ? 'none' : 'unset');
       } else {
-        setDisplayModal("none");
+        setDisplayModal('none');
       }
-    }, 2000);//time in ms
+    }, 2000); //time in ms
   }, [upcoming, upcomingSeries]);
 
   const closeModal = () => {
-    setDisplayModal("none");
+    setDisplayModal('none');
   };
 
   const WebView = () => {
@@ -65,40 +63,38 @@ const UpcomingSermonEaster = ({ upcoming }) => {
         top="10px"
         height="auto"
         maxW="85%"
-        width={{ base: "none", md: "200" }}
+        width={{ base: 'none', md: '200' }}
         background="#FFFFFF"
         boxShadow="0px 3px 4px 2px rgba(0, 0, 0, 0.3)"
         borderRadius="20px"
-        display={{ base: "none", md: displayModal }}
+        display={{ base: 'none', md: displayModal }}
         px={[2, 4]}
         py={[2, 4]}
         zIndex="sticky"
       >
         <Stack direction="column">
           <Stack direction="row" spacing="auto">
-         
-          <Text
-            fontSize="30"
-            marginTop="10px"
-            textStyle="Quicksand_bold"
-            color="#003984"
+            <Text
+              fontSize="30"
+              marginTop="10px"
+              textStyle="Quicksand_bold"
+              color="#003984"
             >
               The online Passion Experience page is now
               <Text
                 fontSize="40"
                 textStyle="Quicksand_bolder"
-                textDecorationLine= 'underline'
+                textDecorationLine="underline"
                 background="none"
-                paddingLeft='45%'>
+                paddingLeft="45%"
+              >
                 LIVE
-            </Text>
+              </Text>
             </Text>
             <CloseButton onClick={closeModal} size="sm" />
           </Stack>
           {/* <Text color="#0628A3">{sermonTitle}</Text> */}
-          <Stack direction="row">
-            
-          </Stack>
+          <Stack direction="row"></Stack>
           <Button
             alignSelf="center"
             height="auto"
@@ -111,13 +107,9 @@ const UpcomingSermonEaster = ({ upcoming }) => {
             borderRadius="10px"
             href="/online"
           >
-          <Text
-                fontSize="20"
-                textStyle="Quicksand_bold"
-            >
-                Check it out!
+            <Text fontSize="20" textStyle="Quicksand_bold">
+              Check it out!
             </Text>
-            
           </Button>
         </Stack>
       </Box>
@@ -129,11 +121,11 @@ const UpcomingSermonEaster = ({ upcoming }) => {
       <Box
         position="absolute"
         right="10px"
-        minH = "fit"
+        minH="fit"
         height="fit-content"
         width="90vw"
         background="#FFFFFF"
-        display={{ base: displayModal, md: "none" }}
+        display={{ base: displayModal, md: 'none' }}
         p="6"
         zIndex="sticky"
         boxShadow="0px 3px 4px 2px rgba(0, 0, 0, 0.3)"
@@ -143,74 +135,58 @@ const UpcomingSermonEaster = ({ upcoming }) => {
           <Stack direction="column" spacing={0}>
             <CloseButton onClick={closeModal} size="lg" alignSelf="flex-end" />
             <Text
-            fontSize="25"
-            marginTop="10px"
-            textStyle="Quicksand_bold"
-            color="#003984"
-            justifyContent={"center"}
-            display='inline-block'
+              fontSize="25"
+              marginTop="10px"
+              textStyle="Quicksand_bold"
+              color="#003984"
+              justifyContent={'center'}
+              textAlign="center"
             >
-              The online Passion Experience page is now
-              
-            </Text>
-            <Text
+              The online Passion Experience page is now{' '}
+              <Text
                 fontSize="40"
                 //paddingLeft = "35%"
                 textStyle="Quicksand_bolder"
-                textDecorationLine= 'underline'
+                textDecorationLine="underline"
+                display="inline"
                 color="#003984"
-                >
+              >
                 LIVE
+              </Text>
             </Text>
-            
-            <Box>
-              <Image src={process.env.PUBLIC_URL + '/images/easter/Hero_mobile_popup_sc.png'} />
-            </Box>
-           
           </Stack>
           <Center>
-          <Button
-            alignSelf="center"
-            height="auto"
-            as={Link}
-            p="2"
-            background="#537893"
-            top="2"
-            color="#ffffff"
-            width="80%"
-            backdropFilter="blur(6px)"
-            borderRadius="10px"
-            href="/online"
-          >
-          <Text
-            fontSize="20"
-            textStyle="Quicksand_bold"
-          >
+            <Button
+              alignSelf="center"
+              height="auto"
+              as={Link}
+              p="2"
+              background="#537893"
+              top="2"
+              color="#ffffff"
+              width="80%"
+              backdropFilter="blur(6px)"
+              borderRadius="10px"
+              href="/online"
+            >
+              <Text fontSize="20" textStyle="Quicksand_bold">
                 Check it out!
-            </Text>
-          </Button>
+              </Text>
+            </Button>
           </Center>
         </Stack>
       </Box>
     );
   };
 
-  let currDate = new Date()
-  const goodFriday = new Date('9 Apr 2022 11:30:00 UTC');//11:30 am UTC is 19:30 PM HKT
-  const easterSunday = new Date('17 Apr 2022 02:00:00 UTC');//2:30 am UTC is 10:00 AM HKT
+  let currDate = new Date('10 Apr 2022 11:30:00 UTC');
+  const goodFriday = new Date('9 Apr 2022 11:30:00 UTC'); //11:30 am UTC is 19:30 PM HKT
+  const easterSunday = new Date('17 Apr 2022 02:00:00 UTC'); //2:30 am UTC is 10:00 AM HKT
 
   return (
     <>
-    {currDate >= goodFriday?(
-      <WebView />
-    ):
-    null
-    }
-    {currDate >= goodFriday?(
-      <MobileView />
-    ):
-    null
-    }
+      {currDate >= goodFriday ? <WebView /> : null}
+      {currDate >= goodFriday ? <MobileView /> : null}
     </>
   );
 };
