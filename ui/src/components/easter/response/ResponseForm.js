@@ -42,10 +42,12 @@ const ResponseForm = (props) => {
         reset();
         setSubmitting(false);
         history.push('/easter/form-success');
-        window.open(
-          'https://www.google.com/maps/d/u/0/edit?hl=en&hl=en&mid=1EY4YEOU3Kcmz5kEHlcjLkh3fUSiBY7Qd&ll=22.368791195813237%2C114.1568863064498&z=11',
-          '_blank'
-        );
+        setTimeout(() => {
+          window.open(
+            'https://www.google.com/maps/d/u/0/edit?hl=en&hl=en&mid=1EY4YEOU3Kcmz5kEHlcjLkh3fUSiBY7Qd&ll=22.368791195813237%2C114.1568863064498&z=11',
+            '_blank'
+          );
+        }, 3000);
       }
     } catch (err) {
       console.log(err);
