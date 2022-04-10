@@ -32,7 +32,7 @@ import GoodFridayStreamContainer from './easter/streaming/GoodFridayStreamContai
 import EasterStreamContainer from './easter/streaming/EasterStreamContainer';
 import SuccessScreen from './easter/response/SuccessScreen';
 import GoodFridayHomeContainer from './easter/homepage/GoodFridayHomeContainer';
-import EasterCelebrationContainer from './homepage/Easter';
+import EasterCelebrationHomeContainer from './easter/homepage/EasterCelebrationHomeContainer';
 import { DateTime } from 'luxon';
 
 const getStreamContainer = () => {
@@ -51,7 +51,6 @@ const getStreamContainer = () => {
     return OnlineSermonContainer;
   }
 };
-import EasterCelebrationContainer from './homepage/Easter';
 
 const MainContainer = () => {
   return (
@@ -260,7 +259,7 @@ const MainContainer = () => {
           exact
           path="/easter-celebration"
           permissions={['public']}
-          component={EasterCelebrationContainer}
+          component={EasterCelebrationHomeContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={NoMatch} />
       </Switch>
