@@ -31,7 +31,7 @@ import EasterContainer from './easter';
 import GoodFridayStreamContainer from './easter/streaming/GoodFridayStreamContainer';
 import EasterStreamContainer from './easter/streaming/EasterStreamContainer';
 import SuccessScreen from './easter/response/SuccessScreen';
-import GoodFridayContainer from './homepage';
+import GoodFridayContainer from './easter/homepage/GoodFridayContainer';
 import { DateTime } from 'luxon';
 
 const getStreamContainer = () => {

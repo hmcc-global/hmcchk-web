@@ -1,5 +1,5 @@
 import { extendTheme } from '@chakra-ui/react';
-import "@fontsource/quicksand";
+import '@fontsource/quicksand';
 
 const easterTheme = extendTheme({
   textStyles: {
@@ -7,9 +7,13 @@ const easterTheme = extendTheme({
       fontFamily: 'NextSoutherlandSerif',
       fontWeight: 400,
     },
+    NextSoutherlandSerif_bold: {
+      fontFamily: 'NextSoutherlandSerif',
+      fontWeight: 700,
+    },
     FogtwoNo5: {
       fontFamily: 'FogtwoNo5',
-      fontWeight: 400
+      fontWeight: 400,
     },
     Quicksand: {
       fontFamily: 'Quicksand',
