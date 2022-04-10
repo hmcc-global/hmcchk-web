@@ -31,7 +31,7 @@ import EasterContainer from './easter';
 import GoodFridayStreamContainer from './easter/streaming/GoodFridayStreamContainer';
 import EasterStreamContainer from './easter/streaming/EasterStreamContainer';
 import SuccessScreen from './easter/response/SuccessScreen';
-import GoodFridayContainer from './easter/homepage/GoodFridayContainer';
+import GoodFridayHomeContainer from './easter/homepage/GoodFridayHomeContainer';
 import { DateTime } from 'luxon';
 
 const getStreamContainer = () => {
@@ -252,7 +252,7 @@ const MainContainer = () => {
           exact
           path="/good-friday"
           permissions={['public']}
-          component={GoodFridayContainer}
+          component={GoodFridayHomeContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={NoMatch} />
       </Switch>

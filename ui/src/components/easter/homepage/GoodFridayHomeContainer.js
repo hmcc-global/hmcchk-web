@@ -5,7 +5,7 @@ import { GiPartyPopper } from 'react-icons/gi';
 import { useMediaQuery } from '@chakra-ui/media-query';
 import { DateTime } from 'luxon';
 
-const GoodFridayContainer = () => {
+const GoodFridayHomeContainer = () => {
   const [isNotSmallerScreen] = useMediaQuery('(min-width:648px)');
 
   const getSessionStream = () => {
@@ -150,4 +150,4 @@ const GoodFridayContainer = () => {
   );
 };
 
-export default GoodFridayContainer;
+export default GoodFridayHomeContainer;
