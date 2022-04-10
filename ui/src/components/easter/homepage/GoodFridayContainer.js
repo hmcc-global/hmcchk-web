@@ -5,7 +5,7 @@ import { GiPartyPopper } from 'react-icons/gi';
 import { useMediaQuery } from '@chakra-ui/media-query';
 import { DateTime } from 'luxon';
 
-const HeroSection = () => {
+const GoodFridayContainer = () => {
   const [isNotSmallerScreen] = useMediaQuery('(min-width:648px)');
 
   const getSessionStream = () => {
@@ -31,9 +31,10 @@ const HeroSection = () => {
     >
       <SimpleGrid spacingY={isNotSmallerScreen ? '25%' : '35%'}>
         <Text
-          fontFamily={'NextSoutherlandSerif'}
+          // fontFamily={'NextSoutherlandSerif'}
+          // fontWeight={700}
+          textStyle="NextSoutherlandSerif_bold"
           fontSize={isNotSmallerScreen ? '72px' : '50px'}
-          fontWeight={700}
           lineHeight={['100%', '110%']}
           textColor={'#935963'}
           textAlign={'center'}
@@ -50,11 +51,10 @@ const HeroSection = () => {
             size="lg"
             w="100%"
             leftIcon={<AiOutlineDesktop />}
-            fontFamily={'Quicksand'}
+            textStyle="Quicksand_bolder"
             fontSize={['sm', 'md']}
             lineHeight="1.2"
             color="#FFFFFF"
-            fontWeight="700"
             bg="rgb(0, 0, 0, 0.17)"
             border="5px solid #ECD8B3"
             boxSizing="border-box"
@@ -91,11 +91,10 @@ const HeroSection = () => {
               leftIcon={<AiOutlineInstagram />}
               size="lg"
               w={isNotSmallerScreen ? ['32%', '42%'] : '100%'}
-              fontFamily={'Quicksand'}
+              textStyle="Quicksand_bolder"
               fontSize={['sm', 'md']}
               lineHeight="1.2"
               color="#FFFFFF"
-              fontWeight="700"
               bg="rgb(0, 0, 0, 0.17)"
               border="5px solid"
               borderColor="#E5B7B1"
@@ -127,11 +126,10 @@ const HeroSection = () => {
               leftIcon={<GiPartyPopper boxSize={20} />}
               size="lg"
               w={isNotSmallerScreen ? ['48%', '58%'] : '100%'}
-              fontFamily={'Quicksand'}
+              textStyle="Quicksand_bolder"
               fontSize={['sm', 'md']}
               lineHeight="1.2"
               color="#FFFFFF"
-              fontWeight="700"
               bg="rgb(0, 0, 0, 0.17)"
               border="5px solid #FFDCF0"
               boxSizing="border-box"
@@ -164,4 +162,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default GoodFridayContainer;
