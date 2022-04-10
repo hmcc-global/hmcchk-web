@@ -109,12 +109,6 @@ const GoodFridayContainer = () => {
               _focus={{
                 outline: 'none',
               }}
-              _disabled={{
-                cursor: 'not-allowed',
-                pointerEvents: 'none',
-                borderColor: '#D7D7D7',
-                color: '#D7D7D7',
-              }}
               as={Link}
               style={{ textDecoration: 'none' }}
               href="/easter#SocialEmbed"
@@ -142,12 +136,6 @@ const GoodFridayContainer = () => {
               }}
               _focus={{
                 outline: 'none',
-              }}
-              _disabled={{
-                cursor: 'not-allowed',
-                pointerEvents: 'none',
-                borderColor: '#D7D7D7',
-                color: '#D7D7D7',
               }}
               as={Link}
               style={{ textDecoration: 'none' }}
