@@ -31,8 +31,6 @@ const GoodFridayHomeContainer = () => {
     >
       <SimpleGrid spacingY={isNotSmallerScreen ? '25%' : '35%'}>
         <Text
-          // fontFamily={'NextSoutherlandSerif'}
-          // fontWeight={700}
           textStyle="NextSoutherlandSerif_bold"
           fontSize={isNotSmallerScreen ? '72px' : '50px'}
           lineHeight={['100%', '110%']}
