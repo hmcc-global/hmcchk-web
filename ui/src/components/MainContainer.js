@@ -30,6 +30,7 @@ import OnlineSermonContainer from './sermons/OnlineSermonContainer';
 import EasterContainer from './easter';
 import GoodFridayStreamContainer from './easter/streaming/GoodFridayStreamContainer';
 import EasterStreamContainer from './easter/streaming/EasterStreamContainer';
+import SuccessScreen from './easter/response/SuccessScreen';
 import { DateTime } from 'luxon';
 
 const getStreamContainer = () => {
@@ -239,6 +240,13 @@ const MainContainer = () => {
           path="/easter"
           permissions={['public']}
           component={EasterContainer}
+        />
+
+        <PrivateRoute
+          exact
+          path="/easter/form-success"
+          permissions={['public']}
+          component={SuccessScreen}
         />
         <PrivateRoute path="*" permissions={['public']} component={NoMatch} />
       </Switch>

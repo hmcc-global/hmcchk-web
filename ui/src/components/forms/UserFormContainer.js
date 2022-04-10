@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
 import Form from './Form';
-import { Container, Center, VStack, Text } from '@chakra-ui/react';
+import { Box, Container, Center, VStack, Text } from '@chakra-ui/react';
+import EasterResponseForm from '../easter/response/EasterResponseForm';
 
 const UserFormContainer = (props) => {
   const [formData, setFormData] = useState(null);
@@ -36,35 +37,56 @@ const UserFormContainer = (props) => {
   let allowFormAccess = formData && filledInProfileCheck;
 
   return (
-    <Container maxW="container.md">
-      {allowFormAccess && (
-        <Form
-          formId={formData.id}
-          formName={formData.formName}
-          formDescription={formData.formDescription}
-          formImage={formData.formImage}
-          formFields={formData.formFields}
-          user={user}
-          history={history}
-        />
-      )}
+    <Box
+      w="100%"
+      background={
+        formData && formData.formName === 'Easter Celebration Response Form'
+          ? `url('${process.env.PUBLIC_URL}/images/easter/response/form-background.svg')`
+          : 'white'
+      }
+      bgPos="top"
+    >
+      <Container maxW="container.md">
+        {allowFormAccess &&
+          (formData.formName === 'Easter Celebration Response Form' ? (
+            <EasterResponseForm
+              formId={formData.id}
+              formName={formData.formName}
+              formDescription={formData.formDescription}
+              formImage={formData.formImage}
+              formFields={formData.formFields}
+              user={user}
+              history={history}
+            />
+          ) : (
+            <Form
+              formId={formData.id}
+              formName={formData.formName}
+              formDescription={formData.formDescription}
+              formImage={formData.formImage}
+              formFields={formData.formFields}
+              user={user}
+              history={history}
+            />
+          ))}
 
-      {!isLoading && !allowFormAccess && (
-        <Center h="100vh">
-          <VStack>
-            <Text fontSize={['xl', '3xl']} spacing="5">
-              You are unable to access this form. Please see the message below
-              for instructions
-            </Text>
-            <Text fontSize={['lg', '2xl']} spacing="5">
-              {user.id && !user.hasFilledProfileForm
-                ? 'Please complete your user profile first before signing up'
-                : 'You need to be logged in to access this form or this form is currently unavailable!'}
-            </Text>
-          </VStack>
-        </Center>
-      )}
-    </Container>
+        {!isLoading && !allowFormAccess && (
+          <Center h="100vh">
+            <VStack>
+              <Text fontSize={['xl', '3xl']} spacing="5">
+                You are unable to access this form. Please see the message below
+                for instructions
+              </Text>
+              <Text fontSize={['lg', '2xl']} spacing="5">
+                {user.id && !user.hasFilledProfileForm
+                  ? 'Please complete your user profile first before signing up'
+                  : 'You need to be logged in to access this form or this form is currently unavailable!'}
+              </Text>
+            </VStack>
+          </Center>
+        )}
+      </Container>
+    </Box>
   );
 };
 
