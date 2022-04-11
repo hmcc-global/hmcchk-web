@@ -23,20 +23,24 @@ const GoodFridayHomeContainer = () => {
   return (
     <Flex
       w={['100%']}
-      h={['135vh', '110vh', '85vh']}
-      bgImage={`url(${'/images/goodfriday/bg.png'})`}
-      bgSize="cover"
-      bgPosition="center center"
+      h={['85vh']}
+      bgImage={{
+        base: `url(${'/images/goodfriday/bg-mobile.png'})`,
+        sm: `url(${'/images/goodfriday/bg.png'})`,
+        md: `url(${'/images/goodfriday/bg.png'})`,
+      }}
+      bgSize={['scale-down', 'cover']}
+      bgPosition={['center center']}
       justify="center"
     >
-      <SimpleGrid spacingY={isNotSmallerScreen ? '25%' : '35%'}>
+      <SimpleGrid spacingY={['30%', '25%', '25%']}>
         <Text
           textStyle="NextSoutherlandSerif_bold"
-          fontSize={isNotSmallerScreen ? '72px' : '50px'}
+          fontSize={['38px', '55px', '65px', '72px']}
           lineHeight={['100%', '110%']}
           textColor={'#935963'}
           textAlign={'center'}
-          marginTop={isNotSmallerScreen ? ['15%', '25%'] : '40%'}
+          marginTop={['20%', '30%', '25%']}
         >
           GOOD FRIDAY
           <br />
@@ -47,7 +51,7 @@ const GoodFridayHomeContainer = () => {
           <Button
             isDisabled={getSessionStream()}
             size="lg"
-            w="100%"
+            w={['100%']}
             leftIcon={<AiOutlineDesktop />}
             textStyle="Quicksand_bolder"
             fontSize={['sm', 'md']}
