@@ -23,20 +23,24 @@ const EasterCelebrationHomeContainer = () => {
   return (
     <Flex
       w={['100%']}
-      h={['135vh', '110vh', '85vh']}
-      bgImage={`url(${'/images/goodfriday/bg2.png'})`}
+      h={['85vh']}
+      bgImage={{
+        base: `url(${'/images/easter/bg-mobile.png'})`,
+        sm: `url(${'/images/easter/bg.png'})`,
+        md: `url(${'/images/easter/bg.png'})`,
+      }}
       bgSize="cover"
       bgPosition="center center"
       justify="center"
     >
-      <SimpleGrid spacingY={isNotSmallerScreen ? '25%' : '35%'}>
+      <SimpleGrid spacingY={['30%', '25%', '25%']}>
         <Text
           textStyle="NextSoutherlandSerif_bold"
-          fontSize={isNotSmallerScreen ? '72px' : '50px'}
+          fontSize={['38px', '55px', '65px', '72px']}
           lineHeight={['100%', '110%']}
           textColor={'#FFFFFF'}
           textAlign={'center'}
-          marginTop={isNotSmallerScreen ? ['15%'] : '40%'}
+          marginTop={['20%', '20%', '15%']}
         >
           EASTER
           <br />
