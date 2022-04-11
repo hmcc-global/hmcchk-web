@@ -18,13 +18,11 @@ import {
 import PopUp from './PopUp.js';
 
 const HeroContainer = () => {
-  const [events, setEvents] = useState([]);
-  const [onlineSermon, setOnlineSermon] = useState(false);
   const [isOpen, setOpen] = useState(false);
   
   return (
     <>
-      {<PopUp upcoming={events} />}
+    {<PopUp/>}
     
     <Box>
       <Box bgColor="white" height="auto"></Box>

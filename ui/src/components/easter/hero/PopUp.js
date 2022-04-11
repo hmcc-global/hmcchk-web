@@ -8,25 +8,14 @@ import {
   Link,
   Text,
 } from '@chakra-ui/react';
-import { DateTime } from 'luxon';
 
-const PopUp = ({ upcoming }) => {
+const PopUp = () => {
   const [displayModal, setDisplayModal] = useState('none');
-  let upcomingSeries = 'Series';
   useEffect(() => {
-    //set display to none if date +7 from start date
-    setTimeout(() => {
-      if (upcoming != null && upcomingSeries != null) {
-        let upcomingSermonDateT7 = DateTime.fromISO(
-          upcomingSeries.startDate
-        ).plus({ days: 7 });
-        let today = DateTime.now();
-        setDisplayModal(today >= upcomingSermonDateT7 ? 'none' : 'unset');
-      } else {
-        setDisplayModal('none');
-      }
-    }, 2000); //time in ms
-  }, [upcoming, upcomingSeries]);
+    setTimeout(() =>{
+      setDisplayModal('unset')
+    }, 2000)
+  },[]);
 
   const closeModal = () => {
     setDisplayModal('none');
