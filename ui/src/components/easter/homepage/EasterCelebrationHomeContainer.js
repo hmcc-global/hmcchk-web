@@ -115,7 +115,7 @@ const EasterCelebrationHomeContainer = () => {
               }}
               as={Link}
               style={{ textDecoration: 'none' }}
-              href="#SocialEmbed"
+              href="/easter/#SocialEmbed"
             >
               IG Campaign
             </Button>
