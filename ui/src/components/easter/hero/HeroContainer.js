@@ -1,6 +1,7 @@
 import 'react-modal-video/scss/modal-video.scss';
 import React, { useState } from 'react';
 import ModalVideo from 'react-modal-video';
+
 import {
   Container,
   Text,
@@ -14,13 +15,17 @@ import {
   Button,
   Center,
 } from '@chakra-ui/react';
+import PopUp from './PopUp.js';
 
 const HeroContainer = () => {
   const [isOpen, setOpen] = useState(false);
+  
   return (
+    <>
+    {<PopUp/>}
+    
     <Box>
       <Box bgColor="white" height="auto"></Box>
-
       <Box
         backgroundRepeat="no-repeat"
         bgSize="100%"
@@ -216,6 +221,7 @@ const HeroContainer = () => {
         </Container>
       </Box>
     </Box>
+    </>
   );
 };
 
