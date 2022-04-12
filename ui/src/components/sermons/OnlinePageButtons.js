@@ -192,8 +192,7 @@ const OnlinePageButtons = (props) => {
           color="#538EC7"
           fontSize={['sm', 'md']}
           as="a"
-          // TODO-aharjanto: Put link to response form
-          href="/give"
+          href="/forms/625237b6f9f5d31b6a9ad9e4"
           target="_blank"
           flex="auto"
           textStyle="Quicksand"
