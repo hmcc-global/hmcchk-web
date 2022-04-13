@@ -109,9 +109,8 @@ const ResponseForm = (props) => {
           </VStack>
           <VStack w="100%">
             <Text w="100%">
-              This is an open-ended response. For example: "Because God is
-              loving, I commit to sharing God's love with others in my
-              workplace."
+              This is an open-ended response. For example: "Because <u>God is loving, </u>
+              I commit to <u>sharing God's love with others</u> in <u>my workplace</u>."
             </Text>
             <VStack
               w="100%"
