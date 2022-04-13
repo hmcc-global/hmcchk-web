@@ -81,7 +81,7 @@ const SuccessScreen = () => {
           >
             THANK YOU! <br /> YOUR RESPONSE HAS BEEN SUCCESSFULLY SUBMITTED.
           </Box>
-          <VStack w={['100%', '60%']}>
+          <VStack w={['100%', '80%']}>
             <Image
               key="formImage"
               boxSize="100%"
@@ -99,11 +99,23 @@ const SuccessScreen = () => {
               src={`${process.env.PUBLIC_URL}/images/easter/response/mobile/${randomizedVerse.image}`}
               display={['block', 'none']}
             />
-            <Text textStyle="Quicksand_bolder" color="#538EC7" display={['none', 'block']} textAlign="center">
-              Right-click and save this image to set it as your wallpaper as a personal reminder!
+            <Text
+              textStyle="Quicksand_bolder"
+              color="#538EC7"
+              display={['none', 'block']}
+              textAlign="center"
+            >
+              Right-click and save this image to set it as your wallpaper as a
+              personal reminder!
             </Text>
-            <Text textStyle="Quicksand_bolder" color="#538EC7" display={['block', 'none']} textAlign="center">
-              Press-and-hold this image to save and set it as your wallpaper as a personal reminder!
+            <Text
+              textStyle="Quicksand_bolder"
+              color="#538EC7"
+              display={['block', 'none']}
+              textAlign="center"
+            >
+              Press-and-hold this image to save and set it as your wallpaper as
+              a personal reminder!
             </Text>
           </VStack>
           <Box
