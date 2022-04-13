@@ -7,8 +7,8 @@ const GoodFridaySchedule = () => {
   const rundown = [
     { name: "Opening Worship"},
     { name: "Sermon" },
-    { name: "Offering"},
     { name: "Response Time"},
+    { name: "Communion"},
     { name: "Closing Worship"},
     { name: "Announcements"}
   ]
