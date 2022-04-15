@@ -1,17 +1,15 @@
-import {
-  Box,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 
 const GoodFridaySchedule = () => {
   const rundown = [
-    { name: "Opening Worship"},
-    { name: "Sermon" },
-    { name: "Response Time"},
-    { name: "Communion"},
-    { name: "Closing Worship"},
-    { name: "Announcements"}
-  ]
+    { name: 'Greeting' },
+    { name: 'Opening Worship' },
+    { name: 'Sermon' },
+    { name: 'Response Time' },
+    { name: 'Communion' },
+    { name: 'Closing Worship' },
+    { name: 'Announcements' },
+  ];
 
   return (
     <Box paddingBottom={2}>
@@ -26,19 +24,22 @@ const GoodFridaySchedule = () => {
         </Text>
       </Box>
       {rundown.map((event) => (
-        <Box bgColor="#F2D4DE18" p={5} borderRadius={15} borderColor="#935963" borderWidth={1} marginBottom={5}>
-          <Text
-            color="black"
-            fontSize="sm"
-            textStyle="NextSoutherlandSerif"
-          >
+        <Box
+          bgColor="#F2D4DE18"
+          p={5}
+          borderRadius={15}
+          borderColor="#935963"
+          borderWidth={1}
+          marginBottom={5}
+        >
+          <Text color="black" fontSize="sm" textStyle="NextSoutherlandSerif">
             {event.name}
           </Text>
           {event.content}
         </Box>
       ))}
     </Box>
-  )
-}
+  );
+};
 
 export default GoodFridaySchedule;

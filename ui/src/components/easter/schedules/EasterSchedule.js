@@ -2,12 +2,11 @@ import { Box, Text } from '@chakra-ui/react';
 
 const EasterSchedule = () => {
   const rundown = [
-    { name: "Pastor's Greeting" },
+    { name: 'Greeting' },
     { name: 'Opening Worship' },
     { name: 'Announcements' },
-    { name: 'Offering' },
     {
-      name: 'Special Praise',
+      name: 'Offering / Special Praise',
       content: (
         <Box marginLeft={5} marginTop={2}>
           <Text color="black" fontSize="sm" textStyle="Quicksand">
