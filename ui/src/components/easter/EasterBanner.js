@@ -7,11 +7,12 @@ const IsSite = (array) => useHistory().location.pathname.includes(array.site);
 const EasterBanner = () => {
   const currDate = DateTime.local();
 
+  const goodFriDateStartDay = DateTime.local(2022, 4, 15);
   const goodFriDateStart = DateTime.local(2022, 4, 15, 19, 30);
   const goodFriDateEnd = DateTime.local(2022, 4, 15, 23, 59, 59);
 
   const easterDateStart = DateTime.local(2022, 4, 17, 10);
-  const easterDateEnd = DateTime.local(2022, 4, 17, 23, 59, 59);
+  const easterDateEnd = DateTime.local(2022, 4, 17, 13, 15);
 
   const bannerMode = {
     easter: {
@@ -25,6 +26,30 @@ const EasterBanner = () => {
       content2: '2022',
       content3: ' : BECAUSE ',
       content4: '              ',
+    },
+    goodFriday: {
+      background: '/images/easter/GF-banner.gif',
+      site: 'good-friday',
+      link: '/good-friday',
+      buttonColor: '#7E465E',
+      hovertextColor: '#FFFFFF',
+      hoverbgColor: '#7E465E',
+      content1: 'Checkout Good Friday Homepage',
+      content2: '',
+      content3: ': BECAUSE ',
+      content4: 'HE DIED',
+    },
+    easterSunday: {
+      background: '/images/easter/easter-banner.gif',
+      site: 'easter-celebration',
+      link: '/easter-celebration',
+      buttonColor: '#004B81',
+      hovertextColor: '#FFFFFF',
+      hoverbgColor: '#004B81',
+      content1: 'Checkout Easter Homepage',
+      content2: '',
+      content3: ': BECAUSE ',
+      content4: 'HE LIVES',
     },
     GF: {
       background: '/images/easter/GF-banner.gif',
@@ -57,8 +82,14 @@ const EasterBanner = () => {
 
   if (currDate > easterDateStart && currDate < easterDateEnd) {
     currMode = bannerMode['EC'];
+  } else if (currDate > goodFriDateEnd && currDate < easterDateEnd) {
+    currMode = bannerMode['easterSunday'];
+    isDisplay = true;
   } else if (currDate > goodFriDateStart && currDate < goodFriDateEnd) {
     currMode = bannerMode['GF'];
+  } else if (currDate > goodFriDateStartDay && currDate < goodFriDateEnd) {
+    currMode = bannerMode['goodFriday']
+    isDisplay = true;
   } else {
     currMode = bannerMode['easter'];
     isDisplay = true;
