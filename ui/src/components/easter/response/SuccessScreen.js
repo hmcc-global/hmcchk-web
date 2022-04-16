@@ -187,6 +187,24 @@ const SuccessScreen = () => {
               <u>Click here if you cannot edit the Google Map</u>
             </Link>
           </Text>
+          <Image
+            key="responseImage"
+            boxSize="100%"
+            height="auto"
+            objectFit="cover"
+            mb=""
+            src={`${process.env.PUBLIC_URL}/images/easter/response/easter_response_desktop.png`}
+            display={['none', 'block']}
+          />
+          <Image
+            key="responseImage"
+            boxSize="100%"
+            height="auto"
+            objectFit="cover"
+            mb=""
+            src={`${process.env.PUBLIC_URL}/images/easter/response/easter_response_mobile.png`}
+            display={['block', 'none']}
+          />
         </VStack>
       </Container>
     </Box>
