@@ -10,7 +10,7 @@ const EasterResponseForm = (props) => {
 
   const handlePasswordCheck = (e) => {
     e.preventDefault();
-    if (password === 'BECAUSE2022') {
+    if (password === 'because2022') {
       setIsInvalid(false);
       setPasswordChecked(true);
     } else {
