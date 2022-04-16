@@ -133,7 +133,7 @@ const SuccessScreen = () => {
               display={['block', 'none']}
               textAlign="center"
             >
-              Press-and-hold this image to save and set it as your wallpaper as
+              Press and hold this image to save and set it as your wallpaper as
               a personal reminder!
             </Text>
           </VStack>
@@ -147,64 +147,74 @@ const SuccessScreen = () => {
             {randomizedVerse.verse}
           </Box>
           <Divider colorScheme="#538EC7" />
-          <Text
-            textStyle="Quicksand_bolder"
-            color="#538EC7"
-            display={['block']}
-            textAlign="center"
-            fontSize="2xl"
-          >
-            Please follow the instructions from the pastor for the next part:
-          </Text>
-          <Button
-            px="10%"
-            py="3%"
-            border="1px solid #6E7F98"
-            bg="#E0EDFF"
-            as="a"
-            href="https://www.google.com/maps/d/u/0/edit?hl=en&hl=en&mid=1EY4YEOU3Kcmz5kEHlcjLkh3fUSiBY7Qd&ll=22.368791195813237%2C114.1568863064498&z=11"
-            target="_blank"
-            textStyle="NextSoutherlandSerif"
-            _hover={{
-              bg: '#004B81',
-              border: '1px solid #E0EDFF',
-              color: 'white',
-            }}
-          >
-            Google Map
-          </Button>
-          <Text
-            textStyle="Quicksand_bolder"
-            color="#538EC7"
-            display={['block']}
-            textAlign="center"
-          >
-            <Link
-              href="https://docs.google.com/forms/d/e/1FAIpQLSf0w_SAPIujq-s0PYq1tZUjWJgGzhRmjLpQfhFmm6zheJhW9A/viewform?hl=en"
-              isExternal
+          <VStack>
+            <Text
+              textStyle="Quicksand_bolder"
+              color="#538EC7"
+              display={['block']}
+              textAlign="center"
+              fontSize="2xl"
             >
-              <br />
-              <u>Click here if you cannot edit the Google Map</u>
-            </Link>
-          </Text>
-          <Image
-            key="responseImage"
-            boxSize="100%"
-            height="auto"
-            objectFit="cover"
-            mb=""
-            src={`${process.env.PUBLIC_URL}/images/easter/response/easter_response_desktop.png`}
-            display={['none', 'block']}
-          />
-          <Image
-            key="responseImage"
-            boxSize="100%"
-            height="auto"
-            objectFit="cover"
-            mb=""
-            src={`${process.env.PUBLIC_URL}/images/easter/response/easter_response_mobile.png`}
-            display={['block', 'none']}
-          />
+              Please follow the instructions from the pastor for the next part:
+            </Text>
+            <Text
+              textStyle="Quicksand_bolder"
+              color="#538EC7"
+              display={['block', 'none']}
+              textAlign="center"
+            >
+              Press and hold this button to open in a new tab
+            </Text>
+            <Button
+              px="10%"
+              py="3%"
+              border="1px solid #6E7F98"
+              bg="#E0EDFF"
+              as="a"
+              href="https://www.google.com/maps/d/u/0/edit?hl=en&hl=en&mid=1EY4YEOU3Kcmz5kEHlcjLkh3fUSiBY7Qd&ll=22.368791195813237%2C114.1568863064498&z=11"
+              target="_blank"
+              textStyle="NextSoutherlandSerif"
+              _hover={{
+                bg: '#004B81',
+                border: '1px solid #E0EDFF',
+                color: 'white',
+              }}
+            >
+              Google Map
+            </Button>
+            <Text
+              textStyle="Quicksand_bolder"
+              color="#538EC7"
+              display={['block']}
+              textAlign="center"
+            >
+              <Link
+                href="https://docs.google.com/forms/d/e/1FAIpQLSf0w_SAPIujq-s0PYq1tZUjWJgGzhRmjLpQfhFmm6zheJhW9A/viewform?hl=en"
+                isExternal
+              >
+                <br />
+                <u>Click here if you cannot edit the Google Map</u>
+              </Link>
+            </Text>
+            <Image
+              key="responseImage"
+              boxSize="100%"
+              height="auto"
+              objectFit="cover"
+              mb=""
+              src={`${process.env.PUBLIC_URL}/images/easter/response/easter_response_desktop.png`}
+              display={['none', 'block']}
+            />
+            <Image
+              key="responseImage"
+              boxSize="100%"
+              height="auto"
+              objectFit="cover"
+              mb=""
+              src={`${process.env.PUBLIC_URL}/images/easter/response/easter_response_mobile.png`}
+              display={['block', 'none']}
+            />
+          </VStack>
         </VStack>
       </Container>
     </Box>
