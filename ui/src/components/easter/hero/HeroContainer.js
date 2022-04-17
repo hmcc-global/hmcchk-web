@@ -22,7 +22,7 @@ const HeroContainer = () => {
   
   return (
     <>
-    {<PopUp/>}
+    <PopUp/>
     
     <Box>
       <Box bgColor="white" height="auto"></Box>
