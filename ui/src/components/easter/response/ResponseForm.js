@@ -42,12 +42,12 @@ const ResponseForm = (props) => {
         reset();
         setSubmitting(false);
         history.push('/easter/form-success');
-        setTimeout(() => {
-          window.open(
-            'https://www.google.com/maps/d/u/0/edit?hl=en&hl=en&mid=1EY4YEOU3Kcmz5kEHlcjLkh3fUSiBY7Qd&ll=22.368791195813237%2C114.1568863064498&z=11',
-            '_blank'
-          );
-        }, 3000);
+        // setTimeout(() => {
+        //   window.open(
+        //     'https://www.google.com/maps/d/u/0/edit?hl=en&hl=en&mid=1EY4YEOU3Kcmz5kEHlcjLkh3fUSiBY7Qd&ll=22.368791195813237%2C114.1568863064498&z=11',
+        //     '_blank'
+        //   );
+        // }, 3000);
       }
     } catch (err) {
       console.log(err);
@@ -79,7 +79,9 @@ const ResponseForm = (props) => {
       <form onSubmit={handleSubmit(handleSubmitForm)} style={{ width: '100%' }}>
         <VStack spacing={5} w="100%" fontWeight="500">
           <VStack w="100%">
-            <Text w="100%">I want to...</Text>
+            <Text w="100%">
+              I want to... <i>(Check the boxes that you want to commit to)</i>
+            </Text>
             <VStack
               w="100%"
               bg="white"
@@ -90,8 +92,8 @@ const ResponseForm = (props) => {
               spacing={[3, 1]}
             >
               <Checkbox {...register('checkCommit')}>
-                Commit to following Jesus Christ as my Lord and Savior for the
-                first time
+                Commit to following Jesus Christ as my Lord and Savior{' '}
+                <u>for the first time</u>
               </Checkbox>
               <Checkbox {...register('checkRecommit')}>
                 Recommit to following and living for Jesus Christ
@@ -109,9 +111,30 @@ const ResponseForm = (props) => {
           </VStack>
           <VStack w="100%">
             <Text w="100%">
-              This is an open-ended response. For example: "Because{' '}
-              <u>God is loving</u>, I commit to{' '}
-              <u>sharing God's love with others</u> in <u>my workplace</u>."
+              The following prompt is an open-ended response. <br />
+              <br />
+              In light of today's message, we saw 6 character traits of God:
+              <br />
+              - God shepherds us
+              <br />
+              - God attends to us
+              <br />
+              - God values us
+              <br />
+              - God interacts with us
+              <br />
+              - God overflows in us
+              <br />
+              - God reaches out to us
+              <br />
+              <br />
+              Choose one of the traits above and fill in your response below:
+              <br />
+              <i>
+                For example: "Because <u>God interacts with us</u>, I commit to{' '}
+                <u>interacting intentionally with others</u> in{' '}
+                <u>my workplace</u>."
+              </i>
             </Text>
             <VStack
               w="100%"
@@ -126,13 +149,17 @@ const ResponseForm = (props) => {
               <Textarea
                 border="none"
                 resize="none"
-                defaultValue="Because __________ (character of God), I commit to __________ (action) in __________ (context)"
+                defaultValue="Because __________ (trait of God), I commit to __________ (action) in __________ (context)"
                 _focus={{ border: '0px' }}
                 {...register('openResponse')}
               ></Textarea>
             </VStack>
           </VStack>
           <VStack w="100%" spacing="5">
+            <Text w="100%">
+              Please fill in your information so that we can follow up with you
+              on your commitments.
+            </Text>
             <FormControl isInvalid={errors['fullName']}>
               <FormLabel fontWeight="500">
                 Full Name{' '}
