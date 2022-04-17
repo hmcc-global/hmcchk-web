@@ -298,6 +298,19 @@ const OnlinePageButtons = (props) => {
         </ModalContent>
       </Modal>
       {renderPrayerButton()}
+      { isEaster && 
+        <Button
+          width={['100%', '25%']}
+          bg="#0628A3"
+          color="white"
+          fontSize={['sm', 'md']}
+          as="a"
+          href="/give"
+          target="_blank"
+        >
+          Giving
+        </Button>
+      }
       { (isGoodFri || isEaster) ?
         renderResponseCard()
       : (
