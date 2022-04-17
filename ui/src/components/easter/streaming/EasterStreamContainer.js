@@ -48,15 +48,15 @@ const EasterStreamContainer = (props) => {
 
   return (
     <Box
-      w="100%" 
+      w="100%"
       bgImage={`url(${
-          process.env.PUBLIC_URL + "/images/easter/easter-streaming.gif"
+        process.env.PUBLIC_URL + '/images/easter/easter-streaming.gif'
       })`}
       bgPosition="center"
       bgSize="cover"
     >
-      { onlineSermon && (
-        <Container maxW={{base: '100%', lg: '85%' }}>
+      {onlineSermon && (
+        <Container maxW={{ base: '100%', lg: '85%' }}>
           <VStack pt={3}>
             <Link href="/easter" alignSelf="baseline">
               <Button
@@ -71,22 +71,32 @@ const EasterStreamContainer = (props) => {
                 Return to Easter Stream Homepage
               </Button>
             </Link>
-            <Box display="flex" flexDirection={{base: 'column', lg: 'row'}} alignItems={{base: 'center', lg: 'unset'}} w="100%">
-              <Box mb="20px" w={{base: '100%', lg: '60%'}}>
+            <Box
+              display="flex"
+              flexDirection={{ base: 'column', lg: 'row' }}
+              alignItems={{ base: 'center', lg: 'unset' }}
+              w="100%"
+            >
+              <Box mb="20px" w={{ base: '100%', lg: '60%' }}>
                 <VStack alignItems="left" alignContent="left">
                   <AspectRatio mb="5" width="100%" ratio={16 / 9}>
                     <iframe
                       width="560"
                       height="315"
                       src={onlineSermon.streamLink}
-                    title="Video player"
+                      title="Video player"
                       frameBorder="0"
                       allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay;"
                       allowFullScreen
                     ></iframe>
                   </AspectRatio>
 
-                  <Text color="#538EC7" textStyle="NextSoutherlandSerif" fontSize={{ base: 'xl', md: '2xl' }} mb="0.5rem !important">
+                  <Text
+                    color="#538EC7"
+                    textStyle="NextSoutherlandSerif"
+                    fontSize={{ base: 'xl', md: '2xl' }}
+                    mb="0.5rem !important"
+                  >
                     {onlineSermon.title}
                   </Text>
                   <Stack spacing={8}>
@@ -98,14 +108,31 @@ const EasterStreamContainer = (props) => {
                       >
                         Description:
                       </Text>
-                      <Text color="#538EC7" textStyle="Quicksand">{onlineSermon.sermonDesc}</Text>
+                      <Text color="#538EC7" textStyle="Quicksand">
+                        {onlineSermon.sermonDesc}
+                      </Text>
                     </Box>
-                    <OnlinePageButtons isEaster={true}/>
+                    <OnlinePageButtons isEaster={true} />
                   </Stack>
                 </VStack>
               </Box>
-              <Box bg="white" ml={{base: '0px', lg: '20px' }} mb="20px" w={{base: '100%', lg: '40%'}} overflowY="auto" position="relative" borderRadius={10} boxShadow="0px 4px 18px rgba(0, 0, 0, 0.25)">
-                <Box position={{base: 'unset', lg: 'absolute '}} top={{base: 'unset', lg: 0 }} left={{base: 'unset', lg: 0 }} w="100%" h="100%">
+              <Box
+                bg="white"
+                ml={{ base: '0px', lg: '20px' }}
+                mb="20px"
+                w={{ base: '100%', lg: '40%' }}
+                overflowY="auto"
+                position="relative"
+                borderRadius={10}
+                boxShadow="0px 4px 18px rgba(0, 0, 0, 0.25)"
+              >
+                <Box
+                  position={{ base: 'unset', lg: 'absolute ' }}
+                  top={{ base: 'unset', lg: 0 }}
+                  left={{ base: 'unset', lg: 0 }}
+                  w="100%"
+                  h="100%"
+                >
                   <OnlinePageTabs
                     sermonNotes={onlineSermon.sermonNotes}
                     isEaster

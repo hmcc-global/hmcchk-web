@@ -14,7 +14,7 @@ import {
   ListItem,
   HStack,
   Image,
-  useMediaQuery
+  useMediaQuery,
 } from '@chakra-ui/react';
 
 const OnlinePageButtons = (props) => {
@@ -40,8 +40,8 @@ const OnlinePageButtons = (props) => {
       >
         Connection Issues
       </Button>
-    )
-  }
+    );
+  };
 
   const GFPrayerButton = () => {
     return (
@@ -65,65 +65,90 @@ const OnlinePageButtons = (props) => {
         Need Prayer?
       </Button>
     );
-  }
+  };
 
   const GFResponseCardButton = () => {
-    const { isOpen: isGFResponseOpen, onOpen: onGFResponseOpen, onClose: onGFResponseClose } = useDisclosure();
+    const {
+      isOpen: isGFResponseOpen,
+      onOpen: onGFResponseOpen,
+      onClose: onGFResponseClose,
+    } = useDisclosure();
     return (
       <>
-      <Modal size="4xl" isOpen={isGFResponseOpen} onClose={onGFResponseClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalCloseButton />
-          <ModalHeader textStyle="Quicksand">Good Friday: Response Time Instructions</ModalHeader>
-          <ModalBody textStyle="Quicksand">
-            In this response time, we will be using Miro - an online collaborative whiteboard platform!
-            <br/>
-
-            { !isDesktopMode && (
-              <span><b>NOTICE: </b> this response time is best experienced over a desktop!<br/></span>
-            )}
-
-            <br/>
-            <OrderedList>
-              <ListItem>
-                <b>Please read this after the pastors give instructions.</b> In the meantime, enjoy the Good Friday Service.
-              </ListItem>
-              <ListItem>
-                As we are going to the response time, <b>please listen carefully to the stream</b> for the instructions on how to 
-                <b> access the Miro board in your LIFE Group Gather</b> and <b>what you will be doing on Miro.</b>
-              </ListItem>
-              <ListItem>
-                <b>Here are some tips on how to navigate Miro:</b> 
-                <OrderedList listStyleType="circle">
-                  <ListItem>
-                    To <b>zoom in/out</b> on the board, pinch your <b>trackpad</b> OR scroll on your <b>mouse.</b>
-                  </ListItem>
-                  <ListItem>
-                    To <b>move around</b> on the board, hold the <b>spacebar</b> and <b>drag your cursor</b> around.
-                  </ListItem>
-                  <ListItem>
-                    Press <b>N</b> to get a <b>Sticky Note.</b>
-                  </ListItem>
-                  <ListItem>
-                    Pick a <b>color</b> and <b>click on the board</b> to paste the sticky note.
-                  </ListItem>
-                </OrderedList>
-              </ListItem>
-            </OrderedList>
-
-            <br/>
-            { isDesktopMode && (
-              <HStack justifyContent="space-evenly">
-                <Image src={`${process.env.PUBLIC_URL}/images/easter/response/1.png`} width="20em" height="auto" />
-                <Image src={`${process.env.PUBLIC_URL}/images/easter/response/2.png`} width="20em" height="auto" />
-              </HStack>
-            )}
-          </ModalBody>
-          <ModalFooter />
-        </ModalContent>
-      </Modal>
-      <Button
+        <Modal size="4xl" isOpen={isGFResponseOpen} onClose={onGFResponseClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalCloseButton />
+            <ModalHeader textStyle="Quicksand">
+              Good Friday: Response Time Instructions
+            </ModalHeader>
+            <ModalBody textStyle="Quicksand">
+              In this response time, we will be using Miro - an online
+              collaborative whiteboard platform!
+              <br />
+              {!isDesktopMode && (
+                <span>
+                  <b>NOTICE: </b> this response time is best experienced over a
+                  desktop!
+                  <br />
+                </span>
+              )}
+              <br />
+              <OrderedList>
+                <ListItem>
+                  <b>Please read this after the pastors give instructions.</b>{' '}
+                  In the meantime, enjoy the Good Friday Service.
+                </ListItem>
+                <ListItem>
+                  As we are going to the response time,{' '}
+                  <b>please listen carefully to the stream</b> for the
+                  instructions on how to
+                  <b>
+                    {' '}
+                    access the Miro board in your LIFE Group Gather
+                  </b> and <b>what you will be doing on Miro.</b>
+                </ListItem>
+                <ListItem>
+                  <b>Here are some tips on how to navigate Miro:</b>
+                  <OrderedList listStyleType="circle">
+                    <ListItem>
+                      To <b>zoom in/out</b> on the board, pinch your{' '}
+                      <b>trackpad</b> OR scroll on your <b>mouse.</b>
+                    </ListItem>
+                    <ListItem>
+                      To <b>move around</b> on the board, hold the{' '}
+                      <b>spacebar</b> and <b>drag your cursor</b> around.
+                    </ListItem>
+                    <ListItem>
+                      Press <b>N</b> to get a <b>Sticky Note.</b>
+                    </ListItem>
+                    <ListItem>
+                      Pick a <b>color</b> and <b>click on the board</b> to paste
+                      the sticky note.
+                    </ListItem>
+                  </OrderedList>
+                </ListItem>
+              </OrderedList>
+              <br />
+              {isDesktopMode && (
+                <HStack justifyContent="space-evenly">
+                  <Image
+                    src={`${process.env.PUBLIC_URL}/images/easter/response/1.png`}
+                    width="20em"
+                    height="auto"
+                  />
+                  <Image
+                    src={`${process.env.PUBLIC_URL}/images/easter/response/2.png`}
+                    width="20em"
+                    height="auto"
+                  />
+                </HStack>
+              )}
+            </ModalBody>
+            <ModalFooter />
+          </ModalContent>
+        </Modal>
+        <Button
           variant="outline"
           width={['100%', '25%']}
           color="#935963"
@@ -134,10 +159,10 @@ const OnlinePageButtons = (props) => {
           bg="white"
         >
           Response Card
-      </Button>
+        </Button>
       </>
-    )
-  }
+    );
+  };
 
   const EasterConnectionButton = () => {
     return (
@@ -157,8 +182,8 @@ const OnlinePageButtons = (props) => {
       >
         Connection Issues
       </Button>
-    )
-  }
+    );
+  };
 
   const EasterPrayerButton = () => {
     return (
@@ -182,26 +207,31 @@ const OnlinePageButtons = (props) => {
         Need Prayer?
       </Button>
     );
-  }
+  };
 
   const EasterResponseCardButton = () => {
     return (
       <Button
-          variant="outline"
-          width={['100%', '25%']}
-          color="#538EC7"
-          fontSize={['sm', 'md']}
-          as="a"
-          href="/forms/625237b6f9f5d31b6a9ad9e4"
-          target="_blank"
-          flex="auto"
-          textStyle="Quicksand"
-          bg="white"
-        >
-          Response Card
+        variant="outline"
+        width={['100%', '25%']}
+        color="white"
+        fontSize={['sm', 'md']}
+        as="a"
+        href="/forms/625237b6f9f5d31b6a9ad9e4"
+        target="_blank"
+        flex="auto"
+        textStyle="Quicksand"
+        bg="#004B81"
+        _hover={{
+          bg: '#E0EDFF',
+          border: '1px solid #E0EDFF',
+          color: '#004B81',
+        }}
+      >
+        Response Card
       </Button>
-    )
-  }
+    );
+  };
 
   const renderConnectionButton = () => {
     if (isGoodFri) {
@@ -221,9 +251,9 @@ const OnlinePageButtons = (props) => {
         >
           Connection Issues
         </Button>
-      )
+      );
     }
-  }
+  };
 
   const renderPrayerButton = () => {
     if (isGoodFri) {
@@ -247,9 +277,9 @@ const OnlinePageButtons = (props) => {
         >
           Need Prayer?
         </Button>
-      )
+      );
     }
-  }
+  };
 
   const renderResponseCard = () => {
     if (isGoodFri) {
@@ -257,7 +287,7 @@ const OnlinePageButtons = (props) => {
     } else if (isEaster) {
       return <EasterResponseCardButton />;
     }
-  }
+  };
 
   return (
     <Stack direction={['column', 'row']}>
@@ -298,7 +328,7 @@ const OnlinePageButtons = (props) => {
         </ModalContent>
       </Modal>
       {renderPrayerButton()}
-      { isEaster && 
+      {isEaster && (
         <Button
           variant="outline"
           width={['100%', '25%']}
@@ -313,10 +343,10 @@ const OnlinePageButtons = (props) => {
         >
           Giving
         </Button>
-      }
-      { (isGoodFri || isEaster) ?
+      )}
+      {isGoodFri || isEaster ? (
         renderResponseCard()
-      : (
+      ) : (
         <>
           <Button
             width={['100%', '25%']}

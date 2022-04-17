@@ -1,4 +1,13 @@
-import { Box, Container, VStack, Image, Text, Link } from '@chakra-ui/react';
+import {
+  Box,
+  Container,
+  VStack,
+  Image,
+  Text,
+  Button,
+  Link,
+  Divider,
+} from '@chakra-ui/react';
 
 const verseGeneratorData = [
   {
@@ -80,23 +89,16 @@ const SuccessScreen = () => {
               textStyle="NextSoutherlandSerif"
               fontWeight="700"
             >
-              THANK YOU! <br /> YOUR RESPONSE HAS BEEN SUCCESSFULLY SUBMITTED.
+              HERE IS A BIBLE VERSE FOR YOU!
             </Box>
-            <Text
-              textStyle="Quicksand_bolder"
-              color="#538EC7"
-              display={['block']}
+            <Box
+              fontSize={'md'}
               textAlign="center"
+              color="#538EC7"
+              textStyle="Quicksand_bolder"
             >
-              If the map does not automatically pop up, please click{' '}
-              <Link
-                href="https://www.google.com/maps/d/u/0/edit?hl=en&hl=en&mid=1EY4YEOU3Kcmz5kEHlcjLkh3fUSiBY7Qd&ll=22.368791195813237%2C114.1568863064498&z=11"
-                isExternal
-              >
-                <u>here</u>
-              </Link>{' '}
-              to open it.
-            </Text>
+              Scroll down to continue the response time.
+            </Box>
           </VStack>
           <VStack w={['100%', '80%']}>
             <Image
@@ -144,6 +146,47 @@ const SuccessScreen = () => {
           >
             {randomizedVerse.verse}
           </Box>
+          <Divider colorScheme="#538EC7" />
+          <Text
+            textStyle="Quicksand_bolder"
+            color="#538EC7"
+            display={['block']}
+            textAlign="center"
+            fontSize="2xl"
+          >
+            Please follow the instructions from the pastor for the next part:
+          </Text>
+          <Button
+            px="10%"
+            py="3%"
+            border="1px solid #6E7F98"
+            bg="#E0EDFF"
+            as="a"
+            href="https://www.google.com/maps/d/u/0/edit?hl=en&hl=en&mid=1EY4YEOU3Kcmz5kEHlcjLkh3fUSiBY7Qd&ll=22.368791195813237%2C114.1568863064498&z=11"
+            target="_blank"
+            textStyle="NextSoutherlandSerif"
+            _hover={{
+              bg: '#004B81',
+              border: '1px solid #E0EDFF',
+              color: 'white',
+            }}
+          >
+            Google Map
+          </Button>
+          <Text
+            textStyle="Quicksand_bolder"
+            color="#538EC7"
+            display={['block']}
+            textAlign="center"
+          >
+            <Link
+              href="https://docs.google.com/forms/d/e/1FAIpQLSf0w_SAPIujq-s0PYq1tZUjWJgGzhRmjLpQfhFmm6zheJhW9A/viewform?hl=en"
+              isExternal
+            >
+              <br />
+              <u>Click here if you cannot edit the Google Map</u>
+            </Link>
+          </Text>
         </VStack>
       </Container>
     </Box>
