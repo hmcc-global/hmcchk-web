@@ -1,14 +1,7 @@
 import 'react-modal-video/scss/modal-video.scss';
 import React, { useState } from 'react';
 import ModalVideo from 'react-modal-video';
-import { DateTime} from 'luxon';
-import { customAxios as axios } from '../../helpers/customAxios';
-import { getRenderDate } from '../../helpers/eventsHelpers';
 
-import UpcomingSermon from "./UpcomingSermonEaster"
-import {scroller, scrollTo, scrollToBottom} from "react-scroll";
-import scrollToComponent from 'react-scroll-to-component';
-import InvitationContainer from '../invitation/InvitationContainer';
 import {
   Container,
   Text,
@@ -22,10 +15,7 @@ import {
   Button,
   Center,
 } from '@chakra-ui/react';
-import UpcomingSermonEaster from './UpcomingSermonEaster';
-
-
-
+import PopUp from './PopUp.js';
 
 const HeroContainer = () => {
   const [events, setEvents] = useState([]);
@@ -34,7 +24,7 @@ const HeroContainer = () => {
   
   return (
     <>
-      {<UpcomingSermonEaster upcoming={events} />}
+      {<PopUp upcoming={events} />}
     
     <Box>
       <Box bgColor="white" height="auto"></Box>

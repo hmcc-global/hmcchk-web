@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 
-const UpcomingSermonEaster = ({ upcoming }) => {
+const PopUp = ({ upcoming }) => {
   const [displayModal, setDisplayModal] = useState('none');
   let upcomingSeries = 'Series';
   useEffect(() => {
@@ -57,7 +57,7 @@ const UpcomingSermonEaster = ({ upcoming }) => {
               textStyle="Quicksand_bold"
               color="#642444"
             >
-              The online Passion Experience page is now
+              The online Good Friday stream is now
               <Text
                 fontSize="40"
                 textStyle="Quicksand_bolder"
@@ -118,7 +118,7 @@ const UpcomingSermonEaster = ({ upcoming }) => {
               justifyContent={'center'}
               textAlign="center"
             >
-              The online Passion Experience page is now{' '}
+              The online Good Friday stream is now{' '}
               <Text
                 fontSize="40"
                 //paddingLeft = "35%"
@@ -180,7 +180,7 @@ const UpcomingSermonEaster = ({ upcoming }) => {
               textStyle="Quicksand_bold"
               color="#003984"
             >
-              The online Passion Experience page is now
+              The online Easter Celebration stream is now
               <Text
                 fontSize="40"
                 textStyle="Quicksand_bolder"
@@ -241,7 +241,7 @@ const UpcomingSermonEaster = ({ upcoming }) => {
               justifyContent={'center'}
               textAlign="center"
             >
-              The online Passion Experience page is now{' '}
+              The online Easter Celebration stream is now{' '}
               <Text
                 fontSize="40"
                 //paddingLeft = "35%"
@@ -279,18 +279,27 @@ const UpcomingSermonEaster = ({ upcoming }) => {
   };
   // let currDate = new Date('17 Apr 2022 02:30:00 UTC');
   let currDate = new Date();
-  const goodFriday = new Date('15 Apr 2022 11:30:00 UTC'); //11:30 am UTC is 19:30 PM HKT
+  const goodFriday = new Date('15 Apr 2022 11:25:00 UTC'); //11:30 am UTC is 19:30 PM HKT
   const goodFridayEnd = new Date ('15 Apr 2022 15:30:00 UTC');
-  const easterSunday = new Date('17 Apr 2022 02:00:00 UTC'); //2:30 am UTC is 10:00 AM HKT
+  const easterSunday = new Date('17 Apr 2022 01:55:00 UTC'); //2:30 am UTC is 10:00 AM HKT
   const easterSundayEnd = new Date('17 Apr 2022 05:00:00 UTC');
   return (
     <>
-      {(currDate >= goodFriday && currDate <= goodFridayEnd) ? <WebViewFriday /> : null}
-      {(currDate >= goodFriday && currDate <= goodFridayEnd) ? <MobileViewFriday /> : null}
-      {(currDate >= easterSunday && currDate <= easterSundayEnd) ? <WebViewSunday /> : null}
-      {(currDate >= easterSunday && currDate <= easterSundayEnd) ? <MobileViewSunday /> : null}
+      {(currDate >= goodFriday && currDate <= goodFridayEnd) ? 
+        <>
+        <WebViewFriday /> 
+        <MobileViewFriday />
+        </>
+        : null}
+      {(currDate >= easterSunday && currDate <= easterSundayEnd) ? 
+        <>
+        <WebViewSunday />
+        <MobileViewSunday />
+        </> 
+        : null}
+     
     </>
   );
 };
 
-export default UpcomingSermonEaster;
+export default PopUp;
