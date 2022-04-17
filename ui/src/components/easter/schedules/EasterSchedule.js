@@ -1,37 +1,28 @@
-import {
-  Box,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 
 const EasterSchedule = () => {
   const rundown = [
-    { name: "Opening Worship" },
-    { name: "Announcements" },
-    { name: "Offering" },
+    { name: "Pastor's Greeting" },
+    { name: 'Opening Worship' },
+    { name: 'Announcements' },
+    { name: 'Offering' },
     {
-      name: "Special Praise",
-      content:
+      name: 'Special Praise',
+      content: (
         <Box marginLeft={5} marginTop={2}>
-          <Text
-            color="black"
-            fontSize="sm"
-            textStyle="Quicksand"
-          >
+          <Text color="black" fontSize="sm" textStyle="Quicksand">
             BENEATH THE WATERS
           </Text>
-          <Text
-            color="black"
-            fontSize="sm"
-            textStyle="Quicksand"
-          >
+          <Text color="black" fontSize="sm" textStyle="Quicksand">
             BECAUSE HE LIVES
           </Text>
-      </Box>
+        </Box>
+      ),
     },
-    { name: "Sermon" },
-    { name: "Response Time" },
-    { name: "Closing Worship" }
-  ]
+    { name: 'Sermon' },
+    { name: 'Response Time' },
+    { name: 'Closing Worship' },
+  ];
 
   return (
     <Box paddingBottom={2}>
@@ -46,19 +37,22 @@ const EasterSchedule = () => {
         </Text>
       </Box>
       {rundown.map((event) => (
-        <Box bgColor="#F4FAFF" p={5} borderRadius={15} borderColor="#558EC5" borderWidth={1} marginBottom={5}>
-          <Text
-            color="black"
-            fontSize="sm"
-            textStyle="NextSoutherlandSerif"
-          >
+        <Box
+          bgColor="#F4FAFF"
+          p={5}
+          borderRadius={15}
+          borderColor="#558EC5"
+          borderWidth={1}
+          marginBottom={5}
+        >
+          <Text color="black" fontSize="sm" textStyle="NextSoutherlandSerif">
             {event.name}
           </Text>
           {event.content}
         </Box>
       ))}
     </Box>
-  )
-}
+  );
+};
 
 export default EasterSchedule;
