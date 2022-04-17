@@ -300,13 +300,16 @@ const OnlinePageButtons = (props) => {
       {renderPrayerButton()}
       { isEaster && 
         <Button
+          variant="outline"
           width={['100%', '25%']}
-          bg="#0628A3"
-          color="white"
+          color="#538EC7"
           fontSize={['sm', 'md']}
+          bg="white"
           as="a"
           href="/give"
           target="_blank"
+          flex="auto"
+          textStyle="Quicksand"
         >
           Giving
         </Button>
