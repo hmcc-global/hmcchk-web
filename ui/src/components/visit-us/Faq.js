@@ -44,14 +44,14 @@ const Faq = (props) => {
           basis to ensure that we are abiding by regulations set by the
           Prevention and Control of Disease Ordinance, and ensure that everyone
           coming in-person will feel safe.
-          <br />
+          {/* <br />
           <br />
           We are currently not meeting in-person due to COVID-19 and moving our
           Sunday Celebration fully online. Please refer to our COVID-19 policy{" "}
           <Link href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/">
             here
           </Link>
-          .
+          . */}
         </AccordionPanel>
       </AccordionItem>
 
@@ -70,14 +70,14 @@ const Faq = (props) => {
           Celebration” button above and submitting the form. You should receive
           an email confirmation shortly notifying you of a successful /{" "}
           wait-listed registration.
-          <br />
+          {/* <br />
           <br />
           We are currently not meeting in-person due to COVID-19 and moving our
           Sunday Celebration fully online. Please refer to our COVID-19 policy{" "}
           <Link href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/">
             here
           </Link>
-          .
+          . */}
         </AccordionPanel>
       </AccordionItem>
 
@@ -96,14 +96,14 @@ const Faq = (props) => {
           apologize for the inconvenience that you may be experiencing. However,
           our lovely host team will continue to monitor registrations throughout
           the week and notify you if additional availability opens up.
-          <br />
+          {/* <br />
           <br />
           We are currently not meeting in-person due to COVID-19 and moving our
           Sunday Celebration fully online. Please refer to our COVID-19 policy{" "}
           <Link href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/">
             here
           </Link>
-          .
+          . */}
         </AccordionPanel>
       </AccordionItem>
 
@@ -123,14 +123,14 @@ const Faq = (props) => {
           come join in worship. If there are any extenuating circumstances that
           prevent those pre-registered from joining in person, please notify us
           via email at hongkong@hmcc.net by the Friday (before) 11:59PM
-          <br />
+          {/* <br />
           <br />
           We are currently not meeting in-person due to COVID-19 and moving our
           Sunday Celebration fully online. Please refer to our COVID-19 policy{" "}
           <Link href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/">
             here
           </Link>
-          .
+          . */}
         </AccordionPanel>
       </AccordionItem>
 
@@ -212,8 +212,10 @@ const Faq = (props) => {
         <AccordionPanel pb={4}>
           We remain committed to supporting the global efforts in preventing the
           spread of the virus and caring for the holistic health of our members
-          and the community. Therefore, we are currently not meeting in-person
-          due to COVID-19 and moving our Sunday Celebration fully online.
+          and the community. Therefore, we are now meeting in person and streaming church online as well.
+          
+          {/* Therefore, we are currently not meeting in-person
+          due to COVID-19 and moving our Sunday Celebration fully online. */}
           <br />
           <br />
           Please refer to our COVID-19 policy{" "}
