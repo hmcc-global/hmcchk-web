@@ -1,8 +1,9 @@
 import { Box, Flex, Image, Text, chakra, Stack, Link } from "@chakra-ui/react";
 
-// const scEventText = "Sunday Celebration: 10AM HKT in-person & Online";
-const scEventText =
-  "Sunday Celebration: 10AM HKT Online only until further notice";
+const scEventText = "Sunday Celebration: 10AM HKT in-person & Online";
+// const scEventText =
+//   "Sunday Celebration: 10AM HKT Online only until further notice";
+
 const FeaturedEvent = (props) => {
   return (
     <Flex w="full" h="full" justify="center">
@@ -34,7 +35,7 @@ const FeaturedEvent = (props) => {
           mt={5}
           w={["100vw", "100vw", "100vw", "65vw", "100vw", "100vw"]}
           h="auto"
-          src={process.env.PUBLIC_URL + "/images/home/featured.jpeg"}
+          src={process.env.PUBLIC_URL + "/images/home/welcome-back.png"}
           alt="Featured Event"
         />
         {/* </Link> */}
