@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import {
   Modal,
   ModalOverlay,
@@ -13,10 +13,10 @@ import {
   Text,
   Stack,
   Button,
-} from "@chakra-ui/react";
-import { customAxios as axios } from "../helpers/customAxios";
-import { arrayToExcel } from "../helpers/arrayToExcel";
-import { DateTime } from "luxon";
+} from '@chakra-ui/react';
+import { customAxios as axios } from '../helpers/customAxios';
+import { arrayToExcel } from '../helpers/arrayToExcel';
+import { DateTime } from 'luxon';
 
 const FormDataDownloader = (props) => {
   const { isOpen, setIsOpen, formId } = props;
@@ -32,9 +32,9 @@ const FormDataDownloader = (props) => {
     setIsLoading(true);
     try {
       let timeRange = null;
-      if (data.startDate !== "" && data.endDate !== "") {
+      if (data.startDate !== '' && data.endDate !== '') {
         if (data.endDate < data.startDate) {
-          alert("Invalid date range");
+          alert('Invalid date range');
           setIsLoading(false);
           return;
         }
@@ -43,7 +43,7 @@ const FormDataDownloader = (props) => {
           end: data.endDate,
         };
       }
-      const res = await axios.get("/api/forms/get-submission", {
+      const res = await axios.get('/api/forms/get-submission', {
         params: { formId: formId, timeRange: timeRange },
       });
       let reconstructedData = res.data.map((formItem) => {
@@ -54,21 +54,21 @@ const FormDataDownloader = (props) => {
         };
         for (let key in formItem.submissionData) {
           let fieldData = formItem.submissionData[key];
-          if (key === "address") {
+          if (key === 'address') {
             fieldData = [
               fieldData.flat,
               fieldData.floor,
               fieldData.street,
               fieldData.district,
               fieldData.region,
-            ].join(" ");
+            ].join(' ');
           }
           rowObj[key] = fieldData;
         }
         return rowObj;
       });
       if (reconstructedData.length)
-        arrayToExcel.convertArrayToTable(reconstructedData, "output");
+        arrayToExcel.convertArrayToTable(reconstructedData, 'output');
     } catch (err) {
       console.log(err);
     }
@@ -90,11 +90,11 @@ const FormDataDownloader = (props) => {
               </Text>
               <FormControl>
                 <FormLabel>Start Date</FormLabel>
-                <Input type="date" {...register("startDate")} />
+                <Input type="date" {...register('startDate')} />
               </FormControl>
               <FormControl>
                 <FormLabel>End Date</FormLabel>
-                <Input type="date" {...register("endDate")} />
+                <Input type="date" {...register('endDate')} />
               </FormControl>
               <Button colorScheme="teal" type="submit" isLoading={isLoading}>
                 Download Data

@@ -188,7 +188,7 @@ const FormEditor = (props) => {
           colorScheme="green"
           onClick={onSaveToDB}
         >
-          Finalize and save form to database
+          Finalize and save
         </Button>
 
         <Box borderRadius="lg" borderWidth="1px" p="3">
