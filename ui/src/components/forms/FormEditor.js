@@ -17,6 +17,8 @@ import {
   ButtonGroup,
   Flex,
   Stack,
+  UnorderedList,
+  ListItem,
 } from '@chakra-ui/react';
 
 const FormEditor = (props) => {
@@ -180,6 +182,12 @@ const FormEditor = (props) => {
         <Heading size="xl">Form Editor</Heading>
         <Text>
           Currently editing form <b>{formInformation.formName}</b>
+          <br />
+          <br />A checklist to keep in mind:
+          <UnorderedList>
+            <ListItem>Have you clicked on create/update form</ListItem>
+            <ListItem>Have you clicked on save prefilled fields</ListItem>
+          </UnorderedList>
         </Text>
         <Button
           isLoading={saveStatus}

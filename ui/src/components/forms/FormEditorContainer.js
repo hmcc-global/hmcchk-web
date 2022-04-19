@@ -14,7 +14,6 @@ import {
   Input,
   Modal,
   ModalOverlay,
-  ModalHeader,
   ModalCloseButton,
   ModalBody,
   ModalContent,
