@@ -72,7 +72,7 @@ const VisitUsPage = (props) => {
           >
             Ways to enjoy Sunday Celebration
           </Heading>
-          {/* <Flex flexDir={["column", "row"]}>
+          <Flex flexDir={["column", "row"]}>
             <VStack
               flex={4.25}
               align="stretch"
@@ -143,7 +143,7 @@ const VisitUsPage = (props) => {
                 loading="lazy"
               ></iframe>
             </AspectRatio>
-          </Flex> */}
+          </Flex>
         </Box>
         <Box
           borderWidth="1px"
@@ -164,9 +164,9 @@ const VisitUsPage = (props) => {
               maxW={650}
               textAlign={['center', 'initial']}
             >
-              {/* If you are not able to join in-person, you could also... */}
-              We are currently not meeting in-person due to COVID-19, so
-              please...
+              If you are not able to join in-person, you could also...
+              {/* We are currently not meeting in-person due to COVID-19, so
+              please... */}
             </Heading>
             <Heading
               as="h3"
