@@ -96,7 +96,7 @@ const HomeContainer = (props) => {
       <Modal isCentered={true} size="6xl" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent borderRadius="20" bgColor="#FFF7E2">
-          <ModalCloseButton size="lg" />
+          <ModalCloseButton size="lg" zIndex="100" />
           <Flex
             w="full"
             h={isMobile ? "50vh" : "80vh"}
