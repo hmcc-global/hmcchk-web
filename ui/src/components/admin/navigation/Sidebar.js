@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   IconButton,
   Box,
@@ -13,7 +13,7 @@ import {
   useDisclosure,
   Button,
   useColorMode,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 import {
   FiHome,
   FiTrendingUp,
@@ -22,22 +22,22 @@ import {
   FiSettings,
   FiMenu,
   FiXCircle,
-} from "react-icons/fi";
+} from 'react-icons/fi';
 
 const LinkItems = [
-  { name: "Home", icon: FiHome, path: "/admin/home" },
+  { name: 'Home', icon: FiHome, path: '/admin/home' },
   {
-    name: "Users",
+    name: 'Users',
     icon: FiTrendingUp,
-    path: "/admin/users",
+    path: '/admin/users',
   },
-  { name: "Forms", icon: FiCompass, path: "/admin/forms" },
-  { name: "Giving", icon: FiStar, path: "/admin/giving" },
-  { name: "Settings", icon: FiSettings, path: "/admin/settings" },
+  { name: 'Forms', icon: FiCompass, path: '/admin/forms' },
+  { name: 'Giving', icon: FiStar, path: '/admin/giving' },
+  { name: 'Settings', icon: FiSettings, path: '/admin/settings' },
   {
-    name: "Log Out",
+    name: 'Log Out',
     icon: FiXCircle,
-    path: "/admin/logout",
+    path: '/admin/logout',
   },
 ];
 
@@ -46,10 +46,10 @@ const SidebarContent = ({ onClose, ...rest }) => {
   return (
     <Box
       transition="3s ease"
-      bg={useColorModeValue("white", "gray.900")}
+      bg={useColorModeValue('white', 'gray.900')}
       borderRight="1px"
-      borderRightColor={useColorModeValue("gray.200", "gray.700")}
-      w={{ base: "full", md: 60 }}
+      borderRightColor={useColorModeValue('gray.200', 'gray.700')}
+      w={{ base: 'full', md: 60 }}
       pos="fixed"
       h="full"
       {...rest}
@@ -58,7 +58,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
           HMCC-HK
         </Text>
-        <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
+        <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
         <NavItem
@@ -79,7 +79,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
 
 const NavItem = ({ icon, children, path, component }) => {
   return (
-    <Link href={path} style={{ textDecoration: "none" }} component={component}>
+    <Link href={path} style={{ textDecoration: 'none' }} component={component}>
       <Flex
         align="center"
         p="4"
@@ -88,8 +88,8 @@ const NavItem = ({ icon, children, path, component }) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: "cyan.400",
-          color: "white",
+          bg: 'cyan.400',
+          color: 'white',
         }}
       >
         {icon && (
@@ -97,7 +97,7 @@ const NavItem = ({ icon, children, path, component }) => {
             mr="4"
             fontSize="16"
             _groupHover={{
-              color: "white",
+              color: 'white',
             }}
             as={icon}
           />
@@ -115,13 +115,14 @@ const MobileNav = ({ onOpen }) => {
       px={{ base: 4, md: 4 }}
       height="20"
       alignItems="center"
-      bg={useColorModeValue("white", "gray.900")}
+      bg={useColorModeValue('white', 'gray.900')}
       borderBottomWidth="1px"
-      borderBottomColor={useColorModeValue("gray.200", "gray.700")}
-      justifyContent={{ base: "space-between", md: "flex-end" }}
+      borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
+      justifyContent={{ base: 'space-between', md: 'flex-end' }}
+      display={['flex', 'none']}
     >
       <IconButton
-        display={{ base: "flex", md: "none" }}
+        display={{ base: 'flex', md: 'none' }}
         onClick={onOpen}
         variant="outline"
         aria-label="open menu"
@@ -129,7 +130,7 @@ const MobileNav = ({ onOpen }) => {
       />
 
       <Text
-        display={{ base: "flex", md: "none" }}
+        display={{ base: 'flex', md: 'none' }}
         fontSize="2xl"
         fontFamily="monospace"
         fontWeight="bold"
@@ -148,7 +149,7 @@ export default function SidebarWithHeader(props) {
     <>
       <SidebarContent
         onClose={() => onClose}
-        display={{ base: "none", md: "block" }}
+        display={{ base: 'none', md: 'block' }}
       />
       <Drawer
         autoFocus={true}

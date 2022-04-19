@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { customAxios as axios } from '../helpers/customAxios';
-import FormCreator from './FormCreator';
+import FormEditor from './FormEditor';
 import {
   FormControl,
   FormLabel,
@@ -162,162 +162,171 @@ const FormManager = (props) => {
   };
 
   return (
-    <Container maxW="container.lg" pt={10}>
-      <FormDataDownloader
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        formId={formId}
-      />
-      <Heading as="h1" size="xl">
-        Form Management System
-      </Heading>
-      <Box borderRadius="lg" p="5" mt="5" borderWidth="1px">
-        <Heading mb="2" as="h2" size="lg">
-          Existing Forms
-        </Heading>
-        <List>
-          {formList.map((formItem) => (
-            <ListItem key={formItem.id}>
-              <Box p="5" mb="2" borderRadius="lg" borderWidth="1px">
-                <Text mb="3">
-                  {' '}
-                  <Badge colorScheme={formItem.isPublished ? 'green' : 'red'}>
-                    {formItem.isPublished ? 'LIVE' : 'PRIVATE'}
-                  </Badge>{' '}
-                  {formItem.formName}
-                </Text>
-                <Stack direction={['column', 'row']} spacing={1}>
-                  <Button
-                    colorScheme="teal"
-                    onClick={onEdit}
-                    value={formItem.id}
-                    isLoading={isLoading}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    colorScheme="teal"
-                    onClick={onPublish}
-                    value={formItem.id}
-                    isLoading={isLoading}
-                  >
-                    {formItem.isPublished ? 'Unpublish' : 'Publish'}
-                  </Button>
-                  <Button
-                    colorScheme="teal"
-                    onClick={onClickRedirect}
-                    value={formItem.id}
-                  >
-                    Public Link
-                  </Button>
-                  <Button
-                    colorScheme="teal"
-                    onClick={onDownload}
-                    value={formItem.id}
-                  >
-                    Download Data
-                  </Button>
-                  <Button
-                    colorScheme="red"
-                    onClick={onDelete}
-                    value={formItem.id}
-                    isLoading={isLoading}
-                  >
-                    Delete
-                  </Button>
-                </Stack>
-              </Box>
-            </ListItem>
-          ))}
-        </List>
-      </Box>
-      <Box borderRadius="lg" p="5" mt="3" borderWidth="1px">
-        <Heading as="h2" mb="5" size="lg">
-          Create A New Form
-        </Heading>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Stack spacing="5">
-            <FormControl isInvalid={errors['formName']}>
-              <FormLabel>Form Name</FormLabel>
-              <Input
-                id="formName"
-                {...register('formName', { required: 'Form name is required' })}
-              />
-              <FormErrorMessage>
-                {errors['formName'] && 'Form name is required'}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl isInvalid={errors['formDescription']}>
-              <FormLabel>Form Description</FormLabel>
-              <Textarea id="formDescription" {...register('formDescription')} />
-              <FormHelperText>
-                This field supports markdown. Just write it in somewhere else
-                and then paste it in and see the magic happen
-              </FormHelperText>
-            </FormControl>
-            <FormControl isInvalid={errors['formImage']}>
-              <FormLabel>Form Image</FormLabel>
-              <Input id="formImage" {...register('formImage')} />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Require login?</FormLabel>
-              <Controller
-                control={control}
-                name="requireLogin"
-                defaultValue={true}
-                render={({ field: { onChange, value, ref } }) => (
-                  <Switch onChange={onChange} ref={ref} isChecked={value}>
-                    {value ? 'Yes' : 'No'}
-                  </Switch>
-                )}
-              />
-            </FormControl>
-            <FormControl isInvalid={errors['successEmailTemplate']}>
-              <FormLabel>Select an email template</FormLabel>
-              <Select {...register('successEmailTemplate', { required: true })}>
-                <option value="form-default-success">Default</option>
-                <option value="form-retreat-success">Retreat</option>
-                <option value="form-ignite-success">!gnite</option>
-              </Select>
-              <FormErrorMessage>
-                {errors['successEmailTemplate'] && 'Field type is required'}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl>
-              <FormLabel>Custom Email Subject</FormLabel>
-              <Input {...register('customEmailSubject')} />
-              <FormHelperText>
-                If you need a custom subject for the success email
-              </FormHelperText>
-            </FormControl>
-            <FormControl>
-              <FormLabel>
-                If you updated the fields above please click here again before
-                saving to DB
-              </FormLabel>
-              <Button colorScheme="teal" type="submit">
-                Create/Update Form
-              </Button>
-            </FormControl>
-          </Stack>
-        </form>
-      </Box>
-
-      {formName && (
-        <FormCreator
-          formInformation={{
-            formName: formName,
-            formDescription: formDescription,
-            formImage: formImage,
-            requireLogin: requireLogin,
-            successEmailTemplate: successEmailTemplate,
-            customEmailSubject: customEmailSubject,
-          }}
-          existingFormFieldsData={editFormData}
-          resetFormEditorCallback={resetFormEditorCallback}
-          user={user}
+    <Container maxW="container.xl" pt={10}>
+      <Stack spacing="5">
+        <FormDataDownloader
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          formId={formId}
         />
-      )}
+        <Heading as="h1" size="xl">
+          Form Management System
+        </Heading>
+        <Box borderRadius="lg">
+          <Heading mb="2" as="h2" size="lg">
+            Existing Forms
+          </Heading>
+          <List spacing="2">
+            {formList.map((formItem) => (
+              <ListItem key={formItem.id}>
+                <Box p="3" borderRadius="lg" borderWidth="1px">
+                  <Text mb="3">
+                    <Badge colorScheme={formItem.isPublished ? 'green' : 'red'}>
+                      {formItem.isPublished ? 'LIVE' : 'PRIVATE'}
+                    </Badge>{' '}
+                    {formItem.formName}
+                  </Text>
+                  <Stack direction={['column', 'row']} spacing={1}>
+                    <Button
+                      colorScheme="blue"
+                      onClick={onEdit}
+                      value={formItem.id}
+                      isLoading={isLoading}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      colorScheme="blue"
+                      onClick={onPublish}
+                      value={formItem.id}
+                      isLoading={isLoading}
+                    >
+                      {formItem.isPublished ? 'Unpublish' : 'Publish'}
+                    </Button>
+                    <Button
+                      colorScheme="blue"
+                      onClick={onClickRedirect}
+                      value={formItem.id}
+                    >
+                      Public Link
+                    </Button>
+                    <Button
+                      colorScheme="blue"
+                      onClick={onDownload}
+                      value={formItem.id}
+                    >
+                      Download Data
+                    </Button>
+                    <Button
+                      colorScheme="red"
+                      onClick={onDelete}
+                      value={formItem.id}
+                      isLoading={isLoading}
+                    >
+                      Delete
+                    </Button>
+                  </Stack>
+                </Box>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+        <Box borderRadius="lg" p="5" borderWidth="1px">
+          <Heading as="h2" mb="5" size="lg">
+            Create A New Form
+          </Heading>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Stack spacing="5">
+              <FormControl isInvalid={errors['formName']}>
+                <FormLabel>Form Name</FormLabel>
+                <Input
+                  id="formName"
+                  {...register('formName', {
+                    required: 'Form name is required',
+                  })}
+                />
+                <FormErrorMessage>
+                  {errors['formName'] && 'Form name is required'}
+                </FormErrorMessage>
+              </FormControl>
+              <FormControl isInvalid={errors['formDescription']}>
+                <FormLabel>Form Description</FormLabel>
+                <Textarea
+                  id="formDescription"
+                  {...register('formDescription')}
+                />
+                <FormHelperText>
+                  This field supports markdown. Just write it in somewhere else
+                  and then paste it in and see the magic happen
+                </FormHelperText>
+              </FormControl>
+              <FormControl isInvalid={errors['formImage']}>
+                <FormLabel>Form Image</FormLabel>
+                <Input id="formImage" {...register('formImage')} />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Require login?</FormLabel>
+                <Controller
+                  control={control}
+                  name="requireLogin"
+                  defaultValue={true}
+                  render={({ field: { onChange, value, ref } }) => (
+                    <Switch onChange={onChange} ref={ref} isChecked={value}>
+                      {value ? 'Yes' : 'No'}
+                    </Switch>
+                  )}
+                />
+              </FormControl>
+              <FormControl isInvalid={errors['successEmailTemplate']}>
+                <FormLabel>Select an email template</FormLabel>
+                <Select
+                  {...register('successEmailTemplate', { required: true })}
+                >
+                  {/* To add more email template, please define the value and add the template here */}
+                  <option value="form-default-success">Default</option>
+                  <option value="form-retreat-success">Retreat</option>
+                  <option value="form-ignite-success">!gnite</option>
+                </Select>
+                <FormErrorMessage>
+                  {errors['successEmailTemplate'] && 'Field type is required'}
+                </FormErrorMessage>
+              </FormControl>
+              <FormControl>
+                <FormLabel>Custom Email Subject</FormLabel>
+                <Input {...register('customEmailSubject')} />
+                <FormHelperText>
+                  If you need a custom subject for the success email
+                </FormHelperText>
+              </FormControl>
+              <FormControl>
+                <FormLabel>
+                  If you updated the fields above please click here again before
+                  saving to DB
+                </FormLabel>
+                <Button colorScheme="blue" type="submit">
+                  Create/Update Form
+                </Button>
+              </FormControl>
+            </Stack>
+          </form>
+        </Box>
+
+        {formName && (
+          <FormEditor
+            formInformation={{
+              formName: formName,
+              formDescription: formDescription,
+              formImage: formImage,
+              requireLogin: requireLogin,
+              successEmailTemplate: successEmailTemplate,
+              customEmailSubject: customEmailSubject,
+            }}
+            existingFormFieldsData={editFormData}
+            resetFormEditorCallback={resetFormEditorCallback}
+            user={user}
+          />
+        )}
+      </Stack>
     </Container>
   );
 };
