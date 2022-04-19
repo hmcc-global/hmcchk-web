@@ -128,7 +128,7 @@ const HomeContainer = (props) => {
               >
                 <Text
                   color="#4C80A5"
-                  fontSize={isMobile ? "12" : "16"}
+                  fontSize={isMobile ? "14" : "16"}
                 >
                     {modalText}
                 </Text>
@@ -144,7 +144,7 @@ const HomeContainer = (props) => {
                     bgColor: "#0628A3",
                   }}
                   marginTop={isMobile ? "2" : "3"}
-                  fontSize={isMobile ? "10" : "12"}
+                  fontSize="12"
                 >
                   {covidButtonText}
                 </Button>
