@@ -1,23 +1,15 @@
 import {
-  AspectRatio,
   Box,
   Button,
-  ButtonGroup,
   Container,
   Flex,
-  Icon,
-  Image,
   Link,
   Modal,
-  ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
-  ModalHeader,
   ModalOverlay,
   Text,
   useBreakpointValue,
-  VStack,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import AboutSection from "./AboutSection";
