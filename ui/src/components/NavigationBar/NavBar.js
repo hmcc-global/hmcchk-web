@@ -195,7 +195,7 @@ const NavBar = (props) => {
         </Flex>
       </Flex>
 
-      { !isOnlineSermon && currDate < easterDateStart && <EasterBanner /> }
+      { !isOnlineSermon && isEaster && <EasterBanner /> }
       {currDate.weekdayShort === 'Sun' && !isOnlineSermon && !isEaster ? (
         <Flex
           w="100vw"
