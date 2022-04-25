@@ -123,6 +123,19 @@ const ValuesSection = (props) => {
               <Text color="#000000">{values.body[5]}</Text>
             </AccordionPanel>
           </AccordionItem>
+          <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+            <h2>
+              <AccordionButton>
+                <Box flex="1" textAlign="left" fontWeight="bold">
+                  <Text color="#000000">{values.head[6]}</Text>
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel>
+              <Text color="#000000">{values.body[6]}</Text>
+            </AccordionPanel>
+          </AccordionItem>
         </Accordion>
       </Box>
     </>
