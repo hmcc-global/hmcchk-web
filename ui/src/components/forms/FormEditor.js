@@ -19,6 +19,7 @@ import {
   Stack,
   UnorderedList,
   ListItem,
+  Center,
 } from '@chakra-ui/react';
 
 const FormEditor = (props) => {
@@ -43,18 +44,6 @@ const FormEditor = (props) => {
     handleSubmit: handleSubmitPrefill,
     control: controlPrefill,
   } = useForm();
-
-  useEffect(() => {
-    if (existingFormFieldsData) {
-      if (existingFormFieldsData.formFields[0].fieldType === 'prefill') {
-        let fields = existingFormFieldsData.formFields[0].options;
-        fields.forEach((field) => {
-          setValuePrefill(field + 'Checkbox', true);
-        });
-      }
-      setFormFields(existingFormFieldsData.formFields);
-    }
-  }, [existingFormFieldsData, setValuePrefill]);
 
   // Handler for prefillable form arguments
   const onPrefillableSubmit = (data, e) => {
@@ -85,6 +74,7 @@ const FormEditor = (props) => {
   // Handler for new custom field submissions
   const onCustomSubmit = (data, e) => {
     // Format the data
+    data.fieldName = data.fieldName.trim();
     if (data.options) {
       data.options = data.options.split(';');
     }
@@ -157,6 +147,12 @@ const FormEditor = (props) => {
         customEmailSubject: formInformation.customEmailSubject,
         formFields: formFields,
       };
+
+      for (let i = 0; i < formToSave.formFields.length; i++) {
+        formToSave.formFields[i].fieldName =
+          formToSave.formFields[i].fieldName.trim();
+      }
+
       const statusCode = await saveFormToDB(formToSave);
       if (statusCode === 200) {
         setSaveStatus(false);
@@ -171,6 +167,18 @@ const FormEditor = (props) => {
   // Watch this to conditionally render custom things
   const ft = watch('fieldType');
 
+  useEffect(() => {
+    if (existingFormFieldsData) {
+      if (existingFormFieldsData.formFields[0].fieldType === 'prefill') {
+        let fields = existingFormFieldsData.formFields[0].options;
+        fields.forEach((field) => {
+          setValuePrefill(field + 'Checkbox', true);
+        });
+      }
+      setFormFields(existingFormFieldsData.formFields);
+    }
+  }, [existingFormFieldsData, setValuePrefill, setFormFields]);
+
   return (
     <Flex
       direction={['column', 'row']}
@@ -179,11 +187,11 @@ const FormEditor = (props) => {
       p="3"
     >
       <Stack flex="2" spacing="3" p="3">
-        <Heading size="xl">Form Editor</Heading>
+        <Heading size="xl">
+          Currently editing: {formInformation.formName}
+        </Heading>
         <Text>
-          Currently editing form <b>{formInformation.formName}</b>
-          <br />
-          <br />A checklist to keep in mind:
+          Click the green button when you are done. A checklist to keep in mind:
           <UnorderedList>
             <ListItem>Have you clicked on create/update form</ListItem>
             <ListItem>Have you clicked on save prefilled fields</ListItem>
@@ -198,33 +206,6 @@ const FormEditor = (props) => {
         >
           Finalize and save
         </Button>
-
-        <Box borderRadius="lg" borderWidth="1px" p="3">
-          <Heading as="h3" size="md">
-            Created Form Fields
-          </Heading>
-          {formFields
-            .filter((obj) => {
-              if (obj.fieldType === 'prefill') {
-                return false;
-              } else {
-                return obj;
-              }
-            })
-            .map((fieldData, i) => (
-              <FormControl key={fieldData.fieldName}>
-                {fieldData.fieldName}
-                <ButtonGroup ml={4} colorScheme="blue">
-                  <Button mt={4} value={i + 1} onClick={onEdit}>
-                    Edit
-                  </Button>
-                  <Button mt={4} value={i + 1} onClick={onDelete}>
-                    Delete
-                  </Button>
-                </ButtonGroup>
-              </FormControl>
-            ))}
-        </Box>
 
         <Box>
           <form onSubmit={handleSubmitPrefill(onPrefillableSubmit)}>
@@ -335,16 +316,45 @@ const FormEditor = (props) => {
                 )}
               />
             </FormControl>
-            <Button mt={4} colorScheme="blue" type="submit">
+            <Button mt={2} colorScheme="blue" type="submit">
               Save Prefilled Fields
             </Button>
           </form>
         </Box>
 
+        <Box borderRadius="lg" borderWidth="1px" p="3">
+          <Heading as="h3" size="md">
+            Created Custom Fields
+          </Heading>
+          {formFields
+            .filter((obj) => {
+              if (obj.fieldType === 'prefill') {
+                return false;
+              } else {
+                return obj;
+              }
+            })
+            .map((fieldData, i) => (
+              <FormControl key={fieldData.fieldName}>
+                <Flex p="1">
+                  <Center flex="2">{fieldData.fieldName}</Center>
+                  <ButtonGroup flex="1" colorScheme="blue">
+                    <Button value={i + 1} onClick={onEdit}>
+                      Edit
+                    </Button>
+                    <Button value={i + 1} onClick={onDelete}>
+                      Delete
+                    </Button>
+                  </ButtonGroup>
+                </Flex>
+              </FormControl>
+            ))}
+        </Box>
+
         <Box>
           <form onSubmit={handleSubmit(onCustomSubmit)}>
-            <Heading as="h3" size="md">
-              Custom Fields
+            <Heading as="h3" size="md" mb="2">
+              Custom Field Editor
             </Heading>
             {editData && (
               <Text>
@@ -414,7 +424,7 @@ const FormEditor = (props) => {
         </Box>
       </Stack>
 
-      <Box flex="3" p="3" borderWidth="1px" borderRadius="lg">
+      <Box flex="3" p="2" borderWidth="1px" borderRadius="lg">
         <Heading size="xl">Form Preview</Heading>
         <Form
           formId={null}

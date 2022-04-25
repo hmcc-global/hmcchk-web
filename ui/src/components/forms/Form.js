@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { customAxios as axios } from "../helpers/customAxios";
-import { camelize, sentencize } from "../helpers/formsHelpers";
-import { CheckCircleIcon } from "@chakra-ui/icons";
-import ReactMarkdown from "react-markdown";
-import ChakraUIRenderer from "chakra-ui-markdown-renderer";
+import { useState, useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { customAxios as axios } from '../helpers/customAxios';
+import { camelize, sentencize } from '../helpers/formsHelpers';
+import { CheckCircleIcon } from '@chakra-ui/icons';
+import ReactMarkdown from 'react-markdown';
+import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 
 import {
   FormControl,
@@ -32,7 +32,7 @@ import {
   Alert,
   AlertIcon,
   Link,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 import {
   campusList,
   countryList,
@@ -40,7 +40,7 @@ import {
   lifegroupList,
   lifestageList,
   regionList,
-} from "../helpers/lists";
+} from '../helpers/lists';
 
 const Form = (props) => {
   const { formId, formName, formDescription, formImage, formFields } = props;
@@ -67,23 +67,35 @@ const Form = (props) => {
     };
 
     let modifiedData = data;
-    modifiedData["address"] = address;
+    modifiedData['address'] = address;
 
-    delete modifiedData["addressFlat"];
-    delete modifiedData["addressFloor"];
-    delete modifiedData["addressStreet"];
-    delete modifiedData["addressDistrict"];
-    delete modifiedData["addressRegion"];
+    // Sanity check if it's all empty, just delete it
+    if (
+      !(
+        data.addressFlat &&
+        data.addressFloor &&
+        data.addressStreet &&
+        data.addressDistrict &&
+        data.addressRegion
+      )
+    )
+      delete modifiedData['address'];
 
-    if (formId) setSubmissionData(modifiedData);
+    delete modifiedData['addressFlat'];
+    delete modifiedData['addressFloor'];
+    delete modifiedData['addressStreet'];
+    delete modifiedData['addressDistrict'];
+    delete modifiedData['addressRegion'];
+
+    if (formId) console.log(modifiedData);
     else console.log("this form doesn't support submission");
   };
 
   const postSubmission = async (formId, data, userId) => {
-    const redirectTarget = userId ? "/profile" : "/";
+    const redirectTarget = userId ? '/profile' : '/';
     setSubmitStatus(true);
     try {
-      const { status } = await axios.post("/api/forms/post-create-submission", {
+      const { status } = await axios.post('/api/forms/post-create-submission', {
         formId: formId,
         submissionData: data,
         userId: userId,
@@ -104,14 +116,14 @@ const Form = (props) => {
     if (submissionData) {
       postSubmission(formId, submissionData, user.id);
     } else if (!submissionData && user.id && formFields.length > 0) {
-      if (formFields[0].fieldType === "prefill") {
+      if (formFields[0].fieldType === 'prefill') {
         formFields[0].options.forEach((field) => {
-          if (field === "address" && user["address"]) {
-            setValue("addressFloor", user["address"]["floor"]);
-            setValue("addressFlat", user["address"]["flat"]);
-            setValue("addressStreet", user["address"]["street"]);
-            setValue("addressDistrict", user["address"]["district"]);
-            setValue("addressRegion", user["address"]["region"]);
+          if (field === 'address' && user['address']) {
+            setValue('addressFloor', user['address']['floor']);
+            setValue('addressFlat', user['address']['flat']);
+            setValue('addressStreet', user['address']['street']);
+            setValue('addressDistrict', user['address']['district']);
+            setValue('addressRegion', user['address']['region']);
           } else {
             setValue(field, user[field]);
           }
@@ -125,7 +137,7 @@ const Form = (props) => {
     if (!fieldData) return;
     let fieldType = fieldData.fieldType;
 
-    if (fieldType !== "prefill") return;
+    if (fieldType !== 'prefill') return;
 
     let opts = fieldData.options;
     let result = [];
@@ -138,9 +150,9 @@ const Form = (props) => {
     opts.forEach((fieldName) => {
       // Generate a label
       let label = (
-        <FormLabel key={fieldName + "label"} id={fieldName + "label"}>
-          {sentencize(fieldName)}{" "}
-          <Text key={fieldName + "alert"} as="span" color="red">
+        <FormLabel key={fieldName + 'label'} id={fieldName + 'label'}>
+          {sentencize(fieldName)}{' '}
+          <Text key={fieldName + 'alert'} as="span" color="red">
             *
           </Text>
         </FormLabel>
@@ -149,98 +161,98 @@ const Form = (props) => {
       // Generate the field itself
       let field = null;
       switch (fieldName) {
-        case "countryOfOrigin":
+        case 'countryOfOrigin':
           field = (
             <Select
               placeholder="Country of Origin"
-              {...register("countryOfOrigin", { required: true })}
+              {...register('countryOfOrigin', { required: true })}
             >
               {countryList.map((item) => {
-                return <option key={"co" + item}>{item}</option>;
+                return <option key={'co' + item}>{item}</option>;
               })}
             </Select>
           );
           break;
-        case "lifestage":
+        case 'lifestage':
           field = (
-            <Select {...register("lifestage", { required: true })}>
+            <Select {...register('lifestage', { required: true })}>
               {lifestageList.map((item) => {
-                return <option key={"li" + item}>{item}</option>;
+                return <option key={'li' + item}>{item}</option>;
               })}
             </Select>
           );
           break;
-        case "campus":
+        case 'campus':
           field = (
-            <Select {...register("campus", { required: true })}>
+            <Select {...register('campus', { required: true })}>
               {campusList.map((item) => {
-                return <option key={"ca" + item}>{item}</option>;
+                return <option key={'ca' + item}>{item}</option>;
               })}
             </Select>
           );
           break;
-        case "lifeGroup":
+        case 'lifeGroup':
           field = (
-            <Select {...register("lifeGroup", { required: true })}>
+            <Select {...register('lifeGroup', { required: true })}>
               {lifegroupList.map((item) => {
-                return <option key={"lg" + item}>{item}</option>;
+                return <option key={'lg' + item}>{item}</option>;
               })}
             </Select>
           );
           break;
-        case "address":
+        case 'address':
           field = (
-            <Stack direction={"column"}>
-              <Stack direction={["column", "row"]} w="100%">
+            <Stack direction={'column'}>
+              <Stack direction={['column', 'row']} w="100%">
                 <Box flex={1}>
                   <Input
                     placeholder="Floor/Level"
-                    {...register("addressFloor", { required: true })}
+                    {...register('addressFloor', { required: true })}
                   />
                 </Box>
                 <Box flex={1}>
                   <Input
                     placeholder="Room/Flat/Unit/Suite"
-                    {...register("addressFlat", { required: true })}
+                    {...register('addressFlat', { required: true })}
                   />
                 </Box>
               </Stack>
-              <Stack direction={["column", "row"]} w="100%">
+              <Stack direction={['column', 'row']} w="100%">
                 <Box flex={1}>
                   <Input
                     placeholder="Street Address"
-                    {...register("addressStreet", { required: true })}
+                    {...register('addressStreet', { required: true })}
                   />
                 </Box>
                 <Box flex={1}>
                   <Select
                     placeholder="District"
-                    {...register("addressDistrict", { required: true })}
+                    {...register('addressDistrict', { required: true })}
                   >
                     {districtList.map((item) => {
-                      return <option key={"di" + item}>{item}</option>;
+                      return <option key={'di' + item}>{item}</option>;
                     })}
                   </Select>
                 </Box>
               </Stack>
-              <Stack direction={["column", "row"]} w="100%">
+              <Stack direction={['column', 'row']} w="100%">
                 <Box flex={1}>
                   <Select
                     placeholder="Region"
-                    {...register("addressRegion", { required: true })}
+                    {...register('addressRegion', { required: true })}
                   >
                     {regionList.map((item) => {
-                      return <option key={"re" + item}>{item}</option>;
+                      return <option key={'re' + item}>{item}</option>;
                     })}
                   </Select>
                 </Box>
-                <Box flex={1} display={["none", "flex"]}></Box>
+                <Box flex={1} display={['none', 'flex']}></Box>
               </Stack>
             </Stack>
           );
 
           break;
-        case "email":
+        case 'email':
           field = (
             <Input
               key={fieldName}
@@ -252,7 +264,7 @@ const Form = (props) => {
           );
           break;
         default:
-          field = createGeneralInputField(fieldName, "text", {
+          field = createGeneralInputField(fieldName, 'text', {
             required: true,
           });
           break;
@@ -261,34 +273,34 @@ const Form = (props) => {
       // Generate validation errors
       let error = createErrorNotifier(fieldName);
 
-      if (fieldName === "address") {
+      if (fieldName === 'address') {
         result.push(
           <FormControl
-            key={fieldName + "Controller"}
+            key={fieldName + 'Controller'}
             isInvalid={
-              errors["addressFloor"] ||
-              errors["addressFlat"] ||
-              errors["addressStreet"] ||
-              errors["addressDistrict"] ||
-              errors["addressRegion"]
+              errors['addressFloor'] ||
+              errors['addressFlat'] ||
+              errors['addressStreet'] ||
+              errors['addressDistrict'] ||
+              errors['addressRegion']
             }
           >
             {label}
             {field}
-            <FormErrorMessage key={fieldName + "errorMessage"}>
-              {(errors["addressFloor"] ||
-                errors["addressFlat"] ||
-                errors["addressStreet"] ||
-                errors["addressDistrict"] ||
-                errors["addressRegion"]) &&
-                "Please fill in all of the fields!"}
+            <FormErrorMessage key={fieldName + 'errorMessage'}>
+              {(errors['addressFloor'] ||
+                errors['addressFlat'] ||
+                errors['addressStreet'] ||
+                errors['addressDistrict'] ||
+                errors['addressRegion']) &&
+                'Please fill in all of the fields!'}
             </FormErrorMessage>
           </FormControl>
         );
       } else {
         result.push(
           <FormControl
-            key={fieldName + "Controller"}
+            key={fieldName + 'Controller'}
             isInvalid={errors[fieldName]}
           >
             {label}
@@ -312,9 +324,9 @@ const Form = (props) => {
     let inputField = [];
 
     switch (fieldType) {
-      case "prefill":
+      case 'prefill':
         break;
-      case "select":
+      case 'select':
         let items = [];
 
         opts.map((option) => {
@@ -324,8 +336,8 @@ const Form = (props) => {
               id={camelize(fieldName + option)}
               value={option}
             >
-              {" "}
-              {option}{" "}
+              {' '}
+              {option}{' '}
             </option>
           );
           items.push(o);
@@ -338,12 +350,12 @@ const Form = (props) => {
             key={fieldName}
             {...register(fieldName, { required: required })}
           >
-            {" "}
-            {items}{" "}
+            {' '}
+            {items}{' '}
           </Select>
         );
         break;
-      case "radio":
+      case 'radio':
         let radioOptions = [];
         opts.map((option) => {
           let o = (
@@ -373,7 +385,7 @@ const Form = (props) => {
           />
         );
         break;
-      case "textarea":
+      case 'textarea':
         inputField.push(
           <Textarea
             id={camelize(fieldName)}
@@ -382,14 +394,14 @@ const Form = (props) => {
           />
         );
         break;
-      case "header":
+      case 'header':
         inputField.push(
           <Heading key={fieldName} as="h3" size="md">
             {fieldName}
           </Heading>
         );
         break;
-      case "checkbox":
+      case 'checkbox':
         inputField.push(
           <Controller
             control={control}
@@ -430,8 +442,8 @@ const Form = (props) => {
 
   const createErrorNotifier = (fieldName) => {
     return (
-      <FormErrorMessage key={fieldName + "errorMessage"}>
-        {errors[fieldName] && "Please fill in this field correctly"}
+      <FormErrorMessage key={fieldName + 'errorMessage'}>
+        {errors[fieldName] && 'Please fill in this field correctly'}
       </FormErrorMessage>
     );
   };
@@ -463,7 +475,7 @@ const Form = (props) => {
         </ModalContent>
       </Modal>
       <form onSubmit={handleSubmit(handleSubmitForm)}>
-        {formImage !== "" && (
+        {formImage !== '' && (
           <Image
             key="formImage"
             boxSize="100%"
@@ -496,17 +508,17 @@ const Form = (props) => {
               key={fieldData.fieldName + i}
               isInvalid={errors[fieldData.fieldName]}
             >
-              {!["header", "prefill", "checkbox"].includes(
+              {!['header', 'prefill', 'checkbox'].includes(
                 fieldData.fieldType
               ) && (
                 <FormLabel
-                  key={fieldData.fieldName + "label"}
-                  id={camelize(fieldData.fieldName + "label")}
+                  key={fieldData.fieldName + 'label'}
+                  id={camelize(fieldData.fieldName + 'label')}
                 >
-                  {fieldData.fieldName}{" "}
+                  {fieldData.fieldName}{' '}
                   {fieldData.required && (
                     <Text
-                      key={fieldData.fieldName + "alert"}
+                      key={fieldData.fieldName + 'alert'}
                       as="span"
                       color="red"
                     >
@@ -516,10 +528,10 @@ const Form = (props) => {
                 </FormLabel>
               )}
               {createFormField(fieldData)}
-              {fieldData.fieldDescription !== "" && (
+              {fieldData.fieldDescription !== '' && (
                 <FormHelperText
-                  key={fieldData.fieldName + "description"}
-                  id={camelize(fieldData.fieldName + "description")}
+                  key={fieldData.fieldName + 'description'}
+                  id={camelize(fieldData.fieldName + 'description')}
                 >
                   {fieldData.fieldDescription}
                 </FormHelperText>
@@ -533,7 +545,7 @@ const Form = (props) => {
             <Text>
               This form submission will be a one-off entry. However, if you want
               an auto-fill feature to be enabled for you for this and all future
-              church event forms,{" "}
+              church event forms,{' '}
               <Link href="/login">
                 you can create an HMCC account right over here
               </Link>

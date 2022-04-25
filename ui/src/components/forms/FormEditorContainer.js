@@ -168,7 +168,7 @@ const FormEditorContainer = (props) => {
                       before saving to DB
                     </FormLabel>
                     <Button colorScheme="blue" type="submit">
-                      Create/Update Form
+                      {!formName ? 'Create' : 'Update'} Form
                     </Button>
                   </FormControl>
                 </Stack>
