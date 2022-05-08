@@ -95,11 +95,11 @@ const FormEditorContainer = (props) => {
         <ModalBody>
           <Container maxW="container.xl" mt="9" mb="9">
             <Box borderRadius="lg" p="5" borderWidth="1px" mb="5">
-              <Heading as="h2" mb="5" size="lg">
+              <Heading as="h2" mb="3" size="lg">
                 Form Information
               </Heading>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <Stack spacing="5">
+                <Stack spacing="2">
                   <FormControl isInvalid={errors['formName']}>
                     <FormLabel>Form Name</FormLabel>
                     <Input
@@ -112,6 +112,10 @@ const FormEditorContainer = (props) => {
                       {errors['formName'] && 'Form name is required'}
                     </FormErrorMessage>
                   </FormControl>
+                  <FormControl isInvalid={errors['formImage']}>
+                    <FormLabel>Form Image Link</FormLabel>
+                    <Input id="formImage" {...register('formImage')} />
+                  </FormControl>
                   <FormControl isInvalid={errors['formDescription']}>
                     <FormLabel>Form Description</FormLabel>
                     <Textarea
@@ -122,10 +126,6 @@ const FormEditorContainer = (props) => {
                       This field supports markdown. Just write it in somewhere
                       else and then paste it in and see the magic happen
                     </FormHelperText>
-                  </FormControl>
-                  <FormControl isInvalid={errors['formImage']}>
-                    <FormLabel>Form Image</FormLabel>
-                    <Input id="formImage" {...register('formImage')} />
                   </FormControl>
                   <FormControl>
                     <FormLabel>Require login?</FormLabel>
@@ -162,7 +162,7 @@ const FormEditorContainer = (props) => {
                       If you need a custom subject for the success email
                     </FormHelperText>
                   </FormControl>
-                  <FormControl>
+                  <FormControl pt="3">
                     <FormLabel>
                       If you updated the fields above please click here again
                       before saving to DB
