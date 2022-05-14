@@ -27,6 +27,7 @@ import AdminContainer from './AdminContainer';
 import ScrollToTop from './helpers/ScrollToTop';
 import AboutUsContainer from './about/AboutUsContainer';
 import OnlineSermonContainer from './sermons/OnlineSermonContainer';
+import IgniteStreamContainer from './ignite/streaming/IgniteStreamContainter';
 
 const MainContainer = () => {
   return (
@@ -212,6 +213,12 @@ const MainContainer = () => {
           path="/admin/:pageName"
           permissions={['admin', 'stewardship']}
           component={AdminContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/go-online"
+          permissions={['public']}
+          component={IgniteStreamContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={NoMatch} />
       </Switch>

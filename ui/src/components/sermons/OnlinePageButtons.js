@@ -12,22 +12,134 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-const OnlinePageButtons = () => {
+const OnlinePageButtons = (props) => {
+  const { isIgnite } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  return (
-    <Stack direction={['column', 'row']}>
+  const IgniteConnectionButton = () => {
+    return (
       <Button
-        width={['100%', '25%']}
+        variant="outline"
+        bg="#00000060"
+        color="#FFFFFF"
+        width={['100%', '33%']}
         fontSize={['sm', 'md']}
         style={{
           whiteSpace: 'normal',
           wordWrap: 'break-word',
         }}
         onClick={onOpen}
+        flex="auto"
+        textStyle="Rubik"
+        borderColor="#3FCBEE"
       >
         Connection Issues
       </Button>
+    );
+  };
+
+  const IgnitePrayerButton = () => {
+    return (
+      <Button
+        bg="#00000060"
+        variant="outline"
+        width={['100%', '33%']}
+        fontSize={['sm', 'md']}
+        style={{
+          whiteSpace: 'normal',
+          wordWrap: 'break-word',
+        }}
+        align="center"
+        as="a"
+        href="https://bit.ly/hmcc-prayer"
+        target="_blank"
+        flex="auto"
+        color="#FFFFFF"
+        textStyle="Rubik"
+        borderColor="#3FCBEE"
+      >
+        Need Prayer?
+      </Button>
+    );
+  };
+
+  const IgniteResponseCardButton = () => {
+    return (
+      <Button
+        bg="#00000060"
+        variant="outline"
+        width={['100%', '33%']}
+        fontSize={['sm', 'md']}
+        style={{
+          whiteSpace: 'normal',
+          wordWrap: 'break-word',
+        }}
+        align="center"
+        flex="auto"
+        color="#FFFFFF"
+        textStyle="Rubik"
+        borderColor="#3FCBEE"
+      >
+        Response Card
+      </Button>
+    );
+  };
+
+  const renderConnectionButton = () => {
+    if (isIgnite) {
+      return <IgniteConnectionButton />;
+    } else {
+      return (
+        <Button
+          width={['100%', '25%']}
+          fontSize={['sm', 'md']}
+          style={{
+            whiteSpace: 'normal',
+            wordWrap: 'break-word',
+          }}
+          onClick={onOpen}
+        >
+          Connection Issues
+        </Button>
+      );
+    }
+  };
+
+  const renderPrayerButton = () => {
+    if (isIgnite) {
+      return <IgnitePrayerButton />;
+    } else {
+      return (
+        <Button
+          variant="outline"
+          width={['100%', '25%']}
+          fontSize={['sm', 'md']}
+          style={{
+            whiteSpace: 'normal',
+            wordWrap: 'break-word',
+          }}
+          align="center"
+          as="a"
+          href="https://bit.ly/hmcc-prayer"
+          target="_blank"
+        >
+          Need Prayer?
+        </Button>
+      );
+    }
+  };
+
+  const renderResponseCard = () => {
+    if (isIgnite) {
+      return <IgniteResponseCardButton />;
+    } else {
+      return;
+    }
+  };
+
+  return (
+    <Stack direction={['column', 'row']}>
+      {renderConnectionButton()}
       <Modal size="2xl" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -63,43 +175,35 @@ const OnlinePageButtons = () => {
           <ModalFooter />
         </ModalContent>
       </Modal>
-      <Button
-        variant="outline"
-        width={['100%', '25%']}
-        fontSize={['sm', 'md']}
-        style={{
-          whiteSpace: 'normal',
-          wordWrap: 'break-word',
-        }}
-        align="center"
-        as="a"
-        href="https://bit.ly/hmcc-prayer"
-        target="_blank"
-      >
-        Need Prayer?
-      </Button>
-      <Button
-        width={['100%', '25%']}
-        bg="#0628A3"
-        color="white"
-        fontSize={['sm', 'md']}
-        as="a"
-        href="/give"
-        target="_blank"
-      >
-        Giving
-      </Button>
-      <Button
-        width={['100%', '25%']}
-        color="#0628A3"
-        fontSize={['sm', 'md']}
-        as="a"
-        href="/events"
-        target="_blank"
-        isTruncated
-      >
-        Events
-      </Button>
+      {renderPrayerButton()}
+      {isIgnite ? (
+        renderResponseCard()
+      ) : (
+        <>
+          <Button
+            width={['100%', '25%']}
+            bg="#0628A3"
+            color="white"
+            fontSize={['sm', 'md']}
+            as="a"
+            href="/give"
+            target="_blank"
+          >
+            Giving
+          </Button>
+          <Button
+            width={['100%', '25%']}
+            color="#0628A3"
+            fontSize={['sm', 'md']}
+            as="a"
+            href="/events"
+            target="_blank"
+            isTruncated
+          >
+            Events
+          </Button>
+        </>
+      )}
     </Stack>
   );
 };
