@@ -87,12 +87,13 @@ const Form = (props) => {
     delete modifiedData['addressDistrict'];
     delete modifiedData['addressRegion'];
 
-    if (formId) console.log(modifiedData);
+    if (formId) setSubmissionData(modifiedData);
     else console.log("this form doesn't support submission");
   };
 
   const postSubmission = async (formId, data, userId) => {
     const redirectTarget = userId ? '/profile' : '/';
+    // Set flag to true to prevent double submission
     setSubmitStatus(true);
     try {
       const { status } = await axios.post('/api/forms/post-create-submission', {
@@ -104,12 +105,13 @@ const Form = (props) => {
         setModalOpen(true);
         setTimeout(() => {
           history.push(redirectTarget);
+          setSubmitStatus(false);
         }, 3000);
       }
     } catch (err) {
       console.log(err);
+      setSubmitStatus(false);
     }
-    setSubmitStatus(false);
   };
 
   useEffect(() => {
@@ -151,7 +153,7 @@ const Form = (props) => {
       // Generate a label
       let label = (
         <FormLabel key={fieldName + 'label'} id={fieldName + 'label'}>
-          {sentencize(fieldName)}{' '}
+          {sentencize(fieldName)}
           <Text key={fieldName + 'alert'} as="span" color="red">
             *
           </Text>
@@ -336,8 +338,7 @@ const Form = (props) => {
               id={camelize(fieldName + option)}
               value={option}
             >
-              {' '}
-              {option}{' '}
+              {option}
             </option>
           );
           items.push(o);
@@ -350,8 +351,7 @@ const Form = (props) => {
             key={fieldName}
             {...register(fieldName, { required: required })}
           >
-            {' '}
-            {items}{' '}
+            {items}
           </Select>
         );
         break;
@@ -360,9 +360,8 @@ const Form = (props) => {
         opts.map((option) => {
           let o = (
             <Radio
-              id={camelize(fieldName + option)}
+              // id={camelize(fieldName + option)}
               key={fieldName + option}
-              {...register(fieldName, { required: required })}
               type="radio"
               value={option}
             >
@@ -376,7 +375,7 @@ const Form = (props) => {
           <Controller
             key={fieldName}
             control={control}
-            name={camelize(fieldName)}
+            name={fieldName}
             render={({ field: { onChange } }) => (
               <RadioGroup onChange={onChange}>
                 <Stack direction="row">{radioOptions}</Stack>
@@ -501,46 +500,51 @@ const Form = (props) => {
             skipHtml
           />
         </Box>
-        <Stack direction="column" spacing={5}>
+        <Stack direction="column" spacing={4}>
           {formFields && createPrefillFormFields(formFields[0])}
-          {formFields.map((fieldData, i) => (
-            <FormControl
-              key={fieldData.fieldName + i}
-              isInvalid={errors[fieldData.fieldName]}
-            >
-              {!['header', 'prefill', 'checkbox'].includes(
-                fieldData.fieldType
-              ) && (
-                <FormLabel
-                  key={fieldData.fieldName + 'label'}
-                  id={camelize(fieldData.fieldName + 'label')}
-                >
-                  {fieldData.fieldName}{' '}
-                  {fieldData.required && (
-                    <Text
-                      key={fieldData.fieldName + 'alert'}
-                      as="span"
-                      color="red"
-                    >
-                      *
-                    </Text>
-                  )}
-                </FormLabel>
-              )}
-              {createFormField(fieldData)}
-              {fieldData.fieldDescription !== '' && (
-                <FormHelperText
-                  key={fieldData.fieldName + 'description'}
-                  id={camelize(fieldData.fieldName + 'description')}
-                >
-                  {fieldData.fieldDescription}
-                </FormHelperText>
-              )}
-            </FormControl>
-          ))}
+          {formFields
+            .filter((fieldData) => {
+              if (fieldData.fieldType === 'prefill') return false;
+              else return true;
+            })
+            .map((fieldData, i) => (
+              <FormControl
+                key={fieldData.fieldName + i}
+                isInvalid={errors[fieldData.fieldName]}
+              >
+                {!['header', 'prefill', 'checkbox'].includes(
+                  fieldData.fieldType
+                ) && (
+                  <FormLabel
+                    key={fieldData.fieldName + 'label'}
+                    id={camelize(fieldData.fieldName + 'label')}
+                  >
+                    {fieldData.fieldName}{' '}
+                    {fieldData.required && (
+                      <Text
+                        key={fieldData.fieldName + 'alert'}
+                        as="span"
+                        color="red"
+                      >
+                        *
+                      </Text>
+                    )}
+                  </FormLabel>
+                )}
+                {createFormField(fieldData)}
+                {fieldData.fieldDescription !== '' && (
+                  <FormHelperText
+                    key={fieldData.fieldName + 'description'}
+                    id={camelize(fieldData.fieldName + 'description')}
+                  >
+                    {fieldData.fieldDescription}
+                  </FormHelperText>
+                )}
+              </FormControl>
+            ))}
         </Stack>
         {!user.id && (
-          <Alert status="info">
+          <Alert status="info" mt={4}>
             <AlertIcon />
             <Text>
               This form submission will be a one-off entry. However, if you want

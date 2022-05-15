@@ -20,7 +20,7 @@ import { DateTime } from 'luxon';
 
 const FormDataDownloader = (props) => {
   const { isOpen, setIsOpen, formId } = props;
-  const { register, reset, handleSubmit, setValue, formState } = useForm();
+  const { register, reset, handleSubmit } = useForm();
   const [isLoading, setIsLoading] = useState(false);
 
   const onClose = () => {
