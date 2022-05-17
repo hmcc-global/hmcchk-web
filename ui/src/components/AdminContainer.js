@@ -1,15 +1,16 @@
-import React from "react";
-import { chakra, useBreakpointValue } from "@chakra-ui/react";
-import AdminHome from "./admin/AdminHome";
-import AdminUser from "./admin/users/AdminUser";
-import FormManager from "./forms/FormManager";
-import AdminGiving from "./admin/AdminGiving";
-import SidebarWithHeader from "./admin/navigation/Sidebar";
-import { useState } from "react";
-import AdminLogout from "./admin/AdminLogout";
+import React from 'react';
+import { chakra, useBreakpointValue } from '@chakra-ui/react';
+import AdminHome from './admin/AdminHome';
+import AdminUser from './admin/users/AdminUser';
+import FormManager from './forms/FormManager';
+import AdminGiving from './admin/AdminGiving';
+import SidebarWithHeader from './admin/navigation/Sidebar';
+import { useState } from 'react';
+import AdminLogout from './admin/AdminLogout';
+import AdminWhitelistManager from './admin/AdminWhitelistManager';
 
-const smVariant = { navigation: "drawer", navigationButton: true };
-const mdVariant = { navigation: "sidebar", navigationButton: false };
+const smVariant = { navigation: 'drawer', navigationButton: true };
+const mdVariant = { navigation: 'sidebar', navigationButton: false };
 
 const AdminContainer = (props) => {
   const { pageName } = props.match.params;
@@ -32,6 +33,7 @@ const AdminContainer = (props) => {
             users: <AdminUser {...props} />,
             forms: <FormManager {...props} />,
             giving: <AdminGiving {...props} />,
+            whitelist: <AdminWhitelistManager {...props} />,
             logout: <AdminLogout {...props} />,
           }[pageName]
         }
