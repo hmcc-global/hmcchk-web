@@ -1,9 +1,17 @@
-import { Heading, Text, Container, Textarea, Button } from '@chakra-ui/react';
+import {
+  Heading,
+  Text,
+  Container,
+  Textarea,
+  Button,
+  useToast,
+} from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { customAxios as axios } from '../helpers/customAxios';
 
 const AdminWhitelistManager = (props) => {
   const { register, handleSubmit, reset } = useForm();
+  const toast = useToast();
 
   const submitWhitelist = async (formData) => {
     try {
@@ -14,24 +22,44 @@ const AdminWhitelistManager = (props) => {
           eventName: 'ignite-2022',
           data: arrayOfEmails,
         });
-        if (status === 200) alert('Successfully created new whitelist entry');
+        if (status === 200) {
+          toast({
+            title: 'Success!',
+            description: 'Whitelist created.',
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
+        }
         reset();
       } else {
-        let cwcEntry = data.filter((obj) => obj.eventName === 'cwc-2022');
+        let cwcEntry = data.filter((obj) => obj.eventName === 'ignite-2022');
         if (cwcEntry.length === 1) {
           let { status } = await axios.post('/api/whitelist/update', {
             id: cwcEntry[0].id,
             eventName: 'ignite-2022',
             data: arrayOfEmails,
           });
-          if (status === 200) alert('Successfully updated whitelist entry');
+          if (status === 200) {
+            toast({
+              title: 'Success!',
+              description: 'Whitelist updated.',
+              status: 'success',
+              duration: 3000,
+              isClosable: true,
+            });
+          }
           reset();
         }
       }
     } catch (err) {
-      alert(
-        'Something went wrong with the whitelist update, please contact a system admin'
-      );
+      toast({
+        title: 'Something went wrong.',
+        description: 'Please contact a system admin',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
@@ -42,7 +70,7 @@ const AdminWhitelistManager = (props) => {
           Whitelist Manager
         </Heading>
         <Text>
-          Insert whitelist here (hardcoded for retreat, don't touch if you don't
+          Insert whitelist here (hardcoded for ignite, don't touch if you don't
           know what you're doing)
         </Text>
         <form onSubmit={handleSubmit(submitWhitelist)}>
