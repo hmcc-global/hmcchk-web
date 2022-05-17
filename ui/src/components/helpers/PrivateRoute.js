@@ -1,12 +1,12 @@
-import { Route } from "react-router-dom";
-import NoMatch from "../errors/NoMatch";
-import HomeContainer from "../home/HomeContainer";
-import { useSelector } from "react-redux";
-import { updateAxiosClient } from "./customAxios";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import UserProfileContainer from "../userProfile/UserProfileContainer";
-import CompleteUserProfileContainer from "../userProfile/CompleteUserProfile";
+import { Route } from 'react-router-dom';
+import NoMatch from '../errors/NoMatch';
+import HomeContainer from '../home/HomeContainer';
+import { useSelector } from 'react-redux';
+import { updateAxiosClient } from './customAxios';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import UserProfileContainer from '../userProfile/UserProfileContainer';
+import CompleteUserProfileContainer from '../userProfile/CompleteUserProfile';
 
 const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
   const user = useSelector((state) => state.user);
@@ -14,13 +14,13 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
 
   const checkIfTokenExists = async (toVerify) => {
     try {
-      const { data } = await axios.post("/api/auth/verify-token", {
+      const { data } = await axios.post('/api/auth/verify-token', {
         token: toVerify,
       });
       updateAxiosClient(toVerify);
       return data;
     } catch (err) {
-      if (err.response.data.raw === "token-expired") {
+      if (err.response.data.raw === 'token-expired') {
         localStorage.clear();
         window.location.reload();
       }
@@ -40,8 +40,8 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
 
   // check if Token exists in redux store
   const noTokenExists = Object.keys(user).length === 0;
-  const noUser = permissions.includes("noUser");
-  const isPublic = permissions.includes("public");
+  const noUser = permissions.includes('noUser');
+  const isPublic = permissions.includes('public');
   const access =
     isPublic ||
     permissions.some(
@@ -60,32 +60,38 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
             if (noTokenExists) return <Component {...props} />;
             else {
               switch (props.location.pathname) {
-                case "/login":
+                case '/login':
                   if (user) {
-                    props.history.push("/profile");
+                    props.history.push('/profile');
                     return <UserProfileContainer {...props} user={userObj} />;
                   }
                   break;
               }
-              props.history.push("/");
+              props.history.push('/');
               return <HomeContainer {...props} user={userObj} />;
             }
           } else if (access) {
             switch (props.location.pathname) {
-              case "/complete-profile":
+              case '/complete-profile':
                 if (userObj.hasFilledProfileForm) {
-                  props.history.push("/profile");
+                  props.history.push('/profile');
                   return <UserProfileContainer {...props} user={userObj} />;
                 }
                 break;
-              case "/profile":
+              case '/profile':
                 if (!userObj.hasFilledProfileForm) {
-                  props.history.push("/complete-profile");
+                  props.history.push('/complete-profile');
                   return (
                     <CompleteUserProfileContainer {...props} user={userObj} />
                   );
                 }
                 break;
+              case props.location.pathname.match(/go-\/*/)?.input:
+                if (userObj.whitelisted) {
+                  return <Component {...props} user={userObj} />;
+                } else {
+                  return <NoMatch user={userObj} />;
+                }
             }
 
             return <Component {...props} user={userObj} />;
