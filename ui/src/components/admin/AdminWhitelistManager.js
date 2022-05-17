@@ -33,10 +33,10 @@ const AdminWhitelistManager = (props) => {
         }
         reset();
       } else {
-        let cwcEntry = data.filter((obj) => obj.eventName === 'ignite-2022');
-        if (cwcEntry.length === 1) {
+        let igniteEntry = data.filter((obj) => obj.eventName === 'ignite-2022');
+        if (igniteEntry.length === 1) {
           let { status } = await axios.post('/api/whitelist/update', {
-            id: cwcEntry[0].id,
+            id: igniteEntry[0].id,
             eventName: 'ignite-2022',
             data: arrayOfEmails,
           });
