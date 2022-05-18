@@ -1,0 +1,62 @@
+export const IgniteSchedule = {
+    '2022-05-27': [
+      {
+        title: 'Check-In',
+        startTime: '19:00',
+        backgroundColor: '',
+        stroke: '#46B2D3',
+        color: '#46B2D3',
+      },
+      {
+        title: 'Session 1',
+        startTime: '19:30',
+        backgroundColor: '',
+        stroke: '',
+        color: '',
+      },
+    ],
+    '2022-05-28': [
+      {
+        title: 'Session 2',
+        startTime: '09:00',
+        backgroundColor: '',
+        stroke: '',
+        color: '',
+      },
+      {
+        title: 'Lunch',
+        startTime: '12:00',
+        backgroundColor: '',
+        stroke: '#46B2D3',
+        color: '#46B2D3',
+      },
+      {
+        title: 'Activity',
+        startTime: '13:30',
+        backgroundColor: '',
+        stroke: '',
+        color: '',
+      },
+      {
+        title: 'Dinner',
+        startTime: '17:00',
+        backgroundColor: '',
+        stroke: '#46B2D3',
+        color: '#46B2D3',
+      },
+      {
+        title: 'Prayer',
+        startTime: '18:30',
+        backgroundColor: '',
+        stroke: '#46B2D3',
+        color: '#46B2D3',
+      },
+      {
+        title: 'Session 3',
+        startTime: '19:30',
+        backgroundColor: '',
+        stroke: '',
+        color: '',
+      },
+    ],
+  };

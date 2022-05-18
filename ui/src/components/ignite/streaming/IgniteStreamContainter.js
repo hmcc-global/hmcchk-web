@@ -110,7 +110,7 @@ const IgniteStreamContainer = (props) => {
                 </VStack>
               </Box>
               <Box
-                bg="white"
+                bg="black"
                 ml={{ base: '0px', lg: '20px' }}
                 mb="20px"
                 w={{ base: '100%', lg: '40%' }}
@@ -126,7 +126,7 @@ const IgniteStreamContainer = (props) => {
                   w="100%"
                   h="100%"
                 >
-                  <OnlinePageTabs sermonNotes={onlineSermon.sermonNotes} />
+                  <OnlinePageTabs isIgnite/>
                 </Box>
               </Box>
             </Box>
