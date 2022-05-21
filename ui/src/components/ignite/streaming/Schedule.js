@@ -2,29 +2,6 @@ import { Box, Container, Flex, Text } from '@chakra-ui/layout';
 import { IgniteSchedule } from './IgniteSchedule';
 import { DateTime } from 'luxon';
 
-export const NextEvent = () => { 
-  const defaultText = 'Please refer to the schedule for next session!'; 
-  const current = DateTime.local();
-  const dateNow = current.toFormat('yyyy-MM-dd'); 
-
-  const todaySchedule = IgniteSchedule[dateNow]; 
-  if (!todaySchedule) return defaultText;
-
-  const nextSession = todaySchedule.find((s) => {
-    if (!s.title.includes('Session')) return false;
-    const startTime = DateTime.fromISO(`${dateNow}T${s.startTime}`);
-
-    if (startTime > current) return true;
-    return false;
-  });
-
-  if (!nextSession) return defaultText;
-
-  const startTime = DateTime.fromISO(`${dateNow}T${nextSession.startTime}`);
-  if (startTime > current)
-    return `Next session is starting at ${nextSession.startTime}`;
-};
-
 const DaySchedule = ({ whichDay, dateString, item }) => {
   const dateObj = DateTime.fromFormat(dateString, 'yyyy-MM-dd'); 
   const scheduleDate = dateObj.toFormat('dd');
@@ -50,7 +27,7 @@ const DaySchedule = ({ whichDay, dateString, item }) => {
         <Text
           fontWeight="800"
           fontSize={{ base: 12, md: 9, lg: 12 }}
-          marginTop="-10px"
+          marginTop={[-10, -1]}
           textAlign="left"
           color="white"
           textStyle="Rubik_bold"
@@ -132,7 +109,6 @@ const DaySchedule = ({ whichDay, dateString, item }) => {
         <></>
       ) : (
         <Box
-          bg="black"
           marginRight={{ md: 2, lg: 4 }}
           marginLeft={{ md: 2, lg: 4 }}
           marginBottom={[4, 0]}
@@ -146,24 +122,12 @@ const DaySchedule = ({ whichDay, dateString, item }) => {
 };
 
 export const Schedule = (props) => {
-  const { withoutHeader, ...properties } = props;
+  const { ...properties } = props;
   return (
     <Container px={[4, 0]}>
       <Box
-        borderRadius={!withoutHeader ? 17 : 0}
-        bg="black"
-        overflow="auto"
-        css={{
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none',
-          '&::-webkit-scrollbar': {
-            width: '0px',
-            height: '0px',
-          },
-        }}
         {...properties}
       >
-        {!withoutHeader}
         {Object.keys(IgniteSchedule).map((schedule, i) => (
           <DaySchedule
             key={i}

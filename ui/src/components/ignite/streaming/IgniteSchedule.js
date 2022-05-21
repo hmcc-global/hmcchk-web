@@ -38,6 +38,20 @@ export const IgniteSchedule = {
         color: '',
       },
       {
+        title: 'Trainings',
+        startTime: '13:50',
+        backgroundColor: '',
+        stroke: '',
+        color: '',
+      },
+      {
+        title: 'Break Time',
+        startTime: '16:00',
+        backgroundColor: '',
+        stroke: '#46B2D3',
+        color: '#46B2D3',
+      },
+      {
         title: 'Dinner',
         startTime: '17:00',
         backgroundColor: '',

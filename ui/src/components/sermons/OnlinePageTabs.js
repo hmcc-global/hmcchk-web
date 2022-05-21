@@ -36,7 +36,6 @@ const OnlinePageTabs = ({ sermonNotes, isIgnite }) => {
     return (
       <Tabs
         isFitted
-        onChange={(i) => setTab(i)} overflowY={(tab ? 'auto' : 'hidden')}
       >
         <TabList orientation="horizontal">
           <Tab 
@@ -57,9 +56,9 @@ const OnlinePageTabs = ({ sermonNotes, isIgnite }) => {
           borderBottomColor="black"
           color="white">
           Schedule</Tab>
-      </TabList>
+        </TabList>
       <TabPanels>
-        <TabPanel h="100%">
+        <TabPanel>
           <VStack spacing={3} align="stretch">
             {/*red box*/}
             <Box height="100%" bg= "#FF7461" color="white">
@@ -67,13 +66,13 @@ const OnlinePageTabs = ({ sermonNotes, isIgnite }) => {
                 !gnite 2022: Go
               </Text>
               <Text marginTop="-20px" textStyle="Rubik" textAlign="center" fontSize="12px" padding={2}>
-                Ignite Conference aims to ignite everyone with a passion <br/>
-                for God so that they can take the Gospel to every nation <br/>
+                Ignite Conference aims to ignite everyone with a passion
+                for God so that they can take the Gospel to every nation
                 in our generation.
                 <br/><br/>
-                In the Great Commission (Matthew 28:19-20), Jesus<br/>  
+                In the Great Commission (Matthew 28:19-20), Jesus
                 commands us to go and make disciples of all nations. We want to go
-                beyond ourselves and into the world to be <br/> His salt and light!
+                beyond ourselves and into the world to be His salt and light!
               </Text>
             </Box>
             {/* blue box*/}
@@ -81,20 +80,20 @@ const OnlinePageTabs = ({ sermonNotes, isIgnite }) => {
               <Text textStyle="Rubik_bold" textAlign="center" padding={5}>
                 Guest Speaker: Pastor Daniel Jung
               </Text>
-              <Image
-              width="70%"
-              mt={-2}
-              mb={2}
-              marginLeft={14}
-              src={`${process.env.PUBLIC_URL + '/images/ignite/image45.png'}`}
-              />
+                <Image
+                width="70%"
+                mt={-2}
+                mb={2}
+                marginLeft={'15%'}
+                src={`${process.env.PUBLIC_URL + '/images/ignite/image45.png'}`}
+                />
               <Text marginTop="-10px" textStyle="Rubik" textAlign="center" fontSize="12px" padding={2}>
-                ​​Pastor Daniel Jung is from the US but moved his family to<br/>
+                ​​Pastor Daniel Jung is from the US but moved his family to
                 live in Chiang Mai, Thailand 12 years ago to live as missionaries.
                 <br/><br/>
-                He started and runs Mango House, an orphanage/children’s<br/>
-                home with a vision to make disciples for Jesus<br/>
-                and to use education to end the cycle of poverty among<br/>
+                He started and runs Mango House, an orphanage/children’s
+                home with a vision to make disciples for Jesus
+                and to use education to end the cycle of poverty among
                 the children that he serves.
                 <br/><br/>
                 He is married to Sue and has 2 sons, <br/> Kido and Kiwon.
@@ -104,7 +103,7 @@ const OnlinePageTabs = ({ sermonNotes, isIgnite }) => {
         </TabPanel>
         <TabPanel>
           <GridItem colSpan={5} marginTop={5}>
-            <Schedule minW="100%" />
+            <Schedule />
           </GridItem>
         </TabPanel>
       </TabPanels>
@@ -112,18 +111,10 @@ const OnlinePageTabs = ({ sermonNotes, isIgnite }) => {
     )
   }
 
-  const renderIgniteTab = () => { 
-    if (isIgnite) { 
-      return <IgnitePage/>;
-    } else { 
-      return;
-    }
-  };
-
   return (
     <>
     {isIgnite ? (
-      renderIgniteTab()) : (
+      IgnitePage()) : (
       <Tabs
         isFitted
         h="100%"

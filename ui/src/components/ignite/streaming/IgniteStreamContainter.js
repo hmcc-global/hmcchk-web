@@ -11,10 +11,8 @@ import {
   Container,
   Image,
 } from '@chakra-ui/react';
-import { ChevronLeftIcon } from '@chakra-ui/icons';
 import OnlinePageButtons from '../../sermons/OnlinePageButtons';
 import OnlinePageTabs from '../../sermons/OnlinePageTabs';
-import igniteTheme from '../igniteTheme';
 
 const IgniteStreamContainer = (props) => {
   const { history } = props;
@@ -114,20 +112,10 @@ const IgniteStreamContainer = (props) => {
                 ml={{ base: '0px', lg: '20px' }}
                 mb="20px"
                 w={{ base: '100%', lg: '40%' }}
-                overflowY="auto"
                 position="relative"
-                borderRadius={10}
                 boxShadow="0px 4px 18px rgba(0, 0, 0, 0.25)"
               >
-                <Box
-                  position={{ base: 'unset', lg: 'absolute ' }}
-                  top={{ base: 'unset', lg: 0 }}
-                  left={{ base: 'unset', lg: 0 }}
-                  w="100%"
-                  h="100%"
-                >
-                  <OnlinePageTabs isIgnite/>
-                </Box>
+                <OnlinePageTabs isIgnite/>
               </Box>
             </Box>
           </VStack>
