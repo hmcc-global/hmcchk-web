@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import UserProfileContainer from '../userProfile/UserProfileContainer';
 import CompleteUserProfileContainer from '../userProfile/CompleteUserProfile';
+import NoAccessIgnite from '../ignite/NoAccess';
 
 const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
   const user = useSelector((state) => state.user);
@@ -86,11 +87,16 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
                   );
                 }
                 break;
-              case props.location.pathname.match(/go-\/*/)?.input:
+              case props.location.pathname.match(/go-online/)?.input:
                 if (userObj.whitelisted) {
                   return <Component {...props} user={userObj} />;
                 } else {
-                  return <NoMatch user={userObj} />;
+                  return (
+                    <NoAccessIgnite
+                      user={userObj}
+                      redirectLink={props.location.pathname}
+                    />
+                  );
                 }
             }
 
