@@ -20,7 +20,12 @@ const IgniteStreamContainer = (props) => {
 
   const getOnlineSermon = useCallback(async () => {
     try {
-      const { data, status } = await axios.get('/api/sermons/get-sermons');
+      const { data, status } = await axios.get('/api/sermons/get-sermons', {
+        params: {
+          includeProtected: true,
+          includePublic: false,
+        },
+      });
       if (status === 200) {
         const current = data.find(({ nextSermon }) => nextSermon == null);
         if (
@@ -112,10 +117,11 @@ const IgniteStreamContainer = (props) => {
                 ml={{ base: '0px', lg: '20px' }}
                 mb="20px"
                 w={{ base: '100%', lg: '40%' }}
+                overflowY="auto"
                 position="relative"
                 boxShadow="0px 4px 18px rgba(0, 0, 0, 0.25)"
               >
-                <OnlinePageTabs isIgnite/>
+                <OnlinePageTabs isIgnite />
               </Box>
             </Box>
           </VStack>

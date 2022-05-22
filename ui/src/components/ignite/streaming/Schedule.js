@@ -3,10 +3,10 @@ import { IgniteSchedule } from './IgniteSchedule';
 import { DateTime } from 'luxon';
 
 const DaySchedule = ({ whichDay, dateString, item }) => {
-  const dateObj = DateTime.fromFormat(dateString, 'yyyy-MM-dd'); 
+  const dateObj = DateTime.fromFormat(dateString, 'yyyy-MM-dd');
   const scheduleDate = dateObj.toFormat('dd');
   const scheduleDay = dateObj.toFormat('cccc');
-  const whatDay = "DAY "+(whichDay+1);
+  const whatDay = 'DAY ' + (whichDay + 1);
 
   const DayDateElement = () => {
     return (
@@ -126,6 +126,15 @@ export const Schedule = (props) => {
   return (
     <Container px={[4, 0]}>
       <Box
+        overflow="auto"
+        css={{
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+          '&::-webkit-scrollbar': {
+            width: '0px',
+            height: '0px',
+          },
+        }}
         {...properties}
       >
         {Object.keys(IgniteSchedule).map((schedule, i) => (
