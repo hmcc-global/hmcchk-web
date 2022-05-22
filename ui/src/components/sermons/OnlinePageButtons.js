@@ -161,16 +161,6 @@ const OnlinePageButtons = (props) => {
             site through incognito browsing.
             <br />
             <br />
-            If you have issues loading the video stream on this site, please try
-            and access the stream at{' '}
-            <Link
-              href="https://youtube.com/c/hmcchk"
-              fontStyle="italic"
-              color="blue"
-              target="_blank"
-            >
-              https://youtube.com/c/hmcchk
-            </Link>{' '}
           </ModalBody>
           <ModalFooter />
         </ModalContent>
