@@ -33,7 +33,12 @@ const OnlinePageTabs = ({ sermonNotes, isIgnite }) => {
 
   const IgnitePage = () => {
     return (
-      <Tabs isFitted h="100%" overflowY={tab ? 'auto' : 'hidden'}>
+      <Tabs
+        isFitted
+        h="100%"
+        onChange={(i) => setTab(i)}
+        overflowY={tab ? 'auto' : 'hidden'}
+      >
         <TabList orientation="horizontal">
           <Tab
             _selected={{
@@ -59,7 +64,7 @@ const OnlinePageTabs = ({ sermonNotes, isIgnite }) => {
           </Tab>
         </TabList>
         <TabPanels>
-          <TabPanel h="100%">
+          <TabPanel>
             <VStack spacing={3} align="stretch">
               {/*red box*/}
               <Box height="100%" bg="#FF7461" color="white">
@@ -120,9 +125,7 @@ const OnlinePageTabs = ({ sermonNotes, isIgnite }) => {
             </VStack>
           </TabPanel>
           <TabPanel>
-            <GridItem colSpan={5} marginTop={5}>
-              <Schedule />
-            </GridItem>
+            <Schedule maxH={'597'} minW="100%" />
           </TabPanel>
         </TabPanels>
       </Tabs>
