@@ -35,7 +35,8 @@ const NoAccessIgnite = (props) => {
           </Text>
           <Image
             w={['80vw', '30vw']}
-            src={process.env.PUBLIC_URL + '/images/ignite/bg.png'}
+            mb={'10'}
+            src={process.env.PUBLIC_URL + '/images/ignite/title.png'}
           />
           <Text
             mt="-1.5rem"
@@ -67,7 +68,7 @@ const NoAccessIgnite = (props) => {
             </Center>
           ) : (
             <Center
-              bg="#A9E0E3"
+              bg="#46B2D3"
               borderRadius="17px"
               p={['2rem 1.2rem', '1rem 3rem']}
               flexDirection="column"
@@ -89,7 +90,7 @@ const NoAccessIgnite = (props) => {
               </HStack>
               <Link
                 borderRadius="20px"
-                bg="#FFE9AF"
+                bg="#FF7461"
                 boxShadow="xl"
                 textStyle="sora_bolder"
                 textAlign="center"
