@@ -54,7 +54,9 @@ const IgniteStreamContainer = (props) => {
   return (
     <Box
       w="100%"
-      bgImage={`url(${process.env.PUBLIC_URL + '/images/ignite/bg.png'})`}
+      bgImage={`linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.7)) , url(${
+        process.env.PUBLIC_URL + '/images/ignite/bg.png'
+      })`}
       bgPosition="center"
       bgSize="cover"
     >
@@ -89,7 +91,7 @@ const IgniteStreamContainer = (props) => {
 
                   <Text
                     color="#FFFFFF"
-                    textStyle="Rubik_bold"
+                    textStyle="Rubik_bolder"
                     fontSize={{ base: 'xl', md: '2xl' }}
                     mb="0.5rem !important"
                   >
@@ -112,6 +114,7 @@ const IgniteStreamContainer = (props) => {
                   </Stack>
                 </VStack>
               </Box>
+
               <Box
                 bg="black"
                 ml={{ base: '0px', lg: '20px' }}
@@ -121,7 +124,14 @@ const IgniteStreamContainer = (props) => {
                 position="relative"
                 boxShadow="0px 4px 18px rgba(0, 0, 0, 0.25)"
               >
-                <OnlinePageTabs isIgnite />
+                <Box
+                  position={{ base: 'unset', lg: 'absolute ' }}
+                  top={{ base: 'unset', lg: 0 }}
+                  left={{ base: 'unset', lg: 0 }}
+                  w="100%"
+                >
+                  <OnlinePageTabs isIgnite />
+                </Box>
               </Box>
             </Box>
           </VStack>
