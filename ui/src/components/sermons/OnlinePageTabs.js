@@ -63,8 +63,8 @@ const OnlinePageTabs = ({ sermonNotes, isIgnite }) => {
             Schedule
           </Tab>
         </TabList>
-        <TabPanels>
-          <TabPanel>
+        <TabPanels h="100%">
+          <TabPanel h="100%">
             <VStack spacing={3} align="stretch">
               {/*red box*/}
               <Box height="100%" bg="#FF7461" color="white">
@@ -89,18 +89,90 @@ const OnlinePageTabs = ({ sermonNotes, isIgnite }) => {
                 </Text>
               </Box>
               {/* blue box*/}
-              <Box height="100%" bg="#46B2D3" color="white" textStyle="Rubik">
+              <Box
+                height="100%"
+                bg="#46B2D3"
+                color="white"
+                textStyle="Rubik"
+                align="center"
+              >
+                <Text textStyle="Rubik_bold" textAlign="center" padding={5}>
+                  Speaker: Rev. Dr. Seth S. Kim
+                </Text>
+                <Image
+                  width="30%"
+                  mt={-2}
+                  mb={2}
+                  src={`${process.env.PUBLIC_URL + '/images/ignite/PSeth.png'}`}
+                />
+                <Text
+                  marginTop="-10px"
+                  textStyle="Rubik"
+                  textAlign="center"
+                  fontSize="12px"
+                  padding={2}
+                >
+                  ​Pastor Seth graduated from the University of Illinois at
+                  Urbana-Champaign in 1992, and received his call into full-time
+                  ministry while serving as a member of a gospel praise band
+                  during his undergraduate years. <br />
+                  <br /> In 1996, Pastor Seth and his wife, Christina, started
+                  Harvest Mission Community Church in Ann Arbor with the vision
+                  of planting a church that would be used by God to “transform
+                  lost people into Christ’s disciples who will then transform
+                  the world.” In July 2015, Pastor Seth moved to Hong Kong with
+                  his whole family to start HMCC of Hong Kong.
+                </Text>
+              </Box>
+              <Box
+                height="100%"
+                bg="#46B2D3"
+                color="white"
+                textStyle="Rubik"
+                align="center"
+              >
+                <Text textStyle="Rubik_bold" textAlign="center" padding={5}>
+                  Speaker: Pastor Bo Zhu
+                </Text>
+                <Image
+                  width="30%"
+                  mt={-2}
+                  mb={2}
+                  src={`${process.env.PUBLIC_URL + '/images/ignite/PBo.png'}`}
+                />
+                <Text
+                  marginTop="-10px"
+                  textStyle="Rubik"
+                  textAlign="center"
+                  fontSize="12px"
+                  padding={2}
+                >
+                  ​​Pastor Bo graduated from University of Michigan where he
+                  accepted Christ and continued to grow in his relationship with
+                  God. He was a part of the church plant team in Hong Kong with
+                  Pastor Seth. <br />
+                  <br />
+                  In 2016, he was commissioned as a Pastor during !gnite
+                  Conference, and has been serving the church faithfully. He
+                  currently lives in Hong Kong with his wife, Erica Zhu, and
+                  their son, Noah.
+                </Text>
+              </Box>
+              <Box
+                height="100%"
+                bg="#46B2D3"
+                color="white"
+                textStyle="Rubik"
+                align="center"
+              >
                 <Text textStyle="Rubik_bold" textAlign="center" padding={5}>
                   Guest Speaker: Pastor Daniel Jung
                 </Text>
                 <Image
-                  width="70%"
+                  width="30%"
                   mt={-2}
                   mb={2}
-                  marginLeft={'15%'}
-                  src={`${
-                    process.env.PUBLIC_URL + '/images/ignite/image45.png'
-                  }`}
+                  src={`${process.env.PUBLIC_URL + '/images/ignite/PDan.png'}`}
                 />
                 <Text
                   marginTop="-10px"

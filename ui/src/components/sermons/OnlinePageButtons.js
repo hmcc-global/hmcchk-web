@@ -32,6 +32,7 @@ const OnlinePageButtons = (props) => {
         flex="auto"
         textStyle="Rubik"
         borderColor="#3FCBEE"
+        _hover={{ bg: '#9C9C9C' }}
       >
         Connection Issues
       </Button>
@@ -57,6 +58,7 @@ const OnlinePageButtons = (props) => {
         color="#FFFFFF"
         textStyle="Rubik"
         borderColor="#3FCBEE"
+        _hover={{ bg: '#9C9C9C' }}
       >
         Need Prayer?
       </Button>
@@ -79,6 +81,10 @@ const OnlinePageButtons = (props) => {
         color="#FFFFFF"
         textStyle="Rubik"
         borderColor="#3FCBEE"
+        _hover={{ bg: '#9C9C9C' }}
+        as="a"
+        href="https://forms.gle/uZeqBGDrj1dSJe9j9"
+        target="_blank"
       >
         Response Card
       </Button>

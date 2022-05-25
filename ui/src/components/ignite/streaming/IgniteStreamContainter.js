@@ -54,7 +54,9 @@ const IgniteStreamContainer = (props) => {
   return (
     <Box
       w="100%"
-      bgImage={`url(${process.env.PUBLIC_URL + '/images/ignite/bg.png'})`}
+      bgImage={`linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.7)) , url(${
+        process.env.PUBLIC_URL + '/images/ignite/bg.png'
+      })`}
       bgPosition="center"
       bgSize="cover"
     >
@@ -89,7 +91,7 @@ const IgniteStreamContainer = (props) => {
 
                   <Text
                     color="#FFFFFF"
-                    textStyle="Rubik_bold"
+                    textStyle="Rubik_bolder"
                     fontSize={{ base: 'xl', md: '2xl' }}
                     mb="0.5rem !important"
                   >

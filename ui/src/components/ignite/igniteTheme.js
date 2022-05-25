@@ -15,6 +15,10 @@ const igniteTheme = extendTheme({
       fontFamily: 'Rubik',
       fontWeight: 700,
     },
+    Rubik_bolder: {
+      fontFamily: 'Rubik',
+      fontWeight: 900,
+    },
   },
 });
 
