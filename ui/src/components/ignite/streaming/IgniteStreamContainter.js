@@ -114,6 +114,7 @@ const IgniteStreamContainer = (props) => {
                   </Stack>
                 </VStack>
               </Box>
+
               <Box
                 bg="black"
                 ml={{ base: '0px', lg: '20px' }}
@@ -123,7 +124,14 @@ const IgniteStreamContainer = (props) => {
                 position="relative"
                 boxShadow="0px 4px 18px rgba(0, 0, 0, 0.25)"
               >
-                <OnlinePageTabs isIgnite />
+                <Box
+                  position={{ base: 'unset', lg: 'absolute ' }}
+                  top={{ base: 'unset', lg: 0 }}
+                  left={{ base: 'unset', lg: 0 }}
+                  w="100%"
+                >
+                  <OnlinePageTabs isIgnite />
+                </Box>
               </Box>
             </Box>
           </VStack>

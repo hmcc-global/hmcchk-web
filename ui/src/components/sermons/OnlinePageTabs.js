@@ -191,7 +191,7 @@ const OnlinePageTabs = ({ sermonNotes, isIgnite }) => {
                   to end the cycle of poverty among the children that he serves.
                   <br />
                   <br />
-                  He is married to Sue and has 2 sons, <br /> Kido and Kiwon.
+                  He is married to Sue and has 2 sons, Kido and Kiwon.
                 </Text>
               </Box>
             </VStack>
