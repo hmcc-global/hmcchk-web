@@ -125,7 +125,7 @@ const OnlinePageTabs = ({ sermonNotes, isIgnite }) => {
             </VStack>
           </TabPanel>
           <TabPanel>
-            <Schedule maxH={'597'} minW="100%" />
+            <Schedule maxH={'590'} minW="100%" />
           </TabPanel>
         </TabPanels>
       </Tabs>

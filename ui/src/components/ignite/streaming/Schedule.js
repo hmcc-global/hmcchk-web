@@ -27,7 +27,7 @@ const DaySchedule = ({ whichDay, dateString, item }) => {
         <Text
           fontWeight="800"
           fontSize={{ base: 12, md: 9, lg: 12 }}
-          marginTop={[-10, -1]}
+          marginTop={[0, -1]}
           textAlign="left"
           color="white"
           textStyle="Rubik_bold"
@@ -37,7 +37,7 @@ const DaySchedule = ({ whichDay, dateString, item }) => {
         <Text
           as="b"
           fontSize={{ base: 30, md: 25, lg: 35 }}
-          marginTop="-10px"
+          marginTop={[-1, -2]}
           textAlign="left"
           color="white"
           textStyle="Rubik_bold"
@@ -54,7 +54,7 @@ const DaySchedule = ({ whichDay, dateString, item }) => {
         bg={backgroundColor !== '' ? backgroundColor : ''}
         marginBottom={4}
         border="2px solid"
-        borderColor={stroke !== '' ? stroke : '#FF7461'}
+        borderColor={stroke !== '' ? stroke : '#FF9283'}
       >
         <Flex flexDir="row" justifyContent="space-between">
           <Text
@@ -63,7 +63,7 @@ const DaySchedule = ({ whichDay, dateString, item }) => {
             fontSize={{ base: 15, md: '0.8em', lg: '0.95em' }}
             fontWeight="700"
             textStyle="Rubik_bold"
-            color={color !== '' ? color : '#FF7461'}
+            color={color !== '' ? color : '#FF9283'}
           >
             {title}
           </Text>
@@ -73,7 +73,7 @@ const DaySchedule = ({ whichDay, dateString, item }) => {
             fontSize={{ base: 15, md: '0.8em', lg: '0.95em' }}
             fontWeight="700"
             textStyle="Rubik_bold"
-            color={color !== '' ? color : '#FF7461'}
+            color={color !== '' ? color : '#FF9283'}
           >
             {time}
           </Text>
@@ -108,12 +108,7 @@ const DaySchedule = ({ whichDay, dateString, item }) => {
       {whichDay === 2 ? (
         <></>
       ) : (
-        <Box
-          marginRight={{ md: 2, lg: 4 }}
-          marginLeft={{ md: 2, lg: 4 }}
-          marginBottom={[4, 0]}
-          h={3}
-        >
+        <Box marginRight={{ md: 2, lg: 4 }} marginLeft={{ md: 2, lg: 4 }} h={1}>
           <br />
         </Box>
       )}
