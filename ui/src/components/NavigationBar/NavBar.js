@@ -29,7 +29,8 @@ import MainMenu from './MainMenu';
 import { useHistory } from 'react-router-dom';
 
 const NavBar = (props) => {
-  const isOnlineSermon = useHistory().location.pathname.includes("online");
+  const { isIgnite } = props;
+  const isOnlineSermon = useHistory().location.pathname.includes('online');
   const [loggedIn, setLoggedIn] = useState(false);
   const user = useSelector((state) => state.user);
   const [username, setUsername] = useState('');
@@ -77,7 +78,7 @@ const NavBar = (props) => {
         <Flex
           w="100vw"
           justify={['space-between', 'space-around']}
-          backgroundColor="white"
+          backgroundColor={isIgnite ? 'black' : 'white'}
           backdrop-filter="blur(39px)"
           align="center"
           fontSize={{ md: 'xs', lg: 'sm', xl: 'md' }}
@@ -92,23 +93,36 @@ const NavBar = (props) => {
             >
               <Box position="relative">
                 <LinkOverlay href="/">
-                  <Image
-                    h={{
-                      base: '3vh',
-                      sm: '3vh',
-                      md: '3vh',
-                      lg: '5vh',
-                    }}
-                    src={process.env.PUBLIC_URL + '/images/ripple_black.svg'}
-                    alt="Logo of HMCC"
-                  />
+                  {isIgnite ? (
+                    <Image
+                      h={{
+                        base: '3vh',
+                        sm: '3vh',
+                        md: '3vh',
+                        lg: '5vh',
+                      }}
+                      src={process.env.PUBLIC_URL + '/images/ripple_white.svg'}
+                      alt="Logo of HMCC"
+                    />
+                  ) : (
+                    <Image
+                      h={{
+                        base: '3vh',
+                        sm: '3vh',
+                        md: '3vh',
+                        lg: '5vh',
+                      }}
+                      src={process.env.PUBLIC_URL + '/images/ripple_black.svg'}
+                      alt="Logo of HMCC"
+                    />
+                  )}
                 </LinkOverlay>
               </Box>
 
               <Stack
                 fontWeight="600"
                 spacing={10}
-                color="black"
+                color={isIgnite ? 'white' : 'black'}
                 justify="center"
                 align="center"
                 display={{ base: 'none', md: 'flex' }}
@@ -136,7 +150,7 @@ const NavBar = (props) => {
               </Stack>
               <Stack
                 spacing={2}
-                color="black"
+                color={isIgnite ? 'white' : 'black'}
                 justify="right"
                 align="right"
                 alignItems="center"
@@ -144,7 +158,7 @@ const NavBar = (props) => {
               >
                 <Box
                   fontWeight="600"
-                  color="#1A365D"
+                  color={isIgnite ? '#46B2D3' : '#1A365D'}
                   display={{ base: 'none', md: 'flex' }}
                 >
                   {loggedIn ? (
@@ -177,11 +191,19 @@ const NavBar = (props) => {
                     onClick={onOpen}
                     style={{ background: 'none' }}
                   >
-                    <Image
-                      h="2.5vh"
-                      src={process.env.PUBLIC_URL + '/images/menu.svg'}
-                      alt="Menu Button"
-                    />
+                    {isIgnite ? (
+                      <Image
+                        h="2.5vh"
+                        src={process.env.PUBLIC_URL + '/images/menu_white.svg'}
+                        alt="Menu Button"
+                      />
+                    ) : (
+                      <Image
+                        h="2.5vh"
+                        src={process.env.PUBLIC_URL + '/images/menu.svg'}
+                        alt="Menu Button"
+                      />
+                    )}
                   </Button>
                 </Box>
               </Stack>
@@ -200,7 +222,6 @@ const NavBar = (props) => {
           align="center"
           color="gray.100"
           justify="center"
-          align="center"
           h="6vh"
           p={2}
         >

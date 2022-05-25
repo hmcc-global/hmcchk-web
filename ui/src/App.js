@@ -13,7 +13,11 @@ const App = () => {
         <PersistGate loading={null} persistor={persistor}>
           <BrowserRouter>
             <>
-              <NavBar />
+              {window.location.pathname.match(/go-online/)?.input ? (
+                <NavBar isIgnite />
+              ) : (
+                <NavBar />
+              )}
               <MainContainer />
             </>
           </BrowserRouter>
