@@ -67,7 +67,7 @@ export const IgniteSchedule = {
     },
     {
       title: 'Session 3',
-      startTime: '19:30',
+      startTime: '19:00',
       backgroundColor: '',
       stroke: '',
       color: '',
