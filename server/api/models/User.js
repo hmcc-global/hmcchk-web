@@ -1,15 +1,15 @@
 module.exports = {
   attributes: {
     email: {
-      type: "string",
+      type: 'string',
       required: true,
       unique: true,
       isEmail: true,
     },
     emailStatus: {
-      type: "string",
-      isIn: ["unconfirmed", "change-requested", "confirmed"],
-      defaultsTo: "unconfirmed",
+      type: 'string',
+      isIn: ['unconfirmed', 'change-requested', 'confirmed'],
+      defaultsTo: 'unconfirmed',
       description: "The confirmation status of the user's email address.",
       extendedDescription: `Users might be created as "unconfirmed" (e.g. normal signup) or as "confirmed" (e.g. hard-coded
 admin users).  When the email verification feature is enabled, new users created via the
@@ -18,96 +18,111 @@ Similarly, when an existing user changes their email address, they switch to the
 email status until they click the link in the confirmation email.`,
     },
     password: {
-      type: "string",
+      type: 'string',
     },
     accessType: {
-      type: "string", //stewardship, admin, alumni, signed, unsigned
-      isIn: ["stewardship", "admin", "alumni", "signed", "unsigned"],
-      defaultsTo: "unsigned",
-      description: "The account types of the user and what access do they have",
+      type: 'string', //stewardship, admin, alumni, signed, unsigned
+      isIn: ['stewardship', 'admin', 'alumni', 'signed', 'unsigned'],
+      defaultsTo: 'unsigned',
+      description: 'The account types of the user and what access do they have',
     },
     fullName: {
-      type: "string",
+      type: 'string',
       required: true,
     },
     countryOfOrigin: {
-      type: "string",
+      type: 'string',
       required: true,
     },
     address: {
-      type: "json",
+      type: 'json',
     },
     birthday: {
-      type: "ref",
-      columnType: "datetime",
+      type: 'ref',
+      columnType: 'datetime',
     },
     campus: {
-      type: "string",
+      type: 'string',
     },
     lifestage: {
-      type: "string",
+      type: 'string',
       required: true,
     },
     lifeGroup: {
-      type: "string",
+      type: 'string',
+      isIn: [
+        'Not in a LIFE Group',
+        'A-Men',
+        'Bare Bros',
+        'BIRD GANG',
+        'Birds of Pray',
+        'Coffee Meets Bible',
+        'inHimfree',
+        'Kingsmen',
+        'MMA',
+        'P.O.V.',
+        'Wingmen',
+      ],
     },
     isMember: {
-      type: "boolean",
+      type: 'boolean',
       defaultsTo: false,
     },
     isBaptised: {
-      type: "boolean",
+      type: 'boolean',
       defaultsTo: false,
     },
     ministryTeam: {
-      type: "string",
+      type: 'string',
       isIn: [
-        "Not Applicable",
-        "Intercessory Prayer Team",
-        "Creatives",
-        "Hospitality",
-        "Band",
-        "Audio/Visual",
-        "Creatives Worship",
-        "Multimedia",
-        "Building Blocks",
+        'Not Applicable',
+        'Audio/Visual',
+        'Band',
+        'Building Blocks',
+        'Creative Worship',
+        'Education Resources Team',
+        'Hospitality',
+        'Intercessory Prayer Team',
+        'Multimedia',
+        'T3CH',
+        'Visual Production',
       ],
     },
     phoneNumber: {
-      type: "number",
+      type: 'number',
       required: true,
     },
     formSubmitted: {
       //one-to-many
-      type: "json",
+      type: 'json',
     },
     membershipInfo: {
       //one-to-one
-      collection: "Membership",
-      via: "userId",
+      collection: 'Membership',
+      via: 'userId',
     },
     baptismInfo: {
       //one-to-one
-      collection: "Baptism",
-      via: "userId",
+      collection: 'Baptism',
+      via: 'userId',
     },
     givingInfo: {
       //one-to-one
       //collection: "Giving",
       //via: "userId",
-      type: "json",
-      columnType: "array",
+      type: 'json',
+      columnType: 'array',
       defaultsTo: [],
     },
     emailProofToken: {
-      type: "string",
+      type: 'string',
       description:
-        "A pseudorandom, probabilistically-unique token for use in our account verification emails.",
+        'A pseudorandom, probabilistically-unique token for use in our account verification emails.',
     },
     hasFilledProfileForm: {
-      type: "boolean",
+      type: 'boolean',
       description:
-        "A flag to indicate whether a user has completed the profile form",
+        'A flag to indicate whether a user has completed the profile form',
     },
   },
 };
