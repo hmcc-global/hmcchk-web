@@ -24,11 +24,11 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-} from "@chakra-ui/react";
-import { CheckCircleIcon } from "@chakra-ui/icons";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useForm, Controller } from "react-hook-form";
+} from '@chakra-ui/react';
+import { CheckCircleIcon } from '@chakra-ui/icons';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useForm, Controller } from 'react-hook-form';
 import {
   campusList,
   countryList,
@@ -37,18 +37,18 @@ import {
   lifestageList,
   ministryTeamList,
   regionList,
-} from "../helpers/lists";
+} from '../helpers/lists';
 import {
   fixAddress,
   fixName,
   purgeFormFields,
   splitFullName,
   updateUserDataRequest,
-} from "../helpers/userInformationHelpers";
-import { customAxios as axios } from "../helpers/customAxios";
+} from '../helpers/userInformationHelpers';
+import { customAxios as axios } from '../helpers/customAxios';
 
 const CompleteUserProfileContainer = (props) => {
-  const formLabelColor = "#2C5282";
+  const formLabelColor = '#2C5282';
   const formValidation = { required: true };
   const { user } = props;
   const { history } = props;
@@ -74,7 +74,7 @@ const CompleteUserProfileContainer = (props) => {
   };
 
   const submitValidatedData = async (data) => {
-    const reqErr = Error("there was a request failure");
+    const reqErr = Error('there was a request failure');
     try {
       fixName(data);
       fixAddress(data);
@@ -82,7 +82,7 @@ const CompleteUserProfileContainer = (props) => {
       data.isMember = data.isMember ? true : false;
 
       if (data.isBaptised) {
-        const { status: baptismRes } = await axios.post("/api/baptism/create", {
+        const { status: baptismRes } = await axios.post('/api/baptism/create', {
           userId: user.id,
           officialName: data.fullName,
           baptismDate: data.baptismDate,
@@ -93,7 +93,7 @@ const CompleteUserProfileContainer = (props) => {
       }
       if (data.isMember) {
         const { status: membershipRes } = await axios.post(
-          "/api/membership/create",
+          '/api/membership/create',
           {
             userId: user.id,
             officialName: data.fullName,
@@ -146,17 +146,17 @@ const CompleteUserProfileContainer = (props) => {
     setValue: reviewSetValue,
   } = useForm();
 
-  let isMember = watchB("isMember");
-  let isBaptised = watchB("isBaptised");
+  let isMember = watchB('isMember');
+  let isBaptised = watchB('isBaptised');
 
   useEffect(() => {
     if (user.id) {
       let { firstName, lastName } = splitFullName(user.fullName);
-      setValueA("firstName", firstName);
-      setValueA("lastName", lastName);
-      setValueA("countryOfOrigin", user.countryOfOrigin);
-      setValueA("lifestage", user.lifestage);
-      setValueA("phoneNumber", user.phoneNumber);
+      setValueA('firstName', firstName);
+      setValueA('lastName', lastName);
+      setValueA('countryOfOrigin', user.countryOfOrigin);
+      setValueA('lifestage', user.lifestage);
+      setValueA('phoneNumber', user.phoneNumber);
     }
   }, [user]);
 
@@ -189,10 +189,10 @@ const CompleteUserProfileContainer = (props) => {
               variant="solid"
               w="100%"
               _hover={{
-                background: "#062286",
+                background: '#062286',
               }}
               onClick={() => {
-                history.push("/");
+                history.push('/');
               }}
             >
               Return to homepage
@@ -206,7 +206,7 @@ const CompleteUserProfileContainer = (props) => {
           mt="3%"
           mb="3%"
           fontWeight="900"
-          fontSize={["36", "48"]}
+          fontSize={['36', '48']}
         >
           Completing your HMCC Profile
         </Center>
@@ -224,16 +224,16 @@ const CompleteUserProfileContainer = (props) => {
               fontSize="sm"
               fontWeight="500"
               borderTop="5px solid #E2E8F0"
-              mr={["2%", "4%"]}
+              mr={['2%', '4%']}
               pl="0"
-              alignItems={["center", "flex-start"]}
+              alignItems={['center', 'flex-start']}
               flexDirection="column"
-              _selected={{ borderColor: "#0628A3" }}
+              _selected={{ borderColor: '#0628A3' }}
             >
               <Text mt="2" color="#0628A3">
                 STEP 1
               </Text>
-              <Text fontSize={["xs", "sm"]} color="#2D3748">
+              <Text fontSize={['xs', 'sm']} color="#2D3748">
                 Personal Profile
               </Text>
             </Tab>
@@ -242,16 +242,16 @@ const CompleteUserProfileContainer = (props) => {
               fontSize="sm"
               fontWeight="500"
               borderTop="5px solid #E2E8F0"
-              mr={["2%", "4%"]}
+              mr={['2%', '4%']}
               pl="0"
-              alignItems={["center", "flex-start"]}
+              alignItems={['center', 'flex-start']}
               flexDirection="column"
-              _selected={{ borderColor: "#0628A3" }}
+              _selected={{ borderColor: '#0628A3' }}
             >
               <Text mt="2" color="#0628A3">
                 STEP 2
               </Text>
-              <Text fontSize={["xs", "sm"]} color="#2D3748">
+              <Text fontSize={['xs', 'sm']} color="#2D3748">
                 Church Profile
               </Text>
             </Tab>
@@ -260,16 +260,16 @@ const CompleteUserProfileContainer = (props) => {
               fontSize="sm"
               fontWeight="500"
               borderTop="5px solid #E2E8F0"
-              mr={["2%", "4%"]}
+              mr={['2%', '4%']}
               pl="0"
-              alignItems={["center", "flex-start"]}
+              alignItems={['center', 'flex-start']}
               flexDirection="column"
-              _selected={{ borderColor: "#0628A3" }}
+              _selected={{ borderColor: '#0628A3' }}
             >
               <Text mt="2" color="#0628A3">
                 STEP 3
               </Text>
-              <Text fontSize={["xs", "sm"]} color="#2D3748">
+              <Text fontSize={['xs', 'sm']} color="#2D3748">
                 Review
               </Text>
             </Tab>
@@ -279,7 +279,7 @@ const CompleteUserProfileContainer = (props) => {
             <TabPanel>
               <form onSubmit={handleSubmitA(submitPartA)}>
                 <Stack spacing="2%">
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl>
                       <FormLabel color={formLabelColor}>
                         First Name (and Middle Name)
@@ -287,8 +287,8 @@ const CompleteUserProfileContainer = (props) => {
                       <Input
                         size="sm"
                         borderRadius="5"
-                        {...registerA("firstName", formValidation)}
-                        isInvalid={errorsA["firstName"]}
+                        {...registerA('firstName', formValidation)}
+                        isInvalid={errorsA['firstName']}
                         placeholder="Please fill in this field"
                       />
                     </FormControl>
@@ -297,21 +297,21 @@ const CompleteUserProfileContainer = (props) => {
                       <Input
                         size="sm"
                         borderRadius="5"
-                        {...registerA("lastName", formValidation)}
-                        isInvalid={errorsA["lastName"]}
+                        {...registerA('lastName', formValidation)}
+                        isInvalid={errorsA['lastName']}
                         placeholder="Please fill in this field"
                       />
                     </FormControl>
                   </Stack>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl>
                       <FormLabel color={formLabelColor}>Birthday</FormLabel>
                       <Input
                         type="date"
                         size="sm"
                         borderRadius="5"
-                        {...registerA("birthday", formValidation)}
-                        isInvalid={errorsA["birthday"]}
+                        {...registerA('birthday', formValidation)}
+                        isInvalid={errorsA['birthday']}
                         placeholder="Please fill in this field"
                       />
                     </FormControl>
@@ -322,28 +322,28 @@ const CompleteUserProfileContainer = (props) => {
                       <Select
                         size="sm"
                         borderRadius="5"
-                        {...registerA("countryOfOrigin", formValidation)}
-                        isInvalid={errorsA["countryOfOrigin"]}
+                        {...registerA('countryOfOrigin', formValidation)}
+                        isInvalid={errorsA['countryOfOrigin']}
                         placeholder="Please fill in this field"
                       >
                         {countryList.map((item) => {
-                          return <option key={"co" + item}>{item}</option>;
+                          return <option key={'co' + item}>{item}</option>;
                         })}
                       </Select>
                     </FormControl>
                   </Stack>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl>
                       <FormLabel color={formLabelColor}>Lifestage</FormLabel>
                       <Select
                         size="sm"
                         borderRadius="5"
-                        {...registerA("lifestage", formValidation)}
-                        isInvalid={errorsA["lifestage"]}
+                        {...registerA('lifestage', formValidation)}
+                        isInvalid={errorsA['lifestage']}
                         placeholder="Please fill in this field"
                       >
                         {lifestageList.map((item) => {
-                          return <option key={"life" + item}>{item}</option>;
+                          return <option key={'life' + item}>{item}</option>;
                         })}
                       </Select>
                     </FormControl>
@@ -352,30 +352,30 @@ const CompleteUserProfileContainer = (props) => {
                       <Select
                         size="sm"
                         borderRadius="5"
-                        {...registerA("campus", formValidation)}
-                        isInvalid={errorsA["campus"]}
+                        {...registerA('campus', formValidation)}
+                        isInvalid={errorsA['campus']}
                         placeholder="Please fill in this field"
                       >
                         {campusList.map((item) => {
-                          return <option key={"ca" + item}>{item}</option>;
+                          return <option key={'ca' + item}>{item}</option>;
                         })}
                       </Select>
                     </FormControl>
                   </Stack>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl flex={1}>
                       <FormLabel color={formLabelColor}>Phone Number</FormLabel>
                       <Input
                         size="sm"
                         borderRadius="5"
-                        {...registerA("phoneNumber", formValidation)}
-                        isInvalid={errorsA["phoneNumber"]}
+                        {...registerA('phoneNumber', formValidation)}
+                        isInvalid={errorsA['phoneNumber']}
                         placeholder="Please fill in this field"
                       />
                     </FormControl>
                     <Box flex={[0, 1]}></Box>
                   </Stack>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl>
                       <FormLabel color={formLabelColor}>
                         Address: Floor / Level
@@ -383,8 +383,8 @@ const CompleteUserProfileContainer = (props) => {
                       <Input
                         size="sm"
                         borderRadius="5"
-                        {...registerA("addressFloor", formValidation)}
-                        isInvalid={errorsA["addressFloor"]}
+                        {...registerA('addressFloor', formValidation)}
+                        isInvalid={errorsA['addressFloor']}
                         placeholder="Please fill in this field"
                       />
                     </FormControl>
@@ -395,13 +395,13 @@ const CompleteUserProfileContainer = (props) => {
                       <Input
                         size="sm"
                         borderRadius="5"
-                        {...registerA("addressFlat", formValidation)}
-                        isInvalid={errorsA["addressFlat"]}
+                        {...registerA('addressFlat', formValidation)}
+                        isInvalid={errorsA['addressFlat']}
                         placeholder="Please fill in this field"
                       />
                     </FormControl>
                   </Stack>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl>
                       <FormLabel color={formLabelColor}>
                         Address: Street Address
@@ -409,8 +409,8 @@ const CompleteUserProfileContainer = (props) => {
                       <Input
                         size="sm"
                         borderRadius="5"
-                        {...registerA("addressStreet", formValidation)}
-                        isInvalid={errorsA["addressStreet"]}
+                        {...registerA('addressStreet', formValidation)}
+                        isInvalid={errorsA['addressStreet']}
                         placeholder="Please fill in this field"
                       />
                     </FormControl>
@@ -421,28 +421,28 @@ const CompleteUserProfileContainer = (props) => {
                       <Select
                         size="sm"
                         borderRadius="5"
-                        {...registerA("addressDistrict", formValidation)}
-                        isInvalid={errorsA["addressDistrict"]}
+                        {...registerA('addressDistrict', formValidation)}
+                        isInvalid={errorsA['addressDistrict']}
                         placeholder="Please fill in this field"
                       >
                         {districtList.map((item) => {
-                          return <option key={"di" + item}>{item}</option>;
+                          return <option key={'di' + item}>{item}</option>;
                         })}
                       </Select>
                     </FormControl>
                   </Stack>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl flex={1}>
                       <FormLabel color="#2C5282">Address: Region</FormLabel>
                       <Select
                         size="sm"
                         borderRadius="5"
-                        {...registerA("addressRegion", formValidation)}
-                        isInvalid={errorsA["addressRegion"]}
+                        {...registerA('addressRegion', formValidation)}
+                        isInvalid={errorsA['addressRegion']}
                         placeholder="Please fill in this field"
                       >
                         {regionList.map((item) => {
-                          return <option key={"re" + item}>{item}</option>;
+                          return <option key={'re' + item}>{item}</option>;
                         })}
                       </Select>
                     </FormControl>
@@ -456,7 +456,7 @@ const CompleteUserProfileContainer = (props) => {
                       borderColor="#0628A3"
                       borderRadius="10"
                       variant="outline"
-                      minW={["10%", "20%"]}
+                      minW={['10%', '20%']}
                       type="submit"
                     >
                       Next
@@ -467,25 +467,25 @@ const CompleteUserProfileContainer = (props) => {
             </TabPanel>
             <TabPanel>
               <form onSubmit={handleSubmitB(submitPartB)}>
-                <Stack spacing={["4%", "2%"]}>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                <Stack spacing={['4%', '2%']}>
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl flex={2}>
-                      <FormLabel color={formLabelColor}>Life Group</FormLabel>
+                      <FormLabel color={formLabelColor}>LIFE Group</FormLabel>
                       <Select
                         size="sm"
                         borderRadius="5"
-                        {...registerB("lifeGroup", formValidation)}
-                        isInvalid={errorsB["lifeGroup"]}
+                        {...registerB('lifeGroup', formValidation)}
+                        isInvalid={errorsB['lifeGroup']}
                         placeholder="Please fill in this field"
                       >
                         {lifegroupList.map((item) => {
-                          return <option key={"li" + item}>{item}</option>;
+                          return <option key={'li' + item}>{item}</option>;
                         })}
                       </Select>
                     </FormControl>
-                    <Box flex={1} display={["none", "block"]}></Box>
+                    <Box flex={1} display={['none', 'block']}></Box>
                   </Stack>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl flex={2}>
                       <FormLabel color={formLabelColor}>
                         Ministry Team
@@ -493,18 +493,18 @@ const CompleteUserProfileContainer = (props) => {
                       <Select
                         size="sm"
                         borderRadius="5"
-                        {...registerB("ministryTeam", formValidation)}
-                        isInvalid={errorsB["ministryTeam"]}
+                        {...registerB('ministryTeam', formValidation)}
+                        isInvalid={errorsB['ministryTeam']}
                         placeholder="Please fill in this field"
                       >
                         {ministryTeamList.map((item) => {
-                          return <option key={"mt" + item}>{item}</option>;
+                          return <option key={'mt' + item}>{item}</option>;
                         })}
                       </Select>
                     </FormControl>
-                    <Box flex={1} display={["none", "block"]}></Box>
+                    <Box flex={1} display={['none', 'block']}></Box>
                   </Stack>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl flex={[1, 4]}>
                       <Stack direction="row">
                         <Text
@@ -518,7 +518,7 @@ const CompleteUserProfileContainer = (props) => {
                         <Box flex={[2, 1]}>
                           <Controller
                             control={controlB}
-                            name={"isMember"}
+                            name={'isMember'}
                             render={({ field: { onChange, value, ref } }) => (
                               <Switch
                                 onChange={onChange}
@@ -529,27 +529,27 @@ const CompleteUserProfileContainer = (props) => {
                             )}
                           />
                           <Text ml="3" fontWeight="500" as="span">
-                            {isMember ? "Yes" : "No"}
+                            {isMember ? 'Yes' : 'No'}
                           </Text>
                         </Box>
                       </Stack>
                       <FormHelperText>
                         An HMCC Covenant Signing Member is someone who has
                         attended HMCC’s Experiencing Membership Class and has
-                        decided to sign (in-person) the Membership Declaration{" "}
+                        decided to sign (in-person) the Membership Declaration{' '}
                       </FormHelperText>
                     </FormControl>
                     <Box flex={[0, 1]}></Box>
                   </Stack>
                   {isMember && (
-                    <Stack direction={["column", "row"]} spacing="4%">
+                    <Stack direction={['column', 'row']} spacing="4%">
                       <Stack
-                        direction={["column", "row"]}
+                        direction={['column', 'row']}
                         spacing="4%"
                         border="1px solid #E2E8F0"
                         borderRadius="6"
-                        p={["5%", "3%"]}
-                        pt={["5%", "2%"]}
+                        p={['5%', '3%']}
+                        pt={['5%', '2%']}
                         flex={[1, 4]}
                       >
                         <FormControl>
@@ -561,10 +561,10 @@ const CompleteUserProfileContainer = (props) => {
                             type="date"
                             borderRadius="5"
                             {...registerB(
-                              "membershipRecognitionDate",
+                              'membershipRecognitionDate',
                               formValidation
                             )}
-                            isInvalid={errorsB["membershipRecognitionDate"]}
+                            isInvalid={errorsB['membershipRecognitionDate']}
                             placeholder="Please fill in this field"
                           />
                         </FormControl>
@@ -577,10 +577,10 @@ const CompleteUserProfileContainer = (props) => {
                             type="date"
                             borderRadius="5"
                             {...registerB(
-                              "membershipRecommitmentDate",
+                              'membershipRecommitmentDate',
                               formValidation
                             )}
-                            isInvalid={errorsB["membershipRecommitmentDate"]}
+                            isInvalid={errorsB['membershipRecommitmentDate']}
                             placeholder="Please fill in this field"
                           />
                         </FormControl>
@@ -588,7 +588,7 @@ const CompleteUserProfileContainer = (props) => {
                       <Box flex={[0, 1]}></Box>
                     </Stack>
                   )}
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl flex={[1, 4]}>
                       <Stack direction="row">
                         <Text
@@ -602,7 +602,7 @@ const CompleteUserProfileContainer = (props) => {
                         <Box flex={[2, 1]}>
                           <Controller
                             control={controlB}
-                            name={"isBaptised"}
+                            name={'isBaptised'}
                             render={({ field: { onChange, value, ref } }) => (
                               <Switch
                                 onChange={onChange}
@@ -613,7 +613,7 @@ const CompleteUserProfileContainer = (props) => {
                             )}
                           />
                           <Text ml="3" fontWeight="500" as="span">
-                            {isBaptised ? "Yes" : "No"}
+                            {isBaptised ? 'Yes' : 'No'}
                           </Text>
                         </Box>
                       </Stack>
@@ -621,14 +621,14 @@ const CompleteUserProfileContainer = (props) => {
                     <Box flex={[0, 1]}></Box>
                   </Stack>
                   {isBaptised && (
-                    <Stack direction={["column", "row"]} spacing="4%">
+                    <Stack direction={['column', 'row']} spacing="4%">
                       <Stack
-                        direction={["column", "row"]}
+                        direction={['column', 'row']}
                         spacing="4%"
                         border="1px solid #E2E8F0"
                         borderRadius="6"
-                        p={["5%", "3%"]}
-                        pt={["5%", "2%"]}
+                        p={['5%', '3%']}
+                        pt={['5%', '2%']}
                         flex={[1, 4]}
                       >
                         <FormControl>
@@ -636,8 +636,8 @@ const CompleteUserProfileContainer = (props) => {
                           <Input
                             size="sm"
                             borderRadius="5"
-                            {...registerB("baptismPlace", formValidation)}
-                            isInvalid={errorsB["baptismPlace"]}
+                            {...registerB('baptismPlace', formValidation)}
+                            isInvalid={errorsB['baptismPlace']}
                             placeholder="Please fill in this field"
                           />
                           <FormHelperText>
@@ -652,8 +652,8 @@ const CompleteUserProfileContainer = (props) => {
                             size="sm"
                             type="date"
                             borderRadius="5"
-                            {...registerB("baptismDate", formValidation)}
-                            isInvalid={errorsB["baptismDate"]}
+                            {...registerB('baptismDate', formValidation)}
+                            isInvalid={errorsB['baptismDate']}
                             placeholder="Please fill in this field"
                           />
                           <FormHelperText>
@@ -672,7 +672,7 @@ const CompleteUserProfileContainer = (props) => {
                       borderColor="#0628A3"
                       borderRadius="10"
                       variant="outline"
-                      minW={["50%", "20%"]}
+                      minW={['50%', '20%']}
                       onClick={() => {
                         setTabIndex(0);
                       }}
@@ -687,10 +687,10 @@ const CompleteUserProfileContainer = (props) => {
                       background="#0628A3"
                       borderRadius="10"
                       variant="solid"
-                      minW={["50%", "20%"]}
+                      minW={['50%', '20%']}
                       type="submit"
                       _hover={{
-                        background: "#062286",
+                        background: '#062286',
                       }}
                     >
                       Review
@@ -702,7 +702,7 @@ const CompleteUserProfileContainer = (props) => {
             <TabPanel>
               <form onSubmit={reviewHandleSubmit(submitValidatedData)}>
                 <Stack spacing="2%">
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl>
                       <FormLabel color={formLabelColor}>
                         First Name (and Middle Name)
@@ -711,7 +711,7 @@ const CompleteUserProfileContainer = (props) => {
                         size="sm"
                         borderRadius="5"
                         isReadOnly
-                        {...reviewRegister("firstName")}
+                        {...reviewRegister('firstName')}
                       />
                     </FormControl>
                     <FormControl>
@@ -720,11 +720,11 @@ const CompleteUserProfileContainer = (props) => {
                         size="sm"
                         borderRadius="5"
                         isReadOnly
-                        {...reviewRegister("lastName")}
+                        {...reviewRegister('lastName')}
                       />
                     </FormControl>
                   </Stack>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl>
                       <FormLabel color={formLabelColor}>Birthday</FormLabel>
                       <Input
@@ -732,7 +732,7 @@ const CompleteUserProfileContainer = (props) => {
                         size="sm"
                         borderRadius="5"
                         isReadOnly
-                        {...reviewRegister("birthday")}
+                        {...reviewRegister('birthday')}
                       />
                     </FormControl>
                     <FormControl>
@@ -743,25 +743,25 @@ const CompleteUserProfileContainer = (props) => {
                         size="sm"
                         borderRadius="5"
                         pointerEvents="none"
-                        {...reviewRegister("countryOfOrigin")}
+                        {...reviewRegister('countryOfOrigin')}
                       >
                         {countryList.map((item) => {
-                          return <option key={"co" + item}>{item}</option>;
+                          return <option key={'co' + item}>{item}</option>;
                         })}
                       </Select>
                     </FormControl>
                   </Stack>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl>
                       <FormLabel color={formLabelColor}>Lifestage</FormLabel>
                       <Select
                         size="sm"
                         borderRadius="5"
                         pointerEvents="none"
-                        {...reviewRegister("lifestage")}
+                        {...reviewRegister('lifestage')}
                       >
                         {lifestageList.map((item) => {
-                          return <option key={"life" + item}>{item}</option>;
+                          return <option key={'life' + item}>{item}</option>;
                         })}
                       </Select>
                     </FormControl>
@@ -771,27 +771,27 @@ const CompleteUserProfileContainer = (props) => {
                         size="sm"
                         borderRadius="5"
                         pointerEvents="none"
-                        {...reviewRegister("campus")}
+                        {...reviewRegister('campus')}
                       >
                         {campusList.map((item) => {
-                          return <option key={"ca" + item}>{item}</option>;
+                          return <option key={'ca' + item}>{item}</option>;
                         })}
                       </Select>
                     </FormControl>
                   </Stack>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl flex={1}>
                       <FormLabel color={formLabelColor}>Phone Number</FormLabel>
                       <Input
                         size="sm"
                         borderRadius="5"
                         isReadOnly
-                        {...reviewRegister("phoneNumber")}
+                        {...reviewRegister('phoneNumber')}
                       />
                     </FormControl>
                     <Box flex={1}></Box>
                   </Stack>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl>
                       <FormLabel color={formLabelColor}>
                         Address: Floor / Level
@@ -800,7 +800,7 @@ const CompleteUserProfileContainer = (props) => {
                         size="sm"
                         borderRadius="5"
                         isReadOnly
-                        {...reviewRegister("addressFloor")}
+                        {...reviewRegister('addressFloor')}
                       />
                     </FormControl>
                     <FormControl>
@@ -811,11 +811,11 @@ const CompleteUserProfileContainer = (props) => {
                         size="sm"
                         borderRadius="5"
                         isReadOnly
-                        {...reviewRegister("addressFlat")}
+                        {...reviewRegister('addressFlat')}
                       />
                     </FormControl>
                   </Stack>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl>
                       <FormLabel color={formLabelColor}>
                         Address: Street Address
@@ -824,7 +824,7 @@ const CompleteUserProfileContainer = (props) => {
                         size="sm"
                         borderRadius="5"
                         isReadOnly
-                        {...reviewRegister("addressStreet")}
+                        {...reviewRegister('addressStreet')}
                       />
                     </FormControl>
                     <FormControl>
@@ -835,47 +835,47 @@ const CompleteUserProfileContainer = (props) => {
                         size="sm"
                         borderRadius="5"
                         pointerEvents="none"
-                        {...reviewRegister("addressDistrict")}
+                        {...reviewRegister('addressDistrict')}
                       >
                         {districtList.map((item) => {
-                          return <option key={"di" + item}>{item}</option>;
+                          return <option key={'di' + item}>{item}</option>;
                         })}
                       </Select>
                     </FormControl>
                   </Stack>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl flex={1}>
                       <FormLabel color="#2C5282">Address: Region</FormLabel>
                       <Select
                         size="sm"
                         borderRadius="5"
                         pointerEvents="none"
-                        {...reviewRegister("addressRegion")}
+                        {...reviewRegister('addressRegion')}
                       >
                         {regionList.map((item) => {
-                          return <option key={"re" + item}>{item}</option>;
+                          return <option key={'re' + item}>{item}</option>;
                         })}
                       </Select>
                     </FormControl>
                     <Box flex={[0, 1]}></Box>
                   </Stack>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl flex={2}>
-                      <FormLabel color={formLabelColor}>Life Group</FormLabel>
+                      <FormLabel color={formLabelColor}>LIFE Group</FormLabel>
                       <Select
                         size="sm"
                         borderRadius="5"
                         pointerEvents="none"
-                        {...reviewRegister("lifeGroup")}
+                        {...reviewRegister('lifeGroup')}
                       >
                         {lifegroupList.map((item) => {
-                          return <option key={"li" + item}>{item}</option>;
+                          return <option key={'li' + item}>{item}</option>;
                         })}
                       </Select>
                     </FormControl>
                     <Box flex={1}></Box>
                   </Stack>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl flex={[1, 2]}>
                       <FormLabel color={formLabelColor}>
                         Ministry Team
@@ -884,16 +884,16 @@ const CompleteUserProfileContainer = (props) => {
                         size="sm"
                         borderRadius="5"
                         pointerEvents="none"
-                        {...reviewRegister("ministryTeam")}
+                        {...reviewRegister('ministryTeam')}
                       >
                         {ministryTeamList.map((item) => {
-                          return <option key={"mt" + item}>{item}</option>;
+                          return <option key={'mt' + item}>{item}</option>;
                         })}
                       </Select>
                     </FormControl>
                     <Box flex={1}></Box>
                   </Stack>
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl flex={[1, 4]}>
                       <Stack direction="row">
                         <Text
@@ -907,7 +907,7 @@ const CompleteUserProfileContainer = (props) => {
                         <Box flex={[2, 1]}>
                           <Controller
                             control={reviewControl}
-                            name={"isMember"}
+                            name={'isMember'}
                             render={({ field: { onChange, value, ref } }) => (
                               <Switch
                                 onChange={onChange}
@@ -919,27 +919,27 @@ const CompleteUserProfileContainer = (props) => {
                             )}
                           />
                           <Text ml="3" fontWeight="500" as="span">
-                            {isMember ? "Yes" : "No"}
+                            {isMember ? 'Yes' : 'No'}
                           </Text>
                         </Box>
                       </Stack>
                       <FormHelperText>
                         An HMCC Covenant Signing Member is someone who has
                         attended HMCC’s Experiencing Membership Class and has
-                        decided to sign (in-person) the Membership Declaration{" "}
+                        decided to sign (in-person) the Membership Declaration{' '}
                       </FormHelperText>
                     </FormControl>
                     <Box flex={[0, 1]}></Box>
                   </Stack>
                   {isMember && (
-                    <Stack direction={["column", "row"]} spacing="4%">
+                    <Stack direction={['column', 'row']} spacing="4%">
                       <Stack
-                        direction={["column", "row"]}
+                        direction={['column', 'row']}
                         spacing="4%"
                         border="1px solid #E2E8F0"
                         borderRadius="6"
-                        p={["5%", "3%"]}
-                        pt={["5%", "2%"]}
+                        p={['5%', '3%']}
+                        pt={['5%', '2%']}
                         flex={[1, 4]}
                       >
                         <FormControl>
@@ -951,7 +951,7 @@ const CompleteUserProfileContainer = (props) => {
                             type="date"
                             borderRadius="5"
                             isReadOnly
-                            {...reviewRegister("membershipRecognitionDate")}
+                            {...reviewRegister('membershipRecognitionDate')}
                           />
                         </FormControl>
                         <FormControl>
@@ -963,14 +963,14 @@ const CompleteUserProfileContainer = (props) => {
                             type="date"
                             borderRadius="5"
                             isReadOnly
-                            {...reviewRegister("membershipRecommitmentDate")}
+                            {...reviewRegister('membershipRecommitmentDate')}
                           />
                         </FormControl>
                       </Stack>
                       <Box flex={[0, 1]}></Box>
                     </Stack>
                   )}
-                  <Stack direction={["column", "row"]} spacing="4%">
+                  <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl flex={[1, 4]}>
                       <Stack direction="row">
                         <Text
@@ -984,7 +984,7 @@ const CompleteUserProfileContainer = (props) => {
                         <Box flex={[2, 1]}>
                           <Controller
                             control={reviewControl}
-                            name={"isBaptised"}
+                            name={'isBaptised'}
                             render={({ field: { onChange, value, ref } }) => (
                               <Switch
                                 onChange={onChange}
@@ -996,7 +996,7 @@ const CompleteUserProfileContainer = (props) => {
                             )}
                           />
                           <Text ml="3" fontWeight="500" as="span">
-                            {isBaptised ? "Yes" : "No"}
+                            {isBaptised ? 'Yes' : 'No'}
                           </Text>
                         </Box>
                       </Stack>
@@ -1004,14 +1004,14 @@ const CompleteUserProfileContainer = (props) => {
                     <Box flex={[0, 1]}></Box>
                   </Stack>
                   {isBaptised && (
-                    <Stack direction={["column", "row"]} spacing="4%">
+                    <Stack direction={['column', 'row']} spacing="4%">
                       <Stack
-                        direction={["column", "row"]}
+                        direction={['column', 'row']}
                         spacing="4%"
                         border="1px solid #E2E8F0"
                         borderRadius="6"
-                        p={["5%", "3%"]}
-                        pt={["5%", "2%"]}
+                        p={['5%', '3%']}
+                        pt={['5%', '2%']}
                         flex={[1, 4]}
                       >
                         <FormControl>
@@ -1020,7 +1020,7 @@ const CompleteUserProfileContainer = (props) => {
                             size="sm"
                             borderRadius="5"
                             isReadOnly
-                            {...reviewRegister("baptismPlace")}
+                            {...reviewRegister('baptismPlace')}
                           />
                           <FormHelperText>
                             ‘HMCC Hong Kong’ if you are baptised with us,
@@ -1035,7 +1035,7 @@ const CompleteUserProfileContainer = (props) => {
                             type="date"
                             borderRadius="5"
                             isReadOnly
-                            {...reviewRegister("baptismDate")}
+                            {...reviewRegister('baptismDate')}
                           />
                           <FormHelperText>
                             To the best of your memory :)
@@ -1053,7 +1053,7 @@ const CompleteUserProfileContainer = (props) => {
                       borderColor="#0628A3"
                       borderRadius="10"
                       variant="outline"
-                      minW={["50%", "20%"]}
+                      minW={['50%', '20%']}
                       onClick={() => {
                         setTabIndex(1);
                       }}
@@ -1068,9 +1068,9 @@ const CompleteUserProfileContainer = (props) => {
                       background="#0628A3"
                       borderRadius="10"
                       variant="solid"
-                      minW={["50%", "20%"]}
+                      minW={['50%', '20%']}
                       _hover={{
-                        background: "#062286",
+                        background: '#062286',
                       }}
                       type="submit"
                     >
