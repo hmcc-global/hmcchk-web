@@ -360,10 +360,10 @@ const Form = (props) => {
         opts.map((option) => {
           let o = (
             <Radio
-              // id={camelize(fieldName + option)}
               key={fieldName + option}
               type="radio"
               value={option}
+              {...register(fieldName, { required: required })}
             >
               {option}
             </Radio>
