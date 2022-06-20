@@ -5,22 +5,24 @@ import {
   HStack,
   Text,
   VStack,
-} from "@chakra-ui/layout";
-import BeliefsSection from "./BeliefsSection";
-import StaffSection from "./StaffSection";
-import StorySection from "./StorySection";
-import StrategySection from "./StrategySection";
-import ValuesSection from "./ValuesSection";
-import blurbs from "./about.json";
-import { Fragment, useState } from "react";
-import { Select } from "@chakra-ui/select";
+} from '@chakra-ui/layout';
+import BeliefsSection from './BeliefsSection';
+import StaffSection from './StaffSection';
+import StorySection from './StorySection';
+import StrategySection from './StrategySection';
+import ValuesSection from './ValuesSection';
+import blurbs from './about.json';
+import { Fragment, useState } from 'react';
+import { Select } from '@chakra-ui/select';
+import { Route } from 'react-router-dom';
 
 const sections = [
-  "Our Story",
-  "Vision & Mission, Our Values",
-  "Our Strategy",
-  "Our Staff",
-  "Beliefs",
+  'Our Story',
+  'Vision & Mission, Our Values',
+  'Our Strategy',
+  'Our Staff',
+  'Beliefs',
+  'HMI',
 ];
 
 const AboutUsContainer = (props) => {
@@ -28,6 +30,7 @@ const AboutUsContainer = (props) => {
   const banner = blurbs.banner;
 
   const handleChange = (e) => setSelected(parseInt(e.target.value));
+
   //To do: implement navbar, menu and footer links to individual sections("our story", "vision mision" etc)
 
   return (
@@ -45,7 +48,7 @@ const AboutUsContainer = (props) => {
         >
           <Heading
             as="h2"
-            fontSize={["4xl", "6xl"]}
+            fontSize={['4xl', '6xl']}
             fontWeight={700}
             lineHeight={1}
             color="white"
@@ -56,7 +59,7 @@ const AboutUsContainer = (props) => {
           </Heading>
           <Text
             color="white"
-            fontSize={["sm", "md"]}
+            fontSize={['sm', 'md']}
             fontWeight={600}
             textAlign="center"
             mb={[0, 10]}
@@ -65,7 +68,7 @@ const AboutUsContainer = (props) => {
           </Text>
           <HStack
             justifyContent="space-evenly"
-            display={{ base: "none", md: "flex" }}
+            display={{ base: 'none', md: 'flex' }}
           >
             {sections &&
               sections.map((e, i) => {
@@ -85,7 +88,7 @@ const AboutUsContainer = (props) => {
                       <Text
                         mx={[3, 4]}
                         color="white"
-                        fontSize={["md", "2xl"]}
+                        fontSize={['md', '2xl']}
                         verticalAlign="baseline"
                       >
                         &bull;
@@ -103,7 +106,7 @@ const AboutUsContainer = (props) => {
             borderRadius="5"
             fontWeight="bold"
             bgColor="white"
-            display={{ base: "block", md: "none" }}
+            display={{ base: 'block', md: 'none' }}
             value={selected}
             onChange={(e) => handleChange(e)}
           >
@@ -134,6 +137,15 @@ const AboutUsContainer = (props) => {
         )}
         {selected === 4 && (
           <BeliefsSection blurb={blurbs.beliefs} title={sections[selected]} />
+        )}
+        {selected === 5 && (
+          <Route
+            component={() => {
+              window.location.href =
+                'https://hongkong.sub.hmcc.net/about-us/hmi/';
+              return null;
+            }}
+          />
         )}
       </VStack>
     </Container>
