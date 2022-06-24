@@ -1,4 +1,11 @@
-const accessTypeList = ['unsigned', 'signed', 'alumni', 'admin', 'stewardship'];
+const accessTypeList = [
+  'unsigned',
+  'signed',
+  'alumni',
+  'admin',
+  'stewardship',
+  't3ch',
+];
 const lifestageList = [
   'Building Blocks (3-11 years old)',
   'Youth (12-17 years old)',
