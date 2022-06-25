@@ -36,7 +36,7 @@ module.exports.policies = {
   "forms/post-contact-us-form": true,
 
   // Cache
-  "cache/*": ["isLoggedIn", "isAdmin"],
+  "cache/*": ["isLoggedIn", "isTech"],
 
   // Forms
   "forms/post-create-form": ["isLoggedIn", "isAdmin"],
