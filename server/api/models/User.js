@@ -22,7 +22,7 @@ email status until they click the link in the confirmation email.`,
     },
     accessType: {
       type: 'string',
-      isIn: ['stewardship', 'admin', 'alumni', 'signed', 'unsigned', 't3ch'],
+      isIn: ['stewardship', 'admin', 'alumni', 't3ch', 'signed', 'unsigned'],
       defaultsTo: 'unsigned',
       description: 'The account types of the user and what access do they have',
     },
