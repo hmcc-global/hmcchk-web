@@ -29,6 +29,7 @@ import MainMenu from './MainMenu';
 import { useHistory } from 'react-router-dom';
 
 const NavBar = (props) => {
+  const isAdminPage = useHistory().location.pathname.includes("admin");
   const isOnlineSermon = useHistory().location.pathname.includes("online");
   const [loggedIn, setLoggedIn] = useState(false);
   const user = useSelector((state) => state.user);
@@ -73,7 +74,7 @@ const NavBar = (props) => {
 
   return (
     <>
-      <Flex w="100vw" background="rgba(0, 0, 0, 0.4)" justify="center">
+      <Flex w="100vw" background="rgba(0, 0, 0, 0.4)" justify="center" display={ isAdminPage ? 'none' : 'block' }>
         <Flex
           w="100vw"
           justify={['space-between', 'space-around']}
