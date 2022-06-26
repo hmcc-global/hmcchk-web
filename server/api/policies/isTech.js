@@ -1,8 +1,8 @@
-const abovet3chPrivs = ["t3ch"];
+const aboveT3chPrivs = ["t3ch", "admin", "stewardship"];
 
 module.exports = async function (req, res, proceed) {
   if (req.user) {
-    if (!abovet3chPrivs.includes(req.user.accessType)) {
+    if (!aboveT3chPrivs.includes(req.user.accessType)) {
       return res.status(401).json({
         err: "Unauthorised",
       });
