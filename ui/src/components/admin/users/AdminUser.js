@@ -1,33 +1,21 @@
 import React from "react";
 import { customAxios as axios } from "../../helpers/customAxios";
 import { useEffect, useState } from "react";
-import {
-  Button,
-  Flex,
-  Box,
-  useColorModeValue,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  chakra,
-  Stack,
-  useToast,
-} from "@chakra-ui/react";
-
-import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
-import { useTable, useSortBy } from "react-table";
-import ViewUser from "./ViewUserComponent";
-import EditUser from "./EditUserComponent";
-import DeleteUser from "./DeleteUserComponent";
-import ArrayToExcelButton from "../ArrayToExcelButton";
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+import { Button, Heading } from "@chakra-ui/react";
+import { DateTime } from "luxon";
 
 export default function AdminUser(props) {
-  const [user, setUsers] = useState([]);
+  const [api, setApi] = useState();
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const toast = useToast();
+
+  const exportParams = {
+    skipColumnGroupHeaders: true,
+    allColumns: true
+  };
 
   const getData = async () => {
     try {
@@ -36,13 +24,6 @@ export default function AdminUser(props) {
       setLoading(false);
     } catch (err) {
       console.log(err);
-      toast({
-        title: "Something went wrong.",
-        description: "Try again.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
     }
   };
 
@@ -50,130 +31,58 @@ export default function AdminUser(props) {
     getData();
   }, []);
 
-  const refreshHandler = () => {
-    getData();
-  };
+  useEffect(() => {
+    console.log(users)
+  })
 
-  const data = user;
+  const exportHandler = () => {
+    if (api) {
+      api.exportDataAsCsv(exportParams);
+    }
+  }
 
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: "Name",
-        accessor: "fullName",
-      },
-      {
-        Header: "Email",
-        accessor: "email",
-      },
-      {
-        Header: "Campus/Life Stage",
-        accessor: "lifestage",
-      },
-      {
-        Header: "Phone Number",
-        accessor: "phoneNumber",
-      },
-      {
-        Header: "Country of Origin",
-        accessor: "countryOfOrigin",
-      },
-      {
-        Header: "LIFE Group",
-        accessor: "lifeGroup",
-      },
-    ],
-    []
-  );
+  // ag-grid helpers
+  const birthdayGetter = (params) => {
+    if (params && params.data && params.data.birthday) {
+      const { birthday: birthdayStr } = params.data;
+      const birthday = DateTime.fromFormat(birthdayStr, 'yyyy-MM-dd');
+      return birthday.toFormat('dd MMM yyyy');
+    }
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data }, useSortBy);
+    return '';
+  }
+
+  // ag-grid functions
+  const onGridReady = (params) => {
+    if (params.api)
+      setApi(params.api);
+  }
+
+  const columnDefs = [
+    { headerName: 'Name', field: 'fullName' },
+    { headerName: 'Email', field: 'email' },
+    { headerName: 'Lifestage', field: 'lifestage' },
+    { headerName: 'Campus', field: 'campus' },
+    { headerName: 'Personal Details', marryChildren: true, children: [
+      { headerName: 'Phone', field: 'phoneNumber' },
+      { headerName: 'Birth Date', valueGetter: birthdayGetter, columnGroupShow: 'open' },
+      { headerName: 'Nationality', field: 'countryOfOrigin', columnGroupShow: 'open' },
+    ]},
+  ];
 
   return (
     <>
-      <Stack mb={3} direction="row">
-        <Button onClick={() => refreshHandler()}>Refresh</Button>
-        {loading ? (
-          <Button> Export </Button>
-        ) : (
-          <ArrayToExcelButton
-            apiArray={data}
-            fileName={"UserData.xls"}
-            buttonTitle={"Export"}
-          />
-        )}
-      </Stack>
-      <Flex
-        bg={useColorModeValue("gray.200")}
-        justifyContent="center"
-        display={{ md: "flex" }}
-        overflowX="auto"
-      >
-        <Box overflowX="auto">
-          <Table
-            variant="striped"
-            colorScheme="blackAlpha"
-            {...getTableProps()}
-          >
-            <Thead>
-              {headerGroups.map((headerGroup) => (
-                <Tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column) => (
-                    <Th
-                      {...column.getHeaderProps(column.getSortByToggleProps())}
-                      isNumeric={column.isNumeric}
-                    >
-                      {column.render("Header")}
-                      <chakra.span pl="4">
-                        {column.isSorted ? (
-                          column.isSortedDesc ? (
-                            <TriangleDownIcon aria-label="sorted descending" />
-                          ) : (
-                            <TriangleUpIcon aria-label="sorted ascending" />
-                          )
-                        ) : null}
-                      </chakra.span>
-                    </Th>
-                  ))}
-                  <Th>Actions</Th>
-                </Tr>
-              ))}
-            </Thead>
-            <Tbody {...getTableBodyProps()}>
-              {rows.map((row, index) => {
-                prepareRow(row);
-                return (
-                  <Tr {...row.getRowProps()} key={index}>
-                    {row.cells.map((cell) => (
-                      <Td
-                        {...cell.getCellProps()}
-                        isNumeric={cell.column.isNumeric}
-                      >
-                        {cell.render("Cell")}
-                      </Td>
-                    ))}
-                    <Td>
-                      <Stack spacing={2} direction="row" align="center">
-                        <ViewUser data={data} row={row.id} />
-                        <EditUser
-                          data={data}
-                          row={row.id}
-                          refreshCallback={refreshHandler}
-                        />
-                        <DeleteUser
-                          data={data}
-                          row={row.id}
-                          refreshCallback={refreshHandler}
-                        />
-                      </Stack>
-                    </Td>
-                  </Tr>
-                );
-              })}
-            </Tbody>
-          </Table>
-        </Box>
-      </Flex>
+      <Heading as="h3">Users</Heading>
+      <div className="ag-theme-balham" style={{height: 400, width: '100%'}}>
+        <AgGridReact
+          columnDefs={columnDefs}
+          onGridReady={onGridReady}
+          rowData={users}
+        />
+      </div>
+      <Button onClick={exportHandler}>
+        Export
+      </Button>
     </>
   );
 }
