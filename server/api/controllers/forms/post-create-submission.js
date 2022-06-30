@@ -1,32 +1,32 @@
 module.exports = {
-  friendlyName: "Create Submission",
+  friendlyName: 'Create Submission',
 
-  description: "Create a new submission entry from form data",
+  description: 'Create a new submission entry from form data',
 
   inputs: {
     formId: {
-      type: "string",
+      type: 'string',
       required: true,
     },
     userId: {
-      type: "string",
+      type: 'string',
     },
     submissionData: {
-      type: "json",
+      type: 'json',
       required: true,
-      description: "key value pair of saved form data",
+      description: 'key value pair of saved form data',
     },
   },
 
   exits: {
     success: {
-      description: "Submission is saved successfuly.",
+      description: 'Submission is saved successfuly.',
     },
     error: {
-      description: "There was an issue with creating the submission",
+      description: 'There was an issue with creating the submission',
     },
     invalid: {
-      description: "There is an issue with your request",
+      description: 'There is an issue with your request',
     },
   },
 
@@ -56,6 +56,28 @@ module.exports = {
         user = (await sails.helpers.users.getUser(userId))[0];
         if (user === null) return exits.invalid();
 
+        // Check for any blank user fields
+        const resettablePrefillFields = [
+          'fullName',
+          'phoneNumber',
+          'email',
+          'address',
+          'countryOfOrigin',
+          'birthday',
+          'campus',
+          'lifestage',
+          'lifeGroup',
+          'ministryTeam',
+        ];
+
+        let userInfoToUpdate = {};
+        for (let i in resettablePrefillFields) {
+          const field = resettablePrefillFields[i];
+          if (user[field] === null || user[field] === '') {
+            userInfoToUpdate[field] = submissionData[field];
+          }
+        }
+
         // Create submission dict for binding to user
         const submissionObject = {
           formId: formId,
@@ -76,24 +98,24 @@ module.exports = {
         let updateUserSubmissions = await User.updateOne({
           _id: userId,
           isDeleted: false,
-        }).set({ formSubmitted: temp });
+        }).set({ formSubmitted: temp, ...userInfoToUpdate });
 
         if (updateUserSubmissions === null) return exits.invalid();
       }
 
       // Send confirmation email if there is email
 
-      if (user.email || submissionData["email"]) {
+      if (user.email || submissionData['email']) {
         await sails.helpers.sendTemplateEmail.with({
-          to: user.email ? user.email : submissionData["email"],
+          to: user.email ? user.email : submissionData['email'],
           subject: formRecord[0].customEmailSubject
             ? formRecord[0].customEmailSubject
-            : "Successful Submission for " + formRecord[0].formName,
+            : 'Successful Submission for ' + formRecord[0].formName,
           template: formRecord[0].successEmailTemplate,
           templateData: {
             fullName: user.fullName
               ? user.fullName
-              : submissionData["fullName"],
+              : submissionData['fullName'],
             formName: formRecord[0].formName,
           },
         });
