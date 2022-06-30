@@ -174,7 +174,7 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/admin"
-          permissions={['admin', 'stewardship']}
+          permissions={['admin', 'stewardship', 't3ch']}
           component={AdminLoginContainer}
         />
         {/* <PrivateRoute
@@ -210,7 +210,7 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/admin/:pageName"
-          permissions={['admin', 'stewardship']}
+          permissions={['admin', 'stewardship', 't3ch']}
           component={AdminContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={NoMatch} />
