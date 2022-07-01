@@ -21,6 +21,7 @@
     "http-proxy-middleware": "^2.0.0",
     "luxon": "^1.27.0",
     "react": "^18.2.0",
+    "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
     "react-google-button": "^0.7.2",
     "react-google-login": "^5.2.2",
