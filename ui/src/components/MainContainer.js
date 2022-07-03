@@ -168,7 +168,7 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/clear-cache/"
-          permissions={['admin', 'stewardship']}
+          permissions={['t3ch', 'admin', 'stewardship']}
           component={ClearCache}
         />
         <PrivateRoute
