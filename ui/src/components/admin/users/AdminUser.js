@@ -1,6 +1,6 @@
-import React from "react";
-import { customAxios as axios } from "../../helpers/customAxios";
-import { useEffect, useState } from "react";
+import React from 'react';
+import { customAxios as axios } from '../../helpers/customAxios';
+import { useEffect, useState } from 'react';
 import {
   Button,
   Flex,
@@ -15,14 +15,14 @@ import {
   chakra,
   Stack,
   useToast,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
-import { useTable, useSortBy } from "react-table";
-import ViewUser from "./ViewUserComponent";
-import EditUser from "./EditUserComponent";
-import DeleteUser from "./DeleteUserComponent";
-import ArrayToExcelButton from "../ArrayToExcelButton";
+import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons';
+import { useTable, useSortBy } from 'react-table';
+import ViewUser from './ViewUserComponent';
+import EditUser from './EditUserComponent';
+import DeleteUser from './DeleteUserComponent';
+import ArrayToExcelButton from '../ArrayToExcelButton';
 
 export default function AdminUser(props) {
   const [user, setUsers] = useState([]);
@@ -31,15 +31,15 @@ export default function AdminUser(props) {
 
   const getData = async () => {
     try {
-      const { data } = await axios.get("/api/users/get");
+      const { data } = await axios.get('/api/users/get');
       setUsers(data);
       setLoading(false);
     } catch (err) {
       console.log(err);
       toast({
-        title: "Something went wrong.",
-        description: "Try again.",
-        status: "error",
+        title: 'Something went wrong.',
+        description: 'Try again.',
+        status: 'error',
         duration: 3000,
         isClosable: true,
       });
@@ -54,33 +54,53 @@ export default function AdminUser(props) {
     getData();
   };
 
+  const resetUsers = async () => {
+    console.log('hai freind');
+    try {
+      const { data } = await axios.post('/api/users/reset', {
+        field: 'lifeGroup',
+      });
+      setUsers(data);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      toast({
+        title: 'Something went wrong.',
+        description: 'Try again.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
   const data = user;
 
   const columns = React.useMemo(
     () => [
       {
-        Header: "Name",
-        accessor: "fullName",
+        Header: 'Name',
+        accessor: 'fullName',
       },
       {
-        Header: "Email",
-        accessor: "email",
+        Header: 'Email',
+        accessor: 'email',
       },
       {
-        Header: "Campus/Life Stage",
-        accessor: "lifestage",
+        Header: 'Campus/Life Stage',
+        accessor: 'lifestage',
       },
       {
-        Header: "Phone Number",
-        accessor: "phoneNumber",
+        Header: 'Phone Number',
+        accessor: 'phoneNumber',
       },
       {
-        Header: "Country of Origin",
-        accessor: "countryOfOrigin",
+        Header: 'Country of Origin',
+        accessor: 'countryOfOrigin',
       },
       {
-        Header: "LIFE Group",
-        accessor: "lifeGroup",
+        Header: 'LIFE Group',
+        accessor: 'lifeGroup',
       },
     ],
     []
@@ -98,15 +118,17 @@ export default function AdminUser(props) {
         ) : (
           <ArrayToExcelButton
             apiArray={data}
-            fileName={"UserData.xls"}
-            buttonTitle={"Export"}
+            fileName={'UserData.xls'}
+            buttonTitle={'Export'}
           />
         )}
+        {/* reset users */}
+        <Button onClick={() => resetUsers()}>Reset</Button>
       </Stack>
       <Flex
-        bg={useColorModeValue("gray.200")}
+        bg={useColorModeValue('gray.200')}
         justifyContent="center"
-        display={{ md: "flex" }}
+        display={{ md: 'flex' }}
         overflowX="auto"
       >
         <Box overflowX="auto">
@@ -123,7 +145,7 @@ export default function AdminUser(props) {
                       {...column.getHeaderProps(column.getSortByToggleProps())}
                       isNumeric={column.isNumeric}
                     >
-                      {column.render("Header")}
+                      {column.render('Header')}
                       <chakra.span pl="4">
                         {column.isSorted ? (
                           column.isSortedDesc ? (
@@ -149,7 +171,7 @@ export default function AdminUser(props) {
                         {...cell.getCellProps()}
                         isNumeric={cell.column.isNumeric}
                       >
-                        {cell.render("Cell")}
+                        {cell.render('Cell')}
                       </Td>
                     ))}
                     <Td>
