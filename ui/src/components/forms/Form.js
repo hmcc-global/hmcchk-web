@@ -40,6 +40,7 @@ import {
   lifegroupList,
   lifestageList,
   regionList,
+  ministryTeamList,
 } from '../helpers/lists';
 
 const Form = (props) => {
@@ -153,7 +154,7 @@ const Form = (props) => {
       // Generate a label
       let label = (
         <FormLabel key={fieldName + 'label'} id={fieldName + 'label'}>
-          {sentencize(fieldName)}
+          {fieldName === 'lifeGroup' ? 'LIFE Group' : sentencize(fieldName)}
           <Text key={fieldName + 'alert'} as="span" color="red">
             *
           </Text>
@@ -198,6 +199,15 @@ const Form = (props) => {
             <Select {...register('lifeGroup', { required: true })}>
               {lifegroupList.map((item) => {
                 return <option key={'lg' + item}>{item}</option>;
+              })}
+            </Select>
+          );
+          break;
+        case 'ministryTeam':
+          field = (
+            <Select {...register('ministryTeam', { required: true })}>
+              {ministryTeamList.map((item) => {
+                return <option key={'mt' + item}>{item}</option>;
               })}
             </Select>
           );
@@ -253,6 +263,17 @@ const Form = (props) => {
             </Stack>
           );
 
+          break;
+        case 'birthday':
+          field = (
+            <Input
+              type="date"
+              key={fieldName}
+              {...register(fieldName, {
+                required: true,
+              })}
+            />
+          );
           break;
         case 'email':
           field = (
