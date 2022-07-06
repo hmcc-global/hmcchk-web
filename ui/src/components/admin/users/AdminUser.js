@@ -31,6 +31,7 @@ export default function AdminUser(props) {
     sortable: true,
     resizable: true,
     filter: true,
+    floatingFilter: true,
   };
 
   const exportParams = {
@@ -57,8 +58,8 @@ export default function AdminUser(props) {
     }
   };
 
-  // ag-grid helpers
-
+  // Ag-Grid Helpers
+  // Getter Functions: to handle errors in retrieving data
   const birthdayGetter = (params) => {
     if (params && params.data && params.data.birthday) {
       const { birthday: birthdayStr } = params.data;
@@ -80,7 +81,7 @@ export default function AdminUser(props) {
   const membershipHeaderGetter = (params, columnName) =>
     params.location === 'csv' ? `Membership ${columnName}` : columnName;
 
-  // membership getters
+  // Membership Getters
   const membershipRecommitmentDateGetter = (params) => {
     if (
       params &&
@@ -133,7 +134,7 @@ export default function AdminUser(props) {
     return '';
   };
 
-  // baptism getters
+  // Baptism Getters
   const baptismDateGetter = (params) => {
     if (
       params &&
@@ -177,7 +178,52 @@ export default function AdminUser(props) {
     return '';
   };
 
-  // Custom editors
+  // Setter Functions: to validate user edits
+  const emailSetter = (params) => {
+    if (params && params.newValue) {
+      var newEmail = params.newValue;
+      // Ref for regex: https://regexlib.com/REDetails.aspx?regexp_id=3029
+      if (
+        params.data.email !== newEmail &&
+        newEmail.match(/^(?:(?:[\w\.\-_]+@[\w\d]+(?:\.[\w]{2,6})+)[,;]?\s?)+$/)
+      ) {
+        params.data.email = newEmail;
+        return true;
+      }
+      return false;
+    }
+    
+    return  false;
+  };
+
+  const phoneNumberSetter = (params) => {
+    if (params && params.newValue && params.data) {
+      var newPhoneNumber = params.newValue;
+      // Handle EDITs
+      if (typeof newPhoneNumber === 'string') {
+        // Get rid of '+', '-', and white spaces
+        newPhoneNumber = newPhoneNumber.replace(/\s|\+|-/g, '');
+        // Check if input is an integer, then assumes phone number is valid
+        if (
+          !isNaN(newPhoneNumber) &&
+          Number.isInteger(Number(newPhoneNumber))
+        ) {
+          params.data.phoneNumber = newPhoneNumber;
+          return true;
+        }
+        return false;
+      }
+      // Handle UNDOs
+      else if (typeof newPhoneNumber === 'number') {
+        params.data.phoneNumber = params.newValue;
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  // Custom Editors
   const MediumTextEditorProps = {
     cellEditorPopup: true,
     cellEditor: 'agLargeTextCellEditor',
@@ -186,15 +232,20 @@ export default function AdminUser(props) {
       rows: 1,
       cols: 50,
     },
-  }
+  };
 
-  // ag-grid functions
+  // Ag-Grid Functions
+  // Initialize Grid API states
   const onGridReady = (params) => {
     if (params.api) setApi(params.api);
     if (params.columnApi) setColApi(params.columnApi);
   };
 
-  // Resize columns automatically
+  const getRowId = (params) => {
+    return params.data.id;
+  };
+
+  // Function to resize all columns automatically
   const autoSizeAllColumns = () => {
     if (colApi) {
       const allColumnIds = [];
@@ -204,15 +255,16 @@ export default function AdminUser(props) {
       colApi.autoSizeColumns(allColumnIds);
     }
   };
-
+  // Resize columns on first render of the grid
   const onFirstDataRendered = () => {
     if (colApi) autoSizeAllColumns();
   };
-
+  // Resize columns on cell edits
   const onCellValueChanged = () => {
     if (colApi) autoSizeAllColumns();
   };
 
+  // Undo and Redo Functions
   const undo = () => {
     if (api) api.undoCellEditing();
   };
@@ -221,17 +273,22 @@ export default function AdminUser(props) {
     if (api) api.redoCellEditing();
   };
 
+  // Enabling Undo and Redo
   const undoRedoCellEditing = true;
   const undoRedoCellEditingLimit = 10;
   const enableCellChangeFlash = true;
 
-  //  ag-grid table column definitions
+  //  Ag-Grid Column Definitions
   const columnDefs = [
     {
       headerName: 'Name',
       field: 'fullName',
     },
-    { headerName: 'Email', field: 'email' },
+    {
+      headerName: 'Email',
+      field: 'email',
+      valueSetter: emailSetter,
+    },
     {
       headerName: 'Lifestage',
       field: 'lifestage',
@@ -260,13 +317,20 @@ export default function AdminUser(props) {
       headerName: 'Personal Details',
       marryChildren: true,
       children: [
-        { headerName: 'Phone', field: 'phoneNumber' },
+        {
+          headerName: 'Phone',
+          field: 'phoneNumber',
+          valueSetter: phoneNumberSetter,
+          // Didn't enable NUMBER filter because there is no "contains" option for number filters: not as user-friendly as TEXT filter
+        },
         {
           headerName: 'Birth Date',
           field: 'birthday',
           valueGetter: birthdayGetter,
           columnGroupShow: 'open',
           cellEditor: CustomDateEditor,
+          cellEditorPopup: true,
+          filter: 'agDateColumnFilter',
         },
         {
           headerName: 'Nationality',
@@ -285,32 +349,23 @@ export default function AdminUser(props) {
       children: [
         {
           headerName: 'Street',
-          field: 'addres.street',
+          field: 'address.street',
           ...MediumTextEditorProps,
         },
         {
           headerName: 'Flat',
           field: 'address.flat',
           columnGroupShow: 'open',
-          ...MediumTextEditorProps,
         },
         {
           headerName: 'Floor',
           field: 'address.floor',
           columnGroupShow: 'open',
-          cellEditorPopup: true,
-          cellEditor: 'agLargeTextCellEditor',
-          cellEditorParams: {
-            maxLength: 100,
-            rows: 1,
-            cols: 10,
-          },
         },
         {
           headerName: 'District',
           field: 'address.district',
           columnGroupShow: 'open',
-          cellEditorPopup: true,
           cellEditor: 'agSelectCellEditor',
           cellEditorParams: {
             values: districtList,
@@ -320,7 +375,6 @@ export default function AdminUser(props) {
           headerName: 'Region',
           field: 'address.region',
           columnGroupShow: 'open',
-          cellEditorPopup: true,
           cellEditor: 'agSelectCellEditor',
           cellEditorParams: {
             values: regionList,
@@ -335,7 +389,6 @@ export default function AdminUser(props) {
         {
           headerName: 'Ministry Team',
           field: 'ministryTeam',
-          cellEditorPopup: true,
           cellEditor: 'agSelectCellEditor',
           cellEditorParams: {
             values: ministryTeamList,
@@ -344,7 +397,6 @@ export default function AdminUser(props) {
         {
           headerName: 'Access Type',
           field: 'accessType',
-          cellEditorPopup: true,
           cellEditor: 'agSelectCellEditor',
           cellEditorParams: {
             values: accessTypeList,
@@ -361,6 +413,7 @@ export default function AdminUser(props) {
               valueGetter: membershipRecommitmentDateGetter,
               cellEditor: CustomDateEditor,
               cellEditorPopup: true,
+              filter: 'agDateColumnFilter',
             },
             {
               headerValueGetter: (p) =>
@@ -369,6 +422,7 @@ export default function AdminUser(props) {
               valueGetter: membershipRecognitionDateGetter,
               cellEditor: CustomDateEditor,
               cellEditorPopup: true,
+              filter: 'agDateColumnFilter',
             },
             {
               headerValueGetter: (p) =>
@@ -389,6 +443,7 @@ export default function AdminUser(props) {
               field: 'baptismInfo.baptismDate',
               cellEditor: CustomDateEditor,
               cellEditorPopup: true,
+              filter: 'agDateColumnFilter',
             },
             {
               headerName: 'Baptism Place',
@@ -432,6 +487,7 @@ export default function AdminUser(props) {
           undoRedoCellEditing={undoRedoCellEditing}
           undoRedoCellEditingLimit={undoRedoCellEditingLimit}
           enableCellChangeFlash={enableCellChangeFlash}
+          getRowId={getRowId}
         />
       </div>
       <Button onClick={exportHandler} mt={5}>
