@@ -23,12 +23,14 @@ export default function AdminUser(props) {
   const dateToFormat = 'dd MMM yyyy';
 
   const [api, setApi] = useState();
+  const [colApi, setColApi] = useState();
   const [users, setUsers] = useState([]);
 
   const defaultColDef = {
     editable: true,
     sortable: true,
     resizable: true,
+    filter: true,
   };
 
   const exportParams = {
@@ -94,6 +96,8 @@ export default function AdminUser(props) {
       );
       return recommitmentDate.toFormat(dateToFormat);
     }
+
+    return '';
   };
 
   const membershipRecognitionDateGetter = (params) => {
@@ -111,6 +115,8 @@ export default function AdminUser(props) {
       );
       return recognitionDate.toFormat(dateToFormat);
     }
+
+    return '';
   };
 
   const membershipOfficialNameGetter = (params) => {
@@ -123,6 +129,8 @@ export default function AdminUser(props) {
       const { officialName } = params.data.membershipInfo[0];
       return officialName;
     }
+
+    return '';
   };
 
   // baptism getters
@@ -137,6 +145,8 @@ export default function AdminUser(props) {
       const baptismDate = DateTime.fromFormat(baptismDateStr, dateFromFormat);
       return baptismDate.toFormat(dateToFormat);
     }
+
+    return '';
   };
 
   const baptismPlaceGetter = (params) => {
@@ -149,6 +159,8 @@ export default function AdminUser(props) {
       const { baptismPlace } = params.data.baptismInfo[0];
       return baptismPlace;
     }
+
+    return '';
   };
 
   const baptismOfficialNameGetter = (params) => {
@@ -161,32 +173,59 @@ export default function AdminUser(props) {
       const { officialName } = params.data.baptismInfo[0];
       return officialName;
     }
+
+    return '';
   };
+
+  // Custom editors
+  const MediumTextEditorProps = {
+    cellEditorPopup: true,
+    cellEditor: 'agLargeTextCellEditor',
+    cellEditorParams: {
+      maxLength: 100,
+      rows: 1,
+      cols: 50,
+    },
+  }
 
   // ag-grid functions
   const onGridReady = (params) => {
     if (params.api) setApi(params.api);
+    if (params.columnApi) setColApi(params.columnApi);
   };
 
-  const onFirstDataRendered = (params) => {
-    const allColumnIds = [];
-    params.columnApi.getAllColumns().forEach((column) => {
-      allColumnIds.push(column.getId());
-    });
-
-    params.columnApi.autoSizeColumns(allColumnIds);
+  // Resize columns automatically
+  const autoSizeAllColumns = () => {
+    if (colApi) {
+      const allColumnIds = [];
+      colApi.getAllColumns().forEach((column) => {
+        allColumnIds.push(column.getId());
+      });
+      colApi.autoSizeColumns(allColumnIds);
+    }
   };
 
-  const onCellValueChanged = (params) => {
-    // Resize columns automatically after editing a cell
-    const allColumnIds = [];
-    params.columnApi.getAllColumns().forEach((column) => {
-      allColumnIds.push(column.getId());
-    });
-
-    params.columnApi.autoSizeColumns(allColumnIds);
+  const onFirstDataRendered = () => {
+    if (colApi) autoSizeAllColumns();
   };
 
+  const onCellValueChanged = () => {
+    if (colApi) autoSizeAllColumns();
+  };
+
+  const undo = () => {
+    if (api) api.undoCellEditing();
+  };
+
+  const redo = () => {
+    if (api) api.redoCellEditing();
+  };
+
+  const undoRedoCellEditing = true;
+  const undoRedoCellEditingLimit = 10;
+  const enableCellChangeFlash = true;
+
+  //  ag-grid table column definitions
   const columnDefs = [
     {
       headerName: 'Name',
@@ -196,7 +235,6 @@ export default function AdminUser(props) {
     {
       headerName: 'Lifestage',
       field: 'lifestage',
-      cellEditorPopup: true,
       cellEditor: 'agSelectCellEditor',
       cellEditorParams: {
         values: lifestageList,
@@ -205,7 +243,6 @@ export default function AdminUser(props) {
     {
       headerName: 'Campus',
       field: 'campus',
-      cellEditorPopup: true,
       cellEditor: 'agSelectCellEditor',
       cellEditorParams: {
         values: campusList,
@@ -214,7 +251,6 @@ export default function AdminUser(props) {
     {
       headerName: 'LIFE Group',
       field: 'lifeGroup',
-      cellEditorPopup: true,
       cellEditor: 'agSelectCellEditor',
       cellEditorParams: {
         values: lifegroupList,
@@ -231,13 +267,11 @@ export default function AdminUser(props) {
           valueGetter: birthdayGetter,
           columnGroupShow: 'open',
           cellEditor: CustomDateEditor,
-          cellEditorPopup: true,
         },
         {
           headerName: 'Nationality',
           field: 'countryOfOrigin',
           columnGroupShow: 'open',
-          cellEditorPopup: true,
           cellEditor: 'agSelectCellEditor',
           cellEditorParams: {
             values: countryList,
@@ -251,26 +285,14 @@ export default function AdminUser(props) {
       children: [
         {
           headerName: 'Street',
-          field: 'address.street',
-          cellEditorPopup: true,
-          cellEditor: 'agLargeTextCellEditor',
-          cellEditorParams: {
-            maxLength: 100,
-            rows: 1,
-            cols: 50,
-          },
+          field: 'addres.street',
+          ...MediumTextEditorProps,
         },
         {
           headerName: 'Flat',
           field: 'address.flat',
           columnGroupShow: 'open',
-          cellEditorPopup: true,
-          cellEditor: 'agLargeTextCellEditor',
-          cellEditorParams: {
-            maxLength: 100,
-            rows: 1,
-            cols: 50,
-          },
+          ...MediumTextEditorProps,
         },
         {
           headerName: 'Floor',
@@ -364,21 +386,16 @@ export default function AdminUser(props) {
             {
               headerName: 'Baptism Date',
               valueGetter: baptismDateGetter,
-              field: 'baptismInfo[0].baptismDate',
+              field: 'baptismInfo.baptismDate',
               cellEditor: CustomDateEditor,
               cellEditorPopup: true,
             },
             {
               headerName: 'Baptism Place',
               valueGetter: baptismPlaceGetter,
+              field: 'baptismInfo.baptismPlace',
               columnGroupShow: 'open',
-              cellEditorPopup: true,
-              cellEditor: 'agLargeTextCellEditor',
-              cellEditorParams: {
-                maxLength: 100,
-                rows: 1,
-                cols: 50,
-              },
+              ...MediumTextEditorProps,
             },
             {
               headerValueGetter: (p) => officialNameHeaderGetter(p, 'Baptism'),
@@ -393,9 +410,15 @@ export default function AdminUser(props) {
 
   return (
     <>
-      <Heading as="h3" mb={10}>
+      <Heading as="h3" mb={5}>
         Users
       </Heading>
+      <Button mb={5} onClick={undo}>
+        Undo
+      </Button>
+      <Button ml={10} mb={5} onClick={redo}>
+        Redo
+      </Button>
       <div className="ag-theme-balham" style={{ height: 800, width: '100%' }}>
         <AgGridReact
           defaultColDef={defaultColDef}
@@ -406,6 +429,9 @@ export default function AdminUser(props) {
           stopEditingWhenCellsLoseFocus={true}
           onFirstDataRendered={onFirstDataRendered}
           onCellValueChanged={onCellValueChanged}
+          undoRedoCellEditing={undoRedoCellEditing}
+          undoRedoCellEditingLimit={undoRedoCellEditingLimit}
+          enableCellChangeFlash={enableCellChangeFlash}
         />
       </div>
       <Button onClick={exportHandler} mt={5}>
