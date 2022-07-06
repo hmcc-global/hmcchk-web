@@ -8,21 +8,22 @@ export default forwardRef((props, ref) => {
   // Date Formatting
   const dateFromFormat = 'dd MMM yyyy';
   const dateToFormat = 'yyyy-MM-dd';
-  const birthday = DateTime.fromFormat(props.value, dateFromFormat);
-  let tempDate = new Date(birthday.toFormat(dateToFormat));
+  const tempDate =
+    props.value && DateTime.fromFormat(props.value, dateFromFormat);
+  let dateStr = tempDate && new Date(tempDate.toFormat(dateToFormat));
 
   // Initialize State
-  const [selectedDate, setSelectedDate] = useState(tempDate);
+  const [selectedDate, setSelectedDate] = useState(dateStr);
 
   // Styling the input
   const buttonStyle = {
-    color: "#000000",
-    background: "transparent",
-    borderWidth: "1px",
-    borderRadius: "3px",
-    borderColor: "#0091EA",
-    padding: "5px 20px",
-    height: "25px",
+    color: '#000000',
+    background: 'transparent',
+    borderWidth: '1px',
+    borderRadius: '3px',
+    borderColor: '#0091EA',
+    padding: '5px 20px',
+    height: '25px',
   };
   const CustomInput = forwardRef(({ value, onClick }, ref) => (
     <button style={buttonStyle} onClick={onClick} ref={ref}>
@@ -46,9 +47,10 @@ export default forwardRef((props, ref) => {
         if (!props.value) {
           return;
         }
-        const birthday = DateTime.fromFormat(props.value, dateFromFormat);
-        let tempDate = new Date(birthday.toFormat(dateToFormat));
-        setSelectedDate(tempDate);
+        const tempDate =
+          props.value && DateTime.fromFormat(props.value, dateFromFormat);
+        let dateStr = tempDate && new Date(tempDate.toFormat(dateToFormat));
+        setSelectedDate(dateStr);
       },
     };
   });
