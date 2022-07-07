@@ -15,6 +15,7 @@ import {
   chakra,
   Stack,
   useToast,
+  Select,
 } from '@chakra-ui/react';
 
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons';
@@ -54,11 +55,11 @@ export default function AdminUser(props) {
     getData();
   };
 
-  const resetUsers = async () => {
+  const resetUsers = async (value) => {
     console.log('hai freind');
     try {
       const { data } = await axios.post('/api/users/reset', {
-        field: 'lifeGroup',
+        field: value,
       });
       setUsers(data);
       setLoading(false);
@@ -105,9 +106,19 @@ export default function AdminUser(props) {
     ],
     []
   );
-
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data }, useSortBy);
+
+  const getInitialValue = () => {
+    const value = null;
+    return value;
+  };
+  const [value, setValue] = useState(getInitialValue);
+  const handleChange = (e) => {
+    setValue(e.target.value);
+    console.log(e.target.value);
+    resetUsers(e.target.value);
+  };
 
   return (
     <>
@@ -123,7 +134,23 @@ export default function AdminUser(props) {
           />
         )}
         {/* reset users */}
-        <Button onClick={() => resetUsers()}>Reset</Button>
+        <Select
+          placeholder="Reset"
+          width="18%"
+          icon={<TriangleDownIcon />}
+          variant="filled"
+          value={value}
+          onChange={handleChange}
+        >
+          <option value="address">Address</option>
+          <option value="countryOfOrigin">Country of Origin</option>
+          <option value="birthday">Birthday</option>
+          <option value="campus">Campus</option>
+          <option value="ministryTeam">Ministry Team</option>
+          <option value="lifestage">Lifestage</option>
+          <option value="phoneNumber">Phone Number</option>
+          <option value="lifeGroup">LIFE Group</option>
+        </Select>
       </Stack>
       <Flex
         bg={useColorModeValue('gray.200')}
