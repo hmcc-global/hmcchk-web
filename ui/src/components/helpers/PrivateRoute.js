@@ -88,7 +88,7 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
                 break;
             }
 
-            return <Component {...props} {...rest} user={userObj} />;
+            return <Component {...props} user={userObj} />;
           } else {
             return <NoMatch user={userObj} />;
           }
