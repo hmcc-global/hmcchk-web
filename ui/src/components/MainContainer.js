@@ -23,7 +23,6 @@ import ConnectFloatButton from './connect-float/ConnectFloatButton';
 import UserFormContainer from './forms/UserFormContainer';
 import NoMatch from './errors/NoMatch';
 import AdminLoginContainer from './admin/AdminLoginContainer';
-//import AdminContainer from './AdminContainer';
 import ScrollToTop from './helpers/ScrollToTop';
 import AboutUsContainer from './about/AboutUsContainer';
 import OnlineSermonContainer from './sermons/OnlineSermonContainer';
@@ -32,6 +31,7 @@ import AdminUser from './admin/users/AdminUser';
 import FormManager from './forms/FormManager';
 import AdminGiving from './admin/AdminGiving';
 import SidebarWithHeader from './admin/navigation/Sidebar';
+import AdminLogout from './admin/AdminLogout';
 
 const MainContainer = () => {
   return (
@@ -176,13 +176,19 @@ const MainContainer = () => {
           permissions={['t3ch', 'admin', 'stewardship']}
           component={ClearCache}
         />
+        <PrivateRoute
+          exact
+          path="/admin"
+          permissions={['admin', 'stewardship', 't3ch']}
+          component={AdminLoginContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/login"
+          permissions={['noUser']}
+          component={AdminLoginContainer}
+        />
         <SidebarWithHeader>
-          <PrivateRoute
-            exact
-            path="/admin"
-            permissions={['admin', 'stewardship', 't3ch']}
-            component={AdminLoginContainer}
-          />
           <PrivateRoute
             exact
             path="/admin/home"
@@ -209,17 +215,12 @@ const MainContainer = () => {
           />
           <PrivateRoute
             exact
-            path="/admin/login"
-            permissions={['noUser']}
-            component={AdminLoginContainer}
+            path="/admin/logout"
+            permissions={['admin', 'stewardship', 't3ch']}
+            component={AdminLogout}
           />
         </SidebarWithHeader>
-        {/* <PrivateRoute
-          exact
-          path="/admin/:pageName"
-          permissions={['admin', 'stewardship', 't3ch']}
-          component={AdminContainer}
-        /> */}
+
         <PrivateRoute path="*" permissions={['public']} component={NoMatch} />
       </Switch>
       <FooterContainer />
