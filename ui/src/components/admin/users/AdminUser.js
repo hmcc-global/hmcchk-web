@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
-import { Button, Heading } from '@chakra-ui/react';
+import { Button, ButtonGroup, Heading } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 import CustomDateEditor from './ag-grid-editors/CustomDateEditor.js';
 import {
@@ -17,6 +17,7 @@ import {
   campusList,
   countryList,
 } from '../../helpers/lists';
+import { CgUndo, CgRedo } from 'react-icons/cg';
 
 export default function AdminUser(props) {
   const dateFromFormat = 'yyyy-MM-dd';
@@ -179,9 +180,29 @@ export default function AdminUser(props) {
   };
 
   // Setter Functions: to validate user edits
+  // Note: for columns with selection edits, there will be NO validation as none is necessary
+  const fullNameSetter = (params) => {
+    if (params && params.data && params.newValue) {
+      var newFullName = params.newValue;
+      
+      // Valid Full Name: Letters and Whitespaces
+      if (
+        params.data.fullName !== newFullName &&
+        /^[A-Za-z\s]*$/.test(newFullName)
+      ) {
+        params.data.fullName = newFullName;
+        return true;
+      }
+      alert("Invalid Full Name!");
+      return false;
+    }
+    return false;
+  }
+
   const emailSetter = (params) => {
-    if (params && params.newValue) {
+    if (params && params.data && params.newValue) {
       var newEmail = params.newValue;
+      
       // Ref for regex: https://regexlib.com/REDetails.aspx?regexp_id=3029
       if (
         params.data.email !== newEmail &&
@@ -190,20 +211,21 @@ export default function AdminUser(props) {
         params.data.email = newEmail;
         return true;
       }
+      alert('Invalid Email Address!');
       return false;
     }
-    
-    return  false;
+
+    return false;
   };
 
   const phoneNumberSetter = (params) => {
-    if (params && params.newValue && params.data) {
+    if (params && params.data && params.newValue) {
       var newPhoneNumber = params.newValue;
-      // Handle EDITs
+      // Handle User EDITs: string type gets passed for edits
       if (typeof newPhoneNumber === 'string') {
         // Get rid of '+', '-', and white spaces
         newPhoneNumber = newPhoneNumber.replace(/\s|\+|-/g, '');
-        // Check if input is an integer, then assumes phone number is valid
+        // Check if input is an integer
         if (
           !isNaN(newPhoneNumber) &&
           Number.isInteger(Number(newPhoneNumber))
@@ -211,9 +233,10 @@ export default function AdminUser(props) {
           params.data.phoneNumber = newPhoneNumber;
           return true;
         }
+        alert('Invalid Phone Number!');
         return false;
       }
-      // Handle UNDOs
+      // Handle UNDOs: number type get passed for undos
       else if (typeof newPhoneNumber === 'number') {
         params.data.phoneNumber = params.newValue;
         return true;
@@ -241,10 +264,6 @@ export default function AdminUser(props) {
     if (params.columnApi) setColApi(params.columnApi);
   };
 
-  const getRowId = (params) => {
-    return params.data.id;
-  };
-
   // Function to resize all columns automatically
   const autoSizeAllColumns = () => {
     if (colApi) {
@@ -255,13 +274,19 @@ export default function AdminUser(props) {
       colApi.autoSizeColumns(allColumnIds);
     }
   };
+
   // Resize columns on first render of the grid
   const onFirstDataRendered = () => {
-    if (colApi) autoSizeAllColumns();
+    if (api && colApi) {
+      autoSizeAllColumns();
+    }
   };
+
   // Resize columns on cell edits
   const onCellValueChanged = () => {
-    if (colApi) autoSizeAllColumns();
+    if (api && colApi) {
+      autoSizeAllColumns();
+    }
   };
 
   // Undo and Redo Functions
@@ -275,7 +300,7 @@ export default function AdminUser(props) {
 
   // Enabling Undo and Redo
   const undoRedoCellEditing = true;
-  const undoRedoCellEditingLimit = 10;
+  const undoRedoCellEditingLimit = 20;
   const enableCellChangeFlash = true;
 
   //  Ag-Grid Column Definitions
@@ -283,6 +308,7 @@ export default function AdminUser(props) {
     {
       headerName: 'Name',
       field: 'fullName',
+      valueSetter: fullNameSetter,
     },
     {
       headerName: 'Email',
@@ -468,12 +494,14 @@ export default function AdminUser(props) {
       <Heading as="h3" mb={5}>
         Users
       </Heading>
-      <Button mb={5} onClick={undo}>
-        Undo
-      </Button>
-      <Button ml={10} mb={5} onClick={redo}>
-        Redo
-      </Button>
+      <ButtonGroup mb={5} variant="outline" spacing="5">
+        <Button onClick={undo} leftIcon={<CgUndo />}>
+          Undo
+        </Button>
+        <Button onClick={redo} rightIcon={<CgRedo />}>
+          Redo
+        </Button>
+      </ButtonGroup>
       <div className="ag-theme-balham" style={{ height: 800, width: '100%' }}>
         <AgGridReact
           defaultColDef={defaultColDef}
@@ -487,10 +515,9 @@ export default function AdminUser(props) {
           undoRedoCellEditing={undoRedoCellEditing}
           undoRedoCellEditingLimit={undoRedoCellEditingLimit}
           enableCellChangeFlash={enableCellChangeFlash}
-          getRowId={getRowId}
         />
       </div>
-      <Button onClick={exportHandler} mt={5}>
+      <Button onClick={exportHandler} mt={5} variant="outline">
         Export
       </Button>
     </>
