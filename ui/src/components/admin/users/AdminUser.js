@@ -20,6 +20,7 @@ import {
 import { CgUndo, CgRedo } from 'react-icons/cg';
 
 export default function AdminUser(props) {
+  // TODO-aparedan: Refresh every x amount minutes
   const dateFromFormat = 'yyyy-MM-dd';
   const dateToFormat = 'dd MMM yyyy';
 
@@ -83,6 +84,7 @@ export default function AdminUser(props) {
     params.location === 'csv' ? `Membership ${columnName}` : columnName;
 
   // Membership Getters
+    // TODO-aparedan: Get latest membershipInfo. Right now just assume always get [0]
   const membershipRecommitmentDateGetter = (params) => {
     if (
       params &&
@@ -246,6 +248,42 @@ export default function AdminUser(props) {
     return false;
   };
 
+  const addressInfoSetter = (params) => {
+    if (params && params.data) {
+      const { colId } = params.colDef;
+      const newAddress = { ...params.data.address };
+      newAddress[colId] = params.newValue ?? '';
+      params.data.address = newAddress;
+      return true;
+    }
+
+    return false;
+  };
+
+  const membershipInfoSetter = (params) => {
+    if (params && params.data) {
+      const { colId } = params.colDef;
+      const newMembershipInfo = { ...params.data.membershipInfo[0] };
+      newMembershipInfo[colId] = params.newValue ?? '';
+      params.data.membershipInfo[0] = newMembershipInfo;
+      return true;
+    }
+
+    return false;
+  };
+
+  const baptismInfoSetter = (params) => {
+    if (params && params.data) {
+      const { colId } = params.colDef;
+      const newBaptismInfo = { ...params.data.baptismInfo[0] };
+      newBaptismInfo[colId] = params.newValue ?? '';
+      params.data.baptismInfo[0] = newBaptismInfo;
+      return true;
+    }
+
+    return false;
+  };
+  
   // Custom Editors
   const MediumTextEditorProps = {
     cellEditorPopup: true,
@@ -374,36 +412,48 @@ export default function AdminUser(props) {
       marryChildren: true,
       children: [
         {
+          ...MediumTextEditorProps,
           headerName: 'Street',
           field: 'address.street',
-          ...MediumTextEditorProps,
+          colId: 'street',
+          valueSetter: addressInfoSetter
         },
         {
           headerName: 'Flat',
           field: 'address.flat',
+          colId: 'flat',
+          valueSetter: addressInfoSetter,
           columnGroupShow: 'open',
         },
         {
           headerName: 'Floor',
           field: 'address.floor',
+          colId: 'floor',
+          valueSetter: addressInfoSetter,
           columnGroupShow: 'open',
         },
         {
           headerName: 'District',
           field: 'address.district',
+          colId: 'district',
           columnGroupShow: 'open',
           cellEditor: 'agSelectCellEditor',
+          valueSetter: addressInfoSetter,
           cellEditorParams: {
             values: districtList,
+            useSetter: true
           },
         },
         {
           headerName: 'Region',
           field: 'address.region',
+          colId: 'region',
           columnGroupShow: 'open',
           cellEditor: 'agSelectCellEditor',
+          valueSetter: addressInfoSetter,
           cellEditorParams: {
             values: regionList,
+            useSetter: true
           },
         },
       ],
@@ -453,9 +503,10 @@ export default function AdminUser(props) {
             {
               headerValueGetter: (p) =>
                 officialNameHeaderGetter(p, 'Membership'),
-              colId: 'membershipOfficialName',
+              colId: 'officialName',
               valueGetter: membershipOfficialNameGetter,
-              columnGroupShow: 'open',
+              valueSetter: membershipInfoSetter,
+              // columnGroupShow: 'open',
             },
           ],
         },
@@ -472,15 +523,19 @@ export default function AdminUser(props) {
               filter: 'agDateColumnFilter',
             },
             {
-              headerName: 'Baptism Place',
-              valueGetter: baptismPlaceGetter,
-              field: 'baptismInfo.baptismPlace',
-              columnGroupShow: 'open',
               ...MediumTextEditorProps,
+              headerName: 'Baptism Place',
+              field: 'baptismInfo.baptismPlace',
+              colId: 'baptismPlace',
+              valueGetter: baptismPlaceGetter,
+              valueSetter: baptismInfoSetter,
+              columnGroupShow: 'open',
             },
             {
               headerValueGetter: (p) => officialNameHeaderGetter(p, 'Baptism'),
+              colId: 'officialName',
               valueGetter: baptismOfficialNameGetter,
+              valueSetter: baptismInfoSetter,
               columnGroupShow: 'open',
             },
           ],

@@ -26,6 +26,7 @@ module.exports = {
 
   fn: async function ({ params }, exits) {
     const { id: membershipId, ...toUpdate } = params;
+    // TODO-aparedan: I don't think this should update an entry. I think it should create a new entry so that there is track record of user's membership recommitment dates
     if (membershipId) {
       try {
         let data = await Membership.updateOne({
