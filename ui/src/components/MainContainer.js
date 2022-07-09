@@ -182,12 +182,6 @@ const MainContainer = () => {
           permissions={['admin', 'stewardship', 't3ch']}
           component={AdminLoginContainer}
         />
-        <PrivateRoute
-          exact
-          path="/admin/login"
-          permissions={['noUser']}
-          component={AdminLoginContainer}
-        />
         <SidebarWithHeader>
           <PrivateRoute
             exact
