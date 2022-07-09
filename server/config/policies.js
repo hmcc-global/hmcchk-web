@@ -18,7 +18,7 @@ module.exports.policies = {
   '*': 'isLoggedIn',
 
   // Public controllers
-  'users/reset': true,
+  'users/reset': ['isLoggedIn', 'isAdmin'],
 
   // Announcements
   'announcements/*': true,

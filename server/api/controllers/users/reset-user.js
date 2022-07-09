@@ -4,12 +4,6 @@ module.exports = {
 
   description: 'Reset users',
 
-  // i dont rlly know what the inputs are?
-  // input yang gua butuh: user id to check usernya, trus LG
-  // bisa buat everyone or a specific person
-  // depends on the id no?
-  // tapi technically cuman elgee doang ga sih?  gatau
-
   inputs: {
     userId: {
       required: false,
@@ -40,9 +34,8 @@ module.exports = {
             [field]: ``,
           })
           .fetch();
-        console.log(data);
         data.forEach(function (p) {
-          if (p[field] != ``) {
+          if (p[field] != '') {
             return exits.invalid();
           }
         });
