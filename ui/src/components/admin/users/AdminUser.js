@@ -16,6 +16,13 @@ import {
   Stack,
   useToast,
   Select,
+  useDisclosure,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
 } from '@chakra-ui/react';
 
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons';
@@ -56,7 +63,6 @@ export default function AdminUser(props) {
   };
 
   const resetUsers = async (value) => {
-    console.log('hai freind');
     try {
       const { data } = await axios.post('/api/users/reset', {
         field: value,
@@ -73,6 +79,7 @@ export default function AdminUser(props) {
         isClosable: true,
       });
     }
+    onClose();
   };
 
   const data = user;
@@ -109,16 +116,18 @@ export default function AdminUser(props) {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data }, useSortBy);
 
-  const getInitialValue = () => {
-    const value = null;
-    return value;
-  };
-  const [value, setValue] = useState(getInitialValue);
+  // const getInitialValue = () => {
+  //   const value = null;
+  //   return value;
+  // };
+  const [value, setValue] = useState(null);
   const handleChange = (e) => {
     setValue(e.target.value);
-    console.log(e.target.value);
-    resetUsers(e.target.value);
+    onOpen();
   };
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef();
 
   return (
     <>
@@ -143,14 +152,45 @@ export default function AdminUser(props) {
           onChange={handleChange}
         >
           <option value="address">Address</option>
-          <option value="countryOfOrigin">Country of Origin</option>
-          <option value="birthday">Birthday</option>
+          {/* <option value="countryOfOrigin">Country of Origin</option> */}
+          {/* <option value="birthday">Birthday</option> */}
           <option value="campus">Campus</option>
           <option value="ministryTeam">Ministry Team</option>
           <option value="lifestage">Lifestage</option>
-          <option value="phoneNumber">Phone Number</option>
+          {/* <option value="phoneNumber">Phone Number</option> */}
           <option value="lifeGroup">LIFE Group</option>
         </Select>
+        <AlertDialog
+          isOpen={isOpen}
+          leastDestructiveRef={cancelRef}
+          onClose={onClose}
+        >
+          <AlertDialogOverlay>
+            <AlertDialogContent>
+              <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                Reset
+              </AlertDialogHeader>
+
+              <AlertDialogBody>
+                Are you sure you want to reset {value}? You can't undo this
+                action afterwards.
+              </AlertDialogBody>
+
+              <AlertDialogFooter>
+                <Button ref={cancelRef} onClick={onClose}>
+                  Cancel
+                </Button>
+                <Button
+                  colorScheme="red"
+                  onClick={() => resetUsers(value)}
+                  ml={3}
+                >
+                  Reset
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
       </Stack>
       <Flex
         bg={useColorModeValue('gray.200')}

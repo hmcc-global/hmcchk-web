@@ -1,4 +1,5 @@
 module.exports = {
+  // eslint-disable-next-line linebreak-style
   friendlyName: 'Reset users',
 
   description: 'Reset users',
@@ -29,17 +30,10 @@ module.exports = {
     },
   },
 
-  // apa sih
   fn: async function ({ userId, field }, exits) {
-    console.log('woi tolong jalan');
-    console.log('masuk ga');
-    console.log('woi lu tuh punya masalah apa sih');
-
     if (field) {
-      // console.log('user id', userId);
       try {
         let data = await User.update({
-          // lifestage: campus,
           _id: userId,
         })
           .set({
@@ -47,11 +41,6 @@ module.exports = {
           })
           .fetch();
         console.log(data);
-        // let data = await User.update(
-        //   {},
-        //   { $set: { [field]: '' } },
-        //   { multi: true }
-        // );
         data.forEach(function (p) {
           if (p[field] != ``) {
             return exits.invalid();
