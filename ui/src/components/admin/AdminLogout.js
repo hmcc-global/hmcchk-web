@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { signout } from "../../reducers/userSlice";
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { signout } from '../../reducers/userSlice';
 
 const AdminLogout = (props) => {
   const dispatch = useDispatch();
@@ -8,7 +8,7 @@ const AdminLogout = (props) => {
   const onLogout = () => {
     localStorage.clear();
     dispatch(signout());
-    props.history.push("/admin/login");
+    props.history.push('/admin');
   };
 
   useEffect(() => {
