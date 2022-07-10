@@ -1,4 +1,5 @@
 import React, { forwardRef, useState, useImperativeHandle } from 'react';
+// TODO-aparedan: Remove this
 import { format } from 'date-fns';
 import { DateTime } from 'luxon';
 import DatePicker from 'react-datepicker';
@@ -6,14 +7,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 export default forwardRef((props, ref) => {
   // Date Formatting
-  const dateFromFormat = 'dd MMM yyyy';
-  const dateToFormat = 'yyyy-MM-dd';
-  const tempDate =
-    props.value && DateTime.fromFormat(props.value, dateFromFormat);
-  let dateStr = tempDate && new Date(tempDate.toFormat(dateToFormat));
-
   // Initialize State
-  const [selectedDate, setSelectedDate] = useState(dateStr);
+  const dateFromFormat = 'yyyy-MM-dd';
+  const dateObj = props.value ? DateTime.fromFormat(props.value, dateFromFormat).toJSDate() : DateTime.min;
+  const [selectedDate, setSelectedDate] = useState(dateObj);
 
   // Styling the input
   const buttonStyle = {
@@ -36,7 +33,7 @@ export default forwardRef((props, ref) => {
       getValue: () => {
         let dateString = null;
         if (selectedDate) {
-          dateString = format(selectedDate, dateToFormat);
+          dateString = DateTime.fromJSDate(selectedDate).toFormat(dateFromFormat);
         }
         return dateString;
       },
@@ -49,8 +46,8 @@ export default forwardRef((props, ref) => {
         }
         const tempDate =
           props.value && DateTime.fromFormat(props.value, dateFromFormat);
-        let dateStr = tempDate && new Date(tempDate.toFormat(dateToFormat));
-        setSelectedDate(dateStr);
+        const dateObj = tempDate && tempDate.toJSDate();
+        setSelectedDate(dateObj);
       },
     };
   });
@@ -58,7 +55,7 @@ export default forwardRef((props, ref) => {
   return (
     <DatePicker
       customInput={<CustomInput />}
-      dateFormat="dd MMM yyyy"
+      dateFormat="yyyy-MM-dd"
       selected={selectedDate}
       onChange={(d) => {
         setSelectedDate(d);
