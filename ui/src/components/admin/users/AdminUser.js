@@ -3,7 +3,7 @@ import { customAxios as axios } from '../../helpers/customAxios';
 import { useEffect, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
-import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { Button, ButtonGroup, Heading } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 import CustomDateEditor from './ag-grid-editors/CustomDateEditor.js';
@@ -18,6 +18,14 @@ import {
   countryList,
 } from '../../helpers/lists';
 import { CgUndo, CgRedo } from 'react-icons/cg';
+
+// TODO-aparedan:
+// Save memberhsip Info
+// Save Baptism Info
+
+// Locking resources?
+// Refresh every 5 minutes
+
 
 export default function AdminUser(props) {
   // TODO-aparedan: Refresh every x amount minutes
@@ -61,17 +69,26 @@ export default function AdminUser(props) {
   };
 
   // Ag-Grid Helpers
-  // Getter Functions: to handle errors in retrieving data
-  const birthdayGetter = (params) => {
-    if (params && params.data && params.data.birthday) {
-      const { birthday: birthdayStr } = params.data;
-      const birthday = DateTime.fromFormat(birthdayStr, dateFromFormat);
-      return birthday.toFormat(dateToFormat);
+  // Formatters
+  const dateFormatter = (dateStr) => {
+    if (dateStr) {
+      const dateObj = DateTime.fromFormat(dateStr, dateFromFormat);
+      return dateObj.toFormat(dateToFormat);
     }
 
     return '';
   };
 
+  const birthdayFormatter = (params) => {
+    if (params && params.data && params.data.birthday) {
+      const { birthday: birthdayStr } = params.data;
+      return dateFormatter(birthdayStr);
+    }
+
+    return '';
+  };
+
+  // Getter Functions: to handle errors in retrieving data
   const officialNameHeaderGetter = (params, parentName) => {
     const headerName = 'Official Name';
     if (params.location === 'csv') {
@@ -85,7 +102,7 @@ export default function AdminUser(props) {
 
   // Membership Getters
     // TODO-aparedan: Get latest membershipInfo. Right now just assume always get [0]
-  const membershipRecommitmentDateGetter = (params) => {
+  const membershipRecommitmentDateFormatter = (params) => {
     if (
       params &&
       params.data &&
@@ -94,17 +111,13 @@ export default function AdminUser(props) {
     ) {
       const { recommitmentDate: recommitmentDateStr } =
         params.data.membershipInfo[0];
-      const recommitmentDate = DateTime.fromFormat(
-        recommitmentDateStr,
-        dateFromFormat
-      );
-      return recommitmentDate.toFormat(dateToFormat);
+        return dateFormatter(recommitmentDateStr);
     }
 
     return '';
   };
 
-  const membershipRecognitionDateGetter = (params) => {
+  const membershipRecognitionDateFormatter = (params) => {
     if (
       params &&
       params.data &&
@@ -113,11 +126,7 @@ export default function AdminUser(props) {
     ) {
       const { recognitionDate: recognitionDateStr } =
         params.data.membershipInfo[0];
-      const recognitionDate = DateTime.fromFormat(
-        recognitionDateStr,
-        dateFromFormat
-      );
-      return recognitionDate.toFormat(dateToFormat);
+      return dateFormatter(recognitionDateStr);
     }
 
     return '';
@@ -138,7 +147,7 @@ export default function AdminUser(props) {
   };
 
   // Baptism Getters
-  const baptismDateGetter = (params) => {
+  const baptismDateFormatter = (params) => {
     if (
       params &&
       params.data &&
@@ -146,8 +155,7 @@ export default function AdminUser(props) {
       params.data.baptismInfo[0]
     ) {
       const { baptismDate: baptismDateStr } = params.data.baptismInfo[0];
-      const baptismDate = DateTime.fromFormat(baptismDateStr, dateFromFormat);
-      return baptismDate.toFormat(dateToFormat);
+      return dateFormatter(baptismDateStr);
     }
 
     return '';
@@ -320,10 +328,59 @@ export default function AdminUser(props) {
     }
   };
 
-  // Resize columns on cell edits
-  const onCellValueChanged = () => {
-    if (api && colApi) {
+  // saving functions
+  const saveUserInfo = async (data) => {
+    const res = await axios.put('/api/users/update', {
+      params: data,
+    });
+
+    if (res.status !== 200) {
+      alert('Something went wrong, please refresh and try again..');
+    }
+  };
+
+  const createMembershipInfo = async (data) => {
+    const res = await axios.post('/api/membership/create', {
+      ...data
+    });
+
+    if (res.status !== 200) {
+      alert('Something went wrong, please refresh and try again..');
+    }
+  }
+
+  const onCellValueChanged = (p) => {
+    if (api && colApi && p.data) {
       autoSizeAllColumns();
+      console.log(p);
+      const groupHeaderName = p?.column?.originalParent?.colGroupDef?.headerName;
+      if (groupHeaderName && groupHeaderName === 'Membership Info') {
+        // TODO-aparedan: Save membershipInfo
+        const { membershipInfo } = p.data;
+        const userIdProp = 'userId';
+        const officialNameProp = 'officialName';
+        if (membershipInfo.id) {
+          // TODO-YY: Use update
+        }
+        else {
+          const newMembershipInfo = { ...membershipInfo }[0];
+          newMembershipInfo[userIdProp] = p.data.id;
+          
+          if (!newMembershipInfo[officialNameProp]) {
+            newMembershipInfo[officialNameProp] = p.data.fullName;
+          }
+          createMembershipInfo(newMembershipInfo);
+        }
+      }
+      else if (groupHeaderName && groupHeaderName === 'Baptism Info') {
+        // TODO-YY: Save Baptism Info
+      }
+      else {
+        if (p.data) {
+          const { membershipInfo, baptismInfo, ...rest } = p.data;
+          saveUserInfo(rest);
+        }
+      }
     }
   };
 
@@ -390,11 +447,9 @@ export default function AdminUser(props) {
         {
           headerName: 'Birth Date',
           field: 'birthday',
-          valueGetter: birthdayGetter,
+          valueFormatter: birthdayFormatter,
           columnGroupShow: 'open',
-          cellEditor: CustomDateEditor,
           cellEditorPopup: true,
-          filter: 'agDateColumnFilter',
         },
         {
           headerName: 'Nationality',
@@ -486,7 +541,9 @@ export default function AdminUser(props) {
               headerValueGetter: (p) =>
                 membershipHeaderGetter(p, 'Recommitment Date'),
               field: 'membershipInfo[0].recommitmentDate',
-              valueGetter: membershipRecommitmentDateGetter,
+              colId: 'recommitmentDate',
+              valueFormatter: membershipRecommitmentDateFormatter,
+              valueSetter: membershipInfoSetter,
               cellEditor: CustomDateEditor,
               cellEditorPopup: true,
               filter: 'agDateColumnFilter',
@@ -495,7 +552,9 @@ export default function AdminUser(props) {
               headerValueGetter: (p) =>
                 membershipHeaderGetter(p, 'Recognition Date'),
               field: 'membershipInfo[0].recognitionDate',
-              valueGetter: membershipRecognitionDateGetter,
+              colId: 'recognitionDate',
+              valueFormatter: membershipRecognitionDateFormatter,
+              valueSetter: membershipInfoSetter,
               cellEditor: CustomDateEditor,
               cellEditorPopup: true,
               filter: 'agDateColumnFilter',
@@ -506,7 +565,7 @@ export default function AdminUser(props) {
               colId: 'officialName',
               valueGetter: membershipOfficialNameGetter,
               valueSetter: membershipInfoSetter,
-              // columnGroupShow: 'open',
+              columnGroupShow: 'open',
             },
           ],
         },
@@ -516,11 +575,16 @@ export default function AdminUser(props) {
           children: [
             {
               headerName: 'Baptism Date',
-              valueGetter: baptismDateGetter,
+              valueFormatter: baptismDateFormatter,
+              valueSetter: baptismInfoSetter,
               field: 'baptismInfo.baptismDate',
+              colId: 'baptismDate',
+              filter: 'agDateColumnFilter',
               cellEditor: CustomDateEditor,
               cellEditorPopup: true,
-              filter: 'agDateColumnFilter',
+              cellEditorParams: {
+                useSetter: true
+              },
             },
             {
               ...MediumTextEditorProps,
@@ -557,7 +621,7 @@ export default function AdminUser(props) {
           Redo
         </Button>
       </ButtonGroup>
-      <div className="ag-theme-balham" style={{ height: 800, width: '100%' }}>
+      <div className="ag-theme-alpine" style={{ height: 800, width: '100%' }}>
         <AgGridReact
           defaultColDef={defaultColDef}
           columnDefs={columnDefs}
