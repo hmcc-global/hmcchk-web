@@ -20,17 +20,18 @@ import {
 import { CgUndo, CgRedo } from 'react-icons/cg';
 
 // TODO-aparedan:
-// Save memberhsip Info
-// Save Baptism Info
+// Date filter comparator
+// Refresh every 5 minutes
 
 // Locking resources?
-// Refresh every 5 minutes
 
 
 export default function AdminUser(props) {
   // TODO-aparedan: Refresh every x amount minutes
   const dateFromFormat = 'yyyy-MM-dd';
   const dateToFormat = 'dd MMM yyyy';
+  const userIdProp = 'userId';
+  const officialNameProp = 'officialName';
 
   const [api, setApi] = useState();
   const [colApi, setColApi] = useState();
@@ -271,6 +272,12 @@ export default function AdminUser(props) {
   const membershipInfoSetter = (params) => {
     if (params && params.data) {
       const { colId } = params.colDef;
+
+      if (colId === officialNameProp && !params.newValue) {
+        alert('Membership Official Name cannot be empty!');
+        return false;
+      }
+
       const newMembershipInfo = { ...params.data.membershipInfo[0] };
       newMembershipInfo[colId] = params.newValue ?? '';
       params.data.membershipInfo[0] = newMembershipInfo;
@@ -283,6 +290,11 @@ export default function AdminUser(props) {
   const baptismInfoSetter = (params) => {
     if (params && params.data) {
       const { colId } = params.colDef;
+
+      if (colId === officialNameProp && !params.newValue) {
+        alert('Baptism Official Name cannot be empty!');
+        return false;
+      }
       const newBaptismInfo = { ...params.data.baptismInfo[0] };
       newBaptismInfo[colId] = params.newValue ?? '';
       params.data.baptismInfo[0] = newBaptismInfo;
@@ -347,23 +359,50 @@ export default function AdminUser(props) {
     if (res.status !== 200) {
       alert('Something went wrong, please refresh and try again..');
     }
-  }
+  };
+
+  const updateMembershipInfo = async (data) => {
+    const res = await axios.put('/api/membership/update', {
+      params: data
+    });
+
+    if (res.status !== 200) {
+      alert('Something went wrong, please refresh and try again..');
+    }
+  };
+
+  const createBaptismInfo = async (data) => {
+    const res = await axios.post('/api/baptism/create', {
+      ...data
+    });
+
+    if (res.status !== 200) {
+      alert('Something went wrong, please refresh and try again..');
+    }
+  };
+
+  const updateBaptismInfo = async (data) => {
+    const res = await axios.put('/api/baptism/update', {
+      params: data
+    });
+    
+    if (res.status !== 200) {
+      alert('Something went wrong, please refresh and try again..');
+    }
+  };
 
   const onCellValueChanged = (p) => {
     if (api && colApi && p.data) {
       autoSizeAllColumns();
-      console.log(p);
+
       const groupHeaderName = p?.column?.originalParent?.colGroupDef?.headerName;
+
       if (groupHeaderName && groupHeaderName === 'Membership Info') {
-        // TODO-aparedan: Save membershipInfo
         const { membershipInfo } = p.data;
-        const userIdProp = 'userId';
-        const officialNameProp = 'officialName';
-        if (membershipInfo.id) {
-          // TODO-YY: Use update
-        }
-        else {
-          const newMembershipInfo = { ...membershipInfo }[0];
+        const newMembershipInfo = { ...membershipInfo }[0];
+        if (newMembershipInfo.id) {
+          updateMembershipInfo(newMembershipInfo);
+        } else {
           newMembershipInfo[userIdProp] = p.data.id;
           
           if (!newMembershipInfo[officialNameProp]) {
@@ -373,7 +412,17 @@ export default function AdminUser(props) {
         }
       }
       else if (groupHeaderName && groupHeaderName === 'Baptism Info') {
-        // TODO-YY: Save Baptism Info
+        const { baptismInfo } = p.data;
+        const newBaptismInfo = { ...baptismInfo }[0];
+        if (newBaptismInfo.id) {
+          updateBaptismInfo(newBaptismInfo);
+        } else {
+          newBaptismInfo[userIdProp] = p.data.id;
+          if (!newBaptismInfo[officialNameProp]) {
+            newBaptismInfo[officialNameProp] = p.data.fullName;
+          }
+          createBaptismInfo(newBaptismInfo);
+        }
       }
       else {
         if (p.data) {
