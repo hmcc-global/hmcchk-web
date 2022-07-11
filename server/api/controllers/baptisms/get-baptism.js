@@ -1,28 +1,28 @@
 module.exports = {
-  friendlyName: "Get baptisms",
+  friendlyName: 'Get baptisms',
 
-  description: "Get baptisms",
+  description: 'Get baptisms',
 
   inputs: {
     baptismId: {
       required: false,
-      type: "string",
+      type: 'string',
     },
   },
 
   exits: {
     success: {
-      description: "Baptism records returned successfully",
+      description: 'Baptism records returned successfully',
     },
     invalid: {
-      description: "Failed to retrieve baptism record",
+      description: 'Failed to retrieve baptism record',
     },
   },
   fn: async function ({ baptismId }, exits) {
     try {
       if (baptismId) {
         let data = await Baptism.find({ _id: baptismId, isDeleted: false });
-        if (data.length === 0) throw "baptism record not found";
+        if (data.length === 0) throw 'baptism record not found';
         return exits.success(data);
       }
 

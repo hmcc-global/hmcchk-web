@@ -1,31 +1,31 @@
 module.exports = {
-  friendlyName: "Create baptisms",
+  friendlyName: 'Create baptisms',
 
-  description: "Create a baptism record",
+  description: 'Create a baptism record',
 
   inputs: {
     officialName: {
-      type: "string",
+      type: 'string',
       required: true,
     },
     userId: {
-      type: "string",
+      type: 'string',
       required: true,
     },
     classAttendance: {
-      type: "json",
+      type: 'json',
     },
     baptismDate: {
-      type: "string",
+      type: 'string',
     },
     baptismPlace: {
-      type: "string",
+      type: 'string',
     },
   },
 
   exits: {
     success: {
-      description: "Baptism record created successfully",
+      description: 'Baptism record created successfully',
     },
   },
 
@@ -43,7 +43,7 @@ module.exports = {
       });
 
       // update user if baptised
-      if (baptismDate != null && baptismPlace != "") {
+      if (baptismDate !== null && baptismPlace !== '') {
         await User.updateOne({ id: userId, isDeleted: false }).set({
           isBaptised: true,
         });

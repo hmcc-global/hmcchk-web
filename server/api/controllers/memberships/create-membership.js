@@ -1,31 +1,31 @@
 module.exports = {
-  friendlyName: "Create memberships",
+  friendlyName: 'Create memberships',
 
-  description: "Create a member record",
+  description: 'Create a member record',
 
   inputs: {
     officialName: {
-      type: "string",
+      type: 'string',
       required: true,
     },
     userId: {
-      type: "string",
+      type: 'string',
       required: true,
     },
     classAttendance: {
-      type: "json",
+      type: 'json',
     },
     recognitionDate: {
-      type: "string",
+      type: 'string',
     },
     recommitmentDate: {
-      type: "string",
+      type: 'string',
     },
   },
 
   exits: {
     success: {
-      description: "Membership record created successfully",
+      description: 'Membership record created successfully',
     },
   },
 
@@ -49,7 +49,7 @@ module.exports = {
       });
 
       // update user if member
-      if (recognitionDate != null) {
+      if (recognitionDate !== null) {
         await User.updateOne({ id: userId, isDeleted: false }).set({
           isMember: true,
         });
