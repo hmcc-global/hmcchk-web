@@ -9,7 +9,7 @@ export default forwardRef((props, ref) => {
   // Date Formatting
   // Initialize State
   const dateFromFormat = 'yyyy-MM-dd';
-  const dateObj = props.value ? DateTime.fromFormat(props.value, dateFromFormat).toJSDate() : DateTime.min;
+  const dateObj = props.value ? DateTime.fromFormat(props.value, dateFromFormat).toJSDate() : null;
   const [selectedDate, setSelectedDate] = useState(dateObj);
 
   // Styling the input

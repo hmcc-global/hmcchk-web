@@ -20,11 +20,8 @@ import {
 import { CgUndo, CgRedo } from 'react-icons/cg';
 
 // TODO-aparedan:
-// Date filter comparator
 // Refresh every 5 minutes
-
-// Locking resources?
-
+// integrate LG clear
 
 export default function AdminUser(props) {
   // TODO-aparedan: Refresh every x amount minutes
@@ -147,6 +144,23 @@ export default function AdminUser(props) {
     return '';
   };
 
+  const membershipInfoGetter = (params) => {
+    if (params) {
+      const { colId } = params.colDef;
+      return params.data.membershipInfo[0]?.[colId];
+    }
+  };
+
+  const membershipFilterGetter = (params) => {
+    if (params) {
+      const { colId } = params.colDef;
+      const dateStr = params.data.membershipInfo[0]?.[colId];
+      if (dateStr) {
+        return DateTime.fromFormat(dateStr, dateFromFormat).toJSDate();
+      }
+    }
+  };
+
   // Baptism Getters
   const baptismDateFormatter = (params) => {
     if (
@@ -188,6 +202,22 @@ export default function AdminUser(props) {
     }
 
     return '';
+  };
+
+  const baptismInfoGetter = (params) => {
+    if (params) {
+      const { colId } = params.colDef;
+      return params.data.baptismInfo[0]?.[colId];
+    }
+  };
+
+  const baptismFilterGetter = (params) => {
+    if (params) {
+      const dateStr = params.data.baptismInfo[0]?.baptismDate;
+      if (dateStr) {
+        return DateTime.fromFormat(dateStr, dateFromFormat).toJSDate();
+      }
+    }
   };
 
   // Setter Functions: to validate user edits
@@ -313,6 +343,12 @@ export default function AdminUser(props) {
       rows: 1,
       cols: 50,
     },
+  };
+
+  const DateCellProps = {
+    cellEditor: CustomDateEditor,
+    cellEditorPopup: true,
+    filter: 'agDateColumnFilter',
   };
 
   // Ag-Grid Functions
@@ -494,11 +530,11 @@ export default function AdminUser(props) {
           // Didn't enable NUMBER filter because there is no "contains" option for number filters: not as user-friendly as TEXT filter
         },
         {
+          ...DateCellProps,
           headerName: 'Birth Date',
           field: 'birthday',
           valueFormatter: birthdayFormatter,
           columnGroupShow: 'open',
-          cellEditorPopup: true,
         },
         {
           headerName: 'Nationality',
@@ -587,26 +623,24 @@ export default function AdminUser(props) {
           marryChildren: true,
           children: [
             {
+              ...DateCellProps,
               headerValueGetter: (p) =>
                 membershipHeaderGetter(p, 'Recommitment Date'),
-              field: 'membershipInfo[0].recommitmentDate',
               colId: 'recommitmentDate',
+              filterValueGetter: membershipFilterGetter,
+              valueGetter: membershipInfoGetter,
               valueFormatter: membershipRecommitmentDateFormatter,
               valueSetter: membershipInfoSetter,
-              cellEditor: CustomDateEditor,
-              cellEditorPopup: true,
-              filter: 'agDateColumnFilter',
             },
             {
+              ...DateCellProps,
               headerValueGetter: (p) =>
                 membershipHeaderGetter(p, 'Recognition Date'),
-              field: 'membershipInfo[0].recognitionDate',
               colId: 'recognitionDate',
+              filterValueGetter: membershipFilterGetter,
+              valueGetter: membershipInfoGetter,
               valueFormatter: membershipRecognitionDateFormatter,
               valueSetter: membershipInfoSetter,
-              cellEditor: CustomDateEditor,
-              cellEditorPopup: true,
-              filter: 'agDateColumnFilter',
             },
             {
               headerValueGetter: (p) =>
@@ -623,13 +657,13 @@ export default function AdminUser(props) {
           marryChildren: true,
           children: [
             {
+              ...DateCellProps,
               headerName: 'Baptism Date',
+              valueGetter: baptismInfoGetter,
+              filterValueGetter: baptismFilterGetter,
               valueFormatter: baptismDateFormatter,
               valueSetter: baptismInfoSetter,
-              field: 'baptismInfo.baptismDate',
               colId: 'baptismDate',
-              filter: 'agDateColumnFilter',
-              cellEditor: CustomDateEditor,
               cellEditorPopup: true,
               cellEditorParams: {
                 useSetter: true
