@@ -4,6 +4,7 @@ import { DateTime } from 'luxon';
 import React from 'react';
 
 const RelatedSermonCard = ({ sermonData, allSermons }) => {
+  const isOnline = sermonData.streamLink !== '';
   let sermonDate = DateTime.fromISO(sermonData.datePreached).toFormat(
     'LLLL dd, yyyy'
   );
@@ -26,7 +27,7 @@ const RelatedSermonCard = ({ sermonData, allSermons }) => {
       <Link
         style={sermonCardStyle}
         to={{
-          pathname: `/sermons/${sermonData.id}`,
+          pathname: (isOnline ? '/online' : `/sermons/${sermonData.id}`),
           state: { sermonData: sermonData, allSermons: allSermons },
         }}
       >
