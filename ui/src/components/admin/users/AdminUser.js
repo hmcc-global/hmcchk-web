@@ -1,6 +1,6 @@
 import React from 'react';
 import { customAxios as axios } from '../../helpers/customAxios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -24,15 +24,16 @@ import { CgUndo, CgRedo } from 'react-icons/cg';
 // integrate LG clear
 
 export default function AdminUser(props) {
-  // TODO-aparedan: Refresh every x amount minutes
   const dateFromFormat = 'yyyy-MM-dd';
   const dateToFormat = 'dd MMM yyyy';
   const userIdProp = 'userId';
   const officialNameProp = 'officialName';
+  const pollFreqInSecs = 30;
 
   const [api, setApi] = useState();
   const [colApi, setColApi] = useState();
   const [users, setUsers] = useState([]);
+  let lastUpdatedTime = useRef();
 
   const defaultColDef = {
     editable: true,
@@ -56,9 +57,27 @@ export default function AdminUser(props) {
     }
   };
 
+  const checkIfUpdated = useCallback(async () => {
+    try {
+      const { data } = await axios.get('/api/last-updated', {
+        params: { modelName: 'user' }
+      });
+      const dateObj = DateTime.fromISO(data);
+      if (!lastUpdatedTime.current || dateObj > lastUpdatedTime.current) {
+        getData();
+        lastUpdatedTime.current = dateObj;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, [])
+
   useEffect(() => {
     getData();
-  }, []);
+    setInterval(() => {
+      checkIfUpdated();
+    }, pollFreqInSecs * 1000);
+  }, [checkIfUpdated]);
 
   const exportHandler = () => {
     if (api) {
@@ -247,6 +266,7 @@ export default function AdminUser(props) {
       // Ref for regex: https://regexlib.com/REDetails.aspx?regexp_id=3029
       if (
         params.data.email !== newEmail &&
+        // eslint-disable-next-line no-useless-escape
         newEmail.match(/^(?:(?:[\w\.\-_]+@[\w\d]+(?:\.[\w]{2,6})+)[,;]?\s?)+$/)
       ) {
         params.data.email = newEmail;
@@ -466,6 +486,8 @@ export default function AdminUser(props) {
           saveUserInfo(rest);
         }
       }
+
+      checkIfUpdated();
     }
   };
 
