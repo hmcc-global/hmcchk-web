@@ -1,36 +1,36 @@
 module.exports = {
-  friendlyName: "Delete users",
+  friendlyName: 'Delete users',
 
-  description: "Delete users",
+  description: 'Delete users',
 
   inputs: {
     userId: {
       required: true,
-      type: "string",
+      type: 'string',
     },
   },
 
   exits: {
     success: {
-      description: "User account deleted successfully",
+      description: 'User account deleted successfully',
     },
     invalid: {
-      description: "Failed to delete user account",
+      description: 'Failed to delete user account',
     },
 
     missingRequiredFields: {
       statusCode: 409,
-      description: "Please fill in the required fields.",
+      description: 'Please fill in the required fields.',
     },
   },
 
   fn: async function ({ userId }, exits) {
     if (userId) {
       try {
-        let data = await User.updateOne({ _id: userId, isDeleted: false }).set({
+        const data = await User.updateOne({ _id: userId, isDeleted: false }).set({
           isDeleted: true,
         });
-        if (data != null) {
+        if (data) {
           return exits.success(data);
         }
         return exits.invalid();
@@ -39,7 +39,7 @@ module.exports = {
         return exits.error(err);
       }
     }
-    sails.log.error("missingRequiredFields");
+    sails.log.error('missingRequiredFields');
     return exits.invalid();
   },
 };

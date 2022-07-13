@@ -78,6 +78,9 @@ module.exports.routes = {
   "put /api/membership/update": "memberships/update-membership",
   "put /api/membership/delete": "memberships/delete-membership",
 
+  // Last Updated APIs
+  'get /api/last-updated': 'lastUpdated/get-last-updated',
+
   // UI
   "get /*": {
     skipAssets: true,

@@ -47,6 +47,9 @@ module.exports.policies = {
   "forms/post-create-submission": true,
   "forms/get-submission": ["isLoggedIn", "isAdmin"],
 
+  // Last Updated
+  'lastUpdated/get-last-updated': true,
+
   // Media
   "media/*": true,
 
