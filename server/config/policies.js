@@ -48,7 +48,7 @@ module.exports.policies = {
   "forms/get-submission": ["isLoggedIn", "isAdmin"],
 
   // Last Updated
-  'lastUpdated/get-last-updated': true,
+  'lastUpdated/get-last-updated': ['isLoggedIn', 'isAdmin'],
 
   // Media
   "media/*": true,
@@ -61,4 +61,7 @@ module.exports.policies = {
 
   // Sermons
   "sermons/*": true,
+
+  // Users
+  'users/reset': ['isLoggedIn', 'isAdmin'],
 };
