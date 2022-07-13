@@ -18,10 +18,8 @@ import {
   countryList,
 } from '../../helpers/lists';
 import { CgUndo, CgRedo } from 'react-icons/cg';
+import ResetUserFields from './ResetUserFields';
 
-// TODO-aparedan:
-// Refresh every 5 minutes
-// integrate LG clear
 
 export default function AdminUser(props) {
   const dateFromFormat = 'yyyy-MM-dd';
@@ -259,26 +257,6 @@ export default function AdminUser(props) {
     return false;
   }
 
-  const emailSetter = (params) => {
-    if (params && params.data && params.newValue) {
-      var newEmail = params.newValue;
-      
-      // Ref for regex: https://regexlib.com/REDetails.aspx?regexp_id=3029
-      if (
-        params.data.email !== newEmail &&
-        // eslint-disable-next-line no-useless-escape
-        newEmail.match(/^(?:(?:[\w\.\-_]+@[\w\d]+(?:\.[\w]{2,6})+)[,;]?\s?)+$/)
-      ) {
-        params.data.email = newEmail;
-        return true;
-      }
-      alert('Invalid Email Address!');
-      return false;
-    }
-
-    return false;
-  };
-
   const phoneNumberSetter = (params) => {
     if (params && params.data && params.newValue) {
       var newPhoneNumber = params.newValue;
@@ -515,7 +493,7 @@ export default function AdminUser(props) {
     {
       headerName: 'Email',
       field: 'email',
-      valueSetter: emailSetter,
+      editable: false,
     },
     {
       headerName: 'Lifestage',
@@ -725,6 +703,7 @@ export default function AdminUser(props) {
         <Button onClick={redo} rightIcon={<CgRedo />}>
           Redo
         </Button>
+        <ResetUserFields />
       </ButtonGroup>
       <div className="ag-theme-alpine" style={{ height: 800, width: '100%' }}>
         <AgGridReact
