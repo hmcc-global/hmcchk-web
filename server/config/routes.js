@@ -64,6 +64,7 @@ module.exports.routes = {
   "get /api/users/get": "users/get-user",
   "put /api/users/update": "users/update-user",
   "put /api/users/delete": "users/delete-user",
+  'post /api/users/reset': 'users/reset-user',
   "post /api/users/change-password": "users/post-change-password",
 
   // Baptism APIs
