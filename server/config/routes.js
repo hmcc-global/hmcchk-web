@@ -64,6 +64,7 @@ module.exports.routes = {
   "get /api/users/get": "users/get-user",
   "put /api/users/update": "users/update-user",
   "put /api/users/delete": "users/delete-user",
+  'post /api/users/reset': 'users/reset-user',
   "post /api/users/change-password": "users/post-change-password",
 
   // Baptism APIs
@@ -77,6 +78,9 @@ module.exports.routes = {
   "get /api/membership/get": "memberships/get-membership",
   "put /api/membership/update": "memberships/update-membership",
   "put /api/membership/delete": "memberships/delete-membership",
+
+  // Last Updated APIs
+  'get /api/last-updated': 'lastUpdated/get-last-updated',
 
   // UI
   "get /*": {
