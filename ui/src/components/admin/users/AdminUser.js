@@ -55,14 +55,14 @@ export default function AdminUser(props) {
     }
   };
 
-  const checkIfUpdated = useCallback(async () => {
+  const checkIfUpdated = useCallback(async (updateData = true) => {
     try {
       const { data } = await axios.get('/api/last-updated', {
         params: { modelName: 'user' }
       });
       const dateObj = DateTime.fromISO(data);
       if (!lastUpdatedTime.current || dateObj > lastUpdatedTime.current) {
-        getData();
+        updateData && getData();
         lastUpdatedTime.current = dateObj;
       }
     } catch (err) {
@@ -464,8 +464,7 @@ export default function AdminUser(props) {
           saveUserInfo(rest);
         }
       }
-
-      checkIfUpdated();
+      checkIfUpdated(false);
     }
   };
 
