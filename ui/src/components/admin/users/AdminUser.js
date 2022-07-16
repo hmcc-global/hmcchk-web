@@ -702,7 +702,7 @@ export default function AdminUser(props) {
         <Button onClick={redo} rightIcon={<CgRedo />}>
           Redo
         </Button>
-        <ResetUserFields />
+        <ResetUserFields checkIfUpdated={checkIfUpdated} />
       </ButtonGroup>
       <div className="ag-theme-alpine" style={{ height: 800, width: '100%' }}>
         <AgGridReact

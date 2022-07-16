@@ -13,7 +13,7 @@ import {
 import { customAxios as axios } from '../../helpers/customAxios';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 
-const ResetUserFields = () => {
+const ResetUserFields = (props) => {
   const [value, setValue] = useState(null);
   const cancelRef = useRef();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,6 +28,7 @@ const ResetUserFields = () => {
       await axios.post('/api/users/reset', {
         field: value,
       });
+      props.checkIfUpdated();
     } catch (err) {
       console.log(err);
     }
@@ -46,7 +47,6 @@ const ResetUserFields = () => {
         <option value="address">Address</option>
         <option value="campus">Campus</option>
         <option value="ministryTeam">Ministry Team</option>
-        <option value="lifestage">Lifestage</option>
         <option value="lifeGroup">LIFE Group</option>
       </Select>
       <AlertDialog
