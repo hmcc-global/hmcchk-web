@@ -1,30 +1,31 @@
 module.exports = {
-  friendlyName: "Update memberships",
+  friendlyName: 'Update memberships',
 
-  description: "Update memberships",
+  description: 'Update memberships',
 
   inputs: {
     params: {
       required: false,
-      type: "json",
+      type: 'json',
     },
   },
 
   exits: {
     success: {
-      description: "Membership records updated successfully",
+      description: 'Membership records updated successfully',
     },
     invalid: {
-      description: "Failed to update membership record",
+      description: 'Failed to update membership record',
     },
 
     missingRequiredFields: {
       statusCode: 409,
-      description: "Please fill in the required fields.",
+      description: 'Please fill in the required fields.',
     },
   },
 
   fn: async function ({ params }, exits) {
+    console.log(params);
     const { id: membershipId, ...toUpdate } = params;
     if (membershipId) {
       try {
@@ -32,7 +33,7 @@ module.exports = {
           _id: membershipId,
           isDeleted: false,
         }).set(toUpdate);
-        if (data != null) {
+        if (data !== null) {
           return exits.success(data);
         }
         return exits.invalid();
@@ -42,7 +43,7 @@ module.exports = {
       }
     }
     sails.log.error(err);
-    sails.log.error("missingRequiredFields");
+    sails.log.error('missingRequiredFields');
     return exits.invalid();
   },
 };

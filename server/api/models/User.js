@@ -110,7 +110,7 @@ email status until they click the link in the confirmation email.`,
       type: 'json',
     },
     membershipInfo: {
-      //one-to-one
+      //one-to-many
       collection: 'Membership',
       via: 'userId',
     },
