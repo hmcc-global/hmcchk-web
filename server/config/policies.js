@@ -36,16 +36,16 @@ module.exports.policies = {
   "forms/post-contact-us-form": true,
 
   // Cache
-  "cache/*": ["isLoggedIn", "isAdmin"],
+  "cache/*": ["isLoggedIn", "aboveTech"],
 
   // Forms
-  "forms/post-create-form": ["isLoggedIn", "isAdmin"],
-  "forms/post-update-form": ["isLoggedIn", "isAdmin"],
-  "forms/post-delete-form": ["isLoggedIn", "isAdmin"],
-  "forms/admin-get-form": ["isLoggedIn", "isAdmin"],
+  "forms/post-create-form": ["isLoggedIn", "aboveAdmin"],
+  "forms/post-update-form": ["isLoggedIn", "aboveAdmin"],
+  "forms/post-delete-form": ["isLoggedIn", "aboveAdmin"],
+  "forms/admin-get-form": ["isLoggedIn", "aboveAdmin"],
   "forms/get-form": true,
   "forms/post-create-submission": true,
-  "forms/get-submission": ["isLoggedIn", "isAdmin"],
+  "forms/get-submission": ["isLoggedIn", "aboveAdmin"],
 
   // Media
   "media/*": true,
