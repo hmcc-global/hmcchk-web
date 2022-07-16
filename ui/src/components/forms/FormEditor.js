@@ -45,8 +45,21 @@ const FormEditor = (props) => {
     control: controlPrefill,
   } = useForm();
 
+  const prefillableField = [
+    ['fullNameCheckbox', 'Full Name'],
+    ['phoneNumberCheckbox', 'Phone Number'],
+    ['emailCheckbox', 'Email'],
+    ['addressCheckbox', 'Address'],
+    ['countryOfOriginCheckbox', 'Country of Origin'],
+    ['birthdayCheckbox', 'Birthday'],
+    ['campusCheckbox', 'Campus'],
+    ['lifestageCheckbox', 'Lifestage'],
+    ['lifeGroupCheckbox', 'LIFE Group'],
+    ['ministryTeamCheckbox', 'Ministry Team'],
+  ];
+
   // Handler for prefillable form arguments
-  const onPrefillableSubmit = (data, e) => {
+  const onPrefillableSubmit = (data) => {
     let chosenFields = [];
     for (let [key, value] of Object.entries(data)) {
       if (value) chosenFields.push(key.replace('Checkbox', ''));
@@ -72,7 +85,7 @@ const FormEditor = (props) => {
   };
 
   // Handler for new custom field submissions
-  const onCustomSubmit = (data, e) => {
+  const onCustomSubmit = (data) => {
     // Format the data
     data.fieldName = data.fieldName.trim();
     if (data.options) {
@@ -118,7 +131,7 @@ const FormEditor = (props) => {
   };
 
   // Write form data to DB
-  const saveFormToDB = async (formToSave) => {
+  const sendSaveRequestToDB = async (formToSave) => {
     if (existingFormFieldsData) {
       const { status } = await axios.post('/api/forms/post-update-form', {
         id: existingFormFieldsData.id,
@@ -135,6 +148,7 @@ const FormEditor = (props) => {
     }
   };
 
+  // Handler for save to db button click
   const onSaveToDB = async (e) => {
     setSaveStatus(true);
     try {
@@ -153,7 +167,7 @@ const FormEditor = (props) => {
           formToSave.formFields[i].fieldName.trim();
       }
 
-      const statusCode = await saveFormToDB(formToSave);
+      const statusCode = await sendSaveRequestToDB(formToSave);
       if (statusCode === 200) {
         setSaveStatus(false);
         resetFormEditorCallback();
@@ -190,13 +204,20 @@ const FormEditor = (props) => {
         <Heading size="xl">
           Currently editing: {formInformation.formName}
         </Heading>
-        <Text>
-          Click the green button when you are done. A checklist to keep in mind:
+        <Box>
+          <Text>
+            Click the green button when you are done. A checklist to keep in
+            mind:
+          </Text>
           <UnorderedList>
-            <ListItem>Have you clicked on create/update form</ListItem>
-            <ListItem>Have you clicked on save prefilled fields</ListItem>
+            <ListItem>
+              Have you clicked on <b>'Create/Update Form</b>
+            </ListItem>
+            <ListItem>
+              Have you clicked on <b>'Save Prefilled Fields'</b>
+            </ListItem>
           </UnorderedList>
-        </Text>
+        </Box>
         <Button
           isLoading={saveStatus}
           loadingText="Saving"
@@ -212,110 +233,21 @@ const FormEditor = (props) => {
             <Heading as="h3" size="md">
               Prefillable Fields
             </Heading>
-            <FormControl>
-              <Controller
-                control={controlPrefill}
-                name="fullNameCheckbox"
-                key="fullNameCheckbox"
-                defaultValue={false}
-                render={({ field: { onChange, value, ref } }) => (
-                  <Checkbox onChange={onChange} ref={ref} isChecked={value}>
-                    Full Name
-                  </Checkbox>
-                )}
-              />
-            </FormControl>
-            <FormControl>
-              <Controller
-                control={controlPrefill}
-                name="phoneNumberCheckbox"
-                key="phoneNumberCheckbox"
-                defaultValue={false}
-                render={({ field: { onChange, value, ref } }) => (
-                  <Checkbox onChange={onChange} ref={ref} isChecked={value}>
-                    Phone Number
-                  </Checkbox>
-                )}
-              />
-            </FormControl>
-            <FormControl>
-              <Controller
-                control={controlPrefill}
-                name="emailCheckbox"
-                key="emailCheckbox"
-                defaultValue={false}
-                render={({ field: { onChange, value, ref } }) => (
-                  <Checkbox onChange={onChange} ref={ref} isChecked={value}>
-                    Email
-                  </Checkbox>
-                )}
-              />
-            </FormControl>
-            <FormControl>
-              <Controller
-                control={controlPrefill}
-                name="addressCheckbox"
-                key="addressCheckbox"
-                defaultValue={false}
-                render={({ field: { onChange, value, ref } }) => (
-                  <Checkbox onChange={onChange} ref={ref} isChecked={value}>
-                    Address
-                  </Checkbox>
-                )}
-              />
-            </FormControl>
-            <FormControl>
-              <Controller
-                control={controlPrefill}
-                name="countryOfOriginCheckbox"
-                key="countryOfOriginCheckbox"
-                defaultValue={false}
-                render={({ field: { onChange, value, ref } }) => (
-                  <Checkbox onChange={onChange} ref={ref} isChecked={value}>
-                    Country of Origin
-                  </Checkbox>
-                )}
-              />
-            </FormControl>
-            <FormControl>
-              <Controller
-                control={controlPrefill}
-                name="campusCheckbox"
-                key="campusCheckbox"
-                defaultValue={false}
-                render={({ field: { onChange, value, ref } }) => (
-                  <Checkbox onChange={onChange} ref={ref} isChecked={value}>
-                    Campus
-                  </Checkbox>
-                )}
-              />
-            </FormControl>
-            <FormControl>
-              <Controller
-                control={controlPrefill}
-                name="lifestageCheckbox"
-                key="lifestageCheckbox"
-                defaultValue={false}
-                render={({ field: { onChange, value, ref } }) => (
-                  <Checkbox onChange={onChange} ref={ref} isChecked={value}>
-                    Lifestage
-                  </Checkbox>
-                )}
-              />
-            </FormControl>
-            <FormControl>
-              <Controller
-                control={controlPrefill}
-                name="lifeGroupCheckbox"
-                key="lifeGroupCheckbox"
-                defaultValue={false}
-                render={({ field: { onChange, value, ref } }) => (
-                  <Checkbox onChange={onChange} ref={ref} isChecked={value}>
-                    LIFE Group
-                  </Checkbox>
-                )}
-              />
-            </FormControl>
+            {prefillableField.map((fieldInfo, i) => (
+              <FormControl>
+                <Controller
+                  control={controlPrefill}
+                  name={fieldInfo[0]}
+                  key={fieldInfo[0]}
+                  defaultValue={false}
+                  render={({ field: { onChange, value, ref } }) => (
+                    <Checkbox onChange={onChange} ref={ref} isChecked={value}>
+                      {fieldInfo[1]}
+                    </Checkbox>
+                  )}
+                />
+              </FormControl>
+            ))}
             <Button mt={2} colorScheme="blue" type="submit">
               Save Prefilled Fields
             </Button>
