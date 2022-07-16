@@ -717,6 +717,9 @@ export default function AdminUser(props) {
           </Button>
         </Tooltip>
         <ResetUserFields checkIfUpdated={checkIfUpdated} />
+        <Button onClick={exportHandler} variant="outline">
+          Export
+        </Button>
       </ButtonGroup>
       <div className="ag-theme-alpine" style={{ height: 800, width: '100%' }}>
         <AgGridReact
@@ -733,9 +736,6 @@ export default function AdminUser(props) {
           enableCellChangeFlash={enableCellChangeFlash}
         />
       </div>
-      <Button onClick={exportHandler} mt={5} variant="outline">
-        Export
-      </Button>
     </>
   );
 }
