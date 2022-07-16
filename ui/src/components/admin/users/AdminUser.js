@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { Button, ButtonGroup, Heading } from '@chakra-ui/react';
+import { Button, ButtonGroup, Heading, Tooltip } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 import CustomDateEditor from './ag-grid-editors/CustomDateEditor.js';
 import {
@@ -696,12 +696,16 @@ export default function AdminUser(props) {
         Users
       </Heading>
       <ButtonGroup mb={5} variant="outline" spacing="5">
-        <Button onClick={undo} leftIcon={<CgUndo />}>
-          Undo
-        </Button>
-        <Button onClick={redo} rightIcon={<CgRedo />}>
-          Redo
-        </Button>
+        <Tooltip label="Ctrl/Cmd + Z">
+          <Button onClick={undo} leftIcon={<CgUndo />}>
+            Undo
+          </Button>
+        </Tooltip>
+        <Tooltip label="Ctrl/Cmd + Y">
+          <Button onClick={redo} rightIcon={<CgRedo />}>
+            Redo
+          </Button>
+        </Tooltip>
         <ResetUserFields checkIfUpdated={checkIfUpdated} />
       </ButtonGroup>
       <div className="ag-theme-alpine" style={{ height: 800, width: '100%' }}>
