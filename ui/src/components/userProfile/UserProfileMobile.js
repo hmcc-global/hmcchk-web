@@ -23,10 +23,10 @@ import {
   ModalFooter,
   VStack,
   ModalCloseButton,
-} from "@chakra-ui/react";
-import { CheckCircleIcon } from "@chakra-ui/icons";
-import { useEffect, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+} from '@chakra-ui/react';
+import { CheckCircleIcon } from '@chakra-ui/icons';
+import { useEffect, useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import {
   ministryTeamList,
   lifegroupList,
@@ -35,7 +35,7 @@ import {
   lifestageList,
   countryList,
   regionList,
-} from "../helpers/lists";
+} from '../helpers/lists';
 import {
   settableDataFields,
   userDataCleanup,
@@ -43,7 +43,7 @@ import {
   updateUserDataRequest,
   getLoginOnlyFormsRequest,
   generatePublishedFormLinks,
-} from "../helpers/userInformationHelpers";
+} from '../helpers/userInformationHelpers';
 
 const UserProfileMobile = (props) => {
   const { register, control, handleSubmit, setValue, formState } = useForm();
@@ -80,37 +80,37 @@ const UserProfileMobile = (props) => {
     for (let key in userData) {
       if (settableDataFields.includes(key)) {
         switch (key) {
-          case "fullName":
-            let nameParts = userData.fullName.split(" ");
+          case 'fullName':
+            let nameParts = userData.fullName.split(' ');
             let lastName = nameParts.pop(-1);
-            let firstName = nameParts.join(" ");
-            setValue("firstName", firstName);
-            setValue("lastName", lastName);
+            let firstName = nameParts.join(' ');
+            setValue('firstName', firstName);
+            setValue('lastName', lastName);
             break;
-          case "address":
+          case 'address':
             if (userData[key]) {
-              setValue("addressFloor", userData[key]["floor"]);
-              setValue("addressFlat", userData[key]["flat"]);
-              setValue("addressStreet", userData[key]["street"]);
-              setValue("addressDistrict", userData[key]["district"]);
-              setValue("addressRegion", userData[key]["region"]);
+              setValue('addressFloor', userData[key]['floor']);
+              setValue('addressFlat', userData[key]['flat']);
+              setValue('addressStreet', userData[key]['street']);
+              setValue('addressDistrict', userData[key]['district']);
+              setValue('addressRegion', userData[key]['region']);
             }
             break;
-          case "baptismInfo":
+          case 'baptismInfo':
             if (userData[key] && userData[key][0]) {
-              setValue("baptismDate", userData[key][0]["baptismDate"]);
-              setValue("baptismPlace", userData[key][0]["baptismPlace"]);
+              setValue('baptismDate', userData[key][0]['baptismDate']);
+              setValue('baptismPlace', userData[key][0]['baptismPlace']);
             }
             break;
-          case "membershipInfo":
+          case 'membershipInfo':
             if (userData[key] && userData[key][0]) {
               setValue(
-                "membershipRecognitionDate",
-                userData[key][0]["recognitionDate"]
+                'membershipRecognitionDate',
+                userData[key][0]['recognitionDate']
               );
               setValue(
-                "membershipRecommitmentDate",
-                userData[key][0]["recommitmentDate"]
+                'membershipRecommitmentDate',
+                userData[key][0]['recommitmentDate']
               );
             }
             break;
@@ -170,10 +170,10 @@ const UserProfileMobile = (props) => {
       <Center mt="7%" fontWeight="900" fontSize="36">
         <Text color="#065666" as="span">
           Hi
-        </Text>{" "}
+        </Text>{' '}
         {userData && userData.fullName && (
           <>
-            ,&nbsp;<u>{userData.fullName.split(" ")[0]}!</u>
+            ,&nbsp;<u>{userData.fullName.split(' ')[0]}!</u>
           </>
         )}
       </Center>
@@ -184,7 +184,7 @@ const UserProfileMobile = (props) => {
               p="0.5"
               fontSize="12"
               fontWeight="500"
-              _selected={{ borderColor: "#0628A3", color: "#0628A3" }}
+              _selected={{ borderColor: '#0628A3', color: '#0628A3' }}
             >
               Manage Account
             </Tab>
@@ -192,7 +192,7 @@ const UserProfileMobile = (props) => {
               p="0.5"
               fontSize="12"
               fontWeight="500"
-              _selected={{ borderColor: "#0628A3", color: "#0628A3" }}
+              _selected={{ borderColor: '#0628A3', color: '#0628A3' }}
             >
               Personal Profile
             </Tab>
@@ -200,7 +200,7 @@ const UserProfileMobile = (props) => {
               p="0.5"
               fontSize="12"
               fontWeight="500"
-              _selected={{ borderColor: "#0628A3", color: "#0628A3" }}
+              _selected={{ borderColor: '#0628A3', color: '#0628A3' }}
             >
               Church Profile
             </Tab>
@@ -218,7 +218,7 @@ const UserProfileMobile = (props) => {
                       size="sm"
                       borderRadius="5"
                       readOnly
-                      {...register("email")}
+                      {...register('email')}
                     />
                   </FormControl>
                 </Center>
@@ -264,8 +264,8 @@ const UserProfileMobile = (props) => {
                   <Input
                     size="sm"
                     borderRadius="5"
-                    {...register("firstName", { required: true })}
-                    isInvalid={errors["firstName"]}
+                    {...register('firstName', { required: true })}
+                    isInvalid={errors['firstName']}
                     placeholder="Please fill in this field"
                   />
                 </FormControl>
@@ -274,8 +274,8 @@ const UserProfileMobile = (props) => {
                   <Input
                     size="sm"
                     borderRadius="5"
-                    {...register("lastName", { required: true })}
-                    isInvalid={errors["lastName"]}
+                    {...register('lastName', { required: true })}
+                    isInvalid={errors['lastName']}
                     placeholder="Please fill in this field"
                   />
                   <FormHelperText>
@@ -288,12 +288,12 @@ const UserProfileMobile = (props) => {
                   <Select
                     size="sm"
                     borderRadius="5"
-                    {...register("countryOfOrigin", { required: true })}
-                    isInvalid={errors["countryOfOrigin"]}
+                    {...register('countryOfOrigin', { required: true })}
+                    isInvalid={errors['countryOfOrigin']}
                     placeholder="Please fill in this field"
                   >
                     {countryList.map((item) => {
-                      return <option key={"co" + item}>{item}</option>;
+                      return <option key={'co' + item}>{item}</option>;
                     })}
                   </Select>
                 </FormControl>
@@ -302,13 +302,13 @@ const UserProfileMobile = (props) => {
                   <Select
                     size="sm"
                     borderRadius="5"
-                    {...register("lifestage", { required: true })}
+                    {...register('lifestage', { required: true })}
                     pointerEvents="none"
-                    isInvalid={errors["lifestage"]}
+                    isInvalid={errors['lifestage']}
                     placeholder="Please fill in this field"
                   >
                     {lifestageList.map((item) => {
-                      return <option key={"life" + item}>{item}</option>;
+                      return <option key={'life' + item}>{item}</option>;
                     })}
                   </Select>
                 </FormControl>
@@ -318,11 +318,11 @@ const UserProfileMobile = (props) => {
                   <Select
                     size="sm"
                     borderRadius="5"
-                    {...register("campus")}
+                    {...register('campus')}
                     pointerEvents="none"
                   >
                     {campusList.map((item) => {
-                      return <option key={"ca" + item}>{item}</option>;
+                      return <option key={'ca' + item}>{item}</option>;
                     })}
                   </Select>
                 </FormControl>
@@ -331,8 +331,8 @@ const UserProfileMobile = (props) => {
                   <Input
                     size="sm"
                     borderRadius="5"
-                    {...register("phoneNumber", { required: true })}
-                    isInvalid={errors["phoneNumber"]}
+                    {...register('phoneNumber', { required: true })}
+                    isInvalid={errors['phoneNumber']}
                     placeholder="Please fill in this field"
                   />
                 </FormControl>
@@ -343,7 +343,7 @@ const UserProfileMobile = (props) => {
                     size="sm"
                     type="date"
                     borderRadius="5"
-                    {...register("birthday")}
+                    {...register('birthday')}
                   />
                 </FormControl>
 
@@ -352,7 +352,7 @@ const UserProfileMobile = (props) => {
                   <Input
                     size="sm"
                     borderRadius="5"
-                    {...register("addressFloor")}
+                    {...register('addressFloor')}
                   />
                 </FormControl>
                 <FormControl>
@@ -362,7 +362,7 @@ const UserProfileMobile = (props) => {
                   <Input
                     size="sm"
                     borderRadius="5"
-                    {...register("addressFlat")}
+                    {...register('addressFlat')}
                   />
                 </FormControl>
                 <FormControl>
@@ -370,7 +370,7 @@ const UserProfileMobile = (props) => {
                   <Input
                     size="sm"
                     borderRadius="5"
-                    {...register("addressStreet")}
+                    {...register('addressStreet')}
                   />
                 </FormControl>
 
@@ -379,10 +379,10 @@ const UserProfileMobile = (props) => {
                   <Select
                     size="sm"
                     borderRadius="5"
-                    {...register("addressDistrict")}
+                    {...register('addressDistrict')}
                   >
                     {districtList.map((item) => {
-                      return <option key={"di" + item}>{item}</option>;
+                      return <option key={'di' + item}>{item}</option>;
                     })}
                   </Select>
                 </FormControl>
@@ -391,10 +391,10 @@ const UserProfileMobile = (props) => {
                   <Select
                     size="sm"
                     borderRadius="5"
-                    {...register("addressRegion")}
+                    {...register('addressRegion')}
                   >
                     {regionList.map((item) => {
-                      return <option key={"re" + item}>{item}</option>;
+                      return <option key={'re' + item}>{item}</option>;
                     })}
                   </Select>
                 </FormControl>
@@ -403,15 +403,15 @@ const UserProfileMobile = (props) => {
             <TabPanel p="7%">
               <Stack spacing="7%">
                 <FormControl>
-                  <FormLabel color="#2C5282">Life Group</FormLabel>
+                  <FormLabel color="#2C5282">LIFE Group</FormLabel>
                   <Select
                     size="sm"
                     borderRadius="5"
-                    {...register("lifeGroup")}
+                    {...register('lifeGroup')}
                     pointerEvents="none"
                   >
                     {lifegroupList.map((item) => {
-                      return <option key={"lg" + item}>{item}</option>;
+                      return <option key={'lg' + item}>{item}</option>;
                     })}
                   </Select>
                 </FormControl>
@@ -421,10 +421,10 @@ const UserProfileMobile = (props) => {
                     size="sm"
                     borderRadius="5"
                     pointerEvents="none"
-                    {...register("ministryTeam")}
+                    {...register('ministryTeam')}
                   >
                     {ministryTeamList.map((item) => {
-                      return <option key={"mt" + item}>{item}</option>;
+                      return <option key={'mt' + item}>{item}</option>;
                     })}
                   </Select>
                 </FormControl>
@@ -436,7 +436,7 @@ const UserProfileMobile = (props) => {
                     <Box flex={1}>
                       <Controller
                         control={control}
-                        name={"isMember"}
+                        name={'isMember'}
                         render={({ field: { onChange, value, ref } }) => (
                           <Switch
                             size="lg"
@@ -455,7 +455,7 @@ const UserProfileMobile = (props) => {
                   <FormHelperText>
                     An HMCC Covenant Signing Member is someone who has attended
                     HMCC’s Experiencing Membership Class and has decided to sign
-                    (in-person) the Membership Declaration{" "}
+                    (in-person) the Membership Declaration{' '}
                   </FormHelperText>
                 </FormControl>
                 <Stack
@@ -472,7 +472,7 @@ const UserProfileMobile = (props) => {
                         size="sm"
                         type="date"
                         borderRadius="5"
-                        {...register("membershipRecognitionDate")}
+                        {...register('membershipRecognitionDate')}
                         isReadOnly
                       />
                       <InputRightAddon borderRadius="5">Date</InputRightAddon>
@@ -487,7 +487,7 @@ const UserProfileMobile = (props) => {
                         size="sm"
                         type="date"
                         borderRadius="5"
-                        {...register("membershipRecommitmentDate")}
+                        {...register('membershipRecommitmentDate')}
                         isReadOnly
                       />
                       <InputRightAddon borderRadius="5">Date</InputRightAddon>
@@ -502,7 +502,7 @@ const UserProfileMobile = (props) => {
                     <Box flex={1}>
                       <Controller
                         control={control}
-                        name={"isBaptised"}
+                        name={'isBaptised'}
                         render={({ field: { onChange, value, ref } }) => (
                           <Switch
                             size="lg"
@@ -531,7 +531,7 @@ const UserProfileMobile = (props) => {
                     <Input
                       size="sm"
                       borderRadius="5"
-                      {...register("baptismPlace")}
+                      {...register('baptismPlace')}
                       isReadOnly
                     />
                   </FormControl>
@@ -542,7 +542,7 @@ const UserProfileMobile = (props) => {
                         size="sm"
                         type="date"
                         borderRadius="5"
-                        {...register("baptismDate")}
+                        {...register('baptismDate')}
                         isReadOnly
                       />
                       <InputRightAddon borderRadius="5">Date</InputRightAddon>

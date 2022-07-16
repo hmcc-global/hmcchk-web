@@ -66,8 +66,26 @@ const HeroSection = () => {
                 // href="/visit-us"
                 href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/"
                 fontSize={['sm', 'md']}
+                target="_blank"
               >
                 {covidText}
+              </Button>
+              <Button
+                bg="rgb(0, 0, 0, 0)"
+                variant="outline"
+                color="white"
+                _hover={{
+                  bg: 'white',
+                  color: '#1A365D',
+                  borderColor: '#1A365D',
+                  textDecoration: 'none',
+                }}
+                w="inherit"
+                as={Link}
+                href="/visit-us"
+                fontSize={['sm', 'md']}
+              >
+                {worshipText}
               </Button>
               <Button
                 bg="rgb(0, 0, 0, 0)"

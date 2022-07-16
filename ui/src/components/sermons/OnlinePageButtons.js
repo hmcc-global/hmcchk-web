@@ -59,16 +59,6 @@ const OnlinePageButtons = () => {
             >
               https://youtube.com/c/hmcchk
             </Link>{' '}
-            or on our secondary site at{' '}
-            <Link
-              href="https://hongkong.sub.hmcc.net/online"
-              fontStyle="italic"
-              color="blue"
-              target="_blank"
-            >
-              https://hongkong.sub.hmcc.net/online
-            </Link>
-            .
           </ModalBody>
           <ModalFooter />
         </ModalContent>

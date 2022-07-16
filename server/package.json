@@ -44,8 +44,5 @@
     "url": "git://github.com/albertpare/server.git"
   },
   "author": "albertpare",
-  "license": "",
-  "engines": {
-    "node": "^12.18"
-  }
+  "license": ""
 }
