@@ -41,9 +41,18 @@ export default function AdminUser(props) {
     floatingFilter: true,
   };
 
-  const exportParams = {
-    skipColumnGroupHeaders: true,
-    allColumns: true,
+  const exportParams = () => {
+    let fileName = 'user.csv';
+    if (lastUpdatedTime.current) {
+      const asOfDate = lastUpdatedTime.current.toFormat('yyyyMMdd_HHmmss');
+      fileName = `${asOfDate}_user.csv`;
+    }
+
+    return {
+      skipColumnGroupHeaders: true,
+      allColumns: true,
+      fileName: fileName
+    };
   };
 
   const getData = async () => {
@@ -72,6 +81,7 @@ export default function AdminUser(props) {
 
   useEffect(() => {
     getData();
+    checkIfUpdated(false);
     setInterval(() => {
       checkIfUpdated();
     }, pollFreqInSecs * 1000);
@@ -79,7 +89,7 @@ export default function AdminUser(props) {
 
   const exportHandler = () => {
     if (api) {
-      api.exportDataAsCsv(exportParams);
+      api.exportDataAsCsv(exportParams());
     }
   };
 
@@ -425,7 +435,7 @@ export default function AdminUser(props) {
     }
   };
 
-  const onCellValueChanged = (p) => {
+  const onCellValueChanged = async (p) => {
     if (api && colApi && p.data) {
       autoSizeAllColumns();
 
@@ -435,36 +445,36 @@ export default function AdminUser(props) {
         const { membershipInfo } = p.data;
         const newMembershipInfo = { ...membershipInfo }[0];
         if (newMembershipInfo.id) {
-          updateMembershipInfo(newMembershipInfo);
+          await updateMembershipInfo(newMembershipInfo);
         } else {
           newMembershipInfo[userIdProp] = p.data.id;
           
           if (!newMembershipInfo[officialNameProp]) {
             newMembershipInfo[officialNameProp] = p.data.fullName;
           }
-          createMembershipInfo(newMembershipInfo);
+          await createMembershipInfo(newMembershipInfo);
         }
       }
       else if (groupHeaderName && groupHeaderName === 'Baptism Info') {
         const { baptismInfo } = p.data;
         const newBaptismInfo = { ...baptismInfo }[0];
         if (newBaptismInfo.id) {
-          updateBaptismInfo(newBaptismInfo);
+          await updateBaptismInfo(newBaptismInfo);
         } else {
           newBaptismInfo[userIdProp] = p.data.id;
           if (!newBaptismInfo[officialNameProp]) {
             newBaptismInfo[officialNameProp] = p.data.fullName;
           }
-          createBaptismInfo(newBaptismInfo);
+          await createBaptismInfo(newBaptismInfo);
         }
       }
       else {
         if (p.data) {
           const { membershipInfo, baptismInfo, ...rest } = p.data;
-          saveUserInfo(rest);
+          await saveUserInfo(rest);
         }
       }
-      checkIfUpdated(false);
+      await checkIfUpdated(false);
     }
   };
 
