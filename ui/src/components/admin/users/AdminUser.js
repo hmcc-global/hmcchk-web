@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { Button, ButtonGroup, Heading } from '@chakra-ui/react';
+import { Button, ButtonGroup, Heading, Tooltip } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 import CustomDateEditor from './ag-grid-editors/CustomDateEditor.js';
 import {
@@ -41,9 +41,18 @@ export default function AdminUser(props) {
     floatingFilter: true,
   };
 
-  const exportParams = {
-    skipColumnGroupHeaders: true,
-    allColumns: true,
+  const exportParams = () => {
+    let fileName = 'user.csv';
+    if (lastUpdatedTime.current) {
+      const asOfDate = lastUpdatedTime.current.toFormat('yyyyMMdd_HHmmss');
+      fileName = `${asOfDate}_user.csv`;
+    }
+
+    return {
+      skipColumnGroupHeaders: true,
+      allColumns: true,
+      fileName: fileName
+    };
   };
 
   const getData = async () => {
@@ -55,14 +64,14 @@ export default function AdminUser(props) {
     }
   };
 
-  const checkIfUpdated = useCallback(async () => {
+  const checkIfUpdated = useCallback(async (updateData = true) => {
     try {
       const { data } = await axios.get('/api/last-updated', {
         params: { modelName: 'user' }
       });
       const dateObj = DateTime.fromISO(data);
       if (!lastUpdatedTime.current || dateObj > lastUpdatedTime.current) {
-        getData();
+        updateData && getData();
         lastUpdatedTime.current = dateObj;
       }
     } catch (err) {
@@ -72,6 +81,7 @@ export default function AdminUser(props) {
 
   useEffect(() => {
     getData();
+    checkIfUpdated(false);
     setInterval(() => {
       checkIfUpdated();
     }, pollFreqInSecs * 1000);
@@ -79,7 +89,7 @@ export default function AdminUser(props) {
 
   const exportHandler = () => {
     if (api) {
-      api.exportDataAsCsv(exportParams);
+      api.exportDataAsCsv(exportParams());
     }
   };
 
@@ -425,7 +435,7 @@ export default function AdminUser(props) {
     }
   };
 
-  const onCellValueChanged = (p) => {
+  const onCellValueChanged = async (p) => {
     if (api && colApi && p.data) {
       autoSizeAllColumns();
 
@@ -435,37 +445,36 @@ export default function AdminUser(props) {
         const { membershipInfo } = p.data;
         const newMembershipInfo = { ...membershipInfo }[0];
         if (newMembershipInfo.id) {
-          updateMembershipInfo(newMembershipInfo);
+          await updateMembershipInfo(newMembershipInfo);
         } else {
           newMembershipInfo[userIdProp] = p.data.id;
           
           if (!newMembershipInfo[officialNameProp]) {
             newMembershipInfo[officialNameProp] = p.data.fullName;
           }
-          createMembershipInfo(newMembershipInfo);
+          await createMembershipInfo(newMembershipInfo);
         }
       }
       else if (groupHeaderName && groupHeaderName === 'Baptism Info') {
         const { baptismInfo } = p.data;
         const newBaptismInfo = { ...baptismInfo }[0];
         if (newBaptismInfo.id) {
-          updateBaptismInfo(newBaptismInfo);
+          await updateBaptismInfo(newBaptismInfo);
         } else {
           newBaptismInfo[userIdProp] = p.data.id;
           if (!newBaptismInfo[officialNameProp]) {
             newBaptismInfo[officialNameProp] = p.data.fullName;
           }
-          createBaptismInfo(newBaptismInfo);
+          await createBaptismInfo(newBaptismInfo);
         }
       }
       else {
         if (p.data) {
           const { membershipInfo, baptismInfo, ...rest } = p.data;
-          saveUserInfo(rest);
+          await saveUserInfo(rest);
         }
       }
-
-      checkIfUpdated();
+      await checkIfUpdated(false);
     }
   };
 
@@ -697,13 +706,20 @@ export default function AdminUser(props) {
         Users
       </Heading>
       <ButtonGroup mb={5} variant="outline" spacing="5">
-        <Button onClick={undo} leftIcon={<CgUndo />}>
-          Undo
+        <Tooltip label="Ctrl/Cmd + Z">
+          <Button onClick={undo} leftIcon={<CgUndo />}>
+            Undo
+          </Button>
+        </Tooltip>
+        <Tooltip label="Ctrl/Cmd + Y">
+          <Button onClick={redo} rightIcon={<CgRedo />}>
+            Redo
+          </Button>
+        </Tooltip>
+        <ResetUserFields checkIfUpdated={checkIfUpdated} />
+        <Button onClick={exportHandler} variant="outline">
+          Export
         </Button>
-        <Button onClick={redo} rightIcon={<CgRedo />}>
-          Redo
-        </Button>
-        <ResetUserFields />
       </ButtonGroup>
       <div className="ag-theme-alpine" style={{ height: 800, width: '100%' }}>
         <AgGridReact
@@ -720,9 +736,6 @@ export default function AdminUser(props) {
           enableCellChangeFlash={enableCellChangeFlash}
         />
       </div>
-      <Button onClick={exportHandler} mt={5} variant="outline">
-        Export
-      </Button>
     </>
   );
 }

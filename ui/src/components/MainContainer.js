@@ -107,7 +107,7 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/forms/:id"
-          permissions={['unsigned', 'signed', 'alumni', 'admin', 'stewardship']}
+          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
           component={UserFormContainer}
         />
         <PrivateRoute
@@ -149,25 +149,25 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/complete-profile"
-          permissions={['unsigned', 'signed', 'alumni', 'admin', 'stewardship']}
+          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
           component={CompleteUserProfileContainer}
         />
         <PrivateRoute
           exact
           path="/profile"
-          permissions={['unsigned', 'signed', 'alumni', 'admin', 'stewardship']}
+          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
           component={UserProfileContainer}
         />
         <PrivateRoute
           exact
           path="/complete-profile"
-          permissions={['unsigned', 'signed', 'alumni', 'admin', 'stewardship']}
+          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
           component={CompleteUserProfileContainer}
         />
         <PrivateRoute
           exact
           path="/profile"
-          permissions={['unsigned', 'signed', 'alumni', 'admin', 'stewardship']}
+          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
           component={UserProfileContainer}
         />
         <PrivateRoute
@@ -179,14 +179,14 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/admin"
-          permissions={['admin', 'stewardship', 't3ch']}
+          permissions={['t3ch', 'admin', 'stewardship']}
           component={AdminLoginContainer}
         />
         <SidebarWithHeader>
           <PrivateRoute
             exact
             path="/admin/home"
-            permissions={['admin', 'stewardship', 't3ch']}
+            permissions={['t3ch', 'admin', 'stewardship']}
             component={AdminHome}
           />
           <PrivateRoute
@@ -198,7 +198,7 @@ const MainContainer = () => {
           <PrivateRoute
             exact
             path="/admin/forms"
-            permissions={['admin', 'stewardship', 't3ch']}
+            permissions={['t3ch', 'admin', 'stewardship']}
             component={FormManager}
           />
           <PrivateRoute
@@ -210,7 +210,7 @@ const MainContainer = () => {
           <PrivateRoute
             exact
             path="/admin/logout"
-            permissions={['admin', 'stewardship', 't3ch']}
+            permissions={['t3ch', 'admin', 'stewardship']}
             component={AdminLogout}
           />
         </SidebarWithHeader>

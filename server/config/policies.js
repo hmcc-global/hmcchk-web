@@ -15,53 +15,53 @@ module.exports.policies = {
    * (`true` allows public access)                                            *
    *                                                                          *
    ***************************************************************************/
-  "*": "isLoggedIn",
+  '*': 'isLoggedIn',
 
   // Public controllers
 
   // Announcements
-  "announcements/*": true,
+  'announcements/*': true,
 
   // Auth
-  "auth/post-login": true,
-  "auth/post-login-google": true,
-  "auth/post-signup": true,
-  "auth/post-signup-google": true,
-  "auth/verify-token": true,
-  "auth/post-confirm-email": true,
-  "auth/post-forgot-password": true,
-  "auth/post-change-password-recovery": true,
+  'auth/post-login': true,
+  'auth/post-login-google': true,
+  'auth/post-signup': true,
+  'auth/post-signup-google': true,
+  'auth/verify-token': true,
+  'auth/post-confirm-email': true,
+  'auth/post-forgot-password': true,
+  'auth/post-change-password-recovery': true,
 
   // Forms
-  "forms/post-contact-us-form": true,
+  'forms/post-contact-us-form': true,
 
   // Cache
-  "cache/*": ["isLoggedIn", "aboveTech"],
+  'cache/*': ['isLoggedIn', 'aboveTech'],
 
   // Forms
-  "forms/post-create-form": ["isLoggedIn", "aboveAdmin"],
-  "forms/post-update-form": ["isLoggedIn", "aboveAdmin"],
-  "forms/post-delete-form": ["isLoggedIn", "aboveAdmin"],
-  "forms/admin-get-form": ["isLoggedIn", "aboveAdmin"],
-  "forms/get-form": true,
-  "forms/post-create-submission": true,
-  "forms/get-submission": ["isLoggedIn", "aboveAdmin"],
+  'forms/post-create-form': ['isLoggedIn', 'aboveTech'],
+  'forms/post-update-form': ['isLoggedIn', 'aboveTech'],
+  'forms/post-delete-form': ['isLoggedIn', 'aboveTech'],
+  'forms/admin-get-form': ['isLoggedIn', 'aboveTech'],
+  'forms/get-form': true,
+  'forms/post-create-submission': true,
+  'forms/get-submission': ['isLoggedIn', 'aboveTech'],
 
   // Last Updated
-  'lastUpdated/get-last-updated': ['isLoggedIn', 'isAdmin'],
+  'lastUpdated/get-last-updated': ['isLoggedIn', 'aboveAdmin'],
 
   // Media
-  "media/*": true,
+  'media/*': true,
 
   // Misc
-  "misc/get-env": true,
+  'misc/get-env': true,
 
   // Pages
-  "pages/*": true,
+  'pages/*': true,
 
   // Sermons
-  "sermons/*": true,
+  'sermons/*': true,
 
   // Users
-  'users/reset': ['isLoggedIn', 'isAdmin'],
+  'users/reset': ['isLoggedIn', 'aboveAdmin'],
 };
