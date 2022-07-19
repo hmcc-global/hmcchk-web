@@ -86,7 +86,7 @@ const VisitUsPage = (props) => {
                 fontWeight={800}
                 mt={4}
               >
-                In-person <Icon as={RiArrowRightLine} />
+                In-person
               </Heading>
               <Text fontSize={["2xl", "2em"]} fontWeight={700}>
                 Sundays @ 10 AM
