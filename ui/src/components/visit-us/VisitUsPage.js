@@ -13,7 +13,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { RiArrowRightLine, RiChat1Line } from 'react-icons/ri';
+import { RiChat1Line } from 'react-icons/ri';
 import Faq from './Faq';
 
 const SUNDAY_CELEBRATION_LOCATION =
@@ -68,7 +68,7 @@ const VisitUsPage = (props) => {
             fontSize={['2em', '5xl']}
             fontWeight={800}
             textAlign="center"
-            // mb={[2, 10]}
+            mb={[2, 10]}
           >
             Ways to enjoy Sunday Celebration
           </Heading>
@@ -82,11 +82,11 @@ const VisitUsPage = (props) => {
             >
               <Heading
                 as="h3"
-                fontSize={["3xl", "5xl"]}
+                fontSize={['2xl', '4xl']}
                 fontWeight={800}
                 mt={4}
               >
-                In-person
+                IN-PERSON
               </Heading>
               <Text fontSize={["2xl", "2em"]} fontWeight={700}>
                 Sundays @ 10 AM
@@ -175,7 +175,7 @@ const VisitUsPage = (props) => {
               textAlign={['center', 'right']}
             >
               <Link href="https://hongkong.hmcc.net/online/" isExternal>
-                Join us Online <Icon as={RiArrowRightLine} />
+                Join us ONLINE
               </Link>
             </Heading>
           </VStack>
