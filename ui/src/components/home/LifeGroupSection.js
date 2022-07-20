@@ -7,8 +7,8 @@ import {
   Stack,
   Text,
   VStack,
-} from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 const colorfulString = (text, colorArray) => {
   if (colorArray.length !== text.length) {
@@ -26,10 +26,11 @@ const colorfulString = (text, colorArray) => {
 };
 
 const lg = {
-  title: colorfulString("LIFE", ["#FD7B7E", "#43B77B", "#7DABFC", "#FEDD64"]),
-  text: "There is no better way to get a taste of who we are and what we believe in then to check out one of our LIFE Groups. This is an opportunity to experience the life-changing power of Biblical community.",
+  section: 'Community',
+  title: 'LIFE Groups',
+  text: 'There is no better way to get a taste of who we are and what we believe in then to check out one of our LIFE Groups. This is an opportunity to experience the life-changing power of Biblical community with Love, Investment, Faith, and Enjoyment.',
 };
-const buttonText = "LEARN MORE >";
+const buttonText = 'Learn More';
 
 const LifeGroupSection = () => {
   return (
@@ -37,45 +38,59 @@ const LifeGroupSection = () => {
       <Container maxW="container.lg" justifyContent="center" display="flex">
         <Stack
           w="100%"
-          direction={["column", "row"]}
+          direction={['column', 'row']}
           justify="center"
           alignItems="center"
           spacing={[6, null]}
         >
           <VStack
-            w={["100%", "50%"]}
-            align={["center", "baseline"]}
-            spacing={[6, 12]}
+            w={['100%', '55%']}
+            align={['center', 'baseline']}
+            spacing={[6, 8]}
           >
-            <Heading as="h1" fontSize={["2em", "4.5em"]}>
-              {lg.title} GROUPS
+            <Heading
+              as="h5"
+              fontSize={['0.9em', '1.5em']}
+              textAlign={['justify']}
+              color="#505050"
+            >
+              {lg.section}
             </Heading>
-            <Text fontSize={["0.9em", "1.5em"]} textAlign={["justify", "left"]}>
+            <Image
+              src={process.env.PUBLIC_URL + '/images/home/lifegroup.png'}
+              w={['90%']}
+            />
+          </VStack>
+          <VStack
+            w={['100%', '55%']}
+            align={['center', 'baseline']}
+            spacing={[6, 8]}
+          >
+            <Heading as="h1" fontSize={['2em', '4.5em']} color="#0628A3">
+              {lg.title}
+            </Heading>
+            <Text fontSize={['0.9em', '1.2em']} textAlign={['justify']}>
               {lg.text}
             </Text>
             <Button
-              alignSelf={["center", "baseline"]}
+              alignSelf={['center', 'baseline']}
               bg="rgb(0, 0, 0, 0)"
               variant="outline"
               color="#0628A3"
               borderColor="#0628A3"
-              w={["85%", "38.2%"]}
+              w={['85%', '38.2%']}
               _hover={{
-                bg: "#0628A3",
-                color: "white",
-                borderColor: "white",
-                textDecoration: "none",
+                bg: '#0628A3',
+                color: 'white',
+                borderColor: 'white',
+                textDecoration: 'none',
               }}
             >
-              <Link to={{ pathname: "/connect", hash: "#lifegroup" }}>
+              <Link to={{ pathname: '/connect', hash: '#lifegroup' }}>
                 {buttonText}
               </Link>
             </Button>
           </VStack>
-          <Image
-            src={process.env.PUBLIC_URL + "/images/home/lifegroup.png"}
-            w={["90%", "50%"]}
-          />
         </Stack>
       </Container>
     </Flex>
