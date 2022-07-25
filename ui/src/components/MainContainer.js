@@ -22,7 +22,6 @@ import PasswordSubmitted from './auth/PasswordSubmitted';
 import ConnectFloatButton from './connect-float/ConnectFloatButton';
 import UserFormContainer from './forms/UserFormContainer';
 import NoMatch from './errors/NoMatch';
-import AdminLoginContainer from './admin/AdminLoginContainer';
 import ScrollToTop from './helpers/ScrollToTop';
 import AboutUsContainer from './about/AboutUsContainer';
 import OnlineSermonContainer from './sermons/OnlineSermonContainer';
@@ -30,7 +29,6 @@ import AdminHome from './admin/AdminHome';
 import AdminUser from './admin/users/AdminUser';
 import FormManager from './forms/FormManager';
 import AdminGiving from './admin/AdminGiving';
-import SidebarWithHeader from './admin/navigation/Sidebar';
 import AdminLogout from './admin/AdminLogout';
 
 const MainContainer = () => {
@@ -180,40 +178,38 @@ const MainContainer = () => {
           exact
           path="/admin"
           permissions={['t3ch', 'admin', 'stewardship']}
-          component={AdminLoginContainer}
+          component={AdminHome}
         />
-        <SidebarWithHeader>
-          <PrivateRoute
-            exact
-            path="/admin/home"
-            permissions={['t3ch', 'admin', 'stewardship']}
-            component={AdminHome}
-          />
-          <PrivateRoute
-            exact
-            path="/admin/users"
-            permissions={['admin', 'stewardship']}
-            component={AdminUser}
-          />
-          <PrivateRoute
-            exact
-            path="/admin/forms"
-            permissions={['t3ch', 'admin', 'stewardship']}
-            component={FormManager}
-          />
-          <PrivateRoute
-            exact
-            path="/admin/giving"
-            permissions={['admin', 'stewardship']}
-            component={AdminGiving}
-          />
-          <PrivateRoute
-            exact
-            path="/admin/logout"
-            permissions={['t3ch', 'admin', 'stewardship']}
-            component={AdminLogout}
-          />
-        </SidebarWithHeader>
+        <PrivateRoute
+          exact
+          path="/admin/home"
+          permissions={['t3ch', 'admin', 'stewardship']}
+          component={AdminHome}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/users"
+          permissions={['admin', 'stewardship']}
+          component={AdminUser}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/forms"
+          permissions={['t3ch', 'admin', 'stewardship']}
+          component={FormManager}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/giving"
+          permissions={['admin', 'stewardship']}
+          component={AdminGiving}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/logout"
+          permissions={['t3ch', 'admin', 'stewardship']}
+          component={AdminLogout}
+        />
 
         <PrivateRoute path="*" permissions={['public']} component={NoMatch} />
       </Switch>
