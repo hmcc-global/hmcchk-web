@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { customAxios as axios } from '../helpers/customAxios';
-import { ChevronLeftIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon } from '@chakra-ui/icons';
 import ReCAPTCHA from 'react-google-recaptcha';
 import {
   Box,
@@ -13,9 +13,8 @@ import {
   Flex,
   Image,
   Text,
-  Stack,
-  HStack,
   Link,
+  Button,
   Input,
   Modal,
   ModalOverlay,
@@ -48,34 +47,58 @@ const Signup = (props) => {
       setValue('firstName', firstname);
       setValue('lastName', lastname);
     }
-  }, []);
+  }, [googleEmail, googleFullName, setValue]);
 
   const inputBox = {
     color: 'black',
-    background: '#FFFFFF',
+    background: '#EDF2F7',
     border: '1px solid #E2E8F0',
     boxSizing: 'border-box',
-    borderRadius: '6px',
+    borderRadius: '12px',
     flex: 'none',
     alignSelf: 'stretch',
     flexGrow: '0',
     margin: '8px 0px',
-    padding: '3px 10px',
+    padding: '15px',
+    fontSize: 'inherit',
+    fontWeight: '500',
+  };
+
+  const selectBox = {
+    color: 'black',
+    background: '#EDF2F7',
+    border: '1px solid #E2E8F0',
+    boxSizing: 'border-box',
+    borderRadius: '12px',
+    flex: 'none',
+    alignSelf: 'stretch',
+    flexGrow: '0',
+    margin: '8px 0px',
+    fontSize: 'inherit',
+    fontWeight: '500',
   };
 
   const submitBoxStyle = {
+    color: 'white',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '6px 19px',
-    background: 'rgba(0, 0, 0, 0.04)',
-    border: '1px solid #FFFFFF',
+    alignSelf: 'stretch',
+    flexGrow: '0',
+    padding: '18px',
+    background: '#164B95',
     boxSizing: 'border-box',
     backdropFilter: 'blur(6px)',
-    borderRadius: '10px',
-    width: '250px',
+    borderRadius: '12px',
     fontWeight: 'bold',
     marginTop: '20px',
     marginBottom: '20px',
+  };
+
+  const recaptchaStyle = {
+    marginTop: '20px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    position: 'relative',
   };
 
   const password = useRef({});
@@ -137,295 +160,310 @@ const Signup = (props) => {
           <ModalFooter />
         </ModalContent>
       </Modal>
-      <Stack background="#2C5282" color="white" padding="20px">
-        <Flex>
-          <Box>
-            <Link href="/login">
-              <ChevronLeftIcon boxSize={10} />
-              Return to Log In
+
+      <Box
+        w="full"
+        bgImage={`linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${
+          process.env.PUBLIC_URL + '/images/home/connect.png'
+        })`}
+        bgRepeat="no-repeat"
+        bgAttachment="fixed"
+      >
+        <Flex
+          flexDirection="column"
+          align="center"
+          w={['100vw', '85vw', '70vw', '60vw', '40vw']}
+          m="auto"
+          p="10"
+        >
+          <Box width="100%" alignSelf="flex-start" mb="5" color="#FFF">
+            <Link href="/signup" justify="center" fontSize="inherit">
+              <ArrowBackIcon boxSize={7} mr="2" />
+              Back
             </Link>
           </Box>
-        </Flex>
-        <Flex justifyContent="center">
-          <form onSubmit={handleSubmit(handleSignup)} autoComplete="off">
-            <VStack justify="center" align="center">
+
+          <Box
+            m="auto"
+            width="100%"
+            background="#f7fafc"
+            p={['15px', '20px', '25px', '30px', '35px']}
+            borderRadius="16px"
+            color="#718096"
+            fontWeight="500"
+          >
+            <VStack justify="center" align="center" mb="2.5">
               <Image
-                marginTop={{ base: '30px', md: 'none' }}
-                marginBottom={{ base: '15px', md: '40px' }}
-                h={{
-                  base: '6vh',
-                  sm: '8vh',
-                  md: '10vh',
-                  lg: '12vh',
-                  xl: '15vh',
-                }}
+                // marginTop={{ base: '30px', md: 'none' }}
+                marginBottom={{ base: '15px', md: '20px' }}
+                h={['4.5vh', '5.5vh', '6.5vh', '7.5vh', '8.5vh']}
                 src={`${process.env.PUBLIC_URL}/images/ripple.png`}
                 alt="Logo of HMCC"
               />
               <Text
-                fontWeight="bold"
-                fontSize="2xl"
-                display={{ base: 'flex', md: 'none' }}
+                fontWeight="700"
+                fontSize={['0.65rem', '0.8rem', '0.95rem', '1rem', '1.05rem']}
+                display="flex"
+                color="#656565"
+              >
+                Harvest Mission Community Church
+              </Text>
+              <Text
+                fontWeight="800"
+                fontSize={['1.25rem', '1.75rem', '2rem', '2.125rem', '2.5rem']}
+                display="flex"
+                color="#2D3748"
               >
                 Sign Up
               </Text>
-              <HStack spacing={{ base: 'none', md: '8' }}>
-                <Text
-                  fontWeight="bold"
-                  fontSize="2xl"
-                  display={{ base: 'none', md: 'flex' }}
-                >
-                  Sign Up
-                </Text>
-                <Image
-                  h={googleEmail ? '60vh' : '85vh'}
-                  src={`${process.env.PUBLIC_URL}/images/HLine.svg`}
-                  alt="Horizontal Line"
-                />
-                <VStack
-                  alignItems="flex-start"
-                  marginLeft={{ base: '20px', md: 'none' }}
-                >
-                  <Text>Enter Your Email Address</Text>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    isReadOnly={googleEmail ? true : false}
-                    placeholder="e.g. chantaiman@gmail.com"
-                    style={inputBox}
-                    {...register('email', {
-                      required: 'Required',
-                      pattern: {
-                        value:
-                          /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
-                        message: 'Invalid email address',
-                      },
-                    })}
-                  />
-                  {errors.email && !googleEmail && (
-                    <Text
-                      color="#FED7D7"
-                      fontWeight="bold"
-                      fontSize={[12, 12, 12, 14]}
-                    >
-                      {errors.email.message}
-                    </Text>
-                  )}
-                  {googleEmail ? null : (
-                    <>
-                      <Text>Enter Your Account Password</Text>
-                      <Input
-                        id="password"
-                        type="password"
-                        name="password"
-                        disabled={googleEmail ? true : false}
-                        placeholder="Password"
-                        style={inputBox}
-                        {...register('password', {
-                          required: 'Required',
-                          pattern: {
-                            value:
-                              /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-                            message:
-                              'Your Password does not fulfill the criteria', // JS only: <p>error message</p> TS only support string
-                          },
-                        })}
-                      />
-                      {errors.password && (
-                        <Text
-                          color="#FED7D7"
-                          fontWeight="bold"
-                          fontSize={[12, 12, 12, 14]}
-                        >
-                          {errors.password.message}
-                        </Text>
-                      )}
-                      <Center>
-                        <Box maxW="300">
-                          <Text
-                            color="#FED7D7"
-                            w="50vw"
-                            fontSize={[12, 12, 12, 14]}
-                          >
-                            Your new password should consist of:
-                          </Text>
-                          <UnorderedList
-                            w="300"
-                            color="#FED7D7"
-                            fontSize={[12, 12, 12, 14]}
-                          >
-                            <ListItem>At least 8 characters in length</ListItem>
-                            <ListItem>
-                              Mixture of both uppercase and lowercase characters
-                            </ListItem>
-                            <ListItem>Contains at least one number</ListItem>
-                            <ListItem>
-                              Contains at least one special character
-                            </ListItem>
-                          </UnorderedList>
-                        </Box>
-                      </Center>
-                      <Text>Re-enter Your Account Password</Text>
-                      <Input
-                        id="rePassword"
-                        type="password"
-                        name="rePassword"
-                        disabled={googleEmail ? true : false}
-                        placeholder="Re-enter Password"
-                        style={inputBox}
-                        {...register('rePassword', {
-                          required: 'Required',
-                          validate: (value) =>
-                            value === password.current ||
-                            'The passwords do not match',
-                        })}
-                      />
-                      {errors.rePassword && (
-                        <Text
-                          color="#FED7D7"
-                          fontWeight="bold"
-                          fontSize={[12, 12, 12, 14]}
-                        >
-                          {errors.rePassword.message}
-                        </Text>
-                      )}
-                    </>
-                  )}
-                  <Text>First Name (and Middle Name)</Text>
-                  <input
-                    id="firstName"
-                    type="text"
-                    name="firstName"
-                    isReadOnly={googleEmail ? true : false}
-                    placeholder="First name"
-                    style={inputBox}
-                    {...register('firstName', { required: 'Required' })}
-                  />
-                  {errors.firstName && (
-                    <Text
-                      color="#FED7D7"
-                      fontWeight="bold"
-                      fontSize={[12, 12, 12, 14]}
-                    >
-                      {errors.firstName.message}
-                    </Text>
-                  )}
-                  <Text>Last Name</Text>
-                  <input
-                    id="lastName"
-                    type="text"
-                    name="lastName"
-                    isReadOnly={googleEmail ? true : false}
-                    placeholder="Last Name"
-                    style={inputBox}
-                    {...register('lastName', { required: 'Required' })}
-                  />
-                  {errors.lastName && (
-                    <Text
-                      color="#FED7D7"
-                      fontWeight="bold"
-                      fontSize={[12, 12, 12, 14]}
-                    >
-                      {errors.lastName.message}
-                    </Text>
-                  )}
-                  <Text>Phone Number</Text>
-                  <input
-                    id="phoneNumber"
-                    type="number"
-                    name="password"
-                    placeholder="Phone Number"
-                    style={inputBox}
-                    {...register('phoneNumber', {
-                      required: 'Required',
-                      maxLength: {
-                        value: 16,
-                        message: 'Phone number too long',
-                      },
-                    })}
-                  />
-                  {errors.phoneNumber && (
-                    <Text
-                      color="#FED7D7"
-                      fontWeight="bold"
-                      fontSize={[12, 12, 12, 14]}
-                    >
-                      {errors.phoneNumber.message}
-                    </Text>
-                  )}
-                  <Text>Country of Origin</Text>
-                  <Select
-                    color="black"
-                    bg="white"
-                    border="1px solid #E2E8F0"
-                    boxSizing="border-box"
-                    borderRadius="6px"
-                    size="sm"
-                    {...register('countryOfOrigin')}
-                    isInvalid={errors['countryOfOrigin']}
-                    placeholder="Please fill in this field"
-                  >
-                    {countryList.map((result) => (
-                      <option value={result}>{result}</option>
-                    ))}
-                  </Select>
-
-                  {errors.country && (
-                    <Text
-                      color="#FED7D7"
-                      fontWeight="bold"
-                      fontSize={[12, 12, 12, 14]}
-                    >
-                      {errors.country.message}
-                    </Text>
-                  )}
-                  <Text>Lifestage </Text>
-                  <Select
-                    color="black"
-                    bg="white"
-                    border="1px solid #E2E8F0"
-                    boxSizing="border-box"
-                    borderRadius="6px"
-                    size="sm"
-                    {...register('lifestage')}
-                    isInvalid={errors['lifestage']}
-                    placeholder="Please fill in this field"
-                  >
-                    {lifestageList.map((lifestage) => (
-                      <option value={lifestage}>{lifestage}</option>
-                    ))}
-                  </Select>
-                  {errors.lifestage && (
-                    <Text
-                      color="#FED7D7"
-                      fontWeight="bold"
-                      fontSize={[12, 12, 12, 14]}
-                    >
-                      {errors.lifestage.message}
-                    </Text>
-                  )}
-                </VStack>
-              </HStack>
-              <ReCAPTCHA
-                style={{ left: '5%', position: 'relative', marginTop: '20px' }}
-                sitekey={process.env.REACT_APP_CAPTCHA}
-              />
-              {error && (
-                <Text color="#F6AD55" fontSize={[14, 14, 14, 16]}>
-                  {error}
-                </Text>
-              )}
-              <input
-                type="submit"
-                name="Login"
-                value="Register"
-                style={submitBoxStyle}
-              />
             </VStack>
-          </form>
+            <form onSubmit={handleSubmit(handleSignup)} autoComplete="off">
+              <VStack
+                width="100%"
+                align="flex-start"
+                fontSize={['0.675rem', '0.75rem', '1rem', '1rem']}
+                display="flex"
+                color="#718096"
+              >
+                <Text>Enter your email address</Text>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  isReadOnly={googleEmail ? true : false}
+                  placeholder="e.g. chantaiman@gmail.com"
+                  style={inputBox}
+                  h={['40px', '40px', '60px', '60px']}
+                  {...register('email', {
+                    required: 'Required',
+                    pattern: {
+                      value:
+                        /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
+                      message: 'Invalid email address',
+                    },
+                  })}
+                />
+                {errors.email && !googleEmail && (
+                  <Text
+                    color="#FED7D7"
+                    fontWeight="bold"
+                    fontSize={[12, 12, 12, 14]}
+                  >
+                    {errors.email.message}
+                  </Text>
+                )}
+                {googleEmail ? null : (
+                  <>
+                    <Text>Enter Your Account Password</Text>
+                    <Input
+                      id="password"
+                      type="password"
+                      name="password"
+                      disabled={googleEmail ? true : false}
+                      placeholder="Password"
+                      style={inputBox}
+                      h={['40px', '40px', '60px', '60px']}
+                      {...register('password', {
+                        required: 'Required',
+                        pattern: {
+                          value:
+                            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+                          message:
+                            'Your Password does not fulfill the criteria', // JS only: <p>error message</p> TS only support string
+                        },
+                      })}
+                    />
+                    {errors.password && (
+                      <Text
+                        color="#FED7D7"
+                        fontWeight="bold"
+                        fontSize={[12, 12, 12, 14]}
+                      >
+                        {errors.password.message}
+                      </Text>
+                    )}
+                    <Center>
+                      <Box maxW="300" color="#787878">
+                        <Text w="50vw" fontSize={[10, 10, 14, 14]}>
+                          Your new password should consist of:
+                        </Text>
+                        <UnorderedList w="300" fontSize={[10, 10, 14, 14]}>
+                          <ListItem>At least 8 characters in length</ListItem>
+                          <ListItem>
+                            Mixture of both uppercase and lowercase characters
+                          </ListItem>
+                          <ListItem>Contains at least one number</ListItem>
+                          <ListItem>
+                            Contains at least one special character
+                          </ListItem>
+                        </UnorderedList>
+                      </Box>
+                    </Center>
+                    <Input
+                      id="rePassword"
+                      type="password"
+                      name="rePassword"
+                      disabled={googleEmail ? true : false}
+                      placeholder="Re-enter Password"
+                      style={inputBox}
+                      h={['40px', '40px', '60px', '60px']}
+                      {...register('rePassword', {
+                        required: 'Required',
+                        validate: (value) =>
+                          value === password.current ||
+                          'The passwords do not match',
+                      })}
+                    />
+                    {errors.rePassword && (
+                      <Text
+                        color="#FED7D7"
+                        fontWeight="bold"
+                        fontSize={[12, 12, 12, 14]}
+                      >
+                        {errors.rePassword.message}
+                      </Text>
+                    )}
+                  </>
+                )}
+                <Text>First Name (and Middle Name)</Text>
+                <Input
+                  id="firstName"
+                  type="text"
+                  name="firstName"
+                  isReadOnly={googleEmail ? true : false}
+                  placeholder="First name"
+                  style={inputBox}
+                  h={['40px', '40px', '60px', '60px']}
+                  {...register('firstName', { required: 'Required' })}
+                />
+                {errors.firstName && (
+                  <Text
+                    color="#FED7D7"
+                    fontWeight="bold"
+                    fontSize={[12, 12, 12, 14]}
+                  >
+                    {errors.firstName.message}
+                  </Text>
+                )}
+                <Text>Last Name</Text>
+                <Input
+                  id="lastName"
+                  type="text"
+                  name="lastName"
+                  isReadOnly={googleEmail ? true : false}
+                  placeholder="Last Name"
+                  style={inputBox}
+                  h={['40px', '40px', '60px', '60px']}
+                  {...register('lastName', { required: 'Required' })}
+                />
+                {errors.lastName && (
+                  <Text
+                    color="#FED7D7"
+                    fontWeight="bold"
+                    fontSize={[12, 12, 12, 14]}
+                  >
+                    {errors.lastName.message}
+                  </Text>
+                )}
+                <Text>Phone Number</Text>
+                <Input
+                  id="phoneNumber"
+                  type="number"
+                  name="password"
+                  placeholder="Phone Number"
+                  style={inputBox}
+                  h={['40px', '40px', '60px', '60px']}
+                  {...register('phoneNumber', {
+                    required: 'Required',
+                    maxLength: {
+                      value: 16,
+                      message: 'Phone number too long',
+                    },
+                  })}
+                />
+                {errors.phoneNumber && (
+                  <Text
+                    color="#FED7D7"
+                    fontWeight="bold"
+                    fontSize={[12, 12, 12, 14]}
+                  >
+                    {errors.phoneNumber.message}
+                  </Text>
+                )}
+                <Text>Country of Origin</Text>
+                <Select
+                  boxSizing="border-box"
+                  style={selectBox}
+                  h={['40px', '40px', '60px', '60px']}
+                  {...register('countryOfOrigin')}
+                  isInvalid={errors['countryOfOrigin']}
+                  placeholder="Please fill in this field"
+                  _placeholder={{ color: '#718096' }}
+                >
+                  {countryList.map((result) => (
+                    <option value={result}>{result}</option>
+                  ))}
+                </Select>
+
+                {errors.country && (
+                  <Text
+                    color="#FED7D7"
+                    fontWeight="bold"
+                    fontSize={[12, 12, 12, 14]}
+                  >
+                    {errors.country.message}
+                  </Text>
+                )}
+                <Text>Life Stage</Text>
+                <Select
+                  style={selectBox}
+                  h={['40px', '40px', '60px', '60px']}
+                  {...register('lifestage')}
+                  isInvalid={errors['lifestage']}
+                  placeholder="Please fill in this field"
+                  _placeholder={{ color: '#718096' }}
+                >
+                  {lifestageList.map((lifestage) => (
+                    <option value={lifestage}>{lifestage}</option>
+                  ))}
+                </Select>
+                {errors.lifestage && (
+                  <Text
+                    color="#FED7D7"
+                    fontWeight="bold"
+                    fontSize={[12, 12, 12, 14]}
+                  >
+                    {errors.lifestage.message}
+                  </Text>
+                )}
+              </VStack>
+              <VStack align="center">
+                <ReCAPTCHA
+                  style={recaptchaStyle}
+                  size="normal"
+                  sitekey={process.env.REACT_APP_CAPTCHA}
+                />
+                {error && (
+                  <Text color="#F6AD55" fontSize={[14, 14, 14, 16]}>
+                    {error}
+                  </Text>
+                )}
+                <Button
+                  type="submit"
+                  name="Login"
+                  value="Sign Up"
+                  style={submitBoxStyle}
+                  _hover={{ opacity: '0.75' }}
+                  h={['40px', '40px', '60px', '60px']}
+                  fontSize={['0.675rem', '0.75rem', '1rem', '1rem']}
+                  >
+                  Sign Up
+                </Button>
+              </VStack>
+            </form>
+          </Box>
         </Flex>
-      </Stack>
+      </Box>
     </>
   );
 };
