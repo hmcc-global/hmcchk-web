@@ -32,7 +32,7 @@ module.exports = {
           _id: baptismId,
           isDeleted: false,
         }).set(toUpdate);
-        if (!data) {
+        if (data) {
           return exits.success(data);
         }
         return exits.invalid();
