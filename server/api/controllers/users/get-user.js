@@ -30,6 +30,7 @@ module.exports = {
       }
 
       //let data = await User.find({ isDeleted: false }).populate("baptismInfo");
+      // TODO-aparedan: membershipInfo should by default be sorted according to creationDate
       let data = await User.find({ isDeleted: false }).populateAll();
       sails.log.info("Retrieving users");
 

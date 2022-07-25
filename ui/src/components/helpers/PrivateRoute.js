@@ -7,6 +7,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import UserProfileContainer from "../userProfile/UserProfileContainer";
 import CompleteUserProfileContainer from "../userProfile/CompleteUserProfile";
+import SidebarWithHeader from '../admin/navigation/Sidebar';
 
 const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
   const user = useSelector((state) => state.user);
@@ -87,6 +88,13 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
                 }
                 break;
             }
+
+              if (props.location.pathname.includes('admin'))
+                return (
+                  <SidebarWithHeader>
+                    <Component {...props} user={userObj} />
+                  </SidebarWithHeader>
+                )
 
             return <Component {...props} user={userObj} />;
           } else {

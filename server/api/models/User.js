@@ -21,8 +21,8 @@ email status until they click the link in the confirmation email.`,
       type: 'string',
     },
     accessType: {
-      type: 'string', //stewardship, admin, alumni, signed, unsigned
-      isIn: ['stewardship', 'admin', 'alumni', 'signed', 'unsigned'],
+      type: 'string',
+      isIn: ['stewardship', 'admin', 'alumni', 't3ch', 'signed', 'unsigned'],
       defaultsTo: 'unsigned',
       description: 'The account types of the user and what access do they have',
     },
@@ -110,7 +110,7 @@ email status until they click the link in the confirmation email.`,
       type: 'json',
     },
     membershipInfo: {
-      //one-to-one
+      //one-to-many
       collection: 'Membership',
       via: 'userId',
     },

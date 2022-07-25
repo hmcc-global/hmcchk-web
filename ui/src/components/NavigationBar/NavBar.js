@@ -200,7 +200,6 @@ const NavBar = (props) => {
           align="center"
           color="gray.100"
           justify="center"
-          align="center"
           h="6vh"
           p={2}
         >

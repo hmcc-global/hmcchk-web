@@ -17,8 +17,10 @@ import { LinkGrid } from './LinkGrid';
 import { SoapAppDownloadButton } from './SoapDownloadButton';
 import { ChurchAppDownloadButton } from './ChurchAppDownloadButton';
 import DailyBrp from '../helpers/DailyBrp';
+import { useHistory } from 'react-router-dom';
 
 export default function FooterContainer() {
+  const isAdminPage = useHistory().location.pathname.includes('admin');
   return (
     <Box
       as="footer"
@@ -28,6 +30,7 @@ export default function FooterContainer() {
       py="12"
       bg="#222222"
       color="white"
+      display={ isAdminPage ? 'none' : 'block' }
     >
       <Container maxW="container.lg">
         <Flex

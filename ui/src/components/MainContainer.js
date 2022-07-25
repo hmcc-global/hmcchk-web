@@ -22,11 +22,14 @@ import PasswordSubmitted from './auth/PasswordSubmitted';
 import ConnectFloatButton from './connect-float/ConnectFloatButton';
 import UserFormContainer from './forms/UserFormContainer';
 import NoMatch from './errors/NoMatch';
-import AdminLoginContainer from './admin/AdminLoginContainer';
-import AdminContainer from './AdminContainer';
 import ScrollToTop from './helpers/ScrollToTop';
 import AboutUsContainer from './about/AboutUsContainer';
 import OnlineSermonContainer from './sermons/OnlineSermonContainer';
+import AdminHome from './admin/AdminHome';
+import AdminUser from './admin/users/AdminUser';
+import FormManager from './forms/FormManager';
+import AdminGiving from './admin/AdminGiving';
+import AdminLogout from './admin/AdminLogout';
 
 const MainContainer = () => {
   return (
@@ -102,7 +105,7 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/forms/:id"
-          permissions={['unsigned', 'signed', 'alumni', 'admin', 'stewardship']}
+          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
           component={UserFormContainer}
         />
         <PrivateRoute
@@ -144,75 +147,70 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/complete-profile"
-          permissions={['unsigned', 'signed', 'alumni', 'admin', 'stewardship']}
+          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
           component={CompleteUserProfileContainer}
         />
         <PrivateRoute
           exact
           path="/profile"
-          permissions={['unsigned', 'signed', 'alumni', 'admin', 'stewardship']}
+          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
           component={UserProfileContainer}
         />
         <PrivateRoute
           exact
           path="/complete-profile"
-          permissions={['unsigned', 'signed', 'alumni', 'admin', 'stewardship']}
+          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
           component={CompleteUserProfileContainer}
         />
         <PrivateRoute
           exact
           path="/profile"
-          permissions={['unsigned', 'signed', 'alumni', 'admin', 'stewardship']}
+          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
           component={UserProfileContainer}
         />
         <PrivateRoute
           exact
           path="/clear-cache/"
-          permissions={['admin', 'stewardship']}
+          permissions={['t3ch', 'admin', 'stewardship']}
           component={ClearCache}
         />
         <PrivateRoute
           exact
           path="/admin"
-          permissions={['admin', 'stewardship']}
-          component={AdminLoginContainer}
+          permissions={['t3ch', 'admin', 'stewardship']}
+          component={AdminHome}
         />
-        {/* <PrivateRoute
+        <PrivateRoute
           exact
           path="/admin/home"
-          permissions={["admin", "stewardship"]}
+          permissions={['t3ch', 'admin', 'stewardship']}
           component={AdminHome}
         />
         <PrivateRoute
           exact
           path="/admin/users"
-          permissions={["admin", "stewardship"]}
+          permissions={['admin', 'stewardship']}
           component={AdminUser}
         />
         <PrivateRoute
           exact
           path="/admin/forms"
-          permissions={["admin", "stewardship"]}
-          component={AdminForm}
+          permissions={['t3ch', 'admin', 'stewardship']}
+          component={FormManager}
         />
         <PrivateRoute
           exact
           path="/admin/giving"
-          permissions={["stewardship"]}
-          component={AdminGiving}
-        />  */}
-        <PrivateRoute
-          exact
-          path="/admin/login"
-          permissions={['noUser']}
-          component={AdminLoginContainer}
-        />
-        <PrivateRoute
-          exact
-          path="/admin/:pageName"
           permissions={['admin', 'stewardship']}
-          component={AdminContainer}
+          component={AdminGiving}
         />
+        <PrivateRoute
+          exact
+          path="/admin/logout"
+          permissions={['t3ch', 'admin', 'stewardship']}
+          component={AdminLogout}
+        />
+
         <PrivateRoute path="*" permissions={['public']} component={NoMatch} />
       </Switch>
       <FooterContainer />

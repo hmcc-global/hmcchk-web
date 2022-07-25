@@ -1,26 +1,26 @@
 module.exports = {
-  friendlyName: "Update baptisms",
+  friendlyName: 'Update baptisms',
 
-  description: "Update baptisms",
+  description: 'Update baptisms',
 
   inputs: {
     params: {
       required: false,
-      type: "json",
+      type: 'json',
     },
   },
 
   exits: {
     success: {
-      description: "Baptism records updated successfully",
+      description: 'Baptism records updated successfully',
     },
     invalid: {
-      description: "Failed to update baptism record",
+      description: 'Failed to update baptism record',
     },
 
     missingRequiredFields: {
       statusCode: 409,
-      description: "Please fill in the required fields.",
+      description: 'Please fill in the required fields.',
     },
   },
 
@@ -32,7 +32,7 @@ module.exports = {
           _id: baptismId,
           isDeleted: false,
         }).set(toUpdate);
-        if (data != null) {
+        if (data) {
           return exits.success(data);
         }
         return exits.invalid();
@@ -42,7 +42,7 @@ module.exports = {
       }
     }
     sails.log.error(err);
-    sails.log.error("missingRequiredFields");
+    sails.log.error('missingRequiredFields');
     return exits.invalid();
   },
 };
