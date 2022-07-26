@@ -1,27 +1,35 @@
 import {
   Box,
   Button,
-  Container,
   Flex,
   Link,
   Modal,
   ModalCloseButton,
+  Image,
   ModalContent,
+  AspectRatio,
   ModalOverlay,
-  Text,
   useBreakpointValue,
-} from "@chakra-ui/react";
-import { useState, useEffect } from "react";
-import AboutSection from "./AboutSection";
-import EventsSection from "./EventsSection";
-import HeroSection from "./HeroSection";
-import LifeGroupSection from "./LifeGroupSection";
-import NewHereSection from "./NewHereSection";
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ButtonGroup,
+} from '@chakra-ui/react';
+import { useState, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
+import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
+
+import AboutSection from './AboutSection';
+import EventsSection from './EventsSection';
+import HeroSection from './HeroSection';
+import LifeGroupSection from './LifeGroupSection';
+import NewHereSection from './NewHereSection';
+
 const HomeContainer = (props) => {
   const { user } = props;
   const [isOpen, setIsOpen] = useState(true);
 
-  const isMobile = useBreakpointValue({ base: true, lg: false});
+  const isMobile = useBreakpointValue({ base: true, lg: false });
 
   const onClose = () => {
     setIsOpen(false);
@@ -31,10 +39,25 @@ const HomeContainer = (props) => {
     if (Object.keys(user).length !== 0) setIsOpen(false);
   }, []);
 
-  const modalText =
-    "With the recent updates regarding Covid-19 restrictions in Hong Kong, we have an update as a church. Click button below to find out more!"
-
-  const covidButtonText = "OUR LATEST COVID-19 POLICY"
+  {
+    /* define content of popup here*/
+  }
+  const popupFlag = true;
+  const popupTitle = 'Welcome Home';
+  const popupImage =
+    process.env.PUBLIC_URL + 'images/modal/welcome-back-modal.png';
+  const popupDescription =
+    'HMCC With the recent updates regarding Covid-19 restrictions in Hong Kong, \n # hmcc \n we have an update as a church. Click button below to find out more!\n ## markdown is supported';
+  const popupButton1Text = 'OUR LATEST COVID-19 POLICY';
+  const popupButton1Link =
+    'https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/';
+  const popupButton1Color = 'teal';
+  const popupButton2Text = 'HELLO';
+  const popupButton2Link = 'google.com';
+  const popupButton2Color = 'gray';
+  const popupButton3Text = 'TEST';
+  const popupButton3Link = 'facebook.com';
+  const popupButton3Color = 'red';
 
   return (
     <Flex direction="column">
@@ -43,108 +66,89 @@ const HomeContainer = (props) => {
       <AboutSection />
       <LifeGroupSection />
       <NewHereSection />
-      {/* <Modal isCentered={true} size="3xl" isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent borderRadius="20" bgColor="#FFF7E2">
-          <ModalCloseButton />
-          <ModalHeader>{"Welcome! Are you new?"}</ModalHeader>
-          <ModalBody ml={[0, 16]} mr={[0, 16]}>
-            <Box>
-              <Text>
-                {
-                  "We would love to welcome you into our Church family, click here to find out more!"
-                }
-              </Text>
-            </Box>
-          </ModalBody>
-          <ModalFooter ml={[0, 16]} mr={[0, 16]}>
-            <ButtonGroup
-              size="md"
-              flexDirection={["column", "row"]}
-              spacing={[0, 2]}
-              w="100%"
-              variant="outline"
-              colorScheme="gray"
-            >
-              <Button
-                flex={[false, 1]}
-                as={Link}
-                // target="_blank"
-                href="/connect"
-                size="sm"
-                color="#00000"
-                bgColor="#FFD600"
-                _hover={{
-                  bgColor: "#CFAE00",
-                }}
+      {popupFlag && (
+        <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent borderRadius="20">
+            <AspectRatio mb="5" width="100%" ratio={16 / 9}>
+              <Image
+                borderTopLeftRadius="20"
+                borderTopRightRadius="20"
+                src={popupImage}
+                objectFit="cover"
+              />
+            </AspectRatio>
+            <ModalCloseButton />
+            {popupTitle && (
+              <ModalHeader
+                ml={[0, 16]}
+                mr={[0, 16]}
+                fontWeight="900"
+                fontSize={['2xl', '3xl']}
               >
-                Yes, I'm new!
-              </Button>
-              <Button
-                flex={[false, 1]}
-                mt={[2, 0]}
-                onClick={onClose}
-                size="sm"
-                bgColor="#E5E5E5"
-              >
-                No, I'm not new
-              </Button>
-            </ButtonGroup>
-          </ModalFooter>
-        </ModalContent>
-      </Modal> */}
-      <Modal isCentered={true} size="6xl" isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent borderRadius="20" bgColor="#FFF7E2">
-          <ModalCloseButton size="lg" zIndex="100" />
-          <Flex
-            w="full"
-            h={isMobile ? "50vh" : "80vh"}
-            bgImage={`url(${
-              process.env.PUBLIC_URL + '/images/modal/welcome-back-modal.png'
-            })`}
-            bgSize="cover"
-            bgPosition="center center"
-            justify="center"
-            borderRadius="20"
-          >
-            <Container display="flex" justifyContent="center" position="relative">
-              <Box
-                backgroundColor="white"
-                textAlign="center"
-                borderRadius="16"
-                padding={isMobile ? "3" : "5"}
-                position="absolute"
-                bottom={isMobile ? "0" : "20"}
-                margin="2"
-              >
-                <Text
-                  color="#4C80A5"
-                  fontSize={isMobile ? "14" : "16"}
-                >
-                    {modalText}
-                </Text>
-                <Button
-                  flex={[false, 1]}
-                  as={Link}
-                  target="_blank"
-                  href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/"
-                  size="sm"
-                  color="#FFFFFF"
-                  bgColor="#0628A3"
-                  _hover={{
-                    bgColor: "#0628A3",
-                  }}
-                  marginTop={isMobile ? "2" : "3"}
-                  fontSize="12"
-                >
-                  {covidButtonText}
-                </Button>
+                {popupTitle}
+              </ModalHeader>
+            )}
+            <ModalBody ml={[0, 16]} mr={[0, 16]}>
+              <Box fontSize="sm" mt="5" color="#4C80A5" textAlign="justify">
+                <ReactMarkdown
+                  components={ChakraUIRenderer()}
+                  children={popupDescription}
+                  skipHtml
+                />
               </Box>
-            </Container>
-          </Flex>
-        </ModalContent>
-      </Modal>
+            </ModalBody>
+            <ModalFooter ml={[0, 16]} mr={[0, 16]}>
+              <ButtonGroup
+                size="md"
+                flexDirection={['column', 'row']}
+                spacing={[0, 2]}
+                w="100%"
+                variant="outline"
+                colorScheme="gray"
+              >
+                {popupButton1Text.length > 0 && (
+                  <Button
+                    flex={[false, 1]}
+                    as={Link}
+                    target="_blank"
+                    href={popupButton1Link ? popupButton1Link : null}
+                    style={{
+                      whiteSpace: 'normal',
+                      wordWrap: 'break-word',
+                    }}
+                    colorScheme={popupButton1Color}
+                  >
+                    {popupButton1Text}
+                  </Button>
+                )}
+                {popupButton2Text.length > 0 && (
+                  <Button
+                    flex={[false, 1]}
+                    as={Link}
+                    target="_blank"
+                    href={popupButton2Link ? popupButton2Link : null}
+                    colorScheme={popupButton2Color}
+                  >
+                    {popupButton2Text}
+                  </Button>
+                )}
+                {popupButton3Text.length > 0 && (
+                  <Button
+                    flex={[false, 1]}
+                    as={Link}
+                    target="_blank"
+                    href={popupButton3Link ? popupButton3Link : null}
+                    colorScheme={popupButton3Color}
+                  >
+                    {popupButton3Text}
+                  </Button>
+                )}
+              </ButtonGroup>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      )}
     </Flex>
   );
 };
