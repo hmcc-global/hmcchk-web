@@ -21,7 +21,7 @@ import ResetPassword from './auth/ResetPassword';
 import PasswordSubmitted from './auth/PasswordSubmitted';
 import ConnectFloatButton from './connect-float/ConnectFloatButton';
 import UserFormContainer from './forms/UserFormContainer';
-import NoMatch from './errors/NoMatch';
+import ErrorPage from './screens/ErrorPage';
 import ScrollToTop from './helpers/ScrollToTop';
 import AboutUsContainer from './about/AboutUsContainer';
 import OnlineSermonContainer from './sermons/OnlineSermonContainer';
@@ -204,7 +204,7 @@ const MainContainer = () => {
           component={AdminPopUpContainer}
         />
 
-        <PrivateRoute path="*" permissions={['public']} component={NoMatch} />
+        <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
       <FooterContainer />
       <ConnectFloatButton />
