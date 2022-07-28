@@ -10,18 +10,19 @@ import {
   ModalOverlay,
   Text,
   useBreakpointValue,
-} from "@chakra-ui/react";
-import { useState, useEffect } from "react";
-import AboutSection from "./AboutSection";
-import EventsSection from "./EventsSection";
-import HeroSection from "./HeroSection";
-import LifeGroupSection from "./LifeGroupSection";
-import NewHereSection from "./NewHereSection";
+} from '@chakra-ui/react';
+import { useState, useEffect } from 'react';
+import AboutSection from './AboutSection';
+import EventsSection from './EventsSection';
+import HeroSection from './HeroSection';
+import LifeGroupSection from './LifeGroupSection';
+import NewHereSection from './NewHereSection';
+import HelloSermonSection from './HelloSermonSection';
 const HomeContainer = (props) => {
   const { user } = props;
   const [isOpen, setIsOpen] = useState(true);
 
-  const isMobile = useBreakpointValue({ base: true, lg: false});
+  const isMobile = useBreakpointValue({ base: true, lg: false });
 
   const onClose = () => {
     setIsOpen(false);
@@ -32,14 +33,15 @@ const HomeContainer = (props) => {
   }, []);
 
   const modalText =
-    "With the recent updates regarding Covid-19 restrictions in Hong Kong, we have an update as a church. Click button below to find out more!"
+    'With the recent updates regarding Covid-19 restrictions in Hong Kong, we have an update as a church. Click button below to find out more!';
 
-  const covidButtonText = "OUR LATEST COVID-19 POLICY"
+  const covidButtonText = 'OUR LATEST COVID-19 POLICY';
 
   return (
     <Flex direction="column">
       <HeroSection />
       <EventsSection />
+      <HelloSermonSection />
       <AboutSection />
       <LifeGroupSection />
       <NewHereSection />
@@ -99,7 +101,7 @@ const HomeContainer = (props) => {
           <ModalCloseButton size="lg" zIndex="100" />
           <Flex
             w="full"
-            h={isMobile ? "50vh" : "80vh"}
+            h={isMobile ? '50vh' : '80vh'}
             bgImage={`url(${
               process.env.PUBLIC_URL + '/images/modal/welcome-back-modal.png'
             })`}
@@ -108,21 +110,22 @@ const HomeContainer = (props) => {
             justify="center"
             borderRadius="20"
           >
-            <Container display="flex" justifyContent="center" position="relative">
+            <Container
+              display="flex"
+              justifyContent="center"
+              position="relative"
+            >
               <Box
                 backgroundColor="white"
                 textAlign="center"
                 borderRadius="16"
-                padding={isMobile ? "3" : "5"}
+                padding={isMobile ? '3' : '5'}
                 position="absolute"
-                bottom={isMobile ? "0" : "20"}
+                bottom={isMobile ? '0' : '20'}
                 margin="2"
               >
-                <Text
-                  color="#4C80A5"
-                  fontSize={isMobile ? "14" : "16"}
-                >
-                    {modalText}
+                <Text color="#4C80A5" fontSize={isMobile ? '14' : '16'}>
+                  {modalText}
                 </Text>
                 <Button
                   flex={[false, 1]}
@@ -133,9 +136,9 @@ const HomeContainer = (props) => {
                   color="#FFFFFF"
                   bgColor="#0628A3"
                   _hover={{
-                    bgColor: "#0628A3",
+                    bgColor: '#0628A3',
                   }}
-                  marginTop={isMobile ? "2" : "3"}
+                  marginTop={isMobile ? '2' : '3'}
                   fontSize="12"
                 >
                   {covidButtonText}
