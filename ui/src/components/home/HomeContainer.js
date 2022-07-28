@@ -7,6 +7,7 @@ import HeroSection from './HeroSection';
 import LifeGroupSection from './LifeGroupSection';
 import NewHereSection from './NewHereSection';
 import PopupContainer from './PopupContainer';
+import HelloSermonSection from './HelloSermonSection';
 import { customAxios as axios } from '../helpers/customAxios';
 
 const HomeContainer = (props) => {
@@ -39,6 +40,8 @@ const HomeContainer = (props) => {
   return (
     <Flex direction="column">
       <HeroSection />
+      <EventsSection />
+      <HelloSermonSection />
       <AboutSection />
       <EventsSection />
       <LifeGroupSection />
