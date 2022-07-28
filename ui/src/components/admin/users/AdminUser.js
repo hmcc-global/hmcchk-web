@@ -93,6 +93,16 @@ export default function AdminUser(props) {
     }
   };
 
+  useEffect(() => {
+    if (api) {
+      if (users && users.length) {
+        api.hideOverlay();
+      } else {
+        api.showLoadingOverlay();
+      }
+    }
+  }, [users, api]);
+
   // Ag-Grid Helpers
   // Formatters
   const dateFormatter = (dateStr) => {
