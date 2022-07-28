@@ -5,10 +5,8 @@ import {
   Heading,
   Container,
   Flex,
-  Stack,
   Text,
   VStack,
-  Box,
   Link,
   Image,
 } from '@chakra-ui/react';
@@ -79,9 +77,9 @@ const HelloSermonSection = () => {
   const [sermons, setSermons] = useState([]);
   const [currentSermon, setCurrentSermon] = useState();
   const [onlineSermon, setOnlineSermon] = useState(false);
-  const currentDate = DateTime.fromISO(currentSermon.datePreached).toFormat(
-    'LLLL dd, yyyy'
-  );
+  const currentDate = currentSermon
+    ? DateTime.fromISO(currentSermon.datePreached).toFormat('LLLL dd, yyyy')
+    : '';
   const getLatestSermon = async () => {
     try {
       const { data, status } = await axios.get('/api/sermons/get-sermons');
@@ -107,7 +105,6 @@ const HelloSermonSection = () => {
     getLatestSermon();
   }, []);
 
-  console.log(currentSermon);
   return (
     <>
       <Flex w="full" h={{ base: '100vh', md: 'auto' }} justify="center">
@@ -132,17 +129,23 @@ const HelloSermonSection = () => {
               Latest Sermon
             </Heading>
             <Image
-              src={currentSermon.sermonSeries[0].image.sourceUrl}
+              src={
+                currentSermon
+                  ? currentSermon.sermonSeries[0].image.sourceUrl
+                  : ''
+              }
               objectFit="cover"
               borderRadius="10px"
             />
             <VStack>
               <Heading color="#A5CBFF">
-                {currentSermon.sermonSeries[0].name}
+                {currentSermon ? currentSermon.sermonSeries[0].name : ''}
               </Heading>
               <Text color="white">{currentDate}</Text>
             </VStack>
-            <Text color="white">{currentSermon.sermonDesc}</Text>
+            <Text color="white">
+              {currentSermon ? currentSermon.sermonDesc : ''}
+            </Text>
             <Button>See All Past Sermons</Button>
           </VStack>
         </Container>
