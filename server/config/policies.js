@@ -59,6 +59,9 @@ module.exports.policies = {
   // Pages
   'pages/*': true,
 
+  // PopUp
+  'popup/*': ['isLoggedIn', 'aboveTech'],
+
   // Sermons
   'sermons/*': true,
 
