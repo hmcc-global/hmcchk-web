@@ -1,9 +1,78 @@
 import { Center, Icon, Text, VStack, Box, Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { MdErrorOutline } from 'react-icons/md';
+import { AiFillCheckCircle } from 'react-icons/ai';
+
+// Define new pages here
+const errorPages = {
+  'not-found': {
+    type: 'error',
+    primaryText: "Uh oh!\n We can't seem to find the page you are looking for.",
+    boldedText: null,
+    buttonLink: '/',
+    buttonText: 'Back to Homepage',
+  },
+  'need-login': {
+    type: 'error',
+    primaryText:
+      'Oops, something went wrong!\nYou are unable to access this form right now.',
+    boldedText: 'Please login to your HMCC account to try again.',
+    buttonLink: '/login',
+    buttonText: 'LOGIN',
+  },
+  'form-unavailable': {
+    type: 'error',
+    primaryText:
+      'Oops, something went wrong!\nYou are unable to access this form right now.',
+    boldedText: 'This form is currently unavailable.',
+    buttonLink: '/',
+    buttonText: 'Back to Homepage',
+  },
+  'form-will-open': {
+    type: 'error',
+    primaryText: 'Please come back later!',
+    boldedText: 'This form will open soon.',
+    buttonLink: '/',
+    buttonText: 'Back to Homepage',
+  },
+  'form-success': {
+    type: 'success',
+    primaryText: null,
+    boldedText: 'Submitted successfully',
+    buttonLink: '/',
+    buttonText: 'Back to Homepage',
+  },
+  'form-success-logged-in': {
+    type: 'success',
+    primaryText: null,
+    boldedText: 'Submitted successfully',
+    buttonLink: '/',
+    buttonText: 'Back to Profile',
+  },
+};
 
 const ErrorPage = (props) => {
-  console.log(props);
+  // Add new cases corresponding to the errorPages definition
+  const key = (() => {
+    try {
+      switch (props.location.pathname) {
+        case '/need-login':
+          return 'need-login';
+        case '/form-unavailable':
+          return 'form-unavailable';
+        case '/form-will-open':
+          return 'form-will-open';
+        case '/form-success':
+          return props.user.id ? 'form-success-logged-in' : 'form-success';
+        default:
+          return 'not-found';
+      }
+    } catch (err) {
+      console.error('Error detected in error page paths');
+      return 'not-found';
+    }
+  })();
+
   return (
     <Box
       minH="100vh"
@@ -15,39 +84,55 @@ const ErrorPage = (props) => {
       bgAttachment="fixed"
       bgSize="cover"
     >
-      <Center pt={['50%', '25%']}>
+      <Center pt={['50%', '17%']}>
         <VStack
           bgColor="#f7fafc"
           borderRadius="xl"
           px={['6', '9']}
           py={['7']}
+          minW={['95%', '30%']}
           maxW={['95%', '100%']}
           spacing="3"
           textAlign="center"
         >
-          <Icon as={MdErrorOutline} color="#F89A9A" w="8" h="8" />
-          <Text color="#656565" fontSize={['sm', 'md']}>
-            Oops, something went wrong!
-            <br />
-            You are unable to access this form right now.
-          </Text>
-          <Text color="#656565" fontWeight="700" fontSize={['sm', 'md']}>
-            Please login to your HMCC account to try again.
-          </Text>
-          <Button
-            as={Link}
-            to="/"
-            borderRadius="lg"
-            bgColor="#0058D2"
-            color="#ffffff"
-            w="100%"
-            fontWeight="700"
-            size="md"
-            fontSize={['sm', 'md']}
-            _hover={{ bgColor: '#0058d2d9' }}
-          >
-            LOGIN
-          </Button>
+          <Icon
+            as={
+              errorPages[key].type === 'success'
+                ? AiFillCheckCircle
+                : MdErrorOutline
+            }
+            color={errorPages[key].type === 'success' ? '#4CAF50' : '#F89A9A'}
+            w="8"
+            h="8"
+          />
+          {errorPages[key].primaryText && (
+            <Box color="#656565" fontSize={['sm', 'md']}>
+              {errorPages[key].primaryText.split('\n').map((str, i) => (
+                <Text key={i}>{str}</Text>
+              ))}
+            </Box>
+          )}
+          {errorPages[key].boldedText && (
+            <Text color="#656565" fontWeight="700" fontSize={['sm', 'md']}>
+              {errorPages[key].boldedText}
+            </Text>
+          )}
+          {errorPages[key].buttonLink && (
+            <Button
+              as={Link}
+              to={errorPages[key].buttonLink}
+              borderRadius="lg"
+              bgColor="#0058D2"
+              color="#ffffff"
+              w="100%"
+              fontWeight="700"
+              size="md"
+              fontSize={['sm', 'md']}
+              _hover={{ bgColor: '#0058d2d9' }}
+            >
+              {errorPages[key].buttonText}
+            </Button>
+          )}
         </VStack>
       </Center>
     </Box>
