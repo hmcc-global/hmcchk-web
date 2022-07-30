@@ -98,7 +98,7 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
 
             return <Component {...props} user={userObj} />;
           } else {
-            return <ErrorPage user={userObj} />;
+            return <ErrorPage {...props} user={userObj} />;
           }
         }}
       />
