@@ -1,5 +1,4 @@
 import { Box, Heading, Link, SimpleGrid, Text } from '@chakra-ui/react';
-import '../../styles/_fliptiles.scss';
 
 const OurMinistries = (props) => {
   return (
@@ -18,135 +17,142 @@ const OurMinistries = (props) => {
         people from all walks of life, specifically college students, working
         adults, and families.
       </Text>
-      <SimpleGrid columns={[2, 4]} spacing={4}>
-        <Box className="flip-container" h={[190, 250]}>
-          <Box
-            p={[3, 4]}
-            borderWidth="1px"
-            borderRadius="20"
-            bgImage={`linear-gradient(180deg, rgba(118, 228, 247, 0.7) 0%, rgba(44, 82, 130, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/campus-ministry.jpg')`}
-            bgPosition="center"
-            bgSize="cover"
-            shadow="lg"
-            color="white"
-            className="flipper"
+      <SimpleGrid columns={[1, 3]} spacing={4}>
+        <Box
+          h={[141, 340]}
+          p={[3, 4]}
+          borderWidth="1px"
+          borderRadius="20"
+          bgImage={`linear-gradient(180deg, rgba(118, 228, 247, 0.7) 0%, rgba(44, 82, 130, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/undergrad.png')`}
+          bgPosition="center"
+          bgSize="cover"
+          shadow="lg"
+          color="white"
+          textAlign="center"
+        >
+          <Heading
+            as="h4"
+            mt={16}
+            fontSize={['1.5em', '1.5em', '2em']}
+            fontWeight={700}
           >
-            <Heading
-              as="h4"
-              fontSize={['1.5em', '1.5em', '2em']}
-              fontWeight={700}
-              className="front"
-            >
-              CAMPUS
-            </Heading>
-            <Box
-              className="back"
-              fontWeight={600}
-              fontSize={['xs', 'sm', 'md']}
-            >
-              Reaching the college students in the university campuses of Hong
-              Kong because we believe that college is a pivotal time for people
-              to discover their God-given destiny.
-            </Box>
-          </Box>
+            UNDERGRADS
+          </Heading>
+          <Text mt={6} fontWeight={400} fontSize={['xs', 'sm', 'md']}>
+            Reaching the college students in the university campuses of Hong
+            Kong because we believe that college is a pivotal time for people to
+            discover their God-given destiny.
+          </Text>
         </Box>
-        <Box className="flip-container" h={[190, 250]}>
-          <Box
-            p={[3, 4]}
-            borderWidth="1px"
-            borderRadius="20"
-            bgImage={`linear-gradient(180deg, rgba(198, 246, 213, 0.7) 0%, rgba(39, 103, 73, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/focus-ministry.jpg')`}
-            bgPosition="center"
-            bgSize="cover"
-            shadow="lg"
-            color="white"
-            className="flipper"
+        <Box
+          h={[141, 340]}
+          p={[3, 4]}
+          borderWidth="1px"
+          borderRadius="20"
+          bgImage={`linear-gradient(180deg, rgba(198, 246, 213, 0.7) 0%, rgba(11, 128, 73, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/city.png')`}
+          bgPosition="center"
+          bgSize="cover"
+          shadow="lg"
+          color="white"
+          textAlign="center"
+        >
+          <Heading
+            as="h4"
+            mt={16}
+            fontSize={['1.5em', '1.5em', '2em']}
+            fontWeight={700}
           >
-            <Heading
-              as="h4"
-              fontSize={['1.5em', '1.5em', '2em']}
-              fontWeight={700}
-              className="front"
-            >
-              SINGLE ADULTS
-            </Heading>
-            <Box
-              className="back"
-              fontWeight={600}
-              fontSize={['xs', 'sm', 'md']}
-            >
-              Creating an avenue for single working adults to fellowship and
-              learn how to best exercise their God-given influence in their
-              respective schools and workplaces.
-            </Box>
-          </Box>
+            SINGLE WORKING ADULTS
+          </Heading>
+          <Text mt={4} fontWeight={400} fontSize={['xs', 'sm', 'md']}>
+            Creating an avenue for single working adults to fellowship and learn
+            how to best exercise their God-given influence in their respective
+            schools and workplaces.
+          </Text>
         </Box>
-        <Box className="flip-container" h={[190, 250]}>
-          <Box
-            p={[3, 4]}
-            borderWidth="1px"
-            borderRadius="20"
-            bgImage={`linear-gradient(180deg, rgba(252, 129, 129, 0.7) 0%, rgba(151, 38, 109, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/married-couples-ministry.jpg')`}
-            bgPosition="center"
-            bgSize="cover"
-            shadow="lg"
-            color="white"
-            className="flipper"
+        <Box
+          h={[141, 340]}
+          p={3}
+          borderWidth="1px"
+          borderRadius="20"
+          bgImage={`linear-gradient(180deg, rgba(252, 129, 129, 0.7) 0%, rgba(151, 38, 109, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/married.png')`}
+          bgPosition="center"
+          bgSize="cover"
+          shadow="lg"
+          color="white"
+          textAlign="center"
+        >
+          <Heading
+            as="h4"
+            fontSize={['1.5em', '1.5em', '2em']}
+            fontWeight={700}
+            mt={16}
           >
-            <Heading
-              as="h4"
-              fontSize={['1.5em', '1.5em', '2em']}
-              fontWeight={700}
-              className="front"
-              p={[5, 10]}
-            >
-              MARRIED COUPLES AND FAMILIES
-            </Heading>
-            <Box
-              className="back"
-              fontWeight={600}
-              fontSize={['xs', 'sm', 'md']}
-            >
-              Bringing together Godly families that will love on and impact the
-              next generation of their families and city.
-            </Box>
-          </Box>
+            MARRIED COUPLES AND FAMILIES
+          </Heading>
+          <Text mt={6} fontWeight={400} fontSize={['xs', 'sm', 'md']}>
+            Bringing together Godly families that will love on and impact the
+            next generation of their families and city.
+          </Text>
         </Box>
-        <Box className="flip-container" h={[190, 250]}>
-          <Box
-            p={[3, 4]}
-            borderWidth="1px"
-            borderRadius="20"
-            bgImage={`linear-gradient(180deg, rgba(254, 252, 191, 0.7) 0%, rgba(246, 173, 85, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/children-ministry.jpg')`}
-            bgPosition="center"
-            bgSize="cover"
-            shadow="lg"
-            color="white"
-            className="flipper"
+      </SimpleGrid>
+      <SimpleGrid ml={40} mr={40} mt={5} columns={[1, 2]}>
+        <Box
+          h={[141, 340]}
+          w={327}
+          p={[3, 4]}
+          borderWidth="1px"
+          borderRadius="20"
+          bgImage={`linear-gradient(180deg, rgba(191, 201, 254, 0.7) 0%, rgba(115, 37, 176, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/youth.png')`}
+          bgPosition="center"
+          bgSize="cover"
+          shadow="lg"
+          color="white"
+          textAlign="center"
+        >
+          <Heading
+            as="h4"
+            fontSize={['1.5em', '1.5em', '2em']}
+            fontWeight={700}
+            mt={20}
           >
-            <Heading
-              as="h4"
-              fontSize={['1.5em', '1.5em', '2em']}
-              fontWeight={700}
-              className="front"
-            >
-              CHILDREN
-            </Heading>
-            <Box
-              className="back"
-              fontWeight={600}
-              fontSize={['xs', 'sm', 'md']}
-            >
-              <Text>
-                Building Blocks is HMCC’s Children Ministry, learn more about it{' '}
-                <Text as="u">
-                  <Link href="https://hongkong.sub.hmcc.net/building-blocks/">
-                    here ➔
-                  </Link>
-                </Text>
-              </Text>
-            </Box>
-          </Box>
+            YOUTH
+          </Heading>
+          <Text mt={4} fontWeight={400} fontSize={['xs', 'sm', 'md']}>
+            Reaching and training the youth of this generation to reach the
+            world by starting from the center, which is our relationship with
+            Jesus Christ.
+          </Text>
+        </Box>
+        <Box
+          h={[141, 340]}
+          w={327}
+          p={[7, 10]}
+          borderWidth="1px"
+          borderRadius="20"
+          bgImage={`linear-gradient(180deg, rgba(233, 223, 132, 0.7) 0%, rgba(170, 102, 0, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/kid.png')`}
+          bgPosition="center"
+          bgSize="cover"
+          shadow="lg"
+          color="white"
+          textAlign="center"
+        >
+          <Heading
+            as="h4"
+            fontSize={['1.5em', '1.5em', '2em']}
+            fontWeight={700}
+            mt={14}
+          >
+            CHILDREN
+          </Heading>
+          <Text mt={6} fontWeight={400} fontSize={['xs', 'sm', 'md']}>
+            Building Blocks is HMCC’s Children Ministry, learn more about it{' '}
+            <Text as="u">
+              <Link href="https://hongkong.sub.hmcc.net/building-blocks/">
+                here ➔
+              </Link>
+            </Text>
+          </Text>
         </Box>
       </SimpleGrid>
     </Box>
