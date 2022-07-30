@@ -61,18 +61,23 @@ const NewHereSection = () => {
     <>
       <Flex
         w="full"
-        h="100vh"
+        h="90vh"
         justify="center"
         background="#F9F9F9"
         style={{ backdropFilter: 'blur(7px)' }}
       >
-        <Container maxW="container.xl" justifyContent="center" display="flex">
+        <Container
+          maxW="container.xl"
+          justifyContent="center"
+          alignItems="center"
+          pt={'100'}
+        >
           <Stack
             direction={['column', 'row']}
             color="white"
             justify="center"
             alignItems="center"
-            spacing={5}
+            spacing={'70'}
           >
             <VStack alignItems={'left'}>
               <Heading fontSize={['1.3em', '3em']} color="#505050">
@@ -82,7 +87,7 @@ const NewHereSection = () => {
                 Connect with us
               </Heading>
             </VStack>
-            <Box w={'55%'} borderWidth={'1px'} px={5} py={10} borderRadius={10}>
+            <Box w={'30%'} borderWidth={'1px'} px={5} py={10} borderRadius={10}>
               <form onSubmit={onSubmit}>
                 <VStack spacing={[4, 2.5]} alignItems="center">
                   <FormControl id="name" isRequired w={['85%', '100%']}>
