@@ -4,6 +4,7 @@ import { chakra } from '@chakra-ui/react';
 import SermonContainer from './sermons/SermonContainer';
 import SermonDetails from './sermons/SermonDetails';
 import LoginContainer from './auth/LoginContainer';
+import SignupContainer from './auth/SignupContainer';
 import EventsPage from './events/EventsPage';
 import VisitUsPage from './visit-us/VisitUsPage';
 import ConnectPage from './connect/ConnectPage';
@@ -55,6 +56,12 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
+          path="/signup"
+          permissions={['noUser']}
+          component={SignupContainer}
+        />
+        <PrivateRoute
+          exact
           path="/password/recover"
           permissions={['public']}
           component={RecoverPassword}
@@ -73,7 +80,7 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/signup"
+          path="/signup/form"
           permissions={['noUser']}
           component={Signup}
         />
