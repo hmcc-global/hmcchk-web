@@ -40,9 +40,9 @@ const HomeContainer = (props) => {
   return (
     <Flex direction="column">
       <HeroSection />
-      <EventsSection />
       <HelloSermonSection />
       <AboutSection />
+      <EventsSection />
       <LifeGroupSection />
       <NewHereSection />
       {/* <Modal isCentered={true} size="3xl" isOpen={isOpen} onClose={onClose}>
