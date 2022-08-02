@@ -97,7 +97,7 @@ const updateUserDataRequest = async (data) => {
 const getLoginOnlyFormsRequest = async () => {
   // Hardcoded to true as it is assumed only logged in users can call this function
   return await axios.get('/api/forms/get-form', {
-    params: { isLoggedIn: true },
+    params: {},
   });
 };
 

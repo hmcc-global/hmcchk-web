@@ -24,10 +24,6 @@ import {
   Radio,
   Stack,
   Center,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalFooter,
   VStack,
   Alert,
   AlertIcon,
@@ -51,11 +47,6 @@ const Form = (props) => {
 
   const [submissionData, setSubmissionData] = useState(null);
   const [submitStatus, setSubmitStatus] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const onModalClose = (e) => {
-    setModalOpen(false);
-  };
 
   // Handle a form submission event
   const handleSubmitForm = (data, e) => {
@@ -103,11 +94,7 @@ const Form = (props) => {
         userId: userId,
       });
       if (status === 200) {
-        setModalOpen(true);
-        setTimeout(() => {
-          history.push(redirectTarget);
-          setSubmitStatus(false);
-        }, 3000);
+        history.push('/form-success');
       }
     } catch (err) {
       console.log(err);
@@ -470,30 +457,6 @@ const Form = (props) => {
 
   return (
     <Box mt="12" mb="12">
-      <Modal isOpen={modalOpen} onClose={onModalClose}>
-        <ModalOverlay />
-        <ModalContent borderRadius="20">
-          <VStack>
-            <Text
-              color="#79B71A"
-              fontSize="2xl"
-              fontWeight="700"
-              mt={6}
-              flex={1}
-              p={5}
-              textAlign="center"
-            >
-              Submitted successfully, redirecting you soon.
-            </Text>
-            <Box flex={4}>
-              <Center w="100%" h="100%">
-                <CheckCircleIcon mt={5} w="70%" h="70%" color="#79B71A" />
-              </Center>
-            </Box>
-          </VStack>
-          <ModalFooter />
-        </ModalContent>
-      </Modal>
       <form onSubmit={handleSubmit(handleSubmitForm)}>
         {formImage !== '' && (
           <Image
