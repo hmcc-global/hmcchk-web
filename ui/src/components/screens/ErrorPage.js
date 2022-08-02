@@ -14,11 +14,17 @@ const errorPages = {
   },
   'need-login': {
     type: 'error',
-    primaryText:
-      'Oops, something went wrong!\nYou are unable to access this form right now.',
-    boldedText: 'Please login to your HMCC account to try again.',
+    primaryText: 'You are unable to access this form right now.',
+    boldedText: 'Please login to your HMCC account to access the form.',
     buttonLink: '/login',
     buttonText: 'LOGIN',
+  },
+  'need-fill-profile': {
+    type: 'error',
+    primaryText: "You haven't filled in your user profile",
+    boldedText: 'Please complete your user profile to access the form.',
+    buttonLink: '/profile',
+    buttonText: 'Back to Profile',
   },
   'form-unavailable': {
     type: 'error',
@@ -46,7 +52,7 @@ const errorPages = {
     type: 'success',
     primaryText: null,
     boldedText: 'Submitted successfully',
-    buttonLink: '/',
+    buttonLink: '/profile',
     buttonText: 'Back to Profile',
   },
 };
@@ -58,6 +64,8 @@ const ErrorPage = (props) => {
       switch (props.location.pathname) {
         case '/need-login':
           return 'need-login';
+        case '/need-fill-profile':
+          return 'need-fill-profile';
         case '/form-unavailable':
           return 'form-unavailable';
         case '/form-will-open':
