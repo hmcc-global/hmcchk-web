@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
 import {
   Button,
+  Box,
   Heading,
-  Container,
   Flex,
   Text,
   VStack,
@@ -42,57 +42,68 @@ const HelpCardInfo = [
 
 const HelpCard = (props) => {
   return (
-    <Link
-      to={{ pathname: props.path }}
-      as={ReactLink}
-      backgroundImage={
-        props.title === "I'm New"
-          ? process.env.PUBLIC_URL + '/images/home/' + props.image
-          : `linear-gradient(0deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.22)), url(${
-              process.env.PUBLIC_URL + '/images/home/' + props.image
-            })`
-      }
-      backdropFilter="blur(4px)"
-      width="100%"
-      height="auto"
-      bgSize="cover"
-      padding="6%"
-      bgPosition="center center"
-      borderRadius="10px"
-      alignItems="center"
-      justifyContent="center"
-      display="flex"
-      cursor="pointer"
-      style={{ textDecoration: 'none' }}
-    >
-      <VStack>
-        <Heading style={props.titleStyle}>{props.title}</Heading>
-        <Text style={props.textStyle}>{props.text}</Text>
-      </VStack>
-    </Link>
+    <>
+      <Link
+        to={{ pathname: props.path }}
+        as={ReactLink}
+        backgroundImage={
+          props.title === "I'm New"
+            ? process.env.PUBLIC_URL + '/images/home/' + props.image
+            : `linear-gradient(0deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.22)), url(${
+                process.env.PUBLIC_URL + '/images/home/' + props.image
+              })`
+        }
+        backdropFilter="blur(4px)"
+        width="100%"
+        height="auto"
+        bgSize="cover"
+        padding="6%"
+        bgPosition="center center"
+        borderRadius="10px"
+        alignItems="center"
+        justifyContent="center"
+        display="flex"
+        cursor="pointer"
+        style={{ textDecoration: 'none', zIndex: 1 }}
+      >
+        <VStack>
+          <Heading style={props.titleStyle} fontSize={{base:"1.5rem", md:"2.5rem"}}>{props.title}</Heading>
+          <Text style={props.textStyle} fontSize={{base:"0.8rem", md:"1.2rem"}}>{props.text}</Text>
+        </VStack>
+      </Link>
+      <Box
+        style={{
+          background: '#9E9E9E',
+          filter: 'blur(20px)',
+          height: '5vh',
+          width: '80%',
+          position: 'relative',
+          bottom: '4%',
+          zIndex: 0,
+          marginTop: '-20px',
+        }}
+      />
+    </>
   );
 };
 
 const HelloSermonSection = () => {
-  const [sermons, setSermons] = useState([]);
   const [currentSermon, setCurrentSermon] = useState();
-  const [onlineSermon, setOnlineSermon] = useState(false);
+  const [isSunday, setIsSunday] = useState(false);
   const currentDate = currentSermon
-    ? DateTime.fromISO(currentSermon.datePreached).toFormat('LLLL dd, yyyy')
+    ? DateTime.fromISO(currentSermon.datePreached).toFormat(
+        'EEEE, dd LLLL yyyy'
+      ) + ', 10:00 AM'
     : '';
   const getLatestSermon = async () => {
     try {
       const { data, status } = await axios.get('/api/sermons/get-sermons');
       if (status === 200) {
-        setSermons([...data]);
-        let current = data[1];
-        if (
-          current.streamLink &&
-          current.sermonNotes &&
-          current.sermonSeries[0]
-        )
-          setOnlineSermon(true);
+        let current = data[0];
         setCurrentSermon(current);
+        if (DateTime.now().toFormat('ccc') === 'Sun') {
+          setIsSunday(true);
+        } else setIsSunday(false);
       } else {
         throw Error('Something went wrong');
       }
@@ -107,48 +118,107 @@ const HelloSermonSection = () => {
 
   return (
     <>
-      <Flex w="full" h={{ base: '100vh', md: 'auto' }} justify="center">
-        <Container
-          maxW="container.lg"
+      <Flex
+        w="full"
+        h={{ base: 'auto', md: 'auto' }}
+        justify="center"
+        background={{
+          base: '',
+          md: ' linear-gradient(270deg, #172848 0%, #172848 50%, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%)',
+        }}
+      >
+        <Box
           justifyContent="space-between"
+          width="100%"
           display="flex"
-          flexDirection="row"
+          flexDirection={{ base: 'column', md: 'row' }}
         >
-          <VStack width="50%">
-            <Heading style={{ alignSelf: 'flex-start' }}>
-              How can we help you?
-            </Heading>
-            <VStack height="100%" width="100%" rowGap="24px">
-              {HelpCardInfo.map((help, i) => {
-                return <HelpCard key={i} {...help} />;
-              })}
-            </VStack>
-          </VStack>
-          <VStack width="50%" background="#172848">
-            <Heading color="white" style={{ alignSelf: 'flex-start' }}>
-              Latest Sermon
-            </Heading>
-            <Image
-              src={
-                currentSermon
-                  ? currentSermon.sermonSeries[0].image.sourceUrl
-                  : ''
-              }
-              objectFit="cover"
-              borderRadius="10px"
-            />
-            <VStack>
-              <Heading color="#A5CBFF">
-                {currentSermon ? currentSermon.sermonSeries[0].name : ''}
+          <Box
+            width={{ base: '100%', md: '50%' }}
+            h={{ base: '80vh', md: 'auto' }}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <VStack width="80%" padding="2rem" gap={4}>
+              <Heading style={{ alignSelf: 'flex-start', color: '#0628A3' }}>
+                How can we help you?
               </Heading>
-              <Text color="white">{currentDate}</Text>
+              <VStack height="100%" width="100%">
+                {HelpCardInfo.map((help, i) => {
+                  return (
+                    <React.Fragment key={i}>
+                      <HelpCard {...help} />
+                    </React.Fragment>
+                  );
+                })}
+              </VStack>
             </VStack>
-            <Text color="white">
-              {currentSermon ? currentSermon.sermonDesc : ''}
-            </Text>
-            <Button>See All Past Sermons</Button>
-          </VStack>
-        </Container>
+          </Box>
+          <Box
+            width={{ base: '100%', md: '50%' }}
+            h={{ base: '80vh', md: 'auto' }}
+            background={{ base: '#172848', md: '' }}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <VStack width="80%" padding="2rem" gap={4}>
+              <Heading color="white" style={{ alignSelf: 'flex-start' }}>
+                Latest Sermon
+              </Heading>
+              <Image
+                src={
+                  currentSermon
+                    ? currentSermon.sermonSeries[0].image.sourceUrl
+                    : ''
+                }
+                objectFit="cover"
+                borderRadius="10px"
+              />
+              <VStack style={{ alignSelf: 'flex-start' }}>
+                <Heading color="#A5CBFF">
+                  {currentSermon
+                    ? isSunday
+                      ? '[LIVE NOW] ' + currentSermon.sermonSeries[0].name
+                      : '' + currentSermon.sermonSeries[0].name
+                    : ''}
+                </Heading>
+                <Text style={{ alignSelf: 'flex-start' }} color="white">
+                  {currentDate}
+                </Text>
+              </VStack>
+              <Text color="white">
+                {currentSermon ? currentSermon.sermonDesc : ''}
+              </Text>
+
+              <Button
+                style={{
+                  alignSelf: 'flex-start',
+                  padding: '15px 20px',
+                  gap: '10px',
+                  border: '2px solid #A5CBFF',
+                  borderRadius: '7px',
+                  background: 'transparent',
+                  color: '#A5CBFF',
+                  marginTop: '7%',
+                }}
+                as={ReactLink}
+                to={{ pathname: '/sermons' }}
+              >
+                {isSunday
+                  ? 'Watch Sunday Celebration LIVE'
+                  : 'See All Past Sermons'}
+              </Button>
+            </VStack>
+          </Box>
+        </Box>
       </Flex>
     </>
   );

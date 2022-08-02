@@ -1,14 +1,4 @@
-import {
-  Button,
-  Container,
-  Flex,
-  Heading,
-  Link,
-  Stack,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
-import Card from '../helpers/components/Card';
+import { Container, Flex, Heading, Text, VStack } from '@chakra-ui/react';
 
 const vision = {
   title: 'VISION',
@@ -31,7 +21,7 @@ const AboutSection = () => {
     >
       <Flex
         w="full"
-        h={{ base: '100vh', md: 'auto' }}
+        h={{ base: '100vh', md: '80vh' }}
         justify="center"
         style={{ backdropFilter: 'blur(7px)' }}
       >
@@ -40,28 +30,34 @@ const AboutSection = () => {
           justifyContent="center"
           display="flex"
         >
-          <VStack rowGap={12} w="full" justify="center" spacing={8}>
-            <VStack rowGap={6}>
-              <Heading fontSize="6xl" color="#0628A3">
+          <VStack
+            rowGap={12}
+            w="full"
+            justify="center"
+            spacing={8}
+            padding="2rem"
+          >
+            <VStack rowGap={2}>
+              <Heading fontSize="4xl" color="#0628A3">
                 {vision.title}
               </Heading>
               <Text
                 fontWeight={400}
                 textAlign="center"
-                fontSize="2xl"
+                fontSize="xl"
                 width="80%"
               >
                 {vision.text}
               </Text>
             </VStack>
-            <VStack rowGap={6}>
-              <Heading fontSize="6xl" color="#0628A3">
+            <VStack rowGap={2}>
+              <Heading fontSize="4xl" color="#0628A3">
                 {mission.title}
               </Heading>
               <Text
                 fontWeight={400}
                 textAlign="center"
-                fontSize="2xl"
+                fontSize="xl"
                 width="80%"
               >
                 {mission.text}

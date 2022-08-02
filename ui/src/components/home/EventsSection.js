@@ -15,57 +15,11 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
 import { DateTime } from 'luxon';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getRenderDate } from '../helpers/eventsHelpers';
 import EventsSectionCard from './EventsSectionCards';
 
-const allEventsText = 'See All Events';
-
-function SampleNextArrow(props) {
-  const { onClick, index, maxSlide } = props;
-  return index !== maxSlide - 1 ? (
-    <div
-      style={{
-        display: 'block',
-        right: '0%',
-        position: 'absolute',
-        top: '40%',
-        zIndex: 8,
-        cursor: 'pointer',
-      }}
-      onClick={onClick}
-    >
-      <img
-        src={process.env.PUBLIC_URL + 'images/home/NextArrow.png'}
-        width="80%"
-        alt="Arrow"
-      />
-    </div>
-  ) : null;
-}
-
-function SamplePrevArrow(props) {
-  const { onClick, index } = props;
-  return index !== 0 ? (
-    <div
-      style={{
-        display: 'block',
-        left: '3%',
-        position: 'absolute',
-        top: '40%',
-        zIndex: 8,
-        cursor: 'pointer',
-      }}
-      onClick={onClick}
-    >
-      <img
-        src={process.env.PUBLIC_URL + 'images/home/PrevArrow.png'}
-        width="80%"
-        alt="Arrow"
-      />
-    </div>
-  ) : null;
-}
+const allEventsText = 'all events >';
 
 const EventsSection = () => {
   const [events, setEvents] = useState([]);
@@ -74,26 +28,13 @@ const EventsSection = () => {
 
   const marginRef = useRef(null);
 
-  function useWindowSize() {
-    const [windowSize, setWindowSize] = useState({
-      width: undefined,
-      height: undefined,
-    });
-    useEffect(() => {
-      function handleResize() {
-        setWindowSize({
-          width: window.innerWidth,
-          height: window.innerHeight,
-        });
-      }
-      window.addEventListener('resize', handleResize);
-      handleResize();
-      return () => window.removeEventListener('resize', handleResize);
-    }, []);
-    return windowSize;
-  }
-  const onArrowClick = (e) => {
-    setSlideIndex(e);
+  const sliderStyle = {
+    width: '100%',
+    position: 'relative',
+    left: '50%',
+    right: '50%',
+    marginLeft: '-50vw',
+    marginRight: '-50vw',
   };
   const populateData = async () => {
     try {
@@ -162,16 +103,7 @@ const EventsSection = () => {
     height: 'auto',
   };
   return (
-    <Flex
-      w="full"
-      h="auto"
-      direction="column"
-      background="#172848"
-      alignItems="center"
-      paddingTop="2em"
-      paddingBottom="2em"
-      boxSizing=""
-    >
+    <Flex w="full" h={['95vh', 'auto']} direction="column">
       <Container
         maxW="container.lg"
         justifyContent="center"
@@ -187,32 +119,20 @@ const EventsSection = () => {
             marginBottom="1em"
             justifyContent="space-between"
           >
-            <VStack alignItems="flex-start">
-              <Heading fontSize={['2em', '4xl']} fontWeight={600} color="white">
-                Events
-              </Heading>
-              <Text color="white">
-                Check out what's happening in HMCC of Hong Kong
-              </Text>
-            </VStack>
-            <Link
-              href="/events"
-              textDecoration="none"
-              _hover={{ textDecoration: 'none' }}
-            >
-              <Button
-                color="#A5CBFF"
-                background="transparent"
-                border="2px solid #A5CBFF"
-                borderRadius="7px"
-                display={{ base: 'none', md: 'block' }}
-                fontWeight="700"
-                padding="6px 24px"
-                boxSizing="content-box"
-              >
-                {allEventsText}
-              </Button>
-            </Link>
+            <Heading fontSize={['2em', '5xl']} color="black">
+              Upcoming Events
+            </Heading>
+            <chakra.hr
+              width="full"
+              color="black"
+              border="none"
+              height="2px"
+              bgColor="black"
+              display={['none', 'block']}
+            />
+            <Text color="black" display={['none', 'block']} fontWeight="900">
+              <Link href="/events">{allEventsText}</Link>
+            </Text>
           </HStack>
         </VStack>
       </Container>
@@ -224,29 +144,27 @@ const EventsSection = () => {
         alignItems="flex-start"
         height="auto"
         overflowX={['auto', 'auto', 'auto', 'auto', 'hidden']}
+        overflowY="hidden"
         whiteSpace="nowrap"
-        marginTop="2.5em"
-        marginBottom={['none', '3em']}
+        marginBottom={['none', '1.5em']}
         _hover={{
           overflowX: 'auto',
         }}
       >
         <Slider {...sliderSettings} style={sliderStyle}>
           {events.length > 0 &&
-            events.map((event, i) => {
-              return (
-                <EventsSectionCard
-                  width={['20em', '35em']}
-                  height="auto"
-                  event={event}
-                  key={'event' + i}
-                />
-              );
-            })}
+            events.map((event, i) => (
+              <EventsSectionCard
+                width={['15em', '35em']}
+                height="auto"
+                event={event}
+                key={'event' + i}
+              />
+            ))}
         </Slider>
       </Box>
       <Button
-        display={{ base: 'block', md: 'none' }}
+        display={['block', 'none']}
         width="15em"
         color="#A5CBFF"
         marginTop="2em"
