@@ -23,6 +23,10 @@ module.exports = {
     isPublished: {
       type: 'boolean',
       defaultsTo: false
+    },
+    isDeleted: {
+      type: 'boolean',
+      defaultsTo: false
     }
   },
 };

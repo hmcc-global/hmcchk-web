@@ -6,9 +6,11 @@ module.exports = {
 
   inputs: {
     name: {
-      required: true,
       type: 'string'
     },
+    isDeleted: {
+      type: 'boolean'
+    }
   },
 
   exits: {
@@ -17,14 +19,21 @@ module.exports = {
     },
   },
 
-  fn: async function({ name }, exits) {
+  fn: async function({ name, isDeleted }, exits) {
     const user = this.req.user.fullName;
-    sails.log.info(`${user}: Getting popUp: ${name}`);
 
     try {
-      const res = await PopUp.findOne({
-        name
-      });
+      let res;
+
+      if (name) {
+        sails.log.info(`${user}: Getting popUp: ${name}`);
+        res = await PopUp.findOne({
+          name
+        });
+      } else {
+        sails.log.info(`${user}: Getting all popUps`);
+        res = await PopUp.find({ isDeleted }).populateAll();
+      }
 
       if (!res) {
         return exits.nonSuccess(err);

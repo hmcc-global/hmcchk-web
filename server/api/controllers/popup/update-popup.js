@@ -30,7 +30,10 @@ module.exports = {
       type: 'json',
     },
     isPublished: {
-      type: boolean
+      type: 'boolean'
+    },
+    isDeleted: {
+      type: 'boolean'
     }
   },
 
@@ -40,7 +43,7 @@ module.exports = {
     },
   },
 
-  fn: async function({ name, title, imageLink, description, buttonTexts, buttonLinks, isPublished }, exits) {
+  fn: async function({ name, title, imageLink, description, buttonTexts, buttonLinks, isPublished, isDeleted }, exits) {
     const user = this.req.user.fullName;
     sails.log.info(`${user}: Updating popUp: ${name}`);
     sails.log.info(`Title: ${title}, ImageLink: ${imageLink}, Desc: ${description}, ButtonTexts: ${buttonTexts}, ButtonLinks: ${buttonLinks}`);
@@ -53,7 +56,8 @@ module.exports = {
         description,
         buttonTexts,
         buttonLinks,
-        isPublished
+        isPublished,
+        isDeleted
       });
 
       if (!existing) {
