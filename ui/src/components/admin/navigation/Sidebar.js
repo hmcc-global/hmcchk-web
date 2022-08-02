@@ -11,38 +11,27 @@ import {
   DrawerContent,
   Text,
   useDisclosure,
-  Button,
-  useColorMode,
 } from '@chakra-ui/react';
 import {
   FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiSettings,
+  FiUsers,
+  FiFileText,
   FiMenu,
-  FiXCircle,
+  FiBell
 } from 'react-icons/fi';
 
 const LinkItems = [
   { name: 'Home', icon: FiHome, path: '/admin/home' },
+  { name: 'Forms', icon: FiFileText, path: '/admin/forms' },
   {
     name: 'Users',
-    icon: FiTrendingUp,
+    icon: FiUsers,
     path: '/admin/users',
   },
-  { name: 'Forms', icon: FiCompass, path: '/admin/forms' },
-  { name: 'Giving', icon: FiStar, path: '/admin/giving' },
-  { name: 'Settings', icon: FiSettings, path: '/admin/settings' },
-  {
-    name: 'Log Out',
-    icon: FiXCircle,
-    path: '/admin/logout',
-  },
+  { name: 'Pop Up', icon: FiBell, path: '/admin/popup' },
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {
-  const { toggleColorMode } = useColorMode();
   return (
     <Box
       transition="3s ease"
@@ -70,9 +59,6 @@ const SidebarContent = ({ onClose, ...rest }) => {
           {link.name}
         </NavItem>
       ))}
-      <Button mx={10} onClick={toggleColorMode}>
-        Toggle Color Mode
-      </Button>
     </Box>
   );
 };

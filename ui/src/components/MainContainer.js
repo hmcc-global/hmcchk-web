@@ -28,8 +28,7 @@ import OnlineSermonContainer from './sermons/OnlineSermonContainer';
 import AdminHome from './admin/AdminHome';
 import AdminUser from './admin/users/AdminUser';
 import FormManager from './forms/FormManager';
-import AdminGiving from './admin/AdminGiving';
-import AdminLogout from './admin/AdminLogout';
+import AdminPopUpContainer from './admin/popup/AdminPopUpContainer';
 
 const MainContainer = () => {
   return (
@@ -200,15 +199,9 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/admin/giving"
-          permissions={['admin', 'stewardship']}
-          component={AdminGiving}
-        />
-        <PrivateRoute
-          exact
-          path="/admin/logout"
+          path="/admin/popup"
           permissions={['t3ch', 'admin', 'stewardship']}
-          component={AdminLogout}
+          component={AdminPopUpContainer}
         />
 
         <PrivateRoute path="*" permissions={['public']} component={NoMatch} />
