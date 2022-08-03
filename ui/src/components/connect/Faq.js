@@ -7,8 +7,8 @@ import {
   Box,
   Heading,
   Link,
-} from "@chakra-ui/react";
-import { AiFillPlusCircle } from "react-icons/ai";
+} from '@chakra-ui/react';
+import { AiFillPlusCircle } from 'react-icons/ai';
 
 const Faq = (props) => {
   // TODO: verify expand icon
@@ -28,7 +28,7 @@ const Faq = (props) => {
         </h4>
         <AccordionPanel pb={4}>
           LIFE Groups happen every Tuesday or Wednesday nights across the city
-          and university campuses! If you would like to join us, please sign-up{" "}
+          and university campuses! If you would like to join us, please sign-up{' '}
           <Link
             href="/events"
             fontStyle="italic"
@@ -86,7 +86,7 @@ const Faq = (props) => {
           <br />
           <br />
           If you’re not sure who the leader of the LIFE Group is, please contact
-          us by dropping an email{" "}
+          us by dropping an email{' '}
           <Link
             href="mailto:support@hongkong.hmcc.net"
             fontStyle="italic"
@@ -116,7 +116,7 @@ const Faq = (props) => {
           <br />
           Please contact the leader of each LIFE Group for more information
           about online arrangements. If you’re not sure who the leader of the
-          LIFE Group is, you can contact us by dropping an email{" "}
+          LIFE Group is, you can contact us by dropping an email{' '}
           <Link
             href="mailto:support@hongkong.hmcc.net"
             fontStyle="italic"
@@ -141,15 +141,33 @@ const Faq = (props) => {
           and check out the Instagram accounts of each campus ministry/ single
           adult (focus) ministry/ married couple (covenant) ministry. Feel free
           to send an Instagram direct message on the appropriate Instagram
-          profile and/or drop an email{" "}
+          profile and/or drop an email{' '}
           <Link
             href="mailto:support@hongkong.hmcc.net"
             fontStyle="italic"
             color="blue"
           >
             here
-          </Link>{" "}
+          </Link>{' '}
           to learn more.
+        </AccordionPanel>
+      </AccordionItem>
+
+      <AccordionItem border="1px solid #E2E8F0">
+        <h2>
+          <AccordionButton fontWeight={700} fontSize="lg" p={4}>
+            <Box flex="1" textAlign="left">
+              How do I learn more about HMCC?
+            </Box>
+            <AccordionIcon as={AiFillPlusCircle} w={7} h={7} />
+          </AccordionButton>
+        </h2>
+        <AccordionPanel pb={4}>
+          Head over to{' '}
+          <Link href="/about-us" fontStyle="italic" color="blue">
+            ABOUT US
+          </Link>{' '}
+          to learn more about our church!
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
