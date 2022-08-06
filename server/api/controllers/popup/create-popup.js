@@ -28,6 +28,10 @@ module.exports = {
     buttonLinks: {
       required: false,
       type: 'json',
+    },
+    isPublished: {
+      required: false,
+      type: 'boolean'
     }
   },
 
@@ -37,18 +41,32 @@ module.exports = {
     },
   },
 
-  fn: async function({ name, title, imageLink, description, buttonTexts, buttonLinks }, exits) {
+  fn: async function({ name, title, imageLink, description, buttonTexts, buttonLinks, isPublished }, exits) {
     const user = this.req.user.fullName;
     sails.log.info(`${user}: Creating popUp: ${name}`);
 
     try {
-      let res = await PopUp.create({
+      let res;
+
+      if (isPublished) {
+        res = await PopUp.update({ isPublished: true })
+        .set({
+          isPublished: false
+        });
+      }
+
+      if (buttonLinks.length > buttonTexts.length) {
+        throw('Number of button links cannot exceed number of button texts');
+      }
+
+      res = await PopUp.create({
         name,
         title,
         imageLink,
         description,
         buttonTexts,
-        buttonLinks
+        buttonLinks,
+        isPublished
       }).fetch();
 
       if (!res) {
