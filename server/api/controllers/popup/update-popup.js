@@ -5,6 +5,10 @@ module.exports = {
   description: 'Update Pop Up',
 
   inputs: {
+    id: {
+      required: true,
+      type: 'string'
+    },
     name: {
       required: true,
       type: 'string'
@@ -41,16 +45,36 @@ module.exports = {
     nonSuccess: {
       description: 'Error'
     },
+    duplicateError: {
+      description: 'Duplicate data found',
+      statusCode: 409,
+    }
   },
 
-  fn: async function({ name, title, imageLink, description, buttonTexts, buttonLinks, isPublished, isDeleted }, exits) {
+  fn: async function({ id, name, title, imageLink, description, buttonTexts, buttonLinks, isPublished, isDeleted }, exits) {
     const user = this.req.user.fullName;
     sails.log.info(`${user}: Updating popUp: ${name}`);
     sails.log.info(`Title: ${title}, ImageLink: ${imageLink}, Desc: ${description}, ButtonTexts: ${buttonTexts}, ButtonLinks: ${buttonLinks}`);
 
     try {
-      // TODO-aparedan: Do checking that others are not already published
-      const existing = await PopUp.updateOne({name}).set({
+
+      if (isDeleted && isPublished) {
+        isPublished = false;
+      }
+
+      if (buttonLinks.length > buttonTexts.length) {
+        throw('Number of button links cannot exceed number of button texts');
+      }
+
+      if (isPublished) {
+        res = await PopUp.update({ isPublished: true })
+        .set({
+          isPublished: false
+        });
+      }
+
+      const existing = await PopUp.updateOne({id}).set({
+        name,
         title,
         imageLink,
         description,
@@ -67,6 +91,9 @@ module.exports = {
       return exits.success(existing);
     } catch (err) {
       sails.log(err);
+      if (err.code === 'E_UNIQUE') {
+        return exits.duplicateError(err);
+      }
       return exits.nonSuccess(err);
     }
   }
