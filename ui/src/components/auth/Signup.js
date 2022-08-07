@@ -95,11 +95,23 @@ const Signup = (props) => {
   };
 
   const recaptchaStyle = {
-    marginTop: '20px',
-    transform: 'scale(0.77)',
-    webkitTransform: 'scale(0.77)',
-    transformOrigin: '0 0',
-    webkitTransformOrigin: '0 0',
+    '@media (max-width: 480px)': {
+      marginTop: '20px',
+      transform: 'scale(0.77)',
+      webkitTransform: 'scale(0.77)',
+      transformOrigin: '0px 0',
+      webkitTransformOrigin: '0 0',
+    },
+    '@media (max-width: 992px)': {
+      marginTop: '20px',
+      transform: 'scale(0.9)',
+      webkitTransform: 'scale(0.9)',
+      transformOrigin: '0px 0',
+      webkitTransformOrigin: '0 0',
+    },
+    '@media (max-width: 2560px)': {
+      marginTop: '20px',
+    },
   };
 
   const password = useRef({});
@@ -441,8 +453,8 @@ const Signup = (props) => {
               </VStack>
               <VStack align="center">
                 <ReCAPTCHA
-                  style={recaptchaStyle}
                   sitekey={process.env.REACT_APP_CAPTCHA}
+                  style={recaptchaStyle}
                 />
                 {error && (
                   <Text color="#F6AD55" fontSize={[14, 14, 14, 16]}>
