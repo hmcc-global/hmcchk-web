@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Flex,
   Link,
   Modal,
   ModalCloseButton,
@@ -9,7 +8,6 @@ import {
   ModalContent,
   AspectRatio,
   ModalOverlay,
-  useBreakpointValue,
   ModalHeader,
   ModalBody,
   ModalFooter,
@@ -21,9 +19,6 @@ import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 
 const PopupContainer = ({ props }) => {
   const popupData = props;
-  console.log(popupData);
-  console.log(popupData.button1Text.length);
-
   const [isOpen, setIsOpen] = useState(true);
   const onClose = () => {
     setIsOpen(false);
@@ -64,48 +59,36 @@ const PopupContainer = ({ props }) => {
           <ButtonGroup
             size="md"
             flexDirection={['column', 'row']}
-            spacing={[0, 2]}
+            spacing={[0, 0]}
+            display={'flex'}
+            flexWrap={'wrap'}
             w="100%"
             variant="outline"
             colorScheme="gray"
+            alignItems="center"
           >
-            {popupData.button1Text.length > 0 && (
-              <Button
-                flex={[false, 1]}
-                as={Link}
-                target="_blank"
-                href={popupData.button1Link ? popupData.button1Link : null}
-                style={{
-                  whiteSpace: 'normal',
-                  wordWrap: 'break-word',
-                }}
-                colorScheme={popupData.button1Color}
-              >
-                {popupData.button1Text}
-              </Button>
-            )}
-            {popupData.button2Text.length > 0 && (
-              <Button
-                flex={[false, 1]}
-                as={Link}
-                target="_blank"
-                href={popupData.button2Link ? popupData.button2Link : null}
-                colorScheme={popupData.button2Color}
-              >
-                {popupData.button2Text}
-              </Button>
-            )}
-            {popupData.button3Text.length > 0 && (
-              <Button
-                flex={[false, 1]}
-                as={Link}
-                target="_blank"
-                href={popupData.button3Link ? popupData.button3Link : null}
-                colorScheme={popupData.button3Color}
-              >
-                {popupData.button3Text}
-              </Button>
-            )}
+            {popupData.buttonText.length > 0 &&
+              popupData.buttonText.map((buttonTextItem, i) => (
+                <Button
+                  my="1"
+                  marginRight="2"
+                  minW={['18em', '10em']}
+                  maxW={['30em', '11em']}
+                  flex={[false, 1]}
+                  as={Link}
+                  target="_blank"
+                  href={
+                    popupData.buttonLink[i] ? popupData.buttonLink[i] : null
+                  }
+                  style={{
+                    whiteSpace: 'normal',
+                    wordWrap: 'break-word',
+                  }}
+                  colorScheme="teal"
+                >
+                  {buttonTextItem}
+                </Button>
+              ))}
           </ButtonGroup>
         </ModalFooter>
       </ModalContent>
