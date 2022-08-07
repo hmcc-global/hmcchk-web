@@ -12,7 +12,7 @@ const lifestageList = [
   'Undergraduate',
   'Postgraduate',
   'Single Adult',
-  'Covenant',
+  'Covenant (Married Couples, Single Parents, Widowed, etc)',
 ];
 
 const ministryTeamList = [

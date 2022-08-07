@@ -5,6 +5,10 @@
     "prettier": "2.3.2"
   },
   "dependencies": {
+    "ag-grid-community": "^28.0.2",
+    "ag-grid-react": "^28.0.0",
+    "date-fns": "^2.29.1",
+    "react-datepicker": "^4.8.0",
     "react-google-recaptcha": "^2.1.0",
     "react-slick": "^0.28.1"
   }

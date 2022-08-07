@@ -137,17 +137,16 @@ const MainMenu = ({ login, onClose }) => {
                 >
                   <Button marginBottom="5" width="100%">
                     <LinkOverlay href="/profile" onClick={onClose}>
-                      My Profile
+                      MY PROFILE
                     </LinkOverlay>
                   </Button>
                   <Button
                     onClick={onLogout}
-                    onClick={onClose}
                     marginBottom="5"
                     width="100%"
                     style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
                   >
-                    <LinkOverlay href="/">Log Out</LinkOverlay>
+                    <LinkOverlay href="/">LOG OUT</LinkOverlay>
                   </Button>
                   <Button
                     width="100%"
@@ -173,8 +172,16 @@ const MainMenu = ({ login, onClose }) => {
                 >
                   <Button marginBottom="5" width="100%">
                     <LinkOverlay href="/login" onClick={onClose}>
-                      Login or Sign up
+                      LOGIN
                     </LinkOverlay>
+                  </Button>
+                  <Button
+                    onClick={onClose}
+                    marginBottom="5"
+                    width="100%"
+                    style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
+                  >
+                    <LinkOverlay href="/signup">SIGN UP</LinkOverlay>
                   </Button>
                   <Button
                     width="100%"
@@ -369,7 +376,7 @@ const MainMenu = ({ login, onClose }) => {
                     >
                       <Button marginBottom="5" width="100%">
                         <Link href="/profile" onClick={onClose}>
-                          My Profile
+                          MY PROFILE
                         </Link>
                       </Button>
                       <Button
@@ -381,7 +388,7 @@ const MainMenu = ({ login, onClose }) => {
                           marginInlineStart: '0',
                         }}
                       >
-                        Log Out
+                        LOG OUT
                       </Button>
                       <Button
                         width="100%"
@@ -409,7 +416,20 @@ const MainMenu = ({ login, onClose }) => {
                     >
                       <Button marginBottom="5" width="100%">
                         <Link href="/login" onClick={onClose}>
-                          Login or Sign up
+                          LOGIN
+                        </Link>
+                      </Button>
+                      <Button
+                        onClick={onLogout}
+                        marginBottom="5"
+                        width="100%"
+                        style={{
+                          WebkitMarginStart: '0',
+                          marginInlineStart: '0',
+                        }}
+                      >
+                        <Link href="/signup" onClick={onClose}>
+                          SIGNUP
                         </Link>
                       </Button>
                       <Button
