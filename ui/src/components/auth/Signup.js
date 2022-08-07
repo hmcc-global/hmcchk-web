@@ -96,9 +96,10 @@ const Signup = (props) => {
 
   const recaptchaStyle = {
     marginTop: '20px',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    position: 'relative',
+    transform: 'scale(0.77)',
+    webkitTransform: 'scale(0.77)',
+    transformOrigin: '0 0',
+    webkitTransformOrigin: '0 0',
   };
 
   const password = useRef({});
@@ -199,10 +200,11 @@ const Signup = (props) => {
                 h={['4.5vh', '5.5vh', '6.5vh', '7.5vh', '8.5vh']}
                 src={`${process.env.PUBLIC_URL}/images/ripple.png`}
                 alt="Logo of HMCC"
+                style={{ filter: 'invert(0.6)' }}
               />
               <Text
                 fontWeight="700"
-                fontSize={['0.65rem', '0.8rem', '0.95rem', '1rem', '1.05rem']}
+                fontSize={['0.7rem', '0.8rem', '0.95rem', '1rem', '1.05rem']}
                 display="flex"
                 color="#656565"
               >
@@ -210,7 +212,7 @@ const Signup = (props) => {
               </Text>
               <Text
                 fontWeight="800"
-                fontSize={['1.25rem', '1.75rem', '2rem', '2.125rem', '2.5rem']}
+                fontSize={['1.75rem', '2rem', '2.25rem', '2.5rem', '2.75rem']}
                 display="flex"
                 color="#2D3748"
               >
@@ -245,7 +247,7 @@ const Signup = (props) => {
                 />
                 {errors.email && !googleEmail && (
                   <Text
-                    color="#FED7D7"
+                    color="#ED4337"
                     fontWeight="bold"
                     fontSize={[12, 12, 12, 14]}
                   >
@@ -275,7 +277,7 @@ const Signup = (props) => {
                     />
                     {errors.password && (
                       <Text
-                        color="#FED7D7"
+                        color="#ED4337"
                         fontWeight="bold"
                         fontSize={[12, 12, 12, 14]}
                       >
@@ -316,7 +318,7 @@ const Signup = (props) => {
                     />
                     {errors.rePassword && (
                       <Text
-                        color="#FED7D7"
+                        color="#ED4337"
                         fontWeight="bold"
                         fontSize={[12, 12, 12, 14]}
                       >
@@ -338,7 +340,7 @@ const Signup = (props) => {
                 />
                 {errors.firstName && (
                   <Text
-                    color="#FED7D7"
+                    color="#ED4337"
                     fontWeight="bold"
                     fontSize={[12, 12, 12, 14]}
                   >
@@ -358,7 +360,7 @@ const Signup = (props) => {
                 />
                 {errors.lastName && (
                   <Text
-                    color="#FED7D7"
+                    color="#ED4337"
                     fontWeight="bold"
                     fontSize={[12, 12, 12, 14]}
                   >
@@ -383,7 +385,7 @@ const Signup = (props) => {
                 />
                 {errors.phoneNumber && (
                   <Text
-                    color="#FED7D7"
+                    color="#ED4337"
                     fontWeight="bold"
                     fontSize={[12, 12, 12, 14]}
                   >
@@ -407,7 +409,7 @@ const Signup = (props) => {
 
                 {errors.country && (
                   <Text
-                    color="#FED7D7"
+                    color="#ED4337"
                     fontWeight="bold"
                     fontSize={[12, 12, 12, 14]}
                   >
@@ -429,7 +431,7 @@ const Signup = (props) => {
                 </Select>
                 {errors.lifestage && (
                   <Text
-                    color="#FED7D7"
+                    color="#ED4337"
                     fontWeight="bold"
                     fontSize={[12, 12, 12, 14]}
                   >
@@ -440,7 +442,6 @@ const Signup = (props) => {
               <VStack align="center">
                 <ReCAPTCHA
                   style={recaptchaStyle}
-                  size="normal"
                   sitekey={process.env.REACT_APP_CAPTCHA}
                 />
                 {error && (
@@ -456,7 +457,7 @@ const Signup = (props) => {
                   _hover={{ opacity: '0.75' }}
                   h={['40px', '40px', '60px', '60px']}
                   fontSize={['0.675rem', '0.75rem', '1rem', '1rem']}
-                  >
+                >
                   Sign Up
                 </Button>
               </VStack>

@@ -38,6 +38,7 @@ const SignupContainer = (props) => {
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'stretch',
+    margin: '5px 0px',
     padding: '18px',
     boxSizing: 'border-box',
     backdropFilter: 'blur(6px)',
@@ -85,10 +86,11 @@ const SignupContainer = (props) => {
                 h={['5vh', '6vh', '7vh', '8vh', '10vh']}
                 src={`${process.env.PUBLIC_URL}/images/ripple.png`}
                 alt="Logo of HMCC"
+                style={{ filter: 'invert(0.6)' }}
               />
               <Text
                 fontWeight="700"
-                fontSize={['0.65rem', '0.8rem', '0.95rem', '1rem', '1.05rem']}
+                fontSize={['0.7rem', '0.8rem', '0.95rem', '1rem', '1.05rem']}
                 display="flex"
                 color="#656565"
               >
@@ -96,7 +98,7 @@ const SignupContainer = (props) => {
               </Text>
               <Text
                 fontWeight="800"
-                fontSize={['1.25rem', '1.5rem', '1.75rem', '2rem', '2.25rem']}
+                fontSize={['1.75rem', '2rem', '2.25rem', '2.5rem', '2.75rem']}
                 display="flex"
                 color="#2D3748"
               >

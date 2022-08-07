@@ -4,7 +4,9 @@ import GoogleLogin from 'react-google-login';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { signin } from '../../reducers/userSlice';
+import { updateUsername } from '../../reducers/usernameSlice';
 import { ArrowBackIcon } from '@chakra-ui/icons';
+
 import {
   Box,
   VStack,
@@ -19,7 +21,7 @@ import {
 const LoginContainer = (props) => {
   const [invalidLogin, setInvalidLogin] = useState('');
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const state = useSelector((state) => state);
   const {
     register,
     handleSubmit,
@@ -33,6 +35,7 @@ const LoginContainer = (props) => {
         password: password,
       });
       dispatch(signin(data));
+      dispatch(updateUsername('TESTING'));
       setInvalidLogin('');
       window.location.reload();
     } catch (err) {
@@ -48,6 +51,7 @@ const LoginContainer = (props) => {
       tokenId: tokenId,
     });
     dispatch(signin(data));
+    dispatch(updateUsername('TESTING'));
     setInvalidLogin('');
     window.location.reload();
   };
@@ -131,6 +135,7 @@ const LoginContainer = (props) => {
                 h={['5vh', '6vh', '7vh', '8vh', '9vh']}
                 src={`${process.env.PUBLIC_URL}/images/ripple.png`}
                 alt="Logo of HMCC"
+                style={{ filter: 'invert(0.6)' }}
               />
               <Text
                 fontWeight="700"
