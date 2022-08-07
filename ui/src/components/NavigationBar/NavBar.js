@@ -190,14 +190,14 @@ const NavBar = (props) => {
                     <Flex align="center" justify="space-between">
                       <Button
                         textAlign="center"
-                        bgColor="transparent"
+                        bgColor="rgba(72, 72, 72, 1)"
                         borderColor="rgba(68, 68, 68, 1)"
                         borderWidth="medium"
                         h="3.5vh"
                         marginLeft="10px"
                         px={{ md: '2', lg: '5' }}
-                        py="3"
-                        _hover={{ backgroundColor: 'rgba(68, 68, 68, 1)' }}
+                        py="4"
+                        _hover={{ backgroundColor: 'rgba(56, 56, 56, 1)' }}
                         onClick={onLogout}
                       >
                         <LinkOverlay href="/">
@@ -216,14 +216,14 @@ const NavBar = (props) => {
                       </Button>
                       <Button
                         textAlign="center"
-                        bgColor="transparent"
+                        bgColor="rgba(0, 88, 210, 1)"
                         borderColor="rgba(0, 88, 210, 1)"
                         borderWidth="medium"
                         h="3.5vh"
                         marginLeft="10px"
                         px={{ md: '2', lg: '5' }}
-                        py="3"
-                        _hover={{ backgroundColor: 'rgba(0, 88, 210, 1)' }}
+                        py="4"
+                        _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
                         onClick={onClose}
                       >
                         <Link href="/profile">
@@ -245,14 +245,14 @@ const NavBar = (props) => {
                     <Flex align="center" justify="space-between">
                       <Button
                         textAlign="center"
-                        bgColor="transparent"
+                        bgColor="rgba(72, 72, 72, 1)"
                         borderColor="rgba(68, 68, 68, 1)"
                         borderWidth="medium"
                         h="3.5vh"
                         marginLeft="10px"
                         px={{ md: '2', lg: '5' }}
-                        py="3"
-                        _hover={{ backgroundColor: 'rgba(68, 68, 68, 1)' }}
+                        py="4"
+                        _hover={{ backgroundColor: 'rgba(56, 56, 56, 1)' }}
                         onClick={onClose}
                       >
                         <Link href="/signup">
@@ -272,15 +272,15 @@ const NavBar = (props) => {
 
                       <Button
                         textAlign="center"
-                        bgColor="transparent"
+                        bgColor="rgba(0, 88, 210, 1)"
                         borderColor="rgba(0, 88, 210, 1)"
                         borderWidth="medium"
                         h="3.5vh"
                         marginLeft="10px"
                         px={{ md: '2', lg: '5' }}
-                        py="3"
-                        _hover={{ backgroundColor: 'rgba(0, 88, 210, 1)' }}
-                        onClick={onClose}
+                        py="4"
+                        _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
+                        onClick={{ onClose }}
                       >
                         <Link href="/login">
                           <Text
