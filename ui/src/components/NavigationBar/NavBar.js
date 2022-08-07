@@ -112,7 +112,7 @@ const NavBar = (props) => {
                     Harvest Mission Community Church
                   </Text>
                 </Link>
-                {currDate === 'Sat' && !isOnlineSermon ? (
+                {currDate === 'Sun' && !isOnlineSermon ? (
                   <Link href="/online" style={{ lineHeight: '0' }}>
                     <Button
                       h="6"
