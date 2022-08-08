@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
 import GoogleLogin from 'react-google-login';
 import { useForm } from 'react-hook-form';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { signin } from '../../reducers/userSlice';
-import { updateUsername } from '../../reducers/usernameSlice';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 
 import {
@@ -21,7 +20,6 @@ import {
 const LoginContainer = (props) => {
   const [invalidLogin, setInvalidLogin] = useState('');
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
   const {
     register,
     handleSubmit,
@@ -35,7 +33,6 @@ const LoginContainer = (props) => {
         password: password,
       });
       dispatch(signin(data));
-      dispatch(updateUsername('TESTING'));
       setInvalidLogin('');
       window.location.reload();
     } catch (err) {
@@ -51,7 +48,6 @@ const LoginContainer = (props) => {
       tokenId: tokenId,
     });
     dispatch(signin(data));
-    dispatch(updateUsername('TESTING'));
     setInvalidLogin('');
     window.location.reload();
   };
@@ -179,7 +175,7 @@ const LoginContainer = (props) => {
                 />
                 {errors.email && (
                   <Text
-                    color="#FED7D7"
+                    color="#ED4337"
                     fontWeight="bold"
                     fontSize={[12, 12, 12, 14]}
                   >
@@ -199,7 +195,7 @@ const LoginContainer = (props) => {
                 />
                 {errors.password && (
                   <Text
-                    color="#FED7D7"
+                    color="#ED4337"
                     fontWeight="bold"
                     fontSize={[12, 12, 12, 14]}
                   >
@@ -208,7 +204,7 @@ const LoginContainer = (props) => {
                 )}
                 {invalidLogin ? (
                   <Text
-                    color="#FED7D7"
+                    color="#ED4337"
                     fontWeight="bold"
                     fontSize={[12, 12, 12, 14]}
                   >

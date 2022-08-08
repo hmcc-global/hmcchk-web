@@ -20,7 +20,7 @@ import {
   ModalOverlay,
   ModalContent,
   ModalFooter,
-  useMediaQuery
+  useMediaQuery,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
 import { lifestageList, countryList } from '../helpers/lists';
@@ -36,12 +36,7 @@ const Signup = (props) => {
 
   const googleEmail = props.history.location.state?.email;
   const googleFullName = props.history.location.state?.fullName;
-  const [isLargerThan1080, isLargerThan992, isLargerThan480] = useMediaQuery(
-    '(min-width: 1080px)',
-    '(min-width: 992px)',
-    '(min-width: 480px)'
-  );
-
+  const [isLargerThan480] = useMediaQuery('(min-width: 480px)');
 
   const [error, setError] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
@@ -105,27 +100,17 @@ const Signup = (props) => {
     marginTop: '20px',
     transform: 'scale(0.77)',
     webkitTransform: 'scale(0.77)',
-    transformOrigin: '0px 0',
-    webkitTransformOrigin: '0 0',
-  };
-
-  const recaptcha992 = {
-    marginTop: '20px',
-    transform: 'scale(0.9)',
-    webkitTransform: 'scale(0.9)',
-    transformOrigin: '0px 0',
-    webkitTransformOrigin: '0 0',
+    transformOrigin: '151px 0px',
+    webkitTransformOrigin: '151px 0px',
   };
 
   const recaptcha1080 = {
     marginTop: '20px',
-  }
+  };
 
   const recaptchaStyle = () => {
-    if (isLargerThan1080) {
+    if (isLargerThan480) {
       return recaptcha1080;
-    } else if (isLargerThan992) {
-      return recaptcha992;
     }
     return recaptcha480;
   };

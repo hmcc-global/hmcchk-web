@@ -12,12 +12,15 @@ import SidebarWithHeader from '../admin/navigation/Sidebar';
 const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
   const user = useSelector((state) => state.user);
   const [userObj, setUserObj] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const checkIfTokenExists = async (toVerify) => {
     try {
+      setIsLoading(true);
       const { data } = await axios.post('/api/auth/verify-token', {
         token: toVerify,
       });
+      setIsLoading(false);
       updateAxiosClient(toVerify);
       return data;
     } catch (err) {
@@ -25,6 +28,7 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
         localStorage.clear();
         window.location.reload();
       }
+      setIsLoading(false);
       return {};
     }
   };
@@ -53,7 +57,7 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
     );
 
   return (
-    userObj != null && (
+    !isLoading && userObj != null && (
       <Route
         {...rest}
         render={(props) => {

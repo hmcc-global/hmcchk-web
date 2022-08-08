@@ -25,7 +25,8 @@ import {
   useDisclosure,
   HStack,
 } from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { signout } from '../../reducers/userSlice';
 import { customAxios as axios } from '../helpers/customAxios';
 import MainMenu from './MainMenu';
 import { useHistory } from 'react-router-dom';
@@ -35,6 +36,7 @@ const NavBar = (props) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const user = useSelector((state) => state.user);
   const [username, setUsername] = useState('');
+  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const liveScStyle = {
@@ -46,6 +48,7 @@ const NavBar = (props) => {
   };
 
   const onLogout = () => {
+    dispatch(signout());
     localStorage.clear();
     window.location.reload();
   };
@@ -57,8 +60,14 @@ const NavBar = (props) => {
     return data;
   };
 
-  useEffect(async () => {
-    const userObj = await getUserObj(user);
+  useEffect(() => {
+    const fetch = async () => {
+      const userObj = await getUserObj(user);
+      return userObj;
+    };
+
+    const userObj = fetch();
+
     if (userObj) {
       const { fullName } = userObj;
       setUsername(fullName.split(' ')[0]);
@@ -66,7 +75,7 @@ const NavBar = (props) => {
     } else {
       setLoggedIn(false);
     }
-  }, []);
+  }, [user]);
 
   let currDate = new Date().toDateString().substr(0, 3);
 
