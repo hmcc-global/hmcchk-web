@@ -84,6 +84,7 @@ module.exports.routes = {
 
   // PopUp APIs
   'get /api/popup/get': 'popup/get-popup',
+  'get /api/popup/get-published': 'popup/get-published-popup',
   'post /api/popup/create': 'popup/create-popup',
   'put /api/popup/update': 'popup/update-popup',
 
