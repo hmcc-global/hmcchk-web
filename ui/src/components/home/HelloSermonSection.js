@@ -120,12 +120,13 @@ const HelloSermonSection = () => {
     <>
       <Flex
         w="full"
-        h={{ base: 'auto', md: 'auto' }}
+        h={{ base: 'auto', md: '80vh', lg:"90vh" }}
         justify="center"
         background={{
           base: '',
           md: ' linear-gradient(270deg, #172848 0%, #172848 50%, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%)',
         }}
+        id="hello"
       >
         <Box
           justifyContent="space-between"
@@ -135,7 +136,7 @@ const HelloSermonSection = () => {
         >
           <Box
             width={{ base: '100%', md: '50%' }}
-            h={{ base: '80vh', md: 'auto' }}
+            h={{ base: '70vh', md: 'auto' }}
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -160,7 +161,7 @@ const HelloSermonSection = () => {
           </Box>
           <Box
             width={{ base: '100%', md: '50%' }}
-            h={{ base: '80vh', md: 'auto' }}
+            h={{ base: '75vh', md: 'auto' }}
             background={{ base: '#172848', md: '' }}
             style={{
               display: 'flex',
@@ -173,6 +174,7 @@ const HelloSermonSection = () => {
               <Heading color="white" style={{ alignSelf: 'flex-start' }}>
                 Latest Sermon
               </Heading>
+              <Box>
               <Image
                 src={
                   currentSermon
@@ -181,20 +183,20 @@ const HelloSermonSection = () => {
                 }
                 objectFit="cover"
                 borderRadius="10px"
-              />
+              /></Box>
               <VStack style={{ alignSelf: 'flex-start' }}>
-                <Heading color="#A5CBFF">
+                <Heading width="100%" color="#A5CBFF" display="flex" justifyContent="flex-start">
                   {currentSermon
                     ? isSunday
                       ? '[LIVE NOW] ' + currentSermon.sermonSeries[0].name
                       : '' + currentSermon.sermonSeries[0].name
                     : ''}
                 </Heading>
-                <Text style={{ alignSelf: 'flex-start' }} color="white">
+                <Text style={{ alignSelf: 'flex-start', marginTop:"0px" }} color="white">
                   {currentDate}
                 </Text>
               </VStack>
-              <Text color="white">
+              <Text fontSize="14px" color="white">
                 {currentSermon ? currentSermon.sermonDesc : ''}
               </Text>
 
