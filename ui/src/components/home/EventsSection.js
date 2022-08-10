@@ -14,7 +14,7 @@ import {
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import axios from 'axios';
+import { customAxios as axios } from '../helpers/customAxios';
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
 import { getRenderDate } from '../helpers/eventsHelpers';

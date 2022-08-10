@@ -2,7 +2,6 @@ import {
   Flex,
   VStack,
   Stack,
-  Link,
   Image,
   useBreakpointValue,
   Heading,
@@ -10,7 +9,7 @@ import {
   Text,
   Box,
 } from '@chakra-ui/react';
-
+import { HashLink } from 'react-router-hash-link';
 // TODO figure out a way to have a central location to edit photo url, blurbs etc.
 // sm = 30em, md = 48em, lg = 62em, xl = 80em, 2xl = "96em"
 // sm = 480px, md = 768px, lg = 992px, xl = 1280px, 2xl = "1536px"
@@ -66,49 +65,72 @@ const HeroSection = () => {
                 {heroText}
               </Heading>
               <Image src={process.env.PUBLIC_URL + '/images/home/ripple.png'} />
-              <Stack w="full" align="center" marginTop="-1rem !important">
-                <Heading
-                  color="white"
-                  as="h4"
-                  textAlign="center"
-                  whiteSpace="pre-wrap"
-                  alignSelf="center"
-                  fontSize={{ base: '1em', md: '1.5em' }}
-                >
-                  Harvest Mission Community Church
-                </Heading>
-                <Heading
-                  color="white"
-                  as="h4"
-                  fontSize={{ base: '1em', md: '1.5em' }}
-                  textAlign="center"
-                  whiteSpace="pre-wrap"
-                  alignSelf="center"
-                >
-                  of Hong Kong
-                </Heading>
+              <Stack
+                w="full"
+                align="center"
+                marginTop="-1rem !important"
+                rowGap={12}
+              >
+                <Box>
+                  <Heading
+                    color="white"
+                    as="h4"
+                    textAlign="center"
+                    whiteSpace="pre-wrap"
+                    alignSelf="center"
+                    fontSize={{ base: '1em', md: '1.5em' }}
+                  >
+                    Harvest Mission Community Church
+                  </Heading>
+                  <Heading
+                    color="white"
+                    as="h4"
+                    fontSize={{ base: '1em', md: '1.5em' }}
+                    textAlign="center"
+                    whiteSpace="pre-wrap"
+                    alignSelf="center"
+                  >
+                    of Hong Kong
+                  </Heading>
+                </Box>
                 <Box
                   style={{
-                    background: 'rgba(23, 40, 72, 0.39)',
+                    background: 'rgba(27, 53, 102, 0.8)',
                     padding: '8px',
                   }}
-                  display={{ base: 'none', md: 'flex' }}
                 >
                   <Text
                     color="white"
+                    display={{ base: 'none', md: 'flex' }}
                     style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
                   >
-                    Every Sunday at 10AM (HKT) @Organize, Kwun Tong
+                    Every Sunday at 10AM HKT | Organize, Kwun Tong & Online
+                  </Text>
+                  <Text
+                    color="white"
+                    display={{ base: 'flex', md: 'none' }}
+                    justifyContent="center"
+                    style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
+                  >
+                    Every Sunday at 10AM HKT
+                  </Text>
+                  <Text
+                    color="white"
+                    justifyContent="center"
+                    display={{ base: 'flex', md: 'none' }}
+                    style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
+                  >
+                    Organize, Kwun Tong & Online
                   </Text>
                 </Box>
               </Stack>
             </Stack>
             <Stack position="relative" bottom="4%" width="35px" height="35px">
-              <Link href="/">
+              <HashLink smooth to="/#hello">
                 <Image
                   src={process.env.PUBLIC_URL + '/images/home/DownArrow.png'}
                 />
-              </Link>
+              </HashLink>
             </Stack>
           </VStack>
         </Container>

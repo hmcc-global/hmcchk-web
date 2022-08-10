@@ -13,7 +13,7 @@ const AboutSection = () => {
   return (
     <Flex
       w="full"
-      h={{ base: '100vh', md: 'auto' }}
+      h={{ base: '75vh', md: 'auto' }}
       justify="center"
       bgImage={process.env.PUBLIC_URL + '/images/home/about-us-bg.png'}
       bgSize="cover"
@@ -21,7 +21,7 @@ const AboutSection = () => {
     >
       <Flex
         w="full"
-        h={{ base: '100vh', md: '80vh' }}
+        h={{ base: '75vh', md: '60vh' }}
         justify="center"
         style={{ backdropFilter: 'blur(7px)' }}
       >
