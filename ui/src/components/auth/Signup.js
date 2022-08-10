@@ -92,12 +92,11 @@ const Signup = (props) => {
     backdropFilter: 'blur(6px)',
     borderRadius: '12px',
     fontWeight: 'bold',
-    marginTop: '20px',
-    marginBottom: '20px',
+    marginBottom: '20px'
   };
 
   const recaptcha480 = {
-    marginTop: '20px',
+    margin: '20px 0px 0px',
     transform: 'scale(0.77)',
     webkitTransform: 'scale(0.77)',
     transformOrigin: '151px 0px',
@@ -105,7 +104,7 @@ const Signup = (props) => {
   };
 
   const recaptcha1080 = {
-    marginTop: '20px',
+    margin: '20px 0px',
   };
 
   const recaptchaStyle = () => {
@@ -176,12 +175,14 @@ const Signup = (props) => {
       </Modal>
 
       <Box
+        minH="100vh"
         w="full"
-        bgImage={`linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${
-          process.env.PUBLIC_URL + '/images/home/connect.png'
+        bgImage={`url(${
+          process.env.PUBLIC_URL + '/images/default-hk-background.jpg'
         })`}
         bgRepeat="no-repeat"
         bgAttachment="fixed"
+        bgSize="cover"
       >
         <Flex
           flexDirection="column"

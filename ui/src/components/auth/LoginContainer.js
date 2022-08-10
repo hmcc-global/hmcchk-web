@@ -70,7 +70,7 @@ const LoginContainer = (props) => {
     borderRadius: '12px',
     flex: 'none',
     flexGrow: '0',
-    margin: '4px 0px',
+    margin: '5px 0px',
     padding: '15px',
     fontSize: 'inherit',
     fontWeight: '500',
@@ -95,8 +95,8 @@ const LoginContainer = (props) => {
       <Box
         minH="100vh"
         w="full"
-        bgImage={`linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${
-          process.env.PUBLIC_URL + '/images/home/connect.png'
+        bgImage={`url(${
+          process.env.PUBLIC_URL + '/images/default-hk-background.jpg'
         })`}
         bgRepeat="no-repeat"
         bgAttachment="fixed"

@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
 import GoogleLogin from 'react-google-login';
-import { useForm } from 'react-hook-form';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Box, VStack, Flex, Image, Text, Button, Link } from '@chakra-ui/react';
 
 const SignupContainer = (props) => {
   const [invalidLogin, setInvalidLogin] = useState('');
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
   const { history } = props;
 
   const onGoogleSuccessSignup = async ({ tokenId }) => {
@@ -38,7 +35,6 @@ const SignupContainer = (props) => {
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'stretch',
-    margin: '5px 0px',
     padding: '18px',
     boxSizing: 'border-box',
     backdropFilter: 'blur(6px)',
@@ -51,12 +47,14 @@ const SignupContainer = (props) => {
   return (
     <>
       <Box
+        minH="100vh"
         w="full"
-        bgImage={`linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${
-          process.env.PUBLIC_URL + '/images/home/connect.png'
+        bgImage={`url(${
+          process.env.PUBLIC_URL + '/images/default-hk-background.jpg'
         })`}
         bgRepeat="no-repeat"
         bgAttachment="fixed"
+        bgSize="cover"
       >
         <Flex
           flexDirection="column"
@@ -115,6 +113,7 @@ const SignupContainer = (props) => {
                   _hover={{ opacity: '0.75' }}
                   background="#0058D2"
                   h={['40px', '40px', '55px', '55px']}
+                  marginTop="0"
                 >
                   SIGN UP WITH PERSONAL EMAIL
                 </Button>
