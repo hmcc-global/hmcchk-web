@@ -14,7 +14,7 @@ const HomeContainer = (props) => {
   const [popupInfo, setPopupInfo] = useState([]);
   const getData = async () => {
     try {
-      const { data } = await axios.get('/api/popup/get');
+      const { data } = await axios.get('/api/popup/get-published');
       setPopupInfo(data);
     } catch (err) {
       console.log(err);
