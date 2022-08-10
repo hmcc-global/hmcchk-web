@@ -71,7 +71,7 @@ const PopupContainer = ({ props }) => {
               popupData.buttonText.map((buttonTextItem, i) => (
                 <Button
                   my="1"
-                  marginRight="2"
+                  marginRight={['0', '4']}
                   minW={['18em', '10em']}
                   maxW={['30em', '11em']}
                   flex={[false, 1]}
