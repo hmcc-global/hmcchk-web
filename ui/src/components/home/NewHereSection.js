@@ -13,6 +13,7 @@ import {
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useState } from 'react';
 import axios from 'axios';
+import BackgroundElements from './BackgroundElements';
 
 const NewHereSection = () => {
   const [name, setName] = useState('');
@@ -61,11 +62,12 @@ const NewHereSection = () => {
     <>
       <Flex
         w={'full'}
-        h={['100vh', '90vh']}
+        h={['110vh', '90vh']}
         justify="center"
         background="#F9F9F9"
         style={{ backdropFilter: 'blur(7px)' }}
       >
+        <BackgroundElements />
         <Container
           maxW="container.xl"
           justifyContent="center"
