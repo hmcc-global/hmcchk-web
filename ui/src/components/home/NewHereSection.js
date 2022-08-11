@@ -60,8 +60,8 @@ const NewHereSection = () => {
   return (
     <>
       <Flex
-        w="full"
-        h="90vh"
+        w={'full'}
+        h={['100vh', '90vh']}
         justify="center"
         background="#F9F9F9"
         style={{ backdropFilter: 'blur(7px)' }}
@@ -70,24 +70,24 @@ const NewHereSection = () => {
           maxW="container.xl"
           justifyContent="center"
           alignItems="center"
-          pt={'100'}
+          pt={['30', '100']}
         >
           <Stack
             direction={['column', 'row']}
             color="white"
             justify="center"
             alignItems="center"
-            spacing={'70'}
+            spacing={['10', '70']}
           >
             <VStack alignItems={'left'}>
-              <Heading fontSize={['1.3em', '3em']} color="#505050">
+              <Heading fontSize={['2em', '3em']} color="#505050">
                 New here?
               </Heading>
-              <Heading fontSize={['1.3em', '3em']} color="#0628A3">
+              <Heading fontSize={['2em', '3em']} color="#0628A3">
                 Connect with us
               </Heading>
             </VStack>
-            <Box w={'30%'} borderWidth={'1px'} px={5} py={10} borderRadius={10}>
+            <Box borderWidth={'1px'} px={5} pt={10} borderRadius={[5, 10]}>
               <form onSubmit={onSubmit}>
                 <VStack spacing={[4, 2.5]} alignItems="center">
                   <FormControl id="name" isRequired w={['85%', '100%']}>
