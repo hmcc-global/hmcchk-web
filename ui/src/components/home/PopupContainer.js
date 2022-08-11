@@ -27,14 +27,16 @@ const PopupContainer = ({ props }) => {
     <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent borderRadius="20">
-        <AspectRatio mb="5" width="100%" ratio={16 / 9}>
-          <Image
-            borderTopLeftRadius="20"
-            borderTopRightRadius="20"
-            src={popupData.image}
-            objectFit="cover"
-          />
-        </AspectRatio>
+        {popupData.image && (
+          <AspectRatio mb="5" width="100%" ratio={16 / 9}>
+            <Image
+              borderTopLeftRadius="20"
+              borderTopRightRadius="20"
+              src={popupData.image}
+              objectFit="cover"
+            />
+          </AspectRatio>
+        )}
         <ModalCloseButton />
         {popupData.title && (
           <ModalHeader
