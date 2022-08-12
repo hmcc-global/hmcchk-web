@@ -22,7 +22,7 @@ const sections = [
   'Our Strategy',
   'Our Staff',
   'Beliefs',
-  'HMI',
+  'Our Heart for Missions',
 ];
 
 const AboutUsContainer = (props) => {

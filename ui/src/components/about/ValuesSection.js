@@ -17,19 +17,6 @@ const ValuesSection = (props) => {
 
   return (
     <>
-      <Center padding="5">
-        <Heading
-          as="h2"
-          fontSize={['4xl', '6xl']}
-          fontWeight={700}
-          color="#0628A3"
-          lineHeight={1}
-          textAlign="center"
-          mb={5}
-        >
-          {title.slice(0, 16)}
-        </Heading>
-      </Center>
       <VisionMissionSection blurb={visionMission} />
       <Box w="90%">
         <Heading

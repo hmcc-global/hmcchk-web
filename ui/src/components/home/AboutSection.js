@@ -7,20 +7,20 @@ import {
   Stack,
   Text,
   VStack,
-} from "@chakra-ui/react";
-import Card from "../helpers/components/Card";
+} from '@chakra-ui/react';
+import Card from '../helpers/components/Card';
 
 const about = {
-  title: "About us",
-  text: "Harvest Mission Community Church of Hong Kong is an international church that was planted in 2015, when a team of 20 people came to Hong Kong with a vision to reach this great city and be a 1st-century church in the 21st century. We value transculturalism and we are actively reaching out to people from all walks of life, specifically college students, working adults, and families.",
+  title: 'About us',
+  text: 'Harvest Mission Community Church of Hong Kong is an international church that was planted in 2015, when a team of 20 people came to Hong Kong with a vision to reach this great city and be a 1st-century church in the 21st century. We value transculturalism and we are actively reaching out to people from all walks of life, specifically college students, working adults, and families.',
 };
 const vision = {
-  title: "VISION",
-  text: "Multiplying churches in campuses and cities to transform the next generation among the nations.",
+  title: 'VISION',
+  text: 'Multiplying churches in campuses and cities to transform the next generation among the nations.',
 };
 const mission = {
-  title: "MISSION",
-  text: "To transform lost people into Christ’s disciples who will then transform the world.",
+  title: 'MISSION',
+  text: 'To transform lost people into Christ’s disciples who will then transform the world.',
 };
 
 const AboutSection = () => {
@@ -30,7 +30,7 @@ const AboutSection = () => {
       h="100vh"
       justify="center"
       bgImage={`linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${
-        process.env.PUBLIC_URL + "/images/home/about.png"
+        process.env.PUBLIC_URL + '/images/home/about.png'
       })`}
       bgSize="cover"
       bgPosition="center center"
@@ -39,10 +39,10 @@ const AboutSection = () => {
         w="full"
         h="100vh"
         justify="center"
-        style={{ backdropFilter: "blur(7px)" }}
+        style={{ backdropFilter: 'blur(7px)' }}
       >
         <Container
-          maxW={["container.md", "container.lg"]}
+          maxW={['container.md', 'container.lg']}
           justifyContent="center"
           display="flex"
         >
@@ -50,23 +50,23 @@ const AboutSection = () => {
             <Heading
               color="white"
               as="h2"
-              fontSize={["2em", "5em"]}
+              fontSize={['2em', '5em']}
               alignSelf="baseline"
             >
               {about.title}
             </Heading>
-            <Text fontSize={["0.8em", "1em"]} color="white" textAlign="justify">
+            <Text fontSize={['0.8em', '1em']} color="white" textAlign="justify">
               {about.text}
             </Text>
             <Stack
               w="full"
               justify="center"
-              direction={["column", "row"]}
+              direction={['column', 'row']}
               alignItems="center"
             >
               <Card
                 width="full"
-                height={["6em", "15em"]}
+                height={['6em', '15em']}
                 color="rgba(255, 255, 255, 0.2)"
                 title={vision.title}
                 titleColor="#63B3ED"
@@ -75,7 +75,7 @@ const AboutSection = () => {
               />
               <Card
                 width="full"
-                height={["6em", "15em"]}
+                height={['6em', '15em']}
                 color="rgba(255, 255, 255, 0.2)"
                 title={mission.title}
                 titleColor="#63B3ED"
@@ -84,21 +84,21 @@ const AboutSection = () => {
               />
             </Stack>
             <Button
-              alignSelf={["center", "flex-end"]}
+              alignSelf={['center', 'flex-end']}
               bg="rgb(0, 0, 0, 0)"
               variant="outline"
               color="white"
-              w={["full", "23.5%"]}
+              w={['full', '23.5%']}
               _hover={{
-                bg: "white",
-                color: "#1A365D",
-                borderColor: "#1A365D",
-                textDecoration: "none",
+                bg: 'white',
+                color: '#1A365D',
+                borderColor: '#1A365D',
+                textDecoration: 'none',
               }}
               as={Link}
               href="/about-us"
             >
-              {"More about us >"}
+              {'More about us >'}
             </Button>
           </VStack>
         </Container>
