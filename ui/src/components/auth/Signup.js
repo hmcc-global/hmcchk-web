@@ -92,7 +92,7 @@ const Signup = (props) => {
     backdropFilter: 'blur(6px)',
     borderRadius: '12px',
     fontWeight: 'bold',
-    marginBottom: '20px'
+    marginBottom: '20px',
   };
 
   const recaptcha480 = {
@@ -178,7 +178,7 @@ const Signup = (props) => {
         minH="100vh"
         w="full"
         bgImage={`url(${
-          process.env.PUBLIC_URL + '/images/default-hk-background.jpg'
+          process.env.PUBLIC_URL + '/images/default-hk-background.jpeg'
         })`}
         bgRepeat="no-repeat"
         bgAttachment="fixed"
@@ -191,13 +191,6 @@ const Signup = (props) => {
           m="auto"
           p="10"
         >
-          <Box width="100%" alignSelf="flex-start" mb="5" color="#FFF">
-            <Link href="/signup" justify="center" fontSize="inherit">
-              <ArrowBackIcon boxSize={7} mr="2" />
-              Back
-            </Link>
-          </Box>
-
           <Box
             m="auto"
             width="100%"
@@ -209,7 +202,6 @@ const Signup = (props) => {
           >
             <VStack justify="center" align="center" mb="2.5">
               <Image
-                // marginTop={{ base: '30px', md: 'none' }}
                 marginBottom={{ base: '15px', md: '20px' }}
                 h={['4.5vh', '5.5vh', '6.5vh', '7.5vh', '8.5vh']}
                 src={`${process.env.PUBLIC_URL}/images/ripple.png`}

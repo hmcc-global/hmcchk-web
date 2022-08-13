@@ -36,7 +36,7 @@ const LoginContainer = (props) => {
       setInvalidLogin('');
       window.location.reload();
     } catch (err) {
-      if (err.response.status === 500) {
+      if (err.response.status === 500 || err.response.status === 401) {
         setInvalidLogin('Invalid email or wrong password');
       }
       console.log(err);
@@ -96,7 +96,7 @@ const LoginContainer = (props) => {
         minH="100vh"
         w="full"
         bgImage={`url(${
-          process.env.PUBLIC_URL + '/images/default-hk-background.jpg'
+          process.env.PUBLIC_URL + '/images/default-hk-background.jpeg'
         })`}
         bgRepeat="no-repeat"
         bgAttachment="fixed"
@@ -109,13 +109,6 @@ const LoginContainer = (props) => {
           m="auto"
           p="10"
         >
-          <Box width="full" alignSelf="flex-start" mb="5" color="#FFF">
-            <Link href="../" justify="center" fontSize="inherit">
-              <ArrowBackIcon boxSize={7} mr="2" />
-              Back
-            </Link>
-          </Box>
-
           <Box
             m="auto"
             width="full"

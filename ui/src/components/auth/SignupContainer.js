@@ -50,7 +50,7 @@ const SignupContainer = (props) => {
         minH="100vh"
         w="full"
         bgImage={`url(${
-          process.env.PUBLIC_URL + '/images/default-hk-background.jpg'
+          process.env.PUBLIC_URL + '/images/default-hk-background.jpeg'
         })`}
         bgRepeat="no-repeat"
         bgAttachment="fixed"

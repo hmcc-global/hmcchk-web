@@ -62,8 +62,8 @@ const NavBar = (props) => {
 
   useEffect(() => {
     const fetch = async () => {
-      const userObj = await getUserObj(user);
-      return userObj;
+      const obj = await getUserObj(user);
+      return obj;
     };
 
     const userObj = fetch();
