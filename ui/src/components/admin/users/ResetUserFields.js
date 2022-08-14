@@ -14,10 +14,12 @@ import { customAxios as axios } from '../../helpers/customAxios';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 
 const fieldMapping = {
-  'address': 'Address',
-  'campus' : 'Campus',
-  'ministryTeam': 'Ministry Team',
-  'lifeGroup': 'LIFE Group'
+  address: 'Address',
+  campus: 'Campus',
+  ministryTeam: 'Ministry Team',
+  lifeGroup: 'LIFE Group',
+  lifestage: 'Lifestage',
+  countryOfOrigin: 'Country of Origin',
 };
 
 const ResetUserFields = (props) => {
@@ -57,6 +59,10 @@ const ResetUserFields = (props) => {
         <option value="campus">{fieldMapping['campus']}</option>
         <option value="ministryTeam">{fieldMapping['ministryTeam']}</option>
         <option value="lifeGroup">{fieldMapping['lifeGroup']}</option>
+        <option value="lifestage">{fieldMapping['lifestage']}</option>
+        <option value="countryOfOrigin">
+          {fieldMapping['countryOfOrigin']}
+        </option>
       </Select>
       <AlertDialog
         isOpen={isOpen}
@@ -70,8 +76,10 @@ const ResetUserFields = (props) => {
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              Are you sure you want to reset <b>{fieldMapping[value]}</b>? <p style={{color: 'red'}}>You can't undo this
-              action afterwards.</p>
+              Are you sure you want to reset <b>{fieldMapping[value]}</b>?{' '}
+              <p style={{ color: 'red' }}>
+                You can't undo this action afterwards.
+              </p>
             </AlertDialogBody>
 
             <AlertDialogFooter>
@@ -93,4 +101,4 @@ const ResetUserFields = (props) => {
   );
 };
 
-export default ResetUserFields ;
+export default ResetUserFields;
