@@ -34,13 +34,13 @@ const buttonText = 'Learn More';
 
 const LifeGroupSection = () => {
   return (
-    <Flex w="full" h="100vh">
+    <Flex w="full" h={['100vh', '75vh']}>
       <Container maxW="container.lg" justifyContent="center" display="flex">
         <Stack
           w="100%"
           direction={['column', 'row']}
           justify="center"
-          alignItems="center"
+          alignItems={['left', 'center']}
           spacing={[6, null]}
         >
           <VStack
@@ -51,7 +51,7 @@ const LifeGroupSection = () => {
             <Heading
               as="h5"
               fontSize={['0.9em', '1.5em']}
-              textAlign={['justify']}
+              alignSelf={['baseline']}
               color="#505050"
             >
               {lg.section}
@@ -66,7 +66,12 @@ const LifeGroupSection = () => {
             align={['center', 'baseline']}
             spacing={[6, 8]}
           >
-            <Heading as="h1" fontSize={['2em', '4.5em']} color="#0628A3">
+            <Heading
+              as="h1"
+              fontSize={['2em', '4.5em']}
+              color="#0628A3"
+              alignSelf={['baseline']}
+            >
               {lg.title}
             </Heading>
             <Text fontSize={['0.9em', '1.2em']} textAlign={['justify']}>

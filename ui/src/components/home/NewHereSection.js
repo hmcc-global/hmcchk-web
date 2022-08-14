@@ -62,7 +62,7 @@ const NewHereSection = () => {
     <>
       <Flex
         w={'full'}
-        h={['110vh', '90vh']}
+        h={['110vh', '80vh']}
         justify="center"
         background="#F9F9F9"
         style={{ backdropFilter: 'blur(7px)' }}
@@ -72,16 +72,16 @@ const NewHereSection = () => {
           maxW="container.xl"
           justifyContent="center"
           alignItems="center"
-          pt={['30', '100']}
+          pt={['35', '55']}
         >
           <Stack
             direction={['column', 'row']}
             color="white"
-            justify="center"
-            alignItems="center"
-            spacing={['10', '70']}
+            justify={'center'}
+            alignItems={['left', 'center']}
+            spacing={['5', '50']}
           >
-            <VStack alignItems={'left'}>
+            <VStack alignItems={'left'} spacing={0}>
               <Heading fontSize={['2em', '3em']} color="#505050">
                 New here?
               </Heading>
@@ -89,10 +89,16 @@ const NewHereSection = () => {
                 Connect with us
               </Heading>
             </VStack>
-            <Box borderWidth={'1px'} px={5} pt={10} borderRadius={[5, 10]}>
+            <Box
+              w={['100%', '35%']}
+              borderWidth={'1px'}
+              px={5}
+              pt={[10]}
+              borderRadius={[5, 10]}
+            >
               <form onSubmit={onSubmit}>
                 <VStack spacing={[4, 2.5]} alignItems="center">
-                  <FormControl id="name" isRequired w={['85%', '100%']}>
+                  <FormControl id="name" isRequired w={['100%']}>
                     <Input
                       variant="filled"
                       type="name"
@@ -100,7 +106,7 @@ const NewHereSection = () => {
                       onChange={(e) => setName(e.target.value)}
                     />
                   </FormControl>
-                  <FormControl id="email" isRequired w={['85%', '100%']}>
+                  <FormControl id="email" isRequired w={['100%']}>
                     <Input
                       variant="filled"
                       type="email"
@@ -108,21 +114,21 @@ const NewHereSection = () => {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </FormControl>
-                  <FormControl id="phoneNumber" isRequired w={['85%', '100%']}>
+                  <FormControl id="phoneNumber" isRequired w={['100%']}>
                     <Input
                       variant="filled"
                       placeholder="Phone Number"
                       onChange={(e) => setPhoneNumber(e.target.value)}
                     />
                   </FormControl>
-                  <FormControl id="lifestage" isRequired w={['85%', '100%']}>
+                  <FormControl id="lifestage" isRequired w={['100%']}>
                     <Input
                       variant="filled"
                       placeholder="Campus/Lifestage"
                       onChange={(e) => setLifestage(e.target.value)}
                     />
                   </FormControl>
-                  <FormControl id="notes" isRequired w={['85%', '100%']}>
+                  <FormControl id="notes" isRequired w={['100%']}>
                     <Input
                       type="notes"
                       placeholder="Notes and remarks"
