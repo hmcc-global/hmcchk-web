@@ -1,6 +1,5 @@
 import { Flex } from '@chakra-ui/react';
-import { useState, useEffect } from 'react';
-
+import { useState, useEffect, useRef } from 'react';
 import AboutSection from './AboutSection';
 import EventsSection from './EventsSection';
 import HeroSection from './HeroSection';
@@ -12,6 +11,7 @@ import { customAxios as axios } from '../helpers/customAxios';
 
 const HomeContainer = (props) => {
   const { user } = props;
+  const sermonRef = useRef(null);
   const [popupInfo, setPopupInfo] = useState([]);
   const getData = async () => {
     try {
@@ -39,8 +39,8 @@ const HomeContainer = (props) => {
   };
   return (
     <Flex direction="column">
-      <HeroSection />
-      <HelloSermonSection />
+      <HeroSection sermonRef={sermonRef} />
+      <HelloSermonSection ref={sermonRef} />
       <AboutSection />
       <EventsSection />
       <LifeGroupSection />

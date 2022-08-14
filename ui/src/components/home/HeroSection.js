@@ -9,13 +9,12 @@ import {
   Text,
   Box,
 } from '@chakra-ui/react';
-import { HashLink } from 'react-router-hash-link';
 // TODO figure out a way to have a central location to edit photo url, blurbs etc.
 // sm = 30em, md = 48em, lg = 62em, xl = 80em, 2xl = "96em"
 // sm = 480px, md = 768px, lg = 992px, xl = 1280px, 2xl = "1536px"
 const heroText = 'Transforming Lives,\nTransforming the World';
 
-const HeroSection = () => {
+const HeroSection = ({ sermonRef }) => {
   return (
     <>
       <Flex
@@ -126,11 +125,17 @@ const HeroSection = () => {
               </Stack>
             </Stack>
             <Stack position="relative" bottom="4%" width="35px" height="35px">
-              <HashLink smooth to="/#hello">
-                <Image
-                  src={process.env.PUBLIC_URL + '/images/home/DownArrow.png'}
-                />
-              </HashLink>
+              <Image
+                src={process.env.PUBLIC_URL + '/images/home/DownArrow.png'}
+                style={{ cursor: 'pointer' }}
+                onClick={() =>
+                  sermonRef.current.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'end',
+                    inline: 'nearest',
+                  })
+                }
+              />
             </Stack>
           </VStack>
         </Container>

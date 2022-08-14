@@ -67,8 +67,18 @@ const HelpCard = (props) => {
         style={{ textDecoration: 'none', zIndex: 1 }}
       >
         <VStack>
-          <Heading style={props.titleStyle} fontSize={{base:"1.5rem", md:"2.5rem"}}>{props.title}</Heading>
-          <Text style={props.textStyle} fontSize={{base:"0.8rem", md:"1.2rem"}}>{props.text}</Text>
+          <Heading
+            style={props.titleStyle}
+            fontSize={{ base: '1.5rem', md: '2.5rem' }}
+          >
+            {props.title}
+          </Heading>
+          <Text
+            style={props.textStyle}
+            fontSize={{ base: '0.8rem', md: '1.2rem' }}
+          >
+            {props.text}
+          </Text>
         </VStack>
       </Link>
       <Box
@@ -87,7 +97,7 @@ const HelpCard = (props) => {
   );
 };
 
-const HelloSermonSection = () => {
+const HelloSermonSection = React.forwardRef((props, ref) => {
   const [currentSermon, setCurrentSermon] = useState();
   const [isSunday, setIsSunday] = useState(false);
   const currentDate = currentSermon
@@ -115,12 +125,12 @@ const HelloSermonSection = () => {
   useEffect(() => {
     getLatestSermon();
   }, []);
-
   return (
     <>
       <Flex
+        ref={ref}
         w="full"
-        h={{ base: 'auto', md: '80vh', lg:"90vh" }}
+        h={{ base: 'auto', md: '80vh', lg: '90vh' }}
         justify="center"
         background={{
           base: '',
@@ -175,24 +185,33 @@ const HelloSermonSection = () => {
                 Latest Sermon
               </Heading>
               <Box>
-              <Image
-                src={
-                  currentSermon
-                    ? currentSermon.sermonSeries[0].image.sourceUrl
-                    : ''
-                }
-                objectFit="cover"
-                borderRadius="10px"
-              /></Box>
+                <Image
+                  src={
+                    currentSermon
+                      ? currentSermon.sermonSeries[0].image.sourceUrl
+                      : ''
+                  }
+                  objectFit="cover"
+                  borderRadius="10px"
+                />
+              </Box>
               <VStack style={{ alignSelf: 'flex-start' }}>
-                <Heading width="100%" color="#A5CBFF" display="flex" justifyContent="flex-start">
+                <Heading
+                  width="100%"
+                  color="#A5CBFF"
+                  display="flex"
+                  justifyContent="flex-start"
+                >
                   {currentSermon
                     ? isSunday
                       ? '[LIVE NOW] ' + currentSermon.sermonSeries[0].name
                       : '' + currentSermon.sermonSeries[0].name
                     : ''}
                 </Heading>
-                <Text style={{ alignSelf: 'flex-start', marginTop:"0px" }} color="white">
+                <Text
+                  style={{ alignSelf: 'flex-start', marginTop: '0px' }}
+                  color="white"
+                >
                   {currentDate}
                 </Text>
               </VStack>
@@ -224,6 +243,6 @@ const HelloSermonSection = () => {
       </Flex>
     </>
   );
-};
+});
 
 export default HelloSermonSection;
