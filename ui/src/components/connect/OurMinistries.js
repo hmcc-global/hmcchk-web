@@ -20,7 +20,7 @@ const OurMinistries = (props) => {
       <SimpleGrid columns={[1, 3]} spacing={4}>
         <Box
           h={[141, 340]}
-          p={[4, 8]}
+          p={2}
           borderRadius="20"
           bgImage={`linear-gradient(180deg, rgba(118, 228, 247, 0.7) 0%, rgba(44, 82, 130, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/undergrad.png')`}
           bgPosition="center"
@@ -31,14 +31,13 @@ const OurMinistries = (props) => {
         >
           <Heading
             as="h4"
-            p={[1, 4]}
-            mt={[0, 7]}
+            mt={[3, 12]}
             fontSize={['1.5em', '1.5em', '2em']}
             fontWeight={700}
           >
             UNDERGRADS
           </Heading>
-          <Text fontWeight={400} fontSize={['xs', 'sm', 'md']}>
+          <Text fontWeight={400} fontSize={['xs', 'sm', 'md']} mt={[2, 6, 8]}>
             Reaching the college students in the university campuses of Hong
             Kong because we believe that college is a pivotal time for people to
             discover their God-given destiny.
@@ -48,7 +47,7 @@ const OurMinistries = (props) => {
           h={[141, 340]}
           p={[3]}
           borderRadius="20"
-          bgImage={`linear-gradient(180deg, rgba(198, 246, 213, 0.7) 0%, rgba(11, 128, 73, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/city.png')`}
+          bgImage={`linear-gradient(180deg, rgba(198, 246, 213, 0.7) 0%, rgba(11, 128, 73, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/city.jpg')`}
           bgPosition="center"
           bgSize="cover"
           shadow="lg"
@@ -58,7 +57,7 @@ const OurMinistries = (props) => {
           <Heading
             as="h4"
             p={2}
-            mt={[0, 10]}
+            mt={[0, 2, 10]}
             fontSize={['1.5em', '1.5em', '2em']}
             fontWeight={700}
           >
@@ -75,7 +74,7 @@ const OurMinistries = (props) => {
           p={3}
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`linear-gradient(180deg, rgba(252, 129, 129, 0.7) 0%, rgba(151, 38, 109, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/married.png')`}
+          bgImage={`linear-gradient(180deg, rgba(252, 129, 129, 0.7) 0%, rgba(151, 38, 109, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/married.jpg')`}
           bgPosition="center"
           bgSize="cover"
           shadow="lg"
@@ -86,11 +85,11 @@ const OurMinistries = (props) => {
             as="h4"
             fontSize={['1.5em', '1.5em', '2em']}
             fontWeight={700}
-            mt={[0, 10, 14]}
+            mt={[3, 10, 14]}
           >
             MARRIED COUPLES AND FAMILIES
           </Heading>
-          <Text mt={[0, 3]} fontWeight={400} fontSize={['xs', 'sm', 'md']}>
+          <Text mt={[1, 5]} fontWeight={400} fontSize={['xs', 'sm', 'md']}>
             Bringing together Godly families that will love on and impact the
             next generation of their families and city.
           </Text>
@@ -106,10 +105,10 @@ const OurMinistries = (props) => {
       >
         <Box
           h={[141, 340]}
-          p={[6, 8, 10]}
+          p={[4, 6, 8, 10]}
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`linear-gradient(180deg, rgba(191, 201, 254, 0.7) 0%, rgba(115, 37, 176, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/youth.png')`}
+          bgImage={`linear-gradient(180deg, rgba(191, 201, 254, 0.7) 0%, rgba(115, 37, 176, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/youth.jpg')`}
           bgPosition="center"
           bgSize="cover"
           shadow="lg"
@@ -118,14 +117,13 @@ const OurMinistries = (props) => {
         >
           <Heading
             as="h4"
-            p={[0, 8]}
             fontSize={['1.5em', '1.5em', '2em']}
             fontWeight={700}
-            // mt={20}
+            mt={[0, 6, 8, 10]}
           >
             YOUTH
           </Heading>
-          <Text fontWeight={400} fontSize={['xs', 'sm', 'md']}>
+          <Text mt={[4, 6]} fontWeight={400} fontSize={['xs', 'sm', 'md']}>
             Reaching and training the youth of this generation to reach the
             world by starting from the center, which is our relationship with
             Jesus Christ.
@@ -133,10 +131,10 @@ const OurMinistries = (props) => {
         </Box>
         <Box
           h={[141, 340]}
-          p={[2, 5, 10, 12]}
+          p={[0, 2, 4, 8]}
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`linear-gradient(180deg, rgba(233, 223, 132, 0.7) 0%, rgba(170, 102, 0, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/kid.png')`}
+          bgImage={`linear-gradient(180deg, rgba(233, 223, 132, 0.7) 0%, rgba(170, 102, 0, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/kid.jpg')`}
           bgPosition="center"
           bgSize="cover"
           shadow="lg"
@@ -145,13 +143,13 @@ const OurMinistries = (props) => {
         >
           <Heading
             as="h4"
-            p={[3, 8]}
+            mt={[6, 12]}
             fontSize={['1.5em', '1.5em', '2em']}
             fontWeight={700}
           >
             CHILDREN
           </Heading>
-          <Text fontWeight={400} fontSize={['xs', 'sm', 'md']}>
+          <Text fontWeight={400} fontSize={['xs', 'sm', 'md']} mt={[4, 6]}>
             Building Blocks is HMCC’s Children Ministry, learn more about it{' '}
             <Text as="u">
               <Link href="https://hongkong.sub.hmcc.net/building-blocks/">

@@ -101,7 +101,7 @@ const LifeGroups = (props) => {
                 href="/events"
                 target="_blank"
               >
-                SIGN UP FOR LIFE GROUPS NOW!
+                TRY OUT A LIFE GROUP
               </LinkOverlay>
             </LinkBox>
           </Center>

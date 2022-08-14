@@ -18,7 +18,11 @@ const ConnectPage = (props) => {
     <Box background="linear-gradient(151.15deg, rgba(255, 244, 201, 0.3) 11.18%, rgba(255, 255, 255, 0.3) 42.46%, rgba(202, 220, 255, 0.3) 76.7%), linear-gradient(194.34deg, #FFE6E6 1.83%, #FFFFFF 51.22%, #D6FFEA 99.59%)">
       <Container maxW="container.lg" py={10}>
         <VStack spacing={[4, 12]} align="stretch">
-          <Flex flexDirection={isLargerThan768 ? 'row' : 'column'} mt={7}>
+          <Flex
+            justifyContent="center"
+            flexDirection={isLargerThan768 ? 'row' : 'column'}
+            mt={7}
+          >
             <Box>
               <Heading
                 as="h3"
