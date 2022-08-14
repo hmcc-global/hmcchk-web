@@ -10,18 +10,17 @@ import {
   Link,
   Button,
   LinkOverlay,
-} from "@chakra-ui/react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import axios from "axios";
-import { DateTime } from "luxon";
-import { useEffect, useState } from "react";
-import { getRenderDate } from "../helpers/eventsHelpers";
-import EventsSectionCard from "./EventsSectionCards";
-import FeaturedEvent from "./FeaturedEvent";
+} from '@chakra-ui/react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import axios from 'axios';
+import { DateTime } from 'luxon';
+import { useEffect, useState } from 'react';
+import { getRenderDate } from '../helpers/eventsHelpers';
+import EventsSectionCard from './EventsSectionCards';
 
-const allEventsText = "all events >";
+const allEventsText = 'See All Events';
 
 const EventsSection = () => {
   const [events, setEvents] = useState([]);
@@ -40,17 +39,17 @@ const EventsSection = () => {
   };
 
   const sliderStyle = {
-    width: "100%",
-    position: "relative",
-    left: "50%",
-    right: "50%",
-    marginLeft: "-50vw",
-    marginRight: "-50vw",
+    width: '100%',
+    position: 'relative',
+    left: '50%',
+    right: '50%',
+    marginLeft: '-50vw',
+    marginRight: '-50vw',
   };
 
   const populateData = async () => {
     try {
-      const { data } = await axios.get("/api/announcements/get-announcements");
+      const { data } = await axios.get('/api/announcements/get-announcements');
       const filtered = data.filter((item) => {
         if (item.endDate) {
           let endDate = new DateTime.fromISO(item.endDate).plus({ days: 1 });
@@ -76,39 +75,50 @@ const EventsSection = () => {
   }, []);
 
   return (
-    <Flex w="full" h={["95vh", "auto"]} direction="column">
-      <Container maxW="container.lg" justifyContent="center" display="flex">
-        <VStack>
-          <FeaturedEvent />
-        </VStack>
-      </Container>
+    <Flex
+      w="full"
+      h={{ base: 'auto', md: 'auto' }}
+      direction="column"
+      background="#172848"
+    >
       <Container
         maxW="container.lg"
         justifyContent="center"
         display="flex"
         marginTop="2em"
       >
-        <VStack w="full" alignItems={["flex-start", null]}>
+        <VStack w="full" alignItems={['flex-start', null]}>
           <HStack
-            w={[null, "full"]}
+            w={[null, 'full']}
             whiteSpace="nowrap"
             height="10vh"
             marginBottom="1em"
+            justifyContent="space-between"
           >
-            <Heading fontSize={["2em", "5xl"]} color="black">
-              Upcoming Events
-            </Heading>
-            <chakra.hr
-              width="full"
-              color="black"
-              border="none"
-              height="2px"
-              bgColor="black"
-              display={["none", "block"]}
-            />
-            <Text color="black" display={["none", "block"]} fontWeight="900">
-              <Link href="/events">{allEventsText}</Link>
-            </Text>
+            <VStack alignItems="flex-start">
+              <Heading fontSize={['2em', '4xl']} fontWeight={600} color="white">
+                Events
+              </Heading>
+              <Text color="white">
+                Check out what's happening in HMCC of Hong Kong
+              </Text>
+            </VStack>
+            <Link
+              href="/events"
+              textDecoration="none"
+              _hover={{ textDecoration: 'none' }}
+            >
+              <Button
+                color="#A5CBFF"
+                background="transparent"
+                border="2px solid #A5CBFF"
+                borderRadius="7px"
+                display={{ base: 'none', md: 'block' }}
+                fontWeight="700"
+              >
+                {allEventsText}
+              </Button>
+            </Link>
           </HStack>
         </VStack>
       </Container>
@@ -117,37 +127,38 @@ const EventsSection = () => {
         display="flex"
         justifyContent="flex-start"
         height="auto"
-        overflowX={["auto", "auto", "auto", "auto", "hidden"]}
+        overflowX={['auto', 'auto', 'auto', 'auto', 'hidden']}
         overflowY="hidden"
         whiteSpace="nowrap"
-        marginBottom={["none", "1.5em"]}
+        marginBottom={['none', '3em']}
         _hover={{
-          overflowX: "auto",
+          overflowX: 'auto',
         }}
       >
         <Slider {...sliderSettings} style={sliderStyle}>
           {events.length > 0 &&
             events.map((event, i) => (
               <EventsSectionCard
-                width={["15em", "35em"]}
+                width={['15em', '35em']}
                 height="auto"
                 event={event}
-                key={"event" + i}
+                key={'event' + i}
               />
             ))}
         </Slider>
       </Box>
       <Button
-        display={["block", "none"]}
-        width="15em"
-        color="white"
-        bgColor="black"
-        alignSelf="center"
-        mt="5%"
-        mb="5%"
-      >
-        <LinkOverlay href="/events">All events</LinkOverlay>
-      </Button>
+          display={{base:'block', md:'none'}}
+          width="15em"
+          color="#A5CBFF"
+          background="transparent"
+          border="2px solid #A5CBFF"
+          borderRadius="7px"
+          alignSelf="center"
+          mb="10%"
+        >
+          <LinkOverlay href="/events">All events</LinkOverlay>
+        </Button>
     </Flex>
   );
 };

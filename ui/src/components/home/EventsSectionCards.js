@@ -20,16 +20,15 @@ import {
   UnorderedList,
   OrderedList,
   ListItem,
-} from "@chakra-ui/react";
-
-import { RiCalendarEventFill } from "react-icons/ri";
-import { BsClockFill } from "react-icons/bs";
-import { ImLocation2 } from "react-icons/im";
-import { getRenderDate } from "../helpers/eventsHelpers";
-import { DateTime } from "luxon";
-import parse, { domToReact, attributesToProps } from "html-react-parser";
-import { generateGoogleCalendarLink } from "../helpers/eventsHelpers";
-import { useState } from "react";
+} from '@chakra-ui/react';
+import { RiCalendarEventFill } from 'react-icons/ri';
+import { BsClockFill } from 'react-icons/bs';
+import { ImLocation2 } from 'react-icons/im';
+import { getRenderDate } from '../helpers/eventsHelpers';
+import { DateTime } from 'luxon';
+import parse, { domToReact, attributesToProps } from 'html-react-parser';
+import { generateGoogleCalendarLink } from '../helpers/eventsHelpers';
+import { useState } from 'react';
 
 const EventsSectionCard = (props) => {
   const { width, height, event } = props;
@@ -47,23 +46,23 @@ const EventsSectionCard = (props) => {
 
   const options = {
     replace: (domNode) => {
-      if (domNode.name === "p") {
+      if (domNode.name === 'p') {
         return <Text mb="2">{domToReact(domNode.children, options)}</Text>;
-      } else if (domNode.name === "ul") {
+      } else if (domNode.name === 'ul') {
         return (
           <UnorderedList marginInlineStart="1.25em" mb="2">
             {domToReact(domNode.children, options)}
           </UnorderedList>
         );
-      } else if (domNode.name === "ol") {
+      } else if (domNode.name === 'ol') {
         return (
           <OrderedList marginInlineStart="1.25em" mb="2">
             {domToReact(domNode.children, options)}
           </OrderedList>
         );
-      } else if (domNode.name === "li") {
+      } else if (domNode.name === 'li') {
         return <ListItem>{domToReact(domNode.children, options)}</ListItem>;
-      } else if (domNode.name === "a") {
+      } else if (domNode.name === 'a') {
         return (
           <Link color="teal.500" {...attributesToProps(domNode.attribs)}>
             {domToReact(domNode.children, options)}
@@ -72,54 +71,38 @@ const EventsSectionCard = (props) => {
       }
     },
   };
-
   return (
     <>
       <Box borderRadius={10} w={width} h={height} mx={4}>
-        <VStack justifyContent="space-between">
-          <AspectRatio width="full" ratio={16 / 9}>
+        <VStack justifyContent="space-between" alignItems="flex-start">
+          <AspectRatio
+            width="full"
+            ratio={16 / 9}
+            onClick={onOpen}
+            cursor="pointer"
+          >
             <Image borderRadius={10} objectFit="cover" src={event.imageUrl} />
           </AspectRatio>
-          <Heading maxWidth={["3xs","lg"]} fontSize={["sm", "3xl"]} color="black" isTruncated>
-            {event.title}
-          </Heading>
-          <HStack direction="space-between" spacing={[2, 6]}>
-            <Button
-              as={Link}
-              target="_blank"
-              href={event.signUpLink ? event.signUpLink : null}
-              isDisabled={event.signUpLink.length <= 0}
-              w={["8em", "10em"]}
-              fontSize={["0.8em", "1.2em"]}
-              size="sm"
-              variant="outline"
-              borderColor="#062A83"
-              color="#062A83"
-              _hover={{
-                borderColor: "#FFFFFF",
-                color: "#FFFFFF",
-                background: "#062A83",
-              }}
-            >
-              Sign up
-            </Button>
-            <Button
+          <VStack alignItems="flex-start">
+            <Heading
               onClick={onOpen}
-              w={["8em", "10em"]}
-              fontSize={["0.8em", "1.2em"]}
-              size="sm"
-              variant="outline"
-              borderColor="#062A83"
-              color="#062A83"
-              _hover={{
-                borderColor: "#FFFFFF",
-                color: "#FFFFFF",
-                background: "#062A83",
-              }}
+              marginBottom="5px"
+              maxWidth={['3xs', 'lg']}
+              fontSize={['sm', '2xl']}
+              color="#A5CBFF"
+              cursor="pointer"
+              isTruncated
             >
-              Learn more
-            </Button>
-          </HStack>
+              {event.title}
+            </Heading>
+              <Text color="white"> {event.location} </Text>
+              <Text color="white" marginTop="0px !important">
+                {event.startDate &&
+                  DateTime.fromISO(event.startDate).toFormat(
+                    'EEEE, d LLLL yyyy'
+                  )}
+              </Text>
+          </VStack>
         </VStack>
       </Box>
       <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
@@ -139,7 +122,7 @@ const EventsSectionCard = (props) => {
               ml={[0, 16]}
               mr={[0, 16]}
               fontWeight="900"
-              fontSize={["2xl", "3xl"]}
+              fontSize={['2xl', '3xl']}
             >
               {event.title}
             </ModalHeader>
@@ -147,9 +130,9 @@ const EventsSectionCard = (props) => {
           <ModalBody ml={[0, 16]} mr={[0, 16]}>
             <Box>
               {event.startDate && event.endDate && event.recurrence && (
-                <Text fontSize={["sm", "md"]} fontWeight="bold">
+                <Text fontSize={['sm', 'md']} fontWeight="bold">
                   <Icon mr={2} as={RiCalendarEventFill} />
-                  Date:{" "}
+                  Date:{' '}
                   {event.renderDate
                     ? event.renderDate.toLocaleString(
                         DateTime.DATE_MED_WITH_WEEKDAY
@@ -162,13 +145,13 @@ const EventsSectionCard = (props) => {
                 </Text>
               )}
               {event.time && (
-                <Text fontSize={["sm", "md"]} fontWeight="bold">
+                <Text fontSize={['sm', 'md']} fontWeight="bold">
                   <Icon mr={2} as={BsClockFill} />
                   Time: {event.time}
                 </Text>
               )}
               {event.location && (
-                <Text fontSize={["sm", "md"]} fontWeight="bold">
+                <Text fontSize={['sm', 'md']} fontWeight="bold">
                   <Icon mr={2} as={ImLocation2} />
                   Location: {event.location}
                 </Text>
@@ -181,7 +164,7 @@ const EventsSectionCard = (props) => {
           <ModalFooter ml={[0, 16]} mr={[0, 16]}>
             <ButtonGroup
               size="md"
-              flexDirection={["column", "row"]}
+              flexDirection={['column', 'row']}
               spacing={[0, 2]}
               w="100%"
               variant="outline"
