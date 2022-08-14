@@ -90,14 +90,15 @@ const NewHereSection = () => {
               </Heading>
             </VStack>
             <Box
+              h={['75vh', '65vh']}
               w={['100%', '35%']}
               borderWidth={'1px'}
               px={5}
-              pt={[10]}
+              py={[10]}
               borderRadius={[5, 10]}
             >
               <form onSubmit={onSubmit}>
-                <VStack spacing={[4, 2.5]} alignItems="center">
+                <VStack spacing={[4, 5]} alignItems="center">
                   <FormControl id="name" isRequired w={['100%']}>
                     <Input
                       variant="filled"
