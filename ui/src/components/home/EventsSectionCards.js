@@ -76,10 +76,11 @@ const EventsSectionCard = (props) => {
       <Box borderRadius={10} w={width} h={height} mx={4}>
         <VStack justifyContent="space-between" alignItems="flex-start">
           <AspectRatio
-            width="full"
+            width="90%"
             ratio={16 / 9}
             onClick={onOpen}
             cursor="pointer"
+            zIndex={5}
           >
             <Image borderRadius={10} objectFit="cover" src={event.imageUrl} />
           </AspectRatio>

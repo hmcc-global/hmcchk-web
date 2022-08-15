@@ -1,5 +1,4 @@
 import {
-  chakra,
   Box,
   Container,
   Flex,
@@ -16,19 +15,65 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
 import { DateTime } from 'luxon';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getRenderDate } from '../helpers/eventsHelpers';
 import EventsSectionCard from './EventsSectionCards';
 
 const allEventsText = 'See All Events';
 
+function SampleNextArrow(props) {
+  const { onClick } = props;
+  return (
+    <div
+      style={{
+        display: 'block',
+        right: '0%',
+        position: 'absolute',
+        top: '40%',
+        zIndex: 8,
+        cursor: 'pointer',
+      }}
+      onClick={onClick}
+    >
+      <img
+        src={process.env.PUBLIC_URL + 'images/home/NextArrow.png'}
+        width="50%"
+        alt="Arrow"
+      />
+    </div>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { onClick } = props;
+  return (
+    <div
+      style={{
+        display: 'block',
+        left: '3%',
+        position: 'absolute',
+        top: '40%',
+        zIndex: 8,
+        cursor: 'pointer',
+      }}
+      onClick={onClick}
+    >
+      <img
+        src={process.env.PUBLIC_URL + 'images/home/PrevArrow.png'}
+        width="50%"
+        alt="Arrow"
+      />
+    </div>
+  );
+}
+
 const EventsSection = () => {
   const [events, setEvents] = useState([]);
-
+  const [computedMargin, setComputedMargin] = useState();
+  const marginRef = useRef(null);
   const sliderSettings = {
     adaptiveHeight: true,
-    arrows: false,
-    centerMode: true,
+    centerMode: false,
     dots: false,
     focusOnSelect: true,
     infinite: false,
@@ -36,16 +81,36 @@ const EventsSection = () => {
     speed: 500,
     swipeToSlide: true,
     variableWidth: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
   };
 
   const sliderStyle = {
     width: '100%',
     position: 'relative',
-    left: '50%',
-    right: '50%',
-    marginLeft: '-50vw',
-    marginRight: '-50vw',
+    height: 'auto',
   };
+
+  function useWindowSize() {
+    const [windowSize, setWindowSize] = useState({
+      width: undefined,
+      height: undefined,
+    });
+    useEffect(() => {
+      function handleResize() {
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      }
+      window.addEventListener('resize', handleResize);
+      handleResize();
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    return windowSize;
+  }
 
   const populateData = async () => {
     try {
@@ -69,23 +134,41 @@ const EventsSection = () => {
       console.log(err);
     }
   };
+  const currentWindow = useWindowSize();
+  useEffect(
+    () =>
+      marginRef.current
+        ? setComputedMargin(
+            window
+              .getComputedStyle(marginRef.current)
+              .getPropertyValue('margin-left')
+          )
+        : '',
+    [currentWindow]
+  );
 
   useEffect(() => {
     populateData();
   }, []);
 
+  console.log(computedMargin);
   return (
     <Flex
       w="full"
-      h={{ base: 'auto', md: 'auto' }}
+      h="auto"
       direction="column"
       background="#172848"
+      alignItems="center"
+      paddingTop="2em"
+      paddingBottom="2em"
+      boxSizing=""
     >
       <Container
         maxW="container.lg"
         justifyContent="center"
         display="flex"
         marginTop="2em"
+        ref={marginRef}
       >
         <VStack w="full" alignItems={['flex-start', null]}>
           <HStack
@@ -123,13 +206,16 @@ const EventsSection = () => {
         </VStack>
       </Container>
       <Box
-        w="full"
+        w="100%"
+        boxSizing="border-box"
         display="flex"
+        paddingLeft={computedMargin}
         justifyContent="flex-start"
+        alignItems="flex-start"
         height="auto"
         overflowX={['auto', 'auto', 'auto', 'auto', 'hidden']}
-        overflowY="hidden"
         whiteSpace="nowrap"
+        marginTop="2.5em"
         marginBottom={['none', '3em']}
         _hover={{
           overflowX: 'auto',
@@ -148,17 +234,18 @@ const EventsSection = () => {
         </Slider>
       </Box>
       <Button
-          display={{base:'block', md:'none'}}
-          width="15em"
-          color="#A5CBFF"
-          background="transparent"
-          border="2px solid #A5CBFF"
-          borderRadius="7px"
-          alignSelf="center"
-          mb="10%"
-        >
-          <LinkOverlay href="/events">All events</LinkOverlay>
-        </Button>
+        display={{ base: 'block', md: 'none' }}
+        width="15em"
+        color="#A5CBFF"
+        marginTop="2em"
+        background="transparent"
+        border="2px solid #A5CBFF"
+        borderRadius="7px"
+        alignSelf="center"
+        mb="10%"
+      >
+        <LinkOverlay href="/events">See All Events</LinkOverlay>
+      </Button>
     </Flex>
   );
 };
