@@ -98,7 +98,7 @@ const LifeGroups = (props) => {
               target="_blank"
             >
               <LinkOverlay
-                href="https://docs.google.com/forms/u/1/d/e/1FAIpQLSdQWmqAiN5E7HkdoqezR0sy9aW7FulGUkO2mqwYreGPtRgnTA/viewform"
+                href="/events"
                 target="_blank"
               >
                 SIGN UP FOR LIFE GROUPS NOW!

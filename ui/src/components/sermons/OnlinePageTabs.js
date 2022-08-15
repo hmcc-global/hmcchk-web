@@ -135,7 +135,7 @@ const OnlinePageTabs = ({ sermonNotes }) => {
                 <b>
                   Get connected and sign up{' '}
                   <Link
-                    href="https://rebrand.ly/hmccLG2122"
+                    href="/events"
                     color="blue"
                     target="_blank"
                   >
