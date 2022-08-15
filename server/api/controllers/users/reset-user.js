@@ -17,10 +17,10 @@ module.exports = {
 
   exits: {
     success: {
-      description: 'LG reset',
+      description: 'Field has been reset',
     },
     invalid: {
-      description: 'Failed to reset LG',
+      description: 'Failed to reset field',
     },
   },
 
@@ -45,13 +45,13 @@ module.exports = {
         let existing;
 
         existing = await LastUpdated.updateOne({ modelName: modelName }).set({
-          lastUpdatedBy: this.req.user.fullName
+          lastUpdatedBy: this.req.user.fullName,
         });
 
         if (!existing) {
           existing = await LastUpdated.create({
             modelName: modelName,
-            lastUpdatedBy: this.req.user.fullName
+            lastUpdatedBy: this.req.user.fullName,
           });
           if (!existing) {
             return exits.invalid();

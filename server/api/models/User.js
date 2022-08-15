@@ -32,7 +32,6 @@ email status until they click the link in the confirmation email.`,
     },
     countryOfOrigin: {
       type: 'string',
-      required: true,
     },
     address: {
       type: 'json',
@@ -46,7 +45,6 @@ email status until they click the link in the confirmation email.`,
     },
     lifestage: {
       type: 'string',
-      required: true,
     },
     lifeGroup: {
       type: 'string',
