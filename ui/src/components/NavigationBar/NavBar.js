@@ -35,7 +35,6 @@ const NavBar = (props) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const user = useSelector((state) => state.user);
   const [username, setUsername] = useState('');
-  const welcomeMsg = ['Login or Sign up', `Hi, ${username}`];
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const liveScStyle = {
@@ -87,7 +86,7 @@ const NavBar = (props) => {
               justify="space-between"
               align="center"
               fontSize={{ md: 'x-small', lg: 'smaller', xl: 'small' }}
-              h={{ md: '7vh', lg: '7vh', xl: '8.5vh' }}
+              h={{ base: '5vh', md: '7vh', lg: '7vh', xl: '8.5vh' }}
             >
               <HStack spacing={5}>
                 <LinkBox>
@@ -361,7 +360,7 @@ const NavBar = (props) => {
         <DrawerContent
           background="url('/images/ripple_bg.png')"
           backgroundRepeat="no-repeat"
-          backgroundColor="#2c5282"
+          backgroundColor="rgba(18, 72, 146, 1)"
           backgroundSize="70%"
           backgroundPosition="120% 75%"
           width={{ base: '100%', md: '70%' }}
