@@ -1,7 +1,7 @@
 {
   "banner": {
     "title": "About Us",
-    "blurb": "Harvest Mission Community Church of Hong Kong is an international church planted in 2015, when a team of 20 people came with a vision to reach this great city and be a 1st-century church in the 21st century. We want to be a church that is transcultural, with people from all walks of life and backgrounds."
+    "blurb": "Harvest Mission Community Church of Hong Kong is an international church that was planted in 2015, when a team of 20 people came to Hong Kong with a vision to reach this great city and be a 1st-century church in the 21st century. We value transculturalism and we are actively reaching out to people from all walks of life, specifically college students, working adults, and families."
   },
   "story": {
     "0": "After the first church started at the University of Michigan in Ann Arbor, God gave us a vision to plant churches on campuses in cities all around the world. We have started churches in Austin, Detroit, and Jakarta, and now Hong Kong, when a team of 20 people came to start HMCC of Hong Kong with a vision to reach this great city and be a 1st-century church in the 21st century.",
@@ -95,6 +95,30 @@
       "position": "Pastor (Hong Kong) - bo.zhu@hmcc.net",
       "0": "Pastor Bo graduated from University of Michigan where he accepted Christ and continued to grow in his relationship with God. He felt a calling to be part of the church plant in Hong Kong where he continued to grow in his calling as a pastor.",
       "1": "In 2016, he was commissioned as a Pastor during !gnite Conference, and has been serving the church faithfully. He is married to his wife, Erica Zhu, and welcomed their son, Noah, in 2021. They live in Hong Kong now."
+    }
+  },
+  "ourHeartMissions": {
+    "title": {
+      "1": "Our Heart For Missions",
+      "2": "Harvest Mission International (HMI)",
+      "3": "Missional Initiatives"
+    },
+    "heading": {
+      "1": "Missions Month",
+      "2": "!gnite Conference",
+      "3": "The Vision"
+    },
+    "blurb": {
+      "1": "As Christ has called us to ‘make disciples of all nations’ (Matthew 28:19), we value the importance of the local church making an impact in its surrounding community for the Gospel of Jesus Christ.",
+      "2": "Similar to the early church seen in the Book of Acts, we believe in doing missions through planting churches. It is our desire to establish and raise up visible local bodies of Christ’s followers who are witnesses to their own communities. Specifically, we seek to target cities with viable college campuses, as students are the future leaders of our world. As a church reaches a campus, we believe that it will begin to impact the community, the city, and ultimately, the nations. Currently HMI is involved in short-term projects both locally and internationally. Starting in Ann Arbor, HMI now has church plants in Austin, Detroit, Jakarta, Indonesia, and Hong Kong.",
+      "3": "Since 2016, we dedicate the month of November each year to learn about and grow a heart for missions. As a whole church, we come together and serve our communities as we live missionally for Christ through outreaches in campuses and around the city, partnering with various NGOs to serve those in need, and reaching out to friends and families.",
+      "4": "These are the Missions Month themes in the past:",
+      "5": "Started in 2011, !gnite Conference is HMCC’s annual church conference that aims to ",
+      "5.5": "!gnite everyone with a passion for God so they can reach every nation in our generation with the Gospel.",
+      "6": "All throughout history, we have seen God set people’s hearts on fire in order to live a radical life for His glory. We are praying that in our generation, God would set the hearts of many students on fire so that we may burn for Him.",
+      "7": "What would it be like if we saw a whole generation of people who are set on fire with God’s glory and love? If they were excited and passionate about bringing the Gospel to every nation? ",
+      "7.5": "Simply, we would see a generation of people living radically for Jesus Christ.",
+      "8": "We are living in a unique time in history. God has been sovereignly orchestrating events and circumstances throughout the world in order for a new generation to rise up and hear the call to take the Gospel to every nation. This is why we have !gnite!"
     }
   }
 }

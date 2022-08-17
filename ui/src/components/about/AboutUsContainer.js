@@ -11,6 +11,7 @@ import StaffSection from './StaffSection';
 import StorySection from './StorySection';
 import StrategySection from './StrategySection';
 import ValuesSection from './ValuesSection';
+import OurHeartMissions from './OurHeartMissions';
 import blurbs from './about.json';
 import { Fragment, useState } from 'react';
 import { Select } from '@chakra-ui/select';
@@ -68,18 +69,20 @@ const AboutUsContainer = (props) => {
           </Text>
           <HStack
             justifyContent="space-evenly"
-            display={{ base: 'none', md: 'flex' }}
+            display={{ base: 'none', sm: 'none', md: 'flex' }}
+            px={{ md: '0em', lg: '3em' }}
           >
             {sections &&
               sections.map((e, i) => {
                 return (
                   <Fragment key={i}>
                     <Text
-                      color="white"
+                      color="rgba(190, 227, 248, 1)"
                       fontWeight={600}
                       textDecoration="none"
-                      borderBottom="#FFFFFF 0.1em solid"
+                      borderBottom="rgba(190, 227, 248, 1) 0.1em solid"
                       cursor="pointer"
+                      fontSize={{ md: 'sm', lg: 'md' }}
                       onClick={() => setSelected(i)}
                     >
                       {e}
@@ -87,7 +90,7 @@ const AboutUsContainer = (props) => {
                     {i < sections.length - 1 ? (
                       <Text
                         mx={[3, 4]}
-                        color="white"
+                        color="rgba(190, 227, 248, 1)"
                         fontSize={['md', '2xl']}
                         verticalAlign="baseline"
                       >
@@ -139,12 +142,9 @@ const AboutUsContainer = (props) => {
           <BeliefsSection blurb={blurbs.beliefs} title={sections[selected]} />
         )}
         {selected === 5 && (
-          <Route
-            component={() => {
-              window.location.href =
-                'https://hongkong.sub.hmcc.net/about-us/hmi/';
-              return null;
-            }}
+          <OurHeartMissions
+            blurb={blurbs.ourHeartMissions}
+            title={sections[selected]}
           />
         )}
       </VStack>
