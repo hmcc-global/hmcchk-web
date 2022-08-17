@@ -36,20 +36,24 @@ const UserFormContainer = (props) => {
             // If form available from is set & valid, check if current time is
             // after formAvailableFrom
             let afterStartTime = formAvailableFrom.isValid
-              ? DateTime.now() >= formAvailableFrom
+              ? DateTime.now().setZone('Asia/Hong_Kong') >= formAvailableFrom
               : true;
 
             // Compound checking: if form available until:
             // is valid: check if it's within the time of form availability
             // is not valid: default to whatever value was already there
             let beforeEndTime = formAvailableUntil.isValid
-              ? DateTime.now() < formAvailableUntil
+              ? DateTime.now().setZone('Asia/Hong_Kong') < formAvailableUntil
               : true;
             let isInRange = afterStartTime && beforeEndTime;
 
             if (!isInRange) {
               if (!beforeEndTime) history.push('/form-unavailable');
-              else history.push('/form-will-open');
+              else
+                history.push({
+                  pathname: '/form-will-open',
+                  state: { availableAfter: formAvailableFrom },
+                });
             }
           }
           // TODO: Add check for form within available period
