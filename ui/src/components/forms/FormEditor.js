@@ -159,6 +159,8 @@ const FormEditor = (props) => {
         requireLogin: formInformation.requireLogin,
         successEmailTemplate: formInformation.successEmailTemplate,
         customEmailSubject: formInformation.customEmailSubject,
+        formAvailableFrom: formInformation.formAvailableFrom,
+        formAvailableUntil: formInformation.formAvailableUntil,
         formFields: formFields,
       };
 

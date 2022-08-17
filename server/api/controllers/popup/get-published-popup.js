@@ -1,5 +1,4 @@
 module.exports = {
-
   friendlyName: 'Get Published Pop Up',
 
   description: 'Get Published Pop Up',
@@ -8,20 +7,20 @@ module.exports = {
 
   exits: {
     nonSuccess: {
-      description: 'Error'
+      description: 'Error',
     },
   },
 
-  fn: async function({}, exits) {
+  fn: async function ({}, exits) {
     try {
       let res;
 
       res = await PopUp.findOne({
-        isPublished: true
+        isPublished: true,
       });
 
       if (!res) {
-        return exits.nonSuccess(err);
+        return exits.nonSuccess();
       }
 
       return exits.success(res);
@@ -29,6 +28,5 @@ module.exports = {
       sails.log(err);
       return exits.nonSuccess(err);
     }
-  }
+  },
 };
-

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { customAxios as axios } from '../helpers/customAxios';
 import { camelize, sentencize } from '../helpers/formsHelpers';
-import { CheckCircleIcon } from '@chakra-ui/icons';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 
@@ -24,7 +23,6 @@ import {
   Radio,
   Stack,
   Center,
-  VStack,
   Alert,
   AlertIcon,
   Link,
@@ -84,7 +82,6 @@ const Form = (props) => {
   };
 
   const postSubmission = async (formId, data, userId) => {
-    const redirectTarget = userId ? '/profile' : '/';
     // Set flag to true to prevent double submission
     setSubmitStatus(true);
     try {
