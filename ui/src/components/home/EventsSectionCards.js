@@ -2,7 +2,6 @@ import {
   AspectRatio,
   Box,
   Button,
-  HStack,
   Image,
   VStack,
   Heading,
@@ -74,9 +73,9 @@ const EventsSectionCard = (props) => {
   return (
     <>
       <Box borderRadius={10} w={width} h={height} mx={4}>
-        <VStack justifyContent="space-between" alignItems="flex-start">
+        <VStack justifyContent="space-between" alignItems="flex-start" spacing={5}>
           <AspectRatio
-            width="90%"
+            width={{base:"100%", md:"90%"}}
             ratio={16 / 9}
             onClick={onOpen}
             cursor="pointer"
@@ -84,20 +83,21 @@ const EventsSectionCard = (props) => {
           >
             <Image borderRadius={10} objectFit="cover" src={event.imageUrl} />
           </AspectRatio>
-          <VStack alignItems="flex-start">
+          <VStack alignItems="flex-start" width="100%">
             <Heading
               onClick={onOpen}
               marginBottom="5px"
-              maxWidth={['3xs', 'lg']}
+              maxWidth={['xs', 'lg']}
               fontSize={['sm', '2xl']}
               color="#A5CBFF"
               cursor="pointer"
+              fontWeight="semibold"
               isTruncated
             >
               {event.title}
             </Heading>
-              <Text color="white"> {event.location} </Text>
-              <Text color="white" marginTop="0px !important">
+              <Text color="white" fontSize={{base:"xs", md:"md"}}> {event.location} </Text>
+              <Text color="white" marginTop="0px !important" fontSize={{base:"xs", md:"md"}}>
                 {event.startDate &&
                   DateTime.fromISO(event.startDate).toFormat(
                     'EEEE, d LLLL yyyy'

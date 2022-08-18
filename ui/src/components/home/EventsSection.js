@@ -22,8 +22,8 @@ import EventsSectionCard from './EventsSectionCards';
 const allEventsText = 'See All Events';
 
 function SampleNextArrow(props) {
-  const { onClick } = props;
-  return (
+  const { onClick, index, maxSlide } = props;
+  return index !== maxSlide - 1 ? (
     <div
       style={{
         display: 'block',
@@ -37,16 +37,16 @@ function SampleNextArrow(props) {
     >
       <img
         src={process.env.PUBLIC_URL + 'images/home/NextArrow.png'}
-        width="50%"
+        width="80%"
         alt="Arrow"
       />
     </div>
-  );
+  ) : null;
 }
 
 function SamplePrevArrow(props) {
-  const { onClick } = props;
-  return (
+  const { onClick, index } = props;
+  return index !== 0 ? (
     <div
       style={{
         display: 'block',
@@ -60,38 +60,19 @@ function SamplePrevArrow(props) {
     >
       <img
         src={process.env.PUBLIC_URL + 'images/home/PrevArrow.png'}
-        width="50%"
+        width="80%"
         alt="Arrow"
       />
     </div>
-  );
+  ) : null;
 }
 
 const EventsSection = () => {
   const [events, setEvents] = useState([]);
   const [computedMargin, setComputedMargin] = useState();
-  const marginRef = useRef(null);
-  const sliderSettings = {
-    adaptiveHeight: true,
-    centerMode: false,
-    dots: false,
-    focusOnSelect: true,
-    infinite: false,
-    slidesPerRow: 1,
-    speed: 500,
-    swipeToSlide: true,
-    variableWidth: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-  };
+  const [slideIndex, setSlideIndex] = useState(0);
 
-  const sliderStyle = {
-    width: '100%',
-    position: 'relative',
-    height: 'auto',
-  };
+  const marginRef = useRef(null);
 
   function useWindowSize() {
     const [windowSize, setWindowSize] = useState({
@@ -111,7 +92,9 @@ const EventsSection = () => {
     }, []);
     return windowSize;
   }
-
+  const onArrowClick = (e) => {
+    setSlideIndex(e);
+  };
   const populateData = async () => {
     try {
       const { data } = await axios.get('/api/announcements/get-announcements');
@@ -148,10 +131,36 @@ const EventsSection = () => {
   );
 
   useEffect(() => {
+    document.querySelectorAll('.slick-track').forEach((el) => {
+      el.style.setProperty('margin-left', computedMargin, 'important');
+    });
+  }, [computedMargin]);
+
+  useEffect(() => {
     populateData();
   }, []);
+  const sliderSettings = {
+    adaptiveHeight: true,
+    centerMode: false,
+    dots: false,
+    focusOnSelect: true,
+    infinite: false,
+    slidesPerRow: 1,
+    speed: 500,
+    swipeToSlide: true,
+    variableWidth: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <SampleNextArrow index={slideIndex} maxSlide={events.length} />,
+    prevArrow: <SamplePrevArrow index={slideIndex} />,
+    afterChange: onArrowClick,
+  };
 
-  console.log(computedMargin);
+  const sliderStyle = {
+    width: '100%',
+    position: 'relative',
+    height: 'auto',
+  };
   return (
     <Flex
       w="full"
@@ -198,6 +207,8 @@ const EventsSection = () => {
                 borderRadius="7px"
                 display={{ base: 'none', md: 'block' }}
                 fontWeight="700"
+                padding="6px 24px"
+                boxSizing="content-box"
               >
                 {allEventsText}
               </Button>
@@ -209,7 +220,6 @@ const EventsSection = () => {
         w="100%"
         boxSizing="border-box"
         display="flex"
-        paddingLeft={computedMargin}
         justifyContent="flex-start"
         alignItems="flex-start"
         height="auto"
@@ -223,14 +233,16 @@ const EventsSection = () => {
       >
         <Slider {...sliderSettings} style={sliderStyle}>
           {events.length > 0 &&
-            events.map((event, i) => (
-              <EventsSectionCard
-                width={['15em', '35em']}
-                height="auto"
-                event={event}
-                key={'event' + i}
-              />
-            ))}
+            events.map((event, i) => {
+              return (
+                <EventsSectionCard
+                  width={['20em', '35em']}
+                  height="auto"
+                  event={event}
+                  key={'event' + i}
+                />
+              );
+            })}
         </Slider>
       </Box>
       <Button
