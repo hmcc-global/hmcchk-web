@@ -15,3 +15,9 @@ code {
 .ag-select-list {
   max-height: 400px !important;
 }
+
+@font-face {
+  font-family: 'Manrope';
+  src: local('Manrope'), url('./font/Manrope.ttf') format('truetype');
+  font-weight: normal;
+}

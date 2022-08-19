@@ -87,7 +87,7 @@ const MissionSection = (props) => {
             >
               {blurb.title[3]}
             </Heading>
-            <Text fontWeight={700} fontSize={['md', 'xl']}>
+            <Text fontWeight={700} fontSize={['md', 'xl']} pb={{ base: 1 }}>
               {blurb.heading[1]}
             </Text>
             <Text paddingBottom="2em" textAlign="justify">
@@ -171,7 +171,12 @@ const MissionSection = (props) => {
             </HStack>
           </VStack>
           <Box px={{ base: 1, md: 3 }}>
-            <Text fontWeight={700} fontSize={['md', 'xl']} marginTop={5}>
+            <Text
+              fontWeight={700}
+              fontSize={['md', 'xl']}
+              marginTop={5}
+              pb={{ base: 1 }}
+            >
               {blurb.heading[2]}
             </Text>
             <Text>
@@ -188,7 +193,7 @@ const MissionSection = (props) => {
             my={5}
           ></Box>
           <Box px={{ base: 1, md: 3 }}>
-            <Text fontWeight={700}>
+            <Text fontWeight={700} pb={{ base: 1 }}>
               <em>{blurb.heading[3]}</em>
             </Text>
             <Text marginBottom={7}>{blurb.blurb[6]}</Text>
