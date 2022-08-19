@@ -42,6 +42,7 @@ const LifeGroupSection = () => {
           justify="center"
           alignItems={['left', 'center']}
           spacing={[6, null]}
+          mx={[4, 0]}
         >
           <VStack
             w={['100%', '55%']}
@@ -83,7 +84,7 @@ const LifeGroupSection = () => {
               variant="outline"
               color="#0628A3"
               borderColor="#0628A3"
-              w={['85%', '38.2%']}
+              w={['45%', '38.2%']}
               _hover={{
                 bg: '#0628A3',
                 color: 'white',

@@ -72,7 +72,7 @@ const NewHereSection = () => {
           maxW="container.xl"
           justifyContent="center"
           alignItems="center"
-          pt={['35', '55']}
+          pt={['55']}
         >
           <Stack
             direction={['column', 'row']}
@@ -86,7 +86,7 @@ const NewHereSection = () => {
                 New here?
               </Heading>
               <Heading fontSize={['2em', '3em']} color="#0628A3">
-                Connect with us
+                Connect with us!
               </Heading>
             </VStack>
             <Box
@@ -95,12 +95,15 @@ const NewHereSection = () => {
               borderWidth={'1px'}
               px={5}
               py={[10]}
+              bgColor="#F7FAFC"
+              boxShadow={'xl'}
               borderRadius={[5, 10]}
             >
               <form onSubmit={onSubmit}>
-                <VStack spacing={[4, 5]} alignItems="center">
+                <VStack spacing={[3]} alignItems="center">
                   <FormControl id="name" isRequired w={['100%']}>
                     <Input
+                      h={'3em'}
                       variant="filled"
                       type="name"
                       placeholder="Name"
@@ -109,6 +112,7 @@ const NewHereSection = () => {
                   </FormControl>
                   <FormControl id="email" isRequired w={['100%']}>
                     <Input
+                      h={'3em'}
                       variant="filled"
                       type="email"
                       placeholder="Email"
@@ -117,6 +121,7 @@ const NewHereSection = () => {
                   </FormControl>
                   <FormControl id="phoneNumber" isRequired w={['100%']}>
                     <Input
+                      h={'3em'}
                       variant="filled"
                       placeholder="Phone Number"
                       onChange={(e) => setPhoneNumber(e.target.value)}
@@ -124,6 +129,7 @@ const NewHereSection = () => {
                   </FormControl>
                   <FormControl id="lifestage" isRequired w={['100%']}>
                     <Input
+                      h={'3em'}
                       variant="filled"
                       placeholder="Campus/Lifestage"
                       onChange={(e) => setLifestage(e.target.value)}
@@ -131,6 +137,7 @@ const NewHereSection = () => {
                   </FormControl>
                   <FormControl id="notes" isRequired w={['100%']}>
                     <Input
+                      h={'3em'}
                       type="notes"
                       placeholder="Notes and remarks"
                       variant="filled"
@@ -140,18 +147,25 @@ const NewHereSection = () => {
                       }}
                     />
                   </FormControl>
-                  <Box transform={['scale(0.77)', 'scale(1)']}>
+                  <Box pb={[0, 3]} transform={['scale(0.77)', 'scale(1)']}>
                     <ReCAPTCHA
                       sitekey={process.env.REACT_APP_CAPTCHA}
                       onChange={onChange}
                     />
                   </Box>
                   <Button
+                    h={'3em'}
                     bg="#0628A3"
                     variant="filled"
                     color="white"
                     type="submit"
                     width="full"
+                    _hover={{
+                      borderWidth: '3px',
+                      borderColor: '#0628A3',
+                      bg: 'white',
+                      color: '#0628A3',
+                    }}
                   >
                     {'Submit'}
                   </Button>
