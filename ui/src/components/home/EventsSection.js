@@ -1,4 +1,5 @@
 import {
+  chakra,
   Box,
   Container,
   Flex,
@@ -23,10 +24,19 @@ const allEventsText = 'all events >';
 
 const EventsSection = () => {
   const [events, setEvents] = useState([]);
-  const [computedMargin, setComputedMargin] = useState();
-  const [slideIndex, setSlideIndex] = useState(0);
 
-  const marginRef = useRef(null);
+  const sliderSettings = {
+    adaptiveHeight: true,
+    arrows: false,
+    centerMode: true,
+    dots: false,
+    focusOnSelect: true,
+    infinite: false,
+    slidesPerRow: 1,
+    speed: 500,
+    swipeToSlide: true,
+    variableWidth: true,
+  };
 
   const sliderStyle = {
     width: '100%',
@@ -36,6 +46,7 @@ const EventsSection = () => {
     marginLeft: '-50vw',
     marginRight: '-50vw',
   };
+
   const populateData = async () => {
     try {
       const { data } = await axios.get('/api/announcements/get-announcements');
@@ -58,50 +69,11 @@ const EventsSection = () => {
       console.log(err);
     }
   };
-  const currentWindow = useWindowSize();
-  useEffect(
-    () =>
-      marginRef.current
-        ? setComputedMargin(
-            window
-              .getComputedStyle(marginRef.current)
-              .getPropertyValue('margin-left')
-          )
-        : '',
-    [currentWindow]
-  );
-
-  useEffect(() => {
-    document.querySelectorAll('.slick-track').forEach((el) => {
-      el.style.setProperty('margin-left', computedMargin, 'important');
-    });
-  }, [computedMargin]);
 
   useEffect(() => {
     populateData();
   }, []);
-  const sliderSettings = {
-    adaptiveHeight: true,
-    centerMode: false,
-    dots: false,
-    focusOnSelect: true,
-    infinite: false,
-    slidesPerRow: 1,
-    speed: 500,
-    swipeToSlide: true,
-    variableWidth: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <SampleNextArrow index={slideIndex} maxSlide={events.length} />,
-    prevArrow: <SamplePrevArrow index={slideIndex} />,
-    afterChange: onArrowClick,
-  };
 
-  const sliderStyle = {
-    width: '100%',
-    position: 'relative',
-    height: 'auto',
-  };
   return (
     <Flex w="full" h={['95vh', 'auto']} direction="column">
       <Container
@@ -109,7 +81,6 @@ const EventsSection = () => {
         justifyContent="center"
         display="flex"
         marginTop="2em"
-        ref={marginRef}
       >
         <VStack w="full" alignItems={['flex-start', null]}>
           <HStack
@@ -117,7 +88,6 @@ const EventsSection = () => {
             whiteSpace="nowrap"
             height="10vh"
             marginBottom="1em"
-            justifyContent="space-between"
           >
             <Heading fontSize={['2em', '5xl']} color="black">
               Upcoming Events
@@ -137,11 +107,9 @@ const EventsSection = () => {
         </VStack>
       </Container>
       <Box
-        w="100%"
-        boxSizing="border-box"
+        w="full"
         display="flex"
         justifyContent="flex-start"
-        alignItems="flex-start"
         height="auto"
         overflowX={['auto', 'auto', 'auto', 'auto', 'hidden']}
         overflowY="hidden"
@@ -166,15 +134,13 @@ const EventsSection = () => {
       <Button
         display={['block', 'none']}
         width="15em"
-        color="#A5CBFF"
-        marginTop="2em"
-        background="transparent"
-        border="2px solid #A5CBFF"
-        borderRadius="7px"
+        color="white"
+        bgColor="black"
         alignSelf="center"
-        mb="10%"
+        mt="5%"
+        mb="5%"
       >
-        <LinkOverlay href="/events">See All Events</LinkOverlay>
+        <LinkOverlay href="/events">All events</LinkOverlay>
       </Button>
     </Flex>
   );

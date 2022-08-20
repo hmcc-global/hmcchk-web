@@ -20,7 +20,7 @@ const HeroSection = ({ sermonRef }) => {
       <Flex
         as="video"
         w="full"
-        h="96vh"
+        h={["92vh","96vh"]}
         src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
         loop
         autoPlay
@@ -140,7 +140,7 @@ const HeroSection = ({ sermonRef }) => {
                 Organize, Kwun Tong & Online
               </Text>
             </Box>
-            <Stack position="relative" bottom="4%" width="35px" height="35px">
+            <Stack position="relative" bottom="6%" width="35px" height="35px">
               <Image
                 src={process.env.PUBLIC_URL + '/images/home/DownArrow.png'}
                 style={{ cursor: 'pointer' }}

@@ -14,6 +14,7 @@ const ConnectFloatButton = (props) => {
       bottom={['2rem', '3rem']}
       right={['2rem', '3rem']}
       overflow="hidden"
+      zIndex={999}
     >
       <IconButton
         bg="#0628A3"
