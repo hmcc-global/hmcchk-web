@@ -34,8 +34,13 @@ const buttonText = 'Learn More';
 
 const LifeGroupSection = () => {
   return (
-    <Flex w="full" h={['100vh', '50vh']}>
-      <Container maxW="container.lg" justifyContent="center" display="flex">
+    <Flex w="full">
+      <Container
+        maxW="container.lg"
+        justifyContent="center"
+        display="flex"
+        py={[55]}
+      >
         <Stack
           w="100%"
           direction={['column', 'row']}
