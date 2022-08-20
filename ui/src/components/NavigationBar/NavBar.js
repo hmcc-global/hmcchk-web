@@ -187,114 +187,121 @@ const NavBar = (props) => {
                 >
                   {loggedIn ? (
                     <Flex align="center" justify="space-between">
-                      <Button
-                        textAlign="center"
-                        bgColor="rgba(72, 72, 72, 1)"
-                        borderColor="rgba(68, 68, 68, 1)"
-                        borderWidth="medium"
-                        h="3.5vh"
-                        marginLeft="10px"
-                        px={{ md: '2', lg: '5' }}
-                        py="4"
-                        _hover={{ backgroundColor: 'rgba(56, 56, 56, 1)' }}
-                        onClick={onLogout}
-                      >
-                        <LinkOverlay href="/">
-                          <Text
-                            fontWeight="600"
-                            textColor="rgba(249, 249, 249, 1)"
-                            fontSize={{
-                              md: 'x-small',
-                              lg: 'smaller',
-                              xl: 'small',
-                            }}
-                          >
-                            LOGOUT
-                          </Text>
-                        </LinkOverlay>
-                      </Button>
-                      <Button
-                        textAlign="center"
-                        bgColor="rgba(0, 88, 210, 1)"
-                        borderColor="rgba(0, 88, 210, 1)"
-                        borderWidth="medium"
-                        h="3.5vh"
-                        marginLeft="10px"
-                        px={{ md: '2', lg: '5' }}
-                        py="4"
-                        _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
-                        onClick={onClose}
-                      >
-                        <Link href="/profile">
-                          <Text
-                            fontWeight="600"
-                            textColor="rgba(249, 249, 249, 1)"
-                            fontSize={{
-                              md: 'x-small',
-                              lg: 'small',
-                              xl: 'small',
-                            }}
-                          >
-                            MY PROFILE
-                          </Text>
-                        </Link>
-                      </Button>
+                      <LinkBox>
+                        <Button
+                          textAlign="center"
+                          bgColor="rgba(72, 72, 72, 1)"
+                          borderColor="rgba(68, 68, 68, 1)"
+                          borderWidth="medium"
+                          h="3.5vh"
+                          marginLeft="10px"
+                          px={{ md: '2', lg: '5' }}
+                          py="4"
+                          _hover={{ backgroundColor: 'rgba(56, 56, 56, 1)' }}
+                          onClick={onLogout}
+                        >
+                          <LinkOverlay href="/">
+                            <Text
+                              fontWeight="600"
+                              textColor="rgba(249, 249, 249, 1)"
+                              fontSize={{
+                                md: 'x-small',
+                                lg: 'smaller',
+                                xl: 'small',
+                              }}
+                            >
+                              LOGOUT
+                            </Text>
+                          </LinkOverlay>
+                        </Button>
+                      </LinkBox>
+                      <LinkBox>
+                        <Button
+                          textAlign="center"
+                          bgColor="rgba(0, 88, 210, 1)"
+                          borderColor="rgba(0, 88, 210, 1)"
+                          borderWidth="medium"
+                          h="3.5vh"
+                          marginLeft="10px"
+                          px={{ md: '2', lg: '5' }}
+                          py="4"
+                          _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
+                          onClick={onClose}
+                        >
+                          <LinkOverlay href="/profile">
+                            <Text
+                              fontWeight="600"
+                              textColor="rgba(249, 249, 249, 1)"
+                              fontSize={{
+                                md: 'x-small',
+                                lg: 'small',
+                                xl: 'small',
+                              }}
+                            >
+                              MY PROFILE
+                            </Text>
+                          </LinkOverlay>
+                        </Button>
+                      </LinkBox>
                     </Flex>
                   ) : (
                     <Flex align="center" justify="space-between">
-                      <Button
-                        textAlign="center"
-                        bgColor="rgba(72, 72, 72, 1)"
-                        borderColor="rgba(68, 68, 68, 1)"
-                        borderWidth="medium"
-                        h="3.5vh"
-                        marginLeft="10px"
-                        px={{ md: '2', lg: '5' }}
-                        py="4"
-                        _hover={{ backgroundColor: 'rgba(56, 56, 56, 1)' }}
-                        onClick={onClose}
-                      >
-                        <Link href="/signup">
-                          <Text
-                            fontWeight="600"
-                            textColor="rgba(255, 255, 255, 1)"
-                            fontSize={{
-                              md: 'x-small',
-                              lg: 'small',
-                              xl: 'small',
-                            }}
-                          >
-                            SIGN UP
-                          </Text>
-                        </Link>
-                      </Button>
-
-                      <Button
-                        textAlign="center"
-                        bgColor="rgba(0, 88, 210, 1)"
-                        borderColor="rgba(0, 88, 210, 1)"
-                        borderWidth="medium"
-                        h="3.5vh"
-                        marginLeft="10px"
-                        px={{ md: '2', lg: '5' }}
-                        py="4"
-                        _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
-                        onClick={{ onClose }}
-                      >
-                        <Link href="/login">
-                          <Text
-                            fontWeight="600"
-                            textColor="rgba(249, 249, 249, 1)"
-                            fontSize={{
-                              md: 'x-small',
-                              lg: 'smaller',
-                              xl: 'small',
-                            }}
-                          >
-                            LOGIN
-                          </Text>
-                        </Link>
-                      </Button>
+                      <LinkBox>
+                        <Button
+                          textAlign="center"
+                          bgColor="rgba(72, 72, 72, 1)"
+                          borderColor="rgba(68, 68, 68, 1)"
+                          borderWidth="medium"
+                          h="3.5vh"
+                          marginLeft="10px"
+                          px={{ md: '2', lg: '5' }}
+                          py="4"
+                          _hover={{ backgroundColor: 'rgba(56, 56, 56, 1)' }}
+                          onClick={onClose}
+                        >
+                          <LinkOverlay href="/signup">
+                            <Text
+                              fontWeight="600"
+                              textColor="rgba(255, 255, 255, 1)"
+                              fontSize={{
+                                md: 'x-small',
+                                lg: 'small',
+                                xl: 'small',
+                              }}
+                            >
+                              SIGN UP
+                            </Text>
+                          </LinkOverlay>
+                        </Button>
+                      </LinkBox>
+                      <LinkBox>
+                        <Button
+                          textAlign="center"
+                          bgColor="rgba(0, 88, 210, 1)"
+                          borderColor="rgba(0, 88, 210, 1)"
+                          borderWidth="medium"
+                          h="3.5vh"
+                          marginLeft="10px"
+                          px={{ md: '2', lg: '5' }}
+                          py="4"
+                          _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
+                          onClick={{ onClose }}
+                        >
+                          <LinkOverlay href="/login">
+                            <Text
+                              fontWeight="600"
+                              textColor="rgba(249, 249, 249, 1)"
+                              fontSize={{
+                                md: 'x-small',
+                                lg: 'smaller',
+                                xl: 'small',
+                              }}
+                            >
+                              LOGIN
+                            </Text>
+                          </LinkOverlay>
+                        </Button>
+                      </LinkBox>
                     </Flex>
                   )}
                 </Box>
