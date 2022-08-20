@@ -20,8 +20,10 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Link,
+  LinkBox,
   LinkOverlay,
   useDisclosure,
+  HStack,
 } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { customAxios as axios } from '../helpers/customAxios';
@@ -29,19 +31,16 @@ import MainMenu from './MainMenu';
 import { useHistory } from 'react-router-dom';
 
 const NavBar = (props) => {
-  const isOnlineSermon = useHistory().location.pathname.includes("online");
+  const isOnlineSermon = useHistory().location.pathname.includes('online');
   const [loggedIn, setLoggedIn] = useState(false);
   const user = useSelector((state) => state.user);
   const [username, setUsername] = useState('');
-  const welcomeMsg = ['Login or Sign up', `Hi, ${username}`];
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const liveScStyle = {
     border: '5px',
     backgroundColor: '#EB4335',
     color: 'white',
-    fontSize: 'xs',
-    justify: 'center',
     fontWeight: '600',
     align: 'center',
   };
@@ -73,46 +72,75 @@ const NavBar = (props) => {
 
   return (
     <>
-      <Flex w="100vw" background="rgba(0, 0, 0, 0.4)" justify="center">
+      <Flex background="rgba(0, 0, 0, 0.4)">
         <Flex
-          w="100vw"
-          justify={['space-between', 'space-around']}
-          backgroundColor="white"
+          width="100%"
+          backgroundColor="rgba(39, 39, 39, 1)"
           backdrop-filter="blur(39px)"
           align="center"
           fontSize={{ md: 'xs', lg: 'sm', xl: 'md' }}
-          h={{ md: '7vh', lg: '7vh', xl: '8.5vh' }}
+          h={{ md: '7vh', lg: '7vh', xl: '8vh' }}
         >
-          <Container maxW="container.lg">
+          <Container maxW="100%" padding={5}>
             <Flex
-              justify={['space-between', 'space-around']}
+              justify="space-between"
               align="center"
-              fontSize={{ md: 'xs', lg: 'sm', xl: 'md' }}
-              h={{ md: '7vh', lg: '7vh', xl: '8.5vh' }}
+              fontSize={{ md: 'x-small', lg: 'smaller', xl: 'small' }}
+              h={{ base: '5vh', md: '7vh', lg: '7vh', xl: '8.5vh' }}
             >
-              <Box position="relative">
-                <LinkOverlay href="/">
-                  <Image
-                    h={{
-                      base: '3vh',
-                      sm: '3vh',
-                      md: '3vh',
-                      lg: '5vh',
+              <HStack spacing={5}>
+                <LinkBox>
+                  <LinkOverlay href="/">
+                    <Image
+                      h="3vh"
+                      src={process.env.PUBLIC_URL + '/images/ripple.svg'}
+                      alt="Logo of HMCC"
+                    />
+                  </LinkOverlay>
+                </LinkBox>
+                <Link href="/">
+                  <Text
+                    textColor="#FFFFFF"
+                    fontSize={{
+                      base: 'small',
+                      md: 'x-small',
+                      lg: 'smaller',
+                      xl: 'small',
                     }}
-                    src={process.env.PUBLIC_URL + '/images/ripple_black.svg'}
-                    alt="Logo of HMCC"
-                  />
-                </LinkOverlay>
-              </Box>
+                  >
+                    Harvest Mission Community Church
+                  </Text>
+                </Link>
+                {currDate === 'Sun' && !isOnlineSermon ? (
+                  <Link href="/online" style={{ lineHeight: '0' }}>
+                    <Button
+                      h="6"
+                      paddingLeft="2"
+                      paddingRight="3"
+                      style={liveScStyle}
+                      lineHeight="0"
+                      borderRadius="8"
+                      fontSize={{
+                        md: 'x-small',
+                        lg: 'small',
+                        xl: 'small',
+                      }}
+                    >
+                      &bull; Live
+                    </Button>
+                  </Link>
+                ) : null}
+              </HStack>
 
               <Stack
                 fontWeight="600"
-                spacing={10}
-                color="black"
-                justify="center"
+                spacing={7}
+                color="rgba(255, 255, 255, 1)"
+                justify={['space-between', 'space-around']}
                 align="center"
                 display={{ base: 'none', md: 'flex' }}
-                marginLeft="40px"
+                marginLeft="15px"
+                marginRight={{ md: '15px', lg: '40px' }}
                 isInline
               >
                 <Box position="relative">
@@ -122,6 +150,16 @@ const NavBar = (props) => {
                   <Link href="/about-us">ABOUT</Link>
                 </Box>
                 <Box position="relative">
+                  <Text
+                    transform="rotate(10deg)"
+                    position="fixed"
+                    textColor="yellow"
+                    fontSize="xx-small"
+                    marginStart="10"
+                    lineHeight="0"
+                  >
+                    I'm new!
+                  </Text>
                   <Link href="/connect">CONNECT</Link>
                 </Box>
                 <Box position="relative">
@@ -148,27 +186,123 @@ const NavBar = (props) => {
                   display={{ base: 'none', md: 'flex' }}
                 >
                   {loggedIn ? (
-                    <Menu>
-                      <MenuButton>
-                        <Text marginLeft="10px" fontWeight="600">
-                          {welcomeMsg[1]}
-                        </Text>
-                      </MenuButton>
-                      <MenuList>
-                        <MenuItem>
-                          <Link href="/profile">View Profile</Link>
-                        </MenuItem>
-                        <MenuItem onClick={onLogout}>
-                          <Link href="/">Log Out</Link>
-                        </MenuItem>
-                      </MenuList>
-                    </Menu>
+                    <Flex align="center" justify="space-between">
+                      <LinkBox>
+                        <Button
+                          textAlign="center"
+                          bgColor="rgba(72, 72, 72, 1)"
+                          borderColor="rgba(68, 68, 68, 1)"
+                          borderWidth="medium"
+                          h="3.5vh"
+                          marginLeft="10px"
+                          px={{ md: '2', lg: '5' }}
+                          py="4"
+                          _hover={{ backgroundColor: 'rgba(56, 56, 56, 1)' }}
+                          onClick={onLogout}
+                        >
+                          <LinkOverlay href="/">
+                            <Text
+                              fontWeight="600"
+                              textColor="rgba(249, 249, 249, 1)"
+                              fontSize={{
+                                md: 'x-small',
+                                lg: 'smaller',
+                                xl: 'small',
+                              }}
+                            >
+                              LOGOUT
+                            </Text>
+                          </LinkOverlay>
+                        </Button>
+                      </LinkBox>
+                      <LinkBox>
+                        <Button
+                          textAlign="center"
+                          bgColor="rgba(0, 88, 210, 1)"
+                          borderColor="rgba(0, 88, 210, 1)"
+                          borderWidth="medium"
+                          h="3.5vh"
+                          marginLeft="10px"
+                          px={{ md: '2', lg: '5' }}
+                          py="4"
+                          _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
+                          onClick={onClose}
+                        >
+                          <LinkOverlay href="/profile">
+                            <Text
+                              fontWeight="600"
+                              textColor="rgba(249, 249, 249, 1)"
+                              fontSize={{
+                                md: 'x-small',
+                                lg: 'small',
+                                xl: 'small',
+                              }}
+                            >
+                              MY PROFILE
+                            </Text>
+                          </LinkOverlay>
+                        </Button>
+                      </LinkBox>
+                    </Flex>
                   ) : (
-                    <Link href="/login">
-                      <Text fontWeight="600" marginLeft="10px">
-                        {welcomeMsg[0]}
-                      </Text>
-                    </Link>
+                    <Flex align="center" justify="space-between">
+                      <LinkBox>
+                        <Button
+                          textAlign="center"
+                          bgColor="rgba(72, 72, 72, 1)"
+                          borderColor="rgba(68, 68, 68, 1)"
+                          borderWidth="medium"
+                          h="3.5vh"
+                          marginLeft="10px"
+                          px={{ md: '2', lg: '5' }}
+                          py="4"
+                          _hover={{ backgroundColor: 'rgba(56, 56, 56, 1)' }}
+                          onClick={onClose}
+                        >
+                          <LinkOverlay href="/signup">
+                            <Text
+                              fontWeight="600"
+                              textColor="rgba(255, 255, 255, 1)"
+                              fontSize={{
+                                md: 'x-small',
+                                lg: 'small',
+                                xl: 'small',
+                              }}
+                            >
+                              SIGN UP
+                            </Text>
+                          </LinkOverlay>
+                        </Button>
+                      </LinkBox>
+                      <LinkBox>
+                        <Button
+                          textAlign="center"
+                          bgColor="rgba(0, 88, 210, 1)"
+                          borderColor="rgba(0, 88, 210, 1)"
+                          borderWidth="medium"
+                          h="3.5vh"
+                          marginLeft="10px"
+                          px={{ md: '2', lg: '5' }}
+                          py="4"
+                          _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
+                          onClick={{ onClose }}
+                        >
+                          <LinkOverlay href="/login">
+                            <Text
+                              fontWeight="600"
+                              textColor="rgba(249, 249, 249, 1)"
+                              fontSize={{
+                                md: 'x-small',
+                                lg: 'smaller',
+                                xl: 'small',
+                              }}
+                            >
+                              LOGIN
+                            </Text>
+                          </LinkOverlay>
+                        </Button>
+                      </LinkBox>
+                    </Flex>
                   )}
                 </Box>
                 <Box>
@@ -190,10 +324,10 @@ const NavBar = (props) => {
         </Flex>
       </Flex>
 
-      {currDate === 'Sun' && !isOnlineSermon ? (
+      {/* {currDate === 'Wed' && !isOnlineSermon ? (
         <Flex
           w="100vw"
-          background="#ffffff"
+          background="black"
           border="1px solid #E2E8F0"
           box-shadow="0px 4px 4px rgba(0, 0, 0, 0.25), 0px 1px 3px rgba(0, 0, 0, 0.1)"
           border-radius="4px"
@@ -221,7 +355,7 @@ const NavBar = (props) => {
             </Stack>
           </Flex>
         </Flex>
-      ) : null}
+      ) : null} */}
       <Drawer
         isOpen={isOpen}
         size="full"
@@ -233,7 +367,7 @@ const NavBar = (props) => {
         <DrawerContent
           background="url('/images/ripple_bg.png')"
           backgroundRepeat="no-repeat"
-          backgroundColor="#2c5282"
+          backgroundColor="rgba(18, 72, 146, 1)"
           backgroundSize="70%"
           backgroundPosition="120% 75%"
           width={{ base: '100%', md: '70%' }}

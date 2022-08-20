@@ -19,6 +19,7 @@ import {
   AccordionPanel,
   Container,
   AccordionIcon,
+  LinkBox,
 } from '@chakra-ui/react';
 import { SocialIcon } from 'react-social-icons';
 
@@ -135,31 +136,36 @@ const MainMenu = ({ login, onClose }) => {
                   colorScheme="black"
                   width="200px"
                 >
-                  <Button marginBottom="5" width="100%">
-                    <LinkOverlay href="/profile" onClick={onClose}>
-                      My Profile
-                    </LinkOverlay>
-                  </Button>
-                  <Button
-                    onClick={onLogout}
-                    onClick={onClose}
-                    marginBottom="5"
-                    width="100%"
-                    style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
-                  >
-                    <LinkOverlay href="/">Log Out</LinkOverlay>
-                  </Button>
-                  <Button
-                    width="100%"
-                    style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
-                  >
-                    <LinkOverlay
-                      href="https://forms.gle/6jasxuLNZt5MVXAy8"
-                      target="_blank"
+                  <LinkBox>
+                    <Button marginBottom="5" width="100%">
+                      <LinkOverlay href="/profile" onClick={onClose}>
+                        MY PROFILE
+                      </LinkOverlay>
+                    </Button>
+                  </LinkBox>
+                  <LinkBox>
+                    <Button
+                      onClick={onLogout}
+                      marginBottom="5"
+                      width="100%"
+                      style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
                     >
-                      Prayer Requests
-                    </LinkOverlay>
-                  </Button>
+                      <LinkOverlay href="/">LOG OUT</LinkOverlay>
+                    </Button>
+                  </LinkBox>
+                  <LinkBox>
+                    <Button
+                      width="100%"
+                      style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
+                    >
+                      <LinkOverlay
+                        href="https://forms.gle/6jasxuLNZt5MVXAy8"
+                        target="_blank"
+                      >
+                        Prayer Requests
+                      </LinkOverlay>
+                    </Button>
+                  </LinkBox>
                 </ButtonGroup>
               ) : (
                 <ButtonGroup
@@ -171,22 +177,36 @@ const MainMenu = ({ login, onClose }) => {
                   colorScheme="black"
                   width="200px"
                 >
-                  <Button marginBottom="5" width="100%">
-                    <LinkOverlay href="/login" onClick={onClose}>
-                      Login or Sign up
-                    </LinkOverlay>
-                  </Button>
-                  <Button
-                    width="100%"
-                    style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
-                  >
-                    <LinkOverlay
-                      href="https://forms.gle/6jasxuLNZt5MVXAy8"
-                      target="_blank"
+                  <LinkBox>
+                    <Button marginBottom="5" width="100%">
+                      <LinkOverlay href="/login" onClick={onClose}>
+                        LOGIN
+                      </LinkOverlay>
+                    </Button>
+                  </LinkBox>
+                  <LinkBox>
+                    <Button
+                      onClick={onClose}
+                      marginBottom="5"
+                      width="100%"
+                      style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
                     >
-                      Prayer Requests
-                    </LinkOverlay>
-                  </Button>
+                      <LinkOverlay href="/signup">SIGN UP</LinkOverlay>
+                    </Button>
+                  </LinkBox>
+                  <LinkBox>
+                    <Button
+                      width="100%"
+                      style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
+                    >
+                      <LinkOverlay
+                        href="https://forms.gle/6jasxuLNZt5MVXAy8"
+                        target="_blank"
+                      >
+                        Prayer Requests
+                      </LinkOverlay>
+                    </Button>
+                  </LinkBox>
                 </ButtonGroup>
               )}
             </Box>
@@ -367,37 +387,43 @@ const MainMenu = ({ login, onClose }) => {
                       colorScheme="black"
                       width="200px"
                     >
-                      <Button marginBottom="5" width="100%">
-                        <Link href="/profile" onClick={onClose}>
-                          My Profile
-                        </Link>
-                      </Button>
-                      <Button
-                        onClick={onLogout}
-                        marginBottom="5"
-                        width="100%"
-                        style={{
-                          WebkitMarginStart: '0',
-                          marginInlineStart: '0',
-                        }}
-                      >
-                        Log Out
-                      </Button>
-                      <Button
-                        width="100%"
-                        style={{
-                          WebkitMarginStart: '0',
-                          marginInlineStart: '0',
-                        }}
-                      >
-                        <Link
-                          href="https://forms.gle/6jasxuLNZt5MVXAy8"
-                          target="_blank"
-                          onClick={onClose}
+                      <LinkBox>
+                        <Button marginBottom="5" width="100%">
+                          <LinkOverlay href="/profile" onClick={onClose}>
+                            MY PROFILE
+                          </LinkOverlay>
+                        </Button>
+                      </LinkBox>
+                      <LinkBox>
+                        <Button
+                          onClick={onLogout}
+                          marginBottom="5"
+                          width="100%"
+                          style={{
+                            WebkitMarginStart: '0',
+                            marginInlineStart: '0',
+                          }}
                         >
-                          Prayer Requests
-                        </Link>
-                      </Button>
+                          LOG OUT
+                        </Button>
+                      </LinkBox>
+                      <LinkBox>
+                        <Button
+                          width="100%"
+                          style={{
+                            WebkitMarginStart: '0',
+                            marginInlineStart: '0',
+                          }}
+                        >
+                          <LinkOverlay
+                            href="https://forms.gle/6jasxuLNZt5MVXAy8"
+                            target="_blank"
+                            onClick={onClose}
+                          >
+                            Prayer Requests
+                          </LinkOverlay>
+                        </Button>
+                      </LinkBox>
                     </ButtonGroup>
                   ) : (
                     <ButtonGroup
@@ -407,26 +433,45 @@ const MainMenu = ({ login, onClose }) => {
                       colorScheme="black"
                       width="200px"
                     >
-                      <Button marginBottom="5" width="100%">
-                        <Link href="/login" onClick={onClose}>
-                          Login or Sign up
-                        </Link>
-                      </Button>
-                      <Button
-                        width="100%"
-                        style={{
-                          WebkitMarginStart: '0',
-                          marginInlineStart: '0',
-                        }}
-                      >
-                        <Link
-                          href="https://forms.gle/6jasxuLNZt5MVXAy8"
-                          target="_blank"
-                          onClick={onClose}
+                      <LinkBox>
+                        <Button marginBottom="5" width="100%">
+                          <LinkOverlay href="/login" onClick={onClose}>
+                            LOGIN
+                          </LinkOverlay>
+                        </Button>
+                      </LinkBox>
+                      <LinkBox>
+                        <Button
+                          onClick={onLogout}
+                          marginBottom="5"
+                          width="100%"
+                          style={{
+                            WebkitMarginStart: '0',
+                            marginInlineStart: '0',
+                          }}
                         >
-                          Prayer Requests
-                        </Link>
-                      </Button>
+                          <LinkOverlay href="/signup" onClick={onClose}>
+                            SIGNUP
+                          </LinkOverlay>
+                        </Button>
+                      </LinkBox>
+                      <LinkBox>
+                        <Button
+                          width="100%"
+                          style={{
+                            WebkitMarginStart: '0',
+                            marginInlineStart: '0',
+                          }}
+                        >
+                          <LinkOverlay
+                            href="https://forms.gle/6jasxuLNZt5MVXAy8"
+                            target="_blank"
+                            onClick={onClose}
+                          >
+                            Prayer Requests
+                          </LinkOverlay>
+                        </Button>
+                      </LinkBox>
                     </ButtonGroup>
                   )}
                 </Box>

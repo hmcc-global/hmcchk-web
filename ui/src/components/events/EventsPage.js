@@ -46,19 +46,23 @@ const EventsPage = (props) => {
   };
   return (
     <Container maxW="container.lg">
-      <Heading
-        as="h2"
-        mb="2"
-        size="2xl"
-        pt="20"
-        fontWeight="900"
-        textAlign="center"
-      >
-        Events
-      </Heading>
-      <Text fontSize={{ base: 'sm', md: 'md' }} textAlign="center">
-        Check out what's happening at HMCC of Hong Kong!
-      </Text>
+      <Container maxW="container.lg" bgImage={`url('${process.env.PUBLIC_URL}/images/event_banner.png')`} bgPosition="center"
+          bgSize="cover" marginTop="10" paddingBottom="20">
+        <Heading
+          as="h2"
+          mb="2"
+          size="2xl"
+          pt="20"
+          fontWeight="900"
+          textAlign="center"
+          textColor="rgba(255, 255, 255, 1)"
+        >
+          Events
+        </Heading>
+        <Text fontSize={{ base: 'sm', md: 'md' }} textAlign="center" textColor="rgba(255, 255, 255, 1)" fontWeight="600">
+          Check out what's happening at HMCC of Hong Kong!
+        </Text>
+      </Container>
       <Grid
         mt="12"
         mb="12"
