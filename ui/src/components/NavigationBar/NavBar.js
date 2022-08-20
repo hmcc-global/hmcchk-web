@@ -36,7 +36,7 @@ const NavBar = (props) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const [username, setUsername] = useState('');
+  const [userObj, setUserObj] = useState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const liveScStyle = {
@@ -57,25 +57,24 @@ const NavBar = (props) => {
     const { data } = await axios.post('/api/auth/verify-token', {
       token: token,
     });
-    return data;
+    setUserObj(data);
   };
 
   useEffect(() => {
     const fetch = async () => {
-      const obj = await getUserObj(user);
-      return obj;
+      await getUserObj(user);
     };
 
-    const userObj = fetch();
+    fetch();
+  }, [user]);
 
+  useEffect(() => {
     if (userObj) {
-      const { fullName } = userObj;
-      setUsername(fullName.split(' ')[0]);
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
     }
-  }, [user]);
+  }, [userObj]);
 
   let currDate = new Date().toDateString().substr(0, 3);
 
@@ -294,7 +293,7 @@ const NavBar = (props) => {
                           px={{ md: '2', lg: '5' }}
                           py="4"
                           _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
-                          onClick={{ onClose }}
+                          onClick={onClose}
                         >
                           <LinkOverlay href="/login">
                             <Text
