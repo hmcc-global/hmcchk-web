@@ -2,113 +2,161 @@ import {
   Flex,
   VStack,
   Stack,
-  Link,
+  Image,
   useBreakpointValue,
   Heading,
   Container,
-  Button,
+  Text,
+  Box,
 } from '@chakra-ui/react';
-
 // TODO figure out a way to have a central location to edit photo url, blurbs etc.
 // sm = 30em, md = 48em, lg = 62em, xl = 80em, 2xl = "96em"
 // sm = 480px, md = 768px, lg = 992px, xl = 1280px, 2xl = "1536px"
 const heroText = 'Transforming Lives,\nTransforming the World';
-const worshipText = 'WORSHIP IN-PERSON >';
-const churchText = 'CHURCH ONLINE >';
-const covidText = 'OUR LATEST COVID-19 POLICY >';
 
-const HeroSection = () => {
+const HeroSection = ({ anchorTarget }) => {
   return (
-    <Flex
-      w="full"
-      h="100vh"
-      bgImage={`linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${
-        process.env.PUBLIC_URL + '/images/home/hero.png'
-      })`}
-      bgSize="cover"
-      bgPosition="center center"
-      justify="center"
-    >
-      <Container maxW="container.lg" justifyContent="center" display="flex">
-        <VStack
-          w="full"
-          justify="center"
-          px={useBreakpointValue({ base: 4, md: 8 })}
-        >
-          <Stack w="full" align="center" spacing={6}>
-            <Heading
-              color="white"
-              as="h1"
-              fontSize={['1.9em', '4em']}
-              textAlign="center"
-              whiteSpace="pre-wrap"
-              alignSelf="center"
-            >
-              {heroText}
-            </Heading>
+    <>
+      <Flex
+        as="video"
+        w="full"
+        h={["92vh","96vh"]}
+        src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
+        loop
+        autoPlay
+        muted
+        objectFit="cover"
+        justify="center"
+        // position="fixed"
+        sx={{ aspectRatio: '16/9' }}
+      />
+      <Flex
+        w="full"
+        h="100vh"
+        marginTop="-100vh"
+        background="rgba(73, 94, 123, 0.53)"
+        style={{ zIndex: 1 }}
+        position="relative"
+      >
+        <Container maxW="container.lg" justifyContent="center" display="flex">
+          <VStack
+            w="full"
+            justify="center"
+            h="100%"
+            px={useBreakpointValue({ base: 4, md: 8 })}
+            spacing={12}
+          >
             <Stack
-              direction={['column', 'row']}
-              w="90%"
-              alignItems={['center']}
+              w="full"
+              align="center"
+              spacing={6}
+              justifyContent="center"
+              height="90%"
+              marginTop="6em"
             >
-              <Button
-                bg="rgb(0, 0, 0, 0)"
-                variant="outline"
+              <Heading
                 color="white"
-                _hover={{
-                  bg: 'white',
-                  color: '#1A365D',
-                  borderColor: '#1A365D',
-                  textDecoration: 'none',
-                }}
-                w="inherit"
-                as={Link}
-                // href="/visit-us"
-                href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/"
-                fontSize={['sm', 'md']}
-                target="_blank"
+                as="h1"
+                fontSize={{ base: '1.5em', md: '3em' }}
+                textAlign="center"
+                fontWeight={600}
+                whiteSpace="pre-wrap"
+                alignSelf="center"
               >
-                {covidText}
-              </Button>
-              <Button
-                bg="rgb(0, 0, 0, 0)"
-                variant="outline"
-                color="white"
-                _hover={{
-                  bg: 'white',
-                  color: '#1A365D',
-                  borderColor: '#1A365D',
-                  textDecoration: 'none',
-                }}
-                w="inherit"
-                as={Link}
-                href="/visit-us"
-                fontSize={['sm', 'md']}
+                {heroText}
+              </Heading>
+              <Image src={process.env.PUBLIC_URL + '/images/home/ripple.png'} />
+              <Stack
+                w="full"
+                align="center"
+                marginTop="-1rem !important"
+                rowGap={12}
               >
-                {worshipText}
-              </Button>
-              <Button
-                bg="rgb(0, 0, 0, 0)"
-                variant="outline"
-                color="white"
-                _hover={{
-                  bg: 'white',
-                  color: '#1A365D',
-                  borderColor: '#1A365D',
-                  textDecoration: 'none',
-                }}
-                w="inherit"
-                as={Link}
-                href="/online"
-                fontSize={['sm', 'md']}
-              >
-                {churchText}
-              </Button>
+                <Box>
+                  <Heading
+                    color="white"
+                    as="h4"
+                    textAlign="center"
+                    whiteSpace="pre-wrap"
+                    alignSelf="center"
+                    fontSize={{ base: '0.8em', md: '1.2em' }}
+                    fontWeight={600}
+                  >
+                    Harvest Mission Community Church
+                  </Heading>
+                  <Heading
+                    color="white"
+                    as="h4"
+                    fontSize={{ base: '0.8em', md: '1.2em' }}
+                    textAlign="center"
+                    whiteSpace="pre-wrap"
+                    alignSelf="center"
+                    fontWeight={600}
+                  >
+                    of Hong Kong
+                  </Heading>
+                </Box>
+                <Box
+                  style={{
+                    background: 'rgba(27, 53, 102, 0.8)',
+                  }}
+                  padding={{ base: '0px', md: '8px' }}
+                >
+                  <Text
+                    color="white"
+                    display={{ base: 'none', md: 'flex' }}
+                    style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
+                    fontSize="16px"
+                  >
+                    Every Sunday at 10AM HKT | Organize, Kwun Tong & Online
+                  </Text>
+                </Box>
+              </Stack>
             </Stack>
-          </Stack>
-        </VStack>
-      </Container>
-    </Flex>
+            <Box
+              style={{
+                background: 'rgba(27, 53, 102, 0.8)',
+              }}
+              padding={{ base: '8px', md: '0px' }}
+              position="relative"
+              bottom="4%"
+            >
+              <Text
+                color="white"
+                display={{ base: 'flex', md: 'none' }}
+                justifyContent="center"
+                style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
+                fontSize="12px"
+              >
+                Every Sunday at 10AM HKT
+              </Text>
+              <Text
+                color="white"
+                justifyContent="center"
+                display={{ base: 'flex', md: 'none' }}
+                style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
+                fontSize="12px"
+              >
+                Organize, Kwun Tong & Online
+              </Text>
+            </Box>
+            <Stack position="relative" bottom="6%" width="35px" height="35px">
+              <Image
+                src={process.env.PUBLIC_URL + '/images/home/DownArrow.png'}
+                style={{ cursor: 'pointer' }}
+                onClick={() =>
+                  anchorTarget.current.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest',
+                  })
+                }
+              />
+            </Stack>
+          </VStack>
+        </Container>
+      </Flex>
+    </>
   );
 };
 
