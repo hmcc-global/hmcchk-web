@@ -14,7 +14,7 @@ import {
 // sm = 480px, md = 768px, lg = 992px, xl = 1280px, 2xl = "1536px"
 const heroText = 'Transforming Lives,\nTransforming the World';
 
-const HeroSection = ({ sermonRef }) => {
+const HeroSection = ({ anchorTarget }) => {
   return (
     <>
       <Flex
@@ -145,7 +145,7 @@ const HeroSection = ({ sermonRef }) => {
                 src={process.env.PUBLIC_URL + '/images/home/DownArrow.png'}
                 style={{ cursor: 'pointer' }}
                 onClick={() =>
-                  sermonRef.current.scrollIntoView({
+                  anchorTarget.current.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start',
                     inline: 'nearest',

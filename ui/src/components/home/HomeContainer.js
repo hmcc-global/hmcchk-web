@@ -39,7 +39,7 @@ const HomeContainer = (props) => {
   };
   return (
     <Flex direction="column">
-      <HeroSection sermonRef={sermonRef} />
+      <HeroSection anchorTarget={sermonRef} />
       <HelloSermonSection ref={sermonRef} />
       <AboutSection />
       <EventsSection />
