@@ -39,8 +39,8 @@ const HomeContainer = (props) => {
   return (
     <Flex direction="column">
       <HeroSection />
-      <EventsSection />
       <AboutSection />
+      <EventsSection />
       <LifeGroupSection />
       <NewHereSection />
       {popup.flag && <PopupContainer props={popup} />}
