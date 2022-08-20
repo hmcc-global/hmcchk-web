@@ -22,13 +22,18 @@ import {
   LinkBox,
 } from '@chakra-ui/react';
 import { SocialIcon } from 'react-social-icons';
+import { useDispatch } from 'react-redux';
+import { signout } from '../../reducers/userSlice';
 
 const MainMenu = ({ login, onClose }) => {
   const onLogout = () => {
     onClose();
+    dispatch(signout());
     localStorage.clear();
     window.location.reload();
   };
+
+  const dispatch = useDispatch();
 
   const WebView = () => {
     return (
