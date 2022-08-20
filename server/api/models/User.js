@@ -135,5 +135,8 @@ email status until they click the link in the confirmation email.`,
       description:
         'A flag to indicate whether a user has completed the profile form',
     },
+    tithelyId: {
+      type: 'json'
+    }
   },
 };
