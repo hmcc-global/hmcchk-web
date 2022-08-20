@@ -35,8 +35,8 @@ const NavBar = (props) => {
   const isOnlineSermon = useHistory().location.pathname.includes('online');
   const [loggedIn, setLoggedIn] = useState(false);
   const user = useSelector((state) => state.user);
-  const [username, setUsername] = useState('');
   const dispatch = useDispatch();
+  const [username, setUsername] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const liveScStyle = {
