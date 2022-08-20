@@ -16,7 +16,7 @@ import { Link as ReactLink } from 'react-router-dom';
 const HelpCardInfo = [
   {
     title: "I'm New",
-    text: 'Connect with us',
+    text: ['Connect with us'],
     image: 'im-new-bg.png',
     titleStyle: { color: 'green' },
     textStyle: { color: 'black' },
@@ -24,7 +24,7 @@ const HelpCardInfo = [
   },
   {
     title: 'Visit us',
-    text: 'Every Sunday at 10AM HKT In-person & Online',
+    text: ['Every Sunday at 10AM HKT',<br />, 'In-person & Online'],
     image: 'visit-us-bg.png',
     titleStyle: { color: 'white' },
     textStyle: { color: 'white' },
@@ -32,7 +32,7 @@ const HelpCardInfo = [
   },
   {
     title: 'About HMCC',
-    text: 'Learn more about who we are',
+    text: ['Learn more about who we are'],
     image: 'about-hmcc-bg.png',
     titleStyle: { color: 'white' },
     textStyle: { color: 'white' },
@@ -70,14 +70,16 @@ const HelpCard = (props) => {
           <Heading
             style={props.titleStyle}
             fontSize={{ base: '1.5rem', md: '2.5rem' }}
+            fontWeight={600}
           >
             {props.title}
           </Heading>
           <Text
             style={props.textStyle}
             fontSize={{ base: '0.8rem', md: '1.2rem' }}
+            textAlign="center"
           >
-            {props.text}
+            {props.text.map((text) => text)}
           </Text>
         </VStack>
       </Link>
@@ -128,9 +130,8 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
   return (
     <>
       <Flex
-        ref={ref}
         w="full"
-        h={{ base: 'auto', md: '80vh', lg: '90vh' }}
+        h="auto"
         justify="center"
         background={{
           base: '',
@@ -145,8 +146,9 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
           flexDirection={{ base: 'column', md: 'row' }}
         >
           <Box
+            ref={ref}
             width={{ base: '100%', md: '50%' }}
-            h={{ base: '70vh', md: 'auto' }}
+            h="auto"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -154,8 +156,12 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
               alignItems: 'center',
             }}
           >
-            <VStack width="80%" padding="2rem" gap={4}>
-              <Heading style={{ alignSelf: 'flex-start', color: '#0628A3' }}>
+            <VStack
+              width="80%"
+              padding={{ base: '3rem 0.5rem', md: '5rem 2rem' }}
+              gap={4}
+            >
+              <Heading style={{ alignSelf: 'flex-start', color: '#0628A3' }} fontSize={{base:"lg",md:"4xl"}} fontWeight={600}>
                 How can we help you?
               </Heading>
               <VStack height="100%" width="100%">
@@ -171,7 +177,7 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
           </Box>
           <Box
             width={{ base: '100%', md: '50%' }}
-            h={{ base: '75vh', md: 'auto' }}
+            h="auto"
             background={{ base: '#172848', md: '' }}
             style={{
               display: 'flex',
@@ -180,8 +186,12 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
               alignItems: 'center',
             }}
           >
-            <VStack width="80%" padding="2rem" gap={4}>
-              <Heading color="white" style={{ alignSelf: 'flex-start' }}>
+            <VStack
+              width="80%"
+              padding={{ base: '3rem 0.5rem', md: '5rem 2rem' }}
+              gap={4}
+            >
+              <Heading color="white" style={{ alignSelf: 'flex-start' }} fontWeight={600} >
                 Latest Sermon
               </Heading>
               <Box>
@@ -201,6 +211,8 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
                   color="#A5CBFF"
                   display="flex"
                   justifyContent="flex-start"
+                  fontSize={{ base: '2xl', md: '4xl' }}
+                  fontWeight={600}
                 >
                   {currentSermon
                     ? isSunday
@@ -211,13 +223,14 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
                 <Text
                   style={{ alignSelf: 'flex-start', marginTop: '0px' }}
                   color="white"
+                  fontSize={{ base: '14px', md: '16px' }}
                 >
                   {currentDate}
                 </Text>
+                <Text fontSize={{ base: '12px', md: '14px' }} color="white">
+                  {currentSermon ? currentSermon.sermonDesc : ''}
+                </Text>
               </VStack>
-              <Text fontSize="14px" color="white">
-                {currentSermon ? currentSermon.sermonDesc : ''}
-              </Text>
 
               <Button
                 style={{

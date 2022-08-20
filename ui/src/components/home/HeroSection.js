@@ -20,7 +20,7 @@ const HeroSection = ({ sermonRef }) => {
       <Flex
         as="video"
         w="full"
-        h="100vh"
+        h="96vh"
         src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
         loop
         autoPlay
@@ -52,12 +52,14 @@ const HeroSection = ({ sermonRef }) => {
               spacing={6}
               justifyContent="center"
               height="90%"
+              marginTop="6em"
             >
               <Heading
                 color="white"
                 as="h1"
-                fontSize={{ base: '2.5em', md: '4em' }}
+                fontSize={{ base: '1.5em', md: '3em' }}
                 textAlign="center"
+                fontWeight={600}
                 whiteSpace="pre-wrap"
                 alignSelf="center"
               >
@@ -77,17 +79,19 @@ const HeroSection = ({ sermonRef }) => {
                     textAlign="center"
                     whiteSpace="pre-wrap"
                     alignSelf="center"
-                    fontSize={{ base: '1em', md: '1.5em' }}
+                    fontSize={{ base: '0.8em', md: '1.2em' }}
+                    fontWeight={600}
                   >
                     Harvest Mission Community Church
                   </Heading>
                   <Heading
                     color="white"
                     as="h4"
-                    fontSize={{ base: '1em', md: '1.5em' }}
+                    fontSize={{ base: '0.8em', md: '1.2em' }}
                     textAlign="center"
                     whiteSpace="pre-wrap"
                     alignSelf="center"
+                    fontWeight={600}
                   >
                     of Hong Kong
                   </Heading>
@@ -95,35 +99,47 @@ const HeroSection = ({ sermonRef }) => {
                 <Box
                   style={{
                     background: 'rgba(27, 53, 102, 0.8)',
-                    padding: '8px',
                   }}
+                  padding={{ base: '0px', md: '8px' }}
                 >
                   <Text
                     color="white"
                     display={{ base: 'none', md: 'flex' }}
                     style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
+                    fontSize="16px"
                   >
                     Every Sunday at 10AM HKT | Organize, Kwun Tong & Online
-                  </Text>
-                  <Text
-                    color="white"
-                    display={{ base: 'flex', md: 'none' }}
-                    justifyContent="center"
-                    style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
-                  >
-                    Every Sunday at 10AM HKT
-                  </Text>
-                  <Text
-                    color="white"
-                    justifyContent="center"
-                    display={{ base: 'flex', md: 'none' }}
-                    style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
-                  >
-                    Organize, Kwun Tong & Online
                   </Text>
                 </Box>
               </Stack>
             </Stack>
+            <Box
+              style={{
+                background: 'rgba(27, 53, 102, 0.8)',
+              }}
+              padding={{ base: '8px', md: '0px' }}
+              position="relative"
+              bottom="4%"
+            >
+              <Text
+                color="white"
+                display={{ base: 'flex', md: 'none' }}
+                justifyContent="center"
+                style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
+                fontSize="12px"
+              >
+                Every Sunday at 10AM HKT
+              </Text>
+              <Text
+                color="white"
+                justifyContent="center"
+                display={{ base: 'flex', md: 'none' }}
+                style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
+                fontSize="12px"
+              >
+                Organize, Kwun Tong & Online
+              </Text>
+            </Box>
             <Stack position="relative" bottom="4%" width="35px" height="35px">
               <Image
                 src={process.env.PUBLIC_URL + '/images/home/DownArrow.png'}
@@ -131,7 +147,7 @@ const HeroSection = ({ sermonRef }) => {
                 onClick={() =>
                   sermonRef.current.scrollIntoView({
                     behavior: 'smooth',
-                    block: 'end',
+                    block: 'start',
                     inline: 'nearest',
                   })
                 }

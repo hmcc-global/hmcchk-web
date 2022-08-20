@@ -13,7 +13,7 @@ const AboutSection = () => {
   return (
     <Flex
       w="full"
-      h={{ base: '75vh', md: 'auto' }}
+      h="auto"
       justify="center"
       bgImage={process.env.PUBLIC_URL + '/images/home/about-us-bg.png'}
       bgSize="cover"
@@ -21,7 +21,7 @@ const AboutSection = () => {
     >
       <Flex
         w="full"
-        h={{ base: '75vh', md: '60vh' }}
+        h="auto"
         justify="center"
         style={{ backdropFilter: 'blur(7px)' }}
       >
@@ -35,7 +35,7 @@ const AboutSection = () => {
             w="full"
             justify="center"
             spacing={8}
-            padding="2rem"
+            padding={{ base: '7rem 1rem', md: '8rem 2rem' }}
           >
             <VStack rowGap={2}>
               <Heading fontSize="4xl" color="#0628A3">
@@ -44,7 +44,7 @@ const AboutSection = () => {
               <Text
                 fontWeight={400}
                 textAlign="center"
-                fontSize="xl"
+                fontSize={{ base: 'md', md: 'xl' }}
                 width="80%"
               >
                 {vision.text}
@@ -57,7 +57,7 @@ const AboutSection = () => {
               <Text
                 fontWeight={400}
                 textAlign="center"
-                fontSize="xl"
+                fontSize={{ base: 'md', md: 'xl' }}
                 width="80%"
               >
                 {mission.text}
