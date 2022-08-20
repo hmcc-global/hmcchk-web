@@ -34,7 +34,7 @@ const buttonText = 'Learn More';
 
 const LifeGroupSection = () => {
   return (
-    <Flex w="full" h={['100vh', '75vh']}>
+    <Flex w="full" h={['100vh', '50vh']}>
       <Container maxW="container.lg" justifyContent="center" display="flex">
         <Stack
           w="100%"

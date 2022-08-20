@@ -62,8 +62,9 @@ const NewHereSection = () => {
     <>
       <Flex
         w={'full'}
-        h={['110vh', '80vh']}
+        h={['110vh', '60vh']}
         justify="center"
+        justifyContent={'space-between'}
         background="#F9F9F9"
         style={{ backdropFilter: 'blur(7px)' }}
       >
@@ -94,13 +95,14 @@ const NewHereSection = () => {
               w={['100%', '35%']}
               borderWidth={'1px'}
               px={5}
-              py={[10]}
+              pt={[10]}
               bgColor="#F7FAFC"
               boxShadow={'xl'}
+              style={{ height: '100%' }}
               borderRadius={[5, 10]}
             >
               <form onSubmit={onSubmit}>
-                <VStack spacing={[3]} alignItems="center">
+                <VStack h="100%" justify-content="space-between">
                   <FormControl id="name" isRequired w={['100%']}>
                     <Input
                       h={'3em'}
