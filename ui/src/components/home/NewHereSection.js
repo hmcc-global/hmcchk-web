@@ -62,7 +62,6 @@ const NewHereSection = () => {
     <>
       <Flex
         w={'full'}
-        h={['110vh', '60vh']}
         justify="center"
         justifyContent={'space-between'}
         background="#F9F9F9"
@@ -73,7 +72,7 @@ const NewHereSection = () => {
           maxW="container.xl"
           justifyContent="center"
           alignItems="center"
-          pt={['55']}
+          py={['55']}
         >
           <Stack
             direction={['column', 'row']}
