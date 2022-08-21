@@ -182,7 +182,7 @@ const EventsSection = () => {
         <VStack w="full" alignItems={['flex-start', null]}>
           <HStack
             w={[null, 'full']}
-            whiteSpace="nowrap"
+            // whiteSpace="nowrap"
             height="10vh"
             marginBottom="1em"
             justifyContent="space-between"
