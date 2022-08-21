@@ -9,28 +9,16 @@ import {
   Text,
   Box,
 } from '@chakra-ui/react';
-import { useEffect, useRef } from 'react';
 // TODO figure out a way to have a central location to edit photo url, blurbs etc.
 // sm = 30em, md = 48em, lg = 62em, xl = 80em, 2xl = "96em"
 // sm = 480px, md = 768px, lg = 992px, xl = 1280px, 2xl = "1536px"
 const heroText = 'Transforming Lives,\nTransforming the World';
 
 const HeroSection = ({ anchorTarget }) => {
-  const vidRef = useRef();
-
-  useEffect(() => {
-    if (vidRef.current) {
-      vidRef.current.addEventListener('loadedmetadata', e => {
-        vidRef.current.play();
-      });
-    }
-  }, [vidRef]);
-
   return (
     <>
       <Flex
         as="video"
-        ref={vidRef}
         w="full"
         h={['92vh', '96vh']}
         src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
@@ -38,6 +26,8 @@ const HeroSection = ({ anchorTarget }) => {
         muted
         objectFit="cover"
         justify="center"
+        autoPlay="true"
+        playsInline="true"
         sx={{ aspectRatio: '16/9' }}
       />
       <Flex
