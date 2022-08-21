@@ -97,7 +97,7 @@ const NavBar = (props) => {
           fontSize={{ md: 'xs', lg: 'sm', xl: 'md' }}
           h={{ md: '7vh', lg: '7vh', xl: '8vh' }}
         >
-          <Container maxW="100%" padding={5}>
+          <Container maxW="100%" padding={{ base: 4, md: 1, lg: 4 }}>
             <Flex
               justify="space-between"
               align="center"
@@ -108,7 +108,8 @@ const NavBar = (props) => {
                 <LinkBox>
                   <LinkOverlay href="/">
                     <Image
-                      h="3vh"
+                      w="3.5em"
+                      minW="3.5em"
                       src={process.env.PUBLIC_URL + '/images/ripple.svg'}
                       alt="Logo of HMCC"
                     />
@@ -118,7 +119,7 @@ const NavBar = (props) => {
                   <Text
                     textColor="#FFFFFF"
                     fontSize={{
-                      base: 'small',
+                      base: 'x-small',
                       md: 'x-small',
                       lg: 'smaller',
                       xl: 'small',
@@ -137,6 +138,7 @@ const NavBar = (props) => {
                       lineHeight="0"
                       borderRadius="8"
                       fontSize={{
+                        base: 'x-small',
                         md: 'x-small',
                         lg: 'small',
                         xl: 'small',
@@ -150,13 +152,13 @@ const NavBar = (props) => {
 
               <Stack
                 fontWeight="600"
-                spacing={7}
+                spacing={{ md: 5, lg: 7 }}
                 color="rgba(255, 255, 255, 1)"
                 justify={['space-between', 'space-around']}
                 align="center"
                 display={{ base: 'none', md: 'flex' }}
                 marginLeft="15px"
-                marginRight={{ md: '15px', lg: '40px' }}
+                marginRight={{ md: '15px', lg: '30px' }}
                 isInline
               >
                 <Box position="relative">
@@ -171,7 +173,7 @@ const NavBar = (props) => {
                     position="fixed"
                     textColor="yellow"
                     fontSize="xx-small"
-                    marginStart="10"
+                    marginStart={{ md: '8', lg: '10' }}
                     lineHeight="0"
                   >
                     I'm new!
@@ -196,7 +198,7 @@ const NavBar = (props) => {
                 alignItems="center"
                 isInline
               >
-                { !isLoading &&
+                {!isLoading && (
                   <Box
                     fontWeight="600"
                     color="#1A365D"
@@ -213,7 +215,7 @@ const NavBar = (props) => {
                             h="3.5vh"
                             marginLeft="10px"
                             px={{ md: '2', lg: '5' }}
-                            py="4"
+                            py={{ md: '3', lg: '4' }}
                             _hover={{ backgroundColor: 'rgba(56, 56, 56, 1)' }}
                             onClick={onLogout}
                           >
@@ -241,7 +243,7 @@ const NavBar = (props) => {
                             h="3.5vh"
                             marginLeft="10px"
                             px={{ md: '2', lg: '5' }}
-                            py="4"
+                            py={{ md: '3', lg: '4' }}
                             _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
                             onClick={onClose}
                           >
@@ -271,8 +273,8 @@ const NavBar = (props) => {
                             borderWidth="medium"
                             h="3.5vh"
                             marginLeft="10px"
-                            px={{ md: '2', lg: '5' }}
-                            py="4"
+                            px={{ md: '3', lg: '5' }}
+                            py={{ md: '3', lg: '4' }}
                             _hover={{ backgroundColor: 'rgba(56, 56, 56, 1)' }}
                             onClick={onClose}
                           >
@@ -300,7 +302,7 @@ const NavBar = (props) => {
                             h="3.5vh"
                             marginLeft="10px"
                             px={{ md: '2', lg: '5' }}
-                            py="4"
+                            py={{ md: '3', lg: '4' }}
                             _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
                             onClick={onClose}
                           >
@@ -322,7 +324,7 @@ const NavBar = (props) => {
                       </Flex>
                     )}
                   </Box>
-                }
+                )}
                 <Box>
                   <Button
                     ref={btnRef}
@@ -330,7 +332,8 @@ const NavBar = (props) => {
                     style={{ background: 'none' }}
                   >
                     <Image
-                      h="2.5vh"
+                      w="1.5em"
+                      minW="1.5em"
                       src={process.env.PUBLIC_URL + '/images/menu.svg'}
                       alt="Menu Button"
                     />

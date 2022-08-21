@@ -14,6 +14,7 @@ import {
 import testimoniesList from './irl-testimonies.json';
 import LifeGroupCard from './LifeGroupCard';
 import lifeGroupList from './lifegroups.json';
+import OurMinistries from './OurMinistries';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './_connect.scss';
@@ -89,7 +90,7 @@ const LifeGroups = (props) => {
           </Center>
         </Stack>
       </Flex>
-      <Box mb={10}>
+      <Box mb={10} width={{ md: '100%', lg: '90%' }}>
         <Heading
           fontSize={['md', 'xl']}
           fontWeight={700}
@@ -98,13 +99,14 @@ const LifeGroups = (props) => {
         >
           Check out the different LIFE Groups in HMCC!
         </Heading>
-        <SimpleGrid columns={[2, 4]} spacing={3}>
+        <SimpleGrid columns={[3, 3]} spacing={3}>
           {lifeGroupList.length > 0 &&
             lifeGroupList.map((lifeGroupInfo, i) => (
               <LifeGroupCard key={'lg' + i} lifeGroupInfo={lifeGroupInfo} />
             ))}
         </SimpleGrid>
       </Box>
+      <OurMinistries />
       <Heading
         as="h2"
         fontSize={['2xl', '3xl', '5xl']}

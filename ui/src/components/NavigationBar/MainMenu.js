@@ -142,7 +142,7 @@ const MainMenu = ({ login, onClose }) => {
                   width="200px"
                 >
                   <LinkBox>
-                    <Button marginBottom="5" width="100%">
+                    <Button marginBottom="5" width="96%" left="2">
                       <LinkOverlay href="/profile" onClick={onClose}>
                         MY PROFILE
                       </LinkOverlay>
@@ -183,7 +183,7 @@ const MainMenu = ({ login, onClose }) => {
                   width="200px"
                 >
                   <LinkBox>
-                    <Button marginBottom="5" width="100%">
+                    <Button marginBottom="5" width="96%" left="2">
                       <LinkOverlay href="/login" onClick={onClose}>
                         LOGIN
                       </LinkOverlay>
@@ -393,7 +393,7 @@ const MainMenu = ({ login, onClose }) => {
                       width="200px"
                     >
                       <LinkBox>
-                        <Button marginBottom="5" width="100%">
+                        <Button marginBottom="5" width="96%" left="2">
                           <LinkOverlay href="/profile" onClick={onClose}>
                             MY PROFILE
                           </LinkOverlay>
@@ -439,7 +439,7 @@ const MainMenu = ({ login, onClose }) => {
                       width="200px"
                     >
                       <LinkBox>
-                        <Button marginBottom="5" width="100%">
+                        <Button marginBottom="5" width="96%" left="2">
                           <LinkOverlay href="/login" onClick={onClose}>
                             LOGIN
                           </LinkOverlay>

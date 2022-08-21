@@ -43,7 +43,7 @@ const AboutUsContainer = (props) => {
           bgImage={`url('${process.env.PUBLIC_URL}/images/about/headerBg.png')`}
           bgPosition="center"
           bgSize="cover"
-          px={[6, 12, 35]}
+          px={{ base: 29, sm: 29, md: 15, lg: 29 }}
           py={5}
           mb={[4, 8]}
         >
@@ -70,28 +70,28 @@ const AboutUsContainer = (props) => {
           <HStack
             justifyContent="space-evenly"
             display={{ base: 'none', sm: 'none', md: 'flex' }}
-            px={{ md: '0em', lg: '3em' }}
+            px={{ md: '0em', lg: '4em' }}
           >
             {sections &&
               sections.map((e, i) => {
                 return (
                   <Fragment key={i}>
                     <Text
-                      color="rgba(190, 227, 248, 1)"
+                      color="rgba(255, 255, 255, 1)"
                       fontWeight={600}
                       textDecoration="none"
-                      borderBottom="rgba(190, 227, 248, 1) 0.1em solid"
+                      borderBottom="rgba(255, 255, 255, 1) 0.1em solid"
                       cursor="pointer"
-                      fontSize={{ md: 'sm', lg: 'md' }}
+                      fontSize={{ md: 'small', lg: 'sm' }}
                       onClick={() => setSelected(i)}
                     >
                       {e}
                     </Text>
                     {i < sections.length - 1 ? (
                       <Text
-                        mx={[3, 4]}
-                        color="rgba(190, 227, 248, 1)"
-                        fontSize={['md', '2xl']}
+                        mx={[1, 4]}
+                        color="rgba(255, 255, 255, 1)"
+                        fontSize={['sm', 'xl']}
                         verticalAlign="baseline"
                       >
                         &bull;

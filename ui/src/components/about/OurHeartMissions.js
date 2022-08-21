@@ -11,7 +11,7 @@ import {
 
 const Picture = ({ image, year, text }) => {
   return (
-    <VStack h="100%" px={2} py={3}>
+    <VStack h="100%" px={{ md: 1, lg: 2 }} py={3}>
       <Box
         w="100%"
         h="7em"
@@ -108,7 +108,7 @@ const MissionSection = (props) => {
               text="Send me"
             ></Picture>
             <Picture
-              image={`/images/about/transformasphere.svg`}
+              image={`/images/about/transformasphere.png`}
               year="2017"
               text="Transformasphere"
             ></Picture>
