@@ -97,7 +97,7 @@ const NavBar = (props) => {
           fontSize={{ md: 'xs', lg: 'sm', xl: 'md' }}
           h={{ md: '7vh', lg: '7vh', xl: '8vh' }}
         >
-          <Container maxW="100%" padding={5}>
+          <Container maxW="100%" padding={{ md: 1, lg: 5 }}>
             <Flex
               justify="space-between"
               align="center"
@@ -150,7 +150,7 @@ const NavBar = (props) => {
 
               <Stack
                 fontWeight="600"
-                spacing={7}
+                spacing={{ md: 5, lg: 7 }}
                 color="rgba(255, 255, 255, 1)"
                 justify={['space-between', 'space-around']}
                 align="center"
@@ -171,7 +171,7 @@ const NavBar = (props) => {
                     position="fixed"
                     textColor="yellow"
                     fontSize="xx-small"
-                    marginStart="10"
+                    marginStart={{ md: '8', lg: '10' }}
                     lineHeight="0"
                   >
                     I'm new!
@@ -196,7 +196,7 @@ const NavBar = (props) => {
                 alignItems="center"
                 isInline
               >
-                { !isLoading &&
+                {!isLoading && (
                   <Box
                     fontWeight="600"
                     color="#1A365D"
@@ -213,7 +213,7 @@ const NavBar = (props) => {
                             h="3.5vh"
                             marginLeft="10px"
                             px={{ md: '2', lg: '5' }}
-                            py="4"
+                            py={{ md: '3', lg: '4' }}
                             _hover={{ backgroundColor: 'rgba(56, 56, 56, 1)' }}
                             onClick={onLogout}
                           >
@@ -241,7 +241,7 @@ const NavBar = (props) => {
                             h="3.5vh"
                             marginLeft="10px"
                             px={{ md: '2', lg: '5' }}
-                            py="4"
+                            py={{ md: '3', lg: '4' }}
                             _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
                             onClick={onClose}
                           >
@@ -271,8 +271,8 @@ const NavBar = (props) => {
                             borderWidth="medium"
                             h="3.5vh"
                             marginLeft="10px"
-                            px={{ md: '2', lg: '5' }}
-                            py="4"
+                            px={{ md: '3', lg: '5' }}
+                            py={{ md: '3', lg: '4' }}
                             _hover={{ backgroundColor: 'rgba(56, 56, 56, 1)' }}
                             onClick={onClose}
                           >
@@ -300,7 +300,7 @@ const NavBar = (props) => {
                             h="3.5vh"
                             marginLeft="10px"
                             px={{ md: '2', lg: '5' }}
-                            py="4"
+                            py={{ md: '3', lg: '4' }}
                             _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
                             onClick={onClose}
                           >
@@ -322,7 +322,7 @@ const NavBar = (props) => {
                       </Flex>
                     )}
                   </Box>
-                }
+                )}
                 <Box>
                   <Button
                     ref={btnRef}

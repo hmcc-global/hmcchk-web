@@ -6,8 +6,8 @@ import {
   LinkOverlay,
   Spacer,
   Text,
-} from "@chakra-ui/react";
-import { AiOutlineInstagram } from "react-icons/ai";
+} from '@chakra-ui/react';
+import { AiOutlineInstagram } from 'react-icons/ai';
 
 const LifeGroupCard = (props) => {
   const { lifeGroupInfo } = props;
@@ -27,10 +27,10 @@ const LifeGroupCard = (props) => {
       textAlign="center"
       flexDir="column"
     >
-      <Heading as="h4" fontSize={["xl", "2xl", "3xl"]} fontWeight={700}>
+      <Heading as="h4" fontSize={['xl', '2xl', '3xl']} fontWeight={700}>
         {name}
       </Heading>
-      <Text fontSize={[".75em", "1em"]} mb={4}>
+      <Text fontSize={['.75em', '1em']} mb={4}>
         {fullname}
       </Text>
       <Spacer />
@@ -41,11 +41,11 @@ const LifeGroupCard = (props) => {
             colorScheme="whiteAlpha"
             borderColor="#fff"
             color="#fff"
-            size={["xs", "xs", "sm"]}
+            size={['xs', 'xs', 'sm']}
             p={[1, 2]}
             variant="outline"
           >
-            <Text fontSize={["xs", "xs", "sm"]}> {igHandle}</Text>
+            <Text fontSize={['xs', 'xs', 'sm']}> {igHandle}</Text>
           </Button>
         </LinkOverlay>
       </LinkBox>
