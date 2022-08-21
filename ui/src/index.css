@@ -15,6 +15,10 @@ code {
   max-height: 400px !important;
 }
 
+.ag-tooltip {
+   background-color: #ffffff !important;
+}
+
 @font-face {
   font-family: 'Manrope';
   src: local('Manrope'), url('./font/Manrope.ttf') format('truetype');
