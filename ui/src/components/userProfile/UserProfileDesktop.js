@@ -6,6 +6,7 @@ import {
   Tab,
   TabPanels,
   TabPanel,
+  Flex,
   FormControl,
   FormLabel,
   FormHelperText,
@@ -142,6 +143,20 @@ const UserProfileDesktop = (props) => {
     // console.log("executed")
   }, [fetchUserData, fetchPublishedForms]);
 
+  const inputBox = {
+    color: '#718096',
+    background: '#EDF2F7',
+    border: '1px solid #E2E8F0',
+    boxSizing: 'border-box',
+    borderRadius: '12px',
+    flexGrow: '0',
+    margin: '10px 0px',
+    padding: '15px',
+    fontSize: 'inherit',
+    fontWeight: 'inherit',
+    textAlign: 'center',
+  };
+
   return (
     <>
       <Modal isOpen={modalOpen} onClose={onModalClose}>
@@ -168,18 +183,40 @@ const UserProfileDesktop = (props) => {
           <ModalFooter />
         </ModalContent>
       </Modal>
-      <Center mt="7%" fontWeight="900" fontSize="64">
-        <Text color="#065666" as="span">
-          Hi
-        </Text>{' '}
-        {userData && userData.fullName && (
-          <>
-            ,&nbsp;<u>{userData.fullName.split(' ')[0]}!</u>
-          </>
-        )}
-      </Center>
+      <Flex
+        mt={{ md: '40px', lg: '60px', xl: '80px' }}
+        alignItems="center"
+        justifyContent="center"
+        flexDirection="column"
+        textAlign="center"
+      >
+        <Box
+          fontWeight="800"
+          fontSize={{ md: '3rem', lg: '3.25rem', xl: '3.5rem' }}
+        >
+          <Text>Welcome Back,&nbsp;</Text>
+          {userData && userData.fullName && (
+            <Text>{userData.fullName.split(' ')[0]}</Text>
+          )}
+        </Box>
+        <Box
+          width="full"
+          fontSize="1.1rem"
+          fontWeight="600"
+          mt="2.5%"
+          textAlign="center"
+        >
+          <Text color="#2C5282">Your Registered Email Address</Text>
+          <Input
+            width="50%"
+            style={inputBox}
+            readOnly
+            {...register('email')}
+          />
+        </Box>
+      </Flex>
       <form onSubmit={handleSubmit(handleEditUserInformation)}>
-        <Tabs mt="7%" mb="7%" orientation="vertical" variant="unstyled">
+        <Tabs mt="5%" mb="5%" orientation="vertical" variant="unstyled">
           <Box flex={1}>
             <TabList border="none" alignItems="flex-end">
               <Tab
@@ -193,8 +230,9 @@ const UserProfileDesktop = (props) => {
                     marginBottom: '-2px',
                   },
                 }}
+                fontWeight="700"
               >
-                Manage Account
+                Signup Links
               </Tab>
               <Tab
                 w="fit-content"
@@ -206,6 +244,7 @@ const UserProfileDesktop = (props) => {
                   borderBottom: '2px solid #0628A3',
                   marginBottom: '-2px',
                 }}
+                fontWeight="700"
               >
                 Personal Profile
               </Tab>
@@ -219,6 +258,7 @@ const UserProfileDesktop = (props) => {
                   borderBottom: '2px solid #0628A3',
                   marginBottom: '-2px',
                 }}
+                fontWeight="700"
               >
                 Church Profile
               </Tab>
@@ -228,26 +268,15 @@ const UserProfileDesktop = (props) => {
             flex={4}
             bgColor="#ffffff"
             ml="5"
-            border="1px solid #E2E8F0"
-            borderRadius="4px"
+            border="1px solid #EBEBEB"
+            borderRadius="10px"
           >
-            <TabPanel p="7%">
+            <TabPanel p="5%">
               <Stack direction="column" spacing="5">
-                <FormControl>
-                  <FormLabel color="#2C5282">
-                    Your Registered Email Address
-                  </FormLabel>
-                  <Input
-                    size="sm"
-                    borderRadius="5"
-                    readOnly
-                    {...register('email')}
-                  />
-                </FormControl>
                 {formList && formList.length > 0 && (
                   <Box>
-                    <Text fontWeight="500" color="#2C5282">
-                      Available Signup Links
+                    <Text fontSize="1.1rem" fontWeight="700" color="#718096" mb="5">
+                      Available Signup Links:
                     </Text>
                     {generatePublishedFormLinks(formList)}
                   </Box>

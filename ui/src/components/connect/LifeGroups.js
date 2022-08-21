@@ -11,29 +11,15 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import Slider from 'react-slick';
-import TestimonyCard from './TestimonyCard';
-import testimoniesList from './testimonies.json';
+import testimoniesList from './irl-testimonies.json';
 import LifeGroupCard from './LifeGroupCard';
 import lifeGroupList from './lifegroups.json';
+import OurMinistries from './OurMinistries';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './_connect.scss';
 
 const LifeGroups = (props) => {
-  const sliderSettings = {
-    adaptiveHeight: true,
-    arrows: false,
-    centerMode: true,
-    dots: false,
-    focusOnSelect: true,
-    infinite: false,
-    slidesPerRow: 1,
-    speed: 500,
-    swipeToSlide: true,
-    variableWidth: true,
-  };
-
   return (
     <Box id="#lifegroup">
       <Heading
@@ -97,17 +83,14 @@ const LifeGroups = (props) => {
               _hover={{ boxShadow: 'none', color: '#fff' }}
               target="_blank"
             >
-              <LinkOverlay
-                href="/events"
-                target="_blank"
-              >
-                SIGN UP FOR LIFE GROUPS NOW!
+              <LinkOverlay href="/events" target="_blank">
+                TRY OUT A LIFE GROUP
               </LinkOverlay>
             </LinkBox>
           </Center>
         </Stack>
       </Flex>
-      <Box mb={10}>
+      <Box mb={10} width={'100%'}>
         <Heading
           fontSize={['md', 'xl']}
           fontWeight={700}
@@ -116,32 +99,41 @@ const LifeGroups = (props) => {
         >
           Check out the different LIFE Groups in HMCC!
         </Heading>
-        <SimpleGrid columns={[2, 4]} spacing={3}>
+        <SimpleGrid columns={[2, 3]} spacing={3}>
           {lifeGroupList.length > 0 &&
             lifeGroupList.map((lifeGroupInfo, i) => (
               <LifeGroupCard key={'lg' + i} lifeGroupInfo={lifeGroupInfo} />
             ))}
         </SimpleGrid>
       </Box>
+      <OurMinistries />
       <Heading
         as="h2"
         fontSize={['2xl', '3xl', '5xl']}
         fontWeight={800}
         textAlign="center"
         px={[4, 16]}
+      >
+        How our members have experienced REAL LIFE
+      </Heading>
+      <Text
+        fontSize={['sm', 'md', 'lg']}
+        fontWeight={400}
+        textAlign="center"
         mb={4}
       >
-        What our members have to say about LIFE Groups
-      </Heading>
-      <Slider {...sliderSettings} className="full-width">
+        Click on the images to check out their testimonies on Instagram!
+      </Text>
+      <SimpleGrid columns={[2, 5]} spacing={2}>
         {testimoniesList.length > 0 &&
-          testimoniesList.map((testimonyInfo, i) => (
-            <TestimonyCard
-              key={'testimony' + i}
-              testimonyInfo={testimonyInfo}
-            />
+          testimoniesList.map((testimony) => (
+            <LinkBox>
+              <LinkOverlay href={testimony.igLink} target="_blank">
+                <Image src={process.env.PUBLIC_URL + testimony.imagePath} />
+              </LinkOverlay>
+            </LinkBox>
           ))}
-      </Slider>
+      </SimpleGrid>
     </Box>
   );
 };

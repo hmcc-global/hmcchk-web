@@ -6,6 +6,7 @@ import {
   Tab,
   TabPanels,
   TabPanel,
+  Flex,
   FormControl,
   FormLabel,
   FormHelperText,
@@ -141,6 +142,25 @@ const UserProfileMobile = (props) => {
     fetchPublishedForms();
   }, []);
 
+  const inputBox = {
+    color: '#718096',
+    background: '#EDF2F7',
+    border: '1px solid #E2E8F0',
+    boxSizing: 'border-box',
+    borderRadius: '12px',
+    flexGrow: '0',
+    margin: '10px 0px',
+    padding: '15px',
+    fontSize: 'inherit',
+    textAlign: 'center',
+  };
+
+  const tabTitle = {
+    color: '#000000',
+    fontWeight: '700',
+    fontSize: 'inherit',
+  };
+
   return (
     <>
       <Modal isOpen={modalOpen} onClose={onModalClose}>
@@ -167,39 +187,62 @@ const UserProfileMobile = (props) => {
           <ModalFooter />
         </ModalContent>
       </Modal>
-      <Center mt="7%" fontWeight="900" fontSize="36">
-        <Text color="#065666" as="span">
-          Hi
-        </Text>{' '}
-        {userData && userData.fullName && (
-          <>
-            ,&nbsp;<u>{userData.fullName.split(' ')[0]}!</u>
-          </>
-        )}
-      </Center>
+      <Flex
+        mt="10%"
+        alignItems="center"
+        justifyContent="center"
+        flexDirection="column"
+        textAlign="center"
+      >
+        <Box fontWeight="800" fontSize="2rem">
+          <Text>Welcome Back,&nbsp;</Text>
+          {userData && userData.fullName && (
+            <Text>{userData.fullName.split(' ')[0]}</Text>
+          )}
+        </Box>
+        <Box
+          width="full"
+          fontSize="0.9rem"
+          mt="5%"
+          fontWeight="500"
+          textAlign="center"
+        >
+          <Text color="#2C5282">Your Registered Email Address</Text>
+          <Input
+            width="100%"
+            style={inputBox}
+            readOnly
+            {...register('email')}
+          />
+        </Box>
+      </Flex>
+
       <form onSubmit={handleSubmit(handleEditUserInformation)}>
-        <Tabs mt="7%" orientation="horizontal" variant="line" mb="12%">
+        <Tabs
+          mt="7%"
+          orientation="horizontal"
+          variant="line"
+          mb="12%"
+          fontSize="0.9rem"
+        >
           <TabList justifyContent="space-between">
             <Tab
               p="0.5"
-              fontSize="12"
-              fontWeight="500"
+              style={tabTitle}
               _selected={{ borderColor: '#0628A3', color: '#0628A3' }}
             >
-              Manage Account
+              Signup Links
             </Tab>
             <Tab
               p="0.5"
-              fontSize="12"
-              fontWeight="500"
+              style={tabTitle}
               _selected={{ borderColor: '#0628A3', color: '#0628A3' }}
             >
               Personal Profile
             </Tab>
             <Tab
               p="0.5"
-              fontSize="12"
-              fontWeight="500"
+              style={tabTitle}
               _selected={{ borderColor: '#0628A3', color: '#0628A3' }}
             >
               Church Profile
@@ -207,25 +250,12 @@ const UserProfileMobile = (props) => {
           </TabList>
 
           <TabPanels>
-            <TabPanel p="7%">
-              <Stack direction="column" spacing="5">
-                <Center mt="15%">
-                  <FormControl>
-                    <FormLabel color="#2C5282">
-                      Your Registered Email Address
-                    </FormLabel>
-                    <Input
-                      size="sm"
-                      borderRadius="5"
-                      readOnly
-                      {...register('email')}
-                    />
-                  </FormControl>
-                </Center>
+            <TabPanel width="full" margin="20px 0px" p="0">
+              <Flex direction="column">
                 {formList && formList.length > 0 && (
                   <Box>
-                    <Text fontWeight="500" color="#2C5282">
-                      Available Signup Links
+                    <Text fontWeight="700" fontSize="0.95rem" color="#718096" mb="2.5">
+                      Available Signup Links:
                     </Text>
                     {generatePublishedFormLinks(formList)}
                   </Box>
@@ -240,7 +270,7 @@ const UserProfileMobile = (props) => {
                 >
                   Change Password
                 </Button> */}
-              </Stack>
+              </Flex>
             </TabPanel>
             <TabPanel p="7%">
               <Center mb="5%">

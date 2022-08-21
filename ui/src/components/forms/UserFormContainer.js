@@ -5,7 +5,6 @@ import { Container, Center, VStack, Text } from '@chakra-ui/react';
 
 const UserFormContainer = (props) => {
   const [formData, setFormData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
   const { user, history } = props;
 
   useEffect(() => {
@@ -15,29 +14,40 @@ const UserFormContainer = (props) => {
       // Get form, also check whether user is logged in or not
       // to see if user can access this form.
       const { data } = await axios.get('/api/forms/get-form', {
-        params: { id: id, isLoggedIn: user.id ? true : false },
+        params: { id: id },
       });
 
       try {
         setFormData(data[0]);
+
+        // Form is not published, hence it is unavailable
+        if (!data[0]) history.push('/form-unavailable');
+        else {
+          // TODO: Add check for form within available period
+          // If form should be open, proceed with checks, else redirect to /form-will-open
+
+          // end form open check
+
+          // If there is a logged in user, check whether they filled or not
+          // Else default to true to allow public to access
+          let filledInProfileCheck = user.id ? user.hasFilledProfileForm : true;
+
+          if (!filledInProfileCheck) history.push('/need-fill-profile');
+          // Check if form requires login
+          else if (data[0].requireLogin && !user.id)
+            history.push('/need-login');
+        }
       } catch (err) {
         console.log('Error retrieving form data');
       }
-
-      setIsLoading(false);
     };
 
     populateData();
   }, [props]);
 
-  // If there is a logged in user, check whether they filled or not
-  // Else default to true to allow public to access
-  const filledInProfileCheck = user.id ? user.hasFilledProfileForm : true;
-  let allowFormAccess = formData && filledInProfileCheck;
-
   return (
     <Container maxW="container.md">
-      {allowFormAccess && (
+      {formData && (
         <Form
           formId={formData.id}
           formName={formData.formName}
@@ -47,22 +57,6 @@ const UserFormContainer = (props) => {
           user={user}
           history={history}
         />
-      )}
-
-      {!isLoading && !allowFormAccess && (
-        <Center h="100vh">
-          <VStack>
-            <Text fontSize={['xl', '3xl']} spacing="5">
-              You are unable to access this form. Please see the message below
-              for instructions
-            </Text>
-            <Text fontSize={['lg', '2xl']} spacing="5">
-              {user.id && !user.hasFilledProfileForm
-                ? 'Please complete your user profile first before signing up'
-                : 'You need to be logged in to access this form or this form is currently unavailable!'}
-            </Text>
-          </VStack>
-        </Center>
       )}
     </Container>
   );

@@ -28,6 +28,8 @@ export default function AdminUser(props) {
   const officialNameProp = 'officialName';
   const pollFreqInSecs = 30;
 
+  const tithelyTooltip = 'Tithely IDs are integers separated using commas. Any whitespaces will be removed.';
+
   const [api, setApi] = useState();
   const [colApi, setColApi] = useState();
   const [users, setUsers] = useState([]);
@@ -257,6 +259,13 @@ export default function AdminUser(props) {
     }
   };
 
+  const tithelyIdGetter = (params) => {
+    const { tithelyId } = params.data;
+    if (!tithelyId || tithelyId === '') return '';
+
+    return tithelyId.join(',');
+  };
+
   // Setter Functions: to validate user edits
   // Note: for columns with selection edits, there will be NO validation as none is necessary
   const fullNameSetter = (params) => {
@@ -351,6 +360,32 @@ export default function AdminUser(props) {
 
     return false;
   };
+
+  const titheIdSetter = (params) => {
+    const { newValue } = params;
+    let idArr = [];
+    try {
+      idArr = newValue.split(',').reduce((arr, curr) => {
+        let trim = curr.trim();
+        if (trim !== '') {
+          let parsed = parseInt(trim);
+          if (isNaN(parsed))
+            throw('Only numbers allowed for Tithely ID');
+          
+          arr.push(parsed);
+        }
+
+        return arr;
+      }, []);
+    } catch (err) {
+      alert(err);
+      return false;
+    }
+    
+    params.data.tithelyId = idArr;
+
+    return true;
+  }
   
   // Custom Editors
   const MediumTextEditorProps = {
@@ -708,6 +743,13 @@ export default function AdminUser(props) {
         },
       ],
     },
+    {
+      headerName: 'Tithely ID',
+      field: 'tithelyId',
+      valueGetter: tithelyIdGetter,
+      valueSetter: titheIdSetter,
+      headerTooltip: tithelyTooltip
+    }
   ];
 
   return (
@@ -744,6 +786,7 @@ export default function AdminUser(props) {
           undoRedoCellEditing={undoRedoCellEditing}
           undoRedoCellEditingLimit={undoRedoCellEditingLimit}
           enableCellChangeFlash={enableCellChangeFlash}
+          tooltipShowDelay={0}
         />
       </div>
     </>

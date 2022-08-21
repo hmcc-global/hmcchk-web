@@ -4,6 +4,7 @@ import { chakra } from '@chakra-ui/react';
 import SermonContainer from './sermons/SermonContainer';
 import SermonDetails from './sermons/SermonDetails';
 import LoginContainer from './auth/LoginContainer';
+import SignupContainer from './auth/SignupContainer';
 import EventsPage from './events/EventsPage';
 import VisitUsPage from './visit-us/VisitUsPage';
 import ConnectPage from './connect/ConnectPage';
@@ -21,15 +22,14 @@ import ResetPassword from './auth/ResetPassword';
 import PasswordSubmitted from './auth/PasswordSubmitted';
 import ConnectFloatButton from './connect-float/ConnectFloatButton';
 import UserFormContainer from './forms/UserFormContainer';
-import NoMatch from './errors/NoMatch';
+import ErrorPage from './screens/ErrorPage';
 import ScrollToTop from './helpers/ScrollToTop';
 import AboutUsContainer from './about/AboutUsContainer';
 import OnlineSermonContainer from './sermons/OnlineSermonContainer';
 import AdminHome from './admin/AdminHome';
 import AdminUser from './admin/users/AdminUser';
 import FormManager from './forms/FormManager';
-import AdminGiving from './admin/AdminGiving';
-import AdminLogout from './admin/AdminLogout';
+import AdminPopUpContainer from './admin/popup/AdminPopUpContainer';
 
 const MainContainer = () => {
   return (
@@ -56,6 +56,12 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
+          path="/signup"
+          permissions={['noUser']}
+          component={SignupContainer}
+        />
+        <PrivateRoute
+          exact
           path="/password/recover"
           permissions={['public']}
           component={RecoverPassword}
@@ -74,7 +80,7 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/signup"
+          path="/signup/form"
           permissions={['noUser']}
           component={Signup}
         />
@@ -200,18 +206,12 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/admin/giving"
-          permissions={['admin', 'stewardship']}
-          component={AdminGiving}
-        />
-        <PrivateRoute
-          exact
-          path="/admin/logout"
+          path="/admin/popup"
           permissions={['t3ch', 'admin', 'stewardship']}
-          component={AdminLogout}
+          component={AdminPopUpContainer}
         />
 
-        <PrivateRoute path="*" permissions={['public']} component={NoMatch} />
+        <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
       <FooterContainer />
       <ConnectFloatButton />

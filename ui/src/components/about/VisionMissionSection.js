@@ -5,13 +5,13 @@ import {
   Stack,
   Text,
   Heading,
-} from "@chakra-ui/layout";
+} from '@chakra-ui/layout';
 
 const VisionMissionCard = ({ title, message }) => {
   return (
     <Box
-      w={["20em", "30em"]}
-      h={["15em", "13em"]}
+      w={['20em', '30em']}
+      h={['15em', '13em']}
       borderWidth="1px"
       borderRadius="20"
       bgColor="#FFFFFF"
@@ -24,7 +24,7 @@ const VisionMissionCard = ({ title, message }) => {
     >
       <Heading
         as="h2"
-        fontSize={["2xl", "5xl"]}
+        fontSize={['2xl', '5xl']}
         fontWeight={800}
         lineHeight={1}
         color="#0628A3"
@@ -33,7 +33,7 @@ const VisionMissionCard = ({ title, message }) => {
       >
         {title}
       </Heading>
-      <Text color="black" fontSize={["sm", "md"]} textAlign="center">
+      <Text color="black" fontSize={['sm', 'md']} textAlign="center">
         {message}
       </Text>
     </Box>
@@ -47,12 +47,12 @@ const VisionMissionSection = (props) => {
       w="100vw"
       padding={0}
       maxW="unset"
-      h={{ base: "100vh", md: "31.25vw" }}
+      h={{ base: '100vh', md: '31.25vw' }}
       bgImage={`url('${process.env.PUBLIC_URL}/images/about/visionMissionBg.png')`}
     >
       <VStack height="100%" justifyContent="center">
         <Stack
-          direction={{ base: "column", md: "row" }}
+          direction={{ base: 'column', md: 'row' }}
           w="100%"
           height="100%"
           alignItems="center"

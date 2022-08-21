@@ -1,5 +1,4 @@
 import {
-  chakra,
   Box,
   Container,
   Flex,
@@ -10,47 +9,95 @@ import {
   Link,
   Button,
   LinkOverlay,
-} from "@chakra-ui/react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import axios from "axios";
-import { DateTime } from "luxon";
-import { useEffect, useState } from "react";
-import { getRenderDate } from "../helpers/eventsHelpers";
-import EventsSectionCard from "./EventsSectionCards";
-import FeaturedEvent from "./FeaturedEvent";
+} from '@chakra-ui/react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import axios from 'axios';
+import { DateTime } from 'luxon';
+import { useEffect, useRef, useState } from 'react';
+import { getRenderDate } from '../helpers/eventsHelpers';
+import EventsSectionCard from './EventsSectionCards';
 
-const allEventsText = "all events >";
+const allEventsText = 'See All Events';
+
+function SampleNextArrow(props) {
+  const { onClick, index, maxSlide } = props;
+  return index !== maxSlide - 1 ? (
+    <div
+      style={{
+        display: 'block',
+        right: '0%',
+        position: 'absolute',
+        top: '40%',
+        zIndex: 8,
+        cursor: 'pointer',
+      }}
+      onClick={onClick}
+    >
+      <img
+        src={process.env.PUBLIC_URL + 'images/home/NextArrow.png'}
+        width="80%"
+        alt="Arrow"
+      />
+    </div>
+  ) : null;
+}
+
+function SamplePrevArrow(props) {
+  const { onClick, index } = props;
+  return index !== 0 ? (
+    <div
+      style={{
+        display: 'block',
+        left: '3%',
+        position: 'absolute',
+        top: '40%',
+        zIndex: 8,
+        cursor: 'pointer',
+      }}
+      onClick={onClick}
+    >
+      <img
+        src={process.env.PUBLIC_URL + 'images/home/PrevArrow.png'}
+        width="80%"
+        alt="Arrow"
+      />
+    </div>
+  ) : null;
+}
 
 const EventsSection = () => {
   const [events, setEvents] = useState([]);
+  const [computedMargin, setComputedMargin] = useState();
+  const [slideIndex, setSlideIndex] = useState(0);
 
-  const sliderSettings = {
-    adaptiveHeight: true,
-    arrows: false,
-    centerMode: true,
-    dots: false,
-    focusOnSelect: true,
-    infinite: false,
-    slidesPerRow: 1,
-    speed: 500,
-    swipeToSlide: true,
-    variableWidth: true,
+  const marginRef = useRef(null);
+
+  function useWindowSize() {
+    const [windowSize, setWindowSize] = useState({
+      width: undefined,
+      height: undefined,
+    });
+    useEffect(() => {
+      function handleResize() {
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      }
+      window.addEventListener('resize', handleResize);
+      handleResize();
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    return windowSize;
+  }
+  const onArrowClick = (e) => {
+    setSlideIndex(e);
   };
-
-  const sliderStyle = {
-    width: "100%",
-    position: "relative",
-    left: "50%",
-    right: "50%",
-    marginLeft: "-50vw",
-    marginRight: "-50vw",
-  };
-
   const populateData = async () => {
     try {
-      const { data } = await axios.get("/api/announcements/get-announcements");
+      const { data } = await axios.get('/api/announcements/get-announcements');
       const filtered = data.filter((item) => {
         if (item.endDate) {
           let endDate = new DateTime.fromISO(item.endDate).plus({ days: 1 });
@@ -70,83 +117,145 @@ const EventsSection = () => {
       console.log(err);
     }
   };
+  const currentWindow = useWindowSize();
+  useEffect(
+    () =>
+      marginRef.current
+        ? setComputedMargin(
+            window
+              .getComputedStyle(marginRef.current)
+              .getPropertyValue('margin-left')
+          )
+        : '',
+    [currentWindow]
+  );
+
+  useEffect(() => {
+    document.querySelectorAll('.slick-track').forEach((el) => {
+      el.style.setProperty('margin-left', computedMargin, 'important');
+    });
+  }, [computedMargin]);
 
   useEffect(() => {
     populateData();
   }, []);
+  const sliderSettings = {
+    adaptiveHeight: true,
+    centerMode: false,
+    dots: false,
+    focusOnSelect: true,
+    infinite: false,
+    slidesPerRow: 1,
+    speed: 500,
+    swipeToSlide: true,
+    variableWidth: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <SampleNextArrow index={slideIndex} maxSlide={events.length} />,
+    prevArrow: <SamplePrevArrow index={slideIndex} />,
+    afterChange: onArrowClick,
+  };
 
+  const sliderStyle = {
+    width: '100%',
+    position: 'relative',
+    height: 'auto',
+  };
   return (
-    <Flex w="full" h={["95vh", "auto"]} direction="column">
-      <Container maxW="container.lg" justifyContent="center" display="flex">
-        <VStack>
-          <FeaturedEvent />
-        </VStack>
-      </Container>
+    <Flex
+      w="full"
+      h="auto"
+      direction="column"
+      background="#172848"
+      alignItems="center"
+      paddingTop="2em"
+      paddingBottom="2em"
+      boxSizing=""
+    >
       <Container
         maxW="container.lg"
         justifyContent="center"
         display="flex"
         marginTop="2em"
+        ref={marginRef}
       >
-        <VStack w="full" alignItems={["flex-start", null]}>
+        <VStack w="full" alignItems={['flex-start', null]}>
           <HStack
-            w={[null, "full"]}
-            whiteSpace="nowrap"
+            w={[null, 'full']}
             height="10vh"
             marginBottom="1em"
+            justifyContent="space-between"
           >
-            <Heading fontSize={["2em", "5xl"]} color="black">
-              Upcoming Events
-            </Heading>
-            <chakra.hr
-              width="full"
-              color="black"
-              border="none"
-              height="2px"
-              bgColor="black"
-              display={["none", "block"]}
-            />
-            <Text color="black" display={["none", "block"]} fontWeight="900">
-              <Link href="/events">{allEventsText}</Link>
-            </Text>
+            <VStack alignItems="flex-start">
+              <Heading fontSize={['2em', '4xl']} fontWeight={600} color="white">
+                Events
+              </Heading>
+              <Text color="white">
+                Check out what's happening in HMCC of Hong Kong
+              </Text>
+            </VStack>
+            <Link
+              href="/events"
+              textDecoration="none"
+              _hover={{ textDecoration: 'none' }}
+            >
+              <Button
+                color="#A5CBFF"
+                background="transparent"
+                border="2px solid #A5CBFF"
+                borderRadius="7px"
+                display={{ base: 'none', md: 'block' }}
+                fontWeight="700"
+                padding="6px 24px"
+                boxSizing="content-box"
+              >
+                {allEventsText}
+              </Button>
+            </Link>
           </HStack>
         </VStack>
       </Container>
       <Box
-        w="full"
+        w="100%"
+        boxSizing="border-box"
         display="flex"
         justifyContent="flex-start"
+        alignItems="flex-start"
         height="auto"
-        overflowX={["auto", "auto", "auto", "auto", "hidden"]}
-        overflowY="hidden"
+        overflowX={['auto', 'auto', 'auto', 'auto', 'hidden']}
         whiteSpace="nowrap"
-        marginBottom={["none", "1.5em"]}
+        marginTop="2.5em"
+        marginBottom={['none', '3em']}
         _hover={{
-          overflowX: "auto",
+          overflowX: 'auto',
         }}
       >
         <Slider {...sliderSettings} style={sliderStyle}>
           {events.length > 0 &&
-            events.map((event, i) => (
-              <EventsSectionCard
-                width={["15em", "35em"]}
-                height="auto"
-                event={event}
-                key={"event" + i}
-              />
-            ))}
+            events.map((event, i) => {
+              return (
+                <EventsSectionCard
+                  width={['20em', '35em']}
+                  height="auto"
+                  event={event}
+                  key={'event' + i}
+                />
+              );
+            })}
         </Slider>
       </Box>
       <Button
-        display={["block", "none"]}
+        display={{ base: 'block', md: 'none' }}
         width="15em"
-        color="white"
-        bgColor="black"
+        color="#A5CBFF"
+        marginTop="2em"
+        background="transparent"
+        border="2px solid #A5CBFF"
+        borderRadius="7px"
         alignSelf="center"
-        mt="5%"
-        mb="5%"
+        mb="10%"
       >
-        <LinkOverlay href="/events">All events</LinkOverlay>
+        <LinkOverlay href="/events">See All Events</LinkOverlay>
       </Button>
     </Flex>
   );

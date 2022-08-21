@@ -11,6 +11,7 @@ import StaffSection from './StaffSection';
 import StorySection from './StorySection';
 import StrategySection from './StrategySection';
 import ValuesSection from './ValuesSection';
+import OurHeartMissions from './OurHeartMissions';
 import blurbs from './about.json';
 import { Fragment, useState } from 'react';
 import { Select } from '@chakra-ui/select';
@@ -22,7 +23,7 @@ const sections = [
   'Our Strategy',
   'Our Staff',
   'Beliefs',
-  'HMI',
+  'Our Heart for Missions',
 ];
 
 const AboutUsContainer = (props) => {
@@ -42,7 +43,7 @@ const AboutUsContainer = (props) => {
           bgImage={`url('${process.env.PUBLIC_URL}/images/about/headerBg.png')`}
           bgPosition="center"
           bgSize="cover"
-          px={[6, 12, 35]}
+          px={{ base: 29, sm: 29, md: 15, lg: 29 }}
           py={5}
           mb={[4, 8]}
         >
@@ -68,27 +69,29 @@ const AboutUsContainer = (props) => {
           </Text>
           <HStack
             justifyContent="space-evenly"
-            display={{ base: 'none', md: 'flex' }}
+            display={{ base: 'none', sm: 'none', md: 'flex' }}
+            px={{ md: '0em', lg: '4em' }}
           >
             {sections &&
               sections.map((e, i) => {
                 return (
                   <Fragment key={i}>
                     <Text
-                      color="white"
+                      color="rgba(255, 255, 255, 1)"
                       fontWeight={600}
                       textDecoration="none"
-                      borderBottom="#FFFFFF 0.1em solid"
+                      borderBottom="rgba(255, 255, 255, 1) 0.1em solid"
                       cursor="pointer"
+                      fontSize={{ md: 'small', lg: 'sm' }}
                       onClick={() => setSelected(i)}
                     >
                       {e}
                     </Text>
                     {i < sections.length - 1 ? (
                       <Text
-                        mx={[3, 4]}
-                        color="white"
-                        fontSize={['md', '2xl']}
+                        mx={[1, 4]}
+                        color="rgba(255, 255, 255, 1)"
+                        fontSize={['sm', 'xl']}
                         verticalAlign="baseline"
                       >
                         &bull;
@@ -139,12 +142,9 @@ const AboutUsContainer = (props) => {
           <BeliefsSection blurb={blurbs.beliefs} title={sections[selected]} />
         )}
         {selected === 5 && (
-          <Route
-            component={() => {
-              window.location.href =
-                'https://hongkong.sub.hmcc.net/about-us/hmi/';
-              return null;
-            }}
+          <OurHeartMissions
+            blurb={blurbs.ourHeartMissions}
+            title={sections[selected]}
           />
         )}
       </VStack>

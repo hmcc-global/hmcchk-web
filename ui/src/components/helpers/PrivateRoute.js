@@ -1,30 +1,34 @@
-import { Route } from "react-router-dom";
-import NoMatch from "../errors/NoMatch";
-import HomeContainer from "../home/HomeContainer";
-import { useSelector } from "react-redux";
-import { updateAxiosClient } from "./customAxios";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import UserProfileContainer from "../userProfile/UserProfileContainer";
-import CompleteUserProfileContainer from "../userProfile/CompleteUserProfile";
+import { Route } from 'react-router-dom';
+import ErrorPage from '../screens/ErrorPage';
+import HomeContainer from '../home/HomeContainer';
+import { useSelector } from 'react-redux';
+import { updateAxiosClient } from './customAxios';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import UserProfileContainer from '../userProfile/UserProfileContainer';
+import CompleteUserProfileContainer from '../userProfile/CompleteUserProfile';
 import SidebarWithHeader from '../admin/navigation/Sidebar';
 
 const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
   const user = useSelector((state) => state.user);
   const [userObj, setUserObj] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const checkIfTokenExists = async (toVerify) => {
     try {
-      const { data } = await axios.post("/api/auth/verify-token", {
+      setIsLoading(true);
+      const { data } = await axios.post('/api/auth/verify-token', {
         token: toVerify,
       });
+      setIsLoading(false);
       updateAxiosClient(toVerify);
       return data;
     } catch (err) {
-      if (err.response.data.raw === "token-expired") {
+      if (err.response.data.raw === 'token-expired') {
         localStorage.clear();
         window.location.reload();
       }
+      setIsLoading(false);
       return {};
     }
   };
@@ -41,8 +45,8 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
 
   // check if Token exists in redux store
   const noTokenExists = Object.keys(user).length === 0;
-  const noUser = permissions.includes("noUser");
-  const isPublic = permissions.includes("public");
+  const noUser = permissions.includes('noUser');
+  const isPublic = permissions.includes('public');
   const access =
     isPublic ||
     permissions.some(
@@ -53,7 +57,7 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
     );
 
   return (
-    userObj != null && (
+    !isLoading && userObj != null && (
       <Route
         {...rest}
         render={(props) => {
@@ -61,27 +65,27 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
             if (noTokenExists) return <Component {...props} />;
             else {
               switch (props.location.pathname) {
-                case "/login":
+                case '/login':
                   if (user) {
-                    props.history.push("/profile");
+                    props.history.push('/profile');
                     return <UserProfileContainer {...props} user={userObj} />;
                   }
                   break;
               }
-              props.history.push("/");
+              props.history.push('/');
               return <HomeContainer {...props} user={userObj} />;
             }
           } else if (access) {
             switch (props.location.pathname) {
-              case "/complete-profile":
+              case '/complete-profile':
                 if (userObj.hasFilledProfileForm) {
-                  props.history.push("/profile");
+                  props.history.push('/profile');
                   return <UserProfileContainer {...props} user={userObj} />;
                 }
                 break;
-              case "/profile":
+              case '/profile':
                 if (!userObj.hasFilledProfileForm) {
-                  props.history.push("/complete-profile");
+                  props.history.push('/complete-profile');
                   return (
                     <CompleteUserProfileContainer {...props} user={userObj} />
                   );
@@ -89,16 +93,16 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
                 break;
             }
 
-              if (props.location.pathname.includes('admin'))
-                return (
-                  <SidebarWithHeader>
-                    <Component {...props} user={userObj} />
-                  </SidebarWithHeader>
-                )
+            if (props.location.pathname.includes('admin'))
+              return (
+                <SidebarWithHeader>
+                  <Component {...props} user={userObj} />
+                </SidebarWithHeader>
+              );
 
             return <Component {...props} user={userObj} />;
           } else {
-            return <NoMatch user={userObj} />;
+            return <ErrorPage {...props} user={userObj} />;
           }
         }}
       />
