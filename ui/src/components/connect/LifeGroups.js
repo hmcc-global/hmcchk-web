@@ -90,7 +90,7 @@ const LifeGroups = (props) => {
           </Center>
         </Stack>
       </Flex>
-      <Box mb={10} width={{ md: '100%', lg: '90%' }}>
+      <Box mb={10} width={'100%'}>
         <Heading
           fontSize={['md', 'xl']}
           fontWeight={700}
@@ -99,7 +99,7 @@ const LifeGroups = (props) => {
         >
           Check out the different LIFE Groups in HMCC!
         </Heading>
-        <SimpleGrid columns={[3, 3]} spacing={3}>
+        <SimpleGrid columns={[2, 3]} spacing={3}>
           {lifeGroupList.length > 0 &&
             lifeGroupList.map((lifeGroupInfo, i) => (
               <LifeGroupCard key={'lg' + i} lifeGroupInfo={lifeGroupInfo} />
