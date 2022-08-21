@@ -97,7 +97,7 @@ const NavBar = (props) => {
           fontSize={{ md: 'xs', lg: 'sm', xl: 'md' }}
           h={{ md: '7vh', lg: '7vh', xl: '8vh' }}
         >
-          <Container maxW="100%" padding={{ md: 1, lg: 5 }}>
+          <Container maxW="100%" padding={{ base: 4, md: 1, lg: 4 }}>
             <Flex
               justify="space-between"
               align="center"
@@ -108,7 +108,8 @@ const NavBar = (props) => {
                 <LinkBox>
                   <LinkOverlay href="/">
                     <Image
-                      h="3vh"
+                      w="3.5em"
+                      minW="3.5em"
                       src={process.env.PUBLIC_URL + '/images/ripple.svg'}
                       alt="Logo of HMCC"
                     />
@@ -118,7 +119,7 @@ const NavBar = (props) => {
                   <Text
                     textColor="#FFFFFF"
                     fontSize={{
-                      base: 'small',
+                      base: 'x-small',
                       md: 'x-small',
                       lg: 'smaller',
                       xl: 'small',
@@ -137,6 +138,7 @@ const NavBar = (props) => {
                       lineHeight="0"
                       borderRadius="8"
                       fontSize={{
+                        base: 'x-small',
                         md: 'x-small',
                         lg: 'small',
                         xl: 'small',
@@ -156,7 +158,7 @@ const NavBar = (props) => {
                 align="center"
                 display={{ base: 'none', md: 'flex' }}
                 marginLeft="15px"
-                marginRight={{ md: '15px', lg: '40px' }}
+                marginRight={{ md: '15px', lg: '30px' }}
                 isInline
               >
                 <Box position="relative">
@@ -330,7 +332,8 @@ const NavBar = (props) => {
                     style={{ background: 'none' }}
                   >
                     <Image
-                      h="2.5vh"
+                      w="1.5em"
+                      minW="1.5em"
                       src={process.env.PUBLIC_URL + '/images/menu.svg'}
                       alt="Menu Button"
                     />

@@ -9,7 +9,6 @@ import {
 } from '@chakra-ui/react';
 import ExperienceHmcc from './ExperienceHmcc';
 import Faq from './Faq';
-import OurMinistries from './OurMinistries';
 import LifeGroups from './LifeGroups';
 
 const ConnectPage = (props) => {
@@ -54,7 +53,6 @@ const ConnectPage = (props) => {
           </Flex>
           <ExperienceHmcc />
           <LifeGroups isLargerThan768={isLargerThan768} />
-          <OurMinistries />
           <Faq />
         </VStack>
       </Container>
