@@ -29,10 +29,12 @@ const HeroSection = ({ anchorTarget }) => {
         justify="center"
         // position="fixed"
         sx={{ aspectRatio: '16/9' }}
-        onCanPlayThrough ={() => {
-          document.querySelectorAll('#video-home').forEach((el) => {
-            el.play();
-          });
+        onCanPlayThrough={() => {
+          setTimeout(() => {
+            document.querySelectorAll('#video-home').forEach((el) => {
+              el.play();
+            });
+          }, 5000);
         }}
       />
       <Flex
