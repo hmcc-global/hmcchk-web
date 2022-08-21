@@ -20,15 +20,20 @@ const HeroSection = ({ anchorTarget }) => {
       <Flex
         as="video"
         w="full"
-        h={["92vh","96vh"]}
+        id="video-home"
+        h={['92vh', '96vh']}
         src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
         loop
-        autoPlay
         muted
         objectFit="cover"
         justify="center"
         // position="fixed"
         sx={{ aspectRatio: '16/9' }}
+        onCanPlayThrough ={() => {
+          document.querySelectorAll('#video-home').forEach((el) => {
+            el.play();
+          });
+        }}
       />
       <Flex
         w="full"
@@ -38,7 +43,12 @@ const HeroSection = ({ anchorTarget }) => {
         style={{ zIndex: 1 }}
         position="relative"
       >
-        <Container maxW="container.lg" justifyContent="center" display="flex">
+        <Container
+          maxW="container.lg"
+          w="full"
+          justifyContent="center"
+          display="flex"
+        >
           <VStack
             w="full"
             justify="center"

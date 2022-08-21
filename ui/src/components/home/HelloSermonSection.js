@@ -24,7 +24,7 @@ const HelpCardInfo = [
   },
   {
     title: 'Visit us',
-    text: ['Every Sunday at 10AM HKT',<br />, 'In-person & Online'],
+    text: ['Every Sunday at 10AM HKT',<br key="space" />, 'In-person & Online'],
     image: 'visit-us-bg.png',
     titleStyle: { color: 'white' },
     textStyle: { color: 'white' },
