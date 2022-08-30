@@ -540,6 +540,11 @@ export default function AdminUser(props) {
   //  Ag-Grid Column Definitions
   const columnDefs = [
     {
+      headerName: 'User ID',
+      field: 'id',
+      editable: false
+    },
+    {
       headerName: 'Name',
       field: 'fullName',
       valueSetter: fullNameSetter,
