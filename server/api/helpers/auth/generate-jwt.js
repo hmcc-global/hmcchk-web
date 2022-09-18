@@ -1,36 +1,36 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
 module.exports = {
-  friendlyName: "Generate JWT",
-  description: "Generate a JWT token.",
+  friendlyName: 'Generate JWT',
+  description: 'Generate a JWT token.',
   inputs: {
     id: {
-      friendlyName: "userId",
-      description: "the unique id of the user",
-      type: "string",
+      friendlyName: 'userId',
+      description: 'the unique id of the user',
+      type: 'string',
       required: true,
     },
     emailAddress: {
-      friendlyName: "Email Address",
-      description: "the email address of the user",
-      type: "string",
+      friendlyName: 'Email Address',
+      description: 'the email address of the user',
+      type: 'string',
       required: true,
     },
     accessType: {
-      friendlyName: "Access Type",
-      description: "the access type permission of the user",
-      type: "string",
+      friendlyName: 'Access Type',
+      description: 'the access type permission of the user',
+      type: 'string',
       required: true,
     },
   },
   exits: {
     invalid: {
-      description: "Invalid token or no authentication present.",
+      description: 'Invalid token or no authentication present.',
     },
   },
   fn: function ({ id, emailAddress, accessType }, exits) {
     try {
-      const maxAge = 24 * 60 * 60 * 7; //token stays for 1 week (1 sec increment)
+      const maxAge = 24 * 60 * 60 * 7 * 4; //token stays for 1 month (1 sec increment)
       const createToken = (id, emailAddress, accessType) => {
         return jwt.sign(
           {
