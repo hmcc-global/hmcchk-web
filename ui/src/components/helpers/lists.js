@@ -31,16 +31,21 @@ const ministryTeamList = [
 
 const lifegroupList = [
   'Not in a LIFE Group',
-  'A-Men',
-  'Bare Bros',
-  'BIRD GANG',
-  'Birds of Pray',
-  'Coffee Meets Bible',
-  'inHimfree',
-  'Kingsmen',
-  'MMA',
-  'P.O.V.',
-  'Wingmen',
+  '4K',
+  'CHRISTiFY',
+  'City Ministry Tue LIFE Group (Leon)',
+  'Covenant',
+  'crocs',
+  'CUHK LIFE Group',
+  'Fuego',
+  'Gsus',
+  'JENGA',
+  'Latitude',
+  'MA FAM',
+  'META',
+  'Mezami',
+  'Palette',
+  'PBnJ',
 ];
 
 const districtList = [

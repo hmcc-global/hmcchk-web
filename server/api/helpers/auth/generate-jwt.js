@@ -30,7 +30,7 @@ module.exports = {
   },
   fn: function ({ id, emailAddress, accessType }, exits) {
     try {
-      const maxAge = 24 * 60 * 60 * 7 * 4; //token stays for 1 month (1 sec increment)
+      const maxAge = 24 * 60 * 60 * 7 * 8; //token stays for 2 month (1 sec increment)
       const createToken = (id, emailAddress, accessType) => {
         return jwt.sign(
           {
