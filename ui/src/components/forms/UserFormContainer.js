@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
 import Form from './Form';
-import { Container, Center, VStack, Text } from '@chakra-ui/react';
+import { Container } from '@chakra-ui/react';
+import { DateTime } from 'luxon';
 
 const UserFormContainer = (props) => {
   const [formData, setFormData] = useState(null);
@@ -23,6 +24,38 @@ const UserFormContainer = (props) => {
         // Form is not published, hence it is unavailable
         if (!data[0]) history.push('/form-unavailable');
         else {
+          const formAvailableFrom = DateTime.fromISO(
+            data[0].formAvailableFrom
+          ).setZone('Asia/Hong_Kong');
+          const formAvailableUntil = DateTime.fromISO(
+            data[0].formAvailableUntil
+          ).setZone('Asia/Hong_Kong');
+
+          // One of these values are set
+          if (formAvailableFrom.isValid || formAvailableUntil.isValid) {
+            // If form available from is set & valid, check if current time is
+            // after formAvailableFrom
+            let afterStartTime = formAvailableFrom.isValid
+              ? DateTime.now().setZone('Asia/Hong_Kong') >= formAvailableFrom
+              : true;
+
+            // Compound checking: if form available until:
+            // is valid: check if it's within the time of form availability
+            // is not valid: default to whatever value was already there
+            let beforeEndTime = formAvailableUntil.isValid
+              ? DateTime.now().setZone('Asia/Hong_Kong') < formAvailableUntil
+              : true;
+            let isInRange = afterStartTime && beforeEndTime;
+
+            if (!isInRange) {
+              if (!beforeEndTime) history.push('/form-unavailable');
+              else
+                history.push({
+                  pathname: '/form-will-open',
+                  state: { availableAfter: formAvailableFrom },
+                });
+            }
+          }
           // TODO: Add check for form within available period
           // If form should be open, proceed with checks, else redirect to /form-will-open
 

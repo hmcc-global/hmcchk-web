@@ -37,6 +37,8 @@ const FormEditorContainer = (props) => {
   const [requireLogin, setRequireLogin] = useState(true);
   const [successEmailTemplate, setSuccessEmailTemplate] = useState(null);
   const [customEmailSubject, setCustomEmailSubject] = useState(null);
+  const [formAvailableFrom, setFormAvailableFrom] = useState(null);
+  const [formAvailableUntil, setFormAvailableUntil] = useState(null);
 
   const resetFormEditorCallback = () => {
     reset();
@@ -46,12 +48,16 @@ const FormEditorContainer = (props) => {
     setValue('requireLogin', true);
     setValue('successEmailTemplate', 'form-default-success');
     setValue('customEmailSubject', '');
+    setValue('formAvailableFrom', null);
+    setValue('formAvailableUntil', null);
     setFormName(null);
     setFormDescription(null);
     setFormImage(null);
     setRequireLogin(true);
     setSuccessEmailTemplate('form-default-success');
     setCustomEmailSubject('');
+    setFormAvailableFrom(null);
+    setFormAvailableUntil(null);
     setIsOpen(false);
     formManagerCallback();
   };
@@ -64,6 +70,8 @@ const FormEditorContainer = (props) => {
       setValue('requireLogin', data.requireLogin);
       setValue('successEmailTemplate', data.successEmailTemplate);
       setValue('customEmailSubject', data.customEmailSubject);
+      setValue('formAvailableFrom', data.formAvailableFrom);
+      setValue('formAvailableUntil', data.formAvailableUntil);
 
       // Update React State for child props
       setFormName(data.formName);
@@ -72,6 +80,8 @@ const FormEditorContainer = (props) => {
       setRequireLogin(data.requireLogin);
       setSuccessEmailTemplate(data.successEmailTemplate);
       setCustomEmailSubject(data.customEmailSubject);
+      setFormAvailableFrom(data.formAvailableFrom);
+      setFormAvailableUntil(data.formAvailableUntil);
     }
   };
 
@@ -162,6 +172,19 @@ const FormEditorContainer = (props) => {
                       If you need a custom subject for the success email
                     </FormHelperText>
                   </FormControl>
+                  <FormControl>
+                    <FormLabel>Form Availability Period</FormLabel>
+                    Starting Time
+                    <Input
+                      type="datetime-local"
+                      {...register('formAvailableFrom')}
+                    />
+                    Ending Time
+                    <Input
+                      type="datetime-local"
+                      {...register('formAvailableUntil')}
+                    />
+                  </FormControl>
                   <FormControl pt="3">
                     <FormLabel>
                       If you updated the fields above please click here again
@@ -184,6 +207,8 @@ const FormEditorContainer = (props) => {
                   requireLogin: requireLogin,
                   successEmailTemplate: successEmailTemplate,
                   customEmailSubject: customEmailSubject,
+                  formAvailableFrom: formAvailableFrom,
+                  formAvailableUntil: formAvailableUntil,
                 }}
                 existingFormFieldsData={editFormData}
                 resetFormEditorCallback={resetFormEditorCallback}

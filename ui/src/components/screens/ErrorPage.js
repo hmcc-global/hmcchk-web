@@ -1,64 +1,75 @@
 import { Center, Icon, Text, VStack, Box, Button } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { MdErrorOutline } from 'react-icons/md';
 import { AiFillCheckCircle } from 'react-icons/ai';
-
-// Define new pages here
-const errorPages = {
-  'not-found': {
-    type: 'error',
-    primaryText: "Uh oh!\n We can't seem to find the page you are looking for.",
-    boldedText: null,
-    buttonLink: '/',
-    buttonText: 'Back to Homepage',
-  },
-  'need-login': {
-    type: 'error',
-    primaryText: 'You are unable to access this form right now.',
-    boldedText: 'Please login to your HMCC account to access the form.',
-    buttonLink: '/login',
-    buttonText: 'LOGIN',
-  },
-  'need-fill-profile': {
-    type: 'error',
-    primaryText: "You haven't filled in your user profile",
-    boldedText: 'Please complete your user profile to access the form.',
-    buttonLink: '/profile',
-    buttonText: 'Back to Profile',
-  },
-  'form-unavailable': {
-    type: 'error',
-    primaryText:
-      'Oops, something went wrong!\nYou are unable to access this form right now.',
-    boldedText: 'This form is currently unavailable.',
-    buttonLink: '/',
-    buttonText: 'Back to Homepage',
-  },
-  'form-will-open': {
-    type: 'error',
-    primaryText: 'Please come back later!',
-    boldedText: 'This form will open soon.',
-    buttonLink: '/',
-    buttonText: 'Back to Homepage',
-  },
-  'form-success': {
-    type: 'success',
-    primaryText: null,
-    boldedText: 'Submitted successfully',
-    buttonLink: '/',
-    buttonText: 'Back to Homepage',
-  },
-  'form-success-logged-in': {
-    type: 'success',
-    primaryText: null,
-    boldedText: 'Submitted successfully',
-    buttonLink: '/profile',
-    buttonText: 'Back to Profile',
-  },
-};
+import { DateTime } from 'luxon';
 
 const ErrorPage = (props) => {
   // Add new cases corresponding to the errorPages definition
+  const history = useHistory();
+
+  // Define new pages here
+  const errorPages = {
+    'not-found': {
+      type: 'error',
+      primaryText:
+        "Uh oh!\n We can't seem to find the page you are looking for.",
+      boldedText: null,
+      buttonLink: '/',
+      buttonText: 'Back to Homepage',
+    },
+    'need-login': {
+      type: 'error',
+      primaryText: 'You are unable to access this form right now.',
+      boldedText: 'Please login to your HMCC account to access the form.',
+      buttonLink: '/login',
+      buttonText: 'LOGIN',
+    },
+    'need-fill-profile': {
+      type: 'error',
+      primaryText: "You haven't filled in your user profile",
+      boldedText: 'Please complete your user profile to access the form.',
+      buttonLink: '/profile',
+      buttonText: 'Back to Profile',
+    },
+    'form-unavailable': {
+      type: 'error',
+      primaryText:
+        'Oops, something went wrong!\nYou are unable to access this form right now.',
+      boldedText: 'This form is currently unavailable.',
+      buttonLink: '/',
+      buttonText: 'Back to Homepage',
+    },
+    'form-will-open': {
+      type: 'error',
+      primaryText: 'Please come back later!',
+      boldedText:
+        'This form will open soon.' +
+        (history.location && history.location.state
+          ? ' Check back after ' +
+            history.location.state.availableAfter.toLocaleString(
+              DateTime.DATETIME_MED
+            )
+          : ''),
+      buttonLink: '/',
+      buttonText: 'Back to Homepage',
+    },
+    'form-success': {
+      type: 'success',
+      primaryText: null,
+      boldedText: 'Submitted successfully',
+      buttonLink: '/',
+      buttonText: 'Back to Homepage',
+    },
+    'form-success-logged-in': {
+      type: 'success',
+      primaryText: null,
+      boldedText: 'Submitted successfully',
+      buttonLink: '/profile',
+      buttonText: 'Back to Profile',
+    },
+  };
+
   const key = (() => {
     try {
       switch (props.location.pathname) {
