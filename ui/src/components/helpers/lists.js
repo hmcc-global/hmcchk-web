@@ -32,11 +32,11 @@ const ministryTeamList = [
 const lifegroupList = [
   'Not in a LIFE Group',
   '4K',
+  'BeReal',
   'CHRISTiFY',
-  'City Ministry Tue LIFE Group (Leon)',
   'Covenant',
   'crocs',
-  'CUHK LIFE Group',
+  'Dim Sum',
   'Fuego',
   'Gsus',
   'JENGA',
