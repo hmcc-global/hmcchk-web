@@ -14,24 +14,16 @@ const UserFormContainer = (props) => {
     const populateData = async () => {
       const { id } = props.match.params;
 
-      // Get form, also check whether user is logged in or not
-      // to see if user can access this form.
       const { data } = await axios.get('/api/forms/get-form', {
         params: { id: id },
       });
 
       try {
-        setFormData(data[0]);
-
-        // Form is not published, hence it is unavailable
-        if (!data[0]) history.push('/form-unavailable');
-        else {
-          const formAvailableFrom = DateTime.fromISO(
-            data[0].formAvailableFrom
-          ).setZone('Asia/Hong_Kong');
-          const formAvailableUntil = DateTime.fromISO(
-            data[0].formAvailableUntil
-          ).setZone('Asia/Hong_Kong');
+        if (!data[0]) {
+          history.push('/form-unavailable');
+        } else {
+          const formAvailableFrom = data[0].formAvailableFrom && DateTime.fromISO(data[0].formAvailableFrom).setZone('Asia/Hong_Kong');
+          const formAvailableUntil = data[0].formAvailableUntil && DateTime.fromISO(data[0].formAvailableUntil).setZone('Asia/Hong_Kong');
 
           // One of these values are set
           if (formAvailableFrom.isValid || formAvailableUntil.isValid) {
@@ -53,8 +45,7 @@ const UserFormContainer = (props) => {
               if (!beforeEndTime) {
                 setIsLoading(false);
                 history.push('/form-unavailable');
-              }
-              else {
+              } else {
                 setIsLoading(false);
                 history.push({
                   pathname: '/form-will-open',
@@ -63,9 +54,6 @@ const UserFormContainer = (props) => {
               }
             }
           }
-          // TODO: Add check for form within available period
-          // If form should be open, proceed with checks, else redirect to /form-will-open
-
           // end form open check
 
           // If there is a logged in user, check whether they filled or not
@@ -82,14 +70,18 @@ const UserFormContainer = (props) => {
             setIsLoading(false);
             history.push('/need-login');
           }
+
+          setFormData(data[0]);
+          setIsLoading(false);
         }
+
       } catch (err) {
         console.log('Error retrieving form data');
       }
     };
 
     populateData();
-  }, [props]);
+  }, [history, props, user.hasFilledProfileForm, user.id]);
 
   return (
     <Container maxW="container.md">
