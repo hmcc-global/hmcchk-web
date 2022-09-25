@@ -6,9 +6,11 @@ import { DateTime } from 'luxon';
 
 const UserFormContainer = (props) => {
   const [formData, setFormData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { user, history } = props;
 
   useEffect(() => {
+    setIsLoading(true);
     const populateData = async () => {
       const { id } = props.match.params;
 
@@ -48,12 +50,17 @@ const UserFormContainer = (props) => {
             let isInRange = afterStartTime && beforeEndTime;
 
             if (!isInRange) {
-              if (!beforeEndTime) history.push('/form-unavailable');
-              else
+              if (!beforeEndTime) {
+                setIsLoading(false);
+                history.push('/form-unavailable');
+              }
+              else {
+                setIsLoading(false);
                 history.push({
                   pathname: '/form-will-open',
                   state: { availableAfter: formAvailableFrom },
                 });
+              }
             }
           }
           // TODO: Add check for form within available period
@@ -65,10 +72,16 @@ const UserFormContainer = (props) => {
           // Else default to true to allow public to access
           let filledInProfileCheck = user.id ? user.hasFilledProfileForm : true;
 
-          if (!filledInProfileCheck) history.push('/need-fill-profile');
+          if (!filledInProfileCheck) {
+            setIsLoading(false);
+            history.push('/need-fill-profile');
+          }
+
           // Check if form requires login
-          else if (data[0].requireLogin && !user.id)
+          else if (data[0].requireLogin && !user.id) {
+            setIsLoading(false);
             history.push('/need-login');
+          }
         }
       } catch (err) {
         console.log('Error retrieving form data');
@@ -80,7 +93,7 @@ const UserFormContainer = (props) => {
 
   return (
     <Container maxW="container.md">
-      {formData && (
+      {!isLoading && formData && (
         <Form
           formId={formData.id}
           formName={formData.formName}
