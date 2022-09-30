@@ -29,13 +29,13 @@ import {
                 lg:`${process.env.PUBLIC_URL}/images/harvest-games/planes_desktop.png`}}
       height={{base:'fit-content',sm:'fit-content',md:'fit-content',lg:'fit-content'}}    
       >
-      <Box  bgImage={{base:`${process.env.PUBLIC_URL}/images/harvest-games/clouds.png`,
-                sm:`${process.env.PUBLIC_URL}/images/harvest-games/clouds.png`,
-                md:`${process.env.PUBLIC_URL}/images/harvest-games/clouds_desktop.png`,
-                lg:`${process.env.PUBLIC_URL}/images/harvest-games/clouds_desktop.png`}}
-        bgPosition = 'bottom'
-        bgSize = {{base:'100%',sm:'100%',md:'100%',lg:'100%'}}
-        backgroundRepeat={{base:'no-repeat',sm:'no-repeat',md:'no-repeat',lg:'no-repeat'}}
+      <Box  bgImage={{base:`${process.env.PUBLIC_URL}/images/harvest-games/cloud.gif`,
+                sm:`${process.env.PUBLIC_URL}/images/harvest-games/cloud.gif`,
+                md:`${process.env.PUBLIC_URL}/images/harvest-games/cloud.gif`,
+                lg:`${process.env.PUBLIC_URL}/images/harvest-games/cloud.gif`}}
+        bgPosition = 'bottom,left'
+        bgSize = {{base:'100%',sm:'100%',md:'45%',lg:'45%'}}
+        backgroundRepeat={{base:'no-repeat',sm:'no-repeat',md:'repeat-x',lg:'repeat-x'}}
         >
       {/*FLY HMCC Text*/}
       <Box
@@ -53,7 +53,7 @@ import {
           /> 
       </Box>
 
-      <Container maxW="container.xl" 
+      <Container maxW="80%" 
       paddingTop = {{base: '35%',sm:'35%', md:'20%', lg:'17%', xl: '15%'}}
       paddingBottom = '5%'
       height = {{base: '70%',sm:'90%', md:'90%', lg:'100%', xl: '100%'}}
