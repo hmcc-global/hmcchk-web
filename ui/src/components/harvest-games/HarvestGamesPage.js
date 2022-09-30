@@ -1,18 +1,21 @@
 import {
     Box,
     Container,
-    Heading,
     Image,
-    VStack,
-    useMediaQuery,
-    Flex,
     Tabs, 
     TabList, 
     TabPanels, 
     Tab, 
     TabPanel,
     Text,
-    Link
+    Link,
+    Table,
+    Thead,
+    Tbody,
+    Tr,
+    Td,
+    TableContainer,
+    Center,
   } from '@chakra-ui/react';
 
   
@@ -53,7 +56,7 @@ import {
           /> 
       </Box>
 
-      <Container maxW="80%" 
+      <Container maxW="90%" 
       paddingTop = {{base: '35%',sm:'35%', md:'20%', lg:'17%', xl: '15%'}}
       paddingBottom = '5%'
       height = {{base: '70%',sm:'90%', md:'90%', lg:'100%', xl: '100%'}}
@@ -62,7 +65,7 @@ import {
       <Box
           background="none"
           paddingTop = {{base: '5%',sm:'1%', md:'1%', lg:'2%'}}
-          
+          width='100%'
           height = '90%'> {/*important so that panels do not overflow*/}
          
         {/* DESKTOP */}
@@ -74,38 +77,58 @@ import {
           borderRadius="5px"
           variant="unstyled"
           mb="5%"
-          default={1}
+          defaultIndex={0}
           >
 
-          <TabList border="none" width = '250px' paddingRight={"10"}>
+          <TabList border="none" width = '250px' paddingRight={"10"} >
             <Tab 
               borderBottom="5px solid #E2E8F0" 
               _selected={{ borderColor: '#0628A3', textColor: "#3A6693", fontWeight: 'bold' }}>
               <Text>
                 Leaderboard
               </Text>
-              </Tab>
+            </Tab>
+        
             <Tab 
+              marginTop = '30'
               borderBottom="5px solid #E2E8F0"
               _selected={{ borderColor: '#0628A3', textColor: "#3A6693", fontWeight: 'bold'}}>Pre-Games</Tab>
           </TabList>     
 
-          <TabPanels bgColor='#FFFFFF' borderRadius={'10'} bottomPadding = "50px" >
-            <TabPanel  height = "40em">
-            <Text
-              fontSize = {{base: '20px',sm:'25px', md:'30px', lg:'40px'}}
-              textAlign = 'center'
-            >
-              Leadership BOARD: 
-              </Text>
+          <TabPanels bgColor='#FFFFFF' borderRadius={'10'} bottomPadding = "50px">
+            <TabPanel  height = "80vh">
+              <Center>
+              <TableContainer  width = '60%' paddingTop = '3%'>
+              <Table variant='unstyled'>
+                  <Thead bgColor="#EDFBFF">
+                    <Tr border = '1px' borderColor={'#BFBFBF'}>
+                      <Td textAlign={'center'} fontWeight='bold'>Week</Td>
+                      <Td textAlign={'center'} fontWeight='bold'>LIFE Group</Td>
+                    </Tr>
+                  </Thead>
+                  <Tbody bgColor = "#CEF6FF">
+                    <Tr border = '1px' borderColor={'#BFBFBF'}>
+                      <Td textAlign={'center'} fontSize = {'15'}>1</Td>
+                      
+                      <Td isNumeric textAlign={'center'} fontSize = {'15'}>TBA</Td>
+                    </Tr>
+                    <Tr border = '1px' borderColor={'#BFBFBF'}>
+                      <Td textAlign={'center'} fontSize = {'15'}>2</Td>
+                      <Td isNumeric textAlign={'center'} fontSize = {'15'}>TBA</Td>
+                    </Tr>
+                  </Tbody>
+                </Table>
+               </TableContainer>
+               </Center>
             </TabPanel>
             
-            <TabPanel  height = "80em">
+            <TabPanel minHeight="80vh">
             <Text
-              fontSize = {{base: '30px',sm:'30px', md:'35px', lg:'40px'}}
+              fontSize = {{md:'30px', lg:'35px'}}
               textAlign = 'center'
+              paddingTop = '10vh'
             >
-               Access Pre-Game Instructions PDF <br></br>by clicking {' '}
+               Access Pre-Game Instructions <br></br>PDF by clicking {' '}
                <Link color='teal.500' href='https://www.youtube.com/' isExternal>
                  here
                </Link>
@@ -120,6 +143,7 @@ import {
         <Tabs 
           isFitted variant = 'enclosed'
           orientation='horizontal'
+          width = '100%'
           display={['block','block','none']}
           default={1}
           >
@@ -134,21 +158,40 @@ import {
             >Pre-Games</Tab>
           </TabList>     
 
-          <TabPanels bgColor='none' borderRadius={'10'}>
+          <TabPanels bgColor='none' borderRadius={'0'}>
 
             <TabPanel height={{base:'30em', sm: "40em"}}> 
-              <Text
-                fontSize = {{base: '20px',sm:'25px', md:'30px', lg:'40px'}}
-                textAlign = 'center'
-              >
-                 Leadership Board:
-              </Text>
+              <Center >
+              <TableContainer width='100%'>
+                <Table variant='unstyled'>
+                  <Thead bgColor="#EDFBFF">
+                    <Tr border = '1px' borderColor={'#BFBFBF'}>
+                      <Td textAlign={'center'} fontWeight='bold'>Week</Td>
+                      <Td textAlign={'center'} fontWeight='bold'>LIFE Group</Td>
+                    </Tr>
+                  </Thead>
+                  <Tbody bgColor = "#CEF6FF">
+                    <Tr border = '1px' borderColor={'#BFBFBF'}>
+                      <Td textAlign={'center'} fontSize = {'15'}>1</Td>
+                      
+                      <Td isNumeric textAlign={'center'} fontSize = {'15'}>TBA</Td>
+                    </Tr>
+                    <Tr border = '1px' borderColor={'#BFBFBF'}>
+                      <Td textAlign={'center'} fontSize = {'15'}>2</Td>
+                      <Td isNumeric textAlign={'center'} fontSize = {'15'}>TBA</Td>
+                    </Tr>
+                  </Tbody>
+                </Table>
+               </TableContainer>
+               </Center>
+
             </TabPanel>
             
             <TabPanel height={{base:'30em', sm: "40em"}} >
             <Text
-              fontSize = {{base: '25px',sm:'25px', md:'30px', lg:'40px'}}
+              fontSize = {{base: '20px',sm:'20px', md:'30px', lg:'40px'}}
               textAlign = 'center'
+              paddingTop = '5vh'
             >
                Access Pre-Game Instructions <br></br> PDF by clicking {''}
                <Link color='teal.500' href='https://www.youtube.com/' isExternal>
