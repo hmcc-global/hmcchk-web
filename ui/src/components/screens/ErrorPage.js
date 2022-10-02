@@ -47,7 +47,7 @@ const ErrorPage = (props) => {
         'This form will open soon.' +
         (history.location && history.location.state
           ? ' Check back after ' +
-            history.location.state.availableAfter.toLocaleString(
+            history.location.state?.availableAfter?.toLocaleString(
               DateTime.DATETIME_MED
             )
           : ''),
@@ -56,14 +56,20 @@ const ErrorPage = (props) => {
     },
     'form-success': {
       type: 'success',
-      primaryText: null,
+      primaryText: 
+        (history.location && history.location.state)
+          ? `${history.location.state?.formName}`
+          : null,
       boldedText: 'Submitted successfully',
       buttonLink: '/',
       buttonText: 'Back to Homepage',
     },
     'form-success-logged-in': {
       type: 'success',
-      primaryText: null,
+      primaryText: 
+        (history.location && history.location.state)
+          ? `${history.location.state?.formName}`
+          : null,
       boldedText: 'Submitted successfully',
       buttonLink: '/profile',
       buttonText: 'Back to Profile',

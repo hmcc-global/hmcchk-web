@@ -91,7 +91,10 @@ const Form = (props) => {
         userId: userId,
       });
       if (status === 200) {
-        history.push('/form-success');
+        history.push({
+          pathname: '/form-success',
+          state: { formName },
+        });
       }
     } catch (err) {
       console.log(err);
