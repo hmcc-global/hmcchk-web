@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { customAxios as axios } from '../helpers/customAxios';
 import Form from './Form';
 import { Container } from '@chakra-ui/react';
-import { DateTime } from 'luxon';
+import { validateForm } from '../helpers/formsHelpers';
 
 const UserFormContainer = (props) => {
   const [formData, setFormData] = useState(null);
@@ -14,74 +13,32 @@ const UserFormContainer = (props) => {
     const populateData = async () => {
       const { id } = props.match.params;
 
-      const { data } = await axios.get('/api/forms/get-form', {
-        params: { id: id },
-      });
-
       try {
-        if (!data[0]) {
-          history.push('/form-unavailable');
-        } else {
-          const formAvailableFrom = data[0].formAvailableFrom && DateTime.fromISO(data[0].formAvailableFrom).setZone('Asia/Hong_Kong');
-          const formAvailableUntil = data[0].formAvailableUntil && DateTime.fromISO(data[0].formAvailableUntil).setZone('Asia/Hong_Kong');
+        const result = await validateForm(id, user);
 
-          // One of these values are set
-          if (formAvailableFrom.isValid || formAvailableUntil.isValid) {
-            // If form available from is set & valid, check if current time is
-            // after formAvailableFrom
-            let afterStartTime = formAvailableFrom.isValid
-              ? DateTime.now().setZone('Asia/Hong_Kong') >= formAvailableFrom
-              : true;
-
-            // Compound checking: if form available until:
-            // is valid: check if it's within the time of form availability
-            // is not valid: default to whatever value was already there
-            let beforeEndTime = formAvailableUntil.isValid
-              ? DateTime.now().setZone('Asia/Hong_Kong') < formAvailableUntil
-              : true;
-            let isInRange = afterStartTime && beforeEndTime;
-
-            if (!isInRange) {
-              if (!beforeEndTime) {
-                setIsLoading(false);
-                history.push('/form-unavailable');
-              } else {
-                setIsLoading(false);
-                history.push({
-                  pathname: '/form-will-open',
-                  state: { availableAfter: formAvailableFrom },
-                });
-              }
+        if (result && result.pathname && result.pathname !== '') {
+          history.push({
+            pathname: result.pathname,
+            state: result.state
+          });
+        } else if (!result?.data[0]) {
+          history.push({
+            pathname: '/form-unavailable',
+            state: {
+              id
             }
-          }
-          // end form open check
-
-          // If there is a logged in user, check whether they filled or not
-          // Else default to true to allow public to access
-          let filledInProfileCheck = user.id ? user.hasFilledProfileForm : true;
-
-          if (!filledInProfileCheck) {
-            setIsLoading(false);
-            history.push('/need-fill-profile');
-          }
-
-          // Check if form requires login
-          else if (data[0].requireLogin && !user.id) {
-            setIsLoading(false);
-            history.push('/need-login');
-          }
-
-          setFormData(data[0]);
+          });
+        } else {
           setIsLoading(false);
+          setFormData(result.data[0]);
         }
-
       } catch (err) {
         console.log('Error retrieving form data');
       }
     };
 
     populateData();
-  }, [history, props, user.hasFilledProfileForm, user.id]);
+  }, [history, props, user]);
 
   return (
     <Container maxW="container.md">
