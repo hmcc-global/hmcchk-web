@@ -21,6 +21,7 @@ module.exports.policies = {
 
   // Announcements
   'announcements/*': true,
+  'witness/*': true,
 
   // Auth
   'auth/post-login': true,

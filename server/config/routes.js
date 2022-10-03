@@ -38,6 +38,9 @@ module.exports.routes = {
   // Announcement APIs
   'get /api/announcements/get-announcements': 'announcements/get-announcements',
 
+  // Witness Video APIs
+  'get /api/witness/get-witness-videos': 'witness/get-witness-videos',
+
   // Pages APIs
   'get /api/pages/get-pages': 'pages/get-pages',
 
