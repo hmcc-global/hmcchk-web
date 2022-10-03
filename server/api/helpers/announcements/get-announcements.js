@@ -59,7 +59,7 @@ module.exports = {
 
     sails.log.info(`Getting all announcements..`);
 
-    const url = sails.config.custom.announcements.host;
+    const url = sails.config.custom.posts.host;
 
     try {
       const data = await sails.helpers.getData(url);
