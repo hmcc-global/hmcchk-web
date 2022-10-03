@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Grid,
   Heading,
@@ -16,64 +16,54 @@ import {
 } from '@chakra-ui/react';
 import VideoCard from './VideoCard';
 import Pagination from '../../helpers/Pagination';
-// import FilterSermon from './FilterSermons';
-// import SermonCard from './SermonCard';
-// import RelatedSermonCard from './RelatedSermonCard';
+import FilterVideos from './FilterVideos';
 
-const VideoCardList = ({ allVideos }, props) => {
+const VideoCardList = ({ allVideos }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const videosPerPage = 12;
-//   const [filterSpeaker, setFilterSpeaker] = useState('');
-//   const [filterSermonSeries, setFilterSermonSeries] = useState('');
-//   const [filterBook, setFilterBook] = useState('');
-//   const [filterServiceType, setFilterServiceType] = useState('');
+  const [filteredTags, setFilteredTags] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
-//   const filterData = [
-//     filterSpeaker,
-//     filterSermonSeries,
-//     filterBook,
-//     filterServiceType,
-//   ];
   const btnRef = React.useRef();
 
   //filter section
 
-  const videos = allVideos;
+  const videos = allVideos
+    .filter((video) => {
+      if (filteredTags.length === 0) {
+        return true;
+      } else {
+        let foundMatchingTag = false;
+        video.tags.forEach((tag) => {
+          console.log("Checking: ", tag);
+          if (filteredTags.includes(tag)) foundMatchingTag = true;
+        });
+        return foundMatchingTag;
+      }
+    });
+  console.log("Tags: ", filteredTags);
+  console.log("Videos: ", videos);
 
-//   const filterSermon = (event) => {
-//     setCurrentPage(1);
-//     if (event.target.name == 'speaker') {
-//       setFilterSpeaker(event.target.value);
-//     } else if (event.target.name == 'sermon') {
-//       setFilterSermonSeries(event.target.value);
-//     } else if (event.target.name == 'book') {
-//       setFilterBook(event.target.value);
-//     } else if (event.target.name == 'service') {
-//       setFilterServiceType(event.target.value);
-//     }
-//   };
-//   const sermons = allSermons
-//     .filter((sermon) => {
-//       if (sermon.speaker[0] != null)
-//         return sermon.speaker[0].name.includes(filterSpeaker);
-//     })
-//     .filter((sermon) => {
-//       if (sermon.sermonSeries[0] != null)
-//         return sermon.sermonSeries[0].name.includes(filterSermonSeries);
-//     })
-//     .filter((sermon) => {
-//       if (sermon.passage != null) return sermon.passage.includes(filterBook);
-//     })
-//     .filter((sermon) => {
-//       if (sermon.serviceType[0] != null)
-//         return sermon.serviceType[0].name.includes(filterServiceType);
-//     });
-//   const clearFilter = () => {
-//     setFilterSpeaker('');
-//     setFilterSermonSeries('');
-//     setFilterBook('');
-//     setFilterServiceType('');
-//   };
+  const handleTagChange = (tag) => {
+    const newTags = [...filteredTags];
+    if (newTags.includes(tag)) {
+      var index = newTags.indexOf(tag);
+      if (index > -1) {
+        newTags.splice(index, 1);
+      }
+      setFilteredTags(newTags);
+    } else {
+      setFilteredTags([...newTags, tag]);
+    }
+  };
+
+  const clearFilter = () => {
+    setFilteredTags([]);
+  };
+
+  const handleClose = () => {
+    setCurrentPage(1);
+    onClose();
+  };
 
   //pagination section
   const indexOfLastVideo = currentPage * videosPerPage;
@@ -88,13 +78,14 @@ const VideoCardList = ({ allVideos }, props) => {
           <Heading>Testimony Videos</Heading>
           <Button
             width="30vw"
-            display={{ base: 'flex', md: 'none' }}
+            // display={{ base: 'flex', md: 'none' }}
+            display="flex"
             background="#0628A3"
             backdropFilter="blur(6px)"
             borderRadius="10px"
             color="white"
             ref={btnRef}
-            // onClick={onOpen}
+            onClick={onOpen}
           >
             Filter
           </Button>
@@ -139,7 +130,7 @@ const VideoCardList = ({ allVideos }, props) => {
           paginate={paginate}
         />
       </Box>
-      {/* <Drawer
+      <Drawer
         isOpen={isOpen}
         size="full"
         onClose={onClose}
@@ -151,19 +142,19 @@ const VideoCardList = ({ allVideos }, props) => {
           <DrawerCloseButton margin="5" />
           <DrawerHeader />
           <DrawerBody>
-            <FilterSermon
-              allSermons={allSermons}
-              filterSermon={filterSermon}
-              filterData={filterData}
+            <FilterVideos
+              allVideos={allVideos}
+              handleTagChange={handleTagChange}
+              filteredTags={filteredTags}
               clearFilter={clearFilter}
-              onClose={onClose}
+              onClose={handleClose}
             />
           </DrawerBody>
           <DrawerFooter fontSize="sm" color="black" justifyContent="center">
             Harvest Mission Community Church {new Date().getFullYear()}
           </DrawerFooter>
         </DrawerContent>
-      </Drawer> */}
+      </Drawer>
     </>
   );
 };
