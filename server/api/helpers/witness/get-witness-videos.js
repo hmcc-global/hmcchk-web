@@ -1,13 +1,15 @@
 const { DateTime } = require("luxon");
 const he = require("he");
 
-const transformWitnessVideo = (video) => {
+const transformWitnessVideo = (video, tags) => {
   let parsedStartDateStr = video.acf.date
     ? video.acf.date.split(" ").pop()
     : null;
   let parsedEndDateStr = video.acf.end_date
     ? video.acf.end_date.split(" ").pop()
     : null;
+  
+  const tagNames = video.tags.map((tagId) => tags[tagId]);
 
   return {
     id: video.id,
@@ -26,7 +28,7 @@ const transformWitnessVideo = (video) => {
       : null,
     videoLink: video.acf.link,
     status: video.status,
-    tags: video.tags,
+    tags: tagNames,
   };
 };
 
@@ -55,14 +57,15 @@ module.exports = {
 
     sails.log.info(`Getting all witness videos..`);
 
-    const url = sails.config.custom.posts.host;
+    const postsUrl = sails.config.custom.posts.host;
 
     try {
-      const data = await sails.helpers.getData(url, {
+      const data = await sails.helpers.getData(postsUrl, {
         // 220 is the category code for Witness Videos on WP
         categories: 220
       });
-      let transformedWitnessVideos = data.map((wv) => transformWitnessVideo(wv));
+      const tags = await sails.helpers.witness.getTags();
+      let transformedWitnessVideos = data.map((wv) => transformWitnessVideo(wv, tags));
 
       if (transformedWitnessVideos.length > 0) {
         sails.cache.set(key, transformedWitnessVideos);
