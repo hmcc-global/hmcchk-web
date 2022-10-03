@@ -26,6 +26,7 @@ const transformWitnessVideo = (video) => {
       : null,
     videoLink: video.acf.link,
     status: video.status,
+    tags: video.tags,
   };
 };
 
