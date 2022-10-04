@@ -94,14 +94,16 @@ const validateForm = async (id, user) => {
 
     if (!filledInProfileCheck) {
       return {
-        pathname: '/need-fill-profile'
+        pathname: '/need-fill-profile',
+        state: { id: data[0].id },
       };
     }
 
     // Check if form requires login
     else if (data[0].requireLogin && !user.id) {
       return {
-        pathname: '/need-login'
+        pathname: '/need-login',
+        state: { id: data[0].id },
       };
     }
     return {
@@ -110,11 +112,10 @@ const validateForm = async (id, user) => {
   } catch (err) {
     console.log(err);
     return {
-      pathname: '/form-unavailable'
+      pathname: '/form-unavailable',
+      state: { id: id }
     };
   }
-
-
 }
 
 export { camelize, sentencize, validateForm };
