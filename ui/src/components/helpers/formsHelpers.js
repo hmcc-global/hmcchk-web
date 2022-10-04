@@ -43,6 +43,9 @@ const validateForm = async (id, user) => {
       params: { id }
     });
 
+    const { data: nowIso } = await axios.get('/api/misc/get-current-time');
+    const now = DateTime.fromISO(nowIso);
+
     if (!data[0]) {
       return {
         pathname: '/form-unavailable',
@@ -58,14 +61,14 @@ const validateForm = async (id, user) => {
       // If form available from is set & valid, check if current time is
       // after formAvailableFrom
       let afterStartTime = formAvailableFrom.isValid
-        ? DateTime.now().setZone('Asia/Hong_Kong') >= formAvailableFrom
+        ? now >= formAvailableFrom
         : true;
 
       // Compound checking: if form available until:
       // is valid: check if it's within the time of form availability
       // is not valid: default to whatever value was already there
       let beforeEndTime = formAvailableUntil.isValid
-        ? DateTime.now().setZone('Asia/Hong_Kong') < formAvailableUntil
+        ? now < formAvailableUntil
         : true;
       let isInRange = afterStartTime && beforeEndTime;
 

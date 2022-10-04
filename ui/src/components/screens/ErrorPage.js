@@ -74,7 +74,9 @@ const ErrorPage = (props) => {
       primaryText: 'Please come back later!',
       boldedText:
         'This form will open soon.' +
-        formOpenTime,
+        (formOpenTime && formOpenTime !== ''
+          ? ' Check back after ' + formOpenTime
+          : ''),
       buttonLink: '/',
       buttonText: 'Back to Homepage',
     },
