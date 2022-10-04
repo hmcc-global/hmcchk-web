@@ -6,14 +6,12 @@ import { useEffect, useState } from 'react';
 import { validateForm } from '../helpers/formsHelpers';
 
 const ErrorPage = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
   // Add new cases corresponding to the errorPages definition
   const history = useHistory();
-  
+  const [isLoading, setIsLoading] = useState(true);
+  const [formOpenTime, setFormOpenTime] = useState(history.location.state.availableAfter)
+
   useEffect(() => {
-    setIsLoading(true);
-    
-    console.log(history);
     const validate = async () => {
       const { location: { state } } = history;
       const { user } = props;
@@ -28,10 +26,14 @@ const ErrorPage = (props) => {
             state: result.state
           });
           return;
+        } else if (result.pathname && result.pathname === '/form-will-open') {
+          setFormOpenTime(result.state.availableAfter);
         }
       }
       setIsLoading(false);
     }
+
+    setIsLoading(true);
     validate();
   }, [history, props]);
 
@@ -72,10 +74,7 @@ const ErrorPage = (props) => {
       primaryText: 'Please come back later!',
       boldedText:
         'This form will open soon.' +
-        (history.location && history.location.state && history.location.state.availableAfter
-          ? ' Check back after ' +
-            history.location.state.availableAfter
-          : ''),
+        formOpenTime,
       buttonLink: '/',
       buttonText: 'Back to Homepage',
     },
