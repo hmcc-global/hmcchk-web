@@ -30,6 +30,7 @@ import AdminHome from './admin/AdminHome';
 import AdminUser from './admin/users/AdminUser';
 import FormManager from './forms/FormManager';
 import AdminPopUpContainer from './admin/popup/AdminPopUpContainer';
+import WitnessContainer from './witness/WitnessContainer';
 
 const MainContainer = () => {
   return (
@@ -209,6 +210,12 @@ const MainContainer = () => {
           path="/admin/popup"
           permissions={['t3ch', 'admin', 'stewardship']}
           component={AdminPopUpContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/witness/testimonies"
+          permissions={['public']}
+          component={WitnessContainer}
         />
 
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
