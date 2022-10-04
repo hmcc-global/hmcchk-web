@@ -55,6 +55,7 @@ module.exports.policies = {
 
   // Misc
   'misc/get-env': true,
+  'misc/get-current-time': true,
 
   // Pages
   'pages/*': true,
