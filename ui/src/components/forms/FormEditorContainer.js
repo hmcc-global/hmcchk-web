@@ -21,6 +21,7 @@ import {
 import FormEditor from './FormEditor';
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect } from 'react';
+import { DateTime } from 'luxon';
 
 const FormEditorContainer = (props) => {
   const { user, isOpen, setIsOpen, editFormData, formManagerCallback } = props;
@@ -39,6 +40,7 @@ const FormEditorContainer = (props) => {
   const [customEmailSubject, setCustomEmailSubject] = useState(null);
   const [formAvailableFrom, setFormAvailableFrom] = useState(null);
   const [formAvailableUntil, setFormAvailableUntil] = useState(null);
+  const [formPeriodInvalid, setFormPeriodInvalid] = useState(false);
 
   const resetFormEditorCallback = () => {
     reset();
@@ -96,6 +98,20 @@ const FormEditorContainer = (props) => {
   useEffect(() => {
     setFormManagerElements(editFormData);
   }, [editFormData]);
+
+
+
+  useEffect(() => {
+    if (formAvailableFrom && formAvailableUntil) {
+      const fromDate = DateTime.fromISO(formAvailableFrom);
+      const untilDate = DateTime.fromISO(formAvailableUntil);
+      if (untilDate <= fromDate) {
+        setFormPeriodInvalid(true);
+        return;
+      }
+    }
+    setFormPeriodInvalid(false);
+  }, [formAvailableFrom, formAvailableUntil]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="full">
@@ -172,8 +188,12 @@ const FormEditorContainer = (props) => {
                       If you need a custom subject for the success email
                     </FormHelperText>
                   </FormControl>
-                  <FormControl>
+                  <FormControl isInvalid={formPeriodInvalid}>
                     <FormLabel>Form Availability Period</FormLabel>
+                    <FormErrorMessage>
+                      {formPeriodInvalid &&
+                        'Availability Period is invalid, please check again'}
+                    </FormErrorMessage>
                     Starting Time
                     <Input
                       type="datetime-local"
