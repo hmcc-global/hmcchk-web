@@ -8,6 +8,10 @@ module.exports = {
       type: 'string',
       defaultsTo: '',
     },
+    theme: {
+      type: 'string',
+      defaultsTo: '',
+    },
     testimony: {
       type: 'string',
       required: true,
