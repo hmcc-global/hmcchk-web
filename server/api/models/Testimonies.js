@@ -6,7 +6,6 @@ module.exports = {
     },
     email: {
       type: 'string',
-      required: true,
       defaultsTo: '',
     },
     testimony: {
@@ -20,10 +19,9 @@ module.exports = {
     },
     image: {
       type: 'string',
-      required: true,
       defaultsTo: '',
     },
-    isApproved: {
+    isPublished: {
       type: 'boolean',
       defaultsTo: false,
     },

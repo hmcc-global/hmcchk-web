@@ -1,11 +1,11 @@
 module.exports = {
-  friendlyName: 'Get testimonies',
+  friendlyName: 'Get published testimonies',
 
-  description: 'Get all testimonies',
+  description: 'Get all published testimonies',
 
   inputs: {
     tags: {
-      description: 'testimonies with the tags to be returned',
+      description: 'published testimonies with the tags to be returned',
       type: 'json',
       required: false,
     },
@@ -22,7 +22,10 @@ module.exports = {
 
   fn: async function ({ tags }, exits) {
     try {
-      let data = await Testimonies.find({ isDeleted: false });
+      let data = await Testimonies.find({
+        isPublished: true,
+        isDeleted: false,
+      });
 
       sails.log.info(`Getting testimony with tags: ${tags}`);
       if (data === null) return exits.error('no data retrieved');

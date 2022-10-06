@@ -99,6 +99,7 @@ module.exports.routes = {
 
   // Testimonies APIs
   'get /api/testimony/get': 'testimonies/get-testimonies',
+  'get /api/testimony/get-published': 'testimonies/get-published-testimonies',
   'post /api/testimony/create': 'testimonies/create-testimonies',
 
   // UI
