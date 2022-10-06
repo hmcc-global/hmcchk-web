@@ -2,7 +2,7 @@ module.exports = {
   attributes: {
     fullName: {
       type: 'string',
-      required: true,
+      defaultsTo: '',
     },
     email: {
       type: 'string',
