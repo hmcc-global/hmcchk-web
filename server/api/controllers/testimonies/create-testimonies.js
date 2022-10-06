@@ -12,6 +12,10 @@ module.exports = {
       type: 'string',
       required: false,
     },
+    theme: {
+      type: 'string',
+      required: false,
+    },
     testimony: {
       type: 'string',
       required: true,
@@ -28,11 +32,12 @@ module.exports = {
     },
   },
 
-  fn: async function ({ fullName, email, testimony, tags }, exits) {
+  fn: async function ({ fullName, email, theme, testimony, tags }, exits) {
     try {
       const newTestimony = await Testimonies.create({
         fullName,
         email,
+        theme,
         testimony,
         tags,
       });
