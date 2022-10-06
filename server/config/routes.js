@@ -91,6 +91,10 @@ module.exports.routes = {
   'post /api/popup/create': 'popup/create-popup',
   'put /api/popup/update': 'popup/update-popup',
 
+  // Testimonies APIs
+  'get /api/testimony/get': 'testimonies/get-testimonies',
+  'post /api/testimony/create': 'testimonies/create-testimonies',
+
   // UI
   'get /*': {
     skipAssets: true,
