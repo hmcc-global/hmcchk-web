@@ -6,10 +6,11 @@ module.exports = {
   inputs: {
     fullName: {
       type: 'string',
-      required: true,
+      required: false,
     },
     email: {
       type: 'string',
+      required: false,
     },
     testimony: {
       type: 'string',
@@ -17,7 +18,7 @@ module.exports = {
     },
     tags: {
       type: 'json',
-      required: true,
+      required: false,
     },
   },
 
