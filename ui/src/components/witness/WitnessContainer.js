@@ -1,5 +1,14 @@
-import { useState } from 'react';
-import { Box, Container, Heading, Tabs, Tab, TabPanel, TabPanels, TabList } from '@chakra-ui/react';
+import React from 'react';
+import {
+  Box,
+  Container,
+  Heading,
+  Tabs,
+  Tab,
+  TabPanel,
+  TabPanels,
+  TabList,
+} from '@chakra-ui/react';
 import VideoTestimonyContainer from './video-testimony/VideoTestimonyContainer';
 
 const WitnessContainer = (props) => {
@@ -20,29 +29,20 @@ const WitnessContainer = (props) => {
             Witness
           </Heading>
         </Box>
-        {/* <Heading
-          size="2xl"
-          color="black"
-          justifyContent="center"
-          fontWeight="900"
-          display={{ base: 'flex', md: 'none' }}
-        >
-          Witness
-        </Heading> */}
-        <Tabs size="lg" variant="soft-rounded" justifyContent="center" m={1}>
-            <TabList justifyContent="center">
-                <Tab>Videos</Tab>
-                <Tab>Text</Tab>
+        <Container maxW="container.xl" padding={[0, 2]}>
+          <Tabs size="lg" justifyContent="center" m={1}>
+            <TabList justifyContent="center" display="flex">
+              <Tab width="100%">WATCH</Tab>
+              <Tab width="100%">READ</Tab>
             </TabList>
             <TabPanels>
-                <TabPanel>
-                    <VideoTestimonyContainer />
-                </TabPanel>
-                <TabPanel>
-                    TODO: Text Testimony Container
-                </TabPanel>
+              <TabPanel>
+                <VideoTestimonyContainer />
+              </TabPanel>
+              <TabPanel>TODO: Text Testimony Container</TabPanel>
             </TabPanels>
-        </Tabs>
+          </Tabs>
+        </Container>
       </Container>
     </>
   );

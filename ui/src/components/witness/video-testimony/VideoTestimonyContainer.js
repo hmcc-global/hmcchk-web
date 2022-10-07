@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
 import { customAxios as axios } from '../../helpers/customAxios';
-import { Box, Container, Heading } from '@chakra-ui/react';
-import { DateTime } from 'luxon';
-import { getRenderDate } from '../../helpers/eventsHelpers';
+import { Container } from '@chakra-ui/react';
 import VideoCardList from './VideoCardList';
 
 const VideoTestimonyContainer = (props) => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    getVideos()
+    getVideos();
   }, []);
 
   const getVideos = async () => {
@@ -19,8 +17,8 @@ const VideoTestimonyContainer = (props) => {
       );
       if (status === 200) {
         data.forEach((wv) => {
-            wv.renderDate = wv.endDate
-        })
+          wv.renderDate = wv.endDate;
+        });
         data.sort((a, b) => (a.renderDate > b.renderDate ? 1 : -1));
         setVideos([...data]);
       } else {
@@ -33,7 +31,7 @@ const VideoTestimonyContainer = (props) => {
 
   return (
     <>
-      <Container maxW="container.lg">
+      <Container maxW="100%" padding={[0, 2]}>
         <VideoCardList allVideos={videos} />
       </Container>
     </>
