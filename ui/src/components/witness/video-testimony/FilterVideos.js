@@ -1,5 +1,12 @@
 import React from 'react';
-import { Stack, Button, Container, Checkbox } from '@chakra-ui/react';
+import {
+  Box,
+  Stack,
+  Button,
+  Container,
+  Checkbox,
+  Text,
+} from '@chakra-ui/react';
 
 const FilterVideos = ({
   allVideos,
@@ -14,7 +21,7 @@ const FilterVideos = ({
     if (tags.length > 0) {
       tags.forEach((tag) => {
         tagSet.add(tag);
-      })
+      });
     }
   });
   const tags = Array.from(tagSet);
@@ -22,6 +29,11 @@ const FilterVideos = ({
   return (
     <>
       <Container maxW="container.lg" p="0">
+        <Box marginBottom={3}>
+          <Text fontWeight="bold" color="#73539B" as="i" fontSize="1.25rem">
+            Select tags to filter:
+          </Text>
+        </Box>
         <Stack
           spacing={{ base: '6', md: 'auto' }}
           alignItems="left"
@@ -31,37 +43,45 @@ const FilterVideos = ({
             <Checkbox
               isChecked={filteredTags.includes(tag)}
               onChange={() => handleTagChange(tag)}
+              color="#73539B"
+              size="lg"
+              borderColor="#73539B"
+              outline={1}
             >
-              {tag}
+              {tag.charAt(0).toUpperCase() + tag.slice(1)}
             </Checkbox>
           ))}
         </Stack>
         <Stack
           direction="row"
-          spacing="auto"
+          // spacing="auto"
+          spacing={3}
           marginTop="75px"
           // display={{ base: 'flex', md: 'none' }}
           display="flex"
         >
           <Button
             onClick={clearFilter}
-            width="35vw"
-            background="transparent"
-            border="1px solid #000000"
+            // width="35vw"
+            width="100%"
+            background="#A6A6A6"
+            border="1px transparent #000000"
             boxSizing="border-box"
             backdropFilter="blur(6px)"
             borderRadius="10px"
+            color="white"
           >
-            Clear Filter
+            Clear
           </Button>
           <Button
             onClick={onClose}
-            width="35vw"
-            backgroundColor="#0628A3"
+            // width="35vw"
+            width="100%"
+            backgroundColor="#73539B"
             color="white"
             borderRadius="10px"
           >
-            Done
+            Filter
           </Button>
         </Stack>
       </Container>

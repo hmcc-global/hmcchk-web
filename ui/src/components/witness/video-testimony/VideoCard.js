@@ -4,71 +4,66 @@ import {
   Box,
   Image,
   Text,
-  HStack,
   VStack,
   Stack,
-  Icon,
   Tag,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { DateTime } from 'luxon';
 
-const sermonCardStyle = {
-  borderWidth: '1px',
-  borderRadius: '20px',
-  overflow: 'hidden',
-  bg: 'white',
-  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.15)',
-  align: 'stretch',
-  maxW: '100%',
-};
-
-const VideoCard = ({ videoData }) => {
-  const videoDate = DateTime.fromISO(videoData.startDate).toFormat('LLLL dd, yyyy');
+const VideoCard = ({ videoData, allVideos }) => {
+  const videoDate = DateTime.fromISO(videoData.startDate).toFormat(
+    'LLLL dd, yyyy'
+  );
 
   return (
     <Link
-      style={sermonCardStyle}
       to={{
         pathname: `/witness/testimonies/videos/${videoData.id}`,
-        state: { videoData },
+        state: { videoData, allVideos },
       }}
     >
-      <Stack direction={['row', 'column']}>
-        <AspectRatio minW={{ base: '36%', md: '18%' }} ratio={16 / 9}>
-          <Image
-            borderTopRadius={['0', '20']}
-            borderLeftRadius={['20', '0']}
-            src={videoData.imageUrl}
-            objectFit="cover"
-          />
+      <Stack direction={['row', 'column']} spacing={3}>
+        <AspectRatio minW={{ base: '40%', md: '18%' }} ratio={16 / 9}>
+          <Image borderRadius={10} src={videoData.imageUrl} objectFit="cover" />
         </AspectRatio>
-        <Box
-          overflow="hidden"
-          position="relative"
-          paddingLeft={[2, 4]}
-          paddingRight={[2, 4]}
-          paddingBottom={[2, 4]}
-          paddingTop={[1, 2]}
-        >
-          <VStack alignItems="left" spacing={2}>
+        <Box overflow="hidden">
+          <VStack alignItems="left" spacing={[1, 2]}>
             <Text
               fontSize={{ base: 'sm', md: 'lg' }}
               fontWeight={['600', '800']}
+              noOfLines={2}
+              minHeight="2rem"
             >
               {videoData.title}
             </Text>
             <Stack direction={['column', 'row']} spacing="auto">
-              <Text fontSize={{ base: 'xs', md: 'sm' }} isTruncated>
-                {videoDate}
-              </Text>
+              <Box display="flex">
+                <Text
+                  fontSize={{ base: 'xs', md: 'sm' }}
+                  isTruncated
+                  alignSelf="flex-end"
+                  justifyContent="flex-start"
+                  textAlign="left"
+                  mb={[1, 0]}
+                >
+                  {videoDate}
+                </Text>
+              </Box>
+              <Box mt={3} display="flex" overflowX="hidden" overflow="scroll">
+                {videoData.tags.map((tag) => (
+                  <Tag
+                    fontSize={['xs', 'sm']}
+                    borderRadius={20}
+                    colorScheme="blue"
+                    alignSelf="flex-end"
+                  >
+                    {tag}
+                  </Tag>
+                ))}
+              </Box>
             </Stack>
           </VStack>
-          <Box marginTop={3}>
-              {videoData.tags.map((tag) => (
-                <Tag colorScheme="teal">{tag}</Tag>
-              ))}
-            </Box>
         </Box>
       </Stack>
     </Link>

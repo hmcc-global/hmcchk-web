@@ -5,9 +5,6 @@ import {
   Heading,
   Image,
   Text,
-  UnorderedList,
-  OrderedList,
-  ListItem,
   Link,
   Button,
   Stack,
@@ -19,14 +16,15 @@ import {
   ModalBody,
   ModalCloseButton,
   ButtonGroup,
-} from "@chakra-ui/react";
-import { RiCalendarEventFill } from "react-icons/ri";
-import { BsClockFill } from "react-icons/bs";
-import { ImLocation2 } from "react-icons/im";
-import { useState } from "react";
-import { DateTime } from "luxon";
-import parse, { domToReact, attributesToProps } from "html-react-parser";
-import { generateGoogleCalendarLink, getRenderDate, EndDateElement, getStartDate } from "../helpers/eventsHelpers";
+} from '@chakra-ui/react';
+import { RiCalendarEventFill } from 'react-icons/ri';
+import { BsClockFill } from 'react-icons/bs';
+import { ImLocation2 } from 'react-icons/im';
+import { useState } from 'react';
+import { getRenderDate } from '../helpers/eventsHelpers';
+import { DateTime } from 'luxon';
+import { generateGoogleCalendarLink } from '../helpers/eventsHelpers';
+import { parseDescription } from '../helpers/parseDescription';
 
 const EventCard = (props) => {
   const { eventData } = props;
@@ -41,34 +39,6 @@ const EventCard = (props) => {
 
   const onClose = (e) => {
     setIsOpen(false);
-  };
-
-  const options = {
-    replace: (domNode) => {
-      if (domNode.name === "p") {
-        return <Text mb="2">{domToReact(domNode.children, options)}</Text>;
-      } else if (domNode.name === "ul") {
-        return (
-          <UnorderedList marginInlineStart="1.25em" mb="2">
-            {domToReact(domNode.children, options)}
-          </UnorderedList>
-        );
-      } else if (domNode.name === "ol") {
-        return (
-          <OrderedList marginInlineStart="1.25em" mb="2">
-            {domToReact(domNode.children, options)}
-          </OrderedList>
-        );
-      } else if (domNode.name === "li") {
-        return <ListItem>{domToReact(domNode.children, options)}</ListItem>;
-      } else if (domNode.name === "a") {
-        return (
-          <Link color="teal.500" {...attributesToProps(domNode.attribs)}>
-            {domToReact(domNode.children, options)}
-          </Link>
-        );
-      }
-    },
   };
 
   return (
@@ -90,17 +60,19 @@ const EventCard = (props) => {
             {eventData.title}
           </Heading>
           {eventData.startDate && eventData.endDate && eventData.recurrence && (
-            <>
-              <Text fontSize={['sm', 'lg']} fontWeight="bold">
-                <Icon mr={2} as={RiCalendarEventFill} />
-                Start Date: {getStartDate(eventData)}
-              </Text>
-              <EndDateElement
-                startDateStr={eventData.startDate}
-                endDateStr={eventData.endDate}
-                interval={eventData.recurrence}
-              />
-            </>
+            <Text fontSize={['sm', 'lg']} fontWeight="bold">
+              <Icon mr={2} as={RiCalendarEventFill} />
+              Date:{' '}
+              {eventData.renderDate
+                ? eventData.renderDate.toLocaleString(
+                    DateTime.DATE_MED_WITH_WEEKDAY
+                  )
+                : getRenderDate(
+                    eventData.startDate,
+                    eventData.endDate,
+                    eventData.recurrence
+                  ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
+            </Text>
           )}
           {eventData.time && (
             <Text fontSize={['sm', 'lg']} fontWeight="bold">
@@ -115,7 +87,7 @@ const EventCard = (props) => {
             </Text>
           )}
           <Text fontSize={['xs', 'md']} mt="5">
-            {parse(eventData.description, options)}
+            {parseDescription(eventData.description)}
           </Text>
           <Box
             position="absolute"
@@ -181,18 +153,19 @@ const EventCard = (props) => {
               {eventData.startDate &&
                 eventData.endDate &&
                 eventData.recurrence && (
-                  <>
-                    <Text fontSize={['sm', 'md']} fontWeight="bold">
-                      <Icon mr={2} as={RiCalendarEventFill} />
-                      Date: {getStartDate(eventData)}
-                    </Text>
-                    <EndDateElement
-                      startDateStr={eventData.startDate}
-                      endDateStr={eventData.endDate}
-                      interval={eventData.recurrence}
-                      isModal
-                    />
-                  </>
+                  <Text fontSize={['sm', 'md']} fontWeight="bold">
+                    <Icon mr={2} as={RiCalendarEventFill} />
+                    Date:{' '}
+                    {eventData.renderDate
+                      ? eventData.renderDate.toLocaleString(
+                          DateTime.DATE_MED_WITH_WEEKDAY
+                        )
+                      : getRenderDate(
+                          eventData.startDate,
+                          eventData.endDate,
+                          eventData.recurrence
+                        ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
+                  </Text>
                 )}
               {eventData.time && (
                 <Text fontSize={['sm', 'md']} fontWeight="bold">
@@ -208,7 +181,7 @@ const EventCard = (props) => {
               )}
             </Box>
             <Box fontSize="sm" mt="5">
-              {parse(eventData.description, options)}
+              {parseDescription(eventData.description)}
             </Box>
           </ModalBody>
           <ModalFooter ml={[0, 16]} mr={[0, 16]}>
