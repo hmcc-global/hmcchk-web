@@ -17,6 +17,7 @@ import {
 import VideoCard from './VideoCard';
 import Pagination from '../../helpers/Pagination';
 import FilterVideos from './FilterVideos';
+import { BiFilterAlt } from 'react-icons/bi';
 
 const VideoCardList = ({ allVideos }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,21 +28,17 @@ const VideoCardList = ({ allVideos }) => {
 
   //filter section
 
-  const videos = allVideos
-    .filter((video) => {
-      if (filteredTags.length === 0) {
-        return true;
-      } else {
-        let foundMatchingTag = false;
-        video.tags.forEach((tag) => {
-          console.log("Checking: ", tag);
-          if (filteredTags.includes(tag)) foundMatchingTag = true;
-        });
-        return foundMatchingTag;
-      }
-    });
-  console.log("Tags: ", filteredTags);
-  console.log("Videos: ", videos);
+  const videos = allVideos.filter((video) => {
+    if (filteredTags.length === 0) {
+      return true;
+    } else {
+      let foundMatchingTag = false;
+      video.tags.forEach((tag) => {
+        if (filteredTags.includes(tag)) foundMatchingTag = true;
+      });
+      return foundMatchingTag;
+    }
+  });
 
   const handleTagChange = (tag) => {
     const newTags = [...filteredTags];
@@ -75,40 +72,33 @@ const VideoCardList = ({ allVideos }) => {
     <>
       <Box>
         <HStack marginTop={[4, 8]} spacing="auto">
-          <Heading>Testimony Videos</Heading>
+          <Heading
+            size="md"
+            color="#73539B"
+            textStyle="dm_sans"
+            fontSize={['1.25rem', '2rem']}
+            fontWeight={500}
+          >
+            ALL VIDEO TESTIMONIES
+          </Heading>
           <Button
-            width="30vw"
+            // width="30vw"
             // display={{ base: 'flex', md: 'none' }}
+            width={['50%', '20%']}
             display="flex"
-            background="#0628A3"
+            background="#73539B"
             backdropFilter="blur(6px)"
-            borderRadius="10px"
+            borderRadius={20}
             color="white"
+            leftIcon={<BiFilterAlt />}
+            // colorScheme="witness_purple.50"
             ref={btnRef}
             onClick={onOpen}
           >
-            Filter
+            FILTER
           </Button>
         </HStack>
-        <Box display={{ base: 'none', md: 'flex' }} marginTop="10px">
-          {/* <FilterSermon
-            allSermons={allSermons}
-            filterSermon={filterSermon}
-            filterData={filterData}
-          /> */}
-        </Box>
-        <Box>
-          {/* <Button
-            variant="link"
-            alignSelf={['center', 'flex-end']}
-            onClick={clearFilter}
-            float="right"
-            display={{ base: 'none', md: 'flex' }}
-            marginTop="8px"
-          >
-            Clear Filter
-          </Button> */}
-        </Box>
+        <Box></Box>
         <Grid
           mt={['6', '12']}
           mb={['6', '12']}
@@ -121,6 +111,7 @@ const VideoCardList = ({ allVideos }) => {
               <VideoCard
                 key={video.id}
                 videoData={video}
+                allVideos={allVideos}
               />
             ))}
         </Grid>
