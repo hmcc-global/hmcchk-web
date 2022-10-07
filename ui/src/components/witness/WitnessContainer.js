@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React from 'react';
-=======
-import { useState } from 'react';
->>>>>>> e042517... GH-550: add banner and font
 import {
   Box,
   Container,
@@ -11,18 +7,11 @@ import {
   TabPanel,
   TabPanels,
   TabList,
-<<<<<<< HEAD
-} from '@chakra-ui/react';
-=======
   Image,
   Text,
 } from '@chakra-ui/react';
 import '@fontsource/dm-sans';
-<<<<<<< HEAD
->>>>>>> e042517... GH-550: add banner and font
-=======
 import witnessTheme from './witnessTheme';
->>>>>>> 57fa2bc... GH-550: add tabs panel
 import VideoTestimonyContainer from './video-testimony/VideoTestimonyContainer';
 
 const WitnessContainer = (props) => {
@@ -51,7 +40,7 @@ const WitnessContainer = (props) => {
               witness of Jesus here and witness God’s work in our church!
             </Text>
           </Box>
-        </Box>          
+        </Box>
         <Tabs
           size="lg"
           justifyContent="center"
