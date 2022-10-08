@@ -23,10 +23,9 @@ import {
 import { RiCalendarEventFill } from 'react-icons/ri';
 import { BsClockFill } from 'react-icons/bs';
 import { ImLocation2 } from 'react-icons/im';
-import { getRenderDate } from '../helpers/eventsHelpers';
 import { DateTime } from 'luxon';
 import parse, { domToReact, attributesToProps } from 'html-react-parser';
-import { generateGoogleCalendarLink } from '../helpers/eventsHelpers';
+import { generateGoogleCalendarLink, getRenderDate, EndDateElement } from '../helpers/eventsHelpers';
 import { useState } from 'react';
 
 const EventsSectionCard = (props) => {
@@ -70,6 +69,24 @@ const EventsSectionCard = (props) => {
       }
     },
   };
+
+  const getStartEndDateStr = (eventData) => {
+    if (!eventData || !eventData.startDate || !eventData.endDate)
+      return '';
+
+    const renderDate = getRenderDate(eventData.startDate, eventData.endDate, eventData.recurrence);
+    const endDate = DateTime.fromISO(eventData.endDate);
+
+    if (!renderDate.isValid || !endDate.isValid)
+      return '';
+
+    const dateFormat = 'dd MMM yyyy';
+    if (renderDate.equals(endDate))
+      return renderDate.toFormat(dateFormat);
+
+    return `${renderDate.toFormat(dateFormat)} - ${endDate.toFormat(dateFormat)}`;
+  }
+
   return (
     <>
       <Box borderRadius={10} w={width} h={height} mx={4}>
@@ -98,10 +115,7 @@ const EventsSectionCard = (props) => {
             </Heading>
               <Text color="white" fontSize={{base:"xs", md:"md"}}> {event.location} </Text>
               <Text color="white" marginTop="0px !important" fontSize={{base:"xs", md:"md"}}>
-                {event.startDate &&
-                  DateTime.fromISO(event.startDate).toFormat(
-                    'EEEE, d LLLL yyyy'
-                  )}
+                {getStartEndDateStr(event)}
               </Text>
           </VStack>
         </VStack>
@@ -131,19 +145,27 @@ const EventsSectionCard = (props) => {
           <ModalBody ml={[0, 16]} mr={[0, 16]}>
             <Box>
               {event.startDate && event.endDate && event.recurrence && (
-                <Text fontSize={['sm', 'md']} fontWeight="bold">
-                  <Icon mr={2} as={RiCalendarEventFill} />
-                  Date:{' '}
-                  {event.renderDate
-                    ? event.renderDate.toLocaleString(
-                        DateTime.DATE_MED_WITH_WEEKDAY
-                      )
-                    : getRenderDate(
-                        event.startDate,
-                        event.endDate,
-                        event.recurrence
-                      ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
-                </Text>
+                <>
+                  <Text fontSize={['sm', 'md']} fontWeight="bold">
+                    <Icon mr={2} as={RiCalendarEventFill} />
+                    Start Date:{' '}
+                    {event.renderDate
+                      ? event.renderDate.toLocaleString(
+                          DateTime.DATE_MED_WITH_WEEKDAY
+                        )
+                      : getRenderDate(
+                          event.startDate,
+                          event.endDate,
+                          event.recurrence
+                        ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
+                  </Text>
+                  <EndDateElement
+                    startDateStr={event.startDate}
+                    endDateStr={event.endDate}
+                    interval={event.recurrence}
+                    isModal
+                  />
+                </>
               )}
               {event.time && (
                 <Text fontSize={['sm', 'md']} fontWeight="bold">
