@@ -313,12 +313,19 @@ const CompleteUserProfileContainer = (props) => {
                   </Stack>
                   <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl>
-                      <FormLabel color={formLabelColor}>Birthday</FormLabel>
+                      <FormLabel color={formLabelColor}>
+                        Birthday
+                        <Text as="span" color="red">
+                          *
+                        </Text>
+                      </FormLabel>
                       <Input
                         type="date"
                         size="sm"
                         borderRadius="5"
-                        {...registerA('birthday')}
+                        {...registerA('birthday', formValidation)}
+                        isInvalid={errorsA['birthday']}
+                        placeholder="Please fill in this field"
                       />
                     </FormControl>
                     <FormControl>
