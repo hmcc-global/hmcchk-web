@@ -35,8 +35,7 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
       lifestage,
       email,
     };
-    const res = await axios.post('/api/testimony/create', payload);
-    console.log(res);
+    await axios.post('/api/testimony/create', payload);
   };
 
   return (
