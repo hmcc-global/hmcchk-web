@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Box,
   Container,
@@ -10,14 +9,16 @@ import {
   Image,
   Text,
   Stack,
-  Button,
+  useDisclosure,
 } from '@chakra-ui/react';
-import { EditIcon } from '@chakra-ui/icons';
 import '@fontsource/dm-sans';
 import witnessTheme from './witnessTheme';
 import VideoTestimonyContainer from './video-testimony/VideoTestimonyContainer';
+import ShareTestimonyButton from './text-testimony/ShareTestimonyButton';
 
 const WitnessContainer = (props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
       <Container maxW="100%" m={0} p={0} theme={witnessTheme}>
@@ -64,18 +65,12 @@ const WitnessContainer = (props) => {
               >
                 HOW ARE YOU WITNESSING GOD?
               </Text>
+              <ShareTestimonyButton
+                onOpen={onOpen}
+                isOpen={isOpen}
+                onClose={onClose}
+              />
               {/* TODO: Testimony Form Modal for this Button*/}
-              <Button
-                my={3}
-                size="lg"
-                w="100%"
-                leftIcon={<EditIcon />}
-                bg="#8D2C72"
-                color="white"
-                _hover={{ bg: 'white', color: '#8D2C72' }}
-              >
-                SHARE YOUR TESTIMONY
-              </Button>
             </Box>
           </Stack>
         </Box>
