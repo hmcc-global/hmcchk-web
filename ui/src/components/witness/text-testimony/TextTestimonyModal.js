@@ -16,8 +16,27 @@ import {
   Textarea,
   Button,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 
 const TextTestimonyModal = ({ isOpen, onClose }) => {
+  const [theme, setTheme] = useState('');
+  const [testimony, setTestimony] = useState('');
+  const [name, setName] = useState('');
+  const [lifestage, setLifestage] = useState('');
+  const [email, setEmail] = useState('');
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const payload = {
+      theme,
+      testimony,
+      name,
+      lifestage,
+      email,
+    };
+    await axios.post('/api/testimony/create', payload);
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay>
@@ -33,7 +52,7 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
                 How are you witnessing God? Share your testimony with us!
               </Text>
             </VStack>
-            <form>
+            <form onSubmit={onSubmit}>
               <VStack spacing={3}>
                 <FormControl id="theme" isRequired>
                   <FormLabel color="#6A5289">
@@ -49,7 +68,8 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
                     _placeholder={{ color: '#6A5289' }}
                     type="text"
                     placeholder="Describe your testimony in one sentence..."
-                  ></Textarea>
+                    onChange={(e) => setTheme(e.target.value)}
+                  />
                 </FormControl>
                 <FormControl id="testimony" isRequired>
                   <FormLabel color="#6A5289">
@@ -62,7 +82,8 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
                     _placeholder={{ color: '#6A5289' }}
                     type="text"
                     placeholder="Write your testimony here..."
-                  ></Textarea>
+                    onChange={(e) => setTestimony(e.target.value)}
+                  />
                 </FormControl>
 
                 <FormControl id="fullName">
@@ -79,7 +100,8 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
                     _placeholder={{ color: '#6A5289' }}
                     type="text"
                     placeholder="Name (optional)"
-                  ></Input>
+                    onChange={(e) => setName(e.target.value)}
+                  />
                 </FormControl>
                 <FormControl id="lifestage">
                   <Input
@@ -87,7 +109,8 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
                     _placeholder={{ color: '#6A5289' }}
                     type="text"
                     placeholder="Campus/Lifestage (optional)"
-                  ></Input>
+                    onChange={(e) => setLifestage(e.target.value)}
+                  />
                 </FormControl>
 
                 <FormControl id="email">
@@ -104,7 +127,8 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
                     _placeholder={{ color: '#6A5289' }}
                     type="email"
                     placeholder="Email (optional)"
-                  ></Input>
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
                 </FormControl>
 
                 <Button w="30%" bg="#73539B" color="white" type="submit">
