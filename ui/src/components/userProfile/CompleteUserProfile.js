@@ -283,6 +283,9 @@ const CompleteUserProfileContainer = (props) => {
                     <FormControl>
                       <FormLabel color={formLabelColor}>
                         First Name (and Middle Name)
+                        <Text as="span" color="red">
+                          *
+                        </Text>
                       </FormLabel>
                       <Input
                         size="sm"
@@ -293,7 +296,12 @@ const CompleteUserProfileContainer = (props) => {
                       />
                     </FormControl>
                     <FormControl>
-                      <FormLabel color={formLabelColor}>Last Name</FormLabel>
+                      <FormLabel color={formLabelColor}>
+                        Last Name
+                        <Text as="span" color="red">
+                          *
+                        </Text>
+                      </FormLabel>
                       <Input
                         size="sm"
                         borderRadius="5"
@@ -310,14 +318,15 @@ const CompleteUserProfileContainer = (props) => {
                         type="date"
                         size="sm"
                         borderRadius="5"
-                        {...registerA('birthday', formValidation)}
-                        isInvalid={errorsA['birthday']}
-                        placeholder="Please fill in this field"
+                        {...registerA('birthday')}
                       />
                     </FormControl>
                     <FormControl>
                       <FormLabel color={formLabelColor}>
                         Country of Origin
+                        <Text as="span" color="red">
+                          *
+                        </Text>
                       </FormLabel>
                       <Select
                         size="sm"
@@ -334,7 +343,12 @@ const CompleteUserProfileContainer = (props) => {
                   </Stack>
                   <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl>
-                      <FormLabel color={formLabelColor}>Lifestage</FormLabel>
+                      <FormLabel color={formLabelColor}>
+                        Lifestage
+                        <Text as="span" color="red">
+                          *
+                        </Text>
+                      </FormLabel>
                       <Select
                         size="sm"
                         borderRadius="5"
@@ -348,7 +362,12 @@ const CompleteUserProfileContainer = (props) => {
                       </Select>
                     </FormControl>
                     <FormControl>
-                      <FormLabel color={formLabelColor}>Campus</FormLabel>
+                      <FormLabel color={formLabelColor}>
+                        Campus
+                        <Text as="span" color="red">
+                          *
+                        </Text>
+                      </FormLabel>
                       <Select
                         size="sm"
                         borderRadius="5"
@@ -368,9 +387,7 @@ const CompleteUserProfileContainer = (props) => {
                       <Input
                         size="sm"
                         borderRadius="5"
-                        {...registerA('phoneNumber', formValidation)}
-                        isInvalid={errorsA['phoneNumber']}
-                        placeholder="Please fill in this field"
+                        {...registerA('phoneNumber')}
                       />
                     </FormControl>
                     <Box flex={[0, 1]}></Box>
@@ -383,9 +400,8 @@ const CompleteUserProfileContainer = (props) => {
                       <Input
                         size="sm"
                         borderRadius="5"
-                        {...registerA('addressFloor', formValidation)}
-                        isInvalid={errorsA['addressFloor']}
-                        placeholder="Please fill in this field"
+                        {...registerA('addressFloor')}
+                        placeholder="This field is optional"
                       />
                     </FormControl>
                     <FormControl>
@@ -395,9 +411,8 @@ const CompleteUserProfileContainer = (props) => {
                       <Input
                         size="sm"
                         borderRadius="5"
-                        {...registerA('addressFlat', formValidation)}
-                        isInvalid={errorsA['addressFlat']}
-                        placeholder="Please fill in this field"
+                        {...registerA('addressFlat')}
+                        placeholder="This field is optional"
                       />
                     </FormControl>
                   </Stack>
@@ -409,9 +424,8 @@ const CompleteUserProfileContainer = (props) => {
                       <Input
                         size="sm"
                         borderRadius="5"
-                        {...registerA('addressStreet', formValidation)}
-                        isInvalid={errorsA['addressStreet']}
-                        placeholder="Please fill in this field"
+                        {...registerA('addressStreet')}
+                        placeholder="This field is optional"
                       />
                     </FormControl>
                     <FormControl>
@@ -421,9 +435,8 @@ const CompleteUserProfileContainer = (props) => {
                       <Select
                         size="sm"
                         borderRadius="5"
-                        {...registerA('addressDistrict', formValidation)}
-                        isInvalid={errorsA['addressDistrict']}
-                        placeholder="Please fill in this field"
+                        {...registerA('addressDistrict')}
+                        placeholder="This field is optional"
                       >
                         {districtList.map((item) => {
                           return <option key={'di' + item}>{item}</option>;
@@ -437,9 +450,8 @@ const CompleteUserProfileContainer = (props) => {
                       <Select
                         size="sm"
                         borderRadius="5"
-                        {...registerA('addressRegion', formValidation)}
-                        isInvalid={errorsA['addressRegion']}
-                        placeholder="Please fill in this field"
+                        {...registerA('addressRegion')}
+                        placeholder="This field is optional"
                       >
                         {regionList.map((item) => {
                           return <option key={'re' + item}>{item}</option>;
@@ -470,7 +482,12 @@ const CompleteUserProfileContainer = (props) => {
                 <Stack spacing={['4%', '2%']}>
                   <Stack direction={['column', 'row']} spacing="4%">
                     <FormControl flex={2}>
-                      <FormLabel color={formLabelColor}>LIFE Group</FormLabel>
+                      <FormLabel color={formLabelColor}>
+                        LIFE Group
+                        <Text as="span" color="red">
+                          *
+                        </Text>
+                      </FormLabel>
                       <Select
                         size="sm"
                         borderRadius="5"
@@ -489,6 +506,9 @@ const CompleteUserProfileContainer = (props) => {
                     <FormControl flex={2}>
                       <FormLabel color={formLabelColor}>
                         Ministry Team
+                        <Text as="span" color="red">
+                          *
+                        </Text>
                       </FormLabel>
                       <Select
                         size="sm"
@@ -514,6 +534,9 @@ const CompleteUserProfileContainer = (props) => {
                           color="#2C5282"
                         >
                           HMCC Covenant Signing Member
+                          <Text as="span" color="red">
+                            *
+                          </Text>
                         </Text>
                         <Box flex={[2, 1]}>
                           <Controller
@@ -536,7 +559,7 @@ const CompleteUserProfileContainer = (props) => {
                       <FormHelperText>
                         An HMCC Covenant Signing Member is someone who has
                         attended HMCC’s Experiencing Membership Class and has
-                        decided to sign (in-person) the Membership Declaration{' '}
+                        decided to sign (in-person) the Membership Declaration.
                       </FormHelperText>
                     </FormControl>
                     <Box flex={[0, 1]}></Box>
@@ -560,12 +583,8 @@ const CompleteUserProfileContainer = (props) => {
                             size="sm"
                             type="date"
                             borderRadius="5"
-                            {...registerB(
-                              'membershipRecognitionDate',
-                              formValidation
-                            )}
-                            isInvalid={errorsB['membershipRecognitionDate']}
-                            placeholder="Please fill in this field"
+                            {...registerB('membershipRecognitionDate')}
+                            placeholder="This field is optional"
                           />
                         </FormControl>
                         <FormControl>
@@ -576,11 +595,7 @@ const CompleteUserProfileContainer = (props) => {
                             size="sm"
                             type="date"
                             borderRadius="5"
-                            {...registerB(
-                              'membershipRecommitmentDate',
-                              formValidation
-                            )}
-                            isInvalid={errorsB['membershipRecommitmentDate']}
+                            {...registerB('membershipRecommitmentDate')}
                             placeholder="Please fill in this field"
                           />
                         </FormControl>
@@ -598,6 +613,9 @@ const CompleteUserProfileContainer = (props) => {
                           color="#2C5282"
                         >
                           Baptised
+                          <Text as="span" color="red">
+                            *
+                          </Text>
                         </Text>
                         <Box flex={[2, 1]}>
                           <Controller
@@ -636,9 +654,8 @@ const CompleteUserProfileContainer = (props) => {
                           <Input
                             size="sm"
                             borderRadius="5"
-                            {...registerB('baptismPlace', formValidation)}
-                            isInvalid={errorsB['baptismPlace']}
-                            placeholder="Please fill in this field"
+                            {...registerB('baptismPlace')}
+                            placeholder="Optional but please fill in if you can!"
                           />
                           <FormHelperText>
                             ‘HMCC Hong Kong’ if you are baptised with us,
@@ -652,9 +669,7 @@ const CompleteUserProfileContainer = (props) => {
                             size="sm"
                             type="date"
                             borderRadius="5"
-                            {...registerB('baptismDate', formValidation)}
-                            isInvalid={errorsB['baptismDate']}
-                            placeholder="Please fill in this field"
+                            {...registerB('baptismDate')}
                           />
                           <FormHelperText>
                             To the best of your memory :)
