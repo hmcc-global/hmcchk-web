@@ -50,6 +50,10 @@ module.exports.policies = {
   // Last Updated
   'lastUpdated/get-last-updated': ['isLoggedIn', 'aboveAdmin'],
 
+  // Live Sermon
+  'liveSermon/*': true,
+  // CRU
+
   // Media
   'media/*': true,
 
