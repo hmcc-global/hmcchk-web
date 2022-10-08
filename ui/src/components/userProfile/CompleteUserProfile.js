@@ -323,9 +323,7 @@ const CompleteUserProfileContainer = (props) => {
                         type="date"
                         size="sm"
                         borderRadius="5"
-                        {...registerA('birthday', formValidation)}
-                        isInvalid={errorsA['birthday']}
-                        placeholder="Please fill in this field"
+                        {...registerA('birthday')}
                       />
                     </FormControl>
                     <FormControl>
