@@ -1,4 +1,6 @@
 import { DateTime } from "luxon";
+import { Text, Icon } from '@chakra-ui/react';
+import { RiCalendarEventFill } from 'react-icons/ri';
 
 const getRenderDate = (startDate, endDate, interval) => {
   let start = DateTime.fromISO(startDate);
@@ -56,8 +58,33 @@ const generateGoogleCalendarLink = (eventData) => {
   return linkComponents.join("");
 };
 
+const EndDateElement = ({startDateStr, endDateStr, interval, isModal = false}) => {
+  if (
+    !startDateStr ||
+    startDateStr === '' ||
+    !endDateStr ||
+    endDateStr === ''
+  ) {
+    return;
+  }
+
+  const renderDate = getRenderDate(startDateStr, endDateStr, interval);
+  const endDate = DateTime.fromISO(endDateStr);
+
+  if (!renderDate.isValid || !endDate.isValid || renderDate.equals(endDate))
+    return;
+
+  return (
+    <Text fontSize={["sm", isModal ? "md" : "lg"]} fontWeight="bold">
+      <Icon mr={2} as={RiCalendarEventFill} />
+      End Date: {endDate.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
+    </Text>
+  );
+}
+
 export {
   getRenderDate,
   filterISOStringForGoogleCalendar,
   generateGoogleCalendarLink,
+  EndDateElement
 };
