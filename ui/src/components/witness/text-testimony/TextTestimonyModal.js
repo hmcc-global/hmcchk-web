@@ -16,6 +16,7 @@ import {
   Textarea,
   Button,
 } from '@chakra-ui/react';
+import axios from 'axios';
 import { useState } from 'react';
 
 const TextTestimonyModal = ({ isOpen, onClose }) => {
@@ -34,7 +35,8 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
       lifestage,
       email,
     };
-    await axios.post('/api/testimony/create', payload);
+    const res = await axios.post('/api/testimony/create', payload);
+    console.log(res);
   };
 
   return (
