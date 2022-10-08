@@ -161,17 +161,45 @@ const HarvestGames = (props) => {
                           </Tr>
                         </Thead>
                         <Tbody bgColor="#CEF6FF">
-                          <Tr border="1px" borderColor={'#BFBFBF'}>
-                            <Td textAlign={'center'} fontSize={'15'}>
+                          <Tr
+                            borderLeft="1px solid #BFBFBF"
+                            borderRight="1px solid #BFBFBF"
+                          >
+                            <Td textAlign={'center'} fontSize={'15'}></Td>
+                            <Td isNumeric textAlign={'center'} fontSize={'15'}>
+                              Fuego
+                            </Td>
+                          </Tr>
+                          <Tr
+                            borderLeft="1px solid #BFBFBF"
+                            borderRight="1px solid #BFBFBF"
+                          >
+                            <Td
+                              textAlign={'center'}
+                              fontSize={'15'}
+                              fontWeight="700"
+                            >
                               1
                             </Td>
-
                             <Td isNumeric textAlign={'center'} fontSize={'15'}>
-                              TBA
+                              CHRISTiFY
+                            </Td>
+                          </Tr>
+                          <Tr
+                            borderLeft="1px solid #BFBFBF"
+                            borderRight="1px solid #BFBFBF"
+                          >
+                            <Td textAlign={'center'} fontSize={'15'}></Td>
+                            <Td isNumeric textAlign={'center'} fontSize={'15'}>
+                              crocs
                             </Td>
                           </Tr>
                           <Tr border="1px" borderColor={'#BFBFBF'}>
-                            <Td textAlign={'center'} fontSize={'15'}>
+                            <Td
+                              textAlign={'center'}
+                              fontSize={'15'}
+                              fontWeight="700"
+                            >
                               2
                             </Td>
                             <Td isNumeric textAlign={'center'} fontSize={'15'}>
@@ -187,7 +215,7 @@ const HarvestGames = (props) => {
                 <TabPanel minHeight="60vh">
                   <Center>
                     <Image
-                      src={`${process.env.PUBLIC_URL}/images/harvest-games/week1-pc.png`}
+                      src={`${process.env.PUBLIC_URL}/images/harvest-games/week2-pc.png`}
                     />
                   </Center>
 
@@ -196,11 +224,11 @@ const HarvestGames = (props) => {
                     textAlign="center"
                     paddingTop="0.75em"
                   >
-                    Access Week 1 Instructions <br />
+                    Access Week 2 Instructions <br />
                     PDF by clicking{' '}
                     <Link
                       color="teal.500"
-                      href="https://hongkong.sub.hmcc.net/wp-content/uploads/Week-1.pdf"
+                      href="https://hongkong.sub.hmcc.net/wp-content/uploads/Week-2.pdf"
                       isExternal
                     >
                       here
@@ -268,17 +296,45 @@ const HarvestGames = (props) => {
                           </Tr>
                         </Thead>
                         <Tbody bgColor="#CEF6FF">
-                          <Tr border="1px" borderColor={'#BFBFBF'}>
-                            <Td textAlign={'center'} fontSize={'15'}>
+                          <Tr
+                            borderLeft="1px solid #BFBFBF"
+                            borderRight="1px solid #BFBFBF"
+                          >
+                            <Td textAlign={'center'} fontSize={'15'}></Td>
+                            <Td isNumeric textAlign={'center'} fontSize={'15'}>
+                              Fuego
+                            </Td>
+                          </Tr>
+                          <Tr
+                            borderLeft="1px solid #BFBFBF"
+                            borderRight="1px solid #BFBFBF"
+                          >
+                            <Td
+                              textAlign={'center'}
+                              fontSize={'15'}
+                              fontWeight="700"
+                            >
                               1
                             </Td>
-
                             <Td isNumeric textAlign={'center'} fontSize={'15'}>
-                              TBA
+                              CHRISTiFY
+                            </Td>
+                          </Tr>
+                          <Tr
+                            borderLeft="1px solid #BFBFBF"
+                            borderRight="1px solid #BFBFBF"
+                          >
+                            <Td textAlign={'center'} fontSize={'15'}></Td>
+                            <Td isNumeric textAlign={'center'} fontSize={'15'}>
+                              crocs
                             </Td>
                           </Tr>
                           <Tr border="1px" borderColor={'#BFBFBF'}>
-                            <Td textAlign={'center'} fontSize={'15'}>
+                            <Td
+                              textAlign={'center'}
+                              fontSize={'15'}
+                              fontWeight="700"
+                            >
                               2
                             </Td>
                             <Td isNumeric textAlign={'center'} fontSize={'15'}>
@@ -295,7 +351,7 @@ const HarvestGames = (props) => {
                   <Center>
                     <Image
                       w="100%"
-                      src={`${process.env.PUBLIC_URL}/images/harvest-games/week1-mobile.png`}
+                      src={`${process.env.PUBLIC_URL}/images/harvest-games/week2-mobile.png`}
                     />
                   </Center>
                   <Text
@@ -305,11 +361,11 @@ const HarvestGames = (props) => {
                     }}
                     textAlign="center"
                   >
-                    Access Week 1 Instructions <br />
+                    Access Week 2 Instructions <br />
                     PDF by clicking{' '}
                     <Link
                       color="teal.500"
-                      href="https://hongkong.sub.hmcc.net/wp-content/uploads/Week-1.pdf"
+                      href="https://hongkong.sub.hmcc.net/wp-content/uploads/Week-2.pdf"
                       isExternal
                     >
                       here
