@@ -69,6 +69,11 @@ module.exports.policies = {
   // Sermons
   'sermons/*': true,
 
+  // Testimonies
+  'testimonies/get-testimonies': ['isLoggedIn', 'aboveTech'],
+  'testimonies/get-published-testimonies': true,
+  'testimonies/create-testimonies': true,
+
   // Users
   'users/reset': ['isLoggedIn', 'aboveAdmin'],
 };
