@@ -7,7 +7,7 @@ module.exports = {
     sermonNotes: {
       type: 'string',
     },
-    sermonLink: {
+    streamLink: {
       type: 'string',
       required: true,
     },

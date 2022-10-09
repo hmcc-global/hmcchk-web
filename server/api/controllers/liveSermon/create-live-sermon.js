@@ -11,7 +11,7 @@ module.exports = {
     sermonNotes: {
       type: 'string',
     },
-    sermonLink: {
+    streamLink: {
       type: 'string',
       required: true,
     },
@@ -38,9 +38,6 @@ module.exports = {
     lastUpdatedBy: {
       type: 'string',
     },
-    isDeleted: {
-      type: 'boolean',
-    },
   },
 
   exits: {
@@ -53,7 +50,7 @@ module.exports = {
     {
       title,
       sermonNotes,
-      sermonLink,
+      streamLink,
       speaker,
       sermonSeries,
       sermonDate,
@@ -61,7 +58,6 @@ module.exports = {
       sermonDescription,
       isPublished,
       lastUpdatedBy,
-      isDeleted,
     },
     exits
   ) {
@@ -77,10 +73,14 @@ module.exports = {
         });
       }
 
+      if(!lastUpdatedBy) {
+        lastUpdatedBy = "user"
+      }
+
       res = await LiveSermon.create({
         title,
         sermonNotes,
-        sermonLink,
+        streamLink,
         speaker,
         sermonSeries,
         sermonDate,
@@ -88,7 +88,6 @@ module.exports = {
         sermonDescription,
         isPublished,
         lastUpdatedBy,
-        isDeleted,
       }).fetch();
 
       if (!res) {
