@@ -15,7 +15,7 @@ module.exports = {
     sermonNotes: {
       type: 'string',
     },
-    sermonLink: {
+    streamLink: {
       type: 'string',
       required: true,
     },
@@ -62,7 +62,7 @@ module.exports = {
       id,
       title,
       sermonNotes,
-      sermonLink,
+      streamLink,
       speaker,
       sermonSeries,
       sermonDate,
@@ -89,10 +89,14 @@ module.exports = {
         });
       }
 
+      if(!lastUpdatedBy) {
+        lastUpdatedBy = "test"
+      }
+
       const existing = await LiveSermon.updateOne({ id }).set({
         title,
         sermonNotes,
-        sermonLink,
+        streamLink,
         speaker,
         sermonSeries,
         sermonDate,
