@@ -50,7 +50,7 @@ const VideoCard = ({ videoData, allVideos }) => {
                   {videoDate}
                 </Text>
               </Box>
-              <Box mt={3} display="flex" overflowX="hidden" overflow="scroll">
+              <Box mt={3} display="flex" overflowX="hidden">
                 {videoData.tags.map((tag) => (
                   <Tag
                     fontSize={['xs', 'sm']}
