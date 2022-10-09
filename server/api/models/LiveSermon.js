@@ -9,16 +9,11 @@ module.exports = {
     },
     sermonLink: {
       type: 'string',
+      required: true,
     },
     speaker: {
       type: 'string',
-      isIn:[
-        'Pastor Bo Zhu',
-        'Pastor Seth S. Kim',
-      ],
-    },
-    guestSpeaker: {
-      type: 'string',
+      required: true,
     },
     sermonSeries: {
       type: 'string',
@@ -26,11 +21,18 @@ module.exports = {
     sermonDate: {
       type: 'ref',
       columnType: 'datetime',
+      required: true,
     },
     sermonPassage: {
       type: 'string',
     },
     sermonDescription: {
+      type: 'string',
+    },
+    isPublished: {
+      type: 'boolean',
+    },
+    lastUpdatedBy: {
       type: 'string',
     },
   },
