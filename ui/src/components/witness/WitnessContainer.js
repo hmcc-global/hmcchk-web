@@ -11,13 +11,21 @@ import {
   Stack,
   useDisclosure,
 } from '@chakra-ui/react';
-import '@fontsource/dm-sans';
 import witnessTheme from './witnessTheme';
 import VideoTestimonyContainer from './video-testimony/VideoTestimonyContainer';
 import ShareTestimonyButton from './text-testimony/ShareTestimonyButton';
 
 const WitnessContainer = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const getOpenTab = () => {
+    const resource = props.match.params.resource;
+    if (resource === "videos") {
+      return 0;
+    } else {
+      return 1;
+    }
+  }
 
   return (
     <>
@@ -81,6 +89,7 @@ const WitnessContainer = (props) => {
           borderColor={'#BB8CA3'}
           mx={12}
           isFitted
+          defaultIndex={getOpenTab()}
         >
           <TabList justifyContent="center">
             <Tab _selected={{ color: '#84005F', borderColor: '#84005F' }}>

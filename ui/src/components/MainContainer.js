@@ -238,6 +238,12 @@ const MainContainer = () => {
           permissions={['public']}
           component={WitnessHomeContainer}
         />
+        <PrivateRoute
+          exact
+          path="/witness/testimonies/:resource?"
+          permissions={['public']}
+          component={WitnessContainer}
+        />
 
         {/* Admin items */}
         <PrivateRoute
