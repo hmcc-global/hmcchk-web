@@ -1,5 +1,4 @@
 module.exports = {
-
   friendlyName: 'Update Live sermon',
 
   description: 'Update Live sermon',
@@ -7,52 +6,105 @@ module.exports = {
   inputs: {
     id: {
       required: true,
-      type: 'string'
+      type: 'string',
     },
     title: {
       required: false,
-      type: 'string'
-    }
+      type: 'string',
+    },
+    sermonNotes: {
+      type: 'string',
+    },
+    sermonLink: {
+      type: 'string',
+      required: true,
+    },
+    speaker: {
+      type: 'string',
+      required: true,
+    },
+    sermonSeries: {
+      type: 'string',
+    },
+    sermonDate: {
+      type: 'string',
+      required: true,
+    },
+    sermonPassage: {
+      type: 'string',
+    },
+    sermonDescription: {
+      type: 'string',
+    },
+    isPublished: {
+      type: 'boolean',
+    },
+    lastUpdatedBy: {
+      type: 'string',
+    },
+    isDeleted: {
+      type: 'boolean',
+    },
   },
 
   exits: {
     nonSuccess: {
-      description: 'Error'
+      description: 'Error',
     },
     duplicateError: {
       description: 'Duplicate data found',
       statusCode: 409,
-    }
+    },
   },
 
-  fn: async function({id, title}, exits) {
+  fn: async function (
+    {
+      id,
+      title,
+      sermonNotes,
+      sermonLink,
+      speaker,
+      sermonSeries,
+      sermonDate,
+      sermonPassage,
+      sermonDescription,
+      isPublished,
+      lastUpdatedBy,
+      isDeleted,
+    },
+    exits
+  ) {
     // const user = this.req.user.fullName;
     // sails.log.info(`${user}: Updating popUp: ${name}`);
     // sails.log.info(`Title: ${title}, ImageLink: ${imageLink}, Desc: ${description}, ButtonTexts: ${buttonTexts}, ButtonLinks: ${buttonLinks}`);
 
     try {
+      if (isDeleted && isPublished) {
+        isPublished = false;
+      }
 
-      // if (isDeleted && isPublished) {
-      //   isPublished = false;
-      // }
+      if (isPublished) {
+        res = await LiveSermon.update({ isPublished: true }).set({
+          isPublished: false,
+        });
+      }
 
-      // if (buttonLinks.length > buttonTexts.length) {
-      //   throw('Number of button links cannot exceed number of button texts');
-      // }
-
-      // if (isPublished) {
-      //   res = await PopUp.update({ isPublished: true })
-      //   .set({
-      //     isPublished: false
-      //   });
-      // }
-
-      const existing = await LiveSermon.updateOne({id}).set({
-        title
+      const existing = await LiveSermon.updateOne({ id }).set({
+        title,
+        sermonNotes,
+        sermonLink,
+        speaker,
+        sermonSeries,
+        sermonDate,
+        sermonPassage,
+        sermonDescription,
+        isPublished,
+        lastUpdatedBy,
+        isDeleted,
       });
 
       if (!existing) {
-        // throw(`Name: ${name}, PopUp doesn't exist yet`);
+        throw `Name: ${title}, live sermon doesn't exist`;
       }
 
       return exits.success(existing);
@@ -63,7 +115,5 @@ module.exports = {
       }
       return exits.nonSuccess(err);
     }
-  }
+  },
 };
-
-
