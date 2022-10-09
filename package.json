@@ -5,6 +5,7 @@
     "prettier": "2.3.2"
   },
   "dependencies": {
+    "@fontsource/dm-sans": "^4.5.9",
     "react-google-recaptcha": "^2.1.0",
     "react-slick": "^0.28.1"
   }
