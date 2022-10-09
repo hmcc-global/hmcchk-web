@@ -32,6 +32,7 @@ import FormManager from './forms/FormManager';
 import AdminPopUpContainer from './admin/popup/AdminPopUpContainer';
 import WitnessContainer from './witness/WitnessContainer';
 import VideoDetails from './witness/video-testimony/VideoDetails';
+import WitnessHomeContainer from './witness/WitnessHomeContainer';
 
 const MainContainer = () => {
   return (
@@ -258,6 +259,12 @@ const MainContainer = () => {
           path="/witness/testimonies"
           permissions={['public']}
           component={WitnessContainer}
+        />
+         <PrivateRoute
+          exact
+          path="/witness/home"
+          permissions={['public']}
+          component={WitnessHomeContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
