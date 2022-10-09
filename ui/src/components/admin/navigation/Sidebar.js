@@ -17,7 +17,8 @@ import {
   FiUsers,
   FiFileText,
   FiMenu,
-  FiBell
+  FiBell,
+  FiFeather,
 } from 'react-icons/fi';
 
 const LinkItems = [
@@ -29,6 +30,7 @@ const LinkItems = [
     path: '/admin/users',
   },
   { name: 'Pop Up', icon: FiBell, path: '/admin/popup' },
+  { name: 'Testimony', icon: FiFeather, path: '/admin/testimony' },
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {
