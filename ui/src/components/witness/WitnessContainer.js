@@ -36,7 +36,7 @@ const WitnessContainer = (props) => {
             <Box w={['85%', '45%']}>
               <Image
                 src={process.env.PUBLIC_URL + '/images/witness/title.png'}
-              />
+              margin/>
               <Box pt={'5'}>
                 <Text
                   textStyle={'dm_sans'}
