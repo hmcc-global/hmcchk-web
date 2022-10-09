@@ -256,7 +256,7 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/witness/testimonies"
+          path="/witness/testimonies/:resource?"
           permissions={['public']}
           component={WitnessContainer}
         />
