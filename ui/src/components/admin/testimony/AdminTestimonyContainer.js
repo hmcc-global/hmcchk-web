@@ -12,9 +12,9 @@ import {
   HStack,
   Checkbox,
   Button,
-  FormErrorMessage,
   useToast,
 } from '@chakra-ui/react';
+import TestimonyGrid from './TestimonyGrid';
 
 export default function AdminTestimonyContainer(props) {
   const toast = useToast();
@@ -65,13 +65,48 @@ export default function AdminTestimonyContainer(props) {
     if (deleted) setPublished(false);
   }, [deleted]);
 
-  const updateHandler = async () => {};
+  const updateHandler = async () => {
+    try {
+      const res = await axios.put('/api/testimony/update', {
+        id,
+        theme: theme,
+        testimony: testimony,
+        name: name,
+        lifestage: lifestage,
+        email: email,
+        isPublished: published,
+        isDeleted: deleted,
+      });
+
+      if (res.status === 200) return true;
+    } catch (e) {
+      console.log(e.response);
+      toast({
+        description: e.response.data,
+        status: 'error',
+        duration: 5000,
+      });
+      return false;
+    }
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     setIsLoading(true);
+    let success = false;
+    if (id && id.length > 0) {
+      success = await updateHandler();
+    }
 
+    if (success) {
+      toast({
+        description: 'Saved',
+        status: 'success',
+        duration: 5000,
+      });
+      await getData();
+    }
     setIsLoading(false);
   };
 
@@ -94,7 +129,7 @@ export default function AdminTestimonyContainer(props) {
       </Heading>
       <Stack direction={['column', 'row']} w="100%">
         <Box w={['100%', '50%']}>
-          <form>
+          <form onSubmit={onSubmit}>
             <FormControl isRequired>
               <FormLabel>Theme</FormLabel>
               <Textarea
@@ -162,6 +197,9 @@ export default function AdminTestimonyContainer(props) {
               RESET
             </Button>
           </form>
+        </Box>
+        <Box w={['100%', '50%']}>
+          <TestimonyGrid testimonies={testimonies} setSelected={setSelected} />
         </Box>
       </Stack>
     </Container>
