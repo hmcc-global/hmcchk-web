@@ -101,6 +101,7 @@ module.exports.routes = {
   'get /api/testimony/get': 'testimonies/get-testimonies',
   'get /api/testimony/get-published': 'testimonies/get-published-testimonies',
   'post /api/testimony/create': 'testimonies/create-testimonies',
+  'put /api/testimony/update': 'testimonies/update-testimonies',
 
   // UI
   'get /*': {

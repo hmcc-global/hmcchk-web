@@ -77,6 +77,7 @@ module.exports.policies = {
 
   // Testimonies
   'testimonies/get-testimonies': ['isLoggedIn', 'aboveTech'],
+  'testimonies/update-testimonies': ['isLoggedIn', 'aboveTech'],
   'testimonies/get-published-testimonies': true,
   'testimonies/create-testimonies': true,
 
