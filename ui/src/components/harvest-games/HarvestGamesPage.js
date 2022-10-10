@@ -18,6 +18,8 @@ import {
   Center,
 } from '@chakra-ui/react';
 
+import HarvestGamesLeaderboard from './HarvestGamesLeaderboard';
+
 const HarvestGames = (props) => {
   return (
     <Box
@@ -132,6 +134,18 @@ const HarvestGames = (props) => {
                 >
                   Pre-Games
                 </Tab>
+
+                <Tab
+                  marginTop="1em"
+                  borderBottom="5px solid #E2E8F0"
+                  _selected={{
+                    borderColor: '#0628A3',
+                    textColor: '#3A6693',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  Live Leaderboard
+                </Tab>
               </TabList>
 
               <TabPanels
@@ -236,6 +250,10 @@ const HarvestGames = (props) => {
                     .
                   </Text>
                 </TabPanel>
+
+                <TabPanel>
+                  <HarvestGamesLeaderboard />
+                </TabPanel>
               </TabPanels>
             </Tabs>
             {/* MOBILE */}
@@ -267,6 +285,16 @@ const HarvestGames = (props) => {
                   }}
                 >
                   Pre-Games
+                </Tab>
+                <Tab
+                  borderBottom="5px solid #E2E8F0"
+                  _selected={{
+                    borderBottom: '5px solid #0628A3',
+                    textColor: '#3A6693',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  Live Leaderboard
                 </Tab>
               </TabList>
 
@@ -372,6 +400,9 @@ const HarvestGames = (props) => {
                     </Link>
                     .
                   </Text>
+                </TabPanel>
+                <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
+                  <HarvestGamesLeaderboard />
                 </TabPanel>
               </TabPanels>
             </Tabs>

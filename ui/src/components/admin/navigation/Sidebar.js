@@ -20,6 +20,7 @@ import {
   FiBell,
   FiFeather,
 } from 'react-icons/fi';
+import { CgGames } from 'react-icons/cg';
 
 const LinkItems = [
   { name: 'Home', icon: FiHome, path: '/admin/home' },
@@ -31,6 +32,11 @@ const LinkItems = [
   },
   { name: 'Pop Up', icon: FiBell, path: '/admin/popup' },
   { name: 'Testimony', icon: FiFeather, path: '/admin/testimony' },
+  {
+    name: 'Harvest Games',
+    icon: CgGames,
+    path: '/admin/harvest-games',
+  },
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {

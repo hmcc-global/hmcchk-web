@@ -52,6 +52,10 @@ module.exports.policies = {
   // Last Updated
   'lastUpdated/get-last-updated': ['isLoggedIn', 'aboveAdmin'],
 
+  // Harvest Games
+  'harvestGames/update-hg-rankings': ['isLoggedIn', 'aboveTech'],
+  'harvestGames/get-hg-rankings': ['isLoggedIn', 'aboveTech'],
+
   // Media
   'media/*': true,
 
