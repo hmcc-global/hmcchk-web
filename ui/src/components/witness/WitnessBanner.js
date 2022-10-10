@@ -1,4 +1,12 @@
-import { Flex, Center, Button, Link, Box, HStack, Text } from '@chakra-ui/react';
+import {
+  Flex,
+  Center,
+  Button,
+  Link,
+  Box,
+  HStack,
+  Text,
+} from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 import { DateTime } from 'luxon';
 
@@ -21,7 +29,7 @@ const WitnessBanner = () => {
               <Box>
                 <Text
                   position="relative"
-                  fontSize={["xs", "xl"]}
+                  fontSize={['xs', 'xl']}
                   as="i"
                   background="linear-gradient(90deg, #FF8933, #AF4F83)"
                   textFillColor="transparent"
@@ -30,7 +38,11 @@ const WitnessBanner = () => {
                 >
                   CLICK HERE TO WITNESS GOD'S WORK IN OUR CHURCH!
                 </Text>
-                <Box w="100%" h={["1px", "2px"]} bgGradient="linear-gradient(90deg, #FF8933, #AF4F83)" />
+                <Box
+                  w="100%"
+                  h={['1px', '2px']}
+                  bgGradient="linear-gradient(90deg, #FF8933, #AF4F83)"
+                />
               </Box>
               {/* <Button
                 size={['xx-small', 'xs']}
