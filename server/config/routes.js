@@ -85,6 +85,10 @@ module.exports.routes = {
   // Last Updated APIs
   'get /api/last-updated': 'lastUpdated/get-last-updated',
 
+  // Harvest Games APIs
+  'get /api/hgRankings/get': 'harvestGames/get-hg-rankings',
+  'put /api/hgRankings/update': 'harvestGames/update-hg-rankings',
+
   // PopUp APIs
   'get /api/popup/get': 'popup/get-popup',
   'get /api/popup/get-published': 'popup/get-published-popup',
