@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { Box, Grid, Heading, HStack, Button, Link } from '@chakra-ui/react';
 import { BsDot } from 'react-icons/bs';
-import VideoCard from "../video-testimony/VideoCard";
+import VideoCard from '../video-testimony/VideoCard';
 import { customAxios as axios } from '../../helpers/customAxios';
 
 const WitnessHomeVideoSection = () => {
@@ -32,12 +32,13 @@ const WitnessHomeVideoSection = () => {
 
   return (
     <Box>
-      <HStack 
-        mt={4} 
-        mb={6}
-        spacing="auto"
-      >
-        <Box w={['100%', 'auto']} textAlign="center" display="flex" justifyContent="center">
+      <HStack mt={4} mb={6} spacing="auto">
+        <Box
+          w={['100%', 'auto']}
+          textAlign="center"
+          display="flex"
+          justifyContent="center"
+        >
           <Heading
             size="md"
             color="#7C26DB"
@@ -47,19 +48,20 @@ const WitnessHomeVideoSection = () => {
             pl={[0, 4]}
             display="flex"
           >
-            HIGHLIGHT <BsDot />WATCH TESTIMONIES
+            HIGHLIGHT <BsDot />
+            WATCH TESTIMONIES
           </Heading>
         </Box>
         <Button
           as={Link}
           href="/witness/testimonies/videos"
-          border="2px" 
-          borderColor="#7C26DB" 
+          border="2px"
+          borderColor="#7C26DB"
           borderRadius={20}
-          color="#7C26DB" 
-          fontSize={20}  
+          color="#7C26DB"
+          fontSize={20}
           mr={4}
-          size='lg'
+          size="lg"
           variant="outline"
           display={{ base: 'none', md: 'flex' }}
         >
@@ -75,9 +77,9 @@ const WitnessHomeVideoSection = () => {
         gap={[3, 6]}
       >
         {videos.length > 0 &&
-          videos.slice(0, 3).map((video) => (
-            <VideoCard key={video.id} videoData={video} />
-          ))}
+          videos
+            .slice(0, 3)
+            .map((video) => <VideoCard key={video.id} videoData={video} />)}
       </Grid>
       <Box display="flex" justifyContent="center">
         <Button
@@ -89,8 +91,8 @@ const WitnessHomeVideoSection = () => {
           color="#7C26DB"
           fontSize={15}
           mr={4}
-          size='md'
-          variant="outline" 
+          size="md"
+          variant="outline"
           display={{ base: 'flex', md: 'none' }}
         >
           WATCH ALL VIDEO TESTIMONIES

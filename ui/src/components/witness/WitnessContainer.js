@@ -20,12 +20,12 @@ const WitnessContainer = (props) => {
 
   const getOpenTab = () => {
     const resource = props.match.params.resource;
-    if (resource === "videos") {
+    if (resource === 'videos') {
       return 0;
     } else {
       return 1;
     }
-  }
+  };
 
   return (
     <>
@@ -44,7 +44,8 @@ const WitnessContainer = (props) => {
             <Box w={['85%', '45%']}>
               <Image
                 src={process.env.PUBLIC_URL + '/images/witness/title.png'}
-              margin/>
+                margin
+              />
               <Box pt={'5'}>
                 <Text
                   textStyle={'dm_sans'}

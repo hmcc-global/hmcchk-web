@@ -30,9 +30,11 @@ import { signout } from '../../reducers/userSlice';
 import { customAxios as axios } from '../helpers/customAxios';
 import MainMenu from './MainMenu';
 import { useHistory } from 'react-router-dom';
+import WitnessBanner from '../witness/WitnessBanner';
 
 const NavBar = (props) => {
   const isOnlineSermon = useHistory().location.pathname.includes('online');
+  const isHomePage = useHistory().location.pathname === "/";
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const user = useSelector((state) => state.user);
@@ -344,7 +346,7 @@ const NavBar = (props) => {
           </Container>
         </Flex>
       </Flex>
-
+      {isHomePage && <WitnessBanner />}
       {/* {currDate === 'Wed' && !isOnlineSermon ? (
         <Flex
           w="100vw"
