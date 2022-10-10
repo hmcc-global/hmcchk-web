@@ -4,10 +4,11 @@ module.exports = {
   description: 'Get all testimonies',
 
   inputs: {
-    tags: {
-      description: 'testimonies with the tags to be returned',
-      type: 'json',
-      required: false,
+    testimony: {
+      type: 'string',
+    },
+    isDeleted: {
+      type: 'boolean',
     },
   },
 
@@ -20,17 +21,25 @@ module.exports = {
     },
   },
 
-  fn: async function ({ tags }, exits) {
-    try {
-      let data = await Testimonies.find({ isDeleted: false });
+  fn: async function ({ name, isDeleted }, exits) {
+    const user = this.req.user.fullName;
 
-      sails.log.info(`Getting testimony with tags: ${tags}`);
-      if (data === null) return exits.error('no data retrieved');
-      if (tags) {
-        data = data.filter((d) => d.tags === tags);
+    try {
+      let res;
+
+      if (name) {
+        sails.log.info(`${user}: Getting testimony: ${testimony}`);
+        res = await Testimonies.findOne({ testimony });
+      } else {
+        sails.log.info(`${user}: Getting all testimonies`);
+        res = await Testimonies.find({ isDeleted }).populateAll();
       }
 
-      return exits.success(data);
+      if (!res) {
+        return exits.nonSuccess(err);
+      }
+
+      return exits.success(res);
     } catch (err) {
       sails.log(err);
       return exits.error(err);
