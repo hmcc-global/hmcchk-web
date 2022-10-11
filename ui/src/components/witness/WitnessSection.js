@@ -1,14 +1,16 @@
 import React from 'react';
 import {
   Box,
+  Button,
   Container,
+  Link,
   Image,
   Stack,
   Text,
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
-import ShareTestimonyButton from './text-testimony/ShareTestimonyButton';
+import '@fontsource/dm-sans';
 
 const WitnessSection = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -73,11 +75,18 @@ const WitnessSection = () => {
             >
               HOW ARE YOU WITNESSING GOD?
             </Text>
-            <ShareTestimonyButton
-              onOpen={onOpen}
-              isOpen={isOpen}
-              onClose={onClose}
-            />
+            <Button
+              py={[5, 7]}
+              fontSize={[17, 24]}
+              w="100%"
+              bg="#8D2C72"
+              color="white"
+              _hover={{ bg: 'white', color: '#8D2C72' }}
+              as={Link}
+              href="/witness/home"
+            >
+              CHECK OUT OUR TESTIMONIES HERE
+            </Button>
           </VStack>
         </Stack>
       </Box>
