@@ -15,7 +15,7 @@ const SignupContainer = (props) => {
         tokenId: tokenId,
       });
       history.push({
-        pathname: '/signup',
+        pathname: '/signup/form',
         state: data,
       });
     } catch (err) {
