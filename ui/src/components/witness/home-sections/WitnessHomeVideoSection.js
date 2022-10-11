@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Grid, Heading, HStack, Button, Link } from '@chakra-ui/react';
+import { Box, Grid, Text, HStack, Button, Link } from '@chakra-ui/react';
 import { BsDot } from 'react-icons/bs';
 import VideoCard from '../video-testimony/VideoCard';
 import { customAxios as axios } from '../../helpers/customAxios';
@@ -39,10 +39,10 @@ const WitnessHomeVideoSection = () => {
           display="flex"
           justifyContent="center"
         >
-          <Heading
+          <Text
+            textStyle="dm_sans"
             size="md"
             color="#7C26DB"
-            textStyle="dm_sans"
             fontWeight={600}
             fontSize={['1rem', '1.5rem']}
             pl={[0, 4]}
@@ -50,9 +50,10 @@ const WitnessHomeVideoSection = () => {
           >
             HIGHLIGHT <BsDot />
             WATCH TESTIMONIES
-          </Heading>
+          </Text>
         </Box>
         <Button
+          textStyle="dm_sans"
           as={Link}
           href="/witness/testimonies/videos"
           border="2px"
@@ -83,6 +84,7 @@ const WitnessHomeVideoSection = () => {
       </Grid>
       <Box display="flex" justifyContent="center">
         <Button
+          textStyle="dm_sans"
           as={Link}
           href="/witness/testimonies/videos"
           border="2px"

@@ -13,11 +13,12 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
+  Text,
 } from '@chakra-ui/react';
+import { BiFilterAlt } from 'react-icons/bi';
+import FilterVideos from './FilterVideos';
 import VideoCard from './VideoCard';
 import Pagination from '../../helpers/Pagination';
-import FilterVideos from './FilterVideos';
-import { BiFilterAlt } from 'react-icons/bi';
 
 const VideoCardList = ({ allVideos }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,7 +27,7 @@ const VideoCardList = ({ allVideos }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
-  //filter section
+  // Filter section
 
   const videos = allVideos.filter((video) => {
     if (filteredTags.length === 0) {
@@ -62,7 +63,7 @@ const VideoCardList = ({ allVideos }) => {
     onClose();
   };
 
-  //pagination section
+  // Pagination section
   const indexOfLastVideo = currentPage * videosPerPage;
   const indexOfFirstVideo = indexOfLastVideo - videosPerPage;
   const currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
@@ -72,18 +73,16 @@ const VideoCardList = ({ allVideos }) => {
     <>
       <Box>
         <HStack marginTop={[4, 8]} spacing="auto">
-          <Heading
+          <Text
+            textStyle="dm_sans"
             size="md"
             color="#73539B"
-            textStyle="dm_sans"
             fontSize={['1.25rem', '2rem']}
             fontWeight={500}
           >
             ALL VIDEO TESTIMONIES
-          </Heading>
+          </Text>
           <Button
-            // width="30vw"
-            // display={{ base: 'flex', md: 'none' }}
             width={['50%', '20%']}
             display="flex"
             background="#73539B"
@@ -91,7 +90,6 @@ const VideoCardList = ({ allVideos }) => {
             borderRadius={20}
             color="white"
             leftIcon={<BiFilterAlt />}
-            // colorScheme="witness_purple.50"
             ref={btnRef}
             onClick={onOpen}
           >
@@ -104,7 +102,6 @@ const VideoCardList = ({ allVideos }) => {
           mb={['6', '12']}
           templateColumns={['repeat(1, 1fr)', 'repeat(3, 1fr)']}
           gap={[3, 6]}
-          // display={{ base: 'none', md: 'grid' }}
         >
           {currentVideos.length > 0 &&
             currentVideos.map((video, i) => (

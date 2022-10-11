@@ -1,18 +1,17 @@
 import React from 'react';
 import {
   Box,
+  Button,
   Container,
+  Link,
   Image,
   Stack,
   Text,
-  useDisclosure,
   VStack,
 } from '@chakra-ui/react';
-import ShareTestimonyButton from './text-testimony/ShareTestimonyButton';
+import '@fontsource/dm-sans';
 
 const WitnessSection = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <Container maxW="100vw" justifyContent="center" display="flex" p={0}>
       <Box
@@ -37,12 +36,13 @@ const WitnessSection = () => {
               w="80%"
             />
             <Text
-              textStyle={'dm_sans'}
+              textStyle="dm_sans_bold"
               textColor="white"
               fontWeight={500}
               fontSize="24px"
               pb={4}
               pt={4}
+              // fontFamily="DM Sans"
             >
               HMCC 2022 - 2023
             </Text>
@@ -73,11 +73,18 @@ const WitnessSection = () => {
             >
               HOW ARE YOU WITNESSING GOD?
             </Text>
-            <ShareTestimonyButton
-              onOpen={onOpen}
-              isOpen={isOpen}
-              onClose={onClose}
-            />
+            <Button
+              py={[5, 7]}
+              fontSize={[17, 24]}
+              w="100%"
+              bg="#8D2C72"
+              color="white"
+              _hover={{ bg: 'white', color: '#8D2C72' }}
+              as={Link}
+              href="/witness/home"
+            >
+              CHECK OUT OUR TESTIMONIES HERE
+            </Button>
           </VStack>
         </Stack>
       </Box>
