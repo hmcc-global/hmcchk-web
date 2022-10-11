@@ -1,4 +1,5 @@
 import { extendTheme } from '@chakra-ui/react';
+import '@fontsource/dm-sans';
 
 const witnessTheme = extendTheme({
   textStyles: {
