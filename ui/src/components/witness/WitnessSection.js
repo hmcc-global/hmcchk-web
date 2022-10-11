@@ -7,14 +7,11 @@ import {
   Image,
   Stack,
   Text,
-  useDisclosure,
   VStack,
 } from '@chakra-ui/react';
 import '@fontsource/dm-sans';
 
 const WitnessSection = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <Container maxW="100vw" justifyContent="center" display="flex" p={0}>
       <Box
@@ -39,12 +36,13 @@ const WitnessSection = () => {
               w="80%"
             />
             <Text
-              textStyle={'dm_sans'}
+              textStyle="dm_sans_bold"
               textColor="white"
               fontWeight={500}
               fontSize="24px"
               pb={4}
               pt={4}
+              // fontFamily="DM Sans"
             >
               HMCC 2022 - 2023
             </Text>
