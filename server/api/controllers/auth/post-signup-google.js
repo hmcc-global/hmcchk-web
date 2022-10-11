@@ -1,4 +1,4 @@
-const { OAuth2Client } = require("google-auth-library");
+const { OAuth2Client } = require('google-auth-library');
 
 const verify = async (client, token) => {
   const ticket = await client.verifyIdToken({
@@ -10,9 +10,9 @@ const verify = async (client, token) => {
 };
 
 module.exports = {
-  friendlyName: "Signup Google",
+  friendlyName: 'Signup Google',
 
-  description: "Sign up for a new user account using Google OAuth.",
+  description: 'Sign up for a new user account using Google OAuth.',
 
   extendedDescription: `This creates a new user record in the database, signs in the requesting user agent
 by modifying its [session](https://sailsjs.com/documentation/concepts/sessions), and
@@ -24,27 +24,27 @@ the account verification message.)`,
   inputs: {
     tokenId: {
       required: true,
-      type: "string",
-      description: "token ID of Google user",
+      type: 'string',
+      description: 'token ID of Google user',
     },
   },
 
   exits: {
     success: {
-      description: "New user account was created successfully.",
+      description: 'New user account was created successfully.',
     },
   },
 
   fn: async function ({ tokenId }, exits) {
     if (tokenId == null) {
-      throw "missing Token ID";
+      throw 'missing Token ID';
     }
 
     const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
     try {
       const data = await verify(client, tokenId);
-      if (!data) throw "Error verifying";
+      if (!data) throw 'Error verifying';
 
       const { email: emailAddress, name: fullName } = data;
 
@@ -55,7 +55,7 @@ the account verification message.)`,
       });
 
       if (userRecord) {
-        throw "Unable to sign up, email already exists!";
+        throw 'Unable to sign up, email already exists!';
       }
 
       const payload = {
