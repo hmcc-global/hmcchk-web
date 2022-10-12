@@ -251,7 +251,7 @@ const HarvestGames = (props) => {
                   </Text>
                 </TabPanel>
 
-                <TabPanel>
+                <TabPanel height="100vh">
                   <HarvestGamesLeaderboard />
                 </TabPanel>
               </TabPanels>
@@ -373,6 +373,7 @@ const HarvestGames = (props) => {
                       </Table>
                     </TableContainer>
                   </Center>
+                  <HarvestGamesLeaderboard />
                 </TabPanel>
 
                 <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
@@ -401,7 +402,7 @@ const HarvestGames = (props) => {
                     .
                   </Text>
                 </TabPanel>
-                <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
+                <TabPanel height={{ base: '80vh', sm: '90vh' }}>
                   <HarvestGamesLeaderboard />
                 </TabPanel>
               </TabPanels>
