@@ -36,6 +36,7 @@ import WitnessContainer from './witness/WitnessContainer';
 import VideoDetails from './witness/video-testimony/VideoDetails';
 import WitnessHomeContainer from './witness/WitnessHomeContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
+import TextDetails from './witness/text-testimony/TextDetails';
 
 const MainContainer = () => {
   return (
@@ -223,12 +224,6 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/witness/testimonies/videos/:id"
-          permissions={['public']}
-          component={VideoDetails}
-        />
-        <PrivateRoute
-          exact
           path="/witness/testimonies"
           permissions={['public']}
           component={WitnessContainer}
@@ -250,6 +245,11 @@ const MainContainer = () => {
           path="/witness/testimonies/videos/:id"
           permissions={['public']}
           component={VideoDetails}
+        />
+        <PrivateRoute
+          path="/witness/testimonies/:id"
+          permissions={['public']}
+          component={TextDetails}
         />
 
         {/* Admin items */}

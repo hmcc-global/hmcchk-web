@@ -6,6 +6,7 @@ const ShareTestimonyButton = ({ onOpen, isOpen, onClose }) => {
   return (
     <>
       <Button
+        borderRadius={15}
         my={3}
         size="lg"
         w="100%"
