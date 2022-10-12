@@ -123,7 +123,7 @@ const VideoCardList = ({ allVideos }) => {
         size="full"
         onClose={onClose}
         finalFocusRef={btnRef}
-        placement="top"
+        placement="right"
       >
         <DrawerOverlay />
         <DrawerContent paddingTop="10">

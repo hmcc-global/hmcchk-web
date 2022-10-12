@@ -15,6 +15,8 @@ import {
 } from '@chakra-ui/react';
 import VideoTestimonyContainer from './video-testimony/VideoTestimonyContainer';
 import ShareTestimonyButton from './text-testimony/ShareTestimonyButton';
+import TextTestimonyContainer from './text-testimony/TextTestimonyContainer';
+import TextTestimonyModal from './text-testimony/TextTestimonyModal';
 
 const WitnessContainer = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -110,7 +112,9 @@ const WitnessContainer = (props) => {
             <TabPanel>
               <VideoTestimonyContainer />
             </TabPanel>
-            <TabPanel>TODO: Text Testimony Container</TabPanel>
+            <TabPanel>
+              <TextTestimonyContainer />
+            </TabPanel>
           </TabPanels>
         </Tabs>
       </Container>

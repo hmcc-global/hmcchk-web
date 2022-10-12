@@ -28,7 +28,9 @@ module.exports = {
       });
 
       sails.log.info(`Getting testimony with tags: ${tags}`);
-      if (data === null) return exits.error('no data retrieved');
+      if (data === null) {
+        return exits.error('no data retrieved');
+      }
       if (tags) {
         data = data.filter((d) => d.tags === tags);
       }
