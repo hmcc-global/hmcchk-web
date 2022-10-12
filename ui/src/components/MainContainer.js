@@ -32,8 +32,12 @@ import FormManager from './forms/FormManager';
 import AdminPopUpContainer from './admin/popup/AdminPopUpContainer';
 import WitnessContainer from './witness/WitnessContainer';
 import VideoDetails from './witness/video-testimony/VideoDetails';
+<<<<<<< Updated upstream
 import WitnessHomeContainer from './witness/WitnessHomeContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
+=======
+import TextDetails from './witness/text-testimony/TextDetails';
+>>>>>>> Stashed changes
 
 const MainContainer = () => {
   return (
@@ -272,6 +276,11 @@ const MainContainer = () => {
           path="/witness/home"
           permissions={['public']}
           component={WitnessHomeContainer}
+        />
+        <PrivateRoute
+          path="/witness/testimonies/:id"
+          permissions={['public']}
+          component={TextDetails}
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
