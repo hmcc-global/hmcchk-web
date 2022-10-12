@@ -61,8 +61,8 @@ module.exports = {
     },
     exits
   ) {
-    // const user = this.req.user.fullName;
-    // sails.log.info(`${user}: Creating live sermon: ${name}`);
+    const user = this.req.user.fullName;
+    sails.log.info(`${user}: Creating live sermon: ${title}`);
 
     try {
       let res;
@@ -74,7 +74,7 @@ module.exports = {
       }
 
       if(!lastUpdatedBy) {
-        lastUpdatedBy = "user"
+        lastUpdatedBy = user
       }
 
       res = await LiveSermon.create({

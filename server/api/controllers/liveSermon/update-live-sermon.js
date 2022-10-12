@@ -74,9 +74,9 @@ module.exports = {
     },
     exits
   ) {
-    // const user = this.req.user.fullName;
-    // sails.log.info(`${user}: Updating popUp: ${name}`);
-    // sails.log.info(`Title: ${title}, ImageLink: ${imageLink}, Desc: ${description}, ButtonTexts: ${buttonTexts}, ButtonLinks: ${buttonLinks}`);
+    const user = this.req.user.fullName;
+    sails.log.info(`${user}: Updating liveSermon: ${title}`);
+    sails.log.info(`Title: ${title},  Desc: ${sermonDescription}`);
 
     try {
       if (isDeleted && isPublished) {
@@ -90,7 +90,7 @@ module.exports = {
       }
 
       if(!lastUpdatedBy) {
-        lastUpdatedBy = "test"
+        lastUpdatedBy = user
       }
 
       const existing = await LiveSermon.updateOne({ id }).set({
