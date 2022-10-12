@@ -247,7 +247,7 @@ const MainContainer = () => {
           component={VideoDetails}
         />
         <PrivateRoute
-          path="/witness/testimonies/:id"
+          path="/witness/testimonies/text/:id"
           permissions={['public']}
           component={TextDetails}
         />

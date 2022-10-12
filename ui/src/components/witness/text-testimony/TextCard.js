@@ -14,6 +14,8 @@ import { DateTime } from 'luxon';
 
 // tag masih ga berfungsi
 // filter masih ga berfungsi
+// mobile view
+// image
 const Background = {
   0: '#EDE2EF',
   1: '#FFD8D8',
@@ -33,7 +35,7 @@ const TextCard = ({ textData, allText }) => {
   return (
     <Link
       to={{
-        pathname: `/witness/testimonies/${textData.id}`,
+        pathname: `/witness/testimonies/text/${textData.id}`,
         state: { textData, allText },
       }}
     >

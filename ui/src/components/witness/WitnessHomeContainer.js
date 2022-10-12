@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 import WitnessHomeVideoSection from './home-sections/WitnessHomeVideoSection';
+import WitnessHomeTextSection from './home-sections/WitnessHomeTextSection';
 import ShareTestimonyButton from './text-testimony/ShareTestimonyButton';
 
 const WitnessHomeContainer = (props) => {
@@ -95,6 +96,24 @@ const WitnessHomeContainer = (props) => {
       </Container>
       <Container maxW="100%" p={[0, 10]} centerContent>
         <WitnessHomeVideoSection />
+        <WitnessHomeTextSection />
+      </Container>
+      <Container maxW="container.sm" mb={10} centerContent alignItems="center">
+        <Text
+          textStyle={'dm_sans'}
+          textColor="#8D2C72"
+          fontWeight="bold"
+          fontSize="24px"
+        >
+          HOW ARE YOU WITNESSING GOD?
+        </Text>
+        <Flex justifyContent="center">
+          <ShareTestimonyButton
+            onOpen={onOpen}
+            isOpen={isOpen}
+            onClose={onClose}
+          />
+        </Flex>
       </Container>
     </>
   );
