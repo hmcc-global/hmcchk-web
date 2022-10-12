@@ -275,7 +275,7 @@ const MainContainer = () => {
           component={WitnessHomeContainer}
         />
         <PrivateRoute
-          path="/witness/testimonies/:id"
+          path="/witness/testimonies/text/:id"
           permissions={['public']}
           component={TextDetails}
         />
