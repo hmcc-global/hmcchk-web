@@ -38,7 +38,7 @@ export default function HarvestGamesLeaderboard(props) {
     }
   };
 
-  // TODO-YY (optional): Update every 10 seconds for a "live" scoreboard feel 
+  // TODO-YY (optional): Update every 10 seconds for a "live" scoreboard feel
   // const checkIfUpdated = useCallback(async (updateData = true) => {
   //   try {
   //     const { data } = await axios.get('/api/last-updated', {
@@ -146,7 +146,7 @@ export default function HarvestGamesLeaderboard(props) {
     {
       headerName: 'LIFE Group',
       field: 'lgName',
-      width: 135,
+      width: 130,
     },
     // Set colId of individual games to ( game number - 1 ), i.e. normalize to zero-based indexing
     // colId will be utilized in getting and setting scores
@@ -159,7 +159,7 @@ export default function HarvestGamesLeaderboard(props) {
           colId: 'overall',
           valueGetter: overallRankingGetter,
           valueFormatter: rankingFormatter,
-          width: 150,
+          width: 125,
         },
         {
           headerName: 'Game 1',
@@ -191,7 +191,10 @@ export default function HarvestGamesLeaderboard(props) {
 
   return (
     <>
-      <div className="ag-theme-material" style={{ height: 800, width: '100%' }}>
+      <div
+        className="ag-theme-material"
+        style={{ height: '100%', width: '100%' }}
+      >
         <AgGridReact
           defaultColDef={defaultColDef}
           columnDefs={columnDefs}
