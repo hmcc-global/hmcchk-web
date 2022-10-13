@@ -67,12 +67,24 @@ const TextCard = ({ textData, allText }) => {
           paddingRight={[4, 5]}
           paddingBottom={[4, 5]}
           paddingTop={4}
+          maxW="170px"
         >
           <VStack alignItems="left" spacing={2}>
-            {Tags.forEach((tag) => {
-              <Text color="black">{tag}</Text>;
-              console.log('tag', tag);
-            })}
+            <HStack>
+              {Tags.map((tag) => {
+                return (
+                  <Tag
+                    size="md"
+                    borderRadius="full"
+                    colorScheme="blackAlpha"
+                    color="black"
+                    bgColor="white"
+                  >
+                    {tag}
+                  </Tag>
+                );
+              })}
+            </HStack>
             <Text
               fontSize={{ base: 'sm', md: 'lg' }}
               fontWeight={['600', '800']}
