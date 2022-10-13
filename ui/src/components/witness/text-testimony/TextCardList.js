@@ -93,7 +93,11 @@ const TextCardList = ({ allText }) => {
         </Button>
       </HStack>
       {/* box filter */}
-      <Grid marginTop={[4, 8]} templateColumns="repeat(3, 1fr)" gap={6}>
+      <Grid
+        marginTop={[4, 8]}
+        templateColumns={['repeat(2, 1fr)', 'repeat(3, 1fr)']}
+        gap={[3, 6]}
+      >
         {currentTexts.length > 0 &&
           currentTexts.map((text, i) => (
             <TextCard key={text.id} allText={allText} textData={text} />

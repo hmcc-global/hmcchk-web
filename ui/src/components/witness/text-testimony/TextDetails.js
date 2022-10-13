@@ -24,7 +24,6 @@ const TextDetails = (props) => {
   const history = useHistory();
 
   const getData = useCallback(async () => {
-    console.log('currId', currId);
     try {
       const { data, status } = await axios.get('/api/testimony/get-published');
       if (status === 200) {
@@ -69,10 +68,10 @@ const TextDetails = (props) => {
                 <HStack>
                   {text.tags.map((tag) => (
                     <Tag
-                      fontSize={['md', 'lg']}
-                      borderRadius={20}
+                      fontSize={'md'}
+                      borderRadius="full"
                       p={3}
-                      colorScheme="blue"
+                      colorScheme="gray"
                     >
                       {tag}
                     </Tag>
