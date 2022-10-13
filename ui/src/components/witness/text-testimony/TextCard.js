@@ -13,9 +13,7 @@ import { Link } from 'react-router-dom';
 import { DateTime } from 'luxon';
 
 // tag masih ga berfungsi
-// filter masih ga berfungsi
 // mobile view
-// image
 const Background = {
   0: '#EDE2EF',
   1: '#FFD8D8',
@@ -31,6 +29,18 @@ const TextCard = ({ textData, allText }) => {
     let num = Math.floor(Math.random() * 10) % 3;
     return Background[num];
   };
+
+  const tagSet = new Set();
+  Object.values(textData).forEach((tags) => {
+    if (typeof textData.tags === 'string') {
+      tagSet.add(textData.tags);
+    } else {
+      textData.tags.forEach((tag) => {
+        tagSet.add(tag);
+      });
+    }
+  });
+  const Tags = Array.from(tagSet);
 
   return (
     <Link
@@ -56,24 +66,28 @@ const TextCard = ({ textData, allText }) => {
           paddingLeft={[4, 5]}
           paddingRight={[4, 5]}
           paddingBottom={[4, 5]}
-          paddingTop={[1, 2]}
+          paddingTop={4}
         >
-          <HStack marginTop={textData.image ? -6 : 0} marginBottom={3}>
-            {/* {textData.tags
-              ? textData.tags.map((tag) => <Tag size={'sm'}>{tag}</Tag>)
-              : null} */}
-          </HStack>
           <VStack alignItems="left" spacing={2}>
+            {Tags.forEach((tag) => {
+              <Text color="black">{tag}</Text>;
+              console.log('tag', tag);
+            })}
             <Text
               fontSize={{ base: 'sm', md: 'lg' }}
               fontWeight={['600', '800']}
+              color="black"
             >
               {textData.theme}
             </Text>
-            <Text fontSize={{ base: 'xs', md: 'sm' }} isTruncated>
+            <Text fontSize={{ base: 'xs', md: 'sm' }} isTruncated color="black">
               {textData.testimony}
             </Text>
-            <Text fontSize={{ base: 'xs', md: 'sm' }} alignSelf="flex-end">
+            <Text
+              fontSize={{ base: 'xs', md: 'sm' }}
+              alignSelf="flex-end"
+              color="black"
+            >
               {textDate}
             </Text>
           </VStack>
