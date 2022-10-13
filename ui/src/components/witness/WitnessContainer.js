@@ -10,9 +10,11 @@ import {
   Text,
   Stack,
   useDisclosure,
-  VStack,
+  Button,
   Flex,
+  Link,
 } from '@chakra-ui/react';
+import { ArrowBackIcon } from '@chakra-ui/icons';
 import VideoTestimonyContainer from './video-testimony/VideoTestimonyContainer';
 import ShareTestimonyButton from './text-testimony/ShareTestimonyButton';
 import TextTestimonyContainer from './text-testimony/TextTestimonyContainer';
@@ -34,12 +36,24 @@ const WitnessContainer = (props) => {
     <>
       <Container maxW="100vw" m={0} p={0}>
         <Box
-          bgImage={`linear-gradient(0deg, rgba(256, 256, 256), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0)), 
+          bgImage={`linear-gradient(0deg, rgba(256, 256, 256), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0)), 
           url('${process.env.PUBLIC_URL}/images/witness/banner-desktop.png')`}
           bgSize="cover"
           justifyContent="center"
-          py={[20, 120]}
+          py={[7, 10]}
         >
+          <Link href="/witness/home">
+            <Button
+              variant="link"
+              fontSize={32}
+              color="#7C2D6B"
+              justifyContent="left"
+              leftIcon={<ArrowBackIcon />}
+              display="flex"
+              mb={5}
+              ml={[5, 10]}
+            />
+          </Link>
           <Stack
             direction={['column', 'row']}
             justifyContent={['center', 'space-evenly']}
