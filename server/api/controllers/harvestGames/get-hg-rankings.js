@@ -22,12 +22,12 @@ module.exports = {
   fn: async function ({ lgRankingId }, exits) {
     try {
       if (lgRankingId) {
-        let data = await HGRankings.find({ _id: lgRankingId }).populateAll();
+        let data = await HGRankings.find({ _id: lgRankingId });
         if (data.length === 0) throw 'HG ranking not found';
         return exits.success(data);
       }
 
-      let data = await HGRankings.find().populateAll();
+      let data = await HGRankings.find();
       sails.log.info('Retrieving Harvest Games rankings..');
 
       return exits.success(data);
