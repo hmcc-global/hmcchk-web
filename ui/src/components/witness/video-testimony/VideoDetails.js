@@ -1,9 +1,9 @@
 import {
   HStack,
   VStack,
+  Stack,
   Box,
   Button,
-  Stack,
   AspectRatio,
   Link,
   Text,
@@ -108,7 +108,7 @@ const VideoDetails = (props) => {
         <Container maxW="container.lg">
           <Box mb="20px" mt="20px">
             <VStack alignItems="left" alignContent="left">
-              <Link href="/witness/testimonies">
+              <Link href="/witness/testimonies/videos">
                 <Button
                   variant="link"
                   fontSize={32}

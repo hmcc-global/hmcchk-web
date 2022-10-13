@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import {
   Grid,
-  Heading,
+  Text,
   Button,
   HStack,
   Drawer,
@@ -69,15 +69,16 @@ const TextCardList = ({ allText }) => {
   return (
     <>
       <HStack marginTop={[4, 8]} spacing="auto">
-        <Heading
+        <Text
           textStyle="dm_sans"
           size="md"
           color="#73539B"
           fontSize={['1.25rem', '2rem']}
           fontWeight={500}
+          minWidth="50vw"
         >
           WRITTEN TESTIMONIES
-        </Heading>
+        </Text>
         <Button
           width={['50%', '20%']}
           display="flex"

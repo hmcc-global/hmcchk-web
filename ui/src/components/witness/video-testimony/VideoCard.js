@@ -33,7 +33,7 @@ const VideoCard = ({ videoData, allVideos }) => {
               fontSize={{ base: 'sm', md: 'lg' }}
               fontWeight={['600', '800']}
               noOfLines={2}
-              minHeight="2rem"
+              minHeight={["auto", "3.5rem"]}
             >
               {videoData.title}
             </Text>
@@ -57,6 +57,7 @@ const VideoCard = ({ videoData, allVideos }) => {
                     borderRadius={20}
                     colorScheme="blue"
                     alignSelf="flex-end"
+                    mr={1}
                   >
                     {tag}
                   </Tag>
