@@ -17,15 +17,15 @@ const FilterTexts = ({
 }) => {
   const tagSet = new Set();
   allTexts.forEach((textData) => {
-    const tags = textData.tags;
-    console.log('tags', tags);
-    if (tags.length > 0) {
-      tags.forEach((tag) => {
+    if (typeof textData.tags === 'string') {
+      tagSet.add(textData.tags);
+    } else {
+      textData.tags.forEach((tag) => {
         tagSet.add(tag);
       });
     }
   });
-  const tags = Array.from(tagSet);
+  const Tags = Array.from(tagSet);
 
   return (
     <>
@@ -38,9 +38,9 @@ const FilterTexts = ({
         <Stack
           spacing={{ base: '6', md: 'auto' }}
           alignItems="left"
-          direction={{ base: 'column', md: 'row' }}
+          direction="column"
         >
-          {tags.map((tag) => (
+          {Tags.map((tag) => (
             <Checkbox
               isChecked={filteredTags.includes(tag)}
               onChange={() => handleTagChange(tag)}
