@@ -6,7 +6,7 @@ const ShareTestimonyButton = ({ onOpen, isOpen, onClose }) => {
   return (
     <>
       <Button
-        borderRadius={15}
+        borderRadius={10}
         my={3}
         size="lg"
         w="100%"
@@ -15,6 +15,7 @@ const ShareTestimonyButton = ({ onOpen, isOpen, onClose }) => {
         color="white"
         _hover={{ bg: 'white', color: '#8D2C72' }}
         onClick={onOpen}
+        boxShadow="0px 8px 15px rgba(0, 0, 0, 0.4)"
       >
         SHARE YOUR TESTIMONY
       </Button>

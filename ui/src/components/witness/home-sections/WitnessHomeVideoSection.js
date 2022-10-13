@@ -42,11 +42,12 @@ const WitnessHomeVideoSection = () => {
           <Text
             textStyle="dm_sans"
             size="md"
-            color="#7C26DB"
+            color="#7C2D6B"
             fontWeight={600}
             fontSize={['1rem', '1.5rem']}
             pl={[0, 4]}
             display="flex"
+            alignItems="center"
           >
             HIGHLIGHT <BsDot />
             WATCH TESTIMONIES
@@ -57,9 +58,9 @@ const WitnessHomeVideoSection = () => {
           as={Link}
           href="/witness/testimonies/videos"
           border="2px"
-          borderColor="#7C26DB"
+          borderColor="#7C2D6B"
           borderRadius={20}
-          color="#7C26DB"
+          color="#7C2D6B"
           fontSize={20}
           mr={4}
           size="lg"
@@ -88,9 +89,9 @@ const WitnessHomeVideoSection = () => {
           as={Link}
           href="/witness/testimonies/videos"
           border="2px"
-          borderColor="#7C26DB"
+          borderColor="#7C2D6B"
           borderRadius={10}
-          color="#7C26DB"
+          color="#7C2D6B"
           fontSize={15}
           mr={4}
           size="md"

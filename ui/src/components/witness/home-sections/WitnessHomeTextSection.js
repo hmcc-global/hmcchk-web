@@ -45,6 +45,7 @@ const WitnessHomeTextSection = () => {
             fontSize={['1rem', '1.5rem']}
             pl={[0, 4]}
             display="flex"
+            alignItems="center"
           >
             HIGHLIGHT <BsDot />
             READ TESTIMONIES
@@ -80,6 +81,24 @@ const WitnessHomeTextSection = () => {
             .slice(0, 3)
             .map((text) => <TextCard key={text.id} textData={text} />)}
       </Grid>
+      <Box display="flex" justifyContent="center">
+        <Button
+          textStyle="dm_sans"
+          as={Link}
+          href="/witness/testimonies/texts"
+          border="2px"
+          borderColor="#D07E78"
+          borderRadius={10}
+          color="#D07E78"
+          fontSize={15}
+          mr={4}
+          size="md"
+          variant="outline"
+          display={{ base: 'flex', md: 'none' }}
+        >
+          READ ALL TESTIMONIES
+        </Button>
+      </Box>
     </Box>
   );
 };
