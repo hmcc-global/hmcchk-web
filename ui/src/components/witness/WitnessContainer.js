@@ -18,7 +18,6 @@ import { ArrowBackIcon } from '@chakra-ui/icons';
 import VideoTestimonyContainer from './video-testimony/VideoTestimonyContainer';
 import ShareTestimonyButton from './text-testimony/ShareTestimonyButton';
 import TextTestimonyContainer from './text-testimony/TextTestimonyContainer';
-import TextTestimonyModal from './text-testimony/TextTestimonyModal';
 
 const WitnessContainer = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -58,6 +57,7 @@ const WitnessContainer = (props) => {
             direction={['column', 'row']}
             justifyContent={['center', 'space-evenly']}
             spacing={7}
+            mb={[5, 20]}
           >
             <Flex w="100%" justifyContent="center">
               <Box w={['85%', '100%']} ml={[0, 20]}>
