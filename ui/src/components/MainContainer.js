@@ -30,6 +30,7 @@ import AdminHome from './admin/AdminHome';
 import AdminUser from './admin/users/AdminUser';
 import FormManager from './forms/FormManager';
 import AdminPopUpContainer from './admin/popup/AdminPopUpContainer';
+import AdminHarvestGames from './admin/harvest-games/AdminHarvestGames';
 import HarvestGames from './harvest-games/HarvestGamesPage';
 
 const MainContainer = () => {
@@ -210,6 +211,12 @@ const MainContainer = () => {
           path="/admin/popup"
           permissions={['t3ch', 'admin', 'stewardship']}
           component={AdminPopUpContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/harvest-games"
+          permissions={['t3ch', 'admin', 'stewardship']}
+          component={AdminHarvestGames}
         />
         <PrivateRoute
           exact
