@@ -30,7 +30,6 @@ const WitnessHomeContainer = (props) => {
           pt={[20, 120]}
           pb={[10, 20]}
           m={0}
-          width="100%"
         >
           <Image
             mr="auto"
