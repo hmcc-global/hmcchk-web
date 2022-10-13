@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import {
   Grid,
-  Heading,
   Button,
-  Box,
   HStack,
   Drawer,
   DrawerBody,
@@ -71,53 +69,51 @@ const VideoCardList = ({ allVideos }) => {
 
   return (
     <>
-      <Box>
-        <HStack marginTop={[4, 8]} spacing="auto">
-          <Text
-            textStyle="dm_sans"
-            size="md"
-            color="#73539B"
-            fontSize={['1.25rem', '2rem']}
-            fontWeight={500}
-          >
-            ALL VIDEO TESTIMONIES
-          </Text>
-          <Button
-            width={['50%', '20%']}
-            display="flex"
-            background="#73539B"
-            backdropFilter="blur(6px)"
-            borderRadius={20}
-            color="white"
-            leftIcon={<BiFilterAlt />}
-            ref={btnRef}
-            onClick={onOpen}
-          >
-            FILTER
-          </Button>
-        </HStack>
-        <Box></Box>
-        <Grid
-          mt={['6', '12']}
-          mb={['6', '12']}
-          templateColumns={['repeat(1, 1fr)', 'repeat(3, 1fr)']}
-          gap={[3, 6]}
+      <HStack marginTop={[4, 8]} spacing="auto">
+        <Text
+          textStyle="dm_sans"
+          size="md"
+          color="#73539B"
+          fontSize={['1.25rem', '2rem']}
+          fontWeight={500}
+          minWidth="50vw"
         >
-          {currentVideos.length > 0 &&
-            currentVideos.map((video, i) => (
-              <VideoCard
-                key={video.id}
-                videoData={video}
-                allVideos={allVideos}
-              />
-            ))}
-        </Grid>
-        <Pagination
-          itemsPerPage={videosPerPage}
-          totalItems={videos.length}
-          paginate={paginate}
-        />
-      </Box>
+          ALL VIDEO TESTIMONIES
+        </Text>
+        <Button
+          width={['50%', '20%']}
+          display="flex"
+          background="#73539B"
+          backdropFilter="blur(6px)"
+          borderRadius={20}
+          color="white"
+          leftIcon={<BiFilterAlt />}
+          ref={btnRef}
+          onClick={onOpen}
+        >
+          FILTER
+        </Button>
+      </HStack>
+      <Grid
+        mt={['6', '12']}
+        mb={['6', '12']}
+        templateColumns={['repeat(1, 1fr)', 'repeat(3, 1fr)']}
+        gap={[3, 6]}
+      >
+        {currentVideos.length > 0 &&
+          currentVideos.map((video, i) => (
+            <VideoCard
+              key={video.id}
+              videoData={video}
+              allVideos={allVideos}
+            />
+          ))}
+      </Grid>
+      <Pagination
+        itemsPerPage={videosPerPage}
+        totalItems={videos.length}
+        paginate={paginate}
+      />
       <Drawer
         isOpen={isOpen}
         size="full"
