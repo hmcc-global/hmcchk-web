@@ -261,7 +261,7 @@ const HarvestGames = (props) => {
                   </Text>
                 </TabPanel>
 
-                <TabPanel>
+                <TabPanel height="100vh">
                   <HarvestGamesLeaderboard />
                 </TabPanel>
                 <TabPanel>
