@@ -6,7 +6,6 @@ import {
   Text,
   VStack,
   Flex,
-  useDisclosure,
   Divider,
 } from '@chakra-ui/react';
 import { TriangleDownIcon } from '@chakra-ui/icons';
@@ -15,8 +14,6 @@ import WitnessHomeTextSection from './home-sections/WitnessHomeTextSection';
 import ShareTestimonyButton from './text-testimony/ShareTestimonyButton';
 
 const WitnessHomeContainer = (props) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <>
       <Container maxW="100%" m={0} p={0}>
@@ -85,11 +82,7 @@ const WitnessHomeContainer = (props) => {
             </Text>
             <Flex justifyContent="center">
               <Box w={['90%', '30%']}>
-                <ShareTestimonyButton
-                  onOpen={onOpen}
-                  isOpen={isOpen}
-                  onClose={onClose}
-                />
+                <ShareTestimonyButton />
               </Box>
             </Flex>
           </Box>
@@ -123,11 +116,7 @@ const WitnessHomeContainer = (props) => {
           HOW ARE YOU WITNESSING GOD?
         </Text>
         <Flex justifyContent="center" w={['90%', '70%']}>
-          <ShareTestimonyButton
-            onOpen={onOpen}
-            isOpen={isOpen}
-            onClose={onClose}
-          />
+          <ShareTestimonyButton />
         </Flex>
       </Container>
     </>

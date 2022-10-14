@@ -9,7 +9,6 @@ import {
   Image,
   Text,
   Stack,
-  useDisclosure,
   Button,
   Flex,
   Link,
@@ -20,8 +19,6 @@ import ShareTestimonyButton from './text-testimony/ShareTestimonyButton';
 import TextTestimonyContainer from './text-testimony/TextTestimonyContainer';
 
 const WitnessContainer = (props) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   const getOpenTab = () => {
     const resource = props.match.params.resource;
     if (resource === 'videos') {
@@ -95,12 +92,7 @@ const WitnessContainer = (props) => {
                 >
                   HOW ARE YOU WITNESSING GOD?
                 </Text>
-                <ShareTestimonyButton
-                  onOpen={onOpen}
-                  isOpen={isOpen}
-                  onClose={onClose}
-                />
-                {/* TODO: Testimony Form Modal for this Button*/}
+                <ShareTestimonyButton />
               </Box>
             </Flex>
           </Stack>
