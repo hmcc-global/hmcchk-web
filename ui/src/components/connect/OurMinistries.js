@@ -134,7 +134,7 @@ const OurMinistries = (props) => {
           p={[0, 2, 4, 8]}
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`linear-gradient(180deg, rgba(233, 223, 132, 0.7) 0%, rgba(170, 102, 0, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/kid.jpg')`}
+          bgImage={`linear-gradient(180deg, rgba(233, 223, 132, 0.7) 0%, rgba(170, 102, 0, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/kid.jpeg')`}
           bgPosition="center"
           bgSize="cover"
           shadow="lg"
