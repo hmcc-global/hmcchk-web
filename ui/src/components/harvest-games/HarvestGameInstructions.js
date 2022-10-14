@@ -22,7 +22,7 @@ export default function HarvestGameInstructions() {
       name: 'SMUGGLING THROUGH SECURITY',
       round: 3,
       player: 5,
-      materials: '-',
+      materials: [],
       imageUrl: [
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1_1.gif',
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1_2.gif',
@@ -61,7 +61,7 @@ export default function HarvestGameInstructions() {
       name: 'THE AIRPLANE RELAY RACE',
       round: 4,
       player: 5,
-      materials: '-',
+      materials: [],
       imageUrl: [
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3_1.gif',
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3_2.gif',
@@ -74,11 +74,11 @@ export default function HarvestGameInstructions() {
 
   const [selected, setSelected] = useState(0);
   const [password, setPassword] = useState('');
+  const [inputValue, setInput] = useState('');
   const [error, setError] = useState(false);
 
   const handleSubmit = () => {
-    let pwd = document.getElementById('inputted').value;
-    // console.log(gameType[selected].pwd, pwd);
+    let pwd = inputValue;
     if (pwd !== gameType[selected].pwd) {
       setError(true);
     } else {
@@ -91,7 +91,7 @@ export default function HarvestGameInstructions() {
   const handleChange = (e) => {
     setSelected(e.target.value);
     setError(false);
-    document.getElementById('inputted').value = '';
+    setInput('');
   };
 
   const handleKeyDown = (e) => {
@@ -152,8 +152,8 @@ export default function HarvestGameInstructions() {
             })}
         </Select>
       </Box>
-      {gameType[selected].pwd === localStorage.getItem(gameType[selected].id) ||
-      gameType[selected].pwd === password ? (
+      {gameType[selected].pwd ===
+      localStorage.getItem(gameType[selected].id) ? (
         <Box w="90%">
           <Heading size="xl" textColor="rgba(1, 43, 85, 1)">
             {gameType[selected].game_num}
@@ -248,8 +248,7 @@ export default function HarvestGameInstructions() {
             >
               Materials :
               <VStack justifyContent="space-evenly" alignItems="start">
-                {gameType[selected].id === 'game_2' &&
-                  gameType[selected].materials.length > 0 &&
+                {gameType[selected].materials.length > 0 &&
                   gameType[selected].materials.map((e, i) => {
                     return (
                       <Fragment key={i}>
@@ -320,15 +319,10 @@ export default function HarvestGameInstructions() {
             backgroundColor="white"
             borderWidth="1px"
             borderColor="gray/300"
+            value={inputValue}
+            onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => handleKeyDown(e)}
           />
-          <Text
-            display={error ? 'flex' : 'none'}
-            textColor="rgba(198, 66, 66, 1)"
-            textAlign={{ base: 'center', md: 'start' }}
-          >
-            Password is incorrect!
-          </Text>
           <Button
             type="submit"
             onClick={handleSubmit}
@@ -339,6 +333,14 @@ export default function HarvestGameInstructions() {
           >
             Submit
           </Button>
+
+          <Text
+            display={error ? 'flex' : 'none'}
+            textColor="rgba(198, 66, 66, 1)"
+            textAlign={{ base: 'center', md: 'start' }}
+          >
+            Password is incorrect!
+          </Text>
         </VStack>
       )}
     </VStack>
