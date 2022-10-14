@@ -17,3 +17,8 @@
   font-size: 14px !important;
   font-weight: 500;
 }
+
+select option {
+  text-align-last: start;
+  text-align: center;
+}

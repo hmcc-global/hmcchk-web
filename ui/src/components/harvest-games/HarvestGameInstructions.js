@@ -1,0 +1,320 @@
+import {
+  Box,
+  Container,
+  Select,
+  Heading,
+  Input,
+  Button,
+  VStack,
+  Image,
+  HStack,
+  Grid,
+} from '@chakra-ui/react';
+import { useState, Form, Label } from 'react';
+
+import './styles.css';
+
+export default function HarvestGameInstructions() {
+  const gameType = [
+    {
+      game_num: 'Game #1',
+      name: 'SMUGGLING THROUGH SECURITY',
+      round: 3,
+      player: 5,
+      points: 15,
+      imageUrl: [
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1_1.gif',
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1_2.gif',
+      ],
+      id: 'game_1',
+      pwd: 'Smuggling',
+    },
+
+    {
+      game_num: 'Game #2',
+      name: 'THE PACKING GAME',
+      round: 2,
+      player: '-',
+      imageUrl: [
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg2_1.gif',
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg2_2.gif',
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg2_3.gif',
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg2_4.gif',
+      ],
+      id: 'game_2',
+      pwd: 'Packing',
+    },
+
+    {
+      game_num: 'Game #3',
+      name: 'THE AIRPLANE RELAY RACE',
+      round: 4,
+      player: '-',
+      imageUrl: [
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3_1.gif',
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3_2.gif',
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3_3.gif',
+      ],
+      id: 'game_3',
+      pwd: 'Airplane',
+    },
+  ];
+
+  const [selected, setSelected] = useState(0);
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = () => {
+    let pwd = document.getElementById('inputted').value;
+    setPassword(pwd);
+    localStorage.setItem(gameType[selected].id, pwd);
+    console.log(localStorage.setItem(gameType[selected].id, pwd));
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
+  return (
+    <VStack bgColor="rgba(228, 241, 244, 1)" spacing="0">
+      <Container
+        position="start"
+        fontWeight="900"
+        bgColor="rgba(134, 185, 197, 1)"
+        fontSize={{ base: '6vw', sm: '4vw' }}
+        textColor="white"
+        marginY="0"
+        borderTopRadius={7}
+        display="flex"
+      >
+        HG-2022
+        <Image
+          marginLeft="auto"
+          w={{ base: '13vw', sm: '7.5vw' }}
+          minW={{ base: '13vw', sm: '7.5vw' }}
+          src={process.env.PUBLIC_URL + '/images/ripple.svg'}
+          alt="Logo of HMCC"
+        />
+      </Container>
+      <Container
+        bgColor="rgba(227, 224, 224, 1)"
+        textAlign="center"
+        textColor="rgba(83, 83, 83, 1)"
+        minW="100%"
+        fontWeight="500"
+        fontSize={{ base: '5vw', sm: '3vw' }}
+      >
+        Game Manual
+      </Container>
+      <Box display="flex" justifyContent="center" paddingY="2em" w="100%">
+        <Select
+          borderWidth="2px"
+          w="80%"
+          h="3em"
+          borderRadius="15"
+          borderColor="rgba(71, 108, 147, 1)"
+          textColor="rgba(71, 108, 147, 1)"
+          value={selected}
+          onChange={(e) => setSelected(e.target.value)}
+        >
+          {gameType &&
+            gameType.map((e, i) => {
+              return (
+                <option value={i} key={i}>
+                  {e.game_num}
+                </option>
+              );
+            })}
+        </Select>
+      </Box>
+      {gameType[selected].pwd === localStorage.getItem(gameType[selected].id) ||
+      gameType[selected].pwd === password ? (
+        <Box w="100%">
+          <Heading size="xl" textColor="rgba(83, 83, 83, 1)">
+            {gameType[selected].game_num}
+          </Heading>
+          <Heading size="lg" textColor="rgba(83, 83, 83, 1)">
+            {gameType[selected].name}
+          </Heading>
+          <HStack
+            justifyContent={('space-evenly', 'space-between')}
+            paddingY="5"
+            w="100%"
+            display="flex"
+          >
+            <Box
+              borderColor="rgba(8, 86, 131, 1)"
+              borderWidth="7px"
+              borderRadius="10px"
+              fontWeight={500}
+              textColor="rgba(151, 149, 149, 1)"
+              fontSize="2vw"
+              w="30%"
+              h={{ base: '17em', sm: '14em', md: '10em', lg: '7em' }}
+              marginX="0"
+              textAlign="center"
+              paddingY={{ base: '2', md: '5', lg: '4' }}
+            >
+              <Heading
+                textColor="rgba(1, 43, 85, 1)"
+                fontWeight={500}
+                fontSize={{ base: '4xl', md: '5xl' }}
+              >
+                {gameType[selected].round}
+              </Heading>
+              <Heading
+                fontSize={{ base: 'sm' }}
+                textColor="rgba(61, 61, 61, 1)"
+              >
+                Rounds
+              </Heading>
+            </Box>
+            <Box
+              borderColor="rgba(8, 86, 131, 1)"
+              borderWidth="7px"
+              borderRadius="10px"
+              fontWeight={500}
+              textColor="rgba(151, 149, 149, 1)"
+              fontSize="2vw"
+              w="30%"
+              h={{ base: '17em', sm: '14em', md: '10em', lg: '7em' }}
+              marginX="0"
+              textAlign="center"
+              paddingY={{ base: '2', md: '5', lg: '4' }}
+            >
+              <Heading
+                textColor="rgba(1, 43, 85, 1)"
+                fontWeight={500}
+                fontSize={{ base: '4xl', md: '5xl' }}
+              >
+                3
+              </Heading>
+              <Heading
+                fontSize={{ base: 'sm' }}
+                textColor="rgba(61, 61, 61, 1)"
+              >
+                Player
+              </Heading>
+              <Heading fontSize={{ base: '2vw', md: '1.5vw' }}>
+                Change players every round
+              </Heading>
+            </Box>
+            <Box
+              borderColor="rgba(8, 86, 131, 1)"
+              borderWidth="7px"
+              borderRadius="10px"
+              fontWeight={500}
+              textColor="rgba(151, 149, 149, 1)"
+              fontSize="2vw"
+              w="30%"
+              h={{ base: '17em', sm: '14em', md: '10em', lg: '7em' }}
+              marginX="0"
+              textAlign="center"
+              paddingY={{ base: '2', md: '5', lg: '4' }}
+            >
+              <Heading
+                textColor="rgba(1, 43, 85, 1)"
+                fontWeight={500}
+                fontSize={{ base: '4xl', md: '5xl' }}
+              >
+                100
+              </Heading>
+              <Heading
+                fontSize={{ base: 'sm' }}
+                textColor="rgba(61, 61, 61, 1)"
+              >
+                Points
+              </Heading>
+              <Heading fontSize={{ base: '2vw', md: '1.5vw' }}>
+                Each round
+              </Heading>
+            </Box>
+          </HStack>
+          <VStack alignItems="start" marginX="0" w="100%">
+            <Box
+              borderColor="rgba(8, 86, 131, 1)"
+              borderWidth="7px"
+              borderRadius="10px"
+              fontWeight={500}
+              fontSize="2.5vw"
+              textColor="rgba(61, 61, 61, 1)"
+              w="100%"
+              h="9em"
+              marginX="0"
+              marginY="5"
+              textAlign="start"
+              paddingY="5"
+              paddingX="9"
+            >
+              Materials:
+            </Box>
+            <Heading paddingX="2">Instructions :</Heading>
+            <Grid
+              w="100%"
+              mt="12"
+              mb="12"
+              templateColumns="repeat(1, 1fr)"
+              gap="2"
+            >
+              {gameType[selected].imageUrl.length > 0 &&
+                gameType[selected].imageUrl.map((url, i) => (
+                  <Box
+                    minH={{ base: '60vh', md: '80vh' }}
+                    w="full"
+                    fontWeight="700"
+                    fontSize={{ base: '60', md: '70' }}
+                    textColor="rgba(1, 43, 85, 1)"
+                    bgImage={url}
+                    bgSize="contain"
+                    bgRepeat="no-repeat"
+                    bgPos="center"
+                    textAlign="end"
+                    paddingBottom="8"
+                  >
+                    {i + 1}
+                  </Box>
+                ))}
+            </Grid>
+          </VStack>
+        </Box>
+      ) : (
+        <VStack
+          display="flex"
+          w="100%"
+          fontSize={{ md: '16', lg: '18' }}
+          textColor="rgba(83, 83, 83, 1)"
+          alignItems={{ base: 'center', sm: 'start' }}
+          textAlign={{ base: 'center', sm: 'start' }}
+          paddingX="5"
+          spacing="4"
+        >
+          <label>
+            Please enter the password for {gameType[selected].game_num}{' '}
+            instructions
+          </label>
+          <Input
+            id="inputted"
+            type="text"
+            placeholder="Start typing here"
+            w={{ base: '100%', sm: '50%' }}
+            backgroundColor="white"
+            borderWidth="1px"
+            borderColor="gray/300"
+            onKeyDown={(e) => handleKeyDown(e)}
+          />
+          <Button
+            type="submit"
+            onClick={handleSubmit}
+            bgColor="rgba(83, 157, 196, 1)"
+            textColor="white"
+            fontSize="smaller"
+            w={{ base: '100%', sm: 'fit-content' }}
+          >
+            Submit
+          </Button>
+        </VStack>
+      )}
+    </VStack>
+  );
+}
