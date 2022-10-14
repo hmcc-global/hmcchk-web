@@ -22,14 +22,13 @@ export default function HarvestGameInstructions() {
       name: 'SMUGGLING THROUGH SECURITY',
       round: 3,
       player: 5,
-      points: 45,
       materials: '-',
       imageUrl: [
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1_1.gif',
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1_2.gif',
       ],
       id: 'game_1',
-      pwd: 'Smugglings',
+      pwd: 'Smuggling',
     },
 
     {
@@ -37,7 +36,6 @@ export default function HarvestGameInstructions() {
       name: 'THE PACKING GAME',
       round: 2,
       player: 2,
-      points: 230,
       materials: [
         '10 Shirts',
         '6  SweatPants',
@@ -55,7 +53,7 @@ export default function HarvestGameInstructions() {
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg2_4.gif',
       ],
       id: 'game_2',
-      pwd: 'Packings',
+      pwd: 'Packing',
     },
 
     {
@@ -64,25 +62,36 @@ export default function HarvestGameInstructions() {
       round: 4,
       player: 5,
       materials: '-',
-      points: '-',
       imageUrl: [
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3_1.gif',
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3_2.gif',
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3_3.gif',
       ],
       id: 'game_3',
-      pwd: 'Airplanes',
+      pwd: 'Airplane',
     },
   ];
 
   const [selected, setSelected] = useState(0);
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
 
   const handleSubmit = () => {
     let pwd = document.getElementById('inputted').value;
-    setPassword(pwd);
-    localStorage.setItem(gameType[selected].id, pwd);
-    console.log(localStorage.setItem(gameType[selected].id, pwd));
+    // console.log(gameType[selected].pwd, pwd);
+    if (pwd !== gameType[selected].pwd) {
+      setError(true);
+    } else {
+      setError(false);
+      setPassword(pwd);
+      localStorage.setItem(gameType[selected].id, pwd);
+    }
+  };
+
+  const handleChange = (e) => {
+    setSelected(e.target.value);
+    setError(false);
+    document.getElementById('inputted').value = '';
   };
 
   const handleKeyDown = (e) => {
@@ -131,7 +140,7 @@ export default function HarvestGameInstructions() {
           borderColor="rgba(71, 108, 147, 1)"
           textColor="rgba(71, 108, 147, 1)"
           value={selected}
-          onChange={(e) => setSelected(e.target.value)}
+          onChange={(e) => handleChange(e)}
         >
           {gameType &&
             gameType.map((e, i) => {
@@ -169,7 +178,7 @@ export default function HarvestGameInstructions() {
               textColor="rgba(151, 149, 149, 1)"
               fontSize="2vw"
               w="35%"
-              h={{ base: '17em', sm: '14em', md: '10em', lg: '7em' }}
+              h={{ base: '15em', sm: '11em', md: '10em', lg: '7em' }}
               marginX="0"
               textAlign="center"
               paddingY={{ base: '2', md: '5', lg: '4' }}
@@ -178,11 +187,12 @@ export default function HarvestGameInstructions() {
                 textColor="rgba(1, 43, 85, 1)"
                 fontWeight={500}
                 fontSize={{ base: '4xl', md: '5xl' }}
+                paddingBottom="1vw"
               >
                 {gameType[selected].round}
               </Heading>
               <Heading
-                fontSize={{ base: 'sm' }}
+                fontSize={{ base: 'sm', md: '2xl' }}
                 textColor="rgba(61, 61, 61, 1)"
               >
                 Rounds
@@ -196,7 +206,7 @@ export default function HarvestGameInstructions() {
               textColor="rgba(151, 149, 149, 1)"
               fontSize="2vw"
               w="35%"
-              h={{ base: '17em', sm: '14em', md: '10em', lg: '7em' }}
+              h={{ base: '15em', sm: '11em', md: '10em', lg: '7em' }}
               marginX="0"
               textAlign="center"
               paddingY={{ base: '2', md: '5', lg: '4' }}
@@ -205,11 +215,12 @@ export default function HarvestGameInstructions() {
                 textColor="rgba(1, 43, 85, 1)"
                 fontWeight={500}
                 fontSize={{ base: '4xl', md: '5xl' }}
+                paddingBottom="1vw"
               >
                 {gameType[selected].player}
               </Heading>
               <Heading
-                fontSize={{ base: 'sm' }}
+                fontSize={{ base: 'sm', md: '2xl' }}
                 textColor="rgba(61, 61, 61, 1)"
               >
                 Player
@@ -218,36 +229,6 @@ export default function HarvestGameInstructions() {
                 Min player required
               </Heading>
             </Box>
-            {/* <Box
-              borderColor="rgba(8, 86, 131, 1)"
-              borderWidth="7px"
-              borderRadius="10px"
-              fontWeight={500}
-              textColor="rgba(151, 149, 149, 1)"
-              fontSize="2vw"
-              w="30%"
-              h={{ base: '17em', sm: '14em', md: '10em', lg: '7em' }}
-              marginX="0"
-              textAlign="center"
-              paddingY={{ base: '2', md: '5', lg: '4' }}
-            >
-              <Heading
-                textColor="rgba(1, 43, 85, 1)"
-                fontWeight={500}
-                fontSize={{ base: '3xl', md: '5xl' }}
-              >
-                {gameType[selected].points}
-              </Heading>
-              <Heading
-                fontSize={{ base: 'sm' }}
-                textColor="rgba(61, 61, 61, 1)"
-              >
-                Points
-              </Heading>
-              <Heading fontSize={{ base: '2vw', md: '1.5vw' }}>
-                Total points for all rounds
-              </Heading>
-            </Box> */}
           </HStack>
           <VStack alignItems="start" marginX="0" w="100%" paddingBottom="10">
             <Box
@@ -341,6 +322,13 @@ export default function HarvestGameInstructions() {
             borderColor="gray/300"
             onKeyDown={(e) => handleKeyDown(e)}
           />
+          <Text
+            display={error ? 'flex' : 'none'}
+            textColor="rgba(198, 66, 66, 1)"
+            textAlign={{ base: 'center', md: 'start' }}
+          >
+            Password is incorrect!
+          </Text>
           <Button
             type="submit"
             onClick={handleSubmit}
