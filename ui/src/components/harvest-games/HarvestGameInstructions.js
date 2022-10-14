@@ -10,7 +10,7 @@ import {
   HStack,
   Grid,
 } from '@chakra-ui/react';
-import { useState, Form, Label } from 'react';
+import { useState } from 'react';
 
 import './styles.css';
 
