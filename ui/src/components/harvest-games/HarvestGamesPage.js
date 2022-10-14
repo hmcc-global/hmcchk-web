@@ -271,7 +271,7 @@ const HarvestGames = (props) => {
             </Tabs>
             {/* MOBILE */}
             <Tabs
-              isFitted
+              isFitted="false"
               variant="enclosed"
               orientation="horizontal"
               width="100%"
@@ -289,7 +289,7 @@ const HarvestGames = (props) => {
                 >
                   Leaderboard
                 </Tab>
-                <Tab
+                {/* <Tab
                   borderBottom="5px solid #E2E8F0"
                   _selected={{
                     borderBottom: '5px solid #0628A3',
@@ -298,7 +298,7 @@ const HarvestGames = (props) => {
                   }}
                 >
                   Pre-Games
-                </Tab>
+                </Tab> */}
                 <Tab
                   borderBottom="5px solid #E2E8F0"
                   _selected={{
@@ -399,7 +399,7 @@ const HarvestGames = (props) => {
                   </Center>
                 </TabPanel>
 
-                <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
+                {/* <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
                   <Center>
                     <Image
                       w="100%"
@@ -424,9 +424,12 @@ const HarvestGames = (props) => {
                     </Link>
                     .
                   </Text>
-                </TabPanel>
+                </TabPanel> */}
                 <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
                   <HarvestGamesLeaderboard />
+                </TabPanel>
+                <TabPanel>
+                  <HarvestGameInstructions />
                 </TabPanel>
               </TabPanels>
             </Tabs>
