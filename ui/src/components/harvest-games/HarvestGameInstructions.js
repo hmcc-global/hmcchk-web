@@ -130,7 +130,7 @@ export default function HarvestGameInstructions() {
       </Box>
       {gameType[selected].pwd === localStorage.getItem(gameType[selected].id) ||
       gameType[selected].pwd === password ? (
-        <Box w="100%">
+        <Box w="90%">
           <Heading size="xl" textColor="rgba(83, 83, 83, 1)">
             {gameType[selected].game_num}
           </Heading>
@@ -231,7 +231,7 @@ export default function HarvestGameInstructions() {
               </Heading>
             </Box>
           </HStack>
-          <VStack alignItems="start" marginX="0" w="100%">
+          <VStack alignItems="start" marginX="0" w="100%" paddingBottom="10">
             <Box
               borderColor="rgba(8, 86, 131, 1)"
               borderWidth="7px"
@@ -269,6 +269,7 @@ export default function HarvestGameInstructions() {
                     bgSize="contain"
                     bgRepeat="no-repeat"
                     bgPos="center"
+                    marginX="auto"
                     textAlign="end"
                     paddingBottom="8"
                   >
