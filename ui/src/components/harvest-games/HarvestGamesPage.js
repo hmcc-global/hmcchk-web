@@ -19,6 +19,7 @@ import {
 } from '@chakra-ui/react';
 
 import HarvestGamesLeaderboard from './HarvestGamesLeaderboard';
+import HarvestGameInstructions from './HarvestGameInstructions';
 
 const HarvestGames = (props) => {
   return (
@@ -122,7 +123,6 @@ const HarvestGames = (props) => {
                 >
                   <Text>Leaderboard</Text>
                 </Tab>
-
                 <Tab
                   marginTop="1em"
                   borderBottom="5px solid #E2E8F0"
@@ -134,7 +134,6 @@ const HarvestGames = (props) => {
                 >
                   Pre-Games
                 </Tab>
-
                 <Tab
                   marginTop="1em"
                   borderBottom="5px solid #E2E8F0"
@@ -145,6 +144,17 @@ const HarvestGames = (props) => {
                   }}
                 >
                   Live Leaderboard
+                </Tab>
+                <Tab
+                  marginTop="1em"
+                  borderBottom="5px solid #E2E8F0"
+                  _selected={{
+                    borderColor: '#0628A3',
+                    textColor: '#3A6693',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  Game Instructions
                 </Tab>
               </TabList>
 
@@ -251,8 +261,11 @@ const HarvestGames = (props) => {
                   </Text>
                 </TabPanel>
 
-                <TabPanel height="100vh">
+                <TabPanel>
                   <HarvestGamesLeaderboard />
+                </TabPanel>
+                <TabPanel>
+                  <HarvestGameInstructions />
                 </TabPanel>
               </TabPanels>
             </Tabs>
@@ -295,6 +308,17 @@ const HarvestGames = (props) => {
                   }}
                 >
                   Live Leaderboard
+                </Tab>
+
+                <Tab
+                  borderBottom="5px solid #E2E8F0"
+                  _selected={{
+                    borderBottom: '5px solid #0628A3',
+                    textColor: '#3A6693',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  Game Instructions
                 </Tab>
               </TabList>
 
@@ -401,7 +425,7 @@ const HarvestGames = (props) => {
                     .
                   </Text>
                 </TabPanel>
-                <TabPanel height={{ base: '80vh', sm: '90vh' }}>
+                <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
                   <HarvestGamesLeaderboard />
                 </TabPanel>
               </TabPanels>
