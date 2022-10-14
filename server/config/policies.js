@@ -54,7 +54,7 @@ module.exports.policies = {
 
   // Harvest Games
   'harvestGames/update-hg-rankings': ['isLoggedIn', 'aboveTech'],
-  'harvestGames/get-hg-rankings': ['isLoggedIn', 'aboveTech'],
+  'harvestGames/get-hg-rankings': true,
 
   // Media
   'media/*': true,
