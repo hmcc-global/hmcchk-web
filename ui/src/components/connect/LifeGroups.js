@@ -107,33 +107,6 @@ const LifeGroups = (props) => {
         </SimpleGrid>
       </Box>
       <OurMinistries />
-      <Heading
-        as="h2"
-        fontSize={['2xl', '3xl', '5xl']}
-        fontWeight={800}
-        textAlign="center"
-        px={[4, 16]}
-      >
-        How our members have experienced REAL LIFE
-      </Heading>
-      <Text
-        fontSize={['sm', 'md', 'lg']}
-        fontWeight={400}
-        textAlign="center"
-        mb={4}
-      >
-        Click on the images to check out their testimonies on Instagram!
-      </Text>
-      <SimpleGrid columns={[2, 5]} spacing={2}>
-        {testimoniesList.length > 0 &&
-          testimoniesList.map((testimony) => (
-            <LinkBox>
-              <LinkOverlay href={testimony.igLink} target="_blank">
-                <Image src={process.env.PUBLIC_URL + testimony.imagePath} />
-              </LinkOverlay>
-            </LinkBox>
-          ))}
-      </SimpleGrid>
     </Box>
   );
 };
