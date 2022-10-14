@@ -1,8 +1,10 @@
-import { Button } from '@chakra-ui/react';
+import { Button, useDisclosure } from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons';
 import TextTestimonyModal from './TextTestimonyModal';
 
-const ShareTestimonyButton = ({ onOpen, isOpen, onClose }) => {
+const ShareTestimonyButton = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
       <Button
