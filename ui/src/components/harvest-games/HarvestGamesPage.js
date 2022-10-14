@@ -113,7 +113,7 @@ const HarvestGames = (props) => {
               defaultIndex={0}
             >
               <TabList border="none" width="250px" paddingRight={'10'}>
-                <Tab
+                {/* <Tab
                   borderBottom="5px solid #E2E8F0"
                   _selected={{
                     borderColor: '#0628A3',
@@ -133,7 +133,7 @@ const HarvestGames = (props) => {
                   }}
                 >
                   Pre-Games
-                </Tab>
+                </Tab> */}
                 <Tab
                   marginTop="1em"
                   borderBottom="5px solid #E2E8F0"
@@ -163,7 +163,7 @@ const HarvestGames = (props) => {
                 borderRadius={'10'}
                 bottomPadding="50px"
               >
-                <TabPanel height="80vh">
+                {/* <TabPanel height="80vh">
                   <Text
                     fontSize={{ md: '26px', lg: '32px' }}
                     textAlign="center"
@@ -259,7 +259,7 @@ const HarvestGames = (props) => {
                     </Link>
                     .
                   </Text>
-                </TabPanel>
+                </TabPanel> */}
 
                 <TabPanel height="100vh">
                   <HarvestGamesLeaderboard />
@@ -279,7 +279,7 @@ const HarvestGames = (props) => {
               default={1}
             >
               <TabList>
-                <Tab
+                {/* <Tab
                   borderBottom="5px solid #E2E8F0"
                   _selected={{
                     borderBottom: '5px solid #0628A3',
@@ -288,7 +288,7 @@ const HarvestGames = (props) => {
                   }}
                 >
                   Leaderboard
-                </Tab>
+                </Tab> */}
                 {/* <Tab
                   borderBottom="5px solid #E2E8F0"
                   _selected={{
@@ -323,7 +323,7 @@ const HarvestGames = (props) => {
               </TabList>
 
               <TabPanels bgColor="none" borderRadius={'0'}>
-                <TabPanel height={{ base: '30em', sm: '40em' }}>
+                {/* <TabPanel height={{ base: '30em', sm: '40em' }}>
                   <Text
                     fontSize={{
                       base: '20px',
@@ -397,6 +397,7 @@ const HarvestGames = (props) => {
                       </Table>
                     </TableContainer>
                   </Center>
+                  <HarvestGamesLeaderboard />
                 </TabPanel>
 
                 {/* <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
