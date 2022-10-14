@@ -29,7 +29,7 @@ export default function HarvestGameInstructions() {
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1_2.gif',
       ],
       id: 'game_1',
-      pwd: 'Smuggling',
+      pwd: 'Smugglings',
     },
 
     {
@@ -55,7 +55,7 @@ export default function HarvestGameInstructions() {
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg2_4.gif',
       ],
       id: 'game_2',
-      pwd: 'Packing',
+      pwd: 'Packings',
     },
 
     {
@@ -71,7 +71,7 @@ export default function HarvestGameInstructions() {
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3_3.gif',
       ],
       id: 'game_3',
-      pwd: 'Airplane',
+      pwd: 'Airplanes',
     },
   ];
 
@@ -156,7 +156,7 @@ export default function HarvestGameInstructions() {
             {gameType[selected].name}
           </Heading>
           <HStack
-            justifyContent={('space-evenly', 'space-between')}
+            justifyContent={'space-evenly'}
             paddingY="5"
             w="100%"
             display="flex"
@@ -168,7 +168,7 @@ export default function HarvestGameInstructions() {
               fontWeight={500}
               textColor="rgba(151, 149, 149, 1)"
               fontSize="2vw"
-              w="30%"
+              w="35%"
               h={{ base: '17em', sm: '14em', md: '10em', lg: '7em' }}
               marginX="0"
               textAlign="center"
@@ -195,7 +195,7 @@ export default function HarvestGameInstructions() {
               fontWeight={500}
               textColor="rgba(151, 149, 149, 1)"
               fontSize="2vw"
-              w="30%"
+              w="35%"
               h={{ base: '17em', sm: '14em', md: '10em', lg: '7em' }}
               marginX="0"
               textAlign="center"
@@ -218,7 +218,7 @@ export default function HarvestGameInstructions() {
                 Min player required
               </Heading>
             </Box>
-            <Box
+            {/* <Box
               borderColor="rgba(8, 86, 131, 1)"
               borderWidth="7px"
               borderRadius="10px"
@@ -247,7 +247,7 @@ export default function HarvestGameInstructions() {
               <Heading fontSize={{ base: '2vw', md: '1.5vw' }}>
                 Total points for all rounds
               </Heading>
-            </Box>
+            </Box> */}
           </HStack>
           <VStack alignItems="start" marginX="0" w="100%" paddingBottom="10">
             <Box
@@ -324,6 +324,7 @@ export default function HarvestGameInstructions() {
           alignItems={{ base: 'center', sm: 'start' }}
           textAlign={{ base: 'center', sm: 'start' }}
           paddingX="5"
+          paddingBottom="10"
           spacing="4"
         >
           <label>
