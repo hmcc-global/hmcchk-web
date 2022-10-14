@@ -108,6 +108,7 @@ const NewHereSection = () => {
                       variant="filled"
                       type="name"
                       placeholder="Name"
+                      color="black"
                       onChange={(e) => setName(e.target.value)}
                     />
                   </FormControl>
@@ -117,6 +118,7 @@ const NewHereSection = () => {
                       variant="filled"
                       type="email"
                       placeholder="Email"
+                      color="black"
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </FormControl>
@@ -125,6 +127,7 @@ const NewHereSection = () => {
                       h={'3em'}
                       variant="filled"
                       placeholder="Phone Number"
+                      color="black"
                       onChange={(e) => setPhoneNumber(e.target.value)}
                     />
                   </FormControl>
@@ -133,6 +136,7 @@ const NewHereSection = () => {
                       h={'3em'}
                       variant="filled"
                       placeholder="Campus/Lifestage"
+                      color="black"
                       onChange={(e) => setLifestage(e.target.value)}
                     />
                   </FormControl>
@@ -141,6 +145,7 @@ const NewHereSection = () => {
                       h={'3em'}
                       type="notes"
                       placeholder="Notes and remarks"
+                      color="black"
                       variant="filled"
                       onChange={(e) => setNotes(e.target.value)}
                       _autofill={{
