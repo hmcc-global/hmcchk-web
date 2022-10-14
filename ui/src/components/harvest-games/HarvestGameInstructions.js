@@ -10,7 +10,8 @@ import {
   HStack,
   Grid,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { Text } from '@chakra-ui/layout';
+import { useState, Fragment } from 'react';
 
 import './styles.css';
 
@@ -21,7 +22,8 @@ export default function HarvestGameInstructions() {
       name: 'SMUGGLING THROUGH SECURITY',
       round: 3,
       player: 5,
-      points: 15,
+      points: 45,
+      materials: '-',
       imageUrl: [
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1_1.gif',
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1_2.gif',
@@ -34,7 +36,18 @@ export default function HarvestGameInstructions() {
       game_num: 'Game #2',
       name: 'THE PACKING GAME',
       round: 2,
-      player: '-',
+      player: 2,
+      points: 230,
+      materials: [
+        '10 Shirts',
+        '6  SweatPants',
+        '6  Books',
+        '6  Hoodies',
+        '9  Socks',
+        '6  Shoes',
+        '8  Hats',
+        '6  Water bottles',
+      ],
       imageUrl: [
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg2_1.gif',
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg2_2.gif',
@@ -49,7 +62,9 @@ export default function HarvestGameInstructions() {
       game_num: 'Game #3',
       name: 'THE AIRPLANE RELAY RACE',
       round: 4,
-      player: '-',
+      player: 5,
+      materials: '-',
+      points: '-',
       imageUrl: [
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3_1.gif',
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3_2.gif',
@@ -131,10 +146,13 @@ export default function HarvestGameInstructions() {
       {gameType[selected].pwd === localStorage.getItem(gameType[selected].id) ||
       gameType[selected].pwd === password ? (
         <Box w="90%">
-          <Heading size="xl" textColor="rgba(83, 83, 83, 1)">
+          <Heading size="xl" textColor="rgba(1, 43, 85, 1)">
             {gameType[selected].game_num}
           </Heading>
-          <Heading size="lg" textColor="rgba(83, 83, 83, 1)">
+          <Heading
+            fontSize={{ base: '4vw', md: '2vw' }}
+            textColor="rgba(1, 43, 85, 1)"
+          >
             {gameType[selected].name}
           </Heading>
           <HStack
@@ -188,7 +206,7 @@ export default function HarvestGameInstructions() {
                 fontWeight={500}
                 fontSize={{ base: '4xl', md: '5xl' }}
               >
-                3
+                {gameType[selected].player}
               </Heading>
               <Heading
                 fontSize={{ base: 'sm' }}
@@ -197,7 +215,7 @@ export default function HarvestGameInstructions() {
                 Player
               </Heading>
               <Heading fontSize={{ base: '2vw', md: '1.5vw' }}>
-                Change players every round
+                Min player required
               </Heading>
             </Box>
             <Box
@@ -216,9 +234,9 @@ export default function HarvestGameInstructions() {
               <Heading
                 textColor="rgba(1, 43, 85, 1)"
                 fontWeight={500}
-                fontSize={{ base: '4xl', md: '5xl' }}
+                fontSize={{ base: '3xl', md: '5xl' }}
               >
-                100
+                {gameType[selected].points}
               </Heading>
               <Heading
                 fontSize={{ base: 'sm' }}
@@ -227,27 +245,45 @@ export default function HarvestGameInstructions() {
                 Points
               </Heading>
               <Heading fontSize={{ base: '2vw', md: '1.5vw' }}>
-                Each round
+                Total points for all rounds
               </Heading>
             </Box>
           </HStack>
           <VStack alignItems="start" marginX="0" w="100%" paddingBottom="10">
             <Box
+              display={gameType[selected].id === 'game_2' ? 'block' : 'none '}
               borderColor="rgba(8, 86, 131, 1)"
               borderWidth="7px"
               borderRadius="10px"
               fontWeight={500}
-              fontSize="2.5vw"
+              fontSize={{ base: '5vw', md: '2.5vw' }}
               textColor="rgba(61, 61, 61, 1)"
               w="100%"
-              h="9em"
               marginX="0"
               marginY="5"
               textAlign="start"
               paddingY="5"
               paddingX="9"
             >
-              Materials:
+              Materials :
+              <VStack justifyContent="space-evenly" alignItems="start">
+                {gameType[selected].id === 'game_2' &&
+                  gameType[selected].materials.length > 0 &&
+                  gameType[selected].materials.map((e, i) => {
+                    return (
+                      <Fragment key={i}>
+                        <Text
+                          color="rgba(1, 43, 85, 1)"
+                          fontWeight={400}
+                          textDecoration="none"
+                          fontSize={{ base: '4vw', md: '2vw' }}
+                        >
+                          {e}
+                        </Text>
+                      </Fragment>
+                    );
+                  })}
+              </VStack>
             </Box>
             <Heading paddingX="2">Instructions :</Heading>
             <Grid
