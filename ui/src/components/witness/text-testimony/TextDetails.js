@@ -16,6 +16,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router';
 import { customAxios as axios } from '../../helpers/customAxios';
 import { parseDescription } from '../../helpers/parseDescription';
+import { DateTime } from 'luxon';
 
 const TextDetails = (props) => {
   const [text, setTexts] = useState();
@@ -86,7 +87,11 @@ const TextDetails = (props) => {
                       <HStack spacing={[0, 2]}>
                         <Text display={['none', 'flex']}>{text.fullName}</Text>
                         <BsDot />
-                        <Text>{text.createdAt}</Text>
+                        <Text>
+                          {DateTime.fromISO(text.createdAt).toFormat(
+                            'LLLL dd, yyyy'
+                          )}
+                        </Text>
                       </HStack>
                       <Text>{parseDescription(text.testimony)}</Text>
                       {text.image ? <Image /> : null}
