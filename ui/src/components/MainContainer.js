@@ -35,8 +35,8 @@ import VideoDetails from './witness/video-testimony/VideoDetails';
 import WitnessHomeContainer from './witness/WitnessHomeContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import TextDetails from './witness/text-testimony/TextDetails';
-import AdminHarvestGames from './admin/harvest-games/AdminHarvestGames';
 import HarvestGames from './harvest-games/HarvestGamesPage';
+import AdminHgContainer from './admin/harvest-games/AdminHgContainer.js';
 
 const MainContainer = () => {
   return (
@@ -286,7 +286,7 @@ const MainContainer = () => {
           exact
           path="/admin/harvest-games"
           permissions={['t3ch', 'admin', 'stewardship']}
-          component={AdminHarvestGames}
+          component={AdminHgContainer}
         />
         <PrivateRoute
           exact
