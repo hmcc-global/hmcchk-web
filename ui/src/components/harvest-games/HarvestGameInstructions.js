@@ -343,10 +343,10 @@ export default function HarvestGameInstructions() {
         </VStack>
       )}
       <Image
-        height={{ base: '13vw', md: '6vw' }}
+        height={{ base: '20vw', md: '9vw' }}
         position="sticky"
-        alignSelf="end"
-        bottom="4"
+        bottom="2"
+        paddingBottom="7"
         display={
           gameType[selected].pwd === localStorage.getItem(gameType[selected].id)
             ? 'flex'
