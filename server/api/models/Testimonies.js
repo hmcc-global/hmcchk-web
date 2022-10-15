@@ -18,8 +18,6 @@ module.exports = {
     },
     tags: {
       type: 'json',
-      columnType: 'array',
-      defaultsTo: [],
     },
     image: {
       type: 'string',

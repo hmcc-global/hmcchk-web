@@ -30,10 +30,20 @@ export default function AdminTestimonyContainer(props) {
   const [name, setName] = useState('');
   const [lifestage, setLifestage] = useState('');
   const [email, setEmail] = useState('');
+  const [tags, setTagsStr] = useState('');
   const [published, setPublished] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
   const [deleted, setDeleted] = useState(false);
+
+  const setTags = useCallback((t) => {
+    if (t && Array.isArray(t)) {
+      setTagsStr(t.join(','));
+      return;
+    }
+
+    setTagsStr('');
+  }, []);
 
   const getData = useCallback(async () => {
     try {
@@ -57,16 +67,19 @@ export default function AdminTestimonyContainer(props) {
       setName(selected.name);
       setLifestage(selected.lifestage);
       setEmail(selected.email);
+      setTags(selected.tags);
       setPublished(selected.isPublished);
       setDeleted(selected.isDeleted);
     }
-  }, [selected]);
+  }, [selected, setTags]);
 
   useEffect(() => {
     if (deleted) setPublished(false);
   }, [deleted]);
 
   const updateHandler = async () => {
+    const tagsArr = tags && tags.length > 0 && tags.split(',');
+
     try {
       const res = await axios.put('/api/testimony/update', {
         id,
@@ -75,6 +88,7 @@ export default function AdminTestimonyContainer(props) {
         name: name,
         lifestage: lifestage,
         email: email,
+        tags: tagsArr,
         isPublished: published,
         isDeleted: deleted,
       });
@@ -118,6 +132,7 @@ export default function AdminTestimonyContainer(props) {
     setName('');
     setLifestage('');
     setEmail('');
+    setTagsStr('');
     setPublished(false);
     setDeleted(false);
     setSelected();
@@ -169,6 +184,14 @@ export default function AdminTestimonyContainer(props) {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Tags</FormLabel>
+              <Input
+                type="text"
+                value={tags}
+                onChange={(e) => setTagsStr(e.target.value)}
               />
             </FormControl>
             <HStack spacing={5} justifyContent="flex-end">
