@@ -28,6 +28,10 @@ module.exports = {
       required: false,
       type: 'string',
     },
+    tags: {
+      required: false,
+      type: 'json',
+    },
     isPublished: {
       type: 'boolean',
     },
@@ -43,7 +47,17 @@ module.exports = {
   },
 
   fn: async function (
-    { id, theme, testimony, name, lifestage, email, isPublished, isDeleted },
+    {
+      id,
+      theme,
+      testimony,
+      name,
+      lifestage,
+      email,
+      tags,
+      isPublished,
+      isDeleted,
+    },
     exits
   ) {
     const user = this.req.user.fullName;
@@ -60,6 +74,7 @@ module.exports = {
         name,
         lifestage,
         email,
+        tags,
         isPublished,
         isDeleted,
       });
