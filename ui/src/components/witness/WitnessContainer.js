@@ -12,6 +12,7 @@ import {
   Button,
   Flex,
   Link,
+  VStack,
 } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import VideoTestimonyContainer from './video-testimony/VideoTestimonyContainer';
@@ -87,7 +88,7 @@ const WitnessContainer = (props) => {
               </Box>
             </Flex>
             <Flex w="100%" justifyContent="center">
-              <Box pt={['3', '12']} justifyContent="center" w={['85%', '90%']}>
+              <Box pt={['3', '12']} justifyContent="center" w={['85%', '60%']}>
                 <Text
                   textStyle={'dm_sans_bold'}
                   color="white"
