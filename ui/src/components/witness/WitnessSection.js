@@ -15,7 +15,10 @@ const WitnessSection = () => {
   return (
     <Container maxW="100vw" justifyContent="center" display="flex" p={0}>
       <Box
-        bgImage={`url('${process.env.PUBLIC_URL}/images/witness/banner-desktop.png')`}
+        bgImage={[
+          `url('${process.env.PUBLIC_URL}/images/witness/ad-home-mobile.png')`,
+          `url('${process.env.PUBLIC_URL}/images/witness/ad-home-desktop.png')`,
+        ]}
         bgSize="cover"
         justifyContent="center"
         py={[20, 120]}
