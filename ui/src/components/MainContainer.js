@@ -30,8 +30,8 @@ import AdminHome from './admin/AdminHome';
 import AdminUser from './admin/users/AdminUser';
 import FormManager from './forms/FormManager';
 import AdminPopUpContainer from './admin/popup/AdminPopUpContainer';
-import AdminHarvestGames from './admin/harvest-games/AdminHarvestGames';
 import HarvestGames from './harvest-games/HarvestGamesPage';
+import AdminHgContainer from './admin/harvest-games/AdminHgContainer.js';
 
 const MainContainer = () => {
   return (
@@ -113,7 +113,14 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/forms/:id"
-          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
+          permissions={[
+            'unsigned',
+            'signed',
+            'alumni',
+            't3ch',
+            'admin',
+            'stewardship',
+          ]}
           component={UserFormContainer}
         />
         <PrivateRoute
@@ -155,25 +162,53 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/complete-profile"
-          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
+          permissions={[
+            'unsigned',
+            'signed',
+            'alumni',
+            't3ch',
+            'admin',
+            'stewardship',
+          ]}
           component={CompleteUserProfileContainer}
         />
         <PrivateRoute
           exact
           path="/profile"
-          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
+          permissions={[
+            'unsigned',
+            'signed',
+            'alumni',
+            't3ch',
+            'admin',
+            'stewardship',
+          ]}
           component={UserProfileContainer}
         />
         <PrivateRoute
           exact
           path="/complete-profile"
-          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
+          permissions={[
+            'unsigned',
+            'signed',
+            'alumni',
+            't3ch',
+            'admin',
+            'stewardship',
+          ]}
           component={CompleteUserProfileContainer}
         />
         <PrivateRoute
           exact
           path="/profile"
-          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
+          permissions={[
+            'unsigned',
+            'signed',
+            'alumni',
+            't3ch',
+            'admin',
+            'stewardship',
+          ]}
           component={UserProfileContainer}
         />
         <PrivateRoute
@@ -216,7 +251,7 @@ const MainContainer = () => {
           exact
           path="/admin/harvest-games"
           permissions={['t3ch', 'admin', 'stewardship']}
-          component={AdminHarvestGames}
+          component={AdminHgContainer}
         />
         <PrivateRoute
           exact

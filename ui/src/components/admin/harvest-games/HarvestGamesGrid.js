@@ -4,28 +4,28 @@ import { useEffect, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { Button, ButtonGroup, Heading, Tooltip } from '@chakra-ui/react';
+import {
+  Button,
+  ButtonGroup,
+  Container,
+  Tooltip,
+  useToast,
+} from '@chakra-ui/react';
 import { CgUndo, CgRedo } from 'react-icons/cg';
 import { MdSave } from 'react-icons/md';
 
-export default function AdminHarvestGames(props) {
+export default function HarvestGamesGrid(props) {
+  const toast = useToast();
+  const { hgRankings } = props;
+
   const [api, setApi] = useState();
   const [colApi, setColApi] = useState();
-  const [rankings, setRankings] = useState([]);
+  const [rankings, setRankings] = useState(hgRankings);
 
   const defaultColDef = {
     editable: true,
     sortable: true,
     resizable: true,
-  };
-
-  const getData = async () => {
-    try {
-      const { data } = await axios.get('/api/hgRankings/get');
-      setRankings(data);
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   // Function to save individual ranking info to DB
@@ -35,33 +35,58 @@ export default function AdminHarvestGames(props) {
     });
 
     if (res.status !== 200) {
-      alert('Something went wrong, please refresh and try again..');
+      return false;
+    } else {
+      return true;
     }
   };
 
   // Save ranking info across all rows
   const saveAllToDB = async () => {
     if (api) {
+      // To count how many rows were successfully saved
+      var successCount = 0;
+
       // Iterate across each node (row) and call API to save to DB
       api.forEachNode(async (rowNode) => {
-        await saveRankingInfo(rowNode.data);
+        const res = await saveRankingInfo(rowNode.data);
+
+        if (res) successCount++;
       });
+
+      if (successCount === api.paginationGetRowCount()) {
+        toast({
+          description: 'All rows saved successfully!',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          description: 'Error saving some rows, please try again!',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     }
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    if (hgRankings) {
+      setRankings(hgRankings);
+    }
+  }, [hgRankings]);
 
   useEffect(() => {
     if (api) {
-      if (rankings && rankings.length) {
+      if (hgRankings && hgRankings.length) {
         api.hideOverlay();
       } else {
         api.showLoadingOverlay();
       }
     }
-  }, [rankings, api]);
+  }, [hgRankings, api]);
 
   // Ag-Grid Helpers
   // Getter Functions: to handle errors in retrieving data
@@ -239,26 +264,25 @@ export default function AdminHarvestGames(props) {
   ];
 
   return (
-    <>
-      <Heading as="h3" mb={5}>
-        Harvest Games Rankings
-      </Heading>
-      <ButtonGroup mb={5} variant="outline" spacing="5">
-        <Tooltip label="Ctrl/Cmd + Z">
-          <Button onClick={undo} leftIcon={<CgUndo />}>
-            Undo
+    <Container w="100%" maxW="100%">
+      <>
+        <ButtonGroup mb={5} variant="outline" spacing="5">
+          <Tooltip label="Ctrl/Cmd + Z">
+            <Button onClick={undo} leftIcon={<CgUndo />}>
+              Undo
+            </Button>
+          </Tooltip>
+          <Tooltip label="Ctrl/Cmd + Y">
+            <Button onClick={redo} rightIcon={<CgRedo />}>
+              Redo
+            </Button>
+          </Tooltip>
+          <Button onClick={saveAllToDB} rightIcon={<MdSave />} variant="solid">
+            Save
           </Button>
-        </Tooltip>
-        <Tooltip label="Ctrl/Cmd + Y">
-          <Button onClick={redo} rightIcon={<CgRedo />}>
-            Redo
-          </Button>
-        </Tooltip>
-        <Button onClick={saveAllToDB} rightIcon={<MdSave />} variant="solid">
-          Save
-        </Button>
-      </ButtonGroup>
-      <div className="ag-theme-alpine" style={{ height: 500 }}>
+        </ButtonGroup>
+      </>
+      <div className="ag-theme-alpine" style={{ height: 700 }}>
         <AgGridReact
           defaultColDef={defaultColDef}
           columnDefs={columnDefs}
@@ -274,6 +298,6 @@ export default function AdminHarvestGames(props) {
           tooltipShowDelay={0}
         />
       </div>
-    </>
+    </Container>
   );
 }
