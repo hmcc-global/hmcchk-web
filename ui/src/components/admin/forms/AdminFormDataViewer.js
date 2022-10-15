@@ -4,7 +4,7 @@ import { customAxios as axios } from '../../helpers/customAxios';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { Button, Heading, Text, Input, HStack } from '@chakra-ui/react';
+import { Button, Heading, Text, Input, HStack, Box } from '@chakra-ui/react';
 
 export default function AdminFormDataViewer(props) {
   const {
@@ -16,11 +16,8 @@ export default function AdminFormDataViewer(props) {
 
   const [formData, setFormData] = useState([]);
   const [api, setApi] = useState();
-  const [flatFormData] = useState([]);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-
-  let lastUpdatedTime = useRef();
 
   const getFilterType = () => {
     if (startDate !== '' && endDate !== '') return 'inRange';
@@ -67,17 +64,13 @@ export default function AdminFormDataViewer(props) {
         Number(dateParts[1]) - 1,
         Number(dateParts[2])
       );
-      console.log(cellDate);
       if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
-        console.log(cellDate);
-        return 0;
+        return 1;
       }
       if (cellDate < filterLocalDateAtMidnight) {
-        console.log(cellDate);
         return -1;
       }
-      if (cellDate > filterLocalDateAtMidnight) {
-        console.log(cellDate);
+      if (cellDate >= filterLocalDateAtMidnight) {
         return 1;
       }
     },
@@ -92,15 +85,13 @@ export default function AdminFormDataViewer(props) {
             formId: formId,
           },
         });
-
         let formDataTemp = [];
-
         data.forEach(function (item) {
           let temp = {};
           temp = item.submissionData;
-          var DateTime = new Date(item.updatedAt);
 
           //format date to: yyy-mm-dd hh:mm:ss
+          var DateTime = new Date(item.updatedAt);
           temp.updatedAt = DateTime.toISOString()
             .replace(/T/, ' ')
             .replace(/\..+/, '');
@@ -110,7 +101,7 @@ export default function AdminFormDataViewer(props) {
             for (const property in temp['address']) {
               addressString.push(temp['address'][property]);
             }
-            temp['address'] = addressString.join();
+            temp['address'] = addressString.join(', ');
           }
           formDataTemp.push(temp);
         });
@@ -125,7 +116,6 @@ export default function AdminFormDataViewer(props) {
 
   useEffect(() => {
     if (gridApi) {
-      console.log(gridApi);
       if (startDate !== '' && endDate !== '' && startDate > endDate) {
         alert('Start Date should be before End Date');
         setEndDate('');
@@ -141,28 +131,9 @@ export default function AdminFormDataViewer(props) {
     }
   }, [startDate, endDate]);
 
-  const parseFormData = (ob) => {
-    let result = {};
-    for (const key in ob) {
-      if (key === 'address') {
-        let addressString = [];
-        for (const property in ob['address']) {
-          addressString.push(ob['address'][property]);
-        }
-        result['address'] = addressString.join();
-      } else {
-        result[key] = ob[key];
-      }
-    }
-    return result;
-  };
-
   useEffect(() => {
     if (api) {
       if (formData && formData.length > 0) {
-        formData.forEach((element) =>
-          flatFormData.push(parseFormData(element))
-        );
         api.setRowData(formData);
         return;
       }
@@ -183,7 +154,6 @@ export default function AdminFormDataViewer(props) {
 
     const createStringColumn = (key) => {
       return {
-        // TODO-Randall: parse this key to a proper headername
         headerName: key,
         field: key,
       };
@@ -251,15 +221,15 @@ export default function AdminFormDataViewer(props) {
         {formName}
       </Heading>
       <div className="ag-theme-alpine" style={{ height: 800, width: '100%' }}>
-        <HStack m="2">
-          <Text>From :</Text>
+        <HStack m="2" w="100%">
+          <Text>From:</Text>
           <Input
             w="12em"
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
           />
-          <Text>To :</Text>
+          <Text>To:</Text>
           <Input
             w="12em"
             type="date"
@@ -275,6 +245,12 @@ export default function AdminFormDataViewer(props) {
             Export
           </Button>
         </HStack>
+        <Box my="4">
+          <Text color="Teal">
+            *date filter indicates midnight of (eg. from 01/01 00:00 to 02/01
+            00:00)
+          </Text>
+        </Box>
         <AgGridReact
           defaultColDef={defaultColDef}
           columnDefs={createColumnDefs()}
