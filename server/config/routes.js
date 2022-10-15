@@ -88,6 +88,7 @@ module.exports.routes = {
   // Harvest Games APIs
   'get /api/hgRankings/get': 'harvestGames/get-hg-rankings',
   'put /api/hgRankings/update': 'harvestGames/update-hg-rankings',
+  'post /api/hgRankings/create': 'harvestGames/create-hg-rankings',
 
   // PopUp APIs
   'get /api/popup/get': 'popup/get-popup',
