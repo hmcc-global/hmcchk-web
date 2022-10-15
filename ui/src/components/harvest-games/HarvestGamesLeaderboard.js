@@ -32,7 +32,7 @@ export default function HarvestGamesLeaderboard(props) {
   const getData = async () => {
     try {
       const { data } = await axios.get('/api/hgRankings/get');
-      setRankings(data);
+      setRankings(data.filter((p) => p.isDeleted === false));
     } catch (err) {
       console.log(err);
     }

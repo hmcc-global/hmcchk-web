@@ -151,7 +151,7 @@ export default function AdminHgContainer(props) {
                 CREATE
               </Button>
             </FormControl>
-            <Button colorScheme="red" w="full" mt={5} onClick={resetHandler}>
+            <Button colorScheme="green" w="full" mt={5} onClick={resetHandler}>
               RESET
             </Button>
           </form>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { customAxios as axios } from '../../helpers/customAxios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -21,6 +21,8 @@ export default function HarvestGamesGrid(props) {
   const [api, setApi] = useState();
   const [colApi, setColApi] = useState();
   const [rankings, setRankings] = useState(hgRankings);
+  const [selected, setSelected] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const defaultColDef = {
     editable: true,
@@ -40,6 +42,22 @@ export default function HarvestGamesGrid(props) {
       return true;
     }
   };
+
+  const getData = useCallback(async () => {
+    try {
+      const { data } = await axios.get('/api/hgRankings/get');
+      console.log(data);
+      if (data) setRankings(data.filter((p) => p.isDeleted === false));
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (hgRankings) {
+      setRankings(hgRankings.filter((p) => p.isDeleted === false));
+    }
+  }, [hgRankings]);
 
   // Save ranking info across all rows
   const saveAllToDB = async () => {
@@ -72,11 +90,38 @@ export default function HarvestGamesGrid(props) {
     }
   };
 
-  useEffect(() => {
-    if (hgRankings) {
-      setRankings(hgRankings);
+  const deleteHandler = async () => {
+    try {
+      setIsLoading(true);
+
+      if (window.confirm('Are you sure you want to delete this?')) {
+        const res = await axios.put('/api/hgRankings/delete', {
+          rankingId: selected.id,
+        });
+
+        if (res.status === 200) {
+          toast({
+            description: 'Successfully deleted!',
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            description: 'Error deleting, please try again!',
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+          });
+        }
+
+        await getData();
+      }
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
     }
-  }, [hgRankings]);
+  };
 
   useEffect(() => {
     if (api) {
@@ -218,12 +263,16 @@ export default function HarvestGamesGrid(props) {
   const undoRedoCellEditingLimit = 20;
   const enableCellChangeFlash = true;
 
+  const onRowClicked = ({ data }) => {
+    if (data) setSelected(data);
+    console.log(data.id);
+  };
+
   //  Ag-Grid Column Definitions
   const columnDefs = [
     {
       headerName: 'LIFE Group',
       field: 'lgName',
-      editable: false,
     },
     // Set colId of breakdown to game number minus 1, i.e. normalize to zero-based indexing
     // colId will be utilized in getting and setting rankings
@@ -280,6 +329,14 @@ export default function HarvestGamesGrid(props) {
           <Button onClick={saveAllToDB} rightIcon={<MdSave />} variant="solid">
             Save
           </Button>
+          <Button
+            onClick={deleteHandler}
+            rightIcon={<MdSave />}
+            variant="solid"
+            colorScheme="red"
+          >
+            Delete
+          </Button>
         </ButtonGroup>
       </>
       <div className="ag-theme-alpine" style={{ height: 700 }}>
@@ -296,6 +353,8 @@ export default function HarvestGamesGrid(props) {
           undoRedoCellEditingLimit={undoRedoCellEditingLimit}
           enableCellChangeFlash={enableCellChangeFlash}
           tooltipShowDelay={0}
+          onRowClicked={onRowClicked}
+          rowSelection="single"
         />
       </div>
     </Container>
