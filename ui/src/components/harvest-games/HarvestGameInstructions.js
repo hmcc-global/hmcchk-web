@@ -11,11 +11,12 @@ import {
   Grid,
 } from '@chakra-ui/react';
 import { Text } from '@chakra-ui/layout';
-import { useState, Fragment } from 'react';
+import { useRef, useState, Fragment } from 'react';
 
 import './styles.css';
 
 export default function HarvestGameInstructions() {
+  const ref = useRef(null);
   const gameType = [
     {
       game_num: 'Game #1',
@@ -28,7 +29,7 @@ export default function HarvestGameInstructions() {
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1_2.gif',
       ],
       id: 'game_1',
-      pwd: 'Smuggling',
+      pwd: 'smuggling',
     },
 
     {
@@ -53,7 +54,7 @@ export default function HarvestGameInstructions() {
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg2_4.gif',
       ],
       id: 'game_2',
-      pwd: 'Packing',
+      pwd: 'packing',
     },
 
     {
@@ -68,22 +69,21 @@ export default function HarvestGameInstructions() {
         'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3_3.gif',
       ],
       id: 'game_3',
-      pwd: 'Airplane',
+      pwd: 'airplane',
     },
   ];
 
   const [selected, setSelected] = useState(0);
-  const [password, setPassword] = useState('');
   const [inputValue, setInput] = useState('');
   const [error, setError] = useState(false);
 
   const handleSubmit = () => {
-    let pwd = inputValue;
+    let pwd = inputValue.toLowerCase();
+    console.log(pwd);
     if (pwd !== gameType[selected].pwd) {
       setError(true);
     } else {
       setError(false);
-      setPassword(pwd);
       localStorage.setItem(gameType[selected].id, pwd);
     }
   };
@@ -133,6 +133,7 @@ export default function HarvestGameInstructions() {
       </Container>
       <Box display="flex" justifyContent="center" paddingY="2em" w="100%">
         <Select
+          ref={ref}
           borderWidth="2px"
           w="80%"
           h="3em"
@@ -172,7 +173,7 @@ export default function HarvestGameInstructions() {
           >
             <Box
               borderColor="rgba(8, 86, 131, 1)"
-              borderWidth="7px"
+              borderWidth="4px"
               borderRadius="10px"
               fontWeight={500}
               textColor="rgba(151, 149, 149, 1)"
@@ -200,7 +201,7 @@ export default function HarvestGameInstructions() {
             </Box>
             <Box
               borderColor="rgba(8, 86, 131, 1)"
-              borderWidth="7px"
+              borderWidth="4px"
               borderRadius="10px"
               fontWeight={500}
               textColor="rgba(151, 149, 149, 1)"
@@ -288,9 +289,7 @@ export default function HarvestGameInstructions() {
                     marginX="auto"
                     textAlign="end"
                     paddingBottom="8"
-                  >
-                    {i + 1}
-                  </Box>
+                  ></Box>
                 ))}
             </Grid>
           </VStack>
@@ -343,6 +342,26 @@ export default function HarvestGameInstructions() {
           </Text>
         </VStack>
       )}
+      <Image
+        height={{ base: '13vw', md: '6vw' }}
+        position="sticky"
+        alignSelf="end"
+        bottom="4"
+        display={
+          gameType[selected].pwd === localStorage.getItem(gameType[selected].id)
+            ? 'flex'
+            : 'none'
+        }
+        src={process.env.PUBLIC_URL + '/images/harvest-games/ArrowUp.svg'}
+        style={{ cursor: 'pointer' }}
+        onClick={() =>
+          ref.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest',
+          })
+        }
+      />
     </VStack>
   );
 }
