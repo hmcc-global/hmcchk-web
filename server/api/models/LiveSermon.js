@@ -29,9 +29,6 @@ module.exports = {
     sermonDescription: {
       type: 'string',
     },
-    isPublished: {
-      type: 'boolean',
-    },
     lastUpdatedBy: {
       type: 'string',
     },
