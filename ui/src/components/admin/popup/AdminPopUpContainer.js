@@ -21,6 +21,7 @@ import PopupContainer from './PopupContainer';
 export default function AdminPopUpContainer(props) {
   const toast = useToast();
   const [popUps, setPopUps] = useState([]);
+  const [isPreviewing, setIsPreviewing] = useState(false);
   const [selected, setSelected] = useState();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +56,6 @@ export default function AdminPopUpContainer(props) {
   const getData = useCallback(async () => {
     try {
       const { data } = await axios.get('/api/popup/get');
-      console.log(data);
       if (data) setPopUps(data);
     } catch (err) {
       console.log(err);
@@ -181,26 +181,11 @@ export default function AdminPopUpContainer(props) {
     setPublished(false);
     setDeleted(false);
     setSelected();
+    setIsPreviewing(false);
   };
 
   const previewHandler = () => {
-    // TODO-aparedan: Handle preview
-    const buttonTextsArr =
-      buttonTexts && buttonTexts.length > 0 && buttonTexts.split(',');
-    const buttonLinksArr =
-      buttonLinks && buttonLinks.length > 0 && buttonLinks.split(',');
-    const popup = {
-      flag: published,
-      title: title,
-      image: image,
-      description: desc,
-      buttonText: buttonTextsArr,
-      buttonLink: buttonLinksArr,
-      buttonColor: 'teal',
-    };
-
-    <PopupContainer props={popup} />;
-    console.log(popup);
+    setIsPreviewing(true);
   };
 
   const nameCheck = () => {
@@ -319,6 +304,13 @@ export default function AdminPopUpContainer(props) {
           <PopUpGrid popUps={popUps} setSelected={setSelected} />
         </Box>
       </Stack>
+      {selected && (
+        <PopupContainer
+          popupData={selected}
+          isPreviewing={isPreviewing}
+          setIsPreviewing={setIsPreviewing}
+        />
+      )}
     </Container>
   );
 }

@@ -17,10 +17,13 @@ import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 
-const PopupContainer = ({ props }) => {
-  const popupData = props;
-  const [isOpen, setIsOpen] = useState(true);
+const PopupContainer = ({ popupData, isPreviewing, setIsPreviewing }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    setIsOpen(isPreviewing);
+  }, [isPreviewing]);
   const onClose = () => {
+    setIsPreviewing(false);
     setIsOpen(false);
   };
   return (
@@ -69,8 +72,8 @@ const PopupContainer = ({ props }) => {
             colorScheme="gray"
             alignItems="center"
           >
-            {popupData.buttonText.length > 0 &&
-              popupData.buttonText.map((buttonTextItem, i) => (
+            {popupData.buttonTexts.length > 0 &&
+              popupData.buttonTexts.map((buttonTextItem, i) => (
                 <Button
                   my="1"
                   marginRight={['0', '4']}
@@ -80,7 +83,7 @@ const PopupContainer = ({ props }) => {
                   as={Link}
                   target="_blank"
                   href={
-                    popupData.buttonLink[i] ? popupData.buttonLink[i] : null
+                    popupData.buttonLinks[i] ? popupData.buttonLinks[i] : null
                   }
                   style={{
                     whiteSpace: 'normal',
