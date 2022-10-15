@@ -60,7 +60,7 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
               </b>
             </FormLabel>
             <FormHelperText color="#6A5289">
-              <i>(e.g. I witness God’s ____ through _____)</i>
+              <i>(e.g. I witnessed God’s ____ through _____)</i>
             </FormHelperText>
             <Textarea
               bg="#F1EDF7"
@@ -92,7 +92,7 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
               </b>
             </FormLabel>
             <FormHelperText color="#6A5289">
-              <i>*You may choose to remain annonymous.</i>
+              <i>*You may choose to remain anonymous.</i>
             </FormHelperText>
             <Input
               bg="#F1EDF7"
@@ -117,7 +117,7 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
               <i>
                 We may invite some people to share their testimonies publicly to
                 our church congregation. <br />
-                If you are open to this possible invitation, ple ase leave your
+                If you are open to this possible invitation, please leave your
                 email below for us to contact you.
               </i>
             </FormHelperText>
