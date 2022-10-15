@@ -1,39 +1,50 @@
 module.exports = {
-  friendlyName: 'Get Harvest Games rankings',
+  friendlyName: 'Update Harvest Games Rankings',
 
-  description: 'Get Harvest Games rankings',
+  description: 'Update Harvest Games Rankings',
 
   inputs: {
-    lgRankingId: {
-      required: false,
-      type: 'string',
+    params: {
+      required: true,
+      type: 'json',
     },
   },
 
   exits: {
     success: {
-      description: 'Harvest Games rankings returned successfully',
+      description: 'Rankings have been updated successfully',
     },
     invalid: {
-      description: 'Failed to retrieve Harvest Games rankings',
+      description: 'Failed to update rankings',
+    },
+
+    missingRequiredFields: {
+      statusCode: 409,
+      description: 'Please fill in the required fields.',
     },
   },
 
-  fn: async function ({ lgRankingId }, exits) {
-    try {
-      if (lgRankingId) {
-        let data = await HGRankings.find({ _id: lgRankingId });
-        if (data.length === 0) throw 'HG ranking not found';
-        return exits.success(data);
+  fn: async function ({ params }, exits) {
+    const { id: lgRankingId, ...toUpdate } = params;
+
+    if (lgRankingId) {
+      try {
+        const data = await HGRankings.updateOne({
+          _id: lgRankingId,
+        }).set(toUpdate);
+
+        if (data) {
+          return exits.success(data);
+        }
+        return exits.invalid();
+      } catch (err) {
+        sails.log.error(err);
+        return exits.error(err);
       }
-
-      let data = await HGRankings.find();
-      sails.log.info('Retrieving Harvest Games rankings..');
-
-      return exits.success(data);
-    } catch (err) {
-      sails.log(err);
-      return exits.invalid(err);
     }
+
+    sails.log.error(err);
+    sails.log.error('missingRequiredFields');
+    return exits.invalid();
   },
 };
