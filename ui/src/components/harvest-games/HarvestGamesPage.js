@@ -100,7 +100,6 @@ const HarvestGames = (props) => {
             width="100%"
             height="90%"
           >
-            {' '}
             {/*important so that panels do not overflow*/}
             {/* DESKTOP */}
             <Tabs
@@ -122,18 +121,8 @@ const HarvestGames = (props) => {
                   }}
                 >
                   <Text>Leaderboard</Text>
-                </Tab>
-                <Tab
-                  marginTop="1em"
-                  borderBottom="5px solid #E2E8F0"
-                  _selected={{
-                    borderColor: '#0628A3',
-                    textColor: '#3A6693',
-                    fontWeight: 'bold',
-                  }}
-                >
-                  Pre-Games
-                </Tab> */}
+                </Tab>*/}
+
                 <Tab
                   marginTop="1em"
                   borderBottom="5px solid #E2E8F0"
@@ -156,6 +145,17 @@ const HarvestGames = (props) => {
                 >
                   Game Instructions
                 </Tab>
+                <Tab
+                  marginTop="1em"
+                  borderBottom="5px solid #E2E8F0"
+                  _selected={{
+                    borderColor: '#0628A3',
+                    textColor: '#3A6693',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  Pre-Games
+                </Tab>
               </TabList>
 
               <TabPanels
@@ -163,7 +163,38 @@ const HarvestGames = (props) => {
                 borderRadius={'10'}
                 bottomPadding="50px"
               >
-                {/* <TabPanel height="80vh">
+                {/* <TabPanel minHeight="60vh">
+                  <Center>
+                    <Image
+                      src={`${process.env.PUBLIC_URL}/images/harvest-games/week2-pc.png`}
+                    />
+                  </Center>
+
+                  <Text
+                    fontSize={{ md: '26px', lg: '32px' }}
+                    textAlign="center"
+                    paddingTop="0.75em"
+                  >
+                    Access Week 2 Instructions <br />
+                    PDF by clicking{' '}
+                    <Link
+                      color="teal.500"
+                      href="https://hongkong.sub.hmcc.net/wp-content/uploads/Week-2.pdf"
+                      isExternal
+                    >
+                      here
+                    </Link>
+                    .
+                  </Text>
+                </TabPanel> */}
+
+                <TabPanel height="100vh">
+                  <HarvestGamesLeaderboard />
+                </TabPanel>
+                <TabPanel>
+                  <HarvestGameInstructions />
+                </TabPanel>
+                <TabPanel height="80vh">
                   <Text
                     fontSize={{ md: '26px', lg: '32px' }}
                     textAlign="center"
@@ -235,38 +266,6 @@ const HarvestGames = (props) => {
                     </TableContainer>
                   </Center>
                 </TabPanel>
-
-                <TabPanel minHeight="60vh">
-                  <Center>
-                    <Image
-                      src={`${process.env.PUBLIC_URL}/images/harvest-games/week2-pc.png`}
-                    />
-                  </Center>
-
-                  <Text
-                    fontSize={{ md: '26px', lg: '32px' }}
-                    textAlign="center"
-                    paddingTop="0.75em"
-                  >
-                    Access Week 2 Instructions <br />
-                    PDF by clicking{' '}
-                    <Link
-                      color="teal.500"
-                      href="https://hongkong.sub.hmcc.net/wp-content/uploads/Week-2.pdf"
-                      isExternal
-                    >
-                      here
-                    </Link>
-                    .
-                  </Text>
-                </TabPanel> */}
-
-                <TabPanel height="100vh">
-                  <HarvestGamesLeaderboard />
-                </TabPanel>
-                <TabPanel>
-                  <HarvestGameInstructions />
-                </TabPanel>
               </TabPanels>
             </Tabs>
             {/* MOBILE */}
@@ -289,16 +288,6 @@ const HarvestGames = (props) => {
                 >
                   Leaderboard
                 </Tab> */}
-                {/* <Tab
-                  borderBottom="5px solid #E2E8F0"
-                  _selected={{
-                    borderBottom: '5px solid #0628A3',
-                    textColor: '#3A6693',
-                    fontWeight: 'bold',
-                  }}
-                >
-                  Pre-Games
-                </Tab> */}
                 <Tab
                   borderBottom="5px solid #E2E8F0"
                   _selected={{
@@ -320,10 +309,52 @@ const HarvestGames = (props) => {
                 >
                   Game Instructions
                 </Tab>
+                <Tab
+                  borderBottom="5px solid #E2E8F0"
+                  _selected={{
+                    borderBottom: '5px solid #0628A3',
+                    textColor: '#3A6693',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  Pre-Games
+                </Tab>
               </TabList>
 
               <TabPanels bgColor="none" borderRadius={'0'}>
-                {/* <TabPanel height={{ base: '30em', sm: '40em' }}>
+                {/* <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
+                  <Center>
+                    <Image
+                      w="100%"
+                      src={`${process.env.PUBLIC_URL}/images/harvest-games/week2-mobile.png`}
+                    />
+                  </Center>
+                  <Text
+                    fontSize={{
+                      base: '20px',
+                      sm: '20px',
+                    }}
+                    textAlign="center"
+                  >
+                    Access Week 2 Instructions <br />
+                    PDF by clicking{' '}
+                    <Link
+                      color="teal.500"
+                      href="https://hongkong.sub.hmcc.net/wp-content/uploads/Week-2.pdf"
+                      isExternal
+                    >
+                      here
+                    </Link>
+                    .
+                  </Text>
+                </TabPanel> */}
+                <TabPanel height={{ base: '80vh', sm: '90vh' }}>
+                  <HarvestGamesLeaderboard />
+                </TabPanel>
+                <TabPanel>
+                  <HarvestGameInstructions />
+                </TabPanel>
+                <TabPanel height={{ base: '30em', sm: '40em' }}>
                   <Text
                     fontSize={{
                       base: '20px',
@@ -381,7 +412,20 @@ const HarvestGames = (props) => {
                               crocs
                             </Td>
                           </Tr>
-                          <Tr border="1px" borderColor={'#BFBFBF'}>
+                          <Tr
+                            borderTop="1px solid #BFBFBF"
+                            borderLeft="1px solid #BFBFBF"
+                            borderRight="1px solid #BFBFBF"
+                          >
+                            <Td textAlign={'center'} fontSize={'15'}></Td>
+                            <Td isNumeric textAlign={'center'} fontSize={'15'}>
+                              Fuego
+                            </Td>
+                          </Tr>
+                          <Tr
+                            borderLeft="1px solid #BFBFBF"
+                            borderRight="1px solid #BFBFBF"
+                          >
                             <Td
                               textAlign={'center'}
                               fontSize={'15'}
@@ -390,47 +434,23 @@ const HarvestGames = (props) => {
                               2
                             </Td>
                             <Td isNumeric textAlign={'center'} fontSize={'15'}>
-                              TBA
+                              Dim Sum
+                            </Td>
+                          </Tr>
+                          <Tr
+                            borderLeft="1px solid #BFBFBF"
+                            borderRight="1px solid #BFBFBF"
+                            borderBottom="1px solid #BFBFBF"
+                          >
+                            <Td textAlign={'center'} fontSize={'15'}></Td>
+                            <Td isNumeric textAlign={'center'} fontSize={'15'}>
+                              MA FAM
                             </Td>
                           </Tr>
                         </Tbody>
                       </Table>
                     </TableContainer>
                   </Center>
-                  <HarvestGamesLeaderboard />
-                </TabPanel>
-
-                {/* <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
-                  <Center>
-                    <Image
-                      w="100%"
-                      src={`${process.env.PUBLIC_URL}/images/harvest-games/week2-mobile.png`}
-                    />
-                  </Center>
-                  <Text
-                    fontSize={{
-                      base: '20px',
-                      sm: '20px',
-                    }}
-                    textAlign="center"
-                  >
-                    Access Week 2 Instructions <br />
-                    PDF by clicking{' '}
-                    <Link
-                      color="teal.500"
-                      href="https://hongkong.sub.hmcc.net/wp-content/uploads/Week-2.pdf"
-                      isExternal
-                    >
-                      here
-                    </Link>
-                    .
-                  </Text>
-                </TabPanel> */}
-                <TabPanel height={{ base: '80vh', sm: '90vh' }}>
-                  <HarvestGamesLeaderboard />
-                </TabPanel>
-                <TabPanel>
-                  <HarvestGameInstructions />
                 </TabPanel>
               </TabPanels>
             </Tabs>
