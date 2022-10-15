@@ -36,12 +36,6 @@ module.exports = {
     sermonDescription: {
       type: 'string',
     },
-    isPublished: {
-      type: 'boolean',
-    },
-    lastUpdatedBy: {
-      type: 'string',
-    },
     isDeleted: {
       type: 'boolean',
     },
@@ -68,8 +62,6 @@ module.exports = {
       sermonDate,
       sermonPassage,
       sermonDescription,
-      isPublished,
-      lastUpdatedBy,
       isDeleted,
     },
     exits
@@ -79,19 +71,7 @@ module.exports = {
     sails.log.info(`Title: ${title},  Desc: ${sermonDescription}`);
 
     try {
-      if (isDeleted && isPublished) {
-        isPublished = false;
-      }
-
-      if (isPublished) {
-        res = await LiveSermon.update({ isPublished: true }).set({
-          isPublished: false,
-        });
-      }
-
-      if(!lastUpdatedBy) {
-        lastUpdatedBy = user
-      }
+      let lastUpdatedBy = user
 
       const existing = await LiveSermon.updateOne({ id }).set({
         title,
@@ -102,13 +82,12 @@ module.exports = {
         sermonDate,
         sermonPassage,
         sermonDescription,
-        isPublished,
         lastUpdatedBy,
         isDeleted,
       });
 
       if (!existing) {
-        throw `Name: ${title}, live sermon doesn't exist`;
+        throw `Name: ${title}, with id: ${id} , live sermon doesn't exist`;
       }
 
       return exits.success(existing);

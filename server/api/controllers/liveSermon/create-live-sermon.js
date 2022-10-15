@@ -32,12 +32,6 @@ module.exports = {
     sermonDescription: {
       type: 'string',
     },
-    isPublished: {
-      type: 'boolean',
-    },
-    lastUpdatedBy: {
-      type: 'string',
-    },
   },
 
   exits: {
@@ -56,8 +50,6 @@ module.exports = {
       sermonDate,
       sermonPassage,
       sermonDescription,
-      isPublished,
-      lastUpdatedBy,
     },
     exits
   ) {
@@ -66,16 +58,7 @@ module.exports = {
 
     try {
       let res;
-
-      if (isPublished) {
-        res = await LiveSermon.update({ isPublished: true }).set({
-          isPublished: false,
-        });
-      }
-
-      if(!lastUpdatedBy) {
-        lastUpdatedBy = user
-      }
+      let lastUpdatedBy = user
 
       res = await LiveSermon.create({
         title,
@@ -86,7 +69,6 @@ module.exports = {
         sermonDate,
         sermonPassage,
         sermonDescription,
-        isPublished,
         lastUpdatedBy,
       }).fetch();
 

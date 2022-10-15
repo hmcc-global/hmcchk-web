@@ -41,9 +41,9 @@ module.exports.routes = {
   'get /api/pages/get-pages': 'pages/get-pages',
 
   //Live Semron APIs
-  'post /api/live-sermons/create-live-sermon': 'liveSermon/create-live-sermon',
-  'get /api/live-sermons/get-live-sermon': 'liveSermon/get-live-sermon',
-  'put /api/live-sermons/update-live-sermon': 'liveSermon/update-live-sermon',
+  'post /api/live-sermon/create-live-sermon': 'liveSermon/create-live-sermon',
+  'get /api/live-sermon/get-live-sermon': 'liveSermon/get-live-sermon',
+  'put /api/live-sermon/update-live-sermon': 'liveSermon/update-live-sermon',
 
   // Sermon APIs
   'get /api/sermons/get-sermons': 'sermons/get-sermons',
