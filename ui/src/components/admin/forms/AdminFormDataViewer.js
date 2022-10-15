@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {} from '@chakra-ui/react';
 import { customAxios as axios } from '../../helpers/customAxios';
-import { Heading } from '@chakra-ui/react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { DateTime } from 'luxon';
+import { Button, Heading, Text, Input, HStack } from '@chakra-ui/react';
 
 export default function AdminFormDataViewer(props) {
   const {
@@ -13,10 +12,77 @@ export default function AdminFormDataViewer(props) {
   } = props;
   const formName = state.name;
   const formId = state.id;
+  const [gridApi, setGridApi] = useState();
 
   const [formData, setFormData] = useState([]);
   const [api, setApi] = useState();
   const [flatFormData] = useState([]);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+
+  let lastUpdatedTime = useRef();
+
+  const getFilterType = () => {
+    if (startDate !== '' && endDate !== '') return 'inRange';
+    else if (startDate !== '') return 'greaterThan';
+    else if (endDate !== '') return 'lessThan';
+  };
+
+  const exportHandler = () => {
+    if (api) {
+      api.exportDataAsCsv(exportParams());
+    }
+  };
+  const exportParams = () => {
+    var currentdate = new Date();
+    var datetime =
+      currentdate.getFullYear() +
+      '' +
+      (currentdate.getMonth() + 1) +
+      '' +
+      currentdate.getDate() +
+      '_' +
+      currentdate.getHours() +
+      '-' +
+      currentdate.getMinutes();
+    let fileName = `${formName} [${datetime}].csv`;
+
+    return {
+      skipColumnGroupHeaders: true,
+      allColumns: true,
+      fileName: fileName,
+    };
+  };
+
+  const dateFilterParams = {
+    comparator: function (filterLocalDateAtMidnight, cellValue) {
+      var dateAsString = cellValue;
+
+      if (dateAsString == null) return -1;
+      var dateParts = dateAsString.split('-');
+      dateParts[2] = dateParts[2].split(' ')[0];
+
+      var cellDate = new Date(
+        Number(dateParts[0]),
+        Number(dateParts[1]) - 1,
+        Number(dateParts[2])
+      );
+      console.log(cellDate);
+      if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
+        console.log(cellDate);
+        return 0;
+      }
+      if (cellDate < filterLocalDateAtMidnight) {
+        console.log(cellDate);
+        return -1;
+      }
+      if (cellDate > filterLocalDateAtMidnight) {
+        console.log(cellDate);
+        return 1;
+      }
+    },
+    browserDatePicker: true,
+  };
 
   useEffect(() => {
     const getFormData = async () => {
@@ -33,6 +99,8 @@ export default function AdminFormDataViewer(props) {
           let temp = {};
           temp = item.submissionData;
           var DateTime = new Date(item.updatedAt);
+
+          //format date to: yyy-mm-dd hh:mm:ss
           temp.updatedAt = DateTime.toISOString()
             .replace(/T/, ' ')
             .replace(/\..+/, '');
@@ -44,8 +112,6 @@ export default function AdminFormDataViewer(props) {
             }
             temp['address'] = addressString.join();
           }
-
-          console.log(temp);
           formDataTemp.push(temp);
         });
 
@@ -54,9 +120,26 @@ export default function AdminFormDataViewer(props) {
         console.log(err);
       }
     };
-
     getFormData();
   }, [formId]);
+
+  useEffect(() => {
+    if (gridApi) {
+      console.log(gridApi);
+      if (startDate !== '' && endDate !== '' && startDate > endDate) {
+        alert('Start Date should be before End Date');
+        setEndDate('');
+      } else {
+        var dateFilterComponent = gridApi.api.getFilterInstance('updatedAt');
+        dateFilterComponent.setModel({
+          type: getFilterType(),
+          dateFrom: startDate ? startDate : endDate,
+          dateTo: endDate,
+        });
+        gridApi.api.onFilterChanged();
+      }
+    }
+  }, [startDate, endDate]);
 
   const parseFormData = (ob) => {
     let result = {};
@@ -71,7 +154,6 @@ export default function AdminFormDataViewer(props) {
         result[key] = ob[key];
       }
     }
-    console.log(result);
     return result;
   };
 
@@ -125,8 +207,18 @@ export default function AdminFormDataViewer(props) {
         },
       };
     };
+    const createDateColumn = (key) => {
+      return {
+        headerName: key,
+        field: key,
+        filter: 'agDateColumnFilter',
+        filterParams: dateFilterParams,
+      };
+    };
     const objectClassifier = (key, value) => {
-      if (typeof value === 'string' || key === 'address') {
+      if (key === 'updatedAt') {
+        columnDefs.push(createDateColumn(key));
+      } else if (typeof value === 'string' || key === 'address') {
         columnDefs.push(createStringColumn(key));
       } else if (typeof value === 'number') {
         columnDefs.push(createNumberColumn(key));
@@ -149,6 +241,7 @@ export default function AdminFormDataViewer(props) {
   const onGridReady = (event) => {
     if (event.api) {
       setApi(event.api);
+      setGridApi(event);
     }
   };
 
@@ -158,6 +251,30 @@ export default function AdminFormDataViewer(props) {
         {formName}
       </Heading>
       <div className="ag-theme-alpine" style={{ height: 800, width: '100%' }}>
+        <HStack m="2">
+          <Text>From :</Text>
+          <Input
+            w="12em"
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+          <Text>To :</Text>
+          <Input
+            w="12em"
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+          <Button
+            onClick={exportHandler}
+            variant="outline"
+            mx="2"
+            colorScheme="teal"
+          >
+            Export
+          </Button>
+        </HStack>
         <AgGridReact
           defaultColDef={defaultColDef}
           columnDefs={createColumnDefs()}
