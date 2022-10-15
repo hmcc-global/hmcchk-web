@@ -18,7 +18,8 @@ import TestimonyGrid from './TestimonyGrid';
 
 export default function AdminTestimonyContainer(props) {
   const toast = useToast();
-  //pop up grid data
+
+  //testimonies grid data
   const [testimonies, setTestimonies] = useState([]);
   const [selected, setSelected] = useState();
 

@@ -44,12 +44,12 @@ export default function TestimonyGrid(props) {
 
   // Ag-Grid definitions
   const columnDefs = [
+    { headerName: 'Published', field: 'isPublished' },
+    { headerName: 'Deleted', field: 'isDeleted' },
     { headerName: 'Theme', field: 'theme' },
     { headerName: 'Testimony', field: 'testimony' },
     { headerName: 'Name', field: 'name' },
     { headerName: 'Campus/Lifestage', field: 'lifestage' },
-    { headerName: 'Published', field: 'isPublished' },
-    { headerName: 'Deleted', field: 'isDeleted' },
   ];
 
   const defaultColDef = {

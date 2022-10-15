@@ -54,12 +54,6 @@ module.exports = {
         isPublished = false;
       }
 
-      if (isPublished) {
-        res = await Testimonies.update({ isPublished: true }).set({
-          isPublished: false,
-        });
-      }
-
       const existing = await Testimonies.updateOne({ id }).set({
         theme,
         testimony,
