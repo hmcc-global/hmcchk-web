@@ -18,8 +18,12 @@ const WitnessHomeContainer = (props) => {
     <>
       <Container maxW="100%" m={0} p={0}>
         <Box
-          bgImage={`linear-gradient(0deg, rgba(256, 256, 256), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0)), 
-          url('${process.env.PUBLIC_URL}/images/witness/banner-desktop.png')`}
+          bgImage={[
+            `linear-gradient(0deg, rgba(256, 256, 256), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0)), 
+          url('${process.env.PUBLIC_URL}/images/witness/banner-home-mobile.png')`,
+            `linear-gradient(0deg, rgba(256, 256, 256), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0)), 
+          url('${process.env.PUBLIC_URL}/images/witness/banner-home-desktop.png')`,
+          ]}
           bgPosition="center"
           bgSize="cover"
           textAlign="center"
