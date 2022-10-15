@@ -249,7 +249,20 @@ const HarvestGames = (props) => {
                               crocs
                             </Td>
                           </Tr>
-                          <Tr border="1px" borderColor={'#BFBFBF'}>
+                          <Tr
+                            borderLeft="1px solid #BFBFBF"
+                            borderRight="1px solid #BFBFBF"
+                            borderTop="1px solid #BFBFBF"
+                          >
+                            <Td textAlign={'center'} fontSize={'15'}></Td>
+                            <Td isNumeric textAlign={'center'} fontSize={'15'}>
+                              Fuego
+                            </Td>
+                          </Tr>
+                          <Tr
+                            borderLeft="1px solid #BFBFBF"
+                            borderRight="1px solid #BFBFBF"
+                          >
                             <Td
                               textAlign={'center'}
                               fontSize={'15'}
@@ -258,7 +271,17 @@ const HarvestGames = (props) => {
                               2
                             </Td>
                             <Td isNumeric textAlign={'center'} fontSize={'15'}>
-                              TBA
+                              Dim Sum
+                            </Td>
+                          </Tr>
+                          <Tr
+                            borderLeft="1px solid #BFBFBF"
+                            borderRight="1px solid #BFBFBF"
+                            borderBottom="1px solid #BFBFBF"
+                          >
+                            <Td textAlign={'center'} fontSize={'15'}></Td>
+                            <Td isNumeric textAlign={'center'} fontSize={'15'}>
+                              MA FAM
                             </Td>
                           </Tr>
                         </Tbody>
