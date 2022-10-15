@@ -426,7 +426,7 @@ const HarvestGames = (props) => {
                     .
                   </Text>
                 </TabPanel> */}
-                <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
+                <TabPanel height={{ base: '80vh', sm: '90vh' }}>
                   <HarvestGamesLeaderboard />
                 </TabPanel>
                 <TabPanel>
