@@ -373,7 +373,6 @@ const HarvestGames = (props) => {
                       </Table>
                     </TableContainer>
                   </Center>
-                  <HarvestGamesLeaderboard />
                 </TabPanel>
 
                 <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
