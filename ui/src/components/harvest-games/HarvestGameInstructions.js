@@ -74,16 +74,18 @@ export default function HarvestGameInstructions() {
   ];
 
   const [selected, setSelected] = useState(0);
+  const [password, setPassword] = useState('');
   const [inputValue, setInput] = useState('');
   const [error, setError] = useState(false);
 
   const handleSubmit = () => {
     let pwd = inputValue.toLowerCase();
-    console.log(pwd);
+    pwd = pwd.replace(/\s+/g, '');
     if (pwd !== gameType[selected].pwd) {
       setError(true);
     } else {
       setError(false);
+      setPassword(pwd);
       localStorage.setItem(gameType[selected].id, pwd);
     }
   };
@@ -196,10 +198,11 @@ export default function HarvestGameInstructions() {
                 fontSize={{ base: 'sm', md: '2xl' }}
                 textColor="rgba(61, 61, 61, 1)"
               >
-                Rounds
+                {selected === 0 ? 'Rounds' : 'Sections'}
               </Heading>
             </Box>
             <Box
+              display={selected === 0 ? 'block' : 'none'}
               borderColor="rgba(8, 86, 131, 1)"
               borderWidth="4px"
               borderRadius="10px"
@@ -267,13 +270,7 @@ export default function HarvestGameInstructions() {
               </VStack>
             </Box>
             <Heading paddingX="2">Instructions :</Heading>
-            <Grid
-              w="100%"
-              mt="12"
-              mb="12"
-              templateColumns="repeat(1, 1fr)"
-              gap="2"
-            >
+            <Grid w="100%" mt="12" mb="12" templateColumns="repeat(1, 1fr)">
               {gameType[selected].imageUrl.length > 0 &&
                 gameType[selected].imageUrl.map((url, i) => (
                   <Box
@@ -283,12 +280,11 @@ export default function HarvestGameInstructions() {
                     fontSize={{ base: '60', md: '70' }}
                     textColor="rgba(1, 43, 85, 1)"
                     bgImage={url}
-                    bgSize="contain"
+                    bgSize={{ base: 'cover', md: 'contain' }}
                     bgRepeat="no-repeat"
                     bgPos="center"
                     marginX="auto"
                     textAlign="end"
-                    paddingBottom="8"
                   ></Box>
                 ))}
             </Grid>
@@ -343,7 +339,7 @@ export default function HarvestGameInstructions() {
         </VStack>
       )}
       <Image
-        height={{ base: '20vw', md: '9vw' }}
+        height={{ base: '20vw', md: '9vw', lg: '5vw' }}
         position="sticky"
         bottom="2"
         paddingBottom="7"
