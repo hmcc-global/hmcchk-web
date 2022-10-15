@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import {} from '@chakra-ui/react';
 import { customAxios as axios } from '../../helpers/customAxios';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { Button, Heading, Text, Input, HStack, Box } from '@chakra-ui/react';
+import { DateTime } from 'luxon';
 
 export default function AdminFormDataViewer(props) {
   const {
@@ -12,7 +13,6 @@ export default function AdminFormDataViewer(props) {
   } = props;
   const formName = state.name;
   const formId = state.id;
-  const [gridApi, setGridApi] = useState();
 
   const [formData, setFormData] = useState([]);
   const [api, setApi] = useState();
@@ -31,18 +31,8 @@ export default function AdminFormDataViewer(props) {
     }
   };
   const exportParams = () => {
-    var currentdate = new Date();
-    var datetime =
-      currentdate.getFullYear() +
-      '' +
-      (currentdate.getMonth() + 1) +
-      '' +
-      currentdate.getDate() +
-      '_' +
-      currentdate.getHours() +
-      '-' +
-      currentdate.getMinutes();
-    let fileName = `${formName} [${datetime}].csv`;
+    let now = DateTime.now();
+    let fileName = `${now.toFormat('yyyyMMdd_HHmmss')}_${formName}.csv`;
 
     return {
       skipColumnGroupHeaders: true,
@@ -53,24 +43,18 @@ export default function AdminFormDataViewer(props) {
 
   const dateFilterParams = {
     comparator: function (filterLocalDateAtMidnight, cellValue) {
-      var dateAsString = cellValue;
-
+      let dateAsString = cellValue;
       if (dateAsString == null) return -1;
-      var dateParts = dateAsString.split('-');
-      dateParts[2] = dateParts[2].split(' ')[0];
 
-      var cellDate = new Date(
-        Number(dateParts[0]),
-        Number(dateParts[1]) - 1,
-        Number(dateParts[2])
-      );
-      if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
+      let dateAtMidnight = DateTime.fromJSDate(filterLocalDateAtMidnight);
+      let cellDate = DateTime.fromFormat(dateAsString, 'yyyy-MM-dd HH:mm:ss');
+      if (cellDate === dateAtMidnight) {
         return 1;
       }
-      if (cellDate < filterLocalDateAtMidnight) {
+      if (cellDate < dateAtMidnight) {
         return -1;
       }
-      if (cellDate >= filterLocalDateAtMidnight) {
+      if (cellDate >= dateAtMidnight) {
         return 1;
       }
     },
@@ -91,8 +75,9 @@ export default function AdminFormDataViewer(props) {
           temp = item.submissionData;
 
           //format date to: yyy-mm-dd hh:mm:ss
-          var DateTime = new Date(item.updatedAt);
-          temp.updatedAt = DateTime.toISOString()
+          let dateTimeRaw = DateTime.fromISO(item.updatedAt);
+          temp.updatedAt = dateTimeRaw
+            .toISO()
             .replace(/T/, ' ')
             .replace(/\..+/, '');
 
@@ -115,18 +100,18 @@ export default function AdminFormDataViewer(props) {
   }, [formId]);
 
   useEffect(() => {
-    if (gridApi) {
+    if (api) {
       if (startDate !== '' && endDate !== '' && startDate > endDate) {
         alert('Start Date should be before End Date');
         setEndDate('');
       } else {
-        var dateFilterComponent = gridApi.api.getFilterInstance('updatedAt');
+        let dateFilterComponent = api.getFilterInstance('updatedAt');
         dateFilterComponent.setModel({
           type: getFilterType(),
           dateFrom: startDate ? startDate : endDate,
           dateTo: endDate,
         });
-        gridApi.api.onFilterChanged();
+        api.onFilterChanged();
       }
     }
   }, [startDate, endDate]);
@@ -167,7 +152,7 @@ export default function AdminFormDataViewer(props) {
       };
     };
 
-    const createCategoricalColumn = (key) => {
+    const createBooleanColumn = (key) => {
       return {
         headerName: key,
         field: key,
@@ -188,13 +173,16 @@ export default function AdminFormDataViewer(props) {
     const objectClassifier = (key, value) => {
       if (key === 'updatedAt') {
         columnDefs.push(createDateColumn(key));
-      } else if (typeof value === 'string' || key === 'address') {
+      } else if (typeof value === 'string') {
         columnDefs.push(createStringColumn(key));
       } else if (typeof value === 'number') {
         columnDefs.push(createNumberColumn(key));
       } else if (typeof value === 'boolean') {
-        columnDefs.push(createCategoricalColumn(key, value));
+        columnDefs.push(createBooleanColumn(key, value));
       } else {
+        console.log(
+          'ERROR: unexpected object type, it is not displayed: ' + key
+        );
       }
     };
 
@@ -211,7 +199,6 @@ export default function AdminFormDataViewer(props) {
   const onGridReady = (event) => {
     if (event.api) {
       setApi(event.api);
-      setGridApi(event);
     }
   };
 
@@ -247,7 +234,7 @@ export default function AdminFormDataViewer(props) {
         </HStack>
         <Box my="4">
           <Text color="Teal">
-            *date filter indicates midnight of (eg. from 01/01 00:00 to 02/01
+            *date filter indicates midnight of (eg. from 20/01 00:00 to 21/01
             00:00)
           </Text>
         </Box>
