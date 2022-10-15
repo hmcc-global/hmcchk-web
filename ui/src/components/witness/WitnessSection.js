@@ -15,6 +15,7 @@ const WitnessSection = () => {
   return (
     <Container maxW="100vw" justifyContent="center" display="flex" p={0}>
       <Box
+        w="100vw"
         bgImage={[
           `url('${process.env.PUBLIC_URL}/images/witness/ad-home-mobile.png')`,
           `url('${process.env.PUBLIC_URL}/images/witness/ad-home-desktop.png')`,
@@ -79,7 +80,7 @@ const WitnessSection = () => {
             <Button
               py={[5, 7]}
               fontSize={[17, 24]}
-              w="100%"
+              w={['100%', '80%']}
               bg="#8D2C72"
               color="white"
               _hover={{ bg: 'white', color: '#8D2C72' }}
