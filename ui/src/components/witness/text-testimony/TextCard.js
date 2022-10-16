@@ -50,7 +50,7 @@ const TextCard = ({ textData, allText }) => {
       }}
     >
       <Stack
-        direction={['row', 'column']}
+        direction={['column', 'row']}
         bg={BackgroundColor()}
         borderRadius={10}
       >
@@ -61,20 +61,13 @@ const TextCard = ({ textData, allText }) => {
             </AspectRatio>
           </>
         ) : null}
-        <Box
-          position="relative"
-          paddingLeft={[4, 5]}
-          paddingRight={[4, 5]}
-          paddingBottom={[4, 5]}
-          paddingTop={4}
-          maxW="170px"
-        >
+        <Box position="relative" px={[4, 5]} py={[4, 5]} w={['42vw', '30vw']}>
           <VStack alignItems="left" spacing={2}>
             <HStack>
               {Tags.map((tag) => {
                 return (
                   <Tag
-                    size="md"
+                    size={['md', 'lg']}
                     borderRadius="full"
                     colorScheme="blackAlpha"
                     color="black"
