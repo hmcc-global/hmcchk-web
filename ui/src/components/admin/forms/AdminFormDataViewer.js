@@ -74,12 +74,8 @@ export default function AdminFormDataViewer(props) {
           let temp = {};
           temp = item.submissionData;
 
-          //format date to: yyy-mm-dd hh:mm:ss
           let dateTimeRaw = DateTime.fromISO(item.updatedAt);
-          temp.updatedAt = dateTimeRaw
-            .toISO()
-            .replace(/T/, ' ')
-            .replace(/\..+/, '');
+          temp.updatedAt = dateTimeRaw.toFormat('yyyy-MM-dd HH:mm:ss');
 
           if ('address' in temp) {
             let addressString = [];
@@ -178,7 +174,7 @@ export default function AdminFormDataViewer(props) {
       } else if (typeof value === 'number') {
         columnDefs.push(createNumberColumn(key));
       } else if (typeof value === 'boolean') {
-        columnDefs.push(createBooleanColumn(key, value));
+        columnDefs.push(createBooleanColumn(key));
       } else {
         console.log(
           'ERROR: unexpected object type, it is not displayed: ' + key
