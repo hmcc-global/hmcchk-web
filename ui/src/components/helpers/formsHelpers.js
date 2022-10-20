@@ -75,8 +75,12 @@ const validateForm = async (id, user) => {
       if (!isInRange) {
         if (!beforeEndTime) {
           return {
-            pathname: '/form-unavailable',
-            state: { id: data[0].id },
+            pathname: '/form-is-closed',
+            state: { 
+              id: data[0].id,
+              formName: data[0].formName,
+              availableUntil: formAvailableUntil.toFormat('dd MMM yyyy, HH:mm')
+            },
           };
         } else {
           return {
