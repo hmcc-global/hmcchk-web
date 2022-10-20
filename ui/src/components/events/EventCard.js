@@ -26,7 +26,7 @@ import { ImLocation2 } from "react-icons/im";
 import { useState } from "react";
 import { DateTime } from "luxon";
 import parse, { domToReact, attributesToProps } from "html-react-parser";
-import { generateGoogleCalendarLink, getRenderDate, EndDateElement } from "../helpers/eventsHelpers";
+import { generateGoogleCalendarLink, getRenderDate, EndDateElement, getStartDate } from "../helpers/eventsHelpers";
 
 const EventCard = (props) => {
   const { eventData } = props;
@@ -93,16 +93,7 @@ const EventCard = (props) => {
             <>
               <Text fontSize={['sm', 'lg']} fontWeight="bold">
                 <Icon mr={2} as={RiCalendarEventFill} />
-                Start Date:{' '}
-                {eventData.renderDate
-                  ? eventData.renderDate.toLocaleString(
-                      DateTime.DATE_MED_WITH_WEEKDAY
-                    )
-                  : getRenderDate(
-                      eventData.startDate,
-                      eventData.endDate,
-                      eventData.recurrence
-                    ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
+                Start Date: {getStartDate(eventData)}
               </Text>
               <EndDateElement
                 startDateStr={eventData.startDate}
@@ -193,16 +184,7 @@ const EventCard = (props) => {
                   <>
                     <Text fontSize={['sm', 'md']} fontWeight="bold">
                       <Icon mr={2} as={RiCalendarEventFill} />
-                      Date:{' '}
-                      {eventData.renderDate
-                        ? eventData.renderDate.toLocaleString(
-                            DateTime.DATE_MED_WITH_WEEKDAY
-                          )
-                        : getRenderDate(
-                            eventData.startDate,
-                            eventData.endDate,
-                            eventData.recurrence
-                          ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
+                      Date: {getStartDate(eventData)}
                     </Text>
                     <EndDateElement
                       startDateStr={eventData.startDate}
