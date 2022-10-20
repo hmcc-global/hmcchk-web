@@ -69,6 +69,20 @@ const ErrorPage = (props) => {
       buttonLink: '/',
       buttonText: 'Back to Homepage',
     },
+    'form-is-closed': {
+      type: 'error',
+      primaryText: 
+        (history.location && history.location.state)
+          ? `${history.location.state?.formName} Form unavailable`
+          : null,
+      boldedText:
+        'This form is closed' +
+        (history?.location?.state?.availableUntil !== '' 
+          ? ` at ${history.location.state.availableUntil}`
+          : ''),
+      buttonLink: '/',
+      buttonText: 'Back to Homepage',
+    },
     'form-will-open': {
       type: 'error',
       primaryText: 'Please come back later!',
@@ -111,6 +125,8 @@ const ErrorPage = (props) => {
           return 'need-fill-profile';
         case '/form-unavailable':
           return 'form-unavailable';
+        case '/form-is-closed':
+          return 'form-is-closed';
         case '/form-will-open':
           return 'form-will-open';
         case '/form-success':
