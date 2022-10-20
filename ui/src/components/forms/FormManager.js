@@ -12,13 +12,10 @@ import {
   Badge,
   Stack,
 } from '@chakra-ui/react';
-import FormDataDownloader from './FormDataDownloader';
 import FormEditorContainer from './FormEditorContainer';
 
 const FormManager = (props) => {
   const { user } = props;
-  const [formId, setFormId] = useState(null);
-  const [isDownloaderOpen, setIsDownloaderOpen] = useState(false);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formList, setFormList] = useState([]);
@@ -106,19 +103,19 @@ const FormManager = (props) => {
     }
   };
 
-  const onDownload = async (e) => {
-    setIsDownloaderOpen(true);
-    setFormId(e.target.value);
+  const onClickHandler = (formItem) => {
+    history.push({
+      pathname: '/admin/formViewer',
+      state: {
+        name: formItem.formName,
+        id: formItem.id
+      }
+    });
   };
 
   return (
     <Container maxW="container.xl" pt={10} minH="100vh">
       <Stack spacing="5">
-        <FormDataDownloader
-          isOpen={isDownloaderOpen}
-          setIsOpen={setIsDownloaderOpen}
-          formId={formId}
-        />
         <Heading as="h1" size="xl">
           Form Management System
         </Heading>
@@ -165,10 +162,9 @@ const FormManager = (props) => {
                     </Button>
                     <Button
                       colorScheme="blue"
-                      onClick={onDownload}
-                      value={formItem.id}
+                      onClick={() => onClickHandler(formItem)}
                     >
-                      Download Data
+                      View Data
                     </Button>
                     <Button
                       colorScheme="red"
