@@ -25,7 +25,7 @@ import { BsClockFill } from 'react-icons/bs';
 import { ImLocation2 } from 'react-icons/im';
 import { DateTime } from 'luxon';
 import parse, { domToReact, attributesToProps } from 'html-react-parser';
-import { generateGoogleCalendarLink, getRenderDate, EndDateElement } from '../helpers/eventsHelpers';
+import { generateGoogleCalendarLink, getStartDate, getRenderDate, EndDateElement } from '../helpers/eventsHelpers';
 import { useState } from 'react';
 
 const EventsSectionCard = (props) => {
@@ -148,16 +148,7 @@ const EventsSectionCard = (props) => {
                 <>
                   <Text fontSize={['sm', 'md']} fontWeight="bold">
                     <Icon mr={2} as={RiCalendarEventFill} />
-                    Start Date:{' '}
-                    {event.renderDate
-                      ? event.renderDate.toLocaleString(
-                          DateTime.DATE_MED_WITH_WEEKDAY
-                        )
-                      : getRenderDate(
-                          event.startDate,
-                          event.endDate,
-                          event.recurrence
-                        ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
+                    Start Date: {getStartDate(event)}
                   </Text>
                   <EndDateElement
                     startDateStr={event.startDate}
