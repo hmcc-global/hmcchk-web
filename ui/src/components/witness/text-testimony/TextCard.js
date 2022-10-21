@@ -4,16 +4,14 @@ import {
   Box,
   Image,
   Text,
-  HStack,
   VStack,
   Stack,
   Tag,
+  Wrap,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { DateTime } from 'luxon';
 
-// tag masih ga berfungsi
-// mobile view
 const Background = {
   0: '#EDE2EF',
   1: '#FFD8D8',
@@ -61,23 +59,24 @@ const TextCard = ({ textData, allText }) => {
             </AspectRatio>
           </>
         ) : null}
-        <Box position="relative" px={[4, 5]} py={[4, 5]} w={['42vw', '30vw']}>
+        <Box p={[4]} w={['42vw', '25vw']}>
           <VStack alignItems="left" spacing={2}>
-            <HStack>
+            <Wrap>
               {Tags.map((tag) => {
                 return (
                   <Tag
-                    size={['md', 'lg']}
+                    size={['sm']}
+                    px={2}
                     borderRadius="full"
-                    colorScheme="blackAlpha"
                     color="black"
                     bgColor="white"
+                    textAlign="center"
                   >
                     {tag}
                   </Tag>
                 );
               })}
-            </HStack>
+            </Wrap>
             <Text
               fontSize={{ base: 'sm', md: 'lg' }}
               fontWeight={['600', '800']}
