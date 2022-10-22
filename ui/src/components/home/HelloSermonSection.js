@@ -104,9 +104,9 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
   const [currentSermon, setCurrentSermon] = useState();
   const [isOnline, setIsOnline] = useState(false);
   const currentDate = currentSermon
-    ? DateTime.fromISO(currentSermon.datePreached).toFormat(
-        'EEEE, dd LLLL yyyy'
-      ) + ', 10:00 AM'
+    ? isOnline 
+      ? DateTime.fromISO(currentSermon.sermonDateTime).toFormat('dd MMM yyyy, hh:mm a')
+      : DateTime.fromISO(currentSermon.datePreached).toFormat('EEEE, dd LLLL yyyy')
     : '';
   const getLatestSermon = async () => {
     try {

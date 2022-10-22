@@ -9,7 +9,7 @@ const ErrorPage = (props) => {
   // Add new cases corresponding to the errorPages definition
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
-  const [formOpenTime, setFormOpenTime] = useState(history.location.state.availableAfter)
+  const [formOpenTime, setFormOpenTime] = useState(history.location?.state?.availableAfter);
 
   useEffect(() => {
     const validate = async () => {
@@ -77,8 +77,8 @@ const ErrorPage = (props) => {
           : null,
       boldedText:
         'This form is closed' +
-        (history?.location?.state?.availableUntil !== '' 
-          ? ` at ${history.location.state.availableUntil}`
+        (history.location?.state?.availableUntil !== '' 
+          ? ` at ${history.location?.state?.availableUntil}`
           : ''),
       buttonLink: '/',
       buttonText: 'Back to Homepage',

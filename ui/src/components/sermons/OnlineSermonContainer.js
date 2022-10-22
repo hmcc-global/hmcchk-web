@@ -131,7 +131,7 @@ const OnlineSermonContainer = (props) => {
                         </HStack>
                         <HStack>
                           <Text fontWeight="bold">Passage:</Text>
-                          <Text>{onlineSermon.passage}</Text>
+                          <Text>{onlineSermon.sermonPassage}</Text>
                         </HStack>
                       </Stack>
                     </Box>
