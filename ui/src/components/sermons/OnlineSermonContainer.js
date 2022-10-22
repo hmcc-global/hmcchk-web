@@ -49,11 +49,6 @@ const OnlineSermonContainer = (props) => {
     })();
   }, [getOnlineSermon]);
 
-  useEffect(() => {
-    if (onlineSermon)
-      console.log(onlineSermon);
-  }, [onlineSermon]);
-
   const getSermonDate = () => {
     if (onlineSermon && onlineSermon.datePreached) {
       return DateTime.fromISO(onlineSermon.datePreached).toLocaleString(
