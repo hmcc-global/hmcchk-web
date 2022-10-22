@@ -18,6 +18,9 @@ module.exports = {
     sermonSeries: {
       type: 'string',
     },
+    sermonSeriesUrl: {
+      type: 'string',
+    },
     sermonDateTime: {
       type: 'ref',
       columnType: 'datetime',

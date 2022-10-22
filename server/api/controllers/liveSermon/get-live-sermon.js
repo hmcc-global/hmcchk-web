@@ -8,6 +8,10 @@ module.exports = {
       required: false,
       type: 'string',
     },
+    isPublished: {
+      required: false,
+      type: 'boolean',
+    }
   },
 
   exits: {
@@ -18,20 +22,21 @@ module.exports = {
       description: 'Failed to retrieve live sermon',
     },
   },
-  fn: async function ({ sermonId }, exits) {
+  fn: async function ({ sermonId, isPublished }, exits) {
     try {
       if (sermonId) {
         let data = await LiveSermon.find({
           _id: sermonId,
           isDeleted: false,
+          isPublished
         }).populateAll();
         if (data.length === 0) {
-          throw 'live sermon not found';
+          return exits.success([]);
         }
         return exits.success(data);
       }
 
-      let data = await LiveSermon.find({ isDeleted: false }).sort('updatedAt DESC').populateAll();
+      let data = await LiveSermon.find({ isDeleted: false, isPublished }).sort('updatedAt DESC').populateAll();
       sails.log.info('Retrieving live sermons');
 
       return exits.success(data);

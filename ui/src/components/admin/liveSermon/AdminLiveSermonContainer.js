@@ -32,6 +32,7 @@ export default function AdminLiveSermonContainer(props) {
   const [sermonNotes, setSermonNotes] = useState('');
   const [speaker, setSpeaker] = useState('');
   const [sermonSeries, setSermonSeries] = useState('');
+  const [sermonSeriesUrl, setSermonSeriesUrl] = useState('');
   const [sermonPassage, setSermonPassage] = useState('');
   const [sermonDateTime, setSermonDateTime] = useState('');
   const [isPublished, setIsPublished] = useState(false);
@@ -44,6 +45,7 @@ export default function AdminLiveSermonContainer(props) {
     setSermonNotes(data.sermonNotes);
     setSpeaker(data.speaker);
     setSermonSeries(data.sermonSeries);
+    setSermonSeriesUrl(data.sermonSeriesUrl);
     setSermonPassage(data.sermonPassage);
     setSermonDateTime(data.sermonDateTime);
     setIsPublished(data.isPublished);
@@ -60,6 +62,7 @@ export default function AdminLiveSermonContainer(props) {
         sermonNotes,
         speaker,
         sermonSeries,
+        sermonSeriesUrl,
         sermonPassage,
         sermonDateTime,
         isPublished
@@ -91,6 +94,7 @@ export default function AdminLiveSermonContainer(props) {
         sermonNotes,
         speaker,
         sermonSeries,
+        sermonSeriesUrl,
         sermonPassage,
         sermonDateTime,
         isPublished
@@ -147,6 +151,7 @@ export default function AdminLiveSermonContainer(props) {
     setSermonNotes('');
     setSpeaker('');
     setSermonSeries('');
+    setSermonSeriesUrl('');
     setSermonPassage('');
     setSermonDateTime('');
     setIsPublished(false);
@@ -224,9 +229,13 @@ export default function AdminLiveSermonContainer(props) {
                   <FormLabel>Speaker</FormLabel>
                   <Input type="text" value={speaker} placeholder="e.g. Pastor Bo Zhu, Pastor Seth S. Kim" onChange={(e) => setSpeaker(e.target.value)} />
                 </FormControl>
-                <FormControl>
+                <FormControl isRequired isInvalid={sermonSeries === ''}>
                   <FormLabel>Series</FormLabel>
                   <Input type="text" value={sermonSeries} onChange={(e) => setSermonSeries(e.target.value)} />
+                </FormControl>
+                <FormControl isRequired isInvalid={sermonSeriesUrl === ''}>
+                  <FormLabel>Series Image</FormLabel>
+                  <Input type="url" value={sermonSeriesUrl} onChange={(e) => setSermonSeriesUrl(e.target.value)} />
                 </FormControl>
                 <FormControl>
                   <FormLabel>Sermon Passage</FormLabel>

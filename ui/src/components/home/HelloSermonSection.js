@@ -102,7 +102,7 @@ const HelpCard = (props) => {
 
 const HelloSermonSection = React.forwardRef((props, ref) => {
   const [currentSermon, setCurrentSermon] = useState();
-  const [isSunday, setIsSunday] = useState(false);
+  const [isOnline, setIsOnline] = useState(false);
   const currentDate = currentSermon
     ? DateTime.fromISO(currentSermon.datePreached).toFormat(
         'EEEE, dd LLLL yyyy'
@@ -110,13 +110,22 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
     : '';
   const getLatestSermon = async () => {
     try {
+      const res = await axios.get('/api/live-sermon/get-live-sermon', {
+        params: {
+          isPublished: true,
+        },
+      });
+
+      if (res.status === 200 && res.data && res.data.length !== 0) {
+        setIsOnline(true);
+        setCurrentSermon(res.data[0]);
+        return;
+      }
+
       const { data, status } = await axios.get('/api/sermons/get-sermons');
       if (status === 200) {
         let current = data[0];
         setCurrentSermon(current);
-        if (DateTime.now().toFormat('ccc') === 'Sun') {
-          setIsSunday(true);
-        } else setIsSunday(false);
       } else {
         throw Error('Something went wrong');
       }
@@ -200,7 +209,9 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
                 <Image
                   src={
                     currentSermon
-                      ? currentSermon.sermonSeries[0].image?.sourceUrl
+                      ? isOnline
+                        ? currentSermon.sermonSeriesUrl
+                        : currentSermon.sermonSeries[0].image?.sourceUrl
                       : ''
                   }
                   objectFit="cover"
@@ -217,8 +228,8 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
                   fontWeight={600}
                 >
                   {currentSermon
-                    ? isSunday
-                      ? '[LIVE NOW] ' + currentSermon.sermonSeries[0].name
+                    ? isOnline
+                      ? '[LIVE NOW] ' + currentSermon.title
                       : '' + currentSermon.sermonSeries[0].name
                     : ''}
                 </Heading>
@@ -229,9 +240,6 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
                   fontSize={{ base: '14px', md: '16px' }}
                 >
                   {currentDate}
-                </Text>
-                <Text fontSize={{ base: '12px', md: '14px' }} color="white">
-                  {currentSermon ? currentSermon.sermonDesc : ''}
                 </Text>
               </VStack>
 
@@ -247,9 +255,7 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
                 as={ReactLink}
                 to={{ pathname: '/sermons' }}
               >
-                {isSunday
-                  ? 'Watch Sunday Celebration LIVE'
-                  : 'See All Past Sermons'}
+                {isOnline ? 'Watch HMCC LIVE' : 'See All Past Sermons'}
               </Button>
             </VStack>
           </Box>
