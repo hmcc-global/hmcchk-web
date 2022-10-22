@@ -18,7 +18,7 @@ module.exports = {
     sermonSeries: {
       type: 'string',
     },
-    sermonDate: {
+    sermonDateTime: {
       type: 'ref',
       columnType: 'datetime',
       required: true,
