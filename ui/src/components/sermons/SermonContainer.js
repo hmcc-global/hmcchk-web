@@ -18,19 +18,35 @@ const SermonContainer = (props) => {
     getEvent();
   }, []);
 
+  const checkIfLive = async () => {
+    try {
+      const { data } = await axios.get('/api/live-sermon/get-live-sermon', 
+      {
+        params: {
+          isPublished: true
+        }
+      });
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   const getData = async () => {
     try {
       const { data, status } = await axios.get('/api/sermons/get-sermons');
+      const onlineSermon = await checkIfLive();
+
+
       if (status === 200) {
         setSermons([...data]);
         // we can always assume the first sermon is the latest one since wpfc_sermon API sorts by datePreached
-        let current = data[0]
-        if (
-          current.streamLink &&
-          current.sermonNotes &&
-          current.sermonSeries[0]
-        )
+        let current = data[0];
+        if (onlineSermon && onlineSermon[0]) {
           setOnlineSermon(true);
+          current = onlineSermon[0];
+        }
+
         setCurrentSermon(current);
       } else {
         throw Error('Something went wrong');

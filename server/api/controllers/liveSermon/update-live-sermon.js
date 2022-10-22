@@ -26,6 +26,9 @@ module.exports = {
     sermonSeries: {
       type: 'string',
     },
+    sermonSeriesUrl: {
+      type: 'string',
+    },
     sermonDateTime: {
       type: 'string',
       required: true,
@@ -62,6 +65,7 @@ module.exports = {
       streamLink,
       speaker,
       sermonSeries,
+      sermonSeriesUrl,
       sermonDateTime,
       sermonPassage,
       sermonDescription,
@@ -92,6 +96,7 @@ module.exports = {
         streamLink,
         speaker,
         sermonSeries,
+        sermonSeriesUrl,
         sermonDateTime,
         sermonPassage,
         sermonDescription,
