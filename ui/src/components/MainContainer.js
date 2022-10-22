@@ -218,21 +218,9 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/witness/testimonies"
+          path="/witness/testimonies/videos/:id"
           permissions={['public']}
-          component={WitnessContainer}
-        />
-        <PrivateRoute
-          exact
-          path="/witness/testimonies"
-          permissions={['public']}
-          component={WitnessContainer}
-        />
-        <PrivateRoute
-          exact
-          path="/witness/home"
-          permissions={['public']}
-          component={WitnessHomeContainer}
+          component={VideoDetails}
         />
         <PrivateRoute
           exact
@@ -242,9 +230,9 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/witness/testimonies/videos/:id"
+          path="/witness/home"
           permissions={['public']}
-          component={VideoDetails}
+          component={WitnessHomeContainer}
         />
         <PrivateRoute
           path="/witness/testimonies/text/:id"
@@ -289,7 +277,7 @@ const MainContainer = () => {
           permissions={['t3ch', 'admin', 'stewardship']}
           component={AdminLiveSermonContainer}
         />
-        <PrivateRoute 
+        <PrivateRoute
           exact
           path="/admin/testimony"
           permissions={['t3ch', 'admin', 'stewardship']}
