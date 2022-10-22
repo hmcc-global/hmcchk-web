@@ -48,7 +48,7 @@ const OnlinePageTabs = ({ sermonNotes }) => {
           >
             <RepeatIcon />
           </Button>
-          <Box height="90%" paddingBottom={15}>
+          <Box height="90%" paddingBottom={15} backgroundColor="#F1F1F3">
             <iframe
               key={noteId}
               title="Sermon Notes"

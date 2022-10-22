@@ -17,17 +17,15 @@ import {
   FiUsers,
   FiFileText,
   FiMenu,
-  FiBell
+  FiBell,
+  FiMonitor
 } from 'react-icons/fi';
 
 const LinkItems = [
   { name: 'Home', icon: FiHome, path: '/admin/home' },
   { name: 'Forms', icon: FiFileText, path: '/admin/forms' },
-  {
-    name: 'Users',
-    icon: FiUsers,
-    path: '/admin/users',
-  },
+  { name: 'Live Sermon', icon: FiMonitor, path: '/admin/liveSermon' },
+  { name: 'Users', icon: FiUsers, path: '/admin/users' },
   { name: 'Pop Up', icon: FiBell, path: '/admin/popup' },
 ];
 

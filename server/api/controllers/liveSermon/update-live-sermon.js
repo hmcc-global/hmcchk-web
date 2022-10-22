@@ -26,7 +26,7 @@ module.exports = {
     sermonSeries: {
       type: 'string',
     },
-    sermonDate: {
+    sermonDateTime: {
       type: 'string',
       required: true,
     },
@@ -62,7 +62,7 @@ module.exports = {
       streamLink,
       speaker,
       sermonSeries,
-      sermonDate,
+      sermonDateTime,
       sermonPassage,
       sermonDescription,
       isPublished,
@@ -84,7 +84,7 @@ module.exports = {
           isPublished: false,
         });
       }
-      let lastUpdatedBy = user
+      let lastUpdatedBy = user;
 
       const existing = await LiveSermon.updateOne({ id }).set({
         title,
@@ -92,7 +92,7 @@ module.exports = {
         streamLink,
         speaker,
         sermonSeries,
-        sermonDate,
+        sermonDateTime,
         sermonPassage,
         sermonDescription,
         isPublished,
