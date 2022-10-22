@@ -26,7 +26,6 @@ const SermonCard = ({ sermonData, allSermons }) => {
     process.env.PUBLIC_URL + '/images/sermons/placeholder.svg'
   );
   const [sermonDate, setSermonDate] = useState('');
-  const [onlineSermon, setOnlineSermon] = useState(false);
 
   useEffect(() => {
     if (sermonData) {
@@ -37,7 +36,6 @@ const SermonCard = ({ sermonData, allSermons }) => {
           DateTime.fromISO(sermonData.datePreached).toFormat('LLLL dd, yyyy')
         );
       }
-      setOnlineSermon(sermonData.streamLink !== '');
     }
   }, [sermonData]);
 
@@ -55,7 +53,7 @@ const SermonCard = ({ sermonData, allSermons }) => {
     <Link
       style={sermonCardStyle}
       to={{
-        pathname: (onlineSermon ? '/online' : `/sermons/${sermonData.id}`),
+        pathname: (`/sermons/${sermonData.id}`),
         state: { sermonData: sermonData, allSermons: allSermons },
       }}
     >
@@ -68,23 +66,6 @@ const SermonCard = ({ sermonData, allSermons }) => {
               src={sermonImage}
               objectFit="cover"
             />
-            {onlineSermon && (
-              <Box
-                pr={{ base: '42%', md: '65%' }}
-                pb={{ base: '40%', md: '40%' }}
-              >
-                <HStack
-                  px={{ base: '0', md: '2', lg: '3' }}
-                  color="white"
-                  bg="red.500"
-                  boxShadow="dark-lg"
-                >
-                  <Text fontSize={['xs', 'sm']} fontWeight={'800'} pr="0.5rem">
-                    <CircleIcon /> LIVE
-                  </Text>
-                </HStack>
-              </Box>
-            )}
           </>
         </AspectRatio>
         <Box position="absolute" left="100%" top="50%">

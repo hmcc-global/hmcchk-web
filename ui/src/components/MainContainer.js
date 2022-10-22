@@ -30,6 +30,8 @@ import AdminHome from './admin/AdminHome';
 import AdminUser from './admin/users/AdminUser';
 import FormManager from './forms/FormManager';
 import AdminPopUpContainer from './admin/popup/AdminPopUpContainer';
+import AdminFormDataViewer from './admin/forms/AdminFormDataViewer';
+import AdminLiveSermonContainer from './admin/liveSermon/AdminLiveSermonContainer';
 
 const MainContainer = () => {
   return (
@@ -174,6 +176,7 @@ const MainContainer = () => {
           permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
           component={UserProfileContainer}
         />
+        {/* Admin items */}
         <PrivateRoute
           exact
           path="/clear-cache/"
@@ -194,21 +197,33 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/admin/users"
-          permissions={['admin', 'stewardship']}
-          component={AdminUser}
-        />
-        <PrivateRoute
-          exact
           path="/admin/forms"
           permissions={['t3ch', 'admin', 'stewardship']}
           component={FormManager}
+        />
+        <PrivateRoute 
+          exact
+          path="/admin/formViewer"
+          permissions={['t3ch', 'admin', 'stewardship']}
+          component={AdminFormDataViewer}
+        />
+        <PrivateRoute 
+          exact
+          path="/admin/liveSermon"
+          permissions={['t3ch', 'admin', 'stewardship']}
+          component={AdminLiveSermonContainer}
         />
         <PrivateRoute
           exact
           path="/admin/popup"
           permissions={['t3ch', 'admin', 'stewardship']}
           component={AdminPopUpContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/users"
+          permissions={['admin', 'stewardship']}
+          component={AdminUser}
         />
 
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />

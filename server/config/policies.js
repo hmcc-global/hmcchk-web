@@ -50,11 +50,17 @@ module.exports.policies = {
   // Last Updated
   'lastUpdated/get-last-updated': ['isLoggedIn', 'aboveAdmin'],
 
+  // Live Sermon
+  'liveSermon/get-live-sermon': true,
+  'liveSermon/create-live-sermon': ['isLoggedIn', 'aboveTech'],
+  'liveSermon/update-live-sermon': ['isLoggedIn', 'aboveTech'],
+
   // Media
   'media/*': true,
 
   // Misc
   'misc/get-env': true,
+  'misc/get-current-time': true,
 
   // Pages
   'pages/*': true,

@@ -21,17 +21,19 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
 
   useEffect(() => {
     if (currentSermon) {
+      if (isOnline) {
+        setSermonSeriesName(currentSermon.sermonSeries);
+        setSermonDesc(currentSermon.sermonDescription);
+        setMediaUrl(currentSermon.sermonSeriesUrl);
+        setHeader(headers[1]);
+      } else {
       currentSermon.sermonSeries[0] &&
         setSermonSeriesName(currentSermon.sermonSeries[0].name);
       setSermonDesc(currentSermon.sermonDesc);
-      if (isOnline) {
-        setMediaUrl(currentSermon.sermonSeries[0].image.sourceUrl);
-        setHeader(headers[1]);
-      } else {
-        setMediaUrl(
-          currentSermon.sermonVideoUrl.split("/")[
-            currentSermon.sermonVideoUrl.split("/").length - 1
-          ]
+      setMediaUrl(
+        currentSermon.sermonVideoUrl.split("/")[
+          currentSermon.sermonVideoUrl.split("/").length - 1
+        ]
         );
       }
     }

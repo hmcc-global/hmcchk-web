@@ -21,6 +21,7 @@ module.exports.routes = {
 
   'get /api/cache/refresh-cache': 'cache/refresh-cache',
   'get /api/misc/get-env': 'misc/get-env',
+  'get /api/misc/get-current-time': 'misc/get-current-time',
 
   // Forms APIs
   'get /api/forms/get-form': 'forms/get-form',
@@ -39,6 +40,11 @@ module.exports.routes = {
 
   // Pages APIs
   'get /api/pages/get-pages': 'pages/get-pages',
+
+  //Live Semron APIs
+  'get /api/live-sermon/get-live-sermon': 'liveSermon/get-live-sermon',
+  'post /api/live-sermon/create-live-sermon': 'liveSermon/create-live-sermon',
+  'put /api/live-sermon/update-live-sermon': 'liveSermon/update-live-sermon',
 
   // Sermon APIs
   'get /api/sermons/get-sermons': 'sermons/get-sermons',

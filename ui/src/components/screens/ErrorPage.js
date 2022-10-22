@@ -2,11 +2,40 @@ import { Center, Icon, Text, VStack, Box, Button } from '@chakra-ui/react';
 import { Link, useHistory } from 'react-router-dom';
 import { MdErrorOutline } from 'react-icons/md';
 import { AiFillCheckCircle } from 'react-icons/ai';
-import { DateTime } from 'luxon';
+import { useEffect, useState } from 'react';
+import { validateForm } from '../helpers/formsHelpers';
 
 const ErrorPage = (props) => {
   // Add new cases corresponding to the errorPages definition
   const history = useHistory();
+  const [isLoading, setIsLoading] = useState(true);
+  const [formOpenTime, setFormOpenTime] = useState(history.location.state.availableAfter)
+
+  useEffect(() => {
+    const validate = async () => {
+      const { location: { state } } = history;
+      const { user } = props;
+      if (state && state.id) {
+        const result = await validateForm(state.id, user);
+        if (result.data) {
+          history.push(`/forms/${state.id}`);
+          return;
+        } else if (result.pathname && result.pathname !== history.location.pathname) {
+          history.push({
+            pathname: result.pathname,
+            state: result.state
+          });
+          return;
+        } else if (result.pathname && result.pathname === '/form-will-open') {
+          setFormOpenTime(result.state.availableAfter);
+        }
+      }
+      setIsLoading(false);
+    }
+
+    setIsLoading(true);
+    validate();
+  }, [history, props]);
 
   // Define new pages here
   const errorPages = {
@@ -40,30 +69,47 @@ const ErrorPage = (props) => {
       buttonLink: '/',
       buttonText: 'Back to Homepage',
     },
+    'form-is-closed': {
+      type: 'error',
+      primaryText: 
+        (history.location && history.location.state)
+          ? `${history.location.state?.formName} Form unavailable`
+          : null,
+      boldedText:
+        'This form is closed' +
+        (history?.location?.state?.availableUntil !== '' 
+          ? ` at ${history.location.state.availableUntil}`
+          : ''),
+      buttonLink: '/',
+      buttonText: 'Back to Homepage',
+    },
     'form-will-open': {
       type: 'error',
       primaryText: 'Please come back later!',
       boldedText:
         'This form will open soon.' +
-        (history.location && history.location.state
-          ? ' Check back after ' +
-            history.location.state.availableAfter.toLocaleString(
-              DateTime.DATETIME_MED
-            )
+        (formOpenTime && formOpenTime !== ''
+          ? ' Check back after ' + formOpenTime
           : ''),
       buttonLink: '/',
       buttonText: 'Back to Homepage',
     },
     'form-success': {
       type: 'success',
-      primaryText: null,
+      primaryText: 
+        (history.location && history.location.state)
+          ? `${history.location.state?.formName}`
+          : null,
       boldedText: 'Submitted successfully',
       buttonLink: '/',
       buttonText: 'Back to Homepage',
     },
     'form-success-logged-in': {
       type: 'success',
-      primaryText: null,
+      primaryText: 
+        (history.location && history.location.state)
+          ? `${history.location.state?.formName}`
+          : null,
       boldedText: 'Submitted successfully',
       buttonLink: '/profile',
       buttonText: 'Back to Profile',
@@ -79,6 +125,8 @@ const ErrorPage = (props) => {
           return 'need-fill-profile';
         case '/form-unavailable':
           return 'form-unavailable';
+        case '/form-is-closed':
+          return 'form-is-closed';
         case '/form-will-open':
           return 'form-will-open';
         case '/form-success':
@@ -93,68 +141,72 @@ const ErrorPage = (props) => {
   })();
 
   return (
-    <Box
-      minH="100vh"
-      bgImage={`url(${
-        process.env.PUBLIC_URL + 'images/default-hk-background.jpeg'
-      })`}
-      w="full"
-      bgRepeat="no-repeat"
-      bgAttachment="fixed"
-      bgSize="cover"
-    >
-      <Center pt={['50%', '17%']}>
-        <VStack
-          bgColor="#f7fafc"
-          borderRadius="xl"
-          px={['6', '9']}
-          py={['7']}
-          minW={['95%', '30%']}
-          maxW={['95%', '100%']}
-          spacing="3"
-          textAlign="center"
+    <>
+      { !isLoading &&
+        <Box
+          minH="100vh"
+          bgImage={`url(${
+            process.env.PUBLIC_URL + 'images/default-hk-background.jpeg'
+          })`}
+          w="full"
+          bgRepeat="no-repeat"
+          bgAttachment="fixed"
+          bgSize="cover"
         >
-          <Icon
-            as={
-              errorPages[key].type === 'success'
-                ? AiFillCheckCircle
-                : MdErrorOutline
-            }
-            color={errorPages[key].type === 'success' ? '#4CAF50' : '#F89A9A'}
-            w="8"
-            h="8"
-          />
-          {errorPages[key].primaryText && (
-            <Box color="#656565" fontSize={['sm', 'md']}>
-              {errorPages[key].primaryText.split('\n').map((str, i) => (
-                <Text key={i}>{str}</Text>
-              ))}
-            </Box>
-          )}
-          {errorPages[key].boldedText && (
-            <Text color="#656565" fontWeight="700" fontSize={['sm', 'md']}>
-              {errorPages[key].boldedText}
-            </Text>
-          )}
-          {errorPages[key].buttonLink && (
-            <Button
-              as={Link}
-              to={errorPages[key].buttonLink}
-              borderRadius="lg"
-              bgColor="#0058D2"
-              color="#ffffff"
-              w="100%"
-              fontWeight="700"
-              size="md"
-              fontSize={['sm', 'md']}
-              _hover={{ bgColor: '#0058d2d9' }}
+          <Center pt={['50%', '17%']}>
+            <VStack
+              bgColor="#f7fafc"
+              borderRadius="xl"
+              px={['6', '9']}
+              py={['7']}
+              minW={['95%', '30%']}
+              maxW={['95%', '100%']}
+              spacing="3"
+              textAlign="center"
             >
-              {errorPages[key].buttonText}
-            </Button>
-          )}
-        </VStack>
-      </Center>
-    </Box>
+              <Icon
+                as={
+                  errorPages[key].type === 'success'
+                    ? AiFillCheckCircle
+                    : MdErrorOutline
+                }
+                color={errorPages[key].type === 'success' ? '#4CAF50' : '#F89A9A'}
+                w="8"
+                h="8"
+              />
+              {errorPages[key].primaryText && (
+                <Box color="#656565" fontSize={['sm', 'md']}>
+                  {errorPages[key].primaryText.split('\n').map((str, i) => (
+                    <Text key={i}>{str}</Text>
+                  ))}
+                </Box>
+              )}
+              {errorPages[key].boldedText && (
+                <Text color="#656565" fontWeight="700" fontSize={['sm', 'md']}>
+                  {errorPages[key].boldedText}
+                </Text>
+              )}
+              {errorPages[key].buttonLink && (
+                <Button
+                  as={Link}
+                  to={errorPages[key].buttonLink}
+                  borderRadius="lg"
+                  bgColor="#0058D2"
+                  color="#ffffff"
+                  w="100%"
+                  fontWeight="700"
+                  size="md"
+                  fontSize={['sm', 'md']}
+                  _hover={{ bgColor: '#0058d2d9' }}
+                >
+                  {errorPages[key].buttonText}
+                </Button>
+              )}
+            </VStack>
+          </Center>
+        </Box>
+      }
+    </>
   );
 };
 

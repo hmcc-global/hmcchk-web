@@ -16,10 +16,12 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import PopUpGrid from './PopUpGrid';
+import PopupContainer from './PopupContainer';
 
 export default function AdminPopUpContainer(props) {
   const toast = useToast();
   const [popUps, setPopUps] = useState([]);
+  const [isPreviewing, setIsPreviewing] = useState(false);
   const [selected, setSelected] = useState();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -40,7 +42,7 @@ export default function AdminPopUpContainer(props) {
     }
 
     setButtonTextsStr('');
-  }, [])
+  }, []);
 
   const setButtonLinks = useCallback((v) => {
     if (v && Array.isArray(v)) {
@@ -49,12 +51,11 @@ export default function AdminPopUpContainer(props) {
     }
 
     setButtonLinksStr('');
-  }, [])
+  }, []);
 
   const getData = useCallback(async () => {
     try {
       const { data } = await axios.get('/api/popup/get');
-      console.log(data);
       if (data) setPopUps(data);
     } catch (err) {
       console.log(err);
@@ -72,7 +73,7 @@ export default function AdminPopUpContainer(props) {
       setTitle(selected.title);
       setDesc(selected.description);
       setImage(selected.imageLink);
-      setButtonTexts(selected.buttonTexts)
+      setButtonTexts(selected.buttonTexts);
       setButtonLinks(selected.buttonLinks);
       setPublished(selected.isPublished);
       setDeleted(selected.isDeleted);
@@ -80,14 +81,15 @@ export default function AdminPopUpContainer(props) {
   }, [selected, setButtonLinks, setButtonTexts]);
 
   useEffect(() => {
-    if (deleted)
-      setPublished(false);
+    if (deleted) setPublished(false);
   }, [deleted]);
 
   const updateHandler = async () => {
     try {
-      const buttonTextsArr = buttonTexts && buttonTexts.length > 0 && buttonTexts.split(',');
-      const buttonLinksArr = buttonLinks && buttonLinks.length > 0 && buttonLinks.split(',');
+      const buttonTextsArr =
+        buttonTexts && buttonTexts.length > 0 && buttonTexts.split(',');
+      const buttonLinksArr =
+        buttonLinks && buttonLinks.length > 0 && buttonLinks.split(',');
       const res = await axios.put('/api/popup/update', {
         id,
         name,
@@ -97,26 +99,27 @@ export default function AdminPopUpContainer(props) {
         buttonTexts: buttonTextsArr,
         buttonLinks: buttonLinksArr,
         isPublished: published,
-        isDeleted: deleted
+        isDeleted: deleted,
       });
 
-      if (res.status === 200)
-        return true;
+      if (res.status === 200) return true;
     } catch (e) {
       console.log(e.response);
       toast({
         description: e.response.data,
         status: 'error',
-        duration: 5000
+        duration: 5000,
       });
       return false;
     }
-  }
+  };
 
   const createHandler = async () => {
     try {
-      const buttonTextsArr = buttonTexts && buttonTexts.length > 0 && buttonTexts.split(',');
-      const buttonLinksArr = buttonLinks && buttonLinks.length > 0 && buttonLinks.split(',');
+      const buttonTextsArr =
+        buttonTexts && buttonTexts.length > 0 && buttonTexts.split(',');
+      const buttonLinksArr =
+        buttonLinks && buttonLinks.length > 0 && buttonLinks.split(',');
       const res = await axios.post('/api/popup/create', {
         name,
         title,
@@ -125,7 +128,7 @@ export default function AdminPopUpContainer(props) {
         buttonTexts: buttonTextsArr,
         buttonLinks: buttonLinksArr,
         isPublished: published,
-      })
+      });
 
       if (res.status === 200) {
         const { data } = res;
@@ -137,7 +140,7 @@ export default function AdminPopUpContainer(props) {
       toast({
         description: e.response.data,
         status: 'error',
-        duration: 5000
+        duration: 5000,
       });
       return false;
     }
@@ -145,9 +148,8 @@ export default function AdminPopUpContainer(props) {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    
-    if (!name || name.length === 0 || nameCheck() || buttonLinkCheck())
-      return;
+
+    if (!name || name.length === 0 || nameCheck() || buttonLinkCheck()) return;
 
     setIsLoading(true);
     let success = false;
@@ -161,7 +163,7 @@ export default function AdminPopUpContainer(props) {
       toast({
         description: 'Saved',
         status: 'success',
-        duration: 5000
+        duration: 5000,
       });
       await getData();
     }
@@ -174,20 +176,20 @@ export default function AdminPopUpContainer(props) {
     setTitle('');
     setDesc('');
     setImage('');
-    setButtonTextsStr('')
+    setButtonTextsStr('');
     setButtonLinksStr('');
     setPublished(false);
     setDeleted(false);
-    setSelected()
+    setSelected();
+    setIsPreviewing(false);
   };
 
   const previewHandler = () => {
-    // TODO-aparedan: Handle preview
-    console.log('preview')
-  }
+    setIsPreviewing(true);
+  };
 
   const nameCheck = () => {
-    if (popUps && popUps.some(i => i.id !== id && i.name === name))
+    if (popUps && popUps.some((i) => i.id !== id && i.name === name))
       return true;
 
     return false;
@@ -195,18 +197,16 @@ export default function AdminPopUpContainer(props) {
 
   const buttonLinkCheck = () => {
     if (buttonLinks && buttonLinks.length > 0) {
-      if (!buttonTexts || buttonTexts.length === 0)
-        return true;
-      
+      if (!buttonTexts || buttonTexts.length === 0) return true;
+
       const buttonTextsArr = buttonTexts.split(',');
       const buttonLinksArr = buttonLinks.split(',');
 
-      if (buttonLinksArr.length > buttonTextsArr.length)
-        return true;
+      if (buttonLinksArr.length > buttonTextsArr.length) return true;
     }
 
     return false;
-  }
+  };
 
   return (
     <Container w="100%" maxW="100%">
@@ -223,7 +223,9 @@ export default function AdminPopUpContainer(props) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-              <FormErrorMessage>Another PopUp with the same name already exists</FormErrorMessage>
+              <FormErrorMessage>
+                Another PopUp with the same name already exists
+              </FormErrorMessage>
             </FormControl>
             <FormControl>
               <FormLabel>Title</FormLabel>
@@ -235,32 +237,59 @@ export default function AdminPopUpContainer(props) {
             </FormControl>
             <FormControl>
               <FormLabel>Desc</FormLabel>
-              <Textarea value={desc} onChange={e => setDesc(e.target.value) } />
+              <Textarea
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
+              />
             </FormControl>
             <FormControl>
               <FormLabel>Image URL</FormLabel>
-              <Input type="url" value={image} onChange={e => setImage(e.target.value) } />
+              <Input
+                type="url"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+              />
             </FormControl>
             <FormControl>
               <FormLabel>Button Text</FormLabel>
-              <Input type="text" value={buttonTexts} onChange={e => setButtonTextsStr(e.target.value) } />
+              <Input
+                type="text"
+                value={buttonTexts}
+                onChange={(e) => setButtonTextsStr(e.target.value)}
+              />
             </FormControl>
             <FormControl isInvalid={buttonLinkCheck()}>
               <FormLabel>Button Links</FormLabel>
-              <Input type="text" value={buttonLinks} onChange={e => setButtonLinksStr(e.target.value) } />
-              <FormErrorMessage>Number of button links cannot exceed number of button texts</FormErrorMessage>
+              <Input
+                type="text"
+                value={buttonLinks}
+                onChange={(e) => setButtonLinksStr(e.target.value)}
+              />
+              <FormErrorMessage>
+                Number of button links cannot exceed number of button texts
+              </FormErrorMessage>
             </FormControl>
             <HStack spacing={5} justifyContent="flex-end">
               <FormControl w="auto" isDisabled={deleted}>
-                <Checkbox isChecked={published} onChange={e => setPublished(e.target.checked) } >Publish?</Checkbox>
+                <Checkbox
+                  isChecked={published}
+                  onChange={(e) => setPublished(e.target.checked)}
+                >
+                  Publish?
+                </Checkbox>
               </FormControl>
               <FormControl w="auto">
-                <Checkbox isChecked={deleted} onChange={ e => setDeleted(e.target.checked) } >Delete?</Checkbox>
+                <Checkbox
+                  isChecked={deleted}
+                  onChange={(e) => setDeleted(e.target.checked)}
+                >
+                  Delete?
+                </Checkbox>
               </FormControl>
             </HStack>
             <FormControl mt={5}>
               <Button type="submit" w="full" isLoading={isLoading}>
-                {id && id.length > 0 ? "UPDATE" : "SAVE"}
+                {id && id.length > 0 ? 'UPDATE' : 'SAVE'}
               </Button>
             </FormControl>
             <Button colorScheme="red" w="full" mt={5} onClick={resetHandler}>
@@ -275,6 +304,13 @@ export default function AdminPopUpContainer(props) {
           <PopUpGrid popUps={popUps} setSelected={setSelected} />
         </Box>
       </Stack>
+      {selected && (
+        <PopupContainer
+          popupData={selected}
+          isPreviewing={isPreviewing}
+          setIsPreviewing={setIsPreviewing}
+        />
+      )}
     </Container>
   );
 }
