@@ -11,10 +11,13 @@ import {
   Text,
   Badge,
   Stack,
+  useToast,
 } from '@chakra-ui/react';
 import FormEditorContainer from './FormEditorContainer';
 
 const FormManager = (props) => {
+  const toast = useToast();
+
   const { user } = props;
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -67,6 +70,17 @@ const FormManager = (props) => {
       setIsLoading(false);
     }
   };
+
+  const copyPublicLinkHandler = (e) => {
+    const host = window.location.host;
+    const formId = e.target.value;
+    navigator?.clipboard?.writeText(`${host}/forms/${formId}`);
+    toast({
+      description: 'Public Link Copied to clipboard!',
+      status: 'success',
+      duration: 5000
+    });
+  }
 
   const onClickRedirect = async (e) => {
     history.push('/forms/' + e.target.value);
@@ -155,10 +169,17 @@ const FormManager = (props) => {
                     </Button>
                     <Button
                       colorScheme="blue"
-                      onClick={onClickRedirect}
+                      onClick={copyPublicLinkHandler}
                       value={formItem.id}
                     >
                       Public Link
+                    </Button>
+                    <Button
+                      colorScheme="blue"
+                      onClick={onClickRedirect}
+                      value={formItem.id}
+                    >
+                      View Form
                     </Button>
                     <Button
                       colorScheme="blue"
