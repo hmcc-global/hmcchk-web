@@ -9,6 +9,7 @@ import {
   Link,
   Spacer,
 } from '@chakra-ui/react';
+import { DateTime } from 'luxon';
 
 // Only allow setting field values that are defined here
 const settableDataFields = [
@@ -95,10 +96,47 @@ const updateUserDataRequest = async (data) => {
 };
 
 const getLoginOnlyFormsRequest = async () => {
-  // Hardcoded to true as it is assumed only logged in users can call this function
-  return await axios.get('/api/forms/get-form', {
+  // Hardcoded to true as it is assumed only logged in users can call this function, filter by available time
+  const formData = await axios.get('/api/forms/get-form', {
     params: {},
   });
+  let formDataValid = [];
+
+  const { data: nowIso } = await axios.get('/api/misc/get-current-time');
+  const now = DateTime.fromISO(nowIso);
+
+  formData.data.forEach((element) => {
+    const formAvailableFrom =
+      element.formAvailableFrom &&
+      DateTime.fromISO(element.formAvailableFrom).setZone('Asia/Hong_Kong');
+    const formAvailableUntil =
+      element.formAvailableUntil &&
+      DateTime.fromISO(element.formAvailableUntil).setZone('Asia/Hong_Kong');
+
+    // One of these values are set
+    if (formAvailableFrom.isValid || formAvailableUntil.isValid) {
+      // If form available from is set & valid, check if current time is
+      // after formAvailableFrom
+      let afterStartTime = formAvailableFrom.isValid
+        ? now >= formAvailableFrom
+        : true;
+
+      // Compound checking: if form available until:
+      // is valid: check if it's within the time of form availability
+      // is not valid: default to whatever value was already there
+      let beforeEndTime = formAvailableUntil.isValid
+        ? now < formAvailableUntil
+        : true;
+      let isInRange = afterStartTime && beforeEndTime;
+
+      if (isInRange) {
+        formDataValid.push(element);
+      }
+    } else {
+      formDataValid.push(element);
+    }
+  });
+  return { data: formDataValid, status: formData.status };
 };
 
 const signUpButton = {
