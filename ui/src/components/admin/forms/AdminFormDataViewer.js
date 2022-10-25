@@ -4,7 +4,6 @@ import { customAxios as axios } from '../../helpers/customAxios';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import 'ag-grid-enterprise';
 import { Button, Heading, Text, Input, HStack, Box } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 
