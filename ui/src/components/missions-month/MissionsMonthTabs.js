@@ -15,25 +15,35 @@ export default function MissionMonthTabs() {
     <Tabs isFitted="enclosed" orientation="horizontal">
       <TabList justifyContent="center">
         <Tab
-          borderBottom="5px solid #E2E8F0"
+          borderBottom="5px solid"
+          borderBottomColor="#CAD9F4"
+          fontWeight="700"
+          textColor="#CAD9F4"
+          line-height="108.2%"
+          fontFamily="Lexend Deca"
           _selected={{
-            borderBottom: '5px solid #0628A3',
-            textColor: '#3A6693',
-            fontWeight: 'bold',
+            borderBottom: '5px solid #325EAE',
+            textColor: '#325EAE',
+            fontWeight: '700',
           }}
         >
-          Details
+          DETAILS
         </Tab>
 
         <Tab
-          borderBottom="5px solid #E2E8F0"
+          borderBottom="5px solid"
+          borderBottomColor="#CAD9F4"
+          fontWeight="700"
+          textColor="#CAD9F4"
+          line-height="108.2%"
+          fontFamily="Lexend Deca"
           _selected={{
-            borderBottom: '5px solid #0628A3',
-            textColor: '#3A6693',
-            fontWeight: 'bold',
+            borderBottom: '5px solid #325EAE',
+            textColor: '#325EAE',
+            fontWeight: '700',
           }}
         >
-          Resources
+          RESOURCES
         </Tab>
       </TabList>
       <TabPanels>
