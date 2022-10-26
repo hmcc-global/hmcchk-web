@@ -37,6 +37,7 @@ import VideoDetails from './witness/video-testimony/VideoDetails';
 import WitnessHomeContainer from './witness/WitnessHomeContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import TextDetails from './witness/text-testimony/TextDetails';
+import MissionsMonthContainer from './missions-month/MissionsMonthContainer';
 
 const MainContainer = () => {
   return (
@@ -157,6 +158,12 @@ const MainContainer = () => {
           path="/about-us"
           permissions={['public']}
           component={AboutUsContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/missions-month"
+          permissions={['public']}
+          component={MissionsMonthContainer}
         />
         <PrivateRoute
           exact
