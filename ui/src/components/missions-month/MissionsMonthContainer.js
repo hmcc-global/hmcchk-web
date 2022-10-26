@@ -1,11 +1,16 @@
-import {Flex} from "@chakra-ui/react"
+import { Container, Flex, VStack } from '@chakra-ui/react';
+
+import MissionTab from './MissionsMonthTabs';
 
 const MissionsMonthContainer = () => {
-  return(
-    <Flex direction="column">
-      <p>Tabs container</p>
-    </Flex>
-  )
-}
+  return (
+    <VStack width="100%">
+      <Container minH="100px">Top</Container>
+      <Container minW="100%">
+        <MissionTab />
+      </Container>
+    </VStack>
+  );
+};
 
-export default MissionsMonthContainer
+export default MissionsMonthContainer;
