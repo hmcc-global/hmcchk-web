@@ -1,15 +1,19 @@
-import { Container, Flex, VStack } from '@chakra-ui/react';
-
-import MissionTab from './MissionsMonthTabs';
+import { Flex, Container } from '@chakra-ui/react';
+import MissionsMonthHero from './MissionsMonthHero';
+import MissionsMonthVerse from './MissionsMonthVerse';
+import MissionsMonthVideo from './MissionsMonthVideo';
+import MissionTab from "./MissionsMonthTabs";
 
 const MissionsMonthContainer = () => {
   return (
-    <VStack width="100%">
-      <Container minH="100px">Top</Container>
+    <Flex direction="column">
+      <MissionsMonthHero />
+      <MissionsMonthVerse />
+      <MissionsMonthVideo />
       <Container minW="100%">
         <MissionTab />
       </Container>
-    </VStack>
+    </Flex>
   );
 };
 
