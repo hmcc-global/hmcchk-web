@@ -30,6 +30,7 @@ import AdminHome from './admin/AdminHome';
 import AdminUser from './admin/users/AdminUser';
 import FormManager from './forms/FormManager';
 import AdminPopUpContainer from './admin/popup/AdminPopUpContainer';
+import MissionsMonthContainer from './missions-month/MissionsMonthContainer';
 
 const MainContainer = () => {
   return (
@@ -143,6 +144,12 @@ const MainContainer = () => {
           path="/about-us"
           permissions={['public']}
           component={AboutUsContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/missions-month"
+          permissions={['public']}
+          component={MissionsMonthContainer}
         />
         <PrivateRoute
           exact
