@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "eslint": "5.16.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.12"
   },
   "scripts": {
     "start": "NODE_ENV=production node app.js",
