@@ -10,8 +10,6 @@ import {
   VStack,
 } from '@chakra-ui/react';
 
-
-
 export default function MissionMonthTabs() {
   return (
     <Tabs isFitted="enclosed" orientation="horizontal">
