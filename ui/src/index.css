@@ -25,9 +25,18 @@ code {
   font-family: 'Manrope';
   src: local('Manrope'), url('./font/Manrope.ttf') format('truetype');
   font-weight: normal;
+}
 
+@font-face {
   font-family: 'Lexend Deca';
   src: local('Lexend Deca'),
     url('./font/LexendDecaRegular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face{
+  font-family: 'Akshar';
+  src: local('Akshar'),
+    url('./font/Akshar-Regular.ttf') format('truetype');
   font-weight: normal;
 }
