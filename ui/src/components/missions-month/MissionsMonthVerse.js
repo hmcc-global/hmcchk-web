@@ -34,12 +34,14 @@ const MissionsMonthVerse = () => {
               color="#FE6F3A"
               fontSize={{ base: '24px', md: '48px' }}
               fontWeight={600}
+              fontFamily= 'Akshar'
             >
               Acts 4:12
             </Heading>
             <Text
               style={{ textAlign: 'center' }}
               fontSize={{ base: '12px', md: '16px' }}
+              fontFamily= 'Lexend Deca'
             >
               {verse}
             </Text>
