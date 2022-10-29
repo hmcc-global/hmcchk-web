@@ -210,15 +210,13 @@ export default function MissionMonthTabs() {
           </Container>
         </TabPanel>
         <TabPanel w="100%">
-          {/* Write your code your for resources */}
-
           <Container minWidth="100%" bg="#FFDBCE" margin="0px">
             <Box
               padding="2"
               color="#00328D"
               w="100%"
               fontFamily="Akshar"
-              fontSize={{ base: '20px', md: '28px' }}
+              fontSize={{ base: '5vw', md: '4vw', lg: '2.5vw' }}
               fontWeight="1000"
               textAlign="center"
               letterSpacing="3px"
@@ -264,7 +262,7 @@ export default function MissionMonthTabs() {
               color="#00328D"
               w="100%"
               fontFamily="Akshar"
-              fontSize={{ base: '20px', md: '28px' }}
+              fontSize={{ base: '5vw', md: '4vw', lg: '2.5vw' }}
               fontWeight="1000"
               textAlign="center"
               letterSpacing="3px"
