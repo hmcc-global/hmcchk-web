@@ -28,7 +28,7 @@ const MissionsMonthVideo = () => {
       >
         <Stack
           direction={{ base: 'column', md: 'row' }}
-          spacing={{ base: 8, md: 2 }}
+          spacing={{ base: 8, md: 6 }}
         >
           <Stack
             direction="column"
@@ -51,6 +51,7 @@ const MissionsMonthVideo = () => {
             <Text
               style={{ textAlign: 'center' }}
               fontSize={{ base: '12px', md: '16px' }}
+              fontFamily= 'Lexend Deca'
             >
               {missionsDesc}
             </Text>

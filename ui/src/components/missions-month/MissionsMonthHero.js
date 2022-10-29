@@ -61,11 +61,25 @@ const MissionsMonthHero = () => {
                   color: 'white',
                   letterSpacing: '0.165em',
                   textShadow: '0px 0px 8.46154px rgba(0, 0, 0, 0.6)',
+                  fontFamily: 'Akshar',
+                  fontSize: '24px',
+                  lineHeight:"33px"
                 }}
               >
                 {heroDesc1}
               </Text>
-              <Text style={{ color: 'white' }}>{heroDesc2}</Text>
+              <Text
+                style={{
+                  color: 'white',
+                  letterSpacing: '0.165em',
+                  textShadow: '0px 0px 8.46154px rgba(0, 0, 0, 0.6)',
+                  fontFamily: 'Akshar',
+                  fontSize: '24px',
+                  lineHeight:"33px"
+                }}
+              >
+                {heroDesc2}
+              </Text>
             </Box>
           </Stack>
         </Container>
@@ -92,12 +106,15 @@ const MissionsMonthHero = () => {
               fontWeight={{ base: 700, md: 600 }}
               color="#00328D"
               fontSize={{ base: '24px', md: '48px' }}
+              fontFamily="Akshar"
+              letterSpacing="0.1em"
             >
               WHAT IS MISSIONS MONTH?
             </Text>
             <Text
               style={{ textAlign: 'center' }}
               fontSize={{ base: '12px', md: '16px' }}
+              fontFamily="Lexend Deca"
             >
               {missionsDesc}
             </Text>
