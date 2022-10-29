@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {} from '@chakra-ui/react';
 import { customAxios as axios } from '../../helpers/customAxios';
 import { AgGridReact } from 'ag-grid-react';
@@ -20,11 +20,11 @@ export default function AdminFormDataViewer(props) {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
-  const getFilterType = () => {
+  const getFilterType = useCallback(() => {
     if (startDate !== '' && endDate !== '') return 'inRange';
     else if (startDate !== '') return 'greaterThan';
     else if (endDate !== '') return 'lessThan';
-  };
+  }, [endDate, startDate]);
 
   const exportHandler = () => {
     if (api) {
@@ -111,7 +111,7 @@ export default function AdminFormDataViewer(props) {
         api.onFilterChanged();
       }
     }
-  }, [startDate, endDate]);
+  }, [startDate, endDate, api, getFilterType]);
 
   useEffect(() => {
     if (api) {
