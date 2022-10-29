@@ -212,7 +212,7 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
                     currentSermon
                       ? isOnline
                         ? currentSermon.sermonSeriesUrl
-                        : currentSermon.sermonSeries[0].image.sourceUrl
+                        : currentSermon.sermonSeries[0].image?.sourceUrl
                       : ''
                   }
                   objectFit="cover"
