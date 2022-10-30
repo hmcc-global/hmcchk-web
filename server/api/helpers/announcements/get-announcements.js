@@ -59,10 +59,13 @@ module.exports = {
 
     sails.log.info(`Getting all announcements..`);
 
-    const url = sails.config.custom.announcements.host;
+    const url = sails.config.custom.posts.host;
 
     try {
-      const data = await sails.helpers.getData(url);
+      const data = await sails.helpers.getData(url, {
+        // 2 is the category id for Announcements in WP
+        categories: 2
+      });
       let transformedAnnouncements = data.map((s) => transformAnnouncement(s));
 
       if (transformedAnnouncements.length > 0) {

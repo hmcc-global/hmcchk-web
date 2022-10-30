@@ -74,8 +74,8 @@ export default function AdminFormDataViewer(props) {
           let temp = {};
           temp = item.submissionData;
 
-          let dateTimeRaw = DateTime.fromISO(item.updatedAt);
-          temp.updatedAt = dateTimeRaw.toFormat('yyyy-MM-dd HH:mm:ss');
+          let dateTimeRaw = DateTime.fromISO(item.createdAt);
+          temp['_submissionTime'] = dateTimeRaw.toFormat('yyyy-MM-dd HH:mm:ss');
 
           if ('address' in temp) {
             let addressString = [];
@@ -101,7 +101,7 @@ export default function AdminFormDataViewer(props) {
         alert('Start Date should be before End Date');
         setEndDate('');
       } else {
-        let dateFilterComponent = api.getFilterInstance('updatedAt');
+        let dateFilterComponent = api.getFilterInstance('_submissionTime');
         dateFilterComponent.setModel({
           type: getFilterType(),
           dateFrom: startDate ? startDate : endDate,
@@ -123,7 +123,6 @@ export default function AdminFormDataViewer(props) {
   }, [formData, api]);
 
   const defaultColDef = {
-    editable: true,
     sortable: true,
     resizable: true,
     filter: true,
@@ -131,8 +130,6 @@ export default function AdminFormDataViewer(props) {
   };
 
   const createColumnDefs = () => {
-    let columnDefs = [];
-
     const createStringColumn = (key) => {
       return {
         headerName: key,
@@ -158,17 +155,21 @@ export default function AdminFormDataViewer(props) {
         },
       };
     };
-    const createDateColumn = (key) => {
-      return {
-        headerName: key,
-        field: key,
-        filter: 'agDateColumnFilter',
-        filterParams: dateFilterParams,
-      };
-    };
+    // const createDateColumn = (key) => {
+    //   return {
+    //     headerName: key,
+    //     field: key,
+    //     filter: 'agDateColumnFilter',
+    //     filterParams: dateFilterParams,
+    //   };
+    // };
+    let columnDefs = [
+      { headerName: '_submissionTime', field: '_submissionTime', filter: 'agDateColumnFilter', filterParams: dateFilterParams, sort: 'asc' }
+    ];
+
     const objectClassifier = (key, value) => {
-      if (key === 'updatedAt') {
-        columnDefs.push(createDateColumn(key));
+      if (key === '_submissionTime') {
+        return;
       } else if (typeof value === 'string') {
         columnDefs.push(createStringColumn(key));
       } else if (typeof value === 'number') {
@@ -240,6 +241,7 @@ export default function AdminFormDataViewer(props) {
           enterMovesDownAfterEdit={true}
           onGridReady={onGridReady}
           stopEditingWhenCellsLoseFocus={true}
+          rowSelection='multiple'
           tooltipShowDelay={0}
         />
       </div>

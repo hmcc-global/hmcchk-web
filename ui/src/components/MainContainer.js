@@ -32,6 +32,11 @@ import FormManager from './forms/FormManager';
 import AdminPopUpContainer from './admin/popup/AdminPopUpContainer';
 import AdminFormDataViewer from './admin/forms/AdminFormDataViewer';
 import AdminLiveSermonContainer from './admin/liveSermon/AdminLiveSermonContainer';
+import WitnessContainer from './witness/WitnessContainer';
+import VideoDetails from './witness/video-testimony/VideoDetails';
+import WitnessHomeContainer from './witness/WitnessHomeContainer';
+import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
+import TextDetails from './witness/text-testimony/TextDetails';
 
 const MainContainer = () => {
   return (
@@ -113,7 +118,14 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/forms/:id"
-          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
+          permissions={[
+            'unsigned',
+            'signed',
+            'alumni',
+            't3ch',
+            'admin',
+            'stewardship',
+          ]}
           component={UserFormContainer}
         />
         <PrivateRoute
@@ -155,27 +167,79 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/complete-profile"
-          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
+          permissions={[
+            'unsigned',
+            'signed',
+            'alumni',
+            't3ch',
+            'admin',
+            'stewardship',
+          ]}
           component={CompleteUserProfileContainer}
         />
         <PrivateRoute
           exact
           path="/profile"
-          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
+          permissions={[
+            'unsigned',
+            'signed',
+            'alumni',
+            't3ch',
+            'admin',
+            'stewardship',
+          ]}
           component={UserProfileContainer}
         />
         <PrivateRoute
           exact
           path="/complete-profile"
-          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
+          permissions={[
+            'unsigned',
+            'signed',
+            'alumni',
+            't3ch',
+            'admin',
+            'stewardship',
+          ]}
           component={CompleteUserProfileContainer}
         />
         <PrivateRoute
           exact
           path="/profile"
-          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
+          permissions={[
+            'unsigned',
+            'signed',
+            'alumni',
+            't3ch',
+            'admin',
+            'stewardship',
+          ]}
           component={UserProfileContainer}
         />
+        <PrivateRoute
+          exact
+          path="/witness/testimonies/videos/:id"
+          permissions={['public']}
+          component={VideoDetails}
+        />
+        <PrivateRoute
+          exact
+          path="/witness/testimonies/:resource?"
+          permissions={['public']}
+          component={WitnessContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/witness/home"
+          permissions={['public']}
+          component={WitnessHomeContainer}
+        />
+        <PrivateRoute
+          path="/witness/testimonies/text/:id"
+          permissions={['public']}
+          component={TextDetails}
+        />
+
         {/* Admin items */}
         <PrivateRoute
           exact
@@ -215,6 +279,12 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
+          path="/admin/testimony"
+          permissions={['t3ch', 'admin', 'stewardship']}
+          component={AdminTestimonyContainer}
+        />
+        <PrivateRoute
+          exact
           path="/admin/popup"
           permissions={['t3ch', 'admin', 'stewardship']}
           component={AdminPopUpContainer}
@@ -225,7 +295,7 @@ const MainContainer = () => {
           permissions={['admin', 'stewardship']}
           component={AdminUser}
         />
-
+        
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
       <FooterContainer />

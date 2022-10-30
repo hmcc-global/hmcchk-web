@@ -38,6 +38,9 @@ module.exports.routes = {
   // Announcement APIs
   'get /api/announcements/get-announcements': 'announcements/get-announcements',
 
+  // Witness Video APIs
+  'get /api/witness/get-witness-videos': 'witness/get-witness-videos',
+
   // Pages APIs
   'get /api/pages/get-pages': 'pages/get-pages',
 
@@ -93,6 +96,12 @@ module.exports.routes = {
   'get /api/popup/get-published': 'popup/get-published-popup',
   'post /api/popup/create': 'popup/create-popup',
   'put /api/popup/update': 'popup/update-popup',
+
+  // Testimonies APIs
+  'get /api/testimony/get': 'testimonies/get-testimonies',
+  'get /api/testimony/get-published': 'testimonies/get-published-testimonies',
+  'post /api/testimony/create': 'testimonies/create-testimonies',
+  'put /api/testimony/update': 'testimonies/update-testimonies',
 
   // UI
   'get /*': {
