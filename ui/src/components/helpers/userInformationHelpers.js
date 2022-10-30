@@ -126,14 +126,8 @@ const generatePublishedFormLinks = (forms) => {
                 fontWeight="700"
                 textAlign="left"
               >
-                <Image
-                  src={item['formImage']}
-                  fit="cover"
-                  h={['4rem', '3rem', '4rem', '5rem', '6rem']}
-                  w={['8rem', '6rem', '8rem', '10rem', '12rem']}
-                />
-
-                <Text margin="0px 15px">{item['formName']}</Text>
+                <Image src={item['formImage']} fit="cover" h="18%" w="35%" />
+                <Text margin="15px">{item['formName']}</Text>
                 <Spacer />
                 <Link
                   href={`/forms/${item['id']}`}

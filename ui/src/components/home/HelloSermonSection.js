@@ -104,17 +104,20 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
   const [currentSermon, setCurrentSermon] = useState();
   const [isOnline, setIsOnline] = useState(false);
   const currentDate = currentSermon
-    ? isOnline 
-      ? DateTime.fromISO(currentSermon.sermonDateTime).toFormat('dd MMM yyyy, hh:mm a')
-      : DateTime.fromISO(currentSermon.datePreached).toFormat('EEEE, dd LLLL yyyy')
+    ? isOnline
+      ? DateTime.fromISO(currentSermon.sermonDateTime).toFormat(
+          'dd MMM yyyy, hh:mm a'
+        )
+      : DateTime.fromISO(currentSermon.datePreached).toFormat(
+          'EEEE, dd LLLL yyyy'
+        )
     : '';
   const getLatestSermon = async () => {
     try {
-      const res = await axios.get('/api/live-sermon/get-live-sermon', 
-      {
+      const res = await axios.get('/api/live-sermon/get-live-sermon', {
         params: {
-          isPublished: true
-        }
+          isPublished: true,
+        },
       });
 
       if (res.status === 200 && res.data && res.data.length !== 0) {
@@ -212,7 +215,7 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
                     currentSermon
                       ? isOnline
                         ? currentSermon.sermonSeriesUrl
-                        : currentSermon.sermonSeries[0].image.sourceUrl
+                        : currentSermon.sermonSeries[0].image?.sourceUrl
                       : ''
                   }
                   objectFit="cover"
@@ -256,9 +259,7 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
                 as={ReactLink}
                 to={{ pathname: '/sermons' }}
               >
-                {isOnline
-                  ? 'Watch HMCC LIVE'
-                  : 'See All Past Sermons'}
+                {isOnline ? 'Watch HMCC LIVE' : 'See All Past Sermons'}
               </Button>
             </VStack>
           </Box>
