@@ -78,7 +78,7 @@ const ErrorPage = (props) => {
       boldedText:
         'This form is closed' +
         (history.location?.state?.availableUntil !== '' 
-          ? ` at ${history.location.state?.availableUntil}`
+          ? ` at ${history.location?.state?.availableUntil}`
           : ''),
       buttonLink: '/',
       buttonText: 'Back to Homepage',
