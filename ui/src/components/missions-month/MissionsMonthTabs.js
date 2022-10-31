@@ -194,19 +194,93 @@ export default function MissionMonthTabs() {
           </Container>
           <Container
             marginTop="10"
+            minW={{ md: '80%', xl: '60%' }}
             marginBottom="10rem"
             display={{ base: 'none', md: 'flex' }}
-            justifyContent="center"
+            flexDirection="row"
           >
-            <Image src={process.env.PUBLIC_URL + 'images/mission-month1.png'} />
+            <Image
+              width={{ md: '35%', xl: '30%' }}
+              height={{ md: 'auto', xl: '30%' }}
+              src={process.env.PUBLIC_URL + 'images/mission_month.png'}
+              marginRight="5"
+            />
+            <VStack alignItems="start" fontWeight="700" fontFamily="Akshar">
+              <Box
+                marginTop="3"
+                textColor="#434347"
+                fontSize={{ md: '2.5vw', xl: '2vw' }}
+                letterSpacing="0.1em"
+                lineHeight="0.2"
+              >
+                Guest Speaker
+              </Box>
+              <Box
+                textColor="#434347"
+                fontSize={{ md: '3.5vw', xl: '3vw' }}
+                letterSpacing="0.1em"
+              >
+                Dr. Andrew Loke
+              </Box>
+              <Box
+                fontSize={{ md: '1.5vw', xl: '1vw' }}
+                letterSpacing="0"
+                lineHeight="1.8"
+                fontWeight="400"
+                fontFamily="Lexend Deca"
+                textColor="#000000"
+              >
+                &bull; Associate Professor in the Department of Religion and
+                Philosophy at Hong Kong Baptist University
+                <br />
+                &bull; Worked as medical doctor for 7 years before completing
+                Ph.D. in Theology <br />
+                &bull; Published multiple books and articles in the fields of
+                theology, philosophy of religion, and science and religion
+              </Box>
+            </VStack>
           </Container>
           <Container
             marginTop="10"
             marginBottom="10rem"
             display={{ base: 'flex', md: 'none' }}
-            justifyContent="center"
+            flexDir="column"
+            alignItems="center"
+            fontFamily="Akshar"
+            letterSpacing="0.2em"
+            fontWeight="700"
           >
-            <Image src={process.env.PUBLIC_URL + 'images/mission-month2.png'} />
+            <Box
+              textColor="#434347"
+              fontSize="5.5vw"
+              letterSpacing="0.1em"
+              lineHeight="3"
+            >
+              Guest Speaker
+            </Box>
+            <Box textColor="#434347" fontSize="8vw">
+              Dr. Andrew Loke
+            </Box>
+            <Image
+              w="65%"
+              src={process.env.PUBLIC_URL + 'images/mission_month.png'}
+              marginBottom="4"
+            />
+            <Box
+              fontSize="3.5vw"
+              letterSpacing="0"
+              fontWeight="400"
+              fontFamily="Lexend Deca"
+              textColor="#000000"
+            >
+              &bull; Associate Professor in the Department of Religion and
+              Philosophy at Hong Kong Baptist University
+              <br />
+              &bull; Worked as medical doctor for 7 years before completing
+              Ph.D. in Theology <br />
+              &bull; Published multiple books and articles in the fields of
+              theology, philosophy of religion, and science and religion
+            </Box>
           </Container>
         </TabPanel>
         <TabPanel w="100%">
