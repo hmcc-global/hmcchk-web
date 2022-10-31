@@ -192,7 +192,7 @@ export default function MissionMonthTabs() {
               </Box>
             </VStack>
           </Container>
-          <Container
+          {/* <Container
             marginTop="10"
             minW={{ md: '80%', xl: '60%' }}
             marginBottom="10rem"
@@ -230,56 +230,74 @@ export default function MissionMonthTabs() {
                 fontFamily="Lexend Deca"
                 textColor="#000000"
               >
-                &bull; Associate Professor in the Department of Religion and
-                Philosophy at Hong Kong Baptist University
-                <br />
-                &bull; Worked as medical doctor for 7 years before completing
-                Ph.D. in Theology <br />
-                &bull; Published multiple books and articles in the fields of
-                theology, philosophy of religion, and science and religion
+                <UnorderedList>
+                  <ListItem>
+                    Associate Professor in the Department of Religion and
+                    Philosophy at Hong Kong Baptist University
+                  </ListItem>
+                  <ListItem>
+                    Worked as a medical doctor for 7 years before completing a
+                    Ph.D. in Theology
+                  </ListItem>
+                  <ListItem>
+                    Published multiple books and articles in the fields of
+                    theology, philosophy of religion, and science and religion
+                  </ListItem>
+                </UnorderedList>
               </Box>
             </VStack>
-          </Container>
+          </Container> */}
           <Container
             marginTop="10"
             marginBottom="10rem"
-            display={{ base: 'flex', md: 'none' }}
+            display="flex"
             flexDir="column"
             alignItems="center"
             fontFamily="Akshar"
             letterSpacing="0.2em"
             fontWeight="700"
+            minW="40%"
           >
             <Box
               textColor="#434347"
-              fontSize="5.5vw"
+              fontSize={{ base: '5.5vw', sm: '4vw', md: '3vw', xl: '2vw' }}
               letterSpacing="0.1em"
               lineHeight="3"
             >
               Guest Speaker
             </Box>
-            <Box textColor="#434347" fontSize="8vw">
+            <Box
+              textColor="#434347"
+              fontSize={{ base: '8vw', sm: '5vw', md: '4vw', xl: '3.5vw' }}
+            >
               Dr. Andrew Loke
             </Box>
             <Image
-              w="65%"
+              w="50%"
               src={process.env.PUBLIC_URL + 'images/mission_month.png'}
               marginBottom="4"
             />
             <Box
-              fontSize="3.5vw"
+              fontSize={{ base: '3.5vw', md: '1.5vw', xl: '1vw' }}
               letterSpacing="0"
               fontWeight="400"
               fontFamily="Lexend Deca"
               textColor="#000000"
             >
-              &bull; Associate Professor in the Department of Religion and
-              Philosophy at Hong Kong Baptist University
-              <br />
-              &bull; Worked as medical doctor for 7 years before completing
-              Ph.D. in Theology <br />
-              &bull; Published multiple books and articles in the fields of
-              theology, philosophy of religion, and science and religion
+              <UnorderedList>
+                <ListItem>
+                  Associate Professor in the Department of Religion and
+                  Philosophy at Hong Kong Baptist University
+                </ListItem>
+                <ListItem>
+                  Worked as a medical doctor for 7 years before completing a
+                  Ph.D. in Theology
+                </ListItem>
+                <ListItem>
+                  Published multiple books and articles in the fields of
+                  theology, philosophy of religion, and science and religion
+                </ListItem>
+              </UnorderedList>
             </Box>
           </Container>
         </TabPanel>
