@@ -9,9 +9,9 @@ import {
   TabPanels,
   VStack,
   Center,
-  UnorderedList,
   Link,
-  ListItem
+  ListItem,
+  UnorderedList,
 } from '@chakra-ui/react';
 
 export default function MissionMonthTabs() {
@@ -25,6 +25,7 @@ export default function MissionMonthTabs() {
           textColor="#CAD9F4"
           line-height="108.2%"
           fontFamily="Lexend Deca"
+          letterSpacing="0.1em"
           _selected={{
             borderBottom: '5px solid #325EAE',
             textColor: '#325EAE',
@@ -41,6 +42,7 @@ export default function MissionMonthTabs() {
           textColor="#CAD9F4"
           line-height="108.2%"
           fontFamily="Lexend Deca"
+          letterSpacing="0.1em"
           _selected={{
             borderBottom: '5px solid #325EAE',
             textColor: '#325EAE',
@@ -54,16 +56,17 @@ export default function MissionMonthTabs() {
         <TabPanel>
           <Container
             marginX="auto"
+            marginTop={{ base: '3', md: '10' }}
             textAlign="center"
             maxW="fit-content"
             textColor="#00328D"
             fontFamily="Akshar"
             fontWeight={('black', 'extrabold')}
-            fontSize={{ base: '5vw', md: '4vw', lg: '3vw' }}
+            fontSize={{ base: '5vw', md: '4vw', lg: '2.5vw' }}
             letterSpacing="0.2em"
           >
             OVERVIEW OF THE MONTH
-            <VStack alignItems="start">
+            <VStack alignItems="start" marginTop="5">
               <Box
                 borderColor="#FFDFD3"
                 bgColor="#FFDFD3"
@@ -79,7 +82,11 @@ export default function MissionMonthTabs() {
                   px={{ base: '6', md: '10' }}
                   borderRadius={{ base: '8.6', md: '16' }}
                   bgColor="#FFFFFF"
-                  fontSize={{ base: '4vw', md: '2vw', lg: '1.5vw' }}
+                  fontSize={{
+                    base: '4vw',
+                    md: '2vw',
+                    lg: '1.5vw',
+                  }}
                   letterSpacing="0.1em"
                   whiteSpace="pre"
                 >
@@ -87,13 +94,23 @@ export default function MissionMonthTabs() {
                 </Box>
                 <VStack spacing="0" alignItems="start" marginY="auto">
                   <Box
-                    fontSize={{ base: '4vw', md: '2.4vw', lg: '2vw' }}
+                    fontSize={{
+                      base: '4vw',
+                      md: '2.4vw',
+                      lg: '2vw',
+                      xl: '1.8vw',
+                    }}
                     letterSpacing="0.1em"
                   >
                     ENCOUNTER
                   </Box>
                   <Box
-                    fontSize={{ base: '2.5vw', md: '1.5vw', lg: '1.5vw' }}
+                    fontSize={{
+                      base: '2.5vw',
+                      md: '1.5vw',
+                      lg: '1.5vw',
+                      xl: '1.4vw',
+                    }}
                     textColor="#000000"
                     letterSpacing="0.1em"
                     paddingRight="7"
@@ -123,7 +140,12 @@ export default function MissionMonthTabs() {
                   EVERY <br /> SUNDAY
                 </Box>
                 <Box
-                  fontSize={{ base: '4vw', md: '2.4vw', lg: '2vw' }}
+                  fontSize={{
+                    base: '4vw',
+                    md: '2.4vw',
+                    lg: '2vw',
+                    xl: '1.8vw',
+                  }}
                   marginY="auto"
                   textAlign="start"
                   letterSpacing={{ base: '0', md: '0.09em' }}
@@ -154,7 +176,12 @@ export default function MissionMonthTabs() {
                   EVERY <br /> SUNDAY
                 </Box>
                 <Box
-                  fontSize={{ base: '4vw', md: '2.4vw', lg: '2vw' }}
+                  fontSize={{
+                    base: '4vw',
+                    md: '2.4vw',
+                    lg: '2vw',
+                    xl: '1.8vw',
+                  }}
                   marginY="auto"
                   textAlign="start"
                   letterSpacing="0.09em"
@@ -167,19 +194,93 @@ export default function MissionMonthTabs() {
           </Container>
           <Container
             marginTop="10"
+            minW={{ md: '80%', xl: '60%' }}
             marginBottom="10rem"
             display={{ base: 'none', md: 'flex' }}
-            justifyContent="center"
+            flexDirection="row"
           >
-            <Image src={process.env.PUBLIC_URL + 'images/mission-month1.png'} />
+            <Image
+              width={{ md: '35%', xl: '30%' }}
+              height={{ md: 'auto', xl: '30%' }}
+              src={process.env.PUBLIC_URL + 'images/mission_month.png'}
+              marginRight="5"
+            />
+            <VStack alignItems="start" fontWeight="700" fontFamily="Akshar">
+              <Box
+                marginTop="3"
+                textColor="#434347"
+                fontSize={{ md: '2.5vw', xl: '2vw' }}
+                letterSpacing="0.1em"
+                lineHeight="0.2"
+              >
+                Guest Speaker
+              </Box>
+              <Box
+                textColor="#434347"
+                fontSize={{ md: '3.5vw', xl: '3vw' }}
+                letterSpacing="0.1em"
+              >
+                Dr. Andrew Loke
+              </Box>
+              <Box
+                fontSize={{ md: '1.5vw', xl: '1vw' }}
+                letterSpacing="0"
+                lineHeight="1.8"
+                fontWeight="400"
+                fontFamily="Lexend Deca"
+                textColor="#000000"
+              >
+                &bull; Associate Professor in the Department of Religion and
+                Philosophy at Hong Kong Baptist University
+                <br />
+                &bull; Worked as medical doctor for 7 years before completing
+                Ph.D. in Theology <br />
+                &bull; Published multiple books and articles in the fields of
+                theology, philosophy of religion, and science and religion
+              </Box>
+            </VStack>
           </Container>
           <Container
             marginTop="10"
             marginBottom="10rem"
             display={{ base: 'flex', md: 'none' }}
-            justifyContent="center"
+            flexDir="column"
+            alignItems="center"
+            fontFamily="Akshar"
+            letterSpacing="0.2em"
+            fontWeight="700"
           >
-            <Image src={process.env.PUBLIC_URL + 'images/mission-month2.png'} />
+            <Box
+              textColor="#434347"
+              fontSize="5.5vw"
+              letterSpacing="0.1em"
+              lineHeight="3"
+            >
+              Guest Speaker
+            </Box>
+            <Box textColor="#434347" fontSize="8vw">
+              Dr. Andrew Loke
+            </Box>
+            <Image
+              w="65%"
+              src={process.env.PUBLIC_URL + 'images/mission_month.png'}
+              marginBottom="4"
+            />
+            <Box
+              fontSize="3.5vw"
+              letterSpacing="0"
+              fontWeight="400"
+              fontFamily="Lexend Deca"
+              textColor="#000000"
+            >
+              &bull; Associate Professor in the Department of Religion and
+              Philosophy at Hong Kong Baptist University
+              <br />
+              &bull; Worked as medical doctor for 7 years before completing
+              Ph.D. in Theology <br />
+              &bull; Published multiple books and articles in the fields of
+              theology, philosophy of religion, and science and religion
+            </Box>
           </Container>
         </TabPanel>
         <TabPanel w="100%">
