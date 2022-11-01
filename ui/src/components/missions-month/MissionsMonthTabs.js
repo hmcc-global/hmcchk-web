@@ -173,7 +173,7 @@ export default function MissionMonthTabs() {
                   fontSize={{ base: '4vw', md: '2vw', lg: '1.5vw' }}
                   letterSpacing="0.1em"
                 >
-                  EVERY <br /> SUNDAY
+                  Tuesday <br /> Nov 29
                 </Box>
                 <Box
                   fontSize={{
