@@ -1,5 +1,5 @@
-import { DateTime } from "luxon";
-import { customAxios as axios } from "./customAxios";
+import { DateTime } from 'luxon';
+import { customAxios as axios } from './customAxios';
 
 // String conversion tools
 const camelize = (str) => {
@@ -7,8 +7,8 @@ const camelize = (str) => {
     .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
       return index === 0 ? word.toLowerCase() : word.toUpperCase();
     })
-    .replace(/\s+/g, "");
-}
+    .replace(/\s+/g, '');
+};
 
 const sentencize = (str) => {
   return str
@@ -19,42 +19,48 @@ const sentencize = (str) => {
       // Skip empty blocks
       if (!v) return v;
       // Underscore substitution
-      if (v === "_") return " ";
+      if (v === '_') return ' ';
       // We have a capital or number
       if (v.length === 1 && v === v.toUpperCase()) {
-        const previousCapital = !arr[i - 1] || arr[i - 1] === "_";
-        const nextWord = i + 1 < arr.length && arr[i + 1] && arr[i + 1] !== "_";
+        const previousCapital = !arr[i - 1] || arr[i - 1] === '_';
+        const nextWord = i + 1 < arr.length && arr[i + 1] && arr[i + 1] !== '_';
         const nextTwoCapitalsOrEndOfString =
           i + 3 > arr.length || (!arr[i + 1] && !arr[i + 3]);
         // Insert space
-        if (!previousCapital || nextWord) v = " " + v;
+        if (!previousCapital || nextWord) v = ' ' + v;
         // Start of word or single letter word
         if (nextWord || (!previousCapital && !nextTwoCapitalsOrEndOfString))
           v = v.toLowerCase();
       }
       return v;
     })
-    .join("");
-}
+    .join('');
+};
 
 const validateForm = async (id, user) => {
   try {
     const { data } = await axios.get('/api/forms/get-form', {
-      params: { id }
+      params: { id },
     });
 
     const { data: nowIso } = await axios.get('/api/misc/get-current-time');
     const now = DateTime.fromISO(nowIso);
 
+    console.log(nowIso);
+    console.log(id);
     if (!data[0]) {
       return {
         pathname: '/form-unavailable',
-        state: { id }
+        state: { id },
       };
     }
 
-    const formAvailableFrom = data[0].formAvailableFrom && DateTime.fromISO(data[0].formAvailableFrom).setZone('Asia/Hong_Kong');
-    const formAvailableUntil = data[0].formAvailableUntil && DateTime.fromISO(data[0].formAvailableUntil).setZone('Asia/Hong_Kong');
+    const formAvailableFrom =
+      data[0].formAvailableFrom &&
+      DateTime.fromISO(data[0].formAvailableFrom).setZone('Asia/Hong_Kong');
+    const formAvailableUntil =
+      data[0].formAvailableUntil &&
+      DateTime.fromISO(data[0].formAvailableUntil).setZone('Asia/Hong_Kong');
 
     // One of these values are set
     if (formAvailableFrom.isValid || formAvailableUntil.isValid) {
@@ -76,19 +82,19 @@ const validateForm = async (id, user) => {
         if (!beforeEndTime) {
           return {
             pathname: '/form-is-closed',
-            state: { 
+            state: {
               id: data[0].id,
               formName: data[0].formName,
-              availableUntil: formAvailableUntil.toFormat('dd MMM yyyy, HH:mm')
+              availableUntil: formAvailableUntil.toFormat('dd MMM yyyy, HH:mm'),
             },
           };
         } else {
           return {
             pathname: '/form-will-open',
-            state: { 
+            state: {
               availableAfter: formAvailableFrom.toFormat('dd MMM yyyy, HH:mm'),
-              id: data[0].id
-            }
+              id: data[0].id,
+            },
           };
         }
       }
@@ -113,16 +119,45 @@ const validateForm = async (id, user) => {
         state: { id: data[0].id },
       };
     }
+
+    //Check if user already signed-up for the PAID form
+
+    //Get email subsmissions from form
+    let emailTemp = [];
+    const { data: submissionData } = await axios.get(
+      '/api/forms/get-submission',
+      {
+        params: {
+          formId: id,
+        },
+      }
+    );
+
+    //Extract the email addresses
+    submissionData.forEach(function (item) {
+      let temp = {};
+      temp = item.submissionData;
+      emailTemp.push(temp['email']);
+    });
+
+    console.log(emailTemp);
+
+    //If user emaill already exist redirect user to a response page
+    if (emailTemp.includes(user['email'])) {
+      console.log('user already signedup');
+      // TO-DO: Redirect user (Dre)
+    }
+
     return {
-      data
+      data,
     };
   } catch (err) {
     console.log(err);
     return {
       pathname: '/form-unavailable',
-      state: { id: id }
+      state: { id: id },
     };
   }
-}
+};
 
 export { camelize, sentencize, validateForm };
