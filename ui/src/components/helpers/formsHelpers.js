@@ -145,7 +145,9 @@ const validateForm = async (id, user) => {
     //If user emaill already exist redirect user to a response page
     if (emailTemp.includes(user['email'])) {
       console.log('user already signedup');
-      // TO-DO: Redirect user (Dre)
+      return {
+        pathname: '/user-has-signedup',
+      };
     }
 
     return {
