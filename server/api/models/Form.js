@@ -11,6 +11,10 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false,
     },
+    isPaymentRequired: {
+      type: 'boolean',
+      defaultsTo: false
+    },
     isDeleted: {
       type: 'boolean',
       defaultsTo: false,

@@ -1,13 +1,13 @@
 module.exports = {
-  friendlyName: "Get form route for admin use",
+  friendlyName: 'Get form route for admin use',
 
   description:
-    "Gets all forms if id is not specified, finds a specific one otherwise",
+    'Gets all forms if id is not specified, finds a specific one otherwise',
 
   inputs: {
     id: {
-      type: "string",
-      description: "Id of form",
+      type: 'string',
+      description: 'Id of form',
     },
   },
 
