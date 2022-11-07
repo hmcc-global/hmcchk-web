@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import {
   Flex,
-  Center,
   Stack,
   Box,
   Text,
   Image,
   Button,
-  Menu,
   Container,
-  MenuButton,
-  MenuList,
-  MenuItem,
   Drawer,
   DrawerBody,
   DrawerFooter,
@@ -30,9 +25,9 @@ import { signout } from '../../reducers/userSlice';
 import { customAxios as axios } from '../helpers/customAxios';
 import MainMenu from './MainMenu';
 import { useHistory } from 'react-router-dom';
-import WitnessBanner from '../witness/WitnessBanner';
+import MissionsMonthBanner from '../missions-month/MissionsMonthBanner';
 
-const NavBar = (props) => {
+const NavBar = () => {
   const [isLive, setIsLive] = useState(false);
   const isHomePage = useHistory().location.pathname === "/";
   const [loggedIn, setLoggedIn] = useState(false);
@@ -360,7 +355,7 @@ const NavBar = (props) => {
           </Container>
         </Flex>
       </Flex>
-      {isHomePage && <WitnessBanner />}
+      {isHomePage && <MissionsMonthBanner />}
       {/* {currDate === 'Wed' && !isOnlineSermon ? (
         <Flex
           w="100vw"

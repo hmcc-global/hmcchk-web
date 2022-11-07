@@ -325,21 +325,22 @@ export default function MissionMonthTabs() {
             <Box
               w="100%"
               padding="10px"
+              marginBottom={5}
               fontFamily="Lexend Deca"
               fontSize={{ base: '12px', md: '15px' }}
             >
               <Center fontFamily="Lexend Deca" as="i" textAlign="center">
+                Missions is only possible when we depend on the very reason we do missions. We must not go on missions without being prayerful. The weekly prayer guide is aimed to guide your inward and outward prayers as we go through missions month.
+                <br/><br />
                 Weekly Prayer Guides will be uploaded every Monday in November!
               </Center>
-              <Center>...</Center>
               <br />
               <UnorderedList>
-                {/* WHEN WEEKLY PRAYER GUIDES BECOME AVAILABLE!! REPLACE LINKS each week!!
-                <ListItem><Link color='black' href='www.hmcc.tv' isExternal>
-                    Week 1
+                <ListItem><Link color='black' href='https://hongkong.sub.hmcc.net/wp-content/uploads/Missions-Month-Prayer-Guide-2022-Week-1.pdf' isExternal>
+                    Week 1 [NEW]
                 </Link></ListItem>
                 
-                <ListItem> <Link color='black' href='www.hmcc.tv' isExternal>
+                {/* <ListItem> <Link color='black' href='www.hmcc.tv' isExternal>
                     Week 2
                 </Link></ListItem>
                 <ListItem><Link color='black' href='www.hmcc.tv' isExternal>
@@ -347,8 +348,8 @@ export default function MissionMonthTabs() {
                 </Link></ListItem>
                 <ListItem><Link color='gray' href='www.hmcc.tv' isExternal>
                     Week 4
-                </Link></ListItem>
-                */}
+                </Link></ListItem> */}
+               
               </UnorderedList>
             </Box>
           </Container>
