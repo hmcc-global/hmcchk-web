@@ -46,7 +46,6 @@ const validateForm = async (id, user) => {
     const { data: nowIso } = await axios.get('/api/misc/get-current-time');
     const now = DateTime.fromISO(nowIso);
 
-    console.log(nowIso);
     console.log(id);
     if (!data[0]) {
       return {
@@ -139,8 +138,6 @@ const validateForm = async (id, user) => {
       temp = item.submissionData;
       emailTemp.push(temp['email']);
     });
-
-    console.log(emailTemp);
 
     //If user emaill already exist redirect user to a response page
     if (emailTemp.includes(user['email'])) {
