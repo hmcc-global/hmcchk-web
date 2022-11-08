@@ -40,6 +40,7 @@ import TextDetails from './witness/text-testimony/TextDetails';
 import MissionsMonthContainer from './missions-month/MissionsMonthContainer';
 import GivingTuesdayPage from './givingTuesday/GivingTuesdayPage';
 import AdminGivingTuesdayContainer from './admin/givingTuesday/AdminGivingTuesdayContainer';
+import AdventContainer from './advent/AdventContainer';
 
 const MainContainer = () => {
   return (
@@ -248,6 +249,11 @@ const MainContainer = () => {
           permissions={['public']}
           component={TextDetails}
         />
+        <PrivateRoute
+          path="/advent"
+          permissions={['public']}
+          component={AdventContainer}
+        />
 
         {/* Admin items */}
         <PrivateRoute
@@ -274,13 +280,13 @@ const MainContainer = () => {
           permissions={['t3ch', 'admin', 'stewardship']}
           component={FormManager}
         />
-        <PrivateRoute 
+        <PrivateRoute
           exact
           path="/admin/formViewer"
           permissions={['t3ch', 'admin', 'stewardship']}
           component={AdminFormDataViewer}
         />
-        <PrivateRoute 
+        <PrivateRoute
           exact
           path="/admin/liveSermon"
           permissions={['t3ch', 'admin', 'stewardship']}
@@ -315,6 +321,7 @@ const MainContainer = () => {
           permissions={['admin', 'stewardship']}
           component={AdminGivingTuesdayContainer}
         />
+
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
       <FooterContainer />
