@@ -46,7 +46,6 @@ const validateForm = async (id, user) => {
     const { data: nowIso } = await axios.get('/api/misc/get-current-time');
     const now = DateTime.fromISO(nowIso);
 
-    console.log(id);
     if (!data[0]) {
       return {
         pathname: '/form-unavailable',
@@ -119,32 +118,27 @@ const validateForm = async (id, user) => {
       };
     }
 
-    //Check if user already signed-up for the PAID form
+    //If form requires payment, check if user has signed-up or not
+    if (data[0].isPaymentRequired) {
+      //Get user subsmissions from form using API
+      const { data: userData } = await axios.get(
+        '/api/forms/get-user-submission',
+        {
+          params: {
+            formId: id,
+          },
+        }
+      );
 
-    //Get email subsmissions from form
-    let emailTemp = [];
-    const { data: submissionData } = await axios.get(
-      '/api/forms/get-submission',
-      {
-        params: {
-          formId: id,
-        },
+      //Extract the email addresses in a set
+      const emailSet = new Set(userData.map((i) => i['email']));
+
+      //If user email already exist redirect user to a response page
+      if (emailSet.has(user['email'])) {
+        return {
+          pathname: '/user-has-signedup',
+        };
       }
-    );
-
-    //Extract the email addresses
-    submissionData.forEach(function (item) {
-      let temp = {};
-      temp = item.submissionData;
-      emailTemp.push(temp['email']);
-    });
-
-    //If user emaill already exist redirect user to a response page
-    if (emailTemp.includes(user['email'])) {
-      console.log('user already signedup');
-      return {
-        pathname: '/user-has-signedup',
-      };
     }
 
     return {
