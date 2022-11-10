@@ -8,15 +8,6 @@ module.exports = {
       type: 'string',
       required: true,
     },
-    timeRange: {
-      type: 'json',
-      description:
-        'is an object with a start and end, sample here: \
-      { \
-        start: YYYY-MM-DD, \
-        end: YYYY-MM-DD \
-      }',
-    },
   },
 
   exits: {
@@ -38,13 +29,6 @@ module.exports = {
         formId: formId,
         isDeleted: false,
       };
-      if (timeRange) {
-        let tr = JSON.parse(timeRange);
-        whereClause['createdAt'] = {
-          '>=': new Date(tr.start),
-          '<=': new Date(tr.end),
-        };
-      }
 
       const data = await Submission.find(whereClause);
       let userData = data.map((i) => i.submissionData);
