@@ -33,6 +33,8 @@ module.exports = {
   },
 
   fn: async function ({ formId, timeRange }, exits) {
+    const user = this.req.user.accessType;
+    console.log(user);
     try {
       let whereClause = {
         formId: formId,
