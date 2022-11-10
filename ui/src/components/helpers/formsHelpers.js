@@ -119,7 +119,9 @@ const validateForm = async (id, user) => {
     }
 
     //If form requires payment, check if user has signed-up or not
-    if (data[0]) {
+    // Comment line 125 and uncomment 126 if you want to test this functionality (until the payment is required frontend implemented)
+    if (data[0].isPaymentRequired) {
+      // if (data[0]) {
       //Get user subsmissions from form using API
       const { data: userData } = await axios.get(
         '/api/forms/get-user-submission',
