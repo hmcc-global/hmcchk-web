@@ -21,6 +21,7 @@ const ErrorPage = (props) => {
       const { user } = props;
       if (state && state.id) {
         const result = await validateForm(state.id, user);
+
         if (result.data) {
           history.push(`/forms/${state.id}`);
           return;
@@ -37,6 +38,7 @@ const ErrorPage = (props) => {
           setFormOpenTime(result.state.availableAfter);
         }
       }
+      console.log(history);
       setIsLoading(false);
     };
 
@@ -123,7 +125,10 @@ const ErrorPage = (props) => {
     },
     'user-has-signedup': {
       type: 'error',
-      primaryText: 'You have signed up for this paid event!',
+      primaryText:
+        'Your signup for ' +
+        `"${history.location.state?.formName}"` +
+        ' has been recorded',
       boldedText: 'Please check your email to verify your sign-up details',
       buttonLink: '/',
       buttonText: 'Back to Homepage',

@@ -119,7 +119,7 @@ const validateForm = async (id, user) => {
     }
 
     //If form requires payment, check if user has signed-up or not
-    if (data[0].isPaymentRequired) {
+    if (data[0]) {
       //Get user subsmissions from form using API
       const { data: userData } = await axios.get(
         '/api/forms/get-user-submission',
@@ -137,6 +137,10 @@ const validateForm = async (id, user) => {
       if (emailSet.has(user['email'])) {
         return {
           pathname: '/user-has-signedup',
+          state: {
+            id: data[0].id,
+            formName: data[0].formName,
+          },
         };
       }
     }
