@@ -40,24 +40,30 @@ const sentencize = (str) => {
 const validateForm = async (id, user) => {
   try {
     const { data } = await axios.get('/api/forms/get-form', {
-      params: { id },
+      params: { id },,
     });
 
     const { data: nowIso } = await axios.get('/api/misc/get-current-time');
     const now = DateTime.fromISO(nowIso);
 
+    console.log(nowIso);
+    console.log(id);
     if (!data[0]) {
       return {
         pathname: '/form-unavailable',
-        state: { id },
+        state: { id },,
       };
     }
 
     const formAvailableFrom =
+     
       data[0].formAvailableFrom &&
+     
       DateTime.fromISO(data[0].formAvailableFrom).setZone('Asia/Hong_Kong');
     const formAvailableUntil =
+     
       data[0].formAvailableUntil &&
+     
       DateTime.fromISO(data[0].formAvailableUntil).setZone('Asia/Hong_Kong');
 
     // One of these values are set
@@ -83,7 +89,7 @@ const validateForm = async (id, user) => {
             state: {
               id: data[0].id,
               formName: data[0].formName,
-              availableUntil: formAvailableUntil.toFormat('dd MMM yyyy, HH:mm'),
+              availableUntil: formAvailableUntil.toFormat('dd MMM yyyy, HH:mm'),,
             },
           };
         } else {
@@ -91,8 +97,8 @@ const validateForm = async (id, user) => {
             pathname: '/form-will-open',
             state: {
               availableAfter: formAvailableFrom.toFormat('dd MMM yyyy, HH:mm'),
-              id: data[0].id,
-            },
+              id: data[0].id,,
+            },,
           };
         }
       }
@@ -146,15 +152,15 @@ const validateForm = async (id, user) => {
     }
 
     return {
-      data,
+      data,,
     };
   } catch (err) {
     console.log(err);
     return {
       pathname: '/form-unavailable',
-      state: { id: id },
+      state: { id: id },,
     };
   }
-};
+};;
 
 export { camelize, sentencize, validateForm };
