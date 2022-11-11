@@ -30,6 +30,7 @@ import AdminHome from './admin/AdminHome';
 import AdminUser from './admin/users/AdminUser';
 import FormManager from './forms/FormManager';
 import AdminPopUpContainer from './admin/popup/AdminPopUpContainer';
+import GTContainer from './givingtuesday/GTMainContainer';
 
 const MainContainer = () => {
   return (
@@ -111,7 +112,14 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/forms/:id"
-          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
+          permissions={[
+            'unsigned',
+            'signed',
+            'alumni',
+            't3ch',
+            'admin',
+            'stewardship',
+          ]}
           component={UserFormContainer}
         />
         <PrivateRoute
@@ -153,25 +161,53 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/complete-profile"
-          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
+          permissions={[
+            'unsigned',
+            'signed',
+            'alumni',
+            't3ch',
+            'admin',
+            'stewardship',
+          ]}
           component={CompleteUserProfileContainer}
         />
         <PrivateRoute
           exact
           path="/profile"
-          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
+          permissions={[
+            'unsigned',
+            'signed',
+            'alumni',
+            't3ch',
+            'admin',
+            'stewardship',
+          ]}
           component={UserProfileContainer}
         />
         <PrivateRoute
           exact
           path="/complete-profile"
-          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
+          permissions={[
+            'unsigned',
+            'signed',
+            'alumni',
+            't3ch',
+            'admin',
+            'stewardship',
+          ]}
           component={CompleteUserProfileContainer}
         />
         <PrivateRoute
           exact
           path="/profile"
-          permissions={['unsigned', 'signed', 'alumni', 't3ch', 'admin', 'stewardship']}
+          permissions={[
+            'unsigned',
+            'signed',
+            'alumni',
+            't3ch',
+            'admin',
+            'stewardship',
+          ]}
           component={UserProfileContainer}
         />
         <PrivateRoute
@@ -209,6 +245,12 @@ const MainContainer = () => {
           path="/admin/popup"
           permissions={['t3ch', 'admin', 'stewardship']}
           component={AdminPopUpContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/giving-tuesday"
+          permissions={['public']}
+          component={GTContainer}
         />
 
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
