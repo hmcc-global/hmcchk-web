@@ -1,23 +1,12 @@
 import React from 'react';
-import {
-  Box,
-  Container,
-  Image,
-  Text,
-  VStack,
-  Flex,
-  Divider,
-} from '@chakra-ui/react';
+import { Container } from '@chakra-ui/react';
+import AdventCalendar from './AdventCalendar';
 
 const AdventContainer = () => {
   return (
-    <>
-      <Container maxW="container.lg" m={0} p={0}>
-        <Box w="100%" h="30em">
-          <Text>Welcome to advent :D </Text>
-        </Box>
-      </Container>
-    </>
+    <Container maxW="" m={0} p={0}>
+      <AdventCalendar />
+    </Container>
   );
 };
 
