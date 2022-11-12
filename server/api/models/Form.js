@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 module.exports = {
   attributes: {
     formName: {
@@ -13,7 +14,7 @@ module.exports = {
     },
     isPaymentRequired: {
       type: 'boolean',
-      defaultsTo: false
+      defaultsTo: false,
     },
     isDeleted: {
       type: 'boolean',

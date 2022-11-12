@@ -11,10 +11,6 @@ module.exports = {
       type: "json",
       required: true,
     },
-    paymentData: {
-      collection: 'PaymentData',
-      via: 'formId',
-    },
     isDeleted: {
       type: "boolean",
       defaultsTo: false,
