@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect,FormControl,FormLabel, } from 'react';
+import { Switch, useHistory } from 'react-router-dom';
 import { customAxios as axios } from '../helpers/customAxios';
 import {
   Button,
@@ -11,6 +11,8 @@ import {
   Text,
   Badge,
   Stack,
+  Checkbox,
+  HStack
 } from '@chakra-ui/react';
 import FormEditorContainer from './FormEditorContainer';
 
@@ -21,6 +23,7 @@ const FormManager = (props) => {
   const [formList, setFormList] = useState([]);
   const history = useHistory();
   const [editFormData, setEditFormData] = useState(null);
+  const [filterPayment, setFilterPayment] = useState(false)
 
   const getFormListFromDatabase = async () => {
     try {
@@ -123,10 +126,14 @@ const FormManager = (props) => {
           Create a new form
         </Button>
         <Box borderRadius="lg">
-          <Heading mb="2" as="h2" size="lg">
-            Existing Forms
-          </Heading>
+          <HStack>
+            <Heading mb="2" as="h2" size="lg" align="left">
+              Existing Forms 
+            </Heading>
+              <Checkbox size='md' onChange={() => setFilterPayment(!filterPayment)} paddingLeft={585}> PaidEventForms </Checkbox>
+          </HStack>
           <List spacing="2">
+            {/* {filterPayment ? true: */}
             {formList.map((formItem) => (
               <ListItem key={formItem.id}>
                 <Box p="3" borderRadius="lg" borderWidth="1px">
@@ -177,7 +184,9 @@ const FormManager = (props) => {
                   </Stack>
                 </Box>
               </ListItem>
-            ))}
+            ))}: {/*filterPayment : true}*/}
+            
+          
           </List>
         </Box>
         <FormEditorContainer

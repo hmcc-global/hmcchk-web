@@ -33,6 +33,7 @@ const FormEditorContainer = (props) => {
 
   // State variables
   const [formName, setFormName] = useState(null);
+  const [isPaymentRequired, setIsPaymentRequired] = useState(false);
   const [formDescription, setFormDescription] = useState(null);
   const [formImage, setFormImage] = useState(null);
   const [requireLogin, setRequireLogin] = useState(true);
@@ -45,6 +46,7 @@ const FormEditorContainer = (props) => {
   const resetFormEditorCallback = () => {
     reset();
     setValue('formName', null);
+    setValue('isPaymentRequired',false);
     setValue('formDescription', null);
     setValue('formImage', null);
     setValue('requireLogin', true);
@@ -53,6 +55,7 @@ const FormEditorContainer = (props) => {
     setValue('formAvailableFrom', null);
     setValue('formAvailableUntil', null);
     setFormName(null);
+    setIsPaymentRequired(false);
     setFormDescription(null);
     setFormImage(null);
     setRequireLogin(true);
@@ -67,6 +70,7 @@ const FormEditorContainer = (props) => {
   const setFormManagerElements = (data) => {
     if (data) {
       setValue('formName', data.formName);
+      setValue('isPaymentRequired', data.isPaymentRequired);
       setValue('formDescription', data.formDescription);
       setValue('formImage', data.formImage);
       setValue('requireLogin', data.requireLogin);
@@ -77,6 +81,7 @@ const FormEditorContainer = (props) => {
 
       // Update React State for child props
       setFormName(data.formName);
+      setIsPaymentRequired(data.isPaymentRequired);
       setFormDescription(data.formDescription);
       setFormImage(data.formImage);
       setRequireLogin(data.requireLogin);
@@ -126,6 +131,19 @@ const FormEditorContainer = (props) => {
               </Heading>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Stack spacing="2">
+                  <FormControl>
+                    <FormLabel> Is Payment Required? </FormLabel>
+                    <Controller
+                      control={control}
+                      name="isPaymentRequired"
+                      defaultValue={false}
+                      render={({ field: { onChange, value, ref } }) => (
+                        <Switch onChange={onChange} ref={ref} isChecked= {value}>
+                          {value ? 'Yes' : 'No'}
+                        </Switch>
+                      )}
+                      />
+                  </FormControl>
                   <FormControl isInvalid={errors['formName']}>
                     <FormLabel>Form Name</FormLabel>
                     <Input
@@ -222,6 +240,7 @@ const FormEditorContainer = (props) => {
               <FormEditor
                 formInformation={{
                   formName: formName,
+                  isPaymentRequired: isPaymentRequired,
                   formDescription: formDescription,
                   formImage: formImage,
                   requireLogin: requireLogin,

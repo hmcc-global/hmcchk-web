@@ -154,6 +154,7 @@ const FormEditor = (props) => {
     try {
       let formToSave = {
         formName: formInformation.formName,
+        isPaymentRequired: formInformation.isPaymentRequired,
         formDescription: formInformation.formDescription,
         formImage: formInformation.formImage,
         requireLogin: formInformation.requireLogin,
@@ -162,6 +163,8 @@ const FormEditor = (props) => {
         formAvailableFrom: formInformation.formAvailableFrom,
         formAvailableUntil: formInformation.formAvailableUntil,
         formFields: formFields,
+        
+        
       };
 
       for (let i = 0; i < formToSave.formFields.length; i++) {
