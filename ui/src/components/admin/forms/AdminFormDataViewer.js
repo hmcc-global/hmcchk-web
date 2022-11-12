@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {} from '@chakra-ui/react';
 import { customAxios as axios } from '../../helpers/customAxios';
 import { AgGridReact } from 'ag-grid-react';
-import 'ag-grid-enterprise';
+//import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { Button, Heading, Text, Input, HStack, Box } from '@chakra-ui/react';
