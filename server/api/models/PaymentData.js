@@ -9,11 +9,15 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    submissionId: {
+      model: 'Submission',
+      unique: true
+    },
     isPaid: {
       type: 'boolean',
       defaultsTo: false,
     },
-    paymentDate: {
+    paymentDateTime: {
       type: 'ref',
       columnType: 'datetime',
       defaultsTo: null,

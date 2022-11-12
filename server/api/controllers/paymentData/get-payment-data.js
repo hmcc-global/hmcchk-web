@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 module.exports = {
   friendlyName: 'Get Payment Data',
 
@@ -18,19 +17,24 @@ module.exports = {
   },
 
   fn: async function ({ formId }, exits) {
-    const user = this.req.user.fullName;
+    // this should directly be restricted based on policies.js
+    // aboveAdmin only
+
+    // TODO-aparedan: uncomment
+    // const user = this.req.user.fullName;
 
     try {
       let res;
 
       if (formId) {
-        sails.log.info(`${user}: Getting payment data for form: ${formId}`);
+        // TODO-aparedan: uncomment
+        // sails.log.info(`${user}: Getting payment data for form: ${formId}`);
 
         res = await PaymentData.find({
           formId: formId,
         }).populateAll();
-        if (data.length === 0) throw 'payment data not found';
-        return exits.success(data);
+        if (res.length === 0) throw 'payment data not found';
+        return exits.success(res);
       }
 
       return exits.success(res);

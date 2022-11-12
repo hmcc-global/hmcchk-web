@@ -68,6 +68,10 @@ module.exports.policies = {
   // Pages
   'pages/*': true,
 
+  // PaymentData
+  // TODO-aparedan: Don't forget to set the right permissions
+  'paymentData/*': true,
+
   // PopUp
   'popup/get-published-popup': true,
   'popup/create-popup': ['isLoggedIn', 'aboveTech'],

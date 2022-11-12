@@ -54,11 +54,11 @@ module.exports = {
       // if res failed
 
       if (formRecord[0].isPaymentRequired) {
-        await PaymentData.create({
+        res = await PaymentData.create({
           formId: formId,
           userId: userId,
-        });
-        console.log(res);
+          submissionId: res.id
+        }).fetch();
       }
 
       // Store the user object if any

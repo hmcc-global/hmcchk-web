@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 module.exports = {
   friendlyName: 'Retrieve Submissions for a certain form',
 
@@ -34,7 +33,8 @@ module.exports = {
   },
 
   fn: async function ({ formId, timeRange }, exits) {
-    const userAccessType = this.req.user.accessType;
+    const accessType = this.req.user.accessType;
+    const viewPaymentDataAccess = sails.config.custom.permissions.viewPaymentData;
 
     try {
       let whereClause = {
@@ -49,8 +49,13 @@ module.exports = {
         };
       }
 
-      const data = await Submission.find(whereClause).populateAll();
+      let data;
+      if (viewPaymentDataAccess.includes(accessType)) {
+        data = await Submission.find(whereClause).populate('paymentData');
+        return exits.success(data);
+      }
 
+      data = await Submission.find(whereClause);
       return exits.success(data);
     } catch (err) {
       sails.log(err);

@@ -38,9 +38,9 @@ module.exports.routes = {
   'get /api/forms/get-user-submission': 'forms/get-user-submission',
 
   // Payment Data APIs
-  'get /api/payment-data/get': 'payment-data/get-payment-data',
-  'post /api/payment-data/create': 'payment-data/create-payment-data',
-  'put /api/payment-data/update': 'payment-data/update-payment-data',
+  'get /api/paymentData/get': 'paymentData/get-payment-data',
+  'post /api/paymentData/create': 'paymentData/create-payment-data',
+  'put /api/paymentData/update': 'paymentData/update-payment-data',
 
   // Announcement APIs
   'get /api/announcements/get-announcements': 'announcements/get-announcements',
