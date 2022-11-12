@@ -20,6 +20,7 @@ module.exports.policies = {
   // Public controllers
 
   // Announcements
+  'givingTuesday/*': true,
   'announcements/*': true,
   'witness/*': true,
   'testimonies/*': true,
