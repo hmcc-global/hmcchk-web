@@ -20,11 +20,10 @@ module.exports = {
   },
 
   fn: async function ({ year }, exits) {
-    sails.log.info(`Get Giving Tuesday data`);
+    sails.log.info(`Retrieving Giving Tuesday data for ${year}`);
 
     try {
       let data = await GivingTuesdayData.findOne({ year });
-      sails.log.info(data);
 
       return exits.success(data);
     } catch (err) {

@@ -38,6 +38,7 @@ import WitnessHomeContainer from './witness/WitnessHomeContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import TextDetails from './witness/text-testimony/TextDetails';
 import MissionsMonthContainer from './missions-month/MissionsMonthContainer';
+import AdminGivingTuesdayContainer from './admin/givingTuesday/AdminGivingTuesdayContainer';
 
 const MainContainer = () => {
   return (
@@ -301,6 +302,12 @@ const MainContainer = () => {
           path="/admin/users"
           permissions={['admin', 'stewardship']}
           component={AdminUser}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/giving-tuesday"
+          permissions={['admin', 'stewardship']}
+          component={AdminGivingTuesdayContainer}
         />
         
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
