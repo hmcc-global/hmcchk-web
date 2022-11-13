@@ -116,6 +116,15 @@ const FormManager = (props) => {
     });
   };
 
+  const noViewPermission = (formItem) => {
+    if (!formItem.isPaymentRequired)
+      return false;
+
+    const currentUserAccessType = user.accessType;
+    const hasViewPermissions = ['admin', 'stewardship'];
+    return !hasViewPermissions.includes(currentUserAccessType);
+  }
+
   return (
     <Container maxW="container.xl" pt={10} minH="100vh">
       <Stack spacing="5">
@@ -130,7 +139,7 @@ const FormManager = (props) => {
             <Heading mb="2" as="h2" size="lg" align="left">
               Existing Forms 
             </Heading>
-              <Checkbox size='md' onChange={() => setFilterPayment(!filterPayment)} paddingLeft={585}> PaidEventForms </Checkbox>
+              {/*<Checkbox size='md' onChange={() => setFilterPayment(!filterPayment)} paddingLeft={585}> PaidEventForms </Checkbox>*/}
           </HStack>
           <List spacing="2">
             {/* {filterPayment ? true: */}
@@ -170,6 +179,7 @@ const FormManager = (props) => {
                     <Button
                       colorScheme="blue"
                       onClick={() => onClickHandler(formItem)}
+                      disabled={noViewPermission(formItem)}
                     >
                       View Data
                     </Button>
