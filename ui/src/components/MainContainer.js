@@ -38,7 +38,11 @@ import WitnessHomeContainer from './witness/WitnessHomeContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import TextDetails from './witness/text-testimony/TextDetails';
 import MissionsMonthContainer from './missions-month/MissionsMonthContainer';
+<<<<<<< HEAD
 import GivingTuesdayPage from './givingTuesday/GivingTuesdayPage';
+=======
+import AdminGivingTuesdayContainer from './admin/givingTuesday/AdminGivingTuesdayContainer';
+>>>>>>> 01a3c57 (GH-634: Updated GT API and created GT admin page)
 
 const MainContainer = () => {
   return (
@@ -304,10 +308,19 @@ const MainContainer = () => {
           component={AdminUser}
         />
         <PrivateRoute
+<<<<<<< HEAD
           path="/giving-tuesday"
           permissions={['public']}
           component={GivingTuesdayPage}
         />
+=======
+          exact
+          path="/admin/giving-tuesday"
+          permissions={['admin', 'stewardship']}
+          component={AdminGivingTuesdayContainer}
+        />
+        
+>>>>>>> 01a3c57 (GH-634: Updated GT API and created GT admin page)
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
       <FooterContainer />

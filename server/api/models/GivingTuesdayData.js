@@ -1,11 +1,8 @@
 module.exports = {
   attributes: {
-    localChurch: {
+    categories: {
       type: "json",
-      required: true,
-    },
-    globalChurch: {
-      type: "json",
+      columnType: "array",
       required: true,
     },
     year: {

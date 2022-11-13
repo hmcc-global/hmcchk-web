@@ -4,21 +4,9 @@ module.exports = {
   description: 'Update Giving Tuesday data',
 
   inputs: {
-    globalChurchAmount: {
+    categories: {
       required: true,
-      type: 'number',
-    },
-    globalChurchGivers: {
-      required: true,
-      type: 'number',
-    },
-    localChurchAmount: {
-      required: true,
-      type: 'number',
-    },
-    localChurchGivers: {
-      required: true,
-      type: 'number',
+      type: 'json',
     },
     year: {
       required: true,
@@ -34,10 +22,7 @@ module.exports = {
 
   fn: async function (
     {
-      globalChurchAmount,
-      globalChurchGivers,
-      localChurchAmount,
-      localChurchGivers,
+      categories,
       year,
     },
     exits
@@ -46,14 +31,7 @@ module.exports = {
 
     try {
       const data = await GivingTuesdayData.updateOne({ year }).set({
-        globalChurch: {
-          totaAmount: globalChurchAmount,
-          totalGivers: globalChurchGivers,
-        },
-        localChurch: {
-          totalAmount: localChurchAmount,
-          totalGivers: localChurchGivers,
-        },
+        categories,
       });
 
       return exits.success(data);
