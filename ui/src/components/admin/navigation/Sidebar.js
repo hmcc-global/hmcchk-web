@@ -19,7 +19,8 @@ import {
   FiMenu,
   FiBell,
   FiMonitor,
-  FiFeather
+  FiFeather,
+  FiHeart,
 } from 'react-icons/fi';
 
 const LinkItems = [
@@ -29,6 +30,7 @@ const LinkItems = [
   { name: 'Users', icon: FiUsers, path: '/admin/users' },
   { name: 'Pop Up', icon: FiBell, path: '/admin/popup' },
   { name: 'Testimony', icon: FiFeather, path: '/admin/testimony' },
+  { name: 'Giving Tuesday', icon: FiHeart, path: '/admin/giving-tuesday' },
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {
