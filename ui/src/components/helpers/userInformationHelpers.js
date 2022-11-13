@@ -8,6 +8,7 @@ import {
   Text,
   Link,
   Spacer,
+  VStack,
 } from '@chakra-ui/react';
 
 // Only allow setting field values that are defined here
@@ -110,6 +111,12 @@ const signUpButton = {
   textAlign: 'center',
 };
 
+const showuserpaidform = (form) => {
+  if (form.isPaymentRequired){
+    return "Payment Required"
+  }
+
+}
 const generatePublishedFormLinks = (forms) => {
   if (forms) {
     return (
@@ -127,7 +134,22 @@ const generatePublishedFormLinks = (forms) => {
                 textAlign="left"
               >
                 <Image src={item['formImage']} fit="cover" h="18%" w="35%" />
-                <Text margin="15px">{item['formName']}</Text>
+                <VStack width={'full'}>
+                  <Text 
+                    margin="0px 15px" 
+                    alignSelf="baseline">
+                    {item['formName']}
+                  </Text>
+                  <Text 
+                    marginInlineStart="15px !important" 
+                    alignSelf="baseline"
+                    backgroundColor="#8ec3eb" 
+                    borderRadius = "20px" 
+                    fontSize={12} color="#00377C"
+                  >
+                    {(showuserpaidform(item))}
+                  </Text> 
+                </VStack>
                 <Spacer />
                 <Link
                   href={`/forms/${item['id']}`}
@@ -141,6 +163,7 @@ const generatePublishedFormLinks = (forms) => {
                 <Divider margin="15px 0px" backgroundColor="black" />
               )}
             </>
+    
           );
         })}
       </Box>
