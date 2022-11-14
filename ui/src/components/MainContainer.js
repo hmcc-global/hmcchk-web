@@ -30,7 +30,7 @@ import AdminHome from './admin/AdminHome';
 import AdminUser from './admin/users/AdminUser';
 import FormManager from './forms/FormManager';
 import AdminPopUpContainer from './admin/popup/AdminPopUpContainer';
-import GTContainer from './givingtuesday/GTMainContainer';
+import GTContainer from './givingTuesday/GivingTuesdayPage';
 
 const MainContainer = () => {
   return (
