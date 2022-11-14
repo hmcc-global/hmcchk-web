@@ -337,13 +337,13 @@ export default function MissionMonthTabs() {
               <br />
               <UnorderedList>
                 <ListItem><Link color='black' href='https://hongkong.sub.hmcc.net/wp-content/uploads/Missions-Month-Prayer-Guide-2022-Week-1.pdf' isExternal>
-                    Week 1 [NEW]
+                    Week 1 
                 </Link></ListItem>
                 
-                {/* <ListItem> <Link color='black' href='www.hmcc.tv' isExternal>
-                    Week 2
+                <ListItem> <Link color='black' href='https://hongkong.sub.hmcc.net/wp-content/uploads/Missions-Month-Prayer-Guide-2022-Week-2-Editable.pdf' isExternal>
+                    Week 2 [NEW]
                 </Link></ListItem>
-                <ListItem><Link color='black' href='www.hmcc.tv' isExternal>
+                {/*<ListItem><Link color='black' href='www.hmcc.tv' isExternal>
                     Week 3
                 </Link></ListItem>
                 <ListItem><Link color='gray' href='www.hmcc.tv' isExternal>
@@ -393,6 +393,15 @@ export default function MissionMonthTabs() {
                     isExternal
                   >
                     Spotify Playlists
+                  </Link> 
+                </ListItem>
+                <ListItem>
+                  <Link
+                    color="black"
+                    href="http://bit.ly/mm-encounter-resources"
+                    isExternal
+                  >
+                    Encounter Resources: Dr. Andrew Loke
                   </Link>
                 </ListItem>
               </UnorderedList>
