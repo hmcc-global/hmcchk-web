@@ -30,7 +30,6 @@ import AdminHome from './admin/AdminHome';
 import AdminUser from './admin/users/AdminUser';
 import FormManager from './forms/FormManager';
 import AdminPopUpContainer from './admin/popup/AdminPopUpContainer';
-<<<<<<< HEAD
 import AdminFormDataViewer from './admin/forms/AdminFormDataViewer';
 import AdminLiveSermonContainer from './admin/liveSermon/AdminLiveSermonContainer';
 import WitnessContainer from './witness/WitnessContainer';
@@ -39,9 +38,7 @@ import WitnessHomeContainer from './witness/WitnessHomeContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import TextDetails from './witness/text-testimony/TextDetails';
 import MissionsMonthContainer from './missions-month/MissionsMonthContainer';
-=======
 import GTContainer from './givingtuesday/GTMainContainer';
->>>>>>> 46cac63 (GH-632: Created container for GT)
 
 const MainContainer = () => {
   return (
@@ -302,19 +299,15 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-<<<<<<< HEAD
           path="/admin/users"
           permissions={['admin', 'stewardship']}
           component={AdminUser}
         />
-        
-=======
+        <PrivateRoute
           path="/giving-tuesday"
           permissions={['public']}
           component={GTContainer}
         />
-
->>>>>>> 46cac63 (GH-632: Created container for GT)
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
       <FooterContainer />
