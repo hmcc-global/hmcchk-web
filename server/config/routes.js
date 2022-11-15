@@ -103,6 +103,9 @@ module.exports.routes = {
   'post /api/testimony/create': 'testimonies/create-testimonies',
   'put /api/testimony/update': 'testimonies/update-testimonies',
 
+  // Advent API
+  'post /api/mailingList/create': 'mailingList/create-mail-entry',
+
   // UI
   'get /*': {
     skipAssets: true,

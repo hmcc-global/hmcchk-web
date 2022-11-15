@@ -82,6 +82,9 @@ module.exports.policies = {
   'testimonies/get-published-testimonies': true,
   'testimonies/create-testimonies': true,
 
+  //advent
+  'mailingList/*': true,
+
   // Users
   'users/reset': ['isLoggedIn', 'aboveAdmin'],
 };
