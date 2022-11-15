@@ -134,6 +134,15 @@ export default function AdminFormDataViewer(props) {
     return false;
   };
 
+  const paymentDateFilterGetter = (params) => {
+    if (params && params.data && params.data.paymentData) {
+      const dateStr = params.data.paymentData.paymentDateTime;
+      if (dateStr) {
+        return DateTime.fromISO(dateStr).toJSDate();
+      }
+    }
+  };
+
   // Custom Editors
   const MediumTextEditorProps = {
     cellEditorPopup: true,
@@ -303,6 +312,7 @@ export default function AdminFormDataViewer(props) {
             valueGetter: paymentDateGetter,
             valueSetter: paymentDateSetter,
             valueFormatter: paymentDateFormatter,
+            filterValueGetter: paymentDateFilterGetter,
           },
           {
             headerName: 'Payment Type',
