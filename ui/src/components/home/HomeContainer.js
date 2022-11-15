@@ -9,6 +9,7 @@ import PopupContainer from './PopupContainer';
 import HelloSermonSection from './HelloSermonSection';
 import { customAxios as axios } from '../helpers/customAxios';
 import WitnessSection from '../witness/WitnessSection';
+import MailingListForm from './MailingListForm';
 
 const HomeContainer = (props) => {
   const { user } = props;
@@ -48,6 +49,7 @@ const HomeContainer = (props) => {
       <LifeGroupSection />
       <NewHereSection />
       {popup.flag && <PopupContainer props={popup} />}
+      {!popup.flag && <MailingListForm props={user} />}
     </Flex>
   );
 };
