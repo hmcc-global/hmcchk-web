@@ -38,7 +38,7 @@ const ErrorPage = (props) => {
           setFormOpenTime(result.state.availableAfter);
         }
       }
-      console.log(history);
+
       setIsLoading(false);
     };
 

@@ -124,11 +124,11 @@ const validateForm = async (id, user) => {
       // if (data[0]) {
       //Get user subsmissions from form using API
       const { data: userData } = await axios.get(
-        '/api/forms/get-user-submission',
+        '/api/forms/get-check-email-form',
         {
           params: {
             formId: id,
-            userId: user.id,
+            emailAddress: user['email'],
           },
         }
       );
@@ -143,7 +143,6 @@ const validateForm = async (id, user) => {
         };
       }
     }
-
     return {
       data,
     };
