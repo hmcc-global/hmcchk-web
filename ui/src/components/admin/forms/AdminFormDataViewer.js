@@ -125,9 +125,7 @@ export default function AdminFormDataViewer(props) {
   // Setters
   const paymentDateSetter = (params) => {
     if (params && params.data) {
-      var newPaymentDateTime = params.newValue;
-
-      params.data.paymentData.paymentDateTime = newPaymentDateTime;
+      params.data.paymentData.paymentDateTime = params.newValue;
       return true;
     }
 
@@ -309,7 +307,7 @@ export default function AdminFormDataViewer(props) {
           {
             ...DateCellProps,
             headerName: 'Payment Date',
-            columnGroupShow: 'open',
+            columnGroupShow: 'closed',
             valueGetter: paymentDateGetter,
             valueSetter: paymentDateSetter,
             valueFormatter: paymentDateFormatter,
@@ -318,7 +316,7 @@ export default function AdminFormDataViewer(props) {
           {
             headerName: 'Payment Type',
             field: 'paymentData.paymentType',
-            columnGroupShow: 'open',
+            columnGroupShow: 'closed',
           },
           {
             headerName: 'Payment Method',
@@ -327,19 +325,19 @@ export default function AdminFormDataViewer(props) {
             cellEditorParams: {
               values: paymentMethodList,
             },
-            columnGroupShow: 'open',
+            columnGroupShow: 'closed',
           },
           {
             ...MediumTextEditorProps,
             headerName: 'Remarks',
             field: 'paymentData.remarks',
-            columnGroupShow: 'open',
+            columnGroupShow: 'closed',
           },
           {
             ...BooleanCellProps,
             headerName: 'Confirmation Email',
             field: 'paymentData.isConfirmationEmailSent',
-            columnGroupShow: 'open',
+            columnGroupShow: 'closed',
             valueFormatter: (params) => {
               if (params && params.data && params.data.paymentData) {
                 return params.data.paymentData.isConfirmationEmailSent

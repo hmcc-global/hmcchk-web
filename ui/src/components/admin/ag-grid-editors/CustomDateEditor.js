@@ -6,10 +6,23 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default forwardRef((props, ref) => {
+  const ISOFormatCheck = (dateStr) => {
+    const parsedDate = new Date(Date.parse(dateStr));
+
+    if (parsedDate.toISOString() === dateStr) {
+      return true;
+    }
+    return false;
+  };
+
   // Date Formatting
   // Initialize State
   const dateFromFormat = 'yyyy-MM-dd';
-  const dateObj = props.value ? DateTime.fromFormat(props.value, dateFromFormat).toJSDate() : null;
+  const dateObj = props.value
+    ? ISOFormatCheck(props.value)
+      ? DateTime.fromISO(props.value).toJSDate()
+      : DateTime.fromFormat(props.value, dateFromFormat).toJSDate()
+    : null;
   const [selectedDate, setSelectedDate] = useState(dateObj);
 
   // Styling the input
@@ -33,7 +46,8 @@ export default forwardRef((props, ref) => {
       getValue: () => {
         let dateString = null;
         if (selectedDate) {
-          dateString = DateTime.fromJSDate(selectedDate).toFormat(dateFromFormat);
+          dateString =
+            DateTime.fromJSDate(selectedDate).toFormat(dateFromFormat);
         }
         return dateString;
       },
