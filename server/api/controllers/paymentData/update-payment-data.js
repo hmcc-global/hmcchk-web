@@ -5,7 +5,7 @@ module.exports = {
   description: 'Update Payment Data',
 
   inputs: {
-    paymentDataId: {
+    id: {
       required: true,
       type: 'string',
     },
@@ -46,7 +46,7 @@ module.exports = {
 
   fn: async function (
     {
-      paymentDataId,
+      id,
       isPaid,
       paymentDateTime,
       paymentType,
@@ -56,24 +56,23 @@ module.exports = {
     },
     exits
   ) {
-    // TODO-aparedan: Uncomment this once the permission properly appluied
+    // TODO-aparedan: Uncomment this once the permission properly applied
     // const user = this.req.user.fullName;
     // sails.log.info(`${user}: Updating payment data`);
 
     // For checking if the date string is valid
+    console.log(paymentDateTime);
     const parsedDate = new Date(Date.parse(paymentDateTime));
 
     if (isNaN(parsedDate)) {
       return exits.invalidDate(err);
     } else {
       // Convert date string to ISO format
-      paymentDateTime = parsedDate.toISOString;
+      paymentDateTime = parsedDate.toISOString();
     }
 
     try {
-      const res = await PaymentData.updateOne({ paymentDataId }).set({
-        formId,
-        userId,
+      const res = await PaymentData.updateOne({ id }).set({
         isPaid,
         paymentDateTime,
         paymentType,

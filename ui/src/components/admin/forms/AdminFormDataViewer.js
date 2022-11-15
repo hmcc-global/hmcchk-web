@@ -5,8 +5,19 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { Button, Heading, Text, Input, HStack, Box } from '@chakra-ui/react';
+import {
+  Button,
+  Heading,
+  Text,
+  Input,
+  HStack,
+  Box,
+  Tooltip,
+} from '@chakra-ui/react';
 import { DateTime } from 'luxon';
+import { paymentMethodList } from '../../helpers/lists';
+import CustomDateEditor from '../ag-grid-editors/CustomDateEditor';
+import { CgUndo, CgRedo } from 'react-icons/cg';
 
 export default function AdminFormDataViewer(props) {
   const {
@@ -15,8 +26,10 @@ export default function AdminFormDataViewer(props) {
   const formName = state.name;
   const formId = state.id;
 
+  const [isPaidForm, setIsPaidForm] = useState(false);
   const [formData, setFormData] = useState([]);
   const [api, setApi] = useState();
+  const [colApi, setColApi] = useState();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
@@ -62,6 +75,89 @@ export default function AdminFormDataViewer(props) {
     browserDatePicker: true,
   };
 
+  // Formatters
+  // For formatting datetime columns
+  const dateTimeFormatter = (dateTime) => {
+    return DateTime.fromISO(dateTime).toFormat('yyyy-MM-dd HH:mm:ss');
+  };
+
+  const dateToFormat = 'dd MMM yyyy';
+  const dateFormatter = (dateStr) => {
+    if (dateStr) {
+      const dateObj = DateTime.fromISO(dateStr);
+      return dateObj.toFormat(dateToFormat);
+    }
+
+    return '';
+  };
+
+  const paymentDateFormatter = (params) => {
+    if (
+      params &&
+      params.data &&
+      params.data.paymentData &&
+      params.data.paymentData.paymentDateTime
+    ) {
+      const { paymentDateTime } = params.data.paymentData;
+      return dateFormatter(paymentDateTime);
+    }
+
+    return '';
+  };
+
+  // Ag-Grid Helpers
+  // Getters
+  const paymentDateGetter = (params) => {
+    if (
+      params &&
+      params.data &&
+      params.data.paymentData &&
+      params.data.paymentData.paymentDateTime
+    ) {
+      const { paymentDateTime } = params.data.paymentData;
+      return paymentDateTime;
+    }
+
+    return '';
+  };
+
+  // Setters
+  const paymentDateSetter = (params) => {
+    if (params && params.data) {
+      var newPaymentDateTime = params.newValue;
+
+      params.data.paymentData.paymentDateTime = newPaymentDateTime;
+      return true;
+    }
+
+    alert('Invalid Payment Date!');
+    return false;
+  };
+
+  // Custom Editors
+  const MediumTextEditorProps = {
+    cellEditorPopup: true,
+    cellEditor: 'agLargeTextCellEditor',
+    cellEditorParams: {
+      maxLength: 100,
+      rows: 1,
+      cols: 50,
+    },
+  };
+
+  const DateCellProps = {
+    cellEditor: CustomDateEditor,
+    cellEditorPopup: true,
+    filter: 'agDateColumnFilter',
+  };
+
+  const BooleanCellProps = {
+    cellEditor: 'agSelectCellEditor',
+    cellEditorParams: {
+      values: [true, false],
+    },
+  };
+
   useEffect(() => {
     const getFormData = async () => {
       try {
@@ -70,13 +166,31 @@ export default function AdminFormDataViewer(props) {
             formId: formId,
           },
         });
+
+        // Check if form is a paid form by checking for paymentData attribute
+        if (data && data.length > 0 && data[data.length - 1].paymentData) {
+          setIsPaidForm(true);
+        }
+
         let formDataTemp = [];
-        data.forEach(function (item) {
+        data.forEach((item) => {
           let temp = {};
+
           temp = item.submissionData;
 
           let dateTimeRaw = DateTime.fromISO(item.createdAt);
           temp['_submissionTime'] = dateTimeRaw.toFormat('yyyy-MM-dd HH:mm:ss');
+          // Populate form data with payment data if form is a paid form
+          if (isPaidForm && item.paymentData && item.paymentData.length > 0) {
+            temp['paymentData'] = item.paymentData[0];
+
+            // Set NULL values to empty strings: NULL values will cause update paymentData API to throw error
+            if (!temp.paymentData.paymentDateTime) {
+              temp.paymentData.paymentDateTime = '';
+            }
+          }
+
+          temp.updatedAt = dateTimeFormatter(item.updatedAt);
 
           if ('address' in temp) {
             let addressString = [];
@@ -85,6 +199,7 @@ export default function AdminFormDataViewer(props) {
             }
             temp['address'] = addressString.join(', ');
           }
+
           formDataTemp.push(temp);
         });
 
@@ -94,7 +209,7 @@ export default function AdminFormDataViewer(props) {
       }
     };
     getFormData();
-  }, [formId]);
+  }, [formId, isPaidForm]);
 
   useEffect(() => {
     if (api) {
@@ -148,14 +263,12 @@ export default function AdminFormDataViewer(props) {
 
     const createBooleanColumn = (key) => {
       return {
+        ...BooleanCellProps,
         headerName: key,
         field: key,
-        cellEditor: 'agSelectCellEditor',
-        cellEditorParams: {
-          values: [true, false],
-        },
       };
     };
+
     // const createDateColumn = (key) => {
     //   return {
     //     headerName: key,
@@ -164,13 +277,76 @@ export default function AdminFormDataViewer(props) {
     //     filterParams: dateFilterParams,
     //   };
     // };
+
     let columnDefs = [
       { headerName: '_submissionTime', field: '_submissionTime', filter: 'agDateColumnFilter', filterParams: dateFilterParams, sort: 'asc' }
     ];
+    const createPaymentDataColumns = (key) => {
+      return {
+        headerName: 'Payment Info',
+        marryChildren: true,
+        children: [
+          {
+            ...BooleanCellProps,
+            headerName: 'Payment Status',
+            field: 'paymentData.isPaid',
+            valueFormatter: (params) => {
+              if (params && params.data && params.data.paymentData) {
+                return params.data.paymentData.isPaid ? 'Paid' : 'Not Paid';
+              }
+            },
+          },
+          {
+            ...DateCellProps,
+            headerName: 'Payment Date',
+            columnGroupShow: 'open',
+            valueGetter: paymentDateGetter,
+            valueSetter: paymentDateSetter,
+            valueFormatter: paymentDateFormatter,
+          },
+          {
+            headerName: 'Payment Type',
+            field: 'paymentData.paymentType',
+            columnGroupShow: 'open',
+          },
+          {
+            headerName: 'Payment Method',
+            field: 'paymentData.paymentMethod',
+            cellEditor: 'agSelectCellEditor',
+            cellEditorParams: {
+              values: paymentMethodList,
+            },
+            columnGroupShow: 'open',
+          },
+          {
+            ...MediumTextEditorProps,
+            headerName: 'Remarks',
+            field: 'paymentData.remarks',
+            columnGroupShow: 'open',
+          },
+          {
+            ...BooleanCellProps,
+            headerName: 'Confirmation Email',
+            field: 'paymentData.isConfirmationEmailSent',
+            columnGroupShow: 'open',
+            valueFormatter: (params) => {
+              if (params && params.data && params.data.paymentData) {
+                return params.data.paymentData.isConfirmationEmailSent
+                  ? 'Sent'
+                  : 'Not Sent';
+              }
+            },
+          },
+        ],
+      };
+    };
 
     const objectClassifier = (key, value) => {
       if (key === '_submissionTime') {
         return;
+      } else if (key === 'paymentData') {
+        // Create Payment Info Column Group
+        columnDefs.push(createPaymentDataColumns(key, value));
       } else if (typeof value === 'string') {
         columnDefs.push(createStringColumn(key));
       } else if (typeof value === 'number') {
@@ -185,8 +361,8 @@ export default function AdminFormDataViewer(props) {
     };
 
     if (formData && formData.length > 0) {
-      const first = formData[0];
-      for (const [key, value] of Object.entries(first)) {
+      const sample = formData[formData.length - 1];
+      for (const [key, value] of Object.entries(sample)) {
         objectClassifier(key, value);
       }
     }
@@ -194,11 +370,69 @@ export default function AdminFormDataViewer(props) {
     return columnDefs;
   };
 
-  const onGridReady = (event) => {
-    if (event.api) {
-      setApi(event.api);
+  // Ag-Grid Functions
+  // Initialize Grid API states
+  const onGridReady = (params) => {
+    if (params.api) setApi(params.api);
+    if (params.columnApi) setColApi(params.columnApi);
+  };
+
+  // Function to resize all columns automatically
+  const autoSizeAllColumns = () => {
+    if (colApi) {
+      const allColumnIds = [];
+      colApi.getAllColumns().forEach((column) => {
+        allColumnIds.push(column.getId());
+      });
+      colApi.autoSizeColumns(allColumnIds);
     }
   };
+
+  // Resize columns on first render of the grid
+  const onFirstDataRendered = () => {
+    if (api && colApi) {
+      autoSizeAllColumns();
+    }
+  };
+
+  // Call API to update payment data
+  const updatePaymentData = async (data) => {
+    const res = await axios.put('/api/paymentData/update', {
+      ...data,
+    });
+
+    if (res.status !== 200) {
+      alert('Something went wrong, please refresh and try again..');
+    }
+  };
+
+  const onCellValueChanged = async (p) => {
+    if (api && colApi && p.data) {
+      autoSizeAllColumns();
+
+      const groupHeaderName =
+        p?.column?.originalParent?.colGroupDef?.headerName;
+
+      if (groupHeaderName && groupHeaderName === 'Payment Info') {
+        const { paymentData: newPaymentData } = p.data;
+        await updatePaymentData(newPaymentData);
+      }
+    }
+  };
+
+  // Undo and Redo Functions
+  const undo = () => {
+    if (api) api.undoCellEditing();
+  };
+
+  const redo = () => {
+    if (api) api.redoCellEditing();
+  };
+
+  // Enabling Undo and Redo
+  const undoRedoCellEditing = true;
+  const undoRedoCellEditingLimit = 20;
+  const enableCellChangeFlash = true;
 
   return (
     <>
@@ -236,6 +470,24 @@ export default function AdminFormDataViewer(props) {
             00:00)
           </Text>
         </Box>
+        {/* Enable Undo / Redo if is a Paid Form */}
+        <div>
+          {isPaidForm ? (
+            <HStack m="2" w="100%">
+              <Tooltip label="Ctrl/Cmd + Z">
+                <Button onClick={undo} leftIcon={<CgUndo />}>
+                  Undo
+                </Button>
+              </Tooltip>
+              <Tooltip label="Ctrl/Cmd + Y">
+                <Button onClick={redo} rightIcon={<CgRedo />}>
+                  Redo
+                </Button>
+              </Tooltip>
+            </HStack>
+          ) : null}
+        </div>
+
         <AgGridReact
           defaultColDef={defaultColDef}
           columnDefs={createColumnDefs()}
@@ -244,6 +496,11 @@ export default function AdminFormDataViewer(props) {
           stopEditingWhenCellsLoseFocus={true}
           rowSelection='multiple'
           tooltipShowDelay={0}
+          onFirstDataRendered={onFirstDataRendered}
+          onCellValueChanged={onCellValueChanged}
+          undoRedoCellEditing={undoRedoCellEditing}
+          undoRedoCellEditingLimit={undoRedoCellEditingLimit}
+          enableCellChangeFlash={enableCellChangeFlash}
         />
       </div>
     </>
