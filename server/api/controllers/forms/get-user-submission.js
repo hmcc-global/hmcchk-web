@@ -8,6 +8,10 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    userId: {
+      type: 'string',
+      required: true,
+    },
   },
 
   exits: {
@@ -23,7 +27,7 @@ module.exports = {
     },
   },
 
-  fn: async function ({ formId, timeRange }, exits) {
+  fn: async function ({ formId, userId }, exits) {
     try {
       let whereClause = {
         formId: formId,
@@ -32,7 +36,14 @@ module.exports = {
 
       const data = await Submission.find(whereClause);
       let userData = data.map((i) => i.submissionData);
-      return exits.success(userData);
+
+      //Extract the email addresses in a set
+      const emailSet = new Set(userData.map((i) => i['email']));
+
+      //If user email already exist redirect return true else false
+      if (emailSet.has(userId)) {
+        return true;
+      } else return false;
     } catch (err) {
       sails.log(err);
       return exits.error(err);
