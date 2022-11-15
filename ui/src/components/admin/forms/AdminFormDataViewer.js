@@ -17,7 +17,7 @@ import {
 import { DateTime } from 'luxon';
 import { paymentMethodList } from '../../helpers/lists';
 import CustomDateEditor from '../ag-grid-editors/CustomDateEditor';
-import { CgUndo, CgRedo } from 'react-icons/cg';
+import { CgUndo, CgRedo, CgMail } from 'react-icons/cg';
 
 export default function AdminFormDataViewer(props) {
   const {
@@ -32,6 +32,7 @@ export default function AdminFormDataViewer(props) {
   const [colApi, setColApi] = useState();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [selectedRows, setSelectedRows] = useState();
 
   const getFilterType = useCallback(() => {
     if (startDate !== '' && endDate !== '') return 'inRange';
@@ -444,6 +445,40 @@ export default function AdminFormDataViewer(props) {
   const undoRedoCellEditingLimit = 20;
   const enableCellChangeFlash = true;
 
+  // Update selected rows
+  const onSelectionChanged = useCallback(() => {
+    if (api) {
+      setSelectedRows(api.getSelectedRows());
+    }
+  }, [api]);
+
+  // TODO-Samyak: Replace with actual send confirmation email function
+  const sendConfirmationEmail = useCallback(() => {
+    if (selectedRows && selectedRows.length > 0) {
+      let emailList = selectedRows.map((row) => row.email);
+      alert(`Confirmation email sent to:\n${emailList.join('\n')}`);
+    }
+  }, [selectedRows]);
+
+  const getContextMenuItems = useCallback(
+    (params) => {
+      var result = [
+        // Default functions
+        'copy',
+        'export',
+        'separator',
+        // Custom functions
+        {
+          name: 'Send Confirmation Email',
+          action: sendConfirmationEmail,
+        },
+      ];
+
+      return result;
+    },
+    [sendConfirmationEmail]
+  );
+
   return (
     <>
       <Heading as="h5" mb={5}>
@@ -511,6 +546,9 @@ export default function AdminFormDataViewer(props) {
           undoRedoCellEditing={undoRedoCellEditing}
           undoRedoCellEditingLimit={undoRedoCellEditingLimit}
           enableCellChangeFlash={enableCellChangeFlash}
+          getContextMenuItems={getContextMenuItems}
+          rowSelection={'multiple'}
+          onSelectionChanged={onSelectionChanged}
         />
       </div>
     </>
