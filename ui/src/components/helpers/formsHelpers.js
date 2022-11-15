@@ -130,15 +130,12 @@ const validateForm = async (id, user) => {
         {
           params: {
             formId: id,
+            userId: user.id,
           },
         }
       );
-
-      //Extract the email addresses in a set
-      const emailSet = new Set(userData.map((i) => i['email']));
-
       //If user email already exist redirect user to a response page
-      if (emailSet.has(user['email'])) {
+      if (userData) {
         return {
           pathname: '/user-has-signedup',
           state: {
