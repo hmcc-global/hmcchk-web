@@ -3,6 +3,12 @@ import AdventCard from './AdventCard';
 
 const AdventContainer = () => {
   const cardArray = Array.from({ length: 24 }, (_, i) => i + 1);
+  const isActive = (i) => {
+    const today = new Date().getDate();
+    if (cardArray[i] <= today) {
+      return true;
+    }
+  };
 
   return (
     <Box
@@ -35,8 +41,7 @@ const AdventContainer = () => {
             left={['5vw', '7vw', '7vw', '7vw', '10vw']}
           >
             {cardArray.map((el, i) => (
-              // Replace el < 10 with actual is active check
-              <AdventCard isActive={el < 10} date={el} key={i} />
+              <AdventCard isActive={isActive(i)} date={el} key={i} />
             ))}
           </Grid>
         </GridItem>
