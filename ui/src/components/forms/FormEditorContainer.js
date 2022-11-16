@@ -138,7 +138,7 @@ const FormEditorContainer = (props) => {
                       name="isPaymentRequired"
                       defaultValue={false}
                       render={({ field: { onChange, value, ref } }) => (
-                        <Switch onChange={onChange} ref={ref} isChecked= {value}>
+                        <Switch onChange={onChange} ref={ref} isChecked= {value} disabled={formName != null}>
                           {value ? 'Yes' : 'No'}
                         </Switch>
                       )}
