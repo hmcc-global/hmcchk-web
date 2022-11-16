@@ -5,7 +5,7 @@ import {
   Text,
   UnorderedList,
   ListItem,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const HowToGive = (props) => {
   return (
@@ -21,31 +21,41 @@ const HowToGive = (props) => {
       <Box textAlign="center">
         <Text
           color="#F9916B"
+          color="#F9916B"
           fontWeight="900"
-          fontSize={["1.3rem", "1.75rem"]}
+          fontSize={['1.3rem', '1.75rem']}
           pt={7}
         >
           How to Give
         </Text>
       </Box>
       <Stack
-        direction={["column", "row"]}
+        direction={{ base: 'column', md: 'row' }}
         p={[3, 10]}
         pt={[3, 4]}
         pb={[3, 7]}
         spacing={[5, 10]}
-        fontSize={["0.7rem", "md"]}
+        fontSize={{ base: '0.7rem', sm: '0.9rem', md: 'md' }}
       >
-        <Box>
-          <Text flex="1" p={[3, 7]} ml={[3, 0]} mr={[3, 0]} borderColor="#F9916B" borderWidth={3}>
+        <Box alignSelf="center" w={{ base: '100%', md: '45%' }}>
+          <Text
+            flex="1"
+            py={[3, 12]}
+            ml={[3, 0]}
+            mr={[3, 0]}
+            pl={[5, 5]}
+            pr={[3, '8vw']}
+            borderColor="#F9916B"
+            borderWidth={3}
+          >
             <b>Category Codes:</b>
             <UnorderedList>
-              <ListItem>GC: Our Global Church</ListItem>
+              <ListItem>GC: Our Global Church LC</ListItem>
               <ListItem>LC: Our Local Church</ListItem>
             </UnorderedList>
           </Text>
         </Box>
-        <Stack direction="column" flex={["1", "2"]} spacing={3} p={2} pt={0}>
+        <Stack direction="column" flex={['1', '2']} spacing={3} p={2} pt={0}>
           <Text>
             <b>
               When giving, please <u>always</u> leave a note in the transfer
@@ -60,13 +70,13 @@ const HowToGive = (props) => {
             GT: GC 1000, LC 500
           </Text>
           <Text>
-            Note: Please email{" "}
+            Note: Please email{' '}
             <Link href="mailto:stewardship@hongkong.hmcc.net">
               <u>
                 <i>stewardship@hongkong.hmcc.net</i>
               </u>
-            </Link>{" "}
-            with the appropriate category and amount allocations if you forgot
+            </Link>{' '}
+            with the appropriate category and amount allocations if you forget
             to leave a remark or memo in the online giving process
           </Text>
         </Stack>
