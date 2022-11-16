@@ -11,27 +11,28 @@ const LastYearGivingTuesday = (props) => {
       background="white"
       shadow="md"
       textAlign="center"
+      paddingBottom={8}
     >
       <Text
-        color="#B1A38F"
+        color="#F9916B"
         fontWeight="900"
         fontSize={['1.1rem', '1.75rem']}
         pt={[3, 7]}
+        mb="2"
       >
         Last Year's Giving Tuesday
       </Text>
       <Stack fontSize={['0.7rem', 'md']} pl={7} pr={7} spacing={[5, 3]}>
         <Text>
-          <b>111 people gave for a total of HK$192,331.09</b>
+          <b>157 person</b> gave for a <b> total of HK$286,171.58</b>
         </Text>
         <Box>
           <Text>
-            <b>HK$60k</b> total given to{' '}
-            <b>missionaries / missions organizations</b>:
+            <b>Giving towards 3 categories:</b>
           </Text>
           <Text>
-            HK$20k each to 1) HKCNP, 2) Christian Action, and 3) Missionary
-            David Ro
+            1) Our Church Budget, 2) Partnering NGOs, 3) Churches Affected by
+            Covid
           </Text>
         </Box>
       </Stack>
