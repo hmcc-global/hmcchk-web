@@ -29,20 +29,22 @@ const RenderSwitch = (param) => {
           <Stack>
             <Text fontWeight="bold">
               Open your mobile banking FPS interface and scan the QR code OR
-              input the FPS identifier.
+              input the FPS identifier:
             </Text>
             <Box>
-              <Text fontWeight="bold">
-                Name: HARVEST MISSION COMMUNITY CHURCH
+              <Text>
+                Name: <b> HARVEST MISSION COMMUNITY CHURCH</b>
               </Text>
-              <Text fontWeight="bold">FPS ID: 167534304</Text>
+              <Text>
+                FPS ID: <b>167534304 </b>
+              </Text>
             </Box>
           </Stack>
           <Spacer />
 
           <Image
             margin="auto"
-            src={process.env.PUBLIC_URL + '/images/givingTuesday/FPSQR.png'}
+            src={process.env.PUBLIC_URL + '/images/giving/fps.png'}
             boxSize={['70%', '70%', '30%']}
           />
         </Flex>
@@ -50,25 +52,24 @@ const RenderSwitch = (param) => {
     case 'Online Giving':
       return (
         <Box>
-          <Text fontWeight="bold">
+          <Text fontWeight="bold" mb="5">
+            Online Giving:{' '}
+            <Link
+              style={{
+                textDecoration: 'underline',
+              }}
+              href="https://bit.ly/hmcc-giving-cc"
+              color="#000000"
+            >
+              https://bit.ly/hmcc-giving-cc
+            </Link>{' '}
+          </Text>
+          <Text>
             Kindly note that a portion of your giving will be deducted for
             online credit card transactions (3.5% + HKD $2.35 processing fee).
             If you wish for 100% of your contribution to go towards our church’s
             ministry work, please consider selecting “cover fees” on the giving
             site or give via cash or check.
-          </Text>
-          <Text fontWeight="bold">
-            Click{' '}
-            <Link
-              style={{
-                textDecoration: 'underline',
-              }}
-              href="https://tithe.ly/give_new/www/#/tithely/give-one-time/645349"
-              color="#319795"
-            >
-              here
-            </Link>{' '}
-            to proceed with online credit card giving
           </Text>
         </Box>
       );
@@ -79,30 +80,32 @@ const RenderSwitch = (param) => {
             <Text fontWeight="bold">
               You may use the following information:
             </Text>
-            <Text fontWeight="bold">
-              Bank Name: China Construction Bank (Asia) Corporation Limited
+            <Text>
+              Bank Name:{' '}
+              <b>China Construction Bank (Asia) Corporation Limited</b>
             </Text>
-            <Text fontWeight="bold">Bank Code: 009</Text>
-            <Text fontWeight="bold">Branch Code: 845</Text>
-            <Text fontWeight="bold">
-              Account Name: Harvest Mission Community Church (Hong Kong)
+            <Text>
+              Bank Code: <b>009</b>
             </Text>
-            <Text fontWeight="bold">Limited Account Number: 13012090</Text>
-            <Text fontWeight="bold">
-              Transfer Remarks: Please indicate the giving type (Weekly
-              Offering, Tithe, HMI, or Other) and write down the giving date
-              (e.g. Weekly Offering 2019-11-03)
+            <Text>
+              Branch Code: <b>845</b>
+            </Text>
+            <Text>
+              Account Name: <b>Harvest Mission Community Church (Hong Kong)</b>
+            </Text>
+            <Text>
+              Limited Account Number: <b>13012090</b>
             </Text>
           </Box>
 
-          <Text fontWeight="bold">
+          <Text>
             If our account name is too long and exceeds the number of permitted
-            characters, you may shorten it as “Harvest Mission Community Church
-            HK”.
+            characters, you may shorten it as{' '}
+            <b> “Harvest Mission Community Church HK”.</b>
           </Text>
-          <Text fontWeight="bold">
+          <Text>
             Please email a copy of your transfer receipt along with your Full
-            Name within 2 weeks to stewardship@hongkong.hmcc.net.
+            Name within 2 weeks to <b> stewardship@hongkong.hmcc.net.</b>
           </Text>
         </VStack>
       );
