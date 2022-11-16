@@ -105,7 +105,7 @@ module.exports.routes = {
 
   // Advent API
   'post /api/mailingList/create': 'mailingList/create-mail-entry',
-
+  'get /api/mailingList/get': 'mailingList/get-mail-entry',
   // UI
   'get /*': {
     skipAssets: true,
