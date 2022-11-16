@@ -163,8 +163,6 @@ const FormEditor = (props) => {
         formAvailableFrom: formInformation.formAvailableFrom,
         formAvailableUntil: formInformation.formAvailableUntil,
         formFields: formFields,
-        
-        
       };
 
       for (let i = 0; i < formToSave.formFields.length; i++) {
@@ -188,7 +186,7 @@ const FormEditor = (props) => {
 
   useEffect(() => {
     if (existingFormFieldsData) {
-      if (existingFormFieldsData.formFields[0].fieldType === 'prefill') {
+      if (existingFormFieldsData.formFields[0]?.fieldType === 'prefill') {
         let fields = existingFormFieldsData.formFields[0].options;
         fields.forEach((field) => {
           setValuePrefill(field + 'Checkbox', true);
