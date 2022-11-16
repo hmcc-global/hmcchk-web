@@ -48,7 +48,7 @@ module.exports.policies = {
   'forms/get-form': true,
   'forms/post-create-submission': true,
   'forms/get-submission': ['isLoggedIn', 'aboveTech'],
-  'forms/get-check-email-form': ['isLoggedIn'],
+  'forms/get-user-submission': ['isLoggedIn'],
 
   // Last Updated
   'lastUpdated/get-last-updated': ['isLoggedIn', 'aboveAdmin'],

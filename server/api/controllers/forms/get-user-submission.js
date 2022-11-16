@@ -1,7 +1,8 @@
 module.exports = {
-  friendlyName: 'Retrieve all users submission for a certain form',
+  friendlyName: 'Return user form submission data',
 
-  description: 'Create a new user submission entry from form data',
+  description:
+    'Returns user form submission data',
 
   inputs: {
     formId: {
@@ -16,11 +17,15 @@ module.exports = {
 
   exits: {
     success: {
-      description: 'Successfully retrieved user submissions.',
+      description: 'Successfully return user form submission.',
     },
     error: {
       description:
-        'There was an internal server issue with retrieving user submissions.',
+        'There was an internal server issue with retrieving user form submission.',
+    },
+    notFound: {
+      description: 'No userId found',
+      responseType: 'notFound'
     },
     invalid: {
       description: 'Something is wrong with your request. Please check it',
@@ -35,15 +40,12 @@ module.exports = {
       };
 
       const data = await Submission.find(whereClause);
-      let userData = data.map((i) => i.submissionData);
+      if (!data) return exits.success({});
 
-      //Extract the email addresses in a set
-      const emailSet = new Set(userData.map((i) => i['email']));
+      const sub = data.find(i => i.userId === userId);
+      if (!sub) return exits.success({});
 
-      //If user email already exist redirect return true else false
-      if (emailSet.has(userId)) {
-        return true;
-      } else return false;
+      return exits.success(sub);
     } catch (err) {
       sails.log(err);
       return exits.error(err);
