@@ -116,15 +116,16 @@ const GivingCard = (cardinfo) => {
   return (
     <Box
       w={['100%', '100%', '32%']}
-      borderRadius="3xl"
+      borderRadius="2xl"
       my={['0', '0', '0']}
       bgImage={cardinfo.imageLink}
       bgPosition="center"
       bgSize="cover"
       boxShadow="0px 4px 8px rgba(0, 0, 0, 0.15)"
+      fontFamily="Inter"
     >
       <Flex
-        borderRadius="3xl"
+        borderRadius="2xl"
         w="full"
         h="100%"
         justify="center"
@@ -134,28 +135,32 @@ const GivingCard = (cardinfo) => {
         }}
       >
         <Box
-          py={['3vh', '3vh', '10vh']}
+          py={['0vh', '3vh', '10vh']}
           px={[1, 0]}
-          minH={['10vh', '20vh']}
+          minH={{ base: '7vh', sm: '12vh', md: '20vh' }}
           minW="90%"
           justifyContent="center"
           textAlign="center"
           verticalAlign="middle"
         >
-          <Flex direction={['row', 'row', 'column']}>
+          <Flex direction={{ base: 'row', md: 'column' }} minH="100%">
             <Center>
               <Heading
                 as="h2"
                 fontSize={['lg', 'xl', '3xl']}
                 color="white"
-                fontWeight="900"
+                fontWeight="700"
               >
                 {cardinfo.text}
               </Heading>
             </Center>
             <Spacer />
             <Center>
-              <Box w="80%" float={['right', 'center']}>
+              <Box
+                w="70%"
+                float={['right', 'center']}
+                mt={{ base: '0', md: '8' }}
+              >
                 <Button
                   w="100%"
                   size="sm"
@@ -224,11 +229,7 @@ const WaysToGive = (props) => {
           </i>
         </Text>
       </Box>
-      <Stack direction={['column', 'row']} spacing={[1, 4]}>
-        <GivingCard
-          text="FPS"
-          imageLink={process.env.PUBLIC_URL + '/images/giving/FPS.png'}
-        />
+      <Stack direction={{ base: 'column', md: 'row' }} spacing={[1, 4]}>
         <GivingCard
           text="Online Giving"
           imageLink={process.env.PUBLIC_URL + '/images/giving/Online.png'}
@@ -237,7 +238,15 @@ const WaysToGive = (props) => {
           text="Bank Transfer"
           imageLink={process.env.PUBLIC_URL + '/images/giving/Transfer.png'}
         />
+        <GivingCard
+          text="FPS"
+          imageLink={process.env.PUBLIC_URL + '/images/giving/FPS.png'}
+        />
       </Stack>
+      <Box fontSize={['0.7rem', 'md']}>
+        *If you would like to give via cash, please contact your LIFE Group
+        leader to help transfer the giving for you
+      </Box>
       <Box fontSize={['0.7rem', 'md']}>
         Personal information is kept confidential, used only for tax receipt
         purposes, and is only accessible by the Stewardship Team. If you have

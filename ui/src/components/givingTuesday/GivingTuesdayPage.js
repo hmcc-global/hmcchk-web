@@ -106,7 +106,7 @@ const GivingTuesdayPage = (props) => {
             eventStatus={eventStatus}
             givingData={givingData}
           />
-          {eventStatus !== "after" && <HowToGive />}
+          {eventStatus !== 'after' && <HowToGive />}
           <WaysToGive accentColor={accentColor} />
           <LastYearGivingTuesday />
         </Stack>
