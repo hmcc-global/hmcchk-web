@@ -56,10 +56,11 @@ const MailingListForm = ({ props }) => {
         category: 'advent',
       });
       toast({
-        description: 'Saved',
+        description: 'You have been added to the mailing list!',
         status: 'success',
         duration: 5000,
       });
+      setIsOpen(false);
     } catch (err) {
       console.log('Submitting to mailing list failed');
       setError('Submitting to mailing list failed');
@@ -149,7 +150,7 @@ const MailingListForm = ({ props }) => {
                   }}
                   colorScheme="teal"
                 >
-                  submit
+                  Submit
                 </Button>
               </ButtonGroup>
             </VStack>
