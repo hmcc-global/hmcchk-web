@@ -125,7 +125,7 @@ const VisitUsPage = (props) => {
                   _hover={{ boxShadow: "none", color: "#fff" }}
                 >
                   <LinkOverlay
-                    href="https://bit.ly/hmcc-sc"
+                    href="https://hongkong.hmcc.net/login"
                     isExternal
                   >
                     Sign Up for In-person Sunday Celebration
