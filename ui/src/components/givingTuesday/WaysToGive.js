@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Box,
   Button,
@@ -19,13 +19,13 @@ import {
   Center,
   Image,
   ModalFooter,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const RenderSwitch = (param) => {
   switch (param.ModalSelection) {
-    case "FPS":
+    case 'FPS':
       return (
-        <Flex direction={["column", "column", "row"]}>
+        <Flex direction={['column', 'column', 'row']}>
           <Stack>
             <Text fontWeight="bold">
               Open your mobile banking FPS interface and scan the QR code OR
@@ -42,12 +42,12 @@ const RenderSwitch = (param) => {
 
           <Image
             margin="auto"
-            src={process.env.PUBLIC_URL + "/images/givingTuesday/FPSQR.png"}
-            boxSize={["70%", "70%", "30%"]}
+            src={process.env.PUBLIC_URL + '/images/givingTuesday/FPSQR.png'}
+            boxSize={['70%', '70%', '30%']}
           />
         </Flex>
       );
-    case "Online Giving":
+    case 'Online Giving':
       return (
         <Box>
           <Text fontWeight="bold">
@@ -58,21 +58,21 @@ const RenderSwitch = (param) => {
             site or give via cash or check.
           </Text>
           <Text fontWeight="bold">
-            Click{" "}
+            Click{' '}
             <Link
               style={{
-                textDecoration: "underline",
+                textDecoration: 'underline',
               }}
               href="https://tithe.ly/give_new/www/#/tithely/give-one-time/645349"
               color="#319795"
             >
               here
-            </Link>{" "}
+            </Link>{' '}
             to proceed with online credit card giving
           </Text>
         </Box>
       );
-    case "Bank Transfer":
+    case 'Bank Transfer':
       return (
         <VStack spacing="3vh">
           <Box>
@@ -107,7 +107,7 @@ const RenderSwitch = (param) => {
         </VStack>
       );
     default:
-      return "not detected";
+      return 'not detected';
   }
 };
 
@@ -115,9 +115,9 @@ const GivingCard = (cardinfo) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box
-      w={["100%", "100%", "32%"]}
+      w={['100%', '100%', '32%']}
       borderRadius="3xl"
-      my={["0", "0", "0"]}
+      my={['0', '0', '0']}
       bgImage={cardinfo.imageLink}
       bgPosition="center"
       bgSize="cover"
@@ -129,24 +129,24 @@ const GivingCard = (cardinfo) => {
         h="100%"
         justify="center"
         style={{
-          backdropFilter: "blur(4px)",
-          background: "rgba(0, 0, 0, 0.29)",
+          backdropFilter: 'blur(4px)',
+          background: 'rgba(0, 0, 0, 0.29)',
         }}
       >
         <Box
-          py={["3vh", "3vh", "10vh"]}
+          py={['3vh', '3vh', '10vh']}
           px={[1, 0]}
-          minH={["10vh", "20vh"]}
+          minH={['10vh', '20vh']}
           minW="90%"
           justifyContent="center"
           textAlign="center"
           verticalAlign="middle"
         >
-          <Flex direction={["row", "row", "column"]}>
+          <Flex direction={['row', 'row', 'column']}>
             <Center>
               <Heading
                 as="h2"
-                fontSize={["lg", "xl", "3xl"]}
+                fontSize={['lg', 'xl', '3xl']}
                 color="white"
                 fontWeight="900"
               >
@@ -155,7 +155,7 @@ const GivingCard = (cardinfo) => {
             </Center>
             <Spacer />
             <Center>
-              <Box w="80%" float={["right", "center"]}>
+              <Box w="80%" float={['right', 'center']}>
                 <Button
                   w="100%"
                   size="sm"
@@ -165,7 +165,7 @@ const GivingCard = (cardinfo) => {
                 >
                   <Text
                     align="center"
-                    fontSize={["xs", "sm", "sm"]}
+                    fontSize={['xs', 'sm', 'sm']}
                     fontWeight="700"
                     color="white"
                     pl={5}
@@ -174,7 +174,7 @@ const GivingCard = (cardinfo) => {
                     Learn More
                   </Text>
                 </Button>
-                <Modal isOpen={isOpen} size={"xl"} onClose={onClose}>
+                <Modal isOpen={isOpen} size={'xl'} onClose={onClose}>
                   <ModalOverlay />
                   <ModalContent>
                     <ModalHeader>
@@ -206,46 +206,42 @@ const WaysToGive = (props) => {
         <Text
           color={accentColor}
           fontWeight="800"
-          fontSize={["1.4rem", "1.875rem"]}
+          fontSize={['1.4rem', '1.875rem']}
         >
           Ways To Give
         </Text>
         <Text
           color={accentColor}
           fontWeight="700"
-          fontSize={["0.8rem", "1.25rem"]}
+          fontSize={['0.8rem', '1.25rem']}
         >
           There are a few different ways you can give to our church.
         </Text>
-        <Text fontSize={["0.7rem", "md"]}>
+        <Text fontSize={['0.7rem', 'md']}>
           <i>
             *When giving, please always use your legal name and provide the same
             email address consistently.
           </i>
         </Text>
       </Box>
-      <Stack direction={["column", "row"]} spacing={[1, 4]}>
+      <Stack direction={['column', 'row']} spacing={[1, 4]}>
         <GivingCard
           text="FPS"
-          imageLink={process.env.PUBLIC_URL + "/images/givingTuesday/FPS.png"}
+          imageLink={process.env.PUBLIC_URL + '/images/giving/FPS.png'}
         />
         <GivingCard
           text="Online Giving"
-          imageLink={
-            process.env.PUBLIC_URL + "/images/givingTuesday/Online.png"
-          }
+          imageLink={process.env.PUBLIC_URL + '/images/giving/Online.png'}
         />
         <GivingCard
           text="Bank Transfer"
-          imageLink={
-            process.env.PUBLIC_URL + "/images/givingTuesday/Transfer.png"
-          }
+          imageLink={process.env.PUBLIC_URL + '/images/giving/Transfer.png'}
         />
       </Stack>
-      <Box fontSize={["0.7rem", "md"]}>
+      <Box fontSize={['0.7rem', 'md']}>
         Personal information is kept confidential, used only for tax receipt
         purposes, and is only accessible by the Stewardship Team. If you have
-        any questions, please do not hesitate to contact us:{" "}
+        any questions, please do not hesitate to contact us:{' '}
         <b>
           <a href="mailto:stewardship@hongkong.hmcc.net">
             stewardship@hongkong.hmcc.net
