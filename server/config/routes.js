@@ -41,6 +41,7 @@ module.exports.routes = {
   'get /api/paymentData/get': 'paymentData/get-payment-data',
   'post /api/paymentData/create': 'paymentData/create-payment-data',
   'put /api/paymentData/update': 'paymentData/update-payment-data',
+  'put /api/paymentData/send-email': 'paymentData/post-send-confirmation-email',
 
   // Announcement APIs
   'get /api/announcements/get-announcements': 'announcements/get-announcements',
