@@ -10,7 +10,7 @@ import WhatIsGivingTuesday from "./WhatIsGivingTuesday";
 import { customAxios as axios } from "../helpers/customAxios";
 
 const GivingTuesdayPage = (props) => {
-  const accentColor = "#3F94C3";
+  const accentColor = "#00328D";
   const [remainingTimeString, setRemainingTimeString] = useState("24:00:00");
   const [eventStatus, setEventStatus] = useState("before");
   const [givingData, setGivingData] = useState([500, 1000, 20, 1]);
@@ -52,7 +52,7 @@ const GivingTuesdayPage = (props) => {
   }, []);
 
   return (
-    <Box background="#EDFBFF">
+    <Box background="#DDE9FF">
       <Container maxW="container.lg">
         <Stack spacing={5} p={[3, 5]}>
           {eventStatus === "during" && (
