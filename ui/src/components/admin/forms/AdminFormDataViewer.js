@@ -17,6 +17,7 @@ import { DateTime } from 'luxon';
 import { paymentMethodList } from '../../helpers/lists';
 import CustomDateEditor from '../ag-grid-editors/CustomDateEditor';
 import { CgUndo, CgRedo } from 'react-icons/cg';
+import AdminPaymentDataModal from './AdminPaymentDataModal';
 
 export default function AdminFormDataViewer(props) {
   const {
@@ -34,6 +35,11 @@ export default function AdminFormDataViewer(props) {
   const [colApi, setColApi] = useState();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState('');
+  const [modalTitle, setModalTitle] = useState('');
+  const [modalColId, setModalColId] = useState('');
 
   const getFilterType = useCallback(() => {
     if (startDate !== '' && endDate !== '') return 'inRange';
@@ -252,7 +258,7 @@ export default function AdminFormDataViewer(props) {
     };
 
     let columnDefs = [
-      { headerName: '_submissionTime', field: '_submissionTime', valueFormatter: dateTimeFormatter, filter: 'agDateColumnFilter', filterParams: dateFilterParams, sort: 'asc' }
+      { headerName: '_submissionTime', field: '_submissionTime', valueFormatter: dateTimeFormatter, filter: 'agDateColumnFilter', checkboxSelection: isPaidForm, filterParams: dateFilterParams, sort: 'asc' }
     ];
     const createPaymentDataColumns = () => {
       return {
@@ -393,7 +399,7 @@ export default function AdminFormDataViewer(props) {
   };
 
   const onCellValueChanged = async (p) => {
-    if (p && p.newValue && p.colDef) {
+    if (p && p.colDef) {
       const payload = {
         id: p.data.paymentData.id,
         [p.colDef.colId]: p.newValue,
@@ -417,30 +423,94 @@ export default function AdminFormDataViewer(props) {
   const enableCellChangeFlash = true;
 
   // TODO-Samyak: Replace with actual send confirmation email function
-  const sendConfirmationEmail = useCallback(() => {
+  const sendConfirmationEmail = () => {
     console.log('not yet implemented')
-  }, []);
+  }
 
-  const getContextMenuItems = useCallback(
-    (params) => {
-      var result = [
-        // Default functions
-        'copy',
-        'separator',
-        // Custom functions
-        {
-          name: 'Send Confirmation Email',
-          action: sendConfirmationEmail,
-        },
-      ];
+  const contextMenuSetter = (selectedNodes, value, colId) => {
+    if (selectedNodes.length === 0) return;
 
-      return result;
-    },
-    [sendConfirmationEmail]
-  );
+    for (const node of selectedNodes) {
+      node.setDataValue(colId, value);
+    }
+  }
+
+  const modalCallbackHandler = (value) => {
+    if (api && value) {
+      const selectedNodes = api.getSelectedNodes();
+      contextMenuSetter(selectedNodes, value, modalColId);
+    }
+  }
+
+  const getContextMenuItems = (params) => {
+    const selectedNodes = params.api.getSelectedNodes();
+    let result = [
+      // Default functions
+      'copy',
+      'separator',
+      // Custom functions
+      {
+        name: 'Set Payment Status As',
+        disabled: selectedNodes.length === 0,
+        subMenu: [
+          {
+            name: 'Paid',
+            action: () => contextMenuSetter(selectedNodes, true, 'isPaid')
+          },
+          {
+            name: 'Not Paid',
+            action: () => contextMenuSetter(selectedNodes, false, 'isPaid')
+          }
+        ],
+      },
+      {
+        name: 'Set Payment Date',
+        disabled: selectedNodes.length === 0,
+        action: () => { 
+          setIsModalOpen(true)
+          setModalTitle('Set Payment Date');
+          setModalColId('paymentDateTime');
+          setModalType('date');
+        }
+      },
+      {
+        name: 'Set Payment Type',
+        disabled: selectedNodes.length === 0,
+        action: () => { 
+          setIsModalOpen(true);
+          setModalTitle('Set Payment Type');
+          setModalColId('paymentType');
+          setModalType('text');
+        }
+      },
+      {
+        name: 'Set Payment Method As',
+        disabled: selectedNodes.length === 0,
+        subMenu: paymentMethodList.map(i => ({
+          name: i,
+          action: () => contextMenuSetter(selectedNodes, i, 'paymentMethod')
+        }))
+      },
+      'separator',
+      {
+        name: 'Send Confirmation Email',
+        disabled: selectedNodes.length === 0,
+        action: sendConfirmationEmail,
+      },
+    ];
+
+    return result;
+  }
 
   return (
     <>
+      <AdminPaymentDataModal
+        modalOpen={isModalOpen}
+        setModalOpen={setIsModalOpen}
+        modalType={modalType}
+        modalTitle={modalTitle}
+        handler={modalCallbackHandler}
+      />
       <Heading as="h5" mb={5}>
         {formName}
       </Heading>
@@ -507,6 +577,7 @@ export default function AdminFormDataViewer(props) {
           undoRedoCellEditingLimit={undoRedoCellEditingLimit}
           enableCellChangeFlash={enableCellChangeFlash}
           getContextMenuItems={getContextMenuItems}
+          suppressRowClickSelection={true}
         />
       </div>
     </>
