@@ -20,7 +20,7 @@ const HowToGive = (props) => {
     >
       <Box textAlign="center">
         <Text
-          color="#B1A38F"
+          color="#F9916B"
           fontWeight="900"
           fontSize={["1.3rem", "1.75rem"]}
           pt={7}
@@ -37,12 +37,11 @@ const HowToGive = (props) => {
         fontSize={["0.7rem", "md"]}
       >
         <Box>
-          <Text flex="1" p={[3, 7]} ml={[3, 0]} mr={[3, 0]} borderColor="#B1A38F" borderWidth={3}>
+          <Text flex="1" p={[3, 7]} ml={[3, 0]} mr={[3, 0]} borderColor="#F9916B" borderWidth={3}>
             <b>Category Codes:</b>
             <UnorderedList>
-              <ListItem>BGT: Our Church Budget</ListItem>
-              <ListItem>NGO: Partnering NGOs</ListItem>
-              <ListItem>CHS: Churches affected by COVID</ListItem>
+              <ListItem>GC: Our Global Church</ListItem>
+              <ListItem>LC: Our Local Church</ListItem>
             </UnorderedList>
           </Text>
         </Box>
@@ -53,12 +52,12 @@ const HowToGive = (props) => {
               remark that states:
             </b>
             <br />
-            GT: BGT Amount1, NGO Amount2, CHS Amount 3
+            GT: GC Amount1, LC Amount2
           </Text>
           <Text>
             <b>Example Remark Note:</b>
             <br />
-            GT: BGT 1000, NGO 500, CHS 500
+            GT: GC 1000, LC 500
           </Text>
           <Text>
             Note: Please email{" "}
@@ -67,7 +66,7 @@ const HowToGive = (props) => {
                 <i>stewardship@hongkong.hmcc.net</i>
               </u>
             </Link>{" "}
-            with the appropriate category and amount allocations if you forget
+            with the appropriate category and amount allocations if you forgot
             to leave a remark or memo in the online giving process
           </Text>
         </Stack>

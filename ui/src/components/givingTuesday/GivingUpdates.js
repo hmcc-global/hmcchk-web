@@ -1,7 +1,7 @@
 import { Stack, Box, Text, Image, Center } from "@chakra-ui/react";
 
 const CategoryCard = (props) => {
-  const { iconLink, text, givingValue, eventStatus } = props;
+  const { iconLink, text, desc, givingValue, eventStatus } = props;
   return (
     <Stack
       borderWidth={1}
@@ -14,22 +14,36 @@ const CategoryCard = (props) => {
       pl={1}
       pr={1}
     >
-      <Stack direction={["row", "column"]} p={[7, 10]} pt={[3, 7]} pb={[1, 5]}>
-        <Center mb={1} flex={1}>
-          <Image h="2rem" src={iconLink} />
-        </Center>
+      <Stack direction={["column"]} p={[7, 10]} pt={[3, 7]} pb={[1, 5]}>
+        <Stack>
+          <Center mb={1} flex={1}>
+            <Image h="2rem" src={iconLink} />
+          </Center>
+          <Stack
+            spacing={0}
+            flex={[4, 1]}
+            fontWeight="700"
+            fontSize={["1.1rem", "1.25rem"]}
+            textAlign="center"
+            color="#74A0F1"
+            verticalAlign="middle"
+            justifyContent="center"
+          >
+            <Center>{text[0]}</Center>
+            <Center>{text[1]}</Center>
+          </Stack>
+        </Stack>
         <Stack
           spacing={0}
           flex={[4, 1]}
-          fontWeight="700"
-          fontSize={["1.1rem", "1.25rem"]}
+          fontSize={["0.5rem", "0.7rem"]}
           textAlign="center"
-          color="#79A9A6"
+          color="#000000"
           verticalAlign="middle"
           justifyContent="center"
         >
-          <Center>{text[0]}</Center>
-          <Center>{text[1]}</Center>
+          <Center>{desc[0]}</Center>
+          <Center>{desc[1]}</Center>
         </Stack>
       </Stack>
       {/* {eventStatus === "after" && (
@@ -55,11 +69,11 @@ const GivingUpdates = (props) => {
   const renderSwitch = () => {
     switch (eventStatus) {
       case "after":
-        return "GIVING TUESDAY 2021 SUMMARY";
+        return "GIVING TUESDAY 2022 SUMMARY";
       case "during":
         return "GIVING LIVE UPDATES";
       default:
-        return "Giving Categories for Giving Tuesday 2021";
+        return "Giving Categories for Giving Tuesday 2022";
     }
   };
 
@@ -69,22 +83,19 @@ const GivingUpdates = (props) => {
 
   const cardData = [
     {
-      iconLink: process.env.PUBLIC_URL + "/images/givingTuesday/1-church.png",
-      text: ["Our Church Budget", "(BGT)"],
+      iconLink: process.env.PUBLIC_URL + "/images/givingTuesday/1-global.png",
+      text: ["Our Global Church (GC)"],
+      desc: ["Missionaries/missions movements,", "churches outside of HK"],
       givingValue: numberWithCommas(givingData[0]),
     },
     {
-      iconLink: process.env.PUBLIC_URL + "/images/givingTuesday/2-ngo.png",
-      text: ["Partnering NGOs", "(NGO)"],
+      iconLink: process.env.PUBLIC_URL + "/images/givingTuesday/2-local.png",
+      text: ["Our Local Church (LC)"],
+      desc: ["Local church needs & church budget"],
       givingValue: numberWithCommas(givingData[1]),
     },
-    {
-      iconLink: process.env.PUBLIC_URL + "/images/givingTuesday/3-other.png",
-      text: ["Churches affected", "by COVID (CHS)"],
-      givingValue: numberWithCommas(givingData[2]),
-    },
   ];
-  const givingSum = givingData[0] + givingData[1] + givingData[2];
+  const givingSum = givingData[0] + givingData[1];
 
   return (
     <Stack direction="column" spacing={5}>
@@ -118,8 +129,8 @@ const GivingUpdates = (props) => {
           direction={["column", "row"]}
           borderWidth={1}
           borderRadius="2xl"
-          borderColor="#0628A3"
-          background="#0628A3"
+          borderColor="#5891FB"
+          background="#5891FB"
           color="white"
           shadow="md"
           fontSize={["1rem", "1.75rem"]}
@@ -151,6 +162,7 @@ const GivingUpdates = (props) => {
           <CategoryCard
             key={"event" + i}
             text={card.text}
+            desc={card.desc}
             iconLink={card.iconLink}
             givingValue={card.givingValue}
             eventStatus={eventStatus}
