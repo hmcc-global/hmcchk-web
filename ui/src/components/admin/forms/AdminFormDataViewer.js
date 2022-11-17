@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { customAxios as axios } from '../../helpers/customAxios';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
@@ -25,8 +25,9 @@ export default function AdminFormDataViewer(props) {
   } = props;
   const formName = state.name;
   const formId = state.id;
+  const pollFreqInSecs = 30;
 
-  // TODO-aparedan: Add lastUpdated
+  let lastUpdatedTime = useRef();
   
   const [isLoading, setIsLoading] = useState(true);
   const [isPaidForm, setIsPaidForm] = useState(false);
@@ -147,52 +148,73 @@ export default function AdminFormDataViewer(props) {
     },
   };
 
-  useEffect(() => {
+  const getData = useCallback(async () => {
     setIsLoading(true);
-    const getFormData = async () => {
-      try {
-        const { data } = await axios.get('/api/forms/get-submission', {
-          params: {
-            formId: formId,
-          },
-        });
+    try {
+      const { data } = await axios.get('/api/forms/get-submission', {
+        params: {
+          formId: formId,
+        },
+      });
 
-        if (data && data.length > 0 && data[0].paymentData && data[0].paymentData.length > 0) {
-          setIsPaidForm(true);
+      if (data && data.length > 0 && data[0].paymentData && data[0].paymentData.length > 0) {
+        setIsPaidForm(true);
+      }
+
+      let formDataTemp = [];
+      data.forEach((item) => {
+        let temp = {};
+
+        temp = item.submissionData;
+        temp['_submissionTime'] = item.createdAt;
+
+        // Populate form data with payment data if form is a paid form
+        if (item.paymentData && item.paymentData.length > 0) {
+          temp['paymentData'] = item.paymentData[0];
         }
 
-        let formDataTemp = [];
-        data.forEach((item) => {
-          let temp = {};
-
-          temp = item.submissionData;
-          temp['_submissionTime'] = item.createdAt;
-
-          // Populate form data with payment data if form is a paid form
-          if (item.paymentData && item.paymentData.length > 0) {
-            temp['paymentData'] = item.paymentData[0];
+        if ('address' in temp) {
+          let addressString = [];
+          for (const property in temp['address']) {
+            addressString.push(temp['address'][property]);
           }
+          temp['address'] = addressString.join(', ');
+        }
 
-          if ('address' in temp) {
-            let addressString = [];
-            for (const property in temp['address']) {
-              addressString.push(temp['address'][property]);
-            }
-            temp['address'] = addressString.join(', ');
-          }
+        formDataTemp.push(temp);
+      });
 
-          formDataTemp.push(temp);
-        });
-
-        setFormData(formDataTemp);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getFormData();
+      setFormData(formDataTemp);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   }, [formId]);
+
+  const checkIfUpdated = useCallback(async (updateData = true) => {
+    try {
+      const modelName = `paymentData-${formId}`;
+      const { data } = await axios.get('/api/last-updated', {
+        params: { modelName },
+      });
+      const dateObj = DateTime.fromISO(data);
+      if (!lastUpdatedTime.current || dateObj > lastUpdatedTime.current) {
+        updateData && getData();
+        lastUpdatedTime.current = dateObj;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, [formId, getData]);
+
+  useEffect(() => {
+    getData();
+    checkIfUpdated(false);
+    setInterval(() => {
+      checkIfUpdated();
+    }, pollFreqInSecs * 1000);
+  }, [checkIfUpdated, getData]);
 
   useEffect(() => {
     if (api) {
@@ -212,7 +234,7 @@ export default function AdminFormDataViewer(props) {
   }, [startDate, endDate, api, getFilterType]);
 
   useEffect(() => {
-    if (api) {
+    if (api && colApi) {
       if (isLoading) {
         api.showLoadingOverlay();
         return;
@@ -224,7 +246,7 @@ export default function AdminFormDataViewer(props) {
       }
       api.setRowData([]);
     }
-  }, [formData, api, isLoading]);
+  }, [formData, api, colApi, isLoading]);
 
   const defaultColDef = {
     sortable: true,
@@ -258,8 +280,20 @@ export default function AdminFormDataViewer(props) {
     };
 
     let columnDefs = [
-      { headerName: '_submissionTime', field: '_submissionTime', valueFormatter: dateTimeFormatter, filter: 'agDateColumnFilter', checkboxSelection: isPaidForm, filterParams: dateFilterParams, sort: 'asc' }
+      {
+        headerName: '_submissionTime',
+        field: '_submissionTime',
+        valueFormatter: dateTimeFormatter,
+        filter: 'agDateColumnFilter',
+        checkboxSelection: isPaidForm,
+        headerCheckboxSelection: isPaidForm,
+        headerCheckboxSelectionFilteredOnly: isPaidForm,
+        filterParams: dateFilterParams,
+        sort: 'asc',
+        lockPosition: true
+      },
     ];
+
     const createPaymentDataColumns = () => {
       return {
         headerName: 'Payment Info',
@@ -423,7 +457,7 @@ export default function AdminFormDataViewer(props) {
   const enableCellChangeFlash = true;
 
   // TODO-Samyak: Replace with actual send confirmation email function
-  const sendConfirmationEmail = () => {
+  const sendConfirmationEmail = (selectedNodes) => {
     console.log('not yet implemented')
   }
 
@@ -495,7 +529,7 @@ export default function AdminFormDataViewer(props) {
       {
         name: 'Send Confirmation Email',
         disabled: selectedNodes.length === 0,
-        action: sendConfirmationEmail,
+        action: () => sendConfirmationEmail(selectedNodes),
       },
     ];
 
@@ -579,6 +613,9 @@ export default function AdminFormDataViewer(props) {
           getContextMenuItems={getContextMenuItems}
           suppressRowClickSelection={true}
         />
+        <Text>
+          Last updated: {DateTime.fromISO(lastUpdatedTime.current).toFormat('dd MMM yyyy, HH:mm:ss')}
+        </Text>
       </div>
     </>
   );

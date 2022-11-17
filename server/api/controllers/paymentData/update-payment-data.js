@@ -44,6 +44,9 @@ module.exports = {
     invalidDate: {
       description: 'Invalid date string',
     },
+    invalid: {
+      description: 'Failed to payment data',
+    },
   },
 
   fn: async function (
@@ -61,7 +64,6 @@ module.exports = {
     const user = this.req.user.fullName;
     sails.log.info(`${user}: Updating payment data`);
 
-  // TODO-aparedan: Add lastUpdated
     // For checking if the date string is valid
     if (paymentDateTime) {
       const dateFormat = 'yyyy-MM-dd';
@@ -85,6 +87,23 @@ module.exports = {
         isConfirmationEmailSent,
         lastUpdatedBy: user
       });
+
+      if (res) {
+        const modelName = `paymentData-${res.formId}`;
+        existing = await LastUpdated.updateOne({ modelName }).set({
+          lastUpdatedBy: this.req.user.fullName
+        });
+
+        if (!existing) {
+          existing = await LastUpdated.create({
+            modelName,
+            lastUpdatedBy: this.req.user.fullName
+          });
+        }
+
+        if (!existing)
+          return exits.invalid();
+      }
 
       return exits.success(res);
     } catch (err) {

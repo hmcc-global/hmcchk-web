@@ -52,12 +52,28 @@ module.exports = {
       }).fetch();
 
       if (formRecord[0].isPaymentRequired) {
-        // TODO-aparedan: Add lastUpdated based on key: paymentData-formId
-        res = await PaymentData.create({
+        let existing = await PaymentData.create({
           formId: formId,
           userId: userId,
           submissionId: res.id
         }).fetch();
+
+        if (existing) {
+          const modelName = `paymentData-${formId}`;
+          existing = await LastUpdated.updateOne({ modelName }).set({
+            lastUpdatedBy: this.req.user.fullName
+          });
+
+          if (!existing) {
+            existing = await LastUpdated.create({
+              modelName,
+              lastUpdatedBy: this.req.user.fullName
+            });
+          }
+
+          if (!existing)
+            return exits.invalid();
+        }
       }
 
       // Store the user object if any

@@ -124,7 +124,7 @@ const ErrorPage = (props) => {
       buttonText: 'Back to Profile',
     },
     'user-has-signedup': {
-      type: 'error',
+      type: 'success',
       primaryText:
         'Your signup for ' +
         `"${history.location.state?.formName}"` +
