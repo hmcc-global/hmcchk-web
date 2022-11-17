@@ -1,10 +1,11 @@
 import { Box, Grid, GridItem, Image } from '@chakra-ui/react';
 import AdventCard from './AdventCard';
+import { DateTime } from 'luxon';
 
-const AdventContainer = () => {
+const AdventCalendar = () => {
   const cardArray = Array.from({ length: 24 }, (_, i) => i + 1);
   const isActive = (i) => {
-    const today = new Date().getDate();
+    const today = DateTime.now().day;
     if (cardArray[i] <= today) {
       return true;
     }
@@ -71,4 +72,4 @@ const AdventContainer = () => {
   );
 };
 
-export default AdventContainer;
+export default AdventCalendar;
