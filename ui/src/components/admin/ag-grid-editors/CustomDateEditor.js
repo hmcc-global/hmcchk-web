@@ -1,18 +1,12 @@
 import React, { forwardRef, useState, useImperativeHandle } from 'react';
-// TODO-aparedan: Remove this
-import { format } from 'date-fns';
 import { DateTime } from 'luxon';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default forwardRef((props, ref) => {
   const ISOFormatCheck = (dateStr) => {
-    const parsedDate = new Date(Date.parse(dateStr));
-
-    if (parsedDate.toISOString() === dateStr) {
-      return true;
-    }
-    return false;
+    const parsedDate = DateTime.fromISO(dateStr);
+    return parsedDate.isValid;
   };
 
   // Date Formatting

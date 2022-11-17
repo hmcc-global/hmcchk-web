@@ -51,9 +51,8 @@ module.exports = {
         submissionData: submissionData,
       }).fetch();
 
-      // if res failed
-
       if (formRecord[0].isPaymentRequired) {
+        // TODO-aparedan: Add lastUpdated based on key: paymentData-formId
         res = await PaymentData.create({
           formId: formId,
           userId: userId,

@@ -34,7 +34,7 @@ module.exports = {
 
   fn: async function ({ formId, timeRange }, exits) {
     const accessType = this.req.user.accessType;
-    const viewPaymentDataAccess = sails.config.custom.permissions.viewPaymentData;
+    const viewPaymentDataPermission = sails.config.custom.permissions.viewPaymentData;
 
     try {
       let whereClause = {
@@ -50,7 +50,7 @@ module.exports = {
       }
 
       let data;
-      if (viewPaymentDataAccess.includes(accessType)) {
+      if (viewPaymentDataPermission.includes(accessType)) {
         data = await Submission.find(whereClause).populate('paymentData');
         return exits.success(data);
       }

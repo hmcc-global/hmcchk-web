@@ -1,3 +1,5 @@
+const { DateTime } = require('luxon');
+
 /* eslint-disable linebreak-style */
 module.exports = {
   friendlyName: 'Update Payment Data',
@@ -56,19 +58,21 @@ module.exports = {
     },
     exits
   ) {
-    // TODO-aparedan: Uncomment this once the permission properly applied
-    // const user = this.req.user.fullName;
-    // sails.log.info(`${user}: Updating payment data`);
+    const user = this.req.user.fullName;
+    sails.log.info(`${user}: Updating payment data`);
 
+  // TODO-aparedan: Add lastUpdated
     // For checking if the date string is valid
-    console.log(paymentDateTime);
-    const parsedDate = new Date(Date.parse(paymentDateTime));
+    if (paymentDateTime) {
+      const dateFormat = 'yyyy-MM-dd';
+      const parsedDate = DateTime.fromFormat(paymentDateTime, dateFormat);
 
-    if (isNaN(parsedDate)) {
-      return exits.invalidDate(err);
-    } else {
-      // Convert date string to ISO format
-      paymentDateTime = parsedDate.toISOString();
+      if (!parsedDate.isValid) {
+        return exits.invalidDate('Invalid Date');
+      } else {
+        // Convert date string to ISO format
+        paymentDateTime = parsedDate.toISO();
+      }
     }
 
     try {
@@ -79,6 +83,7 @@ module.exports = {
         paymentMethod,
         remarks,
         isConfirmationEmailSent,
+        lastUpdatedBy: user
       });
 
       return exits.success(res);

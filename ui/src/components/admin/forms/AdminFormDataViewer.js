@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import {} from '@chakra-ui/react';
 import { customAxios as axios } from '../../helpers/customAxios';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
@@ -17,7 +16,7 @@ import {
 import { DateTime } from 'luxon';
 import { paymentMethodList } from '../../helpers/lists';
 import CustomDateEditor from '../ag-grid-editors/CustomDateEditor';
-import { CgUndo, CgRedo, CgMail } from 'react-icons/cg';
+import { CgUndo, CgRedo } from 'react-icons/cg';
 
 export default function AdminFormDataViewer(props) {
   const {
@@ -26,13 +25,15 @@ export default function AdminFormDataViewer(props) {
   const formName = state.name;
   const formId = state.id;
 
+  // TODO-aparedan: Add lastUpdated
+  
+  const [isLoading, setIsLoading] = useState(true);
   const [isPaidForm, setIsPaidForm] = useState(false);
   const [formData, setFormData] = useState([]);
   const [api, setApi] = useState();
   const [colApi, setColApi] = useState();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [selectedRows, setSelectedRows] = useState();
 
   const getFilterType = useCallback(() => {
     if (startDate !== '' && endDate !== '') return 'inRange';
@@ -45,6 +46,7 @@ export default function AdminFormDataViewer(props) {
       api.exportDataAsCsv(exportParams());
     }
   };
+
   const exportParams = () => {
     let now = DateTime.now();
     let fileName = `${now.toFormat('yyyyMMdd_HHmmss')}_${formName}.csv`;
@@ -62,9 +64,12 @@ export default function AdminFormDataViewer(props) {
       if (dateAsString == null) return -1;
 
       let dateAtMidnight = DateTime.fromJSDate(filterLocalDateAtMidnight);
-      let cellDate = DateTime.fromFormat(dateAsString, 'yyyy-MM-dd HH:mm:ss');
-      if (cellDate === dateAtMidnight) {
+      let cellDate = DateTime.fromISO(dateAsString);
+      if (!cellDate.isValid)
         return 1;
+
+      if (dateAtMidnight.equals(cellDate)) {
+        return 0;
       }
       if (cellDate < dateAtMidnight) {
         return -1;
@@ -78,50 +83,29 @@ export default function AdminFormDataViewer(props) {
 
   // Formatters
   // For formatting datetime columns
-  const dateTimeFormatter = (dateTime) => {
-    return DateTime.fromISO(dateTime).toFormat('yyyy-MM-dd HH:mm:ss');
-  };
-
-  const dateToFormat = 'dd MMM yyyy';
-  const dateFormatter = (dateStr) => {
-    if (dateStr) {
-      const dateObj = DateTime.fromISO(dateStr);
-      return dateObj.toFormat(dateToFormat);
+  const dateTimeFormatter = (p) => {
+    if (p.value) {
+      const dateTimeFormat = 'dd MMM yyyy, HH:mm:ss';
+      const dateTimeObj = DateTime.fromISO(p.value);
+      if (dateTimeObj.isValid)
+        return dateTimeObj.toFormat(dateTimeFormat);
     }
 
-    return '';
+    return ''
   };
 
-  const paymentDateFormatter = (params) => {
-    if (
-      params &&
-      params.data &&
-      params.data.paymentData &&
-      params.data.paymentData.paymentDateTime
-    ) {
-      const { paymentDateTime } = params.data.paymentData;
-      return dateFormatter(paymentDateTime);
+  const dateFormatter = (p) => {
+    const dateToFormat = 'dd MMM yyyy';
+    if (p.value) {
+      const dateObj = DateTime.fromISO(p.value);
+      if (dateObj.isValid) 
+        return dateObj.toFormat(dateToFormat);
     }
 
     return '';
   };
 
   // Ag-Grid Helpers
-  // Getters
-  const paymentDateGetter = (params) => {
-    if (
-      params &&
-      params.data &&
-      params.data.paymentData &&
-      params.data.paymentData.paymentDateTime
-    ) {
-      const { paymentDateTime } = params.data.paymentData;
-      return paymentDateTime;
-    }
-
-    return '';
-  };
-
   // Setters
   const paymentDateSetter = (params) => {
     if (params && params.data) {
@@ -131,15 +115,6 @@ export default function AdminFormDataViewer(props) {
 
     alert('Invalid Payment Date!');
     return false;
-  };
-
-  const paymentDateFilterGetter = (params) => {
-    if (params && params.data && params.data.paymentData) {
-      const dateStr = params.data.paymentData.paymentDateTime;
-      if (dateStr) {
-        return DateTime.fromISO(dateStr).toJSDate();
-      }
-    }
   };
 
   // Custom Editors
@@ -167,6 +142,7 @@ export default function AdminFormDataViewer(props) {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     const getFormData = async () => {
       try {
         const { data } = await axios.get('/api/forms/get-submission', {
@@ -175,8 +151,7 @@ export default function AdminFormDataViewer(props) {
           },
         });
 
-        // Check if form is a paid form by checking for paymentData attribute
-        if (data && data.length > 0 && data[data.length - 1].paymentData) {
+        if (data && data.length > 0 && data[0].paymentData && data[0].paymentData.length > 0) {
           setIsPaidForm(true);
         }
 
@@ -185,20 +160,12 @@ export default function AdminFormDataViewer(props) {
           let temp = {};
 
           temp = item.submissionData;
+          temp['_submissionTime'] = item.createdAt;
 
-          let dateTimeRaw = DateTime.fromISO(item.createdAt);
-          temp['_submissionTime'] = dateTimeRaw.toFormat('yyyy-MM-dd HH:mm:ss');
           // Populate form data with payment data if form is a paid form
-          if (isPaidForm && item.paymentData && item.paymentData.length > 0) {
+          if (item.paymentData && item.paymentData.length > 0) {
             temp['paymentData'] = item.paymentData[0];
-
-            // Set NULL values to empty strings: NULL values will cause update paymentData API to throw error
-            if (!temp.paymentData.paymentDateTime) {
-              temp.paymentData.paymentDateTime = '';
-            }
           }
-
-          temp.updatedAt = dateTimeFormatter(item.updatedAt);
 
           if ('address' in temp) {
             let addressString = [];
@@ -214,10 +181,12 @@ export default function AdminFormDataViewer(props) {
         setFormData(formDataTemp);
       } catch (err) {
         console.log(err);
+      } finally {
+        setIsLoading(false);
       }
     };
     getFormData();
-  }, [formId, isPaidForm]);
+  }, [formId]);
 
   useEffect(() => {
     if (api) {
@@ -238,13 +207,18 @@ export default function AdminFormDataViewer(props) {
 
   useEffect(() => {
     if (api) {
+      if (isLoading) {
+        api.showLoadingOverlay();
+        return;
+      }
+
       if (formData && formData.length > 0) {
         api.setRowData(formData);
         return;
       }
       api.setRowData([]);
     }
-  }, [formData, api]);
+  }, [formData, api, isLoading]);
 
   const defaultColDef = {
     sortable: true,
@@ -277,19 +251,10 @@ export default function AdminFormDataViewer(props) {
       };
     };
 
-    // const createDateColumn = (key) => {
-    //   return {
-    //     headerName: key,
-    //     field: key,
-    //     filter: 'agDateColumnFilter',
-    //     filterParams: dateFilterParams,
-    //   };
-    // };
-
     let columnDefs = [
-      { headerName: '_submissionTime', field: '_submissionTime', filter: 'agDateColumnFilter', filterParams: dateFilterParams, sort: 'asc' }
+      { headerName: '_submissionTime', field: '_submissionTime', valueFormatter: dateTimeFormatter, filter: 'agDateColumnFilter', filterParams: dateFilterParams, sort: 'asc' }
     ];
-    const createPaymentDataColumns = (key) => {
+    const createPaymentDataColumns = () => {
       return {
         headerName: 'Payment Info',
         marryChildren: true,
@@ -298,40 +263,51 @@ export default function AdminFormDataViewer(props) {
             ...BooleanCellProps,
             headerName: 'Payment Status',
             field: 'paymentData.isPaid',
+            colId: 'isPaid',
             valueFormatter: (params) => {
               if (params && params.data && params.data.paymentData) {
                 return params.data.paymentData.isPaid ? 'Paid' : 'Not Paid';
               }
             },
+            editable: true,
           },
           {
             ...DateCellProps,
             headerName: 'Payment Date',
+            field: 'paymentData.paymentDateTime',
+            colId: 'paymentDateTime',
             columnGroupShow: 'closed',
-            valueGetter: paymentDateGetter,
             valueSetter: paymentDateSetter,
-            valueFormatter: paymentDateFormatter,
-            filterValueGetter: paymentDateFilterGetter,
+            valueFormatter: dateFormatter,
+            filter: 'agDateColumnFilter',
+            filterParams: dateFilterParams,
+            editable: true,
           },
           {
             headerName: 'Payment Type',
             field: 'paymentData.paymentType',
+            colId: 'paymentType',
             columnGroupShow: 'closed',
+            editable: true,
           },
           {
             headerName: 'Payment Method',
             field: 'paymentData.paymentMethod',
+            colId: 'paymentMethod',
             cellEditor: 'agSelectCellEditor',
             cellEditorParams: {
               values: paymentMethodList,
             },
             columnGroupShow: 'closed',
+            editable: true,
           },
           {
             ...MediumTextEditorProps,
             headerName: 'Remarks',
             field: 'paymentData.remarks',
+            colId: 'remarks',
             columnGroupShow: 'closed',
+            editable: true,
           },
           {
             ...BooleanCellProps,
@@ -346,6 +322,19 @@ export default function AdminFormDataViewer(props) {
               }
             },
           },
+          {
+            headerName: 'Updated At',
+            field: 'paymentData.updatedAt',
+            valueFormatter: dateTimeFormatter,
+            filter: 'agDateColumnFilter',
+            filterParams: dateFilterParams,
+            columnGroupShow: 'closed',
+          },
+          {
+            headerName: 'Updated By',
+            field: 'paymentData.lastUpdatedBy',
+            columnGroupShow: 'closed',
+          }
         ],
       };
     };
@@ -354,8 +343,7 @@ export default function AdminFormDataViewer(props) {
       if (key === '_submissionTime') {
         return;
       } else if (key === 'paymentData') {
-        // Create Payment Info Column Group
-        columnDefs.push(createPaymentDataColumns(key, value));
+        columnDefs.push(createPaymentDataColumns());
       } else if (typeof value === 'string') {
         columnDefs.push(createStringColumn(key));
       } else if (typeof value === 'number') {
@@ -370,8 +358,8 @@ export default function AdminFormDataViewer(props) {
     };
 
     if (formData && formData.length > 0) {
-      const sample = formData[formData.length - 1];
-      for (const [key, value] of Object.entries(sample)) {
+      const first = formData[0];
+      for (const [key, value] of Object.entries(first)) {
         objectClassifier(key, value);
       }
     }
@@ -386,21 +374,10 @@ export default function AdminFormDataViewer(props) {
     if (params.columnApi) setColApi(params.columnApi);
   };
 
-  // Function to resize all columns automatically
-  const autoSizeAllColumns = () => {
-    if (colApi) {
-      const allColumnIds = [];
-      colApi.getAllColumns().forEach((column) => {
-        allColumnIds.push(column.getId());
-      });
-      colApi.autoSizeColumns(allColumnIds);
-    }
-  };
-
   // Resize columns on first render of the grid
   const onFirstDataRendered = () => {
-    if (api && colApi) {
-      autoSizeAllColumns();
+    if (colApi) {
+      colApi.autoSizeAllColumns();
     }
   };
 
@@ -416,16 +393,12 @@ export default function AdminFormDataViewer(props) {
   };
 
   const onCellValueChanged = async (p) => {
-    if (api && colApi && p.data) {
-      autoSizeAllColumns();
-
-      const groupHeaderName =
-        p?.column?.originalParent?.colGroupDef?.headerName;
-
-      if (groupHeaderName && groupHeaderName === 'Payment Info') {
-        const { paymentData: newPaymentData } = p.data;
-        await updatePaymentData(newPaymentData);
-      }
+    if (p && p.newValue && p.colDef) {
+      const payload = {
+        id: p.data.paymentData.id,
+        [p.colDef.colId]: p.newValue,
+      };
+      await updatePaymentData(payload);
     }
   };
 
@@ -443,27 +416,16 @@ export default function AdminFormDataViewer(props) {
   const undoRedoCellEditingLimit = 20;
   const enableCellChangeFlash = true;
 
-  // Update selected rows
-  const onSelectionChanged = useCallback(() => {
-    if (api) {
-      setSelectedRows(api.getSelectedRows());
-    }
-  }, [api]);
-
   // TODO-Samyak: Replace with actual send confirmation email function
   const sendConfirmationEmail = useCallback(() => {
-    if (selectedRows && selectedRows.length > 0) {
-      let emailList = selectedRows.map((row) => row.email);
-      alert(`Confirmation email sent to:\n${emailList.join('\n')}`);
-    }
-  }, [selectedRows]);
+    console.log('not yet implemented')
+  }, []);
 
   const getContextMenuItems = useCallback(
     (params) => {
       var result = [
         // Default functions
         'copy',
-        'export',
         'separator',
         // Custom functions
         {
@@ -545,8 +507,6 @@ export default function AdminFormDataViewer(props) {
           undoRedoCellEditingLimit={undoRedoCellEditingLimit}
           enableCellChangeFlash={enableCellChangeFlash}
           getContextMenuItems={getContextMenuItems}
-          rowSelection={'multiple'}
-          onSelectionChanged={onSelectionChanged}
         />
       </div>
     </>

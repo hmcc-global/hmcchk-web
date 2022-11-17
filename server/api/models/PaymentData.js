@@ -20,7 +20,7 @@ module.exports = {
     paymentDateTime: {
       type: 'ref',
       columnType: 'datetime',
-      defaultsTo: null,
+      defaultsTo: '',
     },
     paymentType: {
       type: 'string',
@@ -39,5 +39,8 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false,
     },
+    lastUpdatedBy: {
+      type: 'string',
+    }
   },
 };
