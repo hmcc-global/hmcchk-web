@@ -28,7 +28,16 @@ module.exports = {
       type: 'string',
       defaultsTo: 'form-default-success',
     },
+    paymentConfirmationEmailTemplate: {
+      type: 'string',
+    },
+    ccEmail: {
+      type: 'string',
+    },
     customEmailSubject: {
+      type: 'string',
+    },
+    paymentEmailSubject: {
       type: 'string',
     },
     formAvailableFrom: {

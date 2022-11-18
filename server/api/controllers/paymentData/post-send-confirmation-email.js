@@ -1,3 +1,4 @@
+const Form = require('../../models/Form');
 const PaymentData = require('../../models/PaymentData');
 
 module.exports = {
@@ -6,6 +7,9 @@ module.exports = {
   description: 'Send email',
 
   inputs: {
+    formId: {
+      type: 'string',
+    },
     userId: {
       type: 'string',
     },
@@ -27,10 +31,11 @@ module.exports = {
     },
   },
 
-  fn: async function ({ userId, paymentId }, exits) {
+  fn: async function ({ formId, userId, paymentId }, exits) {
     try {
       //find user's email
-      let user = {};
+      let user,
+        form = {};
 
       if (userId) {
         user = (await sails.helpers.users.getUser(userId))[0];
@@ -39,19 +44,24 @@ module.exports = {
         }
       }
 
-      let paymentInfo = await PaymentData.find({
+      let paymentInfo = await PaymentData.findOne({
         _id: paymentId,
       });
 
-      //TODO-tamarayustian: Replace email template
+      //find email template for form
+      if (formId) {
+        form = await Form.findOne({ _id: formId });
+        if (form === null) {
+          return exits.invalid();
+        }
+      }
+
       if (paymentInfo.isPaid == true && paymentInfo.paymentDateTime != null) {
         await sails.helpers.sendTemplateEmail.with({
           to: user.email,
-          subject: 'PAID',
-          template: 'email-payment-success',
-          templateData: {
-            fullName: user.fullName,
-          },
+          subject: form.paymentEmailSubject,
+          template: form.paymentConfirmationEmailTemplate,
+          cc: form.ccEmail,
         });
       }
 
