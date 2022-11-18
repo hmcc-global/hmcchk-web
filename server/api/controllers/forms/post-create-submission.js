@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 module.exports = {
   friendlyName: 'Create Submission',
 
@@ -39,7 +40,9 @@ module.exports = {
         isPublished: true,
       });
 
-      if (formRecord === null) return exits.invalid();
+      if (formRecord === null) {
+        return exits.invalid();
+      }
 
       // Create the submission in DB
       let res = await Submission.create({
@@ -48,13 +51,40 @@ module.exports = {
         submissionData: submissionData,
       }).fetch();
 
+      if (formRecord[0].isPaymentRequired) {
+        let existing = await PaymentData.create({
+          formId: formId,
+          userId: userId,
+          submissionId: res.id
+        }).fetch();
+
+        if (existing) {
+          const modelName = `paymentData-${formId}`;
+          existing = await LastUpdated.updateOne({ modelName }).set({
+            lastUpdatedBy: this.req.user.fullName
+          });
+
+          if (!existing) {
+            existing = await LastUpdated.create({
+              modelName,
+              lastUpdatedBy: this.req.user.fullName
+            });
+          }
+
+          if (!existing)
+            return exits.invalid();
+        }
+      }
+
       // Store the user object if any
       let user = {};
 
       // Only do if there is userID
       if (userId) {
         user = (await sails.helpers.users.getUser(userId))[0];
-        if (user === null) return exits.invalid();
+        if (user === null) {
+          return exits.invalid();
+        }
 
         // Check for any blank user fields
         const resettablePrefillFields = [

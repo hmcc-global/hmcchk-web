@@ -1,15 +1,22 @@
 import React, { forwardRef, useState, useImperativeHandle } from 'react';
-// TODO-aparedan: Remove this
-import { format } from 'date-fns';
 import { DateTime } from 'luxon';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default forwardRef((props, ref) => {
+  const ISOFormatCheck = (dateStr) => {
+    const parsedDate = DateTime.fromISO(dateStr);
+    return parsedDate.isValid;
+  };
+
   // Date Formatting
   // Initialize State
   const dateFromFormat = 'yyyy-MM-dd';
-  const dateObj = props.value ? DateTime.fromFormat(props.value, dateFromFormat).toJSDate() : null;
+  const dateObj = props.value
+    ? ISOFormatCheck(props.value)
+      ? DateTime.fromISO(props.value).toJSDate()
+      : DateTime.fromFormat(props.value, dateFromFormat).toJSDate()
+    : null;
   const [selectedDate, setSelectedDate] = useState(dateObj);
 
   // Styling the input
@@ -33,7 +40,8 @@ export default forwardRef((props, ref) => {
       getValue: () => {
         let dateString = null;
         if (selectedDate) {
-          dateString = DateTime.fromJSDate(selectedDate).toFormat(dateFromFormat);
+          dateString =
+            DateTime.fromJSDate(selectedDate).toFormat(dateFromFormat);
         }
         return dateString;
       },

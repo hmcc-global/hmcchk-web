@@ -197,7 +197,7 @@ const FormManager = (props) => {
                     <Button
                       colorScheme="blue"
                       onClick={() => onClickHandler(formItem)}
-                      disabled={noViewPermission(formItem)}
+                      disabled={false}
                     >
                       View Data
                     </Button>

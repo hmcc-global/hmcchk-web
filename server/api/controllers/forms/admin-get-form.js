@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 module.exports = {
   friendlyName: 'Get form route for admin use',
 

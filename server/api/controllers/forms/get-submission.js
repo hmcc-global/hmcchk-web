@@ -1,38 +1,41 @@
 module.exports = {
-  friendlyName: "Retrieve Submissions for a certain form",
+  friendlyName: 'Retrieve Submissions for a certain form',
 
-  description: "Create a new submission entry from form data",
+  description: 'Create a new submission entry from form data',
 
   inputs: {
     formId: {
-      type: "string",
+      type: 'string',
       required: true,
     },
     timeRange: {
-      type: "json",
+      type: 'json',
       description:
-        "is an object with a start and end, sample here: \
+        'is an object with a start and end, sample here: \
       { \
         start: YYYY-MM-DD, \
         end: YYYY-MM-DD \
-      }",
+      }',
     },
   },
 
   exits: {
     success: {
-      description: "Successfully retrieved submissions.",
+      description: 'Successfully retrieved submissions.',
     },
     error: {
       description:
-        "There was an internal server issue with retrieving submissions.",
+        'There was an internal server issue with retrieving submissions.',
     },
     invalid: {
-      description: "Something is wrong with your request. Please check it",
+      description: 'Something is wrong with your request. Please check it',
     },
   },
 
   fn: async function ({ formId, timeRange }, exits) {
+    const accessType = this.req.user.accessType;
+    const viewPaymentDataPermission = sails.config.custom.permissions.viewPaymentData;
+
     try {
       let whereClause = {
         formId: formId,
@@ -40,13 +43,19 @@ module.exports = {
       };
       if (timeRange) {
         let tr = JSON.parse(timeRange);
-        whereClause["createdAt"] = {
-          ">=": new Date(tr.start),
-          "<=": new Date(tr.end),
+        whereClause['createdAt'] = {
+          '>=': new Date(tr.start),
+          '<=': new Date(tr.end),
         };
       }
 
-      const data = await Submission.find(whereClause);
+      let data;
+      if (viewPaymentDataPermission.includes(accessType)) {
+        data = await Submission.find(whereClause).populate('paymentData');
+        return exits.success(data);
+      }
+
+      data = await Submission.find(whereClause);
       return exits.success(data);
     } catch (err) {
       sails.log(err);

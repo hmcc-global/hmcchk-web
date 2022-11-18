@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 let path = require('path');
 /**
  * Route Mappings
@@ -35,6 +36,11 @@ module.exports.routes = {
   'post /api/forms/post-create-submission': 'forms/post-create-submission',
   'get /api/forms/get-submission': 'forms/get-submission',
   'get /api/forms/get-user-submission': 'forms/get-user-submission',
+
+  // Payment Data APIs
+  'get /api/paymentData/get': 'paymentData/get-payment-data',
+  'post /api/paymentData/create': 'paymentData/create-payment-data',
+  'put /api/paymentData/update': 'paymentData/update-payment-data',
 
   // Announcement APIs
   'get /api/announcements/get-announcements': 'announcements/get-announcements',
