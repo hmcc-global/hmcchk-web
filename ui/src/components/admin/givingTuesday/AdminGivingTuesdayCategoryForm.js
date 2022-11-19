@@ -12,6 +12,7 @@ const AdminGivingTuesdayCategoryForm = ({ categoryDetails, onFieldChange }) => {
   const { name, amount, givers } = categoryDetails;
 
   const onAmountChange = (newAmount) => {
+    console.log(typeof newAmount)
     onFieldChange({
       ...categoryDetails,
       amount: newAmount,
@@ -19,6 +20,7 @@ const AdminGivingTuesdayCategoryForm = ({ categoryDetails, onFieldChange }) => {
   };
 
   const onGiversChange = (newGivers) => {
+    console.log(typeof newGivers)
     onFieldChange({
       ...categoryDetails,
       givers: newGivers,
@@ -35,7 +37,7 @@ const AdminGivingTuesdayCategoryForm = ({ categoryDetails, onFieldChange }) => {
         <Input
           type="number"
           value={amount}
-          onChange={(e) => onAmountChange(e.target.value)}
+          onChange={(e) => onAmountChange(e.target.valueAsNumber)}
         />
         <FormErrorMessage>Amount is required</FormErrorMessage>
       </FormControl>
@@ -44,7 +46,7 @@ const AdminGivingTuesdayCategoryForm = ({ categoryDetails, onFieldChange }) => {
         <Input
           type="number"
           value={givers}
-          onChange={(e) => onGiversChange(e.target.value)}
+          onChange={(e) => onGiversChange(e.target.valueAsNumber)}
         />
         <FormErrorMessage>Givers is required</FormErrorMessage>
       </FormControl>
