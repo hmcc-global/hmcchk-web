@@ -7,6 +7,7 @@ module.exports = {
     categories: {
       required: true,
       type: 'json',
+      columnType: "array",
     },
     year: {
       required: true,

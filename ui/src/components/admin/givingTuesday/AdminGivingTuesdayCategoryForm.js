@@ -12,23 +12,31 @@ const AdminGivingTuesdayCategoryForm = ({ categoryDetails, onFieldChange }) => {
   const { name, amount, givers } = categoryDetails;
 
   const onAmountChange = (newAmount) => {
-    console.log(typeof newAmount)
+    const newData = { ...categoryDetails };
     onFieldChange({
-      ...categoryDetails,
+      ...newData,
       amount: newAmount,
     });
   };
 
   const onGiversChange = (newGivers) => {
-    console.log(typeof newGivers)
+    const newData = { ...categoryDetails };
     onFieldChange({
-      ...categoryDetails,
+      ...newData,
       givers: newGivers,
     });
   };
 
   return (
-    <Box style={{ border: '1px solid gray', borderRadius: 10 }} my={5} p={5}>
+    <Box
+      style={{
+        border: '1px solid gray',
+        borderRadius: 10,
+        marginTop: 10,
+        marginBottom: 10,
+      }}
+      p={5}
+    >
       <Text mb={5} style={{ fontWeight: 'bold' }}>
         {name}
       </Text>
