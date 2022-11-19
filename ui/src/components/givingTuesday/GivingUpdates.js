@@ -10,6 +10,8 @@ const CategoryCard = (props) => {
       background="white"
       shadow="md"
       flex="1"
+      display="flex"
+      justifyContent="space-between"
       pb={1}
       pl={1}
       pr={1}
@@ -23,7 +25,7 @@ const CategoryCard = (props) => {
             spacing={0}
             flex={[4, 1]}
             fontWeight="700"
-            fontSize={["1.1rem", "1.25rem"]}
+            fontSize={["1.2rem", "1.35rem"]}
             textAlign="center"
             color="#74A0F1"
             verticalAlign="middle"
@@ -36,7 +38,7 @@ const CategoryCard = (props) => {
         <Stack
           spacing={0}
           flex={[4, 1]}
-          fontSize={["0.5rem", "0.7rem"]}
+          fontSize={["0.7rem", "1rem"]}
           textAlign="center"
           color="#000000"
           verticalAlign="middle"
@@ -46,10 +48,10 @@ const CategoryCard = (props) => {
           <Center>{desc[1]}</Center>
         </Stack>
       </Stack>
-      {/* {eventStatus === "after" && (
+      {eventStatus === "after" && (
         <Center
-          background="#B1A38F"
-          borderColor="#B1A38F"
+          background="#F6B39E"
+          borderColor="#F6B39E"
           borderWidth={1}
           borderRadius="xl"
           p={[2, 3]}
@@ -58,7 +60,7 @@ const CategoryCard = (props) => {
             HKD {givingValue}
           </Text>
         </Center>
-      )} */}
+      )}
     </Stack>
   );
 };
