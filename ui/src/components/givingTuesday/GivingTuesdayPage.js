@@ -94,8 +94,8 @@ const GivingTuesdayPage = (props) => {
               alignItems="center"
               h="auto"
               src={
-                process.env.PUBLIC_URL +
-                '/images/givingTuesday/giving-tuesday-final-ad.png'
+                process.env.PUBLIC_URL + '/images/giving/GT2022.png'
+                //'/images/givingTuesday/giving-tuesday-final-ad.png'
               }
               alt="Giving Tuesday"
             />
@@ -106,9 +106,14 @@ const GivingTuesdayPage = (props) => {
             eventStatus={eventStatus}
             givingData={givingData}
           />
-          {eventStatus !== 'after' && <HowToGive />}
-          <WaysToGive accentColor={accentColor} />
-          <LastYearGivingTuesday />
+          {eventStatus === 'before' ||
+            (eventStatus === 'during' && (
+              <>
+                <HowToGive />
+                <WaysToGive accentColor={accentColor} />
+              </>
+            ))}
+          {eventStatus === 'during' && <LastYearGivingTuesday />}
         </Stack>
       </Container>
     </Box>
