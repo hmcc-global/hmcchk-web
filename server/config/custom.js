@@ -73,4 +73,8 @@ module.exports.custom = {
   emailProofTokenTTL: 60 * 60 * 1000, // 1 hour
   passwordResetTokenTTL: 60 * 60 * 1000, // 1 hour
   tokenExpiryHours: 1,
+
+  permissions: {
+    viewPaymentData: ['admin', 'stewardship'],
+  }
 };

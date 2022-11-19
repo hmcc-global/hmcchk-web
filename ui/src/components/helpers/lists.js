@@ -337,6 +337,14 @@ const countryList = [
   'Zimbabwe',
 ];
 
+const paymentMethodList = [
+  'FPS',
+  'Cash',
+  'Cheque',
+  'Credit Card',
+  'Bank Transfer',
+];
+
 export {
   accessTypeList,
   lifestageList,
@@ -346,4 +354,5 @@ export {
   regionList,
   campusList,
   countryList,
+  paymentMethodList,
 };

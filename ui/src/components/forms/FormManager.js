@@ -12,6 +12,8 @@ import {
   Badge,
   Stack,
   useToast,
+  Checkbox,
+  HStack
 } from '@chakra-ui/react';
 import FormEditorContainer from './FormEditorContainer';
 
@@ -127,6 +129,15 @@ const FormManager = (props) => {
     });
   };
 
+  const noViewPermission = (formItem) => {
+    if (!formItem.isPaymentRequired)
+      return false;
+
+    const currentUserAccessType = user.accessType;
+    const hasViewPermissions = ['admin', 'stewardship'];
+    return !hasViewPermissions.includes(currentUserAccessType);
+  }
+
   return (
     <Container maxW="container.xl" pt={10} minH="100vh">
       <Stack spacing="5">
@@ -137,9 +148,11 @@ const FormManager = (props) => {
           Create a new form
         </Button>
         <Box borderRadius="lg">
-          <Heading mb="2" as="h2" size="lg">
-            Existing Forms
-          </Heading>
+          <HStack>
+            <Heading mb="2" as="h2" size="lg" align="left">
+              Existing Forms 
+            </Heading>
+          </HStack>
           <List spacing="2">
             {formList.map((formItem) => (
               <ListItem key={formItem.id}>
@@ -184,6 +197,7 @@ const FormManager = (props) => {
                     <Button
                       colorScheme="blue"
                       onClick={() => onClickHandler(formItem)}
+                      disabled={noViewPermission(formItem)}
                     >
                       View Data
                     </Button>

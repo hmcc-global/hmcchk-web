@@ -1,18 +1,22 @@
 module.exports = {
   attributes: {
     formId: {
-      type: "string",
+      type: 'string',
       required: true,
     },
     userId: {
-      type: "string",
+      type: 'string',
     },
     submissionData: {
-      type: "json",
+      type: 'json',
       required: true,
     },
+    paymentData: {
+      collection: 'PaymentData',
+      via: 'submissionId'
+    },
     isDeleted: {
-      type: "boolean",
+      type: 'boolean',
       defaultsTo: false,
     },
   },

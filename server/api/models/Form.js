@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 module.exports = {
   attributes: {
     formName: {
@@ -8,6 +9,10 @@ module.exports = {
       type: 'json',
     },
     isPublished: {
+      type: 'boolean',
+      defaultsTo: false,
+    },
+    isPaymentRequired: {
       type: 'boolean',
       defaultsTo: false,
     },
@@ -33,6 +38,18 @@ module.exports = {
     formAvailableUntil: {
       type: 'string',
       columnType: 'date',
+    },
+    paymentConfirmationEmailTemplate: {
+      type: 'string',
+      defaultsTo: ''
+    },
+    paymentCcEmail: {
+      type: 'json',
+      defaultsTo: null
+    },
+    paymentEmailSubject: {
+      type: 'string',
+      defaultsTo: ''
     },
   },
 };

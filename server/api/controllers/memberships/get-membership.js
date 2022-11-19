@@ -1,21 +1,22 @@
+/* eslint-disable linebreak-style */
 module.exports = {
-  friendlyName: "Get memberships",
+  friendlyName: 'Get memberships',
 
-  description: "Get memberships",
+  description: 'Get memberships',
 
   inputs: {
     membershipId: {
       required: false,
-      type: "string",
+      type: 'string',
     },
   },
 
   exits: {
     success: {
-      description: "Membership records returned successfully",
+      description: 'Membership records returned successfully',
     },
     invalid: {
-      description: "Failed to retrieve membership record",
+      description: 'Failed to retrieve membership record',
     },
   },
   fn: async function ({ membershipId }, exits) {
@@ -25,7 +26,7 @@ module.exports = {
           _id: membershipId,
           isDeleted: false,
         });
-        if (data.length === 0) throw "membership record not found";
+        if (data.length === 0) throw 'membership record not found';
         return exits.success(data);
       }
 

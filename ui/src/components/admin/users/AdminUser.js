@@ -6,7 +6,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { Button, ButtonGroup, Heading, Tooltip } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
-import CustomDateEditor from './ag-grid-editors/CustomDateEditor.js';
+import CustomDateEditor from '../ag-grid-editors/CustomDateEditor.js';
 import {
   accessTypeList,
   lifestageList,
@@ -20,7 +20,6 @@ import {
 import { CgUndo, CgRedo } from 'react-icons/cg';
 import ResetUserFields from './ResetUserFields';
 
-
 export default function AdminUser(props) {
   const dateFromFormat = 'yyyy-MM-dd';
   const dateToFormat = 'dd MMM yyyy';
@@ -28,7 +27,8 @@ export default function AdminUser(props) {
   const officialNameProp = 'officialName';
   const pollFreqInSecs = 30;
 
-  const tithelyTooltip = 'Tithely IDs are integers separated using commas. Any whitespaces will be removed.';
+  const tithelyTooltip =
+    'Tithely IDs are integers separated using commas. Any whitespaces will be removed.';
 
   const [api, setApi] = useState();
   const [colApi, setColApi] = useState();
@@ -53,7 +53,7 @@ export default function AdminUser(props) {
     return {
       skipColumnGroupHeaders: true,
       allColumns: true,
-      fileName: fileName
+      fileName: fileName,
     };
   };
 
@@ -69,7 +69,7 @@ export default function AdminUser(props) {
   const checkIfUpdated = useCallback(async (updateData = true) => {
     try {
       const { data } = await axios.get('/api/last-updated', {
-        params: { modelName: 'user' }
+        params: { modelName: 'user' },
       });
       const dateObj = DateTime.fromISO(data);
       if (!lastUpdatedTime.current || dateObj > lastUpdatedTime.current) {
@@ -79,7 +79,7 @@ export default function AdminUser(props) {
     } catch (err) {
       console.log(err);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     getData();
@@ -138,7 +138,7 @@ export default function AdminUser(props) {
     params.location === 'csv' ? `Membership ${columnName}` : columnName;
 
   // Membership Getters
-    // TODO-aparedan: Get latest membershipInfo. Right now just assume always get [0]
+  // TODO-aparedan: Get latest membershipInfo. Right now just assume always get [0]
   const membershipRecommitmentDateFormatter = (params) => {
     if (
       params &&
@@ -148,7 +148,7 @@ export default function AdminUser(props) {
     ) {
       const { recommitmentDate: recommitmentDateStr } =
         params.data.membershipInfo[0];
-        return dateFormatter(recommitmentDateStr);
+      return dateFormatter(recommitmentDateStr);
     }
 
     return '';
@@ -271,7 +271,7 @@ export default function AdminUser(props) {
   const fullNameSetter = (params) => {
     if (params && params.data && params.newValue) {
       var newFullName = params.newValue;
-      
+
       // Valid Full Name: Letters and Whitespaces
       if (
         params.data.fullName !== newFullName &&
@@ -280,11 +280,11 @@ export default function AdminUser(props) {
         params.data.fullName = newFullName;
         return true;
       }
-      alert("Invalid Full Name!");
+      alert('Invalid Full Name!');
       return false;
     }
     return false;
-  }
+  };
 
   const phoneNumberSetter = (params) => {
     if (params && params.data && params.newValue) {
@@ -369,9 +369,8 @@ export default function AdminUser(props) {
         let trim = curr.trim();
         if (trim !== '') {
           let parsed = parseInt(trim);
-          if (isNaN(parsed))
-            throw('Only numbers allowed for Tithely ID');
-          
+          if (isNaN(parsed)) throw 'Only numbers allowed for Tithely ID';
+
           arr.push(parsed);
         }
 
@@ -381,12 +380,12 @@ export default function AdminUser(props) {
       alert(err);
       return false;
     }
-    
+
     params.data.tithelyId = idArr;
 
     return true;
-  }
-  
+  };
+
   // Custom Editors
   const MediumTextEditorProps = {
     cellEditorPopup: true,
@@ -442,7 +441,7 @@ export default function AdminUser(props) {
 
   const createMembershipInfo = async (data) => {
     const res = await axios.post('/api/membership/create', {
-      ...data
+      ...data,
     });
 
     if (res.status !== 200) {
@@ -452,7 +451,7 @@ export default function AdminUser(props) {
 
   const updateMembershipInfo = async (data) => {
     const res = await axios.put('/api/membership/update', {
-      params: data
+      params: data,
     });
 
     if (res.status !== 200) {
@@ -462,7 +461,7 @@ export default function AdminUser(props) {
 
   const createBaptismInfo = async (data) => {
     const res = await axios.post('/api/baptism/create', {
-      ...data
+      ...data,
     });
 
     if (res.status !== 200) {
@@ -472,9 +471,9 @@ export default function AdminUser(props) {
 
   const updateBaptismInfo = async (data) => {
     const res = await axios.put('/api/baptism/update', {
-      params: data
+      params: data,
     });
-    
+
     if (res.status !== 200) {
       alert('Something went wrong, please refresh and try again..');
     }
@@ -484,7 +483,8 @@ export default function AdminUser(props) {
     if (api && colApi && p.data) {
       autoSizeAllColumns();
 
-      const groupHeaderName = p?.column?.originalParent?.colGroupDef?.headerName;
+      const groupHeaderName =
+        p?.column?.originalParent?.colGroupDef?.headerName;
 
       if (groupHeaderName && groupHeaderName === 'Membership Info') {
         const { membershipInfo } = p.data;
@@ -493,14 +493,13 @@ export default function AdminUser(props) {
           await updateMembershipInfo(newMembershipInfo);
         } else {
           newMembershipInfo[userIdProp] = p.data.id;
-          
+
           if (!newMembershipInfo[officialNameProp]) {
             newMembershipInfo[officialNameProp] = p.data.fullName;
           }
           await createMembershipInfo(newMembershipInfo);
         }
-      }
-      else if (groupHeaderName && groupHeaderName === 'Baptism Info') {
+      } else if (groupHeaderName && groupHeaderName === 'Baptism Info') {
         const { baptismInfo } = p.data;
         const newBaptismInfo = { ...baptismInfo }[0];
         if (newBaptismInfo.id) {
@@ -512,8 +511,7 @@ export default function AdminUser(props) {
           }
           await createBaptismInfo(newBaptismInfo);
         }
-      }
-      else {
+      } else {
         if (p.data) {
           const { membershipInfo, baptismInfo, ...rest } = p.data;
           await saveUserInfo(rest);
@@ -542,7 +540,7 @@ export default function AdminUser(props) {
     {
       headerName: 'User ID',
       field: 'id',
-      editable: false
+      editable: false,
     },
     {
       headerName: 'Name',
@@ -615,7 +613,7 @@ export default function AdminUser(props) {
           headerName: 'Street',
           field: 'address.street',
           colId: 'street',
-          valueSetter: addressInfoSetter
+          valueSetter: addressInfoSetter,
         },
         {
           headerName: 'Flat',
@@ -640,7 +638,7 @@ export default function AdminUser(props) {
           valueSetter: addressInfoSetter,
           cellEditorParams: {
             values: districtList,
-            useSetter: true
+            useSetter: true,
           },
         },
         {
@@ -652,7 +650,7 @@ export default function AdminUser(props) {
           valueSetter: addressInfoSetter,
           cellEditorParams: {
             values: regionList,
-            useSetter: true
+            useSetter: true,
           },
         },
       ],
@@ -725,7 +723,7 @@ export default function AdminUser(props) {
               colId: 'baptismDate',
               cellEditorPopup: true,
               cellEditorParams: {
-                useSetter: true
+                useSetter: true,
               },
             },
             {
@@ -753,8 +751,8 @@ export default function AdminUser(props) {
       field: 'tithelyId',
       valueGetter: tithelyIdGetter,
       valueSetter: titheIdSetter,
-      headerTooltip: tithelyTooltip
-    }
+      headerTooltip: tithelyTooltip,
+    },
   ];
 
   return (
