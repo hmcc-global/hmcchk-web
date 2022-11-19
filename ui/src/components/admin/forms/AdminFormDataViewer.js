@@ -650,6 +650,7 @@ export default function AdminFormDataViewer(props) {
           enableCellChangeFlash={enableCellChangeFlash}
           getContextMenuItems={getContextMenuItems}
           suppressRowClickSelection={true}
+          sideBar={{toolPanels: ['columns', 'filters']}}
         />
         <Text>
           Last updated: {DateTime.fromISO(lastUpdatedTime.current).toFormat('dd MMM yyyy, HH:mm:ss')}
