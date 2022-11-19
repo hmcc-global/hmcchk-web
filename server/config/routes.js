@@ -44,6 +44,7 @@ module.exports.routes = {
   // Giving Tuesday APIs
   'get /api/giving-tuesday/get-giving-tuesday-data/': 'givingTuesday/get-giving-tuesday-data',
   'post /api/giving-tuesday/update-giving-tuesday-data/': 'givingTuesday/update-giving-tuesday-data',
+  'post /api/giving-tuesday/create-giving-tuesday-data/': 'givingTuesday/create-giving-tuesday-data',
 
   // Pages APIs
   'get /api/pages/get-pages': 'pages/get-pages',
