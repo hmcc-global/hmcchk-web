@@ -12,6 +12,7 @@ import {
   HStack,
   Box,
   Tooltip,
+  useToast
 } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 import { paymentMethodList } from '../../helpers/lists';
@@ -20,6 +21,7 @@ import { CgUndo, CgRedo } from 'react-icons/cg';
 import AdminPaymentDataModal from './AdminPaymentDataModal';
 
 export default function AdminFormDataViewer(props) {
+  const toast = useToast();
   const {
     location: { state },
   } = props;
@@ -120,7 +122,11 @@ export default function AdminFormDataViewer(props) {
       return true;
     }
 
-    alert('Invalid Payment Date!');
+    toast({
+      description: 'Invalid payment date',
+      status: 'error',
+      duration: 5000,
+    });
     return false;
   };
 
@@ -166,8 +172,8 @@ export default function AdminFormDataViewer(props) {
         let temp = {};
 
         temp = item.submissionData;
+        temp['submissionId'] = item.id;
         temp['_submissionTime'] = item.createdAt;
-
         // Populate form data with payment data if form is a paid form
         if (item.paymentData && item.paymentData.length > 0) {
           temp['paymentData'] = item.paymentData[0];
@@ -219,7 +225,11 @@ export default function AdminFormDataViewer(props) {
   useEffect(() => {
     if (api) {
       if (startDate !== '' && endDate !== '' && startDate > endDate) {
-        alert('Start Date should be before End Date');
+        toast({
+          description: 'Start Date should be before End Date',
+          status: 'error',
+          duration: 5000,
+        });
         setEndDate('');
       } else {
         let dateFilterComponent = api.getFilterInstance('_submissionTime');
@@ -231,7 +241,7 @@ export default function AdminFormDataViewer(props) {
         api.onFilterChanged();
       }
     }
-  }, [startDate, endDate, api, getFilterType]);
+  }, [startDate, endDate, api, getFilterType, toast]);
 
   useEffect(() => {
     if (api && colApi) {
@@ -428,7 +438,11 @@ export default function AdminFormDataViewer(props) {
     });
 
     if (res.status !== 200) {
-      alert('Something went wrong, please refresh and try again..');
+      toast({
+        description: 'Something went wrong, please refresh and try again..',
+        status: 'error',
+        duration: 5000,
+      });
     }
   };
 
@@ -457,8 +471,31 @@ export default function AdminFormDataViewer(props) {
   const enableCellChangeFlash = true;
 
   // TODO-Samyak: Replace with actual send confirmation email function
-  const sendConfirmationEmail = (selectedNodes) => {
-    console.log('not yet implemented')
+  const sendConfirmationEmail = async (selectedNodes) => {
+    if (selectedNodes.length === 0) return;
+
+    const submissionIds = selectedNodes.map(i => i.data.submissionId);
+    if (submissionIds == null || submissionIds.length === 0) return;
+
+    try {
+      const res = await axios.put('/api/paymentData/send-email', {
+        submissionIds: submissionIds
+      });
+      if (res.status === 200) {
+        toast({
+          description: 'Emails sent',
+          status: 'success',
+          duration: 5000,
+        });
+        await getData();
+      }
+    } catch(err) {
+      toast({
+        description: 'Something went wrong sending the emails',
+        status: 'error',
+        duration: 5000,
+      });
+    }
   }
 
   const contextMenuSetter = (selectedNodes, value, colId) => {

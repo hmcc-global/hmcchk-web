@@ -39,5 +39,17 @@ module.exports = {
       type: 'string',
       columnType: 'date',
     },
+    paymentConfirmationEmailTemplate: {
+      type: 'string',
+      defaultsTo: ''
+    },
+    paymentCcEmail: {
+      type: 'json',
+      defaultsTo: null
+    },
+    paymentEmailSubject: {
+      type: 'string',
+      defaultsTo: ''
+    },
   },
 };
