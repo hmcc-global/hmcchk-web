@@ -62,17 +62,19 @@ module.exports = {
           const modelName = `paymentData-${formId}`;
           existing = await LastUpdated.updateOne({ modelName }).set({
             lastUpdatedBy: 't3chTeam'
-          });
+          }).fetch();
 
           if (!existing) {
             existing = await LastUpdated.create({
               modelName,
               lastUpdatedBy: 't3chTeam'
-            });
+            }).fetch();
           }
 
-          if (!existing)
-            return exits.invalid();
+          if (!existing) {
+            console.log('here');
+            return exits.invalid('LastUpdated failed to update');
+          }
         }
       }
 

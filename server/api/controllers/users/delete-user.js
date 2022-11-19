@@ -37,13 +37,13 @@ module.exports = {
 
           existing = await LastUpdated.updateOne({ modelName: modelName }).set({
             lastUpdatedBy: this.req.user.fullName
-          });
+          }).fetch();
 
           if (!existing) {
             existing = await LastUpdated.create({
               modelName: modelName,
               lastUpdatedBy: this.req.user.fullName
-            });
+            }).fetch();
             if (!existing) {
               return exits.invalid();
             }

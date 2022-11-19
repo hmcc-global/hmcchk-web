@@ -27,7 +27,7 @@ export default function AdminFormDataViewer(props) {
   } = props;
   const formName = state.name;
   const formId = state.id;
-  const pollFreqInSecs = 30;
+  const pollFreqInSecs = 5 * 60;
 
   let lastUpdatedTime = useRef();
   

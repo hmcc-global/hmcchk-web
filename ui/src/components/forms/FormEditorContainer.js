@@ -261,7 +261,7 @@ const FormEditorContainer = (props) => {
                     >
                       {/* To add more email template, please define the value and add the template here */}
                       <option value="form-default-success">Default</option>
-                      <option value="form-retreat-success">Retreat</option>
+                      <option value="form-retreat-success">Retreat 2021</option>
                       <option value="form-ignite-success">!gnite</option>
                     </Select>
                     <FormErrorMessage>

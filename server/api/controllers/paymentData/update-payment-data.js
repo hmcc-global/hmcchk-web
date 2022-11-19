@@ -92,13 +92,13 @@ module.exports = {
         const modelName = `paymentData-${res.formId}`;
         existing = await LastUpdated.updateOne({ modelName }).set({
           lastUpdatedBy: this.req.user.fullName
-        });
+        }).fetch();
 
         if (!existing) {
           existing = await LastUpdated.create({
             modelName,
             lastUpdatedBy: this.req.user.fullName
-          });
+          }).fetch();
         }
 
         if (!existing)
