@@ -1,4 +1,4 @@
-import { Stack, Link, Box, Text, Center, Image } from '@chakra-ui/react';
+import { Stack, Box, Text } from '@chakra-ui/react';
 
 const LastYearGivingTuesday = (props) => {
   return (

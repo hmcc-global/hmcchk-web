@@ -14,7 +14,7 @@ const GivingTuesdayPage = (props) => {
   const [remainingTimeString, setRemainingTimeString] = useState('24:00:00');
   const [eventStatus, setEventStatus] = useState('before');
   const [givingData, setGivingData] = useState([500, 1000, 20, 1]);
-  const endDate = DateTime.fromISO('2021-12-01T00:00');
+  const endDate = DateTime.fromISO('2022-11-30T00:00');
 
   const calculateTimeLeft = () => {
     return endDate.diffNow(['hours', 'seconds']);
@@ -70,8 +70,8 @@ const GivingTuesdayPage = (props) => {
               alignItems="center"
               h="auto"
               src={
-                process.env.PUBLIC_URL +
-                '/images/givingTuesday/giving-tuesday-final-ad.png'
+                process.env.PUBLIC_URL + '/images/giving/GT2022.png'
+                //'/images/givingTuesday/giving-tuesday-final-ad.png'
               }
               alt="Giving Tuesday"
             />
@@ -82,9 +82,14 @@ const GivingTuesdayPage = (props) => {
             eventStatus={eventStatus}
             givingData={givingData}
           />
-          <HowToGive />
-          <WaysToGive accentColor={accentColor} />
-          <LastYearGivingTuesday />
+          {eventStatus === 'before' ||
+            (eventStatus === 'during' && (
+              <>
+                <HowToGive />
+                <WaysToGive accentColor={accentColor} />
+              </>
+            ))}
+          {eventStatus === 'during' && <LastYearGivingTuesday />}
         </Stack>
       </Container>
     </Box>
