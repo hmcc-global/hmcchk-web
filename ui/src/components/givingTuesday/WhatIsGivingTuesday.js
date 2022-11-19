@@ -1,4 +1,4 @@
-import { Stack, Box, Text, Link, Image, Center } from "@chakra-ui/react";
+import { Stack, Box, Text, Link, Image, Center } from '@chakra-ui/react';
 
 const WhatIsGivingTuesday = (props) => {
   const { accentColor } = props;
@@ -17,12 +17,10 @@ const WhatIsGivingTuesday = (props) => {
     >
       <Stack spacing={5} direction="column" textAlign="center">
         <Center>
-          <Stack direction={["column", "row"]} spacing={[2, 5]}>
+          <Stack direction={['column', 'row']} spacing={[2, 5]}>
             <Center>
               <Image
-                src={
-                  process.env.PUBLIC_URL + "/images/givingTuesday/gt-logo.png"
-                }
+                src={process.env.PUBLIC_URL + '/images/giving/heart.png'}
                 h="1.875rem"
                 w="auto"
                 mt="0.4rem"
@@ -31,24 +29,24 @@ const WhatIsGivingTuesday = (props) => {
             <Text
               color={accentColor}
               fontWeight="900"
-              fontSize={["1.4rem", "1.875rem"]}
+              fontSize={['1.4rem', '1.875rem']}
             >
               What is Giving Tuesday?
             </Text>
           </Stack>
         </Center>
 
-        <Text px={[2, 0]} fontSize={["0.7rem", "md"]} mt={5}>
-          <b>Giving Tuesday</b>{" "}
+        <Text px={[2, 0]} fontSize={['0.7rem', 'md']} mt={5}>
+          <b>Giving Tuesday</b>{' '}
           <Link href="https://www.givingtuesday.org">
             (www.givingtuesday.org)
-          </Link>{" "}
+          </Link>{' '}
           is a global generosity movement unleashing the power of people and
           organizations to transform their communities and the world. It started
           as a way to grow a heart for generosity as people are purchasing
           materials during Black Friday and Cyber Monday.
         </Text>
-        <Text px={[2, 0]} fontSize={["0.7rem", "md"]} mt={3} fontWeight="700">
+        <Text px={[2, 0]} fontSize={['0.7rem', 'md']} mt={3} fontWeight="700">
           As a church, we want to continue to grow in a heart to give to others.
         </Text>
       </Stack>
