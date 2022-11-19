@@ -24,9 +24,10 @@ const AdminGivingTuesdayContainer = () => {
   const updateHandler = async () => {
     try {
       const res = await axios.post(
-        `/api/giving-tuesday/update-giving-tuesday-data/${currYear}`,
+        `/api/giving-tuesday/update-giving-tuesday-data`,
         {
           categories: givingDetails.categories,
+          year: currYear,
         }
       );
       if (res.status === 200) return true;
@@ -42,13 +43,13 @@ const AdminGivingTuesdayContainer = () => {
   };
 
   const handleFieldChange = (key) => (newData) => {
-    setGivingDetails({
-      ...givingDetails,
-      categories: {
-        ...givingDetails.categories,
-        [key]: newData,
-      },
+    const newGivingDetails = { ...givingDetails };
+    const foundIndex = newGivingDetails.categories.findIndex((detail) => {
+      return detail.key === key;
     });
+
+    newGivingDetails.categories[foundIndex] = newData;
+    setGivingDetails(newGivingDetails);
   };
 
   const onSubmit = async (event) => {
@@ -73,8 +74,14 @@ const AdminGivingTuesdayContainer = () => {
   const getData = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        `/api/giving-tuesday/get-giving-tuesday-data/${currYear}`
+        `/api/giving-tuesday/get-giving-tuesday-data`,
+        {
+          params: {
+            year: currYear,
+          },
+        }
       );
+
       if (data) {
         setGivingDetails(data);
       }
@@ -102,13 +109,17 @@ const AdminGivingTuesdayContainer = () => {
             Giving Tuesday Manager
           </Heading>
           <Text>Year: {givingDetails.year}</Text>
+          <Text style={{ fontWeight: 'bold', marginTop: 10, color: 'red' }}>
+            ONLY the 'Total Giving' amount and givers will be shown during
+            Giving Tuesday.
+          </Text>
           <form onSubmit={onSubmit}>
             <Stack direction={['column']} w="100%">
-              {Object.keys(givingDetails.categories).map((key) => (
+              {givingDetails.categories.map((category) => (
                 <AdminGivingTuesdayCategoryForm
-                  key={key}
-                  categoryDetails={givingDetails.categories[key]}
-                  onFieldChange={handleFieldChange(key)}
+                  key={category.key}
+                  categoryDetails={category}
+                  onFieldChange={handleFieldChange(category.key)}
                 />
               ))}
             </Stack>
