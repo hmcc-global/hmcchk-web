@@ -44,7 +44,7 @@ const RenderSwitch = (param) => {
 
           <Image
             margin="auto"
-            src={process.env.PUBLIC_URL + '/images/giving/fps.png'}
+            src={process.env.PUBLIC_URL + '/images/giving/FPSQR.png'}
             boxSize={['70%', '70%', '30%']}
           />
         </Flex>
@@ -133,7 +133,7 @@ const GivingCard = (cardinfo) => {
         h="100%"
         justify="center"
         style={{
-          backdropFilter: 'blur(4px)',
+          backdropFilter: 'blur(2px)',
           background: 'rgba(0, 0, 0, 0.29)',
         }}
       >
@@ -152,7 +152,7 @@ const GivingCard = (cardinfo) => {
                 as="h2"
                 fontSize={['lg', 'xl', '3xl']}
                 color="white"
-                fontWeight="700"
+                fontWeight={{ base: '500', md: '700' }}
               >
                 {cardinfo.text}
               </Heading>
@@ -160,7 +160,7 @@ const GivingCard = (cardinfo) => {
             <Spacer />
             <Center>
               <Box
-                w="70%"
+                w={{ base: '80%', md: '70%' }}
                 float={['right', 'center']}
                 mt={{ base: '0', md: '8' }}
               >
@@ -173,11 +173,11 @@ const GivingCard = (cardinfo) => {
                 >
                   <Text
                     align="center"
-                    fontSize={['xs', 'sm', 'sm']}
-                    fontWeight="700"
+                    fontSize={['x-small', 'sm', 'sm']}
+                    fontWeight={{ base: '500', md: '700' }}
                     color="white"
-                    pl={5}
-                    pr={5}
+                    pl={6}
+                    pr={6}
                   >
                     Learn More
                   </Text>
@@ -234,16 +234,16 @@ const WaysToGive = (props) => {
       </Box>
       <Stack direction={{ base: 'column', md: 'row' }} spacing={[1, 4]}>
         <GivingCard
+          text="FPS"
+          imageLink={process.env.PUBLIC_URL + '/images/giving/FPS.png'}
+        />
+        <GivingCard
           text="Online Giving"
           imageLink={process.env.PUBLIC_URL + '/images/giving/Online.png'}
         />
         <GivingCard
           text="Bank Transfer"
           imageLink={process.env.PUBLIC_URL + '/images/giving/Transfer.png'}
-        />
-        <GivingCard
-          text="FPS"
-          imageLink={process.env.PUBLIC_URL + '/images/giving/FPS.png'}
         />
       </Stack>
       <Box fontSize={['0.7rem', 'md']}>
