@@ -42,8 +42,8 @@ module.exports.routes = {
   'get /api/witness/get-witness-videos': 'witness/get-witness-videos',
 
   // Giving Tuesday APIs
-  'get /api/giving-tuesday/get-giving-tuesday-data/:year': 'givingTuesday/get-giving-tuesday-data',
-  'post /api/giving-tuesday/update-giving-tuesday-data/:year': 'givingTuesday/update-giving-tuesday-data',
+  'get /api/giving-tuesday/get-giving-tuesday-data/': 'givingTuesday/get-giving-tuesday-data',
+  'post /api/giving-tuesday/update-giving-tuesday-data/': 'givingTuesday/update-giving-tuesday-data',
 
   // Pages APIs
   'get /api/pages/get-pages': 'pages/get-pages',
