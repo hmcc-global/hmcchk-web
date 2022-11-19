@@ -102,25 +102,26 @@ const AdminGivingTuesdayContainer = () => {
             Giving Tuesday Manager
           </Heading>
           <Text>Year: {givingDetails.year}</Text>
-          <Stack direction={['column']} w="100%">
-            {Object.keys(givingDetails.categories).map((key) => (
-              <AdminGivingTuesdayCategoryForm
-                key={key}
-                categoryDetails={givingDetails.categories[key]}
-                onFieldChange={handleFieldChange(key)}
-              />
-            ))}
-          </Stack>
-          <Button
-            mt={5}
-            colorScheme="green"
-            type="submit"
-            w="full"
-            isLoading={isSaving}
-            onClick={onSubmit}
-          >
-            UPDATE
-          </Button>
+          <form onSubmit={onSubmit}>
+            <Stack direction={['column']} w="100%">
+              {Object.keys(givingDetails.categories).map((key) => (
+                <AdminGivingTuesdayCategoryForm
+                  key={key}
+                  categoryDetails={givingDetails.categories[key]}
+                  onFieldChange={handleFieldChange(key)}
+                />
+              ))}
+            </Stack>
+            <Button
+              mt={5}
+              colorScheme="green"
+              type="submit"
+              w="full"
+              isLoading={isSaving}
+            >
+              UPDATE
+            </Button>
+          </form>
         </>
       )}
     </Container>
