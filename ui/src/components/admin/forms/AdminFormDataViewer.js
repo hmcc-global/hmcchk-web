@@ -20,6 +20,8 @@ import CustomDateEditor from '../ag-grid-editors/CustomDateEditor';
 import { CgUndo, CgRedo } from 'react-icons/cg';
 import AdminPaymentDataModal from './AdminPaymentDataModal';
 
+const pollFreqInSecs = 5 * 60;
+
 export default function AdminFormDataViewer(props) {
   const toast = useToast();
   const {
@@ -27,7 +29,6 @@ export default function AdminFormDataViewer(props) {
   } = props;
   const formName = state.name;
   const formId = state.id;
-  const pollFreqInSecs = 5 * 60;
 
   let lastUpdatedTime = useRef();
   
