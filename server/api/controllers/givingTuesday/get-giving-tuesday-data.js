@@ -6,7 +6,7 @@ module.exports = {
   inputs: {
     year: {
       required: true,
-      type: 'string',
+      type: 'number',
     }
   },
 
