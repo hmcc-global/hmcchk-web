@@ -28,16 +28,7 @@ module.exports = {
       type: 'string',
       defaultsTo: 'form-default-success',
     },
-    paymentConfirmationEmailTemplate: {
-      type: 'string',
-    },
-    ccEmail: {
-      type: 'string',
-    },
     customEmailSubject: {
-      type: 'string',
-    },
-    paymentEmailSubject: {
       type: 'string',
     },
     formAvailableFrom: {
@@ -47,6 +38,18 @@ module.exports = {
     formAvailableUntil: {
       type: 'string',
       columnType: 'date',
+    },
+    paymentConfirmationEmailTemplate: {
+      type: 'string',
+      defaultsTo: ''
+    },
+    paymentCcEmail: {
+      type: 'json',
+      defaultsTo: null
+    },
+    paymentEmailSubject: {
+      type: 'string',
+      defaultsTo: ''
     },
   },
 };
