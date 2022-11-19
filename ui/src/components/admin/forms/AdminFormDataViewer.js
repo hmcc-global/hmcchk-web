@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { customAxios as axios } from '../../helpers/customAxios';
 import { AgGridReact } from 'ag-grid-react';
-import 'ag-grid-enterprise';
+import 'ag-grid-community';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import {
