@@ -209,7 +209,7 @@ const GivingCard = (cardinfo) => {
 const WaysToGive = (props) => {
   const { accentColor } = props;
   return (
-    <Stack spacing={5} direction="column">
+    <Stack spacing={5} direction="column" pb="5">
       <Box pt={[2, 2]} textAlign="center">
         <Text
           color={accentColor}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Stack, Box, Container, Image, Center } from '@chakra-ui/react';
+import { Stack, Box, Container, Image, Center, Text } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 import CountdownTimer from './CountdownTimer';
 import GivingUpdates from './GivingUpdates';
@@ -43,6 +43,8 @@ const GivingTuesdayPage = (props) => {
     return endDate.diffNow(['hours', 'seconds']);
   };
 
+  const isDisplayHTG = eventStatus === 'before' || eventStatus === 'during';
+
   // Timer Functionality
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -53,7 +55,7 @@ const GivingTuesdayPage = (props) => {
       } else if (remainingHours < 0) {
         setEventStatus('after');
       } else {
-        setEventStatus('before');
+        setEventStatus('after');
       }
       setRemainingTimeString(dur.toFormat('hh:mm:ss'));
     }, 1000);
@@ -78,7 +80,7 @@ const GivingTuesdayPage = (props) => {
   return (
     <Box background="#DDE9FF">
       <Container maxW="container.lg">
-        <Stack spacing={5} p={[3, 5]}>
+        <Stack spacing={5} p={[3, 5]} pb="5">
           {eventStatus === 'during' && (
             <CountdownTimer
               accentColor={accentColor}
@@ -107,14 +109,24 @@ const GivingTuesdayPage = (props) => {
             eventStatus={eventStatus}
             givingData={givingData}
           />
-          {eventStatus === 'before' ||
-            (eventStatus === 'during' && (
-              <>
-                <HowToGive />
-                <WaysToGive accentColor={accentColor} />
-              </>
-            ))}
+          {isDisplayHTG && (
+            <>
+              <HowToGive />
+              <WaysToGive accentColor={accentColor} />
+            </>
+          )}
           {eventStatus === 'during' && <LastYearGivingTuesday />}
+          {eventStatus === 'after' && (
+            <Text
+              color={accentColor}
+              fontWeight="900"
+              fontSize={['1.4rem', '1.875rem']}
+              textAlign="center"
+              py="2"
+            >
+              Thank you for participating in Giving Tuesday 2022!
+            </Text>
+          )}
         </Stack>
       </Container>
     </Box>
