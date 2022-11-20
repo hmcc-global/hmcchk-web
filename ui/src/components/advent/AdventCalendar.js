@@ -2,6 +2,8 @@ import { Box, Grid, GridItem, Image } from '@chakra-ui/react';
 import AdventCard from './AdventCard';
 import AudioPlayer from './AudioPlayer';
 import { DateTime } from 'luxon';
+import blurb from './AdventCardConfig.json';
+console.log(blurb);
 
 const AdventCalendar = () => {
   const cardArray = Array.from({ length: 24 }, (_, i) => i + 1);
@@ -43,7 +45,12 @@ const AdventCalendar = () => {
             left={['5vw', '7vw', '7vw', '7vw', '10vw']}
           >
             {cardArray.map((el, i) => (
-              <AdventCard isActive={isActive(i)} date={el} key={i} />
+              <AdventCard
+                isActive={isActive(i)}
+                date={el}
+                key={i}
+                content={blurb[i]}
+              />
             ))}
           </Grid>
         </GridItem>
