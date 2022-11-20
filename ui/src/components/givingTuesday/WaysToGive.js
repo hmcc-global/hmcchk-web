@@ -251,12 +251,14 @@ const WaysToGive = (props) => {
         leader to help transfer the giving for you
       </Box>
       <Box fontSize={['0.7rem', 'md']}>
-        Personal information is kept confidential, used only for tax receipt
-        purposes, and is only accessible by the Stewardship Team. If you have
-        any questions, please do not hesitate to contact us:{' '}
+        <i>
+          Personal information is kept confidential, used only for tax receipt
+          purposes, and is only accessible by the Stewardship Team. If you have
+          any questions, please do not hesitate to contact us:{' '}
+        </i>
         <b>
           <a href="mailto:stewardship@hongkong.hmcc.net">
-            stewardship@hongkong.hmcc.net
+            <i>stewardship@hongkong.hmcc.net</i>
           </a>
         </b>
       </Box>
