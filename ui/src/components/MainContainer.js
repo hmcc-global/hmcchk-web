@@ -38,7 +38,7 @@ import WitnessHomeContainer from './witness/WitnessHomeContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import TextDetails from './witness/text-testimony/TextDetails';
 import MissionsMonthContainer from './missions-month/MissionsMonthContainer';
-import GTContainer from './givingtuesday/GTMainContainer';
+import GivingTuesdayPage from './givingTuesday/GivingTuesdayPage';
 
 const MainContainer = () => {
   return (
@@ -306,7 +306,7 @@ const MainContainer = () => {
         <PrivateRoute
           path="/giving-tuesday"
           permissions={['public']}
-          component={GTContainer}
+          component={GivingTuesdayPage}
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
