@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Box,
   Button,
@@ -19,95 +19,98 @@ import {
   Center,
   Image,
   ModalFooter,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const RenderSwitch = (param) => {
   switch (param.ModalSelection) {
-    case "FPS":
+    case 'FPS':
       return (
-        <Flex direction={["column", "column", "row"]}>
+        <Flex direction={['column', 'column', 'row']}>
           <Stack>
             <Text fontWeight="bold">
               Open your mobile banking FPS interface and scan the QR code OR
-              input the FPS identifier.
+              input the FPS identifier:
             </Text>
             <Box>
-              <Text fontWeight="bold">
-                Name: HARVEST MISSION COMMUNITY CHURCH
+              <Text>
+                Name: <b> HARVEST MISSION COMMUNITY CHURCH</b>
               </Text>
-              <Text fontWeight="bold">FPS ID: 167534304</Text>
+              <Text>
+                FPS ID: <b>167534304 </b>
+              </Text>
             </Box>
           </Stack>
           <Spacer />
 
           <Image
             margin="auto"
-            src={process.env.PUBLIC_URL + "/images/givingTuesday/FPSQR.png"}
-            boxSize={["70%", "70%", "30%"]}
+            src={process.env.PUBLIC_URL + '/images/giving/FPSQR.png'}
+            boxSize={['70%', '70%', '30%']}
           />
         </Flex>
       );
-    case "Online Giving":
+    case 'Online Giving':
       return (
         <Box>
-          <Text fontWeight="bold">
+          <Text fontWeight="bold" mb="5">
+            Online Giving:{' '}
+            <Link
+              style={{
+                textDecoration: 'underline',
+              }}
+              href="https://bit.ly/hmcc-giving-cc"
+              color="#000000"
+            >
+              https://bit.ly/hmcc-giving-cc
+            </Link>{' '}
+          </Text>
+          <Text>
             Kindly note that a portion of your giving will be deducted for
             online credit card transactions (3.5% + HKD $2.35 processing fee).
             If you wish for 100% of your contribution to go towards our church’s
             ministry work, please consider selecting “cover fees” on the giving
             site or give via cash or check.
           </Text>
-          <Text fontWeight="bold">
-            Click{" "}
-            <Link
-              style={{
-                textDecoration: "underline",
-              }}
-              href="https://tithe.ly/give_new/www/#/tithely/give-one-time/645349"
-              color="#319795"
-            >
-              here
-            </Link>{" "}
-            to proceed with online credit card giving
-          </Text>
         </Box>
       );
-    case "Bank Transfer":
+    case 'Bank Transfer':
       return (
         <VStack spacing="3vh">
           <Box>
             <Text fontWeight="bold">
               You may use the following information:
             </Text>
-            <Text fontWeight="bold">
-              Bank Name: China Construction Bank (Asia) Corporation Limited
+            <Text>
+              Bank Name:{' '}
+              <b>China Construction Bank (Asia) Corporation Limited</b>
             </Text>
-            <Text fontWeight="bold">Bank Code: 009</Text>
-            <Text fontWeight="bold">Branch Code: 845</Text>
-            <Text fontWeight="bold">
-              Account Name: Harvest Mission Community Church (Hong Kong)
+            <Text>
+              Bank Code: <b>009</b>
             </Text>
-            <Text fontWeight="bold">Limited Account Number: 13012090</Text>
-            <Text fontWeight="bold">
-              Transfer Remarks: Please indicate the giving type (Weekly
-              Offering, Tithe, HMI, or Other) and write down the giving date
-              (e.g. Weekly Offering 2019-11-03)
+            <Text>
+              Branch Code: <b>845</b>
+            </Text>
+            <Text>
+              Account Name: <b>Harvest Mission Community Church (Hong Kong)</b>
+            </Text>
+            <Text>
+              Limited Account Number: <b>13012090</b>
             </Text>
           </Box>
 
-          <Text fontWeight="bold">
+          <Text>
             If our account name is too long and exceeds the number of permitted
-            characters, you may shorten it as “Harvest Mission Community Church
-            HK”.
+            characters, you may shorten it as{' '}
+            <b> “Harvest Mission Community Church HK”.</b>
           </Text>
-          <Text fontWeight="bold">
+          <Text>
             Please email a copy of your transfer receipt along with your Full
-            Name within 2 weeks to stewardship@hongkong.hmcc.net.
+            Name within 2 weeks to <b> stewardship@hongkong.hmcc.net.</b>
           </Text>
         </VStack>
       );
     default:
-      return "not detected";
+      return 'not detected';
   }
 };
 
@@ -115,47 +118,52 @@ const GivingCard = (cardinfo) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box
-      w={["100%", "100%", "32%"]}
-      borderRadius="3xl"
-      my={["0", "0", "0"]}
+      w={['100%', '100%', '32%']}
+      borderRadius="2xl"
+      my={['0', '0', '0']}
       bgImage={cardinfo.imageLink}
       bgPosition="center"
       bgSize="cover"
       boxShadow="0px 4px 8px rgba(0, 0, 0, 0.15)"
+      fontFamily="Inter"
     >
       <Flex
-        borderRadius="3xl"
+        borderRadius="2xl"
         w="full"
         h="100%"
         justify="center"
         style={{
-          backdropFilter: "blur(4px)",
-          background: "rgba(0, 0, 0, 0.29)",
+          backdropFilter: 'blur(2px)',
+          background: 'rgba(0, 0, 0, 0.29)',
         }}
       >
         <Box
-          py={["3vh", "3vh", "10vh"]}
+          py={['0vh', '3vh', '10vh']}
           px={[1, 0]}
-          minH={["10vh", "20vh"]}
+          minH={{ base: '7vh', sm: '12vh', md: '20vh' }}
           minW="90%"
           justifyContent="center"
           textAlign="center"
           verticalAlign="middle"
         >
-          <Flex direction={["row", "row", "column"]}>
+          <Flex direction={{ base: 'row', md: 'column' }} minH="100%">
             <Center>
               <Heading
                 as="h2"
-                fontSize={["lg", "xl", "3xl"]}
+                fontSize={['lg', 'xl', '3xl']}
                 color="white"
-                fontWeight="900"
+                fontWeight={{ base: '500', md: '700' }}
               >
                 {cardinfo.text}
               </Heading>
             </Center>
             <Spacer />
             <Center>
-              <Box w="80%" float={["right", "center"]}>
+              <Box
+                w={{ base: '80%', md: '70%' }}
+                float={['right', 'center']}
+                mt={{ base: '0', md: '8' }}
+              >
                 <Button
                   w="100%"
                   size="sm"
@@ -165,16 +173,16 @@ const GivingCard = (cardinfo) => {
                 >
                   <Text
                     align="center"
-                    fontSize={["xs", "sm", "sm"]}
-                    fontWeight="700"
+                    fontSize={['x-small', 'sm', 'sm']}
+                    fontWeight={{ base: '500', md: '700' }}
                     color="white"
-                    pl={5}
-                    pr={5}
+                    pl={6}
+                    pr={6}
                   >
                     Learn More
                   </Text>
                 </Button>
-                <Modal isOpen={isOpen} size={"xl"} onClose={onClose}>
+                <Modal isOpen={isOpen} size={'xl'} onClose={onClose}>
                   <ModalOverlay />
                   <ModalContent>
                     <ModalHeader>
@@ -201,54 +209,56 @@ const GivingCard = (cardinfo) => {
 const WaysToGive = (props) => {
   const { accentColor } = props;
   return (
-    <Stack spacing={5} direction="column">
+    <Stack spacing={5} direction="column" pb="5">
       <Box pt={[2, 2]} textAlign="center">
         <Text
           color={accentColor}
           fontWeight="800"
-          fontSize={["1.4rem", "1.875rem"]}
+          fontSize={['1.4rem', '1.875rem']}
         >
           Ways To Give
         </Text>
         <Text
           color={accentColor}
           fontWeight="700"
-          fontSize={["0.8rem", "1.25rem"]}
+          fontSize={['0.8rem', '1.25rem']}
         >
           There are a few different ways you can give to our church.
         </Text>
-        <Text fontSize={["0.7rem", "md"]}>
+        <Text fontSize={['0.7rem', 'md']}>
           <i>
             *When giving, please always use your legal name and provide the same
             email address consistently.
           </i>
         </Text>
       </Box>
-      <Stack direction={["column", "row"]} spacing={[1, 4]}>
+      <Stack direction={{ base: 'column', md: 'row' }} spacing={[1, 4]}>
         <GivingCard
           text="FPS"
-          imageLink={process.env.PUBLIC_URL + "/images/givingTuesday/FPS.png"}
+          imageLink={process.env.PUBLIC_URL + '/images/giving/FPS.png'}
         />
         <GivingCard
           text="Online Giving"
-          imageLink={
-            process.env.PUBLIC_URL + "/images/givingTuesday/Online.png"
-          }
+          imageLink={process.env.PUBLIC_URL + '/images/giving/Online.png'}
         />
         <GivingCard
           text="Bank Transfer"
-          imageLink={
-            process.env.PUBLIC_URL + "/images/givingTuesday/Transfer.png"
-          }
+          imageLink={process.env.PUBLIC_URL + '/images/giving/Transfer.png'}
         />
       </Stack>
-      <Box fontSize={["0.7rem", "md"]}>
-        Personal information is kept confidential, used only for tax receipt
-        purposes, and is only accessible by the Stewardship Team. If you have
-        any questions, please do not hesitate to contact us:{" "}
+      <Box fontSize={['0.7rem', 'md']}>
+        *If you would like to give via cash, please contact your LIFE Group
+        leader to help transfer the giving for you
+      </Box>
+      <Box fontSize={['0.7rem', 'md']}>
+        <i>
+          Personal information is kept confidential, used only for tax receipt
+          purposes, and is only accessible by the Stewardship Team. If you have
+          any questions, please do not hesitate to contact us:{' '}
+        </i>
         <b>
           <a href="mailto:stewardship@hongkong.hmcc.net">
-            stewardship@hongkong.hmcc.net
+            <i>stewardship@hongkong.hmcc.net</i>
           </a>
         </b>
       </Box>
