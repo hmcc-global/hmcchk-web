@@ -330,26 +330,48 @@ export default function MissionMonthTabs() {
               fontSize={{ base: '12px', md: '15px' }}
             >
               <Center fontFamily="Lexend Deca" as="i" textAlign="center">
-                Missions is only possible when we depend on the very reason we do missions. We must not go on missions without being prayerful. The weekly prayer guide is aimed to guide your inward and outward prayers as we go through missions month.
-                <br/><br />
+                Missions is only possible when we depend on the very reason we
+                do missions. We must not go on missions without being prayerful.
+                The weekly prayer guide is aimed to guide your inward and
+                outward prayers as we go through missions month.
+                <br />
+                <br />
                 Weekly Prayer Guides will be uploaded every Monday in November!
               </Center>
               <br />
               <UnorderedList>
-                <ListItem><Link color='black' href='https://hongkong.sub.hmcc.net/wp-content/uploads/Missions-Month-Prayer-Guide-2022-Week-1.pdf' isExternal>
-                    Week 1 
-                </Link></ListItem>
-                
-                <ListItem> <Link color='black' href='https://hongkong.sub.hmcc.net/wp-content/uploads/Missions-Month-Prayer-Guide-2022-Week-2-Editable.pdf' isExternal>
-                    Week 2 [NEW]
-                </Link></ListItem>
-                {/*<ListItem><Link color='black' href='www.hmcc.tv' isExternal>
-                    Week 3
-                </Link></ListItem>
-                <ListItem><Link color='gray' href='www.hmcc.tv' isExternal>
+                <ListItem>
+                  <Link
+                    color="black"
+                    href="https://hongkong.sub.hmcc.net/wp-content/uploads/Missions-Month-Prayer-Guide-2022-Week-1.pdf"
+                    isExternal
+                  >
+                    Week 1
+                  </Link>
+                </ListItem>
+
+                <ListItem>
+                  {' '}
+                  <Link
+                    color="black"
+                    href="https://hongkong.sub.hmcc.net/wp-content/uploads/Missions-Month-Prayer-Guide-2022-Week-2-Editable.pdf"
+                    isExternal
+                  >
+                    Week 2
+                  </Link>
+                </ListItem>
+                <ListItem>
+                  <Link
+                    color="black"
+                    href="https://hongkong.sub.hmcc.net/wp-content/uploads/Missions-Month-Prayer-Guide-2022-Week-3.pdf"
+                    isExternal
+                  >
+                    Week 3 [NEW]
+                  </Link>
+                </ListItem>
+                {/* <ListItem><Link color='gray' href='www.hmcc.tv' isExternal>
                     Week 4
                 </Link></ListItem> */}
-               
               </UnorderedList>
             </Box>
           </Container>
@@ -393,7 +415,7 @@ export default function MissionMonthTabs() {
                     isExternal
                   >
                     Spotify Playlists
-                  </Link> 
+                  </Link>
                 </ListItem>
                 <ListItem>
                   <Link
@@ -402,6 +424,15 @@ export default function MissionMonthTabs() {
                     isExternal
                   >
                     Encounter Resources: Dr. Andrew Loke
+                  </Link>
+                </ListItem>
+                <ListItem>
+                  <Link
+                    color="black"
+                    href="http://transformasphere.com"
+                    isExternal
+                  >
+                    Learn more about Transformasphere
                   </Link>
                 </ListItem>
               </UnorderedList>
