@@ -53,8 +53,8 @@ const AdventCalendar = () => {
               process.env.PUBLIC_URL +
               '/images/advent/adventCalendar/paintings.png'
             }
-            w="75%"
-            mt="15vh"
+            w="100%"
+            mt="12vh"
           />
         </GridItem>
         <GridItem display={{ base: 'none', md: 'block' }}>
