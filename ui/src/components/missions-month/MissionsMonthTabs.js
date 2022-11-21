@@ -426,6 +426,15 @@ export default function MissionMonthTabs() {
                     Encounter Resources: Dr. Andrew Loke
                   </Link>
                 </ListItem>
+                <ListItem>
+                  <Link
+                    color="black"
+                    href="http://transformasphere.com"
+                    isExternal
+                  >
+                    Learn more about Transformasphere
+                  </Link>
+                </ListItem>
               </UnorderedList>
             </Box>
           </Container>
