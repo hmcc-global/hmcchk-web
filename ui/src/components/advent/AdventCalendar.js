@@ -35,13 +35,13 @@ const AdventCalendar = () => {
             bgRepeat="no-repeat"
             bgSize="contain"
             bgPosition="center"
-            w="75%"
-            h="81%"
+            w="90%"
+            h="85%"
             px={['5vw', '9vw', '7vw', '7vw', '5vw']}
             py={['30vh', '25vh', '20vh', '17vh', '12vh']}
             position="relative"
             top={['12vh', '12vh', '12vh', '11vh', '10vh']}
-            left={['5vw', '7vw', '7vw', '7vw', '10vw']}
+            left={['5vw', '7vw']}
           >
             {cardArray.map((el, i) => (
               <AdventCard
@@ -53,25 +53,22 @@ const AdventCalendar = () => {
             ))}
           </Grid>
         </GridItem>
-        <GridItem>
+        <GridItem colSpan={2} rowSpan={2}>
           <Image
             src={
               process.env.PUBLIC_URL +
               '/images/advent/adventCalendar/paintings.png'
             }
-            w="75%"
-            mt="15vh"
+            w="80%"
           />
-        </GridItem>
-        <GridItem>
           <Image
             src={
               process.env.PUBLIC_URL + '/images/advent/adventCalendar/music.png'
             }
-            w="66%"
+            w="35%"
             position="relative"
-            top={['28vh', '19vh', '13vh', '7vh', '2vh']}
-            left={['5vw', '5vw', '5vw', '5vw', '5vw']}
+            top={['24vh', '19vh', '13vh', '7vh', '2vh']}
+            left={['5vw', '7vw', '5vw', '5vw', '10vw']}
           />
         </GridItem>
       </Grid>
