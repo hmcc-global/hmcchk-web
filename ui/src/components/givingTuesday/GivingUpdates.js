@@ -119,19 +119,19 @@ const GivingUpdates = (props) => {
             </Text>
           </>
         )}
-        {eventStatus !== 'before' && (
-              <Text
-                textAlign="right"
-                color="#0628A3"
-                fontSize={['0.5rem', 'sm']}
-                fontStyle="italic"
-              >
-                *as of {DateTime.fromISO(givingData.updatedAt).toFormat('MMMM dd - hh:mm a')}
-              </Text>
-            )}
       </Box>
       {eventStatus !== 'before' && (
-        <Stack
+        <Box>
+          <Text
+            textAlign="right"
+            color="#0628A3"
+            fontSize={['0.7rem', 'sm']}
+            fontStyle="italic"
+            mb={2}
+          >
+            *as of {DateTime.fromISO(givingData.updatedAt).toFormat('MMMM dd - hh:mm a')}
+          </Text>
+          <Stack
           direction={['column', 'row']}
           borderWidth={1}
           borderRadius="2xl"
@@ -163,6 +163,7 @@ const GivingUpdates = (props) => {
             </Text>
           </Stack>
         </Stack>
+        </Box>
       )}
 
       <Stack direction={['column', 'row']} spacing={[2, 4]}>

@@ -10,7 +10,7 @@ const WhatIsGivingTuesday = (props) => {
       borderColor="white"
       background="white"
       pt={[3, 5]}
-      pb={[3, 8]}
+      pb={[5, 8]}
       pl={[3, 20]}
       pr={[3, 20]}
       shadow="md"
