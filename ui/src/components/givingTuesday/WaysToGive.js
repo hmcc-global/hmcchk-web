@@ -215,6 +215,7 @@ const WaysToGive = (props) => {
           color={accentColor}
           fontWeight="800"
           fontSize={['1.4rem', '1.875rem']}
+          pb={1}
         >
           Ways To Give
         </Text>

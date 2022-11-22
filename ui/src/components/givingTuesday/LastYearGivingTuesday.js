@@ -11,14 +11,14 @@ const LastYearGivingTuesday = (props) => {
       background="white"
       shadow="md"
       textAlign="center"
-      paddingBottom={8}
+      paddingBottom={[6, 9]}
     >
       <Text
         color="#F9916B"
         fontWeight="900"
         fontSize={['1.1rem', '1.75rem']}
         pt={[3, 7]}
-        mb="2"
+        my="2"
       >
         Last Year's Giving Tuesday
       </Text>
