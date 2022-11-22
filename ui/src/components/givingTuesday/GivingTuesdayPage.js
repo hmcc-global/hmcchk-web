@@ -55,7 +55,7 @@ const GivingTuesdayPage = (props) => {
       } else if (remainingHours < 0) {
         setEventStatus('after');
       } else {
-        setEventStatus('during');
+        setEventStatus('before');
       }
       setRemainingTimeString(dur.toFormat('hh:mm:ss'));
     }, 1000);
