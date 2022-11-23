@@ -21,7 +21,6 @@ const HowToGive = (props) => {
       <Box textAlign="center">
         <Text
           color="#F9916B"
-          color="#F9916B"
           fontWeight="900"
           fontSize={['1.3rem', '1.75rem']}
           pt={7}
