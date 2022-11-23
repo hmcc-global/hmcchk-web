@@ -56,8 +56,8 @@ const AdventCard = (props) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay filter="blur(8px)" />
         <ModalContent
-          w="370px"
-          h="555px"
+          w="30vw"
+          h="100vh"
           borderWidth={14}
           borderColor={color}
           bg="white"
@@ -65,7 +65,7 @@ const AdventCard = (props) => {
           justifyContent="center"
           boxShadow="1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000"
         >
-          <Box h="527" borderColor="black" borderWidth={1.5}>
+          <Box h="100vh" borderColor="black" borderWidth={1.5}>
             <ModalHeader fontFamily="LettersForLearners" fontSize="27px" p={2}>
               {'December ' + date + ', 2022'}
             </ModalHeader>
@@ -74,7 +74,7 @@ const AdventCard = (props) => {
               <VStack>
                 {content.type === 'image' ? (
                   <Box>
-                    <HStack w="296px" spacing={5}>
+                    <HStack w="25vw" spacing={5}>
                       {content.image && (
                         <Image
                           h="50%"
@@ -99,8 +99,8 @@ const AdventCard = (props) => {
                 ) : null}
                 {content.type === 'video'
                   ? content.video && (
-                      <Box w="370px">
-                        <AspectRatio margin="auto" maxW="206px" ratio={16 / 9}>
+                      <Box w="30vw">
+                        <AspectRatio margin="auto" maxW="20vw" ratio={16 / 9}>
                           <iframe
                             src={content.video}
                             title="Video player"
@@ -134,7 +134,7 @@ const AdventCard = (props) => {
                   </Link>
                 ) : null}
                 {content.type === 'spotify' ? (
-                  <Box w="370px">
+                  <Box w="30vw">
                     <Center mb={2}>
                       <Text
                         fontFamily="LettersForLearners"
@@ -144,7 +144,7 @@ const AdventCard = (props) => {
                         {content.title}
                       </Text>
                     </Center>
-                    <AspectRatio margin="auto" maxW="285px" borderRadius={12}>
+                    <AspectRatio margin="auto" maxW="22vw" borderRadius={12}>
                       <iframe
                         title="spotify playlist"
                         src={content.link}
@@ -157,13 +157,7 @@ const AdventCard = (props) => {
                   </Box>
                 ) : null}
                 {content.type !== 'challenge' ? (
-                  <Box
-                    fontSize="sm"
-                    w="300px"
-                    mt={5}
-                    color="#4C80A5"
-                    textAlign="justify"
-                  >
+                  <Box w="25vw" mt={5} textAlign="justify">
                     <Text
                       fontFamily="LettersforLearners"
                       fontSize={20}
@@ -205,8 +199,8 @@ const AdventCard = (props) => {
         >
           <Image
             src={process.env.PUBLIC_URL + content.thumbnail}
-            w={['80px', '80px', '60px', '60px', '60px']}
-            h={['120px', '120px', '80px', '85px', '100px']}
+            w={['14vw', '14vw', '12vw', '12vw', '10vw']}
+            h={['15vh', '16vh', '12vh', '13vh', '16vh']}
             position="relative"
             onClick={isActive ? onOpen : null}
             // Centering
