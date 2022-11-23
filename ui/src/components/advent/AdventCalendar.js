@@ -67,8 +67,8 @@ const AdventCalendar = () => {
                 bgPosition="center"
                 w="90%"
                 h="85%"
-                px={['5vw', '7vw', '7vw', '7vw', '5vw']}
-                py={['30vh', '25vh', '22vh', '17vh', '16vh']}
+                px={['5vw', '7vw', '7vw', '7vw', '4.5vw']}
+                py={['30vh', '25vh', '22vh', '17vh', '12vh']}
                 position="relative"
                 top={['12vh', '12vh', '11vh', '11vh', '10vh']}
                 left={['5vw', '7vw']}
