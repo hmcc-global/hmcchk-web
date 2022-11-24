@@ -1,5 +1,6 @@
 import { Box, Grid, GridItem, Image } from '@chakra-ui/react';
 import AdventCard from './AdventCard';
+import AudioPlayer from './AudioPlayer';
 import { DateTime } from 'luxon';
 
 const AdventCalendar = () => {
@@ -56,16 +57,8 @@ const AdventCalendar = () => {
             mt="15vh"
           />
         </GridItem>
-        <GridItem>
-          <Image
-            src={
-              process.env.PUBLIC_URL + '/images/advent/adventCalendar/music.png'
-            }
-            w="66%"
-            position="relative"
-            top={['28vh', '19vh', '13vh', '7vh', '2vh']}
-            left={['5vw', '5vw', '5vw', '5vw', '5vw']}
-          />
+        <GridItem display={{ base: 'none', md: 'block' }}>
+          <AudioPlayer />
         </GridItem>
       </Grid>
     </Box>
