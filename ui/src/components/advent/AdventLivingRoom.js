@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Grid,
-  GridItem,
-  Image,
-  Flex,
-  Spacer,
-} from '@chakra-ui/react';
+import { Box, Grid, GridItem, Image, Flex, Spacer } from '@chakra-ui/react';
 const AdventLivingRoom = () => {
   return (
     <Flex
@@ -59,7 +51,7 @@ const AdventLivingRoom = () => {
                   '/images/advent/adventLivingRoom/chair.png'
                 }
                 w="90%"
-                mb={['6vh', '8vh']}
+                mb={['4vh', '6vh']}
                 marginLeft="1vw"
               />
             </Flex>
@@ -69,14 +61,24 @@ const AdventLivingRoom = () => {
             <Flex flexDirection="column" h="100%">
               <Box h="0"></Box>
               <Spacer />
-              <Image
-                w="80%"
-                mb={['10vh', '12vh']}
-                src={
-                  process.env.PUBLIC_URL +
-                  '/images/advent/adventLivingRoom/fireplace.png'
-                }
-              />
+              <Box position="relative" w="80%" mb={['10vh', '12vh']}>
+                <Image
+                  src={
+                    process.env.PUBLIC_URL +
+                    '/images/advent/adventLivingRoom/fireplace.png'
+                  }
+                />
+                <Image
+                  position="absolute"
+                  top="67%"
+                  left="25%"
+                  w="50%"
+                  src={
+                    process.env.PUBLIC_URL +
+                    '/images/advent/adventLivingRoom/fire.gif'
+                  }
+                />
+              </Box>
             </Flex>
           </GridItem>
         </Grid>
