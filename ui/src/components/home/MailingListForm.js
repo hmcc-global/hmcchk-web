@@ -77,6 +77,7 @@ const MailingListForm = ({ props }) => {
             borderTopLeftRadius="20"
             borderTopRightRadius="20"
             objectFit="cover"
+            src={process.env.PUBLIC_URL + '/images/advent/adventad.png'}
           />
         </AspectRatio>
         <ModalCloseButton />
