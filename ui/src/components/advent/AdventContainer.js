@@ -1,5 +1,5 @@
-import { React, useState, useEffect } from 'react';
-import { Container, Flex, Spacer } from '@chakra-ui/react';
+import { React, useEffect, useState } from 'react';
+import { Img, Box, Container, Flex, Spacer } from '@chakra-ui/react';
 import AdventCalendar from './AdventCalendar';
 import AdventLivingRoom from './AdventLivingRoom';
 import { customAxios as axios } from '../helpers/customAxios';
@@ -27,6 +27,17 @@ const AdventContainer = (props) => {
     props.user.email ? getMailingList(props.user) : setUserSignedUp(false);
   }, []);
 
+  let [side, setSide] = useState('right');
+  const onArrowClick = () => {
+    document.querySelector('#advent-container').scrollTo({
+      left: side === 'right' ? 0 : 3000,
+      top: 0,
+      behavior: 'smooth',
+    });
+
+    setSide(side === 'right' ? 'left' : 'right');
+  };
+
   return (
     <Container
       minW="100%"
@@ -48,6 +59,45 @@ const AdventContainer = (props) => {
         <AdventLivingRoom />
         <Spacer />
         <AdventCalendar />
+        {side == 'right' && (
+          <Box
+            position="absolute"
+            h="100%"
+            bg="linear-gradient(to right, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 100%)"
+          >
+            <Img
+              position="relative"
+              top="37%"
+              src={
+                process.env.PUBLIC_URL +
+                '/images/advent/adventCalendar/arrow.gif'
+              }
+              transform={'rotateZ(90deg)'}
+              width="5em"
+              onClick={onArrowClick}
+            />
+          </Box>
+        )}
+        {side === 'left' && (
+          <Box
+            position="absolute"
+            h="100%"
+            bg="linear-gradient(to left, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 100%)"
+            right="0"
+          >
+            <Img
+              position="relative"
+              top="37%"
+              src={
+                process.env.PUBLIC_URL +
+                '/images/advent/adventCalendar/arrow.gif'
+              }
+              transform={'rotateZ(-90deg)'}
+              width="5em"
+              onClick={onArrowClick}
+            />
+          </Box>
+        )}
       </Flex>
     </Container>
   );
