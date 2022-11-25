@@ -20,6 +20,7 @@ import {
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { customAxios as axios } from '../helpers/customAxios';
+import { DateTime } from 'luxon';
 
 const MailingListForm = ({ props }) => {
   const user = props;
@@ -54,6 +55,7 @@ const MailingListForm = ({ props }) => {
       const payload = await axios.post('/api/mailingList/create', {
         email: data.email,
         category: 'advent',
+        fullName: data.fullName,
       });
       toast({
         description: 'You have been added to the mailing list!',
@@ -84,11 +86,13 @@ const MailingListForm = ({ props }) => {
           fontWeight="900"
           fontSize={['2xl', '3xl']}
         >
-          Mailing List
+          2022 Advent Mailing List
         </ModalHeader>
         <ModalBody ml={[0, 16]} mr={[0, 16]}>
-          <Box fontSize="sm" mt="5" color="#4C80A5" textAlign="justify">
-            Hi this is the form description
+          <Box fontSize="lg" my="3" color="#4C80A5" textAlign="justify">
+            This December, we will be sending out daily devotions, challenges
+            and other content to help you get in the Christmas spirit. Sign up
+            below to receive these content!
           </Box>
 
           <form onSubmit={handleSubmit(handleSignup)} autoComplete="off">
@@ -99,12 +103,11 @@ const MailingListForm = ({ props }) => {
               display="flex"
               color="#718096"
             >
-              <Text>Enter your email address</Text>
               <Input
                 id="email"
                 name="email"
                 type="email"
-                placeholder="e.g. chantaiman@gmail.com"
+                placeholder="Email"
                 defaultValue={user.email ? user.email : ''}
                 style={inputBox}
                 h={['40px', '40px', '60px', '60px']}
@@ -124,6 +127,31 @@ const MailingListForm = ({ props }) => {
                   fontSize={[12, 12, 12, 14]}
                 >
                   {errors.email.message}
+                </Text>
+              )}
+              <Input
+                id="fullName"
+                name="fullName"
+                type="fullName"
+                placeholder="Full Name"
+                defaultValue={user.fullName ? user.fullName : ''}
+                style={inputBox}
+                h={['40px', '40px', '60px', '60px']}
+                {...register('fullName', {
+                  required: 'Required',
+                  pattern: {
+                    value: /^[A-Za-z]+((\s)?([A-Za-z])+)*$/,
+                    message: 'Invalid name address',
+                  },
+                })}
+              />
+              {errors.fullName && (
+                <Text
+                  color="#ED4337"
+                  fontWeight="bold"
+                  fontSize={[12, 12, 12, 14]}
+                >
+                  {errors.fullName.message}
                 </Text>
               )}
               <ButtonGroup
@@ -152,6 +180,27 @@ const MailingListForm = ({ props }) => {
                 >
                   Submit
                 </Button>
+                {DateTime.now().ts > 1669824001000 &&
+                  window.location.pathname != '/advent' && (
+                    <Link href="/advent" style={{ lineHeight: '0' }}>
+                      <Button
+                        my="1"
+                        marginRight={['0', '4']}
+                        minW={['18em', '10em']}
+                        variant="solid"
+                        maxW={['30em', '11em']}
+                        flex={[false, 1]}
+                        style={{
+                          whiteSpace: 'normal',
+                          wordWrap: 'break-word',
+                        }}
+                        colorScheme="teal"
+                      >
+                        {' '}
+                        Advent Page
+                      </Button>
+                    </Link>
+                  )}
               </ButtonGroup>
             </VStack>
           </form>
