@@ -75,7 +75,7 @@ const HowToGive = (props) => {
                 <i>stewardship@hongkong.hmcc.net</i>
               </u>
             </Link>{' '}
-            with the appropriate category and amount allocations if you forget
+            with the appropriate category and amount allocations if you forgot
             to leave a remark or memo in the online giving process
           </Text>
         </Stack>

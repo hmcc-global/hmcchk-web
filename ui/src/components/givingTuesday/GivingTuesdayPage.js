@@ -8,6 +8,7 @@ import LastYearGivingTuesday from './LastYearGivingTuesday';
 import WaysToGive from './WaysToGive';
 import WhatIsGivingTuesday from './WhatIsGivingTuesday';
 import { customAxios as axios } from '../helpers/customAxios';
+import GlobalChurchCategories from './GlobalChurchCategories';
 
 const defaultGivingData = {
   categories: [
@@ -109,6 +110,7 @@ const GivingTuesdayPage = (props) => {
             eventStatus={eventStatus}
             givingData={givingData}
           />
+          <GlobalChurchCategories />
           {isDisplayHTG && (
             <>
               <HowToGive />
