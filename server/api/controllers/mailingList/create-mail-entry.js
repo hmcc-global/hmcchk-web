@@ -12,6 +12,10 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    fullName: {
+      type: 'string',
+      required: true,
+    },
   },
 
   exits: {
@@ -20,11 +24,12 @@ module.exports = {
     },
   },
 
-  fn: async function ({ email, category }, exits) {
+  fn: async function ({ email, category, fullName }, exits) {
     try {
       const newMailingListEntry = await MailingListEntry.create({
         email,
         category,
+        fullName,
       });
 
       return exits.success(newMailingListEntry);

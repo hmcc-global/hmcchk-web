@@ -6,5 +6,8 @@ module.exports = {
     category: {
       type: 'String',
     },
+    fullName: {
+      type: 'String',
+    },
   },
 };

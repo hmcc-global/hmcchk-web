@@ -66,8 +66,7 @@ const HomeContainer = (props) => {
       <LifeGroupSection />
       <NewHereSection />
       {popup.flag && <PopupContainer props={popup} />}
-      {/*1669824001000 == Dec 1 2022*/}
-      {!popup.flag && !userSignedUp && DateTime.now().ts < 1669824001000 && (
+      {!popup.flag && !userSignedUp && DateTime.now().ts < 1670169599000 && (
         <MailingListForm props={user} />
       )}
     </Flex>
