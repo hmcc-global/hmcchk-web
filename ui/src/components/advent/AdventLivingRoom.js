@@ -3,7 +3,7 @@ const AdventLivingRoom = () => {
   return (
     <Flex
       w="100%"
-      h="95vh"
+      h="107vh"
       bgImage={`url('${process.env.PUBLIC_URL}/images/advent/adventLivingRoom/room.png')`}
       bgSize="cover"
       bgPosition="right"

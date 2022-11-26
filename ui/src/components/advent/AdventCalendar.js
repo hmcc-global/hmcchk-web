@@ -15,9 +15,9 @@ const AdventCalendar = () => {
   return (
     <Box
       w="100%"
-      h="95vh"
+      h="107vh"
       bgImage={`url('${process.env.PUBLIC_URL}/images/advent/adventCalendar/bg.png')`}
-      bgSize="cover"
+      bgSize="200% 110%"
       bgPosition="right"
     >
       <Grid

@@ -41,6 +41,7 @@ const AdventContainer = (props) => {
   return (
     <Container
       minW="100%"
+      maxH="110vh"
       m={0}
       p={0}
       style={{
@@ -59,15 +60,15 @@ const AdventContainer = (props) => {
         <AdventLivingRoom />
         <Spacer />
         <AdventCalendar />
-        {side == 'right' && (
+        {side === 'right' && (
           <Box
             position="absolute"
-            h="100%"
+            h="90vh"
             bg="linear-gradient(to right, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 100%)"
           >
             <Img
               position="relative"
-              top="37%"
+              top="45%"
               src={
                 process.env.PUBLIC_URL +
                 '/images/advent/adventCalendar/arrow.gif'
@@ -81,13 +82,13 @@ const AdventContainer = (props) => {
         {side === 'left' && (
           <Box
             position="absolute"
-            h="100%"
+            h="90vh"
             bg="linear-gradient(to left, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 100%)"
             right="0"
           >
             <Img
               position="relative"
-              top="37%"
+              top="45%"
               src={
                 process.env.PUBLIC_URL +
                 '/images/advent/adventCalendar/arrow.gif'
@@ -97,7 +98,7 @@ const AdventContainer = (props) => {
               onClick={onArrowClick}
             />
           </Box>
-        )}
+        )}{' '}
       </Flex>
     </Container>
   );
