@@ -72,11 +72,11 @@ const VisitUsPage = (props) => {
           >
             Ways to enjoy Sunday Celebration
           </Heading>
-          <Flex flexDir={["column", "row"]}>
+          <Flex flexDir={['column', 'row']}>
             <VStack
               flex={4.25}
               align="stretch"
-              textAlign={["center", "left"]}
+              textAlign={['center', 'left']}
               mr={[0, 6]}
               mb={[6, 0]}
             >
@@ -88,11 +88,11 @@ const VisitUsPage = (props) => {
               >
                 IN-PERSON
               </Heading>
-              <Text fontSize={["2xl", "2em"]} fontWeight={700}>
+              <Text fontSize={['2xl', '2em']} fontWeight={700}>
                 Sundays @ 10 AM
               </Text>
               <Text
-                fontSize={["1.125em", "2xl"]}
+                fontSize={['1.125em', '2xl']}
                 fontWeight={700}
                 px={[6, 0]}
                 pb={4}
@@ -108,7 +108,7 @@ const VisitUsPage = (props) => {
                 </Link>
               </Text>
               <Spacer />
-              <Center w="100%" px={1}>
+              {/* <Center w="100%" px={1}>
                 <LinkBox
                   style={{ backgroundOrigin: "border-box" }}
                   as="button"
@@ -131,10 +131,10 @@ const VisitUsPage = (props) => {
                     Sign Up for In-person Sunday Celebration
                   </LinkOverlay>
                 </LinkBox>
-              </Center>
-              <Text textAlign="center" fontSize="sm">
+              </Center> */}
+              {/* <Text textAlign="center" fontSize="sm">
                 *Pre-registration opens every Monday at 8PM
-              </Text>
+              </Text> */}
             </VStack>
             <AspectRatio flex={5.75} ratio={16 / 9}>
               <iframe
