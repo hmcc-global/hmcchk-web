@@ -30,8 +30,12 @@ const AdventContainer = (props) => {
       maxW=""
       w="100vw"
       h="100vh"
-      bg={`url('${process.env.PUBLIC_URL}/images/advent/adventad.png')`}
+      bgImage={[
+        `url('${process.env.PUBLIC_URL}/images/advent/mobilebg.jpeg')`,
+        `url('${process.env.PUBLIC_URL}/images/advent/adventad.png')`,
+      ]}
       bgSize="cover"
+      bgPosition="center"
     >
       {/* <AdventCalendar /> */}
       {!userSignedUp && <MailingListForm props={user} />}
