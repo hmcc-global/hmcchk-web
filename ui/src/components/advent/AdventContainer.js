@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Container, Center, Text } from '@chakra-ui/react';
+import { Container } from '@chakra-ui/react';
 import AdventCalendar from './AdventCalendar';
 import { customAxios as axios } from '../helpers/customAxios';
 import MailingListForm from '../home/MailingListForm';
@@ -26,18 +26,8 @@ const AdventContainer = (props) => {
   }, []);
 
   return (
-    <Container
-      maxW=""
-      w="100vw"
-      h="100vh"
-      bgImage={[
-        `url('${process.env.PUBLIC_URL}/images/advent/mobilebg.jpeg')`,
-        `url('${process.env.PUBLIC_URL}/images/advent/adventad.png')`,
-      ]}
-      bgSize="cover"
-      bgPosition="center"
-    >
-      {/* <AdventCalendar /> */}
+    <Container maxW="" m={0} p={0}>
+      <AdventCalendar />
       {!userSignedUp && <MailingListForm props={user} />}
     </Container>
   );
