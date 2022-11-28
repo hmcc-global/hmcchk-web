@@ -49,7 +49,7 @@ const HowToGive = (props) => {
           >
             <b>Category Codes:</b>
             <UnorderedList>
-              <ListItem>GC: Our Global Church LC</ListItem>
+              <ListItem>GC: Our Global Church </ListItem>
               <ListItem>LC: Our Local Church</ListItem>
             </UnorderedList>
           </Text>
