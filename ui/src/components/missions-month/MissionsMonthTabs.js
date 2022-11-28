@@ -366,12 +366,18 @@ export default function MissionMonthTabs() {
                     href="https://hongkong.sub.hmcc.net/wp-content/uploads/Missions-Month-Prayer-Guide-2022-Week-3.pdf"
                     isExternal
                   >
-                    Week 3 [NEW]
+                    Week 3
                   </Link>
                 </ListItem>
-                {/* <ListItem><Link color='gray' href='www.hmcc.tv' isExternal>
-                    Week 4
-                </Link></ListItem> */}
+                <ListItem>
+                  <Link
+                    color="black"
+                    href="https://hongkong.sub.hmcc.net/wp-content/uploads/Missions-Month-Prayer-Guide-2022-Week-4.pdf"
+                    isExternal
+                  >
+                    Week 4 [NEW]
+                  </Link>
+                </ListItem>
               </UnorderedList>
             </Box>
           </Container>
@@ -433,6 +439,11 @@ export default function MissionMonthTabs() {
                     isExternal
                   >
                     Learn more about Transformasphere
+                  </Link>
+                </ListItem>
+                <ListItem>
+                  <Link color="black" href="/giving-tuesday" isExternal>
+                    Learn about GivingTuesday 2022
                   </Link>
                 </ListItem>
               </UnorderedList>
