@@ -92,6 +92,7 @@ const TextCard = ({ textData, allText }) => {
               alignSelf="flex-end"
               color="black"
             >
+              {textData.name ? `${textData.name} • ` : null}
               {textDate}
             </Text>
           </VStack>
