@@ -51,7 +51,7 @@ const GivingTuesdayPage = (props) => {
     const timer = setTimeout(() => {
       let dur = calculateTimeLeft();
       let remainingHours = dur.values['hours'];
-      if (remainingHours <= 24 && remainingHours >= 0) {
+      if (remainingHours < 24 && remainingHours >= 0) {
         setEventStatus('during');
       } else if (remainingHours < 0) {
         setEventStatus('after');
