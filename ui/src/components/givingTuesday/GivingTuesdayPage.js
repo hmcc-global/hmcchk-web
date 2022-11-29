@@ -41,7 +41,7 @@ const GivingTuesdayPage = (props) => {
   const endDate = DateTime.fromISO('2022-11-30T00:30');
 
   const calculateTimeLeft = () => {
-    return endDate.diffNow(['hours', 'seconds']);
+    return endDate.diffNow(['hours', 'minutes']);
   };
 
   const isDisplayHTG = eventStatus === 'before' || eventStatus === 'during';
@@ -50,7 +50,7 @@ const GivingTuesdayPage = (props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       let dur = calculateTimeLeft();
-      let remainingHours = dur.values['hours'];
+      let remainingHours = dur.values[('hours', 'minutes')];
       if (remainingHours < 24 && remainingHours >= 0) {
         setEventStatus('during');
       } else if (remainingHours < 0) {
