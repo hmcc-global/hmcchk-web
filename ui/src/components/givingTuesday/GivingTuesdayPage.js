@@ -38,7 +38,8 @@ const GivingTuesdayPage = (props) => {
   const [remainingTimeString, setRemainingTimeString] = useState('24:00:00');
   const [eventStatus, setEventStatus] = useState('before');
   const [givingData, setGivingData] = useState(defaultGivingData);
-  const endDate = DateTime.fromISO('2022-11-30T00:30');
+  const endDate = DateTime.fromISO('2022-11-30T00:00');
+  const [display, setDisplay] = useState(0);
 
   const calculateTimeLeft = () => {
     return endDate.diffNow(['hours', 'minutes']);
@@ -50,12 +51,14 @@ const GivingTuesdayPage = (props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       let dur = calculateTimeLeft();
-      let remainingHours = dur.values['minutes'] + 60;
-      remainingHours /= 60;
-      console.log(remainingHours);
-      if (remainingHours < 24 && remainingHours >= 0) {
+      let displayRemainingHours = dur.values['minutes'] + 90;
+      displayRemainingHours /= 60;
+
+      console.log(displayRemainingHours);
+
+      if (displayRemainingHours < 24 && displayRemainingHours >= 0) {
         setEventStatus('during');
-      } else if (remainingHours < 0) {
+      } else if (displayRemainingHours < 0) {
         setEventStatus('after');
       } else {
         setEventStatus('before');
