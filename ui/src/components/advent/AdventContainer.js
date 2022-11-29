@@ -5,7 +5,7 @@ import { customAxios as axios } from '../helpers/customAxios';
 import MailingListForm from '../home/MailingListForm';
 
 const AdventContainer = (props) => {
-  const [userSignedUp, setUserSignedUp] = useState(false);
+  const [userSignedUp, setUserSignedUp] = useState(true);
   const { user } = props;
 
   const getMailingList = async (user) => {
@@ -22,7 +22,7 @@ const AdventContainer = (props) => {
     }
   };
   useEffect(() => {
-    props.user.email && getMailingList(props.user);
+    props.user.email ? getMailingList(props.user) : setUserSignedUp(false);
   }, []);
 
   return (
