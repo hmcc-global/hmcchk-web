@@ -56,8 +56,10 @@ const AdventContainer = (props) => {
       id="advent-container"
     >
       {!userSignedUp && <MailingListForm props={user} />}
-      <Flex flexDirection="rows" w="200%">
-        <AdventLivingRoom />
+      <Flex flexDirection="rows" w={['100%', '200%']}>
+        <Box w="100%" display={{ base: 'none', lg: 'block' }}>
+          <AdventLivingRoom />
+        </Box>
         <Spacer />
         <AdventCalendar />
         {side === 'right' && (
@@ -65,6 +67,7 @@ const AdventContainer = (props) => {
             position="absolute"
             h="90vh"
             bg="linear-gradient(to right, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 100%)"
+            display={{ base: 'none', lg: 'block' }}
           >
             <Img
               position="relative"
@@ -85,6 +88,7 @@ const AdventContainer = (props) => {
             h="90vh"
             bg="linear-gradient(to left, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 100%)"
             right="0"
+            display={{ base: 'none', lg: 'block' }}
           >
             <Img
               position="relative"
