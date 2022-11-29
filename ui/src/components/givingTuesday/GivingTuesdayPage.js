@@ -50,7 +50,9 @@ const GivingTuesdayPage = (props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       let dur = calculateTimeLeft();
-      let remainingHours = dur.values[('hours', 'minutes')];
+      let remainingHours = dur.values['minutes'] + 60;
+      remainingHours /= 60;
+      console.log(remainingHours);
       if (remainingHours < 24 && remainingHours >= 0) {
         setEventStatus('during');
       } else if (remainingHours < 0) {
