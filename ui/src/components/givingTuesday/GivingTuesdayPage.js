@@ -54,8 +54,6 @@ const GivingTuesdayPage = (props) => {
       let displayRemainingHours = dur.values['minutes'] + 90;
       displayRemainingHours /= 60;
 
-      console.log(displayRemainingHours);
-
       if (displayRemainingHours < 24 && displayRemainingHours >= 0) {
         setEventStatus('during');
       } else if (displayRemainingHours < 0) {
