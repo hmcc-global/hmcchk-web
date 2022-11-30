@@ -37,6 +37,9 @@ import VideoDetails from './witness/video-testimony/VideoDetails';
 import WitnessHomeContainer from './witness/WitnessHomeContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import TextDetails from './witness/text-testimony/TextDetails';
+import MissionsMonthContainer from './missions-month/MissionsMonthContainer';
+import GivingTuesdayPage from './givingTuesday/GivingTuesdayPage';
+import AdminGivingTuesdayContainer from './admin/givingTuesday/AdminGivingTuesdayContainer';
 
 const MainContainer = () => {
   return (
@@ -157,6 +160,12 @@ const MainContainer = () => {
           path="/about-us"
           permissions={['public']}
           component={AboutUsContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/missions-month"
+          permissions={['public']}
+          component={MissionsMonthContainer}
         />
         <PrivateRoute
           exact
@@ -295,7 +304,17 @@ const MainContainer = () => {
           permissions={['admin', 'stewardship']}
           component={AdminUser}
         />
-        
+        <PrivateRoute
+          path="/giving-tuesday"
+          permissions={['public']}
+          component={GivingTuesdayPage}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/giving-tuesday"
+          permissions={['admin', 'stewardship']}
+          component={AdminGivingTuesdayContainer}
+        />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
       <FooterContainer />
