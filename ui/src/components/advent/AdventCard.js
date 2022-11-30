@@ -14,11 +14,13 @@ import {
   HStack,
   Link,
   ModalFooter,
-  Container,
+  ChakraProvider,
 } from '@chakra-ui/react';
 
+import adventTheme from './adventTheme';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
+import rehypeRaw from 'rehype-raw';
 
 // Replace with actual card data
 const CardData = Array.from({ length: 24 }, () => {
@@ -50,7 +52,7 @@ const AdventCard = (props) => {
   const color = BackgroundColor();
 
   return (
-    <>
+    <ChakraProvider theme={adventTheme}>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay filter="blur(8px)" />
         <ModalContent
@@ -65,7 +67,7 @@ const AdventCard = (props) => {
         >
           <Box h="527" borderColor="black" borderWidth={1.5}>
             <ModalHeader fontFamily="LettersForLearners" fontSize="27px" p={2}>
-              {content.date}
+              {'December ' + date + ', 2022'}
             </ModalHeader>
             <ModalCloseButton />
             <Box>
@@ -155,15 +157,24 @@ const AdventCard = (props) => {
                   </Box>
                 ) : null}
                 {content.type !== 'challenge' ? (
-                  <Box fontSize="sm" mt={5} color="#4C80A5" textAlign="justify">
-                    {/* <ReactMarkdown
-                      fontFamily="LettersForLearners"
-                      components={ChakraUIRenderer()}
-                      children={content.description}
-                      skipHtml
-                    /> */}
-                    <Text fontFamily="LettersForLearners" fontSize="20px">
-                      {content.description}
+                  <Box
+                    fontSize="sm"
+                    w="300px"
+                    mt={5}
+                    color="#4C80A5"
+                    textAlign="justify"
+                  >
+                    <Text
+                      fontFamily="LettersforLearners"
+                      fontSize={20}
+                      color="black"
+                    >
+                      <ReactMarkdown
+                        rehypePlugins={[rehypeRaw]}
+                        components={ChakraUIRenderer()}
+                        children={content.description}
+                        skipHtml
+                      />
                     </Text>
                   </Box>
                 ) : null}
@@ -174,10 +185,10 @@ const AdventCard = (props) => {
               p={0}
               position="absolute"
               right={0}
-              bottom={0}
+              bottom={-5}
             >
               <Text
-                fontFamily="ElsieSwashCaps-Regular"
+                fontFamily="Elsie Swash Caps"
                 fontSize="9xl"
                 textShadow="1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000"
               >
@@ -194,8 +205,8 @@ const AdventCard = (props) => {
         >
           <Image
             src={process.env.PUBLIC_URL + content.thumbnail}
-            w="60px"
-            h="100px"
+            w={['80px', '80px', '60px', '60px', '60px']}
+            h={['120px', '120px', '80px', '85px', '100px']}
             position="relative"
             onClick={isActive ? onOpen : null}
             // Centering
@@ -208,19 +219,25 @@ const AdventCard = (props) => {
           <Center
             position="absolute"
             transform="translate(-50%, -50%)"
-            margin="-75% 0 0 50%"
+            margin={[
+              '-50% 0 0 50%',
+              '-30% 0 0 50%',
+              '-75% 0 0 50%',
+              '-75% 0 0 50%',
+              '-75% 0 0 50%',
+            ]}
           >
             <Text
-              fontSize="5xl"
+              fontSize={['5xl', '5xl', '4xl', '5xl', '5xl']}
               color="white"
-              fontFamily="ElsieSwashCaps-Regular"
+              fontFamily="Elsie Swash Caps"
             >
               {date}
             </Text>
           </Center>
         </Box>
       )}
-    </>
+    </ChakraProvider>
   );
 };
 
