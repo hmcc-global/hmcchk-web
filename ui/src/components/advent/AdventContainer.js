@@ -41,7 +41,7 @@ const AdventContainer = (props) => {
   return (
     <Container
       minW="100%"
-      maxH="110vh"
+      minH="90vh"
       m={0}
       p={0}
       style={{
