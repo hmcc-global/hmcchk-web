@@ -34,9 +34,22 @@ code {
   font-weight: normal;
 }
 
-@font-face{
+@font-face {
   font-family: 'Akshar';
-  src: local('Akshar'),
-    url('./font/Akshar-Regular.ttf') format('truetype');
+  src: local('Akshar'), url('./font/Akshar-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'LettersforLearners';
+  src: local('LettersforLearners'),
+    url('./font/LettersforLearners.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'DryWhiteboardMarker-Regular';
+  src: local('DryWhiteboardMarker-Regular'),
+    url('./font/DryWhiteboardMarker-Regular.ttf') format('truetype');
   font-weight: normal;
 }

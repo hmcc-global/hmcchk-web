@@ -26,10 +26,11 @@ import { customAxios as axios } from '../helpers/customAxios';
 import MainMenu from './MainMenu';
 import { useHistory } from 'react-router-dom';
 import MissionsMonthBanner from '../missions-month/MissionsMonthBanner';
+import AdventBanner from '../advent/AdventBanner';
 
 const NavBar = () => {
   const [isLive, setIsLive] = useState(false);
-  const isHomePage = useHistory().location.pathname === "/";
+  const isHomePage = useHistory().location.pathname === '/';
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const user = useSelector((state) => state.user);
@@ -59,16 +60,15 @@ const NavBar = () => {
       setUserObj(data);
     } catch (err) {
       console.log(err);
-    } 
+    }
   };
 
   const checkIfLive = async () => {
     try {
-      const { data } = await axios.get('/api/live-sermon/get-live-sermon', 
-      {
+      const { data } = await axios.get('/api/live-sermon/get-live-sermon', {
         params: {
-          isPublished: true
-        }
+          isPublished: true,
+        },
       });
       if (data && data[0]) {
         setIsLive(true);
@@ -76,7 +76,7 @@ const NavBar = () => {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -355,7 +355,7 @@ const NavBar = () => {
           </Container>
         </Flex>
       </Flex>
-      {isHomePage && <MissionsMonthBanner />}
+      {isHomePage && <AdventBanner />}
       {/* {currDate === 'Wed' && !isOnlineSermon ? (
         <Flex
           w="100vw"
