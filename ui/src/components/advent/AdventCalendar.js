@@ -23,7 +23,7 @@ const AdventCalendar = () => {
       bgPosition="right"
     >
       <Grid
-        templateColumns="repeat(4, 1fr)"
+        templateColumns="repeat(5, 1fr)"
         templateRows="repeat(2, 1fr)"
         w="100%"
         h="100%"
@@ -36,13 +36,13 @@ const AdventCalendar = () => {
             bgRepeat="no-repeat"
             bgSize="contain"
             bgPosition="center"
-            w="75%"
-            h="81%"
+            w="90%"
+            h="85%"
             px={['5vw', '9vw', '7vw', '7vw', '5vw']}
-            py={['30vh', '25vh', '20vh', '17vh', '12vh']}
+            py={['30vh', '25vh', '22vh', '20vh', '20vh']}
             position="relative"
             top={['12vh', '12vh', '12vh', '11vh', '10vh']}
-            left={['5vw', '7vw', '7vw', '7vw', '10vw']}
+            left={['5vw', '7vw']}
           >
             {cardArray.map((el, i) => (
               <AdventCard
@@ -54,18 +54,28 @@ const AdventCalendar = () => {
             ))}
           </Grid>
         </GridItem>
-        <GridItem>
+        <GridItem colSpan={2} rowSpan={2}>
           <Image
             src={
               process.env.PUBLIC_URL +
               '/images/advent/adventCalendar/paintings.png'
             }
-            w="100%"
-            mt="12vh"
+            mt={['24vh', '20vh', '20vh', '20vh', '15vh']}
+            ml="8vh"
+            w="80%"
           />
         </GridItem>
         <GridItem display={{ base: 'none', md: 'block' }}>
           <AudioPlayer />
+          <Image
+            src={
+              process.env.PUBLIC_URL + '/images/advent/adventCalendar/music.png'
+            }
+            w="35%"
+            position="relative"
+            top={['24vh', '19vh', '17vh', '15vh', '2vh']}
+            left={['5vw', '7vw', '5vw', '10vw', '10vw']}
+          />
         </GridItem>
       </Grid>
     </Box>

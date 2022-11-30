@@ -24,3 +24,15 @@ code {
   src: local('Manrope'), url('./font/Manrope.ttf') format('truetype');
   font-weight: normal;
 }
+
+@font-face {
+  font-family: 'LettersforLearners';
+  src: local('LettersforLearners'), url('./font/LettersforLearners.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'ElsieSwashCaps-Regular';
+  src: local('ElsieSwashCaps-Regular'), url('./font/ElsieSwashCaps-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
