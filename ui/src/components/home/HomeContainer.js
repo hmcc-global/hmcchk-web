@@ -16,7 +16,7 @@ const HomeContainer = (props) => {
   const { user } = props;
   const sermonRef = useRef(null);
   const [popupInfo, setPopupInfo] = useState([]);
-  const [userSignedUp, setUserSignedUp] = useState(false);
+  const [userSignedUp, setUserSignedUp] = useState(true);
   const getData = async () => {
     try {
       const { data } = await axios.get('/api/popup/get-published');
@@ -44,7 +44,7 @@ const HomeContainer = (props) => {
   useEffect(() => {
     if (Object.keys(user).length !== 0) setIsOpen(false);
     getData();
-    props.user.email && getMailingList(props.user);
+    props.user.email ? getMailingList(props.user) : setUserSignedUp(false);
   }, []);
 
   const popup = {
