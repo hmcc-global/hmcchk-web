@@ -32,7 +32,7 @@ code {
 }
 
 @font-face {
-  font-family: 'ElsieSwashCaps-Regular';
-  src: local('ElsieSwashCaps-Regular'), url('./font/ElsieSwashCaps-Regular.ttf') format('truetype');
+  font-family: 'DryWhiteboardMarker-Regular';
+  src: local('DryWhiteboardMarker-Regular'), url('./font/DryWhiteboardMarker-Regular.ttf') format('truetype');
   font-weight: normal;
 }

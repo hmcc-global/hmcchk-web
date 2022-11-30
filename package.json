@@ -7,7 +7,9 @@
   "dependencies": {
     "@fontsource/dm-sans": "^4.5.9",
     "@fontsource/elsie-swash-caps": "^4.5.8",
+    "@fontsource/nosifer": "^4.5.7",
     "react-google-recaptcha": "^2.1.0",
-    "react-slick": "^0.28.1"
+    "react-slick": "^0.28.1",
+    "rehype-raw": "^6.1.1"
   }
 }

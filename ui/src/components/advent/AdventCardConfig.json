@@ -1,7 +1,6 @@
 [{
     "type":"video",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card1.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/embed/CLeZyIID9Bo",
     "title":"Devotional",
@@ -12,17 +11,15 @@
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card2.jpg",    
     "subtitle":"Bible Project | Advent",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/thumbnail.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
     "titleLink":"https://www.youtube.com/watch?v=18y25NWiDfQ",
-    "description":"THis is a  blablabla"
+    "description":"This is the first day of the Advent devotional as prepared by BibleProject (available on the YouVersion bible application / website), where it will be a message on Shalom (Peace).\n\nClick <a href='https://google.com'><u>here</u></a> to access the resource! :)"
 },
 {
     "type": "challenge",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card3.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -32,7 +29,6 @@
 {
     "type": "spotify",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card4.jpg",    
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "link":"https://open.spotify.com/embed/playlist/4or9Lv4jX4YKSBooqMLPBG?utm_source=generator",
@@ -43,7 +39,6 @@
 {
     "type": "video",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card5.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -53,7 +48,6 @@
 {
     "type": "video",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card6.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -64,7 +58,6 @@
 {
     "type": "video",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card7.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -75,7 +68,6 @@
 {
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card8.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -86,7 +78,6 @@
 {
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card9.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -97,7 +88,6 @@
 {
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card10.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -108,7 +98,6 @@
 {
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card11.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -119,7 +108,6 @@
 {
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card12.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -130,7 +118,6 @@
 {
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card13.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -141,7 +128,6 @@
 {
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card14.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -152,7 +138,6 @@
 {
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card15.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -163,7 +148,6 @@
 {
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card16.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -174,7 +158,6 @@
 {
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card17.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -185,7 +168,6 @@
 {
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card18.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -196,7 +178,6 @@
 {
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card19.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -207,7 +188,6 @@
 {
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card20.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -218,7 +198,6 @@
 {
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card21.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -229,7 +208,6 @@
 {
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card22.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -240,7 +218,6 @@
 {
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card23.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
@@ -251,7 +228,6 @@
 {
     "type": "image",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card24.jpg",
-    "date":"December 1, 2022",
     "image":"/images/advent/adventCalendar/card.png", 
     "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
     "title":"Devotional",
