@@ -26,10 +26,11 @@ const AudioPlayer = () => {
     <Box position="relative" top="0" left="0">
       <Image
         src={process.env.PUBLIC_URL + '/images/advent/adventCalendar/music.png'}
-        w="66%"
+        w={['50%', '40%', '35%']}
         position="relative"
-        top={['28vh', '19vh', '13vh', '7vh', '2vh']}
-        right={'0'}
+        top={['24vh', '5vh', '10vh', '8vh', '5vh', '0vh']}
+        left={['5vw', '7vw', '12vw', '12vw', '10vw']}
+        zIndex={10}
         onClick={togglePlaying}
       />
       {playing && (
@@ -37,9 +38,9 @@ const AudioPlayer = () => {
           src={
             process.env.PUBLIC_URL + '/images/advent/adventCalendar/notes.gif'
           }
-          w="50%"
+          w="30%"
           position="absolute"
-          right="20vw"
+          right="27vw"
           bottom={['1vh', '5vh', '10vh', '11vh', '17vh']}
           transform="scaleX(-1)"
         />

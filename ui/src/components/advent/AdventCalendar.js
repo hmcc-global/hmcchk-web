@@ -84,7 +84,7 @@ const AdventCalendar = () => {
                 ))}
               </Grid>
             </GridItem>
-            <GridItem colSpan={2} rowSpan={2}>
+            <GridItem colSpan={2}>
               <Image
                 src={
                   process.env.PUBLIC_URL +
@@ -93,7 +93,10 @@ const AdventCalendar = () => {
                 w={['90%', '80%']}
                 marginTop={['26vh', '30vh', '24vh', '12vh', '6vh', '0vh']}
               />
-              <Image
+            </GridItem>
+            <GridItem colSpan={2}>
+              <AudioPlayer />
+              {/* <Image
                 src={
                   process.env.PUBLIC_URL +
                   '/images/advent/adventCalendar/music.png'
@@ -102,7 +105,7 @@ const AdventCalendar = () => {
                 position="relative"
                 top={['24vh', '5vh', '10vh', '8vh', '5vh', '0vh']}
                 left={['5vw', '7vw', '12vw', '12vw', '10vw']}
-              />
+              /> */}
             </GridItem>
           </Grid>
         </Box>
