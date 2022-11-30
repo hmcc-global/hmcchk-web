@@ -9,6 +9,8 @@
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@fontsource/dm-sans": "^4.5.9",
+    "@fontsource/elsie-swash-caps": "^4.5.8",
+    "@fontsource/nosifer": "^4.5.7",
     "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -39,6 +41,7 @@
     "react-social-icons": "^5.5.1",
     "react-table": "^7.7.0",
     "redux-persist": "^6.0.0",
+    "rehype-raw": "^6.1.1",
     "sass": "^1.53.0",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^1.0.1"

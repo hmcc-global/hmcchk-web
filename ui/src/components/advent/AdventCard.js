@@ -48,7 +48,6 @@ const AdventCard = (props) => {
   const { isActive, date, content } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const thisCardData = CardData[date - 1];
-  console.log(content);
   const color = BackgroundColor();
 
   return (
@@ -56,7 +55,7 @@ const AdventCard = (props) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay filter="blur(8px)" />
         <ModalContent
-          w="30vw"
+          w={['100vw', '30vw']}
           h="100vh"
           borderWidth={14}
           borderColor={color}
@@ -74,7 +73,7 @@ const AdventCard = (props) => {
               <VStack>
                 {content.type === 'image' ? (
                   <Box>
-                    <HStack w="25vw" spacing={5}>
+                    <HStack w={['80vw', '25vw']} spacing={5}>
                       {content.image && (
                         <Image
                           h="50%"
@@ -99,8 +98,12 @@ const AdventCard = (props) => {
                 ) : null}
                 {content.type === 'video'
                   ? content.video && (
-                      <Box w="30vw">
-                        <AspectRatio margin="auto" maxW="20vw" ratio={16 / 9}>
+                      <Box w={['80vw', '30vw']}>
+                        <AspectRatio
+                          margin="auto"
+                          maxW={['90vw', '20vw']}
+                          ratio={16 / 9}
+                        >
                           <iframe
                             src={content.video}
                             title="Video player"
@@ -134,7 +137,7 @@ const AdventCard = (props) => {
                   </Link>
                 ) : null}
                 {content.type === 'spotify' ? (
-                  <Box w="30vw">
+                  <Box w={['80vw', '30vw']}>
                     <Center mb={2}>
                       <Text
                         fontFamily="LettersForLearners"
@@ -157,7 +160,7 @@ const AdventCard = (props) => {
                   </Box>
                 ) : null}
                 {content.type !== 'challenge' ? (
-                  <Box w="25vw" mt={5} textAlign="justify">
+                  <Box w={['80vw', '25vw']} mt={5} textAlign="justify">
                     <Text
                       fontFamily="LettersforLearners"
                       fontSize={20}
