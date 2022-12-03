@@ -81,9 +81,16 @@ const AdventCard = (props) => {
                           src={process.env.PUBLIC_URL + content.image}
                         />
                       )}
-                      <Text fontFamily="LettersForLearners" fontSize="17px">
-                        {content.subtitle}
-                      </Text>
+                      <Box>
+                        <Text fontFamily="LettersForLearners" fontSize="24px">
+                          {content.subtitle}
+                        </Text>
+                        <Center>
+                          <Text fontFamily="LettersForLearners" fontSize="14px">
+                            {content.subtitlesmall}
+                          </Text>
+                        </Center>
+                      </Box>
                     </HStack>
                     <Center mt={5}>
                       <Text
