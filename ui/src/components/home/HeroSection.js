@@ -124,7 +124,7 @@ const HeroSection = ({ anchorTarget }) => {
                     style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
                     fontSize="16px"
                   >
-                    Every Sunday at 10AM HKT | Organize, Kwun Tong & Online
+                    Every Sunday at 10AM HKT | KOHO, Kwun Tong & Online
                   </Text>
                 </Box>
               </Stack>
@@ -153,7 +153,7 @@ const HeroSection = ({ anchorTarget }) => {
                 style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
                 fontSize="12px"
               >
-                Organize, Kwun Tong & Online
+                KOHO, Kwun Tong & Online
               </Text>
             </Box>
             <Stack position="relative" bottom="6%" width="35px" height="35px">
