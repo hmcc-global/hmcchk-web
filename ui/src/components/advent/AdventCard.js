@@ -55,8 +55,8 @@ const AdventCard = (props) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay filter="blur(8px)" />
         <ModalContent
-          w={['100vw', '30vw']}
-          h="100vh"
+          minW={['100vw', '26vw']}
+          h={['80vh', '80vh']}
           borderWidth={14}
           borderColor={color}
           bg="white"
@@ -65,7 +65,11 @@ const AdventCard = (props) => {
           boxShadow="1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000"
         >
           <Box h="100vh" borderColor="black" borderWidth={1.5}>
-            <ModalHeader fontFamily="LettersForLearners" fontSize="27px" p={2}>
+            <ModalHeader
+              fontFamily="LettersForLearners"
+              fontSize={['27px', '32px']}
+              p={2}
+            >
               {'December ' + date + ', 2022'}
             </ModalHeader>
             <ModalCloseButton />
@@ -73,7 +77,7 @@ const AdventCard = (props) => {
               <VStack>
                 {content.type === 'image' ? (
                   <Box>
-                    <HStack w={['80vw', '25vw']} spacing={5}>
+                    <HStack w={['80vw', '22vw']} spacing={5} py={['0', '6']}>
                       {content.image && (
                         <Image
                           h="50%"
@@ -105,7 +109,7 @@ const AdventCard = (props) => {
                 ) : null}
                 {content.type === 'video'
                   ? content.video && (
-                      <Box w={['80vw', '30vw']}>
+                      <Box w={['80vw', '25vw']}>
                         <AspectRatio
                           margin="auto"
                           maxW={['90vw', '20vw']}
@@ -123,7 +127,7 @@ const AdventCard = (props) => {
                           <Text
                             mt={5}
                             fontFamily="LettersForLearners"
-                            fontSize="27px"
+                            fontSize={['27px', '34px']}
                             as="u"
                           >
                             {content.title}
@@ -154,7 +158,11 @@ const AdventCard = (props) => {
                         {content.title}
                       </Text>
                     </Center>
-                    <AspectRatio margin="auto" maxW="22vw" borderRadius={12}>
+                    <AspectRatio
+                      margin="auto"
+                      maxW={['90vw', '22vw']}
+                      borderRadius={12}
+                    >
                       <iframe
                         title="spotify playlist"
                         src={content.link}
@@ -167,10 +175,10 @@ const AdventCard = (props) => {
                   </Box>
                 ) : null}
                 {content.type !== 'challenge' ? (
-                  <Box w={['80vw', '25vw']} mt={5} textAlign="justify">
+                  <Box w={['80vw', '23vw']} mt={5} textAlign="justify">
                     <Text
                       fontFamily="LettersforLearners"
-                      fontSize={20}
+                      fontSize={['20px', '27px']}
                       color="black"
                     >
                       <ReactMarkdown
@@ -209,7 +217,7 @@ const AdventCard = (props) => {
         >
           <Image
             src={process.env.PUBLIC_URL + content.thumbnail}
-            w={['14vw', '14vw', '12vw', '12vw', '10vw']}
+            w={['20vw', '20vw', '12vw', '10vw', '10vw']}
             h={['15vh', '16vh', '12vh', '13vh', '16vh']}
             position="relative"
             onClick={isActive ? onOpen : null}
