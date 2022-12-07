@@ -1,4 +1,4 @@
-import { Image, Box } from '@chakra-ui/react';
+import { Image, Box, Text } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 
 const AudioPlayer = () => {
@@ -24,6 +24,17 @@ const AudioPlayer = () => {
 
   return (
     <Box position="relative" top="0" left="0">
+      <Text
+        fontFamily="LettersForLearners"
+        zIndex={11}
+        fontWeight="bold"
+        position="absolute"
+        fontSize={['2xl']}
+        left="40%"
+        transform="rotate(0.05turn)"
+      >
+        Click here ~
+      </Text>
       <Image
         src={process.env.PUBLIC_URL + '/images/advent/adventCalendar/music.png'}
         w={['50%', '40%', '35%']}
@@ -40,6 +51,7 @@ const AudioPlayer = () => {
           }
           w="30%"
           position="absolute"
+          zIndex={11}
           right="27vw"
           bottom={['1vh', '5vh', '10vh', '11vh', '17vh']}
           transform="scaleX(-1)"
