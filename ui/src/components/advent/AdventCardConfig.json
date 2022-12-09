@@ -98,13 +98,15 @@
     "color":"black"
 },
 {
-    "type": "video",
-    "thumbnail":"/images/advent/adventCalendar/24Photos/card11.jpg",
-    "image":"/images/advent/adventCalendar/card.png", 
-    "video":"https://www.youtube.com/embed/gE8JSTvbdl0",
-    "title":"Encouragements",
+    "type": "image",
+    "thumbnail":"/images/advent/adventCalendar/24Photos/card15.jpg",
+    "image":"/images/advent/adventCalendar/devotional.png", 
+    "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
+    "title":"Devotional",
+    "subtitle":"BibleProject | Advent",
+    "subtitlesmall": "Day 3 of 4",
     "titleLink":"https://www.youtube.com/watch?v=18y25NWiDfQ",
-    "description":"For this Sunday, a fun video from our very own spiritual father, Pastor Seth! You don’t want to miss this!",
+    "description":"This is the third day of the Advent devotional as prepared by BibleProject (available on the YouVersion bible application / website), where it will be a message on Chara (Joy). </br> <ins>[here](https://www.bible.com/reading-plans/13255-bibleproject-advent/day/3)</ins> to access the resources ! ",
     "color":"black"
 },
 {
