@@ -98,15 +98,12 @@
     "color":"black"
 },
 {
-    "type": "image",
-    "thumbnail":"/images/advent/adventCalendar/24Photos/card15.jpg",
+    "type": "video",
+    "thumbnail":"/images/advent/adventCalendar/24Photos/card11.jpg",
     "image":"/images/advent/adventCalendar/devotional.png", 
-    "video":"https://www.youtube.com/watch?v=18y25NWiDfQ",
-    "title":"Devotional",
-    "subtitle":"BibleProject | Advent",
-    "subtitlesmall": "Day 3 of 4",
-    "titleLink":"https://www.youtube.com/watch?v=18y25NWiDfQ",
-    "description":"This is the third day of the Advent devotional as prepared by BibleProject (available on the YouVersion bible application / website), where it will be a message on Chara (Joy). </br> <ins>[here](https://www.bible.com/reading-plans/13255-bibleproject-advent/day/3)</ins> to access the resources ! ",
+    "video":"https://www.youtube.com/embed/bI55VVrRn8c",
+    "title":"Encouragements",
+    "description":"For this Sunday, a fun video from Pastor Bo! You don't want to this miss!",
     "color":"black"
 },
 {
