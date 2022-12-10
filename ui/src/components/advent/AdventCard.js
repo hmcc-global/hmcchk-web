@@ -175,7 +175,7 @@ const AdventCard = (props) => {
                   </Box>
                 ) : null}
                 {content.type !== 'challenge' ? (
-                  <Box w={['80vw', '23vw']} mt={5} textAlign="justify">
+                  <Box w="90%" mt={5} textAlign="justify">
                     <Text
                       fontFamily="LettersforLearners"
                       fontSize={['16px', '25px']}
