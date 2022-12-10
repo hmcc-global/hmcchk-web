@@ -100,11 +100,10 @@
 {
     "type": "video",
     "thumbnail":"/images/advent/adventCalendar/24Photos/card11.jpg",
-    "image":"/images/advent/adventCalendar/card.png", 
-    "video":"https://www.youtube.com/embed/gE8JSTvbdl0",
+    "image":"/images/advent/adventCalendar/devotional.png", 
+    "video":"https://www.youtube.com/embed/bI55VVrRn8c",
     "title":"Encouragements",
-    "titleLink":"https://www.youtube.com/watch?v=18y25NWiDfQ",
-    "description":"For this Sunday, a fun video from our very own spiritual father, Pastor Seth! You don’t want to miss this!",
+    "description":"For this Sunday, a fun video from Pastor Bo! You don't want to miss this!",
     "color":"black"
 },
 {

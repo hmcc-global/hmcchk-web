@@ -56,7 +56,7 @@ const AdventCard = (props) => {
         <ModalOverlay filter="blur(8px)" />
         <ModalContent
           minW={['100vw', '26vw']}
-          h={['80vh', '80vh']}
+          h={['85vh', '100vh', '100vh', '85vh']}
           borderWidth={14}
           borderColor={color}
           bg="white"
@@ -175,10 +175,10 @@ const AdventCard = (props) => {
                   </Box>
                 ) : null}
                 {content.type !== 'challenge' ? (
-                  <Box w={['80vw', '23vw']} mt={5} textAlign="justify">
+                  <Box w="90%" mt={5} textAlign="justify">
                     <Text
                       fontFamily="LettersforLearners"
-                      fontSize={['20px', '27px']}
+                      fontSize={['16px', '25px']}
                       color="black"
                     >
                       <ReactMarkdown
