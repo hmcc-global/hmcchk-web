@@ -17,9 +17,6 @@ export function LinkGrid() {
           </Link>
 
           <Link href="/online">Church online</Link>
-          <Link href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/">
-            COVID-19 Policy
-          </Link>
         </Stack>
       </Box>
       <Box>
