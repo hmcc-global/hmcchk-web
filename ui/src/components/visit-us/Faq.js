@@ -31,95 +31,6 @@ const Faq = (props) => {
         </AccordionPanel>
       </AccordionItem>
 
-      {/* <AccordionItem border="1px solid #E2E8F0">
-        <AccordionButton fontWeight={700} fontSize="lg" p={4}>
-          <Box flex="1" textAlign="left">
-            Why do I need to register to come to service in-person?
-          </Box>
-          <AccordionIcon as={AiFillPlusCircle} w={7} h={7} />
-        </AccordionButton>
-        <AccordionPanel pb={4}>
-          In light of current Covid-related exemption for religious gatherings,
-          we would need to facilitate Sunday Celebrations on a pre-registration
-          basis to ensure that we are abiding by regulations set by the
-          Prevention and Control of Disease Ordinance, and ensure that everyone
-          coming in-person will feel safe.
-           <br />
-          <br />
-          We are currently not meeting in-person due to COVID-19 and moving our
-          Sunday Celebration fully online. Please refer to our COVID-19 policy{" "}
-          <Link href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/">
-            here
-          </Link>
-          . 
-        </AccordionPanel>
-      </AccordionItem> */}
-
-      {/* <AccordionItem border="1px solid #E2E8F0">
-        <h2>
-          <AccordionButton fontWeight={700} fontSize="lg" p={4}>
-            <Box flex="1" textAlign="left">
-              How do I register for an in-person Sunday Celebration?
-            </Box>
-            <AccordionIcon as={AiFillPlusCircle} w={7} h={7} />
-          </AccordionButton>
-        </h2>
-        <AccordionPanel pb={4}>
-          Pre-registrations for Sunday Celebration will open Mondays at 8 PM,
-          and you can register by clicking on the “Sign Up for In-person Sunday
-          Celebration” button above and submitting the form. You should receive
-          an email confirmation shortly notifying you of a successful /{' '}
-          wait-listed registration.
-        
-        </AccordionPanel>
-      </AccordionItem> */}
-
-      {/* <AccordionItem border="1px solid #E2E8F0">
-        <h2>
-          <AccordionButton fontWeight={700} fontSize="lg" p={4}>
-            <Box flex="1" textAlign="left">
-              What happens if I get wait-listed for my Sunday Celebration
-              pre-registration?
-            </Box>
-            <AccordionIcon as={AiFillPlusCircle} w={7} h={7} />
-          </AccordionButton>
-        </h2>
-        <AccordionPanel pb={4}>
-          As pre-registrations are on a first-come-first-serve basis, we do
-          apologize for the inconvenience that you may be experiencing. However,
-          our lovely host team will continue to monitor registrations throughout
-          the week and notify you if additional availability opens up.
-          <br />
-          <br />
-          We are currently not meeting in-person due to COVID-19 and moving our
-          Sunday Celebration fully online. Please refer to our COVID-19 policy{" "}
-          <Link href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/">
-            here
-          </Link>
-          .
-        </AccordionPanel>
-      </AccordionItem> */}
-
-      {/* <AccordionItem border="1px solid #E2E8F0">
-        <h2>
-          <AccordionButton fontWeight={700} fontSize="lg" p={4}>
-            <Box flex="1" textAlign="left">
-              I’ve pre-registered for Sunday Celebration but can’t make it
-              anymore. What should I do?
-            </Box>
-            <AccordionIcon as={AiFillPlusCircle} w={7} h={7} />
-          </AccordionButton>
-        </h2>
-        <AccordionPanel pb={4}>
-          Everyone who pre-registers for Sunday Celebration should commit to
-          showing up, because every slot is an opportunity for someone else to
-          come join in worship. If there are any extenuating circumstances that
-          prevent those pre-registered from joining in person, please notify us
-          via email at hongkong@hmcc.net by the Friday (before) 11:59PM
-         
-        </AccordionPanel>
-      </AccordionItem> */}
-
       <AccordionItem border="1px solid #E2E8F0">
         <h2>
           <AccordionButton fontWeight={700} fontSize="lg" p={4}>
@@ -182,33 +93,6 @@ const Faq = (props) => {
           personal safety as well as meeting together as the body of Christ on a
           consistent basis. Therefore, if you are able to come safely, we will
           still have our gatherings as scheduled.
-        </AccordionPanel>
-      </AccordionItem>
-
-      <AccordionItem border="1px solid #E2E8F0">
-        <h2>
-          <AccordionButton fontWeight={700} fontSize="lg" p={4}>
-            <Box flex="1" textAlign="left">
-              What are the latest COVID-19 measures HMCC-HK is taking in light
-              of the recent changes?
-            </Box>
-            <AccordionIcon as={AiFillPlusCircle} w={7} h={7} />
-          </AccordionButton>
-        </h2>
-        <AccordionPanel pb={4}>
-          We remain committed to supporting the global efforts in preventing the
-          spread of the virus and caring for the holistic health of our members
-          and the community. Therefore, we are now meeting in person and
-          streaming church online as well.
-          {/* Therefore, we are currently not meeting in-person
-          due to COVID-19 and moving our Sunday Celebration fully online. */}
-          <br />
-          <br />
-          Please refer to our COVID-19 policy{' '}
-          <Link href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/">
-            here
-          </Link>
-          .
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
