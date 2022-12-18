@@ -49,9 +49,6 @@ const MainMenu = ({ login, onClose }) => {
               <Link href="/online">
                 <Text fontSize="18px">Church Online</Text>
               </Link>
-              <Link href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/">
-                <Text fontSize="18px">COVID-19 Policy</Text>
-              </Link>
               <Link href="/about-us">
                 <Text fontWeight="bold" fontSize="40px">
                   About
@@ -311,9 +308,6 @@ const MainMenu = ({ login, onClose }) => {
                     <AccordionPanel pb={4}>
                       <VStack alignItems="flex-start">
                         <Link href="/online">Church Online</Link>
-                        <Link href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/">
-                          COVID-19 Policy
-                        </Link>
                       </VStack>
                     </AccordionPanel>
                   </AccordionItem>
