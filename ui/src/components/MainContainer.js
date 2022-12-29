@@ -37,6 +37,7 @@ import VideoDetails from './witness/video-testimony/VideoDetails';
 import WitnessHomeContainer from './witness/WitnessHomeContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import TextDetails from './witness/text-testimony/TextDetails';
+import MissionsHomeContainer from './missions/MissionsHomeContainer';
 
 const MainContainer = () => {
   return (
@@ -239,6 +240,11 @@ const MainContainer = () => {
           permissions={['public']}
           component={TextDetails}
         />
+        <PrivateRoute
+          path="/missions"
+          permissions={['public']}
+          component={MissionsHomeContainer}
+        />
 
         {/* Admin items */}
         <PrivateRoute
@@ -265,13 +271,13 @@ const MainContainer = () => {
           permissions={['t3ch', 'admin', 'stewardship']}
           component={FormManager}
         />
-        <PrivateRoute 
+        <PrivateRoute
           exact
           path="/admin/formViewer"
           permissions={['t3ch', 'admin', 'stewardship']}
           component={AdminFormDataViewer}
         />
-        <PrivateRoute 
+        <PrivateRoute
           exact
           path="/admin/liveSermon"
           permissions={['t3ch', 'admin', 'stewardship']}
@@ -295,7 +301,7 @@ const MainContainer = () => {
           permissions={['admin', 'stewardship']}
           component={AdminUser}
         />
-        
+
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
       <FooterContainer />
