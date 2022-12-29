@@ -43,6 +43,14 @@ module.exports.custom = {
     host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/wpfc_preacher",
   },
 
+  posts: {
+    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/posts",
+  },
+
+  tags: {
+    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/tags",
+  },
+
   sermonSeries: {
     host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/wpfc_sermon_series",
   },
@@ -53,10 +61,6 @@ module.exports.custom = {
 
   media: {
     host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/media",
-  },
-
-  announcements: {
-    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/posts",
   },
 
   pages: {

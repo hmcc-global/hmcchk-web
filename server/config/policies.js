@@ -21,6 +21,8 @@ module.exports.policies = {
 
   // Announcements
   'announcements/*': true,
+  'witness/*': true,
+  'testimonies/*': true,
 
   // Auth
   'auth/post-login': true,
@@ -50,11 +52,17 @@ module.exports.policies = {
   // Last Updated
   'lastUpdated/get-last-updated': ['isLoggedIn', 'aboveAdmin'],
 
+  // Live Sermon
+  'liveSermon/get-live-sermon': true,
+  'liveSermon/create-live-sermon': ['isLoggedIn', 'aboveTech'],
+  'liveSermon/update-live-sermon': ['isLoggedIn', 'aboveTech'],
+
   // Media
   'media/*': true,
 
   // Misc
   'misc/get-env': true,
+  'misc/get-current-time': true,
 
   // Pages
   'pages/*': true,
@@ -67,6 +75,12 @@ module.exports.policies = {
 
   // Sermons
   'sermons/*': true,
+
+  // Testimonies
+  'testimonies/get-testimonies': ['isLoggedIn', 'aboveTech'],
+  'testimonies/update-testimonies': ['isLoggedIn', 'aboveTech'],
+  'testimonies/get-published-testimonies': true,
+  'testimonies/create-testimonies': true,
 
   // Users
   'users/reset': ['isLoggedIn', 'aboveAdmin'],

@@ -11,14 +11,14 @@ import {
   Text,
   Badge,
   Stack,
+  useToast,
 } from '@chakra-ui/react';
-import FormDataDownloader from './FormDataDownloader';
 import FormEditorContainer from './FormEditorContainer';
 
 const FormManager = (props) => {
+  const toast = useToast();
+
   const { user } = props;
-  const [formId, setFormId] = useState(null);
-  const [isDownloaderOpen, setIsDownloaderOpen] = useState(false);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formList, setFormList] = useState([]);
@@ -71,6 +71,17 @@ const FormManager = (props) => {
     }
   };
 
+  const copyPublicLinkHandler = (e) => {
+    const host = window.location.host;
+    const formId = e.target.value;
+    navigator?.clipboard?.writeText(`${host}/forms/${formId}`);
+    toast({
+      description: 'Public Link Copied to clipboard!',
+      status: 'success',
+      duration: 5000
+    });
+  }
+
   const onClickRedirect = async (e) => {
     history.push('/forms/' + e.target.value);
   };
@@ -106,19 +117,19 @@ const FormManager = (props) => {
     }
   };
 
-  const onDownload = async (e) => {
-    setIsDownloaderOpen(true);
-    setFormId(e.target.value);
+  const onClickHandler = (formItem) => {
+    history.push({
+      pathname: '/admin/formViewer',
+      state: {
+        name: formItem.formName,
+        id: formItem.id
+      }
+    });
   };
 
   return (
     <Container maxW="container.xl" pt={10} minH="100vh">
       <Stack spacing="5">
-        <FormDataDownloader
-          isOpen={isDownloaderOpen}
-          setIsOpen={setIsDownloaderOpen}
-          formId={formId}
-        />
         <Heading as="h1" size="xl">
           Form Management System
         </Heading>
@@ -158,17 +169,23 @@ const FormManager = (props) => {
                     </Button>
                     <Button
                       colorScheme="blue"
-                      onClick={onClickRedirect}
+                      onClick={copyPublicLinkHandler}
                       value={formItem.id}
                     >
                       Public Link
                     </Button>
                     <Button
                       colorScheme="blue"
-                      onClick={onDownload}
+                      onClick={onClickRedirect}
                       value={formItem.id}
                     >
-                      Download Data
+                      View Form
+                    </Button>
+                    <Button
+                      colorScheme="blue"
+                      onClick={() => onClickHandler(formItem)}
+                    >
+                      View Data
                     </Button>
                     <Button
                       colorScheme="red"

@@ -30,9 +30,11 @@ import { signout } from '../../reducers/userSlice';
 import { customAxios as axios } from '../helpers/customAxios';
 import MainMenu from './MainMenu';
 import { useHistory } from 'react-router-dom';
+import WitnessBanner from '../witness/WitnessBanner';
 
 const NavBar = (props) => {
-  const isOnlineSermon = useHistory().location.pathname.includes('online');
+  const [isLive, setIsLive] = useState(false);
+  const isHomePage = useHistory().location.pathname === "/";
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const user = useSelector((state) => state.user);
@@ -62,15 +64,31 @@ const NavBar = (props) => {
       setUserObj(data);
     } catch (err) {
       console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
+    } 
   };
+
+  const checkIfLive = async () => {
+    try {
+      const { data } = await axios.get('/api/live-sermon/get-live-sermon', 
+      {
+        params: {
+          isPublished: true
+        }
+      });
+      if (data && data[0]) {
+        setIsLive(true);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   useEffect(() => {
     setIsLoading(true);
     const fetch = async () => {
       await getUserObj(user);
+      await checkIfLive();
+      setIsLoading(false);
     };
 
     fetch();
@@ -83,8 +101,6 @@ const NavBar = (props) => {
       setLoggedIn(false);
     }
   }, [userObj]);
-
-  let currDate = new Date().toDateString().substr(0, 3);
 
   return (
     <>
@@ -128,7 +144,7 @@ const NavBar = (props) => {
                     Harvest Mission Community Church
                   </Text>
                 </Link>
-                {currDate === 'Sun' && !isOnlineSermon ? (
+                {isLive ? (
                   <Link href="/online" style={{ lineHeight: '0' }}>
                     <Button
                       h="6"
@@ -344,7 +360,7 @@ const NavBar = (props) => {
           </Container>
         </Flex>
       </Flex>
-
+      {isHomePage && <WitnessBanner />}
       {/* {currDate === 'Wed' && !isOnlineSermon ? (
         <Flex
           w="100vw"

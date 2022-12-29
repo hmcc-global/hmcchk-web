@@ -21,6 +21,7 @@ module.exports.routes = {
 
   'get /api/cache/refresh-cache': 'cache/refresh-cache',
   'get /api/misc/get-env': 'misc/get-env',
+  'get /api/misc/get-current-time': 'misc/get-current-time',
 
   // Forms APIs
   'get /api/forms/get-form': 'forms/get-form',
@@ -37,8 +38,16 @@ module.exports.routes = {
   // Announcement APIs
   'get /api/announcements/get-announcements': 'announcements/get-announcements',
 
+  // Witness Video APIs
+  'get /api/witness/get-witness-videos': 'witness/get-witness-videos',
+
   // Pages APIs
   'get /api/pages/get-pages': 'pages/get-pages',
+
+  //Live Semron APIs
+  'get /api/live-sermon/get-live-sermon': 'liveSermon/get-live-sermon',
+  'post /api/live-sermon/create-live-sermon': 'liveSermon/create-live-sermon',
+  'put /api/live-sermon/update-live-sermon': 'liveSermon/update-live-sermon',
 
   // Sermon APIs
   'get /api/sermons/get-sermons': 'sermons/get-sermons',
@@ -87,6 +96,12 @@ module.exports.routes = {
   'get /api/popup/get-published': 'popup/get-published-popup',
   'post /api/popup/create': 'popup/create-popup',
   'put /api/popup/update': 'popup/update-popup',
+
+  // Testimonies APIs
+  'get /api/testimony/get': 'testimonies/get-testimonies',
+  'get /api/testimony/get-published': 'testimonies/get-published-testimonies',
+  'post /api/testimony/create': 'testimonies/create-testimonies',
+  'put /api/testimony/update': 'testimonies/update-testimonies',
 
   // UI
   'get /*': {

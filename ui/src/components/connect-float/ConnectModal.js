@@ -16,17 +16,17 @@ import {
   Text,
   Textarea,
   VStack,
-} from "@chakra-ui/react";
-import axios from "axios";
-import { useCallback, useState } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
+} from '@chakra-ui/react';
+import axios from 'axios';
+import { useCallback, useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const ConnectModal = ({ isOpen, onClose }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [notes, setNotes] = useState("");
-  const [prayer, setPrayer] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [notes, setNotes] = useState('');
+  const [prayer, setPrayer] = useState('');
   const [isBot, setIsBot] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -45,7 +45,7 @@ const ConnectModal = ({ isOpen, onClose }) => {
         notes,
         prayer,
       };
-      await axios.post("/api/forms/connect-with-us", payload);
+      await axios.post('/api/forms/connect-with-us', payload);
       setIsSubmitted(true);
     }
   };

@@ -13,7 +13,6 @@ import {
 } from '@chakra-ui/react';
 import { ChevronLeftIcon } from '@chakra-ui/icons';
 import { DateTime } from 'luxon';
-import { DATE_FULL } from 'luxon/src/impl/formats';
 import OnlinePageButtons from './OnlinePageButtons';
 import OnlinePageTabs from './OnlinePageTabs';
 
@@ -23,13 +22,19 @@ const OnlineSermonContainer = (props) => {
 
   const getOnlineSermon = useCallback(async () => {
     try {
-      const { data, status } = await axios.get('/api/sermons/get-sermons');
+      const { data, status } = await axios.get(
+        '/api/live-sermon/get-live-sermon',
+        {
+          params: {
+            isPublished: true,
+          },
+        }
+      );
       if (status === 200) {
-        const current = data.find(({ nextSermon }) => nextSermon == null);
+        const current = data && data[0];
         if (
-          current.streamLink &&
-          current.sermonNotes &&
-          current.sermonSeries[0]
+          current &&
+          current.streamLink
         ) {
           setOnlineSermon(current);
         } else {
@@ -40,6 +45,7 @@ const OnlineSermonContainer = (props) => {
       }
     } catch (err) {
       console.log(err);
+      history.push(`/sermons/`);
     }
   }, [history]);
 
@@ -49,19 +55,17 @@ const OnlineSermonContainer = (props) => {
     })();
   }, [getOnlineSermon]);
 
-  useEffect(() => {
-    if (onlineSermon)
-      console.log(onlineSermon);
-  }, [onlineSermon]);
-
   const getSermonDate = () => {
-    if (onlineSermon && onlineSermon.datePreached) {
-      return DateTime.fromISO(onlineSermon.datePreached).toLocaleString(
-        DATE_FULL
-      );
+    if (onlineSermon.sermonDateTime){
+      return DateTime.fromISO(onlineSermon.sermonDateTime).toFormat('dd MMM yyyy');
     }
-    return '';
-  };
+  }
+
+  const getSermonTime = () => {
+    if (onlineSermon.sermonDateTime){
+      return DateTime.fromISO(onlineSermon.sermonDateTime).toFormat('hh:mm a');
+    }
+  }
 
   return (
     <>
@@ -106,7 +110,7 @@ const OnlineSermonContainer = (props) => {
                       >
                         <HStack>
                           <Text fontWeight="bold">Speaker:</Text>
-                          <Text>{onlineSermon.speaker[0].name}</Text>
+                          <Text>{onlineSermon.speaker}</Text>
                         </HStack>
                         <HStack>
                           <Text fontWeight="bold">Date: </Text>
@@ -114,7 +118,7 @@ const OnlineSermonContainer = (props) => {
                         </HStack>
                         <HStack>
                           <Text fontWeight="bold">Time: </Text>
-                          <Text>{onlineSermon.streamTime}</Text>
+                          <Text>{getSermonTime()}</Text>
                         </HStack>
                       </Stack>
                       <Stack
@@ -123,11 +127,11 @@ const OnlineSermonContainer = (props) => {
                       >
                         <HStack>
                           <Text fontWeight="bold">Series: </Text>
-                          <Text>{onlineSermon.sermonSeries[0].name}</Text>
+                          <Text>{onlineSermon.sermonSeries}</Text>
                         </HStack>
                         <HStack>
                           <Text fontWeight="bold">Passage:</Text>
-                          <Text>{onlineSermon.passage}</Text>
+                          <Text>{onlineSermon.sermonPassage}</Text>
                         </HStack>
                       </Stack>
                     </Box>
@@ -136,7 +140,7 @@ const OnlineSermonContainer = (props) => {
                       <Text fontWeight="bold" color="#0628A3" fontSize="md">
                         Description:
                       </Text>
-                      <Text>{onlineSermon.sermonDesc}</Text>
+                      <Text>{onlineSermon.sermonDescription}</Text>
                     </Box>
                   </Stack>
                 </VStack>
