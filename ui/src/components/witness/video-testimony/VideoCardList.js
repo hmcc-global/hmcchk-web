@@ -12,6 +12,7 @@ import {
   DrawerCloseButton,
   useDisclosure,
   Text,
+  GridItem,
 } from '@chakra-ui/react';
 import { BiFilterAlt } from 'react-icons/bi';
 import FilterVideos from './FilterVideos';
@@ -97,7 +98,7 @@ const VideoCardList = ({ allVideos }) => {
       <Grid
         mt={['6', '12']}
         mb={['6', '12']}
-        templateColumns={['repeat(1, 1fr)', 'repeat(3, 1fr)']}
+        templateColumns={['repeat(1, 1fr)', 'repeat(3, minmax(0, 1fr));']}
         gap={[3, 6]}
       >
         {currentVideos.length > 0 &&
