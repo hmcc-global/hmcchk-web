@@ -241,7 +241,7 @@ const MainContainer = () => {
           component={TextDetails}
         />
         <PrivateRoute
-          path="/missions"
+          path="/tmp-2023"
           permissions={['public']}
           component={MissionsContainer}
         />
