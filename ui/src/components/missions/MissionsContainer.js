@@ -1,6 +1,4 @@
 import {
-  Image,
-  AspectRatio,
   Box,
   Text,
   Container,
@@ -15,7 +13,7 @@ const MissionsContainer = () => {
     <Box bgColor="#254B72" pb="5vh">
       <Box
         w="100vw"
-        h={['50vh', '100vh']}
+        h={['46vh', '100vh']}
         bgImage={[
           process.env.PUBLIC_URL + '/images/tmp-2023/hero_mobile.png',
           process.env.PUBLIC_URL + '/images/tmp-2023/hero_web.png',
@@ -35,7 +33,7 @@ const MissionsContainer = () => {
         <Container
           maxW="container.md"
           color="white"
-          mt="3em"
+          mt={['0', '3em']}
           textAlign="justify"
         >
           <VStack gap={4}>
