@@ -82,6 +82,12 @@ module.exports.policies = {
   'testimonies/get-published-testimonies': true,
   'testimonies/create-testimonies': true,
 
+  // Easter
+  'easter/get-prayers': ['isLoggedIn', 'aboveTech'],
+  'easter/update-prayers': ['isLoggedIn', 'aboveTech'],
+  'easter/get-published-prayers': true,
+  'easter/add-prayers': true,
+
   // Users
   'users/reset': ['isLoggedIn', 'aboveAdmin'],
 };

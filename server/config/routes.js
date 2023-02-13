@@ -103,6 +103,12 @@ module.exports.routes = {
   'post /api/testimony/create': 'testimonies/create-testimonies',
   'put /api/testimony/update': 'testimonies/update-testimonies',
 
+  // Testimonies APIs
+  'get /api/easter/get': 'easter/get-prayers',
+  'get /api/easter/get-published': 'easter/get-published-prayers',
+  'post /api/easter/create': 'easter/add-prayers',
+  'put /api/easter/update': 'easter/update-prayers',
+
   // UI
   'get /*': {
     skipAssets: true,
