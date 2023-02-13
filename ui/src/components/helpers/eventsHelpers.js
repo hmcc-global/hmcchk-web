@@ -1,4 +1,4 @@
-import { DateTime } from "luxon";
+import { DateTime } from 'luxon';
 import { Text, Icon } from '@chakra-ui/react';
 import { RiCalendarEventFill } from 'react-icons/ri';
 
@@ -16,7 +16,7 @@ const getRenderDate = (startDate, endDate, interval) => {
   let start = DateTime.fromISO(startDate);
   let end = DateTime.fromISO(endDate);
 
-  let diffInDays = end.diff(start, "days").toObject();
+  let diffInDays = end.diff(start, 'days').toObject();
   let nRecurrence = Math.floor(diffInDays.days / interval);
 
   let renderDate = startDate;
@@ -29,14 +29,14 @@ const getRenderDate = (startDate, endDate, interval) => {
 };
 
 const filterISOStringForGoogleCalendar = (isoString) => {
-  return isoString.split(".")[0].replaceAll(/\b(?:-|:)\b/gi, "");
+  return isoString.split('.')[0].replaceAll(/\b(?:-|:)\b/gi, '');
 };
 
 const generateGoogleCalendarLink = (eventData) => {
   if (!eventData.time || !eventData.title) return null;
   let eventTime = eventData.time;
-  const baseLink = "https://calendar.google.com/calendar/r/eventedit?";
-  const eventTitle = "text=" + encodeURIComponent(eventData.title);
+  const baseLink = 'https://calendar.google.com/calendar/r/eventedit?';
+  const eventTitle = 'text=' + encodeURIComponent(eventData.title);
 
   if (!eventData.renderDate) {
     eventData.renderDate = getRenderDate(
@@ -48,9 +48,9 @@ const generateGoogleCalendarLink = (eventData) => {
 
   let eventDate = DateTime.fromISO(eventData.renderDate.toISO());
 
-  let parsed = DateTime.fromFormat(eventTime, "t");
+  let parsed = DateTime.fromFormat(eventTime, 'h:mm a');
 
-  let today = DateTime.now().startOf("day");
+  let today = DateTime.now().startOf('day');
   let timeOfDay = parsed.diff(today);
 
   eventDate = eventDate.plus(timeOfDay);
@@ -59,16 +59,21 @@ const generateGoogleCalendarLink = (eventData) => {
   let endTime = eventDate.plus({ hours: 2 });
   endTime = filterISOStringForGoogleCalendar(endTime.toISO());
 
-  const dates = "&dates=" + encodeURIComponent(startTime + "/" + endTime);
+  const dates = '&dates=' + encodeURIComponent(startTime + '/' + endTime);
 
-  const ctz = "&ctz=" + encodeURIComponent("Asia/Hong_Kong");
-  const location = "&location=" + encodeURIComponent(eventData.location);
+  const ctz = '&ctz=' + encodeURIComponent('Asia/Hong_Kong');
+  const location = '&location=' + encodeURIComponent(eventData.location);
   const linkComponents = [baseLink, eventTitle, dates, ctz, location];
 
-  return linkComponents.join("");
+  return linkComponents.join('');
 };
 
-const EndDateElement = ({startDateStr, endDateStr, interval, isModal = false}) => {
+const EndDateElement = ({
+  startDateStr,
+  endDateStr,
+  interval,
+  isModal = false,
+}) => {
   if (
     !startDateStr ||
     startDateStr === '' ||
@@ -85,7 +90,7 @@ const EndDateElement = ({startDateStr, endDateStr, interval, isModal = false}) =
     return;
 
   return (
-    <Text fontSize={["sm", isModal ? "md" : "lg"]} fontWeight="bold">
+    <Text fontSize={['sm', isModal ? 'md' : 'lg']} fontWeight="bold">
       <Icon mr={2} as={RiCalendarEventFill} />
       End Date: {endDate.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
     </Text>
@@ -97,5 +102,5 @@ export {
   getRenderDate,
   filterISOStringForGoogleCalendar,
   generateGoogleCalendarLink,
-  EndDateElement
+  EndDateElement,
 };
