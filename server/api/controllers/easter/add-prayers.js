@@ -16,10 +16,14 @@ module.exports = {
       type: 'string',
       required: true,
     },
-    topics: {
+    topic: {
       type: 'number',
       required: false,
     },
+    lifestage: {
+      type: 'string',
+      required: false,
+    }
   },
 
   exits: {
@@ -28,13 +32,14 @@ module.exports = {
     },
   },
 
-  fn: async function ({ fullName, email, prayer, topics }, exits) {
+  fn: async function ({ fullName, email, prayer, topic, lifestage }, exits) {
     try {
       const newPrayer = await Easter.create({
         fullName,
         email,
         prayer,
-        topics,
+        topic,
+        lifestage,
       });
 
       return exits.success(newPrayer);
