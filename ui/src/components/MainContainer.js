@@ -36,6 +36,7 @@ import WitnessContainer from './witness/WitnessContainer';
 import VideoDetails from './witness/video-testimony/VideoDetails';
 import WitnessHomeContainer from './witness/WitnessHomeContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
+import AdminPrayerContainer from './admin/prayer/AdminPrayerContainer';
 import TextDetails from './witness/text-testimony/TextDetails';
 
 const MainContainer = () => {
@@ -282,6 +283,12 @@ const MainContainer = () => {
           path="/admin/testimony"
           permissions={['t3ch', 'admin', 'stewardship']}
           component={AdminTestimonyContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/prayer"
+          permissions={['t3ch', 'admin', 'stewardship']}
+          component={AdminPrayerContainer}
         />
         <PrivateRoute
           exact

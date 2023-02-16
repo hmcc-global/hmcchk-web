@@ -21,6 +21,9 @@ import {
   FiMonitor,
   FiFeather
 } from 'react-icons/fi';
+import {
+  FaPrayingHands,
+} from 'react-icons/fa';
 
 const LinkItems = [
   { name: 'Home', icon: FiHome, path: '/admin/home' },
@@ -29,6 +32,7 @@ const LinkItems = [
   { name: 'Users', icon: FiUsers, path: '/admin/users' },
   { name: 'Pop Up', icon: FiBell, path: '/admin/popup' },
   { name: 'Testimony', icon: FiFeather, path: '/admin/testimony' },
+  { name: 'Prayer', icon: FaPrayingHands, path: '/admin/prayer' },
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {
