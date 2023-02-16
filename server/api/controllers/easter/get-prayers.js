@@ -29,10 +29,10 @@ module.exports = {
 
       if (name) {
         sails.log.info(`${user}: Getting prayers: ${prayer}`);
-        res = await Prayers.findOne({ prayer });
+        res = await Easter.findOne({ prayer });
       } else {
         sails.log.info(`${user}: Getting all prayers`);
-        res = await Prayers.find({ isDeleted }).populateAll();
+        res = await Easter.find({ isDeleted }).populateAll();
       }
 
       if (!res) {

@@ -22,7 +22,7 @@ module.exports = {
 
   fn: async function ({ topics }, exits) {
     try {
-      let data = await Prayers.find({
+      let data = await Easter.find({
         isPublished: true,
         isDeleted: false,
       });
