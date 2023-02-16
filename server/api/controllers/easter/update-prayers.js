@@ -63,7 +63,7 @@ module.exports = {
         isPublished = false;
       }
 
-      const existing = await Prayers.updateOne({ id }).set({
+      const existing = await Easter.updateOne({ id }).set({
         prayer,
         name,
         lifestage,
