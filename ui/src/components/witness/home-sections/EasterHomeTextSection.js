@@ -19,7 +19,7 @@ const EasterHomeTextSection = () => {
   const [texts, setTexts] = useState([]);
   const [eventDisplay, setEventDisplay] = useState(false);
 
-  const endDate = DateTime.fromISO('2023-02-18T00:42');
+  const endDate = DateTime.fromISO('2023-02-22T00:01');
 
   const timeLeft = () => {
     let display = endDate.diffNow(['hours', 'minutes']);
@@ -49,11 +49,13 @@ const EasterHomeTextSection = () => {
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      let display = timeLeft;
-      setEventDisplay(display);
-    }, 1000);
-    return () => clearTimeout(timer);
+    if (eventDisplay === false) {
+      const timer = setInterval(() => {
+        let display = timeLeft;
+        setEventDisplay(display);
+      }, 1000);
+      return () => clearInterval(timer);
+    }
   });
 
   return (
