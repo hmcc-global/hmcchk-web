@@ -17,11 +17,11 @@ const WitnessBanner = () => {
       bgColor="#FFFFFF95"
       h="12vh"
       p={2}
-      bgImage={`url('${process.env.PUBLIC_URL}/images/witness/easter_bg.png')`}
-      bgPosition="center"
-      bgSize="contain"
       justify="center"
       display="flex"
+      bgImage={`url('${process.env.PUBLIC_URL}/images/witness/easter_bg.png')`}
+      bgPosition="center"
+      bgSize="cover"
     >
       <Flex w="100vw" justify="space-around">
         <Center>
