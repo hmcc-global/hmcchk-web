@@ -27,14 +27,20 @@ import ShareTestimonyButton from '../witness/text-testimony/ShareTestimonyButton
   import ThePassion from './ThePassion';
   import EasterCalendar from './EasterCalendar';
   import EasterStory from './EasterStory';
+  import EasterNavbar from './EasterNavbar';
   
 
   
   const Easter2023Container = (props) => {
   
     //To do: implement navbar, buttons, testimony section
-
- 
+    const handleClickScroll = () => {
+      const element = document.getElementById('section-1');
+      if (element) {
+        // 👇 Will scroll smoothly to the top of the next section
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
     return (
         
         <Container
@@ -42,12 +48,16 @@ import ShareTestimonyButton from '../witness/text-testimony/ShareTestimonyButton
         minHeight = "fill" 
         p={0} m={0}
        >
+        
         <VStack
         divider={<StackDivider borderColor='gray.200' />}
         spacing={0}
         align='stretch'
         >
-        <Box>
+        <Box>   
+        
+      
+   
         <ThePassion/>
         </Box>
         <Box
@@ -67,10 +77,17 @@ import ShareTestimonyButton from '../witness/text-testimony/ShareTestimonyButton
         backgroundColor = 'none'
         >
           
-          <EasterStory/>
+         
+       
+        <EasterNavbar/>
+        <div id="easter-story"><EasterStory/></div>
+        <div id="easter-calendar">
           <Center>
           <EasterCalendar/>
           </Center>
+        </div>
+      
+       
           
         </Box>
         </Box>
