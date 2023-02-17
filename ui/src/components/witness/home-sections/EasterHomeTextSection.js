@@ -15,19 +15,18 @@ import { customAxios as axios } from '../../helpers/customAxios';
 import SubmitPrayerButton from '../text-prayer/SubmitPrayerButton';
 import { DateTime } from 'luxon';
 
-const endDate = DateTime.fromISO('2023-02-17T13:50');
-
-const calculateTimeLeft = () => {
-  let display = endDate.diffNow(['hours', 'seconds']);
-  console.log(display);
-  if (display < 0) return true;
-  else return false;
-};
-
-console.log(calculateTimeLeft);
-
 const EasterHomeTextSection = () => {
   const [texts, setTexts] = useState([]);
+  const [eventDisplay, setEventDisplay] = useState(false);
+  const [textPresent, setTextPresent] = useState(false);
+
+  const endDate = DateTime.fromISO('2023-02-17T14:25');
+
+  const timeLeft = () => {
+    let display = endDate.diffNow(['hours', 'minutes']);
+    if (display < 0) return true;
+    else return false;
+  };
 
   useEffect(() => {
     getTexts();
@@ -50,11 +49,18 @@ const EasterHomeTextSection = () => {
     }
   };
 
-  let text_present = texts.length > 0;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      let display = timeLeft;
+      setEventDisplay(display);
+    }, 1000);
+    setTextPresent(texts.length > 0);
+    return () => clearTimeout(timer);
+  });
 
   return (
     <Box w="100%">
-      {text_present && calculateTimeLeft ? (
+      {textPresent && eventDisplay ? (
         <>
           <Container maxW="100%" centerContent>
             <Text
@@ -64,6 +70,7 @@ const EasterHomeTextSection = () => {
               lineHeight="110%"
               fontSize={['30px', '40px']}
               marginBottom="15px"
+              textAlign="center"
             >
               J-E-S-U-S PRAYER CAMPAIGN
             </Text>
