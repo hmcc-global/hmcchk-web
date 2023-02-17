@@ -39,8 +39,11 @@ import "@fontsource/playfair-display"; // Defaults to weight 400.
         <Heading as="h2" fontSize={["2em", "3.5em"]}  color="#67298E" fontWeight={700} fontFamily = 'PlayfairDisplay'>
           GOOD FRIDAY
         </Heading>
-        <Heading as="h2" fontSize={["2em", "3.5em"]}  color="#67298E" fontWeight={700} fontFamily = 'PlayfairDisplay'>
+        <Heading as="h2" fontSize={["2em", "3.5em"]}  color="#67298E" fontWeight={700}>
+          <Text textStyle={'playfair_display'} fontWeight='black'>
           SERVICE
+          </Text>
+          
         </Heading>
         <Text fontSize={["1.2em", "1.8em"]} color ="#7B0D0D" fontWeight={800} paddingTop = {{ base: 3, sm: 4, md: 5, lg: 6 }}>
           Friday, 7 Apr 2023
