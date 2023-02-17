@@ -36,8 +36,6 @@ export default function AdminPrayerContainer(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [deleted, setDeleted] = useState(false);
 
-  console.log(selected);
-
   const getData = useCallback(async () => {
     try {
       const { data } = await axios.get('/api/easter/get');
