@@ -33,11 +33,13 @@ import AdminPopUpContainer from './admin/popup/AdminPopUpContainer';
 import AdminFormDataViewer from './admin/forms/AdminFormDataViewer';
 import AdminLiveSermonContainer from './admin/liveSermon/AdminLiveSermonContainer';
 import WitnessContainer from './witness/WitnessContainer';
+import EasterContainer from './witness/EasterPrayerContainer';
 import VideoDetails from './witness/video-testimony/VideoDetails';
 import WitnessHomeContainer from './witness/WitnessHomeContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import AdminPrayerContainer from './admin/prayer/AdminPrayerContainer';
 import TextDetails from './witness/text-testimony/TextDetails';
+import PrayerDetails from './witness/text-prayer/TextDetails';
 
 const MainContainer = () => {
   return (
@@ -231,6 +233,17 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
+          path="/witness/prayers/:resource?"
+          permissions={['public']}
+          component={EasterContainer}
+        />
+        <PrivateRoute
+          path="/witness/prayers/text/:id"
+          permissions={['public']}
+          component={PrayerDetails}
+        />
+        <PrivateRoute
+          exact
           path="/witness/home"
           permissions={['public']}
           component={WitnessHomeContainer}
@@ -266,13 +279,13 @@ const MainContainer = () => {
           permissions={['t3ch', 'admin', 'stewardship']}
           component={FormManager}
         />
-        <PrivateRoute 
+        <PrivateRoute
           exact
           path="/admin/formViewer"
           permissions={['t3ch', 'admin', 'stewardship']}
           component={AdminFormDataViewer}
         />
-        <PrivateRoute 
+        <PrivateRoute
           exact
           path="/admin/liveSermon"
           permissions={['t3ch', 'admin', 'stewardship']}
@@ -302,7 +315,7 @@ const MainContainer = () => {
           permissions={['admin', 'stewardship']}
           component={AdminUser}
         />
-        
+
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
       <FooterContainer />
