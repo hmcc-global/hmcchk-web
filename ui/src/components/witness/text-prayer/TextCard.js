@@ -90,7 +90,7 @@ const TextCard = ({ textData, allText }) => {
                 fontWeight={600}
                 display={{ base: 'none', md: 'inline-flex' }}
               >
-                {getPrayerTopic(textData.topics)}
+                {getPrayerTopic(textData.topic)}
               </Tag>
             </Wrap>
             <Box minH={['8vw', '5vw']}>
@@ -123,7 +123,7 @@ const TextCard = ({ textData, allText }) => {
                 fontSize="xx-small"
                 fontWeight={600}
               >
-                {getPrayerTopic(textData.topics)}
+                {getPrayerTopic(textData.topic)}
               </Tag>
             </Wrap>
           </VStack>

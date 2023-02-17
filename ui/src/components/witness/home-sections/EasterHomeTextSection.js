@@ -18,9 +18,8 @@ import { DateTime } from 'luxon';
 const EasterHomeTextSection = () => {
   const [texts, setTexts] = useState([]);
   const [eventDisplay, setEventDisplay] = useState(false);
-  const [textPresent, setTextPresent] = useState(false);
 
-  const endDate = DateTime.fromISO('2023-02-17T14:25');
+  const endDate = DateTime.fromISO('2023-02-18T00:42');
 
   const timeLeft = () => {
     let display = endDate.diffNow(['hours', 'minutes']);
@@ -54,13 +53,12 @@ const EasterHomeTextSection = () => {
       let display = timeLeft;
       setEventDisplay(display);
     }, 1000);
-    setTextPresent(texts.length > 0);
     return () => clearTimeout(timer);
   });
 
   return (
     <Box w="100%">
-      {textPresent && eventDisplay ? (
+      {eventDisplay ? (
         <>
           <Container maxW="100%" centerContent>
             <Text
@@ -195,7 +193,7 @@ const EasterHomeTextSection = () => {
             fontSize={['30px', '40px']}
             marginBottom="15px"
           >
-            PRAYER WALL
+            J-E-S-U-S PRAYER CAMPAIGN
           </Text>
           <Text
             w={['80%', '60%']}
@@ -206,9 +204,9 @@ const EasterHomeTextSection = () => {
             marginBottom="15px"
             textAlign="center"
           >
-            As we enter Lent, we want to prepare our hearts and continue
-            witnessing God work through our prayers! Please feel free to lift up
-            a prayer for whatever God is putting on your heart.
+            As we enter Lent, we want to witness God work through our prayers!
+            That’s why throughout Lent, we’ll be re-focusing on JESUS through
+            the JESUS Prayer Campaign as we prepare our hearts for Easter.
           </Text>
           <Text
             w={['80%', '60%']}

@@ -31,7 +31,7 @@ const TextCardList = ({ allText }) => {
       return true;
     } else {
       let foundMatchingTag = false;
-      if (filterTopic === text.topics) foundMatchingTag = true;
+      if (filterTopic === text.topic) foundMatchingTag = true;
       return foundMatchingTag;
     }
   });

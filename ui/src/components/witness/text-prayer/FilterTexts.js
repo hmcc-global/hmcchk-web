@@ -42,18 +42,6 @@ const FilterTexts = ({
   clearFilter,
   onClose,
 }) => {
-  // const tagSet = new Set();
-  // allTexts.forEach((textData) => {
-  //   if (typeof textData.tags === 'string') {
-  //     tagSet.add(textData.tags);
-  //   } else {
-  //     textData.tags.forEach((tag) => {
-  //       tagSet.add(tag);
-  //     });
-  //   }
-  // });
-  // const Tags = Array.from(tagSet);
-
   return (
     <>
       <Container maxW="container.lg" p="0">
