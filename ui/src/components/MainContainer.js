@@ -39,7 +39,11 @@ import WitnessHomeContainer from './witness/WitnessHomeContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import AdminPrayerContainer from './admin/prayer/AdminPrayerContainer';
 import TextDetails from './witness/text-testimony/TextDetails';
+<<<<<<< HEAD
 import PrayerDetails from './witness/text-prayer/TextDetails';
+=======
+import Easter2023Container from './easter-2023/Easter2023Container';
+>>>>>>> f92755c (GH-713: importing easter theme to maincontainer.js)
 
 const MainContainer = () => {
   return (
@@ -166,6 +170,12 @@ const MainContainer = () => {
           path="/email/confirm/:token"
           permissions={['public']}
           component={ConfirmEmailPage}
+        />
+         <PrivateRoute
+          exact
+          path="/easter"
+          permissions={['public']}
+          component={Easter2023Container}
         />
         <PrivateRoute
           exact
