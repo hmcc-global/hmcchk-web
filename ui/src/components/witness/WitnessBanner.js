@@ -17,8 +17,9 @@ const WitnessBanner = () => {
       bgColor="#FFFFFF95"
       h="12vh"
       p={2}
+      bgImage={`url('${process.env.PUBLIC_URL}/images/witness/easter_bg.png')`}
       bgPosition="center"
-      bgSize="cover"
+      bgSize="contain"
       justify="center"
       display="flex"
     >
@@ -31,17 +32,17 @@ const WitnessBanner = () => {
                   position="relative"
                   fontSize={['xs', 'xl']}
                   as="i"
-                  background="linear-gradient(90deg, #FF8933, #AF4F83)"
+                  background="linear-gradient(90.14deg, #FF8A33 20.44%, #FF8A33 20.45%, #EE80C7 56.46%, #A862C9 89.6%)"
                   textFillColor="transparent"
                   backgroundClip="text"
                   fontWeight={600}
                 >
-                  CLICK HERE TO WITNESS GOD'S WORK IN OUR CHURCH!
+                  CHECK OUT EASTER 2023: WITNESS THE PASSION
                 </Text>
                 <Box
                   w="100%"
-                  h={['1px', '2px']}
-                  bgGradient="linear-gradient(90deg, #FF8933, #AF4F83)"
+                  h={['1px', '1px']}
+                  bgGradient="linear-gradient(90.14deg, #FF8A33 20.44%, #FF8A33 20.45%, #EE80C7 56.46%, #A862C9 89.6%)"
                 />
               </Box>
               {/* <Button
