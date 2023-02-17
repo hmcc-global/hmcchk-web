@@ -39,11 +39,8 @@ import WitnessHomeContainer from './witness/WitnessHomeContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import AdminPrayerContainer from './admin/prayer/AdminPrayerContainer';
 import TextDetails from './witness/text-testimony/TextDetails';
-
 import PrayerDetails from './witness/text-prayer/TextDetails';
-
 import Easter2023Container from './easter-2023/Easter2023Container';
-
 
 const MainContainer = () => {
   return (
