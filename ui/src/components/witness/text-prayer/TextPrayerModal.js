@@ -15,42 +15,14 @@ import {
   Input,
   Textarea,
   Button,
-  Radio,
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { useState, useCallback } from 'react';
 
-export const prayerTopics = [
-  {
-    index: 0,
-    text: 'Joy in the journey',
-  },
-  {
-    index: 1,
-    text: 'Evangelize the Circle',
-  },
-  {
-    index: 2,
-    text: 'Serve our City and Campus',
-  },
-  {
-    index: 3,
-    text: 'Understand the Gospel',
-  },
-  {
-    index: 4,
-    text: 'Send People Out',
-  },
-];
-
-export const getPrayerTopic = (idx) => {
-  return prayerTopics.find((e) => e.index === idx).text;
-};
-
-const EasterPrayerModal = ({ isOpen, onClose }) => {
-  const [topic, setTopic] = useState(0);
-  const [prayer, setPrayer] = useState('');
-  const [fullName, setFullName] = useState('');
+const TextPrayerModal = ({ isOpen, onClose }) => {
+  const [theme, setTheme] = useState('');
+  const [testimony, setTestimony] = useState('');
+  const [name, setName] = useState('');
   const [lifestage, setLifestage] = useState('');
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -63,9 +35,9 @@ const EasterPrayerModal = ({ isOpen, onClose }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const payload = {
-      topic,
-      prayer,
-      fullName,
+      theme,
+      testimony,
+      name,
       lifestage,
       email,
     };
@@ -75,68 +47,65 @@ const EasterPrayerModal = ({ isOpen, onClose }) => {
 
   const renderForm = () => (
     <VStack justifyContent="center" mb={5}>
-      {/* <Image src={process.env.PUBLIC_URL + '/images/witness/title-color.png'} /> */}
-      <Text as="b" fontSize="xl" color="#C11553">
-        SUBMIT A PRAYER
+      <Image src={process.env.PUBLIC_URL + '/images/witness/title-color.png'} />
+      <Text color="#A25C8D" textStyle="dm_sans_bold">
+        How are you witnessing God? Share your testimony with us!
       </Text>
-      <form onSubmit={onSubmit} style={{ width: "95%" }}>
+      <form onSubmit={onSubmit}>
         <VStack spacing={3}>
-          <FormControl id="topic" isRequired>
-            <FormLabel color="#C11553">
+          <FormControl id="theme" isRequired>
+            <FormLabel color="#6A5289">
               <b>
-                <i>Choose your prayer topic</i>
+                <i>Theme of testimony </i>
               </b>
             </FormLabel>
-            <VStack alignItems="flex-start">
-              {prayerTopics.map((t) => (
-                <Radio
-                  isChecked={t.index === topic}
-                  onChange={(e) => setTopic(t.index)}
-                  colorScheme="red"
-                >
-                  <Text color="#C11553">
-                    {t.text}
-                  </Text>
-                </Radio>
-              ))}
-            </VStack>
+            <FormHelperText color="#6A5289">
+              <i>(e.g. I witnessed God’s ____ through _____)</i>
+            </FormHelperText>
+            <Textarea
+              bg="#F1EDF7"
+              _placeholder={{ color: '#6A5289' }}
+              type="text"
+              placeholder="Describe your testimony in one sentence..."
+              onChange={(e) => setTheme(e.target.value)}
+            />
           </FormControl>
           <FormControl id="testimony" isRequired>
-            <FormLabel color="#C11553">
+            <FormLabel color="#6A5289">
               <b>
-                <i>Prayer </i>
+                <i>Testimony </i>
               </b>
             </FormLabel>
             <Textarea
-              bg="#FFEFEF"
-              _placeholder={{ color: '#C11553' }}
+              bg="#F1EDF7"
+              _placeholder={{ color: '#6A5289' }}
               type="text"
-              placeholder="Write your prayer here..."
-              onChange={(e) => setPrayer(e.target.value)}
+              placeholder="Write your testimony here..."
+              onChange={(e) => setTestimony(e.target.value)}
             />
           </FormControl>
 
           <FormControl id="fullName">
-            <FormLabel color="#C11553">
+            <FormLabel color="#6A5289">
               <b>
                 <i>(Optional) Your profile: </i>
               </b>
             </FormLabel>
-            <FormHelperText color="#C11553">
+            <FormHelperText color="#6A5289">
               <i>*You may choose to remain anonymous.</i>
             </FormHelperText>
             <Input
-              bg="#FFEFEF"
-              _placeholder={{ color: '#C11553' }}
+              bg="#F1EDF7"
+              _placeholder={{ color: '#6A5289' }}
               type="text"
               placeholder="Name (optional)"
-              onChange={(e) => setFullName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
             />
           </FormControl>
           <FormControl id="lifestage">
             <Input
-              bg="#FFEFEF"
-              _placeholder={{ color: '#C11553' }}
+              bg="#F1EDF7"
+              _placeholder={{ color: '#6A5289' }}
               type="text"
               placeholder="Campus/Lifestage (optional)"
               onChange={(e) => setLifestage(e.target.value)}
@@ -144,18 +113,23 @@ const EasterPrayerModal = ({ isOpen, onClose }) => {
           </FormControl>
 
           <FormControl id="email">
+            <FormHelperText color="#6A5289">
+              <i>
+                We may invite some people to share their testimonies publicly to
+                our church congregation. <br />
+                If you are open to this possible invitation, please leave your
+                email below for us to contact you.
+              </i>
+            </FormHelperText>
             <Input
-              bg="#FFEFEF"
-              _placeholder={{ color: '#C11553' }}
+              bg="#F1EDF7"
+              _placeholder={{ color: '#6A5289' }}
               type="email"
               placeholder="Email (optional)"
               onChange={(e) => setEmail(e.target.value)}
             />
           </FormControl>
-        </VStack>
-        <VStack w="100%" mt={10}>
-          <Text as="i" fontSize="xs" color="#C11553">Thank you for sharing your prayer!</Text>
-          <Button w="50%" bg="#C11553" color="white" type="submit" mt={20}>
+          <Button w="30%" bg="#73539B" color="white" type="submit">
             Submit
           </Button>
         </VStack>
@@ -166,11 +140,11 @@ const EasterPrayerModal = ({ isOpen, onClose }) => {
   const renderFormSubmitted = useCallback(
     () => (
       <VStack textAlign="center">
-        <Text color="#C11553">
+        <Text color="#6A5289">
           <i>
-            <b>Thank you for sharing your prayer!</b>
-            <br /> Once reviewed, your prayer will be uploaded to the Prayer Wall!
-              Stay tuned :)
+            <b>Thank you for sharing your testimony!</b>
+            <br /> Once reviewed, your testimony will be uploaded to the Witness
+            page! Stay tuned :)
           </i>
         </Text>
       </VStack>
@@ -181,7 +155,7 @@ const EasterPrayerModal = ({ isOpen, onClose }) => {
   return (
     <Modal isOpen={isOpen} onClose={onCloseCustom} size="lg">
       <ModalOverlay>
-        <ModalContent bg="#FFF7F1" maxW={['100vw', '55vw']}>
+        <ModalContent bg="#FBF7FC" maxW={['100vw', '55vw']}>
           <ModalHeader />
           <ModalCloseButton />
           <ModalBody>
@@ -194,4 +168,4 @@ const EasterPrayerModal = ({ isOpen, onClose }) => {
   );
 };
 
-export default EasterPrayerModal;
+export default TextPrayerModal;

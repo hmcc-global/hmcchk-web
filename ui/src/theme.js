@@ -15,6 +15,10 @@ const customTheme = extendTheme({
       fontFamily: 'DM Sans',
       fontWeight: '700',
     },
+    playfair_display: {
+      fontFamily: 'Playfair Display',
+      fontWeight: '500',
+    },
   },
 });
 
