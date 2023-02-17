@@ -15,7 +15,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import PrayerGrid from './PrayerGrid';
-import { getPrayerTopic } from '../../witness/prayer/EasterPrayerModal';
+import { getPrayerTopic } from '../../witness/text-prayer/EasterPrayerModal';
 
 export default function AdminPrayerContainer(props) {
   const toast = useToast();
@@ -35,8 +35,6 @@ export default function AdminPrayerContainer(props) {
 
   const [isLoading, setIsLoading] = useState(false);
   const [deleted, setDeleted] = useState(false);
-
-  console.log(selected)
 
   const getData = useCallback(async () => {
     try {
@@ -145,31 +143,19 @@ export default function AdminPrayerContainer(props) {
             </FormControl>
             <FormControl isReadOnly>
               <FormLabel>Name</FormLabel>
-              <Input
-                type="text"
-                value={fullName}
-              />
+              <Input type="text" value={fullName} />
             </FormControl>
             <FormControl isReadOnly>
               <FormLabel>Campus/Lifestage</FormLabel>
-              <Input
-                type="text"
-                value={lifestage}
-              />
+              <Input type="text" value={lifestage} />
             </FormControl>
             <FormControl isReadOnly>
               <FormLabel>Email</FormLabel>
-              <Input
-                type="email"
-                value={email}
-              />
+              <Input type="email" value={email} />
             </FormControl>
             <FormControl isRequired isReadOnly>
               <FormLabel>Topic</FormLabel>
-              <Input
-                type="text"
-                value={getPrayerTopic(topic)}
-              />
+              <Input type="text" value={getPrayerTopic(topic)} />
             </FormControl>
             <HStack spacing={5} justifyContent="flex-end">
               <FormControl w="auto" isDisabled={deleted}>

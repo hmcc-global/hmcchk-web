@@ -79,7 +79,7 @@ const EasterPrayerModal = ({ isOpen, onClose }) => {
       <Text as="b" fontSize="xl" color="#C11553">
         SUBMIT A PRAYER
       </Text>
-      <form onSubmit={onSubmit} style={{ width: "95%" }}>
+      <form onSubmit={onSubmit} style={{ width: '95%' }}>
         <VStack spacing={3}>
           <FormControl id="topic" isRequired>
             <FormLabel color="#C11553">
@@ -94,9 +94,7 @@ const EasterPrayerModal = ({ isOpen, onClose }) => {
                   onChange={(e) => setTopic(t.index)}
                   colorScheme="red"
                 >
-                  <Text color="#C11553">
-                    {t.text}
-                  </Text>
+                  <Text color="#C11553">{t.text}</Text>
                 </Radio>
               ))}
             </VStack>
@@ -154,7 +152,9 @@ const EasterPrayerModal = ({ isOpen, onClose }) => {
           </FormControl>
         </VStack>
         <VStack w="100%" mt={10}>
-          <Text as="i" fontSize="xs" color="#C11553">Thank you for sharing your prayer!</Text>
+          <Text as="i" fontSize="xs" color="#C11553">
+            Thank you for sharing your prayer!
+          </Text>
           <Button w="50%" bg="#C11553" color="white" type="submit" mt={20}>
             Submit
           </Button>
@@ -169,8 +169,8 @@ const EasterPrayerModal = ({ isOpen, onClose }) => {
         <Text color="#C11553">
           <i>
             <b>Thank you for sharing your prayer!</b>
-            <br /> Once reviewed, your prayer will be uploaded to the Prayer Wall!
-              Stay tuned :)
+            <br /> Once reviewed, your prayer will be uploaded to the Prayer
+            Wall! Stay tuned :)
           </i>
         </Text>
       </VStack>

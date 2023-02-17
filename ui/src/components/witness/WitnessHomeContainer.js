@@ -8,10 +8,10 @@ import {
   Flex,
   Divider,
 } from '@chakra-ui/react';
-import { TriangleDownIcon } from '@chakra-ui/icons';
 import WitnessHomeVideoSection from './home-sections/WitnessHomeVideoSection';
 import WitnessHomeTextSection from './home-sections/WitnessHomeTextSection';
 import ShareTestimonyButton from './text-testimony/ShareTestimonyButton';
+import EasterHomeTextSection from './home-sections/EasterHomeTextSection';
 
 const WitnessHomeContainer = (props) => {
   return (
@@ -74,25 +74,34 @@ const WitnessHomeContainer = (props) => {
                 </Text>
               </VStack>
             </Flex>
-            <TriangleDownIcon w="40px" h="40px" pb={4} color="#FFD6DC" />
-            <Text
-              textStyle={'dm_sans'}
-              textColor="white"
-              fontWeight="bold"
-              fontSize="24px"
-              marginBottom="15px"
-            >
-              HOW ARE YOU WITNESSING GOD?
-            </Text>
-            <Flex justifyContent="center">
-              <Box w={['90%', '30%']}>
-                <ShareTestimonyButton />
-              </Box>
-            </Flex>
           </Box>
         </Box>
       </Container>
       <Container maxW="100%" p={[0, 10]} centerContent>
+        <EasterHomeTextSection />
+        <Divider
+          orientation="horizontal"
+          my={10}
+          w="25%"
+          height="3px"
+          backgroundColor="#DAC7BC"
+        />
+      </Container>
+      <Container maxW="100%" p={[0, 10]} centerContent>
+        <Text
+          textStyle={'dm_sans'}
+          textColor="#000000"
+          fontWeight="bold"
+          fontSize={['20px', '24px']}
+          marginBottom="15px"
+        >
+          HOW ARE YOU WITNESSING GOD?
+        </Text>
+        <Flex justifyContent="center">
+          <Box w={['90%', '100%']}>
+            <ShareTestimonyButton />
+          </Box>
+        </Flex>
         <WitnessHomeVideoSection />
         <Divider
           orientation="horizontal"
@@ -102,26 +111,6 @@ const WitnessHomeContainer = (props) => {
           backgroundColor="#DAC7BC"
         />
         <WitnessHomeTextSection />
-      </Container>
-      <Container
-        maxW="container.sm"
-        my={10}
-        centerContent
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Text
-          textStyle={'dm_sans'}
-          textColor="#8D2C72"
-          fontWeight="bold"
-          fontSize={['20px', '24px']}
-          textAlign="center"
-        >
-          HOW ARE YOU WITNESSING GOD?
-        </Text>
-        <Flex justifyContent="center" w={['90%', '70%']}>
-          <ShareTestimonyButton />
-        </Flex>
       </Container>
     </>
   );
