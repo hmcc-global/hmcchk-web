@@ -58,8 +58,8 @@ const FilterTexts = ({
     <>
       <Container maxW="container.lg" p="0">
         <Box marginBottom={3}>
-          <Text fontWeight="bold" color="#73539B" as="i" fontSize="1.25rem">
-            Select topic to filter:
+          <Text fontWeight="bold" color="#C11553" as="i" fontSize="1.25rem">
+            Select tags to filter:
           </Text>
         </Box>
         <Stack
@@ -71,9 +71,9 @@ const FilterTexts = ({
             <Checkbox
               onChange={() => handleTagChange(t.index)}
               isChecked={filterTopic === t.index}
-              color="#73539B"
+              color="#C11553"
               size="lg"
-              borderColor="#73539B"
+              borderColor="#C11553"
               outline={1}
             >
               {t.text.charAt(0).toUpperCase() + t.text.slice(1)}
@@ -105,7 +105,7 @@ const FilterTexts = ({
             onClick={onClose}
             // width="35vw"
             width="100%"
-            backgroundColor="#73539B"
+            backgroundColor="#C11553"
             color="white"
             borderRadius="10px"
           >
