@@ -1,23 +1,7 @@
 import {
-    Container,
-    Text,
-    VStack,
     Box,
-    Tabs,
-    Tab,
-    TabPanel,
-    TabPanels,
-    TabList,
-    Image,
-    Stack,
     Button,
-    Flex,
     Link,
-    Center,
-    Spacer,
-    Heading,
-    Fade,
-    useBoolean,
     Icon,
   } from '@chakra-ui/react';
 
@@ -33,9 +17,6 @@ import {
           />
         </Icon>
       );
-    const handeScrollToTop = () => {
-        window.scrollTo({ top: 100, behavior: 'smooth'});
-    };
     const handleClickScrollEaster = () => {
         const element = document.getElementById('easter-story');
         if (element) {
@@ -69,7 +50,7 @@ import {
         >
             <hStack px="3" py="6">
             <Button
-                color = '#FF619F'
+                color = '#E60053'
                 paddingTop ={{ base: 10, sm: 9, md: 25, lg: 29 }}
                 paddingBottom ={{ base: 10, sm: 9, md: 25, lg: 29 }}
                 as={Link}
@@ -78,14 +59,15 @@ import {
                 variant="link"
                 w={[70, 200]}
                 fontSize={["0.75em", "1.5em"]}
+                fontWeight='bold'
             >
                 prayer wall
             </Button>
 
-            <CircleIcon color='#FF619F'/>
+            <CircleIcon color='#E60053'/>
         
             <Button
-                color = '#FF810F'
+                color = '#FF3E02'
                 paddingTop ={{ base: 10, sm: 9, md: 25, lg: 29 }}
                 paddingBottom ={{ base: 10, sm: 9, md: 25, lg: 29 }}
                 as={Link}
@@ -93,14 +75,15 @@ import {
                 variant="link"
                 w={[50, 70, 200]}
                 fontSize={["0.75em", "1.5em"]}
+                fontWeight='bold'
             >
                 easter 
             </Button>
             
-            <CircleIcon color='#FF810F'/>
+            <CircleIcon color='#FF3E02'/>
      
             <Button
-                color = '#FF3E02'
+                color = '#8D2C72'
                 paddingTop ={{ base: 10, sm: 9, md: 25, lg: 29 }}
                 paddingBottom ={{ base: 10, sm: 9, md: 25, lg: 29 }}
                 as={Link}
@@ -110,17 +93,15 @@ import {
                 w={[120, 150, 300]}
                 borderRadius={10}
                 fontSize={["0.75em", "1.5em"]}
+                fontWeight='bold'
             >
                 witness testimonies 
             </Button>
           </hStack>
         </Box>
-        
+
       </hStack>
     )
   }
   
- 
-  
-
 export default EasterNavbar;
