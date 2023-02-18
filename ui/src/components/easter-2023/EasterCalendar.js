@@ -39,7 +39,7 @@ const easter = {
 
 const EasterCalendar = () => {
   return (
-    <Flex flexWrap="wrap" gap="0">
+    <Flex flexWrap="wrap" gap="0" bgColor = 'none'>
       <Box
         flex={1}
         //borderWidth="1px"
@@ -104,6 +104,7 @@ const EasterCalendar = () => {
           w={[200, 400]}
           borderRadius={10}
           fontSize={['1.2em', '1.8em']}
+          position = 'inherit'
         >
           Add to Calendar
         </Button>
@@ -170,6 +171,7 @@ const EasterCalendar = () => {
           w={[200, 400]}
           borderRadius={10}
           fontSize={['1.2em', '1.8em']}
+          position = 'inherit'
         >
           Add to Calendar
         </Button>
