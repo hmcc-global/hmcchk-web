@@ -66,15 +66,15 @@ import ShareTestimonyButton from '../witness/text-testimony/ShareTestimonyButton
           />
             </Text>
             <Flex justifyContent="center">
-              <VStack w={['100%', '50%']}>
+              <VStack w={['80%', '50%']}>
                 <Text
-                  paddingTop = "15%"
+                  paddingTop = "5%"
                   textColor="rgba(255, 255, 255, 1)"
                   fontWeight="bold"
                   pb={3}
                   textStyle={'inter'}
                   as='i'
-                  fontSize={['17px', '22px']}
+                  fontSize={['16px', '18px']}
                   
                 >
                  This Passion week, we want to simply remember and commemorate Jesus’ passion that He 
@@ -86,7 +86,7 @@ import ShareTestimonyButton from '../witness/text-testimony/ShareTestimonyButton
             </Flex>
           </Box>
           <Image
-            paddingTop = '10'
+            paddingTop = '5%'
             mr="auto"
             ml="auto"
             src={process.env.PUBLIC_URL + '/images/easter-2023/EASTER_2023.png'}
