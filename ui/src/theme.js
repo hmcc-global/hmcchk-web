@@ -1,6 +1,5 @@
 import { extendTheme } from '@chakra-ui/react';
 import '@fontsource/dm-sans';
-import { fontWeight } from 'styled-system';
 
 const customTheme = extendTheme({
   fonts: {
@@ -18,10 +17,6 @@ const customTheme = extendTheme({
     },
     playfair_display: {
       fontFamily: 'Playfair Display',
-      fontWeight: '500',
-    },
-    concrete_demo: {
-      fontFamily: 'concrete demo',
       fontWeight: '500',
     },
   },
