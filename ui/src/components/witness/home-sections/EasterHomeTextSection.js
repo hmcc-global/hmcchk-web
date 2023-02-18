@@ -235,7 +235,7 @@ const EasterHomeTextSection = () => {
             SERVE OUR CITY AND CAMPUS <br />
             UNDERSTAND THE GOSPEL <br />
             SEND PEOPLE OUT <br />
-            PRAY FOR THE LOST <br />
+            PASSION WEEK <br />
           </Text>
           <Text
             w={['80%', '60%']}
