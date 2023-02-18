@@ -256,7 +256,8 @@ const MainContainer = () => {
           exact
           path="/witness/home"
           permissions={['public']}
-          component={WitnessHomeContainer}
+          // component={WitnessHomeContainer}
+          component={Easter2023Container}
         />
         <PrivateRoute
           path="/witness/testimonies/text/:id"
