@@ -13,33 +13,6 @@ import { Link } from 'react-router-dom';
 import { DateTime } from 'luxon';
 import { prayerTopics } from './EasterPrayerModal';
 
-// const prayerTopics = [
-//   {
-//     index: 0,
-//     text: 'Joy in the journey',
-//   },
-//   {
-//     index: 1,
-//     text: 'Evangelize the Circle',
-//   },
-//   {
-//     index: 2,
-//     text: 'Serve our City and Campus',
-//   },
-//   {
-//     index: 3,
-//     text: 'Understand the Gospel',
-//   },
-//   {
-//     index: 4,
-//     text: "Send rayer "
-//   },
-//   {
-//     index: 4,
-//     text: 'Passion Week',
-//   },
-// ];
-
 const getPrayerTopic = (idx) => {
   let topic = prayerTopics.find((e) => e.index === idx).text;
   return topic;
