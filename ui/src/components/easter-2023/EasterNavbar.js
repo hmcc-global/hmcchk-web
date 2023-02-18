@@ -56,7 +56,7 @@ const EasterNavbar = () => {
             fontSize={{ base: '0.75em', sm: '1em', lg: '1.5em' }}
             fontWeight="bold"
           >
-            prayer wall
+            prayer
           </Button>
 
           <CircleIcon

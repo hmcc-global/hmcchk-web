@@ -37,14 +37,14 @@ const EasterContainer = (props) => {
           >
             <Container maxW="100%" centerContent>
               <Text
-                textStyle={'concrete_demo'}
+                fontFamily={'concrete_demo'}
                 textColor="#E60053"
                 fontWeight="1000"
                 lineHeight="110%"
                 fontSize={['20px', '40px']}
                 marginBottom="15px"
               >
-                PRAYER WALL
+                J-E-S-U-S Prayer Campaign
               </Text>
               <Text
                 w={['80%', '60%']}
