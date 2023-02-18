@@ -64,7 +64,7 @@ const EasterHomeTextSection = () => {
         <>
           <Container maxW="100%" centerContent>
             <Text
-              textStyle={'concrete_demo'}
+              fontFamily="concrete_demo"
               textColor="#E60053"
               fontWeight="1000"
               lineHeight="110%"
@@ -163,7 +163,7 @@ const EasterHomeTextSection = () => {
             variant="outline"
             display={{ base: 'none', md: 'flex' }}
           >
-            SEE ALL PRAYER
+            SEE ALL PRAYERS
           </Button>
           <Box display="flex" justifyContent="center">
             <Button
@@ -181,14 +181,14 @@ const EasterHomeTextSection = () => {
               variant="outline"
               display={{ base: 'flex', md: 'none' }}
             >
-              SEE ALL PRAYER
+              SEE ALL PRAYERS
             </Button>
           </Box>
         </>
       ) : (
         <Container maxW="100%" centerContent>
           <Text
-            textStyle={'concrete_demo'}
+            fontFamily={'concrete_demo'}
             textColor="#E60053"
             fontWeight="1000"
             lineHeight="110%"

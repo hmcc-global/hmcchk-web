@@ -33,7 +33,7 @@ const WitnessSection = () => {
             w="20%"
           />
           <Image
-            src={process.env.PUBLIC_URL + '/images/easter-2023/The passion.png'}
+            src={process.env.PUBLIC_URL + '/images/easter-2023/passion.png'}
             w="100%"
           />
           <Box py={'5'}>
