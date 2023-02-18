@@ -1,18 +1,11 @@
 import {
   Box,
   Container,
-  Tabs,
-  Tab,
-  TabPanel,
-  TabPanels,
-  TabList,
   Image,
   Text,
   Stack,
   Button,
-  Flex,
   Link,
-  VStack,
 } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import SubmitPrayerButton from './text-prayer/SubmitPrayerButton';
@@ -22,17 +15,7 @@ const EasterContainer = (props) => {
   return (
     <>
       <Container maxW="100vw" m={0} p={0}>
-        <Box
-          bgImage={[
-            `linear-gradient(0deg, rgba(256, 256, 256), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0)), 
-            url('${process.env.PUBLIC_URL}/images/witness/banner-mobile.png')`,
-            `linear-gradient(0deg, rgba(256, 256, 256), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0)), 
-            url('${process.env.PUBLIC_URL}/images/witness/banner-desktop.png')`,
-          ]}
-          bgSize="cover"
-          justifyContent="center"
-          py={[7, 5]}
-        >
+        <Box justifyContent="center" py={[7, 5]}>
           <Link href="/witness/home">
             <Button
               variant="link"
@@ -54,7 +37,7 @@ const EasterContainer = (props) => {
           >
             <Container maxW="100%" centerContent>
               <Text
-                textStyle={'playfair_display'}
+                textStyle={'concrete_demo'}
                 textColor="#E60053"
                 fontWeight="1000"
                 lineHeight="110%"

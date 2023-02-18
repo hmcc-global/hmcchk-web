@@ -41,6 +41,10 @@ export const prayerTopics = [
     index: 4,
     text: 'Send People Out',
   },
+  {
+    index: 5,
+    text: 'Passion Week',
+  },
 ];
 
 export const getPrayerTopic = (idx) => {
@@ -169,8 +173,8 @@ const EasterPrayerModal = ({ isOpen, onClose }) => {
         <Text color="#C11553">
           <i>
             <b>Thank you for sharing your prayer!</b>
-            <br /> Once reviewed, your prayer will be uploaded to the Prayer
-            Wall! Stay tuned :)
+            <br /> Your prayer will be uploaded to the Prayer Wall! Stay tuned
+            :)
           </i>
         </Text>
       </VStack>

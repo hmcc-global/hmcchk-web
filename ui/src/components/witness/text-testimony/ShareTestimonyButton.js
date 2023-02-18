@@ -18,6 +18,7 @@ const ShareTestimonyButton = () => {
         _hover={{ bg: 'white', color: '#8D2C72' }}
         onClick={onOpen}
         boxShadow="0px 8px 15px rgba(0, 0, 0, 0.4)"
+        position="inherit"
       >
         SHARE YOUR TESTIMONY
       </Button>

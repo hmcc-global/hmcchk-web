@@ -39,7 +39,11 @@ import WitnessHomeContainer from './witness/WitnessHomeContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import AdminPrayerContainer from './admin/prayer/AdminPrayerContainer';
 import TextDetails from './witness/text-testimony/TextDetails';
+
 import PrayerDetails from './witness/text-prayer/TextDetails';
+
+import Easter2023Container from './easter-2023/Easter2023Container';
+
 
 const MainContainer = () => {
   return (
@@ -167,6 +171,12 @@ const MainContainer = () => {
           permissions={['public']}
           component={ConfirmEmailPage}
         />
+         <PrivateRoute
+          exact
+          path="/easter"
+          permissions={['public']}
+          component={Easter2023Container}
+        />
         <PrivateRoute
           exact
           path="/complete-profile"
@@ -246,7 +256,8 @@ const MainContainer = () => {
           exact
           path="/witness/home"
           permissions={['public']}
-          component={WitnessHomeContainer}
+          // component={WitnessHomeContainer}
+          component={Easter2023Container}
         />
         <PrivateRoute
           path="/witness/testimonies/text/:id"

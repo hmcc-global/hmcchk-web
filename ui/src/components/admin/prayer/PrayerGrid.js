@@ -50,6 +50,12 @@ export default function PrayerGrid(props) {
     { headerName: 'Prayer', field: 'prayer' },
     { headerName: 'Name', field: 'fullName' },
     { headerName: 'Campus/Lifestage', field: 'lifestage' },
+    {
+      headerName: 'Created At',
+      valueGetter: (params) => {
+        return new Date(params.data.createdAt).toDateString();
+      },
+    },
   ];
 
   const defaultColDef = {

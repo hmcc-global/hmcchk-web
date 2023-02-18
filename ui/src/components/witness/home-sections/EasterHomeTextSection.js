@@ -64,7 +64,7 @@ const EasterHomeTextSection = () => {
         <>
           <Container maxW="100%" centerContent>
             <Text
-              textStyle={'playfair_display'}
+              textStyle={'concrete_demo'}
               textColor="#E60053"
               fontWeight="1000"
               lineHeight="110%"
@@ -188,7 +188,7 @@ const EasterHomeTextSection = () => {
       ) : (
         <Container maxW="100%" centerContent>
           <Text
-            textStyle={'playfair_display'}
+            textStyle={'concrete_demo'}
             textColor="#E60053"
             fontWeight="1000"
             lineHeight="110%"
@@ -227,7 +227,7 @@ const EasterHomeTextSection = () => {
             textColor="#E60053"
             fontWeight="700"
             fontSize={['12px', '20px']}
-            marginBottom="15px"
+            marginBottom="10"
             textAlign="center"
           >
             JOY IN THE JOURNEY <br />
@@ -235,22 +235,26 @@ const EasterHomeTextSection = () => {
             SERVE OUR CITY AND CAMPUS <br />
             UNDERSTAND THE GOSPEL <br />
             SEND PEOPLE OUT <br />
-            PRAY FOR THE LOST <br />
+            PASSION WEEK <br />
           </Text>
-          <Text
+          <Box
+            mx="auto"
+            alignContent="center"
             w={['80%', '60%']}
-            py={'6vw'}
+            marginTop="9"
+            py={'5'}
             textStyle={'dm_sans'}
-            fontWeight="400"
+            fontWeight="700"
             textColor="#000000"
             fontSize={['14px', '18px']}
             marginBottom="15px"
             textAlign="center"
+            bgColor="#EACFC4"
           >
             The Prayer Wall will be launched on February 22 (when Lent begins)!{' '}
             <br />
             Come back and check it out :)
-          </Text>
+          </Box>
         </Container>
       )}
     </Box>

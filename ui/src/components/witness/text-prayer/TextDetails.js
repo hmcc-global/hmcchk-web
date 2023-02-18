@@ -17,6 +17,7 @@ import { useHistory } from 'react-router';
 import { customAxios as axios } from '../../helpers/customAxios';
 import { parseDescription } from '../../helpers/parseDescription';
 import { DateTime } from 'luxon';
+import { getPrayerTopic } from './EasterPrayerModal';
 
 const TextDetails = (props) => {
   const [text, setTexts] = useState();
@@ -67,23 +68,13 @@ const TextDetails = (props) => {
               </Link>
               <VStack alignContent="left" alignItems="left">
                 <HStack>
-                  {/* {text.tags.map((tag) => (
-                    <Tag
-                      fontSize={'md'}
-                      borderRadius="full"
-                      p={3}
-                      colorScheme="gray"
-                    >
-                      {tag}
-                    </Tag>
-                  ))} */}
                   <Tag
                     fontSize={'md'}
                     borderRadius="full"
                     p={3}
                     colorScheme="gray"
                   >
-                    {text.topic}
+                    {getPrayerTopic(text.topic)}
                   </Tag>
                 </HStack>
                 <Stack spacing={8}>

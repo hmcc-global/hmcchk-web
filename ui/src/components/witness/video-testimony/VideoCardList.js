@@ -97,16 +97,12 @@ const VideoCardList = ({ allVideos }) => {
       <Grid
         mt={['6', '12']}
         mb={['6', '12']}
-        templateColumns={['repeat(1, 1fr)', 'repeat(3, 1fr)']}
+        templateColumns={['repeat(1, 1fr)', 'repeat(3, minmax(0, 1fr));']}
         gap={[3, 6]}
       >
         {currentVideos.length > 0 &&
           currentVideos.map((video, i) => (
-            <VideoCard
-              key={video.id}
-              videoData={video}
-              allVideos={allVideos}
-            />
+            <VideoCard key={video.id} videoData={video} allVideos={allVideos} />
           ))}
       </Grid>
       <Pagination
