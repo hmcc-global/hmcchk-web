@@ -9,29 +9,38 @@ const ErrorPage = (props) => {
   // Add new cases corresponding to the errorPages definition
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
-  const [formOpenTime, setFormOpenTime] = useState(history.location?.state?.availableAfter);
+  const [formOpenTime, setFormOpenTime] = useState(
+    history.location?.state?.availableAfter
+  );
 
   useEffect(() => {
     const validate = async () => {
-      const { location: { state } } = history;
+      const {
+        location: { state },
+      } = history;
       const { user } = props;
       if (state && state.id) {
         const result = await validateForm(state.id, user);
+
         if (result.data) {
           history.push(`/forms/${state.id}`);
           return;
-        } else if (result.pathname && result.pathname !== history.location.pathname) {
+        } else if (
+          result.pathname &&
+          result.pathname !== history.location.pathname
+        ) {
           history.push({
             pathname: result.pathname,
-            state: result.state
+            state: result.state,
           });
           return;
         } else if (result.pathname && result.pathname === '/form-will-open') {
           setFormOpenTime(result.state.availableAfter);
         }
       }
+
       setIsLoading(false);
-    }
+    };
 
     setIsLoading(true);
     validate();
@@ -71,13 +80,13 @@ const ErrorPage = (props) => {
     },
     'form-is-closed': {
       type: 'error',
-      primaryText: 
-        (history.location && history.location.state)
+      primaryText:
+        history.location && history.location.state
           ? `${history.location.state?.formName} Form unavailable`
           : null,
       boldedText:
         'This form is closed' +
-        (history.location?.state?.availableUntil !== '' 
+        (history.location?.state?.availableUntil !== ''
           ? ` at ${history.location?.state?.availableUntil}`
           : ''),
       buttonLink: '/',
@@ -96,8 +105,8 @@ const ErrorPage = (props) => {
     },
     'form-success': {
       type: 'success',
-      primaryText: 
-        (history.location && history.location.state)
+      primaryText:
+        history.location && history.location.state
           ? `${history.location.state?.formName}`
           : null,
       boldedText: 'Submitted successfully',
@@ -106,13 +115,23 @@ const ErrorPage = (props) => {
     },
     'form-success-logged-in': {
       type: 'success',
-      primaryText: 
-        (history.location && history.location.state)
+      primaryText:
+        history.location && history.location.state
           ? `${history.location.state?.formName}`
           : null,
       boldedText: 'Submitted successfully',
       buttonLink: '/profile',
       buttonText: 'Back to Profile',
+    },
+    'user-has-signedup': {
+      type: 'success',
+      primaryText:
+        'Your signup for ' +
+        `"${history.location.state?.formName}"` +
+        ' has been recorded',
+      boldedText: 'Please check your email to verify your sign-up details',
+      buttonLink: '/',
+      buttonText: 'Back to Homepage',
     },
   };
 
@@ -131,6 +150,8 @@ const ErrorPage = (props) => {
           return 'form-will-open';
         case '/form-success':
           return props.user.id ? 'form-success-logged-in' : 'form-success';
+        case '/user-has-signedup':
+          return 'user-has-signedup';
         default:
           return 'not-found';
       }
@@ -142,7 +163,7 @@ const ErrorPage = (props) => {
 
   return (
     <>
-      { !isLoading &&
+      {!isLoading && (
         <Box
           minH="100vh"
           bgImage={`url(${
@@ -170,7 +191,9 @@ const ErrorPage = (props) => {
                     ? AiFillCheckCircle
                     : MdErrorOutline
                 }
-                color={errorPages[key].type === 'success' ? '#4CAF50' : '#F89A9A'}
+                color={
+                  errorPages[key].type === 'success' ? '#4CAF50' : '#F89A9A'
+                }
                 w="8"
                 h="8"
               />
@@ -205,7 +228,7 @@ const ErrorPage = (props) => {
             </VStack>
           </Center>
         </Box>
-      }
+      )}
     </>
   );
 };

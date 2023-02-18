@@ -17,9 +17,9 @@ import { RiChat1Line } from 'react-icons/ri';
 import Faq from './Faq';
 
 const SUNDAY_CELEBRATION_LOCATION =
-  'Manulife Financial Centre Tower A, Shop 13, 1/F, Tower A, Kwun Tong';
+  '11/F, KOHO, 73-75 Hung To Road, Kwun Tong, Kowloon, Hong Kong';
 const SUNDAY_CELEBRATION_GOOGLE_MAPS_EMBED =
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.2102241954112!2d114.22135071553005!3d22.307887848255323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404014806001b5d%3A0x895969fc5cf86457!2sOrganize%20Kwun%20Tong!5e0!3m2!1sen!2shk!4v1628957852778!5m2!1sen!2shk';
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.1840730169483!2d114.22195441495488!3d22.308877185319144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34040145ab278021%3A0xf168be9bbe8b1740!2sKOHO!5e0!3m2!1sen!2shk!4v1670250935799!5m2!1sen!2shk';
 
 const VisitUsPage = (props) => {
   return (
@@ -72,11 +72,11 @@ const VisitUsPage = (props) => {
           >
             Ways to enjoy Sunday Celebration
           </Heading>
-          <Flex flexDir={["column", "row"]}>
+          <Flex flexDir={['column', 'row']}>
             <VStack
               flex={4.25}
               align="stretch"
-              textAlign={["center", "left"]}
+              textAlign={['center', 'left']}
               mr={[0, 6]}
               mb={[6, 0]}
             >
@@ -88,11 +88,11 @@ const VisitUsPage = (props) => {
               >
                 IN-PERSON
               </Heading>
-              <Text fontSize={["2xl", "2em"]} fontWeight={700}>
+              <Text fontSize={['2xl', '2em']} fontWeight={700}>
                 Sundays @ 10 AM
               </Text>
               <Text
-                fontSize={["1.125em", "2xl"]}
+                fontSize={['1.125em', '2xl']}
                 fontWeight={700}
                 px={[6, 0]}
                 pb={4}
@@ -100,15 +100,15 @@ const VisitUsPage = (props) => {
                 {SUNDAY_CELEBRATION_LOCATION}
                 <br />
                 <Link
-                  href="https://tinyurl.com/directions-organize"
+                  href="https://goo.gl/maps/zdHBeKk39WhF1tSP9"
                   color="#0E66CC"
                   isExternal
                 >
-                  <Text as="u">tinyurl.com/directions-organize</Text>
+                  <Text as="u">tinyurl.com/directions-KOHO</Text>
                 </Link>
               </Text>
               <Spacer />
-              <Center w="100%" px={1}>
+              {/* <Center w="100%" px={1}>
                 <LinkBox
                   style={{ backgroundOrigin: "border-box" }}
                   as="button"
@@ -131,10 +131,10 @@ const VisitUsPage = (props) => {
                     Sign Up for In-person Sunday Celebration
                   </LinkOverlay>
                 </LinkBox>
-              </Center>
-              <Text textAlign="center" fontSize="sm">
+              </Center> */}
+              {/* <Text textAlign="center" fontSize="sm">
                 *Pre-registration opens every Monday at 8PM
-              </Text>
+              </Text> */}
             </VStack>
             <AspectRatio flex={5.75} ratio={16 / 9}>
               <iframe

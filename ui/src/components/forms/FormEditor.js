@@ -152,8 +152,17 @@ const FormEditor = (props) => {
   const onSaveToDB = async (e) => {
     setSaveStatus(true);
     try {
+      let paymentCcEmail = [];
+      if (formInformation.paymentCcEmail && formInformation.paymentCcEmail !== '') {
+        paymentCcEmail = formInformation.paymentCcEmail.trim().split(';')
+      }
+
       let formToSave = {
         formName: formInformation.formName,
+        isPaymentRequired: formInformation.isPaymentRequired,
+        paymentConfirmationEmailTemplate: formInformation.paymentConfirmationEmailTemplate,
+        paymentEmailSubject: formInformation.paymentEmailSubject,
+        paymentCcEmail: paymentCcEmail,
         formDescription: formInformation.formDescription,
         formImage: formInformation.formImage,
         requireLogin: formInformation.requireLogin,
@@ -185,7 +194,7 @@ const FormEditor = (props) => {
 
   useEffect(() => {
     if (existingFormFieldsData) {
-      if (existingFormFieldsData.formFields[0].fieldType === 'prefill') {
+      if (existingFormFieldsData.formFields[0]?.fieldType === 'prefill') {
         let fields = existingFormFieldsData.formFields[0].options;
         fields.forEach((field) => {
           setValuePrefill(field + 'Checkbox', true);

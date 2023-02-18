@@ -75,7 +75,7 @@ const WitnessHomeVideoSection = () => {
         ml={['3', '5']}
         mt={['6', '12']}
         mb={['6', '12']}
-        templateColumns={['repeat(1, 1fr)', 'repeat(3, 1fr)']}
+        templateColumns={['repeat(1, 1fr)', 'repeat(3, minmax(0, 1fr));']}
         gap={[3, 6]}
       >
         {videos.length > 0 &&

@@ -48,9 +48,10 @@ module.exports.policies = {
   'forms/get-form': true,
   'forms/post-create-submission': true,
   'forms/get-submission': ['isLoggedIn', 'aboveTech'],
+  'forms/get-user-submission': ['isLoggedIn'],
 
   // Last Updated
-  'lastUpdated/get-last-updated': ['isLoggedIn', 'aboveAdmin'],
+  'lastUpdated/get-last-updated': ['isLoggedIn', 'aboveTech'],
 
   // Live Sermon
   'liveSermon/get-live-sermon': true,
@@ -66,6 +67,9 @@ module.exports.policies = {
 
   // Pages
   'pages/*': true,
+
+  // PaymentData
+  'paymentData/*': ['isLoggedIn', 'aboveAdmin'],
 
   // PopUp
   'popup/get-published-popup': true,

@@ -17,6 +17,7 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalContent,
+  Divider,
 } from '@chakra-ui/react';
 import FormEditor from './FormEditor';
 import { useForm, Controller } from 'react-hook-form';
@@ -42,31 +43,60 @@ const FormEditorContainer = (props) => {
   const [formAvailableUntil, setFormAvailableUntil] = useState(null);
   const [formPeriodInvalid, setFormPeriodInvalid] = useState(false);
 
+  // Payment variables
+  const [isPaymentRequired, setIsPaymentRequired] = useState(false);
+  const [
+    paymentConfirmationEmailTemplate,
+    setPaymentConfirmationEmailTemplate,
+  ] = useState('');
+  const [paymentEmailSubject, setPaymentEmailSubject] = useState('');
+  const [paymentCcEmail, setPaymentCcEmail] = useState('');
+
   const resetFormEditorCallback = () => {
     reset();
     setValue('formName', null);
+    setValue('isPaymentRequired', false);
+    setValue('paymentConfirmationEmailTemplate', '');
+    setValue('paymentEmailSubject', '');
+    setValue('paymentCcEmail', '');
     setValue('formDescription', null);
     setValue('formImage', null);
     setValue('requireLogin', true);
     setValue('successEmailTemplate', 'form-default-success');
     setValue('customEmailSubject', '');
-    setValue('formAvailableFrom', null);
-    setValue('formAvailableUntil', null);
+    setValue('formAvailableFrom', '');
+    setValue('formAvailableUntil', '');
     setFormName(null);
-    setFormDescription(null);
+    setIsPaymentRequired(false);
+    setPaymentConfirmationEmailTemplate(null);
+    setPaymentEmailSubject('');
+    setPaymentCcEmail('');
+    setFormDescription('');
     setFormImage(null);
     setRequireLogin(true);
     setSuccessEmailTemplate('form-default-success');
     setCustomEmailSubject('');
-    setFormAvailableFrom(null);
-    setFormAvailableUntil(null);
+    setFormAvailableFrom('');
+    setFormAvailableUntil('');
     setIsOpen(false);
     formManagerCallback();
   };
 
   const setFormManagerElements = (data) => {
     if (data) {
+      let paymentCcEmail = data.paymentCcEmail;
+      if (data.paymentCcEmail && Array.isArray(data.paymentCcEmail)) {
+        paymentCcEmail = data.paymentCcEmail.join(';');
+      }
+
       setValue('formName', data.formName);
+      setValue('isPaymentRequired', data.isPaymentRequired);
+      setValue(
+        'paymentConfirmationEmailTemplate',
+        data.paymentConfirmationEmailTemplate
+      );
+      setValue('paymentEmailSubject', data.paymentEmailSubject);
+      setValue('paymentCcEmail', paymentCcEmail);
       setValue('formDescription', data.formDescription);
       setValue('formImage', data.formImage);
       setValue('requireLogin', data.requireLogin);
@@ -77,6 +107,12 @@ const FormEditorContainer = (props) => {
 
       // Update React State for child props
       setFormName(data.formName);
+      setIsPaymentRequired(data.isPaymentRequired);
+      setPaymentConfirmationEmailTemplate(
+        data.paymentConfirmationEmailTemplate
+      );
+      setPaymentEmailSubject(data.paymentEmailSubject);
+      setPaymentCcEmail(paymentCcEmail);
       setFormDescription(data.formDescription);
       setFormImage(data.formImage);
       setRequireLogin(data.requireLogin);
@@ -98,8 +134,6 @@ const FormEditorContainer = (props) => {
   useEffect(() => {
     setFormManagerElements(editFormData);
   }, [editFormData]);
-
-
 
   useEffect(() => {
     if (formAvailableFrom && formAvailableUntil) {
@@ -126,6 +160,85 @@ const FormEditorContainer = (props) => {
               </Heading>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Stack spacing="2">
+                  <Heading as="h4" size="md">
+                    {' '}
+                    Paid Event Details{' '}
+                  </Heading>
+                  <Divider />
+                  <FormControl>
+                    <FormLabel> Is Payment Required? </FormLabel>
+                    <Controller
+                      control={control}
+                      name="isPaymentRequired"
+                      defaultValue={false}
+                      render={({ field: { onChange, value, ref } }) => (
+                        <Switch
+                          onChange={(e) => {
+                            setIsPaymentRequired(e.target.checked);
+                            onChange(e);
+                          }}
+                          ref={ref}
+                          isChecked={value}
+                          disabled={formName != null}
+                        >
+                          {value ? 'Yes' : 'No'}
+                        </Switch>
+                      )}
+                    />
+                  </FormControl>
+                  {isPaymentRequired && (
+                    <>
+                      <FormControl
+                        isInvalid={errors['paymentConfirmationEmailTemp']}
+                        isRequired={isPaymentRequired}
+                      >
+                        <FormLabel>
+                          {' '}
+                          Payment Confirmation Email Template
+                        </FormLabel>
+                        <Select
+                          {...register('paymentConfirmationEmailTemplate', {
+                            required: isPaymentRequired,
+                          })}
+                          placeholder="Select option"
+                        >
+                          {/* To add more email template, please define the value and add the template here */}
+                          <option value="email-retreat-payment-success">
+                            Life Defined Payment Confirmation
+                          </option>
+                          <option value="email-retreat-donation-payment-success">
+                            Life Defined Donation Payment Confirmation
+                          </option>
+                        </Select>
+                        <FormErrorMessage>
+                          {errors['paymentConfirmationEmailTemplate'] &&
+                            'Field type is required'}
+                        </FormErrorMessage>
+                      </FormControl>
+                      <FormControl>
+                        <FormLabel>Payment Email Subject</FormLabel>
+                        <Input {...register('paymentEmailSubject')} />
+                        <FormHelperText>
+                          If you need a custom subject for the payment email
+                        </FormHelperText>
+                      </FormControl>
+                      <FormControl
+                        isInvalid={errors['paymentCcEmail']}
+                        isRequired={isPaymentRequired}
+                      >
+                        <FormLabel>Payment CC Email</FormLabel>
+                        <Input
+                          {...register('paymentCcEmail')}
+                          placeholder={'john@gmail.com;doe@gmail.com'}
+                        />
+                        <FormHelperText>
+                          *All Payment emails will be CC'ed to these emails
+                          (addressees will be BCC'ed). Separate CC emails with ;
+                        </FormHelperText>
+                      </FormControl>
+                    </>
+                  )}
+                  <Divider />
                   <FormControl isInvalid={errors['formName']}>
                     <FormLabel>Form Name</FormLabel>
                     <Input
@@ -173,7 +286,10 @@ const FormEditorContainer = (props) => {
                     >
                       {/* To add more email template, please define the value and add the template here */}
                       <option value="form-default-success">Default</option>
-                      <option value="form-retreat-success">Retreat</option>
+                      <option value="form-retreat-success">Retreat 2023</option>
+                      <option value="form-retreat-donation-success">
+                        Retreat 2023 Donation
+                      </option>
                       <option value="form-ignite-success">!gnite</option>
                     </Select>
                     <FormErrorMessage>
@@ -222,6 +338,7 @@ const FormEditorContainer = (props) => {
               <FormEditor
                 formInformation={{
                   formName: formName,
+                  isPaymentRequired: isPaymentRequired,
                   formDescription: formDescription,
                   formImage: formImage,
                   requireLogin: requireLogin,
@@ -229,6 +346,10 @@ const FormEditorContainer = (props) => {
                   customEmailSubject: customEmailSubject,
                   formAvailableFrom: formAvailableFrom,
                   formAvailableUntil: formAvailableUntil,
+                  paymentConfirmationEmailTemplate:
+                    paymentConfirmationEmailTemplate,
+                  paymentEmailSubject: paymentEmailSubject,
+                  paymentCcEmail: paymentCcEmail,
                 }}
                 existingFormFieldsData={editFormData}
                 resetFormEditorCallback={resetFormEditorCallback}
