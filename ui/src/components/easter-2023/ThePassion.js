@@ -32,9 +32,9 @@ import ShareTestimonyButton from '../witness/text-testimony/ShareTestimonyButton
          <Box
           bgImage={[
             `
-          url('${process.env.PUBLIC_URL}/images/easter-2023/thepassion.png')`,
+          url('${process.env.PUBLIC_URL}/images/easter-2023/passion-squiggle.gif')`,
             ` 
-          url('${process.env.PUBLIC_URL}/images/easter-2023/thepassion.png')`,
+          url('${process.env.PUBLIC_URL}/images/easter-2023/passion-squiggle.gif')`,
           ]}
           bgPosition="center"
           bgSize="cover"
@@ -61,8 +61,8 @@ import ShareTestimonyButton from '../witness/text-testimony/ShareTestimonyButton
                <Image
             mr="auto"
             ml="auto"
-            src={process.env.PUBLIC_URL + '/images/easter-2023/desktop-thepassion-text.png'}
-            maxWidth={['90%', '60%']}
+            src={process.env.PUBLIC_URL + '/images/easter-2023/the-passion.png'}
+            maxWidth={['90%', '80%']}
           />
             </Text>
             <Flex justifyContent="center">
@@ -85,6 +85,13 @@ import ShareTestimonyButton from '../witness/text-testimony/ShareTestimonyButton
               </VStack>
             </Flex>
           </Box>
+          <Image
+            paddingTop = '10'
+            mr="auto"
+            ml="auto"
+            src={process.env.PUBLIC_URL + '/images/easter-2023/EASTER_2023.png'}
+            w={['40%', '20%']}
+          />
         </Box>
       </Container>
     );
