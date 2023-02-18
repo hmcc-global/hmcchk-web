@@ -100,6 +100,7 @@ const TextCard = ({ textData, allText }) => {
                 noOfLines={[4, 3]}
                 color="black"
                 fontWeight={500}
+                textAlign="left"
               >
                 {textData.prayer}
               </Text>

@@ -28,6 +28,7 @@ import { parseDescription } from '../helpers/parseDescription';
 
 const EventCard = (props) => {
   const { eventData } = props;
+  console.log(eventData);
 
   const [isOpen, setIsOpen] = useState(false);
 
