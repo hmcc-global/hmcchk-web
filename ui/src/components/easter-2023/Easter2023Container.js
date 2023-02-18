@@ -1,18 +1,7 @@
 import {
     Container,
-    Text,
     VStack,
     Box,
-    Tabs,
-    Tab,
-    TabPanel,
-    TabPanels,
-    TabList,
-    Image,
-    Stack,
-    Button,
-    Flex,
-    Link,
     Center,
     StackDivider
   } from '@chakra-ui/react';
@@ -22,7 +11,7 @@ import {
   import EasterStory from './EasterStory';
   import EasterNavbar from './EasterNavbar';
   import EasterHomeTextSection from './../witness/home-sections/EasterHomeTextSection';
-import WitnessHomeContainer from './../witness/WitnessHomeContainer';
+
   
   const Easter2023Container = (props) => {
     //To do: implement navbar, buttons, testimony section
@@ -39,7 +28,7 @@ import WitnessHomeContainer from './../witness/WitnessHomeContainer';
         align='stretch'
         >
         <Box>   
-        <ThePassion/>
+          <ThePassion/>
         </Box>
         <Box
         minHeight = 'fit-content'
@@ -54,7 +43,7 @@ import WitnessHomeContainer from './../witness/WitnessHomeContainer';
         bgImage={process.env.PUBLIC_URL + '/images/easter-2023/wigglydesktop.png'}>
         
         <Box 
-        sx={{position:'-webkit-sticky',position:"sticky", top:'0', bgColor:'#FFF7F1'}}
+        sx={{position:'-webkit-sticky',position:"sticky", top:'0', bgColor:'#FFF7F1'}} //sticky header function
         >
           <EasterNavbar/>
         </Box>
@@ -63,17 +52,16 @@ import WitnessHomeContainer from './../witness/WitnessHomeContainer';
         alignContent = 'center'
         backgroundColor = 'none'
         >
-        <div id="prayer-wall"><Box height='20'></Box></div>
-        <EasterHomeTextSection />
-        <div id="easter-story"></div><EasterStory/>
-        
+          <div id="prayer-wall"><Box height='20'></Box></div>
+          <EasterHomeTextSection />
+          <div id="easter-story"></div><EasterStory/>
           <Center>
           <EasterCalendar/>
           </Center>
-      
-        <div id="easter-witness">
-          {/* <WitnessHomeContainer/> */}
-        </div>
+        
+          <div id="easter-witness">
+            {/* <WitnessHomeContainer/> */}
+          </div>
         </Box>
         </Box>
         </VStack>

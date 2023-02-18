@@ -1,44 +1,13 @@
 import {
-    Container,
     Text,
     VStack,
     Box,
-    Tabs,
-    Tab,
-    TabPanel,
-    TabPanels,
-    TabList,
-    Image,
-    Stack,
-    Button,
-    Flex,
-    Link,
-    Center,
-    Spacer,
     Heading,
-    Fade,
-    useBoolean,
-    useDisclosure,
-    ScaleFade,
   } from '@chakra-ui/react';
 
-import React,{useRef} from "react";
-
-
-  import {useInViewport} from 'react-in-viewport';
-  import { AnimationOnScroll } from 'react-animation-on-scroll';
+import React from "react";
 
   const EasterStory = () => {
-    const { isOpen, onToggle } = useDisclosure()
-    const ref = useRef(null);
-    const ref2 = useRef(null);
-    const{enterCount} = useInViewport(
-        ref,
-        {rootMargin: "-300px"},
-        {disconnectOnLeave: false},
-        {}
-    );
-   
     return (
         <VStack w="100%" spacing="3vw" py="3vw" paddingLeft = '10%' paddingRight = '10%' paddingBottom = '0'>
         <Box

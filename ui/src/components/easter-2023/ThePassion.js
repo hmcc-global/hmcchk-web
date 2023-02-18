@@ -3,26 +3,10 @@ import {
     Text,
     VStack,
     Box,
-    Tabs,
-    Tab,
-    TabPanel,
-    TabPanels,
-    TabList,
     Image,
-    Stack,
-    Button,
     Flex,
-    Link,
   } from '@chakra-ui/react';
-  import { TriangleDownIcon } from '@chakra-ui/icons';
-import { ArrowBackIcon } from '@chakra-ui/icons';
-import ShareTestimonyButton from '../witness/text-testimony/ShareTestimonyButton';
 
-  import { Fragment, useState } from 'react';
-  import { Select } from '@chakra-ui/select';
-  import { Route } from 'react-router-dom';
-
-  
   const ThePassion = (props) => {
   
     //To do: implement navbar, menu and footer links to individual sections("our story", "vision mision" etc)
@@ -75,7 +59,6 @@ import ShareTestimonyButton from '../witness/text-testimony/ShareTestimonyButton
                   textStyle={'inter'}
                   as='i'
                   fontSize={['16px', '18px']}
-                  
                 >
                  This Passion week, we want to simply remember and commemorate Jesus’ passion that He 
                  showed through his sacrifice for us by dying on the cross, so that we can passionately live our 
