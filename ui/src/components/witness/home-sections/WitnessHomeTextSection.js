@@ -75,13 +75,28 @@ const WitnessHomeTextSection = () => {
         mb={['6', '12']}
         templateColumns={['repeat(1, 1fr)', 'repeat(3, minmax(0, 1fr));']}
         gap={[3, 6]}
+        display={{ base: 'none', md: 'grid' }}
       >
         {texts.length > 0 &&
           texts
-            .slice(0, 3)
+            .slice(0, 6)
             .map((text) => <TextCard key={text.id} textData={text} />)}
       </Grid>
-      <Box display="flex" justifyContent="center">
+      <Grid
+        mr={['3', '5']}
+        ml={['3', '5']}
+        mt={['6', '12']}
+        mb={['6', '12']}
+        templateColumns={['repeat(2, 1fr)', 'repeat(3, minmax(0, 1fr));']}
+        gap={[3, 6]}
+        display={{ base: 'grid', md: 'none' }}
+      >
+        {texts.length > 0 &&
+          texts
+            .slice(0, 4)
+            .map((text) => <TextCard key={text.id} textData={text} />)}
+      </Grid>
+      <Box display="flex" justifyContent="center" mb="6">
         <Button
           textStyle="dm_sans"
           as={Link}

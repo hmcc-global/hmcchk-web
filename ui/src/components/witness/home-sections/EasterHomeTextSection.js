@@ -19,7 +19,7 @@ const EasterHomeTextSection = () => {
   const [texts, setTexts] = useState([]);
   const [eventDisplay, setEventDisplay] = useState(false);
 
-  const endDate = DateTime.fromISO('2023-02-19T00:01');
+  const endDate = DateTime.fromISO('2023-02-22T00:01');
 
   const timeLeft = () => {
     let display = endDate.diffNow(['hours', 'minutes']);
@@ -64,7 +64,7 @@ const EasterHomeTextSection = () => {
         <>
           <Container maxW="100%" centerContent>
             <Text
-              textStyle={'playfair_display'}
+              textStyle={'concrete_demo'}
               textColor="#E60053"
               fontWeight="1000"
               lineHeight="110%"
@@ -188,7 +188,7 @@ const EasterHomeTextSection = () => {
       ) : (
         <Container maxW="100%" centerContent>
           <Text
-            textStyle={'playfair_display'}
+            textStyle={'concrete_demo'}
             textColor="#E60053"
             fontWeight="1000"
             lineHeight="110%"

@@ -81,7 +81,7 @@ const TextCard = ({ textData, allText }) => {
             </AspectRatio>
           </>
         ) : null}
-        <Box p={[4]} w={{ base: '42vw', md: '25vw', lg: '28vw' }}>
+        <Box p={4} w={{ base: '45vw', sm: '43vw', md: '45vw', lg: '30vw' }}>
           <VStack alignItems="left" spacing={2}>
             <Wrap>
               <Tag
