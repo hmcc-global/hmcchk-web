@@ -59,7 +59,7 @@ const TextCard = ({ textData, allText }) => {
             </AspectRatio>
           </>
         ) : null}
-        <Box p={[4]} w={['42vw', '25vw']}>
+        <Box margin={[3,3,3,4]} w={['42vw', '25vw']}>
           <VStack alignItems="left" spacing={2}>
             <Wrap>
               {Tags.map((tag) => {
