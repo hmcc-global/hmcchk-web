@@ -39,7 +39,7 @@ const easter = {
 
 const EasterCalendar = () => {
   return (
-    <Flex flexWrap="wrap" gap="0" bgColor = 'none'>
+    <Flex flexWrap="wrap" gap="0" bgColor="none">
       <Box
         flex={1}
         //borderWidth="1px"
@@ -59,7 +59,7 @@ const EasterCalendar = () => {
           fontSize={['2em', '3.5em']}
           color="#67298E"
           fontWeight={700}
-          fontFamily="playfair_display"
+          fontFamily="concrete_demo"
         >
           GOOD FRIDAY
         </Heading>
@@ -69,23 +69,30 @@ const EasterCalendar = () => {
           color="#67298E"
           fontWeight={700}
         >
-          <Text textStyle={'playfair_display'} fontWeight="black">
+          <Text fontFamily={'concrete_demo'} fontWeight="black">
             SERVICE
           </Text>
         </Heading>
         <Text
-          fontSize={['1.2em', '1.8em']}
+          textStyle={'dm_sans'}
+          fontSize={['16px', '20px']}
           color="#7B0D0D"
           fontWeight={800}
           paddingTop={{ base: 3, sm: 4, md: 5, lg: 6 }}
         >
           Friday, 7 Apr 2023
         </Text>
-        <Text fontSize={['1.2em', '1.8em']} color="#7B0D0D" fontWeight={800}>
+        <Text
+          textStyle={'dm_sans'}
+          fontSize={['16px', '20px']}
+          color="#7B0D0D"
+          fontWeight={800}
+        >
           8:00 PM
         </Text>
         <Text
-          fontSize={['1.2em', '1.8em']}
+          textStyle={'dm_sans'}
+          fontSize={['16px', '20px']}
           color="#7B0D0D"
           fontWeight={800}
           paddingBottom={{ base: 3, sm: 4, md: 5, lg: 6 }}
@@ -93,6 +100,7 @@ const EasterCalendar = () => {
           TBA
         </Text>
         <Button
+          textStyle={'dm_sans'}
           bgColor="#67298E"
           color="#FFFFFF"
           paddingTop={{ base: 23, sm: 23, md: 25, lg: 29 }}
@@ -103,8 +111,8 @@ const EasterCalendar = () => {
           variant="outline"
           w={[200, 400]}
           borderRadius={10}
-          fontSize={['1.2em', '1.8em']}
-          position = 'inherit'
+          fontSize={['16px', '20px']}
+          position="inherit"
         >
           Add to Calendar
         </Button>
@@ -127,7 +135,7 @@ const EasterCalendar = () => {
           fontSize={['2em', '3.5em']}
           color="#FF619F"
           fontWeight={700}
-          fontFamily="Playfair"
+          fontFamily="concrete_demo"
         >
           EASTER
         </Heading>
@@ -136,23 +144,30 @@ const EasterCalendar = () => {
           fontSize={['2em', '3.5em']}
           color="#FF619F"
           fontWeight={700}
-          fontFamily="Playfair"
+          fontFamily="concrete_demo"
         >
           CELEBRATION
         </Heading>
         <Text
-          fontSize={['1.2em', '1.8em']}
+          textStyle={'dm_sans'}
+          fontSize={['16px', '20px']}
           color="#7B0D0D"
           fontWeight={800}
           paddingTop={{ base: 3, sm: 4, md: 5, lg: 6 }}
         >
           Sunday, 9 Apr 2023
         </Text>
-        <Text fontSize={['1.2em', '1.8em']} color="#7B0D0D" fontWeight={800}>
+        <Text
+          textStyle={'dm_sans'}
+          fontSize={['16px', '20px']}
+          color="#7B0D0D"
+          fontWeight={800}
+        >
           10:00 AM
         </Text>
         <Text
-          fontSize={['1.2em', '1.8em']}
+          textStyle={'dm_sans'}
+          fontSize={['16px', '20px']}
           color="#7B0D0D"
           fontWeight={800}
           paddingBottom={{ base: 3, sm: 4, md: 5, lg: 6 }}
@@ -160,6 +175,7 @@ const EasterCalendar = () => {
           TBA
         </Text>
         <Button
+          textStyle={'dm_sans'}
           bgColor="#FF619F"
           color="#FFFFFF"
           paddingTop={{ base: 23, sm: 23, md: 25, lg: 29 }}
@@ -170,8 +186,8 @@ const EasterCalendar = () => {
           variant="outline"
           w={[200, 400]}
           borderRadius={10}
-          fontSize={['1.2em', '1.8em']}
-          position = 'inherit'
+          fontSize={['16px', '20px']}
+          position="inherit"
         >
           Add to Calendar
         </Button>

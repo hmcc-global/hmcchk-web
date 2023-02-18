@@ -6,12 +6,6 @@ import {
   Stack,
   Flex,
   Center,
-  StackDivider,
-  Tabs,
-  Tab,
-  TabPanel,
-  TabPanels,
-  TabList,
   Divider,
 } from '@chakra-ui/react';
 
@@ -26,24 +20,29 @@ import WitnessHomeTextSection from '../witness/home-sections/WitnessHomeTextSect
 
 const Easter2023Container = (props) => {
   //To do: implement navbar, buttons, testimony section
-  const getOpenTab = () => {
-    const resource = props.match.params.resource;
-    if (resource === 'videos') {
-      return 0;
-    } else {
-      return 1;
-    }
-  };
-
   return (
-    <Container maxW="100%" minHeight="fill" p={0} m={0}>
-      <VStack
-        divider={<StackDivider borderColor="gray.200" />}
-        spacing={0}
-        align="stretch"
-      >
+    <Container
+      maxW="100%"
+      minHeight="fill"
+      p={0}
+      m={0}
+      bgImage={process.env.PUBLIC_URL + '/images/easter-2023/wigglydesktop.png'}
+    >
+      <VStack spacing={0} align="stretch">
         <Box>
           <ThePassion />
+        </Box>
+        <Box
+          sx={{
+            position: '-webkit-sticky',
+            position: 'sticky',
+            top: '0',
+            bgColor: '#FFF7F1',
+            zIndex: '1',
+            textAlign: 'center',
+          }}
+        >
+          <EasterNavbar />
         </Box>
         <Box
           minHeight="fit-content"
@@ -59,17 +58,6 @@ const Easter2023Container = (props) => {
             process.env.PUBLIC_URL + '/images/easter-2023/wigglydesktop.png'
           }
         >
-          <Box
-            sx={{
-              position: '-webkit-sticky',
-              position: 'sticky',
-              top: '0',
-              bgColor: '#FFF7F1',
-            }}
-          >
-            <EasterNavbar />
-          </Box>
-
           <Box alignContent="center" backgroundColor="none">
             <div id="prayer-wall">
               <Box height="20"></Box>
@@ -90,7 +78,7 @@ const Easter2023Container = (props) => {
                 mb={[5, 20]}
               >
                 <Flex w="100%" justifyContent="center" direction="column">
-                  <Box w={['85%', '90%']} ml={[0, 20]} mx="auto">
+                  <Box w={['85%', '90%']} mx="auto">
                     <Text
                       textColor="#8D2C72"
                       fontWeight="400"
@@ -141,22 +129,23 @@ const Easter2023Container = (props) => {
                       <ShareTestimonyButton />
                     </Box>
                   </Box>
-                  <Container maxW="100%" p={[0, 10]} centerContent>
-                    <WitnessHomeVideoSection />
-                    <Divider
-                      orientation="horizontal"
-                      my={10}
-                      w="25%"
-                      height="3px"
-                      backgroundColor="#DAC7BC"
-                    />
-                    <WitnessHomeTextSection />
-                  </Container>
                 </Flex>
               </Stack>
             </div>
           </Box>
         </Box>
+        <Container maxW="100%" p={[0, 10]} bgColor="#FFF7F1">
+          <WitnessHomeVideoSection />
+          <Divider
+            orientation="horizontal"
+            my={10}
+            w="25%"
+            height="3px"
+            backgroundColor="#DAC7BC"
+            mx="auto"
+          />
+          <WitnessHomeTextSection />
+        </Container>
       </VStack>
     </Container>
   );

@@ -66,6 +66,7 @@ const WitnessHomeVideoSection = () => {
           size="lg"
           variant="outline"
           display={{ base: 'none', md: 'flex' }}
+          position="inherit"
         >
           WATCH ALL VIDEO TESTIMONIES
         </Button>
@@ -77,6 +78,7 @@ const WitnessHomeVideoSection = () => {
         mb={['6', '12']}
         templateColumns={['repeat(1, 1fr)', 'repeat(3, minmax(0, 1fr));']}
         gap={[3, 6]}
+        position="inherit"
       >
         {videos.length > 0 &&
           videos
@@ -97,6 +99,7 @@ const WitnessHomeVideoSection = () => {
           size="md"
           variant="outline"
           display={{ base: 'flex', md: 'none' }}
+          position="inherit"
         >
           WATCH ALL VIDEO TESTIMONIES
         </Button>
