@@ -19,7 +19,7 @@ const EasterHomeTextSection = () => {
   const [texts, setTexts] = useState([]);
   const [eventDisplay, setEventDisplay] = useState(false);
 
-  const endDate = DateTime.fromISO('2023-02-22T00:01');
+  const endDate = DateTime.fromISO('2023-02-19T00:01');
 
   const timeLeft = () => {
     let display = endDate.diffNow(['hours', 'minutes']);
@@ -227,7 +227,7 @@ const EasterHomeTextSection = () => {
             textColor="#E60053"
             fontWeight="700"
             fontSize={['12px', '20px']}
-            marginBottom="15px"
+            marginBottom="10"
             textAlign="center"
           >
             JOY IN THE JOURNEY <br />
@@ -237,20 +237,24 @@ const EasterHomeTextSection = () => {
             SEND PEOPLE OUT <br />
             PASSION WEEK <br />
           </Text>
-          <Text
+          <Box
+            mx="auto"
+            alignContent="center"
             w={['80%', '60%']}
-            py={'6vw'}
+            marginTop="9"
+            py={'5'}
             textStyle={'dm_sans'}
-            fontWeight="400"
+            fontWeight="700"
             textColor="#000000"
             fontSize={['14px', '18px']}
             marginBottom="15px"
             textAlign="center"
+            bgColor="#EACFC4"
           >
             The Prayer Wall will be launched on February 22 (when Lent begins)!{' '}
             <br />
             Come back and check it out :)
-          </Text>
+          </Box>
         </Container>
       )}
     </Box>
