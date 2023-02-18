@@ -29,6 +29,10 @@ export const prayerTopics = [
     index: 4,
     text: 'Send People Out',
   },
+  {
+    index: 5,
+    text: 'Passion Week',
+  },
 ];
 
 export const getPrayerTopic = (idx) => {

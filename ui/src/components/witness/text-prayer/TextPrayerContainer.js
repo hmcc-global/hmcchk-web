@@ -28,7 +28,7 @@ const TextPrayerContainer = (props) => {
   };
 
   return (
-    <Container maxW="100%" padding={[1, 2]}>
+    <Container maxW="100%" padding={[1, 2]} px={['3', '6']}>
       <TextCardList allText={texts} />
     </Container>
   );

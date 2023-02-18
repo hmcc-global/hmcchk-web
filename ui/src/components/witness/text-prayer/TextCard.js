@@ -11,29 +11,34 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { DateTime } from 'luxon';
+import { prayerTopics } from './EasterPrayerModal';
 
-const prayerTopics = [
-  {
-    index: 0,
-    text: 'Joy in the journey',
-  },
-  {
-    index: 1,
-    text: 'Evangelize the Circle',
-  },
-  {
-    index: 2,
-    text: 'Serve our City and Campus',
-  },
-  {
-    index: 3,
-    text: 'Understand the Gospel',
-  },
-  {
-    index: 4,
-    text: 'Send People Out',
-  },
-];
+// const prayerTopics = [
+//   {
+//     index: 0,
+//     text: 'Joy in the journey',
+//   },
+//   {
+//     index: 1,
+//     text: 'Evangelize the Circle',
+//   },
+//   {
+//     index: 2,
+//     text: 'Serve our City and Campus',
+//   },
+//   {
+//     index: 3,
+//     text: 'Understand the Gospel',
+//   },
+//   {
+//     index: 4,
+//     text: "Send rayer "
+//   },
+//   {
+//     index: 4,
+//     text: 'Passion Week',
+//   },
+// ];
 
 const getPrayerTopic = (idx) => {
   let topic = prayerTopics.find((e) => e.index === idx).text;
@@ -105,12 +110,13 @@ const TextCard = ({ textData, allText }) => {
                 {textData.prayer}
               </Text>
             </Box>
+
             <Text
               fontSize={{ base: 'xx-small', md: 'sm' }}
               alignSelf="flex-end"
               color="black"
             >
-              &bull; {textDate}
+              {textData.fullName} &bull; {textDate}
             </Text>
             <Wrap>
               <Tag
@@ -121,7 +127,7 @@ const TextCard = ({ textData, allText }) => {
                 bgColor="white"
                 textAlign="center"
                 display={{ base: 'inline-flex', md: 'none' }}
-                fontSize="xx-small"
+                fontSize={['2vw', 'xx-small']}
                 fontWeight={600}
               >
                 {getPrayerTopic(textData.topic)}

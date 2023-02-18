@@ -87,31 +87,29 @@ const WitnessHomeContainer = (props) => {
           backgroundColor="#DAC7BC"
         />
       </Container>
-      <Container maxW="100%" p={[0, 10]} centerContent>
-        <Text
-          textStyle={'dm_sans'}
-          textColor="#000000"
-          fontWeight="bold"
-          fontSize={['20px', '24px']}
-          marginBottom="15px"
-        >
-          HOW ARE YOU WITNESSING GOD?
-        </Text>
-        <Flex justifyContent="center">
-          <Box w={['90%', '100%']}>
-            <ShareTestimonyButton />
-          </Box>
-        </Flex>
-        <WitnessHomeVideoSection />
-        <Divider
-          orientation="horizontal"
-          my={10}
-          w="25%"
-          height="3px"
-          backgroundColor="#DAC7BC"
-        />
-        <WitnessHomeTextSection />
-      </Container>
+      <Text
+        textStyle={'dm_sans'}
+        textColor="#000000"
+        fontWeight="bold"
+        fontSize={['20px', '24px']}
+        marginBottom="15px"
+      >
+        HOW ARE YOU WITNESSING GOD?
+      </Text>
+      <Flex justifyContent="center">
+        <Box w={['90%', '100%']}>
+          <ShareTestimonyButton />
+        </Box>
+      </Flex>
+      <WitnessHomeVideoSection />
+      <Divider
+        orientation="horizontal"
+        my={10}
+        w="25%"
+        height="3px"
+        backgroundColor="#DAC7BC"
+      />
+      <WitnessHomeTextSection />
     </>
   );
 };

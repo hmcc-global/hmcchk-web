@@ -23,13 +23,13 @@ const EasterContainer = (props) => {
     <>
       <Container maxW="100vw" m={0} p={0}>
         <Box
-          bgImage={[
-            `linear-gradient(0deg, rgba(256, 256, 256), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0)), 
-            url('${process.env.PUBLIC_URL}/images/witness/banner-mobile.png')`,
-            `linear-gradient(0deg, rgba(256, 256, 256), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0)), 
-            url('${process.env.PUBLIC_URL}/images/witness/banner-desktop.png')`,
-          ]}
-          bgSize="cover"
+          // bgImage={[
+          //   `linear-gradient(0deg, rgba(256, 256, 256), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0)),
+          //   url('${process.env.PUBLIC_URL}/images/witness/banner-mobile.png')`,
+          //   `linear-gradient(0deg, rgba(256, 256, 256), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0), rgba(256, 256, 256, 0)),
+          //   url('${process.env.PUBLIC_URL}/images/witness/banner-desktop.png')`,
+          // ]}
+          // bgSize="cover"
           justifyContent="center"
           py={[7, 5]}
         >

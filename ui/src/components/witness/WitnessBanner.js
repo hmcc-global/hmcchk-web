@@ -25,7 +25,7 @@ const WitnessBanner = () => {
     >
       <Flex w="100vw" justify="space-around">
         <Center>
-          <Link href="/witness/home" _hover={{}}>
+          <Link href="/easter" _hover={{}}>
             <HStack h="100%" spacing="1">
               <Box>
                 <Text
