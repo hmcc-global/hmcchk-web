@@ -46,8 +46,9 @@ const EasterNavbar = () => {
         <hStack px="3" py="6">
           <Button
             color="#E60053"
-            paddingTop={{ base: 10, sm: 9, md: 25, lg: 29 }}
-            paddingBottom={{ base: 10, sm: 9, md: 25, lg: 29 }}
+            // paddingTop={{ base: 10, sm: 9, md: 25, lg: 29 }}
+            // paddingBottom={{ base: 10, sm: 9, md: 25, lg: 29 }}
+            pt={2}
             as={Link}
             size="sm"
             onClick={handleClickScrollPrayerWall}
@@ -66,8 +67,9 @@ const EasterNavbar = () => {
 
           <Button
             color="#FF3E02"
-            paddingTop={{ base: 10, sm: 9, md: 25, lg: 29 }}
-            paddingBottom={{ base: 10, sm: 9, md: 25, lg: 29 }}
+            // paddingTop={{ base: 10, sm: 9, md: 25, lg: 29 }}
+            // paddingBottom={{ base: 10, sm: 9, md: 25, lg: 29 }}
+            pt={2}
             as={Link}
             onClick={handleClickScrollEaster}
             variant="link"
@@ -85,8 +87,9 @@ const EasterNavbar = () => {
 
           <Button
             color="#8D2C72"
-            paddingTop={{ base: 10, sm: 9, md: 25, lg: 29 }}
-            paddingBottom={{ base: 10, sm: 9, md: 25, lg: 29 }}
+            // paddingTop={{ base: 10, sm: 9, md: 25, lg: 29 }}
+            // paddingBottom={{ base: 10, sm: 9, md: 25, lg: 29 }}
+            pt={2}
             as={Link}
             size="sm"
             onClick={handleClickScrollTestimonies}
