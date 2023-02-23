@@ -44,7 +44,7 @@ const EasterContainer = (props) => {
                 fontSize={['20px', '40px']}
                 marginBottom="15px"
               >
-                PRAYER WALL
+                J-E-S-U-S PRAYER CAMPAIGN
               </Text>
               <Text
                 w={['80%', '60%']}
@@ -55,20 +55,34 @@ const EasterContainer = (props) => {
                 marginBottom="15px"
                 textAlign="center"
               >
-                As we enter Lent, we want to prepare our hearts and continue
-                witnessing God work through our prayers! Please feel free to
-                lift up a prayer for whatever God is putting on your heart.
+                As we enter Lent, we want to witness God work through our
+                prayers! That’s why throughout Lent, we’ll be re-focusing on
+                JESUS through the JESUS Prayer Campaign as we prepare our hearts
+                for Easter.
               </Text>
               <Text
                 w={['80%', '60%']}
                 textStyle={'dm_sans'}
-                fontWeight="black"
+                fontWeight="800"
                 textColor="#000000"
                 fontSize={['14px', '18px']}
                 marginBottom="15px"
                 textAlign="center"
               >
-                This week we are praying for:
+                Please feel free to lift up a prayer for whatever God is putting
+                on your heart.
+              </Text>
+              <Text
+                w={['80%', '60%']}
+                textStyle={'dm_sans'}
+                fontWeight="500"
+                textColor="#000000"
+                fontSize={['14px', '18px']}
+                marginBottom="15px"
+                marginTop="15px"
+                textAlign="center"
+              >
+                This week we will be praying for:
               </Text>
               <Text
                 textStyle={'dm_sans'}

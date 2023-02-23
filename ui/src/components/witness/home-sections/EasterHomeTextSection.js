@@ -14,12 +14,19 @@ import { ChevronRightIcon } from '@chakra-ui/icons';
 import { customAxios as axios } from '../../helpers/customAxios';
 import SubmitPrayerButton from '../text-prayer/SubmitPrayerButton';
 import { DateTime } from 'luxon';
+import { getPrayerTopic } from '../text-prayer/EasterPrayerModal';
 
 const EasterHomeTextSection = () => {
   const [texts, setTexts] = useState([]);
   const [eventDisplay, setEventDisplay] = useState(false);
+  const [eventType, setEventType] = useState('');
 
-  const endDate = DateTime.fromISO('2023-02-22T00:01');
+  const endDate = DateTime.fromISO('2023-02-22T00:00');
+  const evanglizeDate = DateTime.fromISO('2023-03-05T00:00');
+  const serveDate = DateTime.fromISO('2023-03-12T00:00');
+  const understandDate = DateTime.fromISO('2023-03-19T00:00');
+  const sendDate = DateTime.fromISO('2023-03-26T00:00');
+  const passionDate = DateTime.fromISO('2023-04-02T00:00');
 
   const timeLeft = () => {
     let display = endDate.diffNow(['hours', 'minutes']);
@@ -98,6 +105,18 @@ const EasterHomeTextSection = () => {
             >
               Please feel free to lift up a prayer for whatever God is putting
               on your heart.
+            </Text>
+            <Text
+              w={['80%', '60%']}
+              textStyle={'dm_sans'}
+              fontWeight="500"
+              textColor="#000000"
+              fontSize={['14px', '18px']}
+              marginBottom="15px"
+              marginTop="15px"
+              textAlign="center"
+            >
+              This week we will be praying for:
             </Text>
             <Text
               textStyle={'dm_sans'}
