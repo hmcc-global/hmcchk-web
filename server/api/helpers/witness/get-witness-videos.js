@@ -24,7 +24,7 @@ const transformWitnessVideo = (video, tags) => {
     imageUrl: video.acf.image,
     description: he.decode(video.content.rendered),
     time: video.acf.time
-      ? DateTime.fromFormat(video.acf.time, "t").toFormat("t")
+      ? DateTime.fromFormat(video.acf.time, "h:mm a").toFormat("h:mm a")
       : null,
     videoLink: video.acf.link,
     status: video.status,
