@@ -25,7 +25,7 @@ const transformAnnouncement = (announcement) => {
     imageUrl: announcement.acf.image,
     description: he.decode(announcement.content.rendered),
     time: announcement.acf.time
-      ? DateTime.fromFormat(announcement.acf.time, "t").toFormat("t")
+      ? DateTime.fromFormat(announcement.acf.time, "h:mm a").toFormat("h:mm a")
       : null,
     location: announcement.acf.location,
     mapLink: announcement.acf.map,
