@@ -17,9 +17,9 @@ import { RiChat1Line } from 'react-icons/ri';
 import Faq from './Faq';
 
 const SUNDAY_CELEBRATION_LOCATION =
-  'Manulife Financial Centre Tower A, Shop 13, 1/F, Tower A, Kwun Tong';
+  '11/F, KOHO, Hung To Road, Kwun Tong';
 const SUNDAY_CELEBRATION_GOOGLE_MAPS_EMBED =
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.2102241954112!2d114.22135071553005!3d22.307887848255323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404014806001b5d%3A0x895969fc5cf86457!2sOrganize%20Kwun%20Tong!5e0!3m2!1sen!2shk!4v1628957852778!5m2!1sen!2shk';
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.1840730188546!2d114.22194905088833!3d22.30887718524703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34040145ab278021%3A0xf168be9bbe8b1740!2sKOHO!5e0!3m2!1sen!2shk!4v1677338113505!5m2!1sen!2shk';
 
 const VisitUsPage = (props) => {
   return (
@@ -100,11 +100,11 @@ const VisitUsPage = (props) => {
                 {SUNDAY_CELEBRATION_LOCATION}
                 <br />
                 <Link
-                  href="https://tinyurl.com/directions-organize"
+                  href="https://bit.ly/KOHODirections"
                   color="#0E66CC"
                   isExternal
                 >
-                  <Text as="u">tinyurl.com/directions-organize</Text>
+                  <Text as="u">bit.ly/KOHODirections</Text>
                 </Link>
               </Text>
               <Spacer />
