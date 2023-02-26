@@ -45,7 +45,7 @@ const EasterContainer = (props) => {
                 fontSize={['20px', '40px']}
                 marginBottom="15px"
               >
-                J-E-S-U-S Prayer Campaign
+                J-E-S-U-S PRAYER CAMPAIGN
               </Text>
               <Text
                 w={['80%', '60%']}
