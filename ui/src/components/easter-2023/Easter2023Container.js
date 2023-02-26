@@ -78,7 +78,7 @@ const Easter2023Container = (props) => {
                 mb={[5, 20]}
               >
                 <Flex w="100%" justifyContent="center" direction="column">
-                  <Box w={['85%', '90%']} mx="auto">
+                  <Box w={['85%', '90%']} mx="auto" mt={[5, 7]}>
                     <Text
                       textColor="#8D2C72"
                       fontWeight="400"

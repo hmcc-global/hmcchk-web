@@ -15,17 +15,33 @@ import { customAxios as axios } from '../../helpers/customAxios';
 import SubmitPrayerButton from '../text-prayer/SubmitPrayerButton';
 import { DateTime } from 'luxon';
 
+const endDate = DateTime.fromISO('2023-02-22T00:00');
+const evanglizeDate = DateTime.fromISO('2023-03-05T00:00');
+const serveDate = DateTime.fromISO('2023-03-12T00:00');
+const understandDate = DateTime.fromISO('2023-03-19T00:00');
+const sendDate = DateTime.fromISO('2023-03-26T00:00');
+const passionDate = DateTime.fromISO('2023-04-02T00:00');
+
+const timeLeft = (eventTime) => {
+  let display = eventTime.diffNow(['hours', 'minutes']);
+  if (display < 0) return true;
+  else return false;
+};
+
+export const getTopic = () => {
+  if (timeLeft(passionDate)) return 'PASSION WEEK';
+  else if (timeLeft(sendDate)) return 'SEND PEOPLE OUT';
+  else if (timeLeft(understandDate)) return 'UNDERSTAND THE GOSPEL';
+  else if (timeLeft(serveDate)) return 'SERVE OUR CITY AND CAMPUS';
+  else if (timeLeft(evanglizeDate)) return 'EVANGELIZE THE CIRCLE';
+  else return 'JOY IN THE JOURNEY';
+};
+
 const EasterHomeTextSection = () => {
   const [texts, setTexts] = useState([]);
   const [eventDisplay, setEventDisplay] = useState(false);
-
-  const endDate = DateTime.fromISO('2023-02-22T00:01');
-
-  const timeLeft = () => {
-    let display = endDate.diffNow(['hours', 'minutes']);
-    if (display < 0) return true;
-    else return false;
-  };
+  const [prayerWallDisplay, setPrayerWallDisplay] =
+    useState('JOY IN THE JOURNEY');
 
   useEffect(() => {
     getTexts();
@@ -49,9 +65,13 @@ const EasterHomeTextSection = () => {
   };
 
   useEffect(() => {
+    setPrayerWallDisplay(getTopic());
+  }, []);
+
+  useEffect(() => {
     if (eventDisplay === false) {
       const timer = setInterval(() => {
-        let display = timeLeft;
+        let display = timeLeft(endDate);
         setEventDisplay(display);
       }, 1000);
       return () => clearInterval(timer);
@@ -100,13 +120,25 @@ const EasterHomeTextSection = () => {
               on your heart.
             </Text>
             <Text
+              w={['80%', '60%']}
+              textStyle={'dm_sans'}
+              fontWeight="500"
+              textColor="#000000"
+              fontSize={['14px', '18px']}
+              marginBottom="15px"
+              marginTop="15px"
+              textAlign="center"
+            >
+              This week we will be praying for:
+            </Text>
+            <Text
               textStyle={'dm_sans'}
               textColor="#E60053"
               fontWeight="700"
               fontSize={['20px', '27px']}
               marginBottom="15px"
             >
-              JOY IN THE JOURNEY
+              {prayerWallDisplay}
             </Text>
             <Image
               w={{ base: '40px', md: '40px' }}
@@ -123,7 +155,7 @@ const EasterHomeTextSection = () => {
             ml={['3', '5']}
             mt={['6', '12']}
             mb={['6', '12']}
-            templateColumns="repeat(3, 1fr)"
+            templateColumns="repeat(3, minmax(0, 1fr))"
             gap={[3, 6]}
             display={{ base: 'none', md: 'grid' }}
           >
