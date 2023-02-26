@@ -10,7 +10,7 @@ import {
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import SubmitPrayerButton from './text-prayer/SubmitPrayerButton';
 import TextPrayerContainer from './text-prayer/TextPrayerContainer';
-import { getTopics } from './home-sections/EasterHomeTextSection';
+import { getTopic } from './home-sections/EasterHomeTextSection';
 
 const EasterContainer = (props) => {
   return (
@@ -92,7 +92,7 @@ const EasterContainer = (props) => {
                 fontSize={['20px', '27px']}
                 marginBottom="15px"
               >
-                {getTopics()}
+                {getTopic()}
               </Text>
 
               <Box w="100%">
