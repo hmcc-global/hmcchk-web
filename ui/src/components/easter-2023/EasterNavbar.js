@@ -53,12 +53,11 @@ const EasterNavbar = () => {
             size="sm"
             onClick={handleClickScrollPrayerWall}
             variant="link"
-            w={[75, 100, 200]}
+            w={[75, 110, 200]}
             fontSize={{ base: '0.75em', sm: '1em', lg: '1.5em' }}
             fontWeight="bold"
-            pb={2}
           >
-            prayer
+            prayer wall
           </Button>
 
           <CircleIcon
@@ -77,7 +76,6 @@ const EasterNavbar = () => {
             w={[55, 70, 200]}
             fontSize={{ base: '0.75em', sm: '1em', lg: '1.5em' }}
             fontWeight="bold"
-            pb={2}
           >
             easter
           </Button>
@@ -100,7 +98,6 @@ const EasterNavbar = () => {
             borderRadius={10}
             fontSize={{ base: '0.75em', sm: '1em', lg: '1.5em' }}
             fontWeight="bold"
-            pb={2}
           >
             witness testimonies
           </Button>
