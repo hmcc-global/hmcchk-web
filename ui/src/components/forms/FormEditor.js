@@ -153,19 +153,25 @@ const FormEditor = (props) => {
     setSaveStatus(true);
     try {
       let paymentCcEmail = [];
-      if (formInformation.paymentCcEmail && formInformation.paymentCcEmail !== '') {
-        paymentCcEmail = formInformation.paymentCcEmail.trim().split(';')
+      if (
+        formInformation.paymentCcEmail &&
+        formInformation.paymentCcEmail !== ''
+      ) {
+        paymentCcEmail = formInformation.paymentCcEmail.trim().split(';');
       }
 
       let formToSave = {
         formName: formInformation.formName,
         isPaymentRequired: formInformation.isPaymentRequired,
-        paymentConfirmationEmailTemplate: formInformation.paymentConfirmationEmailTemplate,
+        paymentConfirmationEmailTemplate:
+          formInformation.paymentConfirmationEmailTemplate,
         paymentEmailSubject: formInformation.paymentEmailSubject,
         paymentCcEmail: paymentCcEmail,
         formDescription: formInformation.formDescription,
         formImage: formInformation.formImage,
         requireLogin: formInformation.requireLogin,
+        requireBaptism: formInformation.requireBaptism,
+        requireMembership: formInformation.requireMembership,
         successEmailTemplate: formInformation.successEmailTemplate,
         customEmailSubject: formInformation.customEmailSubject,
         formAvailableFrom: formInformation.formAvailableFrom,
