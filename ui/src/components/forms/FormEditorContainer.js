@@ -18,6 +18,7 @@ import {
   ModalBody,
   ModalContent,
   Divider,
+  Flex,
 } from '@chakra-ui/react';
 import FormEditor from './FormEditor';
 import { useForm, Controller } from 'react-hook-form';
@@ -37,6 +38,8 @@ const FormEditorContainer = (props) => {
   const [formDescription, setFormDescription] = useState(null);
   const [formImage, setFormImage] = useState(null);
   const [requireLogin, setRequireLogin] = useState(true);
+  const [requireMembership, setRequireMembership] = useState(false);
+  const [requireBaptism, setRequireBaptism] = useState(false);
   const [successEmailTemplate, setSuccessEmailTemplate] = useState(null);
   const [customEmailSubject, setCustomEmailSubject] = useState(null);
   const [formAvailableFrom, setFormAvailableFrom] = useState(null);
@@ -62,6 +65,8 @@ const FormEditorContainer = (props) => {
     setValue('formDescription', null);
     setValue('formImage', null);
     setValue('requireLogin', true);
+    setValue('requireMembership', false);
+    setValue('requireBaptism', false);
     setValue('successEmailTemplate', 'form-default-success');
     setValue('customEmailSubject', '');
     setValue('formAvailableFrom', '');
@@ -74,6 +79,8 @@ const FormEditorContainer = (props) => {
     setFormDescription('');
     setFormImage(null);
     setRequireLogin(true);
+    setRequireMembership(false);
+    setRequireBaptism(false);
     setSuccessEmailTemplate('form-default-success');
     setCustomEmailSubject('');
     setFormAvailableFrom('');
@@ -100,6 +107,8 @@ const FormEditorContainer = (props) => {
       setValue('formDescription', data.formDescription);
       setValue('formImage', data.formImage);
       setValue('requireLogin', data.requireLogin);
+      setValue('requireMembership', data.requireMembership);
+      setValue('requireBaptism', data.requireBaptism);
       setValue('successEmailTemplate', data.successEmailTemplate);
       setValue('customEmailSubject', data.customEmailSubject);
       setValue('formAvailableFrom', data.formAvailableFrom);
@@ -116,6 +125,8 @@ const FormEditorContainer = (props) => {
       setFormDescription(data.formDescription);
       setFormImage(data.formImage);
       setRequireLogin(data.requireLogin);
+      setRequireMembership(data.requireMembership);
+      setRequireBaptism(data.requireBaptism);
       setSuccessEmailTemplate(data.successEmailTemplate);
       setCustomEmailSubject(data.customEmailSubject);
       setFormAvailableFrom(data.formAvailableFrom);
@@ -282,6 +293,33 @@ const FormEditorContainer = (props) => {
                       )}
                     />
                   </FormControl>
+
+                  <FormControl>
+                    <FormLabel>Require membership?</FormLabel>
+                    <Controller
+                      control={control}
+                      name="requireMembership"
+                      defaultValue={true}
+                      render={({ field: { onChange, value, ref } }) => (
+                        <Switch onChange={onChange} ref={ref} isChecked={value}>
+                          {value ? 'Yes' : 'No'}
+                        </Switch>
+                      )}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel>Require baptism?</FormLabel>
+                    <Controller
+                      control={control}
+                      name="requireBaptism"
+                      defaultValue={true}
+                      render={({ field: { onChange, value, ref } }) => (
+                        <Switch onChange={onChange} ref={ref} isChecked={value}>
+                          {value ? 'Yes' : 'No'}
+                        </Switch>
+                      )}
+                    />
+                  </FormControl>
                   <FormControl isInvalid={errors['successEmailTemplate']}>
                     <FormLabel>Select an email template</FormLabel>
                     <Select
@@ -345,6 +383,8 @@ const FormEditorContainer = (props) => {
                   formDescription: formDescription,
                   formImage: formImage,
                   requireLogin: requireLogin,
+                  requireMembership: requireMembership,
+                  requireBaptism: requireBaptism,
                   successEmailTemplate: successEmailTemplate,
                   customEmailSubject: customEmailSubject,
                   formAvailableFrom: formAvailableFrom,
