@@ -41,15 +41,23 @@ module.exports = {
     },
     paymentConfirmationEmailTemplate: {
       type: 'string',
-      defaultsTo: ''
+      defaultsTo: '',
     },
     paymentCcEmail: {
       type: 'json',
-      defaultsTo: null
+      defaultsTo: null,
     },
     paymentEmailSubject: {
       type: 'string',
-      defaultsTo: ''
+      defaultsTo: '',
+    },
+    requireMembership: {
+      type: 'boolean',
+      defaultsTo: false,
+    },
+    requireBaptism: {
+      type: 'boolean',
+      defaultsTo: false,
     },
   },
 };
