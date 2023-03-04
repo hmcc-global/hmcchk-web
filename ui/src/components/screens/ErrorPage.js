@@ -72,12 +72,9 @@ const ErrorPage = (props) => {
     },
     'need-baptized-member': {
       type: 'error',
-      primaryText: `You are not able to sign up for this event because:
-      - You are not a registered member
-      - You are not baptised
-      - Other reasons`,
+      primaryText: `You are not able to sign up for this event because you haven't fulfilled one of the prerequisites of taking this class.`,
       boldedText:
-        'Please email us for further instructions at hmccsupport@gmail.com',
+        'Please contact us for further instructions at support@hongkong.hmcc.net',
       buttonLink: '/',
       buttonText: 'Back to Homepage',
     },
