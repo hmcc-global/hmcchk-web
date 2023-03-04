@@ -70,6 +70,17 @@ const ErrorPage = (props) => {
       buttonLink: '/profile',
       buttonText: 'Back to Profile',
     },
+    'need-baptized-member': {
+      type: 'error',
+      primaryText: `You are not able to sign up for this event because:
+      - You are not a registered member
+      - You are not baptised
+      - Other reasons`,
+      boldedText:
+        'Please email us for further instructions at hmccsupport@gmail.com',
+      buttonLink: '/',
+      buttonText: 'Back to Homepage',
+    },
     'form-unavailable': {
       type: 'error',
       primaryText:
@@ -142,6 +153,8 @@ const ErrorPage = (props) => {
           return 'need-login';
         case '/need-fill-profile':
           return 'need-fill-profile';
+        case '/need-baptized-member':
+          return 'need-baptized-member';
         case '/form-unavailable':
           return 'form-unavailable';
         case '/form-is-closed':
