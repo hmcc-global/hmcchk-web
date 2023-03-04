@@ -45,7 +45,7 @@ const validateForm = async (id, user) => {
 
     const { data: nowIso } = await axios.get('/api/misc/get-current-time');
     const now = DateTime.fromISO(nowIso);
-
+    
     if (!data[0]) {
       return {
         pathname: '/form-unavailable',
@@ -118,6 +118,21 @@ const validateForm = async (id, user) => {
       };
     }
 
+    // Check if membership field is needed
+    if (data[0].requireMembership && !user.isMember) {
+      return {
+        pathname: '/need-baptized-member',
+        state: { id: data[0].id },
+      };
+    }
+
+    // Check if baptism field is needed
+    if (data[0].requireBaptism && !user.isBaptised) {
+      return {
+        pathname: '/need-baptized-member',
+        state: { id: data[0].id },
+      };
+    }
     //If form requires payment, check if user has signed-up or not
     // Comment line 125 and uncomment 126 if you want to test this functionality (until the payment is required frontend implemented)
     if (data[0].isPaymentRequired) {
@@ -127,7 +142,7 @@ const validateForm = async (id, user) => {
         {
           params: {
             formId: id,
-            userId: user.id
+            userId: user.id,
           },
         }
       );
