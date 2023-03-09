@@ -12,7 +12,7 @@ import {
   HStack,
   Box,
   Tooltip,
-  useToast
+  useToast,
 } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 import { paymentMethodList } from '../../helpers/lists';
@@ -31,7 +31,7 @@ export default function AdminFormDataViewer(props) {
   const formId = state.id;
 
   let lastUpdatedTime = useRef();
-  
+
   const [isLoading, setIsLoading] = useState(true);
   const [isPaidForm, setIsPaidForm] = useState(false);
   const [formData, setFormData] = useState([]);
@@ -75,8 +75,7 @@ export default function AdminFormDataViewer(props) {
 
       let dateAtMidnight = DateTime.fromJSDate(filterLocalDateAtMidnight);
       let cellDate = DateTime.fromISO(dateAsString);
-      if (!cellDate.isValid)
-        return 1;
+      if (!cellDate.isValid) return 1;
 
       if (dateAtMidnight.equals(cellDate)) {
         return 0;
@@ -97,19 +96,17 @@ export default function AdminFormDataViewer(props) {
     if (p.value) {
       const dateTimeFormat = 'dd MMM yyyy, HH:mm:ss';
       const dateTimeObj = DateTime.fromISO(p.value);
-      if (dateTimeObj.isValid)
-        return dateTimeObj.toFormat(dateTimeFormat);
+      if (dateTimeObj.isValid) return dateTimeObj.toFormat(dateTimeFormat);
     }
 
-    return ''
+    return '';
   };
 
   const dateFormatter = (p) => {
     const dateToFormat = 'dd MMM yyyy';
     if (p.value) {
       const dateObj = DateTime.fromISO(p.value);
-      if (dateObj.isValid) 
-        return dateObj.toFormat(dateToFormat);
+      if (dateObj.isValid) return dateObj.toFormat(dateToFormat);
     }
 
     return '';
@@ -167,14 +164,19 @@ export default function AdminFormDataViewer(props) {
   const getData = useCallback(async () => {
     setIsLoading(true);
     try {
-      const { data } = await axios.get('/api/forms/get-submission', {
+      let { data } = await axios.get('/api/forms/get-submission', {
         params: {
           formId: formId,
         },
       });
 
       const usersData = await getUserData();
-      if (data && data.length > 0 && data[0].paymentData && data[0].paymentData.length > 0) {
+      if (
+        data &&
+        data.length > 0 &&
+        data[0].paymentData &&
+        data[0].paymentData.length > 0
+      ) {
         setIsPaidForm(true);
       }
 
@@ -198,38 +200,39 @@ export default function AdminFormDataViewer(props) {
           temp['address'] = addressString.join(', ');
         }
 
-        const found = usersData.find(user => user.id === item.userId);
-        if (found){
+        const found = usersData.find((user) => user.id === item.userId);
+        if (found) {
           temp['baptismInfo'] = found.baptismInfo;
           temp['membershipInfo'] = found.membershipInfo;
         }
         formDataTemp.push(temp);
       });
       setFormData(formDataTemp);
-      
     } catch (err) {
       console.log(err);
     } finally {
       setIsLoading(false);
     }
   }, [formId]);
-   
 
-  const checkIfUpdated = useCallback(async (updateData = true) => {
-    try {
-      const modelName = `paymentData-${formId}`;
-      const { data } = await axios.get('/api/last-updated', {
-        params: { modelName },
-      });
-      const dateObj = DateTime.fromISO(data);
-      if (!lastUpdatedTime.current || dateObj > lastUpdatedTime.current) {
-        updateData && getData();
-        lastUpdatedTime.current = dateObj;
+  const checkIfUpdated = useCallback(
+    async (updateData = true) => {
+      try {
+        const modelName = `paymentData-${formId}`;
+        const { data } = await axios.get('/api/last-updated', {
+          params: { modelName },
+        });
+        const dateObj = DateTime.fromISO(data);
+        if (!lastUpdatedTime.current || dateObj > lastUpdatedTime.current) {
+          updateData && getData();
+          lastUpdatedTime.current = dateObj;
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
-    }
-  }, [formId, getData]);
+    },
+    [formId, getData]
+  );
 
   useEffect(() => {
     getData();
@@ -282,7 +285,6 @@ export default function AdminFormDataViewer(props) {
     floatingFilter: true,
   };
 
-
   const baptismInfoGetter = (params) => {
     if (params) {
       const { colId } = params.colDef;
@@ -291,28 +293,26 @@ export default function AdminFormDataViewer(props) {
   };
 
   const membershipHeaderGetter = (params, columnName) =>
-  params.location === 'csv' ? `Membership ${columnName}` : columnName;
+    params.location === 'csv' ? `Membership ${columnName}` : columnName;
 
   const membershipInfoGetter = (params) => {
-      if (params) {
-        const { colId } = params.colDef;
-        const data = params.data.membershipInfo?.[0]?.[colId];
-        if (Array.isArray(data))
-          return data[0];
+    if (params) {
+      const { colId } = params.colDef;
+      const data = params.data.membershipInfo?.[0]?.[colId];
+      if (Array.isArray(data)) return data[0];
 
-        return data
-      }
+      return data;
+    }
   };
 
   const membershipAndBaptismDateTimeFormatter = (p) => {
     if (p.value) {
       const dateTimeFormat = 'dd MMM yyyy';
       const dateTimeObj = DateTime.fromISO(p.value);
-      if (dateTimeObj.isValid)
-        return dateTimeObj.toFormat(dateTimeFormat);
+      if (dateTimeObj.isValid) return dateTimeObj.toFormat(dateTimeFormat);
     }
 
-    return ''
+    return '';
   };
 
   const createColumnDefs = () => {
@@ -350,7 +350,7 @@ export default function AdminFormDataViewer(props) {
         headerCheckboxSelectionFilteredOnly: isPaidForm,
         filterParams: dateFilterParams,
         sort: 'asc',
-        lockPosition: true
+        lockPosition: true,
       },
       {
         headerName: 'Baptism Info',
@@ -362,8 +362,8 @@ export default function AdminFormDataViewer(props) {
             valueGetter: baptismInfoGetter,
             valueFormatter: membershipAndBaptismDateTimeFormatter,
             colId: 'baptismDate',
-          }
-        ]
+          },
+        ],
       },
       {
         headerName: 'Membership Info',
@@ -385,9 +385,54 @@ export default function AdminFormDataViewer(props) {
             valueGetter: membershipInfoGetter,
             valueFormatter: membershipAndBaptismDateTimeFormatter,
           },
-        ]
-      }
+        ],
+      },
     ];
+
+    const createBaptismInfoColumns = () => {
+      return {
+        headerName: 'Baptism Info',
+        marryChildren: true,
+        children: [
+          {
+            ...DateCellProps,
+            headerName: 'Baptism Date',
+            valueGetter: baptismInfoGetter,
+            valueFormatter: membershipAndBaptismDateTimeFormatter,
+            colId: 'baptismDate',
+            cellEditorPopup: true,
+            cellEditorParams: {
+              useSetter: true,
+            },
+          },
+        ],
+      };
+    };
+
+    const createMembershipInfoColumns = () => {
+      return {
+        headerName: 'Membership Info',
+        marryChildren: true,
+        children: [
+          {
+            ...DateCellProps,
+            headerValueGetter: (p) =>
+              membershipHeaderGetter(p, 'Recommitment Date'),
+            colId: 'recommitmentDate',
+            valueGetter: membershipInfoGetter,
+            valueFormatter: membershipAndBaptismDateTimeFormatter,
+          },
+          {
+            ...DateCellProps,
+            headerValueGetter: (p) =>
+              membershipHeaderGetter(p, 'Recognition Date'),
+            colId: 'recognitionDate',
+            valueGetter: membershipInfoGetter,
+            valueFormatter: membershipAndBaptismDateTimeFormatter,
+          },
+        ],
+      };
+    };
 
     const createPaymentDataColumns = () => {
       return {
@@ -469,12 +514,13 @@ export default function AdminFormDataViewer(props) {
             headerName: 'Updated By',
             field: 'paymentData.lastUpdatedBy',
             columnGroupShow: 'closed',
-          }
+          },
         ],
       };
     };
 
     const objectClassifier = (key, value) => {
+      console.log(key);
       if (key === '_submissionTime') {
         return;
       } else if (key === 'paymentData') {
@@ -485,20 +531,24 @@ export default function AdminFormDataViewer(props) {
         columnDefs.push(createNumberColumn(key));
       } else if (typeof value === 'boolean') {
         columnDefs.push(createBooleanColumn(key));
+      } else if (key === 'baptismInfo') {
+        columnDefs.push(createBaptismInfoColumns());
+      } else if (key === 'membershipInfo') {
+        columnDefs.push(createMembershipInfoColumns());
       } else {
         console.log(
           'ERROR: unexpected object type, it is not displayed: ' + key
         );
       }
     };
-    
+
     if (formData && formData.length > 0) {
       const first = formData[0];
       for (const [key, value] of Object.entries(first)) {
         objectClassifier(key, value);
       }
     }
-    
+
     return columnDefs;
   };
 
@@ -559,12 +609,12 @@ export default function AdminFormDataViewer(props) {
   const sendConfirmationEmail = async (selectedNodes) => {
     if (selectedNodes.length === 0) return;
 
-    const submissionIds = selectedNodes.map(i => i.data.submissionId);
+    const submissionIds = selectedNodes.map((i) => i.data.submissionId);
     if (submissionIds == null || submissionIds.length === 0) return;
 
     try {
       const res = await axios.put('/api/paymentData/send-email', {
-        submissionIds: submissionIds
+        submissionIds: submissionIds,
       });
       if (res.status === 200) {
         toast({
@@ -574,14 +624,14 @@ export default function AdminFormDataViewer(props) {
         });
         await getData();
       }
-    } catch(err) {
+    } catch (err) {
       toast({
         description: 'Something went wrong sending the emails',
         status: 'error',
         duration: 5000,
       });
     }
-  }
+  };
 
   const contextMenuSetter = (selectedNodes, value, colId) => {
     if (selectedNodes.length === 0) return;
@@ -589,14 +639,14 @@ export default function AdminFormDataViewer(props) {
     for (const node of selectedNodes) {
       node.setDataValue(colId, value);
     }
-  }
+  };
 
   const modalCallbackHandler = (value) => {
     if (api && value) {
       const selectedNodes = api.getSelectedNodes();
       contextMenuSetter(selectedNodes, value, modalColId);
     }
-  }
+  };
 
   const getContextMenuItems = (params) => {
     const selectedNodes = params.api.getSelectedNodes();
@@ -611,41 +661,41 @@ export default function AdminFormDataViewer(props) {
         subMenu: [
           {
             name: 'Paid',
-            action: () => contextMenuSetter(selectedNodes, true, 'isPaid')
+            action: () => contextMenuSetter(selectedNodes, true, 'isPaid'),
           },
           {
             name: 'Not Paid',
-            action: () => contextMenuSetter(selectedNodes, false, 'isPaid')
-          }
+            action: () => contextMenuSetter(selectedNodes, false, 'isPaid'),
+          },
         ],
       },
       {
         name: 'Set Payment Date',
         disabled: selectedNodes.length === 0,
-        action: () => { 
-          setIsModalOpen(true)
+        action: () => {
+          setIsModalOpen(true);
           setModalTitle('Set Payment Date');
           setModalColId('paymentDateTime');
           setModalType('date');
-        }
+        },
       },
       {
         name: 'Set Payment Type',
         disabled: selectedNodes.length === 0,
-        action: () => { 
+        action: () => {
           setIsModalOpen(true);
           setModalTitle('Set Payment Type');
           setModalColId('paymentType');
           setModalType('text');
-        }
+        },
       },
       {
         name: 'Set Payment Method As',
         disabled: selectedNodes.length === 0,
-        subMenu: paymentMethodList.map(i => ({
+        subMenu: paymentMethodList.map((i) => ({
           name: i,
-          action: () => contextMenuSetter(selectedNodes, i, 'paymentMethod')
-        }))
+          action: () => contextMenuSetter(selectedNodes, i, 'paymentMethod'),
+        })),
       },
       'separator',
       {
@@ -656,7 +706,7 @@ export default function AdminFormDataViewer(props) {
     ];
 
     return result;
-  }
+  };
 
   return (
     <>
@@ -725,7 +775,7 @@ export default function AdminFormDataViewer(props) {
           enterMovesDownAfterEdit={true}
           onGridReady={onGridReady}
           stopEditingWhenCellsLoseFocus={true}
-          rowSelection='multiple'
+          rowSelection="multiple"
           tooltipShowDelay={0}
           onFirstDataRendered={onFirstDataRendered}
           onCellValueChanged={onCellValueChanged}
@@ -734,10 +784,13 @@ export default function AdminFormDataViewer(props) {
           enableCellChangeFlash={enableCellChangeFlash}
           getContextMenuItems={getContextMenuItems}
           suppressRowClickSelection={true}
-          sideBar={{toolPanels: ['columns', 'filters']}}
+          sideBar={{ toolPanels: ['columns', 'filters'] }}
         />
         <Text>
-          Last updated: {DateTime.fromISO(lastUpdatedTime.current).toFormat('dd MMM yyyy, HH:mm:ss')}
+          Last updated:{' '}
+          {DateTime.fromISO(lastUpdatedTime.current).toFormat(
+            'dd MMM yyyy, HH:mm:ss'
+          )}
         </Text>
       </div>
     </>
