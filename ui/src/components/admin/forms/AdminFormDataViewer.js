@@ -155,15 +155,25 @@ export default function AdminFormDataViewer(props) {
     },
   };
 
+  const getUserData = async () => {
+    try {
+      const { data } = await axios.get('/api/users/get'); // destruct assignment
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const getData = useCallback(async () => {
     setIsLoading(true);
     try {
-      const { data } = await axios.get('/api/forms/get-submission', {
+      let { data } = await axios.get('/api/forms/get-submission', {
         params: {
           formId: formId,
         },
       });
 
+      const usersData = await getUserData();
       if (data && data.length > 0 && data[0].paymentData && data[0].paymentData.length > 0) {
         setIsPaidForm(true);
       }
@@ -188,16 +198,23 @@ export default function AdminFormDataViewer(props) {
           temp['address'] = addressString.join(', ');
         }
 
+        const found = usersData.find(user => user.id === item.userId);
+        if (found){
+          temp['baptismInfo'] = found.baptismInfo;
+          temp['membershipInfo'] = found.membershipInfo;
+        }
         formDataTemp.push(temp);
       });
-
+      console.log(formDataTemp);
       setFormData(formDataTemp);
+      
     } catch (err) {
       console.log(err);
     } finally {
       setIsLoading(false);
     }
   }, [formId]);
+   
 
   const checkIfUpdated = useCallback(async (updateData = true) => {
     try {
@@ -266,6 +283,37 @@ export default function AdminFormDataViewer(props) {
     floatingFilter: true,
   };
 
+
+  const baptismInfoGetter = (params) => {
+    if (params) {
+      const { colId } = params.colDef;
+      return params.data.baptismInfo[0]?.[colId];
+    }
+  };
+
+  const membershipHeaderGetter = (params, columnName) =>
+  params.location === 'csv' ? `Membership ${columnName}` : columnName;
+
+  const membershipInfoGetter = (params) => {
+    if (params) {
+      const { colId } = params.colDef;
+      console.log(params.data)
+      return params.data.membershipInfo[0]?.[colId];
+    }
+  };
+
+  const membershipAndBaptismDateTimeFormatter = (p) => {
+    if (p.value) {
+      const dateTimeFormat = 'dd MMM yyyy';
+      const dateTimeObj = DateTime.fromISO(p.value);
+      if (dateTimeObj.isValid)
+        return dateTimeObj.toFormat(dateTimeFormat);
+    }
+
+    return ''
+  };
+
+ 
   const createColumnDefs = () => {
     const createStringColumn = (key) => {
       return {
@@ -302,8 +350,54 @@ export default function AdminFormDataViewer(props) {
         filterParams: dateFilterParams,
         sort: 'asc',
         lockPosition: true
-      },
+      },  
     ];
+
+    const createBaptismInfoColumns = () => {
+      return {
+        headerName: 'Baptism Info',
+        marryChildren: true,
+        children: [
+          {
+            ...DateCellProps,
+            headerName: 'Baptism Date',
+            valueGetter: baptismInfoGetter,
+            valueFormatter: membershipAndBaptismDateTimeFormatter,
+            colId: 'baptismDate',
+            cellEditorPopup: true,
+            cellEditorParams: {
+              useSetter: true,
+            },
+          }
+        ]
+      }
+    }
+
+    const createMembershipInfoColumns = () => {
+      return{
+        headerName: 'Membership Info',
+        marryChildren: true,
+        children: [
+          {
+            ...DateCellProps,
+            headerValueGetter: (p) =>
+              membershipHeaderGetter(p, 'Recommitment Date'),
+            colId: 'recommitmentDate',
+            valueGetter: membershipInfoGetter,
+            valueFormatter: membershipAndBaptismDateTimeFormatter,
+          },
+          {
+            ...DateCellProps,
+            headerValueGetter: (p) =>
+              membershipHeaderGetter(p, 'Recognition Date'),
+            colId: 'recognitionDate',
+            valueGetter: membershipInfoGetter,
+            valueFormatter: membershipAndBaptismDateTimeFormatter,
+          },
+        ]
+      }  
+    }
+      
 
     const createPaymentDataColumns = () => {
       return {
@@ -391,6 +485,7 @@ export default function AdminFormDataViewer(props) {
     };
 
     const objectClassifier = (key, value) => {
+      console.log(key);
       if (key === '_submissionTime') {
         return;
       } else if (key === 'paymentData') {
@@ -401,7 +496,11 @@ export default function AdminFormDataViewer(props) {
         columnDefs.push(createNumberColumn(key));
       } else if (typeof value === 'boolean') {
         columnDefs.push(createBooleanColumn(key));
-      } else {
+      } else if (key === 'baptismInfo'){
+        columnDefs.push(createBaptismInfoColumns());
+      } else if (key === 'membershipInfo'){
+        columnDefs.push(createMembershipInfoColumns());
+      }else {
         console.log(
           'ERROR: unexpected object type, it is not displayed: ' + key
         );
