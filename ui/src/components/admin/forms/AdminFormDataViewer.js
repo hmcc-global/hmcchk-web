@@ -164,7 +164,7 @@ export default function AdminFormDataViewer(props) {
   const getData = useCallback(async () => {
     setIsLoading(true);
     try {
-      let { data } = await axios.get('/api/forms/get-submission', {
+      const { data } = await axios.get('/api/forms/get-submission', {
         params: {
           formId: formId,
         },
@@ -433,7 +433,6 @@ export default function AdminFormDataViewer(props) {
         ],
       };
     };
-
     const createPaymentDataColumns = () => {
       return {
         headerName: 'Payment Info',
@@ -520,7 +519,6 @@ export default function AdminFormDataViewer(props) {
     };
 
     const objectClassifier = (key, value) => {
-      console.log(key);
       if (key === '_submissionTime') {
         return;
       } else if (key === 'paymentData') {
