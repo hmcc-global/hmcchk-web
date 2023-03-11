@@ -17,6 +17,7 @@ import EasterHomeTextSection from './../witness/home-sections/EasterHomeTextSect
 import ShareTestimonyButton from '../witness/text-testimony/ShareTestimonyButton';
 import WitnessHomeVideoSection from '../witness/home-sections/WitnessHomeVideoSection';
 import WitnessHomeTextSection from '../witness/home-sections/WitnessHomeTextSection';
+import CuratorWidget from './CuratorWidget';
 import EasterHomeInvitationSection from '../witness/home-sections/EasterHomeInvitationSection';
 
 const Easter2023Container = (props) => {
@@ -146,6 +147,7 @@ const Easter2023Container = (props) => {
             mx="auto"
           />
           <WitnessHomeTextSection />
+          <CuratorWidget feedId="572aebce-046b-4a6d-8a37-9fac3b5ab753"></CuratorWidget>
         </Box>
       </VStack>
     </Container>
