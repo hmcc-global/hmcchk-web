@@ -167,7 +167,7 @@ export default function AdminFormDataViewer(props) {
   const getData = useCallback(async () => {
     setIsLoading(true);
     try {
-      let { data } = await axios.get('/api/forms/get-submission', {
+      const { data } = await axios.get('/api/forms/get-submission', {
         params: {
           formId: formId,
         },
@@ -205,7 +205,6 @@ export default function AdminFormDataViewer(props) {
         }
         formDataTemp.push(temp);
       });
-      console.log(formDataTemp);
       setFormData(formDataTemp);
       
     } catch (err) {
@@ -287,7 +286,7 @@ export default function AdminFormDataViewer(props) {
   const baptismInfoGetter = (params) => {
     if (params) {
       const { colId } = params.colDef;
-      return params.data.baptismInfo[0]?.[colId];
+      return params.data.baptismInfo?.[0]?.[colId];
     }
   };
 
@@ -295,11 +294,10 @@ export default function AdminFormDataViewer(props) {
   params.location === 'csv' ? `Membership ${columnName}` : columnName;
 
   const membershipInfoGetter = (params) => {
-    if (params) {
-      const { colId } = params.colDef;
-      console.log(params.data)
-      return params.data.membershipInfo[0]?.[colId];
-    }
+      if (params) {
+        const { colId } = params.colDef;
+        return params.data.membershipInfo?.[0]?.[colId];
+      }
   };
 
   const membershipAndBaptismDateTimeFormatter = (p) => {
@@ -313,7 +311,6 @@ export default function AdminFormDataViewer(props) {
     return ''
   };
 
- 
   const createColumnDefs = () => {
     const createStringColumn = (key) => {
       return {
@@ -350,11 +347,8 @@ export default function AdminFormDataViewer(props) {
         filterParams: dateFilterParams,
         sort: 'asc',
         lockPosition: true
-      },  
-    ];
-
-    const createBaptismInfoColumns = () => {
-      return {
+      },
+      {
         headerName: 'Baptism Info',
         marryChildren: true,
         children: [
@@ -364,17 +358,10 @@ export default function AdminFormDataViewer(props) {
             valueGetter: baptismInfoGetter,
             valueFormatter: membershipAndBaptismDateTimeFormatter,
             colId: 'baptismDate',
-            cellEditorPopup: true,
-            cellEditorParams: {
-              useSetter: true,
-            },
           }
         ]
-      }
-    }
-
-    const createMembershipInfoColumns = () => {
-      return{
+      },
+      {
         headerName: 'Membership Info',
         marryChildren: true,
         children: [
@@ -395,9 +382,8 @@ export default function AdminFormDataViewer(props) {
             valueFormatter: membershipAndBaptismDateTimeFormatter,
           },
         ]
-      }  
-    }
-      
+      }
+    ];
 
     const createPaymentDataColumns = () => {
       return {
@@ -485,7 +471,6 @@ export default function AdminFormDataViewer(props) {
     };
 
     const objectClassifier = (key, value) => {
-      console.log(key);
       if (key === '_submissionTime') {
         return;
       } else if (key === 'paymentData') {
@@ -496,24 +481,20 @@ export default function AdminFormDataViewer(props) {
         columnDefs.push(createNumberColumn(key));
       } else if (typeof value === 'boolean') {
         columnDefs.push(createBooleanColumn(key));
-      } else if (key === 'baptismInfo'){
-        columnDefs.push(createBaptismInfoColumns());
-      } else if (key === 'membershipInfo'){
-        columnDefs.push(createMembershipInfoColumns());
-      }else {
+      } else {
         console.log(
           'ERROR: unexpected object type, it is not displayed: ' + key
         );
       }
     };
-
+    
     if (formData && formData.length > 0) {
       const first = formData[0];
       for (const [key, value] of Object.entries(first)) {
         objectClassifier(key, value);
       }
     }
-
+    
     return columnDefs;
   };
 
