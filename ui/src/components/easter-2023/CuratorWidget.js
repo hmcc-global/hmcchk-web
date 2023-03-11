@@ -1,5 +1,7 @@
 import React from 'react';
 
+//code from : https://github.com/curatorio/react-example/blob/master/src/components/CuratorWidget.js 
+
 export default class CuratorWidget extends React.Component {
   constructor(props) {
     super(props);
