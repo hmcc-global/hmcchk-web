@@ -70,6 +70,14 @@ const ErrorPage = (props) => {
       buttonLink: '/profile',
       buttonText: 'Back to Profile',
     },
+    'need-baptized-member': {
+      type: 'error',
+      primaryText: `You are not able to sign up for this event because you haven't fulfilled one of the prerequisites of taking this class.`,
+      boldedText:
+        'Please contact us for further instructions at support@hongkong.hmcc.net',
+      buttonLink: '/',
+      buttonText: 'Back to Homepage',
+    },
     'form-unavailable': {
       type: 'error',
       primaryText:
@@ -142,6 +150,8 @@ const ErrorPage = (props) => {
           return 'need-login';
         case '/need-fill-profile':
           return 'need-fill-profile';
+        case '/need-baptized-member':
+          return 'need-baptized-member';
         case '/form-unavailable':
           return 'form-unavailable';
         case '/form-is-closed':
