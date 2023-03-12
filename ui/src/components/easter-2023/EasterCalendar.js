@@ -56,7 +56,7 @@ const EasterCalendar = () => {
       >
         <Heading
           as="h2"
-          fontSize={['2em', '3.5em']}
+          fontSize={['2em', '2.8em']}
           color="#67298E"
           fontWeight={700}
           fontFamily="concrete_demo"
@@ -65,7 +65,7 @@ const EasterCalendar = () => {
         </Heading>
         <Heading
           as="h2"
-          fontSize={['2em', '3.5em']}
+          fontSize={['2em', '2.8em']}
           color="#67298E"
           fontWeight={700}
         >
@@ -75,7 +75,7 @@ const EasterCalendar = () => {
         </Heading>
         <Text
           textStyle={'dm_sans'}
-          fontSize={['16px', '20px']}
+          fontSize={['14px', '18px']}
           color="#7B0D0D"
           fontWeight={800}
           paddingTop={{ base: 3, sm: 4, md: 5, lg: 6 }}
@@ -84,7 +84,7 @@ const EasterCalendar = () => {
         </Text>
         <Text
           textStyle={'dm_sans'}
-          fontSize={['16px', '20px']}
+          fontSize={['14px', '18px']}
           color="#7B0D0D"
           fontWeight={800}
         >
@@ -92,7 +92,7 @@ const EasterCalendar = () => {
         </Text>
         <Text
           textStyle={'dm_sans'}
-          fontSize={['16px', '20px']}
+          fontSize={['14px', '18px']}
           color="#7B0D0D"
           fontWeight={800}
           paddingBottom={{ base: 3, sm: 4, md: 5, lg: 6 }}
@@ -112,7 +112,7 @@ const EasterCalendar = () => {
           variant="outline"
           w={[200, 400]}
           borderRadius={10}
-          fontSize={['16px', '20px']}
+          fontSize={['14px', '18px']}
           position="inherit"
           borderWidth={4}
           borderColor="#67298E"
@@ -139,7 +139,7 @@ const EasterCalendar = () => {
       >
         <Heading
           as="h2"
-          fontSize={['2em', '3.5em']}
+          fontSize={['2em', '2.8em']}
           color="#FF619F"
           fontWeight={700}
           fontFamily="concrete_demo"
@@ -148,7 +148,7 @@ const EasterCalendar = () => {
         </Heading>
         <Heading
           as="h2"
-          fontSize={['2em', '3.5em']}
+          fontSize={['2em', '2.8em']}
           color="#FF619F"
           fontWeight={700}
           fontFamily="concrete_demo"
@@ -166,7 +166,7 @@ const EasterCalendar = () => {
         </Text>
         <Text
           textStyle={'dm_sans'}
-          fontSize={['16px', '20px']}
+          fontSize={['14px', '18px']}
           color="#7B0D0D"
           fontWeight={800}
         >
@@ -174,7 +174,7 @@ const EasterCalendar = () => {
         </Text>
         <Text
           textStyle={'dm_sans'}
-          fontSize={['16px', '20px']}
+          fontSize={['14px', '18px']}
           color="#7B0D0D"
           fontWeight={800}
           paddingBottom={{ base: 3, sm: 4, md: 5, lg: 6 }}
@@ -194,7 +194,7 @@ const EasterCalendar = () => {
           variant="outline"
           w={[200, 400]}
           borderRadius={10}
-          fontSize={['16px', '20px']}
+          fontSize={['14px', '18px']}
           position="inherit"
           borderWidth={4}
           borderColor="#FF619F"

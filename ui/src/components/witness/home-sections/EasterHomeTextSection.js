@@ -88,7 +88,7 @@ const EasterHomeTextSection = () => {
               textColor="#E60053"
               fontWeight="1000"
               lineHeight="110%"
-              fontSize={['30px', '40px']}
+              fontSize={['2.1em', '3em']}
               marginBottom="15px"
               textAlign="center"
             >
@@ -224,7 +224,7 @@ const EasterHomeTextSection = () => {
             textColor="#E60053"
             fontWeight="1000"
             lineHeight="110%"
-            fontSize={['30px', '40px']}
+            fontSize={['2.1em', '3em']}
             marginBottom="15px"
           >
             J-E-S-U-S PRAYER CAMPAIGN

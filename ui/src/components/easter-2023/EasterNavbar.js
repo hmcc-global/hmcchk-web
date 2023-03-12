@@ -45,36 +45,17 @@ const EasterNavbar = () => {
       <Box bgPosition="center" bgSize="cover">
         <hStack px="3" py="6">
           <Button
-            color="#FF3E02"
-            // paddingTop={{ base: 10, sm: 9, md: 25, lg: 29 }}
-            // paddingBottom={{ base: 10, sm: 9, md: 25, lg: 29 }}
-            pt={2}
-            as={Link}
-            onClick={handleClickScrollEaster}
-            variant="link"
-            w={[55, 70, 200]}
-            fontSize={{ base: '0.75em', sm: '1em', lg: '1.5em' }}
-            fontWeight="bold"
-          >
-            easter
-          </Button>
-
-          <CircleIcon
-            color="#FF3E02"
-            boxSize={{ base: 2, sm: 3, md: 3.5, lg: 4 }}
-          />
-
-          <Button
             color="#E60053"
             // paddingTop={{ base: 10, sm: 9, md: 25, lg: 29 }}
-            // paddingBottom={{ base: 10, sm: 9, md: 25, lg: 29 }}
-            pt={2}
+            //paddingBottom={{ base: 2, sm: 10, md: 15, lg: 19 }}
+            py={[2, 4]}
             as={Link}
             size="sm"
             onClick={handleClickScrollPrayerWall}
             variant="link"
-            w={[75, 110, 200]}
-            fontSize={{ base: '0.75em', sm: '1em', lg: '1.5em' }}
+            w={[79, 110, 210]}
+            borderRadius={10}
+            fontSize={{ base: '0.75em', sm: '1em', lg: '1.2em' }}
             fontWeight="bold"
           >
             prayer wall
@@ -82,21 +63,47 @@ const EasterNavbar = () => {
 
           <CircleIcon
             color="#E60053"
-            boxSize={{ base: 2, sm: 3, md: 3.5, lg: 4 }}
+            //boxSize={{ base: 2, sm: 3, md: 3.5, lg: 4 }}
+            boxSize={{ base: 2, sm: 2, md: 3.5, lg: 4 }}
+            py={[0.4, 0.6, 0.6, 0.8]}
           />
 
+          <Button
+            color="#FF3E02"
+            // paddingTop={{ base: 10, sm: 9, md: 25, lg: 29 }}
+            // paddingBottom={{ base: 10, sm: 9, md: 25, lg: 29 }}
+            pt={2}
+            pb={1}
+            as={Link}
+            onClick={handleClickScrollEaster}
+            variant="link"
+            w={[55, 70, 168]}
+            borderRadius={10}
+            fontSize={{ base: '0.75em', sm: '1em', lg: '1.2em' }}
+            fontWeight="bold"
+          >
+            easter
+          </Button>
+
+          <CircleIcon
+            color="#FF3E02"
+            //boxSize={{ base: 2, sm: 3, md: 3.5, lg: 4 }}
+            boxSize={{ base: 2, sm: 2, md: 3.5, lg: 4 }}
+            py={[0.4, 0.6, 0.6, 0.8]}
+          />
           <Button
             color="#8D2C72"
             // paddingTop={{ base: 10, sm: 9, md: 25, lg: 29 }}
             // paddingBottom={{ base: 10, sm: 9, md: 25, lg: 29 }}
             pt={2}
+            pb={1}
             as={Link}
             size="sm"
             onClick={handleClickScrollTestimonies}
             variant="link"
             w={[130, 180, 300]}
             borderRadius={10}
-            fontSize={{ base: '0.75em', sm: '1em', lg: '1.5em' }}
+            fontSize={{ base: '0.75em', sm: '1em', lg: '1.2em' }}
             fontWeight="bold"
           >
             witness testimonies

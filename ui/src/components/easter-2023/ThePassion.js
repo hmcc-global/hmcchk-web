@@ -58,7 +58,7 @@ import {
                   pb={3}
                   textStyle={'inter'}
                   as='i'
-                  fontSize={['16px', '18px']}
+                  fontSize={['12px', '18px']}
                 >
                  This Passion week, we want to simply remember and commemorate Jesus’ passion that He 
                  showed through his sacrifice for us by dying on the cross, so that we can passionately live our 
