@@ -45,6 +45,26 @@ const EasterNavbar = () => {
       <Box bgPosition="center" bgSize="cover">
         <hStack px="3" py="6">
           <Button
+            color="#FF3E02"
+            // paddingTop={{ base: 10, sm: 9, md: 25, lg: 29 }}
+            // paddingBottom={{ base: 10, sm: 9, md: 25, lg: 29 }}
+            pt={2}
+            as={Link}
+            onClick={handleClickScrollEaster}
+            variant="link"
+            w={[55, 70, 200]}
+            fontSize={{ base: '0.75em', sm: '1em', lg: '1.5em' }}
+            fontWeight="bold"
+          >
+            easter
+          </Button>
+
+          <CircleIcon
+            color="#FF3E02"
+            boxSize={{ base: 2, sm: 3, md: 3.5, lg: 4 }}
+          />
+
+          <Button
             color="#E60053"
             // paddingTop={{ base: 10, sm: 9, md: 25, lg: 29 }}
             // paddingBottom={{ base: 10, sm: 9, md: 25, lg: 29 }}
@@ -62,26 +82,6 @@ const EasterNavbar = () => {
 
           <CircleIcon
             color="#E60053"
-            boxSize={{ base: 2, sm: 3, md: 3.5, lg: 4 }}
-          />
-
-          <Button
-            color="#FF3E02"
-            // paddingTop={{ base: 10, sm: 9, md: 25, lg: 29 }}
-            // paddingBottom={{ base: 10, sm: 9, md: 25, lg: 29 }}
-            pt={2}
-            as={Link}
-            onClick={handleClickScrollEaster}
-            variant="link"
-            w={[55, 70, 200]}
-            fontSize={{ base: '0.75em', sm: '1em', lg: '1.5em' }}
-            fontWeight="bold"
-          >
-            easter
-          </Button>
-
-          <CircleIcon
-            color="#FF3E02"
             boxSize={{ base: 2, sm: 3, md: 3.5, lg: 4 }}
           />
 
