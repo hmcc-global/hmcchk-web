@@ -34,6 +34,7 @@ const VideoCard = ({ videoData, allVideos }) => {
               fontWeight={['600', '800']}
               noOfLines={2}
               minHeight={['auto', '3.5rem']}
+              textAlign="left"
             >
               {videoData.title}
             </Text>
