@@ -19,7 +19,7 @@ const EasterStory = () => {
             textColor="#FF3E02"
             fontWeight="1000"
             lineHeight="110%"
-            fontSize={['30px', '60px']}
+            fontSize={['2.1em', '3em']}
             marginBottom="15px"
             textAlign="center"
             paddingTop={['10', '4']}
@@ -33,7 +33,7 @@ const EasterStory = () => {
               align="center"
               color="#7B0D0D"
               fontWeight="bold"
-              py={{ base: 2, sm: 3, md: 5, lg: 6 }}
+              py={{ base: 1, sm: 2, md: 2, lg: 2 }}
             >
               <Text textStyle={'dm_sans'} fontSize={['14px', '18px']}>
                 Easter is the time where Christians all over the world gather to
@@ -61,7 +61,7 @@ const EasterStory = () => {
               align="center"
               color="#7B0D0D"
               fontWeight="bold"
-              py={{ base: 2, sm: 3, md: 5, lg: 6 }}
+              py={{ base: 1, sm: 2, md: 2, lg: 2 }}
             >
               <Text textStyle={'dm_sans'} fontSize={['14px', '18px']}>
                 Because of His passionate love for us, demonstrated through his
@@ -89,8 +89,8 @@ const EasterStory = () => {
             align="center"
             color="#7B0D0D"
             fontWeight="bold"
-            py={{ base: 2, sm: 3, md: 5, lg: 6 }}
-          >
+            py={{ base: 1, sm: 2, md: 2, lg: 2 }}
+            >
             <Text textStyle={'dm_sans'} fontSize={['14px', '18px']}>
               We no longer have to be held down by the world, but we can look to
               Jesus

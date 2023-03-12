@@ -86,9 +86,9 @@ const Easter2023Container = (props) => {
                   <Box w={['85%', '90%']} mx="auto" mt={[5, 7]}>
                     <Text
                       textColor="#8D2C72"
-                      fontWeight="400"
+                      fontWeight="1000"
                       fontFamily="concrete_demo"
-                      fontSize={['10vw', '5vw']}
+                      fontSize={['2.1em', '3em']}
                     >
                       WITNESS
                     </Text>
@@ -96,7 +96,7 @@ const Easter2023Container = (props) => {
                       <Text
                         textStyle={'dm_sans_bold'}
                         color="black"
-                        fontSize={['md']}
+                        fontSize={['14px', '18px']}
                         textAlign="center"
                       >
                         The theme for HMCC 2022-2023 is Witness. As a church, it
