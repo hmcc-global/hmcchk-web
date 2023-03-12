@@ -137,42 +137,6 @@ export default function AdminUser(props) {
   const membershipHeaderGetter = (params, columnName) =>
     params.location === 'csv' ? `Membership ${columnName}` : columnName;
 
-  // Membership Getters
-  // TODO-aparedan: Get latest membershipInfo. Right now just assume always get [0]
-  const membershipRecommitmentDateFormatter = (params) => {
-    if (
-      params &&
-      params.data &&
-      params.data.membershipInfo &&
-      params.data.membershipInfo[0]
-    ) {
-      const { recommitmentDate } =
-        params.data.membershipInfo[0];
-      
-      if (Array.isArray(recommitmentDate))
-        return dateFormatter(recommitmentDate[0]);
-
-      return dateFormatter(recommitmentDate);
-    }
-
-    return '';
-  };
-
-  const membershipRecognitionDateFormatter = (params) => {
-    if (
-      params &&
-      params.data &&
-      params.data.membershipInfo &&
-      params.data.membershipInfo[0]
-    ) {
-      const { recognitionDate: recognitionDateStr } =
-        params.data.membershipInfo[0];
-      return dateFormatter(recognitionDateStr);
-    }
-
-    return '';
-  };
-
   const membershipOfficialNameGetter = (params) => {
     if (
       params &&
@@ -209,21 +173,18 @@ export default function AdminUser(props) {
     }
   };
 
-  // Baptism Getters
-  const baptismDateFormatter = (params) => {
-    if (
-      params &&
-      params.data &&
-      params.data.baptismInfo &&
-      params.data.baptismInfo[0]
-    ) {
-      const { baptismDate: baptismDateStr } = params.data.baptismInfo[0];
-      return dateFormatter(baptismDateStr);
+  const membershipBaptismDateFormatter = (params) => {
+    if (params.value) {
+      const dateTimeFormat = 'dd MMM yyyy';
+      const dateTimeObj = DateTime.fromISO(params.value);
+      if (dateTimeObj.isValid)
+        return dateTimeObj.toFormat(dateTimeFormat);
     }
 
-    return '';
+    return ''
   };
 
+  // Baptism Getters
   const baptismPlaceGetter = (params) => {
     if (
       params &&
@@ -453,9 +414,12 @@ export default function AdminUser(props) {
       ...data,
     });
 
-    if (res.status !== 200) {
+    if (res.status !== 200 || res.data.id == null || res.data.id === '') {
       alert('Something went wrong, please refresh and try again..');
+      return;
     }
+
+    return res.data.id;
   };
 
   const updateMembershipInfo = async (data) => {
@@ -473,9 +437,11 @@ export default function AdminUser(props) {
       ...data,
     });
 
-    if (res.status !== 200) {
+    if (res.status !== 200 || res.data.id == null || res.data.id === '') {
       alert('Something went wrong, please refresh and try again..');
     }
+
+    return res.data.id;
   };
 
   const updateBaptismInfo = async (data) => {
@@ -500,13 +466,18 @@ export default function AdminUser(props) {
         const newMembershipInfo = { ...membershipInfo }[0];
         if (newMembershipInfo.id) {
           await updateMembershipInfo(newMembershipInfo);
-        } else {
+        }
+        else {
           newMembershipInfo[userIdProp] = p.data.id;
 
           if (!newMembershipInfo[officialNameProp]) {
             newMembershipInfo[officialNameProp] = p.data.fullName;
           }
-          await createMembershipInfo(newMembershipInfo);
+
+          const membershipId = await createMembershipInfo(newMembershipInfo);
+          const rowData = p.data;
+          rowData.membershipInfo[0]['id'] = membershipId;
+          p.api.applyTransaction({ update: [rowData] });
         }
       } else if (groupHeaderName && groupHeaderName === 'Baptism Info') {
         const { baptismInfo } = p.data;
@@ -518,7 +489,11 @@ export default function AdminUser(props) {
           if (!newBaptismInfo[officialNameProp]) {
             newBaptismInfo[officialNameProp] = p.data.fullName;
           }
-          await createBaptismInfo(newBaptismInfo);
+
+          const baptismId = await createBaptismInfo(newBaptismInfo);
+          const rowData = p.data;
+          rowData.baptismInfo[0]['id'] = baptismId;
+          p.api.applyTransaction({ udpate: [rowData] });
         }
       } else {
         if (p.data) {
@@ -695,7 +670,7 @@ export default function AdminUser(props) {
               colId: 'recommitmentDate',
               filterValueGetter: membershipFilterGetter,
               valueGetter: membershipInfoGetter,
-              valueFormatter: membershipRecommitmentDateFormatter,
+              valueFormatter: membershipBaptismDateFormatter,
               valueSetter: membershipInfoSetter,
             },
             {
@@ -705,7 +680,7 @@ export default function AdminUser(props) {
               colId: 'recognitionDate',
               filterValueGetter: membershipFilterGetter,
               valueGetter: membershipInfoGetter,
-              valueFormatter: membershipRecognitionDateFormatter,
+              valueFormatter: membershipBaptismDateFormatter,
               valueSetter: membershipInfoSetter,
             },
             {
@@ -727,7 +702,7 @@ export default function AdminUser(props) {
               headerName: 'Baptism Date',
               valueGetter: baptismInfoGetter,
               filterValueGetter: baptismFilterGetter,
-              valueFormatter: baptismDateFormatter,
+              valueFormatter: membershipBaptismDateFormatter,
               valueSetter: baptismInfoSetter,
               colId: 'baptismDate',
               cellEditorPopup: true,
