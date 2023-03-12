@@ -146,7 +146,6 @@ const Easter2023Container = (props) => {
           />
           <WitnessHomeTextSection />
         </Box>
-        <Box height="10"></Box>
       </VStack>
     </Container>
   );
