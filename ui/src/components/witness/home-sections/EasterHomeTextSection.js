@@ -205,10 +205,10 @@ const EasterHomeTextSection = () => {
               href="/witness/prayers/text"
               border="2px"
               borderColor="#E60053"
-              borderRadius={20}
+              borderRadius={13}
               color="#E60053"
               fontSize={15}
-              mr={4}
+              paddingX={8}
               size="md"
               variant="outline"
               display={{ base: 'flex', md: 'none' }}

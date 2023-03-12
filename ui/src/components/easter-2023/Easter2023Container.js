@@ -132,7 +132,7 @@ const Easter2023Container = (props) => {
               </Stack>
             </div>
           </Box>
-          <Container maxW="100%" bgColor="#FFF7F1">
+          <Box maxW="100%" bgColor="#FFF7F1">
             <WitnessHomeVideoSection />
             <Divider
               orientation="horizontal"
@@ -143,7 +143,7 @@ const Easter2023Container = (props) => {
               mx="auto"
             />
             <WitnessHomeTextSection />
-          </Container>
+          </Box>
           <Box height="10"></Box>
         </Box>
       </VStack>
