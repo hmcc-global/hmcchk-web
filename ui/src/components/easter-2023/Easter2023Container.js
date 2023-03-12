@@ -80,6 +80,7 @@ const Easter2023Container = (props) => {
                 justifyContent={['center', 'space-evenly']}
                 spacing={7}
                 mb={[5, 20]}
+                mt={[5, 10]}
               >
                 <Flex w="100%" justifyContent="center" direction="column">
                   <Box w={['85%', '90%']} mx="auto" mt={[5, 7]}>

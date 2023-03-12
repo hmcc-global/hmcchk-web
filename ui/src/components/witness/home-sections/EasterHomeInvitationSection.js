@@ -30,7 +30,7 @@ const EasterHomeInvitationSection = () => {
           marginBottom="15px"
           textAlign="center"
         >
-          Save this invite and share them with your friends and loved ones.
+          Long press or right click on the image below to save this invite. Share it with your friends and loved ones!
         </Text>
         <Image
           pt={5}
