@@ -17,6 +17,7 @@ import EasterHomeTextSection from './../witness/home-sections/EasterHomeTextSect
 import ShareTestimonyButton from '../witness/text-testimony/ShareTestimonyButton';
 import WitnessHomeVideoSection from '../witness/home-sections/WitnessHomeVideoSection';
 import WitnessHomeTextSection from '../witness/home-sections/WitnessHomeTextSection';
+import EasterHomeInvitationSection from '../witness/home-sections/EasterHomeInvitationSection';
 
 const Easter2023Container = (props) => {
   //To do: implement navbar, buttons, testimony section
@@ -65,6 +66,12 @@ const Easter2023Container = (props) => {
             <Center>
               <EasterCalendar />
             </Center>
+
+            <EasterHomeInvitationSection />
+
+            <div id="prayer-wall">
+              <Box height="20"></Box>
+            </div>
             <EasterHomeTextSection />
 
             <div id="easter-witness">
@@ -137,10 +144,6 @@ const Easter2023Container = (props) => {
             />
             <WitnessHomeTextSection />
           </Container>
-          <div id="prayer-wall">
-            <Box height="10"></Box>
-          </div>
-          <EasterHomeTextSection />
           <Box height="10"></Box>
         </Box>
       </VStack>

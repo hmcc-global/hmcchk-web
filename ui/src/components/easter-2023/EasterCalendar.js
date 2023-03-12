@@ -97,22 +97,29 @@ const EasterCalendar = () => {
           fontWeight={800}
           paddingBottom={{ base: 3, sm: 4, md: 5, lg: 6 }}
         >
-          TBA
+          11/F, KOHO, Kwun Tong/Online
         </Text>
         <Button
           textStyle={'dm_sans'}
-          bgColor="#67298E"
-          color="#FFFFFF"
+          bgColor="#FCF6FF"
+          color="#67298E"
           paddingTop={{ base: 23, sm: 23, md: 25, lg: 29 }}
           paddingBottom={{ base: 23, sm: 23, md: 25, lg: 29 }}
           as={Link}
           size="sm"
           href={generateGoogleCalendarLink(goodFriday)}
+          target="_blank"
           variant="outline"
           w={[200, 400]}
           borderRadius={10}
           fontSize={['16px', '20px']}
           position="inherit"
+          borderWidth={4}
+          borderColor="#67298E"
+          _hover={{
+            bgColor: "#67298E",
+            color: "#FCF6FF",
+          }}
         >
           Add to Calendar
         </Button>
@@ -172,22 +179,29 @@ const EasterCalendar = () => {
           fontWeight={800}
           paddingBottom={{ base: 3, sm: 4, md: 5, lg: 6 }}
         >
-          TBA
+          N101, HKCEC, Wan Chai
         </Text>
         <Button
           textStyle={'dm_sans'}
-          bgColor="#FF619F"
-          color="#FFFFFF"
+          bgColor="#FCF6FF"
+          color="#FF619F"
           paddingTop={{ base: 23, sm: 23, md: 25, lg: 29 }}
           paddingBottom={{ base: 23, sm: 23, md: 25, lg: 29 }}
           as={Link}
           size="sm"
           href={generateGoogleCalendarLink(easter)}
+          target="_blank"
           variant="outline"
           w={[200, 400]}
           borderRadius={10}
           fontSize={['16px', '20px']}
           position="inherit"
+          borderWidth={4}
+          borderColor="#FF619F"
+          _hover={{
+            bgColor: "#FF619F",
+            color: "#FCF6FF",
+          }}
         >
           Add to Calendar
         </Button>
