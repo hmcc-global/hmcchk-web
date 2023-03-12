@@ -59,16 +59,13 @@ const Easter2023Container = (props) => {
           }
         >
           <Box alignContent="center" backgroundColor="none">
-            <div id="prayer-wall">
-              <Box height="20"></Box>
-            </div>
-            <EasterHomeTextSection />
             <div id="easter-story"></div>
             <EasterStory />
 
             <Center>
               <EasterCalendar />
             </Center>
+            <EasterHomeTextSection />
 
             <div id="easter-witness">
               <Stack
@@ -120,12 +117,7 @@ const Easter2023Container = (props) => {
                         HOW ARE YOU WITNESSING GOD?
                       </Text>
                     </Box>
-                    <Box
-                      mx="auto"
-                      justifyContent="center"
-                      w={['85%', '30%']}
-                      pb="6vw"
-                    >
+                    <Box mx="auto" justifyContent="center" w={['85%', '30%']}>
                       <ShareTestimonyButton />
                     </Box>
                   </Box>
@@ -133,19 +125,24 @@ const Easter2023Container = (props) => {
               </Stack>
             </div>
           </Box>
+          <Container maxW="100%" bgColor="#FFF7F1">
+            <WitnessHomeVideoSection />
+            <Divider
+              orientation="horizontal"
+              my={10}
+              w="25%"
+              height="3px"
+              backgroundColor="#DAC7BC"
+              mx="auto"
+            />
+            <WitnessHomeTextSection />
+          </Container>
+          <div id="prayer-wall">
+            <Box height="10"></Box>
+          </div>
+          <EasterHomeTextSection />
+          <Box height="10"></Box>
         </Box>
-        <Container maxW="100%" p={[0, 10]} bgColor="#FFF7F1">
-          <WitnessHomeVideoSection />
-          <Divider
-            orientation="horizontal"
-            my={10}
-            w="25%"
-            height="3px"
-            backgroundColor="#DAC7BC"
-            mx="auto"
-          />
-          <WitnessHomeTextSection />
-        </Container>
       </VStack>
     </Container>
   );
