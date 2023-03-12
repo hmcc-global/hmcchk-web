@@ -26,10 +26,26 @@ module.exports = {
   },
 
   fn: async function ({ params }, exits) {
-    console.log(params);
-    const { id: membershipId, ...toUpdate } = params;
+    
+    const { id: membershipId, recommitmentDate, ...toUpdate } = params;
     if (membershipId) {
       try {
+        if (recommitmentDate && recommitmentDate !== '') {
+          let data = await Membership.findOne({ _id: membershipId });
+
+          if (data == null)
+            return exits.invalid(`No MembershipId found id: ${membershipId}`);
+
+          const oldRecommitmentDates = data.recommitmentDate;
+          if (oldRecommitmentDates != null && Array.isArray(oldRecommitmentDates) && oldRecommitmentDates.length > 0) {
+            const oldRecommitmentDatesSet = new Set(oldRecommitmentDates);
+            oldRecommitmentDatesSet.add(recommitmentDate);
+            toUpdate['recommitmentDate'] = Array.from(oldRecommitmentDatesSet).sort().reverse();
+          } else {
+            toUpdate['recommitmentDate'] = [recommitmentDate];
+          }
+        }
+
         let data = await Membership.updateOne({
           _id: membershipId,
           isDeleted: false,

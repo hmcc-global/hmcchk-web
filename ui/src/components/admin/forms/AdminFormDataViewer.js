@@ -296,7 +296,11 @@ export default function AdminFormDataViewer(props) {
   const membershipInfoGetter = (params) => {
       if (params) {
         const { colId } = params.colDef;
-        return params.data.membershipInfo?.[0]?.[colId];
+        const data = params.data.membershipInfo?.[0]?.[colId];
+        if (Array.isArray(data))
+          return data[0];
+
+        return data
       }
   };
 
