@@ -80,7 +80,7 @@ const TextCardList = ({ allText }) => {
           WRITTEN TESTIMONIES
         </Text>
         <Button
-          width={['50%', '20%']}
+          width={['35%', '23%', '12%']}
           display="flex"
           background="#73539B"
           backdropFilter="blur(6px)"
@@ -96,8 +96,9 @@ const TextCardList = ({ allText }) => {
       {/* box filter */}
       <Grid
         marginTop={[4, 8]}
-        templateColumns={['repeat(2, 1fr)', 'repeat(3, 1fr)']}
+        templateColumns={['repeat(2, 1fr)', 'repeat(3, minmax(0, 1fr));']}
         gap={[3, 6]}
+        marginBottom={[4, 8]}
       >
         {currentTexts.length > 0 &&
           currentTexts.map((text, i) => (
