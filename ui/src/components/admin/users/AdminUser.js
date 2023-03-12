@@ -146,9 +146,13 @@ export default function AdminUser(props) {
       params.data.membershipInfo &&
       params.data.membershipInfo[0]
     ) {
-      const { recommitmentDate: recommitmentDateStr } =
+      const { recommitmentDate } =
         params.data.membershipInfo[0];
-      return dateFormatter(recommitmentDateStr);
+      
+      if (Array.isArray(recommitmentDate))
+        return dateFormatter(recommitmentDate[0]);
+
+      return dateFormatter(recommitmentDate);
     }
 
     return '';
@@ -186,7 +190,12 @@ export default function AdminUser(props) {
   const membershipInfoGetter = (params) => {
     if (params) {
       const { colId } = params.colDef;
-      return params.data.membershipInfo[0]?.[colId];
+      const data = params.data.membershipInfo[0]?.[colId];
+
+      if (Array.isArray(data))
+        return data[0] ?? '';
+      
+      return data;
     }
   };
 
