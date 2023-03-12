@@ -79,6 +79,7 @@ const TextCardList = ({ allText }) => {
         marginTop={[4, 8]}
         templateColumns={['repeat(2, 1fr)', 'repeat(3, minmax(0, 1fr));']}
         gap={[3, 6]}
+        marginBottom={[4,8]}
       >
         {currentTexts.length > 0 &&
           currentTexts.map((text, i) => (

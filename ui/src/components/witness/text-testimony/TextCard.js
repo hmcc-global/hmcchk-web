@@ -59,7 +59,7 @@ const TextCard = ({ textData, allText }) => {
             </AspectRatio>
           </>
         ) : null}
-        <Box p={4} w={['45vw', '28vw']}>
+        <Box p={4} w={{ base: '42vw', sm: '40vw', md: '42vw', lg: '27vw' }}>
           <VStack alignItems="left" spacing={2}>
             <Wrap>
               {Tags.map((tag) => {
@@ -84,7 +84,7 @@ const TextCard = ({ textData, allText }) => {
             >
               {textData.theme}
             </Text>
-            <Text fontSize={{ base: 'xs', md: 'sm' }} isTruncated color="black">
+            <Text fontSize={{ base: 'xs', md: 'sm' }} color="black" noOfLines={[4, 3]}>
               {textData.testimony}
             </Text>
             <Text
