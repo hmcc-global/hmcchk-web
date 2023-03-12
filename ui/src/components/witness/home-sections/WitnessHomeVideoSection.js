@@ -20,7 +20,7 @@ const WitnessHomeVideoSection = () => {
         data.forEach((wv) => {
           wv.renderDate = wv.endDate;
         });
-        data.sort((a, b) => (a.renderDate > b.renderDate ? 1 : -1));
+        data.sort((a, b) => (a.renderDate < b.renderDate ? 1 : -1));
         setVideos([...data]);
       } else {
         throw Error('Something went wrong');
