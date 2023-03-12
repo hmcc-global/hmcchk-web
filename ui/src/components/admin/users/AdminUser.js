@@ -127,12 +127,14 @@ export default function AdminUser(props) {
 
   const classAttendanceFormatter = (params) => {
     if (params.value !== '') {
-      const dateArr = params.value.trim().split(/\s*,\s*/).filter(Boolean);
+      const dateArr = params.value
+        .trim()
+        .split(/\s*,\s*/)
+        .filter(Boolean);
       const formattedDateArr = dateArr.map((e) => {
         const dateObj = DateTime.fromFormat(e, dateFromFormat);
-        if (dateObj.isValid)
-          return dateObj.toFormat(dateToFormat);
-        
+        if (dateObj.isValid) return dateObj.toFormat(dateToFormat);
+
         return null;
       });
 
@@ -140,13 +142,15 @@ export default function AdminUser(props) {
     }
 
     return params.value;
-  }
+  };
 
   // Getter Functions: to handle errors in retrieving data
   const classAttendanceHeaderGetter = (params, parentName) => {
     const headerName = 'Class Attendance';
-    return params.location === 'csv' ? `${parentName} ${headerName}` : headerName;
-  }
+    return params.location === 'csv'
+      ? `${parentName} ${headerName}`
+      : headerName;
+  };
 
   const officialNameHeaderGetter = (params, parentName) => {
     const headerName = 'Official Name';
@@ -178,9 +182,8 @@ export default function AdminUser(props) {
       const { colId } = params.colDef;
       const data = params.data.membershipInfo[0]?.[colId];
 
-      if (Array.isArray(data))
-        return data[0] ?? '';
-      
+      if (Array.isArray(data)) return data[0] ?? '';
+
       return data;
     }
   };
@@ -193,9 +196,9 @@ export default function AdminUser(props) {
       !Array.isArray(params.data.membershipInfo[0]?.classAttendance)
     )
       return '';
-    
+
     return params.data.membershipInfo[0].classAttendance.join();
-  }
+  };
 
   const membershipFilterGetter = (params) => {
     if (params) {
@@ -211,11 +214,10 @@ export default function AdminUser(props) {
     if (params.value) {
       const dateTimeFormat = 'dd MMM yyyy';
       const dateTimeObj = DateTime.fromISO(params.value);
-      if (dateTimeObj.isValid)
-        return dateTimeObj.toFormat(dateTimeFormat);
+      if (dateTimeObj.isValid) return dateTimeObj.toFormat(dateTimeFormat);
     }
 
-    return ''
+    return '';
   };
 
   // Baptism Getters
@@ -262,9 +264,9 @@ export default function AdminUser(props) {
       !Array.isArray(params.data.baptismInfo[0]?.classAttendance)
     )
       return '';
-    
+
     return params.data.baptismInfo[0].classAttendance.join();
-  }
+  };
 
   const baptismFilterGetter = (params) => {
     if (params) {
@@ -363,18 +365,23 @@ export default function AdminUser(props) {
   const membershipClassAttendanceValueSetter = (params) => {
     const isValidDateArr = (e) => {
       return DateTime.fromFormat(e, dateFromFormat).isValid;
-    }
+    };
 
     if (params && params.data && params.newValue) {
       const { colId } = params.colDef;
       const { newValue } = params;
       let parsedNewValue = [];
 
-      const dateArr = newValue.trim().split(/\s*,\s*/).filter(Boolean);
+      const dateArr = newValue
+        .trim()
+        .split(/\s*,\s*/)
+        .filter(Boolean);
       if (dateArr.length > 0 && dateArr.every(isValidDateArr)) {
         parsedNewValue = dateArr.sort().reverse();
       } else {
-        alert('Invalid ClassAttendance format. Expected: yyyy-MM-dd separated by commas "," e.g. yyyy-MM-dd,yyyy-MM-dd');
+        alert(
+          'Invalid ClassAttendance format. Expected: yyyy-MM-dd separated by commas "," e.g. yyyy-MM-dd,yyyy-MM-dd'
+        );
         return false;
       }
 
@@ -385,7 +392,7 @@ export default function AdminUser(props) {
     }
 
     return false;
-  }
+  };
 
   const baptismInfoSetter = (params) => {
     if (params && params.data) {
@@ -407,18 +414,23 @@ export default function AdminUser(props) {
   const baptismClassAttendanceValueSetter = (params) => {
     const isValidDateArr = (e) => {
       return DateTime.fromFormat(e, dateFromFormat).isValid;
-    }
+    };
 
     if (params && params.data && params.newValue) {
       const { colId } = params.colDef;
       const { newValue } = params;
       let parsedNewValue = [];
 
-      const dateArr = newValue.trim().split(/\s*,\s*/).filter(Boolean);
+      const dateArr = newValue
+        .trim()
+        .split(/\s*,\s*/)
+        .filter(Boolean);
       if (dateArr.length > 0 && dateArr.every(isValidDateArr)) {
         parsedNewValue = dateArr.sort().reverse();
       } else {
-        alert('Invalid ClassAttendance format. Expected: yyyy-MM-dd separated by commas "," e.g. yyyy-MM-dd,yyyy-MM-dd');
+        alert(
+          'Invalid ClassAttendance format. Expected: yyyy-MM-dd separated by commas "," e.g. yyyy-MM-dd,yyyy-MM-dd'
+        );
         return false;
       }
 
@@ -429,7 +441,7 @@ export default function AdminUser(props) {
     }
 
     return false;
-  }
+  };
 
   const titheIdSetter = (params) => {
     const { newValue } = params;
@@ -566,8 +578,7 @@ export default function AdminUser(props) {
         const newMembershipInfo = { ...membershipInfo }[0];
         if (newMembershipInfo.id) {
           await updateMembershipInfo(newMembershipInfo);
-        }
-        else {
+        } else {
           newMembershipInfo[userIdProp] = p.data.id;
 
           if (!newMembershipInfo[officialNameProp]) {
@@ -795,7 +806,7 @@ export default function AdminUser(props) {
               headerValueGetter: (p) =>
                 classAttendanceHeaderGetter(p, 'Membership'),
               colId: 'classAttendance',
-              valueGetter: membershipClassAttendanceValueGetter ,
+              valueGetter: membershipClassAttendanceValueGetter,
               valueFormatter: classAttendanceFormatter,
               valueSetter: membershipClassAttendanceValueSetter,
               columnGroupShow: 'open',
@@ -839,7 +850,7 @@ export default function AdminUser(props) {
               headerValueGetter: (p) =>
                 classAttendanceHeaderGetter(p, 'Baptism'),
               colId: 'classAttendance',
-              valueGetter: baptismClassAttendanceValueGetter ,
+              valueGetter: baptismClassAttendanceValueGetter,
               valueFormatter: classAttendanceFormatter,
               valueSetter: baptismClassAttendanceValueSetter,
               columnGroupShow: 'open',
