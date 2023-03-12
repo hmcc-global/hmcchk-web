@@ -40,7 +40,7 @@ module.exports = {
         classAttendance,
         baptismDate,
         baptismPlace,
-      });
+      }).fetch();
 
       // update user if baptised
       if (baptismDate !== null && baptismPlace !== '') {
