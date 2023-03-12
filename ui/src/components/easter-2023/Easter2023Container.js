@@ -133,20 +133,20 @@ const Easter2023Container = (props) => {
               </Stack>
             </div>
           </Box>
-          <Box maxW="100%" bgColor="#FFF7F1">
-            <WitnessHomeVideoSection />
-            <Divider
-              orientation="horizontal"
-              my={10}
-              w="25%"
-              height="3px"
-              backgroundColor="#DAC7BC"
-              mx="auto"
-            />
-            <WitnessHomeTextSection />
-          </Box>
-          <Box height="10"></Box>
         </Box>
+        <Box maxW="100%" bgColor="#FFF7F1">
+          <WitnessHomeVideoSection />
+          <Divider
+            orientation="horizontal"
+            my={10}
+            w="25%"
+            height="3px"
+            backgroundColor="#DAC7BC"
+            mx="auto"
+          />
+          <WitnessHomeTextSection />
+        </Box>
+        <Box height="10"></Box>
       </VStack>
     </Container>
   );
