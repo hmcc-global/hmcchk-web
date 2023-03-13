@@ -79,7 +79,7 @@ const WitnessHomeTextSection = () => {
       >
         {texts.length > 0 &&
           texts
-            .slice(0, 6)
+            .slice(0, 3)
             .map((text) => <TextCard key={text.id} textData={text} />)}
       </Grid>
       <Grid
@@ -93,7 +93,7 @@ const WitnessHomeTextSection = () => {
       >
         {texts.length > 0 &&
           texts
-            .slice(0, 4)
+            .slice(0, 2)
             .map((text) => <TextCard key={text.id} textData={text} />)}
       </Grid>
       <Box display="flex" justifyContent="center" mb="6">

@@ -161,7 +161,7 @@ const EasterHomeTextSection = () => {
           >
             {texts.length > 0 &&
               texts
-                .slice(0, 6)
+                .slice(0, 3)
                 .map((text) => <TextCard key={text.id} textData={text} />)}
           </Grid>
           <Grid
@@ -175,7 +175,7 @@ const EasterHomeTextSection = () => {
           >
             {texts.length > 0 &&
               texts
-                .slice(0, 4)
+                .slice(0, 2)
                 .map((text) => <TextCard key={text.id} textData={text} />)}
           </Grid>
           <Button
