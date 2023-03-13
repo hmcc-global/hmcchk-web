@@ -74,7 +74,7 @@ const ErrorPage = (props) => {
       type: 'error',
       primaryText: `You are not able to sign up for this event because you haven't fulfilled one of the prerequisites of taking this class.`,
       boldedText:
-        'Please contact us for further instructions at support@hongkong.hmcc.net',
+        'Please contact us for further instructions at classes@hongkong.hmcc.net',
       buttonLink: '/',
       buttonText: 'Back to Homepage',
     },
