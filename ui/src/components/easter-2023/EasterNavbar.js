@@ -45,30 +45,6 @@ const EasterNavbar = () => {
       <Box bgPosition="center" bgSize="cover">
         <hStack px="3" py="6">
           <Button
-            color="#E60053"
-            // paddingTop={{ base: 10, sm: 9, md: 25, lg: 29 }}
-            //paddingBottom={{ base: 2, sm: 10, md: 15, lg: 19 }}
-            py={[2, 4]}
-            as={Link}
-            size="sm"
-            onClick={handleClickScrollPrayerWall}
-            variant="link"
-            w={[79, 110, 210]}
-            borderRadius={10}
-            fontSize={{ base: '0.75em', sm: '1em', lg: '1.2em' }}
-            fontWeight="bold"
-          >
-            prayer wall
-          </Button>
-
-          <CircleIcon
-            color="#E60053"
-            //boxSize={{ base: 2, sm: 3, md: 3.5, lg: 4 }}
-            boxSize={{ base: 2, sm: 2, md: 3.5, lg: 4 }}
-            py={[0.4, 0.6, 0.6, 0.8]}
-          />
-
-          <Button
             color="#FF3E02"
             // paddingTop={{ base: 10, sm: 9, md: 25, lg: 29 }}
             // paddingBottom={{ base: 10, sm: 9, md: 25, lg: 29 }}
@@ -107,6 +83,30 @@ const EasterNavbar = () => {
             fontWeight="bold"
           >
             witness testimonies
+          </Button>
+
+          <CircleIcon
+            color="#E60053"
+            //boxSize={{ base: 2, sm: 3, md: 3.5, lg: 4 }}
+            boxSize={{ base: 2, sm: 2, md: 3.5, lg: 4 }}
+            py={[0.4, 0.6, 0.6, 0.8]}
+          />
+
+          <Button
+            color="#E60053"
+            // paddingTop={{ base: 10, sm: 9, md: 25, lg: 29 }}
+            //paddingBottom={{ base: 2, sm: 10, md: 15, lg: 19 }}
+            py={[2, 4]}
+            as={Link}
+            size="sm"
+            onClick={handleClickScrollPrayerWall}
+            variant="link"
+            w={[79, 110, 210]}
+            borderRadius={10}
+            fontSize={{ base: '0.75em', sm: '1em', lg: '1.2em' }}
+            fontWeight="bold"
+          >
+            prayer wall
           </Button>
         </hStack>
       </Box>
