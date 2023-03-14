@@ -89,6 +89,13 @@ const TextCard = ({ textData, allText }) => {
               alignSelf="flex-end"
               color="black"
             >
+            {textData.lifestage} 
+            </Text>
+            <Text
+              fontSize={{ base: 'xx-small', md: 'sm' }}
+              alignSelf="flex-end"
+              color="black"
+            >
               {textData.fullName} &bull; {textDate}
             </Text>
             <Wrap>
