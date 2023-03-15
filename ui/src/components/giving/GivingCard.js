@@ -122,10 +122,10 @@ const RenderSwitch = (param) => {
             “Harvest Mission Community Church (Hong Kong) Limited”
           </Text>
           <br />
-          <Text fontWeight="bold">You may also mail your checks or donations to:</Text>
           <Text fontWeight="bold">
-            P.O. Box 84282 HUNGHOM BAY POST OFFICE
+            You may also mail your checks or donations to:
           </Text>
+          <Text fontWeight="bold">P.O. Box 84282 HUNGHOM BAY POST OFFICE</Text>
         </Box>
       );
     default:
