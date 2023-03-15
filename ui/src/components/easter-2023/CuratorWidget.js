@@ -1,11 +1,11 @@
 import React from 'react';
 
-//code from : https://github.com/curatorio/react-example/blob/master/src/components/CuratorWidget.js 
+//code from : https://github.com/curatorio/react-example/blob/master/src/components/CuratorWidget.js
 
 export default class CuratorWidget extends React.Component {
   constructor(props) {
     super(props);
-    this.loadScript = this.loadScript.bind(this)
+    this.loadScript = this.loadScript.bind(this);
   }
 
   loadScript(src, libraryId) {
@@ -25,7 +25,9 @@ export default class CuratorWidget extends React.Component {
   }
 
   componentDidMount() {
-    this.loadScript('https://cdn.curator.io/published/' + this.props.feedId + '.js');
+    this.loadScript(
+      'https://cdn.curator.io/published/' + this.props.feedId + '.js'
+    );
   }
 
   render() {
