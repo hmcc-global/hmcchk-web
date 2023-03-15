@@ -121,12 +121,6 @@ const RenderSwitch = (param) => {
           <Text fontWeight="bold">
             “Harvest Mission Community Church (Hong Kong) Limited”
           </Text>
-          <Text fontWeight="bold" paddingTop="1vw">
-            You may also mail your checks or donations to:
-          </Text>
-          <Text fontWeight="bold">
-            P.O. Box 50443 Sai Ying Pun Post Office Sai Ying Pun, Hong Kong
-          </Text>
         </Box>
       );
     default:
