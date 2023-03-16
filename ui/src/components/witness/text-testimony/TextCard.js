@@ -59,7 +59,7 @@ const TextCard = ({ textData, allText }) => {
         ) : null}
         <Box 
           p={4} 
-          w={{ base: '42vw', sm: '40vw', md: '42vw', lg: '27vw' }} 
+          w={{ base: '42vw', sm: '40vw', md: '42vw', lg: '42vw' }} 
           bg={BackgroundColor()}
           borderRadius={10}
         >
