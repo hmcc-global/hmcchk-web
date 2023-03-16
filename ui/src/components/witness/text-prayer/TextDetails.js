@@ -79,20 +79,22 @@ const TextDetails = (props) => {
                 </HStack>
                 <Stack spacing={8}>
                   <Box>
-                    <VStack alignItems="left" spacing={[4, 6]} px= {3}>
+                    <VStack alignItems="left" spacing={[4, 6]} px={3}>
                       <VStack alignItems="left">
-                      <Text display={['flex']}>{text.lifestage}</Text>
-                      <HStack spacing={[0, 2]}>
-                        <Text display={['flex']}>{text.fullName}</Text>
-                        <BsDot />
-                        <Text>
-                          {DateTime.fromISO(text.createdAt).toFormat(
-                            'LLLL dd, yyyy'
-                          )}
-                        </Text>
-                        </ HStack>
-                      <Text>{parseDescription(text.prayer)}</Text>
-                      {text.image ? <Image /> : null}
+                        <Text display="flex">{text.lifestage}</Text>
+                        <HStack spacing={[0, 2]}>
+                          <Text display="flex" overflowWrap="break-word">
+                            {text.fullName}
+                          </Text>
+                          <BsDot />
+                          <Text>
+                            {DateTime.fromISO(text.createdAt).toFormat(
+                              'LLLL dd, yyyy'
+                            )}
+                          </Text>
+                        </HStack>
+                        <Text>{parseDescription(text.prayer)}</Text>
+                        {text.image ? <Image /> : null}
                       </VStack>
                     </VStack>
                   </Box>
