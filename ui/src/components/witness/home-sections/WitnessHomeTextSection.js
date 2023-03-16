@@ -73,7 +73,7 @@ const WitnessHomeTextSection = () => {
         ml={['3', '5']}
         mt={['6', '12']}
         mb={['6', '12']}
-        templateColumns={['repeat(1, 1fr)', 'repeat(3, minmax(0, 1fr));']}
+        templateColumns="repeat(3, minmax(0, 1fr))"
         gap={[3, 6]}
         display={{ base: 'none', md: 'grid' }}
       >
@@ -87,7 +87,7 @@ const WitnessHomeTextSection = () => {
         ml={['3', '5']}
         mt={['6', '12']}
         mb={['6', '12']}
-        templateColumns={['repeat(2, 1fr)', 'repeat(3, minmax(0, 1fr));']}
+        templateColumns="repeat(2, 1fr)"
         gap={[3, 6]}
         display={{ base: 'grid', md: 'none' }}
       >
