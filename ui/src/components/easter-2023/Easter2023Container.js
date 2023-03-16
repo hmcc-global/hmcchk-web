@@ -141,9 +141,9 @@ const Easter2023Container = (props) => {
           />
           <WitnessHomeTextSection />
         </Box>
-        <Box height="10"></Box>
+        {/* <Box height="10"></Box> */}
         <div id="prayer-wall">
-          <Box height="20"></Box>
+          <Box height="10"></Box>
         </div>
         <EasterHomeTextSection />
         <Box height="20"></Box>
