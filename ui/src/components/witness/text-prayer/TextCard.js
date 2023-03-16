@@ -54,7 +54,7 @@ const TextCard = ({ textData, allText }) => {
             </AspectRatio>
           </>
         ) : null}
-        <Box p={4} w={{ base: '45vw', sm: '43vw', md: '45vw', lg: '30vw' }}>
+        <Box p={3} w={{ base: '45vw', sm: '43vw', md: '45vw', lg: '30vw' }}>
           <VStack alignItems="left" spacing={2}>
             <Wrap>
               <Tag
@@ -84,21 +84,24 @@ const TextCard = ({ textData, allText }) => {
               </Text>
             </Box>
 
-            <Text
-              fontSize={{ base: 'xx-small', md: 'sm' }}
-              alignSelf="flex-end"
-              color="black"
-            >
-            {textData.lifestage} 
-            </Text>
-            <Text
-              fontSize={{ base: 'xx-small', md: 'sm' }}
-              alignSelf="flex-end"
-              color="black"
-            >
-              {textData.fullName} &bull; {textDate}
-            </Text>
-            <Wrap>
+            <Box textAlign="end">
+              <Text
+                fontSize={{ base: 'xx-small', md: 'sm' }}
+                alignSelf="flex-end"
+                color="black"
+              >
+                {textData.lifestage}
+              </Text>
+              <Text
+                fontSize={{ base: 'xx-small', md: 'sm' }}
+                alignSelf="flex-end"
+                color="black"
+                marginTop="0px"
+              >
+                {textData.fullName} &bull; {textDate}
+              </Text>
+            </Box>
+            <Wrap display={{ base: 'inline-flex', md: 'none' }}>
               <Tag
                 size="sm"
                 px={2}
@@ -106,7 +109,6 @@ const TextCard = ({ textData, allText }) => {
                 color="black"
                 bgColor="white"
                 textAlign="center"
-                display={{ base: 'inline-flex', md: 'none' }}
                 fontSize={['2vw', 'xx-small']}
                 fontWeight={600}
               >
