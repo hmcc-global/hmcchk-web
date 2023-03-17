@@ -7,6 +7,8 @@ import {
   Flex,
   Center,
   Divider,
+  Button,
+  Link,
 } from '@chakra-ui/react';
 
 import ThePassion from './ThePassion';
@@ -17,6 +19,7 @@ import EasterHomeTextSection from './../witness/home-sections/EasterHomeTextSect
 import ShareTestimonyButton from '../witness/text-testimony/ShareTestimonyButton';
 import WitnessHomeVideoSection from '../witness/home-sections/WitnessHomeVideoSection';
 import WitnessHomeTextSection from '../witness/home-sections/WitnessHomeTextSection';
+import CuratorWidget from './CuratorWidget';
 import EasterHomeInvitationSection from '../witness/home-sections/EasterHomeInvitationSection';
 
 const Easter2023Container = (props) => {
@@ -146,6 +149,31 @@ const Easter2023Container = (props) => {
             mx="auto"
           />
           <WitnessHomeTextSection />
+          <Box
+            textAlign="center"
+            textStyle="dm_sans_bold"
+            fontSize={{ sm: '20px', md: '30px', lg: '40px' }}
+          >
+            <Text textColor="#E60053">#2023Witness Testimony Campaign</Text>
+            <Button
+              borderRadius={[5, 10]}
+              background="linear-gradient(109.54deg, #FF4F50 11.11%, #D33E68 57.55%, #BD3381 95.53%)"
+              textColor="#FFFFFF"
+              fontWeight="700"
+              fontFamily="Inter"
+              height={['25px', '40px']}
+              fontSize={['xs', 'sm', 'lg']}
+              as={Link}
+              href="https://www.instagram.com/hmcc_hk/"
+              _hover="none"
+              target="_blank"
+            >
+              Follow @hmcc_hk
+            </Button>
+          </Box>
+          <CuratorWidget feedId="4762b1d6-6652-492d-a870-fc4dd2ae395c"></CuratorWidget> 
+          {/* #2023Witness */}
+          
         </Box>
       </VStack>
     </Container>
