@@ -79,7 +79,7 @@ const EasterHomeTextSection = () => {
   });
 
   return (
-    <Box w="100%">
+    <Box w="100%" pb={10}>
       {eventDisplay ? (
         <>
           <Container maxW="100%" centerContent>
