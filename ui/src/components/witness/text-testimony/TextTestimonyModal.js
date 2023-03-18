@@ -48,13 +48,13 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
   };
 
   const onClick = (e) => {
-    if(e){
-      navigator.clipboard.writeText(e)
+    if (e) {
+      navigator.clipboard.writeText(e);
     }
-    if(e.clipboardData){
-      e.clipboardData.setData("text/plain", {e});
+    if (e.clipboardData) {
+      e.clipboardData.setData('text/plain', { e });
     }
-  }
+  };
 
   const renderForm = () => (
     <VStack textAlign="center" mb={5}>
@@ -143,7 +143,9 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
           <FormControl id="email">
             <FormHelperText color="#C11553" textAlign="left">
               <i>
-              If you are open for an invitation to share your testimony with the church, please input your email address so we can contact you :) <br/>
+                If you are open for an invitation to share your testimony with
+                the church, please input your email address so we can contact
+                you :) <br />
               </i>
             </FormHelperText>
             <Input
@@ -154,9 +156,9 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </FormControl>
-          <FormHelperText color="#C11553" alignItems={"center"}>
-              <i>Thank you for sharing your testimony!.</i>
-            </FormHelperText>
+          <FormHelperText color="#C11553" alignItems={'center'}>
+            <i>Thank you for sharing your testimony!.</i>
+          </FormHelperText>
           <Button w="30%" bg="#C11553" color="white" type="submit" id="submit">
             Submit
           </Button>
@@ -167,7 +169,7 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
 
   const renderFormSubmitted = useCallback(
     () => (
-      <VStack textAlign="center" maxW={['40vw','42vw']}>
+      <VStack textAlign="center" maxW={['90vw', '42vw']}>
         <Text color="#C11553">
           <i>
             <b>Thank you for sharing your testimony!</b>
@@ -177,34 +179,54 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
         </Text>
         <Text color="#C11553">
           <i>
-            Join the <Link color='teal.500' href="http://instagram.com/hmcc_hk/" isExternal>testimony campaign</Link> over on social media, and share your story on how you witnessed Jesus!
+            Join the{' '}
+            <Link
+              color="teal.500"
+              href="http://instagram.com/hmcc_hk/"
+              isExternal
+            >
+              testimony campaign
+            </Link>{' '}
+            over on social media, and share your story on how you witnessed
+            Jesus!
           </i>
         </Text>
-        <Box bg="#FFE2DE" p={4} borderRadius={10} width={['45vw']}>
+        <Box bg="#FFE2DE" p={4} borderRadius={10} width={['90vw', '45vw']}>
           <Text color="#C11553" textAlign="left">
             <i>
-              1. Answer the prompt <b>"I Witnessed Jesus' Passionate _______"</b>
-              <br /> 2. Share and elaborate on the prompt as creative as you can.
-              <br /> 3. Use the hashtag in the caption <b>#2023Witness</b> and tag <b>@hmcc_hk.</b>
+              1. Answer the prompt{' '}
+              <b>"I Witnessed Jesus' Passionate _______"</b>
+              <br /> 2. Share and elaborate on the prompt as creative as you
+              can.
+              <br /> 3. Use the hashtag in the caption <b>#2023Witness</b> and
+              tag <b>@hmcc_hk.</b>
             </i>
           </Text>
         </Box>
         <Text color="#C11553">
           <i>
-            Tap below to copy the testimony you just submitted and feel free to post it in Instagram!
+            Click/Tap below to copy the testimony you just submitted and feel
+            free to post it in Instagram!
           </i>
         </Text>
-        <Box bg="#EAE9E9;" p={4} borderRadius={10} height={'15vw'} overflowY='scroll' width={['45vw']} onClick={onClick(testimony)}>
+        <Box
+          bg="#EAE9E9;"
+          p={4}
+          borderRadius={10}
+          height={['30vw', '10vw']}
+          overflowY="scroll"
+          width={['90vw', '45vw']}
+          onClick={onClick(testimony)}
+        >
           <Text color="#616161" textAlign="left">
-            <i>
-              {testimony}
-            </i>
+            <i>{testimony}</i>
           </Text>
         </Box>
         <Button
           textStyle="arial"
           as={Link}
-          href="http://instagram.com/" isExternal
+          href="http://instagram.com/"
+          isExternal
           border="2px"
           borderColor="#BE337F"
           borderRadius={10}
@@ -214,8 +236,9 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
           size="md"
           variant="outline"
           _hover={{
-            background: "linear-gradient(109.54deg, #FF4F50 11.11%, #D33E68 57.55%, #BD3381 95.53%);",
-            color: "#FFFFFF",
+            background:
+              'linear-gradient(109.54deg, #FF4F50 11.11%, #D33E68 57.55%, #BD3381 95.53%);',
+            color: '#FFFFFF',
           }}
         >
           Open Instagram
@@ -226,7 +249,13 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
   );
 
   return (
-    <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onCloseCustom} size="lg" scrollBehavior='outside'>
+    <Modal
+      blockScrollOnMount={false}
+      isOpen={isOpen}
+      onClose={onCloseCustom}
+      size="lg"
+      scrollBehavior="outside"
+    >
       <ModalOverlay>
         <ModalContent bg="#FBF7FC" maxW={['100vw', '50vw']} alignItems="center">
           <ModalHeader />
