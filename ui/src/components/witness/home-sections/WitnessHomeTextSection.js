@@ -83,7 +83,7 @@ const WitnessHomeTextSection = () => {
       </Grid>
       <Grid
         mr={['3', '5']}
-        ml={['3', '5']}
+        ml={['5', '5']}
         mt={['6', '12']}
         mb={['6', '12']}
         templateColumns="repeat(2, 1fr)"
