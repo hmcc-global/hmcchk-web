@@ -46,7 +46,7 @@ module.exports = {
         classAttendance,
         recognitionDate,
         recommitmentDate,
-      });
+      }).fetch();
 
       // update user if member
       if (recognitionDate !== null) {
