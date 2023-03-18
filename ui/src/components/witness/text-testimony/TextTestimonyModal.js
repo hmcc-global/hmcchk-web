@@ -198,8 +198,10 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
               <b>"I Witnessed Jesus' Passionate _______"</b>
               <br /> 2. Share and elaborate on the prompt as creative as you
               can.
-              <br /> 3. Use the hashtag in the caption <b>#2023Witness</b> and
-              tag <b>@hmcc_hk.</b>
+              <br /> 3. Use the hashtag in the caption <b>
+                #2023WitnessJesus
+              </b>{' '}
+              and tag <b>@hmcc_hk.</b>
             </i>
           </Text>
         </Box>
