@@ -156,9 +156,8 @@ const Easter2023Container = (props) => {
             textAlign="center"
             textStyle="dm_sans_bold"
             fontSize={{ sm: '20px', md: '30px', lg: '40px' }}
-            my={10}
           >
-            <Text textColor="#E60053" fontSize={[25, 40]}>#2023Witness Testimony Campaign</Text>
+            <Text textColor="#E60053"  fontSize={[25, 40]}>#2023WitnessJesus Testimony Campaign</Text>
             <Button
               borderRadius={[5, 10]}
               background="linear-gradient(109.54deg, #FF4F50 11.11%, #D33E68 57.55%, #BD3381 95.53%)"
@@ -176,14 +175,15 @@ const Easter2023Container = (props) => {
               Follow @hmcc_hk
             </Button>
           </Box>
+          <Box paddingTop = {['8%', '2%', '2%']} paddingLeft = {['0%', '10%', '20%','30%']} paddingRight = {['0%', '10%', '20%','30%']}>
           <CuratorWidget feedId="4762b1d6-6652-492d-a870-fc4dd2ae395c"></CuratorWidget> 
-          {/* #2023Witness */}
-            {/* <Box height="10"></Box> */}
-            <div id="prayer-wall">
-              <Box height="70"></Box>
-            </div>
-            <EasterHomeTextSection />
-          
+          </Box>
+        
+         {/* <Box height="10"></Box> */}
+          <div id="prayer-wall">
+            <Box height="70"></Box>
+          </div>
+          <EasterHomeTextSection />
         </Box>
       </VStack>
     </Container>
