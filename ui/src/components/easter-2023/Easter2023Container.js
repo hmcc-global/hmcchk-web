@@ -72,6 +72,7 @@ const Easter2023Container = (props) => {
 
             <EasterHomeInvitationSection />
 
+           
             {/* <Box height="10"></Box> */}
             <div id="prayer-wall">
               <Box height="10"></Box>
@@ -154,7 +155,7 @@ const Easter2023Container = (props) => {
             textStyle="dm_sans_bold"
             fontSize={{ sm: '20px', md: '30px', lg: '40px' }}
           >
-            <Text textColor="#E60053">#2023Witness Testimony Campaign</Text>
+            <Text textColor="#E60053"  fontSize={[25, 40]}>#2023Witness Testimony Campaign</Text>
             <Button
               borderRadius={[5, 10]}
               background="linear-gradient(109.54deg, #FF4F50 11.11%, #D33E68 57.55%, #BD3381 95.53%)"
