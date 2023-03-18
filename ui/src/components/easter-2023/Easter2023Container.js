@@ -164,15 +164,32 @@ const Easter2023Container = (props) => {
               textColor="#FFFFFF"
               fontWeight="700"
               fontFamily="Inter"
-              height={['25px', '40px']}
+              height={['45px', '40px']}
               fontSize={['xs', 'sm', 'lg']}
               as={Link}
               href="https://www.instagram.com/hmcc_hk/"
               _hover="none"
               target="_blank"
               mt={5}
+              mr={5}
             >
               Follow @hmcc_hk
+            </Button>
+            <Button
+              borderRadius={[5, 10]}
+              background="linear-gradient(109.54deg, #AB3D8C 11.11%, #BD3381 57.55%, #D33E68 95.53%)"
+              textColor="#FFFFFF"
+              fontWeight="700"
+              fontFamily="Inter"
+              height={['45px', '40px']}
+              fontSize={['xs', 'sm', 'lg']}
+              as={Link}
+              href="https://www.instagram.com/explore/tags/2023witnessjesus/"
+              _hover="none"
+              target="_blank"
+              mt={5}
+            >
+              View the Campaign
             </Button>
           </Box>
           <Box paddingTop = {['8%', '2%', '2%']} paddingLeft = {['0%', '10%', '20%','30%']} paddingRight = {['0%', '10%', '20%','30%']}>
