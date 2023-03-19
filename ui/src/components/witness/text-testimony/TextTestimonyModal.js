@@ -71,7 +71,7 @@ const TextTestimonyModal = ({ isOpen, onClose }) => {
               </b>
             </FormLabel>
             <FormHelperText color="#C11553" textAlign="left">
-              <i>(e.g. I witnessed Jesus' Passionate________)</i>
+              <i>(e.g. I witnessed Jesus' Passionate________ through .....)</i>
             </FormHelperText>
             <Textarea
               bg="#FFE2DE"

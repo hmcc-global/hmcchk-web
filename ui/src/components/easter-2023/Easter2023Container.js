@@ -84,7 +84,7 @@ const Easter2023Container = (props) => {
                 <Flex w="100%" justifyContent="center" direction="column">
                   <Box w={['85%', '90%']} mx="auto" mt={[5, 7]}>
                     <Text
-                      textColor="#8D2C72"
+                      textColor="#C11553"
                       fontWeight="1000"
                       fontFamily="concrete_demo"
                       fontSize={['2.1em', '3em']}
@@ -121,7 +121,7 @@ const Easter2023Container = (props) => {
                         fontSize={['md', '2xl']}
                         textAlign="center"
                       >
-                        HOW ARE YOU WITNESSING GOD?
+                        This Passion Week, share how you are witnessing Jesus?
                       </Text>
                     </Box>
                     <Box mx="auto" justifyContent="center" w={['85%', '30%']}>
@@ -157,7 +157,9 @@ const Easter2023Container = (props) => {
             textStyle="dm_sans_bold"
             fontSize={{ sm: '20px', md: '30px', lg: '40px' }}
           >
-            <Text textColor="#E60053"  fontSize={[25, 40]}>#2023WitnessJesus Testimony Campaign</Text>
+            <Text textColor="#E60053" fontSize={[25, 40]}>
+              #2023WitnessJesus Testimony Campaign
+            </Text>
             <Button
               borderRadius={[5, 10]}
               background="linear-gradient(109.54deg, #FF4F50 11.11%, #D33E68 57.55%, #BD3381 95.53%)"
@@ -192,11 +194,15 @@ const Easter2023Container = (props) => {
               View the Campaign
             </Button>
           </Box>
-          <Box paddingTop = {['8%', '2%', '2%']} paddingLeft = {['0%', '10%', '20%','30%']} paddingRight = {['0%', '10%', '20%','30%']}>
-          <CuratorWidget feedId="4762b1d6-6652-492d-a870-fc4dd2ae395c"></CuratorWidget> 
+          <Box
+            paddingTop={['8%', '2%', '2%']}
+            paddingLeft={['0%', '10%', '20%', '30%']}
+            paddingRight={['0%', '10%', '20%', '30%']}
+          >
+            <CuratorWidget feedId="4762b1d6-6652-492d-a870-fc4dd2ae395c"></CuratorWidget>
           </Box>
-        
-         {/* <Box height="10"></Box> */}
+
+          {/* <Box height="10"></Box> */}
           <div id="prayer-wall">
             <Box height="70"></Box>
           </div>
