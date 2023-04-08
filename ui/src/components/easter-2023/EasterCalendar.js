@@ -95,10 +95,20 @@ const EasterCalendar = () => {
           fontSize={['14px', '18px']}
           color="#7B0D0D"
           fontWeight={800}
-          paddingBottom={{ base: 3, sm: 4, md: 5, lg: 6 }}
         >
           11/F, KOHO, Kwun Tong/Online
         </Text>
+        <Link
+          textStyle={'dm_sans'}
+          fontSize={['14px', '18px']}
+          color="#7B0D0D"
+          fontWeight={800}
+          href="http://bit.ly/KOHODirections"
+          textDecoration="underline"
+        >
+          (Directions to KOHO)
+        </Link>
+        <Text paddingBottom={{ base: 3, sm: 4, md: 5, lg: 6 }}></Text>
         <Button
           textStyle={'dm_sans'}
           bgColor="#FCF6FF"
@@ -117,8 +127,8 @@ const EasterCalendar = () => {
           borderWidth={4}
           borderColor="#67298E"
           _hover={{
-            bgColor: "#67298E",
-            color: "#FCF6FF",
+            bgColor: '#67298E',
+            color: '#FCF6FF',
           }}
         >
           Add to Calendar
@@ -177,10 +187,20 @@ const EasterCalendar = () => {
           fontSize={['14px', '18px']}
           color="#7B0D0D"
           fontWeight={800}
-          paddingBottom={{ base: 3, sm: 4, md: 5, lg: 6 }}
         >
           N101, HKCEC, Wan Chai
         </Text>
+        <Link
+          textStyle={'dm_sans'}
+          fontSize={['14px', '18px']}
+          color="#7B0D0D"
+          fontWeight={800}
+          href="https://bit.ly/directions-hkcec-n101"
+          textDecoration="underline"
+        >
+          (Directions to HKCEC N101)
+        </Link>
+        <Text paddingBottom={{ base: 3, sm: 4, md: 5, lg: 6 }}></Text>
         <Button
           textStyle={'dm_sans'}
           bgColor="#FCF6FF"
@@ -199,8 +219,8 @@ const EasterCalendar = () => {
           borderWidth={4}
           borderColor="#FF619F"
           _hover={{
-            bgColor: "#FF619F",
-            color: "#FCF6FF",
+            bgColor: '#FF619F',
+            color: '#FCF6FF',
           }}
         >
           Add to Calendar
