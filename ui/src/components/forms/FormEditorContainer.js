@@ -209,6 +209,9 @@ const FormEditorContainer = (props) => {
                           <option value="email-retreat-donation-payment-success">
                             Life Defined Donation Payment Confirmation
                           </option>
+                          <option value="email-ignite-payment-success">
+                            !gnite 2023 Payment Confirmation
+                          </option>
                         </Select>
                         <FormErrorMessage>
                           {errors['paymentConfirmationEmailTemplate'] &&
