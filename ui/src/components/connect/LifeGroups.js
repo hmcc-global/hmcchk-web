@@ -83,7 +83,7 @@ const LifeGroups = (props) => {
               _hover={{ boxShadow: 'none', color: '#fff' }}
               target="_blank"
             >
-              <LinkOverlay href="https://bit.ly/hmccLG2223" target="_blank">
+              <LinkOverlay href="https://bit.ly/summerLG2023" target="_blank">
                 TRY OUT A LIFE GROUP
               </LinkOverlay>
             </LinkBox>
