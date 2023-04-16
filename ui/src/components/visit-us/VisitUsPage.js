@@ -108,7 +108,7 @@ const VisitUsPage = (props) => {
                 </Link>
               </Text>
               <Spacer />
-              <Center w="100%" px={1}>
+              {/* <Center w="100%" px={1}>
                 <LinkBox
                   style={{ backgroundOrigin: "border-box" }}
                   as="button"
@@ -131,10 +131,10 @@ const VisitUsPage = (props) => {
                     Sign Up for In-person Sunday Celebration
                   </LinkOverlay>
                 </LinkBox>
-              </Center>
-              <Text textAlign="center" fontSize="sm">
+              </Center> */}
+              {/* <Text textAlign="center" fontSize="sm">
                 *Pre-registration opens every Monday at 8PM
-              </Text>
+              </Text> */}
             </VStack>
             <AspectRatio flex={5.75} ratio={16 / 9}>
               <iframe
