@@ -125,7 +125,29 @@ export default function AdminUser(props) {
     return '';
   };
 
+  const classAttendanceFormatter = (params) => {
+    if (params.value !== '') {
+      const dateArr = params.value.trim().split(/\s*,\s*/).filter(Boolean);
+      const formattedDateArr = dateArr.map((e) => {
+        const dateObj = DateTime.fromFormat(e, dateFromFormat);
+        if (dateObj.isValid)
+          return dateObj.toFormat(dateToFormat);
+        
+        return null;
+      });
+
+      return formattedDateArr.filter(Boolean).join(', ');
+    }
+
+    return params.value;
+  }
+
   // Getter Functions: to handle errors in retrieving data
+  const classAttendanceHeaderGetter = (params, parentName) => {
+    const headerName = 'Class Attendance';
+    return params.location === 'csv' ? `${parentName} ${headerName}` : headerName;
+  }
+
   const officialNameHeaderGetter = (params, parentName) => {
     const headerName = 'Official Name';
     if (params.location === 'csv') {
@@ -162,6 +184,18 @@ export default function AdminUser(props) {
       return data;
     }
   };
+
+  const membershipClassAttendanceValueGetter = (params) => {
+    if (
+      params?.data?.membershipInfo == null ||
+      !Array.isArray(params.data.membershipInfo) ||
+      params.data.membershipInfo[0] == null ||
+      !Array.isArray(params.data.membershipInfo[0]?.classAttendance)
+    )
+      return '';
+    
+    return params.data.membershipInfo[0].classAttendance.join();
+  }
 
   const membershipFilterGetter = (params) => {
     if (params) {
@@ -219,6 +253,18 @@ export default function AdminUser(props) {
       return params.data.baptismInfo[0]?.[colId];
     }
   };
+
+  const baptismClassAttendanceValueGetter = (params) => {
+    if (
+      params?.data?.baptismInfo == null ||
+      !Array.isArray(params.data.baptismInfo) ||
+      params.data.baptismInfo[0] == null ||
+      !Array.isArray(params.data.baptismInfo[0]?.classAttendance)
+    )
+      return '';
+    
+    return params.data.baptismInfo[0].classAttendance.join();
+  }
 
   const baptismFilterGetter = (params) => {
     if (params) {
@@ -314,6 +360,33 @@ export default function AdminUser(props) {
     return false;
   };
 
+  const membershipClassAttendanceValueSetter = (params) => {
+    const isValidDateArr = (e) => {
+      return DateTime.fromFormat(e, dateFromFormat).isValid;
+    }
+
+    if (params && params.data && params.newValue) {
+      const { colId } = params.colDef;
+      const { newValue } = params;
+      let parsedNewValue = [];
+
+      const dateArr = newValue.trim().split(/\s*,\s*/).filter(Boolean);
+      if (dateArr.length > 0 && dateArr.every(isValidDateArr)) {
+        parsedNewValue = dateArr.sort().reverse();
+      } else {
+        alert('Invalid ClassAttendance format. Expected: yyyy-MM-dd separated by commas "," e.g. yyyy-MM-dd,yyyy-MM-dd');
+        return false;
+      }
+
+      const newMembershipInfo = { ...params.data.membershipInfo[0] };
+      newMembershipInfo[colId] = parsedNewValue;
+      params.data.membershipInfo[0] = newMembershipInfo;
+      return true;
+    }
+
+    return false;
+  }
+
   const baptismInfoSetter = (params) => {
     if (params && params.data) {
       const { colId } = params.colDef;
@@ -330,6 +403,33 @@ export default function AdminUser(props) {
 
     return false;
   };
+
+  const baptismClassAttendanceValueSetter = (params) => {
+    const isValidDateArr = (e) => {
+      return DateTime.fromFormat(e, dateFromFormat).isValid;
+    }
+
+    if (params && params.data && params.newValue) {
+      const { colId } = params.colDef;
+      const { newValue } = params;
+      let parsedNewValue = [];
+
+      const dateArr = newValue.trim().split(/\s*,\s*/).filter(Boolean);
+      if (dateArr.length > 0 && dateArr.every(isValidDateArr)) {
+        parsedNewValue = dateArr.sort().reverse();
+      } else {
+        alert('Invalid ClassAttendance format. Expected: yyyy-MM-dd separated by commas "," e.g. yyyy-MM-dd,yyyy-MM-dd');
+        return false;
+      }
+
+      const newBaptismInfo = { ...params.data.baptismInfo[0] };
+      newBaptismInfo[colId] = parsedNewValue;
+      params.data.baptismInfo[0] = newBaptismInfo;
+      return true;
+    }
+
+    return false;
+  }
 
   const titheIdSetter = (params) => {
     const { newValue } = params;
@@ -691,6 +791,15 @@ export default function AdminUser(props) {
               valueSetter: membershipInfoSetter,
               columnGroupShow: 'open',
             },
+            {
+              headerValueGetter: (p) =>
+                classAttendanceHeaderGetter(p, 'Membership'),
+              colId: 'classAttendance',
+              valueGetter: membershipClassAttendanceValueGetter ,
+              valueFormatter: classAttendanceFormatter,
+              valueSetter: membershipClassAttendanceValueSetter,
+              columnGroupShow: 'open',
+            },
           ],
         },
         {
@@ -724,6 +833,15 @@ export default function AdminUser(props) {
               colId: 'officialName',
               valueGetter: baptismOfficialNameGetter,
               valueSetter: baptismInfoSetter,
+              columnGroupShow: 'open',
+            },
+            {
+              headerValueGetter: (p) =>
+                classAttendanceHeaderGetter(p, 'Baptism'),
+              colId: 'classAttendance',
+              valueGetter: baptismClassAttendanceValueGetter ,
+              valueFormatter: classAttendanceFormatter,
+              valueSetter: baptismClassAttendanceValueSetter,
               columnGroupShow: 'open',
             },
           ],
