@@ -1,6 +1,6 @@
 module.exports = {
   attributes: {
-    fullName: {
+    name: {
       type: 'string',
       defaultsTo: '',
     },
@@ -18,6 +18,10 @@ module.exports = {
     },
     tags: {
       type: 'json',
+    },
+    lifestage: {
+      type: 'string',
+      required: false,
     },
     image: {
       type: 'string',

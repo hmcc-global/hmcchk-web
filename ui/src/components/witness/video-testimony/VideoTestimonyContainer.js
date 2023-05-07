@@ -31,7 +31,7 @@ const VideoTestimonyContainer = (props) => {
 
   return (
     <>
-      <Container maxW="100%" padding={[0, 2]}>
+      <Container maxW="100%" padding={[0, 1]}>
         <VideoCardList allVideos={videos} />
       </Container>
     </>

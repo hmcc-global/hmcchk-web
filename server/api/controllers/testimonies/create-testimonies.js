@@ -4,7 +4,7 @@ module.exports = {
   description: 'submit a testimony',
 
   inputs: {
-    fullName: {
+    name: {
       type: 'string',
       required: false,
     },
@@ -24,6 +24,10 @@ module.exports = {
       type: 'json',
       required: false,
     },
+    lifestage: {
+      type: 'string',
+      required: false,
+    },
   },
 
   exits: {
@@ -32,14 +36,18 @@ module.exports = {
     },
   },
 
-  fn: async function ({ fullName, email, theme, testimony, tags }, exits) {
+  fn: async function (
+    { name, email, theme, testimony, tags, lifestage },
+    exits
+  ) {
     try {
       const newTestimony = await Testimonies.create({
-        fullName,
+        name,
         email,
         theme,
         testimony,
         tags,
+        lifestage,
       });
 
       return exits.success(newTestimony);

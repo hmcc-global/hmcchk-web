@@ -20,7 +20,7 @@ const WitnessHomeVideoSection = () => {
         data.forEach((wv) => {
           wv.renderDate = wv.endDate;
         });
-        data.sort((a, b) => (a.renderDate > b.renderDate ? 1 : -1));
+        data.sort((a, b) => (a.renderDate < b.renderDate ? 1 : -1));
         setVideos([...data]);
       } else {
         throw Error('Something went wrong');
@@ -32,7 +32,7 @@ const WitnessHomeVideoSection = () => {
 
   return (
     <Box>
-      <HStack mt={4} mb={6} spacing="auto">
+      <HStack mt={4} mb={6} spacing="auto" px={[3, 5]}>
         <Box
           w={['100%', 'auto']}
           textAlign="center"
@@ -45,7 +45,6 @@ const WitnessHomeVideoSection = () => {
             color="#7C2D6B"
             fontWeight={600}
             fontSize={['1rem', '1.5rem']}
-            pl={[0, 4]}
             display="flex"
             alignItems="center"
           >
@@ -66,6 +65,7 @@ const WitnessHomeVideoSection = () => {
           size="lg"
           variant="outline"
           display={{ base: 'none', md: 'flex' }}
+          position="inherit"
         >
           WATCH ALL VIDEO TESTIMONIES
         </Button>
@@ -77,6 +77,7 @@ const WitnessHomeVideoSection = () => {
         mb={['6', '12']}
         templateColumns={['repeat(1, 1fr)', 'repeat(3, minmax(0, 1fr));']}
         gap={[3, 6]}
+        position="inherit"
       >
         {videos.length > 0 &&
           videos
@@ -93,10 +94,11 @@ const WitnessHomeVideoSection = () => {
           borderRadius={10}
           color="#7C2D6B"
           fontSize={15}
-          mr={4}
+          mr={[0, 4]}
           size="md"
           variant="outline"
           display={{ base: 'flex', md: 'none' }}
+          position="inherit"
         >
           WATCH ALL VIDEO TESTIMONIES
         </Button>

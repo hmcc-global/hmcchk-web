@@ -30,7 +30,7 @@ const WitnessHomeTextSection = () => {
 
   return (
     <Box w="100%">
-      <HStack mt={4} mb={6} spacing="auto">
+      <HStack mt={4} mb={6} spacing="auto" px={[3, 5]}>
         <Box
           w={['100%', 'auto']}
           textAlign="center"
@@ -43,7 +43,6 @@ const WitnessHomeTextSection = () => {
             color="#D07E78"
             fontWeight={600}
             fontSize={['1rem', '1.5rem']}
-            pl={[0, 4]}
             display="flex"
             alignItems="center"
           >
@@ -73,15 +72,30 @@ const WitnessHomeTextSection = () => {
         ml={['3', '5']}
         mt={['6', '12']}
         mb={['6', '12']}
-        templateColumns={['repeat(2, 1fr)', 'repeat(3, 1fr)']}
+        templateColumns="repeat(3, minmax(0, 1fr))"
         gap={[3, 6]}
+        display={{ base: 'none', md: 'grid' }}
       >
         {texts.length > 0 &&
           texts
-            .slice(0, 3)
+            .slice(0, 6)
             .map((text) => <TextCard key={text.id} textData={text} />)}
       </Grid>
-      <Box display="flex" justifyContent="center">
+      <Grid
+        mr={['3', '5']}
+        ml={['5', '5']}
+        mt={['6', '12']}
+        mb={['6', '12']}
+        templateColumns="repeat(2, 1fr)"
+        gap={[3, 6]}
+        display={{ base: 'grid', md: 'none' }}
+      >
+        {texts.length > 0 &&
+          texts
+            .slice(0, 4)
+            .map((text) => <TextCard key={text.id} textData={text} />)}
+      </Grid>
+      <Box display="flex" justifyContent="center" mb="6">
         <Button
           textStyle="dm_sans"
           as={Link}
@@ -91,7 +105,7 @@ const WitnessHomeTextSection = () => {
           borderRadius={10}
           color="#D07E78"
           fontSize={15}
-          mr={4}
+          mr={[0, 4]}
           size="md"
           variant="outline"
           display={{ base: 'flex', md: 'none' }}
