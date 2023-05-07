@@ -49,8 +49,6 @@ const TextCard = ({ textData, allText }) => {
     >
       <Stack
         direction={['column', 'row']}
-        bg={BackgroundColor()}
-        borderRadius={10}
       >
         {textData.image ? (
           <>
@@ -59,7 +57,12 @@ const TextCard = ({ textData, allText }) => {
             </AspectRatio>
           </>
         ) : null}
-        <Box p={[4]} w={['42vw', '25vw']}>
+        <Box 
+          p={4} 
+          w={{ base: '42vw', sm: '40vw', md: '42vw', lg: '42vw' }} 
+          bg={BackgroundColor()}
+          borderRadius={10}
+        >
           <VStack alignItems="left" spacing={2}>
             <Wrap>
               {Tags.map((tag) => {
@@ -81,10 +84,12 @@ const TextCard = ({ textData, allText }) => {
               fontSize={{ base: 'sm', md: 'lg' }}
               fontWeight={['600', '800']}
               color="black"
+              noOfLines={[2, 3,4]}
+              textOverflow="ellipsis"
             >
               {textData.theme}
             </Text>
-            <Text fontSize={{ base: 'xs', md: 'sm' }} isTruncated color="black">
+            <Text fontSize={{ base: 'xs', md: 'sm' }} color="black" noOfLines={[4, 3]} textOverflow="ellipsis">
               {textData.testimony}
             </Text>
             <Text

@@ -103,11 +103,7 @@ const VideoCardList = ({ allVideos }) => {
       >
         {currentVideos.length > 0 &&
           currentVideos.map((video, i) => (
-            <VideoCard
-              key={video.id}
-              videoData={video}
-              allVideos={allVideos}
-            />
+            <VideoCard key={video.id} videoData={video} allVideos={allVideos} />
           ))}
       </Grid>
       <Pagination

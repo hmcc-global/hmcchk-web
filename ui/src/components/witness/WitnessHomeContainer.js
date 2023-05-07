@@ -1,17 +1,20 @@
 import React from 'react';
 import {
   Box,
+  Button,
   Container,
   Image,
   Text,
   VStack,
   Flex,
   Divider,
+  Link,
 } from '@chakra-ui/react';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 import WitnessHomeVideoSection from './home-sections/WitnessHomeVideoSection';
 import WitnessHomeTextSection from './home-sections/WitnessHomeTextSection';
 import ShareTestimonyButton from './text-testimony/ShareTestimonyButton';
+import CuratorWidget from './CuratorWidget';
 
 const WitnessHomeContainer = (props) => {
   return (
@@ -102,26 +105,64 @@ const WitnessHomeContainer = (props) => {
           backgroundColor="#DAC7BC"
         />
         <WitnessHomeTextSection />
-      </Container>
-      <Container
-        maxW="container.sm"
-        my={10}
-        centerContent
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Text
-          textStyle={'dm_sans'}
-          textColor="#8D2C72"
-          fontWeight="bold"
-          fontSize={['20px', '24px']}
+        <Divider
+            orientation="horizontal"
+            my={7}
+            w="25%"
+            height="3px"
+            backgroundColor="#DAC7BC"
+            mx="auto"
+          />
+        <Box
           textAlign="center"
+          textStyle="dm_sans_bold"
+          fontSize={{ sm: '20px', md: '30px', lg: '40px' }}
+          my={5}
         >
-          HOW ARE YOU WITNESSING GOD?
-        </Text>
-        <Flex justifyContent="center" w={['90%', '70%']}>
-          <ShareTestimonyButton />
-        </Flex>
+          <Text textColor="#E60053" fontSize={[25, 40]}>
+            #2023WitnessJesus Testimony Campaign
+          </Text>
+          <Button
+            borderRadius={[5, 10]}
+            background="linear-gradient(109.54deg, #FF4F50 11.11%, #D33E68 57.55%, #BD3381 95.53%)"
+            textColor="#FFFFFF"
+            fontWeight="700"
+            fontFamily="Inter"
+            height={['45px', '40px']}
+            fontSize={['xs', 'sm', 'lg']}
+            as={Link}
+            href="https://www.instagram.com/hmcc_hk/"
+            _hover="none"
+            target="_blank"
+            mt={5}
+            mr={5}
+          >
+            Follow @hmcc_hk
+          </Button>
+          <Button
+            borderRadius={[5, 10]}
+            background="linear-gradient(109.54deg, #AB3D8C 11.11%, #BD3381 57.55%, #D33E68 95.53%)"
+            textColor="#FFFFFF"
+            fontWeight="700"
+            fontFamily="Inter"
+            height={['45px', '40px']}
+            fontSize={['xs', 'sm', 'lg']}
+            as={Link}
+            href="https://www.instagram.com/explore/tags/2023witnessjesus/"
+            _hover="none"
+            target="_blank"
+            mt={5}
+          >
+            View the Campaign
+          </Button>
+          <Box
+            paddingTop={['8%', '5%', '5%']}
+            // paddingLeft={['0%', '10%', '20%', '30%']}
+            // paddingRight={['0%', '10%', '20%', '30%']}
+          >
+            <CuratorWidget feedId="4762b1d6-6652-492d-a870-fc4dd2ae395c"></CuratorWidget>
+          </Box>
+        </Box>
       </Container>
     </>
   );

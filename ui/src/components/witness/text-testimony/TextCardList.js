@@ -95,8 +95,9 @@ const TextCardList = ({ allText }) => {
       </HStack>
       {/* box filter */}
       <Grid
-        marginTop={[4, 8]}
-        templateColumns={['repeat(2, 1fr)', 'repeat(3, 1fr)']}
+        mt={['6', '12']}
+        mb={['6', '12']}
+        templateColumns={['repeat(2, 1fr)', 'repeat(3, minmax(0, 1fr));']}
         gap={[3, 6]}
       >
         {currentTexts.length > 0 &&

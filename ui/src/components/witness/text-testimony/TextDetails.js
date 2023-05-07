@@ -85,7 +85,7 @@ const TextDetails = (props) => {
                   <Box>
                     <VStack alignItems="left" spacing={[4, 6]}>
                       <HStack spacing={[0, 2]}>
-                        <Text display={['none', 'flex']}>{text.fullName}</Text>
+                        <Text display={['none', 'flex']}>{text.name}</Text>
                         <BsDot />
                         <Text>
                           {DateTime.fromISO(text.createdAt).toFormat(
