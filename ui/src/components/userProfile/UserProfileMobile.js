@@ -254,7 +254,12 @@ const UserProfileMobile = (props) => {
               <Flex direction="column">
                 {formList && formList.length > 0 && (
                   <Box>
-                    <Text fontWeight="700" fontSize="0.95rem" color="#718096" mb="2.5">
+                    <Text
+                      fontWeight="700"
+                      fontSize="0.95rem"
+                      color="#718096"
+                      mb="2.5"
+                    >
                       Available Signup Links:
                     </Text>
                     {generatePublishedFormLinks(formList)}
@@ -333,7 +338,6 @@ const UserProfileMobile = (props) => {
                     size="sm"
                     borderRadius="5"
                     {...register('lifestage', { required: true })}
-                    pointerEvents="none"
                     isInvalid={errors['lifestage']}
                     placeholder="Please fill in this field"
                   >
@@ -431,15 +435,22 @@ const UserProfileMobile = (props) => {
               </Stack>
             </TabPanel>
             <TabPanel p="7%">
+              <Center mb="5%">
+                <Button
+                  size="md"
+                  color="#0628A3"
+                  borderColor="#0628A3"
+                  borderRadius="10"
+                  variant="outline"
+                  type="submit"
+                >
+                  Save Information
+                </Button>
+              </Center>
               <Stack spacing="7%">
                 <FormControl>
                   <FormLabel color="#2C5282">LIFE Group</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
-                    {...register('lifeGroup')}
-                    pointerEvents="none"
-                  >
+                  <Select size="sm" borderRadius="5" {...register('lifeGroup')}>
                     {lifegroupList.map((item) => {
                       return <option key={'lg' + item}>{item}</option>;
                     })}
@@ -450,7 +461,6 @@ const UserProfileMobile = (props) => {
                   <Select
                     size="sm"
                     borderRadius="5"
-                    pointerEvents="none"
                     {...register('ministryTeam')}
                   >
                     {ministryTeamList.map((item) => {
