@@ -40,7 +40,7 @@ const lifegroupList = [
   'Wednesday Focus Women',
   'Latitude',
   'Covenant',
-  'Missions Team',
+  'Asia Missions Project Team',
 ];
 
 const districtList = [
