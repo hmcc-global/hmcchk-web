@@ -122,35 +122,35 @@ const UserProfileDesktop = (props) => {
     //get all forms
     const { data, status } = await getLoginOnlyFormsRequest();
     if (status === 200) {
-      setFormList([...data])
+      setFormList([...data]);
     }
   }, []);
 
   const fetchSignedUpForms = useCallback(async () => {
     //get signed up forms
-    const { data, status} = await axios.get('/api/forms/get-signedup-form', {
+    const { data, status } = await axios.get('/api/forms/get-signedup-form', {
       params: {
         userId: user.id,
       },
     });
 
-    if(status === 200){
+    if (status === 200) {
       setSignedUpFormList([...data]);
     }
-  }, [user.id])
+  }, [user.id]);
 
   const fetchUnignedUpForms = useCallback(async () => {
     //get signed up forms
-    const { data, status} = await axios.get('/api/forms/get-unsignedup-form', {
+    const { data, status } = await axios.get('/api/forms/get-unsignedup-form', {
       params: {
         userId: user.id,
       },
     });
 
-    if(status === 200){
+    if (status === 200) {
       setUnsignedFormList([...data]);
     }
-  }, [user.id])
+  }, [user.id]);
 
   // Implementation needs some component specific customization
   const handleEditUserInformation = async (data, e) => {
@@ -171,7 +171,12 @@ const UserProfileDesktop = (props) => {
     fetchPublishedForms();
     fetchSignedUpForms();
     fetchUnignedUpForms();
-  }, [fetchUserData, fetchPublishedForms, fetchSignedUpForms, fetchUnignedUpForms]);
+  }, [
+    fetchUserData,
+    fetchPublishedForms,
+    fetchSignedUpForms,
+    fetchUnignedUpForms,
+  ]);
 
   const inputBox = {
     color: '#718096',
@@ -190,7 +195,7 @@ const UserProfileDesktop = (props) => {
   const tabText = {
     borderBottom: '2px solid #0628A3',
     marginBottom: '-2px',
-    color: "#000000",
+    color: '#000000',
   };
 
   return (
@@ -305,10 +310,9 @@ const UserProfileDesktop = (props) => {
                         Available Signup Links:
                       </Text>
                       {generatePublishedFormLinks(unsignedFormList, false)}
-                      
                     </Box>
                     <Box width="50%">
-                    <Text
+                      <Text
                         fontSize="1.1rem"
                         fontWeight="700"
                         color="#718096"

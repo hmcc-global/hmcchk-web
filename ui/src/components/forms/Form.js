@@ -208,6 +208,7 @@ const Form = (props) => {
           field = (
             <Stack direction={'column'}>
               <Stack direction={['column', 'row']} w="100%">
+                s{' '}
                 <Box flex={1}>
                   <Input
                     placeholder="Floor/Level"
