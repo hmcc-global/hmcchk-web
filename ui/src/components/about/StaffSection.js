@@ -75,43 +75,6 @@ const StaffSection = (props) => {
             </Box>
           </Stack>
         </Box>
-        <Box bgColor="#2D4769" w="100%" borderRadius="20px">
-          <Stack
-            direction={{ base: 'column', lg: 'row' }}
-            py={['2em', '2em', '4em']}
-          >
-            <Image
-              src={process.env.PUBLIC_URL + '/images/about/ZhuFamily.png'}
-              objectFit="cover"
-              px={['0', '0', '1em']}
-              w={{ base: '90%', lg: '60em' }}
-              minW={{ base: '90%', lg: '30em' }}
-              margin="auto"
-            />
-            <Box px="1.5em">
-              <Text color="white" fontSize="2xl" fontWeight="bold">
-                {blurb.zhu.title}
-              </Text>
-              <Text
-                as="i"
-                color="white"
-                fontSize="md"
-                fontWeight="semibold"
-                paddingTop={{ base: 'none', lg: '1em' }}
-              >
-                {blurb.zhu.position}
-              </Text>
-              <Box>
-                <Text color="white" fontSize="sm" paddingTop="1em">
-                  {blurb.zhu[0]}
-                </Text>
-                <Text color="white" fontSize="sm" paddingTop="1em">
-                  {blurb.zhu[1]}
-                </Text>
-              </Box>
-            </Box>
-          </Stack>
-        </Box>
       </VStack>
       <Box></Box>
     </Flex>

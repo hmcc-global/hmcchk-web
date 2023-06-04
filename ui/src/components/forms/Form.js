@@ -114,6 +114,11 @@ const Form = (props) => {
             setValue('addressStreet', user['address']['street']);
             setValue('addressDistrict', user['address']['district']);
             setValue('addressRegion', user['address']['region']);
+          } else if (
+            field === 'lifeGroup' &&
+            !(user['lifeGroup'] in lifegroupList)
+          ) {
+            setValue(field, '');
           } else {
             setValue(field, user[field]);
           }
@@ -203,6 +208,7 @@ const Form = (props) => {
           field = (
             <Stack direction={'column'}>
               <Stack direction={['column', 'row']} w="100%">
+                s{' '}
                 <Box flex={1}>
                   <Input
                     placeholder="Floor/Level"
@@ -268,7 +274,8 @@ const Form = (props) => {
               key={fieldName}
               {...register(fieldName, {
                 required: true,
-                pattern: /^\S+@\S+$/i,
+                pattern:
+                  /(?!.*hmcc.net)(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
               })}
             />
           );
@@ -305,6 +312,18 @@ const Form = (props) => {
                 errors['addressRegion']) &&
                 'Please fill in all of the fields!'}
             </FormErrorMessage>
+          </FormControl>
+        );
+      } else if (fieldName === 'email') {
+        result.push(
+          <FormControl
+            key={fieldName + 'Controller'}
+            isInvalid={errors[fieldName]}
+          >
+            {label}
+            {field}
+            <FormHelperText>Please don't use your HMCC email</FormHelperText>
+            {error}
           </FormControl>
         );
       } else {
@@ -357,6 +376,7 @@ const Form = (props) => {
           <Select
             id={camelize(fieldName)}
             key={fieldName}
+            placeholder="Select option"
             {...register(fieldName, { required: required })}
           >
             {items}

@@ -207,12 +207,7 @@ const UserProfileDesktop = (props) => {
           textAlign="center"
         >
           <Text color="#2C5282">Your Registered Email Address</Text>
-          <Input
-            width="50%"
-            style={inputBox}
-            readOnly
-            {...register('email')}
-          />
+          <Input width="50%" style={inputBox} readOnly {...register('email')} />
         </Box>
       </Flex>
       <form onSubmit={handleSubmit(handleEditUserInformation)}>
@@ -275,7 +270,12 @@ const UserProfileDesktop = (props) => {
               <Stack direction="column" spacing="5">
                 {formList && formList.length > 0 && (
                   <Box>
-                    <Text fontSize="1.1rem" fontWeight="700" color="#718096" mb="5">
+                    <Text
+                      fontSize="1.1rem"
+                      fontWeight="700"
+                      color="#718096"
+                      mb="5"
+                    >
                       Available Signup Links:
                     </Text>
                     {generatePublishedFormLinks(formList)}
@@ -345,7 +345,6 @@ const UserProfileDesktop = (props) => {
                       size="sm"
                       borderRadius="5"
                       {...register('lifestage', { required: true })}
-                      pointerEvents="none"
                       isInvalid={errors['lifestage']}
                       placeholder="Please fill in this field"
                     >
@@ -470,12 +469,7 @@ const UserProfileDesktop = (props) => {
               <Stack spacing="3%">
                 <FormControl>
                   <FormLabel color="#2C5282">LIFE Group</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
-                    {...register('lifeGroup')}
-                    pointerEvents="none"
-                  >
+                  <Select size="sm" borderRadius="5" {...register('lifeGroup')}>
                     {lifegroupList.map((item) => {
                       return <option key={'lg' + item}>{item}</option>;
                     })}
@@ -486,7 +480,6 @@ const UserProfileDesktop = (props) => {
                   <Select
                     size="sm"
                     borderRadius="5"
-                    pointerEvents="none"
                     {...register('ministryTeam')}
                   >
                     {ministryTeamList.map((item) => {
@@ -617,6 +610,17 @@ const UserProfileDesktop = (props) => {
                   </FormControl>
                 </Stack>
               </Stack>
+              <Button
+                size="sm"
+                mt="5%"
+                color="#0628A3"
+                borderColor="#0628A3"
+                borderRadius="10"
+                variant="outline"
+                type="submit"
+              >
+                Save Information
+              </Button>
             </TabPanel>
           </TabPanels>
         </Tabs>
