@@ -31,21 +31,16 @@ const ministryTeamList = [
 
 const lifegroupList = [
   'Not in a LIFE Group',
-  '4K',
-  'BeReal',
-  'CHRISTiFY',
-  'Covenant',
-  'crocs',
-  'Dim Sum',
-  'Fuego',
-  'Gsus',
-  'JENGA',
+  'Tuesday Campus Men',
+  'Wednesday Campus Men',
+  'Tuesday Campus Women',
+  'Wednesday Campus Women',
+  'Focus Men',
+  'Tuesday Focus Women',
+  'Wednesday Focus Women',
   'Latitude',
-  'MA FAM',
-  'META',
-  'Mezami',
-  'Palette',
-  'PBnJ',
+  'Covenant',
+  'Asia Missions Project Team',
 ];
 
 const districtList = [

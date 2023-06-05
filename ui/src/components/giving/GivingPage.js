@@ -22,7 +22,7 @@ const GivingPage = (props) => {
     <Container maxW="container.lg">
       <VStack w="100%" spacing="3vw" py="3vw">
         <Box
-          borderRadius="lg"
+          borderRadius="20"
           bgImage={`url('${process.env.PUBLIC_URL}/images/giving/Banner.png')`}
           bgPosition="center"
           bgSize="cover"
