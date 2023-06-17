@@ -1,0 +1,22 @@
+name: "Deploy UAT: Part 2"
+run-name: "${{ github.ref_name }}, Run ID: #${{ github.run_id }}"
+
+on:
+  workflow_dispatch
+
+jobs:
+  download-on-server:
+    name: 'Download on Server'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SSH Keys
+        id: install-ssh-keys
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+      - name: Download artifact from GH
+        id: download-artifact
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd .. && gh run download 5299164710"
+      
