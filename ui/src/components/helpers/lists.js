@@ -31,17 +31,19 @@ const ministryTeamList = [
 
 const lifegroupList = [
   'Not in a LIFE Group',
-  'Tuesday Campus Men',
-  'Wednesday Campus Men',
-  'Tuesday Campus Women',
-  'Wednesday Campus Women',
-  'Focus Men',
-  'Tuesday Focus Women',
-  'Wednesday Focus Women',
+  'BROTEIN',
+  'C.I.A.',
+  'SASSY',
+  'PANDA Xpress',
+  'TRAINS',
+  'Bao Bae',
+  'BLOOM',
   'Latitude',
   'Covenant',
   'Asia Missions Project Team',
 ];
+
+
 
 const districtList = [
   'Not Applicable',
