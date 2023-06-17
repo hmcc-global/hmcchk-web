@@ -1,0 +1,24 @@
+name: 'Build React & Sails application'
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Define branch name'
+        required: true
+
+jobs:
+  install-dependencies:
+    name: 'Install Dependencies'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: github.event.inputs.branch
+      - run: |
+          echo "checkout to ${{ github.event.inputs.branch }}"
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: |
+          pwd
