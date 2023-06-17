@@ -223,6 +223,9 @@ const FormEditorContainer = (props) => {
                           <option value="email-ignite-payment-success">
                             !gnite 2023 Payment Confirmation
                           </option>
+                          <option value="email-deep-payment-success">
+                            Deep Retreat Payment Confirmation
+                          </option>
                         </Select>
                         <FormErrorMessage>
                           {errors['paymentConfirmationEmailTemplate'] &&
@@ -332,6 +335,7 @@ const FormEditorContainer = (props) => {
                         Retreat 2023 Donation
                       </option>
                       <option value="form-ignite-success">!gnite</option>
+                      <option value="form-deep-success">Deep retreat</option>
                     </Select>
                     <FormErrorMessage>
                       {errors['successEmailTemplate'] &&
