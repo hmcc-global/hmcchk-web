@@ -25,4 +25,4 @@ jobs:
       - name: Download Artifact from GH
         id: download-artifact
         run: |
-          ssh ${{ secrets.SSH_USER_UAT }}@${{ secrets.SSH_HOST_UAT }} "~/hmcchk-deploy-script/download.sh ${{ github.event.inputs.runId }}"
+          ssh -tt -o "ControlMaster no" ${{ secrets.SSH_USER_UAT }}@${{ secrets.SSH_HOST_UAT }} " bash ~/hmcchk-deploy-script/download.sh ${{ github.event.inputs.runId }}" | while read line; do echo $line; done
