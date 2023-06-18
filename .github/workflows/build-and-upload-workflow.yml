@@ -31,11 +31,8 @@ jobs:
          cd ui && yarn install
       - name: "Create ui/ .env"
         run: |
-          echo "REACT_APP_GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" > ui/.env
-          echo "REACT_APP_CAPTCHA=${{ secrets.CAPTCHA }}" >> ui/.env
-      - name: "Ensure .env exists in ui/"
-        run: |
-          ls -la ui/
+          echo "REACT_APP_GOOGLE_CLIENT_ID=${{ secrets.REACT_APP_GOOGLE_CLIENT_ID }}" > ui/.env
+          echo "REACT_APP_CAPTCHA=${{ secrets.REACT_APP_CAPTCHA }}" >> ui/.env
       - name: "Build ui/ folder"
         run: |
           cd ui && yarn run build
