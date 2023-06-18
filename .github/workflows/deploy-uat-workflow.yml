@@ -1,0 +1,21 @@
+name: "Deploy UAT"
+run-name: "Deploy branch: ${{ github.ref_name }} to UAT"
+
+on:
+  workflow_dispatch:
+    inputs:
+      runId:
+        description: 'Run Id containing artifact to deploy'
+        required: true
+jobs:
+  download-on-server:
+    name: 'Download on Server'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SSH Keys
+        id: install-ssh-keys
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+     
