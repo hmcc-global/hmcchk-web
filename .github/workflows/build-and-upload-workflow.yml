@@ -1,0 +1,70 @@
+name: "Build and Upload Artifact"
+run-name: "Build: ${{ github.ref_name }}, Run ID: #${{ github.run_id }}"
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_env:
+        description: 'Deploy to?'
+        default: 'uat'
+        required: true
+        type: choice
+        options:
+          - uat
+          - prod
+          
+
+jobs:
+  build-and-upload:
+    name: 'Build and Upload'
+    environment: ${{ github.event.inputs.deploy_env }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout Git to branch: ${{ github.ref_name }}"
+        uses: actions/checkout@v3
+        with:
+          ref: "${{ github.ref_name }}"
+      - name: "Setup Node"
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: "Install Dependencies in root folder"
+        run: yarn install
+      - name: "Install Dependencies in server/ folder"
+        run: |
+          cd server && yarn install
+      - name: "Install Dependencies in ui/ folder"
+        run: |
+         cd ui && yarn install
+      - name: "Create ui/ .env"
+        run: |
+          echo "${{ secrets.UI_ENV }}" > ui/.env
+      - name: "Create server /.env"
+        run: |
+          echo "${{ secrets.SERVER_ENV }}" > server/.env
+      - name: "Build ui/ folder"
+        run: |
+          cd ui && yarn run build
+        env:
+          CI: false
+      - name: "Move build files to Sails client folder"
+        run: |
+          mkdir server/client && mv ui/build/* server/client
+      - name: "Delete ui folder to save storage"
+        run: |
+          rm -rf ui
+      - name: "Zip everything"
+        run: |
+          zip release.zip ./* -r -q
+      - name: "Upload build artifact"
+        uses: actions/upload-artifact@v3
+        with:
+          name: my_artifact
+          path: release.zip
+      - name: "Trigger Deploy ${{ github.event.inputs.deploy_env }} Workflow"
+        run: |
+          curl \
+            -X POST \
+            -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Authorization: Bearer ${{ secrets.AUTH_TOKEN }}" \
+            https://api.github.com/repos/hmcc-global/hmcchk-web/actions/workflows/deploy-and-delete-workflow.yml/dispatches \
+            -d '{"ref":"${{ github.ref_name }}", "inputs": {"runId": "${{ github.run_id }}", "env": "${{ github.event.inputs.deploy_env }}"}}'

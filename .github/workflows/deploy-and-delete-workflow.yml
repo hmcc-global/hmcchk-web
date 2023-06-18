@@ -1,0 +1,45 @@
+name: "Deploy and Delete Artifact"
+run-name: "Deploy branch: ${{ github.ref_name }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      runId:
+        description: 'RunId to get containing artifact'
+        required: true
+      env: 
+        description: 'Deploy to?' 
+        default: 'uat' 
+        required: true 
+        type: choice 
+        options: 
+          - uat 
+          - prod
+
+jobs:
+  download-on-server:
+    name: 'Download on Server'
+    environment: ${{ github.event.inputs.env }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Echo"
+        run: |
+          echo "runId: ${{ github.event.inputs.runId }}, env: ${{ github.event.inputs.env }}"
+      - name: Install SSH Keys
+        id: install-ssh-keys
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+      - name: Download Artifact from GH
+        id: download-artifact
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "bash ~/hmcchk-deploy-script/download.sh ${{ github.event.inputs.runId }} ${{ secrets.AUTH_TOKEN }}" | while read line; do echo $line; done
+      - name: Delete Artifact
+        id: delete-artifact
+        uses: christian-korneck/delete-run-artifacts-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.AUTH_TOKEN }}
+        with:
+          parent_runid: ${{ github.event.inputs.runId }}
+          parent_repo: ${{ github.repository }}

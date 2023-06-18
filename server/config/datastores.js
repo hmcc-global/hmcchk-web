@@ -56,7 +56,7 @@ module.exports.datastores = {
       "@" +
       process.env.MONGO_URI +
       "/" +
-      process.env.MONGO_TEST_BED_DB +
+      process.env.MONGO_DB +
       "?ssl=true&replicaSet=" +
       process.env.MONGO_REPLICA_SET +
       "&authSource=" +
