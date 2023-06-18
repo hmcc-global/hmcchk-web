@@ -1,0 +1,28 @@
+name: "Deploy UAT"
+run-name: "Deploy branch: ${{ github.ref_name }} to UAT"
+
+on:
+  workflow_dispatch:
+    inputs:
+      runId:
+        description: 'RunId to get containing artifact'
+        required: true
+
+jobs:
+  download-on-server:
+    name: 'Download on Server'
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Echo"
+        run: |
+          echo "params: ${{ github.event.inputs.runId }}"
+      - name: Install SSH Keys
+        id: install-ssh-keys
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY_UAT }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST_UAT }} > ~/.ssh/known_hosts
+      - name: Download Artifact from GH
+        id: download-artifact
+        run: |
+          ssh ${{ secrets.SSH_USER_UAT }}@${{ secrets.SSH_HOST_UAT }} "~/hmcchk-deploy-script/download.sh ${{ github.event.inputs.runId }}"

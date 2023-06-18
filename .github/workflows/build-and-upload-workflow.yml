@@ -1,0 +1,62 @@
+name: "Build and Upload application"
+run-name: "Build: ${{ github.ref_name }}, Run ID: #${{ github.run_id }}"
+
+on:
+  workflow_dispatch
+
+jobs:
+  build-and-upload:
+    name: 'Build and Upload'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Artifact name
+        id: generate-name
+        run: |
+          echo "${{ github.ref_name }}-${{ github.run_id }}"
+      - name: "Checkout Git to branch: ${{ github.ref_name }}"
+        uses: actions/checkout@v3
+        with:
+          ref: "${{ github.ref_name }}"
+      - name: "Setup Node"
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: "Install Dependencies in root folder"
+        run: yarn install
+      - name: "Install Dependencies in server/ folder"
+        run: |
+          cd server && yarn install
+      - name: "Install Dependencies in ui/ folder"
+        run: |
+         cd ui && yarn install
+      - name: "Create ui/ .env"
+        run: |
+          echo "REACT_APP_GOOGLE_CLIENT_ID=${{ secrets.REACT_APP_GOOGLE_CLIENT_ID }}" > ui/.env
+          echo "REACT_APP_CAPTCHA=${{ secrets.REACT_APP_CAPTCHA }}" >> ui/.env
+      - name: "Build ui/ folder"
+        run: |
+          cd ui && yarn run build
+        env:
+          CI: false
+      - name: "Move build files to Sails client folder"
+        run: |
+          mkdir server/client && mv ui/build/* server/client
+      - name: "Delete ui folder to save storage"
+        run: |
+          rm -rf ui
+      - name: "Zip everything"
+        run: |
+          zip release-uat.zip ./* -r -q
+      - name: "Upload build artifact"
+        uses: actions/upload-artifact@v3
+        with:
+          name: my_artifact
+          path: release-uat.zip
+      - name: "Trigger Deploy to UAT Workflow"
+        run: |
+          curl \
+            -X POST \
+            -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Authorization: Bearer ${{ secrets.AUTH_TOKEN }}" \
+            https://api.github.com/repos/hmcc-global/hmcchk-web/actions/workflows/deploy-uat-workflow.yml/dispatches \
+            -d '{"ref":"${{ github.ref_name }}", "inputs": {"runId": "${{ github.run_id }}"}}'
