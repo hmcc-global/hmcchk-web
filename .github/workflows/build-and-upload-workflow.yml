@@ -21,6 +21,8 @@ jobs:
       - name: Pre-checks
         id: pre-checks
         if: ${{ github.event.inputs.deploy_env == 'prod' && !startsWith(github.ref, 'main') }} || cancel('Env is prod but branch name does not start with main.')
+        run: |
+          echo "Pre-checks failed"
       - name: Generate Artifact name
         id: generate-name
         run: |
