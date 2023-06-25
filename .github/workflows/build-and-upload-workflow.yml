@@ -22,6 +22,7 @@ jobs:
       - name: Pre-checks
         id: pre-checks
         if: ${{ github.event.inputs.env == 'prod' && !startsWith(github.ref, 'main') }} || cancel('Env is "prod" but branch name does not start with "main".')      - name: Generate Artifact name
+      - name: Generate Artifact name
         id: generate-name
         run: |
           echo "${{ github.ref_name }}-${{ github.run_id }}"
