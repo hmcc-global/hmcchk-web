@@ -1,6 +1,5 @@
 name: "Build and Upload application"
 run-name: "Build: ${{ github.ref_name }}, Run ID: #${{ github.run_id }}"
-
 on:
   workflow_dispatch:
     inputs:
