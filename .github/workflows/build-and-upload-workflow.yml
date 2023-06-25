@@ -2,14 +2,26 @@ name: "Build and Upload application"
 run-name: "Build: ${{ github.ref_name }}, Run ID: #${{ github.run_id }}"
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      env:
+        description: 'Deploy to?'
+        default: 'uat'
+        required: true
+        type: choice
+        options:
+          - uat
+          - prod
 
 jobs:
   build-and-upload:
     name: 'Build and Upload'
+    environment: ${{ startsWith(github.ref, 'main') && 'prod' || 'uat' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Generate Artifact name
+      - name: Pre-checks
+        id: pre-checks
+        if: ${{ github.event.inputs.env == 'prod' && !startsWith(github.ref, 'main') }} || cancel('Env is "prod" but branch name does not start with "main".')      - name: Generate Artifact name
         id: generate-name
         run: |
           echo "${{ github.ref_name }}-${{ github.run_id }}"
