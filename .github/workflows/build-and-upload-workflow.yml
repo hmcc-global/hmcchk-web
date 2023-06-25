@@ -3,10 +3,14 @@ run-name: "Build: ${{ github.ref_name }}, Run ID: #${{ github.run_id }}"
 on:
   workflow_dispatch:
     inputs:
-      test:
+      deply_env:
         description: 'Deploy to?'
         default: 'uat'
         required: true
+        type: choice
+        options:
+          - uat
+          - prod
 
 jobs:
   build-and-upload:
@@ -16,7 +20,7 @@ jobs:
     steps:
       - name: Pre-checks
         id: pre-checks
-        if: ${{ github.event.inputs.deploy_env == 'prod' && !startsWith(github.ref, 'main') }} || cancel('Env is "prod" but branch name does not start with "main".')      - name: Generate Artifact name
+        if: ${{ github.event.inputs.deploy_env == 'prod' && !startsWith(github.ref, 'main') }} || cancel('Env is prod but branch name does not start with main.')
       - name: Generate Artifact name
         id: generate-name
         run: |
