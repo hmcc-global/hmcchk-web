@@ -1,0 +1,22 @@
+name: My Workflow
+on:
+  workflow_dispatch:
+    inputs:
+      my_input:
+        description: 'My Input'
+        default: 'default_value'
+        required: true
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set input choices
+        id: set_input_choices
+        run: |
+          if [[ "${{ github.ref_name }}" == "refs/heads/main" ]]; then
+            echo "::set-output name=my_input_choices::option1,option2"
+          else
+            echo "::set-output name=my_input_choices::option3,option4"
+          fi
+      - name: Run my command
+        run: my-command --my-input "${{ github.event.inputs.my_input }}" --my-input-choices "${{ steps.set_input_choices.outputs.my_input_choices }}"
