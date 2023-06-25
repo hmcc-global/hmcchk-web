@@ -3,14 +3,10 @@ run-name: "Build: ${{ github.ref_name }}, Run ID: #${{ github.run_id }}"
 on:
   workflow_dispatch:
     inputs:
-      deploy_env:
+      test:
         description: 'Deploy to?'
         default: 'uat'
         required: true
-        type: choice
-        options:
-          - uat
-          - prod
 
 jobs:
   build-and-upload:
