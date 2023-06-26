@@ -5,15 +5,13 @@ import {
   Button,
   Heading,
   Container,
-  List,
-  ListItem,
   Box,
   Text,
   Badge,
   Stack,
   useToast,
-  Checkbox,
-  HStack
+  HStack,
+  SimpleGrid,
 } from '@chakra-ui/react';
 import FormEditorContainer from './FormEditorContainer';
 
@@ -80,9 +78,9 @@ const FormManager = (props) => {
     toast({
       description: 'Public Link Copied to clipboard!',
       status: 'success',
-      duration: 5000
+      duration: 5000,
     });
-  }
+  };
 
   const onClickRedirect = async (e) => {
     history.push('/forms/' + e.target.value);
@@ -124,19 +122,18 @@ const FormManager = (props) => {
       pathname: '/admin/formViewer',
       state: {
         name: formItem.formName,
-        id: formItem.id
-      }
+        id: formItem.id,
+      },
     });
   };
 
   const noViewPermission = (formItem) => {
-    if (!formItem.isPaymentRequired)
-      return false;
+    if (!formItem.isPaymentRequired) return false;
 
     const currentUserAccessType = user.accessType;
     const hasViewPermissions = ['admin', 'stewardship'];
     return !hasViewPermissions.includes(currentUserAccessType);
-  }
+  };
 
   return (
     <Container maxW="container.xl" pt={10} minH="100vh">
@@ -150,20 +147,26 @@ const FormManager = (props) => {
         <Box borderRadius="lg">
           <HStack>
             <Heading mb="2" as="h2" size="lg" align="left">
-              Existing Forms 
+              Existing Forms
             </Heading>
           </HStack>
-          <List spacing="2">
+          <SimpleGrid spacing="2" columns={[1, 2]}>
             {formList.map((formItem) => (
-              <ListItem key={formItem.id}>
+              <Box key={formItem.id}>
                 <Box p="3" borderRadius="lg" borderWidth="1px">
                   <Text mb="3">
                     <Badge colorScheme={formItem.isPublished ? 'green' : 'red'}>
                       {formItem.isPublished ? 'LIVE' : 'PRIVATE'}
                     </Badge>{' '}
+                    <Badge>
+                      {formItem.formType ? formItem.formType : 'internal'}
+                    </Badge>{' '}
                     {formItem.formName}
                   </Text>
-                  <Stack direction={['column', 'row']} spacing={1}>
+                  <Stack
+                    direction={['column', 'column', 'column', 'column', 'row']}
+                    spacing={1}
+                  >
                     <Button
                       colorScheme="blue"
                       onClick={onEdit}
@@ -211,9 +214,9 @@ const FormManager = (props) => {
                     </Button>
                   </Stack>
                 </Box>
-              </ListItem>
+              </Box>
             ))}
-          </List>
+          </SimpleGrid>
         </Box>
         <FormEditorContainer
           user={user}

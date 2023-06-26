@@ -18,9 +18,11 @@ import {
   ModalBody,
   ModalContent,
   Divider,
-  Flex,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react';
 import FormEditor from './FormEditor';
+import ExternalFormEditor from './ExternalFormEditor';
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
@@ -29,12 +31,13 @@ const FormEditorContainer = (props) => {
   const { user, isOpen, setIsOpen, editFormData, formManagerCallback } = props;
 
   // React forms basics
-  const { register, reset, handleSubmit, setValue, control, formState } =
+  const { register, reset, handleSubmit, setValue, watch, control, formState } =
     useForm();
   const { errors } = formState;
 
   // State variables
   const [formName, setFormName] = useState(null);
+  const [formType, setFormType] = useState(null);
   const [formDescription, setFormDescription] = useState(null);
   const [formImage, setFormImage] = useState(null);
   const [requireLogin, setRequireLogin] = useState(true);
@@ -64,6 +67,7 @@ const FormEditorContainer = (props) => {
     setValue('paymentCcEmail', '');
     setValue('formDescription', null);
     setValue('formImage', null);
+    setValue('formType', null);
     setValue('requireLogin', true);
     setValue('requireMembership', false);
     setValue('requireBaptism', false);
@@ -78,6 +82,7 @@ const FormEditorContainer = (props) => {
     setPaymentCcEmail('');
     setFormDescription('');
     setFormImage(null);
+    setFormType('internal');
     setRequireLogin(true);
     setRequireMembership(false);
     setRequireBaptism(false);
@@ -106,6 +111,7 @@ const FormEditorContainer = (props) => {
       setValue('paymentCcEmail', paymentCcEmail);
       setValue('formDescription', data.formDescription);
       setValue('formImage', data.formImage);
+      setValue('formType', data.formType);
       setValue('requireLogin', data.requireLogin);
       setValue('requireMembership', data.requireMembership);
       setValue('requireBaptism', data.requireBaptism);
@@ -124,6 +130,7 @@ const FormEditorContainer = (props) => {
       setPaymentCcEmail(paymentCcEmail);
       setFormDescription(data.formDescription);
       setFormImage(data.formImage);
+      setFormType(data.formType);
       setRequireLogin(data.requireLogin);
       setRequireMembership(data.requireMembership);
       setRequireBaptism(data.requireBaptism);
@@ -158,6 +165,9 @@ const FormEditorContainer = (props) => {
     setFormPeriodInvalid(false);
   }, [formAvailableFrom, formAvailableUntil]);
 
+  // Watch this to conditionally render custom things
+  const ftFlag = watch('formType');
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="full">
       <ModalOverlay />
@@ -165,97 +175,27 @@ const FormEditorContainer = (props) => {
         <ModalCloseButton />
         <ModalBody>
           <Container maxW="container.xl" mt="9" mb="9">
-            <Box borderRadius="lg" p="5" borderWidth="1px" mb="5">
-              <Heading as="h2" mb="3" size="lg">
-                Form Information
-              </Heading>
-              <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Stack
+                borderRadius="lg"
+                p="5"
+                borderWidth="1px"
+                mb="5"
+                spacing={5}
+              >
                 <Stack spacing="2">
-                  <Heading as="h4" size="md">
-                    {' '}
-                    Paid Event Details{' '}
+                  <Heading as="h2" mb="3" size="lg">
+                    Form Information
                   </Heading>
-                  <Divider />
                   <FormControl>
-                    <FormLabel> Is Payment Required? </FormLabel>
-                    <Controller
-                      control={control}
-                      name="isPaymentRequired"
-                      defaultValue={false}
-                      render={({ field: { onChange, value, ref } }) => (
-                        <Switch
-                          onChange={(e) => {
-                            setIsPaymentRequired(e.target.checked);
-                            onChange(e);
-                          }}
-                          ref={ref}
-                          isChecked={value}
-                          disabled={formName != null}
-                        >
-                          {value ? 'Yes' : 'No'}
-                        </Switch>
-                      )}
-                    />
+                    <FormLabel>Form Type</FormLabel>
+                    <Select {...register('formType', { required: true })}>
+                      <option value="internal">Internal</option>
+                      <option value="external">
+                        External (Google or other external form links)
+                      </option>
+                    </Select>
                   </FormControl>
-                  {isPaymentRequired && (
-                    <>
-                      <FormControl
-                        isInvalid={errors['paymentConfirmationEmailTemp']}
-                        isRequired={isPaymentRequired}
-                      >
-                        <FormLabel>
-                          {' '}
-                          Payment Confirmation Email Template
-                        </FormLabel>
-                        <Select
-                          {...register('paymentConfirmationEmailTemplate', {
-                            required: isPaymentRequired,
-                          })}
-                          placeholder="Select option"
-                        >
-                          {/* To add more email template, please define the value and add the template here */}
-                          <option value="email-retreat-payment-success">
-                            Life Defined Payment Confirmation
-                          </option>
-                          <option value="email-retreat-donation-payment-success">
-                            Life Defined Donation Payment Confirmation
-                          </option>
-                          <option value="email-ignite-payment-success">
-                            !gnite 2023 Payment Confirmation
-                          </option>
-                          <option value="email-deep-payment-success">
-                            Deep Retreat Payment Confirmation
-                          </option>
-                        </Select>
-                        <FormErrorMessage>
-                          {errors['paymentConfirmationEmailTemplate'] &&
-                            'Field type is required'}
-                        </FormErrorMessage>
-                      </FormControl>
-                      <FormControl>
-                        <FormLabel>Payment Email Subject</FormLabel>
-                        <Input {...register('paymentEmailSubject')} />
-                        <FormHelperText>
-                          If you need a custom subject for the payment email
-                        </FormHelperText>
-                      </FormControl>
-                      <FormControl
-                        isInvalid={errors['paymentCcEmail']}
-                        isRequired={isPaymentRequired}
-                      >
-                        <FormLabel>Payment CC Email</FormLabel>
-                        <Input
-                          {...register('paymentCcEmail')}
-                          placeholder={'john@gmail.com;doe@gmail.com'}
-                        />
-                        <FormHelperText>
-                          *All Payment emails will be CC'ed to these emails
-                          (addressees will be BCC'ed). Separate CC emails with ;
-                        </FormHelperText>
-                      </FormControl>
-                    </>
-                  )}
-                  <Divider />
                   <FormControl isInvalid={errors['formName']}>
                     <FormLabel>Form Name</FormLabel>
                     <Input
@@ -283,72 +223,6 @@ const FormEditorContainer = (props) => {
                       else and then paste it in and see the magic happen
                     </FormHelperText>
                   </FormControl>
-                  <FormControl>
-                    <FormLabel>Require login?</FormLabel>
-                    <Controller
-                      control={control}
-                      name="requireLogin"
-                      defaultValue={true}
-                      render={({ field: { onChange, value, ref } }) => (
-                        <Switch onChange={onChange} ref={ref} isChecked={value}>
-                          {value ? 'Yes' : 'No'}
-                        </Switch>
-                      )}
-                    />
-                  </FormControl>
-
-                  <FormControl>
-                    <FormLabel>Require membership?</FormLabel>
-                    <Controller
-                      control={control}
-                      name="requireMembership"
-                      defaultValue={true}
-                      render={({ field: { onChange, value, ref } }) => (
-                        <Switch onChange={onChange} ref={ref} isChecked={value}>
-                          {value ? 'Yes' : 'No'}
-                        </Switch>
-                      )}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel>Require baptism?</FormLabel>
-                    <Controller
-                      control={control}
-                      name="requireBaptism"
-                      defaultValue={true}
-                      render={({ field: { onChange, value, ref } }) => (
-                        <Switch onChange={onChange} ref={ref} isChecked={value}>
-                          {value ? 'Yes' : 'No'}
-                        </Switch>
-                      )}
-                    />
-                  </FormControl>
-                  <FormControl isInvalid={errors['successEmailTemplate']}>
-                    <FormLabel>Select an email template</FormLabel>
-                    <Select
-                      {...register('successEmailTemplate', { required: true })}
-                    >
-                      {/* To add more email template, please define the value and add the template here */}
-                      <option value="form-default-success">Default</option>
-                      <option value="form-retreat-success">Retreat 2023</option>
-                      <option value="form-retreat-donation-success">
-                        Retreat 2023 Donation
-                      </option>
-                      <option value="form-ignite-success">!gnite</option>
-                      <option value="form-deep-success">Deep retreat</option>
-                    </Select>
-                    <FormErrorMessage>
-                      {errors['successEmailTemplate'] &&
-                        'Field type is required'}
-                    </FormErrorMessage>
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel>Custom Email Subject</FormLabel>
-                    <Input {...register('customEmailSubject')} />
-                    <FormHelperText>
-                      If you need a custom subject for the success email
-                    </FormHelperText>
-                  </FormControl>
                   <FormControl isInvalid={formPeriodInvalid}>
                     <FormLabel>Form Availability Period</FormLabel>
                     <FormErrorMessage>
@@ -366,6 +240,198 @@ const FormEditorContainer = (props) => {
                       {...register('formAvailableUntil')}
                     />
                   </FormControl>
+                </Stack>
+                {ftFlag === 'internal' && (
+                  <Stack spacing="2">
+                    <Divider />
+                    <Heading as="h4" size="md">
+                      Paid Event Details
+                    </Heading>
+                    <Alert status="info">
+                      <AlertIcon />
+                      This setting is not changeable after form is created, a
+                      paid event will always be a paid event!
+                    </Alert>
+
+                    <FormControl>
+                      <FormLabel> Is Payment Required? </FormLabel>
+                      <Controller
+                        control={control}
+                        name="isPaymentRequired"
+                        defaultValue={false}
+                        render={({ field: { onChange, value, ref } }) => (
+                          <Switch
+                            onChange={(e) => {
+                              setIsPaymentRequired(e.target.checked);
+                              onChange(e);
+                            }}
+                            ref={ref}
+                            isChecked={value}
+                            disabled={formName != null}
+                          >
+                            {value ? 'Yes' : 'No'}
+                          </Switch>
+                        )}
+                      />
+                    </FormControl>
+                    {isPaymentRequired && (
+                      <>
+                        <FormControl
+                          isInvalid={errors['paymentConfirmationEmailTemp']}
+                          isRequired={isPaymentRequired}
+                        >
+                          <FormLabel>
+                            {' '}
+                            Payment Confirmation Email Template
+                          </FormLabel>
+                          <Select
+                            {...register('paymentConfirmationEmailTemplate', {
+                              required: isPaymentRequired,
+                            })}
+                            placeholder="Select option"
+                          >
+                            {/* To add more email template, please define the value and add the template here */}
+                            <option value="email-retreat-payment-success">
+                              Life Defined Payment Confirmation
+                            </option>
+                            <option value="email-retreat-donation-payment-success">
+                              Life Defined Donation Payment Confirmation
+                            </option>
+                            <option value="email-ignite-payment-success">
+                              !gnite 2023 Payment Confirmation
+                            </option>
+                            <option value="email-deep-payment-success">
+                              Deep Retreat Payment Confirmation
+                            </option>
+                          </Select>
+                          <FormErrorMessage>
+                            {errors['paymentConfirmationEmailTemplate'] &&
+                              'Field type is required'}
+                          </FormErrorMessage>
+                        </FormControl>
+                        <FormControl>
+                          <FormLabel>Payment Email Subject</FormLabel>
+                          <Input {...register('paymentEmailSubject')} />
+                          <FormHelperText>
+                            If you need a custom subject for the payment email
+                          </FormHelperText>
+                        </FormControl>
+                        <FormControl
+                          isInvalid={errors['paymentCcEmail']}
+                          isRequired={isPaymentRequired}
+                        >
+                          <FormLabel>Payment CC Email</FormLabel>
+                          <Input
+                            {...register('paymentCcEmail')}
+                            placeholder={'john@gmail.com;doe@gmail.com'}
+                          />
+                          <FormHelperText>
+                            *All Payment emails will be CC'ed to these emails
+                            (addressees will be BCC'ed). Separate CC emails with
+                            ;
+                          </FormHelperText>
+                        </FormControl>
+                      </>
+                    )}
+                  </Stack>
+                )}
+                {ftFlag === 'internal' && (
+                  <Stack spacing="2">
+                    <Heading as="h4" size="md">
+                      Form Prerequisites
+                    </Heading>
+                    <FormControl>
+                      <FormLabel>Require login?</FormLabel>
+                      <Controller
+                        control={control}
+                        name="requireLogin"
+                        defaultValue={true}
+                        render={({ field: { onChange, value, ref } }) => (
+                          <Switch
+                            onChange={onChange}
+                            ref={ref}
+                            isChecked={value}
+                          >
+                            {value ? 'Yes' : 'No'}
+                          </Switch>
+                        )}
+                      />
+                    </FormControl>
+                    <FormControl>
+                      <FormLabel>Require membership?</FormLabel>
+                      <Controller
+                        control={control}
+                        name="requireMembership"
+                        defaultValue={true}
+                        render={({ field: { onChange, value, ref } }) => (
+                          <Switch
+                            onChange={onChange}
+                            ref={ref}
+                            isChecked={value}
+                          >
+                            {value ? 'Yes' : 'No'}
+                          </Switch>
+                        )}
+                      />
+                    </FormControl>
+                    <FormControl>
+                      <FormLabel>Require baptism?</FormLabel>
+                      <Controller
+                        control={control}
+                        name="requireBaptism"
+                        defaultValue={true}
+                        render={({ field: { onChange, value, ref } }) => (
+                          <Switch
+                            onChange={onChange}
+                            ref={ref}
+                            isChecked={value}
+                          >
+                            {value ? 'Yes' : 'No'}
+                          </Switch>
+                        )}
+                      />
+                    </FormControl>
+                    <Divider />
+                  </Stack>
+                )}
+                {ftFlag === 'internal' && (
+                  <Stack spacing="2">
+                    <Heading as="h4" size="md">
+                      Custom Autoreply Settings
+                    </Heading>
+                    <FormControl isInvalid={errors['successEmailTemplate']}>
+                      <FormLabel>Select an email template</FormLabel>
+                      <Select
+                        {...register('successEmailTemplate', {
+                          required: true,
+                        })}
+                      >
+                        {/* To add more email template, please define the value and add the template here */}
+                        <option value="form-default-success">Default</option>
+                        <option value="form-retreat-success">
+                          Retreat 2023
+                        </option>
+                        <option value="form-retreat-donation-success">
+                          Retreat 2023 Donation
+                        </option>
+                        <option value="form-ignite-success">!gnite</option>
+                        <option value="form-deep-success">Deep retreat</option>
+                      </Select>
+                      <FormErrorMessage>
+                        {errors['successEmailTemplate'] &&
+                          'Field type is required'}
+                      </FormErrorMessage>
+                    </FormControl>
+                    <FormControl>
+                      <FormLabel>Custom Email Subject</FormLabel>
+                      <Input {...register('customEmailSubject')} />
+                      <FormHelperText>
+                        If you need a custom subject for the success email
+                      </FormHelperText>
+                    </FormControl>
+                  </Stack>
+                )}
+                <Stack spacing="2">
                   <FormControl pt="3">
                     <FormLabel>
                       If you updated the fields above please click here again
@@ -376,16 +442,17 @@ const FormEditorContainer = (props) => {
                     </Button>
                   </FormControl>
                 </Stack>
-              </form>
-            </Box>
+              </Stack>
+            </form>
 
-            {formName && (
+            {formName && formType === 'internal' && (
               <FormEditor
                 formInformation={{
                   formName: formName,
                   isPaymentRequired: isPaymentRequired,
                   formDescription: formDescription,
                   formImage: formImage,
+                  formType: formType,
                   requireLogin: requireLogin,
                   requireMembership: requireMembership,
                   requireBaptism: requireBaptism,
@@ -401,6 +468,21 @@ const FormEditorContainer = (props) => {
                 existingFormFieldsData={editFormData}
                 resetFormEditorCallback={resetFormEditorCallback}
                 user={user}
+              />
+            )}
+
+            {formName && formType === 'external' && (
+              <ExternalFormEditor
+                formInformation={{
+                  formName: formName,
+                  formDescription: formDescription,
+                  formImage: formImage,
+                  formType: formType,
+                  formAvailableFrom: formAvailableFrom,
+                  formAvailableUntil: formAvailableUntil,
+                }}
+                existingFormData={editFormData}
+                resetFormEditorCallback={resetFormEditorCallback}
               />
             )}
           </Container>

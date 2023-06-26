@@ -162,6 +162,7 @@ const FormEditor = (props) => {
 
       let formToSave = {
         formName: formInformation.formName,
+        formType: formInformation.formType,
         isPaymentRequired: formInformation.isPaymentRequired,
         paymentConfirmationEmailTemplate:
           formInformation.paymentConfirmationEmailTemplate,

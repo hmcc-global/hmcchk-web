@@ -151,11 +151,12 @@ const generatePublishedFormLinks = (forms, signedUp) => {
                     </Text>
                     <Spacer />
                   </GridItem>
-                  <GridItem colSpan={3} display="flex" alignItems="center"
-                  >
+                  <GridItem colSpan={3} display="flex" alignItems="center">
                     {signedUp ? (
                       <Box>
-                        <Button style={signedUpButton} disabled>Signed Up</Button>
+                        <Button style={signedUpButton} disabled>
+                          Signed Up
+                        </Button>
                       </Box>
                     ) : (
                       <Link
@@ -163,12 +164,12 @@ const generatePublishedFormLinks = (forms, signedUp) => {
                         _hover={{ textDecoration: 'none', opacity: '75%' }}
                         width="fit-content"
                       >
-                        <Button 
+                        <Button
                           style={signUpButton}
                           _hover={{
-                            color: "#00377C",
-                            textDecoration: "underline",
-                            bg: "#CCE1FF"
+                            color: '#00377C',
+                            textDecoration: 'underline',
+                            bg: '#CCE1FF',
                           }}
                         >
                           Sign Up
