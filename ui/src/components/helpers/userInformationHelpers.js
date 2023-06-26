@@ -110,7 +110,8 @@ const signUpButton = {
   textAlign: 'center',
 };
 
-const isPaymentRequired = (form) => form.isPaymentRequired ? '- [Payment Required]' : '';
+const isPaymentRequired = (form) =>
+  form.isPaymentRequired ? '- [Payment Required]' : '';
 
 const generatePublishedFormLinks = (forms) => {
   if (forms) {
@@ -129,14 +130,17 @@ const generatePublishedFormLinks = (forms) => {
                 textAlign="left"
               >
                 <Image src={item['formImage']} fit="cover" h="18%" w="35%" />
-                  <Text 
-                    margin="0px 15px" 
-                    alignSelf="baseline">
-                    {`${item['formName']} ${isPaymentRequired(item)}`}
+                <Text margin="0px 15px" alignSelf="baseline">
+                  {`${item['formName']} ${isPaymentRequired(item)}`}
                 </Text>
                 <Spacer />
                 <Link
-                  href={`/forms/${item['id']}`}
+                  href={
+                    item.formType === 'external'
+                      ? item.externalFormLink
+                      : `/forms/${item['id']}`
+                  }
+                  target="_blank"
                   _hover={{ textDecoration: 'none', opacity: '75%' }}
                   width="fit-content"
                 >
@@ -147,7 +151,6 @@ const generatePublishedFormLinks = (forms) => {
                 <Divider margin="15px 0px" backgroundColor="black" />
               )}
             </>
-    
           );
         })}
       </Box>
