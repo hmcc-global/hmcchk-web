@@ -15,10 +15,26 @@ module.exports = {
 
   fn: async function ({ id }, exits) {
     try {
+      let now = new Date();
+      let offset = now.getTimezoneOffset();
+      now.setTime(now.getTime() - offset * 60000);
+      now = now.toISOString();
+
       const data = await Form.find({
         _id: id,
         isPublished: true,
         isDeleted: false,
+        or: [
+          {
+            formAvailableFrom: { '<=': now },
+            formAvailableUntil: { '>=': now },
+          },
+          { formAvailableFrom: { '<=': now }, formAvailableUntil: '' },
+          {
+            formAvailableFrom: '',
+            formAvailableUntil: '',
+          },
+        ],
       });
 
       // If no form is found return error
