@@ -8,6 +8,10 @@ module.exports = {
     formFields: {
       type: 'json',
     },
+    formType: {
+      type: 'string',
+      defaultsTo: 'internal',
+    },
     isPublished: {
       type: 'boolean',
       defaultsTo: false,
@@ -58,6 +62,9 @@ module.exports = {
     requireBaptism: {
       type: 'boolean',
       defaultsTo: false,
+    },
+    externalFormLink: {
+      type: 'string',
     },
   },
 };
