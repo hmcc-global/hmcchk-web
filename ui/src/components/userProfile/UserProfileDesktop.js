@@ -26,6 +26,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
+import { customAxios as axios } from '../helpers/customAxios';
 import { useEffect, useState, useCallback } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import {
@@ -52,6 +53,8 @@ const UserProfileDesktop = (props) => {
   const { user } = props;
   const [userData, setUserData] = useState(null);
   const [formList, setFormList] = useState(null);
+  const [unsignedFormList, setUnsignedFormList] = useState([]);
+  const [signedUpFormList, setSignedUpFormList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
 
   const setUserInformationFields = (userData) => {
@@ -116,12 +119,29 @@ const UserProfileDesktop = (props) => {
   }, [user.id]);
 
   const fetchPublishedForms = useCallback(async () => {
+    //get all forms
     const { data, status } = await getLoginOnlyFormsRequest();
-
     if (status === 200) {
-      setFormList([...data]);
+      setFormList([...data])
+
+    //find forms the user have signed up for
+      const tempFormList = data
+      tempFormList.map( async (form) => {
+        const { data, status } = await axios.get('api/forms/get-user-submission', {
+          params: {
+            formId: form.id,
+            userId: user.id,
+          },
+        });
+        if (status === 200 && data.id !== undefined) {
+          setSignedUpFormList(signedUpFormList => [...signedUpFormList, form])
+        } else if (status === 200) {
+          setUnsignedFormList(unsignedFormList => [...unsignedFormList, form])
+        }
+      })
+    
     }
-  }, []);
+  }, [user.id]);
 
   // Implementation needs some component specific customization
   const handleEditUserInformation = async (data, e) => {
@@ -278,7 +298,8 @@ const UserProfileDesktop = (props) => {
                     >
                       Available Signup Links:
                     </Text>
-                    {generatePublishedFormLinks(formList)}
+                    {generatePublishedFormLinks(unsignedFormList)}
+                    {generatePublishedFormLinks(signedUpFormList)}
                   </Box>
                 )}
                 {/* {user.password !== "" && (
