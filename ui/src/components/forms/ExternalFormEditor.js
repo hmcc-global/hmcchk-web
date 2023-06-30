@@ -130,7 +130,7 @@ const ExternalFormEditor = (props) => {
               </FormErrorMessage>
             </FormControl>
             <Button mt={4} colorScheme="blue" type="submit">
-              Save External Form Data
+              Save External Form Link
             </Button>
           </form>
         </Box>

@@ -73,8 +73,18 @@ const FormManager = (props) => {
 
   const copyPublicLinkHandler = (e) => {
     const host = window.location.host;
-    const formId = e.target.value;
-    navigator?.clipboard?.writeText(`${host}/forms/${formId}`);
+    const formTarget = e.target.value;
+
+    navigator?.clipboard?.writeText(`${host}/forms/${formTarget}`);
+    toast({
+      description: 'Public Link Copied to clipboard!',
+      status: 'success',
+      duration: 5000,
+    });
+  };
+
+  const copyPublicLinkHandlerForExternalForms = (e) => {
+    navigator?.clipboard?.writeText(e.target.value);
     toast({
       description: 'Public Link Copied to clipboard!',
       status: 'success',
@@ -84,6 +94,10 @@ const FormManager = (props) => {
 
   const onClickRedirect = async (e) => {
     history.push('/forms/' + e.target.value);
+  };
+
+  const onClickRedirectExternal = async (e) => {
+    window.open(e.target.value);
   };
 
   const onDelete = async (e) => {
@@ -183,24 +197,51 @@ const FormManager = (props) => {
                     >
                       {formItem.isPublished ? 'Unpublish' : 'Publish'}
                     </Button>
-                    <Button
-                      colorScheme="blue"
-                      onClick={copyPublicLinkHandler}
-                      value={formItem.id}
-                    >
-                      Public Link
-                    </Button>
-                    <Button
-                      colorScheme="blue"
-                      onClick={onClickRedirect}
-                      value={formItem.id}
-                    >
-                      View Form
-                    </Button>
+                    {formItem.formType === 'external' && (
+                      <Button
+                        colorScheme="blue"
+                        onClick={copyPublicLinkHandlerForExternalForms}
+                        value={formItem.externalFormLink}
+                      >
+                        Public Link
+                      </Button>
+                    )}
+                    {formItem.formType !== 'external' && (
+                      <Button
+                        colorScheme="blue"
+                        onClick={copyPublicLinkHandler}
+                        value={formItem.id}
+                      >
+                        Public Link
+                      </Button>
+                    )}
+
+                    {formItem.formType === 'external' && (
+                      <Button
+                        colorScheme="blue"
+                        onClick={onClickRedirectExternal}
+                        value={formItem.externalFormLink}
+                      >
+                        View Form
+                      </Button>
+                    )}
+                    {formItem.formType !== 'external' && (
+                      <Button
+                        colorScheme="blue"
+                        onClick={onClickRedirect}
+                        value={formItem.id}
+                      >
+                        View Form
+                      </Button>
+                    )}
+
                     <Button
                       colorScheme="blue"
                       onClick={() => onClickHandler(formItem)}
-                      disabled={noViewPermission(formItem)}
+                      disabled={
+                        noViewPermission(formItem) ||
+                        formItem.formType == 'external'
+                      }
                     >
                       View Data
                     </Button>

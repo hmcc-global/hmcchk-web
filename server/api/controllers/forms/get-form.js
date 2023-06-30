@@ -15,9 +15,7 @@ module.exports = {
 
   fn: async function ({ id }, exits) {
     try {
-      let now = new Date();
-      let offset = now.getTimezoneOffset();
-      now.setTime(now.getTime() - offset * 60000);
+      let now = await sails.helpers.datetime.getOffsettedTime(new Date());
       now = now.toISOString();
 
       const data = await Form.find({
