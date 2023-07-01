@@ -26,8 +26,9 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { customAxios as axios } from '../helpers/customAxios';
 import {
   ministryTeamList,
   lifegroupList,
@@ -52,6 +53,8 @@ const UserProfileMobile = (props) => {
   const { user } = props;
   const [userData, setUserData] = useState(null);
   const [formList, setFormList] = useState(null);
+  const [unsignedFormList, setUnsignedFormList] = useState([]);
+  const [signedUpFormList, setSignedUpFormList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
 
   const onModalClose = (e) => {
@@ -69,13 +72,39 @@ const UserProfileMobile = (props) => {
     }
   };
 
-  const fetchPublishedForms = async () => {
+  const fetchPublishedForms = useCallback(async () => {
+    //get all forms
     const { data, status } = await getLoginOnlyFormsRequest();
 
     if (status === 200) {
       setFormList([...data]);
+
+      //find forms the user have signed up for
+      const tempFormList = data;
+      tempFormList.map(async (form) => {
+        const { data, status } = await axios.get(
+          'api/forms/get-user-submission',
+          {
+            params: {
+              formId: form.id,
+              userId: user.id,
+            },
+          }
+        );
+        if (status === 200 && data.id !== undefined) {
+          setSignedUpFormList((signedUpFormList) => [
+            ...signedUpFormList,
+            form,
+          ]);
+        } else if (status === 200) {
+          setUnsignedFormList((unsignedFormList) => [
+            ...unsignedFormList,
+            form,
+          ]);
+        }
+      });
     }
-  };
+  }, [user.id]);
 
   const setUserInformationFields = (userData) => {
     for (let key in userData) {
@@ -156,7 +185,6 @@ const UserProfileMobile = (props) => {
   };
 
   const tabTitle = {
-    color: '#000000',
     fontWeight: '700',
     fontSize: 'inherit',
   };
@@ -229,21 +257,24 @@ const UserProfileMobile = (props) => {
             <Tab
               p="0.5"
               style={tabTitle}
-              _selected={{ borderColor: '#0628A3', color: '#0628A3' }}
+              color="#0628A3"
+              _selected={{ borderColor: '#0628A3', color: '#000000' }}
             >
               Signup Links
             </Tab>
             <Tab
               p="0.5"
               style={tabTitle}
-              _selected={{ borderColor: '#0628A3', color: '#0628A3' }}
+              color="#0628A3"
+              _selected={{ borderColor: '#0628A3', color: '#000000' }}
             >
               Personal Profile
             </Tab>
             <Tab
               p="0.5"
               style={tabTitle}
-              _selected={{ borderColor: '#0628A3', color: '#0628A3' }}
+              color="#0628A3"
+              _selected={{ borderColor: '#0628A3', color: '#000000' }}
             >
               Church Profile
             </Tab>
@@ -262,7 +293,17 @@ const UserProfileMobile = (props) => {
                     >
                       Available Signup Links:
                     </Text>
-                    {generatePublishedFormLinks(formList)}
+                    {generatePublishedFormLinks(unsignedFormList)}
+                    <Text
+                      fontWeight="700"
+                      fontSize="0.95rem"
+                      color="#718096"
+                      mt="2.5"
+                      mb="2.5"
+                    >
+                      Your Signups:
+                    </Text>
+                    {generatePublishedFormLinks(signedUpFormList)}
                   </Box>
                 )}
                 {/* <Button
