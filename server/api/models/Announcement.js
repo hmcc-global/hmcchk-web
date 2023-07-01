@@ -4,6 +4,14 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    description: {
+      type: 'string',
+      required: true,
+    },
+    imageAdUrl: {
+      type: 'string',
+      required: true,
+    },
     startDate: {
       type: 'string',
       columnType: 'date',
@@ -23,12 +31,6 @@ module.exports = {
     location: {
       type: 'string',
     },
-    description: {
-      type: 'string',
-    },
-    imageAdUrl: {
-      type: 'string',
-    },
     imageAdTakedownDate: {
       type: 'ref',
       columnType: 'datetime',
@@ -45,12 +47,15 @@ module.exports = {
     additionalNotes: {
       type: 'string',
     },
-    submitterId: {
+    submittedBy: {
       type: 'string',
-      required: true,
     },
     approvedBy: {
       type: 'string',
+    },
+    isPublished: {
+      type: 'boolean',
+      defaultsTo: false,
     },
     isDeleted: {
       type: 'boolean',
