@@ -8,6 +8,8 @@ import {
   Text,
   Link,
   Spacer,
+  Grid,
+  GridItem,
 } from '@chakra-ui/react';
 
 // Only allow setting field values that are defined here
@@ -110,9 +112,20 @@ const signUpButton = {
   textAlign: 'center',
 };
 
-const isPaymentRequired = (form) => form.isPaymentRequired ? '- [Payment Required]' : '';
+const signedUpButton = {
+  backgroundColor: '#C4C4C4',
+  color: '#4E4F50',
+  fontSize: 'inherit',
+  borderRadius: '3px',
+  padding: '20px 10px',
+  textAlign: 'center',
+  cursor: 'default',
+};
 
-const generatePublishedFormLinks = (forms) => {
+const isPaymentRequired = (form) =>
+  form.isPaymentRequired ? '- [Payment Required]' : '';
+
+const generatePublishedFormLinks = (forms, signedUp) => {
   if (forms) {
     return (
       <Box>
@@ -124,30 +137,51 @@ const generatePublishedFormLinks = (forms) => {
                 key={'fl' + item['formName']}
                 align="center"
                 w={['100%', '90%', '90%', '80%', '80%']}
-                fontSize={['0.85rem', '1.0rem']}
+                fontSize={['0.6rem', '0.8rem']}
                 fontWeight="700"
                 textAlign="left"
               >
-                <Image src={item['formImage']} fit="cover" h="18%" w="35%" />
-                  <Text 
-                    margin="0px 15px" 
-                    alignSelf="baseline">
-                    {`${item['formName']} ${isPaymentRequired(item)}`}
-                </Text>
-                <Spacer />
-                <Link
-                  href={`/forms/${item['id']}`}
-                  _hover={{ textDecoration: 'none', opacity: '75%' }}
-                  width="fit-content"
-                >
-                  <Button style={signUpButton}>Sign Up</Button>
-                </Link>
+                <Grid h="inherit" templateColumns="repeat(24, 1fr)">
+                  <GridItem colSpan={9} display="flex">
+                    <Image src={item['formImage']} fit="contain" w="100%" />
+                  </GridItem>
+                  <GridItem colSpan={12} display="flex" alignItems="center">
+                    <Text margin="0px 15px">
+                      {`${item['formName']} ${isPaymentRequired(item)}`}
+                    </Text>
+                    <Spacer />
+                  </GridItem>
+                  <GridItem colSpan={3} display="flex" alignItems="center"
+                  >
+                    {signedUp ? (
+                      <Box>
+                        <Button style={signedUpButton}>Signed Up</Button>
+                      </Box>
+                    ) : (
+                      <Link
+                        href={`/forms/${item['id']}`}
+                        _hover={{ textDecoration: 'none', opacity: '75%' }}
+                        width="fit-content"
+                      >
+                        <Button 
+                          style={signUpButton}
+                          _hover={{
+                            color: "#00377C",
+                            textDecoration: "underline",
+                            bg: "#CCE1FF"
+                          }}
+                        >
+                          Sign Up
+                        </Button>
+                      </Link>
+                    )}
+                  </GridItem>
+                </Grid>
               </Flex>
               {index !== forms.length - 1 && (
                 <Divider margin="15px 0px" backgroundColor="black" />
               )}
             </>
-    
           );
         })}
       </Box>

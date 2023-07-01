@@ -243,6 +243,7 @@ const UserProfileDesktop = (props) => {
                   md: {
                     borderBottom: '2px solid #0628A3',
                     marginBottom: '-2px',
+                    color: "#000000",
                   },
                 }}
                 fontWeight="700"
@@ -258,6 +259,7 @@ const UserProfileDesktop = (props) => {
                 _selected={{
                   borderBottom: '2px solid #0628A3',
                   marginBottom: '-2px',
+                  color: "#000000",
                 }}
                 fontWeight="700"
               >
@@ -272,6 +274,7 @@ const UserProfileDesktop = (props) => {
                 _selected={{
                   borderBottom: '2px solid #0628A3',
                   marginBottom: '-2px',
+                  color: "#000000",
                 }}
                 fontWeight="700"
               >
@@ -287,20 +290,33 @@ const UserProfileDesktop = (props) => {
             borderRadius="10px"
           >
             <TabPanel p="5%">
-              <Stack direction="column" spacing="5">
+              <Stack direction="row" spacing="5">
                 {formList && formList.length > 0 && (
-                  <Box>
+                  <>
+                    <Box width="50%">
+                      <Text
+                        fontSize="1.1rem"
+                        fontWeight="700"
+                        color="#718096"
+                        mb="5"
+                      >
+                        Available Signup Links:
+                      </Text>
+                      {generatePublishedFormLinks(unsignedFormList, false)}
+                      
+                    </Box>
+                    <Box width="50%">
                     <Text
-                      fontSize="1.1rem"
-                      fontWeight="700"
-                      color="#718096"
-                      mb="5"
-                    >
-                      Available Signup Links:
-                    </Text>
-                    {generatePublishedFormLinks(unsignedFormList)}
-                    {generatePublishedFormLinks(signedUpFormList)}
-                  </Box>
+                        fontSize="1.1rem"
+                        fontWeight="700"
+                        color="#718096"
+                        mb="5"
+                      >
+                        Your Signups:
+                      </Text>
+                      {generatePublishedFormLinks(signedUpFormList, true)}
+                    </Box>
+                  </>
                 )}
                 {/* {user.password !== "" && (
                 <Button
