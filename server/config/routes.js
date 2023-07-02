@@ -113,6 +113,7 @@ module.exports.routes = {
 
   // Announcements APIs
   'get /api/announcement/get': 'announcements/get-announcements-new',
+  'get /api/announcement/admin-get': 'announcements/admin-get-announcements',
   'post /api/announcement/create': 'announcements/create-announcements',
 
   // UI

@@ -79,7 +79,7 @@ module.exports = {
         signUpUrl,
         directionsUrl,
         additionalNotes,
-        submittedBy: user,
+        submittedBy: submittedBy || user,
         approvedBy,
         isPublished,
       }).fetch();
