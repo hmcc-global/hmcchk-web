@@ -111,6 +111,11 @@ module.exports.routes = {
   'post /api/testimony/create': 'testimonies/create-testimonies',
   'put /api/testimony/update': 'testimonies/update-testimonies',
 
+  // Announcements APIs
+  'get /api/announcement/get': 'announcements/get-announcements-new',
+  'get /api/announcement/admin-get': 'announcements/admin-get-announcements',
+  'post /api/announcement/create': 'announcements/create-announcements',
+
   // UI
   'get /*': {
     skipAssets: true,
