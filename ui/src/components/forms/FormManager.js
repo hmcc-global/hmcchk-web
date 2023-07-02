@@ -5,15 +5,13 @@ import {
   Button,
   Heading,
   Container,
-  List,
-  ListItem,
   Box,
   Text,
   Badge,
   Stack,
   useToast,
-  Checkbox,
-  HStack
+  HStack,
+  SimpleGrid,
 } from '@chakra-ui/react';
 import FormEditorContainer from './FormEditorContainer';
 
@@ -75,17 +73,31 @@ const FormManager = (props) => {
 
   const copyPublicLinkHandler = (e) => {
     const host = window.location.host;
-    const formId = e.target.value;
-    navigator?.clipboard?.writeText(`${host}/forms/${formId}`);
+    const formTarget = e.target.value;
+
+    navigator?.clipboard?.writeText(`${host}/forms/${formTarget}`);
     toast({
       description: 'Public Link Copied to clipboard!',
       status: 'success',
-      duration: 5000
+      duration: 5000,
     });
-  }
+  };
+
+  const copyPublicLinkHandlerForExternalForms = (e) => {
+    navigator?.clipboard?.writeText(e.target.value);
+    toast({
+      description: 'Public Link Copied to clipboard!',
+      status: 'success',
+      duration: 5000,
+    });
+  };
 
   const onClickRedirect = async (e) => {
     history.push('/forms/' + e.target.value);
+  };
+
+  const onClickRedirectExternal = async (e) => {
+    window.open(e.target.value);
   };
 
   const onDelete = async (e) => {
@@ -124,19 +136,18 @@ const FormManager = (props) => {
       pathname: '/admin/formViewer',
       state: {
         name: formItem.formName,
-        id: formItem.id
-      }
+        id: formItem.id,
+      },
     });
   };
 
   const noViewPermission = (formItem) => {
-    if (!formItem.isPaymentRequired)
-      return false;
+    if (!formItem.isPaymentRequired) return false;
 
     const currentUserAccessType = user.accessType;
     const hasViewPermissions = ['admin', 'stewardship'];
     return !hasViewPermissions.includes(currentUserAccessType);
-  }
+  };
 
   return (
     <Container maxW="container.xl" pt={10} minH="100vh">
@@ -150,20 +161,26 @@ const FormManager = (props) => {
         <Box borderRadius="lg">
           <HStack>
             <Heading mb="2" as="h2" size="lg" align="left">
-              Existing Forms 
+              Existing Forms
             </Heading>
           </HStack>
-          <List spacing="2">
+          <SimpleGrid spacing="2" columns={[1, 2]}>
             {formList.map((formItem) => (
-              <ListItem key={formItem.id}>
+              <Box key={formItem.id}>
                 <Box p="3" borderRadius="lg" borderWidth="1px">
                   <Text mb="3">
                     <Badge colorScheme={formItem.isPublished ? 'green' : 'red'}>
                       {formItem.isPublished ? 'LIVE' : 'PRIVATE'}
                     </Badge>{' '}
+                    <Badge>
+                      {formItem.formType ? formItem.formType : 'internal'}
+                    </Badge>{' '}
                     {formItem.formName}
                   </Text>
-                  <Stack direction={['column', 'row']} spacing={1}>
+                  <Stack
+                    direction={['column', 'column', 'column', 'column', 'row']}
+                    spacing={1}
+                  >
                     <Button
                       colorScheme="blue"
                       onClick={onEdit}
@@ -180,24 +197,51 @@ const FormManager = (props) => {
                     >
                       {formItem.isPublished ? 'Unpublish' : 'Publish'}
                     </Button>
-                    <Button
-                      colorScheme="blue"
-                      onClick={copyPublicLinkHandler}
-                      value={formItem.id}
-                    >
-                      Public Link
-                    </Button>
-                    <Button
-                      colorScheme="blue"
-                      onClick={onClickRedirect}
-                      value={formItem.id}
-                    >
-                      View Form
-                    </Button>
+                    {formItem.formType === 'external' && (
+                      <Button
+                        colorScheme="blue"
+                        onClick={copyPublicLinkHandlerForExternalForms}
+                        value={formItem.externalFormLink}
+                      >
+                        Public Link
+                      </Button>
+                    )}
+                    {formItem.formType !== 'external' && (
+                      <Button
+                        colorScheme="blue"
+                        onClick={copyPublicLinkHandler}
+                        value={formItem.id}
+                      >
+                        Public Link
+                      </Button>
+                    )}
+
+                    {formItem.formType === 'external' && (
+                      <Button
+                        colorScheme="blue"
+                        onClick={onClickRedirectExternal}
+                        value={formItem.externalFormLink}
+                      >
+                        View Form
+                      </Button>
+                    )}
+                    {formItem.formType !== 'external' && (
+                      <Button
+                        colorScheme="blue"
+                        onClick={onClickRedirect}
+                        value={formItem.id}
+                      >
+                        View Form
+                      </Button>
+                    )}
+
                     <Button
                       colorScheme="blue"
                       onClick={() => onClickHandler(formItem)}
-                      disabled={noViewPermission(formItem)}
+                      disabled={
+                        noViewPermission(formItem) ||
+                        formItem.formType == 'external'
+                      }
                     >
                       View Data
                     </Button>
@@ -211,9 +255,9 @@ const FormManager = (props) => {
                     </Button>
                   </Stack>
                 </Box>
-              </ListItem>
+              </Box>
             ))}
-          </List>
+          </SimpleGrid>
         </Box>
         <FormEditorContainer
           user={user}
