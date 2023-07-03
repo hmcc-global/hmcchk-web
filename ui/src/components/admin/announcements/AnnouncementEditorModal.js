@@ -17,9 +17,12 @@ import {
   Input,
   FormErrorMessage,
   FormHelperText,
-  Switch,
+  Checkbox,
   Select,
   Button,
+  Grid,
+  GridItem,
+  Textarea,
 } from '@chakra-ui/react';
 
 const AnnouncementEditorModal = (props) => {
@@ -29,19 +32,24 @@ const AnnouncementEditorModal = (props) => {
     setIsOpen,
     editAnnouncementData,
     announcementListCallback,
+    actionOnEditor,
   } = props;
   const { register, handleSubmit, control, reset, setValue, formState } =
     useForm();
   const { errors } = formState;
 
   const [title, setTitle] = useState(null);
+  const [isInWeb, setIsInWeb] = useState(false);
+  const [isInPpt, setIsInPpt] = useState(false);
   const [description, setDescription] = useState(null);
   const [imageAdLink, setImageAdLink] = useState(null);
   const [location, setLocation] = useState(null);
   const [directionsLink, setDirectionsLink] = useState(null);
-  const [startDateTime, setStartDateTime] = useState(null);
-  const [endDateTime, setEndDateTime] = useState(null);
-  const [dateTimePeriodInvalid, setDateTimePeriodInvalid] = useState(false);
+  const [startDate, setStartDate] = useState(null);
+  const [startTime, setStartTime] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [endTime, setEndTime] = useState(null);
+  const [datePeriodInvalid, setDatePeriodInvalid] = useState(false);
   const [formType, setFormType] = useState(null);
   const [formId, setFormId] = useState(null);
   const [formSignupLink, setFormSignupLink] = useState(null);
@@ -57,8 +65,10 @@ const AnnouncementEditorModal = (props) => {
     setImageAdLink(null);
     setLocation(null);
     setDirectionsLink(null);
-    setStartDateTime(null);
-    setEndDateTime(null);
+    setStartDate(null);
+    setStartTime(null);
+    setEndDate(null);
+    setEndTime(null);
     setFormId(null);
     setFormSignupLink(null);
     setImageAdTakedownDate(null);
@@ -76,8 +86,10 @@ const AnnouncementEditorModal = (props) => {
       setImageAdLink(data.imageAdLink);
       setLocation(data.location);
       setDirectionsLink(data.directionsLink);
-      setStartDateTime(data.startDateTime);
-      setEndDateTime(data.endDateTime);
+      setStartDate(data.startDate);
+      setStartTime(data.startTime);
+      setEndDate(data.endDate);
+      setEndTime(data.endTime);
       setFormId(data.formId);
       setFormSignupLink(data.formSignupLink);
       setImageAdTakedownDate(data.imageAdTakedownDate);
@@ -101,24 +113,35 @@ const AnnouncementEditorModal = (props) => {
   }, [editAnnouncementData]);
 
   useEffect(() => {
-    if (startDateTime && endDateTime) {
-      if (DateTime.fromISO(endDateTime) <= DateTime.fromISO(startDateTime)) {
-        setDateTimePeriodInvalid(true);
+    if (startDate && endDate) {
+      if (DateTime.fromISO(endDate) <= DateTime.fromISO(startDate)) {
+        setDatePeriodInvalid(true);
         return;
       }
     }
-    setDateTimePeriodInvalid(false);
-  }, [startDateTime, endDateTime]);
+    setDatePeriodInvalid(false);
+  }, [startDate, endDate]);
+
+  const modalTitle = (actionOnEditor) => {
+    switch (actionOnEditor) {
+      default:
+        return 'New Announcement';
+      case 'edit':
+        return 'Edit Announcement';
+      case 'duplicate':
+        return 'Duplicate Announcement';
+    }
+  };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} size="full">
       <ModalOverlay />
       <ModalContent>
         <ModalCloseButton />
         <ModalBody>
           <Container maxW="container.xl">
-            <Heading as="h2" size="lg">
-              New/Edit/Duplicate Announcement
+            <Heading as="h2" size="lg" pb={3}>
+              {modalTitle(actionOnEditor)}
             </Heading>
 
             <Box>
@@ -134,28 +157,68 @@ const AnnouncementEditorModal = (props) => {
                     />
                   </FormControl>
 
-                  <FormControl isInvalid={dateTimePeriodInvalid}>
-                    <FormLabel>Start/End Date & Time</FormLabel>
-                    <FormErrorMessage>
-                      {dateTimePeriodInvalid &&
-                        'Starting date and time is invalid. Please check again.'}
-                    </FormErrorMessage>
-                    Start Date & Time
-                    <Input
-                      type="datetime-local"
-                      {...register('startDateTime')}
-                    />
-                    End Date & Time
-                    <Input type="datetime-local" {...register('endDateTime')} />
-                  </FormControl>
+                  <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+                    <GridItem>
+                      <FormControl>
+                        <FormLabel>Start Date</FormLabel>
+                        <FormErrorMessage>
+                          {datePeriodInvalid &&
+                            'Start and end date is invalid, please check again'}
+                        </FormErrorMessage>
+                        <Input
+                          id="startDate"
+                          type="date"
+                          {...register('startDate')}
+                        />
+                      </FormControl>
+                    </GridItem>
+                    <GridItem>
+                      <FormControl>
+                        <FormLabel>Start Time</FormLabel>
+                        <Input
+                          id="startTime"
+                          type="time"
+                          {...register('startTime')}
+                        />
+                      </FormControl>
+                    </GridItem>
+                    <GridItem>
+                      <FormControl>
+                        <FormLabel>End Date</FormLabel>
+                        <FormErrorMessage>
+                          {datePeriodInvalid &&
+                            'Start and end date is invalid, please check again'}
+                        </FormErrorMessage>
+                        <Input
+                          id="endDate"
+                          type="date"
+                          {...register('endDate')}
+                        />
+                      </FormControl>
+                    </GridItem>
+                    <GridItem>
+                      <FormControl>
+                        <FormLabel>End Time</FormLabel>
+                        <Input
+                          id="endTime"
+                          type="time"
+                          {...register('endTime')}
+                        />
+                      </FormControl>
+                    </GridItem>
+                  </Grid>
 
                   <FormControl>
                     <FormLabel>Location</FormLabel>
+                    <FormHelperText>
+                      Enter 'TBA' if not confirmed. If not applicable, leave it
+                      blank.
+                    </FormHelperText>
                     <Input id="location" {...register('location')} />
                   </FormControl>
 
                   <FormControl isInvalid={errors['imageAdLink']}>
-                    <FormLabel>Image Ad Link</FormLabel>
+                    <FormLabel>Announcements Image Link</FormLabel>
                     <Input
                       id="imageAdLink"
                       {...register('imageAdLink', {
@@ -197,7 +260,7 @@ const AnnouncementEditorModal = (props) => {
 
                   <FormControl isInvalid={errors['description']}>
                     <FormLabel>Description</FormLabel>
-                    <Input
+                    <Textarea
                       id="description"
                       {...register('description', {
                         required: 'Description is required',
