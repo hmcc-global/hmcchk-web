@@ -115,6 +115,7 @@ module.exports.routes = {
   'get /api/announcement/get': 'announcements/get-announcements-new',
   'get /api/announcement/admin-get': 'announcements/admin-get-announcements',
   'post /api/announcement/create': 'announcements/create-announcements',
+  'put /api/announcement/update': 'announcements/update-announcements',
 
   // UI
   'get /*': {
