@@ -58,6 +58,9 @@ module.exports = {
     submittedBy: {
       type: 'string',
     },
+    lastUpdatedBy: {
+      type: 'string',
+    },
     approvedBy: {
       type: 'string',
     },
