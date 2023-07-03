@@ -18,6 +18,7 @@ module.exports = {
     try {
       const data = await Announcement.find({
         _id: id,
+        isInWeb: true,
         isPublished: true,
         isDeleted: false,
       });
