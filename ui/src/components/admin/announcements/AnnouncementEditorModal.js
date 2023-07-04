@@ -57,10 +57,27 @@ const AnnouncementEditorModal = (props) => {
   const [additionalNotes, setAdditionalNotes] = useState(null);
   const [submitter, setSubmitter] = useState(null);
   const [approvedBy, setApprovedBy] = useState(null);
-  const [publishedAt, setPublishedAt] = useState(null);
 
   const resetAnnouncementEditorCallback = () => {
+    reset();
+    setValue('title', null);
+    setValue('isInWeb', false);
+    setValue('isInPpt', false);
+    setValue('description', null);
+    setValue('imageAdLink', null);
+    setValue('location', null);
+    setValue('directionsLink', null);
+    setValue('startDate', null);
+    setValue('startTime', null);
+    setValue('endDate', null);
+    setValue('endTime', null);
+    setValue('formId', null);
+    setValue('formSignupLink', null);
+    setValue('imageAdTakedownDate', null);
+    setValue('additionalNotes', null);
     setTitle(null);
+    setIsInWeb(false);
+    setIsInPpt(false);
     setDescription(null);
     setImageAdLink(null);
     setLocation(null);
@@ -73,30 +90,44 @@ const AnnouncementEditorModal = (props) => {
     setFormSignupLink(null);
     setImageAdTakedownDate(null);
     setAdditionalNotes(null);
-    setSubmitter(null);
-    setApprovedBy(null);
-    setPublishedAt(null);
     setIsOpen(false);
   };
 
   const setAnnouncementEditorData = (data) => {
     if (data) {
-      setTitle(data.announcementTitle);
+      setValue('title', data.title);
+      setValue('isInWeb', data.isInWeb);
+      setValue('isInPpt', data.isInPpt);
+      setValue('description', data.description);
+      setValue('imageAdLink', data.imageAdUrl);
+      setValue('location', data.location);
+      setValue('directionsLink', data.directionsUrl);
+      setValue('startDate', data.startDate);
+      setValue('startTime', data.startTime);
+      setValue('endDate', data.endDate);
+      setValue('endTime', data.endTime);
+      setValue('formId', data.formId);
+      setValue('formSignupLink', data.signUpUrl);
+      setValue('imageAdTakedownDate', data.imageAdTakedownDate);
+      setValue('additionalNotes', data.additionalNotes);
+
+      setTitle(data.title);
+      setIsInWeb(data.isInWeb);
+      setIsInPpt(data.isInPpt);
       setDescription(data.description);
-      setImageAdLink(data.imageAdLink);
+      setImageAdLink(data.imageAdUrl);
       setLocation(data.location);
-      setDirectionsLink(data.directionsLink);
+      setDirectionsLink(data.directionsUrl);
       setStartDate(data.startDate);
       setStartTime(data.startTime);
       setEndDate(data.endDate);
       setEndTime(data.endTime);
       setFormId(data.formId);
-      setFormSignupLink(data.formSignupLink);
+      setFormSignupLink(data.signUpUrl);
       setImageAdTakedownDate(data.imageAdTakedownDate);
       setAdditionalNotes(data.additionalNotes);
       setSubmitter(data.submitter);
       setApprovedBy(data.approvedBy);
-      setPublishedAt(data.publishedAt);
     }
   };
 
@@ -133,6 +164,17 @@ const AnnouncementEditorModal = (props) => {
     }
   };
 
+  const modalSubmitButton = (actionOnEditor) => {
+    switch (actionOnEditor) {
+      default:
+        return 'Create Announcement';
+      case 'edit':
+        return 'Save Changes';
+      case 'duplicate':
+        return 'Duplicate Announcement';
+    }
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="full">
       <ModalOverlay />
@@ -148,13 +190,29 @@ const AnnouncementEditorModal = (props) => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Stack spacing={2}>
                   <FormControl isInvalid={errors['title']}>
-                    <FormLabel> Title</FormLabel>
+                    <FormLabel>Title</FormLabel>
                     <Input
                       id="title"
                       {...register('title', {
                         required: ' Title is required',
                       })}
                     />
+                  </FormControl>
+
+                  <FormControl>
+                    <FormLabel>Where should this announcement go?</FormLabel>
+                    <FormHelperText>
+                      Check both if it should be shared in both Web/Mobile and
+                      PPT
+                    </FormHelperText>
+                    <Stack spacing={10} direction={['column', 'row']}>
+                      <Checkbox size="lg" id="isInWeb" {...register('isInWeb')}>
+                        Web/Mobile
+                      </Checkbox>
+                      <Checkbox size="lg" id="isInPpt" {...register('isInPpt')}>
+                        PPT
+                      </Checkbox>
+                    </Stack>
                   </FormControl>
 
                   <Grid templateColumns="repeat(2, 1fr)" gap={6}>
@@ -272,7 +330,9 @@ const AnnouncementEditorModal = (props) => {
                       magic happen.
                     </FormHelperText>
                   </FormControl>
-                  <Button type="submit">Create Announcement</Button>
+                  <Button colorScheme="blue" type="submit">
+                    {modalSubmitButton(actionOnEditor)}
+                  </Button>
                 </Stack>
               </form>
             </Box>

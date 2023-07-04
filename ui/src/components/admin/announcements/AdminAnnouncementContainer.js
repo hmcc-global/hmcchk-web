@@ -56,7 +56,9 @@ export default function AdminAnnouncementContainer(props) {
   const onEdit = async (e) => {
     setIsLoading(true);
     try {
-      const { data, status } = await axios.get('');
+      const { data, status } = await axios.get('/api/announcement/admin-get', {
+        params: { id: e.target.value },
+      });
 
       if (status !== 200) {
         toast({
@@ -80,7 +82,9 @@ export default function AdminAnnouncementContainer(props) {
   const onDuplicate = async (e) => {
     setIsLoading(true);
     try {
-      const { data, status } = await axios.get('');
+      const { data, status } = await axios.get('/api/announcement/admin-get', {
+        params: { id: e.target.value },
+      });
 
       if (status !== 200) {
         toast({
@@ -155,6 +159,7 @@ export default function AdminAnnouncementContainer(props) {
         });
       }
 
+      await getAnnouncementList();
       setIsLoading(false);
     } catch (err) {
       console.log(err);
@@ -249,7 +254,7 @@ export default function AdminAnnouncementContainer(props) {
                   <Button
                     colorScheme="blue"
                     value={announcementItem.id}
-                    onClick={onEdit}
+                    onClick={onDuplicate}
                     isLoading={isLoading}
                     actionOnEditor="duplicate"
                   >
@@ -275,6 +280,7 @@ export default function AdminAnnouncementContainer(props) {
         isOpen={isEditorOpen}
         setIsOpen={setIsEditorOpen}
         editAnnouncementData={editAnnouncementData}
+        actionOnEditor={actionOnEditor}
         announcementListCallback={announcementListCallback}
       />
     </Container>
