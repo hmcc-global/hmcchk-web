@@ -12,6 +12,14 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    isInWeb: {
+      type: 'boolean',
+      defaultsTo: false,
+    },
+    isInPpt: {
+      type: 'boolean',
+      defaultsTo: false,
+    },
     startDate: {
       type: 'string',
       columnType: 'date',
@@ -48,6 +56,9 @@ module.exports = {
       type: 'string',
     },
     submittedBy: {
+      type: 'string',
+    },
+    lastUpdatedBy: {
       type: 'string',
     },
     approvedBy: {
