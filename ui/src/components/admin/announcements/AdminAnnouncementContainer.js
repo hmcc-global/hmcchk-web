@@ -121,8 +121,9 @@ export default function AdminAnnouncementContainer(props) {
             isClosable: true,
           });
         }
-        await getAnnouncementList;
       }
+
+      await getAnnouncementList;
       setIsLoading(false);
     } catch (err) {
       console.log(err);
