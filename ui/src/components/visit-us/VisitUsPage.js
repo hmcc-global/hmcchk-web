@@ -1,14 +1,11 @@
 import {
   AspectRatio,
   Box,
-  Center,
   Container,
   Flex,
   Heading,
   Icon,
   Link,
-  LinkBox,
-  LinkOverlay,
   Spacer,
   Text,
   VStack,
@@ -16,8 +13,12 @@ import {
 import { RiChat1Line } from 'react-icons/ri';
 import Faq from './Faq';
 
-const SUNDAY_CELEBRATION_LOCATION =
-  '11/F, KOHO, Hung To Road, Kwun Tong';
+// Imports for link box that we disabled
+// Center,
+// LinkBox,
+// LinkOverlay,
+
+const SUNDAY_CELEBRATION_LOCATION = '11/F, KOHO, Hung To Road,\n Kwun Tong';
 const SUNDAY_CELEBRATION_GOOGLE_MAPS_EMBED =
   'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.1840730188546!2d114.22194905088833!3d22.30887718524703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34040145ab278021%3A0xf168be9bbe8b1740!2sKOHO!5e0!3m2!1sen!2shk!4v1677338113505!5m2!1sen!2shk';
 
@@ -31,14 +32,14 @@ const VisitUsPage = (props) => {
           bgImage={`url('${process.env.PUBLIC_URL}/images/visitus/header-banner.jpeg')`}
           bgPosition="center"
           bgSize="cover"
-          px={[6, 12, 36]}
+          px={[6, 12, 28]}
           py={[8, 16, 20]}
           mb={[4, 0]}
         >
           <Heading
             as="h2"
             fontSize={['4xl', '6xl']}
-            fontWeight={700}
+            fontWeight={800}
             lineHeight={1}
             color="white"
             textAlign="center"
@@ -49,17 +50,17 @@ const VisitUsPage = (props) => {
           <Text
             color="white"
             fontSize={['md', 'xl']}
-            fontWeight={600}
+            fontWeight={700}
             textAlign="center"
             mb={[0, 5]}
           >
-            is HMCC’s weekend gathering where everyone in the church comes
+            is HMCC's weekend gathering where everyone in the church comes
             together to{' '}
             <span style={{ color: '#F6E05E' }}>
-              receive God’s message, worship in community and enjoy fellowship.
+              receive God's message, worship in community and enjoy fellowship.
             </span>
             <br />
-            Everybody’s welcome!
+            Everybody's welcome!
           </Text>
         </Box>
         <Box pb={[4, 0]}>
@@ -72,11 +73,11 @@ const VisitUsPage = (props) => {
           >
             Ways to enjoy Sunday Celebration
           </Heading>
-          <Flex flexDir={["column", "row"]}>
+          <Flex flexDir={['column', 'row']}>
             <VStack
               flex={4.25}
               align="stretch"
-              textAlign={["center", "left"]}
+              textAlign={['center', 'left']}
               mr={[0, 6]}
               mb={[6, 0]}
             >
@@ -88,14 +89,15 @@ const VisitUsPage = (props) => {
               >
                 IN-PERSON
               </Heading>
-              <Text fontSize={["2xl", "2em"]} fontWeight={700}>
+              <Text fontSize={['2xl', '2em']} fontWeight={700}>
                 Sundays @ 10 AM
               </Text>
               <Text
-                fontSize={["1.125em", "2xl"]}
+                fontSize={['1.125em', '2xl']}
                 fontWeight={700}
                 px={[6, 0]}
                 pb={4}
+                whiteSpace="pre-line"
               >
                 {SUNDAY_CELEBRATION_LOCATION}
                 <br />
@@ -103,6 +105,7 @@ const VisitUsPage = (props) => {
                   href="https://bit.ly/KOHODirections"
                   color="#0E66CC"
                   isExternal
+                  fontWeight={700}
                 >
                   <Text as="u">bit.ly/KOHODirections</Text>
                 </Link>
@@ -136,7 +139,13 @@ const VisitUsPage = (props) => {
                 *Pre-registration opens every Monday at 8PM
               </Text> */}
             </VStack>
-            <AspectRatio flex={5.75} ratio={16 / 9}>
+            <AspectRatio
+              flex={5.75}
+              ratio={16 / 9}
+              borderRadius="20"
+              borderWidth="1px"
+              overflow="hidden"
+            >
               <iframe
                 title="Sunday Celebration location - Google Maps"
                 src={SUNDAY_CELEBRATION_GOOGLE_MAPS_EMBED}

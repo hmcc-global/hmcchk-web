@@ -15,7 +15,7 @@ const LifeGroupCard = (props) => {
 
   return (
     <Flex
-      px={2}
+      px={[3, 2]}
       py={4}
       borderWidth="1px"
       borderRadius="20"
@@ -30,7 +30,7 @@ const LifeGroupCard = (props) => {
       <Heading as="h4" fontSize={['xl', '2xl', '3xl']} fontWeight={700}>
         {name}
       </Heading>
-      <Text fontSize={['.75em', '1em']} mb={4}>
+      <Text fontSize={['.75em', '1em']} mb={4} fontWeight={[400, 700]}>
         {fullname}
       </Text>
       <Spacer />

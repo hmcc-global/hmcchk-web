@@ -8,7 +8,7 @@ import {
   Box,
   Heading,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React from 'react';
 
 const StaffSection = (props) => {
   const { title, blurb } = props;
@@ -29,46 +29,52 @@ const StaffSection = (props) => {
       </Center>
       <VStack>
         <Box
-          bgColor="#2D4769"
+          bgColor="#EEFAFF"
           w="100%"
           minH={{ base: '40em', lg: '30em' }}
-          borderRadius="20px"
+          border="2px solid #CDDCE0"
+          borderRadius="7"
         >
           <Stack
-            direction={{ base: 'column', lg: 'row' }}
-            py={['2em', '2em', '4em']}
+            direction={{ base: 'column', lg: 'column' }}
+            py="2em"
+            px="4em"
+            spacing="10"
           >
-            <Image
-              src={process.env.PUBLIC_URL + 'images/about/KimFamily.png'}
-              px={['0', '0', '1em']}
-              w={{ base: '90%', lg: '60em' }}
-              minW={{ base: '90%', lg: '30em' }}
+            <Box
               objectFit="cover"
               margin="auto"
-            />
+              borderRadius="7"
+              w={{ base: '90%', lg: '66%' }}
+              minW={{ base: '90%', lg: '50%' }}
+            >
+              <Image
+                src={process.env.PUBLIC_URL + 'images/about/kimfamily.jpeg'}
+                objectFit="cover"
+                margin="auto"
+                borderRadius="7"
+              />
+            </Box>
+
             <Box px="1.5em">
-              <Text color="white" fontSize="2xl" fontWeight="bold">
+              <Text color="#0628A3" fontSize="2xl" fontWeight="bold">
                 {blurb.kim.title}
               </Text>
-              <Text
-                as="i"
-                color="white"
-                fontSize="md"
-                fontWeight="semibold"
-                paddingTop={{ base: 'none', lg: '1em' }}
-              >
+              <Text color="black" fontSize="lg" fontWeight="bold">
                 {blurb.kim.position.split('\n')[0]}
                 <br />
                 {blurb.kim.position.split('\n')[1]}
+                <br />
+                {blurb.kim.position.split('\n')[2]}
               </Text>
-              <Box>
-                <Text color="white" fontSize="sm" paddingTop="1em">
+              <Box fontSize="md">
+                <Text color="black" paddingTop="1em">
                   {blurb.kim[0]}
                 </Text>
-                <Text color="white" fontSize="sm" paddingTop="1em">
+                <Text color="black" paddingTop="1em">
                   {blurb.kim[1]}
                 </Text>
-                <Text color="white" fontSize="sm" paddingTop="1em">
+                <Text color="black" paddingTop="1em">
                   {blurb.kim[2]}
                 </Text>
               </Box>
