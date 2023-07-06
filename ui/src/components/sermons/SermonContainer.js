@@ -99,21 +99,11 @@ const SermonContainer = (props) => {
           justifyContent="center"
           px={[8, 10]}
           py={[8, 12]}
-          display={{ base: 'none', md: 'flex' }}
         >
           <Heading size="2xl" color="white" fontWeight="900">
             Sermons
           </Heading>
         </Box>
-        <Heading
-          size="2xl"
-          color="black"
-          justifyContent="center"
-          fontWeight="900"
-          display={{ base: 'flex', md: 'none' }}
-        >
-          Sermons
-        </Heading>
         <CurrentSermon currentSermon={currentSermon} isOnline={onlineSermon} />
         <SermonCardList allSermons={sermons} />
       </Container>

@@ -1,10 +1,10 @@
-import * as React from "react";
-import { Box, VStack, HStack, Image, Text, Link } from "@chakra-ui/react";
+import * as React from 'react';
+import { Box, VStack, HStack, Image, Text, Link } from '@chakra-ui/react';
 export function SoapAppDownloadButton() {
   return (
-    <VStack minW="50%">
+    <VStack minW="50%" align="left">
       <Box height="25px">
-        <Text color="white" fontSize="md">
+        <Text color="white" fontSize="lg" fontWeight={['400', '700']}>
           Get our Daily SOAP App
         </Text>
       </Box>
@@ -14,7 +14,7 @@ export function SoapAppDownloadButton() {
           href="https://apps.apple.com/hk/app/daily-soap-bible-reading-app/id1448825436"
         >
           <Image
-            h={{ base: "10", md: "9", lg: "10" }}
+            h={{ base: '10', md: '9', lg: '10' }}
             objectFit="cover"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/135px-Download_on_the_App_Store_Badge.svg.png"
           />
@@ -24,7 +24,7 @@ export function SoapAppDownloadButton() {
           href="https://play.google.com/store/apps/details?id=net.hmcc.hongkong.dailysoap"
         >
           <Image
-            h={{ base: "10", md: "9", lg: "10" }}
+            h={{ base: '10', md: '9', lg: '10' }}
             objectFit="cover"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/320px-Google_Play_Store_badge_EN.svg.png"
           />
