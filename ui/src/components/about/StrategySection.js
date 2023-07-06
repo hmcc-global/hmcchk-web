@@ -2,7 +2,6 @@ import {
   Flex,
   Text,
   Box,
-  Container,
   Heading,
   UnorderedList,
   ListItem,
@@ -10,34 +9,10 @@ import {
 } from '@chakra-ui/react';
 
 const StrategySection = (props) => {
-  const sliderSettings = {
-    adaptiveHeight: true,
-    arrows: false,
-    centerMode: true,
-    dots: false,
-    focusOnSelect: true,
-    infinite: false,
-    slidesPerRow: 1,
-    speed: 500,
-    swipeToSlide: true,
-    variableWidth: true,
-  };
   const { title, blurb } = props;
   return (
     <Flex w="100%" direction="column">
-      <Box
-        borderWidth="2px"
-        borderRadius="5"
-        shadow="lg"
-        bg="#3182CE"
-        px={[0, 8]}
-        pt={[4, 6]}
-        pb={[4, 6]}
-        w="100%"
-        bgImage={`url('${process.env.PUBLIC_URL}/images/about-us/strategy.png')`}
-        bgPosition="center"
-        bgSize="cover"
-      >
+      <Box pt={[4, 6]} pb={[4, 6]} w="100%">
         <Heading
           as="h3"
           fontSize={['4xl', '6xl']}
@@ -49,110 +24,111 @@ const StrategySection = (props) => {
         >
           {title}
         </Heading>
-        <Container maxW="container.lg" py={4}>
-          <Stack
-            direction={{ base: 'column', lg: 'row' }}
-            spacing="10px"
-            alignItems="center"
+        <Stack
+          direction={{ base: 'column', lg: 'column' }}
+          spacing="10px"
+          alignItems="center"
+        >
+          <Flex
+            borderRadius="7"
+            shadow="lg"
+            px={[9, '13.3%']}
+            py={[9, 6]}
+            m={0}
+            minH={['25em', '18em']}
+            w={['full']}
+            bgImage={`${process.env.PUBLIC_URL}/images/about/strat-gather.jpeg`}
+            bgPos="center"
+            bgSize="cover"
           >
-            <Flex
-              borderWidth="2px"
-              borderRadius="5"
-              shadow="lg"
-              bg="#FFFFFF"
-              px={[6, 6]}
-              pt={[6, 6]}
-              pb={[6, 6]}
-              m={0}
-              h={['35em', '40em']}
-              w={['full', '25em']}
-            >
-              <Box m="auto">
-                <Heading color="#3182CE" textAlign="center">
-                  {blurb[0].title}
-                </Heading>
+            <Box m="auto">
+              <Heading color="#0628A3" fontWeight="bold" textAlign="center">
+                {blurb[0].title}
+              </Heading>
 
-                <Text
-                  textAlign="center"
-                  fontWeight="bold"
-                  py="3"
-                  color="#000000"
-                >
-                  {blurb[0].subtitle}
-                </Text>
-                <Text color="#000000">{blurb[0][0]}</Text>
-                <UnorderedList paddingTop="2">
-                  <ListItem color="#000000">{blurb[0][1]}</ListItem>
-                  <ListItem color="#000000">{blurb[0][2]}</ListItem>
-                </UnorderedList>
-              </Box>
-            </Flex>
-            <Flex
-              borderWidth="2px"
-              borderRadius="5"
-              shadow="lg"
-              bg="#FFFFFF"
-              px={[6, 6]}
-              pt={[6, 6]}
-              pb={[6, 6]}
-              m={0}
-              h={['35em', '40em']}
-              w={['full', '25em']}
-            >
-              <Box m="auto">
-                <Heading color="#3182CE" textAlign="center">
-                  {blurb[1].title}
-                </Heading>
+              <Heading
+                textAlign="center"
+                fontSize="xl"
+                fontWeight="bold"
+                py="3"
+                color="#000000"
+              >
+                {blurb[0].subtitle}
+              </Heading>
+              <Text color="#000000">{blurb[0][0]}</Text>
+              <UnorderedList paddingTop="2">
+                <ListItem color="#000000">{blurb[0][1]}</ListItem>
+                <ListItem color="#000000">{blurb[0][2]}</ListItem>
+              </UnorderedList>
+            </Box>
+          </Flex>
+          <Flex
+            borderRadius="7"
+            shadow="lg"
+            px={[9, '13.3%']}
+            py={[9, 6]}
+            m={0}
+            minH={['25em', '23em']}
+            w={['full']}
+            bgImage={`${process.env.PUBLIC_URL}/images/about/strat-grow.jpeg`}
+            bgPos="center"
+            bgSize="cover"
+          >
+            <Box m="auto">
+              <Heading color="#0628A3" fontWeight="bold" textAlign="center">
+                {blurb[1].title}
+              </Heading>
 
-                <Text
-                  textAlign="center"
-                  fontWeight="bold"
-                  py="3"
-                  color="#000000"
-                >
-                  {blurb[1].subtitle}
-                </Text>
-                <Text color="#000000">{blurb[1][0]}</Text>
-                <UnorderedList paddingTop="2">
-                  <ListItem color="#000000">{blurb[1][1]}</ListItem>
-                  <ListItem color="#000000">{blurb[1][2]}</ListItem>
-                </UnorderedList>
-              </Box>
-            </Flex>
-            <Flex
-              borderWidth="2px"
-              borderRadius="5"
-              shadow="lg"
-              bg="#FFFFFF"
-              px={[6, 6]}
-              pt={[6, 6]}
-              pb={[6, 6]}
-              m={0}
-              h={['35em', '40em']}
-              w={['full', '25em']}
-            >
-              <Box m="auto">
-                <Heading color="#3182CE" textAlign="center">
-                  {blurb[2].title}
-                </Heading>
+              <Text
+                textAlign="center"
+                fontSize="xl"
+                fontWeight="bold"
+                py="3"
+                color="#000000"
+              >
+                {blurb[1].subtitle}
+              </Text>
+              <Text color="#000000">{blurb[1][0]}</Text>
+              <UnorderedList paddingTop="2">
+                <ListItem color="#000000">{blurb[1][1]}</ListItem>
+                <ListItem color="#000000">{blurb[1][2]}</ListItem>
+              </UnorderedList>
+            </Box>
+          </Flex>
+          <Flex
+            borderRadius="7"
+            shadow="lg"
+            px={[9, '13.3%']}
+            py={[9, 6]}
+            m={0}
+            minH={['25em', '23em']}
+            w={['full']}
+            bgImage={`${process.env.PUBLIC_URL}/images/about/strat-go.jpeg`}
+            bgPos="center"
+            bgSize="cover"
+          >
+            <Box m="auto">
+              <Heading color="#0628A3" fontWeight="bold" textAlign="center">
+                {blurb[2].title}
+              </Heading>
 
-                <Text
-                  textAlign="center"
-                  fontWeight="bold"
-                  py="3"
-                  color="#000000"
-                >
-                  {blurb[2].subtitle}
-                </Text>
-                <Text color="#000000">{blurb[2][0]}</Text>
-                <UnorderedList paddingTop="2">
-                  <ListItem color="#000000">{blurb[2][1]}</ListItem>
-                  <ListItem color="#000000">{blurb[2][2]}</ListItem>
-                </UnorderedList>
-              </Box>
-            </Flex>
-          </Stack>
-        </Container>
+              <Text
+                textAlign="center"
+                fontSize="xl"
+                fontWeight="bold"
+                py="3"
+                color="#000000"
+              >
+                {blurb[2].subtitle}
+              </Text>
+              <Text color="#000000">{blurb[2][0]}</Text>
+              <UnorderedList paddingTop="2">
+                <ListItem color="#000000">{blurb[2][1]}</ListItem>
+                <ListItem color="#000000">{blurb[2][2]}</ListItem>
+              </UnorderedList>
+            </Box>
+          </Flex>
+        </Stack>
       </Box>
     </Flex>
   );

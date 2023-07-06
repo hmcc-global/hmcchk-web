@@ -5,22 +5,18 @@ import * as React from 'react';
 export function LinkGrid() {
   return (
     <SimpleGrid
-      columns={[2, 2, 4]}
+      columns="2"
       textAlign="left"
       minW="50%"
       spacing={['2vh', '2vh', '2vw']}
     >
-      <Box>
+      <Stack spacing="10">
         <Stack>
           <Link href="/visit-us">
             <Text fontWeight="bold">Visit</Text>
           </Link>
 
           <Link href="/online">Church online</Link>
-        </Stack>
-      </Box>
-      <Box>
-        <Stack>
           <Link href="/connect">
             <Text fontWeight="bold">Connect</Text>
           </Link>
@@ -31,7 +27,21 @@ export function LinkGrid() {
             <Text>LIFE Groups</Text>
           </HashLink>
         </Stack>
-      </Box>
+        <Stack>
+          <Link href="https://hongkong.sub.hmcc.net/privacy-policy-2/">
+            <Text fontWeight="bold">Privacy Policy</Text>
+          </Link>
+          <Link href="/give">
+            <Text fontWeight="bold">Give</Text>
+          </Link>
+          <Link href="/events">
+            <Text fontWeight="bold">Events</Text>
+          </Link>
+          <Link href="/sermons">
+            <Text fontWeight="bold">Sermons</Text>
+          </Link>
+        </Stack>
+      </Stack>
       <Box>
         <Stack>
           <Link href="/about-us">
@@ -54,23 +64,6 @@ export function LinkGrid() {
           </Link>
           <Link href="/about-us">
             <Text>Beliefs</Text>
-          </Link>
-        </Stack>
-      </Box>
-
-      <Box>
-        <Stack>
-          <Link href="/events">
-            <Text fontWeight="bold">Events</Text>
-          </Link>
-          <Link href="/sermons">
-            <Text fontWeight="bold">Sermons</Text>
-          </Link>
-          <Link href="/give">
-            <Text fontWeight="bold">Give</Text>
-          </Link>
-          <Link href="https://hongkong.sub.hmcc.net/privacy-policy-2/">
-            <Text fontWeight="bold">Privacy Policy</Text>
           </Link>
         </Stack>
       </Box>

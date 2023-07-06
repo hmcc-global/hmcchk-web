@@ -16,10 +16,10 @@ import {
 const BeliefsCard = ({ head, body }) => {
   return (
     <Box
-      borderWidth="1px"
-      borderRadius="20"
+      border="1px solid #CDDCE0"
+      borderRadius="7"
       shadow="lg"
-      bg="#F8F8F8"
+      bg="#EEFAFF"
       px="8"
       pt="6"
       pb="6"
@@ -27,7 +27,12 @@ const BeliefsCard = ({ head, body }) => {
       w="19em"
     >
       <Box>
-        <Text fontWeight="bold" color="#2C5282" fontSize="xl">
+        <Text
+          fontWeight="bold"
+          color="#0628A2"
+          fontSize="xl"
+          textAlign="center"
+        >
           {head}
         </Text>
         <Text color="#2C5282" fontSize="sm">
