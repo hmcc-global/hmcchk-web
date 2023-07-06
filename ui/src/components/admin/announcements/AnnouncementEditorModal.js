@@ -1,4 +1,5 @@
 import { useForm, Controller, set } from 'react-hook-form';
+import { customAxios as axios } from '../../helpers/customAxios';
 import { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
 import {
@@ -23,6 +24,7 @@ import {
   Grid,
   GridItem,
   Textarea,
+  useToast,
 } from '@chakra-ui/react';
 
 const AnnouncementEditorModal = (props) => {
@@ -37,14 +39,15 @@ const AnnouncementEditorModal = (props) => {
   const { register, handleSubmit, control, reset, setValue, formState } =
     useForm();
   const { errors } = formState;
+  const toast = useToast();
 
   const [title, setTitle] = useState(null);
   const [isInWeb, setIsInWeb] = useState(false);
   const [isInPpt, setIsInPpt] = useState(false);
   const [description, setDescription] = useState(null);
-  const [imageAdLink, setImageAdLink] = useState(null);
+  const [imageAdUrl, setImageAdUrl] = useState(null);
   const [location, setLocation] = useState(null);
-  const [directionsLink, setDirectionsLink] = useState(null);
+  const [directionsUrl, setDirectionsUrl] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -52,11 +55,9 @@ const AnnouncementEditorModal = (props) => {
   const [datePeriodInvalid, setDatePeriodInvalid] = useState(false);
   const [formType, setFormType] = useState(null);
   const [formId, setFormId] = useState(null);
-  const [formSignupLink, setFormSignupLink] = useState(null);
-  const [imageAdTakedownDate, setImageAdTakedownDate] = useState(null);
+  const [signUpUrl, setSignUpUrl] = useState(null);
+  const [imageAdTakedownDate, setImageAdTakedownDate] = useState('');
   const [additionalNotes, setAdditionalNotes] = useState(null);
-  const [submitter, setSubmitter] = useState(null);
-  const [approvedBy, setApprovedBy] = useState(null);
 
   const resetAnnouncementEditorCallback = () => {
     reset();
@@ -64,33 +65,34 @@ const AnnouncementEditorModal = (props) => {
     setValue('isInWeb', false);
     setValue('isInPpt', false);
     setValue('description', null);
-    setValue('imageAdLink', null);
+    setValue('imageAdUrl', null);
     setValue('location', null);
-    setValue('directionsLink', null);
+    setValue('directionsUrl', null);
     setValue('startDate', null);
     setValue('startTime', null);
     setValue('endDate', null);
     setValue('endTime', null);
     setValue('formId', null);
     setValue('formSignupLink', null);
-    setValue('imageAdTakedownDate', null);
+    setValue('imageAdTakedownDate', '');
     setValue('additionalNotes', null);
     setTitle(null);
     setIsInWeb(false);
     setIsInPpt(false);
     setDescription(null);
-    setImageAdLink(null);
+    setImageAdUrl(null);
     setLocation(null);
-    setDirectionsLink(null);
+    setDirectionsUrl(null);
     setStartDate(null);
     setStartTime(null);
     setEndDate(null);
     setEndTime(null);
     setFormId(null);
-    setFormSignupLink(null);
-    setImageAdTakedownDate(null);
+    setSignUpUrl(null);
+    setImageAdTakedownDate('');
     setAdditionalNotes(null);
     setIsOpen(false);
+    announcementListCallback();
   };
 
   const setAnnouncementEditorData = (data) => {
@@ -99,15 +101,15 @@ const AnnouncementEditorModal = (props) => {
       setValue('isInWeb', data.isInWeb);
       setValue('isInPpt', data.isInPpt);
       setValue('description', data.description);
-      setValue('imageAdLink', data.imageAdUrl);
+      setValue('imageAdUrl', data.imageAdUrl);
       setValue('location', data.location);
-      setValue('directionsLink', data.directionsUrl);
+      setValue('directionsUrl', data.directionsUrl);
       setValue('startDate', data.startDate);
       setValue('startTime', data.startTime);
       setValue('endDate', data.endDate);
       setValue('endTime', data.endTime);
       setValue('formId', data.formId);
-      setValue('formSignupLink', data.signUpUrl);
+      setValue('signUpUrl', data.signUpUrl);
       setValue('imageAdTakedownDate', data.imageAdTakedownDate);
       setValue('additionalNotes', data.additionalNotes);
 
@@ -115,24 +117,92 @@ const AnnouncementEditorModal = (props) => {
       setIsInWeb(data.isInWeb);
       setIsInPpt(data.isInPpt);
       setDescription(data.description);
-      setImageAdLink(data.imageAdUrl);
+      setImageAdUrl(data.imageAdUrl);
       setLocation(data.location);
-      setDirectionsLink(data.directionsUrl);
+      setDirectionsUrl(data.directionsUrl);
       setStartDate(data.startDate);
       setStartTime(data.startTime);
       setEndDate(data.endDate);
       setEndTime(data.endTime);
       setFormId(data.formId);
-      setFormSignupLink(data.signUpUrl);
+      setSignUpUrl(data.signUpUrl);
       setImageAdTakedownDate(data.imageAdTakedownDate);
       setAdditionalNotes(data.additionalNotes);
-      setSubmitter(data.submitter);
-      setApprovedBy(data.approvedBy);
     }
   };
 
   const onSubmit = async (data, e) => {
     setAnnouncementEditorData(data);
+  };
+
+  const saveAnnouncementDataToDB = async (data) => {
+    if (actionOnEditor === 'edit') {
+      const { status } = await axios.put('/api/announcement/update', {
+        id: editAnnouncementData.id,
+        ...data,
+      });
+      return status;
+    } else {
+      const { status } = await axios.post('/api/announcement/create', {
+        ...data,
+      });
+      return status;
+    }
+  };
+
+  const onSubmitEditor = async (e) => {
+    try {
+      const announcementToSave = {
+        title,
+        isInWeb,
+        isInPpt,
+        description,
+        imageAdUrl,
+        location,
+        directionsUrl,
+        startDate,
+        startTime,
+        endDate,
+        endTime,
+        formId,
+        signUpUrl,
+        imageAdTakedownDate: '',
+        additionalNotes,
+      };
+
+      const statusCode = await saveAnnouncementDataToDB(announcementToSave);
+      if (statusCode === 200) {
+        if (actionOnEditor === 'edit') {
+          toast({
+            title: 'Announcement Saved',
+            description: 'Your announcement has been saved.',
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            title: 'Announcement Created',
+            description: 'Your announcement has been created.',
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      }
+
+      setIsOpen(false);
+      resetAnnouncementEditorCallback();
+    } catch (err) {
+      console.log(err);
+      toast({
+        title: 'Error',
+        description: 'An error occurred. Please try again later.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    }
   };
 
   const onClose = () => {
@@ -275,11 +345,11 @@ const AnnouncementEditorModal = (props) => {
                     <Input id="location" {...register('location')} />
                   </FormControl>
 
-                  <FormControl isInvalid={errors['imageAdLink']}>
+                  <FormControl isInvalid={errors['imageAdUrl']}>
                     <FormLabel>Announcements Image Link</FormLabel>
                     <Input
-                      id="imageAdLink"
-                      {...register('imageAdLink', {
+                      id="imageAdUrl"
+                      {...register('imageAdUrl', {
                         required: 'Image is required',
                       })}
                     />
@@ -330,7 +400,11 @@ const AnnouncementEditorModal = (props) => {
                       magic happen.
                     </FormHelperText>
                   </FormControl>
-                  <Button colorScheme="blue" type="submit">
+                  <Button
+                    colorScheme="blue"
+                    type="submit"
+                    onClick={onSubmitEditor}
+                  >
                     {modalSubmitButton(actionOnEditor)}
                   </Button>
                 </Stack>
