@@ -16,7 +16,6 @@ import { useEffect } from 'react';
 const ConnectPage = (props) => {
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
   const { hash } = useLocation();
-  console.log(hash);
 
   useEffect(() => {
     switch (hash) {

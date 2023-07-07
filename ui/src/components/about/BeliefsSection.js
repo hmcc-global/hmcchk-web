@@ -56,6 +56,7 @@ const BeliefsSection = (props) => {
           textAlign="center"
           color="#0628A3"
           mb={5}
+          id="beliefs"
         >
           {title}
         </Heading>

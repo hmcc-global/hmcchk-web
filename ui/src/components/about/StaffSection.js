@@ -23,6 +23,7 @@ const StaffSection = (props) => {
           textAlign="center"
           color="#0628A3"
           mb={5}
+          id="staff"
         >
           {title}
         </Heading>

@@ -21,6 +21,7 @@ const StrategySection = (props) => {
           color="#0628A3"
           textAlign="center"
           mb={4}
+          id="strategy"
         >
           {title}
         </Heading>
