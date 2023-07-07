@@ -53,6 +53,7 @@ const MissionSection = (props) => {
             fontSize={['3xl', '5xl']}
             fontWeight={700}
             paddingBottom={2}
+            id="our-heart-for-missions"
           >
             {title}
           </Heading>

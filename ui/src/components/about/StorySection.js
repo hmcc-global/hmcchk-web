@@ -35,6 +35,7 @@ const StorySection = (props) => {
         color="#0628A3"
         textAlign="center"
         mb={5}
+        id="our-story"
       >
         {title}
       </Heading>

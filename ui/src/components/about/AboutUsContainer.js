@@ -38,6 +38,7 @@ const AboutUsContainer = (props) => {
     switch (hash) {
       case '#our-story':
         setSelected(0);
+        scrollTo('our-story');
         break;
       case '#vision-mission':
         setSelected(1);
@@ -49,15 +50,19 @@ const AboutUsContainer = (props) => {
         break;
       case '#strategy':
         setSelected(2);
+        scrollTo('strategy');
         break;
       case '#staff':
         setSelected(3);
+        scrollTo('staff');
         break;
       case '#beliefs':
         setSelected(4);
+        scrollTo('beliefs');
         break;
       case '#missions':
         setSelected(5);
+        scrollTo('our-heart-for-missions');
         break;
       default:
         break;
