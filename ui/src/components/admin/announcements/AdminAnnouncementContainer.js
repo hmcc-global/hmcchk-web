@@ -236,14 +236,16 @@ export default function AdminAnnouncementContainer(props) {
                 <Spacer />
                 {/* Buttons to publish, edit, duplicate, delete */}
                 <HStack spacing={1}>
-                  <Button
-                    colorScheme="purple"
-                    value={announcementItem.id}
-                    onClick={onPublish}
-                    isLoading={isLoading}
-                  >
-                    {announcementItem.isPublished ? 'Unpublish' : 'Publish'}
-                  </Button>
+                  {announcementItem.isInWeb && (
+                    <Button
+                      colorScheme="purple"
+                      value={announcementItem.id}
+                      onClick={onPublish}
+                      isLoading={isLoading}
+                    >
+                      {announcementItem.isPublished ? 'Unpublish' : 'Publish'}
+                    </Button>
+                  )}
                   <Button
                     colorScheme="blue"
                     value={announcementItem.id}
