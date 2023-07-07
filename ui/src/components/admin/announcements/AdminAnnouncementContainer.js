@@ -14,6 +14,9 @@ import {
   Flex,
   Spacer,
   Badge,
+  Image,
+  Grid,
+  GridItem,
 } from '@chakra-ui/react';
 import {
   CalendarIcon,
@@ -217,41 +220,49 @@ export default function AdminAnnouncementContainer(props) {
           <ListItem key={announcementItem.id}>
             <Box p="3" borderRadius="lg" borderWidth="1px">
               <Flex direction={['column', 'row']} spacing={1}>
+                <Box maxW="12rem" pr={5}>
+                  <Image
+                    src={announcementItem.imageAdUrl}
+                    fallbackSrc="https://hongkong.sub.hmcc.net/wp-content/uploads/image-58-min.jpg"
+                  />
+                </Box>
                 <Stack direction="column" spacing={1}>
                   <Heading size="md">{announcementItem.title}</Heading>
-                  <Text>
-                    <CalendarIcon /> Date:{' '}
-                    {showProperDate(
-                      announcementItem.startDate,
-                      announcementItem.endDate
-                    )}
-                  </Text>
-                  <Text>
-                    <TimeIcon /> Time:{' '}
-                    {showProperTime(
-                      announcementItem.startTime,
-                      announcementItem.endTime
-                    )}
-                  </Text>
-                  <Text>
-                    <InfoOutlineIcon /> Location:{' '}
-                    {announcementItem.location
-                      ? announcementItem.location
-                      : '-'}
-                  </Text>
-                  <Text>
-                    <ChatIcon /> Submitter: {announcementItem.submittedBy}
-                  </Text>
-                  <Text>
-                    <ChatIcon /> Announce in:{' '}
-                    {announcementItem.isInWeb && (
-                      <Badge colorScheme="teal">Web</Badge>
-                    )}{' '}
-                    &nbsp;
-                    {announcementItem.isInPpt && (
-                      <Badge colorScheme="orange">PPT</Badge>
-                    )}
-                  </Text>
+                  <Grid templateColumns="repeat(2, 1fr)" gap={1}>
+                    <Text>
+                      <CalendarIcon /> Date:{' '}
+                      {showProperDate(
+                        announcementItem.startDate,
+                        announcementItem.endDate
+                      )}
+                    </Text>
+                    <Text>
+                      <TimeIcon /> Time:{' '}
+                      {showProperTime(
+                        announcementItem.startTime,
+                        announcementItem.endTime
+                      )}
+                    </Text>
+                    <Text>
+                      <InfoOutlineIcon /> Location:{' '}
+                      {announcementItem.location
+                        ? announcementItem.location
+                        : '-'}
+                    </Text>
+                    <Text>
+                      <ChatIcon /> Submitter: {announcementItem.submittedBy}
+                    </Text>
+                    <Text>
+                      <ViewIcon /> Announce in:{' '}
+                      {announcementItem.isInWeb && (
+                        <Badge colorScheme="teal">Web</Badge>
+                      )}{' '}
+                      &nbsp;
+                      {announcementItem.isInPpt && (
+                        <Badge colorScheme="orange">PPT</Badge>
+                      )}
+                    </Text>
+                  </Grid>
                 </Stack>
                 <Spacer />
                 {/* Buttons to publish, edit, duplicate, delete */}
