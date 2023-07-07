@@ -32,7 +32,7 @@ const HeroSection = ({ anchorTarget }) => {
         as="video"
         ref={vidRef}
         w="full"
-        h={['92vh', '96vh']}
+        h={['565px', '96vh']}
         src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
         loop
         muted
