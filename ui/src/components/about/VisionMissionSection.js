@@ -68,6 +68,7 @@ const VisionMissionSection = (props) => {
           alignItems="center"
           justifyContent="center"
           spacing="5"
+          id="vision-mission"
         >
           {blurb && blurb.vision && (
             <VisionMissionCard title="VISION" message={blurb.vision} />

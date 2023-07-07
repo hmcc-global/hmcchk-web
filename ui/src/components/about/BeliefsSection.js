@@ -50,11 +50,11 @@ const BeliefsSection = (props) => {
       <Center padding="5">
         <Heading
           as="h2"
-          fontSize={['4xl', '6xl']}
+          fontSize={['3xl', '5xl']}
           fontWeight={700}
           lineHeight={1}
           textAlign="center"
-          color="#062883"
+          color="#0628A3"
           mb={5}
         >
           {title}

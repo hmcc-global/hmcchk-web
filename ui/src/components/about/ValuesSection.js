@@ -17,10 +17,10 @@ const ValuesSection = (props) => {
   return (
     <>
       <VisionMissionSection blurb={visionMission} />
-      <Box w="100%" px="1">
+      <Box w="100%" px="1" id="our-values">
         <Heading
           as="h2"
-          fontSize={['2xl', '5xl']}
+          fontSize={['3xl', '5xl']}
           fontWeight={700}
           color="#0628A3"
           lineHeight={1}
