@@ -38,6 +38,7 @@ import WitnessHomeContainer from './witness/WitnessHomeContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import TextDetails from './witness/text-testimony/TextDetails';
 import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementContainer';
+import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
 
 const MainContainer = () => {
   return (
@@ -304,6 +305,7 @@ const MainContainer = () => {
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
       <FooterContainer />
+      <PrayerFloatButton />
       <ConnectFloatButton />
     </chakra.main>
   );

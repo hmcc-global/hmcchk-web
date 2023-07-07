@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback} from 'react';
 import {
   Flex,
   Center,
@@ -24,6 +24,8 @@ import {
   LinkOverlay,
   useDisclosure,
   HStack,
+  IconButton,
+  VStack
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../reducers/userSlice';
@@ -31,6 +33,7 @@ import { customAxios as axios } from '../helpers/customAxios';
 import MainMenu from './MainMenu';
 import { useHistory } from 'react-router-dom';
 import WitnessBanner from '../witness/WitnessBanner';
+import {BsFillPersonFill} from "react-icons/bs";
 
 const NavBar = (props) => {
   const [isLive, setIsLive] = useState(false);
@@ -102,6 +105,24 @@ const NavBar = (props) => {
     }
   }, [userObj]);
 
+  //To do: Change picture when scrolled (Unsure yet)
+  // const navbarContent = isScrolled ?
+  //  (
+  //     <Text
+  //       color="#ffffff"
+  //       fontSize="x-small"
+  //       textAlign="center"
+  //     >
+  //       Harverst Mission Community Church
+  //     </Text>
+  //   ):( <Image
+  //       w="3.5em"
+  //       minW="3.5em"
+  //       src={process.env.PUBLIC_URL + '/images/ripple.svg'}
+  //       alt="Logo of HMCC"
+  //     />
+  //   )
+
   return (
     <>
       <Flex background="rgba(0, 0, 0, 0.4)">
@@ -113,14 +134,15 @@ const NavBar = (props) => {
           fontSize={{ md: 'xs', lg: 'sm', xl: 'md' }}
           h={{ md: '7vh', lg: '7vh', xl: '8vh' }}
         >
-          <Container maxW="100%" padding={{ base: 4, md: 1, lg: 4 }}>
+          <Container maxW="100%" padding={{ base: 4, md: 1, lg: 4 }} >
             <Flex
               justify="space-between"
               align="center"
               fontSize={{ md: 'x-small', lg: 'smaller', xl: 'small' }}
-              h={{ base: '5vh', md: '7vh', lg: '7vh', xl: '8.5vh' }}
+              h={{md: '7vh', lg: '7vh', xl: '8.5vh' }}
+              display={{ base: 'none', md: 'flex' }}
             >
-              <HStack spacing={5}>
+              <HStack spacing={5} display={{ base: 'none', md: 'flex' }}>
                 <LinkBox>
                   <LinkOverlay href="/">
                     <Image
@@ -341,7 +363,7 @@ const NavBar = (props) => {
                     )}
                   </Box>
                 )}
-                <Box>
+                <Box display={{base:"none",md:"flex"}}>
                   <Button
                     ref={btnRef}
                     onClick={onOpen}
@@ -356,6 +378,69 @@ const NavBar = (props) => {
                   </Button>
                 </Box>
               </Stack>
+            </Flex>
+            <Flex
+              display={{ base: 'flex', md: 'none' }}
+              justify="space-between"
+              align="center"
+              h="5vh"
+            >
+              <Box>
+                <Button
+                  ref={btnRef}
+                  onClick={onOpen}
+                  style={{ background: 'none' }}
+                >
+                  <Image
+                    w="1.5em"
+                    minW="1.5em"
+                    src={process.env.PUBLIC_URL + '/images/menu.svg'}
+                    alt="Menu Button"
+                  />
+                </Button>
+              </Box>
+              <Box>
+                <LinkBox>
+                  <LinkOverlay href="/">
+                    <Image
+                      w="3.5em"
+                      minW="3.5em"
+                      src={process.env.PUBLIC_URL + '/images/ripple.svg'}
+                      alt="Logo of HMCC"
+                    />
+                  </LinkOverlay>
+                </LinkBox>
+              </Box>
+              <Box>
+                <HStack>
+                  {isLive ? (
+                      <Link href="/online" style={{ lineHeight: '0' }}>
+                        <Button
+                          h="6"
+                          paddingLeft="2"
+                          paddingRight="3"
+                          style={liveScStyle}
+                          lineHeight="0"
+                          borderRadius="8"
+                          fontSize='x-small'
+                        >
+                          &bull; Live
+                        </Button>
+                      </Link>
+                    ) : null}
+                  <LinkBox>
+                    <LinkOverlay href="/profile">
+                      <IconButton
+                        colorScheme='transparent'
+                        onClick={onClose}
+                        fontSize="20px"
+                        icon={<BsFillPersonFill />}
+                      > 
+                      </IconButton>
+                    </LinkOverlay>
+                  </LinkBox>
+                </HStack>
+              </Box>
             </Flex>
           </Container>
         </Flex>
