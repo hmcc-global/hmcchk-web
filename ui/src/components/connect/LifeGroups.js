@@ -11,7 +11,6 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import testimoniesList from './irl-testimonies.json';
 import LifeGroupCard from './LifeGroupCard';
 import lifeGroupList from './lifegroups.json';
 import OurMinistries from './OurMinistries';
@@ -21,7 +20,7 @@ import './_connect.scss';
 
 const LifeGroups = (props) => {
   return (
-    <Box id="#lifegroup">
+    <Box id="lifegroup">
       <Heading
         as="h2"
         fontSize={['2.25em', '3em', '4em']}

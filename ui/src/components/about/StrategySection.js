@@ -15,10 +15,10 @@ const StrategySection = (props) => {
       <Box pt={[4, 6]} pb={[4, 6]} w="100%">
         <Heading
           as="h3"
-          fontSize={['4xl', '6xl']}
+          fontSize={['3xl', '5xl']}
           fontWeight={700}
           lineHeight={1}
-          color="#000000"
+          color="#0628A3"
           textAlign="center"
           mb={4}
         >

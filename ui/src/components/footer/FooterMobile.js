@@ -91,7 +91,7 @@ const FooterMobile = (props) => {
                         <h2>
                           <AccordionButton
                             as={Link}
-                            href="/about-us"
+                            href="/about-us#our-story"
                             border="none"
                           >
                             <Box as="span" flex="1" textAlign="left">
@@ -102,7 +102,10 @@ const FooterMobile = (props) => {
                       </AccordionItem>
                       <AccordionItem border="none">
                         <h2>
-                          <AccordionButton as={Link} href="/about-us">
+                          <AccordionButton
+                            as={Link}
+                            href="/about-us#vision-mission"
+                          >
                             <Box as="span" flex="1" textAlign="left">
                               Vision & Mission
                             </Box>
@@ -111,7 +114,7 @@ const FooterMobile = (props) => {
                       </AccordionItem>
                       <AccordionItem border="none">
                         <h2>
-                          <AccordionButton as={Link} href="/about-us">
+                          <AccordionButton as={Link} href="/about-us#values">
                             <Box as="span" flex="1" textAlign="left">
                               Our Values
                             </Box>
@@ -120,7 +123,7 @@ const FooterMobile = (props) => {
                       </AccordionItem>
                       <AccordionItem border="none">
                         <h2>
-                          <AccordionButton as={Link} href="/about-us">
+                          <AccordionButton as={Link} href="/about-us#strategy">
                             <Box as="span" flex="1" textAlign="left">
                               Our Strategy
                             </Box>
@@ -129,7 +132,7 @@ const FooterMobile = (props) => {
                       </AccordionItem>
                       <AccordionItem border="none">
                         <h2>
-                          <AccordionButton as={Link} href="/about-us">
+                          <AccordionButton as={Link} href="/about-us#staff">
                             <Box as="span" flex="1" textAlign="left">
                               Our Staff
                             </Box>
@@ -138,9 +141,18 @@ const FooterMobile = (props) => {
                       </AccordionItem>
                       <AccordionItem border="none">
                         <h2>
-                          <AccordionButton as={Link} href="/about-us">
+                          <AccordionButton as={Link} href="/about-us#beliefs">
                             <Box as="span" flex="1" textAlign="left">
                               Our Beliefs
+                            </Box>
+                          </AccordionButton>
+                        </h2>
+                      </AccordionItem>
+                      <AccordionItem border="none">
+                        <h2>
+                          <AccordionButton as={Link} href="/about-us#missions">
+                            <Box as="span" flex="1" textAlign="left">
+                              Our Heart for Missions
                             </Box>
                           </AccordionButton>
                         </h2>
