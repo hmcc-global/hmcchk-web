@@ -47,23 +47,26 @@ export function LinkGrid() {
           <Link href="/about-us">
             <Text fontWeight="bold">About</Text>
           </Link>
-          <Link href="/about-us">
+          <Link href="/about-us#our-story">
             <Text>Our Story</Text>
           </Link>
-          <Link href="/about-us">
+          <Link href="/about-us#vision-mission">
             <Text>{'Vision & Mission'}</Text>
           </Link>
-          <Link href="/about-us">
+          <Link href="/about-us#values">
             <Text>Our Values</Text>
           </Link>
-          <Link href="/about-us">
+          <Link href="/about-us#strategy">
             <Text>Our Strategy</Text>
           </Link>
-          <Link href="/about-us">
+          <Link href="/about-us#staff">
             <Text>Our Staff</Text>
           </Link>
-          <Link href="/about-us">
+          <Link href="/about-us#beliefs">
             <Text>Beliefs</Text>
+          </Link>
+          <Link href="/about-us#missions">
+            <Text>Our Heart for Missions</Text>
           </Link>
         </Stack>
       </Box>

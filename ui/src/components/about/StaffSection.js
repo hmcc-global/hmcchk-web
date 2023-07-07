@@ -21,7 +21,7 @@ const StaffSection = (props) => {
           fontWeight={700}
           lineHeight={1}
           textAlign="center"
-          color="#062883"
+          color="#0628A3"
           mb={5}
         >
           {title}
@@ -37,8 +37,8 @@ const StaffSection = (props) => {
         >
           <Stack
             direction={{ base: 'column', lg: 'column' }}
-            py="2em"
-            px="4em"
+            py={['10', '2em']}
+            px={['5', '4em']}
             spacing="10"
           >
             <Box
