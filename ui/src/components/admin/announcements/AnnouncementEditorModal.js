@@ -25,6 +25,7 @@ import {
   GridItem,
   Textarea,
   useToast,
+  Divider,
 } from '@chakra-ui/react';
 
 const AnnouncementEditorModal = (props) => {
@@ -41,6 +42,8 @@ const AnnouncementEditorModal = (props) => {
   const { errors } = formState;
   const toast = useToast();
 
+  // TODO: add interval for dates to repeat events
+  // TODO: clarify if we still need imageTakedownDate
   const [title, setTitle] = useState(null);
   const [isInWeb, setIsInWeb] = useState(false);
   const [isInPpt, setIsInPpt] = useState(false);
@@ -76,6 +79,7 @@ const AnnouncementEditorModal = (props) => {
     setValue('formSignupLink', null);
     setValue('imageAdTakedownDate', '');
     setValue('additionalNotes', null);
+
     setTitle(null);
     setIsInWeb(false);
     setIsInPpt(false);
@@ -266,6 +270,7 @@ const AnnouncementEditorModal = (props) => {
                       {...register('title', {
                         required: ' Title is required',
                       })}
+                      onChange={(e) => setTitle(e.target.value)}
                     />
                   </FormControl>
 
@@ -276,10 +281,20 @@ const AnnouncementEditorModal = (props) => {
                       PPT
                     </FormHelperText>
                     <Stack spacing={10} direction={['column', 'row']}>
-                      <Checkbox size="lg" id="isInWeb" {...register('isInWeb')}>
+                      <Checkbox
+                        size="lg"
+                        id="isInWeb"
+                        {...register('isInWeb')}
+                        onChange={(e) => setIsInWeb(e.target.checked)}
+                      >
                         Web/Mobile
                       </Checkbox>
-                      <Checkbox size="lg" id="isInPpt" {...register('isInPpt')}>
+                      <Checkbox
+                        size="lg"
+                        id="isInPpt"
+                        {...register('isInPpt')}
+                        onChange={(e) => setIsInPpt(e.target.checked)}
+                      >
                         PPT
                       </Checkbox>
                     </Stack>
@@ -297,6 +312,7 @@ const AnnouncementEditorModal = (props) => {
                           id="startDate"
                           type="date"
                           {...register('startDate')}
+                          onChange={(e) => setStartDate(e.target.value)}
                         />
                       </FormControl>
                     </GridItem>
@@ -307,6 +323,7 @@ const AnnouncementEditorModal = (props) => {
                           id="startTime"
                           type="time"
                           {...register('startTime')}
+                          onChange={(e) => setStartTime(e.target.value)}
                         />
                       </FormControl>
                     </GridItem>
@@ -321,6 +338,7 @@ const AnnouncementEditorModal = (props) => {
                           id="endDate"
                           type="date"
                           {...register('endDate')}
+                          onChange={(e) => setEndDate(e.target.value)}
                         />
                       </FormControl>
                     </GridItem>
@@ -331,6 +349,7 @@ const AnnouncementEditorModal = (props) => {
                           id="endTime"
                           type="time"
                           {...register('endTime')}
+                          onChange={(e) => setEndTime(e.target.value)}
                         />
                       </FormControl>
                     </GridItem>
@@ -342,7 +361,11 @@ const AnnouncementEditorModal = (props) => {
                       Enter 'TBA' if not confirmed. If not applicable, leave it
                       blank.
                     </FormHelperText>
-                    <Input id="location" {...register('location')} />
+                    <Input
+                      id="location"
+                      {...register('location')}
+                      onChange={(e) => setLocation(e.target.value)}
+                    />
                   </FormControl>
 
                   <FormControl isInvalid={errors['imageAdUrl']}>
@@ -352,16 +375,31 @@ const AnnouncementEditorModal = (props) => {
                       {...register('imageAdUrl', {
                         required: 'Image is required',
                       })}
+                      onChange={(e) => setImageAdUrl(e.target.value)}
                     />
                   </FormControl>
 
                   <FormControl>
                     <FormLabel>Is there a form? </FormLabel>
-                    <Select {...register('formType')}>
-                      <option value="no">No form</option>
-                      <option value="hmcc">Yes, a HMCC form</option>
-                      <option value="others">Yes, others form</option>
-                    </Select>
+                    <Controller
+                      control={control}
+                      name="formType"
+                      defaultValue="no"
+                      render={({ field: { onChange, value, ref } }) => (
+                        <Select
+                          onChange={(e) => {
+                            onChange(e);
+                            setFormType(e.target.value);
+                          }}
+                          ref={ref}
+                          disabled={title === null}
+                        >
+                          <option value="no">No form</option>
+                          <option value="hmcc">Yes, a HMCC form</option>
+                          <option value="other">Yes, other form</option>
+                        </Select>
+                      )}
+                    ></Controller>
                   </FormControl>
                   {(() => {
                     switch (formType) {
@@ -371,14 +409,20 @@ const AnnouncementEditorModal = (props) => {
                             <FormControl>
                               <FormLabel>Select Form</FormLabel>
                             </FormControl>
+                            <Divider />
                           </>
                         );
-                      case 'others':
+                      case 'other':
                         return (
                           <>
                             <FormControl>
                               <FormLabel>Sign-up link</FormLabel>
+                              <Input
+                                id="signUpUrl"
+                                {...register('signUpUrl')}
+                              />
                             </FormControl>
+                            <Divider />
                           </>
                         );
                       default:
@@ -393,6 +437,7 @@ const AnnouncementEditorModal = (props) => {
                       {...register('description', {
                         required: 'Description is required',
                       })}
+                      onChange={(e) => setDescription(e.target.value)}
                     />
                     <FormHelperText>
                       This field supports markdown. Just write it in somewhere
