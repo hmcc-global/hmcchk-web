@@ -105,7 +105,7 @@ const EventsSectionCard = (props) => {
               onClick={onOpen}
               marginBottom="5px"
               maxWidth={['xs', 'lg']}
-              fontSize={['sm', '2xl']}
+              fontSize={['lg', '2xl']}
               color="#A5CBFF"
               cursor="pointer"
               fontWeight="semibold"
@@ -113,8 +113,8 @@ const EventsSectionCard = (props) => {
             >
               {event.title}
             </Heading>
-              <Text color="white" fontSize={{base:"xs", md:"md"}}> {event.location} </Text>
-              <Text color="white" marginTop="0px !important" fontSize={{base:"xs", md:"md"}}>
+              <Text color="white" fontSize={{base:"md", md:"md"}}> {event.location} </Text>
+              <Text color="white" marginTop="0px !important" fontSize={{base:"md", md:"md"}}>
                 {getStartEndDateStr(event)}
               </Text>
           </VStack>

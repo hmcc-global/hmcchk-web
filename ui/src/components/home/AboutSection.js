@@ -15,7 +15,7 @@ const AboutSection = () => {
       w="full"
       h="auto"
       justify="center"
-      bgImage={process.env.PUBLIC_URL + '/images/home/about-us-bg.jpg'}
+      bgImage={process.env.PUBLIC_URL + '/images/home/WaterMoving.gif'}
       bgSize="cover"
       bgPosition="center center"
     >
@@ -38,7 +38,12 @@ const AboutSection = () => {
             padding={{ base: '7rem 1rem', md: '8rem 2rem' }}
           >
             <VStack rowGap={2}>
-              <Heading fontSize="4xl" color="#0628A3">
+              <Heading 
+                fontSize={["1.875em","4xl"]}
+                color="#0628A3"
+                fontWeight="bold"
+                fontFamily="Inter"
+              >
                 {vision.title}
               </Heading>
               <Text
@@ -51,7 +56,12 @@ const AboutSection = () => {
               </Text>
             </VStack>
             <VStack rowGap={2}>
-              <Heading fontSize="4xl" color="#0628A3">
+              <Heading 
+                fontSize={["1.875em","4xl"]}
+                color="#0628A3"
+                fontWeight="bold"
+                fontFamily="Inter"
+              >
                 {mission.title}
               </Heading>
               <Text
