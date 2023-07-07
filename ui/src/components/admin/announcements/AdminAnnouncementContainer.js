@@ -13,8 +13,15 @@ import {
   ListItem,
   Flex,
   Spacer,
+  Badge,
 } from '@chakra-ui/react';
-import { CalendarIcon, TimeIcon, InfoOutlineIcon } from '@chakra-ui/icons';
+import {
+  CalendarIcon,
+  TimeIcon,
+  InfoOutlineIcon,
+  ChatIcon,
+  ViewIcon,
+} from '@chakra-ui/icons';
 import AnnouncementEditorModal from './AnnouncementEditorModal';
 
 export default function AdminAnnouncementContainer(props) {
@@ -146,7 +153,7 @@ export default function AdminAnnouncementContainer(props) {
 
       if (status === 200) {
         toast({
-          description: 'Announcement has been published',
+          description: 'Announcement has been updated',
           status: 'success',
           duration: 8000,
           isClosable: true,
@@ -231,6 +238,19 @@ export default function AdminAnnouncementContainer(props) {
                     {announcementItem.location
                       ? announcementItem.location
                       : '-'}
+                  </Text>
+                  <Text>
+                    <ChatIcon /> Submitter: {announcementItem.submittedBy}
+                  </Text>
+                  <Text>
+                    <ChatIcon /> Announce in:{' '}
+                    {announcementItem.isInWeb && (
+                      <Badge colorScheme="teal">Web</Badge>
+                    )}{' '}
+                    &nbsp;
+                    {announcementItem.isInPpt && (
+                      <Badge colorScheme="orange">PPT</Badge>
+                    )}
                   </Text>
                 </Stack>
                 <Spacer />
