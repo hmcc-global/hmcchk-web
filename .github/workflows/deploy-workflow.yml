@@ -1,4 +1,4 @@
-name: "Deploy"
+name: "Deploy Artifact"
 run-name: "Deploy branch: ${{ github.ref_name }}"
 
 on:
@@ -7,9 +7,14 @@ on:
       runId:
         description: 'RunId to get containing artifact'
         required: true
-      env:
-        description: 'Deploy environment'
-        required: true
+      env: 
+        description: 'Deploy to?' 
+        default: 'uat' 
+        required: true 
+        type: choice 
+        options: 
+          - uat 
+          - prod
 
 jobs:
   download-on-server:
