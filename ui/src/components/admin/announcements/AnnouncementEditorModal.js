@@ -285,6 +285,7 @@ const AnnouncementEditorModal = (props) => {
                         size="lg"
                         id="isInWeb"
                         {...register('isInWeb')}
+                        isChecked={isInWeb}
                         onChange={(e) => setIsInWeb(e.target.checked)}
                       >
                         Web/Mobile
@@ -293,6 +294,7 @@ const AnnouncementEditorModal = (props) => {
                         size="lg"
                         id="isInPpt"
                         {...register('isInPpt')}
+                        isChecked={isInPpt}
                         onChange={(e) => setIsInPpt(e.target.checked)}
                       >
                         PPT
