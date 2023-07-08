@@ -48,13 +48,27 @@ export default function AdminAnnouncementContainer(props) {
       }
       // TODO: filter out announcements that are current and past accordingly
       if (isCurrentAnnouncements) {
-        const current = data.filter(
-          (announcement) =>
-            announcement.startDate <= today || announcement.startDate === ''
-        );
+        const current = data.filter((item) => {
+          if (item.endDate) {
+            return DateTime.fromISO(item.endDate) > today;
+          }
+          if (item.startDate) {
+            return DateTime.fromISO(item.startDate) > today;
+          }
+          return true;
+        });
         setAnnouncementList(current);
       } else {
-        setAnnouncementList(data);
+        const past = data.filter((item) => {
+          if (item.endDate) {
+            return DateTime.fromISO(item.endDate) < today;
+          }
+          if (item.startDate) {
+            return DateTime.fromISO(item.startDate) < today;
+          }
+          return false;
+        });
+        setAnnouncementList(past);
       }
     } catch (err) {
       console.log(err);
