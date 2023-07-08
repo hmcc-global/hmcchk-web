@@ -1,4 +1,4 @@
-name: "Deploy Artifact"
+name: "Deploy and Delete Artifact"
 run-name: "Deploy branch: ${{ github.ref_name }}"
 
 on:
