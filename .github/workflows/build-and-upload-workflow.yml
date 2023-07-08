@@ -37,8 +37,10 @@ jobs:
          cd ui && yarn install
       - name: "Create ui/ .env"
         run: |
-          echo "REACT_APP_GOOGLE_CLIENT_ID=${{ secrets.REACT_APP_GOOGLE_CLIENT_ID }}" > ui/.env
-          echo "REACT_APP_CAPTCHA=${{ secrets.REACT_APP_CAPTCHA }}" >> ui/.env
+          echo "${{ secrets.UI_ENV }}" > ui/.env
+      - name: "Create server /.env"
+        run: |
+          echo "${{ secrets.SERVER_ENV }}" > server/.env
       - name: "Build ui/ folder"
         run: |
           cd ui && yarn run build
@@ -64,5 +66,5 @@ jobs:
             -X POST \
             -H "Accept: application/vnd.github.everest-preview+json" \
             -H "Authorization: Bearer ${{ secrets.AUTH_TOKEN }}" \
-            https://api.github.com/repos/hmcc-global/hmcchk-web/actions/workflows/deploy-prod-workflow.yml/dispatches \
+            https://api.github.com/repos/hmcc-global/hmcchk-web/actions/workflows/deploy-workflow.yml/dispatches \
             -d '{"ref":"${{ github.ref_name }}", "inputs": {"runId": "${{ github.run_id }}", "env": "${{ github.event.inputs.deploy_env }}"}}'
