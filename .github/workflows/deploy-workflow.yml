@@ -35,3 +35,11 @@ jobs:
         id: download-artifact
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "bash ~/hmcchk-deploy-script/download.sh ${{ github.event.inputs.runId }} ${{ secrets.AUTH_TOKEN }}" | while read line; do echo $line; done
+      - name: Delete Artifact
+        id: delete-artifact
+        uses: christian-korneck/delete-run-artifacts-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.AUTH_TOKEN }}
+        with:
+          parent_runid: ${{ github.event.inputs.runId }}
+          parent_repo: ${{ github.repository }}
