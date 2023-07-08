@@ -1,4 +1,4 @@
-name: "Build and Upload application"
+name: "Build and Upload Artifact"
 run-name: "Build: ${{ github.ref_name }}, Run ID: #${{ github.run_id }}"
 on:
   workflow_dispatch:
@@ -19,10 +19,6 @@ jobs:
     environment: ${{ github.event.inputs.deploy_env }}
     runs-on: ubuntu-latest
     steps:
-      - name: Generate Artifact name
-        id: generate-name
-        run: |
-          echo "${{ github.ref_name }}-${{ github.run_id }}"
       - name: "Checkout Git to branch: ${{ github.ref_name }}"
         uses: actions/checkout@v3
         with:
