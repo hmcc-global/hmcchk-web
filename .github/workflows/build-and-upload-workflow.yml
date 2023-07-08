@@ -68,5 +68,5 @@ jobs:
             -X POST \
             -H "Accept: application/vnd.github.everest-preview+json" \
             -H "Authorization: Bearer ${{ secrets.AUTH_TOKEN }}" \
-            https://api.github.com/repos/hmcc-global/hmcchk-web/actions/workflows/deploy-uat-workflow.yml/dispatches \
+            https://api.github.com/repos/hmcc-global/hmcchk-web/actions/workflows/deploy-prod-workflow.yml/dispatches \
             -d '{"ref":"${{ github.ref_name }}", "inputs": {"runId": "${{ github.run_id }}", "env": "${{ github.event.inputs.deploy_env }}"}}'
