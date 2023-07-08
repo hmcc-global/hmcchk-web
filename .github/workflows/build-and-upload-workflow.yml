@@ -56,13 +56,13 @@ jobs:
           rm -rf ui
       - name: "Zip everything"
         run: |
-          zip release-uat.zip ./* -r -q
+          zip release.zip ./* -r -q
       - name: "Upload build artifact"
         uses: actions/upload-artifact@v3
         with:
           name: my_artifact
-          path: release-uat.zip
-      - name: "Trigger Deploy to UAT Workflow"
+          path: release.zip
+      - name: "Trigger Deploy ${{ github.event.inputs.deploy_env }} Workflow"
         run: |
           curl \
             -X POST \
