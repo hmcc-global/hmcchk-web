@@ -1,4 +1,4 @@
-import { useForm, Controller, set } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { customAxios as axios } from '../../helpers/customAxios';
 import { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
@@ -19,13 +19,11 @@ import {
   FormErrorMessage,
   FormHelperText,
   Checkbox,
-  Select,
   Button,
   Grid,
   GridItem,
   Textarea,
   useToast,
-  Divider,
 } from '@chakra-ui/react';
 
 const AnnouncementEditorModal = (props) => {
@@ -37,8 +35,7 @@ const AnnouncementEditorModal = (props) => {
     announcementListCallback,
     actionOnEditor,
   } = props;
-  const { register, handleSubmit, control, reset, setValue, formState } =
-    useForm();
+  const { register, handleSubmit, reset, setValue, formState } = useForm();
   const { errors } = formState;
   const toast = useToast();
 
@@ -56,7 +53,6 @@ const AnnouncementEditorModal = (props) => {
   const [endDate, setEndDate] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [datePeriodInvalid, setDatePeriodInvalid] = useState(false);
-  const [formType, setFormType] = useState(null);
   const [formId, setFormId] = useState(null);
   const [signUpUrl, setSignUpUrl] = useState(null);
   const [imageAdTakedownDate, setImageAdTakedownDate] = useState('');
@@ -263,7 +259,7 @@ const AnnouncementEditorModal = (props) => {
             <Box>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Stack spacing={2}>
-                  <FormControl isInvalid={errors['title']}>
+                  <FormControl isInvalid={errors['title']} isRequired>
                     <FormLabel>Title</FormLabel>
                     <Input
                       id="title"
@@ -370,7 +366,7 @@ const AnnouncementEditorModal = (props) => {
                     />
                   </FormControl>
 
-                  <FormControl isInvalid={errors['imageAdUrl']}>
+                  <FormControl isInvalid={errors['imageAdUrl']} isRequired>
                     <FormLabel>Announcements Image Link</FormLabel>
                     <Input
                       id="imageAdUrl"
@@ -382,57 +378,15 @@ const AnnouncementEditorModal = (props) => {
                   </FormControl>
 
                   <FormControl>
-                    <FormLabel>Is there a form? </FormLabel>
-                    <Controller
-                      control={control}
-                      name="formType"
-                      defaultValue="no"
-                      render={({ field: { onChange, value, ref } }) => (
-                        <Select
-                          onChange={(e) => {
-                            onChange(e);
-                            setFormType(e.target.value);
-                          }}
-                          ref={ref}
-                          disabled={title === null}
-                        >
-                          <option value="no">No form</option>
-                          <option value="hmcc">Yes, a HMCC form</option>
-                          <option value="other">Yes, other form</option>
-                        </Select>
-                      )}
-                    ></Controller>
+                    <FormLabel>Announcements Sign-up link</FormLabel>
+                    <Input
+                      id="signUpUrl"
+                      {...register('signUpUrl')}
+                      onChange={(e) => setSignUpUrl(e.target.value)}
+                    />
                   </FormControl>
-                  {(() => {
-                    switch (formType) {
-                      case 'hmcc':
-                        return (
-                          <>
-                            <FormControl>
-                              <FormLabel>Select Form</FormLabel>
-                            </FormControl>
-                            <Divider />
-                          </>
-                        );
-                      case 'other':
-                        return (
-                          <>
-                            <FormControl>
-                              <FormLabel>Sign-up link</FormLabel>
-                              <Input
-                                id="signUpUrl"
-                                {...register('signUpUrl')}
-                              />
-                            </FormControl>
-                            <Divider />
-                          </>
-                        );
-                      default:
-                        return null;
-                    }
-                  })()}
 
-                  <FormControl isInvalid={errors['description']}>
+                  <FormControl isInvalid={errors['description']} isRequired>
                     <FormLabel>Description</FormLabel>
                     <Textarea
                       id="description"
