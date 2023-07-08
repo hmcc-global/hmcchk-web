@@ -26,16 +26,19 @@ import {
   ViewIcon,
 } from '@chakra-ui/icons';
 import AnnouncementEditorModal from './AnnouncementEditorModal';
+import { DateTime } from 'luxon';
 
 export default function AdminAnnouncementContainer(props) {
   const toast = useToast();
   const { user } = props;
+  const today = new DateTime.now();
 
   const [announcementList, setAnnouncementList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [editAnnouncementData, setEditAnnouncementData] = useState(null);
   const [actionOnEditor, setActionOnEditor] = useState('create');
+  const [isCurrentAnnouncements, setIsCurrentAnnouncements] = useState(true);
 
   const getAnnouncementList = async () => {
     try {
@@ -43,15 +46,28 @@ export default function AdminAnnouncementContainer(props) {
       if (status !== 200) {
         throw Error('Something went wrong with the request');
       }
-      setAnnouncementList(data);
+      // TODO: filter out announcements that are current and past accordingly
+      if (isCurrentAnnouncements) {
+        const current = data.filter(
+          (announcement) =>
+            announcement.startDate <= today || announcement.startDate === ''
+        );
+        setAnnouncementList(current);
+      } else {
+        setAnnouncementList(data);
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
+  const toggleAnnouncementsView = () => {
+    setIsCurrentAnnouncements(!isCurrentAnnouncements);
+  };
+
   useEffect(() => {
     getAnnouncementList();
-  }, []);
+  }, [isCurrentAnnouncements]);
 
   const announcementListCallback = async () => {
     await getAnnouncementList();
@@ -207,12 +223,16 @@ export default function AdminAnnouncementContainer(props) {
         <Button colorScheme="blue" size="lg" onClick={onCreate}>
           Add New
         </Button>
-        <Button colorScheme="blue" size="lg">
-          Past Announcements
+        <Button colorScheme="blue" size="lg" onClick={toggleAnnouncementsView}>
+          {isCurrentAnnouncements
+            ? 'Past Announcements'
+            : 'Current Announcements'}
         </Button>
       </Stack>
       <Heading as="h2" size="lg" pt={7}>
-        Current Announcements
+        {isCurrentAnnouncements
+          ? 'Current Announcements'
+          : 'Past Announcements'}
       </Heading>
       <List spacing="2" pt={3}>
         {/* List announcements */}
