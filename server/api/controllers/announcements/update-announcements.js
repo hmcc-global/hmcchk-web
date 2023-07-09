@@ -25,6 +25,7 @@ module.exports = {
     signUpUrl: { type: 'string' },
     directionsUrl: { type: 'string' },
     additionalNotes: { type: 'string' },
+    lastUpdatedBy: { type: 'string' },
     approvedBy: { type: 'string' },
     isPublished: { type: 'boolean' },
     isDeleted: { type: 'boolean' },
@@ -67,6 +68,7 @@ module.exports = {
       signUpUrl,
       directionsUrl,
       additionalNotes,
+      lastUpdatedBy,
       approvedBy,
       isPublished,
       isDeleted,
@@ -84,8 +86,12 @@ module.exports = {
         }
 
         // if someone pressed publish, but it wasn't approved, approve it
+        // and do NOT set the lastUpdatedBy to the approvedBy
         if (isPublished && !approvedBy) {
           approvedBy = user;
+        } else {
+          // only when information is updated or deleted, update the lastUpdatedBy
+          lastUpdatedBy = user;
         }
 
         const existing = await Announcement.updateOne({ id }).set({
@@ -106,7 +112,7 @@ module.exports = {
           signUpUrl,
           directionsUrl,
           additionalNotes,
-          lastUpdatedBy: user,
+          lastUpdatedBy,
           approvedBy,
           isPublished,
           isDeleted,
