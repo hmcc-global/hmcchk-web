@@ -72,6 +72,13 @@ export default function AdminAnnouncementContainer(props) {
       }
     } catch (err) {
       console.log(err);
+      toast({
+        description:
+          'There was an issue with the request, please talk to a t3ch support',
+        status: 'error',
+        duration: 8000,
+        isClosable: true,
+      });
     }
   };
 
@@ -115,6 +122,13 @@ export default function AdminAnnouncementContainer(props) {
       setIsLoading(false);
     } catch (err) {
       console.log(err);
+      toast({
+        description:
+          'There was an issue with the request, please talk to a t3ch support',
+        status: 'warning',
+        duration: 8000,
+        isClosable: true,
+      });
       setIsLoading(false);
     }
   };
@@ -141,6 +155,13 @@ export default function AdminAnnouncementContainer(props) {
       setIsLoading(false);
     } catch (err) {
       console.log(err);
+      toast({
+        description:
+          'There was an issue with the request, please talk to a t3ch support',
+        status: 'warning',
+        duration: 8000,
+        isClosable: true,
+      });
       setIsLoading(false);
     }
   };
@@ -167,6 +188,13 @@ export default function AdminAnnouncementContainer(props) {
       setIsLoading(false);
     } catch (err) {
       console.log(err);
+      toast({
+        description:
+          'There was an issue with the request, please talk to a t3ch support',
+        status: 'warning',
+        duration: 8000,
+        isClosable: true,
+      });
       setIsLoading(false);
     }
   };
@@ -204,6 +232,13 @@ export default function AdminAnnouncementContainer(props) {
       setIsLoading(false);
     } catch (err) {
       console.log(err);
+      toast({
+        description:
+          'There was an issue with the request, please talk to a t3ch support',
+        status: 'warning',
+        duration: 8000,
+        isClosable: true,
+      });
       setIsLoading(false);
     }
   };
@@ -257,7 +292,7 @@ export default function AdminAnnouncementContainer(props) {
                 <Box maxW="12rem" pr={5}>
                   <Image
                     src={announcementItem.imageAdUrl}
-                    fallbackSrc="https://hongkong.sub.hmcc.net/wp-content/uploads/image-58-min.jpg"
+                    fallbackSrc="https://hongkong.sub.hmcc.net/wp-content/uploads/Screenshot-2020-09-04-at-6.39.50-PM.png"
                   />
                 </Box>
                 <Stack direction="column" spacing={1}>
