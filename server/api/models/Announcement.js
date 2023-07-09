@@ -44,6 +44,12 @@ module.exports = {
       type: 'string',
       columnType: 'time',
     },
+    eventInterval: {
+      type: 'string',
+      isIn: ['Daily', 'Weekly', 'Monthly', 'None'],
+      defaultsTo: 'None',
+      description: 'Recurring event interval if any.',
+    },
     location: {
       type: 'string',
     },
