@@ -20,28 +20,32 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false,
     },
-    startDate: {
+    displayStartDateTime: {
+      type: 'ref',
+      columnType: 'datetime',
+    },
+    displayEndDateTime: {
+      type: 'ref',
+      columnType: 'datetime',
+    },
+    eventStartDate: {
       type: 'string',
       columnType: 'date',
     },
-    startTime: {
+    eventStartTime: {
       type: 'string',
       columnType: 'time',
     },
-    endDate: {
+    eventEndDate: {
       type: 'string',
       columnType: 'date',
     },
-    endTime: {
+    eventEndTime: {
       type: 'string',
       columnType: 'time',
     },
     location: {
       type: 'string',
-    },
-    imageAdTakedownDate: {
-      type: 'ref',
-      columnType: 'datetime',
     },
     formId: {
       type: 'string',
