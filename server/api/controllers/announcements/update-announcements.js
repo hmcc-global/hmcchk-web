@@ -13,10 +13,13 @@ module.exports = {
     imageAdUrl: { type: 'string' },
     isInWeb: { type: 'boolean' },
     isInPpt: { type: 'boolean' },
-    startDate: { type: 'string' },
-    startTime: { type: 'string' },
-    endDate: { type: 'string' },
-    endTime: { type: 'string' },
+    displayStartDateTime: { type: 'string' },
+    displayEndDateTime: { type: 'string' },
+    eventStartDate: { type: 'string' },
+    eventStartTime: { type: 'string' },
+    eventEndDate: { type: 'string' },
+    eventEndTime: { type: 'string' },
+    eventInterval: { type: 'string' },
     location: { type: 'string' },
     imageAdTakedownDate: { type: 'string' },
     formId: { type: 'string' },
@@ -54,10 +57,13 @@ module.exports = {
       imageAdUrl,
       isInWeb,
       isInPpt,
-      startDate,
-      startTime,
-      endDate,
-      endTime,
+      displayStartDateTime,
+      displayEndDateTime,
+      eventStartDate,
+      eventStartTime,
+      eventEndDate,
+      eventEndTime,
+      eventInterval,
       location,
       imageAdTakedownDate,
       formId,
@@ -82,8 +88,12 @@ module.exports = {
         }
 
         // if someone pressed publish, but it wasn't approved, approve it
+        // and do NOT set the lastUpdatedBy to the approvedBy
         if (isPublished && !approvedBy) {
           approvedBy = user;
+        } else {
+          // only when information is updated or deleted, update the lastUpdatedBy
+          lastUpdatedBy = user;
         }
 
         const existing = await Announcement.updateOne({ id }).set({
@@ -92,17 +102,20 @@ module.exports = {
           imageAdUrl,
           isInWeb,
           isInPpt,
-          startDate,
-          startTime,
-          endDate,
-          endTime,
+          displayStartDateTime,
+          displayEndDateTime,
+          eventStartDate,
+          eventStartTime,
+          eventEndDate,
+          eventEndTime,
+          eventInterval,
           location,
           imageAdTakedownDate,
           formId,
           signUpUrl,
           directionsUrl,
           additionalNotes,
-          lastUpdatedBy: user,
+          lastUpdatedBy,
           approvedBy,
           isPublished,
           isDeleted,
