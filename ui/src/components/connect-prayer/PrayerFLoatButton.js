@@ -1,6 +1,6 @@
 import { useState } from "react";
-import {Box, HStack,IconButton,useMediaQuery}  from '@chakra-ui/react'
-import {LiaPrayingHandsSolid} from 'react-icons/lia'
+import {Box, Image, HStack,IconButton,useMediaQuery}  from '@chakra-ui/react'
+
 
 const PrayerFloatButton = (props) => {
     const [isHover,setIsHover] = useState(false);
@@ -15,7 +15,7 @@ const PrayerFloatButton = (props) => {
             zIndex={999}
         >
             <IconButton
-                bg="#A5CBFF"
+                bg="#3E86E9"
                 w = "0"
                 size="lg"
                 isRound
@@ -23,15 +23,18 @@ const PrayerFloatButton = (props) => {
                     <HStack
                         className="content"
                         transition="all 0.5s"
-                        marginLeft={isHover ? '0%' : '200%'}
+                        marginLeft={isHover ? '0%' : '170%'}
                     >
-                        <LiaPrayingHandsSolid color="#172848" />
+                        <Image 
+                            src={`${process.env.PUBLIC_URL}/images/PrayerLogo.png`}
+                            boxSize="25px"
+                        />
                         <Box    
                             as="span"
                             fontSize="sm"
                             opacity={isHover ? 1 : 0}
                             transition="opacity 0.5s"
-                            color="#172848"
+                            color = "white"
                         >
                             Need Prayer?
                         </Box>

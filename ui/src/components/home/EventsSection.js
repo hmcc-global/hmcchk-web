@@ -200,8 +200,8 @@ const EventsSection = () => {
               _hover={{ textDecoration: 'none' }}
             >
               <Button
-                color="#172848"
-                background="#A5CBFF"
+                color={["#A5CBFF","#172848"]}
+                background={["","#A5CBFF"]}
                 border="2px solid #A5CBFF"
                 borderRadius="7px"
                 display={{ base: 'none', md: 'block' }}
@@ -247,15 +247,15 @@ const EventsSection = () => {
       <Button
         display={{ base: 'block', md: 'none' }}
         width="10em"
-        color="#172848"
+        color="#A5CBFF"
         marginTop="2em"
-        background="#A5CBFF"
+        background="#172848"
         border="2px solid #A5CBFF"
         borderRadius="7px"
         alignSelf="start"
         ml="5%"
         mb="10%"
-        fontSize="20px"
+        fontSize="1.2em"
       >
         <LinkOverlay href="/events">See All Events</LinkOverlay>
       </Button>

@@ -88,10 +88,11 @@ const LifeGroupSection = () => {
             </Text>
             <Button
               alignSelf={['start', 'baseline']}
-              bg="#0628A3"
+              bg={["","#0628A3"]}
               variant="outline"
-              color="#ffffff"
-              borderColor="#ffffff"
+              color={["#0628A3","#ffffff"]}
+              borderColor="#0628A3"
+              borderWidth="2px"
               w={['45%', '38.2%']}
               _hover={{
                 bg: 'white',
@@ -99,7 +100,7 @@ const LifeGroupSection = () => {
                 borderColor: '#0628A3',
                 textDecoration: 'none',
               }}
-              fontSize="20px"
+              fontSize="1.2em"
             >
               <Link to={{ pathname: '/connect', hash: '#lifegroup' }}>
                 {buttonText}
