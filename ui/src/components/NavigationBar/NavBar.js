@@ -105,23 +105,6 @@ const NavBar = (props) => {
     }
   }, [userObj]);
 
-  //To do: Change picture when scrolled (Unsure yet)
-  // const navbarContent = isScrolled ?
-  //  (
-  //     <Text
-  //       color="#ffffff"
-  //       fontSize="x-small"
-  //       textAlign="center"
-  //     >
-  //       Harverst Mission Community Church
-  //     </Text>
-  //   ):( <Image
-  //       w="3.5em"
-  //       minW="3.5em"
-  //       src={process.env.PUBLIC_URL + '/images/ripple.svg'}
-  //       alt="Logo of HMCC"
-  //     />
-  //   )
 
   return (
     <>

@@ -15,7 +15,7 @@ const WitnessBanner = () => {
     <Flex
       w="100vw"
       bgColor="#FFFFFF95"
-      h={["50px","12vh"]}
+      h={["10vh","12vh"]}
       p={2}
       bgPosition="center"
       bgSize="cover"
@@ -29,7 +29,7 @@ const WitnessBanner = () => {
               <Box>
                 <Text
                   position="relative"
-                  fontSize={['10px', 'xl']}
+                  fontSize={['0.7em', 'xl']}
                   as="i"
                   background="linear-gradient(90deg, #FF8933, #AF4F83)"
                   textFillColor="transparent"

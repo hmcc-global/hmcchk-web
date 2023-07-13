@@ -274,14 +274,14 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
                 gap="10px"
                 border="2px solid #A5CBFF"
                 borderRadius="7px"
-                background="#A5CBFF"
-                color="#172848"
+                background={["","#A5CBFF"]}
+                color={["#A5CBFF","#172848"]}
                 marginTop="7%"
                 as={ReactLink}
                 to={{ pathname: '/sermons' }}
                 fontFamily="Inter"
                 fontWeight="semibold"
-                fontSize="20px"
+                fontSize="1.2em"
               >
                 {isOnline ? 'Watch HMCC LIVE' : 'See All Past Sermons'}
               </Button>
