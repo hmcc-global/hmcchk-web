@@ -15,7 +15,9 @@ const AboutSection = () => {
       w="full"
       h="auto"
       justify="center"
-      bgImage={process.env.PUBLIC_URL + '/images/home/WaterMoving.gif'}
+      bgImage={`url(${
+        process.env.PUBLIC_URL + '/images/home/about-us-bg.jpg'
+      })`}
       bgSize="cover"
       bgPosition="center center"
     >

@@ -123,15 +123,14 @@ const MainMenu = ({ login, onClose }) => {
                   variant="outline"
                   colorScheme="black"
                   width="200px"
-                  color="#172848"
+                  color="#ffffff"
+                  borderColor="#ffffff"
                 >
                   <LinkBox>
                     <Button 
                       marginBottom="5" 
                       width="96%" 
                       left="2"
-                      borderColor="#172848" 
-                      backgroundColor="#A5CBFF"
                     >
                       <LinkOverlay href="/profile" onClick={onClose}>
                         MY PROFILE
@@ -143,8 +142,6 @@ const MainMenu = ({ login, onClose }) => {
                       onClick={onLogout}
                       marginBottom="5"
                       width="100%"
-                      borderColor="#172848" 
-                      backgroundColor="#A5CBFF"
                       style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
                     >
                       <LinkOverlay href="/">LOG OUT</LinkOverlay>
@@ -152,25 +149,7 @@ const MainMenu = ({ login, onClose }) => {
                   </LinkBox>
                   <LinkBox>
                     <Button
-                      width="100%"
-                      marginBottom="5"
-                      borderColor="#172848" 
-                      backgroundColor="#A5CBFF"
-                      style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
-                    >
-                      <LinkOverlay
-                        href="https://forms.gle/6jasxuLNZt5MVXAy8"
-                        target="_blank"
-                      >
-                        Prayer Requests
-                      </LinkOverlay>
-                    </Button>
-                  </LinkBox>
-                  <LinkBox>
-                    <Button
                         width="100%"
-                        borderColor="#172848" 
-                        backgroundColor="#A5CBFF"
                         style={{
                           WebkitMarginStart: '0',
                           marginInlineStart: '0',
@@ -195,7 +174,8 @@ const MainMenu = ({ login, onClose }) => {
                   variant="outline"
                   colorScheme="black"
                   width="200px"
-                  color="#172848"
+                  color="#ffffff"
+                  borderColor="#ffffff"
                 >
                   <LinkBox>
                     <Button marginBottom="5" width="96%" left="2">
@@ -209,8 +189,6 @@ const MainMenu = ({ login, onClose }) => {
                       onClick={onClose}
                       marginBottom="5"
                       width="100%"
-                      borderColor="#172848" 
-                      backgroundColor="#A5CBFF"
                       style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
                     >
                       <LinkOverlay href="/signup">SIGN UP</LinkOverlay>
@@ -219,24 +197,6 @@ const MainMenu = ({ login, onClose }) => {
                   <LinkBox>
                     <Button
                       width="100%"
-                      style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
-                      marginBottom="5px"
-                      borderColor="#172848" 
-                      backgroundColor="#A5CBFF"
-                    >
-                      <LinkOverlay
-                        href="https://forms.gle/6jasxuLNZt5MVXAy8"
-                        target="_blank"
-                      >
-                        Prayer Requests
-                      </LinkOverlay>
-                    </Button>
-                  </LinkBox>
-                  <LinkBox>
-                    <Button
-                      width="100%"
-                      borderColor="#172848" 
-                      backgroundColor="#A5CBFF"
                       style={{
                         WebkitMarginStart: '0',
                         marginInlineStart: '0',
@@ -431,15 +391,14 @@ const MainMenu = ({ login, onClose }) => {
                       size="md"
                       variant="outline"
                       width="200px"
-                      color="#172848"
+                      color="#ffffff"
+                      borderColor="#ffffff"
                     >
                       <LinkBox>
                         <Button 
                           marginBottom="5" 
                           width="96%" 
                           left="2" 
-                          borderColor="#172848"
-                          backgroundColor="#A5CBFF"
                         >
                           <LinkOverlay href="/profile" onClick={onClose}>
                             MY PROFILE
@@ -451,8 +410,6 @@ const MainMenu = ({ login, onClose }) => {
                           onClick={onLogout}
                           marginBottom="5"
                           width="100%"
-                          borderColor="#172848"
-                          backgroundColor="#A5CBFF"
                           style={{
                             WebkitMarginStart: '0',
                             marginInlineStart: '0',
@@ -464,28 +421,6 @@ const MainMenu = ({ login, onClose }) => {
                       <LinkBox>
                         <Button
                           width="100%"
-                          marginBottom="5"
-                          borderColor="#172848"
-                          backgroundColor="#A5CBFF"
-                          style={{
-                            WebkitMarginStart: '0',
-                            marginInlineStart: '0',
-                          }}
-                        >
-                          <LinkOverlay
-                            href="https://forms.gle/6jasxuLNZt5MVXAy8"
-                            target="_blank"
-                            onClick={onClose}
-                          >
-                            Prayer Requests
-                          </LinkOverlay>
-                        </Button>
-                      </LinkBox>
-                      <LinkBox>
-                        <Button
-                          width="100%"
-                          borderColor="#172848" 
-                          backgroundColor="#A5CBFF"
                           style={{
                             WebkitMarginStart: '0',
                             marginInlineStart: '0',
@@ -507,15 +442,14 @@ const MainMenu = ({ login, onClose }) => {
                       size="md"
                       variant="outline"
                       width="200px"
-                      color="#172848"
+                      color="#ffffff"
+                      borderColor="#ffffff"
                     >
                       <LinkBox>
                         <Button 
                           marginBottom="5" 
                           width="96%" 
                           left="2"
-                          borderColor="#172848" 
-                          backgroundColor="#A5CBFF"
                         >
                           <LinkOverlay href="/login" onClick={onClose}>
                             LOGIN
@@ -527,8 +461,6 @@ const MainMenu = ({ login, onClose }) => {
                           onClick={onLogout}
                           marginBottom="5"
                           width="100%"
-                          borderColor="#172848" 
-                          backgroundColor="#A5CBFF"
                           style={{
                             WebkitMarginStart: '0',
                             marginInlineStart: '0',
@@ -542,27 +474,6 @@ const MainMenu = ({ login, onClose }) => {
                       <LinkBox>
                         <Button
                           width="100%"
-                          borderColor="#172848" 
-                          backgroundColor="#A5CBFF"
-                          style={{
-                            WebkitMarginStart: '0',
-                            marginInlineStart: '0',
-                          }}
-                        >
-                          <LinkOverlay
-                            href="https://forms.gle/6jasxuLNZt5MVXAy8"
-                            target="_blank"
-                            onClick={onClose}
-                          >
-                            Prayer Requests
-                          </LinkOverlay>
-                        </Button>
-                      </LinkBox>
-                      <LinkBox>
-                        <Button
-                          width="100%"
-                          borderColor="#172848" 
-                          backgroundColor="#A5CBFF"
                           style={{
                             WebkitMarginStart: '0',
                             marginInlineStart: '0',
