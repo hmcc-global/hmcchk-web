@@ -40,7 +40,6 @@ const AnnouncementEditorModal = (props) => {
   const toast = useToast();
 
   // TODO: add interval for dates to repeat events
-  // TODO: clarify if we still need imageTakedownDate
   const [title, setTitle] = useState(null);
   const [isInWeb, setIsInWeb] = useState(false);
   const [isInPpt, setIsInPpt] = useState(false);
@@ -48,14 +47,15 @@ const AnnouncementEditorModal = (props) => {
   const [imageAdUrl, setImageAdUrl] = useState(null);
   const [location, setLocation] = useState(null);
   const [directionsUrl, setDirectionsUrl] = useState(null);
-  const [startDate, setStartDate] = useState(null);
-  const [startTime, setStartTime] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [endTime, setEndTime] = useState(null);
+  const [displayStartDateTime, setDisplayStartDateTime] = useState(null);
+  const [displayEndDateTime, setDisplayEndDateTime] = useState(null);
+  const [eventStartDate, setEventStartDate] = useState(null);
+  const [eventStartTime, setEventStartTime] = useState(null);
+  const [eventEndDate, setEventEndDate] = useState(null);
+  const [eventEndTime, setEventEndTime] = useState(null);
   const [datePeriodInvalid, setDatePeriodInvalid] = useState(false);
   const [formId, setFormId] = useState(null);
   const [signUpUrl, setSignUpUrl] = useState(null);
-  const [imageAdTakedownDate, setImageAdTakedownDate] = useState('');
   const [additionalNotes, setAdditionalNotes] = useState(null);
 
   const resetAnnouncementEditorCallback = () => {
@@ -67,13 +67,14 @@ const AnnouncementEditorModal = (props) => {
     setValue('imageAdUrl', null);
     setValue('location', null);
     setValue('directionsUrl', null);
-    setValue('startDate', null);
-    setValue('startTime', null);
-    setValue('endDate', null);
-    setValue('endTime', null);
+    setValue('displayStartDateTime', null);
+    setValue('displayEndDateTime', null);
+    setValue('eventStartDate', null);
+    setValue('eventStartTime', null);
+    setValue('eventEndDate', null);
+    setValue('eventEndTime', null);
     setValue('formId', null);
     setValue('formSignupLink', null);
-    setValue('imageAdTakedownDate', '');
     setValue('additionalNotes', null);
 
     setTitle(null);
@@ -83,13 +84,14 @@ const AnnouncementEditorModal = (props) => {
     setImageAdUrl(null);
     setLocation(null);
     setDirectionsUrl(null);
-    setStartDate(null);
-    setStartTime(null);
-    setEndDate(null);
-    setEndTime(null);
+    setDisplayStartDateTime(null);
+    setDisplayEndDateTime(null);
+    setEventStartDate(null);
+    setEventStartTime(null);
+    setEventEndDate(null);
+    setEventEndTime(null);
     setFormId(null);
     setSignUpUrl(null);
-    setImageAdTakedownDate('');
     setAdditionalNotes(null);
     setIsOpen(false);
     announcementListCallback();
@@ -104,13 +106,14 @@ const AnnouncementEditorModal = (props) => {
       setValue('imageAdUrl', data.imageAdUrl);
       setValue('location', data.location);
       setValue('directionsUrl', data.directionsUrl);
-      setValue('startDate', data.startDate);
-      setValue('startTime', data.startTime);
-      setValue('endDate', data.endDate);
-      setValue('endTime', data.endTime);
+      setValue('displayStartDateTime', data.displayStartDateTime);
+      setValue('displayEndDateTime', data.displayEndDateTime);
+      setValue('eventStartDate', data.eventStartDate);
+      setValue('eventStartTime', data.eventStartTime);
+      setValue('eventEndDate', data.eventEndDate);
+      setValue('eventEndTime', data.eventEndTime);
       setValue('formId', data.formId);
       setValue('signUpUrl', data.signUpUrl);
-      setValue('imageAdTakedownDate', data.imageAdTakedownDate);
       setValue('additionalNotes', data.additionalNotes);
 
       setTitle(data.title);
@@ -120,13 +123,14 @@ const AnnouncementEditorModal = (props) => {
       setImageAdUrl(data.imageAdUrl);
       setLocation(data.location);
       setDirectionsUrl(data.directionsUrl);
-      setStartDate(data.startDate);
-      setStartTime(data.startTime);
-      setEndDate(data.endDate);
-      setEndTime(data.endTime);
+      setDisplayStartDateTime(data.displayStartDateTime);
+      setDisplayEndDateTime(data.displayEndDateTime);
+      setEventStartDate(data.eventStartDate);
+      setEventStartTime(data.eventStartTime);
+      setEventEndDate(data.eventEndDate);
+      setEventEndTime(data.eventEndTime);
       setFormId(data.formId);
       setSignUpUrl(data.signUpUrl);
-      setImageAdTakedownDate(data.imageAdTakedownDate);
       setAdditionalNotes(data.additionalNotes);
     }
   };
@@ -160,13 +164,14 @@ const AnnouncementEditorModal = (props) => {
         imageAdUrl,
         location,
         directionsUrl,
-        startDate,
-        startTime,
-        endDate,
-        endTime,
+        displayStartDateTime,
+        displayEndDateTime,
+        eventStartDate,
+        eventStartTime,
+        eventEndDate,
+        eventEndTime,
         formId,
         signUpUrl,
-        imageAdTakedownDate: '',
         additionalNotes,
       };
 
@@ -214,14 +219,14 @@ const AnnouncementEditorModal = (props) => {
   }, [editAnnouncementData]);
 
   useEffect(() => {
-    if (startDate && endDate) {
-      if (DateTime.fromISO(endDate) <= DateTime.fromISO(startDate)) {
+    if (eventStartDate && eventEndDate) {
+      if (DateTime.fromISO(eventEndDate) <= DateTime.fromISO(eventStartDate)) {
         setDatePeriodInvalid(true);
         return;
       }
     }
     setDatePeriodInvalid(false);
-  }, [startDate, endDate]);
+  }, [eventStartDate, eventEndDate]);
 
   const modalTitle = (actionOnEditor) => {
     switch (actionOnEditor) {
@@ -301,53 +306,78 @@ const AnnouncementEditorModal = (props) => {
                   <Grid templateColumns="repeat(2, 1fr)" gap={6}>
                     <GridItem>
                       <FormControl>
-                        <FormLabel>Start Date</FormLabel>
+                        <FormLabel>Announcement Display Start Date</FormLabel>
+                      </FormControl>
+                      <Input
+                        id="displayStartDateTime"
+                        type="datetime-local"
+                        {...register('displayStartDateTime')}
+                        onChange={(e) =>
+                          setDisplayStartDateTime(e.target.value)
+                        }
+                      />
+                    </GridItem>
+                    <GridItem>
+                      <FormControl>
+                        <FormLabel>Announcement Display End Date</FormLabel>
+                      </FormControl>
+                      <Input
+                        id="displayEndDateTime"
+                        type="datetime-local"
+                        {...register('displayEndDateTime')}
+                        onChange={(e) => setDisplayEndDateTime(e.target.value)}
+                      />
+                    </GridItem>
+
+                    <GridItem>
+                      <FormControl>
+                        <FormLabel>Event Start Date</FormLabel>
                         <FormErrorMessage>
                           {datePeriodInvalid &&
                             'Start and end date is invalid, please check again'}
                         </FormErrorMessage>
                         <Input
-                          id="startDate"
+                          id="eventStartDate"
                           type="date"
-                          {...register('startDate')}
-                          onChange={(e) => setStartDate(e.target.value)}
+                          {...register('eventStartDate')}
+                          onChange={(e) => setEventStartDate(e.target.value)}
                         />
                       </FormControl>
                     </GridItem>
                     <GridItem>
                       <FormControl>
-                        <FormLabel>Start Time</FormLabel>
+                        <FormLabel>Event Start Time</FormLabel>
                         <Input
-                          id="startTime"
+                          id="eventStartTime"
                           type="time"
-                          {...register('startTime')}
-                          onChange={(e) => setStartTime(e.target.value)}
+                          {...register('eventStartTime')}
+                          onChange={(e) => setEventStartTime(e.target.value)}
                         />
                       </FormControl>
                     </GridItem>
                     <GridItem>
                       <FormControl>
-                        <FormLabel>End Date</FormLabel>
+                        <FormLabel>Event End Date</FormLabel>
                         <FormErrorMessage>
                           {datePeriodInvalid &&
                             'Start and end date is invalid, please check again'}
                         </FormErrorMessage>
                         <Input
-                          id="endDate"
+                          id="eventEndDate"
                           type="date"
-                          {...register('endDate')}
-                          onChange={(e) => setEndDate(e.target.value)}
+                          {...register('eventEndDate')}
+                          onChange={(e) => setEventEndDate(e.target.value)}
                         />
                       </FormControl>
                     </GridItem>
                     <GridItem>
                       <FormControl>
-                        <FormLabel>End Time</FormLabel>
+                        <FormLabel>Event End Time</FormLabel>
                         <Input
-                          id="endTime"
+                          id="eventEndTime"
                           type="time"
-                          {...register('endTime')}
-                          onChange={(e) => setEndTime(e.target.value)}
+                          {...register('eventEndTime')}
+                          onChange={(e) => setEventEndTime(e.target.value)}
                         />
                       </FormControl>
                     </GridItem>
@@ -388,6 +418,11 @@ const AnnouncementEditorModal = (props) => {
 
                   <FormControl isInvalid={errors['description']} isRequired>
                     <FormLabel>Description</FormLabel>
+                    <FormHelperText>
+                      This field supports markdown. Just write it in somewhere
+                      else (with formatting) and then paste it here and see the
+                      magic happen.
+                    </FormHelperText>
                     <Textarea
                       id="description"
                       {...register('description', {
@@ -395,12 +430,22 @@ const AnnouncementEditorModal = (props) => {
                       })}
                       onChange={(e) => setDescription(e.target.value)}
                     />
-                    <FormHelperText>
-                      This field supports markdown. Just write it in somewhere
-                      else (with formatting) and then paste it here and see the
-                      magic happen.
-                    </FormHelperText>
                   </FormControl>
+
+                  <FormControl>
+                    <FormLabel>Additional Notes</FormLabel>
+                    <FormHelperText>
+                      If there is anything that any remarks, please put it in
+                      here. Also, please put a remark in here if it's an updated
+                      image
+                    </FormHelperText>
+                    <Textarea
+                      id="additionalNotes"
+                      {...register('additionalNotes')}
+                      onChange={(e) => setAdditionalNotes(e.target.value)}
+                    />
+                  </FormControl>
+
                   <Button
                     colorScheme="blue"
                     type="submit"
