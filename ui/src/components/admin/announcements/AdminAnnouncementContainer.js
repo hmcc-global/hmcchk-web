@@ -16,7 +16,6 @@ import {
   Badge,
   Image,
   Grid,
-  GridItem,
 } from '@chakra-ui/react';
 import {
   CalendarIcon,
@@ -24,6 +23,7 @@ import {
   InfoOutlineIcon,
   ChatIcon,
   ViewIcon,
+  EditIcon,
 } from '@chakra-ui/icons';
 import AnnouncementEditorModal from './AnnouncementEditorModal';
 import { DateTime } from 'luxon';
@@ -314,9 +314,7 @@ export default function AdminAnnouncementContainer(props) {
                     </Text>
                     <Text>
                       <InfoOutlineIcon /> Location:{' '}
-                      {announcementItem.location
-                        ? announcementItem.location
-                        : '-'}
+                      {announcementItem.location || '-'}
                     </Text>
                     <Text>
                       <ChatIcon /> Submitter: {announcementItem.submittedBy}
@@ -331,6 +329,10 @@ export default function AdminAnnouncementContainer(props) {
                         <Badge colorScheme="orange">PPT</Badge>
                       )}
                     </Text>
+                    <Text>
+                      <EditIcon /> Last updated by:{' '}
+                      {announcementItem.lastUpdatedBy || '-'}
+                    </Text>
                   </Grid>
                 </Stack>
                 <Spacer />
@@ -338,7 +340,12 @@ export default function AdminAnnouncementContainer(props) {
                 <HStack spacing={1}>
                   {announcementItem.isInWeb && isCurrentAnnouncements && (
                     <Button
-                      colorScheme="purple"
+                      bgColor={
+                        announcementItem.isPublished
+                          ? 'purple.800'
+                          : 'purple.500'
+                      }
+                      color="white"
                       value={announcementItem.id}
                       onClick={onPublish}
                       isLoading={isLoading}
