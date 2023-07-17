@@ -38,5 +38,13 @@ module.exports = {
     lastUpdatedBy: {
       type: 'string',
     },
+    streamStartTime: {
+      type: 'string',
+      columnType: 'datetime',
+    },
+    streamEndTime: {
+      type: 'string',
+      columnType: 'datetime',
+    },
   },
 };
