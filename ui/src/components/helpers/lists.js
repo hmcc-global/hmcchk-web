@@ -5,6 +5,8 @@ const accessTypeList = [
   'admin',
   'stewardship',
   't3ch',
+  'ministry',
+  'tc',
 ];
 const lifestageList = [
   'Building Blocks (3-11 years old)',
