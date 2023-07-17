@@ -39,11 +39,16 @@ module.exports = {
     sermonDescription: {
       type: 'string',
     },
-    isPublished: {
-      type: 'boolean',
-    },
     isDeleted: {
       type: 'boolean',
+    },
+    streamStartTime: {
+      type: 'string',
+      required: true,
+    },
+    streamEndTime: {
+      type: 'string',
+      required: true,
     },
   },
 
@@ -69,8 +74,9 @@ module.exports = {
       sermonDateTime,
       sermonPassage,
       sermonDescription,
-      isPublished,
       isDeleted,
+      streamStartTime,
+      streamEndTime,
     },
     exits
   ) {
@@ -79,15 +85,6 @@ module.exports = {
     sails.log.info(`Title: ${title},  Desc: ${sermonDescription}`);
 
     try {
-      if (isDeleted && isPublished) {
-        isPublished = false;
-      }
-
-      if (isPublished) {
-        res = await LiveSermon.update({ isPublished: true }).set({
-          isPublished: false,
-        });
-      }
       let lastUpdatedBy = user;
 
       const existing = await LiveSermon.updateOne({ id }).set({
@@ -100,9 +97,10 @@ module.exports = {
         sermonDateTime,
         sermonPassage,
         sermonDescription,
-        isPublished,
         lastUpdatedBy,
         isDeleted,
+        streamStartTime,
+        streamEndTime,
       });
 
       if (!existing) {
