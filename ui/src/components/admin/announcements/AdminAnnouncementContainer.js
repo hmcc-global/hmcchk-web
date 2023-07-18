@@ -251,6 +251,14 @@ export default function AdminAnnouncementContainer(props) {
     return true;
   };
 
+  const isCreateDisabled = () => {
+    const aboveTcPrivs = ['tc', 't3ch', 'admin', 'stewardship'];
+    if (aboveTcPrivs.includes(user.accessType)) {
+      return false;
+    }
+    return true;
+  };
+
   const showProperDate = (startDate, endDate) => {
     if (startDate && endDate) {
       return `${startDate} - ${endDate}`;
@@ -277,7 +285,12 @@ export default function AdminAnnouncementContainer(props) {
         Announcements Manager
       </Heading>
       <Stack direction="row">
-        <Button colorScheme="blue" size="lg" onClick={onCreate}>
+        <Button
+          colorScheme="blue"
+          size="lg"
+          onClick={onCreate}
+          disabled={isCreateDisabled()}
+        >
           Add New
         </Button>
         <Button colorScheme="blue" size="lg" onClick={toggleAnnouncementsView}>
@@ -375,6 +388,7 @@ export default function AdminAnnouncementContainer(props) {
                     value={announcementItem.id}
                     onClick={onDuplicate}
                     isLoading={isLoading}
+                    disabled={isCreateDisabled()}
                     actionOnEditor="duplicate"
                   >
                     Duplicate
@@ -383,6 +397,7 @@ export default function AdminAnnouncementContainer(props) {
                     colorScheme="red"
                     value={announcementItem.id}
                     onClick={onDelete}
+                    disabled={isPublishDisabled()}
                     isLoading={isLoading}
                   >
                     Delete
