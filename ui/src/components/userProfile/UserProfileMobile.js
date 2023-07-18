@@ -185,8 +185,11 @@ const UserProfileMobile = (props) => {
   };
 
   const tabTitle = {
+    padding : '0.5px',
     fontWeight: '700',
     fontSize: 'inherit',
+    color : "#0628A3",
+    borderColor: '#0628A3'
   };
 
   return (
@@ -255,26 +258,20 @@ const UserProfileMobile = (props) => {
         >
           <TabList justifyContent="space-between">
             <Tab
-              p="0.5"
               style={tabTitle}
-              color="#0628A3"
-              _selected={{ borderColor: '#0628A3', color: '#000000' }}
+              _selected={{ color: '#000000' }}
             >
               Signup Links
             </Tab>
             <Tab
-              p="0.5"
               style={tabTitle}
-              color="#0628A3"
-              _selected={{ borderColor: '#0628A3', color: '#000000' }}
+              _selected={{ color: '#000000' }}
             >
               Personal Profile
             </Tab>
             <Tab
-              p="0.5"
               style={tabTitle}
-              color="#0628A3"
-              _selected={{ borderColor: '#0628A3', color: '#000000' }}
+              _selected={{ color: '#000000' }}
             >
               Church Profile
             </Tab>
@@ -293,7 +290,7 @@ const UserProfileMobile = (props) => {
                     >
                       Available Signup Links:
                     </Text>
-                    {generatePublishedFormLinks(unsignedFormList)}
+                    {generatePublishedFormLinks(unsignedFormList, false)}
                     <Text
                       fontWeight="700"
                       fontSize="0.95rem"
@@ -303,7 +300,7 @@ const UserProfileMobile = (props) => {
                     >
                       Your Signups:
                     </Text>
-                    {generatePublishedFormLinks(signedUpFormList)}
+                    {generatePublishedFormLinks(signedUpFormList, true)}
                   </Box>
                 )}
                 {/* <Button

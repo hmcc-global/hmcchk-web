@@ -155,7 +155,7 @@ const generatePublishedFormLinks = (forms, signedUp) => {
                   >
                     {signedUp ? (
                       <Box>
-                        <Button style={signedUpButton}>Signed Up</Button>
+                        <Button style={signedUpButton} disabled>Signed Up</Button>
                       </Box>
                     ) : (
                       <Link
