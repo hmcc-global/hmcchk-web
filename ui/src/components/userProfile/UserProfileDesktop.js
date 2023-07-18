@@ -177,6 +177,12 @@ const UserProfileDesktop = (props) => {
     textAlign: 'center',
   };
 
+  const tabText = {
+    borderBottom: '2px solid #0628A3',
+    marginBottom: '-2px',
+    color: "#000000",
+  };
+
   return (
     <>
       <Modal isOpen={modalOpen} onClose={onModalClose}>
@@ -239,13 +245,7 @@ const UserProfileDesktop = (props) => {
                 pr="1"
                 pl="1"
                 color="#0628A3"
-                _selected={{
-                  md: {
-                    borderBottom: '2px solid #0628A3',
-                    marginBottom: '-2px',
-                    color: "#000000",
-                  },
-                }}
+                _selected={{ md: tabText }}
                 fontWeight="700"
               >
                 Signup Links
@@ -256,11 +256,7 @@ const UserProfileDesktop = (props) => {
                 pl="1"
                 color="#0628A3"
                 mt="5"
-                _selected={{
-                  borderBottom: '2px solid #0628A3',
-                  marginBottom: '-2px',
-                  color: "#000000",
-                }}
+                _selected={{ md: tabText }}
                 fontWeight="700"
               >
                 Personal Profile
@@ -271,11 +267,7 @@ const UserProfileDesktop = (props) => {
                 pl="1"
                 color="#0628A3"
                 mt="5"
-                _selected={{
-                  borderBottom: '2px solid #0628A3',
-                  marginBottom: '-2px',
-                  color: "#000000",
-                }}
+                _selected={{ md: tabText }}
                 fontWeight="700"
               >
                 Church Profile
