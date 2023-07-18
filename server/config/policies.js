@@ -55,7 +55,7 @@ module.exports.policies = {
   // Announcements
   'announcements/admin-get-announcements': ['isLoggedIn', 'aboveMinistry'],
   'announcements/create-announcements': ['isLoggedIn', 'aboveTc'],
-  'announcements/update-announcements': ['isLoggedIn', 'aboveTc'],
+  'announcements/update-announcements': ['isLoggedIn', 'aboveMinistry'],
 
   // Last Updated
   'lastUpdated/get-last-updated': ['isLoggedIn', 'aboveTech'],
