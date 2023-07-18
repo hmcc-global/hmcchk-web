@@ -1,9 +1,9 @@
 // TODO move this to custom.js
-const isMinistryPrivs = ['ministry'];
+const aboveMinistryPrivs = ['ministry', 'tc', 't3ch', 'admin', 'stewardship'];
 
 module.exports = async function (req, res, proceed) {
   if (req.user) {
-    if (!isMinistryPrivs.includes(req.user.accessType)) {
+    if (!aboveMinistryPrivs.includes(req.user.accessType)) {
       return res.status(401).json({
         err: 'Unauthorised',
       });

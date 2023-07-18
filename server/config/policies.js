@@ -51,11 +51,7 @@ module.exports.policies = {
   'forms/get-user-submission': ['isLoggedIn'],
 
   // Announcements
-  'announcements/admin-get-announcements': [
-    'isLoggedIn',
-    'aboveTc',
-    'isMinistry',
-  ],
+  'announcements/admin-get-announcements': ['isLoggedIn', 'aboveMinistry'],
   'announcements/create-announcements': ['isLoggedIn', 'aboveTc'],
   'announcements/update-announcements': ['isLoggedIn', 'aboveTc'],
 
