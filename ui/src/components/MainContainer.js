@@ -240,7 +240,6 @@ const MainContainer = () => {
           permissions={['public']}
           component={TextDetails}
         />
-
         {/* Admin items */}
         <PrivateRoute
           exact
@@ -290,6 +289,7 @@ const MainContainer = () => {
           permissions={['t3ch', 'admin', 'stewardship']}
           component={AdminTestimonyContainer}
         />
+        QWW
         <PrivateRoute
           exact
           path="/admin/popup"
@@ -302,7 +302,6 @@ const MainContainer = () => {
           permissions={['admin', 'stewardship']}
           component={AdminUser}
         />
-
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
       <FooterContainer />
