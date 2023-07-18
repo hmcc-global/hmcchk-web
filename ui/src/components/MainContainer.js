@@ -251,25 +251,25 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/admin"
-          permissions={['t3ch', 'admin', 'stewardship']}
+          permissions={['ministry', 't3ch', 'admin', 'stewardship']}
           component={AdminHome}
         />
         <PrivateRoute
           exact
           path="/admin/home"
-          permissions={['t3ch', 'admin', 'stewardship']}
+          permissions={['ministry', 't3ch', 'admin', 'stewardship']}
           component={AdminHome}
         />
         <PrivateRoute
           exact
           path="/admin/forms"
-          permissions={['t3ch', 'admin', 'stewardship']}
+          permissions={['ministry', 't3ch', 'admin', 'stewardship']}
           component={FormManager}
         />
         <PrivateRoute
           exact
           path="/admin/announcements"
-          permissions={['t3ch', 'admin', 'stewardship']}
+          permissions={['ministry', 't3ch', 'admin', 'stewardship']}
           component={AdminAnnouncementContainer}
         />
         <PrivateRoute

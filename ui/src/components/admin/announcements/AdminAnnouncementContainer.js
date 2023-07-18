@@ -243,6 +243,14 @@ export default function AdminAnnouncementContainer(props) {
     }
   };
 
+  const isPublishDisabled = () => {
+    const aboveT3chPrivs = ['t3ch', 'admin', 'stewardship'];
+    if (aboveT3chPrivs.includes(user.accessType)) {
+      return false;
+    }
+    return true;
+  };
+
   const showProperDate = (startDate, endDate) => {
     if (startDate && endDate) {
       return `${startDate} - ${endDate}`;
@@ -349,6 +357,7 @@ export default function AdminAnnouncementContainer(props) {
                       value={announcementItem.id}
                       onClick={onPublish}
                       isLoading={isLoading}
+                      disabled={isPublishDisabled()}
                     >
                       {announcementItem.isPublished ? 'Unpublish' : 'Publish'}
                     </Button>
