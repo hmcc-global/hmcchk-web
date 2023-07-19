@@ -10,10 +10,6 @@ module.exports = {
       required: false,
       type: 'string',
     },
-    isPublished: {
-      required: false,
-      type: 'boolean',
-    },
   },
 
   exits: {
@@ -24,13 +20,12 @@ module.exports = {
       description: 'Failed to retrieve live sermon',
     },
   },
-  fn: async function ({ sermonId, isPublished }, exits) {
+  fn: async function ({ sermonId }, exits) {
     try {
+      // This is for AdminLiveSermonContainer to get sermon if there is one that exists
       if (sermonId) {
         let data = await LiveSermon.find({
-          _id: sermonId,
           isDeleted: false,
-          isPublished,
         }).populateAll();
         if (data.length === 0) {
           return exits.success([]);
@@ -38,30 +33,21 @@ module.exports = {
         return exits.success(data);
       }
 
-      let data = await LiveSermon.find({ isDeleted: false, isPublished })
-        .sort('updatedAt DESC')
-        .populateAll();
+      const now = DateTime.fromISO(new Date().toISOString()).setZone(
+        'Asia/Hong_Kong'
+      );
+
+      // This is for the rest to see the most updated sermon that is live
+      let data = await LiveSermon.find({
+        isDeleted: false,
+        streamStartTime: { '<=': now.toISO() },
+        streamEndTime: { '>=': now.toISO() },
+      }).sort('updatedAt DESC');
 
       if (data && data[0]) {
-        const now = DateTime.fromISO(new Date().toISOString()).setZone(
-          'Asia/Hong_Kong'
-        );
-        const startTime = DateTime.fromISO(data[0].streamStartTime).setZone(
-          'Asia/Hong_Kong'
-        );
-        const endTime = DateTime.fromISO(data[0].streamEndTime).setZone(
-          'Asia/Hong_Kong'
-        );
-
-        const shouldBePublished =
-          startTime < endTime && now > startTime && now < endTime;
-
-        const res = await LiveSermon.update({ isPublished }).set({
-          isPublished: shouldBePublished,
-        });
+        return exits.success(data);
       }
-
-      return exits.success(data);
+      return exits.success([]);
     } catch (err) {
       sails.log(err);
       return exits.invalid(err);

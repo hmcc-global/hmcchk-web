@@ -72,8 +72,6 @@ module.exports = {
 
     try {
       let res;
-
-      let isPublished = false;
       let lastUpdatedBy = user;
 
       res = await LiveSermon.create({
@@ -86,7 +84,6 @@ module.exports = {
         sermonDateTime,
         sermonPassage,
         sermonDescription,
-        isPublished,
         lastUpdatedBy,
         streamStartTime,
         streamEndTime,

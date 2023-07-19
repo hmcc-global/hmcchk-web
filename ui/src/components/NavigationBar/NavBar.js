@@ -72,11 +72,7 @@ const NavBar = (props) => {
 
   const checkIfLive = async () => {
     try {
-      const { data } = await axios.get('/api/live-sermon/get-live-sermon', {
-        params: {
-          isPublished: true,
-        },
-      });
+      const { data } = await axios.get('/api/live-sermon/get-live-sermon');
       if (data && data[0]) {
         setIsLive(true);
       }
@@ -117,7 +113,6 @@ const NavBar = (props) => {
       position.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
 
   return (
     <>
@@ -403,7 +398,11 @@ const NavBar = (props) => {
                 >
                   <LinkBox>
                     <LinkOverlay href="/">
-                      <Text color="#ffffff" fontSize="x-small" textAlign="center">
+                      <Text
+                        color="#ffffff"
+                        fontSize="x-small"
+                        textAlign="center"
+                      >
                         Harverst Mission Community Church
                       </Text>
                     </LinkOverlay>
