@@ -13,11 +13,17 @@ const getStartDate = (eventData) => {
 };
 
 const getRenderDate = (startDate, endDate, interval) => {
+  // parse the interval to number
+  let recur = interval === "Daily" ? 1 : 
+              interval === "Weekly" ? 7 : 
+              interval === "Monthly" ? 30 :
+              interval === "None" ? 0 : 0;
+
   let start = DateTime.fromISO(startDate);
   let end = DateTime.fromISO(endDate);
 
   let diffInDays = end.diff(start, 'days').toObject();
-  let nRecurrence = Math.floor(diffInDays.days / interval);
+  let nRecurrence = recur !== 0 ? Math.floor(diffInDays.days / interval) : 0;
 
   let renderDate = startDate;
 
