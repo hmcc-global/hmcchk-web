@@ -55,7 +55,7 @@ export default function AdminLiveSermonContainer(props) {
     setStreamEndTime(data.streamEndTime);
   }
 
-  const sanityCheckFailed = title === '' || sermonDescription === '' || streamPeriodInvalid === true;
+  const sanityCheckFailed = title === '' || sermonDescription === '' || streamPeriodInvalid;
 
   const createHandler = async () => {
     try {
@@ -180,8 +180,13 @@ export default function AdminLiveSermonContainer(props) {
 
   const getData = useCallback(async () => {
     try {
-      const { data } = await axios.get('/api/live-sermon/get-live-sermon');
-      if (data && data[0]){
+      // Hardcoded to always get the latest sermon if it exists, if not returns empty array
+      const { data } = await axios.get('/api/live-sermon/get-live-sermon', {
+        params: {
+          sermonId: 'Sermon',
+        },
+      });
+      if (data && data[0]) {
         // we only get the latest one to update
         setLiveSermon(data[0]);
         initLiveSermonValues(data[0]);
@@ -191,7 +196,7 @@ export default function AdminLiveSermonContainer(props) {
       toast({
         description: err,
         status: 'error',
-        duration: 5000
+        duration: 5000,
       });
       console.log(err);
     } finally {
@@ -207,13 +212,15 @@ export default function AdminLiveSermonContainer(props) {
     if (streamStartTime && streamEndTime) {
       const startTime = DateTime.fromISO(streamStartTime);
       const endTime = DateTime.fromISO(streamEndTime);
+
       if (startTime >= endTime) {
         setStreamPeriodInvalid(true);
         return;
       }
+      setStreamPeriodInvalid(false);
     }
-    setStreamPeriodInvalid(false);
   }, [streamStartTime, streamEndTime]);
+
 
   return (
     <Container w="100%" maxW="100%">
@@ -322,11 +329,6 @@ export default function AdminLiveSermonContainer(props) {
               <Heading as="h5" size="md" mb={5}>
                 PREVIEW
               </Heading>
-              { liveSermon && !liveSermon.isPublished && (
-              <Heading as="h5" size="sm" mb={5} color="red">
-                [NOT PUBLISHED]
-              </Heading>
-              )}
                 <PreviewOnlineSermonContainer
                   isPreviewing={isPreviewing}
                   setIsPreviewing={setIsPreviewing}

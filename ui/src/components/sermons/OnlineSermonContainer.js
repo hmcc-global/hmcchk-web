@@ -23,19 +23,11 @@ const OnlineSermonContainer = (props) => {
   const getOnlineSermon = useCallback(async () => {
     try {
       const { data, status } = await axios.get(
-        '/api/live-sermon/get-live-sermon',
-        {
-          params: {
-            isPublished: true,
-          },
-        }
+        '/api/live-sermon/get-live-sermon'
       );
       if (status === 200) {
         const current = data && data[0];
-        if (
-          current &&
-          current.streamLink
-        ) {
+        if (current && current.streamLink) {
           setOnlineSermon(current);
         } else {
           history.push(`/sermons/`);
