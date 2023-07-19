@@ -28,7 +28,6 @@ import { parseDescription } from '../helpers/parseDescription';
 
 const EventCard = (props) => {
   const { eventData } = props;
-
   const [isOpen, setIsOpen] = useState(false);
 
   const onOpen = (e) => {
@@ -53,13 +52,13 @@ const EventCard = (props) => {
         onClick={onOpen}
       >
         <AspectRatio mb="5" width="100%" ratio={16 / 9}>
-          <Image borderRadius="20" src={eventData.imageUrl} objectFit="cover" />
+          <Image borderRadius="20" src={eventData.imageAdUrl} objectFit="cover" />
         </AspectRatio>
         <Box height={['200', '280']} overflow="hidden" position="relative">
           <Heading as="h4" mb="5" size="lg" fontWeight="900" isTruncated>
             {eventData.title}
           </Heading>
-          {eventData.startDate && eventData.endDate && eventData.recurrence && (
+          {eventData.displayStartDateTime && eventData.displayEndDateTime && eventData.eventInterval && (
             <Text fontSize={['sm', 'lg']} fontWeight="bold">
               <Icon mr={2} as={RiCalendarEventFill} />
               Date:{' '}
@@ -68,16 +67,16 @@ const EventCard = (props) => {
                     DateTime.DATE_MED_WITH_WEEKDAY
                   )
                 : getRenderDate(
-                    eventData.startDate,
-                    eventData.endDate,
-                    eventData.recurrence
+                    eventData.eventStartDate,
+                    eventData.eventEndDate,
+                    eventData.eventInterval
                   ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
             </Text>
           )}
-          {eventData.time && (
+          {eventData.eventStartTime && (
             <Text fontSize={['sm', 'lg']} fontWeight="bold">
               <Icon mr={2} as={BsClockFill} />
-              Time: {eventData.time}
+              Time: {eventData.eventStartTime}
             </Text>
           )}
           {eventData.location && (
@@ -99,14 +98,14 @@ const EventCard = (props) => {
           ></Box>
         </Box>
         <Stack mt="5" direction="row" justifyContent="center" spacing={2}>
-          {eventData.signUpLink.length > 0 && (
+          {eventData.signUpUrl.length > 0 && (
             <Button
               flex={1}
               as={Link}
               size="sm"
               target="_blank"
-              href={eventData.signUpLink ? eventData.signUpLink : null}
-              isDisabled={eventData.signUpLink.length <= 0}
+              href={eventData.signUpUrl ? eventData.signUpUrl : null}
+              isDisabled={eventData.signUpUrl.length <= 0}
               fontSize={['xs', 'sm']}
             >
               Sign up
@@ -133,7 +132,7 @@ const EventCard = (props) => {
             <Image
               borderTopLeftRadius="20"
               borderTopRightRadius="20"
-              src={eventData.imageUrl}
+              src={eventData.imageAdUrl}
               objectFit="cover"
             />
           </AspectRatio>
@@ -150,9 +149,9 @@ const EventCard = (props) => {
           )}
           <ModalBody ml={[0, 16]} mr={[0, 16]}>
             <Box>
-              {eventData.startDate &&
-                eventData.endDate &&
-                eventData.recurrence && (
+              {eventData.displayStartDateTime &&
+                eventData.displayEndDateTime &&
+                eventData.eventInterval && (
                   <Text fontSize={['sm', 'md']} fontWeight="bold">
                     <Icon mr={2} as={RiCalendarEventFill} />
                     Date:{' '}
@@ -161,16 +160,16 @@ const EventCard = (props) => {
                           DateTime.DATE_MED_WITH_WEEKDAY
                         )
                       : getRenderDate(
-                          eventData.startDate,
-                          eventData.endDate,
-                          eventData.recurrence
+                          eventData.eventStartDate,
+                          eventData.eventEndDate,
+                          eventData.eventInterval
                         ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
                   </Text>
                 )}
-              {eventData.time && (
+              {eventData.eventStartTime && (
                 <Text fontSize={['sm', 'md']} fontWeight="bold">
                   <Icon mr={2} as={BsClockFill} />
-                  Time: {eventData.time}
+                  Time: {eventData.eventStartTime}
                 </Text>
               )}
               {eventData.location && (
@@ -193,23 +192,23 @@ const EventCard = (props) => {
               variant="outline"
               colorScheme="gray"
             >
-              {eventData.mapLink.length > 0 && (
+              {eventData.directionsUrl.length > 0 && (
                 <Button
                   flex={[false, 1]}
                   as={Link}
                   target="_blank"
-                  href={eventData.mapLink ? eventData.mapLink : null}
+                  href={eventData.directionsUrl ? eventData.directionsUrl : null}
                 >
                   Directions
                 </Button>
               )}
-              {eventData.signUpLink.length > 0 && (
+              {eventData.signUpUrl.length > 0 && (
                 <Button
                   flex={[false, 1]}
                   mt={[2, 0]}
                   as={Link}
                   target="_blank"
-                  href={eventData.signUpLink ? eventData.signUpLink : null}
+                  href={eventData.signUpUrl ? eventData.signUpUrl : null}
                 >
                   Sign up
                 </Button>

@@ -19,23 +19,30 @@ const EventsPage = (props) => {
   const getEventsListFromDatabase = async () => {
     try {
       const { data, status } = await axios.get(
-        '/api/announcements/get-announcements'
+        '/api/announcement/get'
       );
+
       if (status === 200) {
         const filtered = data.filter((item) => {
-          if (item.endDate) {
+          if(item.displayEndDateTime === null ){
+            return true;
+          } else return false;
+        });
+        const filteredEndDate = data.filter((item) => {
+          if (item.displayEndDateTime) {
             // Add one day to offset end date to end of day
-            let endDate = new DateTime.fromISO(item.endDate).plus({ days: 1 });
+            let endDate = new DateTime.fromISO(item.displayEndDateTime).plus({ days: 1 });
             const renderDate = getRenderDate(
-              item.startDate,
-              item.endDate,
-              item.recurrence
+              item.eventStartDate,
+              item.eventEndDate,
+              item.eventInterval
             );
             item.renderDate = renderDate;
             return endDate > DateTime.now();
-          } else return false;
+          }  else return false;
         });
-        filtered.sort((a, b) => (a.renderDate > b.renderDate ? 1 : -1));
+        filteredEndDate.sort((a, b) => (a.renderDate > b.renderDate ? 1 : -1));
+        filtered.push(...filteredEndDate);
         setEventsList([...filtered]);
       } else {
         throw Error('Something went wrong with the request');
