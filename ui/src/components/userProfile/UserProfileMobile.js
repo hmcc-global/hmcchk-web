@@ -78,33 +78,34 @@ const UserProfileMobile = (props) => {
 
     if (status === 200) {
       setFormList([...data]);
-
-      //find forms the user have signed up for
-      const tempFormList = data;
-      tempFormList.map(async (form) => {
-        const { data, status } = await axios.get(
-          'api/forms/get-user-submission',
-          {
-            params: {
-              formId: form.id,
-              userId: user.id,
-            },
-          }
-        );
-        if (status === 200 && data.id !== undefined) {
-          setSignedUpFormList((signedUpFormList) => [
-            ...signedUpFormList,
-            form,
-          ]);
-        } else if (status === 200) {
-          setUnsignedFormList((unsignedFormList) => [
-            ...unsignedFormList,
-            form,
-          ]);
-        }
-      });
     }
-  }, [user.id]);
+  }, []);
+
+  const fetchSignedUpForms = useCallback(async () => {
+    //get signed up forms
+    const { data, status} = await axios.get('/api/forms/get-signedup-form', {
+      params: {
+        userId: user.id,
+      },
+    });
+
+    if(status === 200){
+      setSignedUpFormList([...data]);
+    }
+  }, [user.id])
+
+  const fetchUnignedUpForms = useCallback(async () => {
+    //get signed up forms
+    const { data, status} = await axios.get('/api/forms/get-unsignedup-form', {
+      params: {
+        userId: user.id,
+      },
+    });
+
+    if(status === 200){
+      setUnsignedFormList([...data]);
+    }
+  }, [user.id])
 
   const setUserInformationFields = (userData) => {
     for (let key in userData) {
@@ -169,6 +170,8 @@ const UserProfileMobile = (props) => {
   useEffect(() => {
     fetchUserData();
     fetchPublishedForms();
+    fetchSignedUpForms();
+    fetchUnignedUpForms();
   }, []);
 
   const inputBox = {
