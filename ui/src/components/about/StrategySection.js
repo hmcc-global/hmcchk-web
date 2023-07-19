@@ -12,7 +12,7 @@ const StrategySection = (props) => {
   const { title, blurb } = props;
   return (
     <Flex w="100%" direction="column">
-      <Box pt={[4, 6]} pb={[4, 6]} w="100%">
+      <Box py={[4, 6]} w="100%">
         <Heading
           as="h3"
           fontSize={['3xl', '5xl']}
