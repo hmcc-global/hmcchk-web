@@ -1,6 +1,36 @@
 import { Box, SimpleGrid, Stack, Link, Text } from '@chakra-ui/react';
-import { Link as HashLink } from 'react-router-dom';
 import * as React from 'react';
+import LinkList from './footerLinks.json';
+
+const LinkItem = (linkText, href, target = '_self', fontWeight = '400') => {
+  return (
+    <Link href={href}>
+      <Text fontWeight={fontWeight} target={target}>
+        {linkText}
+      </Text>
+    </Link>
+  );
+};
+
+const LinkCollection = (linkListItem) => {
+  // Ternary operator, if there's children make children
+  // else use empty array so nothing appears when the array is deconstructed
+  let children = linkListItem['children']
+    ? linkListItem['children'].map((item) => {
+        return LinkItem(item['linkText'], item['href'], item['target']);
+      })
+    : [];
+
+  return [
+    <Link
+      href={linkListItem['href']}
+      target={linkListItem['target'] ? linkListItem['target'] : '_self'}
+    >
+      <Text fontWeight="bold">{linkListItem['linkText']}</Text>
+    </Link>,
+    ...children,
+  ];
+};
 
 export function LinkGrid() {
   return (
@@ -12,63 +42,18 @@ export function LinkGrid() {
     >
       <Stack spacing="10">
         <Stack>
-          <Link href="/visit-us">
-            <Text fontWeight="bold">Visit</Text>
-          </Link>
-
-          <Link href="/online">Church online</Link>
-          <Link href="/connect">
-            <Text fontWeight="bold">Connect</Text>
-          </Link>
-          <HashLink to={{ pathname: '/connect', hash: '#ministries' }}>
-            Ministries
-          </HashLink>
-          <HashLink to={{ pathname: '/connect', hash: '#lifegroup' }}>
-            <Text>LIFE Groups</Text>
-          </HashLink>
+          {LinkCollection(LinkList[1])}
+          {LinkCollection(LinkList[2])}
         </Stack>
         <Stack>
-          <Link href="https://hongkong.sub.hmcc.net/privacy-policy-2/">
-            <Text fontWeight="bold">Privacy Policy</Text>
-          </Link>
-          <Link href="/give">
-            <Text fontWeight="bold">Give</Text>
-          </Link>
-          <Link href="/events">
-            <Text fontWeight="bold">Events</Text>
-          </Link>
-          <Link href="/sermons">
-            <Text fontWeight="bold">Sermons</Text>
-          </Link>
+          {LinkCollection(LinkList[3])}
+          {LinkCollection(LinkList[4])}
+          {LinkCollection(LinkList[5])}
+          {LinkCollection(LinkList[6])}
         </Stack>
       </Stack>
       <Box>
-        <Stack>
-          <Link href="/about-us">
-            <Text fontWeight="bold">About</Text>
-          </Link>
-          <Link href="/about-us#our-story">
-            <Text>Our Story</Text>
-          </Link>
-          <Link href="/about-us#vision-mission">
-            <Text>{'Vision & Mission'}</Text>
-          </Link>
-          <Link href="/about-us#values">
-            <Text>Our Values</Text>
-          </Link>
-          <Link href="/about-us#strategy">
-            <Text>Our Strategy</Text>
-          </Link>
-          <Link href="/about-us#staff">
-            <Text>Our Staff</Text>
-          </Link>
-          <Link href="/about-us#beliefs">
-            <Text>Beliefs</Text>
-          </Link>
-          <Link href="/about-us#missions">
-            <Text>Our Heart for Missions</Text>
-          </Link>
-        </Stack>
+        <Stack>{LinkCollection(LinkList[0])}</Stack>
       </Box>
     </SimpleGrid>
   );
