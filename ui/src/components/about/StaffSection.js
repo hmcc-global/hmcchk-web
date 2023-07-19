@@ -72,15 +72,13 @@ const StaffSection = (props) => {
                 })}
 
               <Box fontSize="md">
-                <Text color="black" paddingTop="1em">
-                  {blurb.kim[0]}
-                </Text>
-                <Text color="black" paddingTop="1em">
-                  {blurb.kim[1]}
-                </Text>
-                <Text color="black" paddingTop="1em">
-                  {blurb.kim[2]}
-                </Text>
+                {[blurb.kim[0], blurb.kim[1], blurb.kim[2]].map((item) => {
+                  return (
+                    <Text color="black" paddingTop="1em">
+                      {item}
+                    </Text>
+                  );
+                })}
               </Box>
             </Box>
           </Stack>
