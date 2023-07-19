@@ -127,11 +127,7 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
     : '';
   const getLatestSermon = async () => {
     try {
-      const res = await axios.get('/api/live-sermon/get-live-sermon', {
-        params: {
-          isPublished: true,
-        },
-      });
+      const res = await axios.get('/api/live-sermon/get-live-sermon');
 
       if (res.status === 200 && res.data && res.data.length !== 0) {
         setIsOnline(true);

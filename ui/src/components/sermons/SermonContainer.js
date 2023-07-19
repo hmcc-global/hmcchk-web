@@ -20,11 +20,8 @@ const SermonContainer = (props) => {
 
   const checkIfLive = async () => {
     try {
-      const { data } = await axios.get('/api/live-sermon/get-live-sermon', {
-        params: {
-          isPublished: true,
-        },
-      });
+      const { data } = await axios.get('/api/live-sermon/get-live-sermon',);
+      console.log(data)
       return data;
     } catch (err) {
       console.log(err);
