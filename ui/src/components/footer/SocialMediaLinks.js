@@ -6,7 +6,7 @@ export function SocialMediaLinks() {
   return (
     <Box>
       <Box w="300px">
-        <Text textAlign="left">Follow us</Text>
+        <Text textAlign={['center', 'left']}>Follow us</Text>
         <HStack>
           <SocialIcon
             target="_blank"

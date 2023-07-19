@@ -11,7 +11,6 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import testimoniesList from './irl-testimonies.json';
 import LifeGroupCard from './LifeGroupCard';
 import lifeGroupList from './lifegroups.json';
 import OurMinistries from './OurMinistries';
@@ -21,7 +20,7 @@ import './_connect.scss';
 
 const LifeGroups = (props) => {
   return (
-    <Box id="#lifegroup">
+    <Box id="lifegroup">
       <Heading
         as="h2"
         fontSize={['2.25em', '3em', '4em']}
@@ -34,7 +33,14 @@ const LifeGroups = (props) => {
         <span style={{ color: '#7DABFC' }}>F</span>
         <span style={{ color: '#FEDD64' }}>E</span> GROUPS
       </Heading>
-      <AspectRatio maxW="100%" ratio={16 / 9} mb={10}>
+      <AspectRatio
+        maxW="100%"
+        ratio={16 / 9}
+        mb={10}
+        borderRadius="20"
+        borderWidth="1px"
+        overflow="hidden"
+      >
         <iframe
           src="https://www.youtube.com/embed/tainVHwAWt0"
           title="YouTube video player"
@@ -71,19 +77,29 @@ const LifeGroups = (props) => {
               style={{ backgroundOrigin: 'border-box' }}
               as="button"
               transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
-              boxShadow="2px 1000px 1px #fff inset"
+              boxShadow={['none', '2px 1000px 1px #fff inset']}
               boxSizing="border-box"
               border="solid 3px transparent"
               borderRadius={10}
               backgroundImage="linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(to right, #fd7b7e, #3182ce)"
-              backgroundClip="content-box, border-box"
+              backgroundSize="100%"
+              backgroundClip="border-clip, text"
               py={2}
-              w={['95%', 350]}
+              w={['75%', 350]}
               fontSize={['0.75em', '1.125em']}
-              _hover={{ boxShadow: 'none', color: '#fff' }}
+              fontWeight="600"
+              _hover={{ boxShadow: 'none' }}
               target="_blank"
             >
-              <LinkOverlay href="https://bit.ly/summerLG2023" target="_blank">
+              <LinkOverlay
+                href="https://bit.ly/summerLG2023"
+                target="_blank"
+                backgroundImage="linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(to right, #fd7b7e, #3182ce)"
+                backgroundSize="100%"
+                backgroundClip="text"
+                color={['white', 'transparent']}
+                _hover={{ color: 'white' }}
+              >
                 TRY OUT A LIFE GROUP
               </LinkOverlay>
             </LinkBox>

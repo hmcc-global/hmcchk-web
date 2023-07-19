@@ -26,15 +26,16 @@ const PictureStory = ({ image, text }) => {
 const StorySection = (props) => {
   const { title, blurb } = props;
   return (
-    <Flex direction="column" maxW="container.lg">
+    <Flex direction="column" maxW="container.lg" px={[3, 0]}>
       <Heading
         as="h2"
-        fontSize={['2xl', '6xl']}
+        fontSize={['3xl', '5xl']}
         fontWeight={700}
         lineHeight={1}
         color="#0628A3"
         textAlign="center"
         mb={5}
+        id="our-story"
       >
         {title}
       </Heading>

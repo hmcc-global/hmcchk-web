@@ -1,11 +1,11 @@
-import { Box, Button, Flex, Heading, Link, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Link, Text } from '@chakra-ui/react';
 
 const ExperienceHmcc = (props) => {
   return (
     <Box>
       <Heading
         as="h2"
-        fontSize={["2.25em", "3em", "4em"]}
+        fontSize={['2.25em', '3em', '4em']}
         fontWeight={800}
         textAlign="center"
         mb={[0, 4]}
@@ -24,28 +24,39 @@ const ExperienceHmcc = (props) => {
           color="white"
           textAlign="center"
           px={[8, 10]}
-          py={[8, 16]}
+          pt={[8, 20]}
+          pb={[8, 14]}
           m={2}
         >
-          <Text fontSize={["0.75em", "1.5em"]} fontWeight={600}>
+          <Text fontSize={['0.85em', '1.25em']} fontWeight={[400, 700]}>
             Every Sunday at 10AM
           </Text>
-          <Heading as="h2" fontSize={["1.125em", "2.5em"]} fontWeight={700}>
+          <Heading fontSize={['1.25em', '2.25em']} fontWeight={[700, 900]}>
             Sunday Celebration
           </Heading>
-          <Text fontSize={["0.75em", "1.5em"]} fontWeight={600} mb={[4, 6]}>
+          <Text
+            fontSize={['0.85em', '1.25em']}
+            fontWeight={[400, 700]}
+            mb={[4, 6]}
+          >
             Worship In-person and Online
           </Text>
           <Button
             as={Link}
-            size="sm"
+            size="md"
             href="/visit-us"
             variant="outline"
             w={[200, 240]}
             borderRadius={10}
-            fontSize={["0.75em", "1.125em"]}
+            backdropFilter="blur(10px)"
+            fontSize={['0.85em', '1.125em']}
+            _hover={{
+              bgColor: 'white',
+              color: 'black',
+              textDecoration: 'none',
+            }}
           >
-            Learn more {">"}
+            Learn more
           </Button>
         </Box>
         <Box
@@ -59,28 +70,40 @@ const ExperienceHmcc = (props) => {
           color="white"
           textAlign="center"
           px={[8, 10]}
-          py={[8, 16]}
+          pt={[8, 20]}
+          pb={[8, 14]}
+          // py={[8, 16]}
           m={2}
         >
-          <Text fontSize={["0.75em", "1.5em"]} fontWeight={600}>
+          <Text fontSize={['0.85em', '1.25em']} fontWeight={[400, 700]}>
             Learn about our
           </Text>
-          <Heading as="h2" fontSize={["1.125em", "2.5em"]} fontWeight={700}>
+          <Heading fontSize={['1.25em', '2.25em']} fontWeight={[700, 900]}>
             Upcoming Events
           </Heading>
-          <Text fontSize={["0.75em", "1.5em"]} fontWeight={600} mb={[4, 6]}>
+          <Text
+            fontSize={['0.85em', '1.25em']}
+            fontWeight={[400, 700]}
+            mb={[4, 6]}
+          >
             and get connected!
           </Text>
           <Button
             as={Link}
-            size="sm"
+            size="md"
             href="/events"
             variant="outline"
             w={[200, 240]}
             borderRadius={10}
-            fontSize={["0.75em", "1.125em"]}
+            backdropFilter="blur(10px)"
+            fontSize={['0.85em', '1.125em']}
+            _hover={{
+              bgColor: 'white',
+              color: 'black',
+              textDecoration: 'none',
+            }}
           >
-            Check them out {">"}
+            Check them out
           </Button>
         </Box>
       </Flex>
