@@ -116,11 +116,18 @@ const AboutUsContainer = (props) => {
                     <Text
                       color="rgba(255, 255, 255, 1)"
                       fontWeight={600}
-                      textDecoration="none"
-                      borderBottom="rgba(255, 255, 255, 1) 0.1em solid"
+                      // textDecoration={selected === i ? 'underline' : 'none'}
+                      borderBottom={
+                        selected === i
+                          ? 'rgba(255, 255, 255, 1) 0.1em solid'
+                          : 'none'
+                      }
                       cursor="pointer"
                       fontSize={{ md: 'small', lg: 'sm' }}
                       onClick={() => setSelected(i)}
+                      _hover={{
+                        borderBottom: 'rgba(255, 255, 255, 1) 0.1em solid',
+                      }}
                     >
                       {e}
                     </Text>

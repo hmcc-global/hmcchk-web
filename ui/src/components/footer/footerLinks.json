@@ -1,0 +1,36 @@
+[
+  {
+    "linkText": "About",
+    "href": "/about-us",
+    "children": [
+      { "linkText": "Our Story", "href": "/about-us#our-story" },
+      { "linkText": "Vision & Mission", "href": "/about-us#vision-mission" },
+      { "linkText": "Our Values", "href": "/about-us#values" },
+      { "linkText": "Our Strategy", "href": "/about-us#strategy" },
+      { "linkText": "Our Staff", "href": "/about-us#staff" },
+      { "linkText": "Beliefs", "href": "/about-us#beliefs" },
+      { "linkText": "Our Heart for Missions", "href": "/about-us#missions" }
+    ]
+  },
+  {
+    "linkText": "Visit",
+    "href": "/visit-us",
+    "children": [{ "linkText": "Church online", "href": "/online" }]
+  },
+  {
+    "linkText": "Connect",
+    "href": "/connect",
+    "children": [
+      { "linkText": "Ministries", "href": "/connect#ministries" },
+      { "linkText": "LIFE Groups", "href": "/connect#lifegroup" }
+    ]
+  },
+  { "linkText": "Events", "href": "/events" },
+  { "linkText": "Sermons", "href": "/sermons" },
+  { "linkText": "Give", "href": "/give" },
+  {
+    "linkText": "Privacy Policy",
+    "href": "https://hongkong.sub.hmcc.net/privacy-policy-2/",
+    "target": "_blank"
+  }
+]

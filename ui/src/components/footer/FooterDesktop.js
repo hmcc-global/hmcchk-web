@@ -51,6 +51,7 @@ const FooterDesktop = (props) => {
               colorScheme="white"
               as={Link}
               href="https://hmcc.tv"
+              target="_blank"
             >
               <Text px="5" fontWeight="700">
                 HMCC.TV

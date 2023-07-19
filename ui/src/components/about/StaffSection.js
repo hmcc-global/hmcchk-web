@@ -61,13 +61,16 @@ const StaffSection = (props) => {
               <Text color="#0628A3" fontSize="2xl" fontWeight="bold">
                 {blurb.kim.title}
               </Text>
-              <Text color="black" fontSize="lg" fontWeight="bold">
-                {blurb.kim.position.split('\n')[0]}
-                <br />
-                {blurb.kim.position.split('\n')[1]}
-                <br />
-                {blurb.kim.position.split('\n')[2]}
-              </Text>
+              {blurb.kim.position &&
+                blurb.kim.position.split('\n').map((item) => {
+                  return (
+                    <Text color="black" fontSize="lg" fontWeight="bold">
+                      {item}
+                      <br />
+                    </Text>
+                  );
+                })}
+
               <Box fontSize="md">
                 <Text color="black" paddingTop="1em">
                   {blurb.kim[0]}
