@@ -43,8 +43,6 @@ const lifegroupList = [
   'Asia Missions Project Team',
 ];
 
-
-
 const districtList = [
   'Not Applicable',
   'Islands',
@@ -342,6 +340,8 @@ const paymentMethodList = [
   'Bank Transfer',
 ];
 
+const eventIntervalList = ['None', 'Daily', 'Weekly', 'Monthly'];
+
 export {
   accessTypeList,
   lifestageList,
@@ -352,4 +352,5 @@ export {
   campusList,
   countryList,
   paymentMethodList,
+  eventIntervalList,
 };
