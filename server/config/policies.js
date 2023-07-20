@@ -46,6 +46,8 @@ module.exports.policies = {
   'forms/post-delete-form': ['isLoggedIn', 'aboveTech'],
   'forms/admin-get-form': ['isLoggedIn', 'aboveTech'],
   'forms/get-form': true,
+  'forms/get-signedup-form': ['isLoggedIn'],
+  'forms/get-unsignedup-form': ['isLoggedIn'],
   'forms/post-create-submission': true,
   'forms/get-submission': ['isLoggedIn', 'aboveTech'],
   'forms/get-user-submission': ['isLoggedIn'],

@@ -1,8 +1,8 @@
 module.exports = {
-  friendlyName: 'Get signed up form route for public use',
+  friendlyName: 'Get not signed up form route for public use',
 
   description:
-    'Gets all signed up forms from specified user id, but checks if the form is published',
+    'Gets all forms from specified user id that the user have not signed up for, but checks if the form is published',
 
   inputs: {
     userId: {
@@ -41,8 +41,12 @@ module.exports = {
         isDeleted: false,
       });
 
+      //find the forms that the user have signed up for
       const sub = data.map( s => formData.find( i => i.id === s.formId ))
+
+      //filter out ther forms that the user have signed up for
       const final = formData.filter((i) => !sub.includes(i))
+
       // If no form is found return error
       if (final === null) return exits.error('unauthorized access');
 
