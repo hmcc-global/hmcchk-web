@@ -180,10 +180,10 @@ export default function AdminLiveSermonContainer(props) {
 
   const getData = useCallback(async () => {
     try {
-      // Hardcoded to always get the latest sermon if it exists, if not returns empty array
+      // Hardcoded to always get the latest sermon if it exists, if not returns empty array for actual database
       const { data } = await axios.get('/api/live-sermon/get-live-sermon', {
         params: {
-          sermonId: 'Sermon',
+          sermonId: "635487c446187f591b0fb15a",
         },
       });
       if (data && data[0]) {
