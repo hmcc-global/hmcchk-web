@@ -24,7 +24,9 @@ import {
   GridItem,
   Textarea,
   useToast,
+  Select,
 } from '@chakra-ui/react';
+import { eventIntervalList } from '../../helpers/lists';
 
 const AnnouncementEditorModal = (props) => {
   const {
@@ -53,6 +55,7 @@ const AnnouncementEditorModal = (props) => {
   const [eventStartTime, setEventStartTime] = useState(null);
   const [eventEndDate, setEventEndDate] = useState(null);
   const [eventEndTime, setEventEndTime] = useState(null);
+  const [eventInterval, setEventInterval] = useState('None'); // ['Daily', 'Weekly', 'Monthly', 'None'
   const [datePeriodInvalid, setDatePeriodInvalid] = useState(false);
   const [formId, setFormId] = useState(null);
   const [signUpUrl, setSignUpUrl] = useState(null);
@@ -73,6 +76,7 @@ const AnnouncementEditorModal = (props) => {
     setValue('eventStartTime', null);
     setValue('eventEndDate', null);
     setValue('eventEndTime', null);
+    setValue('eventInterval', 'None');
     setValue('formId', null);
     setValue('formSignupLink', null);
     setValue('additionalNotes', null);
@@ -90,6 +94,7 @@ const AnnouncementEditorModal = (props) => {
     setEventStartTime(null);
     setEventEndDate(null);
     setEventEndTime(null);
+    setEventInterval('None');
     setFormId(null);
     setSignUpUrl(null);
     setAdditionalNotes(null);
@@ -112,6 +117,7 @@ const AnnouncementEditorModal = (props) => {
       setValue('eventStartTime', data.eventStartTime);
       setValue('eventEndDate', data.eventEndDate);
       setValue('eventEndTime', data.eventEndTime);
+      setValue('eventInterval', data.eventInterval);
       setValue('formId', data.formId);
       setValue('signUpUrl', data.signUpUrl);
       setValue('additionalNotes', data.additionalNotes);
@@ -129,6 +135,7 @@ const AnnouncementEditorModal = (props) => {
       setEventStartTime(data.eventStartTime);
       setEventEndDate(data.eventEndDate);
       setEventEndTime(data.eventEndTime);
+      setEventInterval(data.eventInterval);
       setFormId(data.formId);
       setSignUpUrl(data.signUpUrl);
       setAdditionalNotes(data.additionalNotes);
@@ -170,6 +177,7 @@ const AnnouncementEditorModal = (props) => {
         eventStartTime,
         eventEndDate,
         eventEndTime,
+        eventInterval,
         formId,
         signUpUrl,
         additionalNotes,
@@ -382,6 +390,23 @@ const AnnouncementEditorModal = (props) => {
                       </FormControl>
                     </GridItem>
                   </Grid>
+
+                  <FormControl>
+                    <FormLabel>Event interval</FormLabel>
+                    <FormHelperText>
+                      If the event is recurring (e.g. Sunday Celebration),
+                      please set an interval. If not, leave it as 'None'.
+                    </FormHelperText>
+                    <Select
+                      id="eventInterval"
+                      {...register('eventInterval')}
+                      onChange={(e) => setEventInterval(e.target.value)}
+                    >
+                      {eventIntervalList.map((interval) => {
+                        return <option value={interval}>{interval}</option>;
+                      })}
+                    </Select>
+                  </FormControl>
 
                   <FormControl>
                     <FormLabel>Location</FormLabel>
