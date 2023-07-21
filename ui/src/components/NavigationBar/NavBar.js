@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Flex,
   Center,
@@ -24,6 +24,8 @@ import {
   LinkOverlay,
   useDisclosure,
   HStack,
+  IconButton,
+  VStack,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../reducers/userSlice';
@@ -31,10 +33,11 @@ import { customAxios as axios } from '../helpers/customAxios';
 import MainMenu from './MainMenu';
 import { useHistory } from 'react-router-dom';
 import WitnessBanner from '../witness/WitnessBanner';
+import { BsFillPersonFill } from 'react-icons/bs';
 
 const NavBar = (props) => {
   const [isLive, setIsLive] = useState(false);
-  const isHomePage = useHistory().location.pathname === "/";
+  const isHomePage = useHistory().location.pathname === '/';
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const user = useSelector((state) => state.user);
@@ -64,16 +67,15 @@ const NavBar = (props) => {
       setUserObj(data);
     } catch (err) {
       console.log(err);
-    } 
+    }
   };
 
   const checkIfLive = async () => {
     try {
-      const { data } = await axios.get('/api/live-sermon/get-live-sermon', 
-      {
+      const { data } = await axios.get('/api/live-sermon/get-live-sermon', {
         params: {
-          isPublished: true
-        }
+          isPublished: true,
+        },
       });
       if (data && data[0]) {
         setIsLive(true);
@@ -81,7 +83,7 @@ const NavBar = (props) => {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -102,6 +104,21 @@ const NavBar = (props) => {
     }
   }, [userObj]);
 
+  const [yPosition, setYPosition] = useState(0);
+
+  useEffect(() => {
+    const position = document.querySelector('#main-container');
+    const handleScroll = () => {
+      setYPosition(position.scrollTop);
+    };
+    position.addEventListener('scroll', handleScroll);
+
+    return () => {
+      position.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
   return (
     <>
       <Flex background="rgba(0, 0, 0, 0.4)">
@@ -118,9 +135,10 @@ const NavBar = (props) => {
               justify="space-between"
               align="center"
               fontSize={{ md: 'x-small', lg: 'smaller', xl: 'small' }}
-              h={{ base: '5vh', md: '7vh', lg: '7vh', xl: '8.5vh' }}
+              h={{ md: '7vh', lg: '7vh', xl: '8.5vh' }}
+              display={{ base: 'none', md: 'flex' }}
             >
-              <HStack spacing={5}>
+              <HStack spacing={5} display={{ base: 'none', md: 'flex' }}>
                 <LinkBox>
                   <LinkOverlay href="/">
                     <Image
@@ -341,7 +359,7 @@ const NavBar = (props) => {
                     )}
                   </Box>
                 )}
-                <Box>
+                <Box display={{ base: 'none', md: 'flex' }}>
                   <Button
                     ref={btnRef}
                     onClick={onOpen}
@@ -356,6 +374,92 @@ const NavBar = (props) => {
                   </Button>
                 </Box>
               </Stack>
+            </Flex>
+            <Flex
+              display={{ base: 'flex', md: 'none' }}
+              justify="space-between"
+              align="center"
+              h="5vh"
+              position="relative"
+            >
+              <Box>
+                <Button
+                  ref={btnRef}
+                  onClick={onOpen}
+                  style={{ background: 'none' }}
+                >
+                  <Image
+                    w="1.5em"
+                    minW="1.5em"
+                    src={process.env.PUBLIC_URL + '/images/menu.svg'}
+                    alt="Menu Button"
+                  />
+                </Button>
+              </Box>
+              <Box>
+                <Box
+                  transition="opacity 0.5s"
+                  style={{ opacity: Math.max((yPosition - 100) / 400, 0) }}
+                >
+                  <LinkBox>
+                    <LinkOverlay href="/">
+                      <Text color="#ffffff" fontSize="x-small" textAlign="center">
+                        Harverst Mission Community Church
+                      </Text>
+                    </LinkOverlay>
+                  </LinkBox>
+                </Box>
+                <Box
+                  transition="opacity 0.5s"
+                  style={{
+                    opacity: Math.max(1 - yPosition / 400, 0),
+                  }}
+                  position="absolute"
+                  top="50%"
+                  left="50%"
+                  transform="translate(-50%, -50%)"
+                >
+                  <LinkBox>
+                    <LinkOverlay href="/">
+                      <Image
+                        w="3.5em"
+                        minW="3.5em"
+                        src={process.env.PUBLIC_URL + '/images/ripple.svg'}
+                        alt="Logo of HMCC"
+                      />
+                    </LinkOverlay>
+                  </LinkBox>
+                </Box>
+              </Box>
+              <Box>
+                <HStack>
+                  {isLive ? (
+                    <Link href="/online" style={{ lineHeight: '0' }}>
+                      <Button
+                        h="6"
+                        paddingLeft="2"
+                        paddingRight="3"
+                        style={liveScStyle}
+                        lineHeight="0"
+                        borderRadius="8"
+                        fontSize="x-small"
+                      >
+                        &bull; Live
+                      </Button>
+                    </Link>
+                  ) : null}
+                  <LinkBox>
+                    <LinkOverlay href="/profile">
+                      <IconButton
+                        colorScheme="transparent"
+                        onClick={onClose}
+                        fontSize="20px"
+                        icon={<BsFillPersonFill />}
+                      ></IconButton>
+                    </LinkOverlay>
+                  </LinkBox>
+                </HStack>
+              </Box>
             </Flex>
           </Container>
         </Flex>

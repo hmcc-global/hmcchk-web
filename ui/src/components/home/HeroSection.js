@@ -32,7 +32,7 @@ const HeroSection = ({ anchorTarget }) => {
         as="video"
         ref={vidRef}
         w="full"
-        h={['92vh', '96vh']}
+        h={['85vh', '96vh']}
         src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
         loop
         muted
@@ -117,6 +117,7 @@ const HeroSection = ({ anchorTarget }) => {
                     background: 'rgba(27, 53, 102, 0.8)',
                   }}
                   padding={{ base: '0px', md: '8px' }}
+                  borderRadius="7px"
                 >
                   <Text
                     color="white"

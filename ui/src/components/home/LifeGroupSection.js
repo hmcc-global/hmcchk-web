@@ -56,9 +56,11 @@ const LifeGroupSection = () => {
           >
             <Heading
               as="h5"
-              fontSize={['0.9em', '1.5em']}
+              fontSize={['1.875em', '1.5em']}
               alignSelf={['baseline']}
               color="#505050"
+              fontWeight="semibold"
+              fontFamily="Inter"
             >
               {lg.section}
             </Heading>
@@ -77,6 +79,7 @@ const LifeGroupSection = () => {
               fontSize={['2em', '4.5em']}
               color="#0628A3"
               alignSelf={['baseline']}
+              fontWeight="bold"
             >
               {lg.title}
             </Heading>
@@ -84,18 +87,20 @@ const LifeGroupSection = () => {
               {lg.text}
             </Text>
             <Button
-              alignSelf={['center', 'baseline']}
-              bg="rgb(0, 0, 0, 0)"
+              alignSelf={['start', 'baseline']}
+              bg={["","#0628A3"]}
               variant="outline"
-              color="#0628A3"
+              color={["#0628A3","#ffffff"]}
               borderColor="#0628A3"
+              borderWidth="2px"
               w={['45%', '38.2%']}
               _hover={{
-                bg: '#0628A3',
-                color: 'white',
-                borderColor: 'white',
+                bg: 'white',
+                color: '#0628A3',
+                borderColor: '#0628A3',
                 textDecoration: 'none',
               }}
+              fontSize="1.2em"
             >
               <Link to={{ pathname: '/connect', hash: '#lifegroup' }}>
                 {buttonText}

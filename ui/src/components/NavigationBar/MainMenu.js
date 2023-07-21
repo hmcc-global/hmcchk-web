@@ -54,19 +54,19 @@ const MainMenu = ({ login, onClose }) => {
                   About
                 </Text>
               </Link>
-              <Link href="/about-us">
+              <Link href="/about-us#our-story">
                 <Text fontSize="18px">Our Story</Text>
               </Link>
-              <Link href="/about-us">
+              <Link href="/about-us#vision-mission">
                 <Text fontSize="18px">{'Vision & Mission'}</Text>
               </Link>
-              <Link href="/about-us">
+              <Link href="/about-us#values">
                 <Text fontSize="18px">Our Values</Text>
               </Link>
-              <Link href="/about-us">
+              <Link href="/about-us#strategy">
                 <Text fontSize="18px">Our Strategy</Text>
               </Link>
-              <Link href="/about-us">
+              <Link href="/about-us#staff">
                 <Text fontSize="18px">Our Staff</Text>
               </Link>
               <Link href="/about-us">
@@ -97,24 +97,7 @@ const MainMenu = ({ login, onClose }) => {
                   Events
                 </Text>
               </Link>
-              <HashLink
-                to={{ pathname: '/events', hash: '#sundayCelebration' }}
-                onClick={onClose}
-              >
-                <Text fontSize="18px">Upcoming Sunday Celebration</Text>
-              </HashLink>
-              <HashLink
-                to={{ pathname: '/events', hash: '#churchActivities' }}
-                onClick={onClose}
-              >
-                <Text fontSize="18px">Church-wide Activities</Text>
-              </HashLink>
-              <HashLink
-                to={{ pathname: '/events', hash: '#classes' }}
-                onClick={onClose}
-              >
-                <Text fontSize="18px">Upcoming Classes</Text>
-              </HashLink>
+              
               <Link href="/sermons">
                 <Text fontWeight="bold" fontSize="40px">
                   Sermons
@@ -140,9 +123,15 @@ const MainMenu = ({ login, onClose }) => {
                   variant="outline"
                   colorScheme="black"
                   width="200px"
+                  color="#ffffff"
+                  borderColor="#ffffff"
                 >
                   <LinkBox>
-                    <Button marginBottom="5" width="96%" left="2">
+                    <Button 
+                      marginBottom="5" 
+                      width="96%" 
+                      left="2"
+                    >
                       <LinkOverlay href="/profile" onClick={onClose}>
                         MY PROFILE
                       </LinkOverlay>
@@ -160,16 +149,20 @@ const MainMenu = ({ login, onClose }) => {
                   </LinkBox>
                   <LinkBox>
                     <Button
-                      width="100%"
-                      style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
-                    >
-                      <LinkOverlay
-                        href="https://forms.gle/6jasxuLNZt5MVXAy8"
-                        target="_blank"
+                        width="100%"
+                        style={{
+                          WebkitMarginStart: '0',
+                          marginInlineStart: '0',
+                        }}
                       >
-                        Prayer Requests
-                      </LinkOverlay>
-                    </Button>
+                        <LinkOverlay
+                          href="https://hmcc.tv"
+                          target="_blank"
+                          onClick={onClose}
+                        >
+                          HMCC TV
+                        </LinkOverlay>
+                      </Button>
                   </LinkBox>
                 </ButtonGroup>
               ) : (
@@ -181,6 +174,8 @@ const MainMenu = ({ login, onClose }) => {
                   variant="outline"
                   colorScheme="black"
                   width="200px"
+                  color="#ffffff"
+                  borderColor="#ffffff"
                 >
                   <LinkBox>
                     <Button marginBottom="5" width="96%" left="2">
@@ -202,13 +197,17 @@ const MainMenu = ({ login, onClose }) => {
                   <LinkBox>
                     <Button
                       width="100%"
-                      style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
+                      style={{
+                        WebkitMarginStart: '0',
+                        marginInlineStart: '0',
+                      }}
                     >
                       <LinkOverlay
-                        href="https://forms.gle/6jasxuLNZt5MVXAy8"
+                        href="https://hmcc.tv"
                         target="_blank"
+                        onClick={onClose}
                       >
-                        Prayer Requests
+                        HMCC TV
                       </LinkOverlay>
                     </Button>
                   </LinkBox>
@@ -391,11 +390,16 @@ const MainMenu = ({ login, onClose }) => {
                       flexDirection="column"
                       size="md"
                       variant="outline"
-                      colorScheme="black"
                       width="200px"
+                      color="#ffffff"
+                      borderColor="#ffffff"
                     >
                       <LinkBox>
-                        <Button marginBottom="5" width="96%" left="2">
+                        <Button 
+                          marginBottom="5" 
+                          width="96%" 
+                          left="2" 
+                        >
                           <LinkOverlay href="/profile" onClick={onClose}>
                             MY PROFILE
                           </LinkOverlay>
@@ -423,11 +427,11 @@ const MainMenu = ({ login, onClose }) => {
                           }}
                         >
                           <LinkOverlay
-                            href="https://forms.gle/6jasxuLNZt5MVXAy8"
+                            href="https://hmcc.tv"
                             target="_blank"
                             onClick={onClose}
                           >
-                            Prayer Requests
+                            HMCC TV
                           </LinkOverlay>
                         </Button>
                       </LinkBox>
@@ -437,11 +441,16 @@ const MainMenu = ({ login, onClose }) => {
                       flexDirection="column"
                       size="md"
                       variant="outline"
-                      colorScheme="black"
                       width="200px"
+                      color="#ffffff"
+                      borderColor="#ffffff"
                     >
                       <LinkBox>
-                        <Button marginBottom="5" width="96%" left="2">
+                        <Button 
+                          marginBottom="5" 
+                          width="96%" 
+                          left="2"
+                        >
                           <LinkOverlay href="/login" onClick={onClose}>
                             LOGIN
                           </LinkOverlay>
@@ -471,11 +480,11 @@ const MainMenu = ({ login, onClose }) => {
                           }}
                         >
                           <LinkOverlay
-                            href="https://forms.gle/6jasxuLNZt5MVXAy8"
+                            href="https://hmcc.tv"
                             target="_blank"
                             onClick={onClose}
                           >
-                            Prayer Requests
+                            HMCC TV
                           </LinkOverlay>
                         </Button>
                       </LinkBox>
@@ -530,46 +539,6 @@ const MainMenu = ({ login, onClose }) => {
                       </AccordionPanel>
                     </AccordionItem>
                   </Accordion>
-                </Box>
-                <Box className="social-media">
-                  <Center h="100%" w="100%" color="white" marginTop="10px">
-                    <SocialIcon
-                      bgColor="transparent"
-                      fgColor="#ffffff"
-                      url="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q"
-                      target="_blank"
-                    />
-                    <SocialIcon
-                      bgColor="transparent"
-                      fgColor="#ffffff"
-                      url="https://www.instagram.com/hmcc_hk/?hl=en"
-                      target="_blank"
-                    />
-                    <SocialIcon
-                      bgColor="transparent"
-                      fgColor="#ffffff"
-                      url="https://open.spotify.com/user/hmccofhk?si=bd64100596904a95"
-                      target="_blank"
-                    />
-                    <SocialIcon
-                      bgColor="transparent"
-                      fgColor="#ffffff"
-                      url="https://www.facebook.com/hmccofhk/"
-                      target="_blank"
-                    />
-                    <SocialIcon
-                      bgColor="transparent"
-                      fgColor="#ffffff"
-                      url="https://twitter.com/hmcc_hk?lang=en"
-                      target="_blank"
-                    />
-                    <SocialIcon
-                      bgColor="transparent"
-                      fgColor="#ffffff"
-                      url="https://vimeo.com/hmcchk"
-                      target="_blank"
-                    />
-                  </Center>
                 </Box>
               </VStack>
             </Flex>

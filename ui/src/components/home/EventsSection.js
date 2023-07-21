@@ -166,7 +166,7 @@ const EventsSection = () => {
       w="full"
       h="auto"
       direction="column"
-      background="#172848"
+      background="#172842"
       alignItems="center"
       paddingTop="2em"
       paddingBottom="2em"
@@ -174,7 +174,7 @@ const EventsSection = () => {
     >
       <Container
         maxW="container.lg"
-        justifyContent="center"
+        justifyContent={["flex-start","center"]}
         display="flex"
         marginTop="2em"
         ref={marginRef}
@@ -200,8 +200,8 @@ const EventsSection = () => {
               _hover={{ textDecoration: 'none' }}
             >
               <Button
-                color="#A5CBFF"
-                background="transparent"
+                color={["#A5CBFF","#172848"]}
+                background={["","#A5CBFF"]}
                 border="2px solid #A5CBFF"
                 borderRadius="7px"
                 display={{ base: 'none', md: 'block' }}
@@ -246,14 +246,16 @@ const EventsSection = () => {
       </Box>
       <Button
         display={{ base: 'block', md: 'none' }}
-        width="15em"
+        width="10em"
         color="#A5CBFF"
         marginTop="2em"
-        background="transparent"
+        background="#172848"
         border="2px solid #A5CBFF"
         borderRadius="7px"
-        alignSelf="center"
+        alignSelf="start"
+        ml="5%"
         mb="10%"
+        fontSize="1.2em"
       >
         <LinkOverlay href="/events">See All Events</LinkOverlay>
       </Button>
