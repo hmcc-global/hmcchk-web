@@ -12,13 +12,19 @@ const getStartDate = (eventData) => {
       ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
 };
 
+const getNumberOfDaysInMonth = (date) => {
+  let month =  date.getMonth() + 1;
+  let year = date.getFullYear();
+  return new Date(year, month, 0).getDate()
+}
+
 const getRenderDate = (startDate, endDate, interval) => {
   // parse the interval to number
   let recur = interval === "Daily" ? 1 : 
               interval === "Weekly" ? 7 : 
-              interval === "Monthly" ? 30 :
+              interval === "Monthly" ? getNumberOfDaysInMonth(startDate) :
               interval === "None" ? 0 : 0;
-
+              
   let start = DateTime.fromISO(startDate);
   let end = DateTime.fromISO(endDate);
 
