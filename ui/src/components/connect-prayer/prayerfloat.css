@@ -1,3 +1,36 @@
 .prayer-float-btn:hover .content {
-    right: 25px;
+  right: 25px;
+}
+
+@media (min-height: 650px) {
+  .prayerposition {
+    position: 'absolute';
+    bottom: 7rem;
+    z-index: 999;
+  }
+}
+/* Target screen devices with viewport height more than 720px and widths between 390px to 420px such as 
+Samsung Galaxy S8+
+*/
+
+@media (min-height: 650px) and (min-width: 350px) and (max-width: 370px) {
+  .prayerposition {
+    position: 'absolute';
+    bottom: 10rem;
+    z-index: 999;
+  }
+}
+/* Target screen devices with viewport height more than 720px and widths between 390px to 420px such as 
+Iphone XR, 
+Iphone 12 Pro,
+Samsung Galaxy S20 Ultra,
+Pixel 5
+Samsung Galaxy A51/A71
+*/
+@media (min-height: 720px) and (min-width: 390px) and (max-width: 420px) {
+  .prayerposition {
+    position: 'absolute';
+    bottom: 20rem;
+    z-index: 999;
+  }
 }

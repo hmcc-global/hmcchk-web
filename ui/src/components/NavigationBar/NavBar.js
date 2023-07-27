@@ -448,7 +448,7 @@ const NavBar = (props) => {
                     </Link>
                   ) : null}
                   <LinkBox>
-                    <LinkOverlay href="/profile">
+                    <LinkOverlay href="/login">
                       <IconButton
                         colorScheme="transparent"
                         onClick={onClose}
