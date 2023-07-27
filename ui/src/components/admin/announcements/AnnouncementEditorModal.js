@@ -49,8 +49,8 @@ const AnnouncementEditorModal = (props) => {
   const [imageAdUrl, setImageAdUrl] = useState(null);
   const [location, setLocation] = useState(null);
   const [directionsUrl, setDirectionsUrl] = useState(null);
-  const [displayStartDateTime, setDisplayStartDateTime] = useState(null);
-  const [displayEndDateTime, setDisplayEndDateTime] = useState(null);
+  const [displayStartDateTime, setDisplayStartDateTime] = useState(undefined);
+  const [displayEndDateTime, setDisplayEndDateTime] = useState(undefined);
   const [eventStartDate, setEventStartDate] = useState(null);
   const [eventStartTime, setEventStartTime] = useState(null);
   const [eventEndDate, setEventEndDate] = useState(null);
@@ -70,8 +70,8 @@ const AnnouncementEditorModal = (props) => {
     setValue('imageAdUrl', null);
     setValue('location', null);
     setValue('directionsUrl', null);
-    setValue('displayStartDateTime', null);
-    setValue('displayEndDateTime', null);
+    setValue('displayStartDateTime', undefined);
+    setValue('displayEndDateTime', undefined);
     setValue('eventStartDate', null);
     setValue('eventStartTime', null);
     setValue('eventEndDate', null);
@@ -88,8 +88,8 @@ const AnnouncementEditorModal = (props) => {
     setImageAdUrl(null);
     setLocation(null);
     setDirectionsUrl(null);
-    setDisplayStartDateTime(null);
-    setDisplayEndDateTime(null);
+    setDisplayStartDateTime(undefined);
+    setDisplayEndDateTime(undefined);
     setEventStartDate(null);
     setEventStartTime(null);
     setEventEndDate(null);

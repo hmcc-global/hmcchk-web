@@ -27,6 +27,7 @@ import {
 } from '@chakra-ui/icons';
 import AnnouncementEditorModal from './AnnouncementEditorModal';
 import { DateTime } from 'luxon';
+import { getRenderDate } from '../../helpers/eventsHelpers';
 
 export default function AdminAnnouncementContainer(props) {
   const toast = useToast();
@@ -49,22 +50,22 @@ export default function AdminAnnouncementContainer(props) {
       // TODO: filter out announcements that are current and past accordingly
       if (isCurrentAnnouncements) {
         const current = data.filter((item) => {
-          if (item.endDate) {
-            return DateTime.fromISO(item.endDate) > today;
+          if (item.eventEndDate) {
+            return DateTime.fromISO(item.eventEndDate) > today;
           }
-          if (item.startDate) {
-            return DateTime.fromISO(item.startDate) > today;
+          if (item.eventStartDate) {
+            return DateTime.fromISO(item.eventStartDate) > today;
           }
           return true;
         });
         setAnnouncementList(current);
       } else {
         const past = data.filter((item) => {
-          if (item.endDate) {
-            return DateTime.fromISO(item.endDate) < today;
+          if (item.eventEndDate) {
+            return DateTime.fromISO(item.eventEndDate) < today;
           }
-          if (item.startDate) {
-            return DateTime.fromISO(item.startDate) < today;
+          if (item.eventStartDate) {
+            return DateTime.fromISO(item.eventStartDate) < today;
           }
           return false;
         });
@@ -259,9 +260,12 @@ export default function AdminAnnouncementContainer(props) {
     return true;
   };
 
-  const showProperDate = (startDate, endDate) => {
+  const showProperDate = (startDate, endDate, interval) => {
     if (startDate && endDate) {
       return `${startDate} - ${endDate}`;
+    }
+    if (startDate && !endDate) {
+      return startDate.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
     }
     if (!startDate && !endDate) {
       return '-';
@@ -322,15 +326,16 @@ export default function AdminAnnouncementContainer(props) {
                     <Text>
                       <CalendarIcon /> Date:{' '}
                       {showProperDate(
-                        announcementItem.startDate,
-                        announcementItem.endDate
+                        announcementItem.eventStartDate,
+                        announcementItem.eventEndDate,
+                        announcementItem.eventInterval
                       )}
                     </Text>
                     <Text>
                       <TimeIcon /> Time:{' '}
                       {showProperTime(
-                        announcementItem.startTime,
-                        announcementItem.endTime
+                        announcementItem.eventStartTime,
+                        announcementItem.eventEndTime
                       )}
                     </Text>
                     <Text>
