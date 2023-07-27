@@ -35,12 +35,12 @@ const getRenderDate = (startDate, endDate, interval) => {
   let end = DateTime.fromISO(endDate);
 
   let diffInDays = end.diff(start, 'days').toObject();
-  let nRecurrence = recur !== 0 ? Math.floor(diffInDays.days / interval) : 0;
+  let nRecurrence = recur !== 0 ? Math.floor(diffInDays.days / recur) : 0;
 
   let renderDate = startDate;
 
   for (let i = 0; i <= nRecurrence; i++) {
-    renderDate = start.plus({ days: interval * i });
+    renderDate = start.plus({ days: recur * i });
     if (DateTime.now() < renderDate) break;
   }
   return renderDate;
