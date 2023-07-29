@@ -97,7 +97,7 @@ const MainMenu = ({ login, onClose }) => {
                   Events
                 </Text>
               </Link>
-              
+
               <Link href="/sermons">
                 <Text fontWeight="bold" fontSize="40px">
                   Sermons
@@ -127,11 +127,7 @@ const MainMenu = ({ login, onClose }) => {
                   borderColor="#ffffff"
                 >
                   <LinkBox>
-                    <Button 
-                      marginBottom="5" 
-                      width="96%" 
-                      left="2"
-                    >
+                    <Button marginBottom="5" width="96%" left="2">
                       <LinkOverlay href="/profile" onClick={onClose}>
                         MY PROFILE
                       </LinkOverlay>
@@ -149,20 +145,20 @@ const MainMenu = ({ login, onClose }) => {
                   </LinkBox>
                   <LinkBox>
                     <Button
-                        width="100%"
-                        style={{
-                          WebkitMarginStart: '0',
-                          marginInlineStart: '0',
-                        }}
+                      width="100%"
+                      style={{
+                        WebkitMarginStart: '0',
+                        marginInlineStart: '0',
+                      }}
+                    >
+                      <LinkOverlay
+                        href="https://hmcc.tv"
+                        target="_blank"
+                        onClick={onClose}
                       >
-                        <LinkOverlay
-                          href="https://hmcc.tv"
-                          target="_blank"
-                          onClick={onClose}
-                        >
-                          HMCC TV
-                        </LinkOverlay>
-                      </Button>
+                        HMCC TV
+                      </LinkOverlay>
+                    </Button>
                   </LinkBox>
                 </ButtonGroup>
               ) : (
@@ -332,7 +328,7 @@ const MainMenu = ({ login, onClose }) => {
                         fontWeight="bold"
                         fontSize="2xl"
                       >
-                        <Link href="/connect#ministries" onClick={onClose}>
+                        <Link href="/connect" onClick={onClose}>
                           Connect
                         </Link>
                       </Box>
@@ -395,11 +391,7 @@ const MainMenu = ({ login, onClose }) => {
                       borderColor="#ffffff"
                     >
                       <LinkBox>
-                        <Button 
-                          marginBottom="5" 
-                          width="96%" 
-                          left="2" 
-                        >
+                        <Button marginBottom="5" width="96%" left="2">
                           <LinkOverlay href="/profile" onClick={onClose}>
                             MY PROFILE
                           </LinkOverlay>
@@ -446,11 +438,7 @@ const MainMenu = ({ login, onClose }) => {
                       borderColor="#ffffff"
                     >
                       <LinkBox>
-                        <Button 
-                          marginBottom="5" 
-                          width="96%" 
-                          left="2"
-                        >
+                        <Button marginBottom="5" width="96%" left="2">
                           <LinkOverlay href="/login" onClick={onClose}>
                             LOGIN
                           </LinkOverlay>
