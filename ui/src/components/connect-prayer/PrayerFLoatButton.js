@@ -17,6 +17,7 @@ const PrayerFloatButton = (props) => {
       className="prayerposition"
       position="absolute"
       right={['2rem', '3rem']}
+      bottom={['5.5rem', '6.5rem']}
       overflow="hidden"
       zIndex={999}
     >

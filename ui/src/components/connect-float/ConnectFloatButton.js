@@ -13,6 +13,7 @@ const ConnectFloatButton = (props) => {
       className="connectposition"
       position="absolute"
       right={['2rem', '3rem']}
+      bottom={['2rem', '3rem']}
       overflow="hidden"
       zIndex={999}
     >
