@@ -315,6 +315,10 @@ const AnnouncementEditorModal = (props) => {
                     <GridItem>
                       <FormControl>
                         <FormLabel>Announcement Display Start Date</FormLabel>
+                        <FormHelperText>
+                          If the announcement is for web/mobile, please input
+                          this field otherwise the announcement will not show
+                        </FormHelperText>
                       </FormControl>
                       <Input
                         id="displayStartDateTime"
@@ -328,6 +332,10 @@ const AnnouncementEditorModal = (props) => {
                     <GridItem>
                       <FormControl>
                         <FormLabel>Announcement Display End Date</FormLabel>
+                        <FormHelperText>
+                          If the announcement is for web/mobile, please input
+                          this field otherwise the announcement will not show
+                        </FormHelperText>
                       </FormControl>
                       <Input
                         id="displayEndDateTime"

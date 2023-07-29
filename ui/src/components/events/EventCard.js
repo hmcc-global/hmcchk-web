@@ -39,7 +39,7 @@ const EventCard = (props) => {
   const onClose = (e) => {
     setIsOpen(false);
   };
-
+  console.log(eventData)
   return (
     <>
       <Box
@@ -58,7 +58,7 @@ const EventCard = (props) => {
           <Heading as="h4" mb="5" size="lg" fontWeight="900" isTruncated>
             {eventData.title}
           </Heading>
-          {eventData.displayStartDateTime && eventData.displayEndDateTime && eventData.eventInterval && (
+          {eventData.eventStartDate && eventData.eventEndDate && (
             <Text fontSize={['sm', 'lg']} fontWeight="bold">
               <Icon mr={2} as={RiCalendarEventFill} />
               Date:{' '}
