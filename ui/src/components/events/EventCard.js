@@ -149,9 +149,8 @@ const EventCard = (props) => {
           )}
           <ModalBody ml={[0, 16]} mr={[0, 16]}>
             <Box>
-              {eventData.displayStartDateTime &&
-                eventData.displayEndDateTime &&
-                eventData.eventInterval && (
+              {eventData.eventStartDate &&
+                eventData.eventEndDate && (
                   <Text fontSize={['sm', 'md']} fontWeight="bold">
                     <Icon mr={2} as={RiCalendarEventFill} />
                     Date:{' '}
