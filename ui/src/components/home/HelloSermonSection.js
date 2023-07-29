@@ -59,7 +59,7 @@ const HelpCard = (props) => {
         C
         backdropFilter="blur(4px)"
         width="100%"
-        height="220"
+        height={['auto', '220']}
         bgSize="cover"
         padding="6%"
         bgPosition="center center"

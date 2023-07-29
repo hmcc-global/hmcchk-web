@@ -403,7 +403,7 @@ const NavBar = (props) => {
                         fontSize="x-small"
                         textAlign="center"
                       >
-                        Harverst Mission Community Church
+                        Harvest Mission Community Church
                       </Text>
                     </LinkOverlay>
                   </LinkBox>
