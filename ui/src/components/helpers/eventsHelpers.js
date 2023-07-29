@@ -40,7 +40,7 @@ const getRenderDate = (startDate, endDate, interval, startTime) => {
   let renderDate = startDate;
 
   //if there is a set time, add the interval after the event time
-  if(startTime !== undefined){
+  if(startTime !== ""){
     renderDate = start.plus(DateTime.fromISO(startTime) - DateTime.fromISO("00:00"));
   }
 
