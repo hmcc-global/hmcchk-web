@@ -18,7 +18,7 @@ const getNumberOfDaysInMonth = (date) => {
   return new Date(year, month, 0).getDate();
 };
 
-const getRenderDate = (startDate, endDate, interval) => {
+const getRenderDate = (startDate, endDate, interval, startTime) => {
   // parse the interval to number
   let recur =
     interval === 'Daily'
@@ -39,9 +39,14 @@ const getRenderDate = (startDate, endDate, interval) => {
 
   let renderDate = startDate;
 
+  //if there is a set time, add the interval after the event time
+  if(startTime !== undefined){
+    renderDate = start.plus(DateTime.fromISO(startTime) - DateTime.fromISO("00:00"));
+  }
+
   for (let i = 0; i <= nRecurrence; i++) {
-    renderDate = start.plus({ days: recur * i });
     if (DateTime.now() < renderDate) break;
+    renderDate = start.plus({ days: recur * i });
   }
   return renderDate;
 };

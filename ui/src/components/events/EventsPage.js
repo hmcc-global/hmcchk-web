@@ -31,11 +31,12 @@ const EventsPage = (props) => {
         const filteredEndDate = data.filter((item) => {
           if (item.displayEndDateTime) {
             // Add one day to offset end date to end of day
-            let endDate = new DateTime.fromISO(item.displayEndDateTime).plus({ days: 1 });
+            let endDate = new DateTime.fromISO(item.displayEndDateTime);
             const renderDate = getRenderDate(
               item.eventStartDate,
               item.eventEndDate,
-              item.eventInterval
+              item.eventInterval,
+              item.eventStartTime
             );
             item.renderDate = renderDate;
             return endDate > DateTime.now();

@@ -40,7 +40,7 @@ const EventCard = (props) => {
   const onClose = (e) => {
     setIsOpen(false);
   };
-  console.log(eventData);
+  console.log(eventData)
   return (
     <>
       <Box
@@ -63,7 +63,7 @@ const EventCard = (props) => {
           <Heading as="h4" mb="5" size="lg" fontWeight="900" isTruncated>
             {eventData.title}
           </Heading>
-          {eventData.eventStartDate && eventData.eventEndDate && (
+          {eventData.eventStartDate && (
             <Text fontSize={['sm', 'lg']} fontWeight="bold">
               <Icon mr={2} as={RiCalendarEventFill} />
               Date:{' '}
@@ -74,14 +74,29 @@ const EventCard = (props) => {
                 : getRenderDate(
                     eventData.eventStartDate,
                     eventData.eventEndDate,
-                    eventData.eventInterval
+                    eventData.eventInterval,
+                    eventData.eventStartTime
                   ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
+              {eventData.eventEndDate &&
+                getRenderDate(
+                  eventData.eventStartDate,
+                  eventData.eventEndDate,
+                  eventData.eventInterval,
+                  eventData.eventStartTime
+                ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY) !==
+                  DateTime.fromISO(eventData.eventEndDate).toLocaleString(
+                    DateTime.DATE_MED_WITH_WEEKDAY
+                  ) &&
+                ' - ' +
+                  DateTime.fromISO(eventData.eventEndDate).toLocaleString(
+                    DateTime.DATE_MED_WITH_WEEKDAY
+                  )}
             </Text>
           )}
           {eventData.eventStartTime && (
             <Text fontSize={['sm', 'lg']} fontWeight="bold">
               <Icon mr={2} as={BsClockFill} />
-              Time: {eventData.eventStartTime}
+              Time: {eventData.eventStartTime}{(eventData.eventEndTime && eventData.eventStartTime !== eventData.eventEndTime) ? " - " + eventData.eventEndTime : ""}
             </Text>
           )}
           {eventData.location && (
@@ -171,12 +186,26 @@ const EventCard = (props) => {
                         eventData.eventEndDate,
                         eventData.eventInterval
                       ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
+                  {eventData.eventEndDate &&
+                    getRenderDate(
+                      eventData.eventStartDate,
+                      eventData.eventEndDate,
+                      eventData.eventInterval,
+                      eventData.eventStartTime
+                    ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY) !==
+                      DateTime.fromISO(eventData.eventEndDate).toLocaleString(
+                        DateTime.DATE_MED_WITH_WEEKDAY
+                      ) &&
+                    ' - ' +
+                      DateTime.fromISO(eventData.eventEndDate).toLocaleString(
+                        DateTime.DATE_MED_WITH_WEEKDAY
+                      )}
                 </Text>
               )}
               {eventData.eventStartTime && (
                 <Text fontSize={['sm', 'md']} fontWeight="bold">
                   <Icon mr={2} as={BsClockFill} />
-                  Time: {eventData.eventStartTime}
+                  Time: {eventData.eventStartTime}{(eventData.eventEndTime && eventData.eventStartTime !== eventData.eventEndTime) ? " - " + eventData.eventEndTime : ""}
                 </Text>
               )}
               {eventData.location && (
