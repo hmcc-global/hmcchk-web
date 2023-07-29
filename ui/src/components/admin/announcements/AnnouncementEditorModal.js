@@ -48,7 +48,7 @@ const AnnouncementEditorModal = (props) => {
   const [description, setDescription] = useState(null);
   const [imageAdUrl, setImageAdUrl] = useState(null);
   const [location, setLocation] = useState(null);
-  const [directionsUrl, setDirectionsUrl] = useState(null);
+  const [directionsUrl, setDirectionsUrl] = useState(undefined);
   const [displayStartDateTime, setDisplayStartDateTime] = useState(undefined);
   const [displayEndDateTime, setDisplayEndDateTime] = useState(undefined);
   const [eventStartDate, setEventStartDate] = useState(null);
@@ -57,9 +57,9 @@ const AnnouncementEditorModal = (props) => {
   const [eventEndTime, setEventEndTime] = useState(null);
   const [eventInterval, setEventInterval] = useState('None'); // ['Daily', 'Weekly', 'Monthly', 'None'
   const [datePeriodInvalid, setDatePeriodInvalid] = useState(false);
-  const [formId, setFormId] = useState(null);
+  const [formId, setFormId] = useState(undefined);
   const [signUpUrl, setSignUpUrl] = useState(null);
-  const [additionalNotes, setAdditionalNotes] = useState(null);
+  const [additionalNotes, setAdditionalNotes] = useState(undefined);
 
   const resetAnnouncementEditorCallback = () => {
     reset();
@@ -69,7 +69,7 @@ const AnnouncementEditorModal = (props) => {
     setValue('description', null);
     setValue('imageAdUrl', null);
     setValue('location', null);
-    setValue('directionsUrl', null);
+    setValue('directionsUrl', undefined);
     setValue('displayStartDateTime', undefined);
     setValue('displayEndDateTime', undefined);
     setValue('eventStartDate', null);
@@ -77,9 +77,9 @@ const AnnouncementEditorModal = (props) => {
     setValue('eventEndDate', null);
     setValue('eventEndTime', null);
     setValue('eventInterval', 'None');
-    setValue('formId', null);
+    setValue('formId', undefined);
     setValue('formSignupLink', null);
-    setValue('additionalNotes', null);
+    setValue('additionalNotes', undefined);
 
     setTitle(null);
     setIsInWeb(false);
@@ -87,7 +87,7 @@ const AnnouncementEditorModal = (props) => {
     setDescription(null);
     setImageAdUrl(null);
     setLocation(null);
-    setDirectionsUrl(null);
+    setDirectionsUrl(undefined);
     setDisplayStartDateTime(undefined);
     setDisplayEndDateTime(undefined);
     setEventStartDate(null);
@@ -95,9 +95,9 @@ const AnnouncementEditorModal = (props) => {
     setEventEndDate(null);
     setEventEndTime(null);
     setEventInterval('None');
-    setFormId(null);
+    setFormId(undefined);
     setSignUpUrl(null);
-    setAdditionalNotes(null);
+    setAdditionalNotes(undefined);
     setIsOpen(false);
     announcementListCallback();
   };
