@@ -311,7 +311,10 @@ const AnnouncementEditorModal = (props) => {
                     </Stack>
                   </FormControl>
 
-                  <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+                  <Grid
+                    templateColumns={['repeat(1,1fr)', 'repeat(2, 1fr)']}
+                    gap={6}
+                  >
                     <GridItem>
                       <FormControl>
                         <FormLabel>Announcement Display Start Date</FormLabel>

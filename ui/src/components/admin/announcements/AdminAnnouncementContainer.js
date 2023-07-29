@@ -322,7 +322,10 @@ export default function AdminAnnouncementContainer(props) {
                 </Box>
                 <Stack direction="column" spacing={1}>
                   <Heading size="md">{announcementItem.title}</Heading>
-                  <Grid templateColumns="repeat(2, 1fr)" gap={1}>
+                  <Grid
+                    templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)']}
+                    gap={1}
+                  >
                     <Text>
                       <CalendarIcon /> Date:{' '}
                       {showProperDate(
