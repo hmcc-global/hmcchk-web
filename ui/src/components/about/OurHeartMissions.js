@@ -150,7 +150,7 @@ const MissionSection = (props) => {
                 text="Send me"
               ></Picture>
               <Picture
-                image={`/images/about/transformasphere.png`}
+                image={`/images/about/transformasphere.svg`}
                 year="2017"
                 text="Transformasphere"
               ></Picture>
