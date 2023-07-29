@@ -174,7 +174,7 @@ const EventsSection = () => {
     >
       <Container
         maxW="container.lg"
-        justifyContent={["flex-start","center"]}
+        justifyContent={['flex-start', 'center']}
         display="flex"
         marginTop="2em"
         ref={marginRef}
@@ -200,14 +200,15 @@ const EventsSection = () => {
               _hover={{ textDecoration: 'none' }}
             >
               <Button
-                color={["#A5CBFF","#172848"]}
-                background={["","#A5CBFF"]}
+                color="#A5CBFF"
+                background="transparent"
                 border="2px solid #A5CBFF"
                 borderRadius="7px"
                 display={{ base: 'none', md: 'block' }}
                 fontWeight="700"
                 padding="6px 24px"
                 boxSizing="content-box"
+                _hover={{ background: '#A5CBFF', color: '#172848' }}
               >
                 {allEventsText}
               </Button>

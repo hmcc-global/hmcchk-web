@@ -88,15 +88,15 @@ const LifeGroupSection = () => {
             </Text>
             <Button
               alignSelf={['start', 'baseline']}
-              bg={["","#0628A3"]}
+              bg="white"
               variant="outline"
-              color={["#0628A3","#ffffff"]}
+              color="#0628A3"
               borderColor="#0628A3"
               borderWidth="2px"
               w={['45%', '38.2%']}
               _hover={{
-                bg: 'white',
-                color: '#0628A3',
+                bg: '#0628A3',
+                color: 'white',
                 borderColor: '#0628A3',
                 textDecoration: 'none',
               }}

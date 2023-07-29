@@ -18,7 +18,7 @@ const HelpCardInfo = [
     title: "I'm New",
     text: 'Connect with us',
     image: 'im-new-bg.png',
-    titleStyle: { color: 'green', fontFamily:'Inter' },
+    titleStyle: { color: 'green', fontFamily: 'Inter' },
     textStyle: { color: 'black' },
     path: '/connect',
   },
@@ -41,7 +41,6 @@ const HelpCardInfo = [
 ];
 
 const HelpCard = (props) => {
-
   const [mdHeadingSize, setMdHeadingSize] = useState('2.5rem');
   const [mdTitleSize, setMdTitleSize] = useState('1.5rem');
 
@@ -56,7 +55,8 @@ const HelpCard = (props) => {
             : `linear-gradient(0deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.22)), url(${
                 process.env.PUBLIC_URL + '/images/home/' + props.image
               })`
-        }C
+        }
+        C
         backdropFilter="blur(4px)"
         width="100%"
         height="220"
@@ -96,7 +96,7 @@ const HelpCard = (props) => {
             {props.text}
           </Text>
         </VStack>
-      </Link> 
+      </Link>
       <Box
         style={{
           background: '#9E9E9E',
@@ -188,7 +188,7 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
                 alignSelf="flex-start"
                 color="#0628A3"
                 fontSize={{ base: '1.5625em', md: '4xl' }}
-                fontWeight={["bold","600"]}
+                fontWeight={['bold', '600']}
                 fontFamily="Inter"
               >
                 How can we help you?
@@ -218,9 +218,9 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
               padding={{ base: '3rem 0.5rem', md: '5rem 2rem' }}
               gap={4}
             >
-              <Heading 
-                color="white" 
-                alignSelf="flex-start" 
+              <Heading
+                color="white"
+                alignSelf="flex-start"
                 fontWeight={600}
                 fontSize="30px"
               >
@@ -270,14 +270,18 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
                 gap="10px"
                 border="2px solid #A5CBFF"
                 borderRadius="7px"
-                background={["","#A5CBFF"]}
-                color={["#A5CBFF","#172848"]}
+                background="transparent"
+                color="#A5CBFF"
                 marginTop="7%"
                 as={ReactLink}
                 to={{ pathname: '/sermons' }}
                 fontFamily="Inter"
                 fontWeight="semibold"
                 fontSize="1.2em"
+                _hover={{
+                  bg: '#A5CBFF',
+                  color: '#172848',
+                }}
               >
                 {isOnline ? 'Watch HMCC LIVE' : 'See All Past Sermons'}
               </Button>
