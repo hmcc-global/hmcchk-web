@@ -184,7 +184,8 @@ const EventCard = (props) => {
                     : getRenderDate(
                         eventData.eventStartDate,
                         eventData.eventEndDate,
-                        eventData.eventInterval
+                        eventData.eventInterval,
+                        eventData.eventStartTime
                       ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
                   {eventData.eventEndDate &&
                     getRenderDate(
