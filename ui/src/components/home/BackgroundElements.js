@@ -7,7 +7,7 @@ const BackgroundElements = () => {
       <Image
         boxSize={'100%'}
         position="absolute"
-        right={'45em'}
+        right={'30em'}
         src={`${process.env.PUBLIC_URL}/images/home/blue-background-desktop.svg`}
         w={['40%']}
         display={['none', 'block']}

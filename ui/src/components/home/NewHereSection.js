@@ -67,6 +67,7 @@ const NewHereSection = () => {
         background="#EEF7FF"
         style={{ backdropFilter: 'blur(7px)' }}
       >
+        <BackgroundElements />
         <Container
           maxW="container.xl"
           justifyContent="center"
