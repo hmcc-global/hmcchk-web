@@ -97,22 +97,35 @@ const EventsSection = () => {
   };
   const populateData = async () => {
     try {
-      const { data } = await axios.get('/api/announcements/get-announcements');
-      const filtered = data.filter((item) => {
-        if (item.endDate) {
-          let endDate = new DateTime.fromISO(item.endDate).plus({ days: 1 });
-          const renderDate = getRenderDate(
-            item.startDate,
-            item.endDate,
-            item.recurrence
-          );
-          item.renderDate = renderDate;
-          return endDate > DateTime.now();
-        } else return false;
-      });
-      filtered.sort((a, b) => (a.renderDate > b.renderDate ? 1 : -1));
-      let upcoming = filtered.slice(0, 5);
-      setEvents(upcoming);
+      const { data, status } = await axios.get(
+        '/api/announcement/get'
+      );
+      if (status === 200) {
+        const filtered = data.filter((item) => {
+          if(item.displayEndDateTime === null ){
+            return true;
+          } else return false;
+        });
+        const filteredEndDate = data.filter((item) => {
+          if (item.displayEndDateTime) {
+            // Add one day to offset end date to end of day
+            let endDate = new DateTime.fromISO(item.displayEndDateTime);
+            const renderDate = getRenderDate(
+              item.eventStartDate,
+              item.eventEndDate,
+              item.eventInterval,
+              item.eventStartTime
+            );
+            item.renderDate = renderDate;
+            return endDate > DateTime.now();
+          }  else return false;
+        });
+        filteredEndDate.sort((a, b) => (a.renderDate > b.renderDate ? 1 : -1));
+        filtered.push(...filteredEndDate);
+        setEvents([...filtered]);
+      } else {
+        throw Error('Something went wrong with the request');
+      }
     } catch (err) {
       console.log(err);
     }

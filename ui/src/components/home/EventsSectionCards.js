@@ -71,11 +71,11 @@ const EventsSectionCard = (props) => {
   };
 
   const getStartEndDateStr = (eventData) => {
-    if (!eventData || !eventData.startDate || !eventData.endDate)
+    if (!eventData || !eventData.eventStartDate || !eventData.eventEndDate)
       return '';
 
-    const renderDate = getRenderDate(eventData.startDate, eventData.endDate, eventData.recurrence);
-    const endDate = DateTime.fromISO(eventData.endDate);
+    const renderDate = getRenderDate(eventData.eventStartDate, eventData.eventEndDate, eventData.eventInterval);
+    const endDate = DateTime.fromISO(eventData.eventEndDate);
 
     if (!renderDate.isValid || !endDate.isValid)
       return '';
@@ -86,7 +86,6 @@ const EventsSectionCard = (props) => {
 
     return `${renderDate.toFormat(dateFormat)} - ${endDate.toFormat(dateFormat)}`;
   }
-
   return (
     <>
       <Box borderRadius={10} w={width} h={height} mx={4}>
@@ -98,7 +97,7 @@ const EventsSectionCard = (props) => {
             cursor="pointer"
             zIndex={5}
           >
-            <Image borderRadius={10} objectFit="cover" src={event.imageUrl} />
+            <Image borderRadius={10} objectFit="cover" src={event.imageAdUrl} />
           </AspectRatio>
           <VStack alignItems="flex-start" width="100%">
             <Heading
@@ -127,7 +126,7 @@ const EventsSectionCard = (props) => {
             <Image
               borderTopLeftRadius="20"
               borderTopRightRadius="20"
-              src={event.imageUrl}
+              src={event.imageAdUrl}
               objectFit="cover"
             />
           </AspectRatio>
@@ -144,24 +143,24 @@ const EventsSectionCard = (props) => {
           )}
           <ModalBody ml={[0, 16]} mr={[0, 16]}>
             <Box>
-              {event.startDate && event.endDate && event.recurrence && (
+              {event.eventStartDate && event.eventEndDate && event.eventInterval && (
                 <>
                   <Text fontSize={['sm', 'md']} fontWeight="bold">
                     <Icon mr={2} as={RiCalendarEventFill} />
                     Start Date: {getStartDate(event)}
                   </Text>
                   <EndDateElement
-                    startDateStr={event.startDate}
-                    endDateStr={event.endDate}
-                    interval={event.recurrence}
+                    startDateStr={event.eventStartDate}
+                    endDateStr={event.eventEndDate}
+                    interval={event.eventInterval}
                     isModal
                   />
                 </>
               )}
-              {event.time && (
+              {event.eventStartTime && (
                 <Text fontSize={['sm', 'md']} fontWeight="bold">
                   <Icon mr={2} as={BsClockFill} />
-                  Time: {event.time}
+                  Time: {event.eventStartTime}
                 </Text>
               )}
               {event.location && (
@@ -188,8 +187,8 @@ const EventsSectionCard = (props) => {
                 flex={[false, 1]}
                 as={Link}
                 target="_blank"
-                href={event.mapLink ? event.mapLink : null}
-                isDisabled={event.mapLink.length <= 0}
+                href={event.directionsUrl ? event.directionsUrl : null}
+                isDisabled={event.directionsUrl.length <= 0}
                 size="sm"
               >
                 Directions
@@ -199,8 +198,8 @@ const EventsSectionCard = (props) => {
                 mt={[2, 0]}
                 as={Link}
                 target="_blank"
-                href={event.signUpLink ? event.signUpLink : null}
-                isDisabled={event.signUpLink.length <= 0}
+                href={event.signUpUrl ? event.signUpUrl : null}
+                isDisabled={event.signUpUrl.length <= 0}
                 size="sm"
               >
                 Sign up

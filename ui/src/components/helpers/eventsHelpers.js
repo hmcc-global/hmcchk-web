@@ -12,11 +12,6 @@ const getStartDate = (eventData) => {
       ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
 };
 
-const getNumberOfDaysInMonth = (date) => {
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
-  return new Date(year, month, 0).getDate();
-};
 
 const getRenderDate = (startDate, endDate, interval, startTime) => {
   // parse the interval to number
@@ -39,8 +34,10 @@ const getRenderDate = (startDate, endDate, interval, startTime) => {
   let renderDate = startDate;
 
   //if there is a set time, add the interval after the event time
-  if(startTime !== ""){
-    renderDate = start.plus(DateTime.fromISO(startTime) - DateTime.fromISO("00:00"));
+  if (startTime !== '' && startTime !== undefined) {
+    renderDate = start.plus(
+      DateTime.fromISO(startTime) - DateTime.fromISO('00:00')
+    );
   }
 
   for (let i = 0; i <= nRecurrence; i++) {
@@ -55,27 +52,28 @@ const filterISOStringForGoogleCalendar = (isoString) => {
 };
 
 const generateGoogleCalendarLink = (eventData) => {
-  if (!eventData.time || !eventData.title) return null;
-  let eventTime = eventData.time;
+  if (
+    !eventData.eventStartTime ||
+    !eventData.title ||
+    eventData.eventStartTime === '' ||
+    eventData.eventStartTime === undefined
+  )
+    return null;
+  let eventTime = eventData.eventStartTime;
   const baseLink = 'https://calendar.google.com/calendar/r/eventedit?';
   const eventTitle = 'text=' + encodeURIComponent(eventData.title);
 
   if (!eventData.renderDate) {
     eventData.renderDate = getRenderDate(
-      eventData.startDate,
-      eventData.endDate,
-      eventData.recurrence
+      eventData.eventStartDate,
+      eventData.eventEndDate,
+      eventData.eventInterval
     );
   }
 
   let eventDate = DateTime.fromISO(eventData.renderDate.toISO());
 
-  let parsed = DateTime.fromFormat(eventTime, 'h:mm a');
-
-  let today = DateTime.now().startOf('day');
-  let timeOfDay = parsed.diff(today);
-
-  eventDate = eventDate.plus(timeOfDay);
+  eventDate = eventDate.plus(DateTime.fromISO(eventTime) - DateTime.fromISO('00:00'));
 
   let startTime = filterISOStringForGoogleCalendar(eventDate.toISO());
   let endTime = eventDate.plus({ hours: 2 });
