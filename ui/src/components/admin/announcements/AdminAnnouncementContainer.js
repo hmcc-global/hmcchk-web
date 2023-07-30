@@ -53,8 +53,8 @@ export default function AdminAnnouncementContainer(props) {
           if (item.eventEndDate) {
             return DateTime.fromISO(item.eventEndDate) > today;
           }
-          if (item.eventStartDate) {
-            return DateTime.fromISO(item.eventStartDate) > today;
+          if (item.eventStartDate && !item.eventEndDate) {
+            return DateTime.fromISO(item.eventStartDate) < today;
           }
           return true;
         });
@@ -63,9 +63,6 @@ export default function AdminAnnouncementContainer(props) {
         const past = data.filter((item) => {
           if (item.eventEndDate) {
             return DateTime.fromISO(item.eventEndDate) < today;
-          }
-          if (item.eventStartDate) {
-            return DateTime.fromISO(item.eventStartDate) < today;
           }
           return false;
         });
