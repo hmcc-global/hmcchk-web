@@ -2,7 +2,14 @@ import { Image, Box } from '@chakra-ui/react';
 
 const BackgroundElements = () => {
   return (
-    <Box h="100%" position="absolute" top="0" zIndex="-1" w="100%">
+    <Box
+      h="100%"
+      position="absolute"
+      top="0"
+      zIndex="-1"
+      w="100%"
+      overflow={'hidden'}
+    >
       {/* Desktop */}
       <Image
         boxSize={'100%'}
