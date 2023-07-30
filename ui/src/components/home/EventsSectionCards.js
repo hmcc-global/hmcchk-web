@@ -25,7 +25,12 @@ import { BsClockFill } from 'react-icons/bs';
 import { ImLocation2 } from 'react-icons/im';
 import { DateTime } from 'luxon';
 import parse, { domToReact, attributesToProps } from 'html-react-parser';
-import { generateGoogleCalendarLink, getStartDate, getRenderDate, EndDateElement } from '../helpers/eventsHelpers';
+import {
+  generateGoogleCalendarLink,
+  getStartDate,
+  getRenderDate,
+  EndDateElement,
+} from '../helpers/eventsHelpers';
 import { useState } from 'react';
 
 const EventsSectionCard = (props) => {
@@ -71,27 +76,44 @@ const EventsSectionCard = (props) => {
   };
 
   const getStartEndDateStr = (eventData) => {
-    if (!eventData || !eventData.eventStartDate || !eventData.eventEndDate)
-      return '';
-
-    const renderDate = getRenderDate(eventData.eventStartDate, eventData.eventEndDate, eventData.eventInterval);
-    const endDate = DateTime.fromISO(eventData.eventEndDate);
-
-    if (!renderDate.isValid || !endDate.isValid)
-      return '';
-
-    const dateFormat = 'dd MMM yyyy';
-    if (renderDate.equals(endDate))
-      return renderDate.toFormat(dateFormat);
-
-    return `${renderDate.toFormat(dateFormat)} - ${endDate.toFormat(dateFormat)}`;
-  }
+    return (
+      <>
+        {eventData.renderDate
+          ? eventData.renderDate.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)
+          : getRenderDate(
+              eventData.eventStartDate,
+              eventData.eventEndDate,
+              eventData.eventInterval,
+              eventData.eventStartTime
+            ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
+        {eventData.eventEndDate &&
+          getRenderDate(
+            eventData.eventStartDate,
+            eventData.eventEndDate,
+            eventData.eventInterval,
+            eventData.eventStartTime
+          ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY) !==
+            DateTime.fromISO(eventData.eventEndDate).toLocaleString(
+              DateTime.DATE_MED_WITH_WEEKDAY
+            ) &&
+          eventData.eventInterval === 'None' &&
+          ' - ' +
+            DateTime.fromISO(eventData.eventEndDate).toLocaleString(
+              DateTime.DATE_MED_WITH_WEEKDAY
+            )}{' '}
+      </>
+    );
+  };
   return (
     <>
       <Box borderRadius={10} w={width} h={height} mx={4}>
-        <VStack justifyContent="space-between" alignItems="flex-start" spacing={5}>
+        <VStack
+          justifyContent="space-between"
+          alignItems="flex-start"
+          spacing={5}
+        >
           <AspectRatio
-            width={{base:"100%", md:"90%"}}
+            width={{ base: '100%', md: '90%' }}
             ratio={16 / 9}
             onClick={onOpen}
             cursor="pointer"
@@ -112,10 +134,17 @@ const EventsSectionCard = (props) => {
             >
               {event.title}
             </Heading>
-              <Text color="white" fontSize={{base:"md", md:"md"}}> {event.location} </Text>
-              <Text color="white" marginTop="0px !important" fontSize={{base:"md", md:"md"}}>
-                {getStartEndDateStr(event)}
-              </Text>
+            <Text color="white" fontSize={{ base: 'md', md: 'md' }}>
+              {' '}
+              {event.location}{' '}
+            </Text>
+            <Text
+              color="white"
+              marginTop="0px !important"
+              fontSize={{ base: 'md', md: 'md' }}
+            >
+              {getStartEndDateStr(event)}
+            </Text>
           </VStack>
         </VStack>
       </Box>
@@ -143,20 +172,22 @@ const EventsSectionCard = (props) => {
           )}
           <ModalBody ml={[0, 16]} mr={[0, 16]}>
             <Box>
-              {event.eventStartDate && event.eventEndDate && event.eventInterval && (
-                <>
-                  <Text fontSize={['sm', 'md']} fontWeight="bold">
-                    <Icon mr={2} as={RiCalendarEventFill} />
-                    Start Date: {getStartDate(event)}
-                  </Text>
-                  <EndDateElement
-                    startDateStr={event.eventStartDate}
-                    endDateStr={event.eventEndDate}
-                    interval={event.eventInterval}
-                    isModal
-                  />
-                </>
-              )}
+              {event.eventStartDate &&
+                event.eventEndDate &&
+                event.eventInterval && (
+                  <>
+                    <Text fontSize={['sm', 'md']} fontWeight="bold">
+                      <Icon mr={2} as={RiCalendarEventFill} />
+                      Start Date: {getStartDate(event)}
+                    </Text>
+                    <EndDateElement
+                      startDateStr={event.eventStartDate}
+                      endDateStr={event.eventEndDate}
+                      interval={event.eventInterval}
+                      isModal
+                    />
+                  </>
+                )}
               {event.eventStartTime && (
                 <Text fontSize={['sm', 'md']} fontWeight="bold">
                   <Icon mr={2} as={BsClockFill} />

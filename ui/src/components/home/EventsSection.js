@@ -153,7 +153,6 @@ const EventsSection = () => {
     populateData();
   }, []);
   const sliderSettings = {
-    adaptiveHeight: true,
     centerMode: false,
     dots: false,
     focusOnSelect: true,
@@ -172,7 +171,7 @@ const EventsSection = () => {
   const sliderStyle = {
     width: '100%',
     position: 'relative',
-    height: 'auto',
+    height: '80vh',
   };
   return (
     <Flex
