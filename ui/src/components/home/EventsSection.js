@@ -171,7 +171,7 @@ const EventsSection = () => {
   const sliderStyle = {
     width: '100%',
     position: 'relative',
-    height: '80vh',
+    height: 'auto',
   };
   return (
     <Flex
