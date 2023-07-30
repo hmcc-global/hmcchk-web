@@ -87,7 +87,6 @@ const EventCard = (props) => {
                   DateTime.fromISO(eventData.eventEndDate).toLocaleString(
                     DateTime.DATE_MED_WITH_WEEKDAY
                   ) &&
-                eventData.eventInterval === 'None' &&
                 ' - ' +
                   DateTime.fromISO(eventData.eventEndDate).toLocaleString(
                     DateTime.DATE_MED_WITH_WEEKDAY

@@ -366,7 +366,12 @@ export default function AdminAnnouncementContainer(props) {
                 </Stack>
                 <Spacer />
                 {/* Buttons to publish, edit, duplicate, delete */}
-                <HStack spacing={1}>
+                <Stack
+                  pt={[3, 0]}
+                  spacing={1}
+                  direction={['column', 'row']}
+                  alignItems="center"
+                >
                   {announcementItem.isInWeb && isCurrentAnnouncements && (
                     <Button
                       bgColor={
@@ -379,6 +384,7 @@ export default function AdminAnnouncementContainer(props) {
                       onClick={onPublish}
                       isLoading={isLoading}
                       disabled={isPublishDisabled()}
+                      width={['100%', 'auto']}
                     >
                       {announcementItem.isPublished ? 'Unpublish' : 'Publish'}
                     </Button>
@@ -388,6 +394,7 @@ export default function AdminAnnouncementContainer(props) {
                     value={announcementItem.id}
                     onClick={onEdit}
                     isLoading={isLoading}
+                    width={['100%', 'auto']}
                   >
                     Edit
                   </Button>
@@ -398,6 +405,7 @@ export default function AdminAnnouncementContainer(props) {
                     isLoading={isLoading}
                     disabled={isCreateDisabled()}
                     actionOnEditor="duplicate"
+                    width={['100%', 'auto']}
                   >
                     Duplicate
                   </Button>
@@ -407,10 +415,11 @@ export default function AdminAnnouncementContainer(props) {
                     onClick={onDelete}
                     disabled={isPublishDisabled()}
                     isLoading={isLoading}
+                    width={['100%', 'auto']}
                   >
                     Delete
                   </Button>
-                </HStack>
+                </Stack>
               </Flex>
             </Box>
           </ListItem>
