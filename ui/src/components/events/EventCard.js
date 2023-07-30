@@ -40,7 +40,7 @@ const EventCard = (props) => {
   const onClose = (e) => {
     setIsOpen(false);
   };
-  console.log(eventData)
+  console.log(eventData);
   return (
     <>
       <Box
@@ -87,6 +87,7 @@ const EventCard = (props) => {
                   DateTime.fromISO(eventData.eventEndDate).toLocaleString(
                     DateTime.DATE_MED_WITH_WEEKDAY
                   ) &&
+                eventData.eventInterval === 'None' &&
                 ' - ' +
                   DateTime.fromISO(eventData.eventEndDate).toLocaleString(
                     DateTime.DATE_MED_WITH_WEEKDAY
@@ -96,7 +97,11 @@ const EventCard = (props) => {
           {eventData.eventStartTime && (
             <Text fontSize={['sm', 'lg']} fontWeight="bold">
               <Icon mr={2} as={BsClockFill} />
-              Time: {eventData.eventStartTime}{(eventData.eventEndTime && eventData.eventStartTime !== eventData.eventEndTime) ? " - " + eventData.eventEndTime : ""}
+              Time: {eventData.eventStartTime}
+              {eventData.eventEndTime &&
+              eventData.eventStartTime !== eventData.eventEndTime
+                ? ' - ' + eventData.eventEndTime
+                : ''}
             </Text>
           )}
           {eventData.location && (
@@ -206,7 +211,11 @@ const EventCard = (props) => {
               {eventData.eventStartTime && (
                 <Text fontSize={['sm', 'md']} fontWeight="bold">
                   <Icon mr={2} as={BsClockFill} />
-                  Time: {eventData.eventStartTime}{(eventData.eventEndTime && eventData.eventStartTime !== eventData.eventEndTime) ? " - " + eventData.eventEndTime : ""}
+                  Time: {eventData.eventStartTime}
+                  {eventData.eventEndTime &&
+                  eventData.eventStartTime !== eventData.eventEndTime
+                    ? ' - ' + eventData.eventEndTime
+                    : ''}
                 </Text>
               )}
               {eventData.location && (
