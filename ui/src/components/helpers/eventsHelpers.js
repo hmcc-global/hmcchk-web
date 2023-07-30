@@ -20,19 +20,18 @@ const getNumberOfDaysInMonth = (date) => {
 
 const getRenderDate = (startDate, endDate, interval, startTime) => {
   // parse the interval to number
+  let start = DateTime.fromISO(startDate);
+  let end = DateTime.fromISO(endDate);
   let recur =
     interval === 'Daily'
       ? 1
       : interval === 'Weekly'
       ? 7
       : interval === 'Monthly'
-      ? getNumberOfDaysInMonth(startDate)
+      ? start.daysInMonth
       : interval === 'None'
       ? 0
       : 0;
-
-  let start = DateTime.fromISO(startDate);
-  let end = DateTime.fromISO(endDate);
 
   let diffInDays = end.diff(start, 'days').toObject();
   let nRecurrence = recur !== 0 ? Math.floor(diffInDays.days / recur) : 0;
