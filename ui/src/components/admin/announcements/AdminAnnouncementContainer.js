@@ -8,7 +8,6 @@ import {
   Container,
   useToast,
   Stack,
-  HStack,
   List,
   ListItem,
   Flex,
@@ -27,7 +26,6 @@ import {
 } from '@chakra-ui/icons';
 import AnnouncementEditorModal from './AnnouncementEditorModal';
 import { DateTime } from 'luxon';
-import { getRenderDate } from '../../helpers/eventsHelpers';
 
 export default function AdminAnnouncementContainer(props) {
   const toast = useToast();
@@ -50,6 +48,12 @@ export default function AdminAnnouncementContainer(props) {
       // TODO: filter out announcements that are current and past accordingly
       if (isCurrentAnnouncements) {
         const current = data.filter((item) => {
+          if (item.displayEndDateTime) {
+            return DateTime.fromISO(item.displayEndDateTime) > today;
+          }
+          if (item.displayStartDateTime && item.displayEndDateTime) {
+            return DateTime.fromISO(item.eventStartDate) < today;
+          }
           if (item.eventEndDate) {
             return DateTime.fromISO(item.eventEndDate) > today;
           }
@@ -61,6 +65,9 @@ export default function AdminAnnouncementContainer(props) {
         setAnnouncementList(current);
       } else {
         const past = data.filter((item) => {
+          if (item.displayEndDateTime) {
+            return DateTime.fromISO(item.displayEndDateTime) < today;
+          }
           if (item.eventEndDate) {
             return DateTime.fromISO(item.eventEndDate) < today;
           }
