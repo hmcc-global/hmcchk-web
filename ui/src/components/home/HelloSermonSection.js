@@ -23,7 +23,7 @@ const HelpCardInfo = [
     path: '/connect',
   },
   {
-    title: 'Visit us',
+    title: 'Visit Us',
     text: 'Every Sunday at 10AM HKT \n In-person & Online',
     image: 'visit-us-bg.png',
     titleStyle: { color: 'white' },
@@ -41,8 +41,8 @@ const HelpCardInfo = [
 ];
 
 const HelpCard = (props) => {
-  const [mdHeadingSize, setMdHeadingSize] = useState('2.5rem');
-  const [mdTitleSize, setMdTitleSize] = useState('1.5rem');
+  const [mdHeadingSize, setMdHeadingSize] = useState('2.5em');
+  const [mdTitleSize, setMdTitleSize] = useState('1.5em');
 
   return (
     <>
@@ -71,25 +71,25 @@ const HelpCard = (props) => {
         style={{ textDecoration: 'none', zIndex: 1 }}
         overflow="hidden"
         onMouseOver={() => {
-          setMdHeadingSize('2.7rem');
-          setMdTitleSize('1.7rem');
+          setMdHeadingSize('2.7em');
+          setMdTitleSize('1.7em');
         }}
         onMouseOut={() => {
-          setMdHeadingSize('2.5rem');
+          setMdHeadingSize('4xl');
           setMdTitleSize('1.5rem');
         }}
       >
         <VStack>
           <Heading
             style={props.titleStyle}
-            fontSize={{ base: '1.8rem', md: mdHeadingSize }}
+            fontSize={{ base: '1.8em', md: mdHeadingSize }}
             fontWeight={600}
           >
             {props.title}
           </Heading>
           <Text
             style={props.textStyle}
-            fontSize={{ base: '1rem', md: mdTitleSize }}
+            fontSize={{ base: '1em', md: mdTitleSize }}
             textAlign="center"
             whiteSpace="pre-wrap"
           >
@@ -179,15 +179,11 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
             boxShadow="rgba(164,164,164,0.5)"
             blur="20px"
           >
-            <VStack
-              width="80%"
-              padding={{ base: '3rem 0.5rem', md: '5rem 2rem' }}
-              gap={4}
-            >
+            <VStack width="80%" py={{ base: '3rem', md: '5rem' }} gap={4}>
               <Heading
                 alignSelf="flex-start"
                 color="#0628A3"
-                fontSize={{ base: '1.5625em', md: '4xl' }}
+                fontSize={{ base: '1.875em', md: '4xl' }}
                 fontWeight={['bold', '600']}
                 fontFamily="Inter"
               >
@@ -213,16 +209,12 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
             justifyContent="center"
             alignItems="center"
           >
-            <VStack
-              width="80%"
-              padding={{ base: '3rem 0.5rem', md: '5rem 2rem' }}
-              gap={4}
-            >
+            <VStack width="80%" py={{ base: '3rem', md: '5rem' }} gap={4}>
               <Heading
                 color="white"
                 alignSelf="flex-start"
                 fontWeight={600}
-                fontSize="30px"
+                fontSize={['1.875em', '4xl']}
               >
                 Latest Sermon
               </Heading>
