@@ -18,12 +18,12 @@ const HelpCardInfo = [
     title: "I'm New",
     text: 'Connect with us',
     image: 'im-new-bg.png',
-    titleStyle: { color: 'green', fontFamily:'Inter' },
+    titleStyle: { color: 'green', fontFamily: 'Inter' },
     textStyle: { color: 'black' },
     path: '/connect',
   },
   {
-    title: 'Visit us',
+    title: 'Visit Us',
     text: 'Every Sunday at 10AM HKT \n In-person & Online',
     image: 'visit-us-bg.png',
     titleStyle: { color: 'white' },
@@ -41,9 +41,8 @@ const HelpCardInfo = [
 ];
 
 const HelpCard = (props) => {
-
-  const [mdHeadingSize, setMdHeadingSize] = useState('2.5rem');
-  const [mdTitleSize, setMdTitleSize] = useState('1.5rem');
+  const [mdHeadingSize, setMdHeadingSize] = useState('2.5em');
+  const [mdTitleSize, setMdTitleSize] = useState('1.5em');
 
   return (
     <>
@@ -56,10 +55,11 @@ const HelpCard = (props) => {
             : `linear-gradient(0deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.22)), url(${
                 process.env.PUBLIC_URL + '/images/home/' + props.image
               })`
-        }C
+        }
+        C
         backdropFilter="blur(4px)"
         width="100%"
-        height="220"
+        height={['auto', '220']}
         bgSize="cover"
         padding="6%"
         bgPosition="center center"
@@ -71,32 +71,32 @@ const HelpCard = (props) => {
         style={{ textDecoration: 'none', zIndex: 1 }}
         overflow="hidden"
         onMouseOver={() => {
-          setMdHeadingSize('2.7rem');
-          setMdTitleSize('1.7rem');
+          setMdHeadingSize('2.7em');
+          setMdTitleSize('1.7em');
         }}
         onMouseOut={() => {
-          setMdHeadingSize('2.5rem');
+          setMdHeadingSize('4xl');
           setMdTitleSize('1.5rem');
         }}
       >
         <VStack>
           <Heading
             style={props.titleStyle}
-            fontSize={{ base: '1.8rem', md: mdHeadingSize }}
+            fontSize={{ base: '1.8em', md: mdHeadingSize }}
             fontWeight={600}
           >
             {props.title}
           </Heading>
           <Text
             style={props.textStyle}
-            fontSize={{ base: '1rem', md: mdTitleSize }}
+            fontSize={{ base: '1em', md: mdTitleSize }}
             textAlign="center"
             whiteSpace="pre-wrap"
           >
             {props.text}
           </Text>
         </VStack>
-      </Link> 
+      </Link>
       <Box
         style={{
           background: '#9E9E9E',
@@ -179,16 +179,12 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
             boxShadow="rgba(164,164,164,0.5)"
             blur="20px"
           >
-            <VStack
-              width="80%"
-              padding={{ base: '3rem 0.5rem', md: '5rem 2rem' }}
-              gap={4}
-            >
+            <VStack width="80%" py={{ base: '3rem', md: '5rem' }} gap={4}>
               <Heading
                 alignSelf="flex-start"
                 color="#0628A3"
-                fontSize={{ base: '1.5625em', md: '4xl' }}
-                fontWeight={["bold","600"]}
+                fontSize={{ base: '1.875em', md: '4xl' }}
+                fontWeight={['bold', '600']}
                 fontFamily="Inter"
               >
                 How can we help you?
@@ -213,16 +209,12 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
             justifyContent="center"
             alignItems="center"
           >
-            <VStack
-              width="80%"
-              padding={{ base: '3rem 0.5rem', md: '5rem 2rem' }}
-              gap={4}
-            >
-              <Heading 
-                color="white" 
-                alignSelf="flex-start" 
+            <VStack width="80%" py={{ base: '3rem', md: '5rem' }} gap={4}>
+              <Heading
+                color="white"
+                alignSelf="flex-start"
                 fontWeight={600}
-                fontSize="30px"
+                fontSize={['1.875em', '4xl']}
               >
                 Latest Sermon
               </Heading>
@@ -270,14 +262,18 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
                 gap="10px"
                 border="2px solid #A5CBFF"
                 borderRadius="7px"
-                background={["","#A5CBFF"]}
-                color={["#A5CBFF","#172848"]}
+                background="transparent"
+                color="#A5CBFF"
                 marginTop="7%"
                 as={ReactLink}
                 to={{ pathname: '/sermons' }}
                 fontFamily="Inter"
                 fontWeight="semibold"
                 fontSize="1.2em"
+                _hover={{
+                  bg: '#A5CBFF',
+                  color: '#172848',
+                }}
               >
                 {isOnline ? 'Watch HMCC LIVE' : 'See All Past Sermons'}
               </Button>

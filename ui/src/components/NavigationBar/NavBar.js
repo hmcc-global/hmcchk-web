@@ -403,7 +403,7 @@ const NavBar = (props) => {
                         fontSize="x-small"
                         textAlign="center"
                       >
-                        Harverst Mission Community Church
+                        Harvest Mission Community Church
                       </Text>
                     </LinkOverlay>
                   </LinkBox>
@@ -448,7 +448,7 @@ const NavBar = (props) => {
                     </Link>
                   ) : null}
                   <LinkBox>
-                    <LinkOverlay href="/profile">
+                    <LinkOverlay href="/login">
                       <IconButton
                         colorScheme="transparent"
                         onClick={onClose}

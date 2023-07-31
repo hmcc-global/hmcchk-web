@@ -198,6 +198,14 @@ const UserProfileDesktop = (props) => {
     color: '#000000',
   };
 
+  const tabTitle = {
+    w: 'fit-content',
+    pr: '1',
+    pl: '1',
+    color: '#0628A3',
+    fontWeight: '700',
+  };
+
   return (
     <>
       <Modal isOpen={modalOpen} onClose={onModalClose}>
@@ -255,36 +263,13 @@ const UserProfileDesktop = (props) => {
         <Tabs mt="5%" mb="5%" orientation="vertical" variant="unstyled">
           <Box flex={1}>
             <TabList border="none" alignItems="flex-end">
-              <Tab
-                w="fit-content"
-                pr="1"
-                pl="1"
-                color="#0628A3"
-                _selected={{ md: tabText }}
-                fontWeight="700"
-              >
+              <Tab style={tabTitle} _selected={{ md: tabText }}>
                 Signup Links
               </Tab>
-              <Tab
-                w="fit-content"
-                pr="1"
-                pl="1"
-                color="#0628A3"
-                mt="5"
-                _selected={{ md: tabText }}
-                fontWeight="700"
-              >
+              <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
                 Personal Profile
               </Tab>
-              <Tab
-                w="fit-content"
-                pr="1"
-                pl="1"
-                color="#0628A3"
-                mt="5"
-                _selected={{ md: tabText }}
-                fontWeight="700"
-              >
+              <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
                 Church Profile
               </Tab>
             </TabList>

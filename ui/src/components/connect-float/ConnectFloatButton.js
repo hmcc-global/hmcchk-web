@@ -10,9 +10,10 @@ const ConnectFloatButton = (props) => {
 
   return (
     <Box
+      className="connectposition"
       position="absolute"
-      bottom={['2rem', '3rem']}
       right={['2rem', '3rem']}
+      bottom={['2rem', '3rem']}
       overflow="hidden"
       zIndex={999}
     >

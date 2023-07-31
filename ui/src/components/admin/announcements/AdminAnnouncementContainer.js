@@ -8,7 +8,6 @@ import {
   Container,
   useToast,
   Stack,
-  HStack,
   List,
   ListItem,
   Flex,
@@ -49,22 +48,28 @@ export default function AdminAnnouncementContainer(props) {
       // TODO: filter out announcements that are current and past accordingly
       if (isCurrentAnnouncements) {
         const current = data.filter((item) => {
-          if (item.endDate) {
-            return DateTime.fromISO(item.endDate) > today;
+          if (item.displayEndDateTime) {
+            return DateTime.fromISO(item.displayEndDateTime) > today;
           }
-          if (item.startDate) {
-            return DateTime.fromISO(item.startDate) > today;
+          if (item.displayStartDateTime && item.displayEndDateTime) {
+            return DateTime.fromISO(item.eventStartDate) < today;
+          }
+          if (item.eventEndDate) {
+            return DateTime.fromISO(item.eventEndDate) > today;
+          }
+          if (item.eventStartDate && !item.eventEndDate) {
+            return DateTime.fromISO(item.eventStartDate) < today;
           }
           return true;
         });
         setAnnouncementList(current);
       } else {
         const past = data.filter((item) => {
-          if (item.endDate) {
-            return DateTime.fromISO(item.endDate) < today;
+          if (item.displayEndDateTime) {
+            return DateTime.fromISO(item.displayEndDateTime) < today;
           }
-          if (item.startDate) {
-            return DateTime.fromISO(item.startDate) < today;
+          if (item.eventEndDate) {
+            return DateTime.fromISO(item.eventEndDate) < today;
           }
           return false;
         });
@@ -259,9 +264,12 @@ export default function AdminAnnouncementContainer(props) {
     return true;
   };
 
-  const showProperDate = (startDate, endDate) => {
+  const showProperDate = (startDate, endDate, interval) => {
     if (startDate && endDate) {
       return `${startDate} - ${endDate}`;
+    }
+    if (startDate && !endDate) {
+      return startDate.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
     }
     if (!startDate && !endDate) {
       return '-';
@@ -318,19 +326,23 @@ export default function AdminAnnouncementContainer(props) {
                 </Box>
                 <Stack direction="column" spacing={1}>
                   <Heading size="md">{announcementItem.title}</Heading>
-                  <Grid templateColumns="repeat(2, 1fr)" gap={1}>
+                  <Grid
+                    templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)']}
+                    gap={1}
+                  >
                     <Text>
                       <CalendarIcon /> Date:{' '}
                       {showProperDate(
-                        announcementItem.startDate,
-                        announcementItem.endDate
+                        announcementItem.eventStartDate,
+                        announcementItem.eventEndDate,
+                        announcementItem.eventInterval
                       )}
                     </Text>
                     <Text>
                       <TimeIcon /> Time:{' '}
                       {showProperTime(
-                        announcementItem.startTime,
-                        announcementItem.endTime
+                        announcementItem.eventStartTime,
+                        announcementItem.eventEndTime
                       )}
                     </Text>
                     <Text>
@@ -358,7 +370,12 @@ export default function AdminAnnouncementContainer(props) {
                 </Stack>
                 <Spacer />
                 {/* Buttons to publish, edit, duplicate, delete */}
-                <HStack spacing={1}>
+                <Stack
+                  pt={[3, 0]}
+                  spacing={1}
+                  direction={['column', 'row']}
+                  alignItems="center"
+                >
                   {announcementItem.isInWeb && isCurrentAnnouncements && (
                     <Button
                       bgColor={
@@ -371,6 +388,7 @@ export default function AdminAnnouncementContainer(props) {
                       onClick={onPublish}
                       isLoading={isLoading}
                       disabled={isPublishDisabled()}
+                      width={['100%', 'auto']}
                     >
                       {announcementItem.isPublished ? 'Unpublish' : 'Publish'}
                     </Button>
@@ -380,6 +398,7 @@ export default function AdminAnnouncementContainer(props) {
                     value={announcementItem.id}
                     onClick={onEdit}
                     isLoading={isLoading}
+                    width={['100%', 'auto']}
                   >
                     Edit
                   </Button>
@@ -390,6 +409,7 @@ export default function AdminAnnouncementContainer(props) {
                     isLoading={isLoading}
                     disabled={isCreateDisabled()}
                     actionOnEditor="duplicate"
+                    width={['100%', 'auto']}
                   >
                     Duplicate
                   </Button>
@@ -399,10 +419,11 @@ export default function AdminAnnouncementContainer(props) {
                     onClick={onDelete}
                     disabled={isPublishDisabled()}
                     isLoading={isLoading}
+                    width={['100%', 'auto']}
                   >
                     Delete
                   </Button>
-                </HStack>
+                </Stack>
               </Flex>
             </Box>
           </ListItem>

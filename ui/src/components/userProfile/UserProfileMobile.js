@@ -83,29 +83,29 @@ const UserProfileMobile = (props) => {
 
   const fetchSignedUpForms = useCallback(async () => {
     //get signed up forms
-    const { data, status} = await axios.get('/api/forms/get-signedup-form', {
+    const { data, status } = await axios.get('/api/forms/get-signedup-form', {
       params: {
         userId: user.id,
       },
     });
 
-    if(status === 200){
+    if (status === 200) {
       setSignedUpFormList([...data]);
     }
-  }, [user.id])
+  }, [user.id]);
 
   const fetchUnignedUpForms = useCallback(async () => {
     //get signed up forms
-    const { data, status} = await axios.get('/api/forms/get-unsignedup-form', {
+    const { data, status } = await axios.get('/api/forms/get-unsignedup-form', {
       params: {
         userId: user.id,
       },
     });
 
-    if(status === 200){
+    if (status === 200) {
       setUnsignedFormList([...data]);
     }
-  }, [user.id])
+  }, [user.id]);
 
   const setUserInformationFields = (userData) => {
     for (let key in userData) {
@@ -188,11 +188,11 @@ const UserProfileMobile = (props) => {
   };
 
   const tabTitle = {
-    padding : '0.5px',
+    padding: '0.5px',
     fontWeight: '700',
     fontSize: 'inherit',
-    color : "#0628A3",
-    borderColor: '#0628A3'
+    color: '#0628A3',
+    _selected: { borderColor: '#0628A3', color: '#000000' },
   };
 
   return (
@@ -260,24 +260,9 @@ const UserProfileMobile = (props) => {
           fontSize="0.9rem"
         >
           <TabList justifyContent="space-between">
-            <Tab
-              style={tabTitle}
-              _selected={{ color: '#000000' }}
-            >
-              Signup Links
-            </Tab>
-            <Tab
-              style={tabTitle}
-              _selected={{ color: '#000000' }}
-            >
-              Personal Profile
-            </Tab>
-            <Tab
-              style={tabTitle}
-              _selected={{ color: '#000000' }}
-            >
-              Church Profile
-            </Tab>
+            <Tab style={tabTitle}>Signup Links</Tab>
+            <Tab style={tabTitle}>Personal Profile</Tab>
+            <Tab style={tabTitle}>Church Profile</Tab>
           </TabList>
 
           <TabPanels>

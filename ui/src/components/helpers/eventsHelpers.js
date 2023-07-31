@@ -12,36 +12,37 @@ const getStartDate = (eventData) => {
       ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
 };
 
-const getNumberOfDaysInMonth = (date) => {
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
-  return new Date(year, month, 0).getDate();
-};
 
-const getRenderDate = (startDate, endDate, interval) => {
+const getRenderDate = (startDate, endDate, interval, startTime) => {
   // parse the interval to number
+  let start = DateTime.fromISO(startDate);
+  let end = DateTime.fromISO(endDate);
   let recur =
     interval === 'Daily'
       ? 1
       : interval === 'Weekly'
       ? 7
       : interval === 'Monthly'
-      ? getNumberOfDaysInMonth(startDate)
+      ? start.daysInMonth
       : interval === 'None'
       ? 0
       : 0;
 
-  let start = DateTime.fromISO(startDate);
-  let end = DateTime.fromISO(endDate);
-
   let diffInDays = end.diff(start, 'days').toObject();
-  let nRecurrence = recur !== 0 ? Math.floor(diffInDays.days / interval) : 0;
+  let nRecurrence = recur !== 0 ? Math.floor(diffInDays.days / recur) : 0;
 
   let renderDate = startDate;
 
+  //if there is a set time, add the interval after the event time
+  if (startTime !== '' && startTime !== undefined) {
+    renderDate = start.plus(
+      DateTime.fromISO(startTime) - DateTime.fromISO('00:00')
+    );
+  }
+
   for (let i = 0; i <= nRecurrence; i++) {
-    renderDate = start.plus({ days: interval * i });
     if (DateTime.now() < renderDate) break;
+    renderDate = start.plus({ days: recur * i });
   }
   return renderDate;
 };
@@ -51,27 +52,28 @@ const filterISOStringForGoogleCalendar = (isoString) => {
 };
 
 const generateGoogleCalendarLink = (eventData) => {
-  if (!eventData.time || !eventData.title) return null;
-  let eventTime = eventData.time;
+  if (
+    !eventData.eventStartTime ||
+    !eventData.title ||
+    eventData.eventStartTime === '' ||
+    eventData.eventStartTime === undefined
+  )
+    return null;
+  let eventTime = eventData.eventStartTime;
   const baseLink = 'https://calendar.google.com/calendar/r/eventedit?';
   const eventTitle = 'text=' + encodeURIComponent(eventData.title);
 
   if (!eventData.renderDate) {
     eventData.renderDate = getRenderDate(
-      eventData.startDate,
-      eventData.endDate,
-      eventData.recurrence
+      eventData.eventStartDate,
+      eventData.eventEndDate,
+      eventData.eventInterval
     );
   }
 
   let eventDate = DateTime.fromISO(eventData.renderDate.toISO());
 
-  let parsed = DateTime.fromFormat(eventTime, 'h:mm a');
-
-  let today = DateTime.now().startOf('day');
-  let timeOfDay = parsed.diff(today);
-
-  eventDate = eventDate.plus(timeOfDay);
+  eventDate = eventDate.plus(DateTime.fromISO(eventTime) - DateTime.fromISO('00:00'));
 
   let startTime = filterISOStringForGoogleCalendar(eventDate.toISO());
   let endTime = eventDate.plus({ hours: 2 });

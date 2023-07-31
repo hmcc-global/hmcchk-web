@@ -47,7 +47,7 @@ const LifeGroupSection = () => {
           justify="center"
           alignItems={['left', 'center']}
           spacing={[6, null]}
-          mx={[4, 0]}
+          mx={[6, 0]}
         >
           <VStack
             w={['100%', '55%']}
@@ -56,7 +56,7 @@ const LifeGroupSection = () => {
           >
             <Heading
               as="h5"
-              fontSize={['1.875em', '1.5em']}
+              fontSize={['1.875em', '4xl']}
               alignSelf={['baseline']}
               color="#505050"
               fontWeight="semibold"
@@ -76,7 +76,7 @@ const LifeGroupSection = () => {
           >
             <Heading
               as="h1"
-              fontSize={['2em', '4.5em']}
+              fontSize={['1.875em', '6xl']}
               color="#0628A3"
               alignSelf={['baseline']}
               fontWeight="bold"
@@ -88,15 +88,15 @@ const LifeGroupSection = () => {
             </Text>
             <Button
               alignSelf={['start', 'baseline']}
-              bg={["","#0628A3"]}
+              bg="white"
               variant="outline"
-              color={["#0628A3","#ffffff"]}
+              color="#0628A3"
               borderColor="#0628A3"
               borderWidth="2px"
               w={['45%', '38.2%']}
               _hover={{
-                bg: 'white',
-                color: '#0628A3',
+                bg: '#0628A3',
+                color: 'white',
                 borderColor: '#0628A3',
                 textDecoration: 'none',
               }}

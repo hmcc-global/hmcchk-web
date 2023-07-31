@@ -67,6 +67,7 @@ const NewHereSection = () => {
         background="#EEF7FF"
         style={{ backdropFilter: 'blur(7px)' }}
       >
+        <BackgroundElements />
         <Container
           maxW="container.xl"
           justifyContent="center"
@@ -79,18 +80,19 @@ const NewHereSection = () => {
             justify={'center'}
             alignItems={['left', 'center']}
             spacing={['5', '50']}
+            mx={[6, 0]}
           >
-            <VStack alignItems={'left'} spacing={0}>
-              <Heading 
-                fontSize={['1.875em', '3em']} 
+            <VStack alignItems={'left'} spacing={0} w={['100%', '30%']}>
+              <Heading
+                fontSize={['1.875em', '4xl']}
                 color="#505050"
                 fontWeight="bold"
                 fontFamily="Inter"
               >
                 New here?
               </Heading>
-              <Heading 
-                fontSize={['1.875em', '3em']}
+              <Heading
+                fontSize={['1.875em', '4xl']}
                 color="#0628A3"
                 fontWeight="bold"
                 fontFamily="Inter"
@@ -100,10 +102,10 @@ const NewHereSection = () => {
             </VStack>
             <Box
               h={['75vh', '65vh']}
-              w={['100%', '35%']}
+              w={['100%', '40%']}
               borderWidth={'1px'}
-              px={5}
-              pt={[10]}
+              px={7}
+              pt={7}
               bgColor="#F7FAFC"
               boxShadow={'xl'}
               style={{ height: '100%' }}

@@ -24,7 +24,8 @@ import { useState } from 'react';
 import { getRenderDate } from '../helpers/eventsHelpers';
 import { DateTime } from 'luxon';
 import { generateGoogleCalendarLink } from '../helpers/eventsHelpers';
-import { parseDescription } from '../helpers/parseDescription';
+import ReactMarkdown from 'react-markdown';
+import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 
 const EventCard = (props) => {
   const { eventData } = props;
@@ -52,13 +53,17 @@ const EventCard = (props) => {
         onClick={onOpen}
       >
         <AspectRatio mb="5" width="100%" ratio={16 / 9}>
-          <Image borderRadius="20" src={eventData.imageAdUrl} objectFit="cover" />
+          <Image
+            borderRadius="20"
+            src={eventData.imageAdUrl}
+            objectFit="cover"
+          />
         </AspectRatio>
         <Box height={['200', '280']} overflow="hidden" position="relative">
           <Heading as="h4" mb="5" size="lg" fontWeight="900" isTruncated>
             {eventData.title}
           </Heading>
-          {eventData.displayStartDateTime && eventData.displayEndDateTime && eventData.eventInterval && (
+          {eventData.eventStartDate && (
             <Text fontSize={['sm', 'lg']} fontWeight="bold">
               <Icon mr={2} as={RiCalendarEventFill} />
               Date:{' '}
@@ -69,14 +74,44 @@ const EventCard = (props) => {
                 : getRenderDate(
                     eventData.eventStartDate,
                     eventData.eventEndDate,
-                    eventData.eventInterval
+                    eventData.eventInterval,
+                    eventData.eventStartTime
                   ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
+              {eventData.eventEndDate &&
+                getRenderDate(
+                  eventData.eventStartDate,
+                  eventData.eventEndDate,
+                  eventData.eventInterval,
+                  eventData.eventStartTime
+                ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY) !==
+                  DateTime.fromISO(eventData.eventEndDate).toLocaleString(
+                    DateTime.DATE_MED_WITH_WEEKDAY
+                  ) &&
+                eventData.eventInterval === 'None' &&
+                ' - ' +
+                  DateTime.fromISO(eventData.eventEndDate).toLocaleString(
+                    DateTime.DATE_MED_WITH_WEEKDAY
+                  )}
             </Text>
           )}
           {eventData.eventStartTime && (
             <Text fontSize={['sm', 'lg']} fontWeight="bold">
               <Icon mr={2} as={BsClockFill} />
-              Time: {eventData.eventStartTime}
+              Time:{' '}
+              {DateTime.fromISO(eventData.eventStartTime).toLocaleString({
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true,
+              })}
+              {eventData.eventEndTime &&
+              eventData.eventStartTime !== eventData.eventEndTime
+                ? ' - ' +
+                  DateTime.fromISO(eventData.eventEndTime).toLocaleString({
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: true,
+                  })
+                : ''}
             </Text>
           )}
           {eventData.location && (
@@ -86,7 +121,11 @@ const EventCard = (props) => {
             </Text>
           )}
           <Text fontSize={['xs', 'md']} mt="5">
-            {parseDescription(eventData.description)}
+            <ReactMarkdown
+              components={ChakraUIRenderer()}
+              children={eventData.description}
+              skipHtml
+            />{' '}
           </Text>
           <Box
             position="absolute"
@@ -149,27 +188,57 @@ const EventCard = (props) => {
           )}
           <ModalBody ml={[0, 16]} mr={[0, 16]}>
             <Box>
-              {eventData.displayStartDateTime &&
-                eventData.displayEndDateTime &&
-                eventData.eventInterval && (
-                  <Text fontSize={['sm', 'md']} fontWeight="bold">
-                    <Icon mr={2} as={RiCalendarEventFill} />
-                    Date:{' '}
-                    {eventData.renderDate
-                      ? eventData.renderDate.toLocaleString(
-                          DateTime.DATE_MED_WITH_WEEKDAY
-                        )
-                      : getRenderDate(
-                          eventData.eventStartDate,
-                          eventData.eventEndDate,
-                          eventData.eventInterval
-                        ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
-                  </Text>
-                )}
+              {eventData.eventStartDate && (
+                <Text fontSize={['sm', 'md']} fontWeight="bold">
+                  <Icon mr={2} as={RiCalendarEventFill} />
+                  Date:{' '}
+                  {eventData.renderDate
+                    ? eventData.renderDate.toLocaleString(
+                        DateTime.DATE_MED_WITH_WEEKDAY
+                      )
+                    : getRenderDate(
+                        eventData.eventStartDate,
+                        eventData.eventEndDate,
+                        eventData.eventInterval,
+                        eventData.eventStartTime
+                      ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
+                  {eventData.eventEndDate &&
+                    getRenderDate(
+                      eventData.eventStartDate,
+                      eventData.eventEndDate,
+                      eventData.eventInterval,
+                      eventData.eventStartTime
+                    ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY) !==
+                      DateTime.fromISO(eventData.eventEndDate).toLocaleString(
+                        DateTime.DATE_MED_WITH_WEEKDAY
+                      ) &&
+                    eventData.eventInterval === 'None' &&
+                    ' - ' +
+                      DateTime.fromISO(eventData.eventEndDate).toLocaleString(
+                        DateTime.DATE_MED_WITH_WEEKDAY
+                      )}
+                </Text>
+              )}
               {eventData.eventStartTime && (
                 <Text fontSize={['sm', 'md']} fontWeight="bold">
                   <Icon mr={2} as={BsClockFill} />
-                  Time: {eventData.eventStartTime}
+                  Time:{' '}
+                  {DateTime.fromISO(eventData.eventStartTime).toLocaleString({
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: true,
+                  })}
+                  {eventData.eventEndTime &&
+                  eventData.eventStartTime !== eventData.eventEndTime
+                    ? ' - ' +
+                      DateTime.fromISO(eventData.eventStartTime).toLocaleString(
+                        {
+                          hour: 'numeric',
+                          minute: 'numeric',
+                          hour12: true,
+                        }
+                      )
+                    : ''}
                 </Text>
               )}
               {eventData.location && (
@@ -180,7 +249,11 @@ const EventCard = (props) => {
               )}
             </Box>
             <Box fontSize="sm" mt="5">
-              {parseDescription(eventData.description)}
+              <ReactMarkdown
+                components={ChakraUIRenderer()}
+                children={eventData.description}
+                skipHtml
+              />
             </Box>
           </ModalBody>
           <ModalFooter ml={[0, 16]} mr={[0, 16]}>
@@ -197,7 +270,9 @@ const EventCard = (props) => {
                   flex={[false, 1]}
                   as={Link}
                   target="_blank"
-                  href={eventData.directionsUrl ? eventData.directionsUrl : null}
+                  href={
+                    eventData.directionsUrl ? eventData.directionsUrl : null
+                  }
                 >
                   Directions
                 </Button>

@@ -40,8 +40,8 @@ const AboutSection = () => {
             padding={{ base: '7rem 1rem', md: '8rem 2rem' }}
           >
             <VStack rowGap={2}>
-              <Heading 
-                fontSize={["1.875em","4xl"]}
+              <Heading
+                fontSize={['1.875em', '4xl']}
                 color="#0628A3"
                 fontWeight="bold"
                 fontFamily="Inter"
@@ -58,8 +58,8 @@ const AboutSection = () => {
               </Text>
             </VStack>
             <VStack rowGap={2}>
-              <Heading 
-                fontSize={["1.875em","4xl"]}
+              <Heading
+                fontSize={['1.875em', '4xl']}
                 color="#0628A3"
                 fontWeight="bold"
                 fontFamily="Inter"

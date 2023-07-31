@@ -42,62 +42,62 @@ const AnnouncementEditorModal = (props) => {
   const toast = useToast();
 
   // TODO: add interval for dates to repeat events
-  const [title, setTitle] = useState(null);
+  const [title, setTitle] = useState(undefined);
   const [isInWeb, setIsInWeb] = useState(false);
   const [isInPpt, setIsInPpt] = useState(false);
-  const [description, setDescription] = useState(null);
-  const [imageAdUrl, setImageAdUrl] = useState(null);
-  const [location, setLocation] = useState(null);
-  const [directionsUrl, setDirectionsUrl] = useState(null);
-  const [displayStartDateTime, setDisplayStartDateTime] = useState(null);
-  const [displayEndDateTime, setDisplayEndDateTime] = useState(null);
-  const [eventStartDate, setEventStartDate] = useState(null);
-  const [eventStartTime, setEventStartTime] = useState(null);
-  const [eventEndDate, setEventEndDate] = useState(null);
-  const [eventEndTime, setEventEndTime] = useState(null);
+  const [description, setDescription] = useState(undefined);
+  const [imageAdUrl, setImageAdUrl] = useState(undefined);
+  const [location, setLocation] = useState(undefined);
+  const [directionsUrl, setDirectionsUrl] = useState(undefined);
+  const [displayStartDateTime, setDisplayStartDateTime] = useState(undefined);
+  const [displayEndDateTime, setDisplayEndDateTime] = useState(undefined);
+  const [eventStartDate, setEventStartDate] = useState(undefined);
+  const [eventStartTime, setEventStartTime] = useState(undefined);
+  const [eventEndDate, setEventEndDate] = useState(undefined);
+  const [eventEndTime, setEventEndTime] = useState(undefined);
   const [eventInterval, setEventInterval] = useState('None'); // ['Daily', 'Weekly', 'Monthly', 'None'
   const [datePeriodInvalid, setDatePeriodInvalid] = useState(false);
-  const [formId, setFormId] = useState(null);
-  const [signUpUrl, setSignUpUrl] = useState(null);
-  const [additionalNotes, setAdditionalNotes] = useState(null);
+  const [formId, setFormId] = useState(undefined);
+  const [signUpUrl, setSignUpUrl] = useState(undefined);
+  const [additionalNotes, setAdditionalNotes] = useState(undefined);
 
   const resetAnnouncementEditorCallback = () => {
     reset();
-    setValue('title', null);
+    setValue('title', undefined);
     setValue('isInWeb', false);
     setValue('isInPpt', false);
-    setValue('description', null);
-    setValue('imageAdUrl', null);
-    setValue('location', null);
-    setValue('directionsUrl', null);
-    setValue('displayStartDateTime', null);
-    setValue('displayEndDateTime', null);
-    setValue('eventStartDate', null);
-    setValue('eventStartTime', null);
-    setValue('eventEndDate', null);
-    setValue('eventEndTime', null);
+    setValue('description', undefined);
+    setValue('imageAdUrl', undefined);
+    setValue('location', undefined);
+    setValue('directionsUrl', undefined);
+    setValue('displayStartDateTime', undefined);
+    setValue('displayEndDateTime', undefined);
+    setValue('eventStartDate', undefined);
+    setValue('eventStartTime', undefined);
+    setValue('eventEndDate', undefined);
+    setValue('eventEndTime', undefined);
     setValue('eventInterval', 'None');
-    setValue('formId', null);
-    setValue('formSignupLink', null);
-    setValue('additionalNotes', null);
+    setValue('formId', undefined);
+    setValue('formSignupLink', undefined);
+    setValue('additionalNotes', undefined);
 
-    setTitle(null);
+    setTitle(undefined);
     setIsInWeb(false);
     setIsInPpt(false);
-    setDescription(null);
-    setImageAdUrl(null);
-    setLocation(null);
-    setDirectionsUrl(null);
-    setDisplayStartDateTime(null);
-    setDisplayEndDateTime(null);
-    setEventStartDate(null);
-    setEventStartTime(null);
-    setEventEndDate(null);
-    setEventEndTime(null);
+    setDescription(undefined);
+    setImageAdUrl(undefined);
+    setLocation(undefined);
+    setDirectionsUrl(undefined);
+    setDisplayStartDateTime(undefined);
+    setDisplayEndDateTime(undefined);
+    setEventStartDate(undefined);
+    setEventStartTime(undefined);
+    setEventEndDate(undefined);
+    setEventEndTime(undefined);
     setEventInterval('None');
-    setFormId(null);
-    setSignUpUrl(null);
-    setAdditionalNotes(null);
+    setFormId(undefined);
+    setSignUpUrl(undefined);
+    setAdditionalNotes(undefined);
     setIsOpen(false);
     announcementListCallback();
   };
@@ -311,10 +311,17 @@ const AnnouncementEditorModal = (props) => {
                     </Stack>
                   </FormControl>
 
-                  <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+                  <Grid
+                    templateColumns={['repeat(1,1fr)', 'repeat(2, 1fr)']}
+                    gap={6}
+                  >
                     <GridItem>
                       <FormControl>
                         <FormLabel>Announcement Display Start Date</FormLabel>
+                        <FormHelperText>
+                          If the announcement is for web/mobile, please input
+                          this field otherwise the announcement will not show
+                        </FormHelperText>
                       </FormControl>
                       <Input
                         id="displayStartDateTime"
@@ -328,6 +335,10 @@ const AnnouncementEditorModal = (props) => {
                     <GridItem>
                       <FormControl>
                         <FormLabel>Announcement Display End Date</FormLabel>
+                        <FormHelperText>
+                          If the announcement is for web/mobile, please input
+                          this field otherwise the announcement will not show
+                        </FormHelperText>
                       </FormControl>
                       <Input
                         id="displayEndDateTime"
