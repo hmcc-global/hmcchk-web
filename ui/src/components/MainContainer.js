@@ -127,6 +127,8 @@ const MainContainer = () => {
             't3ch',
             'admin',
             'stewardship',
+            'tc',
+            'ministry',
           ]}
           component={UserFormContainer}
         />
@@ -176,6 +178,8 @@ const MainContainer = () => {
             't3ch',
             'admin',
             'stewardship',
+            'tc',
+            'ministry',
           ]}
           component={CompleteUserProfileContainer}
         />
@@ -189,6 +193,8 @@ const MainContainer = () => {
             't3ch',
             'admin',
             'stewardship',
+            'tc',
+            'ministry',
           ]}
           component={UserProfileContainer}
         />
@@ -202,6 +208,8 @@ const MainContainer = () => {
             't3ch',
             'admin',
             'stewardship',
+            'tc',
+            'ministry',
           ]}
           component={CompleteUserProfileContainer}
         />
@@ -215,6 +223,8 @@ const MainContainer = () => {
             't3ch',
             'admin',
             'stewardship',
+            'tc',
+            'ministry',
           ]}
           component={UserProfileContainer}
         />
