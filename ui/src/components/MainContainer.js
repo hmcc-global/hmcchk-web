@@ -119,21 +119,6 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/forms/:id"
-          permissions={[
-            'unsigned',
-            'signed',
-            'alumni',
-            't3ch',
-            'admin',
-            'stewardship',
-            'tc',
-            'ministry',
-          ]}
-          component={UserFormContainer}
-        />
-        <PrivateRoute
-          exact
           path="/events/"
           permissions={['public']}
           component={EventsPage}
@@ -167,36 +152,6 @@ const MainContainer = () => {
           path="/email/confirm/:token"
           permissions={['public']}
           component={ConfirmEmailPage}
-        />
-        <PrivateRoute
-          exact
-          path="/complete-profile"
-          permissions={[
-            'unsigned',
-            'signed',
-            'alumni',
-            't3ch',
-            'admin',
-            'stewardship',
-            'tc',
-            'ministry',
-          ]}
-          component={CompleteUserProfileContainer}
-        />
-        <PrivateRoute
-          exact
-          path="/profile"
-          permissions={[
-            'unsigned',
-            'signed',
-            'alumni',
-            't3ch',
-            'admin',
-            'stewardship',
-            'tc',
-            'ministry',
-          ]}
-          component={UserProfileContainer}
         />
         <PrivateRoute
           exact
