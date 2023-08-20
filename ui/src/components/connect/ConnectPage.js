@@ -36,8 +36,8 @@ const ConnectPage = (props) => {
         <VStack spacing={[4, 12]} align="stretch">
           <Flex
             bgImage={
-              `linear-gradient(90deg, rgba(231, 187, 187, 0.71) 0%, rgba(89, 168, 212, 0.62) 100%), ` +
-              `url(${process.env.PUBLIC_URL}/images/connect/connect.png)`
+              // `linear-gradient(90deg, rgba(231, 187, 187, 0.71) 0%, rgba(89, 168, 212, 0.62) 100%), ` +
+              `url(${process.env.PUBLIC_URL}/images/connect/live-different-ocr2023.png)`
             }
             bgSize="cover"
             bgPosition="top"
@@ -47,7 +47,7 @@ const ConnectPage = (props) => {
             padding={6}
             flexDirection="column-reverse"
           >
-            <Box align="left" pb="3%">
+            {/* <Box align="left" pb="3%">
               <Heading
                 as="h3"
                 fontSize={['2.75em', '3.5em', '6em']}
@@ -72,7 +72,7 @@ const ConnectPage = (props) => {
               >
                 We're so glad you're here :)
               </Heading>
-            </Box>
+            </Box> */}
           </Flex>
           <ExperienceHmcc />
           <LifeGroups isLargerThan768={isLargerThan768} />
