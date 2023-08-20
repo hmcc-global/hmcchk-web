@@ -1,81 +1,59 @@
 import { Box, SimpleGrid, Stack, Link, Text } from '@chakra-ui/react';
-import { Link as HashLink } from 'react-router-dom';
 import * as React from 'react';
+import LinkList from './footerLinks.json';
+
+const LinkItem = (linkText, href, target = '_self', fontWeight = '400') => {
+  return (
+    <Link href={href}>
+      <Text fontWeight={fontWeight} target={target}>
+        {linkText}
+      </Text>
+    </Link>
+  );
+};
+
+const LinkCollection = (linkListItem) => {
+  // Ternary operator, if there's children make children
+  // else use empty array so nothing appears when the array is deconstructed
+  let children = linkListItem['children']
+    ? linkListItem['children'].map((item) => {
+        return LinkItem(item['linkText'], item['href'], item['target']);
+      })
+    : [];
+
+  return [
+    <Link
+      href={linkListItem['href']}
+      target={linkListItem['target'] ? linkListItem['target'] : '_self'}
+    >
+      <Text fontWeight="bold">{linkListItem['linkText']}</Text>
+    </Link>,
+    ...children,
+  ];
+};
 
 export function LinkGrid() {
   return (
     <SimpleGrid
-      columns={[2, 2, 4]}
+      columns="2"
       textAlign="left"
       minW="50%"
       spacing={['2vh', '2vh', '2vw']}
     >
-      <Box>
+      <Stack spacing="10">
         <Stack>
-          <Link href="/visit-us">
-            <Text fontWeight="bold">Visit</Text>
-          </Link>
-
-          <Link href="/online">Church online</Link>
-          <Link href="https://hongkong.sub.hmcc.net/urgent-announcements/hmcc-covid-19-safety-precautions/">
-            COVID-19 Policy
-          </Link>
+          {LinkCollection(LinkList[1])}
+          {LinkCollection(LinkList[2])}
         </Stack>
-      </Box>
-      <Box>
         <Stack>
-          <Link href="/connect">
-            <Text fontWeight="bold">Connect</Text>
-          </Link>
-          <HashLink to={{ pathname: '/connect', hash: '#ministries' }}>
-            Ministries
-          </HashLink>
-          <HashLink to={{ pathname: '/connect', hash: '#lifegroup' }}>
-            <Text>LIFE Groups</Text>
-          </HashLink>
+          {LinkCollection(LinkList[3])}
+          {LinkCollection(LinkList[4])}
+          {LinkCollection(LinkList[5])}
+          {LinkCollection(LinkList[6])}
         </Stack>
-      </Box>
+      </Stack>
       <Box>
-        <Stack>
-          <Link href="/about-us">
-            <Text fontWeight="bold">About</Text>
-          </Link>
-          <Link href="/about-us">
-            <Text>Our Story</Text>
-          </Link>
-          <Link href="/about-us">
-            <Text>{'Vision & Mission'}</Text>
-          </Link>
-          <Link href="/about-us">
-            <Text>Our Values</Text>
-          </Link>
-          <Link href="/about-us">
-            <Text>Our Strategy</Text>
-          </Link>
-          <Link href="/about-us">
-            <Text>Our Staff</Text>
-          </Link>
-          <Link href="/about-us">
-            <Text>Beliefs</Text>
-          </Link>
-        </Stack>
-      </Box>
-
-      <Box>
-        <Stack>
-          <Link href="/events">
-            <Text fontWeight="bold">Events</Text>
-          </Link>
-          <Link href="/sermons">
-            <Text fontWeight="bold">Sermons</Text>
-          </Link>
-          <Link href="/give">
-            <Text fontWeight="bold">Give</Text>
-          </Link>
-          <Link href="https://hongkong.sub.hmcc.net/privacy-policy-2/">
-            <Text fontWeight="bold">Privacy Policy</Text>
-          </Link>
-        </Stack>
+        <Stack>{LinkCollection(LinkList[0])}</Stack>
       </Box>
     </SimpleGrid>
   );

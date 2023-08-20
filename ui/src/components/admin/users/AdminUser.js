@@ -125,7 +125,33 @@ export default function AdminUser(props) {
     return '';
   };
 
+  const classAttendanceFormatter = (params) => {
+    if (params.value !== '') {
+      const dateArr = params.value
+        .trim()
+        .split(/\s*,\s*/)
+        .filter(Boolean);
+      const formattedDateArr = dateArr.map((e) => {
+        const dateObj = DateTime.fromFormat(e, dateFromFormat);
+        if (dateObj.isValid) return dateObj.toFormat(dateToFormat);
+
+        return null;
+      });
+
+      return formattedDateArr.filter(Boolean).join(', ');
+    }
+
+    return params.value;
+  };
+
   // Getter Functions: to handle errors in retrieving data
+  const classAttendanceHeaderGetter = (params, parentName) => {
+    const headerName = 'Class Attendance';
+    return params.location === 'csv'
+      ? `${parentName} ${headerName}`
+      : headerName;
+  };
+
   const officialNameHeaderGetter = (params, parentName) => {
     const headerName = 'Official Name';
     if (params.location === 'csv') {
@@ -136,38 +162,6 @@ export default function AdminUser(props) {
 
   const membershipHeaderGetter = (params, columnName) =>
     params.location === 'csv' ? `Membership ${columnName}` : columnName;
-
-  // Membership Getters
-  // TODO-aparedan: Get latest membershipInfo. Right now just assume always get [0]
-  const membershipRecommitmentDateFormatter = (params) => {
-    if (
-      params &&
-      params.data &&
-      params.data.membershipInfo &&
-      params.data.membershipInfo[0]
-    ) {
-      const { recommitmentDate: recommitmentDateStr } =
-        params.data.membershipInfo[0];
-      return dateFormatter(recommitmentDateStr);
-    }
-
-    return '';
-  };
-
-  const membershipRecognitionDateFormatter = (params) => {
-    if (
-      params &&
-      params.data &&
-      params.data.membershipInfo &&
-      params.data.membershipInfo[0]
-    ) {
-      const { recognitionDate: recognitionDateStr } =
-        params.data.membershipInfo[0];
-      return dateFormatter(recognitionDateStr);
-    }
-
-    return '';
-  };
 
   const membershipOfficialNameGetter = (params) => {
     if (
@@ -186,8 +180,24 @@ export default function AdminUser(props) {
   const membershipInfoGetter = (params) => {
     if (params) {
       const { colId } = params.colDef;
-      return params.data.membershipInfo[0]?.[colId];
+      const data = params.data.membershipInfo[0]?.[colId];
+
+      if (Array.isArray(data)) return data[0] ?? '';
+
+      return data;
     }
+  };
+
+  const membershipClassAttendanceValueGetter = (params) => {
+    if (
+      params?.data?.membershipInfo == null ||
+      !Array.isArray(params.data.membershipInfo) ||
+      params.data.membershipInfo[0] == null ||
+      !Array.isArray(params.data.membershipInfo[0]?.classAttendance)
+    )
+      return '';
+
+    return params.data.membershipInfo[0].classAttendance.join();
   };
 
   const membershipFilterGetter = (params) => {
@@ -200,21 +210,17 @@ export default function AdminUser(props) {
     }
   };
 
-  // Baptism Getters
-  const baptismDateFormatter = (params) => {
-    if (
-      params &&
-      params.data &&
-      params.data.baptismInfo &&
-      params.data.baptismInfo[0]
-    ) {
-      const { baptismDate: baptismDateStr } = params.data.baptismInfo[0];
-      return dateFormatter(baptismDateStr);
+  const membershipBaptismDateFormatter = (params) => {
+    if (params.value) {
+      const dateTimeFormat = 'dd MMM yyyy';
+      const dateTimeObj = DateTime.fromISO(params.value);
+      if (dateTimeObj.isValid) return dateTimeObj.toFormat(dateTimeFormat);
     }
 
     return '';
   };
 
+  // Baptism Getters
   const baptismPlaceGetter = (params) => {
     if (
       params &&
@@ -248,6 +254,18 @@ export default function AdminUser(props) {
       const { colId } = params.colDef;
       return params.data.baptismInfo[0]?.[colId];
     }
+  };
+
+  const baptismClassAttendanceValueGetter = (params) => {
+    if (
+      params?.data?.baptismInfo == null ||
+      !Array.isArray(params.data.baptismInfo) ||
+      params.data.baptismInfo[0] == null ||
+      !Array.isArray(params.data.baptismInfo[0]?.classAttendance)
+    )
+      return '';
+
+    return params.data.baptismInfo[0].classAttendance.join();
   };
 
   const baptismFilterGetter = (params) => {
@@ -344,6 +362,38 @@ export default function AdminUser(props) {
     return false;
   };
 
+  const membershipClassAttendanceValueSetter = (params) => {
+    const isValidDateArr = (e) => {
+      return DateTime.fromFormat(e, dateFromFormat).isValid;
+    };
+
+    if (params && params.data && params.newValue) {
+      const { colId } = params.colDef;
+      const { newValue } = params;
+      let parsedNewValue = [];
+
+      const dateArr = newValue
+        .trim()
+        .split(/\s*,\s*/)
+        .filter(Boolean);
+      if (dateArr.length > 0 && dateArr.every(isValidDateArr)) {
+        parsedNewValue = dateArr.sort().reverse();
+      } else {
+        alert(
+          'Invalid ClassAttendance format. Expected: yyyy-MM-dd separated by commas "," e.g. yyyy-MM-dd,yyyy-MM-dd'
+        );
+        return false;
+      }
+
+      const newMembershipInfo = { ...params.data.membershipInfo[0] };
+      newMembershipInfo[colId] = parsedNewValue;
+      params.data.membershipInfo[0] = newMembershipInfo;
+      return true;
+    }
+
+    return false;
+  };
+
   const baptismInfoSetter = (params) => {
     if (params && params.data) {
       const { colId } = params.colDef;
@@ -354,6 +404,38 @@ export default function AdminUser(props) {
       }
       const newBaptismInfo = { ...params.data.baptismInfo[0] };
       newBaptismInfo[colId] = params.newValue ?? '';
+      params.data.baptismInfo[0] = newBaptismInfo;
+      return true;
+    }
+
+    return false;
+  };
+
+  const baptismClassAttendanceValueSetter = (params) => {
+    const isValidDateArr = (e) => {
+      return DateTime.fromFormat(e, dateFromFormat).isValid;
+    };
+
+    if (params && params.data && params.newValue) {
+      const { colId } = params.colDef;
+      const { newValue } = params;
+      let parsedNewValue = [];
+
+      const dateArr = newValue
+        .trim()
+        .split(/\s*,\s*/)
+        .filter(Boolean);
+      if (dateArr.length > 0 && dateArr.every(isValidDateArr)) {
+        parsedNewValue = dateArr.sort().reverse();
+      } else {
+        alert(
+          'Invalid ClassAttendance format. Expected: yyyy-MM-dd separated by commas "," e.g. yyyy-MM-dd,yyyy-MM-dd'
+        );
+        return false;
+      }
+
+      const newBaptismInfo = { ...params.data.baptismInfo[0] };
+      newBaptismInfo[colId] = parsedNewValue;
       params.data.baptismInfo[0] = newBaptismInfo;
       return true;
     }
@@ -444,9 +526,12 @@ export default function AdminUser(props) {
       ...data,
     });
 
-    if (res.status !== 200) {
+    if (res.status !== 200 || res.data.id == null || res.data.id === '') {
       alert('Something went wrong, please refresh and try again..');
+      return;
     }
+
+    return res.data.id;
   };
 
   const updateMembershipInfo = async (data) => {
@@ -464,9 +549,11 @@ export default function AdminUser(props) {
       ...data,
     });
 
-    if (res.status !== 200) {
+    if (res.status !== 200 || res.data.id == null || res.data.id === '') {
       alert('Something went wrong, please refresh and try again..');
     }
+
+    return res.data.id;
   };
 
   const updateBaptismInfo = async (data) => {
@@ -497,7 +584,11 @@ export default function AdminUser(props) {
           if (!newMembershipInfo[officialNameProp]) {
             newMembershipInfo[officialNameProp] = p.data.fullName;
           }
-          await createMembershipInfo(newMembershipInfo);
+
+          const membershipId = await createMembershipInfo(newMembershipInfo);
+          const rowData = p.data;
+          rowData.membershipInfo[0]['id'] = membershipId;
+          p.api.applyTransaction({ update: [rowData] });
         }
       } else if (groupHeaderName && groupHeaderName === 'Baptism Info') {
         const { baptismInfo } = p.data;
@@ -509,7 +600,11 @@ export default function AdminUser(props) {
           if (!newBaptismInfo[officialNameProp]) {
             newBaptismInfo[officialNameProp] = p.data.fullName;
           }
-          await createBaptismInfo(newBaptismInfo);
+
+          const baptismId = await createBaptismInfo(newBaptismInfo);
+          const rowData = p.data;
+          rowData.baptismInfo[0]['id'] = baptismId;
+          p.api.applyTransaction({ udpate: [rowData] });
         }
       } else {
         if (p.data) {
@@ -686,7 +781,7 @@ export default function AdminUser(props) {
               colId: 'recommitmentDate',
               filterValueGetter: membershipFilterGetter,
               valueGetter: membershipInfoGetter,
-              valueFormatter: membershipRecommitmentDateFormatter,
+              valueFormatter: membershipBaptismDateFormatter,
               valueSetter: membershipInfoSetter,
             },
             {
@@ -696,7 +791,7 @@ export default function AdminUser(props) {
               colId: 'recognitionDate',
               filterValueGetter: membershipFilterGetter,
               valueGetter: membershipInfoGetter,
-              valueFormatter: membershipRecognitionDateFormatter,
+              valueFormatter: membershipBaptismDateFormatter,
               valueSetter: membershipInfoSetter,
             },
             {
@@ -705,6 +800,15 @@ export default function AdminUser(props) {
               colId: 'officialName',
               valueGetter: membershipOfficialNameGetter,
               valueSetter: membershipInfoSetter,
+              columnGroupShow: 'open',
+            },
+            {
+              headerValueGetter: (p) =>
+                classAttendanceHeaderGetter(p, 'Membership'),
+              colId: 'classAttendance',
+              valueGetter: membershipClassAttendanceValueGetter,
+              valueFormatter: classAttendanceFormatter,
+              valueSetter: membershipClassAttendanceValueSetter,
               columnGroupShow: 'open',
             },
           ],
@@ -718,7 +822,7 @@ export default function AdminUser(props) {
               headerName: 'Baptism Date',
               valueGetter: baptismInfoGetter,
               filterValueGetter: baptismFilterGetter,
-              valueFormatter: baptismDateFormatter,
+              valueFormatter: membershipBaptismDateFormatter,
               valueSetter: baptismInfoSetter,
               colId: 'baptismDate',
               cellEditorPopup: true,
@@ -740,6 +844,15 @@ export default function AdminUser(props) {
               colId: 'officialName',
               valueGetter: baptismOfficialNameGetter,
               valueSetter: baptismInfoSetter,
+              columnGroupShow: 'open',
+            },
+            {
+              headerValueGetter: (p) =>
+                classAttendanceHeaderGetter(p, 'Baptism'),
+              colId: 'classAttendance',
+              valueGetter: baptismClassAttendanceValueGetter,
+              valueFormatter: classAttendanceFormatter,
+              valueSetter: baptismClassAttendanceValueSetter,
               columnGroupShow: 'open',
             },
           ],

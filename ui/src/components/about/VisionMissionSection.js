@@ -9,54 +9,66 @@ import {
 
 const VisionMissionCard = ({ title, message }) => {
   return (
-    <Box
-      w={['20em', '30em']}
-      h={['15em', '13em']}
-      borderWidth="1px"
-      borderRadius="20"
-      bgColor="#FFFFFF"
-      bgPosition="center"
-      bgSize="cover"
-      display="flex"
-      flexDir="column"
-      justifyContent="center"
-      px={2}
-    >
+    <Stack spacing="5" w="100%">
       <Heading
         as="h2"
-        fontSize={['2xl', '5xl']}
+        fontSize={['3xl', '5xl']}
         fontWeight={800}
         lineHeight={1}
         color="#0628A3"
         textAlign="center"
-        mb={1}
+        display={['none', 'block']}
       >
         {title}
       </Heading>
-      <Text color="black" fontSize={['sm', 'md']} textAlign="center">
-        {message}
-      </Text>
-    </Box>
+      <Box
+        w="100%"
+        h={['12em', '7em']}
+        minH="5em"
+        borderWidth="1px"
+        borderRadius="7"
+        shadow="md"
+        bgImage={`url('${process.env.PUBLIC_URL}/images/about/water.jpeg')`}
+        bgPosition="center"
+        bgSize="cover"
+        display="flex"
+        flexDir="column"
+        justifyContent="center"
+        px={[9, 5]}
+      >
+        <Heading
+          as="h2"
+          fontSize={['3xl', '5xl']}
+          fontWeight={800}
+          lineHeight={1}
+          color="#0628A3"
+          textAlign="center"
+          mb={5}
+          display={['block', 'none']}
+        >
+          {title}
+        </Heading>
+        <Text color="black" fontSize={['md', 'md']} textAlign="center">
+          {message}
+        </Text>
+      </Box>
+    </Stack>
   );
 };
 
 const VisionMissionSection = (props) => {
   const { blurb } = props;
   return (
-    <Container
-      w="100vw"
-      padding={0}
-      maxW="unset"
-      h={{ base: '100vh', md: '31.25vw' }}
-      bgImage={`url('${process.env.PUBLIC_URL}/images/about/visionMissionBg.png')`}
-    >
-      <VStack height="100%" justifyContent="center">
+    <Container w="100vw" maxW="container.lg">
+      <VStack height="100%" justifyContent="center" padding={1}>
         <Stack
-          direction={{ base: 'column', md: 'row' }}
+          direction={{ base: 'column', md: 'column' }}
           w="100%"
           height="100%"
           alignItems="center"
           justifyContent="center"
+          spacing="5"
+          id="vision-mission"
         >
           {blurb && blurb.vision && (
             <VisionMissionCard title="VISION" message={blurb.vision} />

@@ -5,6 +5,8 @@ const accessTypeList = [
   'admin',
   'stewardship',
   't3ch',
+  'ministry',
+  'tc',
 ];
 const lifestageList = [
   'Building Blocks (3-11 years old)',
@@ -31,22 +33,19 @@ const ministryTeamList = [
 
 const lifegroupList = [
   'Not in a LIFE Group',
-  '4K',
-  'BeReal',
-  'CHRISTiFY',
-  'Covenant',
-  'crocs',
-  'Dim Sum',
-  'Fuego',
-  'Gsus',
-  'JENGA',
+  'BROTEIN',
+  'C.I.A.',
+  'SASSY',
+  'PANDA Xpress',
+  'TRAINS',
+  'Bao Bae',
+  'BLOOM',
   'Latitude',
-  'MA FAM',
-  'META',
-  'Mezami',
-  'Palette',
-  'PBnJ',
+  'Covenant',
+  'Asia Missions Project Team',
 ];
+
+
 
 const districtList = [
   'Not Applicable',
@@ -345,6 +344,8 @@ const paymentMethodList = [
   'Bank Transfer',
 ];
 
+const eventIntervalList = ['None', 'Daily', 'Weekly', 'Monthly'];
+
 export {
   accessTypeList,
   lifestageList,
@@ -355,4 +356,5 @@ export {
   campusList,
   countryList,
   paymentMethodList,
+  eventIntervalList,
 };

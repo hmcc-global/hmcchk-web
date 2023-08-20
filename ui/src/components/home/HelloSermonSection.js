@@ -18,12 +18,12 @@ const HelpCardInfo = [
     title: "I'm New",
     text: 'Connect with us',
     image: 'im-new-bg.png',
-    titleStyle: { color: 'green' },
+    titleStyle: { color: 'green', fontFamily: 'Inter' },
     textStyle: { color: 'black' },
     path: '/connect',
   },
   {
-    title: 'Visit us',
+    title: 'Visit Us',
     text: 'Every Sunday at 10AM HKT \n In-person & Online',
     image: 'visit-us-bg.png',
     titleStyle: { color: 'white' },
@@ -41,6 +41,9 @@ const HelpCardInfo = [
 ];
 
 const HelpCard = (props) => {
+  const [mdHeadingSize, setMdHeadingSize] = useState('2.5em');
+  const [mdTitleSize, setMdTitleSize] = useState('1.5em');
+
   return (
     <>
       <Link
@@ -53,9 +56,10 @@ const HelpCard = (props) => {
                 process.env.PUBLIC_URL + '/images/home/' + props.image
               })`
         }
+        C
         backdropFilter="blur(4px)"
         width="100%"
-        height="auto"
+        height={['auto', '220']}
         bgSize="cover"
         padding="6%"
         bgPosition="center center"
@@ -65,18 +69,27 @@ const HelpCard = (props) => {
         display="flex"
         cursor="pointer"
         style={{ textDecoration: 'none', zIndex: 1 }}
+        overflow="hidden"
+        onMouseOver={() => {
+          setMdHeadingSize('2.7em');
+          setMdTitleSize('1.7em');
+        }}
+        onMouseOut={() => {
+          setMdHeadingSize('4xl');
+          setMdTitleSize('1.5rem');
+        }}
       >
         <VStack>
           <Heading
             style={props.titleStyle}
-            fontSize={{ base: '1.5rem', md: '2.5rem' }}
+            fontSize={{ base: '1.8em', md: mdHeadingSize }}
             fontWeight={600}
           >
             {props.title}
           </Heading>
           <Text
             style={props.textStyle}
-            fontSize={{ base: '0.8rem', md: '1.2rem' }}
+            fontSize={{ base: '1em', md: mdTitleSize }}
             textAlign="center"
             whiteSpace="pre-wrap"
           >
@@ -114,11 +127,7 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
     : '';
   const getLatestSermon = async () => {
     try {
-      const res = await axios.get('/api/live-sermon/get-live-sermon', {
-        params: {
-          isPublished: true,
-        },
-      });
+      const res = await axios.get('/api/live-sermon/get-live-sermon');
 
       if (res.status === 200 && res.data && res.data.length !== 0) {
         setIsOnline(true);
@@ -167,17 +176,16 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
+            boxShadow="rgba(164,164,164,0.5)"
+            blur="20px"
           >
-            <VStack
-              width="80%"
-              padding={{ base: '3rem 0.5rem', md: '5rem 2rem' }}
-              gap={4}
-            >
+            <VStack width="80%" py={{ base: '3rem', md: '5rem' }} gap={4}>
               <Heading
                 alignSelf="flex-start"
                 color="#0628A3"
-                fontSize={{ base: 'lg', md: '4xl' }}
-                fontWeight={600}
+                fontSize={{ base: '1.875em', md: '4xl' }}
+                fontWeight={['bold', '600']}
+                fontFamily="Inter"
               >
                 How can we help you?
               </Heading>
@@ -201,12 +209,13 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
             justifyContent="center"
             alignItems="center"
           >
-            <VStack
-              width="80%"
-              padding={{ base: '3rem 0.5rem', md: '5rem 2rem' }}
-              gap={4}
-            >
-              <Heading color="white" alignSelf="flex-start" fontWeight={600}>
+            <VStack width="80%" py={{ base: '3rem', md: '5rem' }} gap={4}>
+              <Heading
+                color="white"
+                alignSelf="flex-start"
+                fontWeight={600}
+                fontSize={['1.875em', '4xl']}
+              >
                 Latest Sermon
               </Heading>
               <Box>
@@ -258,6 +267,13 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
                 marginTop="7%"
                 as={ReactLink}
                 to={{ pathname: '/sermons' }}
+                fontFamily="Inter"
+                fontWeight="semibold"
+                fontSize="1.2em"
+                _hover={{
+                  bg: '#A5CBFF',
+                  color: '#172848',
+                }}
               >
                 {isOnline ? 'Watch HMCC LIVE' : 'See All Past Sermons'}
               </Button>

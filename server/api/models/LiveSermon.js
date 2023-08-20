@@ -32,11 +32,16 @@ module.exports = {
     sermonDescription: {
       type: 'string',
     },
-    isPublished: {
-      type: 'boolean',
-    },
     lastUpdatedBy: {
       type: 'string',
+    },
+    streamStartTime: {
+      type: 'ref',
+      columnType: 'datetime',
+    },
+    streamEndTime: {
+      type: 'string',
+      columnType: 'datetime',
     },
   },
 };

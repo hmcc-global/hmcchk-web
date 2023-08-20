@@ -26,8 +26,9 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { customAxios as axios } from '../helpers/customAxios';
 import {
   ministryTeamList,
   lifegroupList,
@@ -52,6 +53,8 @@ const UserProfileMobile = (props) => {
   const { user } = props;
   const [userData, setUserData] = useState(null);
   const [formList, setFormList] = useState(null);
+  const [unsignedFormList, setUnsignedFormList] = useState([]);
+  const [signedUpFormList, setSignedUpFormList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
 
   const onModalClose = (e) => {
@@ -69,13 +72,40 @@ const UserProfileMobile = (props) => {
     }
   };
 
-  const fetchPublishedForms = async () => {
+  const fetchPublishedForms = useCallback(async () => {
+    //get all forms
     const { data, status } = await getLoginOnlyFormsRequest();
 
     if (status === 200) {
       setFormList([...data]);
     }
-  };
+  }, []);
+
+  const fetchSignedUpForms = useCallback(async () => {
+    //get signed up forms
+    const { data, status } = await axios.get('/api/forms/get-signedup-form', {
+      params: {
+        userId: user.id,
+      },
+    });
+
+    if (status === 200) {
+      setSignedUpFormList([...data]);
+    }
+  }, [user.id]);
+
+  const fetchUnignedUpForms = useCallback(async () => {
+    //get signed up forms
+    const { data, status } = await axios.get('/api/forms/get-unsignedup-form', {
+      params: {
+        userId: user.id,
+      },
+    });
+
+    if (status === 200) {
+      setUnsignedFormList([...data]);
+    }
+  }, [user.id]);
 
   const setUserInformationFields = (userData) => {
     for (let key in userData) {
@@ -140,6 +170,8 @@ const UserProfileMobile = (props) => {
   useEffect(() => {
     fetchUserData();
     fetchPublishedForms();
+    fetchSignedUpForms();
+    fetchUnignedUpForms();
   }, []);
 
   const inputBox = {
@@ -156,9 +188,11 @@ const UserProfileMobile = (props) => {
   };
 
   const tabTitle = {
-    color: '#000000',
+    padding: '0.5px',
     fontWeight: '700',
     fontSize: 'inherit',
+    color: '#0628A3',
+    _selected: { borderColor: '#0628A3', color: '#000000' },
   };
 
   return (
@@ -226,27 +260,9 @@ const UserProfileMobile = (props) => {
           fontSize="0.9rem"
         >
           <TabList justifyContent="space-between">
-            <Tab
-              p="0.5"
-              style={tabTitle}
-              _selected={{ borderColor: '#0628A3', color: '#0628A3' }}
-            >
-              Signup Links
-            </Tab>
-            <Tab
-              p="0.5"
-              style={tabTitle}
-              _selected={{ borderColor: '#0628A3', color: '#0628A3' }}
-            >
-              Personal Profile
-            </Tab>
-            <Tab
-              p="0.5"
-              style={tabTitle}
-              _selected={{ borderColor: '#0628A3', color: '#0628A3' }}
-            >
-              Church Profile
-            </Tab>
+            <Tab style={tabTitle}>Signup Links</Tab>
+            <Tab style={tabTitle}>Personal Profile</Tab>
+            <Tab style={tabTitle}>Church Profile</Tab>
           </TabList>
 
           <TabPanels>
@@ -254,10 +270,25 @@ const UserProfileMobile = (props) => {
               <Flex direction="column">
                 {formList && formList.length > 0 && (
                   <Box>
-                    <Text fontWeight="700" fontSize="0.95rem" color="#718096" mb="2.5">
+                    <Text
+                      fontWeight="700"
+                      fontSize="0.95rem"
+                      color="#718096"
+                      mb="2.5"
+                    >
                       Available Signup Links:
                     </Text>
-                    {generatePublishedFormLinks(formList)}
+                    {generatePublishedFormLinks(unsignedFormList, false)}
+                    <Text
+                      fontWeight="700"
+                      fontSize="0.95rem"
+                      color="#718096"
+                      mt="2.5"
+                      mb="2.5"
+                    >
+                      Your Signups:
+                    </Text>
+                    {generatePublishedFormLinks(signedUpFormList, true)}
                   </Box>
                 )}
                 {/* <Button
@@ -333,7 +364,6 @@ const UserProfileMobile = (props) => {
                     size="sm"
                     borderRadius="5"
                     {...register('lifestage', { required: true })}
-                    pointerEvents="none"
                     isInvalid={errors['lifestage']}
                     placeholder="Please fill in this field"
                   >
@@ -431,15 +461,22 @@ const UserProfileMobile = (props) => {
               </Stack>
             </TabPanel>
             <TabPanel p="7%">
+              <Center mb="5%">
+                <Button
+                  size="md"
+                  color="#0628A3"
+                  borderColor="#0628A3"
+                  borderRadius="10"
+                  variant="outline"
+                  type="submit"
+                >
+                  Save Information
+                </Button>
+              </Center>
               <Stack spacing="7%">
                 <FormControl>
                   <FormLabel color="#2C5282">LIFE Group</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
-                    {...register('lifeGroup')}
-                    pointerEvents="none"
-                  >
+                  <Select size="sm" borderRadius="5" {...register('lifeGroup')}>
                     {lifegroupList.map((item) => {
                       return <option key={'lg' + item}>{item}</option>;
                     })}
@@ -450,7 +487,6 @@ const UserProfileMobile = (props) => {
                   <Select
                     size="sm"
                     borderRadius="5"
-                    pointerEvents="none"
                     {...register('ministryTeam')}
                   >
                     {ministryTeamList.map((item) => {

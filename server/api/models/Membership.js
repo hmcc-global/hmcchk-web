@@ -9,7 +9,7 @@ module.exports = {
     },
     classAttendance: {
       type: "json",
-      defaultsTo: { yyyymmdd: false },
+      defaultsTo: [],
     },
     recognitionDate: {
       type: "ref",

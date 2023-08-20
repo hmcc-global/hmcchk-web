@@ -2,7 +2,6 @@ import {
   Accordion,
   Text,
   Heading,
-  Center,
   Box,
   AccordionItem,
   AccordionButton,
@@ -18,14 +17,15 @@ const ValuesSection = (props) => {
   return (
     <>
       <VisionMissionSection blurb={visionMission} />
-      <Box w="90%">
+      <Box w="100%" px="1" id="our-values">
         <Heading
           as="h2"
-          fontSize={['4xl', '6xl']}
+          fontSize={['3xl', '5xl']}
           fontWeight={700}
           color="#0628A3"
           lineHeight={1}
           textAlign="center"
+          mt={5}
           mb={5}
         >
           {title.slice(17, 28)}

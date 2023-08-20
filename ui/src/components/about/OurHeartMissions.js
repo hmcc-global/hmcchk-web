@@ -49,10 +49,11 @@ const MissionSection = (props) => {
         <Box>
           <Heading
             textAlign="center"
-            textColor="rgba(66, 86, 158, 1)"
-            fontSize={['xl', '3xl']}
+            textColor="#0628A3"
+            fontSize={['3xl', '5xl']}
             fontWeight={700}
             paddingBottom={2}
+            id="our-heart-for-missions"
           >
             {title}
           </Heading>
@@ -60,11 +61,15 @@ const MissionSection = (props) => {
             {blurb.blurb[1]}
           </Text>
         </Box>
-        <Container backgroundColor="rgba(238, 250, 255, 1)" maxW="container.lg">
+        <Container
+          backgroundColor="rgba(238, 250, 255, 1)"
+          maxW="container.lg"
+          borderRadius="7"
+        >
           <Box backgroundColor="rgba(238, 250, 255, 1)" px={{ base: 1, md: 3 }}>
             <Heading
               textAlign="left"
-              textColor="rgba(66, 86, 158, 1)"
+              textColor="#0628A3"
               fontSize={['xl', '3xl']}
               fontWeight={700}
               paddingTop="1em"
@@ -76,14 +81,18 @@ const MissionSection = (props) => {
             </Text>
           </Box>
         </Container>
-        <Container backgroundColor="rgba(243, 243, 243, 1)" maxW="container.lg">
+        <Container
+          backgroundColor="rgba(243, 243, 243, 1)"
+          maxW="container.lg"
+          borderRadius="7"
+        >
           <Box px={{ base: 1, md: 3 }}>
             <Heading
               textAlign="left"
-              textColor="rgba(66, 86, 158, 1)"
+              textColor="#0628A3"
               fontSize={['xl', '3xl']}
               fontWeight={700}
-              py="1em"
+              pt="1em"
             >
               {blurb.title[3]}
             </Heading>
@@ -95,7 +104,6 @@ const MissionSection = (props) => {
             </Text>
             <Text>{blurb.blurb[4]}</Text>
           </Box>
-          {}
           <Stack
             direction="row"
             display={{ base: 'none', sm: 'none', md: 'flex' }}
@@ -142,7 +150,7 @@ const MissionSection = (props) => {
                 text="Send me"
               ></Picture>
               <Picture
-                image={`/images/about/transformasphere.png`}
+                image={`/images/about/transformasphere.svg`}
                 year="2017"
                 text="Transformasphere"
               ></Picture>

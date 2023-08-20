@@ -19,23 +19,31 @@ const EventsPage = (props) => {
   const getEventsListFromDatabase = async () => {
     try {
       const { data, status } = await axios.get(
-        '/api/announcements/get-announcements'
+        '/api/announcement/get'
       );
+
       if (status === 200) {
         const filtered = data.filter((item) => {
-          if (item.endDate) {
+          if(item.displayEndDateTime === null ){
+            return true;
+          } else return false;
+        });
+        const filteredEndDate = data.filter((item) => {
+          if (item.displayEndDateTime) {
             // Add one day to offset end date to end of day
-            let endDate = new DateTime.fromISO(item.endDate).plus({ days: 1 });
+            let endDate = new DateTime.fromISO(item.displayEndDateTime);
             const renderDate = getRenderDate(
-              item.startDate,
-              item.endDate,
-              item.recurrence
+              item.eventStartDate,
+              item.eventEndDate,
+              item.eventInterval,
+              item.eventStartTime
             );
             item.renderDate = renderDate;
             return endDate > DateTime.now();
-          } else return false;
+          }  else return false;
         });
-        filtered.sort((a, b) => (a.renderDate > b.renderDate ? 1 : -1));
+        filteredEndDate.sort((a, b) => (a.renderDate > b.renderDate ? 1 : -1));
+        filtered.push(...filteredEndDate);
         setEventsList([...filtered]);
       } else {
         throw Error('Something went wrong with the request');
@@ -46,8 +54,16 @@ const EventsPage = (props) => {
   };
   return (
     <Container maxW="container.lg">
-      <Container maxW="container.lg" bgImage={`url('${process.env.PUBLIC_URL}/images/event_banner.png')`} bgPosition="center"
-          bgSize="cover" marginTop="10" paddingBottom="20">
+      <Container
+        maxW="container.lg"
+        bgImage={`url('${process.env.PUBLIC_URL}/images/event_banner.png')`}
+        bgPosition="center"
+        bgSize="cover"
+        marginTop="10"
+        paddingBottom="20"
+        borderWidth="1px"
+        borderRadius="20"
+      >
         <Heading
           as="h2"
           mb="2"
@@ -59,7 +75,12 @@ const EventsPage = (props) => {
         >
           Events
         </Heading>
-        <Text fontSize={{ base: 'sm', md: 'md' }} textAlign="center" textColor="rgba(255, 255, 255, 1)" fontWeight="600">
+        <Text
+          fontSize={{ base: 'sm', md: 'md' }}
+          textAlign="center"
+          textColor="rgba(255, 255, 255, 1)"
+          fontWeight="600"
+        >
           Check out what's happening at HMCC of Hong Kong!
         </Text>
       </Container>

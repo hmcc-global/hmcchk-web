@@ -13,9 +13,10 @@ import StrategySection from './StrategySection';
 import ValuesSection from './ValuesSection';
 import OurHeartMissions from './OurHeartMissions';
 import blurbs from './about.json';
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { Select } from '@chakra-ui/select';
-import { Route } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import scrollTo from '../helpers/ScrollTo';
 
 const sections = [
   'Our Story',
@@ -31,6 +32,42 @@ const AboutUsContainer = (props) => {
   const banner = blurbs.banner;
 
   const handleChange = (e) => setSelected(parseInt(e.target.value));
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    switch (hash) {
+      case '#our-story':
+        setSelected(0);
+        scrollTo('our-story');
+        break;
+      case '#vision-mission':
+        setSelected(1);
+        scrollTo('vision-mission');
+        break;
+      case '#values':
+        setSelected(1);
+        scrollTo('our-values');
+        break;
+      case '#strategy':
+        setSelected(2);
+        scrollTo('strategy');
+        break;
+      case '#staff':
+        setSelected(3);
+        scrollTo('staff');
+        break;
+      case '#beliefs':
+        setSelected(4);
+        scrollTo('beliefs');
+        break;
+      case '#missions':
+        setSelected(5);
+        scrollTo('our-heart-for-missions');
+        break;
+      default:
+        break;
+    }
+  }, [hash, setSelected]);
 
   //To do: implement navbar, menu and footer links to individual sections("our story", "vision mision" etc)
 
@@ -79,11 +116,18 @@ const AboutUsContainer = (props) => {
                     <Text
                       color="rgba(255, 255, 255, 1)"
                       fontWeight={600}
-                      textDecoration="none"
-                      borderBottom="rgba(255, 255, 255, 1) 0.1em solid"
+                      // textDecoration={selected === i ? 'underline' : 'none'}
+                      borderBottom={
+                        selected === i
+                          ? 'rgba(255, 255, 255, 1) 0.1em solid'
+                          : 'none'
+                      }
                       cursor="pointer"
                       fontSize={{ md: 'small', lg: 'sm' }}
                       onClick={() => setSelected(i)}
+                      _hover={{
+                        borderBottom: 'rgba(255, 255, 255, 1) 0.1em solid',
+                      }}
                     >
                       {e}
                     </Text>

@@ -37,6 +37,8 @@ import VideoDetails from './witness/video-testimony/VideoDetails';
 import WitnessHomeContainer from './witness/WitnessHomeContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import TextDetails from './witness/text-testimony/TextDetails';
+import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementContainer';
+import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
 
 const MainContainer = () => {
   return (
@@ -117,19 +119,6 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/forms/:id"
-          permissions={[
-            'unsigned',
-            'signed',
-            'alumni',
-            't3ch',
-            'admin',
-            'stewardship',
-          ]}
-          component={UserFormContainer}
-        />
-        <PrivateRoute
-          exact
           path="/events/"
           permissions={['public']}
           component={EventsPage}
@@ -174,6 +163,8 @@ const MainContainer = () => {
             't3ch',
             'admin',
             'stewardship',
+            'tc',
+            'ministry',
           ]}
           component={CompleteUserProfileContainer}
         />
@@ -187,32 +178,8 @@ const MainContainer = () => {
             't3ch',
             'admin',
             'stewardship',
-          ]}
-          component={UserProfileContainer}
-        />
-        <PrivateRoute
-          exact
-          path="/complete-profile"
-          permissions={[
-            'unsigned',
-            'signed',
-            'alumni',
-            't3ch',
-            'admin',
-            'stewardship',
-          ]}
-          component={CompleteUserProfileContainer}
-        />
-        <PrivateRoute
-          exact
-          path="/profile"
-          permissions={[
-            'unsigned',
-            'signed',
-            'alumni',
-            't3ch',
-            'admin',
-            'stewardship',
+            'tc',
+            'ministry',
           ]}
           component={UserProfileContainer}
         />
@@ -239,7 +206,6 @@ const MainContainer = () => {
           permissions={['public']}
           component={TextDetails}
         />
-
         {/* Admin items */}
         <PrivateRoute
           exact
@@ -250,28 +216,34 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/admin"
-          permissions={['t3ch', 'admin', 'stewardship']}
+          permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
           component={AdminHome}
         />
         <PrivateRoute
           exact
           path="/admin/home"
-          permissions={['t3ch', 'admin', 'stewardship']}
+          permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
           component={AdminHome}
         />
         <PrivateRoute
           exact
           path="/admin/forms"
-          permissions={['t3ch', 'admin', 'stewardship']}
+          permissions={['tc', 't3ch', 'admin', 'stewardship']}
           component={FormManager}
         />
-        <PrivateRoute 
+        <PrivateRoute
+          exact
+          path="/admin/announcements"
+          permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
+          component={AdminAnnouncementContainer}
+        />
+        <PrivateRoute
           exact
           path="/admin/formViewer"
-          permissions={['t3ch', 'admin', 'stewardship']}
+          permissions={['tc', 't3ch', 'admin', 'stewardship']}
           component={AdminFormDataViewer}
         />
-        <PrivateRoute 
+        <PrivateRoute
           exact
           path="/admin/liveSermon"
           permissions={['t3ch', 'admin', 'stewardship']}
@@ -295,10 +267,10 @@ const MainContainer = () => {
           permissions={['admin', 'stewardship']}
           component={AdminUser}
         />
-        
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
       <FooterContainer />
+      <PrayerFloatButton />
       <ConnectFloatButton />
     </chakra.main>
   );

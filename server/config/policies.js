@@ -41,14 +41,21 @@ module.exports.policies = {
   'cache/*': ['isLoggedIn', 'aboveTech'],
 
   // Forms
-  'forms/post-create-form': ['isLoggedIn', 'aboveTech'],
-  'forms/post-update-form': ['isLoggedIn', 'aboveTech'],
-  'forms/post-delete-form': ['isLoggedIn', 'aboveTech'],
-  'forms/admin-get-form': ['isLoggedIn', 'aboveTech'],
+  'forms/post-create-form': ['isLoggedIn', 'aboveTc'],
+  'forms/post-update-form': ['isLoggedIn', 'aboveTc'],
+  'forms/post-delete-form': ['isLoggedIn', 'aboveTc'],
+  'forms/admin-get-form': ['isLoggedIn', 'aboveTc'],
   'forms/get-form': true,
+  'forms/get-signedup-form': ['isLoggedIn'],
+  'forms/get-unsignedup-form': ['isLoggedIn'],
   'forms/post-create-submission': true,
-  'forms/get-submission': ['isLoggedIn', 'aboveTech'],
+  'forms/get-submission': ['isLoggedIn', 'aboveTc'],
   'forms/get-user-submission': ['isLoggedIn'],
+
+  // Announcements
+  'announcements/admin-get-announcements': ['isLoggedIn', 'aboveMinistry'],
+  'announcements/create-announcements': ['isLoggedIn', 'aboveTc'],
+  'announcements/update-announcements': ['isLoggedIn', 'aboveMinistry'],
 
   // Last Updated
   'lastUpdated/get-last-updated': ['isLoggedIn', 'aboveTech'],

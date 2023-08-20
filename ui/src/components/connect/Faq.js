@@ -30,7 +30,7 @@ const Faq = (props) => {
           LIFE Groups happen every Tuesday or Wednesday nights across the city
           and university campuses! If you would like to join us, please sign-up{' '}
           <Link
-            href="https://bit.ly/summerLG2023"
+            href="https://bit.ly/LGsignup2023"
             fontStyle="italic"
             color="blue"
             isExternal
@@ -88,36 +88,6 @@ const Faq = (props) => {
           <br />
           If you’re not sure who the leader of the LIFE Group is, please contact
           us by dropping an email{' '}
-          <Link
-            href="mailto:support@hongkong.hmcc.net"
-            fontStyle="italic"
-            color="blue"
-          >
-            here
-          </Link>
-        </AccordionPanel>
-      </AccordionItem>
-
-      <AccordionItem border="1px solid #E2E8F0">
-        <h2>
-          <AccordionButton fontWeight={700} fontSize="lg" p={4}>
-            <Box flex="1" textAlign="left">
-              What are the current guidelines and measures taken for LIFE Group
-              gatherings in light of COVID-19?
-            </Box>
-            <AccordionIcon as={AiFillPlusCircle} w={7} h={7} />
-          </AccordionButton>
-        </h2>
-        <AccordionPanel pb={4}>
-          LIFE Groups will provide online methods of participation, and will
-          practice social distancing guidelines for any in-person gatherings
-          (practice good hygiene, wear masks as often as possible, use of hand
-          sanitizers, and washing of hands frequently).
-          <br />
-          <br />
-          Please contact the leader of each LIFE Group for more information
-          about online arrangements. If you’re not sure who the leader of the
-          LIFE Group is, you can contact us by dropping an email{' '}
           <Link
             href="mailto:support@hongkong.hmcc.net"
             fontStyle="italic"

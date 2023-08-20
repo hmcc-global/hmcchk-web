@@ -20,23 +20,17 @@ const SermonContainer = (props) => {
 
   const checkIfLive = async () => {
     try {
-      const { data } = await axios.get('/api/live-sermon/get-live-sermon', 
-      {
-        params: {
-          isPublished: true
-        }
-      });
+      const { data } = await axios.get('/api/live-sermon/get-live-sermon');
       return data;
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const getData = async () => {
     try {
       const { data, status } = await axios.get('/api/sermons/get-sermons');
       const onlineSermon = await checkIfLive();
-
 
       if (status === 200) {
         setSermons([...data]);
@@ -101,22 +95,11 @@ const SermonContainer = (props) => {
           justifyContent="center"
           px={[8, 10]}
           py={[8, 12]}
-          m={2}
-          display={{ base: 'none', md: 'flex' }}
         >
           <Heading size="2xl" color="white" fontWeight="900">
             Sermons
           </Heading>
         </Box>
-        <Heading
-          size="2xl"
-          color="black"
-          justifyContent="center"
-          fontWeight="900"
-          display={{ base: 'flex', md: 'none' }}
-        >
-          Sermons
-        </Heading>
         <CurrentSermon currentSermon={currentSermon} isOnline={onlineSermon} />
         <SermonCardList allSermons={sermons} />
       </Container>

@@ -26,6 +26,8 @@ module.exports.routes = {
 
   // Forms APIs
   'get /api/forms/get-form': 'forms/get-form',
+  'get /api/forms/get-signedup-form': 'forms/get-signedup-form',
+  'get /api/forms/get-unsignedup-form': 'forms/get-unsignedup-form',
   'get /api/forms/admin-get-form': 'forms/admin-get-form',
   'post /api/forms/post-create-form': 'forms/post-create-form',
   'post /api/forms/post-update-form': 'forms/post-update-form',
@@ -110,6 +112,12 @@ module.exports.routes = {
   'get /api/testimony/get-published': 'testimonies/get-published-testimonies',
   'post /api/testimony/create': 'testimonies/create-testimonies',
   'put /api/testimony/update': 'testimonies/update-testimonies',
+
+  // Announcements APIs
+  'get /api/announcement/get': 'announcements/get-announcements-new',
+  'get /api/announcement/admin-get': 'announcements/admin-get-announcements',
+  'post /api/announcement/create': 'announcements/create-announcements',
+  'put /api/announcement/update': 'announcements/update-announcements',
 
   // UI
   'get /*': {

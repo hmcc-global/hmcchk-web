@@ -26,6 +26,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
+import { customAxios as axios } from '../helpers/customAxios';
 import { useEffect, useState, useCallback } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import {
@@ -52,6 +53,8 @@ const UserProfileDesktop = (props) => {
   const { user } = props;
   const [userData, setUserData] = useState(null);
   const [formList, setFormList] = useState(null);
+  const [unsignedFormList, setUnsignedFormList] = useState([]);
+  const [signedUpFormList, setSignedUpFormList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
 
   const setUserInformationFields = (userData) => {
@@ -116,12 +119,38 @@ const UserProfileDesktop = (props) => {
   }, [user.id]);
 
   const fetchPublishedForms = useCallback(async () => {
+    //get all forms
     const { data, status } = await getLoginOnlyFormsRequest();
-
     if (status === 200) {
       setFormList([...data]);
     }
   }, []);
+
+  const fetchSignedUpForms = useCallback(async () => {
+    //get signed up forms
+    const { data, status } = await axios.get('/api/forms/get-signedup-form', {
+      params: {
+        userId: user.id,
+      },
+    });
+
+    if (status === 200) {
+      setSignedUpFormList([...data]);
+    }
+  }, [user.id]);
+
+  const fetchUnignedUpForms = useCallback(async () => {
+    //get signed up forms
+    const { data, status } = await axios.get('/api/forms/get-unsignedup-form', {
+      params: {
+        userId: user.id,
+      },
+    });
+
+    if (status === 200) {
+      setUnsignedFormList([...data]);
+    }
+  }, [user.id]);
 
   // Implementation needs some component specific customization
   const handleEditUserInformation = async (data, e) => {
@@ -140,8 +169,14 @@ const UserProfileDesktop = (props) => {
   useEffect(() => {
     fetchUserData();
     fetchPublishedForms();
-    // console.log("executed")
-  }, [fetchUserData, fetchPublishedForms]);
+    fetchSignedUpForms();
+    fetchUnignedUpForms();
+  }, [
+    fetchUserData,
+    fetchPublishedForms,
+    fetchSignedUpForms,
+    fetchUnignedUpForms,
+  ]);
 
   const inputBox = {
     color: '#718096',
@@ -155,6 +190,20 @@ const UserProfileDesktop = (props) => {
     fontSize: 'inherit',
     fontWeight: 'inherit',
     textAlign: 'center',
+  };
+
+  const tabText = {
+    borderBottom: '2px solid #0628A3',
+    marginBottom: '-2px',
+    color: '#000000',
+  };
+
+  const tabTitle = {
+    w: 'fit-content',
+    pr: '1',
+    pl: '1',
+    color: '#0628A3',
+    fontWeight: '700',
   };
 
   return (
@@ -207,59 +256,20 @@ const UserProfileDesktop = (props) => {
           textAlign="center"
         >
           <Text color="#2C5282">Your Registered Email Address</Text>
-          <Input
-            width="50%"
-            style={inputBox}
-            readOnly
-            {...register('email')}
-          />
+          <Input width="50%" style={inputBox} readOnly {...register('email')} />
         </Box>
       </Flex>
       <form onSubmit={handleSubmit(handleEditUserInformation)}>
         <Tabs mt="5%" mb="5%" orientation="vertical" variant="unstyled">
           <Box flex={1}>
             <TabList border="none" alignItems="flex-end">
-              <Tab
-                w="fit-content"
-                pr="1"
-                pl="1"
-                color="#0628A3"
-                _selected={{
-                  md: {
-                    borderBottom: '2px solid #0628A3',
-                    marginBottom: '-2px',
-                  },
-                }}
-                fontWeight="700"
-              >
+              <Tab style={tabTitle} _selected={{ md: tabText }}>
                 Signup Links
               </Tab>
-              <Tab
-                w="fit-content"
-                pr="1"
-                pl="1"
-                color="#0628A3"
-                mt="5"
-                _selected={{
-                  borderBottom: '2px solid #0628A3',
-                  marginBottom: '-2px',
-                }}
-                fontWeight="700"
-              >
+              <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
                 Personal Profile
               </Tab>
-              <Tab
-                w="fit-content"
-                pr="1"
-                pl="1"
-                color="#0628A3"
-                mt="5"
-                _selected={{
-                  borderBottom: '2px solid #0628A3',
-                  marginBottom: '-2px',
-                }}
-                fontWeight="700"
-              >
+              <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
                 Church Profile
               </Tab>
             </TabList>
@@ -272,14 +282,32 @@ const UserProfileDesktop = (props) => {
             borderRadius="10px"
           >
             <TabPanel p="5%">
-              <Stack direction="column" spacing="5">
+              <Stack direction="row" spacing="5">
                 {formList && formList.length > 0 && (
-                  <Box>
-                    <Text fontSize="1.1rem" fontWeight="700" color="#718096" mb="5">
-                      Available Signup Links:
-                    </Text>
-                    {generatePublishedFormLinks(formList)}
-                  </Box>
+                  <>
+                    <Box width="50%">
+                      <Text
+                        fontSize="1.1rem"
+                        fontWeight="700"
+                        color="#718096"
+                        mb="5"
+                      >
+                        Available Signup Links:
+                      </Text>
+                      {generatePublishedFormLinks(unsignedFormList, false)}
+                    </Box>
+                    <Box width="50%">
+                      <Text
+                        fontSize="1.1rem"
+                        fontWeight="700"
+                        color="#718096"
+                        mb="5"
+                      >
+                        Your Signups:
+                      </Text>
+                      {generatePublishedFormLinks(signedUpFormList, true)}
+                    </Box>
+                  </>
                 )}
                 {/* {user.password !== "" && (
                 <Button
@@ -345,7 +373,6 @@ const UserProfileDesktop = (props) => {
                       size="sm"
                       borderRadius="5"
                       {...register('lifestage', { required: true })}
-                      pointerEvents="none"
                       isInvalid={errors['lifestage']}
                       placeholder="Please fill in this field"
                     >
@@ -470,12 +497,7 @@ const UserProfileDesktop = (props) => {
               <Stack spacing="3%">
                 <FormControl>
                   <FormLabel color="#2C5282">LIFE Group</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
-                    {...register('lifeGroup')}
-                    pointerEvents="none"
-                  >
+                  <Select size="sm" borderRadius="5" {...register('lifeGroup')}>
                     {lifegroupList.map((item) => {
                       return <option key={'lg' + item}>{item}</option>;
                     })}
@@ -486,7 +508,6 @@ const UserProfileDesktop = (props) => {
                   <Select
                     size="sm"
                     borderRadius="5"
-                    pointerEvents="none"
                     {...register('ministryTeam')}
                   >
                     {ministryTeamList.map((item) => {
@@ -617,6 +638,17 @@ const UserProfileDesktop = (props) => {
                   </FormControl>
                 </Stack>
               </Stack>
+              <Button
+                size="sm"
+                mt="5%"
+                color="#0628A3"
+                borderColor="#0628A3"
+                borderRadius="10"
+                variant="outline"
+                type="submit"
+              >
+                Save Information
+              </Button>
             </TabPanel>
           </TabPanels>
         </Tabs>

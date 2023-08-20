@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { customAxios as axios } from '../../helpers/customAxios';
 import PreviewOnlineSermonContainer from './PreviewOnlineSermonContainer';
+import {DateTime} from 'luxon';
 
 export default function AdminLiveSermonContainer(props) {
   const toast = useToast();
@@ -35,7 +36,9 @@ export default function AdminLiveSermonContainer(props) {
   const [sermonSeriesUrl, setSermonSeriesUrl] = useState('');
   const [sermonPassage, setSermonPassage] = useState('');
   const [sermonDateTime, setSermonDateTime] = useState('');
-  const [isPublished, setIsPublished] = useState(false);
+  const [streamStartTime,setStreamStartTime] = useState('');
+  const [streamEndTime,setStreamEndTime] = useState('');
+  const [streamPeriodInvalid, setStreamPeriodInvalid] = useState(false);
 
   const initLiveSermonValues = (data) => {
     setId(data.id);
@@ -48,10 +51,11 @@ export default function AdminLiveSermonContainer(props) {
     setSermonSeriesUrl(data.sermonSeriesUrl);
     setSermonPassage(data.sermonPassage);
     setSermonDateTime(data.sermonDateTime);
-    setIsPublished(data.isPublished);
+    setStreamStartTime(data.streamStartTime);
+    setStreamEndTime(data.streamEndTime);
   }
 
-  const sanityCheckFailed = title === '' || sermonDescription === '';
+  const sanityCheckFailed = title === '' || sermonDescription === '' || streamPeriodInvalid;
 
   const createHandler = async () => {
     try {
@@ -65,7 +69,9 @@ export default function AdminLiveSermonContainer(props) {
         sermonSeriesUrl,
         sermonPassage,
         sermonDateTime,
-        isPublished
+        streamStartTime,
+        streamEndTime
+
       });
 
       if (res.status === 200) {
@@ -97,7 +103,8 @@ export default function AdminLiveSermonContainer(props) {
         sermonSeriesUrl,
         sermonPassage,
         sermonDateTime,
-        isPublished
+        streamStartTime,
+        streamEndTime
       });
       if (res.status === 200) return true;
     } catch (err) {
@@ -154,7 +161,9 @@ export default function AdminLiveSermonContainer(props) {
     setSermonSeriesUrl('');
     setSermonPassage('');
     setSermonDateTime('');
-    setIsPublished(false);
+    setStreamStartTime('');
+    setStreamEndTime('');
+    setStreamPeriodInvalid(false);
   }
 
   const resetHandler = () => {
@@ -171,8 +180,13 @@ export default function AdminLiveSermonContainer(props) {
 
   const getData = useCallback(async () => {
     try {
-      const { data } = await axios.get('/api/live-sermon/get-live-sermon');
-      if (data && data[0]){
+      // Hardcoded to always get the latest sermon if it exists, if not returns empty array for actual database
+      const { data } = await axios.get('/api/live-sermon/get-live-sermon', {
+        params: {
+          sermonId: "635487c446187f591b0fb15a",
+        },
+      });
+      if (data && data[0]) {
         // we only get the latest one to update
         setLiveSermon(data[0]);
         initLiveSermonValues(data[0]);
@@ -182,7 +196,7 @@ export default function AdminLiveSermonContainer(props) {
       toast({
         description: err,
         status: 'error',
-        duration: 5000
+        duration: 5000,
       });
       console.log(err);
     } finally {
@@ -193,6 +207,20 @@ export default function AdminLiveSermonContainer(props) {
   useEffect(() => {
     getData();
   }, [getData]);
+
+  useEffect(() => {
+    if (streamStartTime && streamEndTime) {
+      const startTime = DateTime.fromISO(streamStartTime);
+      const endTime = DateTime.fromISO(streamEndTime);
+
+      if (startTime >= endTime) {
+        setStreamPeriodInvalid(true);
+        return;
+      }
+      setStreamPeriodInvalid(false);
+    }
+  }, [streamStartTime, streamEndTime]);
+
 
   return (
     <Container w="100%" maxW="100%">
@@ -249,11 +277,24 @@ export default function AdminLiveSermonContainer(props) {
                     onChange={(e) => setSermonDateTime(e.target.value)}
                   />
                 </FormControl>
-                <HStack spacing={5} justifyContent="flex-end">
-                  <FormControl w="auto" isDisabled={sanityCheckFailed}>
-                    <Checkbox isChecked={isPublished} onChange={(e) => setIsPublished(e.target.checked)}>Publish?</Checkbox>
-                  </FormControl>
-                </HStack>
+                <FormControl isInvalid={streamPeriodInvalid} isRequired>
+                  <FormLabel> Stream Period </FormLabel>
+                  <FormErrorMessage>
+                    {streamPeriodInvalid && 'Stream Period is invalid, please check again'}
+                  </FormErrorMessage>
+                  Starting Time
+                  <Input
+                    type="datetime-local"
+                    value={streamStartTime}
+                    onChange={(e) => setStreamStartTime(e.target.value)}
+                  />
+                  Ending Time
+                  <Input
+                    type="datetime-local"
+                    value={streamEndTime}
+                    onChange={(e) => setStreamEndTime(e.target.value)}
+                  />
+                </FormControl>
                 <FormControl mt={5}>
                   <Button colorScheme="green" type="submit" w="full" isLoading={isSaving} isDisabled={sanityCheckFailed}>
                     {id && id !== '' ? 'UPDATE' : 'CREATE'}
@@ -288,11 +329,6 @@ export default function AdminLiveSermonContainer(props) {
               <Heading as="h5" size="md" mb={5}>
                 PREVIEW
               </Heading>
-              { liveSermon && !liveSermon.isPublished && (
-              <Heading as="h5" size="sm" mb={5} color="red">
-                [NOT PUBLISHED]
-              </Heading>
-              )}
                 <PreviewOnlineSermonContainer
                   isPreviewing={isPreviewing}
                   setIsPreviewing={setIsPreviewing}

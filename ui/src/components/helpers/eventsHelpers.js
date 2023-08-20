@@ -1,4 +1,4 @@
-import { DateTime } from "luxon";
+import { DateTime } from 'luxon';
 import { Text, Icon } from '@chakra-ui/react';
 import { RiCalendarEventFill } from 'react-icons/ri';
 
@@ -12,63 +12,88 @@ const getStartDate = (eventData) => {
       ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
 };
 
-const getRenderDate = (startDate, endDate, interval) => {
+
+const getRenderDate = (startDate, endDate, interval, startTime) => {
+  // parse the interval to number
   let start = DateTime.fromISO(startDate);
   let end = DateTime.fromISO(endDate);
+  let recur =
+    interval === 'Daily'
+      ? 1
+      : interval === 'Weekly'
+      ? 7
+      : interval === 'Monthly'
+      ? start.daysInMonth
+      : interval === 'None'
+      ? 0
+      : 0;
 
-  let diffInDays = end.diff(start, "days").toObject();
-  let nRecurrence = Math.floor(diffInDays.days / interval);
+  let diffInDays = end.diff(start, 'days').toObject();
+  let nRecurrence = recur !== 0 ? Math.floor(diffInDays.days / recur) : 0;
 
   let renderDate = startDate;
 
+  //if there is a set time, add the interval after the event time
+  if (startTime !== '' && startTime !== undefined) {
+    renderDate = start.plus(
+      DateTime.fromISO(startTime) - DateTime.fromISO('00:00')
+    );
+  }
+
   for (let i = 0; i <= nRecurrence; i++) {
-    renderDate = start.plus({ days: interval * i });
     if (DateTime.now() < renderDate) break;
+    renderDate = start.plus({ days: recur * i });
   }
   return renderDate;
 };
 
 const filterISOStringForGoogleCalendar = (isoString) => {
-  return isoString.split(".")[0].replaceAll(/\b(?:-|:)\b/gi, "");
+  return isoString.split('.')[0].replaceAll(/\b(?:-|:)\b/gi, '');
 };
 
 const generateGoogleCalendarLink = (eventData) => {
-  if (!eventData.time || !eventData.title) return null;
-  let eventTime = eventData.time;
-  const baseLink = "https://calendar.google.com/calendar/r/eventedit?";
-  const eventTitle = "text=" + encodeURIComponent(eventData.title);
+  if (
+    !eventData.eventStartTime ||
+    !eventData.title ||
+    eventData.eventStartTime === '' ||
+    eventData.eventStartTime === undefined
+  )
+    return null;
+  let eventTime = eventData.eventStartTime;
+  const baseLink = 'https://calendar.google.com/calendar/r/eventedit?';
+  const eventTitle = 'text=' + encodeURIComponent(eventData.title);
 
   if (!eventData.renderDate) {
     eventData.renderDate = getRenderDate(
-      eventData.startDate,
-      eventData.endDate,
-      eventData.recurrence
+      eventData.eventStartDate,
+      eventData.eventEndDate,
+      eventData.eventInterval
     );
   }
 
   let eventDate = DateTime.fromISO(eventData.renderDate.toISO());
 
-  let parsed = DateTime.fromFormat(eventTime, "t");
-
-  let today = DateTime.now().startOf("day");
-  let timeOfDay = parsed.diff(today);
-
-  eventDate = eventDate.plus(timeOfDay);
+  eventDate = eventDate.plus(DateTime.fromISO(eventTime) - DateTime.fromISO('00:00'));
 
   let startTime = filterISOStringForGoogleCalendar(eventDate.toISO());
   let endTime = eventDate.plus({ hours: 2 });
   endTime = filterISOStringForGoogleCalendar(endTime.toISO());
 
-  const dates = "&dates=" + encodeURIComponent(startTime + "/" + endTime);
+  const dates = '&dates=' + encodeURIComponent(startTime + '/' + endTime);
 
-  const ctz = "&ctz=" + encodeURIComponent("Asia/Hong_Kong");
-  const location = "&location=" + encodeURIComponent(eventData.location);
+  const ctz = '&ctz=' + encodeURIComponent('Asia/Hong_Kong');
+  const location = '&location=' + encodeURIComponent(eventData.location);
   const linkComponents = [baseLink, eventTitle, dates, ctz, location];
 
-  return linkComponents.join("");
+  return linkComponents.join('');
 };
 
-const EndDateElement = ({startDateStr, endDateStr, interval, isModal = false}) => {
+const EndDateElement = ({
+  startDateStr,
+  endDateStr,
+  interval,
+  isModal = false,
+}) => {
   if (
     !startDateStr ||
     startDateStr === '' ||
@@ -85,7 +110,7 @@ const EndDateElement = ({startDateStr, endDateStr, interval, isModal = false}) =
     return;
 
   return (
-    <Text fontSize={["sm", isModal ? "md" : "lg"]} fontWeight="bold">
+    <Text fontSize={['sm', isModal ? 'md' : 'lg']} fontWeight="bold">
       <Icon mr={2} as={RiCalendarEventFill} />
       End Date: {endDate.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
     </Text>
@@ -97,5 +122,5 @@ export {
   getRenderDate,
   filterISOStringForGoogleCalendar,
   generateGoogleCalendarLink,
-  EndDateElement
+  EndDateElement,
 };
