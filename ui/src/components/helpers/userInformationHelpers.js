@@ -160,7 +160,12 @@ const generatePublishedFormLinks = (forms, signedUp) => {
                       </Box>
                     ) : (
                       <Link
-                        href={`/forms/${item['id']}`}
+                        href={
+                          item.formType === 'external'
+                            ? item.externalFormLink
+                            : `/forms/${item['id']}`
+                        }
+                        target="_blank"
                         _hover={{ textDecoration: 'none', opacity: '75%' }}
                         width="fit-content"
                       >
