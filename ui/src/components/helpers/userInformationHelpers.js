@@ -125,6 +125,9 @@ const signedUpButton = {
 const isPaymentRequired = (form) =>
   form.isPaymentRequired ? '- [Payment Required]' : '';
 
+const isExternal = (item) =>
+  item.formType === 'external' ? '[External Form]' : '';
+
 const generatePublishedFormLinks = (forms, signedUp) => {
   if (forms) {
     return (
@@ -147,7 +150,9 @@ const generatePublishedFormLinks = (forms, signedUp) => {
                   </GridItem>
                   <GridItem colSpan={12} display="flex" alignItems="center">
                     <Text margin="0px 15px">
-                      {`${item['formName']} ${isPaymentRequired(item)}`}
+                      {`${isExternal(item)} ${
+                        item['formName']
+                      } ${isPaymentRequired(item)}`}
                     </Text>
                     <Spacer />
                   </GridItem>
@@ -160,7 +165,12 @@ const generatePublishedFormLinks = (forms, signedUp) => {
                       </Box>
                     ) : (
                       <Link
-                        href={`/forms/${item['id']}`}
+                        href={
+                          item.formType === 'external'
+                            ? item.externalFormLink
+                            : `/forms/${item['id']}`
+                        }
+                        target="_blank"
                         _hover={{ textDecoration: 'none', opacity: '75%' }}
                         width="fit-content"
                       >
