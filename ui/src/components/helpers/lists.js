@@ -33,19 +33,20 @@ const ministryTeamList = [
 
 const lifegroupList = [
   'Not in a LIFE Group',
-  'BROTEIN',
-  'C.I.A.',
-  'SASSY',
-  'PANDA Xpress',
-  'TRAINS',
-  'Bao Bae',
-  'BLOOM',
+  'CityU',
+  'Focus Tuesday (Makoto)',
+  'Focus Tuesday (Josephine)',
+  'Focus Wednesday',
+  'HKBU',
+  'HKU',
+  'HKUST Tuesday (Kris)',
+  'HKUST Tuesday (Reiko',
+  'HKUST Wednesday',
+  'PolyU Tuesday',
+  'PolyU Wednesday',
   'Latitude',
   'Covenant',
-  'Asia Missions Project Team',
 ];
-
-
 
 const districtList = [
   'Not Applicable',

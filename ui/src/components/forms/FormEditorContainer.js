@@ -303,6 +303,9 @@ const FormEditorContainer = (props) => {
                             <option value="email-deep-payment-success">
                               Deep Retreat Payment Confirmation
                             </option>
+                            <option value="email-ug-retreat-payment-success">
+                              UG Retreat Payment Confirmation
+                            </option>
                           </Select>
                           <FormErrorMessage>
                             {errors['paymentConfirmationEmailTemplate'] &&
@@ -416,6 +419,9 @@ const FormEditorContainer = (props) => {
                         </option>
                         <option value="form-ignite-success">!gnite</option>
                         <option value="form-deep-success">Deep retreat</option>
+                        <option value="form-ug-retreat-success">
+                          UG Retreat
+                        </option>
                       </Select>
                       <FormErrorMessage>
                         {errors['successEmailTemplate'] &&

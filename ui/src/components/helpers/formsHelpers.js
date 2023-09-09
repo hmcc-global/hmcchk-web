@@ -45,7 +45,7 @@ const validateForm = async (id, user) => {
 
     const { data: nowIso } = await axios.get('/api/misc/get-current-time');
     const now = DateTime.fromISO(nowIso);
-    
+
     if (!data[0]) {
       return {
         pathname: '/form-unavailable',
