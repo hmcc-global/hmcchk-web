@@ -34,6 +34,7 @@ const ministryTeamList = [
 const lifegroupList = [
   'Not in a LIFE Group',
   'CityU',
+  'CUHK',
   'Focus Tuesday (Makoto)',
   'Focus Tuesday (Josephine)',
   'Focus Wednesday',
