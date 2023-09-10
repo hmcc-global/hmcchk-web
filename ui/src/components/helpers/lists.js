@@ -35,7 +35,7 @@ const lifegroupList = [
   'Not in a LIFE Group',
   'CityU',
   'CUHK',
-  'Focus Tuesday (Makoto)',
+  'Focus Tuesday (Joanna)',
   'Focus Tuesday (Josephine)',
   'Focus Wednesday',
   'HKBU',
