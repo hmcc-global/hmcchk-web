@@ -71,17 +71,6 @@ const HarvestGames = (props) => {
             >
               <TabList border="none" width="250px" paddingRight={'10'}>
                 <Tab
-                  textColor="#EEF4FF"
-                  _selected={{
-                    borderBottom: '5px solid #6F75CC',
-                    textColor: '#6F75CC',
-                    fontWeight: 'bold',
-                  }}
-                >
-                  <Text>Leaderboard</Text>
-                </Tab>
-
-                <Tab
                   marginTop="1em"
                   textColor="#EEF4FF"
                   _selected={{
@@ -91,6 +80,17 @@ const HarvestGames = (props) => {
                   }}
                 >
                   Challenges
+                </Tab>
+
+                <Tab
+                  textColor="#EEF4FF"
+                  _selected={{
+                    borderBottom: '5px solid #6F75CC',
+                    textColor: '#6F75CC',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  <Text>Leaderboard</Text>
                 </Tab>
 
                 {/* <Tab
@@ -107,13 +107,36 @@ const HarvestGames = (props) => {
               </TabList>
 
               <TabPanels borderRadius={'10'} bottomPadding="50px">
+                <TabPanel minHeight="80vh" padding={0}>
+                  <Center>
+                    <Image
+                      src={`${process.env.PUBLIC_URL}/images/harvest-games/week1-pc.png`}
+                      width={{ md: '100%', lg: '80%' }}
+                    />
+                  </Center>
+
+                  <Text
+                    fontSize={{ md: '26px', lg: '32px' }}
+                    fontWeight={'bold'}
+                    textAlign="center"
+                    paddingTop="0.75em"
+                  >
+                    Access Week 1 Instructions <br />
+                    PDF by clicking{' '}
+                    <Link color="#EEF4FF" isExternal>
+                      here
+                    </Link>
+                    .
+                  </Text>
+                </TabPanel>
+
                 <TabPanel height="80vh" padding={0}>
                   <Text
                     fontSize={{ md: '26px', lg: '32px' }}
                     fontWeight={'bold'}
                     textAlign="center"
                   >
-                    Giveaway Winners
+                    Challenge Winners
                   </Text>
                   <Center>
                     <TableContainer width="60%" paddingTop="3%">
@@ -152,32 +175,9 @@ const HarvestGames = (props) => {
                   </Center>
                 </TabPanel>
 
-                <TabPanel minHeight="80vh" padding={0}>
-                  <Center>
-                    <Image
-                      src={`${process.env.PUBLIC_URL}/images/harvest-games/week1-pc.png`}
-                      width={{ md: '100%', lg: '80%' }}
-                    />
-                  </Center>
-
-                  <Text
-                    fontSize={{ md: '26px', lg: '32px' }}
-                    fontWeight={'bold'}
-                    textAlign="center"
-                    paddingTop="0.75em"
-                  >
-                    Access Week 1 Instructions <br />
-                    PDF by clicking{' '}
-                    <Link color="#EEF4FF" isExternal>
-                      here
-                    </Link>
-                    .
-                  </Text>
-                </TabPanel>
-
-                <TabPanel>
+                {/* <TabPanel>
                   <HarvestGamesLeaderboard />
-                </TabPanel>
+                </TabPanel> */}
               </TabPanels>
             </Tabs>
             {/* MOBILE */}
@@ -198,8 +198,9 @@ const HarvestGames = (props) => {
                     fontWeight: 'bold',
                   }}
                 >
-                  Leaderboard
+                  Challenges
                 </Tab>
+
                 <Tab
                   textColor="#EEF4FF"
                   _selected={{
@@ -208,7 +209,7 @@ const HarvestGames = (props) => {
                     fontWeight: 'bold',
                   }}
                 >
-                  Challenges
+                  Leaderboard
                 </Tab>
                 {/* <Tab
                   borderBottom="5px solid #E2E8F0"
@@ -223,6 +224,31 @@ const HarvestGames = (props) => {
               </TabList>
 
               <TabPanels paddingTop={'7'}>
+                <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
+                  <Center>
+                    <Image
+                      w="100%"
+                      src={`${process.env.PUBLIC_URL}/images/harvest-games/week1-mobile.png`}
+                      paddingBottom={'7'}
+                    />
+                  </Center>
+                  <Text
+                    fontSize={{
+                      base: '20px',
+                      sm: '20px',
+                    }}
+                    fontWeight={'bold'}
+                    textAlign="center"
+                  >
+                    Access Week 1 Instructions <br />
+                    PDF by clicking{' '}
+                    <Link color="#EEF4FF  " isExternal>
+                      here
+                    </Link>
+                    .
+                  </Text>
+                </TabPanel>
+
                 <TabPanel height={{ base: '30em', sm: '40em' }}>
                   <Text
                     fontSize={{
@@ -233,7 +259,7 @@ const HarvestGames = (props) => {
                     textAlign="center"
                     paddingTop="0.75em"
                   >
-                    Giveaway Winners
+                    Challenge Winners
                   </Text>
                   <Center>
                     <TableContainer width="100%">
@@ -271,34 +297,9 @@ const HarvestGames = (props) => {
                     </TableContainer>
                   </Center>
                 </TabPanel>
-
-                <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
-                  <Center>
-                    <Image
-                      w="100%"
-                      src={`${process.env.PUBLIC_URL}/images/harvest-games/week1-mobile.png`}
-                      paddingBottom={'7'}
-                    />
-                  </Center>
-                  <Text
-                    fontSize={{
-                      base: '20px',
-                      sm: '20px',
-                    }}
-                    fontWeight={'bold'}
-                    textAlign="center"
-                  >
-                    Access Week 1 Instructions <br />
-                    PDF by clicking{' '}
-                    <Link color="#EEF4FF  " isExternal>
-                      here
-                    </Link>
-                    .
-                  </Text>
-                </TabPanel>
-                <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
+                {/* <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
                   <HarvestGamesLeaderboard />
-                </TabPanel>
+                </TabPanel> */}
               </TabPanels>
             </Tabs>
           </Box>
