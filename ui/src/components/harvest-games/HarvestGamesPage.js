@@ -110,6 +110,7 @@ const HarvestGames = (props) => {
                 <TabPanel height="80vh" padding={0}>
                   <Text
                     fontSize={{ md: '26px', lg: '32px' }}
+                    fontWeight={'bold'}
                     textAlign="center"
                   >
                     Giveaway Winners
@@ -151,7 +152,7 @@ const HarvestGames = (props) => {
                   </Center>
                 </TabPanel>
 
-                <TabPanel minHeight="60vh" padding={0}>
+                <TabPanel minHeight="80vh" padding={0}>
                   <Center>
                     <Image
                       src={`${process.env.PUBLIC_URL}/images/harvest-games/week1-pc.png`}
@@ -167,11 +168,7 @@ const HarvestGames = (props) => {
                   >
                     Access Week 1 Instructions <br />
                     PDF by clicking{' '}
-                    <Link
-                      color="#EEF4FF"
-                      href="https://hongkong.sub.hmcc.net/wp-content/uploads/Week-1.pdf"
-                      isExternal
-                    >
+                    <Link color="#EEF4FF" isExternal>
                       here
                     </Link>
                     .
@@ -225,13 +222,14 @@ const HarvestGames = (props) => {
                 </Tab> */}
               </TabList>
 
-              <TabPanels bgColor="none" borderRadius={'0'}>
+              <TabPanels paddingTop={'7'}>
                 <TabPanel height={{ base: '30em', sm: '40em' }}>
                   <Text
                     fontSize={{
                       base: '20px',
                       sm: '20px',
                     }}
+                    fontWeight={'bold'}
                     textAlign="center"
                     paddingTop="0.75em"
                   >
@@ -279,6 +277,7 @@ const HarvestGames = (props) => {
                     <Image
                       w="100%"
                       src={`${process.env.PUBLIC_URL}/images/harvest-games/week1-mobile.png`}
+                      paddingBottom={'7'}
                     />
                   </Center>
                   <Text
@@ -291,11 +290,7 @@ const HarvestGames = (props) => {
                   >
                     Access Week 1 Instructions <br />
                     PDF by clicking{' '}
-                    <Link
-                      color="#EEF4FF  "
-                      href="https://hongkong.sub.hmcc.net/wp-content/uploads/Week-1.pdf"
-                      isExternal
-                    >
+                    <Link color="#EEF4FF  " isExternal>
                       here
                     </Link>
                     .
