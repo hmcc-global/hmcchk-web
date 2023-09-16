@@ -1,0 +1,19 @@
+@import url('https://rsms.me/inter/inter.css');
+
+.ag-theme-material {
+  --ag-foreground-color: rgb(103, 95, 95);
+  --ag-header-foreground-color: rgb(103, 95, 95);
+  --ag-header-background-color: rgb(237, 251, 255);
+
+  font-family: 'Inter', sans-serif;
+}
+
+.ag-theme-material .ag-header-row {
+  font-size: 15px !important;
+  font-weight: 700;
+}
+
+.ag-theme-material .ag-cell {
+  font-size: 14px !important;
+  font-weight: 500;
+}
