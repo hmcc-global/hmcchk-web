@@ -39,6 +39,8 @@ import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import TextDetails from './witness/text-testimony/TextDetails';
 import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementContainer';
 import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
+import HarvestGames from './harvest-games/HarvestGamesPage';
+import AdminHarvestGames from './admin/harvest-game/AdminHarvestGames';
 
 const MainContainer = () => {
   return (
@@ -206,6 +208,12 @@ const MainContainer = () => {
           permissions={['public']}
           component={TextDetails}
         />
+        <PrivateRoute
+          exact
+          path="/harvest-games"
+          permissions={['public']}
+          component={HarvestGames}
+        />
         {/* Admin items */}
         <PrivateRoute
           exact
@@ -266,6 +274,12 @@ const MainContainer = () => {
           path="/admin/users"
           permissions={['admin', 'stewardship']}
           component={AdminUser}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/harvest-games"
+          permissions={['t3ch', 'admin', 'stewardship']}
+          component={AdminHarvestGames}
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
