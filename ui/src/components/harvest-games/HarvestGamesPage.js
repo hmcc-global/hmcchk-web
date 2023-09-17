@@ -121,9 +121,13 @@ const HarvestGames = (props) => {
                     textAlign="center"
                     paddingTop="0.75em"
                   >
-                    Access Week 1 Instructions <br />
-                    PDF by clicking{' '}
-                    <Link color="#EEF4FF" isExternal>
+                    Access Week 1 Challenge <br />
+                    Google form by clicking{' '}
+                    <Link
+                      color="#EEF4FF"
+                      href="https://forms.gle/2Hz3shuConAhzQfz5"
+                      isExternal
+                    >
                       here
                     </Link>
                     .
@@ -240,9 +244,13 @@ const HarvestGames = (props) => {
                     fontWeight={'bold'}
                     textAlign="center"
                   >
-                    Access Week 1 Instructions <br />
-                    PDF by clicking{' '}
-                    <Link color="#EEF4FF  " isExternal>
+                    Access Week 1 Challenge <br />
+                    Google form by clicking{' '}
+                    <Link
+                      color="#EEF4FF"
+                      href="https://forms.gle/2Hz3shuConAhzQfz5"
+                      isExternal
+                    >
                       here
                     </Link>
                     .
