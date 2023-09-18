@@ -121,11 +121,11 @@ const HarvestGames = (props) => {
                     textAlign="center"
                     paddingTop="0.75em"
                   >
-                    Access Week 1 Challenge <br />
-                    Google form by clicking{' '}
+                    Access Week 1 Instructions <br />
+                    PDF by clicking{' '}
                     <Link
                       color="#EEF4FF"
-                      href="https://forms.gle/2Hz3shuConAhzQfz5"
+                      href="https://hongkong.sub.hmcc.net/wp-content/uploads/Week-1-PreGame-Challenges.pdf"
                       isExternal
                     >
                       here
@@ -244,11 +244,11 @@ const HarvestGames = (props) => {
                     fontWeight={'bold'}
                     textAlign="center"
                   >
-                    Access Week 1 Challenge <br />
-                    Google form by clicking{' '}
+                    Access Week 1 Instructions <br />
+                    PDF by clicking{' '}
                     <Link
                       color="#EEF4FF"
-                      href="https://forms.gle/2Hz3shuConAhzQfz5"
+                      href="https://hongkong.sub.hmcc.net/wp-content/uploads/Week-1-PreGame-Challenges.pdf"
                       isExternal
                     >
                       here
