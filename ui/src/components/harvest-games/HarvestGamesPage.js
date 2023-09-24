@@ -162,7 +162,7 @@ const HarvestGames = (props) => {
                             </Td>
 
                             <Td isNumeric textAlign={'center'} fontSize={'15'}>
-                              TBA
+                              DHL, RIZE
                             </Td>
                           </Tr>
                           <Tr border="1px" borderColor={'#BFBFBF'}>
@@ -289,7 +289,7 @@ const HarvestGames = (props) => {
                             </Td>
 
                             <Td isNumeric textAlign={'center'} fontSize={'15'}>
-                              TBA
+                              DHL, RIZE
                             </Td>
                           </Tr>
                           <Tr border="1px" borderColor={'#BFBFBF'}>
