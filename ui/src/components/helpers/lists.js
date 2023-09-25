@@ -41,7 +41,7 @@ const lifegroupList = [
   'G-FORCE',
   'Genough',
   'H2O',
-  'SHEEP',
+  'Latitude: SHEEP',
   'RIZE',
   'SPLASH',
   'TRAM',
