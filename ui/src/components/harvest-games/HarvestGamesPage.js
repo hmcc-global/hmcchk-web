@@ -110,7 +110,7 @@ const HarvestGames = (props) => {
                 <TabPanel minHeight="80vh" padding={0}>
                   <Center>
                     <Image
-                      src={`${process.env.PUBLIC_URL}/images/harvest-games/week1-pc.png`}
+                      src={`${process.env.PUBLIC_URL}/images/harvest-games/week2-web.png`}
                       width={{ md: '100%', lg: '80%' }}
                     />
                   </Center>
@@ -121,11 +121,11 @@ const HarvestGames = (props) => {
                     textAlign="center"
                     paddingTop="0.75em"
                   >
-                    Access Week 1 Instructions <br />
+                    Access Week 2 Instructions <br />
                     PDF by clicking{' '}
                     <Link
                       color="#EEF4FF"
-                      href="https://hongkong.sub.hmcc.net/wp-content/uploads/Week-1-PreGame-Challenges.pdf"
+                      href="https://hongkong.sub.hmcc.net/wp-content/uploads/Week-2-Pregame-challenges.pdf"
                       isExternal
                     >
                       here
@@ -162,7 +162,7 @@ const HarvestGames = (props) => {
                             </Td>
 
                             <Td isNumeric textAlign={'center'} fontSize={'15'}>
-                              TBA
+                              DHL, RIZE
                             </Td>
                           </Tr>
                           <Tr border="1px" borderColor={'#BFBFBF'}>
@@ -232,7 +232,7 @@ const HarvestGames = (props) => {
                   <Center>
                     <Image
                       w="100%"
-                      src={`${process.env.PUBLIC_URL}/images/harvest-games/week1-mobile.png`}
+                      src={`${process.env.PUBLIC_URL}/images/harvest-games/week2-mobile.png`}
                       paddingBottom={'7'}
                     />
                   </Center>
@@ -244,11 +244,11 @@ const HarvestGames = (props) => {
                     fontWeight={'bold'}
                     textAlign="center"
                   >
-                    Access Week 1 Instructions <br />
+                    Access Week 2 Instructions <br />
                     PDF by clicking{' '}
                     <Link
                       color="#EEF4FF"
-                      href="https://hongkong.sub.hmcc.net/wp-content/uploads/Week-1-PreGame-Challenges.pdf"
+                      href="https://hongkong.sub.hmcc.net/wp-content/uploads/Week-2-Pregame-challenges.pdf"
                       isExternal
                     >
                       here
@@ -289,7 +289,7 @@ const HarvestGames = (props) => {
                             </Td>
 
                             <Td isNumeric textAlign={'center'} fontSize={'15'}>
-                              TBA
+                              DHL, RIZE
                             </Td>
                           </Tr>
                           <Tr border="1px" borderColor={'#BFBFBF'}>

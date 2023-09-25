@@ -33,20 +33,20 @@ const ministryTeamList = [
 
 const lifegroupList = [
   'Not in a LIFE Group',
-  'CityU',
-  'CUHK',
-  'Focus Tuesday (Makoto)',
-  'Focus Tuesday (Josephine)',
-  'Focus Wednesday',
-  'HKBU',
-  'HKU',
-  'HKUST Tuesday (Kris)',
-  'HKUST Tuesday (Reiko',
-  'HKUST Wednesday',
-  'PolyU Tuesday',
-  'PolyU Wednesday',
-  'Latitude',
+  '100ºChrist',
+  'CHRISTscendo',
   'Covenant',
+  'DHL',
+  'ETA',
+  'G-FORCE',
+  'Genough',
+  'H2O',
+  'Latitude: SHEEP',
+  'RIZE',
+  'SPLASH',
+  'TRAM',
+  'UniqLO',
+  'WATT',
 ];
 
 const districtList = [
