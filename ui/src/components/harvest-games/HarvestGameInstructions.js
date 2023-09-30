@@ -1,85 +1,110 @@
 import {
   Box,
-  Container,
   Select,
   Heading,
   Input,
   Button,
   VStack,
-  Image,
   HStack,
   Grid,
+  Image,
 } from '@chakra-ui/react';
 import { Text } from '@chakra-ui/layout';
-import { useState, Fragment } from 'react';
+import { useEffect, useState, Fragment } from 'react';
+import { customAxios as axios } from '../helpers/customAxios';
 
 import './styles.css';
 
 export default function HarvestGameInstructions() {
+  const [selected, setSelected] = useState(0);
+  const [game_1pwd, setGame_1pwd] = useState('');
+  const [game_2pwd, setGame_2pwd] = useState('');
+  const [game_3pwd, setGame_3pwd] = useState('');
+  const [pwd, setPassword] = useState('');
+  const [inputValue, setInput] = useState('');
+  const [error, setError] = useState(false);
+
+  const getData = async () => {
+    try {
+      const { data } = await axios.get('/api/hgrankings/get');
+      const password = data.filter((row) => row.lgName === 'password');
+      setGame_1pwd(String(password[0].gameRankings[0]));
+      setGame_2pwd(String(password[0].gameRankings[1]));
+      setGame_3pwd(String(password[0].gameRankings[2]));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   const gameType = [
     {
       game_num: 'Game #1',
-      name: 'SMUGGLING THROUGH SECURITY',
+      name: 'TIDY-UP',
       round: 3,
-      player: 5,
-      materials: [],
+      player: 4,
       imageUrl: [
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1_1.gif',
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1_2.gif',
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1-1' +
+          game_1pwd +
+          '.gif',
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1-2' +
+          game_1pwd +
+          '.gif',
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1-3' +
+          game_1pwd +
+          '.gif',
       ],
       id: 'game_1',
-      pwd: 'Smuggling',
+      pwd: game_1pwd,
     },
 
     {
       game_num: 'Game #2',
-      name: 'THE PACKING GAME',
-      round: 2,
-      player: 2,
-      materials: [
-        '10 Shirts',
-        '6  SweatPants',
-        '6  Books',
-        '6  Hoodies',
-        '9  Socks',
-        '6  Shoes',
-        '8  Hats',
-        '6  Water bottles',
-      ],
+      name: 'OFF-ROAD',
+      round: 3,
+      player: 4,
       imageUrl: [
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg2_1.gif',
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg2_2.gif',
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg2_3.gif',
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg2_4.gif',
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg2-1' +
+          game_2pwd +
+          '.gif',
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg2-2' +
+          game_2pwd +
+          '.gif',
       ],
       id: 'game_2',
-      pwd: 'Packing',
+      pwd: game_2pwd,
     },
 
     {
       game_num: 'Game #3',
-      name: 'THE AIRPLANE RELAY RACE',
-      round: 4,
-      player: 5,
-      materials: [],
+      name: 'MOVING IN',
+      round: 5,
+      player: '-',
       imageUrl: [
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3_1.gif',
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3_2.gif',
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3_3.gif',
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3-1' +
+          game_3pwd +
+          '.gif',
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3-2' +
+          game_3pwd +
+          '.gif',
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3-3' +
+          game_3pwd +
+          '.gif',
+        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3-4' +
+          game_3pwd +
+          '.gif',
       ],
       id: 'game_3',
-      pwd: 'Airplane',
+      pwd: game_3pwd,
     },
   ];
 
-  const [selected, setSelected] = useState(0);
-  const [password, setPassword] = useState('');
-  const [inputValue, setInput] = useState('');
-  const [error, setError] = useState(false);
-
   const handleSubmit = () => {
     let pwd = inputValue;
-    if (pwd !== gameType[selected].pwd) {
+    if (pwd !== String(gameType[selected].pwd)) {
       setError(true);
     } else {
       setError(false);
@@ -101,57 +126,68 @@ export default function HarvestGameInstructions() {
   };
 
   return (
-    <VStack bgColor="rgba(228, 241, 244, 1)" spacing="0">
-      <Container
-        position="start"
-        fontWeight="900"
-        bgColor="rgba(134, 185, 197, 1)"
-        fontSize={{ base: '6vw', sm: '4vw' }}
-        textColor="white"
-        marginY="0"
-        borderTopRadius={7}
-        display="flex"
-      >
-        HG-2022
-        <Image
-          marginLeft="auto"
-          w={{ base: '13vw', sm: '7.5vw' }}
-          minW={{ base: '13vw', sm: '7.5vw' }}
-          src={process.env.PUBLIC_URL + '/images/ripple.svg'}
-          alt="Logo of HMCC"
-        />
-      </Container>
-      <Container
-        bgColor="rgba(227, 224, 224, 1)"
-        textAlign="center"
-        textColor="rgba(83, 83, 83, 1)"
-        minW="100%"
-        fontWeight="500"
-        fontSize={{ base: '5vw', sm: '3vw' }}
-      >
-        Game Manual
-      </Container>
-      <Box display="flex" justifyContent="center" paddingY="2em" w="100%">
-        <Select
-          borderWidth="2px"
-          w="80%"
-          h="3em"
-          borderRadius="15"
-          borderColor="rgba(71, 108, 147, 1)"
-          textColor="rgba(71, 108, 147, 1)"
-          value={selected}
-          onChange={(e) => handleChange(e)}
+    <VStack spacing="0" minHeight="60em">
+      {/* <Container
+          position="start"
+          fontWeight="900"
+          bgColor="rgba(134, 185, 197, 1)"
+          fontSize={{ base: '6vw', sm: '4vw' }}
+          textColor="white"
+          marginY="0"
+          borderTopRadius={7}
+          display="flex"
         >
-          {gameType &&
-            gameType.map((e, i) => {
-              return (
-                <option value={i} key={i}>
-                  {e.game_num}
-                </option>
-              );
-            })}
-        </Select>
-      </Box>
+          HG-2022
+          <Image
+            marginLeft="auto"
+            w={{ base: '13vw', sm: '7.5vw' }}
+            minW={{ base: '13vw', sm: '7.5vw' }}
+            src={process.env.PUBLIC_URL + '/images/ripple.svg'}
+            alt="Logo of HMCC"
+          />
+        </Container> */}
+      {/* <Container
+          bgColor="rgba(227, 224, 224, 1)"
+          textAlign="center"
+          textColor="rgba(83, 83, 83, 1)"
+          minW="100%"
+          fontWeight="500"
+          fontSize={{ base: '5vw', sm: '3vw' }}
+        >
+          Game Manual
+        </Container> */}
+      <HStack w="100%">
+        <Box w="10%">
+          <Image
+            src={`${process.env.PUBLIC_URL}/images/harvest-games/white-dot.png`}
+            objectFit="cover"
+            position="center"
+            width={{ base: '70%', sm: '35%', md: '30%', lg: '30%', xl: '25%' }}
+            marginX="auto"
+          />
+        </Box>
+        <Box display="flex" justifyContent="center" paddingY="2em" w="100%">
+          <Select
+            borderWidth="3px"
+            w={{ base: '90%', sm: '100%' }}
+            h="3em"
+            borderRadius="15"
+            borderColor="#6F75CC"
+            textColor="rgba(71, 108, 147, 1)"
+            value={selected}
+            onChange={(e) => handleChange(e)}
+          >
+            {gameType &&
+              gameType.map((e, i) => {
+                return (
+                  <option value={i} key={i}>
+                    {e.game_num}
+                  </option>
+                );
+              })}
+          </Select>
+        </Box>
+      </HStack>
       {gameType[selected].pwd ===
       localStorage.getItem(gameType[selected].id) ? (
         <Box w="90%">
@@ -231,40 +267,6 @@ export default function HarvestGameInstructions() {
             </Box>
           </HStack>
           <VStack alignItems="start" marginX="0" w="100%" paddingBottom="10">
-            <Box
-              display={gameType[selected].id === 'game_2' ? 'block' : 'none '}
-              borderColor="rgba(8, 86, 131, 1)"
-              borderWidth="7px"
-              borderRadius="10px"
-              fontWeight={500}
-              fontSize={{ base: '5vw', md: '2.5vw' }}
-              textColor="rgba(61, 61, 61, 1)"
-              w="100%"
-              marginX="0"
-              marginY="5"
-              textAlign="start"
-              paddingY="5"
-              paddingX="9"
-            >
-              Materials :
-              <VStack justifyContent="space-evenly" alignItems="start">
-                {gameType[selected].materials.length > 0 &&
-                  gameType[selected].materials.map((e, i) => {
-                    return (
-                      <Fragment key={i}>
-                        <Text
-                          color="rgba(1, 43, 85, 1)"
-                          fontWeight={400}
-                          textDecoration="none"
-                          fontSize={{ base: '4vw', md: '2vw' }}
-                        >
-                          {e}
-                        </Text>
-                      </Fragment>
-                    );
-                  })}
-              </VStack>
-            </Box>
             <Heading paddingX="2">Instructions :</Heading>
             <Grid
               w="100%"
@@ -296,52 +298,70 @@ export default function HarvestGameInstructions() {
           </VStack>
         </Box>
       ) : (
-        <VStack
-          display="flex"
-          w="100%"
-          fontSize={{ md: '16', lg: '18' }}
-          textColor="rgba(83, 83, 83, 1)"
-          alignItems={{ base: 'center', sm: 'start' }}
-          textAlign={{ base: 'center', sm: 'start' }}
-          paddingX="5"
-          paddingBottom="10"
-          spacing="4"
-        >
-          <label>
-            Please enter the password for {gameType[selected].game_num}{' '}
-            instructions
-          </label>
-          <Input
-            id="inputted"
-            type="text"
-            placeholder="Start typing here"
-            w={{ base: '100%', sm: '50%' }}
-            backgroundColor="white"
-            borderWidth="1px"
-            borderColor="gray/300"
-            value={inputValue}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => handleKeyDown(e)}
-          />
-          <Button
-            type="submit"
-            onClick={handleSubmit}
-            bgColor="rgba(83, 157, 196, 1)"
-            textColor="white"
-            fontSize="smaller"
-            w={{ base: '100%', sm: 'fit-content' }}
+        <HStack w="100%">
+          <Box w="10%">
+            <Image
+              src={`${process.env.PUBLIC_URL}/images/harvest-games/blue-dot.png`}
+              objectFit="cover"
+              position="center"
+              width={{
+                base: '70%',
+                sm: '35%',
+                md: '30%',
+                lg: '30%',
+                xl: '25%',
+              }}
+              marginX="auto"
+            />
+          </Box>
+          <VStack
+            display="flex"
+            w={{ base: '90%', sm: '60%' }}
+            fontSize={{ md: '16', lg: '18' }}
+            fontWeight="500"
+            textColor="rgba(83, 83, 83, 1)"
+            alignItems={{ base: 'center', sm: 'start' }}
+            textAlign={{ base: 'center', sm: 'start' }}
+            paddingX="5"
+            paddingBottom="10"
+            spacing="4"
           >
-            Submit
-          </Button>
+            <label>
+              Please enter the password for {gameType[selected].game_num}{' '}
+              instructions
+            </label>
+            <Input
+              id="inputted"
+              type="text"
+              placeholder="Start typing here"
+              w={{ base: '80%', sm: '100%' }}
+              backgroundColor="white"
+              borderWidth="1px"
+              borderColor="gray/300"
+              value={inputValue}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => handleKeyDown(e)}
+            />
+            <Button
+              type="submit"
+              onClick={handleSubmit}
+              bgColor="#6F75CC"
+              textColor="white"
+              fontSize="smaller"
+              w={{ base: '100%', sm: 'fit-content' }}
+            >
+              Submit
+            </Button>
 
-          <Text
-            display={error ? 'flex' : 'none'}
-            textColor="rgba(198, 66, 66, 1)"
-            textAlign={{ base: 'center', md: 'start' }}
-          >
-            Password is incorrect!
-          </Text>
-        </VStack>
+            <Text
+              display={error ? 'flex' : 'none'}
+              textColor="rgba(198, 66, 66, 1)"
+              textAlign={{ base: 'center', md: 'start' }}
+            >
+              Password is incorrect!
+            </Text>
+          </VStack>
+        </HStack>
       )}
     </VStack>
   );

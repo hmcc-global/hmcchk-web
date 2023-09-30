@@ -80,18 +80,6 @@ const HarvestGames = (props) => {
                     fontWeight: 'bold',
                   }}
                 >
-                  Challenges Winners
-                </Tab>
-
-                <Tab
-                  marginTop="1em"
-                  textColor="#EEF4FF"
-                  _selected={{
-                    borderBottom: '5px solid #6F75CC',
-                    textColor: '#6F75CC',
-                    fontWeight: 'bold',
-                  }}
-                >
                   Games Instructions
                 </Tab>
 
@@ -105,6 +93,17 @@ const HarvestGames = (props) => {
                 >
                   <Text>Leaderboard</Text>
                 </Tab>
+                {/* <Tab
+                  marginTop="1em"
+                  textColor="#EEF4FF"
+                  _selected={{
+                    borderBottom: '5px solid #6F75CC',
+                    textColor: '#6F75CC',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  Challenges Winners
+                </Tab> */}
 
                 {/* <Tab
                   marginTop="1em"
@@ -146,6 +145,12 @@ const HarvestGames = (props) => {
                     .
                   </Text>
                 </TabPanel> */}
+                <TabPanel>
+                  <HarvestGameInstructions />
+                </TabPanel>
+                <TabPanel>
+                  <HarvestGamesLeaderboard />
+                </TabPanel>
 
                 <TabPanel height="80vh" padding={0}>
                   <Text
@@ -191,12 +196,6 @@ const HarvestGames = (props) => {
                     </TableContainer>
                   </Center>
                 </TabPanel>
-                <TabPanel>
-                  <HarvestGameInstructions />
-                </TabPanel>
-                <TabPanel>
-                  <HarvestGamesLeaderboard />
-                </TabPanel>
               </TabPanels>
             </Tabs>
             {/* MOBILE */}
@@ -217,7 +216,7 @@ const HarvestGames = (props) => {
                     fontWeight: 'bold',
                   }}
                 >
-                  Challenges Winners
+                  Games Instructions
                 </Tab>
 
                 <Tab
@@ -230,6 +229,16 @@ const HarvestGames = (props) => {
                 >
                   Leaderboard
                 </Tab>
+                {/* <Tab
+                  textColor="#EEF4FF"
+                  _selected={{
+                    borderBottom: '5px solid #6F75CC',
+                    textColor: '#6F75CC',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  Challenges Winners
+                </Tab> */}
               </TabList>
 
               <TabPanels paddingTop={'7'}>
@@ -261,8 +270,14 @@ const HarvestGames = (props) => {
                     .
                   </Text>
                 </TabPanel> */}
+                <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
+                  <HarvestGameInstructions />
+                </TabPanel>
+                <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
+                  <HarvestGamesLeaderboard />
+                </TabPanel>
 
-                <TabPanel height={{ base: '30em', sm: '40em' }}>
+                {/* <TabPanel height={{ base: '30em', sm: '40em' }}>
                   <Text
                     fontSize={{
                       base: '20px',
@@ -309,13 +324,7 @@ const HarvestGames = (props) => {
                       </Table>
                     </TableContainer>
                   </Center>
-                </TabPanel>
-                <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
-                  <HarvestGameInstructions />
-                </TabPanel>
-                <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
-                  <HarvestGamesLeaderboard />
-                </TabPanel>
+                </TabPanel> */}
               </TabPanels>
             </Tabs>
           </Box>
