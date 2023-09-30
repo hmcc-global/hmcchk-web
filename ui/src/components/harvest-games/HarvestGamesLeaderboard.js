@@ -14,6 +14,7 @@ export default function HarvestGamesLeaderboard(props) {
   const [api, setApi] = useState();
   const [colApi, setColApi] = useState();
   const [rankings, setRankings] = useState();
+  const [filteredRankings, setFilteredRankings] = useState();
   // let lastUpdatedTime = useRef();
 
   const defaultColDef = {
@@ -66,11 +67,15 @@ export default function HarvestGamesLeaderboard(props) {
     if (api) {
       if (rankings && rankings.length) {
         api.hideOverlay();
+        const filteredRankings = rankings.filter(
+          (row) => row.lgName !== 'password'
+        );
+        setFilteredRankings(filteredRankings);
       } else {
         api.showLoadingOverlay();
       }
     }
-  }, [rankings, api]);
+  }, [rankings]);
 
   // Ag-Grid Helpers
   // Getter Functions: to handle errors in retrieving data
@@ -196,7 +201,7 @@ export default function HarvestGamesLeaderboard(props) {
           defaultColDef={defaultColDef}
           columnDefs={columnDefs}
           onGridReady={onGridReady}
-          rowData={rankings}
+          rowData={filteredRankings}
           onFirstDataRendered={onFirstDataRendered}
           tooltipShowDelay={0}
           getRowStyle={getRowStyle}
