@@ -117,6 +117,10 @@ module.exports.policies = {
   // LeadershipTeam
   'leadershipTeam/*': ['isLoggedIn', 'aboveAdmin'],
 
+  // Harvest Games
+  'harvestGames/get-hg-rankings': ['isLoggedIn', 'aboveTech'],
+  'harvestGames/update-hg-rankings': ['isLoggedIn', 'aboveTech'],
+
   // Users
   'users/reset': ['isLoggedIn', 'aboveAdmin'],
 };
