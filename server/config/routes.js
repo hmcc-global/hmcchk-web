@@ -23,9 +23,12 @@ module.exports.routes = {
   'get /api/cache/refresh-cache': 'cache/refresh-cache',
   'get /api/misc/get-env': 'misc/get-env',
   'get /api/misc/get-current-time': 'misc/get-current-time',
-  'get /api/misc/get-latest-lifegroup-list': 'leadershipTeam/get-latest-lifegroup-list',
-  'get /api/misc/get-latest-campus-list': 'leadershipTeam/get-latest-campus-list',
-  'get /api/misc/get-latest-lifestage-list': 'leadershipTeam/get-latest-lifestage-list',
+  'get /api/misc/get-latest-lifegroup-list':
+    'leadershipTeam/get-latest-lifegroup-list',
+  'get /api/misc/get-latest-campus-list':
+    'leadershipTeam/get-latest-campus-list',
+  'get /api/misc/get-latest-lifestage-list':
+    'leadershipTeam/get-latest-lifestage-list',
 
   // Forms APIs
   'get /api/forms/get-form': 'forms/get-form',
@@ -136,12 +139,20 @@ module.exports.routes = {
   'get /api/leadership-team/get': 'leadershipTeam/get-leadership-team',
   'post /api/leadership-team/create': 'leadershipTeam/create-leadership-team',
   'put /api/leadership-team/update': 'leadershipTeam/update-leadership-team',
-  
+
   // Sermon Notes Parent APIs
-  'get /api/sermon-notes-parent/get': 'sermonNotesParent/get-sermon-notes-parent',
-  'post /api/sermon-notes-parent/create': 'sermonNotesParent/create-sermon-notes-parent',
-  'put /api/sermon-notes-parent/update': 'sermonNotesParent/update-sermon-notes-parent',
-  'put /api/sermon-notes-parent/delete': 'sermonNotesParent/delete-sermon-notes-parent',
+  'get /api/sermon-notes-parent/get':
+    'sermonNotesParent/get-sermon-notes-parent',
+  'post /api/sermon-notes-parent/create':
+    'sermonNotesParent/create-sermon-notes-parent',
+  'put /api/sermon-notes-parent/update':
+    'sermonNotesParent/update-sermon-notes-parent',
+  'put /api/sermon-notes-parent/delete':
+    'sermonNotesParent/delete-sermon-notes-parent',
+
+  // Harvest Games APIs
+  'get /api/hgRankings/get': 'harvestGames/get-hg-rankings',
+  'put /api/hgRankings/update': 'harvestGames/update-hg-rankings',
 
   // UI
   'get /*': {
