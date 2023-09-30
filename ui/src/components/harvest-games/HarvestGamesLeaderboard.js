@@ -31,14 +31,14 @@ export default function HarvestGamesLeaderboard(props) {
 
   const getData = async () => {
     try {
-      const { data } = await axios.get('/api/hgRankings/get');
+      const { data } = await axios.get('/api/hgrankings/get');
       setRankings(data);
     } catch (err) {
       console.log(err);
     }
   };
 
-  // TODO-YY (optional): Update every 10 seconds for a "live" scoreboard feel 
+  // TODO-YY (optional): Update every 10 seconds for a "live" scoreboard feel
   // const checkIfUpdated = useCallback(async (updateData = true) => {
   //   try {
   //     const { data } = await axios.get('/api/last-updated', {

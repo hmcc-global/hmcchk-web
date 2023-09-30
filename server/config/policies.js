@@ -93,6 +93,10 @@ module.exports.policies = {
   'testimonies/get-published-testimonies': true,
   'testimonies/create-testimonies': true,
 
+  // Harvest Games
+  'harvestGames/get-hg-rankings': ['isLoggedIn', 'aboveTech'],
+  'harvestGames/update-hg-rankings': ['isLoggedIn', 'aboveTech'],
+
   // Users
   'users/reset': ['isLoggedIn', 'aboveAdmin'],
 };

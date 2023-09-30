@@ -19,6 +19,7 @@ import {
 } from '@chakra-ui/react';
 
 import HarvestGamesLeaderboard from './HarvestGamesLeaderboard';
+import HarvestGameInstructions from './HarvestGameInstructions';
 
 const HarvestGames = (props) => {
   return (
@@ -79,7 +80,19 @@ const HarvestGames = (props) => {
                     fontWeight: 'bold',
                   }}
                 >
-                  Challenges
+                  Challenges Winners
+                </Tab>
+
+                <Tab
+                  marginTop="1em"
+                  textColor="#EEF4FF"
+                  _selected={{
+                    borderBottom: '5px solid #6F75CC',
+                    textColor: '#6F75CC',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  Games Instructions
                 </Tab>
 
                 <Tab
@@ -107,7 +120,7 @@ const HarvestGames = (props) => {
               </TabList>
 
               <TabPanels borderRadius={'10'} bottomPadding="50px">
-                <TabPanel minHeight="80vh" padding={0}>
+                {/* <TabPanel minHeight="80vh" padding={0}>
                   <Center>
                     <Image
                       src={`${process.env.PUBLIC_URL}/images/harvest-games/week2-web.png`}
@@ -132,7 +145,7 @@ const HarvestGames = (props) => {
                     </Link>
                     .
                   </Text>
-                </TabPanel>
+                </TabPanel> */}
 
                 <TabPanel height="80vh" padding={0}>
                   <Text
@@ -178,10 +191,12 @@ const HarvestGames = (props) => {
                     </TableContainer>
                   </Center>
                 </TabPanel>
-
-                {/* <TabPanel>
+                <TabPanel>
+                  <HarvestGameInstructions />
+                </TabPanel>
+                <TabPanel>
                   <HarvestGamesLeaderboard />
-                </TabPanel> */}
+                </TabPanel>
               </TabPanels>
             </Tabs>
             {/* MOBILE */}
@@ -202,7 +217,7 @@ const HarvestGames = (props) => {
                     fontWeight: 'bold',
                   }}
                 >
-                  Challenges
+                  Challenges Winners
                 </Tab>
 
                 <Tab
@@ -215,20 +230,10 @@ const HarvestGames = (props) => {
                 >
                   Leaderboard
                 </Tab>
-                {/* <Tab
-                  borderBottom="5px solid #E2E8F0"
-                  _selected={{
-                    borderBottom: '5px solid #0628A3',
-                    textColor: '#3A6693',
-                    fontWeight: 'bold',
-                  }}
-                >
-                  Live Leaderboard
-                </Tab> */}
               </TabList>
 
               <TabPanels paddingTop={'7'}>
-                <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
+                {/* <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
                   <Center>
                     <Image
                       w="100%"
@@ -255,7 +260,7 @@ const HarvestGames = (props) => {
                     </Link>
                     .
                   </Text>
-                </TabPanel>
+                </TabPanel> */}
 
                 <TabPanel height={{ base: '30em', sm: '40em' }}>
                   <Text
@@ -305,9 +310,12 @@ const HarvestGames = (props) => {
                     </TableContainer>
                   </Center>
                 </TabPanel>
-                {/* <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
+                <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
+                  <HarvestGameInstructions />
+                </TabPanel>
+                <TabPanel minHeight={{ base: '30em', sm: '40em' }}>
                   <HarvestGamesLeaderboard />
-                </TabPanel> */}
+                </TabPanel>
               </TabPanels>
             </Tabs>
           </Box>
