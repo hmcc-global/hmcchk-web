@@ -119,6 +119,10 @@ module.exports.routes = {
   'post /api/announcement/create': 'announcements/create-announcements',
   'put /api/announcement/update': 'announcements/update-announcements',
 
+  // Harvest Games APIs
+  'get /api/hgRankings/get': 'harvestGames/get-hg-rankings',
+  'put /api/hgRankings/update': 'harvestGames/update-hg-rankings',
+
   // UI
   'get /*': {
     skipAssets: true,

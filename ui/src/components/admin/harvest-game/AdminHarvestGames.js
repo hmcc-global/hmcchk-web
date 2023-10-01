@@ -198,7 +198,7 @@ export default function AdminHarvestGames(props) {
     {
       headerName: 'LIFE Group',
       field: 'lgName',
-      editable: false,
+      editable: true,
     },
     // Set colId of breakdown to game number minus 1, i.e. normalize to zero-based indexing
     // colId will be utilized in getting and setting rankings
