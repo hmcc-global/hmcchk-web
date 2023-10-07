@@ -36,6 +36,7 @@ import SaturateContainer from './saturate/SaturateContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementContainer';
 import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
+import RippleOutContainer from './ripple-out/RippleOutContainer';
 
 const MainContainer = () => {
   return (
@@ -185,6 +186,12 @@ const MainContainer = () => {
           path="/saturate"
           permissions={['public']}
           component={SaturateContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/ripple-out"
+          permissions={['public']}
+          component={RippleOutContainer}
         />
         {/* Admin items */}
         <PrivateRoute
