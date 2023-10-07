@@ -1,6 +1,11 @@
 import { extendTheme } from '@chakra-ui/react';
 import '@fontsource/dm-sans';
 import '@fontsource/cousine';
+import '@fontsource/darker-grotesque';
+import '@fontsource/darker-grotesque/500.css';
+import '@fontsource/darker-grotesque/600.css';
+import '@fontsource/darker-grotesque/700.css';
+import '@fontsource/darker-grotesque/900.css';
 
 const customTheme = extendTheme({
   fonts: {
@@ -21,6 +26,26 @@ const customTheme = extendTheme({
       fontWeight: ['400', '700'],
     },
     
+    darker_grotesque: {
+      fontFamily: 'Darker Grotesque',
+      fontWeight: '400',
+    },
+    darker_grotesque_medium: {
+      fontFamily: 'Darker Grotesque',
+      fontWeight: '500',
+    },
+    darker_grotesque_semibold: {
+      fontFamily: 'Darker Grotesque',
+      fontWeight: '600',
+    },
+    darker_grotesque_bold: {
+      fontFamily: 'Darker Grotesque',
+      fontWeight: '700',
+    },
+    darker_grotesque_black: {
+      fontFamily: 'Darker Grotesque',
+      fontWeight: '900',
+    },
   },
 });
 
