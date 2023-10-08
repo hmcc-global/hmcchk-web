@@ -422,8 +422,26 @@ const RippleOutContainer = (props) => {
                 There are a few different ways you can give to our church.
               </Text>
               <Text fontSize={bodyFontSize}>
-                *When giving, please always use your legal name and provide the
-                same email address consistently.
+                When giving for the Ripple Out Campaign:
+                <UnorderedList>
+                  <ListItem>
+                    Please always use your legal name and provide the same email
+                    address consistently.
+                  </ListItem>
+                  <ListItem>
+                    Please always leave a note in the transfer remark
+                  </ListItem>
+                </UnorderedList>
+                Transfer Remark:{' '}
+                <Box textStyle="darker_grotesque_black" as="span">
+                  RIPPLE OUT: {'{Your full name}'}
+                </Box>
+              </Text>
+              <Text fontSize={bodyFontSize}>
+                Note: Please email stewardship@hongkong.hmcc.net with your full
+                name and transfer receipt, especially if you forgot to leave a
+                remark or memo in the online giving process, for record-keeping
+                purposes
               </Text>
               <Center minW="100%">
                 <Flex
