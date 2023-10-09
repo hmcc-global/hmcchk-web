@@ -20,7 +20,7 @@ import {
   FiBell,
   FiMonitor,
   FiFeather,
-  FiVolume2
+  FiVolume2,
 } from 'react-icons/fi';
 
 const LinkItems = [
@@ -29,8 +29,8 @@ const LinkItems = [
   { name: 'Live Sermon', icon: FiMonitor, path: '/admin/liveSermon' },
   { name: 'Users', icon: FiUsers, path: '/admin/users' },
   { name: 'Pop Up', icon: FiBell, path: '/admin/popup' },
-  { name: 'Testimony', icon: FiFeather, path: '/admin/testimony' },
-  { name: 'Announcements', icon: FiVolume2, path: '/admin/announcements' }
+  // { name: 'Testimony', icon: FiFeather, path: '/admin/testimony' },
+  { name: 'Announcements', icon: FiVolume2, path: '/admin/announcements' },
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {
