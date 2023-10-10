@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   Flex,
-  Center,
+
   Stack,
   Box,
   Text,
@@ -32,6 +32,7 @@ import { signout } from '../../reducers/userSlice';
 import { customAxios as axios } from '../helpers/customAxios';
 import MainMenu from './MainMenu';
 import { useHistory } from 'react-router-dom';
+import RippleOutBanner from '../ripple-out/RippleOutBanner';
 import { BsFillPersonFill } from 'react-icons/bs';
 
 const NavBar = (props) => {
@@ -462,6 +463,7 @@ const NavBar = (props) => {
           </Container>
         </Flex>
       </Flex>
+      {isHomePage && <RippleOutBanner />}
       {/* {currDate === 'Wed' && !isOnlineSermon ? (
         <Flex
           w="100vw"
