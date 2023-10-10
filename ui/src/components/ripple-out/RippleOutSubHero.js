@@ -43,7 +43,8 @@ const RippleOutSubHero = (props) => {
           fontSize="lg"
           bgColor="#ffffff"
           fontWeight="bold"
-          borderColor="182E57"
+          borderColor="#182E57"
+          color="#182E57"
         >
           READ THE STORY
         </Button>
