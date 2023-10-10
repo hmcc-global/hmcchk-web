@@ -19,7 +19,7 @@ const RippleOutSection = () => {
         bgPos={['right', 'center']}
         display={['none', 'block']}
       >
-        <Container h="100%">
+        <Container maxW="container.xl" h="100%">
           <Center h="full" flexDir="column">
             <Flex w="100%" flexDir="column" color="#ffffff">
               <Text
@@ -43,7 +43,7 @@ const RippleOutSection = () => {
               borderColor="#182E57"
               color="#182E57"
               alignSelf="flex-start"
-              px="em"
+              px="2em"
             >
               LEARN MORE
             </Button>
