@@ -9,6 +9,7 @@ import PopupContainer from './PopupContainer';
 import HelloSermonSection from './HelloSermonSection';
 import { customAxios as axios } from '../helpers/customAxios';
 import SaturateVisionSection from './SaturateVisionSection';
+import RippleOutSection from '../ripple-out/RippleOutSection';
 
 const HomeContainer = (props) => {
   const { user } = props;
@@ -42,6 +43,7 @@ const HomeContainer = (props) => {
     <Flex direction="column">
       <HeroSection anchorTarget={sermonRef} />
       <HelloSermonSection ref={sermonRef} />
+      <RippleOutSection />
       <AboutSection />
       <SaturateVisionSection />
       <EventsSection />
