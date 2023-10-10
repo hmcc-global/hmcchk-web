@@ -25,12 +25,15 @@ const RippleOutSection = () => {
               <Text
                 textStyle="darker_grotesque_bold"
                 fontWeight="900"
-                fontSize={['4em', '14em']}
+                fontSize={['4em', '8em', '8em', '14em']}
                 lineHeight={['1em', '0em']}
               >
                 RIPPLE OUT
               </Text>
-              <Text textStyle="darker_grotesque" fontSize={['3em', '12em']}>
+              <Text
+                textStyle="darker_grotesque"
+                fontSize={['3em', '6em', '6em', '12em']}
+              >
                 CAMPAIGN
               </Text>
             </Flex>
