@@ -55,7 +55,7 @@ const RippleOutContainer = () => {
                 textStyle="darker_grotesque_bold"
                 fontWeight="900"
                 fontSize={['4em', '14em']}
-                lineHeight={['1em', '0em']}
+                lineHeight={['0.25em', '0em']}
               >
                 RIPPLE OUT
               </Text>
