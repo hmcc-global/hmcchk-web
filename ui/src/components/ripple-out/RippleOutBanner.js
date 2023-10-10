@@ -19,12 +19,12 @@ const RippleOutBanner = () => {
               <Box>
                 <Text
                   position="relative"
-                  fontSize={['0.7em', 'xl']}
+                  fontSize={['0.65em', 'xl']}
                   as="i"
                   color="#182E57"
                   fontWeight={600}
                 >
-                  CLICK HERE TO LEARN MORE ABOUT THE RIPPLE OUT CAMPAIGN !
+                  CLICK HERE TO LEARN MORE ABOUT THE RIPPLE OUT CAMPAIGN!
                 </Text>
               </Box>
             </HStack>
