@@ -25,9 +25,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../reducers/userSlice';
 import { customAxios as axios } from '../helpers/customAxios';
 import MainMenu from './MainMenu';
+import { useHistory } from 'react-router-dom';
+import RippleOutBanner from '../ripple-out/RippleOutBanner';
 import { BsFillPersonFill } from 'react-icons/bs';
 
 const NavBar = (props) => {
+  const isHomePage = useHistory().location.pathname === '/';
+
   const [isLive, setIsLive] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -458,6 +462,7 @@ const NavBar = (props) => {
           </Container>
         </Flex>
       </Flex>
+      {isHomePage && <RippleOutBanner />}
       {/* {currDate === 'Wed' && !isOnlineSermon ? (
         <Flex
           w="100vw"
