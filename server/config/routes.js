@@ -124,6 +124,10 @@ module.exports.routes = {
   'post /api/leadership-team/create': 'leadershipTeam/create-leadership-team',
   'put /api/leadership-team/update': 'leadershipTeam/update-leadership-team',
 
+  // FAQ APIs
+  'get /api/faq/get': 'faq/get-faq',
+  'get /api/faq/admin-get': 'faq/admin-get-faq',
+
   // UI
   'get /*': {
     skipAssets: true,

@@ -13,6 +13,8 @@ module.exports.policies = {
    *                                                                          *
    * Default policy for all controllers and actions, unless overridden.       *
    * (`true` allows public access)                                            *
+   * Current levels of access from lowest to highest:                         *
+   * isLoggedIn, aboveMinistry, aboveTc, aboveTech, aboveAdmin                *                                                                     *
    *                                                                          *
    * Current hierarchy from lowest to highest:                                *
    * - isLoggedIn                                                             *
@@ -64,6 +66,10 @@ module.exports.policies = {
   'announcements/admin-get-announcements': ['isLoggedIn', 'aboveMinistry'],
   'announcements/create-announcements': ['isLoggedIn', 'aboveTc'],
   'announcements/update-announcements': ['isLoggedIn', 'aboveMinistry'],
+
+  // FAQ
+  'faq/get-faq': true,
+  'faq/admin-get-faq': ['isLoggedIn', 'aboveTc'],
 
   // Last Updated
   'lastUpdated/get-last-updated': ['isLoggedIn', 'aboveTech'],
