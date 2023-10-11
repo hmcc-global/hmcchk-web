@@ -70,6 +70,8 @@ module.exports.policies = {
   // FAQ
   'faq/get-faq': true,
   'faq/admin-get-faq': ['isLoggedIn', 'aboveTc'],
+  'faq/create-faq': ['isLoggedIn', 'aboveTc'],
+  'faq/update-faq': ['isLoggedIn', 'aboveTc'],
 
   // Last Updated
   'lastUpdated/get-last-updated': ['isLoggedIn', 'aboveTech'],
