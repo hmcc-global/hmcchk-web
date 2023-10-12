@@ -21,6 +21,7 @@ module.exports = {
         const data = await Faq.find({
           pageTopic: pageTopic,
           isDeleted: false,
+          isPublished: true,
         });
         return exits.success(data);
       }
