@@ -23,6 +23,7 @@ import {
   FiVolume2,
   FiShield,
   FiAlertCircle,
+  FiDollarSign,
 } from 'react-icons/fi';
 
 const LinkItems = [
@@ -39,6 +40,7 @@ const LinkItems = [
     icon: FiShield,
     path: '/admin/leadership-team',
   },
+  { name: 'Fundraise', icon: FiDollarSign, path: '/admin/fundraise' },
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {
