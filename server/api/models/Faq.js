@@ -20,6 +20,10 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    isPublished: {
+      type: 'boolean',
+      defaultsTo: false,
+    },
     isDeleted: {
       type: 'boolean',
       defaultsTo: false,
