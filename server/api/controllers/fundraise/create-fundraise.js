@@ -25,36 +25,36 @@ module.exports = {
     milestones: {
       type: 'json',
     },
+  },
 
-    exits: {},
+  exits: {},
 
-    fn: async function (
-      { campaignName, categoryName, categoryKey, amount, givers, milestones },
-      exits
-    ) {
-      try {
-        if (!campaignName || !categoryName || !categoryKey) {
-          return exits.error('Missing required fields');
-        }
-
-        const newFundraise = await Fundraise.create({
-          campaignName,
-          categoryName,
-          categoryKey,
-          amount,
-          givers,
-          milestones,
-        });
-
-        if (!newFundraise) {
-          return exits.error('Fundraise campaign not created');
-        }
-
-        return exits.success(newFundraise);
-      } catch (err) {
-        sails.log.error(err);
-        return exits.error(err);
+  fn: async function (
+    { campaignName, categoryName, categoryKey, amount, givers, milestones },
+    exits
+  ) {
+    try {
+      if (!campaignName || !categoryName || !categoryKey) {
+        return exits.error('Missing required fields');
       }
-    },
+
+      const newFundraise = await Fundraise.create({
+        campaignName,
+        categoryName,
+        categoryKey,
+        amount,
+        givers,
+        milestones,
+      });
+
+      if (!newFundraise) {
+        return exits.error('Fundraise campaign not created');
+      }
+
+      return exits.success(newFundraise);
+    } catch (err) {
+      sails.log.error(err);
+      return exits.error(err);
+    }
   },
 };
