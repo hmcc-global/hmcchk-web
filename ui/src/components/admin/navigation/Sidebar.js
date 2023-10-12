@@ -22,6 +22,7 @@ import {
   FiFeather,
   FiVolume2,
   FiDollarSign,
+  FiHelpCircle
 } from 'react-icons/fi';
 
 const LinkItems = [
@@ -33,6 +34,7 @@ const LinkItems = [
   { name: 'Testimony', icon: FiFeather, path: '/admin/testimony' },
   { name: 'Announcements', icon: FiVolume2, path: '/admin/announcements' },
   { name: 'Fundraise', icon: FiDollarSign, path: '/admin/fundraise' },
+  { name: 'FAQs', icon: FiHelpCircle, path: '/admin/faqs' }
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {
