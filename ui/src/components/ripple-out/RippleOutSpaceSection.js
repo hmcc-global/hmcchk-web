@@ -40,7 +40,7 @@ const RippleOutSpaceSection = ({ headerFontSize, bodyFontSize }) => {
       </Container>
       <Box
         my={9}
-        h={['20vh', '40vh', '60vh', '80vh']}
+        h={['30vh', '40vh', '60vh', '90vh']}
         w="screen"
         bgImage={`url(${process.env.PUBLIC_URL}/images/ripple-out/ripple-photos.png)`}
         bgSize="contain"
