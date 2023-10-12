@@ -38,6 +38,7 @@ import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementC
 import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
 import RippleOutContainer from './ripple-out/RippleOutContainer';
 import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
+import AdminFaqContainer from './admin/faqs/AdminFaqContainer';
 import EasterContainer from './easter-2024/EasterContainer';
 
 const MainContainer = () => {
@@ -225,6 +226,12 @@ const MainContainer = () => {
           path="/admin/announcements"
           permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
           component={AdminAnnouncementContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/faqs"
+          permissions={['t3ch', 'admin', 'stewardship']}
+          component={AdminFaqContainer}
         />
         <PrivateRoute
           exact
