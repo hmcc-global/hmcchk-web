@@ -40,6 +40,7 @@ import TextDetails from './witness/text-testimony/TextDetails';
 import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementContainer';
 import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
 import RippleOutContainer from './ripple-out/RippleOutContainer';
+import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
 
 const MainContainer = () => {
   return (
@@ -273,6 +274,12 @@ const MainContainer = () => {
           path="/admin/users"
           permissions={['admin', 'stewardship']}
           component={AdminUser}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/fundraise"
+          permissions={['admin', 'stewardship']}
+          component={AdminFundraiseContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
