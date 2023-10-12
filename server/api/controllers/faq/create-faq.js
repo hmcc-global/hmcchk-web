@@ -16,11 +16,15 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    isPublished: {
+      type: 'boolean',
+      defaultsTo: false,
+    },
   },
 
   exits: {},
 
-  fn: async function ({ pageTopic, question, answer }, exits) {
+  fn: async function ({ pageTopic, question, answer, isPublished }, exits) {
     const createdBy = this.req.user.fullName;
 
     try {
@@ -30,6 +34,7 @@ module.exports = {
         answer,
         createdBy,
         lastUpdatedBy: createdBy,
+        isPublished,
       }).fetch();
 
       if (!newFaq) {
