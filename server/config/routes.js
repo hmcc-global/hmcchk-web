@@ -119,6 +119,12 @@ module.exports.routes = {
   'post /api/announcement/create': 'announcements/create-announcements',
   'put /api/announcement/update': 'announcements/update-announcements',
 
+  // FAQ APIs
+  'get /api/faq/get': 'faq/get-faq',
+  'get /api/faq/admin-get': 'faq/admin-get-faq',
+  'post /api/faq/create': 'faq/create-faq',
+  'put /api/faq/update': 'faq/update-faq',
+
   // UI
   'get /*': {
     skipAssets: true,
