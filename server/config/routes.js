@@ -130,6 +130,12 @@ module.exports.routes = {
   'post /api/faq/create': 'faq/create-faq',
   'put /api/faq/update': 'faq/update-faq',
 
+  // Fundraise APIs
+  'get /api/fundraise/get': 'fundraise/get-fundraise',
+  'get /api/fundraise/admin-get': 'fundraise/admin-get-fundraise',
+  'post /api/fundraise/create': 'fundraise/create-fundraise',
+  'put /api/fundraise/update': 'fundraise/update-fundraise',
+
   // UI
   'get /*': {
     skipAssets: true,

@@ -73,6 +73,12 @@ module.exports.policies = {
   'faq/create-faq': ['isLoggedIn', 'aboveTc'],
   'faq/update-faq': ['isLoggedIn', 'aboveTc'],
 
+  // Fundraise
+  'fundraise/get-fundraise': true,
+  'fundraise/admin-get-fundraise': ['isLoggedIn', 'aboveAdmin'],
+  'fundraise/create-fundraise': ['isLoggedIn', 'aboveAdmin'],
+  'fundraise/update-fundraise': ['isLoggedIn', 'aboveAdmin'],
+
   // Last Updated
   'lastUpdated/get-last-updated': ['isLoggedIn', 'aboveTech'],
 
