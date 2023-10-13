@@ -12,6 +12,7 @@ export default function FaqGrid(props) {
   const [api, setApi] = useState();
   const [colApi, setColApi] = useState();
 
+  // Filter the faqs based on the showDeleted state
   useEffect(() => {
     if (faqs) {
       if (!showDeleted) {
@@ -22,6 +23,7 @@ export default function FaqGrid(props) {
     }
   }, [faqs, showDeleted]);
 
+  // Show the loading overlay when the faqs are loading
   useEffect(() => {
     if (api) {
       if (faqs && faqs.length) {
@@ -38,6 +40,7 @@ export default function FaqGrid(props) {
     if (params.columnApi) setColApi(params.columnApi);
   };
 
+  // Set the selected FAQ when a row is clicked
   const onRowClicked = ({ data }) => {
     if (data) setSelected(data);
   };
