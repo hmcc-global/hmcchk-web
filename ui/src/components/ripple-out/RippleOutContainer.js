@@ -1,16 +1,52 @@
-import { Box, Container, Flex, Text, Center } from '@chakra-ui/react';
+import { Box, Container, Flex, Text, Center, HStack } from '@chakra-ui/react';
 import RippleOutSubHero from './RippleOutSubHero';
 import RippleOutTakePartSection from './RippleOutTakePartSection';
 import RippleOutSupportGiveSection from './RippleOutSupportGiveSection';
 import RippleOutFaqSection from './RippleOutFaqSection';
 import RippleOutSpaceSection from './RippleOutSpaceSection';
 import ProgressSection from './ProgressSection';
+import { useRef } from 'react';
 
 const headerFontSize = ['2.5em', '4.25em'];
 const bodyFontSize = '1.4em';
 const fontColor = '#182E57';
 
 const RippleOutContainer = () => {
+  const storyRef = useRef(null);
+  const stepsRef = useRef(null);
+  const spaceRef = useRef(null);
+  const supportRef = useRef(null);
+  const navStyle = {
+    color: '#F0F0F0',
+    fontFamily: 'Inter',
+    fontSize: '18px',
+    fontStyle: 'normal',
+    fontWeight: 700,
+    lineHeight: '32px' /* 177.778% */,
+    textDecorationLine: 'underline',
+    cursor: 'pointer',
+  };
+  const navStyleMobile = {
+    color: '#F0F0F0',
+    fontFamily: 'Inter',
+    fontSize: '4.9px',
+    fontStyle: 'normal',
+    fontWeight: 700,
+    lineHeight: '8.711px' /* 177.778% */,
+    textDecorationLine: 'underline',
+    cursor: 'pointer',
+  };
+  const navDotStyle = {
+    borderRadius: '20px',
+    borderColor: '#F0F0F0',
+    border: '3px #F0F0F0 solid',
+  };
+  const navDotStyleMobile = {
+    borderRadius: '20px',
+    borderColor: '#F0F0F0',
+    border: '1.2px #F0F0F0 solid',
+  };
+
   return (
     <>
       {/* Hero section - desktop */}
@@ -23,7 +59,12 @@ const RippleOutContainer = () => {
         display={['none', 'block']}
       >
         <Container maxW={['container.xl']} h="100%">
-          <Center h="full">
+          <Center
+            h="full"
+            flexDirection="column"
+            justifyContent="space-between"
+          >
+            <HStack paddingTop="40px" />
             <Flex w="100%" flexDir="column" color="#ffffff">
               <Text
                 textStyle="darker_grotesque_bold"
@@ -40,6 +81,64 @@ const RippleOutContainer = () => {
                 CAMPAIGN
               </Text>
             </Flex>
+            <HStack
+              alignItems="center"
+              w="100%"
+              paddingBottom="20px"
+              spacing={8}
+            >
+              <Text
+                style={navStyle}
+                onClick={() =>
+                  storyRef.current.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest',
+                  })
+                }
+              >
+                THE STORY
+              </Text>
+              <Box style={navDotStyle} />
+              <Text
+                style={navStyle}
+                onClick={() =>
+                  stepsRef.current.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest',
+                  })
+                }
+              >
+                THE STEPS
+              </Text>
+              <Box style={navDotStyle} />
+              <Text
+                style={navStyle}
+                onClick={() =>
+                  spaceRef.current.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest',
+                  })
+                }
+              >
+                THE SPACE
+              </Text>
+              <Box style={navDotStyle} />
+              <Text
+                style={navStyle}
+                onClick={() =>
+                  supportRef.current.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest',
+                  })
+                }
+              >
+                THE SUPPORT
+              </Text>
+            </HStack>
           </Center>
         </Container>
       </Box>
@@ -53,7 +152,12 @@ const RippleOutContainer = () => {
         display={['block', 'none']}
       >
         <Container maxW={['container.xl']} h="100%">
-          <Center h="full">
+          <Center
+            h="full"
+            flexDirection="column"
+            justifyContent="space-between"
+          >
+            <HStack paddingTop="40px" />
             <Flex w="100%" flexDir="column" color="#ffffff">
               <Text
                 textStyle="darker_grotesque_bold"
@@ -67,6 +171,64 @@ const RippleOutContainer = () => {
                 CAMPAIGN
               </Text>
             </Flex>
+            <HStack
+              alignItems="center"
+              w="100%"
+              paddingBottom="20px"
+              spacing={2}
+            >
+              <Text
+                style={navStyleMobile}
+                onClick={() =>
+                  storyRef.current.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest',
+                  })
+                }
+              >
+                THE STORY
+              </Text>
+              <Box style={navDotStyleMobile} />
+              <Text
+                style={navStyleMobile}
+                onClick={() =>
+                  stepsRef.current.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest',
+                  })
+                }
+              >
+                THE STEPS
+              </Text>
+              <Box style={navDotStyleMobile} />
+              <Text
+                style={navStyleMobile}
+                onClick={() =>
+                  spaceRef.current.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest',
+                  })
+                }
+              >
+                THE SPACE
+              </Text>
+              <Box style={navDotStyleMobile} />
+              <Text
+                style={navStyleMobile}
+                onClick={() =>
+                  supportRef.current.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest',
+                  })
+                }
+              >
+                THE SUPPORT
+              </Text>
+            </HStack>
           </Center>
         </Container>
       </Box>
@@ -76,6 +238,7 @@ const RippleOutContainer = () => {
         bgColor="#FFFBEF"
         py={['1.8em', '4em']}
         color={fontColor}
+        ref={storyRef}
       >
         <Container
           maxW={['container.xl']}
@@ -88,7 +251,8 @@ const RippleOutContainer = () => {
               bodyFontSize={bodyFontSize}
             />
             <ProgressSection />
-            <Flex flexDir="column" gap={3}>
+            
+            <Flex flexDir="column" gap={3} ref={stepsRef}>
               <Text
                 fontSize={headerFontSize}
                 textStyle="darker_grotesque_black"
@@ -141,6 +305,7 @@ const RippleOutContainer = () => {
         bgColor="#C9DDED"
         py={['1.8em', '4em']}
         color={fontColor}
+        ref={spaceRef}
       >
         <RippleOutSpaceSection
           headerFontSize={headerFontSize}
@@ -154,6 +319,7 @@ const RippleOutContainer = () => {
         bgColor="#FFFBEF"
         py={['1.8em', '4em']}
         color={fontColor}
+        ref={supportRef}
       >
         <RippleOutSupportGiveSection
           headerFontSize={headerFontSize}
