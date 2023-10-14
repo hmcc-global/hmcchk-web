@@ -34,12 +34,6 @@ module.exports = {
     error: {
       description: 'There was an issue with creating the submission',
     },
-    invalid: {
-      description: 'There is an issue with your request',
-    },
-    nonSuccess: {
-      description: 'ERROR',
-    },
   },
 
   fn: async function (
