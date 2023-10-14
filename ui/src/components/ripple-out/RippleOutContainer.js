@@ -29,7 +29,7 @@ const RippleOutContainer = () => {
   const navStyleMobile = {
     color: '#F0F0F0',
     fontFamily: 'Inter',
-    fontSize: '4.9px',
+    fontSize: '8px',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: '8.711px' /* 177.778% */,
