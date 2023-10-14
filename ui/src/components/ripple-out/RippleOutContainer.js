@@ -4,6 +4,7 @@ import RippleOutTakePartSection from './RippleOutTakePartSection';
 import RippleOutSupportGiveSection from './RippleOutSupportGiveSection';
 import RippleOutFaqSection from './RippleOutFaqSection';
 import RippleOutSpaceSection from './RippleOutSpaceSection';
+import ProgressSection from './ProgressSection';
 
 const headerFontSize = ['2.5em', '4.25em'];
 const bodyFontSize = '1.4em';
@@ -86,6 +87,7 @@ const RippleOutContainer = () => {
               headerFontSize={headerFontSize}
               bodyFontSize={bodyFontSize}
             />
+            <ProgressSection />
             <Flex flexDir="column" gap={3}>
               <Text
                 fontSize={headerFontSize}
