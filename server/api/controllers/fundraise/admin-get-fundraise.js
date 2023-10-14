@@ -17,14 +17,11 @@ module.exports = {
       if (id) {
         const data = await Fundraise.find({
           _id: id,
-          isDeleted: false,
         });
 
         return exits.success(data);
       }
-      const data = await Fundraise.find({
-        isDeleted: false,
-      });
+      const data = await Fundraise.find({});
 
       return exits.success(data);
     } catch (err) {
