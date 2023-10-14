@@ -12,6 +12,12 @@ export default function AdminFundraiseGrid(props) {
   const [api, setApi] = useState();
   const [colApi, setColApi] = useState();
 
+  const objectListValueFormatter = (objects) => {
+    const objectString = objects
+      .map((object) => JSON.stringify(object))
+      .join(', ');
+    return objectString;
+  };
   useEffect(() => {
     if (fundraises) {
       if (!showDeleted) {
@@ -49,7 +55,11 @@ export default function AdminFundraiseGrid(props) {
     { headerName: 'Category Key', field: 'categoryKey' },
     { headerName: 'Amount', field: 'amount' },
     { headerName: 'Givers', field: 'givers' },
-    { headerName: 'Milestones', field: 'milestones' },
+    {
+      headerName: 'Milestones',
+      field: 'milestones',
+      valueFormatter: (params) => objectListValueFormatter(params.value),
+    },
     { headerName: 'Deleted', field: 'isDeleted' },
   ];
 
