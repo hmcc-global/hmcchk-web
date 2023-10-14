@@ -287,7 +287,6 @@ export default function FundraiseContainer(props) {
                         onClick={() => handleRemoveMilestones(index)}
                         ml={2}
                         my="auto"
-                        mx="1"
                       >
                         Remove
                       </Button>
