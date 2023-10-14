@@ -18,6 +18,10 @@ module.exports = {
     answer: {
       type: 'string',
     },
+
+    isPublished: {
+      type: 'boolean',
+    },
     isDeleted: {
       type: 'boolean',
     },
@@ -29,7 +33,7 @@ module.exports = {
     },
   },
 
-  fn: async function ({ id, pageTopic, question, answer, isDeleted }, exits) {
+  fn: async function ({ id, pageTopic, question, answer, isPublished, isDeleted }, exits) {
     const user = this.req.user.fullName;
 
     try {
@@ -40,6 +44,7 @@ module.exports = {
         question,
         answer,
         lastUpdatedBy,
+        isPublished,
         isDeleted,
       });
 
