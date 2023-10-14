@@ -1,5 +1,4 @@
 import Tippy from '@tippyjs/react';
-// import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 import { Box, Text } from '@chakra-ui/react';
 
@@ -63,23 +62,10 @@ const ProgressBar = (props) => {
                 </Box>
               </Box>
             }
-            // visible
             placement="bottom"
             >
               <Box style={dotStyle} height={["20px", "30px"]} width={["20px", "30px"]} />
             </Tippy>
-            {/* <Tippy render={ attrs =>
-              <Box textAlign="center" borderRadius={30} tabIndex={-1} {...attrs}>
-                <Box>
-                  {`$${milestone.milestoneAmount.toLocaleString()}`}
-                </Box>
-                <Box>
-                  {milestone.milestoneName}
-                </Box>
-              </Box>
-            }>
-              <Box style={dotStyle} height={["20px", "30px"]} width={["20px", "30px"]} />
-            </Tippy> */}
           </div>
         )
       })}
