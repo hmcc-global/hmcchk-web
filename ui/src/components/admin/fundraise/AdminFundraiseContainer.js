@@ -256,7 +256,7 @@ export default function FundraiseContainer(props) {
                 <FormControl>
                   <FormLabel>Milestone Deadline</FormLabel>
                   <Input
-                    type="datetime-local"
+                    type="text"
                     value={milestoneDeadline}
                     onChange={(e) => setMilestoneDeadline(e.target.value)}
                   />
