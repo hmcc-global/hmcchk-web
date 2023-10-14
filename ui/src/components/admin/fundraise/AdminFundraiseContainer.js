@@ -148,7 +148,10 @@ export default function FundraiseContainer(props) {
     setCategoryKey('');
     setAmount('');
     setGivers('');
-    setMilestones('');
+    setMilestones([]);
+    setMilestoneName('');
+    setMilestoneDeadline('');
+    setMilestoneAmount('');
     setSelected();
   };
   const campaignNameCheck = () => {
@@ -217,21 +220,19 @@ export default function FundraiseContainer(props) {
             </FormControl>
             <FormControl isRequired>
               <FormLabel>Amount</FormLabel>
-              <NumberInput>
-                <NumberInputField
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                />
-              </NumberInput>
+              <Input
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+              />
             </FormControl>
             <FormControl isRequired>
               <FormLabel>Givers</FormLabel>
-              <NumberInput>
-                <NumberInputField
-                  value={givers}
-                  onChange={(e) => setGivers(e.target.value)}
-                />
-              </NumberInput>
+              <Input
+                type="number"
+                value={givers}
+                onChange={(e) => setGivers(e.target.value)}
+              />
             </FormControl>
             <Text></Text>
             <Box borderWidth="1px" borderRadius="xl" m="2" py="3">
@@ -246,12 +247,11 @@ export default function FundraiseContainer(props) {
                 </FormControl>
                 <FormControl>
                   <FormLabel>Milestone Amount</FormLabel>
-                  <NumberInput>
-                    <NumberInputField
-                      value={milestoneAmount}
-                      onChange={(e) => setAmount(e.target.value)}
-                    />
-                  </NumberInput>
+                  <Input
+                    type="number"
+                    value={milestoneAmount}
+                    onChange={(e) => setMilestoneAmount(e.target.value)}
+                  />
                 </FormControl>
                 <FormControl>
                   <FormLabel>Milestone Deadline</FormLabel>
