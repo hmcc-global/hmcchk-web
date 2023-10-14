@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { customAxios as axios } from "../helpers/customAxios";
 import MilestoneProgressBar from './MilestoneProgressBar';
 
+// TODO: Remove later. Keeping it here in case someone wants to test locally with dummy data.
 // const fundraiseDataTest = {
 //   givers: 20,
 //   amount: 2000000,
