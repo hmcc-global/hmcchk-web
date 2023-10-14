@@ -111,7 +111,7 @@ const RippleOutContainer = () => {
         {/* Ripple steps drops image - desktop & mobile */}
         <Box
           my={9}
-          h={['50vh', '60vh', '60vh', '80vh']}
+          h={['60vh', '60vh', '60vh', '90vh']}
           w="screen"
           bgImage={`url(${process.env.PUBLIC_URL}/images/ripple-out/ripple-steps.png)`}
           bgSize="contain"
@@ -120,7 +120,7 @@ const RippleOutContainer = () => {
         />
         <Box
           my={9}
-          h={['50vh', '60vh', '60vh', '80vh']}
+          h={['60vh', '60vh', '60vh', '90vh']}
           w="screen"
           bgImage={`url(${process.env.PUBLIC_URL}/images/ripple-out/ripple-steps-mobile.png)`}
           bgSize="contain"
