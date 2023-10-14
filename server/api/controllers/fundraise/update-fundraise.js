@@ -1,5 +1,3 @@
-const Fundraise = require('../../models/Fundraise');
-
 module.exports = {
   friendlyName: 'Update Fundraise Campaign object',
 
@@ -60,7 +58,7 @@ module.exports = {
 
       let lastUpdatedBy = user;
 
-      const existingFundraise = Fundraise.updateOne({ id }).set({
+      const existingFundraise = await Fundraise.updateOne({ id }).set({
         campaignName,
         categoryName,
         categoryKey,
