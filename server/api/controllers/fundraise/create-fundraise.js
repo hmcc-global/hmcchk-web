@@ -27,7 +27,20 @@ module.exports = {
     },
   },
 
-  exits: {},
+  exits: {
+    success: {
+      description: 'Submission is saved successfuly.',
+    },
+    error: {
+      description: 'There was an issue with creating the submission',
+    },
+    invalid: {
+      description: 'There is an issue with your request',
+    },
+    nonSuccess: {
+      description: 'ERROR',
+    },
+  },
 
   fn: async function (
     { campaignName, categoryName, categoryKey, amount, givers, milestones },
@@ -45,7 +58,7 @@ module.exports = {
         amount,
         givers,
         milestones,
-      });
+      }).fetch();
 
       if (!newFundraise) {
         return exits.error('Fundraise campaign not created');
