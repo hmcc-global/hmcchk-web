@@ -73,7 +73,7 @@ export default function AdminFundraiseGrid(props) {
     <Container w="100%" maxW="100%">
       <HStack justifyContent="space-between">
         <Heading s="md" size="md">
-          Pop Ups
+          Fundraise Campaigns
         </Heading>
         <Switch
           value={showDeleted}
