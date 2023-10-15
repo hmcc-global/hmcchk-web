@@ -130,6 +130,9 @@ const RippleOutSupportGiveSection = ({ headerFontSize, bodyFontSize }) => {
             <Flex flexDir="column" gap={3}></Flex>
           </Center>
           <Text fontSize={bodyFontSize}>
+            If you are giving from the US, you may give to our Chase account via Zellepay using the email stewardship@hongkong.hmcc.net
+          </Text>
+          <Text fontSize={bodyFontSize}>
             Personal information is kept confidential, used only for tax receipt
             purposes, and is only accessible by the Stewardship Team.
           </Text>
