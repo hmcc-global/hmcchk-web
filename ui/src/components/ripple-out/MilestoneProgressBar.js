@@ -47,9 +47,9 @@ const MilestoneProgressBar = (props) => {
 
   const getLabel = (completed) => {
     if (completed == 100) {
-      return `GOAL REACHED ($${target.toLocaleString()})`
+      return `GOAL REACHED ($${Number(target).toLocaleString()})`
     } else {
-      return `$${achieved.toLocaleString()}/$${target.toLocaleString()}`
+      return `$${Number(achieved).toLocaleString()}/$${Number(target).toLocaleString()}`
     }
   }
 
