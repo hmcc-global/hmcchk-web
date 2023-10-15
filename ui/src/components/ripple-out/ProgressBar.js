@@ -55,7 +55,7 @@ const ProgressBar = (props) => {
             <Tippy content={
               <Box textAlign="center" borderRadius={30}>
                 <Box>
-                  {`$${milestone.milestoneAmount.toLocaleString()}`}
+                  {`$${Number(milestone.milestoneAmount).toLocaleString()}`}
                 </Box>
                 <Box>
                   {milestone.milestoneName}
