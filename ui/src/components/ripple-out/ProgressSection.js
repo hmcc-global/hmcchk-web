@@ -61,7 +61,7 @@ const ProgressSection = () => {
       diff = milestone.milestoneAmount - prevMilestone.milestoneAmount;
     }
 
-    return `${milestone.milestoneName} (+$${diff.toLocaleString()} BY ${milestone.milestoneDeadline})`;
+    return `${milestone.milestoneName} (+$${Number(diff).toLocaleString()} BY ${milestone.milestoneDeadline})`;
   }
 
   const getCurrentMilestoneIndex = (milestones, amount) => {
@@ -129,7 +129,7 @@ const ProgressSection = () => {
                   <Text as="b" fontSize={["xl", "3xl"]}>RAISED</Text>
                 </Box>
                 <Box>
-                  <Text as="b" fontSize={["2xl", "4xl"]}>{`$${amount.toLocaleString()}`}</Text>
+                  <Text as="b" fontSize={["2xl", "4xl"]}>{`$${Number(amount).toLocaleString()}`}</Text>
                 </Box>
               </Box>
               <Box textAlign="center">
@@ -145,7 +145,7 @@ const ProgressSection = () => {
                   <Text as="b" fontSize={["xl", "3xl"]}>GOAL</Text>
                 </Box>
                 <Box>
-                  <Text as="b" fontSize={["2xl", "4xl"]}>{`$${getTarget(milestones).toLocaleString()}`}</Text>
+                  <Text as="b" fontSize={["2xl", "4xl"]}>{`$${Number(getTarget(milestones)).toLocaleString()}`}</Text>
                 </Box>
               </Box>
             </Flex>
