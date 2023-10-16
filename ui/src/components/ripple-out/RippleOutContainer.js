@@ -250,7 +250,7 @@ const RippleOutContainer = () => {
               headerFontSize={headerFontSize}
               bodyFontSize={bodyFontSize}
             />
-            <ProgressSection />
+            <ProgressSection bodyFontSize={bodyFontSize} />
 
             <Flex flexDir="column" gap={3} ref={stepsRef}>
               <Text

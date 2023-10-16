@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Text, Center } from '@chakra-ui/react';
+import { Box, Container, Flex, Text, Center, Button } from '@chakra-ui/react';
 import ProgressBar from './ProgressBar';
 import { useEffect, useState } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
@@ -27,7 +27,7 @@ import MilestoneProgressBar from './MilestoneProgressBar';
 //   ]
 // }
 
-const ProgressSection = () => {
+const ProgressSection = ({ bodyFontSize }) => {
   const [fundraiseData, setFundraiseData] = useState(null);
   const [pledeData, setPledgeData] = useState(null);
 
@@ -232,19 +232,62 @@ const ProgressSection = () => {
               <>
                 <Box mt={8}>
                   <Text fontWeight="extrabold" fontSize={['3xl', '5xl']}>
-                    PLEDGES RAISED
+                    PLEDGES
                   </Text>
+                </Box>
+                <Box>
+                  <Text as="b" fontSize={bodyFontSize}>
+                    What is a Pledge?
+                  </Text>
+                  <Text fontSize={bodyFontSize}>
+                    A pledge is a commitment, both financial and symbolic, to
+                    support our Ripple Out Campaign. When you make a pledge, you
+                    are promising to donate a specific amount of money over a
+                    designated period of time by March 2024.
+                  </Text>
+
+                  <Text as="b" fontSize={bodyFontSize}>
+                    Why Make a Pledge?
+                  </Text>
+                  <Text fontSize={bodyFontSize}>
+                    By making a pledge, you play a crucial role in helping us
+                    realize our vision for a vibrant and nurturing space where
+                    we can reach out to more people with the Gospel. Your
+                    support will enable us to create an environment that fosters
+                    spiritual growth, offers a gathering place for our
+                    community, and facilitates meaningful outreach programs.
+                  </Text>
+                  <Text fontSize={bodyFontSize}>
+                    Pledge your support to the Ripple Out Campaign by filling
+                    out this form!
+                  </Text>
+                  <Box textAlign={['center', 'left']}>
+                    <Button
+                      my={2}
+                      as="a"
+                      href="https://bit.ly/ripple-pledge"
+                      target="_blank"
+                      variant="outline"
+                      fontSize="xl"
+                      bgColor="#ffffff"
+                      fontWeight="bold"
+                      borderColor="#182E57"
+                      color="#182E57"
+                    >
+                      SUBMIT YOUR PLEDGE
+                    </Button>
+                  </Box>
                 </Box>
                 <Flex
                   justifyContent="space-between"
-                  marginX={['15%', '30%']}
+                  marginX={['5%', '20%']}
                   lineHeight="30px"
                   marginTop={5}
                 >
                   <Box textAlign="center">
                     <Box>
                       <Text as="b" fontSize={['lg', '3xl']}>
-                        RAISED
+                        TOTAL PLEDGED AMOUNT
                       </Text>
                     </Box>
                     <Box>
