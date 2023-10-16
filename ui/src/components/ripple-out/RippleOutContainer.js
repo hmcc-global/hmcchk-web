@@ -250,8 +250,8 @@ const RippleOutContainer = () => {
               headerFontSize={headerFontSize}
               bodyFontSize={bodyFontSize}
             />
-            <ProgressSection />
-            
+            <ProgressSection bodyFontSize={bodyFontSize} />
+
             <Flex flexDir="column" gap={3} ref={stepsRef}>
               <Text
                 fontSize={headerFontSize}
@@ -275,20 +275,22 @@ const RippleOutContainer = () => {
         {/* Ripple steps drops image - desktop & mobile */}
         <Box
           my={9}
-          h={['60vh', '60vh', '60vh', '90vh']}
+          h={['60vh', '40vh', '50vh', '85vh']}
           w="screen"
           bgImage={`url(${process.env.PUBLIC_URL}/images/ripple-out/ripple-steps.png)`}
           bgSize="contain"
           bgRepeat="no-repeat"
+          bgColor="#34486F"
           display={['none', 'block']}
         />
         <Box
           my={9}
-          h={['60vh', '60vh', '60vh', '90vh']}
+          h={['40vh', '50vh', '50vh', '50vh']}
           w="screen"
           bgImage={`url(${process.env.PUBLIC_URL}/images/ripple-out/ripple-steps-mobile.png)`}
           bgSize="contain"
           bgRepeat="no-repeat"
+          bgColor="#34486F"
           display={['block', 'none']}
         />
 
