@@ -1,7 +1,5 @@
 import { Box, Text } from '@chakra-ui/react';
-import {
-  CheckIcon
-} from '@chakra-ui/icons';
+import { CheckIcon } from '@chakra-ui/icons';
 
 const MilestoneProgressBar = (props) => {
   const { bgcolor, target, achieved } = props;
@@ -10,23 +8,23 @@ const MilestoneProgressBar = (props) => {
 
   const containerStyles = {
     width: '100%',
-    backgroundColor: "#BEC7DA",
+    backgroundColor: '#BEC7DA',
     borderRadius: 50,
-    position: "relative",
-    overflow: "hidden",
+    position: 'relative',
+    overflow: 'hidden',
   };
 
   const dotStyle = {
-    borderRadius: "50%",
-    display: "flex",
-    borderColor: "black",
+    borderRadius: '50%',
+    display: 'flex',
+    borderColor: 'black',
     borderWidth: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   };
 
   const fillerStyles = {
-    position: "absolute",
+    position: 'absolute',
     height: '100%',
     width: `${completed}%`,
     backgroundColor: bgcolor,
@@ -36,33 +34,41 @@ const MilestoneProgressBar = (props) => {
   };
 
   const dotContainerStyle = {
-    position: "absolute",
+    position: 'absolute',
     textAlign: 'right',
-    width: "100%",
+    width: '100%',
     height: '100%',
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "center",
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   };
 
   const getLabel = (completed) => {
-    if (completed == 100) {
-      return `GOAL REACHED ($${Number(target).toLocaleString()})`
+    if (completed === 100) {
+      return `GOAL REACHED ($${Number(target).toLocaleString()})`;
     } else {
-      return `$${Number(achieved).toLocaleString()}/$${Number(target).toLocaleString()}`
+      return `$${Number(achieved).toLocaleString()}/$${Number(
+        target
+      ).toLocaleString()}`;
     }
-  }
+  };
 
   return (
-    <Box style={containerStyles} height={["30px", "40px"]} marginY={[3, 2]}>
+    <Box style={containerStyles} height={['30px', '40px']} marginY={[3, 2]}>
       <div style={fillerStyles}>
         <div style={dotContainerStyle}>
-          {completed === 100 &&
-            <Box style={dotStyle} height={["30px", "40px"]} width={["30px", "40px"]}>
+          {completed === 100 && (
+            <Box
+              style={dotStyle}
+              height={['30px', '40px']}
+              width={['30px', '40px']}
+            >
               <CheckIcon />
             </Box>
-          }
-          <Text as="b" marginLeft={3} fontSize={["large", "2xl"]}>{getLabel(completed)}</Text>
+          )}
+          <Text as="b" marginLeft={3} fontSize={['large', '2xl']}>
+            {getLabel(completed)}
+          </Text>
         </div>
       </div>
     </Box>
