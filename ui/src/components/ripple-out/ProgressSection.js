@@ -29,7 +29,7 @@ import MilestoneProgressBar from './MilestoneProgressBar';
 
 const ProgressSection = ({ bodyFontSize }) => {
   const [fundraiseData, setFundraiseData] = useState(null);
-  const [pledeData, setPledgeData] = useState(null);
+  const [pledgeData, setPledgeData] = useState(null);
 
   useEffect(() => {
     fetchFundraiseData();
@@ -228,7 +228,7 @@ const ProgressSection = ({ bodyFontSize }) => {
                 );
               })}
             </Box>
-            {pledeData && (
+            {pledgeData && (
               <>
                 <Box mt={8}>
                   <Text fontWeight="extrabold" fontSize={['3xl', '5xl']}>
@@ -292,7 +292,7 @@ const ProgressSection = ({ bodyFontSize }) => {
                     </Box>
                     <Box>
                       <Text as="b" fontSize={['xl', '4xl']}>
-                        {`$${pledeData.amount.toLocaleString()}`}
+                        {`$${pledgeData.amount.toLocaleString()}`}
                       </Text>
                     </Box>
                   </Box>
@@ -304,7 +304,7 @@ const ProgressSection = ({ bodyFontSize }) => {
                     </Box>
                     <Box>
                       <Text as="b" fontSize={['xl', '4xl']}>
-                        {`${pledeData.givers.toLocaleString()}`}
+                        {`${pledgeData.givers.toLocaleString()}`}
                       </Text>
                     </Box>
                   </Box>
