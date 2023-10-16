@@ -9,20 +9,17 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Text,
   UnorderedList,
   Flex,
   VStack,
   Checkbox,
   Spacer,
   Button,
-  NumberInput,
-  NumberInputField,
   FormErrorMessage,
   useToast,
 } from '@chakra-ui/react';
 
-export default function FundraiseContainer(props) {
+export default function FundraiseContainer() {
   const toast = useToast();
   const [fundraises, setFundraises] = useState([]);
   const [selected, setSelected] = useState();
@@ -120,8 +117,7 @@ export default function FundraiseContainer(props) {
   };
   const onSubmit = async (event) => {
     event.preventDefault();
-    if (!campaignName || campaignName.length === 0 || campaignNameCheck())
-      return;
+    if (!campaignName || campaignName.length === 0) return;
 
     setIsLoading(true);
     let success = false;
@@ -154,15 +150,7 @@ export default function FundraiseContainer(props) {
     setMilestoneAmount('');
     setSelected();
   };
-  const campaignNameCheck = () => {
-    if (
-      fundraises &&
-      fundraises.some((i) => i.id !== id && i.campaignName === campaignName)
-    )
-      return true;
 
-    return false;
-  };
   const handleAddMilestones = () => {
     if (milestoneName && milestoneAmount && milestoneDeadline) {
       const newMilestone = {
@@ -191,7 +179,7 @@ export default function FundraiseContainer(props) {
       <Stack direction={['column', 'row']} w="100%">
         <Box w={['100%', '50%']}>
           <form onSubmit={onSubmit}>
-            <FormControl isRequired isInvalid={campaignNameCheck()}>
+            <FormControl isRequired>
               <FormLabel>Campaign Name</FormLabel>
               <Input
                 type="text"
@@ -234,7 +222,6 @@ export default function FundraiseContainer(props) {
                 onChange={(e) => setGivers(e.target.value)}
               />
             </FormControl>
-            <Text></Text>
             <Box borderWidth="1px" borderRadius="xl" m="2" py="3">
               <VStack spacing={4} align="start" m="2">
                 <FormControl>
