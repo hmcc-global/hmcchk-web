@@ -150,8 +150,9 @@ const ProgressSection = ({ bodyFontSize }) => {
             <Flex
               justifyContent="space-between"
               marginX={[0, 2]}
-              lineHeight="30px"
+              lineHeight={['1em', '1.9em']}
               marginTop={5}
+              gap="3"
             >
               <Box textAlign="left">
                 <Box>
@@ -159,7 +160,7 @@ const ProgressSection = ({ bodyFontSize }) => {
                     TOTAL AMOUNT RAISED
                   </Text>
                 </Box>
-                <Box>
+                <Box mt={[2, 0]}>
                   <Text as="b" fontSize={['lg', '4xl']}>
                     {`$${Number(amount).toLocaleString()}`}
                   </Text>
@@ -171,7 +172,7 @@ const ProgressSection = ({ bodyFontSize }) => {
                     NUMBER OF SUPPORTERS
                   </Text>
                 </Box>
-                <Box>
+                <Box mt={[2, 0]}>
                   <Text as="b" fontSize={['2xl', '4xl']}>
                     {givers}
                   </Text>
@@ -183,7 +184,7 @@ const ProgressSection = ({ bodyFontSize }) => {
                     FUNDRAISING TARGET
                   </Text>
                 </Box>
-                <Box>
+                <Box mt={[2, 0]}>
                   <Text as="b" fontSize={['lg', '4xl']}>
                     {`$${Number(getTarget(milestones)).toLocaleString()}`}
                   </Text>
