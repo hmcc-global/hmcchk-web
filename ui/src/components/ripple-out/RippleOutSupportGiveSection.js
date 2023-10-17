@@ -10,7 +10,7 @@ import {
   UnorderedList,
   ListItem,
 } from '@chakra-ui/react';
-import GivingCard from '../giving/GivingCard';
+import RippleOutGivingCard from './RippleOutGivingCard';
 
 const RippleOutSupportGiveSection = ({ headerFontSize, bodyFontSize }) => {
   return (
@@ -110,17 +110,17 @@ const RippleOutSupportGiveSection = ({ headerFontSize, bodyFontSize }) => {
               minW="100%"
               h={['100%', '100%', '13em']}
             >
-              <GivingCard
+              <RippleOutGivingCard
                 text="FPS"
                 imageLink={process.env.PUBLIC_URL + '/images/giving/FPS.png'}
               />
               <Spacer />
-              <GivingCard
+              <RippleOutGivingCard
                 text="Online Giving"
                 imageLink={process.env.PUBLIC_URL + '/images/giving/Online.png'}
               />
               <Spacer />
-              <GivingCard
+              <RippleOutGivingCard
                 text="Bank Transfer"
                 imageLink={
                   process.env.PUBLIC_URL + '/images/giving/Transfer.png'
@@ -130,7 +130,8 @@ const RippleOutSupportGiveSection = ({ headerFontSize, bodyFontSize }) => {
             <Flex flexDir="column" gap={3}></Flex>
           </Center>
           <Text fontSize={bodyFontSize}>
-            If you are giving from the US, you may give to our Chase account via Zellepay using the email stewardship@hongkong.hmcc.net
+            If you are giving from the US, you may give to our Chase account via
+            Zellepay using the email stewardship@hongkong.hmcc.net
           </Text>
           <Text fontSize={bodyFontSize}>
             Personal information is kept confidential, used only for tax receipt
