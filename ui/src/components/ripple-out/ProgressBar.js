@@ -1,10 +1,10 @@
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 
 const ProgressBar = (props) => {
   const { bgcolor, amount, milestones, target } = props;
-  var completed = (amount / target) * 100;
+  let completed = (amount / target) * 100;
   completed = Math.min(completed, 100);
 
   const containerStyles = {
@@ -37,7 +37,13 @@ const ProgressBar = (props) => {
 
   return (
     <Box style={containerStyles} height={[50, 100]}>
-      <div style={fillerStyles} />
+      <div style={fillerStyles}>
+        <Box my={[2.5, 6]} mr={[1, 3]}>
+          <Text as="b" fontSize={['lg', '3xl']}>
+            {completed.toFixed(0)}%
+          </Text>
+        </Box>
+      </div>
       {reversedMilestones.map((milestone) => {
         const percentage = (milestone.milestoneAmount / target) * 100;
 
@@ -52,6 +58,7 @@ const ProgressBar = (props) => {
         };
         return (
           <div style={dotContainerStyle}>
+            {/* milestone dots */}
             <Tippy
               content={
                 <Box textAlign="center" borderRadius={30}>
