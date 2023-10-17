@@ -20,21 +20,20 @@ import {
   Image,
   ModalFooter,
 } from '@chakra-ui/react';
+
 const RenderSwitch = (param) => {
   switch (param.ModalSelection) {
     case 'FPS':
       return (
-        <Flex direction={['column', 'column', 'row']}>
+        <Flex direction={['column', 'column', 'row']} fontWeight="bold">
           <Stack>
-            <Text fontWeight="bold">
+            <Text>
               Open your mobile banking FPS interface and scan the QR code OR
               input the FPS identifier.
             </Text>
             <Box>
-              <Text fontWeight="bold">
-                Name: HARVEST MISSION COMMUNITY CHURCH
-              </Text>
-              <Text fontWeight="bold">FPS ID: 167534304</Text>
+              <Text>Name: HARVEST MISSION COMMUNITY CHURCH</Text>
+              <Text>FPS ID: 167534304</Text>
             </Box>
           </Stack>
           <Spacer />
@@ -48,32 +47,30 @@ const RenderSwitch = (param) => {
       );
     case 'Bank Transfer':
       return (
-        <VStack spacing="3vh">
+        <VStack spacing="3vh" fontWeight="bold">
           <Box py="1em">
-            <Text fontWeight="bold">
-              You may use the following information:
-            </Text>
-            <Text fontWeight="bold">
+            <Text>You may use the following information:</Text>
+            <Text>
               Bank Name: China Construction Bank (Asia) Corporation Limited
             </Text>
-            <Text fontWeight="bold">Bank Code: 009</Text>
-            <Text fontWeight="bold">Branch Code: 845</Text>
-            <Text fontWeight="bold">
+            <Text>Bank Code: 009</Text>
+            <Text>Branch Code: 845</Text>
+            <Text>
               Account Name: Harvest Mission Community Church (Hong Kong) Limited
             </Text>
-            <Text fontWeight="bold"> Account Number: 013012090</Text>
-            <Text fontWeight="bold">
-              Transfer Remarks: Please indicate the giving is for the “Ripple
-              Out Campaign”
+            <Text> Account Number: 013012090</Text>
+            <Text>
+              Transfer Remarks:{' '}
+              <Box as="span">RIPPLE OUT: {'{Your full name}'}</Box>
             </Text>
           </Box>
 
-          <Text fontWeight="bold">
+          <Text>
             If our account name is too long and exceeds the number of permitted
             characters, you may shorten it as “Harvest Mission Community Church
             HK”.
           </Text>
-          <Text fontWeight="bold">
+          <Text>
             Please email a copy of your transfer receipt along with your Full
             Name within 2 weeks to stewardship@hongkong.hmcc.net.
           </Text>
@@ -90,15 +87,15 @@ const RenderSwitch = (param) => {
       );
     case 'Online Giving':
       return (
-        <Box>
-          <Text fontWeight="bold">
+        <Box fontWeight="bold">
+          <Text>
             Kindly note that a portion of your giving will be deducted for
             online credit card transactions (3.5% + HKD $2.35 processing fee).
             If you wish for 100% of your contribution to go towards our church’s
             ministry work, please consider selecting “cover fees” on the giving
             site or give via cash or check.
           </Text>
-          <Text fontWeight="bold">
+          <Text>
             Click{' '}
             <Link
               style={{
@@ -115,16 +112,12 @@ const RenderSwitch = (param) => {
       );
     case 'Cheque':
       return (
-        <Box>
-          <Text fontWeight="bold">All Checks should be made out to:</Text>
-          <Text fontWeight="bold">
-            “Harvest Mission Community Church (Hong Kong) Limited”
-          </Text>
+        <Box fontWeight="bold">
+          <Text>All Checks should be made out to:</Text>
+          <Text>“Harvest Mission Community Church (Hong Kong) Limited”</Text>
           <br />
-          <Text fontWeight="bold">
-            You may also mail your checks or donations to:
-          </Text>
-          <Text fontWeight="bold">P.O. Box 84282 HUNGHOM BAY POST OFFICE</Text>
+          <Text>You may also mail your checks or donations to:</Text>
+          <Text>P.O. Box 84282 HUNGHOM BAY POST OFFICE</Text>
         </Box>
       );
     default:
@@ -132,14 +125,14 @@ const RenderSwitch = (param) => {
   }
 };
 
-export const RippleOutGivingCard = (cardinfo) => {
+export const RippleOutGivingCard = (cardInfo) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box
       w={['100%', '100%', '32%']}
       borderRadius="lg"
       my={['0.6em', '0.6em', '0']}
-      bgImage={cardinfo.imageLink}
+      bgImage={cardInfo.imageLink}
       bgPosition="center"
       bgSize="cover"
       boxShadow="0px 4px 8px rgba(0, 0, 0, 0.15)"
@@ -168,7 +161,7 @@ export const RippleOutGivingCard = (cardinfo) => {
                 color="white"
                 fontWeight="bold"
               >
-                {cardinfo.text}
+                {cardInfo.text}
               </Heading>
             </Center>
             <Spacer />
@@ -196,12 +189,12 @@ export const RippleOutGivingCard = (cardinfo) => {
                   <ModalContent>
                     <ModalHeader>
                       <Heading as="h2" size="xl" fontWeight="bold">
-                        {cardinfo.text}
+                        {cardInfo.text}
                       </Heading>
                     </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                      <RenderSwitch ModalSelection={cardinfo.text} />
+                      <RenderSwitch ModalSelection={cardInfo.text} />
                     </ModalBody>
                     <ModalFooter></ModalFooter>
                   </ModalContent>
