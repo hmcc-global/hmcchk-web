@@ -8,6 +8,7 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Text,
   Textarea,
   HStack,
   Checkbox,
@@ -74,6 +75,7 @@ export default function AdminFaqContainer(props) {
         question: question,
         answer: answer,
         isDeleted: deleted,
+        isPublished: published
       });
 
       if (res.status === 200) return true;
@@ -177,22 +179,8 @@ export default function AdminFaqContainer(props) {
                 onChange={(e) => setAnswer(e.target.value)}
               />
             </FormControl>
-            <FormControl isReadOnly>
-              <FormLabel>Created By</FormLabel>
-              <Input
-                type="text"
-                value={createdBy}
-                onChange={(e) => setAnswer(e.target.value)}
-              />
-            </FormControl>
-            <FormControl isReadOnly>
-              <FormLabel>Last Updated By</FormLabel>
-              <Input
-                type="text"
-                value={lastUpdatedBy}
-                onChange={(e) => setAnswer(e.target.value)}
-              />
-            </FormControl>
+            <Text mt={2.5} fontStyle="italic">Created by: {createdBy}</Text>
+            <Text fontStyle="italic">Last Updated by: {lastUpdatedBy}</Text>
             <HStack mt={5} spacing={5} justifyContent="flex-end">
               <FormControl w="auto" isDisabled={deleted}>
                 <Checkbox
@@ -213,7 +201,7 @@ export default function AdminFaqContainer(props) {
             </HStack>
             <FormControl mt={5}>
               <Button type="submit" w="full" isLoading={isLoading}>
-                {id === '' ? 'CREATE' : 'SAVE'}
+                {id === '' ? 'CREATE' : 'UPDATE'}
               </Button>
             </FormControl>
             <Button colorScheme="red" w="full" mt={5} onClick={resetHandler}>
