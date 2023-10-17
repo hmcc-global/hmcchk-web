@@ -4,7 +4,7 @@ import { Box } from '@chakra-ui/react';
 
 const ProgressBar = (props) => {
   const { bgcolor, amount, milestones, target } = props;
-  var completed = (amount / target) * 100;
+  let completed = (amount / target) * 100;
   completed = Math.min(completed, 100);
 
   const containerStyles = {
@@ -37,6 +37,7 @@ const ProgressBar = (props) => {
 
   return (
     <Box style={containerStyles} height={[50, 100]}>
+      {/* filler for completed funds */}
       <div style={fillerStyles} />
       {reversedMilestones.map((milestone) => {
         const percentage = (milestone.milestoneAmount / target) * 100;
