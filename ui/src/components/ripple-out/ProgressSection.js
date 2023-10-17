@@ -3,6 +3,7 @@ import ProgressBar from './ProgressBar';
 import { useEffect, useState } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
 import MilestoneProgressBar from './MilestoneProgressBar';
+import { DateTime } from 'luxon';
 
 // TODO: Remove later. Keeping it here in case someone wants to test locally with dummy data.
 // const fundraiseDataTest = {
@@ -81,7 +82,7 @@ const ProgressSection = ({ bodyFontSize }) => {
 
   const getMilestoneLevels = (milestones, amount, i) => {
     const milestone = milestones[i];
-    var diff;
+    let diff;
 
     if (i === 0) {
       diff = milestone.milestoneAmount;
@@ -90,7 +91,7 @@ const ProgressSection = ({ bodyFontSize }) => {
       diff = milestone.milestoneAmount - prevMilestone.milestoneAmount;
     }
 
-    var prevMilestoneAmount;
+    let prevMilestoneAmount;
     if (i === 0) {
       prevMilestoneAmount = 0;
     } else {
@@ -99,7 +100,7 @@ const ProgressSection = ({ bodyFontSize }) => {
 
     const currentMilestone = getCurrentMilestoneIndex(milestones, amount);
 
-    var achieved;
+    let achieved;
     if (i === currentMilestone) {
       achieved = amount - prevMilestoneAmount;
     } else if (currentMilestone === -1) {
@@ -116,9 +117,20 @@ const ProgressSection = ({ bodyFontSize }) => {
     };
   };
 
+  const dateTimeFormatter = (p) => {
+    if (p) {
+      const dateTimeFormat = 'dd MMM yyyy, HH:mm:ss';
+      const dateTimeObj = DateTime.fromISO(p);
+      if (dateTimeObj.isValid) return dateTimeObj.toFormat(dateTimeFormat);
+    }
+
+    return '';
+  };
+
   const amount = fundraiseData?.amount;
   const givers = fundraiseData?.givers;
   const milestones = fundraiseData?.milestones;
+  const updatedAt = dateTimeFormatter(fundraiseData?.updatedAt);
 
   return (
     <Box
@@ -138,16 +150,17 @@ const ProgressSection = ({ bodyFontSize }) => {
             <Flex
               justifyContent="space-between"
               marginX={[0, 2]}
-              lineHeight="30px"
+              lineHeight={['1em', '1.9em']}
               marginTop={5}
+              gap="3"
             >
               <Box textAlign="left">
                 <Box>
-                  <Text as="b" fontSize={['md', '3xl']}>
-                    RAISED
+                  <Text as="b" fontSize={['sm', '3xl']}>
+                    TOTAL AMOUNT RAISED
                   </Text>
                 </Box>
-                <Box>
+                <Box mt={[2, 0]}>
                   <Text as="b" fontSize={['lg', '4xl']}>
                     {`$${Number(amount).toLocaleString()}`}
                   </Text>
@@ -155,11 +168,11 @@ const ProgressSection = ({ bodyFontSize }) => {
               </Box>
               <Box textAlign="center">
                 <Box>
-                  <Text as="b" fontSize={['xl', '3xl']}>
-                    SUPPORTERS
+                  <Text as="b" fontSize={['lg', '3xl']}>
+                    NUMBER OF SUPPORTERS
                   </Text>
                 </Box>
-                <Box>
+                <Box mt={[2, 0]}>
                   <Text as="b" fontSize={['2xl', '4xl']}>
                     {givers}
                   </Text>
@@ -167,11 +180,11 @@ const ProgressSection = ({ bodyFontSize }) => {
               </Box>
               <Box textAlign="right">
                 <Box>
-                  <Text as="b" fontSize={['md', '3xl']}>
-                    GOAL
+                  <Text as="b" fontSize={['sm', '3xl']}>
+                    FUNDRAISING TARGET
                   </Text>
                 </Box>
-                <Box>
+                <Box mt={[2, 0]}>
                   <Text as="b" fontSize={['lg', '4xl']}>
                     {`$${Number(getTarget(milestones)).toLocaleString()}`}
                   </Text>
@@ -190,6 +203,9 @@ const ProgressSection = ({ bodyFontSize }) => {
               <Text fontSize={['xl', '3xl']}>
                 Click/hover on the white circles for milestones info!
               </Text>
+            </Flex>
+            <Flex justifyContent="right">
+              <Text fontSize={['lg', '2xl']}>Last updated: {updatedAt}</Text>
             </Flex>
             <Box marginTop={8}>
               <Text fontWeight="extrabold" fontSize={['3xl', '5xl']}>
