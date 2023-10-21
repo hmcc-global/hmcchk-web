@@ -42,6 +42,10 @@ import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
 import RippleOutContainer from './ripple-out/RippleOutContainer';
 import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
 import AdminFaqContainer from './admin/faqs/AdminFaqContainer';
+import RippleOutStorySection from './ripple-out/RippleOutStorySection';
+import RippleOutStepsSection from './ripple-out/RippleOutStepsSection';
+import RippleOutSpaceSection from './ripple-out/RippleOutSpaceSection';
+import RippleOutSupportGiveSection from './ripple-out/RippleOutSupportGiveSection';
 
 const MainContainer = () => {
   return (
@@ -214,6 +218,30 @@ const MainContainer = () => {
           path="/ripple-out"
           permissions={['public']}
           component={RippleOutContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/ripple-out/story"
+          permissions={['public']}
+          component={RippleOutStorySection}
+        />
+        <PrivateRoute
+          exact
+          path="/ripple-out/steps"
+          permissions={['public']}
+          component={RippleOutStepsSection}
+        />
+        <PrivateRoute
+          exact
+          path="/ripple-out/space"
+          permissions={['public']}
+          component={RippleOutSpaceSection}
+        />
+        <PrivateRoute
+          exact
+          path="/ripple-out/support"
+          permissions={['public']}
+          component={RippleOutSupportGiveSection}
         />
         {/* Admin items */}
         <PrivateRoute
