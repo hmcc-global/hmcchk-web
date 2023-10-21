@@ -12,12 +12,13 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { FaCaretDown } from 'react-icons/fa';
+import { faqPageTopicList as pageTopicList } from '../../helpers/lists';
 
 export default function FaqGrid(props) {
-  const { faqs, setSelected, toast, resetHandler, updateHandler } = props;
+  const { faqs, setSelected, toast, resetHandler, updateHandler, isLoading } =
+    props;
 
   const [pageTopicFilter, setPageTopicFilter] = useState('');
-  const [pageTopicList, setPageTopicList] = useState([]);
   const [showDeleted, setShowDeleted] = useState(false);
   const [showPublishedOnly, setShowPublishedOnly] = useState(false);
   const [filtered, setFiltered] = useState(faqs);
@@ -29,15 +30,6 @@ export default function FaqGrid(props) {
 
   const [api, setApi] = useState();
   const [colApi, setColApi] = useState();
-
-  // Retrieve all page topics
-  useEffect(() => {
-    if (faqs) {
-      const pageTopics = faqs.map((p) => p.pageTopic);
-      const uniquePageTopics = [...new Set(pageTopics.sort())];
-      setPageTopicList(uniquePageTopics);
-    }
-  }, [faqs]);
 
   // Filter the faqs based on the showDeleted and filter states
   useEffect(() => {
@@ -74,6 +66,14 @@ export default function FaqGrid(props) {
       }
     }
   }, [faqs, api]);
+
+    // Reset the faq grid after the faqs are updated
+    useEffect(() => {
+      if (!isLoading) {
+        setToPublish(false);
+        setToUnpublish(false);
+      }
+    }, [isLoading]);
 
   // Ag-Grid Functions
   const onGridReady = (params) => {
@@ -144,7 +144,7 @@ export default function FaqGrid(props) {
   };
 
   // FAQ Publishing & Reordering Functions
-  // Handles FAQ publishing
+  // Handles FAQ publishing/unpublishing
   const publishHandler = async () => {
     if (api) {
       const selectedFaqs = api.getSelectedNodes();
@@ -203,6 +203,7 @@ export default function FaqGrid(props) {
     }
   };
 
+  // FAQ Update Functions
   const saveFaqInfo = async (data) => {
     return updateHandler(data);
   };
@@ -212,7 +213,7 @@ export default function FaqGrid(props) {
       api.forEachNode(async (node) => {
         const toUpdate = {
           id: node.data.id,
-          order: node.data.order,
+          order: node.data.isPublished ? node.data.order : -1,
           isPublished: node.data.isPublished,
         };
         const success = await saveFaqInfo(toUpdate);
@@ -319,6 +320,7 @@ export default function FaqGrid(props) {
               <Select
                 width="auto"
                 size="md"
+                borderRadius={5}
                 icon={<FaCaretDown />}
                 variant="filled"
                 value={pageTopicFilter}

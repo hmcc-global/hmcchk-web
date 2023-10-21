@@ -7,15 +7,16 @@ import {
   Box,
   FormControl,
   FormLabel,
-  Input,
   Text,
   Textarea,
   HStack,
   Checkbox,
   Button,
   useToast,
+  Select,
 } from '@chakra-ui/react';
 import FaqGrid from './FaqGrid';
+import { faqPageTopicList } from '../../helpers/lists';
 
 export default function AdminFaqContainer(props) {
   const toast = useToast();
@@ -94,7 +95,6 @@ export default function AdminFaqContainer(props) {
         question: question,
         answer: answer,
         order: order === '' ? -1 : order,
-        isPublished: published,
       });
 
       if (res.status === 200) return true;
@@ -123,7 +123,6 @@ export default function AdminFaqContainer(props) {
         answer: answer,
         order: order === '' ? -1 : deleted ? -1 : order,
         isDeleted: deleted,
-        isPublished: published,
       };
       success = await updateHandler(toUpdate);
     } else {
@@ -165,11 +164,17 @@ export default function AdminFaqContainer(props) {
           <form onSubmit={onSubmit}>
             <FormControl isRequired>
               <FormLabel>Page Topic</FormLabel>
-              <Input
-                type="text"
+              <Select
+                placeholder='Select Page Topic'
+                borderRadius={5}
+                size="md"
                 value={pageTopic}
                 onChange={(e) => setPageTopic(e.target.value)}
-              />
+              >
+                {faqPageTopicList.map((item) => {
+                  return <option>{item}</option>;
+                })}
+              </Select>
             </FormControl>
             <FormControl isRequired>
               <FormLabel>Question</FormLabel>
@@ -226,6 +231,7 @@ export default function AdminFaqContainer(props) {
             toast={toast}
             resetHandler={resetHandler}
             updateHandler={updateHandler}
+            isLoading={isLoading}
           />
         </Box>
       </Stack>

@@ -3,7 +3,10 @@ module.exports = {
     pageTopic: {
       type: 'string',
       required: true,
-      enum: ['connect', 'ripple-out'],
+      isIn: [
+        'connect',
+        'ripple-out'
+      ],
     },
     question: {
       type: 'string',

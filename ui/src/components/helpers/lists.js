@@ -348,6 +348,8 @@ const paymentMethodList = [
 
 const eventIntervalList = ['None', 'Daily', 'Weekly', 'Monthly'];
 
+const faqPageTopicList = ['connect', 'ripple-out'];
+
 export {
   accessTypeList,
   lifestageList,
@@ -359,4 +361,5 @@ export {
   countryList,
   paymentMethodList,
   eventIntervalList,
+  faqPageTopicList,
 };
