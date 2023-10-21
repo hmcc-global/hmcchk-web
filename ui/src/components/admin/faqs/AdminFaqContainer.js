@@ -29,6 +29,7 @@ export default function AdminFaqContainer(props) {
   const [pageTopic, setPageTopic] = useState('');
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
+  const [order, setOrder] = useState('');
   const [createdBy, setCreatedBy] = useState('');
   const [lastUpdatedBy, setLastUpdatedBy] = useState('');
 
@@ -56,6 +57,7 @@ export default function AdminFaqContainer(props) {
       setPageTopic(selected.pageTopic);
       setQuestion(selected.question);
       setAnswer(selected.answer);
+      setOrder(selected.order);
       setCreatedBy(selected.createdBy);
       setLastUpdatedBy(selected.lastUpdatedBy);
       setPublished(selected.isPublished);
@@ -67,15 +69,10 @@ export default function AdminFaqContainer(props) {
     if (deleted) setPublished(false);
   }, [deleted]);
 
-  const updateHandler = async () => {
+  const updateHandler = async (toUpdate) => {
     try {
       const res = await axios.put('/api/faq/update', {
-        id,
-        pageTopic: pageTopic,
-        question: question,
-        answer: answer,
-        isDeleted: deleted,
-        isPublished: published
+        ...toUpdate,
       });
 
       if (res.status === 200) return true;
@@ -96,6 +93,7 @@ export default function AdminFaqContainer(props) {
         pageTopic: pageTopic,
         question: question,
         answer: answer,
+        order: order === '' ? -1 : order,
         isPublished: published,
       });
 
@@ -118,7 +116,16 @@ export default function AdminFaqContainer(props) {
     let success = false;
     let isUpdate = id && id.length > 0;
     if (isUpdate) {
-      success = await updateHandler();
+      const toUpdate = {
+        id,
+        pageTopic: pageTopic,
+        question: question,
+        answer: answer,
+        order: order === '' ? -1 : deleted ? -1 : order,
+        isDeleted: deleted,
+        isPublished: published,
+      };
+      success = await updateHandler(toUpdate);
     } else {
       success = await createHandler();
     }
@@ -140,6 +147,7 @@ export default function AdminFaqContainer(props) {
     setPageTopic('');
     setQuestion('');
     setAnswer('');
+    setOrder('');
     setCreatedBy('');
     setLastUpdatedBy('');
     setPublished(false);
@@ -179,15 +187,17 @@ export default function AdminFaqContainer(props) {
                 onChange={(e) => setAnswer(e.target.value)}
               />
             </FormControl>
-            <Text mt={2.5} fontStyle="italic">Created by: {createdBy}</Text>
+            <Text my={2.5}>Order: {order}</Text>
+            <Text fontStyle="italic">Created by: {createdBy}</Text>
             <Text fontStyle="italic">Last Updated by: {lastUpdatedBy}</Text>
             <HStack mt={5} spacing={5} justifyContent="flex-end">
               <FormControl w="auto" isDisabled={deleted}>
                 <Checkbox
+                  isReadOnly={true}
                   isChecked={published}
                   onChange={(e) => setPublished(e.target.checked)}
                 >
-                  Publish?
+                  Published?
                 </Checkbox>
               </FormControl>
               <FormControl w="auto">
@@ -210,7 +220,13 @@ export default function AdminFaqContainer(props) {
           </form>
         </Box>
         <Box w={['100%', '70%']}>
-          <FaqGrid faqs={faqs} setSelected={setSelected} />
+          <FaqGrid
+            faqs={faqs}
+            setSelected={setSelected}
+            toast={toast}
+            resetHandler={resetHandler}
+            updateHandler={updateHandler}
+          />
         </Box>
       </Stack>
     </Container>
