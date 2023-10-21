@@ -3,6 +3,7 @@ module.exports = {
     pageTopic: {
       type: 'string',
       required: true,
+      enum: ['connect', 'ripple-out'],
     },
     question: {
       type: 'string',
@@ -11,6 +12,10 @@ module.exports = {
     answer: {
       type: 'string',
       required: true,
+    },
+    order: {
+      type: 'number',
+      defaultsTo: -1,
     },
     createdBy: {
       type: 'string',
