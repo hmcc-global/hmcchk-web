@@ -8,11 +8,9 @@ import {
 } from '@chakra-ui/react';
 import RippleOutFaqSection from './RippleOutFaqSection';
 import RippleOutHeroSection from './RippleOutHeroSection';
+import { fontColor, headerFontSize, bodyFontSize } from './RippleOutTextStyle';
 
-const RippleOutSpaceSection = () => {
-  const headerFontSize = ['2.5em', '4.25em'];
-  const bodyFontSize = '1.4em';
-  const fontColor = '#182E57';
+const RippleOutSpaceContainer = () => {
   return (
     <>
       <RippleOutHeroSection />
@@ -70,4 +68,4 @@ const RippleOutSpaceSection = () => {
   );
 };
 
-export default RippleOutSpaceSection;
+export default RippleOutSpaceContainer;

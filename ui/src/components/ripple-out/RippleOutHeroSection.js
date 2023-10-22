@@ -101,6 +101,13 @@ const RippleOutHeroSection = () => {
               >
                 THE SUPPORT
               </Text>
+              <Box style={navDotStyle} />
+              <Text
+                onClick={() => history.push('/ripple-out/progress')}
+                style={navStyle}
+              >
+                THE PROGRESS
+              </Text>
             </HStack>
           </Center>
         </Container>
@@ -167,6 +174,13 @@ const RippleOutHeroSection = () => {
                 style={navStyleMobile}
               >
                 THE SUPPORT
+              </Text>
+              <Box style={navDotStyle} />
+              <Text
+                onClick={() => history.push('/ripple-out/progress')}
+                style={navStyle}
+              >
+                THE PROGRESS
               </Text>
             </HStack>
           </Center>

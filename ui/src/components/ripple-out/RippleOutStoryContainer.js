@@ -11,14 +11,11 @@ import {
   VStack,
   Container,
 } from '@chakra-ui/react';
-import ProgressSection from './ProgressSection';
 import RippleOutFaqSection from './RippleOutFaqSection';
 import RippleOutHeroSection from './RippleOutHeroSection';
+import { fontColor, headerFontSize, bodyFontSize } from './RippleOutTextStyle';
 
-const RippleOutStorySection = () => {
-  const headerFontSize = ['2.5em', '4.25em'];
-  const bodyFontSize = '1.4em';
-  const fontColor = '#182E57';
+const RippleOutStoryContainer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -143,10 +140,9 @@ const RippleOutStorySection = () => {
           </Modal>
         </Container>
       </Flex>
-      <ProgressSection />
       <RippleOutFaqSection />
     </>
   );
 };
 
-export default RippleOutStorySection;
+export default RippleOutStoryContainer;

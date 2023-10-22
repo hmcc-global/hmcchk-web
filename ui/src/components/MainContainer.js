@@ -39,13 +39,13 @@ import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import TextDetails from './witness/text-testimony/TextDetails';
 import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementContainer';
 import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
-import RippleOutContainer from './ripple-out/RippleOutContainer';
 import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
 import AdminFaqContainer from './admin/faqs/AdminFaqContainer';
-import RippleOutStorySection from './ripple-out/RippleOutStorySection';
-import RippleOutStepsSection from './ripple-out/RippleOutStepsSection';
-import RippleOutSpaceSection from './ripple-out/RippleOutSpaceSection';
-import RippleOutSupportGiveSection from './ripple-out/RippleOutSupportGiveSection';
+import RippleOutStorySection from './ripple-out/RippleOutStoryContainer';
+import RippleOutStepsSection from './ripple-out/RippleOutStepsContainer';
+import RippleOutSpaceSection from './ripple-out/RippleOutSpaceContainer';
+import RippleOutSupportGiveSection from './ripple-out/RippleOutSupportGiveContainer';
+import RippleOutProgressContainer from './ripple-out/RippleOutProgressContainer';
 
 const MainContainer = () => {
   return (
@@ -217,7 +217,7 @@ const MainContainer = () => {
           exact
           path="/ripple-out"
           permissions={['public']}
-          component={RippleOutContainer}
+          component={RippleOutStorySection}
         />
         <PrivateRoute
           exact
@@ -242,6 +242,12 @@ const MainContainer = () => {
           path="/ripple-out/support"
           permissions={['public']}
           component={RippleOutSupportGiveSection}
+        />
+        <PrivateRoute
+          exact
+          path="/ripple-out/progress"
+          permissions={['public']}
+          component={RippleOutProgressContainer}
         />
         {/* Admin items */}
         <PrivateRoute

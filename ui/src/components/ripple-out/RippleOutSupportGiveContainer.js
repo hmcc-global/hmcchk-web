@@ -13,11 +13,9 @@ import {
 import RippleOutGivingCard from './RippleOutGivingCard';
 import RippleOutFaqSection from './RippleOutFaqSection';
 import RippleOutHeroSection from './RippleOutHeroSection';
+import { fontColor, headerFontSize, bodyFontSize } from './RippleOutTextStyle';
 
-const RippleOutSupportGiveSection = () => {
-  const headerFontSize = ['2.5em', '4.25em'];
-  const bodyFontSize = '1.4em';
-  const fontColor = '#182E57';
+const RippleOutSupportGiveContainer = () => {
   return (
     <>
       <RippleOutHeroSection />
@@ -179,4 +177,4 @@ const RippleOutSupportGiveSection = () => {
   );
 };
 
-export default RippleOutSupportGiveSection;
+export default RippleOutSupportGiveContainer;

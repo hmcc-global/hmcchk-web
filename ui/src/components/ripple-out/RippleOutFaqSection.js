@@ -11,10 +11,9 @@ import {
 } from '@chakra-ui/react';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import faqContent from './faqContent.json';
+import { fontColor, headerFontSize } from './RippleOutTextStyle';
 
 const RippleOutFaqSection = () => {
-  const headerFontSize = ['2.5em', '4.25em'];
-  const fontColor = '#182E57';
   return (
     <Flex
       minH="100%"
