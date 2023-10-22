@@ -175,10 +175,10 @@ const RippleOutHeroSection = () => {
               >
                 THE SUPPORT
               </Text>
-              <Box style={navDotStyle} />
+              <Box style={navDotStyleMobile} />
               <Text
                 onClick={() => history.push('/ripple-out/progress')}
-                style={navStyle}
+                style={navStyleMobile}
               >
                 THE PROGRESS
               </Text>
