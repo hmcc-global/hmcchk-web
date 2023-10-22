@@ -41,10 +41,10 @@ import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementC
 import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
 import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
 import AdminFaqContainer from './admin/faqs/AdminFaqContainer';
-import RippleOutStorySection from './ripple-out/RippleOutStoryContainer';
-import RippleOutStepsSection from './ripple-out/RippleOutStepsContainer';
-import RippleOutSpaceSection from './ripple-out/RippleOutSpaceContainer';
-import RippleOutSupportGiveSection from './ripple-out/RippleOutSupportGiveContainer';
+import RippleOutStoryContainer from './ripple-out/RippleOutStoryContainer';
+import RippleOutStepsContainer from './ripple-out/RippleOutStepsContainer';
+import RippleOutSpaceContainer from './ripple-out/RippleOutSpaceContainer';
+import RippleOutSupportGiveContainer from './ripple-out/RippleOutSupportGiveContainer';
 import RippleOutProgressContainer from './ripple-out/RippleOutProgressContainer';
 
 const MainContainer = () => {
@@ -217,31 +217,31 @@ const MainContainer = () => {
           exact
           path="/ripple-out"
           permissions={['public']}
-          component={RippleOutStorySection}
+          component={RippleOutStoryContainer}
         />
         <PrivateRoute
           exact
           path="/ripple-out/story"
           permissions={['public']}
-          component={RippleOutStorySection}
+          component={RippleOutStoryContainer}
         />
         <PrivateRoute
           exact
           path="/ripple-out/steps"
           permissions={['public']}
-          component={RippleOutStepsSection}
+          component={RippleOutStepsContainer}
         />
         <PrivateRoute
           exact
           path="/ripple-out/space"
           permissions={['public']}
-          component={RippleOutSpaceSection}
+          component={RippleOutSpaceContainer}
         />
         <PrivateRoute
           exact
           path="/ripple-out/support"
           permissions={['public']}
-          component={RippleOutSupportGiveSection}
+          component={RippleOutSupportGiveContainer}
         />
         <PrivateRoute
           exact
