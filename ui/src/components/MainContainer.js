@@ -38,9 +38,13 @@ import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementContainer';
 import AdminLeadershipTeamContainer from './admin/leadershipTeam/AdminLeadershipTeamContainer';
 import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
-import RippleOutContainer from './ripple-out/RippleOutContainer';
 import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
 import AdminFaqContainer from './admin/faqs/AdminFaqContainer';
+import RippleOutStoryContainer from './ripple-out/RippleOutStoryContainer';
+import RippleOutStepsContainer from './ripple-out/RippleOutStepsContainer';
+import RippleOutSpaceContainer from './ripple-out/RippleOutSpaceContainer';
+import RippleOutSupportGiveContainer from './ripple-out/RippleOutSupportGiveContainer';
+import RippleOutProgressContainer from './ripple-out/RippleOutProgressContainer';
 import EasterContainer from './easter-2024/EasterContainer';
 
 const MainContainer = () => {
@@ -196,7 +200,37 @@ const MainContainer = () => {
           exact
           path="/ripple-out"
           permissions={['public']}
-          component={RippleOutContainer}
+          component={RippleOutStoryContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/ripple-out/story"
+          permissions={['public']}
+          component={RippleOutStoryContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/ripple-out/steps"
+          permissions={['public']}
+          component={RippleOutStepsContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/ripple-out/space"
+          permissions={['public']}
+          component={RippleOutSpaceContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/ripple-out/support"
+          permissions={['public']}
+          component={RippleOutSupportGiveContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/ripple-out/progress"
+          permissions={['public']}
+          component={RippleOutProgressContainer}
         />
         {/* Admin items */}
         <PrivateRoute
