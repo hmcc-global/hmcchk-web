@@ -20,7 +20,7 @@ const HeroSection = ({ anchorTarget }) => {
 
   useEffect(() => {
     if (vidRef.current) {
-      vidRef.current.addEventListener('loadedmetadata', e => {
+      vidRef.current.addEventListener('loadedmetadata', (e) => {
         vidRef.current.play();
       });
     }
@@ -125,7 +125,8 @@ const HeroSection = ({ anchorTarget }) => {
                     style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
                     fontSize="16px"
                   >
-                    Every Sunday at 10AM HKT | KOHO, Kwun Tong & Online
+                    Every Sunday at 10AM HKT | Paragon Creatorspace, Kwun Tong &
+                    Online
                   </Text>
                 </Box>
               </Stack>
@@ -154,7 +155,7 @@ const HeroSection = ({ anchorTarget }) => {
                 style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
                 fontSize="12px"
               >
-                KOHO, Kwun Tong & Online
+                Paragon Creatorspace, Kwun Tong & Online
               </Text>
             </Box>
             <Stack position="relative" bottom="6%" width="35px" height="35px">

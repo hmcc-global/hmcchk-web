@@ -18,9 +18,10 @@ import Faq from './Faq';
 // LinkBox,
 // LinkOverlay,
 
-const SUNDAY_CELEBRATION_LOCATION = '11/F, KOHO, Hung To Road,\n Kwun Tong';
+const SUNDAY_CELEBRATION_LOCATION =
+  '4/F, Yau Lee Centre,\n 45 Hoi Yuen Rd,\n Kwun Tong';
 const SUNDAY_CELEBRATION_GOOGLE_MAPS_EMBED =
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.1840730188546!2d114.22194905088833!3d22.30887718524703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34040145ab278021%3A0xf168be9bbe8b1740!2sKOHO!5e0!3m2!1sen!2shk!4v1677338113505!5m2!1sen!2shk';
+  'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14764.630680799666!2d114.2235024!3d22.309876!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x340401d8a28d3a69%3A0xd9392ffd3ca3a2ac!2sPARAGON%20CREATORSPACE!5e0!3m2!1sen!2shk!4v1698049900838!5m2!1sen!2shk';
 
 const VisitUsPage = (props) => {
   return (
@@ -102,12 +103,12 @@ const VisitUsPage = (props) => {
                 {SUNDAY_CELEBRATION_LOCATION}
                 <br />
                 <Link
-                  href="https://bit.ly/KOHODirections"
+                  href="https://bit.ly/PSDirections"
                   color="#0E66CC"
                   isExternal
                   fontWeight={700}
                 >
-                  <Text as="u">bit.ly/KOHODirections</Text>
+                  <Text as="u">bit.ly/PSDirections</Text>
                 </Link>
               </Text>
               <Spacer />
