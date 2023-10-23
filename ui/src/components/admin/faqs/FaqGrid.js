@@ -15,27 +15,46 @@ import { FaCaretDown } from 'react-icons/fa';
 import { faqPageTopicList as pageTopicList } from '../../helpers/lists';
 
 export default function FaqGrid(props) {
-  const { faqs, setSelected, toast, resetHandler, updateHandler, isLoading } =
-    props;
+  const {
+    faqs,
+    setSelected,
+    toast,
+    resetHandler,
+    updateHandler,
+    isLoading,
+    getData,
+  } = props;
 
-  const [pageTopicFilter, setPageTopicFilter] = useState('');
   const [showDeleted, setShowDeleted] = useState(false);
   const [showPublishedOnly, setShowPublishedOnly] = useState(false);
-  const [filtered, setFiltered] = useState(faqs);
+  const [pageTopicFilter, setPageTopicFilter] = useState('');
+  const [localFaqs, setLocalFaqs] = useState([]);
+  const [filtered, setFiltered] = useState([]);
   const [isReorderingFaqs, setIsReorderingFaqs] = useState(false);
   const [toPublish, setToPublish] = useState(false);
   const [toUnpublish, setToUnpublish] = useState(false);
-  const [toPublishList, setToPublishList] = useState([]);
-  const [toUnpublishList, setToUnpublishList] = useState([]);
 
   const [api, setApi] = useState();
   const [colApi, setColApi] = useState();
 
-  // Filter the faqs based on the showDeleted and filter states
+  // Utility function for deep copying arrays
+  const deepCopyArray = (arrayToCopy) => {
+    return JSON.parse(JSON.stringify(arrayToCopy));
+  }
+
+  // Update local faqs when FAQs are updated in the database
   useEffect(() => {
     if (faqs) {
+      // Perform deep copy to prevent modifying the original FAQs array
+      setLocalFaqs(deepCopyArray(faqs));
+    }
+  }, [faqs]);
+
+  // Filter the faqs based on the showDeleted and filter states
+  useEffect(() => {
+    if (localFaqs) {
       let filteredFaqs;
-      filteredFaqs = showDeleted ? faqs : faqs.filter((p) => !p.isDeleted);
+      filteredFaqs = showDeleted ? localFaqs : localFaqs.filter((p) => !p.isDeleted);
       filteredFaqs =
         pageTopicFilter !== ''
           ? filteredFaqs.filter((p) => p.pageTopic === pageTopicFilter)
@@ -54,7 +73,7 @@ export default function FaqGrid(props) {
 
       setFiltered(filteredFaqs);
     }
-  }, [faqs, showDeleted, pageTopicFilter, showPublishedOnly]);
+  }, [localFaqs, showDeleted, pageTopicFilter, showPublishedOnly]);
 
   // Show the loading overlay when the faqs are loading
   useEffect(() => {
@@ -67,13 +86,13 @@ export default function FaqGrid(props) {
     }
   }, [faqs, api]);
 
-    // Reset the faq grid after the faqs are updated
-    useEffect(() => {
-      if (!isLoading) {
-        setToPublish(false);
-        setToUnpublish(false);
-      }
-    }, [isLoading]);
+  // Reset the faq grid after the faqs are updated
+  useEffect(() => {
+    if (!isLoading) {
+      setToPublish(false);
+      setToUnpublish(false);
+    }
+  }, [isLoading]);
 
   // Ag-Grid Functions
   const onGridReady = (params) => {
@@ -150,19 +169,25 @@ export default function FaqGrid(props) {
       const selectedFaqs = api.getSelectedNodes();
 
       if (selectedFaqs && selectedFaqs.length) {
+        let tempFaqs = deepCopyArray(localFaqs);
+
         if (toPublish) {
-          setToPublishList(selectedFaqs);
           selectedFaqs.forEach((faq) => {
-            faq.setDataValue('isPublished', true);
+            const idx = tempFaqs.findIndex((f) => f.id === faq.data.id);
+            if (idx !== -1) tempFaqs[idx].isPublished = true;
           });
-          resetHandler();
-          setIsReorderingFaqs(true);
-        } else if (toUnpublish) {
-          setToUnpublishList(selectedFaqs);
+        }
+
+        if (toUnpublish) {
           selectedFaqs.forEach((faq) => {
-            faq.setDataValue('isPublished', false);
+            const idx = tempFaqs.findIndex((f) => f.id === faq.data.id);
+            if (idx !== -1) tempFaqs[idx].isPublished = false;
           });
+        }
+
+        if (toPublish || toUnpublish) {
           resetHandler();
+          setLocalFaqs(tempFaqs);
           setIsReorderingFaqs(true);
         }
       } else {
@@ -181,25 +206,20 @@ export default function FaqGrid(props) {
   };
   // Cancels FAQ publishing/reordering
   const cancelHandler = () => {
-    if (toPublish && toPublishList && toPublishList.length) {
-      toPublishList.forEach((faq) => {
-        faq.setDataValue('isPublished', false);
-      });
-      setToPublish(false);
-    } else if (toUnpublish && toUnpublishList && toUnpublishList.length) {
-      toUnpublishList.forEach((faq) => {
-        faq.setDataValue('isPublished', true);
-      });
-      setToUnpublish(false);
-    }
     setIsReorderingFaqs(false);
+    // Revert local FAQs to database FAQs
+    setLocalFaqs(deepCopyArray(faqs));
   };
   // Set the order of the FAQs when a row is dragged
   const onRowDragEnd = (params) => {
     if (params.api) {
+      let tempFaqs = deepCopyArray(localFaqs);
       params.api.forEachNode((node) => {
-        node.setDataValue('order', node.rowIndex + 1);
+        const idx = tempFaqs.findIndex((f) => f.id === node.data.id);
+        if (idx !== -1) tempFaqs[idx].order = node.rowIndex + 1;
+        
       });
+      setLocalFaqs(tempFaqs);
     }
   };
 
@@ -209,27 +229,42 @@ export default function FaqGrid(props) {
   };
 
   const saveFaqReordering = async () => {
-    if (api) {
-      api.forEachNode(async (node) => {
+    try {
+      const updatePromises = localFaqs.map(async (faq) => {
         const toUpdate = {
-          id: node.data.id,
-          order: node.data.isPublished ? node.data.order : -1,
-          isPublished: node.data.isPublished,
+          id: faq.id,
+          order: faq.order,
+          isPublished: faq.isPublished,
         };
+
         const success = await saveFaqInfo(toUpdate);
         if (!success) {
-          console.log('Error saving FAQ reordering');
-          return;
+          console.log('Error saving FAQ');
         }
       });
+      
+      // Wait for all FAQs to be updated
+      await Promise.all(updatePromises);
+
       toast({
-        description: 'Successfully published reordered FAQs',
+        description: 'Successfully reordered FAQs',
         status: 'success',
         duration: 5000,
       });
+
+      // Refresh FAQs with updated data
+      await getData();
+
+      setIsReorderingFaqs(false);
       setToPublish(false);
       setToUnpublish(false);
-      setIsReorderingFaqs(false);
+    } catch (err) {
+      console.log(err);
+      toast({
+        description: 'Error publishing reordered FAQs',
+        status: 'error',
+        duration: 5000,
+      });
     }
   };
 
@@ -275,17 +310,25 @@ export default function FaqGrid(props) {
   return (
     <Container w="100%" maxW="100%">
       <HStack justifyContent="space-between">
-        <Heading s="md" size="md">
-          FAQs
-        </Heading>
-        <Switch
-          value={showDeleted}
-          onChange={(e) => setShowDeleted(e.target.checked)}
-          isDisabled={isReorderingFaqs}
-          isChecked={showDeleted}
-        >
-          Show deleted
-        </Switch>
+        <Heading size="md">FAQs</Heading>
+        <HStack>
+          <Switch
+            value={showDeleted}
+            onChange={(e) => setShowDeleted(e.target.checked)}
+            isDisabled={isReorderingFaqs}
+            isChecked={showDeleted}
+          >
+            Show deleted
+          </Switch>
+          <Switch
+            value={showPublishedOnly}
+            onChange={(e) => setShowPublishedOnly(e.target.checked)}
+            isDisabled={isReorderingFaqs}
+            isChecked={showPublishedOnly}
+          >
+            Show published only
+          </Switch>
+        </HStack>
       </HStack>
       <HStack>
         {toPublish || toUnpublish ? (

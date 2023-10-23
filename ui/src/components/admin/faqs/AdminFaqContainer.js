@@ -22,7 +22,7 @@ export default function AdminFaqContainer(props) {
   const toast = useToast();
 
   // faqs grid data
-  const [faqs, setFaqs] = useState([]);
+  const [faqs, setFaqs] = useState(null);
   const [selected, setSelected] = useState();
 
   // individual faq data
@@ -232,6 +232,7 @@ export default function AdminFaqContainer(props) {
             resetHandler={resetHandler}
             updateHandler={updateHandler}
             isLoading={isLoading}
+            getData={getData}
           />
         </Box>
       </Stack>
