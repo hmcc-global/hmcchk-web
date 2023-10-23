@@ -8,7 +8,6 @@ import NewHereSection from './NewHereSection';
 import PopupContainer from './PopupContainer';
 import HelloSermonSection from './HelloSermonSection';
 import { customAxios as axios } from '../helpers/customAxios';
-// import WitnessSection from '../witness/WitnessSection';
 import SaturateVisionSection from './SaturateVisionSection';
 
 const HomeContainer = (props) => {
@@ -43,7 +42,6 @@ const HomeContainer = (props) => {
     <Flex direction="column">
       <HeroSection anchorTarget={sermonRef} />
       <HelloSermonSection ref={sermonRef} />
-      {/* <WitnessSection /> */}
       <AboutSection />
       <SaturateVisionSection />
       <EventsSection />

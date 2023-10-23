@@ -32,11 +32,8 @@ import FormManager from './forms/FormManager';
 import AdminPopUpContainer from './admin/popup/AdminPopUpContainer';
 import AdminFormDataViewer from './admin/forms/AdminFormDataViewer';
 import AdminLiveSermonContainer from './admin/liveSermon/AdminLiveSermonContainer';
-import WitnessContainer from './witness/WitnessContainer';
-import VideoDetails from './witness/video-testimony/VideoDetails';
-import WitnessHomeContainer from './witness/WitnessHomeContainer';
+import SaturateContainer from './saturate/SaturateContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
-import TextDetails from './witness/text-testimony/TextDetails';
 import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementContainer';
 import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
 
@@ -185,26 +182,9 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/witness/testimonies/videos/:id"
+          path="/saturate-home"
           permissions={['public']}
-          component={VideoDetails}
-        />
-        <PrivateRoute
-          exact
-          path="/witness/testimonies/:resource?"
-          permissions={['public']}
-          component={WitnessContainer}
-        />
-        <PrivateRoute
-          exact
-          path="/witness/home"
-          permissions={['public']}
-          component={WitnessHomeContainer}
-        />
-        <PrivateRoute
-          path="/witness/testimonies/text/:id"
-          permissions={['public']}
-          component={TextDetails}
+          component={SaturateContainer}
         />
         {/* Admin items */}
         <PrivateRoute
