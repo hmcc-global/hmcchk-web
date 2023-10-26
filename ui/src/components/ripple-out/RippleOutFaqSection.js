@@ -12,8 +12,9 @@ import {
 } from '@chakra-ui/react';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { useEffect, useState } from 'react';
+import { fontColor, headerFontSize } from './RippleOutTextStyle';
 
-const RippleOutFaqSection = ({ headerFontSize }) => {
+const RippleOutFaqSection = ({ pageTopic }) => {
   const [faqs, setFaqs] = useState(null);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const RippleOutFaqSection = ({ headerFontSize }) => {
     try {
       const { data } = await axios.get('/api/faq/get', {
         params: {
-          pageTopic: 'ripple-out',
+          pageTopic: pageTopic,
         },
       });
     
@@ -40,58 +41,35 @@ const RippleOutFaqSection = ({ headerFontSize }) => {
   };
 
   return (
-    <Container maxW={['container.xl']} h="100%" textStyle="darker_grotesque">
-      <Flex flexDir="column" gap={3}>
-        <Text
-          fontSize={headerFontSize}
-          textStyle="darker_grotesque_black"
-          color="#182E57"
-          lineHeight="0.9em"
+    <>
+      <Flex
+        flexDir="column"
+        bgColor="#C9DDED"
+        py={['1.8em', '4em']}
+        color={fontColor}
+      >
+        <Container
+          maxW={['container.xl']}
+          h="100%"
+          textStyle="darker_grotesque"
         >
-          FAQ
-        </Text>
-        <Accordion allowMultiple allowToggle fontSize="lg" borderRadius="2xl">
-          <AccordionItem borderTopRadius="2xl">
-            {({ isExpanded }) => (
-              <>
-                <h4>
-                  <AccordionButton
-                    textStyle="darker_grotesque_bold"
-                    fontSize="lg"
-                    p={3}
-                    bg="#34486F"
-                    color="#ffffff"
-                    _hover={{
-                      bg: 'rgba(52, 72, 111, 0.8)',
-                      color: '#ffffff',
-                    }}
-                    borderTopRadius="2xl"
-                  >
-                    <Box flex="1" textAlign="left">
-                      {faqs && faqs[0].question}
-                    </Box>
-                    {isExpanded ? (
-                      <AccordionIcon as={AiOutlineMinus} w={5} h={5} />
-                    ) : (
-                      <AccordionIcon as={AiOutlinePlus} w={5} h={5} />
-                    )}
-                  </AccordionButton>
-                </h4>
-                <AccordionPanel
-                  pb={2}
-                  border="1px solid #34486F"
-                  bg="#FFFBEF"
-                  whiteSpace="pre-wrap"
-                >
-                  {faqs && faqs[0].answer}
-                </AccordionPanel>
-              </>
-            )}
-          </AccordionItem>
-
-          {faqs &&
-            faqs.slice(1, faqs.length - 1).map((item, index) => (
-              <AccordionItem key={'faq' + index}>
+          <Flex flexDir="column" gap={3}>
+            <Text
+              fontSize={headerFontSize}
+              textStyle="darker_grotesque_black"
+              color="#182E57"
+              lineHeight="0.9em"
+            >
+              FAQ
+            </Text>
+            <Accordion
+              mt={5}
+              allowMultiple
+              allowToggle
+              fontSize="lg"
+              borderRadius="2xl"
+            >
+              <AccordionItem borderTopRadius="2xl">
                 {({ isExpanded }) => (
                   <>
                     <h4>
@@ -105,9 +83,10 @@ const RippleOutFaqSection = ({ headerFontSize }) => {
                           bg: 'rgba(52, 72, 111, 0.8)',
                           color: '#ffffff',
                         }}
+                        borderTopRadius="2xl"
                       >
                         <Box flex="1" textAlign="left">
-                          {item.question}
+                          {faqs && faqs[0].question}
                         </Box>
                         {isExpanded ? (
                           <AccordionIcon as={AiOutlineMinus} w={5} h={5} />
@@ -122,55 +101,97 @@ const RippleOutFaqSection = ({ headerFontSize }) => {
                       bg="#FFFBEF"
                       whiteSpace="pre-wrap"
                     >
-                      {item.answer}
+                      {faqs && faqs[0].answer}
                     </AccordionPanel>
                   </>
                 )}
               </AccordionItem>
-            ))}
 
-          <AccordionItem borderBottomRadius="2xl">
-            {({ isExpanded }) => (
-              <>
-                <h4>
-                  <AccordionButton
-                    textStyle="darker_grotesque_bold"
-                    fontSize="lg"
-                    borderBottomRadius={isExpanded ? 'none' : '2xl'}
-                    p={3}
-                    bg="#34486F"
-                    color="#ffffff"
-                    _hover={{
-                      bg: 'rgba(52, 72, 111, 0.8)',
-                      color: '#ffffff',
-                    }}
-                    borderTop="0px"
-                  >
-                    <Box flex="1" textAlign="left">
-                      {faqs && faqs[faqs.length - 1].question}
-                    </Box>
-                    {isExpanded ? (
-                      <AccordionIcon as={AiOutlineMinus} w={5} h={5} />
-                    ) : (
-                      <AccordionIcon as={AiOutlinePlus} w={5} h={5} />
+              {faqs &&
+                faqs.length > 2 &&
+                faqs.slice(1, faqs.length - 1).map((item, index) => (
+                  <AccordionItem key={'faq' + index}>
+                    {({ isExpanded }) => (
+                      <>
+                        <h4>
+                          <AccordionButton
+                            textStyle="darker_grotesque_bold"
+                            fontSize="lg"
+                            p={3}
+                            bg="#34486F"
+                            color="#ffffff"
+                            _hover={{
+                              bg: 'rgba(52, 72, 111, 0.8)',
+                              color: '#ffffff',
+                            }}
+                          >
+                            <Box flex="1" textAlign="left">
+                              {item.question}
+                            </Box>
+                            {isExpanded ? (
+                              <AccordionIcon as={AiOutlineMinus} w={5} h={5} />
+                            ) : (
+                              <AccordionIcon as={AiOutlinePlus} w={5} h={5} />
+                            )}
+                          </AccordionButton>
+                        </h4>
+                        <AccordionPanel
+                          pb={2}
+                          border="1px solid #34486F"
+                          bg="#FFFBEF"
+                          whiteSpace="pre-wrap"
+                        >
+                          {item.answer}
+                        </AccordionPanel>
+                      </>
                     )}
-                  </AccordionButton>
-                </h4>
-                <AccordionPanel
-                  pb={2}
-                  border="1px solid #34486F"
-                  borderBottomRadius="2xl"
-                  bg="#FFFBEF"
-                  whiteSpace="pre-wrap"
-                >
-                  {faqs && faqs[faqs.length - 1].answer}
-                </AccordionPanel>
-              </>
-            )}
-          </AccordionItem>
-        </Accordion>
+                  </AccordionItem>
+                ))}
+
+              <AccordionItem borderBottomRadius="2xl">
+                {({ isExpanded }) => (
+                  <>
+                    <h4>
+                      <AccordionButton
+                        textStyle="darker_grotesque_bold"
+                        fontSize="lg"
+                        borderBottomRadius={isExpanded ? 'none' : '2xl'}
+                        p={3}
+                        bg="#34486F"
+                        color="#ffffff"
+                        _hover={{
+                          bg: 'rgba(52, 72, 111, 0.8)',
+                          color: '#ffffff',
+                        }}
+                        borderTop="0px"
+                      >
+                        <Box flex="1" textAlign="left">
+                          {faqs && faqs[faqs.length - 1].question}
+                        </Box>
+                        {isExpanded ? (
+                          <AccordionIcon as={AiOutlineMinus} w={5} h={5} />
+                        ) : (
+                          <AccordionIcon as={AiOutlinePlus} w={5} h={5} />
+                        )}
+                      </AccordionButton>
+                    </h4>
+                    <AccordionPanel
+                      pb={2}
+                      border="1px solid #34486F"
+                      borderBottomRadius="2xl"
+                      bg="#FFFBEF"
+                      whiteSpace="pre-wrap"
+                    >
+                      {faqs && faqs[faqs.length - 1].answer}
+                    </AccordionPanel>
+                  </>
+                )}
+              </AccordionItem>
+            </Accordion>
+          </Flex>
+        </Container>
       </Flex>
-    </Container>
+    </>
   );
 };
 

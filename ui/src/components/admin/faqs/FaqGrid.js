@@ -233,7 +233,7 @@ export default function FaqGrid(props) {
       const updatePromises = localFaqs.map(async (faq) => {
         const toUpdate = {
           id: faq.id,
-          order: faq.order,
+          order: faq.isPublished ? faq.order : -1,
           isPublished: faq.isPublished,
         };
 
@@ -265,6 +265,9 @@ export default function FaqGrid(props) {
         status: 'error',
         duration: 5000,
       });
+      setIsReorderingFaqs(false);
+      setToPublish(false);
+      setToUnpublish(false);
     }
   };
 

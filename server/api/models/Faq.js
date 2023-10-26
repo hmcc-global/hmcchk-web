@@ -5,7 +5,11 @@ module.exports = {
       required: true,
       isIn: [
         'connect',
-        'ripple-out'
+        'ripple-out-story',
+        'ripple-out-steps',
+        'ripple-out-space',
+        'ripple-out-support',
+        'ripple-out-progress',
       ],
     },
     question: {
