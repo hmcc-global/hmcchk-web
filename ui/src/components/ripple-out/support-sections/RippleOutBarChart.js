@@ -26,8 +26,8 @@ const RippleOutBarChart = ({ height, width }) => {
         },
       },
       grid: {
-        left: '3%',
-        right: '4%',
+        left: '-10%',
+        right: '0%',
         bottom: '3%',
         containLabel: true,
       },
@@ -35,6 +35,18 @@ const RippleOutBarChart = ({ height, width }) => {
         type: 'category',
         splitLine: { show: false },
         data: data.map((bar) => bar.name),
+        axisLabel: {
+          formatter: function (value) {
+            var lines = value.split(' ');
+            return lines.join('\n');
+          },
+          lineHeight: 14,
+          interval: 0,
+          overflow: 'truncate',
+          padding: [10, 0, 0, 0],
+          color: "#01375A",fontFamily: "Darker Grotesque",
+          fontWeight: 400
+        },
       },
       yAxis: {
         show: false,
@@ -72,13 +84,14 @@ const RippleOutBarChart = ({ height, width }) => {
           z: 2,
           data: data.map((bar, index) => {
             return {
+              key: index,
               value:
                 index === 0 || index === data.length - 1
                   ? bar.value
                   : bar.value - data[index - 1].value,
               itemStyle: {
                 color: bar.color,
-                barBorderRadius:
+                borderRadius:
                   index === 0 || index === data.length - 1
                     ? [4, 4, 0, 0]
                     : [4, 4, 4, 4],
@@ -89,9 +102,10 @@ const RippleOutBarChart = ({ height, width }) => {
                 formatter: function () {
                   return bar.label;
                 },
-                color: '#000000',
-                fontSize: 12,
-                fontWeight: 'bold',
+                color: '#01375A',
+                fontSize: 14,
+                fontWeight: 400,
+                fontFamily: 'Darker Grotesque',
               },
             };
           }),
@@ -116,6 +130,10 @@ const RippleOutBarChart = ({ height, width }) => {
     };
 
     chart.setOption(option);
+
+    window.addEventListener('resize', () => {
+      chart.resize();
+    });
 
     return () => {
       chart.dispose();
