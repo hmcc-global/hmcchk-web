@@ -14,6 +14,7 @@ import RippleOutGivingCard from './RippleOutGivingCard';
 import RippleOutFaqSection from './RippleOutFaqSection';
 import RippleOutHeroSection from './RippleOutHeroSection';
 import { fontColor, headerFontSize, bodyFontSize } from './RippleOutTextStyle';
+import RippleOutBarChart from './RippleOutBarChart';
 
 const RippleOutSupportGiveContainer = () => {
   return (
@@ -81,13 +82,9 @@ const RippleOutSupportGiveContainer = () => {
                       </Flex>
                     </Center>
                   </GridItem>
-                  <GridItem
-                    bgImage={`url(${process.env.PUBLIC_URL}/images/ripple-out/waterfall.png)`}
-                    bgSize="contain"
-                    bgRepeat="no-repeat"
-                    bgPosition="center"
-                    minH="40vh"
-                  ></GridItem>
+                  <GridItem minH="40vh">
+                    <RippleOutBarChart height="100%" width="100%" />
+                  </GridItem>
                 </Grid>
               </Box>
             </Flex>

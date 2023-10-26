@@ -1,0 +1,52 @@
+[
+  {
+    "id" : "pray",
+    "name": "pray",
+    "content": [
+      { "title": "", "data": "" },
+      { "title": "", "data": "" },
+      { "title": "", "data": "" },
+      { "title": "", "data": "" },
+      { "title": "", "data": "" }
+    ]
+  },
+  {
+    "id":"give",
+    "name": "give",
+    "content": [
+      {
+        "title": "bar_chart_text",
+        "data": "To facilitate procurement of required materials and ensure smooth renovation progress, sufficient funds need to be secured at designated times according to project plan."
+      },
+      {
+        "title": "bar_chart",
+        "data": [
+          {
+            "name": "Mid-Nov 2023",
+            "value": 1000,
+            "color": "#F1DAAE",
+            "label": "$1M"
+          },
+          {
+            "name": "End-Dec 2023",
+            "value": 1300,
+            "color": "#DFC695",
+            "label": "$300K"
+          },
+          {
+            "name": "End-Mar 2024",
+            "value": 2000,
+            "color": "#D7BB84",
+            "label": "$700K"
+          },
+          { "name": "TOTAL", "value": 2000, "color": "#CDAC6B", "label": "$2M" }
+        ]
+      },
+      {
+        "title": "give_text",
+        "data": "We always believe the biblical principle “different sums, equal sacrifice”. We believe that many have been blessed in extraordinary ways, but all have different amounts to give. We aren’t all in the same place financially, but sacrificial giving is an element of Christian faith. In Mark 12:41, the widow gave everything she had and Christ commended her though her gift was only a small amount. It’s not just about the amount, but it comes down to stretching ourselves as we give by faith towards what God is calling us to."
+      }
+    ]
+  },
+  { "id":"pledge","name": "pledge", "content": "" }
+]
