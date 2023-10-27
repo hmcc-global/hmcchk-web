@@ -12,14 +12,29 @@ import {
 import RippleOutBarChart from './RippleOutBarChart';
 import RippleOutGivingCard from './RippleOutGivingCard';
 import {
+  subHeaderFontSize,
   headerFontSize,
   bodyFontSize,
 } from '../RippleOutTextStyle';
 
-const RippleOutGiveSection = () => {
+const RippleOutGiveSection = ({giveData}) => {
   return (
     <>
-      <Box bg="#ffffff" px="10" py="5" borderRadius="2xl" boxShadow="lg">
+      <Text
+        fontSize={subHeaderFontSize}
+        textStyle="darker_grotesque_black"
+        lineHeight="0.9em"
+      >
+        GIVE TO THE CAMPAIGN
+      </Text>
+      <Box
+        bg="#ffffff"
+        px="10"
+        py="5"
+        border="2px solid #182E57"
+        borderRadius="2xl"
+        boxShadow="lg"
+      >
         <Grid templateColumns={['repeat(1, 2fr)', 'repeat(2, 1fr)']}>
           <GridItem>
             <Center h="100%">

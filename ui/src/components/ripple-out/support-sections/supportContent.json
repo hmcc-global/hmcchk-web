@@ -1,17 +1,51 @@
 [
   {
-    "id" : "pray",
+    "id": "pray",
     "name": "pray",
     "content": [
-      { "title": "", "data": "" },
-      { "title": "", "data": "" },
-      { "title": "", "data": "" },
-      { "title": "", "data": "" },
-      { "title": "", "data": "" }
+      {
+        "title": "PRAY ABOUT HOW TO PARTICIPATE",
+        "data": [
+          "Take a moment to be prayerful and see how God will move you to participate and contribute to the Ripple Out Campaign. Here is a sample prayer to guide you in this process: “Lord, I pray that you would move my heart and show me how You are calling me to be a part of Your kingdom work in Hong Kong. Give me faith so that I can respond with generosity and give with joy by faith as I believe that you’ll multiply and provide for Your church. May it be more of you and we pray that you will use this new facility for your glory to saturate the city. Amen”"
+        ]
+      },
+      {
+        "title": "REMEMBER THE BIBLICAL PRINCIPLE: DIFFERENT SUMS, EQUAL SACRIFICE",
+        "data": [
+          "God cares more about you taking a step of faith to give generously than the amount that you give. While we may be in different financial situations, we call for everyone to give sacrificially by faith as we give with unity and sacrifice equally. It’s not the amount, but it comes down to stretching ourselves as we give by faith towards what God is calling us to."
+        ]
+      },
+      {
+        "title": "DETERMINE WHAT WILL GUIDE YOUR DECISION: REASON OR REVELATION",
+        "data": [
+          "Decisions based on reason is the most common way people give to charities. When I give based on reason, I simply look at my finances, determine a “reasonable” amount, and then I donate. It is an act of unselfishness, but it requires no faith, no sacrifice, and therefore limits the opportunity to see God perform a miracle. Reason asks: “What can I afford to give?”",
+          "",
+          "But there’s an even better way to give:",
+          "Decisions based on revelation require faith and are determined by prayer and a willingness to have your faith stretched. The people of Macedonia were honoured by God because “they gave not only what they could afford, they gave even more than they could afford.”(2 corinthians 8:3)"
+        ]
+      },
+      {
+        "title": "CHOOSE TO GIVE AS AN ACT OF WORSHIP",
+        "data": [
+          "We give not because of obligation or duty, but because of our response towards God’s great generosity to us that was shown through the sacrifice of His son, Jesus Christ. Giving and generosity can be a great avenue of worship as we yield to God and give with joy and faith. May we be reminded of the people of Macedonia who “gave not only what they could afford, but gave beyond their means”."
+        ]
+      },
+      {
+        "title": "THINK CREATIVELY ABOUT HOW TO BE INVOLVED",
+        "data": [
+          "Many think they can’t help out significantly, even if they really wanted to. But if you give it some thought, you may be able to give more than you think. Here are some questions to help you think through your possibilities:",
+          " \u2022 What difference can my giving to the Ripple Out campaign make in my heart and my life? ",
+          " \u2022 How might my gift change my views towards the needs of people in the city and give me a way to intentionally improve their lives? ",
+          " \u2022 Am I prepared to be challenged to become more financially disciplined and selfless in response to this vision? ",
+          " \u2022 What things can I afford or already have but am intentionally choosing to live without because I am committing to give sacrificially? Can I rearrange my financial priorities to better reflect the order of my loves? ",
+          " \u2022 Am I thinking creatively about a comprehensive giving plan that represents what I am capable of giving? What assets and resources could I use as a gift beyond my income-stream? ",
+          " \u2022 Do I find myself refreshed by a new joy in giving through this process? How is this commitment reflective of my expression of faith?"
+        ]
+      }
     ]
   },
   {
-    "id":"give",
+    "id": "give",
     "name": "give",
     "content": [
       {
@@ -48,5 +82,18 @@
       }
     ]
   },
-  { "id":"pledge","name": "pledge", "content": "" }
+  {
+    "id": "pledge",
+    "name": "pledge",
+    "content": [
+      {
+        "title": "What is a pledge?",
+        "data": "A pledge is a commitment, both financial and symbolic, to support our Ripple Out Campaign. When you make a pledge, you are promising to donate a specific amount of money over a designated period of time by March 2024."
+      },
+      {
+        "title": "Why make a pledge?",
+        "data": "By making a pledge, you play a crucial role in helping us realize our vision for a vibrant and nurturing space where we can reach out to more people with the Gospel. Your support will enable us to create an environment that fosters spiritual growth, offers a gathering place for our community, and facilitates meaningful outreach programs."
+      }
+    ]
+  }
 ]

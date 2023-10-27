@@ -1,4 +1,12 @@
-import { Container, Flex, HStack, Image, Text, VStack } from '@chakra-ui/react';
+import {
+  Container,
+  Flex,
+  HStack,
+  Image,
+  Text,
+  VStack,
+  Box,
+} from '@chakra-ui/react';
 import RippleOutFaqSection from './RippleOutFaqSection';
 import RippleOutHeroSection from './RippleOutHeroSection';
 import {
@@ -11,8 +19,30 @@ import RippleOutGiveSection from './support-sections/RippleOutGiveSection';
 import { useState } from 'react';
 import RippleOutPraySection from './support-sections/RippleOutPraySection';
 import RippleOutPledgeSection from './support-sections/RippleOutPledgeSection';
+import supportContent from './support-sections/supportContent.json';
+
+const TriangleTabs = ({ status }) => {
+  const stat = status;
+  return (
+    <>
+      <Flex style={{ marginTop: '25px' }}>
+        <Box
+          w="0"
+          h="0"
+          borderLeftWidth="40px"
+          borderLeftColor="transparent"
+          borderRightWidth="40px"
+          borderRightColor="transparent"
+          borderBottomWidth="60px"
+          borderBottomColor={stat ? 'white' : 'transparent'}
+        />
+      </Flex>
+    </>
+  );
+};
 
 const RippleOutSupportContainer = () => {
+  const data = supportContent;
   const supportText =
     "Our Ripple Out Campaign aims to fund the facility's preparation, reflecting Christ's generosity and enabling us to reach more people with the Gospel. We believe that we are not just simply giving a sum to a campaign or facility, but giving towards a larger vision so that we can see more lives transformed. Join us as we invest in God’s work!";
   const supportWaysText =
@@ -62,70 +92,86 @@ const RippleOutSupportContainer = () => {
               <Text fontSize={bodyFontSize}>{supportWaysText}</Text>
             </Flex>
             {/* Beginning of tabs */}
-            <HStack
-              w="100%"
-              display="flex"
-              justifyContent="center"
-              spacing={[6, 28]}
-            >
-              <VStack>
-                <Image
-                  src={`${process.env.PUBLIC_URL}/images/ripple-out/pray.png`}
-                  h={['30px', '90px']}
-                  onClick={() => handleClick('pray')}
-                  cursor="pointer"
-                />
-                <Text
-                  style={tabStyle}
-                  background={tabStatus === 'pray' ? '#FFFFFF' : '#C9DDED'}
-                  fontSize={['10px', '30px']}
-                  onClick={() => handleClick('pray')}
-                >
-                  PRAY
-                </Text>
-              </VStack>
-              <VStack>
-                <Image
-                  src={`${process.env.PUBLIC_URL}/images/ripple-out/give.png`}
-                  h={['30px', '90px']}
-                  onClick={() => handleClick('give')}
-                  cursor="pointer"
-                />
-                <Text
-                  style={tabStyle}
-                  fontSize={['10px', '30px']}
-                  background={tabStatus === 'give' ? '#FFFFFF' : '#C9DDED'}
-                  onClick={() => handleClick('give')}
-                >
-                  GIVE
-                </Text>
-              </VStack>
+            <Flex flexDir="column">
+              <HStack
+                w="100%"
+                display="flex"
+                justifyContent="center"
+                spacing={[6, 28]}
+              >
+                <VStack>
+                  <Image
+                    src={`${process.env.PUBLIC_URL}/images/ripple-out/pray.png`}
+                    h={['30px', '90px']}
+                    onClick={() => handleClick('pray')}
+                    cursor="pointer"
+                  />
+                  <Text
+                    style={tabStyle}
+                    background={tabStatus === 'pray' ? '#FFFFFF' : '#C9DDED'}
+                    fontSize={['10px', '30px']}
+                    onClick={() => handleClick('pray')}
+                  >
+                    PRAY
+                  </Text>
+                  <TriangleTabs status={tabStatus === 'pray'} />
+                </VStack>
+                <VStack>
+                  <Image
+                    src={`${process.env.PUBLIC_URL}/images/ripple-out/give.png`}
+                    h={['30px', '90px']}
+                    onClick={() => handleClick('give')}
+                    cursor="pointer"
+                  />
+                  <Text
+                    style={tabStyle}
+                    fontSize={['10px', '30px']}
+                    background={tabStatus === 'give' ? '#FFFFFF' : '#C9DDED'}
+                    onClick={() => handleClick('give')}
+                  >
+                    GIVE
+                  </Text>
+                  <TriangleTabs status={tabStatus === 'give'} />
+                </VStack>
 
-              <VStack>
-                <Image
-                  src={`${process.env.PUBLIC_URL}/images/ripple-out/pledge.png`}
-                  h={['30px', '90px']}
-                  onClick={() => handleClick('pledge')}
-                  cursor="pointer"
-                />
-                <Text
-                  style={tabStyle}
-                  background={tabStatus === 'pledge' ? '#FFFFFF' : '#C9DDED'}
-                  fontSize={['10px', '30px']}
-                  onClick={() => handleClick('pledge')}
-                >
-                  PLEDGE
-                </Text>
-              </VStack>
-            </HStack>
-            {/* Render different tabs based on state */}
-            {tabStatus === 'pray' ? (
-              <RippleOutPraySection />
-            ) : tabStatus === 'give' ? (
-              <RippleOutGiveSection />
-            ) : (
-              <RippleOutPledgeSection />
-            )}
+                <VStack>
+                  <Image
+                    src={`${process.env.PUBLIC_URL}/images/ripple-out/pledge.png`}
+                    h={['30px', '90px']}
+                    onClick={() => handleClick('pledge')}
+                    cursor="pointer"
+                  />
+                  <Text
+                    style={tabStyle}
+                    background={tabStatus === 'pledge' ? '#FFFFFF' : '#C9DDED'}
+                    fontSize={['10px', '30px']}
+                    onClick={() => handleClick('pledge')}
+                  >
+                    PLEDGE
+                  </Text>
+                  <TriangleTabs status={tabStatus === 'pledge'} />
+                </VStack>
+              </HStack>
+              {/* Render different tabs based on state */}
+
+              <Flex
+                flexDir="column"
+                gap={9}
+                style={{
+                  borderRadius: 10,
+                  background: '#FFFFFF',
+                  padding: '4em',
+                }}
+              >
+                {tabStatus === 'pray' ? (
+                  <RippleOutPraySection prayerData={data[0]} />
+                ) : tabStatus === 'give' ? (
+                  <RippleOutGiveSection giveData={data[1]} />
+                ) : (
+                  <RippleOutPledgeSection pledgeData={data[2]} />
+                )}
+              </Flex>
+            </Flex>
           </Flex>
         </Container>
       </Flex>
