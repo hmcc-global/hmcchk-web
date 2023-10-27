@@ -6,8 +6,9 @@ import {
   Center,
   Text,
   Spacer,
-  UnorderedList,
-  ListItem,
+  VStack,
+  Image,
+  HStack,
 } from '@chakra-ui/react';
 import RippleOutBarChart from './RippleOutBarChart';
 import RippleOutGivingCard from './RippleOutGivingCard';
@@ -16,8 +17,13 @@ import {
   headerFontSize,
   bodyFontSize,
 } from '../RippleOutTextStyle';
+import { useState } from 'react';
+import RippleOutCalculatorSection from './RippleOutCalculatorSection';
 
-const RippleOutGiveSection = ({giveData}) => {
+const RippleOutGiveSection = ({ giveData }) => {
+  const data = giveData.content;
+  const [slider, setSlider] = useState(0);
+
   return (
     <>
       <Text
@@ -58,9 +64,7 @@ const RippleOutGiveSection = ({giveData}) => {
                   raised by end of March 2024
                 </Text>
                 <Text mt={5} fontSize="lg" textStyle="darker_grotesque_bold">
-                  To facilitate procurement of required materials and ensure
-                  smooth renovation progress, sufficient funds need to be
-                  secured at designated times according to project plan.
+                  {data[0].data}
                 </Text>
               </Flex>
             </Center>
@@ -70,6 +74,50 @@ const RippleOutGiveSection = ({giveData}) => {
           </GridItem>
         </Grid>
       </Box>
+      <Text fontSize={bodyFontSize} fontWeight={500}>
+        {data[2].data}
+      </Text>
+
+      {/* Plans ahead */}
+      <Text
+        fontSize={subHeaderFontSize}
+        textStyle="darker_grotesque_black"
+        lineHeight="0.9em"
+      >
+        PLAN AHEAD
+      </Text>
+      <Flex>
+        <VStack>
+          <Text fontSize={bodyFontSize} fontWeight={500}>
+            Here’s an illustration of how a small act of giving over time can go
+            a long way to contribute to the Ripple Out Campaign
+          </Text>
+          <Image
+            src={
+              slider === 0
+                ? `${process.env.PUBLIC_URL}/images/ripple-out/illustration-graph-1.png`
+                : `${process.env.PUBLIC_URL}/images/ripple-out/illustration-graph-2.png`
+            }
+          />
+          <HStack spacing={12}>
+            <Box
+              border={slider === 0 ? '8px solid #2A3A58' : '8px solid #B6C1D7'}
+              borderRadius="30px"
+              onClick={() => setSlider(0)}
+              cursor="pointer"
+            />
+            <Box
+              border={slider === 1 ? '8px solid #2A3A58' : '8px solid #B6C1D7'}
+              borderRadius="30px"
+              onClick={() => setSlider(1)}
+              cursor="pointer"
+            />
+          </HStack>
+        </VStack>
+      </Flex>
+      {/* Calculator section */}
+      <RippleOutCalculatorSection />
+      {/* Ways to give */}
       <Flex flexDir="column" gap={3}>
         <Text
           fontSize={['1.35em', '2.5em']}
@@ -79,28 +127,7 @@ const RippleOutGiveSection = ({giveData}) => {
           WAYS TO GIVE
         </Text>
         <Text fontSize={bodyFontSize}>
-          There are a few different ways you can give to our church.
-        </Text>
-        <Text fontSize={bodyFontSize}>
-          When giving for the Ripple Out Campaign:
-          <UnorderedList>
-            <ListItem>
-              Please always use your legal name and provide the same email
-              address consistently.
-            </ListItem>
-            <ListItem>
-              Please always leave a note in the transfer remark
-            </ListItem>
-          </UnorderedList>
-          Transfer Remark:{' '}
-          <Box textStyle="darker_grotesque_black" as="span">
-            RIPPLE OUT: {'{Your full name}'}
-          </Box>
-        </Text>
-        <Text fontSize={bodyFontSize}>
-          Note: Please email stewardship@hongkong.hmcc.net with your full name
-          and transfer receipt, especially if you forgot to leave a remark or
-          memo in the online giving process, for record-keeping purposes
+          There are a few different ways you can give to the Ripple Out Campaign
         </Text>
         <Center minW="100%">
           <Flex
@@ -125,16 +152,30 @@ const RippleOutGiveSection = ({giveData}) => {
           </Flex>
           <Flex flexDir="column" gap={3}></Flex>
         </Center>
+        <Text fontSize={bodyFontSize} fontWeight={600}>
+          When giving, please always leave a note in the transfer remark:
+        </Text>
+        <Text fontSize={bodyFontSize} fontWeight={600}>
+          Transfer Remarks:{' '}
+          <Box
+            textStyle="darker_grotesque_black"
+            as="span"
+            background="#C9DDED"
+            borderRadius="15px"
+            padding="2px 10px"
+          >
+            RIPPLE OUT: {'{{Your full name}}'}
+          </Box>
+        </Text>
         <Text fontSize={bodyFontSize}>
-          If you are giving from the US, you may give to our Chase account via
-          Zellepay using the email stewardship@hongkong.hmcc.net
+          Note: Please email stewardship@hongkong.hmcc.net with your full name
+          and transfer receipt, especially if you forgot to leave a remark or
+          memo in the online giving process, for record-keeping purposes
         </Text>
         <Text fontSize={bodyFontSize}>
           Personal information is kept confidential, used only for tax receipt
-          purposes, and is only accessible by the Stewardship Team.
-        </Text>
-        <Text fontSize={bodyFontSize}>
-          If you have any questions, please do not hesitate to contact us:{' '}
+          purposes, and is only accessible by the Stewardship Team. If you have
+          any questions, please do not hesitate to contact us:{' '}
           <a href="mailto:stewardship@hongkong.hmcc.net">
             stewardship@hongkong.hmcc.net
           </a>

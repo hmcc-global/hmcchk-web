@@ -29,11 +29,11 @@ const TriangleTabs = ({ status }) => {
         <Box
           w="0"
           h="0"
-          borderLeftWidth="40px"
+          borderLeftWidth={['20px', '40px']}
           borderLeftColor="transparent"
-          borderRightWidth="40px"
+          borderRightWidth={['20px', '40px']}
           borderRightColor="transparent"
-          borderBottomWidth="60px"
+          borderBottomWidth={['30px', '60px']}
           borderBottomColor={stat ? 'white' : 'transparent'}
         />
       </Flex>
@@ -157,10 +157,10 @@ const RippleOutSupportContainer = () => {
               <Flex
                 flexDir="column"
                 gap={9}
+                padding={['1em', '4em']}
                 style={{
                   borderRadius: 10,
                   background: '#FFFFFF',
-                  padding: '4em',
                 }}
               >
                 {tabStatus === 'pray' ? (
