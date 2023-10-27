@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Text, Center, Button } from '@chakra-ui/react';
+import { Box, Container, Flex, Text, Center, Button, useMediaQuery } from '@chakra-ui/react';
 import ProgressBar from './ProgressBar';
 import { useEffect, useState } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
@@ -31,6 +31,8 @@ import { DateTime } from 'luxon';
 const ProgressSection = ({ bodyFontSize }) => {
   const [fundraiseData, setFundraiseData] = useState(null);
   const [pledgeData, setPledgeData] = useState(null);
+
+  const [isWideScreen] = useMediaQuery('(min-width: 800px)')
 
   useEffect(() => {
     fetchFundraiseData();
@@ -137,13 +139,16 @@ const ProgressSection = ({ bodyFontSize }) => {
       w="full"
       bgPos={['right', 'center']}
       display={['block', 'block']}
-      marginY={[0, 10]}
+      paddingY={[0, 100]}
+      paddingX={[5, 0]}
+      background="linear-gradient(180deg, #F0F5FF 10.74%, #E9F6FF 22.35%, #FFFAEC 30.87%)"
+      color="#182E57"
     >
       {fundraiseData != null && (
         <div>
           <Container maxW="container.xl" h="100%" paddingX={0}>
             <Box>
-              <Text fontWeight="extrabold" fontSize={['3xl', '5xl']}>
+              <Text fontWeight="extrabold" fontSize={['3xl', '5xl']} pt={5}>
                 MILESTONES
               </Text>
             </Box>
@@ -151,13 +156,13 @@ const ProgressSection = ({ bodyFontSize }) => {
               justifyContent="space-between"
               marginX={[0, 2]}
               lineHeight={['1em', '1.9em']}
-              marginTop={5}
+              marginTop={[2, 5]}
               gap="3"
             >
               <Box textAlign="left">
                 <Box>
                   <Text as="b" fontSize={['sm', '3xl']}>
-                    TOTAL AMOUNT RAISED
+                    {isWideScreen ? "TOTAL AMOUNT RAISED": "RAISED"}
                   </Text>
                 </Box>
                 <Box mt={[2, 0]}>
@@ -168,12 +173,12 @@ const ProgressSection = ({ bodyFontSize }) => {
               </Box>
               <Box textAlign="center">
                 <Box>
-                  <Text as="b" fontSize={['lg', '3xl']}>
-                    NUMBER OF SUPPORTERS
+                  <Text as="b" fontSize={['sm', '3xl']}>
+                    {isWideScreen ? "NUMBER OF SUPPORTERS": "SUPPORTERS"}
                   </Text>
                 </Box>
                 <Box mt={[2, 0]}>
-                  <Text as="b" fontSize={['2xl', '4xl']}>
+                  <Text as="b" fontSize={['lg', '4xl']}>
                     {givers}
                   </Text>
                 </Box>
@@ -181,7 +186,7 @@ const ProgressSection = ({ bodyFontSize }) => {
               <Box textAlign="right">
                 <Box>
                   <Text as="b" fontSize={['sm', '3xl']}>
-                    FUNDRAISING TARGET
+                    {isWideScreen ? "FUNDRAISING TARGET": "GOAL"}
                   </Text>
                 </Box>
                 <Box mt={[2, 0]}>
@@ -199,15 +204,16 @@ const ProgressSection = ({ bodyFontSize }) => {
                 target={getTarget(milestones)}
               />
             </Center>
-            <Flex justifyContent="center" marginX="2">
-              <Text fontSize={['xl', '3xl']}>
+            <Flex justifyContent={["center", "space-between"]} textAlign="center">
+              <Text fontSize={['lg', '2xl']}>
                 Click/hover on the white circles for milestones info!
               </Text>
+              {isWideScreen &&
+                <Text fontSize={['lg', '2xl']}>
+                  Last updated: {updatedAt}
+                </Text>}
             </Flex>
-            <Flex justifyContent="right">
-              <Text fontSize={['lg', '2xl']}>Last updated: {updatedAt}</Text>
-            </Flex>
-            <Box marginTop={8}>
+            <Box mt={[10, 20]}>
               <Text fontWeight="extrabold" fontSize={['3xl', '5xl']}>
                 NEEDS
               </Text>
@@ -246,64 +252,26 @@ const ProgressSection = ({ bodyFontSize }) => {
             </Box>
             {pledgeData && (
               <>
-                <Box mt={8}>
+                <Box mt={[10, 20]}>
                   <Text fontWeight="extrabold" fontSize={['3xl', '5xl']}>
-                    PLEDGES
+                    PLEDGE RECEIVED
                   </Text>
                 </Box>
                 <Box>
-                  <Text as="b" fontSize={bodyFontSize}>
-                    What is a Pledge?
+                  <Text fontSize={['lg', '3xl']} fontWeight="thin">
+                    A pledge is a commitment, both financial and symbolic, to support our Ripple Out Campaign. Here is the amount of pledge we have received so far!
                   </Text>
-                  <Text fontSize={bodyFontSize}>
-                    A pledge is a commitment, both financial and symbolic, to
-                    support our Ripple Out Campaign. When you make a pledge, you
-                    are promising to donate a specific amount of money over a
-                    designated period of time by March 2024.
-                  </Text>
-
-                  <Text as="b" fontSize={bodyFontSize}>
-                    Why Make a Pledge?
-                  </Text>
-                  <Text fontSize={bodyFontSize}>
-                    By making a pledge, you play a crucial role in helping us
-                    realize our vision for a vibrant and nurturing space where
-                    we can reach out to more people with the Gospel. Your
-                    support will enable us to create an environment that fosters
-                    spiritual growth, offers a gathering place for our
-                    community, and facilitates meaningful outreach programs.
-                  </Text>
-                  <Text fontSize={bodyFontSize}>
-                    Pledge your support to the Ripple Out Campaign by filling
-                    out this form!
-                  </Text>
-                  <Box textAlign={['center', 'left']}>
-                    <Button
-                      my={2}
-                      as="a"
-                      href="https://bit.ly/ripple-pledge"
-                      target="_blank"
-                      variant="outline"
-                      fontSize="xl"
-                      bgColor="#ffffff"
-                      fontWeight="bold"
-                      borderColor="#182E57"
-                      color="#182E57"
-                    >
-                      SUBMIT YOUR PLEDGE
-                    </Button>
-                  </Box>
                 </Box>
                 <Flex
                   justifyContent="space-between"
                   marginX={['5%', '20%']}
                   lineHeight="30px"
-                  marginTop={5}
+                  mt={[10, 20]}
                 >
                   <Box textAlign="center">
                     <Box>
                       <Text as="b" fontSize={['lg', '3xl']}>
-                        TOTAL PLEDGED AMOUNT
+                        {isWideScreen ? "TOTAL PLEDGED AMOUNT": "TOTAL PLEDGED"}
                       </Text>
                     </Box>
                     <Box>
@@ -325,6 +293,34 @@ const ProgressSection = ({ bodyFontSize }) => {
                     </Box>
                   </Box>
                 </Flex>
+                <Box
+                  textAlign="center"
+                  mt={[10, 20]}
+                >
+                  <Flex width="100%" justifyContent="center">
+                    <Text fontSize={['xl', '3xl']} fontWeight="thin" width={["100%", "50%"]}>
+                      Click below to learn more how to participate in the Ripple Out Campaign!
+                    </Text>
+                  </Flex>
+                  <Box textAlign={['center', 'center']} width="100%" mt={5}>
+                    <Button
+                      mt={5}
+                      mb={10}
+                      href="https://bit.ly/ripple-pledge"
+                      target="_blank"
+                      variant="outline"
+                      fontSize={["xl", "2xl"]}
+                      bgColor="#ffffff"
+                      fontWeight="bold"
+                      borderColor="#182E57"
+                      color="#182E57"
+                      py={[8, 10]}
+                      width={["70%", "30%"]}
+                    >
+                      I WANT TO <br/> PARTICIPATE!
+                    </Button>
+                  </Box>
+                </Box>
               </>
             )}
           </Container>
