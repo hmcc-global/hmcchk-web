@@ -91,11 +91,13 @@ const RippleOutCalculatorSection = () => {
                 Total (HKD)
               </FormLabel>
               <NumberInput
-                style={{ color: 'black', opacity: 1 }}
                 value={isNaN(total) ? '' : total}
                 isDisabled
               >
-                <NumberInputField background="#C9DDED" />
+                <NumberInputField
+                  style={{ color: 'black', opacity: 1 }}
+                  background="#C9DDED"
+                />
               </NumberInput>
             </FormControl>
           </HStack>

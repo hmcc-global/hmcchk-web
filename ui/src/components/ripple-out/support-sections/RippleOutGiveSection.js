@@ -9,6 +9,7 @@ import {
   VStack,
   Image,
   HStack,
+  Link,
 } from '@chakra-ui/react';
 import RippleOutBarChart from './RippleOutBarChart';
 import RippleOutGivingCard from './RippleOutGivingCard';
@@ -75,7 +76,11 @@ const RippleOutGiveSection = ({ giveData }) => {
         </Grid>
       </Box>
       <Text fontSize={bodyFontSize} fontWeight={500}>
-        {data[2].data}
+        {data[2].data[0]}
+        <Box as="span" fontWeight={700}>
+          {data[2].data[1]}
+        </Box>
+        {data[2].data[2]}
       </Text>
 
       {/* Plans ahead */}
@@ -90,7 +95,10 @@ const RippleOutGiveSection = ({ giveData }) => {
         <VStack>
           <Text fontSize={bodyFontSize} fontWeight={500}>
             Here’s an illustration of how a small act of giving over time can go
-            a long way to contribute to the Ripple Out Campaign
+            a long way to contribute to the{' '}
+            <Box as="span" fontWeight={700}>
+              Ripple Out Campaign
+            </Box>
           </Text>
           <Image
             src={
@@ -99,7 +107,8 @@ const RippleOutGiveSection = ({ giveData }) => {
                 : `${process.env.PUBLIC_URL}/images/ripple-out/illustration-graph-2.png`
             }
           />
-          <HStack spacing={12}>
+          {/* Desktop view */}
+          <HStack spacing={12} paddingTop="30px" display={['none', 'flex']}>
             <Box
               border={slider === 0 ? '8px solid #2A3A58' : '8px solid #B6C1D7'}
               borderRadius="30px"
@@ -108,6 +117,21 @@ const RippleOutGiveSection = ({ giveData }) => {
             />
             <Box
               border={slider === 1 ? '8px solid #2A3A58' : '8px solid #B6C1D7'}
+              borderRadius="30px"
+              onClick={() => setSlider(1)}
+              cursor="pointer"
+            />
+          </HStack>
+          {/* Mobile view */}
+          <HStack spacing={12} paddingTop="10px" display={['flex', 'none']}>
+            <Box
+              border={slider === 0 ? '6px solid #2A3A58' : '6px solid #B6C1D7'}
+              borderRadius="30px"
+              onClick={() => setSlider(0)}
+              cursor="pointer"
+            />
+            <Box
+              border={slider === 1 ? '6px solid #2A3A58' : '6px solid #B6C1D7'}
               borderRadius="30px"
               onClick={() => setSlider(1)}
               cursor="pointer"
@@ -153,7 +177,11 @@ const RippleOutGiveSection = ({ giveData }) => {
           <Flex flexDir="column" gap={3}></Flex>
         </Center>
         <Text fontSize={bodyFontSize} fontWeight={600}>
-          When giving, please always leave a note in the transfer remark:
+          When giving, please{' '}
+          <Box as="span" textDecoration="underline">
+            always
+          </Box>{' '}
+          leave a note in the transfer remark:
         </Text>
         <Text fontSize={bodyFontSize} fontWeight={600}>
           Transfer Remarks:{' '}
@@ -168,17 +196,24 @@ const RippleOutGiveSection = ({ giveData }) => {
           </Box>
         </Text>
         <Text fontSize={bodyFontSize}>
-          Note: Please email stewardship@hongkong.hmcc.net with your full name
-          and transfer receipt, especially if you forgot to leave a remark or
-          memo in the online giving process, for record-keeping purposes
+          Note: Please email{' '}
+          <Box as="span" textDecoration="underline">
+            stewardship@hongkong.hmcc.net
+          </Box>{' '}
+          with your full name and transfer receipt, especially if you forgot to
+          leave a remark or memo in the online giving process, for
+          record-keeping purposes
         </Text>
         <Text fontSize={bodyFontSize}>
           Personal information is kept confidential, used only for tax receipt
           purposes, and is only accessible by the Stewardship Team. If you have
           any questions, please do not hesitate to contact us:{' '}
-          <a href="mailto:stewardship@hongkong.hmcc.net">
+          <Link
+            textDecoration="underline !important"
+            href="mailto:stewardship@hongkong.hmcc.net"
+          >
             stewardship@hongkong.hmcc.net
-          </a>
+          </Link>
         </Text>
       </Flex>
     </>

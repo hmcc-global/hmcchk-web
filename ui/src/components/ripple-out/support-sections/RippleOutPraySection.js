@@ -11,17 +11,27 @@ const SliderDots = (props) => {
   const dotList = [];
   for (let i = 0; i < length; i++) {
     dotList.push(
-      <Box
-        border={slider === i ? '8px solid #2A3A58' : '8px solid #B6C1D7'}
-        borderRadius="30px"
-        onClick={() => setSlider(i)}
-        cursor="pointer"
-      />
+      <>
+        <Box
+          border={slider === i ? '8px solid #2A3A58' : '8px solid #B6C1D7'}
+          borderRadius="30px"
+          display={['none', 'flex']}
+          onClick={() => setSlider(i)}
+          cursor="pointer"
+        />
+        <Box
+          border={slider === i ? '6px solid #2A3A58' : '6px solid #B6C1D7'}
+          borderRadius="30px"
+          display={['flex', 'none']}
+          onClick={() => setSlider(i)}
+          cursor="pointer"
+        />
+      </>
     );
   }
   return (
     <>
-      <HStack w="100%" display="flex" justifyContent="center">
+      <HStack w="100%" justifyContent="center" spacing={6}>
         {dotList}
       </HStack>
     </>
