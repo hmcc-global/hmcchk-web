@@ -1,50 +1,47 @@
-import { Box, Flex, HStack, Text, VStack } from '@chakra-ui/react';
-import { useState } from 'react';
+import { Box, Button, Flex, HStack, Text, VStack } from '@chakra-ui/react';
+import { useState, useEffect } from 'react';
 import {
   fontColor,
   bodyFontSize2,
   subHeaderFontSize,
 } from '../RippleOutTextStyle';
-
-const SliderDots = (props) => {
-  const { slider, setSlider, length } = props;
-  const dotList = [];
-  for (let i = 0; i < length; i++) {
-    dotList.push(
-      <>
-        <Box
-          border={slider === i ? '8px solid #2A3A58' : '8px solid #B6C1D7'}
-          borderRadius="30px"
-          display={['none', 'flex']}
-          onClick={() => setSlider(i)}
-          cursor="pointer"
-        />
-        <Box
-          border={slider === i ? '6px solid #2A3A58' : '6px solid #B6C1D7'}
-          borderRadius="30px"
-          display={['flex', 'none']}
-          onClick={() => setSlider(i)}
-          cursor="pointer"
-        />
-      </>
-    );
-  }
-  return (
-    <>
-      <HStack w="100%" justifyContent="center" spacing={6}>
-        {dotList}
-      </HStack>
-    </>
-  );
-};
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const RippleOutPraySection = ({ prayerData }) => {
   const data = prayerData.content;
   const [slider, setSlider] = useState(0);
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesPerRow: 1,
+    speed: 500,
+    swipeToSlide: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    adaptiveHeight: true,
+    arrows: false,
+    afterChange: (index) => setSlider(index),
+    // customPaging: (index) => {
+    //   console.log(index, slider);
+    //   return (
+    //     <Box
+    //       w="0"
+    //       border={index === 2 ? '8px solid #2A3A58' : '8px solid #B6C1D7'}
+    //       borderRadius="20px"
+    //       display="flex"
+    //       cursor="pointer"
+    //       marginTop="20px"
+    //     />
+    //   );
+    // },
+  };
+
   return (
     <>
-      <Flex>
-        <VStack spacing={8} display="flex" alignItems="flex-start">
+      <Flex w="100%">
+        <VStack spacing={8} display="flex" alignItems="flex-start" w="100%">
           <Text
             fontSize={['1.4em', '2.4em']}
             textStyle="darker_grotesque_black"
@@ -52,39 +49,47 @@ const RippleOutPraySection = ({ prayerData }) => {
           >
             PRAY FOR THE CAMPAIGN
           </Text>
-
-          <VStack w="100%" display="flex" alignItems="flex-start" spacing={6}>
-            <Text
-              fontSize={subHeaderFontSize}
-              textStyle="darker_grotesque_black"
-              lineHeight="0.9em"
-            >
-              {data[slider].title}
-            </Text>
-            <Text
-              fontSize={bodyFontSize2}
-              lineHeight="0.9em"
-              color={fontColor}
-              border="1px solid #182E57"
-              borderRadius={10}
-              padding="0.6em 0.8em"
-            >
-              {data[slider].data.map((line, i) => {
+          <Box w="100%">
+            <Slider {...settings}>
+              {data.map((prayer, i) => {
                 return (
-                  <Text key={i}>
-                    {line}
-                    <br />
-                  </Text>
+                  <VStack
+                    key={i}
+                    w="100%"
+                    display="flex"
+                    alignItems="flex-start"
+                    spacing={6}
+                    padding="0px 10px"
+                  >
+                    <Text
+                      fontSize={subHeaderFontSize}
+                      textStyle="darker_grotesque_black"
+                      lineHeight="0.9em"
+                    >
+                      {prayer.title}
+                    </Text>
+                    <Text
+                      fontSize={bodyFontSize2}
+                      lineHeight={['0.9em', '0.94em']}
+                      color={fontColor}
+                      border="1px solid #182E57"
+                      borderRadius={10}
+                      padding="0.6em 0.8em"
+                    >
+                      {prayer.data.map((line, i) => {
+                        return (
+                          <Text key={i}>
+                            {line}
+                            <br />
+                          </Text>
+                        );
+                      })}
+                    </Text>
+                  </VStack>
                 );
               })}
-            </Text>
-          </VStack>
-
-          <SliderDots
-            slider={slider}
-            setSlider={setSlider}
-            length={data.length}
-          />
+            </Slider>
+          </Box>
         </VStack>
       </Flex>
     </>

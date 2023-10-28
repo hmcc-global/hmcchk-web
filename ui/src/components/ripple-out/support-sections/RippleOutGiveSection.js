@@ -18,13 +18,37 @@ import {
   headerFontSize,
   bodyFontSize,
 } from '../RippleOutTextStyle';
-import { useState } from 'react';
 import RippleOutCalculatorSection from './RippleOutCalculatorSection';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const RippleOutGiveSection = ({ giveData }) => {
   const data = giveData.content;
-  const [slider, setSlider] = useState(0);
-
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesPerRow: 1,
+    speed: 500,
+    swipeToSlide: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    adaptiveHeight: true,
+    arrows: false,
+    // customPaging: (index) => {
+    //   console.log(index, slider);
+    //   return (
+    //     <Box
+    //       w="0"
+    //       border={index === 2 ? '8px solid #2A3A58' : '8px solid #B6C1D7'}
+    //       borderRadius="20px"
+    //       display="flex"
+    //       cursor="pointer"
+    //       marginTop="20px"
+    //     />
+    //   );
+    // },
+  };
   return (
     <>
       <Text
@@ -91,8 +115,8 @@ const RippleOutGiveSection = ({ giveData }) => {
       >
         PLAN AHEAD
       </Text>
-      <Flex>
-        <VStack>
+      <Flex w="100%">
+        <VStack w="100%">
           <Text fontSize={bodyFontSize} fontWeight={500}>
             Here’s an illustration of how a small act of giving over time can go
             a long way to contribute to the{' '}
@@ -100,43 +124,18 @@ const RippleOutGiveSection = ({ giveData }) => {
               Ripple Out Campaign
             </Box>
           </Text>
-          <Image
-            src={
-              slider === 0
-                ? `${process.env.PUBLIC_URL}/images/ripple-out/illustration-graph-1.png`
-                : `${process.env.PUBLIC_URL}/images/ripple-out/illustration-graph-2.png`
-            }
-          />
-          {/* Desktop view */}
-          <HStack spacing={12} paddingTop="30px" display={['none', 'flex']}>
-            <Box
-              border={slider === 0 ? '8px solid #2A3A58' : '8px solid #B6C1D7'}
-              borderRadius="30px"
-              onClick={() => setSlider(0)}
-              cursor="pointer"
-            />
-            <Box
-              border={slider === 1 ? '8px solid #2A3A58' : '8px solid #B6C1D7'}
-              borderRadius="30px"
-              onClick={() => setSlider(1)}
-              cursor="pointer"
-            />
-          </HStack>
-          {/* Mobile view */}
-          <HStack spacing={12} paddingTop="10px" display={['flex', 'none']}>
-            <Box
-              border={slider === 0 ? '6px solid #2A3A58' : '6px solid #B6C1D7'}
-              borderRadius="30px"
-              onClick={() => setSlider(0)}
-              cursor="pointer"
-            />
-            <Box
-              border={slider === 1 ? '6px solid #2A3A58' : '6px solid #B6C1D7'}
-              borderRadius="30px"
-              onClick={() => setSlider(1)}
-              cursor="pointer"
-            />
-          </HStack>
+          <Box w="100%">
+            <Slider {...settings}>
+              <Image
+                padding="0px 10px"
+                src={`${process.env.PUBLIC_URL}/images/ripple-out/illustration-graph-1.png`}
+              />
+              <Image
+                padding="0px 10px"
+                src={`${process.env.PUBLIC_URL}/images/ripple-out/illustration-graph-2.png`}
+              />
+            </Slider>
+          </Box>
         </VStack>
       </Flex>
       {/* Calculator section */}

@@ -97,19 +97,19 @@ const RippleOutSupportContainer = () => {
                 w="100%"
                 display="flex"
                 justifyContent="center"
-                spacing={[6, 28]}
+                spacing={{ base: 6, md: 16, lg: 28 }}
               >
                 <VStack>
                   <Image
                     src={`${process.env.PUBLIC_URL}/images/ripple-out/pray.png`}
-                    h={['30px', '90px']}
+                    h={{ base: '30px', md: '60px', lg: '90px' }}
                     onClick={() => handleClick('pray')}
                     cursor="pointer"
                   />
                   <Text
                     style={tabStyle}
                     background={tabStatus === 'pray' ? '#FFFFFF' : '#C9DDED'}
-                    fontSize={['10px', '30px']}
+                    fontSize={{ base: '10px', md: '20px', lg: '30px' }}
                     onClick={() => handleClick('pray')}
                   >
                     PRAY
@@ -119,13 +119,13 @@ const RippleOutSupportContainer = () => {
                 <VStack>
                   <Image
                     src={`${process.env.PUBLIC_URL}/images/ripple-out/give.png`}
-                    h={['30px', '90px']}
+                    h={{ base: '30px', md: '60px', lg: '90px' }}
                     onClick={() => handleClick('give')}
                     cursor="pointer"
                   />
                   <Text
                     style={tabStyle}
-                    fontSize={['10px', '30px']}
+                    fontSize={{ base: '10px', md: '20px', lg: '30px' }}
                     background={tabStatus === 'give' ? '#FFFFFF' : '#C9DDED'}
                     onClick={() => handleClick('give')}
                   >
@@ -137,14 +137,14 @@ const RippleOutSupportContainer = () => {
                 <VStack>
                   <Image
                     src={`${process.env.PUBLIC_URL}/images/ripple-out/pledge.png`}
-                    h={['30px', '90px']}
+                    h={{ base: '30px', md: '60px', lg: '90px' }}
                     onClick={() => handleClick('pledge')}
                     cursor="pointer"
                   />
                   <Text
                     style={tabStyle}
                     background={tabStatus === 'pledge' ? '#FFFFFF' : '#C9DDED'}
-                    fontSize={['10px', '30px']}
+                    fontSize={{ base: '10px', md: '20px', lg: '30px' }}
                     onClick={() => handleClick('pledge')}
                   >
                     PLEDGE
@@ -158,10 +158,12 @@ const RippleOutSupportContainer = () => {
                 flexDir="column"
                 gap={9}
                 padding={['1em', '4em']}
+                paddingBottom={['2em', '4em']}
                 style={{
                   borderRadius: 10,
                   background: '#FFFFFF',
                 }}
+                w="100%"
               >
                 {tabStatus === 'pray' ? (
                   <RippleOutPraySection prayerData={data[0]} />
