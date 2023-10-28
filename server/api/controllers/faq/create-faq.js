@@ -16,6 +16,10 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    order: {
+      type: 'number',
+      defaultsTo: -1,
+    },
     isPublished: {
       type: 'boolean',
       defaultsTo: false,
@@ -24,7 +28,7 @@ module.exports = {
 
   exits: {},
 
-  fn: async function ({ pageTopic, question, answer, isPublished }, exits) {
+  fn: async function ({ pageTopic, question, answer, order, isPublished }, exits) {
     const createdBy = this.req.user.fullName;
 
     try {
@@ -32,6 +36,7 @@ module.exports = {
         pageTopic,
         question,
         answer,
+        order,
         createdBy,
         lastUpdatedBy: createdBy,
         isPublished,

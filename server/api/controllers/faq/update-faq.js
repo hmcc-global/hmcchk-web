@@ -18,7 +18,9 @@ module.exports = {
     answer: {
       type: 'string',
     },
-
+    order: {
+      type: 'number',
+    },
     isPublished: {
       type: 'boolean',
     },
@@ -33,7 +35,7 @@ module.exports = {
     },
   },
 
-  fn: async function ({ id, pageTopic, question, answer, isPublished, isDeleted }, exits) {
+  fn: async function ({ id, pageTopic, question, answer, order, isPublished, isDeleted }, exits) {
     const user = this.req.user.fullName;
 
     try {
@@ -43,6 +45,7 @@ module.exports = {
         pageTopic,
         question,
         answer,
+        order,
         lastUpdatedBy,
         isPublished,
         isDeleted,

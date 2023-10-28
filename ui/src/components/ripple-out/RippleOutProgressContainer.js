@@ -7,7 +7,7 @@ const RippleOutProgressContainer = () => {
     <>
       <RippleOutHeroSection />
       <ProgressSection />
-      <RippleOutFaqSection />
+      <RippleOutFaqSection pageTopic="ripple-out-progress" />
     </>
   );
 };

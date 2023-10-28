@@ -140,7 +140,7 @@ const RippleOutStoryContainer = () => {
           </Modal>
         </Container>
       </Flex>
-      <RippleOutFaqSection />
+      <RippleOutFaqSection pageTopic="ripple-out-story" />
     </>
   );
 };
