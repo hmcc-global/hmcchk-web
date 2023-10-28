@@ -11,7 +11,7 @@ import {
 import RippleOutFaqSection from './RippleOutFaqSection';
 import RippleOutHeroSection from './RippleOutHeroSection';
 import { fontColor, headerFontSize, bodyFontSize } from './RippleOutTextStyle';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 const titleFontSize = ['1.3em', '3em'];
 const subtitleFontSize = ['1em', '1.4em'];
@@ -70,6 +70,8 @@ const RippleOutStepsContainer = () => {
   const [middleHover, setMiddleHover] = useState(false);
   const [innerHover, setInnerHover] = useState(false);
 
+  const ripplesImage = useRef(null);
+
   const onDropHover = (e) => {
     e.currentTarget.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/drop.png`;
     setDropHover(true);
@@ -81,22 +83,23 @@ const RippleOutStepsContainer = () => {
   };
 
   const onOuterHover = (e) => {
-    e.currentTarget.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/ripple-outer-white.png`;
+    ripplesImage.current.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/ripple-outer-white.png`;
     setOuterHover(true);
   };
 
   const onMiddleHover = (e) => {
-    e.currentTarget.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/ripple-middle-white.png`;
+    ripplesImage.current.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/ripple-middle-white.png`;
+
     setMiddleHover(true);
   };
 
   const onInnerHover = (e) => {
-    e.currentTarget.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/ripple-inner-white.png`;
+    ripplesImage.current.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/ripple-inner-white.png`;
     setInnerHover(true);
   };
 
   const onRippleOut = (e) => {
-    e.currentTarget.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/ripples.svg`;
+    ripplesImage.current.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/ripples.svg`;
     setOuterHover(false);
     setMiddleHover(false);
     setInnerHover(false);
@@ -228,8 +231,10 @@ const RippleOutStepsContainer = () => {
                 <img
                   src={`${process.env.PUBLIC_URL}/images/ripple-out/steps/ripples.svg`}
                   alt="ripples"
+                  id="ripplesImage"
                   usemap="#image-map"
                   onMouseOut={onRippleOut}
+                  ref={ripplesImage}
                 />
                 <map name="image-map">
                   <area
