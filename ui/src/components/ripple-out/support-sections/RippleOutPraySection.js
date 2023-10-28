@@ -58,13 +58,13 @@ const RippleOutPraySection = ({ prayerData }) => {
                     w="100%"
                     display="flex"
                     alignItems="flex-start"
-                    spacing={6}
                     padding="0px 10px"
                   >
                     <Text
                       fontSize={subHeaderFontSize}
                       textStyle="darker_grotesque_black"
                       lineHeight="0.9em"
+                      marginBottom="20px"
                     >
                       {prayer.title}
                     </Text>
