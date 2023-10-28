@@ -13,8 +13,9 @@ import RippleOutHeroSection from './RippleOutHeroSection';
 import { fontColor, headerFontSize, bodyFontSize } from './RippleOutTextStyle';
 import { useState } from 'react';
 
-const titleFontSize = '3em';
-const descriptionFontSize = '1.4em';
+const titleFontSize = ['1.3em', '3em'];
+const subtitleFontSize = ['1em', '1.4em'];
+const descriptionFontSize = ['0.8em', '1.4em'];
 
 const StepText = ({ title, headers, description, hover }) => {
   let titleBgColor = '#2A3A58';
@@ -38,7 +39,7 @@ const StepText = ({ title, headers, description, hover }) => {
       </Text>
       {headers.map((item, i) => (
         <Text
-          fontSize={descriptionFontSize}
+          fontSize={subtitleFontSize}
           textStyle="darker_grotesque"
           color="white"
           key={i}
@@ -112,8 +113,8 @@ const RippleOutStepsContainer = () => {
             </Flex>
           </Flex>
         </Container>
-        {/* Ripple steps drops hover */}
-        <Flex bgColor="#34486F">
+        {/* Ripple steps on hover - desktop version */}
+        <Flex bgColor="#34486F" display={['none', 'block']}>
           <Grid
             mt={7}
             py={5}
@@ -198,8 +199,110 @@ const RippleOutStepsContainer = () => {
               <Center mt={12}>
                 <img
                   src={`${process.env.PUBLIC_URL}/images/ripple-out/steps/ripples.svg`}
-                  alt=""
+                  alt="ripples"
                   usemap="#image-map"
+                />
+                {/* <img
+                  src={`${process.env.PUBLIC_URL}/images/ripple-out/steps/inner.svg`}
+                  alt="ripples"
+                  usemap="#image-map"
+                />
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/ripple-out/steps/middle.svg`}
+                  alt="ripples"
+                  usemap="#image-map"
+                />
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/ripple-out/steps/outer.svg`}
+                  alt="ripples"
+                  usemap="#image-map"
+                /> */}
+              </Center>
+            </GridItem>
+          </Grid>
+        </Flex>
+        {/* Ripple steps no effect - mobile version */}
+        <Flex bgColor="#34486F" display={['block', 'none']}>
+          <Grid
+            mt={4}
+            py={3}
+            templateColumns="repeat(5, 1fr)"
+            autoFlow="column dense"
+          >
+            <GridItem colStart={3} colSpan={3}>
+              <StepText
+                title="THE DROP"
+                headers={[
+                  {
+                    bold: 'Exaltation',
+                    normal: 'Inspired people, inspire people',
+                  },
+                ]}
+                description="A space for our corporate church gatherings, e.g. Sunday Celebration 
+              and Encounter, where we can encounter and experience God as we exalt and worship Him."
+                hover="true"
+              />
+            </GridItem>
+            <GridItem rowStart={2} colSpan={3}>
+              <Box mt={3}>
+                <StepText
+                  title="INNER RIPPLE"
+                  headers={[
+                    {
+                      bold: 'Edification',
+                      normal: 'Loved people, love people',
+                    },
+                  ]}
+                  description="A space where we can love God and love people as we fellowship and
+              live out community in LIFE Groups and other community gatherings."
+                  hover="true"
+                />
+              </Box>
+            </GridItem>
+            <GridItem rowStart={4} colStart={3} colSpan={3}>
+              <Box mt={4}>
+                <StepText
+                  title="MIDDLE RIPPLE"
+                  headers={[
+                    {
+                      bold: 'Education',
+                      normal: 'Discipled people, disciple people',
+                    },
+                  ]}
+                  description="A space where we can grow in our knowledge of the glory of God and 
+              be equipped for discipleship through our Experiencing Classes and other trainings 
+              and courses."
+                  hover="true"
+                />
+              </Box>
+            </GridItem>
+            <GridItem rowStart={5} colSpan={3}>
+              <Box mt={3}>
+                <StepText
+                  title="OUTER RIPPLE"
+                  headers={[
+                    {
+                      bold: 'Extension',
+                      normal: 'Served people, serve people',
+                    },
+                    {
+                      bold: 'Evangelism',
+                      normal: 'Found people, found people',
+                    },
+                  ]}
+                  description="A space where we can invite our friends, family, and colleagues through 
+              our outreaches and serve and reach out to the community and city of Hong Kong through 
+              after-school programs and missional initiatives so that they may experience the Gospel."
+                  hover="true"
+                />
+              </Box>
+            </GridItem>
+            <GridItem rowStart={3} colSpan={5}>
+              <Center>
+                <Image
+                  mt={3}
+                  px={12}
+                  src={`${process.env.PUBLIC_URL}/images/ripple-out/steps/full-white.svg`}
                 />
               </Center>
             </GridItem>
