@@ -1,22 +1,135 @@
 import {
   Flex,
   Text,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-  Button,
   VStack,
   Container,
+  Highlight,
+  Image,
+  useMediaQuery,
 } from '@chakra-ui/react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import RippleOutFaqSection from './RippleOutFaqSection';
 import RippleOutHeroSection from './RippleOutHeroSection';
-import { fontColor, headerFontSize, bodyFontSize } from './RippleOutTextStyle';
+import { fontColor, headerFontSize } from './RippleOutTextStyle';
+import RippleOutStoryCard from './RippleOutStoryCards';
+import storyCardsContent from './storyCardsContent.json';
+import { useState } from 'react';
+
+
 
 const RippleOutStoryContainer = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [isMobile, isSmallTablet, isMediumTablet, isLargeTablet, isDesktop] = useMediaQuery([
+    '(max-width : 400px)',
+    '(max-width : 800px)',
+    '(max-width : 950px)',
+    '(max-width : 1400px)',
+    '(min-width : 1400px',
+  ]);
+
+  const NextArrow = (props) => {
+    const { onClick, index, maxSlide } = props;
+    return index !== maxSlide - 1 ? (
+      <div
+        style={{
+          display: 'block',
+          position: 'absolute',
+          right: isMobile
+            ? '-11%'
+            : isSmallTablet
+            ? '2.5%'
+            : isMediumTablet
+            ? '1%'
+            : isLargeTablet
+            ? '5%'
+            : '10%',
+          top: isMobile
+            ? '9%'
+            : isSmallTablet
+            ? '17.5%'
+            : isMediumTablet
+            ? '20%'
+            : isLargeTablet
+            ? '23%'
+            : '23%',
+          zIndex: 8,
+          cursor: 'pointer',
+        }}
+        onClick={onClick}
+      >
+        <Image
+          src={process.env.PUBLIC_URL + '/images/home/NextArrow.png'}
+          boxSize={['50%', '80%']}
+          alt="Arrow"
+        />
+      </div>
+    ) : null;
+  };
+
+  const PrevArrow = (props) => {
+    const { onClick, index } = props;
+    return index !== 0 ? (
+      <div
+        style={{
+          display: 'block',
+          position: 'absolute',
+          left: isMobile
+            ? '0%'
+            : isSmallTablet
+            ? '5%'
+            : isMediumTablet
+            ? '3%'
+            : isLargeTablet
+            ? '6.5%'
+            : '11.5%',
+          top: isMobile
+            ? '9%'
+            : isSmallTablet
+            ? '17.5%'
+            : isMediumTablet
+            ? '20%'
+            : isLargeTablet
+            ? '23%'
+            : '23%',
+          zIndex: 8,
+          cursor: 'pointer',
+        }}
+        onClick={onClick}
+      >
+        <Image
+          src={process.env.PUBLIC_URL + '/images/home/PrevArrow.png'}
+          boxSize={['50%', '80%']}
+          alt="Arrow"
+        />
+      </div>
+    ) : null;
+  };
+
+  const onArrowClick = (e) => {
+    setSlideIndex(e);
+  };
+
+  const sliderSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+    nextArrow: (
+      <NextArrow index={slideIndex} maxSlide={storyCardsContent.length} />
+    ),
+    prevArrow: <PrevArrow index={slideIndex} />,
+    afterChange: onArrowClick,
+  };
+
+  const sliderStyle = {
+    width: '100%',
+    position: 'relative',
+    height: 'auto',
+  };
 
   return (
     <>
@@ -24,7 +137,7 @@ const RippleOutStoryContainer = () => {
       <Flex
         minH="100%"
         flexDir="column"
-        bgColor="#FFFBEF"
+        bgGradient="linear(120deg, rgba(132,225,255,0.5), rgba(197,230,212,0.5), rgba(255,235,174,0.5));"
         py={['1.8em', '4em']}
         color={fontColor}
       >
@@ -32,112 +145,70 @@ const RippleOutStoryContainer = () => {
           maxW={['container.xl']}
           h="100%"
           textStyle="darker_grotesque"
+          w={'100%'}
+          px={isDesktop ? '' : '0'}
         >
-          <Flex flexDir="column" gap={9}></Flex>
-          <VStack gap="4em" textAlign="center">
+          <Text px={'0.5em'} fontSize={headerFontSize} fontWeight={800}>
+            THE STORY
+          </Text>
+          <VStack px={'1em'} mt={['2.5em', '5em']} textAlign="center">
             <Text
-              fontSize={['3em', '4.75em']}
-              lineHeight="1em"
+              fontSize={['2.25em', '2.75em', '3.25em', '3.75em', '4.25em']}
+              lineHeight={['1.5em', '1.5em']}
               textStyle="darker_grotesque_medium"
             >
-              We are called to <u>RIPPLE OUT</u> as we live out our{' '}
-              <u>SATURATE VISION</u> to saturate Hong Kong with the knowledge of
-              God’s glory
-            </Text>
-            <VStack lineHeight="2em">
-              <Text fontSize={['3xl', '4xl']}>
-                TRANSFORMING LIVES TRANSFORMING THE WORLD
-              </Text>
-              <Text
-                fontSize={['3xl', '4xl']}
-                textStyle="darker_grotesque_medium"
+              <Highlight
+                query={['ripple out', 'saturate vision']}
+                styles={{
+                  px: '1',
+                  bg: '#D7BB84',
+                  fontWeight: '800',
+                  color: '#182E57',
+                }}
               >
-                Transformation Center {'>>'} Kwun Tong {'>>'} Hong Kong {'>>'}{' '}
-                Ends of the earth
-              </Text>
-            </VStack>
-
-            <Button
-              variant="outline"
-              onClick={onOpen}
-              fontSize="lg"
-              bgColor="#ffffff"
-              fontWeight="bold"
-              borderColor="#182E57"
-              color="#182E57"
-            >
-              READ THE STORY
-            </Button>
+                We are called to ripple out as we live out our Saturate vision
+                to saturate Hong Kong with the knowledge of God’s glory
+              </Highlight>
+            </Text>
           </VStack>
-
-          <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent maxW="container.lg" p={5}>
-              <ModalCloseButton />
-              <ModalBody>
-                <Flex flexDir="column" gap={3} textStyle="darker_grotesque">
-                  <Text
-                    fontSize={headerFontSize}
-                    textStyle="darker_grotesque_black"
-                  >
-                    THE STORY
-                  </Text>
-                  <Text fontSize={bodyFontSize}>
-                    Harvest Mission Community Church (HMCC) has always been
-                    about “transforming lives and transforming the world.” This
-                    is our passion. This is our mission. Ever since HMCC got
-                    started back in 1996 on the campus of the University of
-                    Michigan, in the U.S., and in Hong Kong back in 2015, we
-                    have focused on proclaiming the transformative message of
-                    the Gospel because the Gospel changes everything.
-                  </Text>
-                  <Text fontSize={bodyFontSize}>
-                    Over the years, we realized that in order for this dream to
-                    become a reality, we need to start here in Hong Kong, and
-                    then ripple out to reach the nations. Therefore,{' '}
-                    <b>starting in January 2024 until December 2029</b>, we are
-                    going to launch our Saturate Vision. The vision is simply
-                    ”to saturate Hong Kong with the knowledge of God’s glory by
-                    living out the Kingdom lifestyle and proclaiming the Gospel,
-                    so that we can make more Christ’s disciples of all nations
-                    locally, regionally, and globally for the spread of Jesus’s
-                    fame.” This vision was inspired by the passage from Habakkuk
-                    2:14 (ESV), “For the earth will be filled with the knowledge
-                    of the glory of the LORD as the waters cover the sea.”
-                  </Text>
-                  <Text fontSize={bodyFontSize}>
-                    By God’s grace, we have been able to find a location for our
-                    whole church to physically gather together! We give God all
-                    the glory. This space will be our church home where we will
-                    have our Sunday Celebrations, a place for our LIFE Group and
-                    ministry-related gatherings, and a space to train, equip,
-                    and send out people to do the ministry. It is also on our
-                    hearts to use the space to reach out and serve our community
-                    throughout the week. A permanent place will not only give us
-                    a missional presence in the neighborhood, but also brings
-                    stability to our church. This will open up opportunities to
-                    minister to the community with the Gospel and saturate the
-                    city of Hong Kong.
-                  </Text>
-                  <Text fontSize={bodyFontSize}>
-                    In order to prepare the facility for all that God is calling
-                    us to do, we are launching our <b>Ripple Out Campaign</b> to
-                    help fund this project. We are praying that out of the
-                    generosity that we have received from Christ’s sacrifice we
-                    will be able to reflect His heart and character by being
-                    generous so that we may reach out to more people with the
-                    Gospel. As we have always said, “We are blessed to be a
-                    blessing!” We cannot do this without you and every single
-                    person in our church participating, as well as some of you
-                    who are alumni of our church. We invite you to pray with us
-                    and depend on God, who is the Jehovah-Jireh, our God who
-                    provides. May we continue to send out ripples from Hong
-                    Kong.
-                  </Text>
-                </Flex>
-              </ModalBody>
-            </ModalContent>
-          </Modal>
+          <Image
+            src={
+              process.env.PUBLIC_URL +
+              '/images/ripple-out/ripple-out-story-circles.png'
+            }
+            boxSize={'100%'}
+            height={['11.5em', '13em', '16em', '20em', '100%']}
+            objectFit="cover"
+            my={'2em'}
+          />
+          <VStack px={'1em'} textAlign={'center'}>
+            <Text
+              fontSize={['1.5em', '1.75em', '2.25em', '2.5em', '2.75em']}
+              fontWeight={800}
+              textStyle="darker_grotesque_medium"
+            >
+              TRANSFORMING LIVES. TRANSFORMING THE WORLD.
+            </Text>
+            <Text
+              fontSize={['1.65em', '1.80em', '2.40em', '2.65em', '2.9em']}
+              fontWeight={600}
+              mt={['1.5em', '2.5em']}
+              mb={'0.5em'}
+            >
+              SWIPE TO READ OUR STORY {'>>'}
+            </Text>
+          </VStack>
+          <Slider {...sliderSettings} style={sliderStyle}>
+            {storyCardsContent.length > 0 &&
+              storyCardsContent.map((storyCardContent, i) => {
+                return (
+                  <RippleOutStoryCard
+                    storyCardContent={storyCardContent}
+                    key={'ripple-out-story' + i}
+                  />
+                );
+              })}
+          </Slider>
         </Container>
       </Flex>
       <RippleOutFaqSection pageTopic="ripple-out-story" />
