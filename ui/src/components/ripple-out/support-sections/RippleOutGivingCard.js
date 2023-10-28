@@ -34,6 +34,10 @@ const RenderSwitch = (param) => {
             <Box>
               <Text>Name: HARVEST MISSION COMMUNITY CHURCH</Text>
               <Text>FPS ID: 167534304</Text>
+              <Text>
+                Transfer Remarks:{' '}
+                <Box as="span">RIPPLE OUT: {'{Your full name}'}</Box>
+              </Text>
             </Box>
           </Stack>
           <Spacer />
@@ -95,6 +99,7 @@ const RenderSwitch = (param) => {
             ministry work, please consider selecting “cover fees” on the giving
             site or give via cash or check.
           </Text>
+
           <Text>
             Click{' '}
             <Link
@@ -107,6 +112,10 @@ const RenderSwitch = (param) => {
               here
             </Link>{' '}
             to proceed with online credit card giving
+          </Text>
+          <Text>
+            Please put in the note/memo box:{' '}
+            <Box as="span">RIPPLE OUT: {'{Your full name}'}</Box>
           </Text>
         </Box>
       );
