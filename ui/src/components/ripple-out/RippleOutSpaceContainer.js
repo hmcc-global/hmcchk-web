@@ -282,7 +282,7 @@ const RippleOutSpaceContainer = () => {
           <Box>
             <VStack>
               <Box w="100%" display={['none', 'block']}>
-                <Flex h={['28vh', '30vh']} w="100%">
+                <Flex minH={['28vh', '12vh', '15vh', '40vh']} w="100%">
                   <Image
                     w="33%"
                     objectFit="scale-down"
@@ -305,7 +305,7 @@ const RippleOutSpaceContainer = () => {
 
               <Box>
                 <Flex
-                  h={['auto', '40vh']}
+                  minH={['auto', '12vh', '15vh', '40vh']}
                   w="100%"
                   paddingTop="2em"
                   flexDirection={['column', 'row']}
@@ -342,9 +342,8 @@ const RippleOutSpaceContainer = () => {
                 </Flex>
               </Box>
               <Box textAlign={['center', 'center']} width="100%">
-                <Link href="https://bit.ly/ripple-pledge" alignSelf="baseline">
+                <Link href="/ripple-out/support" alignSelf="baseline">
                   <Button
-                    href="https://bit.ly/ripple-pledge"
                     target="_blank"
                     variant="outline"
                     fontSize={['lg', 'xl']}
@@ -354,7 +353,7 @@ const RippleOutSpaceContainer = () => {
                     color="#182E57"
                     marginY={[4, 8]}
                     py={[6, 8]}
-                    w={['40%', '20%']}
+                    w={['40%', '30%', '25%', '20%']}
                   >
                     I WANT TO <br /> PARTICIPATE!
                   </Button>
