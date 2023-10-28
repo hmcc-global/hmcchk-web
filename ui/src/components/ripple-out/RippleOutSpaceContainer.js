@@ -15,6 +15,7 @@ import {
 import Tippy from '@tippyjs/react';
 import 'tippy.js/themes/material.css';
 import 'tippy.js/dist/tippy.css';
+import './custom-theme.css';
 import RippleOutFaqSection from './RippleOutFaqSection';
 import RippleOutHeroSection from './RippleOutHeroSection';
 import { fontColor, headerFontSize, bodyFontSize } from './RippleOutTextStyle';
@@ -77,7 +78,7 @@ const RippleOutSpaceContainer = () => {
               bgSize="cover"
             >
               <Tippy
-                theme="material"
+                theme="custom-theme"
                 content={
                   <Box
                     textAlign="center"
@@ -132,7 +133,7 @@ const RippleOutSpaceContainer = () => {
             bgSize="cover"
           >
             <Tippy
-              theme="material"
+              theme="custom-theme"
               content={
                 <VStack textAlign="center">
                   <Image
@@ -158,7 +159,7 @@ const RippleOutSpaceContainer = () => {
               />
             </Tippy>
             <Tippy
-              theme="material"
+              theme="custom-theme"
               content={
                 <VStack textAlign="center">
                   <Image
@@ -185,7 +186,7 @@ const RippleOutSpaceContainer = () => {
               />
             </Tippy>
             <Tippy
-              theme="material"
+              theme="custom-theme"
               content={
                 <VStack textAlign="center">
                   <Image
@@ -212,7 +213,7 @@ const RippleOutSpaceContainer = () => {
               />
             </Tippy>
             <Tippy
-              theme="material"
+              theme="custom-theme"
               content={
                 <VStack textAlign="center">
                   <Image
@@ -240,7 +241,7 @@ const RippleOutSpaceContainer = () => {
               />
             </Tippy>
             <Tippy
-              theme="material"
+              theme="custom-theme"
               content={
                 <VStack textAlign="center">
                   <Image
@@ -341,7 +342,7 @@ const RippleOutSpaceContainer = () => {
                 </Flex>
               </Box>
               <Box textAlign={['center', 'center']} width="100%">
-                <Link href="/sermons" alignSelf="baseline">
+                <Link href="https://bit.ly/ripple-pledge" alignSelf="baseline">
                   <Button
                     href="https://bit.ly/ripple-pledge"
                     target="_blank"
