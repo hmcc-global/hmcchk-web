@@ -1,4 +1,12 @@
-import { Box, Container, Flex, Text, Center, Button, useMediaQuery } from '@chakra-ui/react';
+import {
+  Box,
+  Container,
+  Flex,
+  Text,
+  Center,
+  Button,
+  useMediaQuery,
+} from '@chakra-ui/react';
 import ProgressBar from './ProgressBar';
 import { useEffect, useState } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
@@ -32,7 +40,7 @@ const ProgressSection = ({ bodyFontSize }) => {
   const [fundraiseData, setFundraiseData] = useState(null);
   const [pledgeData, setPledgeData] = useState(null);
 
-  const [isWideScreen] = useMediaQuery('(min-width: 800px)')
+  const [isWideScreen] = useMediaQuery('(min-width: 800px)');
 
   useEffect(() => {
     fetchFundraiseData();
@@ -71,9 +79,7 @@ const ProgressSection = ({ bodyFontSize }) => {
       diff = milestone.milestoneAmount - prevMilestone.milestoneAmount;
     }
 
-    return `${milestone.milestoneName} (+$${Number(diff).toLocaleString()} BY ${
-      milestone.milestoneDeadline
-    })`;
+    return `${milestone.milestoneName} (+$${Number(diff).toLocaleString()})`;
   };
 
   const getCurrentMilestoneIndex = (milestones, amount) => {
@@ -162,7 +168,7 @@ const ProgressSection = ({ bodyFontSize }) => {
               <Box textAlign="left">
                 <Box>
                   <Text as="b" fontSize={['sm', '3xl']}>
-                    {isWideScreen ? "TOTAL AMOUNT RAISED": "RAISED"}
+                    {isWideScreen ? 'TOTAL AMOUNT RAISED' : 'RAISED'}
                   </Text>
                 </Box>
                 <Box mt={[2, 0]}>
@@ -174,7 +180,7 @@ const ProgressSection = ({ bodyFontSize }) => {
               <Box textAlign="center">
                 <Box>
                   <Text as="b" fontSize={['sm', '3xl']}>
-                    {isWideScreen ? "NUMBER OF SUPPORTERS": "SUPPORTERS"}
+                    {isWideScreen ? 'NUMBER OF SUPPORTERS' : 'SUPPORTERS'}
                   </Text>
                 </Box>
                 <Box mt={[2, 0]}>
@@ -186,7 +192,7 @@ const ProgressSection = ({ bodyFontSize }) => {
               <Box textAlign="right">
                 <Box>
                   <Text as="b" fontSize={['sm', '3xl']}>
-                    {isWideScreen ? "FUNDRAISING TARGET": "GOAL"}
+                    {isWideScreen ? 'FUNDRAISING TARGET' : 'GOAL'}
                   </Text>
                 </Box>
                 <Box mt={[2, 0]}>
@@ -204,14 +210,16 @@ const ProgressSection = ({ bodyFontSize }) => {
                 target={getTarget(milestones)}
               />
             </Center>
-            <Flex justifyContent={["center", "space-between"]} textAlign="center">
+            <Flex
+              justifyContent={['center', 'space-between']}
+              textAlign="center"
+            >
               <Text fontSize={['lg', '2xl']}>
                 Click/hover on the white circles for milestones info!
               </Text>
-              {isWideScreen &&
-                <Text fontSize={['lg', '2xl']}>
-                  Last updated: {updatedAt}
-                </Text>}
+              {isWideScreen && (
+                <Text fontSize={['lg', '2xl']}>Last updated: {updatedAt}</Text>
+              )}
             </Flex>
             <Box mt={[10, 20]}>
               <Text fontWeight="extrabold" fontSize={['3xl', '5xl']}>
@@ -259,7 +267,9 @@ const ProgressSection = ({ bodyFontSize }) => {
                 </Box>
                 <Box>
                   <Text fontSize={['lg', '3xl']} fontWeight="thin">
-                    A pledge is a commitment, both financial and symbolic, to support our Ripple Out Campaign. Here is the amount of pledge we have received so far!
+                    A pledge is a commitment, both financial and symbolic, to
+                    support our Ripple Out Campaign. Here is the amount of
+                    pledge we have received so far!
                   </Text>
                 </Box>
                 <Flex
@@ -271,7 +281,9 @@ const ProgressSection = ({ bodyFontSize }) => {
                   <Box textAlign="center">
                     <Box>
                       <Text as="b" fontSize={['lg', '3xl']}>
-                        {isWideScreen ? "TOTAL PLEDGED AMOUNT": "TOTAL PLEDGED"}
+                        {isWideScreen
+                          ? 'TOTAL PLEDGED AMOUNT'
+                          : 'TOTAL PLEDGED'}
                       </Text>
                     </Box>
                     <Box>
@@ -293,13 +305,15 @@ const ProgressSection = ({ bodyFontSize }) => {
                     </Box>
                   </Box>
                 </Flex>
-                <Box
-                  textAlign="center"
-                  mt={[10, 20]}
-                >
+                <Box textAlign="center" mt={[10, 20]}>
                   <Flex width="100%" justifyContent="center">
-                    <Text fontSize={['xl', '3xl']} fontWeight="thin" width={["100%", "50%"]}>
-                      Click below to learn more how to participate in the Ripple Out Campaign!
+                    <Text
+                      fontSize={['xl', '3xl']}
+                      fontWeight="thin"
+                      width={['100%', '50%']}
+                    >
+                      Click below to learn more how to participate in the Ripple
+                      Out Campaign!
                     </Text>
                   </Flex>
                   <Box textAlign={['center', 'center']} width="100%" mt={5}>
@@ -309,15 +323,15 @@ const ProgressSection = ({ bodyFontSize }) => {
                       href="https://bit.ly/ripple-pledge"
                       target="_blank"
                       variant="outline"
-                      fontSize={["xl", "2xl"]}
+                      fontSize={['xl', '2xl']}
                       bgColor="#ffffff"
                       fontWeight="bold"
                       borderColor="#182E57"
                       color="#182E57"
                       py={[8, 10]}
-                      width={["70%", "30%"]}
+                      width={['70%', '30%']}
                     >
-                      I WANT TO <br/> PARTICIPATE!
+                      I WANT TO <br /> PARTICIPATE!
                     </Button>
                   </Box>
                 </Box>
