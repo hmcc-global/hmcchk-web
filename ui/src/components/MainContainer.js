@@ -44,7 +44,7 @@ import AdminFaqContainer from './admin/faqs/AdminFaqContainer';
 import RippleOutStoryContainer from './ripple-out/RippleOutStoryContainer';
 import RippleOutStepsContainer from './ripple-out/RippleOutStepsContainer';
 import RippleOutSpaceContainer from './ripple-out/RippleOutSpaceContainer';
-import RippleOutSupportGiveContainer from './ripple-out/RippleOutSupportGiveContainer';
+import RippleOutSupportContainer from './ripple-out/RippleOutSupportContainer';
 import RippleOutProgressContainer from './ripple-out/RippleOutProgressContainer';
 
 const MainContainer = () => {
@@ -241,7 +241,7 @@ const MainContainer = () => {
           exact
           path="/ripple-out/support"
           permissions={['public']}
-          component={RippleOutSupportGiveContainer}
+          component={RippleOutSupportContainer}
         />
         <PrivateRoute
           exact
