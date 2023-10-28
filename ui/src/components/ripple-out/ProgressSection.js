@@ -6,6 +6,7 @@ import {
   Center,
   Button,
   useMediaQuery,
+  Link,
 } from '@chakra-ui/react';
 import ProgressBar from './ProgressBar';
 import { useEffect, useState } from 'react';
@@ -145,7 +146,7 @@ const ProgressSection = ({ bodyFontSize }) => {
       w="full"
       bgPos={['right', 'center']}
       display={['block', 'block']}
-      paddingY={[0, 100]}
+      paddingY={[0, 30]}
       paddingX={[5, 0]}
       background="linear-gradient(180deg, #F0F5FF 10.74%, #E9F6FF 22.35%, #FFFAEC 30.87%)"
       color="#182E57"
@@ -274,7 +275,7 @@ const ProgressSection = ({ bodyFontSize }) => {
                 </Box>
                 <Flex
                   justifyContent="space-between"
-                  marginX={['5%', '20%']}
+                  marginX={['5%', '6%', '6%', '20%']}
                   lineHeight="30px"
                   mt={[10, 20]}
                 >
@@ -308,31 +309,32 @@ const ProgressSection = ({ bodyFontSize }) => {
                 <Box textAlign="center" mt={[10, 20]}>
                   <Flex width="100%" justifyContent="center">
                     <Text
-                      fontSize={['xl', '3xl']}
+                      fontSize={['lg', '3xl']}
                       fontWeight="thin"
-                      width={['100%', '50%']}
+                      width={['100%', '80%', '80%', '66%']}
                     >
                       Click below to learn more how to participate in the Ripple
                       Out Campaign!
                     </Text>
                   </Flex>
                   <Box textAlign={['center', 'center']} width="100%" mt={5}>
-                    <Button
-                      mt={5}
-                      mb={10}
-                      href="https://bit.ly/ripple-pledge"
-                      target="_blank"
-                      variant="outline"
-                      fontSize={['xl', '2xl']}
-                      bgColor="#ffffff"
-                      fontWeight="bold"
-                      borderColor="#182E57"
-                      color="#182E57"
-                      py={[8, 10]}
-                      width={['70%', '30%']}
-                    >
-                      I WANT TO <br /> PARTICIPATE!
-                    </Button>
+                    <Link target="_blank" href="https://bit.ly/ripple-pledge">
+                      <Button
+                        mt={5}
+                        mb={10}
+                        target="_blank"
+                        variant="outline"
+                        fontSize={['xl', '2xl']}
+                        bgColor="#ffffff"
+                        fontWeight="bold"
+                        borderColor="#182E57"
+                        color="#182E57"
+                        py={[8, 10]}
+                        width={['70%', '30%']}
+                      >
+                        I WANT TO <br /> PARTICIPATE!
+                      </Button>
+                    </Link>
                   </Box>
                 </Box>
               </>
