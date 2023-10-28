@@ -6,7 +6,7 @@ const RippleOutHeroSection = () => {
   const navStyle = {
     color: '#F0F0F0',
     fontFamily: 'Inter',
-    fontSize: '18px',
+    fontSize: '16px',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: '32px' /* 177.778% */,
@@ -72,7 +72,7 @@ const RippleOutHeroSection = () => {
               w="100%"
               justifyContent="center"
               paddingBottom="20px"
-              spacing={8}
+              spacing={6}
             >
               <Text
                 onClick={() => history.push('/ripple-out/story')}
