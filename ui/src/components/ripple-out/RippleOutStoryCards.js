@@ -1,5 +1,5 @@
 import { Box, VStack, Image, Text } from '@chakra-ui/react';
-import { bodyFontSize, fontColor } from './RippleOutTextStyle';
+import { fontColor } from './RippleOutTextStyle';
 
 const RippleOutStoryCard = (props) => {
   const { storyCardContent } = props;
@@ -8,7 +8,8 @@ const RippleOutStoryCard = (props) => {
       color={fontColor}
       w={'100%'}
       h={'auto'}
-      px={['1em', '1.75em', '5em', '10em', '17.5em']}
+      px={['2.5em', '5em', '7.5em', '10em', '17.5em']}
+      textAlign={'center'}
     >
       <VStack justifyContent="space-between" spacing={15}>
         <Image
@@ -19,7 +20,7 @@ const RippleOutStoryCard = (props) => {
           objectFit="cover"
         />
         <Box w="100%" borderRadius={10} bg="#C9DDED" p={5}>
-          <Text fontSize={bodyFontSize}>
+          <Text fontSize={['1.25em', '1.4em']}>
             {storyCardContent.content}
           </Text>
         </Box>
