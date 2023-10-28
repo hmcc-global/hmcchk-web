@@ -152,7 +152,7 @@ const ProgressSection = ({ bodyFontSize }) => {
     >
       {fundraiseData != null && (
         <div>
-          <Container maxW="container.xl" h="100%" paddingX={0}>
+          <Container maxW="container.xl" h="100%" paddingX={[0, 5, 5, 5]}>
             <Box>
               <Text fontWeight="extrabold" fontSize={['3xl', '5xl']} pt={5}>
                 MILESTONES
