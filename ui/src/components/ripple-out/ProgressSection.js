@@ -318,7 +318,7 @@ const ProgressSection = ({ bodyFontSize }) => {
                     </Text>
                   </Flex>
                   <Box textAlign={['center', 'center']} width="100%" mt={5}>
-                    <Link target="_blank" href="https://bit.ly/ripple-pledge">
+                    <Link href="/ripple-out/support">
                       <Button
                         mt={5}
                         mb={10}
