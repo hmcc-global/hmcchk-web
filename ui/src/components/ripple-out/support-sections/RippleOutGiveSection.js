@@ -11,6 +11,7 @@ import {
   HStack,
   Link,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 import RippleOutBarChart from './RippleOutBarChart';
 import RippleOutGivingCard from './RippleOutGivingCard';
 import {
@@ -25,6 +26,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const RippleOutGiveSection = ({ giveData }) => {
   const data = giveData.content;
+  const [slider, setSlider] = useState(0);
   const settings = {
     dots: true,
     infinite: true,
@@ -35,6 +37,7 @@ const RippleOutGiveSection = ({ giveData }) => {
     slidesToScroll: 1,
     adaptiveHeight: true,
     arrows: false,
+    afterChange: (index) => setSlider(index),
     // customPaging: (index) => {
     //   console.log(index, slider);
     //   return (
@@ -126,14 +129,18 @@ const RippleOutGiveSection = ({ giveData }) => {
           </Text>
           <Box w="100%">
             <Slider {...settings}>
-              <Image
-                padding="0px 10px"
-                src={`${process.env.PUBLIC_URL}/images/ripple-out/illustration-graph-1.png`}
-              />
-              <Image
-                padding="0px 10px"
-                src={`${process.env.PUBLIC_URL}/images/ripple-out/illustration-graph-2.png`}
-              />
+              <Box>
+                <Image
+                  padding="0px 10px"
+                  src={`${process.env.PUBLIC_URL}/images/ripple-out/illustration-graph-1.png`}
+                />
+              </Box>
+              <Box>
+                <Image
+                  padding="0px 10px"
+                  src={`${process.env.PUBLIC_URL}/images/ripple-out/illustration-graph-2.png`}
+                />
+              </Box>
             </Slider>
           </Box>
         </VStack>
