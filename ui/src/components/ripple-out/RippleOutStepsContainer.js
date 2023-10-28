@@ -66,15 +66,40 @@ const StepText = ({ title, headers, description, hover }) => {
 
 const RippleOutStepsContainer = () => {
   const [dropHover, setDropHover] = useState(false);
+  const [outerHover, setOuterHover] = useState(false);
+  const [middleHover, setMiddleHover] = useState(false);
+  const [innerHover, setInnerHover] = useState(false);
 
-  const onHover = (e) => {
+  const onDropHover = (e) => {
     e.currentTarget.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/drop.png`;
     setDropHover(true);
   };
 
-  const onOut = (e) => {
+  const onDropOut = (e) => {
     e.currentTarget.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/drop-blue.png`;
     setDropHover(false);
+  };
+
+  const onOuterHover = (e) => {
+    e.currentTarget.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/ripple-outer-white.png`;
+    setOuterHover(true);
+  };
+
+  const onMiddleHover = (e) => {
+    e.currentTarget.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/ripple-middle-white.png`;
+    setMiddleHover(true);
+  };
+
+  const onInnerHover = (e) => {
+    e.currentTarget.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/ripple-inner-white.png`;
+    setInnerHover(true);
+  };
+
+  const onRippleOut = (e) => {
+    e.currentTarget.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/ripples.svg`;
+    setOuterHover(false);
+    setMiddleHover(false);
+    setInnerHover(false);
   };
 
   return (
@@ -147,6 +172,7 @@ const RippleOutStepsContainer = () => {
                   ]}
                   description="A space where we can love God and love people as we fellowship and
               live out community in LIFE Groups and other community gatherings."
+                  hover={innerHover}
                 />
               </Box>
             </GridItem>
@@ -163,6 +189,7 @@ const RippleOutStepsContainer = () => {
                   description="A space where we can grow in our knowledge of the glory of God and 
               be equipped for discipleship through our Experiencing Classes and other trainings 
               and courses."
+                  hover={middleHover}
                 />
               </Box>
             </GridItem>
@@ -183,6 +210,7 @@ const RippleOutStepsContainer = () => {
                   description="A space where we can invite our friends, family, and colleagues through 
               our outreaches and serve and reach out to the community and city of Hong Kong through 
               after-school programs and missional initiatives so that they may experience the Gospel."
+                  hover={outerHover}
                 />
               </Box>
             </GridItem>
@@ -190,8 +218,8 @@ const RippleOutStepsContainer = () => {
               <Center>
                 <Image
                   src={`${process.env.PUBLIC_URL}/images/ripple-out/steps/drop-blue.png`}
-                  onMouseOver={onHover}
-                  onMouseOut={onOut}
+                  onMouseOver={onDropHover}
+                  onMouseOut={onDropOut}
                 />
               </Center>
             </GridItem>
@@ -201,22 +229,58 @@ const RippleOutStepsContainer = () => {
                   src={`${process.env.PUBLIC_URL}/images/ripple-out/steps/ripples.svg`}
                   alt="ripples"
                   usemap="#image-map"
+                  onMouseOut={onRippleOut}
                 />
-                {/* <img
-                  src={`${process.env.PUBLIC_URL}/images/ripple-out/steps/inner.svg`}
-                  alt="ripples"
-                  usemap="#image-map"
-                />
-                <img
-                  src={`${process.env.PUBLIC_URL}/images/ripple-out/steps/middle.svg`}
-                  alt="ripples"
-                  usemap="#image-map"
-                />
-                <img
-                  src={`${process.env.PUBLIC_URL}/images/ripple-out/steps/outer.svg`}
-                  alt="ripples"
-                  usemap="#image-map"
-                /> */}
+                <map name="image-map">
+                  <area
+                    onMouseOver={onOuterHover}
+                    onMouseOut={onRippleOut}
+                    alt="outer_left"
+                    title="outer_left"
+                    coords="152,8,82,22,13,51,-1,83,22,109,63,131,132,150,162,154,244,157,135,126,76,98,70,64,107,36,201,12,271,1,182,6"
+                    shape="poly"
+                  />
+                  <area
+                    onMouseOver={onOuterHover}
+                    onMouseOut={onRippleOut}
+                    alt="outer_right"
+                    title="outer_right"
+                    coords="473,-1,562,10,616,18,656,30,691,42,723,59,729,86,708,113,677,123,652,132,590,151,555,155,473,157,594,127,660,101,672,70,634,38"
+                    shape="poly"
+                  />
+                  <area
+                    onMouseOver={onMiddleHover}
+                    onMouseOut={onRippleOut}
+                    alt="middle_left"
+                    title="middle_left"
+                    coords="305,21,224,26,184,36,135,55,131,78,149,92,179,105,225,114,253,118,267,119,312,123,205,101,172,75,185,52"
+                    shape="poly"
+                  />
+                  <area
+                    onMouseOver={onMiddleHover}
+                    onMouseOut={onRippleOut}
+                    alt="middle_right"
+                    title="middle_right"
+                    coords="415,22,487,25,552,38,583,51,604,73,587,94,559,101,531,107,490,114,416,123,545,93,563,67,537,45"
+                    shape="poly"
+                  />
+                  <area
+                    onMouseOver={onInnerHover}
+                    onMouseOut={onRippleOut}
+                    alt="inner_left"
+                    title="inner_left"
+                    coords="339,44,287,46,248,62,244,75,274,88,294,92,341,97,270,75,275,56"
+                    shape="poly"
+                  />
+                  <area
+                    onMouseOver={onInnerHover}
+                    onMouseOut={onRippleOut}
+                    alt="inner_right"
+                    title="inner_right"
+                    coords="387,45,428,47,457,51,481,65,478,77,451,87,431,91,412,92,389,97,462,76,460,61"
+                    shape="poly"
+                  />
+                </map>
               </Center>
             </GridItem>
           </Grid>
