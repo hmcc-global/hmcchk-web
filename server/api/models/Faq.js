@@ -3,6 +3,14 @@ module.exports = {
     pageTopic: {
       type: 'string',
       required: true,
+      isIn: [
+        'connect',
+        'ripple-out-story',
+        'ripple-out-steps',
+        'ripple-out-space',
+        'ripple-out-support',
+        'ripple-out-progress',
+      ],
     },
     question: {
       type: 'string',
@@ -11,6 +19,10 @@ module.exports = {
     answer: {
       type: 'string',
       required: true,
+    },
+    order: {
+      type: 'number',
+      defaultsTo: -1,
     },
     createdBy: {
       type: 'string',
