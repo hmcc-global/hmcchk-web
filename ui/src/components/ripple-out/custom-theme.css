@@ -1,0 +1,14 @@
+.tippy-box[data-theme~='custom-theme'] {
+    background-color: #E1B662;
+    color: white;
+    border-radius: 8px;
+   margin:auto;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 12px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2); 
+  }
+  .tippy-box[data-theme~='custom-theme'][data-placement^='top'] > .tippy-arrow::before {
+    border-top-color: #E1B662;
+  
+  }
