@@ -12,7 +12,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import RippleOutFaqSection from './RippleOutFaqSection';
 import RippleOutHeroSection from './RippleOutHeroSection';
-import { fontColor, headerFontSize, bodyFontSize } from './RippleOutTextStyle';
+import { fontColor, headerFontSize } from './RippleOutTextStyle';
 import RippleOutStoryCard from './RippleOutStoryCards';
 import storyCardsContent from './storyCardsContent.json';
 import { useState } from 'react';
@@ -21,17 +21,39 @@ import { useState } from 'react';
 
 const RippleOutStoryContainer = () => {
   const [slideIndex, setSlideIndex] = useState(0);
-  const [isMobileAndSmallTablet] = useMediaQuery(['(max-width : 820px)']); // Adjust the breakpoint as needed
+  const [isMobile, isSmallTablet, isMediumTablet, isLargeTablet, isDesktop] = useMediaQuery([
+    '(max-width : 400px)',
+    '(max-width : 800px)',
+    '(max-width : 950px)',
+    '(max-width : 1400px)',
+    '(min-width : 1400px',
+  ]);
 
   const NextArrow = (props) => {
     const { onClick, index, maxSlide } = props;
-    return index !== maxSlide - 1 && !isMobileAndSmallTablet ? (
+    return index !== maxSlide - 1 ? (
       <div
         style={{
           display: 'block',
-          right: '6.5%',
           position: 'absolute',
-          top: '40%',
+          right: isMobile
+            ? '-11%'
+            : isSmallTablet
+            ? '2.5%'
+            : isMediumTablet
+            ? '1%'
+            : isLargeTablet
+            ? '5%'
+            : '10%',
+          top: isMobile
+            ? '9%'
+            : isSmallTablet
+            ? '17.5%'
+            : isMediumTablet
+            ? '20%'
+            : isLargeTablet
+            ? '23%'
+            : '23%',
           zIndex: 8,
           cursor: 'pointer',
         }}
@@ -39,7 +61,7 @@ const RippleOutStoryContainer = () => {
       >
         <Image
           src={process.env.PUBLIC_URL + '/images/home/NextArrow.png'}
-          boxSize={'100%'}
+          boxSize={['50%', '80%']}
           alt="Arrow"
         />
       </div>
@@ -48,13 +70,29 @@ const RippleOutStoryContainer = () => {
 
   const PrevArrow = (props) => {
     const { onClick, index } = props;
-    return index !== 0 && !isMobileAndSmallTablet ? (
+    return index !== 0 ? (
       <div
         style={{
           display: 'block',
-          left: '6.5%',
           position: 'absolute',
-          top: '40%',
+          left: isMobile
+            ? '0%'
+            : isSmallTablet
+            ? '5%'
+            : isMediumTablet
+            ? '3%'
+            : isLargeTablet
+            ? '6.5%'
+            : '11.5%',
+          top: isMobile
+            ? '9%'
+            : isSmallTablet
+            ? '17.5%'
+            : isMediumTablet
+            ? '20%'
+            : isLargeTablet
+            ? '23%'
+            : '23%',
           zIndex: 8,
           cursor: 'pointer',
         }}
@@ -62,7 +100,7 @@ const RippleOutStoryContainer = () => {
       >
         <Image
           src={process.env.PUBLIC_URL + '/images/home/PrevArrow.png'}
-          boxSize={'100%'}
+          boxSize={['50%', '80%']}
           alt="Arrow"
         />
       </div>
@@ -107,11 +145,13 @@ const RippleOutStoryContainer = () => {
           maxW={['container.xl']}
           h="100%"
           textStyle="darker_grotesque"
+          w={'100%'}
+          px={isDesktop ? '' : '0'}
         >
-          <Text fontSize={headerFontSize} fontWeight={800}>
+          <Text px={'0.5em'} fontSize={headerFontSize} fontWeight={800}>
             THE STORY
           </Text>
-          <VStack mt={['2.5em', '5em']} gap="4em" textAlign="center">
+          <VStack px={'1em'} mt={['2.5em', '5em']} textAlign="center">
             <Text
               fontSize={['2.25em', '2.75em', '3.25em', '3.75em', '4.25em']}
               lineHeight={['1.5em', '1.5em']}
@@ -130,15 +170,18 @@ const RippleOutStoryContainer = () => {
                 to saturate Hong Kong with the knowledge of God’s glory
               </Highlight>
             </Text>
-            <Image
-              src={
-                process.env.PUBLIC_URL +
-                '/images/ripple-out/ripple-out-story-circles.png'
-              }
-              boxSize={'100%'}
-              height={['11.5em', '13em', '15em', '20em', '100%']}
-              objectFit="cover"
-            />
+          </VStack>
+          <Image
+            src={
+              process.env.PUBLIC_URL +
+              '/images/ripple-out/ripple-out-story-circles.png'
+            }
+            boxSize={'100%'}
+            height={['11.5em', '13em', '16em', '20em', '100%']}
+            objectFit="cover"
+            my={'2em'}
+          />
+          <VStack px={'1em'} textAlign={'center'}>
             <Text
               fontSize={['1.5em', '1.75em', '2.25em', '2.5em', '2.75em']}
               fontWeight={800}
@@ -149,21 +192,23 @@ const RippleOutStoryContainer = () => {
             <Text
               fontSize={['1.65em', '1.80em', '2.40em', '2.65em', '2.9em']}
               fontWeight={600}
+              mt={['1.5em', '2.5em']}
+              mb={'0.5em'}
             >
               SWIPE TO READ OUR STORY {'>>'}
             </Text>
-            <Slider {...sliderSettings} style={sliderStyle}>
-              {storyCardsContent.length > 0 &&
-                storyCardsContent.map((storyCardContent, i) => {
-                  return (
-                    <RippleOutStoryCard
-                      storyCardContent={storyCardContent}
-                      key={'ripple-out-story' + i}
-                    />
-                  );
-                })}
-            </Slider>
           </VStack>
+          <Slider {...sliderSettings} style={sliderStyle}>
+            {storyCardsContent.length > 0 &&
+              storyCardsContent.map((storyCardContent, i) => {
+                return (
+                  <RippleOutStoryCard
+                    storyCardContent={storyCardContent}
+                    key={'ripple-out-story' + i}
+                  />
+                );
+              })}
+          </Slider>
         </Container>
       </Flex>
       <RippleOutFaqSection pageTopic="ripple-out-story" />
