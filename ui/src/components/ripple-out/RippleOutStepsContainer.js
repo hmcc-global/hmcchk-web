@@ -59,7 +59,7 @@ const RippleOutStepsContainer = () => {
           display={['block', 'none']}
         />
       </Flex>
-      <RippleOutFaqSection />
+      <RippleOutFaqSection pageTopic="ripple-out-steps" />
     </>
   );
 };
