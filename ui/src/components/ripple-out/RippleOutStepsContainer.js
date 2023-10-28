@@ -17,68 +17,24 @@ const titleFontSize = ['1.3em', '3em'];
 const subtitleFontSize = ['1em', '1.4em'];
 const descriptionFontSize = ['0.8em', '1.4em'];
 
-const StepText = ({ title, headers, description, hover }) => {
-  let titleBgColor = '#2A3A58';
-  if (hover) {
-    titleBgColor = '#fff';
-  } else {
-    titleBgColor = '#2A3A58';
-  }
-
-  return (
-    <>
-      <Text
-        fontSize={titleFontSize}
-        textStyle="darker_grotesque_black"
-        bgColor={titleBgColor}
-        color="#34486F"
-        lineHeight="0.9em"
-        pl={4}
-      >
-        {title}
-      </Text>
-      {headers.map((item, i) => (
-        <Text
-          fontSize={subtitleFontSize}
-          textStyle="darker_grotesque"
-          color="white"
-          key={i}
-          px={2}
-          lineHeight={1.2}
-        >
-          <b>{headers[i].bold}</b>: {headers[i].normal}
-        </Text>
-      ))}
-
-      <Text
-        fontSize={descriptionFontSize}
-        textStyle="darker_grotesque"
-        color="white"
-        textAlign="justify"
-        px={2}
-        lineHeight={1}
-      >
-        {description}
-      </Text>
-    </>
-  );
-};
-
 const RippleOutStepsContainer = () => {
   const [dropHover, setDropHover] = useState(false);
   const [outerHover, setOuterHover] = useState(false);
   const [middleHover, setMiddleHover] = useState(false);
   const [innerHover, setInnerHover] = useState(false);
 
+  const dropImage = useRef(null);
   const ripplesImage = useRef(null);
 
   const onDropHover = (e) => {
     e.currentTarget.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/drop.png`;
+    dropImage.current.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/drop.png`;
     setDropHover(true);
   };
 
   const onDropOut = (e) => {
     e.currentTarget.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/drop-blue.png`;
+    dropImage.current.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/drop-blue.png`;
     setDropHover(false);
   };
 
@@ -89,7 +45,6 @@ const RippleOutStepsContainer = () => {
 
   const onMiddleHover = (e) => {
     ripplesImage.current.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/ripple-middle-white.png`;
-
     setMiddleHover(true);
   };
 
@@ -103,6 +58,58 @@ const RippleOutStepsContainer = () => {
     setOuterHover(false);
     setMiddleHover(false);
     setInnerHover(false);
+  };
+
+  const StepText = ({ title, headers, description, hover, onHover }) => {
+    let titleBgColor = '#2A3A58';
+    if (hover) {
+      titleBgColor = '#fff';
+    }
+
+    let onOut = onRippleOut;
+    if (title === 'THE DROP') {
+      onOut = onDropOut;
+    }
+
+    return (
+      <>
+        <Text
+          fontSize={titleFontSize}
+          textStyle="darker_grotesque_black"
+          bgColor={titleBgColor}
+          color="#34486F"
+          lineHeight="0.9em"
+          pl={4}
+          onMouseOver={onHover}
+          onMouseOut={onOut}
+        >
+          {title}
+        </Text>
+        {headers.map((item, i) => (
+          <Text
+            fontSize={subtitleFontSize}
+            textStyle="darker_grotesque"
+            color="white"
+            key={i}
+            px={2}
+            lineHeight={1.2}
+          >
+            <b>{headers[i].bold}</b>: {headers[i].normal}
+          </Text>
+        ))}
+
+        <Text
+          fontSize={descriptionFontSize}
+          textStyle="darker_grotesque"
+          color="white"
+          textAlign="justify"
+          px={2}
+          lineHeight={1}
+        >
+          {description}
+        </Text>
+      </>
+    );
   };
 
   return (
@@ -161,6 +168,7 @@ const RippleOutStepsContainer = () => {
                 description="A space for our corporate church gatherings, e.g. Sunday Celebration 
               and Encounter, where we can encounter and experience God as we exalt and worship Him."
                 hover={dropHover}
+                onHover={onDropHover}
               />
             </GridItem>
             <GridItem colSpan={3}>
@@ -176,6 +184,7 @@ const RippleOutStepsContainer = () => {
                   description="A space where we can love God and love people as we fellowship and
               live out community in LIFE Groups and other community gatherings."
                   hover={innerHover}
+                  onHover={onInnerHover}
                 />
               </Box>
             </GridItem>
@@ -193,6 +202,7 @@ const RippleOutStepsContainer = () => {
               be equipped for discipleship through our Experiencing Classes and other trainings 
               and courses."
                   hover={middleHover}
+                  onHover={onMiddleHover}
                 />
               </Box>
             </GridItem>
@@ -214,6 +224,7 @@ const RippleOutStepsContainer = () => {
               our outreaches and serve and reach out to the community and city of Hong Kong through 
               after-school programs and missional initiatives so that they may experience the Gospel."
                   hover={outerHover}
+                  onHover={onOuterHover}
                 />
               </Box>
             </GridItem>
@@ -223,6 +234,7 @@ const RippleOutStepsContainer = () => {
                   src={`${process.env.PUBLIC_URL}/images/ripple-out/steps/drop-blue.png`}
                   onMouseOver={onDropHover}
                   onMouseOut={onDropOut}
+                  ref={dropImage}
                 />
               </Center>
             </GridItem>
