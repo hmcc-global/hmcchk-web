@@ -6,21 +6,30 @@ import {
   GridItem,
   Center,
   Box,
+  Image,
 } from '@chakra-ui/react';
 import RippleOutFaqSection from './RippleOutFaqSection';
 import RippleOutHeroSection from './RippleOutHeroSection';
 import { fontColor, headerFontSize, bodyFontSize } from './RippleOutTextStyle';
+import { useState } from 'react';
 
 const titleFontSize = '3em';
 const descriptionFontSize = '1.4em';
 
-const StepText = ({ title, headers, description }) => {
+const StepText = ({ title, headers, description, hover }) => {
+  let titleBgColor = '#2A3A58';
+  if (hover) {
+    titleBgColor = '#fff';
+  } else {
+    titleBgColor = '#2A3A58';
+  }
+
   return (
     <>
       <Text
         fontSize={titleFontSize}
         textStyle="darker_grotesque_black"
-        bgColor="#182E57"
+        bgColor={titleBgColor}
         color="#34486F"
         lineHeight="0.9em"
         pl={4}
@@ -55,6 +64,18 @@ const StepText = ({ title, headers, description }) => {
 };
 
 const RippleOutStepsContainer = () => {
+  const [dropHover, setDropHover] = useState(false);
+
+  const onHover = (e) => {
+    e.currentTarget.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/drop.png`;
+    setDropHover(true);
+  };
+
+  const onOut = (e) => {
+    e.currentTarget.src = `${process.env.PUBLIC_URL}/images/ripple-out/steps/drop-blue.png`;
+    setDropHover(false);
+  };
+
   return (
     <>
       <RippleOutHeroSection />
@@ -110,6 +131,7 @@ const RippleOutStepsContainer = () => {
                 ]}
                 description="A space for our corporate church gatherings, e.g. Sunday Celebration 
               and Encounter, where we can encounter and experience God as we exalt and worship Him."
+                hover={dropHover}
               />
             </GridItem>
             <GridItem colSpan={3}>
@@ -165,10 +187,10 @@ const RippleOutStepsContainer = () => {
             </GridItem>
             <GridItem rowStart={2} colStart={4}>
               <Center>
-                <img
-                  src={`${process.env.PUBLIC_URL}/images/ripple-out/steps/drop.svg`}
-                  alt=""
-                  usemap="#image-map"
+                <Image
+                  src={`${process.env.PUBLIC_URL}/images/ripple-out/steps/drop-blue.png`}
+                  onMouseOver={onHover}
+                  onMouseOut={onOut}
                 />
               </Center>
             </GridItem>
