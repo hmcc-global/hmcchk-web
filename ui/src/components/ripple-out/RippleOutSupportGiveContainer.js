@@ -172,7 +172,7 @@ const RippleOutSupportGiveContainer = () => {
           </Flex>
         </Container>
       </Flex>
-      <RippleOutFaqSection />
+      <RippleOutFaqSection pageTopic="ripple-out-support" />
     </>
   );
 };

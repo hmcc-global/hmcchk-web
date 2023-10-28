@@ -63,7 +63,7 @@ const RippleOutSpaceContainer = () => {
           bgRepeat="no-repeat"
         />
       </Flex>
-      <RippleOutFaqSection />
+      <RippleOutFaqSection pageTopic="ripple-out-space" />
     </>
   );
 };
