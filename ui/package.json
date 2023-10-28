@@ -20,6 +20,7 @@
     "ag-grid-react": "^27.3.0",
     "axios": "^0.21.1",
     "chakra-ui-markdown-renderer": "^4.0.0",
+    "echarts": "^5.4.3",
     "framer-motion": "^4.1.17",
     "html-react-parser": "^1.2.7",
     "http-proxy-middleware": "^2.0.0",
