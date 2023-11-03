@@ -13,9 +13,44 @@ import {
   HStack,
   Grid,
   Stack,
+  Center,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 
 const SaturateGoals = () => {
+  const [outerRing1Hover, setouterRing1Hover] = useState(false);
+  const [outerRing2Hover, setouterRing2Hover] = useState(false);
+  const [outerRing3Hover, setouterRing3Hover] = useState(false);
+  const [outerRing4Hover, setouterRing4Hover] = useState(false);
+  const [dropHover, setDropHover] = useState(true);
+
+  const onOuterRing1 = (e) => {
+    onDropHover();
+    setouterRing1Hover(true);
+  };
+
+  const onOuterRing2 = (e) => {
+    onDropHover();
+    setouterRing2Hover(true);
+  };
+
+  const onOuterRing3 = (e) => {
+    onDropHover();
+    setouterRing3Hover(true);
+  };
+
+  const onOuterRing4 = (e) => {
+    onDropHover();
+    setouterRing4Hover(true);
+  };
+
+  const onDropHover = (e) => {
+    setouterRing1Hover(false);
+    setouterRing2Hover(false);
+    setouterRing3Hover(false);
+    setouterRing4Hover(false);
+  };
+
   return (
     <>
       <Container maxW="100%" m={0} p={0} display={['block', 'none']}>
@@ -551,50 +586,62 @@ const SaturateGoals = () => {
           </Box> */}
         {/* </Box> */}
       </Container>
-      <Container maxWidth="100%" m={0} p={0}>
-        <Flex>
-          <Box
-            display="flex"
-            flexDirection="column"
+      <Container
+        maxWidth="100%"
+        my={5}
+        p={0}
+        overflow="clip"
+        display={['none', 'block']}
+      >
+        <HStack>
+          <VStack
             alignItems="center"
             justifyContent="space-evenly"
+            width="35%"
+            mt="10"
           >
             <Box>
-              <Box bg="#0053A4" height={['2.5em', '2.8em']} mb="1em" pl="0.5em">
-                <Flex>
-                  <Box
-                    bg="white"
-                    borderColor="#0053A4"
-                    borderWidth="5px"
-                    borderRadius="50%"
-                    width={['50px', '80px']}
-                    height={['50px', '80px']}
-                    position="relative"
-                    transform="translateY(-10%)"
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    mr="0.4em"
-                  >
-                    <Image
-                      src={
-                        process.env.PUBLIC_URL +
-                        '/images/saturate/Saturate_Foundation.svg'
-                      }
-                      boxSize={['2em', '3em']}
-                    ></Image>
-                  </Box>
-                  <Text
-                    color="white"
-                    fontSize={['1.8em', '2em']}
-                    fontWeight="700"
-                  >
-                    FOUNDATIONS
-                  </Text>
+              <Flex
+                bgColor={outerRing4Hover ? '#0053A4' : '#D9D9D9'}
+                onMouseOver={onOuterRing4}
+                onMouseLeave={onDropHover}
+                height={{ sm: '1.5em', md: '2.4em', lg: '2.8em' }}
+                width={{ sm: '150%', lg: '130%' }}
+                alignItems="center"
+              >
+                <Flex
+                  bg="white"
+                  borderColor={outerRing4Hover ? '#0053A4' : '#D9D9D9'}
+                  borderWidth="5px"
+                  borderRadius="50%"
+                  justifyContent="center"
+                  alignItems="center"
+                  mr="0.4em"
+                >
+                  <Image
+                    src={
+                      process.env.PUBLIC_URL +
+                      '/images/saturate/Saturate_Foundation.svg'
+                    }
+                    borderRadius="full"
+                    m="2"
+                    boxSize="3.5vw"
+                  ></Image>
                 </Flex>
-              </Box>
-              <Box pl={['2.5em', '5em']}>
-                <UnorderedList fontSize={['0.9em', '1.3em']}>
+                <Text
+                  color="white"
+                  fontSize={{ sm: '2.5vw', md: '3vw', lg: '3.4vw' }}
+                  fontWeight="700"
+                  fontFamily="DarkerGrotesque"
+                >
+                  FOUNDATIONS
+                </Text>
+              </Flex>
+              <Box pl={{ sm: '3em', md: '4em', lg: '5em' }}>
+                <UnorderedList
+                  fontSize={{ sm: '1.2vw', md: '1.3vw', lg: '1.5vw' }}
+                  fontFamily="Be-Vietnam"
+                >
                   <ListItem>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
@@ -612,42 +659,48 @@ const SaturateGoals = () => {
                 </UnorderedList>
               </Box>
             </Box>
-            <Box>
-              <Box bg="#81B1E1" height={['2.5em', '2.8em']} mb="1em" pl="0.5em">
-                <Flex>
-                  <Box
-                    bg="white"
-                    borderColor="#81B1E1"
-                    borderWidth="5px"
-                    borderRadius="50%"
-                    width={['50px', '80px']}
-                    height={['50px', '80px']}
-                    position="relative"
-                    transform="translateY(-10%)"
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    mr="0.4em"
-                  >
-                    <Image
-                      src={
-                        process.env.PUBLIC_URL +
-                        '/images/saturate/Saturate_Link.svg'
-                      }
-                      boxSize={['2em', '3em']}
-                    ></Image>
-                  </Box>
-                  <Text
-                    color="white"
-                    fontSize={['1.8em', '2em']}
-                    fontWeight="700"
-                  >
-                    LINK UP
-                  </Text>
+            <Box mt="4">
+              <Flex
+                bg={outerRing2Hover ? '#81B1E1' : '#D9D9D9'}
+                onMouseOver={onOuterRing2}
+                onMouseLeave={onDropHover}
+                height={{ sm: '1.5em', md: '2.4em', lg: '2.8em' }}
+                width={{ sm: '150%', lg: '130%' }}
+                alignItems="center"
+              >
+                <Flex
+                  bg="white"
+                  borderColor={outerRing2Hover ? '#81B1E1' : '#D9D9D9'}
+                  borderWidth="5px"
+                  borderRadius="50%"
+                  justifyContent="center"
+                  alignItems="center"
+                  mr="0.4em"
+                >
+                  <Image
+                    src={
+                      process.env.PUBLIC_URL +
+                      '/images/saturate/Saturate_Link.svg'
+                    }
+                    borderRadius="full"
+                    m="2"
+                    boxSize="3.5vw"
+                  ></Image>
                 </Flex>
-              </Box>
-              <Box pl={['2.5em', '5em']}>
-                <UnorderedList fontSize={['0.9em', '1.3em']}>
+                <Text
+                  color="white"
+                  fontSize={{ sm: '2.5vw', md: '3vw', lg: '3.4vw' }}
+                  fontWeight="700"
+                  fontFamily="DarkerGrotesque"
+                >
+                  LINK UP
+                </Text>
+              </Flex>
+              <Box pl={{ sm: '3em', md: '4em', lg: '5em' }}>
+                <UnorderedList
+                  fontSize={{ sm: '1.2vw', md: '1.3vw', lg: '1.5vw' }}
+                  fontFamily="Be-Vietnam"
+                >
                   <ListItem>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
@@ -666,57 +719,129 @@ const SaturateGoals = () => {
                 </UnorderedList>
               </Box>
             </Box>
-          </Box>
+          </VStack>
+          {/* <Center>
+            <Image
+              src={
+                process.env.PUBLIC_URL +
+                '/images/saturate/saturate_ring_non-colored.png'
+              }
+              usemap="#ripple-image"
+              bgColor="white"
+              p="2"
+              borderRadius="full"
+              zIndex="0"
+            />
+
+            <Text
+                fontWeight="800"
+                fontSize={['0.8em', '1.5em', '2.5em', '3.5em']}
+                color="#0053A4"
+                textAlign="center"
+                lineHeight="1em"
+              >
+                The
+                <br />
+                Goals
+              </Text>
+            <map name="ripple-image">
+              <area
+                alt="outer-ring-1"
+                title="outer-ring-1"
+                coords="85,113 43,178 18,264 27,368 77,456 130,507 202,543 317,561 413,542 492,493 549,430 527,418 502,448 470,481 404,520 309,539 211,521 156,492 89,431 52,349 47,245 88,153 129,104 "
+                shape="polygon"
+                onMouseEnter={onOuterRing1}
+              />
+              <area
+                alt="outer-ring-2"
+                title="outer-ring-2"
+                coords="86,112 127,71 201,31 285,15 363,20 445,50 502,94 561,168 589,253 582,351 550,431 528,416 552,363 567,300 559,232 534,167 490,114 425,68 325,39 235,47 167,79 130,104 "
+                shape="polygon"
+                onMouseEnter={onOuterRing2}
+              />
+            </map>
+          </Center> */}
           <Box
             m="0"
             p="0"
+            borderRadius="full"
+            border="1.8vw solid white"
+            onMouseEnter={onDropHover}
+            onMouseLeave={onDropHover}
             style={{ shapeOutside: 'circle(50%)' }}
             float="left"
+            bgColor="white"
             position="relative"
+            zIndex="1"
           >
             <Box
-              borderRadius="50%"
-              width="600px"
-              height="600px"
+              borderRadius="full"
+              width="40vw"
+              height="40vw"
               display="flex"
+              onMouseEnter={onOuterRing1}
+              onMouseLeave={onOuterRing1}
               justifyContent="center"
               alignItems="center"
-              border="30px solid #c3e0fd"
-              style={{ shapeOutside: 'circle()' }}
+              // width: isLargerThan480px ? '175px' : '0',
+              style={{
+                shapeOutside: 'circle()',
+                border: outerRing1Hover
+                  ? '1.8vw solid #c3e0fd'
+                  : '1.8vw solid #D9D9D9',
+              }}
             >
               <Box
-                borderRadius="50%"
-                width="500px"
-                height="500px"
+                borderRadius="full"
+                width="34vw"
+                height="34vw"
                 display="flex"
+                onMouseEnter={onOuterRing2}
+                onMouseLeave={onOuterRing2}
                 justifyContent="center"
                 alignItems="center"
-                border="30px solid #81b1e1"
-                style={{ shapeOutside: 'circle()' }}
+                style={{
+                  shapeOutside: 'circle()',
+                  border: outerRing2Hover
+                    ? '1.8vw solid #81b1e1'
+                    : '1.8vw solid #D9D9D9',
+                }}
               >
                 <Box
-                  borderRadius="50%"
-                  border="30px solid #3b8ad7"
-                  width="400px"
-                  height="400px"
+                  borderRadius="full"
+                  width="28vw"
+                  height="28vw"
                   display="flex"
+                  onMouseEnter={onOuterRing3}
+                  onMouseLeave={onOuterRing3}
                   justifyContent="center"
                   alignItems="center"
-                  style={{ shapeOutside: 'circle()' }}
+                  style={{
+                    shapeOutside: 'circle()',
+                    border: outerRing3Hover
+                      ? '1.8vw solid #3b8ad7'
+                      : '1.8vw solid #D9D9D9',
+                  }}
                 >
                   <Box
-                    borderRadius="50%"
-                    border="30px solid #0053A4"
-                    width="300px"
-                    height="300px"
+                    borderRadius="full"
+                    width="22vw"
+                    height="22vw"
                     display="flex"
+                    onMouseEnter={onOuterRing4}
+                    onMouseLeave={onOuterRing4}
                     alignItems="center"
                     justifyContent="center"
-                    style={{ shapeOutside: 'circle()' }}
+                    style={{
+                      shapeOutside: 'circle()',
+                      border: outerRing4Hover
+                        ? '1.8vw solid #0053A4'
+                        : '1.8vw solid #D9D9D9',
+                    }}
                   >
                     <Text
                       fontWeight="800"
-                      fontSize={['0.8em', '1.5em', '2.5em', '3.5em']}
+                      fontSize="4.5vw"
                       color="#0053A4"
                       lineHeight="1em"
                     >
@@ -729,132 +854,140 @@ const SaturateGoals = () => {
               </Box>
             </Box>
           </Box>
-          <Flex>
-            <Box
-              display="flex"
-              flexDirection="column"
-              justifyContent="space-evenly"
-            >
-              <Box>
-                <Box
-                  bg="#3B8AD7"
-                  height={['2.5em', '2.8em']}
-                  mb="1em"
-                  pl="0.5em"
+          <VStack
+            justifyContent="space-evenly"
+            width="35%"
+            pt={{ sm: '13vw', md: '12vw' }}
+          >
+            <Box mb={{ sm: '4', md: '9' }}>
+              <Flex
+                bg={outerRing3Hover ? '#3B8AD7' : '#D9D9D9'}
+                onMouseOver={onOuterRing3}
+                onMouseLeave={onDropHover}
+                height={{ sm: '1.5em', md: '2.4em', lg: '2.8em' }}
+                width={{ sm: '150%', md: '120%', lg: '140%', xl: '145%' }}
+                ml={{ sm: '-50%', md: '-20%', lg: '-30%' }}
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Text
+                  color="white"
+                  fontSize={{ sm: '2.5vw', md: '3vw', lg: '3.4vw' }}
+                  fontWeight="700"
+                  fontFamily="DarkerGrotesque"
+                  pl={{ sm: '35%', md: '16%', lg: '18.7%' }}
                 >
-                  <Flex justifyContent="space-between">
-                    <Text
-                      color="white"
-                      fontSize={['1.8em', '2em']}
-                      fontWeight="700"
-                    >
-                      IMPACT
-                    </Text>
-                    <Box
-                      bg="white"
-                      borderColor="#3B8AD7"
-                      borderWidth="5px"
-                      borderRadius="50%"
-                      width={['50px', '80px']}
-                      height={['50px', '80px']}
-                      position="relative"
-                      transform="translateY(-10%)"
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      mr="0.4em"
-                    >
-                      <Image
-                        src={
-                          process.env.PUBLIC_URL +
-                          '/images/saturate/Saturate_Impact.svg'
-                        }
-                        boxSize={['2em', '3em']}
-                      ></Image>
-                    </Box>
-                  </Flex>
-                </Box>
-                <Box pr="3.5em">
-                  <UnorderedList fontSize={['0.9em', '1.3em']}>
-                    <ListItem>
-                      <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
-                        {' '}
-                        20{' '}
-                      </span>{' '}
-                      Campus Microchurches
-                    </ListItem>
-                    <ListItem>
-                      <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
-                        {' '}
-                        14{' '}
-                      </span>{' '}
-                      City Microchurches
-                    </ListItem>
-                  </UnorderedList>
-                </Box>
-              </Box>
-              <Box>
-                <Box
-                  bg="#C3E0FD"
-                  height={['2.5em', '2.8em']}
-                  mb="1em"
-                  pl="0.5em"
+                  IMPACT
+                </Text>
+                <Flex
+                  bg="white"
+                  borderColor={outerRing3Hover ? '#3B8AD7' : '#D9D9D9'}
+                  borderWidth="5px"
+                  borderRadius="50%"
+                  justifyContent="center"
+                  alignItems="center"
+                  pos="sticky"
+                  right="0.4em"
                 >
-                  <Flex justifyContent="space-between">
-                    <Text
-                      color="#0053A4"
-                      fontSize={['1.8em', '2em']}
-                      fontWeight="700"
-                    >
-                      LAUNCH
-                    </Text>
-                    <Box
-                      bg="white"
-                      borderColor="#C3E0FD"
-                      borderWidth="5px"
-                      borderRadius="50%"
-                      width={['50px', '80px']}
-                      height={['50px', '80px']}
-                      position="relative"
-                      transform="translateY(-10%)"
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      mr="0.4em"
-                    >
-                      <Image
-                        src={
-                          process.env.PUBLIC_URL +
-                          '/images/saturate/Saturate_Launch.svg'
-                        }
-                        boxSize={['2em', '3em']}
-                      ></Image>
-                    </Box>
-                  </Flex>
-                </Box>
-                <Box pr="3.5em">
-                  <UnorderedList fontSize={['0.9em', '1.3em']}>
-                    <ListItem>
-                      <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
-                        {' '}
-                        1{' '}
-                      </span>{' '}
-                      Transformational Hub
-                    </ListItem>
-                    <ListItem>
-                      <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
-                        {' '}
-                        1{' '}
-                      </span>{' '}
-                      international church plant on or near a university campus
-                      in an Asian international city
-                    </ListItem>
-                  </UnorderedList>
-                </Box>
+                  <Image
+                    src={
+                      process.env.PUBLIC_URL +
+                      '/images/saturate/Saturate_Impact.svg'
+                    }
+                    orderRadius="full"
+                    m="2"
+                    boxSize="3.5vw"
+                  ></Image>
+                </Flex>
+              </Flex>
+              <Box pr="3.5em">
+                <UnorderedList
+                  fontSize={{ sm: '1.2vw', md: '1.3vw', lg: '1.5vw' }}
+                  fontFamily="Be-Vietnam"
+                >
+                  <ListItem>
+                    <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
+                      {' '}
+                      20{' '}
+                    </span>{' '}
+                    Campus Microchurches
+                  </ListItem>
+                  <ListItem>
+                    <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
+                      {' '}
+                      14{' '}
+                    </span>{' '}
+                    City Microchurches
+                  </ListItem>
+                </UnorderedList>
               </Box>
             </Box>
-          </Flex>
-        </Flex>
+            <Box pt="5">
+              <Flex
+                bg={outerRing1Hover ? '#C3E0FD' : '#D9D9D9'}
+                onMouseOver={onOuterRing1}
+                onMouseLeave={onDropHover}
+                height={{ sm: '1.5em', md: '2.4em', lg: '2.8em' }}
+                alignItems="center"
+                justifyContent="space-between"
+                width={{ sm: '150%', md: '120%', lg: '120%' }}
+                ml={{ sm: '-50%', md: '-20%', lg: '-20%' }}
+              >
+                <Text
+                  color={outerRing1Hover ? '#0053A4' : 'white'}
+                  fontSize={{ sm: '2.5vw', md: '3vw', lg: '3.4vw' }}
+                  fontWeight="700"
+                  fontFamily="DarkerGrotesque"
+                  pl={{ sm: '35%', md: '17%', lg: '17%' }}
+                >
+                  LAUNCH
+                </Text>
+                <Box
+                  bg="white"
+                  borderColor={outerRing1Hover ? '#C3E0FD' : '#D9D9D9'}
+                  borderWidth="5px"
+                  borderRadius="50%"
+                  justifyContent="center"
+                  alignItems="center"
+                  pos="sticky"
+                  right="0.4em"
+                >
+                  <Image
+                    src={
+                      process.env.PUBLIC_URL +
+                      '/images/saturate/Saturate_Launch.svg'
+                    }
+                    borderRadius="full"
+                    m="2"
+                    boxSize="3.5vw"
+                  ></Image>
+                </Box>
+              </Flex>
+              <Box pr="3.5em">
+                <UnorderedList
+                  fontSize={{ sm: '1.2vw', md: '1.3vw', lg: '1.5vw' }}
+                  fontFamily="Be-Vietnam"
+                >
+                  <ListItem>
+                    <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
+                      {' '}
+                      1{' '}
+                    </span>{' '}
+                    Transformational Hub
+                  </ListItem>
+                  <ListItem>
+                    <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
+                      {' '}
+                      1{' '}
+                    </span>{' '}
+                    international church plant on or near a university campus in
+                    an Asian international city
+                  </ListItem>
+                </UnorderedList>
+              </Box>
+            </Box>
+          </VStack>
+        </HStack>
       </Container>
     </>
   );
