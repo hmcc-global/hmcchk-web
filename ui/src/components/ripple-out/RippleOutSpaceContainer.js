@@ -1,9 +1,7 @@
 import {
   Box,
   Container,
-  ListItem,
   Text,
-  UnorderedList,
   Flex,
   Center,
   Image,
