@@ -11,6 +11,17 @@ const RippleOutBarChart = ({ height, width }) => {
     // Data from json
     const data = supportContent[1].content[1].data;
 
+    function valueFormatter(input) {
+      let res = '';
+      if (input >= 1000) {
+        res = '$' + input / 1000 + 'M';
+      } else {
+        res = '$' + input + 'K';
+      }
+
+      return res;
+    }
+
     const option = {
       title: {
         text: '',
@@ -22,7 +33,7 @@ const RippleOutBarChart = ({ height, width }) => {
         },
         formatter: function (params) {
           var tar = params[1];
-          return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
+          return tar.name + '<br/>' + tar.seriesName + ' : ' + valueFormatter(tar.value);
         },
       },
       grid: {
@@ -44,8 +55,9 @@ const RippleOutBarChart = ({ height, width }) => {
           interval: 0,
           overflow: 'truncate',
           padding: [10, 0, 0, 0],
-          color: "#01375A",fontFamily: "Darker Grotesque",
-          fontWeight: 400
+          color: '#01375A',
+          fontFamily: 'Darker Grotesque',
+          fontWeight: 400,
         },
       },
       yAxis: {
