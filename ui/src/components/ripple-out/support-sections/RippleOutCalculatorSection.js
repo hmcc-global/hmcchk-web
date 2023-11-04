@@ -55,7 +55,7 @@ const RippleOutCalculatorSection = () => {
                 Giving Per Day (HKD)
               </FormLabel>
               <NumberInput min={0} onChange={(e) => setAmount(e)}>
-                <NumberInputField placeholder="Insert Amount" />
+                <NumberInputField placeholder="Insert Amount" px="0.5" />
               </NumberInput>
               <FormErrorMessage>
                 Amount cannot be lower than 0.
@@ -73,7 +73,7 @@ const RippleOutCalculatorSection = () => {
                 Duration (days)
               </FormLabel>
               <NumberInput min={0} onChange={(e) => setDuration(e)}>
-                <NumberInputField placeholder="Insert Amount" />
+                <NumberInputField placeholder="Insert Amount" px="0.5" />
               </NumberInput>
               <FormErrorMessage>
                 Amount cannot be lower than 0.
@@ -90,11 +90,9 @@ const RippleOutCalculatorSection = () => {
               <FormLabel fontSize={bodyFontSize3} style={calcTextStyle}>
                 Total (HKD)
               </FormLabel>
-              <NumberInput
-                value={isNaN(total) ? '' : total}
-                isDisabled
-              >
+              <NumberInput value={isNaN(total) ? '' : total} isDisabled>
                 <NumberInputField
+                  px="0.5"
                   style={{ color: 'black', opacity: 1 }}
                   background="#C9DDED"
                 />
