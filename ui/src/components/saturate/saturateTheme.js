@@ -1,8 +1,7 @@
 import { extendTheme } from '@chakra-ui/react';
 import '@fontsource/dm-sans';
-import '@fontsource/darker-grotesque';
 
-const witnessTheme = extendTheme({
+const saturateTheme = extendTheme({
   textStyles: {
     dm_sans: {
       fontFamily: 'DM Sans',
@@ -12,11 +11,7 @@ const witnessTheme = extendTheme({
       fontFamily: 'DM Sans',
       fontWeight: '700',
     },
-    darker_grotesque: {
-      fontFamily: 'Darker Grotesque',
-      fontWeight: '900',
-    },
   },
 });
 
-export default witnessTheme;
+export default saturateTheme;
