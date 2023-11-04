@@ -19,11 +19,10 @@ const RippleOutHeroSection = () => {
   const navStyle = {
     color: '#F0F0F0',
     fontFamily: 'Inter',
-    fontSize: '16px',
+    fontSize: { md: '16px', lg: '28px' },
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: '32px' /* 177.778% */,
-    textDecorationLine: 'underline',
     cursor: 'pointer',
   };
   const navDotStyle = {
@@ -47,7 +46,8 @@ const RippleOutHeroSection = () => {
     }
     return 'THE STORY';
   };
-
+  const pathname = getCurrentPage(window.location.pathname);
+  
   return (
     <>
       {/* Hero section - desktop */}
@@ -91,35 +91,40 @@ const RippleOutHeroSection = () => {
             >
               <Text
                 onClick={() => history.push('/ripple-out/story')}
-                style={navStyle}
+                {...navStyle}
+                textDecoration={pathname === 'THE STORY' ? 'underline' : ''}
               >
                 THE STORY
               </Text>
               <Box style={navDotStyle} />
               <Text
                 onClick={() => history.push('/ripple-out/steps')}
-                style={navStyle}
+                {...navStyle}
+                textDecoration={pathname === 'THE STEPS' ? 'underline' : ''}
               >
                 THE STEPS
               </Text>
               <Box style={navDotStyle} />
               <Text
                 onClick={() => history.push('/ripple-out/space')}
-                style={navStyle}
+                {...navStyle}
+                textDecoration={pathname === 'THE SPACE' ? 'underline' : ''}
               >
                 THE SPACE
               </Text>
               <Box style={navDotStyle} />
               <Text
                 onClick={() => history.push('/ripple-out/support')}
-                style={navStyle}
+                {...navStyle}
+                textDecoration={pathname === 'THE SUPPORT' ? 'underline' : ''}
               >
                 THE SUPPORT
               </Text>
               <Box style={navDotStyle} />
               <Text
                 onClick={() => history.push('/ripple-out/progress')}
-                style={navStyle}
+                {...navStyle}
+                textDecoration={pathname === 'THE PROGRESS' ? 'underline' : ''}
               >
                 THE PROGRESS
               </Text>
