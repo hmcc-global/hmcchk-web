@@ -244,7 +244,7 @@ const RippleOutStepsContainer = () => {
                   src={`${process.env.PUBLIC_URL}/images/ripple-out/steps/ripples.svg`}
                   alt="ripples"
                   id="ripplesImage"
-                  usemap="#image-map"
+                  useMap="#image-map"
                   onMouseOut={onRippleOut}
                   ref={ripplesImage}
                 />
