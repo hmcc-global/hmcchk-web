@@ -129,7 +129,17 @@ const MainMenu = ({ login, onClose }) => {
                   <LinkBox>
                     <Button marginBottom="5" width="96%" left="2">
                       <LinkOverlay href="/profile" onClick={onClose}>
-                        MY PROFILE
+                        <Text
+                          fontWeight="600"
+                          textColor="rgba(249, 249, 249, 1)"
+                          fontSize={{
+                            md: 'x-small',
+                            lg: 'medium',
+                            xl: 'medium',
+                          }}
+                        >
+                          MY PROFILE
+                        </Text>
                       </LinkOverlay>
                     </Button>
                   </LinkBox>
@@ -176,7 +186,17 @@ const MainMenu = ({ login, onClose }) => {
                   <LinkBox>
                     <Button marginBottom="5" width="96%" left="2">
                       <LinkOverlay href="/login" onClick={onClose}>
-                        LOGIN
+                        <Text
+                          fontWeight="600"
+                          textColor="rgba(249, 249, 249, 1)"
+                          fontSize={{
+                            md: 'x-small',
+                            lg: 'medium',
+                            xl: 'mmedium',
+                          }}
+                        >
+                          LOGIN
+                        </Text>
                       </LinkOverlay>
                     </Button>
                   </LinkBox>
@@ -187,7 +207,19 @@ const MainMenu = ({ login, onClose }) => {
                       width="100%"
                       style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
                     >
-                      <LinkOverlay href="/signup">SIGN UP</LinkOverlay>
+                      <LinkOverlay href="/signup">
+                        <Text
+                          fontWeight="600"
+                          textColor="rgba(249, 249, 249, 1)"
+                          fontSize={{
+                            md: 'x-small',
+                            lg: 'medium',
+                            xl: 'mmedium',
+                          }}
+                        >
+                          SIGNUP
+                        </Text>
+                      </LinkOverlay>
                     </Button>
                   </LinkBox>
                   <LinkBox>
@@ -393,7 +425,17 @@ const MainMenu = ({ login, onClose }) => {
                       <LinkBox>
                         <Button marginBottom="5" width="96%" left="2">
                           <LinkOverlay href="/profile" onClick={onClose}>
-                            MY PROFILE
+                            <Text
+                              fontWeight="600"
+                              textColor="rgba(249, 249, 249, 1)"
+                              fontSize={{
+                                md: 'x-small',
+                                lg: 'medium',
+                                xl: 'mmedium',
+                              }}
+                            >
+                              MY PROFILE
+                            </Text>
                           </LinkOverlay>
                         </Button>
                       </LinkBox>
@@ -407,7 +449,17 @@ const MainMenu = ({ login, onClose }) => {
                             marginInlineStart: '0',
                           }}
                         >
-                          LOG OUT
+                          <Text
+                            fontWeight="600"
+                            textColor="rgba(249, 249, 249, 1)"
+                            fontSize={{
+                              md: 'x-small',
+                              lg: 'medium',
+                              xl: 'mmedium',
+                            }}
+                          >
+                            LOG OUT
+                          </Text>
                         </Button>
                       </LinkBox>
                       <LinkBox>
@@ -423,7 +475,17 @@ const MainMenu = ({ login, onClose }) => {
                             target="_blank"
                             onClick={onClose}
                           >
-                            HMCC TV
+                            <Text
+                              fontWeight="600"
+                              textColor="rgba(249, 249, 249, 1)"
+                              fontSize={{
+                                md: 'x-small',
+                                lg: 'medium',
+                                xl: 'mmedium',
+                              }}
+                            >
+                              HMCC TV
+                            </Text>
                           </LinkOverlay>
                         </Button>
                       </LinkBox>
@@ -440,7 +502,17 @@ const MainMenu = ({ login, onClose }) => {
                       <LinkBox>
                         <Button marginBottom="5" width="96%" left="2">
                           <LinkOverlay href="/login" onClick={onClose}>
-                            LOGIN
+                            <Text
+                              fontWeight="600"
+                              textColor="rgba(249, 249, 249, 1)"
+                              fontSize={{
+                                md: 'x-small',
+                                lg: 'medium',
+                                xl: 'mmedium',
+                              }}
+                            >
+                              LOGIN
+                            </Text>
                           </LinkOverlay>
                         </Button>
                       </LinkBox>
@@ -455,7 +527,17 @@ const MainMenu = ({ login, onClose }) => {
                           }}
                         >
                           <LinkOverlay href="/signup" onClick={onClose}>
-                            SIGNUP
+                            <Text
+                              fontWeight="600"
+                              textColor="rgba(249, 249, 249, 1)"
+                              fontSize={{
+                                md: 'x-small',
+                                lg: 'medium',
+                                xl: 'mmedium',
+                              }}
+                            >
+                              SIGNUP
+                            </Text>
                           </LinkOverlay>
                         </Button>
                       </LinkBox>
@@ -472,7 +554,17 @@ const MainMenu = ({ login, onClose }) => {
                             target="_blank"
                             onClick={onClose}
                           >
-                            HMCC TV
+                            <Text
+                              fontWeight="600"
+                              textColor="rgba(249, 249, 249, 1)"
+                              fontSize={{
+                                md: 'x-small',
+                                lg: 'medium',
+                                xl: 'mmedium',
+                              }}
+                            >
+                              HMCC TV
+                            </Text>
                           </LinkOverlay>
                         </Button>
                       </LinkBox>
