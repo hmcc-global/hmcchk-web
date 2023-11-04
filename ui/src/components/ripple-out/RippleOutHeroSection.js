@@ -1,4 +1,17 @@
-import { Box, Container, Flex, Text, Center, HStack } from '@chakra-ui/react';
+import {
+  Box,
+  Container,
+  Flex,
+  Text,
+  Center,
+  HStack,
+  Menu,
+  MenuItem,
+  MenuList,
+  MenuButton,
+  Button,
+} from '@chakra-ui/react';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 import { useHistory } from 'react-router-dom';
 
 const RippleOutHeroSection = () => {
@@ -13,26 +26,28 @@ const RippleOutHeroSection = () => {
     textDecorationLine: 'underline',
     cursor: 'pointer',
   };
-  const navStyleMobile = {
-    color: '#F0F0F0',
-    fontFamily: 'Inter',
-    fontSize: '8px',
-    fontStyle: 'normal',
-    fontWeight: 700,
-    lineHeight: '8.711px' /* 177.778% */,
-    textDecorationLine: 'underline',
-    cursor: 'pointer',
-  };
   const navDotStyle = {
     borderRadius: '20px',
     borderColor: '#F0F0F0',
     border: '3px #F0F0F0 solid',
   };
-  const navDotStyleMobile = {
-    borderRadius: '20px',
-    borderColor: '#F0F0F0',
-    border: '1.2px #F0F0F0 solid',
+
+  const getCurrentPage = (path) => {
+    if (path.includes('/steps')) {
+      return 'THE STEPS';
+    }
+    if (path.includes('/space')) {
+      return 'THE SPACE';
+    }
+    if (path.includes('/support')) {
+      return 'THE SUPPORT';
+    }
+    if (path.includes('/progress')) {
+      return 'THE PROGRESS';
+    }
+    return 'THE STORY';
   };
+
   return (
     <>
       {/* Hero section - desktop */}
@@ -141,48 +156,28 @@ const RippleOutHeroSection = () => {
                 CAMPAIGN
               </Text>
             </Flex>
-            <HStack
-              alignItems="center"
-              w="100%"
-              justifyContent="center"
-              paddingBottom="20px"
-              spacing={2}
-            >
-              <Text
-                onClick={() => history.push('/ripple-out/story')}
-                style={navStyleMobile}
-              >
-                THE STORY
-              </Text>
-              <Box style={navDotStyleMobile} />
-              <Text
-                onClick={() => history.push('/ripple-out/steps')}
-                style={navStyleMobile}
-              >
-                THE STEPS
-              </Text>
-              <Box style={navDotStyleMobile} />
-              <Text
-                onClick={() => history.push('/ripple-out/space')}
-                style={navStyleMobile}
-              >
-                THE SPACE
-              </Text>
-              <Box style={navDotStyleMobile} />
-              <Text
-                onClick={() => history.push('/ripple-out/support')}
-                style={navStyleMobile}
-              >
-                THE SUPPORT
-              </Text>
-              <Box style={navDotStyleMobile} />
-              <Text
-                onClick={() => history.push('/ripple-out/progress')}
-                style={navStyleMobile}
-              >
-                THE PROGRESS
-              </Text>
-            </HStack>
+            <Menu>
+              <MenuButton as={Button} rightIcon={<ChevronDownIcon />} mb={3}>
+                {getCurrentPage(window.location.pathname)}
+              </MenuButton>
+              <MenuList>
+                <MenuItem onClick={() => history.push('/ripple-out/story')}>
+                  THE STORY
+                </MenuItem>
+                <MenuItem onClick={() => history.push('/ripple-out/steps')}>
+                  THE STEPS
+                </MenuItem>
+                <MenuItem onClick={() => history.push('/ripple-out/space')}>
+                  THE SPACE
+                </MenuItem>
+                <MenuItem onClick={() => history.push('/ripple-out/support')}>
+                  THE SUPPORT
+                </MenuItem>
+                <MenuItem onClick={() => history.push('/ripple-out/progress')}>
+                  THE PROGRESS
+                </MenuItem>
+              </MenuList>
+            </Menu>
           </Center>
         </Container>
       </Box>
