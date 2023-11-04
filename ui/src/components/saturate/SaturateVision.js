@@ -1,20 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
   Box,
-  Button,
   Center,
-  CircularProgress,
-  CircularProgressLabel,
   Container,
-  Fade,
   Grid,
   GridItem,
-  Image,
-  Text,
-  VStack,
+  Highlight,
   Flex,
-  Stack,
   HStack,
+  Text,
 } from '@chakra-ui/react';
 
 const SaturateVision = () => {
@@ -22,20 +16,33 @@ const SaturateVision = () => {
   const [impactPosition, setImpactPosition] = useState(false);
   const [linkPosition, setLinkPosition] = useState(false);
   const [launchPosition, setLaunchPosition] = useState(false);
+  const [mobileChange, setMobileChange] = useState(false);
+  // useState to get mobile value
   let yPos = useRef(0);
+  let windowWidth = useRef(0);
 
   useEffect(() => {
     const position = document.querySelector('#main-container');
     const handleScroll = () => {
       yPos.current = position.scrollTop;
-      if (position.scrollTop > 500 && position.scrollTop < 600) {
+      windowWidth = window.innerWidth;
+      console.log('width: ', windowWidth.current);
+
+      if (position.scrollTop > 500) {
         setFillPosition(true);
-      } else if (position.scrollTop > 600 && position.scrollTop < 750) {
+      }
+      if (position.scrollTop > 600) {
         setImpactPosition(true);
-      } else if (position.scrollTop > 750 && position.scrollTop < 850) {
+      }
+      if (position.scrollTop > 750) {
         setLinkPosition(true);
-      } else if (position.scrollTop > 850 && position.scrollTop < 1000) {
+      }
+      if (position.scrollTop > 850) {
         setLaunchPosition(true);
+      }
+
+      if (window.innerWidth < 500) {
+        setMobileChange(true);
       }
     };
     position.addEventListener('scroll', handleScroll);
@@ -83,18 +90,19 @@ const SaturateVision = () => {
       </Box>
       <Box bgColor="white" h={7} />
 
-      <HStack h={1200} overflow="hidden" alignItems="left">
-        <Box w="70%" h={[300, 350, 450, 730, 900, 1050]}>
+      <HStack h={1100} overflow="hidden" alignItems="left" spacing="-20%">
+        <Box w="55%" h={['70%', '70%', '70%', '70%', '80%', '95%']}>
           <Box
             marginTop="-20%"
             marginLeft="-20%"
             transition="border 4s ease-in"
             style={{
               border: launchPosition
-                ? '2.3vw solid #C3E0FD'
-                : '2.3vw solid #ffffff',
+                ? '3vw solid #C3E0FD'
+                : '3vw solid #ffffff',
             }}
-            boxSize="90%"
+            w="120%"
+            h={['70%', '70%', '80%', '90%', '100%', '118%']}
             borderRadius="full"
             display="flex"
             alignItems="center"
@@ -104,10 +112,10 @@ const SaturateVision = () => {
               transition="border 3s ease-in"
               style={{
                 border: linkPosition
-                  ? '2.3vw solid #81B1E1'
-                  : '2.3vw solid #ffffff',
+                  ? '3vw solid #81B1E1'
+                  : '3vw solid #ffffff',
               }}
-              boxSize="92%"
+              boxSize="90%"
               borderRadius="full"
               display="flex"
               alignItems="center"
@@ -117,10 +125,10 @@ const SaturateVision = () => {
                 transition="border 2s ease-in"
                 style={{
                   border: impactPosition
-                    ? '2.3vw solid #3B8AD7'
-                    : '2.3vw solid #ffffff',
+                    ? '3vw solid #3B8AD7'
+                    : '3vw solid #ffffff',
                 }}
-                boxSize="90%"
+                boxSize="87%"
                 borderRadius="full"
                 display="flex"
                 alignItems="center"
@@ -130,10 +138,10 @@ const SaturateVision = () => {
                   transition="border 1s ease-in"
                   style={{
                     border: fillPosition
-                      ? '2.3vw solid #0053A4'
-                      : '2.3vw solid #ffffff',
+                      ? '3vw solid #0053A4'
+                      : '3vw solid #ffffff',
                   }}
-                  boxSize="90%"
+                  boxSize="85%"
                   borderRadius="full"
                   display="flex"
                   alignItems="center"
@@ -142,21 +150,25 @@ const SaturateVision = () => {
                   <Center
                     display="flex"
                     flexDirection="column"
-                    w="80%"
+                    w="65%"
                     alignItems="center"
                     justifyContent="center"
                   >
                     <Text
-                      fontWeight={700}
                       color="#0053A4"
-                      fontSize={55}
-                      lineHeight="90%"
+                      fontSize={90}
+                      lineHeight="85%"
+                      fontFamily="DarkerGrotesque"
                     >
                       THE VALUES
                     </Text>
-                    <Text>
-                      To FILL Hong Kong with the knowledge of the glory of the
-                      Lord
+                    <Text fontSize={20} fontFamily="Be-Vietnam">
+                      To
+                      <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
+                        {' '}
+                        FILL{' '}
+                      </span>{' '}
+                      Hong Kong with the knowledge of the glory of the Lord
                     </Text>
                   </Center>
                 </Box>
@@ -165,173 +177,181 @@ const SaturateVision = () => {
           </Box>
         </Box>
 
-        <Stack
-          w="50%"
+        <Box
+          w={800}
           color="black"
           display="flex"
+          flexDirection="column"
           alignItems="center"
           justifyContent="center"
         >
           <Flex
-            gap={0}
             h={20}
+            w={1200}
             display="flex"
             alignItems="center"
-            justifyContent="center"
-            marginTop={['-65%', '-75%', '-70%', '-60%', '-30%']}
-            marginLeft={['-25%', '-20%', '-15%', '-13%', '-10%']}
+            justifyContent="left"
+            marginTop="-45%"
+            marginLeft="30%"
+            transition="opacity 1s ease-in"
+            style={{
+              opacity: fillPosition ? 1 : 0,
+            }}
           >
             <Box
-              w={['60px', '65px', '70px', '75px', '80px']}
-              h={['60px', '65px', '70px', '75px', '80px']}
-              borderRadius="50%"
+              w="8%"
+              h="130%"
+              borderRadius="full"
               bgColor="#0053A4"
-              transform="translate(10%, 0%)"
               display="flex"
               alignItems="center"
               justifyContent="center"
-              fontSize={[40, 15, 30, 30, 40]}
-              fontWeight={700}
+              fontSize={[40, 15, 30, 30, 90]}
               color="white"
+              fontFamily="DarkerGrotesque"
             >
               F
             </Box>
             <Box
-              w={380}
+              w={500}
               h={2}
+              borderRadius={'0 20px 20px 0'}
               bgColor="#0053A4"
-              transform="translate(-5%, 0%)"
               display="flex"
               alignItems="center"
               justifyContent="center"
             />
-            <Text fontSize={[20, 20, 30, 35, 40]} fontWeight={700}>
-              FOUNDATIONS (disciples)
-            </Text>
+
+            <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
+              <span /> <Text fontFamily="DarkerGrotesque">FOUNDATIONS</Text>
+              <Text fontFamily="DarkerGrotesque_Normal">(disciples)</Text>
+            </Flex>
           </Flex>
           <Flex
             h={20}
+            w={1200}
             display="flex"
             alignItems="center"
-            justifyContent="center"
-            marginTop={['-65%', '-75%', '-70%', '-60%', '-30%']}
-            // marginLeft={['-25%', '-20%', '-15%', '-13%', '-10%']}
+            justifyContent="left"
+            marginLeft="65%"
+            transition="opacity 2s ease-in"
+            style={{
+              opacity: impactPosition ? 1 : 0,
+            }}
           >
             <Box
-              w={['60px', '65px', '70px', '75px', '80px']}
-              h={['60px', '65px', '70px', '75px', '80px']}
-              top="50%"
-              transform="translate(-30%, 0%)"
-              borderRadius="50%"
+              w="8%"
+              h="130%"
+              borderRadius="full"
               bgColor="#3B8AD7"
               display="flex"
               alignItems="center"
               justifyContent="center"
-              fontSize={[40, 15, 30, 30, 40]}
-              fontWeight={700}
+              fontSize={[40, 15, 30, 30, 90]}
               color="white"
+              fontFamily="DarkerGrotesque"
             >
               I
             </Box>
             <Box
-              w={240}
+              w={360}
               h={2}
-              transform="translate(-10%, 0%)"
+              borderRadius={'0 20px 20px 0'}
               bgColor="#3B8AD7"
               display="flex"
               alignItems="center"
               justifyContent="center"
             />
-            <Text
-              fontSize={[20, 20, 30, 35, 40]}
-              transform="translate(0%, 0%)"
-              fontWeight={700}
-            >
-              IMPACT (microchurches)
-            </Text>
+
+            <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
+              <span /> <Text fontFamily="DarkerGrotesque">IMPACT</Text>
+              <Text fontFamily="DarkerGrotesque_Normal">(microchurches)</Text>
+            </Flex>
           </Flex>
           <Flex
             h={20}
+            w={1200}
             display="flex"
             alignItems="center"
-            justifyContent="center"
-            marginTop={['-65%', '-75%', '-70%', '-60%', '-30%']}
-            // marginLeft={['-20%', '-20%', '-20%', '-20%', '-20%']}
+            justifyContent="left"
+            marginLeft="95%"
+            transition="opacity 3s ease-in"
+            style={{
+              opacity: linkPosition ? 1 : 0,
+            }}
           >
             <Box
-              w={['60px', '65px', '70px', '75px', '80px']}
-              h={['60px', '65px', '70px', '75px', '80px']}
-              top="50%"
-              transform="translate(80%, 0%)"
-              borderRadius="50%"
+              w="8%"
+              h="130%"
+              borderRadius="full"
               bgColor="#81B1E1"
               display="flex"
               alignItems="center"
               justifyContent="center"
-              fontSize={[40, 15, 30, 30, 40]}
-              fontWeight={700}
+              fontSize={[40, 15, 30, 30, 90]}
               color="white"
+              fontFamily="DarkerGrotesque"
             >
               L
             </Box>
             <Box
               w={240}
               h={2}
-              //   transform="translate(0%, 0%)"
+              borderRadius={'0 20px 20px 0'}
               bgColor="#81B1E1"
               display="flex"
               alignItems="center"
               justifyContent="center"
             />
-            <Text
-              fontSize={[20, 20, 30, 35, 40]}
-              transform="translate(3%, 0%)"
-              fontWeight={700}
-            >
-              LINK UP (district churches)
-            </Text>
+
+            <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
+              <span /> <Text fontFamily="DarkerGrotesque">LINK UP</Text>
+              <Text fontFamily="DarkerGrotesque_Normal">
+                (district churches)
+              </Text>
+            </Flex>
           </Flex>
           <Flex
-            gap={0}
-            h={10}
+            h={20}
+            w={1200}
             display="flex"
             alignItems="center"
-            justifyContent="center"
+            justifyContent="left"
+            marginLeft="125%"
+            transition="opacity 3s ease-in"
+            style={{
+              opacity: launchPosition ? 1 : 0,
+            }}
           >
             <Box
-              w={['60px', '65px', '70px', '75px', '80px']}
-              h={['60px', '65px', '70px', '75px', '80px']}
-              top="50%"
-              transform="translate(-50%, 0%)"
-              borderRadius="50%"
+              w="8%"
+              h="130%"
+              borderRadius="full"
               bgColor="#C3E0FD"
               display="flex"
               alignItems="center"
               justifyContent="center"
-              fontSize={[40, 15, 30, 30, 40]}
-              fontWeight={700}
+              fontSize={[40, 15, 30, 30, 90]}
               color="white"
+              fontFamily="DarkerGrotesque"
             >
               L
             </Box>
             <Box
-              w={110}
+              w={114}
               h={2}
-              transform="translate(-37%, 0%)"
+              borderRadius={'0 20px 20px 0'}
               bgColor="#C3E0FD"
               display="flex"
               alignItems="center"
               justifyContent="center"
             />
-            <Text
-              fontSize={[20, 20, 30, 35, 40]}
-              transform="translate(-9%, 0%)"
-              fontWeight={700}
-            >
-              LAUNCH (hubs)
-            </Text>
+            <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
+              <span /> <Text fontFamily="DarkerGrotesque">LAUNCH</Text>
+              <Text fontFamily="DarkerGrotesque_Normal">(hubs)</Text>
+            </Flex>
           </Flex>
-        </Stack>
+        </Box>
       </HStack>
     </Container>
   );
