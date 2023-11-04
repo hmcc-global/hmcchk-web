@@ -144,7 +144,7 @@ const RippleOutStoryContainer = () => {
       <RippleOutHeroSection />
       <Flex
         flexDir="column"
-        background="linear-gradient(180deg, #F0F5FF 10.74%, #E9F6FF 22.35%, #FFFAEC 99.87%)"
+        bgGradient="linear(120deg, rgba(132,225,255,0.5), rgba(197,230,212,0.5), rgba(255,235,174,0.5));"
         py={['1.8em', '4em']}
         color={fontColor}
       >
