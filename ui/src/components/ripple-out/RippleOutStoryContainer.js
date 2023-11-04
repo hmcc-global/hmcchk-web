@@ -21,8 +21,9 @@ import { useState } from 'react';
 
 const RippleOutStoryContainer = () => {
   const [slideIndex, setSlideIndex] = useState(0);
-  const [isMobile, isSmallTablet, isMediumTablet, isLargeTablet, isDesktop] = useMediaQuery([
-    '(max-width : 400px)',
+  const [isMobile, isBigMobile, isSmallTablet, isMediumTablet, isLargeTablet, isDesktop] = useMediaQuery([
+    '(max-width : 410px)',
+    '(max-width : 500px)',
     '(max-width : 800px)',
     '(max-width : 950px)',
     '(max-width : 1400px)',
@@ -38,6 +39,8 @@ const RippleOutStoryContainer = () => {
           position: 'absolute',
           right: isMobile
             ? '-11%'
+            : isBigMobile
+            ? '-10%'
             : isSmallTablet
             ? '2.5%'
             : isMediumTablet
@@ -47,6 +50,8 @@ const RippleOutStoryContainer = () => {
             : '10%',
           top: isMobile
             ? '9%'
+            : isBigMobile
+            ? '12%'
             : isSmallTablet
             ? '17.5%'
             : isMediumTablet
@@ -75,17 +80,20 @@ const RippleOutStoryContainer = () => {
         style={{
           display: 'block',
           position: 'absolute',
-          left: isMobile
-            ? '0%'
-            : isSmallTablet
-            ? '5%'
-            : isMediumTablet
-            ? '3%'
-            : isLargeTablet
-            ? '6.5%'
-            : '11.5%',
+          left:
+            isMobile || isBigMobile
+              ? '0%'
+              : isSmallTablet
+              ? '5%'
+              : isMediumTablet
+              ? '3%'
+              : isLargeTablet
+              ? '6.5%'
+              : '11.5%',
           top: isMobile
             ? '9%'
+            : isBigMobile
+            ? '12%'
             : isSmallTablet
             ? '17.5%'
             : isMediumTablet
@@ -135,9 +143,8 @@ const RippleOutStoryContainer = () => {
     <>
       <RippleOutHeroSection />
       <Flex
-        minH="100%"
         flexDir="column"
-        bgGradient="linear(120deg, rgba(132,225,255,0.5), rgba(197,230,212,0.5), rgba(255,235,174,0.5));"
+        background="linear-gradient(180deg, #F0F5FF 10.74%, #E9F6FF 22.35%, #FFFAEC 99.87%)"
         py={['1.8em', '4em']}
         color={fontColor}
       >
@@ -145,12 +152,17 @@ const RippleOutStoryContainer = () => {
           maxW={['container.xl']}
           h="100%"
           textStyle="darker_grotesque"
-          w={'100%'}
           px={isDesktop ? '' : '0'}
         >
-          <Text px={'0.5em'} fontSize={headerFontSize} fontWeight={800}>
+          <Text
+            fontSize={headerFontSize}
+            textStyle="darker_grotesque_black"
+            lineHeight="0.9em"
+            px={['0.4em', '0.25em']}
+          >
             THE STORY
           </Text>
+
           <VStack px={'1em'} mt={['2.5em', '5em']} textAlign="center">
             <Text
               fontSize={['2.25em', '2.75em', '3.25em', '3.75em', '4.25em']}
