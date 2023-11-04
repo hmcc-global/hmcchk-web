@@ -33,7 +33,6 @@ const RippleOutHeroSection = () => {
   };
 
   const getCurrentPage = (path) => {
-    console.log(path);
     if (path.includes('/steps')) {
       return 'THE STEPS';
     }
