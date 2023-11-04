@@ -38,7 +38,7 @@ const RippleOutHeroSection = () => {
       {/* Hero section - desktop */}
       <Box
         w="full"
-        h="100%"
+        h="60vh"
         bgImage={`url(${process.env.PUBLIC_URL}/images/ripple-out/ripple-out-hero.png)`}
         bgSize="cover"
         bgPos={['right', 'center']}
@@ -50,19 +50,19 @@ const RippleOutHeroSection = () => {
             flexDirection="column"
             justifyContent="space-between"
           >
-            <HStack paddingTop="40px" />
+            <HStack paddingTop="100px" />
             <Flex w="100%" flexDir="column" color="#ffffff">
               <Text
                 textStyle="darker_grotesque_bold"
                 fontWeight="900"
-                fontSize={['4em', '8em', '8em', '14em']}
+                fontSize={['4em', '8em', '8em', '12em']}
                 lineHeight={['1em', '0em']}
               >
                 RIPPLE OUT
               </Text>
               <Text
                 textStyle="darker_grotesque"
-                fontSize={['3em', '6em', '6em', '12em']}
+                fontSize={['3em', '6em', '6em', '10em']}
               >
                 CAMPAIGN
               </Text>
