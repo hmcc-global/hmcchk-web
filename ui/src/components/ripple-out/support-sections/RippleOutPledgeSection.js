@@ -1,9 +1,5 @@
-import { Flex, Link, Text, VStack } from '@chakra-ui/react';
-import {
-  subHeaderFontSize,
-  bodyFontSize,
-  fontColor,
-} from '../RippleOutTextStyle';
+import { Flex, Text, VStack } from '@chakra-ui/react';
+import { subHeaderFontSize, bodyFontSize } from '../RippleOutTextStyle';
 
 const RippleOutPledgeSection = ({ pledgeData }) => {
   const data = pledgeData.content;
@@ -16,7 +12,7 @@ const RippleOutPledgeSection = ({ pledgeData }) => {
             textStyle="darker_grotesque_black"
             lineHeight="0.9em"
           >
-            PLEDGE TO THE CAMPAIGN
+            PLEDGES FOR THE CAMPAIGN
           </Text>
           {data.map((text, i) => {
             return (
@@ -32,30 +28,6 @@ const RippleOutPledgeSection = ({ pledgeData }) => {
               </VStack>
             );
           })}
-
-          <Text fontSize={bodyFontSize}>
-            Pledge your support to the Ripple Out Campaign by filling out this
-            form
-          </Text>
-          <Link
-            fontSize={bodyFontSize}
-            color={fontColor}
-            textStyle="darker_grotesque_black"
-            lineHeight="0.9em"
-            variant="outline"
-            fontWeight={700}
-            border="1px solid #000000"
-            borderRadius={10}
-            padding="0.5em"
-            href="https://bit.ly/ripple-pledge"
-            style={{
-              textDecoration: 'none',
-            }}
-            _hover={{ background: '#E1EAF0' }}
-            isExternal
-          >
-            SUBMIT YOUR PLEDGE
-          </Link>
         </VStack>
       </Flex>
     </>
