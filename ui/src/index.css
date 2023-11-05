@@ -24,3 +24,9 @@ code {
   src: local('Manrope'), url('./font/Manrope.ttf') format('truetype');
   font-weight: normal;
 }
+
+/* override for react slick dots */
+.slick-dots li button:before
+{
+    font-size: 15px;
+}
