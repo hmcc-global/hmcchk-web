@@ -221,7 +221,6 @@ const RippleOutSpaceContainer = () => {
                   />
                   <Text textStyle="darker_grotesque_semibold" fontSize="lg">
                     a function room for ministry gatherings and training classes
-                    an office for pastoral staff
                   </Text>
                 </VStack>
               }
@@ -248,7 +247,6 @@ const RippleOutSpaceContainer = () => {
                     src={`${process.env.PUBLIC_URL}/images/ripple-out/ripple-out-offices.png`}
                   />
                   <Text textStyle="darker_grotesque_semibold" fontSize="lg">
-                    a function room for ministry gatherings and training classes
                     an office for pastoral staff
                   </Text>
                 </VStack>
