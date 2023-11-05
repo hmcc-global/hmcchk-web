@@ -48,6 +48,12 @@ code {
   font-weight: normal;
 }
 
+/* override for react slick dots */
+.slick-dots li button:before
+{
+    font-size: 15px;
+}
+
 #easter-2024-theme {
   scroll-margin-top: 50px;
 }
