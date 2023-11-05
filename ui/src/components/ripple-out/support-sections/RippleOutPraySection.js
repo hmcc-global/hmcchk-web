@@ -6,8 +6,6 @@ import {
   subHeaderFontSize,
 } from '../RippleOutTextStyle';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
 const RippleOutPraySection = ({ prayerData }) => {
   const data = prayerData.content;
@@ -58,7 +56,7 @@ const RippleOutPraySection = ({ prayerData }) => {
                     w="100%"
                     display="flex"
                     alignItems="flex-start"
-                    padding="0px 10px"
+                    padding="10px 10px"
                   >
                     <Text
                       fontSize={subHeaderFontSize}

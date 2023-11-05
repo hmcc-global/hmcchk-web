@@ -21,8 +21,6 @@ import {
 } from '../RippleOutTextStyle';
 import RippleOutCalculatorSection from './RippleOutCalculatorSection';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
 const RippleOutGiveSection = ({ giveData }) => {
   const data = giveData.content;

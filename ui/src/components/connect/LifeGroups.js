@@ -14,8 +14,6 @@ import {
 import LifeGroupCard from './LifeGroupCard';
 import lifeGroupList from './lifegroups.json';
 import OurMinistries from './OurMinistries';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import './_connect.scss';
 
 const LifeGroups = (props) => {
