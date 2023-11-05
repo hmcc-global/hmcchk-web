@@ -1,9 +1,7 @@
 import {
   Box,
   Container,
-  ListItem,
   Text,
-  UnorderedList,
   Flex,
   Center,
   Image,
@@ -85,7 +83,7 @@ const RippleOutSpaceContainer = () => {
                     w="6em"
                     h="3em"
                     textStyle="darker_grotesque_semibold"
-                    fontSize="lg"
+                    fontSize={['1.1em', 'xl']}
                   >
                     Crocodile Center
                   </Box>
@@ -149,13 +147,13 @@ const RippleOutSpaceContainer = () => {
               placement="top"
             >
               <Box
-                top={['-6vh', '-14vh']}
-                left={['-30vw', '-18vw']}
+                bottom={['6.25vh', '16vh']}
+                right={['28.5vw', '16.5vw']}
                 position="relative"
                 style={dotStyle}
                 backgroundColor="#34486F"
-                height={['10px', '20px']}
-                width={['10px', '20px']}
+                height={['12.5px', '25px']}
+                width={['12.5px', '25px']}
               />
             </Tippy>
             <Tippy
@@ -175,14 +173,14 @@ const RippleOutSpaceContainer = () => {
               placement="top"
             >
               <Box
-                top={['-6vh', '-10vh']}
-                left={['5vw', '4vw']}
+                top={['-4.5vh', '-11vh']}
+                left={['9vw', '5vw']}
                 position="relative"
                 style={dotStyle}
                 backgroundColor="#34486F"
                 textStyle="darker_grotesque_semibold"
-                height={['10px', '20px']}
-                width={['10px', '20px']}
+                height={['12.5px', '25px']}
+                width={['12.5px', '25px']}
               />
             </Tippy>
             <Tippy
@@ -202,14 +200,14 @@ const RippleOutSpaceContainer = () => {
               placement="top"
             >
               <Box
-                top={['5vh', '12vh']}
-                left={['-11vw', '-6vw']}
+                top={['5vh', '13.5vh']}
+                right={['11vw', '6.5vw']}
                 position="relative"
                 style={dotStyle}
                 backgroundColor="#34486F"
                 textStyle="darker_grotesque_semibold"
-                height={['10px', '20px']}
-                width={['10px', '20px']}
+                height={['12.5px', '25px']}
+                width={['12.5px', '25px']}
               />
             </Tippy>
             <Tippy
@@ -230,14 +228,14 @@ const RippleOutSpaceContainer = () => {
               placement="top"
             >
               <Box
-                top={['7vh', '16vh']}
-                left={['7vw', '5vw']}
+                top={['6.5vh', '18.5vh']}
+                left={['7vw', '4vw']}
                 position="relative"
                 style={dotStyle}
                 backgroundColor="#34486F"
                 textStyle="darker_grotesque_semibold"
-                height={['10px', '20px']}
-                width={['10px', '20px']}
+                height={['12.5px', '25px']}
+                width={['12.5px', '25px']}
               />
             </Tippy>
             <Tippy
@@ -258,14 +256,14 @@ const RippleOutSpaceContainer = () => {
               placement="top"
             >
               <Box
-                top={['7vh', '16vh']}
-                left={['22vw', '14vw']}
+                top={['6.5vh', '17.5vh']}
+                left={['21vw', '12.25vw']}
                 position="relative"
                 style={dotStyle}
                 backgroundColor="#34486F"
                 textStyle="darker_grotesque_semibold"
-                height={['10px', '20px']}
-                width={['10px', '20px']}
+                height={['12.5px', '25px']}
+                width={['12.5px', '25px']}
               />
             </Tippy>
           </Center>
