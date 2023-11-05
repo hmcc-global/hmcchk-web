@@ -37,7 +37,7 @@ code {
   font-family: 'DarkerGrotesque';
   src: local('DarkerGrotesque'),
     url('./font/DarkerGrotesque.ttf') format('truetype');
-  font-weight: bold;
+  font-weight: 900;
 }
 
 @font-face {
