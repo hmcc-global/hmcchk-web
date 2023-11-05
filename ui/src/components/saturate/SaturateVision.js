@@ -3,10 +3,9 @@ import {
   Box,
   Center,
   Container,
+  Flex,
   Grid,
   GridItem,
-  Flex,
-  HStack,
   Stack,
   Text,
 } from '@chakra-ui/react';
@@ -26,7 +25,6 @@ const SaturateVision = () => {
     const handleScroll = () => {
       yPos.current = position.scrollTop;
       windowWidth.current = window.innerWidth;
-      console.log('width: ', windowWidth.current);
 
       if (position.scrollTop > 500) {
         setFillPosition(true);
@@ -42,7 +40,6 @@ const SaturateVision = () => {
       }
 
       if (window.innerWidth < 750) {
-        console.log('TRUE');
         setIsMobile(true);
       } else {
         setIsMobile(false);
@@ -176,6 +173,10 @@ const SaturateVision = () => {
                     top="10%"
                     left="70%"
                     position="absolute"
+                    transition="opacity 1s ease-in"
+                    style={{
+                      opacity: fillPosition ? 1 : 0,
+                    }}
                   >
                     <Box
                       w="9%"
@@ -218,6 +219,10 @@ const SaturateVision = () => {
                   position="absolute"
                   top="30%"
                   left="85%"
+                  transition="opacity 2s ease-in"
+                  style={{
+                    opacity: impactPosition ? 1 : 0,
+                  }}
                 >
                   <Box
                     w="9%"
@@ -259,6 +264,10 @@ const SaturateVision = () => {
                 position="absolute"
                 top="43%"
                 left="90%"
+                transition="opacity 3s ease-in"
+                style={{
+                  opacity: linkPosition ? 1 : 0,
+                }}
               >
                 <Box
                   w="13%"
@@ -302,6 +311,10 @@ const SaturateVision = () => {
               position="absolute"
               top={['30%', '30%', '34%', '34%', '34%', '34%']}
               left="93%"
+              transition="opacity 4s ease-in"
+              style={{
+                opacity: launchPosition ? 1 : 0,
+              }}
             >
               <Box
                 w="15%"
@@ -334,7 +347,7 @@ const SaturateVision = () => {
           </Box>
         </Stack>
       ) : (
-        <Box>
+        <Stack>
           <Box
             bgColor="#0053A4"
             bgImage={
@@ -370,225 +383,219 @@ const SaturateVision = () => {
               </GridItem>
             </Grid>
           </Box>
-          <Box h={10} bgColor="#ffffff" />
-          <HStack
-            h={[500, 600, 600, 950, 1000, 1100]}
-            overflow="hidden"
-            alignItems="left"
-            spacing="-20%"
+          <Stack h={7} bgColor="#ffffff" />
+          <Box
+            w="55%"
+            h={[500, 700, 900, 800, 1000, 1200]}
+            position="relative"
+            overflowY="clip"
           >
-            <Box>
+            <Box
+              marginTop="-29%"
+              marginLeft="-20%"
+              transition="border 4s ease-in"
+              style={{
+                border: launchPosition
+                  ? '3vw solid #C3E0FD'
+                  : '3vw solid #ffffff',
+              }}
+              h={['70%', '70%', '70%', '85%', '100%', '110%']}
+              borderRadius="full"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              position="relative"
+            >
               <Box
-                marginTop="-20%"
-                marginLeft="-20%"
-                transition="border 4s ease-in"
+                transition="border 3s ease-in"
                 style={{
-                  border: launchPosition
-                    ? '3vw solid #C3E0FD'
+                  border: linkPosition
+                    ? '3vw solid #81B1E1'
                     : '3vw solid #ffffff',
                 }}
-                w={['170%', '170%', '150%', '140%', '130%', '120%']}
-                h={['70%', '70%', '70%', '85%', '110%', '118%']}
+                boxSize="90%"
                 borderRadius="full"
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
+                position="relative"
               >
                 <Box
-                  transition="border 3s ease-in"
+                  transition="border 2s ease-in"
                   style={{
-                    border: linkPosition
-                      ? '3vw solid #81B1E1'
+                    border: impactPosition
+                      ? '3vw solid #3B8AD7'
                       : '3vw solid #ffffff',
                   }}
-                  boxSize="90%"
+                  boxSize="87%"
                   borderRadius="full"
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
+                  position="relative"
                 >
                   <Box
-                    transition="border 2s ease-in"
+                    transition="border 1s ease-in"
                     style={{
-                      border: impactPosition
-                        ? '3vw solid #3B8AD7'
+                      border: fillPosition
+                        ? '3vw solid #0053A4'
                         : '3vw solid #ffffff',
                     }}
-                    boxSize="87%"
+                    boxSize="85%"
                     borderRadius="full"
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
+                    position="absolute"
+                    p={20}
                   >
-                    <Box
-                      transition="border 1s ease-in"
-                      style={{
-                        border: fillPosition
-                          ? '3vw solid #0053A4'
-                          : '3vw solid #ffffff',
-                      }}
-                      boxSize="85%"
-                      borderRadius="full"
+                    <Center
                       display="flex"
+                      flexDirection="column"
                       alignItems="center"
                       justifyContent="center"
                     >
-                      <Center
-                        display="flex"
-                        flexDirection="column"
-                        // w="65%"
-                        alignItems="center"
-                        justifyContent="center"
+                      <Text
+                        color="#0053A4"
+                        fontSize={[20, 20, 55, 65, 80, 90]}
+                        lineHeight="85%"
+                        fontFamily="DarkerGrotesque"
                       >
-                        <Text
-                          color="#0053A4"
-                          fontSize={[20, 20, 20, 30, 30, 90]}
-                          lineHeight="85%"
-                          fontFamily="DarkerGrotesque"
-                        >
-                          THE VALUES
-                        </Text>
-                        <Text
-                          fontSize={[10, 10, 10, 15, 20, 20]}
-                          fontFamily="Be-Vietnam"
-                        >
-                          To
-                          <span
-                            style={{ color: '#0053A4', fontWeight: 'bold' }}
-                          >
-                            {' '}
-                            FILL{' '}
-                          </span>{' '}
-                          Hong Kong with the knowledge of the glory of the Lord
-                        </Text>
-                      </Center>
-                    </Box>
+                        THE VALUES
+                      </Text>
+                      <Text
+                        fontSize={[10, 10, 15, 15, 20, 20]}
+                        fontFamily="Be-Vietnam"
+                      >
+                        To
+                        <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
+                          {' '}
+                          FILL{' '}
+                        </span>{' '}
+                        Hong Kong with the knowledge of the glory of the Lord
+                      </Text>
+                    </Center>
                   </Box>
+                  <Flex
+                    h={20}
+                    display="flex"
+                    position="absolute"
+                    alignItems="center"
+                    justifyContent="center"
+                    top="22%"
+                    left="75%"
+                    transition="opacity 1s ease-in"
+                    style={{
+                      opacity: fillPosition ? 1 : 0,
+                    }}
+                  >
+                    <Box
+                      w={['6%', '10%', '8%', '8%', '10%', '12%']}
+                      h={['100%', '60%', '80%', '90%', '100%', '130%']}
+                      borderRadius="full"
+                      bgColor="#0053A4"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      fontSize={[80, 60, 70, 80, 80, 90]}
+                      color="white"
+                      fontFamily="DarkerGrotesque"
+                    >
+                      F
+                    </Box>
+                    <Box
+                      w={[400, 200, 300, 350, 500, 590]}
+                      h={2}
+                      borderRadius={'0 20px 20px 0'}
+                      bgColor="#0053A4"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                    />
+
+                    <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
+                      <span />{' '}
+                      <Text fontFamily="DarkerGrotesque">FOUNDATIONS</Text>
+                      <Text fontFamily="DarkerGrotesque_Normal">
+                        (disciples)
+                      </Text>
+                    </Flex>
+                  </Flex>
                 </Box>
+                <Flex
+                  h={20}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  position="absolute"
+                  top="40%"
+                  left="85%"
+                  transition="opacity 2s ease-in"
+                  style={{
+                    opacity: impactPosition ? 1 : 0,
+                  }}
+                >
+                  <Box
+                    w={['6%', '12%', '12%', '12%', '10%', '12%']}
+                    h={['100%', '60%', '80%', '100%', '100%', '130%']}
+                    borderRadius="full"
+                    bgColor="#3B8AD7"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    fontSize={[80, 60, 70, 80, 90]}
+                    color="white"
+                    fontFamily="DarkerGrotesque"
+                  >
+                    I
+                  </Box>
+                  <Box
+                    w={[400, 145, 220, 260, 390, 445]}
+                    h={2}
+                    borderRadius={'0 20px 20px 0'}
+                    bgColor="#3B8AD7"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  />
+
+                  <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
+                    <span /> <Text fontFamily="DarkerGrotesque">IMPACT</Text>
+                    <Text fontFamily="DarkerGrotesque_Normal">
+                      (microchurches)
+                    </Text>
+                  </Flex>
+                </Flex>
               </Box>
-            </Box>
-
-            <Box
-              w={800}
-              color="black"
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              justifyContent="center"
-            >
               <Flex
                 h={20}
-                w={1200}
                 display="flex"
                 alignItems="center"
-                justifyContent="left"
-                marginTop="-45%"
-                marginLeft={['30%', '30%', '50%', '70%', '40%', '30%']}
-                transition="opacity 1s ease-in"
-                style={{
-                  opacity: fillPosition ? 1 : 0,
-                }}
-              >
-                <Box
-                  w={['6%', '6%', '6%', '6%', '6%', '8%']}
-                  h={['100%', '100%', '100%', '100%', '100%', '130%']}
-                  borderRadius="full"
-                  bgColor="#0053A4"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  fontSize={[80, 80, 80, 80, 80, 90]}
-                  color="white"
-                  fontFamily="DarkerGrotesque"
-                >
-                  F
-                </Box>
-                <Box
-                  w={[400, 400, 400, 400, 400, 500]}
-                  h={2}
-                  borderRadius={'0 20px 20px 0'}
-                  bgColor="#0053A4"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                />
-
-                <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
-                  <span /> <Text fontFamily="DarkerGrotesque">FOUNDATIONS</Text>
-                  <Text fontFamily="DarkerGrotesque_Normal">(disciples)</Text>
-                </Flex>
-              </Flex>
-              <Flex
-                h={20}
-                w={1200}
-                display="flex"
-                alignItems="center"
-                justifyContent="left"
-                marginLeft="65%"
-                transition="opacity 2s ease-in"
-                style={{
-                  opacity: impactPosition ? 1 : 0,
-                }}
-              >
-                <Box
-                  w="8%"
-                  h="130%"
-                  borderRadius="full"
-                  bgColor="#3B8AD7"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  fontSize={[40, 15, 30, 30, 90]}
-                  color="white"
-                  fontFamily="DarkerGrotesque"
-                >
-                  I
-                </Box>
-                <Box
-                  w={360}
-                  h={2}
-                  borderRadius={'0 20px 20px 0'}
-                  bgColor="#3B8AD7"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                />
-
-                <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
-                  <span /> <Text fontFamily="DarkerGrotesque">IMPACT</Text>
-                  <Text fontFamily="DarkerGrotesque_Normal">
-                    (microchurches)
-                  </Text>
-                </Flex>
-              </Flex>
-              <Flex
-                h={20}
-                w={1200}
-                display="flex"
-                alignItems="center"
-                justifyContent="left"
-                marginLeft="95%"
+                justifyContent="center"
+                position="absolute"
+                top="50%"
+                left="88%"
                 transition="opacity 3s ease-in"
                 style={{
                   opacity: linkPosition ? 1 : 0,
                 }}
               >
                 <Box
-                  w="8%"
-                  h="130%"
+                  w={['6%', '7%', '9%', '10%', '10%', '13%']}
+                  h={['100%', '60%', '80%', '90%', '100%', '120%']}
                   borderRadius="full"
                   bgColor="#81B1E1"
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
-                  fontSize={[40, 15, 30, 30, 90]}
+                  fontSize={[80, 60, 70, 80, 90]}
                   color="white"
                   fontFamily="DarkerGrotesque"
                 >
                   L
                 </Box>
                 <Box
-                  w={240}
+                  w={[400, 85, 130, 160, 270, 285]}
                   h={2}
                   borderRadius={'0 20px 20px 0'}
                   bgColor="#81B1E1"
@@ -597,56 +604,57 @@ const SaturateVision = () => {
                   justifyContent="center"
                 />
 
-                <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
+                <Flex width="500px" fontSize={[20, 20, 30, 35, 40]} gap={3}>
                   <span /> <Text fontFamily="DarkerGrotesque">LINK UP</Text>
                   <Text fontFamily="DarkerGrotesque_Normal">
                     (district churches)
                   </Text>
                 </Flex>
               </Flex>
-              <Flex
-                h={20}
-                w={1200}
+            </Box>
+            <Flex
+              h={20}
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              position="absolute"
+              transition="opacity 4s ease-in"
+              style={{
+                opacity: launchPosition ? 1 : 0,
+              }}
+              top={['50%', '25%', '28%', '30%', '25%', '35%']}
+              left={['90%', '90%', '90%', '90%', '92%', '92%']}
+            >
+              <Box
+                w={['10%', '15%', '21%', '25%', '17%', '18%']}
+                h={['60%', '60%', '80%', '90%', '100%', '120%']}
+                borderRadius="full"
+                bgColor="#C3E0FD"
                 display="flex"
                 alignItems="center"
-                justifyContent="left"
-                marginLeft="125%"
-                transition="opacity 3s ease-in"
-                style={{
-                  opacity: launchPosition ? 1 : 0,
-                }}
+                justifyContent="center"
+                fontSize={[80, 60, 70, 80, 90]}
+                color="white"
+                fontFamily="DarkerGrotesque"
               >
-                <Box
-                  w="8%"
-                  h="130%"
-                  borderRadius="full"
-                  bgColor="#C3E0FD"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  fontSize={[40, 15, 30, 30, 90]}
-                  color="white"
-                  fontFamily="DarkerGrotesque"
-                >
-                  L
-                </Box>
-                <Box
-                  w={114}
-                  h={2}
-                  borderRadius={'0 20px 20px 0'}
-                  bgColor="#C3E0FD"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                />
-                <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
-                  <span /> <Text fontFamily="DarkerGrotesque">LAUNCH</Text>
-                  <Text fontFamily="DarkerGrotesque_Normal">(hubs)</Text>
-                </Flex>
+                L
+              </Box>
+              <Box
+                w={[10, 55, 100, 120, 120, 200]}
+                h={2}
+                borderRadius={'0 20px 20px 0'}
+                bgColor="#C3E0FD"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              />
+              <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
+                <span /> <Text fontFamily="DarkerGrotesque">LAUNCH</Text>
+                <Text fontFamily="DarkerGrotesque_Normal">(hubs)</Text>
               </Flex>
-            </Box>
-          </HStack>
-        </Box>
+            </Flex>
+          </Box>
+        </Stack>
       )}
     </Container>
   );
