@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
   Box,
-  Center,
   Container,
   Flex,
   Grid,
@@ -11,6 +10,11 @@ import {
 } from '@chakra-ui/react';
 
 const SaturateVision = () => {
+  const [stopTransition, setStopTransition] = useState(false);
+
+  const handleTransitionEnd = () => {
+    setStopTransition(true);
+  };
   const [fillPosition, setFillPosition] = useState(false);
   const [impactPosition, setImpactPosition] = useState(false);
   const [linkPosition, setLinkPosition] = useState(false);
@@ -84,14 +88,14 @@ const SaturateVision = () => {
           <Stack p={5}>
             <Text
               color="#0053A4"
-              fontSize={70}
+              fontSize="10vw"
               lineHeight="85%"
               fontFamily="DarkerGrotesque"
             >
               THE <br />
               VALUES
             </Text>
-            <Text fontSize={20} fontFamily="Be-Vietnam">
+            <Text fontSize="4vw" fontFamily="Be-Vietnam">
               To
               <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                 {' '}
@@ -101,17 +105,11 @@ const SaturateVision = () => {
             </Text>
           </Stack>
 
-          <Box
-            w="55%"
-            h={[320, 500, 500, 600, 650, 700]}
-            position="relative"
-            overflowY="clip"
-          >
+          <Box w="50%" position="relative" overflowY="clip">
             <Box
-              h={['90%', '110%', '120%', '50%', '35%', '35%']}
               marginLeft="-50%"
               marginTop="-30%"
-              transition="border 4s ease-in"
+              transition={stopTransition ? 'none' : 'border 4s ease-in'}
               style={{
                 border: launchPosition
                   ? '3vw solid #C3E0FD'
@@ -122,65 +120,65 @@ const SaturateVision = () => {
               alignItems="center"
               justifyContent="center"
               position="relative"
+              p="3vw"
             >
               <Box
-                transition="border 3s ease-in"
+                transition={stopTransition ? 'none' : 'border 3s ease-in'}
                 style={{
                   border: linkPosition
                     ? '3vw solid #81B1E1'
                     : '3vw solid #ffffff',
                 }}
-                boxSize="90%"
                 borderRadius="full"
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
                 position="relative"
+                p="4vw"
               >
                 <Box
-                  transition="border 2s ease-in"
+                  transition={stopTransition ? 'none' : 'border 2s ease-in'}
                   style={{
                     border: impactPosition
                       ? '3vw solid #3B8AD7'
                       : '3vw solid #ffffff',
                   }}
-                  boxSize="87%"
                   borderRadius="full"
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
                   position="relative"
+                  p="21vw"
                 >
                   <Box
-                    transition="border 1s ease-in"
+                    transition={stopTransition ? 'none' : 'border 1s ease-in'}
                     style={{
                       border: fillPosition
                         ? '3vw solid #0053A4'
                         : '3vw solid #ffffff',
                     }}
-                    boxSize="85%"
                     borderRadius="full"
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
                     position="absolute"
+                    p="15vw"
                   />
                   <Flex
                     h={10}
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
-                    top="10%"
+                    top="14%"
                     left="70%"
                     position="absolute"
-                    transition="opacity 1s ease-in"
+                    transition={stopTransition ? 'none' : 'opacity 1s ease-in'}
                     style={{
                       opacity: fillPosition ? 1 : 0,
                     }}
                   >
                     <Box
-                      w="9%"
-                      h="100%"
+                      boxSize="5vw"
                       borderRadius="full"
                       bgColor="#0053A4"
                       display="flex"
@@ -193,7 +191,8 @@ const SaturateVision = () => {
                       F
                     </Box>
                     <Box
-                      w={[120, 250, 250, 250, 250, 250]}
+                      // w={[120, 250, 250, 250, 250, 250]}
+                      w="34vw"
                       h={2}
                       borderRadius={'0 20px 20px 0'}
                       bgColor="#0053A4"
@@ -217,16 +216,15 @@ const SaturateVision = () => {
                   alignItems="center"
                   justifyContent="center"
                   position="absolute"
-                  top="30%"
+                  top="33%"
                   left="85%"
-                  transition="opacity 2s ease-in"
+                  transition={stopTransition ? 'none' : 'opacity 2s ease-in'}
                   style={{
                     opacity: impactPosition ? 1 : 0,
                   }}
                 >
                   <Box
-                    w="9%"
-                    h="100%"
+                    boxSize="5vw"
                     borderRadius="full"
                     bgColor="#3B8AD7"
                     display="flex"
@@ -239,7 +237,7 @@ const SaturateVision = () => {
                     I
                   </Box>
                   <Box
-                    w={[73, 160, 170, 170, 190, 170]}
+                    w="22.5vw"
                     h={2}
                     borderRadius={'0 20px 20px 0'}
                     bgColor="#3B8AD7"
@@ -264,14 +262,13 @@ const SaturateVision = () => {
                 position="absolute"
                 top="43%"
                 left="90%"
-                transition="opacity 3s ease-in"
+                transition={stopTransition ? 'none' : 'opacity 3s ease-in'}
                 style={{
                   opacity: linkPosition ? 1 : 0,
                 }}
               >
                 <Box
-                  w="13%"
-                  h="80%"
+                  boxSize="5vw"
                   borderRadius="full"
                   bgColor="#81B1E1"
                   display="flex"
@@ -284,7 +281,7 @@ const SaturateVision = () => {
                   L
                 </Box>
                 <Box
-                  w={[30, 74, 170, 170, 190, 170]}
+                  w="15vw"
                   h={2}
                   borderRadius={'0 20px 20px 0'}
                   bgColor="#81B1E1"
@@ -309,16 +306,15 @@ const SaturateVision = () => {
               alignItems="center"
               justifyContent="center"
               position="absolute"
-              top={['30%', '30%', '34%', '34%', '34%', '34%']}
+              top="40%"
               left="93%"
-              transition="opacity 4s ease-in"
+              transition={stopTransition ? 'none' : 'opacity 3s ease-in'}
               style={{
                 opacity: launchPosition ? 1 : 0,
               }}
             >
               <Box
-                w="15%"
-                h="90%"
+                boxSize="5vw"
                 borderRadius="full"
                 bgColor="#C3E0FD"
                 display="flex"
@@ -331,7 +327,8 @@ const SaturateVision = () => {
                 L
               </Box>
               <Box
-                w={[15, 45, 170, 170, 190, 170]}
+                w="8vw"
+                // w={[15, 45, 170, 170, 190, 170]}
                 h={2}
                 borderRadius={'0 20px 20px 0'}
                 bgColor="#C3E0FD"
@@ -395,7 +392,8 @@ const SaturateVision = () => {
               position="relative"
             >
               <Box
-                transition="border 3s ease-in"
+                transition={stopTransition ? 'none' : 'border 3s ease-in'}
+                onTransitionEnd={handleTransitionEnd}
                 style={{
                   border: launchPosition
                     ? '3vw solid #C3E0FD'
@@ -409,7 +407,7 @@ const SaturateVision = () => {
                 position="relative"
               >
                 <Box
-                  transition="border 3s ease-in"
+                  transition={stopTransition ? 'none' : 'border 3s ease-in'}
                   style={{
                     border: linkPosition
                       ? '3vw solid #81B1E1'
@@ -423,7 +421,7 @@ const SaturateVision = () => {
                   position="relative"
                 >
                   <Box
-                    transition="border 2s ease-in"
+                    transition={stopTransition ? 'none' : 'border 2s ease-in'}
                     style={{
                       border: impactPosition
                         ? '3vw solid #3B8AD7'
@@ -437,7 +435,7 @@ const SaturateVision = () => {
                     position="relative"
                   >
                     <Box
-                      transition="border 1s ease-in"
+                      transition={stopTransition ? 'none' : 'border 1s ease-in'}
                       style={{
                         border: fillPosition
                           ? '3vw solid #0053A4'
@@ -494,14 +492,14 @@ const SaturateVision = () => {
                       justifyContent="center"
                       top="30%"
                       left="80%"
-                      transition="opacity 1s ease-in"
+                      transition={
+                        stopTransition ? 'none' : 'opacity 1s ease-in'
+                      }
                       style={{
                         opacity: fillPosition ? 1 : 0,
                       }}
                     >
                       <Box
-                        // w={['6%', '10%', '8%', '8%', '10%', '12%']}
-                        // h={['100%', '60%', '80%', '90%', '100%', '130%']}
                         boxSize="6.5vw"
                         borderRadius="full"
                         bgColor="#0053A4"
@@ -540,14 +538,12 @@ const SaturateVision = () => {
                     position="absolute"
                     top="45%"
                     left="85%"
-                    transition="opacity 2s ease-in"
+                    transition={stopTransition ? 'none' : 'opacity 2s ease-in'}
                     style={{
                       opacity: impactPosition ? 1 : 0,
                     }}
                   >
                     <Box
-                      // w={['6%', '12%', '12%', '12%', '10%', '12%']}
-                      // h={['100%', '60%', '80%', '100%', '100%', '130%']}
                       boxSize="6.5vw"
                       borderRadius="full"
                       bgColor="#3B8AD7"
@@ -586,14 +582,12 @@ const SaturateVision = () => {
                   position="absolute"
                   top="55%"
                   left="85%"
-                  transition="opacity 3s ease-in"
+                  transition={stopTransition ? 'none' : 'opacity 3s ease-in'}
                   style={{
                     opacity: linkPosition ? 1 : 0,
                   }}
                 >
                   <Box
-                    // w={['6%', '7%', '9%', '10%', '10%', '13%']}
-                    // h={['100%', '60%', '80%', '90%', '100%', '120%']}
                     borderRadius="full"
                     boxSize="6.5vw"
                     bgColor="#81B1E1"
@@ -637,18 +631,14 @@ const SaturateVision = () => {
                 h={20}
                 alignItems="center"
                 position="absolute"
-                transition="opacity 4s ease-in"
+                transition={stopTransition ? 'none' : 'opacity 4s ease-in'}
                 style={{
                   opacity: launchPosition ? 1 : 0,
                 }}
                 top="62%"
                 left="87%"
-                // top={['50%', '25%', '28%', '30%', '25%', '35%']}
-                // left={['90%', '90%', '90%', '90%', '92%', '92%']}
               >
                 <Box
-                  // w={['10%', '15%', '21%', '25%', '17%', '18%']}
-                  // h={['60%', '60%', '80%', '90%', '100%', '120%']}
                   borderRadius="full"
                   boxSize="6.5vw"
                   bgColor="#C3E0FD"
@@ -674,47 +664,6 @@ const SaturateVision = () => {
                 </Flex>
               </Flex>
             </Box>
-            {/* <Flex
-              h={20}
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              position="absolute"
-              transition="opacity 4s ease-in"
-              style={{
-                opacity: launchPosition ? 1 : 0,
-              }}
-              top={['50%', '25%', '28%', '30%', '25%', '35%']}
-              left={['90%', '90%', '90%', '90%', '92%', '92%']}
-            >
-              <Box
-                w={['10%', '15%', '21%', '25%', '17%', '18%']}
-                h={['60%', '60%', '80%', '90%', '100%', '120%']}
-                borderRadius="full"
-                bgColor="#C3E0FD"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                fontSize={[80, 60, 70, 80, 90]}
-                color="white"
-                fontFamily="DarkerGrotesque"
-              >
-                L
-              </Box>
-              <Box
-                w={[10, 55, 100, 120, 120, 200]}
-                h={2}
-                borderRadius={'0 20px 20px 0'}
-                bgColor="#C3E0FD"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-              />
-              <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
-                <span /> <Text fontFamily="DarkerGrotesque">LAUNCH</Text>
-                <Text fontFamily="DarkerGrotesque_Normal">(hubs)</Text>
-              </Flex>
-            </Flex> */}
           </Box>
         </Stack>
       )}
