@@ -12,9 +12,6 @@ import {
 const SaturateVision = () => {
   const [stopTransition, setStopTransition] = useState(false);
 
-  const handleTransitionEnd = () => {
-    setStopTransition(true);
-  };
   const [fillPosition, setFillPosition] = useState(false);
   const [impactPosition, setImpactPosition] = useState(false);
   const [linkPosition, setLinkPosition] = useState(false);
@@ -23,6 +20,16 @@ const SaturateVision = () => {
   // useState to get mobile value
   let yPos = useRef(0);
   let windowWidth = useRef(0);
+
+  useEffect(() => {
+    if (launchPosition) {
+      const timerOut = setTimeout(() => {
+        setStopTransition(launchPosition);
+      }, 1000);
+    } else {
+      setStopTransition(launchPosition);
+    }
+  }, [launchPosition]);
 
   useEffect(() => {
     const position = document.querySelector('#main-container');
@@ -41,6 +48,17 @@ const SaturateVision = () => {
       }
       if (position.scrollTop > 850) {
         setLaunchPosition(true);
+      }
+
+      if (position.scrollTop < 600) {
+        setFillPosition(false);
+      }
+      if (position.scrollTop < 650) {
+        setImpactPosition(false);
+      }
+      if (position.scrollTop < 700) {
+        setLinkPosition(false);
+        setLaunchPosition(false);
       }
 
       if (window.innerWidth < 750) {
@@ -109,7 +127,7 @@ const SaturateVision = () => {
             <Box
               marginLeft="-50%"
               marginTop="-30%"
-              transition={stopTransition ? 'none' : 'border 4s ease-in'}
+              transition={stopTransition ? 'none' : 'border 2s ease-in'}
               style={{
                 border: launchPosition
                   ? '3vw solid #C3E0FD'
@@ -123,7 +141,7 @@ const SaturateVision = () => {
               p="3vw"
             >
               <Box
-                transition={stopTransition ? 'none' : 'border 3s ease-in'}
+                transition={stopTransition ? 'none' : 'border 1.5s ease-in'}
                 style={{
                   border: linkPosition
                     ? '3vw solid #81B1E1'
@@ -137,7 +155,7 @@ const SaturateVision = () => {
                 p="4vw"
               >
                 <Box
-                  transition={stopTransition ? 'none' : 'border 2s ease-in'}
+                  transition={stopTransition ? 'none' : 'border 1s ease-in'}
                   style={{
                     border: impactPosition
                       ? '3vw solid #3B8AD7'
@@ -151,7 +169,7 @@ const SaturateVision = () => {
                   p="21vw"
                 >
                   <Box
-                    transition={stopTransition ? 'none' : 'border 1s ease-in'}
+                    transition={stopTransition ? 'none' : 'border 0.5s ease-in'}
                     style={{
                       border: fillPosition
                         ? '3vw solid #0053A4'
@@ -172,7 +190,9 @@ const SaturateVision = () => {
                     top="14%"
                     left="70%"
                     position="absolute"
-                    transition={stopTransition ? 'none' : 'opacity 1s ease-in'}
+                    transition={
+                      stopTransition ? 'none' : 'opacity 0.5s ease-in'
+                    }
                     style={{
                       opacity: fillPosition ? 1 : 0,
                     }}
@@ -218,7 +238,7 @@ const SaturateVision = () => {
                   position="absolute"
                   top="33%"
                   left="85%"
-                  transition={stopTransition ? 'none' : 'opacity 2s ease-in'}
+                  transition={stopTransition ? 'none' : 'opacity 1s ease-in'}
                   style={{
                     opacity: impactPosition ? 1 : 0,
                   }}
@@ -262,7 +282,7 @@ const SaturateVision = () => {
                 position="absolute"
                 top="43%"
                 left="90%"
-                transition={stopTransition ? 'none' : 'opacity 3s ease-in'}
+                transition={stopTransition ? 'none' : 'opacity 1.5s ease-in'}
                 style={{
                   opacity: linkPosition ? 1 : 0,
                 }}
@@ -308,7 +328,7 @@ const SaturateVision = () => {
               position="absolute"
               top="40%"
               left="93%"
-              transition={stopTransition ? 'none' : 'opacity 3s ease-in'}
+              transition={stopTransition ? 'none' : 'opacity 1.5s ease-in'}
               style={{
                 opacity: launchPosition ? 1 : 0,
               }}
@@ -392,8 +412,7 @@ const SaturateVision = () => {
               position="relative"
             >
               <Box
-                transition={stopTransition ? 'none' : 'border 3s ease-in'}
-                onTransitionEnd={handleTransitionEnd}
+                transition={stopTransition ? 'none' : 'border 2s ease-in'}
                 style={{
                   border: launchPosition
                     ? '3vw solid #C3E0FD'
@@ -407,7 +426,7 @@ const SaturateVision = () => {
                 position="relative"
               >
                 <Box
-                  transition={stopTransition ? 'none' : 'border 3s ease-in'}
+                  transition={stopTransition ? 'none' : 'border 1.5s ease-in'}
                   style={{
                     border: linkPosition
                       ? '3vw solid #81B1E1'
@@ -421,7 +440,7 @@ const SaturateVision = () => {
                   position="relative"
                 >
                   <Box
-                    transition={stopTransition ? 'none' : 'border 2s ease-in'}
+                    transition={stopTransition ? 'none' : 'border 1s ease-in'}
                     style={{
                       border: impactPosition
                         ? '3vw solid #3B8AD7'
@@ -435,7 +454,9 @@ const SaturateVision = () => {
                     position="relative"
                   >
                     <Box
-                      transition={stopTransition ? 'none' : 'border 1s ease-in'}
+                      transition={
+                        stopTransition ? 'none' : 'border 0.5s ease-in'
+                      }
                       style={{
                         border: fillPosition
                           ? '3vw solid #0053A4'
@@ -493,7 +514,7 @@ const SaturateVision = () => {
                       top="30%"
                       left="80%"
                       transition={
-                        stopTransition ? 'none' : 'opacity 1s ease-in'
+                        stopTransition ? 'none' : 'opacity 0.5s ease-in'
                       }
                       style={{
                         opacity: fillPosition ? 1 : 0,
@@ -513,7 +534,7 @@ const SaturateVision = () => {
                         F
                       </Box>
                       <Box
-                        w="36.5vw"
+                        w="29vw"
                         h={2}
                         borderRadius={'0 20px 20px 0'}
                         bgColor="#0053A4"
@@ -538,7 +559,7 @@ const SaturateVision = () => {
                     position="absolute"
                     top="45%"
                     left="85%"
-                    transition={stopTransition ? 'none' : 'opacity 2s ease-in'}
+                    transition={stopTransition ? 'none' : 'opacity 1s ease-in'}
                     style={{
                       opacity: impactPosition ? 1 : 0,
                     }}
@@ -557,7 +578,7 @@ const SaturateVision = () => {
                       I
                     </Box>
                     <Box
-                      w="27.5vw"
+                      w="21vw"
                       h={2}
                       borderRadius={'0 20px 20px 0'}
                       bgColor="#3B8AD7"
@@ -576,13 +597,12 @@ const SaturateVision = () => {
                 </Box>
                 <Flex
                   h={20}
-                  overflowX="clip"
-                  w="100%"
+                  w="80%"
                   alignItems="center"
                   position="absolute"
                   top="55%"
-                  left="85%"
-                  transition={stopTransition ? 'none' : 'opacity 3s ease-in'}
+                  left="86%"
+                  transition={stopTransition ? 'none' : 'opacity 1.5s ease-in'}
                   style={{
                     opacity: linkPosition ? 1 : 0,
                   }}
@@ -601,7 +621,7 @@ const SaturateVision = () => {
                     L
                   </Box>
                   <Box
-                    w="20vw"
+                    w="14.5vw"
                     h={2}
                     borderRadius={'0 20px 20px 0'}
                     bgColor="#81B1E1"
@@ -631,7 +651,7 @@ const SaturateVision = () => {
                 h={20}
                 alignItems="center"
                 position="absolute"
-                transition={stopTransition ? 'none' : 'opacity 4s ease-in'}
+                transition={stopTransition ? 'none' : 'opacity 2s ease-in'}
                 style={{
                   opacity: launchPosition ? 1 : 0,
                 }}
@@ -652,7 +672,7 @@ const SaturateVision = () => {
                   L
                 </Box>
                 <Box
-                  w="10vw"
+                  w="6.5vw"
                   h={2}
                   borderRadius={'0 20px 20px 0'}
                   bgColor="#C3E0FD"
