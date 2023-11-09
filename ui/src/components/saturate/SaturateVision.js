@@ -384,22 +384,10 @@ const SaturateVision = () => {
             </Grid>
           </Box>
           <Stack h={7} bgColor="#ffffff" />
-          <Box
-            w="55%"
-            h={[500, 700, 900, 800, 1000, 1200]}
-            position="relative"
-            overflowY="clip"
-          >
+          <Box w="55%" position="relative" overflowY="clip">
             <Box
               marginTop="-29%"
-              marginLeft="-20%"
-              transition="border 4s ease-in"
-              style={{
-                border: launchPosition
-                  ? '3vw solid #C3E0FD'
-                  : '3vw solid #ffffff',
-              }}
-              h={['70%', '70%', '70%', '85%', '100%', '110%']}
+              marginLeft="-55%"
               borderRadius="full"
               display="flex"
               alignItems="center"
@@ -409,11 +397,11 @@ const SaturateVision = () => {
               <Box
                 transition="border 3s ease-in"
                 style={{
-                  border: linkPosition
-                    ? '3vw solid #81B1E1'
+                  border: launchPosition
+                    ? '3vw solid #C3E0FD'
                     : '3vw solid #ffffff',
                 }}
-                boxSize="90%"
+                p="4vw"
                 borderRadius="full"
                 display="flex"
                 alignItems="center"
@@ -421,13 +409,13 @@ const SaturateVision = () => {
                 position="relative"
               >
                 <Box
-                  transition="border 2s ease-in"
+                  transition="border 3s ease-in"
                   style={{
-                    border: impactPosition
-                      ? '3vw solid #3B8AD7'
+                    border: linkPosition
+                      ? '3vw solid #81B1E1'
                       : '3vw solid #ffffff',
                   }}
-                  boxSize="87%"
+                  p="4vw"
                   borderRadius="full"
                   display="flex"
                   alignItems="center"
@@ -435,111 +423,180 @@ const SaturateVision = () => {
                   position="relative"
                 >
                   <Box
-                    transition="border 1s ease-in"
+                    transition="border 2s ease-in"
                     style={{
-                      border: fillPosition
-                        ? '3vw solid #0053A4'
+                      border: impactPosition
+                        ? '3vw solid #3B8AD7'
                         : '3vw solid #ffffff',
                     }}
-                    boxSize="85%"
+                    p="21vw"
                     borderRadius="full"
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
-                    position="absolute"
-                    p={20}
+                    position="relative"
                   >
-                    <Center
+                    <Box
+                      transition="border 1s ease-in"
+                      style={{
+                        border: fillPosition
+                          ? '3vw solid #0053A4'
+                          : '3vw solid #ffffff',
+                      }}
+                      borderRadius="full"
                       display="flex"
-                      flexDirection="column"
                       alignItems="center"
                       justifyContent="center"
+                      position="absolute"
+                      p="15vw"
                     >
-                      <Text
-                        color="#0053A4"
-                        fontSize={[20, 20, 55, 65, 80, 90]}
-                        lineHeight="85%"
+                      <Box
+                        h="100%"
+                        display="flex"
+                        flexDirection="column"
+                        alignItems="center"
+                        mt="11vw"
+                        mx="6vw"
+                        justifyContent="flex-start"
+                        pos="absolute"
+                      >
+                        <Text
+                          textAlign="start"
+                          color="#0053A4"
+                          fontSize="4vw"
+                          lineHeight="85%"
+                          fontFamily="DarkerGrotesque"
+                        >
+                          THE <br /> VALUES
+                        </Text>
+                        <br />
+                        <Text
+                          fontSize="1.6vw"
+                          textAlign="center"
+                          fontFamily="Be-Vietnam"
+                        >
+                          To
+                          <span
+                            style={{ color: '#0053A4', fontWeight: 'bold' }}
+                          >
+                            {' '}
+                            FILL{' '}
+                          </span>{' '}
+                          Hong Kong with the knowledge of the glory of the Lord
+                        </Text>
+                      </Box>
+                    </Box>
+                    <Flex
+                      h={20}
+                      display="flex"
+                      position="absolute"
+                      alignItems="center"
+                      justifyContent="center"
+                      top="30%"
+                      left="80%"
+                      transition="opacity 1s ease-in"
+                      style={{
+                        opacity: fillPosition ? 1 : 0,
+                      }}
+                    >
+                      <Box
+                        // w={['6%', '10%', '8%', '8%', '10%', '12%']}
+                        // h={['100%', '60%', '80%', '90%', '100%', '130%']}
+                        boxSize="6.5vw"
+                        borderRadius="full"
+                        bgColor="#0053A4"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        fontSize={[80, 60, 70, 80, 80, 90]}
+                        color="white"
                         fontFamily="DarkerGrotesque"
                       >
-                        THE VALUES
-                      </Text>
-                      <Text
-                        fontSize={[10, 10, 15, 15, 20, 20]}
-                        fontFamily="Be-Vietnam"
-                      >
-                        To
-                        <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
-                          {' '}
-                          FILL{' '}
-                        </span>{' '}
-                        Hong Kong with the knowledge of the glory of the Lord
-                      </Text>
-                    </Center>
+                        F
+                      </Box>
+                      <Box
+                        w="36.5vw"
+                        h={2}
+                        borderRadius={'0 20px 20px 0'}
+                        bgColor="#0053A4"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                      />
+                      <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
+                        <span />{' '}
+                        <Text fontFamily="DarkerGrotesque">FOUNDATIONS</Text>
+                        <Text fontFamily="DarkerGrotesque_Normal">
+                          (disciples)
+                        </Text>
+                      </Flex>
+                    </Flex>
                   </Box>
                   <Flex
                     h={20}
                     display="flex"
-                    position="absolute"
                     alignItems="center"
                     justifyContent="center"
-                    top="22%"
-                    left="75%"
-                    transition="opacity 1s ease-in"
+                    position="absolute"
+                    top="45%"
+                    left="85%"
+                    transition="opacity 2s ease-in"
                     style={{
-                      opacity: fillPosition ? 1 : 0,
+                      opacity: impactPosition ? 1 : 0,
                     }}
                   >
                     <Box
-                      w={['6%', '10%', '8%', '8%', '10%', '12%']}
-                      h={['100%', '60%', '80%', '90%', '100%', '130%']}
+                      // w={['6%', '12%', '12%', '12%', '10%', '12%']}
+                      // h={['100%', '60%', '80%', '100%', '100%', '130%']}
+                      boxSize="6.5vw"
                       borderRadius="full"
-                      bgColor="#0053A4"
+                      bgColor="#3B8AD7"
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
-                      fontSize={[80, 60, 70, 80, 80, 90]}
+                      fontSize={[80, 60, 70, 80, 90]}
                       color="white"
                       fontFamily="DarkerGrotesque"
                     >
-                      F
+                      I
                     </Box>
                     <Box
-                      w={[400, 200, 300, 350, 500, 590]}
+                      w="27.5vw"
                       h={2}
                       borderRadius={'0 20px 20px 0'}
-                      bgColor="#0053A4"
+                      bgColor="#3B8AD7"
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
                     />
 
                     <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
-                      <span />{' '}
-                      <Text fontFamily="DarkerGrotesque">FOUNDATIONS</Text>
+                      <span /> <Text fontFamily="DarkerGrotesque">IMPACT</Text>
                       <Text fontFamily="DarkerGrotesque_Normal">
-                        (disciples)
+                        (microchurches)
                       </Text>
                     </Flex>
                   </Flex>
                 </Box>
                 <Flex
                   h={20}
-                  display="flex"
+                  overflowX="clip"
+                  w="100%"
                   alignItems="center"
-                  justifyContent="center"
                   position="absolute"
-                  top="40%"
+                  top="55%"
                   left="85%"
-                  transition="opacity 2s ease-in"
+                  transition="opacity 3s ease-in"
                   style={{
-                    opacity: impactPosition ? 1 : 0,
+                    opacity: linkPosition ? 1 : 0,
                   }}
                 >
                   <Box
-                    w={['6%', '12%', '12%', '12%', '10%', '12%']}
-                    h={['100%', '60%', '80%', '100%', '100%', '130%']}
+                    // w={['6%', '7%', '9%', '10%', '10%', '13%']}
+                    // h={['100%', '60%', '80%', '90%', '100%', '120%']}
                     borderRadius="full"
-                    bgColor="#3B8AD7"
+                    boxSize="6.5vw"
+                    bgColor="#81B1E1"
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
@@ -547,44 +604,54 @@ const SaturateVision = () => {
                     color="white"
                     fontFamily="DarkerGrotesque"
                   >
-                    I
+                    L
                   </Box>
                   <Box
-                    w={[400, 145, 220, 260, 390, 445]}
+                    w="20vw"
                     h={2}
                     borderRadius={'0 20px 20px 0'}
-                    bgColor="#3B8AD7"
+                    bgColor="#81B1E1"
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
                   />
 
-                  <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
-                    <span /> <Text fontFamily="DarkerGrotesque">IMPACT</Text>
-                    <Text fontFamily="DarkerGrotesque_Normal">
-                      (microchurches)
+                  <Flex display="-webkit-inline-box" gap={3}>
+                    <span />{' '}
+                    <Text
+                      fontSize={[20, 20, 30, 35, 40]}
+                      fontFamily="DarkerGrotesque"
+                    >
+                      LINK UP
+                    </Text>
+                    <Text
+                      fontSize={[20, 20, 30, 35, 40]}
+                      fontFamily="DarkerGrotesque_Normal"
+                    >
+                      (district churches)
                     </Text>
                   </Flex>
                 </Flex>
               </Box>
               <Flex
                 h={20}
-                display="flex"
                 alignItems="center"
-                justifyContent="center"
                 position="absolute"
-                top="50%"
-                left="88%"
-                transition="opacity 3s ease-in"
+                transition="opacity 4s ease-in"
                 style={{
-                  opacity: linkPosition ? 1 : 0,
+                  opacity: launchPosition ? 1 : 0,
                 }}
+                top="62%"
+                left="87%"
+                // top={['50%', '25%', '28%', '30%', '25%', '35%']}
+                // left={['90%', '90%', '90%', '90%', '92%', '92%']}
               >
                 <Box
-                  w={['6%', '7%', '9%', '10%', '10%', '13%']}
-                  h={['100%', '60%', '80%', '90%', '100%', '120%']}
+                  // w={['10%', '15%', '21%', '25%', '17%', '18%']}
+                  // h={['60%', '60%', '80%', '90%', '100%', '120%']}
                   borderRadius="full"
-                  bgColor="#81B1E1"
+                  boxSize="6.5vw"
+                  bgColor="#C3E0FD"
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
@@ -595,24 +662,19 @@ const SaturateVision = () => {
                   L
                 </Box>
                 <Box
-                  w={[400, 85, 130, 160, 270, 285]}
+                  w="10vw"
                   h={2}
                   borderRadius={'0 20px 20px 0'}
-                  bgColor="#81B1E1"
+                  bgColor="#C3E0FD"
                   display="flex"
-                  alignItems="center"
-                  justifyContent="center"
                 />
-
-                <Flex width="500px" fontSize={[20, 20, 30, 35, 40]} gap={3}>
-                  <span /> <Text fontFamily="DarkerGrotesque">LINK UP</Text>
-                  <Text fontFamily="DarkerGrotesque_Normal">
-                    (district churches)
-                  </Text>
+                <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
+                  <span /> <Text fontFamily="DarkerGrotesque">LAUNCH</Text>
+                  <Text fontFamily="DarkerGrotesque_Normal">(hubs)</Text>
                 </Flex>
               </Flex>
             </Box>
-            <Flex
+            {/* <Flex
               h={20}
               display="flex"
               alignItems="center"
@@ -652,7 +714,7 @@ const SaturateVision = () => {
                 <span /> <Text fontFamily="DarkerGrotesque">LAUNCH</Text>
                 <Text fontFamily="DarkerGrotesque_Normal">(hubs)</Text>
               </Flex>
-            </Flex>
+            </Flex> */}
           </Box>
         </Stack>
       )}
