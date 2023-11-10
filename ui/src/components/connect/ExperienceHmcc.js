@@ -50,6 +50,7 @@ const ExperienceHmcc = (props) => {
             borderRadius={10}
             backdropFilter="blur(10px)"
             fontSize={['0.85em', '1.125em']}
+            color="inherit"
             _hover={{
               bgColor: 'white',
               color: 'black',
@@ -97,6 +98,7 @@ const ExperienceHmcc = (props) => {
             borderRadius={10}
             backdropFilter="blur(10px)"
             fontSize={['0.85em', '1.125em']}
+            color="inherit"
             _hover={{
               bgColor: 'white',
               color: 'black',
