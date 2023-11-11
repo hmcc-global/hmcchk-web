@@ -50,7 +50,7 @@ const SaturateContainer = () => {
             ></Image>
             <Text
               textColor="#023A71"
-              fontSize={{ sm: '15px', md: '17px', lg: '20px' }}
+              fontSize={{ sm: '15px', md: '17px', lg: '19px' }}
               fontWeight="500"
               textShadow="0px 4px 4px rgba(0, 0, 0, 0.25);"
               display={{ base: 'none', sm: 'block' }}
@@ -60,7 +60,7 @@ const SaturateContainer = () => {
             </Text>
             <Text
               textColor="#023A71"
-              fontSize={{ sm: '15px', md: '17px', lg: '20px' }}
+              fontSize={{ sm: '15px', md: '17px', lg: '19px' }}
               fontWeight="500"
               textShadow="0px 4px 4px rgba(0, 0, 0, 0.25);"
               display={{ base: 'block', sm: 'none' }}
