@@ -494,7 +494,6 @@ const SaturateGoals = () => {
                     }}
                   >
                     <Text
-                      fontWeight="800"
                       fontSize="4.5vw"
                       color="#0053A4"
                       lineHeight="1em"

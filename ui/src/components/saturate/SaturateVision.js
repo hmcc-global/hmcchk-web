@@ -472,14 +472,12 @@ const SaturateVision = () => {
                         h="100%"
                         display="flex"
                         flexDirection="column"
-                        alignItems="center"
                         mt="11vw"
                         mx="6vw"
-                        justifyContent="flex-start"
                         pos="absolute"
                       >
                         <Text
-                          textAlign="start"
+                          textAlign="left"
                           color="#0053A4"
                           fontSize="4vw"
                           lineHeight="85%"
@@ -490,7 +488,7 @@ const SaturateVision = () => {
                         <br />
                         <Text
                           fontSize="1.6vw"
-                          textAlign="center"
+                          textAlign="left"
                           fontFamily="Be-Vietnam"
                         >
                           To
@@ -534,7 +532,7 @@ const SaturateVision = () => {
                       </Box>
                       <Box
                         w="29vw"
-                        h={2}
+                        h={3}
                         borderRadius={'0 20px 20px 0'}
                         bgColor="#0053A4"
                         display="flex"
@@ -577,8 +575,8 @@ const SaturateVision = () => {
                       I
                     </Box>
                     <Box
-                      w="21vw"
-                      h={2}
+                      w="22vw"
+                      h={3}
                       borderRadius={'0 20px 20px 0'}
                       bgColor="#3B8AD7"
                       display="flex"
@@ -620,8 +618,8 @@ const SaturateVision = () => {
                     L
                   </Box>
                   <Box
-                    w="14.5vw"
-                    h={2}
+                    w="16vw"
+                    h={3}
                     borderRadius={'0 20px 20px 0'}
                     bgColor="#81B1E1"
                     display="flex"
@@ -671,8 +669,8 @@ const SaturateVision = () => {
                   L
                 </Box>
                 <Box
-                  w="6.5vw"
-                  h={2}
+                  w="9.5vw"
+                  h={3}
                   borderRadius={'0 20px 20px 0'}
                   bgColor="#C3E0FD"
                   display="flex"
