@@ -104,7 +104,7 @@ const SaturateVision = () => {
               </Text>
             </Flex>
           </Box>
-          <Stack p={5}>
+          <Stack p={5} pl={10}>
             <Text
               color="#0053A4"
               fontSize="10vw"
