@@ -130,8 +130,7 @@ const VisionMissionSection = (props) => {
                 }}
                 fontSize="1.2em"
               >
-                {/* TODO-aparedan: Chagne this link */}
-                <Link to={{ pathname: '/connect', hash: '#lifegroup' }}>
+                <Link href="/saturate-home" >
                   Learn More
                 </Link>
               </Button>

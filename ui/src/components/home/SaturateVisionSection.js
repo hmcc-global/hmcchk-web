@@ -83,8 +83,7 @@ const SaturateVisionSection = () => {
               }}
               fontSize="1.2em"
             >
-              {/* TODO-aparedan: Chagne this link */}
-              <Link to={{ pathname: '/connect', hash: '#lifegroup' }}>
+              <Link to={{ pathname: '/saturate-home' }}>
                 {buttonText}
               </Link>
             </Button>
