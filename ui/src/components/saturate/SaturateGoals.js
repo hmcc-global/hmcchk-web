@@ -485,6 +485,7 @@ const SaturateGoals = () => {
                     onMouseLeave={onOuterRing4}
                     alignItems="center"
                     justifyContent="center"
+                    textAlign="center"
                     style={{
                       shapeOutside: 'circle()',
                       border: outerRing4Hover
@@ -498,9 +499,9 @@ const SaturateGoals = () => {
                       color="#0053A4"
                       lineHeight="1em"
                     >
-                      The
+                      THE
                       <br />
-                      Goals
+                      GOALS
                     </Text>
                   </Box>
                 </Box>
