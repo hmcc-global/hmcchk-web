@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import SaturateGoals from './SaturateGoals';
+import SaturateVision from './SaturateVision';
 
 const animationKeyframes = keyframes`
   0% { transform: opacity: [1, 0, 1] ; }
@@ -110,6 +111,7 @@ const SaturateContainer = () => {
           </motion.div>
         </Box>
       </Container>
+      <SaturateVision />
       <SaturateGoals />
 
       <Container maxW="100%" m={0} p={0}></Container>
