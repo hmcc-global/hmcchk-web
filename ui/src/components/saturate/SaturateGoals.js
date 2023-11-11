@@ -498,6 +498,7 @@ const SaturateGoals = () => {
                       fontSize="4.5vw"
                       color="#0053A4"
                       lineHeight="1em"
+                      fontFamily="DarkerGrotesque"
                     >
                       THE
                       <br />
