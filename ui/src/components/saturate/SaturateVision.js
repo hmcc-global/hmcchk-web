@@ -88,7 +88,7 @@ const SaturateVision = () => {
           >
             <Flex flexDirection="column" p={10} alignItems="left">
               <Text
-                fontSize="6xl"
+                fontSize={['5xl', '6xl']}
                 lineHeight={1}
                 textColor="#ffffff"
                 fontFamily="DarkerGrotesque"
