@@ -182,7 +182,7 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/saturate-home"
+          path="/saturate"
           permissions={['public']}
           component={SaturateContainer}
         />

@@ -83,7 +83,7 @@ const SaturateVisionSection = () => {
               }}
               fontSize="1.2em"
             >
-              <Link to={{ pathname: '/saturate-home' }}>
+              <Link to={{ pathname: '/saturate' }}>
                 {buttonText}
               </Link>
             </Button>

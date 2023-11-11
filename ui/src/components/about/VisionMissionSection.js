@@ -130,7 +130,7 @@ const VisionMissionSection = (props) => {
                 }}
                 fontSize="1.2em"
               >
-                <Link href="/saturate-home" >
+                <Link href="/saturate" >
                   Learn More
                 </Link>
               </Button>
