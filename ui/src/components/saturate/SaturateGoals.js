@@ -280,8 +280,7 @@ const SaturateGoals = () => {
         p={0}
         position="relative"
         display={['none', 'none', 'block', 'block', 'block']}
-      >
-      </Container>
+      ></Container>
       <Container
         maxWidth="100%"
         my={5}

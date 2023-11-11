@@ -97,7 +97,7 @@ const SaturateContainer = () => {
             <b>Saturate Vision </b> in Hong Kong.
           </Text>
         </Box>
-        <Box>
+        <Box pb={12}>
           <motion.div animate={continuousAnimation}>
             <Image
               src={

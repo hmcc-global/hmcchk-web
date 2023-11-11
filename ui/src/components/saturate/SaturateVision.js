@@ -88,14 +88,15 @@ const SaturateVision = () => {
           >
             <Flex flexDirection="column" p={10} alignItems="left">
               <Text
-                fontSize={['5xl', '6xl']}
+                fontSize={['8vw', '10vw']}
                 lineHeight={1}
                 textColor="#ffffff"
                 fontFamily="DarkerGrotesque"
               >
                 THE <br /> VISION STATEMENT
               </Text>
-              <Text fontSize="2xl" textColor="#ffffff">
+              <br />
+              <Text fontSize="4vw" textColor="#ffffff">
                 To <b>saturate</b> Hong Kong with the knowledge of God’s glory
                 by living out the Kingdom lifestyle and proclaiming the Gospel,
                 so that we can make more disciples of all nations, locally,
@@ -198,22 +199,21 @@ const SaturateVision = () => {
                     }}
                   >
                     <Box
-                      boxSize="5vw"
+                      boxSize="8vw"
                       borderRadius="full"
                       bgColor="#0053A4"
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
-                      fontSize={[30, 30, 30, 30, 30, 30]}
+                      fontSize={25}
                       color="white"
                       fontFamily="DarkerGrotesque"
                     >
                       F
                     </Box>
                     <Box
-                      // w={[120, 250, 250, 250, 250, 250]}
-                      w="34vw"
-                      h={2}
+                      w="30vw"
+                      h={1}
                       borderRadius={'0 20px 20px 0'}
                       bgColor="#0053A4"
                       display="flex"
@@ -237,28 +237,28 @@ const SaturateVision = () => {
                   justifyContent="center"
                   position="absolute"
                   top="33%"
-                  left="85%"
+                  left="83%"
                   transition={stopTransition ? 'none' : 'opacity 1s ease-in'}
                   style={{
                     opacity: impactPosition ? 1 : 0,
                   }}
                 >
                   <Box
-                    boxSize="5vw"
+                    boxSize="8vw"
                     borderRadius="full"
                     bgColor="#3B8AD7"
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
-                    fontSize={[30, 30, 30, 30, 30]}
+                    fontSize={25}
                     color="white"
                     fontFamily="DarkerGrotesque"
                   >
                     I
                   </Box>
                   <Box
-                    w="22.5vw"
-                    h={2}
+                    w="20vw"
+                    h={1}
                     borderRadius={'0 20px 20px 0'}
                     bgColor="#3B8AD7"
                     display="flex"
@@ -280,29 +280,29 @@ const SaturateVision = () => {
                 alignItems="center"
                 justifyContent="center"
                 position="absolute"
-                top="43%"
-                left="90%"
+                top="45%"
+                left="88%"
                 transition={stopTransition ? 'none' : 'opacity 1.5s ease-in'}
                 style={{
                   opacity: linkPosition ? 1 : 0,
                 }}
               >
                 <Box
-                  boxSize="5vw"
+                  boxSize="8vw"
                   borderRadius="full"
                   bgColor="#81B1E1"
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
-                  fontSize={[30, 30, 30, 30, 30]}
+                  fontSize={25}
                   color="white"
                   fontFamily="DarkerGrotesque"
                 >
                   L
                 </Box>
                 <Box
-                  w="15vw"
-                  h={2}
+                  w="12vw"
+                  h={1}
                   borderRadius={'0 20px 20px 0'}
                   bgColor="#81B1E1"
                   alignItems="center"
@@ -326,30 +326,29 @@ const SaturateVision = () => {
               alignItems="center"
               justifyContent="center"
               position="absolute"
-              top="40%"
-              left="93%"
+              top="45%"
+              left="90%"
               transition={stopTransition ? 'none' : 'opacity 1.5s ease-in'}
               style={{
                 opacity: launchPosition ? 1 : 0,
               }}
             >
               <Box
-                boxSize="5vw"
+                boxSize="8vw"
                 borderRadius="full"
                 bgColor="#C3E0FD"
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
-                fontSize={[30, 30, 30, 30, 30]}
+                fontSize={25}
                 color="white"
                 fontFamily="DarkerGrotesque"
               >
                 L
               </Box>
               <Box
-                w="8vw"
-                // w={[15, 45, 170, 170, 190, 170]}
-                h={2}
+                w="6vw"
+                h={1}
                 borderRadius={'0 20px 20px 0'}
                 bgColor="#C3E0FD"
                 display="flex"
