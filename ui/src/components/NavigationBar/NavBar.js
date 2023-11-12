@@ -32,7 +32,6 @@ import { signout } from '../../reducers/userSlice';
 import { customAxios as axios } from '../helpers/customAxios';
 import MainMenu from './MainMenu';
 import { useHistory } from 'react-router-dom';
-import WitnessBanner from '../witness/WitnessBanner';
 import { BsFillPersonFill } from 'react-icons/bs';
 
 const NavBar = (props) => {
@@ -463,7 +462,6 @@ const NavBar = (props) => {
           </Container>
         </Flex>
       </Flex>
-      {isHomePage && <WitnessBanner />}
       {/* {currDate === 'Wed' && !isOnlineSermon ? (
         <Flex
           w="100vw"

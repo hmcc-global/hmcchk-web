@@ -1,7 +1,9 @@
 @import url('https://rsms.me/inter/inter.css');
 body {
   margin: 0;
-  font-family:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -16,11 +18,31 @@ code {
 }
 
 .ag-tooltip {
-   background-color: #ffffff !important;
+  background-color: #ffffff !important;
 }
 
 @font-face {
   font-family: 'Manrope';
   src: local('Manrope'), url('./font/Manrope.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Be-Vietnam';
+  src: local('Be-Vietname'), url('./font/Be-Vietnam.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'DarkerGrotesque';
+  src: local('DarkerGrotesque'),
+    url('./font/DarkerGrotesque.ttf') format('truetype');
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: 'DarkerGrotesque_Normal';
+  src: local('DarkerGrotesque'),
+    url('./font/DarkerGrotesque.ttf') format('truetype');
   font-weight: normal;
 }

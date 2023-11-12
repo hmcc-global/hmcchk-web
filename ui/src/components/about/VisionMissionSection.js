@@ -6,6 +6,12 @@ import {
   Text,
   Heading,
 } from '@chakra-ui/layout';
+import {
+  Image,
+  Button,
+  Link,
+} from '@chakra-ui/react';
+import { saturateText } from '../home/SaturateVisionSection';
 
 const VisionMissionCard = ({ title, message }) => {
   return (
@@ -70,6 +76,67 @@ const VisionMissionSection = (props) => {
           spacing="5"
           id="vision-mission"
         >
+        <Box
+          w="100%"
+          borderWidth="1px"
+          borderRadius="7"
+          shadow="md"
+          bgImage={`url('${process.env.PUBLIC_URL}/images/home/saturate-bg.png')`}
+          bgPosition="center"
+          bgSize="cover"
+          display="flex"
+          flexDir="column"
+          justifyContent="center"
+          padding={8}
+        >
+          <Stack
+            w="100%"
+            direction={['column', 'row']}
+            justify="center"
+            alignItems='center'
+            spacing={[6, null]}
+          >
+            <VStack
+              w={['85%', '35%']}
+              align='center'
+              spacing={[6, 8]}
+            >
+              <Image
+                src={process.env.PUBLIC_URL + '/images/home/saturate-logo.png'}
+                w={['90%']}
+              />
+            </VStack>
+            <VStack
+              maxW={['100%', '50%']}
+              align='center'
+              spacing={[6, 8]}
+            >
+              <Text fontSize={['0.9em', '1.0em']} textAlign={['justify']}>
+                {saturateText.text}
+              </Text>
+              <Button
+                alignSelf='center'
+                bg="white"
+                variant="outline"
+                color="#0628A3"
+                borderColor="#0628A3"
+                borderWidth="2px"
+                w={['45%', '38.2%']}
+                _hover={{
+                  bg: '#0628A3',
+                  color: 'white',
+                  borderColor: '#0628A3',
+                  textDecoration: 'none',
+                }}
+                fontSize="1.2em"
+              >
+                <Link href="/saturate" >
+                  Learn More
+                </Link>
+              </Button>
+            </VStack>
+          </Stack>
+        </Box>
           {blurb && blurb.vision && (
             <VisionMissionCard title="VISION" message={blurb.vision} />
           )}
