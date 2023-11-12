@@ -53,7 +53,7 @@ const SermonCard = ({ sermonData, allSermons }) => {
     <Link
       style={sermonCardStyle}
       to={{
-        pathname: (`/sermons/${sermonData.id}`),
+        pathname: `/sermons/${sermonData.id}`,
         state: { sermonData: sermonData, allSermons: allSermons },
       }}
     >
@@ -95,7 +95,11 @@ const SermonCard = ({ sermonData, allSermons }) => {
             <Text fontSize={{ base: 'xs', md: 'sm' }} isTruncated>
               {sermonData.sermonSeries[0].name}
             </Text>
-            <Stack direction={['column', 'row']} spacing="auto">
+            <Stack
+              direction={['column', 'row']}
+              spacing="auto"
+              justifyContent="space-between"
+            >
               <Text fontSize={{ base: 'xs', md: 'sm' }} isTruncated>
                 {sermonData.speaker[0].name}
               </Text>
