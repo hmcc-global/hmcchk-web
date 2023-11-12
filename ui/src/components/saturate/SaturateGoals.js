@@ -280,8 +280,7 @@ const SaturateGoals = () => {
         p={0}
         position="relative"
         display={['none', 'none', 'block', 'block', 'block']}
-      >
-      </Container>
+      ></Container>
       <Container
         maxWidth="100%"
         my={5}
@@ -486,6 +485,7 @@ const SaturateGoals = () => {
                     onMouseLeave={onOuterRing4}
                     alignItems="center"
                     justifyContent="center"
+                    textAlign="center"
                     style={{
                       shapeOutside: 'circle()',
                       border: outerRing4Hover
@@ -494,14 +494,14 @@ const SaturateGoals = () => {
                     }}
                   >
                     <Text
-                      fontWeight="800"
                       fontSize="4.5vw"
                       color="#0053A4"
                       lineHeight="1em"
+                      fontFamily="DarkerGrotesque"
                     >
-                      The
+                      THE
                       <br />
-                      Goals
+                      GOALS
                     </Text>
                   </Box>
                 </Box>
