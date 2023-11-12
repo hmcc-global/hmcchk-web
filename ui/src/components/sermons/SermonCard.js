@@ -97,7 +97,7 @@ const SermonCard = ({ sermonData, allSermons }) => {
             </Text>
             <Stack
               direction={['column', 'row']}
-              spacing="auto"
+              spacing="1"
               justifyContent="space-between"
             >
               <Text fontSize={{ base: 'xs', md: 'sm' }} isTruncated>
