@@ -21,7 +21,7 @@ import { fontColor, headerFontSize, bodyFontSize } from './RippleOutTextStyle';
 const RippleOutSpaceContainer = () => {
   const dotStyle = {
     borderRadius: '50%',
-    boxShadow: '0 5px 2px -2px gray',
+    boxShadow: '0 10px 10px -2px #424B5E',
   };
 
   return (
@@ -98,7 +98,17 @@ const RippleOutSpaceContainer = () => {
                   style={dotStyle}
                   height={['15px', '30px']}
                   width={['15px', '30px']}
-                />
+                  bgColor="#8F6C00"
+                >
+                  <Box
+                    borderRadius="50%"
+                    height={['11px', '20px']}
+                    width={['11px', '20px']}
+                    bgColor="white"
+                    marginTop={['2px', '5px']}
+                    mx="auto"
+                  />
+                </Box>
               </Tippy>
             </Center>
           </Box>
@@ -111,7 +121,7 @@ const RippleOutSpaceContainer = () => {
             Features of the Transformation Center:
           </Text>
           <Text
-            fontSize={['lg', '2xl']}
+            fontSize={['1em', '3xl']}
             lineHeight="0.9em"
             textStyle="darker_grotesque_semibold"
             paddingBottom="1em"
@@ -151,10 +161,19 @@ const RippleOutSpaceContainer = () => {
                 right={['28.5vw', '16.5vw']}
                 position="relative"
                 style={dotStyle}
-                backgroundColor="#34486F"
-                height={['12.5px', '25px']}
-                width={['12.5px', '25px']}
-              />
+                bgColor="#424B5E"
+                height={['15px', '30px']}
+                width={['15px', '30px']}
+              >
+                <Box
+                  borderRadius="50%"
+                  height={['11px', '20px']}
+                  width={['11px', '20px']}
+                  bgColor="#538DFF"
+                  marginTop={['2px', '5px']}
+                  mx="auto"
+                />
+              </Box>
             </Tippy>
             <Tippy
               theme="custom-theme"
@@ -177,11 +196,19 @@ const RippleOutSpaceContainer = () => {
                 left={['9vw', '5vw']}
                 position="relative"
                 style={dotStyle}
-                backgroundColor="#34486F"
-                textStyle="darker_grotesque_semibold"
-                height={['12.5px', '25px']}
-                width={['12.5px', '25px']}
-              />
+                bgColor="#424B5E"
+                height={['15px', '30px']}
+                width={['15px', '30px']}
+              >
+                <Box
+                  borderRadius="50%"
+                  height={['11px', '20px']}
+                  width={['11px', '20px']}
+                  bgColor="#538DFF"
+                  marginTop={['2px', '5px']}
+                  mx="auto"
+                />
+              </Box>
             </Tippy>
             <Tippy
               theme="custom-theme"
@@ -204,11 +231,19 @@ const RippleOutSpaceContainer = () => {
                 right={['11vw', '6.5vw']}
                 position="relative"
                 style={dotStyle}
-                backgroundColor="#34486F"
-                textStyle="darker_grotesque_semibold"
-                height={['12.5px', '25px']}
-                width={['12.5px', '25px']}
-              />
+                bgColor="#424B5E"
+                height={['15px', '30px']}
+                width={['15px', '30px']}
+              >
+                <Box
+                  borderRadius="50%"
+                  height={['11px', '20px']}
+                  width={['11px', '20px']}
+                  bgColor="#538DFF"
+                  marginTop={['2px', '5px']}
+                  mx="auto"
+                />
+              </Box>
             </Tippy>
             <Tippy
               theme="custom-theme"
@@ -231,11 +266,19 @@ const RippleOutSpaceContainer = () => {
                 left={['7vw', '4vw']}
                 position="relative"
                 style={dotStyle}
-                backgroundColor="#34486F"
-                textStyle="darker_grotesque_semibold"
-                height={['12.5px', '25px']}
-                width={['12.5px', '25px']}
-              />
+                bgColor="#424B5E"
+                height={['15px', '30px']}
+                width={['15px', '30px']}
+              >
+                <Box
+                  borderRadius="50%"
+                  height={['11px', '20px']}
+                  width={['11px', '20px']}
+                  bgColor="#538DFF"
+                  marginTop={['2px', '5px']}
+                  mx="auto"
+                />
+              </Box>
             </Tippy>
             <Tippy
               theme="custom-theme"
@@ -258,11 +301,19 @@ const RippleOutSpaceContainer = () => {
                 left={['21vw', '12.25vw']}
                 position="relative"
                 style={dotStyle}
-                backgroundColor="#34486F"
-                textStyle="darker_grotesque_semibold"
-                height={['12.5px', '25px']}
-                width={['12.5px', '25px']}
-              />
+                bgColor="#424B5E"
+                height={['15px', '30px']}
+                width={['15px', '30px']}
+              >
+                <Box
+                  borderRadius="50%"
+                  height={['11px', '20px']}
+                  width={['11px', '20px']}
+                  bgColor="#538DFF"
+                  marginTop={['2px', '5px']}
+                  mx="auto"
+                />
+              </Box>
             </Tippy>
           </Center>
           <Text
@@ -308,7 +359,7 @@ const RippleOutSpaceContainer = () => {
                 >
                   <VStack w={['100%', '49%']}>
                     <Text
-                      fontSize={bodyFontSize}
+                      fontSize={['1.2em', '2.5em']}
                       textStyle="darker_grotesque"
                       lineHeight="0.9em"
                       textAlign="center"
@@ -323,7 +374,7 @@ const RippleOutSpaceContainer = () => {
                   <Spacer />
                   <VStack w={['100%', '49%']}>
                     <Text
-                      fontSize={bodyFontSize}
+                      fontSize={['1.2em', '2.5em']}
                       textStyle="darker_grotesque"
                       lineHeight="0.9em"
                       textAlign="center"
