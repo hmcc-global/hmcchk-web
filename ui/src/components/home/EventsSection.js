@@ -97,12 +97,10 @@ const EventsSection = () => {
   };
   const populateData = async () => {
     try {
-      const { data, status } = await axios.get(
-        '/api/announcement/get'
-      );
+      const { data, status } = await axios.get('/api/announcement/get');
       if (status === 200) {
         const filtered = data.filter((item) => {
-          if(item.displayEndDateTime === null ){
+          if (item.displayEndDateTime === null) {
             return true;
           } else return false;
         });
@@ -118,9 +116,15 @@ const EventsSection = () => {
             );
             item.renderDate = renderDate;
             return endDate > DateTime.now();
-          }  else return false;
+          } else return false;
         });
-        filteredEndDate.sort((a, b) => (a.renderDate > b.renderDate ? 1 : -1));
+        filteredEndDate.sort((a, b) =>
+          a.renderDate === '' || b.renderDate === ''
+            ? -1
+            : a.renderDate > b.renderDate
+            ? 1
+            : -1
+        );
         filtered.push(...filteredEndDate);
         setEvents([...filtered]);
       } else {

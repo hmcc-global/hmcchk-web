@@ -18,9 +18,7 @@ const EventsPage = (props) => {
 
   const getEventsListFromDatabase = async () => {
     try {
-      const { data, status } = await axios.get(
-        '/api/announcement/get'
-        );
+      const { data, status } = await axios.get('/api/announcement/get');
 
       if (status === 200) {
         const filtered = [];
@@ -36,9 +34,15 @@ const EventsPage = (props) => {
             );
             item.renderDate = renderDate;
             return endDate > DateTime.now();
-          }  else return false;
+          } else return false;
         });
-        filteredEndDate.sort((a, b) => (a.renderDate === "" || b.renderDate === "" ? -1 : a.renderDate > b.renderDate ? 1 : -1));
+        filteredEndDate.sort((a, b) =>
+          a.renderDate === '' || b.renderDate === ''
+            ? -1
+            : a.renderDate > b.renderDate
+            ? 1
+            : -1
+        );
         filtered.push(...filteredEndDate);
         setEventsList([...filtered]);
       } else {
