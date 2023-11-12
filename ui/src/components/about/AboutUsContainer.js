@@ -107,7 +107,7 @@ const AboutUsContainer = (props) => {
           <HStack
             justifyContent="space-evenly"
             display={{ base: 'none', sm: 'none', md: 'flex' }}
-            px={{ md: '0em', lg: '4em' }}
+            px={{ md: '0em', lg: '1em' }}
           >
             {sections &&
               sections.map((e, i) => {
