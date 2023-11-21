@@ -125,8 +125,8 @@ const HeroSection = ({ anchorTarget }) => {
                     style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
                     fontSize="16px"
                   >
-                    Every Sunday at 10AM HKT | Paragon Creatorspace, Kwun Tong &
-                    Online
+                    Every Sunday at 10AM HKT | Transformation Center - 22/F
+                    Crocodile Center, Kwun Tong & Online
                   </Text>
                 </Box>
               </Stack>
@@ -155,7 +155,8 @@ const HeroSection = ({ anchorTarget }) => {
                 style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
                 fontSize="12px"
               >
-                Paragon Creatorspace, Kwun Tong & Online
+                Transformation Center - 22/F Crocodile Center, Kwun Tong &
+                Online
               </Text>
             </Box>
             <Stack position="relative" bottom="6%" width="35px" height="35px">
