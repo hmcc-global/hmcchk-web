@@ -19,9 +19,9 @@ import Faq from './Faq';
 // LinkOverlay,
 
 const SUNDAY_CELEBRATION_LOCATION =
-  '4/F, Yau Lee Centre,\n 45 Hoi Yuen Rd,\n Kwun Tong';
+  'Transformation Center\n 22/F, Crocodile Center\n 79 Hoi Yuen Rd,\n Kwun Tong';
 const SUNDAY_CELEBRATION_GOOGLE_MAPS_EMBED =
-  'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14764.630680799666!2d114.2235024!3d22.309876!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x340401d8a28d3a69%3A0xd9392ffd3ca3a2ac!2sPARAGON%20CREATORSPACE!5e0!3m2!1sen!2shk!4v1698049900838!5m2!1sen!2shk';
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.108283447043!2d114.22300777523644!3d22.31174417967842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404014f8caf0583%3A0xb486f5b3fe80efae!2sCrocodile%20Centre!5e0!3m2!1sen!2sus!4v1700553454511!5m2!1sen!2sus';
 
 const VisitUsPage = (props) => {
   return (
@@ -103,12 +103,12 @@ const VisitUsPage = (props) => {
                 {SUNDAY_CELEBRATION_LOCATION}
                 <br />
                 <Link
-                  href="https://bit.ly/PSDirections"
+                  href="https://bit.ly/TCenterDirections"
                   color="#0E66CC"
                   isExternal
                   fontWeight={700}
                 >
-                  <Text as="u">bit.ly/PSDirections</Text>
+                  <Text as="u">bit.ly/TCenterDirections</Text>
                 </Link>
               </Text>
               <Spacer />
