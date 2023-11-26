@@ -10,22 +10,6 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
-// Colorful string for old design
-// const colorfulString = (text, colorArray) => {
-//   if (colorArray.length !== text.length) {
-//     return <span>{text}</span>;
-//   }
-//   let result = [];
-//   for (let i = 0; i < text.length; i++) {
-//     result[i] = (
-//       <span key={i} style={{ color: colorArray[i] }}>
-//         {text[i]}
-//       </span>
-//     );
-//   }
-//   return result;
-// };
-
 const lg = {
   section: 'Community',
   title: 'LIFE Groups',

@@ -17,10 +17,7 @@ const DailyBrp = () => {
   const determinePassage = (data) => {
     let leapYear = false;
     //putting the passage to an array
-    data.map((res) => {
-      brpList.push(res.passage);
-      return null; // Add a return statement to satisfy the eslint rule
-    });
+    brpList = data.map((res) => res.passage);
 
     //check if its a leapyear
     intYear = today.toFormat('yyyy');
