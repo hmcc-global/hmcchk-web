@@ -1,7 +1,7 @@
-import React from "react";
-import { customAxios as axios } from "../helpers/customAxios";
-import { useForm } from "react-hook-form";
-import { ChevronLeftIcon } from "@chakra-ui/icons";
+import React from 'react';
+import { customAxios as axios } from '../helpers/customAxios';
+import { useForm } from 'react-hook-form';
+import { ChevronLeftIcon } from '@chakra-ui/icons';
 import {
   Box,
   Container,
@@ -13,47 +13,47 @@ import {
   Link,
   useToast,
   Button,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const RecoverPassword = (props) => {
   const { register, handleSubmit } = useForm();
   const toast = useToast();
   const onSubmit = async (data) => {
-    const isSuccess = await axios.post("/api/auth/forgot-password", data);
+    await axios.post('/api/auth/forgot-password', data);
 
     // Send toast regardless to prevent email sniffing.
     toast({
-      title: "Password Recovery.",
-      description: "Email Sent!.",
-      status: "success",
+      title: 'Password Recovery.',
+      description: 'Email Sent!.',
+      status: 'success',
       duration: 9000,
       isClosable: true,
     });
   };
 
   const inputBoxStyle = {
-    background: "#ffffff",
-    border: "1px solid #000000",
-    boxSizing: "border-box",
-    borderRadius: "6px",
-    padding: "3px",
-    width: "300px",
-    color: "black",
-    paddingLeft: "5px",
+    background: '#ffffff',
+    border: '1px solid #000000',
+    boxSizing: 'border-box',
+    borderRadius: '6px',
+    padding: '3px',
+    width: '300px',
+    color: 'black',
+    paddingLeft: '5px',
   };
 
   const submitBoxStyle = {
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "3px 19px",
-    background: "rgba(0, 0, 0, 0.04)",
-    border: "1px solid #FFFFFF",
-    boxSizing: "border-box",
-    backdropFilter: "blur(6px)",
-    borderRadius: "10px",
-    height: "40px",
-    width: "250px",
-    fontWeight: "bold",
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '3px 19px',
+    background: 'rgba(0, 0, 0, 0.04)',
+    border: '1px solid #FFFFFF',
+    boxSizing: 'border-box',
+    backdropFilter: 'blur(6px)',
+    borderRadius: '10px',
+    height: '40px',
+    width: '250px',
+    fontWeight: 'bold',
   };
 
   return (
@@ -69,15 +69,15 @@ const RecoverPassword = (props) => {
             </Box>
           </Flex>
           <Flex justifyContent="center">
-            <VStack justify="center" align="center" spacing={["3vh"]} py="5vh">
+            <VStack justify="center" align="center" spacing={['3vh']} py="5vh">
               <Image
                 marginBottom="15px"
                 h={{
-                  base: "6vh",
-                  sm: "8vh",
-                  md: "10vh",
-                  lg: "12vh",
-                  xl: "15vh",
+                  base: '6vh',
+                  sm: '8vh',
+                  md: '10vh',
+                  lg: '12vh',
+                  xl: '15vh',
                 }}
                 src={`${process.env.PUBLIC_URL}/images/ripple.png`}
                 alt="Logo of HMCC"
@@ -90,9 +90,9 @@ const RecoverPassword = (props) => {
                 instructions to reset your password
               </Text>
               <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-                <VStack spacing={["3vh"]}>
+                <VStack spacing={['3vh']}>
                   <input
-                    {...register("email", { required: true })}
+                    {...register('email', { required: true })}
                     placeholder="Email"
                     style={inputBoxStyle}
                   />

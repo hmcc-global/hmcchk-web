@@ -30,7 +30,6 @@ import { eventIntervalList } from '../../helpers/lists';
 
 const AnnouncementEditorModal = (props) => {
   const {
-    user,
     isOpen,
     setIsOpen,
     editAnnouncementData,

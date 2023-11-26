@@ -23,7 +23,7 @@ const SaturateVision = () => {
 
   useEffect(() => {
     if (launchPosition) {
-      const timerOut = setTimeout(() => {
+      setTimeout(() => {
         setStopTransition(launchPosition);
       }, 1000);
     } else {

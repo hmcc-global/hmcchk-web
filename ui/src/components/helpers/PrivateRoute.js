@@ -57,7 +57,8 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
     );
 
   return (
-    !isLoading && userObj != null && (
+    !isLoading &&
+    userObj != null && (
       <Route
         {...rest}
         render={(props) => {

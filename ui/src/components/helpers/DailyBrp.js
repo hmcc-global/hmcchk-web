@@ -19,6 +19,7 @@ const DailyBrp = () => {
     //putting the passage to an array
     data.map((res) => {
       brpList.push(res.passage);
+      return null; // Add a return statement to satisfy the eslint rule
     });
 
     //check if its a leapyear
