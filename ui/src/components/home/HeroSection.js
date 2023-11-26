@@ -8,7 +8,6 @@ import {
   Container,
   Text,
   Box,
-  Center,
 } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
 // TODO figure out a way to have a central location to edit photo url, blurbs etc.

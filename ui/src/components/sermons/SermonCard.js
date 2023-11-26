@@ -1,25 +1,17 @@
-import {
-  AspectRatio,
-  Box,
-  Image,
-  Text,
-  HStack,
-  VStack,
-  Stack,
-  Icon,
-} from '@chakra-ui/react';
+import { AspectRatio, Box, Image, Text, VStack, Stack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
 
-const CircleIcon = () => (
-  <Icon viewBox="0 0 200 200">
-    <path
-      fill="currentColor"
-      d="M 75, 75 m -50, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
-    />
-  </Icon>
-);
+// Old circle icon
+// const CircleIcon = () => (
+//   <Icon viewBox="0 0 200 200">
+//     <path
+//       fill="currentColor"
+//       d="M 75, 75 m -50, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
+//     />
+//   </Icon>
+// );
 
 const SermonCard = ({ sermonData, allSermons }) => {
   const [sermonImage, setSermonImage] = useState(
@@ -53,7 +45,7 @@ const SermonCard = ({ sermonData, allSermons }) => {
     <Link
       style={sermonCardStyle}
       to={{
-        pathname: (`/sermons/${sermonData.id}`),
+        pathname: `/sermons/${sermonData.id}`,
         state: { sermonData: sermonData, allSermons: allSermons },
       }}
     >

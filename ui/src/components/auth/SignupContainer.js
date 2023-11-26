@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
 import GoogleLogin from 'react-google-login';
-import { useSelector } from 'react-redux';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Box, VStack, Flex, Image, Text, Button, Link } from '@chakra-ui/react';
 

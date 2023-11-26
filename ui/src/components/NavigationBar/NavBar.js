@@ -1,17 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Flex,
-  Center,
   Stack,
   Box,
   Text,
   Image,
   Button,
-  Menu,
   Container,
-  MenuButton,
-  MenuList,
-  MenuItem,
   Drawer,
   DrawerBody,
   DrawerFooter,
@@ -25,18 +20,15 @@ import {
   useDisclosure,
   HStack,
   IconButton,
-  VStack,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../reducers/userSlice';
 import { customAxios as axios } from '../helpers/customAxios';
 import MainMenu from './MainMenu';
-import { useHistory } from 'react-router-dom';
 import { BsFillPersonFill } from 'react-icons/bs';
 
 const NavBar = (props) => {
   const [isLive, setIsLive] = useState(false);
-  const isHomePage = useHistory().location.pathname === '/';
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const user = useSelector((state) => state.user);

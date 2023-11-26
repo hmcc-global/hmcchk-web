@@ -4,7 +4,6 @@ import GoogleLogin from 'react-google-login';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { signin } from '../../reducers/userSlice';
-import { ArrowBackIcon } from '@chakra-ui/icons';
 
 import {
   Box,

@@ -8,15 +8,13 @@ import {
   FormLabel,
   Input,
   Textarea,
-  HStack,
-  Checkbox,
   Button,
   FormErrorMessage,
   useToast,
 } from '@chakra-ui/react';
 import { customAxios as axios } from '../../helpers/customAxios';
 import PreviewOnlineSermonContainer from './PreviewOnlineSermonContainer';
-import {DateTime} from 'luxon';
+import { DateTime } from 'luxon';
 
 export default function AdminLiveSermonContainer(props) {
   const toast = useToast();
@@ -28,7 +26,7 @@ export default function AdminLiveSermonContainer(props) {
   const [liveSermon, setLiveSermon] = useState();
   const [id, setId] = useState('');
   const [title, setTitle] = useState('');
-  const [sermonDescription, setSermonDescription] = useState('')
+  const [sermonDescription, setSermonDescription] = useState('');
   const [streamLink, setStreamLink] = useState('');
   const [sermonNotes, setSermonNotes] = useState('');
   const [speaker, setSpeaker] = useState('');
@@ -36,8 +34,8 @@ export default function AdminLiveSermonContainer(props) {
   const [sermonSeriesUrl, setSermonSeriesUrl] = useState('');
   const [sermonPassage, setSermonPassage] = useState('');
   const [sermonDateTime, setSermonDateTime] = useState('');
-  const [streamStartTime,setStreamStartTime] = useState('');
-  const [streamEndTime,setStreamEndTime] = useState('');
+  const [streamStartTime, setStreamStartTime] = useState('');
+  const [streamEndTime, setStreamEndTime] = useState('');
   const [streamPeriodInvalid, setStreamPeriodInvalid] = useState(false);
 
   const initLiveSermonValues = (data) => {
@@ -53,9 +51,10 @@ export default function AdminLiveSermonContainer(props) {
     setSermonDateTime(data.sermonDateTime);
     setStreamStartTime(data.streamStartTime);
     setStreamEndTime(data.streamEndTime);
-  }
+  };
 
-  const sanityCheckFailed = title === '' || sermonDescription === '' || streamPeriodInvalid;
+  const sanityCheckFailed =
+    title === '' || sermonDescription === '' || streamPeriodInvalid;
 
   const createHandler = async () => {
     try {
@@ -70,8 +69,7 @@ export default function AdminLiveSermonContainer(props) {
         sermonPassage,
         sermonDateTime,
         streamStartTime,
-        streamEndTime
-
+        streamEndTime,
       });
 
       if (res.status === 200) {
@@ -83,12 +81,12 @@ export default function AdminLiveSermonContainer(props) {
       toast({
         description: err,
         status: 'error',
-        duration: 5000
+        duration: 5000,
       });
       console.log(err);
-      return false
+      return false;
     }
-  }
+  };
 
   const updateHandler = async () => {
     try {
@@ -104,7 +102,7 @@ export default function AdminLiveSermonContainer(props) {
         sermonPassage,
         sermonDateTime,
         streamStartTime,
-        streamEndTime
+        streamEndTime,
       });
       if (res.status === 200) return true;
     } catch (err) {
@@ -116,16 +114,16 @@ export default function AdminLiveSermonContainer(props) {
       console.log(err);
       return false;
     }
-  }
+  };
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    
+
     if (sanityCheckFailed) {
       toast({
         description: 'Some fields are not valid, please check again.',
         status: 'error',
-        duration: 5000
+        duration: 5000,
       });
       return;
     }
@@ -148,7 +146,7 @@ export default function AdminLiveSermonContainer(props) {
       await getData();
     }
     setIsSaving(false);
-  }
+  };
 
   const clearHandler = () => {
     setId('');
@@ -164,26 +162,26 @@ export default function AdminLiveSermonContainer(props) {
     setStreamStartTime('');
     setStreamEndTime('');
     setStreamPeriodInvalid(false);
-  }
+  };
 
   const resetHandler = () => {
     if (liveSermon) {
-      initLiveSermonValues(liveSermon)
+      initLiveSermonValues(liveSermon);
     }
-  }
+  };
 
   const previewHandler = useCallback(() => {
     if (sanityCheckFailed) return;
 
     setIsPreviewing(true);
-  }, [sanityCheckFailed])
+  }, [sanityCheckFailed]);
 
   const getData = useCallback(async () => {
     try {
       // Hardcoded to always get the latest sermon if it exists, if not returns empty array for actual database
       const { data } = await axios.get('/api/live-sermon/get-live-sermon', {
         params: {
-          sermonId: "635487c446187f591b0fb15a",
+          sermonId: '635487c446187f591b0fb15a',
         },
       });
       if (data && data[0]) {
@@ -221,7 +219,6 @@ export default function AdminLiveSermonContainer(props) {
     }
   }, [streamStartTime, streamEndTime]);
 
-
   return (
     <Container w="100%" maxW="100%">
       {!isLoading && (
@@ -234,40 +231,72 @@ export default function AdminLiveSermonContainer(props) {
               <form onSubmit={onSubmit}>
                 <FormControl isRequired isInvalid={title === ''}>
                   <FormLabel>Title</FormLabel>
-                  <Input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                  <Input
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
                   <FormErrorMessage>Sermon Title is required</FormErrorMessage>
                 </FormControl>
                 <FormControl isRequired isInvalid={sermonDescription === ''}>
                   <FormLabel>Description</FormLabel>
-                  <Textarea value={sermonDescription} onChange={(e) => setSermonDescription(e.target.value)}/>
+                  <Textarea
+                    value={sermonDescription}
+                    onChange={(e) => setSermonDescription(e.target.value)}
+                  />
                   <FormErrorMessage>Description is required</FormErrorMessage>
                 </FormControl>
                 <FormControl isRequired isInvalid={streamLink === ''}>
                   <FormLabel>Stream Link</FormLabel>
-                  <Input type="url" value={streamLink} onChange={(e) => setStreamLink(e.target.value)} />
+                  <Input
+                    type="url"
+                    value={streamLink}
+                    onChange={(e) => setStreamLink(e.target.value)}
+                  />
                   <FormErrorMessage>
                     Stream Link is required/invalid
                   </FormErrorMessage>
                 </FormControl>
                 <FormControl>
                   <FormLabel>Sermon Notes</FormLabel>
-                  <Input type="url" value={sermonNotes} onChange={(e) => setSermonNotes(e.target.value)}/>
+                  <Input
+                    type="url"
+                    value={sermonNotes}
+                    onChange={(e) => setSermonNotes(e.target.value)}
+                  />
                 </FormControl>
                 <FormControl isRequired isInvalid={speaker === ''}>
                   <FormLabel>Speaker</FormLabel>
-                  <Input type="text" value={speaker} placeholder="e.g. Pastor Bo Zhu, Pastor Seth S. Kim" onChange={(e) => setSpeaker(e.target.value)} />
+                  <Input
+                    type="text"
+                    value={speaker}
+                    placeholder="e.g. Pastor Bo Zhu, Pastor Seth S. Kim"
+                    onChange={(e) => setSpeaker(e.target.value)}
+                  />
                 </FormControl>
                 <FormControl isRequired isInvalid={sermonSeries === ''}>
                   <FormLabel>Series</FormLabel>
-                  <Input type="text" value={sermonSeries} onChange={(e) => setSermonSeries(e.target.value)} />
+                  <Input
+                    type="text"
+                    value={sermonSeries}
+                    onChange={(e) => setSermonSeries(e.target.value)}
+                  />
                 </FormControl>
                 <FormControl isRequired isInvalid={sermonSeriesUrl === ''}>
                   <FormLabel>Series Image</FormLabel>
-                  <Input type="url" value={sermonSeriesUrl} onChange={(e) => setSermonSeriesUrl(e.target.value)} />
+                  <Input
+                    type="url"
+                    value={sermonSeriesUrl}
+                    onChange={(e) => setSermonSeriesUrl(e.target.value)}
+                  />
                 </FormControl>
                 <FormControl>
                   <FormLabel>Sermon Passage</FormLabel>
-                  <Input type="text" value={sermonPassage} onChange={(e) => setSermonPassage(e.target.value)} />
+                  <Input
+                    type="text"
+                    value={sermonPassage}
+                    onChange={(e) => setSermonPassage(e.target.value)}
+                  />
                 </FormControl>
                 <FormControl isRequired isInvalid={sermonDateTime === ''}>
                   <FormLabel>Date &#38; Time</FormLabel>
@@ -280,7 +309,8 @@ export default function AdminLiveSermonContainer(props) {
                 <FormControl isInvalid={streamPeriodInvalid} isRequired>
                   <FormLabel> Stream Period </FormLabel>
                   <FormErrorMessage>
-                    {streamPeriodInvalid && 'Stream Period is invalid, please check again'}
+                    {streamPeriodInvalid &&
+                      'Stream Period is invalid, please check again'}
                   </FormErrorMessage>
                   Starting Time
                   <Input
@@ -296,7 +326,13 @@ export default function AdminLiveSermonContainer(props) {
                   />
                 </FormControl>
                 <FormControl mt={5}>
-                  <Button colorScheme="green" type="submit" w="full" isLoading={isSaving} isDisabled={sanityCheckFailed}>
+                  <Button
+                    colorScheme="green"
+                    type="submit"
+                    w="full"
+                    isLoading={isSaving}
+                    isDisabled={sanityCheckFailed}
+                  >
                     {id && id !== '' ? 'UPDATE' : 'CREATE'}
                   </Button>
                 </FormControl>
@@ -308,11 +344,7 @@ export default function AdminLiveSermonContainer(props) {
                 >
                   RESET
                 </Button>
-                <Button
-                  w="full"
-                  mt={5}
-                  onClick={clearHandler}
-                >
+                <Button w="full" mt={5} onClick={clearHandler}>
                   CLEAR
                 </Button>
                 <Button
@@ -329,20 +361,20 @@ export default function AdminLiveSermonContainer(props) {
               <Heading as="h5" size="md" mb={5}>
                 PREVIEW
               </Heading>
-                <PreviewOnlineSermonContainer
-                  isPreviewing={isPreviewing}
-                  setIsPreviewing={setIsPreviewing}
-                  data={{
-                    title,
-                    sermonDescription,
-                    streamLink,
-                    sermonNotes,
-                    speaker,
-                    sermonSeries,
-                    sermonPassage,
-                    sermonDateTime,
-                  }}
-                />
+              <PreviewOnlineSermonContainer
+                isPreviewing={isPreviewing}
+                setIsPreviewing={setIsPreviewing}
+                data={{
+                  title,
+                  sermonDescription,
+                  streamLink,
+                  sermonNotes,
+                  speaker,
+                  sermonSeries,
+                  sermonPassage,
+                  sermonDateTime,
+                }}
+              />
             </Box>
           </Stack>
         </>
