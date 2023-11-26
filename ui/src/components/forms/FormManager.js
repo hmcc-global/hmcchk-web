@@ -240,7 +240,7 @@ const FormManager = (props) => {
                       onClick={() => onClickHandler(formItem)}
                       disabled={
                         noViewPermission(formItem) ||
-                        formItem.formType == 'external'
+                        formItem.formType === 'external'
                       }
                     >
                       View Data

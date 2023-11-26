@@ -38,13 +38,13 @@ const SermonCardList = ({ allSermons }, props) => {
 
   const filterSermon = (event) => {
     setCurrentPage(1);
-    if (event.target.name == 'speaker') {
+    if (event.target.name === 'speaker') {
       setFilterSpeaker(event.target.value);
-    } else if (event.target.name == 'sermon') {
+    } else if (event.target.name === 'sermon') {
       setFilterSermonSeries(event.target.value);
-    } else if (event.target.name == 'book') {
+    } else if (event.target.name === 'book') {
       setFilterBook(event.target.value);
-    } else if (event.target.name == 'service') {
+    } else if (event.target.name === 'service') {
       setFilterServiceType(event.target.value);
     }
   };

@@ -27,7 +27,7 @@ const FilterSermon = ({
       allSermons.map((sermon) => {
         if (!isNaN(sermon.passage[0])) {
           return sermon.passage.split(' ').slice(0, 2).join(' ');
-        } else if (sermon.passage == '') {
+        } else if (sermon.passage === '') {
           return null;
         } else {
           return sermon.passage.split(' ').slice(0, 1).join(' ');

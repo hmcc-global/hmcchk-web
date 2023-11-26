@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   AspectRatio,
   Box,
@@ -9,21 +9,20 @@ import {
   Image,
   Link,
   Text,
-} from "@chakra-ui/react";
-import { DateTime } from "luxon";
+} from '@chakra-ui/react';
+import { DateTime } from 'luxon';
 
 const UpcomingSermon = ({ upcoming }) => {
-  const [displayModal, setDisplayModal] = useState("none");
-  let today = DateTime.now();
-  let upcomingSeries = "";
-  let sermonImage = "";
-  let sermonDesc = "";
-  let sermonTitle = "";
+  const [displayModal, setDisplayModal] = useState('none');
+  let upcomingSeries = '';
+  let sermonImage = '';
+  let sermonDesc = '';
+  let sermonTitle = '';
   if (upcoming != null) {
     upcomingSeries = upcoming.filter((event) => {
       if (
-        event.time == "10:00 AM" &&
-        event.title.replace(/ .*/, "") == "Sunday"
+        event.time === '10:00 AM' &&
+        event.title.replace(/ .*/, '') === 'Sunday'
       )
         return event;
     })[0];
@@ -42,15 +41,15 @@ const UpcomingSermon = ({ upcoming }) => {
           upcomingSeries.startDate
         ).plus({ days: 7 });
         let today = DateTime.now();
-        setDisplayModal(today >= upcomingSermonDateT7 ? "none" : "unset");
+        setDisplayModal(today >= upcomingSermonDateT7 ? 'none' : 'unset');
       } else {
-        setDisplayModal("none");
+        setDisplayModal('none');
       }
     }, 2000);
   }, [upcoming, upcomingSeries]);
 
   const closeModal = () => {
-    setDisplayModal("none");
+    setDisplayModal('none');
   };
 
   const WebView = () => {
@@ -61,11 +60,11 @@ const UpcomingSermon = ({ upcoming }) => {
         top="10px"
         height="auto"
         maxW="md"
-        width={{ base: "none", md: "md" }}
+        width={{ base: 'none', md: 'md' }}
         background="#FFFFFF"
         boxShadow="0px 3px 4px 2px rgba(0, 0, 0, 0.3)"
         borderRadius="20px"
-        display={{ base: "none", md: displayModal }}
+        display={{ base: 'none', md: displayModal }}
         px={[2, 4]}
         py={[2, 4]}
         zIndex="sticky"
@@ -122,7 +121,7 @@ const UpcomingSermon = ({ upcoming }) => {
         height="auto"
         width="100vw"
         background="#FFFFFF"
-        display={{ base: displayModal, md: "none" }}
+        display={{ base: displayModal, md: 'none' }}
         p="8"
         zIndex="sticky"
       >
