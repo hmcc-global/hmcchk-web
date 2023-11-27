@@ -1,7 +1,6 @@
 import {
   Stack,
   Container,
-  Box,
   Heading,
   Button,
   FormControl,

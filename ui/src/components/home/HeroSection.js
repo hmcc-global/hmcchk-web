@@ -150,10 +150,10 @@ const HeroSection = ({ anchorTarget }) => {
               </Text>
               <Text
                 color="white"
-                justifyContent="center"
                 display={{ base: 'flex', md: 'none' }}
                 style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
                 fontSize="12px"
+                align="center"
               >
                 Transformation Center - 22/F Crocodile Center, Kwun Tong &
                 Online

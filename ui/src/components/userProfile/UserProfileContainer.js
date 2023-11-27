@@ -1,4 +1,4 @@
-import { Container, Image, Box } from '@chakra-ui/react';
+import { Container, Box } from '@chakra-ui/react';
 import UserProfileDesktop from './UserProfileDesktop';
 import UserProfileMobile from './UserProfileMobile';
 

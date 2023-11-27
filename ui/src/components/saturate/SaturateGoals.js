@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Box,
   Container,
@@ -6,14 +5,9 @@ import {
   Text,
   VStack,
   Flex,
-  Divider,
   UnorderedList,
   ListItem,
-  GridItem,
   HStack,
-  Grid,
-  Stack,
-  Center,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
