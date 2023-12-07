@@ -19,9 +19,9 @@ import Faq from './Faq';
 // LinkOverlay,
 
 const SUNDAY_CELEBRATION_LOCATION =
-  'Transformation Center\n 22/F, Crocodile Center\n 79 Hoi Yuen Rd,\n Kwun Tong';
+  'Transformation Center\n Unit 02, 22/F, Crocodile Center\n 79 Hoi Yuen Rd,\n Kwun Tong';
 const SUNDAY_CELEBRATION_GOOGLE_MAPS_EMBED =
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.108283447043!2d114.22300777523644!3d22.31174417967842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404014f8caf0583%3A0xb486f5b3fe80efae!2sCrocodile%20Centre!5e0!3m2!1sen!2sus!4v1700553454511!5m2!1sen!2sus';
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.1090099217117!2d114.2256487!3d22.311716699999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404018c12b37b11%3A0x594094421f794e0b!2sHarvest%20Mission%20Community%20Church%20(HMCC)%20of%20Hong%20Kong!5e0!3m2!1sen!2shk!4v1701923920210!5m2!1sen!2shk';
 
 const VisitUsPage = (props) => {
   return (
