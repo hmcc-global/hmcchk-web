@@ -1,258 +1,258 @@
-{
+﻿{
   "plan": {
     "title": "2 Year Reading Plan - Year 1",
     "reading": [
       {
         "day": "1",
-        "passage": "Genesis 1-2"
+        "passage": "Genesis 1-3"
       },
       {
         "day": "2",
-        "passage": "Genesis 3-4"
+        "passage": "Matthew 1"
       },
       {
         "day": "3",
-        "passage": "Genesis 5-6"
+        "passage": "Genesis 4-6"
       },
       {
         "day": "4",
-        "passage": "Matthew 1-2"
+        "passage": "Matthew 2"
       },
       {
         "day": "5",
-        "passage": "Genesis 7-8"
+        "passage": "Genesis 7-9"
       },
       {
         "day": "6",
-        "passage": "Genesis 9-10"
+        "passage": "Matthew 3"
       },
       {
         "day": "7",
-        "passage": "Genesis 11-12"
+        "passage": "Genesis 10-12"
       },
       {
         "day": "8",
-        "passage": "Matthew 3-4"
+        "passage": "Matthew 4"
       },
       {
         "day": "9",
-        "passage": "Genesis 13-14"
+        "passage": "Genesis 13-15"
       },
       {
         "day": "10",
-        "passage": "Genesis 15-16"
-      },
-      {
-        "day": "11",
-        "passage": "Genesis 17-18"
-      },
-      {
-        "day": "12",
         "passage": "Matthew 5"
       },
       {
+        "day": "11",
+        "passage": "Genesis 16-17"
+      },
+      {
+        "day": "12",
+        "passage": "Genesis 18"
+      },
+      {
         "day": "13",
-        "passage": "Genesis 19-20"
+        "passage": "Genesis 19"
       },
       {
         "day": "14",
-        "passage": "Genesis 21-22"
-      },
-      {
-        "day": "15",
-        "passage": "Genesis 23-24"
-      },
-      {
-        "day": "16",
         "passage": "Matthew 6"
       },
       {
+        "day": "15",
+        "passage": "Genesis 20-21"
+      },
+      {
+        "day": "16",
+        "passage": "Genesis 22"
+      },
+      {
         "day": "17",
-        "passage": "Genesis 25-26"
+        "passage": "Genesis 23-24"
       },
       {
         "day": "18",
-        "passage": "Genesis 27-28"
-      },
-      {
-        "day": "19",
-        "passage": "Genesis 29-30"
-      },
-      {
-        "day": "20",
         "passage": "Matthew 7"
       },
       {
-        "day": "21",
-        "passage": "Genesis 31"
+        "day": "19",
+        "passage": "Genesis 25-26"
       },
       {
-        "day": "22",
-        "passage": "Genesis 32-33"
-      },
-      {
-        "day": "23",
-        "passage": "Genesis 34-35"
-      },
-      {
-        "day": "24",
+        "day": "20",
         "passage": "Matthew 8"
       },
       {
-        "day": "25",
-        "passage": "Genesis 36-37"
+        "day": "21",
+        "passage": "Genesis 27-28"
       },
       {
-        "day": "26",
-        "passage": "Genesis 38-39"
+        "day": "22",
+        "passage": "Genesis 29"
       },
       {
-        "day": "27",
-        "passage": "Genesis 40-41"
+        "day": "23",
+        "passage": "Genesis 30"
       },
       {
-        "day": "28",
+        "day": "24",
         "passage": "Matthew 9"
       },
       {
+        "day": "25",
+        "passage": "Genesis 31"
+      },
+      {
+        "day": "26",
+        "passage": "Genesis 32-33"
+      },
+      {
+        "day": "27",
+        "passage": "Genesis 34-35"
+      },
+      {
+        "day": "28",
+        "passage": "Matthew 10"
+      },
+      {
         "day": "29",
-        "passage": "Genesis 42-43"
+        "passage": "Genesis 36-37"
       },
       {
         "day": "30",
-        "passage": "Genesis 44-45"
+        "passage": "Genesis 38"
       },
       {
         "day": "31",
-        "passage": "Genesis 46-47"
+        "passage": "Genesis 39-40"
       },
       {
         "day": "32",
-        "passage": "Matthew 10-11"
+        "passage": "Matthew 11"
       },
       {
         "day": "33",
-        "passage": "Genesis 48-49"
+        "passage": "Genesis 41-42"
       },
       {
         "day": "34",
-        "passage": "Genesis 50"
-      },
-      {
-        "day": "35",
-        "passage": "Exodus 1-3"
-      },
-      {
-        "day": "36",
         "passage": "Matthew 12"
       },
       {
+        "day": "35",
+        "passage": "Genesis 43-44"
+      },
+      {
+        "day": "36",
+        "passage": "Genesis 45-46"
+      },
+      {
         "day": "37",
-        "passage": "Exodus 4-5"
+        "passage": "Genesis 47-48"
       },
       {
         "day": "38",
-        "passage": "Exodus 6-7"
-      },
-      {
-        "day": "39",
-        "passage": "Exodus 8-9"
-      },
-      {
-        "day": "40",
         "passage": "Matthew 13"
       },
       {
+        "day": "39",
+        "passage": "Genesis 49-50"
+      },
+      {
+        "day": "40",
+        "passage": "Exodus 1"
+      },
+      {
         "day": "41",
-        "passage": "Exodus 10-11"
+        "passage": "Exodus 2-3"
       },
       {
         "day": "42",
-        "passage": "Exodus 12-13"
-      },
-      {
-        "day": "43",
-        "passage": "Exodus 14-15"
-      },
-      {
-        "day": "44",
         "passage": "Matthew 14"
       },
       {
+        "day": "43",
+        "passage": "Exodus 4-5"
+      },
+      {
+        "day": "44",
+        "passage": "Exodus 6"
+      },
+      {
         "day": "45",
-        "passage": "Exodus 16-17"
+        "passage": "Exodus 7-8"
       },
       {
         "day": "46",
-        "passage": "Exodus 18-19"
-      },
-      {
-        "day": "47",
-        "passage": "Exodus 20-21"
-      },
-      {
-        "day": "48",
         "passage": "Matthew 15"
       },
       {
+        "day": "47",
+        "passage": "Exodus 9-10"
+      },
+      {
+        "day": "48",
+        "passage": "Exodus 11"
+      },
+      {
         "day": "49",
-        "passage": "Exodus 22-23"
+        "passage": "Exodus 12-13"
       },
       {
         "day": "50",
-        "passage": "Exodus 24-25"
+        "passage": "Matthew 16"
       },
       {
         "day": "51",
-        "passage": "Exodus 26-27"
+        "passage": "Exodus 14-15"
       },
       {
         "day": "52",
-        "passage": "Matthew 16-17"
+        "passage": "Matthew 17"
       },
       {
         "day": "53",
-        "passage": "Exodus 28"
+        "passage": "Exodus 16-18"
       },
       {
         "day": "54",
-        "passage": "Exodus 29"
-      },
-      {
-        "day": "55",
-        "passage": "Exodus 30-31"
-      },
-      {
-        "day": "56",
         "passage": "Matthew 18"
       },
       {
+        "day": "55",
+        "passage": "Exodus 19-20"
+      },
+      {
+        "day": "56",
+        "passage": "Exodus 21"
+      },
+      {
         "day": "57",
-        "passage": "Exodus 32"
+        "passage": "Exodus 22"
       },
       {
         "day": "58",
-        "passage": "Exodus 33"
+        "passage": "Matthew 19"
       },
       {
         "day": "59",
-        "passage": "Exodus 34"
+        "passage": "Exodus 23-24"
       },
       {
         "day": "60",
-        "passage": "Matthew 19-20"
+        "passage": "Matthew 20"
       },
       {
         "day": "61",
-        "passage": "Exodus 35"
+        "passage": "Exodus 25"
       },
       {
         "day": "62",
-        "passage": "Exodus 36-37"
+        "passage": "Exodus 26"
       },
       {
         "day": "63",
-        "passage": "Exodus 38"
+        "passage": "Exodus 27-28"
       },
       {
         "day": "64",
@@ -260,15 +260,15 @@
       },
       {
         "day": "65",
-        "passage": "Exodus 39"
+        "passage": "Exodus 29"
       },
       {
         "day": "66",
-        "passage": "Exodus 40"
+        "passage": "Exodus 30-31"
       },
       {
         "day": "67",
-        "passage": "Leviticus 1-3"
+        "passage": "Exodus 32-33"
       },
       {
         "day": "68",
@@ -276,15 +276,15 @@
       },
       {
         "day": "69",
-        "passage": "Leviticus 4"
+        "passage": "Exodus 34-35"
       },
       {
         "day": "70",
-        "passage": "Leviticus 5-6"
+        "passage": "Exodus 36"
       },
       {
         "day": "71",
-        "passage": "Leviticus 7-8"
+        "passage": "Exodus 37-38"
       },
       {
         "day": "72",
@@ -292,15 +292,15 @@
       },
       {
         "day": "73",
-        "passage": "Leviticus 9-10"
+        "passage": "Exodus 39"
       },
       {
         "day": "74",
-        "passage": "Leviticus 11-12"
+        "passage": "Exodus 40"
       },
       {
         "day": "75",
-        "passage": "Leviticus 13"
+        "passage": "Leviticus 1-3"
       },
       {
         "day": "76",
@@ -308,15 +308,15 @@
       },
       {
         "day": "77",
-        "passage": "Leviticus 14"
+        "passage": "Leviticus 4-5"
       },
       {
         "day": "78",
-        "passage": "Leviticus 15-16"
+        "passage": "Leviticus 6"
       },
       {
         "day": "79",
-        "passage": "Leviticus 17-18"
+        "passage": "Leviticus 7"
       },
       {
         "day": "80",
@@ -324,15 +324,15 @@
       },
       {
         "day": "81",
-        "passage": "Leviticus 19-20"
+        "passage": "Leviticus 8-9"
       },
       {
         "day": "82",
-        "passage": "Leviticus 21-22"
+        "passage": "Leviticus 10"
       },
       {
         "day": "83",
-        "passage": "Leviticus 23"
+        "passage": "Leviticus 11-12"
       },
       {
         "day": "84",
@@ -340,79 +340,79 @@
       },
       {
         "day": "85",
-        "passage": "Leviticus 24"
+        "passage": "Leviticus 13"
       },
       {
         "day": "86",
-        "passage": "Leviticus 25"
+        "passage": "Leviticus 14"
       },
       {
         "day": "87",
-        "passage": "Leviticus 26"
+        "passage": "Leviticus 15"
       },
       {
         "day": "88",
-        "passage": "Matthew 27"
+        "passage": "Leviticus 16"
       },
       {
         "day": "89",
-        "passage": "Numbers 1"
+        "passage": "Matthew 27"
       },
       {
         "day": "90",
-        "passage": "Numbers 2"
+        "passage": "Leviticus 17"
       },
       {
         "day": "91",
-        "passage": "Leviticus 27"
+        "passage": "Leviticus 18"
       },
       {
         "day": "92",
-        "passage": "Matthew 28"
+        "passage": "Leviticus 19"
       },
       {
         "day": "93",
-        "passage": "Numbers 3"
+        "passage": "Leviticus 20"
       },
       {
         "day": "94",
-        "passage": "Numbers 4"
+        "passage": "Leviticus 21"
       },
       {
         "day": "95",
-        "passage": "Numbers 5"
+        "passage": "Leviticus 22"
       },
       {
         "day": "96",
-        "passage": "Mark 1"
+        "passage": "Matthew 28"
       },
       {
         "day": "97",
-        "passage": "Numbers 6"
+        "passage": "Leviticus 23-24"
       },
       {
         "day": "98",
-        "passage": "Numbers 7"
+        "passage": "Mark 1"
       },
       {
         "day": "99",
-        "passage": "Numbers 8-9"
+        "passage": "Leviticus 25"
       },
       {
         "day": "100",
-        "passage": "Mark 2"
+        "passage": "Leviticus 26"
       },
       {
         "day": "101",
-        "passage": "Numbers 10"
+        "passage": "Leviticus 27"
       },
       {
         "day": "102",
-        "passage": "Numbers 11"
+        "passage": "Mark 2"
       },
       {
         "day": "103",
-        "passage": "Numbers 12-13"
+        "passage": "Numbers 1-2"
       },
       {
         "day": "104",
@@ -420,15 +420,15 @@
       },
       {
         "day": "105",
-        "passage": "Numbers 14"
+        "passage": "Numbers 3"
       },
       {
         "day": "106",
-        "passage": "Numbers 15"
+        "passage": "Numbers 4"
       },
       {
         "day": "107",
-        "passage": "Numbers 16-17"
+        "passage": "Numbers 5-6"
       },
       {
         "day": "108",
@@ -436,15 +436,15 @@
       },
       {
         "day": "109",
-        "passage": "Numbers 18-19"
+        "passage": "Numbers 7"
       },
       {
         "day": "110",
-        "passage": "Numbers 20"
+        "passage": "Numbers 8-9"
       },
       {
         "day": "111",
-        "passage": "Numbers 21"
+        "passage": "Numbers 10-11"
       },
       {
         "day": "112",
@@ -452,15 +452,15 @@
       },
       {
         "day": "113",
-        "passage": "Numbers 22"
+        "passage": "Numbers 12-13"
       },
       {
         "day": "114",
-        "passage": "Numbers 23"
+        "passage": "Numbers 14"
       },
       {
         "day": "115",
-        "passage": "Numbers 24-25"
+        "passage": "Numbers 15-16"
       },
       {
         "day": "116",
@@ -468,15 +468,15 @@
       },
       {
         "day": "117",
-        "passage": "Numbers 26"
+        "passage": "Numbers 17-18"
       },
       {
         "day": "118",
-        "passage": "Numbers 27-28"
+        "passage": "Numbers 19-20"
       },
       {
         "day": "119",
-        "passage": "Numbers 29-30"
+        "passage": "Numbers 21-22"
       },
       {
         "day": "120",
@@ -484,15 +484,15 @@
       },
       {
         "day": "121",
-        "passage": "Numbers 31"
+        "passage": "Numbers 23-24"
       },
       {
         "day": "122",
-        "passage": "Numbers 32"
+        "passage": "Numbers 25-26"
       },
       {
         "day": "123",
-        "passage": "Numbers 33"
+        "passage": "Numbers 27-28"
       },
       {
         "day": "124",
@@ -500,31 +500,31 @@
       },
       {
         "day": "125",
-        "passage": "Numbers 34-35"
+        "passage": "Numbers 29-30"
       },
       {
         "day": "126",
-        "passage": "Numbers 36"
+        "passage": "Numbers 31"
       },
       {
         "day": "127",
-        "passage": "Deuteronomy 1"
-      },
-      {
-        "day": "128",
         "passage": "Mark 9"
       },
       {
+        "day": "128",
+        "passage": "Numbers 32"
+      },
+      {
         "day": "129",
-        "passage": "Deuteronomy 2"
+        "passage": "Numbers 33"
       },
       {
         "day": "130",
-        "passage": "Deuteronomy 3"
+        "passage": "Numbers 34"
       },
       {
         "day": "131",
-        "passage": "Deuteronomy 4"
+        "passage": "Numbers 35-36"
       },
       {
         "day": "132",
@@ -532,79 +532,79 @@
       },
       {
         "day": "133",
-        "passage": "Deuteronomy 5-6"
+        "passage": "Deuteronomy 1-3"
       },
       {
         "day": "134",
-        "passage": "Deuteronomy 7-8"
+        "passage": "Deuteronomy 4-6"
       },
       {
         "day": "135",
-        "passage": "Deuteronomy 9"
-      },
-      {
-        "day": "136",
         "passage": "Mark 11"
       },
       {
+        "day": "136",
+        "passage": "Deuteronomy 7-9"
+      },
+      {
         "day": "137",
-        "passage": "Deuteronomy 10"
+        "passage": "Deuteronomy 10-12"
       },
       {
         "day": "138",
-        "passage": "Deuteronomy 11"
-      },
-      {
-        "day": "139",
-        "passage": "Deuteronomy 12"
-      },
-      {
-        "day": "140",
         "passage": "Mark 12"
       },
       {
-        "day": "141",
+        "day": "139",
         "passage": "Deuteronomy 13-14"
       },
       {
-        "day": "142",
+        "day": "140",
         "passage": "Deuteronomy 15-16"
       },
       {
-        "day": "143",
+        "day": "141",
         "passage": "Deuteronomy 17-18"
       },
       {
-        "day": "144",
+        "day": "142",
         "passage": "Mark 13"
       },
       {
-        "day": "145",
+        "day": "143",
         "passage": "Deuteronomy 19-20"
       },
       {
-        "day": "146",
+        "day": "144",
         "passage": "Deuteronomy 21-22"
       },
       {
-        "day": "147",
+        "day": "145",
         "passage": "Deuteronomy 23-24"
       },
       {
-        "day": "148",
+        "day": "146",
         "passage": "Mark 14"
       },
       {
-        "day": "149",
+        "day": "147",
         "passage": "Deuteronomy 25-26"
       },
       {
-        "day": "150",
+        "day": "148",
         "passage": "Deuteronomy 27"
       },
       {
-        "day": "151",
+        "day": "149",
         "passage": "Deuteronomy 28"
+      },
+      {
+        "day": "150",
+        "passage": "Deuteronomy 29-30"
+      },
+      {
+        "day": "151",
+        "passage": "Deuteronomy 31"
       },
       {
         "day": "152",
@@ -612,15 +612,15 @@
       },
       {
         "day": "153",
-        "passage": "Deuteronomy 29-30"
+        "passage": "Deuteronomy 32-34"
       },
       {
         "day": "154",
-        "passage": "Deuteronomy 31"
+        "passage": "Joshua 1-2"
       },
       {
         "day": "155",
-        "passage": "Deuteronomy 32"
+        "passage": "Joshua 3-4"
       },
       {
         "day": "156",
@@ -628,839 +628,839 @@
       },
       {
         "day": "157",
-        "passage": "Deuteronomy 33"
+        "passage": "Joshua 5-6"
       },
       {
         "day": "158",
-        "passage": "Deuteronomy 34"
+        "passage": "Joshua 7-8"
       },
       {
         "day": "159",
-        "passage": "Joshua 1"
+        "passage": "Joshua 9-10"
       },
       {
         "day": "160",
-        "passage": "Luke 1"
+        "passage": "Joshua 11-12"
       },
       {
         "day": "161",
-        "passage": "Joshua 2-3"
+        "passage": "Luke 1"
       },
       {
         "day": "162",
-        "passage": "Joshua 4-5"
+        "passage": "Joshua 13-14"
       },
       {
         "day": "163",
-        "passage": "Joshua 6"
+        "passage": "Joshua 15-16"
       },
       {
         "day": "164",
-        "passage": "Luke 2"
+        "passage": "Joshua 17-18"
       },
       {
         "day": "165",
-        "passage": "Joshua 7"
+        "passage": "Luke 2"
       },
       {
         "day": "166",
-        "passage": "Joshua 8"
+        "passage": "Joshua 19-20"
       },
       {
         "day": "167",
-        "passage": "Joshua 9"
+        "passage": "Joshua 21-22"
       },
       {
         "day": "168",
-        "passage": "Luke 3"
+        "passage": "Joshua 23-24"
       },
       {
         "day": "169",
-        "passage": "Joshua 10"
+        "passage": "Luke 3"
       },
       {
         "day": "170",
-        "passage": "Joshua 11"
+        "passage": "Judges 1-2"
       },
       {
         "day": "171",
-        "passage": "Joshua 12"
-      },
-      {
-        "day": "172",
         "passage": "Luke 4"
       },
       {
+        "day": "172",
+        "passage": "Judges 3-4"
+      },
+      {
         "day": "173",
-        "passage": "Joshua 13"
+        "passage": "Judges 5-6"
       },
       {
         "day": "174",
-        "passage": "Joshua 14"
+        "passage": "Judges 7-8"
       },
       {
         "day": "175",
-        "passage": "Joshua 15"
-      },
-      {
-        "day": "176",
         "passage": "Luke 5"
       },
       {
+        "day": "176",
+        "passage": "Judges 9-10"
+      },
+      {
         "day": "177",
-        "passage": "Joshua 16-17"
+        "passage": "Judges 11-12"
       },
       {
         "day": "178",
-        "passage": "Joshua 18"
+        "passage": "Judges 13-14"
       },
       {
         "day": "179",
-        "passage": "Joshua 19"
-      },
-      {
-        "day": "180",
         "passage": "Luke 6"
       },
       {
+        "day": "180",
+        "passage": "Judges 15-16"
+      },
+      {
         "day": "181",
-        "passage": "Joshua 20-21"
-      },
-      {
-        "day": "182",
-        "passage": "Joshua 22"
-      },
-      {
-        "day": "183",
-        "passage": "Joshua 23"
-      },
-      {
-        "day": "184",
-        "passage": "Luke 7"
-      },
-      {
-        "day": "185",
-        "passage": "Joshua 24"
-      },
-      {
-        "day": "186",
-        "passage": "Judges 1"
-      },
-      {
-        "day": "187",
-        "passage": "Judges 2"
-      },
-      {
-        "day": "188",
-        "passage": "Luke 8"
-      },
-      {
-        "day": "189",
-        "passage": "Judges 3"
-      },
-      {
-        "day": "190",
-        "passage": "Judges 4"
-      },
-      {
-        "day": "191",
-        "passage": "Judges 5"
-      },
-      {
-        "day": "192",
-        "passage": "Luke 9"
-      },
-      {
-        "day": "193",
-        "passage": "Judges 6"
-      },
-      {
-        "day": "194",
-        "passage": "Judges 7"
-      },
-      {
-        "day": "195",
-        "passage": "Judges 8"
-      },
-      {
-        "day": "196",
-        "passage": "Luke 10"
-      },
-      {
-        "day": "197",
-        "passage": "Judges 9"
-      },
-      {
-        "day": "198",
-        "passage": "Judges 10-11"
-      },
-      {
-        "day": "199",
-        "passage": "Judges 12"
-      },
-      {
-        "day": "200",
-        "passage": "Luke 11"
-      },
-      {
-        "day": "201",
-        "passage": "Judges 13"
-      },
-      {
-        "day": "202",
-        "passage": "Judges 14-15"
-      },
-      {
-        "day": "203",
-        "passage": "Judges 16"
-      },
-      {
-        "day": "204",
-        "passage": "Luke 12"
-      },
-      {
-        "day": "205",
         "passage": "Judges 17-18"
       },
       {
-        "day": "206",
-        "passage": "Judges 19"
+        "day": "182",
+        "passage": "Judges 19-20"
       },
       {
-        "day": "207",
-        "passage": "Judges 20"
+        "day": "183",
+        "passage": "Luke 7"
       },
       {
-        "day": "208",
-        "passage": "Luke 13"
-      },
-      {
-        "day": "209",
+        "day": "184",
         "passage": "Judges 21"
       },
       {
-        "day": "210",
+        "day": "185",
         "passage": "Ruth 1-2"
       },
       {
-        "day": "211",
+        "day": "186",
         "passage": "Ruth 3-4"
       },
       {
-        "day": "212",
-        "passage": "Luke 14"
+        "day": "187",
+        "passage": "Luke 8"
       },
       {
-        "day": "213",
-        "passage": "1 Samuel 1"
+        "day": "188",
+        "passage": "1 Samuel 1-2"
       },
       {
-        "day": "214",
-        "passage": "1 Samuel 2"
-      },
-      {
-        "day": "215",
+        "day": "189",
         "passage": "1 Samuel 3-4"
       },
       {
-        "day": "216",
-        "passage": "Luke 15"
-      },
-      {
-        "day": "217",
+        "day": "190",
         "passage": "1 Samuel 5-6"
       },
       {
-        "day": "218",
+        "day": "191",
+        "passage": "Luke 9"
+      },
+      {
+        "day": "192",
         "passage": "1 Samuel 7-8"
       },
       {
-        "day": "219",
+        "day": "193",
         "passage": "1 Samuel 9-10"
       },
       {
-        "day": "220",
-        "passage": "Luke 16"
-      },
-      {
-        "day": "221",
+        "day": "194",
         "passage": "1 Samuel 11-12"
       },
       {
-        "day": "222",
+        "day": "195",
         "passage": "1 Samuel 13"
       },
       {
-        "day": "223",
+        "day": "196",
         "passage": "1 Samuel 14"
       },
       {
-        "day": "224",
-        "passage": "Luke 17"
+        "day": "197",
+        "passage": "Luke 10"
       },
       {
-        "day": "225",
-        "passage": "1 Samuel 15"
+        "day": "198",
+        "passage": "1 Samuel 15-16"
       },
       {
-        "day": "226",
-        "passage": "1 Samuel 16"
-      },
-      {
-        "day": "227",
+        "day": "199",
         "passage": "1 Samuel 17"
       },
       {
-        "day": "228",
-        "passage": "Luke 18"
-      },
-      {
-        "day": "229",
+        "day": "200",
         "passage": "1 Samuel 18"
       },
       {
-        "day": "230",
-        "passage": "1 Samuel 19"
+        "day": "201",
+        "passage": "Luke 11"
       },
       {
-        "day": "231",
-        "passage": "1 Samuel 20"
+        "day": "202",
+        "passage": "1 Samuel 19-20"
       },
       {
-        "day": "232",
-        "passage": "Luke 19"
-      },
-      {
-        "day": "233",
+        "day": "203",
         "passage": "1 Samuel 21-22"
       },
       {
-        "day": "234",
+        "day": "204",
         "passage": "1 Samuel 23-24"
       },
       {
-        "day": "235",
+        "day": "205",
+        "passage": "Luke 12"
+      },
+      {
+        "day": "206",
         "passage": "1 Samuel 25"
       },
       {
-        "day": "236",
-        "passage": "Luke 20"
-      },
-      {
-        "day": "237",
+        "day": "207",
         "passage": "1 Samuel 26-27"
       },
       {
-        "day": "238",
+        "day": "208",
         "passage": "1 Samuel 28-29"
       },
       {
-        "day": "239",
+        "day": "209",
+        "passage": "Luke 13"
+      },
+      {
+        "day": "210",
         "passage": "1 Samuel 30-31"
       },
       {
-        "day": "240",
-        "passage": "Luke 21"
+        "day": "211",
+        "passage": "2 Samuel 1-2"
       },
       {
-        "day": "241",
-        "passage": "2 Samuel 1"
+        "day": "212",
+        "passage": "2 Samuel 3-4"
       },
       {
-        "day": "242",
-        "passage": "2 Samuel 2"
+        "day": "213",
+        "passage": "Luke 14"
       },
       {
-        "day": "243",
-        "passage": "2 Samuel 3"
+        "day": "214",
+        "passage": "2 Samuel 5-6"
       },
       {
-        "day": "244",
-        "passage": "Luke 22"
-      },
-      {
-        "day": "245",
-        "passage": "2 Samuel 4-5"
-      },
-      {
-        "day": "246",
-        "passage": "2 Samuel 6"
-      },
-      {
-        "day": "247",
+        "day": "215",
         "passage": "2 Samuel 7-8"
       },
       {
-        "day": "248",
-        "passage": "Luke 23"
-      },
-      {
-        "day": "249",
+        "day": "216",
         "passage": "2 Samuel 9-10"
       },
       {
-        "day": "250",
+        "day": "217",
+        "passage": "Luke 15"
+      },
+      {
+        "day": "218",
         "passage": "2 Samuel 11-12"
       },
       {
-        "day": "251",
-        "passage": "2 Samuel 13"
+        "day": "219",
+        "passage": "2 Samuel 13-14"
       },
       {
-        "day": "252",
-        "passage": "Luke 24"
+        "day": "220",
+        "passage": "2 Samuel 15-16"
       },
       {
-        "day": "253",
-        "passage": "2 Samuel 14"
+        "day": "221",
+        "passage": "Luke 16"
       },
       {
-        "day": "254",
-        "passage": "2 Samuel 15"
+        "day": "222",
+        "passage": "2 Samuel 17-18"
       },
       {
-        "day": "255",
-        "passage": "2 Samuel 16-17"
+        "day": "223",
+        "passage": "Luke 17"
       },
       {
-        "day": "256",
-        "passage": "John 1-2"
+        "day": "224",
+        "passage": "2 Samuel 19-20"
       },
       {
-        "day": "257",
-        "passage": "2 Samuel 18"
+        "day": "225",
+        "passage": "2 Samuel 21-22"
       },
       {
-        "day": "258",
-        "passage": "2 Samuel 19"
+        "day": "226",
+        "passage": "2 Samuel 23-24"
       },
       {
-        "day": "259",
-        "passage": "2 Samuel 20-21"
+        "day": "227",
+        "passage": "Luke 18"
       },
       {
-        "day": "260",
-        "passage": "John 3"
-      },
-      {
-        "day": "261",
-        "passage": "2 Samuel 22"
-      },
-      {
-        "day": "262",
-        "passage": "2 Samuel 23"
-      },
-      {
-        "day": "263",
-        "passage": "2 Samuel 24"
-      },
-      {
-        "day": "264",
-        "passage": "John 4"
-      },
-      {
-        "day": "265",
+        "day": "228",
         "passage": "1 Kings 1"
       },
       {
-        "day": "266",
+        "day": "229",
         "passage": "1 Kings 2"
       },
       {
-        "day": "267",
-        "passage": "1 Kings 3"
+        "day": "230",
+        "passage": "1 Kings 3-4"
       },
       {
-        "day": "268",
-        "passage": "John 5"
+        "day": "231",
+        "passage": "Luke 19"
       },
       {
-        "day": "269",
-        "passage": "1 Kings 4"
-      },
-      {
-        "day": "270",
+        "day": "232",
         "passage": "1 Kings 5-6"
       },
       {
-        "day": "271",
+        "day": "233",
         "passage": "1 Kings 7"
       },
       {
-        "day": "272",
-        "passage": "John 6"
-      },
-      {
-        "day": "273",
+        "day": "234",
         "passage": "1 Kings 8"
       },
       {
-        "day": "274",
-        "passage": "1 Kings 9"
+        "day": "235",
+        "passage": "Luke 20"
       },
       {
-        "day": "275",
-        "passage": "1 Kings 10"
+        "day": "236",
+        "passage": "1 Kings 9-10"
       },
       {
-        "day": "276",
-        "passage": "John 7"
+        "day": "237",
+        "passage": "1 Kings 11-12"
       },
       {
-        "day": "277",
-        "passage": "1 Kings 11"
+        "day": "238",
+        "passage": "1 Kings 13-14"
       },
       {
-        "day": "278",
-        "passage": "1 Kings 12"
+        "day": "239",
+        "passage": "Luke 21"
       },
       {
-        "day": "279",
-        "passage": "1 Kings 13"
+        "day": "240",
+        "passage": "1 Kings 15-16"
       },
       {
-        "day": "280",
-        "passage": "John 8"
+        "day": "241",
+        "passage": "1 Kings 17-18"
       },
       {
-        "day": "281",
-        "passage": "1 Kings 14"
+        "day": "242",
+        "passage": "1 Kings 19-20"
       },
       {
-        "day": "282",
-        "passage": "1 Kings 15"
+        "day": "243",
+        "passage": "Luke 22"
       },
       {
-        "day": "283",
-        "passage": "1 Kings 16"
+        "day": "244",
+        "passage": "1 Kings 21-22"
       },
       {
-        "day": "284",
-        "passage": "John 9"
-      },
-      {
-        "day": "285",
-        "passage": "1 Kings 17"
-      },
-      {
-        "day": "286",
-        "passage": "1 Kings 18"
-      },
-      {
-        "day": "287",
-        "passage": "1 Kings 19"
-      },
-      {
-        "day": "288",
-        "passage": "John 10"
-      },
-      {
-        "day": "289",
-        "passage": "1 Kings 20"
-      },
-      {
-        "day": "290",
-        "passage": "1 Kings 21 "
-      },
-      {
-        "day": "291",
-        "passage": "1 Kings 22"
-      },
-      {
-        "day": "292",
-        "passage": "John 11"
-      },
-      {
-        "day": "293",
+        "day": "245",
         "passage": "2 Kings 1-2"
       },
       {
-        "day": "294",
+        "day": "246",
         "passage": "2 Kings 3"
       },
       {
-        "day": "295",
+        "day": "247",
         "passage": "2 Kings 4"
       },
       {
-        "day": "296",
-        "passage": "John 12"
+        "day": "248",
+        "passage": "2 Kings 5-6"
       },
       {
-        "day": "297",
-        "passage": "2 Kings 5"
+        "day": "249",
+        "passage": "Luke 23"
       },
       {
-        "day": "298",
-        "passage": "2 Kings 6"
+        "day": "250",
+        "passage": "2 Kings 7-8"
       },
       {
-        "day": "299",
-        "passage": "2 Kings 7"
+        "day": "251",
+        "passage": "2 Kings 9-10"
       },
       {
-        "day": "300",
-        "passage": "John 13-14"
-      },
-      {
-        "day": "301",
-        "passage": "2 Kings 8"
-      },
-      {
-        "day": "302",
-        "passage": "2 Kings 9"
-      },
-      {
-        "day": "303",
-        "passage": "2 Kings 10"
-      },
-      {
-        "day": "304",
-        "passage": "John 15-16"
-      },
-      {
-        "day": "305",
+        "day": "252",
         "passage": "2 Kings 11-12"
       },
       {
-        "day": "306",
+        "day": "253",
+        "passage": "Luke 24"
+      },
+      {
+        "day": "254",
         "passage": "2 Kings 13-14"
       },
       {
-        "day": "307",
-        "passage": "2 Kings 15-16 "
+        "day": "255",
+        "passage": "2 Kings 15-16"
       },
       {
-        "day": "308",
-        "passage": "John 17-18"
+        "day": "256",
+        "passage": "2 Kings 17-18"
       },
       {
-        "day": "309",
-        "passage": "2 Kings 17"
+        "day": "257",
+        "passage": "John 1"
       },
       {
-        "day": "310",
-        "passage": "2 Kings 18"
+        "day": "258",
+        "passage": "2 Kings 19-20"
       },
       {
-        "day": "311",
-        "passage": "2 Kings 19"
-      },
-      {
-        "day": "312",
-        "passage": "John 19"
-      },
-      {
-        "day": "313",
-        "passage": "2 Kings 20"
-      },
-      {
-        "day": "314",
+        "day": "259",
         "passage": "2 Kings 21-22"
       },
       {
-        "day": "315",
+        "day": "260",
         "passage": "2 Kings 23"
       },
       {
-        "day": "316",
-        "passage": "John 20-21"
+        "day": "261",
+        "passage": "John 2"
       },
       {
-        "day": "317",
-        "passage": "2 Kings 24"
+        "day": "262",
+        "passage": "2 Kings 24-25"
       },
       {
-        "day": "318",
-        "passage": "2 Kings 25"
+        "day": "263",
+        "passage": "John 3"
       },
       {
-        "day": "319",
+        "day": "264",
         "passage": "1 Chronicles 1"
       },
       {
-        "day": "320",
-        "passage": "Acts 1-2"
-      },
-      {
-        "day": "321",
+        "day": "265",
         "passage": "1 Chronicles 2"
       },
       {
-        "day": "322",
+        "day": "266",
         "passage": "1 Chronicles 3"
       },
       {
-        "day": "323",
+        "day": "267",
         "passage": "1 Chronicles 4"
       },
       {
-        "day": "324",
-        "passage": "Acts 3-4"
-      },
-      {
-        "day": "325",
+        "day": "268",
         "passage": "1 Chronicles 5"
       },
       {
-        "day": "326",
+        "day": "269",
         "passage": "1 Chronicles 6"
       },
       {
-        "day": "327",
+        "day": "270",
+        "passage": "John 4"
+      },
+      {
+        "day": "271",
         "passage": "1 Chronicles 7"
       },
       {
-        "day": "328",
-        "passage": "Acts 5-6"
-      },
-      {
-        "day": "329",
+        "day": "272",
         "passage": "1 Chronicles 8"
       },
       {
-        "day": "330",
+        "day": "273",
         "passage": "1 Chronicles 9"
       },
       {
-        "day": "331",
+        "day": "274",
         "passage": "1 Chronicles 10"
       },
       {
-        "day": "332",
-        "passage": "Acts 7"
+        "day": "275",
+        "passage": "1 Chronicles 11-12"
       },
       {
-        "day": "333",
-        "passage": "1 Chronicles 11"
+        "day": "276",
+        "passage": "John 5"
       },
       {
-        "day": "334",
-        "passage": "1 Chronicles 12"
-      },
-      {
-        "day": "335",
+        "day": "277",
         "passage": "1 Chronicles 13-14"
       },
       {
-        "day": "336",
-        "passage": "Acts 8"
+        "day": "278",
+        "passage": "1 Chronicles 15-16"
       },
       {
-        "day": "337",
-        "passage": "1 Chronicles 15"
+        "day": "279",
+        "passage": "1 Chronicles 17-18"
       },
       {
-        "day": "338",
-        "passage": "1 Chronicles 16"
+        "day": "280",
+        "passage": "John 6"
       },
       {
-        "day": "339",
-        "passage": "1 Chronicles 17"
+        "day": "281",
+        "passage": "1 Chronicles 19-20"
       },
       {
-        "day": "340",
-        "passage": "Acts 9"
+        "day": "282",
+        "passage": "1 Chronicles 21-22"
       },
       {
-        "day": "341",
-        "passage": "1 Chronicles 18-20"
+        "day": "283",
+        "passage": "1 Chronicles 23-24"
       },
       {
-        "day": "342",
-        "passage": "1 Chronicles 21"
+        "day": "284",
+        "passage": "1 Chronicles 25-26"
       },
       {
-        "day": "343",
-        "passage": "1 Chronicles 22-23"
+        "day": "285",
+        "passage": "1 Chronicles 27-28"
       },
       {
-        "day": "344",
-        "passage": "Acts 10-11"
+        "day": "286",
+        "passage": "John 7"
       },
       {
-        "day": "345",
-        "passage": "1 Chronicles 24"
-      },
-      {
-        "day": "346",
-        "passage": "1 Chronicles 25"
-      },
-      {
-        "day": "347",
-        "passage": "1 Chronicles 26"
-      },
-      {
-        "day": "348",
-        "passage": "Acts 12"
-      },
-      {
-        "day": "349",
-        "passage": "1 Chronicles 27"
-      },
-      {
-        "day": "350",
-        "passage": "1 Chronicles 28"
-      },
-      {
-        "day": "351",
+        "day": "287",
         "passage": "1 Chronicles 29"
       },
       {
-        "day": "352",
-        "passage": "Acts 13"
-      },
-      {
-        "day": "353",
+        "day": "288",
         "passage": "2 Chronicles 1-2"
       },
       {
-        "day": "354",
+        "day": "289",
+        "passage": "John 8"
+      },
+      {
+        "day": "290",
+        "passage": "John 9"
+      },
+      {
+        "day": "291",
         "passage": "2 Chronicles 3-4"
       },
       {
-        "day": "355",
-        "passage": "2 Chronicles 5"
+        "day": "292",
+        "passage": "2 Chronicles 5-6"
       },
       {
-        "day": "356",
-        "passage": "Acts 14-15"
+        "day": "293",
+        "passage": "John 10"
       },
       {
-        "day": "357",
-        "passage": "2 Chronicles 6"
-      },
-      {
-        "day": "358",
+        "day": "294",
         "passage": "2 Chronicles 7-8"
       },
       {
+        "day": "295",
+        "passage": "2 Chronicles 9-10"
+      },
+      {
+        "day": "296",
+        "passage": "2 Chronicles 11-12"
+      },
+      {
+        "day": "297",
+        "passage": "John 11"
+      },
+      {
+        "day": "298",
+        "passage": "2 Chronicles 13-14"
+      },
+      {
+        "day": "299",
+        "passage": "John 12"
+      },
+      {
+        "day": "300",
+        "passage": "2 Chronicles 15-16"
+      },
+      {
+        "day": "301",
+        "passage": "2 Chronicles 17-18"
+      },
+      {
+        "day": "302",
+        "passage": "John 13"
+      },
+      {
+        "day": "303",
+        "passage": "2 Chronicles 19-20"
+      },
+      {
+        "day": "304",
+        "passage": "2 Chronicles 21-22"
+      },
+      {
+        "day": "305",
+        "passage": "John 14"
+      },
+      {
+        "day": "306",
+        "passage": "2 Chronicles 23-24"
+      },
+      {
+        "day": "307",
+        "passage": "John 15"
+      },
+      {
+        "day": "308",
+        "passage": "2 Chronicles 25-27"
+      },
+      {
+        "day": "309",
+        "passage": "John 16"
+      },
+      {
+        "day": "310",
+        "passage": "2 Chronicles 28-29"
+      },
+      {
+        "day": "311",
+        "passage": "John 17"
+      },
+      {
+        "day": "312",
+        "passage": "2 Chronicles 30-31"
+      },
+      {
+        "day": "313",
+        "passage": "John 18"
+      },
+      {
+        "day": "314",
+        "passage": "2 Chronicles 32-33"
+      },
+      {
+        "day": "315",
+        "passage": "2 Chronicles 34-36"
+      },
+      {
+        "day": "316",
+        "passage": "John 19"
+      },
+      {
+        "day": "317",
+        "passage": "Ezra 1-2"
+      },
+      {
+        "day": "318",
+        "passage": "Ezra 3-5"
+      },
+      {
+        "day": "319",
+        "passage": "John 20"
+      },
+      {
+        "day": "320",
+        "passage": "Ezra 6-8"
+      },
+      {
+        "day": "321",
+        "passage": "John 21"
+      },
+      {
+        "day": "322",
+        "passage": "Ezra 9-10"
+      },
+      {
+        "day": "323",
+        "passage": "Acts 1"
+      },
+      {
+        "day": "324",
+        "passage": "Nehemiah 1-2"
+      },
+      {
+        "day": "325",
+        "passage": "Nehemiah 3-4"
+      },
+      {
+        "day": "326",
+        "passage": "Acts 2"
+      },
+      {
+        "day": "327",
+        "passage": "Nehemiah 5-6"
+      },
+      {
+        "day": "328",
+        "passage": "Nehemiah 7-8"
+      },
+      {
+        "day": "329",
+        "passage": "Nehemiah 9"
+      },
+      {
+        "day": "330",
+        "passage": "Acts 3"
+      },
+      {
+        "day": "331",
+        "passage": "Nehemiah 10"
+      },
+      {
+        "day": "332",
+        "passage": "Nehemiah 11"
+      },
+      {
+        "day": "333",
+        "passage": "Nehemiah 12"
+      },
+      {
+        "day": "334",
+        "passage": "Acts 4"
+      },
+      {
+        "day": "335",
+        "passage": "Nehemiah 13"
+      },
+      {
+        "day": "336",
+        "passage": "Esther 1-2"
+      },
+      {
+        "day": "337",
+        "passage": "Acts 5"
+      },
+      {
+        "day": "338",
+        "passage": "Esther 3-4"
+      },
+      {
+        "day": "339",
+        "passage": "Esther 5-6"
+      },
+      {
+        "day": "340",
+        "passage": "Esther 7-8"
+      },
+      {
+        "day": "341",
+        "passage": "Acts 6"
+      },
+      {
+        "day": "342",
+        "passage": "Esther 9-10"
+      },
+      {
+        "day": "343",
+        "passage": "Acts 7"
+      },
+      {
+        "day": "344",
+        "passage": "Job 1"
+      },
+      {
+        "day": "345",
+        "passage": "Job 2-3"
+      },
+      {
+        "day": "346",
+        "passage": "Job 4"
+      },
+      {
+        "day": "347",
+        "passage": "Job 5-6"
+      },
+      {
+        "day": "348",
+        "passage": "Job 7-8"
+      },
+      {
+        "day": "349",
+        "passage": "Acts 8"
+      },
+      {
+        "day": "350",
+        "passage": "Job 9-10"
+      },
+      {
+        "day": "351",
+        "passage": "Job 11-12"
+      },
+      {
+        "day": "352",
+        "passage": "Job 13"
+      },
+      {
+        "day": "353",
+        "passage": "Acts 9"
+      },
+      {
+        "day": "354",
+        "passage": "Job 14"
+      },
+      {
+        "day": "355",
+        "passage": "Job 15"
+      },
+      {
+        "day": "356",
+        "passage": "Job 16"
+      },
+      {
+        "day": "357",
+        "passage": "Job 17-18"
+      },
+      {
+        "day": "358",
+        "passage": "Job 19"
+      },
+      {
         "day": "359",
-        "passage": "2 Chronicles 9"
+        "passage": "Job 20"
       },
       {
         "day": "360",
-        "passage": "Acts 16"
+        "passage": "Job 21"
       },
       {
         "day": "361",
-        "passage": "2 Chronicles 10-11"
+        "passage": "Acts 10"
       },
       {
         "day": "362",
-        "passage": "2 Chronicles 12-13"
+        "passage": "Job 22-23"
       },
       {
         "day": "363",
-        "passage": "2 Chronicles 14-16"
+        "passage": "Job 24"
       },
       {
         "day": "364",
-        "passage": "Acts 17"
+        "passage": "Job 25-26"
       },
       {
         "day": "365",
-        "passage": "2 Chronicles 17-18"
+        "passage": "Acts 11"
       }
     ]
   }
