@@ -66,7 +66,7 @@ const ProgressBar = (props) => {
         <>
           <Text
             as="b"
-            mr={milestones ? 10 : 2}
+            mr={milestones ? [5, 10] : 2}
             fontSize={fontSize ? fontSize : ['lg', '3xl']}
           >
             {completeLabel ?? '100%'}
