@@ -175,7 +175,7 @@ const ProgressSection = ({ bodyFontSize }) => {
                 <Flex
                   justifyContent="space-between"
                   lineHeight={['1em', '1.9em']}
-                  marginTop={[2, 5]}
+                  marginTop={[10, 5]}
                 >
                   <Box textAlign="left">
                     <Box>
