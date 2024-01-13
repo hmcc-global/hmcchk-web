@@ -12,7 +12,6 @@ import ProgressBar from './ProgressBar';
 import { useEffect, useState } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
 import MilestoneProgressBar from './MilestoneProgressBar';
-import PledgeProgressBar from './PledgeProgressBar';
 import { DateTime } from 'luxon';
 
 // TODO: Remove later. Keeping it here in case someone wants to test locally with dummy data.
@@ -219,6 +218,8 @@ const ProgressSection = ({ bodyFontSize }) => {
                   bgcolor="#9B99E5"
                   height={['30px', '40px']}
                   fontSize={['large', '2xl']}
+                  showCheck={true}
+                  completeLabel="ALL PLEDGES FULFILLED"
                   amount={pledgeCompletion.amount}
                   target={pledgeData.amount}
                 />
@@ -314,6 +315,7 @@ const ProgressSection = ({ bodyFontSize }) => {
                 bgcolor="#7C9AD4"
                 amount={amount}
                 milestones={milestones}
+                completeLabel="100%"
                 target={getTarget(milestones)}
               />
             </Center>

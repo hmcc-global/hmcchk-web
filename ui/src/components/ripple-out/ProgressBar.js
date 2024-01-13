@@ -4,7 +4,16 @@ import { Box, Text } from '@chakra-ui/react';
 import { CheckIcon } from '@chakra-ui/icons';
 
 const ProgressBar = (props) => {
-  const { bgcolor, height, fontSize, amount, milestones, target } = props;
+  const {
+    bgcolor,
+    height,
+    fontSize,
+    completeLabel,
+    showCheck,
+    amount,
+    milestones,
+    target,
+  } = props;
   let completed = (amount / target) * 100;
   completed = Math.min(completed, 100);
 
@@ -26,12 +35,11 @@ const ProgressBar = (props) => {
 
   const checkStyle = {
     borderRadius: '50%',
-    display: 'flex',
+    display: showCheck ? 'flex' : 'none',
     borderColor: 'black',
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: 1,
   };
 
   const percentageStyle = {
@@ -56,8 +64,12 @@ const ProgressBar = (props) => {
     if (completed === 100) {
       return (
         <>
-          <Text as="b" mr={2} fontSize={fontSize ? fontSize : ['lg', '3xl']}>
-            ALL PLEDGES FULFILLED
+          <Text
+            as="b"
+            mr={milestones ? 10 : 2}
+            fontSize={fontSize ? fontSize : ['lg', '3xl']}
+          >
+            {completeLabel ?? '100%'}
           </Text>
           <Box
             style={checkStyle}
@@ -70,7 +82,7 @@ const ProgressBar = (props) => {
       );
     } else {
       return (
-        <Text as="b" fontSize={fontSize ? fontSize : ['lg', '3xl']}>
+        <Text as="b" mr={2} fontSize={fontSize ? fontSize : ['lg', '3xl']}>
           {completed.toFixed(0)}%
         </Text>
       );
@@ -96,7 +108,7 @@ const ProgressBar = (props) => {
           textAlign: 'right',
           width: `${percentage}%`,
           height: '100%',
-          display: completed === 100 ? 'none' : 'flex',
+          display: 'flex',
           justifyContent: 'flex-end',
           alignItems: 'center',
         };
