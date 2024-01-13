@@ -215,9 +215,11 @@ const ProgressSection = ({ bodyFontSize }) => {
                   </Box>
                 </Flex>
 
-                <PledgeProgressBar
+                <ProgressBar
                   bgcolor="#9B99E5"
-                  achieved={pledgeCompletion.amount}
+                  height={['30px', '40px']}
+                  fontSize={['large', '2xl']}
+                  amount={pledgeCompletion.amount}
                   target={pledgeData.amount}
                 />
 
