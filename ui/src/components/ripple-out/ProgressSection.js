@@ -12,6 +12,7 @@ import ProgressBar from './ProgressBar';
 import { useEffect, useState } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
 import MilestoneProgressBar from './MilestoneProgressBar';
+import PledgeProgressBar from './PledgeProgressBar';
 import { DateTime } from 'luxon';
 
 // TODO: Remove later. Keeping it here in case someone wants to test locally with dummy data.
@@ -40,6 +41,7 @@ import { DateTime } from 'luxon';
 const ProgressSection = ({ bodyFontSize }) => {
   const [fundraiseData, setFundraiseData] = useState(null);
   const [pledgeData, setPledgeData] = useState(null);
+  const [pledgeCompletion, setPledgeCompletion] = useState(null);
 
   const [isWideScreen] = useMediaQuery('(min-width: 800px)');
 
@@ -60,6 +62,8 @@ const ProgressSection = ({ bodyFontSize }) => {
         setFundraiseData(item);
       } else if (item.categoryKey === 'pledge') {
         setPledgeData(item);
+      } else if (item.categoryKey === 'pledgeCompletion') {
+        setPledgeCompletion(item);
       }
     }
   };
@@ -146,7 +150,7 @@ const ProgressSection = ({ bodyFontSize }) => {
       w="full"
       bgPos={['right', 'center']}
       display={['block', 'block']}
-      paddingY={[0, 30]}
+      paddingY={[10, 30]}
       paddingX={[5, 0]}
       background="linear-gradient(180deg, #F0F5FF 10.74%, #E9F6FF 22.35%, #FFFAEC 30.87%)"
       color="#182E57"
@@ -154,8 +158,108 @@ const ProgressSection = ({ bodyFontSize }) => {
       {fundraiseData != null && (
         <div>
           <Container maxW="container.xl" h="100%" paddingX={[0, 5, 5, 5]}>
+            {pledgeData && pledgeCompletion && (
+              <>
+                <Box pt={[0, 5]}>
+                  <Text fontWeight="extrabold" fontSize={['3xl', '5xl']}>
+                    PLEDGE RECEIVED
+                  </Text>
+                </Box>
+                <Box>
+                  <Text fontSize={['lg', '3xl']} fontWeight="thin">
+                    A pledge is a commitment, both financial and symbolic, to
+                    support our Ripple Out Campaign. Here is the amount of
+                    pledge we have received so far!
+                  </Text>
+                </Box>
+                <Flex
+                  justifyContent="space-between"
+                  lineHeight={['1em', '1.9em']}
+                  marginTop={[2, 5]}
+                >
+                  <Box textAlign="left">
+                    <Box>
+                      <Text as="b" fontSize={['sm', '3xl']}>
+                        {isWideScreen ? 'TOTAL PLEDGE FULFILLED' : 'FULFILLED'}
+                      </Text>
+                    </Box>
+                    <Box mt={[2, 0]}>
+                      <Text as="b" fontSize={['lg', '4xl']}>
+                        {`$${pledgeCompletion.amount.toLocaleString()}`}
+                      </Text>
+                    </Box>
+                  </Box>
+                  <Box textAlign="center">
+                    <Box>
+                      <Text as="b" fontSize={['sm', '3xl']}>
+                        PARTICIPANTS
+                      </Text>
+                    </Box>
+                    <Box mt={[2, 0]}>
+                      <Text as="b" fontSize={['lg', '4xl']}>
+                        {`${pledgeData.givers.toLocaleString()}`}
+                      </Text>
+                    </Box>
+                  </Box>
+                  <Box textAlign="right">
+                    <Box>
+                      <Text as="b" fontSize={['sm', '3xl']}>
+                        {isWideScreen ? 'TOTAL PLEDGED AMOUNT' : 'PLEDGED'}
+                      </Text>
+                    </Box>
+                    <Box mt={[2, 0]}>
+                      <Text as="b" fontSize={['lg', '4xl']}>
+                        {`$${pledgeData.amount.toLocaleString()}`}
+                      </Text>
+                    </Box>
+                  </Box>
+                </Flex>
+
+                <PledgeProgressBar
+                  bgcolor="#9B99E5"
+                  achieved={pledgeCompletion.amount}
+                  target={pledgeData.amount}
+                />
+
+                <Box textAlign="center" mt={[5, 10]}>
+                  <Flex width="100%" justifyContent="center">
+                    <Text
+                      fontSize={['lg', '3xl']}
+                      fontWeight="thin"
+                      width={['100%', '80%', '80%', '66%']}
+                    >
+                      Click below to learn more how to participate in the Ripple
+                      Out Campaign!
+                    </Text>
+                  </Flex>
+                  <Box textAlign={['center', 'center']} width="100%" mt={5}>
+                    <Link href="/ripple-out/support">
+                      <Button
+                        mt={5}
+                        mb={10}
+                        target="_blank"
+                        variant="outline"
+                        fontSize={['xl', '2xl']}
+                        bgColor="#ffffff"
+                        fontWeight="bold"
+                        borderColor="#182E57"
+                        color="#182E57"
+                        py={[8, 10]}
+                        width={['70%', '30%']}
+                      >
+                        I WANT TO <br /> PARTICIPATE!
+                      </Button>
+                    </Link>
+                  </Box>
+                </Box>
+              </>
+            )}
             <Box>
-              <Text fontWeight="extrabold" fontSize={['3xl', '5xl']} pt={5}>
+              <Text
+                fontWeight="extrabold"
+                fontSize={['3xl', '5xl']}
+                pt={[10, 20]}
+              >
                 MILESTONES
               </Text>
             </Box>
@@ -259,86 +363,6 @@ const ProgressSection = ({ bodyFontSize }) => {
                 );
               })}
             </Box>
-            {pledgeData && (
-              <>
-                <Box mt={[10, 20]}>
-                  <Text fontWeight="extrabold" fontSize={['3xl', '5xl']}>
-                    PLEDGE RECEIVED
-                  </Text>
-                </Box>
-                <Box>
-                  <Text fontSize={['lg', '3xl']} fontWeight="thin">
-                    A pledge is a commitment, both financial and symbolic, to
-                    support our Ripple Out Campaign. Here is the amount of
-                    pledge we have received so far!
-                  </Text>
-                </Box>
-                <Flex
-                  justifyContent="space-between"
-                  marginX={['5%', '6%', '6%', '20%']}
-                  lineHeight="30px"
-                  mt={[10, 20]}
-                >
-                  <Box textAlign="center">
-                    <Box>
-                      <Text as="b" fontSize={['lg', '3xl']}>
-                        {isWideScreen
-                          ? 'TOTAL PLEDGED AMOUNT'
-                          : 'TOTAL PLEDGED'}
-                      </Text>
-                    </Box>
-                    <Box>
-                      <Text as="b" fontSize={['xl', '4xl']}>
-                        {`$${pledgeData.amount.toLocaleString()}`}
-                      </Text>
-                    </Box>
-                  </Box>
-                  <Box textAlign="center">
-                    <Box>
-                      <Text as="b" fontSize={['lg', '3xl']}>
-                        PARTICIPANTS
-                      </Text>
-                    </Box>
-                    <Box>
-                      <Text as="b" fontSize={['xl', '4xl']}>
-                        {`${pledgeData.givers.toLocaleString()}`}
-                      </Text>
-                    </Box>
-                  </Box>
-                </Flex>
-                <Box textAlign="center" mt={[10, 20]}>
-                  <Flex width="100%" justifyContent="center">
-                    <Text
-                      fontSize={['lg', '3xl']}
-                      fontWeight="thin"
-                      width={['100%', '80%', '80%', '66%']}
-                    >
-                      Click below to learn more how to participate in the Ripple
-                      Out Campaign!
-                    </Text>
-                  </Flex>
-                  <Box textAlign={['center', 'center']} width="100%" mt={5}>
-                    <Link href="/ripple-out/support">
-                      <Button
-                        mt={5}
-                        mb={10}
-                        target="_blank"
-                        variant="outline"
-                        fontSize={['xl', '2xl']}
-                        bgColor="#ffffff"
-                        fontWeight="bold"
-                        borderColor="#182E57"
-                        color="#182E57"
-                        py={[8, 10]}
-                        width={['70%', '30%']}
-                      >
-                        I WANT TO <br /> PARTICIPATE!
-                      </Button>
-                    </Link>
-                  </Box>
-                </Box>
-              </>
-            )}
           </Container>
         </div>
       )}
