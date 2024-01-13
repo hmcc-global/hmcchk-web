@@ -1,9 +1,19 @@
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { Box, Text } from '@chakra-ui/react';
+import { CheckIcon } from '@chakra-ui/icons';
 
 const ProgressBar = (props) => {
-  const { bgcolor, amount, milestones, target } = props;
+  const {
+    bgcolor,
+    height,
+    fontSize,
+    completeLabel,
+    showCheck,
+    amount,
+    milestones,
+    target,
+  } = props;
   let completed = (amount / target) * 100;
   completed = Math.min(completed, 100);
 
@@ -23,6 +33,23 @@ const ProgressBar = (props) => {
     boxShadow: '0 5px 2px -2px gray',
   };
 
+  const checkStyle = {
+    borderRadius: '50%',
+    display: showCheck ? 'flex' : 'none',
+    borderColor: 'black',
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
+
+  const percentageStyle = {
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    marginRight: '0px',
+  };
+
   const fillerStyles = {
     position: 'absolute',
     height: '100%',
@@ -33,15 +60,44 @@ const ProgressBar = (props) => {
     transition: 'width 1s ease-in-out',
   };
 
-  const reversedMilestones = [...milestones].slice(0, -1).reverse();
+  const getLabel = (completed) => {
+    if (completed === 100) {
+      return (
+        <>
+          <Text
+            as="b"
+            mr={milestones ? [5, 10] : 2}
+            fontSize={fontSize ? fontSize : ['lg', '3xl']}
+          >
+            {completeLabel ?? '100%'}
+          </Text>
+          <Box
+            style={checkStyle}
+            height={height ? height : [25, 50]}
+            width={height ? height : [25, 50]}
+          >
+            <CheckIcon />
+          </Box>
+        </>
+      );
+    } else {
+      return (
+        <Text as="b" mr={2} fontSize={fontSize ? fontSize : ['lg', '3xl']}>
+          {completed.toFixed(0)}%
+        </Text>
+      );
+    }
+  };
+
+  const reversedMilestones = milestones
+    ? [...milestones].slice(0, -1).reverse()
+    : [];
 
   return (
-    <Box style={containerStyles} height={[50, 100]}>
+    <Box style={containerStyles} height={height ? height : [50, 100]}>
       <div style={fillerStyles}>
-        <Box my={[2.5, 6]} mr={[1, 3]}>
-          <Text as="b" fontSize={['lg', '3xl']}>
-            {completed.toFixed(0)}%
-          </Text>
+        <Box style={percentageStyle} mr={[1, 3]}>
+          {getLabel(completed)}
         </Box>
       </div>
       {reversedMilestones.map((milestone) => {
