@@ -40,6 +40,8 @@ const getRenderDate = (startDate, endDate, interval, startTime) => {
     );
   }
 
+  if (nRecurrence === 0) return renderDate;
+
   for (let i = 0; i <= nRecurrence; i++) {
     if (DateTime.now() < renderDate) break;
     renderDate = start.plus({ days: recur * i });
