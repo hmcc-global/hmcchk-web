@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import { customAxios as axios } from '../../helpers/customAxios';
 import { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
@@ -27,6 +27,7 @@ import {
   Select,
 } from '@chakra-ui/react';
 import { eventIntervalList } from '../../helpers/lists';
+import FileUpload from '../../helpers/components/FileUpload';
 
 const AnnouncementEditorModal = (props) => {
   const {
@@ -36,7 +37,8 @@ const AnnouncementEditorModal = (props) => {
     announcementListCallback,
     actionOnEditor,
   } = props;
-  const { register, handleSubmit, reset, setValue, formState } = useForm();
+  const { register, handleSubmit, reset, setValue, formState, control } =
+    useForm();
   const { errors } = formState;
   const toast = useToast();
 
@@ -153,6 +155,7 @@ const AnnouncementEditorModal = (props) => {
       });
       return status;
     } else {
+      console.log(data.imageAdUrl);
       const { status } = await axios.post('/api/announcement/create', {
         ...data,
       });
@@ -431,7 +434,7 @@ const AnnouncementEditorModal = (props) => {
                     />
                   </FormControl>
 
-                  <FormControl isInvalid={errors['imageAdUrl']} isRequired>
+                  {/* <FormControl isInvalid={errors['imageAdUrl']} isRequired>
                     <FormLabel>Announcements Image Link</FormLabel>
                     <Input
                       id="imageAdUrl"
@@ -440,7 +443,20 @@ const AnnouncementEditorModal = (props) => {
                       })}
                       onChange={(e) => setImageAdUrl(e.target.value)}
                     />
-                  </FormControl>
+                  </FormControl> */}
+
+                  <FileUpload
+                    id="imageAdUrl"
+                    name="imageAdUrl"
+                    acceptedFileTypes="image/*"
+                    placeholder="Click here to select a file"
+                    register={register}
+                    control={control}
+                    // onChange={(e) => setImageAdUrl(e.target.value)}
+                    onChange={(e) => console.log(e)}
+                  >
+                    Upload Announcements Image
+                  </FileUpload>
 
                   <FormControl>
                     <FormLabel>Announcements Sign-up link</FormLabel>
