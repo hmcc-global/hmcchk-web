@@ -231,7 +231,7 @@ const EventCard = (props) => {
                   {eventData.eventEndTime &&
                   eventData.eventStartTime !== eventData.eventEndTime
                     ? ' - ' +
-                      DateTime.fromISO(eventData.eventStartTime).toLocaleString(
+                      DateTime.fromISO(eventData.eventEndTime).toLocaleString(
                         {
                           hour: 'numeric',
                           minute: 'numeric',
