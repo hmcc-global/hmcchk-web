@@ -38,6 +38,7 @@ import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementContainer';
 import AdminLeadershipTeamContainer from './admin/leadershipTeam/AdminLeadershipTeamContainer';
 import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
+import EasterContainer from './easter-2024/EasterContainer';
 
 const MainContainer = () => {
   return (
@@ -260,6 +261,12 @@ const MainContainer = () => {
           path="/admin/followUp"
           permissions={['admin', 'stewardship']}
           component={BaptismFollowUpContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/easter-2024"
+          permissions={['public']}
+          component={EasterContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
