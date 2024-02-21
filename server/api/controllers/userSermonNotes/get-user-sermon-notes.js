@@ -24,14 +24,14 @@ module.exports = {
   fn: async function ({ userSermonNoteId }, exits) {
     try {
       if (userSermonNoteId) {
-        let data = await UserSermonNote.find({
+        let data = await UserSermonNotes.find({
           _id: userSermonNoteId,
         });
         if (data.length === 0) throw 'user sermon note not found';
         return exits.success(data);
       }
 
-      let data = await UserSermonNote.find({ isDeleted: false });
+      let data = await UserSermonNotes.find({ isDeleted: false });
       return exits.success(data);
     } catch (err) {
       sails.log(err);
