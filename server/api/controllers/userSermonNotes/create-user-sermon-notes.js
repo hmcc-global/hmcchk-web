@@ -42,13 +42,13 @@ module.exports = {
     sails.log.info(`${user}: Creating user sermon note: ${sermonNoteId}`);
 
     try {
-      const newChildSermon = await UserSermonNote.create({
+      const newChildSermon = await UserSermonNotes.create({
         sermonNoteId,
         userId,
         editContended,
         themes,
         stickyNote,
-      });
+      }).fetch();
 
       if (!newChildSermon) {
         return exits.nonSuccess(err);
