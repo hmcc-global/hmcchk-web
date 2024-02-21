@@ -65,6 +65,11 @@ module.exports.policies = {
   'liveSermon/create-live-sermon': ['isLoggedIn', 'aboveTech'],
   'liveSermon/update-live-sermon': ['isLoggedIn', 'aboveTech'],
 
+  // User Sermon Note
+  'userSermonNotes/get-user-sermon-notes': true,
+  'userSermonNotes/create-user-sermon-notes': true,
+  'userSermonNotes/update-user-sermon-notes': true,
+
   // Media
   'media/*': true,
 
