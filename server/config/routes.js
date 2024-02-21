@@ -127,6 +127,12 @@ module.exports.routes = {
   'get /api/leadership-team/get': 'leadershipTeam/get-leadership-team',
   'post /api/leadership-team/create': 'leadershipTeam/create-leadership-team',
   'put /api/leadership-team/update': 'leadershipTeam/update-leadership-team',
+  
+  // Sermon Notes Parent APIs
+  'get /api/sermonNotesParent/get': 'sermonNotesParent/get-sermon-notes-parent',
+  'post /api/sermonNotesParent/create': 'sermonNotesParent/create-sermon-notes-parent',
+  'put /api/sermonNotesParent/update': 'sermonNotesParent/update-sermon-notes-parent',
+  'put /api/sermonNotesParent/delete': 'sermonNotesParent/delete-sermon-notes-parent',
 
   // UI
   'get /*': {

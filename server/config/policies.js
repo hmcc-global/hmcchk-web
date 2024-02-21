@@ -99,7 +99,8 @@ module.exports.policies = {
 
   // Sermons
   'sermons/*': true,
-
+  'sermonNotesParent/create-sermon-notes-parent': true,
+  'sermonNotesParent/create-sermon-notes-parent': true,
   // Testimonies
   'testimonies/get-testimonies': ['isLoggedIn', 'aboveTech'],
   'testimonies/update-testimonies': ['isLoggedIn', 'aboveTech'],
