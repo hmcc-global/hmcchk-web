@@ -7,7 +7,7 @@ const EasterContainer = (props) => {
   const isMobile = useBreakpointValue({ base: true, lg: false });
 
   return (
-    <Container maxW="100%" minHeight="fill" p={0} m={0}>
+    <Container maxW="container.lg" minHeight="fill" p={0}>
       <EasterNavbar />
       {isMobile ? <EasterBodyMobile /> : <EasterBodyWeb />}
     </Container>
