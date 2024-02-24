@@ -1,4 +1,4 @@
-import { useForm, FormProvider } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { customAxios as axios } from '../../helpers/customAxios';
 import { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
@@ -450,10 +450,10 @@ const AnnouncementEditorModal = (props) => {
                     name="imageAdUrl"
                     acceptedFileTypes="image/*"
                     placeholder="Click here to select a file"
-                    register={register}
+                    setImageUrl={setImageAdUrl}
+                    inputValue={imageAdUrl}
                     control={control}
-                    // onChange={(e) => setImageAdUrl(e.target.value)}
-                    onChange={(e) => console.log(e)}
+                    onChange={(e) => setImageAdUrl(e.target.value)}
                   >
                     Upload Announcements Image
                   </FileUpload>

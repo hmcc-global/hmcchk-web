@@ -11,28 +11,28 @@ import {
   Stack,
   Progress,
 } from '@chakra-ui/react';
-import { useController, useFormContext } from 'react-hook-form';
+import { useController } from 'react-hook-form';
 import { FiFile } from 'react-icons/fi';
 
 const FileUpload = (props) => {
   const {
     name,
-    options,
     placeholder,
     control,
     children,
     acceptedFileTypes = '',
-    allowMultipleFiles = false,
     isRequired = false,
+    setImageUrl,
+    inputValue,
   } = props;
 
   const [isUploading, setIsUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
   const inputRef = useRef();
 
-  const { register } = useFormContext();
   const {
     field: { ref, onChange, value, ...inputProps },
-    fieldState: { invalid, isTouched, isDirty },
+    fieldState: { invalid },
   } = useController({
     name,
     control,
@@ -45,7 +45,7 @@ const FileUpload = (props) => {
 
       let file = inputRef.current.files[0];
 
-      // set up file in formdata
+      // set up file in form data
       let formData = new FormData();
       formData.append('file', file);
       formData.append('title', file.name);
@@ -60,14 +60,22 @@ const FileUpload = (props) => {
           ),
       };
 
+      let config = {
+        onUploadProgress: (event) => {
+          console.log(event.loaded);
+          setProgress(Math.round((100 * event.loaded) / event.total));
+        },
+      };
+
       try {
-        await axios.post(process.env.REACT_APP_WP_MEDIA_API, formData, {
-          headers,
-        });
+        const response = await axios.post(
+          process.env.REACT_APP_WP_MEDIA_API,
+          formData,
+          { headers, config }
+        );
 
-        console.log('Image uploaded to WP');
-        // value = response.data.source_url;
-
+        const url = response.data.source_url;
+        setImageUrl(url);
         setIsUploading(false);
 
         return name;
@@ -75,6 +83,7 @@ const FileUpload = (props) => {
         console.log('Image fail to upload');
         console.log(err);
         setIsUploading(false);
+        setProgress(0);
       }
     }
   };
@@ -91,12 +100,10 @@ const FileUpload = (props) => {
             </InputLeftElement>
             <input
               type="file"
-              // onChange={(e) => onChange(e.target.files[0])}
               onChange={uploadFile}
               accept={acceptedFileTypes}
               name={name}
               ref={inputRef}
-              {...register(name, options)}
               {...inputProps}
               style={{ display: 'none' }}
             />
@@ -104,13 +111,16 @@ const FileUpload = (props) => {
               placeholder={placeholder || 'Your file ...'}
               onClick={() => inputRef.current.click()}
               readOnly={true}
-              value={(value && value.name) || ''}
+              value={inputValue}
             />
           </InputGroup>
           {isUploading && (
             <Progress
               colorScheme="blue"
               isAnimated
+              value={progress}
+              min="0"
+              max="100"
               isIndeterminate={isUploading}
             />
           )}
