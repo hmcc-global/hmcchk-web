@@ -1,5 +1,6 @@
 import { extendTheme } from '@chakra-ui/react';
 import '@fontsource/dm-sans';
+import '@fontsource/cousine';
 
 const customTheme = extendTheme({
   fonts: {
@@ -15,6 +16,11 @@ const customTheme = extendTheme({
       fontFamily: 'DM Sans',
       fontWeight: '700',
     },
+    cousine: {
+      fontFamily: 'Cousine',
+      fontWeight: ['400', '700'],
+    },
+    
   },
 });
 
