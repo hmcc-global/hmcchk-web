@@ -1,12 +1,13 @@
-import { Grid, GridItem } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
+import { EasterTheme } from './EasterTheme';
+import { EasterMore } from './EasterMore';
 
 function EasterBodyMobile() {
   return (
-    <Grid templateColumns="repeat(3, 1fr)" gap={4}>
-      <GridItem colSpan={3}></GridItem>
-      <GridItem colSpan={2}></GridItem>
-      <GridItem colSpan={1}></GridItem>
-    </Grid>
+    <VStack w={'100%'} minW={'100%'} spacing={'10px'}>
+      <EasterTheme />
+      <EasterMore />
+    </VStack>
   );
 }
 
