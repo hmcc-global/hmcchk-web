@@ -3,6 +3,7 @@ const bodyFontSizeDesktop = '1rem';
 const bodyTwoFontSize = '1.2rem';
 const subheadingFontSize = '1.4rem';
 const headingFontSize = '1.8rem';
+const headingFontSizeDesktop = '2rem';
 const greyColor = '#464646';
 const bentoRadius = '15px';
 const buttonRadius = '30px';
@@ -13,6 +14,7 @@ export {
   bodyTwoFontSize,
   subheadingFontSize,
   headingFontSize,
+  headingFontSizeDesktop,
   greyColor,
   bentoRadius,
   buttonRadius,
