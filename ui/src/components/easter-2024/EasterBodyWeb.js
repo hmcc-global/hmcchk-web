@@ -7,9 +7,9 @@ const EasterBodyWeb = () => {
   return (
     <VStack w={'100%'} minW={'100%'} spacing={'10px'}>
       <EasterTheme />
+      <EasterEvents />
       <EasterMore />
     </VStack>
-      <EasterEvents />
   );
 };
 
