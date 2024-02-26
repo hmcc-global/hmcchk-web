@@ -9,9 +9,9 @@ const EasterBodyWeb = () => {
     <VStack w={'100%'} minW={'100%'} spacing={'10px'}>
       <EasterTheme />
       <EasterStory />
+      <EasterEvents />
       <EasterMore />
     </VStack>
-      <EasterEvents />
   );
 };
 

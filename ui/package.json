@@ -39,6 +39,7 @@
     "react-slick": "^0.29.0",
     "react-social-icons": "^5.5.1",
     "react-table": "^7.7.0",
+    "react-web-share": "^2.0.2",
     "redux-persist": "^6.0.0",
     "sass": "^1.53.0",
     "slick-carousel": "^1.8.1",
