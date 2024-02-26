@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Container,
+  Image,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -9,7 +10,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import Stories from 'react-insta-stories';
-import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import { MdOutlinePlayCircleFilled } from 'react-icons/md';
 import {
   bentoRadius,
   headingFontSizeDesktop,
@@ -24,36 +25,27 @@ const stories = [
   {
     content: () => {
       return (
-        <div>
-          <img
-            alt="img"
-            src="https://img.freepik.com/free-photo/nature-journey-travel-trekking-summertime-concept-vertical-shot-pathway-park-leading-forested-area-outdoor-view-wooden-boardwalk-along-tall-pine-trees-morning-forest_343059-3064.jpg"
-          />
-        </div>
+        <>
+          <Image src="https://img.freepik.com/free-photo/nature-journey-travel-trekking-summertime-concept-vertical-shot-pathway-park-leading-forested-area-outdoor-view-wooden-boardwalk-along-tall-pine-trees-morning-forest_343059-3064.jpg" />
+        </>
       );
     },
   },
   {
     content: () => {
       return (
-        <div>
-          <img
-            alt="img"
-            src="https://img.freepik.com/free-photo/vertical-shot-path-leading-waterfall-blue-cloudy-sky_181624-52369.jpg"
-          />
-        </div>
+        <>
+          <Image src="https://img.freepik.com/free-photo/vertical-shot-path-leading-waterfall-blue-cloudy-sky_181624-52369.jpg" />
+        </>
       );
     },
   },
   {
     content: () => {
       return (
-        <div>
-          <img
-            alt="img"
-            src="https://img.freepik.com/free-photo/nature-journey-travel-trekking-summertime-concept-vertical-shot-pathway-park-leading-forested-area-outdoor-view-wooden-boardwalk-along-tall-pine-trees-morning-forest_343059-3064.jpg"
-          />
-        </div>
+        <>
+          <Image src="https://img.freepik.com/free-photo/nature-journey-travel-trekking-summertime-concept-vertical-shot-pathway-park-leading-forested-area-outdoor-view-wooden-boardwalk-along-tall-pine-trees-morning-forest_343059-3064.jpg" />
+        </>
       );
     },
   },
@@ -84,7 +76,7 @@ export const EasterStory = () => {
         THE STORY OF PASSION WEEK
         <Button
           onClick={onOpen}
-          rightIcon={<PlayCircleIcon />}
+          rightIcon={<MdOutlinePlayCircleFilled />}
           borderRadius={buttonRadius}
           size="sm"
           width={{ base: 40, lg: 60 }}
