@@ -76,31 +76,24 @@ const EventsSectionCard = (props) => {
   };
 
   const getStartEndDateStr = (eventData) => {
+    const eventRenderDate = DateTime.fromISO(
+      getRenderDate(
+        eventData.eventStartDate,
+        eventData.eventEndDate,
+        eventData.eventInterval,
+        eventData.eventStartTime
+      )
+    );
+    const dateFormat = eventData.eventStartTime
+      ? DateTime.DATETIME_MED_WITH_WEEKDAY
+      : DateTime.DATE_MED_WITH_WEEKDAY;
     return (
       <>
-        {eventData.renderDate
-          ? eventData.renderDate.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)
-          : getRenderDate(
-              eventData.eventStartDate,
-              eventData.eventEndDate,
-              eventData.eventInterval,
-              eventData.eventStartTime
-            ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
-        {eventData.eventEndDate &&
-          getRenderDate(
-            eventData.eventStartDate,
-            eventData.eventEndDate,
-            eventData.eventInterval,
-            eventData.eventStartTime
-          ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY) !==
-            DateTime.fromISO(eventData.eventEndDate).toLocaleString(
-              DateTime.DATE_MED_WITH_WEEKDAY
-            ) &&
-          eventData.eventInterval === 'None' &&
-          ' - ' +
-            DateTime.fromISO(eventData.eventEndDate).toLocaleString(
-              DateTime.DATE_MED_WITH_WEEKDAY
-            )}{' '}
+        {eventData.eventStartDate
+          ? eventData.renderDate
+            ? DateTime.fromISO(eventData.renderDate).toLocaleString(dateFormat)
+            : eventRenderDate.toLocaleString(dateFormat)
+          : null}
       </>
     );
   };
@@ -191,7 +184,21 @@ const EventsSectionCard = (props) => {
               {event.eventStartTime && (
                 <Text fontSize={['sm', 'md']} fontWeight="bold">
                   <Icon mr={2} as={BsClockFill} />
-                  Time: {event.eventStartTime}
+                  Time:{' '}
+                  {DateTime.fromISO(event.eventStartTime).toLocaleString({
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hourCycle: 'h12',
+                  })}
+                  {event.eventEndTime &&
+                  event.eventStartTime !== event.eventEndTime
+                    ? ' - ' +
+                      DateTime.fromISO(event.eventEndTime).toLocaleString({
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        hourCycle: 'h12',
+                      })
+                    : ''}
                 </Text>
               )}
               {event.location && (
