@@ -6,7 +6,6 @@ import {
   Text,
   Button,
   AspectRatio,
-  HStack,
   Spacer,
   Flex,
   useDisclosure,
@@ -14,8 +13,8 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  Heading,
   Stack,
+  Link,
   ModalBody,
   ModalFooter,
 } from '@chakra-ui/react';
@@ -178,10 +177,17 @@ const EasterEvents = () => {
           colSpan={[2, 1]}
           borderRadius="0.75em"
           border="1px solid #181818"
-          bgImage={`url('${process.env.PUBLIC_URL}/images/easter2024/good_friday_bg.svg')`}
+          bgImage={`url('${process.env.PUBLIC_URL}/images/easter-2024/good_friday.png')`}
           bgSize="cover"
         >
-          <VStack align="left" w="90%" mx="auto" my=" 1em" fontFamily="Cousine">
+          <VStack
+            align="left"
+            w="90%"
+            mx="auto"
+            my=" 1em"
+            fontFamily="Cousine"
+            spacing="0.25em"
+          >
             <Text fontSize="1.5em" fontWeight="700">
               Good Friday
             </Text>
@@ -207,10 +213,17 @@ const EasterEvents = () => {
           colSpan={[2, 1]}
           borderRadius="0.75em"
           border="1px solid #181818"
-          bgImage={`url('${process.env.PUBLIC_URL}/images/easter2024/easter_bg.svg')`}
+          bgImage={`url('${process.env.PUBLIC_URL}/images/easter-2024/easter.png')`}
           bgSize="cover"
         >
-          <VStack align="left" w="90%" mx="auto" my=" 1em" fontFamily="Cousine">
+          <VStack
+            align="left"
+            w="90%"
+            mx="auto"
+            my=" 1em"
+            fontFamily="Cousine"
+            spacing="0.25em"
+          >
             <Text fontSize="1.5em" fontWeight="700">
               Easter Celebration
             </Text>
@@ -237,10 +250,17 @@ const EasterEvents = () => {
           colSpan={[2, 1]}
           borderRadius="0.75em"
           border="1px solid #181818"
-          bgImage={`url('${process.env.PUBLIC_URL}/images/easter2024/baptism_bg.svg')`}
+          bgImage={`url('${process.env.PUBLIC_URL}/images/easter-2024/baptism.png')`}
           bgSize="cover"
         >
-          <VStack align="left" w="90%" mx="auto" my=" 1em" fontFamily="Cousine">
+          <VStack
+            align="left"
+            w="90%"
+            mx="auto"
+            my=" 1em"
+            fontFamily="Cousine"
+            spacing="0.25em"
+          >
             <Text fontSize="1.5em" fontWeight="700">
               Baptism Celebration
             </Text>
@@ -271,29 +291,33 @@ const EasterEvents = () => {
         bgColor="#FFF"
         border=" 1px solid #181818;"
       >
-        <Text
-          color="#464646"
-          fontFamily="Cousine"
-          fontSize="1.5em"
-          fontStyle="normal"
-          fontWeight="700"
-          lineHeight="normal"
-          textTransform="uppercase"
-          paddingTop="1em"
-        >
-          #UNDEFEATED
-        </Text>
-        <Text
-          color="#464646"
-          fontFamily="Inter"
-          fontSize="2em"
-          fontStyle="normal"
-          fontWeight="900"
-          lineHeight="normal"
-          textTransform="uppercase"
-        >
-          WE'RE SHARING TESTIMONIES!
-        </Text>
+        <Box textalign={['left']} w="90%">
+          <Text
+            color="#464646"
+            fontFamily="Cousine"
+            fontSize={['1em', '1.5em']}
+            fontStyle="normal"
+            fontWeight="700"
+            lineHeight="normal"
+            textTransform="uppercase"
+            paddingTop="1em"
+            textAlign={['left', 'center']}
+          >
+            #UNDEFEATED
+          </Text>
+          <Text
+            color="#464646"
+            fontFamily="Inter"
+            fontSize={['1.2em', '2em']}
+            fontStyle="normal"
+            fontWeight="900"
+            lineHeight="normal"
+            textTransform="uppercase"
+            textAlign={['left', 'center']}
+          >
+            WE'RE SHARING TESTIMONIES!
+          </Text>
+        </Box>
         <Stack
           w={['90%', '60%']}
           h={['auto', '50%']}
@@ -302,7 +326,7 @@ const EasterEvents = () => {
         >
           <Button
             borderRadius="2em"
-            w={['18em', '20em']}
+            w={['15em', '20em']}
             border="2px solid #525252"
             bgcolor="#FFF"
             onClick={openModalParticipate}
@@ -310,7 +334,7 @@ const EasterEvents = () => {
             <Text
               color="#525252"
               fontFamily="Cousine"
-              fontSize="1em"
+              fontSize={['0.75em', '1em']}
               fontStyle="italic"
               fontWeight="700"
               lineHeight="normal"
@@ -320,25 +344,32 @@ const EasterEvents = () => {
             </Text>
             <InfoIcon color="#525252" />
           </Button>
-          <Button
-            borderRadius="2em"
-            w={['18em', '20em']}
-            border="2px solid #B0005C"
-            bgcolor="#FFF"
+          <Link
+            href="https://www.instagram.com/explore/tags/2023witnessjesus?igsh=ejUyenB6em80em9s"
+            isExternal
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <Text
-              color="#B0005C"
-              fontFamily="Cousine"
-              fontSize="1em"
-              fontStyle="italic"
-              fontWeight="700"
-              lineHeight="normal"
-              px="1em"
+            <Button
+              borderRadius="2em"
+              w={['15em', '20em']}
+              border="2px solid #B0005C"
+              bgcolor="#FFF"
             >
-              Check it out on IG
-            </Text>
-            <ExternalLinkIcon color="#B0005C" />
-          </Button>
+              <Text
+                color="#B0005C"
+                fontFamily="Cousine"
+                fontSize={['0.75em', '1em']}
+                fontStyle="italic"
+                fontWeight="700"
+                lineHeight="normal"
+                px="1em"
+              >
+                Check it out on IG
+              </Text>
+              <ExternalLinkIcon color="#B0005C" />
+            </Button>
+          </Link>
           <Modal
             isOpen={isOpenModalParticipate}
             onClose={closeModalParticipate}
