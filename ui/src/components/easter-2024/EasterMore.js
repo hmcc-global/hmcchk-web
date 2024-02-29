@@ -45,7 +45,8 @@ export const EasterMore = () => {
         </Button>
       </Box>
       <Box
-        bg={'#0058D2'}
+        backgroundImage={[process.env.PUBLIC_URL + '/images/easter-2024/check-out-hmcc-mobile.svg', process.env.PUBLIC_URL + '/images/easter-2024/check-out-hmcc.svg']}
+        backgroundSize="cover"
         borderRadius={'15px'}
         p={'1rem'}
         justifyContent={'space-between'}

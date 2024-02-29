@@ -34,6 +34,7 @@ export const EasterTheme = () => {
         <Image
           src={process.env.PUBLIC_URL + '/images/easter-2024/theme.svg'}
           flex="1"
+          borderRadius={10}
         />
         <VStack
           textAlign={'center'}
