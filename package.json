@@ -2,11 +2,32 @@
   "name": "hmcchk-web",
   "private": true,
   "devDependencies": {
+    "@commitlint/cli": "^17.6.7",
+    "@commitlint/config-conventional": "^17.6.7",
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
     "prettier": "2.3.2"
   },
   "dependencies": {
     "@fontsource/dm-sans": "^4.5.9",
     "react-google-recaptcha": "^2.1.0",
     "react-slick": "^0.28.1"
+  },
+  "peerDependencies": {
+    "@commitlint/lint": ">=7.6.0"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx}": [
+      "npx eslint --cache --max-warnings=0"
+    ]
+  },
+  "scripts": {
+    "prepare": "husky install"
   }
 }

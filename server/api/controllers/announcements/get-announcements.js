@@ -1,26 +1,26 @@
 module.exports = {
-  friendlyName: "Get all available Announcements",
+  friendlyName: 'Get all available Announcements',
 
-  description: "Get all available Announcements",
+  description: 'Get all available Announcements',
 
   inputs: {
     id: {
       required: false,
-      type: "number",
-      description: "Id of announcement",
+      type: 'number',
+      description: 'Id of announcement',
     },
   },
 
   exits: {
     noData: {
-      description: "No data found",
+      description: 'No data found',
     },
     nonSuccess: {
-      description: "Error",
+      description: 'Error',
     },
   },
 
-  fn: async function ({ id }, exits) {
+  async fn({ id }, exits) {
     sails.log.info(`Get announcements`);
 
     try {
