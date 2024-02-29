@@ -1,5 +1,3 @@
-const UserSermonNotes = require('../../models/UserSermonNotes');
-
 /* eslint-disable linebreak-style */
 module.exports = {
   friendlyName: 'Get user sermon note',
@@ -26,6 +24,7 @@ module.exports = {
       if (userSermonNoteId) {
         let data = await UserSermonNotes.find({
           _id: userSermonNoteId,
+          isDeleted: false,
         });
         if (data.length === 0) throw 'user sermon note not found';
         return exits.success(data);

@@ -1,15 +1,25 @@
-const UserSermonNotes = require('../../models/UserSermonNotes');
-
 module.exports = {
   friendlyName: 'Update user sermon note',
 
   description: 'Update user sermon note',
 
   inputs: {
-    params: {
-      required: false,
-      type: 'json',
+    userSermonNoteId: {
+      type: 'string',
+      required: true,
     },
+    editContended: {
+      type: 'string',
+    },
+    themes: {
+      type: 'json',
+      defaultsTo: [],
+    },
+    stickyNote: {
+      type: 'json',
+      defaultsTo: [],
+    },
+    isDeleted: { type: 'boolean' },
   },
 
   exits: {
@@ -26,14 +36,19 @@ module.exports = {
     },
   },
 
-  fn: async function ({ params }, exits) {
-    const { id: userSermonNoteId, ...toUpdate } = params;
+  fn: async function (
+    { userSermonNoteId, editContended, themes, stickyNote, isDeleted },
+    exits
+  ) {
+    const user = this.req.user.fullName;
+    sails.log.info(`${user}: Updating user sermon note: ${userSermonNoteId}`);
+
     if (userSermonNoteId) {
       try {
         let data = await UserSermonNotes.updateOne({
-          _id: userSermonNoteId,
+          userSermonNoteId,
           isDeleted: false,
-        }).set(toUpdate);
+        }).set(editContended, themes, stickyNote, isDeleted);
         if (data) {
           return exits.success(data);
         }
