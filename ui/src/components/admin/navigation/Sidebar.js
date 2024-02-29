@@ -20,17 +20,19 @@ import {
   FiBell,
   FiMonitor,
   FiFeather,
-  FiVolume2
+  FiVolume2,
 } from 'react-icons/fi';
+import { CgNotes } from "react-icons/cg";
 
 const LinkItems = [
   { name: 'Home', icon: FiHome, path: '/admin/home' },
   { name: 'Forms', icon: FiFileText, path: '/admin/forms' },
   { name: 'Live Sermon', icon: FiMonitor, path: '/admin/liveSermon' },
+  { name: 'Sermon Notes', icon: CgNotes, path: '/admin/sermonNotes' },
   { name: 'Users', icon: FiUsers, path: '/admin/users' },
   { name: 'Pop Up', icon: FiBell, path: '/admin/popup' },
   { name: 'Testimony', icon: FiFeather, path: '/admin/testimony' },
-  { name: 'Announcements', icon: FiVolume2, path: '/admin/announcements' }
+  { name: 'Announcements', icon: FiVolume2, path: '/admin/announcements' },
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {
