@@ -17,6 +17,7 @@ import {
   Link,
   ModalBody,
   ModalFooter,
+  HStack,
 } from '@chakra-ui/react';
 import '@fontsource/cousine';
 import {
@@ -377,37 +378,188 @@ const EasterEvents = () => {
             <ModalOverlay />
             <ModalContent bgColor="#FFDED7">
               <ModalHeader>
-                <Button
-                  onClick={closeModalParticipate}
-                  borderRadius="2.0625rem"
-                  border="1px solid #FFF"
-                  background="#623105"
-                  _hover={{ background: 'black' }}
-                  _active={{ background: 'black' }}
-                  fontFamily="Cousine"
-                  fontStyle="italic"
-                  fontWeight="700"
-                  textColor="white"
+                <Flex position="relative" top={['-3.25em', '-3em']} w="100%">
+                  <Button
+                    onClick={closeModalParticipate}
+                    borderRadius="2.0625rem"
+                    border="1px solid #FFF"
+                    background="black"
+                    _hover={{ background: 'black' }}
+                    _active={{ background: 'black' }}
+                    fontFamily="Cousine"
+                    fontStyle="italic"
+                    fontWeight="700"
+                    textColor="white"
+                  >
+                    <ArrowBackIcon color="white" />
+                    Back
+                  </Button>
+                </Flex>
+                <Text
+                  align="left"
+                  as="h1"
+                  color="#464646"
+                  fontFamily="Inter"
+                  fontSize="1.25rem"
+                  fontStyle="normal"
+                  fontWeight="900"
+                  lineHeight="normal"
+                  textTransform="uppercase"
                 >
-                  <ArrowBackIcon color="white" />
-                  Back
-                </Button>
+                  HOW TO PARTICIPATE
+                </Text>
               </ModalHeader>
               <ModalBody>
                 <VStack textAlign="left" w="90%">
-                  <Text
-                    as="h1"
-                    color="#464646"
-                    fontFamily="Inter"
-                    fontSize="1.25rem"
-                    fontStyle="normal"
-                    fontWeight="900"
-                    lineHeight="normal"
-                    textTransform="uppercase"
-                  >
-                    HOW TO PARTICIPATE
-                  </Text>
-                  <Box></Box>
+                  <VStack spacing="1.5em">
+                    <HStack>
+                      <Box
+                        borderRadius="50%"
+                        border="1px solid #FFF"
+                        background="#464646"
+                        padding="0.75em"
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        textColor="white"
+                        h="2em"
+                      >
+                        1
+                      </Box>
+                      <Box
+                        color="#4F4F4F"
+                        fontFamily="Cousine"
+                        fontSize="0.803rem"
+                        fontStyle="normal"
+                        fontWeight="400"
+                        lineHeight="normal"
+                      >
+                        Post an image, reel, or any creative form of expression
+                        on your Instagram, and write your testimony in the
+                        caption.
+                      </Box>
+                    </HStack>
+                    <HStack>
+                      <Box
+                        borderRadius="50%"
+                        border="1px solid #FFF"
+                        background="#464646"
+                        padding="0.625rem"
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        textColor="white"
+                        h="2em"
+                        w="2em"
+                        marginTop="-4em"
+                      >
+                        2
+                      </Box>
+                      <Box>
+                        <Box
+                          color="#4F4F4F"
+                          fontFamily="Cousine"
+                          fontSize="0.803rem"
+                          fontStyle="normal"
+                          fontWeight="400"
+                          lineHeight="normal"
+                        >
+                          Share your personal testimony about how the power of
+                          Jesus has impacted your life using the following
+                          prompt:
+                        </Box>
+                        <Box
+                          color="#863100"
+                          fontFamily="Cousine"
+                          fontSize="0.803rem"
+                          fontStyle="italic"
+                          fontWeight="700"
+                          lineHeight="normal"
+                          py="1em"
+                        >
+                          "I was once defeated by ___, but now I'm undefeated
+                          because Jesus ___."
+                        </Box>
+                      </Box>
+                    </HStack>
+                    <HStack>
+                      <Box
+                        borderRadius="50%"
+                        border="1px solid #FFF"
+                        background="#464646"
+                        padding="0.625rem"
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        textColor="white"
+                        h="2em"
+                        w="2em"
+                      >
+                        3
+                      </Box>
+                      <Box
+                        color="#4F4F4F"
+                        fontFamily="Cousine"
+                        fontSize="0.803rem"
+                        fontStyle="normal"
+                        fontWeight="400"
+                        lineHeight="normal"
+                      >
+                        Include the hashtag
+                        <Text
+                          color="#863100"
+                          fontFamily="Cousine"
+                          fontSize="0.803rem"
+                          fontWeight="700"
+                          lineHeight="normal"
+                          as="span"
+                        >
+                          {' '}
+                          #hmccundefeated{' '}
+                        </Text>
+                        and tag
+                        <Text
+                          color="#863100"
+                          fontFamily="Cousine"
+                          fontSize="0.803rem"
+                          fontWeight="700"
+                          lineHeight="normal"
+                          as="span"
+                        >
+                          {' '}
+                          @hmcc_hk{' '}
+                        </Text>
+                        in your post.
+                      </Box>
+                    </HStack>
+                    <HStack>
+                      <Box
+                        borderRadius="50%"
+                        border="1px solid #FFF"
+                        background="#464646"
+                        padding="0.625rem"
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        textColor="white"
+                        h="2em"
+                        w="2em"
+                      >
+                        4
+                      </Box>
+                      <Box
+                        color="#4F4F4F"
+                        fontFamily="Cousine"
+                        fontSize="0.803rem"
+                        fontStyle="normal"
+                        fontWeight="400"
+                        lineHeight="normal"
+                      >
+                        Make sure to visit our Easter website to view and read
+                        other people's posts and testimonies!
+                      </Box>
+                    </HStack>
+                  </VStack>
                 </VStack>
               </ModalBody>
               <ModalFooter></ModalFooter>
