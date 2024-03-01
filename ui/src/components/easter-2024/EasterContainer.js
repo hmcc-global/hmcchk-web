@@ -8,7 +8,7 @@ const EasterContainer = (props) => {
   return (
     <>
       <EasterNavbar />
-      <Container maxW="container.lg" minHeight="fill" p={0}>
+      <Container maxW="container.lg" minHeight="fill" px={0} py={'10px'}>
         <Box height="50px" />
         {isMobile ? <EasterBodyMobile /> : <EasterBodyWeb />}
       </Container>

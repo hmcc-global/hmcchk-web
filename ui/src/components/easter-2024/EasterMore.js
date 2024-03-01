@@ -39,6 +39,7 @@ export const EasterMore = () => {
           color={'#487DD1'}
           href="https://go.onehtw.com/"
           fontStyle={'italic'}
+          p={'1em'}
         >
           <Text mr="10px">Go</Text>
           <Icon as={MdOutlinePlayCircleFilled} boxSize={'20px'} />
@@ -64,6 +65,7 @@ export const EasterMore = () => {
           color={'#487DD1'}
           href="/"
           fontStyle={'italic'}
+          p={'1em'}
         >
           <Text mr="10px">Go</Text>
           <Icon as={MdOutlinePlayCircleFilled} boxSize={'20px'} />
