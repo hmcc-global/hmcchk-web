@@ -6,6 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 code {
@@ -45,4 +46,30 @@ code {
   src: local('DarkerGrotesque'),
     url('./font/DarkerGrotesque.ttf') format('truetype');
   font-weight: normal;
+}
+
+html, body {
+  scroll-behavior: smooth !important;
+  -webkit-scroll-behavior: smooth;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+  -webkit-scroll-behavior: smooth;
+}
+
+#easter-2024-theme {
+  scroll-margin-top: 50px;
+}
+
+#easter-2024-story {
+  scroll-margin-top: 50px;
+}
+
+#easter-2024-events {
+  scroll-margin-top: 50px;
+}
+
+#easter-2024-more {
+  scroll-margin-top: 50px;
 }
