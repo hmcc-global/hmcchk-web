@@ -1,6 +1,6 @@
 module.exports = {
   attributes: {
-    sermonNoteId: {
+    sermonId: {
       type: 'String',
       unique: true,
       required: true,
@@ -9,14 +9,14 @@ module.exports = {
       model: 'User',
       required: true,
     },
-    editContended: {
+    editedContent: {
       type: 'String',
       allowNull: true,
     },
     themes: {
-      type: 'json',
-      columnType: 'array',
-      defaultsTo: [],
+      type: 'String',
+      isIn: ['Forgiven', 'Redemption'],
+      defaultsTo: 'None',
     },
     stickyNote: {
       type: 'json',

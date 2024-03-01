@@ -1,12 +1,10 @@
-const UserSermonNotes = require('../../models/UserSermonNotes');
-
 module.exports = {
   friendlyName: 'Delete user sermon notes',
 
   description: 'Delete user sermon notes',
 
   inputs: {
-    userSermonNotesId: {
+    sermonId: {
       required: true,
       type: 'string',
     },
@@ -26,11 +24,11 @@ module.exports = {
     },
   },
 
-  fn: async function ({ userSermonNotesId }, exits) {
-    if (userSermonNotesId) {
+  fn: async function ({ sermonId }, exits) {
+    if (sermonId) {
       try {
         let data = await UserSermonNotes.updateOne({
-          _id: userSermonNotesId,
+          sermonId: sermonId,
           isDeleted: false,
         }).set({
           isDeleted: true,

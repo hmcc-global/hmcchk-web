@@ -5,7 +5,11 @@ module.exports = {
   description: 'Get user sermon note',
 
   inputs: {
-    userSermonNoteId: {
+    sermonId: {
+      required: true,
+      type: 'string',
+    },
+    userId: {
       required: true,
       type: 'string',
     },
@@ -19,18 +23,22 @@ module.exports = {
       description: 'Failed to retrieve user sermon note',
     },
   },
-  fn: async function ({ userSermonNoteId }, exits) {
+  fn: async function ({ sermonId, userId }, exits) {
     try {
-      if (userSermonNoteId) {
+      if (sermonId && userId) {
         let data = await UserSermonNotes.find({
-          _id: userSermonNoteId,
+          sermonId: sermonId,
+          userId: userId,
           isDeleted: false,
         });
         if (data.length === 0) throw 'user sermon note not found';
         return exits.success(data);
       }
 
-      let data = await UserSermonNotes.find({ isDeleted: false });
+      let data = await UserSermonNotes.find({
+        userId: userId,
+        isDeleted: false,
+      });
       return exits.success(data);
     } catch (err) {
       sails.log(err);
