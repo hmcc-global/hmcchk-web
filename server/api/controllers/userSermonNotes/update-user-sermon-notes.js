@@ -4,16 +4,15 @@ module.exports = {
   description: 'Update user sermon note',
 
   inputs: {
-    userSermonNoteId: {
+    sermonId: {
       type: 'string',
       required: true,
     },
-    editContended: {
+    editedContent: {
       type: 'string',
     },
     themes: {
-      type: 'json',
-      defaultsTo: [],
+      type: 'string',
     },
     stickyNote: {
       type: 'json',
@@ -37,18 +36,18 @@ module.exports = {
   },
 
   fn: async function (
-    { userSermonNoteId, editContended, themes, stickyNote, isDeleted },
+    { sermonId, editedContent, themes, stickyNote, isDeleted },
     exits
   ) {
     const user = this.req.user.fullName;
-    sails.log.info(`${user}: Updating user sermon note: ${userSermonNoteId}`);
+    sails.log.info(`${user}: Updating user sermon note: ${sermonId}`);
 
-    if (userSermonNoteId) {
+    if (sermonId) {
       try {
         let data = await UserSermonNotes.updateOne({
-          userSermonNoteId,
+          sermonId: sermonId,
           isDeleted: false,
-        }).set(editContended, themes, stickyNote, isDeleted);
+        }).set(editedContent, themes, stickyNote, isDeleted);
         if (data) {
           return exits.success(data);
         }
