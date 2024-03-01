@@ -46,7 +46,7 @@ const EasterEvents = () => {
   } = useDisclosure();
 
   return (
-    <VStack h="90em" w="100%">
+    <VStack h={['auto', '90em']} w="100%">
       <Grid
         h={['auto', '30em']}
         templateRows="repeat(3, 1fr)"
@@ -287,7 +287,7 @@ const EasterEvents = () => {
       </Grid>
       <VStack
         w="100%"
-        h={['40em', '60em']}
+        h={['auto', '60em']}
         borderRadius="0.75em"
         bgColor="#FFF"
         border=" 1px solid #181818;"
@@ -304,7 +304,7 @@ const EasterEvents = () => {
             paddingTop="1em"
             textAlign={['left', 'center']}
           >
-            #UNDEFEATED
+            #HMCCUNDEFEATED
           </Text>
           <Text
             color="#464646"
@@ -353,7 +353,7 @@ const EasterEvents = () => {
           >
             <Button
               borderRadius="2em"
-              w={['15em', '20em']}
+              w={['12em', '20em']}
               border="2px solid #B0005C"
               bgcolor="#FFF"
             >
