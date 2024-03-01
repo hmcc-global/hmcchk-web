@@ -83,7 +83,7 @@ export const EasterStory = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Container maxW="100%" bg="#A85C58" borderRadius={bentoRadius}>
+    <Container maxW="100%" bg="#A85C58" borderRadius={bentoRadius} id="easter-2024-story">
       <Box
         display="flex"
         padding={4}

@@ -20,6 +20,7 @@ export const EasterTheme = () => {
       color={greyColor}
       fontFamily={'Cousine'}
       maxW={'100%'}
+      id="easter-2024-theme"
     >
       <Text textAlign="center" whiteSpace="pre-line" mb={'10px'}>
         Come celebrate this <b>Passion Week</b> with us!
