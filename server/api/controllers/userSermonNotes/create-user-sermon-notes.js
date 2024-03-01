@@ -4,7 +4,7 @@ module.exports = {
   description: 'Create a new user sermon notes',
 
   inputs: {
-    sermonNoteId: {
+    sermonId: {
       type: 'string',
       required: true,
     },
@@ -12,12 +12,11 @@ module.exports = {
       type: 'string',
       required: true,
     },
-    editContended: {
+    editedContent: {
       type: 'string',
     },
     themes: {
-      type: 'json',
-      defaultsTo: [],
+      type: 'string',
     },
     stickyNote: {
       type: 'json',
@@ -35,17 +34,17 @@ module.exports = {
   },
 
   fn: async function (
-    { sermonNoteId, userId, editContended, themes, stickyNote },
+    { sermonId, userId, editedContent, themes, stickyNote },
     exits
   ) {
     const user = this.req.user.fullName;
-    sails.log.info(`${user}: Creating user sermon note: ${sermonNoteId}`);
+    sails.log.info(`${user}: Creating user sermon note: ${sermonId}`);
 
     try {
       const newChildSermon = await UserSermonNotes.create({
-        sermonNoteId,
+        sermonId,
         userId,
-        editContended,
+        editedContent,
         themes,
         stickyNote,
       }).fetch();
