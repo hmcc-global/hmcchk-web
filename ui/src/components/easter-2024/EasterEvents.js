@@ -23,7 +23,7 @@ import '@fontsource/cousine';
 import {
   bodyFontSizeMobile,
   bodyFontSizeDesktop,
-  greyColor,
+  buttonRadius,
 } from './constants';
 
 import {
@@ -46,12 +46,12 @@ const EasterEvents = () => {
   } = useDisclosure();
 
   return (
-    <VStack h={['auto', '90em']} w="100%" id="easter-2024-events">
+    <VStack h={['auto', '90em']} w="100%" spacing={'10px'}>
       <Grid
         h={['auto', '30em']}
         templateRows="repeat(3, 1fr)"
         templateColumns="repeat(2, 1fr)"
-        gap={4}
+        gap={'10px'}
         w="100%"
       >
         <GridItem rowSpan={3} colSpan={[2, 1]}>
@@ -78,8 +78,8 @@ const EasterEvents = () => {
               <Text
                 color="#4F4F4F"
                 fontFamily="Cousine"
-                fontSize="1em"
                 fontStyle="normal"
+                fontSize={{ base: bodyFontSizeMobile, lg: bodyFontSizeDesktop }}
                 fontWeight="400"
                 lineHeight="normal"
                 py={['1em', '']}
@@ -89,24 +89,26 @@ const EasterEvents = () => {
               <Spacer />
 
               <Button
-                borderRadius="2em"
+                borderRadius={buttonRadius}
                 w="15em"
-                border="2px solid #D67944"
+                border="1px solid #D67944"
                 bgcolor="#FFF"
                 onClick={openModalShare}
               >
                 <Text
                   color="#D67944"
                   fontFamily="Cousine"
-                  fontSize="1em"
+                  fontSize={{
+                    base: bodyFontSizeMobile,
+                    lg: bodyFontSizeDesktop,
+                  }}
                   fontStyle="italic"
                   fontWeight="700"
                   lineHeight="normal"
-                  px="1em"
+                  mr="10px"
                 >
                   Share an invite
                 </Text>
-
                 <DownloadIcon color="#D67944" />
               </Button>
 
@@ -323,24 +325,24 @@ const EasterEvents = () => {
         <Stack
           w={['90%', '60%']}
           h={['auto', '50%']}
-          justifyContent="space-between"
+          spacing={'10px'}
           direction={['column', 'row']}
         >
           <Button
-            borderRadius="2em"
-            w={['15em', '20em']}
-            border="2px solid #525252"
+            borderRadius={buttonRadius}
+            p={'1em'}
+            border="1px solid #525252"
             bgcolor="#FFF"
             onClick={openModalParticipate}
           >
             <Text
               color="#525252"
               fontFamily="Cousine"
-              fontSize={['0.75em', '1em']}
+              fontSize={{ base: bodyFontSizeMobile, lg: bodyFontSizeDesktop }}
               fontStyle="italic"
               fontWeight="700"
               lineHeight="normal"
-              px="0.5em"
+              mr={'10px'}
             >
               Learn how to participate
             </Text>
@@ -353,19 +355,19 @@ const EasterEvents = () => {
             rel="noopener noreferrer"
           >
             <Button
-              borderRadius="2em"
-              w={['12em', '20em']}
-              border="2px solid #B0005C"
+              borderRadius={buttonRadius}
+              p={'1em'}
+              border="1px solid #B0005C"
               bgcolor="#FFF"
             >
               <Text
                 color="#B0005C"
                 fontFamily="Cousine"
-                fontSize={['0.75em', '1em']}
+                fontSize={{ base: bodyFontSizeMobile, lg: bodyFontSizeDesktop }}
                 fontStyle="italic"
                 fontWeight="700"
                 lineHeight="normal"
-                px="1em"
+                mr={'10px'}
               >
                 Check it out on IG
               </Text>
