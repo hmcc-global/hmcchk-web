@@ -26,7 +26,9 @@ const stories = [
     content: () => {
       return (
         <>
-          <Image src="https://img.freepik.com/free-photo/nature-journey-travel-trekking-summertime-concept-vertical-shot-pathway-park-leading-forested-area-outdoor-view-wooden-boardwalk-along-tall-pine-trees-morning-forest_343059-3064.jpg" />
+          <Image
+            src={process.env.PUBLIC_URL + '/images/easter-2024/what.svg'}
+          />
         </>
       );
     },
@@ -35,7 +37,7 @@ const stories = [
     content: () => {
       return (
         <>
-          <Image src="https://img.freepik.com/free-photo/vertical-shot-path-leading-waterfall-blue-cloudy-sky_181624-52369.jpg" />
+          <Image src={process.env.PUBLIC_URL + '/images/easter-2024/why.svg'} />
         </>
       );
     },
@@ -44,7 +46,25 @@ const stories = [
     content: () => {
       return (
         <>
-          <Image src="https://img.freepik.com/free-photo/nature-journey-travel-trekking-summertime-concept-vertical-shot-pathway-park-leading-forested-area-outdoor-view-wooden-boardwalk-along-tall-pine-trees-morning-forest_343059-3064.jpg" />
+          <Image
+            src={
+              process.env.PUBLIC_URL + '/images/easter-2024/how_it_relates.svg'
+            }
+          />
+        </>
+      );
+    },
+  },
+  {
+    content: () => {
+      return (
+        <>
+          <Image
+            src={
+              process.env.PUBLIC_URL +
+              '/images/easter-2024/how_to_participate.svg'
+            }
+          />
         </>
       );
     },
