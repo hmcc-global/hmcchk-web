@@ -9,7 +9,6 @@
     "@emotion/styled": "^11.11.0",
     "@fontsource/dm-sans": "^4.5.9",
     "react-google-recaptcha": "^2.1.0",
-    "react-insta-stories": "^2.6.2",
     "react-slick": "^0.28.1"
   }
 }
