@@ -569,7 +569,7 @@ const EasterEvents = () => {
         <AspectRatio h={['30em', '50em']} w="80%" ratio={1}>
           <iframe
             title="Easter 2024 Events"
-            src="https://widgets.sociablekit.com/instagram-hashtag-feed/iframe/25366574"
+            src="https://widgets.sociablekit.com/instagram-hashtag-feed/iframe/25373860"
           />
         </AspectRatio>
       </VStack>
