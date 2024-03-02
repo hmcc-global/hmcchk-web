@@ -66,13 +66,12 @@ module.exports.routes = {
   'get /api/sermons/get-service-types': 'sermons/get-service-types',
 
   // User Sermon APIs
-  'get /api/user-sermon-notes/get-user-sermon':
-    'userSermonNotes/get-user-sermon-notes',
-  'post /api/user-sermon-notes/create-user-sermon':
+  'get /api/user-sermon-notes/get': 'userSermonNotes/get-user-sermon-notes',
+  'post /api/user-sermon-notes/create':
     'userSermonNotes/create-user-sermon-notes',
-  'put /api/user-sermon-notes/update-user-sermon':
+  'put /api/user-sermon-notes/update':
     'userSermonNotes/update-user-sermon-notes',
-  'put /api/user-sermon-notes/delete-user-sermon':
+  'put /api/user-sermon-notes/delete':
     'userSermonNotes/delete-user-sermon-notes',
 
   // Media APIs
@@ -128,15 +127,6 @@ module.exports.routes = {
   'get /api/announcement/admin-get': 'announcements/admin-get-announcements',
   'post /api/announcement/create': 'announcements/create-announcements',
   'put /api/announcement/update': 'announcements/update-announcements',
-
-  // Sermon Notes Parent APIs
-  'get /api/sermonNotesParent/get': 'sermonNotesParent/get-sermon-notes-parent',
-  'post /api/sermonNotesParent/create':
-    'sermonNotesParent/create-sermon-notes-parent',
-  'put /api/sermonNotesParent/update':
-    'sermonNotesParent/update-sermon-notes-parent',
-  'put /api/sermonNotesParent/delete':
-    'sermonNotesParent/delete-sermon-notes-parent',
 
   // UI
   'get /*': {
