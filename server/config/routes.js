@@ -128,6 +128,12 @@ module.exports.routes = {
   'post /api/announcement/create': 'announcements/create-announcements',
   'put /api/announcement/update': 'announcements/update-announcements',
 
+  // Sermon Notes Parent APIs
+  'get /api/sermon-notes-parent/get': 'sermonNotesParent/get-sermon-notes-parent',
+  'post /api/sermon-notes-parent/create': 'sermonNotesParent/create-sermon-notes-parent',
+  'put /api/sermon-notes-parent/update': 'sermonNotesParent/update-sermon-notes-parent',
+  'put /api/sermon-notes-parent/delete': 'sermonNotesParent/delete-sermon-notes-parent',
+
   // UI
   'get /*': {
     skipAssets: true,
