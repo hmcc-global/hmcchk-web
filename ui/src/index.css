@@ -48,16 +48,6 @@ code {
   font-weight: normal;
 }
 
-html, body {
-  scroll-behavior: smooth !important;
-  -webkit-scroll-behavior: smooth;
-}
-
-html:focus-within {
-  scroll-behavior: smooth;
-  -webkit-scroll-behavior: smooth;
-}
-
 #easter-2024-theme {
   scroll-margin-top: 50px;
 }
