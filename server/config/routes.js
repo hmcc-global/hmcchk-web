@@ -72,6 +72,8 @@ module.exports.routes = {
     'userSermonNotes/create-user-sermon-notes',
   'put /api/user-sermon-notes/update-user-sermon':
     'userSermonNotes/update-user-sermon-notes',
+  'put /api/user-sermon-notes/delete-user-sermon':
+    'userSermonNotes/delete-user-sermon-notes',
 
   // Media APIs
   'get /api/media/get-media': 'media/get-media',
