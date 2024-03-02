@@ -8,6 +8,10 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    userId: {
+      type: 'string',
+      required: true,
+    },
     editedContent: {
       type: 'string',
     },
@@ -36,16 +40,17 @@ module.exports = {
   },
 
   fn: async function (
-    { sermonId, editedContent, themes, stickyNote, isDeleted },
+    { sermonId, userId, editedContent, themes, stickyNote, isDeleted },
     exits
   ) {
     const user = this.req.user.fullName;
     sails.log.info(`${user}: Updating user sermon note: ${sermonId}`);
 
-    if (sermonId) {
+    if (sermonId && userId) {
       try {
         let data = await UserSermonNotes.updateOne({
           sermonId: sermonId,
+          userId: userId,
           isDeleted: false,
         }).set({ editedContent, themes, stickyNote, isDeleted });
         if (data) {

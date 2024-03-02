@@ -1,7 +1,7 @@
 module.exports = {
   attributes: {
     sermonId: {
-      type: 'String',
+      type: 'string',
       unique: true,
       required: true,
     },
@@ -10,12 +10,12 @@ module.exports = {
       required: true,
     },
     editedContent: {
-      type: 'String',
+      type: 'string',
       allowNull: true,
     },
     themes: {
-      type: 'String',
-      isIn: ['Forgiven', 'Redemption'],
+      type: 'string',
+      isIn: [],
       defaultsTo: 'None',
     },
     stickyNote: {
