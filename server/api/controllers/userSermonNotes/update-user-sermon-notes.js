@@ -47,7 +47,7 @@ module.exports = {
         let data = await UserSermonNotes.updateOne({
           sermonId: sermonId,
           isDeleted: false,
-        }).set(editedContent, themes, stickyNote, isDeleted);
+        }).set({ editedContent, themes, stickyNote, isDeleted });
         if (data) {
           return exits.success(data);
         }
