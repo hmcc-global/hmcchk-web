@@ -70,13 +70,12 @@ module.exports.routes = {
   'get /api/sermons/get-service-types': 'sermons/get-service-types',
 
   // User Sermon APIs
-  'get /api/user-sermon-notes/get-user-sermon':
-    'userSermonNotes/get-user-sermon-notes',
-  'post /api/user-sermon-notes/create-user-sermon':
+  'get /api/user-sermon-notes/get': 'userSermonNotes/get-user-sermon-notes',
+  'post /api/user-sermon-notes/create':
     'userSermonNotes/create-user-sermon-notes',
-  'put /api/user-sermon-notes/update-user-sermon':
+  'put /api/user-sermon-notes/update':
     'userSermonNotes/update-user-sermon-notes',
-  'put /api/user-sermon-notes/delete-user-sermon':
+  'put /api/user-sermon-notes/delete':
     'userSermonNotes/delete-user-sermon-notes',
 
   // Media APIs
