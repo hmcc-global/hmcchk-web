@@ -19,6 +19,7 @@ export const EasterMore = () => {
       textAlign={'left'}
       fontFamily={'Cousine'}
       fontSize={{ base: bodyFontSizeMobile, lg: bodyFontSizeDesktop }}
+      paddingBottom={2.5}
     >
       <Box
         bg="linear-gradient(90deg, #BA43CD 17.6%, #00A0D2 77.46%);"
