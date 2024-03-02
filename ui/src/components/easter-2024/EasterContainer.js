@@ -2,14 +2,14 @@ import { Box, Container, useBreakpointValue } from '@chakra-ui/react';
 import EasterNavbar from './EasterNavbar';
 import EasterBodyWeb from './EasterBodyWeb';
 import EasterBodyMobile from './EasterBodyMobile';
+
 const EasterContainer = (props) => {
   const isMobile = useBreakpointValue({ base: true, lg: false });
 
   return (
     <>
       <EasterNavbar />
-      <Container maxW="container.lg" minHeight="fill" px={0} py={'10px'}>
-        <Box height="50px" />
+      <Container maxW="container.lg" minHeight="fill" p={0} scrollBehavior="smooth">
         {isMobile ? <EasterBodyMobile /> : <EasterBodyWeb />}
       </Container>
     </>

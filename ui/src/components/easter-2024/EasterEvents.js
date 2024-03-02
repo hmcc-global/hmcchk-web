@@ -46,7 +46,7 @@ const EasterEvents = () => {
   } = useDisclosure();
 
   return (
-    <VStack h={['auto', '90em']} w="100%" spacing={'10px'}>
+    <VStack h={['auto', '90em']} w="100%" id="easter-2024-events" spacing={'10px'}>
       <Grid
         h={['auto', '30em']}
         templateRows="repeat(3, 1fr)"
@@ -290,6 +290,7 @@ const EasterEvents = () => {
         borderRadius="0.75em"
         bgColor="#FFF"
         border=" 1px solid #181818;"
+        id="easter-2024-more"
       >
         <Box textalign={['left']} w="90%">
           <Text

@@ -83,12 +83,12 @@ export const EasterStory = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Container maxW="100%" bg="#A85C58" borderRadius={bentoRadius}>
+    <Container maxW="100%" bg="#A85C58" borderRadius={bentoRadius} id="easter-2024-story">
       <Box
         display="flex"
         flexDir={'row'}
         py={'15px'}
-        px={'10px'}
+        px={['5px', '10px']}
         justifyContent="space-between"
         alignItems="center"
         color="white"
