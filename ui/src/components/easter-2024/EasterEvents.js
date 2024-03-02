@@ -46,7 +46,12 @@ const EasterEvents = () => {
   } = useDisclosure();
 
   return (
-    <VStack h={['auto', '90em']} w="100%" spacing={'10px'}>
+    <VStack
+      h={['auto', '90em']}
+      w="100%"
+      id="easter-2024-events"
+      spacing={'10px'}
+    >
       <Grid
         h={['auto', '30em']}
         templateRows="repeat(3, 1fr)"
@@ -134,24 +139,26 @@ const EasterEvents = () => {
                       Back
                     </Button>
                     <Spacer />
-                    <Button
-                      as="a"
-                      link=""
-                      borderRadius="2.0625rem"
-                      border="1px solid #FFF"
-                      background="#623105"
-                      _hover={{ background: 'black' }}
-                      _active={{ background: 'black' }}
-                    >
-                      Download
-                      <DownloadIcon color="white" />
-                    </Button>
+                    <Link href="https://drive.google.com/uc?export=download&id=1NW__m2FPGa7JFwG4ga-dU6EUCqihoqUX">
+                      <Button
+                        as="a"
+                        link=""
+                        borderRadius="2.0625rem"
+                        border="1px solid #FFF"
+                        background="#623105"
+                        _hover={{ background: 'black' }}
+                        _active={{ background: 'black' }}
+                      >
+                        Download
+                        <DownloadIcon color="white" />
+                      </Button>
+                    </Link>
                     <Spacer />
                     <div>
                       <RWebShare
                         data={{
                           text: 'Easter 2024 Invitation',
-                          url: 'https://on.natgeo.com/2zHaNup',
+                          url: 'https://hongkong.sub.hmcc.net/wp-content/uploads/EASTER-2024-DIGITAL-INVITE.png',
                           title: 'HMCC Easter ',
                         }}
                       >
@@ -169,8 +176,15 @@ const EasterEvents = () => {
                     </div>
                   </Flex>
 
-                  <ModalHeader> </ModalHeader>
-                  <ModalBody>Content for Modal 1</ModalBody>
+                  <ModalBody>
+                    <Box
+                      m="auto"
+                      w="22em"
+                      h="40em"
+                      bgImage={`url('${process.env.PUBLIC_URL}/images/easter-2024/invite.png')`}
+                      bgSize="cover"
+                    ></Box>
+                  </ModalBody>
                   <ModalFooter></ModalFooter>
                 </ModalContent>
               </Modal>
@@ -290,7 +304,8 @@ const EasterEvents = () => {
       </Grid>
       <VStack
         w="100%"
-        h={['auto', '60em']}
+        // h={['auto', '60em']}
+        h={['auto', '30em']}
         borderRadius="0.75em"
         bgColor="#FFF"
         border=" 1px solid #181818;"
@@ -570,12 +585,27 @@ const EasterEvents = () => {
             </ModalContent>
           </Modal>
         </Stack>
-        <AspectRatio h={['30em', '50em']} w="80%" ratio={1}>
+        <Box h={['10em', '10em']} w="80%">
+          <Text
+            color="#B27850"
+            fontFamily="Cousine"
+            fontSize={['1em', '1.5em']}
+            fontStyle="normal"
+            fontWeight="700"
+            lineHeight="normal"
+            textTransform="uppercase"
+            paddingTop="1em"
+            textAlign={['left', 'center']}
+          >
+            Stay tuned for testimonies!
+          </Text>
+        </Box>
+        {/* <AspectRatio h={['30em', '50em']} w="80%" ratio={1}>
           <iframe
             title="Easter 2024 Events"
             src="https://widgets.sociablekit.com/instagram-hashtag-feed/iframe/25373860"
           />
-        </AspectRatio>
+        </AspectRatio> */}
       </VStack>
     </VStack>
   );
