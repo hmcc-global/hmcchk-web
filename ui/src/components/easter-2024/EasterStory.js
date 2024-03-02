@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Container,
-  Image,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -20,14 +19,17 @@ import {
   bodyFontSizeDesktop,
 } from './constants';
 
-// need to add the stories later
 const stories = [
   {
-    content: () => {
+    content: ({ action }) => {
       return (
         <>
-          <Image
-            src={process.env.PUBLIC_URL + '/images/easter-2024/what.svg'}
+          <img
+            alt="story1"
+            onClick={() => {
+              action('next');
+            }}
+            src={process.env.PUBLIC_URL + '/images/easter-2024/story1.png'}
           />
         </>
       );
@@ -37,19 +39,9 @@ const stories = [
     content: () => {
       return (
         <>
-          <Image src={process.env.PUBLIC_URL + '/images/easter-2024/why.svg'} />
-        </>
-      );
-    },
-  },
-  {
-    content: () => {
-      return (
-        <>
-          <Image
-            src={
-              process.env.PUBLIC_URL + '/images/easter-2024/how_it_relates.svg'
-            }
+          <img
+            alt="story2"
+            src={process.env.PUBLIC_URL + '/images/easter-2024/story2.png'}
           />
         </>
       );
@@ -59,11 +51,21 @@ const stories = [
     content: () => {
       return (
         <>
-          <Image
-            src={
-              process.env.PUBLIC_URL +
-              '/images/easter-2024/how_to_participate.svg'
-            }
+          <img
+            alt="story3"
+            src={process.env.PUBLIC_URL + '/images/easter-2024/story3.png'}
+          />
+        </>
+      );
+    },
+  },
+  {
+    content: () => {
+      return (
+        <>
+          <img
+            alt="story4"
+            src={process.env.PUBLIC_URL + '/images/easter-2024/story4.png'}
           />
         </>
       );
@@ -83,7 +85,12 @@ export const EasterStory = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Container maxW="100%" bg="#A85C58" borderRadius={bentoRadius} id="easter-2024-story">
+    <Container
+      maxW="100%"
+      bg="#A85C58"
+      borderRadius={bentoRadius}
+      id="easter-2024-story"
+    >
       <Box
         display="flex"
         flexDir={'row'}
@@ -116,18 +123,18 @@ export const EasterStory = () => {
         </Button>
       </Box>
 
-      <Modal isOpen={isOpen} onClose={onClose} size="sm">
+      <Modal isOpen={isOpen} onClose={onClose} size="xs">
         <ModalOverlay />
         <ModalContent>
           <Stories
+            preloadCount={4}
             keyboardNavigation
             stories={stories}
-            defaultInterval={7000}
+            defaultInterval={3500}
             progressWrapperStyles={wrapperStyles}
             progressStyles={styles}
-            // remove this later
-            width={{ base: 200, lg: 420 }}
-            height={{ base: 300, lg: 650 }}
+            width={320}
+            height={470}
           />
         </ModalContent>
       </Modal>
