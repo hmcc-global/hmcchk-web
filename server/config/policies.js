@@ -69,7 +69,7 @@ module.exports.policies = {
   'lastUpdated/get-last-updated': ['isLoggedIn', 'aboveTech'],
 
   // Live Sermon
-  'liveSermon/get-live-sermon': true,
+  'liveSermon/get-live-sermon': ['isLoggedIn', 'aboveTech'],
   'liveSermon/create-live-sermon': ['isLoggedIn', 'aboveTech'],
   'liveSermon/update-live-sermon': ['isLoggedIn', 'aboveTech'],
 
@@ -97,10 +97,6 @@ module.exports.policies = {
   'popup/get-popup': ['isLoggedIn', 'aboveTech'],
   'popup/update-popup': ['isLoggedIn', 'aboveTech'],
 
-  // Sermons
-  'sermons/*': true,
-  'sermonNotesParent/create-sermon-notes-parent': true,
-  'sermonNotesParent/create-sermon-notes-parent': true,
   // Testimonies
   'testimonies/get-testimonies': ['isLoggedIn', 'aboveTech'],
   'testimonies/update-testimonies': ['isLoggedIn', 'aboveTech'],

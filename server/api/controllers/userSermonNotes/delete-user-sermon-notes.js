@@ -8,6 +8,10 @@ module.exports = {
       required: true,
       type: 'string',
     },
+    userId: {
+      required: true,
+      type: 'string',
+    },
   },
 
   exits: {
@@ -24,11 +28,12 @@ module.exports = {
     },
   },
 
-  fn: async function ({ sermonId }, exits) {
-    if (sermonId) {
+  fn: async function ({ sermonId, userId }, exits) {
+    if (sermonId && userId) {
       try {
         let data = await UserSermonNotes.updateOne({
           sermonId: sermonId,
+          userId: userId,
           isDeleted: false,
         }).set({
           isDeleted: true,
