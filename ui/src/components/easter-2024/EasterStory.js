@@ -87,6 +87,7 @@ export const EasterStory = () => {
       <Box
         display="flex"
         padding={4}
+        paddingX={[1.5, 4]}
         justifyContent="space-between"
         alignItems="center"
         color="white"
