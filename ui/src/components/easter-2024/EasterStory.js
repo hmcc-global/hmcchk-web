@@ -7,6 +7,7 @@ import {
   ModalContent,
   useDisclosure,
   Text,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import Stories from 'react-insta-stories';
 import { MdOutlinePlayCircleFilled } from 'react-icons/md';
@@ -30,6 +31,9 @@ const stories = [
               action('next');
             }}
             src={process.env.PUBLIC_URL + '/images/easter-2024/story1.png'}
+            backgroundSize="cover"
+            width="100%"
+            height="100%"
           />
         </>
       );
@@ -42,6 +46,9 @@ const stories = [
           <img
             alt="story2"
             src={process.env.PUBLIC_URL + '/images/easter-2024/story2.png'}
+            backgroundSize="cover"
+            width="100%"
+            height="100%"
           />
         </>
       );
@@ -54,6 +61,9 @@ const stories = [
           <img
             alt="story3"
             src={process.env.PUBLIC_URL + '/images/easter-2024/story3.png'}
+            backgroundSize="cover"
+            width="100%"
+            height="100%"
           />
         </>
       );
@@ -66,6 +76,9 @@ const stories = [
           <img
             alt="story4"
             src={process.env.PUBLIC_URL + '/images/easter-2024/story4.png'}
+            backgroundSize="cover"
+            width="100%"
+            height="100%"
           />
         </>
       );
@@ -83,6 +96,7 @@ const wrapperStyles = {
 
 export const EasterStory = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const isMobile = useBreakpointValue({ base: true, lg: false });
 
   return (
     <Container
@@ -133,8 +147,8 @@ export const EasterStory = () => {
             defaultInterval={3500}
             progressWrapperStyles={wrapperStyles}
             progressStyles={styles}
-            width={320}
-            height={470}
+            width={isMobile ? 320 : 640}
+            height={isMobile ? 470 : 940}
           />
         </ModalContent>
       </Modal>
