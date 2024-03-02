@@ -369,6 +369,8 @@ const EasterEvents = () => {
             isExternal
             target="_blank"
             rel="noopener noreferrer"
+            h="2.5em"
+            w="14em"
           >
             <Button
               borderRadius={buttonRadius}
