@@ -86,23 +86,23 @@ export const EasterStory = () => {
     <Container maxW="100%" bg="#A85C58" borderRadius={bentoRadius} id="easter-2024-story">
       <Box
         display="flex"
-        padding={4}
-        paddingX={[1.5, 4]}
+        flexDir={'row'}
+        py={'15px'}
+        px={['5px', '10px']}
         justifyContent="space-between"
         alignItems="center"
         color="white"
         fontWeight={900}
         fontSize={{ base: subheadingFontSize, lg: headingFontSizeDesktop }}
       >
-        THE STORY OF PASSION WEEK
+        <Text>THE STORY OF PASSION WEEK</Text>
+
         <Button
           onClick={onOpen}
           rightIcon={<MdOutlinePlayCircleFilled />}
           borderRadius={buttonRadius}
-          size="sm"
           width={{ base: 40, lg: 60 }}
-          border="1px"
-          borderColor="black"
+          border="1px solid #000000"
           color="black"
         >
           <Text
@@ -122,7 +122,7 @@ export const EasterStory = () => {
           <Stories
             keyboardNavigation
             stories={stories}
-            defaultInterval={3000}
+            defaultInterval={7000}
             progressWrapperStyles={wrapperStyles}
             progressStyles={styles}
             // remove this later
