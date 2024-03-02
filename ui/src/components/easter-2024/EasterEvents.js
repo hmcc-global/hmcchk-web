@@ -53,6 +53,7 @@ const EasterEvents = () => {
         templateColumns="repeat(2, 1fr)"
         gap={'10px'}
         w="100%"
+        paddingBottom="0.5em"
       >
         <GridItem rowSpan={3} colSpan={[2, 1]}>
           <Box w="100%" h="100%" borderRadius="0.75rem" bgColor="#FFDFAF">
@@ -294,7 +295,7 @@ const EasterEvents = () => {
       >
         <Box textalign={['left']} w="90%">
           <Text
-            color="#464646"
+            color="#B27850"
             fontFamily="Cousine"
             fontSize={['1em', '1.5em']}
             fontStyle="normal"
@@ -307,7 +308,7 @@ const EasterEvents = () => {
             #HMCCUNDEFEATED
           </Text>
           <Text
-            color="#464646"
+            color="#B27850"
             fontFamily="Inter"
             fontSize={['1.2em', '2em']}
             fontStyle="normal"
@@ -346,7 +347,7 @@ const EasterEvents = () => {
             <InfoIcon color="#525252" />
           </Button>
           <Link
-            href="https://www.instagram.com/explore/tags/2023witnessjesus?igsh=ejUyenB6em80em9s"
+            href="https://www.instagram.com/explore/tags/hmccundefeated/"
             isExternal
             target="_blank"
             rel="noopener noreferrer"
