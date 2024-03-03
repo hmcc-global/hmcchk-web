@@ -5,9 +5,8 @@ module.exports = {
 
   inputs: {
     sermonId: {
-      required: true,
       type: 'string',
-      unique: 'true',
+      unique: true,
     },
     title: {
       required: true,
@@ -91,6 +90,14 @@ module.exports = {
     sails.log.info(`Creating sermonNoteParent: ${sermonId}`);
 
     try {
+      const checkSermonNote = await SermonNotesParent.find({
+        sermonId: sermonId,
+        isDeleted: false
+      });
+      if(checkSermonNote.length > 0){
+        return exits.duplicateError('Sermon note already exists');
+      }
+
       const newSermonNotesParent = await SermonNotesParent.create({
         sermonId,
         title,

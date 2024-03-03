@@ -4,14 +4,9 @@ module.exports = {
   description: 'Update Sermon Note parent',
 
   inputs: {
-    id: {
-      required: true,
-      type: 'string',
-    },
     sermonId: {
-      required: true,
       type: 'string',
-      unique: 'true',
+      unique: true,
     },
     title: {
       required: true,
@@ -75,7 +70,6 @@ module.exports = {
 
   fn: async function (
     {
-      id,
       sermonId,
       title,
       subtitle,
@@ -107,7 +101,7 @@ module.exports = {
         });
       }
 
-      const existing = await SermonNotesParent.updateOne({ _id: id }).set({
+      const existing = await SermonNotesParent.updateOne({ sermonId: sermonId }).set({
         title,
         subtitle,
         speaker,

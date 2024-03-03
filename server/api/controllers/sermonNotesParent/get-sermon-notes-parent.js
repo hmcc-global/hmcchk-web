@@ -4,7 +4,7 @@ module.exports = {
   description: 'Get Sermon Notes Parent',
 
   inputs: {
-    sermonNoteId: {
+    sermonId: {
       required: false,
       type: 'string',
     },
@@ -18,11 +18,11 @@ module.exports = {
       description: 'Failed to retrieve Sermon notes parents',
     },
   },
-  fn: async function ({ sermonNoteId }, exits) {
+  fn: async function ({ sermonId }, exits) {
     try {
-      if (sermonNoteId) {
+      if (sermonId) {
         let data = await SermonNotesParent.find({
-          _id: sermonNoteId,
+          sermonId: sermonId,
           isDeleted: false,
         });
         if (data.length === 0) throw 'Sermon note parent record not found';

@@ -4,7 +4,7 @@ module.exports = {
   description: 'Delete Sermon Notes Parent',
 
   inputs: {
-    sermonNoteId: {
+    sermonId: {
       required: true,
       type: 'string',
     },
@@ -24,11 +24,11 @@ module.exports = {
     },
   },
 
-  fn: async function ({ sermonNoteId }, exits) {
-    if (sermonNoteId) {
+  fn: async function ({ sermonId }, exits) {
+    if (sermonId) {
       try {
         let data = await SermonNotesParent.updateOne({
-          _id: sermonNoteId,
+          sermonId: sermonId,
           isDeleted: false,
         }).set({
           isDeleted: true,

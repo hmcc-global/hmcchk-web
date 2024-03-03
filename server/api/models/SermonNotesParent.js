@@ -2,8 +2,7 @@ module.exports = {
   attributes: {
     sermonId: {
       type: 'string',
-      unique: 'true',
-      required: true,
+      unique: true,
     },
     title: {
       required: true,
