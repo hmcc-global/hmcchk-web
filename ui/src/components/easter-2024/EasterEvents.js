@@ -53,7 +53,6 @@ const EasterEvents = () => {
         templateColumns="repeat(2, 1fr)"
         gap={'10px'}
         w="100%"
-        paddingBottom="0.5em"
       >
         <GridItem rowSpan={3} colSpan={[2, 1]}>
           <Box w="100%" h="100%" borderRadius="0.75rem" bgColor="#FFDFAF">
@@ -283,7 +282,7 @@ const EasterEvents = () => {
               <Text>When: </Text>
               <Text fontWeight={['normal', '700']}>
                 {' '}
-                Sunday March 31, 2024 @2PM
+                Sunday March 31, 2024 @2:30PM
               </Text>
             </Flex>
             <Flex
@@ -291,7 +290,7 @@ const EasterEvents = () => {
             >
               <Text>Where: </Text>
               <Text fontWeight={['normal', '700']}>
-                Transformation Center, Kwun Tong
+                Hong Kong Mandarin Bible Church
               </Text>
             </Flex>
           </VStack>
@@ -338,9 +337,11 @@ const EasterEvents = () => {
           h={['auto', '50%']}
           spacing={'10px'}
           direction={['column', 'row']}
+          justifyContent={['space-between', 'center']}
         >
           <Button
             borderRadius={buttonRadius}
+            w={'fit-content'}
             p={'1em'}
             border="1px solid #525252"
             bgcolor="#FFF"

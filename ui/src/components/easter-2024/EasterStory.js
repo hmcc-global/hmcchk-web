@@ -147,8 +147,8 @@ export const EasterStory = () => {
             defaultInterval={3500}
             progressWrapperStyles={wrapperStyles}
             progressStyles={styles}
-            width={isMobile ? 320 : 640}
-            height={isMobile ? 470 : 940}
+            width={isMobile ? '320px' : '400px'}
+            height={isMobile ? '470px' : '588px'}
           />
         </ModalContent>
       </Modal>
