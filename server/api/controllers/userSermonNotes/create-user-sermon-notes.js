@@ -31,6 +31,10 @@ module.exports = {
     error: {
       description: 'Failed to create new user sermon note.',
     },
+    duplicateError: {
+      description: 'Duplicate data found',
+      statusCode: 409,
+    },
   },
 
   fn: async function (
@@ -41,6 +45,16 @@ module.exports = {
     sails.log.info(`${user}: Creating user sermon note: ${sermonId}`);
 
     try {
+      const checkSermonNote = await UserSermonNotes.find({
+        sermonId: sermonId,
+        userId: userId,
+        isDeleted: false
+      });
+      sails.log(checkSermonNote)
+      if(checkSermonNote.length > 0){
+        return exits.duplicateError('Sermon note already exists');
+      }
+
       const newChildSermon = await UserSermonNotes.create({
         sermonId,
         userId,
