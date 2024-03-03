@@ -119,13 +119,11 @@ const EventsSection = () => {
           } else return false;
         });
         filteredEndDate.sort((a, b) =>
-          a.renderDate === ''
-            ? 1
-            : b.renderDate === ''
+          a.renderDate === '' || b.renderDate === ''
             ? -1
             : a.renderDate > b.renderDate
-            ? -1
-            : 1
+            ? 1
+            : -1
         );
         filtered.push(...filteredEndDate);
         setEvents([...filtered]);
