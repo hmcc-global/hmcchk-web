@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { customAxios as axios } from '../../helpers/customAxios';
 import { Container, Heading, Text, Stack, Button, FormLabel, FormControl, Input, ListItem, Flex, Grid, Spacer, List, Box, Image } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 import SermonNotesEditorModal from './SermonNotesEditorModal';
@@ -32,12 +33,23 @@ export default function AdminSermonNotesContainer(props) {
     id: "1", 
     title: "eternity", 
     sermonSeries: "eternity", 
-    serviceType: "-", 
+    serviceType: " TODAY IS SUNNY BUT   ", 
     sermonDateTime: "-",
     imageAdUrl:"-",
     speaker: "-",
     passage: "John 3:18"
   }]
+
+  const fetchSermonNote = async() => {
+    try{
+      const{data} = await axios.get('/api/create-sermon-notes-parent/get');
+      return data;
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+
 
   const isPublishDisabled = () => {
     const aboveT3chPrivs = ['t3ch', 'admin', 'stewardship'];
@@ -46,6 +58,8 @@ export default function AdminSermonNotesContainer(props) {
     }
     return true;
   };
+
+  // const 
 
   return (
     <Container maxW="container.xl">
@@ -117,11 +131,11 @@ export default function AdminSermonNotesContainer(props) {
                         fallbackSrc="https://hongkong.sub.hmcc.net/wp-content/uploads/Screenshot-2020-09-04-at-6.39.50-PM.png"
                       />
                     </Box>
-                    <Stack direction="column" spacing = {1}>
+                    <Stack direction="column" spacing = {2}>
                       <Heading size = "md">{sermonNoteItem.title}</Heading>
                     <Grid
                       templateColumns={['repeat(1,2fr)','repeat(2,2fr)']}
-                      gap = {1}
+                      gap = {1.5}
                     >
                       <div style={{display: "flex", justifyContent: "left"}}>
                         <FaRegCalendarAlt /> Date:{' '}
