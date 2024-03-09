@@ -494,8 +494,8 @@ const EasterEvents = () => {
                           lineHeight="normal"
                           py="1em"
                         >
-                          "I was once defeated by ___, but now I'm undefeated
-                          because Jesus ___."
+                          "I was once defeated by ___, but because Jesus is undefeated,
+                          I ___."
                         </Box>
                       </Box>
                     </HStack>
