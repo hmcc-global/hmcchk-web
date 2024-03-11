@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { customAxios as axios } from '../../helpers/customAxios';
-import { Container, Heading, Text, Stack, Button, FormLabel, FormControl, Input, ListItem, Flex, Grid, Spacer, List, Box, Image } from '@chakra-ui/react';
+import { Container, Heading, Text, Stack, Button, FormLabel, FormControl, Input, ListItem, Flex, Grid, Spacer, List, Box, Image,HStack, useToast  } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 import SermonNotesEditorModal from './SermonNotesEditorModal';
 import AnnouncementEditorModal from '../announcements/AnnouncementEditorModal';
@@ -17,11 +17,13 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 export default function AdminSermonNotesContainer(props) {
   const { user } = props;
   const today = new DateTime.now();
+  const toast = useToast();
 
   // This useState is to open the Editor Modal
   const [isEditorOpen, setIsEditorOpen] = useState(true);
   const [actionOnEditor, setActionOnEditor] = useState('create');
 
+  const [isLoading, setIsLoading] = useState(false);
   const [sermonNotesList, setSermonNotesList] = useState([]);
   const [title, Title] = useState('');
   const [sermonSeries, SermonSeries] = useState('');
@@ -40,17 +42,14 @@ export default function AdminSermonNotesContainer(props) {
     passage: "John 3:18"
   }]
 
-  const fetchSermonNote = async() => {
+  const fetchSermonNotes = async() => {
     try{
-      const{data} = await axios.get('/api/create-sermon-notes-parent/get');
-      return data;
+      const{data} = await axios.get('/api/sermon-notes-parent/get');
+      setSermonNotesList(data);
     }catch(err){
       console.log(err)
     }
   }
-
-
-
   const isPublishDisabled = () => {
     const aboveT3chPrivs = ['t3ch', 'admin', 'stewardship'];
     if (aboveT3chPrivs.includes(user.accessType)) {
@@ -59,7 +58,40 @@ export default function AdminSermonNotesContainer(props) {
     return true;
   };
 
-  // const 
+  const onDelete = async(e) => {
+    try{
+      if (window.confirm('Are you sure you want to delete this sermon note?')){
+        console.log(e.target.value);
+        const {status} = await axios.put('/api/sermon-notes-parent/delete',{
+          sermonId: e.target.value,
+      });
+      if (status === 200){
+        toast({
+          description: 'Sermon Notes has been deleted',
+          status: 'success',
+          duration: 8000,
+          isClosable: true,
+        });
+      }
+      }
+      await fetchSermonNotes();
+      setIsLoading(false);
+    }catch(err){
+      console.log(err);
+      toast({
+        description:
+        'There was an issue with the request, please talk to t3ch support',
+        status: 'warning',
+        duration: 8000,
+        isClosable: true,
+      });
+      setIsLoading(false);
+    }
+  }; 
+
+ useEffect(() => {
+  fetchSermonNotes();
+ },[]);
 
   return (
     <Container maxW="container.xl">
@@ -121,8 +153,8 @@ export default function AdminSermonNotesContainer(props) {
           </form>
           </Stack>
           <List spacing="2" pt={3}>
-            {sermonNoteItem.map((sermonNoteItem) => (
-              <ListItem key={sermonNoteItem.id}>
+            {sermonNotesList.map((sermonNoteItem) => (
+              <ListItem key={sermonNoteItem.sermonId}>
                 <Box p="3" borderRadius = "lg" borderWidth = "1px">
                   <Flex direction={['column','row']} spacing = {1}>
                     <Box maxW="13rem" pr={6}>
@@ -137,24 +169,25 @@ export default function AdminSermonNotesContainer(props) {
                       templateColumns={['repeat(1,2fr)','repeat(2,2fr)']}
                       gap = {1.5}
                     >
-                      <div style={{display: "flex", justifyContent: "left"}}>
-                        <FaRegCalendarAlt /> Date:{' '}
+                      <HStack alignments='center' gap={1}>
+                        <FaRegCalendarAlt /><Text> Date:{' '}</Text>
                         {/* {showProperDate(
                           sermonNoteItem.DateTime
                         )} */}
-                      </div>
-                      <div style={{display: "flex", justifyContent: "left"}}>
-                        <MdOutlineVideoLibrary /><span> Sermon Series: {sermonNoteItem.sermonSeries}</span>
-                      </div>
-                      <div style={{display: "flex", justifyContent: "left"}}>
-                        <BiDonateHeart /> Service Type: {sermonNoteItem.serviceType}
-                      </div>
-                      <div style={{display: "flex", justifyContent: "left"}}>
-                        <IoPeopleOutline /> Speaker: {sermonNoteItem.speaker}
-                      </div>
-                      <div style={{display: "flex", justifyContent: "left"}}>
-                        <IoBookOutline /> Passage: {sermonNoteItem.passage}
-                      </div>
+                      </HStack>
+                      <HStack alignments='center' gap={1}>
+                        <IoPeopleOutline /> <Text>Speaker: {sermonNoteItem.speaker}</Text>
+                      </HStack>
+                      <HStack alignments='center' gap={1}>
+                        <MdOutlineVideoLibrary /><Text> Sermon Series: {sermonNoteItem.sermonSeries}</Text>
+                      </HStack>
+                      <HStack alignments='center' gap={1}>
+                        <IoBookOutline /><Text>Passage: {sermonNoteItem.passage}</Text> 
+                      </HStack>
+                      <HStack alignments='center' gap={1}>
+                        <BiDonateHeart /><Text>Service Type: {sermonNoteItem.serviceType}</Text> 
+                      </HStack>
+
                       </Grid>
                     </Stack>
                     <Spacer />
@@ -165,18 +198,17 @@ export default function AdminSermonNotesContainer(props) {
                       direction={['column', 'row']}
                       alignItems="center"
                     >
-                      {sermonNoteItem.isInWeb && (
-                        <Button>
-                          bgColor={
-                            sermonNoteItem.isPublishDisabled
-                            ? 'grey.800'
-                            : 'grey.800'
-                          }
-                        </Button>
-                      )} 
+                      <Button
+                          value={sermonNoteItem.sermonId}
+                          bgColor = {sermonNoteItem.
+                          IsPublished ? 'purple' : 'gray'}
+                        >
+                        {sermonNoteItem.IsPublished? 'Unpublish':'Publish'}
+                      </Button>
+                    
                       <Button
                       colorScheme="blue"
-                      value={sermonNoteItem.id}
+                      value={sermonNoteItem.sermonId}
                       // onClick={onEdit}
                       // isLoading={isLoading}
                       width={['100%', 'auto']}
@@ -185,7 +217,7 @@ export default function AdminSermonNotesContainer(props) {
                       </Button>
                       <Button
                       colorScheme="blue"
-                      value={sermonNoteItem.id}
+                      value={sermonNoteItem.sermonId}
                       // onClick={onDuplicate}
                       // isLoading={isLoading}
                       // disabled={isCreateDisabled()}
@@ -196,8 +228,8 @@ export default function AdminSermonNotesContainer(props) {
                       </Button>
                       <Button
                       colorScheme="red"
-                      value={sermonNoteItem.id}
-                      // onClick={onDelete}
+                      value={sermonNoteItem.sermonId}
+                      onClick={onDelete}
                       disabled={isPublishDisabled()}
                       // isLoading={isLoading}
                       width={['100%', 'auto']}
