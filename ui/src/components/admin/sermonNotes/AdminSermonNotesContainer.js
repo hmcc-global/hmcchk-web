@@ -64,7 +64,6 @@ export default function AdminSermonNotesContainer(props) {
   const onDelete = async (e) => {
     try {
       if (window.confirm('Are you sure you want to delete this sermon note?')) {
-        console.log(e.target.value);
         const { status } = await axios.put('/api/sermon-notes-parent/delete', {
           sermonId: e.target.value,
         });
