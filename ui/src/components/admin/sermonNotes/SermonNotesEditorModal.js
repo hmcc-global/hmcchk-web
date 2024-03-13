@@ -47,7 +47,6 @@ const SermonNotesEditorModal = (props) => {
   const [date, setDate] = useState(undefined);
   // This is the state that will hold the number of sermons for a particular date for edge case handling
   const [numberOfSermons, setNumberOfSermons] = useState(0);
-  
 
   const onSubmit = async (data) => {
     if (data) {
@@ -89,6 +88,13 @@ const SermonNotesEditorModal = (props) => {
       return data;
     } catch (err) {
       console.log(err);
+      toast({
+        description:
+          'There was an issue with the request, please talk to a t3ch support',
+        status: 'error',
+        duration: 8000,
+        isClosable: true,
+      });
     }
   };
 
