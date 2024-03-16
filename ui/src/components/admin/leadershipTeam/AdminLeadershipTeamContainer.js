@@ -8,7 +8,6 @@ import {
   FormControl,
   FormLabel,
   Input,
-  FormErrorMessage,
   Button,
   Checkbox,
   Select,
@@ -29,7 +28,7 @@ import { lifestageList, campusList } from '../../helpers/lists';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import LeadershipTeamGrid from './LeadershipTeamGrid.js';
-import { AddIcon } from '@chakra-ui/icons';
+import { AddIcon, EditIcon } from '@chakra-ui/icons';
 
 export default function AdminLeadershipTeamContainer(props) {
   const toast = useToast();
@@ -156,6 +155,7 @@ export default function AdminLeadershipTeamContainer(props) {
     setLeaders('');
     setDeleted(false);
     setSelected();
+    setIsLoading(false);
   };
 
   const onSubmit = async (event) => {
@@ -192,8 +192,15 @@ export default function AdminLeadershipTeamContainer(props) {
 
         <Spacer />
 
-        <Button leftIcon={<AddIcon />} colorScheme="teal" onClick={onOpen}>
-          Add new
+        <Button colorScheme="red" onClick={resetHandler} mr={2}>
+          RESET
+        </Button>
+        <Button
+          leftIcon={id !== '' ? <EditIcon /> : <AddIcon />}
+          colorScheme="teal"
+          onClick={onOpen}
+        >
+          {id !== '' ? 'EDIT' : 'ADD'}
         </Button>
       </Flex>
 
@@ -210,13 +217,13 @@ export default function AdminLeadershipTeamContainer(props) {
           size="lg"
         >
           <DrawerOverlay />
-          <form onSubmit={onSubmit}>
-            <DrawerContent>
-              <DrawerCloseButton />
+          <DrawerContent>
+            <DrawerCloseButton />
 
-              <DrawerHeader></DrawerHeader>
+            <DrawerHeader></DrawerHeader>
 
-              <DrawerBody>
+            <DrawerBody>
+              <form id="lt-form" onSubmit={onSubmit}>
                 <FormControl>
                   <FormLabel>Season From</FormLabel>
                   <Input
@@ -292,35 +299,29 @@ export default function AdminLeadershipTeamContainer(props) {
                     Delete?
                   </Checkbox>
                 </FormControl>
-              </DrawerBody>
+              </form>
+            </DrawerBody>
 
-              <DrawerFooter>
-                <Stack w="full" direction={['column', 'row']} spacing={2}>
-                  <Button
-                    w={['100%', '33%']}
-                    type="submit"
-                    isLoading={isLoading}
-                  >
-                    {id && id.length > 0 ? 'UPDATE' : 'SAVE'}
-                  </Button>
-                  <Button
-                    w={['100%', '33%']}
-                    colorScheme="blue"
-                    onClick={duplicateHandler}
-                  >
-                    DUPLICATE
-                  </Button>
-                  <Button
-                    w={['100%', '33%']}
-                    colorScheme="red"
-                    onClick={resetHandler}
-                  >
-                    RESET
-                  </Button>
-                </Stack>
-              </DrawerFooter>
-            </DrawerContent>
-          </form>
+            <DrawerFooter>
+              <Stack w="full" direction={['column', 'row']} spacing={2}>
+                <Button
+                  w={['100%', '50%']}
+                  form="lt-form"
+                  type="submit"
+                  isLoading={isLoading}
+                >
+                  {id && id.length > 0 ? 'UPDATE' : 'SAVE'}
+                </Button>
+                <Button
+                  w={['100%', '50%']}
+                  colorScheme="blue"
+                  onClick={duplicateHandler}
+                >
+                  DUPLICATE
+                </Button>
+              </Stack>
+            </DrawerFooter>
+          </DrawerContent>
         </Drawer>
       </Stack>
     </Container>
