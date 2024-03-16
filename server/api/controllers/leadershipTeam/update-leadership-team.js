@@ -13,7 +13,7 @@ module.exports = {
     campus: { type: 'string' },
     lifestage: { type: 'string' },
     lifeGroup: { type: 'string' },
-    leaders: { type: 'string' },
+    leaders: { type: 'json' },
     isDeleted: { type: 'boolean' },
   },
 
@@ -35,7 +35,16 @@ module.exports = {
   },
 
   fn: async function (
-    { seasonFrom, seasonTo, campus, lifestage, lifeGroup, leaders },
+    {
+      id,
+      seasonFrom,
+      seasonTo,
+      campus,
+      lifestage,
+      lifeGroup,
+      leaders,
+      isDeleted,
+    },
     exits
   ) {
     const user = this.req.user.fullName;
@@ -43,15 +52,13 @@ module.exports = {
 
     if (id) {
       try {
-        const leadersArray = leaders ? leaders.split(',') : [];
-
         const existing = await LeadershipTeam.updateOne({ id }).set({
           seasonFrom,
           seasonTo,
           campus,
           lifestage,
           lifeGroup,
-          leaders: leadersArray,
+          leaders,
           lastUpdatedBy: user,
           isDeleted,
         });

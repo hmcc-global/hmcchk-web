@@ -9,7 +9,7 @@ module.exports = {
     campus: { type: 'string' },
     lifestage: { type: 'string' },
     lifeGroup: { type: 'string' },
-    leaders: { type: 'string' },
+    leaders: { type: 'json' },
   },
 
   exits: {
@@ -29,15 +29,13 @@ module.exports = {
     sails.log.info(`${user}: Creating leadership team entry`);
 
     try {
-      const leadersArray = leaders ? leaders.split(',') : [];
-
       const res = await LeadershipTeam.create({
         seasonFrom,
         seasonTo,
         campus,
         lifestage,
         lifeGroup,
-        leaders: leadersArray,
+        leaders,
         lastUpdatedBy: user,
       });
 
