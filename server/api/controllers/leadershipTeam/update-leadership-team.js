@@ -58,11 +58,7 @@ module.exports = {
           campus,
           lifestage,
           lifeGroup,
-<<<<<<< HEAD
           leaders,
-=======
-          leaders: leadersArray,
->>>>>>> 60db39a (GH-939: Add leadership team model and api)
           lastUpdatedBy: user,
           isDeleted,
         });
