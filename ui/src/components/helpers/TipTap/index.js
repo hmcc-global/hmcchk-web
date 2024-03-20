@@ -25,7 +25,6 @@ export default () => {
     <div className="editor">
       {editor && <MenuBar editor={editor} />}
       <EditorContent className="editor__content" editor={editor} />
-      <div className="editor__footer">Footer</div>
     </div>
   );
 };
