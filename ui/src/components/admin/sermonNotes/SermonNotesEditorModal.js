@@ -18,7 +18,7 @@ import { useState } from 'react';
 import { customAxios as axios } from '../../helpers/customAxios';
 
 const SermonNotesEditorModal = (props) => {
-  const { user } = props;
+  const { user, editSermonNotesData, actionOnEditor, setIsEditorOpen } = props;
   const {
     register,
     handleSubmit,
@@ -45,33 +45,47 @@ const SermonNotesEditorModal = (props) => {
   const [serviceType, setServiceType] = useState(undefined);
   const [passage, setPassage] = useState(undefined);
   const [date, setDate] = useState(undefined);
+
   // This is the state that will hold the number of sermons for a particular date for edge case handling
   const [numberOfSermons, setNumberOfSermons] = useState(0);
 
-  const onSubmit = async (data) => {
-    if (data) {
-      setValue('title', data.title);
-      setValue('subtitle', data.subtitle);
-      setValue('speaker', data.speaker);
-      setValue('sermonSeries', data.sermonSeries);
-      setValue('date', data.date);
-      setValue('imageLink', data.imageLink);
-      setValue('originalContent', data.originalContent);
-      setValue('sermonLink', data.sermonLink);
-      setValue('serviceType', data.serviceType);
-      setValue('passage', data.passage);
-
-      setTitle(data.title);
-      setSubtitle(data.subtitle);
-      setSpeaker(data.speaker);
-      setSermonSeries(data.sermonSeries);
-      setDate(data.date);
-      setImageLink(data.imageLink);
-      setOriginalContent(data.originalContent);
-      setSermonLink(data.sermonLink);
-      setServiceType(data.serviceType);
-      setPassage(data.passage);
+  const editorSubmitButton = (actionOnEditor) => {
+    switch (actionOnEditor) {
+      default:
+        return 'Create Sermon Notes';
+      case 'edit':
+        return 'Update Sermon Notes';
+      case 'duplicate':
+        return 'Duplicate Sermon Notes';
     }
+  };
+
+  const setSermonNotesData = (data) => {
+    if (data) setValue('title', data.title);
+    setValue('subtitle', data.subtitle);
+    setValue('speaker', data.speaker);
+    setValue('sermonSeries', data.sermonSeries);
+    setValue('date', data.date);
+    setValue('imageLink', data.imageLink);
+    setValue('originalContent', data.originalContent);
+    setValue('sermonLink', data.sermonLink);
+    setValue('serviceType', data.serviceType);
+    setValue('passage', data.passage);
+
+    setTitle(data.title);
+    setSubtitle(data.subtitle);
+    setSpeaker(data.speaker);
+    setSermonSeries(data.sermonSeries);
+    setDate(data.date);
+    setImageLink(data.imageLink);
+    setOriginalContent(data.originalContent);
+    setSermonLink(data.sermonLink);
+    setServiceType(data.serviceType);
+    setPassage(data.passage);
+  };
+
+  const onSubmit = async (data) => {
+    setSermonNotesData(data);
   };
 
   const formatDate = (date) => {
@@ -98,37 +112,65 @@ const SermonNotesEditorModal = (props) => {
     }
   };
 
-  const onSubmitSermonnotes = async (e) => {
+  const onSubmitSermonNotes = async (e) => {
     try {
-      const formattedData = formatDate(date);
-      const sermonId = `${sermonIdMap[serviceType]}-${formattedData}-${
-        numberOfSermons + 1
-      }`;
-      setSermonId(sermonId);
-      setValue('sermonId', sermonId);
-
-      const { status } = await axios.post('/api/sermon-notes-parent/create', {
-        sermonId,
-        title,
-        subtitle,
-        speaker,
-        sermonSeries,
-        date,
-        imageLink,
-        originalContent,
-        sermonLink,
-        serviceType,
-        passage,
-        isPublished: true,
-      });
-      if (status === 200) {
-        toast({
-          title: 'Announcement Created',
-          description: 'Your announcement has been created.',
-          status: 'success',
-          duration: 5000,
-          isClosable: true,
+      if (actionOnEditor === 'edit') {
+        const { status } = await axios.put('/api/sermon-notes-parent/update', {
+          sermonId: editSermonNotesData.sermonId,
+          title,
+          subtitle,
+          speaker,
+          sermonSeries,
+          date,
+          imageLink,
+          originalContent,
+          sermonLink,
+          serviceType,
+          passage,
         });
+        if (status === 200) {
+          toast({
+            title: 'Announcement Updated',
+            description: 'Your announcement has been updated.',
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+        setIsEditorOpen(false);
+      } else {
+        // Create Unique Sermon ID
+        const formattedData = formatDate(date);
+        const sermonId = `${sermonIdMap[serviceType]}-${formattedData}-${
+          numberOfSermons + 1
+        }`;
+        setSermonId(sermonId);
+        setValue('sermonId', sermonId);
+
+        const { status } = await axios.post('/api/sermon-notes-parent/create', {
+          sermonId,
+          title,
+          subtitle,
+          speaker,
+          sermonSeries,
+          date,
+          imageLink,
+          originalContent,
+          sermonLink,
+          serviceType,
+          passage,
+          isPublished: true,
+        });
+        if (status === 200) {
+          toast({
+            title: 'Announcement Created',
+            description: 'Your announcement has been created.',
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+        setIsEditorOpen(false);
       }
     } catch (err) {
       console.log('Error');
@@ -142,22 +184,27 @@ const SermonNotesEditorModal = (props) => {
     }
   };
 
-  useEffect(() => {
-    const getData = async () => {
-      const result = await fetchSermonNotes();
-      const numberOfSermonNotes = result.filter((sermonNote) => {
-        return sermonNote.date === date;
-      });
-      console.log(numberOfSermonNotes);
-      if (numberOfSermonNotes.length > 0) {
-        setNumberOfSermons(numberOfSermonNotes.length);
-      } else {
-        setNumberOfSermons(0);
-      }
-    };
+  const getData = async () => {
+    const result = await fetchSermonNotes();
+    const numberOfSermonNotes = result.filter((sermonNote) => {
+      return sermonNote.date === date;
+    });
+    if (numberOfSermonNotes.length > 0) {
+      setNumberOfSermons(numberOfSermonNotes.length);
+    } else {
+      setNumberOfSermons(0);
+    }
+  };
 
+  useEffect(() => {
     getData();
   }, [date]);
+
+  useEffect(() => {
+    if (editSermonNotesData !== null) {
+      setSermonNotesData(editSermonNotesData);
+    }
+  }, [editSermonNotesData]);
 
   return (
     <>
@@ -310,17 +357,15 @@ const SermonNotesEditorModal = (props) => {
               </FormControl>
               <Stack direction="row" spacing={5}>
                 <Button
-                  width="13vw"
                   bgColor="#3182CE"
                   color="#FFFFFF"
                   _hover={{ bgColor: '#3D678E' }}
                   type="submit"
-                  onClick={onSubmitSermonnotes}
+                  onClick={onSubmitSermonNotes}
                 >
-                  Publish
+                  {editorSubmitButton(actionOnEditor)}
                 </Button>
                 <Button
-                  width="13vw"
                   bgColor="#6C7BFF"
                   color="#FFFFFF"
                   _hover={{ bgColor: '#4F5ABE' }}
