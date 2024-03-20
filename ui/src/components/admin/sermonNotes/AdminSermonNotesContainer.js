@@ -22,6 +22,7 @@ import { BiDonateHeart } from 'react-icons/bi';
 import { IoPeopleOutline } from 'react-icons/io5';
 import { IoBookOutline } from 'react-icons/io5';
 import { FaRegCalendarAlt } from 'react-icons/fa';
+import { set } from 'react-hook-form';
 
 export default function AdminSermonNotesContainer(props) {
   const { user } = props;
@@ -33,6 +34,7 @@ export default function AdminSermonNotesContainer(props) {
 
   const [isLoading, setIsLoading] = useState(false);
   const [sermonNotesList, setSermonNotesList] = useState([]);
+  const [editSermonNotesData, setEditSermonNotesData] = useState(null);
 
   const fetchSermonNotes = async () => {
     try {
@@ -77,6 +79,41 @@ export default function AdminSermonNotesContainer(props) {
         }
       }
       await fetchSermonNotes();
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+      toast({
+        description:
+          'There was an issue with the request, please talk to t3ch support',
+        status: 'warning',
+        duration: 8000,
+        isClosable: true,
+      });
+      setIsLoading(false);
+    }
+  };
+
+  const onDuplicate = async (e) => {
+    try {
+      setIsLoading(true);
+      const { data, status } = await axios.get('/api/sermon-notes-parent/get', {
+        params: {
+          sermonId: e.target.value,
+        },
+      });
+
+      if (status !== 200) {
+        toast({
+          description:
+            'There was an issue with the request, please talk to a t3ch support',
+          status: 'warning',
+          duration: 8000,
+          isClosable: true,
+        });
+      }
+      setIsEditorOpen(true);
+      setActionOnEditor('duplicate');
+      setEditSermonNotesData(data[0]);
       setIsLoading(false);
     } catch (err) {
       console.log(err);
@@ -141,9 +178,44 @@ export default function AdminSermonNotesContainer(props) {
     }
   };
 
+  const onEdit = async (e) => {
+    setIsEditorOpen(true);
+    try {
+      const { data, status } = await axios.get('/api/sermon-notes-parent/get', {
+        params: {
+          sermonId: e.target.value,
+        },
+      });
+
+      if (status !== 200) {
+        toast({
+          description:
+            'There was an issue with the request, please talk to a t3ch support',
+          status: 'warning',
+          duration: 8000,
+          isClosable: true,
+        });
+      }
+      setIsEditorOpen(true);
+      setActionOnEditor('edit');
+      setEditSermonNotesData(data[0]);
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+      toast({
+        description:
+          'There was an issue with the request, please talk to t3ch support',
+        status: 'warning',
+        duration: 8000,
+        isClosable: true,
+      });
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchSermonNotes();
-  }, []);
+  }, [isEditorOpen]);
 
   return (
     <Container maxW="container.xl">
@@ -239,7 +311,6 @@ export default function AdminSermonNotesContainer(props) {
                       </Grid>
                     </Stack>
                     <Spacer />
-                    {/* buttons */}
                     <Stack
                       pt={[3, 0]}
                       spacing={1}
@@ -258,8 +329,8 @@ export default function AdminSermonNotesContainer(props) {
                       <Button
                         colorScheme="blue"
                         value={sermonNoteItem.sermonId}
-                        // onClick={onEdit}
-                        // isLoading={isLoading}
+                        onClick={onEdit}
+                        isLoading={isLoading}
                         width={['100%', 'auto']}
                         disabled={isPublishDisabled()}
                       >
@@ -268,8 +339,8 @@ export default function AdminSermonNotesContainer(props) {
                       <Button
                         colorScheme="blue"
                         value={sermonNoteItem.sermonId}
-                        // onClick={onDuplicate}
-                        // isLoading={isLoading}
+                        onClick={onDuplicate}
+                        isLoading={isLoading}
                         // disabled={isCreateDisabled()}
                         actionOnEditor="duplicate"
                         width={['100%', 'auto']}
@@ -294,7 +365,14 @@ export default function AdminSermonNotesContainer(props) {
           </List>
         </>
       )}
-      {isEditorOpen && <SermonNotesEditorModal user={user} />}
+      {isEditorOpen && (
+        <SermonNotesEditorModal
+          user={user}
+          editSermonNotesData={editSermonNotesData}
+          actionOnEditor={actionOnEditor}
+          setIsEditorOpen={setIsEditorOpen}
+        />
+      )}
     </Container>
   );
 }
