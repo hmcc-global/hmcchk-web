@@ -1,10 +1,19 @@
-import './MenuBar.scss'
-
-import React, { Fragment } from 'react'
-
-import MenuItem from './MenuItem.js'
+import React, { Fragment } from 'react';
+import MenuItem from './MenuItem.js';
+import { Box } from '@chakra-ui/react';
+import styled from '@emotion/styled';
 
 export default ({ editor }) => {
+  const StyledDivider = styled(Box)({
+    '& .divider': {
+      background: 'rgba(255,255,255, 0.25)',
+      height: '1.25rem',
+      marginLeft: '0.5rem',
+      marginRight: '0.75rem',
+      width: '1px',
+    },
+  });
+
   const items = [
     {
       icon: 'bold',
@@ -106,8 +115,7 @@ export default ({ editor }) => {
     {
       icon: 'format-clear',
       title: 'Clear Format',
-      action: () => editor.chain().focus().clearNodes().unsetAllMarks()
-        .run(),
+      action: () => editor.chain().focus().clearNodes().unsetAllMarks().run(),
     },
     {
       type: 'divider',
@@ -122,15 +130,21 @@ export default ({ editor }) => {
       title: 'Redo',
       action: () => editor.chain().focus().redo().run(),
     },
-  ]
+  ];
 
   return (
     <div className="editor__header">
       {items.map((item, index) => (
         <Fragment key={index}>
-          {item.type === 'divider' ? <div className="divider" /> : <MenuItem {...item} />}
+          {item.type === 'divider' ? (
+            <StyledDivider>
+              <div className="divider" />
+            </StyledDivider>
+          ) : (
+            <MenuItem {...item} />
+          )}
         </Fragment>
       ))}
     </div>
-  )
-}
+  );
+};

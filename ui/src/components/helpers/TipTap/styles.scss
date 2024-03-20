@@ -9,7 +9,11 @@
     padding: 0 1rem;
   }
 
-  h1,
+  h1{
+    font-size: 2.5rem;
+    line-height: 1.1;
+  }
+
   h2,
   h3,
   h4,
@@ -111,89 +115,4 @@
     padding: 1.25rem 1rem;
     -webkit-overflow-scrolling: touch;
   }
-
-  &__footer {
-    align-items: center;
-    border-top: 3px solid #0d0d0d;
-    color: #0d0d0d;
-    display: flex;
-    flex: 0 0 auto;
-    font-size: 12px;
-    flex-wrap: wrap;
-    font-weight: 600;
-    justify-content: space-between;
-    padding: 0.25rem 0.75rem;
-    white-space: nowrap;
-  }
-
-  /* Some information about the status */
-  &__status {
-    align-items: center;
-    border-radius: 5px;
-    display: flex;
-
-    &::before {
-      background: rgba(#0d0d0d, 0.5);
-      border-radius: 50%;
-      content: " ";
-      display: inline-block;
-      flex: 0 0 auto;
-      height: 0.5rem;
-      margin-right: 0.5rem;
-      width: 0.5rem;
-    }
-
-    &--connecting::before {
-      background: #616161;
-    }
-
-    &--connected::before {
-      background: #b9f18d;
-    }
-  }
-
-  &__name {
-    button {
-      background: none;
-      border: none;
-      border-radius: 0.4rem;
-      color: #0d0d0d;
-      font: inherit;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 0.25rem 0.5rem;
-
-      &:hover {
-        background-color: #0d0d0d;
-        color: #fff;
-      }
-    }
-  }
-}
-
-/* Give a remote user a caret */
-.collaboration-cursor__caret {
-  border-left: 1px solid #0d0d0d;
-  border-right: 1px solid #0d0d0d;
-  margin-left: -1px;
-  margin-right: -1px;
-  pointer-events: none;
-  position: relative;
-  word-break: normal;
-}
-
-/* Render the username above the caret */
-.collaboration-cursor__label {
-  border-radius: 3px 3px 3px 0;
-  color: #0d0d0d;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 600;
-  left: -1px;
-  line-height: normal;
-  padding: 0.1rem 0.3rem;
-  position: absolute;
-  top: -1.4em;
-  user-select: none;
-  white-space: nowrap;
 }
