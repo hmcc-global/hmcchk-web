@@ -46,13 +46,19 @@ const EasterEvents = () => {
   } = useDisclosure();
 
   return (
-    <VStack w="100%" id="easter-2024-events" spacing={'10px'}>
+    <VStack
+      h={['auto', '90em']}
+      w="100%"
+      id="easter-2024-events"
+      spacing={'10px'}
+    >
       <Grid
         h={['auto', '30em']}
         templateRows="repeat(3, 1fr)"
         templateColumns="repeat(2, 1fr)"
         gap={'10px'}
         w="100%"
+        paddingBottom="0.5em"
       >
         <GridItem rowSpan={3} colSpan={[2, 1]}>
           <Box w="100%" h="100%" borderRadius="0.75rem" bgColor="#FFDFAF">
@@ -282,7 +288,7 @@ const EasterEvents = () => {
               <Text>When: </Text>
               <Text fontWeight={['normal', '700']}>
                 {' '}
-                Sunday March 31, 2024 @2:30PM
+                Sunday March 31, 2024 @2PM
               </Text>
             </Flex>
             <Flex
@@ -290,7 +296,7 @@ const EasterEvents = () => {
             >
               <Text>Where: </Text>
               <Text fontWeight={['normal', '700']}>
-                Hong Kong Mandarin Bible Church
+                Transformation Center, Kwun Tong
               </Text>
             </Flex>
           </VStack>
@@ -298,8 +304,7 @@ const EasterEvents = () => {
       </Grid>
       <VStack
         w="100%"
-        // h={['auto', '60em']}
-        h={['auto', '30em']}
+        h={['auto', '60em']}
         borderRadius="0.75em"
         bgColor="#FFF"
         border=" 1px solid #181818;"
@@ -334,14 +339,11 @@ const EasterEvents = () => {
         </Box>
         <Stack
           w={['90%', '60%']}
-          h={['auto', '50%']}
           spacing={'10px'}
           direction={['column', 'row']}
-          justifyContent={['space-between', 'center']}
         >
           <Button
             borderRadius={buttonRadius}
-            w={'fit-content'}
             p={'1em'}
             border="1px solid #525252"
             bgcolor="#FFF"
@@ -494,8 +496,8 @@ const EasterEvents = () => {
                           lineHeight="normal"
                           py="1em"
                         >
-                          "I was once defeated by ___, but because Jesus is undefeated,
-                          I ___."
+                          "I was once defeated by ___, but now I'm undefeated
+                          because Jesus ___."
                         </Box>
                       </Box>
                     </HStack>
@@ -583,27 +585,13 @@ const EasterEvents = () => {
             </ModalContent>
           </Modal>
         </Stack>
-        <Box h={['10em', '10em']} w="80%">
-          <Text
-            color="#B27850"
-            fontFamily="Cousine"
-            fontSize={['1em', '1.5em']}
-            fontStyle="normal"
-            fontWeight="700"
-            lineHeight="normal"
-            textTransform="uppercase"
-            paddingTop="1em"
-            textAlign={['left', 'center']}
-          >
-            Stay tuned for testimonies!
-          </Text>
-        </Box>
-        {/* <AspectRatio h={['30em', '50em']} w="80%" ratio={1}>
+
+        <AspectRatio h={['30em', '50em']} w="80%" ratio={1}>
           <iframe
             title="Easter 2024 Events"
             src="https://widgets.sociablekit.com/instagram-hashtag-feed/iframe/25373860"
           />
-        </AspectRatio> */}
+        </AspectRatio>
       </VStack>
     </VStack>
   );
