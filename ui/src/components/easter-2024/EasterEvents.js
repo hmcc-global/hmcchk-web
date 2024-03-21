@@ -298,8 +298,7 @@ const EasterEvents = () => {
       </Grid>
       <VStack
         w="100%"
-        // h={['auto', '60em']}
-        h={['auto', '30em']}
+        h={['auto', '60em']}
         borderRadius="0.75em"
         bgColor="#FFF"
         border=" 1px solid #181818;"
@@ -494,8 +493,8 @@ const EasterEvents = () => {
                           lineHeight="normal"
                           py="1em"
                         >
-                          "I was once defeated by ___, but because Jesus is undefeated,
-                          I ___."
+                          "I was once defeated by ___, but because Jesus is
+                          undefeated, I ___."
                         </Box>
                       </Box>
                     </HStack>
@@ -583,27 +582,13 @@ const EasterEvents = () => {
             </ModalContent>
           </Modal>
         </Stack>
-        <Box h={['10em', '10em']} w="80%">
-          <Text
-            color="#B27850"
-            fontFamily="Cousine"
-            fontSize={['1em', '1.5em']}
-            fontStyle="normal"
-            fontWeight="700"
-            lineHeight="normal"
-            textTransform="uppercase"
-            paddingTop="1em"
-            textAlign={['left', 'center']}
-          >
-            Stay tuned for testimonies!
-          </Text>
-        </Box>
-        {/* <AspectRatio h={['30em', '50em']} w="80%" ratio={1}>
+
+        <AspectRatio h={['30em', '50em']} w="80%" ratio={1}>
           <iframe
             title="Easter 2024 Events"
             src="https://widgets.sociablekit.com/instagram-hashtag-feed/iframe/25373860"
           />
-        </AspectRatio> */}
+        </AspectRatio>
       </VStack>
     </VStack>
   );
