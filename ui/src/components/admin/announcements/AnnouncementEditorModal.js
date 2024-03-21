@@ -155,7 +155,6 @@ const AnnouncementEditorModal = (props) => {
       });
       return status;
     } else {
-      console.log(data.imageAdUrl);
       const { status } = await axios.post('/api/announcement/create', {
         ...data,
       });
@@ -433,17 +432,6 @@ const AnnouncementEditorModal = (props) => {
                       onChange={(e) => setLocation(e.target.value)}
                     />
                   </FormControl>
-
-                  {/* <FormControl isInvalid={errors['imageAdUrl']} isRequired>
-                    <FormLabel>Announcements Image Link</FormLabel>
-                    <Input
-                      id="imageAdUrl"
-                      {...register('imageAdUrl', {
-                        required: 'Image is required',
-                      })}
-                      onChange={(e) => setImageAdUrl(e.target.value)}
-                    />
-                  </FormControl> */}
 
                   <FileUpload
                     id="imageAdUrl"
