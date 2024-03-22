@@ -1,7 +1,19 @@
-import Link from '@tiptap/extension-link'
+// import Link from '@tiptap/extension-link'
 
-const BibleVerseExtension = Link.extend({
-  
-})
+import { Extension } from '@tiptap/core';
 
-export default BibleVerseExtension
+const BibleVerseExtension = Extension.create({
+  name: 'bibleVerseExtension',
+  priority: 9000,
+  addCommands() {
+    return {
+      setBibleVerse:
+        (bibleVerse) =>
+        ({ commands }) => {
+          return commands.insertContent(bibleVerse);
+        },
+    };
+  },
+});
+
+export default BibleVerseExtension;

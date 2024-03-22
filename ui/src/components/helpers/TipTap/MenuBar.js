@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import MenuItem from './MenuItem.js';
 import styled from '@emotion/styled';
 import { Box } from '@chakra-ui/react';
+import { useCallback } from 'react';
 
 export default ({ editor }) => {
   const StyledDivider = styled(Box)({
@@ -130,34 +131,39 @@ export default ({ editor }) => {
       title: 'Redo',
       action: () => editor.chain().focus().redo().run(),
     },
-    // {
-    //   icon: 'bold',
-    //   title: 'Bible Verse',
-    //   action: useCallback(() => {
-    //     const previousUrl = editor.getAttributes('link').href;
-    //     const url = window.prompt('URL', previousUrl);
+    {
+      icon: 'bold',
+      title: 'Bible Verse',
+      action: useCallback(() => {
+        const previousUrl = editor.getAttributes('link').href;
+        const url = window.prompt('URL', previousUrl);
 
-    //     // cancelled
-    //     if (url === null) {
-    //       return;
-    //     }
+        // cancelled
+        if (url === null) {
+          return;
+        }
 
-    //     // empty
-    //     if (url === '') {
-    //       editor.chain().focus().extendMarkRange('link').unsetLink().run();
+        // empty
+        if (url === '') {
+          editor.chain().focus().extendMarkRange('link').unsetLink().run();
 
-    //       return;
-    //     }
+          return;
+        }
 
-    //     // update link
-    //     editor
-    //       .chain()
-    //       .focus()
-    //       .extendMarkRange('link')
-    //       .setLink({ href: url })
-    //       .run();
-    //   }, [editor]),
-    // },
+        // update link
+        editor
+          .chain()
+          .focus()
+          .extendMarkRange('link')
+          .setLink({ href: url })
+          .run();
+      }, [editor]),
+    },
+    {
+      icon:'italic',
+      title: 'Bible Passage',
+      action: () => editor.chain().focus().setBibleVerse('John 3:16').run(),
+    }
   ];
 
   return (
