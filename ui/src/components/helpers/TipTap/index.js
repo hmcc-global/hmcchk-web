@@ -6,8 +6,8 @@ import TaskList from '@tiptap/extension-task-list';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import React from 'react';
-
 import MenuBar from './MenuBar.js';
+import Link from '@tiptap/extension-link';
 
 export default () => {
   const editor = useEditor({
@@ -18,6 +18,7 @@ export default () => {
       Highlight,
       TaskList,
       TaskItem,
+      Link,
     ],
   });
 
