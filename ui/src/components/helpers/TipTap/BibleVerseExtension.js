@@ -1,8 +1,7 @@
 import { Node, mergeAttributes } from '@tiptap/core';
-import { Modal, ModalContent, ModalHeader, ModalBody } from '@chakra-ui/react';
 import { NodeViewWrapper, ReactNodeViewRenderer } from '@tiptap/react';
-import { getBiblePassage } from '../SermonNotes';
-import React, { useState } from 'react';
+import { BibleVerseModal } from '../components/Modal.js';
+import React from 'react';
 
 export const BibleVersseNode = Node.create({
   name: 'bibleVerse',
@@ -47,24 +46,11 @@ export const BibleVersseNode = Node.create({
   },
 });
 
-const BibleVerseModal = ({ isOpen, onClose, bibleVerse }) => {
-  const [passage, setPassage] = useState('');
-  (async () => {
-    const res = await getBiblePassage(bibleVerse);
-    setPassage(res);
-  })();
-  return (
-    <Modal isOpen={true} onClose={onClose}>
-      <ModalContent width="unset" height="unset">
-        <ModalHeader>{bibleVerse + ' (ESV)'}</ModalHeader>
-        <ModalBody>{passage}</ModalBody>
-      </ModalContent>
-    </Modal>
-  );
-};
+
 const BibleVerseWithModal = (props) => {
   const verse = props.node.attrs.bibleVerse;
   const [isOpen, setIsOpen] = React.useState(false);
+  const verseRef = React.useRef(null);
 
   const handleMouseEnter = () => {
     setIsOpen(true);
@@ -78,6 +64,7 @@ const BibleVerseWithModal = (props) => {
     <NodeViewWrapper
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      ref={verseRef}
     >
       <span style={{ textDecoration: 'underline', cursor: 'pointer' }}>
         {verse}
@@ -87,10 +74,10 @@ const BibleVerseWithModal = (props) => {
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
           bibleVerse={verse}
+          verseRef= {verseRef}
         />
       )}
     </NodeViewWrapper>
   );
 };
 
-// export default BibleVerseExtension;
