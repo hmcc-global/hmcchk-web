@@ -37,10 +37,10 @@ module.exports = {
         lifeGroup,
         leaders,
         lastUpdatedBy: user,
-      });
+      }).fetch();
 
       if (!res) {
-        return exits.error(err);
+        return exits.error();
       }
 
       return exits.success();

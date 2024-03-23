@@ -65,7 +65,7 @@ module.exports = {
 
         if (!existing) {
           sails.log.error('invalidId');
-          return exits.error(err);
+          return exits.error();
         }
 
         return exits.success(existing);
