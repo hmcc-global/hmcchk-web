@@ -1,97 +1,35 @@
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  Button,
-  useDisclosure,
-} from '@chakra-ui/react';
 import { getBiblePassage } from '../SermonNotes';
-import { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Modal, ModalContent, ModalHeader, ModalBody } from '@chakra-ui/react';
+import styled from '@emotion/styled';
 
-export const BibleModal = ({ verse }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+export const BibleVerseModal = ({ isOpen, onClose, bibleVerse, verseRef }) => {
   const [passage, setPassage] = useState('');
   (async () => {
-    const res = await getBiblePassage(verse);
+    const res = await getBiblePassage(bibleVerse);
     setPassage(res);
   })();
 
-  return (
-    <>
-      <Button onClick={onOpen}>click</Button>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalContent>
-          <ModalHeader>{verse + ' (ESV)'}</ModalHeader>
-          <ModalBody>
-            <p>{passage ? passage : 'Loading...'}</p>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-    </>
-  );
-};
-
-export const LinkModal = ({ editor }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const urlRef = useRef('');
-
-  const openLinkModal = () => {
-    const previousUrl = editor.getAttributes('link').href;
-    urlRef.current = previousUrl;
-    onOpen();
-  };
-
-  const closeLinkModal = () => {
-    onClose();
-  };
-
-  const handleUrlChange = (event) => {
-    urlRef.current = event.target.value;
-  };
-
-  const handleSave = () => {
-    const url = urlRef.current;
-
-    // Cancelled
-    if (url === null) {
-      return;
-    }
-
-    // Empty
-    if (url === '') {
-      editor.chain().focus().extendMarkRange('link').unsetLink().run();
-    } else {
-      // Update link
-      editor
-        .chain()
-        .focus()
-        .extendMarkRange('link')
-        .setLink({ href: url })
-        .run();
-    }
-
-    onClose();
-  };
-
-  useEffect(() => {
-    const { dom } = editor.view;
-    dom.addEventListener('mouseover', openLinkModal);
-    dom.addEventListener('mouseleave', closeLinkModal);
-
-    return () => {
-      dom.removeEventListener('mouseover', openLinkModal);
-      dom.removeEventListener('mouseleave', closeLinkModal);
+  const calculateModalPosition = () => {
+    const buttonRect = verseRef.current.getBoundingClientRect();
+    return {
+      top: buttonRect.top,
+      left: buttonRect.left,
     };
-  }, [editor.view, openLinkModal, closeLinkModal]);
-
+  };
+  const modalPosition = calculateModalPosition();
+  console.log(modalPosition);
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalContent>
-        <ModalHeader>Insert Link</ModalHeader>
-        <ModalBody>
-          <p>testing</p>
-        </ModalBody>
+      <ModalContent
+        style={{
+          // position: 'absolute',
+          // top: `${modalPosition.top}px`,
+          // left: `${modalPosition.left}px`,
+        }}
+      >
+        <ModalHeader>{bibleVerse + ' (ESV)'}</ModalHeader>
+        <ModalBody>{passage}</ModalBody>
       </ModalContent>
     </Modal>
   );
