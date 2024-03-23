@@ -132,13 +132,11 @@ export default ({ editor }) => {
       action: () => editor.chain().focus().redo().run(),
     },
     {
-      icon: 'bold',
-      title: 'Bible Verse',
+      icon: 'italic',
+      title: 'Bible Passage',
       action: useCallback(() => {
         const previousUrl = editor.getAttributes('link').href;
         const url = window.prompt('URL', previousUrl);
-
-        // cancelled
         if (url === null) {
           return;
         }
@@ -150,20 +148,9 @@ export default ({ editor }) => {
           return;
         }
 
-        // update link
-        editor
-          .chain()
-          .focus()
-          .extendMarkRange('link')
-          .setLink({ href: url })
-          .run();
+        editor.commands.insertBibleVerse(url);
       }, [editor]),
     },
-    {
-      icon:'italic',
-      title: 'Bible Passage',
-      action: () => editor.chain().focus().setBibleVerse('John 3:16').run(),
-    }
   ];
 
   return (
