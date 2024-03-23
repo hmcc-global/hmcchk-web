@@ -62,7 +62,6 @@ const FileUpload = (props) => {
 
       let config = {
         onUploadProgress: (event) => {
-          console.log(event.loaded);
           setProgress(Math.round((100 * event.loaded) / event.total));
         },
       };
