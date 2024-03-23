@@ -14,6 +14,14 @@ module.exports.policies = {
    * Default policy for all controllers and actions, unless overridden.       *
    * (`true` allows public access)                                            *
    *                                                                          *
+   * Current hierarchy from lowest to highest:                                *
+   * - isLoggedIn                                                             *
+   * - aboveMinistry                                                          *
+   * - aboveTc                                                                *
+   * - aboveTech                                                              *
+   * - aboveAdmin                                                             *
+   * - isStewardship                                                          *
+   *                                                                          *
    ***************************************************************************/
   '*': 'isLoggedIn',
 
@@ -92,6 +100,9 @@ module.exports.policies = {
   'testimonies/update-testimonies': ['isLoggedIn', 'aboveTech'],
   'testimonies/get-published-testimonies': true,
   'testimonies/create-testimonies': true,
+
+  // LeadershipTeam
+  'leadershipTeam/*': ['isLoggedIn', 'aboveAdmin'],
 
   // Users
   'users/reset': ['isLoggedIn', 'aboveAdmin'],
