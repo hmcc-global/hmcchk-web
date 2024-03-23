@@ -89,6 +89,7 @@ export default function AdminLeadershipTeamContainer(props) {
   const createHandler = async () => {
     try {
       const leadersArr = leaders && leaders.length > 0 && leaders.split(',');
+      const cleanLeadersArr = leadersArr.map((x) => x.trim());
 
       const res = await axios.post('/api/leadership-team/create', {
         seasonFrom,
@@ -96,38 +97,7 @@ export default function AdminLeadershipTeamContainer(props) {
         campus,
         lifestage,
         lifeGroup,
-        leaders: leadersArr,
-        isDeleted: deleted,
-      });
-
-      if (res.status === 200) {
-        const { data } = res;
-        setId(data.id);
-        return true;
-      }
-    } catch (e) {
-      console.log(e.response);
-      toast({
-        description: e.response.data,
-        status: 'error',
-        duration: 5000,
-      });
-      return false;
-    }
-  };
-
-  const updateHandler = async () => {
-    try {
-      const leadersArr = leaders && leaders.length > 0 && leaders.split(',');
-
-      const res = await axios.put('/api/leadership-team/update', {
-        id,
-        seasonFrom,
-        seasonTo,
-        campus,
-        lifestage,
-        lifeGroup,
-        leaders: leadersArr,
+        leaders: cleanLeadersArr,
         isDeleted: deleted,
       });
 
@@ -143,7 +113,74 @@ export default function AdminLeadershipTeamContainer(props) {
     }
   };
 
-  const duplicateHandler = () => {};
+  const updateHandler = async () => {
+    try {
+      const leadersArr = leaders && leaders.length > 0 && leaders.split(',');
+      const cleanLeadersArr = leadersArr.map((x) => x.trim());
+
+      const res = await axios.put('/api/leadership-team/update', {
+        id,
+        seasonFrom,
+        seasonTo,
+        campus,
+        lifestage,
+        lifeGroup,
+        leaders: cleanLeadersArr,
+        isDeleted: deleted,
+      });
+
+      if (res.status === 200) return true;
+    } catch (e) {
+      console.log(e.response);
+      toast({
+        description: e.response.data,
+        status: 'error',
+        duration: 5000,
+      });
+      return false;
+    }
+  };
+
+  const duplicateHandler = async (e) => {
+    setIsLoading(true);
+    try {
+      const { data, status } = await axios.get('/api/leadership-team/get', {
+        params: { id: e.target.value },
+      });
+
+      if (status !== 200) {
+        toast({
+          description:
+            'There was an issue with the request, please talk to a t3ch support',
+          status: 'warning',
+          duration: 8000,
+          isClosable: true,
+        });
+      }
+
+      setId('');
+      setSeasonFrom(data[0].seasonFrom);
+      setSeasonTo(data[0].seasonTo);
+      setCampus(data[0].campus);
+      setLifestage(data[0].lifestage);
+      setLifeGroup(data[0].lifeGroup);
+      setLeaders(data[0].leaders);
+      setDeleted(data[0].isDeleted);
+
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+
+      toast({
+        description:
+          'There was an issue with the request, please talk to a t3ch support',
+        status: 'warning',
+        duration: 8000,
+        isClosable: true,
+      });
+      setIsLoading(false);
+    }
+  };
 
   const resetHandler = () => {
     setId('');
@@ -315,7 +352,9 @@ export default function AdminLeadershipTeamContainer(props) {
                 <Button
                   w={['100%', '50%']}
                   colorScheme="blue"
+                  value={id}
                   onClick={duplicateHandler}
+                  isDisabled={!id && id.length === 0}
                 >
                   DUPLICATE
                 </Button>
