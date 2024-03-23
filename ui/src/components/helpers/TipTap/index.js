@@ -8,7 +8,7 @@ import StarterKit from '@tiptap/starter-kit';
 import React from 'react';
 import MenuBar from './MenuBar.js';
 import Link from '@tiptap/extension-link';
-import BibleVerseExtension from './BibleVerseExtension.js';
+import { BibleVersseNode } from './BibleVerseExtension.js';
 
 export default () => {
   const editor = useEditor({
@@ -20,7 +20,7 @@ export default () => {
       TaskList,
       TaskItem,
       Link,
-      BibleVerseExtension
+      BibleVersseNode
     ],
   });
 
