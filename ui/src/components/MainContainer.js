@@ -29,6 +29,7 @@ import OnlineSermonContainer from './sermons/OnlineSermonContainer';
 import AdminHome from './admin/AdminHome';
 import AdminUser from './admin/users/AdminUser';
 import FormManager from './forms/FormManager';
+import BaptismFollowUpContainer from './admin/follow-up/BaptismFollowUpContainer';
 import AdminPopUpContainer from './admin/popup/AdminPopUpContainer';
 import AdminFormDataViewer from './admin/forms/AdminFormDataViewer';
 import AdminLiveSermonContainer from './admin/liveSermon/AdminLiveSermonContainer';
@@ -253,6 +254,12 @@ const MainContainer = () => {
           path="/admin/users"
           permissions={['admin', 'stewardship']}
           component={AdminUser}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/followUp"
+          permissions={['admin', 'stewardship']}
+          component={BaptismFollowUpContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
