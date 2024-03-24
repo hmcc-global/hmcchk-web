@@ -1,47 +1,66 @@
 import { customAxios as axios } from '../../helpers/customAxios';
-import { Heading, Button } from '@chakra-ui/react';
-import { useState, useRef, useCallback, useEffect } from 'react';
-import { DateTime } from 'luxon';
+import {
+  Heading,
+  Box,
+  useToast,
+  Container,
+  Stack,
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Checkbox,
+  Select,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerBody,
+  DrawerFooter,
+  useDisclosure,
+  Flex,
+  Spacer,
+} from '@chakra-ui/react';
+import { useState, useCallback, useEffect, useRef } from 'react';
+import { lifestageList, campusList } from '../../helpers/lists';
 
-import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import LeadershipTeamGrid from './LeadershipTeamGrid.js';
+import { AddIcon, EditIcon } from '@chakra-ui/icons';
 
 export default function AdminLeadershipTeamContainer(props) {
-  // constants
-  const dateFromFormat = 'yyyy-MM-dd'; // Ag-grid converter helper
-  const dateToFormat = 'dd MMM yyyy';
-  const pollFreqInSecs = 30;
-  const undoRedoCellEditing = true; // Enabling Undo and Redo
-  const undoRedoCellEditingLimit = 20;
-  const enableCellChangeFlash = true;
+  const toast = useToast();
 
   // states
-  const [api, setApi] = useState();
-  const [colApi, setColApi] = useState();
   const [teams, setTeams] = useState([]);
-  let lastUpdatedTime = useRef();
+  const [selected, setSelected] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
-  // get data for ag grid table and check when is it last up
-  const getData = async () => {
+  const [id, setId] = useState('');
+  const [seasonFrom, setSeasonFrom] = useState('');
+  const [seasonTo, setSeasonTo] = useState('');
+  const [campus, setCampus] = useState('');
+  const [lifestage, setLifestage] = useState('');
+  const [lifeGroup, setLifeGroup] = useState('');
+  const [leaders, setLeadersStr] = useState('');
+  const [deleted, setDeleted] = useState(false);
+
+  const setLeaders = useCallback((v) => {
+    if (v && Array.isArray(v)) {
+      setLeadersStr(v.join(','));
+      return;
+    }
+
+    setLeadersStr('');
+  }, []);
+
+  // get data for Ag-Grid table
+  const getData = useCallback(async () => {
     try {
       const { data } = await axios.get('/api/leadership-team/get');
-      setTeams(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const checkIfUpdated = useCallback(async (updateData = true) => {
-    try {
-      const { data } = await axios.get('/api/last-updated', {
-        params: { modelName: 'leadershipTeam' },
-      });
-      const dateObj = DateTime.fromISO(data);
-      if (!lastUpdatedTime.current || dateObj > lastUpdatedTime.current) {
-        updateData && getData();
-        lastUpdatedTime.current = dateObj;
-      }
+      if (data) setTeams(data);
     } catch (err) {
       console.log(err);
     }
@@ -49,77 +68,301 @@ export default function AdminLeadershipTeamContainer(props) {
 
   useEffect(() => {
     getData();
-    checkIfUpdated(false);
-    setInterval(() => {
-      checkIfUpdated();
-    }, pollFreqInSecs * 1000);
-  }, [checkIfUpdated]);
-
-  const defaultColDef = {
-    editable: true,
-    sortable: true,
-    resizable: true,
-    filter: true,
-    floatingFilter: true,
-  };
-
-  // handle export of csv
-  const exportParams = () => {
-    let fileName = 'leadership_team.csv';
-    if (lastUpdatedTime.current) {
-      const asOfDate = lastUpdatedTime.current.toFormat('yyyyMMdd_HHmmss');
-      fileName = `${asOfDate}_leadership_team.csv`;
-    }
-
-    return {
-      skipColumnGroupHeaders: true,
-      allColumns: true,
-      fileName: fileName,
-    };
-  };
-
-  const exportHandler = () => {
-    if (api) {
-      api.exportDataAsCsv(exportParams());
-    }
-  };
+  }, [getData]);
 
   useEffect(() => {
-    if (api) {
-      if (teams && teams.length) {
-        api.hideOverlay();
-      } else {
-        api.showLoadingOverlay();
+    if (selected) {
+      setId(selected.id);
+      setSeasonFrom(selected.seasonFrom);
+      setSeasonTo(selected.seasonTo);
+      setCampus(selected.campus);
+      setLifestage(selected.lifestage);
+      setLifeGroup(selected.lifeGroup);
+      setLeaders(selected.leaders);
+      setDeleted(selected.isDeleted);
+    }
+  }, [selected, setLeaders]);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const firstField = useRef();
+
+  const createHandler = async () => {
+    try {
+      const leadersArr = leaders && leaders.length > 0 && leaders.split(',');
+      const cleanLeadersArr = leadersArr.map((x) => x.trim());
+
+      const res = await axios.post('/api/leadership-team/create', {
+        seasonFrom,
+        seasonTo,
+        campus,
+        lifestage,
+        lifeGroup,
+        leaders: cleanLeadersArr,
+        isDeleted: deleted,
+      });
+
+      if (res.status === 200) return true;
+    } catch (e) {
+      console.log(e.response);
+      toast({
+        description: e.response.data,
+        status: 'error',
+        duration: 5000,
+      });
+      return false;
+    }
+  };
+
+  const updateHandler = async () => {
+    try {
+      const leadersArr = leaders && leaders.length > 0 && leaders.split(',');
+      const cleanLeadersArr = leadersArr.map((x) => x.trim());
+
+      const res = await axios.put('/api/leadership-team/update', {
+        id,
+        seasonFrom,
+        seasonTo,
+        campus,
+        lifestage,
+        lifeGroup,
+        leaders: cleanLeadersArr,
+        isDeleted: deleted,
+      });
+
+      if (res.status === 200) return true;
+    } catch (e) {
+      console.log(e.response);
+      toast({
+        description: e.response.data,
+        status: 'error',
+        duration: 5000,
+      });
+      return false;
+    }
+  };
+
+  const duplicateHandler = async (e) => {
+    setIsLoading(true);
+    try {
+      const { data, status } = await axios.get('/api/leadership-team/get', {
+        params: { id: e.target.value },
+      });
+
+      if (status !== 200) {
+        toast({
+          description:
+            'There was an issue with the request, please talk to a t3ch support',
+          status: 'warning',
+          duration: 8000,
+          isClosable: true,
+        });
       }
+
+      setId('');
+      setSeasonFrom(data[0].seasonFrom);
+      setSeasonTo(data[0].seasonTo);
+      setCampus(data[0].campus);
+      setLifestage(data[0].lifestage);
+      setLifeGroup(data[0].lifeGroup);
+      setLeaders(data[0].leaders);
+      setDeleted(data[0].isDeleted);
+
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+
+      toast({
+        description:
+          'There was an issue with the request, please talk to a t3ch support',
+        status: 'warning',
+        duration: 8000,
+        isClosable: true,
+      });
+      setIsLoading(false);
     }
-  }, [teams, api]);
+  };
 
-  // Ag-Grid Helpers
-  // Formatters
-  const dateFormatter = (dateStr) => {
-    if (dateStr) {
-      const dateObj = DateTime.fromFormat(dateStr, dateFromFormat);
-      return dateObj.toFormat(dateToFormat);
+  const resetHandler = () => {
+    setId('');
+    setSeasonFrom('');
+    setSeasonTo('');
+    setCampus('');
+    setLifestage('');
+    setLifeGroup('');
+    setLeaders('');
+    setDeleted(false);
+    setSelected();
+    setIsLoading(false);
+  };
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!lifeGroup || lifeGroup.length === 0) return;
+
+    setIsLoading(true);
+    let success = false;
+
+    if (id && id.length > 0) {
+      success = await updateHandler();
+    } else {
+      success = await createHandler();
     }
 
-    return '';
+    if (success) {
+      toast({
+        description: 'Saved!',
+        status: 'success',
+        duration: 5000,
+      });
+      await getData();
+    }
+    setIsLoading(false);
   };
-
-  // Undo and Redo Functions
-  const undo = () => {
-    if (api) api.undoCellEditing();
-  };
-
-  const redo = () => {
-    if (api) api.redoCellEditing();
-  };
-
-  // Ag-Grid Column Definitions
-  const columnDefs = [];
 
   return (
-    <>
-      <Heading></Heading>
-    </>
+    <Container maxW="100%">
+      <Flex>
+        <Heading as="h3" mb={5}>
+          Leadership Team Manager
+        </Heading>
+
+        <Spacer />
+
+        <Button colorScheme="red" onClick={resetHandler} mr={2}>
+          RESET
+        </Button>
+        <Button
+          leftIcon={id !== '' ? <EditIcon /> : <AddIcon />}
+          colorScheme="teal"
+          onClick={onOpen}
+        >
+          {id !== '' ? 'EDIT' : 'ADD'}
+        </Button>
+      </Flex>
+
+      <Stack direction={['column']} w="100%">
+        <Box w={['100%']}>
+          <LeadershipTeamGrid teams={teams} setSelected={setSelected} />
+        </Box>
+
+        <Drawer
+          isOpen={isOpen}
+          placement="right"
+          onClose={onClose}
+          initialFocusRef={firstField}
+          size="lg"
+        >
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerCloseButton />
+
+            <DrawerHeader></DrawerHeader>
+
+            <DrawerBody>
+              <form id="lt-form" onSubmit={onSubmit}>
+                <FormControl>
+                  <FormLabel>Season From</FormLabel>
+                  <Input
+                    ref={firstField}
+                    type="date"
+                    value={seasonFrom}
+                    onChange={(e) => setSeasonFrom(e.target.value)}
+                  />
+                </FormControl>
+
+                <FormControl>
+                  <FormLabel>Season To</FormLabel>
+                  <Input
+                    type="date"
+                    value={seasonTo}
+                    onChange={(e) => setSeasonTo(e.target.value)}
+                  />
+                </FormControl>
+
+                <FormControl>
+                  <FormLabel>Campus</FormLabel>
+                  <Select
+                    size="sm"
+                    borderRadius="5"
+                    value={campus}
+                    placeholder="Please fill in this field"
+                    onChange={(e) => setCampus(e.target.value)}
+                  >
+                    {campusList.map((item) => {
+                      return <option key={item}>{item}</option>;
+                    })}
+                  </Select>
+                </FormControl>
+
+                <FormControl>
+                  <FormLabel>Lifestage</FormLabel>
+                  <Select
+                    size="sm"
+                    borderRadius="5"
+                    value={lifestage}
+                    placeholder="Please fill in this field"
+                    onChange={(e) => setLifestage(e.target.value)}
+                  >
+                    {lifestageList.map((item) => {
+                      return <option key={item}>{item}</option>;
+                    })}
+                  </Select>
+                </FormControl>
+
+                <FormControl>
+                  <FormLabel>LIFE Group</FormLabel>
+                  <Input
+                    type="text"
+                    value={lifeGroup}
+                    onChange={(e) => setLifeGroup(e.target.value)}
+                  />
+                </FormControl>
+
+                <FormControl>
+                  <FormLabel>Leaders</FormLabel>
+                  <Input
+                    type="text"
+                    value={leaders}
+                    onChange={(e) => setLeadersStr(e.target.value)}
+                  />
+                </FormControl>
+
+                <FormControl w="auto">
+                  <Checkbox
+                    isChecked={deleted}
+                    onChange={(e) => setDeleted(e.target.checked)}
+                  >
+                    Delete?
+                  </Checkbox>
+                </FormControl>
+              </form>
+            </DrawerBody>
+
+            <DrawerFooter>
+              <Stack w="full" direction={['column', 'row']} spacing={2}>
+                <Button
+                  w={['100%', '50%']}
+                  form="lt-form"
+                  type="submit"
+                  isLoading={isLoading}
+                >
+                  {id && id.length > 0 ? 'UPDATE' : 'SAVE'}
+                </Button>
+                <Button
+                  w={['100%', '50%']}
+                  colorScheme="blue"
+                  value={id}
+                  onClick={duplicateHandler}
+                  isDisabled={!id && id.length === 0}
+                >
+                  DUPLICATE
+                </Button>
+              </Stack>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      </Stack>
+    </Container>
   );
 }
