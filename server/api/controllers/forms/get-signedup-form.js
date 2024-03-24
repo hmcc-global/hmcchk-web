@@ -22,7 +22,7 @@ module.exports = {
     },
     notFound: {
       description: 'No userId found',
-      responseType: 'notFound',
+      responseType: 'notFound'
     },
     invalid: {
       description: 'Something is wrong with your request. Please check it',
@@ -41,37 +41,7 @@ module.exports = {
         isDeleted: false,
       });
 
-      const sub = data.map((s) =>
-        formData.find((i) => {
-          if (i.formAvailableFrom || i.formAvailableUntil) {
-            // Do date checking
-            let submissionDate = new Date(s.createdAt);
-
-            // Dates might evaluate to invalid date if the value is not set
-            let formAvailableFrom = new Date(i.formAvailableFrom);
-            let formAvailableUntil = new Date(i.formAvailableUntil);
-
-            // Handle logic accordingly
-            // if it is a date, check if submission is within validity period
-            // + sanity check that date object is a date and not null
-            // if not, by default submission exists for this form and return true
-            let signedUpAfterFormOpen =
-              formAvailableFrom instanceof Date && !isNaN(formAvailableFrom)
-                ? submissionDate >= formAvailableFrom
-                : true;
-            let signedUpBeforeFormEnd =
-              formAvailableUntil instanceof Date && !isNaN(formAvailableUntil)
-                ? submissionDate <= formAvailableUntil
-                : true;
-
-            return (
-              i.id === s.formId &&
-              signedUpAfterFormOpen &&
-              signedUpBeforeFormEnd
-            );
-          } else return i.id === s.formId;
-        })
-      );
+      const sub = data.map( s => formData.find( i => i.id === s.formId ))
 
       // If no form is found return error
       if (sub === null) return exits.error('unauthorized access');
