@@ -94,7 +94,7 @@ const UserProfileMobile = (props) => {
     }
   }, [user.id]);
 
-  const fetchUnsignedUpForms = useCallback(async () => {
+  const fetchUnignedUpForms = useCallback(async () => {
     //get signed up forms
     const { data, status } = await axios.get('/api/forms/get-unsignedup-form', {
       params: {
@@ -171,7 +171,7 @@ const UserProfileMobile = (props) => {
     fetchUserData();
     fetchPublishedForms();
     fetchSignedUpForms();
-    fetchUnsignedUpForms();
+    fetchUnignedUpForms();
   }, []);
 
   const inputBox = {
