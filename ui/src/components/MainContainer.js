@@ -35,6 +35,7 @@ import AdminLiveSermonContainer from './admin/liveSermon/AdminLiveSermonContaine
 import SaturateContainer from './saturate/SaturateContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementContainer';
+import AdminSermonNotesContainer from './admin/sermonNotes/AdminSermonNotesContainer';
 import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
 
 const MainContainer = () => {
@@ -246,6 +247,12 @@ const MainContainer = () => {
           path="/admin/users"
           permissions={['admin', 'stewardship']}
           component={AdminUser}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/sermonNotes"
+          permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
+          component={AdminSermonNotesContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>

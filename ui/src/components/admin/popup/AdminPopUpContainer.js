@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react';
 import PopUpGrid from './PopUpGrid';
 import PopupContainer from './PopupContainer';
+import TiptapEditor from '../../helpers/TipTap';
 
 export default function AdminPopUpContainer(props) {
   const toast = useToast();
@@ -304,6 +305,8 @@ export default function AdminPopUpContainer(props) {
           <PopUpGrid popUps={popUps} setSelected={setSelected} />
         </Box>
       </Stack>
+      <br />
+      <TiptapEditor />
       {selected && (
         <PopupContainer
           popupData={selected}
