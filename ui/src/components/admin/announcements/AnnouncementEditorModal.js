@@ -437,7 +437,6 @@ const AnnouncementEditorModal = (props) => {
                     id="imageAdUrl"
                     name="imageAdUrl"
                     acceptedFileTypes="image/*"
-                    placeholder="Click here to select a file"
                     setImageUrl={setImageAdUrl}
                     inputValue={imageAdUrl}
                     control={control}

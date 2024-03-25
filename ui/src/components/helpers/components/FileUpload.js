@@ -1,4 +1,4 @@
-import { useRef, useState, useSelector } from 'react';
+import { useRef, useState } from 'react';
 import { customAxios as axios } from '../customAxios';
 import {
   FormControl,
@@ -6,10 +6,9 @@ import {
   FormLabel,
   Input,
   InputGroup,
-  InputLeftElement,
-  Icon,
   Stack,
   Progress,
+  Button,
 } from '@chakra-ui/react';
 import { useController } from 'react-hook-form';
 import { FiFile } from 'react-icons/fi';
@@ -28,6 +27,7 @@ const FileUpload = (props) => {
 
   const [isUploading, setIsUploading] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [textValue, setTextValue] = useState(inputValue || '');
   const inputRef = useRef();
 
   const {
@@ -38,6 +38,8 @@ const FileUpload = (props) => {
     control,
     rules: { required: isRequired },
   });
+
+  const handleTextChange = (event) => setTextValue(event.target.value);
 
   const uploadFile = async () => {
     if (inputRef.current.files.length > 0) {
@@ -75,6 +77,7 @@ const FileUpload = (props) => {
 
         const url = response.data.source_url;
         setImageUrl(url);
+        setTextValue(url);
         setIsUploading(false);
         setProgress(0);
 
@@ -94,9 +97,6 @@ const FileUpload = (props) => {
         <FormLabel htmlFor="writeUpFile">{children}</FormLabel>
 
         <InputGroup>
-          <InputLeftElement pointerEvents="none">
-            <Icon as={FiFile} />
-          </InputLeftElement>
           <input
             type="file"
             onChange={uploadFile}
@@ -107,11 +107,18 @@ const FileUpload = (props) => {
             style={{ display: 'none' }}
           />
           <Input
-            placeholder={placeholder || 'Your file ...'}
-            onClick={() => inputRef.current.click()}
-            readOnly={true}
-            value={inputValue}
+            placeholder={placeholder || ''}
+            value={textValue}
+            onChange={handleTextChange}
           />
+          <Button
+            leftIcon={<FiFile />}
+            colorScheme="green"
+            onClick={() => inputRef.current.click()}
+            ml={2}
+          >
+            Upload
+          </Button>
         </InputGroup>
         {isUploading && (
           <Progress colorScheme="blue" value={progress} min="0" max="100" />
