@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useSelector } from 'react';
 import { customAxios as axios } from '../customAxios';
 import {
   FormControl,
@@ -70,12 +70,13 @@ const FileUpload = (props) => {
         const response = await axios.post(
           process.env.REACT_APP_WP_MEDIA_API,
           formData,
-          { headers, config }
+          { ...config, headers }
         );
 
         const url = response.data.source_url;
         setImageUrl(url);
         setIsUploading(false);
+        setProgress(0);
 
         return name;
       } catch (err) {
@@ -88,45 +89,36 @@ const FileUpload = (props) => {
   };
 
   return (
-    <>
-      <Stack direction={['row']} align={'end'}>
-        <FormControl isInvalid={invalid} isRequired>
-          <FormLabel htmlFor="writeUpFile">{children}</FormLabel>
+    <Stack direction={['row']} align={'end'}>
+      <FormControl isInvalid={invalid} isRequired>
+        <FormLabel htmlFor="writeUpFile">{children}</FormLabel>
 
-          <InputGroup>
-            <InputLeftElement pointerEvents="none">
-              <Icon as={FiFile} />
-            </InputLeftElement>
-            <input
-              type="file"
-              onChange={uploadFile}
-              accept={acceptedFileTypes}
-              name={name}
-              ref={inputRef}
-              {...inputProps}
-              style={{ display: 'none' }}
-            />
-            <Input
-              placeholder={placeholder || 'Your file ...'}
-              onClick={() => inputRef.current.click()}
-              readOnly={true}
-              value={inputValue}
-            />
-          </InputGroup>
-          {isUploading && (
-            <Progress
-              colorScheme="blue"
-              isAnimated
-              value={progress}
-              min="0"
-              max="100"
-              isIndeterminate={isUploading}
-            />
-          )}
-          <FormErrorMessage>{invalid}</FormErrorMessage>
-        </FormControl>
-      </Stack>
-    </>
+        <InputGroup>
+          <InputLeftElement pointerEvents="none">
+            <Icon as={FiFile} />
+          </InputLeftElement>
+          <input
+            type="file"
+            onChange={uploadFile}
+            accept={acceptedFileTypes}
+            name={name}
+            ref={inputRef}
+            {...inputProps}
+            style={{ display: 'none' }}
+          />
+          <Input
+            placeholder={placeholder || 'Your file ...'}
+            onClick={() => inputRef.current.click()}
+            readOnly={true}
+            value={inputValue}
+          />
+        </InputGroup>
+        {isUploading && (
+          <Progress colorScheme="blue" value={progress} min="0" max="100" />
+        )}
+        <FormErrorMessage>{invalid}</FormErrorMessage>
+      </FormControl>
+    </Stack>
   );
 };
 
