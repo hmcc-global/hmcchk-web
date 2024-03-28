@@ -27,7 +27,6 @@ const FileUpload = (props) => {
 
   const [isUploading, setIsUploading] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [textValue, setTextValue] = useState(inputValue || '');
   const inputRef = useRef();
 
   const {
@@ -39,7 +38,7 @@ const FileUpload = (props) => {
     rules: { required: isRequired },
   });
 
-  const handleTextChange = (event) => setTextValue(event.target.value);
+  const handleTextChange = (event) => setImageUrl(event.target.value);
 
   const uploadFile = async () => {
     if (inputRef.current.files.length > 0) {
@@ -77,7 +76,6 @@ const FileUpload = (props) => {
 
         const url = response.data.source_url;
         setImageUrl(url);
-        setTextValue(url);
         setIsUploading(false);
         setProgress(0);
 
@@ -108,7 +106,7 @@ const FileUpload = (props) => {
           />
           <Input
             placeholder={placeholder || ''}
-            value={textValue}
+            value={inputValue}
             onChange={handleTextChange}
           />
           <Button
