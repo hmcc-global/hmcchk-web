@@ -182,7 +182,7 @@ export default function AdminLeadershipTeamContainer(props) {
     }
   };
 
-  const resetHandler = () => {
+  const unselectHandler = () => {
     setId('');
     setSeasonFrom('');
     setSeasonTo('');
@@ -223,22 +223,36 @@ export default function AdminLeadershipTeamContainer(props) {
   return (
     <Container maxW="100%">
       <Flex>
-        <Heading as="h3" mb={5}>
+        <Heading as={'h3'} mb={5}>
           Leadership Team Manager
         </Heading>
 
         <Spacer />
 
-        <Button colorScheme="red" onClick={resetHandler} mr={2}>
-          RESET
-        </Button>
-        <Button
-          leftIcon={id !== '' ? <EditIcon /> : <AddIcon />}
-          colorScheme="teal"
-          onClick={onOpen}
+        <Box
+          position="absolute"
+          right={['2rem', '3rem']}
+          overflow="hidden"
+          zIndex={999}
         >
-          {id !== '' ? 'EDIT' : 'ADD'}
-        </Button>
+          <Stack direction={['column', 'row']}>
+            <Button
+              colorScheme="blue"
+              onClick={unselectHandler}
+              mr={['0', '2']}
+              isDisabled={id === ''}
+            >
+              UNSELECT
+            </Button>
+            <Button
+              leftIcon={id !== '' ? <EditIcon /> : <AddIcon />}
+              colorScheme="teal"
+              onClick={onOpen}
+            >
+              {id !== '' ? 'EDIT' : 'ADD'}
+            </Button>
+          </Stack>
+        </Box>
       </Flex>
 
       <Stack direction={['column']} w="100%">
