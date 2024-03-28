@@ -27,6 +27,7 @@ import {
   Select,
 } from '@chakra-ui/react';
 import { eventIntervalList } from '../../helpers/lists';
+import FileUpload from '../../helpers/components/FileUpload';
 
 const AnnouncementEditorModal = (props) => {
   const {
@@ -36,7 +37,8 @@ const AnnouncementEditorModal = (props) => {
     announcementListCallback,
     actionOnEditor,
   } = props;
-  const { register, handleSubmit, reset, setValue, formState } = useForm();
+  const { register, handleSubmit, reset, setValue, formState, control } =
+    useForm();
   const { errors } = formState;
   const toast = useToast();
 
@@ -431,16 +433,17 @@ const AnnouncementEditorModal = (props) => {
                     />
                   </FormControl>
 
-                  <FormControl isInvalid={errors['imageAdUrl']} isRequired>
-                    <FormLabel>Announcements Image Link</FormLabel>
-                    <Input
-                      id="imageAdUrl"
-                      {...register('imageAdUrl', {
-                        required: 'Image is required',
-                      })}
-                      onChange={(e) => setImageAdUrl(e.target.value)}
-                    />
-                  </FormControl>
+                  <FileUpload
+                    id="imageAdUrl"
+                    name="imageAdUrl"
+                    acceptedFileTypes="image/*"
+                    setImageUrl={setImageAdUrl}
+                    inputValue={imageAdUrl}
+                    control={control}
+                    onChange={(e) => setImageAdUrl(e.target.value)}
+                  >
+                    Upload Announcements Image
+                  </FileUpload>
 
                   <FormControl>
                     <FormLabel>Announcements Sign-up link</FormLabel>

@@ -373,7 +373,7 @@ export default function AdminAnnouncementContainer(props) {
                 <Stack
                   pt={[3, 0]}
                   spacing={1}
-                  direction={['column', 'row']}
+                  direction={{ base: 'column', lg: 'row' }}
                   alignItems="center"
                 >
                   {announcementItem.isInWeb && isCurrentAnnouncements && (
@@ -388,7 +388,7 @@ export default function AdminAnnouncementContainer(props) {
                       onClick={onPublish}
                       isLoading={isLoading}
                       disabled={isPublishDisabled()}
-                      width={['100%', 'auto']}
+                      width={{ base: '100%', lg: 'auto' }}
                     >
                       {announcementItem.isPublished ? 'Unpublish' : 'Publish'}
                     </Button>
@@ -398,7 +398,7 @@ export default function AdminAnnouncementContainer(props) {
                     value={announcementItem.id}
                     onClick={onEdit}
                     isLoading={isLoading}
-                    width={['100%', 'auto']}
+                    width={{ base: '100%', lg: 'auto' }}
                   >
                     Edit
                   </Button>
@@ -409,7 +409,7 @@ export default function AdminAnnouncementContainer(props) {
                     isLoading={isLoading}
                     disabled={isCreateDisabled()}
                     actionOnEditor="duplicate"
-                    width={['100%', 'auto']}
+                    width={{ base: '100%', lg: 'auto' }}
                   >
                     Duplicate
                   </Button>
@@ -419,7 +419,7 @@ export default function AdminAnnouncementContainer(props) {
                     onClick={onDelete}
                     disabled={isPublishDisabled()}
                     isLoading={isLoading}
-                    width={['100%', 'auto']}
+                    width={{ base: '100%', lg: 'auto' }}
                   >
                     Delete
                   </Button>
