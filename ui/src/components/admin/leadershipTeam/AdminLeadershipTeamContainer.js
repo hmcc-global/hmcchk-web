@@ -182,7 +182,7 @@ export default function AdminLeadershipTeamContainer(props) {
     }
   };
 
-  const resetHandler = () => {
+  const unselectHandler = () => {
     setId('');
     setSeasonFrom('');
     setSeasonTo('');
@@ -229,8 +229,13 @@ export default function AdminLeadershipTeamContainer(props) {
 
         <Spacer />
 
-        <Button colorScheme="red" onClick={resetHandler} mr={2}>
-          RESET
+        <Button
+          colorScheme="blue"
+          onClick={unselectHandler}
+          mr={2}
+          isDisabled={id === ''}
+        >
+          UNSELECT
         </Button>
         <Button
           leftIcon={id !== '' ? <EditIcon /> : <AddIcon />}
