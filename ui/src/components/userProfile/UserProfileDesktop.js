@@ -139,7 +139,7 @@ const UserProfileDesktop = (props) => {
     }
   }, [user.id]);
 
-  const fetchUnignedUpForms = useCallback(async () => {
+  const fetchUnsignedUpForms = useCallback(async () => {
     //get signed up forms
     const { data, status } = await axios.get('/api/forms/get-unsignedup-form', {
       params: {
@@ -170,12 +170,12 @@ const UserProfileDesktop = (props) => {
     fetchUserData();
     fetchPublishedForms();
     fetchSignedUpForms();
-    fetchUnignedUpForms();
+    fetchUnsignedUpForms();
   }, [
     fetchUserData,
     fetchPublishedForms,
     fetchSignedUpForms,
-    fetchUnignedUpForms,
+    fetchUnsignedUpForms,
   ]);
 
   const inputBox = {
