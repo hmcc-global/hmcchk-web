@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { customAxios as axios } from '../customAxios';
+import axios from 'axios';
 import {
   FormControl,
   FormErrorMessage,
