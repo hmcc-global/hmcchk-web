@@ -22,7 +22,6 @@ import { BiDonateHeart } from 'react-icons/bi';
 import { IoPeopleOutline } from 'react-icons/io5';
 import { IoBookOutline } from 'react-icons/io5';
 import { FaRegCalendarAlt } from 'react-icons/fa';
-import { set } from 'react-hook-form';
 
 export default function AdminSermonNotesContainer(props) {
   const { user } = props;
@@ -229,7 +228,7 @@ export default function AdminSermonNotesContainer(props) {
           borderColor="#3182CE"
           borderWidth={3}
           size="lg"
-          disabled={isPublishDisabled}
+          disabled={isPublishDisabled()}
           onClick={() => setIsEditorOpen(true)}
         >
           Add New
@@ -247,26 +246,6 @@ export default function AdminSermonNotesContainer(props) {
       </Stack>
       {!isEditorOpen && (
         <>
-          {/* <Stack direction={['row']} w="100%" spacing={5}>
-            <form>
-              <FormControl isInvalid={title === ''}>
-                <FormLabel>Title</FormLabel>
-                <Input type="text" value={title} />
-              </FormControl>
-            </form>
-            <form>
-              <FormControl isInvalid={sermonSeries === ''}>
-                <FormLabel>Sermon Series</FormLabel>
-                <Input type="Sermon Series" value={sermonSeries} />
-              </FormControl>
-            </form>
-            <form>
-              <FormControl isInvalid={sermonDateTime === ''}>
-                <FormLabel>Date &#38; Time</FormLabel>
-                <Input type="datetime-local" value={sermonDateTime} />
-              </FormControl>
-            </form>
-          </Stack> */}
           <List spacing="2" pt={3}>
             {sermonNotesList.map((sermonNoteItem) => (
               <ListItem key={sermonNoteItem.sermonId}>
@@ -312,16 +291,21 @@ export default function AdminSermonNotesContainer(props) {
                     </Stack>
                     <Spacer />
                     <Stack
-                      pt={[3, 0]}
+                      pt={[3, 3, 3, 0]}
                       spacing={1}
-                      direction={['column', 'row']}
+                      direction={['column', 'column', 'column', 'row']}
                       alignItems="center"
                     >
                       <Button
                         value={sermonNoteItem.sermonId}
-                        bgColor={sermonNoteItem.isPublished ? 'purple' : 'gray'}
+                        bgColor={
+                          sermonNoteItem.isPublished
+                            ? 'purple.800'
+                            : 'purple.500'
+                        }
                         onClick={onPublish}
                         disabled={isPublishDisabled()}
+                        width={['100%', '100%', '100%', 'auto']}
                       >
                         {sermonNoteItem.isPublished ? 'Unpublish' : 'Publish'}
                       </Button>
@@ -331,7 +315,7 @@ export default function AdminSermonNotesContainer(props) {
                         value={sermonNoteItem.sermonId}
                         onClick={onEdit}
                         isLoading={isLoading}
-                        width={['100%', 'auto']}
+                        width={['100%', '100%', '100%', 'auto']}
                         disabled={isPublishDisabled()}
                       >
                         Edit
@@ -341,9 +325,8 @@ export default function AdminSermonNotesContainer(props) {
                         value={sermonNoteItem.sermonId}
                         onClick={onDuplicate}
                         isLoading={isLoading}
-                        // disabled={isCreateDisabled()}
                         actionOnEditor="duplicate"
-                        width={['100%', 'auto']}
+                        width={['100%', '100%', '100%', 'auto']}
                       >
                         Duplicate
                       </Button>
@@ -352,8 +335,8 @@ export default function AdminSermonNotesContainer(props) {
                         value={sermonNoteItem.sermonId}
                         onClick={onDelete}
                         disabled={isPublishDisabled()}
-                        // isLoading={isLoading}
-                        width={['100%', 'auto']}
+                        isLoading={isLoading}
+                        width={['100%', '100%', '100%', 'auto']}
                       >
                         Delete
                       </Button>
