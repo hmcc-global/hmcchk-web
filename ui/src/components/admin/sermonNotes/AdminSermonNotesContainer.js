@@ -297,6 +297,7 @@ export default function AdminSermonNotesContainer(props) {
                       alignItems="center"
                     >
                       <Button
+                        color="white"
                         value={sermonNoteItem.sermonId}
                         bgColor={
                           sermonNoteItem.isPublished
