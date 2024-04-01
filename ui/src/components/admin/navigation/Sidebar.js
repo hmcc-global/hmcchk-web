@@ -20,17 +20,25 @@ import {
   FiBell,
   FiMonitor,
   FiFeather,
-  FiVolume2
+  FiVolume2,
+  FiShield,
+  FiAlertCircle,
 } from 'react-icons/fi';
 
 const LinkItems = [
   { name: 'Home', icon: FiHome, path: '/admin/home' },
   { name: 'Forms', icon: FiFileText, path: '/admin/forms' },
+  { name: 'Follow Up', icon: FiAlertCircle, path: '/admin/followUp' },
   { name: 'Live Sermon', icon: FiMonitor, path: '/admin/liveSermon' },
   { name: 'Users', icon: FiUsers, path: '/admin/users' },
   { name: 'Pop Up', icon: FiBell, path: '/admin/popup' },
   { name: 'Testimony', icon: FiFeather, path: '/admin/testimony' },
-  { name: 'Announcements', icon: FiVolume2, path: '/admin/announcements' }
+  { name: 'Announcements', icon: FiVolume2, path: '/admin/announcements' },
+  {
+    name: 'Leadership Teams',
+    icon: FiShield,
+    path: '/admin/leadership-team',
+  },
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {
