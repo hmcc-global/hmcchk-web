@@ -66,11 +66,8 @@ const FormEditor = (props) => {
       if (value) chosenFields.push(key.replace('Checkbox', ''));
     }
 
-    console.log(chosenFields);
-
     let prefillableFields = [];
     for (let field of chosenFields) {
-      console.log(field);
       prefillableFields.push(new FormField('', field, 'prefill', '', true, []));
     }
 
