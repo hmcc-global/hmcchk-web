@@ -1,6 +1,8 @@
+import { v4 as uuidv4 } from 'uuid';
+
 class FormField {
-  constructor(id, fieldName, fieldType, fieldDescription, required, options) {
-    this.id = id;
+  constructor(fieldName, fieldType, fieldDescription, required, options) {
+    this.id = uuidv4();
     this.fieldName = fieldName;
     this.fieldType = fieldType;
     this.fieldDescription = fieldDescription;

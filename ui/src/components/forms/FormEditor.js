@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { customAxios as axios } from '../helpers/customAxios';
 import Form from './Form';
-import FormField from './FormField';
+import FormField from './class/FormField';
 import {
   FormControl,
   FormLabel,
@@ -68,7 +68,7 @@ const FormEditor = (props) => {
 
     let prefillableFields = [];
     for (let field of chosenFields) {
-      prefillableFields.push(new FormField('', field, 'prefill', '', true, []));
+      prefillableFields.push(new FormField(field, 'prefill', '', true, []));
     }
 
     let temp = [...prefillableFields];
@@ -89,7 +89,6 @@ const FormEditor = (props) => {
     }
 
     let newField = new FormField(
-      '',
       data.fieldName,
       data.fieldType,
       data.fieldDescription ? data.fieldDescription : '',
