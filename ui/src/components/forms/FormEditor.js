@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { customAxios as axios } from '../helpers/customAxios';
 import Form from './Form';
+import FormField from './class/FormField';
 import {
   FormControl,
   FormLabel,
@@ -65,20 +66,15 @@ const FormEditor = (props) => {
       if (value) chosenFields.push(key.replace('Checkbox', ''));
     }
 
-    const dataObject = {
-      fieldName: 'prefill',
-      fieldType: 'prefill',
-      options: chosenFields,
-      fieldDescription: '',
-      required: true,
-    };
+    let prefillableFields = [];
+    for (let field of chosenFields) {
+      prefillableFields.push(new FormField(field, 'prefill', '', true, []));
+    }
 
-    let temp = [...formFields];
-    try {
-      let spliceAmount = temp[0].fieldType === 'prefill' ? 1 : 0;
-      temp.splice(0, spliceAmount, dataObject);
-    } catch (err) {
-      temp.push(dataObject);
+    let temp = [...prefillableFields];
+
+    for (let field of formFields) {
+      if (field.fieldType !== 'prefill') temp.push(field);
     }
 
     setFormFields(temp);
@@ -91,13 +87,22 @@ const FormEditor = (props) => {
     if (data.options) {
       data.options = data.options.split(';');
     }
+
+    let newField = new FormField(
+      data.fieldName,
+      data.fieldType,
+      data.fieldDescription ? data.fieldDescription : '',
+      data.required ? data.required : false,
+      data.options ? data.options : []
+    );
+
     let temp = [...formFields];
 
     if (editData) {
-      temp.splice(editData, 1, data);
+      temp.splice(editData, 1, newField);
       setEditData(null);
     } else {
-      temp.push(data);
+      temp.push(newField);
     }
     setFormFields(temp);
 
@@ -196,16 +201,21 @@ const FormEditor = (props) => {
     }
   };
 
+  const getNumberOfPrefillFields = (fieldData) => {
+    return fieldData.filter((obj) => {
+      if (obj.fieldType === 'prefill') return obj;
+      else return false;
+    }).length;
+  };
+
   // Watch this to conditionally render custom things
   const ft = watch('fieldType');
 
   useEffect(() => {
     if (existingFormFieldsData) {
-      if (existingFormFieldsData.formFields[0]?.fieldType === 'prefill') {
-        let fields = existingFormFieldsData.formFields[0].options;
-        fields.forEach((field) => {
-          setValuePrefill(field + 'Checkbox', true);
-        });
+      for (let field of existingFormFieldsData.formFields) {
+        if (field.fieldType === 'prefill')
+          setValuePrefill(field.fieldName + 'Checkbox', true);
       }
       setFormFields(existingFormFieldsData.formFields);
     }
@@ -289,10 +299,17 @@ const FormEditor = (props) => {
                 <Flex p="1">
                   <Center flex="2">{fieldData.fieldName}</Center>
                   <ButtonGroup flex="1" colorScheme="blue">
-                    <Button value={i + 1} onClick={onEdit}>
+                    {/* offset index with the # of prefillable fields to correctly edit */}
+                    <Button
+                      value={i + getNumberOfPrefillFields(formFields)}
+                      onClick={onEdit}
+                    >
                       Edit
                     </Button>
-                    <Button value={i + 1} onClick={onDelete}>
+                    <Button
+                      value={i + getNumberOfPrefillFields(formFields)}
+                      onClick={onDelete}
+                    >
                       Delete
                     </Button>
                   </ButtonGroup>
