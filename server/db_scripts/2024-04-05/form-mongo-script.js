@@ -1,12 +1,19 @@
 /**
  * How to run script:
- * 1. Open MongoDB Compass and open the mongo shell
+ * 1. Open MongoDB Compass
  *
- * 2. Connect to the MongoDB server by running either one of this command:
+ * 2. Back up the db first before you do anything. Export the
+ * original json/csv of the collection that you will be touching
+ *
+ * 3. Open the mongo shell at the bottom. Please test at
+ * the test db first before you start on prod db
+ *
+ * 4. Connect to the MongoDB server by running either one
+ * of these commands:
  * use hmcchk_db;
  * use hmcchk_db_test;
  *
- * 3. Copy and paste the script below to the shell
+ * 5. Copy and paste the script below to the shell
  */
 
 // Add id for all formFields
