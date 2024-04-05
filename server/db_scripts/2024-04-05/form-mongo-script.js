@@ -1,15 +1,22 @@
-// Connect to the MongoDB server
-// use hmcchk_db_test;
+/**
+ * How to run script:
+ * 1. Open MongoDB Compass and open the mongo shell
+ *
+ * 2. Connect to the MongoDB server by running either one of this command:
+ * use hmcchk_db;
+ * use hmcchk_db_test;
+ *
+ * 3. Copy and paste the script below to the shell
+ */
 
 // Add id for all formFields
-db.form1.updateMany(
+db.form.updateMany(
   { formFields: { $ne: null, $type: 'array' } },
   { $set: { 'formFields.$[].id': ObjectId() } }
 );
 
 // Find documents in the collection
-// const documents = db.form1.find();
-const documents = db.form1.find({ formFields: { $ne: null, $type: 'array' } });
+const documents = db.form.find({ formFields: { $ne: null, $type: 'array' } });
 
 // Loop through the documents
 documents.forEach((doc) => {
@@ -39,10 +46,7 @@ documents.forEach((doc) => {
   });
 
   // Update the document with the modified formFields array
-  db.form1.updateOne(
-    { _id: doc._id },
-    { $set: { formFields: doc.formFields } }
-  );
+  db.form.updateOne({ _id: doc._id }, { $set: { formFields: doc.formFields } });
 
   console.log(`${doc._id} -- UPDATED`);
 });
