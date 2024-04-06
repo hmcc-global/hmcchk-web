@@ -343,6 +343,7 @@ export {
   countryList,
   paymentMethodList,
   eventIntervalList,
+  eventTypeList,
   formAlertTypes,
   eventTypeList,
 };
