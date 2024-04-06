@@ -437,6 +437,7 @@ export default function AdminAnnouncementContainer(props) {
         editAnnouncementData={editAnnouncementData}
         actionOnEditor={actionOnEditor}
         announcementListCallback={announcementListCallback}
+        announcementList={announcementList}
       />
     </Container>
   );

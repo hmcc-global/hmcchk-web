@@ -23,11 +23,14 @@ import {
   Grid,
   GridItem,
   Textarea,
+  SimpleGrid,
   useToast,
+  Switch,
   Select,
 } from '@chakra-ui/react';
-import { eventIntervalList } from '../../helpers/lists';
+import { eventIntervalList, eventTypeList } from '../../helpers/lists';
 import FileUpload from '../../helpers/components/FileUpload';
+import { CUIAutoComplete } from 'chakra-ui-autocomplete';
 
 const AnnouncementEditorModal = (props) => {
   const {
@@ -36,6 +39,7 @@ const AnnouncementEditorModal = (props) => {
     editAnnouncementData,
     announcementListCallback,
     actionOnEditor,
+    announcementList,
   } = props;
   const { register, handleSubmit, reset, setValue, formState, control } =
     useForm();
@@ -56,7 +60,9 @@ const AnnouncementEditorModal = (props) => {
   const [eventStartTime, setEventStartTime] = useState(undefined);
   const [eventEndDate, setEventEndDate] = useState(undefined);
   const [eventEndTime, setEventEndTime] = useState(undefined);
-  const [eventInterval, setEventInterval] = useState('None'); // ['Daily', 'Weekly', 'Monthly', 'None'
+  const [eventInterval, setEventInterval] = useState('None'); // ['Daily', 'Weekly', 'Monthly', 'None']
+  const [eventType, setEventType] = useState(undefined);
+  const [featured, setFeatured] = useState(false);
   const [datePeriodInvalid, setDatePeriodInvalid] = useState(false);
   const [formId, setFormId] = useState(undefined);
   const [signUpUrl, setSignUpUrl] = useState(undefined);
@@ -78,9 +84,13 @@ const AnnouncementEditorModal = (props) => {
     setValue('eventEndDate', undefined);
     setValue('eventEndTime', undefined);
     setValue('eventInterval', 'None');
+    setValue('eventType', undefined);
+    setValue('featured', false);
     setValue('formId', undefined);
     setValue('formSignupLink', undefined);
     setValue('additionalNotes', undefined);
+
+    setSelectedItems(undefined);
 
     setTitle(undefined);
     setIsInWeb(false);
@@ -96,6 +106,8 @@ const AnnouncementEditorModal = (props) => {
     setEventEndDate(undefined);
     setEventEndTime(undefined);
     setEventInterval('None');
+    setEventType(undefined);
+    setFeatured(false);
     setFormId(undefined);
     setSignUpUrl(undefined);
     setAdditionalNotes(undefined);
@@ -119,9 +131,13 @@ const AnnouncementEditorModal = (props) => {
       setValue('eventEndDate', data.eventEndDate);
       setValue('eventEndTime', data.eventEndTime);
       setValue('eventInterval', data.eventInterval);
+      setValue('eventType', data.eventType);
+      setValue('featured', data.featured);
       setValue('formId', data.formId);
       setValue('signUpUrl', data.signUpUrl);
       setValue('additionalNotes', data.additionalNotes);
+
+      setSelectedItems(data.eventType);
 
       setTitle(data.title);
       setIsInWeb(data.isInWeb);
@@ -137,12 +153,29 @@ const AnnouncementEditorModal = (props) => {
       setEventEndDate(data.eventEndDate);
       setEventEndTime(data.eventEndTime);
       setEventInterval(data.eventInterval);
+      setEventType(data.eventType);
+      setFeatured(data.featured);
       setFormId(data.formId);
       setSignUpUrl(data.signUpUrl);
       setAdditionalNotes(data.additionalNotes);
     }
   };
+  const [pickerItems, setPickerItems] = useState(eventTypeList);
+  const [selectedItems, setSelectedItems] = useState([]);
 
+  const handleCreateItem = (item) => {
+    setPickerItems((curr) => [...curr, item]);
+    setSelectedItems((curr) => [...curr, item]);
+    setEventType((curr) => [...curr, item]);
+    handleSelectedItemsChange(selectedItems);
+  };
+
+  const handleSelectedItemsChange = (selectedItems) => {
+    if (selectedItems) {
+      setSelectedItems(selectedItems);
+      setEventType(selectedItems);
+    }
+  };
   const onSubmit = async (data, e) => {
     setAnnouncementEditorData(data);
   };
@@ -179,6 +212,8 @@ const AnnouncementEditorModal = (props) => {
         eventEndDate,
         eventEndTime,
         eventInterval,
+        eventType,
+        featured,
         formId,
         signUpUrl,
         additionalNotes,
@@ -283,7 +318,17 @@ const AnnouncementEditorModal = (props) => {
                       onChange={(e) => setTitle(e.target.value)}
                     />
                   </FormControl>
+                  <FormControl display="flex" alignItems="center">
+                    <FormLabel mb="0">Featured:</FormLabel>
 
+                    <Switch
+                      px="1em"
+                      id="featured"
+                      {...register('featured')}
+                      onChange={(e) => setFeatured(e.target.checked)}
+                      isChecked={featured}
+                    />
+                  </FormControl>
                   <FormControl>
                     <FormLabel>Where should this announcement go?</FormLabel>
                     <FormHelperText>
@@ -418,6 +463,26 @@ const AnnouncementEditorModal = (props) => {
                         return <option value={interval}>{interval}</option>;
                       })}
                     </Select>
+                  </FormControl>
+                  <FormControl>
+                    <CUIAutoComplete
+                      label="Event type"
+                      placeholder="Classes, Resources, Events, Others"
+                      onCreateItem={handleCreateItem}
+                      items={pickerItems}
+                      tagStyleProps={{
+                        rounded: 'full',
+                        pt: 1,
+                        pb: 2,
+                        px: 2,
+                        fontSize: '1rem',
+                      }}
+                      selectedItems={selectedItems}
+                      {...register('eventType')}
+                      onSelectedItemsChange={(changes) =>
+                        handleSelectedItemsChange(changes.selectedItems)
+                      }
+                    />
                   </FormControl>
 
                   <FormControl>

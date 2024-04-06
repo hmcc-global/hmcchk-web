@@ -17,6 +17,7 @@
     "ag-grid-enterprise": "^27.3.0",
     "ag-grid-react": "^27.3.0",
     "axios": "^0.21.1",
+    "chakra-ui-autocomplete": "^1.4.5",
     "chakra-ui-markdown-renderer": "^4.0.0",
     "framer-motion": "^4.1.17",
     "html-react-parser": "^1.2.7",
