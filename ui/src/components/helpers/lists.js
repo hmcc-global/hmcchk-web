@@ -347,6 +347,12 @@ const paymentMethodList = [
 ];
 
 const eventIntervalList = ['None', 'Daily', 'Weekly', 'Monthly'];
+const eventTypeList = [
+  { value: 'Classes', label: 'Classes' },
+  { value: 'Resources', label: 'Resources' },
+  { value: 'Events', label: 'Events' },
+  { value: 'Others', label: 'Others' },
+];
 
 export {
   accessTypeList,
@@ -359,4 +365,5 @@ export {
   countryList,
   paymentMethodList,
   eventIntervalList,
+  eventTypeList,
 };

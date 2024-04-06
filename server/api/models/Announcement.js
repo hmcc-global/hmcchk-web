@@ -50,6 +50,13 @@ module.exports = {
       defaultsTo: 'None',
       description: 'Recurring event interval if any.',
     },
+    eventType: {
+      type: 'json',
+    },
+    featured: {
+      type: 'boolean',
+      defaultsTo: false,
+    },
     location: {
       type: 'string',
     },
