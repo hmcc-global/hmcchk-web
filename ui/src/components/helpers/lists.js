@@ -322,6 +322,12 @@ const paymentMethodList = [
 ];
 
 const eventIntervalList = ['None', 'Daily', 'Weekly', 'Monthly'];
+const eventTypeList = [
+  { value: 'Classes', label: 'Classes' },
+  { value: 'Resources', label: 'Resources' },
+  { value: 'Events', label: 'Events' },
+  { value: 'Others', label: 'Others' },
+];
 
 const formAlertTypes = ['None', 'Custom', 'LIFE Group', 'Lifestage', 'Campus'];
 
@@ -336,4 +342,5 @@ export {
   paymentMethodList,
   eventIntervalList,
   formAlertTypes,
+  eventTypeList,
 };
