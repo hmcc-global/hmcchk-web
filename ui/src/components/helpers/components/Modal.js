@@ -1,7 +1,7 @@
 import { getBiblePassage } from '../SermonNotes';
 import React, { useState } from 'react';
 import { Modal, ModalContent, ModalHeader, ModalBody } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+// import styled from '@emotion/styled';
 
 export const BibleVerseModal = ({ isOpen, onClose, bibleVerse, verseRef }) => {
   const [passage, setPassage] = useState('');
