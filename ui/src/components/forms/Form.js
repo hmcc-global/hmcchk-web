@@ -83,7 +83,7 @@ const Form = (props) => {
     delete modifiedData['addressStreet'];
     delete modifiedData['addressDistrict'];
     delete modifiedData['addressRegion'];
-
+    console.log(modifiedData);
     if (formId) setSubmissionData(modifiedData);
     else console.log("this form doesn't support submission");
   };
@@ -560,7 +560,7 @@ const Form = (props) => {
 
   const createConditionalFormField = (parentFieldData) => {
     return (
-      <>
+      <Stack spacing="3">
         {Object.entries(parentFieldData.children).map((kv) => {
           // kv[0] = option
           // kv[1] = childrenFieldsIdOrders when kv[0] is selected
@@ -580,7 +580,7 @@ const Form = (props) => {
             );
           });
         })}
-      </>
+      </Stack>
     );
   };
 
