@@ -371,6 +371,12 @@ const Form = (props) => {
     );
   };
 
+  // Skeleton
+  // create and store state variable in array
+  // for each condition
+  // generate a list of fields to render and just make it render if condition is true
+  // if not true, hide the full set.
+  // document will be long but working
   const createConditionalFormField = (fieldData) => {};
 
   // Helper function to create the input fields
