@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { customAxios as axios } from '../helpers/customAxios';
-import { camelize, sentencize } from '../helpers/formsHelpers';
+import { camelize, sentencize, getAllChildrenFieldIds } from '../helpers/formsHelpers';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 
@@ -42,6 +42,9 @@ const Form = (props) => {
   const { register, handleSubmit, control, formState, setValue } = useForm();
   const { errors } = formState;
   const { user, history } = props;
+
+  const allChildren = getAllChildrenFieldIds(formFields);
+  const [renderChildren, setRenderChildren] = useState({});
 
   const [submissionData, setSubmissionData] = useState(null);
   const [submitStatus, setSubmitStatus] = useState(false);
@@ -103,13 +106,6 @@ const Form = (props) => {
   };
 
   useEffect(() => {
-    // when formfield data is detected
-    // generate list of fields in the render order
-    // loop through from first to last field
-    // use state variable to store fields to render
-    // render the fields one by one
-    // 3 possible types of fields. 1. regular 2. prefill 3. conditional
-
     if (submissionData) {
       postSubmission(formId, submissionData, user.id);
     } else if (!submissionData && user.id && formFields.length > 0) {
@@ -339,11 +335,14 @@ const Form = (props) => {
   };
 
   // Generate form field based on given data
-  const createFormField = (fieldData, i) => {
+  const createFormField = (fieldData, i, parentId, option) => {
     return (
       <FormControl
         key={fieldData.fieldName + i}
         isInvalid={errors[fieldData.fieldName]}
+        display={parentId == null || option == null ? 'block' : (
+          renderChildren[parentId] === option ? 'block' : 'none'
+        )}
       >
         {!['header', 'prefill', 'checkbox'].includes(fieldData.fieldType) && (
           <FormLabel
@@ -370,14 +369,6 @@ const Form = (props) => {
       </FormControl>
     );
   };
-
-  // Skeleton
-  // create and store state variable in array
-  // for each condition
-  // generate a list of fields to render and just make it render if condition is true
-  // if not true, hide the full set.
-  // document will be long but working
-  const createConditionalFormField = (fieldData) => {};
 
   // Helper function to create the input fields
   const createFormInput = (fieldData) => {
@@ -414,6 +405,11 @@ const Form = (props) => {
             key={fieldName}
             placeholder="Select option"
             {...register(fieldName, { required: required })}
+            onChange={(e) => {
+              const temp = JSON.parse(JSON.stringify(renderChildren));
+              temp[fieldData.id] = e.target.value;
+              setRenderChildren(temp);
+            }}
           >
             {items}
           </Select>
@@ -493,15 +489,43 @@ const Form = (props) => {
     return inputField;
   };
 
+  // TODO: Kris
+  // this one somehow breaks the whole form. once we fix this, it should work
   const createGeneralInputField = (fieldName, fieldType, validation) => {
-    return (
-      <Input
-        key={fieldName}
-        type={fieldType}
-        {...register(fieldName, validation)}
-      />
-    );
+    return (<></>);
+    // return (
+    //   <Input
+    //     key={fieldName}
+    //     type={fieldType}
+    //     {...register(fieldName, validation)}
+    //   />
+    // );
   };
+
+  const createConditionalFormField = (parentFieldData, i) => {
+    return (
+      <>
+      {
+        createFormField(parentFieldData, i)
+      }
+      {
+        Object.entries(parentFieldData.children).map(kv => {
+          // kv[0] = option
+          // kv[1] = childrenFieldsIdOrders when kv[0] is selected
+          return kv[1].map(childFieldIdOrder => {
+            // childFieldIdOrder[0] = childId
+            // childFieldIdOrder[1] = renderOrder (but it's useless as it's already sorted)
+            const childFieldData = formFields.find(field => field.id === childFieldIdOrder[0]);
+            if (childFieldData == null) return (<></>);
+
+            return createFormField(childFieldData, childFieldIdOrder[1], parentFieldData.id, kv[0]);
+          });
+        })
+      }
+      </>
+    )
+  };
+
 
   const createErrorNotifier = (fieldName) => {
     return (
@@ -554,7 +578,10 @@ const Form = (props) => {
           {formFields.map((fieldData, i) => {
             if (fieldData.fieldType === 'prefill') {
               return createPrefillFormField(fieldData);
-            } else {
+            } else if (!allChildren.includes(fieldData.id)) {
+              if (fieldData.conditional) {
+                return createConditionalFormField(fieldData, i);
+              }
               return createFormField(fieldData, i);
             }
           })}
