@@ -22,6 +22,7 @@ import {
   UnorderedList,
   ListItem,
   Center,
+  Textarea,
 } from '@chakra-ui/react';
 
 const FormEditor = (props) => {
@@ -362,7 +363,7 @@ const FormEditor = (props) => {
               <FormLabel>
                 Field Description (describe what this field is for)
               </FormLabel>
-              <Input {...register('fieldDescription')} />
+              <Textarea {...register('fieldDescription')} />
               <FormHelperText>Leave blank if not needed</FormHelperText>
             </FormControl>
             {(ft === 'select' || ft === 'radio') && (
