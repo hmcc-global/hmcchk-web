@@ -335,6 +335,10 @@ const FormEditor = (props) => {
                 {ft === 'header' ? 'Header Text' : 'Field Name'}
               </FormLabel>
               <Input {...register('fieldName', { required: true })} />
+              <FormHelperText>
+                Please <b>DO NOT</b> have an apostrophe ('), it will crash the
+                site
+              </FormHelperText>
               <FormErrorMessage>
                 {errors['fieldName'] && 'Field name is required'}
               </FormErrorMessage>

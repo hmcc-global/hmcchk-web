@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { customAxios as axios } from '../helpers/customAxios';
-import { camelize, sentencize, getAllChildrenFieldIds } from '../helpers/formsHelpers';
+import {
+  camelize,
+  sentencize,
+  getAllChildrenFieldIds,
+} from '../helpers/formsHelpers';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 
@@ -124,6 +128,11 @@ const Form = (props) => {
             setValue(field.fieldName, '');
           } else {
             setValue(field.fieldName, user[field.fieldName]);
+
+            // Force set the render children field
+            const temp = JSON.parse(JSON.stringify(renderChildren));
+            temp[field.id] = user[field.fieldName];
+            setRenderChildren(temp);
           }
         }
       }
@@ -156,6 +165,11 @@ const Form = (props) => {
           <Select
             placeholder="Country of Origin"
             {...register('countryOfOrigin', { required: true })}
+            onChange={(e) => {
+              const temp = JSON.parse(JSON.stringify(renderChildren));
+              temp[fieldData.id] = e.target.value;
+              setRenderChildren(temp);
+            }}
           >
             {countryList.map((item) => {
               return <option key={'co' + item}>{item}</option>;
@@ -165,7 +179,14 @@ const Form = (props) => {
         break;
       case 'lifestage':
         field = (
-          <Select {...register('lifestage', { required: true })}>
+          <Select
+            {...register('lifestage', { required: true })}
+            onChange={(e) => {
+              const temp = JSON.parse(JSON.stringify(renderChildren));
+              temp[fieldData.id] = e.target.value;
+              setRenderChildren(temp);
+            }}
+          >
             {lifestageList.map((item) => {
               return <option key={'li' + item}>{item}</option>;
             })}
@@ -174,7 +195,14 @@ const Form = (props) => {
         break;
       case 'campus':
         field = (
-          <Select {...register('campus', { required: true })}>
+          <Select
+            {...register('campus', { required: true })}
+            onChange={(e) => {
+              const temp = JSON.parse(JSON.stringify(renderChildren));
+              temp[fieldData.id] = e.target.value;
+              setRenderChildren(temp);
+            }}
+          >
             {campusList.map((item) => {
               return <option key={'ca' + item}>{item}</option>;
             })}
@@ -183,7 +211,14 @@ const Form = (props) => {
         break;
       case 'lifeGroup':
         field = (
-          <Select {...register('lifeGroup', { required: true })}>
+          <Select
+            {...register('lifeGroup', { required: true })}
+            onChange={(e) => {
+              const temp = JSON.parse(JSON.stringify(renderChildren));
+              temp[fieldData.id] = e.target.value;
+              setRenderChildren(temp);
+            }}
+          >
             {lifegroupList.map((item) => {
               return <option key={'lg' + item}>{item}</option>;
             })}
@@ -192,7 +227,14 @@ const Form = (props) => {
         break;
       case 'ministryTeam':
         field = (
-          <Select {...register('ministryTeam', { required: true })}>
+          <Select
+            {...register('ministryTeam', { required: true })}
+            onChange={(e) => {
+              const temp = JSON.parse(JSON.stringify(renderChildren));
+              temp[fieldData.id] = e.target.value;
+              setRenderChildren(temp);
+            }}
+          >
             {ministryTeamList.map((item) => {
               return <option key={'mt' + item}>{item}</option>;
             })}
@@ -340,9 +382,13 @@ const Form = (props) => {
       <FormControl
         key={fieldData.fieldName + i}
         isInvalid={errors[fieldData.fieldName]}
-        display={parentId == null || option == null ? 'block' : (
-          renderChildren[parentId] === option ? 'block' : 'none'
-        )}
+        display={
+          parentId == null || option == null
+            ? 'block'
+            : renderChildren[parentId] === option
+            ? 'block'
+            : 'none'
+        }
       >
         {!['header', 'prefill', 'checkbox'].includes(fieldData.fieldType) && (
           <FormLabel
@@ -489,43 +535,41 @@ const Form = (props) => {
     return inputField;
   };
 
-  // TODO: Kris
-  // this one somehow breaks the whole form. once we fix this, it should work
   const createGeneralInputField = (fieldName, fieldType, validation) => {
-    return (<></>);
-    // return (
-    //   <Input
-    //     key={fieldName}
-    //     type={fieldType}
-    //     {...register(fieldName, validation)}
-    //   />
-    // );
+    return (
+      <Input
+        key={fieldName}
+        type={fieldType}
+        {...register(fieldName, validation)}
+      />
+    );
   };
 
-  const createConditionalFormField = (parentFieldData, i) => {
+  const createConditionalFormField = (parentFieldData) => {
     return (
       <>
-      {
-        createFormField(parentFieldData, i)
-      }
-      {
-        Object.entries(parentFieldData.children).map(kv => {
+        {Object.entries(parentFieldData.children).map((kv) => {
           // kv[0] = option
           // kv[1] = childrenFieldsIdOrders when kv[0] is selected
-          return kv[1].map(childFieldIdOrder => {
+          return kv[1].map((childFieldIdOrder) => {
             // childFieldIdOrder[0] = childId
             // childFieldIdOrder[1] = renderOrder (but it's useless as it's already sorted)
-            const childFieldData = formFields.find(field => field.id === childFieldIdOrder[0]);
-            if (childFieldData == null) return (<></>);
+            const childFieldData = formFields.find(
+              (field) => field.id === childFieldIdOrder[0]
+            );
+            if (childFieldData == null) return <></>;
 
-            return createFormField(childFieldData, childFieldIdOrder[1], parentFieldData.id, kv[0]);
+            return createFormField(
+              childFieldData,
+              childFieldIdOrder[1],
+              parentFieldData.id,
+              kv[0]
+            );
           });
-        })
-      }
+        })}
       </>
-    )
+    );
   };
-
 
   const createErrorNotifier = (fieldName) => {
     return (
@@ -577,10 +621,23 @@ const Form = (props) => {
           {/* Generate the fields */}
           {formFields.map((fieldData, i) => {
             if (fieldData.fieldType === 'prefill') {
+              if (fieldData.conditional) {
+                return (
+                  <>
+                    {createPrefillFormField(fieldData)}
+                    {createConditionalFormField(fieldData)}
+                  </>
+                );
+              }
               return createPrefillFormField(fieldData);
             } else if (!allChildren.includes(fieldData.id)) {
               if (fieldData.conditional) {
-                return createConditionalFormField(fieldData, i);
+                return (
+                  <>
+                    {createFormField(fieldData, i)}
+                    {createConditionalFormField(fieldData)}
+                  </>
+                );
               }
               return createFormField(fieldData, i);
             }

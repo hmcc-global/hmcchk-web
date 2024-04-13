@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { sentencize } from '../helpers/formsHelpers';
+import {
+  sentencize,
+  getFieldById,
+  getFieldIndexById,
+} from '../helpers/formsHelpers';
 import {
   FormControl,
   FormLabel,
@@ -21,7 +25,6 @@ import {
 } from '../helpers/lists';
 
 import ConditionalFormFieldMapper from './ConditionalFormFieldMapper';
-import { getFieldById, getFieldIndexById } from './helpers/formHelpers';
 
 const ConditionalFormFieldEditor = (props) => {
   const { formFields, setFormFields } = props;
