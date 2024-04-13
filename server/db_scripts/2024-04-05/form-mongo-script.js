@@ -28,6 +28,8 @@ const documents = db.form.find({ formFields: { $ne: null, $type: 'array' } });
 // Loop through the documents
 documents.forEach((doc) => {
   // Loop through the options field in formFields array
+  let tempPrefill = [];
+
   doc.formFields.forEach((field) => {
     if (field.fieldName !== 'prefill') return; // Skip if not prefill field
 
@@ -42,10 +44,12 @@ documents.forEach((doc) => {
         required: true,
       };
 
-      // Insert the new formField object into the formFields array
-      doc.formFields.push(newFormField);
+      tempPrefill.push(newFormField);
     });
   });
+
+  // Insert the new formField object into the formFields array
+  doc.formFields.unshift(...tempPrefill);
 
   // Remove the original prefill field
   doc.formFields = doc.formFields.filter((field) => {
