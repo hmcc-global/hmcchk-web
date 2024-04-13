@@ -53,6 +53,7 @@ const ConditionalFormFieldMapper = (props) => {
 
   useEffect(() => {
     if (opt in conditionalFieldChild) {
+      reset();
       conditionalFieldChild[opt].forEach((optChildren) => {
         setValue(optChildren[0], optChildren[1]);
       });

@@ -41,15 +41,7 @@ const ConditionalFormFieldEditor = (props) => {
     ministryTeam: ministryTeamList,
   };
 
-  const {
-    register,
-    reset,
-    watch,
-    setValue,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm();
+  const { register, watch, setValue } = useForm();
 
   const conditionalFieldParent = watch('conditionalFieldParent');
   const conditionalFieldOption = watch('conditionalFieldOption');
@@ -58,6 +50,7 @@ const ConditionalFormFieldEditor = (props) => {
 
   const getFieldOptions = (id, formFields) => {
     let field = getFieldById(id, formFields);
+    if (!field) return [];
     if (field.fieldType === 'prefill')
       return prefillFieldOptions[field.fieldName];
     else return field.options;
@@ -74,6 +67,24 @@ const ConditionalFormFieldEditor = (props) => {
     temp[parentIndex] = field;
 
     setFormFields(temp);
+  };
+
+  const onDelete = (e) => {
+    setConditionalFieldChild({});
+    setValue('conditionalFieldParent', null);
+    setValue('conditionalFieldOption', null);
+
+    let fi = getFieldIndexById(e.target.value, formFields);
+
+    if (fi) {
+      let field = formFields[fi];
+      field.conditional = false;
+      delete field.children;
+
+      let temp = [...formFields];
+      temp[fi] = field;
+      setFormFields(temp);
+    }
   };
 
   useEffect(() => {
@@ -105,15 +116,26 @@ const ConditionalFormFieldEditor = (props) => {
         <Heading as="h4" size="sm">
           Applied Conditional Fields
         </Heading>
-        {formFields
-          .filter((obj) => {
-            if (obj.children) {
-              return obj;
-            } else return false;
-          })
-          .map((fieldData, i) => {
-            return <Text>{fieldData.fieldName}</Text>;
-          })}
+        <Stack>
+          {formFields
+            .filter((obj) => {
+              if (obj.children) {
+                return obj;
+              } else return false;
+            })
+            .map((fieldData, i) => {
+              return (
+                <Stack direction="row">
+                  <Text margin="auto" flex="2">
+                    {fieldData.fieldName}
+                  </Text>
+                  <Button value={fieldData.id} onClick={onDelete}>
+                    Delete
+                  </Button>
+                </Stack>
+              );
+            })}
+        </Stack>
       </Box>
       <Box>
         <Heading as="h4" size="sm" mb="1">
@@ -154,7 +176,9 @@ const ConditionalFormFieldEditor = (props) => {
               >
                 {getFieldOptions(conditionalFieldParent, formFields).map(
                   (opt, i) => (
-                    <option value={opt}>{opt}</option>
+                    <option key={`${opt + i}`} value={opt}>
+                      {opt}
+                    </option>
                   )
                 )}
               </Select>
