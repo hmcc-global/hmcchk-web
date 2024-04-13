@@ -29,6 +29,7 @@ export default function AdminFormDataViewer(props) {
   } = props;
   const formName = state.name;
   const formId = state.id;
+  const formFields = state.formFields;
 
   let lastUpdatedTime = useRef();
 
@@ -316,24 +317,8 @@ export default function AdminFormDataViewer(props) {
   };
 
   const createColumnDefs = () => {
-    const createStringColumn = (key) => {
+    const createFormFieldColumn = (key) => {
       return {
-        headerName: key,
-        field: key,
-      };
-    };
-
-    const createNumberColumn = (key) => {
-      return {
-        headerName: key,
-        field: key,
-        type: 'numericColumn',
-      };
-    };
-
-    const createBooleanColumn = (key) => {
-      return {
-        ...BooleanCellProps,
         headerName: key,
         field: key,
       };
@@ -351,88 +336,9 @@ export default function AdminFormDataViewer(props) {
         filterParams: dateFilterParams,
         sort: 'asc',
         lockPosition: true,
-      },
-      {
-        headerName: 'Baptism Info',
-        marryChildren: true,
-        children: [
-          {
-            ...DateCellProps,
-            headerName: 'Baptism Date',
-            valueGetter: baptismInfoGetter,
-            valueFormatter: membershipAndBaptismDateTimeFormatter,
-            colId: 'baptismDate',
-          },
-        ],
-      },
-      {
-        headerName: 'Membership Info',
-        marryChildren: true,
-        children: [
-          {
-            ...DateCellProps,
-            headerValueGetter: (p) =>
-              membershipHeaderGetter(p, 'Recommitment Date'),
-            colId: 'recommitmentDate',
-            valueGetter: membershipInfoGetter,
-            valueFormatter: membershipAndBaptismDateTimeFormatter,
-          },
-          {
-            ...DateCellProps,
-            headerValueGetter: (p) =>
-              membershipHeaderGetter(p, 'Recognition Date'),
-            colId: 'recognitionDate',
-            valueGetter: membershipInfoGetter,
-            valueFormatter: membershipAndBaptismDateTimeFormatter,
-          },
-        ],
-      },
+      }
     ];
 
-    const createBaptismInfoColumns = () => {
-      return {
-        headerName: 'Baptism Info',
-        marryChildren: true,
-        children: [
-          {
-            ...DateCellProps,
-            headerName: 'Baptism Date',
-            valueGetter: baptismInfoGetter,
-            valueFormatter: membershipAndBaptismDateTimeFormatter,
-            colId: 'baptismDate',
-            cellEditorPopup: true,
-            cellEditorParams: {
-              useSetter: true,
-            },
-          },
-        ],
-      };
-    };
-
-    const createMembershipInfoColumns = () => {
-      return {
-        headerName: 'Membership Info',
-        marryChildren: true,
-        children: [
-          {
-            ...DateCellProps,
-            headerValueGetter: (p) =>
-              membershipHeaderGetter(p, 'Recommitment Date'),
-            colId: 'recommitmentDate',
-            valueGetter: membershipInfoGetter,
-            valueFormatter: membershipAndBaptismDateTimeFormatter,
-          },
-          {
-            ...DateCellProps,
-            headerValueGetter: (p) =>
-              membershipHeaderGetter(p, 'Recognition Date'),
-            colId: 'recognitionDate',
-            valueGetter: membershipInfoGetter,
-            valueFormatter: membershipAndBaptismDateTimeFormatter,
-          },
-        ],
-      };
-    };
     const createPaymentDataColumns = () => {
       return {
         headerName: 'Payment Info',
@@ -518,34 +424,57 @@ export default function AdminFormDataViewer(props) {
       };
     };
 
-    const objectClassifier = (key, value) => {
+    const objectClassifier = (key) => {
       if (key === '_submissionTime') {
         return;
       } else if (key === 'paymentData') {
         columnDefs.push(createPaymentDataColumns());
-      } else if (typeof value === 'string') {
-        columnDefs.push(createStringColumn(key));
-      } else if (typeof value === 'number') {
-        columnDefs.push(createNumberColumn(key));
-      } else if (typeof value === 'boolean') {
-        columnDefs.push(createBooleanColumn(key));
-      } else if (key === 'baptismInfo') {
-        columnDefs.push(createBaptismInfoColumns());
-      } else if (key === 'membershipInfo') {
-        columnDefs.push(createMembershipInfoColumns());
-      } else {
-        console.log(
-          'ERROR: unexpected object type, it is not displayed: ' + key
-        );
+      }  else {
+        columnDefs.push(createFormFieldColumn(key))
       }
     };
 
-    if (formData && formData.length > 0) {
-      const first = formData[0];
-      for (const [key, value] of Object.entries(first)) {
-        objectClassifier(key, value);
-      }
+    if (formFields && formFields.length > 0) {
+      formFields.forEach(formField => objectClassifier(formField.fieldName))
     }
+
+    columnDefs = columnDefs.concat([
+      {
+        headerName: 'Baptism Info',
+        marryChildren: true,
+        children: [
+          {
+            ...DateCellProps,
+            headerName: 'Baptism Date',
+            valueGetter: baptismInfoGetter,
+            valueFormatter: membershipAndBaptismDateTimeFormatter,
+            colId: 'baptismDate',
+          },
+        ],
+      },
+      {
+        headerName: 'Membership Info',
+        marryChildren: true,
+        children: [
+          {
+            ...DateCellProps,
+            headerValueGetter: (p) =>
+              membershipHeaderGetter(p, 'Recommitment Date'),
+            colId: 'recommitmentDate',
+            valueGetter: membershipInfoGetter,
+            valueFormatter: membershipAndBaptismDateTimeFormatter,
+          },
+          {
+            ...DateCellProps,
+            headerValueGetter: (p) =>
+              membershipHeaderGetter(p, 'Recognition Date'),
+            colId: 'recognitionDate',
+            valueGetter: membershipInfoGetter,
+            valueFormatter: membershipAndBaptismDateTimeFormatter,
+          },
+        ],
+      },
+    ])
 
     return columnDefs;
   };
