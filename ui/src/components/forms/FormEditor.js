@@ -337,8 +337,8 @@ const FormEditor = (props) => {
               </FormLabel>
               <Input {...register('fieldName', { required: true })} />
               <FormHelperText>
-                Please <b>DO NOT</b> have an apostrophe ('), it will crash the
-                site
+                Please <b>DO NOT</b> have an apostrophe (') or double quote ("),
+                it will crash the site
               </FormHelperText>
               <FormErrorMessage>
                 {errors['fieldName'] && 'Field name is required'}
