@@ -135,20 +135,24 @@ export default ({ editor }) => {
       icon: 'italic',
       title: 'Bible Passage',
       action: useCallback(() => {
-        const previousUrl = editor.getAttributes('link').href;
-        const url = window.prompt('URL', previousUrl);
-        if (url === null) {
+        const previousVerse = editor.getAttributes('bibleVerse').verse;
+        const verse = window.prompt('Bible Verse', previousVerse);
+        if (verse === null) {
           return;
         }
 
         // empty
-        if (url === '') {
-          editor.chain().focus().extendMarkRange('link').unsetLink().run();
+        if (verse === '') {
+          editor
+            .chain()
+            .focus()
+            .extendMarkRange('bibleVerse')
+            .unsetBibleVerse()
+            .run();
 
           return;
         }
-
-        editor.commands.insertBibleVerse(url);
+        editor.commands.insertBibleVerse(verse);
       }, [editor]),
     },
   ];

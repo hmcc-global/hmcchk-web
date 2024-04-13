@@ -21,3 +21,7 @@ export const getBiblePassage = async (passage) => {
     return 'Passage not found';
   }
 };
+
+export const isBibleVerse = async (passage) => {
+  
+}
