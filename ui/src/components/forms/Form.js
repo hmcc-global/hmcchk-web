@@ -166,10 +166,12 @@ const Form = (props) => {
             placeholder="Country of Origin"
             {...register('countryOfOrigin', { required: true })}
             onChange={(e) => {
+              if (!fieldData.conditional) return;
               const temp = JSON.parse(JSON.stringify(renderChildren));
               temp[fieldData.id] = e.target.value;
               setRenderChildren(temp);
             }}
+            key={fieldData.id}
           >
             {countryList.map((item) => {
               return <option key={'co' + item}>{item}</option>;
@@ -182,10 +184,12 @@ const Form = (props) => {
           <Select
             {...register('lifestage', { required: true })}
             onChange={(e) => {
+              if (!fieldData.conditional) return;
               const temp = JSON.parse(JSON.stringify(renderChildren));
               temp[fieldData.id] = e.target.value;
               setRenderChildren(temp);
             }}
+            key={fieldData.id}
           >
             {lifestageList.map((item) => {
               return <option key={'li' + item}>{item}</option>;
@@ -198,10 +202,12 @@ const Form = (props) => {
           <Select
             {...register('campus', { required: true })}
             onChange={(e) => {
+              if (!fieldData.conditional) return;
               const temp = JSON.parse(JSON.stringify(renderChildren));
               temp[fieldData.id] = e.target.value;
               setRenderChildren(temp);
             }}
+            key={fieldData.id}
           >
             {campusList.map((item) => {
               return <option key={'ca' + item}>{item}</option>;
@@ -214,10 +220,12 @@ const Form = (props) => {
           <Select
             {...register('lifeGroup', { required: true })}
             onChange={(e) => {
+              if (!fieldData.conditional) return;
               const temp = JSON.parse(JSON.stringify(renderChildren));
               temp[fieldData.id] = e.target.value;
               setRenderChildren(temp);
             }}
+            key={fieldData.id}
           >
             {lifegroupList.map((item) => {
               return <option key={'lg' + item}>{item}</option>;
@@ -230,10 +238,12 @@ const Form = (props) => {
           <Select
             {...register('ministryTeam', { required: true })}
             onChange={(e) => {
+              if (!fieldData.conditional) return;
               const temp = JSON.parse(JSON.stringify(renderChildren));
               temp[fieldData.id] = e.target.value;
               setRenderChildren(temp);
             }}
+            key={fieldData.id}
           >
             {ministryTeamList.map((item) => {
               return <option key={'mt' + item}>{item}</option>;
@@ -378,17 +388,15 @@ const Form = (props) => {
 
   // Generate form field based on given data
   const createFormField = (fieldData, i, parentId, option) => {
+    if (parentId != null && option != null && renderChildren[parentId] !== option) {
+      setValue(fieldData.fieldName, null);
+      return null;
+    }
+
     return (
       <FormControl
         key={fieldData.fieldName + i}
         isInvalid={errors[fieldData.fieldName]}
-        display={
-          parentId == null || option == null
-            ? 'block'
-            : renderChildren[parentId] === option
-            ? 'block'
-            : 'none'
-        }
       >
         {!['header', 'prefill', 'checkbox'].includes(fieldData.fieldType) && (
           <FormLabel
@@ -452,6 +460,7 @@ const Form = (props) => {
             placeholder="Select option"
             {...register(fieldName, { required: required })}
             onChange={(e) => {
+              if (!fieldData.conditional) return;
               const temp = JSON.parse(JSON.stringify(renderChildren));
               temp[fieldData.id] = e.target.value;
               setRenderChildren(temp);
@@ -623,14 +632,15 @@ const Form = (props) => {
             if (fieldData.fieldType === 'prefill') {
               if (fieldData.conditional) {
                 return (
-                  <>
+                  <div key={fieldData.id}>
                     {createPrefillFormField(fieldData)}
                     {createConditionalFormField(fieldData)}
-                  </>
+                  </div>
                 );
               }
               return createPrefillFormField(fieldData);
-            } else if (!allChildren.includes(fieldData.id)) {
+            } 
+            else if (!allChildren.includes(fieldData.id)) {
               if (fieldData.conditional) {
                 return (
                   <>
@@ -641,6 +651,7 @@ const Form = (props) => {
               }
               return createFormField(fieldData, i);
             }
+            return null;
           })}
         </Stack>
         {!user.id && (
