@@ -28,7 +28,7 @@
     "react-google-button": "^0.7.2",
     "react-google-login": "^5.2.2",
     "react-google-recaptcha": "^2.1.0",
-    "react-hook-form": "^7.12.2",
+    "react-hook-form": "^7.51.2",
     "react-icons": "^4.2.0",
     "react-markdown": "^7.1.2",
     "react-property": "^1.0.1",
@@ -41,6 +41,7 @@
     "redux-persist": "^6.0.0",
     "sass": "^1.53.0",
     "slick-carousel": "^1.8.1",
+    "uuid": "^9.0.1",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
