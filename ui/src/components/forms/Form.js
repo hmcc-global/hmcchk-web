@@ -103,6 +103,13 @@ const Form = (props) => {
   };
 
   useEffect(() => {
+    // when formfield data is detected
+    // generate list of fields in the render order
+    // loop through from first to last field
+    // use state variable to store fields to render
+    // render the fields one by one
+    // 3 possible types of fields. 1. regular 2. prefill 3. conditional
+
     if (submissionData) {
       postSubmission(formId, submissionData, user.id);
     } else if (!submissionData && user.id && formFields.length > 0) {
@@ -331,6 +338,7 @@ const Form = (props) => {
     }
   };
 
+  // Generate form field based on given data
   const createFormField = (fieldData, i) => {
     return (
       <FormControl
@@ -362,6 +370,8 @@ const Form = (props) => {
       </FormControl>
     );
   };
+
+  const createConditionalFormField = (fieldData) => {};
 
   // Helper function to create the input fields
   const createFormInput = (fieldData) => {

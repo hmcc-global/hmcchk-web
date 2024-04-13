@@ -125,7 +125,7 @@ const ConditionalFormFieldEditor = (props) => {
             })
             .map((fieldData, i) => {
               return (
-                <Stack direction="row">
+                <Stack key={`${fieldData.fieldName}-${i}`} direction="row">
                   <Text margin="auto" flex="2">
                     {fieldData.fieldName}
                   </Text>
