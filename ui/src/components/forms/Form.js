@@ -388,7 +388,11 @@ const Form = (props) => {
 
   // Generate form field based on given data
   const createFormField = (fieldData, i, parentId, option) => {
-    if (parentId != null && option != null && renderChildren[parentId] !== option) {
+    if (
+      parentId != null &&
+      option != null &&
+      renderChildren[parentId] !== option
+    ) {
       setValue(fieldData.fieldName, null);
       return null;
     }
@@ -634,17 +638,18 @@ const Form = (props) => {
                 return (
                   <div key={fieldData.id}>
                     {createPrefillFormField(fieldData)}
+                    <Box mt="3" />
                     {createConditionalFormField(fieldData)}
                   </div>
                 );
               }
               return createPrefillFormField(fieldData);
-            } 
-            else if (!allChildren.includes(fieldData.id)) {
+            } else if (!allChildren.includes(fieldData.id)) {
               if (fieldData.conditional) {
                 return (
                   <>
                     {createFormField(fieldData, i)}
+                    <Box mt="3" />
                     {createConditionalFormField(fieldData)}
                   </>
                 );

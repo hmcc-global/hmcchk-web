@@ -374,7 +374,7 @@ const FormEditor = (props) => {
                 </FormHelperText>
               </FormControl>
             )}
-            {ft === 'header' && (
+            {ft !== 'header' && (
               <FormControl>
                 <FormLabel>Do you want this field to be required?</FormLabel>
                 <Controller
