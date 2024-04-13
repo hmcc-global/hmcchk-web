@@ -137,6 +137,7 @@ const FormManager = (props) => {
       state: {
         name: formItem.formName,
         id: formItem.id,
+        formFields: formItem.formFields
       },
     });
   };

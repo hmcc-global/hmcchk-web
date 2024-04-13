@@ -1,6 +1,28 @@
 import { DateTime } from 'luxon';
 import { customAxios as axios } from './customAxios';
 
+const getAllChildrenFieldIds = (formFields) => {
+  let result = [];
+  formFields.forEach((f) => {
+    if (f.conditional && Object.values(f.children).length > 0) {
+      result = result.concat(
+        Object.values(f.children)
+          .flatMap((options) => options)
+          .flatMap((fields) => fields[0])
+      );
+    }
+  });
+  return result;
+};
+
+const getFieldById = (id, formFields) => {
+  return formFields.find((el) => el.id === id);
+};
+
+const getFieldIndexById = (id, formFields) => {
+  return formFields.findIndex((el) => el.id === id);
+};
+
 // String conversion tools
 const camelize = (str) => {
   return str
@@ -169,4 +191,11 @@ const validateForm = async (id, user) => {
   }
 };
 
-export { camelize, sentencize, validateForm };
+export {
+  camelize,
+  sentencize,
+  validateForm,
+  getAllChildrenFieldIds,
+  getFieldById,
+  getFieldIndexById,
+};
