@@ -3,7 +3,7 @@ import { NodeViewWrapper, ReactNodeViewRenderer } from '@tiptap/react';
 import { BibleVerseModal } from '../components/Modal.js';
 import React from 'react';
 
-export const BibleVersseNode = Node.create({
+export const BibleVerseMark = Node.create({
   name: 'bibleVerse',
   inline: true,
   group: 'inline',
@@ -57,7 +57,7 @@ const BibleVerseWithModal = (props) => {
   };
 
   const handleMouseLeave = () => {
-    setIsOpen(true);
+    setIsOpen(false);
   };
 
   return (
