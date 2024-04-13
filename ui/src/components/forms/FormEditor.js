@@ -3,6 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { customAxios as axios } from '../helpers/customAxios';
 import Form from './Form';
 import FormField from './class/FormField';
+import ConditionalFormFieldEditor from './ConditionalFormFieldEditor';
 import {
   FormControl,
   FormLabel,
@@ -120,6 +121,7 @@ const FormEditor = (props) => {
       setValue('options', temp.options.join(';'));
     }
     setValue('required', temp.required);
+    setValue('conditional', temp.conditional);
   };
 
   // Handler for deletion of field data
@@ -368,7 +370,7 @@ const FormEditor = (props) => {
                 </FormHelperText>
               </FormControl>
             )}
-            {ft !== 'header' && (
+            {ft === 'header' && (
               <FormControl>
                 <FormLabel>Do you want this field to be required?</FormLabel>
                 <Controller
@@ -384,10 +386,17 @@ const FormEditor = (props) => {
                 />
               </FormControl>
             )}
+
             <Button mt={4} colorScheme="blue" type="submit">
-              Save Field Data
+              Save Custom Field
             </Button>
           </form>
+        </Box>
+        <Box pt="5">
+          <ConditionalFormFieldEditor
+            formFields={formFields}
+            setFormFields={setFormFields}
+          />
         </Box>
       </Stack>
 
