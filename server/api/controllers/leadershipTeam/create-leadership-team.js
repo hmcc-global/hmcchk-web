@@ -9,7 +9,7 @@ module.exports = {
     campus: { type: 'string' },
     lifestage: { type: 'string' },
     lifeGroup: { type: 'string' },
-    leaders: { type: 'json' },
+    leaderEmails: { type: 'json' },
   },
 
   exits: {
@@ -22,7 +22,7 @@ module.exports = {
   },
 
   fn: async function (
-    { seasonFrom, seasonTo, campus, lifestage, lifeGroup, leaders },
+    { seasonFrom, seasonTo, campus, lifestage, lifeGroup, leaderEmails },
     exits
   ) {
     const user = this.req.user.fullName;
@@ -35,7 +35,7 @@ module.exports = {
         campus,
         lifestage,
         lifeGroup,
-        leaders,
+        leaderEmails,
         lastUpdatedBy: user,
       }).fetch();
 
