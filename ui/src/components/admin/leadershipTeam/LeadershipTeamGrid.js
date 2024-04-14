@@ -33,10 +33,11 @@ export default function LeadershipTeamGrid(props) {
 
   useEffect(() => {
     if (api) {
+      api.showLoadingOverlay();
       if (teams && teams.length) {
         api.hideOverlay();
       } else {
-        api.showLoadingOverlay();
+        api.showNoRowsOverlay();
       }
     }
   }, [teams, api]);
@@ -71,11 +72,11 @@ export default function LeadershipTeamGrid(props) {
 
   // Ag-Grid Helpers
   // Getters
-  const leadersGetter = (params) => {
-    const { leaders } = params.data;
-    if (!leaders || leaders === '') return '';
+  const leaderEmailsGetter = (params) => {
+    const { leaderEmails } = params.data;
+    if (!leaderEmails || leaderEmails === '') return '';
 
-    return leaders.join(',');
+    return leaderEmails.join(',');
   };
 
   // Formatters
@@ -156,15 +157,15 @@ export default function LeadershipTeamGrid(props) {
     },
     {
       headerName: "Leaders' Emails",
-      field: 'leaders',
-      valueGetter: leadersGetter,
+      field: 'leaderEmails',
+      valueGetter: leaderEmailsGetter,
     },
     {
-      headerName: 'Last updated by',
+      headerName: 'Last Updated By',
       field: 'lastUpdatedBy',
     },
     {
-      headerName: 'Last updated at',
+      headerName: 'Last Updated At',
       field: 'updatedAt',
     },
   ];
