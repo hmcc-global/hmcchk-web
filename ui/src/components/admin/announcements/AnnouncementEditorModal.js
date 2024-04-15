@@ -21,6 +21,7 @@ import {
   Checkbox,
   Button,
   Grid,
+  Divider,
   GridItem,
   Textarea,
   SimpleGrid,
@@ -318,17 +319,7 @@ const AnnouncementEditorModal = (props) => {
                       onChange={(e) => setTitle(e.target.value)}
                     />
                   </FormControl>
-                  <FormControl display="flex" alignItems="center">
-                    <FormLabel mb="0">Featured:</FormLabel>
 
-                    <Switch
-                      px="1em"
-                      id="featured"
-                      {...register('featured')}
-                      onChange={(e) => setFeatured(e.target.checked)}
-                      isChecked={featured}
-                    />
-                  </FormControl>
                   <FormControl>
                     <FormLabel>Where should this announcement go?</FormLabel>
                     <FormHelperText>
@@ -464,6 +455,8 @@ const AnnouncementEditorModal = (props) => {
                       })}
                     </Select>
                   </FormControl>
+                  <Divider orientation="horizontal" />
+
                   <FormControl>
                     <CUIAutoComplete
                       label="Event type"
@@ -472,9 +465,7 @@ const AnnouncementEditorModal = (props) => {
                       items={pickerItems}
                       tagStyleProps={{
                         rounded: 'full',
-                        pt: 1,
-                        pb: 2,
-                        px: 2,
+
                         fontSize: '1rem',
                       }}
                       selectedItems={selectedItems}
@@ -484,6 +475,22 @@ const AnnouncementEditorModal = (props) => {
                       }
                     />
                   </FormControl>
+                  <FormControl display="flex" alignItems="center">
+                    <FormLabel mb="0">Featured </FormLabel>
+
+                    <Switch
+                      px="1em"
+                      id="featured"
+                      {...register('featured')}
+                      onChange={(e) => setFeatured(e.target.checked)}
+                      isChecked={featured}
+                    />
+                    <FormHelperText>
+                      Determines if it will show up as featured in our events
+                      page
+                    </FormHelperText>
+                  </FormControl>
+                  <Divider orientation="horizontal" />
 
                   <FormControl>
                     <FormLabel>Location</FormLabel>
