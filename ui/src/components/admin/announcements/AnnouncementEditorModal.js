@@ -26,6 +26,7 @@ import {
   Textarea,
   SimpleGrid,
   useToast,
+  Link,
   Switch,
   Select,
 } from '@chakra-ui/react';
@@ -40,7 +41,6 @@ const AnnouncementEditorModal = (props) => {
     editAnnouncementData,
     announcementListCallback,
     actionOnEditor,
-    announcementList,
   } = props;
   const { register, handleSubmit, reset, setValue, formState, control } =
     useForm();
@@ -61,7 +61,7 @@ const AnnouncementEditorModal = (props) => {
   const [eventStartTime, setEventStartTime] = useState(undefined);
   const [eventEndDate, setEventEndDate] = useState(undefined);
   const [eventEndTime, setEventEndTime] = useState(undefined);
-  const [eventInterval, setEventInterval] = useState('None'); // ['Daily', 'Weekly', 'Monthly', 'None']
+  const [eventInterval, setEventInterval] = useState('None');
   const [eventType, setEventType] = useState(undefined);
   const [featured, setFeatured] = useState(false);
   const [datePeriodInvalid, setDatePeriodInvalid] = useState(false);
@@ -460,7 +460,7 @@ const AnnouncementEditorModal = (props) => {
                   <FormControl>
                     <CUIAutoComplete
                       label="Event type"
-                      placeholder="Classes, Resources, Events, Others"
+                      placeholder="Classes, Resources, Others"
                       onCreateItem={handleCreateItem}
                       items={pickerItems}
                       tagStyleProps={{
@@ -529,9 +529,16 @@ const AnnouncementEditorModal = (props) => {
                   <FormControl isInvalid={errors['description']} isRequired>
                     <FormLabel>Description</FormLabel>
                     <FormHelperText>
-                      This field supports markdown. Just write it in somewhere
-                      else (with formatting) and then paste it here and see the
-                      magic happen.
+                      This field supports formatting, you can add it yourself.
+                      on how to use {''}
+                      <Link
+                        color="blue.500"
+                        href="https://www.markdownguide.org/cheat-sheet/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Click here
+                      </Link>{' '}
                     </FormHelperText>
                     <Textarea
                       id="description"
