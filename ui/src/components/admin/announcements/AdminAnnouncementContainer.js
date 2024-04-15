@@ -23,6 +23,7 @@ import {
   ChatIcon,
   ViewIcon,
   EditIcon,
+  StarIcon,
 } from '@chakra-ui/icons';
 import AnnouncementEditorModal from './AnnouncementEditorModal';
 import { DateTime } from 'luxon';
@@ -317,6 +318,12 @@ export default function AdminAnnouncementContainer(props) {
         {announcementList.map((announcementItem) => (
           <ListItem key={announcementItem.id}>
             <Box p="3" borderRadius="lg" borderWidth="1px">
+              {announcementItem.featured && (
+                <Flex color="green" justifyContent="flex-end">
+                  <StarIcon my="auto" />
+                  <Text px="0.5em">Featured</Text>
+                </Flex>
+              )}
               <Flex direction={['column', 'row']} spacing={1}>
                 <Box maxW="12rem" pr={5}>
                   <Image
