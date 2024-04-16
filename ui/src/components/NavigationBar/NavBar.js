@@ -182,10 +182,10 @@ const NavBar = (props) => {
                 isInline
               >
                 <Box position="relative">
-                  <Link href="/visit-us">VISIT</Link>
+                  <Link href="/visit-us" id='button-navbar-visit'>VISIT</Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/about-us">ABOUT</Link>
+                  <Link href="/about-us" id='button-navbar-about'>ABOUT</Link>
                 </Box>
                 <Box position="relative">
                   <Text
@@ -198,16 +198,16 @@ const NavBar = (props) => {
                   >
                     I'm new!
                   </Text>
-                  <Link href="/connect">CONNECT</Link>
+                  <Link href="/connect" id='button-navbar-connect'>CONNECT</Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/events">EVENTS</Link>
+                  <Link href="/events" id='button-navbar-events'>EVENTS</Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/sermons">SERMONS</Link>
+                  <Link href="/sermons" id='button-navbar-sermons'>SERMONS</Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/give">GIVE</Link>
+                  <Link href="/give" id='button-navbar-give'>GIVE</Link>
                 </Box>
               </Stack>
               <Stack
