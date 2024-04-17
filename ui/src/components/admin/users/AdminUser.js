@@ -9,18 +9,17 @@ import { DateTime } from 'luxon';
 import CustomDateEditor from '../ag-grid-editors/CustomDateEditor.js';
 import {
   accessTypeList,
-  lifestageList,
   ministryTeamList,
-  lifegroupList,
   districtList,
   regionList,
-  campusList,
   countryList,
 } from '../../helpers/lists';
 import { CgUndo, CgRedo } from 'react-icons/cg';
 import ResetUserFields from './ResetUserFields';
 
 export default function AdminUser(props) {
+  const { lifestageList, lifegroupList, campusList } = props.staticData;
+
   const dateFromFormat = 'yyyy-MM-dd';
   const dateToFormat = 'dd MMM yyyy';
   const userIdProp = 'userId';

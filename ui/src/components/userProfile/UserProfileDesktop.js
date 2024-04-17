@@ -31,10 +31,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import {
   ministryTeamList,
-  lifegroupList,
   districtList,
-  campusList,
-  lifestageList,
   countryList,
   regionList,
 } from '../helpers/lists';
@@ -48,9 +45,11 @@ import {
 } from '../helpers/userInformationHelpers';
 
 const UserProfileDesktop = (props) => {
+  const { user , staticData } = props;
+  const { lifegroupList, lifestageList, campusList } = staticData;
+
   const { register, control, handleSubmit, setValue, formState } = useForm();
   const { errors } = formState;
-  const { user } = props;
   const [userData, setUserData] = useState(null);
   const [formList, setFormList] = useState(null);
   const [unsignedFormList, setUnsignedFormList] = useState([]);
