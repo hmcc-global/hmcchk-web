@@ -137,17 +137,23 @@ const FormManager = (props) => {
       state: {
         name: formItem.formName,
         id: formItem.id,
-        formFields: formItem.formFields
+        formFields: formItem.formFields,
       },
     });
   };
 
   const noViewPermission = (formItem) => {
-    if (!formItem.isPaymentRequired) return false;
-
     const currentUserAccessType = user.accessType;
-    const hasViewPermissions = ['admin', 'stewardship'];
-    return !hasViewPermissions.includes(currentUserAccessType);
+    const hasPaymentViewPermissions = ['admin', 'stewardship'];
+    const hasAllViewPermissions = ['tc', 'admin', 'stewardship'];
+
+    // only admin and stewardship can view payment data
+    if (formItem.isPaymentRequired) {
+      return !hasPaymentViewPermissions.includes(currentUserAccessType);
+    }
+
+    // only tc, et/admin, and stewardship can view form data
+    return !hasAllViewPermissions.includes(currentUserAccessType);
   };
 
   return (
