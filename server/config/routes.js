@@ -23,6 +23,9 @@ module.exports.routes = {
   'get /api/cache/refresh-cache': 'cache/refresh-cache',
   'get /api/misc/get-env': 'misc/get-env',
   'get /api/misc/get-current-time': 'misc/get-current-time',
+  'get /api/misc/get-latest-lifegroup-list': 'leadershipTeam/get-latest-lifegroup-list',
+  'get /api/misc/get-latest-campus-list': 'leadershipTeam/get-latest-campus-list',
+  'get /api/misc/get-latest-lifestage-list': 'leadershipTeam/get-latest-lifestage-list',
 
   // Forms APIs
   'get /api/forms/get-form': 'forms/get-form',

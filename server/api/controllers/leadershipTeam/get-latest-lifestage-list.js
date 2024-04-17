@@ -1,8 +1,8 @@
 module.exports = {
-  friendlyName: 'Get latest LG list',
+  friendlyName: 'Get latest Campus list',
 
   description:
-    'Get latest LG list',
+    'Get latest Campus list',
 
   inputs: {
     includeDeleted: {
@@ -19,9 +19,9 @@ module.exports = {
       const data = await sails.helpers.leadershipteam.getLatestLeadershipTeams(includeDeleted);
       if (data === null) return exits.error('Unexpected');
 
-      const lifeGroups = data.map(x => x.lifeGroup);
-      lifeGroups.push('Not Applicable');
-      return exits.success([... new Set(lifeGroups)]);
+      // eslint-disable-next-line eqeqeq
+      const lifestages = data.map(x => x.lifestage).filter(l => l != null && l !== '');
+      return exits.success([...new Set(lifestages)]);
     } catch (err) {
       sails.log(err);
       return exits.error(err);

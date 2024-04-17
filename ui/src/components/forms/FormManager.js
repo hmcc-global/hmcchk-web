@@ -266,6 +266,7 @@ const FormManager = (props) => {
           setIsOpen={setIsEditorOpen}
           editFormData={editFormData}
           formManagerCallback={formManagerCallback}
+          staticData={props.staticData}
         />
       </Stack>
     </Container>

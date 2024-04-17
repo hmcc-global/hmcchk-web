@@ -473,6 +473,7 @@ const FormEditorContainer = (props) => {
                 existingFormFieldsData={editFormData}
                 resetFormEditorCallback={resetFormEditorCallback}
                 user={user}
+                staticData={props.staticData}
               />
             )}
 

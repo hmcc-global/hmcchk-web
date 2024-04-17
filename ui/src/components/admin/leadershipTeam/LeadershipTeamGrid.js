@@ -1,8 +1,6 @@
 import { Heading, HStack, Container, Switch } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
-import { lifestageList, campusList } from '../../helpers/lists';
-
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -138,18 +136,10 @@ export default function LeadershipTeamGrid(props) {
     {
       headerName: 'Campus',
       field: 'campus',
-      cellEditor: 'agSelectCellEditor',
-      cellEditorParams: {
-        values: campusList,
-      },
     },
     {
       headerName: 'Lifestage',
       field: 'lifestage',
-      cellEditor: 'agSelectCellEditor',
-      cellEditorParams: {
-        values: lifestageList,
-      },
     },
     {
       headerName: 'LIFE Group',

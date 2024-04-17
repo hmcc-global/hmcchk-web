@@ -401,6 +401,7 @@ const FormEditor = (props) => {
           <ConditionalFormFieldEditor
             formFields={formFields}
             setFormFields={setFormFields}
+            staticData={props.staticData}
           />
         </Box>
       </Stack>
@@ -414,6 +415,7 @@ const FormEditor = (props) => {
           formImage={formInformation.formImage}
           formFields={formFields}
           user={user}
+          staticData={props.staticData}
         />
       </Box>
     </Flex>
