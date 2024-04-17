@@ -38,6 +38,8 @@ const getRenderDate = (startDate, endDate, interval, startTime) => {
     renderDate = start.plus(
       DateTime.fromISO(startTime) - DateTime.fromISO('00:00')
     );
+  } else {
+    renderDate = start.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
   }
 
   if (nRecurrence === 0) return renderDate;
