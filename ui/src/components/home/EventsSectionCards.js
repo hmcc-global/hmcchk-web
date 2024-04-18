@@ -32,6 +32,7 @@ import {
   EndDateElement,
 } from '../helpers/eventsHelpers';
 import { useState } from 'react';
+import TrackingUtil from '../../util/TrackingUtil';
 
 const EventsSectionCard = (props) => {
   const { width, height, event } = props;
@@ -239,6 +240,7 @@ const EventsSectionCard = (props) => {
                 href={event.signUpUrl ? event.signUpUrl : null}
                 isDisabled={event.signUpUrl.length <= 0}
                 size="sm"
+                id={`events-signup-${TrackingUtil.generateIdFromTitle(event.title)}}`}
               >
                 Sign up
               </Button>
@@ -250,6 +252,7 @@ const EventsSectionCard = (props) => {
                 href={generateGoogleCalendarLink(event)}
                 isDisabled={generateGoogleCalendarLink(event) ? false : true}
                 size="sm"
+                id={`events-calendar-${TrackingUtil.generateIdFromTitle(event.title)}}`}
               >
                 Add to Calendar
               </Button>

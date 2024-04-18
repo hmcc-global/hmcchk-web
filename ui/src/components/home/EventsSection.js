@@ -275,6 +275,7 @@ const EventsSection = () => {
         ml="5%"
         mb="10%"
         fontSize="1.2em"
+        id="homepage-events"
       >
         <LinkOverlay href="/events">See All Events</LinkOverlay>
       </Button>

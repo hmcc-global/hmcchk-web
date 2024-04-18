@@ -16,6 +16,7 @@ import {
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
+import TrackingUtil from '../../util/TrackingUtil';
 
 const PopupContainer = ({ props }) => {
   const popupData = props;
@@ -87,6 +88,7 @@ const PopupContainer = ({ props }) => {
                     wordWrap: 'break-word',
                   }}
                   colorScheme="teal"
+                  id={`popup-check-${TrackingUtil.generateIdFromTitle(popupData.title)}`}
                 >
                   {buttonTextItem}
                 </Button>
@@ -97,4 +99,5 @@ const PopupContainer = ({ props }) => {
     </Modal>
   );
 };
+
 export default PopupContainer;
