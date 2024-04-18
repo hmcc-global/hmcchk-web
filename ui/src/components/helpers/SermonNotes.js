@@ -18,10 +18,18 @@ export const getBiblePassage = async (passage) => {
     if (
       bible &&
       bible[book] &&
-      bible[book][chapter] &&
-      bible[book][chapter][verse]
+      bible[book][chapter]
     ) {
-      return bible[book][chapter][verse];
+      if (verse.includes('-')) {
+        let verses = verse.split('-');
+        console.log(verses)
+        let passageBlock = '';
+        for(let i = verses[0]; i <= verses[1]; i++) {
+          passageBlock += `${i} ${bible[book][chapter][i]} `;
+        }
+        return passageBlock;
+      }
+      return `${verse} ${bible[book][chapter][verse]}`;
     } else {
       return 'Passage not found';
     }
