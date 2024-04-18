@@ -12,6 +12,7 @@ export function SoapAppDownloadButton() {
         <Link
           target="_blank"
           href="https://apps.apple.com/hk/app/daily-soap-bible-reading-app/id1448825436"
+          id="footer-soap-apple"
         >
           <Image
             h={{ base: '10', md: '9', lg: '10' }}
@@ -22,6 +23,7 @@ export function SoapAppDownloadButton() {
         <Link
           target="_blank"
           href="https://play.google.com/store/apps/details?id=net.hmcc.hongkong.dailysoap"
+          id="footer-soap-android"
         >
           <Image
             h={{ base: '10', md: '9', lg: '10' }}

@@ -182,10 +182,10 @@ const NavBar = (props) => {
                 isInline
               >
                 <Box position="relative">
-                  <Link href="/visit-us" id='button-navbar-visit'>VISIT</Link>
+                  <Link href="/visit-us" id='navbar-visit'>VISIT</Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/about-us" id='button-navbar-about'>ABOUT</Link>
+                  <Link href="/about-us" id='navbar-about'>ABOUT</Link>
                 </Box>
                 <Box position="relative">
                   <Text
@@ -198,16 +198,16 @@ const NavBar = (props) => {
                   >
                     I'm new!
                   </Text>
-                  <Link href="/connect" id='button-navbar-connect'>CONNECT</Link>
+                  <Link href="/connect" id='navbar-connect'>CONNECT</Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/events" id='button-navbar-events'>EVENTS</Link>
+                  <Link href="/events" id='navbar-events'>EVENTS</Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/sermons" id='button-navbar-sermons'>SERMONS</Link>
+                  <Link href="/sermons" id='navbar-sermons'>SERMONS</Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/give" id='button-navbar-give'>GIVE</Link>
+                  <Link href="/give" id='navbar-give'>GIVE</Link>
                 </Box>
               </Stack>
               <Stack
@@ -266,6 +266,7 @@ const NavBar = (props) => {
                             py={{ md: '3', lg: '4' }}
                             _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
                             onClick={onClose}
+                            id="navbar-profile"
                           >
                             <LinkOverlay href="/profile">
                               <Text

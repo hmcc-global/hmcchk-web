@@ -57,6 +57,7 @@ const PrayerFloatButton = (props) => {
         onMouseOut={() => isLargerThan480px && setIsHover(false)}
         onClick={() => window.open('https://forms.gle/6jasxuLNZt5MVXAy8')}
         className="prayer-float-btn"
+        id="homepage-prayer"
       >
         {' '}
       </IconButton>
