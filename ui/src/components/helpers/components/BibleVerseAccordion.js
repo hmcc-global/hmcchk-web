@@ -8,19 +8,18 @@ import {
   AccordionPanel,
   Box,
 } from '@chakra-ui/react';
-export const BibleVerseAccordion = ({ bibleVerse }) => {
+export const BibleVerseAccordion = ({ bibleVerse, actionText }) => {
   const [passage, setPassage] = useState('');
   (async () => {
     const res = await getBiblePassage(bibleVerse);
     setPassage(res);
   })();
-
   return (
     <Accordion allowToggle>
       <AccordionItem style={{ border: 'none' }}>
         <AccordionButton>
-          <Box as="span" flex="1" textAlign="left">
-            READ{' '}
+          <Box as="span" flex="1" textAlign="left" fontWeight={600}>
+            {actionText}{' '}
             <span style={{ textDecoration: 'underline' }}>{bibleVerse}</span>
           </Box>
           <AccordionIcon />
