@@ -5,10 +5,10 @@ import {
   nodePasteRule,
 } from '@tiptap/core';
 import { NodeViewWrapper, ReactNodeViewRenderer } from '@tiptap/react';
-import { BibleVerseAccordion } from '../components/Modal.js';
+import { BibleVerseAccordion } from '../components/BibleVerseAccordion.js';
 import React from 'react';
 
-export const BibleVerseMark = Node.create({
+export const BibleVerseNode = Node.create({
   name: 'bibleVerse',
   inline: true,
   group: 'inline',
@@ -16,6 +16,9 @@ export const BibleVerseMark = Node.create({
   addAttributes() {
     return {
       bibleVerse: {
+        default: null,
+      },
+      actionText: {
         default: null,
       },
     };
@@ -36,10 +39,13 @@ export const BibleVerseMark = Node.create({
   addInputRules() {
     return [
       nodeInputRule({
-        find: /\b(READ[\s\S]*?)\n/,
+        find: /\b((?:READ|TEXT:)[\s\S]*?)\n/,
         type: this.type,
         getAttributes: (match) => {
-          return { bibleVerse: match[1].replace('READ ', '') };
+          return {
+            bibleVerse: match[1].replace('READ ', '').replace('TEXT: ', ''),
+            actionText: match[1].split(' ')[0],
+          };
         },
       }),
     ];
@@ -47,10 +53,12 @@ export const BibleVerseMark = Node.create({
   addPasteRules() {
     return [
       nodePasteRule({
-        find: /\b(READ[\s\S]*)/g,
+        find: /\b((?:READ|TEXT:)[\s\S]*)/g,
         type: this.type,
         getAttributes: (match) => {
-          return { bibleVerse: match[1].replace('READ ', '') };
+          return {
+            bibleVerse: match[1].replace('READ ', '').replace('TEXT: ', ''),
+          };
         },
       }),
     ];
@@ -75,10 +83,10 @@ export const BibleVerseMark = Node.create({
 //READ Isaiah 53:5
 const BibleVerseWithAccordion = (props) => {
   const verse = props.node.attrs.bibleVerse;
-
+  const actionText = props.node.attrs.actionText;
   return (
     <NodeViewWrapper>
-      <BibleVerseAccordion bibleVerse={verse} />
+      <BibleVerseAccordion bibleVerse={verse} actionText={actionText} />
     </NodeViewWrapper>
   );
 };
