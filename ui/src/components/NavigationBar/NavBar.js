@@ -436,7 +436,7 @@ const NavBar = (props) => {
                         lineHeight="0"
                         borderRadius="8"
                         fontSize="x-small"
-                        id="navbar-live"
+                        id="navbar-online"
                       >
                         &bull; Live
                       </Button>

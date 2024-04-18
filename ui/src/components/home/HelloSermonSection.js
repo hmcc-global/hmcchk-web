@@ -278,7 +278,7 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
                   bg: '#A5CBFF',
                   color: '#172848',
                 }}
-                id={`homepage-sermons-${isOnline ? "live" : "list"}`}
+                id={`homepage-sermons-${isOnline ? "online" : "list"}`}
               >
                 {isOnline ? 'Watch HMCC LIVE' : 'See All Past Sermons'}
               </Button>
