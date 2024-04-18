@@ -132,6 +132,9 @@ export default ({ editor }) => {
       action: () => editor.chain().focus().redo().run(),
     },
     {
+      type: 'divider',
+    },
+    {
       icon: 'italic',
       title: 'Bible Passage',
       action: useCallback(() => {
@@ -153,6 +156,13 @@ export default ({ editor }) => {
           return;
         }
         editor.commands.insertBibleVerse(verse);
+      }, [editor]),
+    },
+    {
+      icon: 'bold',
+      title: 'Add Notes',
+      action: useCallback(() => {
+        editor.commands.insertUserNotes();
       }, [editor]),
     },
   ];

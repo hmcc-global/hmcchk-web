@@ -19,7 +19,7 @@ export const BibleVerseAccordion = ({ bibleVerse, actionText }) => {
       <AccordionItem style={{ border: 'none' }}>
         <AccordionButton>
           <Box as="span" flex="1" textAlign="left" fontWeight={600}>
-            {actionText}{' '}
+            {actionText ?? 'READ'}{' '}
             <span style={{ textDecoration: 'underline' }}>{bibleVerse}</span>
           </Box>
           <AccordionIcon />

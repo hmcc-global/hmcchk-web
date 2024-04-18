@@ -128,3 +128,19 @@
     -webkit-overflow-scrolling: touch;
   }
 }
+
+.user-notes {
+  border: 1px solid #0D0D0D;
+  border-radius: 0.5rem;
+  position: relative;
+
+  .content {
+    padding: 0.5rem;
+  }
+  .content:empty::before {
+    content: "Your notes";
+    color: #0D0D0D;
+    opacity: 0.5;
+    text-align: center;
+  }
+}
