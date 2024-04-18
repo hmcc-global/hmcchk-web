@@ -41,69 +41,71 @@ const MainMenu = ({ login, onClose }) => {
         <HStack display={{ base: 'none', lg: 'flex' }} color="white">
           <Flex marginTop="30px" minW="55%">
             <VStack alignItems="flex-start">
-              <Link href="/visit-us" onClick={onClose}>
+              <Link href="/visit-us" onClick={onClose} id="menu-visit">
                 <Text fontWeight="bold" fontSize="40px">
                   Visit
                 </Text>
               </Link>
-              <Link href="/online">
+              <Link href="/online" id="menu-online">
                 <Text fontSize="18px">Church Online</Text>
               </Link>
-              <Link href="/about-us">
+              <Link href="/about-us" id="menu-about">
                 <Text fontWeight="bold" fontSize="40px">
                   About
                 </Text>
               </Link>
-              <Link href="/about-us#our-story">
+              <Link href="/about-us#our-story" id="menu-about-story">
                 <Text fontSize="18px">Our Story</Text>
               </Link>
-              <Link href="/about-us#vision-mission">
+              <Link href="/about-us#vision-mission" id="menu-about-vision">
                 <Text fontSize="18px">{'Vision & Mission'}</Text>
               </Link>
-              <Link href="/about-us#values">
+              <Link href="/about-us#values" id="menu-about-values">
                 <Text fontSize="18px">Our Values</Text>
               </Link>
-              <Link href="/about-us#strategy">
+              <Link href="/about-us#strategy" id="menu-about-strategy">
                 <Text fontSize="18px">Our Strategy</Text>
               </Link>
-              <Link href="/about-us#staff">
+              <Link href="/about-us#staff" id="menu-about-staff">
                 <Text fontSize="18px">Our Staff</Text>
               </Link>
-              <Link href="/about-us">
+              <Link href="/about-us" id="menu-about-beliefs">
                 <Text fontSize="18px">Beliefs</Text>
               </Link>
             </VStack>
             <Spacer />
             <VStack alignItems="flex-start" left={{ md: '10%', xl: '20%' }}>
               <Link href="/connect" onClick={onClose}>
-                <Text fontWeight="bold" fontSize="40px">
+                <Text fontWeight="bold" fontSize="40px" id="menu-connect">
                   Connect
                 </Text>
               </Link>
               <HashLink
                 to={{ pathname: '/connect', hash: '#ministries' }}
                 onClick={onClose}
+                id="menu-connect-ministries"
               >
                 <Text fontSize="18px">Ministries</Text>
               </HashLink>
               <HashLink
                 to={{ pathname: '/connect', hash: '#lifegroup' }}
                 onClick={onClose}
+                id="menu-connect-lg"
               >
                 <Text fontSize="18px">LIFE Groups</Text>
               </HashLink>
-              <Link href="/events" onClick={onClose}>
+              <Link href="/events" onClick={onClose} id="menu-events">
                 <Text fontWeight="bold" fontSize="40px">
                   Events
                 </Text>
               </Link>
 
-              <Link href="/sermons">
+              <Link href="/sermons" id="menu-sermons">
                 <Text fontWeight="bold" fontSize="40px">
                   Sermons
                 </Text>
               </Link>
-              <Link href="/give">
+              <Link href="/give" id="menu-give">
                 <Text fontWeight="bold" fontSize="40px">
                   Give
                 </Text>
@@ -127,7 +129,7 @@ const MainMenu = ({ login, onClose }) => {
                   borderColor="#ffffff"
                 >
                   <LinkBox>
-                    <Button marginBottom="5" width="96%" left="2">
+                    <Button marginBottom="5" width="96%" left="2" id="menu-profile">
                       <LinkOverlay href="/profile" onClick={onClose}>
                         <Text
                           fontWeight="600"
@@ -160,6 +162,7 @@ const MainMenu = ({ login, onClose }) => {
                         WebkitMarginStart: '0',
                         marginInlineStart: '0',
                       }}
+                      id="menu-hmcc.tv"
                     >
                       <LinkOverlay
                         href="https://hmcc.tv"

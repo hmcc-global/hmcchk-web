@@ -87,7 +87,7 @@ const LifeGroupSection = () => {
               }}
               fontSize="1.2em"
             >
-              <Link to={{ pathname: '/connect', hash: '#lifegroup' }}>
+              <Link to={{ pathname: '/connect', hash: '#lifegroup' }} id="homepage-lg">
                 {buttonText}
               </Link>
             </Button>

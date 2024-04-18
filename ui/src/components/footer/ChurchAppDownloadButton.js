@@ -11,6 +11,7 @@ export function ChurchAppDownloadButton() {
         <Link
           target="_blank"
           href="https://tithely.app.link/harvest-mission-community-church-hong-kong"
+          id="footer-app-apple"
         >
           <Image
             h={{ base: '10', md: '9', lg: '10' }}
@@ -21,6 +22,7 @@ export function ChurchAppDownloadButton() {
         <Link
           target="_blank"
           href="https://tithely.app.link/harvest-mission-community-church-hong-kong"
+          id="footer-app-android"
         >
           <Image
             h={{ base: '10', md: '9', lg: '10' }}
