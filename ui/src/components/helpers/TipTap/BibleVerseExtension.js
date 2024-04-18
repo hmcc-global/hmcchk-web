@@ -58,6 +58,7 @@ export const BibleVerseNode = Node.create({
         getAttributes: (match) => {
           return {
             bibleVerse: match[1].replace('READ ', '').replace('TEXT: ', ''),
+            actionText: match[1].split(' ')[0],
           };
         },
       }),
