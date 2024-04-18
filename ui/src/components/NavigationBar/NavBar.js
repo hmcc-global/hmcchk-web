@@ -298,6 +298,7 @@ const NavBar = (props) => {
                             py={{ md: '3', lg: '4' }}
                             _hover={{ backgroundColor: 'rgba(56, 56, 56, 1)' }}
                             onClick={onClose}
+                            id="navbar-signup"
                           >
                             <LinkOverlay href="/signup">
                               <Text
@@ -326,6 +327,7 @@ const NavBar = (props) => {
                             py={{ md: '3', lg: '4' }}
                             _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
                             onClick={onClose}
+                            id="navbar-login"
                           >
                             <LinkOverlay href="/login">
                               <Text
@@ -434,6 +436,7 @@ const NavBar = (props) => {
                         lineHeight="0"
                         borderRadius="8"
                         fontSize="x-small"
+                        id="navbar-live"
                       >
                         &bull; Live
                       </Button>
