@@ -26,6 +26,7 @@ const LinkCollection = (linkListItem) => {
       href={linkListItem['href']}
       target={linkListItem['target'] ? linkListItem['target'] : '_self'}
       key={linkListItem['linkText']}
+      id={linkListItem['id']}
     >
       <Text fontWeight="bold">{linkListItem['linkText']}</Text>
     </Link>,

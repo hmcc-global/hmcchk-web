@@ -87,6 +87,7 @@ const PopupContainer = ({ props }) => {
                     wordWrap: 'break-word',
                   }}
                   colorScheme="teal"
+                  id={`popup-check-${generateId(popupData.title)}`}
                 >
                   {buttonTextItem}
                 </Button>
@@ -97,4 +98,9 @@ const PopupContainer = ({ props }) => {
     </Modal>
   );
 };
+
+const generateId = (title) => {
+  return title.replace(/\s+/g, '-').toLowerCase();
+}
+
 export default PopupContainer;

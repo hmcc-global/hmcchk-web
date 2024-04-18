@@ -55,6 +55,7 @@ const ExperienceHmcc = (props) => {
               color: 'black',
               textDecoration: 'none',
             }}
+            id="connect-visit"
           >
             Learn more
           </Button>
@@ -102,6 +103,7 @@ const ExperienceHmcc = (props) => {
               color: 'black',
               textDecoration: 'none',
             }}
+            id="connect-events"
           >
             Check them out
           </Button>

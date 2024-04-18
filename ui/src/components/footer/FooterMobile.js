@@ -26,12 +26,13 @@ const AccordionLink = (
   linkText,
   href,
   target = '_self',
-  fontWeight = '400'
+  id,
+  fontWeight = '400',
 ) => {
   return (
     <AccordionItem border="none" fontWeight={fontWeight}>
       <h2>
-        <AccordionButton as={Link} href={href} target={target}>
+        <AccordionButton as={Link} href={href} target={target} id={id}>
           <Box as="span" flex="1" textAlign="left">
             {linkText}
           </Box>
@@ -64,7 +65,8 @@ const AccordionHeader = (linkText, children) => {
                 AccordionLink(
                   item['linkText'],
                   item['href'],
-                  item['target'] ? item['target'] : '_self'
+                  item['target'] ? item['target'] : '_self',
+                  item['id'],
                 )
               )}
             </Accordion>
@@ -116,6 +118,7 @@ const FooterMobile = (props) => {
               as={Link}
               href="https://hmcc.tv"
               target="_blank"
+              id="footer-hmcc.tv"
             >
               <Text px="7" fontWeight="700">
                 HMCC.TV
@@ -131,7 +134,8 @@ const FooterMobile = (props) => {
                   item['linkText'],
                   item['href'],
                   item['target'] ? item['target'] : '_self',
-                  700
+                  item['id'],
+                  700,
                 );
             })}
           </Accordion>
