@@ -339,7 +339,7 @@ const MainMenu = ({ login, onClose }) => {
                     </AccordionButton>
                     <AccordionPanel pb={4}>
                       <VStack alignItems="flex-start">
-                        <Link href="/online" id="menu-live">Church Online</Link>
+                        <Link href="/online" id="menu-online">Church Online</Link>
                       </VStack>
                     </AccordionPanel>
                   </AccordionItem>
