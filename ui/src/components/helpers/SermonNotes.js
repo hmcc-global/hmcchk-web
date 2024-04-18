@@ -3,7 +3,16 @@ export const getBiblePassage = async (passage) => {
     const response = await fetch(`${process.env.PUBLIC_URL}/assets/ESV.json`);
     const bible = await response.json();
 
-    const [book, chapterAndVerse] = passage.split(' '); // change this to take care of books with spaces
+    const processPassage = passage.trim();
+    let book = '';
+    let chapterAndVerse = '';
+    if (/^[0-9]/.test(passage)) {
+      let temp = processPassage.split(' ');
+      book = temp[0] + ' ' + temp[1];
+      chapterAndVerse = temp[2];
+    } else {
+      [book, chapterAndVerse] = processPassage.split(' ');
+    }
     const [chapter, verse] = chapterAndVerse.split(':');
 
     if (
@@ -22,6 +31,4 @@ export const getBiblePassage = async (passage) => {
   }
 };
 
-export const isBibleVerse = async (passage) => {
-  
-}
+export const isBibleVerse = async (passage) => {};
