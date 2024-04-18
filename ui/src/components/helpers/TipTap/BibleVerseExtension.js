@@ -1,6 +1,11 @@
-import { Node, mergeAttributes } from '@tiptap/core';
+import {
+  Node,
+  mergeAttributes,
+  nodeInputRule,
+  nodePasteRule,
+} from '@tiptap/core';
 import { NodeViewWrapper, ReactNodeViewRenderer } from '@tiptap/react';
-import { BibleVerseModal } from '../components/Modal.js';
+import { BibleVerseAccordion } from '../components/Modal.js';
 import React from 'react';
 
 export const BibleVerseMark = Node.create({
@@ -28,6 +33,28 @@ export const BibleVerseMark = Node.create({
         },
     };
   },
+  addInputRules() {
+    return [
+      nodeInputRule({
+        find: /\b(READ[\s\S]*?)\n/,
+        type: this.type,
+        getAttributes: (match) => {
+          return { bibleVerse: match[1].replace('READ ', '') };
+        },
+      }),
+    ];
+  },
+  addPasteRules() {
+    return [
+      nodePasteRule({
+        find: /\b(READ[\s\S]*)/g,
+        type: this.type,
+        getAttributes: (match) => {
+          return { bibleVerse: match[1].replace('READ ', '') };
+        },
+      }),
+    ];
+  },
   parseHTML() {
     return [
       {
@@ -41,43 +68,17 @@ export const BibleVerseMark = Node.create({
   },
   addNodeView() {
     return ReactNodeViewRenderer((props) => {
-      return <BibleVerseWithModal {...props} />;
+      return <BibleVerseWithAccordion {...props} />;
     });
   },
 });
-
-
-const BibleVerseWithModal = (props) => {
+//READ Isaiah 53:5
+const BibleVerseWithAccordion = (props) => {
   const verse = props.node.attrs.bibleVerse;
-  const [isOpen, setIsOpen] = React.useState(false);
-  const verseRef = React.useRef(null);
-
-  const handleMouseEnter = () => {
-    setIsOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsOpen(false);
-  };
 
   return (
-    <NodeViewWrapper
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      ref={verseRef}
-    >
-      <span style={{ textDecoration: 'underline', cursor: 'pointer' }}>
-        {verse}
-      </span>
-      {isOpen && (
-        <BibleVerseModal
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          bibleVerse={verse}
-          verseRef= {verseRef}
-        />
-      )}
+    <NodeViewWrapper>
+      <BibleVerseAccordion bibleVerse={verse} />
     </NodeViewWrapper>
   );
 };
-
