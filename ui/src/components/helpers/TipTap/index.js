@@ -9,6 +9,7 @@ import React from 'react';
 import MenuBar from './MenuBar.js';
 import Link from '@tiptap/extension-link';
 import { BibleVerseNode } from './BibleVerseExtension.js';
+import { UserNotesNode } from './UserNotesExtension.js';
 
 export default () => {
   const editor = useEditor({
@@ -21,6 +22,7 @@ export default () => {
       TaskItem,
       Link,
       BibleVerseNode,
+      UserNotesNode,
     ],
   });
 
