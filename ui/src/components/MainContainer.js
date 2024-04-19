@@ -37,6 +37,7 @@ import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementContainer';
 import AdminSermonNotesContainer from './admin/sermonNotes/AdminSermonNotesContainer';
 import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
+import SermonNotesContainer from './sermon-notes/SermonNotesContainer';
 
 const MainContainer = () => {
   return (
@@ -108,6 +109,12 @@ const MainContainer = () => {
           path="/sermons/:id"
           permissions={['public']}
           component={SermonDetails}
+        />
+        <PrivateRoute
+          exact
+          path="/sermons/sn/:id"
+          permissions={['public']}
+          component={SermonNotesContainer}
         />
         <PrivateRoute
           exact
