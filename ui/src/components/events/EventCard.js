@@ -22,20 +22,32 @@ import { RiCalendarEventFill } from 'react-icons/ri';
 import { BsClockFill, BsFullscreen } from 'react-icons/bs';
 import { ImLocation2 } from 'react-icons/im';
 import { FaCalendarAlt } from 'react-icons/fa';
-import { MdOutlineDirections, MdOutlineAddToPhotos } from 'react-icons/md';
+import { MdOutlineAddToPhotos } from 'react-icons/md';
 import { useState, useEffect } from 'react';
 import { getRenderDate } from '../helpers/eventsHelpers';
 import { DateTime } from 'luxon';
 import { generateGoogleCalendarLink } from '../helpers/eventsHelpers';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
+import { ColorExtractor } from 'react-color-extractor';
 
-// TODO: color button according to image
-// TODO: button directions
+// TODO: tag colors
 const EventCard = (props) => {
   const { eventData } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [colors, setColors] = useState([]);
+  const tagArray = [];
+
+  const colorManager = () => {
+    if (eventData.color) {
+      return eventData.color;
+    } else if (colors[0]) {
+      return colors[0];
+    } else {
+      return '#2C5282';
+    }
+  };
 
   const onOpen = (e) => {
     if (!e.target.href) {
@@ -72,34 +84,39 @@ const EventCard = (props) => {
         flexDirection={['column', 'row']}
       >
         <AspectRatio mb="5" width={['100%', '45%']} ratio={16 / 9}>
-          <Image
-            borderRadius="20"
-            src={eventData.imageAdUrl}
-            objectFit="cover"
-            class="an_image"
-            alt="event_img"
-            id="event_img"
-          />
+          <ColorExtractor getColors={(colors) => setColors(colors)}>
+            <img
+              alt="event-img"
+              src={eventData.imageAdUrl}
+              objectFit="cover"
+              style={{ borderRadius: '5%' }}
+            />
+          </ColorExtractor>
         </AspectRatio>
         <Box
-          // height={['200', '280']}
           overflow="hidden"
           position="relative"
           ml={['0', '6']}
           width={['100%', '55%']}
         >
           <Stack spacing={4} direction="row" mb={['2', '5']}>
-            {eventData.eventTags.length > 0 &&
-              eventData.eventTags.map((tag, i) => (
-                <Tag
-                  key={'event' + i}
-                  borderRadius={20}
-                  size="sm"
-                  fontSize={['10', '14']}
-                >
-                  {tag}
-                </Tag>
-              ))}
+            {eventData.eventType.length > 0 &&
+              eventData.eventType.forEach((tag) => {
+                tagArray.push(tag.value);
+              })}
+
+            {eventData.featured ? tagArray.push('Featured') : null}
+
+            {tagArray.map((tag, i) => (
+              <Tag
+                key={'event' + i}
+                borderRadius={20}
+                size="sm"
+                fontSize={['10', '14']}
+              >
+                {tag}
+              </Tag>
+            ))}
           </Stack>
           <Heading
             as="h4"
@@ -199,6 +216,9 @@ const EventCard = (props) => {
                 as={Link}
                 size="md"
                 target="_blank"
+                bg={colorManager}
+                color="white"
+                _hover={{ bg: '#3F3F3F', textColor: '#ffffff' }}
                 href={eventData.signUpUrl ? eventData.signUpUrl : null}
                 isDisabled={eventData.signUpUrl.length <= 0}
                 fontSize={['xs', 'md']}
@@ -212,25 +232,15 @@ const EventCard = (props) => {
                 as={Link}
                 size="md"
                 target="_blank"
+                bg={colorManager}
+                color="white"
+                _hover={{ bg: '#3F3F3F', textColor: '#ffffff' }}
                 href={generateGoogleCalendarLink(eventData)}
                 fontSize={['xs', 'md']}
                 rightIcon={<FaCalendarAlt />}
                 whiteSpace={['wrap', 'nowrap']}
               >
                 Add to Calendar
-              </Button>
-            )}
-            {eventData.location.length > 0 && (
-              <Button
-                as={Link}
-                size="md"
-                target="_blank"
-                href={eventData.directionsUrl ? eventData.directionsUrl : null}
-                rightIcon={<MdOutlineDirections />}
-                fontSize={['xs', 'md']}
-                whiteSpace={['wrap', 'nowrap']}
-              >
-                Get Directions
               </Button>
             )}
           </Stack>
@@ -257,18 +267,16 @@ const EventCard = (props) => {
           </AspectRatio>
           <ModalBody ml={[-2, 0]}>
             <Stack spacing={4} direction="row" mt={[0, 2]} mb="2">
-              {eventData.eventTags.length > 0 &&
-                eventData.eventTags.map((tag, i) => (
-                  <Tag
-                    key={'event' + i}
-                    borderRadius={20}
-                    size={['sm', 'lg']}
-                    fontSize={[10, 16]}
-                    p={[1, 2]}
-                  >
-                    {tag}
-                  </Tag>
-                ))}
+              {tagArray.map((tag, i) => (
+                <Tag
+                  key={'event' + i}
+                  borderRadius={20}
+                  size="sm"
+                  fontSize={['10', '14']}
+                >
+                  {tag}
+                </Tag>
+              ))}
             </Stack>
             {eventData.title && (
               <Heading as="h4" size="lg" fontWeight="900" mb="2">
@@ -354,25 +362,13 @@ const EventCard = (props) => {
               colorScheme="gray"
               alignItems="center"
             >
-              {eventData.location.length > 0 && (
-                <Button
-                  as={Link}
-                  target="_blank"
-                  href={
-                    eventData.directionsUrl ? eventData.directionsUrl : null
-                  }
-                  rightIcon={<MdOutlineDirections />}
-                  whiteSpace={['wrap', 'nowrap']}
-                  fontSize={['xs', 'md']}
-                  p="4"
-                >
-                  Get Directions
-                </Button>
-              )}
               {eventData.signUpUrl.length > 0 && (
                 <Button
                   as={Link}
                   target="_blank"
+                  bg={colorManager}
+                  color="white"
+                  _hover={{ bg: '#3F3F3F', textColor: '#ffffff' }}
                   href={eventData.signUpUrl ? eventData.signUpUrl : null}
                   rightIcon={<MdOutlineAddToPhotos />}
                   whiteSpace={['wrap', 'nowrap']}
@@ -387,6 +383,9 @@ const EventCard = (props) => {
                 <Button
                   as={Link}
                   target="_blank"
+                  bg={colorManager}
+                  color="white"
+                  _hover={{ bg: '#3F3F3F', textColor: '#ffffff' }}
                   href={generateGoogleCalendarLink(eventData)}
                   rightIcon={<FaCalendarAlt />}
                   whiteSpace={['wrap', 'nowrap']}

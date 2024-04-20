@@ -6,7 +6,7 @@ import {
   Divider,
   Grid,
   Heading,
-  HStack,
+  Select,
   Stack,
   Text,
 } from '@chakra-ui/react';
@@ -14,20 +14,38 @@ import { MdArrowDropDown } from 'react-icons/md';
 import EventCard from './EventCard';
 import { DateTime } from 'luxon';
 import { getRenderDate } from '../helpers/eventsHelpers';
+import isDateInThisWeek from './getWeek';
 
+// todo: active button
 const EventsPage = (props) => {
   const [eventsList, setEventsList] = useState([]);
-  const [isMobile, setIsMobile] = useState(false);
-  const [headerState, setHeaderState] = useState(null);
+  const [thisWeekList, setThisWeekList] = useState([]);
+  const [featuredList, setFeaturedList] = useState([]);
+  const [moreFilterList, setMoreFilterList] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
+  const [tagList, setTagList] = useState([]);
+  const [selectedOption, setSelectedOption] = useState('');
 
-  const tagHeader = ['All', 'This Week', 'Featured', 'More Filters'];
-  const tagList = ['All', 'This Week', 'Featured', 'Classes', 'Resources'];
+  // mock array
+  const tagHeader = ['All', 'This Week', 'Featured'];
 
   const onFilter = (e) => {
-    setHeaderState(e.target.id);
-    console.log(eventsList[0].eventTags);
-    console.log(headerState);
-    // header state is the filter
+    let index = parseInt(e.target.id);
+    if (index === 1) {
+      setFilteredList([...thisWeekList]);
+    } else if (index === 2) {
+      setFilteredList([...featuredList]);
+    } else if (index === 0) {
+      setFilteredList([...eventsList]);
+    }
+  };
+
+  const onSelect = (e) => {
+    const selectedValue = e.target.value;
+    setSelectedOption(selectedValue);
+    // more filter list
+    // if (selectedValue === 3) {
+    // }
   };
 
   useEffect(() => {
@@ -38,20 +56,19 @@ const EventsPage = (props) => {
     }
   }, [props]);
 
-  useEffect(() => {
-    const handleChange = () => {
-      if (window.innerWidth < 750) {
-        setIsMobile(true);
-      } else {
-        setIsMobile(false);
-      }
-    };
-    window.addEventListener('resize', handleChange);
-
-    return () => {
-      window.removeEventListener('resize', handleChange);
-    };
-  }, []);
+  // this is a mock tag
+  const obj = [
+    {
+      value: 'Classes',
+      label: 'Classes',
+      color: '#DDF3E0',
+    },
+    {
+      value: 'Resources',
+      label: 'Resources',
+      color: '#7D5300',
+    },
+  ];
 
   const getEventsListFromDatabase = async () => {
     try {
@@ -59,6 +76,7 @@ const EventsPage = (props) => {
 
       if (status === 200) {
         const filtered = [];
+        const tagsList = new Set([]);
         const filteredEndDate = data.filter((item) => {
           if (item.displayEndDateTime !== '') {
             // Add one day to offset end date to end of day
@@ -82,21 +100,51 @@ const EventsPage = (props) => {
             ? -1
             : 1
         );
-        // remove this code later
         filtered.push(...filteredEndDate);
 
+        // remove this code later
+        // eventType: [ { ... }, { ... }]
         filtered.forEach((data) => {
-          var i = Math.floor(Math.random() * 4);
-          var j = Math.floor(Math.random() * 4);
-          while (j === i) {
-            j = Math.random() * 4;
-          }
-          data.eventTags = [];
-          data.eventTags.push(tagList[i]);
-          data.eventTags.push(tagList[j]);
+          data.eventType = obj;
+          // gets all the tags
+          data.eventType.forEach((tag) => {
+            if (!tagsList.has(tag.value)) {
+              tagsList.add(tag.value);
+            }
+          });
         });
-        console.log(eventsList[0]);
-        setEventsList([...filtered]);
+
+        // generate mock tags
+        for (let i = 0; i < filtered.length; i++) {
+          if (i % 2 === 0) {
+            filtered[i].featured = true;
+          } else {
+            filtered[i].featured = false;
+          }
+        }
+
+        const featuredEvents = [];
+        const thisWeekEvents = [];
+        const moreFilterEvents = [];
+
+        filtered.forEach((data) => {
+          if (data.featured) {
+            featuredEvents.push(data);
+          } else if (isDateInThisWeek(data.eventStartDate)) {
+            thisWeekEvents.push(data);
+          } else {
+            moreFilterEvents.push(data);
+          }
+        });
+
+        setFeaturedList([...featuredEvents]);
+        setThisWeekList([...thisWeekEvents]);
+        setMoreFilterList([...moreFilterEvents]);
+        setTagList([...tagsList]);
+
+        const sorted = featuredEvents.concat(thisWeekEvents, moreFilterEvents);
+        setEventsList([...sorted]);
+        setFilteredList([...sorted]);
       } else {
         throw Error('Something went wrong with the request');
       }
@@ -104,6 +152,7 @@ const EventsPage = (props) => {
       console.log(err);
     }
   };
+
   return (
     <Container maxW="container.xl">
       <Heading
@@ -125,48 +174,18 @@ const EventsPage = (props) => {
         Check out what's happening at HMCC of Hong Kong!
       </Text>
 
-      {isMobile ? (
-        <></>
-      ) : (
-        <HStack
-          border="1px"
-          p={3}
-          borderRadius={30}
-          justifyContent="space-around"
-          flexWrap="wrap"
-          direction="row"
-        >
-          {/* TODO: handle the logic of filtering */}
-          {tagHeader.map((tag, i) => (
-            <Button
-              width={['34vw', '14vw']}
-              size="lg"
-              borderRadius={20}
-              key={'button' + i}
-              rightIcon={i === 3 ? <MdArrowDropDown /> : null}
-            >
-              {tag}
-            </Button>
-          ))}
-        </HStack>
-      )}
       <Stack
         border="1px"
-        mt="5"
-        p={4}
+        p={3}
         borderRadius={30}
         justifyContent="space-evenly"
         flexWrap="wrap"
         direction="row"
-        spacing={2}
       >
-        {/* TODO: handle the logic of filtering */}
-        {tagList.map((tag, i) => (
+        {tagHeader.map((tag, i) => (
           <Button
-            width={['24vw', '12vw']}
-            size={['xs', 'lg']}
-            borderRadius={20}
-            p={2}
+            width={['18vw', '15vw']}
+            borderRadius={[15, 20]}
             key={'button' + i}
             _hover={{ bg: '#3F3F3F', textColor: '#ffffff' }}
             _active={{
@@ -176,9 +195,29 @@ const EventsPage = (props) => {
             id={i}
             onClick={onFilter}
           >
-            {tag}
+            <Text id={i} fontSize={{ base: '70%', sm: '100%' }}>
+              {tag}
+            </Text>
           </Button>
         ))}
+        {/* todo: styling  */}
+        {/* TODO: handle the logic of filtering */}
+        <Select
+          placeholder="More Filters"
+          width={['18vw', '15vw']}
+          borderRadius={[15, 20]}
+          rightIcon={<MdArrowDropDown />}
+          variant="filled"
+          onChange={onSelect}
+          value={selectedOption}
+          id={selectedOption}
+        >
+          {tagList.map((tag, i) => (
+            <option id={i + 3} value={i + 3}>
+              {tag}
+            </option>
+          ))}
+        </Select>
       </Stack>
       <Grid
         mt="12"
@@ -186,8 +225,8 @@ const EventsPage = (props) => {
         templateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(1, 1fr)' }}
         gap={[3, 6]}
       >
-        {eventsList.length > 0 &&
-          eventsList.map((event, i) => (
+        {filteredList.length > 0 &&
+          filteredList.map((event, i) => (
             <>
               <EventCard key={'event' + i} eventData={event} />
               <Divider />
