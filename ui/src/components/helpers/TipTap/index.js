@@ -14,9 +14,7 @@ import { UserNotesNode } from './UserNotesExtension.js';
 export default () => {
   const editor = useEditor({
     extensions: [
-      StarterKit.configure({
-        history: false,
-      }),
+      StarterKit,
       Highlight,
       TaskList,
       TaskItem,
