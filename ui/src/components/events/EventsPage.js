@@ -24,12 +24,14 @@ const EventsPage = (props) => {
   const [filteredList, setFilteredList] = useState([]);
   const [tagList, setTagList] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
+  const [selectedFilterIndex, setSelectedFilterIndex] = useState(0);
 
   // mock array
   const tagHeader = ['All', 'This Week', 'Featured'];
 
   const onFilter = (e) => {
     let index = parseInt(e.target.id);
+    setSelectedFilterIndex(index);
     if (index === 1) {
       setFilteredList([...thisWeekList]);
     } else if (index === 2) {
@@ -40,6 +42,11 @@ const EventsPage = (props) => {
   };
 
   const onSelect = (e) => {
+    if (e.target.value === '') {
+      setFilteredList([...eventsList]);
+      setSelectedOption('');
+      return;
+    }
     const selectedValue = e.target.value;
     setSelectedOption(selectedValue);
     const filtered = [];
@@ -185,7 +192,7 @@ const EventsPage = (props) => {
         border="1px"
         p={3}
         borderRadius={30}
-        justifyContent="space-evenly"
+        justifyContent="space-around"
         flexWrap="wrap"
         direction="row"
       >
@@ -194,11 +201,9 @@ const EventsPage = (props) => {
             width={['18vw', '15vw']}
             borderRadius={[15, 20]}
             key={'button' + i}
-            _hover={{ bg: '#3F3F3F', textColor: '#ffffff' }}
-            _active={{
-              bg: '#3F3F3F',
-              textColor: '#ffffff',
-            }}
+            _hover={{ opacity: '90%' }}
+            bg={selectedFilterIndex === i ? '#3F3F3F' : 'gray.100'}
+            color={selectedFilterIndex === i ? '#ffffff' : ''}
             id={i}
             onClick={onFilter}
           >
@@ -215,10 +220,16 @@ const EventsPage = (props) => {
           borderRadius={[15, 20]}
           rightIcon={<MdArrowDropDown />}
           variant="filled"
+          bg={selectedOption !== '' ? '#3F3F3F' : 'gray.100'}
+          color={selectedOption !== '' ? '#ffffff' : ''}
           _hover={{
-            backgroundColor: '#3F3F3F',
-            textColor: '#ffffff',
+            opacity: '90%',
           }}
+          _focus={{
+            bg: 'gray.100',
+            color: '#000000',
+          }}
+          cursor="pointer"
           onChange={onSelect}
           value={selectedOption}
         >
@@ -237,7 +248,7 @@ const EventsPage = (props) => {
           filteredList.map((event, i) => (
             <>
               <EventCard key={'event' + i} eventData={event} />
-              <Divider />
+              {i !== filteredList.length - 1 && <Divider />}
             </>
           ))}
       </Grid>
