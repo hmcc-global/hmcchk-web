@@ -135,7 +135,7 @@ export default ({ editor }) => {
       type: 'divider',
     },
     {
-      icon: 'italic',
+      icon: 'book-line',
       title: 'Bible Passage',
       action: useCallback(() => {
         const previousVerse = editor.getAttributes('bibleVerse').verse;
@@ -159,7 +159,7 @@ export default ({ editor }) => {
       }, [editor]),
     },
     {
-      icon: 'bold',
+      icon: 'sticky-note-add-line',
       title: 'Add Notes',
       action: useCallback(() => {
         editor.commands.insertUserNotes();
