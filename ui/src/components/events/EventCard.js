@@ -89,7 +89,7 @@ const EventCard = (props) => {
               alt="event-img"
               src={eventData.imageAdUrl}
               objectFit="cover"
-              style={{ borderRadius: '5%' }}
+              style={{ borderRadius: '10px' }}
             />
           </ColorExtractor>
         </AspectRatio>
@@ -110,9 +110,11 @@ const EventCard = (props) => {
             {tagArray.map((tag, i) => (
               <Tag
                 key={'event' + i}
-                borderRadius={20}
+                borderRadius={50}
                 size="sm"
                 fontSize={['10', '14']}
+                px={['2', '3']}
+                py={1}
               >
                 {tag}
               </Tag>
@@ -127,7 +129,7 @@ const EventCard = (props) => {
           >
             {eventData.title}
           </Heading>
-          <Stack spacing={-1}>
+          <Stack spacing={1}>
             {eventData.eventStartDate && (
               <Text fontSize={['sm', 'lg']} fontWeight="bold">
                 <Icon mr={2} as={RiCalendarEventFill} />
@@ -208,7 +210,12 @@ const EventCard = (props) => {
                 skipHtml
               />{' '}
             </Text>
-            <Icon as={BsFullscreen} position="absolute" right="6" />
+            <Icon
+              as={BsFullscreen}
+              position="absolute"
+              right="6"
+              cursor="pointer"
+            />
           </Box>
           <Stack mt={['2', '5']} direction="row" spacing={4}>
             {eventData.signUpUrl.length > 0 && (
@@ -218,7 +225,7 @@ const EventCard = (props) => {
                 target="_blank"
                 bg={colorManager}
                 color="white"
-                _hover={{ bg: '#3F3F3F', textColor: '#ffffff' }}
+                _hover={{ opacity: '90%', textDecoration: 'none' }}
                 href={eventData.signUpUrl ? eventData.signUpUrl : null}
                 isDisabled={eventData.signUpUrl.length <= 0}
                 fontSize={['xs', 'md']}
@@ -234,7 +241,7 @@ const EventCard = (props) => {
                 target="_blank"
                 bg={colorManager}
                 color="white"
-                _hover={{ bg: '#3F3F3F', textColor: '#ffffff' }}
+                _hover={{ opacity: '90%', textDecoration: 'none' }}
                 href={generateGoogleCalendarLink(eventData)}
                 fontSize={['xs', 'md']}
                 rightIcon={<FaCalendarAlt />}
@@ -263,23 +270,25 @@ const EventCard = (props) => {
             />
           )}
           <AspectRatio ratio={16 / 9} m={[2, 0]}>
-            <Image borderRadius={20} src={eventData.imageAdUrl} />
+            <Image borderRadius={10} src={eventData.imageAdUrl} />
           </AspectRatio>
-          <ModalBody ml={[-2, 0]}>
-            <Stack spacing={4} direction="row" mt={[0, 2]} mb="2">
+          <ModalBody ml={[-2, 0]} p={1} my={1}>
+            <Stack spacing={4} direction="row" mt={[0, 2]} mb="3">
               {tagArray.map((tag, i) => (
                 <Tag
                   key={'event' + i}
                   borderRadius={20}
                   size="sm"
                   fontSize={['10', '14']}
+                  px={['2', '3']}
+                  py={1}
                 >
                   {tag}
                 </Tag>
               ))}
             </Stack>
             {eventData.title && (
-              <Heading as="h4" size="lg" fontWeight="900" mb="2">
+              <Heading as="h4" size="lg" fontWeight="900" mb="3">
                 {eventData.title}
               </Heading>
             )}
@@ -352,7 +361,7 @@ const EventCard = (props) => {
               </Text>
             </Box>
           </ModalBody>
-          <ModalFooter>
+          <ModalFooter p={1} my={1}>
             <ButtonGroup
               size="md"
               flexDirection="row"
@@ -368,7 +377,7 @@ const EventCard = (props) => {
                   target="_blank"
                   bg={colorManager}
                   color="white"
-                  _hover={{ bg: '#3F3F3F', textColor: '#ffffff' }}
+                  _hover={{ opacity: '90%', textDecoration: 'none' }}
                   href={eventData.signUpUrl ? eventData.signUpUrl : null}
                   rightIcon={<MdOutlineAddToPhotos />}
                   whiteSpace={['wrap', 'nowrap']}
@@ -385,7 +394,7 @@ const EventCard = (props) => {
                   target="_blank"
                   bg={colorManager}
                   color="white"
-                  _hover={{ bg: '#3F3F3F', textColor: '#ffffff' }}
+                  _hover={{ opacity: '90%', textDecoration: 'none' }}
                   href={generateGoogleCalendarLink(eventData)}
                   rightIcon={<FaCalendarAlt />}
                   whiteSpace={['wrap', 'nowrap']}
