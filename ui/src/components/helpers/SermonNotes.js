@@ -3,15 +3,15 @@ export const getBiblePassage = async (passage) => {
     const response = await fetch(`${process.env.PUBLIC_URL}/assets/ESV.json`);
     const bible = await response.json();
 
-    const processPassage = passage.trim();
+    const trimmedPassage = passage.trim();
     let book = '';
     let chapterAndVerse = '';
     if (/^[0-9]/.test(passage)) {
-      let temp = processPassage.split(' ');
+      let temp = trimmedPassage.split(' ');
       book = temp[0] + ' ' + temp[1];
       chapterAndVerse = temp[2];
     } else {
-      [book, chapterAndVerse] = processPassage.split(' ');
+      [book, chapterAndVerse] = trimmedPassage.split(' ');
     }
     const [chapter, verse] = chapterAndVerse.split(':');
 
@@ -22,7 +22,6 @@ export const getBiblePassage = async (passage) => {
     ) {
       if (verse.includes('-')) {
         let verses = verse.split('-');
-        console.log(verses)
         let passageBlock = '';
         for(let i = verses[0]; i <= verses[1]; i++) {
           passageBlock += `${i} ${bible[book][chapter][i]} `;
@@ -34,9 +33,6 @@ export const getBiblePassage = async (passage) => {
       return 'Passage not found';
     }
   } catch (err) {
-    console.log(err, ' error');
     return 'Passage not found';
   }
 };
-
-export const isBibleVerse = async (passage) => {};
