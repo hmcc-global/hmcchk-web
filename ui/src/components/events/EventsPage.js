@@ -144,7 +144,8 @@ const EventsPage = (props) => {
         filtered.forEach((data) => {
           if (data.featured) {
             featuredEvents.push(data);
-          } else if (isDateInThisWeek(data.eventStartDate)) {
+          }
+          if (isDateInThisWeek(data.eventStartDate)) {
             thisWeekEvents.push(data);
           } else {
             moreFilterEvents.push(data);
@@ -156,7 +157,9 @@ const EventsPage = (props) => {
         setMoreFilterList([...moreFilterEvents]);
         setTagList([...tagsList]);
 
-        const sorted = featuredEvents.concat(thisWeekEvents, moreFilterEvents);
+        const sorted = new Set(
+          featuredEvents.concat(thisWeekEvents, moreFilterEvents)
+        );
         setEventsList([...sorted]);
         setFilteredList([...sorted]);
       } else {
