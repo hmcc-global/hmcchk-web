@@ -26,12 +26,12 @@ module.exports = {
   fn: async function ({ sermonId, userId }, exits) {
     try {
       if (sermonId && userId) {
-        let data = await UserSermonNotes.find({
+        let data = await UserSermonNotes.findOne({
           sermonId: sermonId,
           userId: userId,
           isDeleted: false,
         });
-        if (data.length === 0) throw 'user sermon note not found';
+        if (!data && data.length === 0) throw 'user sermon note not found';
         return exits.success(data);
       }
 

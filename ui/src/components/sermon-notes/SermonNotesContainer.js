@@ -1,4 +1,4 @@
-import { Container, Box } from '@chakra-ui/react';
+import { Container, Image } from '@chakra-ui/react';
 import { customAxios as axios } from '../helpers/customAxios';
 import { useState, useEffect, useCallback } from 'react';
 
@@ -40,16 +40,18 @@ const SermonNotesContainer = (props) => {
       console.log(error);
     }
   }, [user]);
-
+  console.log(sermonNotes);
   useEffect(() => {
     getSermonNotesParent();
     getUserSermonNotes();
   }, [getSermonNotesParent, getUserSermonNotes]);
-  console.log(sermonNotes);
   return (
     <>
-      <Box />
-      <Container>test</Container>
+      <Image
+        src={sermonNotes.imageLink}
+        style={{ width: '100vw', height: '30vh' }}
+      />
+      <Container>{sermonNotes.originalContent}</Container>
     </>
   );
 };
