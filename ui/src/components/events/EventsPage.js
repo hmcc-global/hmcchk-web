@@ -16,7 +16,6 @@ import { DateTime } from 'luxon';
 import { getRenderDate } from '../helpers/eventsHelpers';
 import isDateInThisWeek from './getWeek';
 
-// todo: active button
 const EventsPage = (props) => {
   const [eventsList, setEventsList] = useState([]);
   const [thisWeekList, setThisWeekList] = useState([]);
@@ -43,9 +42,17 @@ const EventsPage = (props) => {
   const onSelect = (e) => {
     const selectedValue = e.target.value;
     setSelectedOption(selectedValue);
-    // more filter list
-    // if (selectedValue === 3) {
-    // }
+    const filtered = [];
+    let tag = tagList[selectedValue];
+    eventsList.forEach((data) => {
+      for (let i = 0; i < data.eventType.length; i++) {
+        if (data.eventType[i].value === tag) {
+          filtered.push(data);
+          break;
+        }
+      }
+    });
+    setFilteredList([...filtered]);
   };
 
   useEffect(() => {
@@ -200,22 +207,23 @@ const EventsPage = (props) => {
             </Text>
           </Button>
         ))}
-        {/* todo: styling  */}
-        {/* TODO: handle the logic of filtering */}
         <Select
           placeholder="More Filters"
+          fontWeight="600"
+          textAlign="center"
           width={['18vw', '15vw']}
           borderRadius={[15, 20]}
           rightIcon={<MdArrowDropDown />}
           variant="filled"
+          _hover={{
+            backgroundColor: '#3F3F3F',
+            textColor: '#ffffff',
+          }}
           onChange={onSelect}
           value={selectedOption}
-          id={selectedOption}
         >
           {tagList.map((tag, i) => (
-            <option id={i + 3} value={i + 3}>
-              {tag}
-            </option>
+            <option value={i}>{tag}</option>
           ))}
         </Select>
       </Stack>
