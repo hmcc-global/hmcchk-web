@@ -112,7 +112,7 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/sermons/sn/:id"
+          path="/sermons/notes/:id"
           permissions={['public']}
           component={SermonNotesContainer}
         />

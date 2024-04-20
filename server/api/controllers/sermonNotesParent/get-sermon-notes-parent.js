@@ -21,15 +21,13 @@ module.exports = {
   fn: async function ({ sermonId }, exits) {
     try {
       if (sermonId) {
-        let data = await SermonNotesParent.find({
+        let data = await SermonNotesParent.findOne({
           sermonId: sermonId,
           isDeleted: false,
         });
         if (data.length === 0) throw 'Sermon note parent record not found';
         return exits.success(data);
       }
-
-      let data = await SermonNotesParent.find({ isDeleted: false });
       return exits.success(data);
     } catch (err) {
       sails.log(err);
