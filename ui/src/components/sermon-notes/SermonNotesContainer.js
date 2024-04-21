@@ -47,11 +47,15 @@ const SermonNotesContainer = (props) => {
   }, [getSermonNotesParent, getUserSermonNotes]);
   return (
     <>
-      <Image
-        src={sermonNotes.imageLink}
-        style={{ width: '100vw', height: '30vh' }}
-      />
-      <Container>{sermonNotes.originalContent}</Container>
+      {sermonNotes ? (
+        <>
+          <Image
+            // src={sermonNotes.imageLink}
+            style={{ width: '100vw', height: '30vh' }}
+          />
+          <Container>{sermonNotes.originalContent}</Container>
+        </>
+      ) : null}
     </>
   );
 };
