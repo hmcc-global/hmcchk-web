@@ -13,7 +13,7 @@ module.exports = {
       required: true,
     },
     editedContent: {
-      type: 'string',
+      type: 'json',
     },
     themes: {
       type: 'string',

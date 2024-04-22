@@ -10,7 +10,7 @@ module.exports = {
       required: true,
     },
     editedContent: {
-      type: 'string',
+      type: 'json',
       allowNull: true,
     },
     themes: {
