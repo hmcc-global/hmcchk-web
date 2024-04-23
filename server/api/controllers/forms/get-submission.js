@@ -1,7 +1,7 @@
 module.exports = {
   friendlyName: 'Retrieve Submissions for a certain form',
 
-  description: 'Create a new submission entry from form data',
+  description: 'Retrieve all submission entries for a certain form',
 
   inputs: {
     formId: {
@@ -34,7 +34,8 @@ module.exports = {
 
   fn: async function ({ formId, timeRange }, exits) {
     const accessType = this.req.user.accessType;
-    const viewPaymentDataPermission = sails.config.custom.permissions.viewPaymentData;
+    const viewPaymentDataPermission =
+      sails.config.custom.permissions.viewPaymentData;
 
     try {
       let whereClause = {
