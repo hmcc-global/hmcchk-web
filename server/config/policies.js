@@ -18,6 +18,7 @@ module.exports.policies = {
    * - isLoggedIn                                                             *
    * - aboveMinistry                                                          *
    * - aboveTc                                                                *
+   * - aboveTcNotTech                                                         *
    * - aboveTech                                                              *
    * - aboveAdmin                                                             *
    * - isStewardship                                                          *
@@ -57,7 +58,7 @@ module.exports.policies = {
   'forms/get-signedup-form': ['isLoggedIn'],
   'forms/get-unsignedup-form': ['isLoggedIn'],
   'forms/post-create-submission': true,
-  'forms/get-submission': ['isLoggedIn', 'aboveTc'],
+  'forms/get-submission': ['isLoggedIn', 'aboveTcNotTech'],
   'forms/get-user-submission': ['isLoggedIn'],
 
   // Announcements

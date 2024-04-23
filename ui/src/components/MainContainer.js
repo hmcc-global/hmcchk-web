@@ -222,7 +222,7 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/admin/formViewer"
-          permissions={['tc', 't3ch', 'admin', 'stewardship']}
+          permissions={['tc', 'admin', 'stewardship']}
           component={AdminFormDataViewer}
         />
         <PrivateRoute
