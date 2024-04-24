@@ -55,19 +55,21 @@ module.exports = {
         let existing = await PaymentData.create({
           formId: formId,
           userId: userId,
-          submissionId: res.id
+          submissionId: res.id,
         }).fetch();
 
         if (existing) {
           const modelName = `paymentData-${formId}`;
-          existing = await LastUpdated.updateOne({ modelName }).set({
-            lastUpdatedBy: 't3chTeam'
-          }).fetch();
+          existing = await LastUpdated.updateOne({ modelName })
+            .set({
+              lastUpdatedBy: 't3chTeam',
+            })
+            .fetch();
 
           if (!existing) {
             existing = await LastUpdated.create({
               modelName,
-              lastUpdatedBy: 't3chTeam'
+              lastUpdatedBy: 't3chTeam',
             }).fetch();
           }
 
@@ -135,8 +137,7 @@ module.exports = {
         if (updateUserSubmissions === null) return exits.invalid();
       }
 
-      // Send confirmation email if there is email
-
+      // Send confirmation email to user if there is email
       if (user.email || submissionData['email']) {
         await sails.helpers.sendTemplateEmail.with({
           to: user.email ? user.email : submissionData['email'],
@@ -151,6 +152,16 @@ module.exports = {
             formName: formRecord[0].formName,
           },
         });
+      }
+
+      // Send alert email to leaders if setting is turned on
+      if (formRecord[0].alertType === 'Custom') {
+        const emailRecipients = formRecord[0].customAlertRecipients;
+      } else if (
+        ['LIFE Group', 'Lifestage', 'Campus'].includes(formRecord[0].alertType)
+      ) {
+        const emailRecipients =
+          sails.helpers.forms.getFormAlertRecipients(formId);
       }
 
       // Successfully completed flow
