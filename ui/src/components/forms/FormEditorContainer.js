@@ -1,3 +1,6 @@
+import { useForm, Controller } from 'react-hook-form';
+import { useState, useEffect } from 'react';
+import { DateTime } from 'luxon';
 import {
   Stack,
   Container,
@@ -22,10 +25,8 @@ import {
 } from '@chakra-ui/react';
 import FormEditor from './FormEditor';
 import ExternalFormEditor from './ExternalFormEditor';
-import { useForm, Controller } from 'react-hook-form';
-import { useState, useEffect } from 'react';
-import { DateTime } from 'luxon';
 import { formAlertTypes } from '../helpers/lists';
+import FileUpload from '../helpers/components/FileUpload';
 
 const FormEditorContainer = (props) => {
   const { user, isOpen, setIsOpen, editFormData, formManagerCallback } = props;
@@ -219,10 +220,19 @@ const FormEditorContainer = (props) => {
                       {errors['formName'] && 'Form name is required'}
                     </FormErrorMessage>
                   </FormControl>
-                  <FormControl isInvalid={errors['formImage']}>
-                    <FormLabel>Form Image Link</FormLabel>
-                    <Input id="formImage" {...register('formImage')} />
-                  </FormControl>
+
+                  <FileUpload
+                    id="formImage"
+                    name="formImage"
+                    acceptedFileTypes="image/*"
+                    setImageUrl={setFormImage}
+                    inputValue={formImage}
+                    control={control}
+                    onChange={(e) => setFormImage(e.target.value)}
+                  >
+                    Form Image Link
+                  </FileUpload>
+
                   <FormControl isInvalid={errors['formDescription']}>
                     <FormLabel>Form Description</FormLabel>
                     <Textarea
@@ -415,15 +425,19 @@ const FormEditorContainer = (props) => {
                   <FormControl>
                     <FormLabel>Alert Type</FormLabel>
                     <Select {...register('alertType', { required: true })}>
-                      {
-                        formAlertTypes.map((val, i) => <option key={i}>{val}</option>)
-                      }
+                      {formAlertTypes.map((val, i) => (
+                        <option key={i}>{val}</option>
+                      ))}
                     </Select>
                   </FormControl>
                   {alertTypeFlag === formAlertTypes[1] && (
                     <FormControl>
                       <FormLabel>Custom Email Recipients</FormLabel>
-                      <Input type="text" {...register('customAlertRecipients')} placeholder='first@person.com;second@person.com' />
+                      <Input
+                        type="text"
+                        {...register('customAlertRecipients')}
+                        placeholder="first@person.com;second@person.com"
+                      />
                     </FormControl>
                   )}
                 </Stack>
