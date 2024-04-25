@@ -105,6 +105,7 @@ const UpcomingSermon = ({ upcoming }) => {
             backdropFilter="blur(6px)"
             borderRadius="10px"
             href="/events"
+            id="sermon-events"
           >
             Learn More
           </Button>
@@ -152,6 +153,7 @@ const UpcomingSermon = ({ upcoming }) => {
               borderRadius="10px"
               marginTop="20px"
               href="/events"
+              id="sermon-events"
             >
               Learn More
             </Button>

@@ -75,7 +75,7 @@ const MainMenu = ({ login, onClose }) => {
             </VStack>
             <Spacer />
             <VStack alignItems="flex-start" left={{ md: '10%', xl: '20%' }}>
-              <Link href="/connect" onClick={onClose}>
+              <Link href="/connect" onClick={onClose} id="menu-connect">
                 <Text fontWeight="bold" fontSize="40px" id="menu-connect">
                   Connect
                 </Text>
@@ -130,7 +130,7 @@ const MainMenu = ({ login, onClose }) => {
                 >
                   <LinkBox>
                     <Button marginBottom="5" width="96%" left="2" id="menu-profile">
-                      <LinkOverlay href="/profile" onClick={onClose}>
+                      <LinkOverlay href="/profile" onClick={onClose} id="menu-profile">
                         <Text
                           fontWeight="600"
                           textColor="rgba(249, 249, 249, 1)"
@@ -188,7 +188,7 @@ const MainMenu = ({ login, onClose }) => {
                 >
                   <LinkBox>
                     <Button marginBottom="5" width="96%" left="2" id="menu-login">
-                      <LinkOverlay href="/login" onClick={onClose}>
+                      <LinkOverlay href="/login" onClick={onClose} id="menu-login">
                         <Text
                           fontWeight="600"
                           textColor="rgba(249, 249, 249, 1)"
@@ -197,6 +197,7 @@ const MainMenu = ({ login, onClose }) => {
                             lg: 'medium',
                             xl: 'mmedium',
                           }}
+                          id="menu-login"
                         >
                           LOGIN
                         </Text>
@@ -211,7 +212,7 @@ const MainMenu = ({ login, onClose }) => {
                       style={{ WebkitMarginStart: '0', marginInlineStart: '0' }}
                       id="menu-signup"
                     >
-                      <LinkOverlay href="/signup">
+                      <LinkOverlay href="/signup" id="menu-signup">
                         <Text
                           fontWeight="600"
                           textColor="rgba(249, 249, 249, 1)"
@@ -429,7 +430,7 @@ const MainMenu = ({ login, onClose }) => {
                     >
                       <LinkBox>
                         <Button marginBottom="5" width="96%" left="2" id="menu-profile">
-                          <LinkOverlay href="/profile" onClick={onClose}>
+                          <LinkOverlay href="/profile" onClick={onClose} id="menu-profile">
                             <Text
                               fontWeight="600"
                               textColor="rgba(249, 249, 249, 1)"
@@ -507,7 +508,7 @@ const MainMenu = ({ login, onClose }) => {
                     >
                       <LinkBox>
                         <Button marginBottom="5" width="96%" left="2" id="menu-login">
-                          <LinkOverlay href="/login" onClick={onClose}>
+                          <LinkOverlay href="/login" onClick={onClose} id="menu-login">
                             <Text
                               fontWeight="600"
                               textColor="rgba(249, 249, 249, 1)"
@@ -532,6 +533,7 @@ const MainMenu = ({ login, onClose }) => {
                             WebkitMarginStart: '0',
                             marginInlineStart: '0',
                           }}
+                          id="menu-signup"
                         >
                           <LinkOverlay href="/signup" onClick={onClose} id="menu-signup">
                             <Text
@@ -542,7 +544,6 @@ const MainMenu = ({ login, onClose }) => {
                                 lg: 'medium',
                                 xl: 'mmedium',
                               }}
-                              id="menu-signup"
                             >
                               SIGNUP
                             </Text>

@@ -665,7 +665,7 @@ const Form = (props) => {
               This form submission will be a one-off entry. However, if you want
               an auto-fill feature to be enabled for you for this and all future
               church event forms,{' '}
-              <Link href="/login">
+              <Link href="/login" id="form-login">
                 you can create an HMCC account right over here
               </Link>
             </Text>
