@@ -135,7 +135,7 @@ const Faq = (props) => {
         </h2>
         <AccordionPanel pb={4}>
           Head over to{' '}
-          <Link href="/about-us" fontStyle="italic" color="blue">
+          <Link href="/about-us" fontStyle="italic" color="blue" id="faq-about">
             ABOUT US
           </Link>{' '}
           to learn more about our church!
