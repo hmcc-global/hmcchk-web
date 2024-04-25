@@ -155,13 +155,32 @@ module.exports = {
       }
 
       // Send alert email to leaders if setting is turned on
-      if (formRecord[0].alertType === 'Custom') {
-        const emailRecipients = formRecord[0].customAlertRecipients;
-      } else if (
-        ['LIFE Group', 'Lifestage', 'Campus'].includes(formRecord[0].alertType)
-      ) {
-        const emailRecipients =
-          sails.helpers.forms.getFormAlertRecipients(formId);
+      if (formRecord[0].alertType !== 'None') {
+        let emailRecipients;
+
+        // get email addresses of the recipients
+        if (formRecord[0].alertType === 'Custom') {
+          emailRecipients = formRecord[0].customAlertRecipients;
+        } else if (
+          ['LIFE Group', 'Lifestage', 'Campus'].includes(
+            formRecord[0].alertType
+          )
+        ) {
+          emailRecipients = sails.helpers.forms.getFormAlertRecipients(formId);
+        }
+
+        // send notification email
+        await sails.helpers.sendTemplateEmail.with({
+          to: emailRecipients,
+          subject: 'New Sign-up for ' + formRecord[0].formName,
+          template: 'form-notify-leader-success',
+          templateData: {
+            submissionTime: res.createdAt,
+            fullName: user.fullName || submissionData['fullName'],
+            email: user.email || submissionData['email'],
+            phoneNumber: user.phoneNumber || submissionData['phoneNumber'],
+          },
+        });
       }
 
       // Successfully completed flow
