@@ -27,8 +27,8 @@ const SermonNotesEditorModal = (props) => {
     Encounter: 'encounter',
   };
 
-  const [sermondId, setSermonId] = useState('');
   const [sermonNoteData, setSermonNoteData] = useState({
+    sermonId: '',
     title: '',
     subtitle: '',
     speaker: '',
@@ -68,16 +68,7 @@ const SermonNotesEditorModal = (props) => {
     setValue('passage', data.passage);
 
     setSermonNoteData({
-      title: data.title,
-      subtitle: data.subtitle,
-      speaker: data.speaker,
-      sermonSeries: data.sermonSeries,
-      imageLink: data.imageLink,
-      originalContent: data.originalContent,
-      sermonLink: data.sermonLink,
-      serviceType: data.serviceType,
-      date: data.date,
-      passage: data.passage,
+      ...data,
     });
   };
 
@@ -132,13 +123,12 @@ const SermonNotesEditorModal = (props) => {
         const sermonId = `${
           sermonIdMap[sermonNoteData.serviceType]
         }-${formattedData}-${numberOfSermons + 1}`;
-        setSermonId(sermonId);
+        setSermonNoteData({ ...sermonNoteData, sermonID: sermonId });
         setValue('sermonId', sermonId);
 
         const { status } = await axios.post('/api/sermon-notes-parent/create', {
           ...sermonNoteData,
           isPublished: true,
-          sermonId: sermonId,
         });
         if (status === 200) {
           toast({

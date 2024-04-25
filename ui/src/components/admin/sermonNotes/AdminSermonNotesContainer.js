@@ -23,7 +23,7 @@ import { IoPeopleOutline } from 'react-icons/io5';
 import { IoBookOutline } from 'react-icons/io5';
 import { FaRegCalendarAlt } from 'react-icons/fa';
 
-export default function AdminSermonNotesContainer(props) {
+const AdminSermonNotesContainer = (props) => {
   const { user } = props;
   const toast = useToast();
 
@@ -336,4 +336,6 @@ export default function AdminSermonNotesContainer(props) {
       )}
     </Container>
   );
-}
+};
+
+export default AdminSermonNotesContainer;
