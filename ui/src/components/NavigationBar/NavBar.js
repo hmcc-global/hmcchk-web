@@ -268,7 +268,7 @@ const NavBar = (props) => {
                             onClick={onClose}
                             id="navbar-profile"
                           >
-                            <LinkOverlay href="/profile">
+                            <LinkOverlay href="/profile" id="navbar-profile">
                               <Text
                                 fontWeight="600"
                                 textColor="rgba(249, 249, 249, 1)"
@@ -300,7 +300,7 @@ const NavBar = (props) => {
                             onClick={onClose}
                             id="navbar-signup"
                           >
-                            <LinkOverlay href="/signup">
+                            <LinkOverlay href="/signup" id="navbar-signup">
                               <Text
                                 fontWeight="600"
                                 textColor="rgba(255, 255, 255, 1)"
@@ -329,7 +329,7 @@ const NavBar = (props) => {
                             onClick={onClose}
                             id="navbar-login"
                           >
-                            <LinkOverlay href="/login">
+                            <LinkOverlay href="/login" id="navbar-login">
                               <Text
                                 fontWeight="600"
                                 textColor="rgba(249, 249, 249, 1)"
@@ -443,7 +443,7 @@ const NavBar = (props) => {
                     </Link>
                   ) : null}
                   <LinkBox>
-                    <LinkOverlay href="/login">
+                    <LinkOverlay href="/login" id="navbar-login">
                       <IconButton
                         colorScheme="transparent"
                         onClick={onClose}

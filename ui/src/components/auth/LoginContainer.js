@@ -260,7 +260,7 @@ const LoginContainer = (props) => {
               fontSize={['0.675rem', '0.75rem', '1rem', '1rem']}
             >
               <Text marginRight="5px">Don't have an account?</Text>
-              <Link href="/signup">
+              <Link href="/signup" id="login_container-signup">
                 <Text
                   textAlign="right"
                   position="relative"
