@@ -26,7 +26,6 @@ import {
 import FormEditor from './FormEditor';
 import ExternalFormEditor from './ExternalFormEditor';
 import { formAlertTypes } from '../helpers/lists';
-import FileUpload from '../helpers/components/FileUpload';
 
 const FormEditorContainer = (props) => {
   const { user, isOpen, setIsOpen, editFormData, formManagerCallback } = props;
@@ -220,19 +219,10 @@ const FormEditorContainer = (props) => {
                       {errors['formName'] && 'Form name is required'}
                     </FormErrorMessage>
                   </FormControl>
-
-                  <FileUpload
-                    id="formImage"
-                    name="formImage"
-                    acceptedFileTypes="image/*"
-                    setImageUrl={setFormImage}
-                    inputValue={formImage}
-                    control={control}
-                    onChange={(e) => setFormImage(e.target.value)}
-                  >
-                    Form Image Link
-                  </FileUpload>
-
+                  <FormControl isInvalid={errors['formImage']}>
+                    <FormLabel>Form Image Link</FormLabel>
+                    <Input id="formImage" {...register('formImage')} />
+                  </FormControl>
                   <FormControl isInvalid={errors['formDescription']}>
                     <FormLabel>Form Description</FormLabel>
                     <Textarea
