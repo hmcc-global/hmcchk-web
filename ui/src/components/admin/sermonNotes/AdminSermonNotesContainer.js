@@ -37,10 +37,7 @@ export default function AdminSermonNotesContainer(props) {
 
   const fetchSermonNotes = async () => {
     try {
-      const { data, status } = await axios.get('/api/sermon-notes-parent/get');
-      if (status !== 200) {
-        throw Error('There was an issue with the request');
-      }
+      const { data } = await axios.get('/api/sermon-notes-parent/get');
       setSermonNotesList(data);
     } catch (err) {
       console.log(err);
@@ -100,16 +97,6 @@ export default function AdminSermonNotesContainer(props) {
           sermonId: e.target.value,
         },
       });
-
-      if (status !== 200) {
-        toast({
-          description:
-            'There was an issue with the request, please talk to a t3ch support',
-          status: 'warning',
-          duration: 8000,
-          isClosable: true,
-        });
-      }
       setIsEditorOpen(true);
       setActionOnEditor('duplicate');
       setEditSermonNotesData(data[0]);
@@ -180,21 +167,11 @@ export default function AdminSermonNotesContainer(props) {
   const onEdit = async (e) => {
     setIsEditorOpen(true);
     try {
-      const { data, status } = await axios.get('/api/sermon-notes-parent/get', {
+      const { data } = await axios.get('/api/sermon-notes-parent/get', {
         params: {
           sermonId: e.target.value,
         },
       });
-
-      if (status !== 200) {
-        toast({
-          description:
-            'There was an issue with the request, please talk to a t3ch support',
-          status: 'warning',
-          duration: 8000,
-          isClosable: true,
-        });
-      }
       setIsEditorOpen(true);
       setActionOnEditor('edit');
       setEditSermonNotesData(data[0]);
@@ -214,7 +191,7 @@ export default function AdminSermonNotesContainer(props) {
 
   useEffect(() => {
     fetchSermonNotes();
-  }, [isEditorOpen]);
+  }, [sermonNotesList]);
 
   return (
     <Container maxW="container.xl">
@@ -291,9 +268,9 @@ export default function AdminSermonNotesContainer(props) {
                     </Stack>
                     <Spacer />
                     <Stack
-                      pt={[3, 3, 3, 0]}
+                      pt={[3, 0]}
                       spacing={1}
-                      direction={['column', 'column', 'column', 'row']}
+                      direction={['column', 'row']}
                       alignItems="center"
                     >
                       <Button

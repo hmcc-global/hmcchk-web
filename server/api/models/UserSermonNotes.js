@@ -11,7 +11,7 @@ module.exports = {
     },
     editedContent: {
       type: 'json',
-      allowNull: true,
+      // allowNull: true,
     },
     themes: {
       type: 'string',
