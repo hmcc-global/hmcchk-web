@@ -44,4 +44,5 @@ const TiptapEditor = ({ onEditorChange, onFocus, existingContent }) => {
     </div>
   );
 };
+
 export default TiptapEditor;

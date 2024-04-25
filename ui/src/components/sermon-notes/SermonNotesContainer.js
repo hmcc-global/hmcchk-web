@@ -41,6 +41,7 @@ const SermonNotesContainer = (props) => {
     }
   }, [user]);
   console.log(sermonNotes);
+  console.log(userSermonNotes);
   useEffect(() => {
     getSermonNotesParent();
     getUserSermonNotes();

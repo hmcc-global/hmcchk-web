@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { Box } from '@chakra-ui/react';
 import { useCallback } from 'react';
 
-export default ({ editor }) => {
+const MenuBar = ({ editor }) => {
   const StyledDivider = styled(Box)({
     '& .divider': {
       background: 'rgba(255,255,255, 0.25)',
@@ -183,3 +183,5 @@ export default ({ editor }) => {
     </div>
   );
 };
+
+export default MenuBar;
