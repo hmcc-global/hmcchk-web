@@ -190,36 +190,43 @@ const EventsPage = (props) => {
       >
         Check out what's happening at HMCC of Hong Kong!
       </Text>
-
       <Stack
         border="1px"
         p={3}
         borderRadius={30}
         justifyContent="space-around"
-        flexWrap="wrap"
-        direction="row"
+        flexDirection={['column', 'row']}
+        spacing={[2, 0]}
+        zIndex={999}
+        top={2}
+        position="sticky"
+        alignItems="center"
+        bg="#ffffff"
       >
-        {tagHeader.map((tag, i) => (
-          <Button
-            width={['18vw', '15vw']}
-            borderRadius={[15, 20]}
-            key={'button' + i}
-            _hover={{ opacity: '90%' }}
-            bg={selectedFilterIndex === i ? '#3F3F3F' : 'gray.100'}
-            color={selectedFilterIndex === i ? '#ffffff' : ''}
-            id={i}
-            onClick={onFilter}
-          >
-            <Text id={i} fontSize={{ base: '70%', sm: '100%' }}>
-              {tag}
-            </Text>
-          </Button>
-        ))}
+        <Grid templateColumns="repeat(3, 1fr)" gap={[3, 9]}>
+          {tagHeader.map((tag, i) => (
+            <Button
+              width={['23vw', '14vw']}
+              borderRadius={[15, 20]}
+              key={'button' + i}
+              m="0rem"
+              _hover={{ opacity: '90%' }}
+              bg={selectedFilterIndex === i ? '#3F3F3F' : 'gray.100'}
+              color={selectedFilterIndex === i ? '#ffffff' : ''}
+              id={i}
+              onClick={onFilter}
+            >
+              <Text id={i} fontSize={{ base: '80%', sm: '100%' }}>
+                {tag}
+              </Text>
+            </Button>
+          ))}
+        </Grid>
         <Select
           placeholder="More Filters"
           fontWeight="600"
           textAlign="center"
-          width={['18vw', '15vw']}
+          width={['75vw', '14vw']}
           borderRadius={[15, 20]}
           rightIcon={<MdArrowDropDown />}
           variant="filled"

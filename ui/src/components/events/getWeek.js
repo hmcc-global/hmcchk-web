@@ -1,11 +1,15 @@
 export default function isDateInThisWeek(date) {
   const todayObj = new Date();
-  const eventDate = new Date(date);
+  const eventDate = new Date(new Date(date).toDateString());
   const todayDate = todayObj.getDate();
   const todayDay = todayObj.getDay();
 
-  const firstDayOfWeek = new Date(todayObj.setDate(todayDate - todayDay));
+  const firstDayOfWeek = new Date(
+    new Date(todayObj.setDate(todayDate - todayDay)).toDateString()
+  );
   const lastDayOfWeek = new Date(firstDayOfWeek);
   lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
-  return eventDate >= firstDayOfWeek && eventDate <= lastDayOfWeek;
+  const endOfWeek = new Date(new Date(lastDayOfWeek).toDateString());
+
+  return eventDate >= firstDayOfWeek && eventDate <= endOfWeek;
 }
