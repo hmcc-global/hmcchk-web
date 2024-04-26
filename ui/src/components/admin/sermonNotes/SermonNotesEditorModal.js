@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import {
   Container,
   FormControl,
@@ -17,6 +17,7 @@ import { useState } from 'react';
 import { customAxios as axios } from '../../helpers/customAxios';
 
 const SermonNotesEditorModal = (props) => {
+  
   const { editSermonNotesData, actionOnEditor, setIsEditorOpen } = props;
   const { register, handleSubmit, setValue } = useForm();
   const toast = useToast();
@@ -55,22 +56,27 @@ const SermonNotesEditorModal = (props) => {
     }
   };
 
-  const setSermonNotesData = (data) => {
-    if (data) setValue('title', data.title);
-    setValue('subtitle', data.subtitle);
-    setValue('speaker', data.speaker);
-    setValue('sermonSeries', data.sermonSeries);
-    setValue('date', data.date);
-    setValue('imageLink', data.imageLink);
-    setValue('originalContent', data.originalContent);
-    setValue('sermonLink', data.sermonLink);
-    setValue('serviceType', data.serviceType);
-    setValue('passage', data.passage);
+  const setSermonNotesData = useCallback(
+    (data) => {
+      if (data) 
+      setValue('title', data.title);
+      setValue('subtitle', data.subtitle);
+      setValue('speaker', data.speaker);
+      setValue('sermonSeries', data.sermonSeries);
+      setValue('date', data.date);
+      setValue('imageLink', data.imageLink);
+      setValue('originalContent', data.originalContent);
+      setValue('sermonLink', data.sermonLink);
+      setValue('serviceType', data.serviceType);
+      setValue('passage', data.passage);
+      setValue('sermonId', data.sermonId);
 
-    setSermonNoteData({
-      ...data,
-    });
-  };
+      setSermonNoteData({
+        ...data,
+      });
+    },
+    [setValue]
+  );
 
   const onSubmit = async (data) => {
     setSermonNotesData(data);
@@ -84,7 +90,7 @@ const SermonNotesEditorModal = (props) => {
     return `${day}${month}${year}`;
   };
 
-  const fetchSermonNotes = async () => {
+  const fetchSermonNotes = useCallback(async () => {
     try {
       const { data } = await axios.get('/api/sermon-notes-parent/get');
       return data;
@@ -98,7 +104,7 @@ const SermonNotesEditorModal = (props) => {
         isClosable: true,
       });
     }
-  };
+  }, [toast]);
 
   const onSubmitSermonNotes = async (e) => {
     try {
@@ -123,11 +129,12 @@ const SermonNotesEditorModal = (props) => {
         const sermonId = `${
           sermonIdMap[sermonNoteData.serviceType]
         }-${formattedData}-${numberOfSermons + 1}`;
-        setSermonNoteData({ ...sermonNoteData, sermonID: sermonId });
+        setSermonNoteData({ ...sermonNoteData});
         setValue('sermonId', sermonId);
 
         const { status } = await axios.post('/api/sermon-notes-parent/create', {
           ...sermonNoteData,
+          sermonId: sermonId,
           isPublished: true,
         });
         if (status === 200) {
@@ -153,7 +160,7 @@ const SermonNotesEditorModal = (props) => {
     }
   };
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     const result = await fetchSermonNotes();
     // Format of Sermon ID: sn-01012021-1 (Service Type - Date - Number of Sermons)
     // Check if there are any sermon notes for the same date. This is so that we can create a unique sermon ID for the sermon notes.
@@ -165,17 +172,17 @@ const SermonNotesEditorModal = (props) => {
     } else {
       setNumberOfSermons(0);
     }
-  };
+  }, [sermonNoteData.date, fetchSermonNotes]);
 
   useEffect(() => {
     getData();
-  }, [sermonNoteData.date]);
+  }, [getData]);
 
   useEffect(() => {
     if (editSermonNotesData !== null) {
       setSermonNotesData(editSermonNotesData);
     }
-  }, [editSermonNotesData]);
+  }, [editSermonNotesData, setSermonNotesData]);
 
   return (
     <>

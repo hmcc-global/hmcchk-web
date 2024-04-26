@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { customAxios as axios } from '../../helpers/customAxios';
 import {
   Container,
@@ -28,14 +28,14 @@ const AdminSermonNotesContainer = (props) => {
   const toast = useToast();
 
   // This useState is to open the Editor Modal
-  const [isEditorOpen, setIsEditorOpen] = useState(true);
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [actionOnEditor, setActionOnEditor] = useState('create');
 
   const [isLoading, setIsLoading] = useState(false);
   const [sermonNotesList, setSermonNotesList] = useState([]);
   const [editSermonNotesData, setEditSermonNotesData] = useState(null);
 
-  const fetchSermonNotes = async () => {
+  const fetchSermonNotes = useCallback(async () => {
     try {
       const { data } = await axios.get('/api/sermon-notes-parent/get');
       setSermonNotesList(data);
@@ -49,7 +49,7 @@ const AdminSermonNotesContainer = (props) => {
         isClosable: true,
       });
     }
-  };
+  }, [toast, sermonNotesList]); // add empty dependency array to useCallback
 
   const isPublishDisabled = () => {
     const aboveT3chPrivs = ['t3ch', 'admin', 'stewardship'];
@@ -92,7 +92,7 @@ const AdminSermonNotesContainer = (props) => {
   const onDuplicate = async (e) => {
     try {
       setIsLoading(true);
-      const { data, status } = await axios.get('/api/sermon-notes-parent/get', {
+      const { data } = await axios.get('/api/sermon-notes-parent/get', {
         params: {
           sermonId: e.target.value,
         },
@@ -121,6 +121,7 @@ const AdminSermonNotesContainer = (props) => {
       const sermonNotesData = sermonNotesList.find(
         (sermonNote) => sermonNote.sermonId === sermonNotesId
       );
+      console.log(sermonNotesId, sermonNotesData);
       const { status } = await axios.put('/api/sermon-notes-parent/update', {
         sermonId: sermonNotesId,
         title: sermonNotesData.title,
@@ -132,7 +133,6 @@ const AdminSermonNotesContainer = (props) => {
         passage: sermonNotesData.passage,
         isPublished: !sermonNotesData.isPublished,
       });
-
       if (status === 200) {
         toast({
           description: 'Sermon Notes has been updated',
@@ -191,7 +191,7 @@ const AdminSermonNotesContainer = (props) => {
 
   useEffect(() => {
     fetchSermonNotes();
-  }, [sermonNotesList]);
+  }, [fetchSermonNotes]);
 
   return (
     <Container maxW="container.xl">
@@ -287,7 +287,6 @@ const AdminSermonNotesContainer = (props) => {
                       >
                         {sermonNoteItem.isPublished ? 'Unpublish' : 'Publish'}
                       </Button>
-
                       <Button
                         colorScheme="blue"
                         value={sermonNoteItem.sermonId}
