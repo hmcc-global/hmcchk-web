@@ -272,7 +272,7 @@ const EventCard = (props) => {
           <AspectRatio ratio={16 / 9} m={[2, 0]}>
             <Image borderRadius={10} src={eventData.imageAdUrl} />
           </AspectRatio>
-          <ModalBody ml={[-2, 0]} p={1} my={1} w="90%" m="auto">
+          <ModalBody ml={[-2, 0]} p={1} my={1} w={['90%', '100%']} m="auto">
             <Stack spacing={4} direction="row" mt={[0, 2]} mb="3">
               {tagArray.map((tag, i) => (
                 <Tag
@@ -361,7 +361,7 @@ const EventCard = (props) => {
               </Text>
             </Box>
           </ModalBody>
-          <ModalFooter p={1} my={1} w="90%" m="auto">
+          <ModalFooter>
             <ButtonGroup
               size="md"
               flexDirection="row"
