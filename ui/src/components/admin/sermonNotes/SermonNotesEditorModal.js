@@ -15,11 +15,16 @@ import {
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { customAxios as axios } from '../../helpers/customAxios';
+import TiptapEditor from '../../helpers/TipTap';
 
 const SermonNotesEditorModal = (props) => {
-  
   const { editSermonNotesData, actionOnEditor, setIsEditorOpen } = props;
-  const { register, handleSubmit, setValue } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { touchedFields },
+  } = useForm();
   const toast = useToast();
 
   // Create a object
@@ -58,8 +63,7 @@ const SermonNotesEditorModal = (props) => {
 
   const setSermonNotesData = useCallback(
     (data) => {
-      if (data) 
-      setValue('title', data.title);
+      if (data) setValue('title', data.title);
       setValue('subtitle', data.subtitle);
       setValue('speaker', data.speaker);
       setValue('sermonSeries', data.sermonSeries);
@@ -129,7 +133,7 @@ const SermonNotesEditorModal = (props) => {
         const sermonId = `${
           sermonIdMap[sermonNoteData.serviceType]
         }-${formattedData}-${numberOfSermons + 1}`;
-        setSermonNoteData({ ...sermonNoteData});
+        setSermonNoteData({ ...sermonNoteData });
         setValue('sermonId', sermonId);
 
         const { status } = await axios.post('/api/sermon-notes-parent/create', {
@@ -196,7 +200,10 @@ const SermonNotesEditorModal = (props) => {
         <Box>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack gap={6}>
-              <FormControl isRequired isInvalid={sermonNoteData.title === ''}>
+              <FormControl
+                isRequired
+                isInvalid={sermonNoteData.title === '' && touchedFields.title}
+              >
                 <FormLabel color="#656565" fontWeight="bold">
                   Title
                 </FormLabel>
@@ -235,7 +242,10 @@ const SermonNotesEditorModal = (props) => {
                 </FormControl>
                 <FormControl
                   isRequired
-                  isInvalid={sermonNoteData.serviceType === ''}
+                  isInvalid={
+                    sermonNoteData.serviceType === '' &&
+                    touchedFields.serviceType
+                  }
                 >
                   <FormLabel color="#656565" fontWeight="bold">
                     Service Type
@@ -280,7 +290,9 @@ const SermonNotesEditorModal = (props) => {
                 </FormControl>
                 <FormControl
                   isRequired
-                  isInvalid={sermonNoteData.passage === ''}
+                  isInvalid={
+                    sermonNoteData.passage === '' && touchedFields.passage
+                  }
                 >
                   <FormLabel color="#656565" fontWeight="bold">
                     Service Verse
@@ -299,7 +311,9 @@ const SermonNotesEditorModal = (props) => {
                 </FormControl>
                 <FormControl
                   isRequired
-                  isInvalid={sermonNoteData.speaker === ''}
+                  isInvalid={
+                    sermonNoteData.speaker === '' && touchedFields.speaker
+                  }
                 >
                   <FormLabel color="#656565" fontWeight="bold">
                     Speaker
@@ -318,7 +332,10 @@ const SermonNotesEditorModal = (props) => {
                   ></Input>
                   <FormErrorMessage>Speaker is required</FormErrorMessage>
                 </FormControl>
-                <FormControl isRequired isInvalid={sermonNoteData.date === ''}>
+                <FormControl
+                  isRequired
+                  isInvalid={sermonNoteData.date === '' && touchedFields.date}
+                >
                   <FormLabel color="#656565" fontWeight="bold">
                     Sermon Date
                   </FormLabel>
@@ -337,7 +354,9 @@ const SermonNotesEditorModal = (props) => {
                 </FormControl>
                 <FormControl
                   isRequired
-                  isInvalid={sermonNoteData.sermonLink === ''}
+                  isInvalid={
+                    sermonNoteData.sermonLink === '' && touchedFields.sermonLink
+                  }
                 >
                   <FormLabel color="#656565" fontWeight="bold">
                     Sermon Link
@@ -372,23 +391,15 @@ const SermonNotesEditorModal = (props) => {
               </Grid>
               <FormControl
                 isRequired
-                isInvalid={sermonNoteData.originalContent === ''}
+                isInvalid={
+                  sermonNoteData.originalContent === '' &&
+                  touchedFields.originalContent
+                }
               >
                 <FormLabel color="#656565" fontWeight="bold">
                   Rich Text Editor Sermon Notes
                 </FormLabel>
-                <Input
-                  id="originalContent"
-                  {...register('originalContent', {
-                    required: 'Sermon Notes are required',
-                  })}
-                  onChange={(e) =>
-                    setSermonNoteData({
-                      ...sermonNoteData,
-                      originalContent: e.target.value,
-                    })
-                  }
-                />
+                <TiptapEditor />
                 <FormErrorMessage>Sermon Notes are required</FormErrorMessage>
               </FormControl>
               <Stack direction="row" spacing={5}>

@@ -28,7 +28,7 @@ const AdminSermonNotesContainer = (props) => {
   const toast = useToast();
 
   // This useState is to open the Editor Modal
-  const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const [isEditorOpen, setIsEditorOpen] = useState(true);
   const [actionOnEditor, setActionOnEditor] = useState('create');
 
   const [isLoading, setIsLoading] = useState(false);
@@ -121,7 +121,6 @@ const AdminSermonNotesContainer = (props) => {
       const sermonNotesData = sermonNotesList.find(
         (sermonNote) => sermonNote.sermonId === sermonNotesId
       );
-      console.log(sermonNotesId, sermonNotesData);
       const { status } = await axios.put('/api/sermon-notes-parent/update', {
         sermonId: sermonNotesId,
         title: sermonNotesData.title,
@@ -302,7 +301,7 @@ const AdminSermonNotesContainer = (props) => {
                         value={sermonNoteItem.sermonId}
                         onClick={onDuplicate}
                         isLoading={isLoading}
-                        actionOnEditor="duplicate"
+                        name="duplicate"
                         width={['100%', '100%', '100%', 'auto']}
                       >
                         Duplicate

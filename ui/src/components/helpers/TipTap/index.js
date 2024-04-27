@@ -11,7 +11,7 @@ import Link from '@tiptap/extension-link';
 import { BibleVerseNode } from './BibleVerseExtension.js';
 import { UserNotesNode } from './UserNotesExtension.js';
 
-export default () => {
+const TiptapEditor = () => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -31,3 +31,4 @@ export default () => {
     </div>
   );
 };
+export default TiptapEditor;
