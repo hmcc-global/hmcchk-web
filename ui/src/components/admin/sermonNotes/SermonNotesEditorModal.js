@@ -61,29 +61,29 @@ const SermonNotesEditorModal = (props) => {
     }
   };
 
-  const setSermonNotesData = useCallback(
-    (data) => {
-      if (data) setValue('title', data.title);
-      setValue('subtitle', data.subtitle);
-      setValue('speaker', data.speaker);
-      setValue('sermonSeries', data.sermonSeries);
-      setValue('date', data.date);
-      setValue('imageLink', data.imageLink);
-      setValue('originalContent', data.originalContent);
-      setValue('sermonLink', data.sermonLink);
-      setValue('serviceType', data.serviceType);
-      setValue('passage', data.passage);
-      setValue('sermonId', data.sermonId);
+  // const setSermonNotesData = useCallback(
+  //   (data) => {
+  //     if (data) setValue('title', data.title);
+  //     setValue('subtitle', data.subtitle);
+  //     setValue('speaker', data.speaker);
+  //     setValue('sermonSeries', data.sermonSeries);
+  //     setValue('date', data.date);
+  //     setValue('imageLink', data.imageLink);
+  //     setValue('originalContent', data.originalContent);
+  //     setValue('sermonLink', data.sermonLink);
+  //     setValue('serviceType', data.serviceType);
+  //     setValue('passage', data.passage);
+  //     setValue('sermonId', data.sermonId);
 
-      setSermonNoteData({
-        ...data,
-      });
-    },
-    [setValue]
-  );
+  //     setSermonNoteData({
+  //       ...data,
+  //     });
+  //   },
+  //   [data]
+  // );
 
   const onSubmit = async (data) => {
-    setSermonNotesData(data);
+    setSermonNoteData({ ...data });
   };
 
   const formatDate = (date) => {
@@ -184,10 +184,11 @@ const SermonNotesEditorModal = (props) => {
 
   useEffect(() => {
     if (editSermonNotesData !== null) {
-      setSermonNotesData(editSermonNotesData);
+      setSermonNoteData({ ...editSermonNotesData });
     }
-  }, [editSermonNotesData, setSermonNotesData]);
-
+  }, [editSermonNotesData, setSermonNoteData]);
+  console.log(editSermonNotesData);
+  console.log('2', sermonNoteData);
   return (
     <>
       <Container
@@ -212,6 +213,7 @@ const SermonNotesEditorModal = (props) => {
                   {...register('title', {
                     required: 'Title is required',
                   })}
+                  value={sermonNoteData.title}
                   onChange={(e) =>
                     setSermonNoteData({
                       ...sermonNoteData,
@@ -231,6 +233,7 @@ const SermonNotesEditorModal = (props) => {
                   </FormLabel>
                   <Input
                     id="subtitle"
+                    value={sermonNoteData.subtitle}
                     {...register('subtitle')}
                     onChange={(e) =>
                       setSermonNoteData({
@@ -279,6 +282,7 @@ const SermonNotesEditorModal = (props) => {
                   </FormLabel>
                   <Input
                     id="sermonSeries"
+                    value={sermonNoteData.sermonSeries}
                     {...register('sermonSeries')}
                     onChange={(e) =>
                       setSermonNoteData({
@@ -299,6 +303,7 @@ const SermonNotesEditorModal = (props) => {
                   </FormLabel>
                   <Input
                     id="passage"
+                    value={sermonNoteData.passage}
                     {...register('passage', { required: 'Verse is required' })}
                     onChange={(e) =>
                       setSermonNoteData({
@@ -320,6 +325,7 @@ const SermonNotesEditorModal = (props) => {
                   </FormLabel>
                   <Input
                     id="speaker"
+                    value={sermonNoteData.speaker}
                     {...register('speaker', {
                       required: 'Speaker is required',
                     })}
@@ -341,6 +347,7 @@ const SermonNotesEditorModal = (props) => {
                   </FormLabel>
                   <Input
                     id="date"
+                    value={sermonNoteData.date}
                     type="date"
                     {...register('date', { required: 'Date is required' })}
                     onChange={(e) =>
@@ -352,17 +359,13 @@ const SermonNotesEditorModal = (props) => {
                   />
                   <FormErrorMessage>Date is required</FormErrorMessage>
                 </FormControl>
-                <FormControl
-                  isRequired
-                  isInvalid={
-                    sermonNoteData.sermonLink === '' && touchedFields.sermonLink
-                  }
-                >
+                <FormControl>
                   <FormLabel color="#656565" fontWeight="bold">
                     Sermon Link
                   </FormLabel>
                   <Input
                     id="sermonLink"
+                    value={sermonNoteData.sermonLink}
                     {...register('sermonLink')}
                     onChange={(e) =>
                       setSermonNoteData({
@@ -371,7 +374,6 @@ const SermonNotesEditorModal = (props) => {
                       })
                     }
                   />
-                  <FormErrorMessage>Sermon Link is required</FormErrorMessage>
                 </FormControl>
                 <FormControl>
                   <FormLabel color="#656565" fontWeight="bold">
@@ -379,6 +381,7 @@ const SermonNotesEditorModal = (props) => {
                   </FormLabel>
                   <Input
                     id="imageLink"
+                    value={sermonNoteData.imageLink}
                     {...register('imageLink')}
                     onChange={(e) =>
                       setSermonNoteData({
@@ -399,7 +402,22 @@ const SermonNotesEditorModal = (props) => {
                 <FormLabel color="#656565" fontWeight="bold">
                   Rich Text Editor Sermon Notes
                 </FormLabel>
-                <TiptapEditor />
+                <TiptapEditor
+                  onFocus={() =>
+                    setValue(
+                      'originalContent',
+                      sermonNoteData.originalContent,
+                      { shouldTouch: true }
+                    )
+                  }
+                  onEditorChange={(json) =>
+                    setSermonNoteData({
+                      ...sermonNoteData,
+                      originalContent: json,
+                    })
+                  }
+                  existingContent={sermonNoteData.originalContent}
+                />
                 <FormErrorMessage>Sermon Notes are required</FormErrorMessage>
               </FormControl>
               <Stack direction="row" spacing={5}>

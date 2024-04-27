@@ -49,7 +49,7 @@ const AdminSermonNotesContainer = (props) => {
         isClosable: true,
       });
     }
-  }, [toast, sermonNotesList]); // add empty dependency array to useCallback
+  }, [toast, setSermonNotesList]); // add empty dependency array to useCallback
 
   const isPublishDisabled = () => {
     const aboveT3chPrivs = ['t3ch', 'admin', 'stewardship'];
