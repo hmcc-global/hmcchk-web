@@ -187,8 +187,6 @@ const SermonNotesEditorModal = (props) => {
       setSermonNoteData({ ...editSermonNotesData });
     }
   }, [editSermonNotesData, setSermonNoteData]);
-  console.log(editSermonNotesData);
-  console.log('2', sermonNoteData);
   return (
     <>
       <Container
