@@ -55,19 +55,21 @@ module.exports = {
         let existing = await PaymentData.create({
           formId: formId,
           userId: userId,
-          submissionId: res.id
+          submissionId: res.id,
         }).fetch();
 
         if (existing) {
           const modelName = `paymentData-${formId}`;
-          existing = await LastUpdated.updateOne({ modelName }).set({
-            lastUpdatedBy: 't3chTeam'
-          }).fetch();
+          existing = await LastUpdated.updateOne({ modelName })
+            .set({
+              lastUpdatedBy: 't3chTeam',
+            })
+            .fetch();
 
           if (!existing) {
             existing = await LastUpdated.create({
               modelName,
-              lastUpdatedBy: 't3chTeam'
+              lastUpdatedBy: 't3chTeam',
             }).fetch();
           }
 
@@ -135,8 +137,7 @@ module.exports = {
         if (updateUserSubmissions === null) return exits.invalid();
       }
 
-      // Send confirmation email if there is email
-
+      // Send confirmation email to user if there is email
       if (user.email || submissionData['email']) {
         await sails.helpers.sendTemplateEmail.with({
           to: user.email ? user.email : submissionData['email'],
@@ -149,6 +150,69 @@ module.exports = {
               ? user.fullName
               : submissionData['fullName'],
             formName: formRecord[0].formName,
+          },
+        });
+      }
+
+      // Send alert email to leaders if setting is turned on
+      if (formRecord[0].alertType !== 'None') {
+        let emailRecipients;
+
+        // get email addresses of the recipients
+        if (formRecord[0].alertType === 'Custom') {
+          emailRecipients = formRecord[0].customAlertRecipients.split(';');
+        } else if (
+          ['LIFE Group', 'Lifestage', 'Campus'].includes(
+            formRecord[0].alertType
+          )
+        ) {
+          const recipientsDict =
+            await sails.helpers.forms.getFormAlertRecipients(formId);
+
+          // get the current season leadership teams
+          const today = new Date();
+
+          let fieldSelected = await sails.helpers.camelize(
+            formRecord[0].alertType
+          );
+
+          // match the current user's data with the alert type config
+          const recipientsEntries =
+            recipientsDict[submissionData[fieldSelected]];
+
+          for (const entry of recipientsEntries) {
+            // find the entry in the current season
+            if (
+              today >= new Date(entry.seasonFrom) &&
+              today <= new Date(entry.seasonTo)
+            ) {
+              emailRecipients = entry.leaderEmails;
+            }
+          }
+        } else {
+          return exits.invalid('Alert type is invalid');
+        }
+
+        // failsafe
+        if (emailRecipients.length < 1) {
+          emailRecipients = ['no-reply@hongkong.hmcc.net'];
+        }
+
+        // send notification email
+        await sails.helpers.sendTemplateEmail.with({
+          to: emailRecipients[0],
+          cc: emailRecipients,
+          subject: 'New Sign-up for ' + formRecord[0].formName,
+          template: 'form-notify-leader-success',
+          templateData: {
+            submissionTime: res.createdAt,
+            fullName:
+              user.fullName || submissionData['fullName'] || 'Not Applicable',
+            email: user.email || submissionData['email'] || 'Not Applicable',
+            phoneNumber:
+              user.phoneNumber ||
+              submissionData['phoneNumber'] ||
+              'Not Applicable',
           },
         });
       }

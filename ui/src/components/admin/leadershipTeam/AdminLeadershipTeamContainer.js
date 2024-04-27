@@ -10,7 +10,6 @@ import {
   Input,
   Button,
   Checkbox,
-  Select,
   Drawer,
   DrawerOverlay,
   DrawerContent,
@@ -23,7 +22,6 @@ import {
   Spacer,
 } from '@chakra-ui/react';
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { lifestageList, campusList } from '../../helpers/lists';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -44,16 +42,16 @@ export default function AdminLeadershipTeamContainer(props) {
   const [campus, setCampus] = useState('');
   const [lifestage, setLifestage] = useState('');
   const [lifeGroup, setLifeGroup] = useState('');
-  const [leaders, setLeadersStr] = useState('');
+  const [leaderEmails, setLeaderEmailsStr] = useState('');
   const [deleted, setDeleted] = useState(false);
 
-  const setLeaders = useCallback((v) => {
+  const setLeaderEmails = useCallback((v) => {
     if (v && Array.isArray(v)) {
-      setLeadersStr(v.join(','));
+      setLeaderEmailsStr(v.join(','));
       return;
     }
 
-    setLeadersStr('');
+    setLeaderEmailsStr('');
   }, []);
 
   // get data for Ag-Grid table
@@ -78,18 +76,18 @@ export default function AdminLeadershipTeamContainer(props) {
       setCampus(selected.campus);
       setLifestage(selected.lifestage);
       setLifeGroup(selected.lifeGroup);
-      setLeaders(selected.leaders);
+      setLeaderEmails(selected.leaderEmails);
       setDeleted(selected.isDeleted);
     }
-  }, [selected, setLeaders]);
+  }, [selected, setLeaderEmails]);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
 
   const createHandler = async () => {
     try {
-      const leadersArr = leaders && leaders.length > 0 && leaders.split(',');
-      const cleanLeadersArr = leadersArr.map((x) => x.trim());
+      const leaderEmailsArr = leaderEmails && leaderEmails.length > 0 && leaderEmails.split(',');
+      const cleanLeaderEmailsArr = leaderEmailsArr.map((x) => x.trim());
 
       const res = await axios.post('/api/leadership-team/create', {
         seasonFrom,
@@ -97,7 +95,7 @@ export default function AdminLeadershipTeamContainer(props) {
         campus,
         lifestage,
         lifeGroup,
-        leaders: cleanLeadersArr,
+        leaderEmails: cleanLeaderEmailsArr,
         isDeleted: deleted,
       });
 
@@ -115,8 +113,8 @@ export default function AdminLeadershipTeamContainer(props) {
 
   const updateHandler = async () => {
     try {
-      const leadersArr = leaders && leaders.length > 0 && leaders.split(',');
-      const cleanLeadersArr = leadersArr.map((x) => x.trim());
+      const leaderEmailsArr = leaderEmails && leaderEmails.length > 0 && leaderEmails.split(',');
+      const cleanLeaderEmailssArr = leaderEmailsArr.map((x) => x.trim());
 
       const res = await axios.put('/api/leadership-team/update', {
         id,
@@ -125,7 +123,7 @@ export default function AdminLeadershipTeamContainer(props) {
         campus,
         lifestage,
         lifeGroup,
-        leaders: cleanLeadersArr,
+        leaderEmails: cleanLeaderEmailssArr,
         isDeleted: deleted,
       });
 
@@ -164,7 +162,7 @@ export default function AdminLeadershipTeamContainer(props) {
       setCampus(data[0].campus);
       setLifestage(data[0].lifestage);
       setLifeGroup(data[0].lifeGroup);
-      setLeaders(data[0].leaders);
+      setLeaderEmails(data[0].leaderEmails);
       setDeleted(data[0].isDeleted);
 
       setIsLoading(false);
@@ -189,7 +187,7 @@ export default function AdminLeadershipTeamContainer(props) {
     setCampus('');
     setLifestage('');
     setLifeGroup('');
-    setLeaders('');
+    setLeaderEmails('');
     setDeleted(false);
     setSelected();
     setIsLoading(false);
@@ -217,7 +215,8 @@ export default function AdminLeadershipTeamContainer(props) {
       });
       await getData();
     }
-    setIsLoading(false);
+    unselectHandler();
+    onClose();
   };
 
   return (
@@ -296,32 +295,20 @@ export default function AdminLeadershipTeamContainer(props) {
 
                 <FormControl>
                   <FormLabel>Campus</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
+                  <Input
+                    type="text"
                     value={campus}
-                    placeholder="Please fill in this field"
                     onChange={(e) => setCampus(e.target.value)}
-                  >
-                    {campusList.map((item) => {
-                      return <option key={item}>{item}</option>;
-                    })}
-                  </Select>
+                  />
                 </FormControl>
 
                 <FormControl>
                   <FormLabel>Lifestage</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
+                  <Input
+                    type="text"
                     value={lifestage}
-                    placeholder="Please fill in this field"
                     onChange={(e) => setLifestage(e.target.value)}
-                  >
-                    {lifestageList.map((item) => {
-                      return <option key={item}>{item}</option>;
-                    })}
-                  </Select>
+                  />
                 </FormControl>
 
                 <FormControl>
@@ -334,11 +321,11 @@ export default function AdminLeadershipTeamContainer(props) {
                 </FormControl>
 
                 <FormControl>
-                  <FormLabel>Leaders</FormLabel>
+                  <FormLabel>Leader Emails</FormLabel>
                   <Input
                     type="text"
-                    value={leaders}
-                    onChange={(e) => setLeadersStr(e.target.value)}
+                    value={leaderEmails}
+                    onChange={(e) => setLeaderEmailsStr(e.target.value)}
                   />
                 </FormControl>
 

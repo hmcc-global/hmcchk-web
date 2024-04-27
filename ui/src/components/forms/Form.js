@@ -32,17 +32,15 @@ import {
   Link,
 } from '@chakra-ui/react';
 import {
-  campusList,
   countryList,
   districtList,
-  lifegroupList,
-  lifestageList,
   regionList,
   ministryTeamList,
 } from '../helpers/lists';
 
 const Form = (props) => {
-  const { formId, formName, formDescription, formImage, formFields } = props;
+  const { formId, formName, formDescription, formImage, formFields, staticData } = props;
+  const { lifegroupList, lifestageList, campusList } = staticData;
   const { register, handleSubmit, control, formState, setValue } = useForm();
   const { errors } = formState;
   const { user, history } = props;

@@ -80,6 +80,9 @@ module.exports.policies = {
   // Misc
   'misc/get-env': true,
   'misc/get-current-time': true,
+  'leadershipTeam/get-latest-lifegroup-list': true,
+  'leadershipTeam/get-latest-campus-list': true,
+  'leadershipTeam/get-latest-lifestage-list': true,
 
   // Pages
   'pages/*': true,
