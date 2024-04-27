@@ -26,7 +26,6 @@ const EventsPage = (props) => {
   const [selectedOption, setSelectedOption] = useState('');
   const [selectedFilterIndex, setSelectedFilterIndex] = useState(0);
 
-  // mock array
   const tagHeader = ['All', 'This Week', 'Featured'];
 
   const onFilter = (e) => {
@@ -70,20 +69,6 @@ const EventsPage = (props) => {
     }
   }, [props]);
 
-  // this is a mock tag
-  const obj = [
-    {
-      value: 'Classes',
-      label: 'Classes',
-      color: '#DDF3E0',
-    },
-    {
-      value: 'Resources',
-      label: 'Resources',
-      color: '#7D5300',
-    },
-  ];
-
   const getEventsListFromDatabase = async () => {
     try {
       const { data, status } = await axios.get('/api/announcement/get');
@@ -115,27 +100,17 @@ const EventsPage = (props) => {
             : 1
         );
         filtered.push(...filteredEndDate);
-
-        // remove this code later
-        // eventType: [ { ... }, { ... }]
         filtered.forEach((data) => {
-          data.eventType = obj;
-          // gets all the tags
-          data.eventType.forEach((tag) => {
-            if (!tagsList.has(tag.value)) {
-              tagsList.add(tag.value);
-            }
-          });
-        });
-
-        // generate mock tags
-        for (let i = 0; i < filtered.length; i++) {
-          if (i % 2 === 0) {
-            filtered[i].featured = true;
-          } else {
-            filtered[i].featured = false;
+          if (data.eventType === null || data.eventType === undefined) {
+            console.log('data.eventType is null or undefined');
+          } else if (data.eventType.length > 0) {
+            data.eventType.forEach((tag) => {
+              if (!tagsList.has(tag.value)) {
+                tagsList.add(tag.value);
+              }
+            });
           }
-        }
+        });
 
         const featuredEvents = [];
         const thisWeekEvents = [];

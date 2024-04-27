@@ -56,6 +56,7 @@ module.exports = {
     },
     eventType: {
       type: 'json',
+      defaultsTo: [],
     },
     featured: {
       type: 'boolean',

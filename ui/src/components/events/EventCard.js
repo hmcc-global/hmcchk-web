@@ -40,8 +40,9 @@ const EventCard = (props) => {
   const tagArray = [];
 
   const colorManager = () => {
-    if (eventData.color) {
-      return eventData.color;
+    console.log(eventData);
+    if (eventData.imagePrimaryColor) {
+      return eventData.imagePrimaryColor;
     } else if (colors[0]) {
       return colors[0];
     } else {
@@ -100,12 +101,12 @@ const EventCard = (props) => {
           width={['100%', '55%']}
         >
           <Stack spacing={4} direction="row" mb={['2', '5']}>
-            {eventData.eventType.length > 0 &&
-              eventData.eventType.forEach((tag) => {
+            {eventData.eventType?.length > 0 &&
+              eventData.eventType.map((tag) => {
                 tagArray.push(tag.value);
               })}
 
-            {eventData.featured ? tagArray.push('Featured') : null}
+            {eventData.featured && tagArray.push('Featured')}
 
             {tagArray.map((tag, i) => (
               <Tag
