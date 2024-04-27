@@ -5,7 +5,9 @@ export default function isDateInThisWeek(date) {
   const todayDay = todayObj.getDay();
 
   const firstDayOfWeek = new Date(
-    new Date(todayObj.setDate(todayDate - todayDay)).toDateString()
+    new Date(
+      todayObj.setDate(todayDate - todayDay + (todayDay === 0 ? -6 : 1))
+    ).toDateString()
   );
   const lastDayOfWeek = new Date(firstDayOfWeek);
   lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
