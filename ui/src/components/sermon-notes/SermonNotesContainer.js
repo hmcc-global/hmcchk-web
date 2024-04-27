@@ -1,6 +1,7 @@
 import { Container, Image } from '@chakra-ui/react';
 import { customAxios as axios } from '../helpers/customAxios';
 import { useState, useEffect, useCallback } from 'react';
+import TiptapOutput from '../helpers/TipTap/TiptapOutput';
 
 const SermonNotesContainer = (props) => {
   const { user, history } = props;
@@ -16,7 +17,7 @@ const SermonNotesContainer = (props) => {
         },
       });
       if (status === 200) {
-        setSermonNotes(data);
+        setSermonNotes(data[0]);
       }
     } catch (error) {
       console.log(error);
@@ -33,7 +34,7 @@ const SermonNotesContainer = (props) => {
         },
       });
       if (status === 200) {
-        setUserSermonNotes(data);
+        setUserSermonNotes(data[0]);
       }
       // TO-DO: handle if the user does not have data
     } catch (error) {
@@ -44,7 +45,7 @@ const SermonNotesContainer = (props) => {
   console.log(userSermonNotes);
   useEffect(() => {
     getSermonNotesParent();
-    
+
     getUserSermonNotes();
   }, [getSermonNotesParent, getUserSermonNotes]);
   return (
@@ -55,7 +56,9 @@ const SermonNotesContainer = (props) => {
             // src={sermonNotes.imageLink}
             style={{ width: '100vw', height: '30vh' }}
           />
-          <Container>{sermonNotes.originalContent}</Container>
+          <Container>
+            <TiptapOutput input={sermonNotes.originalContent} />
+          </Container>
         </>
       ) : null}
     </>
