@@ -2,6 +2,7 @@ const getFieldNameFromAlertType = (alertType) => {
   if (alertType === 'LIFE Group') return 'lifeGroup';
   if (alertType === 'Lifestage') return 'lifestage';
   if (alertType === 'Campus') return 'campus';
+  throw new Error(`${alertType} unrecognised`);
 };
 
 module.exports = {
@@ -21,20 +22,18 @@ module.exports = {
 
   fn: async function ({ formId }, exits) {
     // eslint-disable-next-line eqeqeq
-    if (formId == null || formId === '') return exits.success([]);
+    if (formId == null || formId === '') return exits.success({});
 
     try {
       const formData = await Form.findOne({
         _id: formId
       });
       // eslint-disable-next-line eqeqeq
-      console.log(formData);
-      if (formData == null || formData.alertType === 'Custom' || formData.alertType === 'None') return exits.success([]);
-      console.log('loop');
+      if (formData == null || formData.alertType === 'Custom' || formData.alertType === 'None') return exits.success({});
 
       const latestLeadershipData = await sails.helpers.leadershipteam.getLatestLeadershipTeams();
       // eslint-disable-next-line eqeqeq
-      if (latestLeadershipData == null) return exits.success([]);
+      if (latestLeadershipData == null) return exits.success({});
 
       const propertyName = getFieldNameFromAlertType(formData.alertType);
       const res = _.chain(latestLeadershipData)
