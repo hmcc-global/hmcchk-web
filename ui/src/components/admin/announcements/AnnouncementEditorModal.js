@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { customAxios as axios } from '../../helpers/customAxios';
 import { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
+import { ColorExtractor } from 'react-color-extractor';
 import {
   ModalBody,
   ModalCloseButton,
@@ -53,6 +54,7 @@ const AnnouncementEditorModal = (props) => {
   const [isInPpt, setIsInPpt] = useState(false);
   const [description, setDescription] = useState(undefined);
   const [imageAdUrl, setImageAdUrl] = useState(undefined);
+  const [imagePrimaryColor, setImagePrimaryColor] = useState('#2C5282');
   const [location, setLocation] = useState(undefined);
   const [directionsUrl, setDirectionsUrl] = useState(undefined);
   const [displayStartDateTime, setDisplayStartDateTime] = useState(undefined);
@@ -76,6 +78,7 @@ const AnnouncementEditorModal = (props) => {
     setValue('isInPpt', false);
     setValue('description', undefined);
     setValue('imageAdUrl', undefined);
+    setValue('imagePrimaryColor', '#2C5282');
     setValue('location', undefined);
     setValue('directionsUrl', undefined);
     setValue('displayStartDateTime', undefined);
@@ -98,6 +101,7 @@ const AnnouncementEditorModal = (props) => {
     setIsInPpt(false);
     setDescription(undefined);
     setImageAdUrl(undefined);
+    setImagePrimaryColor('#2C5282');
     setLocation(undefined);
     setDirectionsUrl(undefined);
     setDisplayStartDateTime(undefined);
@@ -123,6 +127,7 @@ const AnnouncementEditorModal = (props) => {
       setValue('isInPpt', data.isInPpt);
       setValue('description', data.description);
       setValue('imageAdUrl', data.imageAdUrl);
+      setValue('imagePrimaryColor', data.imagePrimaryColor);
       setValue('location', data.location);
       setValue('directionsUrl', data.directionsUrl);
       setValue('displayStartDateTime', data.displayStartDateTime);
@@ -145,6 +150,7 @@ const AnnouncementEditorModal = (props) => {
       setIsInPpt(data.isInPpt);
       setDescription(data.description);
       setImageAdUrl(data.imageAdUrl);
+      setImagePrimaryColor(data.imagePrimaryColor);
       setLocation(data.location);
       setDirectionsUrl(data.directionsUrl);
       setDisplayStartDateTime(data.displayStartDateTime);
@@ -182,6 +188,7 @@ const AnnouncementEditorModal = (props) => {
   };
 
   const saveAnnouncementDataToDB = async (data) => {
+    console.log(data);
     if (actionOnEditor === 'edit') {
       const { status } = await axios.put('/api/announcement/update', {
         id: editAnnouncementData.id,
@@ -204,6 +211,7 @@ const AnnouncementEditorModal = (props) => {
         isInPpt,
         description,
         imageAdUrl,
+        imagePrimaryColor,
         location,
         directionsUrl,
         displayStartDateTime,
@@ -223,7 +231,7 @@ const AnnouncementEditorModal = (props) => {
       const statusCode = await saveAnnouncementDataToDB(announcementToSave);
       if (statusCode === 200) {
         if (actionOnEditor === 'edit') {
-          toast({
+        toast({
             title: 'Announcement Saved',
             description: 'Your announcement has been saved.',
             status: 'success',
@@ -234,11 +242,10 @@ const AnnouncementEditorModal = (props) => {
           toast({
             title: 'Announcement Created',
             description: 'Your announcement has been created.',
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-          });
-        }
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        });
       }
 
       setIsOpen(false);
@@ -319,7 +326,6 @@ const AnnouncementEditorModal = (props) => {
                       onChange={(e) => setTitle(e.target.value)}
                     />
                   </FormControl>
-
                   <FormControl>
                     <FormLabel>Where should this announcement go?</FormLabel>
                     <FormHelperText>
@@ -347,7 +353,6 @@ const AnnouncementEditorModal = (props) => {
                       </Checkbox>
                     </Stack>
                   </FormControl>
-
                   <Grid
                     templateColumns={['repeat(1,1fr)', 'repeat(2, 1fr)']}
                     gap={6}
@@ -438,7 +443,6 @@ const AnnouncementEditorModal = (props) => {
                       </FormControl>
                     </GridItem>
                   </Grid>
-
                   <FormControl>
                     <FormLabel>Event interval</FormLabel>
                     <FormHelperText>
@@ -456,7 +460,6 @@ const AnnouncementEditorModal = (props) => {
                     </Select>
                   </FormControl>
                   <Divider orientation="horizontal" />
-
                   <FormControl>
                     <CUIAutoComplete
                       label="Event type"
@@ -491,7 +494,6 @@ const AnnouncementEditorModal = (props) => {
                     </FormHelperText>
                   </FormControl>
                   <Divider orientation="horizontal" />
-
                   <FormControl>
                     <FormLabel>Location</FormLabel>
                     <FormHelperText>
@@ -504,7 +506,6 @@ const AnnouncementEditorModal = (props) => {
                       onChange={(e) => setLocation(e.target.value)}
                     />
                   </FormControl>
-
                   <FileUpload
                     id="imageAdUrl"
                     name="imageAdUrl"
@@ -516,7 +517,6 @@ const AnnouncementEditorModal = (props) => {
                   >
                     Upload Announcements Image
                   </FileUpload>
-
                   <FormControl>
                     <FormLabel>Announcements Sign-up link</FormLabel>
                     <Input
@@ -525,7 +525,6 @@ const AnnouncementEditorModal = (props) => {
                       onChange={(e) => setSignUpUrl(e.target.value)}
                     />
                   </FormControl>
-
                   <FormControl isInvalid={errors['description']} isRequired>
                     <FormLabel>Description</FormLabel>
                     <FormHelperText>
@@ -548,7 +547,6 @@ const AnnouncementEditorModal = (props) => {
                       onChange={(e) => setDescription(e.target.value)}
                     />
                   </FormControl>
-
                   <FormControl>
                     <FormLabel>Additional Notes</FormLabel>
                     <FormHelperText>
@@ -562,7 +560,6 @@ const AnnouncementEditorModal = (props) => {
                       onChange={(e) => setAdditionalNotes(e.target.value)}
                     />
                   </FormControl>
-
                   <Button
                     colorScheme="blue"
                     type="submit"
@@ -570,6 +567,13 @@ const AnnouncementEditorModal = (props) => {
                   >
                     {modalSubmitButton(actionOnEditor)}
                   </Button>
+                  <div>
+                    <ColorExtractor
+                      src={`https://cors-anywhere.herokuapp.com/${imageAdUrl}`}
+                      getColors={(colors) => setImagePrimaryColor(colors[0])}
+                    />
+                  </div>
+                  ;
                 </Stack>
               </form>
             </Box>
