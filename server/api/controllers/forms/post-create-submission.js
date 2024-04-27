@@ -181,6 +181,7 @@ module.exports = {
             recipientsDict[submissionData[fieldSelected]];
 
           for (const entry of recipientsEntries) {
+            // find the entry in the current season
             if (
               today >= new Date(entry.seasonFrom) &&
               today <= new Date(entry.seasonTo)
@@ -188,6 +189,8 @@ module.exports = {
               emailRecipients = entry.leaderEmails;
             }
           }
+        } else {
+          return exits.invalid('Alert type is invalid');
         }
 
         // failsafe
