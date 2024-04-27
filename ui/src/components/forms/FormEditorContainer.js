@@ -1,3 +1,6 @@
+import { useForm, Controller } from 'react-hook-form';
+import { useState, useEffect } from 'react';
+import { DateTime } from 'luxon';
 import {
   Stack,
   Container,
@@ -22,9 +25,6 @@ import {
 } from '@chakra-ui/react';
 import FormEditor from './FormEditor';
 import ExternalFormEditor from './ExternalFormEditor';
-import { useForm, Controller } from 'react-hook-form';
-import { useState, useEffect } from 'react';
-import { DateTime } from 'luxon';
 import { formAlertTypes } from '../helpers/lists';
 
 const FormEditorContainer = (props) => {
@@ -415,15 +415,19 @@ const FormEditorContainer = (props) => {
                   <FormControl>
                     <FormLabel>Alert Type</FormLabel>
                     <Select {...register('alertType', { required: true })}>
-                      {
-                        formAlertTypes.map((val, i) => <option key={i}>{val}</option>)
-                      }
+                      {formAlertTypes.map((val, i) => (
+                        <option key={i}>{val}</option>
+                      ))}
                     </Select>
                   </FormControl>
                   {alertTypeFlag === formAlertTypes[1] && (
                     <FormControl>
                       <FormLabel>Custom Email Recipients</FormLabel>
-                      <Input type="text" {...register('customAlertRecipients')} placeholder='first@person.com;second@person.com' />
+                      <Input
+                        type="text"
+                        {...register('customAlertRecipients')}
+                        placeholder="first@person.com;second@person.com"
+                      />
                     </FormControl>
                   )}
                 </Stack>
