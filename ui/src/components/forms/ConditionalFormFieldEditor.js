@@ -17,17 +17,15 @@ import {
 } from '@chakra-ui/react';
 
 import {
-  campusList,
   countryList,
-  lifegroupList,
-  lifestageList,
   ministryTeamList,
 } from '../helpers/lists';
 
 import ConditionalFormFieldMapper from './ConditionalFormFieldMapper';
 
 const ConditionalFormFieldEditor = (props) => {
-  const { formFields, setFormFields } = props;
+  const { formFields, setFormFields, staticData } = props;
+  const { lifegroupList, lifestageList, campusList } = staticData;
   const conditionalEnabledPrefillFields = [
     'countryOfOrigin',
     'campus',

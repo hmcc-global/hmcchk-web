@@ -21,7 +21,7 @@ import {
   useMediaQuery,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
-import { lifestageList, countryList } from '../helpers/lists';
+import { countryList } from '../helpers/lists';
 
 const Signup = (props) => {
   const {
@@ -32,6 +32,8 @@ const Signup = (props) => {
     formState: { errors },
   } = useForm();
 
+  const { staticData } = props;
+  const { lifestageList } = staticData;
   const googleEmail = props.history.location.state?.email;
   const googleFullName = props.history.location.state?.fullName;
   const [isLargerThan480] = useMediaQuery('(min-width: 480px)');
