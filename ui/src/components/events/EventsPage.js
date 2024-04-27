@@ -51,10 +51,12 @@ const EventsPage = (props) => {
     const filtered = [];
     let tag = tagList[selectedValue];
     eventsList.forEach((data) => {
-      for (let i = 0; i < data.eventType.length; i++) {
-        if (data.eventType[i].value === tag) {
-          filtered.push(data);
-          break;
+      if (data.eventType) {
+        for (let i = 0; i < data.eventType.length; i++) {
+          if (data.eventType[i].value === tag) {
+            filtered.push(data);
+            break;
+          }
         }
       }
     });
