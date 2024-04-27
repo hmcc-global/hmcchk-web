@@ -3,11 +3,11 @@ import { customAxios as axios } from '../helpers/customAxios';
 import { useState, useEffect, useCallback } from 'react';
 
 const SermonNotesContainer = (props) => {
-  const { user } = props;
+  const { user, history } = props;
   const [sermonNotes, setSermonNotes] = useState();
   const [userSermonNotes, setUserSermonNotes] = useState();
-  const sermonId = 'sn-24042024-1';
-
+  const sermonId = history.location.pathname.split('/').reverse()[0]; // Get the id at the back of the link
+  console.log(sermonId);
   const getSermonNotesParent = useCallback(async () => {
     try {
       const { data, status } = await axios.get('/api/sermon-notes-parent/get', {
@@ -44,6 +44,7 @@ const SermonNotesContainer = (props) => {
   console.log(userSermonNotes);
   useEffect(() => {
     getSermonNotesParent();
+    
     getUserSermonNotes();
   }, [getSermonNotesParent, getUserSermonNotes]);
   return (
