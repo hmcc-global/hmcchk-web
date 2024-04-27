@@ -231,7 +231,7 @@ const AnnouncementEditorModal = (props) => {
       const statusCode = await saveAnnouncementDataToDB(announcementToSave);
       if (statusCode === 200) {
         if (actionOnEditor === 'edit') {
-        toast({
+          toast({
             title: 'Announcement Saved',
             description: 'Your announcement has been saved.',
             status: 'success',
@@ -242,10 +242,11 @@ const AnnouncementEditorModal = (props) => {
           toast({
             title: 'Announcement Created',
             description: 'Your announcement has been created.',
-          status: 'success',
-          duration: 5000,
-          isClosable: true,
-        });
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+          });
+        }
       }
 
       setIsOpen(false);
