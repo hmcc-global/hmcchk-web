@@ -61,27 +61,6 @@ const SermonNotesEditorModal = (props) => {
     }
   };
 
-  // const setSermonNotesData = useCallback(
-  //   (data) => {
-  //     if (data) setValue('title', data.title);
-  //     setValue('subtitle', data.subtitle);
-  //     setValue('speaker', data.speaker);
-  //     setValue('sermonSeries', data.sermonSeries);
-  //     setValue('date', data.date);
-  //     setValue('imageLink', data.imageLink);
-  //     setValue('originalContent', data.originalContent);
-  //     setValue('sermonLink', data.sermonLink);
-  //     setValue('serviceType', data.serviceType);
-  //     setValue('passage', data.passage);
-  //     setValue('sermonId', data.sermonId);
-
-  //     setSermonNoteData({
-  //       ...data,
-  //     });
-  //   },
-  //   [data]
-  // );
-
   const onSubmit = async (data) => {
     setSermonNoteData({ ...data });
   };
@@ -92,6 +71,22 @@ const SermonNotesEditorModal = (props) => {
     const month = parts[1];
     const year = parts[0];
     return `${day}${month}${year}`;
+  };
+
+  const onReset = () => {
+    setSermonNoteData({
+      sermonId: '',
+      title: '',
+      subtitle: '',
+      speaker: '',
+      sermonSeries: '',
+      imageLink: '',
+      originalContent: {},
+      sermonLink: '',
+      serviceType: '',
+      date: '',
+      passage: '',
+    });
   };
 
   const fetchSermonNotes = useCallback(async () => {
@@ -187,6 +182,10 @@ const SermonNotesEditorModal = (props) => {
       setSermonNoteData({ ...editSermonNotesData });
     }
   }, [editSermonNotesData, setSermonNoteData]);
+
+  useEffect(() => {
+    if (actionOnEditor === 'create') onReset();
+  }, [actionOnEditor]);
   return (
     <>
       <Container

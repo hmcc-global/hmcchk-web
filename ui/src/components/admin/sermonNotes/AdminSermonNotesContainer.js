@@ -205,7 +205,10 @@ const AdminSermonNotesContainer = (props) => {
           borderWidth={3}
           size="lg"
           disabled={isPublishDisabled()}
-          onClick={() => setIsEditorOpen(true)}
+          onClick={() => {
+            setIsEditorOpen(true);
+            setActionOnEditor('create');
+          }}
         >
           Add New
         </Button>
