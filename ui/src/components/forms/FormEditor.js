@@ -181,6 +181,8 @@ const FormEditor = (props) => {
         requireLogin: formInformation.requireLogin,
         requireBaptism: formInformation.requireBaptism,
         requireMembership: formInformation.requireMembership,
+        alertType: formInformation.alertType,
+        customAlertRecipients: formInformation.customAlertRecipients,
         successEmailTemplate: formInformation.successEmailTemplate,
         customEmailSubject: formInformation.customEmailSubject,
         formAvailableFrom: formInformation.formAvailableFrom,

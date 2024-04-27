@@ -322,6 +322,9 @@ const paymentMethodList = [
 
 const eventIntervalList = ['None', 'Daily', 'Weekly', 'Monthly'];
 
+const formAlertTypes = ['None', 'Custom', 'LIFE Group', 'Lifestage', 'Campus'];
+
+
 export {
   accessTypeList,
   ministryTeamList,
@@ -331,4 +334,5 @@ export {
   countryList,
   paymentMethodList,
   eventIntervalList,
+  formAlertTypes,
 };
