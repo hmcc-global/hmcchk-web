@@ -12,6 +12,10 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    imagePrimaryColor: {
+      type: 'string',
+      defaultsTo: '#2C5282',
+    },
     isInWeb: {
       type: 'boolean',
       defaultsTo: false,
