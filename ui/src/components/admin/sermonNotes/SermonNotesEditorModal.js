@@ -414,6 +414,7 @@ const SermonNotesEditorModal = (props) => {
                     })
                   }
                   existingContent={sermonNoteData.originalContent}
+                  textPassage={sermonNoteData.passage}
                 />
                 <FormErrorMessage>Sermon Notes are required</FormErrorMessage>
               </FormControl>
