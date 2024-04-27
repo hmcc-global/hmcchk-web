@@ -5,7 +5,7 @@ import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import React, { createContext, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import MenuBar from './MenuBar.js';
 import Link from '@tiptap/extension-link';
 import { BibleVerseNode } from './BibleVerseExtension.js';
@@ -21,6 +21,7 @@ const TiptapEditor = ({
   existingContent,
   textPassage,
 }) => {
+  const [blurred, setBlurred] = useState(false);
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -40,13 +41,20 @@ const TiptapEditor = ({
   });
 
   useEffect(() => {
-    if (editor && existingContent) {
+    if (editor && existingContent && blurred) {
       editor.commands.setContent(existingContent);
     }
   }, [editor, existingContent]);
   return (
     <TextContext.Provider value={textPassage}>
-      <div className="editor" onFocus={onFocus}>
+      <div
+        className="editor"
+        onFocus={() => {
+          onFocus();
+          setBlurred(false);
+        }}
+        onBlur={() => setBlurred(true)}
+      >
         {editor && <MenuBar editor={editor} />}
         <EditorContent className="editor__content" editor={editor} />
       </div>
