@@ -22,7 +22,7 @@ module.exports = {
     },
     notFound: {
       description: 'No userId found',
-      responseType: 'notFound'
+      responseType: 'notFound',
     },
     invalid: {
       description: 'Something is wrong with your request. Please check it',
@@ -41,11 +41,35 @@ module.exports = {
         isDeleted: false,
       });
 
-      //find the forms that the user have signed up for
-      const sub = data.map( s => formData.find( i => i.id === s.formId ))
+      // find the forms that the user have signed up for (PORTED OVER FROM GET SIGNED UP FORM)
+      // will generate list of forms that user have signed up for and keep the inverse
+      const sub = data.map((s) =>
+        formData.find((i) => {
+          if (i.formAvailableFrom || i.formAvailableUntil) {
+            let submissionDate = new Date(s.createdAt);
+            let formAvailableFrom = new Date(i.formAvailableFrom);
+            let formAvailableUntil = new Date(i.formAvailableUntil);
 
-      //filter out ther forms that the user have signed up for
-      const final = formData.filter((i) => !sub.includes(i))
+            let signedUpAfterFormOpen =
+              formAvailableFrom instanceof Date && !isNaN(formAvailableFrom)
+                ? submissionDate >= formAvailableFrom
+                : true;
+            let signedUpBeforeFormEnd =
+              formAvailableUntil instanceof Date && !isNaN(formAvailableUntil)
+                ? submissionDate <= formAvailableUntil
+                : true;
+
+            return (
+              i.id === s.formId &&
+              signedUpAfterFormOpen &&
+              signedUpBeforeFormEnd
+            );
+          } else return i.id === s.formId;
+        })
+      );
+
+      // filter out the forms that the user have signed up for
+      const final = formData.filter((i) => !sub.includes(i));
 
       // If no form is found return error
       if (final === null) return exits.error('unauthorized access');
