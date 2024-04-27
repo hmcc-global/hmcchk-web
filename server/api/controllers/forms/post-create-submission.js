@@ -172,20 +172,11 @@ module.exports = {
           // get the current season leadership teams
           const today = new Date();
 
-          let fieldSelected;
+          let fieldSelected = await sails.helpers.camelize(
+            formRecord[0].alertType
+          );
 
-          switch (formRecord[0].alertType) {
-            case 'Campus':
-              fieldSelected = 'campus';
-              break;
-            case 'Lifestage':
-              fieldSelected = 'lifestage';
-              break;
-            case 'LIFE Group':
-              fieldSelected = 'lifeGroup';
-              break;
-          }
-
+          // match the current user's data with the alert type config
           const recipientsEntries =
             recipientsDict[submissionData[fieldSelected]];
 
@@ -201,7 +192,7 @@ module.exports = {
 
         // failsafe
         if (emailRecipients.length < 1) {
-          emailRecipients = ['web@hongkong.hmcc.net'];
+          emailRecipients = ['no-reply@hongkong.hmcc.net'];
         }
 
         // send notification email
@@ -212,9 +203,13 @@ module.exports = {
           template: 'form-notify-leader-success',
           templateData: {
             submissionTime: res.createdAt,
-            fullName: user.fullName || submissionData['fullName'],
-            email: user.email || submissionData['email'],
-            phoneNumber: user.phoneNumber || submissionData['phoneNumber'],
+            fullName:
+              user.fullName || submissionData['fullName'] || 'Not Applicable',
+            email: user.email || submissionData['email'] || 'Not Applicable',
+            phoneNumber:
+              user.phoneNumber ||
+              submissionData['phoneNumber'] ||
+              'Not Applicable',
           },
         });
       }
