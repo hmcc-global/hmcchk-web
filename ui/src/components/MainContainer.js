@@ -37,6 +37,7 @@ import SaturateContainer from './saturate/SaturateContainer';
 import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementContainer';
 import AdminLeadershipTeamContainer from './admin/leadershipTeam/AdminLeadershipTeamContainer';
+import AdminSermonNotesContainer from './admin/sermonNotes/AdminSermonNotesContainer';
 import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
 
 const MainContainer = () => {
@@ -260,6 +261,12 @@ const MainContainer = () => {
           path="/admin/followUp"
           permissions={['admin', 'stewardship']}
           component={BaptismFollowUpContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/sermonNotes"
+          permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
+          component={AdminSermonNotesContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>

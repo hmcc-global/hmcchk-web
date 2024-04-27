@@ -24,12 +24,14 @@ import {
   FiShield,
   FiAlertCircle,
 } from 'react-icons/fi';
+import { CgNotes } from "react-icons/cg";
 
 const LinkItems = [
   { name: 'Home', icon: FiHome, path: '/admin/home' },
   { name: 'Forms', icon: FiFileText, path: '/admin/forms' },
   { name: 'Follow Up', icon: FiAlertCircle, path: '/admin/followUp' },
   { name: 'Live Sermon', icon: FiMonitor, path: '/admin/liveSermon' },
+  { name: 'Sermon Notes', icon: CgNotes, path: '/admin/sermonNotes' },
   { name: 'Users', icon: FiUsers, path: '/admin/users' },
   { name: 'Pop Up', icon: FiBell, path: '/admin/popup' },
   { name: 'Testimony', icon: FiFeather, path: '/admin/testimony' },

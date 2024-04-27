@@ -5,13 +5,13 @@ import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import React from 'react';
+import React, { useEffect } from 'react';
 import MenuBar from './MenuBar.js';
 import Link from '@tiptap/extension-link';
 import { BibleVerseNode } from './BibleVerseExtension.js';
 import { UserNotesNode } from './UserNotesExtension.js';
 
-export default () => {
+const TiptapEditor = ({ onEditorChange, onFocus, existingContent }) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -22,12 +22,24 @@ export default () => {
       BibleVerseNode,
       UserNotesNode,
     ],
+    content: existingContent,
+    onUpdate: () => {
+      const json = editor.getJSON();
+      onEditorChange(json);
+    },
   });
 
+  useEffect(() => {
+    if (editor && existingContent) {
+      editor.commands.setContent(existingContent);
+    }
+  }, [editor, existingContent]);
+
   return (
-    <div className="editor">
+    <div className="editor" onFocus={onFocus}>
       {editor && <MenuBar editor={editor} />}
       <EditorContent className="editor__content" editor={editor} />
     </div>
   );
 };
+export default TiptapEditor;
