@@ -8,14 +8,13 @@ const getFieldNameFromAlertType = (alertType) => {
 module.exports = {
   friendlyName: 'Get Form Alert Email Recipients',
 
-  description:
-    'Get Form Alert Email Recipients',
+  description: 'Get Form Alert Email Recipients',
 
   inputs: {
     formId: {
       required: true,
       type: 'string',
-    }
+    },
   },
 
   exits: {},
@@ -26,12 +25,19 @@ module.exports = {
 
     try {
       const formData = await Form.findOne({
-        _id: formId
+        _id: formId,
       });
-      // eslint-disable-next-line eqeqeq
-      if (formData == null || formData.alertType === 'Custom' || formData.alertType === 'None') return exits.success({});
 
-      const latestLeadershipData = await sails.helpers.leadershipteam.getLatestLeadershipTeams();
+      if (
+        // eslint-disable-next-line eqeqeq
+        formData == null ||
+        formData.alertType === 'Custom' ||
+        formData.alertType === 'None'
+      )
+        return exits.success({});
+
+      const latestLeadershipData =
+        await sails.helpers.leadershipteam.getLatestLeadershipTeams();
       // eslint-disable-next-line eqeqeq
       if (latestLeadershipData == null) return exits.success({});
 
