@@ -20,7 +20,7 @@ module.exports = {
       if (data === null) return exits.error('Unexpected');
 
       const lifeGroups = data.map(x => x.lifeGroup);
-      lifeGroups.push('Not Applicable');
+      lifeGroups.push('Not in a LIFE Group');
       return exits.success([... new Set(lifeGroups)]);
     } catch (err) {
       sails.log(err);
