@@ -160,7 +160,7 @@ module.exports = {
 
         // get email addresses of the recipients
         if (formRecord[0].alertType === 'Custom') {
-          emailRecipients = formRecord[0].customAlertRecipients;
+          emailRecipients = formRecord[0].customAlertRecipients.split(';');
         } else if (
           ['LIFE Group', 'Lifestage', 'Campus'].includes(
             formRecord[0].alertType
@@ -200,7 +200,7 @@ module.exports = {
         }
 
         // failsafe
-        if (emailRecipients.length <= 0) {
+        if (emailRecipients.length < 1) {
           emailRecipients = ['web@hongkong.hmcc.net'];
         }
 
