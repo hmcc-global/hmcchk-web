@@ -166,12 +166,48 @@ module.exports = {
             formRecord[0].alertType
           )
         ) {
-          emailRecipients = sails.helpers.forms.getFormAlertRecipients(formId);
+          const recipientsDict =
+            await sails.helpers.forms.getFormAlertRecipients(formId);
+
+          // get the current season leadership teams
+          const today = new Date();
+
+          let fieldSelected;
+
+          switch (formRecord[0].alertType) {
+            case 'Campus':
+              fieldSelected = 'campus';
+              break;
+            case 'Lifestage':
+              fieldSelected = 'lifestage';
+              break;
+            case 'LIFE Group':
+              fieldSelected = 'lifeGroup';
+              break;
+          }
+
+          const recipientsEntries =
+            recipientsDict[submissionData[fieldSelected]];
+
+          for (const entry of recipientsEntries) {
+            if (
+              today >= new Date(entry.seasonFrom) &&
+              today <= new Date(entry.seasonTo)
+            ) {
+              emailRecipients = entry.leaderEmails;
+            }
+          }
+        }
+
+        // failsafe
+        if (emailRecipients.length <= 0) {
+          emailRecipients = ['web@hongkong.hmcc.net'];
         }
 
         // send notification email
         await sails.helpers.sendTemplateEmail.with({
-          to: emailRecipients,
+          to: emailRecipients[0],
+          cc: emailRecipients,
           subject: 'New Sign-up for ' + formRecord[0].formName,
           template: 'form-notify-leader-success',
           templateData: {
