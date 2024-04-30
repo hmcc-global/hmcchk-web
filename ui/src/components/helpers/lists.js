@@ -19,16 +19,17 @@ const lifestageList = [
 
 const ministryTeamList = [
   'Not Applicable',
-  'Audio/Visual',
+  'Audio',
   'Band',
+  'Broadcast',
   'Building Blocks',
-  'Creative Worship',
+  'Design, Publications, Influence',
   'Education Resources Team',
+  'FILM',
   'Hospitality',
   'Intercessory Prayer Team',
-  'Multimedia',
   'T3CH',
-  'Visual Production',
+  'Visual',
 ];
 
 const lifegroupList = [
