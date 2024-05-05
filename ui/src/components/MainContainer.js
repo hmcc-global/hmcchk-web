@@ -38,6 +38,8 @@ import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementContainer';
 import AdminLeadershipTeamContainer from './admin/leadershipTeam/AdminLeadershipTeamContainer';
 import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
+import AdminUrlContainer from './admin/url/AdminUrlContainer';
+import UrlRedirectContainer from './admin/url/UrlRedirectContainer';
 
 const MainContainer = () => {
   return (
@@ -260,6 +262,18 @@ const MainContainer = () => {
           path="/admin/followUp"
           permissions={['admin', 'stewardship']}
           component={BaptismFollowUpContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/short-url"
+          permissions={['tc', 't3ch', 'admin', 'stewardship']}
+          component={AdminUrlContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/redirect/:urlCode"
+          permissions={['public']}
+          component={UrlRedirectContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
