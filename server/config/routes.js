@@ -124,6 +124,11 @@ module.exports.routes = {
   'post /api/leadership-team/create': 'leadershipTeam/create-leadership-team',
   'put /api/leadership-team/update': 'leadershipTeam/update-leadership-team',
 
+  // URL APIs
+  'post /api/url/shorten': 'url/create-short-url',
+  'get /api/url/redirect/:urlCode': 'url/redirect-short-url',
+  'get /api/url/get': 'url/get-url',
+
   // UI
   'get /*': {
     skipAssets: true,

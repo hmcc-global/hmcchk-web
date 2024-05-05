@@ -104,6 +104,10 @@ module.exports.policies = {
   // LeadershipTeam
   'leadershipTeam/*': ['isLoggedIn', 'aboveAdmin'],
 
+  // URL
+  'url/*': ['isLoggedIn', 'aboveTc'],
+  'url/redirect-short-url': true,
+
   // Users
   'users/reset': ['isLoggedIn', 'aboveAdmin'],
 };
