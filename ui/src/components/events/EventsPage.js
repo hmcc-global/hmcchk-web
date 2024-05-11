@@ -227,6 +227,7 @@ const EventsPage = (props) => {
           fontWeight="600"
           textAlign="center"
           width={['75vw', '14vw']}
+          mr={[0, 6]}
           borderRadius={[15, 20]}
           rightIcon={<MdArrowDropDown />}
           variant="filled"
