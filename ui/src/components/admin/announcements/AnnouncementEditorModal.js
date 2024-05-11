@@ -170,13 +170,6 @@ const AnnouncementEditorModal = (props) => {
   const [pickerItems, setPickerItems] = useState(eventTypeList);
   const [selectedItems, setSelectedItems] = useState([]);
 
-  const handleCreateItem = (item) => {
-    setPickerItems((curr) => [...curr, item]);
-    setSelectedItems((curr) => [...curr, item]);
-    setEventType((curr) => [...curr, item]);
-    handleSelectedItemsChange(selectedItems);
-  };
-
   const handleSelectedItemsChange = (selectedItems) => {
     if (selectedItems) {
       setSelectedItems(selectedItems);
@@ -465,7 +458,7 @@ const AnnouncementEditorModal = (props) => {
                     <CUIAutoComplete
                       label="Event type"
                       placeholder="Classes, Resources, Others"
-                      onCreateItem={handleCreateItem}
+                      disableCreateItem={true}
                       items={pickerItems}
                       tagStyleProps={{
                         rounded: 'full',
