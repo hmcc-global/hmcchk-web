@@ -173,7 +173,9 @@ const AnnouncementEditorModal = (props) => {
   const handleSelectedItemsChange = (selectedItems) => {
     if (selectedItems) {
       setSelectedItems(selectedItems);
-      setEventType(selectedItems);
+      setEventType(
+        [...selectedItems].sort((a, b) => a.value.localeCompare(b.value))
+      );
     }
   };
   const onSubmit = async (data, e) => {
