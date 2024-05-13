@@ -39,7 +39,6 @@ const EventCard = (props) => {
   const tagArray = [];
 
   const colorManager = () => {
-    console.log(eventData);
     if (eventData.imagePrimaryColor) {
       return eventData.imagePrimaryColor;
     } else if (colors[0]) {
