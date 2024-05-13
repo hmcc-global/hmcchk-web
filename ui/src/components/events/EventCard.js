@@ -98,7 +98,7 @@ const EventCard = (props) => {
           ml={['0', '6']}
           width={['100%', '55%']}
         >
-          <Stack spacing={4} direction="row" mb={['2', '5']}>
+          <Stack spacing={[2, 4]} direction="row" mb={['2', '5']}>
             {eventData.eventType?.length > 0 &&
               eventData.eventType.map((tag) => {
                 tagArray.push({ value: tag.value, color: tag.color });
