@@ -31,7 +31,6 @@ import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 import { ColorExtractor } from 'react-color-extractor';
 
-// TODO: tag colors
 const EventCard = (props) => {
   const { eventData } = props;
   const [isOpen, setIsOpen] = useState(false);
@@ -103,10 +102,11 @@ const EventCard = (props) => {
           <Stack spacing={4} direction="row" mb={['2', '5']}>
             {eventData.eventType?.length > 0 &&
               eventData.eventType.map((tag) => {
-                tagArray.push(tag.value);
+                tagArray.push({ value: tag.value, color: tag.color });
               })}
 
-            {eventData.featured && tagArray.push('Featured')}
+            {eventData.featured &&
+              tagArray.push({ value: 'Featured', color: 'yellow' })}
 
             {tagArray.map((tag, i) => (
               <Tag
@@ -114,10 +114,12 @@ const EventCard = (props) => {
                 borderRadius={50}
                 size="sm"
                 fontSize={['10', '14']}
+                fontWeight={'bold'}
                 px={['2', '3']}
                 py={1}
+                colorScheme={tag.color}
               >
-                {tag}
+                {tag.value}
               </Tag>
             ))}
           </Stack>
@@ -282,9 +284,11 @@ const EventCard = (props) => {
                   size="sm"
                   fontSize={['10', '14']}
                   px={['2', '3']}
+                  fontWeight={'bold'}
                   py={1}
+                  colorScheme={tag.color}
                 >
-                  {tag}
+                  {tag.value}
                 </Tag>
               ))}
             </Stack>
