@@ -323,10 +323,12 @@ const paymentMethodList = [
 
 const eventIntervalList = ['None', 'Daily', 'Weekly', 'Monthly'];
 const eventTypeList = [
-  { value: 'Classes', label: 'Classes' },
-  { value: 'Resources', label: 'Resources' },
-  { value: 'Events', label: 'Events' },
-  { value: 'Others', label: 'Others' },
+  { value: 'Classes', label: 'Classes', color: 'green' },
+  { value: 'Resources', label: 'Resources', color: 'teal' },
+  { value: 'Events', label: 'Events', color: 'blue' },
+  { value: 'Campus Ministry', label: 'Campus Ministry', color: 'purple' },
+  { value: 'City Ministry', label: 'City Ministry', color: 'orange' },
+  { value: 'Others', label: 'Others', color: 'red' },
 ];
 
 const formAlertTypes = ['None', 'Custom', 'LIFE Group', 'Lifestage', 'Campus'];
