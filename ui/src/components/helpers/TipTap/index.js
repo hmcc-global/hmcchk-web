@@ -10,6 +10,7 @@ import MenuBar from './MenuBar.js';
 import Link from '@tiptap/extension-link';
 import { BibleVerseNode } from './BibleVerseExtension.js';
 import { UserNotesNode } from './UserNotesExtension.js';
+import { FillInBlankNode } from './FillInBlank.js';
 
 const TiptapEditor = ({ onEditorChange, onFocus, existingContent }) => {
   const editor = useEditor({
@@ -21,6 +22,7 @@ const TiptapEditor = ({ onEditorChange, onFocus, existingContent }) => {
       Link,
       BibleVerseNode,
       UserNotesNode,
+      FillInBlankNode,
     ],
     content: existingContent,
     onUpdate: () => {
