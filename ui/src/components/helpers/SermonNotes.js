@@ -1,15 +1,14 @@
-import { useContext } from 'react';
-import { useTextContext } from './TipTap';
-
 export const getBiblePassage = async (passage, currentText) => {
   try {
     const response = await fetch(`${process.env.PUBLIC_URL}/assets/ESV.json`);
     const bible = await response.json();
 
-    const trimmedPassage = currentText.trim();
+    const trimmedPassage = passage.includes('v.')
+      ? currentText.trim()
+      : passage.trim();
     let book = '';
     let chapterAndVerse = '';
-    if (/^[0-9]/.test(currentText)) {
+    if (/^[0-9]/.test(trimmedPassage)) {
       let temp = trimmedPassage.split(' ');
       book = temp[0] + ' ' + temp[1];
       chapterAndVerse = temp[2];
@@ -31,6 +30,7 @@ export const getBiblePassage = async (passage, currentText) => {
       }
       return `${textVerses} ${bible[book][chapter][textVerses]}`;
     }
+    console.log(book, chapter, verse)
 
     if (bible && bible[book] && bible[book][chapter]) {
       // TO-DO: handle if its different chapter
