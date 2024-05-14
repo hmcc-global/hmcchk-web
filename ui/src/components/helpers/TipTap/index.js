@@ -3,7 +3,7 @@ import './styles.scss';
 import Highlight from '@tiptap/extension-highlight';
 import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
-import { EditorContent, useEditor } from '@tiptap/react';
+import { EditorContent, isEmptyObject, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import MenuBar from './MenuBar.js';
@@ -21,7 +21,7 @@ const TiptapEditor = ({
   existingContent,
   textPassage,
 }) => {
-  const [blurred, setBlurred] = useState(false);
+  const [blurred, setBlurred] = useState(true);
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -40,11 +40,13 @@ const TiptapEditor = ({
     },
   });
 
+  const isContentEmpty = isEmptyObject(existingContent);
   useEffect(() => {
-    if (editor && existingContent && blurred) {
+    if (editor && !isContentEmpty && blurred) {
       editor.commands.setContent(existingContent);
     }
-  }, [editor, existingContent]);
+  }, [editor, isContentEmpty, blurred]);
+
   return (
     <TextContext.Provider value={textPassage}>
       <div
