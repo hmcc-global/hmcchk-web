@@ -236,15 +236,10 @@ module.exports = {
       // Otherwise, continue to actually send the email.
 
       const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
+        service: 'gmail',
         auth: {
-          type: 'OAuth2',
           user: process.env.EMAIL_FROM,
-          clientId: process.env.GOOGLE_CLIENT_ID,
-          clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-          refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+          pass: process.env.EMAIL_PWD
         },
       });
 
