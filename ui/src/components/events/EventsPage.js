@@ -228,6 +228,7 @@ const EventsPage = (props) => {
       <Grid
         mt="12"
         mb="12"
+        mr={[0, 6]}
         templateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(1, 1fr)' }}
         gap={[3, 6]}
       >
