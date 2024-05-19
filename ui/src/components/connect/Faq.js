@@ -30,7 +30,7 @@ const Faq = (props) => {
           LIFE Groups happen every Tuesday or Wednesday nights across the city
           and university campuses! If you would like to join us, please sign-up{' '}
           <Link
-            href="https://bit.ly/LGsignup2023"
+            href="https://bit.ly/summerLG2024"
             fontStyle="italic"
             color="blue"
             isExternal
