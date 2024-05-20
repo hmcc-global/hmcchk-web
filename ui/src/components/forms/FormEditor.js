@@ -181,6 +181,8 @@ const FormEditor = (props) => {
         requireLogin: formInformation.requireLogin,
         requireBaptism: formInformation.requireBaptism,
         requireMembership: formInformation.requireMembership,
+        alertType: formInformation.alertType,
+        customAlertRecipients: formInformation.customAlertRecipients,
         successEmailTemplate: formInformation.successEmailTemplate,
         customEmailSubject: formInformation.customEmailSubject,
         formAvailableFrom: formInformation.formAvailableFrom,
@@ -401,6 +403,7 @@ const FormEditor = (props) => {
           <ConditionalFormFieldEditor
             formFields={formFields}
             setFormFields={setFormFields}
+            staticData={props.staticData}
           />
         </Box>
       </Stack>
@@ -414,6 +417,7 @@ const FormEditor = (props) => {
           formImage={formInformation.formImage}
           formFields={formFields}
           user={user}
+          staticData={props.staticData}
         />
       </Box>
     </Flex>

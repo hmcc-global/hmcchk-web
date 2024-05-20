@@ -51,6 +51,7 @@ const UserFormContainer = (props) => {
           formFields={formData.formFields}
           user={user}
           history={history}
+          staticData={props.staticData}
         />
       )}
     </Container>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { customAxios as axios } from '../../helpers/customAxios';
 import {
   Container,
@@ -15,11 +15,16 @@ import {
   FormErrorMessage,
   useToast,
 } from '@chakra-ui/react';
+import { useForm } from 'react-hook-form';
 import PopUpGrid from './PopUpGrid';
 import PopupContainer from './PopupContainer';
+import FileUpload from '../../helpers/components/FileUpload';
 
 export default function AdminPopUpContainer(props) {
   const toast = useToast();
+
+  const { control } = useForm();
+
   const [popUps, setPopUps] = useState([]);
   const [isPreviewing, setIsPreviewing] = useState(false);
   const [selected, setSelected] = useState();
@@ -242,14 +247,18 @@ export default function AdminPopUpContainer(props) {
                 onChange={(e) => setDesc(e.target.value)}
               />
             </FormControl>
-            <FormControl>
-              <FormLabel>Image URL</FormLabel>
-              <Input
-                type="url"
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
-              />
-            </FormControl>
+
+            <FileUpload
+              name="image"
+              acceptedFileTypes="image/*"
+              setImageUrl={setImage}
+              inputValue={image}
+              control={control}
+              onChange={(e) => setImage(e.target.value)}
+            >
+              Image URL
+            </FileUpload>
+
             <FormControl>
               <FormLabel>Button Text</FormLabel>
               <Input

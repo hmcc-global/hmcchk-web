@@ -13,7 +13,7 @@ module.exports = {
     campus: { type: 'string' },
     lifestage: { type: 'string' },
     lifeGroup: { type: 'string' },
-    leaders: { type: 'json' },
+    leaderEmails: { type: 'json' },
     isDeleted: { type: 'boolean' },
   },
 
@@ -42,7 +42,7 @@ module.exports = {
       campus,
       lifestage,
       lifeGroup,
-      leaders,
+      leaderEmails,
       isDeleted,
     },
     exits
@@ -58,7 +58,7 @@ module.exports = {
           campus,
           lifestage,
           lifeGroup,
-          leaders,
+          leaderEmails,
           lastUpdatedBy: user,
           isDeleted,
         });

@@ -1,3 +1,6 @@
+import { useForm, Controller } from 'react-hook-form';
+import { useState, useEffect } from 'react';
+import { DateTime } from 'luxon';
 import {
   Stack,
   Container,
@@ -22,9 +25,7 @@ import {
 } from '@chakra-ui/react';
 import FormEditor from './FormEditor';
 import ExternalFormEditor from './ExternalFormEditor';
-import { useForm, Controller } from 'react-hook-form';
-import { useState, useEffect } from 'react';
-import { DateTime } from 'luxon';
+import { formAlertTypes } from '../helpers/lists';
 
 const FormEditorContainer = (props) => {
   const { user, isOpen, setIsOpen, editFormData, formManagerCallback } = props;
@@ -42,6 +43,8 @@ const FormEditorContainer = (props) => {
   const [requireLogin, setRequireLogin] = useState(true);
   const [requireMembership, setRequireMembership] = useState(false);
   const [requireBaptism, setRequireBaptism] = useState(false);
+  const [alertType, setAlertType] = useState(formAlertTypes[0]);
+  const [customAlertRecipients, setCustomAlertRecipients] = useState([]);
   const [successEmailTemplate, setSuccessEmailTemplate] = useState(null);
   const [customEmailSubject, setCustomEmailSubject] = useState(null);
   const [formAvailableFrom, setFormAvailableFrom] = useState(null);
@@ -70,6 +73,8 @@ const FormEditorContainer = (props) => {
     setValue('requireLogin', true);
     setValue('requireMembership', false);
     setValue('requireBaptism', false);
+    setValue('alertType', null);
+    setValue('customAlertRecipients', []);
     setValue('successEmailTemplate', 'form-default-success');
     setValue('customEmailSubject', '');
     setValue('formAvailableFrom', '');
@@ -85,6 +90,8 @@ const FormEditorContainer = (props) => {
     setRequireLogin(true);
     setRequireMembership(false);
     setRequireBaptism(false);
+    setAlertType(formAlertTypes[0]);
+    setCustomAlertRecipients([]);
     setSuccessEmailTemplate('form-default-success');
     setCustomEmailSubject('');
     setFormAvailableFrom('');
@@ -114,6 +121,8 @@ const FormEditorContainer = (props) => {
       setValue('requireLogin', data.requireLogin);
       setValue('requireMembership', data.requireMembership);
       setValue('requireBaptism', data.requireBaptism);
+      setValue('alertType', data.alertType);
+      setValue('customAlertRecipients', data.customAlertRecipients);
       setValue('successEmailTemplate', data.successEmailTemplate);
       setValue('customEmailSubject', data.customEmailSubject);
       setValue('formAvailableFrom', data.formAvailableFrom);
@@ -133,6 +142,8 @@ const FormEditorContainer = (props) => {
       setRequireLogin(data.requireLogin);
       setRequireMembership(data.requireMembership);
       setRequireBaptism(data.requireBaptism);
+      setAlertType(data.alertType);
+      setCustomAlertRecipients(data.customAlertRecipients);
       setSuccessEmailTemplate(data.successEmailTemplate);
       setCustomEmailSubject(data.customEmailSubject);
       setFormAvailableFrom(data.formAvailableFrom);
@@ -166,6 +177,7 @@ const FormEditorContainer = (props) => {
 
   // Watch this to conditionally render custom things
   const ftFlag = watch('formType');
+  const alertTypeFlag = watch('alertType');
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="full">
@@ -396,6 +408,29 @@ const FormEditorContainer = (props) => {
                     <Divider />
                   </Stack>
                 )}
+                <Stack spacing="2">
+                  <Heading as="h4" size="md">
+                    New Sign Up Notification
+                  </Heading>
+                  <FormControl>
+                    <FormLabel>Alert Type</FormLabel>
+                    <Select {...register('alertType', { required: true })}>
+                      {formAlertTypes.map((val, i) => (
+                        <option key={i}>{val}</option>
+                      ))}
+                    </Select>
+                  </FormControl>
+                  {alertTypeFlag === formAlertTypes[1] && (
+                    <FormControl>
+                      <FormLabel>Custom Email Recipients</FormLabel>
+                      <Input
+                        type="text"
+                        {...register('customAlertRecipients')}
+                        placeholder="first@person.com;second@person.com"
+                      />
+                    </FormControl>
+                  )}
+                </Stack>
                 {ftFlag === 'internal' && (
                   <Stack spacing="2">
                     <Heading as="h4" size="md">
@@ -461,6 +496,8 @@ const FormEditorContainer = (props) => {
                   requireLogin: requireLogin,
                   requireMembership: requireMembership,
                   requireBaptism: requireBaptism,
+                  alertType: alertType,
+                  customAlertRecipients: customAlertRecipients,
                   successEmailTemplate: successEmailTemplate,
                   customEmailSubject: customEmailSubject,
                   formAvailableFrom: formAvailableFrom,
@@ -473,6 +510,7 @@ const FormEditorContainer = (props) => {
                 existingFormFieldsData={editFormData}
                 resetFormEditorCallback={resetFormEditorCallback}
                 user={user}
+                staticData={props.staticData}
               />
             )}
 
