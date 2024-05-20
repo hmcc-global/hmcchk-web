@@ -13,7 +13,7 @@ import { UserNotesNode } from './UserNotesExtension.js';
 import { FillInBlankNode } from './FillInBlank.js';
 
 // Find a better way to pass the text passage
-const TextContext = createContext();
+export const TextContext = createContext();
 
 const TiptapEditor = ({
   onEditorChange,

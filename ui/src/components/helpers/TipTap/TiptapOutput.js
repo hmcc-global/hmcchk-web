@@ -9,8 +9,9 @@ import Link from '@tiptap/extension-link';
 import { BibleVerseNode } from './BibleVerseExtension.js';
 import { UserNotesNode } from './UserNotesExtension.js';
 import { EditorContent, useEditor } from '@tiptap/react';
+import { TextContext } from './index.js';
 
-const TiptapOutput = ({ input }) => {
+const TiptapOutput = ({ input, textPassage }) => {
   const editor = useEditor({
     editable: false,
     content: input,
@@ -25,7 +26,11 @@ const TiptapOutput = ({ input }) => {
     ],
   });
 
-  return <EditorContent editor={editor} />;
+  return (
+    <TextContext.Provider value={textPassage}>
+      <EditorContent editor={editor} />
+    </TextContext.Provider>
+  );
 };
 
 export default TiptapOutput;

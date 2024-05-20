@@ -28,9 +28,12 @@ export const getBiblePassage = async (passage, currentText) => {
         }
         return passageBlock;
       }
-      return `${textVerses} ${bible[book][chapter][textVerses]}`;
+      return `${textVerses} ${
+        bible[book][chapter][
+          /[a-z]/.test(textVerses) ? textVerses.slice(0, -1) : textVerses
+        ]
+      }`;
     }
-    console.log(book, chapter, verse)
 
     if (bible && bible[book] && bible[book][chapter]) {
       // TO-DO: handle if its different chapter
@@ -43,7 +46,9 @@ export const getBiblePassage = async (passage, currentText) => {
         }
         return passageBlock;
       }
-      return `${verse} ${bible[book][chapter][verse]}`;
+      return `${verse} ${
+        bible[book][chapter][/[a-z]/.test(verse) ? verse.slice(0, -1) : verse]
+      }`;
     } else {
       return 'Passage not found';
     }

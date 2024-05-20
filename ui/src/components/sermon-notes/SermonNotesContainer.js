@@ -53,6 +53,7 @@ const SermonNotesContainer = (props) => {
     getSermonNotesParent();
     getUserSermonNotes();
   }, [getSermonNotesParent, getUserSermonNotes]);
+  console.log(sermonNotes);
   return (
     <>
       {sermonNotes ? (
@@ -84,7 +85,10 @@ const SermonNotesContainer = (props) => {
             </Box>
           </Box>
           <Container>
-            <TiptapOutput input={sermonNotes.originalContent} />
+            <TiptapOutput
+              input={sermonNotes.originalContent}
+              textPassage={sermonNotes.passage}
+            />
           </Container>
         </>
       ) : null}
