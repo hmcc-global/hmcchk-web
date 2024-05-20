@@ -86,8 +86,11 @@ export default function AdminLeadershipTeamContainer(props) {
 
   const createHandler = async () => {
     try {
-      const leaderEmailsArr = leaderEmails && leaderEmails.length > 0 && leaderEmails.split(',');
-      const cleanLeaderEmailsArr = leaderEmailsArr.map((x) => x.trim());
+      const leaderEmailsArr =
+        (leaderEmails && leaderEmails.length > 0 && leaderEmails.split(',')) ||
+        '';
+      const cleanLeaderEmailsArr =
+        (leaderEmailsArr && leaderEmailsArr.map((x) => x.trim())) || '';
 
       const res = await axios.post('/api/leadership-team/create', {
         seasonFrom,
@@ -113,8 +116,11 @@ export default function AdminLeadershipTeamContainer(props) {
 
   const updateHandler = async () => {
     try {
-      const leaderEmailsArr = leaderEmails && leaderEmails.length > 0 && leaderEmails.split(',');
-      const cleanLeaderEmailssArr = leaderEmailsArr.map((x) => x.trim());
+      const leaderEmailsArr =
+        (leaderEmails && leaderEmails.length > 0 && leaderEmails.split(',')) ||
+        '';
+      const cleanLeaderEmailsArr =
+        (leaderEmailsArr && leaderEmailsArr.map((x) => x.trim())) || '';
 
       const res = await axios.put('/api/leadership-team/update', {
         id,
@@ -123,7 +129,7 @@ export default function AdminLeadershipTeamContainer(props) {
         campus,
         lifestage,
         lifeGroup,
-        leaderEmails: cleanLeaderEmailssArr,
+        leaderEmails: cleanLeaderEmailsArr,
         isDeleted: deleted,
       });
 
@@ -274,7 +280,7 @@ export default function AdminLeadershipTeamContainer(props) {
 
             <DrawerBody>
               <form id="lt-form" onSubmit={onSubmit}>
-                <FormControl>
+                <FormControl isRequired>
                   <FormLabel>Season From</FormLabel>
                   <Input
                     ref={firstField}
@@ -284,7 +290,7 @@ export default function AdminLeadershipTeamContainer(props) {
                   />
                 </FormControl>
 
-                <FormControl>
+                <FormControl isRequired>
                   <FormLabel>Season To</FormLabel>
                   <Input
                     type="date"
@@ -293,7 +299,7 @@ export default function AdminLeadershipTeamContainer(props) {
                   />
                 </FormControl>
 
-                <FormControl>
+                <FormControl isRequired>
                   <FormLabel>Campus</FormLabel>
                   <Input
                     type="text"
@@ -302,7 +308,7 @@ export default function AdminLeadershipTeamContainer(props) {
                   />
                 </FormControl>
 
-                <FormControl>
+                <FormControl isRequired>
                   <FormLabel>Lifestage</FormLabel>
                   <Input
                     type="text"
@@ -311,7 +317,7 @@ export default function AdminLeadershipTeamContainer(props) {
                   />
                 </FormControl>
 
-                <FormControl>
+                <FormControl isRequired>
                   <FormLabel>LIFE Group</FormLabel>
                   <Input
                     type="text"
