@@ -8,14 +8,6 @@ const accessTypeList = [
   'ministry',
   'tc',
 ];
-const lifestageList = [
-  'Building Blocks (3-11 years old)',
-  'Youth (12-17 years old)',
-  'Undergraduate',
-  'Postgraduate',
-  'Single Adult',
-  'Covenant (Married Couples, Single Parents, Widowed, etc)',
-];
 
 const ministryTeamList = [
   'Not Applicable',
@@ -30,24 +22,6 @@ const ministryTeamList = [
   'Intercessory Prayer Team',
   'T3CH',
   'Visual',
-];
-
-const lifegroupList = [
-  'Not in a LIFE Group',
-  '100ºChrist',
-  'CHRISTscendo',
-  'Covenant',
-  'DHL',
-  'ETA',
-  'G-FORCE',
-  'Genough',
-  'H2O',
-  'Latitude: SHEEP',
-  'RIZE',
-  'SPLASH',
-  'TRAM',
-  'UniqLO',
-  'WATT',
 ];
 
 const districtList = [
@@ -349,15 +323,17 @@ const paymentMethodList = [
 
 const eventIntervalList = ['None', 'Daily', 'Weekly', 'Monthly'];
 
+const formAlertTypes = ['None', 'Custom', 'LIFE Group', 'Lifestage', 'Campus'];
+
+
 export {
   accessTypeList,
-  lifestageList,
   ministryTeamList,
-  lifegroupList,
   districtList,
   regionList,
   campusList,
   countryList,
   paymentMethodList,
   eventIntervalList,
+  formAlertTypes,
 };
