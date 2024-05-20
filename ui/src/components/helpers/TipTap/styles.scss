@@ -9,7 +9,7 @@
     padding: 0 1rem;
   }
 
-  h1{
+  h1 {
     font-size: 2.5rem;
     line-height: 1.1;
   }
@@ -37,9 +37,9 @@
     background: #0d0d0d;
     border-radius: 0.5rem;
     color: #fff;
-    font-family: "JetBrainsMono", monospace;
+    font-family: 'JetBrainsMono', monospace;
     padding: 0.75rem 1rem;
-    
+
     code {
       background: none;
       color: inherit;
@@ -72,7 +72,7 @@
     margin: 2rem 0;
   }
 
-  ul[data-type="taskList"] {
+  ul[data-type='taskList'] {
     list-style: none;
     padding: 0;
 
@@ -93,8 +93,7 @@
   }
 }
 
-
-.chakra-modal__content-container{
+.chakra-modal__content-container {
   width: unset !important;
   height: unset !important;
 }
@@ -130,7 +129,7 @@
 }
 
 .user-notes {
-  border: 1px solid #0D0D0D;
+  border: 1px solid #0d0d0d;
   border-radius: 0.5rem;
   position: relative;
 
@@ -138,9 +137,24 @@
     padding: 0.5rem;
   }
   .content:empty::before {
-    content: "Your notes";
-    color: #0D0D0D;
+    content: 'Your notes';
+    color: #0d0d0d;
     opacity: 0.5;
     text-align: center;
   }
+}
+
+.fill-in-blank {
+  width: min-content !important;
+  white-space: nowrap;
+}
+
+.toggle-answer {
+  margin-left: 0.7rem;
+  margin-right: 0.7rem;
+  height: 1.2rem;
+  width: 0.5rem;
+  border-bottom: 0.2em solid green;
+  border-right: 0.2em solid green;
+  transform: rotate(45deg);
 }
