@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form';
 import { customAxios as axios } from '../../helpers/customAxios';
 import { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
-import { ColorExtractor } from 'react-color-extractor';
 import {
   ModalBody,
   ModalCloseButton,
@@ -54,7 +53,6 @@ const AnnouncementEditorModal = (props) => {
   const [isInPpt, setIsInPpt] = useState(false);
   const [description, setDescription] = useState(undefined);
   const [imageAdUrl, setImageAdUrl] = useState(undefined);
-  const [imagePrimaryColor, setImagePrimaryColor] = useState('#2C5282');
   const [location, setLocation] = useState(undefined);
   const [directionsUrl, setDirectionsUrl] = useState(undefined);
   const [displayStartDateTime, setDisplayStartDateTime] = useState(undefined);
@@ -78,7 +76,6 @@ const AnnouncementEditorModal = (props) => {
     setValue('isInPpt', false);
     setValue('description', undefined);
     setValue('imageAdUrl', undefined);
-    setValue('imagePrimaryColor', '#2C5282');
     setValue('location', undefined);
     setValue('directionsUrl', undefined);
     setValue('displayStartDateTime', undefined);
@@ -101,7 +98,6 @@ const AnnouncementEditorModal = (props) => {
     setIsInPpt(false);
     setDescription(undefined);
     setImageAdUrl(undefined);
-    setImagePrimaryColor('#2C5282');
     setLocation(undefined);
     setDirectionsUrl(undefined);
     setDisplayStartDateTime(undefined);
@@ -127,7 +123,6 @@ const AnnouncementEditorModal = (props) => {
       setValue('isInPpt', data.isInPpt);
       setValue('description', data.description);
       setValue('imageAdUrl', data.imageAdUrl);
-      setValue('imagePrimaryColor', data.imagePrimaryColor);
       setValue('location', data.location);
       setValue('directionsUrl', data.directionsUrl);
       setValue('displayStartDateTime', data.displayStartDateTime);
@@ -150,7 +145,6 @@ const AnnouncementEditorModal = (props) => {
       setIsInPpt(data.isInPpt);
       setDescription(data.description);
       setImageAdUrl(data.imageAdUrl);
-      setImagePrimaryColor(data.imagePrimaryColor);
       setLocation(data.location);
       setDirectionsUrl(data.directionsUrl);
       setDisplayStartDateTime(data.displayStartDateTime);
@@ -206,7 +200,6 @@ const AnnouncementEditorModal = (props) => {
         isInPpt,
         description,
         imageAdUrl,
-        imagePrimaryColor,
         location,
         directionsUrl,
         displayStartDateTime,
@@ -563,12 +556,6 @@ const AnnouncementEditorModal = (props) => {
                   >
                     {modalSubmitButton(actionOnEditor)}
                   </Button>
-                  <div>
-                    <ColorExtractor
-                      src={`https://cors-anywhere.herokuapp.com/${imageAdUrl}`}
-                      getColors={(colors) => setImagePrimaryColor(colors[0])}
-                    />
-                  </div>
                   ;
                 </Stack>
               </form>
