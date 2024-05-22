@@ -29,7 +29,6 @@ import { DateTime } from 'luxon';
 import { generateGoogleCalendarLink } from '../helpers/eventsHelpers';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
-import { ColorExtractor } from 'react-color-extractor';
 
 const EventCard = (props) => {
   const { eventData } = props;
@@ -73,14 +72,12 @@ const EventCard = (props) => {
         flexDirection={['column', 'row']}
       >
         <AspectRatio mb="5" width={['100%', '45%']} ratio={16 / 9}>
-          <ColorExtractor getColors={(colors) => setColors(colors)}>
-            <img
-              alt="event-img"
-              src={eventData.imageAdUrl}
-              objectFit="cover"
-              style={{ borderRadius: '10px' }}
-            />
-          </ColorExtractor>
+          <img
+            alt="event-img"
+            src={eventData.imageAdUrl}
+            objectFit="cover"
+            style={{ borderRadius: '10px' }}
+          />
         </AspectRatio>
         <Box
           overflow="hidden"
