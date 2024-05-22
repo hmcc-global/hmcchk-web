@@ -38,16 +38,6 @@ const EventCard = (props) => {
   const [colors, setColors] = useState([]);
   const tagArray = [];
 
-  const colorManager = () => {
-    if (eventData.imagePrimaryColor) {
-      return eventData.imagePrimaryColor;
-    } else if (colors[0]) {
-      return colors[0];
-    } else {
-      return '#2C5282';
-    }
-  };
-
   const onOpen = (e) => {
     if (!e.target.href) {
       setIsOpen(true);
@@ -225,7 +215,7 @@ const EventCard = (props) => {
                 as={Link}
                 size="md"
                 target="_blank"
-                bg={colorManager}
+                bg="#2C5282"
                 color="white"
                 _hover={{ opacity: '90%', textDecoration: 'none' }}
                 href={eventData.signUpUrl ? eventData.signUpUrl : null}
@@ -241,7 +231,7 @@ const EventCard = (props) => {
                 as={Link}
                 size="md"
                 target="_blank"
-                bg={colorManager}
+                bg="#2C5282"
                 color="white"
                 _hover={{ opacity: '90%', textDecoration: 'none' }}
                 href={generateGoogleCalendarLink(eventData)}
@@ -379,7 +369,7 @@ const EventCard = (props) => {
                 <Button
                   as={Link}
                   target="_blank"
-                  bg={colorManager}
+                  bg="#2C5282"
                   color="white"
                   _hover={{ opacity: '90%', textDecoration: 'none' }}
                   href={eventData.signUpUrl ? eventData.signUpUrl : null}
@@ -396,7 +386,7 @@ const EventCard = (props) => {
                 <Button
                   as={Link}
                   target="_blank"
-                  bg={colorManager}
+                  bg="#2C5282"
                   color="white"
                   _hover={{ opacity: '90%', textDecoration: 'none' }}
                   href={generateGoogleCalendarLink(eventData)}
