@@ -41,6 +41,9 @@ const SermonNotesContainer = (props) => {
       console.log(error);
     }
   }, [user, sermonId]);
+
+  // send update to the userSermonNotes 5 seconds after the user stops typing
+
   const sermonDate = useMemo(() => {
     return new Date(sermonNotes?.date).toLocaleDateString(undefined, {
       year: 'numeric',
@@ -88,6 +91,7 @@ const SermonNotesContainer = (props) => {
             <TiptapOutput
               input={sermonNotes.originalContent}
               textPassage={sermonNotes.passage}
+              setUserSermonNotes={setUserSermonNotes}
             />
           </Container>
         </>

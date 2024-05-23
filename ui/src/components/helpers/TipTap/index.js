@@ -11,6 +11,7 @@ import React, {
   useEffect,
   useMemo,
   useRef,
+  useState,
 } from 'react';
 import MenuBar from './MenuBar.js';
 import Link from '@tiptap/extension-link';
@@ -20,6 +21,8 @@ import { FillInBlankNode } from './FillInBlank.js';
 
 // Find a better way to pass the text passage
 export const TextContext = createContext();
+
+export const LastUpdatedPosContext = createContext();
 
 const TiptapEditor = ({
   onEditorChange,
@@ -50,6 +53,7 @@ const TiptapEditor = ({
     [existingContent]
   );
 
+  const [lastUpdatedPos, setLastUpdatedPos] = useState(null);
   const hasRun = useRef(false);
   useEffect(() => {
     if (!hasRun.current && editor && !isContentEmpty) {
@@ -59,17 +63,21 @@ const TiptapEditor = ({
   }, [existingContent, editor, isContentEmpty]);
 
   return (
-    <TextContext.Provider value={textPassage}>
-      <div
-        className="editor"
-        onFocus={() => {
-          onFocus();
-        }}
-      >
-        {editor && <MenuBar editor={editor} />}
-        <EditorContent className="editor__content" editor={editor} />
-      </div>
-    </TextContext.Provider>
+    <LastUpdatedPosContext.Provider
+      value={{ lastUpdatedPos, setLastUpdatedPos }}
+    >
+      <TextContext.Provider value={textPassage}>
+        <div
+          className="editor"
+          onFocus={() => {
+            onFocus();
+          }}
+        >
+          {editor && <MenuBar editor={editor} />}
+          <EditorContent className="editor__content" editor={editor} />
+        </div>
+      </TextContext.Provider>
+    </LastUpdatedPosContext.Provider>
   );
 };
 

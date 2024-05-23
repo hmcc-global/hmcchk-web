@@ -1,6 +1,6 @@
 import './styles.scss';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Highlight from '@tiptap/extension-highlight';
 import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
@@ -9,12 +9,13 @@ import Link from '@tiptap/extension-link';
 import { BibleVerseNode } from './BibleVerseExtension.js';
 import { UserNotesNode } from './UserNotesExtension.js';
 import { EditorContent, useEditor } from '@tiptap/react';
-import { TextContext } from './index.js';
+import { TextContext, LastUpdatedPosContext } from './index.js';
 import { FillInBlankNode } from './FillInBlank.js';
 
-const TiptapOutput = ({ input, textPassage }) => {
+const TiptapOutput = ({ input, textPassage, setUserSermonNotes }) => {
+  const [lastUpdatedPos, setLastUpdatedPos] = useState(null);
   const editor = useEditor({
-    editable: false,
+    editable: true,
     content: input,
     extensions: [
       StarterKit,
@@ -24,14 +25,28 @@ const TiptapOutput = ({ input, textPassage }) => {
       Link,
       BibleVerseNode,
       UserNotesNode,
-      FillInBlankNode
+      FillInBlankNode,
     ],
   });
-
+  useEffect(() => {
+    if (editor && lastUpdatedPos !== null) {
+      const setNotes = () => {
+        setUserSermonNotes(editor.getJSON());
+      };
+      editor.on('transaction', setNotes);
+      return () => {
+        editor.off('transaction', setNotes);
+      };
+    }
+  }, [editor, lastUpdatedPos, setUserSermonNotes]);
   return (
-    <TextContext.Provider value={textPassage}>
-      <EditorContent editor={editor} />
-    </TextContext.Provider>
+    <LastUpdatedPosContext.Provider
+      value={{ lastUpdatedPos, setLastUpdatedPos }}
+    >
+      <TextContext.Provider value={textPassage}>
+        <EditorContent editor={editor} />
+      </TextContext.Provider>
+    </LastUpdatedPosContext.Provider>
   );
 };
 
