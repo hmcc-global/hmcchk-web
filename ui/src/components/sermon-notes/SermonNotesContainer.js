@@ -84,7 +84,7 @@ const SermonNotesContainer = (props) => {
               </VStack>
             </Box>
           </Box>
-          <Container>
+          <Container my={[4,8]}>
             <TiptapOutput
               input={sermonNotes.originalContent}
               textPassage={sermonNotes.passage}

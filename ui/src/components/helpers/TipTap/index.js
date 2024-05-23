@@ -5,7 +5,13 @@ import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
 import { EditorContent, isEmptyObject, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import React, { createContext, useContext, useEffect, useRef } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import MenuBar from './MenuBar.js';
 import Link from '@tiptap/extension-link';
 import { BibleVerseNode } from './BibleVerseExtension.js';
@@ -39,7 +45,11 @@ const TiptapEditor = ({
     },
   });
 
-  const isContentEmpty = isEmptyObject(existingContent);
+  const isContentEmpty = useMemo(
+    () => isEmptyObject(existingContent) || existingContent === '',
+    [existingContent]
+  );
+
   const hasRun = useRef(false);
   useEffect(() => {
     if (!hasRun.current && editor && !isContentEmpty) {

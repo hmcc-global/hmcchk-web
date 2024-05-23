@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { customAxios as axios } from '../../helpers/customAxios';
 import {
   Container,
@@ -22,14 +22,30 @@ import { BiDonateHeart } from 'react-icons/bi';
 import { IoPeopleOutline } from 'react-icons/io5';
 import { IoBookOutline } from 'react-icons/io5';
 import { FaRegCalendarAlt } from 'react-icons/fa';
+import { useHistory } from 'react-router-dom';
+import { get } from 'react-hook-form';
 
+// TO-DO: need to refactor in the future so the components rely on the pathname not the current state of the page
+// current solution with useEffect is rly whack, no time to refactor it this cycle :)
 const AdminSermonNotesContainer = (props) => {
   const { user } = props;
   const toast = useToast();
+  const history = useHistory();
+  const path = history.location.pathname.split('/');
+
+  const isEditorPath = useMemo(() => {
+    return path.includes('edit');
+  }, [path]);
+
+  const isPastSermonsExist = useMemo(() => {
+    return path.length > 4;
+  }, [path]);
 
   // This useState is to open the Editor Modal
-  const [isEditorOpen, setIsEditorOpen] = useState(true);
-  const [actionOnEditor, setActionOnEditor] = useState('create');
+  const [isEditorOpen, setIsEditorOpen] = useState(isEditorPath ? true : false);
+  const [actionOnEditor, setActionOnEditor] = useState(
+    isPastSermonsExist ? 'edit' : 'create'
+  );
 
   const [isLoading, setIsLoading] = useState(false);
   const [sermonNotesList, setSermonNotesList] = useState([]);
@@ -50,6 +66,15 @@ const AdminSermonNotesContainer = (props) => {
       });
     }
   }, [toast, setSermonNotesList]); // add empty dependency array to useCallback
+
+  const getExistingSermonNotes = useCallback(async (id) => {
+    const { data } = await axios.get('/api/sermon-notes-parent/get', {
+      params: {
+        sermonId: id,
+      },
+    });
+    setEditSermonNotesData(data[0]);
+  }, []);
 
   const isPublishDisabled = () => {
     const aboveT3chPrivs = ['t3ch', 'admin', 'stewardship'];
@@ -171,8 +196,7 @@ const AdminSermonNotesContainer = (props) => {
           sermonId: e.target.value,
         },
       });
-      setIsEditorOpen(true);
-      setActionOnEditor('edit');
+      history.push(`/admin/sermonNotes/edit/${e.target.value}`);
       setEditSermonNotesData(data[0]);
       setIsLoading(false);
     } catch (err) {
@@ -187,6 +211,16 @@ const AdminSermonNotesContainer = (props) => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    isEditorPath ? setIsEditorOpen(true) : setIsEditorOpen(false);
+    if (isPastSermonsExist) {
+      setActionOnEditor('edit');
+      getExistingSermonNotes(path[path.length - 1]);
+    } else {
+      setActionOnEditor('create');
+    }
+  }, [isEditorPath, isPastSermonsExist]);
 
   useEffect(() => {
     fetchSermonNotes();
@@ -206,7 +240,7 @@ const AdminSermonNotesContainer = (props) => {
           size="lg"
           disabled={isPublishDisabled()}
           onClick={() => {
-            setIsEditorOpen(true);
+            history.push('/admin/sermonNotes/edit');
             setActionOnEditor('create');
           }}
         >
@@ -218,7 +252,7 @@ const AdminSermonNotesContainer = (props) => {
           borderColor="#3182CE"
           borderWidth={3}
           size="lg"
-          onClick={() => setIsEditorOpen(false)}
+          onClick={() => history.push('/admin/sermonNotes')}
         >
           Past Sermons
         </Button>

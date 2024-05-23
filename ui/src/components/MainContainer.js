@@ -261,6 +261,18 @@ const MainContainer = () => {
           permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
           component={AdminSermonNotesContainer}
         />
+        <PrivateRoute
+          exact
+          path="/admin/sermonNotes/edit"
+          permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
+          component={AdminSermonNotesContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/sermonNotes/edit/:id"
+          permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
+          component={AdminSermonNotesContainer}
+        />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
       <FooterContainer />
