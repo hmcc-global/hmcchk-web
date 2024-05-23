@@ -10,6 +10,7 @@ import { BibleVerseNode } from './BibleVerseExtension.js';
 import { UserNotesNode } from './UserNotesExtension.js';
 import { EditorContent, useEditor } from '@tiptap/react';
 import { TextContext } from './index.js';
+import { FillInBlankNode } from './FillInBlank.js';
 
 const TiptapOutput = ({ input, textPassage }) => {
   const editor = useEditor({
@@ -23,6 +24,7 @@ const TiptapOutput = ({ input, textPassage }) => {
       Link,
       BibleVerseNode,
       UserNotesNode,
+      FillInBlankNode
     ],
   });
 

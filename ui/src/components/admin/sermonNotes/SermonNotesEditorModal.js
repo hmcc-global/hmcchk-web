@@ -16,6 +16,7 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { customAxios as axios } from '../../helpers/customAxios';
 import TiptapEditor from '../../helpers/TipTap';
+import { useHistory } from 'react-router-dom';
 
 const SermonNotesEditorModal = (props) => {
   const { editSermonNotesData, actionOnEditor, setIsEditorOpen } = props;
@@ -26,6 +27,7 @@ const SermonNotesEditorModal = (props) => {
     formState: { touchedFields },
   } = useForm();
   const toast = useToast();
+  const history = useHistory();
 
   // Create a object
   const sermonIdMap = {
@@ -121,7 +123,6 @@ const SermonNotesEditorModal = (props) => {
             isClosable: true,
           });
         }
-        setIsEditorOpen(false);
       } else {
         // Create Unique Sermon ID
         const formattedData = formatDate(sermonNoteData.date);
@@ -145,8 +146,9 @@ const SermonNotesEditorModal = (props) => {
             isClosable: true,
           });
         }
-        setIsEditorOpen(false);
       }
+      history.push('/admin/sermonNotes');
+      window.location.reload();
     } catch (err) {
       console.log('Error');
       toast({
@@ -432,6 +434,9 @@ const SermonNotesEditorModal = (props) => {
                   bgColor="#6C7BFF"
                   color="#FFFFFF"
                   _hover={{ bgColor: '#4F5ABE' }}
+                  onClick={() =>
+                    history.push(`/sermons/notes/${sermonNoteData.sermonId}`)
+                  }
                 >
                   Preview
                 </Button>

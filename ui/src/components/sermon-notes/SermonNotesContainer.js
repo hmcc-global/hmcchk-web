@@ -22,7 +22,7 @@ const SermonNotesContainer = (props) => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [sermonId]);
 
   // TO-DO: check if the user logged in or not
   const getUserSermonNotes = useCallback(async () => {
@@ -40,7 +40,7 @@ const SermonNotesContainer = (props) => {
     } catch (error) {
       console.log(error);
     }
-  }, [user]);
+  }, [user, sermonId]);
   const sermonDate = useMemo(() => {
     return new Date(sermonNotes?.date).toLocaleDateString(undefined, {
       year: 'numeric',
@@ -53,7 +53,7 @@ const SermonNotesContainer = (props) => {
     getSermonNotesParent();
     getUserSermonNotes();
   }, [getSermonNotesParent, getUserSermonNotes]);
-  console.log(sermonNotes);
+  console.log(userSermonNotes);
   return (
     <>
       {sermonNotes ? (
@@ -84,7 +84,7 @@ const SermonNotesContainer = (props) => {
               </VStack>
             </Box>
           </Box>
-          <Container my={[4,8]}>
+          <Container my={[4, 8]}>
             <TiptapOutput
               input={sermonNotes.originalContent}
               textPassage={sermonNotes.passage}
