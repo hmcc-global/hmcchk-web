@@ -12,6 +12,7 @@ module.exports = {
       type: 'string',
       required: true,
     },
+
     isInWeb: {
       type: 'boolean',
       defaultsTo: false,
@@ -52,6 +53,7 @@ module.exports = {
     },
     eventType: {
       type: 'json',
+      defaultsTo: [],
     },
     featured: {
       type: 'boolean',
