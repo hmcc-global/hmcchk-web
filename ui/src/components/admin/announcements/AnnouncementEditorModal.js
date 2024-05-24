@@ -177,7 +177,6 @@ const AnnouncementEditorModal = (props) => {
   };
 
   const saveAnnouncementDataToDB = async (data) => {
-    console.log(data);
     if (actionOnEditor === 'edit') {
       const { status } = await axios.put('/api/announcement/update', {
         id: editAnnouncementData.id,
@@ -457,7 +456,6 @@ const AnnouncementEditorModal = (props) => {
                       items={pickerItems}
                       tagStyleProps={{
                         rounded: 'full',
-
                         fontSize: '1rem',
                       }}
                       selectedItems={selectedItems}
