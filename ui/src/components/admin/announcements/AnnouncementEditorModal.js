@@ -21,13 +21,18 @@ import {
   Checkbox,
   Button,
   Grid,
+  Divider,
   GridItem,
   Textarea,
+  SimpleGrid,
   useToast,
+  Link,
+  Switch,
   Select,
 } from '@chakra-ui/react';
-import { eventIntervalList } from '../../helpers/lists';
+import { eventIntervalList, eventTypeList } from '../../helpers/lists';
 import FileUpload from '../../helpers/components/FileUpload';
+import { CUIAutoComplete } from 'chakra-ui-autocomplete';
 
 const AnnouncementEditorModal = (props) => {
   const {
@@ -56,7 +61,9 @@ const AnnouncementEditorModal = (props) => {
   const [eventStartTime, setEventStartTime] = useState(undefined);
   const [eventEndDate, setEventEndDate] = useState(undefined);
   const [eventEndTime, setEventEndTime] = useState(undefined);
-  const [eventInterval, setEventInterval] = useState('None'); // ['Daily', 'Weekly', 'Monthly', 'None'
+  const [eventInterval, setEventInterval] = useState('None');
+  const [eventType, setEventType] = useState(undefined);
+  const [featured, setFeatured] = useState(false);
   const [datePeriodInvalid, setDatePeriodInvalid] = useState(false);
   const [formId, setFormId] = useState(undefined);
   const [signUpUrl, setSignUpUrl] = useState(undefined);
@@ -78,9 +85,13 @@ const AnnouncementEditorModal = (props) => {
     setValue('eventEndDate', undefined);
     setValue('eventEndTime', undefined);
     setValue('eventInterval', 'None');
+    setValue('eventType', undefined);
+    setValue('featured', false);
     setValue('formId', undefined);
     setValue('formSignupLink', undefined);
     setValue('additionalNotes', undefined);
+
+    setSelectedItems(undefined);
 
     setTitle(undefined);
     setIsInWeb(false);
@@ -96,6 +107,8 @@ const AnnouncementEditorModal = (props) => {
     setEventEndDate(undefined);
     setEventEndTime(undefined);
     setEventInterval('None');
+    setEventType(undefined);
+    setFeatured(false);
     setFormId(undefined);
     setSignUpUrl(undefined);
     setAdditionalNotes(undefined);
@@ -119,9 +132,13 @@ const AnnouncementEditorModal = (props) => {
       setValue('eventEndDate', data.eventEndDate);
       setValue('eventEndTime', data.eventEndTime);
       setValue('eventInterval', data.eventInterval);
+      setValue('eventType', data.eventType);
+      setValue('featured', data.featured);
       setValue('formId', data.formId);
       setValue('signUpUrl', data.signUpUrl);
       setValue('additionalNotes', data.additionalNotes);
+
+      setSelectedItems(data.eventType);
 
       setTitle(data.title);
       setIsInWeb(data.isInWeb);
@@ -137,12 +154,24 @@ const AnnouncementEditorModal = (props) => {
       setEventEndDate(data.eventEndDate);
       setEventEndTime(data.eventEndTime);
       setEventInterval(data.eventInterval);
+      setEventType(data.eventType);
+      setFeatured(data.featured);
       setFormId(data.formId);
       setSignUpUrl(data.signUpUrl);
       setAdditionalNotes(data.additionalNotes);
     }
   };
+  const [pickerItems, setPickerItems] = useState(eventTypeList);
+  const [selectedItems, setSelectedItems] = useState([]);
 
+  const handleSelectedItemsChange = (selectedItems) => {
+    if (selectedItems) {
+      setSelectedItems(selectedItems);
+      setEventType(
+        [...selectedItems].sort((a, b) => a.value.localeCompare(b.value))
+      );
+    }
+  };
   const onSubmit = async (data, e) => {
     setAnnouncementEditorData(data);
   };
@@ -179,6 +208,8 @@ const AnnouncementEditorModal = (props) => {
         eventEndDate,
         eventEndTime,
         eventInterval,
+        eventType,
+        featured,
         formId,
         signUpUrl,
         additionalNotes,
@@ -283,7 +314,6 @@ const AnnouncementEditorModal = (props) => {
                       onChange={(e) => setTitle(e.target.value)}
                     />
                   </FormControl>
-
                   <FormControl>
                     <FormLabel>Where should this announcement go?</FormLabel>
                     <FormHelperText>
@@ -311,7 +341,6 @@ const AnnouncementEditorModal = (props) => {
                       </Checkbox>
                     </Stack>
                   </FormControl>
-
                   <Grid
                     templateColumns={['repeat(1,1fr)', 'repeat(2, 1fr)']}
                     gap={6}
@@ -402,7 +431,6 @@ const AnnouncementEditorModal = (props) => {
                       </FormControl>
                     </GridItem>
                   </Grid>
-
                   <FormControl>
                     <FormLabel>Event interval</FormLabel>
                     <FormHelperText>
@@ -419,7 +447,40 @@ const AnnouncementEditorModal = (props) => {
                       })}
                     </Select>
                   </FormControl>
+                  <Divider orientation="horizontal" />
+                  <FormControl>
+                    <CUIAutoComplete
+                      label="Event type"
+                      placeholder="Classes, Resources, Others"
+                      disableCreateItem={true}
+                      items={pickerItems}
+                      tagStyleProps={{
+                        rounded: 'full',
+                        fontSize: '1rem',
+                      }}
+                      selectedItems={selectedItems}
+                      {...register('eventType')}
+                      onSelectedItemsChange={(changes) =>
+                        handleSelectedItemsChange(changes.selectedItems)
+                      }
+                    />
+                  </FormControl>
+                  <FormControl display="flex" alignItems="center">
+                    <FormLabel mb="0">Featured </FormLabel>
 
+                    <Switch
+                      px="1em"
+                      id="featured"
+                      {...register('featured')}
+                      onChange={(e) => setFeatured(e.target.checked)}
+                      isChecked={featured}
+                    />
+                    <FormHelperText>
+                      Determines if it will show up as featured in our events
+                      page
+                    </FormHelperText>
+                  </FormControl>
+                  <Divider orientation="horizontal" />
                   <FormControl>
                     <FormLabel>Location</FormLabel>
                     <FormHelperText>
@@ -432,7 +493,6 @@ const AnnouncementEditorModal = (props) => {
                       onChange={(e) => setLocation(e.target.value)}
                     />
                   </FormControl>
-
                   <FileUpload
                     id="imageAdUrl"
                     name="imageAdUrl"
@@ -444,7 +504,6 @@ const AnnouncementEditorModal = (props) => {
                   >
                     Upload Announcements Image
                   </FileUpload>
-
                   <FormControl>
                     <FormLabel>Announcements Sign-up link</FormLabel>
                     <Input
@@ -453,13 +512,19 @@ const AnnouncementEditorModal = (props) => {
                       onChange={(e) => setSignUpUrl(e.target.value)}
                     />
                   </FormControl>
-
                   <FormControl isInvalid={errors['description']} isRequired>
                     <FormLabel>Description</FormLabel>
                     <FormHelperText>
-                      This field supports markdown. Just write it in somewhere
-                      else (with formatting) and then paste it here and see the
-                      magic happen.
+                      This field supports formatting, you can add it yourself.
+                      on how to use {''}
+                      <Link
+                        color="blue.500"
+                        href="https://www.markdownguide.org/cheat-sheet/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Click here
+                      </Link>{' '}
                     </FormHelperText>
                     <Textarea
                       id="description"
@@ -469,7 +534,6 @@ const AnnouncementEditorModal = (props) => {
                       onChange={(e) => setDescription(e.target.value)}
                     />
                   </FormControl>
-
                   <FormControl>
                     <FormLabel>Additional Notes</FormLabel>
                     <FormHelperText>
@@ -483,7 +547,6 @@ const AnnouncementEditorModal = (props) => {
                       onChange={(e) => setAdditionalNotes(e.target.value)}
                     />
                   </FormControl>
-
                   <Button
                     colorScheme="blue"
                     type="submit"
@@ -491,6 +554,7 @@ const AnnouncementEditorModal = (props) => {
                   >
                     {modalSubmitButton(actionOnEditor)}
                   </Button>
+                  ;
                 </Stack>
               </form>
             </Box>

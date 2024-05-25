@@ -12,6 +12,7 @@ module.exports = {
       type: 'string',
       required: true,
     },
+
     isInWeb: {
       type: 'boolean',
       defaultsTo: false,
@@ -49,6 +50,14 @@ module.exports = {
       isIn: ['Daily', 'Weekly', 'Monthly', 'None'],
       defaultsTo: 'None',
       description: 'Recurring event interval if any.',
+    },
+    eventType: {
+      type: 'json',
+      defaultsTo: [],
+    },
+    featured: {
+      type: 'boolean',
+      defaultsTo: false,
     },
     location: {
       type: 'string',
