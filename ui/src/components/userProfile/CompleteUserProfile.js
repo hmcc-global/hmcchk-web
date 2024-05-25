@@ -29,11 +29,8 @@ import { CheckCircleIcon } from '@chakra-ui/icons';
 import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import {
-  campusList,
   countryList,
   districtList,
-  lifegroupList,
-  lifestageList,
   ministryTeamList,
   regionList,
 } from '../helpers/lists';
@@ -47,10 +44,11 @@ import {
 import { customAxios as axios } from '../helpers/customAxios';
 
 const CompleteUserProfileContainer = (props) => {
+  const { user, history, staticData } = props;
+  const { lifegroupList, lifestageList, campusList } = staticData;
+
   const formLabelColor = '#2C5282';
   const formValidation = { required: true };
-  const { user } = props;
-  const { history } = props;
   const [tabIndex, setTabIndex] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
 

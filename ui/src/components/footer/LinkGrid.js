@@ -2,10 +2,10 @@ import { Box, SimpleGrid, Stack, Link, Text } from '@chakra-ui/react';
 import * as React from 'react';
 import LinkList from './footerLinks.json';
 
-const LinkItem = (linkText, href, target = '_self', fontWeight = '400') => {
+const LinkItem = (i, linkText, href, target = '_self', fontWeight = '400') => {
   return (
-    <Link href={href}>
-      <Text fontWeight={fontWeight} target={target}>
+    <Link href={href} key={i}>
+      <Text fontWeight={fontWeight} target={target} key={i}>
         {linkText}
       </Text>
     </Link>
@@ -16,8 +16,8 @@ const LinkCollection = (linkListItem) => {
   // Ternary operator, if there's children make children
   // else use empty array so nothing appears when the array is deconstructed
   let children = linkListItem['children']
-    ? linkListItem['children'].map((item) => {
-        return LinkItem(item['linkText'], item['href'], item['target']);
+    ? linkListItem['children'].map((item, i) => {
+        return LinkItem(i, item['linkText'], item['href'], item['target']);
       })
     : [];
 
@@ -25,6 +25,8 @@ const LinkCollection = (linkListItem) => {
     <Link
       href={linkListItem['href']}
       target={linkListItem['target'] ? linkListItem['target'] : '_self'}
+      key={linkListItem['linkText']}
+      id={linkListItem['id']}
     >
       <Text fontWeight="bold">{linkListItem['linkText']}</Text>
     </Link>,

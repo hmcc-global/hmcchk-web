@@ -106,13 +106,14 @@ const SignupContainer = (props) => {
               width="full"
               fontSize={['0.675rem', '0.75rem', '1rem', '1rem']}
             >
-              <Link href="/signup/form" width="full">
+              <Link href="/signup/form" width="full" id="signup_container-signup">
                 <Button
                   style={signupBoxStyle}
                   _hover={{ opacity: '0.75' }}
                   background="#0058D2"
                   h={['40px', '40px', '55px', '55px']}
                   marginTop="0"
+                  id="signup_container-signup"
                 >
                   SIGN UP WITH PERSONAL EMAIL
                 </Button>
@@ -149,7 +150,7 @@ const SignupContainer = (props) => {
               fontSize={['0.675rem', '0.75rem', '1rem', '1rem']}
             >
               <Text marginRight="5px">Already have an account?</Text>
-              <Link href="/login">
+              <Link href="/login" id="signup_container-login">
                 <Text
                   textAlign="right"
                   position="relative"

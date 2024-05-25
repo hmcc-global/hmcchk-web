@@ -13,6 +13,7 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
   const user = useSelector((state) => state.user);
   const [userObj, setUserObj] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [staticData, setStaticData] = useState();
 
   const checkIfTokenExists = async (toVerify) => {
     try {
@@ -32,6 +33,22 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
       return {};
     }
   };
+
+  useEffect(() => {
+    async function getStatic() {
+      const { data: lifegroupList } = await axios.get('/api/misc/get-latest-lifegroup-list');
+      const { data: campusList } = await axios.get('/api/misc/get-latest-campus-list');
+      const { data: lifestageList } = await axios.get('/api/misc/get-latest-lifestage-list');
+      const data = {
+        lifegroupList,
+        campusList,
+        lifestageList
+      };
+      setStaticData(data);
+    }
+
+    getStatic();
+  }, [])
 
   useEffect(() => {
     // useEffects are meant to be synchronous, this helps to remove the warning
@@ -58,10 +75,14 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
 
   return (
     !isLoading &&
-    userObj != null && (
+    userObj != null && 
+    staticData != null &&
+    (
       <Route
         {...rest}
         render={(props) => {
+          props.staticData = staticData;
+
           if (noUser) {
             if (noTokenExists) return <Component {...props} />;
             else {

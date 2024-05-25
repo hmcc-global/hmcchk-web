@@ -3,7 +3,6 @@ import UserProfileDesktop from './UserProfileDesktop';
 import UserProfileMobile from './UserProfileMobile';
 
 const UserProfileContainer = (props) => {
-  const { user } = props;
   return (
     <Box>
       {/* Breaks footer... commenting out until fixable */}
@@ -22,7 +21,7 @@ const UserProfileContainer = (props) => {
         position="relative"
         display={{ base: 'none', md: 'block' }}
       >
-        <UserProfileDesktop user={user} />
+        <UserProfileDesktop {...props} />
       </Container>
 
       <Container
@@ -31,7 +30,7 @@ const UserProfileContainer = (props) => {
         position="relative"
         display={{ base: 'block', md: 'none' }}
       >
-        <UserProfileMobile user={user} />
+        <UserProfileMobile {...props} />
       </Container>
     </Box>
   );

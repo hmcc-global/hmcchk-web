@@ -30,7 +30,7 @@ const Faq = (props) => {
           LIFE Groups happen every Tuesday or Wednesday nights across the city
           and university campuses! If you would like to join us, please sign-up{' '}
           <Link
-            href="https://bit.ly/LGsignup2023"
+            href="https://bit.ly/summerLG2024"
             fontStyle="italic"
             color="blue"
             isExternal
@@ -135,7 +135,7 @@ const Faq = (props) => {
         </h2>
         <AccordionPanel pb={4}>
           Head over to{' '}
-          <Link href="/about-us" fontStyle="italic" color="blue">
+          <Link href="/about-us" fontStyle="italic" color="blue" id="faq-about">
             ABOUT US
           </Link>{' '}
           to learn more about our church!

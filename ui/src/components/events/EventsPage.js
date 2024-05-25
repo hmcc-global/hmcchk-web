@@ -97,7 +97,7 @@ const EventsPage = (props) => {
             ? 1
             : b.renderDate === ''
             ? -1
-            : a.renderDate > b.renderDate
+            : a.renderDate < b.renderDate
             ? -1
             : 1
         );

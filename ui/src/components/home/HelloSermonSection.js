@@ -21,6 +21,7 @@ const HelpCardInfo = [
     titleStyle: { color: 'green', fontFamily: 'Inter' },
     textStyle: { color: 'black' },
     path: '/connect',
+    id: 'homepage-connect',
   },
   {
     title: 'Visit Us',
@@ -29,6 +30,7 @@ const HelpCardInfo = [
     titleStyle: { color: 'white' },
     textStyle: { color: 'white' },
     path: '/visit-us',
+    id: 'homepage-visit',
   },
   {
     title: 'About HMCC',
@@ -37,6 +39,7 @@ const HelpCardInfo = [
     titleStyle: { color: 'white' },
     textStyle: { color: 'white' },
     path: 'about-us',
+    id: 'homepage-about',
   },
 ];
 
@@ -78,6 +81,7 @@ const HelpCard = (props) => {
           setMdHeadingSize('4xl');
           setMdTitleSize('1.5rem');
         }}
+        id={props.id}
       >
         <VStack>
           <Heading
@@ -274,6 +278,7 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
                   bg: '#A5CBFF',
                   color: '#172848',
                 }}
+                id={`homepage-sermons-${isOnline ? "online" : "list"}`}
               >
                 {isOnline ? 'Watch HMCC LIVE' : 'See All Past Sermons'}
               </Button>

@@ -138,6 +138,7 @@ const OnlinePageTabs = ({ sermonNotes }) => {
                     href="/events"
                     color="blue"
                     target="_blank"
+                    id="online-events"
                   >
                     here
                   </Link>

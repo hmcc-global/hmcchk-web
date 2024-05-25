@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { customAxios as axios } from '../helpers/customAxios';
-import { camelize, sentencize } from '../helpers/formsHelpers';
+import {
+  camelize,
+  sentencize,
+  getAllChildrenFieldIds,
+} from '../helpers/formsHelpers';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 
@@ -28,20 +32,21 @@ import {
   Link,
 } from '@chakra-ui/react';
 import {
-  campusList,
   countryList,
   districtList,
-  lifegroupList,
-  lifestageList,
   regionList,
   ministryTeamList,
 } from '../helpers/lists';
 
 const Form = (props) => {
-  const { formId, formName, formDescription, formImage, formFields } = props;
+  const { formId, formName, formDescription, formImage, formFields, staticData } = props;
+  const { lifegroupList, lifestageList, campusList } = staticData;
   const { register, handleSubmit, control, formState, setValue } = useForm();
   const { errors } = formState;
   const { user, history } = props;
+
+  const allChildren = getAllChildrenFieldIds(formFields);
+  const [renderChildren, setRenderChildren] = useState({});
 
   const [submissionData, setSubmissionData] = useState(null);
   const [submitStatus, setSubmitStatus] = useState(false);
@@ -76,7 +81,6 @@ const Form = (props) => {
     delete modifiedData['addressStreet'];
     delete modifiedData['addressDistrict'];
     delete modifiedData['addressRegion'];
-
     if (formId) setSubmissionData(modifiedData);
     else console.log("this form doesn't support submission");
   };
@@ -106,244 +110,323 @@ const Form = (props) => {
     if (submissionData) {
       postSubmission(formId, submissionData, user.id);
     } else if (!submissionData && user.id && formFields.length > 0) {
-      if (formFields[0].fieldType === 'prefill') {
-        formFields[0].options.forEach((field) => {
-          if (field === 'address' && user['address']) {
+      for (let field of formFields) {
+        if (field.fieldType === 'prefill') {
+          if (field.fieldName === 'address' && user['address']) {
             setValue('addressFloor', user['address']['floor']);
             setValue('addressFlat', user['address']['flat']);
             setValue('addressStreet', user['address']['street']);
             setValue('addressDistrict', user['address']['district']);
             setValue('addressRegion', user['address']['region']);
           } else if (
-            field === 'lifeGroup' &&
-            !(user['lifeGroup'] in lifegroupList)
+            field.fieldName === 'lifeGroup' &&
+            !lifegroupList.includes(user['lifeGroup'])
           ) {
-            setValue(field, '');
+            setValue(field.fieldName, '');
           } else {
-            setValue(field, user[field]);
+            setValue(field.fieldName, user[field.fieldName]);
+
+            // Force set the render children field
+            const temp = JSON.parse(JSON.stringify(renderChildren));
+            temp[field.id] = user[field.fieldName];
+            setRenderChildren(temp);
           }
-        });
+        }
       }
     }
   }, [submissionData, formId, user, formFields, setValue]);
 
   // Custom changes for prefill form fields
-  const createPrefillFormFields = (fieldData) => {
+  const createPrefillFormField = (fieldData) => {
     if (!fieldData) return;
     let fieldType = fieldData.fieldType;
+    let fieldName = fieldData.fieldName;
 
     if (fieldType !== 'prefill') return;
 
-    let opts = fieldData.options;
-    let result = [];
-    result.push(
-      <Heading key="personalInfoHeading" as="h3" mb="2" size="md">
-        Personal Information
-      </Heading>
+    // Generate a label
+    let label = (
+      <FormLabel key={fieldName + 'label'} id={fieldName + 'label'}>
+        {fieldName === 'lifeGroup' ? 'LIFE Group' : sentencize(fieldName)}
+        <Text key={fieldName + 'alert'} as="span" color="red">
+          *
+        </Text>
+      </FormLabel>
     );
 
-    opts.forEach((fieldName) => {
-      // Generate a label
-      let label = (
-        <FormLabel key={fieldName + 'label'} id={fieldName + 'label'}>
-          {fieldName === 'lifeGroup' ? 'LIFE Group' : sentencize(fieldName)}
-          <Text key={fieldName + 'alert'} as="span" color="red">
-            *
-          </Text>
-        </FormLabel>
-      );
-
-      // Generate the field itself
-      let field = null;
-      switch (fieldName) {
-        case 'countryOfOrigin':
-          field = (
-            <Select
-              placeholder="Country of Origin"
-              {...register('countryOfOrigin', { required: true })}
-            >
-              {countryList.map((item) => {
-                return <option key={'co' + item}>{item}</option>;
-              })}
-            </Select>
-          );
-          break;
-        case 'lifestage':
-          field = (
-            <Select {...register('lifestage', { required: true })}>
-              {lifestageList.map((item) => {
-                return <option key={'li' + item}>{item}</option>;
-              })}
-            </Select>
-          );
-          break;
-        case 'campus':
-          field = (
-            <Select {...register('campus', { required: true })}>
-              {campusList.map((item) => {
-                return <option key={'ca' + item}>{item}</option>;
-              })}
-            </Select>
-          );
-          break;
-        case 'lifeGroup':
-          field = (
-            <Select {...register('lifeGroup', { required: true })}>
-              {lifegroupList.map((item) => {
-                return <option key={'lg' + item}>{item}</option>;
-              })}
-            </Select>
-          );
-          break;
-        case 'ministryTeam':
-          field = (
-            <Select {...register('ministryTeam', { required: true })}>
-              {ministryTeamList.map((item) => {
-                return <option key={'mt' + item}>{item}</option>;
-              })}
-            </Select>
-          );
-          break;
-        case 'address':
-          field = (
-            <Stack direction={'column'}>
-              <Stack direction={['column', 'row']} w="100%">
-                <Box flex={1}>
-                  <Input
-                    placeholder="Floor/Level"
-                    {...register('addressFloor', { required: true })}
-                  />
-                </Box>
-                <Box flex={1}>
-                  <Input
-                    placeholder="Room/Flat/Unit/Suite"
-                    {...register('addressFlat', { required: true })}
-                  />
-                </Box>
-              </Stack>
-              <Stack direction={['column', 'row']} w="100%">
-                <Box flex={1}>
-                  <Input
-                    placeholder="Street Address"
-                    {...register('addressStreet', { required: true })}
-                  />
-                </Box>
-                <Box flex={1}>
-                  <Select
-                    placeholder="District"
-                    {...register('addressDistrict', { required: true })}
-                  >
-                    {districtList.map((item) => {
-                      return <option key={'di' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </Box>
-              </Stack>
-              <Stack direction={['column', 'row']} w="100%">
-                <Box flex={1}>
-                  <Select
-                    placeholder="Region"
-                    {...register('addressRegion', { required: true })}
-                  >
-                    {regionList.map((item) => {
-                      return <option key={'re' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </Box>
-                <Box flex={1} display={['none', 'flex']}></Box>
-              </Stack>
+    // Generate the field itself
+    let field = null;
+    switch (fieldName) {
+      case 'countryOfOrigin':
+        field = (
+          <Select
+            placeholder="Country of Origin"
+            {...register('countryOfOrigin', { required: true })}
+            onChange={(e) => {
+              if (!fieldData.conditional) return;
+              const temp = JSON.parse(JSON.stringify(renderChildren));
+              temp[fieldData.id] = e.target.value;
+              setRenderChildren(temp);
+            }}
+            key={fieldData.id}
+          >
+            {countryList.map((item) => {
+              return <option key={'co' + item}>{item}</option>;
+            })}
+          </Select>
+        );
+        break;
+      case 'lifestage':
+        field = (
+          <Select
+            {...register('lifestage', { required: true })}
+            onChange={(e) => {
+              if (!fieldData.conditional) return;
+              const temp = JSON.parse(JSON.stringify(renderChildren));
+              temp[fieldData.id] = e.target.value;
+              setRenderChildren(temp);
+            }}
+            key={fieldData.id}
+          >
+            {lifestageList.map((item) => {
+              return <option key={'li' + item}>{item}</option>;
+            })}
+          </Select>
+        );
+        break;
+      case 'campus':
+        field = (
+          <Select
+            {...register('campus', { required: true })}
+            onChange={(e) => {
+              if (!fieldData.conditional) return;
+              const temp = JSON.parse(JSON.stringify(renderChildren));
+              temp[fieldData.id] = e.target.value;
+              setRenderChildren(temp);
+            }}
+            key={fieldData.id}
+          >
+            {campusList.map((item) => {
+              return <option key={'ca' + item}>{item}</option>;
+            })}
+          </Select>
+        );
+        break;
+      case 'lifeGroup':
+        field = (
+          <Select
+            {...register('lifeGroup', { required: true })}
+            onChange={(e) => {
+              if (!fieldData.conditional) return;
+              const temp = JSON.parse(JSON.stringify(renderChildren));
+              temp[fieldData.id] = e.target.value;
+              setRenderChildren(temp);
+            }}
+            key={fieldData.id}
+          >
+            {lifegroupList.map((item) => {
+              return <option key={'lg' + item}>{item}</option>;
+            })}
+          </Select>
+        );
+        break;
+      case 'ministryTeam':
+        field = (
+          <Select
+            {...register('ministryTeam', { required: true })}
+            onChange={(e) => {
+              if (!fieldData.conditional) return;
+              const temp = JSON.parse(JSON.stringify(renderChildren));
+              temp[fieldData.id] = e.target.value;
+              setRenderChildren(temp);
+            }}
+            key={fieldData.id}
+          >
+            {ministryTeamList.map((item) => {
+              return <option key={'mt' + item}>{item}</option>;
+            })}
+          </Select>
+        );
+        break;
+      case 'address':
+        field = (
+          <Stack direction={'column'}>
+            <Stack direction={['column', 'row']} w="100%">
+              <Box flex={1}>
+                <Input
+                  placeholder="Floor/Level"
+                  {...register('addressFloor', { required: true })}
+                />
+              </Box>
+              <Box flex={1}>
+                <Input
+                  placeholder="Room/Flat/Unit/Suite"
+                  {...register('addressFlat', { required: true })}
+                />
+              </Box>
             </Stack>
-          );
+            <Stack direction={['column', 'row']} w="100%">
+              <Box flex={1}>
+                <Input
+                  placeholder="Street Address"
+                  {...register('addressStreet', { required: true })}
+                />
+              </Box>
+              <Box flex={1}>
+                <Select
+                  placeholder="District"
+                  {...register('addressDistrict', { required: true })}
+                >
+                  {districtList.map((item) => {
+                    return <option key={'di' + item}>{item}</option>;
+                  })}
+                </Select>
+              </Box>
+            </Stack>
+            <Stack direction={['column', 'row']} w="100%">
+              <Box flex={1}>
+                <Select
+                  placeholder="Region"
+                  {...register('addressRegion', { required: true })}
+                >
+                  {regionList.map((item) => {
+                    return <option key={'re' + item}>{item}</option>;
+                  })}
+                </Select>
+              </Box>
+              <Box flex={1} display={['none', 'flex']}></Box>
+            </Stack>
+          </Stack>
+        );
 
-          break;
-        case 'birthday':
-          field = (
-            <Input
-              type="date"
-              key={fieldName}
-              {...register(fieldName, {
-                required: true,
-              })}
-            />
-          );
-          break;
-        case 'email':
-          field = (
-            <Input
-              key={fieldName}
-              {...register(fieldName, {
-                required: true,
-                pattern:
-                  /(?!.*hmcc.net)(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
-              })}
-            />
-          );
-          break;
-        default:
-          field = createGeneralInputField(fieldName, 'text', {
-            required: true,
-          });
-          break;
-      }
+        break;
+      case 'birthday':
+        field = (
+          <Input
+            type="date"
+            key={fieldName}
+            {...register(fieldName, {
+              required: true,
+            })}
+          />
+        );
+        break;
+      case 'email':
+        field = (
+          <Input
+            key={fieldName}
+            {...register(fieldName, {
+              required: true,
+              pattern:
+                /(?!.*hmcc.net)(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
+            })}
+          />
+        );
+        break;
+      default:
+        field = createGeneralInputField(fieldName, 'text', {
+          required: true,
+        });
+        break;
+    }
 
-      // Generate validation errors
-      let error = createErrorNotifier(fieldName);
+    // Generate validation errors
+    let error = createErrorNotifier(fieldName);
 
-      if (fieldName === 'address') {
-        result.push(
-          <FormControl
-            key={fieldName + 'Controller'}
-            isInvalid={
-              errors['addressFloor'] ||
+    if (fieldName === 'address') {
+      return (
+        <FormControl
+          key={fieldName + 'Controller'}
+          isInvalid={
+            errors['addressFloor'] ||
+            errors['addressFlat'] ||
+            errors['addressStreet'] ||
+            errors['addressDistrict'] ||
+            errors['addressRegion']
+          }
+        >
+          {label}
+          {field}
+          <FormErrorMessage key={fieldName + 'errorMessage'}>
+            {(errors['addressFloor'] ||
               errors['addressFlat'] ||
               errors['addressStreet'] ||
               errors['addressDistrict'] ||
-              errors['addressRegion']
-            }
-          >
-            {label}
-            {field}
-            <FormErrorMessage key={fieldName + 'errorMessage'}>
-              {(errors['addressFloor'] ||
-                errors['addressFlat'] ||
-                errors['addressStreet'] ||
-                errors['addressDistrict'] ||
-                errors['addressRegion']) &&
-                'Please fill in all of the fields!'}
-            </FormErrorMessage>
-          </FormControl>
-        );
-      } else if (fieldName === 'email') {
-        result.push(
-          <FormControl
-            key={fieldName + 'Controller'}
-            isInvalid={errors[fieldName]}
-          >
-            {label}
-            {field}
-            <FormHelperText>Please don't use your HMCC email</FormHelperText>
-            {error}
-          </FormControl>
-        );
-      } else {
-        result.push(
-          <FormControl
-            key={fieldName + 'Controller'}
-            isInvalid={errors[fieldName]}
-          >
-            {label}
-            {field}
-            {error}
-          </FormControl>
-        );
-      }
-    });
+              errors['addressRegion']) &&
+              'Please fill in all of the fields!'}
+          </FormErrorMessage>
+        </FormControl>
+      );
+    } else if (fieldName === 'email') {
+      return (
+        <FormControl
+          key={fieldName + 'Controller'}
+          isInvalid={errors[fieldName]}
+        >
+          {label}
+          {field}
+          <FormHelperText>Please don't use your HMCC email</FormHelperText>
+          {error}
+        </FormControl>
+      );
+    } else {
+      return (
+        <FormControl
+          key={fieldName + 'Controller'}
+          isInvalid={errors[fieldName]}
+        >
+          {label}
+          {field}
+          {error}
+        </FormControl>
+      );
+    }
+  };
 
-    return result;
+  // Generate form field based on given data
+  const createFormField = (fieldData, i, parentId, option) => {
+    if (
+      parentId != null &&
+      option != null &&
+      renderChildren[parentId] !== option
+    ) {
+      setValue(fieldData.fieldName, null);
+      return null;
+    }
+
+    return (
+      <FormControl
+        key={fieldData.fieldName + i}
+        isInvalid={errors[fieldData.fieldName]}
+      >
+        {!['header', 'prefill', 'checkbox'].includes(fieldData.fieldType) && (
+          <FormLabel
+            key={fieldData.fieldName + 'label'}
+            id={camelize(fieldData.fieldName + 'label')}
+          >
+            {fieldData.fieldName}{' '}
+            {fieldData.required && (
+              <Text key={fieldData.fieldName + 'alert'} as="span" color="red">
+                *
+              </Text>
+            )}
+          </FormLabel>
+        )}
+        {createFormInput(fieldData)}
+        {fieldData.fieldDescription !== '' && (
+          <FormHelperText
+            key={fieldData.fieldName + 'description'}
+            id={camelize(fieldData.fieldName + 'description')}
+          >
+            {fieldData.fieldDescription}
+          </FormHelperText>
+        )}
+      </FormControl>
+    );
   };
 
   // Helper function to create the input fields
-  const createFormField = (fieldData) => {
+  const createFormInput = (fieldData) => {
     let fieldName = fieldData.fieldName;
     let fieldType = fieldData.fieldType;
     let opts = fieldData.options;
@@ -377,6 +460,12 @@ const Form = (props) => {
             key={fieldName}
             placeholder="Select option"
             {...register(fieldName, { required: required })}
+            onChange={(e) => {
+              if (!fieldData.conditional) return;
+              const temp = JSON.parse(JSON.stringify(renderChildren));
+              temp[fieldData.id] = e.target.value;
+              setRenderChildren(temp);
+            }}
           >
             {items}
           </Select>
@@ -466,6 +555,32 @@ const Form = (props) => {
     );
   };
 
+  const createConditionalFormField = (parentFieldData) => {
+    return (
+      <Stack spacing="3">
+        {Object.entries(parentFieldData.children).map((kv) => {
+          // kv[0] = option
+          // kv[1] = childrenFieldsIdOrders when kv[0] is selected
+          return kv[1].map((childFieldIdOrder) => {
+            // childFieldIdOrder[0] = childId
+            // childFieldIdOrder[1] = renderOrder (but it's useless as it's already sorted)
+            const childFieldData = formFields.find(
+              (field) => field.id === childFieldIdOrder[0]
+            );
+            if (childFieldData == null) return <></>;
+
+            return createFormField(
+              childFieldData,
+              childFieldIdOrder[1],
+              parentFieldData.id,
+              kv[0]
+            );
+          });
+        })}
+      </Stack>
+    );
+  };
+
   const createErrorNotifier = (fieldName) => {
     return (
       <FormErrorMessage key={fieldName + 'errorMessage'}>
@@ -504,47 +619,42 @@ const Form = (props) => {
           />
         </Box>
         <Stack direction="column" spacing={4}>
-          {formFields && createPrefillFormFields(formFields[0])}
-          {formFields
-            .filter((fieldData) => {
-              if (fieldData.fieldType === 'prefill') return false;
-              else return true;
-            })
-            .map((fieldData, i) => (
-              <FormControl
-                key={fieldData.fieldName + i}
-                isInvalid={errors[fieldData.fieldName]}
-              >
-                {!['header', 'prefill', 'checkbox'].includes(
-                  fieldData.fieldType
-                ) && (
-                  <FormLabel
-                    key={fieldData.fieldName + 'label'}
-                    id={camelize(fieldData.fieldName + 'label')}
-                  >
-                    {fieldData.fieldName}{' '}
-                    {fieldData.required && (
-                      <Text
-                        key={fieldData.fieldName + 'alert'}
-                        as="span"
-                        color="red"
-                      >
-                        *
-                      </Text>
-                    )}
-                  </FormLabel>
-                )}
-                {createFormField(fieldData)}
-                {fieldData.fieldDescription !== '' && (
-                  <FormHelperText
-                    key={fieldData.fieldName + 'description'}
-                    id={camelize(fieldData.fieldName + 'description')}
-                  >
-                    {fieldData.fieldDescription}
-                  </FormHelperText>
-                )}
-              </FormControl>
-            ))}
+          {/* If there is a prefill field, create it's heading */}
+          {formFields &&
+            formFields.length > 1 &&
+            formFields[0].fieldType === 'prefill'}
+          {
+            <Heading key="personalInfoHeading" as="h3" mb="2" size="md">
+              Personal Information
+            </Heading>
+          }
+          {/* Generate the fields */}
+          {formFields.map((fieldData, i) => {
+            if (fieldData.fieldType === 'prefill') {
+              if (fieldData.conditional) {
+                return (
+                  <div key={fieldData.id}>
+                    {createPrefillFormField(fieldData)}
+                    <Box mt="3" />
+                    {createConditionalFormField(fieldData)}
+                  </div>
+                );
+              }
+              return createPrefillFormField(fieldData);
+            } else if (!allChildren.includes(fieldData.id)) {
+              if (fieldData.conditional) {
+                return (
+                  <>
+                    {createFormField(fieldData, i)}
+                    <Box mt="3" />
+                    {createConditionalFormField(fieldData)}
+                  </>
+                );
+              }
+              return createFormField(fieldData, i);
+            }
+            return null;
+          })}
         </Stack>
         {!user.id && (
           <Alert status="info" mt={4}>
@@ -553,7 +663,7 @@ const Form = (props) => {
               This form submission will be a one-off entry. However, if you want
               an auto-fill feature to be enabled for you for this and all future
               church event forms,{' '}
-              <Link href="/login">
+              <Link href="/login" id="form-login">
                 you can create an HMCC account right over here
               </Link>
             </Text>

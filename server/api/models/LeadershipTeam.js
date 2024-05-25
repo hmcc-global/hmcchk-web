@@ -17,7 +17,7 @@ module.exports = {
     lifeGroup: {
       type: 'string',
     },
-    leaders: {
+    leaderEmails: {
       type: 'json',
       columnType: 'array',
       defaultsTo: [],

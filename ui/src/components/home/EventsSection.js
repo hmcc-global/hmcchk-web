@@ -216,6 +216,7 @@ const EventsSection = () => {
               href="/events"
               textDecoration="none"
               _hover={{ textDecoration: 'none' }}
+              id="homepage-events"
             >
               <Button
                 color="#A5CBFF"
@@ -227,6 +228,7 @@ const EventsSection = () => {
                 padding="6px 24px"
                 boxSizing="content-box"
                 _hover={{ background: '#A5CBFF', color: '#172848' }}
+                id="homepage-events"
               >
                 {allEventsText}
               </Button>
@@ -275,6 +277,7 @@ const EventsSection = () => {
         ml="5%"
         mb="10%"
         fontSize="1.2em"
+        id="homepage-events"
       >
         <LinkOverlay href="/events">See All Events</LinkOverlay>
       </Button>

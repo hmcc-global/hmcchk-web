@@ -86,6 +86,7 @@ const OnlinePageButtons = () => {
         as="a"
         href="/give"
         target="_blank"
+        id="online-give"
       >
         Giving
       </Button>
@@ -97,6 +98,7 @@ const OnlinePageButtons = () => {
         href="/events"
         target="_blank"
         isTruncated
+        id="online-events"
       >
         Events
       </Button>
