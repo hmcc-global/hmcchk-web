@@ -156,7 +156,7 @@ module.exports = {
 
       // Send alert email to leaders if setting is turned on
       if (formRecord[0].alertType !== 'None') {
-        let emailRecipients;
+        let emailRecipients = [];
 
         // get email addresses of the recipients
         if (formRecord[0].alertType === 'Custom') {
@@ -186,9 +186,11 @@ module.exports = {
               today >= new Date(entry.seasonFrom) &&
               today <= new Date(entry.seasonTo)
             ) {
-              emailRecipients = entry.leaderEmails;
+              emailRecipients.push(...entry.leaderEmails);
             }
           }
+
+          emailRecipients = [...new Set(emailRecipients)];
         } else {
           return exits.invalid('Alert type is invalid');
         }
