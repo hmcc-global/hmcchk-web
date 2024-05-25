@@ -169,9 +169,6 @@ module.exports = {
           const recipientsDict =
             await sails.helpers.forms.getFormAlertRecipients(formId);
 
-          // get the current season leadership teams
-          const today = new Date();
-
           let fieldSelected = await sails.helpers.camelize(
             formRecord[0].alertType
           );
@@ -181,13 +178,7 @@ module.exports = {
             recipientsDict[submissionData[fieldSelected]];
 
           for (const entry of recipientsEntries) {
-            // find the entry in the current season
-            if (
-              today >= new Date(entry.seasonFrom) &&
-              today <= new Date(entry.seasonTo)
-            ) {
-              emailRecipients.push(...entry.leaderEmails);
-            }
+            emailRecipients.push(...entry.leaderEmails);
           }
 
           emailRecipients = [...new Set(emailRecipients)];
