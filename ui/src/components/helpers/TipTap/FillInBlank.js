@@ -1,9 +1,4 @@
-import {
-  Node,
-  mergeAttributes,
-  nodeInputRule,
-  nodePasteRule,
-} from '@tiptap/core';
+import { Node, nodeInputRule, nodePasteRule } from '@tiptap/core';
 import { NodeViewWrapper, ReactNodeViewRenderer } from '@tiptap/react';
 import React, { useState, useEffect, useRef } from 'react';
 
@@ -94,12 +89,13 @@ export const FillInBlankNode = Node.create({
       const [userText, setUserText] = useState(props.node.attrs.userText);
 
       useEffect(() => {
+        inputRef.current.style.color = '#3182CE';
         if (inputRef.current) {
           let textWidth = getTextWidth(userText);
           if (!userText) {
-            textWidth = getTextWidth('Blank');
+            textWidth = getTextWidth('Blankspace');
           }
-          inputRef.current.style.width = `${textWidth}px`;
+          inputRef.current.style.width = `${textWidth + 40}px`;
         }
       }, [userText]);
 
@@ -133,9 +129,22 @@ export const FillInBlankNode = Node.create({
               ref={inputRef}
               value={userText || ''}
               onChange={handleInputChange}
-              placeholder="Blank"
+              style={{
+                borderBottomColor: '#3182CE',
+                borderBottomWidth: '0.15rem',
+                textAlign: 'center',
+                height: '1.5rem',
+              }}
             />
-            <button className="toggle-answer" onClick={handleToggle}></button>
+            <img
+              src={process.env.PUBLIC_URL + '/images/sermons/green-tick.svg'}
+              style={{
+                display: 'inline-block',
+                marginLeft: '0.3rem',
+                marginBottom: '-0.2rem',
+              }}
+              onClick={handleToggle}
+            ></img>
           </span>
         </NodeViewWrapper>
       );
