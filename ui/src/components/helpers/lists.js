@@ -333,7 +333,6 @@ const eventTypeList = [
 
 const formAlertTypes = ['None', 'Custom', 'LIFE Group', 'Lifestage', 'Campus'];
 
-
 export {
   accessTypeList,
   ministryTeamList,
@@ -345,5 +344,4 @@ export {
   eventIntervalList,
   eventTypeList,
   formAlertTypes,
-  eventTypeList,
 };
