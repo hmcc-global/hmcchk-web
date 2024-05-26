@@ -156,7 +156,7 @@ module.exports = {
 
       // Send alert email to leaders if setting is turned on
       if (formRecord[0].alertType !== 'None') {
-        let emailRecipients;
+        let emailRecipients = [];
 
         // get email addresses of the recipients
         if (formRecord[0].alertType === 'Custom') {
@@ -169,9 +169,6 @@ module.exports = {
           const recipientsDict =
             await sails.helpers.forms.getFormAlertRecipients(formId);
 
-          // get the current season leadership teams
-          const today = new Date();
-
           let fieldSelected = await sails.helpers.camelize(
             formRecord[0].alertType
           );
@@ -181,14 +178,10 @@ module.exports = {
             recipientsDict[submissionData[fieldSelected]];
 
           for (const entry of recipientsEntries) {
-            // find the entry in the current season
-            if (
-              today >= new Date(entry.seasonFrom) &&
-              today <= new Date(entry.seasonTo)
-            ) {
-              emailRecipients = entry.leaderEmails;
-            }
+            emailRecipients.push(...entry.leaderEmails);
           }
+
+          emailRecipients = [...new Set(emailRecipients)];
         } else {
           return exits.invalid('Alert type is invalid');
         }
