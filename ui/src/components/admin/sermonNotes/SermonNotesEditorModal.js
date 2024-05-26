@@ -147,8 +147,6 @@ const SermonNotesEditorModal = (props) => {
           });
         }
       }
-      history.push('/admin/sermonNotes');
-      window.location.reload();
     } catch (err) {
       console.log('Error');
       toast({
