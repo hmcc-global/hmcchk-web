@@ -67,6 +67,15 @@ module.exports.custom = {
     host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/pages",
   },
 
+  formAlertTypes: {
+    'LIFE Group' : ['lifeGroup'],
+    'Lifestage Only' : ['lifestage'],
+    'Campus Only' : ['campus'],
+    'Campus/Lifestage' : ['campus', 'lifestage'],
+    'Custom': [],
+    'None': [],
+  },
+
   // Whether to require proof of email address ownership any time a new user
   // signs up, or when an existing user attempts to change their email address.
   verifyEmailAddresses: false,

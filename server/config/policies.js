@@ -83,6 +83,7 @@ module.exports.policies = {
   'leadershipTeam/get-latest-lifegroup-list': true,
   'leadershipTeam/get-latest-campus-list': true,
   'leadershipTeam/get-latest-lifestage-list': true,
+  'forms/get-all-form-alert-types': true,
 
   // Pages
   'pages/*': true,

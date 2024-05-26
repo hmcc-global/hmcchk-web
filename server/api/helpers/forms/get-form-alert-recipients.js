@@ -1,8 +1,10 @@
-const getFieldNameFromAlertType = (alertType) => {
-  if (alertType === 'LIFE Group') return 'lifeGroup';
-  if (alertType === 'Lifestage') return 'lifestage';
-  if (alertType === 'Campus') return 'campus';
-  throw new Error(`${alertType} unrecognised`);
+const groupLeadershipTeamsByKey = (leadershipTeams, key) => {
+  const res = _.chain(leadershipTeams)
+    // eslint-disable-next-line eqeqeq
+    .filter((x) => x[key] != null && x[key] !== '' && x[key] !== 'Not Applicable')
+    .groupBy((x) => x[key])
+    .value();
+  return res;
 };
 
 module.exports = {
@@ -15,13 +17,17 @@ module.exports = {
       required: true,
       type: 'string',
     },
+    submissionData: {
+      required: true,
+      type: 'json',
+    }
   },
 
   exits: {},
 
-  fn: async function ({ formId }, exits) {
+  fn: async function ({ formId, submissionData }, exits) {
     // eslint-disable-next-line eqeqeq
-    if (formId == null || formId === '') return exits.success({});
+    if (formId == null || formId === '' || submissionData == null) return exits.success({});
 
     try {
       const formData = await Form.findOne({
@@ -34,20 +40,30 @@ module.exports = {
         formData.alertType === 'Custom' ||
         formData.alertType === 'None'
       )
-        return exits.success({});
+        return exits.success([]);
 
       const latestLeadershipData =
         await sails.helpers.leadershipteam.getLatestLeadershipTeams();
       // eslint-disable-next-line eqeqeq
-      if (latestLeadershipData == null) return exits.success({});
+      if (latestLeadershipData == null) return exits.success([]);
 
-      const propertyName = getFieldNameFromAlertType(formData.alertType);
-      const res = _.chain(latestLeadershipData)
+      const allFormAlertyTypes = await sails.helpers.forms.getAllFormAlertTypes();
+      const groupByKeys = allFormAlertyTypes[formData.alertType];
+      // eslint-disable-next-line eqeqeq
+      if (groupByKeys == null) throw new Error(`Invalid alert type: ${formData.alertType}`);
+      if (groupByKeys.length === 0) return exits.success([]);
+
+      for (const key of groupByKeys) {
+        const userData = submissionData[key];
+        const groupedLeadershipTeam = groupLeadershipTeamsByKey(latestLeadershipData, key);
         // eslint-disable-next-line eqeqeq
-        .filter((x) => x[propertyName] != null && x[propertyName] !== '')
-        .groupBy((x) => x[propertyName])
-        .value();
-      return exits.success(res);
+        if (groupedLeadershipTeam[userData] != null) {
+          const emails = groupedLeadershipTeam[userData].flatMap(x => x.leaderEmails);
+          return exits.success([...new Set(emails)]);
+        }
+      }
+
+      return exits.success([]);
     } catch (err) {
       sails.log(err);
       return exits.error(err);
