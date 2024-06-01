@@ -42,11 +42,7 @@ const MenuBar = ({ editor }) => {
       icon: 'italic',
       title: 'Bold',
       action: (e) => {
-        const state = editor.state;
-        const { from, to } = state.selection;
-        const attrs = editor.getMarkAttrs(from, to, 'textStyle');
-
-        console.log(attrs.size);
+        console.log(e);
         editor.commands.setFontSize(48);
       },
       isActive: () => editor.isActive('bold'),
@@ -194,7 +190,13 @@ const MenuBar = ({ editor }) => {
     <div className="editor__header">
       <Popover trigger="hover">
         <PopoverTrigger>
-          <Button>Text Style</Button>
+          <Button
+            variant="ghost"
+            style={{ color: 'white' }}
+            _hover={{ color: 'black' }}
+          >
+            Text Style
+          </Button>
         </PopoverTrigger>
         <PopoverContent>
           <PopoverBody>
