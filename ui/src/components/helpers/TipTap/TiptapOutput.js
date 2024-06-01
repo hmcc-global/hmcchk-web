@@ -15,7 +15,7 @@ import { FillInBlankNode } from './FillInBlank.js';
 const TiptapOutput = ({ input, textPassage, setUserSermonNotes }) => {
   const [lastUpdatedPos, setLastUpdatedPos] = useState(null);
   const editor = useEditor({
-    editable: true,
+    editable: false,
     content: input,
     extensions: [
       StarterKit,

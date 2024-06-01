@@ -19,7 +19,7 @@ import TiptapEditor from '../../helpers/TipTap';
 import { useHistory } from 'react-router-dom';
 
 const SermonNotesEditorModal = (props) => {
-  const { editSermonNotesData, actionOnEditor, setIsEditorOpen } = props;
+  const { editSermonNotesData, actionOnEditor } = props;
   const {
     register,
     handleSubmit,

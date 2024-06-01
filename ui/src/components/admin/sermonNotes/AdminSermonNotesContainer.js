@@ -23,7 +23,6 @@ import { IoPeopleOutline } from 'react-icons/io5';
 import { IoBookOutline } from 'react-icons/io5';
 import { FaRegCalendarAlt } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
-import { get } from 'react-hook-form';
 
 // TO-DO: need to refactor in the future so the components rely on the pathname not the current state of the page
 // current solution with useEffect is rly whack, no time to refactor it this cycle :)
@@ -220,7 +219,7 @@ const AdminSermonNotesContainer = (props) => {
     } else {
       setActionOnEditor('create');
     }
-  }, [isEditorPath, isPastSermonsExist]);
+  }, [isEditorPath, isPastSermonsExist, path, getExistingSermonNotes]);
 
   useEffect(() => {
     fetchSermonNotes();

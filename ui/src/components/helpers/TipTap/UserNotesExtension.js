@@ -66,12 +66,14 @@ export const UserNotesNode = Node.create({
   addNodeView() {
     return ReactNodeViewRenderer((props) => {
       const { setLastUpdatedPos } = useContext(LastUpdatedPosContext);
+      const userInput = props.node.attrs.userNotes;
       const handleInput = (event) => {
         const newTextContent = event.target.textContent;
         const { node, getPos } = props;
         const { view } = props.editor;
         const { tr } = view.state;
         const pos = getPos();
+        // const finalContent 
         const transaction = tr.setNodeMarkup(pos, node.type, {
           ...node.attrs,
           userNotes: newTextContent,
@@ -80,12 +82,14 @@ export const UserNotesNode = Node.create({
         setLastUpdatedPos(pos);
         view.dispatch(transaction);
       };
+      console.log(userInput);
       return (
         <NodeViewWrapper className="user-notes">
           <NodeViewContent
             className="content"
             contentEditable={true}
             onInput={handleInput}
+            value={userInput}
           />
         </NodeViewWrapper>
       );

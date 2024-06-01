@@ -1,12 +1,14 @@
 import { Container, Box, Text, VStack } from '@chakra-ui/react';
 import { customAxios as axios } from '../helpers/customAxios';
 import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useDebounce } from 'react-use';
 import TiptapOutput from '../helpers/TipTap/TiptapOutput';
 
 const SermonNotesContainer = (props) => {
   const { user, history } = props;
   const [sermonNotes, setSermonNotes] = useState();
   const [userSermonNotes, setUserSermonNotes] = useState();
+  const [editUserSermonNotes, setEditUserSermonNotes] = useState();
   const sermonId = history.location.pathname.split('/').reverse()[0]; // Get the id at the back of the link
 
   const getSermonNotesParent = useCallback(async () => {
@@ -26,6 +28,7 @@ const SermonNotesContainer = (props) => {
 
   // TO-DO: check if the user logged in or not
   const getUserSermonNotes = useCallback(async () => {
+    console.log(sermonId, user.id);
     try {
       const { data, status } = await axios.get('/api/user-sermon-notes/get', {
         params: {
@@ -34,15 +37,50 @@ const SermonNotesContainer = (props) => {
         },
       });
       if (status === 200) {
-        setUserSermonNotes(data[0]);
+        setUserSermonNotes(data);
       }
-      // TO-DO: handle if the user does not have data
     } catch (error) {
       console.log(error);
     }
   }, [user, sermonId]);
 
   // send update to the userSermonNotes 5 seconds after the user stops typing
+  const updateUserSermonNotes = useCallback(async () => {
+    if (userSermonNotes) {
+      try {
+        const { data, status } = await axios.put(
+          '/api/user-sermon-notes/update',
+          {
+            userId: user.id,
+            sermonId: sermonId,
+            editedContent: editUserSermonNotes,
+          }
+        );
+        if (status === 200) {
+          setUserSermonNotes(data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        const { data, status } = await axios.post(
+          '/api/user-sermon-notes/create',
+          {
+            userId: user.id,
+            sermonId: sermonId,
+            editedContent: editUserSermonNotes,
+          }
+        );
+        if (status === 200) {
+          setUserSermonNotes(data);
+        }
+      } catch (error) {
+        console.log(error);
+        getUserSermonNotes();
+      }
+    }
+  }, [user.id, sermonId, editUserSermonNotes, userSermonNotes]);
 
   const sermonDate = useMemo(() => {
     return new Date(sermonNotes?.date).toLocaleDateString(undefined, {
@@ -56,7 +94,16 @@ const SermonNotesContainer = (props) => {
     getSermonNotesParent();
     getUserSermonNotes();
   }, [getSermonNotesParent, getUserSermonNotes]);
-  console.log(userSermonNotes);
+
+  useDebounce(
+    () => {
+      setEditUserSermonNotes(editUserSermonNotes);
+      updateUserSermonNotes();
+    },
+    5000,
+    [editUserSermonNotes]
+  );
+
   return (
     <>
       {sermonNotes ? (
@@ -87,11 +134,15 @@ const SermonNotesContainer = (props) => {
               </VStack>
             </Box>
           </Box>
-          <Container my={[4, 8]}>
+          <Container my={[4, 8]} width="960px">
             <TiptapOutput
-              input={sermonNotes.originalContent}
+              input={
+                userSermonNotes
+                  ? userSermonNotes.editedContent
+                  : sermonNotes.originalContent
+              }
               textPassage={sermonNotes.passage}
-              setUserSermonNotes={setUserSermonNotes}
+              setUserSermonNotes={setEditUserSermonNotes}
             />
           </Container>
         </>
