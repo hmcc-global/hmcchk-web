@@ -1,7 +1,14 @@
 import React, { Fragment } from 'react';
 import MenuItem from './MenuItem.js';
 import styled from '@emotion/styled';
-import { Box } from '@chakra-ui/react';
+import {
+  Box,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  Button,
+} from '@chakra-ui/react';
 import { useCallback } from 'react';
 
 const MenuBar = ({ editor }) => {
@@ -15,7 +22,35 @@ const MenuBar = ({ editor }) => {
     },
   });
 
+  const dropdown = [
+    {
+      icon: 'h-1',
+      title: 'Heading 1',
+      action: () => editor.chain().focus().toggleHeading({ level: 1 }).run(),
+      isActive: () => editor.isActive('heading', { level: 1 }),
+    },
+    {
+      icon: 'h-2',
+      title: 'Heading 2',
+      action: () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
+      isActive: () => editor.isActive('heading', { level: 2 }),
+    },
+  ];
+
   const items = [
+    {
+      icon: 'italic',
+      title: 'Bold',
+      action: (e) => {
+        const state = editor.state;
+        const { from, to } = state.selection;
+        const attrs = editor.getMarkAttrs(from, to, 'textStyle');
+
+        console.log(attrs.size);
+        editor.commands.setFontSize(48);
+      },
+      isActive: () => editor.isActive('bold'),
+    },
     {
       icon: 'bold',
       title: 'Bold',
@@ -48,18 +83,6 @@ const MenuBar = ({ editor }) => {
     },
     {
       type: 'divider',
-    },
-    {
-      icon: 'h-1',
-      title: 'Heading 1',
-      action: () => editor.chain().focus().toggleHeading({ level: 1 }).run(),
-      isActive: () => editor.isActive('heading', { level: 1 }),
-    },
-    {
-      icon: 'h-2',
-      title: 'Heading 2',
-      action: () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
-      isActive: () => editor.isActive('heading', { level: 2 }),
     },
     {
       icon: 'paragraph',
@@ -166,9 +189,26 @@ const MenuBar = ({ editor }) => {
       }, [editor]),
     },
   ];
-
+  // console.log(editor);
   return (
     <div className="editor__header">
+      <Popover trigger="hover">
+        <PopoverTrigger>
+          <Button>Text Style</Button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <PopoverBody>
+            {dropdown.map((item, index) => (
+              <Box key={index} onClick={item.action}>
+                {item.title}
+              </Box>
+            ))}
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
+      <StyledDivider>
+        <div className="divider" />
+      </StyledDivider>
       {items.map((item, index) => (
         <Fragment key={index}>
           {item.type === 'divider' ? (

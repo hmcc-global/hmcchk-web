@@ -3,6 +3,7 @@ import './styles.scss';
 import Highlight from '@tiptap/extension-highlight';
 import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
+import TextStyle from '@tiptap/extension-text-style';
 import { EditorContent, isEmptyObject, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import React, {
@@ -18,6 +19,7 @@ import Link from '@tiptap/extension-link';
 import { BibleVerseNode } from './BibleVerseExtension.js';
 import { UserNotesNode } from './UserNotesExtension.js';
 import { FillInBlankNode } from './FillInBlank.js';
+import { FontSize } from './FontSizeExtension.js';
 
 // Find a better way to pass the text passage
 export const TextContext = createContext();
@@ -40,6 +42,8 @@ const TiptapEditor = ({
       BibleVerseNode,
       UserNotesNode,
       FillInBlankNode,
+      FontSize,
+      TextStyle,
     ],
     content: existingContent,
     onUpdate: () => {
