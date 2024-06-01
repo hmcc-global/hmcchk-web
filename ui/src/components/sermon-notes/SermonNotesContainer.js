@@ -28,7 +28,6 @@ const SermonNotesContainer = (props) => {
 
   // TO-DO: check if the user logged in or not
   const getUserSermonNotes = useCallback(async () => {
-    console.log(sermonId, user.id);
     try {
       const { data, status } = await axios.get('/api/user-sermon-notes/get', {
         params: {

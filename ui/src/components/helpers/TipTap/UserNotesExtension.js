@@ -9,7 +9,7 @@ import {
   ReactNodeViewRenderer,
   NodeViewContent,
 } from '@tiptap/react';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { LastUpdatedPosContext } from './index.js';
 
 export const UserNotesNode = Node.create({
@@ -67,29 +67,31 @@ export const UserNotesNode = Node.create({
     return ReactNodeViewRenderer((props) => {
       const { setLastUpdatedPos } = useContext(LastUpdatedPosContext);
       const userInput = props.node.attrs.userNotes;
+      const [localUserNotes, setLocalUserNotes] = useState(userInput);
       const handleInput = (event) => {
-        const newTextContent = event.target.textContent;
+        setLocalUserNotes(event.target.textContent);
+      };
+      const handleBlur = () => {
         const { node, getPos } = props;
         const { view } = props.editor;
         const { tr } = view.state;
         const pos = getPos();
-        // const finalContent 
         const transaction = tr.setNodeMarkup(pos, node.type, {
           ...node.attrs,
-          userNotes: newTextContent,
+          userNotes: localUserNotes,
         });
 
         setLastUpdatedPos(pos);
         view.dispatch(transaction);
       };
-      console.log(userInput);
       return (
         <NodeViewWrapper className="user-notes">
           <NodeViewContent
             className="content"
+            onBlur={handleBlur}
             contentEditable={true}
             onInput={handleInput}
-            value={userInput}
+            dangerouslySetInnerHTML={{ __html: userInput }}
           />
         </NodeViewWrapper>
       );
