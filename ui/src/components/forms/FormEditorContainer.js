@@ -25,10 +25,11 @@ import {
 } from '@chakra-ui/react';
 import FormEditor from './FormEditor';
 import ExternalFormEditor from './ExternalFormEditor';
-import { formAlertTypes } from '../helpers/lists';
 
 const FormEditorContainer = (props) => {
-  const { user, isOpen, setIsOpen, editFormData, formManagerCallback } = props;
+  const { user, isOpen, setIsOpen, editFormData, formManagerCallback, staticData } = props;
+  const { formAlertTypeList } = staticData;
+  const formAlertTypes = Object.keys(formAlertTypeList);
 
   // React forms basics
   const { register, reset, handleSubmit, setValue, watch, control, formState } =

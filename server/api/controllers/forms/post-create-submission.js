@@ -156,44 +156,16 @@ module.exports = {
 
       // Send alert email to leaders if setting is turned on
       if (formRecord[0].alertType !== 'None') {
-        let emailRecipients = [];
+        const emailRecipients =
+          formRecord[0].alertType === 'Custom'
+            ? formRecord[0].customAlertRecipients.split(';')
+            : await sails.helpers.forms.getFormAlertRecipients(
+                formId,
+                submissionData
+            );
 
-        // get email addresses of the recipients
-        if (formRecord[0].alertType === 'Custom') {
-          emailRecipients = formRecord[0].customAlertRecipients.split(';');
-        } else if (
-          ['LIFE Group', 'Lifestage', 'Campus'].includes(
-            formRecord[0].alertType
-          )
-        ) {
-          const recipientsDict =
-            await sails.helpers.forms.getFormAlertRecipients(formId);
-
-          let fieldSelected = await sails.helpers.camelize(
-            formRecord[0].alertType
-          );
-
-          // match the current user's data with the alert type config
-          const recipientsEntries =
-            recipientsDict[submissionData[fieldSelected]];
-
-          for (const entry of recipientsEntries) {
-            emailRecipients.push(...entry.leaderEmails);
-          }
-
-          emailRecipients = [...new Set(emailRecipients)];
-        } else {
-          return exits.invalid('Alert type is invalid');
-        }
-
-        // failsafe
-        if (emailRecipients.length < 1) {
-          emailRecipients = ['no-reply@hongkong.hmcc.net'];
-        }
-
-        // send notification email
         await sails.helpers.sendTemplateEmail.with({
-          to: emailRecipients[0],
+          to: 'no-reply@hongkong.hmcc.net',
           cc: emailRecipients,
           subject: 'New Sign-up for ' + formRecord[0].formName,
           template: 'form-notify-leader-success',

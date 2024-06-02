@@ -331,8 +331,6 @@ const eventTypeList = [
   { value: 'Others', label: 'Others', color: 'red' },
 ];
 
-const formAlertTypes = ['None', 'Custom', 'LIFE Group', 'Lifestage', 'Campus'];
-
 export {
   accessTypeList,
   ministryTeamList,
@@ -343,5 +341,4 @@ export {
   paymentMethodList,
   eventIntervalList,
   eventTypeList,
-  formAlertTypes,
 };

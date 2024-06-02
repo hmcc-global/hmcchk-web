@@ -32,6 +32,7 @@ module.exports.routes = {
   'get /api/forms/get-signedup-form': 'forms/get-signedup-form',
   'get /api/forms/get-unsignedup-form': 'forms/get-unsignedup-form',
   'get /api/forms/admin-get-form': 'forms/admin-get-form',
+  'get /api/forms/all-form-alert-types': 'forms/get-all-form-alert-types',
   'post /api/forms/post-create-form': 'forms/post-create-form',
   'post /api/forms/post-update-form': 'forms/post-update-form',
   'post /api/forms/post-delete-form': 'forms/post-delete-form',
