@@ -47,8 +47,8 @@ module.exports = {
       // eslint-disable-next-line eqeqeq
       if (latestLeadershipData == null) return exits.success([]);
 
-      const allFormAlertyTypes = await sails.helpers.forms.getAllFormAlertTypes();
-      const groupByKeys = allFormAlertyTypes[formData.alertType];
+      const allFormAlertTypes = await sails.helpers.forms.getAllFormAlertTypes();
+      const groupByKeys = allFormAlertTypes[formData.alertType];
       // eslint-disable-next-line eqeqeq
       if (groupByKeys == null) throw new Error(`Invalid alert type: ${formData.alertType}`);
       if (groupByKeys.length === 0) return exits.success([]);
