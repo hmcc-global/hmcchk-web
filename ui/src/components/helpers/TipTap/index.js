@@ -3,16 +3,35 @@ import './styles.scss';
 import Highlight from '@tiptap/extension-highlight';
 import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
-import { EditorContent, useEditor } from '@tiptap/react';
+import TextStyle from '@tiptap/extension-text-style';
+import { EditorContent, isEmptyObject, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import React, { useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import MenuBar from './MenuBar.js';
 import Link from '@tiptap/extension-link';
 import { BibleVerseNode } from './BibleVerseExtension.js';
 import { UserNotesNode } from './UserNotesExtension.js';
 import { FillInBlankNode } from './FillInBlank.js';
+import { FontSize } from './FontSizeExtension.js';
 
-const TiptapEditor = ({ onEditorChange, onFocus, existingContent }) => {
+// Find a better way to pass the text passage
+export const TextContext = createContext();
+
+export const LastUpdatedPosContext = createContext();
+
+const TiptapEditor = ({
+  onEditorChange,
+  onFocus,
+  existingContent,
+  textPassage,
+}) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -23,6 +42,8 @@ const TiptapEditor = ({ onEditorChange, onFocus, existingContent }) => {
       BibleVerseNode,
       UserNotesNode,
       FillInBlankNode,
+      FontSize,
+      TextStyle,
     ],
     content: existingContent,
     onUpdate: () => {
@@ -31,17 +52,41 @@ const TiptapEditor = ({ onEditorChange, onFocus, existingContent }) => {
     },
   });
 
+  const isContentEmpty = useMemo(
+    () => isEmptyObject(existingContent) || existingContent === '',
+    [existingContent]
+  );
+
+  const [lastUpdatedPos, setLastUpdatedPos] = useState(null);
+  const hasRun = useRef(false);
   useEffect(() => {
-    if (editor && existingContent) {
+    if (!hasRun.current && editor && !isContentEmpty) {
       editor.commands.setContent(existingContent);
+      hasRun.current = true;
     }
-  }, [editor, existingContent]);
+  }, [existingContent, editor, isContentEmpty]);
 
   return (
-    <div className="editor" onFocus={onFocus}>
-      {editor && <MenuBar editor={editor} />}
-      <EditorContent className="editor__content" editor={editor} />
-    </div>
+    <LastUpdatedPosContext.Provider
+      value={{ lastUpdatedPos, setLastUpdatedPos }}
+    >
+      <TextContext.Provider value={textPassage}>
+        <div
+          className="editor"
+          onFocus={() => {
+            onFocus();
+          }}
+        >
+          {editor && <MenuBar editor={editor} />}
+          <EditorContent className="editor__content" editor={editor} />
+        </div>
+      </TextContext.Provider>
+    </LastUpdatedPosContext.Provider>
   );
 };
+
+export const useTextContext = () => {
+  return useContext(TextContext);
+};
+
 export default TiptapEditor;

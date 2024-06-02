@@ -28,8 +28,10 @@ module.exports = {
         if (data.length === 0) throw 'Sermon note parent record not found';
         return exits.success(data);
       }
-
-      let data = await SermonNotesParent.find({ isDeleted: false });
+      // in future iterations, we should not do this for better practice
+      let data = await SermonNotesParent.find({
+        isDeleted: false,
+      });
       return exits.success(data);
     } catch (err) {
       sails.log(err);
