@@ -39,7 +39,7 @@ export const FillInBlankNode = Node.create({
   addInputRules() {
     return [
       nodeInputRule({
-        find: /(\_{4}\(([^)]+)\))/,
+        find: /(_{4}\(([^)]+)\))/,
         type: this.type,
         getAttributes: (match) => {
           return {
@@ -52,7 +52,7 @@ export const FillInBlankNode = Node.create({
   addPasteRules() {
     return [
       nodePasteRule({
-        find: /(\_{4}\(([^)]+)\))/,
+        find: /(_{4}\(([^)]+)\))/,
         type: this.type,
         getAttributes: (match) => {
           return {
@@ -137,6 +137,7 @@ export const FillInBlankNode = Node.create({
               }}
             />
             <img
+              alt=""
               src={process.env.PUBLIC_URL + '/images/sermons/green-tick.svg'}
               style={{
                 display: 'inline-block',

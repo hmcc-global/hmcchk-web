@@ -39,6 +39,7 @@ import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementC
 import AdminLeadershipTeamContainer from './admin/leadershipTeam/AdminLeadershipTeamContainer';
 import AdminSermonNotesContainer from './admin/sermonNotes/AdminSermonNotesContainer';
 import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
+import SermonNotesContainer from './sermon-notes/SermonNotesContainer';
 
 const MainContainer = () => {
   return (
@@ -110,6 +111,12 @@ const MainContainer = () => {
           path="/sermons/:id"
           permissions={['public']}
           component={SermonDetails}
+        />
+        <PrivateRoute
+          exact
+          path="/sermons/notes/:id"
+          permissions={['public']}
+          component={SermonNotesContainer}
         />
         <PrivateRoute
           exact
@@ -265,6 +272,18 @@ const MainContainer = () => {
         <PrivateRoute
           exact
           path="/admin/sermonNotes"
+          permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
+          component={AdminSermonNotesContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/sermonNotes/edit"
+          permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
+          component={AdminSermonNotesContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/sermonNotes/edit/:id"
           permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
           component={AdminSermonNotesContainer}
         />
