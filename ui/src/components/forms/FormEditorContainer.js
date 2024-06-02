@@ -27,7 +27,14 @@ import FormEditor from './FormEditor';
 import ExternalFormEditor from './ExternalFormEditor';
 
 const FormEditorContainer = (props) => {
-  const { user, isOpen, setIsOpen, editFormData, formManagerCallback, staticData } = props;
+  const {
+    user,
+    isOpen,
+    setIsOpen,
+    editFormData,
+    formManagerCallback,
+    staticData,
+  } = props;
   const { formAlertTypeList } = staticData;
   const formAlertTypes = Object.keys(formAlertTypeList);
 
@@ -421,7 +428,7 @@ const FormEditorContainer = (props) => {
                       ))}
                     </Select>
                   </FormControl>
-                  {alertTypeFlag === formAlertTypes[1] && (
+                  {alertTypeFlag === 'Custom' && (
                     <FormControl>
                       <FormLabel>Custom Email Recipients</FormLabel>
                       <Input

@@ -31,7 +31,14 @@ module.exports = {
     alertType: {
       type: 'string',
       // any addition here needs to be added in ui/src/components/helpers/list.js
-      isIn: ['None', 'Custom', 'LIFE Group', 'Lifestage', 'Campus'],
+      isIn: [
+        'None',
+        'Custom',
+        'LIFE Group',
+        'Lifestage Only',
+        'Campus Only',
+        'Campus/Lifestage',
+      ],
     },
     customAlertRecipients: {
       type: 'json',
