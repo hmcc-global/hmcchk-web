@@ -10,13 +10,36 @@
   }
 
   h1 {
-    font-size: 2.5rem;
-    line-height: 1.1;
+    font-family: Inter;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
   }
 
-  h2,
-  h3,
-  h4,
+  h2 {
+    font-family: Inter;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  h3 {
+    font-family: Inter;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 500;
+    line-height: normal;
+  }
+  h4 {
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
   h5,
   h6 {
     line-height: 1.1;
