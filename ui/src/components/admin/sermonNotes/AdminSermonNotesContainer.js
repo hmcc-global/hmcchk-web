@@ -40,6 +40,10 @@ const AdminSermonNotesContainer = (props) => {
     return path.length > 4;
   }, [path]);
 
+  const sermonId = useMemo(() => {
+    return isPastSermonsExist ? path[path.length - 1] : '';
+  }, [path, isPastSermonsExist]);
+
   // This useState is to open the Editor Modal
   const [isEditorOpen, setIsEditorOpen] = useState(isEditorPath ? true : false);
   const [actionOnEditor, setActionOnEditor] = useState(
@@ -66,14 +70,17 @@ const AdminSermonNotesContainer = (props) => {
     }
   }, [toast, setSermonNotesList]); // add empty dependency array to useCallback
 
-  const getExistingSermonNotes = useCallback(async (id) => {
-    const { data } = await axios.get('/api/sermon-notes-parent/get', {
-      params: {
-        sermonId: id,
-      },
-    });
-    setEditSermonNotesData(data[0]);
-  }, []);
+  const getExistingSermonNotes = useCallback(
+    async (id) => {
+      const { data } = await axios.get('/api/sermon-notes-parent/get', {
+        params: {
+          sermonId: id,
+        },
+      });
+      setEditSermonNotesData(data[0]);
+    },
+    [setEditSermonNotesData]
+  );
 
   const isPublishDisabled = () => {
     const aboveT3chPrivs = ['t3ch', 'admin', 'stewardship'];
@@ -215,11 +222,11 @@ const AdminSermonNotesContainer = (props) => {
     isEditorPath ? setIsEditorOpen(true) : setIsEditorOpen(false);
     if (isPastSermonsExist) {
       setActionOnEditor('edit');
-      getExistingSermonNotes(path[path.length - 1]);
+      getExistingSermonNotes(sermonId);
     } else {
       setActionOnEditor('create');
     }
-  }, [isEditorPath, isPastSermonsExist, path, getExistingSermonNotes]);
+  }, [isEditorPath, getExistingSermonNotes, isPastSermonsExist, sermonId]);
 
   useEffect(() => {
     fetchSermonNotes();

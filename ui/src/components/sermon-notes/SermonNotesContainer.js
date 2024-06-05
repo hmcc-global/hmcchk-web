@@ -79,7 +79,13 @@ const SermonNotesContainer = (props) => {
         getUserSermonNotes();
       }
     }
-  }, [user.id, sermonId, editUserSermonNotes, userSermonNotes]);
+  }, [
+    user.id,
+    sermonId,
+    editUserSermonNotes,
+    userSermonNotes,
+    getUserSermonNotes,
+  ]);
 
   const sermonDate = useMemo(() => {
     return new Date(sermonNotes?.date).toLocaleDateString(undefined, {
@@ -102,6 +108,29 @@ const SermonNotesContainer = (props) => {
     5000,
     [editUserSermonNotes]
   );
+
+  const originalContentWithUserNotes = useMemo(() => {
+    //TO-DO: inject the old user notes to the updated original sermon notes properly, need to add id to the user notes attrs in tiptap
+    if (userSermonNotes) {
+      const userNotes = userSermonNotes.editedContent.content.filter(
+        (content) => content.type === 'userNotes'
+      );
+      const updatedNotes = sermonNotes?.originalContent.content.map(
+        (content) => {
+          if (content.type === 'userNotes') {
+            // Find the corresponding user note, but currently theres no id attribute
+            const userNote = userNotes.find((note) => note.id === content.id);
+            return userNote ? userNote : content;
+          } else {
+            return content;
+          }
+        }
+      );
+      return { type: 'doc', content: updatedNotes };
+    } else {
+      return sermonNotes?.originalContent;
+    }
+  }, [userSermonNotes, sermonNotes?.originalContent]);
 
   return (
     <>
@@ -135,11 +164,7 @@ const SermonNotesContainer = (props) => {
           </Box>
           <Container my={[4, 8]} width="960px">
             <TiptapOutput
-              input={
-                userSermonNotes
-                  ? userSermonNotes.editedContent
-                  : sermonNotes.originalContent
-              }
+              input={originalContentWithUserNotes}
               textPassage={sermonNotes.passage}
               setUserSermonNotes={setEditUserSermonNotes}
             />

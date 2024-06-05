@@ -171,7 +171,7 @@ const SermonNotesEditorModal = (props) => {
     } else {
       setNumberOfSermons(0);
     }
-  }, [sermonNoteData.date, fetchSermonNotes]);
+  }, [sermonNoteData.date, fetchSermonNotes, setNumberOfSermons]);
 
   useEffect(() => {
     getData();
