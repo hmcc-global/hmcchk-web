@@ -1,6 +1,8 @@
 import './styles.scss';
 
 import Highlight from '@tiptap/extension-highlight';
+import BulletList from '@tiptap/extension-bullet-list';
+import ListItem from '@tiptap/extension-list-item';
 import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
 import TextStyle from '@tiptap/extension-text-style';
@@ -38,6 +40,8 @@ const TiptapEditor = ({
       Highlight,
       TaskList,
       TaskItem,
+      BulletList,
+      ListItem,
       Link,
       BibleVerseNode,
       UserNotesNode,

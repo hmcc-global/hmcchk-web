@@ -25,28 +25,31 @@ const MenuBar = ({ editor }) => {
   const dropdown = [
     {
       icon: 'h-1',
-      title: 'Heading 1',
+      title: 'Header',
       action: () => editor.chain().focus().toggleHeading({ level: 1 }).run(),
       isActive: () => editor.isActive('heading', { level: 1 }),
     },
     {
       icon: 'h-2',
-      title: 'Heading 2',
+      title: 'Title',
       action: () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
       isActive: () => editor.isActive('heading', { level: 2 }),
+    },
+    {
+      icon: 'h-3',
+      title: 'Subtitle',
+      action: () => editor.chain().focus().toggleHeading({ level: 3 }).run(),
+      isActive: () => editor.isActive('heading', { level: 3 }),
+    },
+    {
+      icon: 'h-4',
+      title: 'Normal Format',
+      action: () => editor.chain().focus().toggleHeading({ level: 4 }).run(),
+      isActive: () => editor.isActive('heading', { level: 4 }),
     },
   ];
 
   const items = [
-    {
-      icon: 'italic',
-      title: 'Bold',
-      action: (e) => {
-        console.log(e);
-        editor.commands.setFontSize(48);
-      },
-      isActive: () => editor.isActive('bold'),
-    },
     {
       icon: 'bold',
       title: 'Bold',
