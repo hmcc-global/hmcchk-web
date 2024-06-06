@@ -1,6 +1,6 @@
 export const getBiblePassage = async (passage, currentText) => {
   try {
-    const response = await fetch(`${process.env.PUBLIC_URL}/assets/ESV.json`);
+    const response = await fetch(`${process.env.PUBLIC_URL}/images/bible/ESV.json`);
     const bible = await response.json();
 
     const trimmedPassage = passage.includes('v.')
