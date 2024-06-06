@@ -14,7 +14,7 @@
     font-size: 40px;
     font-style: normal;
     font-weight: 700;
-    line-height: normal;
+    line-height: 24px;
   }
 
   h2 {
@@ -22,7 +22,7 @@
     font-size: 32px;
     font-style: normal;
     font-weight: 700;
-    line-height: normal;
+    line-height: 24px;
   }
 
   h3 {
@@ -30,20 +30,17 @@
     font-size: 20px;
     font-style: italic;
     font-weight: 500;
-    line-height: normal;
+    line-height: 24px;
   }
-  h4 {
-    font-family: Inter;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-  
+  h4,
   h5,
   h6 {
-    line-height: 1.1;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
   }
+  
 
   a {
     color: #007bff;

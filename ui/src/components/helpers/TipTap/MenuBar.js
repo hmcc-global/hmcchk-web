@@ -195,7 +195,7 @@ const MenuBar = ({ editor }) => {
         <PopoverTrigger>
           <Button
             variant="ghost"
-            style={{ color: 'white' }}
+            style={{ color: 'white', backgroundColor: 'black' }}
             _hover={{ color: 'black' }}
           >
             Text Style
