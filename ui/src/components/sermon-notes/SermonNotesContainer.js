@@ -111,7 +111,11 @@ const SermonNotesContainer = (props) => {
 
   const originalContentWithUserNotes = useMemo(() => {
     //TO-DO: inject the old user notes to the updated original sermon notes properly, need to add id to the user notes attrs in tiptap
-    if (userSermonNotes) {
+    if (
+      userSermonNotes &&
+      userSermonNotes.editedContent &&
+      userSermonNotes.editedContent.content
+    ) {
       const userNotes = userSermonNotes.editedContent.content.filter(
         (content) => content.type === 'userNotes'
       );
