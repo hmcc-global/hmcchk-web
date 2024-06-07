@@ -19,7 +19,7 @@ import TiptapEditor from '../../helpers/TipTap';
 import { useHistory } from 'react-router-dom';
 
 const SermonNotesEditorModal = (props) => {
-  const { editSermonNotesData, actionOnEditor } = props;
+  const { editSermonNotesData, actionOnEditor, setIsEditorOpen } = props;
   const {
     register,
     handleSubmit,
@@ -116,8 +116,8 @@ const SermonNotesEditorModal = (props) => {
         });
         if (status === 200) {
           toast({
-            title: 'Announcement Updated',
-            description: 'Your announcement has been updated.',
+            title: 'Sermon Note Updated',
+            description: 'Your Sermon Note has been updated.',
             status: 'success',
             duration: 5000,
             isClosable: true,
@@ -131,21 +131,33 @@ const SermonNotesEditorModal = (props) => {
         }-${formattedData}-${numberOfSermons + 1}`;
         setSermonNoteData({ ...sermonNoteData });
         setValue('sermonId', sermonId);
-
         const { status } = await axios.post('/api/sermon-notes-parent/create', {
           ...sermonNoteData,
           sermonId: sermonId,
           isPublished: true,
         });
-        if (status === 200) {
-          toast({
-            title: 'Announcement Created',
-            description: 'Your announcement has been created.',
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-          });
+        if (actionOnEditor === 'duplicate') {
+          if (status === 200) {
+            toast({
+              title: 'Sermon Note Duplicated',
+              description: 'Your sermon note has been duplicated.',
+              status: 'success',
+              duration: 5000,
+              isClosable: true,
+            });
+          }
+        } else {
+          if (status === 200) {
+            toast({
+              title: 'Sermon Note Created',
+              description: 'Your sermon note has been created.',
+              status: 'success',
+              duration: 5000,
+              isClosable: true,
+            });
+          }
         }
+        setIsEditorOpen(false);
       }
     } catch (err) {
       console.log('Error');
@@ -166,6 +178,7 @@ const SermonNotesEditorModal = (props) => {
     const numberOfSermonNotes = result.filter((sermonNotes) => {
       return sermonNotes.date === sermonNoteData.date;
     });
+    console.log(numberOfSermonNotes);
     if (numberOfSermonNotes.length > 0) {
       setNumberOfSermons(numberOfSermonNotes.length);
     } else {
