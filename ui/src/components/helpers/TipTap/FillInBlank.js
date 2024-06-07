@@ -108,14 +108,15 @@ export const FillInBlankNode = Node.create({
       };
 
       const handleInputChange = (event) => {
-        setUserText(event.target.value);
+        setUserText(event.target.value.toUpperCase());
         props.updateAttributes({
           userText: event.target.value,
         });
+        console.log(userText);
       };
 
       const handleToggle = () => {
-        setUserText(props.node.attrs.editorText);
+        setUserText(props.node.attrs.editorText.toUpperCase());
         props.updateAttributes({
           userText: props.node.attrs.editorText,
         });
@@ -133,7 +134,8 @@ export const FillInBlankNode = Node.create({
                 borderBottomColor: '#3182CE',
                 borderBottomWidth: '0.15rem',
                 textAlign: 'center',
-                height: '1.5rem',
+                height: '2rem',
+                textTransform: 'uppercase',
               }}
             />
             <img
