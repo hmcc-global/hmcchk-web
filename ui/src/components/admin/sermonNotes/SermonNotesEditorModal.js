@@ -112,16 +112,22 @@ const SermonNotesEditorModal = (props) => {
       const data = await fetchSermonNotes();
       const duplicateTitle = sermonNoteData.title;
       const duplicateSermonLink = sermonNoteData.sermonLink;
-      const duplicate = data.filter((sermonNote) => {
-        return (
-          sermonNote.title === duplicateTitle ||
-          sermonNote.sermonLink === duplicateSermonLink
-        );
+      const duplicatedSermonNoteTitle = data.filter((sermonNote) => {
+        return sermonNote.title === duplicateTitle;
       });
-      if (duplicate.length > 0) {
-        return true;
+      const duplicatedSermonNoteSermonLink = data.filter((sermonNote) => {
+        return sermonNote.sermonLink === duplicateSermonLink;
+      });
+      if (
+        duplicatedSermonNoteTitle.length > 0 &&
+        duplicatedSermonNoteSermonLink.length > 0
+      ) {
+        return 'both';
+      } else if (duplicatedSermonNoteTitle.length > 0) {
+        return 'title';
+      } else if (duplicatedSermonNoteSermonLink.length > 0) {
+        return 'sermonLink';
       }
-      return false;
     } catch (err) {
       console.log(err);
     }
@@ -145,11 +151,31 @@ const SermonNotesEditorModal = (props) => {
         }
       } else {
         const isDuplicate = await checkDuplicateTitleAndSermonLink();
-        if (isDuplicate) {
+        if (isDuplicate === 'both') {
           toast({
-            title: 'Title or Sermon Link Already Exists',
+            title: 'Duplicated Sermon Title and Sermon Link',
             description:
-              'Sermon Note with the same title or sermon link already exists.',
+              'A sermon note with the same title and sermon link already exists. Please rename the title and sermon link.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+          return;
+        } else if (isDuplicate === 'title') {
+          toast({
+            title: 'Duplicated Sermon Title',
+            description:
+              'A sermon note with the same title already exists.Please rename the title.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+          return;
+        } else if (isDuplicate === 'sermonLink') {
+          toast({
+            title: 'Duplicated Sermon Link',
+            description:
+              'A sermon note with the same sermon link already exists. Please rename the sermon link.',
             status: 'error',
             duration: 5000,
             isClosable: true,
