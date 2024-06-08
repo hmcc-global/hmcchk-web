@@ -107,6 +107,26 @@ const SermonNotesEditorModal = (props) => {
     }
   }, [toast]);
 
+  const checkDuplicateTitleAndSermonLink = async () => {
+    try {
+      const data = await fetchSermonNotes();
+      const duplicateTitle = sermonNoteData.title;
+      const duplicateSermonLink = sermonNoteData.sermonLink;
+      const duplicate = data.filter((sermonNote) => {
+        return (
+          sermonNote.title === duplicateTitle ||
+          sermonNote.sermonLink === duplicateSermonLink
+        );
+      });
+      if (duplicate.length > 0) {
+        return true;
+      }
+      return false;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const onSubmitSermonNotes = async (e) => {
     try {
       if (actionOnEditor === 'edit') {
@@ -124,6 +144,18 @@ const SermonNotesEditorModal = (props) => {
           });
         }
       } else {
+        const isDuplicate = await checkDuplicateTitleAndSermonLink();
+        if (isDuplicate) {
+          toast({
+            title: 'Title or Sermon Link Already Exists',
+            description:
+              'Sermon Note with the same title or sermon link already exists.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+          return;
+        }
         // Create Unique Sermon ID
         const formattedData = formatDate(sermonNoteData.date);
         const sermonId = `${
