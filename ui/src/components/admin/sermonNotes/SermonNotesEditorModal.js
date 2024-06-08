@@ -178,7 +178,6 @@ const SermonNotesEditorModal = (props) => {
     const numberOfSermonNotes = result.filter((sermonNotes) => {
       return sermonNotes.date === sermonNoteData.date;
     });
-    console.log(numberOfSermonNotes);
     if (numberOfSermonNotes.length > 0) {
       setNumberOfSermons(numberOfSermonNotes.length);
     } else {
