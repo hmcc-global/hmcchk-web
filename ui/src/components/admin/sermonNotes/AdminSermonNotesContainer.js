@@ -130,7 +130,6 @@ const AdminSermonNotesContainer = (props) => {
       // use this once sermonLink is implemented
       publicLink = `${host}/${sermonLink}`;
     }
-    console.log(publicLink);
     navigator?.clipboard?.writeText(publicLink);
     toast({
       description: 'Semron Notes Public Link Copied to clipboard!',

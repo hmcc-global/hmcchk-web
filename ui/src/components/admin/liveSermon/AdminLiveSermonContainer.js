@@ -18,6 +18,7 @@ import { DateTime } from 'luxon';
 
 export default function AdminLiveSermonContainer(props) {
   const toast = useToast();
+  const { user, history } = props;
 
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -363,6 +364,8 @@ export default function AdminLiveSermonContainer(props) {
               </Heading>
               <PreviewOnlineSermonContainer
                 isPreviewing={isPreviewing}
+                user={user}
+                history={history}
                 setIsPreviewing={setIsPreviewing}
                 data={{
                   title,

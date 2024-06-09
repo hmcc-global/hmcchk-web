@@ -5,11 +5,14 @@ import { useDebounce } from 'react-use';
 import TiptapOutput from '../helpers/TipTap/TiptapOutput';
 
 const SermonNotesContainer = (props) => {
-  const { user, history } = props;
+  const { user, history, sermonNoteId } = props;
   const [sermonNotes, setSermonNotes] = useState();
   const [userSermonNotes, setUserSermonNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
-  const sermonId = history.location.pathname.split('/').reverse()[0]; // Get the id at the back of the link
+  const sermonId =
+    sermonNoteId && sermonNoteId !== ''
+      ? sermonNoteId
+      : history.location.pathname.split('/').reverse()[0]; // Get the id at the back of the link
 
   const getSermonNotesParent = useCallback(async () => {
     try {
@@ -31,7 +34,7 @@ const SermonNotesContainer = (props) => {
     try {
       const { data, status } = await axios.get('/api/user-sermon-notes/get', {
         params: {
-          userId: user.id,
+          userId: user?.id || '',
           sermonId: sermonId,
         },
       });
@@ -50,7 +53,7 @@ const SermonNotesContainer = (props) => {
         const { data, status } = await axios.put(
           '/api/user-sermon-notes/update',
           {
-            userId: user.id,
+            userId: user?.id || '',
             sermonId: sermonId,
             editedContent: editUserSermonNotes,
           }
@@ -66,7 +69,7 @@ const SermonNotesContainer = (props) => {
         const { data, status } = await axios.post(
           '/api/user-sermon-notes/create',
           {
-            userId: user.id,
+            userId: user?.id || '',
             sermonId: sermonId,
             editedContent: editUserSermonNotes,
           }
@@ -80,7 +83,7 @@ const SermonNotesContainer = (props) => {
       }
     }
   }, [
-    user.id,
+    user?.id,
     sermonId,
     editUserSermonNotes,
     userSermonNotes,

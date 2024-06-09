@@ -17,9 +17,8 @@ import OnlinePageButtons from './OnlinePageButtons';
 import OnlinePageTabs from './OnlinePageTabs';
 
 const OnlineSermonContainer = (props) => {
-  const { history } = props;
+  const { user, history } = props;
   const [onlineSermon, setOnlineSermon] = useState();
-
   const getOnlineSermon = useCallback(async () => {
     try {
       const { data, status } = await axios.get(
@@ -48,21 +47,23 @@ const OnlineSermonContainer = (props) => {
   }, [getOnlineSermon]);
 
   const getSermonDate = () => {
-    if (onlineSermon.sermonDateTime){
-      return DateTime.fromISO(onlineSermon.sermonDateTime).toFormat('dd MMM yyyy');
+    if (onlineSermon.sermonDateTime) {
+      return DateTime.fromISO(onlineSermon.sermonDateTime).toFormat(
+        'dd MMM yyyy'
+      );
     }
-  }
+  };
 
   const getSermonTime = () => {
-    if (onlineSermon.sermonDateTime){
+    if (onlineSermon.sermonDateTime) {
       return DateTime.fromISO(onlineSermon.sermonDateTime).toFormat('hh:mm a');
     }
-  }
+  };
 
   return (
     <>
-      { onlineSermon && (
-        <Container maxW={{base: '100%', lg: '85%' }}>
+      {onlineSermon && (
+        <Container maxW={{ base: '100%', lg: '85%' }}>
           <VStack>
             <Link href="/sermons" alignSelf="baseline">
               <Button
@@ -76,8 +77,13 @@ const OnlineSermonContainer = (props) => {
                 See all past sermons
               </Button>
             </Link>
-            <Box display="flex" flexDirection={{base: 'column', lg: 'row'}} alignItems={{base: 'center', lg: 'unset'}} w="100%">
-              <Box mb="20px" w={{base: '100%', lg: '60%'}}>
+            <Box
+              display="flex"
+              flexDirection={{ base: 'column', lg: 'row' }}
+              alignItems={{ base: 'center', lg: 'unset' }}
+              w="100%"
+            >
+              <Box mb="20px" w={{ base: '100%', lg: '60%' }}>
                 <VStack alignItems="left" alignContent="left">
                   <AspectRatio mb="5" width="100%" ratio={16 / 9}>
                     <iframe
@@ -137,10 +143,26 @@ const OnlineSermonContainer = (props) => {
                   </Stack>
                 </VStack>
               </Box>
-              <Box ml={{base: '0px', lg: '20px' }} mb="20px" w={{base: '100%', lg: '40%'}} overflowY="auto" position="relative" borderRadius={10} boxShadow="0px 4px 18px rgba(0, 0, 0, 0.25)">
-                <Box position={{base: 'unset', lg: 'absolute '}} top={{base: 'unset', lg: 0 }} left={{base: 'unset', lg: 0 }} w="100%" h="100%">
+              <Box
+                ml={{ base: '0px', lg: '20px' }}
+                mb="20px"
+                w={{ base: '100%', lg: '40%' }}
+                overflowY="auto"
+                position="relative"
+                borderRadius={10}
+                boxShadow="0px 4px 18px rgba(0, 0, 0, 0.25)"
+              >
+                <Box
+                  position={{ base: 'unset', lg: 'absolute ' }}
+                  top={{ base: 'unset', lg: 0 }}
+                  left={{ base: 'unset', lg: 0 }}
+                  w="100%"
+                  h="100%"
+                >
                   <OnlinePageTabs
                     sermonNotes={onlineSermon.sermonNotes}
+                    user={user}
+                    history={history}
                   />
                 </Box>
               </Box>
