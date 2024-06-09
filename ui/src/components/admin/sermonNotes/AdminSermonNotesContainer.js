@@ -120,6 +120,25 @@ const AdminSermonNotesContainer = (props) => {
     }
   };
 
+  const copyPublicLinkHandler = (e, sermonNoteItem) => {
+    const host = window.location.host;
+    const sermonLink = e.target.value;
+    let publicLink = '';
+    if (sermonLink === '') {
+      publicLink = `${host}/sermons/notes/${sermonNoteItem.sermonId}`;
+    } else {
+      // use this once sermonLink is implemented
+      publicLink = `${host}/${sermonLink}`;
+    }
+    console.log(publicLink);
+    navigator?.clipboard?.writeText(publicLink);
+    toast({
+      description: 'Semron Notes Public Link Copied to clipboard!',
+      status: 'success',
+      duration: 5000,
+    });
+  };
+
   const onDuplicate = async (e) => {
     try {
       setIsLoading(true);
@@ -266,104 +285,117 @@ const AdminSermonNotesContainer = (props) => {
       {!isEditorOpen && (
         <>
           <List spacing="2" pt={3}>
-            {sermonNotesList.map((sermonNoteItem) => (
-              <ListItem key={sermonNoteItem.sermonId}>
-                <Box p="3" borderRadius="lg" borderWidth="1px">
-                  <Flex direction={['column', 'row']} spacing={1}>
-                    <Box maxW="13rem" pr={6}>
-                      <Image
-                        src={sermonNoteItem.imageLink}
-                        fallbackSrc="https://hongkong.sub.hmcc.net/wp-content/uploads/Screenshot-2020-09-04-at-6.39.50-PM.png"
-                      />
-                    </Box>
-                    <Stack direction="column" spacing={2}>
-                      <Heading size="md">{sermonNoteItem.title}</Heading>
-                      <Grid
-                        templateColumns={['repeat(1,2fr)', 'repeat(2,2fr)']}
-                        gap={1.5}
+            {sermonNotesList
+              .sort((a, b) => new Date(b.date) - new Date(a.date))
+              .map((sermonNoteItem) => (
+                <ListItem key={sermonNoteItem.sermonId}>
+                  <Box p="3" borderRadius="lg" borderWidth="1px">
+                    <Flex direction={['column', 'row']} spacing={1}>
+                      <Box maxW="13rem" pr={6}>
+                        <Image
+                          src={sermonNoteItem.imageLink}
+                          fallbackSrc="https://hongkong.sub.hmcc.net/wp-content/uploads/Screenshot-2020-09-04-at-6.39.50-PM.png"
+                        />
+                      </Box>
+                      <Stack direction="column" spacing={2}>
+                        <Heading size="md">{sermonNoteItem.title}</Heading>
+                        <Grid
+                          templateColumns={['repeat(1,2fr)', 'repeat(2,2fr)']}
+                          gap={1.5}
+                        >
+                          <HStack alignments="center" gap={1}>
+                            <FaRegCalendarAlt />
+                            <Text> Date: {sermonNoteItem.date} </Text>
+                          </HStack>
+                          <HStack alignments="center" gap={1}>
+                            <IoPeopleOutline />
+                            <Text>Speaker: {sermonNoteItem.speaker}</Text>
+                          </HStack>
+                          <HStack alignments="center" gap={1}>
+                            <MdOutlineVideoLibrary />
+                            <Text>
+                              Sermon Series: {sermonNoteItem.sermonSeries}
+                            </Text>
+                          </HStack>
+                          <HStack alignments="center" gap={1}>
+                            <IoBookOutline />
+                            <Text>Passage: {sermonNoteItem.passage}</Text>
+                          </HStack>
+                          <HStack alignments="center" gap={1}>
+                            <BiDonateHeart />
+                            <Text>
+                              Service Type: {sermonNoteItem.serviceType}
+                            </Text>
+                          </HStack>
+                        </Grid>
+                      </Stack>
+                      <Spacer />
+                      <Stack
+                        pt={[3, 0]}
+                        spacing={1}
+                        direction={['column', 'row']}
+                        alignItems="center"
                       >
-                        <HStack alignments="center" gap={1}>
-                          <FaRegCalendarAlt />
-                          <Text> Date: {sermonNoteItem.date} </Text>
-                        </HStack>
-                        <HStack alignments="center" gap={1}>
-                          <IoPeopleOutline />
-                          <Text>Speaker: {sermonNoteItem.speaker}</Text>
-                        </HStack>
-                        <HStack alignments="center" gap={1}>
-                          <MdOutlineVideoLibrary />
-                          <Text>
-                            Sermon Series: {sermonNoteItem.sermonSeries}
-                          </Text>
-                        </HStack>
-                        <HStack alignments="center" gap={1}>
-                          <IoBookOutline />
-                          <Text>Passage: {sermonNoteItem.passage}</Text>
-                        </HStack>
-                        <HStack alignments="center" gap={1}>
-                          <BiDonateHeart />
-                          <Text>
-                            Service Type: {sermonNoteItem.serviceType}
-                          </Text>
-                        </HStack>
-                      </Grid>
-                    </Stack>
-                    <Spacer />
-                    <Stack
-                      pt={[3, 0]}
-                      spacing={1}
-                      direction={['column', 'row']}
-                      alignItems="center"
-                    >
-                      <Button
-                        color="white"
-                        value={sermonNoteItem.sermonId}
-                        bgColor={
-                          sermonNoteItem.isPublished
-                            ? 'purple.800'
-                            : 'purple.500'
-                        }
-                        onClick={onPublish}
-                        disabled={isPublishDisabled()}
-                        width={['100%', '100%', '100%', 'auto']}
-                      >
-                        {sermonNoteItem.isPublished ? 'Unpublish' : 'Publish'}
-                      </Button>
-                      <Button
-                        colorScheme="blue"
-                        value={sermonNoteItem.sermonId}
-                        onClick={onEdit}
-                        isLoading={isLoading}
-                        width={['100%', '100%', '100%', 'auto']}
-                        disabled={isPublishDisabled()}
-                      >
-                        Edit
-                      </Button>
-                      <Button
-                        colorScheme="blue"
-                        value={sermonNoteItem.sermonId}
-                        onClick={onDuplicate}
-                        isLoading={isLoading}
-                        name="duplicate"
-                        width={['100%', '100%', '100%', 'auto']}
-                      >
-                        Duplicate
-                      </Button>
-                      <Button
-                        colorScheme="red"
-                        value={sermonNoteItem.sermonId}
-                        onClick={onDelete}
-                        disabled={isPublishDisabled()}
-                        isLoading={isLoading}
-                        width={['100%', '100%', '100%', 'auto']}
-                      >
-                        Delete
-                      </Button>
-                    </Stack>
-                  </Flex>
-                </Box>
-              </ListItem>
-            ))}
+                        <Button
+                          color="white"
+                          value={sermonNoteItem.sermonId}
+                          bgColor={
+                            sermonNoteItem.isPublished
+                              ? 'purple.800'
+                              : 'purple.500'
+                          }
+                          onClick={onPublish}
+                          disabled={isPublishDisabled()}
+                          width={['100%', '100%', '100%', 'auto']}
+                        >
+                          {sermonNoteItem.isPublished ? 'Unpublish' : 'Publish'}
+                        </Button>
+                        <Button
+                          colorScheme="blue"
+                          value={sermonNoteItem.sermonId}
+                          onClick={onEdit}
+                          isLoading={isLoading}
+                          width={['100%', '100%', '100%', 'auto']}
+                          disabled={isPublishDisabled()}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          colorScheme="blue"
+                          value={sermonNoteItem.sermonLink}
+                          onClick={(e) =>
+                            copyPublicLinkHandler(e, sermonNoteItem)
+                          }
+                          width={['100%', '100%', '100%', 'auto']}
+                          disabled={isPublishDisabled()}
+                        >
+                          Public Link
+                        </Button>
+                        <Button
+                          colorScheme="blue"
+                          value={sermonNoteItem.sermonId}
+                          onClick={onDuplicate}
+                          isLoading={isLoading}
+                          name="duplicate"
+                          width={['100%', '100%', '100%', 'auto']}
+                        >
+                          Duplicate
+                        </Button>
+                        <Button
+                          colorScheme="red"
+                          value={sermonNoteItem.sermonId}
+                          onClick={onDelete}
+                          disabled={isPublishDisabled()}
+                          isLoading={isLoading}
+                          width={['100%', '100%', '100%', 'auto']}
+                        >
+                          Delete
+                        </Button>
+                      </Stack>
+                    </Flex>
+                  </Box>
+                </ListItem>
+              ))}
           </List>
         </>
       )}
