@@ -138,13 +138,13 @@ const SermonNotesContainer = (props) => {
       return sermonNotes?.originalContent;
     }
   }, [userSermonNotes, sermonNotes?.originalContent]);
-
+  console.log(sermonNotes);
   return (
     <>
       {sermonNotes ? (
         <>
           <Box
-            width="100vw"
+            width="100%"
             height="30vh"
             style={{
               backgroundImage: `url(${sermonNotes.imageLink})`,
@@ -169,7 +169,7 @@ const SermonNotesContainer = (props) => {
               </VStack>
             </Box>
           </Box>
-          <Container my={[4, 8]} width="960px">
+          <Container my={[4, 8]} width="100%">
             <TiptapOutput
               input={originalContentWithUserNotes}
               textPassage={sermonNotes.passage}
@@ -177,7 +177,11 @@ const SermonNotesContainer = (props) => {
             />
           </Container>
         </>
-      ) : null}
+      ) : (
+        <Box p={[2,4]}>
+          <Text>Sermon Notes not available.</Text>
+        </Box>
+      )}
     </>
   );
 };

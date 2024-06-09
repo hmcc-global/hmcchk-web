@@ -53,22 +53,12 @@ const OnlinePageTabs = ({ user, history, sermonNotes }) => {
           >
             <RepeatIcon />
           </Button>
-          <Box height="90%" paddingBottom={15} backgroundColor="#F1F1F3">
-            {/* <iframe
-              key={noteId}
-              src={sermonNotes}
-              title="Sermon Notes"
-              width="100%"
-              style={
-                isMobile
-                  ? {
-                      height: '100vh',
-                    }
-                  : {
-                      height: '100%',
-                    }
-              }
-            ></iframe> */}
+          <Box
+            height="90%"
+            paddingBottom={15}
+            overflow="auto"
+            backgroundColor="#F1F1F3"
+          >
             <SermonNotesContainer
               sermonNoteId={sermonId}
               history={history}
