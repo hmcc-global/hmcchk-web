@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import {
   Container,
   FormControl,
@@ -13,7 +13,6 @@ import {
   FormErrorMessage,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
 import { customAxios as axios } from '../../helpers/customAxios';
 import TiptapEditor from '../../helpers/TipTap';
 import { useHistory } from 'react-router-dom';
@@ -51,6 +50,7 @@ const SermonNotesEditorModal = (props) => {
 
   // This is the state that will hold the number of sermons for a particular date for edge case handling
   const [numberOfSermons, setNumberOfSermons] = useState(0);
+  const [sermonNotes, setSermonNotes] = useState([]);
 
   const editorSubmitButton = (actionOnEditor) => {
     switch (actionOnEditor) {
@@ -109,15 +109,16 @@ const SermonNotesEditorModal = (props) => {
 
   const checkDuplicateTitleAndSermonLink = async () => {
     try {
-      const data = await fetchSermonNotes();
       const duplicateTitle = sermonNoteData.title;
       const duplicateSermonLink = sermonNoteData.sermonLink;
-      const duplicatedSermonNoteTitle = data.filter((sermonNote) => {
+      const duplicatedSermonNoteTitle = sermonNotes.filter((sermonNote) => {
         return sermonNote.title === duplicateTitle;
       });
-      const duplicatedSermonNoteSermonLink = data.filter((sermonNote) => {
-        return sermonNote.sermonLink === duplicateSermonLink;
-      });
+      const duplicatedSermonNoteSermonLink = sermonNotes.filter(
+        (sermonNote) => {
+          return sermonNote.sermonLink === duplicateSermonLink;
+        }
+      );
       if (
         duplicatedSermonNoteTitle.length > 0 &&
         duplicatedSermonNoteSermonLink.length > 0
@@ -231,6 +232,8 @@ const SermonNotesEditorModal = (props) => {
 
   const getData = useCallback(async () => {
     const result = await fetchSermonNotes();
+    setSermonNotes(result);
+
     // Format of Sermon ID: sn-01012021-1 (Service Type - Date - Number of Sermons)
     // Check if there are any sermon notes for the same date. This is so that we can create a unique sermon ID for the sermon notes.
     const numberOfSermonNotes = result.filter((sermonNotes) => {
