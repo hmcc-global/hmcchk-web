@@ -138,14 +138,14 @@ const SermonNotesContainer = (props) => {
       return sermonNotes?.originalContent;
     }
   }, [userSermonNotes, sermonNotes?.originalContent]);
-  console.log(sermonNotes);
   return (
     <>
       {sermonNotes ? (
         <>
           <Box
             width="100%"
-            height="30vh"
+            minHeight="30vh"
+            height="auto"
             style={{
               backgroundImage: `url(${sermonNotes.imageLink})`,
               backgroundSize: 'cover',
@@ -156,6 +156,11 @@ const SermonNotesContainer = (props) => {
             <Box
               width="100%"
               height="100%"
+              minHeight="30vh"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              padding="16px"
               backgroundColor="rgba(0, 0, 0, 0.5)"
             >
               <VStack height="100%" justifyContent="center">
@@ -178,7 +183,7 @@ const SermonNotesContainer = (props) => {
           </Container>
         </>
       ) : (
-        <Box p={[2,4]}>
+        <Box p={[2, 4]}>
           <Text>Sermon Notes not available.</Text>
         </Box>
       )}
