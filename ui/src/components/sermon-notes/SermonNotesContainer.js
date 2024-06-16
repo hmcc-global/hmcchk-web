@@ -3,6 +3,7 @@ import { customAxios as axios } from '../helpers/customAxios';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDebounce } from 'react-use';
 import TiptapOutput from '../helpers/TipTap/TiptapOutput';
+import { DateTime } from 'luxon';
 
 const SermonNotesContainer = (props) => {
   const { user, history, sermonNoteId } = props;
@@ -12,11 +13,18 @@ const SermonNotesContainer = (props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [userSermonNotes, setUserSermonNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
-  const sermonId =
-    sermonNoteId && sermonNoteId !== ''
-      ? sermonNoteId
-      : history.location.pathname.split('/').reverse()[0]; // Get the id at the back of the link
 
+  const todayId = DateTime.fromISO(new Date().toISOString()).toFormat(
+    'ddMMyyyy'
+  );
+  const urlPath = history.location.pathname.split('/').reverse()[0];
+  const sermonId =
+    sermonNoteId && sermonNoteId !== '' && sermonNoteId !== 'online'
+      ? sermonNoteId // id from the live page
+      : sermonNoteId === 'online'
+      ? `sn-${todayId}-1` // Only works when theere is just one sermon note that day
+      : urlPath; // Get the id at the back of the link
+      
   const getSermonNotesParent = useCallback(async () => {
     try {
       setIsLoading(true);

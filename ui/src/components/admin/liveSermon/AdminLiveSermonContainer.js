@@ -11,6 +11,7 @@ import {
   Button,
   FormErrorMessage,
   useToast,
+  FormHelperText,
 } from '@chakra-ui/react';
 import { customAxios as axios } from '../../helpers/customAxios';
 import PreviewOnlineSermonContainer from './PreviewOnlineSermonContainer';
@@ -265,6 +266,11 @@ export default function AdminLiveSermonContainer(props) {
                     value={sermonNotes}
                     onChange={(e) => setSermonNotes(e.target.value)}
                   />
+                  <FormHelperText>
+                    /online only works properly if there is only 1 sermon per
+                    day. Please input the sermon link if there are more than 1
+                    sermon in 1 day.
+                  </FormHelperText>
                 </FormControl>
                 <FormControl isRequired isInvalid={speaker === ''}>
                   <FormLabel>Speaker</FormLabel>

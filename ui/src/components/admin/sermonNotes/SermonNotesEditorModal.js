@@ -11,6 +11,7 @@ import {
   useToast,
   Select,
   FormErrorMessage,
+  FormHelperText,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { customAxios as axios } from '../../helpers/customAxios';
@@ -188,7 +189,6 @@ const SermonNotesEditorModal = (props) => {
         const sermonId = `${
           sermonIdMap[sermonNoteData.serviceType]
         }-${formattedData}-${numberOfSermons + 1}`;
-        setSermonNoteData({ ...sermonNoteData });
         setValue('sermonId', sermonId);
         const { status } = await axios.post('/api/sermon-notes-parent/create', {
           ...sermonNoteData,
@@ -429,6 +429,7 @@ const SermonNotesEditorModal = (props) => {
                   />
                   <FormErrorMessage>Date is required</FormErrorMessage>
                 </FormControl>
+                {/* TO-DO: Implement sermon link shortener / custom link */}
                 <FormControl>
                   <FormLabel color="#656565" fontWeight="bold">
                     Sermon Link
@@ -444,6 +445,7 @@ const SermonNotesEditorModal = (props) => {
                       })
                     }
                   />
+                  <FormHelperText>Please follow the usual format 'sn-06jul'</FormHelperText>
                 </FormControl>
                 <FormControl>
                   <FormLabel color="#656565" fontWeight="bold">
