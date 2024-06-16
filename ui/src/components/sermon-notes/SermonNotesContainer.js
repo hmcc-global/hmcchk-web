@@ -1,4 +1,4 @@
-import { Container, Box, Text, VStack } from '@chakra-ui/react';
+import { Container, Box, Text, VStack, Button } from '@chakra-ui/react';
 import { customAxios as axios } from '../helpers/customAxios';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDebounce } from 'react-use';
@@ -8,6 +8,8 @@ const SermonNotesContainer = (props) => {
   const { user, history, sermonNoteId } = props;
   const [sermonNotes, setSermonNotes] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingExistingNotes, setIsLoadingExistingNotes] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [userSermonNotes, setUserSermonNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
   const sermonId =
@@ -50,8 +52,10 @@ const SermonNotesContainer = (props) => {
     }
   }, [user, sermonId]);
 
-  // send update to the userSermonNotes 5 seconds after the user stops typing
+  // send update to the localstorage 1 seconds after the user stops typing
+  // send update to db when user click save
   const updateUserSermonNotes = useCallback(async () => {
+    setIsSubmitting(true);
     if (userSermonNotes) {
       try {
         const { data, status } = await axios.put(
@@ -86,6 +90,7 @@ const SermonNotesContainer = (props) => {
         getUserSermonNotes();
       }
     }
+    setIsSubmitting(false);
   }, [
     user?.id,
     sermonId,
@@ -107,23 +112,38 @@ const SermonNotesContainer = (props) => {
     getUserSermonNotes();
   }, [getSermonNotesParent, getUserSermonNotes]);
 
+  useEffect(() => {
+    const localUserNotes = localStorage.getItem('sermonNotes');
+    if (
+      localUserNotes !== 'null' &&
+      localUserNotes !== 'undefined' &&
+      localUserNotes
+    ) {
+      setEditUserSermonNotes(JSON.parse(localUserNotes));
+    }
+  }, []);
+
   useDebounce(
     () => {
       setEditUserSermonNotes(editUserSermonNotes);
-      updateUserSermonNotes();
+      localStorage.setItem('sermonNotes', JSON.stringify(editUserSermonNotes));
     },
-    5000,
+    1000,
     [editUserSermonNotes]
   );
 
   const originalContentWithUserNotes = useMemo(() => {
-    //TO-DO: inject the old user notes to the updated original sermon notes properly, need to add id to the user notes attrs in tiptap
+    setIsLoadingExistingNotes(true);
     if (
       userSermonNotes &&
       userSermonNotes.editedContent &&
       userSermonNotes.editedContent.content
     ) {
-      const userNotes = userSermonNotes.editedContent.content.filter(
+      const currentUserNotes =
+        editUserSermonNotes && editUserSermonNotes.content
+          ? editUserSermonNotes.editedContent
+          : userSermonNotes.editedContent;
+      const userNotes = currentUserNotes.content.filter(
         (content) => content.type === 'userNotes'
       );
       const updatedNotes = sermonNotes?.originalContent.content.map(
@@ -138,11 +158,13 @@ const SermonNotesContainer = (props) => {
           }
         }
       );
+      setIsLoadingExistingNotes(false);
       return { type: 'doc', content: updatedNotes };
     } else {
+      setIsLoadingExistingNotes(false);
       return sermonNotes?.originalContent;
     }
-  }, [userSermonNotes, sermonNotes?.originalContent]);
+  }, [userSermonNotes, sermonNotes?.originalContent, editUserSermonNotes]);
   if (isLoading) return <Text>Loading Sermon Notes...</Text>;
   return (
     <>
@@ -181,11 +203,24 @@ const SermonNotesContainer = (props) => {
             </Box>
           </Box>
           <Container my={[4, 8]} width="100%">
-            <TiptapOutput
-              input={originalContentWithUserNotes}
-              textPassage={sermonNotes.passage}
-              setUserSermonNotes={setEditUserSermonNotes}
-            />
+            {isLoadingExistingNotes ? (
+              <Text>Loading</Text>
+            ) : (
+              <TiptapOutput
+                input={originalContentWithUserNotes}
+                textPassage={sermonNotes.passage}
+                setUserSermonNotes={setEditUserSermonNotes}
+              />
+            )}
+            <Button
+              mt={8}
+              isFullWidth
+              isLoading={isSubmitting}
+              colorScheme="teal"
+              onClick={updateUserSermonNotes}
+            >
+              Save Notes
+            </Button>
           </Container>
         </>
       ) : (
