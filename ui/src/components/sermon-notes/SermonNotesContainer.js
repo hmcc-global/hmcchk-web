@@ -125,8 +125,9 @@ const SermonNotesContainer = (props) => {
       const updatedNotes = sermonNotes?.originalContent.content.map(
         (content) => {
           if (content.type === 'userNotes') {
-            // Find the corresponding user note, but currently theres no id attribute
-            const userNote = userNotes.find((note) => note.id === content.id);
+            const userNote = userNotes.find(
+              (note) => note && content && note.attrs?.id === content.attrs?.id
+            );
             return userNote ? userNote : content;
           } else {
             return content;

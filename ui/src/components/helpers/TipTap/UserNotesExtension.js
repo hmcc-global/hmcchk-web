@@ -11,6 +11,8 @@ import {
 } from '@tiptap/react';
 import React, { useContext, useState } from 'react';
 import { LastUpdatedPosContext } from './index.js';
+import { v4 as uuid } from 'uuid';
+import { Plugin } from 'prosemirror-state';
 
 export const UserNotesNode = Node.create({
   name: 'userNotes',
@@ -19,6 +21,9 @@ export const UserNotesNode = Node.create({
   addAttributes() {
     return {
       userNotes: {
+        default: null,
+      },
+      id: {
         default: null,
       },
     };
@@ -31,6 +36,7 @@ export const UserNotesNode = Node.create({
           const position = editor.state.selection.from;
           return commands.insertContentAt(position, {
             type: 'userNotes',
+            id: uuid(),
           });
         },
     };
@@ -52,16 +58,51 @@ export const UserNotesNode = Node.create({
       }),
     ];
   },
+
+  addProseMirrorPlugins() {
+    return [
+      new Plugin({
+        appendTransaction: (_transactions, oldState, newState) => {
+          if (newState.doc === oldState.doc) {
+            return;
+          }
+          const tr = newState.tr;
+
+          newState.doc.descendants((node, pos, parent) => {
+            if (node.isBlock && parent === newState.doc && !node.attrs.id) {
+              tr.setNodeMarkup(pos, undefined, {
+                ...node.attrs,
+                id: uuid(),
+              });
+            }
+          });
+
+          return tr;
+        },
+      }),
+    ];
+  },
+
   parseHTML() {
     return [
       {
-        tag: 'user-notes',
+        tag: 'div.userNotes',
+        getAttrs: (dom) => ({
+          id: dom.getAttribute('id'),
+        }),
       },
     ];
   },
 
-  renderHTML({ HTMLAttributes }) {
-    return ['user-notes', mergeAttributes(HTMLAttributes)];
+  renderHTML({ node }) {
+    return [
+      'div',
+      {
+        class: 'userNotes',
+        id: node.attrs.id, // Use the id attribute here
+      },
+      0,
+    ];
   },
   addNodeView() {
     return ReactNodeViewRenderer((props) => {

@@ -188,7 +188,7 @@ const MenuBar = ({ editor }) => {
       }, [editor]),
     },
   ];
-  // console.log(editor);
+  
   return (
     <div className="editor__header">
       <Popover trigger="hover">
