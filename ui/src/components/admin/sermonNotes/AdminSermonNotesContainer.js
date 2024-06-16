@@ -276,7 +276,10 @@ const AdminSermonNotesContainer = (props) => {
           borderColor="#3182CE"
           borderWidth={3}
           size="lg"
-          onClick={() => history.push('/admin/sermonNotes')}
+          onClick={() => {
+            history.push('/admin/sermonNotes');
+            setIsEditorOpen(false);
+          }}
         >
           Past Sermons
         </Button>
