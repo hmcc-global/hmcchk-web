@@ -1,6 +1,8 @@
 export const getBiblePassage = async (passage, currentText) => {
   try {
-    const response = await fetch(`${process.env.PUBLIC_URL}/images/bible/ESV.json`);
+    const response = await fetch(
+      `${process.env.PUBLIC_URL}/images/bible/ESV.json`
+    );
     const bible = await response.json();
 
     const trimmedPassage = passage.includes('v.')
@@ -37,11 +39,10 @@ export const getBiblePassage = async (passage, currentText) => {
 
     if (bible && bible[book] && bible[book][chapter]) {
       // TO-DO: handle if its different chapter
-
       if (verse.includes('-')) {
         let verses = verse.split('-');
         let passageBlock = '';
-        for (let i = verses[0]; i <= verses[1]; i++) {
+        for (let i = Number(verses[0]); i <= Number(verses[1]); i++) {
           passageBlock += `${i} ${bible[book][chapter][i]} `;
         }
         return passageBlock;

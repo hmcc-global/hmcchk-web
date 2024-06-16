@@ -7,6 +7,7 @@ import TiptapOutput from '../helpers/TipTap/TiptapOutput';
 const SermonNotesContainer = (props) => {
   const { user, history, sermonNoteId } = props;
   const [sermonNotes, setSermonNotes] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const [userSermonNotes, setUserSermonNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
   const sermonId =
@@ -16,6 +17,7 @@ const SermonNotesContainer = (props) => {
 
   const getSermonNotesParent = useCallback(async () => {
     try {
+      setIsLoading(true);
       const { data, status } = await axios.get('/api/sermon-notes-parent/get', {
         params: {
           sermonId: sermonId,
@@ -23,9 +25,11 @@ const SermonNotesContainer = (props) => {
       });
       if (status === 200) {
         setSermonNotes(data[0]);
+        setIsLoading(false);
       }
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   }, [sermonId]);
 
@@ -139,6 +143,7 @@ const SermonNotesContainer = (props) => {
       return sermonNotes?.originalContent;
     }
   }, [userSermonNotes, sermonNotes?.originalContent]);
+  if (isLoading) return <Text>Loading Sermon Notes...</Text>;
   return (
     <>
       {sermonNotes ? (
