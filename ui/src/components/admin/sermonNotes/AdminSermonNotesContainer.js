@@ -132,7 +132,7 @@ const AdminSermonNotesContainer = (props) => {
     }
     navigator?.clipboard?.writeText(publicLink);
     toast({
-      description: 'Semron Notes Public Link Copied to clipboard!',
+      description: 'Sermon Notes Public Link Copied to clipboard!',
       status: 'success',
       duration: 5000,
     });
