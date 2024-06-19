@@ -34,7 +34,7 @@ module.exports = {
       type: 'json',
     },
     sermonLink: {
-      required: true,
+      required: false,
       type: 'string',
     },
     serviceType: {

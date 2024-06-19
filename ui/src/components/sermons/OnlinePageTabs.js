@@ -15,12 +15,16 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import SermonNotesContainer from '../sermon-notes/SermonNotesContainer';
 
-const OnlinePageTabs = ({ sermonNotes }) => {
+const OnlinePageTabs = ({ user, history, sermonNotes }) => {
   const [noteId, setNoteId] = useState(0);
   const [tab, setTab] = useState(0);
-  const isMobile = useBreakpointValue({ base: true, lg: false});
+  const isMobile = useBreakpointValue({ base: true, lg: false });
+  const sermonId = useMemo(() => {
+    return sermonNotes && sermonNotes.split('/').reverse()[0];
+  }, [sermonNotes]);
 
   const refreshSermonNotes = () => {
     setNoteId(noteId + 1);
@@ -30,7 +34,8 @@ const OnlinePageTabs = ({ sermonNotes }) => {
     <Tabs
       isFitted
       h="100%"
-      onChange={(i) => setTab(i)} overflowY={(tab ? 'auto' : 'hidden')}
+      onChange={(i) => setTab(i)}
+      overflowY={tab ? 'auto' : 'hidden'}
     >
       <TabList orientation="horizontal">
         <Tab>Sermon Notes</Tab>
@@ -48,18 +53,17 @@ const OnlinePageTabs = ({ sermonNotes }) => {
           >
             <RepeatIcon />
           </Button>
-          <Box height="90%" paddingBottom={15} backgroundColor="#F1F1F3">
-            <iframe
-              key={noteId}
-              title="Sermon Notes"
-              src={sermonNotes}
-              width="100%"
-              style={ isMobile ? {
-                height: '100vh',
-              } : {
-                height: '100%'
-              }}
-            ></iframe>
+          <Box
+            height="90%"
+            paddingBottom={15}
+            overflow="auto"
+            backgroundColor="#F1F1F3"
+          >
+            <SermonNotesContainer
+              sermonNoteId={sermonId}
+              history={history}
+              user={user}
+            />
           </Box>
         </TabPanel>
         <TabPanel>
