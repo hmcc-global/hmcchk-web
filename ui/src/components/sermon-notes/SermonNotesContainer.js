@@ -1,18 +1,33 @@
-import { Container, Box, Text, VStack } from '@chakra-ui/react';
+import { Container, Box, Text, VStack, Button } from '@chakra-ui/react';
 import { customAxios as axios } from '../helpers/customAxios';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDebounce } from 'react-use';
 import TiptapOutput from '../helpers/TipTap/TiptapOutput';
+import { DateTime } from 'luxon';
 
 const SermonNotesContainer = (props) => {
-  const { user, history } = props;
+  const { user, history, sermonNoteId } = props;
   const [sermonNotes, setSermonNotes] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingExistingNotes, setIsLoadingExistingNotes] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [userSermonNotes, setUserSermonNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
-  const sermonId = history.location.pathname.split('/').reverse()[0]; // Get the id at the back of the link
 
+  const todayId = DateTime.fromISO(new Date().toISOString()).toFormat(
+    'ddMMyyyy'
+  );
+  const urlPath = history.location.pathname.split('/').reverse()[0];
+  const sermonId =
+    sermonNoteId && sermonNoteId !== '' && sermonNoteId !== 'online'
+      ? sermonNoteId // id from the live page
+      : sermonNoteId === 'online'
+      ? `sn-${todayId}-1` // Only works when theere is just one sermon note that day
+      : urlPath; // Get the id at the back of the link
+      
   const getSermonNotesParent = useCallback(async () => {
     try {
+      setIsLoading(true);
       const { data, status } = await axios.get('/api/sermon-notes-parent/get', {
         params: {
           sermonId: sermonId,
@@ -20,9 +35,11 @@ const SermonNotesContainer = (props) => {
       });
       if (status === 200) {
         setSermonNotes(data[0]);
+        setIsLoading(false);
       }
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   }, [sermonId]);
 
@@ -31,7 +48,7 @@ const SermonNotesContainer = (props) => {
     try {
       const { data, status } = await axios.get('/api/user-sermon-notes/get', {
         params: {
-          userId: user.id,
+          userId: user?.id || '',
           sermonId: sermonId,
         },
       });
@@ -43,14 +60,16 @@ const SermonNotesContainer = (props) => {
     }
   }, [user, sermonId]);
 
-  // send update to the userSermonNotes 5 seconds after the user stops typing
+  // send update to the localstorage 1 seconds after the user stops typing
+  // send update to db when user click save
   const updateUserSermonNotes = useCallback(async () => {
+    setIsSubmitting(true);
     if (userSermonNotes) {
       try {
         const { data, status } = await axios.put(
           '/api/user-sermon-notes/update',
           {
-            userId: user.id,
+            userId: user?.id || '',
             sermonId: sermonId,
             editedContent: editUserSermonNotes,
           }
@@ -66,7 +85,7 @@ const SermonNotesContainer = (props) => {
         const { data, status } = await axios.post(
           '/api/user-sermon-notes/create',
           {
-            userId: user.id,
+            userId: user?.id || '',
             sermonId: sermonId,
             editedContent: editUserSermonNotes,
           }
@@ -79,8 +98,9 @@ const SermonNotesContainer = (props) => {
         getUserSermonNotes();
       }
     }
+    setIsSubmitting(false);
   }, [
-    user.id,
+    user?.id,
     sermonId,
     editUserSermonNotes,
     userSermonNotes,
@@ -100,45 +120,68 @@ const SermonNotesContainer = (props) => {
     getUserSermonNotes();
   }, [getSermonNotesParent, getUserSermonNotes]);
 
+  useEffect(() => {
+    const localUserNotes = localStorage.getItem('sermonNotes');
+    if (
+      localUserNotes !== 'null' &&
+      localUserNotes !== 'undefined' &&
+      localUserNotes
+    ) {
+      setEditUserSermonNotes(JSON.parse(localUserNotes));
+    }
+  }, []);
+
   useDebounce(
     () => {
       setEditUserSermonNotes(editUserSermonNotes);
-      updateUserSermonNotes();
+      localStorage.setItem('sermonNotes', JSON.stringify(editUserSermonNotes));
     },
-    5000,
+    1000,
     [editUserSermonNotes]
   );
 
   const originalContentWithUserNotes = useMemo(() => {
-    //TO-DO: inject the old user notes to the updated original sermon notes properly, need to add id to the user notes attrs in tiptap
-    if (userSermonNotes) {
-      const userNotes = userSermonNotes.editedContent.content.filter(
+    setIsLoadingExistingNotes(true);
+    if (
+      userSermonNotes &&
+      userSermonNotes.editedContent &&
+      userSermonNotes.editedContent.content
+    ) {
+      const currentUserNotes =
+        editUserSermonNotes && editUserSermonNotes.content
+          ? editUserSermonNotes.editedContent
+          : userSermonNotes.editedContent;
+      const userNotes = currentUserNotes.content.filter(
         (content) => content.type === 'userNotes'
       );
       const updatedNotes = sermonNotes?.originalContent.content.map(
         (content) => {
           if (content.type === 'userNotes') {
-            // Find the corresponding user note, but currently theres no id attribute
-            const userNote = userNotes.find((note) => note.id === content.id);
+            const userNote = userNotes.find(
+              (note) => note && content && note.attrs?.id === content.attrs?.id
+            );
             return userNote ? userNote : content;
           } else {
             return content;
           }
         }
       );
+      setIsLoadingExistingNotes(false);
       return { type: 'doc', content: updatedNotes };
     } else {
+      setIsLoadingExistingNotes(false);
       return sermonNotes?.originalContent;
     }
-  }, [userSermonNotes, sermonNotes?.originalContent]);
-
+  }, [userSermonNotes, sermonNotes?.originalContent, editUserSermonNotes]);
+  if (isLoading) return <Text>Loading Sermon Notes...</Text>;
   return (
     <>
       {sermonNotes ? (
         <>
           <Box
-            width="100vw"
-            height="30vh"
+            width="100%"
+            minHeight="30vh"
+            height="auto"
             style={{
               backgroundImage: `url(${sermonNotes.imageLink})`,
               backgroundSize: 'cover',
@@ -149,6 +192,11 @@ const SermonNotesContainer = (props) => {
             <Box
               width="100%"
               height="100%"
+              minHeight="30vh"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              padding="16px"
               backgroundColor="rgba(0, 0, 0, 0.5)"
             >
               <VStack height="100%" justifyContent="center">
@@ -162,15 +210,32 @@ const SermonNotesContainer = (props) => {
               </VStack>
             </Box>
           </Box>
-          <Container my={[4, 8]} width="960px">
-            <TiptapOutput
-              input={originalContentWithUserNotes}
-              textPassage={sermonNotes.passage}
-              setUserSermonNotes={setEditUserSermonNotes}
-            />
+          <Container my={[4, 8]} width="100%">
+            {isLoadingExistingNotes ? (
+              <Text>Loading</Text>
+            ) : (
+              <TiptapOutput
+                input={originalContentWithUserNotes}
+                textPassage={sermonNotes.passage}
+                setUserSermonNotes={setEditUserSermonNotes}
+              />
+            )}
+            <Button
+              mt={8}
+              isFullWidth
+              isLoading={isSubmitting}
+              colorScheme="teal"
+              onClick={updateUserSermonNotes}
+            >
+              Save Notes
+            </Button>
           </Container>
         </>
-      ) : null}
+      ) : (
+        <Box p={[2, 4]}>
+          <Text>Sermon Notes not available.</Text>
+        </Box>
+      )}
     </>
   );
 };

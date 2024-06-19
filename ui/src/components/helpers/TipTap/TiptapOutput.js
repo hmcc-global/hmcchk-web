@@ -6,11 +6,13 @@ import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
+import TextStyle from '@tiptap/extension-text-style';
 import { BibleVerseNode } from './BibleVerseExtension.js';
 import { UserNotesNode } from './UserNotesExtension.js';
 import { EditorContent, useEditor } from '@tiptap/react';
 import { TextContext, LastUpdatedPosContext } from './index.js';
 import { FillInBlankNode } from './FillInBlank.js';
+import { FontSize } from './FontSizeExtension.js';
 
 const TiptapOutput = ({ input, textPassage, setUserSermonNotes }) => {
   const [lastUpdatedPos, setLastUpdatedPos] = useState(null);
@@ -26,6 +28,8 @@ const TiptapOutput = ({ input, textPassage, setUserSermonNotes }) => {
       BibleVerseNode,
       UserNotesNode,
       FillInBlankNode,
+      FontSize,
+      TextStyle,
     ],
   });
   useEffect(() => {

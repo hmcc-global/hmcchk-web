@@ -188,14 +188,14 @@ const MenuBar = ({ editor }) => {
       }, [editor]),
     },
   ];
-  // console.log(editor);
+  
   return (
     <div className="editor__header">
       <Popover trigger="hover">
         <PopoverTrigger>
           <Button
             variant="ghost"
-            style={{ color: 'white' }}
+            style={{ color: 'white', backgroundColor: 'black' }}
             _hover={{ color: 'black' }}
           >
             Text Style

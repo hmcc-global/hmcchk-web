@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import {
   Container,
   FormControl,
@@ -11,15 +11,15 @@ import {
   useToast,
   Select,
   FormErrorMessage,
+  FormHelperText,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
 import { customAxios as axios } from '../../helpers/customAxios';
 import TiptapEditor from '../../helpers/TipTap';
 import { useHistory } from 'react-router-dom';
 
 const SermonNotesEditorModal = (props) => {
-  const { editSermonNotesData, actionOnEditor } = props;
+  const { editSermonNotesData, actionOnEditor, setIsEditorOpen } = props;
   const {
     register,
     handleSubmit,
@@ -51,6 +51,7 @@ const SermonNotesEditorModal = (props) => {
 
   // This is the state that will hold the number of sermons for a particular date for edge case handling
   const [numberOfSermons, setNumberOfSermons] = useState(0);
+  const [sermonNotes, setSermonNotes] = useState([]);
 
   const editorSubmitButton = (actionOnEditor) => {
     switch (actionOnEditor) {
@@ -107,6 +108,33 @@ const SermonNotesEditorModal = (props) => {
     }
   }, [toast]);
 
+  const checkDuplicateTitleAndSermonLink = async () => {
+    try {
+      const duplicateTitle = sermonNoteData.title;
+      const duplicateSermonLink = sermonNoteData.sermonLink;
+      const duplicatedSermonNoteTitle = sermonNotes.filter((sermonNote) => {
+        return sermonNote.title === duplicateTitle;
+      });
+      const duplicatedSermonNoteSermonLink = sermonNotes.filter(
+        (sermonNote) => {
+          return sermonNote.sermonLink === duplicateSermonLink;
+        }
+      );
+      if (
+        duplicatedSermonNoteTitle.length > 0 &&
+        duplicatedSermonNoteSermonLink.length > 0
+      ) {
+        return 'both';
+      } else if (duplicatedSermonNoteTitle.length > 0) {
+        return 'title';
+      } else if (duplicatedSermonNoteSermonLink.length > 0) {
+        return 'sermonLink';
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const onSubmitSermonNotes = async (e) => {
     try {
       if (actionOnEditor === 'edit') {
@@ -116,36 +144,79 @@ const SermonNotesEditorModal = (props) => {
         });
         if (status === 200) {
           toast({
-            title: 'Announcement Updated',
-            description: 'Your announcement has been updated.',
+            title: 'Sermon Note Updated',
+            description: 'Your Sermon Note has been updated.',
             status: 'success',
             duration: 5000,
             isClosable: true,
           });
         }
       } else {
+        const isDuplicate = await checkDuplicateTitleAndSermonLink();
+        if (isDuplicate === 'both') {
+          toast({
+            title: 'Duplicated Sermon Title and Sermon Link',
+            description:
+              'A sermon note with the same title and sermon link already exists. Please rename the title and sermon link.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+          return;
+        } else if (isDuplicate === 'title') {
+          toast({
+            title: 'Duplicated Sermon Title',
+            description:
+              'A sermon note with the same title already exists.Please rename the title.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+          return;
+        } else if (isDuplicate === 'sermonLink') {
+          toast({
+            title: 'Duplicated Sermon Link',
+            description:
+              'A sermon note with the same sermon link already exists. Please rename the sermon link.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+          return;
+        }
         // Create Unique Sermon ID
         const formattedData = formatDate(sermonNoteData.date);
         const sermonId = `${
           sermonIdMap[sermonNoteData.serviceType]
         }-${formattedData}-${numberOfSermons + 1}`;
-        setSermonNoteData({ ...sermonNoteData });
         setValue('sermonId', sermonId);
-
         const { status } = await axios.post('/api/sermon-notes-parent/create', {
           ...sermonNoteData,
           sermonId: sermonId,
           isPublished: true,
         });
-        if (status === 200) {
-          toast({
-            title: 'Announcement Created',
-            description: 'Your announcement has been created.',
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-          });
+        if (actionOnEditor === 'duplicate') {
+          if (status === 200) {
+            toast({
+              title: 'Sermon Note Duplicated',
+              description: 'Your sermon note has been duplicated.',
+              status: 'success',
+              duration: 5000,
+              isClosable: true,
+            });
+          }
+        } else {
+          if (status === 200) {
+            toast({
+              title: 'Sermon Note Created',
+              description: 'Your sermon note has been created.',
+              status: 'success',
+              duration: 5000,
+              isClosable: true,
+            });
+          }
         }
+        setIsEditorOpen(false);
       }
     } catch (err) {
       console.log('Error');
@@ -161,6 +232,8 @@ const SermonNotesEditorModal = (props) => {
 
   const getData = useCallback(async () => {
     const result = await fetchSermonNotes();
+    setSermonNotes(result);
+
     // Format of Sermon ID: sn-01012021-1 (Service Type - Date - Number of Sermons)
     // Check if there are any sermon notes for the same date. This is so that we can create a unique sermon ID for the sermon notes.
     const numberOfSermonNotes = result.filter((sermonNotes) => {
@@ -356,6 +429,7 @@ const SermonNotesEditorModal = (props) => {
                   />
                   <FormErrorMessage>Date is required</FormErrorMessage>
                 </FormControl>
+                {/* TO-DO: Implement sermon link shortener / custom link */}
                 <FormControl>
                   <FormLabel color="#656565" fontWeight="bold">
                     Sermon Link
@@ -371,6 +445,7 @@ const SermonNotesEditorModal = (props) => {
                       })
                     }
                   />
+                  <FormHelperText>Please follow the usual format 'sn-06jul'</FormHelperText>
                 </FormControl>
                 <FormControl>
                   <FormLabel color="#656565" fontWeight="bold">

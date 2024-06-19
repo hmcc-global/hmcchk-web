@@ -11,6 +11,7 @@ import {
   Button,
   FormErrorMessage,
   useToast,
+  FormHelperText,
 } from '@chakra-ui/react';
 import { customAxios as axios } from '../../helpers/customAxios';
 import PreviewOnlineSermonContainer from './PreviewOnlineSermonContainer';
@@ -18,6 +19,7 @@ import { DateTime } from 'luxon';
 
 export default function AdminLiveSermonContainer(props) {
   const toast = useToast();
+  const { user, history } = props;
 
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -264,6 +266,11 @@ export default function AdminLiveSermonContainer(props) {
                     value={sermonNotes}
                     onChange={(e) => setSermonNotes(e.target.value)}
                   />
+                  <FormHelperText>
+                    /online only works properly if there is only 1 sermon per
+                    day. Please input the sermon link if there are more than 1
+                    sermon in 1 day.
+                  </FormHelperText>
                 </FormControl>
                 <FormControl isRequired isInvalid={speaker === ''}>
                   <FormLabel>Speaker</FormLabel>
@@ -363,6 +370,8 @@ export default function AdminLiveSermonContainer(props) {
               </Heading>
               <PreviewOnlineSermonContainer
                 isPreviewing={isPreviewing}
+                user={user}
+                history={history}
                 setIsPreviewing={setIsPreviewing}
                 data={{
                   title,

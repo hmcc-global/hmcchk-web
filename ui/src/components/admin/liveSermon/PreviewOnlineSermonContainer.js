@@ -16,10 +16,10 @@ import OnlinePageTabs from '../../sermons/OnlinePageTabs';
 import { DateTime } from 'luxon';
 
 const PreviewOnlineSermonContainer = (props) => {
-  const { isPreviewing, setIsPreviewing, data } = props;
+  const { isPreviewing, setIsPreviewing, data, user, history } = props;
 
   const [title, setTitle] = useState('');
-  const [sermonDescription, setSermonDescription] = useState('')
+  const [sermonDescription, setSermonDescription] = useState('');
   const [streamLink, setStreamLink] = useState('');
   const [sermonNotes, setSermonNotes] = useState('');
   const [speaker, setSpeaker] = useState('');
@@ -40,22 +40,22 @@ const PreviewOnlineSermonContainer = (props) => {
     }
 
     setIsPreviewing(false);
-  }, [data, isPreviewing, setIsPreviewing])
+  }, [data, isPreviewing, setIsPreviewing]);
 
   const getSermonDate = () => {
-    if (sermonDateTime){
+    if (sermonDateTime) {
       return DateTime.fromISO(sermonDateTime).toFormat('dd MMM yyyy');
     }
-  }
+  };
 
   const getSermonTime = () => {
-    if (sermonDateTime){
+    if (sermonDateTime) {
       return DateTime.fromISO(sermonDateTime).toFormat('hh:mm a');
     }
-  }
+  };
 
   return (
-    <Container maxW={{base: '100%', lg: '85%' }}>
+    <Container maxW={{ base: '100%', lg: '85%' }}>
       <VStack>
         <Link alignSelf="baseline">
           <Button
@@ -69,10 +69,20 @@ const PreviewOnlineSermonContainer = (props) => {
             See all past sermons
           </Button>
         </Link>
-        <Box display="flex" flexDirection={{base: 'column', lg: 'row'}} alignItems={{base: 'center', lg: 'unset'}} w="100%">
-          <Box mb="20px" w={{base: '100%', lg: '60%'}}>
+        <Box
+          display="flex"
+          flexDirection={{ base: 'column', lg: 'row' }}
+          alignItems={{ base: 'center', lg: 'unset' }}
+          w="100%"
+        >
+          <Box mb="20px" w={{ base: '100%', lg: '50%' }}>
             <VStack alignItems="left" alignContent="left">
-              <AspectRatio mb="5" width="100%" ratio={16 / 9} backgroundColor="#F1F1F3">
+              <AspectRatio
+                mb="5"
+                width="100%"
+                ratio={16 / 9}
+                backgroundColor="#F1F1F3"
+              >
                 <iframe
                   width="560"
                   height="315"
@@ -130,10 +140,26 @@ const PreviewOnlineSermonContainer = (props) => {
               </Stack>
             </VStack>
           </Box>
-          <Box ml={{base: '0px', lg: '20px' }} mb="20px" w={{base: '100%', lg: '40%'}} overflowY="auto" position="relative" borderRadius={10} boxShadow="0px 4px 18px rgba(0, 0, 0, 0.25)">
-            <Box position={{base: 'unset', lg: 'absolute '}} top={{base: 'unset', lg: 0 }} left={{base: 'unset', lg: 0 }} w="100%" h="100%">
+          <Box
+            ml={{ base: '0px', lg: '20px' }}
+            mb="20px"
+            w={{ base: '100%', lg: '50%' }}
+            overflowY="auto"
+            position="relative"
+            borderRadius={10}
+            boxShadow="0px 4px 18px rgba(0, 0, 0, 0.25)"
+          >
+            <Box
+              position={{ base: 'unset', lg: 'absolute ' }}
+              top={{ base: 'unset', lg: 0 }}
+              left={{ base: 'unset', lg: 0 }}
+              w="100%"
+              h="100%"
+            >
               <OnlinePageTabs
                 sermonNotes={sermonNotes}
+                user={user}
+                history={history}
               />
             </Box>
           </Box>

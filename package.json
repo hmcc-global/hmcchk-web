@@ -7,6 +7,7 @@
   "dependencies": {
     "@fontsource/dm-sans": "^4.5.9",
     "react-google-recaptcha": "^2.1.0",
-    "react-slick": "^0.28.1"
+    "react-slick": "^0.28.1",
+    "uuid": "^10.0.0"
   }
 }
