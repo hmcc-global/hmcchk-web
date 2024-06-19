@@ -128,7 +128,8 @@ const AdminSermonNotesContainer = (props) => {
       publicLink = `${host}/sermons/notes/${sermonNoteItem.sermonId}`;
     } else {
       // use this once sermonLink is implemented
-      publicLink = `${host}/${sermonLink}`;
+      // publicLink = `${host}/${sermonLink}`;
+      publicLink = `${host}/sermons/notes/${sermonNoteItem.sermonId}`;
     }
     navigator?.clipboard?.writeText(publicLink);
     toast({
