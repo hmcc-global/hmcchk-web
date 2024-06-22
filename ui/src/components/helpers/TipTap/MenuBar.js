@@ -187,8 +187,21 @@ const MenuBar = ({ editor }) => {
         editor.commands.insertUserNotes();
       }, [editor]),
     },
+    {
+      icon: 'space',
+      title: 'Fill in The Blank',
+      action: useCallback(() => {
+        const { from, to } = editor.state.selection;
+        const textBlank = editor.state.doc.textBetween(from, to);
+        if (textBlank === null) {
+          return;
+        }
+        editor.commands.insertFillInBlank(textBlank);
+        editor.view.dispatch(editor.view.state.tr.delete(from + 2, to + 2));
+      }, [editor]),
+    },
   ];
-  
+
   return (
     <div className="editor__header">
       <Popover trigger="hover">
