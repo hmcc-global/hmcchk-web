@@ -24,7 +24,7 @@ const SermonNotesContainer = (props) => {
       : sermonNoteId === 'online'
       ? `sn-${todayId}-1` // Only works when theere is just one sermon note that day
       : urlPath; // Get the id at the back of the link
-      
+
   const getSermonNotesParent = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -45,6 +45,7 @@ const SermonNotesContainer = (props) => {
 
   // TO-DO: check if the user logged in or not
   const getUserSermonNotes = useCallback(async () => {
+    setIsLoadingExistingNotes(true)
     try {
       const { data, status } = await axios.get('/api/user-sermon-notes/get', {
         params: {
@@ -58,6 +59,7 @@ const SermonNotesContainer = (props) => {
     } catch (error) {
       console.log(error);
     }
+    setIsLoadingExistingNotes(false)
   }, [user, sermonId]);
 
   // send update to the localstorage 1 seconds after the user stops typing
@@ -141,35 +143,41 @@ const SermonNotesContainer = (props) => {
   );
 
   const originalContentWithUserNotes = useMemo(() => {
-    setIsLoadingExistingNotes(true);
-    if (
+    const isUserSermonNotesExist =
       userSermonNotes &&
       userSermonNotes.editedContent &&
-      userSermonNotes.editedContent.content
-    ) {
-      const currentUserNotes =
-        editUserSermonNotes && editUserSermonNotes.content
-          ? editUserSermonNotes.editedContent
-          : userSermonNotes.editedContent;
-      const userNotes = currentUserNotes.content.filter(
-        (content) => content.type === 'userNotes'
-      );
+      userSermonNotes.editedContent.content;
+    const isEditUserSermonNotesExist =
+      editUserSermonNotes && editUserSermonNotes.content;
+
+    if (isUserSermonNotesExist || isEditUserSermonNotesExist) {
+      const currentUserNotes = isEditUserSermonNotesExist
+        ? editUserSermonNotes
+        : isUserSermonNotesExist
+        ? userSermonNotes.editedContent
+        : sermonNotes?.originalContent.content;
+      const userNotes =
+        currentUserNotes &&
+        currentUserNotes.content.filter(
+          (content) => content.type === 'userNotes'
+        );
       const updatedNotes = sermonNotes?.originalContent.content.map(
         (content) => {
           if (content.type === 'userNotes') {
-            const userNote = userNotes.find(
-              (note) => note && content && note.attrs?.id === content.attrs?.id
-            );
+            const userNote =
+              userNotes &&
+              userNotes.find(
+                (note) =>
+                  note && content && note.attrs?.id === content.attrs?.id
+              );
             return userNote ? userNote : content;
           } else {
             return content;
           }
         }
       );
-      setIsLoadingExistingNotes(false);
       return { type: 'doc', content: updatedNotes };
     } else {
-      setIsLoadingExistingNotes(false);
       return sermonNotes?.originalContent;
     }
   }, [userSermonNotes, sermonNotes?.originalContent, editUserSermonNotes]);
