@@ -22,11 +22,12 @@ export const FillInBlankNode = Node.create({
   addCommands() {
     return {
       insertFillInBlank:
-        () =>
+        (fillText) =>
         ({ commands, editor }) => {
           const position = editor.state.selection.from;
           return commands.insertContentAt(position, {
             type: 'fillInBlank',
+            attrs: { editorText: fillText, userText: '' },
           });
         },
       filledInBlank:

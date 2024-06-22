@@ -59,6 +59,7 @@ const TiptapEditor = ({
 
   const [lastUpdatedPos, setLastUpdatedPos] = useState(null);
   const hasRun = useRef(false);
+
   useEffect(() => {
     if (!hasRun.current && editor && !isContentEmpty) {
       editor.commands.setContent(existingContent);
