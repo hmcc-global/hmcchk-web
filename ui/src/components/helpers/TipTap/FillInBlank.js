@@ -53,7 +53,7 @@ export const FillInBlankNode = Node.create({
   addPasteRules() {
     return [
       nodePasteRule({
-        find: /(_{4}\(([^)]+)\))/,
+        find: /(_{4}\(([^)]+)\))/g,
         type: this.type,
         getAttributes: (match) => {
           return {

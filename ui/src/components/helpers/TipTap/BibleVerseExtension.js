@@ -81,7 +81,7 @@ export const BibleVerseNode = Node.create({
     });
   },
 });
-//READ Isaiah 53:5
+
 const BibleVerseWithAccordion = (props) => {
   const verse = props.node.attrs.bibleVerse;
   const actionText = props.node.attrs.actionText;
