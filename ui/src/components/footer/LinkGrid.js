@@ -4,8 +4,8 @@ import LinkList from './footerLinks.json';
 
 const LinkItem = (i, linkText, href, target = '_self', fontWeight = '400') => {
   return (
-    <Link href={href} key={i}>
-      <Text fontWeight={fontWeight} target={target} key={i}>
+    <Link href={href} key={linkText}>
+      <Text fontWeight={fontWeight} target={target}>
         {linkText}
       </Text>
     </Link>

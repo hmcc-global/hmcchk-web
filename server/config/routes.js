@@ -69,6 +69,15 @@ module.exports.routes = {
   'get /api/sermons/get-sermon-series': 'sermons/get-sermon-series',
   'get /api/sermons/get-service-types': 'sermons/get-service-types',
 
+  // User Sermon APIs
+  'get /api/user-sermon-notes/get': 'userSermonNotes/get-user-sermon-notes',
+  'post /api/user-sermon-notes/create':
+    'userSermonNotes/create-user-sermon-notes',
+  'put /api/user-sermon-notes/update':
+    'userSermonNotes/update-user-sermon-notes',
+  'put /api/user-sermon-notes/delete':
+    'userSermonNotes/delete-user-sermon-notes',
+
   // Media APIs
   'get /api/media/get-media': 'media/get-media',
 
@@ -127,6 +136,12 @@ module.exports.routes = {
   'get /api/leadership-team/get': 'leadershipTeam/get-leadership-team',
   'post /api/leadership-team/create': 'leadershipTeam/create-leadership-team',
   'put /api/leadership-team/update': 'leadershipTeam/update-leadership-team',
+  
+  // Sermon Notes Parent APIs
+  'get /api/sermon-notes-parent/get': 'sermonNotesParent/get-sermon-notes-parent',
+  'post /api/sermon-notes-parent/create': 'sermonNotesParent/create-sermon-notes-parent',
+  'put /api/sermon-notes-parent/update': 'sermonNotesParent/update-sermon-notes-parent',
+  'put /api/sermon-notes-parent/delete': 'sermonNotesParent/delete-sermon-notes-parent',
 
   // UI
   'get /*': {
