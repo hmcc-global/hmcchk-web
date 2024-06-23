@@ -35,7 +35,7 @@ const OurMinistries = (props) => {
             fontSize={['1.5em', '1.5em', '2em']}
             fontWeight={700}
           >
-            UNDERGRADS
+            UNIVERSITY STUDENTS
           </Heading>
           <Text fontWeight={400} fontSize={['xs', 'sm', 'md']} mt={[2, 6, 8]}>
             Reaching the college students in the university campuses of Hong
