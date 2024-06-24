@@ -79,9 +79,13 @@ const EventsPage = (props) => {
         const filtered = [];
         const tagsList = new Set([]);
         const filteredEndDate = data.filter((item) => {
-          if (item.displayEndDateTime !== '') {
+          if (
+            item.displayEndDateTime !== '' &&
+            item.displayStartDateTime !== ''
+          ) {
             // Add one day to offset end date to end of day
             let endDate = new DateTime.fromISO(item.displayEndDateTime);
+            let startDate = new DateTime.fromISO(item.displayStartDateTime);
             const renderDate = getRenderDate(
               item.eventStartDate,
               item.eventEndDate,
@@ -89,7 +93,7 @@ const EventsPage = (props) => {
               item.eventStartTime
             );
             item.renderDate = renderDate;
-            return endDate > DateTime.now();
+            return endDate > DateTime.now() && DateTime.now() > startDate;
           } else return false;
         });
         filteredEndDate.sort((a, b) =>
@@ -101,6 +105,23 @@ const EventsPage = (props) => {
             ? -1
             : 1
         );
+        // Resources are last in the list
+        filteredEndDate.sort((a, b) => {
+          const hasOthersA = a.eventType?.some(
+            (type) => type.value === 'Resources'
+          );
+          const hasOthersB = b.eventType?.some(
+            (type) => type.value === 'Resources'
+          );
+
+          if (hasOthersA && !hasOthersB) {
+            return 1;
+          } else if (!hasOthersA && hasOthersB) {
+            return -1;
+          } else {
+            return a.renderDate < b.renderDate ? -1 : 1;
+          }
+        });
         filtered.push(...filteredEndDate);
         filtered.forEach((data) => {
           if (data.eventType === null || data.eventType === undefined) {
