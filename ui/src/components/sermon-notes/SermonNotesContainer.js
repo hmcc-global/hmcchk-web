@@ -45,7 +45,7 @@ const SermonNotesContainer = (props) => {
 
   // TO-DO: check if the user logged in or not
   const getUserSermonNotes = useCallback(async () => {
-    setIsLoadingExistingNotes(true)
+    setIsLoadingExistingNotes(true);
     try {
       const { data, status } = await axios.get('/api/user-sermon-notes/get', {
         params: {
@@ -59,7 +59,7 @@ const SermonNotesContainer = (props) => {
     } catch (error) {
       console.log(error);
     }
-    setIsLoadingExistingNotes(false)
+    setIsLoadingExistingNotes(false);
   }, [user, sermonId]);
 
   // send update to the localstorage 1 seconds after the user stops typing
