@@ -45,7 +45,7 @@ const SermonNotesContainer = (props) => {
 
   // TO-DO: check if the user logged in or not
   const getUserSermonNotes = useCallback(async () => {
-    setIsLoadingExistingNotes(true)
+    setIsLoadingExistingNotes(true);
     try {
       const { data, status } = await axios.get('/api/user-sermon-notes/get', {
         params: {
@@ -59,7 +59,7 @@ const SermonNotesContainer = (props) => {
     } catch (error) {
       console.log(error);
     }
-    setIsLoadingExistingNotes(false)
+    setIsLoadingExistingNotes(false);
   }, [user, sermonId]);
 
   // send update to the localstorage 1 seconds after the user stops typing
@@ -207,13 +207,19 @@ const SermonNotesContainer = (props) => {
               padding="16px"
               backgroundColor="rgba(0, 0, 0, 0.5)"
             >
-              <VStack height="100%" justifyContent="center">
-                <Text color="white" fontWeight={700} fontSize={[24, 40]}>
+              <VStack height="100%" justifyContent="center" spacing={4}>
+                <Text
+                  color="white"
+                  fontWeight={700}
+                  fontSize={[24, 40]}
+                  textAlign="center"
+                >
                   {sermonNotes.title}
                 </Text>
                 <Text
                   color="white"
-                  fontSize={[10, 18]}
+                  fontSize={[14, 22]}
+                  textAlign="center"
                 >{`By ${sermonNotes.speaker}, ${sermonDate}`}</Text>
               </VStack>
             </Box>
