@@ -80,7 +80,7 @@ module.exports.policies = {
   'userSermonNotes/update-user-sermon-notes': ['isLoggedIn', 'aboveTech'],
 
   // User Sermon Note
-  'sermonNotesParent/*': ['isLoggedIn', 'aboveMinistry'],
+  'sermonNotesParent/*': true,
 
   // Media
   'media/*': true,
