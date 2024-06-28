@@ -1,6 +1,7 @@
 import { Node, nodeInputRule, nodePasteRule } from '@tiptap/core';
 import { NodeViewWrapper, ReactNodeViewRenderer } from '@tiptap/react';
 import React, { useState, useEffect, useRef } from 'react';
+import { v4 as uuid } from 'uuid';
 
 let currentId = 0;
 
@@ -31,10 +32,9 @@ export const FillInBlankNode = Node.create({
         (fillText) =>
         ({ commands, editor }) => {
           const position = editor.state.selection.from;
-          currentId++;
           return commands.insertContentAt(position, {
             type: 'fillInBlank',
-            attrs: { editorText: fillText, userText: '', currentId: currentId },
+            attrs: { editorText: fillText, userText: '', currentId: uuid() },
           });
         },
     };
