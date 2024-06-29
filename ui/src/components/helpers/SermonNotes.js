@@ -26,21 +26,21 @@ export const getBiblePassage = async (passage, currentText) => {
       const [firstChapter, firstVerse] = firstChapterVerse.split(':');
       const [lastChapter, lastVerse] = lastChapterVerse.split(':');
       let passageBlock = '';
-      for (let i = Number(firstChapter); i <= lastChapter; i++) {
-        if (i === Number(firstChapter)) {
-          for (let j = firstVerse; bible[book][i][j] !== undefined; j++) {
-            passageBlock += `${j} ${bible[book][i][j]} `;
+      for (let chapterLoop = Number(firstChapter); chapterLoop <= lastChapter; chapterLoop++) {
+        if (chapterLoop === Number(firstChapter)) {
+          for (let verseLoop = firstVerse; bible[book][chapterLoop][verseLoop] !== undefined; verseLoop++) {
+            passageBlock += `${verseLoop} ${bible[book][chapterLoop][verseLoop]} `;
           }
           passageBlock += '<br />';
-        } else if (i === Number(lastChapter)) {
+        } else if (chapterLoop === Number(lastChapter)) {
           passageBlock += '<br />';
-          for (let j = 1; j <= lastVerse; j++) {
-            passageBlock += `${j} ${bible[book][i][j]} `;
+          for (let verseLoop = 1; verseLoop <= lastVerse; verseLoop++) {
+            passageBlock += `${verseLoop} ${bible[book][chapterLoop][verseLoop]} `;
           }
         } else {
           passageBlock += '<br />';
-          for (let j = 1; bible[book][i][j] !== undefined; j++) {
-            passageBlock += `${j} ${bible[book][i][j]} `;
+          for (let verseLoop = 1; bible[book][chapterLoop][verseLoop] !== undefined; verseLoop++) {
+            passageBlock += `${verseLoop} ${bible[book][chapterLoop][verseLoop]} `;
           }
           passageBlock += '<br />';
         }
