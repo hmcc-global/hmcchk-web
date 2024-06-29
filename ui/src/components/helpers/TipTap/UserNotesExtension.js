@@ -1,8 +1,4 @@
-import {
-  Node,
-  nodeInputRule,
-  nodePasteRule,
-} from '@tiptap/core';
+import { Node, nodeInputRule, nodePasteRule } from '@tiptap/core';
 import {
   NodeViewWrapper,
   ReactNodeViewRenderer,
@@ -109,7 +105,9 @@ export const UserNotesNode = Node.create({
       const userInput = props.node.attrs.userNotes;
       const [localUserNotes, setLocalUserNotes] = useState(userInput);
       const handleInput = (event) => {
-        setLocalUserNotes(event.target.textContent);
+        let text = event.target.innerHTML;
+        text = text.replace(/<div>/gi, '\n').replace(/<\/div>/gi, '');
+        setLocalUserNotes(text);
       };
       const handleBlur = () => {
         const { node, getPos } = props;

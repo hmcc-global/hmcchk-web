@@ -19,6 +19,35 @@ export const getBiblePassage = async (passage, currentText) => {
     }
     const [chapter, verse] = chapterAndVerse.split(':');
 
+    // handle if its different chapter
+    const isDifferentChapter = chapterAndVerse.split(':').length > 2;
+    if (bible && bible[book] && isDifferentChapter) {
+      const [firstChapterVerse, lastChapterVerse] = chapterAndVerse.split('-');
+      const [firstChapter, firstVerse] = firstChapterVerse.split(':');
+      const [lastChapter, lastVerse] = lastChapterVerse.split(':');
+      let passageBlock = '';
+      for (let chapterLoop = Number(firstChapter); chapterLoop <= lastChapter; chapterLoop++) {
+        if (chapterLoop === Number(firstChapter)) {
+          for (let verseLoop = firstVerse; bible[book][chapterLoop][verseLoop] !== undefined; verseLoop++) {
+            passageBlock += `${verseLoop} ${bible[book][chapterLoop][verseLoop]} `;
+          }
+          passageBlock += '<br />';
+        } else if (chapterLoop === Number(lastChapter)) {
+          passageBlock += '<br />';
+          for (let verseLoop = 1; verseLoop <= lastVerse; verseLoop++) {
+            passageBlock += `${verseLoop} ${bible[book][chapterLoop][verseLoop]} `;
+          }
+        } else {
+          passageBlock += '<br />';
+          for (let verseLoop = 1; bible[book][chapterLoop][verseLoop] !== undefined; verseLoop++) {
+            passageBlock += `${verseLoop} ${bible[book][chapterLoop][verseLoop]} `;
+          }
+          passageBlock += '<br />';
+        }
+      }
+      return passageBlock;
+    }
+
     // handle the verses in the middle of the sn i.e. vv.
     if (passage.includes('v.')) {
       const textVerses = passage.split('v.').reverse()[0].trim();
@@ -37,11 +66,12 @@ export const getBiblePassage = async (passage, currentText) => {
       }`;
     }
 
+    // handle returning the verse
     if (bible && bible[book] && bible[book][chapter]) {
-      // TO-DO: handle if its different chapter
       if (verse.includes('-')) {
         let verses = verse.split('-');
         let passageBlock = '';
+
         for (let i = Number(verses[0]); i <= Number(verses[1]); i++) {
           passageBlock += `${i} ${bible[book][chapter][i]} `;
         }
