@@ -193,7 +193,7 @@ const MenuBar = ({ editor }) => {
       action: useCallback(() => {
         const { from, to } = editor.state.selection;
         const textBlank = editor.state.doc.textBetween(from, to);
-        if (textBlank === null) {
+        if (textBlank === '') {
           return;
         }
         editor.commands.insertFillInBlank(textBlank);

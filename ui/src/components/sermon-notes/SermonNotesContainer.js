@@ -229,13 +229,19 @@ const SermonNotesContainer = (props) => {
               padding="16px"
               backgroundColor="rgba(0, 0, 0, 0.5)"
             >
-              <VStack height="100%" justifyContent="center">
-                <Text color="white" fontWeight={700} fontSize={[24, 40]}>
+              <VStack height="100%" justifyContent="center" spacing={4}>
+                <Text
+                  color="white"
+                  fontWeight={700}
+                  fontSize={[24, 40]}
+                  textAlign="center"
+                >
                   {sermonNotes.title}
                 </Text>
                 <Text
                   color="white"
-                  fontSize={[10, 18]}
+                  fontSize={[14, 22]}
+                  textAlign="center"
                 >{`By ${sermonNotes.speaker}, ${sermonDate}`}</Text>
               </VStack>
             </Box>
