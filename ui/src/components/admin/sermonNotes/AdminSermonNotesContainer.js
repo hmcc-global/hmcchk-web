@@ -22,6 +22,7 @@ import { BiDonateHeart } from 'react-icons/bi';
 import { IoPeopleOutline } from 'react-icons/io5';
 import { IoBookOutline } from 'react-icons/io5';
 import { FaRegCalendarAlt } from 'react-icons/fa';
+import { FiRefreshCw } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 
 // TO-DO: need to refactor in the future so the components rely on the pathname not the current state of the page
@@ -256,33 +257,39 @@ const AdminSermonNotesContainer = (props) => {
       <Heading as="h1" size="xl" pb={3}>
         Sermon Notes Manager
       </Heading>
-      <Stack direction="row" mb={5}>
-        <Button
-          colorScheme="blue"
-          variant={isEditorOpen ? 'solid' : 'outline'}
-          borderColor="#3182CE"
-          borderWidth={3}
-          size="lg"
-          disabled={isPublishDisabled()}
-          onClick={() => {
-            history.push('/admin/sermonNotes/edit');
-            setActionOnEditor('create');
-          }}
-        >
-          Add New
-        </Button>
-        <Button
-          colorScheme="blue"
-          variant={isEditorOpen ? 'outline' : 'solid'}
-          borderColor="#3182CE"
-          borderWidth={3}
-          size="lg"
-          onClick={() => {
-            history.push('/admin/sermonNotes');
-            setIsEditorOpen(false);
-          }}
-        >
-          Past Sermons
+      <Stack direction="row" mb={5} justifyContent="space-between">
+        <Box gap={4} display="flex">
+          <Button
+            colorScheme="blue"
+            variant={isEditorOpen ? 'solid' : 'outline'}
+            borderColor="#3182CE"
+            borderWidth={3}
+            size="lg"
+            disabled={isPublishDisabled()}
+            onClick={() => {
+              history.push('/admin/sermonNotes/edit');
+              setActionOnEditor('create');
+            }}
+          >
+            Add New
+          </Button>
+          <Button
+            colorScheme="blue"
+            variant={isEditorOpen ? 'outline' : 'solid'}
+            borderColor="#3182CE"
+            borderWidth={3}
+            size="lg"
+            onClick={() => {
+              history.push('/admin/sermonNotes');
+              setIsEditorOpen(false);
+            }}
+          >
+            Past Sermons
+          </Button>
+        </Box>
+        {/* TO-DO: Add a refresh button to refresh just the sermons list */}
+        <Button size="lg" onClick={() => window.location.reload()}>
+          <FiRefreshCw />
         </Button>
       </Stack>
       {!isEditorOpen && (
