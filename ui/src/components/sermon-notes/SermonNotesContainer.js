@@ -206,7 +206,7 @@ const SermonNotesContainer = (props) => {
 
   return (
     <>
-      {sermonNotes ? (
+      {sermonNotes && sermonNotes.isPublished ? (
         <>
           <Box
             width="100%"
