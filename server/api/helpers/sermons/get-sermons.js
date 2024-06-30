@@ -1,6 +1,22 @@
 const { DateTime } = require('luxon');
 const he = require('he');
 
+// removes html elements and attempts to remove sermon series from title
+// e.g. Sermon Series - Part 1: Sermon Title -> Part 1: Sermon Title
+// e.g. Sermon Series - Part 1 -> Part 1
+// e.g. Encounter: Sermon Title -> Encounter: Sermon Title
+const parseSermonTitle = (title) => {
+  // eslint-disable-next-line eqeqeq
+  if (title == null) return '';
+
+  const decodedTitle = he.decode(title);
+  const pattern = /.*(Part \d+.*)/g;
+  const captured = pattern.exec(decodedTitle);
+
+  // eslint-disable-next-line eqeqeq
+  return captured != null && captured[1] != null && captured[1] !== '' ? captured[1] : decodedTitle;
+};
+
 const arrayReducer = (id, list) => {
   return id.reduce((acc, s) => {
     return [...acc, list.find((l) => l.id === s)];
@@ -10,7 +26,7 @@ const arrayReducer = (id, list) => {
 const transformSermon = (sermon, speakers, sermonSeries, serviceTypes) => {
   return {
     id: sermon.id,
-    title: he.decode(sermon.title.rendered),
+    title: parseSermonTitle(sermon.title.rendered),
     speaker: arrayReducer(sermon.wpfc_preacher, speakers),
     datePreached: DateTime.fromSeconds(sermon.sermon_date),
     serviceType: arrayReducer(sermon.wpfc_service_type, serviceTypes),

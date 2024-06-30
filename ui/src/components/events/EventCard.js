@@ -71,7 +71,7 @@ const EventCard = (props) => {
         display="flex"
         flexDirection={['column', 'row']}
       >
-        <AspectRatio mb="5" width={['100%', '45%']} ratio={16 / 9}>
+        <AspectRatio mb="5" width={['100%', '50%']} ratio={16 / 9}>
           <img
             alt="event-img"
             src={eventData.imageAdUrl}
