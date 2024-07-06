@@ -257,6 +257,7 @@ const SermonNotesContainer = (props) => {
               />
             )}
             <Button
+              display={!user?.id ? 'none' : 'block'}
               mt={8}
               isFullWidth
               isLoading={isSubmitting}
