@@ -249,6 +249,11 @@ const SermonNotesContainer = (props) => {
             </Box>
           </Box>
           <Container my={[4, 8]} width="100%">
+            <Container mb="3" display={!user?.id ? 'block' : 'none'}>
+              <Text fontStyle="italic" textColor="#B2BEB5">
+                Please log into your HMCC account to get the save notes feature.
+              </Text>
+            </Container>
             {isLoadingExistingNotes ? (
               <Text>Loading</Text>
             ) : (
@@ -260,6 +265,8 @@ const SermonNotesContainer = (props) => {
             )}
             <Button
               display={!user?.id ? 'none' : 'block'}
+              pos={'sticky'}
+              bottom="10px"
               mt={8}
               isFullWidth
               isLoading={isSubmitting}
