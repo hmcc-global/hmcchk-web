@@ -144,7 +144,7 @@ const SermonNotesContainer = (props) => {
   }, [getSermonNotesParent, getUserSermonNotes]);
 
   useEffect(() => {
-    const localUserNotes = localStorage.getItem('sermonNotes');
+    const localUserNotes = localStorage.getItem(`sermonNotes-${sermonId}`);
     if (
       localUserNotes !== 'null' &&
       localUserNotes !== 'undefined' &&
@@ -156,10 +156,12 @@ const SermonNotesContainer = (props) => {
 
   useDebounce(
     () => {
-      setEditUserSermonNotes(editUserSermonNotes);
-      localStorage.setItem('sermonNotes', JSON.stringify(editUserSermonNotes));
+      localStorage.setItem(
+        `sermonNotes-${sermonId}`,
+        JSON.stringify(editUserSermonNotes)
+      );
     },
-    1000,
+    0,
     [editUserSermonNotes]
   );
 
