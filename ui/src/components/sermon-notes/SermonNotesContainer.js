@@ -257,6 +257,19 @@ const SermonNotesContainer = (props) => {
                 Please log into your HMCC account to get the save notes feature.
               </Text>
             </Container>
+            <Button
+              display={!user?.id ? 'none' : 'block'}
+              pos={'sticky'}
+              top="10px"
+              mt={8}
+              isFullWidth
+              isLoading={isSubmitting}
+              colorScheme="teal"
+              onClick={updateUserSermonNotes}
+              zIndex={3}
+            >
+              Save Notes
+            </Button>
             {isLoadingExistingNotes ? (
               <Text>Loading</Text>
             ) : (
@@ -266,18 +279,6 @@ const SermonNotesContainer = (props) => {
                 setUserSermonNotes={setEditUserSermonNotes}
               />
             )}
-            <Button
-              display={!user?.id ? 'none' : 'block'}
-              pos={'sticky'}
-              bottom="10px"
-              mt={8}
-              isFullWidth
-              isLoading={isSubmitting}
-              colorScheme="teal"
-              onClick={updateUserSermonNotes}
-            >
-              Save Notes
-            </Button>
           </Container>
         </>
       ) : (
