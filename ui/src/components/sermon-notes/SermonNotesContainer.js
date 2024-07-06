@@ -76,6 +76,9 @@ const SermonNotesContainer = (props) => {
   // send update to the localstorage 1 seconds after the user stops typing
   // send update to db when user click save
   const updateUserSermonNotes = useCallback(async () => {
+    if (document.activeElement) {
+      document.activeElement.blur();
+    }
     setIsSubmitting(true);
     if (!user?.id) {
       setIsSubmitting(false);
@@ -144,7 +147,7 @@ const SermonNotesContainer = (props) => {
   }, [getSermonNotesParent, getUserSermonNotes]);
 
   useEffect(() => {
-    const localUserNotes = localStorage.getItem('sermonNotes');
+    const localUserNotes = localStorage.getItem(`sermonNotes-${sermonId}`);
     if (
       localUserNotes !== 'null' &&
       localUserNotes !== 'undefined' &&
@@ -156,10 +159,12 @@ const SermonNotesContainer = (props) => {
 
   useDebounce(
     () => {
-      setEditUserSermonNotes(editUserSermonNotes);
-      localStorage.setItem('sermonNotes', JSON.stringify(editUserSermonNotes));
+      localStorage.setItem(
+        `sermonNotes-${sermonId}`,
+        JSON.stringify(editUserSermonNotes)
+      );
     },
-    1000,
+    0,
     [editUserSermonNotes]
   );
 
@@ -247,6 +252,11 @@ const SermonNotesContainer = (props) => {
             </Box>
           </Box>
           <Container my={[4, 8]} width="100%">
+            <Container mb="3" display={!user?.id ? 'block' : 'none'}>
+              <Text fontStyle="italic" textColor="#B2BEB5">
+                Please log into your HMCC account to get the save notes feature.
+              </Text>
+            </Container>
             {isLoadingExistingNotes ? (
               <Text>Loading</Text>
             ) : (
@@ -258,6 +268,8 @@ const SermonNotesContainer = (props) => {
             )}
             <Button
               display={!user?.id ? 'none' : 'block'}
+              pos={'sticky'}
+              bottom="10px"
               mt={8}
               isFullWidth
               isLoading={isSubmitting}
