@@ -107,14 +107,16 @@ const NavBar = (props) => {
 
   return (
     <>
-      <Flex background="rgba(0, 0, 0, 0.4)">
+      <Flex background="white">
         <Flex
+          backgroundColor="white"
           width="100%"
-          backgroundColor="rgba(39, 39, 39, 1)"
-          backdrop-filter="blur(39px)"
-          align="center"
-          fontSize={{ md: 'xs', lg: 'sm', xl: 'md' }}
           h={{ md: '7vh', lg: '7vh', xl: '8vh' }}
+          align="center"
+          fontFamily="Manrope"
+          fontSize={{ md: 'xs', lg: 'sm', xl: 'md' }}
+          textColor="black"
+          letterSpacing={1}
         >
           <Container maxW="100%" padding={{ base: 4, md: 1, lg: 4 }}>
             <Flex
@@ -130,20 +132,20 @@ const NavBar = (props) => {
                     <Image
                       w="3.5em"
                       minW="3.5em"
-                      src={process.env.PUBLIC_URL + '/images/ripple.svg'}
+                      src={process.env.PUBLIC_URL + '/images/ripple_black.svg'}
                       alt="Logo of HMCC"
                     />
                   </LinkOverlay>
                 </LinkBox>
                 <Link href="/">
                   <Text
-                    textColor="#FFFFFF"
                     fontSize={{
                       base: 'x-small',
                       md: 'x-small',
                       lg: 'smaller',
                       xl: 'small',
                     }}
+                    fontWeight="bolder"
                   >
                     Harvest Mission Community Church
                   </Text>
@@ -173,7 +175,6 @@ const NavBar = (props) => {
               <Stack
                 fontWeight="600"
                 spacing={{ md: 5, lg: 7 }}
-                color="rgba(255, 255, 255, 1)"
                 justify={['space-between', 'space-around']}
                 align="center"
                 display={{ base: 'none', md: 'flex' }}
@@ -191,10 +192,11 @@ const NavBar = (props) => {
                   <Text
                     transform="rotate(10deg)"
                     position="fixed"
-                    textColor="yellow"
                     fontSize="xx-small"
                     marginStart={{ md: '8', lg: '10' }}
                     lineHeight="0"
+                    textColor="#4A6EEB;"
+                    marginTop={-1}
                   >
                     I'm new!
                   </Text>
@@ -242,7 +244,6 @@ const NavBar = (props) => {
                             <LinkOverlay href="/">
                               <Text
                                 fontWeight="600"
-                                textColor="rgba(249, 249, 249, 1)"
                                 fontSize={{
                                   md: 'x-small',
                                   lg: 'smaller',
@@ -271,7 +272,6 @@ const NavBar = (props) => {
                             <LinkOverlay href="/profile" id="navbar-profile">
                               <Text
                                 fontWeight="600"
-                                textColor="rgba(249, 249, 249, 1)"
                                 fontSize={{
                                   md: 'x-small',
                                   lg: 'small',
@@ -289,9 +289,7 @@ const NavBar = (props) => {
                         <LinkBox>
                           <Button
                             textAlign="center"
-                            bgColor="rgba(72, 72, 72, 1)"
-                            borderColor="rgba(68, 68, 68, 1)"
-                            borderWidth="medium"
+                            bgColor="rgba(0, 0, 0, 0)"
                             h="3.5vh"
                             marginLeft="10px"
                             px={{ md: '3', lg: '5' }}
@@ -299,11 +297,12 @@ const NavBar = (props) => {
                             _hover={{ backgroundColor: 'rgba(56, 56, 56, 1)' }}
                             onClick={onClose}
                             id="navbar-signup"
+                            letterSpacing={1}
+                            borderRadius={20}
                           >
                             <LinkOverlay href="/signup" id="navbar-signup">
                               <Text
                                 fontWeight="600"
-                                textColor="rgba(255, 255, 255, 1)"
                                 fontSize={{
                                   md: 'x-small',
                                   lg: 'small',
@@ -318,8 +317,9 @@ const NavBar = (props) => {
                         <LinkBox>
                           <Button
                             textAlign="center"
-                            bgColor="rgba(0, 88, 210, 1)"
-                            borderColor="rgba(0, 88, 210, 1)"
+                            bgColor="#4A6EEB"
+                            color="white"
+                            borderColor="#4A6EEB"
                             borderWidth="medium"
                             h="3.5vh"
                             marginLeft="10px"
@@ -328,11 +328,12 @@ const NavBar = (props) => {
                             _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
                             onClick={onClose}
                             id="navbar-login"
+                            borderRadius={20}
+                            letterSpacing={1}
                           >
                             <LinkOverlay href="/login" id="navbar-login">
                               <Text
                                 fontWeight="600"
-                                textColor="rgba(249, 249, 249, 1)"
                                 fontSize={{
                                   md: 'x-small',
                                   lg: 'smaller',
@@ -458,38 +459,6 @@ const NavBar = (props) => {
           </Container>
         </Flex>
       </Flex>
-      {/* {currDate === 'Wed' && !isOnlineSermon ? (
-        <Flex
-          w="100vw"
-          background="black"
-          border="1px solid #E2E8F0"
-          box-shadow="0px 4px 4px rgba(0, 0, 0, 0.25), 0px 1px 3px rgba(0, 0, 0, 0.1)"
-          border-radius="4px"
-          align="center"
-          color="gray.100"
-          justify="center"
-          h="6vh"
-          p={2}
-        >
-          <Flex w="100vw" justify="space-around">
-            <Stack justify="center" align="center" isInline>
-              <Center>
-                <Link href="/online" style={{ lineHeight: '0' }}>
-                  <Button
-                    h="3.5vh"
-                    style={liveScStyle}
-                    fontSize="xs"
-                    lineHeight="0"
-                    w="95%"
-                  >
-                    WATCH SUNDAY CELEBRATION LIVE
-                  </Button>
-                </Link>
-              </Center>
-            </Stack>
-          </Flex>
-        </Flex>
-      ) : null} */}
       <Drawer
         isOpen={isOpen}
         size="full"
