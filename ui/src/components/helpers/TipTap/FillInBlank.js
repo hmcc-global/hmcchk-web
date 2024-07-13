@@ -101,7 +101,12 @@ export const FillInBlankNode = Node.create({
           if (!userText) {
             textWidth = getTextWidth('Blankspace');
           }
-          inputRef.current.style.width = `${textWidth + 25}px`;
+          const windowWidth = window.innerWidth;
+          inputRef.current.style.width = `${Math.min(
+            textWidth + 25,
+            windowWidth - 25
+          )}px`;
+          // inputRef.current.style.width = `${textWidth + 25}px`;
         }
         localStorage.setItem(
           `fillInBlank-${props.node.attrs.currentId}-userText`,
