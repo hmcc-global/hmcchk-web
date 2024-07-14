@@ -346,7 +346,7 @@ const AnnouncementEditorModal = (props) => {
                     gap={6}
                   >
                     <GridItem>
-                      <FormControl>
+                      <FormControl isRequired>
                         <FormLabel>Announcement Display Start Date</FormLabel>
                         <FormHelperText>
                           If the announcement is for web/mobile, please input
@@ -356,14 +356,16 @@ const AnnouncementEditorModal = (props) => {
                       <Input
                         id="displayStartDateTime"
                         type="datetime-local"
-                        {...register('displayStartDateTime')}
+                        {...register('displayStartDateTime', {
+                          required: 'Display Start Date is required',
+                        })}
                         onChange={(e) =>
                           setDisplayStartDateTime(e.target.value)
                         }
                       />
                     </GridItem>
                     <GridItem>
-                      <FormControl>
+                      <FormControl isRequired>
                         <FormLabel>Announcement Display End Date</FormLabel>
                         <FormHelperText>
                           If the announcement is for web/mobile, please input
@@ -373,7 +375,9 @@ const AnnouncementEditorModal = (props) => {
                       <Input
                         id="displayEndDateTime"
                         type="datetime-local"
-                        {...register('displayEndDateTime')}
+                        {...register('displayEndDateTime', {
+                          required: 'Display End Date is required',
+                        })}
                         onChange={(e) => setDisplayEndDateTime(e.target.value)}
                       />
                     </GridItem>
