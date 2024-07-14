@@ -7,25 +7,14 @@ import {
   Image,
   Button,
   Container,
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
   Link,
   LinkBox,
   LinkOverlay,
-  useDisclosure,
   HStack,
-  IconButton,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../reducers/userSlice';
 import { customAxios as axios } from '../helpers/customAxios';
-import MainMenu from './MainMenu';
-import { BsFillPersonFill } from 'react-icons/bs';
 
 const NavBar = (props) => {
   const [isLive, setIsLive] = useState(false);
@@ -34,8 +23,6 @@ const NavBar = (props) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [userObj, setUserObj] = useState();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef();
   const liveScStyle = {
     border: '5px',
     backgroundColor: '#EB4335',
@@ -109,7 +96,7 @@ const NavBar = (props) => {
     <>
       <Flex>
         <Flex
-          backgroundColor="white"
+          backgroundColor="#F6FAFF"
           width="100%"
           h={{ md: '7vh', lg: '7vh', xl: '8vh' }}
           align="center"
@@ -277,7 +264,6 @@ const NavBar = (props) => {
                             }}
                             borderRadius={20}
                             letterSpacing={1}
-                            onClick={onClose}
                             id="navbar-profile"
                           >
                             <LinkOverlay href="/profile" id="navbar-profile">
@@ -309,7 +295,6 @@ const NavBar = (props) => {
                               backgroundColor: '#4A6EEB',
                               color: "white"
                             }}
-                            onClick={onClose}
                             id="navbar-signup"
                             letterSpacing={1}
                             borderRadius={20}
@@ -346,7 +331,6 @@ const NavBar = (props) => {
                             }}
                             borderRadius={20}
                             letterSpacing={1}
-                            onClick={onClose}
                             id="navbar-login"
                           >
                             <LinkOverlay href="/login" id="navbar-login">
@@ -415,39 +399,6 @@ const NavBar = (props) => {
           </Container>
         </Flex>
       </Flex>
-      <Drawer
-        isOpen={isOpen}
-        size="full"
-        onClose={onClose}
-        finalFocusRef={btnRef}
-        placement="top"
-      >
-        <DrawerOverlay />
-        <DrawerContent
-          background="url('/images/ripple_bg.png')"
-          backgroundRepeat="no-repeat"
-          backgroundColor="rgba(18, 72, 146, 1)"
-          backgroundSize="70%"
-          backgroundPosition="120% 75%"
-          width={{ base: '100%', md: '70%' }}
-          style={{ position: 'absolute' }}
-          marginLeft={{ base: 'none', md: '15%' }}
-        >
-          <DrawerCloseButton
-            position="absolute"
-            right="5%"
-            top="5%"
-            color="white"
-          />
-          <DrawerHeader />
-          <DrawerBody>
-            <MainMenu login={loggedIn} onClose={onClose} />
-          </DrawerBody>
-          <DrawerFooter fontSize="sm" color="white" justifyContent="center">
-            Harvest Mission Community Church {new Date().getFullYear()}
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
     </>
   );
 };
