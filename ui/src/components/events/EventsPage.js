@@ -93,6 +93,7 @@ const EventsPage = (props) => {
               item.eventStartTime
             );
             item.renderDate = renderDate;
+
             return endDate > DateTime.now() && DateTime.now() > startDate;
           } else return false;
         });
@@ -143,7 +144,13 @@ const EventsPage = (props) => {
           if (data.featured) {
             featuredEvents.push(data);
           }
-          if (isDateInThisWeek(data.eventStartDate)) {
+          if (
+            isDateInThisWeek(data.eventStartDate) ||
+            isDateInThisWeek(data.eventEndDate) ||
+            isDateInThisWeek(
+              data.renderDate.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)
+            )
+          ) {
             thisWeekEvents.push(data);
           } else {
             moreFilterEvents.push(data);
