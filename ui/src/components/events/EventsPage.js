@@ -79,10 +79,14 @@ const EventsPage = (props) => {
         const filtered = [];
         const tagsList = new Set([]);
         const filteredEndDate = data.filter((item) => {
-          if (
-            item.displayEndDateTime !== '' &&
-            item.displayStartDateTime !== ''
-          ) {
+          if (item.displayStartDateTime) {
+            let displayStartDate = new DateTime.fromISO(
+              item.displayStartDateTime
+            );
+            if (displayStartDate > DateTime.now()) return false;
+          }
+
+          if (item.displayEndDateTime !== '') {
             // Add one day to offset end date to end of day
             let endDate = new DateTime.fromISO(item.displayEndDateTime);
             let startDate = new DateTime.fromISO(item.displayStartDateTime);
