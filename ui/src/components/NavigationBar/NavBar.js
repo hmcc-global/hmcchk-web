@@ -51,6 +51,7 @@ const NavBar = (props) => {
   };
 
   const getUserObj = async (token) => {
+    if (Object.keys(token).length === 0) return;
     try {
       const { data } = await axios.post('/api/auth/verify-token', {
         token: token,
@@ -182,10 +183,14 @@ const NavBar = (props) => {
                 isInline
               >
                 <Box position="relative">
-                  <Link href="/visit-us" id='navbar-visit'>VISIT</Link>
+                  <Link href="/visit-us" id="navbar-visit">
+                    VISIT
+                  </Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/about-us" id='navbar-about'>ABOUT</Link>
+                  <Link href="/about-us" id="navbar-about">
+                    ABOUT
+                  </Link>
                 </Box>
                 <Box position="relative">
                   <Text
@@ -198,16 +203,24 @@ const NavBar = (props) => {
                   >
                     I'm new!
                   </Text>
-                  <Link href="/connect" id='navbar-connect'>CONNECT</Link>
+                  <Link href="/connect" id="navbar-connect">
+                    CONNECT
+                  </Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/events" id='navbar-events'>EVENTS</Link>
+                  <Link href="/events" id="navbar-events">
+                    EVENTS
+                  </Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/sermons" id='navbar-sermons'>SERMONS</Link>
+                  <Link href="/sermons" id="navbar-sermons">
+                    SERMONS
+                  </Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/give" id='navbar-give'>GIVE</Link>
+                  <Link href="/give" id="navbar-give">
+                    GIVE
+                  </Link>
                 </Box>
               </Stack>
               <Stack
