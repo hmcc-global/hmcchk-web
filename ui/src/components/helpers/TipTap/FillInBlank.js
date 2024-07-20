@@ -150,6 +150,7 @@ export const FillInBlankNode = Node.create({
                 textAlign: 'center',
                 height: '2rem',
                 textTransform: 'uppercase',
+                backgroundColor: 'transparent',
               }}
             />
             <img

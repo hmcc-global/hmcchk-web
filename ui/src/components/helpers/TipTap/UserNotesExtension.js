@@ -126,6 +126,7 @@ export const UserNotesNode = Node.create({
         <NodeViewWrapper className="user-notes">
           <NodeViewContent
             className="content"
+            onClick={handleBlur}
             onBlur={handleBlur}
             contentEditable={true}
             onInput={handleInput}
