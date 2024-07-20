@@ -39,7 +39,14 @@ import {
 } from '../helpers/lists';
 
 const Form = (props) => {
-  const { formId, formName, formDescription, formImage, formFields, staticData } = props;
+  const {
+    formId,
+    formName,
+    formDescription,
+    formImage,
+    formFields,
+    staticData,
+  } = props;
   const { lifegroupList, lifestageList, campusList } = staticData;
   const { register, handleSubmit, control, formState, setValue } = useForm();
   const { errors } = formState;
@@ -160,7 +167,6 @@ const Form = (props) => {
       case 'countryOfOrigin':
         field = (
           <Select
-            placeholder="Country of Origin"
             {...register('countryOfOrigin', { required: true })}
             onChange={(e) => {
               if (!fieldData.conditional) return;
@@ -169,6 +175,7 @@ const Form = (props) => {
               setRenderChildren(temp);
             }}
             key={fieldData.id}
+            placeholder="Select option"
           >
             {countryList.map((item) => {
               return <option key={'co' + item}>{item}</option>;
@@ -187,6 +194,7 @@ const Form = (props) => {
               setRenderChildren(temp);
             }}
             key={fieldData.id}
+            placeholder="Select option"
           >
             {lifestageList.map((item) => {
               return <option key={'li' + item}>{item}</option>;
@@ -205,6 +213,7 @@ const Form = (props) => {
               setRenderChildren(temp);
             }}
             key={fieldData.id}
+            placeholder="Select option"
           >
             {campusList.map((item) => {
               return <option key={'ca' + item}>{item}</option>;
@@ -223,6 +232,7 @@ const Form = (props) => {
               setRenderChildren(temp);
             }}
             key={fieldData.id}
+            placeholder="Select option"
           >
             {lifegroupList.map((item) => {
               return <option key={'lg' + item}>{item}</option>;
@@ -241,6 +251,7 @@ const Form = (props) => {
               setRenderChildren(temp);
             }}
             key={fieldData.id}
+            placeholder="Select option"
           >
             {ministryTeamList.map((item) => {
               return <option key={'mt' + item}>{item}</option>;
