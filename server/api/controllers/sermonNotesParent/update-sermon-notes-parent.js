@@ -86,8 +86,7 @@ module.exports = {
     },
     exits
   ) {
-    const user = this.req.user.fullName;
-    sails.log.info(`${user}: Updating Sermon Notes: ${title}`);
+    sails.log.info(`Updating Sermon Notes: ${title}`);
     sails.log.info(`Title: ${title},  Desc: ${subtitle}`);
 
     try {
@@ -101,7 +100,9 @@ module.exports = {
         });
       }
 
-      const existing = await SermonNotesParent.updateOne({ sermonId: sermonId }).set({
+      const existing = await SermonNotesParent.updateOne({
+        sermonId: sermonId,
+      }).set({
         title,
         subtitle,
         speaker,
