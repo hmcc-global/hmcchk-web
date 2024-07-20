@@ -21,7 +21,6 @@ const SermonNotesContainer = (props) => {
   const [userSermonNotes, setUserSermonNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
   const toast = useToast();
-  const [isLogin, setLogin] = useState(false);
 
   const todayId = DateTime.fromISO(new Date().toISOString()).toFormat(
     'ddMMyyyy'
