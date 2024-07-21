@@ -143,6 +143,11 @@ module.exports.routes = {
   'put /api/sermon-notes-parent/update': 'sermonNotesParent/update-sermon-notes-parent',
   'put /api/sermon-notes-parent/delete': 'sermonNotesParent/delete-sermon-notes-parent',
 
+  // URL APIs
+  'post /api/url/shorten': 'url/create-short-url',
+  'get /api/url/redirect/:urlCode': 'url/redirect-short-url',
+  'get /api/url/get': 'url/get-url',
+
   // UI
   'get /*': {
     skipAssets: true,
