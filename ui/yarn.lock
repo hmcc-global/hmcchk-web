@@ -1893,6 +1893,11 @@
   resolved "https://registry.yarnpkg.com/@fontsource/dm-sans/-/dm-sans-4.5.9.tgz#a48f9c815728ebb47e1c58e5176a9d4aa6cb25ea"
   integrity sha512-qaFvSBJhoeley1A9myRUUuHbm9sz7ADyC2WodezBzdFSPs2VD/p5WPPwtpVE8b1SglQrOPAnxA7s3fH5zOtiMQ==
 
+"@fontsource/dm-serif-display@^5.0.20":
+  version "5.0.20"
+  resolved "https://registry.yarnpkg.com/@fontsource/dm-serif-display/-/dm-serif-display-5.0.20.tgz#1baff2b734e9a3476476d0febeb8728a98fe535e"
+  integrity sha512-/2lKZzzbEJMNsqizgZPPCL9PquWTWgeA2hLrq74XVDwoI3HOLSaopmOusuD8eDke33WoM/EbpKeB0/jnpv8Ogg==
+
 "@humanwhocodes/config-array@^0.10.4":
   version "0.10.4"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.10.4.tgz#01e7366e57d2ad104feea63e72248f22015c520c"

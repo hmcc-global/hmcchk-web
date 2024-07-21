@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, useBreakpointValue } from '@chakra-ui/react';
 import { useState, useEffect, useRef } from 'react';
 import AboutSection from './AboutSection';
 import EventsSection from './EventsSection';
@@ -10,10 +10,12 @@ import HelloSermonSection from './HelloSermonSection';
 import { customAxios as axios } from '../helpers/customAxios';
 import SaturateVisionSection from './SaturateVisionSection';
 import VisionMissionSection from './VisionMissionSection';
+import VisionMissionSectionMobile from './VisionMissionSectionMobile';
 
 const HomeContainer = (props) => {
   const { user } = props;
   const sermonRef = useRef(null);
+  const isMobile = useBreakpointValue({ base: true, md: false });
   const [popupInfo, setPopupInfo] = useState([]);
   const getData = async () => {
     try {
@@ -48,7 +50,8 @@ const HomeContainer = (props) => {
       <EventsSection />
       <LifeGroupSection />
       <NewHereSection />
-      <VisionMissionSection />
+      {isMobile ? <VisionMissionSectionMobile /> : <VisionMissionSection />}
+
       {popup.flag && <PopupContainer props={popup} />}
     </Flex>
   );
