@@ -28,7 +28,7 @@ const VisionMissionSectionMobile = () => {
               w="100%"
               position="absolute"
               h="122%"
-              bgPos="60% 100%"
+              bgPos="70% 100%"
               bgSize="70%"
               bgRepeat="no-repeat"
               bgImage={`url('${process.env.PUBLIC_URL}/images/home/vector-green-3.svg')`}
