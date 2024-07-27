@@ -23,7 +23,7 @@ const HomeContainer = (props) => {
     }
   };
 
-  const [isOpen, setIsOpen] = useState(true);
+  const [_isOpen, setIsOpen] = useState(true);
   useEffect(() => {
     if (Object.keys(user).length !== 0) setIsOpen(false);
     getData();
@@ -40,7 +40,7 @@ const HomeContainer = (props) => {
   };
   return (
     <Flex direction="column">
-      <HeroSection anchorTarget={sermonRef} />
+      <HeroSection />
       <HelloSermonSection ref={sermonRef} />
       <AboutSection />
       <SaturateVisionSection />

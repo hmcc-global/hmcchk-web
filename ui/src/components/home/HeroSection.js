@@ -15,7 +15,7 @@ import { useEffect, useRef } from 'react';
 // sm = 480px, md = 768px, lg = 992px, xl = 1280px, 2xl = "1536px"
 const heroText = 'Transforming Lives,\nTransforming the World';
 
-const HeroSection = ({ anchorTarget }) => {
+const HeroSection = () => {
   const vidRef = useRef();
 
   useEffect(() => {
@@ -42,94 +42,78 @@ const HeroSection = ({ anchorTarget }) => {
         sx={{ aspectRatio: '16/9' }}
       />
       <Flex
-        w="full"
+        w="100%"
         h="100vh"
         marginTop="-100vh"
-        background="rgba(73, 94, 123, 0.53)"
+        background="linear-gradient(to right, rgb(246,250,255,1) 45%, rgba(255,255,255,0) 100%)"
         style={{ zIndex: 1 }}
         position="relative"
       >
         <Container
-          maxW="container.lg"
-          w="full"
-          justifyContent="center"
+          width="100%"
           display="flex"
+          maxW="100%"
+          justifyContent="flex-start"
         >
           <VStack
-            w="full"
-            justify="center"
+            w="100%"
             h="100%"
             px={useBreakpointValue({ base: 4, md: 8 })}
             spacing={12}
           >
             <Stack
-              w="full"
-              align="center"
+              w="100%"
+              align="flex-start"
               spacing={6}
               justifyContent="center"
               height="90%"
               marginTop="6em"
             >
+              <Image src={process.env.PUBLIC_URL + '/images/home/ripple.png'} />
               <Heading
-                color="white"
+                color="black"
+                as="h4"
+                textAlign="center"
+                blackSpace="pre-wrap"
+                fontSize={{ base: '0.8em', md: '1.2em' }}
+                fontWeight={600}
+              >
+                Harvest Mission Community Church
+              </Heading>
+              <Heading
+                color="black"
                 as="h1"
                 fontSize={{ base: '1.5em', md: '3em' }}
-                textAlign="center"
                 fontWeight={600}
-                whiteSpace="pre-wrap"
-                alignSelf="center"
+                blackSpace="pre-wrap"
               >
                 {heroText}
               </Heading>
-              <Image src={process.env.PUBLIC_URL + '/images/home/ripple.png'} />
-              <Stack
-                w="full"
-                align="center"
-                marginTop="-1rem !important"
-                rowGap={12}
+              <Text
+                color="black"
+                display={{ base: 'none', md: 'flex' }}
+                style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
+                fontSize="16px"
               >
-                <Box>
-                  <Heading
-                    color="white"
-                    as="h4"
-                    textAlign="center"
-                    whiteSpace="pre-wrap"
-                    alignSelf="center"
-                    fontSize={{ base: '0.8em', md: '1.2em' }}
-                    fontWeight={600}
-                  >
-                    Harvest Mission Community Church
-                  </Heading>
-                  <Heading
-                    color="white"
-                    as="h4"
-                    fontSize={{ base: '0.8em', md: '1.2em' }}
-                    textAlign="center"
-                    whiteSpace="pre-wrap"
-                    alignSelf="center"
-                    fontWeight={600}
-                  >
-                    of Hong Kong
-                  </Heading>
-                </Box>
-                <Box
-                  style={{
-                    background: 'rgba(27, 53, 102, 0.8)',
-                  }}
-                  padding={{ base: '0px', md: '8px' }}
-                  borderRadius="7px"
-                >
-                  <Text
-                    color="white"
-                    display={{ base: 'none', md: 'flex' }}
-                    style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
-                    fontSize="16px"
-                  >
-                    Every Sunday at 10AM HKT | Transformation Center - Unit 02,
-                    22/F Crocodile Center, Kwun Tong & Online
-                  </Text>
-                </Box>
-              </Stack>
+                Every Sunday at 10AM HKT 
+              </Text>
+              <Text
+                color="black"
+                display={{ base: 'none', md: 'flex' }}
+                style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
+                fontSize="16px"
+              >
+                Transformation Center
+                22/F Crocodile Center, Kwun Tong & Online
+              </Text>
+              <Text
+                color="black"
+                display={{ base: 'none', md: 'flex' }}
+                style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
+                fontSize="16px"
+              >
+                Unit 2, 22/F Crocodile Center, Kwun Tong & Online
+              </Text>
             </Stack>
             <Box
               style={{
@@ -140,7 +124,7 @@ const HeroSection = ({ anchorTarget }) => {
               bottom="4%"
             >
               <Text
-                color="white"
+                color="black"
                 display={{ base: 'flex', md: 'none' }}
                 justifyContent="center"
                 style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
@@ -149,7 +133,7 @@ const HeroSection = ({ anchorTarget }) => {
                 Every Sunday at 10AM HKT
               </Text>
               <Text
-                color="white"
+                color="black"
                 display={{ base: 'flex', md: 'none' }}
                 style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
                 fontSize="12px"
@@ -159,19 +143,6 @@ const HeroSection = ({ anchorTarget }) => {
                 Tong & Online
               </Text>
             </Box>
-            <Stack position="relative" bottom="6%" width="35px" height="35px">
-              <Image
-                src={process.env.PUBLIC_URL + '/images/home/DownArrow.png'}
-                style={{ cursor: 'pointer' }}
-                onClick={() =>
-                  anchorTarget.current.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start',
-                    inline: 'nearest',
-                  })
-                }
-              />
-            </Stack>
           </VStack>
         </Container>
       </Flex>
