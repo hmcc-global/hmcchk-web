@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const getBiblePassage = async (passage, currentText) => {
   try {
     const response = await fetch(
@@ -26,9 +28,17 @@ export const getBiblePassage = async (passage, currentText) => {
       const [firstChapter, firstVerse] = firstChapterVerse.split(':');
       const [lastChapter, lastVerse] = lastChapterVerse.split(':');
       let passageBlock = '';
-      for (let chapterLoop = Number(firstChapter); chapterLoop <= lastChapter; chapterLoop++) {
+      for (
+        let chapterLoop = Number(firstChapter);
+        chapterLoop <= lastChapter;
+        chapterLoop++
+      ) {
         if (chapterLoop === Number(firstChapter)) {
-          for (let verseLoop = firstVerse; bible[book][chapterLoop][verseLoop] !== undefined; verseLoop++) {
+          for (
+            let verseLoop = firstVerse;
+            bible[book][chapterLoop][verseLoop] !== undefined;
+            verseLoop++
+          ) {
             passageBlock += `${verseLoop} ${bible[book][chapterLoop][verseLoop]} `;
           }
           passageBlock += '<br />';
@@ -39,7 +49,11 @@ export const getBiblePassage = async (passage, currentText) => {
           }
         } else {
           passageBlock += '<br />';
-          for (let verseLoop = 1; bible[book][chapterLoop][verseLoop] !== undefined; verseLoop++) {
+          for (
+            let verseLoop = 1;
+            bible[book][chapterLoop][verseLoop] !== undefined;
+            verseLoop++
+          ) {
             passageBlock += `${verseLoop} ${bible[book][chapterLoop][verseLoop]} `;
           }
           passageBlock += '<br />';
@@ -86,4 +100,54 @@ export const getBiblePassage = async (passage, currentText) => {
   } catch (err) {
     return 'Passage not found';
   }
+};
+
+const months = [
+  'jan',
+  'feb',
+  'mar',
+  'apr',
+  'may',
+  'jun',
+  'jul',
+  'aug',
+  'sep',
+  'oct',
+  'nov',
+  'dec',
+];
+
+export const getSermonNotesFromShortLink = async (id) => {
+  // only works for single sermon notes days
+  const splitId = id.split('-');
+
+  const year = new Date().getFullYear().toString();
+  const month = months.indexOf(splitId[1].substring(0, 3)) + 1;
+  const day = splitId[1].substring(3, 5);
+
+  const monthString = month.toString().length === 1 ? `0${month}` : month;
+  const sermonDate = day + monthString + year;
+  const sermonId = `${splitId[0]}-${sermonDate}-1`;
+  try {
+    const { status } = await axios.get(`/api/sermon-notes-parent/get`, {
+      params: {
+        sermonId,
+      },
+    });
+    if (status === 200) {
+      return sermonId;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+export const isSermonNotesLink = (id) => {
+  const dateString = id.split('-')[1];
+  const pattern = /^([a-z]{3})(\d{2})$/i;
+  const match = pattern.exec(dateString);
+  if (match) {
+    const monthPart = match[1].toLowerCase();
+    return months.includes(monthPart);
+  }
+  return false;
 };
