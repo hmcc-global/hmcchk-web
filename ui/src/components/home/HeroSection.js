@@ -10,10 +10,6 @@ import {
   Box,
 } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
-// TODO figure out a way to have a central location to edit photo url, blurbs etc.
-// sm = 30em, md = 48em, lg = 62em, xl = 80em, 2xl = "96em"
-// sm = 480px, md = 768px, lg = 992px, xl = 1280px, 2xl = "1536px"
-const heroText = 'Transforming Lives,\nTransforming the World';
 
 const HeroSection = () => {
   const vidRef = useRef();
@@ -32,7 +28,7 @@ const HeroSection = () => {
         as="video"
         ref={vidRef}
         w="full"
-        h={['85vh', '96vh']}
+        h="100vh"
         src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
         loop
         muted
@@ -40,6 +36,7 @@ const HeroSection = () => {
         justify="center"
         playsInline
         sx={{ aspectRatio: '16/9' }}
+        background="linear-gradient(to top, rgb(246,250,255,1) 45%, rgba(255,255,255,0) 100%)"
       />
       <Flex
         w="100%"
@@ -83,11 +80,22 @@ const HeroSection = () => {
               <Heading
                 color="black"
                 as="h1"
-                fontSize={{ base: '1.5em', md: '3em' }}
+                fontSize='6em'
                 fontWeight={600}
                 blackSpace="pre-wrap"
+                letterSpacing="-5.5px"
               >
-                {heroText}
+                Transforming <span style={{ fontFamily: 'DMSerifDisplay_Italic', fontWeight: 'lighter' }}>Lives,</span>
+              </Heading>
+              <Heading
+                color="black"
+                as="h1"
+                fontSize='6em'
+                fontWeight={600}
+                blackSpace="pre-wrap"
+                letterSpacing="-5.5px"
+              >
+                Transforming <span style={{ fontFamily: 'DMSerifDisplay_Italic', fontWeight: 'lighter' }}> the World</span>
               </Heading>
               <Text
                 color="black"
