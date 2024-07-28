@@ -314,6 +314,7 @@ const VisionMissionSection = () => {
               <Flex justifyContent="flex-end">
                 <Button
                   bgColor={'#DBF1F1'}
+                  _hover={{ color: 'white', bgColor: 'black' }}
                   borderRadius="5rem"
                   border="0.7px solid"
                   borderColor="var(--Black, #0C0C20)"
@@ -350,10 +351,11 @@ const VisionMissionSection = () => {
                 border="0.7px solid var(--chakra-colors-Blue-Primary, #4A6EEB)"
                 my="auto"
                 borderRadius="2.75rem"
+                _hover={{ bg: '#4A6EEB', color: 'white' }}
+                textColor="#4A6EEB"
                 bgColor="transparent"
               >
                 <Text
-                  textColor="#4A6EEB"
                   fontSize="18px"
                   fontFamily="'Manrope', sans-serif"
                   fontWeight="400"
@@ -361,7 +363,7 @@ const VisionMissionSection = () => {
                 >
                   Learn More
                 </Text>
-                <ArrowForwardIcon color="#4A6EEB" />
+                <ArrowForwardIcon />
               </Button>
             </Flex>
             <VStack bgColor="white">
