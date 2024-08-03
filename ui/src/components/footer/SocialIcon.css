@@ -1,0 +1,10 @@
+.social-icon:hover .social-svg-icon {
+    fill: #DBE9FF !important;
+    color: #4A6EEB !important;
+    background-color: #4A6EEB !important;
+}
+.social-icon:hover .social-svg-mask {
+  fill: #4A6EEB !important;
+  color: #4A6EEB !important;
+  background-color: #4A6EEB !important;
+}
