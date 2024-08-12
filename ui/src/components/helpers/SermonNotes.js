@@ -151,3 +151,52 @@ export const isSermonNotesLink = (id) => {
   }
   return false;
 };
+
+export const deepUpdateUserNotes = (content, userNotes) => {
+  let index = 0;
+
+  function deepGet(item) {
+    if (Array.isArray(item)) {
+      return item.map(deepGet);
+    } else if (typeof item === 'object' && item !== null) {
+      if (item.type === 'userNotes') {
+        if (index < userNotes.length) {
+          return {
+            ...item,
+            attrs: {
+              ...item.attrs,
+              userNotes: userNotes[index++].attrs.userNotes,
+            },
+          };
+        }
+      } else if (Array.isArray(item.content)) {
+        return {
+          ...item,
+          content: item.content.map(deepGet),
+        };
+      }
+    }
+    return item;
+  }
+
+  return deepGet(content);
+};
+
+export const getAllUserSermonNotes = (content) => {
+  let notes = [];
+
+  function deepGet(item) {
+    if (Array.isArray(item)) {
+      item.forEach(deepGet);
+    } else if (typeof item === 'object' && item !== null) {
+      if (item.type === 'userNotes') {
+        notes.push(item);
+      } else if (Array.isArray(item.content)) {
+        item.content.forEach(deepGet);
+      }
+    }
+  }
+
+  deepGet(content);
+  return notes;
+};

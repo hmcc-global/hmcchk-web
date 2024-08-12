@@ -11,6 +11,10 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDebounce } from 'react-use';
 import TiptapOutput from '../helpers/TipTap/TiptapOutput';
 import { DateTime } from 'luxon';
+import {
+  getAllUserSermonNotes,
+  deepUpdateUserNotes,
+} from '../helpers/SermonNotes';
 
 const SermonNotesContainer = (props) => {
   const { user, history, sermonNoteId } = props;
@@ -18,6 +22,7 @@ const SermonNotesContainer = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingExistingNotes, setIsLoadingExistingNotes] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // In General, userSermonNotes comes from db, editUserSermonNotes comes from localStorage
   const [userSermonNotes, setUserSermonNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
   const toast = useToast();
@@ -175,32 +180,21 @@ const SermonNotesContainer = (props) => {
       userSermonNotes.editedContent.content;
     const isEditUserSermonNotesExist =
       editUserSermonNotes && editUserSermonNotes.content;
-
+    // We are passing the notes manually like this, in the event we need to edit the notes mid sermon.
+    // User notes would still be properly refelcted
     if (isUserSermonNotesExist || isEditUserSermonNotesExist) {
       const currentUserNotes = isEditUserSermonNotesExist
         ? editUserSermonNotes
         : isUserSermonNotesExist
         ? userSermonNotes.editedContent
         : sermonNotes?.originalContent.content;
+      //get All user notes inside nested object
       const userNotes =
-        currentUserNotes &&
-        currentUserNotes.content.filter(
-          (content) => content.type === 'userNotes'
-        );
-      const updatedNotes = sermonNotes?.originalContent.content.map(
-        (content) => {
-          if (content.type === 'userNotes') {
-            const userNote =
-              userNotes &&
-              userNotes.find(
-                (note) =>
-                  note && content && note.attrs?.id === content.attrs?.id
-              );
-            return userNote ? userNote : content;
-          } else {
-            return content;
-          }
-        }
+        currentUserNotes && getAllUserSermonNotes(currentUserNotes.content);
+      // parse the userNotes into the new nested object
+      const updatedNotes = deepUpdateUserNotes(
+        sermonNotes?.originalContent.content,
+        userNotes
       );
       return { type: 'doc', content: updatedNotes };
     } else {
