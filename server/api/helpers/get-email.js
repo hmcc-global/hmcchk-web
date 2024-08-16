@@ -1,40 +1,8 @@
 const { ImapFlow } = require('imapflow');
 
-const imapConfig = {
-  auth: {
-    user: process.env.EMAIL_READ_USER,
-    pass: process.env.EMAIL_PWD,
-  },
-  host: 'imap.gmail.com',
-  port: 993,
-  secure: true,
-  logger: false,
-};
-
-const getSubjectFromHeader = (header) => {
-  const subjectRegex = /\nSubject:\s*(.+)/i;
-  const match = header.match(subjectRegex);
-  const result = match ? match[1] : null;
-
-  // eslint-disable-next-line eqeqeq
-  if (result == null) return result;
-  return result.replace('Re: ', '');
-};
-
-const getEmailMetaData = (msg) => {
-  const { headers, uid, internalDate } = msg;
-  const subject = getSubjectFromHeader(headers.toString('utf8'));
-  // eslint-disable-next-line eqeqeq
-  if (subject == null) return null;
-  return {
-    uid,
-    internalDate,
-    subject
-  };
-};
-
 async function getUnreadEmailFromMailbox(mailbox) {
   const allUnreadEmails = [];
+  const imapConfig = sails.config.custom.imapConfig;
   const client = new ImapFlow(imapConfig);
   await client.connect();
   const lock = await client.getMailboxLock(mailbox);
@@ -46,13 +14,24 @@ async function getUnreadEmailFromMailbox(mailbox) {
       {
         uid: true,
         internalDate: true,
-        headers: true,
+        envelope: true,
       }
     )) {
-      const msgObj = getEmailMetaData(msg);
-      // eslint-disable-next-line eqeqeq
-      if (msgObj == null) continue;
-      allUnreadEmails.push(getEmailMetaData(msg));
+      const { uid, internalDate, envelope } = msg;
+      const { messageId, cc, replyTo, subject } = envelope;
+      const cleanSubject = subject.replace('Re: ', '');
+      allUnreadEmails.push({
+        uid,
+        messageId,
+        internalDate,
+        cc,
+        replyTo,
+        subject: cleanSubject,
+      });
+    }
+    for (const i in allUnreadEmails) {
+      const msg = allUnreadEmails[i];
+      // await client.messageFlagsAdd({ uid: msg.uid }, ['\\Seen'], { uid: true });
     }
   } catch (err) {
     console.log(err);
