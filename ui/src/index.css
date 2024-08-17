@@ -24,7 +24,6 @@ code {
 @font-face {
   font-family: 'Manrope';
   src: local('Manrope'), url('./font/Manrope.ttf') format('truetype');
-  font-weight: normal;
 }
 
 @font-face {
@@ -49,12 +48,14 @@ code {
 
 @font-face {
   font-family: 'DMSerifDisplay_Regular';
-  src: local('DMSerifDisplay-Regular'), url('./font/DMSerifDisplay-Regular.ttf') format('truetype');
+  src: local('DMSerifDisplay-Regular'),
+    url('./font/DMSerifDisplay-Regular.ttf') format('truetype');
   font-weight: normal;
 }
 
 @font-face {
   font-family: 'DMSerifDisplay_Italic';
-  src: local('DMSerifDisplay-Italic'), url('./font/DMSerifDisplay-Italic.ttf') format('truetype');
+  src: local('DMSerifDisplay-Italic'),
+    url('./font/DMSerifDisplay-Italic.ttf') format('truetype');
   font-weight: normal;
 }
