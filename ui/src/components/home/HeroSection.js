@@ -13,6 +13,14 @@ import { useEffect, useRef } from 'react';
 const HeroSection = () => {
   const vidRef = useRef();
 
+  // Define some styling as variable to make editing them easier
+  const headerTextSize = ['3.8em', '4.75em', '4.25em', '5.5em'];
+  const headerTextWeight = ['bold', 'bold', 'semibold'];
+  const headerTextSpacing = ['-3px', '-5.5px'];
+  const headerHighlightTextSize = ['1.2em', '1.25em', '1em', '1em'];
+  const headerHighlightTextWeight = ['normal', 'normal', 'lighter'];
+  const headerHighlightTextSpacing = ['-2px', '-2.5px', '-5.5px'];
+
   useEffect(() => {
     if (vidRef.current) {
       vidRef.current.addEventListener('loadedmetadata', (e) => {
@@ -24,7 +32,7 @@ const HeroSection = () => {
   return (
     <Box position="relative">
       {/* Layer 0 - video bg */}
-      <Box>
+      <Box display={['none', 'none', 'block']}>
         <Flex
           as="video"
           ref={vidRef}
@@ -46,7 +54,7 @@ const HeroSection = () => {
           w="full"
           h="95.1vh"
           zIndex="0"
-          background="linear-gradient(to right, rgb(246,250,255,1) 45%, rgba(255,255,255,0) 100%)"
+          background="linear-gradient(to right, rgb(246,250,255,1) 45%, rgba(246,250,255,0) 100%)"
           position="absolute"
           top="0"
           left="0"
@@ -61,6 +69,7 @@ const HeroSection = () => {
         top="0"
         left="0"
         mixBlendMode="exclusion"
+        opacity={['0', '0', '1']}
       >
         <Container
           display="flex"
@@ -72,7 +81,7 @@ const HeroSection = () => {
             height="93%"
             spacing={5}
             align="flex-start"
-            justifyContent="end"
+            justifyContent={['start', 'start', 'end']}
             fontFamily="Manrope"
             fontSize={{ base: '0.8em', md: '1.1em' }}
             letterSpacing="-0.02em"
@@ -80,65 +89,72 @@ const HeroSection = () => {
           >
             <Image
               opacity="0"
+              display={['none', 'none', 'block']}
               src={process.env.PUBLIC_URL + '/images/home/hmcc-ripple-blue.svg'}
             />
-            <Text opacity="0" textAlign="center" fontWeight="bold">
+            <Text
+              opacity="0"
+              display={['none', 'none', 'block']}
+              textAlign="center"
+              fontWeight="bold"
+            >
               Harvest Mission Community Church of Hong Kong
             </Text>
-            <Stack spacing={0}>
+
+            {/* Hide the text with exclusion effect*/}
+            <Stack
+              spacing={[1, 0]}
+              pt={['10%', '10%', 0]}
+              px={['15%', '15%', '0']}
+              textAlign={['center', 'center', 'left']}
+            >
               <Heading
-                fontSize="5.5em"
-                fontWeight="semibold"
-                letterSpacing="-5.5px"
+                fontSize={headerTextSize}
+                fontWeight={headerTextWeight}
+                letterSpacing={headerTextSpacing}
                 color="black"
+                lineHeight="1.05"
               >
                 Transforming{' '}
-                <span
-                  style={{
-                    color: '#ffffff',
-                    fontFamily: 'DMSerifDisplay_Italic',
-                    fontWeight: 'lighter',
-                  }}
+                <Text
+                  as="span"
+                  color={['#000000', '#ffffff']}
+                  fontFamily="DMSerifDisplay_Italic"
+                  fontSize={headerHighlightTextSize}
+                  fontWeight={headerHighlightTextWeight}
+                  letterSpacing={headerHighlightTextSpacing}
                 >
                   Lives,
-                </span>
+                </Text>
               </Heading>
               <Heading
-                fontSize="5.5em"
-                fontWeight="semibold"
-                letterSpacing="-5.5px"
+                fontSize={headerTextSize}
+                fontWeight={headerTextWeight}
+                letterSpacing={headerTextSpacing}
                 color="black"
+                lineHeight="1.05"
               >
                 Transforming{' '}
-                <span
-                  style={{
-                    color: '#ffffff',
-                    fontFamily: 'DMSerifDisplay_Italic',
-                    fontWeight: 'lighter',
-                  }}
+                <Text
+                  as="span"
+                  color={['#000000', '#ffffff']}
+                  fontFamily="DMSerifDisplay_Italic"
+                  fontSize={headerHighlightTextSize}
+                  fontWeight={headerHighlightTextWeight}
+                  letterSpacing={headerHighlightTextSpacing}
                 >
-                  the World
-                </span>
+                  the World,
+                </Text>
               </Heading>
             </Stack>
-            <Text
-              display={{ base: 'none', md: 'flex' }}
-              style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
-              whiteSpace="pre"
-              opacity="0"
-            >
+            <Text opacity="0" whiteSpace="pre">
               Every Sunday at <b>10AM</b> HKT
             </Text>
-            <Text
-              display={{ base: 'none', md: 'flex' }}
-              style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
-              flexDir="column"
-              opacity="0"
-            >
+            <Text opacity="0" flexDir="column">
               <Text fontWeight="bold">Transformation Center</Text>
               <Text>Unit 2, 22/F Crocodile Center, Kwun Tong & Online</Text>
             </Text>
-            <Stack opacity="0" spacing={0} pl="40%">
+            <Stack spacing={0} pl="40%">
               <SocialIcon
                 target="_blank"
                 bgColor="none"
@@ -174,70 +190,76 @@ const HeroSection = () => {
             height="93%"
             spacing={5}
             align="flex-start"
-            justifyContent="end"
+            justifyContent={['start', 'start', 'end']}
             fontFamily="Manrope"
             fontSize={{ base: '0.8em', md: '1.1em' }}
             letterSpacing="-0.02em"
             color="#4A6EEB"
           >
             <Image
+              display={['none', 'none', 'block']}
               src={process.env.PUBLIC_URL + '/images/home/hmcc-ripple-blue.svg'}
             />
-            <Text textAlign="center" fontWeight="bold">
+            <Text
+              display={['none', 'none', 'block']}
+              textAlign="center"
+              fontWeight="bold"
+            >
               Harvest Mission Community Church of Hong Kong
             </Text>
 
             {/* Hide the text with exclusion effect*/}
-            <Stack spacing={0}>
+            <Stack
+              spacing={[1, 0]}
+              pt={['10%', '10%', 0]}
+              px={['15%', '15%', '0']}
+              textAlign={['center', 'center', 'left']}
+            >
               <Heading
-                fontSize="5.5em"
-                fontWeight="semibold"
-                letterSpacing="-5.5px"
+                fontSize={headerTextSize}
+                fontWeight={headerTextWeight}
+                letterSpacing={headerTextSpacing}
                 color="black"
+                lineHeight="1.05"
               >
                 Transforming{' '}
-                <span
-                  style={{
-                    color: '#ffffff',
-                    fontFamily: 'DMSerifDisplay_Italic',
-                    fontWeight: 'lighter',
-                    opacity: 0,
-                  }}
+                <Text
+                  as="span"
+                  color={['#000000', '#000000', '#ffffff']}
+                  fontFamily="DMSerifDisplay_Italic"
+                  fontSize={headerHighlightTextSize}
+                  fontWeight={headerHighlightTextWeight}
+                  letterSpacing={headerHighlightTextSpacing}
+                  opacity={['1', '1', '0']}
                 >
                   Lives,
-                </span>
+                </Text>
               </Heading>
               <Heading
-                fontSize="5.5em"
-                fontWeight="semibold"
-                letterSpacing="-5.5px"
+                fontSize={headerTextSize}
+                fontWeight={headerTextWeight}
+                letterSpacing={headerTextSpacing}
                 color="black"
+                lineHeight="1.05"
               >
                 Transforming{' '}
-                <span
-                  style={{
-                    color: '#ffffff',
-                    fontFamily: 'DMSerifDisplay_Italic',
-                    fontWeight: 'lighter',
-                    opacity: 0,
-                  }}
+                <Text
+                  as="span"
+                  color={['#000000', '#000000', '#ffffff']}
+                  fontFamily="DMSerifDisplay_Italic"
+                  fontSize={headerHighlightTextSize}
+                  fontWeight={headerHighlightTextWeight}
+                  letterSpacing={headerHighlightTextSpacing}
+                  opacity={['1', '1', '0']}
                 >
-                  the World
-                </span>
+                  the World,
+                </Text>
               </Heading>
             </Stack>
-            <Text
-              display={{ base: 'none', md: 'flex' }}
-              style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
-              whiteSpace="pre"
-            >
+            <Text whiteSpace="pre">
               Every Sunday at <b>10AM</b> HKT
             </Text>
-            <Text
-              display={{ base: 'none', md: 'flex' }}
-              style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
-              flexDir="column"
-            >
+            <Text flexDir="column">
               <Text fontWeight="bold">Transformation Center</Text>
               <Text>Unit 2, 22/F Crocodile Center, Kwun Tong & Online</Text>
             </Text>

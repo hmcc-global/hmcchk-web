@@ -39,7 +39,7 @@ const HomeContainer = (props) => {
     buttonColor: 'teal',
   };
   return (
-    <Flex direction="column">
+    <Flex direction="column" bgColor="#F6FAFF">
       <HeroSection />
       <HelloSermonSection ref={sermonRef} />
       <AboutSection />
