@@ -12,14 +12,16 @@ import { useEffect, useRef } from 'react';
 
 const HeroSection = () => {
   const vidRef = useRef();
+  const vidRefMobile = useRef();
 
   // Define some styling as variable to make editing them easier
-  const headerTextSize = ['3.8em', '4.75em', '4.25em', '5.5em'];
-  const headerTextWeight = ['bold', 'bold', 'semibold'];
-  const headerTextSpacing = ['-3px', '-5.5px'];
-  const headerHighlightTextSize = ['1.2em', '1.25em', '1em', '1em'];
+  const headerTextSize = ['2.75rem', '3rem', '4.6rem', '5.75rem'];
+  const headerTextWeight = ['bold', 'semibold', 'semibold'];
+  const headerTextSpacing = ['-3px', '-4px', '-5.5px'];
+  const headerHighlightTextSize = ['1.25em', '1.25em', '1em', '1.1em'];
   const headerHighlightTextWeight = ['normal', 'normal', 'lighter'];
   const headerHighlightTextSpacing = ['-2px', '-2.5px', '-5.5px'];
+  const bodyTextSize = { base: '0.925rem', md: '1.2em' };
 
   useEffect(() => {
     if (vidRef.current) {
@@ -27,17 +29,27 @@ const HeroSection = () => {
         vidRef.current.play();
       });
     }
-  }, [vidRef]);
+    if (vidRefMobile.current) {
+      vidRefMobile.current.addEventListener('loadedmetadata', (e) => {
+        vidRefMobile.current.play();
+      });
+    }
+  }, [vidRef, vidRefMobile]);
 
   return (
     <Box position="relative">
-      {/* Layer 0 - video bg */}
-      <Box display={['none', 'none', 'block']}>
+      <Box
+        display={['none', 'none', 'block']}
+        w="full"
+        minH="95vh"
+        overflow="hidden"
+        position="absolute"
+      >
         <Flex
           as="video"
           ref={vidRef}
           w="full"
-          h="95vh"
+          minH="95.1vh"
           src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
           loop
           muted
@@ -48,28 +60,31 @@ const HeroSection = () => {
           zIndex="0"
           position="absolute"
           top="0"
-          left="0"
+          left="350"
         />
         <Flex
           w="full"
-          h="95.1vh"
+          minH="95.1vh"
           zIndex="0"
           background="linear-gradient(to right, rgb(246,250,255,1) 45%, rgba(246,250,255,0) 100%)"
           position="absolute"
+          sx={{ aspectRatio: '16/9' }}
           top="0"
           left="0"
         />
       </Box>
-      {/* Layer 1 - clone of content, exclusion effect for header text */}
+
       <Flex
         w="full"
-        h="95vh"
+        minH={['30vh', '30vh', '95vh']}
         zIndex="1"
         position="absolute"
-        top="0"
-        left="0"
+        flexDir="column"
+        justifyContent="flex-start"
+        px={[0, 0, '3%']}
+        pt={['3vh', '3vh', '12vh', '12vh']}
         mixBlendMode="exclusion"
-        opacity={['0', '0', '1']}
+        display={['none', 'none', 'flex']}
       >
         <Container
           display="flex"
@@ -78,25 +93,24 @@ const HeroSection = () => {
         >
           <Stack
             w="100%"
-            height="93%"
-            spacing={5}
+            spacing={[1, 1, 5]}
             align="flex-start"
-            justifyContent={['start', 'start', 'end']}
+            justifyContent="start"
             fontFamily="Manrope"
-            fontSize={{ base: '0.8em', md: '1.1em' }}
+            fontSize={bodyTextSize}
             letterSpacing="-0.02em"
             color="#4A6EEB"
           >
             <Image
-              opacity="0"
               display={['none', 'none', 'block']}
               src={process.env.PUBLIC_URL + '/images/home/hmcc-ripple-blue.svg'}
+              opacity="0"
             />
             <Text
-              opacity="0"
               display={['none', 'none', 'block']}
               textAlign="center"
               fontWeight="bold"
+              opacity="0"
             >
               Harvest Mission Community Church of Hong Kong
             </Text>
@@ -104,8 +118,8 @@ const HeroSection = () => {
             {/* Hide the text with exclusion effect*/}
             <Stack
               spacing={[1, 0]}
-              pt={['10%', '10%', 0]}
-              px={['15%', '15%', '0']}
+              px={['11%', '20%', '0']}
+              w="full"
               textAlign={['center', 'center', 'left']}
             >
               <Heading
@@ -118,11 +132,12 @@ const HeroSection = () => {
                 Transforming{' '}
                 <Text
                   as="span"
-                  color={['#000000', '#ffffff']}
+                  color={['#000000', '#000000', '#ffffff']}
                   fontFamily="DMSerifDisplay_Italic"
                   fontSize={headerHighlightTextSize}
                   fontWeight={headerHighlightTextWeight}
                   letterSpacing={headerHighlightTextSpacing}
+                  opacity={['1', '1', '1']}
                 >
                   Lives,
                 </Text>
@@ -137,24 +152,63 @@ const HeroSection = () => {
                 Transforming{' '}
                 <Text
                   as="span"
-                  color={['#000000', '#ffffff']}
+                  color={['#000000', '#000000', '#ffffff']}
                   fontFamily="DMSerifDisplay_Italic"
                   fontSize={headerHighlightTextSize}
                   fontWeight={headerHighlightTextWeight}
                   letterSpacing={headerHighlightTextSpacing}
+                  opacity={['1', '1', '1']}
                 >
-                  the World,
+                  the World
                 </Text>
               </Heading>
             </Stack>
-            <Text opacity="0" whiteSpace="pre">
+          </Stack>
+        </Container>
+        <Flex
+          display={['flex', 'flex', 'none']}
+          as="video"
+          w="full"
+          h="auto"
+          src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
+          loop
+          muted
+          objectFit="cover"
+          justify="center"
+          playsInline
+          sx={{ aspectRatio: '16/9' }}
+          mt={[7, 7, 5]}
+        ></Flex>
+        <Container
+          display="flex"
+          maxW="container.xl"
+          justifyContent="flex-start"
+          mt={[7, 7, 5]}
+          overflowX="hidden"
+          opacity="0"
+        >
+          <Stack
+            w="100%"
+            spacing={[1, 1, 5]}
+            fontFamily="Manrope"
+            fontSize={bodyTextSize}
+            textAlign={['right', 'right', 'left']}
+            letterSpacing="-0.02em"
+            color="#4A6EEB"
+          >
+            <Text whiteSpace="pre">
               Every Sunday at <b>10AM</b> HKT
             </Text>
-            <Text opacity="0" flexDir="column">
+            <Text flexDir="column">
               <Text fontWeight="bold">Transformation Center</Text>
               <Text>Unit 2, 22/F Crocodile Center, Kwun Tong & Online</Text>
             </Text>
-            <Stack spacing={0} pl="40%">
+            <Stack
+              spacing={[0, 0, -3]}
+              pl={[0, 0, '40%']}
+              flexDir={['row', 'row', 'column']}
+              justifyContent={['flex-end', 'flex-end', 'flex-start']}
+            >
               <SocialIcon
                 target="_blank"
                 bgColor="none"
@@ -178,8 +232,16 @@ const HeroSection = () => {
         </Container>
       </Flex>
 
-      {/* Layer 2 - true content layer */}
-      <Flex w="full" h="95vh" zIndex="1" position="relative">
+      <Flex
+        w="full"
+        minH={['30vh', '30vh', '95vh']}
+        zIndex="1"
+        position="relative"
+        flexDir="column"
+        justifyContent="flex-start"
+        px={[0, 0, '3%']}
+        pt={['3vh', '3vh', '12vh', '12vh']}
+      >
         <Container
           display="flex"
           maxW="container.xl"
@@ -187,12 +249,11 @@ const HeroSection = () => {
         >
           <Stack
             w="100%"
-            height="93%"
-            spacing={5}
+            spacing={[1, 1, 5]}
             align="flex-start"
-            justifyContent={['start', 'start', 'end']}
+            justifyContent="start"
             fontFamily="Manrope"
-            fontSize={{ base: '0.8em', md: '1.1em' }}
+            fontSize={bodyTextSize}
             letterSpacing="-0.02em"
             color="#4A6EEB"
           >
@@ -211,8 +272,8 @@ const HeroSection = () => {
             {/* Hide the text with exclusion effect*/}
             <Stack
               spacing={[1, 0]}
-              pt={['10%', '10%', 0]}
-              px={['15%', '15%', '0']}
+              px={['11%', '20%', '0']}
+              w="full"
               textAlign={['center', 'center', 'left']}
             >
               <Heading
@@ -252,10 +313,43 @@ const HeroSection = () => {
                   letterSpacing={headerHighlightTextSpacing}
                   opacity={['1', '1', '0']}
                 >
-                  the World,
+                  the World
                 </Text>
               </Heading>
             </Stack>
+          </Stack>
+        </Container>
+        <Flex
+          display={['flex', 'flex', 'none']}
+          as="video"
+          ref={vidRefMobile}
+          w="full"
+          h="auto"
+          src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
+          loop
+          muted
+          objectFit="cover"
+          justify="center"
+          playsInline
+          sx={{ aspectRatio: '16/9' }}
+          mt={[7, 7, 5]}
+        ></Flex>
+        <Container
+          display="flex"
+          maxW="container.xl"
+          justifyContent="flex-start"
+          mt={[7, 7, 5]}
+          overflowX="hidden"
+        >
+          <Stack
+            w="100%"
+            spacing={[1, 1, 5]}
+            fontFamily="Manrope"
+            fontSize={bodyTextSize}
+            textAlign={['right', 'right', 'left']}
+            letterSpacing="-0.02em"
+            color="#4A6EEB"
+          >
             <Text whiteSpace="pre">
               Every Sunday at <b>10AM</b> HKT
             </Text>
@@ -263,7 +357,12 @@ const HeroSection = () => {
               <Text fontWeight="bold">Transformation Center</Text>
               <Text>Unit 2, 22/F Crocodile Center, Kwun Tong & Online</Text>
             </Text>
-            <Stack spacing={0} pl="40%">
+            <Stack
+              spacing={[0, 0, -3]}
+              pl={[0, 0, '40%']}
+              flexDir={['row', 'row', 'column']}
+              justifyContent={['flex-end', 'flex-end', 'flex-start']}
+            >
               <SocialIcon
                 target="_blank"
                 bgColor="none"
