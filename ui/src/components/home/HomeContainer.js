@@ -9,6 +9,7 @@ import PopupContainer from './PopupContainer';
 import HelloSermonSection from './HelloSermonSection';
 import { customAxios as axios } from '../helpers/customAxios';
 import SaturateVisionSection from './SaturateVisionSection';
+import ExperienceBiblicalCommunity from './ExperienceBiblicalCommunity';
 
 const HomeContainer = (props) => {
   const { user } = props;
@@ -46,6 +47,7 @@ const HomeContainer = (props) => {
       <SaturateVisionSection />
       <EventsSection />
       <LifeGroupSection />
+      <ExperienceBiblicalCommunity />
       <NewHereSection />
       {popup.flag && <PopupContainer props={popup} />}
     </Flex>
