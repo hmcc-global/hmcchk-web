@@ -7,8 +7,11 @@ import {
   Stack,
   Text,
   Flex,
+  Fade,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { Link as ReactLink } from 'react-router-dom';
+import { InView } from 'react-intersection-observer';
 
 const LinkCardInfo = [
   {
@@ -117,42 +120,50 @@ const LinkCard = (props) => {
 const SubHeroSection = () => {
   return (
     <>
-      <Container
-        display="flex"
-        maxW="container.xl"
-        justifyContent="flex-start"
-        my={['5', '5', '7vh']}
-      >
-        <Stack w="100%" fontFamily="Manrope">
-          <Text
-            px={[0, 0, '5%']}
-            textAlign={['justify', 'justify', 'center']}
-            fontSize={['1rem', '1rem', '1.4rem']}
-          >
-            <b>Harvest Mission Community Church of Hong Kong</b> is an
-            international church planted in 2015, when a team of 20 people came
-            to Hong Kong with a vision to reach this great city. We value
-            transculturalism and we actively reach out to people from all walks
-            of life, specifically students, working adults, and families.
-          </Text>
-          <Grid
-            pt={['10vh', '10vh', '7vh']}
-            w="100%"
-            templateColumns={[
-              'repeat(1, 1fr)',
-              'repeat(1, 1fr)',
-              'repeat(1, 1fr)',
-              'repeat(4, 1fr)',
-            ]}
-            gap={5}
-            fontFamily="Manrope"
-          >
-            {LinkCardInfo.map((data, i) => {
-              return <LinkCard key={'linkCardInfo' + i} {...data} />;
-            })}
-          </Grid>
-        </Stack>
-      </Container>
+      <InView rootMargin="-200px" triggerOnce={true}>
+        {({ inView, ref }) => (
+          <Fade transition={{ enter: { duration: 0.5 } }} in={inView}>
+            <Container
+              display="flex"
+              maxW="container.xl"
+              justifyContent="flex-start"
+              my={['5', '5', '7vh']}
+              ref={ref}
+            >
+              <Stack w="100%" fontFamily="Manrope">
+                <Text
+                  px={[0, 0, '5%']}
+                  textAlign={['justify', 'justify', 'center']}
+                  fontSize={['1rem', '1rem', '1.4rem']}
+                >
+                  <b>Harvest Mission Community Church of Hong Kong</b> is an
+                  international church planted in 2015, when a team of 20 people
+                  came to Hong Kong with a vision to reach this great city. We
+                  value transculturalism and we actively reach out to people
+                  from all walks of life, specifically students, working adults,
+                  and families.
+                </Text>
+                <Grid
+                  pt={['10vh', '10vh', '7vh']}
+                  w="100%"
+                  templateColumns={[
+                    'repeat(1, 1fr)',
+                    'repeat(1, 1fr)',
+                    'repeat(1, 1fr)',
+                    'repeat(4, 1fr)',
+                  ]}
+                  gap={5}
+                  fontFamily="Manrope"
+                >
+                  {LinkCardInfo.map((data, i) => {
+                    return <LinkCard key={'linkCardInfo' + i} {...data} />;
+                  })}
+                </Grid>
+              </Stack>
+            </Container>
+          </Fade>
+        )}
+      </InView>
     </>
   );
 };
