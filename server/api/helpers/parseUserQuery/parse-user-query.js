@@ -21,7 +21,7 @@ const parseWorksheet = (worksheet, isBatch) => {
   if (rawData == null) return {};
   const data = rawData.filter((e, i) => i < 5 || rawData[i].length === 4);
 
-  const lifeGroupName = data[1][1];
+  const lifeGroupName = isBatch ? data[1][1] : data[0][1];
   let lifeGroupId;
   const users = [];
   if (isBatch) {
@@ -40,7 +40,7 @@ const parseWorksheet = (worksheet, isBatch) => {
       }
     }
   } else {
-    const userData = data[4];
+    const userData = data[3];
     if (userData.length === 4 && verifyUserData(userData)) {
       users.push({
         name: userData[0],
