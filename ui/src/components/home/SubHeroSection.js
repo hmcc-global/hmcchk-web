@@ -122,7 +122,7 @@ const SubHeroSection = () => {
     <>
       <InView rootMargin="-200px" triggerOnce={true}>
         {({ inView, ref }) => (
-          <Fade transition={{ enter: { duration: 0.5 } }} in={inView}>
+          <Fade transition={{ enter: { duration: 1 } }} in={inView}>
             <Container
               display="flex"
               maxW="container.xl"
