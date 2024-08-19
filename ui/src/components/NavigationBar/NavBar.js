@@ -104,6 +104,8 @@ const NavBar = (props) => {
           fontSize={{ md: 'xs', lg: 'sm', xl: 'md' }}
           textColor="black"
           letterSpacing={1}
+          border="1px solid"
+          borderColor="#4A6EEB"
         >
           <Container maxW="100%" padding={{ base: 4, md: 1, lg: 4 }}>
             <Flex

@@ -59,7 +59,6 @@ const HelpCard = (props) => {
                 process.env.PUBLIC_URL + '/images/home/' + props.image
               })`
         }
-        C
         backdropFilter="blur(4px)"
         width="100%"
         height={['auto', '220']}
@@ -278,7 +277,7 @@ const HelloSermonSection = React.forwardRef((props, ref) => {
                   bg: '#A5CBFF',
                   color: '#172848',
                 }}
-                id={`homepage-sermons-${isOnline ? "online" : "list"}`}
+                id={`homepage-sermons-${isOnline ? 'online' : 'list'}`}
               >
                 {isOnline ? 'Watch HMCC LIVE' : 'See All Past Sermons'}
               </Button>
