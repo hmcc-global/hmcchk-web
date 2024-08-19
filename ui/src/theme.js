@@ -1,6 +1,5 @@
 import { extendTheme } from '@chakra-ui/react';
 import '@fontsource/dm-sans';
-import '@fontsource/dm-serif-display';
 
 const customTheme = extendTheme({
   fonts: {
