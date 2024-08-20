@@ -20,7 +20,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const ExperienceBiblicalCommunity = () => {
-  const isDesktop = useBreakpointValue({ base: false, md: true });
   const settings = {
     infinite: true,
     autoplay: true,
@@ -47,10 +46,10 @@ const ExperienceBiblicalCommunity = () => {
   };
   return (
     <Container
-      maxW="container.lg"
-      py={10}
-      bgImage={`url('${process.env.PUBLIC_URL}/images/home/hk-green.png')`}
-      bgPos="center right"
+      maxW="container.xl"
+      py={8}
+      bgImage={`url('${process.env.PUBLIC_URL}/images/home/vector-life.svg')`}
+      bgPos="right top"
       bgSize="contain"
       bgRepeat="no-repeat"
     >
@@ -61,26 +60,25 @@ const ExperienceBiblicalCommunity = () => {
               w="100%"
               position="absolute"
               h="122%"
-              bgPos="70% 100%"
-              bgSize="70%"
+              bgPos="21% 95%"
+              bgSize="20%"
               bgRepeat="no-repeat"
-              bgImage={`url('${process.env.PUBLIC_URL}/images/home/vector-green-3.svg')`}
+              bgImage={`url('${process.env.PUBLIC_URL}/images/home/vector-orange-1.svg')`}
             ></Box>
             <Heading
               color="#0C0C20"
-              fontFamily="'DM Serif Display', serif"
-              fontStyle="italic"
+              fontFamily="DMSerifDisplay_Italic"
               fontWeight="400"
               lineHeight="1"
               wordBreak="break-word"
-              fontSize="36px"
+              fontSize="60"
             >
               Experience <br />
               Biblical Community
             </Heading>
           </Box>
         </Box>
-        <Box my={8} w={'100vw'} h={['30vw', '']}>
+        <Box my={4} w={'100vw'} h={['30vw', '40vh']}>
           <Slider {...settings}>
             <Image
               src={process.env.PUBLIC_URL + '/images/home/community-1.png'}
@@ -118,79 +116,149 @@ const ExperienceBiblicalCommunity = () => {
             />
           </Slider>
         </Box>
-
-        <VStack w="80%">
-          <Flex w="100%">
-            <HStack>
-              <Box
-                w="2em"
-                h="2em"
-                borderRadius="full"
-                bg="black"
-                display="flex"
-                justifyContent="center"
-                fontFamily="'DM Serif Display', serif"
-                fontWeight="400"
-                alignItems="center"
-                color="white"
-                fontSize="24px"
+        <VStack>
+          <VStack w="80%" paddingBottom="2em">
+            <Flex w="100%">
+              <HStack>
+                <Box
+                  w="2em"
+                  h="2em"
+                  borderRadius="full"
+                  bg="black"
+                  display="flex"
+                  justifyContent="center"
+                  fontFamily="DMSerifDisplay_Regular"
+                  fontWeight="400"
+                  alignItems="center"
+                  color="white"
+                  fontSize="24px"
+                >
+                  1
+                </Box>
+                <Text
+                  color="black"
+                  fontSize="42px"
+                  fontFamily="DMSerifDisplay_Italic"
+                  fontWeight="400"
+                  lineHeight="39.48px"
+                  wordBreak="break-word"
+                >
+                  Join a LIFE Group
+                </Text>
+              </HStack>
+              <Spacer />
+              <Button
+                pt={6}
+                pb={6}
+                pl={10.5}
+                pr={7}
+                borderRadius={80}
+                border="0.70px solid #D46764"
+                justify="space-between"
+                align="center"
               >
-                1
-              </Box>
+                <Flex w="100%">
+                  <Box px="1em">
+                    <Text
+                      color="#D46764"
+                      fontSize="20px"
+                      fontFamily="Manrope"
+                      fontWeight="700"
+                      wordBreak="break-word"
+                    >
+                      Sign up now
+                    </Text>
+                  </Box>
+                  <Spacer />
+                  <ArrowForwardIcon color="#D46764" my="auto" />
+                </Flex>
+              </Button>
+            </Flex>
+            <Box>
               <Text
-                color="black"
-                fontSize="42px"
-                fontFamily="'DM Serif Display', serif"
-                fontStyle="italic"
+                color="#0B0F19"
+                fontSize="20"
+                fontFamily="Manrope"
                 fontWeight="400"
-                lineHeight="39.48px"
                 wordBreak="break-word"
               >
-                Join a LIFE Group
+                There is no better way to get a taste of who we are and what we
+                believe in then to check out one of our LIFE Groups. This is an
+                opportunity to experience the life-changing power of Biblical
+                community with Love, Investment, Faith, and Enjoyment.
               </Text>
-            </HStack>
-            <Spacer />
-            <Button
-              pt={6}
-              pb={6}
-              pl={10.5}
-              pr={7}
-              borderRadius={80}
-              border="0.70px solid #D46764"
-              justify="space-between"
-              align="center"
-            >
-              <Flex w="100%">
-                <Box px="1em">
-                  <Text
-                    color="#D46764"
-                    fontSize="20px"
-                    fontFamily="'Manrope', sans-serif"
-                    fontWeight="700"
-                    wordBreak="break-word"
-                  >
-                    Sign up now
-                  </Text>
+            </Box>
+          </VStack>
+          <VStack w="80%">
+            <Flex w="100%">
+              <HStack>
+                <Box
+                  w="2em"
+                  h="2em"
+                  borderRadius="full"
+                  bg="black"
+                  display="flex"
+                  justifyContent="center"
+                  fontFamily="DMSerifDisplay_Regular"
+                  fontWeight="400"
+                  alignItems="center"
+                  color="white"
+                  fontSize="24px"
+                >
+                  2
                 </Box>
-                <Spacer />
-                <ArrowForwardIcon color="#D46764" my="auto" />
-              </Flex>
-            </Button>
-          </Flex>
-          <Box>
-            <Text
-              color="#0B0F19"
-              fontSize="14px"
-              fontFamily="'Manrope', sans-serif"
-              fontWeight="400"
-              wordBreak="break-word"
-            >
-              There is no better way to get a taste of who we are and what we
-              believe in then to check out one of our LIFE Groups. This is an
-              opportunity to experience the life-changing power of Biblical
-              community with Love, Investment, Faith, and Enjoyment.
-            </Text>
-          </Box>
+                <Text
+                  color="black"
+                  fontSize="42px"
+                  fontFamily="DMSerifDisplay_Italic"
+                  fontWeight="400"
+                  lineHeight="39.48px"
+                  wordBreak="break-word"
+                >
+                  Connect with Us
+                </Text>
+              </HStack>
+              <Spacer />
+              <Button
+                pt={6}
+                pb={6}
+                pl={10.5}
+                pr={7}
+                borderRadius={80}
+                border="0.70px solid #D46764"
+                justify="space-between"
+                align="center"
+              >
+                <Flex w="100%">
+                  <Box px="1em">
+                    <Text
+                      color="#D46764"
+                      fontSize="20px"
+                      fontFamily="Manrope"
+                      fontWeight="700"
+                      wordBreak="break-word"
+                    >
+                      Get in touch
+                    </Text>
+                  </Box>
+                  <Spacer />
+                  <ArrowForwardIcon color="#D46764" my="auto" />
+                </Flex>
+              </Button>
+            </Flex>
+            <Box w="100%">
+              <Text
+                color="#0B0F19"
+                fontSize="20"
+                fontFamily="Manrope"
+                fontWeight="400"
+                wordBreak="break-word"
+              >
+                New here and don’t know where to begin? Let us know your contact
+                & we can connect you to our church community!
+              </Text>
+            </Box>
+          </VStack>
         </VStack>
       </VStack>
     </Container>
