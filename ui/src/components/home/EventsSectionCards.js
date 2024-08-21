@@ -184,6 +184,7 @@ const EventsSectionCard = (props) => {
             <ModalHeader
               ml={[0, 16]}
               mr={[0, 16]}
+              pb="1"
               fontWeight="900"
               fontSize={['2xl', '3xl']}
             >
@@ -193,7 +194,7 @@ const EventsSectionCard = (props) => {
           <ModalBody ml={[0, 16]} mr={[0, 16]}>
             <Stack spacing={0}>
               {event.eventStartDate && (
-                <Text fontSize={['sm', 'md']} fontWeight="bold">
+                <Text fontSize={'md'} fontWeight="bold">
                   Date:{' '}
                   {event.renderDate
                     ? event.renderDate.toLocaleString(
@@ -223,7 +224,7 @@ const EventsSectionCard = (props) => {
                 </Text>
               )}
               {event.eventStartTime && (
-                <Text fontSize={['sm', 'md']} fontWeight="bold">
+                <Text fontSize={'md'} fontWeight="bold">
                   Time:{' '}
                   {DateTime.fromISO(event.eventStartTime).toLocaleString({
                     hour: 'numeric',
@@ -242,12 +243,12 @@ const EventsSectionCard = (props) => {
                 </Text>
               )}
               {event.location && (
-                <Text fontSize={['sm', 'md']} fontWeight="bold">
+                <Text fontSize={'md'} fontWeight="bold">
                   Location: {event.location}
                 </Text>
               )}
             </Stack>
-            <Box fontSize="sm" mt="5">
+            <Box fontSize="sm" mt="3">
               <ReactMarkdown
                 components={ChakraUIRenderer()}
                 children={event.description}
