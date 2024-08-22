@@ -2,7 +2,6 @@ import {
   Box,
   Container,
   Flex,
-  Stack,
   Text,
   VStack,
   Heading,
@@ -12,7 +11,6 @@ import {
   Image,
   Fade,
   IconButton,
-  useBreakpointValue,
 } from '@chakra-ui/react';
 import { ChevronRightIcon, ChevronLeftIcon } from '@chakra-ui/icons';
 import { InView } from 'react-intersection-observer';
@@ -25,76 +23,12 @@ import { useEffect, useRef, useState, React } from 'react';
 import { getRenderDate } from '../helpers/eventsHelpers';
 import EventsSectionCard from './EventsSectionCards';
 
-function SampleNextArrow(props) {
-  const { onClick, index, maxSlide } = props;
-  return index !== maxSlide - 1 ? (
-    <div
-      style={{
-        display: 'block',
-        position: 'relative',
-        zIndex: 2,
-        cursor: 'pointer',
-      }}
-      onClick={onClick}
-    >
-      <Image
-        src={process.env.PUBLIC_URL + 'images/home/NextArrow.png'}
-        width="5em"
-        alt="Arrow"
-      />
-    </div>
-  ) : null;
-}
-
-function SamplePrevArrow(props) {
-  const { onClick, index } = props;
-  return index !== 0 ? (
-    <div
-      style={{
-        display: 'block',
-        position: 'relative',
-        zIndex: 2,
-        cursor: 'pointer',
-      }}
-      onClick={onClick}
-    >
-      <Image
-        src={process.env.PUBLIC_URL + 'images/home/PrevArrow.png'}
-        width="5em"
-        alt="Arrow"
-      />
-    </div>
-  ) : null;
-}
-
 const EventsSection = () => {
   const [events, setEvents] = useState([]);
-  // const [computedMargin, setComputedMargin] = useState();
   const [slideIndex, setSlideIndex] = useState(0);
 
-  const isMobile = useBreakpointValue({ base: true, md: false });
-  const marginRef = useRef(null);
-  const sliderDesktop = useRef(null);
-  const sliderMobile = useRef(null);
+  const slider = useRef(null);
 
-  // function useWindowSize() {
-  //   const [windowSize, setWindowSize] = useState({
-  //     width: undefined,
-  //     height: undefined,
-  //   });
-  //   useEffect(() => {
-  //     function handleResize() {
-  //       setWindowSize({
-  //         width: window.innerWidth,
-  //         height: window.innerHeight,
-  //       });
-  //     }
-  //     window.addEventListener('resize', handleResize);
-  //     handleResize();
-  //     return () => window.removeEventListener('resize', handleResize);
-  //   }, []);
-  //   return windowSize;
-  // }
   const onArrowClick = (e) => {
     setSlideIndex(e);
   };
@@ -139,42 +73,10 @@ const EventsSection = () => {
       console.log(err);
     }
   };
-  // const currentWindow = useWindowSize();
-  // useEffect(
-  //   () =>
-  //     marginRef.current
-  //       ? setComputedMargin(
-  //           window
-  //             .getComputedStyle(marginRef.current)
-  //             .getPropertyValue('margin-left')
-  //         )
-  //       : '',
-  //   [currentWindow]
-  // );
-
-  // useEffect(() => {
-  //   document.querySelectorAll('.slick-track').forEach((el) => {
-  //     el.style.setProperty('margin-left', computedMargin, 'important');
-  //   });
-  // }, [computedMargin]);
 
   useEffect(() => {
     populateData();
   }, []);
-  const sliderSettingsMobile = {
-    centerMode: false,
-    dots: false,
-    focusOnSelect: true,
-    infinite: false,
-    slidesPerRow: 1,
-    speed: 500,
-    swipeToSlide: true,
-    variableWidth: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    afterChange: onArrowClick,
-  };
 
   const sliderSettings = {
     centerMode: false,
@@ -189,6 +91,22 @@ const EventsSection = () => {
     slidesToScroll: 1,
     arrows: false,
     afterChange: onArrowClick,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          variableWidth: true,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          variableWidth: true,
+        },
+      },
+    ],
   };
 
   const sliderStyle = {
@@ -207,7 +125,6 @@ const EventsSection = () => {
               alignItems="flex-start"
               paddingTop={'2em'}
               paddingBottom="2em"
-              // ref={marginRef}
             >
               <Flex
                 w={{ base: '100%', md: '30%' }}
@@ -307,32 +224,12 @@ const EventsSection = () => {
                   alignItems="flex-start"
                   height="auto"
                   marginTop={['1em', '2.5em']}
-                  marginBottom={['none', '1em']}
+                  marginBottom={'1em'}
                 >
-                  <Box w="100%" display={['none', 'none', 'block']}>
+                  <Box w="100%" display={['block', 'block', 'block']}>
                     <Slider
-                      ref={sliderDesktop}
+                      ref={slider}
                       {...sliderSettings}
-                      style={sliderStyle}
-                    >
-                      {events.length > 0 &&
-                        events.map((event, i) => {
-                          return (
-                            <EventsSectionCard
-                              width={['17em', '17em', '100%']}
-                              height="auto"
-                              event={event}
-                              key={'event' + i}
-                            />
-                          );
-                        })}
-                    </Slider>
-                  </Box>
-
-                  <Box w="100%" display={['block', 'block', 'none']}>
-                    <Slider
-                      ref={sliderMobile}
-                      {...sliderSettingsMobile}
                       style={sliderStyle}
                     >
                       {events.length > 0 &&
@@ -353,7 +250,7 @@ const EventsSection = () => {
                   <IconButton
                     onClick={() => {
                       return slideIndex != 0
-                        ? sliderDesktop?.current?.slickPrev()
+                        ? slider?.current?.slickPrev()
                         : '';
                     }}
                     isRound={true}
@@ -365,7 +262,7 @@ const EventsSection = () => {
                   <IconButton
                     onClick={() => {
                       return slideIndex <= events.length - 1
-                        ? sliderDesktop?.current?.slickNext()
+                        ? slider?.current?.slickNext()
                         : '';
                     }}
                     isRound={true}
