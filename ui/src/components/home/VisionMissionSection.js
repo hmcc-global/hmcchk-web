@@ -61,13 +61,11 @@ const VisionMissionSection = () => {
               </Box>
               <Flex minH="12em">
                 <VStack
-                  borderRadius="0.5rem"
+                  borderRadius="10"
                   w="49%"
                   border="1px solid"
                   borderColor="#97D0D4"
-                  pt="1em"
-                  pb="2.5em"
-                  px="3.25em"
+                  p="10"
                   textAlign="justify"
                 >
                   <Box
@@ -93,92 +91,65 @@ const VisionMissionSection = () => {
                   </Box>
                   <Box>
                     <Text>
-                      <Text display="inline">
+                      <Text
+                        display="inline"
+                        fontWeight="400"
+                        lineHeight="28.84px"
+                        wordBreak="break-word"
+                        fontSize="28"
+                      >
                         <Text
                           color="#4A6EEB"
-                          fontSize="28"
                           fontFamily="DMSerifDisplay_Italic, serif"
-                          fontWeight="400"
-                          lineHeight="28.84px"
-                          wordBreak="break-word"
                           display="inline"
                         >
                           Multiplying
                         </Text>{' '}
                         <Text
                           color="#141419"
-                          fontSize="28"
                           fontFamily="DMSerifDisplay_Regular, serif"
-                          fontWeight="400"
-                          lineHeight="28.84px"
-                          wordBreak="break-word"
                           display="inline"
                         >
                           churches in
                         </Text>{' '}
                         <Text
                           color="#141419"
-                          fontSize="28"
                           fontFamily="DMSerifDisplay_Italic, serif"
-                          fontWeight="400"
-                          lineHeight="28.84px"
-                          wordBreak="break-word"
                           display="inline"
                         >
                           campuses and cities
                         </Text>{' '}
                         <Text
                           color="#141419"
-                          fontSize="28"
                           fontFamily="DMSerifDisplay_Regular, serif"
-                          fontWeight="400"
-                          lineHeight="28.84px"
-                          wordBreak="break-word"
                           display="inline"
                         >
                           to
                         </Text>{' '}
                         <Text
                           color="#4A6EEB"
-                          fontSize="28"
                           fontFamily="DMSerifDisplay_Italic, serif"
-                          fontWeight="400"
-                          lineHeight="28.84px"
-                          wordBreak="break-word"
                           display="inline"
                         >
                           transform
                         </Text>{' '}
                         <Text
                           color="#141419"
-                          fontSize="28"
                           fontFamily="DMSerifDisplay_Regular, serif"
-                          fontWeight="400"
-                          lineHeight="28.84px"
-                          wordBreak="break-word"
                           display="inline"
                         >
                           the
                         </Text>{' '}
                         <Text
                           color="#141419"
-                          fontSize="28"
                           fontFamily="DMSerifDisplay_Italic, serif"
-                          fontStyle="italic"
-                          fontWeight="400"
-                          lineHeight="28.84px"
-                          wordBreak="break-word"
                           display="inline"
                         >
                           next generation
                         </Text>{' '}
                         <Text
                           color="#141419"
-                          fontSize="28"
                           fontFamily="DMSerifDisplay_Regular, serif"
-                          fontWeight="400"
-                          lineHeight="28.84px"
-                          wordBreak="break-word"
                           display="inline"
                         >
                           among the nations.
@@ -189,12 +160,10 @@ const VisionMissionSection = () => {
                 </VStack>
                 <Spacer />
                 <VStack
-                  borderRadius="0.5rem"
+                  borderRadius="10"
                   border="1px solid"
                   borderColor="#97D0D4"
-                  pt="1em"
-                  pb="2.5em"
-                  px="3.25em"
+                  p="10"
                   w="49%"
                   textAlign="justify"
                 >
@@ -220,91 +189,65 @@ const VisionMissionSection = () => {
                     </Text>
                   </Box>
                   <Box>
-                    <Text display="inline">
+                    <Text
+                      display="inline"
+                      fontWeight="400"
+                      lineHeight="28.84px"
+                      fontSize="28"
+                      wordWrap="break-word"
+                    >
                       <Text
                         color="#141419"
-                        fontSize="28"
                         fontFamily="DMSerifDisplay_Regular, serif"
-                        fontWeight="400"
-                        lineHeight="28.84px"
-                        wordWrap="break-word"
                         display="inline"
                       >
                         To
                       </Text>{' '}
                       <Text
                         color="#4A6EEB"
-                        fontSize="28"
                         fontFamily="DMSerifDisplay_Italic, serif"
-                        fontWeight="400"
-                        lineHeight="28.84px"
-                        wordWrap="break-word"
                         display="inline"
                       >
                         transform
                       </Text>{' '}
                       <Text
                         color="#141419"
-                        fontSize="28"
                         fontFamily="DMSerifDisplay_Regular, serif"
-                        fontWeight="400"
-                        lineHeight="28.84px"
-                        wordWrap="break-word"
                         display="inline"
                       >
                         lost people into
                       </Text>{' '}
                       <Text
                         color="#141419"
-                        fontSize="28"
                         fontFamily="DMSerifDisplay_Italic, serif"
-                        fontWeight="400"
-                        lineHeight="28.84px"
-                        wordWrap="break-word"
                         display="inline"
                       >
                         Christ's disciples
                       </Text>{' '}
                       <Text
                         color="#141419"
-                        fontSize="28"
                         fontFamily="DMSerifDisplay_Regular, serif"
-                        fontWeight="400"
-                        lineHeight="28.84px"
-                        wordWrap="break-word"
                         display="inline"
                       >
                         who will then
                       </Text>{' '}
                       <Text
                         color="#4A6EEB"
-                        fontSize="28"
                         fontFamily="DMSerifDisplay_Italic, serif"
-                        fontWeight="400"
-                        lineHeight="28.84px"
-                        wordWrap="break-word"
                         display="inline"
                       >
                         transform
                       </Text>{' '}
                       <Text
                         color="#141419"
-                        fontSize="28"
                         fontFamily="DMSerifDisplay_Regular, serif"
-                        fontWeight="400"
-                        lineHeight="28.84px"
-                        wordWrap="break-word"
                         display="inline"
                       >
                         the
                       </Text>{' '}
                       <Text
                         color="#141419"
-                        fontSize="28"
                         fontFamily="DMSerifDisplay_Italic, serif"
-                        fontWeight="400"
-                        lineHeight="28.84px"
-                        wordWrap="break-word"
                         display="inline"
                       >
                         world.
