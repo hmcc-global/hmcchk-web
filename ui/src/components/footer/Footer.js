@@ -263,23 +263,6 @@ const Footer = () => {
           <Spacer />
           <VStack px="2em" align={['center', 'start']}>
             <Link
-              _hover={{
-                textDecoration: 'underline',
-                textDecorationColor: '#4A6EEB',
-              }}
-            >
-              <Text
-                fontSize="16px"
-                fontFamily="Manrope"
-                fontWeight="700"
-                color="#4A6EEB"
-                textAlign="center"
-              >
-                Resources
-              </Text>
-            </Link>
-
-            <Link
               href="https://play.google.com/store/apps/details?id=net.hmcc.hongkong.dailysoap&hl=en"
               _hover={{
                 textDecoration: 'underline',
