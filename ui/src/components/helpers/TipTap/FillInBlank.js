@@ -1,6 +1,7 @@
 import { Node, nodeInputRule, nodePasteRule } from '@tiptap/core';
 import { NodeViewWrapper, ReactNodeViewRenderer } from '@tiptap/react';
 import React, { useState, useEffect, useRef } from 'react';
+import { v4 as uuid } from 'uuid';
 
 export const FillInBlankNode = Node.create({
   name: 'fillInBlank',
@@ -17,8 +18,12 @@ export const FillInBlankNode = Node.create({
       userText: {
         default: null,
       },
+      currentId: {
+        default: null,
+      },
     };
   },
+
   addCommands() {
     return {
       insertFillInBlank:
@@ -27,16 +32,12 @@ export const FillInBlankNode = Node.create({
           const position = editor.state.selection.from;
           return commands.insertContentAt(position, {
             type: 'fillInBlank',
-            attrs: { editorText: fillText, userText: '' },
+            attrs: { editorText: fillText, userText: '', currentId: uuid() },
           });
-        },
-      filledInBlank:
-        (editorText) =>
-        ({ commands }) => {
-          return commands.setNodeAttribute('editorText', editorText);
         },
     };
   },
+
   addInputRules() {
     return [
       nodeInputRule({
@@ -50,6 +51,7 @@ export const FillInBlankNode = Node.create({
       }),
     ];
   },
+
   addPasteRules() {
     return [
       nodePasteRule({
@@ -64,22 +66,18 @@ export const FillInBlankNode = Node.create({
     ];
   },
 
-  toDOM() {
-    return ['span', { class: 'fillInBlank' }, 0];
-  },
-
   parseHTML() {
     return [
       {
-        tag: 'span',
+        tag: 'fillInBlank',
       },
     ];
   },
 
-  renderHTML({ HTMLAttributes }) {
+  renderHTML() {
     return [
       'span',
-      { class: 'fillInBlank', ...HTMLAttributes },
+      { class: 'fillInBlank' },
       0,
       // Remove the trailing break element
     ];
@@ -87,7 +85,14 @@ export const FillInBlankNode = Node.create({
   addNodeView() {
     return ReactNodeViewRenderer((props) => {
       const inputRef = useRef(null);
-      const [userText, setUserText] = useState(props.node.attrs.userText);
+      // const userInput = props.node.attrs.userText;
+      const [userText, setUserText] = useState(() => {
+        // Retrieve the userText from localStorage or use an empty string
+        const storedUserText = localStorage.getItem(
+          `fillInBlank-${props.node.attrs.currentId}-userText`
+        );
+        return storedUserText || '';
+      });
 
       useEffect(() => {
         inputRef.current.style.color = '#3182CE';
@@ -96,27 +101,45 @@ export const FillInBlankNode = Node.create({
           if (!userText) {
             textWidth = getTextWidth('Blankspace');
           }
-          inputRef.current.style.width = `${textWidth + 40}px`;
+          const windowWidth = window.innerWidth;
+          inputRef.current.style.width = `${Math.min(
+            textWidth + 25,
+            windowWidth - 25
+          )}px`;
+          // inputRef.current.style.width = `${textWidth + 25}px`;
         }
+        localStorage.setItem(
+          `fillInBlank-${props.node.attrs.currentId}-userText`,
+          userText
+        );
       }, [userText]);
 
       const getTextWidth = (text) => {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        context.font = window.getComputedStyle(inputRef.current).font;
+        const computedFont = getComputedFont(inputRef.current);
+        context.font = computedFont;
         const metrics = context.measureText(text);
         return metrics.width;
       };
 
+      function getComputedFont(element) {
+        const computedStyle = window.getComputedStyle(element);
+        return `${computedStyle.fontStyle} ${computedStyle.fontWeight} ${computedStyle.fontSize} ${computedStyle.fontFamily}`;
+      }
+
       const handleInputChange = (event) => {
-        setUserText(event.target.value);
+        setUserText(event.target.value.toUpperCase());
         props.updateAttributes({
           userText: event.target.value,
         });
       };
 
       const handleToggle = () => {
-        setUserText(props.node.attrs.editorText);
+        if (props.node.attrs.editorText === null) {
+          return;
+        }
+        setUserText(props.node.attrs.editorText.toUpperCase());
         props.updateAttributes({
           userText: props.node.attrs.editorText,
         });
@@ -134,7 +157,9 @@ export const FillInBlankNode = Node.create({
                 borderBottomColor: '#3182CE',
                 borderBottomWidth: '0.15rem',
                 textAlign: 'center',
-                height: '1.5rem',
+                height: 'fit-content',
+                textTransform: 'uppercase',
+                backgroundColor: 'transparent',
               }}
             />
             <img

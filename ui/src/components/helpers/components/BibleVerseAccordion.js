@@ -26,7 +26,7 @@ export const BibleVerseAccordion = ({ bibleVerse, actionText }) => {
           </Box>
           <AccordionIcon />
         </AccordionButton>
-        <AccordionPanel pb={4}>{passage}</AccordionPanel>
+        <AccordionPanel pb={4} dangerouslySetInnerHTML={{ __html: passage }} />
       </AccordionItem>
     </Accordion>
   );

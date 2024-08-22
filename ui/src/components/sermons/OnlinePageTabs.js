@@ -54,10 +54,10 @@ const OnlinePageTabs = ({ user, history, sermonNotes }) => {
             <RepeatIcon />
           </Button>
           <Box
-            height="90%"
+            height={['85vh', '90%']}
             paddingBottom={15}
             overflow="auto"
-            backgroundColor="#F1F1F3"
+            // backgroundColor="#F1F1F3"
           >
             <SermonNotesContainer
               sermonNoteId={sermonId}

@@ -1,14 +1,10 @@
-import {
-  Node,
-  nodeInputRule,
-  nodePasteRule,
-} from '@tiptap/core';
+import { Node, nodeInputRule, nodePasteRule } from '@tiptap/core';
 import {
   NodeViewWrapper,
   ReactNodeViewRenderer,
   NodeViewContent,
 } from '@tiptap/react';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { LastUpdatedPosContext } from './index.js';
 import { v4 as uuid } from 'uuid';
 import { Plugin } from 'prosemirror-state';
@@ -108,9 +104,42 @@ export const UserNotesNode = Node.create({
       const { setLastUpdatedPos } = useContext(LastUpdatedPosContext);
       const userInput = props.node.attrs.userNotes;
       const [localUserNotes, setLocalUserNotes] = useState(userInput);
+
       const handleInput = (event) => {
-        setLocalUserNotes(event.target.textContent);
+        let text = event.target.innerHTML;
+        text = text.replace(/<div>/gi, '\n').replace(/<\/div>/gi, '');
+        setLocalUserNotes(text);
       };
+
+      // handle the user notes width
+      useEffect(() => {
+        const bulletElement = document.querySelector('ul');
+        const bulletPadding =
+          window.getComputedStyle(bulletElement).paddingLeft;
+        const childElements = document.querySelectorAll(
+          '.user-notes-full-width'
+        );
+        childElements.forEach((childElement) => {
+          let parentCount = 0;
+          let currentElement = childElement && childElement.parentElement;
+          while (currentElement) {
+            if (currentElement.tagName === 'LI') {
+              parentCount++;
+            }
+            currentElement = currentElement.parentElement;
+          }
+
+          childElement.style.marginLeft = `-${
+            parseInt(bulletPadding) * parentCount
+          }px`;
+        });
+      }, []);
+
+      const tiptapElement = document.querySelector('.tiptap');
+      const computedStyle = window.getComputedStyle(tiptapElement);
+      const width = computedStyle.width;
+      document.documentElement.style.setProperty('--tiptap-width', width);
+
       const handleBlur = () => {
         const { node, getPos } = props;
         const { view } = props.editor;
@@ -125,9 +154,10 @@ export const UserNotesNode = Node.create({
         view.dispatch(transaction);
       };
       return (
-        <NodeViewWrapper className="user-notes">
+        <NodeViewWrapper className="user-notes user-notes-full-width">
           <NodeViewContent
             className="content"
+            onClick={handleBlur}
             onBlur={handleBlur}
             contentEditable={true}
             onInput={handleInput}

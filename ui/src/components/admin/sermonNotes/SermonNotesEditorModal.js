@@ -445,7 +445,7 @@ const SermonNotesEditorModal = (props) => {
                       })
                     }
                   />
-                  <FormHelperText>Please follow the usual format 'sn-06jul'</FormHelperText>
+                  <FormHelperText>Please follow the usual format 'sn-jul06'</FormHelperText>
                 </FormControl>
                 <FormControl>
                   <FormLabel color="#656565" fontWeight="bold">

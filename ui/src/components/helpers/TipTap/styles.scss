@@ -163,3 +163,7 @@
   width: min-content !important;
   white-space: nowrap;
 }
+
+.user-notes-full-width {
+  width: var(--tiptap-width);
+}

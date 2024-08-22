@@ -86,19 +86,12 @@ module.exports = {
     },
     exits
   ) {
-    const user = this.req.user.fullName;
-    sails.log.info(`${user}: Updating Sermon Notes: ${title}`);
+    sails.log.info(`Updating Sermon Notes: ${title}`);
     sails.log.info(`Title: ${title},  Desc: ${subtitle}`);
 
     try {
       if (isDeleted && isPublished) {
         isPublished = false;
-      }
-
-      if (isPublished) {
-        res = await SermonNotesParent.update({ isPublished: true }).set({
-          isPublished: false,
-        });
       }
 
       const existing = await SermonNotesParent.updateOne({ sermonId: sermonId }).set({

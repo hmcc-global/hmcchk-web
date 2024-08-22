@@ -1,9 +1,20 @@
-import { Container, Box, Text, VStack, Button } from '@chakra-ui/react';
+import {
+  Container,
+  Box,
+  Text,
+  VStack,
+  Button,
+  useToast,
+} from '@chakra-ui/react';
 import { customAxios as axios } from '../helpers/customAxios';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDebounce } from 'react-use';
 import TiptapOutput from '../helpers/TipTap/TiptapOutput';
 import { DateTime } from 'luxon';
+import {
+  getAllUserSermonNotes,
+  deepUpdateUserNotes,
+} from '../helpers/SermonNotes';
 
 const SermonNotesContainer = (props) => {
   const { user, history, sermonNoteId } = props;
@@ -11,8 +22,10 @@ const SermonNotesContainer = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingExistingNotes, setIsLoadingExistingNotes] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // In General, userSermonNotes comes from db, editUserSermonNotes comes from localStorage
   const [userSermonNotes, setUserSermonNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
+  const toast = useToast();
 
   const todayId = DateTime.fromISO(new Date().toISOString()).toFormat(
     'ddMMyyyy'
@@ -43,9 +56,12 @@ const SermonNotesContainer = (props) => {
     }
   }, [sermonId]);
 
-  // TO-DO: check if the user logged in or not
   const getUserSermonNotes = useCallback(async () => {
-    setIsLoadingExistingNotes(true)
+    setIsLoadingExistingNotes(true);
+    if (!user?.id) {
+      setIsLoadingExistingNotes(false);
+      return;
+    }
     try {
       const { data, status } = await axios.get('/api/user-sermon-notes/get', {
         params: {
@@ -59,13 +75,20 @@ const SermonNotesContainer = (props) => {
     } catch (error) {
       console.log(error);
     }
-    setIsLoadingExistingNotes(false)
+    setIsLoadingExistingNotes(false);
   }, [user, sermonId]);
 
   // send update to the localstorage 1 seconds after the user stops typing
   // send update to db when user click save
   const updateUserSermonNotes = useCallback(async () => {
+    if (document.activeElement) {
+      document.activeElement.blur();
+    }
     setIsSubmitting(true);
+    if (!user?.id) {
+      setIsSubmitting(false);
+      return;
+    }
     if (userSermonNotes) {
       try {
         const { data, status } = await axios.put(
@@ -78,6 +101,12 @@ const SermonNotesContainer = (props) => {
         );
         if (status === 200) {
           setUserSermonNotes(data);
+          toast({
+            title: 'Sermon Notes Saved',
+            status: 'success',
+            duration: 2000,
+            isClosable: true,
+          });
         }
       } catch (error) {
         console.log(error);
@@ -123,7 +152,7 @@ const SermonNotesContainer = (props) => {
   }, [getSermonNotesParent, getUserSermonNotes]);
 
   useEffect(() => {
-    const localUserNotes = localStorage.getItem('sermonNotes');
+    const localUserNotes = localStorage.getItem(`sermonNotes-${sermonId}`);
     if (
       localUserNotes !== 'null' &&
       localUserNotes !== 'undefined' &&
@@ -135,10 +164,12 @@ const SermonNotesContainer = (props) => {
 
   useDebounce(
     () => {
-      setEditUserSermonNotes(editUserSermonNotes);
-      localStorage.setItem('sermonNotes', JSON.stringify(editUserSermonNotes));
+      localStorage.setItem(
+        `sermonNotes-${sermonId}`,
+        JSON.stringify(editUserSermonNotes)
+      );
     },
-    1000,
+    0,
     [editUserSermonNotes]
   );
 
@@ -149,32 +180,21 @@ const SermonNotesContainer = (props) => {
       userSermonNotes.editedContent.content;
     const isEditUserSermonNotesExist =
       editUserSermonNotes && editUserSermonNotes.content;
-
+    // We are passing the notes manually like this, in the event we need to edit the notes mid sermon.
+    // User notes would still be properly refelcted
     if (isUserSermonNotesExist || isEditUserSermonNotesExist) {
       const currentUserNotes = isEditUserSermonNotesExist
         ? editUserSermonNotes
         : isUserSermonNotesExist
         ? userSermonNotes.editedContent
         : sermonNotes?.originalContent.content;
+      //get All user notes inside nested object
       const userNotes =
-        currentUserNotes &&
-        currentUserNotes.content.filter(
-          (content) => content.type === 'userNotes'
-        );
-      const updatedNotes = sermonNotes?.originalContent.content.map(
-        (content) => {
-          if (content.type === 'userNotes') {
-            const userNote =
-              userNotes &&
-              userNotes.find(
-                (note) =>
-                  note && content && note.attrs?.id === content.attrs?.id
-              );
-            return userNote ? userNote : content;
-          } else {
-            return content;
-          }
-        }
+        currentUserNotes && getAllUserSermonNotes(currentUserNotes.content);
+      // parse the userNotes into the new nested object
+      const updatedNotes = deepUpdateUserNotes(
+        sermonNotes?.originalContent.content,
+        userNotes
       );
       return { type: 'doc', content: updatedNotes };
     } else {
@@ -182,9 +202,10 @@ const SermonNotesContainer = (props) => {
     }
   }, [userSermonNotes, sermonNotes?.originalContent, editUserSermonNotes]);
   if (isLoading) return <Text>Loading Sermon Notes...</Text>;
+
   return (
     <>
-      {sermonNotes ? (
+      {sermonNotes && sermonNotes.isPublished ? (
         <>
           <Box
             width="100%"
@@ -207,18 +228,42 @@ const SermonNotesContainer = (props) => {
               padding="16px"
               backgroundColor="rgba(0, 0, 0, 0.5)"
             >
-              <VStack height="100%" justifyContent="center">
-                <Text color="white" fontWeight={700} fontSize={[24, 40]}>
+              <VStack height="100%" justifyContent="center" spacing={4}>
+                <Text
+                  color="white"
+                  fontWeight={700}
+                  fontSize={[24, 40]}
+                  textAlign="center"
+                >
                   {sermonNotes.title}
                 </Text>
                 <Text
                   color="white"
-                  fontSize={[10, 18]}
+                  fontSize={[14, 22]}
+                  textAlign="center"
                 >{`By ${sermonNotes.speaker}, ${sermonDate}`}</Text>
               </VStack>
             </Box>
           </Box>
           <Container my={[4, 8]} width="100%">
+            <Container mb="3" display={!user?.id ? 'block' : 'none'}>
+              <Text fontStyle="italic" textColor="#B2BEB5">
+                Please log into your HMCC account to get the save notes feature.
+              </Text>
+            </Container>
+            <Button
+              display={!user?.id ? 'none' : 'block'}
+              pos={'sticky'}
+              top="10px"
+              mt={8}
+              isFullWidth
+              isLoading={isSubmitting}
+              colorScheme="teal"
+              onClick={updateUserSermonNotes}
+              zIndex={3}
+            >
+              Save Notes
+            </Button>
             {isLoadingExistingNotes ? (
               <Text>Loading</Text>
             ) : (
@@ -228,15 +273,6 @@ const SermonNotesContainer = (props) => {
                 setUserSermonNotes={setEditUserSermonNotes}
               />
             )}
-            <Button
-              mt={8}
-              isFullWidth
-              isLoading={isSubmitting}
-              colorScheme="teal"
-              onClick={updateUserSermonNotes}
-            >
-              Save Notes
-            </Button>
           </Container>
         </>
       ) : (
