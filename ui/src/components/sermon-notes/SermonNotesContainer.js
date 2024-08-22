@@ -163,15 +163,6 @@ const SermonNotesContainer = (props) => {
     [editUserSermonNotes]
   );
 
-  useEffect(() => {
-    if (!user?.id) {
-      setLogin(false);
-    } else {
-      setLogin(true);
-    }
-    console.log(user?.id);
-  }, [user]);
-
   const originalContentWithUserNotes = useMemo(() => {
     const isUserSermonNotesExist =
       userSermonNotes &&
