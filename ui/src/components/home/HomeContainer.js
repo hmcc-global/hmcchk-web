@@ -44,10 +44,11 @@ const HomeContainer = (props) => {
   return (
     <Flex direction="column" bgColor="#F6FAFF">
       <HeroSection />
+      <EventsSection />
       <HelloSermonSection ref={sermonRef} />
       <AboutSection />
       <SaturateVisionSection />
-      <EventsSection />
+
       <LifeGroupSection />
       <NewHereSection />
       {isMobile ? <VisionMissionSectionMobile /> : <VisionMissionSection />}
