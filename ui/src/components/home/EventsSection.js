@@ -2,98 +2,35 @@ import {
   Box,
   Container,
   Flex,
-  HStack,
   Text,
   VStack,
   Heading,
   Link,
   Button,
   LinkOverlay,
+  Image,
+  Fade,
+  IconButton,
 } from '@chakra-ui/react';
+import { ChevronRightIcon, ChevronLeftIcon } from '@chakra-ui/icons';
+import { InView } from 'react-intersection-observer';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
 import { DateTime } from 'luxon';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, React } from 'react';
 import { getRenderDate } from '../helpers/eventsHelpers';
 import EventsSectionCard from './EventsSectionCards';
 
-const allEventsText = 'See All Events';
-
-function SampleNextArrow(props) {
-  const { onClick, index, maxSlide } = props;
-  return index !== maxSlide - 1 ? (
-    <div
-      style={{
-        display: 'block',
-        right: '0%',
-        position: 'absolute',
-        top: '40%',
-        zIndex: 8,
-        cursor: 'pointer',
-      }}
-      onClick={onClick}
-    >
-      <img
-        src={process.env.PUBLIC_URL + 'images/home/NextArrow.png'}
-        width="80%"
-        alt="Arrow"
-      />
-    </div>
-  ) : null;
-}
-
-function SamplePrevArrow(props) {
-  const { onClick, index } = props;
-  return index !== 0 ? (
-    <div
-      style={{
-        display: 'block',
-        left: '3%',
-        position: 'absolute',
-        top: '40%',
-        zIndex: 8,
-        cursor: 'pointer',
-      }}
-      onClick={onClick}
-    >
-      <img
-        src={process.env.PUBLIC_URL + 'images/home/PrevArrow.png'}
-        width="80%"
-        alt="Arrow"
-      />
-    </div>
-  ) : null;
-}
-
 const EventsSection = () => {
   const [events, setEvents] = useState([]);
-  const [computedMargin, setComputedMargin] = useState();
   const [slideIndex, setSlideIndex] = useState(0);
 
-  const marginRef = useRef(null);
+  const slider = useRef(null);
 
-  function useWindowSize() {
-    const [windowSize, setWindowSize] = useState({
-      width: undefined,
-      height: undefined,
-    });
-    useEffect(() => {
-      function handleResize() {
-        setWindowSize({
-          width: window.innerWidth,
-          height: window.innerHeight,
-        });
-      }
-      window.addEventListener('resize', handleResize);
-      handleResize();
-      return () => window.removeEventListener('resize', handleResize);
-    }, []);
-    return windowSize;
-  }
-  const onArrowClick = (e) => {
-    setSlideIndex(e);
+  const onArrowClick = (_, next) => {
+    setSlideIndex(next);
   };
   const populateData = async () => {
     try {
@@ -136,28 +73,11 @@ const EventsSection = () => {
       console.log(err);
     }
   };
-  const currentWindow = useWindowSize();
-  useEffect(
-    () =>
-      marginRef.current
-        ? setComputedMargin(
-            window
-              .getComputedStyle(marginRef.current)
-              .getPropertyValue('margin-left')
-          )
-        : '',
-    [currentWindow]
-  );
-
-  useEffect(() => {
-    document.querySelectorAll('.slick-track').forEach((el) => {
-      el.style.setProperty('margin-left', computedMargin, 'important');
-    });
-  }, [computedMargin]);
 
   useEffect(() => {
     populateData();
   }, []);
+
   const sliderSettings = {
     centerMode: false,
     dots: false,
@@ -166,12 +86,27 @@ const EventsSection = () => {
     slidesPerRow: 1,
     speed: 500,
     swipeToSlide: true,
-    variableWidth: true,
-    slidesToShow: 1,
+    variableWidth: false,
+    slidesToShow: 2,
     slidesToScroll: 1,
-    nextArrow: <SampleNextArrow index={slideIndex} maxSlide={events.length} />,
-    prevArrow: <SamplePrevArrow index={slideIndex} />,
-    afterChange: onArrowClick,
+    arrows: false,
+    beforeChange: onArrowClick,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          variableWidth: true,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          variableWidth: true,
+        },
+      },
+    ],
   };
 
   const sliderStyle = {
@@ -180,108 +115,209 @@ const EventsSection = () => {
     height: 'auto',
   };
   return (
-    <Flex
-      w="full"
-      h="auto"
-      direction="column"
-      background="#172842"
-      alignItems="center"
-      paddingTop="2em"
-      paddingBottom="2em"
-      boxSizing=""
-    >
-      <Container
-        maxW="container.lg"
-        justifyContent={['flex-start', 'center']}
-        display="flex"
-        marginTop="2em"
-        ref={marginRef}
-      >
-        <VStack w="full" alignItems={['flex-start', null]}>
-          <HStack
-            w={[null, 'full']}
-            height="10vh"
-            marginBottom="1em"
-            justifyContent="space-between"
-          >
-            <VStack alignItems="flex-start">
-              <Heading fontSize={['2em', '4xl']} fontWeight={600} color="white">
-                Events
-              </Heading>
-              <Text color="white">
-                Check out what's happening in HMCC of Hong Kong
-              </Text>
-            </VStack>
-            <Link
-              href="/events"
-              textDecoration="none"
-              _hover={{ textDecoration: 'none' }}
-              id="homepage-events"
+    <InView rootMargin="-200px" triggerOnce={true}>
+      {({ inView, ref }) => (
+        <Fade transition={{ enter: { duration: 1 } }} in={inView}>
+          <Container maxW="container.xl" pr="0" ref={ref}>
+            <Flex
+              h="auto"
+              direction={{ base: 'column', md: 'row' }}
+              alignItems="flex-start"
+              paddingTop={'2em'}
+              paddingBottom="2em"
             >
+              <Flex
+                w={{ base: '100%', md: '30%' }}
+                justifyContent="flex-start"
+                display="flex"
+              >
+                <VStack
+                  w="100%"
+                  fontFamily="Manrope"
+                  alignItems="flex-start"
+                  color="black"
+                  spacing={[3, 3, 10]}
+                >
+                  <Box position="relative">
+                    <Box
+                      w={{ base: '105%', md: '100%' }}
+                      position="absolute"
+                      h={{ base: '115%', md: '110%' }}
+                      bgPos={{ base: '100% 100%', md: '0% 100%' }}
+                      bgSize={{ base: '40%', md: '56%' }}
+                      bgRepeat="no-repeat"
+                      bgImage={`url('${process.env.PUBLIC_URL}/images/home/vector-yellow-1.svg')`}
+                    />
+                    <Heading
+                      fontFamily="DMSerifDisplay_Italic"
+                      fontSize={['2rem', '2rem', '3rem', '3.75rem']}
+                      fontWeight={400}
+                    >
+                      Upcoming Events
+                    </Heading>
+                  </Box>
+                  <Text
+                    display={['none', 'none', 'block']}
+                    fontSize={{ base: '0.925rem', md: '1.2rem' }}
+                  >
+                    Check out what's happening in HMCC of Hong Kong
+                  </Text>
+                  <Text
+                    display={['block', 'block', 'none']}
+                    fontSize={{ base: '0.925rem', md: '1.2rem' }}
+                  >
+                    Click on the events below to see what's happening at HMCC of
+                    Hong Kong!
+                  </Text>
+                  <Link
+                    href="/events"
+                    textDecoration="none"
+                    _hover={{ textDecoration: 'none' }}
+                    id="homepage-events"
+                    minW="12em"
+                    display={{ base: 'none', md: 'block' }}
+                  >
+                    <Button
+                      color="#black"
+                      bgColor="#EBBB41"
+                      borderRadius="20em"
+                      border="1px solid #F6FAFF"
+                      fontWeight="700"
+                      p={[0, 0, '0.4em', '0.6em 1.75em']}
+                      boxSizing="content-box"
+                      _hover={{
+                        background: 'none',
+                        border: '1px solid #EBBB41',
+                      }}
+                      id="homepage-events"
+                      w="full"
+                    >
+                      <Flex
+                        flexDir="row"
+                        h="full"
+                        w="full"
+                        justifyContent="space-evenly"
+                      >
+                        <Text
+                          fontSize={['1rem', '1rem', '1.2rem', '1.4rem']}
+                          my="auto"
+                        >
+                          All Events
+                        </Text>
+                        <Image
+                          w="auto"
+                          fill="black"
+                          my="auto"
+                          h="70%"
+                          src={
+                            process.env.PUBLIC_URL +
+                            '/images/home/call-made-black.svg'
+                          }
+                        />
+                      </Flex>
+                    </Button>
+                  </Link>
+                </VStack>
+              </Flex>
+              <Flex w={['100%', '100%', '70%']} flexDir="column">
+                <Box
+                  w="100%"
+                  boxSizing="border-box"
+                  display="flex"
+                  justifyContent="space-evenly"
+                  alignItems="flex-start"
+                  height="auto"
+                  marginTop={['1em', '2.5em']}
+                  marginBottom={'1em'}
+                >
+                  <Box w="100%" display={['block', 'block', 'block']}>
+                    <Slider
+                      ref={slider}
+                      {...sliderSettings}
+                      style={sliderStyle}
+                    >
+                      {events.length > 0 &&
+                        events.map((event, i) => {
+                          return (
+                            <EventsSectionCard
+                              width={['17em', '17em', '100%']}
+                              height="auto"
+                              event={event}
+                              key={'event' + i}
+                            />
+                          );
+                        })}
+                    </Slider>
+                  </Box>
+                </Box>
+                <Flex display={['none', 'none', 'block']} flexDir="row">
+                  <IconButton
+                    onClick={() => {
+                      return slideIndex != 0
+                        ? slider?.current?.slickPrev()
+                        : '';
+                    }}
+                    isRound={true}
+                    bgColor={
+                      (slideIndex != 0 ? '#EBBB41' : 'gray') + ' !important'
+                    }
+                    mr={10}
+                    icon={<ChevronLeftIcon boxSize={7} color="white" />}
+                  />
+                  <IconButton
+                    onClick={() => {
+                      return slideIndex < events.length - 2
+                        ? slider?.current?.slickNext()
+                        : '';
+                    }}
+                    isRound={true}
+                    bgColor={
+                      (slideIndex < events.length - 2 ? '#EBBB41' : 'gray') +
+                      ' !important'
+                    }
+                    icon={<ChevronRightIcon boxSize={7} color="white" />}
+                  />
+                </Flex>
+              </Flex>
+
               <Button
-                color="#A5CBFF"
-                background="transparent"
-                border="2px solid #A5CBFF"
-                borderRadius="7px"
-                display={{ base: 'none', md: 'block' }}
-                fontWeight="700"
-                padding="6px 24px"
-                boxSizing="content-box"
-                _hover={{ background: '#A5CBFF', color: '#172848' }}
+                display={{ base: 'block', md: 'none' }}
+                w="95%"
+                color="black"
+                bgColor="#EBBB41"
+                borderRadius="20em"
+                alignSelf="start"
+                mt="1"
+                ml={['auto', 'auto', '5%']}
+                mr={['auto', 'auto', 0]}
+                mb="10%"
+                fontSize=""
                 id="homepage-events"
               >
-                {allEventsText}
+                <LinkOverlay href="/events">
+                  <Flex flexDir="row" h="full" w="full" justifyContent="center">
+                    <Text fontSize="1rem" mr="2%" my="auto">
+                      See All Events
+                    </Text>
+                    <Image
+                      w="auto"
+                      fill="black"
+                      ml="2%"
+                      my="auto"
+                      h="70%"
+                      src={
+                        process.env.PUBLIC_URL +
+                        '/images/home/call-made-black.svg'
+                      }
+                    />
+                  </Flex>
+                </LinkOverlay>
               </Button>
-            </Link>
-          </HStack>
-        </VStack>
-      </Container>
-      <Box
-        w="100%"
-        boxSizing="border-box"
-        display="flex"
-        justifyContent="flex-start"
-        alignItems="flex-start"
-        height="auto"
-        overflowX={['auto', 'auto', 'auto', 'auto', 'hidden']}
-        whiteSpace="nowrap"
-        marginTop="2.5em"
-        marginBottom={['none', '3em']}
-        _hover={{
-          overflowX: 'auto',
-        }}
-      >
-        <Slider {...sliderSettings} style={sliderStyle}>
-          {events.length > 0 &&
-            events.map((event, i) => {
-              return (
-                <EventsSectionCard
-                  width={['20em', '35em']}
-                  height="auto"
-                  event={event}
-                  key={'event' + i}
-                />
-              );
-            })}
-        </Slider>
-      </Box>
-      <Button
-        display={{ base: 'block', md: 'none' }}
-        width="10em"
-        color="#A5CBFF"
-        marginTop="2em"
-        background="#172848"
-        border="2px solid #A5CBFF"
-        borderRadius="7px"
-        alignSelf="start"
-        ml="5%"
-        mb="10%"
-        fontSize="1.2em"
-        id="homepage-events"
-      >
-        <LinkOverlay href="/events">See All Events</LinkOverlay>
-      </Button>
-    </Flex>
+            </Flex>
+          </Container>
+        </Fade>
+      )}
+    </InView>
   );
 };
 
