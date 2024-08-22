@@ -21,6 +21,7 @@ const SermonNotesContainer = (props) => {
   const [userSermonNotes, setUserSermonNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
   const toast = useToast();
+  const [isLogin, setLogin] = useState(false);
 
   const todayId = DateTime.fromISO(new Date().toISOString()).toFormat(
     'ddMMyyyy'
@@ -163,6 +164,15 @@ const SermonNotesContainer = (props) => {
     [editUserSermonNotes]
   );
 
+  useEffect(() => {
+    if (!user?.id) {
+      setLogin(false);
+    } else {
+      setLogin(true);
+    }
+    console.log(user?.id);
+  }, [user]);
+
   const originalContentWithUserNotes = useMemo(() => {
     const isUserSermonNotesExist =
       userSermonNotes &&
@@ -257,6 +267,7 @@ const SermonNotesContainer = (props) => {
               />
             )}
             <Button
+              display={isLogin ? 'button' : 'none'}
               mt={8}
               isFullWidth
               isLoading={isSubmitting}
