@@ -26,6 +26,7 @@ const Footer = () => {
                 src={`${process.env.PUBLIC_URL}/images/ripple_blue.svg`}
                 alt="Logo of HMCC"
                 h="2em"
+                mx={['auto', '0']}
               />
             </Link>
             <Text

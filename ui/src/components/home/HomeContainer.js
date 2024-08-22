@@ -1,18 +1,12 @@
 import { Flex, useBreakpointValue } from '@chakra-ui/react';
 import { useState, useEffect, useRef } from 'react';
-import AboutSection from './AboutSection';
 import EventsSection from './EventsSection';
 import HeroSection from './HeroSection';
-import LifeGroupSection from './LifeGroupSection';
-import NewHereSection from './NewHereSection';
 import PopupContainer from './PopupContainer';
-import HelloSermonSection from './HelloSermonSection';
 import { customAxios as axios } from '../helpers/customAxios';
-import SaturateVisionSection from './SaturateVisionSection';
 import VisionMissionSection from './VisionMissionSection';
 import VisionMissionSectionMobile from './VisionMissionSectionMobile';
 import ExperienceBiblicalCommunity from './ExperienceBiblicalCommunity';
-
 
 const HomeContainer = (props) => {
   const { user } = props;
@@ -47,15 +41,9 @@ const HomeContainer = (props) => {
     <Flex direction="column" bgColor="#F6FAFF">
       <HeroSection />
       <EventsSection />
-      <HelloSermonSection ref={sermonRef} />
-      <AboutSection />
-      <SaturateVisionSection />
 
-      <LifeGroupSection />
-      <ExperienceBiblicalCommunity />
-      <NewHereSection />
       {isMobile ? <VisionMissionSectionMobile /> : <VisionMissionSection />}
-
+      <ExperienceBiblicalCommunity />
       {popup.flag && <PopupContainer props={popup} />}
     </Flex>
   );
