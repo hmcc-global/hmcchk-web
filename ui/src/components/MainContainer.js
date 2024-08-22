@@ -20,7 +20,6 @@ import ClearCache from './helpers/ClearCache';
 import RecoverPassword from './auth/RecoverPassword';
 import ResetPassword from './auth/ResetPassword';
 import PasswordSubmitted from './auth/PasswordSubmitted';
-import ConnectFloatButton from './connect-float/ConnectFloatButton';
 import UserFormContainer from './forms/UserFormContainer';
 import ErrorPage from './screens/ErrorPage';
 import ScrollToTop from './helpers/ScrollToTop';
@@ -38,7 +37,6 @@ import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementContainer';
 import AdminLeadershipTeamContainer from './admin/leadershipTeam/AdminLeadershipTeamContainer';
 import AdminSermonNotesContainer from './admin/sermonNotes/AdminSermonNotesContainer';
-import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
 import SermonNotesContainer from './sermon-notes/SermonNotesContainer';
 
 const MainContainer = () => {
@@ -290,8 +288,6 @@ const MainContainer = () => {
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
       <FooterContainer />
-      <PrayerFloatButton />
-      <ConnectFloatButton />
     </chakra.main>
   );
 };
