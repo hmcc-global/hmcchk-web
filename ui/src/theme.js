@@ -16,9 +16,6 @@ const customTheme = extendTheme({
       fontFamily: 'DM Sans',
       fontWeight: '700',
     },
-    dm_serif_display: {
-      fontFamily: 'DM Serif Display',
-    },
   },
 });
 
