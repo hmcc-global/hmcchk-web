@@ -11,7 +11,7 @@ import ConnectPage from './connect/ConnectPage';
 import PrivateRoute from './helpers/PrivateRoute';
 import Signup from './auth/Signup';
 import HomeContainer from './home/HomeContainer';
-import FooterContainer from './footer/FooterContainer';
+import Footer from './footer/Footer';
 import ConfirmEmailPage from './email/ConfirmEmailPage';
 import UserProfileContainer from './userProfile/UserProfileContainer';
 import CompleteUserProfileContainer from './userProfile/CompleteUserProfile';
@@ -287,7 +287,7 @@ const MainContainer = () => {
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
-      <FooterContainer />
+      <Footer />
     </chakra.main>
   );
 };
