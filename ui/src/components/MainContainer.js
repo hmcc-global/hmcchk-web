@@ -47,6 +47,7 @@ const MainContainer = () => {
       bg="#ffffff"
       overflowY="auto"
       id="main-container"
+      overflowX="hidden"
       // Added to allow the bottom navbar to overlay the container with minimal bottom offset
       mb={['6vh', '6vh', 0, 0]}
     >
