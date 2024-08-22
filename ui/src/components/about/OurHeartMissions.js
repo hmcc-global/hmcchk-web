@@ -30,7 +30,7 @@ const Picture = ({ image, year, text }) => {
       </Text>
       <Text
         color="black"
-        fontFamily="Manrope"
+        fontFamily="DMSerifDisplay_Italic"
         fontWeight={400}
         textAlign="center"
         fontSize={{ base: 'smaller', md: 'md' }}
