@@ -19,6 +19,7 @@ import {
   UnorderedList,
   OrderedList,
   ListItem,
+  Stack,
 } from '@chakra-ui/react';
 import { RiCalendarEventFill } from 'react-icons/ri';
 import { BsClockFill } from 'react-icons/bs';
@@ -33,6 +34,8 @@ import {
 } from '../helpers/eventsHelpers';
 import { useState } from 'react';
 import TrackingUtil from '../../util/TrackingUtil';
+import ReactMarkdown from 'react-markdown';
+import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 
 const EventsSectionCard = (props) => {
   const { width, height, event } = props;
@@ -85,14 +88,21 @@ const EventsSectionCard = (props) => {
         eventData.eventStartTime
       )
     );
-    const dateFormat = eventData.eventStartTime
-      ? DateTime.DATETIME_MED_WITH_WEEKDAY
-      : DateTime.DATE_MED_WITH_WEEKDAY;
+    const dateFormat = DateTime.DATE_MED_WITH_WEEKDAY;
     return (
       <>
         {eventData.eventStartDate
           ? eventData.renderDate
-            ? DateTime.fromISO(eventData.renderDate).toLocaleString(dateFormat)
+            ? 'Date: ' +
+              DateTime.fromISO(eventData.renderDate).toLocaleString(
+                dateFormat
+              ) +
+              (eventData.eventInterval === 'None' && eventData.eventEndDate
+                ? ' - ' +
+                  DateTime.fromISO(eventData.eventEndDate).toLocaleString(
+                    dateFormat
+                  )
+                : '')
             : eventRenderDate.toLocaleString(dateFormat)
           : null}
       </>
@@ -100,52 +110,68 @@ const EventsSectionCard = (props) => {
   };
   return (
     <>
-      <Box borderRadius={10} w={width} h={height} mx={4}>
-        <VStack
-          justifyContent="space-between"
-          alignItems="flex-start"
-          spacing={5}
-        >
-          <AspectRatio
-            width={{ base: '100%', md: '90%' }}
-            ratio={16 / 9}
-            onClick={onOpen}
-            cursor="pointer"
-            zIndex={5}
+      <Box w={width} h={height} px={2}>
+        <Box border="1px solid #8C8C8C" borderRadius={10}>
+          <VStack
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={[2, 2, 5]}
+            p={['3%', '3%', '5%']}
           >
-            <Image borderRadius={10} objectFit="cover" src={event.imageAdUrl} />
-          </AspectRatio>
-          <VStack alignItems="flex-start" width="100%">
-            <Heading
+            <AspectRatio
+              width="100%"
+              ratio={16 / 9}
               onClick={onOpen}
-              marginBottom="5px"
-              maxWidth={['xs', 'lg']}
-              fontSize={['lg', '2xl']}
-              color="#A5CBFF"
               cursor="pointer"
+              zIndex={5}
+            >
+              <Image
+                borderRadius={10}
+                objectFit="cover"
+                src={event.imageAdUrl}
+              />
+            </AspectRatio>
+            <VStack
+              fontFamily="Manrope"
               fontWeight="semibold"
-              isTruncated
+              color="#818181"
+              alignItems="flex-start"
+              width="100%"
+              spacing={'0'}
+              overflow="hidden"
+              fontSize={{ base: 'sm', md: 'md' }}
             >
-              {event.title}
-            </Heading>
-            <Text color="white" fontSize={{ base: 'md', md: 'md' }}>
-              {' '}
-              {event.location}{' '}
-            </Text>
-            <Text
-              color="white"
-              marginTop="0px !important"
-              fontSize={{ base: 'md', md: 'md' }}
-            >
-              {getStartEndDateStr(event)}
-            </Text>
+              <Heading
+                onClick={onOpen}
+                maxWidth={'100%'}
+                fontSize={['lg', '2xl']}
+                cursor="pointer"
+                fontFamily="Manrope"
+                fontWeight="bold"
+                color="black"
+                isTruncated
+                mt={[1, 1, 0]}
+                mb={[2, 2, 0]}
+              >
+                {event.title}
+              </Heading>
+              <Text overflow="wrap">{getStartEndDateStr(event)}</Text>
+              <Text>
+                {event.eventStartTime
+                  ? 'Time: ' +
+                    event.eventStartTime +
+                    (event.eventEndTime ? ' - ' + event.eventEndTime : '')
+                  : ''}
+              </Text>
+              <Text>{event.location ? 'Location: ' + event.location : ''}</Text>
+            </VStack>
           </VStack>
-        </VStack>
+        </Box>
       </Box>
       <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent borderRadius="20">
-          <AspectRatio mb="5" width="100%" ratio={16 / 9}>
+        <ModalContent borderRadius="20" fontFamily="Manrope">
+          <AspectRatio width="100%" ratio={16 / 9}>
             <Image
               borderTopLeftRadius="20"
               borderTopRightRadius="20"
@@ -158,6 +184,7 @@ const EventsSectionCard = (props) => {
             <ModalHeader
               ml={[0, 16]}
               mr={[0, 16]}
+              pb="1"
               fontWeight="900"
               fontSize={['2xl', '3xl']}
             >
@@ -165,26 +192,39 @@ const EventsSectionCard = (props) => {
             </ModalHeader>
           )}
           <ModalBody ml={[0, 16]} mr={[0, 16]}>
-            <Box>
-              {event.eventStartDate &&
-                event.eventEndDate &&
-                event.eventInterval && (
-                  <>
-                    <Text fontSize={['sm', 'md']} fontWeight="bold">
-                      <Icon mr={2} as={RiCalendarEventFill} />
-                      Start Date: {getStartDate(event)}
-                    </Text>
-                    <EndDateElement
-                      startDateStr={event.eventStartDate}
-                      endDateStr={event.eventEndDate}
-                      interval={event.eventInterval}
-                      isModal
-                    />
-                  </>
-                )}
+            <Stack spacing={0}>
+              {event.eventStartDate && (
+                <Text fontSize={'md'} fontWeight="bold">
+                  Date:{' '}
+                  {event.renderDate
+                    ? event.renderDate.toLocaleString(
+                        DateTime.DATE_MED_WITH_WEEKDAY
+                      )
+                    : getRenderDate(
+                        event.eventStartDate,
+                        event.eventEndDate,
+                        event.eventInterval,
+                        event.eventStartTime
+                      ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
+                  {event.eventEndDate &&
+                    getRenderDate(
+                      event.eventStartDate,
+                      event.eventEndDate,
+                      event.eventInterval,
+                      event.eventStartTime
+                    ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY) !==
+                      DateTime.fromISO(event.eventEndDate).toLocaleString(
+                        DateTime.DATE_MED_WITH_WEEKDAY
+                      ) &&
+                    event.eventInterval === 'None' &&
+                    ' - ' +
+                      DateTime.fromISO(event.eventEndDate).toLocaleString(
+                        DateTime.DATE_MED_WITH_WEEKDAY
+                      )}
+                </Text>
+              )}
               {event.eventStartTime && (
-                <Text fontSize={['sm', 'md']} fontWeight="bold">
-                  <Icon mr={2} as={BsClockFill} />
+                <Text fontSize={'md'} fontWeight="bold">
                   Time:{' '}
                   {DateTime.fromISO(event.eventStartTime).toLocaleString({
                     hour: 'numeric',
@@ -203,14 +243,17 @@ const EventsSectionCard = (props) => {
                 </Text>
               )}
               {event.location && (
-                <Text fontSize={['sm', 'md']} fontWeight="bold">
-                  <Icon mr={2} as={ImLocation2} />
+                <Text fontSize={'md'} fontWeight="bold">
                   Location: {event.location}
                 </Text>
               )}
-            </Box>
-            <Box fontSize="sm" mt="5">
-              {parse(event.description, options)}
+            </Stack>
+            <Box fontSize="sm" mt="3">
+              <ReactMarkdown
+                components={ChakraUIRenderer()}
+                children={event.description}
+                skipHtml
+              />
             </Box>
           </ModalBody>
           <ModalFooter ml={[0, 16]} mr={[0, 16]}>
@@ -240,7 +283,9 @@ const EventsSectionCard = (props) => {
                 href={event.signUpUrl ? event.signUpUrl : null}
                 isDisabled={event.signUpUrl.length <= 0}
                 size="sm"
-                id={`events-signup-${TrackingUtil.generateIdFromTitle(event.title)}}`}
+                id={`events-signup-${TrackingUtil.generateIdFromTitle(
+                  event.title
+                )}}`}
               >
                 Sign up
               </Button>
@@ -252,7 +297,9 @@ const EventsSectionCard = (props) => {
                 href={generateGoogleCalendarLink(event)}
                 isDisabled={generateGoogleCalendarLink(event) ? false : true}
                 size="sm"
-                id={`events-calendar-${TrackingUtil.generateIdFromTitle(event.title)}}`}
+                id={`events-calendar-${TrackingUtil.generateIdFromTitle(
+                  event.title
+                )}}`}
               >
                 Add to Calendar
               </Button>
