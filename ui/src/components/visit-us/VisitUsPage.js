@@ -45,6 +45,7 @@ const VisitUsPage = (props) => {
             color="white"
             textAlign="center"
             mb={5}
+            fontFamily="DMSerifDisplay_Italic"
           >
             Sunday Celebration
           </Heading>
@@ -53,6 +54,7 @@ const VisitUsPage = (props) => {
             fontSize={['md', 'xl']}
             fontWeight={700}
             textAlign="center"
+            fontFamily="DMSerifDisplay_Regular"
             mb={[0, 5]}
           >
             is HMCC's weekend gathering where everyone in the church comes
@@ -71,10 +73,11 @@ const VisitUsPage = (props) => {
             fontWeight={800}
             textAlign="center"
             mb={[2, 10]}
+            fontFamily="Manrope"
           >
             Ways to enjoy Sunday Celebration
           </Heading>
-          <Flex flexDir={['column', 'row']}>
+          <Flex flexDir={['column', 'row']} fontFamily="Manrope">
             <VStack
               flex={4.25}
               align="stretch"
@@ -87,6 +90,7 @@ const VisitUsPage = (props) => {
                 fontSize={['2xl', '4xl']}
                 fontWeight={800}
                 mt={4}
+                fontFamily="Manrope"
               >
                 IN-PERSON
               </Heading>
@@ -173,6 +177,7 @@ const VisitUsPage = (props) => {
               color="white"
               maxW={650}
               textAlign={['center', 'initial']}
+              fontFamily="Manrope"
             >
               If you are not able to join in-person, you could also...
               {/* We are currently not meeting in-person due to COVID-19, so
@@ -184,7 +189,11 @@ const VisitUsPage = (props) => {
               color="white"
               textAlign={['center', 'right']}
             >
-              <Link href="https://hongkong.hmcc.net/online/" isExternal>
+              <Link
+                href="https://hongkong.hmcc.net/online/"
+                isExternal
+                fontFamily="Manrope"
+              >
                 Join us ONLINE
               </Link>
             </Heading>
@@ -196,6 +205,7 @@ const VisitUsPage = (props) => {
             fontSize={['2xl', '4xl']}
             fontWeight={800}
             textAlign="center"
+            fontFamily="Manrope"
           >
             Got Queries?{' '}
             <Link href="mailto:hongkong@hmcc.net">

@@ -18,6 +18,7 @@ const StaffSection = (props) => {
         <Heading
           as="h2"
           fontSize={['4xl', '6xl']}
+          fontFamily="DMSerifDisplay_Italic"
           fontWeight={700}
           lineHeight={1}
           textAlign="center"
@@ -58,13 +59,23 @@ const StaffSection = (props) => {
             </Box>
 
             <Box px="1.5em">
-              <Text color="#0628A3" fontSize="2xl" fontWeight="bold">
+              <Text
+                color="#0628A3"
+                fontSize="2xl"
+                fontWeight="bold"
+                fontFamily="DMSerifDisplay_Italic"
+              >
                 {blurb.kim.title}
               </Text>
               {blurb.kim.position &&
                 blurb.kim.position.split('\n').map((item) => {
                   return (
-                    <Text color="black" fontSize="lg" fontWeight="bold">
+                    <Text
+                      color="black"
+                      fontSize="lg"
+                      fontWeight="bold"
+                      fontFamily="DMSerifDisplay_Italic"
+                    >
                       {item}
                       <br />
                     </Text>

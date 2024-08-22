@@ -12,7 +12,7 @@ import { AiFillPlusCircle } from 'react-icons/ai';
 
 const Faq = (props) => {
   return (
-    <Accordion allowMultiple allowToggle>
+    <Accordion allowMultiple allowToggle fontFamily="Manrope">
       <Heading as="h2" mb="4" size="2xl" fontWeight="900" textAlign="left">
         FAQs
       </Heading>

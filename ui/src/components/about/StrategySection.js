@@ -20,6 +20,7 @@ const StrategySection = (props) => {
           lineHeight={1}
           color="#0628A3"
           textAlign="center"
+          fontFamily="DMSerifDisplay_Italic"
           mb={4}
           id="strategy"
         >
@@ -43,7 +44,12 @@ const StrategySection = (props) => {
             bgSize="cover"
           >
             <Box m="auto">
-              <Heading color="#0628A3" fontWeight="bold" textAlign="center">
+              <Heading
+                color="#0628A3"
+                fontWeight="bold"
+                textAlign="center"
+                fontFamily="DMSerifDisplay_Italic"
+              >
                 {blurb[0].title}
               </Heading>
 
@@ -53,6 +59,7 @@ const StrategySection = (props) => {
                 fontWeight="bold"
                 py="3"
                 color="#000000"
+                fontFamily="DMSerifDisplay_Italic"
               >
                 {blurb[0].subtitle}
               </Heading>
@@ -76,7 +83,12 @@ const StrategySection = (props) => {
             bgSize="cover"
           >
             <Box m="auto">
-              <Heading color="#0628A3" fontWeight="bold" textAlign="center">
+              <Heading
+                color="#0628A3"
+                fontWeight="bold"
+                textAlign="center"
+                fontFamily="DMSerifDisplay_Italic"
+              >
                 {blurb[1].title}
               </Heading>
 
@@ -85,6 +97,7 @@ const StrategySection = (props) => {
                 fontSize="xl"
                 fontWeight="bold"
                 py="3"
+                fontFamily="DMSerifDisplay_Italic"
                 color="#000000"
               >
                 {blurb[1].subtitle}
@@ -109,7 +122,12 @@ const StrategySection = (props) => {
             bgSize="cover"
           >
             <Box m="auto">
-              <Heading color="#0628A3" fontWeight="bold" textAlign="center">
+              <Heading
+                color="#0628A3"
+                fontWeight="bold"
+                textAlign="center"
+                fontFamily="DMSerifDisplay_Italic"
+              >
                 {blurb[2].title}
               </Heading>
 
@@ -119,6 +137,7 @@ const StrategySection = (props) => {
                 fontWeight="bold"
                 py="3"
                 color="#000000"
+                fontFamily="DMSerifDisplay_Italic"
               >
                 {blurb[2].subtitle}
               </Text>
