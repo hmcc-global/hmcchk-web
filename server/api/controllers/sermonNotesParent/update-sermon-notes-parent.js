@@ -94,15 +94,7 @@ module.exports = {
         isPublished = false;
       }
 
-      if (isPublished) {
-        res = await SermonNotesParent.update({ isPublished: true }).set({
-          isPublished: false,
-        });
-      }
-
-      const existing = await SermonNotesParent.updateOne({
-        sermonId: sermonId,
-      }).set({
+      const existing = await SermonNotesParent.updateOne({ sermonId: sermonId }).set({
         title,
         subtitle,
         speaker,
