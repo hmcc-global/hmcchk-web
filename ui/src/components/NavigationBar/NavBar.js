@@ -238,9 +238,9 @@ const NavBar = (props) => {
                             marginLeft="10px"
                             px={{ md: '3', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
-                            _hover={{ 
+                            _hover={{
                               backgroundColor: '#4A6EEB',
-                              color: "white"
+                              color: 'white',
                             }}
                             id="navbar-signup"
                             letterSpacing={1}
@@ -272,10 +272,10 @@ const NavBar = (props) => {
                             marginLeft="10px"
                             px={{ md: '2', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
-                            _hover={{ 
+                            _hover={{
                               backgroundColor: '#ffffff',
-                              color: "black",
-                              borderColor: "#ffffff"
+                              color: 'black',
+                              borderColor: '#ffffff',
                             }}
                             borderRadius={20}
                             letterSpacing={1}
@@ -306,9 +306,9 @@ const NavBar = (props) => {
                             marginLeft="10px"
                             px={{ md: '3', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
-                            _hover={{ 
+                            _hover={{
                               backgroundColor: '#4A6EEB',
-                              color: "white"
+                              color: 'white',
                             }}
                             id="navbar-signup"
                             letterSpacing={1}
@@ -339,10 +339,10 @@ const NavBar = (props) => {
                             marginLeft="10px"
                             px={{ md: '2', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
-                            _hover={{ 
+                            _hover={{
                               backgroundColor: '#ffffff',
-                              color: "black",
-                              borderColor: "#ffffff"
+                              color: 'black',
+                              borderColor: '#ffffff',
                             }}
                             borderRadius={20}
                             letterSpacing={1}
@@ -370,27 +370,13 @@ const NavBar = (props) => {
             </Flex>
             <Flex
               display={{ base: 'flex', md: 'none' }}
-              justify="center"
+              justify="space-between"
               align="center"
               h="5vh"
               position="relative"
+              w="100%"
             >
-              <Box>
-                <LinkBox>
-                  <LinkOverlay href="/">
-                    <Text
-                      color="#4A6EEB"
-                      fontSize="x-small"
-                      textAlign="center"
-                      justifySelf="center"
-                      fontWeight="bold"
-                    >
-                      Harvest Mission Community Church
-                    </Text>
-                  </LinkOverlay>
-                </LinkBox>
-              </Box>
-              <Box>
+              <Box w="10%">
                 <HStack>
                   {isLive ? (
                     <Link href="/online" style={{ lineHeight: '0' }}>
@@ -410,6 +396,49 @@ const NavBar = (props) => {
                   ) : null}
                 </HStack>
               </Box>
+              <Box>
+                <Box
+                  transition="opacity 0.5s"
+                  style={{
+                    opacity: Math.max(1 - yPosition / 400, 0),
+                  }}
+                >
+                  <LinkBox>
+                    <LinkOverlay href="/">
+                      <Text
+                        color="#4A6EEB"
+                        fontSize="x-small"
+                        textAlign="center"
+                        justifySelf="center"
+                        fontWeight="bold"
+                      >
+                        Harvest Mission Community Church
+                      </Text>
+                    </LinkOverlay>
+                  </LinkBox>
+                </Box>
+                <Box
+                  transition="opacity 0.5s"
+                  style={{ opacity: Math.max((yPosition - 100) / 400, 0) }}
+                  position="absolute"
+                  top="50%"
+                  left="50%"
+                  transform="translate(-50%, -50%)"
+                >
+                  <LinkBox>
+                    <LinkOverlay href="/">
+                      <Image
+                        w="4em"
+                        src={
+                          process.env.PUBLIC_URL + '/images/ripple_black.svg'
+                        }
+                        alt="Logo of HMCC"
+                      />
+                    </LinkOverlay>
+                  </LinkBox>
+                </Box>
+              </Box>
+              <Box w="10%"></Box>
             </Flex>
           </Container>
         </Flex>
