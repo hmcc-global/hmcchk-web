@@ -29,8 +29,8 @@ const EventsSection = () => {
 
   const slider = useRef(null);
 
-  const onArrowClick = (e) => {
-    setSlideIndex(e);
+  const onArrowClick = (_, next) => {
+    setSlideIndex(next);
   };
   const populateData = async () => {
     try {
@@ -90,7 +90,7 @@ const EventsSection = () => {
     slidesToShow: 2,
     slidesToScroll: 1,
     arrows: false,
-    afterChange: onArrowClick,
+    beforeChange: onArrowClick,
     responsive: [
       {
         breakpoint: 768,
@@ -181,10 +181,14 @@ const EventsSection = () => {
                       color="#black"
                       bgColor="#EBBB41"
                       borderRadius="20em"
+                      border="1px solid #F6FAFF"
                       fontWeight="700"
                       p={[0, 0, '0.4em', '0.6em 1.75em']}
                       boxSizing="content-box"
-                      _hover={{ background: '#A5CBFF', color: '#172848' }}
+                      _hover={{
+                        background: 'none',
+                        border: '1px solid #EBBB41',
+                      }}
                       id="homepage-events"
                       w="full"
                     >
@@ -254,20 +258,23 @@ const EventsSection = () => {
                         : '';
                     }}
                     isRound={true}
-                    bgColor="#EBBB41"
+                    bgColor={
+                      (slideIndex != 0 ? '#EBBB41' : 'gray') + ' !important'
+                    }
                     mr={10}
-                    _hover={{ bgColor: '#EBBB41' }}
                     icon={<ChevronLeftIcon boxSize={7} color="white" />}
                   />
                   <IconButton
                     onClick={() => {
-                      return slideIndex <= events.length - 1
+                      return slideIndex < events.length - 2
                         ? slider?.current?.slickNext()
                         : '';
                     }}
                     isRound={true}
-                    bgColor="#EBBB41"
-                    _hover={{ bgColor: '#EBBB41' }}
+                    bgColor={
+                      (slideIndex < events.length - 2 ? '#EBBB41' : 'gray') +
+                      ' !important'
+                    }
                     icon={<ChevronRightIcon boxSize={7} color="white" />}
                   />
                 </Flex>
