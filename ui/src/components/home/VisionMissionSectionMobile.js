@@ -307,36 +307,38 @@ const VisionMissionSectionMobile = () => {
                         the Saturate Vision in Hong Kong.
                       </Text>
                     </Box>
-                    <Box w="100%" p="1em" bgColor="white">
+                    <Box w="100%" p="1em" bgColor="white" borderRadius="12">
+                      <Box w="100%" p="1em" bgColor="white">
+                        <Text
+                          color="#4A6EEB"
+                          fontSize="16px"
+                          fontFamily="Manrope"
+                          fontWeight="700"
+                          textTransform="uppercase"
+                          lineHeight="16px"
+                          letterSpacing="4px"
+                          wordBreak="break-word"
+                          textAlign="center"
+                        >
+                          SATURATE VISION
+                        </Text>
+                      </Box>
                       <Text
-                        color="#4A6EEB"
-                        fontSize="16px"
-                        fontFamily="Manrope"
-                        fontWeight="700"
-                        textTransform="uppercase"
-                        lineHeight="16px"
-                        letterSpacing="4px"
+                        color="#0C0C20"
+                        fontSize="20px"
+                        fontFamily="DMSerifDisplay_Italic, serif"
+                        fontWeight="400"
+                        lineHeight="21.26px"
                         wordBreak="break-word"
                         textAlign="center"
                       >
-                        SATURATE VISION
+                        To saturate Hong Kong with the knowledge of God's glory
+                        by living out the Kingdom lifestyle and proclaiming the
+                        Gospel, so that we can make more disciples of all
+                        nations, locally, regionally, and globally for the
+                        spread of Jesus's fame.
                       </Text>
                     </Box>
-                    <Text
-                      color="#0C0C20"
-                      fontSize="20px"
-                      fontFamily="DMSerifDisplay_Italic, serif"
-                      fontWeight="400"
-                      lineHeight="21.26px"
-                      wordBreak="break-word"
-                      textAlign="center"
-                    >
-                      To saturate Hong Kong with the knowledge of God's glory by
-                      living out the Kingdom lifestyle and proclaiming the
-                      Gospel, so that we can make more disciples of all nations,
-                      locally, regionally, and globally for the spread of
-                      Jesus's fame.
-                    </Text>
                   </VStack>
                 </VStack>
                 <Link href="/about-us" id="homepage-about">
