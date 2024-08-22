@@ -345,7 +345,7 @@ const VisionMissionSectionMobile = () => {
           <Text
             fontSize="14px"
             fontFamily="'Manrope', sans-serif"
-            fontWeight="400"
+            fontWeight="700"
             wordBreak="break-word"
             mx="1em"
           >
