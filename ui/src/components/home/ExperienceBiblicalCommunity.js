@@ -31,7 +31,7 @@ const ExperienceBiblicalCommunity = () => {
   const settings = {
     infinite: true,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 1500,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -203,6 +203,11 @@ const ExperienceBiblicalCommunity = () => {
                           justify="space-between"
                           align="center"
                           bgColor="#D46764"
+                          color="white"
+                          _active={{
+                            bg: '#D46764',
+                            color: 'white',
+                          }}
                         >
                           <Flex w="40%">
                             <Box px="1em">
@@ -274,9 +279,13 @@ const ExperienceBiblicalCommunity = () => {
                         border="0.70px solid #D46764"
                         justify="space-between"
                         align="center"
+                        bgColor="#D46764"
                         color="white"
                         onClick={onOpen}
-                        bgColor="#D46764"
+                        _active={{
+                          bg: '#D46764',
+                          color: 'white',
+                        }}
                       >
                         <Flex w="40%">
                           <NewHereForm isOpen={isOpen} onClose={onClose} />
@@ -337,6 +346,7 @@ const ExperienceBiblicalCommunity = () => {
                             borderRadius={80}
                             border="0.70px solid #D46764"
                             justify="space-between"
+                            bgColor="transparent"
                             align="center"
                             color="#D46764"
                             _hover={{
@@ -416,6 +426,7 @@ const ExperienceBiblicalCommunity = () => {
                           border="0.70px solid #D46764"
                           justify="space-between"
                           align="center"
+                          bgColor="transparent"
                           color="#D46764"
                           onClick={onOpen}
                           _hover={{
