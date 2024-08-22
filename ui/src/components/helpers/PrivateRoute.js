@@ -36,10 +36,18 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
 
   useEffect(() => {
     async function getStatic() {
-      const { data: lifegroupList } = await axios.get('/api/misc/get-latest-lifegroup-list');
-      const { data: campusList } = await axios.get('/api/misc/get-latest-campus-list');
-      const { data: lifestageList } = await axios.get('/api/misc/get-latest-lifestage-list');
-      const { data: formAlertTypeList } = await axios.get('/api/forms/all-form-alert-types');
+      const { data: lifegroupList } = await axios.get(
+        '/api/misc/get-latest-lifegroup-list'
+      );
+      const { data: campusList } = await axios.get(
+        '/api/misc/get-latest-campus-list'
+      );
+      const { data: lifestageList } = await axios.get(
+        '/api/misc/get-latest-lifestage-list'
+      );
+      const { data: formAlertTypeList } = await axios.get(
+        '/api/forms/all-form-alert-types'
+      );
       const data = {
         lifegroupList,
         campusList,
@@ -50,7 +58,7 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
     }
 
     getStatic();
-  }, [])
+  }, []);
 
   useEffect(() => {
     // useEffects are meant to be synchronous, this helps to remove the warning
@@ -77,9 +85,8 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
 
   return (
     !isLoading &&
-    userObj != null && 
-    staticData != null &&
-    (
+    userObj != null &&
+    staticData != null && (
       <Route
         {...rest}
         render={(props) => {
