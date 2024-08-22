@@ -40,15 +40,15 @@ const LinkCardInfo = [
     textMobile: 'Watch the latest sermons from HMCC of Hong Kong',
     bgPosition: ['center bottom', 'left bottom'],
   },
-  {
-    path: '/',
-    mobileImage: 'resources.svg',
-    desktopImage: 'resources.svg',
-    title: 'Resources',
-    textDesktop: 'Access various tools and resources created by our church',
-    textMobile: 'Access various tools and resources created by our church',
-    bgPosition: ['center bottom', 'left bottom'],
-  },
+  // {
+  //   path: '/',
+  //   mobileImage: 'resources.svg',
+  //   desktopImage: 'resources.svg',
+  //   title: 'Resources',
+  //   textDesktop: 'Access various tools and resources created by our church',
+  //   textMobile: 'Access various tools and resources created by our church',
+  //   bgPosition: ['center bottom', 'left bottom'],
+  // },
 ];
 
 const LinkCard = (props) => {
@@ -149,7 +149,7 @@ const SubHeroSection = () => {
                     'repeat(1, 1fr)',
                     'repeat(1, 1fr)',
                     'repeat(1, 1fr)',
-                    'repeat(4, 1fr)',
+                    'repeat(3, 1fr)',
                   ]}
                   gap={5}
                   fontFamily="Manrope"
