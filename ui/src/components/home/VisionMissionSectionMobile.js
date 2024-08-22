@@ -18,7 +18,6 @@ const VisionMissionSectionMobile = () => {
           <Fade transition={{ enter: { duration: 1 } }} in={inView}>
             <Container
               maxW="container.xl"
-              py={10}
               bgImage={`url('${process.env.PUBLIC_URL}/images/home/hk-green.png')`}
               bgPos="center right"
               bgSize="contain"
