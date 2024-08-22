@@ -4,10 +4,16 @@ import { MdErrorOutline } from 'react-icons/md';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { useEffect, useState } from 'react';
 import { validateForm } from '../helpers/formsHelpers';
+import {
+  getSermonNotesFromShortLink,
+  isSermonNotesLink,
+} from '../helpers/SermonNotes';
 
 const ErrorPage = (props) => {
   // Add new cases corresponding to the errorPages definition
   const history = useHistory();
+  const path = history.location.pathname.split('/')[1];
+  const isSermonNotes = isSermonNotesLink(path);
   const [isLoading, setIsLoading] = useState(true);
   const [formOpenTime, setFormOpenTime] = useState(
     history.location?.state?.availableAfter
@@ -19,7 +25,16 @@ const ErrorPage = (props) => {
         location: { state },
       } = history;
       const { user } = props;
+
+      // check if the id exist for shortened sn link
+      if (isSermonNotes) {
+        const sermonNotesId = await getSermonNotesFromShortLink(path);
+        if (sermonNotesId) {
+          history.push(`/sermons/notes/${sermonNotesId}`);
+        }
+      }
       if (state && state.id) {
+        // check the validity of the form
         const result = await validateForm(state.id, user);
 
         if (result.data) {
