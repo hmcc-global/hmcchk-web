@@ -11,6 +11,8 @@ import { customAxios as axios } from '../helpers/customAxios';
 import SaturateVisionSection from './SaturateVisionSection';
 import VisionMissionSection from './VisionMissionSection';
 import VisionMissionSectionMobile from './VisionMissionSectionMobile';
+import ExperienceBiblicalCommunity from './ExperienceBiblicalCommunity';
+
 
 const HomeContainer = (props) => {
   const { user } = props;
@@ -44,11 +46,13 @@ const HomeContainer = (props) => {
   return (
     <Flex direction="column" bgColor="#F6FAFF">
       <HeroSection />
+      <EventsSection />
       <HelloSermonSection ref={sermonRef} />
       <AboutSection />
       <SaturateVisionSection />
-      <EventsSection />
+
       <LifeGroupSection />
+      <ExperienceBiblicalCommunity />
       <NewHereSection />
       {isMobile ? <VisionMissionSectionMobile /> : <VisionMissionSection />}
 
