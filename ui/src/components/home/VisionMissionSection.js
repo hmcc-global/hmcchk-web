@@ -2,13 +2,11 @@ import {
   Button,
   Box,
   Flex,
-  HStack,
   Heading,
   VStack,
   Text,
   Spacer,
   Link,
-  Image,
   Fade,
   Container,
 } from '@chakra-ui/react';
@@ -61,13 +59,16 @@ const VisionMissionSection = () => {
                   </Heading>
                 </Box>
               </Box>
-              <Flex h="12em">
+              <Flex minH="12em">
                 <VStack
                   borderRadius="0.5rem"
                   w="49%"
                   border="1px solid"
-                  borderColor="green.400"
-                  p="1em"
+                  borderColor="#97D0D4"
+                  pt="1em"
+                  pb="2.5em"
+                  px="3.25em"
+                  textAlign="justify"
                 >
                   <Box
                     borderRadius="1.875em"
@@ -85,6 +86,7 @@ const VisionMissionSection = () => {
                       lineHeight="20.6px"
                       letterSpacing="4px"
                       wordBreak="break-word"
+                      py="0.5em"
                     >
                       VISION
                     </Text>
@@ -189,9 +191,12 @@ const VisionMissionSection = () => {
                 <VStack
                   borderRadius="0.5rem"
                   border="1px solid"
-                  borderColor="green.400"
-                  p="1em"
+                  borderColor="#97D0D4"
+                  pt="1em"
+                  pb="2.5em"
+                  px="3.25em"
                   w="49%"
+                  textAlign="justify"
                 >
                   <Box
                     borderRadius="1.875em"
@@ -209,6 +214,7 @@ const VisionMissionSection = () => {
                       lineHeight="20.6px"
                       letterSpacing="4px"
                       wordBreak="break-word"
+                      py="0.5em"
                     >
                       MISSION
                     </Text>
@@ -308,23 +314,34 @@ const VisionMissionSection = () => {
                 </VStack>
               </Flex>
               <Flex py="1em">
-                <Box bgColor={'#DBF1F1'} p="1em" w="19%">
-                  <VStack>
-                    <Box textAlign="left">
-                      <Text
-                        color="#0C0C20"
-                        fontSize="32px"
-                        fontFamily="DMSerifDisplay_Italic, serif"
-                        fontWeight="400"
-                        wordBreak="break-word"
-                      >
-                        About Us
-                      </Text>
-                      <Text fontFamily="Manrope" fontWeight="400" fontSize="18">
-                        Learn more about who we are, our values, our beliefs,
-                        and more
-                      </Text>
-                    </Box>
+                <Box bgColor={'#DBF1F1'} p="1.75em" w="24%">
+                  <Flex
+                    h="full"
+                    flexDir="column"
+                    justifyContent="space-between"
+                  >
+                    <VStack spacing="3">
+                      <Box textAlign="left">
+                        <Text
+                          color="#0C0C20"
+                          fontSize="32px"
+                          fontFamily="DMSerifDisplay_Italic, serif"
+                          fontWeight="400"
+                          wordBreak="break-word"
+                        >
+                          About Us
+                        </Text>
+                        <Text
+                          fontFamily="Manrope"
+                          fontWeight="400"
+                          fontSize="18"
+                        >
+                          Learn more about who we are, our values, our beliefs,
+                          and more
+                        </Text>
+                      </Box>
+                    </VStack>
+
                     <Flex justifyContent="flex-end" py="1em">
                       <Link
                         href="/about-us"
@@ -337,23 +354,26 @@ const VisionMissionSection = () => {
                           borderRadius="5rem"
                           border="0.7px solid"
                           borderColor="var(--Black, #0C0C20)"
+                          py="1.75em"
+                          px="1.25em"
                         >
-                          <ArrowForwardIcon />
+                          <ArrowForwardIcon boxSize={6} />
                         </Button>
                       </Link>
                     </Flex>
-                  </VStack>
+                  </Flex>
                 </Box>
                 <Spacer />
                 <VStack
-                  w="79%"
+                  w="74%"
                   borderRadius="0.5rem"
                   border="1px solid"
-                  borderColor="green.400"
-                  p="1em"
+                  borderColor="#97D0D4"
+                  p="2em"
+                  spacing="1.5em"
                 >
-                  <Flex h="full">
-                    <Box w="75%">
+                  <Flex h="full" justifyContent="space-between">
+                    <Box w="65%">
                       <Text
                         color="#0C0C20"
                         fontSize="18px"
@@ -367,30 +387,42 @@ const VisionMissionSection = () => {
                         the Saturate Vision in Hong Kong.
                       </Text>
                     </Box>
-                    <Spacer />
-                    <Link href="/saturate">
+                    <Link href="/saturate" my="auto">
                       <Button
                         border="0.7px solid var(--chakra-colors-Blue-Primary, #4A6EEB)"
-                        my="auto"
                         borderRadius="2.75rem"
                         _hover={{ bg: '#4A6EEB', color: 'white' }}
                         textColor="#4A6EEB"
                         bgColor="transparent"
+                        px="2.4em"
+                        py="1.6em"
                       >
-                        <Text
-                          fontSize="18px"
-                          fontFamily="Manrope"
-                          fontWeight="400"
-                          wordBreak="break-word"
+                        <Flex
+                          flexDir="row"
+                          w="100%"
+                          justifyContent="space-between"
+                          minW="9em"
                         >
-                          Learn More
-                        </Text>
-                        <ArrowForwardIcon />
+                          <Text
+                            fontSize="18px"
+                            fontFamily="Manrope"
+                            fontWeight="700"
+                            wordBreak="break-word"
+                          >
+                            Learn More
+                          </Text>
+                          <ArrowForwardIcon boxSize={6} my="auto" />
+                        </Flex>
                       </Button>
                     </Link>
                   </Flex>
-                  <VStack bgColor="white">
-                    <Box textAlign="left" w="100%" px="1em" paddingTop="1em">
+                  <VStack
+                    bgColor="white"
+                    borderRadius="0.5rem"
+                    p="1.25em"
+                    spacing="0.75em"
+                  >
+                    <Box textAlign="left" w="100%">
                       <Text
                         color="#4A6EEB"
                         fontSize="20px"
@@ -404,7 +436,7 @@ const VisionMissionSection = () => {
                         SATURATE VISION
                       </Text>
                     </Box>
-                    <Box textAlign="left" w="100%" px="1em" paddingBottom="1em">
+                    <Box textAlign="left" w="100%">
                       <Text
                         color="#0C0C20"
                         fontSize="20px"

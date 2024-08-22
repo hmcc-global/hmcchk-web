@@ -1,11 +1,8 @@
 import {
-  HStack,
   Text,
   Container,
   Box,
   Heading,
-  Flex,
-  Spacer,
   Button,
   Fade,
   Link,
@@ -55,7 +52,7 @@ const VisionMissionSectionMobile = () => {
                 <VStack
                   borderRadius="0.5rem"
                   border="1px solid"
-                  borderColor="green.400"
+                  borderColor="#97D0D4"
                   p="1em"
                 >
                   <Box borderRadius="1.875em" bgColor="white" m="auto" px="1em">
@@ -68,6 +65,8 @@ const VisionMissionSectionMobile = () => {
                       lineHeight="16px"
                       letterSpacing="4px"
                       wordBreak="break-word"
+                      py="0.5em"
+                      px="1em"
                     >
                       VISION
                     </Text>
@@ -170,7 +169,7 @@ const VisionMissionSectionMobile = () => {
                 <VStack
                   borderRadius="0.5rem"
                   border="1px solid"
-                  borderColor="green.400"
+                  borderColor="#97D0D4"
                   p="1em"
                 >
                   <Box
@@ -189,6 +188,8 @@ const VisionMissionSectionMobile = () => {
                       lineHeight="16px"
                       letterSpacing="4px"
                       wordBreak="break-word"
+                      py="0.5em"
+                      px="1em"
                     >
                       MISSION
                     </Text>
@@ -290,7 +291,7 @@ const VisionMissionSectionMobile = () => {
                   <VStack
                     borderRadius="0.5rem"
                     border="1px solid"
-                    borderColor="green.400"
+                    borderColor="#97D0D4"
                     p="1em"
                   >
                     <Box>
@@ -307,8 +308,15 @@ const VisionMissionSectionMobile = () => {
                         the Saturate Vision in Hong Kong.
                       </Text>
                     </Box>
-                    <Box w="100%" p="1em" bgColor="white" borderRadius="12">
-                      <Box w="100%" p="1em" bgColor="white">
+                    <Box
+                      w="100%"
+                      px="0.5em"
+                      pt="0.75em"
+                      pb="1.25em"
+                      bgColor="white"
+                      borderRadius="12"
+                    >
+                      <Box w="100%" p="0.6em" bgColor="white">
                         <Text
                           color="#4A6EEB"
                           fontSize="16px"
@@ -341,7 +349,7 @@ const VisionMissionSectionMobile = () => {
                     </Box>
                   </VStack>
                 </VStack>
-                <Link href="/about-us" id="homepage-about">
+                <Link href="/about-us" id="homepage-about" w="100%">
                   <Button
                     my="auto"
                     borderRadius="2.75rem"
