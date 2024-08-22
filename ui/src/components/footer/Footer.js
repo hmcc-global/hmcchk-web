@@ -4,14 +4,12 @@ import {
   Image,
   Text,
   VStack,
-  Center,
   Button,
   Stack,
   Flex,
   Box,
   Spacer,
   HStack,
-  chakra,
 } from '@chakra-ui/react';
 import './SocialIcon.css';
 import { EmailIcon } from '@chakra-ui/icons';
@@ -20,26 +18,28 @@ import { SocialIcon } from 'react-social-icons';
 const Footer = () => {
   return (
     <Container maxW="container.xl" py="2em">
-      <Flex w="100%" direction={['column', 'row']} py="2em">
+      <Flex w="100%" direction={['column', 'row']} py={['0', '2em']}>
         <VStack w={['100%', '40%']} alignItems={['center', 'flex-start']}>
-          <Link href="/">
-            <Image
-              src={`${process.env.PUBLIC_URL}/images/ripple_blue.svg`}
-              alt="Logo of HMCC"
-              h="2em"
-            />
-          </Link>
-          <Text
-            color="#4A6EEB"
-            fontSize="16"
-            fontWeight="700"
-            fontFamily="Manrope"
-            wordWrap="break-word"
-            textAlign={['center', 'left']}
-          >
-            Harvest Mission Community Church <br /> Hong Kong
-          </Text>
-          <HStack>
+          <Stack flexDir="column">
+            <Link href="/">
+              <Image
+                src={`${process.env.PUBLIC_URL}/images/ripple_blue.svg`}
+                alt="Logo of HMCC"
+                h="2em"
+              />
+            </Link>
+            <Text
+              color="#4A6EEB"
+              fontSize="16"
+              fontWeight="700"
+              fontFamily="Manrope"
+              wordWrap="break-word"
+              textAlign={['center', 'left']}
+            >
+              Harvest Mission Community Church <br /> Hong Kong
+            </Text>
+          </Stack>
+          <HStack py="1em">
             <Link href="mailto:hongkong@hmcc.net">
               <Button
                 bg="#DBE9FF"
