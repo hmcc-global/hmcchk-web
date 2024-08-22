@@ -119,7 +119,14 @@ const Footer = () => {
         <Flex py={['3em', '0']} w={['80%', 'auto']} mx="auto">
           <Stack direction={['column', 'row']}>
             <VStack px={[0, '2em']} align={['center', 'start']}>
-              <Link href="/visit-us" id="footer-visit">
+              <Link
+                href="/visit-us"
+                id="footer-visit"
+                _hover={{
+                  textDecoration: 'underline',
+                  textDecorationColor: '#4A6EEB',
+                }}
+              >
                 <Text
                   fontSize="16px"
                   fontFamily="Manrope"
@@ -130,7 +137,14 @@ const Footer = () => {
                   Visit
                 </Text>
               </Link>
-              <Link href="/online" id="footer-visit-online">
+              <Link
+                href="/online"
+                id="footer-visit-online"
+                _hover={{
+                  textDecoration: 'underline',
+                  textDecorationColor: '#4A6EEB',
+                }}
+              >
                 <Text
                   fontSize="16px"
                   fontFamily="Manrope"
@@ -140,7 +154,14 @@ const Footer = () => {
                   Church Online
                 </Text>
               </Link>
-              <Link href="/about-us" id="footer-about">
+              <Link
+                href="/about-us"
+                id="footer-about"
+                _hover={{
+                  textDecoration: 'underline',
+                  textDecorationColor: '#4A6EEB',
+                }}
+              >
                 <Text
                   fontSize="16px"
                   fontFamily="Manrope"
@@ -151,7 +172,14 @@ const Footer = () => {
                   About
                 </Text>
               </Link>
-              <Link href="/connect" id="footer-connect">
+              <Link
+                href="/connect"
+                id="footer-connect"
+                _hover={{
+                  textDecoration: 'underline',
+                  textDecorationColor: '#4A6EEB',
+                }}
+              >
                 <Text
                   fontSize="16px"
                   fontFamily="Manrope"
@@ -162,14 +190,28 @@ const Footer = () => {
                   Connect
                 </Text>
               </Link>
-              <Link href="/connect#lifegroup" id="footer-connect-lg">
+              <Link
+                href="/connect#lifegroup"
+                id="footer-connect-lg"
+                _hover={{
+                  textDecoration: 'underline',
+                  textDecorationColor: '#4A6EEB',
+                }}
+              >
                 <Text fontSize="16px" fontFamily="Manrope" color="#4A6EEB">
                   LIFE Group
                 </Text>
               </Link>
             </VStack>
             <VStack px="2em" align={['center', 'start']}>
-              <Link href="/events" id="footer-events">
+              <Link
+                href="/events"
+                id="footer-events"
+                _hover={{
+                  textDecoration: 'underline',
+                  textDecorationColor: '#4A6EEB',
+                }}
+              >
                 <Text
                   fontSize="16px"
                   fontFamily="Manrope"
@@ -180,7 +222,14 @@ const Footer = () => {
                   Events
                 </Text>
               </Link>
-              <Link href="/sermons" id="footer-sermons">
+              <Link
+                href="/sermons"
+                id="footer-sermons"
+                _hover={{
+                  textDecoration: 'underline',
+                  textDecorationColor: '#4A6EEB',
+                }}
+              >
                 <Text
                   fontSize="16px"
                   fontFamily="Manrope"
@@ -191,7 +240,14 @@ const Footer = () => {
                   Sermons
                 </Text>
               </Link>
-              <Link href="/give" id="footer-give">
+              <Link
+                href="/give"
+                id="footer-give"
+                _hover={{
+                  textDecoration: 'underline',
+                  textDecorationColor: '#4A6EEB',
+                }}
+              >
                 <Text
                   fontSize="16px"
                   fontFamily="Manrope"
@@ -206,7 +262,12 @@ const Footer = () => {
           </Stack>
           <Spacer />
           <VStack px="2em" align={['center', 'start']}>
-            <Link>
+            <Link
+              _hover={{
+                textDecoration: 'underline',
+                textDecorationColor: '#4A6EEB',
+              }}
+            >
               <Text
                 fontSize="16px"
                 fontFamily="Manrope"
@@ -218,7 +279,13 @@ const Footer = () => {
               </Text>
             </Link>
 
-            <Link href="https://play.google.com/store/apps/details?id=net.hmcc.hongkong.dailysoap&hl=en">
+            <Link
+              href="https://play.google.com/store/apps/details?id=net.hmcc.hongkong.dailysoap&hl=en"
+              _hover={{
+                textDecoration: 'underline',
+                textDecorationColor: '#4A6EEB',
+              }}
+            >
               <Text
                 fontSize="16px"
                 fontFamily="Manrope"
@@ -228,7 +295,13 @@ const Footer = () => {
                 Daily SOAP
               </Text>
             </Link>
-            <Link href="https://hmcc.tv/">
+            <Link
+              href="https://hmcc.tv/"
+              _hover={{
+                textDecoration: 'underline',
+                textDecorationColor: '#4A6EEB',
+              }}
+            >
               <Text
                 fontSize="16px"
                 fontFamily="Manrope"
