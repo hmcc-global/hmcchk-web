@@ -1,5 +1,6 @@
 import { extendTheme } from '@chakra-ui/react';
 import '@fontsource/dm-sans';
+import '@fontsource/dm-serif-display';
 
 const customTheme = extendTheme({
   fonts: {
@@ -14,6 +15,9 @@ const customTheme = extendTheme({
     dm_sans_bold: {
       fontFamily: 'DM Sans',
       fontWeight: '700',
+    },
+    dm_serif_display: {
+      fontFamily: 'DM Serif Display',
     },
   },
 });
