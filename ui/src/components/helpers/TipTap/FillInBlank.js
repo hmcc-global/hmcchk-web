@@ -3,8 +3,6 @@ import { NodeViewWrapper, ReactNodeViewRenderer } from '@tiptap/react';
 import React, { useState, useEffect, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
 
-let currentId = 0;
-
 export const FillInBlankNode = Node.create({
   name: 'fillInBlank',
   content: 'text*',
@@ -114,7 +112,8 @@ export const FillInBlankNode = Node.create({
       const getTextWidth = (text) => {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        context.font = window.getComputedStyle(inputRef.current).font;
+        const computedFont = window.getComputedStyle(inputRef.current).font;
+        context.font = computedFont || 'Arial';
         const metrics = context.measureText(text);
         return metrics.width;
       };
@@ -148,7 +147,7 @@ export const FillInBlankNode = Node.create({
                 borderBottomColor: '#3182CE',
                 borderBottomWidth: '0.15rem',
                 textAlign: 'center',
-                height: '2rem',
+                height: 'fit-content',
                 textTransform: 'uppercase',
                 backgroundColor: 'transparent',
               }}
