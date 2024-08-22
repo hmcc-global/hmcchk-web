@@ -101,7 +101,7 @@ export const FillInBlankNode = Node.create({
           if (!userText) {
             textWidth = getTextWidth('Blankspace');
           }
-          inputRef.current.style.width = `${textWidth + 40}px`;
+          inputRef.current.style.width = `${textWidth + 25}px`;
         }
         localStorage.setItem(
           `fillInBlank-${props.node.attrs.currentId}-userText`,
@@ -112,11 +112,16 @@ export const FillInBlankNode = Node.create({
       const getTextWidth = (text) => {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        const computedFont = window.getComputedStyle(inputRef.current).font;
-        context.font = computedFont || 'Arial';
+        const computedFont = getComputedFont(inputRef.current);
+        context.font = computedFont;
         const metrics = context.measureText(text);
         return metrics.width;
       };
+
+      function getComputedFont(element) {
+        const computedStyle = window.getComputedStyle(element);
+        return `${computedStyle.fontStyle} ${computedStyle.fontWeight} ${computedStyle.fontSize} ${computedStyle.fontFamily}`;
+      }
 
       const handleInputChange = (event) => {
         setUserText(event.target.value.toUpperCase());
