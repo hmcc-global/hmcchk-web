@@ -1,4 +1,11 @@
-import { Container, Box, Text, VStack, Button } from '@chakra-ui/react';
+import {
+  Container,
+  Box,
+  Text,
+  VStack,
+  Button,
+  useToast,
+} from '@chakra-ui/react';
 import { customAxios as axios } from '../helpers/customAxios';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDebounce } from 'react-use';
@@ -13,6 +20,7 @@ const SermonNotesContainer = (props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [userSermonNotes, setUserSermonNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
+  const toast = useToast();
 
   const todayId = DateTime.fromISO(new Date().toISOString()).toFormat(
     'ddMMyyyy'
@@ -43,9 +51,12 @@ const SermonNotesContainer = (props) => {
     }
   }, [sermonId]);
 
-  // TO-DO: check if the user logged in or not
   const getUserSermonNotes = useCallback(async () => {
     setIsLoadingExistingNotes(true);
+    if (!user?.id) {
+      setIsLoadingExistingNotes(false);
+      return;
+    }
     try {
       const { data, status } = await axios.get('/api/user-sermon-notes/get', {
         params: {
@@ -66,6 +77,10 @@ const SermonNotesContainer = (props) => {
   // send update to db when user click save
   const updateUserSermonNotes = useCallback(async () => {
     setIsSubmitting(true);
+    if (!user?.id) {
+      setIsSubmitting(false);
+      return;
+    }
     if (userSermonNotes) {
       try {
         const { data, status } = await axios.put(
@@ -78,6 +93,12 @@ const SermonNotesContainer = (props) => {
         );
         if (status === 200) {
           setUserSermonNotes(data);
+          toast({
+            title: 'Sermon Notes Saved',
+            status: 'success',
+            duration: 2000,
+            isClosable: true,
+          });
         }
       } catch (error) {
         console.log(error);
@@ -182,6 +203,7 @@ const SermonNotesContainer = (props) => {
     }
   }, [userSermonNotes, sermonNotes?.originalContent, editUserSermonNotes]);
   if (isLoading) return <Text>Loading Sermon Notes...</Text>;
+
   return (
     <>
       {sermonNotes ? (
