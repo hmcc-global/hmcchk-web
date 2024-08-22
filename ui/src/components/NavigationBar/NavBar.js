@@ -108,7 +108,7 @@ const NavBar = (props) => {
 
   return (
     <>
-      <Flex background="white">
+      <Flex>
         <Flex
           backgroundColor="white"
           width="100%"
@@ -244,14 +244,18 @@ const NavBar = (props) => {
                         <LinkBox>
                           <Button
                             textAlign="center"
-                            bgColor="rgba(72, 72, 72, 1)"
-                            borderColor="rgba(68, 68, 68, 1)"
-                            borderWidth="medium"
+                            bgColor="rgba(0, 0, 0, 0)"
                             h="3.5vh"
                             marginLeft="10px"
-                            px={{ md: '2', lg: '5' }}
+                            px={{ md: '3', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
-                            _hover={{ backgroundColor: 'rgba(56, 56, 56, 1)' }}
+                            _hover={{ 
+                              backgroundColor: '#4A6EEB',
+                              color: "white"
+                            }}
+                            id="navbar-signup"
+                            letterSpacing={1}
+                            borderRadius={20}
                             onClick={onLogout}
                           >
                             <LinkOverlay href="/">
@@ -271,14 +275,21 @@ const NavBar = (props) => {
                         <LinkBox>
                           <Button
                             textAlign="center"
-                            bgColor="rgba(0, 88, 210, 1)"
-                            borderColor="rgba(0, 88, 210, 1)"
+                            bgColor="#4A6EEB"
+                            color="white"
+                            borderColor="#4A6EEB"
                             borderWidth="medium"
                             h="3.5vh"
                             marginLeft="10px"
                             px={{ md: '2', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
-                            _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
+                            _hover={{ 
+                              backgroundColor: '#ffffff',
+                              color: "black",
+                              borderColor: "#ffffff"
+                            }}
+                            borderRadius={20}
+                            letterSpacing={1}
                             onClick={onClose}
                             id="navbar-profile"
                           >
@@ -307,7 +318,10 @@ const NavBar = (props) => {
                             marginLeft="10px"
                             px={{ md: '3', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
-                            _hover={{ backgroundColor: 'rgba(56, 56, 56, 1)' }}
+                            _hover={{ 
+                              backgroundColor: '#4A6EEB',
+                              color: "white"
+                            }}
                             onClick={onClose}
                             id="navbar-signup"
                             letterSpacing={1}
@@ -338,11 +352,15 @@ const NavBar = (props) => {
                             marginLeft="10px"
                             px={{ md: '2', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
-                            _hover={{ backgroundColor: 'rgba(0, 60, 143, 1)' }}
-                            onClick={onClose}
-                            id="navbar-login"
+                            _hover={{ 
+                              backgroundColor: '#ffffff',
+                              color: "black",
+                              borderColor: "#ffffff"
+                            }}
                             borderRadius={20}
                             letterSpacing={1}
+                            onClick={onClose}
+                            id="navbar-login"
                           >
                             <LinkOverlay href="/login" id="navbar-login">
                               <Text
@@ -362,81 +380,29 @@ const NavBar = (props) => {
                     )}
                   </Box>
                 )}
-                <Box display={{ base: 'none', md: 'flex' }}>
-                  <Button
-                    ref={btnRef}
-                    onClick={onOpen}
-                    style={{ background: 'none' }}
-                  >
-                    <Image
-                      w="1.5em"
-                      minW="1.5em"
-                      src={process.env.PUBLIC_URL + '/images/menu.svg'}
-                      alt="Menu Button"
-                    />
-                  </Button>
-                </Box>
               </Stack>
             </Flex>
             <Flex
               display={{ base: 'flex', md: 'none' }}
-              justify="space-between"
+              justify="center"
               align="center"
               h="5vh"
               position="relative"
             >
               <Box>
-                <Button
-                  ref={btnRef}
-                  onClick={onOpen}
-                  style={{ background: 'none' }}
-                >
-                  <Image
-                    w="1.5em"
-                    minW="1.5em"
-                    src={process.env.PUBLIC_URL + '/images/menu.svg'}
-                    alt="Menu Button"
-                  />
-                </Button>
-              </Box>
-              <Box>
-                <Box
-                  transition="opacity 0.5s"
-                  style={{ opacity: Math.max((yPosition - 100) / 400, 0) }}
-                >
-                  <LinkBox>
-                    <LinkOverlay href="/">
-                      <Text
-                        color="#ffffff"
-                        fontSize="x-small"
-                        textAlign="center"
-                      >
-                        Harvest Mission Community Church
-                      </Text>
-                    </LinkOverlay>
-                  </LinkBox>
-                </Box>
-                <Box
-                  transition="opacity 0.5s"
-                  style={{
-                    opacity: Math.max(1 - yPosition / 400, 0),
-                  }}
-                  position="absolute"
-                  top="50%"
-                  left="50%"
-                  transform="translate(-50%, -50%)"
-                >
-                  <LinkBox>
-                    <LinkOverlay href="/">
-                      <Image
-                        w="3.5em"
-                        minW="3.5em"
-                        src={process.env.PUBLIC_URL + '/images/ripple.svg'}
-                        alt="Logo of HMCC"
-                      />
-                    </LinkOverlay>
-                  </LinkBox>
-                </Box>
+                <LinkBox>
+                  <LinkOverlay href="/">
+                    <Text
+                      color="#4A6EEB"
+                      fontSize="x-small"
+                      textAlign="center"
+                      justifySelf="center"
+                      fontWeight="bold"
+                    >
+                      Harvest Mission Community Church
+                    </Text>
+                  </LinkOverlay>
+                </LinkBox>
               </Box>
               <Box>
                 <HStack>
@@ -456,16 +422,6 @@ const NavBar = (props) => {
                       </Button>
                     </Link>
                   ) : null}
-                  <LinkBox>
-                    <LinkOverlay href="/login" id="navbar-login">
-                      <IconButton
-                        colorScheme="transparent"
-                        onClick={onClose}
-                        fontSize="20px"
-                        icon={<BsFillPersonFill />}
-                      ></IconButton>
-                    </LinkOverlay>
-                  </LinkBox>
                 </HStack>
               </Box>
             </Flex>
