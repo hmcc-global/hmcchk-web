@@ -200,7 +200,7 @@ const SaturateGoals = () => {
                   5{' '}
                 </span>{' '}
                 Missional initiatives started by at least 5 different LGs
-                collborating together to reach 5 different HK districts
+                collaborating together to reach 5 different HK districts
               </ListItem>
               <ListItem>
                 <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
@@ -396,7 +396,7 @@ const SaturateGoals = () => {
                       5{' '}
                     </span>{' '}
                     Missional initiatives started by at least 5 different LGs
-                    collborating together to reach 5 different HK districts
+                    collaborating together to reach 5 different HK districts
                   </ListItem>
                   <ListItem>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
