@@ -24,7 +24,7 @@ import {
   FiShield,
   FiAlertCircle,
 } from 'react-icons/fi';
-import { CgNotes } from "react-icons/cg";
+import { CgNotes } from 'react-icons/cg';
 
 const LinkItems = [
   { name: 'Home', icon: FiHome, path: '/admin/home' },

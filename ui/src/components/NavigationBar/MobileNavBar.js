@@ -72,7 +72,7 @@ const MobileNavBar = (props) => {
         borderColor="#4A6EEB"
         borderTopLeftRadius="2xl"
         borderTopRightRadius="2xl"
-        position="absolute"
+        position="fixed"
         bottom="0"
         zIndex="9999999"
         overflow="hidden"

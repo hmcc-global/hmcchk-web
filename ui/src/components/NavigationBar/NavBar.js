@@ -15,6 +15,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../reducers/userSlice';
 import { customAxios as axios } from '../helpers/customAxios';
+import { useLocation } from 'react-router-dom';
 
 const NavBar = (props) => {
   const [isLive, setIsLive] = useState(false);
@@ -23,6 +24,8 @@ const NavBar = (props) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [userObj, setUserObj] = useState();
+  const location = useLocation();
+
   const liveScStyle = {
     border: '5px',
     backgroundColor: '#EB4335',
@@ -95,7 +98,13 @@ const NavBar = (props) => {
 
   return (
     <>
-      <Flex>
+      <Flex
+        display={
+          location.pathname.includes('/admin')
+            ? ['none', 'none', 'flex']
+            : 'flex'
+        }
+      >
         <Flex
           backgroundColor="#F6FAFF"
           width="100%"
