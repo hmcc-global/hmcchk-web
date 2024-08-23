@@ -74,7 +74,7 @@ const MobileNavBar = (props) => {
         borderTopRightRadius="2xl"
         position="fixed"
         bottom="0"
-        zIndex="9999999"
+        zIndex="9"
         overflow="hidden"
         align="center"
         display={{ base: 'flex', md: 'none' }}
@@ -177,7 +177,7 @@ const MobileNavBar = (props) => {
           <DrawerCloseButton
             position="absolute"
             right="8%"
-            top="4%"
+            top="8%"
             color="white"
           />
           <DrawerBody>

@@ -183,12 +183,7 @@ const EventsSectionCard = (props) => {
       </Box>
       <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent
-          borderRadius="20"
-          justifyContent="center"
-          p={[0, 5]}
-          my={['25%', '25%', '10%', '10%']}
-        >
+        <ModalContent borderRadius="20" justifyContent="center" p={[0, 5]}>
           {isMobile ? (
             <Center mt={4} mb={2}>
               <Box w={10} h={1} bgColor="#A8A8A8" borderRadius={20} />

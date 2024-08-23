@@ -103,7 +103,7 @@ const NavBar = (props) => {
         position="fixed"
         top="0"
         width="100%"
-        zIndex="999999"
+        zIndex="9"
         display={
           location.pathname.includes('/admin')
             ? ['none', 'none', 'flex']

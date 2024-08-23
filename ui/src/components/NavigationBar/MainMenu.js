@@ -39,7 +39,7 @@ const MainMenu = ({ login, onClose }) => {
 
   const MobileView = () => {
     return (
-      <Container maxW="container.lg" fontFamily="Manrope">
+      <Container maxW="container.lg" fontFamily="Manrope" pt="8%">
         <VStack
           spacing="7"
           color="white"
