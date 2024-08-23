@@ -49,7 +49,7 @@ const MainContainer = () => {
       id="main-container"
       overflowX="hidden"
       // Added to allow the navbar to overlay the container with minimal offset
-      mt={['7vh', '7vh', '7vh', '8vh']}
+      mt="7vh"
       mb={['6vh', '6vh', 0, 0]}
     >
       <ScrollToTop />

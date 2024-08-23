@@ -11,6 +11,7 @@ import {
   LinkBox,
   LinkOverlay,
   HStack,
+  Spacer,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../reducers/userSlice';
@@ -85,14 +86,14 @@ const NavBar = (props) => {
   const [yPosition, setYPosition] = useState(0);
 
   useEffect(() => {
-    const position = document.querySelector('#main-container');
     const handleScroll = () => {
-      setYPosition(position.scrollTop);
+      // console.log(window.scrollY);
+      setYPosition(window.scrollY);
     };
-    position.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      position.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -112,7 +113,7 @@ const NavBar = (props) => {
         <Flex
           backgroundColor="#F6FAFF"
           width="100%"
-          h={{ md: '7vh', lg: '7vh', xl: '8vh' }}
+          h="7vh"
           align="center"
           fontFamily="Manrope"
           fontSize={{ md: 'xs', lg: 'sm', xl: 'md' }}
@@ -388,7 +389,7 @@ const NavBar = (props) => {
               position="relative"
               w="100%"
             >
-              <Box w="5%">
+              <Box w="15%">
                 <HStack>
                   {isLive ? (
                     <Link href="/online" style={{ lineHeight: '0' }}>
@@ -405,10 +406,12 @@ const NavBar = (props) => {
                         &bull; Live
                       </Button>
                     </Link>
-                  ) : null}
+                  ) : (
+                    <Spacer />
+                  )}
                 </HStack>
               </Box>
-              <Box>
+              <Box w="70%">
                 <Box
                   transition="opacity 0.5s"
                   style={{
@@ -450,7 +453,7 @@ const NavBar = (props) => {
                   </LinkBox>
                 </Box>
               </Box>
-              <Box w="5%"></Box>
+              <Spacer w="15%" />
             </Flex>
           </Container>
         </Flex>
