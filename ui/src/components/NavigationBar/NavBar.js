@@ -135,7 +135,7 @@ const NavBar = (props) => {
                     <Image
                       w="3.5em"
                       minW="3.5em"
-                      src={process.env.PUBLIC_URL + '/images/ripple_black.svg'}
+                      src={process.env.PUBLIC_URL + '/images/ripple-black.png'}
                       alt="Logo of HMCC"
                     />
                   </LinkOverlay>
@@ -445,7 +445,7 @@ const NavBar = (props) => {
                       <Image
                         w="4em"
                         src={
-                          process.env.PUBLIC_URL + '/images/ripple_black.svg'
+                          process.env.PUBLIC_URL + '/images/ripple-black.png'
                         }
                         alt="Logo of HMCC"
                       />

@@ -116,9 +116,8 @@ const HeroSection = () => {
             >
               <Image
                 display={['none', 'none', 'block']}
-                src={
-                  process.env.PUBLIC_URL + '/images/home/hmcc-ripple-blue.svg'
-                }
+                src={process.env.PUBLIC_URL + '/images/home/ripple-blue.png'}
+                h="2em"
                 opacity="0"
               />
               <Text
@@ -274,9 +273,8 @@ const HeroSection = () => {
             >
               <Image
                 display={['none', 'none', 'block']}
-                src={
-                  process.env.PUBLIC_URL + '/images/home/hmcc-ripple-blue.svg'
-                }
+                src={process.env.PUBLIC_URL + '/images/home/ripple-blue.png'}
+                h="2em"
               />
               <Text
                 display={['none', 'none', 'block']}
