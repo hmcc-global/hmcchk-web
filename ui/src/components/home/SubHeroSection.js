@@ -119,7 +119,7 @@ const LinkCard = (props) => {
 const SubHeroSection = () => {
   return (
     <>
-      <InView rootMargin="-200px" triggerOnce={true}>
+      <InView root={document.body} rootMargin="-200px" triggerOnce={true}>
         {({ inView, ref }) => (
           <>
             <h2>{`Header inside viewport ${inView}.`}</h2>

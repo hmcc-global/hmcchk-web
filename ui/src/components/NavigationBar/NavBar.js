@@ -99,6 +99,10 @@ const NavBar = (props) => {
   return (
     <>
       <Flex
+        position="fixed"
+        top="0"
+        width="100%"
+        zIndex="999999"
         display={
           location.pathname.includes('/admin')
             ? ['none', 'none', 'flex']
@@ -113,7 +117,6 @@ const NavBar = (props) => {
           fontFamily="Manrope"
           fontSize={{ md: 'xs', lg: 'sm', xl: 'md' }}
           textColor="black"
-          letterSpacing={1}
           border="1px solid"
           borderColor="#4A6EEB"
         >
@@ -385,7 +388,7 @@ const NavBar = (props) => {
               position="relative"
               w="100%"
             >
-              <Box w="10%">
+              <Box w="5%">
                 <HStack>
                   {isLive ? (
                     <Link href="/online" style={{ lineHeight: '0' }}>
@@ -447,7 +450,7 @@ const NavBar = (props) => {
                   </LinkBox>
                 </Box>
               </Box>
-              <Box w="10%"></Box>
+              <Box w="5%"></Box>
             </Flex>
           </Container>
         </Flex>

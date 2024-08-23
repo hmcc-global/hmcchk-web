@@ -42,13 +42,14 @@ import SermonNotesContainer from './sermon-notes/SermonNotesContainer';
 const MainContainer = () => {
   return (
     <chakra.main
-      maxH="100vh"
+      maxH="100%"
       flexGrow={1}
       bg="#ffffff"
       overflowY="auto"
       id="main-container"
       overflowX="hidden"
-      // Added to allow the bottom navbar to overlay the container with minimal bottom offset
+      // Added to allow the navbar to overlay the container with minimal offset
+      mt={['7vh', '7vh', '7vh', '8vh']}
       mb={['6vh', '6vh', 0, 0]}
     >
       <ScrollToTop />
