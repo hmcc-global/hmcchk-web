@@ -118,7 +118,7 @@ const NavBar = (props) => {
           fontFamily="Manrope"
           fontSize={{ md: 'xs', lg: 'sm', xl: 'md' }}
           textColor="black"
-          border="1px solid"
+          borderBottom="1px solid"
           borderColor="#4A6EEB"
         >
           <Container maxW="100%" padding={{ base: 4, md: 1, lg: 4 }}>
