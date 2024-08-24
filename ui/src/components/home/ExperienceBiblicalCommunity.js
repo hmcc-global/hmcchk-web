@@ -98,7 +98,7 @@ const ExperienceBiblicalCommunity = () => {
                   <Slider {...settings}>
                     <Box px={['0.5em', '1em']}>
                       <Box
-                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-1.jpg')`}
+                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-1.png')`}
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
@@ -108,7 +108,7 @@ const ExperienceBiblicalCommunity = () => {
 
                     <Box px={['0.5em', '1em']}>
                       <Box
-                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-2.jpg')`}
+                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-2.png')`}
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
@@ -118,7 +118,7 @@ const ExperienceBiblicalCommunity = () => {
 
                     <Box px={['0.5em', '1em']}>
                       <Box
-                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-3.jpg')`}
+                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-3.png')`}
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
@@ -128,7 +128,7 @@ const ExperienceBiblicalCommunity = () => {
 
                     <Box px={['0.5em', '1em']}>
                       <Box
-                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-4.jpg')`}
+                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-4.png')`}
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
@@ -137,7 +137,7 @@ const ExperienceBiblicalCommunity = () => {
                     </Box>
                     <Box px={['0.5em', '1em']}>
                       <Box
-                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-5.jpg')`}
+                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-5.png')`}
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
@@ -146,7 +146,7 @@ const ExperienceBiblicalCommunity = () => {
                     </Box>
                     <Box px={['0.5em', '1em']}>
                       <Box
-                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-6.jpg')`}
+                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-6.png')`}
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
@@ -156,7 +156,7 @@ const ExperienceBiblicalCommunity = () => {
                     </Box>
                     <Box px={['0.5em', '1em']}>
                       <Box
-                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-7.jpg')`}
+                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-7.png')`}
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
