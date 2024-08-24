@@ -87,66 +87,89 @@ const ExperienceBiblicalCommunity = () => {
                       fontWeight="400"
                       lineHeight="1"
                       wordBreak="break-word"
-                      fontSize={['36', '60']}
+                      fontSize={['2rem', '2rem', '3rem', '3.75rem']}
                     >
                       Experience <br />
                       Biblical Community
                     </Heading>
                   </Box>
                 </Box>
-                <Box my={4} w="99vw" h={['13em', '40vh']} overflow="hidden">
+                <Box my={4} w="100vw" h={['13em', '40vh']} overflow="hidden">
                   <Slider {...settings}>
-                    <Image
-                      src={
-                        process.env.PUBLIC_URL + '/images/home/community-1.png'
-                      }
-                      alt="Image 1"
-                      borderRadius="md"
-                      px={['0.5em', '2em']}
-                    />
+                    <Box px={['0.5em', '1em']}>
+                      <Box
+                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-1.jpg')`}
+                        borderRadius="md"
+                        bgSize="cover"
+                        h={['11em', '23em']}
+                        bgPosition="center"
+                      ></Box>
+                    </Box>
 
-                    <Image
-                      src={
-                        process.env.PUBLIC_URL + '/images/home/community-2.png'
-                      }
-                      alt="Image 2"
-                      borderRadius="md"
-                      px={['0.5em', '2em']}
-                    />
+                    <Box px={['0.5em', '1em']}>
+                      <Box
+                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-2.jpg')`}
+                        borderRadius="md"
+                        bgSize="cover"
+                        h={['11em', '23em']}
+                        bgPosition="center"
+                      ></Box>
+                    </Box>
 
-                    <Image
-                      src={
-                        process.env.PUBLIC_URL + '/images/home/community-3.png'
-                      }
-                      alt="Image 3"
-                      borderRadius="md"
-                      px={['0.5em', '2em']}
-                    />
+                    <Box px={['0.5em', '1em']}>
+                      <Box
+                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-3.jpg')`}
+                        borderRadius="md"
+                        bgSize="cover"
+                        h={['11em', '23em']}
+                        bgPosition="center"
+                      ></Box>
+                    </Box>
 
-                    <Image
-                      src={
-                        process.env.PUBLIC_URL + '/images/home/community-1.png'
-                      }
-                      alt="Image 4"
-                      borderRadius="md"
-                      px={['0.5em', '2em']}
-                    />
-
-                    <Image
-                      src={
-                        process.env.PUBLIC_URL + '/images/home/community-5.png'
-                      }
-                      alt="Image 5"
-                      borderRadius="md"
-                      px={['0.5em', '2em']}
-                    />
+                    <Box px={['0.5em', '1em']}>
+                      <Box
+                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-4.jpg')`}
+                        borderRadius="md"
+                        bgSize="cover"
+                        h={['11em', '23em']}
+                        bgPosition="center"
+                      ></Box>
+                    </Box>
+                    <Box px={['0.5em', '1em']}>
+                      <Box
+                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-5.jpg')`}
+                        borderRadius="md"
+                        bgSize="cover"
+                        h={['11em', '23em']}
+                        bgPosition="center"
+                      ></Box>
+                    </Box>
+                    <Box px={['0.5em', '1em']}>
+                      <Box
+                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-6.jpg')`}
+                        borderRadius="md"
+                        bgSize="cover"
+                        h={['11em', '23em']}
+                        px="1em"
+                        bgPosition="center"
+                      ></Box>
+                    </Box>
+                    <Box px={['0.5em', '1em']}>
+                      <Box
+                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-7.jpg')`}
+                        borderRadius="md"
+                        bgSize="cover"
+                        h={['11em', '23em']}
+                        bgPosition="center"
+                      ></Box>
+                    </Box>
                   </Slider>
                 </Box>
                 {isMobile ? (
                   <VStack>
                     <VStack w="100%">
                       <Flex w="100%">
-                        <HStack py="1em">
+                        <HStack paddingBottom="1em">
                           <Box
                             w="1.2em"
                             h="1.2em"
@@ -158,13 +181,13 @@ const ExperienceBiblicalCommunity = () => {
                             fontWeight="400"
                             alignItems="center"
                             color="white"
-                            fontSize="42"
+                            fontSize="36"
                           >
                             1
                           </Box>
                           <Text
                             color="black"
-                            fontSize="32"
+                            fontSize={['1.6rem', '1.6rem', '2.4rem', '3rem']}
                             px="0.5em"
                             fontFamily="DMSerifDisplay_Italic"
                             fontWeight="400"
@@ -241,13 +264,13 @@ const ExperienceBiblicalCommunity = () => {
                             fontWeight="400"
                             alignItems="center"
                             color="white"
-                            fontSize="42"
+                            fontSize="36"
                           >
                             2
                           </Box>
                           <Text
                             color="black"
-                            fontSize="32"
+                            fontSize={['1.6rem', '1.6rem', '2.4rem', '3rem']}
                             fontFamily="DMSerifDisplay_Italic"
                             fontWeight="400"
                             lineHeight="39.48px"
@@ -306,7 +329,7 @@ const ExperienceBiblicalCommunity = () => {
                     </VStack>
                   </VStack>
                 ) : (
-                  <VStack>
+                  <VStack py="3em">
                     <VStack w="80%" paddingBottom="2em">
                       <Flex w="100%">
                         <HStack>
