@@ -26,8 +26,10 @@ const GivingPage = (props) => {
           bgImage={`url('${process.env.PUBLIC_URL}/images/giving/Banner.png')`}
           bgPosition="center"
           bgSize="cover"
+          fontFamily="Manrope"
         >
           <Heading
+            fontFamily="DMSerifDisplay_Italic"
             as="h1"
             fontSize={['5xl', '5xl', '6xl']}
             align="center"
@@ -44,6 +46,7 @@ const GivingPage = (props) => {
               align="center"
               color="#319795"
               fontWeight="bold"
+              fontFamily="DMSerifDisplay_Regular"
             >
               At HMCC, we believe that when God gives someone a vision, He will
               always provide for that vision.
@@ -70,18 +73,33 @@ const GivingPage = (props) => {
           </VStack>
         </Box>
       </VStack>
-      <Center>
+      <Center fontFamily="Manrope">
         <Flex
           h={['100%', '100%', '13em']}
           direction={['column', 'column', 'row']}
           paddingBottom={[0, 0, '2vh']}
           minW="100%"
         >
-          <Box w={['100%', '100%', '32%']} h="20%" borderRadius="lg">
-            <Heading as="h3" size="xl" paddingBottom="1vw" color="#319795">
+          <Box
+            w={['100%', '100%', '32%']}
+            h="20%"
+            borderRadius="lg"
+            fontFamily="Manrope"
+          >
+            <Heading
+              as="h3"
+              size="xl"
+              paddingBottom="1vw"
+              color="#319795"
+              fontFamily="DMSerifDisplay_Italic"
+            >
               Ways to Give:
             </Heading>
-            <Text fontWeight="bold" paddingBottom="1vw">
+            <Text
+              fontWeight="bold"
+              paddingBottom="1vw"
+              fontFamily="DMSerifDisplay_Regular"
+            >
               There are a few different ways you can give to our church
             </Text>
             <Text as="i" color="#319795">
@@ -138,7 +156,7 @@ const GivingPage = (props) => {
           stewardship@hongkong.hmcc.net
         </Text>
       </Box>
-      <Box paddingBottom="10vh">
+      <Box paddingBottom="10vh" fontFamily="Manrope">
         <Box display={{ base: 'none', md: 'block', lg: 'block' }}>
           <Heading
             as="h1"

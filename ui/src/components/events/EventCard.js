@@ -69,6 +69,7 @@ const EventCard = (props) => {
         bg="white"
         onClick={onOpen}
         display="flex"
+        fontFamily="Manrope"
         flexDirection={['column', 'row']}
       >
         <AspectRatio mb="5" width={['100%', '50%']} ratio={16 / 9}>

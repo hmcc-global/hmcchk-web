@@ -9,15 +9,21 @@ const OurMinistries = (props) => {
         fontWeight={800}
         textAlign="center"
         mb={[0, 2]}
+        fontFamily="DMSerifDisplay_Italic"
       >
         OUR MINISTRIES
       </Heading>
-      <Text fontSize={['0.75em', '1.5em']} textAlign="center" mb={6}>
+      <Text
+        fontSize={['0.75em', '1.5em']}
+        textAlign="center"
+        mb={6}
+        fontFamily="Manrope"
+      >
         At Harvest Mission Community Church, we are actively reaching out to
         people from all walks of life, specifically college students, working
         adults, and families.
       </Text>
-      <SimpleGrid columns={[1, 3]} spacing={4}>
+      <SimpleGrid columns={[1, 3]} spacing={4} fontFamily="Manrope">
         <Box
           h={[141, 340]}
           p={2}

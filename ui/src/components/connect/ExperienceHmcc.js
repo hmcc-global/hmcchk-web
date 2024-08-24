@@ -2,13 +2,14 @@ import { Box, Button, Flex, Heading, Link, Text } from '@chakra-ui/react';
 
 const ExperienceHmcc = (props) => {
   return (
-    <Box>
+    <Box fontFamily="Manrope">
       <Heading
         as="h2"
         fontSize={['2.25em', '3em', '4em']}
         fontWeight={800}
         textAlign="center"
         mb={[0, 4]}
+        fontFamily="DMSerifDisplay_Italic"
       >
         EXPERIENCE HMCC
       </Heading>
@@ -31,7 +32,11 @@ const ExperienceHmcc = (props) => {
           <Text fontSize={['0.85em', '1.25em']} fontWeight={[400, 700]}>
             Every Sunday at 10AM
           </Text>
-          <Heading fontSize={['1.25em', '2.25em']} fontWeight={[700, 900]}>
+          <Heading
+            fontSize={['1.25em', '2.25em']}
+            fontWeight={[700, 900]}
+            fontFamily="DMSerifDisplay_Italic"
+          >
             Sunday Celebration
           </Heading>
           <Text
@@ -80,7 +85,11 @@ const ExperienceHmcc = (props) => {
           <Text fontSize={['0.85em', '1.25em']} fontWeight={[400, 700]}>
             Learn about our
           </Text>
-          <Heading fontSize={['1.25em', '2.25em']} fontWeight={[700, 900]}>
+          <Heading
+            fontSize={['1.25em', '2.25em']}
+            fontWeight={[700, 900]}
+            fontFamily="DMSerifDisplay_Italic"
+          >
             Upcoming Events
           </Heading>
           <Text

@@ -70,6 +70,7 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
               fontSize="2em"
               color="#0628A3"
               marginTop="-10px"
+              fontFamily="DMSerifDisplay_Italic"
             >
               {header}
             </Text>

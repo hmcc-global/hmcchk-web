@@ -72,7 +72,7 @@ const AboutUsContainer = (props) => {
   //To do: implement navbar, menu and footer links to individual sections("our story", "vision mision" etc)
 
   return (
-    <Container maxW="container.lg" py={10}>
+    <Container maxW="container.lg" py={10} fontFamily="Manrope">
       <VStack>
         <Box
           borderWidth="1px"
@@ -92,6 +92,7 @@ const AboutUsContainer = (props) => {
             color="white"
             textAlign="center"
             mb={12}
+            fontFamily="DMSerifDisplay_Italic"
           >
             {banner.title}
           </Heading>
@@ -101,6 +102,7 @@ const AboutUsContainer = (props) => {
             fontWeight={600}
             textAlign="center"
             mb={[0, 10]}
+            fontFamily="DMSerifDisplay_Regular"
           >
             {banner.blurb}
           </Text>
@@ -114,6 +116,7 @@ const AboutUsContainer = (props) => {
                 return (
                   <Fragment key={i}>
                     <Text
+                      fontFamily="DMSerifDisplay_Regular"
                       color="rgba(255, 255, 255, 1)"
                       fontWeight={600}
                       // textDecoration={selected === i ? 'underline' : 'none'}
@@ -137,6 +140,7 @@ const AboutUsContainer = (props) => {
                         color="rgba(255, 255, 255, 1)"
                         fontSize={['sm', 'xl']}
                         verticalAlign="baseline"
+                        fontFamily="Manrope"
                       >
                         &bull;
                       </Text>

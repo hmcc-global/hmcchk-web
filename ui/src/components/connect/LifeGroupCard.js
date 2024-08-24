@@ -26,6 +26,7 @@ const LifeGroupCard = (props) => {
       color="#fff"
       textAlign="center"
       flexDir="column"
+      fontFamily="Manrope"
     >
       <Heading as="h4" fontSize={['xl', '2xl', '3xl']} fontWeight={700}>
         {name}

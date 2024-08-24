@@ -58,7 +58,11 @@ const LifeGroups = (props) => {
           />
         </Box>
         <Stack flex={1} textAlign={['center', 'left']} pb={[6, 0]}>
-          <Text fontSize={['md', 'xl']} mb={4}>
+          <Text
+            fontSize={['md', 'xl']}
+            mb={4}
+            fontFamily="DMSerifDisplay_Italic"
+          >
             At HMCC, we believe in the power of community and the fullness of
             life that it offers -- which is why we believe in{' '}
             <span style={{ fontWeight: 'bold' }}>LIFE Groups.</span>
@@ -112,6 +116,7 @@ const LifeGroups = (props) => {
           fontWeight={700}
           textAlign="center"
           mb={[2, 4]}
+          fontFamily="DMSerifDisplay_Regular"
         >
           Check out the different LIFE Groups in HMCC!
         </Heading>

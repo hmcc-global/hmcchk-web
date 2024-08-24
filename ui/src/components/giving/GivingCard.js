@@ -144,6 +144,7 @@ export const GivingCard = (cardinfo) => {
       bgPosition="center"
       bgSize="cover"
       boxShadow="0px 4px 8px rgba(0, 0, 0, 0.15)"
+      fontFamily="Manrope"
     >
       <Flex
         borderRadius="lg"
@@ -196,12 +197,17 @@ export const GivingCard = (cardinfo) => {
                   <ModalOverlay />
                   <ModalContent>
                     <ModalHeader>
-                      <Heading as="h2" size="xl" fontWeight="bold">
+                      <Heading
+                        as="h2"
+                        size="xl"
+                        fontWeight="bold"
+                        fontFamily="Manrope"
+                      >
                         {cardinfo.text}
                       </Heading>
                     </ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody>
+                    <ModalBody fontFamily="Manrope">
                       <RenderSwitch ModalSelection={cardinfo.text} />
                     </ModalBody>
                     <ModalFooter></ModalFooter>
