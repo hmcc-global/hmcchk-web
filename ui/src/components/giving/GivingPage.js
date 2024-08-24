@@ -84,7 +84,7 @@ const GivingPage = (props) => {
             <Text fontWeight="bold" paddingBottom="1vw">
               There are a few different ways you can give to our church
             </Text>
-            <Text as="i" color="#319795">
+            <Text as="i" color="#319795" fontSize="12">
               *When giving, please always use your legal name and provide the
               same email address consistently.
             </Text>

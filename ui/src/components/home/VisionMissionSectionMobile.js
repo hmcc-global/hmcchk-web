@@ -31,7 +31,7 @@ const VisionMissionSectionMobile = () => {
                       w="100%"
                       position="absolute"
                       h="122%"
-                      bgPos="60% 100%"
+                      bgPos="55% 100%"
                       bgSize="70%"
                       bgRepeat="no-repeat"
                       bgImage={`url('${process.env.PUBLIC_URL}/images/home/vector-green-3.svg')`}
@@ -42,7 +42,7 @@ const VisionMissionSectionMobile = () => {
                       fontWeight="400"
                       lineHeight="1"
                       wordBreak="break-word"
-                      fontSize="36"
+                      fontSize={['2rem', '2rem', '3rem', '3.75rem']}
                     >
                       Our Vision & Mission
                     </Heading>

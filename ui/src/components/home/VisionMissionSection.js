@@ -50,10 +50,10 @@ const VisionMissionSection = () => {
                   <Heading
                     color="#0C0C20"
                     fontFamily="DMSerifDisplay_Italic, serif"
+                    fontSize={['2rem', '2rem', '3rem', '3.75rem']}
                     fontWeight="400"
                     lineHeight="1"
                     wordBreak="break-word"
-                    fontSize="60"
                   >
                     Our Vision<br></br> & Mission
                   </Heading>
