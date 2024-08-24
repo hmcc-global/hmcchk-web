@@ -87,7 +87,7 @@ const ExperienceBiblicalCommunity = () => {
                       fontWeight="400"
                       lineHeight="1"
                       wordBreak="break-word"
-                      fontSize={['36', '60']}
+                      fontSize={['2rem', '2rem', '3rem', '3.75rem']}
                     >
                       Experience <br />
                       Biblical Community
@@ -181,13 +181,13 @@ const ExperienceBiblicalCommunity = () => {
                             fontWeight="400"
                             alignItems="center"
                             color="white"
-                            fontSize="42"
+                            fontSize="36"
                           >
                             1
                           </Box>
                           <Text
                             color="black"
-                            fontSize="32"
+                            fontSize={['1.6rem', '1.6rem', '2.4rem', '3rem']}
                             px="0.5em"
                             fontFamily="DMSerifDisplay_Italic"
                             fontWeight="400"
@@ -264,13 +264,13 @@ const ExperienceBiblicalCommunity = () => {
                             fontWeight="400"
                             alignItems="center"
                             color="white"
-                            fontSize="42"
+                            fontSize="36"
                           >
                             2
                           </Box>
                           <Text
                             color="black"
-                            fontSize="32"
+                            fontSize={['1.6rem', '1.6rem', '2.4rem', '3rem']}
                             fontFamily="DMSerifDisplay_Italic"
                             fontWeight="400"
                             lineHeight="39.48px"
@@ -329,7 +329,7 @@ const ExperienceBiblicalCommunity = () => {
                     </VStack>
                   </VStack>
                 ) : (
-                  <VStack>
+                  <VStack py="3em">
                     <VStack w="80%" paddingBottom="2em">
                       <Flex w="100%">
                         <HStack>
