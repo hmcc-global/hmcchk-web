@@ -115,7 +115,7 @@ const EventsSection = () => {
     height: 'auto',
   };
   return (
-    <InView rootMargin="-200px" triggerOnce={true}>
+    <InView rootMargin="-50px" triggerOnce={true}>
       {({ inView, ref }) => (
         <Fade transition={{ enter: { duration: 1 } }} in={inView}>
           <Container maxW="container.xl" pr="0" ref={ref}>

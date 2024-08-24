@@ -15,10 +15,19 @@ import './SocialIcon.css';
 import { EmailIcon } from '@chakra-ui/icons';
 import { SocialIcon } from 'react-social-icons';
 
+import { useLocation } from 'react-router-dom';
+
 const Footer = () => {
+  const location = useLocation();
+
   return (
     <Container maxW="container.xl" py="2em">
-      <Flex w="100%" direction={['column', 'row']} py={['0', '2em']}>
+      <Flex
+        display={location.pathname.includes('/admin') ? 'none' : 'flex'}
+        w="100%"
+        direction={['column', 'row']}
+        py={['0', '2em']}
+      >
         <VStack w={['100%', '40%']} alignItems={['center', 'flex-start']}>
           <Stack flexDir="column">
             <Link href="/">

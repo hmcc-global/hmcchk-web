@@ -24,7 +24,7 @@ import {
   FiShield,
   FiAlertCircle,
 } from 'react-icons/fi';
-import { CgNotes } from "react-icons/cg";
+import { CgNotes } from 'react-icons/cg';
 
 const LinkItems = [
   { name: 'Home', icon: FiHome, path: '/admin/home' },
@@ -61,7 +61,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      {LinkItems.map((link) => (
+      {LinkItems.sort((a, b) => a.name.localeCompare(b.name)).map((link) => (
         <NavItem
           key={link.name}
           icon={link.icon}

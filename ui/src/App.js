@@ -9,7 +9,13 @@ import MobileNavBar from './components/NavigationBar/MobileNavBar';
 
 const App = () => {
   return (
-    <Flex flexGrow={1} display="flex" h="100vh" direction="column">
+    <Flex
+      flexGrow={1}
+      display="flex"
+      h="100%"
+      overflow="auto"
+      direction="column"
+    >
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <BrowserRouter>

@@ -86,15 +86,16 @@ const HeroSection = () => {
           />
         </Box>
 
+        {/* Middle layer for effect */}
         <Flex
           w="full"
-          minH={['30vh', '30vh', '95vh']}
+          minH={['85vh', '85vh', '95vh']}
           zIndex="1"
           position="absolute"
           flexDir="column"
-          justifyContent="flex-start"
+          justifyContent={['space-evenly', 'space-evenly', 'flex-start']}
           px={[0, 0, '3%']}
-          pt={['3vh', '3vh', '12vh', '12vh']}
+          pt={[0, -3, '12vh', '12vh']}
           mixBlendMode="exclusion"
           display={['none', 'none', 'flex']}
         >
@@ -115,9 +116,8 @@ const HeroSection = () => {
             >
               <Image
                 display={['none', 'none', 'block']}
-                src={
-                  process.env.PUBLIC_URL + '/images/home/hmcc-ripple-blue.svg'
-                }
+                src={process.env.PUBLIC_URL + '/images/home/ripple-blue.png'}
+                h="2em"
                 opacity="0"
               />
               <Text
@@ -132,7 +132,7 @@ const HeroSection = () => {
               {/* Hide the text with exclusion effect*/}
               <Stack
                 spacing={[1, 0]}
-                px={['11%', '20%', '0']}
+                px={['11%', '5%', '0']}
                 w="full"
                 textAlign={['center', 'center', 'left']}
               >
@@ -248,13 +248,13 @@ const HeroSection = () => {
 
         <Flex
           w="full"
-          minH={['30vh', '30vh', '95vh']}
+          minH={['85vh', '85vh', '95vh']}
           zIndex="1"
           position="relative"
           flexDir="column"
-          justifyContent="flex-start"
+          justifyContent={['space-evenly', 'space-evenly', 'flex-start']}
           px={[0, 0, '3%']}
-          pt={['3vh', '3vh', '12vh', '12vh']}
+          pt={[0, -3, '12vh', '12vh']}
         >
           <Container
             display="flex"
@@ -273,9 +273,8 @@ const HeroSection = () => {
             >
               <Image
                 display={['none', 'none', 'block']}
-                src={
-                  process.env.PUBLIC_URL + '/images/home/hmcc-ripple-blue.svg'
-                }
+                src={process.env.PUBLIC_URL + '/images/home/ripple-blue.png'}
+                h="2em"
               />
               <Text
                 display={['none', 'none', 'block']}
@@ -288,7 +287,7 @@ const HeroSection = () => {
               {/* Hide the text with exclusion effect*/}
               <Stack
                 spacing={[1, 0]}
-                px={['11%', '20%', '0']}
+                px={['11%', '5%', '0']}
                 w="full"
                 textAlign={['center', 'center', 'left']}
               >
@@ -348,13 +347,13 @@ const HeroSection = () => {
             justify="center"
             playsInline
             sx={{ aspectRatio: '16/9' }}
-            mt={[7, 7, 5]}
+            mt={[2, -3, 5]}
           ></Flex>
           <Container
             display="flex"
             maxW="container.xl"
             justifyContent="flex-start"
-            mt={[7, 7, 5]}
+            mt={[2, -3, 5]}
             overflowX="hidden"
           >
             <Stack

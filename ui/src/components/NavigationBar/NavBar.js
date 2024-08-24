@@ -11,10 +11,12 @@ import {
   LinkBox,
   LinkOverlay,
   HStack,
+  Spacer,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../reducers/userSlice';
 import { customAxios as axios } from '../helpers/customAxios';
+import { useLocation } from 'react-router-dom';
 
 const NavBar = (props) => {
   const [isLive, setIsLive] = useState(false);
@@ -23,6 +25,8 @@ const NavBar = (props) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [userObj, setUserObj] = useState();
+  const location = useLocation();
+
   const liveScStyle = {
     border: '5px',
     backgroundColor: '#EB4335',
@@ -82,30 +86,39 @@ const NavBar = (props) => {
   const [yPosition, setYPosition] = useState(0);
 
   useEffect(() => {
-    const position = document.querySelector('#main-container');
     const handleScroll = () => {
-      setYPosition(position.scrollTop);
+      // console.log(window.scrollY);
+      setYPosition(window.scrollY);
     };
-    position.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      position.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   return (
     <>
-      <Flex>
+      <Flex
+        position="fixed"
+        top="0"
+        width="100%"
+        zIndex="9"
+        display={
+          location.pathname.includes('/admin')
+            ? ['none', 'none', 'flex']
+            : 'flex'
+        }
+      >
         <Flex
           backgroundColor="#F6FAFF"
           width="100%"
-          h={{ md: '7vh', lg: '7vh', xl: '8vh' }}
+          h="7vh"
           align="center"
           fontFamily="Manrope"
           fontSize={{ md: 'xs', lg: 'sm', xl: 'md' }}
           textColor="black"
-          letterSpacing={1}
-          border="1px solid"
+          borderBottom="1px solid"
           borderColor="#4A6EEB"
         >
           <Container maxW="100%" padding={{ base: 4, md: 1, lg: 4 }}>
@@ -122,7 +135,7 @@ const NavBar = (props) => {
                     <Image
                       w="3.5em"
                       minW="3.5em"
-                      src={process.env.PUBLIC_URL + '/images/ripple_black.svg'}
+                      src={process.env.PUBLIC_URL + '/images/ripple-black.png'}
                       alt="Logo of HMCC"
                     />
                   </LinkOverlay>
@@ -376,7 +389,7 @@ const NavBar = (props) => {
               position="relative"
               w="100%"
             >
-              <Box w="10%">
+              <Box w="15%">
                 <HStack>
                   {isLive ? (
                     <Link href="/online" style={{ lineHeight: '0' }}>
@@ -393,10 +406,12 @@ const NavBar = (props) => {
                         &bull; Live
                       </Button>
                     </Link>
-                  ) : null}
+                  ) : (
+                    <Spacer />
+                  )}
                 </HStack>
               </Box>
-              <Box>
+              <Box w="70%">
                 <Box
                   transition="opacity 0.5s"
                   style={{
@@ -430,7 +445,7 @@ const NavBar = (props) => {
                       <Image
                         w="4em"
                         src={
-                          process.env.PUBLIC_URL + '/images/ripple_black.svg'
+                          process.env.PUBLIC_URL + '/images/ripple-black.png'
                         }
                         alt="Logo of HMCC"
                       />
@@ -438,7 +453,7 @@ const NavBar = (props) => {
                   </LinkBox>
                 </Box>
               </Box>
-              <Box w="10%"></Box>
+              <Spacer w="15%" />
             </Flex>
           </Container>
         </Flex>
