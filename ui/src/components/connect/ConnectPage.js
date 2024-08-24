@@ -49,6 +49,7 @@ const ConnectPage = (props) => {
           >
             <Box align="left" pb="3%">
               <Heading
+                fontFamily="DMSerifDisplay_Italic"
                 as="h3"
                 fontSize={['2.75em', '3.5em', '6em']}
                 fontWeight={800}
@@ -69,6 +70,7 @@ const ConnectPage = (props) => {
                 textAlign="left"
                 textShadow="0px 4px 7px rgba(0, 0, 0, 0.44)"
                 letterSpacing={-1}
+                fontFamily="DMSerifDisplay_Italic"
               >
                 We're so glad you're here :)
               </Heading>

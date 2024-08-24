@@ -96,7 +96,12 @@ const SermonContainer = (props) => {
           px={[8, 10]}
           py={[8, 12]}
         >
-          <Heading size="2xl" color="white" fontWeight="900">
+          <Heading
+            size="2xl"
+            color="white"
+            fontWeight="900"
+            fontFamily="DMSerifDisplay_Italic"
+          >
             Sermons
           </Heading>
         </Box>
