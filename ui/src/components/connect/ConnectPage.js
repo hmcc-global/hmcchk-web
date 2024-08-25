@@ -31,23 +31,23 @@ const ConnectPage = (props) => {
   }, [hash]);
 
   return (
-    <Box background="linear-gradient(151.15deg, rgba(255, 244, 201, 0.3) 11.18%, rgba(255, 255, 255, 0.3) 42.46%, rgba(202, 220, 255, 0.3) 76.7%), linear-gradient(194.34deg, #FFE6E6 1.83%, #FFFFFF 51.22%, #D6FFEA 99.59%)">
+    <Box background="linear-gradient(151.15deg, rgba(223, 231, 255, 1.0) 11.18%, rgba(255, 255, 255, 0.3) 42.46%, rgba(202, 220, 255, 0.3) 76.7%), linear-gradient(194.34deg, #FFE6E6 1.83%, #FFFFFF 51.22%, #D6FFEA 99.59%)">
       <Container maxW="container.lg" py={10}>
         <VStack spacing={[4, 12]} align="stretch">
           <Flex
             bgImage={
-              `linear-gradient(90deg, rgba(231, 187, 187, 0.71) 0%, rgba(89, 168, 212, 0.62) 100%), ` +
-              `url(${process.env.PUBLIC_URL}/images/connect/connect.png)`
+              // `linear-gradient(90deg, rgba(231, 187, 187, 0.71) 0%, rgba(89, 168, 212, 0.62) 100%), ` +
+              `url(${process.env.PUBLIC_URL}/images/connect/connect-welcome.png)`
             }
             bgSize="cover"
-            bgPosition="top"
+            bgPosition="center"
             borderRadius="20"
-            minHeight={['30vh', '30vh', '40vh', '50vh']}
+            minHeight={['30vh', '30vh', '40vh', '60vh']}
             alt="Connect"
             padding={6}
             flexDirection="column-reverse"
           >
-            <Box align="left" pb="3%">
+            <Box align="left" pb="3%" color="white">
               <Heading
                 fontFamily="DMSerifDisplay_Italic"
                 as="h3"
@@ -55,8 +55,8 @@ const ConnectPage = (props) => {
                 fontWeight={800}
                 textAlign="left"
                 filter="drop-shadow(0px 4px 7px rgba(0, 0, 0, 0.44))"
-                bgGradient="linear-gradient(90deg, #79A7FF 31.77%, #D77CD9 91.79%)"
-                bgClip="text"
+                // bgGradient="linear-gradient(90deg, #79A7FF 31.77%, #D77CD9 91.79%)"
+                // bgClip="text"
                 letterSpacing={[-1, -3]}
                 w="fit-content"
                 mb="-2"

@@ -83,6 +83,7 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
           <Text
             fontWeight="bold"
             fontSize="2em"
+            fontFamily="DMSerifDisplay_Italic"
             color="#0628A3"
             display={{ base: 'flex', md: 'none' }}
             marginTop="0"
@@ -133,6 +134,7 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
             alignItems="left"
             direction="column"
             display={{ base: 'flex', md: 'none' }}
+            fontFamily="Manrope"
           >
             <Text fontWeight="bold" fontSize="1.2em">
               {sermonSeriesName}

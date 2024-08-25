@@ -9,7 +9,6 @@ import {
   Button,
   Fade,
   Spacer,
-  Image,
   useMediaQuery,
   Link,
 } from '@chakra-ui/react';

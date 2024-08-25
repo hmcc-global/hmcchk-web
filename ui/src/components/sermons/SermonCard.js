@@ -66,11 +66,12 @@ const SermonCard = ({ sermonData, allSermons }) => {
           paddingBottom={[2, 4]}
           paddingTop={[1, 2]}
         >
-          <VStack alignItems="left" spacing={1}>
+          <VStack alignItems="left" spacing={1} fontFamily="Manrope">
             <Text
               fontSize={{ base: 'sm', md: 'lg' }}
               fontWeight={['600', '800']}
               isTruncated
+              fontFamily="DMSerifDisplay_Italic"
             >
               {sermonData.title}
             </Text>
