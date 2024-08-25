@@ -93,7 +93,7 @@ const ExperienceBiblicalCommunity = () => {
                     </Heading>
                   </Box>
                 </Box>
-                <Box my={4} w="100vw" h={['13em', '40vh']} overflow="hidden">
+                <Box my={4} w="100vw" minH={['13em', '40vh']} overflow="hidden">
                   <Slider {...settings}>
                     <Box px={['0.5em', '1em']}>
                       <Box

@@ -77,7 +77,7 @@ const AboutUsContainer = (props) => {
         <Box
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`url('${process.env.PUBLIC_URL}/images/about/headerBg.png')`}
+          bgImage={`url('${process.env.PUBLIC_URL}/images/about/headerBg.jpg')`}
           bgPosition="center"
           bgSize="cover"
           px={{ base: 29, sm: 29, md: 15, lg: 29 }}
