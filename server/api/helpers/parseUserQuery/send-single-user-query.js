@@ -61,7 +61,12 @@ module.exports = {
     const fileName = `assets/attachments/${submissionId}.xlsx`;
     const firstWorksheet = workbook.getWorksheet('Sheet1');
     const rowToFill = firstWorksheet.getRow(5);
-    rowToFill.values = [submissionData.fullName, submissionData.phoneNumber, submissionData.email];
+    rowToFill.values = [submissionData.fullName, submissionData.phoneNumber, submissionData.email, ''];
+    rowToFill.getCell('D').fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor:{argb:'00FFFF'},
+    };
     await workbook.xlsx.writeFile(fileName);
 
     try {
