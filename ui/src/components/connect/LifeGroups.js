@@ -27,6 +27,7 @@ const LifeGroups = (props) => {
         fontWeight={800}
         textAlign="center"
         mb={[0, 4]}
+        fontFamily="DMSerifDisplay_Italic"
       >
         <span style={{ color: '#FD7B7E' }}>L</span>
         <span style={{ color: '#43B77B' }}>I</span>

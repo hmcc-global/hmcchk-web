@@ -18,7 +18,7 @@ const ExperienceHmcc = (props) => {
           flex={1}
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${process.env.PUBLIC_URL}/images/connect/2021_07_11_Membership_Recognition_Prayer_2.jpg')`}
+          bgImage={`linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${process.env.PUBLIC_URL}/images/connect/sunday-celebration.JPG')`}
           bgPosition="center"
           bgSize="cover"
           shadow="lg"
@@ -27,7 +27,9 @@ const ExperienceHmcc = (props) => {
           px={[8, 10]}
           pt={[8, 20]}
           pb={[8, 14]}
-          m={2}
+          m={[0, 2]}
+          ml={0}
+          my={[1, 0]}
         >
           <Text fontSize={['0.85em', '1.25em']} fontWeight={[400, 700]}>
             Every Sunday at 10AM
@@ -70,7 +72,7 @@ const ExperienceHmcc = (props) => {
           flex={1}
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${process.env.PUBLIC_URL}/images/connect/2016_Apr_EOY_Celebration_Group_Cheering_higher.jpg')`}
+          bgImage={`linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${process.env.PUBLIC_URL}/images/connect/upcoming-events.jpg')`}
           bgPosition="center"
           bgSize="cover"
           shadow="lg"
@@ -79,8 +81,9 @@ const ExperienceHmcc = (props) => {
           px={[8, 10]}
           pt={[8, 20]}
           pb={[8, 14]}
-          // py={[8, 16]}
-          m={2}
+          m={[0, 2]}
+          mr={0}
+          my={[1, 0]}
         >
           <Text fontSize={['0.85em', '1.25em']} fontWeight={[400, 700]}>
             Learn about our
