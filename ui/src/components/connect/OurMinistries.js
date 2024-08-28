@@ -53,7 +53,7 @@ const OurMinistries = (props) => {
           h={[141, 340]}
           p={[3]}
           borderRadius="20"
-          bgImage={`linear-gradient(180deg, rgba(198, 246, 213, 0.7) 0%, rgba(11, 128, 73, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/city.jpg')`}
+          bgImage={`linear-gradient(180deg, rgba(198, 246, 213, 0.7) 0%, rgba(11, 128, 73, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/city.png')`}
           bgPosition="center"
           bgSize="cover"
           shadow="lg"
@@ -80,7 +80,7 @@ const OurMinistries = (props) => {
           p={3}
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`linear-gradient(180deg, rgba(252, 129, 129, 0.7) 0%, rgba(151, 38, 109, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/married.jpg')`}
+          bgImage={`linear-gradient(180deg, rgba(252, 129, 129, 0.7) 0%, rgba(151, 38, 109, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/married.png')`}
           bgPosition="center"
           bgSize="cover"
           shadow="lg"
@@ -113,7 +113,7 @@ const OurMinistries = (props) => {
           p={[4, 6, 8, 10]}
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`linear-gradient(180deg, rgba(191, 201, 254, 0.7) 0%, rgba(115, 37, 176, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/youth.jpg')`}
+          bgImage={`linear-gradient(180deg, rgba(191, 201, 254, 0.7) 0%, rgba(115, 37, 176, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/youth.png')`}
           bgPosition="center"
           bgSize="cover"
           shadow="lg"
@@ -139,7 +139,7 @@ const OurMinistries = (props) => {
           p={[0, 2, 4, 8]}
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`linear-gradient(180deg, rgba(233, 223, 132, 0.7) 0%, rgba(170, 102, 0, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/kid.jpg')`}
+          bgImage={`linear-gradient(180deg, rgba(233, 223, 132, 0.7) 0%, rgba(170, 102, 0, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/kid.png')`}
           bgPosition="center"
           bgSize="cover"
           shadow="lg"
