@@ -1,29 +1,6 @@
 import React from 'react';
-import { Link as HashLink } from 'react-router-dom';
-import {
-  Flex,
-  Box,
-  HStack,
-  Spacer,
-  Button,
-  ButtonGroup,
-  VStack,
-  Text,
-  Divider,
-  Center,
-  Accordion,
-  LinkOverlay,
-  Link,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  Container,
-  AccordionIcon,
-  LinkBox,
-  Image,
-} from '@chakra-ui/react';
+import { Flex, VStack, Text, Link, Container, Image } from '@chakra-ui/react';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import { SocialIcon } from 'react-social-icons';
 import { useDispatch } from 'react-redux';
 import { signout } from '../../reducers/userSlice';
 
@@ -77,9 +54,9 @@ const MainMenu = ({ login, onClose }) => {
                 </Flex>
               </Link>
               <Link
-                href="/events"
+                href="/visit-us"
                 onClick={onClose}
-                id="menu-events"
+                id="menu-visit"
                 w="100%"
                 bgColor="#4465D6"
                 borderRadius="full"
@@ -92,7 +69,7 @@ const MainMenu = ({ login, onClose }) => {
                   px="0.65em"
                   py="1"
                 >
-                  <Text>Events</Text>
+                  <Text>Visit Us</Text>
                   <ChevronRightIcon boxSize={6} />
                 </Flex>
               </Link>
@@ -133,6 +110,26 @@ const MainMenu = ({ login, onClose }) => {
                   py="1"
                 >
                   <Text>Connect</Text>
+                  <ChevronRightIcon boxSize={6} />
+                </Flex>
+              </Link>
+              <Link
+                href="/events"
+                onClick={onClose}
+                id="menu-events"
+                w="100%"
+                bgColor="#4465D6"
+                borderRadius="full"
+                textDecoration="none !important"
+              >
+                <Flex
+                  dir="row"
+                  justifyContent="space-between"
+                  align="center"
+                  px="0.65em"
+                  py="1"
+                >
+                  <Text>Events</Text>
                   <ChevronRightIcon boxSize={6} />
                 </Flex>
               </Link>

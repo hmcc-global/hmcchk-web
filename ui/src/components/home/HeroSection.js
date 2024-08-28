@@ -51,7 +51,6 @@ const HeroSection = () => {
             as="video"
             ref={vidRef}
             w="full"
-            minH="95.1vh"
             src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
             loop
             muted

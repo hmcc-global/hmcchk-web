@@ -11,11 +11,13 @@ import Faq from './Faq';
 import LifeGroups from './LifeGroups';
 import { useLocation } from 'react-router-dom';
 import scrollTo from '../helpers/ScrollTo';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 const ConnectPage = (props) => {
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
   const { hash } = useLocation();
+  const vidRef = useRef();
+  const vidRefMobile = useRef();
 
   useEffect(() => {
     switch (hash) {
@@ -29,6 +31,18 @@ const ConnectPage = (props) => {
         break;
     }
   }, [hash]);
+  useEffect(() => {
+    if (vidRef.current) {
+      vidRef.current.addEventListener('loadedmetadata', (e) => {
+        vidRef.current.play();
+      });
+    }
+    if (vidRefMobile.current) {
+      vidRefMobile.current.addEventListener('loadedmetadata', (e) => {
+        vidRefMobile.current.play();
+      });
+    }
+  }, [vidRef, vidRefMobile]);
 
   return (
     <Box background="linear-gradient(151.15deg, rgba(223, 231, 255, 1.0) 11.18%, rgba(255, 255, 255, 0.3) 42.46%, rgba(202, 220, 255, 0.3) 76.7%), linear-gradient(194.34deg, #FFE6E6 1.83%, #FFFFFF 51.22%, #D6FFEA 99.59%)">
@@ -65,6 +79,7 @@ const ConnectPage = (props) => {
               </Heading>
               <Heading
                 as="h3"
+                zIndex="1"
                 fontSize={['1.5em', '2.5em', '4em']}
                 fontWeight={700}
                 textAlign="left"
