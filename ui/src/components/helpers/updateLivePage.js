@@ -41,19 +41,19 @@ const updateLivePage = async (props) => {
           sermonId: '635487c446187f591b0fb15a',
         },
       });
-      console.log('tes2', data);
       if (data && data[0]) {
         // we only get the latest one to update
         initLiveSermonValues(data[0]);
+        return false;
       }
     } catch (err) {
       console.log(err);
+      return true;
     }
   };
 
   // update values if provided
   // For now, set the stream time fixed for sn Ciek-1028
-
   const updateHandler = async () => {
     try {
       const res = await axios.put('/api/live-sermon/update-live-sermon', {
@@ -66,11 +66,16 @@ const updateLivePage = async (props) => {
     }
   };
 
-  let loadInitialData = false;
-  loadInitialData = await getData();
-  console.log('test', liveSermon);
+  let loadedInitialData = false;
+  loadedInitialData = await getData();
+
   if (sanityCheckFailed) {
     console.log('Fields invalid');
+    return;
+  }
+
+  if (loadedInitialData) {
+    console.log('Fail to retrieve online live sermon data');
     return;
   }
 
