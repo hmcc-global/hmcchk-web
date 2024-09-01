@@ -17,6 +17,7 @@ import { useForm } from 'react-hook-form';
 import { customAxios as axios } from '../../helpers/customAxios';
 import TiptapEditor from '../../helpers/TipTap';
 import { useHistory } from 'react-router-dom';
+import updateLivePage from '../../helpers/updateLivePage';
 
 const SermonNotesEditorModal = (props) => {
   const { editSermonNotesData, actionOnEditor, setIsEditorOpen } = props;
@@ -42,6 +43,7 @@ const SermonNotesEditorModal = (props) => {
     speaker: '',
     sermonSeries: '',
     imageLink: '',
+    sermonSeriesImage: '',
     originalContent: '',
     sermonLink: '',
     serviceType: '',
@@ -84,6 +86,7 @@ const SermonNotesEditorModal = (props) => {
       speaker: '',
       sermonSeries: '',
       imageLink: '',
+      sermonSeriesImage: '',
       originalContent: {},
       sermonLink: '',
       serviceType: '',
@@ -150,6 +153,8 @@ const SermonNotesEditorModal = (props) => {
             duration: 5000,
             isClosable: true,
           });
+          // Update Live page
+          await updateLivePage(sermonNoteData);
         }
       } else {
         const isDuplicate = await checkDuplicateTitleAndSermonLink();
@@ -214,6 +219,8 @@ const SermonNotesEditorModal = (props) => {
               duration: 5000,
               isClosable: true,
             });
+            //Update Live page
+            await updateLivePage(sermonNoteData);
           }
         }
         setIsEditorOpen(false);
@@ -293,26 +300,27 @@ const SermonNotesEditorModal = (props) => {
                 />
                 <FormErrorMessage>Title is required</FormErrorMessage>
               </FormControl>
+              <FormControl>
+                {/* TO-DO: Change the naming from subtitile to description */}
+                <FormLabel color="#656565" fontWeight="bold">
+                  Description
+                </FormLabel>
+                <Input
+                  id="subtitle"
+                  value={sermonNoteData.subtitle}
+                  {...register('subtitle')}
+                  onChange={(e) =>
+                    setSermonNoteData({
+                      ...sermonNoteData,
+                      subtitle: e.target.value,
+                    })
+                  }
+                />
+              </FormControl>
               <Grid
                 templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)']}
                 gap={6}
               >
-                <FormControl>
-                  <FormLabel color="#656565" fontWeight="bold">
-                    Subtitle
-                  </FormLabel>
-                  <Input
-                    id="subtitle"
-                    value={sermonNoteData.subtitle}
-                    {...register('subtitle')}
-                    onChange={(e) =>
-                      setSermonNoteData({
-                        ...sermonNoteData,
-                        subtitle: e.target.value,
-                      })
-                    }
-                  />
-                </FormControl>
                 <FormControl
                   isRequired
                   isInvalid={
@@ -445,11 +453,13 @@ const SermonNotesEditorModal = (props) => {
                       })
                     }
                   />
-                  <FormHelperText>Please follow the usual format 'sn-jul06'</FormHelperText>
+                  <FormHelperText>
+                    Please follow the usual format 'sn-jul06'
+                  </FormHelperText>
                 </FormControl>
                 <FormControl>
                   <FormLabel color="#656565" fontWeight="bold">
-                    Image Link
+                    Image Link (Background only)
                   </FormLabel>
                   <Input
                     id="imageLink"
@@ -459,6 +469,22 @@ const SermonNotesEditorModal = (props) => {
                       setSermonNoteData({
                         ...sermonNoteData,
                         imageLink: e.target.value,
+                      })
+                    }
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel color="#656565" fontWeight="bold">
+                    Image Link (With wordings)
+                  </FormLabel>
+                  <Input
+                    id="sermonSeriesImage"
+                    value={sermonNoteData.sermonSeriesImage}
+                    {...register('sermonSeriesImage')}
+                    onChange={(e) =>
+                      setSermonNoteData({
+                        ...sermonNoteData,
+                        sermonSeriesImage: e.target.value,
                       })
                     }
                   />
