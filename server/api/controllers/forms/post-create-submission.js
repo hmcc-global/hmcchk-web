@@ -164,22 +164,20 @@ module.exports = {
                 submissionData
             );
 
-        await sails.helpers.sendTemplateEmail.with({
-          to: 'no-reply@hongkong.hmcc.net',
-          cc: emailRecipients,
-          subject: 'New Sign-up for ' + formRecord[0].formName,
-          template: 'form-notify-leader-success',
-          templateData: {
-            submissionTime: res.createdAt,
-            fullName:
-              user.fullName || submissionData['fullName'] || 'Not Applicable',
-            email: user.email || submissionData['email'] || 'Not Applicable',
-            phoneNumber:
-              user.phoneNumber ||
-              submissionData['phoneNumber'] ||
-              'Not Applicable',
-          },
-        });
+        if (formRecord[0].parseUserData) {
+          await sails.helpers.parseuserquery.sendSingleUserQuery(res.id, submissionData, emailRecipients);
+        } else {
+          await sails.helpers.sendTemplateEmail.with({
+            to: 'no-reply@hongkong.hmcc.net',
+            cc: emailRecipients,
+            subject: 'New Sign-up for ' + formRecord[0].formName,
+            template: 'form-notify-leader-success',
+            templateData: {
+              submissionTime: res.createdAt,
+              submissionData: submissionData,
+            },
+          });
+        }
       }
 
       // Successfully completed flow

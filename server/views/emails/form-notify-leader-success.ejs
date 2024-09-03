@@ -1,18 +1,90 @@
-<% /* Note: This is injected into `views/layouts/layout-email.ejs` */ %>
-<p style="margin-bottom: 25px">Hi,</p>
-<p style="margin-bottom: 25px">
-  A new person has signed up to this form at <%= submissionTime %>, here are the
-  details:
-</p>
-<br />
-<p style="margin-bottom: 25px">Name: <%= fullName %></p>
-<p style="margin-bottom: 25px">Email: <%= email %></p>
-<p style="margin-bottom: 25px">Phone Number: <%= phoneNumber %></p>
-<br />
-<p style="margin-bottom: 25px">
-  Please check the full record of their submission data in our admin dashboard.
-  And please take the appropriate next step with them, if any. If you do not
-  have access to the dashboard, please contact someone who does. Thank you!
-</p>
-<p style="margin-bottom: 5px">Sincerely,</p>
-<p style="margin-top: 0px">T3CH Team</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Submission Data Table</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      @media (max-width: 600px) {
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+          display: block;
+        }
+        th {
+          display: none;
+        }
+        .key {
+          font-weight: bold;
+        }
+        tr {
+          margin-bottom: 15px;
+        }
+        td {
+          text-align: right;
+          position: relative;
+          padding-left: 50%;
+        }
+        td::before {
+          content: attr(data-label);
+          position: absolute;
+          left: 10px;
+          width: calc(50% - 20px);
+          padding-right: 10px;
+          white-space: nowrap;
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <% /* Note: This is injected into `views/layouts/layout-email.ejs` */ %>
+  <body>
+    <p style="margin-bottom: 25px">Hi,</p>
+    <p style="margin-bottom: 25px">
+      A new person has signed up to this form at <%= submissionTime %>, here are
+      the details:
+    </p>
+    <br />
+
+    <table>
+        <% for (const [key, value] of Object.entries(submissionData)) { %>
+            <% if (value !== null && typeof value !== 'object' && value !== '') { %>
+                <tr>
+                    <td class="key"><%= key %></td>
+                    <td data-label="<%= key %>"><%= value %></td>
+                </tr>
+            <% } %>
+        <% } %>
+      </tbody>
+    </table>
+
+    <p style="margin-bottom: 25px">
+      Please check the full record of their submission data in our admin
+      dashboard. And please take the appropriate next step with them, if any. If
+      you do not have access to the dashboard, please contact someone who does.
+      Thank you!
+    </p>
+    <p style="margin-bottom: 5px">Sincerely,</p>
+    <p style="margin-top: 0px">T3CH Team</p>
+  </body>
+</html>
