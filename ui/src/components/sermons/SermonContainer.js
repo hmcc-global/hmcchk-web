@@ -87,7 +87,7 @@ const SermonContainer = (props) => {
           marginTop="20px"
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`url('${process.env.PUBLIC_URL}/images/sermons/sermons-banner.png')`}
+          bgImage={`url('${process.env.PUBLIC_URL}/images/sermons/sermons-banner.jpg')`}
           bgPosition="center"
           bgSize="cover"
           flex={1}
@@ -96,7 +96,12 @@ const SermonContainer = (props) => {
           px={[8, 10]}
           py={[8, 12]}
         >
-          <Heading size="2xl" color="white" fontWeight="900">
+          <Heading
+            size="3xl"
+            color="white"
+            fontWeight="900"
+            fontFamily="DMSerifDisplay_Italic"
+          >
             Sermons
           </Heading>
         </Box>

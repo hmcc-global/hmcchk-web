@@ -32,6 +32,7 @@ const BeliefsCard = ({ head, body }) => {
           color="#0628A2"
           fontSize="xl"
           textAlign="center"
+          fontFamily="DMSerifDisplay_Regular"
         >
           {head}
         </Text>
@@ -56,6 +57,7 @@ const BeliefsSection = (props) => {
           textAlign="center"
           color="#0628A3"
           mb={5}
+          fontFamily="DMSerifDisplay_Italic"
           id="beliefs"
         >
           {title}
@@ -81,7 +83,11 @@ const BeliefsSection = (props) => {
         </VStack>
       </Box>
       <Center>
-        <Box display={{ base: 'block', lg: 'none' }} w="90%">
+        <Box
+          display={{ base: 'block', lg: 'none' }}
+          w="90%"
+          fontFamily="Manrope"
+        >
           <Accordion allowMultiple>
             <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
               <h2>

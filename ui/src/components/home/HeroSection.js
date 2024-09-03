@@ -1,22 +1,28 @@
 import {
   Flex,
-  VStack,
   Stack,
   Image,
-  useBreakpointValue,
+  Box,
   Heading,
   Container,
   Text,
-  Box,
 } from '@chakra-ui/react';
+import { SocialIcon } from 'react-social-icons';
 import { useEffect, useRef } from 'react';
-// TODO figure out a way to have a central location to edit photo url, blurbs etc.
-// sm = 30em, md = 48em, lg = 62em, xl = 80em, 2xl = "96em"
-// sm = 480px, md = 768px, lg = 992px, xl = 1280px, 2xl = "1536px"
-const heroText = 'Transforming Lives,\nTransforming the World';
+import SubHeroSection from './SubHeroSection';
 
-const HeroSection = ({ anchorTarget }) => {
+const HeroSection = () => {
   const vidRef = useRef();
+  const vidRefMobile = useRef();
+
+  // Define some styling as variable to make editing them easier
+  const headerTextSize = ['2.75rem', '3rem', '4.6rem', '5.75rem'];
+  const headerTextWeight = ['bold', 'semibold', 'semibold'];
+  const headerTextSpacing = ['-3px', '-4px', '-5.5px'];
+  const headerHighlightTextSize = ['1.25em', '1.25em', '1em', '1.1em'];
+  const headerHighlightTextWeight = ['normal', 'normal', 'lighter'];
+  const headerHighlightTextSpacing = ['-2px', '-2.5px', '-5.5px'];
+  const bodyTextSize = { base: '0.925rem', md: '1.2rem' };
 
   useEffect(() => {
     if (vidRef.current) {
@@ -24,157 +30,377 @@ const HeroSection = ({ anchorTarget }) => {
         vidRef.current.play();
       });
     }
-  }, [vidRef]);
+    if (vidRefMobile.current) {
+      vidRefMobile.current.addEventListener('loadedmetadata', (e) => {
+        vidRefMobile.current.play();
+      });
+    }
+  }, [vidRef, vidRefMobile]);
 
   return (
     <>
-      <Flex
-        as="video"
-        ref={vidRef}
-        w="full"
-        h={['85vh', '96vh']}
-        src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
-        loop
-        muted
-        objectFit="cover"
-        justify="center"
-        playsInline
-        sx={{ aspectRatio: '16/9' }}
-      />
-      <Flex
-        w="full"
-        h="100vh"
-        marginTop="-100vh"
-        background="rgba(73, 94, 123, 0.53)"
-        style={{ zIndex: 1 }}
-        position="relative"
-      >
-        <Container
-          maxW="container.lg"
+      <Box position="relative">
+        <Box
+          display={['none', 'none', 'block']}
           w="full"
-          justifyContent="center"
-          display="flex"
+          minH="95vh"
+          overflow="hidden"
+          position="absolute"
         >
-          <VStack
+          <Flex
+            as="video"
+            ref={vidRef}
             w="full"
+            src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
+            loop
+            muted
+            objectFit="cover"
             justify="center"
-            h="100%"
-            px={useBreakpointValue({ base: 4, md: 8 })}
-            spacing={12}
+            playsInline
+            sx={{ aspectRatio: '16/9' }}
+            zIndex="0"
+            position="absolute"
+            top="0"
+            left="350"
+          />
+          <Flex
+            w="full"
+            minH="95.1vh"
+            zIndex="0"
+            background="linear-gradient(to right, rgb(246,250,255,1) 45%, rgba(246,250,255,0) 68%)"
+            position="absolute"
+            sx={{ aspectRatio: '16/9' }}
+            top="0"
+            left="0"
+          />
+          <Flex
+            w="full"
+            minH="95.1vh"
+            zIndex="0"
+            background="linear-gradient(to top, rgb(246,250,255, 1) 10%, rgba(246,250,255,0) 25%)"
+            position="absolute"
+            sx={{ aspectRatio: '16/9' }}
+            top="0"
+            left="0"
+          />
+        </Box>
+
+        {/* Middle layer for effect */}
+        <Flex
+          w="full"
+          minH={['85vh', '85vh', '95vh']}
+          zIndex="1"
+          position="absolute"
+          flexDir="column"
+          justifyContent={['space-evenly', 'space-evenly', 'flex-start']}
+          px={[0, 0, '3%']}
+          pt={[0, -3, '12vh', '12vh']}
+          mixBlendMode="exclusion"
+          display={['none', 'none', 'flex']}
+        >
+          <Container
+            display="flex"
+            maxW="container.xl"
+            justifyContent="flex-start"
           >
             <Stack
-              w="full"
-              align="center"
-              spacing={6}
-              justifyContent="center"
-              height="90%"
-              marginTop="6em"
+              w="100%"
+              spacing={[1, 1, 5]}
+              align="flex-start"
+              justifyContent="start"
+              fontFamily="Manrope"
+              fontSize={bodyTextSize}
+              letterSpacing="-0.02em"
+              color="#4A6EEB"
             >
-              <Heading
-                color="white"
-                as="h1"
-                fontSize={{ base: '1.5em', md: '3em' }}
+              <Image
+                display={['none', 'none', 'block']}
+                src={process.env.PUBLIC_URL + '/images/home/ripple-blue.png'}
+                h="2em"
+                opacity="0"
+              />
+              <Text
+                display={['none', 'none', 'block']}
                 textAlign="center"
-                fontWeight={600}
-                whiteSpace="pre-wrap"
-                alignSelf="center"
+                fontWeight="bold"
+                opacity="0"
               >
-                {heroText}
-              </Heading>
-              <Image src={process.env.PUBLIC_URL + '/images/home/ripple.png'} />
+                Harvest Mission Community Church of Hong Kong
+              </Text>
+
+              {/* Hide the text with exclusion effect*/}
               <Stack
+                spacing={[1, 0]}
+                px={['11%', '5%', '0']}
                 w="full"
-                align="center"
-                marginTop="-1rem !important"
-                rowGap={12}
+                textAlign={['center', 'center', 'left']}
               >
-                <Box>
-                  <Heading
-                    color="white"
-                    as="h4"
-                    textAlign="center"
-                    whiteSpace="pre-wrap"
-                    alignSelf="center"
-                    fontSize={{ base: '0.8em', md: '1.2em' }}
-                    fontWeight={600}
-                  >
-                    Harvest Mission Community Church
-                  </Heading>
-                  <Heading
-                    color="white"
-                    as="h4"
-                    fontSize={{ base: '0.8em', md: '1.2em' }}
-                    textAlign="center"
-                    whiteSpace="pre-wrap"
-                    alignSelf="center"
-                    fontWeight={600}
-                  >
-                    of Hong Kong
-                  </Heading>
-                </Box>
-                <Box
-                  style={{
-                    background: 'rgba(27, 53, 102, 0.8)',
-                  }}
-                  padding={{ base: '0px', md: '8px' }}
-                  borderRadius="7px"
+                <Heading
+                  fontSize={headerTextSize}
+                  fontWeight={headerTextWeight}
+                  letterSpacing={headerTextSpacing}
+                  color="black"
+                  lineHeight="1.05"
                 >
+                  Transforming{' '}
                   <Text
-                    color="white"
-                    display={{ base: 'none', md: 'flex' }}
-                    style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
-                    fontSize="16px"
+                    as="span"
+                    color={['#000000', '#000000', '#ffffff']}
+                    fontFamily="DMSerifDisplay_Italic"
+                    fontSize={headerHighlightTextSize}
+                    fontWeight={headerHighlightTextWeight}
+                    letterSpacing={headerHighlightTextSpacing}
+                    opacity={['1', '1', '1']}
                   >
-                    Every Sunday at 10AM HKT | Transformation Center - Unit 02,
-                    22/F Crocodile Center, Kwun Tong & Online
+                    Lives,
                   </Text>
-                </Box>
+                </Heading>
+                <Heading
+                  fontSize={headerTextSize}
+                  fontWeight={headerTextWeight}
+                  letterSpacing={headerTextSpacing}
+                  color="black"
+                  lineHeight="1.05"
+                >
+                  Transforming{' '}
+                  <Text
+                    as="span"
+                    color={['#000000', '#000000', '#ffffff']}
+                    fontFamily="DMSerifDisplay_Italic"
+                    fontSize={headerHighlightTextSize}
+                    fontWeight={headerHighlightTextWeight}
+                    letterSpacing={headerHighlightTextSpacing}
+                    opacity={['1', '1', '1']}
+                  >
+                    the World
+                  </Text>
+                </Heading>
               </Stack>
             </Stack>
-            <Box
-              style={{
-                background: 'rgba(27, 53, 102, 0.8)',
-              }}
-              padding={{ base: '8px', md: '0px' }}
-              position="relative"
-              bottom="4%"
+          </Container>
+          <Flex
+            display={['flex', 'flex', 'none']}
+            as="video"
+            w="full"
+            h="auto"
+            src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
+            loop
+            muted
+            objectFit="cover"
+            justify="center"
+            playsInline
+            sx={{ aspectRatio: '16/9' }}
+            mt={[7, 7, 5]}
+          ></Flex>
+          <Container
+            display="flex"
+            maxW="container.xl"
+            justifyContent="flex-start"
+            mt={[7, 7, 5]}
+            overflowX="hidden"
+            opacity="0"
+          >
+            <Stack
+              w="100%"
+              spacing={[1, 1, 5]}
+              fontFamily="Manrope"
+              fontSize={bodyTextSize}
+              textAlign={['right', 'right', 'left']}
+              letterSpacing="-0.02em"
+              color="#4A6EEB"
             >
-              <Text
-                color="white"
-                display={{ base: 'flex', md: 'none' }}
-                justifyContent="center"
-                style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
-                fontSize="12px"
-              >
-                Every Sunday at 10AM HKT
+              <Text whiteSpace="pre">
+                Every Sunday at <b>10AM</b> HKT
               </Text>
-              <Text
-                color="white"
-                display={{ base: 'flex', md: 'none' }}
-                style={{ textShadow: '0px 3.2px 32px rgba(0, 0, 0, 0.25)' }}
-                fontSize="12px"
-                align="center"
-              >
-                Transformation Center - Unit 02, 22/F Crocodile Center, Kwun
-                Tong & Online
+              <Text flexDir="column">
+                <Text fontWeight="bold">Transformation Center</Text>
+                <Text>Unit 2, 22/F Crocodile Center, Kwun Tong & Online</Text>
               </Text>
-            </Box>
-            <Stack position="relative" bottom="6%" width="35px" height="35px">
-              <Image
-                src={process.env.PUBLIC_URL + '/images/home/DownArrow.png'}
-                style={{ cursor: 'pointer' }}
-                onClick={() =>
-                  anchorTarget.current.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start',
-                    inline: 'nearest',
-                  })
-                }
-              />
+              <Stack
+                spacing={[0, 0, -3]}
+                pl={[0, 0, '40%']}
+                flexDir={['row', 'row', 'column']}
+                justifyContent={['flex-end', 'flex-end', 'flex-start']}
+              >
+                <SocialIcon
+                  target="_blank"
+                  bgColor="none"
+                  fgColor="#4A6EEB"
+                  url="https://www.instagram.com/hmcc_hk/?hl=en"
+                />
+                <SocialIcon
+                  target="_blank"
+                  bgColor="none"
+                  fgColor="#4A6EEB"
+                  url="https://open.spotify.com/user/hmccofhk?si=bd64100596904a95"
+                />
+                <SocialIcon
+                  target="_blank"
+                  bgColor="none"
+                  fgColor="#4A6EEB"
+                  url="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q"
+                />
+              </Stack>
             </Stack>
-          </VStack>
-        </Container>
-      </Flex>
+          </Container>
+        </Flex>
+
+        <Flex
+          w="full"
+          minH={['85vh', '85vh', '95vh']}
+          zIndex="1"
+          position="relative"
+          flexDir="column"
+          justifyContent={['space-evenly', 'space-evenly', 'flex-start']}
+          px={[0, 0, '3%']}
+          pt={[0, -3, '12vh', '12vh']}
+        >
+          <Container
+            display="flex"
+            maxW="container.xl"
+            justifyContent="flex-start"
+          >
+            <Stack
+              w="100%"
+              spacing={[1, 1, 5]}
+              align="flex-start"
+              justifyContent="start"
+              fontFamily="Manrope"
+              fontSize={bodyTextSize}
+              letterSpacing="-0.02em"
+              color="#4A6EEB"
+            >
+              <Image
+                display={['none', 'none', 'block']}
+                src={process.env.PUBLIC_URL + '/images/home/ripple-blue.png'}
+                h="2em"
+              />
+              <Text
+                display={['none', 'none', 'block']}
+                textAlign="center"
+                fontWeight="bold"
+              >
+                Harvest Mission Community Church of Hong Kong
+              </Text>
+
+              {/* Hide the text with exclusion effect*/}
+              <Stack
+                spacing={[1, 0]}
+                px={['11%', '5%', '0']}
+                w="full"
+                textAlign={['center', 'center', 'left']}
+              >
+                <Heading
+                  fontSize={headerTextSize}
+                  fontWeight={headerTextWeight}
+                  letterSpacing={headerTextSpacing}
+                  color="black"
+                  lineHeight="1.05"
+                >
+                  Transforming{' '}
+                  <Text
+                    as="span"
+                    color={['#000000', '#000000', '#ffffff']}
+                    fontFamily="DMSerifDisplay_Italic"
+                    fontSize={headerHighlightTextSize}
+                    fontWeight={headerHighlightTextWeight}
+                    letterSpacing={headerHighlightTextSpacing}
+                    opacity={['1', '1', '0']}
+                  >
+                    Lives,
+                  </Text>
+                </Heading>
+                <Heading
+                  fontSize={headerTextSize}
+                  fontWeight={headerTextWeight}
+                  letterSpacing={headerTextSpacing}
+                  color="black"
+                  lineHeight="1.05"
+                >
+                  Transforming{' '}
+                  <Text
+                    as="span"
+                    color={['#000000', '#000000', '#ffffff']}
+                    fontFamily="DMSerifDisplay_Italic"
+                    fontSize={headerHighlightTextSize}
+                    fontWeight={headerHighlightTextWeight}
+                    letterSpacing={headerHighlightTextSpacing}
+                    opacity={['1', '1', '0']}
+                  >
+                    the World
+                  </Text>
+                </Heading>
+              </Stack>
+            </Stack>
+          </Container>
+          <Flex
+            display={['flex', 'flex', 'none']}
+            as="video"
+            ref={vidRefMobile}
+            w="full"
+            h="auto"
+            src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
+            loop
+            muted
+            objectFit="cover"
+            justify="center"
+            playsInline
+            sx={{ aspectRatio: '16/9' }}
+            mt={[2, -3, 5]}
+          ></Flex>
+          <Container
+            display="flex"
+            maxW="container.xl"
+            justifyContent="flex-start"
+            mt={[2, -3, 5]}
+            overflowX="hidden"
+          >
+            <Stack
+              w="100%"
+              spacing={[1, 1, 5]}
+              fontFamily="Manrope"
+              fontSize={bodyTextSize}
+              textAlign={['right', 'right', 'left']}
+              letterSpacing="-0.02em"
+              color="#4A6EEB"
+            >
+              <Text whiteSpace="pre">
+                Every Sunday at <b>10AM</b> HKT
+              </Text>
+              <Text flexDir="column">
+                <Text fontWeight="bold">Transformation Center</Text>
+                <Text>Unit 2, 22/F Crocodile Center, Kwun Tong & Online</Text>
+              </Text>
+              <Stack
+                spacing={[0, 0, -3]}
+                pl={[0, 0, '40%']}
+                flexDir={['row', 'row', 'column']}
+                justifyContent={['flex-end', 'flex-end', 'flex-start']}
+              >
+                <SocialIcon
+                  target="_blank"
+                  bgColor="none"
+                  fgColor="#4A6EEB"
+                  url="https://www.instagram.com/hmcc_hk/?hl=en"
+                />
+                <SocialIcon
+                  target="_blank"
+                  bgColor="none"
+                  fgColor="#4A6EEB"
+                  url="https://open.spotify.com/user/hmccofhk?si=bd64100596904a95"
+                />
+                <SocialIcon
+                  target="_blank"
+                  bgColor="none"
+                  fgColor="#4A6EEB"
+                  url="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q"
+                />
+              </Stack>
+            </Stack>
+          </Container>
+        </Flex>
+      </Box>
+      <SubHeroSection />
     </>
   );
 };

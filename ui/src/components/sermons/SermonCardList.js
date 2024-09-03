@@ -81,7 +81,7 @@ const SermonCardList = ({ allSermons }, props) => {
     <>
       <Box>
         <HStack marginTop={[4, 8]} spacing="auto">
-          <Heading>Past Sermons</Heading>
+          <Heading fontFamily="DMSerifDisplay_Italic">Past Sermons</Heading>
           <Button
             width="30vw"
             display={{ base: 'flex', md: 'none' }}

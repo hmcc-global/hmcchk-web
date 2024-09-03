@@ -1,18 +1,17 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, useBreakpointValue } from '@chakra-ui/react';
 import { useState, useEffect, useRef } from 'react';
-import AboutSection from './AboutSection';
 import EventsSection from './EventsSection';
 import HeroSection from './HeroSection';
-import LifeGroupSection from './LifeGroupSection';
-import NewHereSection from './NewHereSection';
 import PopupContainer from './PopupContainer';
-import HelloSermonSection from './HelloSermonSection';
 import { customAxios as axios } from '../helpers/customAxios';
-import SaturateVisionSection from './SaturateVisionSection';
+import VisionMissionSection from './VisionMissionSection';
+import VisionMissionSectionMobile from './VisionMissionSectionMobile';
+import ExperienceBiblicalCommunity from './ExperienceBiblicalCommunity';
 
 const HomeContainer = (props) => {
   const { user } = props;
   const sermonRef = useRef(null);
+  const isMobile = useBreakpointValue({ base: true, md: false });
   const [popupInfo, setPopupInfo] = useState([]);
   const getData = async () => {
     try {
@@ -23,7 +22,7 @@ const HomeContainer = (props) => {
     }
   };
 
-  const [isOpen, setIsOpen] = useState(true);
+  const [_isOpen, setIsOpen] = useState(true);
   useEffect(() => {
     if (Object.keys(user).length !== 0) setIsOpen(false);
     getData();
@@ -39,14 +38,12 @@ const HomeContainer = (props) => {
     buttonColor: 'teal',
   };
   return (
-    <Flex direction="column">
-      <HeroSection anchorTarget={sermonRef} />
-      <HelloSermonSection ref={sermonRef} />
-      <AboutSection />
-      <SaturateVisionSection />
+    <Flex direction="column" bgColor="#F6FAFF">
+      <HeroSection />
       <EventsSection />
-      <LifeGroupSection />
-      <NewHereSection />
+
+      {isMobile ? <VisionMissionSectionMobile /> : <VisionMissionSection />}
+      <ExperienceBiblicalCommunity />
       {popup.flag && <PopupContainer props={popup} />}
     </Flex>
   );

@@ -188,6 +188,7 @@ const EventsPage = (props) => {
         pt="16"
         fontWeight="900"
         textAlign="center"
+        fontFamily="DMSerifDisplay_Italic"
       >
         Events
       </Heading>
@@ -195,6 +196,7 @@ const EventsPage = (props) => {
         fontSize={{ base: 'md', md: 'xl' }}
         textAlign="center"
         fontWeight="600"
+        fontFamily="Manrope"
         mb="10"
       >
         Check out what's happening at HMCC of Hong Kong!

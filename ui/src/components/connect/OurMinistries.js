@@ -9,20 +9,26 @@ const OurMinistries = (props) => {
         fontWeight={800}
         textAlign="center"
         mb={[0, 2]}
+        fontFamily="DMSerifDisplay_Italic"
       >
         OUR MINISTRIES
       </Heading>
-      <Text fontSize={['0.75em', '1.5em']} textAlign="center" mb={6}>
+      <Text
+        fontSize={['0.75em', '1.5em']}
+        textAlign="center"
+        mb={6}
+        fontFamily="Manrope"
+      >
         At Harvest Mission Community Church, we are actively reaching out to
         people from all walks of life, specifically college students, working
         adults, and families.
       </Text>
-      <SimpleGrid columns={[1, 3]} spacing={4}>
+      <SimpleGrid columns={[1, 3]} spacing={4} fontFamily="Manrope">
         <Box
           h={[141, 340]}
           p={2}
           borderRadius="20"
-          bgImage={`linear-gradient(180deg, rgba(118, 228, 247, 0.7) 0%, rgba(44, 82, 130, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/undergrad.png')`}
+          bgImage={`linear-gradient(180deg, rgba(118, 228, 247, 0.7) 0%, rgba(44, 82, 130, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/undergrad.jpg')`}
           bgPosition="center"
           bgSize="cover"
           shadow="lg"
@@ -32,7 +38,7 @@ const OurMinistries = (props) => {
           <Heading
             as="h4"
             mt={[3, 12]}
-            fontSize={['1.5em', '1.5em', '2em']}
+            fontSize={['1.4em', '1.5em', '2em']}
             fontWeight={700}
           >
             UNIVERSITY STUDENTS
@@ -58,7 +64,7 @@ const OurMinistries = (props) => {
             as="h4"
             p={2}
             mt={[0, 2, 10]}
-            fontSize={['1.5em', '1.5em', '2em']}
+            fontSize={['1.4em', '1.5em', '2em']}
             fontWeight={700}
           >
             SINGLE WORKING ADULTS
@@ -83,7 +89,7 @@ const OurMinistries = (props) => {
         >
           <Heading
             as="h4"
-            fontSize={['1.5em', '1.5em', '2em']}
+            fontSize={['1.4em', '1.5em', '2em']}
             fontWeight={700}
             mt={[3, 10, 14]}
           >
@@ -95,7 +101,6 @@ const OurMinistries = (props) => {
           </Text>
         </Box>
       </SimpleGrid>
-      {/* <SimpleGrid ml={40} mr={40} mt={5} columns={[1, 2]}> */}
       <SimpleGrid
         columns={[1, 2]}
         ml={[0, 20, 40]}
@@ -117,7 +122,7 @@ const OurMinistries = (props) => {
         >
           <Heading
             as="h4"
-            fontSize={['1.5em', '1.5em', '2em']}
+            fontSize={['1.4em', '1.5em', '2em']}
             fontWeight={700}
             mt={[0, 6, 8, 10]}
           >
@@ -134,7 +139,7 @@ const OurMinistries = (props) => {
           p={[0, 2, 4, 8]}
           borderWidth="1px"
           borderRadius="20"
-          bgImage={`linear-gradient(180deg, rgba(233, 223, 132, 0.7) 0%, rgba(170, 102, 0, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/kid.jpeg')`}
+          bgImage={`linear-gradient(180deg, rgba(233, 223, 132, 0.7) 0%, rgba(170, 102, 0, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/kid.jpg')`}
           bgPosition="center"
           bgSize="cover"
           shadow="lg"
@@ -144,7 +149,7 @@ const OurMinistries = (props) => {
           <Heading
             as="h4"
             mt={[6, 12]}
-            fontSize={['1.5em', '1.5em', '2em']}
+            fontSize={['1.4em', '1.5em', '2em']}
             fontWeight={700}
           >
             CHILDREN

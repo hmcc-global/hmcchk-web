@@ -11,7 +11,7 @@ import ConnectPage from './connect/ConnectPage';
 import PrivateRoute from './helpers/PrivateRoute';
 import Signup from './auth/Signup';
 import HomeContainer from './home/HomeContainer';
-import FooterContainer from './footer/FooterContainer';
+import Footer from './footer/Footer';
 import ConfirmEmailPage from './email/ConfirmEmailPage';
 import UserProfileContainer from './userProfile/UserProfileContainer';
 import CompleteUserProfileContainer from './userProfile/CompleteUserProfile';
@@ -20,7 +20,6 @@ import ClearCache from './helpers/ClearCache';
 import RecoverPassword from './auth/RecoverPassword';
 import ResetPassword from './auth/ResetPassword';
 import PasswordSubmitted from './auth/PasswordSubmitted';
-import ConnectFloatButton from './connect-float/ConnectFloatButton';
 import UserFormContainer from './forms/UserFormContainer';
 import ErrorPage from './screens/ErrorPage';
 import ScrollToTop from './helpers/ScrollToTop';
@@ -38,17 +37,20 @@ import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementContainer';
 import AdminLeadershipTeamContainer from './admin/leadershipTeam/AdminLeadershipTeamContainer';
 import AdminSermonNotesContainer from './admin/sermonNotes/AdminSermonNotesContainer';
-import PrayerFloatButton from './connect-prayer/PrayerFLoatButton';
 import SermonNotesContainer from './sermon-notes/SermonNotesContainer';
 
 const MainContainer = () => {
   return (
     <chakra.main
-      maxH="100vh"
+      maxH="100%"
       flexGrow={1}
       bg="#ffffff"
       overflowY="auto"
       id="main-container"
+      overflowX="hidden"
+      // Added to allow the navbar to overlay the container with minimal offset
+      mt="7vh"
+      mb={['6vh', '6vh', 0, 0]}
     >
       <ScrollToTop />
       <Switch>
@@ -289,9 +291,7 @@ const MainContainer = () => {
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
-      <FooterContainer />
-      <PrayerFloatButton />
-      <ConnectFloatButton />
+      <Footer />
     </chakra.main>
   );
 };

@@ -30,7 +30,7 @@ const Picture = ({ image, year, text }) => {
       </Text>
       <Text
         color="black"
-        fontFamily="Manrope"
+        fontFamily="DMSerifDisplay_Italic"
         fontWeight={400}
         textAlign="center"
         fontSize={{ base: 'smaller', md: 'md' }}
@@ -52,12 +52,13 @@ const MissionSection = (props) => {
             textColor="#0628A3"
             fontSize={['3xl', '5xl']}
             fontWeight={700}
+            fontFamily="DMSerifDisplay_Italic"
             paddingBottom={2}
             id="our-heart-for-missions"
           >
             {title}
           </Heading>
-          <Text textAlign="center" px="1em">
+          <Text textAlign="center" px="1em" fontFamily="DMSerifDisplay_Regular">
             {blurb.blurb[1]}
           </Text>
         </Box>
@@ -69,6 +70,7 @@ const MissionSection = (props) => {
           <Box backgroundColor="rgba(238, 250, 255, 1)" px={{ base: 1, md: 3 }}>
             <Heading
               textAlign="left"
+              fontFamily="DMSerifDisplay_Italic"
               textColor="#0628A3"
               fontSize={['xl', '3xl']}
               fontWeight={700}
@@ -88,6 +90,7 @@ const MissionSection = (props) => {
         >
           <Box px={{ base: 1, md: 3 }}>
             <Heading
+              fontFamily="DMSerifDisplay_Italic"
               textAlign="left"
               textColor="#0628A3"
               fontSize={['xl', '3xl']}
@@ -96,7 +99,12 @@ const MissionSection = (props) => {
             >
               {blurb.title[3]}
             </Heading>
-            <Text fontWeight={700} fontSize={['md', 'xl']} pb={{ base: 1 }}>
+            <Text
+              fontWeight={700}
+              fontSize={['md', 'xl']}
+              pb={{ base: 1 }}
+              fontFamily="DMSerifDisplay_Regular"
+            >
               {blurb.heading[1]}
             </Text>
             <Text paddingBottom="2em" textAlign="justify">
@@ -183,6 +191,7 @@ const MissionSection = (props) => {
               fontWeight={700}
               fontSize={['md', 'xl']}
               marginTop={5}
+              fontFamily="DMSerifDisplay_Regular"
               pb={{ base: 1 }}
             >
               {blurb.heading[2]}
@@ -201,7 +210,11 @@ const MissionSection = (props) => {
             my={5}
           ></Box>
           <Box px={{ base: 1, md: 3 }}>
-            <Text fontWeight={700} pb={{ base: 1 }}>
+            <Text
+              fontWeight={700}
+              pb={{ base: 1 }}
+              fontFamily="DMSerifDisplay_Regular"
+            >
               <em>{blurb.heading[3]}</em>
             </Text>
             <Text marginBottom={7}>{blurb.blurb[6]}</Text>

@@ -15,7 +15,7 @@ const PictureStory = ({ image, text }) => {
         mb={3}
       ></Box>
       <Box w="100%" bgColor="#E9E9E9" px={10} py={1}>
-        <Text color="black" textAlign="center">
+        <Text color="black" textAlign="center" fontFamily="Manrope">
           {text}
         </Text>
       </Box>
@@ -36,6 +36,7 @@ const StorySection = (props) => {
         textAlign="center"
         mb={5}
         id="our-story"
+        fontFamily="DMSerifDisplay_Italic"
       >
         {title}
       </Heading>
