@@ -31,7 +31,7 @@ async function getUnreadEmailFromMailbox(mailbox) {
     }
     for (const i in allUnreadEmails) {
       const msg = allUnreadEmails[i];
-      // await client.messageFlagsAdd({ uid: msg.uid }, ['\\Seen'], { uid: true });
+      await client.messageFlagsAdd({ uid: msg.uid }, ['\\Seen'], { uid: true });
     }
   } catch (err) {
     console.log(err);

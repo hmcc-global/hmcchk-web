@@ -54,7 +54,9 @@ module.exports = {
       if (groupByKeys.length === 0) return exits.success([]);
 
       for (const key of groupByKeys) {
-        const userData = submissionData[key];
+        // handle instances when submissionData contains fields with different naming conventions (e.g. Campus VS campus)
+        const field = Object.keys(submissionData).find(userDataField => userDataField.toLowerCase() === key.toLowerCase());
+        const userData = submissionData[field];
         const groupedLeadershipTeam = groupLeadershipTeamsByKey(latestLeadershipData, key);
         // eslint-disable-next-line eqeqeq
         if (groupedLeadershipTeam[userData] != null) {
