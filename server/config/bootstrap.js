@@ -28,7 +28,7 @@ module.exports.bootstrap = async function () {
   sails.log('Initialising Send Batch Parse User Email Cron');
   // every Saturday at 7AM
   schedule.scheduleJob(
-    '0 0 7 * * 7',
+    '0 0 7 * * 6',
     async () => await sails.helpers.parseuserquery.sendBatchUsersQuery()
   );
 
