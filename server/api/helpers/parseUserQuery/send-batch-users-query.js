@@ -5,7 +5,7 @@ const fs = require('fs');
 module.exports = {
   friendlyName: 'Send Batch User Query',
 
-  description: 'Send Emails latest Leadership Teams to request User data',
+  description: 'Send Emails to latest Leadership Teams to request User data',
 
   inputs: {
   },
@@ -28,7 +28,7 @@ module.exports = {
 
     // modify Excel by populating the lifestage list
     // eslint-disable-next-line eqeqeq
-    const allLifestage = [...new Set(latestLeadershipTeams.map(x => x.lifestage).filter(x => x!= null && x!== ''))];
+    const allLifestage = [...new Set(latestLeadershipTeams.map(x => x.lifestage).filter(x => x != null && x !== ''))];
 
     const workbook = new xlsx.Workbook();
     await workbook.xlsx.readFile('assets/attachments/batch_user_data_query.xlsx');
@@ -58,7 +58,7 @@ module.exports = {
           await sails.helpers.sendTemplateEmail.with({
             to: team.leaderEmails,
             subject: `[ACTION]: Batch User Data Query: ${team.lifeGroup}`,
-            template: 'email-batch-parse-query',
+            template: 'email-parse-user-query',
             attachments: [
               {
                 filename: 'query.xlsx',

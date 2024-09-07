@@ -28,6 +28,10 @@ module.exports = {
       type: 'boolean',
       defaultsTo: true,
     },
+    parseUserData: {
+      type: 'boolean',
+      defaultsTo: false,
+    },
     alertType: {
       type: 'string',
     },
