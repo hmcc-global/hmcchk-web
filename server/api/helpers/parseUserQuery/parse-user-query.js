@@ -3,8 +3,8 @@ const xlsx = require('node-xlsx');
 const verifyUserData = (userData) => {
   return (
     // eslint-disable-next-line eqeqeq
-    userData[0] != null && userData[1] != null && userData[2] != null && userData[3] != null &&
-    userData[0] !== '' && userData[1] !== '' && userData[2] !== '' && userData[3] !== ''
+    userData[0] != null && userData[1] != null && userData[2] != null && userData[3] != null && userData[4] != null &&
+    userData[0] !== '' && userData[1] !== '' && userData[2] !== '' && userData[3] !== '' && userData[4] !== ''
   );
 };
 
@@ -19,7 +19,7 @@ const parseWorksheet = (worksheet, isBatch) => {
   const rawData = worksheet.data;
   // eslint-disable-next-line eqeqeq
   if (rawData == null) return {};
-  const data = rawData.filter((e, i) => i < 5 || rawData[i].length === 4);
+  const data = rawData.filter((e, i) => i < 5 || rawData[i].length === 5);
 
   const lifeGroupName = isBatch ? data[1][1] : data[0][1];
   let lifeGroupId;
@@ -27,7 +27,7 @@ const parseWorksheet = (worksheet, isBatch) => {
   if (isBatch) {
     lifeGroupId = data[0][1];
     for (let i = 4; i < data.length; i++) {
-      if (data[i].length !== 4) continue;
+      if (data[i].length !== 5) continue;
 
       const userData = data[i];
       if (verifyUserData(userData)) {
@@ -35,18 +35,20 @@ const parseWorksheet = (worksheet, isBatch) => {
           name: userData[0],
           phoneNumber: userData[1],
           email: userData[2],
-          lifestage: userData[3]
+          lifestage: userData[3],
+          campus: userData[4],
         });
       }
     }
   } else {
     const userData = data[3];
-    if (userData.length === 4 && verifyUserData(userData)) {
+    if (userData.length === 5 && verifyUserData(userData)) {
       users.push({
         name: userData[0],
         phoneNumber: userData[1],
         email: userData[2],
-        lifestage: userData[3]
+        lifestage: userData[3],
+        campus: userData[4],
       });
     }
   }
@@ -81,7 +83,8 @@ async function updateUserInfo(users, lifeGroup) {
       _id: user[0].id,
     }).set({
       lifestage: updateUserData.lifestage,
-      lifeGroup: lifeGroup
+      lifeGroup: lifeGroup,
+      campus: updateUserData.campus,
     });
     // eslint-disable-next-line eqeqeq
     if (result == null) {

@@ -24,21 +24,31 @@ module.exports = {
     if (latestLeadershipTeams == null || latestLeadershipTeams.length === 0) return exits.success();
 
     const todayMinus3Weeks = DateTime.now().plus({ weeks: -3 });
+    // TODO-aparedan: Only trigger once, right now this will trigger every Saturday after the 3rd Saturday
+    // TODO-aparedan: How to filter out invalid LGs
     const filteredTeams = latestLeadershipTeams.filter(i => DateTime.fromISO(i.seasonFrom) <= todayMinus3Weeks);
 
     // modify Excel by populating the lifestage list
     // eslint-disable-next-line eqeqeq
     const allLifestage = [...new Set(latestLeadershipTeams.map(x => x.lifestage).filter(x => x != null && x !== ''))];
+    // eslint-disable-next-line eqeqeq
+    const allCampus = [...new Set(latestLeadershipTeams.map(x => x.campus).filter(x => x != null && x !== ''))];
 
     const workbook = new xlsx.Workbook();
     await workbook.xlsx.readFile('assets/attachments/batch_user_data_query.xlsx');
     const worksheet = workbook.getWorksheet('Sheet2');
 
-    // set the lifestage using latest list
-    for (let i = 0; i < allLifestage.length; i++) {
+    // set the lifestage and campus using latest list
+    for (let i = 0; i < Math.max(allCampus.length, allLifestage.length); i++) {
       const rowIndex = i + 2;
       const row = worksheet.getRow(rowIndex);
-      row.values = ['', allLifestage[i]];
+
+      // eslint-disable-next-line eqeqeq
+      const lifestage = allLifestage[i] == null ? '' : allLifestage[i];
+      // eslint-disable-next-line eqeqeq
+      const campus = allCampus[i] == null ? '' : allCampus[i];
+
+      row.values = ['', lifestage, campus];
       row.commit();
     }
 

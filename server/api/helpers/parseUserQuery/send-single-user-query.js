@@ -39,21 +39,25 @@ module.exports = {
     const allLifestage = [...new Set(latestLeadershipTeams.map(x => x.lifestage).filter(x => x != null && x !== ''))];
     // eslint-disable-next-line eqeqeq
     const allLifeGroups = [...new Set(latestLeadershipTeams.map(x => x.lifeGroup).filter(x => x != null && x !== ''))];
+    // eslint-disable-next-line eqeqeq
+    const allCampus = [...new Set(latestLeadershipTeams.map(x => x.campus).filter(x => x != null && x !== ''))];
 
     const workbook = new xlsx.Workbook();
     await workbook.xlsx.readFile('assets/attachments/single_user_data_query.xlsx');
     const worksheet = workbook.getWorksheet('Sheet2');
 
     // set the lifeGroup and lifestage using latest list
-    for (let i = 0; i < Math.max(allLifeGroups.length, allLifestage.length); i++) {
+    for (let i = 0; i < Math.max(allLifeGroups.length, allLifestage.length, allCampus.length); i++) {
       const rowIndex = i + 2;
       const row = worksheet.getRow(rowIndex);
       // eslint-disable-next-line eqeqeq
       const lifeGroup = allLifeGroups[i] == null ? '' : allLifeGroups[i];
       // eslint-disable-next-line eqeqeq
       const lifestage = allLifestage[i] == null ? '' : allLifestage[i];
+      // eslint-disable-next-line eqeqeq
+      const campus = allCampus[i] == null ? '' : allCampus[i];
 
-      row.values = [lifeGroup, lifestage];
+      row.values = [lifeGroup, lifestage, campus];
       row.commit();
     }
 
@@ -61,8 +65,14 @@ module.exports = {
     const fileName = `assets/attachments/${submissionId}.xlsx`;
     const firstWorksheet = workbook.getWorksheet('Sheet1');
     const rowToFill = firstWorksheet.getRow(5);
-    rowToFill.values = [submissionData.fullName, submissionData.phoneNumber, submissionData.email, ''];
+    const userPhone = submissionData.phoneNumber || submissionData['Phone Number'];
+    rowToFill.values = [submissionData.fullName, userPhone, submissionData.email, '', ''];
     rowToFill.getCell('D').fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor:{argb:'00FFFF'},
+    };
+    rowToFill.getCell('E').fill = {
       type: 'pattern',
       pattern: 'solid',
       fgColor:{argb:'00FFFF'},
