@@ -54,6 +54,16 @@ module.exports = {
       example: 'Nola Thacker',
     },
 
+    inReplyTo: {
+      description: 'Message-Id of the email thread, used to reply to emails',
+      type: 'string',
+    },
+
+    references: {
+      description: 'Array list of Message-Id',
+      type: 'ref',
+    },
+
     subject: {
       description: 'The subject of the email.',
       example: 'Hello there.',
@@ -133,6 +143,8 @@ module.exports = {
     templateData,
     to,
     toName,
+    inReplyTo,
+    references,
     subject,
     from,
     fromName,
@@ -248,18 +260,20 @@ module.exports = {
           ? ''
           : sails.config.environment === 'staging'
           ? '[FROM STAGING] '
-          : '[FROM LOCALHOST] ';
+          : '';
       const mailOptions = {
         from: process.env.EMAIL_FROM, // if using Gmail, "from" gets set to the authenticated email
         to: to,
         cc: cc,
         bcc: bcc,
+        inReplyTo: inReplyTo,
+        references: references,
         subject: subjectLinePrefix + subject,
         html: htmlEmailContents,
         attachments,
       };
 
-      transporter.sendMail(mailOptions, function (error, info) {
+      transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
           sails.log(error);
         } else {

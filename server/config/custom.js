@@ -21,6 +21,18 @@ module.exports.custom = {
    * > but it can also be used for user-uploaded images, webhooks, etc.      *
    *                                                                         *
    **************************************************************************/
+
+  imapConfig: {
+    auth: {
+      user: process.env.EMAIL_READ_USER,
+      pass: process.env.EMAIL_PWD,
+    },
+    host: 'imap.gmail.com',
+    port: 993,
+    secure: true,
+    logger: false,
+  },
+
   baseUrl: "http://localhost:3000",
 
   /***************************************************************************
@@ -74,6 +86,11 @@ module.exports.custom = {
     'Campus/Lifestage' : ['campus', 'lifestage'],
     'Custom': [],
     'None': [],
+  },
+
+  parseUserMailbox: {
+    'single': 'Single Parse User Query',
+    'batch': 'Batch Parse User Query'
   },
 
   // Whether to require proof of email address ownership any time a new user
