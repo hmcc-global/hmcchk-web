@@ -174,13 +174,7 @@ module.exports = {
             template: 'form-notify-leader-success',
             templateData: {
               submissionTime: res.createdAt,
-              fullName:
-                user.fullName || submissionData['fullName'] || 'Not Applicable',
-              email: user.email || submissionData['email'] || 'Not Applicable',
-              phoneNumber:
-                user.phoneNumber ||
-                submissionData['phoneNumber'] ||
-                'Not Applicable',
+              submissionData: submissionData,
             },
           });
         }
