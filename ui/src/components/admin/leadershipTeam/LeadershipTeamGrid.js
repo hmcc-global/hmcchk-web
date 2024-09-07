@@ -6,6 +6,25 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import CustomDateEditor from '../ag-grid-editors/CustomDateEditor.js';
 
+const tMinusOneDay = DateTime.now().plus({ days: -1 }).startOf('day');
+const tPlusOneDay = DateTime.now().plus({ days: 1 }).startOf('day');
+const filterDateFormat = 'yyyy-MM-dd HH:mm:ss';
+
+const defaultDateFilter = {
+  seasonFrom: {
+    dateFrom: tMinusOneDay.toFormat(filterDateFormat),
+    dateTo: null,
+    filterType: 'date',
+    type: 'lessThan'
+  },
+  seasonTo: {
+    dateFrom: tPlusOneDay.toFormat(filterDateFormat),
+    dateTo: null,
+    filterType: 'date',
+    type: 'greaterThan'
+  }
+};
+
 export default function LeadershipTeamGrid(props) {
   // constants
   const dateFromFormat = 'yyyy-MM-dd'; // Ag-grid converter helper
@@ -61,10 +80,12 @@ export default function LeadershipTeamGrid(props) {
   const onFirstDataRendered = () => {
     if (api && colApi) {
       autoSizeAllColumns();
+      api.setFilterModel(defaultDateFilter);
     }
   };
 
-  const onRowClicked = ({ data }) => {
+  const onRowClicked = (params) => {
+    const { data, api } = params;
     if (data) setSelected(data);
   };
 
@@ -110,6 +131,17 @@ export default function LeadershipTeamGrid(props) {
     cellEditor: CustomDateEditor,
     cellEditorPopup: true,
     filter: 'agDateColumnFilter',
+    filterParams: {
+      comparator: (filterLocalDateAtMidnight, cellValueAsString) => {
+        const cellValueAsDate = DateTime.fromISO(cellValueAsString).toJSDate();
+        if (cellValueAsDate < filterLocalDateAtMidnight) {
+          return -1;
+        } else if (cellValueAsDate  > filterLocalDateAtMidnight) {
+          return 1;
+        }
+        return 0;
+      }
+    }
   };
 
   const defaultColDef = {
