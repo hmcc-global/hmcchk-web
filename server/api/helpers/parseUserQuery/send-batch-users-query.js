@@ -24,9 +24,8 @@ module.exports = {
     if (latestLeadershipTeams == null || latestLeadershipTeams.length === 0) return exits.success();
 
     const todayMinus3Weeks = DateTime.now().plus({ weeks: -3 });
-    // TODO-aparedan: Only trigger once, right now this will trigger every Saturday after the 3rd Saturday
-    // TODO-aparedan: How to filter out invalid LGs
-    const filteredTeams = latestLeadershipTeams.filter(i => DateTime.fromISO(i.seasonFrom) <= todayMinus3Weeks);
+    // only send batch query once after 3 Saturdays have passed from season start
+    const filteredTeams = latestLeadershipTeams.filter(i => DateTime.fromISO(i.seasonFrom).weekNumber === todayMinus3Weeks.weekNumber && i.lifeGroup !== 'Not Applicable');
 
     // modify Excel by populating the lifestage list
     // eslint-disable-next-line eqeqeq
