@@ -1,10 +1,10 @@
 {
   "banner": {
     "title": "About Us",
-    "blurb": "Harvest Mission Community Church of Hong Kong is an international church that was planted in 2015, when a team of 20 people came to Hong Kong with a vision to reach this great city and be a 1st-century church in the 21st century. We value transculturalism and we are actively reaching out to people from all walks of life, specifically college students, working adults, and families."
+    "blurb": "Harvest Mission Community Church of Hong Kong is an international church with a vision to reach this great city of Hong Kong and be a 1st-century church in the 21st century. We value transculturalism and we are actively reaching out to people from all walks of life, specifically university students, working adults, and families."
   },
   "story": {
-    "0": "After the first church started at the University of Michigan in Ann Arbor, God gave us a vision to plant churches on campuses in cities all around the world. We have started churches in Austin, Detroit, and Jakarta, and now Hong Kong, when a team of 20 people came to start HMCC of Hong Kong with a vision to reach this great city and be a 1st-century church in the 21st century.",
+    "0": "God gave us a vision to plant churches on university campuses in cities all around the world.",
     "1": "As an international church that is for the city, we value transculturalism and we are actively reaching out to people from all walks of life, specifically university students, working adults, and families. We want to reach students in the university campuses around Hong Kong because we believe that university is a pivotal time for people to discover their God-given destiny. We are also reaching out to working adults and families so that they can be the salt and light of this city in their spheres of influence.",
     "2": "It is our passion for the local church to continue to be a viable demonstration of His love, seeing more people radically changed through the Gospel, trained to be a Christ disciple, and sent out to other nations to be the light unto the world.",
     "3": "God continues to write our story and we cannot wait to see how it will unfold. One thing that we do know is that our vision will always remain the same. We desire to see people’s lives transformed, redirected to God’s purposes, and set out to transform the world for the glory of God."
@@ -83,19 +83,32 @@
     }
   },
   "staff": {
-    "kim": {
-      "title": "Rev. Dr. Seth S. Kim",
-      "position": "Lead Pastor (Hong Kong)\n seth.kim@hmcc.net \nGlobal Leadership Team Member",
-      "0": "Pastor Seth moved to Ann Arbor with his wife, Christina, in the summer of 1996 with the vision of planting a church that would be used by God to “transform lost people into Christ’s disciples who will then transform the world.” He graduated from the University of Illinois at Urbana-Champaign in 1992, and received his call into full-time ministry while serving as a member of a gospel praise band during his undergraduate years.",
-      "1": "After college, Pastor Seth worked as a youth pastor and then completed his Master of Divinity and Master of Arts degrees at Trinity Evangelical Divinity School in Deerfield, IL. Pastor Seth has also received his doctorate degree from Gordon-Conwell Theological Seminary in South Hamilton, MA.",
-      "2": "In 2013, Pastor Seth felt God's call to plant a church in Hong Kong. After praying through this decision with his family, Pastor Seth, Christina, and their three kids, Josiah, Elliot, and Karissa, moved to Hong Kong in July 2015 to start HMCC of Hong Kong."
+    "pastoral": {
+      "kim": {
+        "title": "Rev. Dr. Seth S. Kim",
+        "position": "Lead Pastor (Hong Kong)\n seth.kim@hmcc.net \nGlobal Leadership Team Member",
+        "0": "Seth Kim has been educated and awarded degrees from the University of Illinois, Trinity International University, and Gordon-Conwell Theological Seminary.",
+        "1": "Seth is a pastor, speaker, leadership educator, church planter, and spiritual trainer. He and his wife started HMCC back in 1996 in the U.S. Then in 2015, he and his family moved out to Hong Kong to launch HMCC of Hong Kong and since then has been involved around the world working with different churches and organizations to train and equip people to live life with purpose and hope. He is currently serving with different organizations and movements such as Arise Asia, CPX Asia (Church Planting & Multiplication), Movement Day, and NXT Move Global.",
+        "2": "He is passionate about developing people and seeing their lives transformed so that they can then transform the world."
+      }
     },
-    "zhu": {
-      "title": "Pastor Bo Zhu",
-      "position": "Pastor (Hong Kong) - bo.zhu@hmcc.net",
-      "0": "Pastor Bo graduated from University of Michigan where he accepted Christ and continued to grow in his relationship with God. He felt a calling to be part of the church plant in Hong Kong where he continued to grow in his calling as a pastor.",
-      "1": "In 2016, he was commissioned as a Pastor during !gnite Conference, and has been serving the church faithfully. He is married to his wife, Erica Zhu, and welcomed their son, Noah, in 2021. They live in Hong Kong now."
-    }
+    "directors": [
+      {
+        "photo": "staff-anne.jpg",
+        "name": "Anne Hu",
+        "title": ["Education", "Campus Ministry"]
+      },
+      {
+        "photo": "staff-anne.jpg",
+        "name": "Joanna Jing",
+        "title": ["Corporate Operations & Events", "City Ministry"]
+      },
+      {
+        "photo": "staff-anne.jpg",
+        "name": "Peter Young",
+        "title": ["Youth & Families Ministry", "Worship Ministry"]
+      }
+    ]
   },
   "ourHeartMissions": {
     "title": {

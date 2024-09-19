@@ -18,7 +18,7 @@ const StaffSection = (props) => {
         <Heading
           as="h2"
           fontSize={['4xl', '6xl']}
-          fontFamily="DMSerifDisplay_Italic"
+          fontFamily="DMSerifDisplay"
           fontWeight={700}
           lineHeight={1}
           textAlign="center"
@@ -29,7 +29,22 @@ const StaffSection = (props) => {
           {title}
         </Heading>
       </Center>
-      <VStack>
+      <VStack mb={[5, 10]}>
+        <Box w="full">
+          <Heading
+            as="h3"
+            fontSize={['3xl', '4xl']}
+            fontFamily="DMSerifDisplay_Italic"
+            fontWeight={700}
+            lineHeight={1}
+            textAlign="left"
+            color="#0628A3"
+            mb={3}
+            id="staff"
+          >
+            Pastoral Staff
+          </Heading>
+        </Box>
         <Box
           bgColor="#EEFAFF"
           w="100%"
@@ -65,10 +80,10 @@ const StaffSection = (props) => {
                 fontWeight="bold"
                 fontFamily="DMSerifDisplay_Italic"
               >
-                {blurb.kim.title}
+                {blurb.pastoral.kim.title}
               </Text>
-              {blurb.kim.position &&
-                blurb.kim.position.split('\n').map((item) => {
+              {blurb.pastoral.kim.position &&
+                blurb.pastoral.kim.position.split('\n').map((item) => {
                   return (
                     <Text
                       color="black"
@@ -83,7 +98,11 @@ const StaffSection = (props) => {
                 })}
 
               <Box fontSize="md">
-                {[blurb.kim[0], blurb.kim[1], blurb.kim[2]].map((item) => {
+                {[
+                  blurb.pastoral.kim[0],
+                  blurb.pastoral.kim[1],
+                  blurb.pastoral.kim[2],
+                ].map((item) => {
                   return (
                     <Text color="black" paddingTop="1em">
                       {item}
@@ -94,6 +113,65 @@ const StaffSection = (props) => {
             </Box>
           </Stack>
         </Box>
+      </VStack>
+      <VStack>
+        <Box w="full" mb={[5, 10]}>
+          <Heading
+            as="h3"
+            fontSize={['3xl', '4xl']}
+            fontFamily="DMSerifDisplay_Italic"
+            fontWeight={700}
+            lineHeight={1}
+            textAlign="left"
+            color="#0628A3"
+            id="staff"
+          >
+            Ministry Leaders
+          </Heading>
+        </Box>
+        <Flex flexDir={['column', 'row']}>
+          {blurb.directors.length > 0 &&
+            blurb.directors.map((content, i) => (
+              <Box
+                key={'director' + i}
+                fontFamily="Manrope"
+                textAlign="center"
+                w={['90%', '100%', '100%']}
+                mb="3"
+                mx="auto"
+              >
+                <Box px={[5, 9]} mb="3">
+                  <Image
+                    src={
+                      process.env.PUBLIC_URL + 'images/about/' + content.photo
+                    }
+                    w={['80%', '100%', '100%']}
+                    objectFit="cover"
+                    margin="auto"
+                    borderRadius="7"
+                  />
+                </Box>
+
+                <Box
+                  fontSize={['md', 'md', '2xl']}
+                  fontWeight="700"
+                  color="#0628A3"
+                >
+                  {content.name}
+                </Box>
+                {content.title.length > 0 &&
+                  content.title.map((title, i) => (
+                    <Box
+                      key={'directortitle' + i}
+                      fontSize={['xs', 'xs', 'lg']}
+                      fontWeight="700"
+                    >
+                      {title}
+                    </Box>
+                  ))}
+              </Box>
+            ))}
+        </Flex>
       </VStack>
       <Box></Box>
     </Flex>
