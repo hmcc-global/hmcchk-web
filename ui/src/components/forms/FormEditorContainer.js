@@ -26,6 +26,8 @@ import {
 import FormEditor from './FormEditor';
 import ExternalFormEditor from './ExternalFormEditor';
 
+const isAlertTypeNone = (alertType) => alertType == null || alertType === '' || alertType === 'None';
+
 const FormEditorContainer = (props) => {
   const {
     user,
@@ -51,6 +53,7 @@ const FormEditorContainer = (props) => {
   const [requireLogin, setRequireLogin] = useState(true);
   const [requireMembership, setRequireMembership] = useState(false);
   const [requireBaptism, setRequireBaptism] = useState(false);
+  const [parseUserData, setParseUserData] = useState(false);
   const [alertType, setAlertType] = useState(formAlertTypes[0]);
   const [customAlertRecipients, setCustomAlertRecipients] = useState([]);
   const [successEmailTemplate, setSuccessEmailTemplate] = useState(null);
@@ -81,6 +84,7 @@ const FormEditorContainer = (props) => {
     setValue('requireLogin', true);
     setValue('requireMembership', false);
     setValue('requireBaptism', false);
+    setValue('parseUserData', false);
     setValue('alertType', null);
     setValue('customAlertRecipients', []);
     setValue('successEmailTemplate', 'form-default-success');
@@ -98,6 +102,7 @@ const FormEditorContainer = (props) => {
     setRequireLogin(true);
     setRequireMembership(false);
     setRequireBaptism(false);
+    setParseUserData(false);
     setAlertType(formAlertTypes[0]);
     setCustomAlertRecipients([]);
     setSuccessEmailTemplate('form-default-success');
@@ -130,6 +135,7 @@ const FormEditorContainer = (props) => {
       setValue('requireMembership', data.requireMembership);
       setValue('requireBaptism', data.requireBaptism);
       setValue('alertType', data.alertType);
+      setValue('parseUserData', data.parseUserData && !isAlertTypeNone(data.alertType));
       setValue('customAlertRecipients', data.customAlertRecipients);
       setValue('successEmailTemplate', data.successEmailTemplate);
       setValue('customEmailSubject', data.customEmailSubject);
@@ -150,6 +156,7 @@ const FormEditorContainer = (props) => {
       setRequireLogin(data.requireLogin);
       setRequireMembership(data.requireMembership);
       setRequireBaptism(data.requireBaptism);
+      setParseUserData(data.parseUserData && !isAlertTypeNone(data.alertType));
       setAlertType(data.alertType);
       setCustomAlertRecipients(data.customAlertRecipients);
       setSuccessEmailTemplate(data.successEmailTemplate);
@@ -438,6 +445,30 @@ const FormEditorContainer = (props) => {
                       />
                     </FormControl>
                   )}
+                  {
+                    !isAlertTypeNone(alertTypeFlag) && (
+                      <FormControl>
+                        <FormLabel>Parse User Data?</FormLabel>
+                        <FormHelperText>
+                          This will send email queries to the alert recipients above which will update the submitter's information in our database.
+                        </FormHelperText>
+                        <Controller
+                          control={control}
+                          name="parseUserData"
+                          defaultValue={false}
+                          render={({ field: { onChange, value, ref } }) => (
+                            <Switch
+                              onChange={onChange}
+                              ref={ref}
+                              isChecked={value}
+                            >
+                              {value ? 'Yes' : 'No'}
+                            </Switch>
+                          )}
+                        />
+                      </FormControl>
+                    )
+                  }
                 </Stack>
                 {ftFlag === 'internal' && (
                   <Stack spacing="2">
@@ -505,6 +536,7 @@ const FormEditorContainer = (props) => {
                   requireMembership: requireMembership,
                   requireBaptism: requireBaptism,
                   alertType: alertType,
+                  parseUserData: parseUserData,
                   customAlertRecipients: customAlertRecipients,
                   successEmailTemplate: successEmailTemplate,
                   customEmailSubject: customEmailSubject,

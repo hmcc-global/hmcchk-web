@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>User Success Email</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <p style="margin-bottom: 25px">Hi,</p>
+    <p style="margin-bottom: 25px">
+      User data successfully parsed.
+    </p>
+    <br/>
+    <br/>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Life Stage</th>
+          <th>Campus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach(function(user) { %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.phoneNumber %></td>
+            <td><%= user.email %></td>
+            <td><%= user.lifestage %></td>
+            <td><%= user.campus %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <br/>
+    <br/>
+    <p style="margin-bottom: 5px">Sincerely,</p>
+    <p style="margin-top: 0px">T3CH Team</p>
+  </body>
+</html>

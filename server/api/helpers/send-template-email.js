@@ -40,18 +40,23 @@ module.exports = {
     },
 
     to: {
-      description: 'The email address of the primary recipient.',
-      extendedDescription:
-        'If this is any address ending in "@example.com", then don\'t actually deliver the message. ' +
-        'Instead, just log it to the console.',
-      example: 'nola.thacker@example.com',
+      type: 'ref',
       required: true,
-      isEmail: true,
     },
 
     toName: {
       description: 'Name of the primary recipient as displayed in their inbox.',
       example: 'Nola Thacker',
+    },
+
+    inReplyTo: {
+      description: 'Message-Id of the email thread, used to reply to emails',
+      type: 'string',
+    },
+
+    references: {
+      description: 'Array list of Message-Id',
+      type: 'ref',
     },
 
     subject: {
@@ -103,17 +108,7 @@ module.exports = {
     attachments: {
       description:
         'Attachments to include in the email, with the file content encoded as base64.',
-      whereToGet: {
-        description:
-          'If you have `sails-hook-uploads` installed, you can use `sails.reservoir` to get an attachment into the expected format.',
-      },
-      example: [
-        {
-          contentBytes: 'iVBORw0KGgoAA…',
-          name: 'sails.png',
-          type: 'image/png',
-        },
-      ],
+      type: 'ref',
       defaultsTo: [],
     },
   },
@@ -133,6 +128,8 @@ module.exports = {
     templateData,
     to,
     toName,
+    inReplyTo,
+    references,
     subject,
     from,
     fromName,
@@ -200,19 +197,8 @@ module.exports = {
         return err;
       });
 
-    // Sometimes only log info to the console about the email that WOULD have been sent.
-    // Specifically, if the "To" email address is anything "@example.com".
-    //
-    // > This is used below when determining whether to actually send the email,
-    // > for convenience during development, but also for safety.  (For example,
-    // > a special-cased version of "user@example.com" is used by Trend Micro Mars
-    // > scanner to "check apks for malware".)
-    var isToAddressConsideredFake = Boolean(to.match(/@example\.com$/i));
-
-    // If that's the case, or if we're in the "test" environment, then log
-    // the email instead of sending it:
     var dontActuallySend =
-      sails.config.environment === 'test' || isToAddressConsideredFake;
+      sails.config.environment === 'test';
     if (dontActuallySend) {
       sails.log(
         'Skipped sending email, either because the "To" email address ended in "@example.com"\n' +
@@ -248,25 +234,26 @@ module.exports = {
           ? ''
           : sails.config.environment === 'staging'
           ? '[FROM STAGING] '
-          : '[FROM LOCALHOST] ';
+          : '';
       const mailOptions = {
         from: process.env.EMAIL_FROM, // if using Gmail, "from" gets set to the authenticated email
         to: to,
         cc: cc,
         bcc: bcc,
+        inReplyTo: inReplyTo,
+        references: references,
         subject: subjectLinePrefix + subject,
         html: htmlEmailContents,
         attachments,
       };
 
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          sails.log(error);
-        } else {
-          sails.log('Email sent: ' + info.response);
-          sails.log('successfully sent email!');
-        }
-      });
+      try {
+        const info = await transporter.sendMail(mailOptions);
+        sails.log('Email sent: ' + info.response);
+        sails.log('successfully sent email!');
+      } catch (err) {
+        console.log(err);
+      }
     }
 
     // All done!
