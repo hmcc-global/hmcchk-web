@@ -86,14 +86,17 @@ module.exports = {
     try {
       await sails.helpers.sendTemplateEmail.with({
         to: emailRecipients,
-        subject: `[ACTION]: ${formName} - New User #${submissionId}`,
-        template: 'email-parse-user-query',
+        subject: `[ACTION]: New ${formName} - User #${submissionId}`,
+        template: 'email-parse-single-user-query',
         attachments: [
           {
             filename: 'query.xlsx',
             path: fileName
           }
-        ]
+        ],
+        templateData: {
+          submissionData: submissionData,
+        },
       });
     } catch (err) {
       console.log(err);
