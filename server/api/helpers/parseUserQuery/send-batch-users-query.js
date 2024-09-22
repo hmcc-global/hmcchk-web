@@ -66,7 +66,7 @@ module.exports = {
         if (team.leaderEmails) {
           await sails.helpers.sendTemplateEmail.with({
             to: team.leaderEmails,
-            subject: `[ACTION]: Batch User Data Query: ${team.lifeGroup}`,
+            subject: `[ACTION]: LIFE Group Name Needed - ${team.lifeGroup}`,
             template: 'email-parse-user-query',
             attachments: [
               {
