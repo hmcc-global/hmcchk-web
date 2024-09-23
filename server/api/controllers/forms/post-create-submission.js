@@ -165,7 +165,7 @@ module.exports = {
             );
 
         if (formRecord[0].parseUserData) {
-          await sails.helpers.parseuserquery.sendSingleUserQuery(res.id, submissionData, emailRecipients);
+          await sails.helpers.parseuserquery.sendSingleUserQuery(res.id, submissionData, emailRecipients, formRecord[0].formName);
         } else {
           await sails.helpers.sendTemplateEmail.with({
             to: 'no-reply@hongkong.hmcc.net',

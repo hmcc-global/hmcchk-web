@@ -19,6 +19,10 @@ module.exports = {
       type: 'ref',
       required: true,
     },
+    formName: {
+      type: 'string',
+      required: false
+    }
   },
 
   exits: {
@@ -29,7 +33,7 @@ module.exports = {
       description: 'Failed',
     },
   },
-  fn: async function ({ submissionId, submissionData, emailRecipients }, exits) {
+  fn: async function ({ submissionId, submissionData, emailRecipients, formName }, exits) {
     const latestLeadershipTeams = await sails.helpers.leadershipteam.getLatestLeadershipTeams();
     // eslint-disable-next-line eqeqeq
     if (latestLeadershipTeams == null || latestLeadershipTeams.length === 0) return exits.success();
@@ -82,14 +86,17 @@ module.exports = {
     try {
       await sails.helpers.sendTemplateEmail.with({
         to: emailRecipients,
-        subject: `[ACTION]: Single User Data Query: ID: ${submissionId}`,
-        template: 'email-parse-user-query',
+        subject: `[ACTION]: New ${formName} - User Info Needed #${submissionId}`,
+        template: 'email-parse-single-user-query',
         attachments: [
           {
             filename: 'query.xlsx',
             path: fileName
           }
-        ]
+        ],
+        templateData: {
+          submissionData: submissionData,
+        },
       });
     } catch (err) {
       console.log(err);

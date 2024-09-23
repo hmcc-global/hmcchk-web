@@ -8,6 +8,15 @@ const verifyUserData = (userData) => {
   );
 };
 
+const findStartIndex = (arr, target) => {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] != null && arr[i].includes(target)) {
+      return i; // Return the index after the found index
+    }
+  }
+  return -1; // Return -1 if target is not found
+};
+
 // Format of EXCEL file
 //   |      A      |     B     |        C          |      D       |
 // 1 | lifeGroupId   | someId  |                   |              |
@@ -21,12 +30,15 @@ const parseWorksheet = (worksheet, isBatch) => {
   if (rawData == null) return {};
   const data = rawData.filter((e, i) => i < 5 || rawData[i].length === 5);
 
-  const lifeGroupName = isBatch ? data[1][1] : data[0][1];
+  const lifeGroupNameIndex = findStartIndex(data, 'lifeGroupName');
+  const lifeGroupName = data[lifeGroupNameIndex][1];
   let lifeGroupId;
   const users = [];
   if (isBatch) {
-    lifeGroupId = data[0][1];
-    for (let i = 4; i < data.length; i++) {
+    const lifeGroupIdIndex = findStartIndex(data, 'lifeGroupId');
+    lifeGroupId = data[lifeGroupIdIndex][1];
+    const userDataIndex = findStartIndex(data, 'Name') + 1;
+    for (let i = userDataIndex; i < data.length && i > 0; i++) {
       if (data[i].length !== 5) continue;
 
       const userData = data[i];
@@ -41,7 +53,7 @@ const parseWorksheet = (worksheet, isBatch) => {
       }
     }
   } else {
-    const userData = data[3];
+    const userData = data[findStartIndex(data, 'Name') + 1];
     if (userData.length === 5 && verifyUserData(userData)) {
       users.push({
         name: userData[0],
@@ -66,10 +78,11 @@ async function updateUserInfo(users, lifeGroup) {
 
   for (const i in users) {
     const updateUserData = users[i];
+    const sanitisedPhoneNumber = isNaN(updateUserData.phoneNumber) ? updateUserData.phoneNumber.replace(/[^0-9]/g, '') : updateUserData.phoneNumber;
     const user = await User.find({
       or: [
         { email: updateUserData.email },
-        { phoneNumber: updateUserData.phoneNumber },
+        { phoneNumber: sanitisedPhoneNumber },
       ]
     });
 
