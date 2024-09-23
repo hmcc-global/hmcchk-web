@@ -86,7 +86,7 @@ module.exports = {
     try {
       await sails.helpers.sendTemplateEmail.with({
         to: emailRecipients,
-        subject: `[ACTION]: New ${formName} - User #${submissionId}`,
+        subject: `[ACTION]: New ${formName} - User Info Needed #${submissionId}`,
         template: 'email-parse-single-user-query',
         attachments: [
           {

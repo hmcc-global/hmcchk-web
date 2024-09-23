@@ -67,7 +67,7 @@ module.exports = {
           const filteredEmails = team.leaderEmails.filter(x => x !== 'hongkong@hongkong.hmcc.net');
           await sails.helpers.sendTemplateEmail.with({
             to: filteredEmails,
-            subject: `[ACTION]: LIFE Group Name Needed - ${team.lifeGroup}`,
+            subject: `[ACTION]: LIFE Group Info Needed - ${team.lifeGroup}`,
             template: 'email-parse-user-query',
             attachments: [
               {
