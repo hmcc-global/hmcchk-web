@@ -21,6 +21,7 @@ module.exports = {
         isDeleted: false,
       });
 
+      await sails.helpers.parseuserquery.parseUserQuery();
       // If no data is found return error
       if (data === null) return exits.error('unauthorized access');
 
