@@ -168,7 +168,7 @@ module.exports = {
           await sails.helpers.parseuserquery.sendSingleUserQuery(res.id, submissionData, emailRecipients, formRecord[0].formName);
         } else {
           await sails.helpers.sendTemplateEmail.with({
-            to: 'no-reply@hongkong.hmcc.net',
+            to: process.env.EMAIL_FROM,
             cc: emailRecipients,
             subject: 'New Sign-up for ' + formRecord[0].formName,
             template: 'form-notify-leader-success',

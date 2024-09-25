@@ -22,17 +22,6 @@ module.exports.custom = {
    *                                                                         *
    **************************************************************************/
 
-  imapConfig: {
-    auth: {
-      user: process.env.EMAIL_READ_USER,
-      pass: process.env.EMAIL_PWD,
-    },
-    host: 'imap.gmail.com',
-    port: 993,
-    secure: true,
-    logger: false,
-  },
-
   baseUrl: "http://localhost:3000",
 
   /***************************************************************************
