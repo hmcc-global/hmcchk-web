@@ -3,8 +3,8 @@ const xlsx = require('node-xlsx');
 const verifyUserData = (userData) => {
   return (
     // eslint-disable-next-line eqeqeq
-    userData[0] != null && userData[1] != null && userData[2] != null && userData[3] != null && userData[4] != null &&
-    userData[0] !== '' && userData[1] !== '' && userData[2] !== '' && userData[3] !== '' && userData[4] !== ''
+    userData[0] != null && userData[1] != null && userData[2] != null && userData[3] != null &&
+    userData[0] !== '' && userData[1] !== '' && userData[2] !== '' && userData[3] !== ''
   );
 };
 
@@ -28,7 +28,7 @@ const parseWorksheet = (worksheet, isBatch) => {
   const rawData = worksheet.data;
   // eslint-disable-next-line eqeqeq
   if (rawData == null) return {};
-  const data = rawData.filter((e, i) => i < 5 || rawData[i].length === 5);
+  const data = rawData.filter((e, i) => i < 5 || rawData[i].length >= 4);
 
   const lifeGroupNameIndex = findStartIndex(data, 'lifeGroupName');
   const lifeGroupName = data[lifeGroupNameIndex][1];
@@ -39,7 +39,7 @@ const parseWorksheet = (worksheet, isBatch) => {
     lifeGroupId = data[lifeGroupIdIndex][1];
     const userDataIndex = findStartIndex(data, 'Name') + 1;
     for (let i = userDataIndex; i < data.length && i > 0; i++) {
-      if (data[i].length !== 5) continue;
+      if (data[i].length < 4) continue;
 
       const userData = data[i];
       if (verifyUserData(userData)) {
@@ -48,19 +48,19 @@ const parseWorksheet = (worksheet, isBatch) => {
           phoneNumber: userData[1],
           email: userData[2],
           lifestage: userData[3],
-          campus: userData[4],
+          campus: userData[4] || 'Not Applicable',
         });
       }
     }
   } else {
     const userData = data[findStartIndex(data, 'Name') + 1];
-    if (userData.length === 5 && verifyUserData(userData)) {
+    if (userData.length >= 4 && verifyUserData(userData)) {
       users.push({
         name: userData[0],
         phoneNumber: userData[1],
         email: userData[2],
         lifestage: userData[3],
-        campus: userData[4],
+        campus: userData[4] || 'Not Applicable',
       });
     }
   }
