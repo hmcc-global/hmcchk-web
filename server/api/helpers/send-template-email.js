@@ -197,8 +197,7 @@ module.exports = {
         return err;
       });
 
-    var dontActuallySend =
-      sails.config.environment === 'test';
+    var dontActuallySend = sails.config.environment === 'development';
     if (dontActuallySend) {
       sails.log(
         'Skipped sending email, either because the "To" email address ended in "@example.com"\n' +
@@ -222,18 +221,24 @@ module.exports = {
       // Otherwise, continue to actually send the email.
 
       const transporter = nodemailer.createTransport({
-        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
         auth: {
+          type: 'OAuth2',
           user: process.env.EMAIL_FROM,
-          pass: process.env.EMAIL_PWD
+          clientId: process.env.EMAIL_CLIENT_ID,
+          clientSecret: process.env.EMAIL_CLIENT_SECRET,
+          refreshToken: process.env.EMAIL_REFRESH_TOKEN,
+          accessToken: process.env.EMAIL_ACCESS_TOKEN,
         },
       });
 
       const subjectLinePrefix =
         sails.config.environment === 'production'
           ? ''
-          : sails.config.environment === 'staging'
-          ? '[FROM STAGING] '
+          : sails.config.environment === 'uat'
+          ? '[UAT] '
           : '';
       const mailOptions = {
         from: process.env.EMAIL_FROM, // if using Gmail, "from" gets set to the authenticated email

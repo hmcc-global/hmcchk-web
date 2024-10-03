@@ -24,8 +24,16 @@ module.exports = {
   },
 
   fn: async function ({ uid, mailbox }, exits) {
-    const imapConfig = sails.config.custom.imapConfig;
-    const client = new ImapFlow(imapConfig);
+    const accessToken = await sails.helpers.emailhelpers.getGmailAccessToken();
+    const client = new ImapFlow({
+      host: 'imap.gmail.com',
+      port: 993,
+      secure: true,
+      auth: {
+        user: process.env.EMAIL_FROM,
+        accessToken: accessToken
+      }
+    });
     await client.connect();
     const lock = await client.getMailboxLock(mailbox);
     let attachment;
