@@ -8,29 +8,49 @@ import {
   HStack,
   Grid,
   Image,
+  Icon,
 } from '@chakra-ui/react';
 import { Text } from '@chakra-ui/layout';
 import { useEffect, useState, Fragment } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
+import { MdEmojiFlags, MdSportsEsports, MdArrowBack } from 'react-icons/md';
 
-import './styles.css';
+// import './styles.css';
 
 export default function HarvestGameInstructions() {
   const [selected, setSelected] = useState(0);
-  const [game_1pwd, setGame_1pwd] = useState('');
-  const [game_2pwd, setGame_2pwd] = useState('');
-  const [game_3pwd, setGame_3pwd] = useState('');
-  const [pwd, setPassword] = useState('');
+  const [game_1pwd, setGame_1pwd] = useState(false);
+  const [game_2pwd, setGame_2pwd] = useState(false);
+  const [game_3pwd, setGame_3pwd] = useState(false);
   const [inputValue, setInput] = useState('');
   const [error, setError] = useState(false);
+  const [gameType, setGameType] = useState([
+    {
+      game_num: 'Game 1',
+      name: 'TIDY-UP',
+      imageUrl: [],
+      id: 'game_1',
+      pwd: game_1pwd,
+    },
+    {
+      game_num: 'Game 2',
+      name: 'OFF-ROAD',
+      imageUrl: [],
+      id: 'game_2',
+      pwd: game_2pwd,
+    },
+    {
+      game_num: 'Game 3',
+      name: 'MOVING IN',
+      imageUrl: [],
+      id: 'game_3',
+      pwd: game_3pwd,
+    },
+  ]);
 
   const getData = async () => {
     try {
       const { data } = await axios.get('/api/hgrankings/get');
-      const password = data.filter((row) => row.lgName === 'password');
-      setGame_1pwd(String(password[0].gameRankings[0]));
-      setGame_2pwd(String(password[0].gameRankings[1]));
-      setGame_3pwd(String(password[0].gameRankings[2]));
     } catch (err) {
       console.log(err);
     }
@@ -40,76 +60,32 @@ export default function HarvestGameInstructions() {
     getData();
   }, []);
 
-  const gameType = [
-    {
-      game_num: 'Game #1',
-      name: 'TIDY-UP',
-      round: 3,
-      player: 4,
-      imageUrl: [
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1-1' +
-          game_1pwd +
-          '.gif',
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1-2' +
-          game_1pwd +
-          '.gif',
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg1-3' +
-          game_1pwd +
-          '.gif',
-      ],
-      id: 'game_1',
-      pwd: game_1pwd,
-    },
-
-    {
-      game_num: 'Game #2',
-      name: 'OFF-ROAD',
-      round: 3,
-      player: 4,
-      imageUrl: [
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg2-1' +
-          game_2pwd +
-          '.gif',
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg2-2' +
-          game_2pwd +
-          '.gif',
-      ],
-      id: 'game_2',
-      pwd: game_2pwd,
-    },
-
-    {
-      game_num: 'Game #3',
-      name: 'MOVING IN',
-      round: 5,
-      player: '-',
-      imageUrl: [
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3-1' +
-          game_3pwd +
-          '.gif',
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3-2' +
-          game_3pwd +
-          '.gif',
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3-3' +
-          game_3pwd +
-          '.gif',
-        'https://hongkong.sub.hmcc.net/wp-content/uploads/hg3-4' +
-          game_3pwd +
-          '.gif',
-      ],
-      id: 'game_3',
-      pwd: game_3pwd,
-    },
-  ];
-
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     let pwd = inputValue;
-    if (pwd !== String(gameType[selected].pwd)) {
-      setError(true);
-    } else {
+
+    try {
+      const { data } = await axios.get('/api/hgrankings/authenticate', {
+        params: { gameId: selected, password: pwd },
+      });
+      // Update imageUrl in the gameType state
+      setGameType((prevGameType) => {
+        const updatedGameType = [...prevGameType];
+        updatedGameType[selected].imageUrl = data.imageLinkData; // Replace the imageUrl
+        updatedGameType[selected].pwd = true;
+        return updatedGameType;
+      });
+
       setError(false);
-      setPassword(pwd);
-      localStorage.setItem(gameType[selected].id, pwd);
+
+      if (selected == 0) {
+        setGame_1pwd(pwd);
+      } else if (selected == 1) {
+        setGame_2pwd(pwd);
+      } else if (selected == 2) {
+        setGame_3pwd(pwd);
+      }
+    } catch (err) {
+      setError(true);
     }
   };
 
@@ -125,57 +101,73 @@ export default function HarvestGameInstructions() {
     }
   };
 
+  console.log(gameType[selected].imageUrl);
+
   return (
     <VStack spacing="0" minHeight="60em">
-      {/* <Container
-          position="start"
-          fontWeight="900"
-          bgColor="rgba(134, 185, 197, 1)"
-          fontSize={{ base: '6vw', sm: '4vw' }}
+      <Box
+        display="flex"
+        borderRadius="8px"
+        alignContent="center"
+        justifyContent="center"
+        width={{ base: '60%', md: '40%' }}
+        marginX="auto"
+        marginBottom={{ base: '3', md: '7' }}
+        border="1px solid #474747;"
+        marginTop={{ base: '4' }}
+      >
+        <Icon
+          as={MdSportsEsports}
+          boxSize={{ base: 5, md: 10 }}
+          color="white"
+          marginY="auto"
+        />
+        <Text
           textColor="white"
-          marginY="0"
-          borderTopRadius={7}
-          display="flex"
+          marginY={{ base: '1', md: '4' }}
+          paddingLeft={{ base: '2', md: '10' }}
+          fontSize={{ base: '4vw', md: '2.5vw' }}
+          fontWeight="100"
+          fontFamily="FjallaOne-Regular"
         >
-          HG-2022
-          <Image
-            marginLeft="auto"
-            w={{ base: '13vw', sm: '7.5vw' }}
-            minW={{ base: '13vw', sm: '7.5vw' }}
-            src={process.env.PUBLIC_URL + '/images/ripple.svg'}
-            alt="Logo of HMCC"
-          />
-        </Container> */}
-      {/* <Container
-          bgColor="rgba(227, 224, 224, 1)"
-          textAlign="center"
-          textColor="rgba(83, 83, 83, 1)"
-          minW="100%"
-          fontWeight="500"
-          fontSize={{ base: '5vw', sm: '3vw' }}
-        >
-          Game Manual
-        </Container> */}
+          GAME INSTRUCTIONS
+        </Text>
+      </Box>
       <HStack w="100%">
-        <Box w="10%">
-          <Image
-            src={`${process.env.PUBLIC_URL}/images/harvest-games/white-dot.png`}
-            objectFit="cover"
-            position="center"
-            width={{ base: '70%', sm: '35%', md: '30%', lg: '30%', xl: '25%' }}
-            marginX="auto"
-          />
+        <Box w="40%">
+          <Text
+            textAlign="center"
+            color="#E7E7E7"
+            letterSpacing={4}
+            fontSize={{ sm: '2vh', md: '3vh' }}
+            fontWeight="light"
+          >
+            SELECT GAME:{' '}
+          </Text>
         </Box>
-        <Box display="flex" justifyContent="center" paddingY="2em" w="100%">
+        <Box display="flex" justifyContent="center" paddingY="2em" w="40%">
           <Select
             borderWidth="3px"
             w={{ base: '90%', sm: '100%' }}
             h="3em"
             borderRadius="15"
-            borderColor="#6F75CC"
-            textColor="rgba(71, 108, 147, 1)"
+            backgroundColor="#262626"
+            borderColor="#262626"
+            textAlign="center"
+            textColor="white"
             value={selected}
             onChange={(e) => handleChange(e)}
+            sx={{
+              backgroundColor: '#262626',
+              color: 'white',
+              '& option': {
+                backgroundColor: '#262626',
+                color: 'white',
+              },
+              '&:focus': {
+                borderColor: 'white',
+              },
+            }}
           >
             {gameType &&
               gameType.map((e, i) => {
@@ -188,10 +180,9 @@ export default function HarvestGameInstructions() {
           </Select>
         </Box>
       </HStack>
-      {gameType[selected].pwd ===
-      localStorage.getItem(gameType[selected].id) ? (
+      {gameType[selected].pwd ? (
         <Box w="90%">
-          <Heading size="xl" textColor="rgba(1, 43, 85, 1)">
+          {/* <Heading size="xl" textColor="rgba(1, 43, 85, 1)">
             {gameType[selected].game_num}
           </Heading>
           <Heading
@@ -199,8 +190,8 @@ export default function HarvestGameInstructions() {
             textColor="rgba(1, 43, 85, 1)"
           >
             {gameType[selected].name}
-          </Heading>
-          <HStack
+          </Heading> */}
+          {/* <HStack
             justifyContent={'space-evenly'}
             paddingY="5"
             w="100%"
@@ -265,9 +256,16 @@ export default function HarvestGameInstructions() {
                 Min player required
               </Heading>
             </Box>
-          </HStack>
-          <VStack alignItems="start" marginX="0" w="100%" paddingBottom="10">
-            <Heading paddingX="2">Instructions :</Heading>
+          </HStack> */}
+          <VStack alignItems="center" marginX="0" w="100%" paddingBottom="10">
+            <Heading
+              paddingX="2"
+              textColor="white"
+              fontSize={{ base: '5vw', md: '3vw', lg: '2.5vw' }}
+              fontWeight="light"
+            >
+              Instructions :
+            </Heading>
             <Grid
               w="100%"
               mt="12"
@@ -282,7 +280,7 @@ export default function HarvestGameInstructions() {
                     w="full"
                     fontWeight="700"
                     fontSize={{ base: '60', md: '70' }}
-                    textColor="rgba(1, 43, 85, 1)"
+                    textColor="white"
                     bgImage={url}
                     bgSize="contain"
                     bgRepeat="no-repeat"
@@ -298,46 +296,34 @@ export default function HarvestGameInstructions() {
           </VStack>
         </Box>
       ) : (
-        <HStack w="100%">
-          <Box w="10%">
-            <Image
-              src={`${process.env.PUBLIC_URL}/images/harvest-games/blue-dot.png`}
-              objectFit="cover"
-              position="center"
-              width={{
-                base: '70%',
-                sm: '35%',
-                md: '30%',
-                lg: '30%',
-                xl: '25%',
-              }}
-              marginX="auto"
-            />
-          </Box>
+        <HStack w="100%" justifyContent="center">
           <VStack
             display="flex"
             w={{ base: '90%', sm: '60%' }}
             fontSize={{ md: '16', lg: '18' }}
             fontWeight="500"
-            textColor="rgba(83, 83, 83, 1)"
-            alignItems={{ base: 'center', sm: 'start' }}
-            textAlign={{ base: 'center', sm: 'start' }}
+            textColor="white"
+            alignItems="center"
+            textAlign="center"
             paddingX="5"
             paddingBottom="10"
             spacing="4"
           >
             <label>
-              Please enter the password for {gameType[selected].game_num}{' '}
-              instructions
+              ENTER PASSWORD FOR {gameType[selected].game_num} INSTRUCTIONS
             </label>
             <Input
               id="inputted"
               type="text"
-              placeholder="Start typing here"
-              w={{ base: '80%', sm: '100%' }}
-              backgroundColor="white"
+              placeholder="Enter Password"
+              sx={{ '::placeholder': { color: '#7E7E7E' } }}
+              textAlign="center"
+              textColor="#7E7E7E"
+              w={{ base: '80%', sm: '60%' }}
+              paddingY="7"
+              backgroundColor="#000000"
               borderWidth="1px"
-              borderColor="gray/300"
+              borderColor="#474747"
               value={inputValue}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => handleKeyDown(e)}
@@ -345,9 +331,10 @@ export default function HarvestGameInstructions() {
             <Button
               type="submit"
               onClick={handleSubmit}
-              bgColor="#6F75CC"
+              bgColor="#60100B"
               textColor="white"
               fontSize="smaller"
+              borderRadius="full"
               w={{ base: '100%', sm: 'fit-content' }}
             >
               Submit
@@ -355,10 +342,10 @@ export default function HarvestGameInstructions() {
 
             <Text
               display={error ? 'flex' : 'none'}
-              textColor="rgba(198, 66, 66, 1)"
-              textAlign={{ base: 'center', md: 'start' }}
+              textColor="#E7D991"
+              textAlign="center"
             >
-              Password is incorrect!
+              Incorrect password. try again!
             </Text>
           </VStack>
         </HStack>

@@ -21,16 +21,18 @@ module.exports = {
 
   fn: async function ({ lgRankingId }, exits) {
     try {
-      if (lgRankingId) {
-        let data = await HGRankings.find({ _id: lgRankingId }).populateAll();
+      if (lgRankingId === 'AdminTest') {
+        let data = await HGRankings.find().populateAll();
         if (data.length === 0) throw 'HG ranking not found';
+
         return exits.success(data);
       }
 
       let data = await HGRankings.find().populateAll();
+      const filteredData = data.filter((entry) => entry.lgName !== 'password');
       sails.log.info('Retrieving Harvest Games rankings..');
 
-      return exits.success(data);
+      return exits.success(filteredData);
     } catch (err) {
       sails.log(err);
       return exits.invalid(err);

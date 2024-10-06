@@ -59,3 +59,10 @@ code {
     url('./font/DMSerifDisplay-Italic.ttf') format('truetype');
   font-weight: normal;
 }
+
+@font-face {
+  font-family: 'FjallaOne-Regular';
+  src: local('FjallaOne-Regular'),
+    url('./font/FjallaOne-Regular.ttf') format('truetype');
+  font-weight: normal;
+}

@@ -38,6 +38,8 @@ import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementC
 import AdminLeadershipTeamContainer from './admin/leadershipTeam/AdminLeadershipTeamContainer';
 import AdminSermonNotesContainer from './admin/sermonNotes/AdminSermonNotesContainer';
 import SermonNotesContainer from './sermon-notes/SermonNotesContainer';
+import HarvestGames from './harvest-games/HarvestGamesPage';
+import AdminHarvestGame from './admin/harvest-game/AdminHarvestGames';
 
 const MainContainer = () => {
   return (
@@ -288,6 +290,18 @@ const MainContainer = () => {
           path="/admin/sermonNotes/edit/:id"
           permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
           component={AdminSermonNotesContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/harvest-game"
+          permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
+          component={AdminHarvestGame}
+        />
+        <PrivateRoute
+          exact
+          path="/harvest-games"
+          permissions={['public']}
+          component={HarvestGames}
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>

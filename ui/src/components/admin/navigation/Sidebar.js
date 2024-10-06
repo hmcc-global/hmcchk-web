@@ -41,6 +41,7 @@ const LinkItems = [
     icon: FiShield,
     path: '/admin/leadership-team',
   },
+  { name: 'Harvest Game', path: '/admin/harvest-game' },
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {

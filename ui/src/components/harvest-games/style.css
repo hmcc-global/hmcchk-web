@@ -1,0 +1,85 @@
+/* styles.css */
+.ag-theme-material {
+  background-color: transparent !important;
+  color: white !important;
+}
+
+.ag-theme-material .ag-root-wrapper {
+  background-color: transparent !important;
+  text-align: center;
+}
+
+.ag-theme-material .ag-header {
+  background-color: transparent !important;
+  font-weight: bold;
+  border-color: transparent !important;
+}
+
+.ag-theme-material .ag-header-cell {
+  padding: 0 !important;
+  width: 100%;
+}
+
+.ag-theme-material .ag-header-row {
+  background-color: transparent !important;
+  color: white !important;
+}
+
+/* Small devices (sm) */
+@media (max-width: 576px) {
+  .ag-header-cell-label {
+    font-size: 8px;
+    font-family: 'Gotham';
+  }
+}
+
+/* Medium devices (md) */
+@media (min-width: 577px) and (max-width: 768px) {
+  .ag-header-cell-label {
+    font-size: 14px;
+    font-family: 'Gotham';
+  }
+}
+
+/* Large devices (lg) */
+@media (min-width: 769px) {
+  .ag-header-cell-label {
+    font-size: 16px;
+    font-family: 'Gotham';
+  }
+}
+
+.ag-row {
+  background-color: transparent !important;
+  color: white !important;
+  border-color: transparent !important;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  font-family: 'Gotham';
+}
+
+.ag-theme-material .ag-cell {
+  padding: 0 !important;
+}
+
+/* Small devices (sm) */
+@media (max-width: 576px) {
+  .ag-row {
+    font-size: 12px;
+  }
+}
+
+/* Medium devices (md) */
+@media (min-width: 577px) and (max-width: 768px) {
+  .ag-row {
+    font-size: 14px;
+  }
+}
+
+/* Large devices (lg) */
+@media (min-width: 769px) {
+  .ag-row {
+    font-size: 16px;
+  }
+}
