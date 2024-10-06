@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { customAxios as axios } from '../../helpers/customAxios';
-import { useEffect, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { Button, ButtonGroup, Heading, Tooltip } from '@chakra-ui/react';
 import { CgUndo, CgRedo } from 'react-icons/cg';
 import { MdSave } from 'react-icons/md';
+
+import './style.css';
 
 export default function AdminHarvestGames(props) {
   const [api, setApi] = useState();
@@ -21,11 +22,23 @@ export default function AdminHarvestGames(props) {
 
   const getData = async () => {
     try {
-      const { data } = await axios.get('/api/hgRankings/get');
+      const { data } = await axios.get('/api/hgRankings/get', {
+        params: { lgRankingId: 'AdminTest' },
+      });
       setRankings(data);
     } catch (err) {
       console.log(err);
     }
+  };
+
+  // Function to add a new row
+  const addNewRow = () => {
+    const newRow = {
+      lgName: '', // Default value for LIFE Group
+      gameRankings: { 0: 0, 1: 0, 2: 0 }, // Default values for games
+      overallRanking: 0, // Default overall ranking
+    };
+    setRankings((prevRankings) => [...prevRankings, newRow]);
   };
 
   // Function to save individual ranking info to DB
@@ -42,7 +55,6 @@ export default function AdminHarvestGames(props) {
   // Save ranking info across all rows
   const saveAllToDB = async () => {
     if (api) {
-      // Iterate across each node (row) and call API to save to DB
       api.forEachNode(async (rowNode) => {
         await saveRankingInfo(rowNode.data);
       });
@@ -64,13 +76,11 @@ export default function AdminHarvestGames(props) {
   }, [rankings, api]);
 
   // Ag-Grid Helpers
-  // Getter Functions: to handle errors in retrieving data
   const gameRankingGetter = (params) => {
     if (params && params.data && params.data.gameRankings) {
       const { colId } = params.colDef;
       return params.data.gameRankings[colId];
     }
-
     return 0;
   };
 
@@ -78,22 +88,14 @@ export default function AdminHarvestGames(props) {
     if (params && params.data && params.data.overallRanking) {
       return params.data.overallRanking;
     }
-
     return 0;
   };
 
-  // Setter Functions: to validate user edits
   const rankingSetter = (params) => {
-    // Convert to String for handling misleading False condition (i.e. Number 0 == False)
     if (params && params.data && String(params.newValue)) {
       const { colId } = params.colDef;
-
-      // Convert to Number for storing and saving to database
       var newRanking = Number(params.newValue);
-
-      // Ranking validation: Check if input is a positive integer
       if (Number.isInteger(newRanking) && newRanking >= 0) {
-        // Check for ranking type: (1) <string> = overall (2) <Number> = individual games
         if (typeof colId === 'string') {
           params.data.overallRanking = newRanking;
           return true;
@@ -105,14 +107,12 @@ export default function AdminHarvestGames(props) {
       alert('Invalid Ranking!');
       return false;
     }
-
     return false;
   };
 
   const rankingFormatter = (params) => {
     if (params && params.data) {
       const { colId } = params.colDef;
-
       if (typeof colId === 'string') {
         return params.data.overallRanking === 0 ||
           params.data.overallRanking === '-'
@@ -125,18 +125,14 @@ export default function AdminHarvestGames(props) {
           : params.data.gameRankings[colId];
       }
     }
-
     return '-';
   };
 
-  // Ag-Grid Functions
-  // Initialize Grid API states
   const onGridReady = (params) => {
     if (params.api) setApi(params.api);
     if (params.columnApi) setColApi(params.columnApi);
   };
 
-  // Function to resize all columns automatically
   const autoSizeAllColumns = () => {
     if (colApi) {
       const allColumnIds = [];
@@ -147,15 +143,11 @@ export default function AdminHarvestGames(props) {
     }
   };
 
-  // Sorting Function
   const sortByOverall = () => {
     if (colApi) {
-      // To reset sort state before sorting again
       colApi.applyColumnState({
         defaultState: { sort: null },
       });
-
-      // DEFAULT: Sort in ascending order of overall ranking
       colApi.applyColumnState({
         state: [{ colId: 'overall', sort: 'asc' }],
         defaultState: { sort: null },
@@ -163,7 +155,6 @@ export default function AdminHarvestGames(props) {
     }
   };
 
-  // Resize columns and sort rankings on first render of the grid
   const onFirstDataRendered = () => {
     if (api && colApi) {
       autoSizeAllColumns();
@@ -171,7 +162,6 @@ export default function AdminHarvestGames(props) {
     }
   };
 
-  // Function to handle cell edits
   const onCellValueChanged = async (p) => {
     if (api && colApi && p.data) {
       autoSizeAllColumns();
@@ -179,7 +169,6 @@ export default function AdminHarvestGames(props) {
     }
   };
 
-  // Undo and Redo Functions
   const undo = () => {
     if (api) api.undoCellEditing();
   };
@@ -188,20 +177,16 @@ export default function AdminHarvestGames(props) {
     if (api) api.redoCellEditing();
   };
 
-  // Enabling Undo and Redo
   const undoRedoCellEditing = true;
   const undoRedoCellEditingLimit = 20;
   const enableCellChangeFlash = true;
 
-  //  Ag-Grid Column Definitions
   const columnDefs = [
     {
       headerName: 'LIFE Group',
       field: 'lgName',
       editable: true,
     },
-    // Set colId of breakdown to game number minus 1, i.e. normalize to zero-based indexing
-    // colId will be utilized in getting and setting rankings
     {
       headerName: 'Rankings Breakdown',
       marryChildren: true,
@@ -244,6 +229,11 @@ export default function AdminHarvestGames(props) {
         Harvest Games Rankings
       </Heading>
       <ButtonGroup mb={5} variant="outline" spacing="5">
+        <Tooltip label="Add a new row">
+          <Button onClick={addNewRow} variant="solid">
+            Add Row
+          </Button>
+        </Tooltip>
         <Tooltip label="Ctrl/Cmd + Z">
           <Button onClick={undo} leftIcon={<CgUndo />}>
             Undo
@@ -258,7 +248,10 @@ export default function AdminHarvestGames(props) {
           Save
         </Button>
       </ButtonGroup>
-      <div className="ag-theme-alpine" style={{ height: 500 }}>
+      <div
+        className="ag-theme-alpine"
+        style={{ height: 500, backgroundColor: 'black' }}
+      >
         <AgGridReact
           defaultColDef={defaultColDef}
           columnDefs={columnDefs}

@@ -153,6 +153,7 @@ module.exports.routes = {
   // Harvest Games APIs
   'get /api/hgRankings/get': 'harvestGames/get-hg-rankings',
   'put /api/hgRankings/update': 'harvestGames/update-hg-rankings',
+  'get /api/hgRankings/authenticate': 'harvestGames/get-hg-passwords',
 
   // UI
   'get /*': {

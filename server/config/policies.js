@@ -120,6 +120,7 @@ module.exports.policies = {
   // Harvest Games
   'harvestGames/get-hg-rankings': true,
   'harvestGames/update-hg-rankings': ['isLoggedIn', 'aboveTech'],
+  'harvestGames/get-hg-passwords': true,
 
   // Users
   'users/reset': ['isLoggedIn', 'aboveAdmin'],
