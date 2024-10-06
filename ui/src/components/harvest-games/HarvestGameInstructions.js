@@ -101,6 +101,8 @@ export default function HarvestGameInstructions() {
     }
   };
 
+  console.log(gameType[selected].imageUrl);
+
   return (
     <VStack spacing="0" minHeight="60em">
       <Box

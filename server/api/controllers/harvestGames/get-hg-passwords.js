@@ -45,7 +45,7 @@ module.exports = {
           'https://hongkong.sub.hmcc.net/wp-content/uploads/hg_game1_pg3.gif',
         ];
       } else if (gameId == 1) {
-        imageLink = [
+        imageLinkData = [
           'https://hongkong.sub.hmcc.net/wp-content/uploads/hg_game2_pg1.gif',
           'https://hongkong.sub.hmcc.net/wp-content/uploads/hg_game2_pg2.gif',
           'https://hongkong.sub.hmcc.net/wp-content/uploads/hg_game2_pg3.gif',
@@ -53,13 +53,12 @@ module.exports = {
           'https://hongkong.sub.hmcc.net/wp-content/uploads/hg_game2_pg5.gif',
         ];
       } else if (gameId == 2) {
-        imageLink = [
+        imageLinkData = [
           'https://hongkong.sub.hmcc.net/wp-content/uploads/hg_game3_pg1.gif',
           'https://hongkong.sub.hmcc.net/wp-content/uploads/hg_game3_pg2.gif',
           'https://hongkong.sub.hmcc.net/wp-content/uploads/hg_game3_pg3.gif',
           'https://hongkong.sub.hmcc.net/wp-content/uploads/hg_game3_pg4.gif',
           'https://hongkong.sub.hmcc.net/wp-content/uploads/hg_game3_pg5.gif',
-          'https://hongkong.sub.hmcc.net/wp-content/uploads/hg_game3_pg6.gif',
         ];
       }
 
