@@ -286,9 +286,7 @@ export default function HarvestGameInstructions() {
                     marginX="auto"
                     textAlign="end"
                     paddingBottom="8"
-                  >
-                    {i + 1}
-                  </Box>
+                  ></Box>
                 ))}
             </Grid>
           </VStack>
