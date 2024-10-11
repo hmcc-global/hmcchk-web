@@ -126,7 +126,7 @@ const StaffSection = (props) => {
             color="#0628A3"
             id="staff"
           >
-            Ministry Leaders
+            Ministry Directors
           </Heading>
         </Box>
         <Flex flexDir={['column', 'row']}>
