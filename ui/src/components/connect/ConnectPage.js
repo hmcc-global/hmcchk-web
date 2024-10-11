@@ -51,7 +51,7 @@ const ConnectPage = (props) => {
           <Flex
             bgImage={
               // `linear-gradient(90deg, rgba(231, 187, 187, 0.71) 0%, rgba(89, 168, 212, 0.62) 100%), ` +
-              `url(${process.env.PUBLIC_URL}/images/connect/connect-welcome.png)`
+              `url(${process.env.PUBLIC_URL}/images/connect/connect-welcome.gif)`
             }
             bgSize="cover"
             bgPosition="center"
