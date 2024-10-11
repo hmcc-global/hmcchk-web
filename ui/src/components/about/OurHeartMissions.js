@@ -14,7 +14,7 @@ const Picture = ({ image, year, text }) => {
     <VStack h="100%" px={{ md: 1, lg: 2 }} py={3}>
       <Box
         w="100%"
-        h="7em"
+        h="5em"
         bgImage={image}
         bgPos="center"
         bgSize="contain"
@@ -116,7 +116,7 @@ const MissionSection = (props) => {
             direction="row"
             display={{ base: 'none', sm: 'none', md: 'flex' }}
             justify="space-around"
-            marginX={[5, 12]}
+            marginX={[5]}
           >
             <Picture
               image={`/images/about/send_me.svg`}
@@ -148,6 +148,16 @@ const MissionSection = (props) => {
               year="2021"
               text="Living on the Edge"
             ></Picture>
+            <Picture
+              image={`/images/about/no_other_name.svg`}
+              year="2022"
+              text="No Other Name"
+            ></Picture>
+            <Picture
+              image={`/images/about/to_the_ends_of_the_earth.svg`}
+              year="2023"
+              text="To the Ends of the Earth"
+            ></Picture>
           </Stack>
 
           <VStack display={{ sm: 'flex', md: 'none' }}>
@@ -167,13 +177,13 @@ const MissionSection = (props) => {
                 year="2018"
                 text="Chosen Generation"
               ></Picture>
-            </HStack>
-            <HStack w="100%" justify="space-around">
               <Picture
                 image={`/images/about/just_one.svg`}
                 year="2019"
                 text="Just One"
               ></Picture>
+            </HStack>
+            <HStack w="100%" justify="space-around">
               <Picture
                 image={`/images/about/upside_down.svg`}
                 year="2020"
@@ -183,6 +193,16 @@ const MissionSection = (props) => {
                 image={`/images/about/living_edge.png`}
                 year="2021"
                 text="Living on the Edge"
+              ></Picture>
+              <Picture
+                image={`/images/about/no_other_name.svg`}
+                year="2022"
+                text="No Other Name"
+              ></Picture>
+              <Picture
+                image={`/images/about/to_the_ends_of_the_earth.svg`}
+                year="2023"
+                text="To the Ends of the Earth"
               ></Picture>
             </HStack>
           </VStack>

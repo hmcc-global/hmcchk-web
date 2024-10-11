@@ -43,20 +43,7 @@ const StorySection = (props) => {
       <Text color="black" textAlign="justify">
         {blurb[0]}
       </Text>
-      <Box
-        w="100%"
-        h={['15em', '25em']}
-        borderWidth="1px"
-        borderRadius="20"
-        bgImage={`url('${process.env.PUBLIC_URL}/images/about/picture1.png')`}
-        bgPosition="center"
-        bgSize="cover"
-        px={[6, 12, 35]}
-        py={[8, 16, 20]}
-        mt={[4, 8]}
-        mb={[4, 8]}
-      ></Box>
-      <Text color="black" textAlign="justify">
+      <Text mt={[4, 8]} color="black" textAlign="justify">
         {blurb[1]}
       </Text>
       <Stack
