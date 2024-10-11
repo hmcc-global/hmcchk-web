@@ -38,6 +38,7 @@ import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementC
 import AdminLeadershipTeamContainer from './admin/leadershipTeam/AdminLeadershipTeamContainer';
 import AdminSermonNotesContainer from './admin/sermonNotes/AdminSermonNotesContainer';
 import SermonNotesContainer from './sermon-notes/SermonNotesContainer';
+import PrivacyPolicy from './screens/PrivacyPolicy';
 
 const MainContainer = () => {
   return (
@@ -54,6 +55,12 @@ const MainContainer = () => {
     >
       <ScrollToTop />
       <Switch>
+        <PrivateRoute
+          exact
+          path="/privacy-policy"
+          permissions={['public']}
+          component={PrivacyPolicy}
+        />
         <PrivateRoute
           exact
           path="/"

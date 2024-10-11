@@ -268,6 +268,23 @@ const Footer = () => {
                   Give
                 </Text>
               </Link>
+              <Link
+                href="/privacy-policy"
+                id="footer-privacy-policy"
+                _hover={{
+                  textDecoration: 'underline',
+                  textDecorationColor: '#4A6EEB',
+                }}
+              >
+                <Text
+                  fontSize="16px"
+                  fontFamily="Manrope"
+                  color="#4A6EEB"
+                  textAlign="center"
+                >
+                  Privacy Policy
+                </Text>
+              </Link>
             </VStack>
           </Stack>
           <Spacer />
