@@ -35,9 +35,10 @@ const LifeGroups = (props) => {
         <span style={{ color: '#FEDD64' }}>E</span> GROUPS
       </Heading>
       <AspectRatio
-        maxW="100%"
+        maxW={['100%', '100%', '66%']}
         ratio={16 / 9}
         mb={10}
+        mx="auto"
         borderRadius="20"
         borderWidth="1px"
         overflow="hidden"

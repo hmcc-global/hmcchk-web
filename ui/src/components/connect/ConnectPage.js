@@ -6,6 +6,7 @@ import {
   useMediaQuery,
   Flex,
 } from '@chakra-ui/react';
+import PastorGreeting from './PastorGreeting';
 import ExperienceHmcc from './ExperienceHmcc';
 import Faq from './Faq';
 import LifeGroups from './LifeGroups';
@@ -16,8 +17,6 @@ import { useEffect, useRef } from 'react';
 const ConnectPage = (props) => {
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
   const { hash } = useLocation();
-  const vidRef = useRef();
-  const vidRefMobile = useRef();
 
   useEffect(() => {
     switch (hash) {
@@ -31,23 +30,11 @@ const ConnectPage = (props) => {
         break;
     }
   }, [hash]);
-  useEffect(() => {
-    if (vidRef.current) {
-      vidRef.current.addEventListener('loadedmetadata', (e) => {
-        vidRef.current.play();
-      });
-    }
-    if (vidRefMobile.current) {
-      vidRefMobile.current.addEventListener('loadedmetadata', (e) => {
-        vidRefMobile.current.play();
-      });
-    }
-  }, [vidRef, vidRefMobile]);
 
   return (
     <Box background="linear-gradient(151.15deg, rgba(223, 231, 255, 1.0) 11.18%, rgba(255, 255, 255, 0.3) 42.46%, rgba(202, 220, 255, 0.3) 76.7%), linear-gradient(194.34deg, #FFE6E6 1.83%, #FFFFFF 51.22%, #D6FFEA 99.59%)">
       <Container maxW="container.lg" py={10}>
-        <VStack spacing={[4, 12]} align="stretch">
+        <VStack spacing={[4, 7]} align="stretch">
           <Flex
             bgImage={
               // `linear-gradient(90deg, rgba(231, 187, 187, 0.71) 0%, rgba(89, 168, 212, 0.62) 100%), ` +
@@ -91,6 +78,7 @@ const ConnectPage = (props) => {
               </Heading>
             </Box>
           </Flex>
+          <PastorGreeting />
           <ExperienceHmcc />
           <LifeGroups isLargerThan768={isLargerThan768} />
           <Faq />
