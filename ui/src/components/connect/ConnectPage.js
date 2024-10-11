@@ -78,7 +78,7 @@ const ConnectPage = (props) => {
               </Heading>
             </Box>
           </Flex>
-          <PastorGreeting />
+          {/* <PastorGreeting /> */}
           <ExperienceHmcc />
           <LifeGroups isLargerThan768={isLargerThan768} />
           <Faq />
