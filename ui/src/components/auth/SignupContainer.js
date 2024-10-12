@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
-import GoogleLogin from 'react-google-login';
+import { GoogleLogin } from '@react-oauth/google';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Box, VStack, Flex, Image, Text, Button, Link } from '@chakra-ui/react';
 
@@ -8,10 +8,10 @@ const SignupContainer = (props) => {
   const [invalidLogin, setInvalidLogin] = useState('');
   const { history } = props;
 
-  const onGoogleSuccessSignup = async ({ tokenId }) => {
+  const onGoogleSuccessSignup = async ({ credential }) => {
     try {
       const { data } = await axios.post('/api/auth/signup-google', {
-        tokenId: tokenId,
+        tokenId: credential,
       });
       history.push({
         pathname: '/signup/form',
@@ -22,11 +22,12 @@ const SignupContainer = (props) => {
     }
   };
 
-  const onGoogleFailure = ({ error }) => {
-    if (error.response.status === 500) {
-      setInvalidLogin('Invalid email or wrong password');
-    }
-    console.log(error);
+  const onGoogleFailure = (message) => {
+    // TODO
+    // if (error.response.status === 500) {
+    //   setInvalidLogin('Invalid email or wrong password');
+    // }
+    // console.log(error);
   };
 
   const signupBoxStyle = {
@@ -118,29 +119,15 @@ const SignupContainer = (props) => {
                   SIGN UP WITH PERSONAL EMAIL
                 </Button>
               </Link>
+              <Text>OR</Text>
               <GoogleLogin
-                clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                render={(renderProps) => (
-                  <Button
-                    leftIcon={
-                      <Image
-                        src={`${process.env.PUBLIC_URL}/images/google.svg`}
-                        alt="Google"
-                      />
-                    }
-                    style={signupBoxStyle}
-                    _hover={{ opacity: '0.75' }}
-                    background="#2C5282"
-                    h={['40px', '40px', '55px', '55px']}
-                    onClick={renderProps.onClick}
-                  >
-                    SIGN UP WITH GOOGLE
-                  </Button>
-                )}
-                buttonText="Login"
+                locale="en"
+                size="large"
+                shape="pill"
+                text="signup_with"
+                use_fedcm_for_prompt={true}
                 onSuccess={onGoogleSuccessSignup}
                 onFailure={onGoogleFailure}
-                cookiePolicy={'single_host_origin'}
               />
             </VStack>
             <Flex

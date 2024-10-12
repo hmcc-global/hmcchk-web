@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
-import GoogleLogin from 'react-google-login';
+import { GoogleLogin } from '@react-oauth/google';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { signin } from '../../reducers/userSlice';
@@ -42,21 +42,24 @@ const LoginContainer = (props) => {
     }
   };
 
-  const onGoogleSuccessLogin = async ({ tokenId }) => {
+  const onGoogleSuccessLogin = async ({credential}) => {
     const { data } = await axios.post('/api/auth/login-google', {
-      tokenId: tokenId,
+      tokenId: credential,
     });
     dispatch(signin(data));
     setInvalidLogin('');
     window.location.reload();
   };
 
-  const onGoogleFailure = ({ error }) => {
-    if (error.response.status === 500) {
-      setInvalidLogin('Invalid email or wrong password');
-    }
-    console.log(error);
+  const onGoogleFailure = (message) => {
+    // TODO
+    console.log(message);
+    // if (error.response.status === 500) {
+    //   setInvalidLogin('Invalid email or wrong password');
+    // }
+    // console.log(error);
   };
+
   const onSubmit = (data) => {
     postLogin(data.email, data.password);
   };
@@ -226,29 +229,15 @@ const LoginContainer = (props) => {
                 >
                   LOGIN
                 </Button>
+                <Text>OR</Text>
                 <GoogleLogin
-                  clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                  render={(renderProps) => (
-                    <Button
-                      leftIcon={
-                        <Image
-                          src={`${process.env.PUBLIC_URL}/images/google.svg`}
-                          alt="Google"
-                        />
-                      }
-                      onClick={renderProps.onClick}
-                      style={submitBoxStyle}
-                      _hover={{ opacity: '0.75' }}
-                      background="#2C5282"
-                      h={['40px', '40px', '55px', '55px']}
-                    >
-                      LOGIN WITH GOOGLE
-                    </Button>
-                  )}
-                  buttonText="Login"
+                  locale="en"
+                  size="large"
+                  shape="pill"
+                  text="signin_with"
+                  use_fedcm_for_prompt={true}
                   onSuccess={onGoogleSuccessLogin}
                   onFailure={onGoogleFailure}
-                  cookiePolicy={'single_host_origin'}
                 />
               </VStack>
             </form>
