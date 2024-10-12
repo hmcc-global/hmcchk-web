@@ -119,12 +119,13 @@ const SignupContainer = (props) => {
                   SIGN UP WITH PERSONAL EMAIL
                 </Button>
               </Link>
+              <Text>OR</Text>
               <GoogleLogin
                 locale="en"
-                width="100%"
                 size="large"
                 shape="pill"
                 text="signup_with"
+                use_fedcm_for_prompt={true}
                 onSuccess={onGoogleSuccessSignup}
                 onFailure={onGoogleFailure}
               />

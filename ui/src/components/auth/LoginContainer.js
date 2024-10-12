@@ -229,12 +229,13 @@ const LoginContainer = (props) => {
                 >
                   LOGIN
                 </Button>
+                <Text>OR</Text>
                 <GoogleLogin
                   locale="en"
-                  width="100%"
                   size="large"
                   shape="pill"
                   text="signin_with"
+                  use_fedcm_for_prompt={true}
                   onSuccess={onGoogleSuccessLogin}
                   onFailure={onGoogleFailure}
                 />
