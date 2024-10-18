@@ -24,6 +24,7 @@ import {
   ModalFooter,
   VStack,
   ModalCloseButton,
+  HStack,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
 import { customAxios as axios } from '../helpers/customAxios';
@@ -43,9 +44,10 @@ import {
   getLoginOnlyFormsRequest,
   generatePublishedFormLinks,
 } from '../helpers/userInformationHelpers';
+import SermonNotesPagination from './SermonNotesPagination';
 
 const UserProfileDesktop = (props) => {
-  const { user , staticData } = props;
+  const { user, staticData } = props;
   const { lifegroupList, lifestageList, campusList } = staticData;
 
   const { register, control, handleSubmit, setValue, formState } = useForm();
@@ -55,6 +57,8 @@ const UserProfileDesktop = (props) => {
   const [unsignedFormList, setUnsignedFormList] = useState([]);
   const [signedUpFormList, setSignedUpFormList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [activeSermonNoteTab, setActiveSermonNoteTab] = useState('all');
+  const [userSermonNotes, setUserSermonNotes] = useState([]);
 
   const setUserInformationFields = (userData) => {
     for (let key in userData) {
@@ -151,6 +155,18 @@ const UserProfileDesktop = (props) => {
     }
   }, [user.id]);
 
+  const fetchUserSermonNotes = useCallback(async () => {
+    const { data, status } = await axios.get('/api/sermons/get-sermon-notes', {
+      params: {
+        userId: user.id,
+      },
+    });
+
+    if (status === 200) {
+      setUserSermonNotes(data);
+    }
+  }, [user.id]);
+
   // Implementation needs some component specific customization
   const handleEditUserInformation = async (data, e) => {
     userDataCleanup(data);
@@ -170,11 +186,13 @@ const UserProfileDesktop = (props) => {
     fetchPublishedForms();
     fetchSignedUpForms();
     fetchUnsignedUpForms();
+    fetchUserSermonNotes();
   }, [
     fetchUserData,
     fetchPublishedForms,
     fetchSignedUpForms,
     fetchUnsignedUpForms,
+    fetchUserSermonNotes,
   ]);
 
   const inputBox = {
@@ -263,6 +281,9 @@ const UserProfileDesktop = (props) => {
           <Box flex={1}>
             <TabList border="none" alignItems="flex-end">
               <Tab style={tabTitle} _selected={{ md: tabText }}>
+                Sermon Notes
+              </Tab>
+              <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
                 Signup Links
               </Tab>
               <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
@@ -280,6 +301,52 @@ const UserProfileDesktop = (props) => {
             border="1px solid #EBEBEB"
             borderRadius="10px"
           >
+            <TabPanel p="5%">
+              <HStack gap={5} mb={5}>
+                <Button
+                  borderRadius={30}
+                  bg={activeSermonNoteTab === 'all' ? '#4A6EEB' : '#DFE7FF'}
+                  color={activeSermonNoteTab === 'all' ? 'white' : '#4A6EEB'}
+                  onClick={() => setActiveSermonNoteTab('all')}
+                  px={5}
+                  _hover={{
+                    bg: activeSermonNoteTab === 'all' ? '#4A6EEB' : '#DFE7FF',
+                    color: activeSermonNoteTab === 'all' ? 'white' : '#4A6EEB',
+                  }}
+                >
+                  <Text fontWeight="semibold" mx={2}>
+                    All Sermon Notes
+                  </Text>
+                </Button>
+                <Button
+                  borderRadius={30}
+                  bg={activeSermonNoteTab === 'my' ? '#4A6EEB' : '#DFE7FF'}
+                  color={activeSermonNoteTab === 'my' ? 'white' : '#4A6EEB'}
+                  onClick={() => {
+                    setActiveSermonNoteTab('my');
+                  }}
+                  px={5}
+                  _hover={{
+                    bg: activeSermonNoteTab === 'my' ? '#4A6EEB' : '#DFE7FF',
+                    color: activeSermonNoteTab === 'my' ? 'white' : '#4A6EEB',
+                  }}
+                >
+                  <Text fontWeight="semibold">Saved Sermon Notes</Text>
+                </Button>
+              </HStack>
+              {activeSermonNoteTab === 'all' && (
+                <SermonNotesPagination
+                  sermonNotes={userSermonNotes}
+                  showSavedOnly={false}
+                />
+              )}
+              {activeSermonNoteTab === 'my' && (
+                <SermonNotesPagination
+                  sermonNotes={userSermonNotes}
+                  showSavedOnly={true}
+                />
+              )}
+            </TabPanel>
             <TabPanel p="5%">
               <Stack direction="row" spacing="5">
                 {formList && formList.length > 0 && (

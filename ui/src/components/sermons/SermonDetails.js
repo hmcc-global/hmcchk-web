@@ -16,6 +16,7 @@ import { DateTime } from 'luxon';
 import { DATE_FULL } from 'luxon/src/impl/formats';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router';
+import OnlinePageTabs from './OnlinePageTabs';
 
 const SermonDetails = (props) => {
   const [sermon, setSermon] = useState();
@@ -24,8 +25,10 @@ const SermonDetails = (props) => {
   const [sermonUrl, setSermonUrl] = useState();
   const [sermonDate, setSermonDate] = useState();
   const [randomSermons, setRandomSermons] = useState([]);
+  const [sermonNoteLink, setSermonNoteLink] = useState('');
   const currId = props.match.params.id;
   const history = useHistory();
+  const { user } = props;
 
   const getData = useCallback(async () => {
     try {
@@ -38,6 +41,16 @@ const SermonDetails = (props) => {
         setAllSermons([...data]);
         if (currentSermon.streamLink && currentSermon.sermonNotes) {
         }
+        setSermon(currentSermon);
+        const formattedDate = getFormattedDate(
+          currentSermon?.datePreached || ''
+        );
+        const serviceTypeCode = getServiceTypeCode(
+          currentSermon?.serviceType[0]?.name || ''
+        );
+        setSermonNoteLink(
+          `/sermons/notes/${serviceTypeCode}-${formattedDate}-1`
+        );
         setSermon(currentSermon);
       } else {
         throw Error('Something went wrong');
@@ -73,11 +86,13 @@ const SermonDetails = (props) => {
       DATE_FULL
     );
     setSermonDate(sermonDate);
-  },[sermon]);
+  }, [sermon]);
 
   const getVideoCode = useCallback(() => {
     let sermonVideoCode =
-      sermon.sermonVideoUrl.split('/')[sermon.sermonVideoUrl.split('/').length - 1];
+      sermon.sermonVideoUrl.split('/')[
+        sermon.sermonVideoUrl.split('/').length - 1
+      ];
     setSermonUrl(`https://www.youtube.com/embed/${sermonVideoCode}`);
   }, [sermon]);
 
@@ -109,6 +124,20 @@ const SermonDetails = (props) => {
     setRandomSermons(randomSermons);
   }, [allSermons, sermon]);
 
+  const getFormattedDate = (datePreached) => {
+    return datePreached
+      ? DateTime.fromISO(datePreached).toFormat('ddMMyyyy')
+      : '';
+  };
+
+  const getServiceTypeCode = (serviceTypeName) => {
+    return serviceTypeName === 'Sunday Celebration'
+      ? 'sn'
+      : serviceTypeName
+      ? serviceTypeName.toLowerCase()
+      : '';
+  };
+
   useEffect(() => {
     if (allSermons && sermon) {
       getRelatedSermons();
@@ -116,87 +145,125 @@ const SermonDetails = (props) => {
       getVideoCode();
       getRandomSermons();
     }
-  }, [allSermons, getRandomSermons, getRelatedSermons, getSermonDate, getVideoCode, sermon]);
+  }, [
+    allSermons,
+    getRandomSermons,
+    getRelatedSermons,
+    getSermonDate,
+    getVideoCode,
+    sermon,
+  ]);
 
   return (
     <>
       {sermon && allSermons && (
-        <Container maxW="container.lg">
+        <Container maxW="container.xl">
           <Box mb="20px" mt="20px">
-            <VStack alignItems="left" alignContent="left">
-              <Link href="/sermons" id="sermon_details-sermons">
-                <Button
-                  variant="link"
-                  fontSize="lg"
-                  color="black"
-                  justifyContent="left"
-                  leftIcon={<ChevronLeftIcon />}
-                  display={{ base: 'none', md: 'flex' }}
-                >
-                  See all past sermons
-                </Button>
-              </Link>
-              <AspectRatio mb="5" width="100%" ratio={16 / 9}>
-                <iframe
-                  width="560"
-                  height="315"
-                  src={sermonUrl}
-                  title="Video player"
-                  frameBorder="0"
-                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
-                  allowFullScreen
-                ></iframe>
-              </AspectRatio>
-              <Text fontWeight="bold" fontSize={{ base: 'xl', md: '3xl' }}>
-                {sermon.title}
-              </Text>
-              <Stack spacing={8}>
-                <Box>
-                  <Stack
-                    spacing={{ base: 'normal', md: 'auto' }}
-                    direction={{ base: 'column', md: 'row' }}
-                  >
-                    <HStack>
-                      <Text fontWeight="bold">Speaker:</Text>
-                      <Text>{sermon.speaker[0].name}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Date: </Text>
-                      <Text>{sermonDate}</Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">Series: </Text>
-                      <Text>{sermon.sermonSeries[0].name}</Text>
-                    </HStack>
-                  </Stack>
-                  <Stack
-                    spacing={{ base: 'normal', md: 'auto' }}
-                    direction={{ base: 'column', md: 'row' }}
-                  >
-                    <HStack>
-                      <Text fontWeight="bold">Passage:</Text>
-                      <Text>{sermon.passage}</Text>
-                    </HStack>
-                  </Stack>
-                </Box>
-                {sermon.sermonAudioUrl && (
+            <Link href="/sermons" id="sermon_details-sermons">
+              <Button
+                variant="link"
+                fontSize="lg"
+                color="black"
+                justifyContent="left"
+                leftIcon={<ChevronLeftIcon />}
+                display={{ base: 'none', md: 'flex' }}
+                mb="10px"
+              >
+                See all past sermons
+              </Button>
+            </Link>
+            <Stack
+              spacing={4}
+              direction={{ base: 'column', lg: 'row' }}
+              alignItems="flex-start"
+              mb={5}
+            >
+              <Box w={{ base: '100%', lg: '60%' }}>
+                <AspectRatio mb="5" width="100%" ratio={16 / 9}>
+                  <iframe
+                    width="560"
+                    height="315"
+                    src={sermonUrl}
+                    title="Video player"
+                    frameBorder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+                    allowFullScreen
+                  ></iframe>
+                </AspectRatio>
+                <Text fontWeight="bold" fontSize={{ base: 'xl', md: '3xl' }}>
+                  {sermon.title}
+                </Text>
+                <Stack spacing={8}>
                   <Box>
-                    <Text fontWeight="bold" color="#0628A3" fontSize="xl">
-                      Audio Sermon:
-                    </Text>
-                    <HStack>
-                      <audio
-                        src={sermon.sermonAudioUrl}
-                        width="100%"
-                        height="232"
-                        frameBorder="0"
-                        controls
-                        allowFullScreen=""
-                        allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                      />
-                    </HStack>
+                    <Stack
+                      spacing={{ base: 'normal', md: 'auto' }}
+                      direction={{ base: 'column', md: 'row' }}
+                    >
+                      <HStack>
+                        <Text fontWeight="bold">Speaker:</Text>
+                        <Text>{sermon.speaker[0].name}</Text>
+                      </HStack>
+                      <HStack>
+                        <Text fontWeight="bold">Date: </Text>
+                        <Text>{sermonDate}</Text>
+                      </HStack>
+                      <HStack>
+                        <Text fontWeight="bold">Series: </Text>
+                        <Text>{sermon.sermonSeries[0].name}</Text>
+                      </HStack>
+                    </Stack>
+                    <Stack
+                      spacing={{ base: 'normal', md: 'auto' }}
+                      direction={{ base: 'column', md: 'row' }}
+                    >
+                      <HStack>
+                        <Text fontWeight="bold">Passage:</Text>
+                        <Text>{sermon.passage}</Text>
+                      </HStack>
+                    </Stack>
                   </Box>
-                )}
+
+                  {sermon.sermonAudioUrl && (
+                    <Box>
+                      <Text fontWeight="bold" color="#0628A3" fontSize="xl">
+                        Audio Sermon:
+                      </Text>
+                      <HStack>
+                        <audio
+                          src={sermon.sermonAudioUrl}
+                          width="100%"
+                          controls
+                          allowFullScreen=""
+                          allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        />
+                      </HStack>
+                    </Box>
+                  )}
+                </Stack>
+              </Box>
+              <Box
+                w={{ base: '100%', lg: '40%' }}
+                overflowY="auto"
+                borderRadius={10}
+                boxShadow="0px 4px 18px rgba(0, 0, 0, 0.25)"
+                maxH={700}
+              >
+                <Box w="100%" h="50%">
+                  <OnlinePageTabs
+                    sermonNotes={sermonNoteLink}
+                    user={user}
+                    history={history}
+                    isOfflineSermonNote={true}
+                  />
+                </Box>
+              </Box>
+            </Stack>
+            <VStack
+              alignItems="left"
+              alignContent="center"
+              mx={{ base: '5px', lg: '20px' }}
+            >
+              <Stack spacing={8}>
                 <Stack spacing={4}>
                   {relatedSermons.length > 0 && (
                     <Text fontWeight="bold" color="#0628A3" fontSize="xl">

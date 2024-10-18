@@ -18,7 +18,12 @@ import { RepeatIcon } from '@chakra-ui/icons';
 import { useMemo, useState } from 'react';
 import SermonNotesContainer from '../sermon-notes/SermonNotesContainer';
 
-const OnlinePageTabs = ({ user, history, sermonNotes }) => {
+const OnlinePageTabs = ({
+  user,
+  history,
+  sermonNotes,
+  isOfflineSermonNote,
+}) => {
   const [noteId, setNoteId] = useState(0);
   const [tab, setTab] = useState(0);
   const isMobile = useBreakpointValue({ base: true, lg: false });
@@ -63,6 +68,7 @@ const OnlinePageTabs = ({ user, history, sermonNotes }) => {
               sermonNoteId={sermonId}
               history={history}
               user={user}
+              isOfflineSermonNote={isOfflineSermonNote}
             />
           </Box>
         </TabPanel>

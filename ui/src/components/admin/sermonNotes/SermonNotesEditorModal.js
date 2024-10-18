@@ -32,7 +32,9 @@ const SermonNotesEditorModal = (props) => {
   // Create a object
   const sermonIdMap = {
     'Sunday Celebration': 'sn',
-    Encounter: 'encounter',
+    'Vision Sunday': 'vs',
+    'Special Events': 'se',
+    Encounter: 'en',
   };
 
   const [sermonNoteData, setSermonNoteData] = useState({
@@ -445,7 +447,9 @@ const SermonNotesEditorModal = (props) => {
                       })
                     }
                   />
-                  <FormHelperText>Please follow the usual format 'sn-jul06'</FormHelperText>
+                  <FormHelperText>
+                    Please follow the usual format 'sn-jul06'
+                  </FormHelperText>
                 </FormControl>
                 <FormControl>
                   <FormLabel color="#656565" fontWeight="bold">
