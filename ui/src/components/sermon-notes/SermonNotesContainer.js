@@ -35,10 +35,10 @@ const SermonNotesContainer = (props) => {
   const sermonId = isOfflineSermonNote
     ? sermonNoteId // If offline, use the passed sermonNoteId directly
     : sermonNoteId && sermonNoteId !== '' && sermonNoteId !== 'online'
-    ? sermonNoteId // Use the ID from the live page
-    : sermonNoteId === 'online'
-    ? `sn-${todayId}-1` // Only works when there is just one sermon note that day
-    : urlPath; // Get the ID from the URL path as a fallback
+      ? sermonNoteId // Use the ID from the live page
+      : sermonNoteId === 'online'
+        ? `sn-${todayId}-1` // Only works when there is just one sermon note that day
+        : urlPath; // Get the ID from the URL path as a fallback
 
   const getSermonNotesParent = useCallback(async () => {
     try {

@@ -17,6 +17,13 @@ import { DATE_FULL } from 'luxon/src/impl/formats';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router';
 import OnlinePageTabs from './OnlinePageTabs';
+import { sermonIdMap } from '../admin/sermonNotes/SermonNotesEditorModal';
+
+const getSermonNoteId = (sermon) => {
+  const datePreached = DateTime.fromISO(sermon.datePreached).toFormat('ddMMyyyy');
+  const serviceTypePrefix = sermonIdMap[sermon.serviceType[0].name];
+  return `/sermons/notes/${serviceTypePrefix}-${datePreached}-1`;
+}
 
 const SermonDetails = (props) => {
   const [sermon, setSermon] = useState();
@@ -41,16 +48,6 @@ const SermonDetails = (props) => {
         setAllSermons([...data]);
         if (currentSermon.streamLink && currentSermon.sermonNotes) {
         }
-        setSermon(currentSermon);
-        const formattedDate = getFormattedDate(
-          currentSermon?.datePreached || ''
-        );
-        const serviceTypeCode = getServiceTypeCode(
-          currentSermon?.serviceType[0]?.name || ''
-        );
-        setSermonNoteLink(
-          `/sermons/notes/${serviceTypeCode}-${formattedDate}-1`
-        );
         setSermon(currentSermon);
       } else {
         throw Error('Something went wrong');
@@ -85,6 +82,8 @@ const SermonDetails = (props) => {
     let sermonDate = DateTime.fromISO(sermon.datePreached).toLocaleString(
       DATE_FULL
     );
+
+    setSermonNoteLink(getSermonNoteId(sermon));
     setSermonDate(sermonDate);
   }, [sermon]);
 
@@ -123,20 +122,6 @@ const SermonDetails = (props) => {
     );
     setRandomSermons(randomSermons);
   }, [allSermons, sermon]);
-
-  const getFormattedDate = (datePreached) => {
-    return datePreached
-      ? DateTime.fromISO(datePreached).toFormat('ddMMyyyy')
-      : '';
-  };
-
-  const getServiceTypeCode = (serviceTypeName) => {
-    return serviceTypeName === 'Sunday Celebration'
-      ? 'sn'
-      : serviceTypeName
-      ? serviceTypeName.toLowerCase()
-      : '';
-  };
 
   useEffect(() => {
     if (allSermons && sermon) {
