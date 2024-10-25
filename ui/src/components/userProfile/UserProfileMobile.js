@@ -58,6 +58,8 @@ const UserProfileMobile = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeSermonNoteTab, setActiveSermonNoteTab] = useState('all');
   const [userSermonNotes, setUserSermonNotes] = useState([]);
+  const [sermonSeriesList, setSermonSeriesList] = useState([]);
+  const [selectedSermonSeries, setSelectedSermonSeries] = useState('');
 
   const onModalClose = (e) => {
     setModalOpen(false);
@@ -118,8 +120,29 @@ const UserProfileMobile = (props) => {
 
     if (status === 200) {
       setUserSermonNotes(data);
+      const uniqueSeries = extractUniqueSermonSeries(data);
+      setSermonSeriesList(uniqueSeries);
     }
   }, [user.id]);
+
+  const extractUniqueSermonSeries = (notes) => {
+    const seriesSet = new Set(notes.map((note) => note.sermonSeries));
+    return [...seriesSet];
+  };
+
+  const sermonNotes = userSermonNotes.filter((note) => {
+    if (activeSermonNoteTab === 'all') {
+      return selectedSermonSeries
+        ? note.sermonSeries === selectedSermonSeries
+        : true;
+    }
+
+    if (activeSermonNoteTab === 'my') {
+      return note.isSaved;
+    }
+
+    return true;
+  });
 
   const setUserInformationFields = (userData) => {
     for (let key in userData) {
@@ -335,17 +358,36 @@ const UserProfileMobile = (props) => {
                 </Button>
               </HStack>
               {activeSermonNoteTab === 'all' && (
-                <SermonNotesPagination
-                  sermonNotes={userSermonNotes}
-                  showSavedOnly={false}
-                />
+                <>
+                  <Text
+                    color="#0628A3"
+                    fontSize="1.1rem"
+                    fontWeight={700}
+                    mb={3}
+                  >
+                    Sermon Series
+                  </Text>
+                  <Select
+                    placeholder="Select Sermon Series"
+                    value={selectedSermonSeries}
+                    onChange={(e) => setSelectedSermonSeries(e.target.value)}
+                    mb={4}
+                  >
+                    {sermonSeriesList.map((series) => {
+                      if (series !== '') {
+                        return (
+                          <option key={series} value={series}>
+                            {series}
+                          </option>
+                        );
+                      }
+                      return null;
+                    })}
+                  </Select>
+                </>
               )}
-              {activeSermonNoteTab === 'my' && (
-                <SermonNotesPagination
-                  sermonNotes={userSermonNotes}
-                  showSavedOnly={true}
-                />
-              )}
+              {/* Pass Sermon Notes depending on the tab and also whether there is any select option */}
+              <SermonNotesPagination sermonNotes={sermonNotes} />
             </TabPanel>
             <TabPanel width="full" margin="20px 0px" p="0">
               <Flex direction="column">

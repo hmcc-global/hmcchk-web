@@ -29,33 +29,28 @@ module.exports = {
         isDeleted: false,
       }).sort('date DESC');
 
-      // Step 2: For each parent sermon note, if userId is provided, check for corresponding user sermon notes
-      let data = await Promise.all(
-        parentSermonNotes.map(async (parentNote) => {
-          let isSaved = false;
-          let childUpdatedAt = null;
+      // Step 2: If userId is provided, fetch all related user sermon notes in a single query
+      let allRelatedUserSermonNotes = [];
+      if (userId) {
+        allRelatedUserSermonNotes = await UserSermonNotes.find({
+          userId: userId,
+          isDeleted: false,
+          sermonId: parentSermonNotes.map((note) => note.sermonId),
+        });
+      }
 
-          if (userId) {
-            let userSermonNote = await UserSermonNotes.findOne({
-              sermonId: parentNote.sermonId,
-              userId: userId,
-              isDeleted: false,
-            });
+      // Step 3: Enrich each parent note with userSermonNote data
+      let data = parentSermonNotes.map((parentNote) => {
+        let userSermonNote = allRelatedUserSermonNotes.find(
+          (userNote) => userNote.sermonId === parentNote.sermonId
+        );
 
-            if (userSermonNote) {
-              isSaved = true;
-              childUpdatedAt = userSermonNote.updatedAt;
-            }
-          }
-
-          // Step 3: Return the parent note along with isSaved and updatedAt from child (if applicable)
-          return {
-            ...parentNote,
-            isSaved,
-            childUpdatedAt,
-          };
-        })
-      );
+        return {
+          ...parentNote,
+          isSaved: !!userSermonNote,
+          childUpdatedAt: userSermonNote ? userSermonNote.updatedAt : null,
+        };
+      });
 
       return exits.success(data);
     } catch (err) {

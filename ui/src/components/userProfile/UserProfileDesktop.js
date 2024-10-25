@@ -59,6 +59,8 @@ const UserProfileDesktop = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [activeSermonNoteTab, setActiveSermonNoteTab] = useState('all');
   const [userSermonNotes, setUserSermonNotes] = useState([]);
+  const [sermonSeriesList, setSermonSeriesList] = useState([]);
+  const [selectedSermonSeries, setSelectedSermonSeries] = useState('');
 
   const setUserInformationFields = (userData) => {
     for (let key in userData) {
@@ -164,8 +166,29 @@ const UserProfileDesktop = (props) => {
 
     if (status === 200) {
       setUserSermonNotes(data);
+      const uniqueSeries = extractUniqueSermonSeries(data);
+      setSermonSeriesList(uniqueSeries);
     }
   }, [user.id]);
+
+  const extractUniqueSermonSeries = (notes) => {
+    const seriesSet = new Set(notes.map((note) => note.sermonSeries));
+    return [...seriesSet];
+  };
+
+  const sermonNotes = userSermonNotes.filter((note) => {
+    if (activeSermonNoteTab === 'all') {
+      return selectedSermonSeries
+        ? note.sermonSeries === selectedSermonSeries
+        : true;
+    }
+
+    if (activeSermonNoteTab === 'my') {
+      return note.isSaved;
+    }
+
+    return true;
+  });
 
   // Implementation needs some component specific customization
   const handleEditUserInformation = async (data, e) => {
@@ -322,9 +345,7 @@ const UserProfileDesktop = (props) => {
                   borderRadius={30}
                   bg={activeSermonNoteTab === 'my' ? '#4A6EEB' : '#DFE7FF'}
                   color={activeSermonNoteTab === 'my' ? 'white' : '#4A6EEB'}
-                  onClick={() => {
-                    setActiveSermonNoteTab('my');
-                  }}
+                  onClick={() => setActiveSermonNoteTab('my')}
                   px={5}
                   _hover={{
                     bg: activeSermonNoteTab === 'my' ? '#4A6EEB' : '#DFE7FF',
@@ -334,18 +355,41 @@ const UserProfileDesktop = (props) => {
                   <Text fontWeight="semibold">Saved Sermon Notes</Text>
                 </Button>
               </HStack>
+
+              {/* Display the sermon series dropdown only for 'All Sermon Notes' */}
               {activeSermonNoteTab === 'all' && (
-                <SermonNotesPagination
-                  sermonNotes={userSermonNotes}
-                  showSavedOnly={false}
-                />
+                <>
+                  <Text
+                    color="#0628A3"
+                    fontSize="1.1rem"
+                    fontWeight={700}
+                    mb={3}
+                  >
+                    Sermon Series
+                  </Text>
+                  <Select
+                    placeholder="Select Sermon Series"
+                    value={selectedSermonSeries}
+                    onChange={(e) => setSelectedSermonSeries(e.target.value)}
+                    width="50%"
+                    mb={4}
+                  >
+                    {sermonSeriesList.map((series) => {
+                      if (series !== '') {
+                        return (
+                          <option key={series} value={series}>
+                            {series}
+                          </option>
+                        );
+                      }
+                      return null;
+                    })}
+                  </Select>
+                </>
               )}
-              {activeSermonNoteTab === 'my' && (
-                <SermonNotesPagination
-                  sermonNotes={userSermonNotes}
-                  showSavedOnly={true}
-                />
-              )}
+
+              {/* Pass Sermon Notes depending on the tab and also whether there is any select option */}
+              <SermonNotesPagination sermonNotes={sermonNotes} />
             </TabPanel>
             <TabPanel p="5%">
               <Stack direction="row" spacing="5">

@@ -2,26 +2,24 @@ import { useState } from 'react';
 import { Box, Button, Flex, Text, Divider, Image } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
-const SermonNotesPagination = ({ sermonNotes, showSavedOnly = false }) => {
+const SermonNotesPagination = ({ sermonNotes }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5; // Show 5 sermon notes per page
 
-  const filteredSermonNotes = sermonNotes.filter((item) =>
-    showSavedOnly ? item.isSaved : true
-  );
+  // Calculate the total number of pages
+  const totalPages = Math.ceil(sermonNotes.length / itemsPerPage);
 
-  const totalPages = Math.ceil(filteredSermonNotes.length / itemsPerPage);
-
+  // Determine which notes to display on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentSermonNotes = filteredSermonNotes.slice(
+  const currentSermonNotes = sermonNotes.slice(
     indexOfFirstItem,
     indexOfLastItem
   );
 
   return (
     <Box>
-      {currentSermonNotes.map((item, index) => (
+      {currentSermonNotes.map((item) => (
         <Box key={item.sermonId}>
           <Flex
             direction="row"
@@ -89,11 +87,11 @@ const SermonNotesPagination = ({ sermonNotes, showSavedOnly = false }) => {
               View
             </Button>
           </Flex>
-          {index < currentSermonNotes.length - 1 && (
-            <Divider bg="black" height={0.4} />
-          )}{' '}
+          <Divider bg="black" height={0.4} mt={2} />
         </Box>
       ))}
+
+      {/* Pagination Controls */}
       <Flex justifyContent="flex-end" alignItems="center" mt={4}>
         <Button
           onClick={() =>
