@@ -78,6 +78,7 @@ module.exports.policies = {
   'userSermonNotes/get-user-sermon-notes': true,
   'userSermonNotes/create-user-sermon-notes': ['isLoggedIn', 'aboveTech'],
   'userSermonNotes/update-user-sermon-notes': ['isLoggedIn', 'aboveTech'],
+  'userSermonNotes/email-user-sermon-notes': true,
 
   // User Sermon Note
   'sermonNotesParent/*': true,

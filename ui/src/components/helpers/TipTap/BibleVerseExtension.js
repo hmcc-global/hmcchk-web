@@ -12,6 +12,7 @@ export const BibleVerseNode = Node.create({
   name: 'bibleVerse',
   inline: true,
   group: 'inline',
+  atom: true,
 
   addAttributes() {
     return {
@@ -72,8 +73,8 @@ export const BibleVerseNode = Node.create({
     ];
   },
 
-  renderHTML({ HTMLAttributes }) {
-    return ['bible-verse', mergeAttributes(HTMLAttributes)];
+  renderHTML({ HTMLAttributes, node }) {
+    return ['strong', mergeAttributes(HTMLAttributes), node.attrs.bibleVerse];
   },
   addNodeView() {
     return ReactNodeViewRenderer((props) => {

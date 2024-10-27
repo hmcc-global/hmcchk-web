@@ -74,11 +74,11 @@ export const FillInBlankNode = Node.create({
     ];
   },
 
-  renderHTML() {
+  renderHTML({ node }) {
     return [
-      'span',
-      { class: 'fillInBlank' },
-      0,
+      'em',
+      {},
+      node.attrs.editorText,
       // Remove the trailing break element
     ];
   },

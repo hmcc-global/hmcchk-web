@@ -14,7 +14,12 @@ import { TextContext, LastUpdatedPosContext } from './index.js';
 import { FillInBlankNode } from './FillInBlank.js';
 import { FontSize } from './FontSizeExtension.js';
 
-const TiptapOutput = ({ input, textPassage, setUserSermonNotes }) => {
+const TiptapOutput = ({
+  input,
+  textPassage,
+  setUserSermonNotes,
+  setHtmlUserNotes,
+}) => {
   const [lastUpdatedPos, setLastUpdatedPos] = useState(null);
   const editor = useEditor({
     editable: false,
@@ -31,18 +36,47 @@ const TiptapOutput = ({ input, textPassage, setUserSermonNotes }) => {
       FontSize,
       TextStyle,
     ],
+    onCreate: ({ editor }) => {
+      const setEmailNotes = () => {
+        setHtmlUserNotes(editor.getHTML());
+      };
+
+      setEmailNotes();
+    },
   });
+
+  useEffect(() => {
+    if (editor) {
+      editor.commands.focus();
+      const setEmailNotes = () => {
+        setHtmlUserNotes(editor.getHTML());
+        console.log(editor.getHTML());
+      };
+
+      editor.on('create', setEmailNotes);
+      editor.on('create', () => {
+        console.log('Create event triggered');
+      });
+
+      return () => {
+        editor.off('create', setEmailNotes);
+      };
+    }
+  }, [editor, setHtmlUserNotes]);
+
   useEffect(() => {
     if (editor && lastUpdatedPos !== null) {
       const setNotes = () => {
         setUserSermonNotes(editor.getJSON());
+        setHtmlUserNotes(editor.getHTML());
       };
       editor.on('transaction', setNotes);
+
       return () => {
         editor.off('transaction', setNotes);
       };
     }
-  }, [editor, lastUpdatedPos, setUserSermonNotes]);
+  }, [editor, lastUpdatedPos, setUserSermonNotes, setHtmlUserNotes]);
   return (
     <LastUpdatedPosContext.Provider
       value={{ lastUpdatedPos, setLastUpdatedPos }}
