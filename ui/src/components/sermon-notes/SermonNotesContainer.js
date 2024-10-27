@@ -5,6 +5,7 @@ import {
   VStack,
   Button,
   useToast,
+  HStack,
 } from '@chakra-ui/react';
 import { customAxios as axios } from '../helpers/customAxios';
 import { useState, useEffect, useCallback, useMemo } from 'react';
@@ -24,7 +25,9 @@ const SermonNotesContainer = (props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   // In General, userSermonNotes comes from db, editUserSermonNotes comes from localStorage
   const [userSermonNotes, setUserSermonNotes] = useState();
+  const [htmlUserSermonNotes, setHtmlUserNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
+  const [userEmail, setUserEmail] = useState('');
   const toast = useToast();
 
   const todayId = DateTime.fromISO(new Date().toISOString()).toFormat(
@@ -138,6 +141,38 @@ const SermonNotesContainer = (props) => {
     getUserSermonNotes,
   ]);
 
+  const emailCheck = async () => {
+    if (user.email) {
+      setUserEmail(user.email);
+    } else {
+      const email = window.prompt('Input Email Address');
+      setUserEmail(email);
+    }
+    emailSermonNote();
+  };
+
+  const emailSermonNote = async () => {
+    try {
+      const { data, status } = await axios.post(
+        '/api/email-user-sermon-notes',
+        {
+          email: userEmail,
+          sermonNoteData: htmlUserSermonNotes,
+        }
+      );
+      if (status === 200) {
+        toast({
+          title: 'Emailed Sermon Note',
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const sermonDate = useMemo(() => {
     return new Date(sermonNotes?.date).toLocaleDateString(undefined, {
       year: 'numeric',
@@ -207,72 +242,95 @@ const SermonNotesContainer = (props) => {
     <>
       {sermonNotes && sermonNotes.isPublished ? (
         <>
-          <Box
-            width="100%"
-            minHeight="30vh"
-            height="auto"
-            style={{
-              backgroundImage: `url(${sermonNotes.imageLink})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-            }}
-          >
+          <Container minW="100%" p="0">
             <Box
               width="100%"
-              height="100%"
               minHeight="30vh"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              padding="16px"
-              backgroundColor="rgba(0, 0, 0, 0.5)"
+              height="auto"
+              style={{
+                backgroundImage: `url(${sermonNotes.imageLink})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+              }}
             >
-              <VStack height="100%" justifyContent="center" spacing={4}>
-                <Text
-                  color="white"
-                  fontWeight={700}
-                  fontSize={[24, 40]}
-                  textAlign="center"
-                >
-                  {sermonNotes.title}
-                </Text>
-                <Text
-                  color="white"
-                  fontSize={[14, 22]}
-                  textAlign="center"
-                >{`By ${sermonNotes.speaker}, ${sermonDate}`}</Text>
-              </VStack>
+              <Box
+                width="100%"
+                height="100%"
+                minHeight="30vh"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                padding="16px"
+                backgroundColor="rgba(0, 0, 0, 0.5)"
+              >
+                <VStack height="100%" justifyContent="center" spacing={4}>
+                  <Text
+                    color="white"
+                    fontWeight={700}
+                    fontSize={[24, 40]}
+                    textAlign="center"
+                  >
+                    {sermonNotes.title}
+                  </Text>
+                  <Text
+                    color="white"
+                    fontSize={[14, 22]}
+                    textAlign="center"
+                  >{`By ${sermonNotes.speaker}, ${sermonDate}`}</Text>
+                </VStack>
+              </Box>
             </Box>
-          </Box>
-          <Container my={[4, 8]} width="100%">
-            <Container mb="3" display={!user?.id ? 'block' : 'none'}>
-              <Text fontStyle="italic" textColor="#B2BEB5">
-                Please log into your HMCC account to get the save notes feature.
-              </Text>
+            <Container display="block" top="0" pos={'sticky'} zIndex={2}>
+              <Button
+                display={!user?.id ? 'none' : 'sticky'}
+                width="50%"
+                isLoading={isSubmitting}
+                colorScheme="teal"
+                onClick={updateUserSermonNotes}
+                zIndex={3}
+              >
+                Save Notes
+              </Button>
+              <Button
+                pos="sticky"
+                width="50%"
+                isLoading={isSubmitting}
+                colorScheme="teal"
+                onClick={emailCheck}
+                zIndex={3}
+              >
+                Email
+              </Button>
+              {/* </HStack> */}
             </Container>
-            <Button
-              display={!user?.id ? 'none' : 'block'}
-              pos={'sticky'}
-              top="10px"
-              mt={8}
-              isFullWidth
-              isLoading={isSubmitting}
-              colorScheme="teal"
-              onClick={updateUserSermonNotes}
-              zIndex={3}
-            >
-              Save Notes
-            </Button>
-            {isLoadingExistingNotes ? (
-              <Text>Loading</Text>
-            ) : (
-              <TiptapOutput
-                input={originalContentWithUserNotes}
-                textPassage={sermonNotes.passage}
-                setUserSermonNotes={setEditUserSermonNotes}
-              />
-            )}
+            <Container my={[4, 8]} width="100%" h="100%">
+              <Container
+                mb="3"
+                zIndex={3}
+                pos={!user?.id ? 'relative' : 'fixed'}
+              >
+                <Text
+                  fontStyle="italic"
+                  textColor="#B2BEB5"
+                  display={!user?.id ? 'block' : 'none'}
+                >
+                  Please log into your HMCC account to get the save notes
+                  feature.
+                </Text>
+              </Container>
+              <Box h={!user?.id ? '0' : '3em'}></Box>
+              {isLoadingExistingNotes ? (
+                <Text>Loading</Text>
+              ) : (
+                <TiptapOutput
+                  input={originalContentWithUserNotes}
+                  textPassage={sermonNotes.passage}
+                  setUserSermonNotes={setEditUserSermonNotes}
+                  setHtmlUserNotes={setHtmlUserNotes}
+                />
+              )}
+            </Container>
           </Container>
         </>
       ) : (
