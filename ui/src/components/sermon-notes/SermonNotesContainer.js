@@ -28,6 +28,7 @@ const SermonNotesContainer = (props) => {
   const [htmlUserSermonNotes, setHtmlUserNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
   const [userEmail, setUserEmail] = useState('');
+  const [heightAboveTitle, setHeightAboveTitle] = useState(false);
   const toast = useToast();
 
   const todayId = DateTime.fromISO(new Date().toISOString()).toFormat(
@@ -38,10 +39,10 @@ const SermonNotesContainer = (props) => {
   const sermonId = isOfflineSermonNote
     ? sermonNoteId // If offline, use the passed sermonNoteId directly
     : sermonNoteId && sermonNoteId !== '' && sermonNoteId !== 'online'
-      ? sermonNoteId // Use the ID from the live page
-      : sermonNoteId === 'online'
-        ? `sn-${todayId}-1` // Only works when there is just one sermon note that day
-        : urlPath; // Get the ID from the URL path as a fallback
+    ? sermonNoteId // Use the ID from the live page
+    : sermonNoteId === 'online'
+    ? `sn-${todayId}-1` // Only works when there is just one sermon note that day
+    : urlPath; // Get the ID from the URL path as a fallback
 
   const getSermonNotesParent = useCallback(async () => {
     try {
@@ -191,6 +192,17 @@ const SermonNotesContainer = (props) => {
   }, [sermonId, getSermonNotesParent, getUserSermonNotes]);
 
   useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight * 0.32 < window.scrollY) {
+        setHeightAboveTitle(true);
+      } else {
+        setHeightAboveTitle(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
     if (sermonId) {
       const localUserNotes = localStorage.getItem(`sermonNotes-${sermonId}`);
       if (
@@ -250,6 +262,7 @@ const SermonNotesContainer = (props) => {
         <>
           <Container minW="100%" p="0">
             <Box
+              id="title"
               width="100%"
               minHeight="30vh"
               height="auto"
@@ -287,34 +300,12 @@ const SermonNotesContainer = (props) => {
                 </VStack>
               </Box>
             </Box>
-            <Container display="block" top="0" pos={'sticky'} zIndex={2}>
-              <Button
-                display={!user?.id ? 'none' : 'sticky'}
-                width="50%"
-                isLoading={isSubmitting}
-                colorScheme="teal"
-                onClick={updateUserSermonNotes}
-                zIndex={3}
-              >
-                Save Notes
-              </Button>
-              <Button
-                pos="sticky"
-                width="50%"
-                isLoading={isSubmitting}
-                colorScheme="teal"
-                onClick={emailCheck}
-                zIndex={3}
-              >
-                Email
-              </Button>
-              {/* </HStack> */}
-            </Container>
-            <Container my={[4, 8]} width="100%" h="100%">
+
+            <Container my={[4, 8]} width="100%">
               <Container
                 mb="3"
                 zIndex={3}
-                pos={!user?.id ? 'relative' : 'fixed'}
+                pos={!user?.id ? 'relative' : 'sticky'}
               >
                 <Text
                   fontStyle="italic"
@@ -324,17 +315,53 @@ const SermonNotesContainer = (props) => {
                   Please log into your HMCC account to get the save notes
                   feature.
                 </Text>
+                <Container
+                  pos={heightAboveTitle ? 'fixed' : 'relative'}
+                  top={heightAboveTitle ? '10vh' : '0'}
+                  display="flex"
+                  flexDir="row"
+                  minW="50vw"
+                  maxW="50vw"
+                  m="auto"
+                  left={0}
+                  right={0}
+                  justifyContent="space-between"
+                  zIndex={2}
+                >
+                  <Button
+                    display={!user?.id ? 'none' : 'sticky'}
+                    width="20vw"
+                    isLoading={isSubmitting}
+                    colorScheme="teal"
+                    onClick={updateUserSermonNotes}
+                    zIndex={3}
+                  >
+                    Save Notes
+                  </Button>
+                  <Button
+                    pos="sticky"
+                    width={!user?.id ? '40vw' : '20vw'}
+                    isLoading={isSubmitting}
+                    colorScheme="teal"
+                    onClick={emailCheck}
+                    zIndex={3}
+                  >
+                    Email
+                  </Button>
+                </Container>
               </Container>
-              <Box h={!user?.id ? '0' : '3em'}></Box>
+
               {isLoadingExistingNotes ? (
                 <Text>Loading</Text>
               ) : (
-                <TiptapOutput
-                  input={originalContentWithUserNotes}
-                  textPassage={sermonNotes.passage}
-                  setUserSermonNotes={setEditUserSermonNotes}
-                  setHtmlUserNotes={setHtmlUserNotes}
-                />
+                <Container>
+                  <TiptapOutput
+                    input={originalContentWithUserNotes}
+                    textPassage={sermonNotes.passage}
+                    setUserSermonNotes={setEditUserSermonNotes}
+                    setHtmlUserNotes={setHtmlUserNotes}
+                  />
+                </Container>
               )}
             </Container>
           </Container>
