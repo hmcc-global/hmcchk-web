@@ -212,6 +212,17 @@ const SermonNotesContainer = (props) => {
   }, []);
 
   useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight * 0.32 < window.scrollY) {
+        setHeightAboveTitle(true);
+      } else {
+        setHeightAboveTitle(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
     if (sermonId) {
       const localUserNotes = localStorage.getItem(`sermonNotes-${sermonId}`);
       if (
