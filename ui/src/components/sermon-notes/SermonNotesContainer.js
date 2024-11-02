@@ -282,7 +282,6 @@ const SermonNotesContainer = (props) => {
         <>
           <Container minW="100%" p="0">
             <Box
-              id="title"
               width="100%"
               minHeight="30vh"
               height="auto"
