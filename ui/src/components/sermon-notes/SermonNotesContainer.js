@@ -27,7 +27,6 @@ const SermonNotesContainer = (props) => {
   const [userSermonNotes, setUserSermonNotes] = useState();
   const [htmlUserSermonNotes, setHtmlUserNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
-  const [userEmail, setUserEmail] = useState('');
   const [heightAboveTitle, setHeightAboveTitle] = useState(false);
   const toast = useToast();
 
@@ -142,22 +141,32 @@ const SermonNotesContainer = (props) => {
     getUserSermonNotes,
   ]);
 
-  const emailCheck = async () => {
-    if (user.email) {
-      setUserEmail(user.email);
-    } else {
-      const email = window.prompt('Input Email Address');
-      setUserEmail(email);
-    }
-    emailSermonNote();
+  const isValidEmail = (email) => {
+    const emailAddress = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailAddress.test(email);
   };
 
-  const emailSermonNote = async () => {
+  const emailCheck = async () => {
+    let email = user.email || window.prompt('Input Email Address');
+
+    if (email && !isValidEmail(email)) {
+      toast({
+        title: 'Error in Email Address',
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      });
+      return;
+    }
+    await emailSermonNote(email);
+  };
+
+  const emailSermonNote = async (email) => {
     try {
       const { data, status } = await axios.post(
         '/api/email-user-sermon-notes',
         {
-          email: userEmail,
+          email: email,
           sermonNoteData: htmlUserSermonNotes,
         }
       );
@@ -314,17 +323,16 @@ const SermonNotesContainer = (props) => {
                   top={heightAboveTitle ? '10vh' : '0'}
                   display="flex"
                   flexDir="row"
-                  minW="50vw"
-                  maxW="50vw"
+                  w="100%"
                   m="auto"
                   left={0}
                   right={0}
-                  justifyContent="space-between"
+                  justifyContent="space-around"
                   zIndex={2}
                 >
                   <Button
                     display={!user?.id ? 'none' : 'sticky'}
-                    width="20vw"
+                    width="45%"
                     isLoading={isSubmitting}
                     colorScheme="teal"
                     onClick={updateUserSermonNotes}
@@ -334,7 +342,7 @@ const SermonNotesContainer = (props) => {
                   </Button>
                   <Button
                     pos="sticky"
-                    width={!user?.id ? '40vw' : '20vw'}
+                    width={!user?.id ? '60%' : '45%'}
                     isLoading={isSubmitting}
                     colorScheme="teal"
                     onClick={emailCheck}
