@@ -18,6 +18,15 @@ import { customAxios as axios } from '../../helpers/customAxios';
 import TiptapEditor from '../../helpers/TipTap';
 import { useHistory } from 'react-router-dom';
 
+
+// Create a object
+export const sermonIdMap = {
+  'Sunday Celebration': 'sn',
+  'Vision Sunday': 'vs',
+  'Special Events': 'se',
+  Encounter: 'en',
+};
+
 const SermonNotesEditorModal = (props) => {
   const { editSermonNotesData, actionOnEditor, setIsEditorOpen } = props;
   const {
@@ -28,12 +37,6 @@ const SermonNotesEditorModal = (props) => {
   } = useForm();
   const toast = useToast();
   const history = useHistory();
-
-  // Create a object
-  const sermonIdMap = {
-    'Sunday Celebration': 'sn',
-    Encounter: 'encounter',
-  };
 
   const [sermonNoteData, setSermonNoteData] = useState({
     sermonId: '',
@@ -445,7 +448,9 @@ const SermonNotesEditorModal = (props) => {
                       })
                     }
                   />
-                  <FormHelperText>Please follow the usual format 'sn-jul06'</FormHelperText>
+                  <FormHelperText>
+                    Please follow the usual format 'sn-jul06'
+                  </FormHelperText>
                 </FormControl>
                 <FormControl>
                   <FormLabel color="#656565" fontWeight="bold">

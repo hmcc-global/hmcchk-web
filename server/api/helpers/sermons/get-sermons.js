@@ -23,12 +23,20 @@ const arrayReducer = (id, list) => {
   }, []);
 };
 
+const getSermonPreachedDate = (sermon) => {
+  if (sermon.acf.sermon_date_preached) {
+    return DateTime.fromFormat(sermon.acf.sermon_date_preached, 'yyyyMMdd');
+  }
+
+  return DateTime.fromSeconds(sermon.sermon_date);
+};
+
 const transformSermon = (sermon, speakers, sermonSeries, serviceTypes) => {
   return {
     id: sermon.id,
     title: parseSermonTitle(sermon.title.rendered),
     speaker: arrayReducer(sermon.wpfc_preacher, speakers),
-    datePreached: DateTime.fromSeconds(sermon.sermon_date),
+    datePreached: getSermonPreachedDate(sermon),
     serviceType: arrayReducer(sermon.wpfc_service_type, serviceTypes),
     passage: sermon.bible_passage,
     sermonSeries: arrayReducer(sermon.wpfc_sermon_series, sermonSeries),

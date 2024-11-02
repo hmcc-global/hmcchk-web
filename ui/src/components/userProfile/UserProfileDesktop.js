@@ -24,6 +24,7 @@ import {
   ModalFooter,
   VStack,
   ModalCloseButton,
+  HStack,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
 import { customAxios as axios } from '../helpers/customAxios';
@@ -43,9 +44,10 @@ import {
   getLoginOnlyFormsRequest,
   generatePublishedFormLinks,
 } from '../helpers/userInformationHelpers';
+import SermonNotesPagination from './SermonNotesPagination';
 
 const UserProfileDesktop = (props) => {
-  const { user , staticData } = props;
+  const { user, staticData } = props;
   const { lifegroupList, lifestageList, campusList } = staticData;
 
   const { register, control, handleSubmit, setValue, formState } = useForm();
@@ -55,6 +57,10 @@ const UserProfileDesktop = (props) => {
   const [unsignedFormList, setUnsignedFormList] = useState([]);
   const [signedUpFormList, setSignedUpFormList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [activeSermonNoteTab, setActiveSermonNoteTab] = useState('all');
+  const [userSermonNotes, setUserSermonNotes] = useState([]);
+  const [sermonSeriesList, setSermonSeriesList] = useState([]);
+  const [selectedSermonSeries, setSelectedSermonSeries] = useState('');
 
   const setUserInformationFields = (userData) => {
     for (let key in userData) {
@@ -151,6 +157,39 @@ const UserProfileDesktop = (props) => {
     }
   }, [user.id]);
 
+  const fetchUserSermonNotes = useCallback(async () => {
+    const { data, status } = await axios.get('/api/sermons/get-sermon-notes', {
+      params: {
+        userId: user.id,
+      },
+    });
+
+    if (status === 200) {
+      setUserSermonNotes(data);
+      const uniqueSeries = extractUniqueSermonSeries(data);
+      setSermonSeriesList(uniqueSeries);
+    }
+  }, [user.id]);
+
+  const extractUniqueSermonSeries = (notes) => {
+    const seriesSet = new Set(notes.map((note) => note.sermonSeries));
+    return [...seriesSet];
+  };
+
+  const sermonNotes = userSermonNotes.filter((note) => {
+    if (activeSermonNoteTab === 'all') {
+      return selectedSermonSeries
+        ? note.sermonSeries === selectedSermonSeries
+        : true;
+    }
+
+    if (activeSermonNoteTab === 'my') {
+      return note.isSaved;
+    }
+
+    return true;
+  });
+
   // Implementation needs some component specific customization
   const handleEditUserInformation = async (data, e) => {
     userDataCleanup(data);
@@ -170,11 +209,13 @@ const UserProfileDesktop = (props) => {
     fetchPublishedForms();
     fetchSignedUpForms();
     fetchUnsignedUpForms();
+    fetchUserSermonNotes();
   }, [
     fetchUserData,
     fetchPublishedForms,
     fetchSignedUpForms,
     fetchUnsignedUpForms,
+    fetchUserSermonNotes,
   ]);
 
   const inputBox = {
@@ -266,6 +307,9 @@ const UserProfileDesktop = (props) => {
                 Signup Links
               </Tab>
               <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
+                Sermon Notes
+              </Tab>
+              <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
                 Personal Profile
               </Tab>
               <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
@@ -321,6 +365,73 @@ const UserProfileDesktop = (props) => {
                 </Button>
               )} */}
               </Stack>
+            </TabPanel>
+            <TabPanel p="5%">
+              <HStack gap={5} mb={5}>
+                <Button
+                  borderRadius={30}
+                  bg={activeSermonNoteTab === 'all' ? '#4A6EEB' : '#DFE7FF'}
+                  color={activeSermonNoteTab === 'all' ? 'white' : '#4A6EEB'}
+                  onClick={() => setActiveSermonNoteTab('all')}
+                  px={5}
+                  _hover={{
+                    bg: activeSermonNoteTab === 'all' ? '#4A6EEB' : '#DFE7FF',
+                    color: activeSermonNoteTab === 'all' ? 'white' : '#4A6EEB',
+                  }}
+                >
+                  <Text fontWeight="semibold" mx={2}>
+                    All Sermon Notes
+                  </Text>
+                </Button>
+                <Button
+                  borderRadius={30}
+                  bg={activeSermonNoteTab === 'my' ? '#4A6EEB' : '#DFE7FF'}
+                  color={activeSermonNoteTab === 'my' ? 'white' : '#4A6EEB'}
+                  onClick={() => setActiveSermonNoteTab('my')}
+                  px={5}
+                  _hover={{
+                    bg: activeSermonNoteTab === 'my' ? '#4A6EEB' : '#DFE7FF',
+                    color: activeSermonNoteTab === 'my' ? 'white' : '#4A6EEB',
+                  }}
+                >
+                  <Text fontWeight="semibold">Saved Sermon Notes</Text>
+                </Button>
+              </HStack>
+
+              {/* Display the sermon series dropdown only for 'All Sermon Notes' */}
+              {activeSermonNoteTab === 'all' && (
+                <>
+                  <Text
+                    color="#0628A3"
+                    fontSize="1.1rem"
+                    fontWeight={700}
+                    mb={3}
+                  >
+                    Sermon Series
+                  </Text>
+                  <Select
+                    placeholder="Select Sermon Series"
+                    value={selectedSermonSeries}
+                    onChange={(e) => setSelectedSermonSeries(e.target.value)}
+                    width="50%"
+                    mb={4}
+                  >
+                    {sermonSeriesList.map((series) => {
+                      if (series !== '') {
+                        return (
+                          <option key={series} value={series}>
+                            {series}
+                          </option>
+                        );
+                      }
+                      return null;
+                    })}
+                  </Select>
+                </>
+              )}
+
+              {/* Pass Sermon Notes depending on the tab and also whether there is any select option */}
+              <SermonNotesPagination sermonNotes={sermonNotes} />
             </TabPanel>
             <TabPanel p="7%">
               <Stack spacing="2%">

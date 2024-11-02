@@ -17,7 +17,7 @@ import {
 } from '../helpers/SermonNotes';
 
 const SermonNotesContainer = (props) => {
-  const { user, history, sermonNoteId } = props;
+  const { user, history, sermonNoteId, isOfflineSermonNote } = props;
   const [sermonNotes, setSermonNotes] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingExistingNotes, setIsLoadingExistingNotes] = useState(false);
@@ -31,12 +31,14 @@ const SermonNotesContainer = (props) => {
     'ddMMyyyy'
   );
   const urlPath = history.location.pathname.split('/').reverse()[0];
-  const sermonId =
-    sermonNoteId && sermonNoteId !== '' && sermonNoteId !== 'online'
-      ? sermonNoteId // id from the live page
+
+  const sermonId = isOfflineSermonNote
+    ? sermonNoteId // If offline, use the passed sermonNoteId directly
+    : sermonNoteId && sermonNoteId !== '' && sermonNoteId !== 'online'
+      ? sermonNoteId // Use the ID from the live page
       : sermonNoteId === 'online'
-      ? `sn-${todayId}-1` // Only works when theere is just one sermon note that day
-      : urlPath; // Get the id at the back of the link
+        ? `sn-${todayId}-1` // Only works when there is just one sermon note that day
+        : urlPath; // Get the ID from the URL path as a fallback
 
   const getSermonNotesParent = useCallback(async () => {
     try {
@@ -147,20 +149,24 @@ const SermonNotesContainer = (props) => {
   }, [sermonNotes]);
 
   useEffect(() => {
-    getSermonNotesParent();
-    getUserSermonNotes();
-  }, [getSermonNotesParent, getUserSermonNotes]);
+    if (sermonId) {
+      getSermonNotesParent();
+      getUserSermonNotes();
+    }
+  }, [sermonId, getSermonNotesParent, getUserSermonNotes]);
 
   useEffect(() => {
-    const localUserNotes = localStorage.getItem(`sermonNotes-${sermonId}`);
-    if (
-      localUserNotes !== 'null' &&
-      localUserNotes !== 'undefined' &&
-      localUserNotes
-    ) {
-      setEditUserSermonNotes(JSON.parse(localUserNotes));
+    if (sermonId) {
+      const localUserNotes = localStorage.getItem(`sermonNotes-${sermonId}`);
+      if (
+        localUserNotes !== 'null' &&
+        localUserNotes !== 'undefined' &&
+        localUserNotes
+      ) {
+        setEditUserSermonNotes(JSON.parse(localUserNotes));
+      }
     }
-  }, []);
+  }, [sermonId]);
 
   useDebounce(
     () => {
