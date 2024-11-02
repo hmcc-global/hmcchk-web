@@ -12,6 +12,7 @@ import { Plugin } from 'prosemirror-state';
 export const UserNotesNode = Node.create({
   name: 'userNotes',
   group: 'block',
+  atom: true,
 
   addAttributes() {
     return {
@@ -90,14 +91,19 @@ export const UserNotesNode = Node.create({
   },
 
   renderHTML({ node }) {
-    return [
-      'div',
-      {
-        class: 'userNotes',
-        id: node.attrs.id, // Use the id attribute here
-      },
-      0,
-    ];
+    if (node.attrs.id) {
+      return [
+        'div',
+        {
+          class: 'userNotes',
+          id: node.attrs.id,
+          style: 'background-color:#f4f4f4;', // Use the id attribute here
+        },
+        node.attrs.userNotes ? node.attrs.userNotes : '',
+      ];
+    } else {
+      return ['div'];
+    }
   },
   addNodeView() {
     return ReactNodeViewRenderer((props) => {
