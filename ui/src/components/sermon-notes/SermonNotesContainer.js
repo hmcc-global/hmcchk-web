@@ -348,7 +348,8 @@ const SermonNotesContainer = (props) => {
                   </Button>
                   <Button
                     pos="sticky"
-                    width={!user?.id ? '60%' : '45%'}
+                    display={!user?.id ? 'none' : 'sticky'}
+                    width="45%"
                     isLoading={isSubmitting}
                     colorScheme="teal"
                     onClick={emailCheck}
