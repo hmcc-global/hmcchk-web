@@ -316,12 +316,49 @@ const UserProfileMobile = (props) => {
             mx="auto"
             fontWeight="semibold"
           >
-            <option value={0}>Sermon Notes</option>
-            <option value={1}>Signup Links</option>
+            <option value={0}>Signup Links</option>
+            <option value={1}>Sermon Notes</option>
             <option value={2}>Personal Profile</option>
             <option value={3}>Church Profile</option>
           </Select>
           <TabPanels>
+            <TabPanel width="full" margin="20px 0px" p="0">
+              <Flex direction="column">
+                {formList && formList.length > 0 && (
+                  <Box>
+                    <Text
+                      fontWeight="700"
+                      fontSize="0.95rem"
+                      color="#718096"
+                      mb="2.5"
+                    >
+                      Available Signup Links:
+                    </Text>
+                    {generatePublishedFormLinks(unsignedFormList, false)}
+                    <Text
+                      fontWeight="700"
+                      fontSize="0.95rem"
+                      color="#718096"
+                      mt="2.5"
+                      mb="2.5"
+                    >
+                      Your Signups:
+                    </Text>
+                    {generatePublishedFormLinks(signedUpFormList, true)}
+                  </Box>
+                )}
+                {/* <Button
+                  size="sm"
+                  mt="8"
+                  color="#0628A3"
+                  borderColor="#0628A3"
+                  borderRadius="10"
+                  variant="outline"
+                >
+                  Change Password
+                </Button> */}
+              </Flex>
+            </TabPanel>
             <TabPanel width="full" margin="20px 0px" p="0">
               <HStack gap={3} mb={5} mx={5}>
                 <Button
@@ -388,43 +425,6 @@ const UserProfileMobile = (props) => {
               )}
               {/* Pass Sermon Notes depending on the tab and also whether there is any select option */}
               <SermonNotesPagination sermonNotes={sermonNotes} />
-            </TabPanel>
-            <TabPanel width="full" margin="20px 0px" p="0">
-              <Flex direction="column">
-                {formList && formList.length > 0 && (
-                  <Box>
-                    <Text
-                      fontWeight="700"
-                      fontSize="0.95rem"
-                      color="#718096"
-                      mb="2.5"
-                    >
-                      Available Signup Links:
-                    </Text>
-                    {generatePublishedFormLinks(unsignedFormList, false)}
-                    <Text
-                      fontWeight="700"
-                      fontSize="0.95rem"
-                      color="#718096"
-                      mt="2.5"
-                      mb="2.5"
-                    >
-                      Your Signups:
-                    </Text>
-                    {generatePublishedFormLinks(signedUpFormList, true)}
-                  </Box>
-                )}
-                {/* <Button
-                  size="sm"
-                  mt="8"
-                  color="#0628A3"
-                  borderColor="#0628A3"
-                  borderRadius="10"
-                  variant="outline"
-                >
-                  Change Password
-                </Button> */}
-              </Flex>
             </TabPanel>
             <TabPanel p="7%">
               <Center mb="5%">

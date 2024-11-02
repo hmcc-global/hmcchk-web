@@ -304,10 +304,10 @@ const UserProfileDesktop = (props) => {
           <Box flex={1}>
             <TabList border="none" alignItems="flex-end">
               <Tab style={tabTitle} _selected={{ md: tabText }}>
-                Sermon Notes
+                Signup Links
               </Tab>
               <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
-                Signup Links
+                Sermon Notes
               </Tab>
               <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
                 Personal Profile
@@ -324,6 +324,48 @@ const UserProfileDesktop = (props) => {
             border="1px solid #EBEBEB"
             borderRadius="10px"
           >
+            <TabPanel p="5%">
+              <Stack direction="row" spacing="5">
+                {formList && formList.length > 0 && (
+                  <>
+                    <Box width="50%">
+                      <Text
+                        fontSize="1.1rem"
+                        fontWeight="700"
+                        color="#718096"
+                        mb="5"
+                      >
+                        Available Signup Links:
+                      </Text>
+                      {generatePublishedFormLinks(unsignedFormList, false)}
+                    </Box>
+                    <Box width="50%">
+                      <Text
+                        fontSize="1.1rem"
+                        fontWeight="700"
+                        color="#718096"
+                        mb="5"
+                      >
+                        Your Signups:
+                      </Text>
+                      {generatePublishedFormLinks(signedUpFormList, true)}
+                    </Box>
+                  </>
+                )}
+                {/* {user.password !== "" && (
+                <Button
+                  size="sm"
+                  mt="8"
+                  color="#0628A3"
+                  borderColor="#0628A3"
+                  borderRadius="10"
+                  variant="outline"
+                >
+                  Change Password
+                </Button>
+              )} */}
+              </Stack>
+            </TabPanel>
             <TabPanel p="5%">
               <HStack gap={5} mb={5}>
                 <Button
@@ -390,48 +432,6 @@ const UserProfileDesktop = (props) => {
 
               {/* Pass Sermon Notes depending on the tab and also whether there is any select option */}
               <SermonNotesPagination sermonNotes={sermonNotes} />
-            </TabPanel>
-            <TabPanel p="5%">
-              <Stack direction="row" spacing="5">
-                {formList && formList.length > 0 && (
-                  <>
-                    <Box width="50%">
-                      <Text
-                        fontSize="1.1rem"
-                        fontWeight="700"
-                        color="#718096"
-                        mb="5"
-                      >
-                        Available Signup Links:
-                      </Text>
-                      {generatePublishedFormLinks(unsignedFormList, false)}
-                    </Box>
-                    <Box width="50%">
-                      <Text
-                        fontSize="1.1rem"
-                        fontWeight="700"
-                        color="#718096"
-                        mb="5"
-                      >
-                        Your Signups:
-                      </Text>
-                      {generatePublishedFormLinks(signedUpFormList, true)}
-                    </Box>
-                  </>
-                )}
-                {/* {user.password !== "" && (
-                <Button
-                  size="sm"
-                  mt="8"
-                  color="#0628A3"
-                  borderColor="#0628A3"
-                  borderRadius="10"
-                  variant="outline"
-                >
-                  Change Password
-                </Button>
-              )} */}
-              </Stack>
             </TabPanel>
             <TabPanel p="7%">
               <Stack spacing="2%">

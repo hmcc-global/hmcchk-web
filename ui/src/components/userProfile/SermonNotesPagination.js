@@ -61,9 +61,9 @@ const SermonNotesPagination = ({ sermonNotes }) => {
                     }`}
                   </Text>
                   <Text fontSize={{ base: 'xs', md: 'sm' }} color="gray.500">
-                    {`Last Updated: ${
+                    {`Last Saved: ${
                       item.isSaved
-                        ? new Date(item.updatedAt).toLocaleDateString(
+                        ? new Date(item.childUpdatedAt).toLocaleDateString(
                             'default',
                             {
                               day: '2-digit',
