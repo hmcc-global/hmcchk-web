@@ -318,10 +318,10 @@ const FormEditorContainer = (props) => {
                           >
                             {/* To add more email template, please define the value and add the template here */}
                             <option value="email-retreat-payment-success">
-                              Life Defined Payment Confirmation
+                              Retreat 2025 Payment Confirmation
                             </option>
                             <option value="email-retreat-donation-payment-success">
-                              Life Defined Donation Payment Confirmation
+                              Retreat 2025 Donation Payment Confirmation
                             </option>
                             <option value="email-ignite-payment-success">
                               !gnite 2023 Payment Confirmation
@@ -485,10 +485,10 @@ const FormEditorContainer = (props) => {
                         {/* To add more email template, please define the value and add the template here */}
                         <option value="form-default-success">Default</option>
                         <option value="form-retreat-success">
-                          Retreat 2023
+                          Retreat 2025
                         </option>
                         <option value="form-retreat-donation-success">
-                          Retreat 2023 Donation
+                          Retreat 2025 Donation
                         </option>
                         <option value="form-ignite-success">!gnite</option>
                         <option value="form-deep-success">Deep retreat</option>
