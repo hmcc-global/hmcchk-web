@@ -138,6 +138,7 @@ const FormManager = (props) => {
         name: formItem.formName,
         id: formItem.id,
         formFields: formItem.formFields,
+        isPaymentRequired: formItem.isPaymentRequired,
       },
     });
   };
