@@ -23,6 +23,7 @@ import {
   FiVolume2,
   FiShield,
   FiAlertCircle,
+  FiDollarSign,
 } from 'react-icons/fi';
 import { CgNotes } from 'react-icons/cg';
 
@@ -35,6 +36,7 @@ const LinkItems = [
   { name: 'Users', icon: FiUsers, path: '/admin/users' },
   { name: 'Pop Up', icon: FiBell, path: '/admin/popup' },
   { name: 'Testimony', icon: FiFeather, path: '/admin/testimony' },
+  { name: 'Fundraise', icon: FiDollarSign, path: '/admin/fundraise' },
   { name: 'Announcements', icon: FiVolume2, path: '/admin/announcements' },
   {
     name: 'Leadership Teams',

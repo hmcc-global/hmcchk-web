@@ -39,6 +39,7 @@ import AdminLeadershipTeamContainer from './admin/leadershipTeam/AdminLeadership
 import AdminSermonNotesContainer from './admin/sermonNotes/AdminSermonNotesContainer';
 import SermonNotesContainer from './sermon-notes/SermonNotesContainer';
 import PrivacyPolicy from './screens/PrivacyPolicy';
+import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
 
 const MainContainer = () => {
   return (
@@ -295,6 +296,12 @@ const MainContainer = () => {
           path="/admin/sermonNotes/edit/:id"
           permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
           component={AdminSermonNotesContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/fundraise"
+          permissions={['admin', 'stewardship']}
+          component={AdminFundraiseContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
