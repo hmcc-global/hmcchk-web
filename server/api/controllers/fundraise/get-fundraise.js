@@ -14,15 +14,12 @@ module.exports = {
 
   fn: async function ({ campaignName }, exits) {
     try {
-      if (campaignName) {
-        const data = await Fundraise.find({
-          campaignName,
-          isDeleted: false,
-        });
+      const data = await Fundraise.find({
+        campaignName,
+        isDeleted: false,
+      });
 
-        return exits.success(data);
-      }
-      return exits.invalid('Missing required field: campaignName');
+      return exits.success(data);
     } catch (err) {
       sails.log.error(err);
       return exits.error(err);
