@@ -13,20 +13,26 @@ import { customAxios as axios } from '../helpers/customAxios';
 const defaultGivingData = {
   categories: [
     {
+      name: 'Local',
+      key: 'local',
+      amount: -1,
+      givers: -1,
+    },
+    {
+      name: 'Global',
+      key: 'global',
+      amount: -1,
+      givers: -1,
+    },
+    {
+      name: 'Saturate',
+      key: 'saturate',
+      amount: -1,
+      givers: -1,
+    },
+    {
       name: 'Total Giving',
       key: 'totalGiving',
-      amount: -1,
-      givers: -1,
-    },
-    {
-      name: 'Local Church',
-      key: 'localChurch',
-      amount: -1,
-      givers: -1,
-    },
-    {
-      name: 'Global Church',
-      key: 'globalChurch',
       amount: -1,
       givers: -1,
     },
@@ -64,11 +70,32 @@ const GivingTuesdayPage = (props) => {
   });
 
   const getData = async () => {
-    const { data, status } = await axios.get(
-      '/api/giving-tuesday/get-giving-tuesday-data?year=2022'
-    );
     try {
-      if (status === 200) setGivingData(data);
+      const { data, status } = await axios.get('/api/fundraise/get', {
+        params: {
+          campaignName: 'Giving Tuesday 2024',
+        },
+      });
+
+      // Construct transformed data
+      let transformToGivingData = {
+        categories: [],
+        updatedAt: data[3].updatedAt,
+      };
+
+      data.forEach((el) => {
+        console.log(el);
+        let transformedEl = {
+          name: el.categoryName,
+          key: el.categoryKey,
+          amount: el.amount,
+          givers: el.givers,
+        };
+        transformToGivingData.categories.push(transformedEl);
+      });
+
+      // Set data
+      if (status === 200) setGivingData(transformToGivingData);
     } catch (err) {
       console.log('error:', err);
     }
@@ -96,10 +123,7 @@ const GivingTuesdayPage = (props) => {
               w={['100%', '80%']}
               alignItems="center"
               h="auto"
-              src={
-                process.env.PUBLIC_URL + '/images/givingTuesday/GT2024.png'
-                //'/images/givingTuesday/giving-tuesday-final-ad.png'
-              }
+              src={process.env.PUBLIC_URL + '/images/givingTuesday/GT2024.png'}
               alt="Giving Tuesday"
             />
           </Center>

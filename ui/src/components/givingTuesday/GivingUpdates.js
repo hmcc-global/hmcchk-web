@@ -97,9 +97,9 @@ const GivingUpdates = (props) => {
       text: ['Local'],
       desc: ['CityServe'],
       givingValue:
-        givingData.categories[2].amount === -1
+        givingData.categories[0].amount === -1
           ? '-'
-          : numberWithCommas(givingData.categories[2].amount),
+          : numberWithCommas(givingData.categories[0].amount),
     },
     {
       iconLink: process.env.PUBLIC_URL + '/images/givingTuesday/2-global.png',
@@ -117,13 +117,13 @@ const GivingUpdates = (props) => {
       givingValue:
         givingData.categories[2].amount === -1
           ? '-'
-          : numberWithCommas(givingData.categories[1].amount),
+          : numberWithCommas(givingData.categories[2].amount),
     },
   ];
   const givingSum =
-    givingData.categories[0].amount === -1
+    givingData.categories[3].amount === -1
       ? '-'
-      : givingData.categories[0].amount;
+      : givingData.categories[3].amount;
 
   return (
     <Stack direction="column" spacing={5}>
@@ -214,9 +214,9 @@ const GivingUpdates = (props) => {
                 Number of Givers:
               </Text>
               <Text flex={1} textAlign={['right', 'center']}>
-                {givingData.categories[0].givers === -1
+                {givingData.categories[3].givers === -1
                   ? '-'
-                  : givingData.categories[0].givers}
+                  : givingData.categories[3].givers}
               </Text>
             </Stack>
           </Stack>
