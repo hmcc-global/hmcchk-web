@@ -153,6 +153,12 @@ module.exports.routes = {
   'put /api/sermon-notes-parent/delete':
     'sermonNotesParent/delete-sermon-notes-parent',
 
+  // Fundraise APIs
+  'get /api/fundraise/get': 'fundraise/get-fundraise',
+  'get /api/fundraise/admin-get': 'fundraise/admin-get-fundraise',
+  'post /api/fundraise/create': 'fundraise/create-fundraise',
+  'put /api/fundraise/update': 'fundraise/update-fundraise',
+
   // UI
   'get /*': {
     skipAssets: true,
