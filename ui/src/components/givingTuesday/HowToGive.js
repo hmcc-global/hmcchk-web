@@ -49,8 +49,9 @@ const HowToGive = (props) => {
           >
             <b>Category Codes:</b>
             <UnorderedList>
-              <ListItem>GC: Our Global Church LC</ListItem>
-              <ListItem>LC: Our Local Church</ListItem>
+              <ListItem>GT Local</ListItem>
+              <ListItem>GT Global</ListItem>
+              <ListItem>GT Saturate</ListItem>
             </UnorderedList>
           </Text>
         </Box>
@@ -61,12 +62,12 @@ const HowToGive = (props) => {
               remark that states:
             </b>
             <br />
-            GT: GC Amount1, LC Amount2
+            GT Local Amount1, Global Amount2, Saturate Amount 3
           </Text>
           <Text>
             <b>Example Remark Note:</b>
             <br />
-            GT: GC 1000, LC 500
+            GT Local 1000, Global 500, Saturate 300
           </Text>
           <Text>
             Note: Please email{' '}
