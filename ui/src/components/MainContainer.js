@@ -40,6 +40,7 @@ import AdminSermonNotesContainer from './admin/sermonNotes/AdminSermonNotesConta
 import SermonNotesContainer from './sermon-notes/SermonNotesContainer';
 import PrivacyPolicy from './screens/PrivacyPolicy';
 import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
+import GivingTuesdayPage from './givingTuesday/GivingTuesdayPage';
 
 const MainContainer = () => {
   return (
@@ -302,6 +303,12 @@ const MainContainer = () => {
           path="/admin/fundraise"
           permissions={['admin', 'stewardship']}
           component={AdminFundraiseContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/giving-tuesday"
+          permissions={['public']}
+          component={GivingTuesdayPage}
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
