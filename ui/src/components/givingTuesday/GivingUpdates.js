@@ -153,8 +153,7 @@ const GivingUpdates = (props) => {
               </b>
             </Text>
             <Text fontSize={['0.5rem', 'sm']} fontWeight={400}>
-              Numbers will be updated at 10:00, 12:00, 15:00, 18:00,
-              22:00, 23:00, 00:30
+              Numbers will be updated at 10:00, 14:00, 19:00, 22:00, 00:30
             </Text>
           </>
         )}
