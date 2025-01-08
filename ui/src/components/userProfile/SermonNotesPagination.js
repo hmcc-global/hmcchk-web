@@ -1,16 +1,18 @@
-import { useState } from 'react';
 import { Box, Button, Flex, Text, Divider, Image } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
-const SermonNotesPagination = ({ sermonNotes }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5; // Show 5 sermon notes per page
+const SermonNotesPagination = ({
+  sermonNotes,
+  currentPage,
+  setCurrentPage,
+}) => {
+  const itemsPerPage = 5; // Fixed at 5 items per page
 
-  // Calculate the total number of pages
   const totalPages = Math.ceil(sermonNotes.length / itemsPerPage);
 
-  // Determine which notes to display on the current page
-  const indexOfLastItem = currentPage * itemsPerPage;
+  const validCurrentPage = Math.min(currentPage, totalPages);
+
+  const indexOfLastItem = validCurrentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentSermonNotes = sermonNotes.slice(
     indexOfFirstItem,
@@ -67,7 +69,7 @@ const SermonNotesPagination = ({ sermonNotes }) => {
                             'default',
                             {
                               day: '2-digit',
-                              month: 'short', // This should give "Sep"
+                              month: 'short',
                               year: 'numeric',
                             }
                           )
@@ -97,18 +99,18 @@ const SermonNotesPagination = ({ sermonNotes }) => {
           onClick={() =>
             setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))
           }
-          isDisabled={currentPage === 1}
+          isDisabled={validCurrentPage === 1}
         >
           &lt;
         </Button>
         <Text mx={4} textAlign="center">
-          {currentPage}/{totalPages}
+          {validCurrentPage}/{totalPages}
         </Text>
         <Button
           onClick={() =>
             setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))
           }
-          isDisabled={currentPage === totalPages}
+          isDisabled={validCurrentPage === totalPages}
         >
           &gt;
         </Button>

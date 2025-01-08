@@ -14,7 +14,20 @@ const parseSermonTitle = (title) => {
   const captured = pattern.exec(decodedTitle);
 
   // eslint-disable-next-line eqeqeq
-  return captured != null && captured[1] != null && captured[1] !== '' ? captured[1] : decodedTitle;
+  return captured != null && captured[1] != null && captured[1] !== ''
+    ? captured[1]
+    : decodedTitle;
+};
+
+const parseSermonDescription = (sermonDesc) => {
+  if (sermonDesc == null) return '';
+
+  const pattern = /<p>(.*)<\/p>/i;
+  const captured = pattern.exec(sermonDesc);
+
+  return captured != null && captured[1] && captured[1] !== ''
+    ? captured[1]
+    : sermonDesc;
 };
 
 const arrayReducer = (id, list) => {
@@ -40,7 +53,7 @@ const transformSermon = (sermon, speakers, sermonSeries, serviceTypes) => {
     serviceType: arrayReducer(sermon.wpfc_service_type, serviceTypes),
     passage: sermon.bible_passage,
     sermonSeries: arrayReducer(sermon.wpfc_sermon_series, sermonSeries),
-    sermonDesc: sermon.sermon_description,
+    sermonDesc: parseSermonDescription(sermon.content.rendered),
     sermonAudioUrl: sermon.sermon_audio,
     sermonAudioDuration: sermon.sermon_audio_duration,
     sermonVideoUrl: sermon.sermon_video_url,

@@ -61,6 +61,8 @@ const UserProfileDesktop = (props) => {
   const [userSermonNotes, setUserSermonNotes] = useState([]);
   const [sermonSeriesList, setSermonSeriesList] = useState([]);
   const [selectedSermonSeries, setSelectedSermonSeries] = useState('');
+  const [currentPageAll, setCurrentPageAll] = useState(1);
+  const [currentPageSaved, setCurrentPageSaved] = useState(1);
 
   const setUserInformationFields = (userData) => {
     for (let key in userData) {
@@ -201,6 +203,15 @@ const UserProfileDesktop = (props) => {
     if (status === 200) {
       setModalOpen(true);
       fetchUserData();
+    }
+  };
+
+  const handleTabSwitch = (tab) => {
+    setActiveSermonNoteTab(tab);
+    if (tab === 'all') {
+      setCurrentPageSaved(1); // Reset page for the saved tab
+    } else {
+      setCurrentPageAll(1); // Reset page for the all tab
     }
   };
 
@@ -372,7 +383,7 @@ const UserProfileDesktop = (props) => {
                   borderRadius={30}
                   bg={activeSermonNoteTab === 'all' ? '#4A6EEB' : '#DFE7FF'}
                   color={activeSermonNoteTab === 'all' ? 'white' : '#4A6EEB'}
-                  onClick={() => setActiveSermonNoteTab('all')}
+                  onClick={() => handleTabSwitch('all')}
                   px={5}
                   _hover={{
                     bg: activeSermonNoteTab === 'all' ? '#4A6EEB' : '#DFE7FF',
@@ -387,7 +398,7 @@ const UserProfileDesktop = (props) => {
                   borderRadius={30}
                   bg={activeSermonNoteTab === 'my' ? '#4A6EEB' : '#DFE7FF'}
                   color={activeSermonNoteTab === 'my' ? 'white' : '#4A6EEB'}
-                  onClick={() => setActiveSermonNoteTab('my')}
+                  onClick={() => handleTabSwitch('my')}
                   px={5}
                   _hover={{
                     bg: activeSermonNoteTab === 'my' ? '#4A6EEB' : '#DFE7FF',
@@ -398,7 +409,6 @@ const UserProfileDesktop = (props) => {
                 </Button>
               </HStack>
 
-              {/* Display the sermon series dropdown only for 'All Sermon Notes' */}
               {activeSermonNoteTab === 'all' && (
                 <>
                   <Text
@@ -430,8 +440,20 @@ const UserProfileDesktop = (props) => {
                 </>
               )}
 
-              {/* Pass Sermon Notes depending on the tab and also whether there is any select option */}
-              <SermonNotesPagination sermonNotes={sermonNotes} />
+              {/* Pass pagination state to SermonNotesPagination */}
+              <SermonNotesPagination
+                sermonNotes={sermonNotes}
+                currentPage={
+                  activeSermonNoteTab === 'all'
+                    ? currentPageAll
+                    : currentPageSaved
+                }
+                setCurrentPage={
+                  activeSermonNoteTab === 'all'
+                    ? setCurrentPageAll
+                    : setCurrentPageSaved
+                }
+              />
             </TabPanel>
             <TabPanel p="7%">
               <Stack spacing="2%">
