@@ -7,6 +7,7 @@ import { customAxios as axios } from '../helpers/customAxios';
 import VisionMissionSection from './VisionMissionSection';
 import VisionMissionSectionMobile from './VisionMissionSectionMobile';
 import ExperienceBiblicalCommunity from './ExperienceBiblicalCommunity';
+import ChurchThemeSection from './ChurchThemeSection';
 
 const HomeContainer = (props) => {
   const { user } = props;
@@ -43,7 +44,9 @@ const HomeContainer = (props) => {
       <EventsSection />
 
       {isMobile ? <VisionMissionSectionMobile /> : <VisionMissionSection />}
+      <ChurchThemeSection />
       <ExperienceBiblicalCommunity />
+    
       {popup.flag && <PopupContainer props={popup} />}
     </Flex>
   );
