@@ -53,11 +53,10 @@ const ChurchThemeSection = () => {
                   borderRadius="0.5rem"
                   border="1px solid"
                   borderColor="#EDECFF"
-                  p="2em"
-                  spacing="1.5em"
+                  p="1.5em"
                   bgColor="#EDECFF"
                 >
-                  <VStack w="60%">
+                  <VStack w="50%">
                     <Flex h="full" justifyContent="space-between">
                       <Box>
                         <Text
@@ -79,11 +78,12 @@ const ChurchThemeSection = () => {
                         >
                         The 3 specific reasons for this theme:
                         </Text>
+                        <br></br>
                       </Box>
                     </Flex>
                     <Box
                       borderRadius="10"
-                      w="70%"
+                      w="80%"
                       border="1px solid"
                       borderColor="#B9B5F4"
                       textAlign="center"
@@ -118,7 +118,7 @@ const ChurchThemeSection = () => {
                     </Box>
                     <Box
                       borderRadius="10"
-                      w="70%"
+                      w="80%"
                       border="1px solid"
                       borderColor="#B9B5F4"
                       textAlign="center"
@@ -154,7 +154,7 @@ const ChurchThemeSection = () => {
                     </Box>
                     <Box
                       borderRadius="10"
-                      w="70%"
+                      w="80%"
                       border="1px solid"
                       borderColor="#B9B5F4"
                       textAlign="center"
@@ -189,7 +189,10 @@ const ChurchThemeSection = () => {
                     </Box>
                   </VStack>
                   <Box>
-                    <Image src={process.env.PUBLIC_URL+'images/home/pursue_theme.png'} />
+                    <Image
+                      width="38rem" 
+                      src={process.env.PUBLIC_URL+'images/home/pursue_theme.png'} 
+                    />
                   </Box> 
                 </HStack>
               </Flex>
