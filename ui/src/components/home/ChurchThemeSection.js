@@ -1,16 +1,14 @@
 import {
-    Button,
-    Box,
-    Flex,
-    Heading,
-    VStack,
-    Text,
-    Image,
-    Fade,
-    Container,
-    HStack,
-  } from '@chakra-ui/react';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
+  Box,
+  Flex,
+  Heading,
+  VStack,
+  Text,
+  Image,
+  Fade,
+  Container,
+  HStack,
+} from '@chakra-ui/react';
 import { InView } from 'react-intersection-observer';
 
 const ChurchThemeSection = () => {
@@ -18,11 +16,7 @@ const ChurchThemeSection = () => {
     <InView rootMargin="-50px" triggerOnce={true}>
       {({ inView, ref }) => (
         <Fade transition={{ enter: { duration: 1 } }} in={inView}>
-          <Container
-            maxW="container.xl"
-            py={10}
-            ref={ref}
-          >
+          <Container maxW="container.xl" py={10} ref={ref}>
             <VStack>
               <Box w="100%" alignItems="flex-start" paddingBottom={'1em'}>
                 <Box w="100%" position="relative">
@@ -41,7 +35,6 @@ const ChurchThemeSection = () => {
                     fontSize={['2rem', '2rem', '3rem', '3.75rem']}
                     fontWeight="400"
                     lineHeight="1"
-                    wordBreak="break-word"
                   >
                     Our 2024-25 Church Theme: Pursue
                   </Heading>
@@ -66,7 +59,9 @@ const ChurchThemeSection = () => {
                           fontFamily="Manrope"
                           fontWeight="400"
                         >
-                          As our church approaches our 10th year, we recognize the need to more actively <b>"pursue"</b> the vision and calling God has given us. 
+                          As our church approaches our 10th year, we recognize
+                          the need to more actively <b>"pursue"</b> the vision
+                          and calling God has given us.
                         </Text>
                         <br></br>
                         <Text
@@ -76,7 +71,7 @@ const ChurchThemeSection = () => {
                           fontFamily="Manrope"
                           fontWeight="400"
                         >
-                        The 3 specific reasons for this theme:
+                          The 3 specific reasons for this theme:
                         </Text>
                         <br></br>
                       </Box>
@@ -96,24 +91,15 @@ const ChurchThemeSection = () => {
                         fontSize="20"
                         wordBreak="break-word"
                       >
-                        <Text 
-                          color="#141419"
-                          display="inline"> 
-                            We want to 
+                        <Text color="#141419" display="inline">
+                          We want to
+                        </Text>{' '}
+                        <Text color="#C17150" display="inline">
+                          SEEK
+                        </Text>{' '}
+                        <Text color="#141419" display="inline">
+                          after Jesus and Kingdom things
                         </Text>
-                        {' '}
-                        <Text 
-                          color="#C17150"
-                          display="inline"> 
-                            SEEK
-                        </Text>
-                        {' '}
-                        <Text 
-                          color="#141419"
-                          display="inline"> 
-                            after Jesus and Kingdom things 
-                        </Text>
-                         
                       </Text>
                     </Box>
                     <Box
@@ -131,26 +117,16 @@ const ChurchThemeSection = () => {
                         fontSize="20"
                         wordBreak="break-word"
                       >
-                        <Text 
-                          color="#141419"
-                          display="inline"> 
-                            We want to 
+                        <Text color="#141419" display="inline">
+                          We want to
+                        </Text>{' '}
+                        <Text color="#C17150" display="inline">
+                          SET
+                        </Text>{' '}
+                        <Text color="#141419" display="inline">
+                          a standard for discipleship
                         </Text>
-                        {' '}
-                        <Text 
-                          color="#C17150"
-                          display="inline"> 
-                            SET
-                        </Text>
-                        {' '}
-                        <Text 
-                          color="#141419"
-                          display="inline"> 
-                            a standard for discipleship
-                        </Text>
-                         
                       </Text>
-                      
                     </Box>
                     <Box
                       borderRadius="10"
@@ -167,33 +143,26 @@ const ChurchThemeSection = () => {
                         fontSize="20"
                         wordBreak="break-word"
                       >
-                        <Text 
-                          color="#141419"
-                          display="inline"> 
-                            We want to 
+                        <Text color="#141419" display="inline">
+                          We want to
+                        </Text>{' '}
+                        <Text color="#C17150" display="inline">
+                          SEE
+                        </Text>{' '}
+                        <Text color="#141419" display="inline">
+                          progress in the Saturate Vision
                         </Text>
-                        {' '}
-                        <Text 
-                          color="#C17150"
-                          display="inline"> 
-                            SEE
-                        </Text>
-                        {' '}
-                        <Text 
-                          color="#141419"
-                          display="inline"> 
-                            progress in the Saturate Vision
-                        </Text>
-                         
                       </Text>
                     </Box>
                   </VStack>
                   <Box>
                     <Image
-                      width="38rem" 
-                      src={process.env.PUBLIC_URL+'images/home/pursue_theme.png'} 
+                      width="38rem"
+                      src={
+                        process.env.PUBLIC_URL + 'images/home/pursue_theme.png'
+                      }
                     />
-                  </Box> 
+                  </Box>
                 </HStack>
               </Flex>
             </VStack>
