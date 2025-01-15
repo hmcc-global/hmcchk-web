@@ -354,7 +354,7 @@ const EventCard = (props) => {
               </Text>
             </Box>
           </ModalBody>
-          <ModalFooter>
+          <ModalFooter p={1} mt={0}>
             <ButtonGroup
               size="md"
               flexDirection="row"
