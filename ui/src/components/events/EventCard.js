@@ -66,7 +66,7 @@ const EventCard = (props) => {
     <>
       <Box
         overflow="hidden"
-        bg="white"
+        bg="#F6FAFF"
         onClick={onOpen}
         display="flex"
         fontFamily="Manrope"
@@ -85,6 +85,7 @@ const EventCard = (props) => {
           position="relative"
           ml={['0', '6']}
           width={['100%', '55%']}
+          bg="#F6FAFF"
         >
           <Stack spacing={[2, 4]} direction="row" mb={['2', '5']}>
             {eventData.eventType?.length > 0 &&
