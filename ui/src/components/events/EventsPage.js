@@ -9,6 +9,7 @@ import {
   Select,
   Stack,
   Text,
+  Wrap,
 } from '@chakra-ui/react';
 import { MdArrowDropDown } from 'react-icons/md';
 import EventCard from './EventCard';
@@ -203,8 +204,9 @@ const EventsPage = (props) => {
       </Text>
       <Stack
         border="1px"
+        borderColor="#DFE7FF"
         p={3}
-        borderRadius={30}
+        borderRadius={{base:"0.938rem", lg:"3.188rem"}}
         justifyContent="space-around"
         flexDirection={['column', 'row']}
         spacing={[2, 0]}
@@ -214,15 +216,19 @@ const EventsPage = (props) => {
         alignItems="center"
         bg="#ffffff"
       >
-        <Grid templateColumns="repeat(3, 1fr)" gap={[3, 9]}>
+        <Wrap 
+          spacing={["0.5rem", "1rem"]}
+          align="center"
+          justify="center">
           {tagHeader.map((tag, i) => (
             <Button
-              width={['23vw', '14vw']}
-              borderRadius={[15, 20]}
+              width={["26vw", "17vw"]}
+              height={["2rem", "2.625rem"]}
+              borderRadius="1.875rem"
               key={'button' + i}
               m="0rem"
               _hover={{ opacity: '90%' }}
-              bg={selectedFilterIndex === i ? '#3F3F3F' : 'gray.100'}
+              bg={selectedFilterIndex === i ? '#4A6EEB' : '#DFE7FF'}
               color={selectedFilterIndex === i ? '#ffffff' : ''}
               id={i}
               onClick={onFilter}
@@ -232,32 +238,33 @@ const EventsPage = (props) => {
               </Text>
             </Button>
           ))}
-        </Grid>
-        <Select
-          placeholder="More Filters"
-          fontWeight="600"
-          textAlign="center"
-          width={['75vw', '14vw']}
-          borderRadius={[15, 20]}
-          rightIcon={<MdArrowDropDown />}
-          variant="filled"
-          bg={selectedOption !== '' ? '#3F3F3F' : 'gray.100'}
-          color={selectedOption !== '' ? '#ffffff' : ''}
-          _hover={{
-            opacity: '90%',
-          }}
-          _focus={{
-            bg: 'gray.100',
-            color: '#000000',
-          }}
-          cursor="pointer"
-          onChange={onSelect}
-          value={selectedOption}
-        >
-          {tagList.map((tag, i) => (
-            <option value={i}>{tag}</option>
-          ))}
+          <Select
+            placeholder="More Filters"
+            fontSize={{ base: '80%', sm: '100%' }}
+            fontWeight="600"
+            textAlign="center"
+            width={["82vw", "17vw"]}
+            height={["2rem", "2.625rem"]}
+            borderRadius="1.875rem"
+            rightIcon={<MdArrowDropDown />}
+            variant="filled"
+            bg={selectedOption !== '' ? '#DFE7FF' : '#DFE7FF'}
+            _hover={{
+              opacity: '90%',
+            }}
+            _focus={{
+              bg: 'gray.100',
+              color: '#000000',
+            }}
+            cursor="pointer"
+            onChange={onSelect}
+            value={selectedOption}
+          >
+            {tagList.map((tag, i) => (
+              <option value={i}>{tag}</option>
+            ))}
         </Select>
+        </Wrap>
       </Stack>
       <Grid
         mt="12"
