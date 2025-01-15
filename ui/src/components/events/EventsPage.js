@@ -221,7 +221,7 @@ const EventsPage = (props) => {
           <Wrap spacing={['0.5rem', '1rem']} align="center" justify="center">
             {tagHeader.map((tag, i) => (
               <Button
-                width={['26vw','13.5vw']}
+                width={['26vw','15vw']}
                 height={['2rem', '2.625rem']}
                 borderRadius="1.875rem"
                 key={'button' + i}
@@ -242,7 +242,7 @@ const EventsPage = (props) => {
               fontSize={{ base: '80%', sm: '100%' }}
               fontWeight="600"
               textAlign="center"
-              width={['83vw', '13.5vw']}
+              width={['83vw', '15vw']}
               height={['2rem', '2.625rem']}
               borderRadius="1.875rem"
               rightIcon={<MdArrowDropDown />}
@@ -276,7 +276,7 @@ const EventsPage = (props) => {
             filteredList.map((event, i) => (
               <>
                 <EventCard key={'event' + i} eventData={event} />
-                {i !== filteredList.length - 1 && <Divider />}
+                {i !== filteredList.length - 1 && <Divider borderColor="#A8A8A8"/>}
               </>
             ))}
         </Grid>
