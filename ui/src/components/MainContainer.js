@@ -46,7 +46,7 @@ const MainContainer = () => {
     <chakra.main
       maxH="100%"
       flexGrow={1}
-      bg="#ffffff"
+      bg="#F6FAFF"
       overflowY="auto"
       id="main-container"
       overflowX="hidden"

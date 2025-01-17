@@ -12,6 +12,7 @@ import {
   Container,
 } from '@chakra-ui/react';
 import { ChevronLeftIcon } from '@chakra-ui/icons';
+import { SocialIcon } from 'react-social-icons';
 import { DateTime } from 'luxon';
 import OnlinePageButtons from './OnlinePageButtons';
 import OnlinePageTabs from './OnlinePageTabs';
@@ -65,18 +66,13 @@ const OnlineSermonContainer = (props) => {
       {onlineSermon && (
         <Container maxW={{ base: '100%', lg: '85%' }}>
           <VStack>
-            <Link href="/sermons" alignSelf="baseline" id="online-sermon">
-              <Button
-                variant="link"
-                fontSize="lg"
-                color="black"
-                justifyContent="left"
-                leftIcon={<ChevronLeftIcon />}
-                display={{ base: 'none', md: 'flex' }}
-              >
-                See all past sermons
-              </Button>
-            </Link>
+            <Text
+              alignSelf="self-start"
+              fontFamily="DMSerifDisplay_Italic"
+              fontSize="3.75rem"
+            >
+              {onlineSermon.sermonSeries}
+            </Text>
             <Box
               display="flex"
               flexDirection={{ base: 'column', lg: 'row' }}
@@ -85,7 +81,7 @@ const OnlineSermonContainer = (props) => {
             >
               <Box mb="20px" w={{ base: '100%', lg: '60%' }}>
                 <VStack alignItems="left" alignContent="left">
-                  <AspectRatio mb="5" width="100%" ratio={16 / 9}>
+                  <AspectRatio mb="0" width="100%" ratio={16 / 9}>
                     <iframe
                       width="560"
                       height="315"
@@ -97,49 +93,79 @@ const OnlineSermonContainer = (props) => {
                     ></iframe>
                   </AspectRatio>
 
-                  <Text fontWeight="bold" fontSize={{ base: 'xl', md: '3xl' }}>
+                  <Text
+                    fontWeight="400"
+                    fontSize={{ base: '1.063rem', md: '2rem' }}
+                    fontFamily="DMSerifDisplay_Italic"
+                  >
                     {onlineSermon.title}
                   </Text>
                   <Stack spacing={8}>
-                    <Box>
+                    <Box fontSize={{ base: '0.625remrem', md: '0.75rem' }}>
                       <Stack
-                        spacing={{ base: 'normal', md: 'auto' }}
+                        spacing="3"
                         direction={{ base: 'column', md: 'row' }}
+                        mb="3"
                       >
-                        <HStack>
-                          <Text fontWeight="bold">Speaker:</Text>
-                          <Text>{onlineSermon.speaker}</Text>
-                        </HStack>
-                        <HStack>
-                          <Text fontWeight="bold">Date: </Text>
+                        <HStack spacing="1">
+                          <Text>Date:</Text>
                           <Text>{getSermonDate()}</Text>
                         </HStack>
-                        <HStack>
-                          <Text fontWeight="bold">Time: </Text>
-                          <Text>{getSermonTime()}</Text>
+                        <Text>|</Text>
+                        <HStack spacing="1">
+                          <Text>Speaker: </Text>
+                          <Text>{onlineSermon.speaker}</Text>
                         </HStack>
-                      </Stack>
-                      <Stack
-                        spacing={{ base: 'normal', md: 'auto' }}
-                        direction={{ base: 'column', md: 'row' }}
-                      >
-                        <HStack>
-                          <Text fontWeight="bold">Series: </Text>
-                          <Text>{onlineSermon.sermonSeries}</Text>
-                        </HStack>
-                        <HStack>
-                          <Text fontWeight="bold">Passage:</Text>
+                        <Text>|</Text>
+                        <HStack spacing="1">
+                          <Text>Passage: </Text>
                           <Text>{onlineSermon.sermonPassage}</Text>
                         </HStack>
                       </Stack>
-                    </Box>
-                    <OnlinePageButtons />
-                    <Box bgColor="#F1F1F3" p={5} borderRadius={15}>
-                      <Text fontWeight="bold" color="#0628A3" fontSize="md">
-                        Description:
+                      <Text
+                        fontFamily="Manrope"
+                        fontSize="0.875rem"
+                        fontWeight="500"
+                        color="black"
+                      >
+                        {onlineSermon.sermonDescription}
                       </Text>
-                      <Text>{onlineSermon.sermonDescription}</Text>
                     </Box>
+                    <HStack
+                      textColor="#4A6EEB"
+                      fontFamily="Manrope"
+                      fontSize="1rem"
+                      gap="10"
+                      fontWeight="700"
+                    >
+                      <Link
+                        target="_blank"
+                        href="https://open.spotify.com/user/hmccofhk?si=bd64100596904a95"
+                      >
+                        <SocialIcon
+                          target="_blank"
+                          bgColor="transparent"
+                          fgColor="#4A6EEB"
+                          style={{ height: '2.5em', width: '2.5em' }}
+                          url="https://open.spotify.com/user/hmccofhk?si=bd64100596904a95"
+                        />
+                        Listen on Spotify
+                      </Link>
+
+                      <Link
+                        target="_blank"
+                        href="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q"
+                      >
+                        <SocialIcon
+                          target="_blank"
+                          bgColor="transparent"
+                          fgColor="#4A6EEB"
+                          style={{ height: '2.5em', width: '2.5em' }}
+                          url="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q"
+                        />
+                        Watch on Youtube
+                      </Link>
+                    </HStack>
                   </Stack>
                 </VStack>
               </Box>
@@ -168,6 +194,7 @@ const OnlineSermonContainer = (props) => {
               </Box>
             </Box>
           </VStack>
+          <OnlinePageButtons />
         </Container>
       )}
     </>
