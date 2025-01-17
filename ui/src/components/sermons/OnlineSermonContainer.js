@@ -65,11 +65,11 @@ const OnlineSermonContainer = (props) => {
     <>
       {onlineSermon && (
         <Container maxW={{ base: '100%', lg: '85%' }}>
-          <VStack>
+          <VStack mb="4">
             <Text
-              alignSelf="self-start"
+              alignSelf={{ base: 'center', md: 'self-start' }}
               fontFamily="DMSerifDisplay_Italic"
-              fontSize="3.75rem"
+              fontSize={{ base: '2rem', md: '3.75rem' }}
             >
               {onlineSermon.sermonSeries}
             </Text>
@@ -95,17 +95,18 @@ const OnlineSermonContainer = (props) => {
 
                   <Text
                     fontWeight="400"
-                    fontSize={{ base: '1.063rem', md: '2rem' }}
+                    fontSize={{ base: '1.125rem', md: '2rem' }}
                     fontFamily="DMSerifDisplay_Italic"
                   >
                     {onlineSermon.title}
                   </Text>
-                  <Stack spacing={8}>
-                    <Box fontSize={{ base: '0.625remrem', md: '0.75rem' }}>
+                  <Stack spacing={{ base: '2', md: '8' }}>
+                    <Box>
                       <Stack
-                        spacing="3"
-                        direction={{ base: 'column', md: 'row' }}
+                        spacing={{ base: '1', md: '3' }}
+                        direction="row"
                         mb="3"
+                        fontSize={{ base: '0.625rem', md: '0.75rem' }}
                       >
                         <HStack spacing="1">
                           <Text>Date:</Text>
@@ -124,7 +125,7 @@ const OnlineSermonContainer = (props) => {
                       </Stack>
                       <Text
                         fontFamily="Manrope"
-                        fontSize="0.875rem"
+                        fontSize={{ base: '0.75rem', md: '0.875rem' }}
                         fontWeight="500"
                         color="black"
                       >
@@ -135,35 +136,64 @@ const OnlineSermonContainer = (props) => {
                       textColor="#4A6EEB"
                       fontFamily="Manrope"
                       fontSize="1rem"
-                      gap="10"
+                      gap={{ base: '0', md: '10' }}
                       fontWeight="700"
+                      justifyContent={{ base: 'center', md: 'flex-start' }}
                     >
                       <Link
                         target="_blank"
                         href="https://open.spotify.com/user/hmccofhk?si=bd64100596904a95"
                       >
-                        <SocialIcon
-                          target="_blank"
-                          bgColor="transparent"
-                          fgColor="#4A6EEB"
-                          style={{ height: '2.5em', width: '2.5em' }}
-                          url="https://open.spotify.com/user/hmccofhk?si=bd64100596904a95"
-                        />
-                        Listen on Spotify
+                        <HStack>
+                          <Box
+                            height={{ base: '4.5em', md: '2.5em' }}
+                            width={{ base: '4.5em', md: '2.5em' }}
+                          >
+                            <SocialIcon
+                              target="_blank"
+                              bgColor="transparent"
+                              fgColor="#4A6EEB"
+                              style={{ height: '100%', width: '100%' }}
+                              url="https://open.spotify.com/user/hmccofhk?si=bd64100596904a95"
+                            />
+                          </Box>
+                          <Text
+                            fontWeight="700"
+                            borderBottomWidth="2px"
+                            borderColor=" #4A6EEB"
+                            display={{ base: 'none', md: 'block' }}
+                          >
+                            Listen on Spotify
+                          </Text>
+                        </HStack>
                       </Link>
 
                       <Link
                         target="_blank"
                         href="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q"
                       >
-                        <SocialIcon
-                          target="_blank"
-                          bgColor="transparent"
-                          fgColor="#4A6EEB"
-                          style={{ height: '2.5em', width: '2.5em' }}
-                          url="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q"
-                        />
-                        Watch on Youtube
+                        <HStack>
+                          <Box
+                            height={{ base: '5em', md: '2.5em' }}
+                            width={{ base: '5em', md: '2.5em' }}
+                          >
+                            <SocialIcon
+                              target="_blank"
+                              bgColor="transparent"
+                              fgColor="#4A6EEB"
+                              style={{ height: '100%', width: '100%' }}
+                              url="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q"
+                            />
+                          </Box>
+                          <Text
+                            fontWeight="700"
+                            borderBottomWidth="2px"
+                            borderColor="#4A6EEB"
+                            display={{ base: 'none', md: 'block' }}
+                          >
+                            Watch on Youtube
+                          </Text>
+                        </HStack>
                       </Link>
                     </HStack>
                   </Stack>
@@ -194,6 +224,9 @@ const OnlineSermonContainer = (props) => {
               </Box>
             </Box>
           </VStack>
+          <Text fontFamily="DMSerifDisplay_Italic" fontSize="2rem">
+            Check Out More!
+          </Text>
           <OnlinePageButtons />
         </Container>
       )}
