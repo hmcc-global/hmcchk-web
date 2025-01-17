@@ -1,152 +1,172 @@
 import { useEffect, useState } from 'react';
-import { Stack, Text, Box, AspectRatio, Image, Button } from '@chakra-ui/react';
+import {
+  Stack,
+  Text,
+  Box,
+  AspectRatio,
+  Image,
+  Button,
+  HStack,
+  Icon,
+} from '@chakra-ui/react';
 import { useHistory } from 'react-router';
+import { FaArrowRight } from 'react-icons/fa';
+import LiveButton from '../helpers/components/LiveButton';
 
-const headers = ['Current Series', 'HMCC is ONLINE'];
+const headers = ['Latest Sermon', 'HMCC is Live!'];
 
 const CurrentSermon = ({ currentSermon, isOnline }) => {
-  const [header, setHeader] = useState(headers[0]);
-  const [sermonSeriesName, setSermonSeriesName] = useState('');
-  const [sermonDesc, setSermonDesc] = useState('');
-  const [mediaUrl, setMediaUrl] = useState('');
+  const [sermonData, setSermonData] = useState({
+    header: headers[0],
+    sermonSeriesName: '',
+    sermonDesc: '',
+    mediaUrl: '',
+  });
+
   const history = useHistory();
 
   useEffect(() => {
     if (currentSermon) {
-      if (isOnline) {
-        setSermonSeriesName(currentSermon.sermonSeries);
-        setSermonDesc(currentSermon.sermonDescription);
-        setMediaUrl(currentSermon.sermonSeriesUrl);
-        setHeader(headers[1]);
-      } else {
-        currentSermon.sermonSeries[0] &&
-          setSermonSeriesName(currentSermon.sermonSeries[0].name);
-        setSermonDesc(currentSermon.sermonDesc);
-        setMediaUrl(
-          currentSermon.sermonVideoUrl.split('/')[
-            currentSermon.sermonVideoUrl.split('/').length - 1
-          ]
-        );
-      }
+      const header = isOnline ? headers[1] : headers[0];
+      const sermonSeriesName = isOnline
+        ? currentSermon.title
+        : currentSermon.sermonSeries[0]?.name || '';
+      const sermonDesc = isOnline
+        ? currentSermon.sermonDescription
+        : currentSermon.sermonDesc;
+      const mediaUrl = isOnline
+        ? currentSermon.sermonSeriesUrl
+        : currentSermon.sermonVideoUrl.split('/').pop();
+
+      setSermonData({ header, sermonSeriesName, sermonDesc, mediaUrl });
     }
   }, [currentSermon, isOnline]);
 
-  const onClickHandler = () => {
-    history.push('/online');
+  const MediaDisplay = ({ isOnline, mediaUrl }) => (
+    <AspectRatio
+      borderRadius="20px"
+      width={{ base: '100%', md: '40%' }}
+      ratio={16 / 9}
+    >
+      {isOnline ? (
+        <Image src={mediaUrl} objectFit="cover" />
+      ) : (
+        <iframe
+          width="560"
+          height="315"
+          src={`https://www.youtube.com/embed/${mediaUrl}`}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      )}
+    </AspectRatio>
+  );
+
+  const onWatchButtonClick = () => {
+    if (isOnline) {
+      history.push('/online');
+    } else {
+      history.push({
+        pathname: `/sermons/${sermonData.id}`,
+        state: { sermonData: sermonData },
+      });
+    }
   };
 
-  const WatchButton = () => {
-    return (
-      <>
-        {isOnline && (
-          <>
-            <div display={'flex'}></div>
-            <Button onClick={onClickHandler}>Watch Now</Button>
-          </>
-        )}
-      </>
-    );
-  };
+  const WatchButton = () => (
+    <Button
+      borderRadius="80px"
+      border="1px solid #4A6EEB"
+      py={{ base: '1.125rem', md: '1.375rem' }}
+      px={{ base: '1.625rem', md: '1.875rem' }}
+      backgroundColor={'#4A6EEB'}
+      color="#FFFFFF"
+      fontSize="1rem"
+      onClick={() => history.push('/online')}
+      _hover={{ backgroundColor: 'rgba(74, 110, 235, 0.9)' }}
+    >
+      <HStack spacing="1rem" alignItems="center" justifyContent={'center'}>
+        <Text>Watch Now</Text>
+        <Icon as={FaArrowRight} boxSize="1rem" />
+      </HStack>
+    </Button>
+  );
+
+  const { header, sermonSeriesName, sermonDesc, mediaUrl } = sermonData;
 
   return (
-    <>
-      <Box
-        border="4px solid #0628A3"
-        boxSizing="border-box"
-        borderRadius="20px"
-        marginTop="20px"
-        p={[4, 8]}
-        paddingTop={[0, 8]}
-      >
-        <Stack direction={{ base: 'column', md: 'row' }}>
-          <Stack
-            alignItems="left"
-            width="35vw"
-            direction="column"
-            display={{ base: 'none', md: 'flex' }}
-          >
-            <Text
-              fontWeight="bold"
-              fontSize="2em"
-              color="#0628A3"
-              marginTop="-10px"
-              fontFamily="DMSerifDisplay_Italic"
+    <Box boxSizing="border-box">
+      <Stack direction={{ base: 'column', md: 'row' }}>
+        <MediaDisplay isOnline={isOnline} mediaUrl={mediaUrl} />
+
+        {isOnline ? (
+          <>
+            <Stack
+              pl={{ base: '0', md: '1.5rem' }}
+              alignItems="flex-start"
+              flex="1"
+              direction="column"
+              gap="0.5rem"
             >
-              {header}
-            </Text>
-            <Text fontWeight="bold" fontSize="2em">
-              {sermonSeriesName}
-            </Text>
-            <Text fontSize="sm">{sermonDesc}</Text>
-            <WatchButton />
-          </Stack>
-          <Text
-            fontWeight="bold"
-            fontSize="2em"
-            fontFamily="DMSerifDisplay_Italic"
-            color="#0628A3"
-            display={{ base: 'flex', md: 'none' }}
-            marginTop="0"
-          >
-            {header}
-          </Text>
-          <Stack alignContent="center" alignItems="center">
-            <AspectRatio
-              borderRadius="20px"
-              width="80%"
-              ratio={16 / 9}
-              display={{ base: 'unset', md: 'none' }}
+              <Text
+                fontWeight={400}
+                fontSize={{ base: '1.875rem', md: '2.625rem' }}
+                color="#272727"
+                fontFamily="DMSerifDisplay_Italic"
+              >
+                {header}
+              </Text>
+              <HStack spacing="0.5rem" alignItems="center">
+                <LiveButton />
+                <Text
+                  fontWeight="bold"
+                  fontSize={{ base: '1rem', md: '1.125rem' }}
+                >
+                  {sermonSeriesName}
+                </Text>
+              </HStack>
+              <Text
+                fontSize={{ base: '0.875rem', md: '1rem' }}
+                fontWeight={500}
+              >
+                {sermonDesc}
+              </Text>
+              <WatchButton />
+            </Stack>
+          </>
+        ) : (
+          <>
+            <Stack
+              pl={{ base: '0', md: '1.5rem' }}
+              alignItems="left"
+              direction="column"
+              fontFamily="Manrope"
+              gap="0.875rem"
             >
-              {isOnline ? (
-                <Image src={mediaUrl} objectFit="cover" />
-              ) : (
-                <iframe
-                  width="560"
-                  height="315"
-                  src={`https://www.youtube.com/embed/${mediaUrl}`}
-                  title="YouTube video player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              )}
-            </AspectRatio>
-          </Stack>
-          <AspectRatio
-            borderRadius="20px"
-            width="80%"
-            ratio={16 / 9}
-            display={{ base: 'none', md: 'usnet' }}
-          >
-            {isOnline ? (
-              <Image src={mediaUrl} objectFit="cover" />
-            ) : (
-              <iframe
-                width="560"
-                height="315"
-                src={`https://www.youtube.com/embed/${mediaUrl}`}
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            )}
-          </AspectRatio>
-          <Stack
-            alignItems="left"
-            direction="column"
-            display={{ base: 'flex', md: 'none' }}
-            fontFamily="Manrope"
-          >
-            <Text fontWeight="bold" fontSize="1.2em">
-              {sermonSeriesName}
-            </Text>
-            <Text fontSize="sm" lineHeight="shorter">
-              {sermonDesc}
-            </Text>
-            <WatchButton />
-          </Stack>
-        </Stack>
-      </Box>
-    </>
+              <Text
+                fontWeight="800"
+                fontSize={{ base: '1rem', md: '1.125rem' }}
+                color="#4A6EEB"
+              >
+                {header}
+              </Text>
+              <Text
+                fontWeight="400"
+                fontSize={{ base: '1.75rem', md: '2rem' }}
+                fontFamily="DMSerifDisplay_Italic"
+              >
+                {sermonSeriesName}
+              </Text>
+              <Text fontSize="sm" lineHeight="shorter">
+                {sermonDesc}
+              </Text>
+              <WatchButton />
+            </Stack>
+          </>
+        )}
+      </Stack>
+    </Box>
   );
 };
 
