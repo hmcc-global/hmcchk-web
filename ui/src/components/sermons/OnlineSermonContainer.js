@@ -206,7 +206,10 @@ const OnlineSermonContainer = (props) => {
                 overflowY="auto"
                 position="relative"
                 borderRadius={10}
-                boxShadow="0px 4px 18px rgba(0, 0, 0, 0.25)"
+                boxShadow={{
+                  base: 'none',
+                  sm: '0px 4px 18px rgba(0, 0, 0, 0.25)',
+                }}
               >
                 <Box
                   position={{ base: 'unset', lg: 'absolute ' }}
@@ -224,10 +227,17 @@ const OnlineSermonContainer = (props) => {
               </Box>
             </Box>
           </VStack>
-          <Text fontFamily="DMSerifDisplay_Italic" fontSize="2rem">
+          <Text
+            fontFamily="DMSerifDisplay_Italic"
+            fontSize="2rem"
+            display={{ base: 'none', sm: 'block' }}
+          >
             Check Out More!
           </Text>
-          <OnlinePageButtons />
+          <OnlinePageButtons
+            fontSize="2rem"
+            display={{ base: 'none', sm: 'block' }}
+          />
         </Container>
       )}
     </>
