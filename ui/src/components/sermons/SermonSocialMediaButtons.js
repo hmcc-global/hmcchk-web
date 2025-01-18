@@ -21,8 +21,8 @@ const SermonSocialMediaButtons = ({ isLive = false, spotifyLink, ytLink }) => {
           fontSize="1rem"
           fontWeight={700}
           color="#4A6EEB"
-          justifyContent="left"
-          gap="0.5rem"
+          justifyContent={{ base: 'center', lg: 'flex-start' }}
+          gap={{ base: 0, lg: '0.5rem' }}
         >
           <Icon as={FaSpotify} boxSize={{ base: '2rem', lg: '1.5rem' }} />
           <Text
@@ -45,8 +45,8 @@ const SermonSocialMediaButtons = ({ isLive = false, spotifyLink, ytLink }) => {
           fontSize="1rem"
           fontWeight={700}
           color="#4A6EEB"
-          justifyContent="left"
-          gap="0.5rem"
+          justifyContent={{ base: 'center', lg: 'flex-start' }}
+          gap={{ base: 0, lg: '0.5rem' }}
         >
           <Icon as={FaYoutube} boxSize={{ base: '2rem', lg: '1.5rem' }} />
           <Text
