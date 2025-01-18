@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Button, Select, Container, Box } from '@chakra-ui/react';
+import { Select, Container, Grid } from '@chakra-ui/react';
 import { FaCaretDown } from 'react-icons/fa';
 
 // Utility function to get unique values
@@ -16,32 +16,31 @@ const getUniqueValues = (items, keyExtractor) => {
 
 // Reusable FilterOption component
 const FilterOption = ({ name, placeholder, options, onChange, value }) => (
-  <Box alignItems="left" spacing={3} w="25%">
-    <Select
-      style={{
-        overflowY: 'scroll',
-        textAlign: 'center',
-        color: '#4A6EEB',
-        fontWeight: '700',
-      }}
-      icon={<FaCaretDown />}
-      iconColor="transparent"
-      iconSize="0px"
-      borderRadius="30px"
-      borderColor="#4A6EEB"
-      _hover={{ borderColor: '#4A6EEB', bgColor: 'rgba(74, 110, 235, 0.1)' }}
-      name={name}
-      placeholder={placeholder}
-      onChange={onChange}
-      value={value}
-    >
-      {options.map((option, index) => (
-        <option key={index} value={option}>
-          {option}
-        </option>
-      ))}
-    </Select>
-  </Box>
+  <Select
+    style={{
+      overflowY: 'scroll',
+      textAlign: 'center',
+      color: '#4A6EEB',
+      fontWeight: '700',
+    }}
+    fontSize={{ base: '0.875rem', md: '1rem' }}
+    icon={<FaCaretDown />}
+    iconColor="#4A6EEB"
+    iconSize="1rem"
+    borderRadius="30px"
+    borderColor="#4A6EEB"
+    _hover={{ borderColor: '#4A6EEB', bgColor: 'rgba(74, 110, 235, 0.1)' }}
+    name={name}
+    placeholder={placeholder}
+    onChange={onChange}
+    value={value}
+  >
+    {options.map((option, index) => (
+      <option key={index} value={option}>
+        {option}
+      </option>
+    ))}
+  </Select>
 );
 
 const FilterSermon = ({
@@ -54,10 +53,6 @@ const FilterSermon = ({
   // Extract unique values for each filter category
   const uniqueSpeaker = getUniqueValues(allSermons, (sermon) =>
     sermon.speaker[0] ? sermon.speaker[0].name : null
-  );
-
-  const uniqueSermonSeries = getUniqueValues(allSermons, (sermon) =>
-    sermon.sermonSeries[0] ? sermon.sermonSeries[0].name : null
   );
 
   const uniqueBook = getUniqueValues(allSermons, (sermon) => {
@@ -77,12 +72,7 @@ const FilterSermon = ({
   return (
     <Container maxW="container.xl" p="0">
       {/* Filter Options */}
-      <Stack
-        spacing={{ base: '6', md: '1.5rem' }}
-        alignItems="center"
-        justifyContent="flex-start"
-        direction={{ base: 'column', md: 'row' }}
-      >
+      <Grid templateColumns={['repeat(2, 1fr)', 'repeat(3, 1fr)']} gap={[3, 6]}>
         <FilterOption
           name="speaker"
           placeholder="Speaker"
@@ -90,13 +80,6 @@ const FilterSermon = ({
           onChange={filterSermon}
           value={filterData[0]}
         />
-        {/* <FilterOption
-          name="sermon"
-          placeholder="Sermon Series"
-          options={uniqueSermonSeries}
-          onChange={filterSermon}
-          value={filterData[1]}
-        /> */}
         <FilterOption
           name="book"
           placeholder="Book"
@@ -111,36 +94,7 @@ const FilterSermon = ({
           onChange={filterSermon}
           value={filterData[3]}
         />
-      </Stack>
-
-      {/* Action Buttons */}
-      <Stack
-        direction="row"
-        spacing="auto"
-        marginTop="75px"
-        display={{ base: 'flex', md: 'none' }}
-      >
-        <Button
-          onClick={clearFilter}
-          width="35vw"
-          background="transparent"
-          border="1px solid #000000"
-          boxSizing="border-box"
-          backdropFilter="blur(6px)"
-          borderRadius="10px"
-        >
-          Clear Filter
-        </Button>
-        <Button
-          onClick={onClose}
-          width="35vw"
-          backgroundColor="#0628A3"
-          color="white"
-          borderRadius="10px"
-        >
-          Done
-        </Button>
-      </Stack>
+      </Grid>
     </Container>
   );
 };

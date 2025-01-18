@@ -78,16 +78,8 @@ const SermonSeriesCard = ({
 
   return (
     <>
-      <Box
-        style={sermonSeriesCardStyle}
-        // to={{
-        //   pathname: `/sermons/${firstSermon.id}`,
-        //   state: { sermonData: firstSermon, allSermons: allSermons },
-        // }}
-        onClick={onOpen}
-        cursor="pointer"
-      >
-        <Stack direction={['row', 'column']} columnGap={'0.5rem'}>
+      <Box style={sermonSeriesCardStyle} onClick={onOpen} cursor="pointer">
+        <Stack direction={'column'} columnGap={'0.5rem'}>
           <AspectRatio minW={{ base: '36%', md: '18%' }} ratio={16 / 9}>
             <>
               <Image borderRadius="15px" src={sermonImage} objectFit="cover" />
@@ -158,7 +150,7 @@ const SermonSeriesCard = ({
           </Box>
         </Stack>
       </Box>
-      <Modal isOpen={isOpen} onClose={onClose} size={'3xl'}>
+      <Modal isOpen={isOpen} onClose={onClose} size={'4xl'}>
         <ModalOverlay />
         <ModalContent borderRadius="20">
           <ModalCloseButton />
@@ -166,14 +158,14 @@ const SermonSeriesCard = ({
             <Text
               fontFamily={'DMSerifDisplay_Italic'}
               fontWeight={400}
-              fontSize={{ base: '2rem', md: '2.625rem' }}
+              fontSize={{ base: '1.625rem', md: '2.625rem' }}
               textAlign={{ base: 'center', md: 'left' }}
             >
               {sermonSeriesTitle}
             </Text>
           </ModalHeader>
 
-          <ModalBody>
+          <ModalBody pb={'1rem'}>
             <Box
               display={'flex'}
               flexDir={{ base: 'column', lg: 'row' }}
@@ -182,8 +174,12 @@ const SermonSeriesCard = ({
               w="100%"
               gap={'1.5rem'}
             >
-              <VStack spacing={'0.5rem'} alignItems="left" mb={'1rem'} w="45%">
-                <AspectRatio minW={{ base: '80%', lg: '100%' }} ratio={16 / 9}>
+              <VStack
+                spacing={'1rem'}
+                alignItems="left"
+                w={{ base: '100%', lg: '45%' }}
+              >
+                <AspectRatio minW={'100%'} ratio={16 / 9}>
                   <>
                     <Image
                       borderRadius="15px"
@@ -192,11 +188,11 @@ const SermonSeriesCard = ({
                     />
                   </>
                 </AspectRatio>
-                <VStack spacing={'0.5rem'} alignItems="left" mb={'1rem'}>
+                <VStack spacing={'0.5rem'} alignItems="left">
                   <Text
                     fontFamily={'DMSerifDisplay_Italic'}
                     fontWeight={400}
-                    fontSize={{ base: '1.5rem', md: '1.75rem' }}
+                    fontSize={{ base: '1.25rem', md: '1.75rem' }}
                   >
                     Description
                   </Text>
@@ -209,15 +205,24 @@ const SermonSeriesCard = ({
                   </Text>
                 </VStack>
               </VStack>
-              <VStack spacing={'0.5rem'} alignItems="left" mb={'1rem'} flex={1}>
+              <VStack spacing={'0.5rem'} alignItems="left" flex={1}>
                 <Text
                   fontFamily={'DMSerifDisplay_Italic'}
                   fontWeight={400}
-                  fontSize={{ base: '1.5rem', md: '1.75rem' }}
+                  fontSize={{ base: '1.25rem', md: '1.75rem' }}
                 >
                   Choose Sermon
                 </Text>
-                <SermonSeries sermonSeriesName={sermonSeries} />
+                <Box
+                  display={'flex'}
+                  flexDir={'column'}
+                  gap={'1rem'}
+                  w="100%"
+                  overflowY="auto"
+                  maxHeight={{ base: '30vh', lg: '60vh' }}
+                >
+                  <SermonSeries sermonSeriesName={sermonSeries} />
+                </Box>
               </VStack>
             </Box>
           </ModalBody>
