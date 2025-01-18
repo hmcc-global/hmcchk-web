@@ -22,7 +22,7 @@ import { sermonIdMap } from '../admin/sermonNotes/SermonNotesEditorModal';
 const getSermonNoteId = (sermon) => {
   const datePreached = DateTime.fromISO(sermon.datePreached).toFormat('ddMMyyyy');
   const serviceTypePrefix = sermonIdMap[sermon.serviceType[0].name];
-  return `/sermons/notes/${serviceTypePrefix}-${datePreached}-1`;
+  return `${serviceTypePrefix}-${datePreached}-1`;
 }
 
 const SermonDetails = (props) => {
@@ -32,7 +32,7 @@ const SermonDetails = (props) => {
   const [sermonUrl, setSermonUrl] = useState();
   const [sermonDate, setSermonDate] = useState();
   const [randomSermons, setRandomSermons] = useState([]);
-  const [sermonNoteLink, setSermonNoteLink] = useState('');
+  const [sermonNoteId, setSermonNoteId] = useState('');
   const currId = props.match.params.id;
   const history = useHistory();
   const { user } = props;
@@ -83,7 +83,7 @@ const SermonDetails = (props) => {
       DATE_FULL
     );
 
-    setSermonNoteLink(getSermonNoteId(sermon));
+    setSermonNoteId(getSermonNoteId(sermon));
     setSermonDate(sermonDate);
   }, [sermon]);
 
@@ -235,10 +235,9 @@ const SermonDetails = (props) => {
               >
                 <Box w="100%" h="50%">
                   <OnlinePageTabs
-                    sermonNotes={sermonNoteLink}
+                    sermonNoteId={sermonNoteId}
                     user={user}
                     history={history}
-                    isOfflineSermonNote={true}
                   />
                 </Box>
               </Box>

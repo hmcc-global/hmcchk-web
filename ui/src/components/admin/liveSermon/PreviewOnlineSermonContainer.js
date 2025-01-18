@@ -157,7 +157,7 @@ const PreviewOnlineSermonContainer = (props) => {
               h="100%"
             >
               <OnlinePageTabs
-                sermonNotes={sermonNotes}
+                sermonNoteId={sermonNotes}
                 user={user}
                 history={history}
               />

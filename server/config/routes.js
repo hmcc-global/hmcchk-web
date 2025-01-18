@@ -61,7 +61,7 @@ module.exports.routes = {
   // Pages APIs
   'get /api/pages/get-pages': 'pages/get-pages',
 
-  //Live Semron APIs
+  //Live Sermon APIs
   'get /api/live-sermon/get-live-sermon': 'liveSermon/get-live-sermon',
   'post /api/live-sermon/create-live-sermon': 'liveSermon/create-live-sermon',
   'put /api/live-sermon/update-live-sermon': 'liveSermon/update-live-sermon',
@@ -144,6 +144,7 @@ module.exports.routes = {
   'put /api/leadership-team/update': 'leadershipTeam/update-leadership-team',
 
   // Sermon Notes Parent APIs
+  'get /api/sermon-notes-parent/latest': 'sermonNotesParent/get-latest',
   'get /api/sermon-notes-parent/get':
     'sermonNotesParent/get-sermon-notes-parent',
   'post /api/sermon-notes-parent/create':

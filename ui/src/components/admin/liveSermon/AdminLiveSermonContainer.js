@@ -262,7 +262,7 @@ export default function AdminLiveSermonContainer(props) {
                 <FormControl>
                   <FormLabel>Sermon Notes</FormLabel>
                   <Input
-                    type="url"
+                    type="text"
                     value={sermonNotes}
                     onChange={(e) => setSermonNotes(e.target.value)}
                   />
