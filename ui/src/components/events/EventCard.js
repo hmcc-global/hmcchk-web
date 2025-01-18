@@ -263,21 +263,21 @@ const EventCard = (props) => {
             p={1}
           >
             <Center mt={4} mb={2}>
-                <Box w={10} h={1} bgColor="#A8A8A8" borderRadius={20} />
-              </Center>
-            <AspectRatio ratio={16 / 9} m={[2, 0]}>
+              <Box w={10} h={1} bgColor="#A8A8A8" borderRadius={20} />
+            </Center>
+            <AspectRatio ratio={16 / 9} m={2}>
               <Image borderRadius={10} src={eventData.imageAdUrl} />
             </AspectRatio>
-            <DrawerBody p={[0, 1]} w={['90%', '100%']} m="auto">
-              <Stack spacing={4} direction="row" mt={[0, 2]} mb="3">
+            <DrawerBody p={0} w={['90%', '100%']} m="auto">
+              <Stack spacing={4} direction="row" mb="2">
                 {tagArray.map((tag, i) => (
                   <Tag
                     key={'event' + i}
                     borderRadius={20}
                     size="sm"
-                    fontSize={['10', '14']}
-                    px={['2', '3']}
+                    fontSize="11"
                     fontWeight={'bold'}
+                    px={3}
                     py={1}
                     colorScheme={tag.color}
                   >
@@ -292,7 +292,7 @@ const EventCard = (props) => {
               )}
               <Box>
                 {eventData.eventStartDate && (
-                  <Text fontSize={['sm', 'md']} fontWeight="bold">
+                  <Text fontSize={"sm"} fontWeight="bold">
                     <Icon mr={2} as={RiCalendarEventFill} />
                     Date:{' '}
                     {eventData.renderDate
@@ -323,7 +323,7 @@ const EventCard = (props) => {
                   </Text>
                 )}
                 {eventData.eventStartTime && (
-                  <Text fontSize={['sm', 'md']} fontWeight="bold">
+                  <Text fontSize={"sm"} fontWeight="bold">
                     <Icon mr={2} as={BsClockFill} />
                     Time:{' '}
                     {DateTime.fromISO(eventData.eventStartTime).toLocaleString({
@@ -345,14 +345,14 @@ const EventCard = (props) => {
                   </Text>
                 )}
                 {eventData.location && (
-                  <Text fontSize={['sm', 'md']} fontWeight="bold">
+                  <Text fontSize={"sm"} fontWeight="bold">
                     <Icon mr={2} as={ImLocation2} />
                     Location: {eventData.location}
                   </Text>
                 )}
               </Box>
-              <Box bg="#EBF0F9" borderRadius="20" mt={[2, 5]} p={4}>
-                <Text fontSize={['xs', 'md']} w="100%">
+              <Box bg="#EBF0F9" borderRadius="20" mt="2" p={4}>
+                <Text fontSize={"xs"} w="100%">
                   <ReactMarkdown
                     components={ChakraUIRenderer()}
                     children={eventData.description}
@@ -361,13 +361,13 @@ const EventCard = (props) => {
                 </Text>
               </Box>
             </DrawerBody>
-            <DrawerFooter p={0} pl={[2, 1]} mt={3} mb={(0, 2)}>
+            <DrawerFooter py={1} mt={3} mb="2">
               <ButtonGroup
                 display="flex"
                 justifyContent="center"
                 size="md"
                 flexDirection="row"
-                spacing={[1, 2]}
+                spacing="2"
                 w="100%"
                 variant="outline"
                 colorScheme="#535353"
@@ -375,6 +375,7 @@ const EventCard = (props) => {
               >
                 {eventData.signUpUrl.length > 0 && (
                   <Button
+                    flex="1"
                     as={Link}
                     target="_blank"
                     bg="#2C5282"
@@ -382,8 +383,7 @@ const EventCard = (props) => {
                     _hover={{ opacity: '90%', textDecoration: 'none' }}
                     href={eventData.signUpUrl ? eventData.signUpUrl : null}
                     rightIcon={<MdOutlineAddToPhotos />}
-                    whiteSpace={['wrap', 'nowrap']}
-                    fontSize={['xs', 'md']}
+                    fontSize="xs"
                     p="4"
                   >
                     Sign up
@@ -392,6 +392,7 @@ const EventCard = (props) => {
 
                 {generateGoogleCalendarLink(eventData) && (
                   <Button
+                    flex="1"
                     as={Link}
                     target="_blank"
                     bg="#2C5282"
@@ -399,18 +400,17 @@ const EventCard = (props) => {
                     _hover={{ opacity: '90%', textDecoration: 'none' }}
                     href={generateGoogleCalendarLink(eventData)}
                     rightIcon={<FaCalendarAlt />}
-                    whiteSpace={['wrap', 'nowrap']}
-                    fontSize={['xs', 'md']}
+                    fontSize="xs"
                     p="4"
                   >
                     Add to Calendar
                   </Button>
                 )}
               </ButtonGroup>
+              
             </DrawerFooter>
           </DrawerContent>
         </Drawer>
-          
       ) : (
         <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
@@ -420,24 +420,19 @@ const EventCard = (props) => {
             justifyContent="center"
             p={5}
           >
-            {isMobile ? (
-              <Center mt={4} mb={2}>
-                <Box w={10} h={1} bgColor="#A8A8A8" borderRadius={20} />
-              </Center>
-            ) : (
-              <ModalCloseButton
-                position="absolute"
-                right="0"
-                top="-10"
-                bgColor="white"
-                borderRadius="20"
-              />
-            )}
+            <ModalCloseButton
+              position="absolute"
+              right="0"
+              top="-10"
+              bgColor="white"
+              borderRadius="20"
+            />
+
             <AspectRatio ratio={16 / 9}>
               <Image borderRadius={10} src={eventData.imageAdUrl} />
             </AspectRatio>
             <ModalBody p={1} w={['90%', '100%']} m="auto">
-              <Stack spacing={4} direction="row" mt={[0, 2]} mb="3">
+              <Stack spacing={4} direction="row" mt="2" mb="3">
                 {tagArray.map((tag, i) => (
                   <Tag
                     key={'event' + i}
@@ -446,7 +441,7 @@ const EventCard = (props) => {
                     fontSize={14}
                     px={3}
                     fontWeight={'bold'}
-                    py={1}
+                    py={2}
                     colorScheme={tag.color}
                   >
                     {tag.value}
@@ -529,7 +524,7 @@ const EventCard = (props) => {
                 </Text>
               </Box>
             </ModalBody>
-            <ModalFooter p={0} pl={1} mt={3} mb={2}>
+            <ModalFooter p={0} pl={1} mt={3}>
               <ButtonGroup
                 size="md"
                 flexDirection="row"
