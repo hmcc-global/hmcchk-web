@@ -12,7 +12,7 @@ import { Plugin } from 'prosemirror-state';
 export const UserNotesNode = Node.create({
   name: 'userNotes',
   group: 'block',
-  atom: true,
+  atom: false,
 
   addAttributes() {
     return {
@@ -85,25 +85,23 @@ export const UserNotesNode = Node.create({
         tag: 'div.userNotes',
         getAttrs: (dom) => ({
           id: dom.getAttribute('id'),
+          userNotes: dom.getAttribute('usernotes') || null,
         }),
       },
     ];
   },
 
-  renderHTML({ node }) {
-    if (node.attrs.id) {
-      return [
-        'div',
-        {
-          class: 'userNotes',
-          id: node.attrs.id,
-          style: 'background-color:#f4f4f4;', // Use the id attribute here
-        },
-        node.attrs.userNotes ? node.attrs.userNotes : '',
-      ];
-    } else {
-      return ['div'];
-    }
+  renderHTML({ node, HTMLAttributes }) {
+    return [
+      'div',
+      {
+        class: 'userNotes',
+        id: node.attrs.id || '',
+        style: 'background-color:#f4f4f4;',
+        ...HTMLAttributes,
+      },
+      node.content.size > 0 ? 0 : node.attrs.userNotes || '',
+    ];
   },
   addNodeView() {
     return ReactNodeViewRenderer((props) => {
@@ -113,7 +111,11 @@ export const UserNotesNode = Node.create({
 
       const handleInput = (event) => {
         let text = event.target.innerHTML;
-        text = text.replace(/<div>/gi, '\n').replace(/<\/div>/gi, '');
+
+        text = text.replace(/<div[^>]*>/gi, '<br>').replace(/<\/div>/gi, '');
+
+        text = text.replace(/<br[^>]*>/gi, '<br>');
+
         setLocalUserNotes(text);
       };
 
