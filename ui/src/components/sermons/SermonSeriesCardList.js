@@ -99,26 +99,15 @@ const SermonSeriesCardList = ({ allSermons }) => {
           <Text
             fontFamily="DMSerifDisplay_Italic"
             fontWeight="400"
-            fontSize={{ base: '2rem', md: '2.625rem' }}
+            fontSize={'2.625rem'}
+            display={{ base: 'none', md: 'block' }}
           >
             Past Sermon Series
           </Text>
-          <Button
-            width="30vw"
-            display={{ base: 'flex', md: 'none' }}
-            background="#0628A3"
-            backdropFilter="blur(6px)"
-            borderRadius="10px"
-            color="white"
-            ref={btnRef}
-            onClick={onOpen}
-          >
-            Filter
-          </Button>
         </HStack>
 
         {/* Desktop Filters */}
-        <Box display={{ base: 'none', md: 'flex' }} marginTop="10px">
+        <Box display={'flex'} marginTop="10px">
           <FilterSermon
             allSermons={allSermons}
             filterSermon={updateFilter}
@@ -164,33 +153,6 @@ const SermonSeriesCardList = ({ allSermons }) => {
           paginate={paginate}
         />
       </Box>
-
-      {/* Mobile Filter Drawer */}
-      <Drawer
-        isOpen={isOpen}
-        size="full"
-        onClose={onClose}
-        finalFocusRef={btnRef}
-        placement="top"
-      >
-        <DrawerOverlay />
-        <DrawerContent paddingTop="10">
-          <DrawerCloseButton margin="5" />
-          <DrawerHeader />
-          <DrawerBody>
-            <FilterSermon
-              allSermons={allSermons}
-              filterSermon={updateFilter}
-              filterData={filters}
-              clearFilter={clearFilter}
-              onClose={onClose}
-            />
-          </DrawerBody>
-          <DrawerFooter fontSize="sm" color="black" justifyContent="center">
-            Harvest Mission Community Church {new Date().getFullYear()}
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
     </>
   );
 };

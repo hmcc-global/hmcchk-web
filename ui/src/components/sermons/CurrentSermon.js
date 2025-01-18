@@ -12,6 +12,9 @@ import {
 import { useHistory } from 'react-router';
 import { FaArrowRight } from 'react-icons/fa';
 import LiveButton from '../helpers/components/LiveButton';
+import SermonSocialMediaButtons from './SermonSocialMediaButtons';
+import { DateTime } from 'luxon';
+import { DATE_FULL } from 'luxon/src/impl/formats';
 
 const headers = ['Latest Sermon', 'HMCC is Live!'];
 
@@ -30,7 +33,9 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
       const header = isOnline ? headers[1] : headers[0];
       const sermonSeriesName = isOnline
         ? currentSermon.title
-        : currentSermon.sermonSeries[0]?.name || '';
+        : currentSermon.sermonSeries[0]?.name +
+            ' Sermon Series - ' +
+            currentSermon.title || '';
       const sermonDesc = isOnline
         ? currentSermon.sermonDescription
         : currentSermon.sermonDesc;
@@ -63,17 +68,6 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
     </AspectRatio>
   );
 
-  const onWatchButtonClick = () => {
-    if (isOnline) {
-      history.push('/online');
-    } else {
-      history.push({
-        pathname: `/sermons/${sermonData.id}`,
-        state: { sermonData: sermonData },
-      });
-    }
-  };
-
   const WatchButton = () => (
     <Button
       borderRadius="80px"
@@ -95,16 +89,36 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
 
   const { header, sermonSeriesName, sermonDesc, mediaUrl } = sermonData;
 
-  return (
-    <Box boxSizing="border-box">
-      <Stack direction={{ base: 'column', md: 'row' }}>
-        <MediaDisplay isOnline={isOnline} mediaUrl={mediaUrl} />
+  const getSermonDate = () => {
+    if (currentSermon.sermonDateTime) {
+      return DateTime.fromISO(currentSermon.sermonDateTime).toLocaleString(
+        DATE_FULL
+      );
+    }
+  };
 
-        {isOnline ? (
+  return (
+    currentSermon && (
+      <Box boxSizing="border-box">
+        <Stack
+          direction={{ base: 'column', md: 'row' }}
+          alignItems={{ base: 'center', lg: 'center' }}
+        >
+          <Text
+            fontWeight={400}
+            fontSize={'1.5rem'}
+            color="#272727"
+            fontFamily="DMSerifDisplay_Italic"
+            display={{ base: 'block', lg: 'none' }}
+          >
+            {header}
+          </Text>
+          <MediaDisplay isOnline={isOnline} mediaUrl={mediaUrl} />
+
           <>
             <Stack
               pl={{ base: '0', md: '1.5rem' }}
-              alignItems="flex-start"
+              alignItems={{ base: 'center', lg: 'flex-start' }}
               flex="1"
               direction="column"
               gap="0.5rem"
@@ -114,11 +128,12 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
                 fontSize={{ base: '1.875rem', md: '2.625rem' }}
                 color="#272727"
                 fontFamily="DMSerifDisplay_Italic"
+                display={{ base: 'none', lg: 'block' }}
               >
                 {header}
               </Text>
               <HStack spacing="0.5rem" alignItems="center">
-                <LiveButton />
+                {isOnline && <LiveButton />}
                 <Text
                   fontWeight="bold"
                   fontSize={{ base: '1rem', md: '1.125rem' }}
@@ -126,47 +141,39 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
                   {sermonSeriesName}
                 </Text>
               </HStack>
+              {isOnline && (
+                <HStack
+                  spacing={{ base: '0.375rem', md: '1rem' }}
+                  fontSize={{ base: '0.625rem', md: '0.875rem' }}
+                  alignItems="center"
+                  justifyContent="flex-start"
+                  flexWrap={'wrap'}
+                >
+                  <Text>{'Date: ' + getSermonDate()}</Text>
+                  <Text>|</Text>
+                  <Text>{'Speaker: ' + currentSermon.speaker}</Text>
+                  <Text>|</Text>
+                  <Text>{'Passage: ' + currentSermon.sermonPassage}</Text>
+                </HStack>
+              )}
               <Text
                 fontSize={{ base: '0.875rem', md: '1rem' }}
                 fontWeight={500}
               >
                 {sermonDesc}
               </Text>
-              <WatchButton />
+              {isOnline ? (
+                <WatchButton />
+              ) : (
+                <SermonSocialMediaButtons
+                  ytLink={currentSermon.sermonVideoUrl}
+                />
+              )}
             </Stack>
           </>
-        ) : (
-          <>
-            <Stack
-              pl={{ base: '0', md: '1.5rem' }}
-              alignItems="left"
-              direction="column"
-              fontFamily="Manrope"
-              gap="0.875rem"
-            >
-              <Text
-                fontWeight="800"
-                fontSize={{ base: '1rem', md: '1.125rem' }}
-                color="#4A6EEB"
-              >
-                {header}
-              </Text>
-              <Text
-                fontWeight="400"
-                fontSize={{ base: '1.75rem', md: '2rem' }}
-                fontFamily="DMSerifDisplay_Italic"
-              >
-                {sermonSeriesName}
-              </Text>
-              <Text fontSize="sm" lineHeight="shorter">
-                {sermonDesc}
-              </Text>
-              <WatchButton />
-            </Stack>
-          </>
-        )}
-      </Stack>
-    </Box>
+        </Stack>
+      </Box>
+    )
   );
 };
 

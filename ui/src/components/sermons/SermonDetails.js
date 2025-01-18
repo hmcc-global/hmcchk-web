@@ -20,7 +20,7 @@ import { sermonIdMap } from '../admin/sermonNotes/SermonNotesEditorModal';
 import SermonSeriesCard from './SermonSeriesCard';
 import { FaArrowRight } from 'react-icons/fa';
 import OfflinePageTabs from './OfflinePageTabs';
-import SermonSocialMediaButtons from '../helpers/components/SermonSocialMediaButtons';
+import SermonSocialMediaButtons from './SermonSocialMediaButtons';
 
 const getSermonNoteId = (sermon) => {
   const datePreached = DateTime.fromISO(sermon.datePreached).toFormat(
@@ -34,6 +34,7 @@ const SermonDetails = (props) => {
   const [sermon, setSermon] = useState();
   const [allSermons, setAllSermons] = useState([]);
   const [sermonSeriesTitle, setSermonSeriesTitle] = useState('');
+  const [sermonTitlePrefix, setSermonTitlePrefix] = useState('');
   const [sermonUrl, setSermonUrl] = useState();
   const [sermonDate, setSermonDate] = useState();
   const [latestSermonSeries, setLatestSermonSeries] = useState([]);
@@ -102,12 +103,16 @@ const SermonDetails = (props) => {
   }, [allSermons, sermon]);
 
   const getSermonSeriesTitle = useCallback(() => {
-    if (sermon.title.includes('Part') && !isMobile) {
-      setSermonSeriesTitle(sermon.sermonSeries[0].name + ' Sermon Series');
+    setSermonSeriesTitle(sermon.sermonSeries[0].name);
+  }, [sermon]);
+
+  const getSermonTitlePrefix = useCallback(() => {
+    if (sermon.title.includes('Part')) {
+      setSermonTitlePrefix(sermon.sermonSeries[0].name + ' Sermon Series - ');
     } else {
-      setSermonSeriesTitle(sermon.sermonSeries[0].name);
+      setSermonTitlePrefix('');
     }
-  }, [sermon, isMobile]);
+  }, [sermon]);
 
   useEffect(() => {
     if (allSermons && sermon) {
@@ -115,6 +120,7 @@ const SermonDetails = (props) => {
       getSermonDate();
       getVideoCode();
       getSermonSeriesTitle();
+      getSermonTitlePrefix();
     }
   }, [
     allSermons,
@@ -123,13 +129,14 @@ const SermonDetails = (props) => {
     sermon,
     getLatestSermonSeries,
     getSermonSeriesTitle,
+    getSermonTitlePrefix,
   ]);
 
   return (
     <>
       {sermon && allSermons && (
-        <Container maxW="container.xl">
-          <Box mb="20px" mt="20px">
+        <Container maxW="container.xl" mt={{ base: '0.75rem', lg: '2.5rem' }}>
+          <Box mb={{ base: '1rem', md: '2.5rem' }}>
             <Text
               fontFamily={'DMSerifDisplay_Italic'}
               fontWeight={400}
@@ -168,11 +175,11 @@ const SermonDetails = (props) => {
                     fontWeight={400}
                     fontSize={{ base: '1.25rem', md: '2rem' }}
                   >
-                    {sermon.title}
+                    {sermonTitlePrefix + sermon.title}
                   </Text>
                   <HStack
                     spacing={{ base: '0.375rem', md: '1rem' }}
-                    fontSize={{ base: '0.75rem', md: '0.875rem' }}
+                    fontSize={{ base: '0.625rem', md: '0.875rem' }}
                     alignItems="center"
                     justifyContent="flex-start"
                     flexWrap={'wrap'}
@@ -198,14 +205,7 @@ const SermonDetails = (props) => {
                   />
                 </VStack>
               </Box>
-              <Box
-                w={{ base: '100%', lg: '40%' }}
-                overflowY="auto"
-                borderRadius={'12px'}
-                borderWidth={'1px'}
-                borderColor="#4A6EEB"
-                maxH={700}
-              >
+              <Box w={{ base: '100%', lg: '40%' }}>
                 <Box w="100%" h="50%">
                   <OfflinePageTabs
                     sermonNotes={sermonNoteLink}
