@@ -28,12 +28,13 @@ module.exports = {
       const data = await sails.helpers.getData(url);
       const media = await sails.helpers.media.getMedia();
       let transformedData = data.reduce(
-        (acc, { id, name, sermon_series_image_id: sermonSeriesImageId }) => {
+        (acc, { id, name, description, sermon_series_image_id: sermonSeriesImageId }) => {
           sermonSeriesImageId = parseInt(sermonSeriesImageId);
           let imageObj = media.find((m) => m.id === sermonSeriesImageId);
           acc.push({
             id: id,
             name: he.decode(name),
+            description,
             image: imageObj || null,
           });
           return acc;
