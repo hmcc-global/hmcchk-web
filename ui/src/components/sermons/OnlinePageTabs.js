@@ -96,7 +96,16 @@ const OnlinePageTabs = ({
   };
 
   const handleClick = (index) => {
-    setSlideIndex(index);
+    if (index === 0 || index === 1) {
+      setSlideIndex(index);
+    }
+    if (index === 2) {
+      window.open('https://bit.ly/hmcc-prayer', '_blank');
+    } else if (index === 3) {
+      window.open('/events', '_blank');
+    } else if (index === 4) {
+      window.open('/give', '_blank');
+    }
   };
 
   return (
