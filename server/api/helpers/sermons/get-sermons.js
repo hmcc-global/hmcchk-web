@@ -5,17 +5,32 @@ const he = require('he');
 // e.g. Sermon Series - Part 1: Sermon Title -> Part 1: Sermon Title
 // e.g. Sermon Series - Part 1 -> Part 1
 // e.g. Encounter: Sermon Title -> Encounter: Sermon Title
-const parseSermonTitle = (title) => {
+const parseHtmlText = (text) => {
   // eslint-disable-next-line eqeqeq
-  if (title == null) return '';
+  if (text == null) return '';
 
-  const decodedTitle = he.decode(title);
+  const decodedTitle = he.decode(text);
   const pattern = /.*(Part \d+.*)/g;
   const captured = pattern.exec(decodedTitle);
 
   // eslint-disable-next-line eqeqeq
   return captured != null && captured[1] != null && captured[1] !== '' ? captured[1] : decodedTitle;
 };
+
+const convertToMarkdown = (htmlText) => {
+  // 1. Remove HTML tags:  A simple approach using a regular expression.  For more robust HTML parsing, consider a dedicated HTML parser library.
+  const textWithoutHTML = htmlText.replace(/<\/?[^>]+(>|$)/g, '');
+
+  // 2. Convert paragraph tags to Markdown: Replace <p> tags with newline characters.
+  const markdownText = textWithoutHTML.replace(/<\/p>/g, '\n\n').replace(/<p>/g, '');
+
+  // 3. Handle special characters (optional but recommended for better Markdown compatibility):  This step is crucial for accurate conversion.  We'll handle em dashes here.  Other characters might need similar treatment depending on the input.
+  const markdownWithDashes = markdownText.replace(/&#8211;/g, '--');
+
+
+  return markdownWithDashes;
+};
+
 
 const arrayReducer = (id, list) => {
   return id.reduce((acc, s) => {
@@ -34,13 +49,13 @@ const getSermonPreachedDate = (sermon) => {
 const transformSermon = (sermon, speakers, sermonSeries, serviceTypes) => {
   return {
     id: sermon.id,
-    title: parseSermonTitle(sermon.title.rendered),
+    title: parseHtmlText(sermon.title.rendered),
     speaker: arrayReducer(sermon.wpfc_preacher, speakers),
     datePreached: getSermonPreachedDate(sermon),
     serviceType: arrayReducer(sermon.wpfc_service_type, serviceTypes),
     passage: sermon.bible_passage,
     sermonSeries: arrayReducer(sermon.wpfc_sermon_series, sermonSeries),
-    sermonDesc: sermon.sermon_description,
+    sermonDesc: convertToMarkdown(sermon.content.rendered),
     sermonAudioUrl: sermon.sermon_audio,
     sermonAudioDuration: sermon.sermon_audio_duration,
     sermonVideoUrl: sermon.sermon_video_url,
