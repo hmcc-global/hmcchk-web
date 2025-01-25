@@ -15,7 +15,7 @@ import {
 import { RepeatIcon } from '@chakra-ui/icons';
 import { useMemo, useState, useRef } from 'react';
 import SermonNotesContainer from '../sermon-notes/SermonNotesContainer';
-import SermonSeries from '../helpers/components/SermonSeries';
+import SermonSeries from './SermonSeries';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -25,6 +25,7 @@ const OnlinePageTabs = ({
   history,
   sermonNotes,
   isOfflineSermonNote,
+  sermonSeries,
 }) => {
   const [noteId, setNoteId] = useState(0);
   const [tab, setTab] = useState(0);
@@ -115,57 +116,63 @@ const OnlinePageTabs = ({
         h="100%"
         onChange={(i) => setTab(i)}
         overflowY={tab ? 'auto' : 'hidden'}
-        border="1px solid"
+        display={{ base: 'none', md: 'block' }}
+        maxH={700}
+        borderRadius={'12px'}
+        borderWidth={'1px'}
         borderColor="#4A6EEB"
-        borderRadius="10px"
-        variant="unstyled"
-        display={{ base: 'none', sm: 'block' }}
       >
-        <TabList orientation="horizontal" bgColor="#EAF0FF" textColor="#4A6EEB">
+        <TabList orientation="horizontal">
           <Tab
+            p={0}
             _selected={{
               bgColor: '#4A6EEB',
               textColor: 'white',
+              color: 'white',
               borderColor: '#4A6EEB',
             }}
-            fontSize="0.938rem"
+            bgColor={'#EAF0FF'}
+            color={'#4A6EEB'}
           >
-            <HStack>
-              <Box>
-                <Image
-                  src={
-                    tab === 1
-                      ? process.env.PUBLIC_URL +
-                        '/images/sermons/sermon_icon_unclicked.svg'
-                      : process.env.PUBLIC_URL +
-                        '/images/sermons/sermon_icon_clicked.svg'
-                  }
-                />
-              </Box>{' '}
-              <Text>Sermon Notes</Text>
+            <HStack alignItems="center" spacing={'0.75rem'} py="0.75rem">
+              <Image
+                src={
+                  tab === 1
+                    ? process.env.PUBLIC_URL +
+                      '/images/sermons/sermon_icon_unclicked.svg'
+                    : process.env.PUBLIC_URL +
+                      '/images/sermons/sermon_icon_clicked.svg'
+                }
+              />
+              <Text fontSize={{ base: '0.75rem', md: '1rem' }} fontWeight={400}>
+                Sermon Notes
+              </Text>
             </HStack>
           </Tab>
           <Tab
+            p={0}
             _selected={{
               bgColor: '#4A6EEB',
               textColor: 'white',
+              color: 'white',
               borderColor: '#4A6EEB',
             }}
-            fontSize="0.938rem"
+            bgColor={'#EAF0FF'}
+            color={'#4A6EEB'}
           >
-            <HStack>
-              <Box>
-                <Image
-                  src={
-                    tab === 0
-                      ? process.env.PUBLIC_URL +
-                        '/images/sermons/more_series_unclicked.svg'
-                      : process.env.PUBLIC_URL +
-                        '/images/sermons/more_series_clicked.svg'
-                  }
-                />
-              </Box>{' '}
-              <Text>More in The Series</Text>
+            <HStack alignItems="center" spacing={'0.75rem'} py="0.375rem">
+              <Image
+                src={
+                  tab === 0
+                    ? process.env.PUBLIC_URL +
+                      '/images/sermons/more_series_unclicked.svg'
+                    : process.env.PUBLIC_URL +
+                      '/images/sermons/more_series_clicked.svg'
+                }
+              />
+              <Text fontSize={{ base: '0.75rem', md: '1rem' }} fontWeight={400}>
+                More in Series
+              </Text>
             </HStack>
           </Tab>
         </TabList>
@@ -190,14 +197,12 @@ const OnlinePageTabs = ({
               />
             </Box>
           </TabPanel>
-          <TabPanel>
-            <Box height={['85vh', '90%']} paddingBottom={15} overflow="auto">
-              <SermonSeries />
-            </Box>
+          <TabPanel p={'1rem'}>
+              <SermonSeries sermonSeriesName={sermonSeries} />
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <VStack align="center" gap="5">
+      <VStack align="center" gap="5" display={{ base: 'block', lg: 'none' }}>
         <Slider ref={slider} {...sliderSettings} style={sliderStyle}>
           {slideButtons.length > 0 &&
             slideButtons.map((button, i) => {
@@ -259,7 +264,7 @@ const OnlinePageTabs = ({
             borderWidth="1px"
             borderColor="#4A6EEB"
           >
-            <SermonSeries />
+            <SermonSeries sermonSeriesName={sermonSeries} />
           </Box>
         )}
       </VStack>
