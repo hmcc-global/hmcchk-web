@@ -169,7 +169,7 @@ const SermonNotesContainer = (props) => {
         '/api/email-user-sermon-notes',
         {
           email: email,
-          sermonNoteData: htmlUserSermonNotes,
+          sermonNoteData: preprocessUserNotesAttribute(htmlUserSermonNotes),
         }
       );
       if (status === 200) {
@@ -192,6 +192,12 @@ const SermonNotesContainer = (props) => {
       day: 'numeric',
     });
   }, [sermonNotes]);
+
+  const preprocessUserNotesAttribute = (htmlString) => {
+    if (!htmlString) return htmlString;
+
+    return htmlString.replace(/&lt;br&gt;/g, '<br>');
+  };
 
   useEffect(() => {
     if (sermonId) {
