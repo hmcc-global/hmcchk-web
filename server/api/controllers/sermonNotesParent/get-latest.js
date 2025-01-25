@@ -23,7 +23,7 @@ module.exports = {
         where: {
           isDeleted: false,
           isPublished: true,
-          createdAt: { '>=': today.toJSDate()}
+          date: today.toFormat('yyyy-MM-dd')
         },
         sort: [
           { sermonId: 'DESC'}
