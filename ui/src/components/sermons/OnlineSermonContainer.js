@@ -160,7 +160,7 @@ const OnlineSermonContainer = (props) => {
                   h="100%"
                 >
                   <OnlinePageTabs
-                    sermonNotes={onlineSermon.sermonNotes}
+                    sermonNoteId={onlineSermon.sermonNotes}
                     user={user}
                     history={history}
                   />

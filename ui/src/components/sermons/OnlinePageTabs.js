@@ -21,15 +21,11 @@ import SermonNotesContainer from '../sermon-notes/SermonNotesContainer';
 const OnlinePageTabs = ({
   user,
   history,
-  sermonNotes,
-  isOfflineSermonNote,
+  sermonNoteId,
 }) => {
   const [noteId, setNoteId] = useState(0);
   const [tab, setTab] = useState(0);
   const isMobile = useBreakpointValue({ base: true, lg: false });
-  const sermonId = useMemo(() => {
-    return sermonNotes && sermonNotes.split('/').reverse()[0];
-  }, [sermonNotes]);
 
   const refreshSermonNotes = () => {
     setNoteId(noteId + 1);
@@ -65,10 +61,9 @@ const OnlinePageTabs = ({
             // backgroundColor="#F1F1F3"
           >
             <SermonNotesContainer
-              sermonNoteId={sermonId}
+              sermonNoteId={sermonNoteId}
               history={history}
               user={user}
-              isOfflineSermonNote={isOfflineSermonNote}
             />
           </Box>
         </TabPanel>

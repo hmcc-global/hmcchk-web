@@ -37,6 +37,7 @@ import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementContainer';
 import AdminLeadershipTeamContainer from './admin/leadershipTeam/AdminLeadershipTeamContainer';
 import AdminSermonNotesContainer from './admin/sermonNotes/AdminSermonNotesContainer';
+import OnlineSermonNotesRedirect from './sermon-notes/OnlineSermonNotesRedirect';
 import SermonNotesContainer from './sermon-notes/SermonNotesContainer';
 import PrivacyPolicy from './screens/PrivacyPolicy';
 import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
@@ -121,6 +122,12 @@ const MainContainer = () => {
           path="/sermons/:id"
           permissions={['public']}
           component={SermonDetails}
+        />
+        <PrivateRoute
+          exact
+          path="/sermons/notes/online"
+          permissions={['public']}
+          component={OnlineSermonNotesRedirect}
         />
         <PrivateRoute
           exact
