@@ -1,6 +1,7 @@
 import React from 'react';
 import { Select, Container, Grid } from '@chakra-ui/react';
 import { FaCaretDown } from 'react-icons/fa';
+import { DateTime } from 'luxon';
 
 // Utility function to get unique values
 const getUniqueValues = (items, keyExtractor) => {
@@ -43,13 +44,7 @@ const FilterOption = ({ name, placeholder, options, onChange, value }) => (
   </Select>
 );
 
-const FilterSermon = ({
-  allSermons,
-  filterSermon,
-  clearFilter,
-  filterData,
-  onClose,
-}) => {
+const FilterSermon = ({ allSermons, filterSermon, filterData }) => {
   // Extract unique values for each filter category
   const uniqueSpeaker = getUniqueValues(allSermons, (sermon) =>
     sermon.speaker[0] ? sermon.speaker[0].name : null
@@ -69,16 +64,29 @@ const FilterSermon = ({
     sermon.serviceType[0] ? sermon.serviceType[0].name : null
   );
 
+  const uniqueYear = getUniqueValues(allSermons, (sermon) =>
+    sermon.datePreached
+      ? DateTime.fromISO(sermon.datePreached).toFormat('yyyy')
+      : null
+  );
+
   return (
     <Container maxW="container.xl" p="0">
       {/* Filter Options */}
-      <Grid templateColumns={['repeat(2, 1fr)', 'repeat(3, 1fr)']} gap={[3, 6]}>
+      <Grid templateColumns={['repeat(2, 1fr)', 'repeat(4, 1fr)']} gap={[3, 6]}>
         <FilterOption
           name="speaker"
           placeholder="Speaker"
           options={uniqueSpeaker}
           onChange={filterSermon}
           value={filterData[0]}
+        />
+        <FilterOption
+          name="year"
+          placeholder="Year"
+          options={uniqueYear}
+          onChange={filterSermon}
+          value={filterData[1]}
         />
         <FilterOption
           name="book"
@@ -88,7 +96,7 @@ const FilterSermon = ({
           value={filterData[2]}
         />
         <FilterOption
-          name="service"
+          name="serviceType"
           placeholder="Service Type"
           options={uniqueServiceType}
           onChange={filterSermon}
