@@ -17,6 +17,8 @@ const SermonSeries = () => {
   const [sermon, setSermon] = useState(null);
   const [allSermons, setAllSermons] = useState([]);
   const [sermonSeries, setSermonSeries] = useState([]);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
   const history = useHistory();
 
   const getData = useCallback(async () => {
@@ -90,6 +92,9 @@ const SermonSeries = () => {
                 borderColor="#DFE7FF"
                 fontFamily="Manrope"
                 my="3"
+                bg={hoveredIndex === i ? '#DFE7FF' : 'transparent'}
+                onMouseEnter={() => setHoveredIndex(i)}
+                onMouseLeave={() => setHoveredIndex(null)}
               >
                 <HStack gap="3">
                   <AspectRatio ratio={16 / 9} minW="25%">
@@ -105,8 +110,8 @@ const SermonSeries = () => {
                     w="70%"
                   >
                     <Text
-                      fontWeight="600"
-                      fontSize="0.875rem"
+                      fontWeight={hoveredIndex === i ? '700' : '400'}
+                      fontSize={{ base: '0.688rem', md: '0.875rem' }}
                       isTruncated="false"
                     >
                       {sermon.title}
@@ -116,10 +121,18 @@ const SermonSeries = () => {
                       spacing={{ base: 1, md: 'auto' }}
                       alignItems="flex-start"
                     >
-                      <Text fontSize="0.625rem" isTruncated>
+                      <Text
+                        fontSize="0.625rem"
+                        textColor={hoveredIndex === i ? 'black' : '#818181'}
+                        isTruncated
+                      >
                         Speaker: {sermon.speaker[0].name}
                       </Text>
-                      <Text fontSize="0.625rem" isTruncated>
+                      <Text
+                        fontSize="0.625rem"
+                        textColor={hoveredIndex === i ? 'black' : '#818181'}
+                        isTruncated
+                      >
                         Passage: {sermon.passage}
                       </Text>
                     </VStack>
