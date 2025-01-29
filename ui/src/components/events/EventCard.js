@@ -31,12 +31,15 @@ import { BsClockFill, BsFullscreen } from 'react-icons/bs';
 import { ImLocation2 } from 'react-icons/im';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { MdOutlineAddToPhotos } from 'react-icons/md';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getRenderDate } from '../helpers/eventsHelpers';
 import { DateTime } from 'luxon';
 import { generateGoogleCalendarLink } from '../helpers/eventsHelpers';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
+import { motion, AnimatePresence } from 'framer-motion'; // Import Framer Motion
+
+const MotionBox = motion(Box);
 
 const EventCard = (props) => {
   const { eventData } = props;
@@ -44,6 +47,7 @@ const EventCard = (props) => {
   const [isMobile, setIsMobile] = useState(false);
   const [colors, setColors] = useState([]);
   const tagArray = [];
+  const [yPosition, setYPosition] = useState(0);
 
   const onOpen = (e) => {
     if (!e.target.href) {
@@ -55,6 +59,14 @@ const EventCard = (props) => {
     setIsOpen(false);
   };
 
+  // Handle drag end to close the drawer if dragged down enough
+  const handleDragEnd = (event, info) => {
+    if (info.offset.y > 100) {
+      setYPosition(0);
+      onClose();
+    }
+  };
+
   useEffect(() => {
     const handleChange = () => {
       if (window.innerWidth < 750) {
@@ -64,7 +76,6 @@ const EventCard = (props) => {
       }
     };
     window.addEventListener('resize', handleChange);
-
     return () => {
       window.removeEventListener('resize', handleChange);
     };
@@ -256,160 +267,196 @@ const EventCard = (props) => {
       {isMobile ? (
         <Drawer placement="bottom" size="xl" isOpen={isOpen} onClose={onClose}>
           <DrawerOverlay />
-          <DrawerContent
-            bg="#F6FAFF"
-            borderRadius="20"
-            justifyContent="center"
-            p={1}
-          >
-            <Center mt={4} mb={2}>
-              <Box w={10} h={1} bgColor="#A8A8A8" borderRadius={20} />
-            </Center>
-            <AspectRatio ratio={16 / 9} m={2}>
-              <Image borderRadius={10} src={eventData.imageAdUrl} />
-            </AspectRatio>
-            <DrawerBody p={0} w={['90%', '100%']} m="auto">
-              <Stack spacing={4} direction="row" mb="2">
-                {tagArray.map((tag, i) => (
-                  <Tag
-                    key={'event' + i}
-                    borderRadius={20}
-                    size="sm"
-                    fontSize="11"
-                    fontWeight={'bold'}
-                    px={3}
-                    py={1}
-                    colorScheme={tag.color}
-                  >
-                    {tag.value}
-                  </Tag>
-                ))}
-              </Stack>
-              {eventData.title && (
-                <Heading as="h4" size="lg" fontWeight="900" mb="3">
-                  {eventData.title}
-                </Heading>
-              )}
-              <Box>
-                {eventData.eventStartDate && (
-                  <Text fontSize={"sm"} fontWeight="bold">
-                    <Icon mr={2} as={RiCalendarEventFill} />
-                    Date:{' '}
-                    {eventData.renderDate
-                      ? eventData.renderDate.toLocaleString(
-                          DateTime.DATE_MED_WITH_WEEKDAY
-                        )
-                      : getRenderDate(
-                          eventData.eventStartDate,
-                          eventData.eventEndDate,
-                          eventData.eventInterval,
-                          eventData.eventStartTime
-                        ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
-                    {eventData.eventEndDate &&
-                      getRenderDate(
-                        eventData.eventStartDate,
-                        eventData.eventEndDate,
-                        eventData.eventInterval,
-                        eventData.eventStartTime
-                      ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY) !==
-                        DateTime.fromISO(eventData.eventEndDate).toLocaleString(
-                          DateTime.DATE_MED_WITH_WEEKDAY
-                        ) &&
-                      eventData.eventInterval === 'None' &&
-                      ' - ' +
-                        DateTime.fromISO(eventData.eventEndDate).toLocaleString(
-                          DateTime.DATE_MED_WITH_WEEKDAY
-                        )}
-                  </Text>
-                )}
-                {eventData.eventStartTime && (
-                  <Text fontSize={"sm"} fontWeight="bold">
-                    <Icon mr={2} as={BsClockFill} />
-                    Time:{' '}
-                    {DateTime.fromISO(eventData.eventStartTime).toLocaleString({
-                      hour: 'numeric',
-                      minute: 'numeric',
-                      hourCycle: 'h12',
-                    })}
-                    {eventData.eventEndTime &&
-                    eventData.eventStartTime !== eventData.eventEndTime
-                      ? ' - ' +
-                        DateTime.fromISO(eventData.eventEndTime).toLocaleString(
-                          {
-                            hour: 'numeric',
-                            minute: 'numeric',
-                            hourCycle: 'h12',
-                          }
-                        )
-                      : ''}
-                  </Text>
-                )}
-                {eventData.location && (
-                  <Text fontSize={"sm"} fontWeight="bold">
-                    <Icon mr={2} as={ImLocation2} />
-                    Location: {eventData.location}
-                  </Text>
-                )}
-              </Box>
-              <Box bg="#EBF0F9" borderRadius="20" mt="2" p={4}>
-                <Text fontSize={"xs"} w="100%">
-                  <ReactMarkdown
-                    components={ChakraUIRenderer()}
-                    children={eventData.description}
-                    skipHtml
-                  />
-                </Text>
-              </Box>
-            </DrawerBody>
-            <DrawerFooter py={1} mt={3} mb="2">
-              <ButtonGroup
-                display="flex"
+          <AnimatePresence>
+            {isOpen && (
+              <DrawerContent
+                bg="#F6FAFF"
+                borderTopLeftRadius="20"
+                borderTopRightRadius="20"
                 justifyContent="center"
-                size="md"
-                flexDirection="row"
-                spacing="2"
-                w="100%"
-                variant="outline"
-                colorScheme="#535353"
-                alignItems="center"
+                p={1}
               >
-                {eventData.signUpUrl.length > 0 && (
-                  <Button
-                    flex="1"
-                    as={Link}
-                    target="_blank"
-                    bg="#2C5282"
-                    color="white"
-                    _hover={{ opacity: '90%', textDecoration: 'none' }}
-                    href={eventData.signUpUrl ? eventData.signUpUrl : null}
-                    rightIcon={<MdOutlineAddToPhotos />}
-                    fontSize="xs"
-                    p="4"
+                <MotionBox
+                  drag="y"
+                  dragConstraints={{ top: 0, bottom: 0 }}
+                  onDragEnd={handleDragEnd}
+                  initial={{ y: '100%' }}
+                  animate={{ y: yPosition }}
+                  exit={{ y: '100%' }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+                >
+                  <Center mt={4} mb={2}>
+                    <Box w={10} h={1} bgColor="#A8A8A8" borderRadius={20} />
+                  </Center>
+                  <AspectRatio ratio={16 / 9} m={2}>
+                    <Image borderRadius={10} src={eventData.imageAdUrl} />
+                  </AspectRatio>
+                  <DrawerBody 
+                    p={0} 
+                    w={['90%', '100%']} 
+                    m="auto" 
                   >
-                    Sign up
-                  </Button>
-                )}
+                    <Box 
+                      maxH="40vh" 
+                      style={{ scrollBehavior: 'auto', scrollSnapAlign: 'start' }}
+                      alignItems="flex-start"
+                    >
+                      <Stack spacing={4} direction="row" mb="2">
+                        {tagArray.map((tag, i) => (
+                          <Tag
+                            key={'event' + i}
+                            borderRadius={20}
+                            size="sm"
+                            fontSize="11"
+                            fontWeight={'bold'}
+                            px={3}
+                            py={1}
+                            colorScheme={tag.color}
+                          >
+                            {tag.value}
+                          </Tag>
+                        ))}
+                      </Stack>
+                      {eventData.title && (
+                        <Heading as="h4" size="lg" fontWeight="900" mb="3">
+                          {eventData.title}
+                        </Heading>
+                      )}
+                      <Box>
+                        {eventData.eventStartDate && (
+                          <Text fontSize={'sm'} fontWeight="bold">
+                            <Icon mr={2} as={RiCalendarEventFill} />
+                            Date:{' '}
+                            {eventData.renderDate
+                              ? eventData.renderDate.toLocaleString(
+                                  DateTime.DATE_MED_WITH_WEEKDAY
+                                )
+                              : getRenderDate(
+                                  eventData.eventStartDate,
+                                  eventData.eventEndDate,
+                                  eventData.eventInterval,
+                                  eventData.eventStartTime
+                                ).toLocaleString(
+                                  DateTime.DATE_MED_WITH_WEEKDAY
+                                )}
+                            {eventData.eventEndDate &&
+                              getRenderDate(
+                                eventData.eventStartDate,
+                                eventData.eventEndDate,
+                                eventData.eventInterval,
+                                eventData.eventStartTime
+                              ).toLocaleString(
+                                DateTime.DATE_MED_WITH_WEEKDAY
+                              ) !==
+                                DateTime.fromISO(
+                                  eventData.eventEndDate
+                                ).toLocaleString(
+                                  DateTime.DATE_MED_WITH_WEEKDAY
+                                ) &&
+                              eventData.eventInterval === 'None' &&
+                              ' - ' +
+                                DateTime.fromISO(
+                                  eventData.eventEndDate
+                                ).toLocaleString(
+                                  DateTime.DATE_MED_WITH_WEEKDAY
+                                )}
+                          </Text>
+                        )}
+                        {eventData.eventStartTime && (
+                          <Text fontSize={'sm'} fontWeight="bold">
+                            <Icon mr={2} as={BsClockFill} />
+                            Time:{' '}
+                            {DateTime.fromISO(
+                              eventData.eventStartTime
+                            ).toLocaleString({
+                              hour: 'numeric',
+                              minute: 'numeric',
+                              hourCycle: 'h12',
+                            })}
+                            {eventData.eventEndTime &&
+                            eventData.eventStartTime !== eventData.eventEndTime
+                              ? ' - ' +
+                                DateTime.fromISO(
+                                  eventData.eventEndTime
+                                ).toLocaleString({
+                                  hour: 'numeric',
+                                  minute: 'numeric',
+                                  hourCycle: 'h12',
+                                })
+                              : ''}
+                          </Text>
+                        )}
+                        {eventData.location && (
+                          <Text fontSize={'sm'} fontWeight="bold">
+                            <Icon mr={2} as={ImLocation2} />
+                            Location: {eventData.location}
+                          </Text>
+                        )}
+                      </Box>
+                      <Box bg="#EBF0F9" borderRadius="20" mt="2" p={4}>
+                        <Text fontSize={'xs'} w="100%">
+                          <ReactMarkdown
+                            components={ChakraUIRenderer()}
+                            children={eventData.description}
+                            skipHtml
+                          />
+                        </Text>
+                      </Box>
+                    </Box>
+                  </DrawerBody>
+                  <DrawerFooter py={1} mt={3} mb="2">
+                    <ButtonGroup
+                      display="flex"
+                      justifyContent="center"
+                      size="md"
+                      flexDirection="row"
+                      spacing="2"
+                      w="100%"
+                      variant="outline"
+                      colorScheme="#535353"
+                      alignItems="center"
+                    >
+                      {eventData.signUpUrl.length > 0 && (
+                        <Button
+                          flex="1"
+                          as={Link}
+                          target="_blank"
+                          bg="#2C5282"
+                          color="white"
+                          _hover={{ opacity: '90%', textDecoration: 'none' }}
+                          href={
+                            eventData.signUpUrl ? eventData.signUpUrl : null
+                          }
+                          rightIcon={<MdOutlineAddToPhotos />}
+                          fontSize="xs"
+                          p="4"
+                        >
+                          Sign up
+                        </Button>
+                      )}
 
-                {generateGoogleCalendarLink(eventData) && (
-                  <Button
-                    flex="1"
-                    as={Link}
-                    target="_blank"
-                    bg="#2C5282"
-                    color="white"
-                    _hover={{ opacity: '90%', textDecoration: 'none' }}
-                    href={generateGoogleCalendarLink(eventData)}
-                    rightIcon={<FaCalendarAlt />}
-                    fontSize="xs"
-                    p="4"
-                  >
-                    Add to Calendar
-                  </Button>
-                )}
-              </ButtonGroup>
-              
-            </DrawerFooter>
-          </DrawerContent>
+                      {generateGoogleCalendarLink(eventData) && (
+                        <Button
+                          flex="1"
+                          as={Link}
+                          target="_blank"
+                          bg="#2C5282"
+                          color="white"
+                          _hover={{ opacity: '90%', textDecoration: 'none' }}
+                          href={generateGoogleCalendarLink(eventData)}
+                          rightIcon={<FaCalendarAlt />}
+                          fontSize="xs"
+                          p="4"
+                        >
+                          Add to Calendar
+                        </Button>
+                      )}
+                    </ButtonGroup>
+                  </DrawerFooter>
+                </MotionBox>
+              </DrawerContent>
+            )}
+          </AnimatePresence>
         </Drawer>
       ) : (
         <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
