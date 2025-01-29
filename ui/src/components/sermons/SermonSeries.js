@@ -31,32 +31,16 @@ const SermonSeries = ({ sermonSeriesName }) => {
   }, []);
 
   const getSermonSeries = useCallback(() => {
-    if (liveSermon) {
-      const filteredSeries = allSermons.filter((series) => {
-        return (
-          series.sermonSeries &&
-          liveSermon[0].sermonSeries &&
-          series.sermonSeries[0].name === liveSermon[0].sermonSeries &&
-          series.id !== liveSermon[0].id
-        );
-      });
+    const filteredSeries = allSermons.filter((sermon) => {
+      return (
+        sermon.sermonSeries && sermon.sermonSeries[0].name === sermonSeriesName
+      );
+    });
 
-      filteredSeries.reverse();
+    filteredSeries.reverse();
 
-      setSermonSeries(filteredSeries);
-    } else {
-      const filteredSeries = allSermons.filter((sermon) => {
-        return (
-          sermon.sermonSeries &&
-          sermon.sermonSeries[0].name === sermonSeriesName
-        );
-      });
-
-      filteredSeries.reverse();
-
-      setSermonSeries(filteredSeries);
-    }
-  }, [allSermons, liveSermon, sermonSeriesName]);
+    setSermonSeries(filteredSeries);
+  }, [allSermons, sermonSeriesName]);
 
   useEffect(() => {
     (async () => {
@@ -71,11 +55,7 @@ const SermonSeries = ({ sermonSeriesName }) => {
   }, [allSermons, liveSermon, getSermonSeries]);
 
   return (
-    <Box
-      display="flex"
-      flexDir={'column'}
-      gap={'1rem'}
-    >
+    <Box display="flex" flexDir={'column'} gap={'1rem'}>
       {sermonSeries.length > 0 &&
         sermonSeries.map((sermon) => (
           <SermonCard key={sermon.id.toString()} sermonData={sermon} />

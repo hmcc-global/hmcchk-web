@@ -1,23 +1,10 @@
-import { useState, useRef } from 'react';
-import {
-  Grid,
-  Button,
-  Box,
-  HStack,
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  useDisclosure,
-  Text,
-} from '@chakra-ui/react';
+import { useState } from 'react';
+import { Grid, Box, HStack, Text } from '@chakra-ui/react';
 import Pagination from '../helpers/Pagination';
 import FilterSermon from './FilterSermons';
 import SermonSeriesCard from './SermonSeriesCard';
 import { useEffect } from 'react';
+import { DateTime } from 'luxon';
 
 const SermonSeriesCardList = ({ allSermons }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,13 +13,10 @@ const SermonSeriesCardList = ({ allSermons }) => {
   // Consolidated filter state
   const [filters, setFilters] = useState({
     speaker: '',
-    sermonSeries: '',
+    year: '',
     book: '',
     serviceType: '',
   });
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef();
 
   // Update a specific filter
   const updateFilter = (event) => {
@@ -44,24 +28,16 @@ const SermonSeriesCardList = ({ allSermons }) => {
     }));
   };
 
-  // Clear all filters
-  const clearFilter = () => {
-    setFilters({
-      speaker: '',
-      sermonSeries: '',
-      book: '',
-      serviceType: '',
-    });
-  };
-
   // Filtered sermons
   const filteredSermons = allSermons.filter((sermon) => {
-    const { speaker, sermonSeries, book, serviceType } = filters;
+    const { speaker, year, book, serviceType } = filters;
 
     return (
       (!speaker || (sermon.speaker[0]?.name || '').includes(speaker)) &&
-      (!sermonSeries ||
-        (sermon.sermonSeries[0]?.name || '').includes(sermonSeries)) &&
+      (!year ||
+        (DateTime.fromISO(sermon.datePreached).toFormat('yyyy') || '').includes(
+          year
+        )) &&
       (!book || (sermon.passage || '').includes(book)) &&
       (!serviceType ||
         (sermon.serviceType[0]?.name || '').includes(serviceType))
@@ -113,20 +89,6 @@ const SermonSeriesCardList = ({ allSermons }) => {
             filterSermon={updateFilter}
             filterData={filters}
           />
-        </Box>
-
-        {/* Clear Filter Button (Desktop) */}
-        <Box>
-          <Button
-            variant="link"
-            alignSelf={['center', 'flex-end']}
-            onClick={clearFilter}
-            float="right"
-            display={{ base: 'none', md: 'flex' }}
-            marginTop="8px"
-          >
-            Clear Filter
-          </Button>
         </Box>
 
         {/* Sermon Cards */}

@@ -73,9 +73,14 @@ const OfflinePageTabs = ({ user, history, sermonNotes, sermonSeries }) => {
             color={'#4A6EEB'}
           >
             <HStack alignItems="center" spacing={'0.75rem'} py="0.75rem">
-              <Icon
-                as={MdOutlineLibraryBooks}
-                boxSize={{ base: '1.25rem', lg: '1.5rem' }}
+              <Image
+                src={
+                  tab === 1
+                    ? process.env.PUBLIC_URL +
+                      '/images/sermons/sermon_icon_unclicked.svg'
+                    : process.env.PUBLIC_URL +
+                      '/images/sermons/sermon_icon_clicked.svg'
+                }
               />
               <Text fontSize={{ base: '0.75rem', md: '1rem' }} fontWeight={400}>
                 Sermon Notes
@@ -94,9 +99,14 @@ const OfflinePageTabs = ({ user, history, sermonNotes, sermonSeries }) => {
             color={'#4A6EEB'}
           >
             <HStack alignItems="center" spacing={'0.75rem'} py="0.375rem">
-              <Icon
-                as={RiPlayList2Line}
-                boxSize={{ base: '1.25rem', lg: '1.5rem' }}
+              <Image
+                src={
+                  tab === 0
+                    ? process.env.PUBLIC_URL +
+                      '/images/sermons/more_series_unclicked.svg'
+                    : process.env.PUBLIC_URL +
+                      '/images/sermons/more_series_clicked.svg'
+                }
               />
               <Text fontSize={{ base: '0.75rem', md: '1rem' }} fontWeight={400}>
                 More in Series

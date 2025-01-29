@@ -3,13 +3,11 @@ import {
   VStack,
   Box,
   Button,
-  Stack,
   AspectRatio,
   Text,
   Container,
   Grid,
   Icon,
-  useBreakpointValue,
 } from '@chakra-ui/react';
 import { customAxios as axios } from '../helpers/customAxios';
 import { DateTime } from 'luxon';
@@ -42,8 +40,6 @@ const SermonDetails = (props) => {
   const currId = props.match.params.id;
   const history = useHistory();
   const { user } = props;
-
-  const isMobile = useBreakpointValue({ base: true, md: false });
 
   const getData = useCallback(async () => {
     try {
@@ -85,7 +81,7 @@ const SermonDetails = (props) => {
       sermon.sermonVideoUrl.split('/')[
         sermon.sermonVideoUrl.split('/').length - 1
       ];
-    setSermonUrl(`https://www.youtube.com/embed/${sermonVideoCode}`);
+    setSermonUrl(sermonVideoCode);
   }, [sermon]);
 
   const getLatestSermonSeries = useCallback(() => {
@@ -135,7 +131,7 @@ const SermonDetails = (props) => {
   return (
     <>
       {sermon && allSermons && (
-        <Container maxW="container.xl" mt={{ base: '0.75rem', lg: '2.5rem' }}>
+        <Container maxW="container.xl" mt={{ base: '0.75rem', lg: '1.75rem' }}>
           <Box mb={{ base: '1rem', md: '2.5rem' }}>
             <Text
               fontFamily={'DMSerifDisplay_Italic'}
@@ -145,13 +141,12 @@ const SermonDetails = (props) => {
             >
               {sermonSeriesTitle}
             </Text>
-            <Stack
-              spacing={{ base: '0.5rem', lg: '2rem' }}
-              direction={{ base: 'column', lg: 'row' }}
-              alignItems={{ base: 'center', lg: 'flex-start' }}
-              justifyContent={{ base: 'flex-start', lg: 'space-between' }}
-              mt={'0.5rem'}
-              mb={{ base: '2rem', lg: '4rem' }}
+            <Box
+              display="flex"
+              flexDirection={{ base: 'column', lg: 'row' }}
+              alignItems={{ base: 'center', lg: 'unset' }}
+              w="100%"
+              mb={'2rem'}
             >
               <Box
                 w={{ base: '100%', lg: '60%' }}
@@ -163,7 +158,7 @@ const SermonDetails = (props) => {
                   <iframe
                     width="560"
                     height="315"
-                    src={sermonUrl}
+                    src={`https://www.youtube.com/embed/${sermonUrl}`}
                     title="Video player"
                     allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
                     allowFullScreen
@@ -178,16 +173,16 @@ const SermonDetails = (props) => {
                     {sermonTitlePrefix + sermon.title}
                   </Text>
                   <HStack
-                    spacing={{ base: '0.375rem', md: '1rem' }}
+                    spacing={0}
                     fontSize={{ base: '0.625rem', md: '0.875rem' }}
                     alignItems="center"
                     justifyContent="flex-start"
                     flexWrap={'wrap'}
                   >
                     <Text>{'Date: ' + sermonDate}</Text>
-                    <Text>|</Text>
+                    <Text px={{ base: '0.375rem', md: '1rem' }}>|</Text>
                     <Text>{'Speaker: ' + sermon.speaker[0].name}</Text>
-                    <Text>|</Text>
+                    <Text px={{ base: '0.375rem', md: '1rem' }}>|</Text>
                     <Text>{'Passage: ' + sermon.passage}</Text>
                   </HStack>
                   <Text
@@ -197,16 +192,19 @@ const SermonDetails = (props) => {
                   >
                     {sermon.sermonDesc}
                   </Text>
-
-                  {/* TODO-YY: to attach actual links */}
                   <SermonSocialMediaButtons
-                    ytLink={'sermonUrl'}
-                    spotifyLink={''}
+                    ytLink={`https://www.youtube.com/watch?v=${sermonUrl}`}
                   />
                 </VStack>
               </Box>
-              <Box w={{ base: '100%', lg: '40%' }}>
-                <Box w="100%" h="50%">
+              <Box
+                ml={{ base: '0px', lg: '20px' }}
+                w={{ base: '100%', lg: '40%' }}
+                overflowY="auto"
+                position="relative"
+                borderRadius={10}
+              >
+                <Box w="100%" h="100%">
                   <OfflinePageTabs
                     sermonNoteId={sermonNoteId}
                     user={user}
@@ -215,7 +213,7 @@ const SermonDetails = (props) => {
                   />
                 </Box>
               </Box>
-            </Stack>
+            </Box>
 
             <VStack alignItems="left" alignContent="center" spacing={4}>
               <HStack alignItems="center" justifyContent={'space-between'}>
@@ -224,7 +222,7 @@ const SermonDetails = (props) => {
                   fontWeight={400}
                   fontSize={{ base: '1.75rem', md: '2rem' }}
                 >
-                  Past Sermons
+                  Past Sermon Series
                 </Text>
                 <Button
                   borderRadius="80px"
@@ -245,7 +243,7 @@ const SermonDetails = (props) => {
                     color="#4A6EEB"
                     fontSize={{ base: '0.75rem', md: '0.875rem' }}
                   >
-                    See All Sermons
+                    See All
                   </Text>
                   <Icon as={FaArrowRight} color={'#4A6EEB'} />
                 </Button>
