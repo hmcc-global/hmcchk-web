@@ -8,25 +8,18 @@ import {
   Box,
   HStack,
   Text,
-  Icon,
   VStack,
   Image,
 } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import SermonNotesContainer from '../sermon-notes/SermonNotesContainer';
-import { MdOutlineLibraryBooks } from 'react-icons/md';
-import { RiPlayList2Line } from 'react-icons/ri';
 import SermonSeries from './SermonSeries';
 
-const OfflinePageTabs = ({ user, history, sermonNotes, sermonSeries }) => {
+const OfflinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
   const [noteId, setNoteId] = useState(0);
   const [tab, setTab] = useState(0);
   const [slideIndex, setSlideIndex] = useState(0);
-
-  const sermonId = useMemo(() => {
-    return sermonNotes && sermonNotes.split('/').reverse()[0];
-  }, [sermonNotes]);
 
   const refreshSermonNotes = () => {
     setNoteId(noteId + 1);
@@ -128,10 +121,9 @@ const OfflinePageTabs = ({ user, history, sermonNotes, sermonSeries }) => {
             </Button>
             <Box height={['85vh', '90%']} paddingBottom={15} overflow="auto">
               <SermonNotesContainer
-                sermonNoteId={sermonId}
+                sermonNoteId={sermonNoteId}
                 history={history}
                 user={user}
-                isOfflineSermonNote={true}
               />
             </Box>
           </TabPanel>
@@ -195,7 +187,7 @@ const OfflinePageTabs = ({ user, history, sermonNotes, sermonSeries }) => {
             borderColor="#4A6EEB"
           >
             <SermonNotesContainer
-              sermonNoteId={sermonId}
+              sermonNoteId={sermonNoteId}
               history={history}
               user={user}
               isOfflineSermonNote={true}
