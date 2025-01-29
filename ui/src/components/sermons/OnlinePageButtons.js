@@ -1,76 +1,17 @@
-import {
-  Button,
-  Stack,
-  Link,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-} from '@chakra-ui/react';
+import { Button, Stack } from '@chakra-ui/react';
 
 const OnlinePageButtons = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <Stack
       direction={['column', 'row']}
-      fontSize="2rem"
       display={{ base: 'none', sm: 'flex' }}
+      textColor="#0C0C20"
+      fontFamily="Manrope"
+      my="5"
     >
-      <Button
-        width={['100%', '25%']}
-        fontSize={['sm', 'md']}
-        style={{
-          whiteSpace: 'normal',
-          wordWrap: 'break-word',
-        }}
-        onClick={onOpen}
-      >
-        Connection Issues
-      </Button>
-      <Modal size="2xl" isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalCloseButton />
-          <ModalHeader>Connection Issues</ModalHeader>
-          <ModalBody>
-            In cases where the livestream video is not working or sermon notes
-            are not up to date, please <u>hard refresh</u> using the following
-            commands: <br />
-            <br />
-            <b>On a PC:</b> Press CTRL + SHIFT + R <br />
-            <b>On a Mac (Chrome):</b> Press CMD + SHIFT + R <br />
-            <b>On a Mac (Safari):</b> Press CMD + OPTION + E (afterwards) CMD +
-            R
-            <br />
-            <br />
-            This refreshes your browser's content and ensures proper loading of
-            up-to-date page content. Alternatively, you can choose to open the
-            site through incognito browsing.
-            <br />
-            <br />
-            If you have issues loading the video stream on this site, please try
-            and access the stream at{' '}
-            <Link
-              href="https://youtube.com/c/hmcchk"
-              fontStyle="italic"
-              color="blue"
-              target="_blank"
-            >
-              https://youtube.com/c/hmcchk
-            </Link>{' '}
-          </ModalBody>
-          <ModalFooter />
-        </ModalContent>
-      </Modal>
       <Button
         variant="outline"
         width={['100%', '25%']}
-        fontSize={['sm', 'md']}
         style={{
           whiteSpace: 'normal',
           wordWrap: 'break-word',
@@ -79,32 +20,68 @@ const OnlinePageButtons = () => {
         as="a"
         href="https://bit.ly/hmcc-prayer"
         target="_blank"
+        borderColor="#4A6EEB"
+        border="1px solid var(--Blue-Primary, #4A6EEB)"
+        borderRadius="15px"
+        bgColor="transparent"
+        fontSize="0.8rem"
+        letterSpacing="0.185rem"
+        fontWeight="700"
+        height="2.813rem"
       >
-        Need Prayer?
+        NEED PRAYER?
       </Button>
       <Button
         width={['100%', '25%']}
-        bg="#0628A3"
-        color="white"
-        fontSize={['sm', 'md']}
         as="a"
-        href="/give"
+        href="/sermons"
         target="_blank"
-        id="online-give"
+        id="past-sermons"
+        borderColor="#4A6EEB"
+        border="1px solid var(--Blue-Primary, #4A6EEB)"
+        borderRadius="15px"
+        bgColor="transparent"
+        fontSize="0.8rem"
+        letterSpacing="0.185rem"
+        fontWeight="700"
+        height="2.813rem"
       >
-        Giving
+        PAST SERMONS
       </Button>
       <Button
         width={['100%', '25%']}
-        color="#0628A3"
-        fontSize={['sm', 'md']}
         as="a"
         href="/events"
         target="_blank"
         isTruncated
         id="online-events"
+        borderColor="#4A6EEB"
+        border="1px solid var(--Blue-Primary, #4A6EEB)"
+        borderRadius="15px"
+        bgColor="transparent"
+        fontSize="0.8rem"
+        letterSpacing="0.185rem"
+        fontWeight="700"
+        height="2.813rem"
       >
-        Events
+        UPCOMING EVENTS
+      </Button>
+      <Button
+        width={['100%', '25%']}
+        as="a"
+        href="/give"
+        target="_blank"
+        id="online-give"
+        borderColor="#4A6EEB"
+        border="1px solid var(--Blue-Primary, #4A6EEB)"
+        borderRadius="15px"
+        bgColor="transparent"
+        fontSize="0.8rem"
+        letterSpacing="0.185rem"
+        fontWeight="700"
+        height="2.813rem"
+      >
+        GIVING
       </Button>
     </Stack>
   );
