@@ -1,5 +1,4 @@
 import {
-  Container,
   Stack,
   AspectRatio,
   Image,
@@ -45,12 +44,12 @@ const SermonSeries = () => {
 
   const getSermonSeries = useCallback(() => {
     if (!sermon) return; // Ensure sermon is available
-    const filteredSeries = allSermons.filter((series) => {
+    const filteredSeries = allSermons.filter((sermon) => {
       return (
-        series.sermonSeries &&
+        sermon.sermonSeries &&
         sermon[0].sermonSeries &&
-        series.sermonSeries[0].name === sermon[0].sermonSeries &&
-        series.id !== sermon.id
+        sermon.sermonSeries[0].name === sermon[0].sermonSeries &&
+        sermon.id !== sermon.id
       );
     });
     setSermonSeries(filteredSeries);

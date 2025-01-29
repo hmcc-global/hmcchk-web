@@ -143,16 +143,16 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
               </HStack>
               {isOnline && (
                 <HStack
-                  spacing={{ base: '0.375rem', md: '1rem' }}
+                  spacing={0}
                   fontSize={{ base: '0.625rem', md: '0.875rem' }}
                   alignItems="center"
                   justifyContent="flex-start"
                   flexWrap={'wrap'}
                 >
                   <Text>{'Date: ' + getSermonDate()}</Text>
-                  <Text>|</Text>
+                  <Text px={{ base: '0.375rem', md: '1rem' }}>|</Text>
                   <Text>{'Speaker: ' + currentSermon.speaker}</Text>
-                  <Text>|</Text>
+                  <Text px={{ base: '0.375rem', md: '1rem' }}>|</Text>
                   <Text>{'Passage: ' + currentSermon.sermonPassage}</Text>
                 </HStack>
               )}
@@ -166,7 +166,7 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
                 <WatchButton />
               ) : (
                 <SermonSocialMediaButtons
-                  ytLink={currentSermon.sermonVideoUrl}
+                  ytLink={`https://www.youtube.com/watch?v=${mediaUrl}`}
                 />
               )}
             </Stack>
