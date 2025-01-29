@@ -60,7 +60,7 @@ const SermonSeriesCard = ({
           setSermonSeriesTitle(sermonSeries);
         }
 
-        setSermonSeriesDescription(sermonData.sermonDesc);
+        setSermonSeriesDescription(sermonData.sermonSeries[0].description);
       }
     }
   }, [sermonSeries, allSermons]);
@@ -150,9 +150,9 @@ const SermonSeriesCard = ({
           </Box>
         </Stack>
       </Box>
-      <Modal isOpen={isOpen} onClose={onClose} size={'4xl'}>
+      <Modal isOpen={isOpen} onClose={onClose} size={'5xl'}>
         <ModalOverlay />
-        <ModalContent borderRadius="20">
+        <ModalContent borderRadius="20" p={'1rem'}>
           <ModalCloseButton />
           <ModalHeader>
             <Text

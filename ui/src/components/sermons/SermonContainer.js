@@ -82,7 +82,7 @@ const SermonContainer = (props) => {
   return (
     <>
       {!onlineSermon && <UpcomingSermon upcoming={events} />}
-      <Container maxW="container.xl" mt={{ base: '0.75rem', lg: '2.5rem' }}>
+      <Container maxW="container.xl" mt={{ base: '0.75rem', lg: '1.75rem' }}>
         <Box
           display="flex"
           flexDirection="column"

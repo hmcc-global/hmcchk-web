@@ -1,7 +1,7 @@
 import { Button, HStack, Icon, Link, Text } from '@chakra-ui/react';
 import { FaSpotify, FaYoutube } from 'react-icons/fa';
 
-const SermonSocialMediaButtons = ({ isLive = false, spotifyLink, ytLink }) => {
+const SermonSocialMediaButtons = ({ isLive = false, ytLink }) => {
   return (
     <HStack
       alignItems={'center'}
@@ -10,7 +10,9 @@ const SermonSocialMediaButtons = ({ isLive = false, spotifyLink, ytLink }) => {
     >
       <Link
         _hover={{ textDecoration: 'none' }}
-        href={spotifyLink}
+        href={
+          'https://open.spotify.com/show/0uSR3wzNvN5i9kMXfOnbbw?si=v8oSNaVpTDG2kYms8tb3pA'
+        }
         id="sermon_details-sermons"
         display={isLive ? 'none' : 'flex'}
       >
