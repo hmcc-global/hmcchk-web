@@ -82,11 +82,11 @@ const SermonContainer = (props) => {
   return (
     <>
       {!onlineSermon && <UpcomingSermon upcoming={events} />}
-      <Container maxW="container.xl">
+      <Container maxW="container.xl" mt={{ base: '0.75rem', lg: '2.5rem' }}>
         <Box
           display="flex"
           flexDirection="column"
-          alignItems={'left'}
+          alignItems={{ base: 'center', md: 'flex-start' }}
           justifyContent="center"
           gap="0.5rem"
           mb={{ base: '1rem', md: '2.5rem' }}
