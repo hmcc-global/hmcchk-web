@@ -181,10 +181,9 @@ const OnlinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
             </Button>
             <Box height={['85vh', '90%']} paddingBottom={15} overflow="auto">
               <SermonNotesContainer
-                sermonNoteId={sermonId}
+                sermonNoteId={sermonNoteId}
                 history={history}
                 user={user}
-                isOfflineSermonNote={isOfflineSermonNote}
               />
             </Box>
           </TabPanel>
