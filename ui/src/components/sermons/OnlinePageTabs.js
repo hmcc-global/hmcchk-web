@@ -38,6 +38,7 @@ const OnlinePageTabs = ({
       border="1px solid"
       borderColor="#4A6EEB"
       borderRadius="10px"
+      variant="unstyled"
     >
       <TabList orientation="horizontal" bgColor="#EAF0FF" textColor="#4A6EEB">
         <Tab
