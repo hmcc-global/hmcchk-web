@@ -18,7 +18,6 @@ import { customAxios as axios } from '../../helpers/customAxios';
 import TiptapEditor from '../../helpers/TipTap';
 import { useHistory } from 'react-router-dom';
 
-
 // Create a object
 export const sermonIdMap = {
   'Sunday Celebration': 'sn',
@@ -480,13 +479,19 @@ const SermonNotesEditorModal = (props) => {
                   Rich Text Editor Sermon Notes
                 </FormLabel>
                 <TiptapEditor
-                  onFocus={() =>
+                  onFocus={() => {
                     setValue(
                       'originalContent',
                       sermonNoteData.originalContent,
                       { shouldTouch: true }
-                    )
-                  }
+                    );
+                    // Remove outline directly on focus
+                    const editorElement =
+                      document.querySelector('.ProseMirror');
+                    if (editorElement) {
+                      editorElement.style.outline = 'none'; // Remove outline on focus
+                    }
+                  }}
                   onEditorChange={(json) =>
                     setSermonNoteData({
                       ...sermonNoteData,
