@@ -75,8 +75,6 @@ const SermonSeries = ({ sermonSeriesName }) => {
       display="flex"
       flexDir={'column'}
       gap={'1rem'}
-      // overflowY={'auto'}
-      // maxHeight={'50vh'}
     >
       {sermonSeries.length > 0 &&
         sermonSeries.map((sermon) => (
