@@ -109,7 +109,7 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
             fontSize={'1.5rem'}
             color="#272727"
             fontFamily="DMSerifDisplay_Italic"
-            display={{ base: 'block', lg: 'none' }}
+            display={{ base: 'block', md: 'none' }}
           >
             {header}
           </Text>
@@ -128,7 +128,7 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
                 fontSize={{ base: '1.875rem', md: '2.625rem' }}
                 color="#272727"
                 fontFamily="DMSerifDisplay_Italic"
-                display={{ base: 'none', lg: 'block' }}
+                display={{ base: 'none', md: 'block' }}
               >
                 {header}
               </Text>
