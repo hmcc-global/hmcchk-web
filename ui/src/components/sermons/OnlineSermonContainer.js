@@ -69,7 +69,7 @@ const OnlineSermonContainer = (props) => {
             <Text
               alignSelf={{ base: 'center', md: 'self-start' }}
               fontFamily="DMSerifDisplay_Italic"
-              fontSize={{ base: '2rem', md: '3.75rem' }}
+              fontSize={{ base: '2rem', md: '3rem' }}
             >
               {onlineSermon.sermonSeries}
             </Text>
@@ -232,12 +232,9 @@ const OnlineSermonContainer = (props) => {
             fontSize="2rem"
             display={{ base: 'none', sm: 'block' }}
           >
-            Check Out More!
+            Other Links
           </Text>
-          <OnlinePageButtons
-            fontSize="2rem"
-            display={{ base: 'none', sm: 'block' }}
-          />
+          <OnlinePageButtons />
         </Container>
       )}
     </>
