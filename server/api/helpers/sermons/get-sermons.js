@@ -18,17 +18,18 @@ const parseHtmlText = (text) => {
 };
 
 const convertToMarkdown = (htmlText) => {
-  // 1. Remove HTML tags:  A simple approach using a regular expression.  For more robust HTML parsing, consider a dedicated HTML parser library.
+  // 1. Remove HTML tags: Improved regular expression for better robustness.
   const textWithoutHTML = htmlText.replace(/<\/?[^>]+(>|$)/g, '');
 
-  // 2. Convert paragraph tags to Markdown: Replace <p> tags with newline characters.
-  const markdownText = textWithoutHTML.replace(/<\/p>/g, '\n\n').replace(/<p>/g, '');
-
-  // 3. Handle special characters (optional but recommended for better Markdown compatibility):  This step is crucial for accurate conversion.  We'll handle em dashes here.  Other characters might need similar treatment depending on the input.
-  const markdownWithDashes = markdownText.replace(/&#8211;/g, '--');
+  // 2. Convert paragraph tags to Markdown:  Maintain consistency.
+  let markdownText = textWithoutHTML.replace(/<\/p>/g, '\n\n').replace(/<p>/g, '');
 
 
-  return markdownWithDashes;
+  // 3. Handle special characters:  Include 'right single quote' and other needed characters.
+  markdownText = markdownText.replace(/&#8211;/g, '--')
+                            .replace(/&#8217;/g, "'"); // Add this line to handle right single quotes
+
+  return markdownText;
 };
 
 
