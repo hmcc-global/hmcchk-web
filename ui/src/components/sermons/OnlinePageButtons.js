@@ -16,7 +16,11 @@ const OnlinePageButtons = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Stack direction={['column', 'row']}>
+    <Stack
+      direction={['column', 'row']}
+      fontSize="2rem"
+      display={{ base: 'none', sm: 'flex' }}
+    >
       <Button
         width={['100%', '25%']}
         fontSize={['sm', 'md']}
