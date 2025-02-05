@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
 import { useState, useEffect, useCallback } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
 import SermonCard from './SermonCard';
@@ -55,12 +55,14 @@ const SermonSeries = ({ sermonSeriesName }) => {
   }, [allSermons, liveSermon, getSermonSeries]);
 
   return (
-    <Box display="flex" flexDir={'column'} gap={'1rem'}>
-      {sermonSeries.length > 0 &&
-        sermonSeries.map((sermon) => (
-          <SermonCard key={sermon.id.toString()} sermonData={sermon} />
-        ))}
-    </Box>
+    <Container minW="100%" p="0" maxH={'100%'}>
+      <Box display="flex" flexDir={'column'} gap={'1rem'}>
+        {sermonSeries.length > 0 &&
+          sermonSeries.map((sermon) => (
+            <SermonCard key={sermon.id.toString()} sermonData={sermon} />
+          ))}
+      </Box>
+    </Container>
   );
 };
 

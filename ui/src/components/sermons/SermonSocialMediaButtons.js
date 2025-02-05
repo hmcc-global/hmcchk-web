@@ -1,12 +1,16 @@
 import { Button, HStack, Icon, Link, Text } from '@chakra-ui/react';
 import { FaSpotify, FaYoutube } from 'react-icons/fa';
 
-const SermonSocialMediaButtons = ({ isLive = false, ytLink }) => {
+const SermonSocialMediaButtons = ({
+  isLive = false,
+  ytLink,
+  iconsOnly = false,
+}) => {
   return (
     <HStack
       alignItems={'center'}
       justifyContent={{ base: 'center', lg: 'flex-start' }}
-      spacing={{ base: '0.5rem', lg: '2.5rem' }}
+      spacing={{ base: '0.5rem', lg: iconsOnly ? '0.5rem' : '2.5rem' }}
     >
       <Link
         _hover={{ textDecoration: 'none' }}
@@ -27,12 +31,14 @@ const SermonSocialMediaButtons = ({ isLive = false, ytLink }) => {
           gap={{ base: 0, lg: '0.5rem' }}
         >
           <Icon as={FaSpotify} boxSize={{ base: '2rem', lg: '1.5rem' }} />
-          <Text
-            display={{ base: 'none', lg: 'flex' }}
-            borderBottom="1px solid #4A6EEB"
-          >
-            Listen on Spotify
-          </Text>
+          {!iconsOnly && (
+            <Text
+              display={{ base: 'none', lg: 'flex' }}
+              borderBottom="1px solid #4A6EEB"
+            >
+              Listen on Spotify
+            </Text>
+          )}
         </Button>
       </Link>
       <Link
@@ -51,12 +57,14 @@ const SermonSocialMediaButtons = ({ isLive = false, ytLink }) => {
           gap={{ base: 0, lg: '0.5rem' }}
         >
           <Icon as={FaYoutube} boxSize={{ base: '2rem', lg: '1.5rem' }} />
-          <Text
-            display={{ base: 'none', lg: 'flex' }}
-            borderBottom="1px solid #4A6EEB"
-          >
-            Watch on YouTube
-          </Text>
+          {!iconsOnly && (
+            <Text
+              display={{ base: 'none', lg: 'flex' }}
+              borderBottom="1px solid #4A6EEB"
+            >
+              Watch on YouTube
+            </Text>
+          )}
         </Button>
       </Link>
     </HStack>
