@@ -46,7 +46,7 @@ const OfflinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
         isFitted
         h="100%"
         onChange={(i) => setTab(i)}
-        overflowY={tab ? 'auto' : 'hidden'}
+        overflowY={'hidden'}
         display={{ base: 'none', md: 'block' }}
         maxH={700}
         borderRadius={'12px'}
@@ -119,7 +119,7 @@ const OfflinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
             >
               <RepeatIcon />
             </Button>
-            <Box height={['85vh', '90%']} paddingBottom={15} overflow="auto">
+            <Box height={'90%'} paddingBottom={15} overflow="auto">
               <SermonNotesContainer
                 sermonNoteId={sermonNoteId}
                 history={history}
@@ -127,8 +127,10 @@ const OfflinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
               />
             </Box>
           </TabPanel>
-          <TabPanel p={'1rem'}>
-            <SermonSeries sermonSeriesName={sermonSeries} />
+          <TabPanel h="100%">
+            <Box height={'90%'} overflow="auto">
+              <SermonSeries sermonSeriesName={sermonSeries} />
+            </Box>
           </TabPanel>
         </TabPanels>
       </Tabs>
@@ -179,7 +181,7 @@ const OfflinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
 
         {slideIndex === 0 && (
           <Box
-            height={['85vh', '90%']}
+            height={'85vh'}
             paddingBottom={15}
             overflow="auto"
             borderRadius="15px"
@@ -196,7 +198,7 @@ const OfflinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
         )}
         {slideIndex === 1 && (
           <Box
-            height={['85vh', '90%']}
+            height={'85vh'}
             w="100%"
             p={'1rem'}
             overflow="auto"
