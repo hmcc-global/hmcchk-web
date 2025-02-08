@@ -77,7 +77,9 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
       backgroundColor={'#4A6EEB'}
       color="#FFFFFF"
       fontSize="1rem"
-      onClick={() => history.push('/online')}
+      onClick={() =>
+        history.push(isOnline ? '/online' : '/sermons/' + currentSermon.id)
+      }
       _hover={{ backgroundColor: 'rgba(74, 110, 235, 0.9)' }}
     >
       <HStack spacing="1rem" alignItems="center" justifyContent={'center'}>
@@ -115,62 +117,55 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
           </Text>
           <MediaDisplay isOnline={isOnline} mediaUrl={mediaUrl} />
 
-          <>
-            <Stack
-              pl={{ base: '0', md: '1.5rem' }}
-              alignItems={{ base: 'center', lg: 'flex-start' }}
-              flex="1"
-              direction="column"
-              gap="0.5rem"
+          <Stack
+            pl={{ base: '0', md: '1.5rem' }}
+            alignItems={{ base: 'center', lg: 'flex-start' }}
+            flex="1"
+            direction="column"
+            gap="0.5rem"
+          >
+            <Text
+              fontWeight={400}
+              fontSize={{ base: '1.875rem', md: '2.625rem' }}
+              color="#272727"
+              fontFamily="DMSerifDisplay_Italic"
+              display={{ base: 'none', md: 'block' }}
             >
+              {header}
+            </Text>
+            <HStack spacing="0.5rem" alignItems="center">
+              {isOnline && <LiveButton />}
               <Text
-                fontWeight={400}
-                fontSize={{ base: '1.875rem', md: '2.625rem' }}
-                color="#272727"
-                fontFamily="DMSerifDisplay_Italic"
-                display={{ base: 'none', md: 'block' }}
+                fontWeight="bold"
+                fontSize={{ base: '1rem', md: '1.125rem' }}
               >
-                {header}
+                {sermonSeriesName}
               </Text>
-              <HStack spacing="0.5rem" alignItems="center">
-                {isOnline && <LiveButton />}
-                <Text
-                  fontWeight="bold"
-                  fontSize={{ base: '1rem', md: '1.125rem' }}
-                >
-                  {sermonSeriesName}
-                </Text>
+            </HStack>
+            {isOnline && (
+              <HStack
+                spacing={0}
+                fontSize={{ base: '0.625rem', md: '0.875rem' }}
+                alignItems="center"
+                justifyContent="flex-start"
+                flexWrap={'wrap'}
+              >
+                <Text>{'Date: ' + getSermonDate()}</Text>
+                <Text px={{ base: '0.375rem', md: '1rem' }}>|</Text>
+                <Text>{'Speaker: ' + currentSermon.speaker}</Text>
+                <Text px={{ base: '0.375rem', md: '1rem' }}>|</Text>
+                <Text>{'Passage: ' + currentSermon.sermonPassage}</Text>
               </HStack>
-              {isOnline && (
-                <HStack
-                  spacing={0}
-                  fontSize={{ base: '0.625rem', md: '0.875rem' }}
-                  alignItems="center"
-                  justifyContent="flex-start"
-                  flexWrap={'wrap'}
-                >
-                  <Text>{'Date: ' + getSermonDate()}</Text>
-                  <Text px={{ base: '0.375rem', md: '1rem' }}>|</Text>
-                  <Text>{'Speaker: ' + currentSermon.speaker}</Text>
-                  <Text px={{ base: '0.375rem', md: '1rem' }}>|</Text>
-                  <Text>{'Passage: ' + currentSermon.sermonPassage}</Text>
-                </HStack>
-              )}
-              <Text
-                fontSize={{ base: '0.875rem', md: '1rem' }}
-                fontWeight={500}
-              >
-                {sermonDesc}
-              </Text>
-              {isOnline ? (
-                <WatchButton />
-              ) : (
-                <SermonSocialMediaButtons
-                  ytLink={`https://www.youtube.com/watch?v=${mediaUrl}`}
-                />
-              )}
-            </Stack>
-          </>
+            )}
+            <Text
+              fontSize={{ base: '0.875rem', md: '1rem' }}
+              fontWeight={500}
+              pb={{ base: '0', lg: '1rem' }}
+            >
+              {sermonDesc}
+            </Text>
+            <WatchButton />
+          </Stack>
         </Stack>
       </Box>
     )

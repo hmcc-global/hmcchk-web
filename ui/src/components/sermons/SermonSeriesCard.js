@@ -188,22 +188,25 @@ const SermonSeriesCard = ({
                     />
                   </>
                 </AspectRatio>
-                <VStack spacing={'0.5rem'} alignItems="left">
-                  <Text
-                    fontFamily={'DMSerifDisplay_Italic'}
-                    fontWeight={400}
-                    fontSize={{ base: '1.25rem', md: '1.75rem' }}
-                  >
-                    Description
-                  </Text>
-                  <Text
-                    fontFamily={'Manrope'}
-                    fontWeight={400}
-                    fontSize={{ base: '0.875rem', md: '1rem' }}
-                  >
-                    {sermonSeriesDescription}
-                  </Text>
-                </VStack>
+                {sermonSeriesDescription &&
+                  sermonSeriesDescription.trim().length > 0 && (
+                    <VStack spacing={'0.5rem'} alignItems="left">
+                      <Text
+                        fontFamily={'DMSerifDisplay_Italic'}
+                        fontWeight={400}
+                        fontSize={{ base: '1.25rem', md: '1.75rem' }}
+                      >
+                        Description
+                      </Text>
+                      <Text
+                        fontFamily={'Manrope'}
+                        fontWeight={400}
+                        fontSize={{ base: '0.875rem', md: '1rem' }}
+                      >
+                        {sermonSeriesDescription}
+                      </Text>
+                    </VStack>
+                  )}
               </VStack>
               <VStack spacing={'0.5rem'} alignItems="left" flex={1}>
                 <Text
