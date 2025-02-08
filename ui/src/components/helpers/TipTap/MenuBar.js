@@ -200,6 +200,16 @@ const MenuBar = ({ editor }) => {
         editor.view.dispatch(editor.view.state.tr.delete(from + 2, to + 2));
       }, [editor]),
     },
+    {
+      icon: 'delete-bin-line',
+      title: 'Delete Note',
+      action: useCallback(() => {
+        if (editor.isActive('userNotes')) {
+          editor.commands.deleteUserNotes();
+        }
+      }, [editor]),
+      isActive: () => editor.isActive('userNotes'),
+    },
   ];
 
   return (
