@@ -207,7 +207,7 @@ const NavBar = (props) => {
                   >
                     I'm new!
                   </Text>
-                  <Link href="/connect" id="navbar-connect">
+                  <Link href="/discover" id="navbar-connect">
                     CONNECT
                   </Link>
                 </Box>
