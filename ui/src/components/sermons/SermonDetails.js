@@ -133,14 +133,6 @@ const SermonDetails = (props) => {
       {sermon && allSermons && (
         <Container maxW="container.xl" mt={{ base: '0.75rem', lg: '1.75rem' }}>
           <Box mb={{ base: '1rem', md: '2.5rem' }}>
-            <Text
-              fontFamily={'DMSerifDisplay_Italic'}
-              fontWeight={400}
-              fontSize={{ base: '2rem', md: '3.375rem' }}
-              textAlign={{ base: 'center', md: 'left' }}
-            >
-              {sermonSeriesTitle}
-            </Text>
             <Box
               display="flex"
               flexDirection={{ base: 'column', lg: 'row' }}
@@ -187,7 +179,6 @@ const SermonDetails = (props) => {
                   </HStack>
                   <Text
                     py={{ base: '0', lg: '0.75rem' }}
-                    fontWeight={600}
                     fontSize={{ base: '0.875rem', md: '1rem' }}
                   >
                     {sermon.sermonDesc}
