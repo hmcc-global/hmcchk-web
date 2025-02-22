@@ -28,15 +28,16 @@ const OnlinePageButtons = () => {
         letterSpacing="0.185rem"
         fontWeight="700"
         height="2.813rem"
+        _hover={{ bgColor: '#DFE7FF' }}
       >
         NEED PRAYER?
       </Button>
       <Button
         width={['100%', '25%']}
         as="a"
-        href="/sermons"
+        href="/give"
         target="_blank"
-        id="past-sermons"
+        id="online-give"
         borderColor="#4A6EEB"
         border="1px solid var(--Blue-Primary, #4A6EEB)"
         borderRadius="15px"
@@ -45,8 +46,9 @@ const OnlinePageButtons = () => {
         letterSpacing="0.185rem"
         fontWeight="700"
         height="2.813rem"
+        _hover={{ bgColor: '#DFE7FF' }}
       >
-        PAST SERMONS
+        GIVING
       </Button>
       <Button
         width={['100%', '25%']}
@@ -63,15 +65,17 @@ const OnlinePageButtons = () => {
         letterSpacing="0.185rem"
         fontWeight="700"
         height="2.813rem"
+        _hover={{ bgColor: '#DFE7FF' }}
       >
         UPCOMING EVENTS
       </Button>
+
       <Button
         width={['100%', '25%']}
         as="a"
-        href="/give"
+        href="/sermons"
         target="_blank"
-        id="online-give"
+        id="past-sermons"
         borderColor="#4A6EEB"
         border="1px solid var(--Blue-Primary, #4A6EEB)"
         borderRadius="15px"
@@ -80,8 +84,9 @@ const OnlinePageButtons = () => {
         letterSpacing="0.185rem"
         fontWeight="700"
         height="2.813rem"
+        _hover={{ bgColor: '#DFE7FF' }}
       >
-        GIVING
+        PAST SERMONS
       </Button>
     </Stack>
   );

@@ -51,25 +51,11 @@ const OnlineSermonContainer = (props) => {
     }
   };
 
-  const getSermonTime = () => {
-    if (onlineSermon.sermonDateTime) {
-      return DateTime.fromISO(onlineSermon.sermonDateTime).toFormat('hh:mm a');
-    }
-  };
-
   return (
     <>
       {onlineSermon && (
         <Container maxW="container.xl" mt={{ base: '0.75rem', lg: '1.75rem' }}>
           <Box mb={{ base: '1rem', md: '2.5rem' }}>
-            <Text
-              fontFamily={'DMSerifDisplay_Italic'}
-              fontWeight={400}
-              fontSize={{ base: '2rem', md: '3.375rem' }}
-              textAlign={{ base: 'center', md: 'left' }}
-            >
-              {onlineSermon.sermonSeries}
-            </Text>
             <Box
               display="flex"
               flexDirection={{ base: 'column', lg: 'row' }}
@@ -117,7 +103,6 @@ const OnlineSermonContainer = (props) => {
                   </HStack>
                   <Text
                     py={{ base: '0', lg: '0.75rem' }}
-                    fontWeight={600}
                     fontSize={{ base: '0.875rem', md: '1rem' }}
                   >
                     {onlineSermon.sermonDescription}
@@ -148,13 +133,6 @@ const OnlineSermonContainer = (props) => {
               </Box>
             </Box>
           </Box>
-          <Text
-            fontFamily={'DMSerifDisplay_Italic'}
-            fontWeight={400}
-            fontSize={{ base: '1.75rem', md: '2rem' }}
-          >
-            Other Links
-          </Text>
           <OnlinePageButtons />
         </Container>
       )}
