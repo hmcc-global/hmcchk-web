@@ -41,6 +41,7 @@ import OnlineSermonNotesRedirect from './sermon-notes/OnlineSermonNotesRedirect'
 import SermonNotesContainer from './sermon-notes/SermonNotesContainer';
 import PrivacyPolicy from './screens/PrivacyPolicy';
 import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
+import ConnectMinistry from './discover/ConnectMinistry';
 
 const MainContainer = () => {
   return (
@@ -158,6 +159,12 @@ const MainContainer = () => {
           path="/discover"
           permissions={['public']}
           component={DiscoverPage}
+        />
+        <PrivateRoute
+          exact
+          path="/discover/connect"
+          permissions={['public']}
+          component={ConnectMinistry}
         />
         <PrivateRoute
           exact
