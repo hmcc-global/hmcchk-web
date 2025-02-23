@@ -6,7 +6,6 @@ import {
   TabPanels,
   TabPanel,
   Box,
-  useBreakpointValue,
   Image,
   HStack,
   Text,
@@ -26,8 +25,6 @@ const OnlinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
   const [slideIndex, setSlideIndex] = useState(0);
 
   const slider = useRef(null);
-
-  const isMobile = useBreakpointValue({ base: true, lg: false });
 
   const refreshSermonNotes = () => {
     setNoteId(noteId + 1);
@@ -66,19 +63,21 @@ const OnlinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
       text: 'Sermon Notes',
       image: '/images/sermons/sermon_icon_unclicked.svg',
     },
-    {
-      text: 'More in Series',
-      image: '/images/sermons/more_series_unclicked.svg',
-    },
+
     {
       text: 'Need Prayer?',
       image: '/images/sermons/prayer_icon_unclicked.svg',
     },
+    { text: 'Giving', image: '/images/sermons/giving_icon_unclicked.svg' },
     {
       text: 'Upcoming Events',
       image: '/images/sermons/event_icon_unclicked.svg',
     },
-    { text: 'Giving', image: '/images/sermons/giving_icon_unclicked.svg' },
+
+    {
+      text: 'More in Series',
+      image: '/images/sermons/more_series_unclicked.svg',
+    },
   ];
 
   const sliderStyle = {
@@ -88,15 +87,17 @@ const OnlinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
   };
 
   const handleClick = (index) => {
-    if (index === 0 || index === 1) {
+    if (index === 0) {
       setSlideIndex(index);
     }
-    if (index === 2) {
+    if (index === 1) {
       window.open('https://bit.ly/hmcc-prayer', '_blank');
+    } else if (index === 2) {
+      window.open('/give', '_blank');
     } else if (index === 3) {
       window.open('/events', '_blank');
     } else if (index === 4) {
-      window.open('/give', '_blank');
+      setSlideIndex(1);
     }
   };
 
