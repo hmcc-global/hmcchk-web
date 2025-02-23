@@ -7,7 +7,7 @@ import LoginContainer from './auth/LoginContainer';
 import SignupContainer from './auth/SignupContainer';
 import EventsPage from './events/EventsPage';
 import VisitUsPage from './visit-us/VisitUsPage';
-import DiscoverPage from './connect/DiscoverPage';
+import DiscoverPage from './discover/DiscoverPage';
 import PrivateRoute from './helpers/PrivateRoute';
 import Signup from './auth/Signup';
 import HomeContainer from './home/HomeContainer';
@@ -41,6 +41,7 @@ import OnlineSermonNotesRedirect from './sermon-notes/OnlineSermonNotesRedirect'
 import SermonNotesContainer from './sermon-notes/SermonNotesContainer';
 import PrivacyPolicy from './screens/PrivacyPolicy';
 import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
+import ConnectMinistry from './discover/ConnectMinistry';
 
 const MainContainer = () => {
   return (
@@ -158,6 +159,12 @@ const MainContainer = () => {
           path="/discover"
           permissions={['public']}
           component={DiscoverPage}
+        />
+        <PrivateRoute
+          exact
+          path="/discover/connect"
+          permissions={['public']}
+          component={ConnectMinistry}
         />
         <PrivateRoute
           exact
