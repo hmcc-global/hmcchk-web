@@ -6,11 +6,13 @@ import {
 } from '@chakra-ui/react';
 import MinistryCard from './MinistryCard';
 import FaqConnect from './FaqConnect';
+import BackButton from './BackButton';
 
 const ConnectMinistry = (props) => {
   return (
-    <Box background="linear-gradient(151.15deg, rgba(223, 231, 255, 1.0) 11.18%, rgba(255, 255, 255, 0.3) 42.46%, rgba(202, 220, 255, 0.3) 76.7%), linear-gradient(194.34deg, #FFE6E6 1.83%, #FFFFFF 51.22%, #D6FFEA 99.59%)">
-      <Container maxW="container.lg" py={10}>
+    <Box>
+      <BackButton />
+      <Container maxW="container.lg" py={10}  pt="60px">
         <VStack spacing={[4, 7]} align={["center","stretch"]}>
           <Text 
             color="#0C0C20"
@@ -26,7 +28,7 @@ const ConnectMinistry = (props) => {
           <Text 
             color="#0C0C20"
             fontFamily="Manrope"
-            fontSize={['0.85rem', '0.9rem', '1rem']} // Responsive font size
+            fontSize={['0.85rem', '0.9rem', '1rem']}
             fontStyle="normal"
             fontWeight="400"
             lineHeight="normal"
