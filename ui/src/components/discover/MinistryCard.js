@@ -58,10 +58,8 @@ const MinistryCard = (props) => {
           key={index}
           flexBasis={["100%", "calc(33.333% - 16px)"]} // 1 card per row on mobile, 3 cards per row on desktop
           maxW={["100%", "calc(33.333% - 16px)"]} // Ensure cards don't exceed the width
-          borderWidth="1px"
-          borderRadius="20px"
-          // p={4}
-          boxShadow="md"
+          border={"1px solid #8C8C8C"}
+          borderRadius="16px"
           textAlign="center"
           overflow="hidden"
         >
@@ -93,7 +91,7 @@ const MinistryCard = (props) => {
           {card.showButton && ( // Only render the button if `showButton` is true
             <Box p={4}>
               <Button 
-               bg={"#EBAC09"}
+               bg={"#21A0A7"}
                borderRadius={"15px"}
                width="100%"
                textColor={"white"}

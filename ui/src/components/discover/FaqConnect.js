@@ -8,8 +8,7 @@ import {
   Text,
   Link,
 } from '@chakra-ui/react';
-import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
-// import { LuPlus } from "react-icons/lu";
+import { LuPlus, LuMinus } from "react-icons/lu";
 
 const FaqConnect = (props) => {
   // TODO: verify expand icon
@@ -24,12 +23,12 @@ const FaqConnect = (props) => {
         FAQs
       </Text>
       <AccordionItem 
-        border={["0.5px solid #EBAC09","0.5px solid #D46764"]}
+        border={["0.5px solid #21A0A7"]}
       >
         {({isExpanded }) => ( // Destructure isExpanded here
         <> 
         <h4>
-          <AccordionButton fontWeight={700} fontSize="lg" p={4} bg={["#F5F0E0", "#F1E6E6"]}>
+          <AccordionButton fontWeight={700} fontSize="lg" p={4} bg={["#DBF1F1"]}>
             <Box 
               flex="1" 
               textAlign="left" 
@@ -39,15 +38,15 @@ const FaqConnect = (props) => {
               When do LIFE Groups happen?
             </Box>
             {isExpanded ? (
-              <AccordionIcon as={AiFillMinusCircle}  size="24px" />
+              <AccordionIcon as={LuMinus}  size="24px" />
             ) : (
-              <AccordionIcon as={AiFillPlusCircle}  size="24px" />
+              <AccordionIcon as={LuPlus}  size="24px" />
             )}
           </AccordionButton>
         </h4>
         <AccordionPanel 
           pb={4}
-          borderTop={["1.5px solid #EBAC09", "1.5px solid #D46764"]}
+          borderTop={["1.5px solid #21A0A7"]}
           bg={"white"}
           fontFamily={"Manrope"}
           fontSize={['0.95rem', '1rem', '1.1rem']}
@@ -69,11 +68,11 @@ const FaqConnect = (props) => {
       </AccordionItem>
 
       <AccordionItem 
-        border={["0.5px solid #EBAC09","0.5px solid #D46764"]}
+        border={["0.5px solid #21A0A7"]}
       >
         {({isExpanded }) => ( // Destructure isExpanded here
         <> 
-        <AccordionButton fontWeight={700} fontSize="lg" p={4} bg={["#F5F0E0", "#F1E6E6"]}>
+        <AccordionButton fontWeight={700} fontSize="lg" p={4} bg={["#DBF1F1"]}>
             <Box 
               flex="1" 
               textAlign="left" 
@@ -84,14 +83,14 @@ const FaqConnect = (props) => {
             Christian?
           </Box>
           {isExpanded ? (
-              <AccordionIcon as={AiFillMinusCircle}  size="24px" />
+              <AccordionIcon as={LuMinus}  size="24px" />
             ) : (
-              <AccordionIcon as={AiFillPlusCircle}  size="24px" />
+              <AccordionIcon as={LuPlus}  size="24px" />
             )}
         </AccordionButton>
         <AccordionPanel 
           pb={4}
-          borderTop={["1.5px solid #EBAC09", "1.5px solid #D46764"]}
+          borderTop={["1.5px solid #21A0A7"]}
           bg={"white"}
           fontFamily={"Manrope"}
           fontSize={['0.95rem', '1rem', '1.1rem']}
@@ -105,13 +104,12 @@ const FaqConnect = (props) => {
       </AccordionItem>
 
       <AccordionItem 
-        
-        border={["0.5px solid #EBAC09","0.5px solid #D46764"]}
+        border={["0.5px solid #21A0A7"]}
       >
         {({isExpanded }) => ( // Destructure isExpanded here
         <> 
         <h2>
-          <AccordionButton fontWeight={700} fontSize="lg" p={4} bg={["#F5F0E0", "#F1E6E6"]}>
+          <AccordionButton fontWeight={700} fontSize="lg" p={4} bg={["#DBF1F1"]}>
             <Box 
               flex="1" 
               textAlign="left" 
@@ -122,15 +120,15 @@ const FaqConnect = (props) => {
               Group, what can I do?
             </Box>
             {isExpanded ? (
-              <AccordionIcon as={AiFillMinusCircle}  size="24px" />
+              <AccordionIcon as={LuMinus}  size="24px" />
             ) : (
-              <AccordionIcon as={AiFillPlusCircle}  size="24px" />
+              <AccordionIcon as={LuPlus}  size="24px" />
             )}
           </AccordionButton>
         </h2>
         <AccordionPanel 
           pb={4}
-          borderTop={["1.5px solid #EBAC09", "1.5px solid #D46764"]}
+          borderTop={["1.5px solid #21A0A7"]}
           bg={"white"}
           fontFamily={"Manrope"}
           fontSize={['0.95rem', '1rem', '1.1rem']}
@@ -144,12 +142,12 @@ const FaqConnect = (props) => {
       </AccordionItem>
 
       <AccordionItem 
-        border={["0.5px solid #EBAC09","0.5px solid #D46764"]}
+        border={["0.5px solid #21A0A7"]}
       >
         {({isExpanded }) => ( // Destructure isExpanded here
         <> 
         <h2>
-          <AccordionButton fontWeight={700} fontSize="lg" p={4} bg={["#F5F0E0","#F1E6E6"]}>
+          <AccordionButton fontWeight={700} fontSize="lg" p={4} bg={["#DBF1F1"]}>
             <Box 
               flex="1" 
               textAlign="left" 
@@ -159,15 +157,15 @@ const FaqConnect = (props) => {
               What is the weather policy for the LIFE Group gatherings?
             </Box>
             {isExpanded ? (
-              <AccordionIcon as={AiFillMinusCircle}  size="24px" />
+              <AccordionIcon as={LuMinus}  size="24px" />
             ) : (
-              <AccordionIcon as={AiFillPlusCircle}  size="24px" />
+              <AccordionIcon as={LuPlus}  size="24px" />
             )}
           </AccordionButton>
         </h2>
         <AccordionPanel 
           pb={4}
-          borderTop={["1.5px solid #EBAC09", "1.5px solid #D46764"]}
+          borderTop={["1.5px solid #21A0A7"]}
           bg={"white"}
           fontFamily={"Manrope"}
           fontSize={['0.95rem', '1rem', '1.1rem']}
@@ -193,12 +191,12 @@ const FaqConnect = (props) => {
       </AccordionItem>
 
       <AccordionItem 
-        border={["0.5px solid #EBAC09","0.5px solid #D46764"]}
+        border={["0.5px solid #21A0A7"]}
       >
         {({isExpanded }) => ( // Destructure isExpanded here
         <> 
         <h2>
-          <AccordionButton fontWeight={700} fontSize="lg" p={4} bg={["#F5F0E0","#F1E6E6"]}>
+          <AccordionButton fontWeight={700} fontSize="lg" p={4} bg={["#DBF1F1"]}>
             <Box 
               flex="1" 
               textAlign="left" 
@@ -208,15 +206,15 @@ const FaqConnect = (props) => {
               How do I learn more about the different ministries?
             </Box>
             {isExpanded ? (
-              <AccordionIcon as={AiFillMinusCircle}  size="24px" />
+              <AccordionIcon as={LuMinus}  size="24px" />
             ) : (
-              <AccordionIcon as={AiFillPlusCircle}  size="24px" />
+              <AccordionIcon as={LuPlus}  size="24px" />
             )}
           </AccordionButton>
         </h2>
         <AccordionPanel 
           pb={4}
-          borderTop={["1.5px solid #EBAC09", "1.5px solid #D46764"]}
+          borderTop={["1.5px solid #21A0A7"]}
           bg={"white"}
           fontFamily={"Manrope"}
           fontSize={['0.95rem', '1rem', '1.1rem']}
@@ -241,12 +239,12 @@ const FaqConnect = (props) => {
       </AccordionItem>
 
       <AccordionItem 
-        border={["0.5px solid #EBAC09","0.5px solid #D46764"]}
+        border={["0.5px solid #21A0A7"]}
       >
         {({isExpanded }) => ( // Destructure isExpanded here
         <> 
         <h2>
-          <AccordionButton fontWeight={700} fontSize="lg" p={4} bg={["#F5F0E0", "#F1E6E6"]}>
+          <AccordionButton fontWeight={700} fontSize="lg" p={4} bg={["#DBF1F1"]}>
             <Box 
               flex="1" 
               textAlign="left" 
@@ -256,15 +254,15 @@ const FaqConnect = (props) => {
               How do I learn more about HMCC?
             </Box>
             {isExpanded ? (
-              <AccordionIcon as={AiFillMinusCircle}  size="24px" />
+              <AccordionIcon as={LuMinus}  size="24px" />
             ) : (
-              <AccordionIcon as={AiFillPlusCircle}  size="24px" />
+              <AccordionIcon as={LuPlus}  size="24px" />
             )}
           </AccordionButton>
         </h2>
         <AccordionPanel 
           pb={4}
-          borderTop={["1.5px solid #EBAC09", "1.5px solid #D46764"]}
+          borderTop={["1.5px solid #21A0A7"]}
           bg={"white"}
           fontFamily={"Manrope"}
           fontSize={['0.95rem', '1rem', '1.1rem']}
