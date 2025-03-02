@@ -1,32 +1,28 @@
-import { AspectRatio, Box, Image, Text, VStack, Stack } from '@chakra-ui/react';
+import { Box, Icon, Text, VStack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import { MdOutlineSmartDisplay } from 'react-icons/md';
 
-const SermonCard = ({ sermonData, allSermons }) => {
-  const [sermonImage, setSermonImage] = useState(
-    process.env.PUBLIC_URL + '/images/sermons/placeholder.svg'
-  );
-  const [sermonDate, setSermonDate] = useState('');
+const SermonCard = ({ sermonData }) => {
+  const [sermonTitlePrefix, setSermonTitlePrefix] = useState('');
+
+  const pathId = useLocation().pathname.split('/').reverse()[0];
+
+  const isSelected = pathId === sermonData.id.toString();
 
   useEffect(() => {
-    if (sermonData) {
-      if (sermonData.sermonSeries && sermonData.sermonSeries[0].image !== null)
-        setSermonImage(sermonData.sermonSeries[0].image.sourceUrl);
-      if (sermonData.datePreached) {
-        setSermonDate(
-          DateTime.fromISO(sermonData.datePreached).toFormat('LLLL dd, yyyy')
-        );
-      }
+    if (sermonData.title.includes('Part')) {
+      setSermonTitlePrefix(
+        sermonData.sermonSeries[0].name + ' Sermon Series - '
+      );
+    } else {
+      setSermonTitlePrefix('');
     }
   }, [sermonData]);
 
   const sermonCardStyle = {
-    borderWidth: '1px',
-    borderRadius: '20px',
     overflow: 'hidden',
-    bg: 'white',
-    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.15)',
     align: 'stretch',
     maxW: '100%',
   };
@@ -36,59 +32,48 @@ const SermonCard = ({ sermonData, allSermons }) => {
       style={sermonCardStyle}
       to={{
         pathname: `/sermons/${sermonData.id}`,
-        state: { sermonData: sermonData, allSermons: allSermons },
+        state: { sermonData: sermonData },
       }}
     >
-      <Stack direction={['row', 'column']}>
-        <AspectRatio minW={{ base: '36%', md: '18%' }} ratio={16 / 9}>
-          <>
-            <Image
-              borderTopRadius={['0', '20']}
-              borderLeftRadius={['20', '0']}
-              src={sermonImage}
-              objectFit="cover"
-            />
-          </>
-        </AspectRatio>
-        <Box position="absolute" left="100%" top="50%">
-          <AspectRatio width="20%" ratio={1 / 1}>
-            <Image
-              borderRadius="100%"
-              src={process.env.PUBLIC_URL + '/images/PlayButton.png'}
-            />
-          </AspectRatio>
-        </Box>
-        <Box
-          overflow="hidden"
-          position="relative"
-          paddingLeft={[2, 4]}
-          paddingRight={[2, 4]}
-          paddingBottom={[2, 4]}
-          paddingTop={[1, 2]}
-        >
-          <VStack alignItems="left" spacing={1} fontFamily="Manrope">
-            <Text
-              fontSize={{ base: 'sm', md: 'lg' }}
-              fontWeight={['600', '800']}
-              isTruncated
-              fontFamily="DMSerifDisplay_Italic"
-            >
-              {sermonData.title}
-            </Text>
-            <Text fontSize={{ base: 'xs', md: 'sm' }} isTruncated>
-              {sermonData.sermonSeries[0].name}
-            </Text>
-            <Stack direction={['column', 'row']} spacing="auto">
-              <Text fontSize={{ base: 'xs', md: 'sm' }} isTruncated>
-                {sermonData.speaker[0].name}
-              </Text>
-              <Text fontSize={{ base: 'xs', md: 'sm' }} isTruncated>
-                {sermonDate}
-              </Text>
-            </Stack>
-          </VStack>
-        </Box>
-      </Stack>
+      <Box
+        display="flex"
+        flexDir={'row'}
+        alignItems={'center'}
+        justifyContent={'flex-start'}
+        gap={'1rem'}
+        px={'1rem'}
+        py={'0.75rem'}
+        border="1px solid"
+        borderColor={isSelected ? '#4A6EEB' : '#DFE7FF'}
+        borderRadius={'5px'}
+        bg={isSelected ? '#DFE7FF' : 'transparent'}
+        _hover={{ borderColor: '#4A6EEB' }}
+      >
+        <Icon as={MdOutlineSmartDisplay} boxSize="2rem" color={'#4A6EEB'} />
+        <VStack alignItems={'left'} spacing={'0.25rem'}>
+          <Text
+            fontSize={{ base: '0.75rem', md: '0.875rem' }}
+            fontWeight={isSelected ? 700 : 400}
+            noOfLines={2}
+          >
+            {sermonTitlePrefix + sermonData.title}
+          </Text>
+          <Text
+            fontSize={{ base: '0.625rem', md: '0.75rem' }}
+            color={isSelected ? 'black' : '#818181'}
+            isTruncated
+          >
+            {'Speaker: ' + sermonData.speaker[0].name}
+          </Text>
+          <Text
+            fontSize={{ base: '0.625rem', md: '0.75rem' }}
+            color={isSelected ? 'black' : '#818181'}
+            isTruncated
+          >
+            {'Passage: ' + sermonData.passage}
+          </Text>
+        </VStack>
+      </Box>
     </Link>
   );
 };

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
-import { Box, Container, Heading } from '@chakra-ui/react';
+import { Box, Container, Heading, Text } from '@chakra-ui/react';
 import UpcomingSermon from './UpcomingSermon';
-import SermonCardList from './SermonCardList';
+import SermonSeriesCardList from './SermonSeriesCardList';
 import CurrentSermon from './CurrentSermon';
 import { DateTime } from 'luxon';
 import { getRenderDate } from '../helpers/eventsHelpers';
@@ -82,31 +82,32 @@ const SermonContainer = (props) => {
   return (
     <>
       {!onlineSermon && <UpcomingSermon upcoming={events} />}
-      <Container maxW="container.lg">
+      <Container maxW="container.xl" mt={{ base: '0.75rem', lg: '1.75rem' }}>
         <Box
-          marginTop="20px"
-          borderWidth="1px"
-          borderRadius="20"
-          bgImage={`url('${process.env.PUBLIC_URL}/images/sermons/sermons-banner.jpg')`}
-          bgPosition="center"
-          bgSize="cover"
-          flex={1}
-          textAlign="center"
+          display="flex"
+          flexDirection="column"
+          alignItems={{ base: 'center', md: 'flex-start' }}
           justifyContent="center"
-          px={[8, 10]}
-          py={[8, 12]}
+          gap="0.5rem"
+          mb={{ base: '1rem', md: '2.5rem' }}
         >
           <Heading
-            size="3xl"
-            color="white"
-            fontWeight="900"
+            fontSize={{ base: '2.25rem', md: '3.75rem' }}
+            color="#272727"
+            fontWeight="400"
             fontFamily="DMSerifDisplay_Italic"
           >
             Sermons
           </Heading>
+          <Text
+            fontSize={{ base: '0.75rem', md: '1.125rem' }}
+            fontWeight={{ base: 600, md: 700 }}
+          >
+            Check out the latest sermons at HMCC of Hong Kong!
+          </Text>
         </Box>
         <CurrentSermon currentSermon={currentSermon} isOnline={onlineSermon} />
-        <SermonCardList allSermons={sermons} />
+        <SermonSeriesCardList allSermons={sermons} />
       </Container>
     </>
   );

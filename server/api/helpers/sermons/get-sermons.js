@@ -5,17 +5,33 @@ const he = require('he');
 // e.g. Sermon Series - Part 1: Sermon Title -> Part 1: Sermon Title
 // e.g. Sermon Series - Part 1 -> Part 1
 // e.g. Encounter: Sermon Title -> Encounter: Sermon Title
-const parseSermonTitle = (title) => {
+const parseHtmlText = (text) => {
   // eslint-disable-next-line eqeqeq
-  if (title == null) return '';
+  if (text == null) return '';
 
-  const decodedTitle = he.decode(title);
+  const decodedTitle = he.decode(text);
   const pattern = /.*(Part \d+.*)/g;
   const captured = pattern.exec(decodedTitle);
 
   // eslint-disable-next-line eqeqeq
   return captured != null && captured[1] != null && captured[1] !== '' ? captured[1] : decodedTitle;
 };
+
+const convertToMarkdown = (htmlText) => {
+  // 1. Remove HTML tags: Improved regular expression for better robustness.
+  const textWithoutHTML = htmlText.replace(/<\/?[^>]+(>|$)/g, '');
+
+  // 2. Convert paragraph tags to Markdown:  Maintain consistency.
+  let markdownText = textWithoutHTML.replace(/<\/p>/g, '\n\n').replace(/<p>/g, '');
+
+
+  // 3. Handle special characters:  Include 'right single quote' and other needed characters.
+  markdownText = markdownText.replace(/&#8211;/g, '--')
+                            .replace(/&#8217;/g, "'"); // Add this line to handle right single quotes
+
+  return markdownText;
+};
+
 
 const arrayReducer = (id, list) => {
   return id.reduce((acc, s) => {
@@ -34,13 +50,13 @@ const getSermonPreachedDate = (sermon) => {
 const transformSermon = (sermon, speakers, sermonSeries, serviceTypes) => {
   return {
     id: sermon.id,
-    title: parseSermonTitle(sermon.title.rendered),
+    title: parseHtmlText(sermon.title.rendered),
     speaker: arrayReducer(sermon.wpfc_preacher, speakers),
     datePreached: getSermonPreachedDate(sermon),
     serviceType: arrayReducer(sermon.wpfc_service_type, serviceTypes),
     passage: sermon.bible_passage,
     sermonSeries: arrayReducer(sermon.wpfc_sermon_series, sermonSeries),
-    sermonDesc: sermon.sermon_description,
+    sermonDesc: convertToMarkdown(sermon.content.rendered),
     sermonAudioUrl: sermon.sermon_audio,
     sermonAudioDuration: sermon.sermon_audio_duration,
     sermonVideoUrl: sermon.sermon_video_url,

@@ -1,0 +1,18 @@
+<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Clip path group">
+<mask id="mask0_4077_1542" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="23" height="22">
+<g id="clip0">
+<path id="Vector" d="M0.75 0.5H21.75V21.5H0.75V0.5Z" fill="white" stroke="white"/>
+</g>
+</mask>
+<g mask="url(#mask0_4077_1542)">
+<g id="Group">
+<path id="Vector_2" d="M17.2083 5.04169H2.54167V21.5417H17.2083V5.04169Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"/>
+<path id="Vector_3" d="M5.29167 1.375H20.875V19.7083" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"/>
+<path id="Vector_4" d="M6.20834 9.625H13.5417" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"/>
+<path id="Vector_5" d="M6.20834 13.2917H13.5417" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"/>
+<path id="Vector_6" d="M6.20834 16.9583H9.87501" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"/>
+</g>
+</g>
+</g>
+</svg>
