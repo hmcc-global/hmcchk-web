@@ -108,6 +108,7 @@ const PlanAVisit = (props) => {
             borderRadius="0.875rem"
             p={6}
             mr={[0, 6]}
+            mb={[6, 0]}
             flex="1.5"
             fontFamily="Manrope"
           >
