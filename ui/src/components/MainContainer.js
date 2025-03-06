@@ -7,7 +7,7 @@ import LoginContainer from './auth/LoginContainer';
 import SignupContainer from './auth/SignupContainer';
 import EventsPage from './events/EventsPage';
 import VisitUsPage from './visit-us/VisitUsPage';
-import DiscoverPage from './connect/DiscoverPage';
+import DiscoverPage from './discover/DiscoverPage';
 import PrivateRoute from './helpers/PrivateRoute';
 import Signup from './auth/Signup';
 import HomeContainer from './home/HomeContainer';
