@@ -109,7 +109,7 @@ const MainMenu = ({ login, onClose }) => {
                   px="0.65em"
                   py="1"
                 >
-                  <Text>Connect</Text>
+                  <Text>Discover</Text>
                   <ChevronRightIcon boxSize={6} />
                 </Flex>
               </Link>
