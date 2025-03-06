@@ -1,8 +1,15 @@
-import { Box, Container, VStack, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Container,
+  VStack,
+  Text,
+  Button,
+  HStack,
+  Image,
+} from '@chakra-ui/react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -32,11 +39,87 @@ const DiscoverPage = () => {
     ],
   };
 
+  const content = {
+    visit: {
+      title: 'Plan a Visit',
+      image: '/images/location.svg',
+      description:
+        "Sunday Celebration is HMCC's weekend gathering where everyone in the church comes together to receive God's message, worship in community and enjoy fellowship. Everybody's welcome!",
+      link: '',
+      button_color: '#EDB115',
+    },
+    lifeGroup: {
+      title: 'Join a \n LIFE Group',
+      image: '/images/people-community.svg',
+      description:
+        'There is no better way to get a taste of who we are and what we believe in then to check out one of our LIFE Groups. This is an opportunity to experience the life-changing power of Biblical community with Love, Investment, Faith, and Enjoyment.',
+      link: '',
+      button_color: '#D46764',
+    },
+    ministry: {
+      title: 'Connect with Our Ministries',
+      image: '/images/compass-discover-line.svg',
+      description:
+        'At Harvest Mission Community Church, we are actively reaching out to people from all walks of life, specifically youths, college students, working adults, and families.',
+      link: '',
+      button_color: '#21A0A7',
+    },
+  };
+
+  const ContentBox = (content) => {
+    return (
+      <VStack
+        alignItems="start"
+        justifyContent="space-between"
+        h="90%"
+        px="4"
+        my="3"
+      >
+        <HStack justifyContent="space-between" w="100%">
+          <Text
+            fontFamily="DMSerifDisplay_Italic"
+            fontSize="2.625rem"
+            fontWeight="400"
+            whiteSpace="pre-line"
+            lineHeight="94%"
+            letterSpacing="-2px"
+          >
+            {content.title}
+          </Text>
+          <Image src={process.env.PUBLIC_URL + content.image} />
+        </HStack>
+        <Text fontFamily="Manrope" fontSize="1.125rem" fontWeight="400">
+          {content.description}
+        </Text>
+        <Button
+          fontFamily="Manrope"
+          fontSize="1rem"
+          borderRadius="0.938rem"
+          backgroundColor={content.button_color}
+          textColor="#F6FAFF"
+          letterSpacing="0.25rem"
+          border="1px solid #0C0C20;"
+          mx="4"
+          marginY="6"
+          fontWeight="700"
+        >
+          LEARN MORE
+        </Button>
+      </VStack>
+    );
+  };
+
   return (
     <Box>
-      <Container maxW="100%" py={10} px={0} fontFamily="DMSerifDisplay_Italic">
+      <Container
+        maxW="100%"
+        paddingTop={5}
+        paddingBottom={10}
+        px={0}
+        fontFamily="DMSerifDisplay_Italic"
+      >
         <VStack alignItems="start" gap={0}>
-          <Box px="7rem">
+          <Box px="6rem" mb="5">
             <Text fontWeight="400" fontSize="3.75rem">
               Discover HMCC of Hong Kong
             </Text>
@@ -115,6 +198,37 @@ const DiscoverPage = () => {
               </Box>
             </Slider>
           </Box>
+          <VStack w="100%" px="6rem">
+            <HStack w="100%" h="21.5rem" justifyContent="space-between">
+              <Box
+                w="50%"
+                borderRadius="0.875rem"
+                border="0.5px solid var(--Blue-Primary, #4A6EEB);"
+                p="3"
+                h="100%"
+              >
+                {ContentBox(content.visit)}
+              </Box>
+              <Box
+                w="50%"
+                borderRadius="0.875rem"
+                border="0.5px solid var(--Blue-Primary, #4A6EEB);"
+                p="3"
+                h="100%"
+              >
+                {ContentBox(content.lifeGroup)}
+              </Box>
+            </HStack>
+            <Box
+              w="100%"
+              borderRadius="0.875rem"
+              border="0.5px solid var(--Blue-Primary, #4A6EEB);"
+              p="3"
+              h="15rem"
+            >
+              {ContentBox(content.ministry)}
+            </Box>
+          </VStack>
         </VStack>
       </Container>
     </Box>
