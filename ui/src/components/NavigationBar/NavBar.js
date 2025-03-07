@@ -186,11 +186,6 @@ const NavBar = (props) => {
                 isInline
               >
                 <Box position="relative">
-                  <Link href="/visit-us" id="navbar-visit">
-                    VISIT
-                  </Link>
-                </Box>
-                <Box position="relative">
                   <Link href="/about-us" id="navbar-about">
                     ABOUT
                   </Link>
