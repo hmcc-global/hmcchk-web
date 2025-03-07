@@ -72,35 +72,40 @@ const DiscoverPage = () => {
         alignItems="start"
         justifyContent="space-between"
         h="90%"
-        px="4"
-        my="3"
+        px={{ base: '1', md: '4' }}
+        my={{ base: '1', md: '3' }}
+        gap={{ base: '3', md: 'none' }}
       >
         <HStack justifyContent="space-between" w="100%">
           <Text
             fontFamily="DMSerifDisplay_Italic"
-            fontSize="2.625rem"
+            fontSize={{ base: '1.5rem', md: '2.625rem' }}
             fontWeight="400"
-            whiteSpace="pre-line"
+            whiteSpace={{ base: 'none', md: 'pre-line' }}
             lineHeight="94%"
-            letterSpacing="-2px"
+            letterSpacing={{ base: '0', md: '-2px' }}
           >
             {content.title}
           </Text>
           <Image src={process.env.PUBLIC_URL + content.image} />
         </HStack>
-        <Text fontFamily="Manrope" fontSize="1.125rem" fontWeight="400">
+        <Text
+          fontFamily="Manrope"
+          fontSize={{ base: '0.875rem', md: '1.125rem' }}
+          fontWeight="400"
+        >
           {content.description}
         </Text>
         <Button
           fontFamily="Manrope"
-          fontSize="1rem"
+          fontSize="0.9rem"
           borderRadius="0.938rem"
           backgroundColor={content.button_color}
           textColor="#F6FAFF"
           letterSpacing="0.25rem"
           border="1px solid #0C0C20;"
-          mx="4"
-          marginY="6"
+          px={{ base: '1.2rem', md: '2rem' }}
+          py={{ base: '1rem', md: '1.4rem' }}
           fontWeight="700"
         >
           LEARN MORE
@@ -119,11 +124,18 @@ const DiscoverPage = () => {
         fontFamily="DMSerifDisplay_Italic"
       >
         <VStack alignItems="start" gap={0}>
-          <Box px="6rem" mb="5">
-            <Text fontWeight="400" fontSize="3.75rem">
+          <Box px={{ base: '5', md: '6rem' }} mb="5">
+            <Text
+              fontWeight="400"
+              fontSize={{ base: '2.25rem', md: '3.75rem' }}
+            >
               Discover HMCC of Hong Kong
             </Text>
-            <Text fontFamily="Manrope" fontWeight="700" fontSize="1.125rem">
+            <Text
+              fontFamily="Manrope"
+              fontWeight="700"
+              fontSize={{ base: '0.875rem', md: '1.125rem' }}
+            >
               New here or just wanting to discover
             </Text>
           </Box>
@@ -198,8 +210,17 @@ const DiscoverPage = () => {
               </Box>
             </Slider>
           </Box>
-          <VStack w="100%" px="6rem">
-            <HStack w="100%" h="21.5rem" justifyContent="space-between">
+          <VStack
+            w="100%"
+            px={{ base: '5', md: '6rem' }}
+            gap={{ base: '3', md: 'none' }}
+          >
+            <HStack
+              w="100%"
+              h="22rem"
+              display={{ base: 'none', md: 'flex' }}
+              justifyContent="space-between"
+            >
               <Box
                 w="50%"
                 borderRadius="0.875rem"
@@ -220,11 +241,31 @@ const DiscoverPage = () => {
               </Box>
             </HStack>
             <Box
+              display={{ base: 'flex', md: 'none' }}
               w="100%"
               borderRadius="0.875rem"
               border="0.5px solid var(--Blue-Primary, #4A6EEB);"
               p="3"
-              h="15rem"
+              h="max-content"
+            >
+              {ContentBox(content.visit)}
+            </Box>
+            <Box
+              display={{ base: 'flex', md: 'none' }}
+              w="100%"
+              borderRadius="0.875rem"
+              border="0.5px solid var(--Blue-Primary, #4A6EEB);"
+              p="3"
+              h="max-content"
+            >
+              {ContentBox(content.lifeGroup)}
+            </Box>
+            <Box
+              w="100%"
+              borderRadius="0.875rem"
+              border="0.5px solid var(--Blue-Primary, #4A6EEB);"
+              p="3"
+              h={{ base: 'max-content', md: '15rem' }}
             >
               {ContentBox(content.ministry)}
             </Box>
