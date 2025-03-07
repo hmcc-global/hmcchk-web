@@ -6,7 +6,6 @@ import SermonDetails from './sermons/SermonDetails';
 import LoginContainer from './auth/LoginContainer';
 import SignupContainer from './auth/SignupContainer';
 import EventsPage from './events/EventsPage';
-import VisitUsPage from './visit-us/VisitUsPage';
 import DiscoverPage from './discover/DiscoverPage';
 import PrivateRoute from './helpers/PrivateRoute';
 import Signup from './auth/Signup';
@@ -147,12 +146,7 @@ const MainContainer = () => {
           permissions={['public']}
           component={EventsPage}
         />
-        <PrivateRoute
-          exact
-          path="/visit-us"
-          permissions={['public']}
-          component={VisitUsPage}
-        />
+
         <PrivateRoute
           exact
           path="/discover"
