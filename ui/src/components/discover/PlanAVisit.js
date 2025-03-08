@@ -197,7 +197,7 @@ const PlanAVisit = (props) => {
             <Box display="flex" justifyContent={['center', 'flex-start']}>
               <Button
                 mt={6}
-                mb={[0,6]}
+                mb={[0, 6]}
                 p={6}
                 bgColor="#EBAC09"
                 variant="solid"
@@ -206,7 +206,7 @@ const PlanAVisit = (props) => {
                 borderRadius="0.938rem"
                 _hover={{ bgColor: '#BE8E11' }}
                 href="https://bit.ly/TCenterDirections"
-                isExternal
+                target="_blank"
               >
                 DIRECTIONS
               </Button>
@@ -229,8 +229,9 @@ const PlanAVisit = (props) => {
 
         <Flex direction="column" align={['center', 'stretch']}>
           <Box
+            bgColor={['#F5F0E0', 'transparent']}
             borderWidth="0.031rem"
-            borderColor="#0C0C20"
+            borderColor={['transparent', '#0C0C20']}
             borderRadius="0.875rem"
             p={6}
             mt={6}
@@ -265,7 +266,7 @@ const PlanAVisit = (props) => {
                   borderRadius="0.938rem"
                   _hover={{ bgColor: '#BE8E11' }}
                   href="https://hongkong.hmcc.net/online/"
-                  isExternal
+                  target="_blank"
                 >
                   JOIN ONLINE
                 </Button>
