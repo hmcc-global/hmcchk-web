@@ -124,7 +124,7 @@ const DiscoverPage = () => {
         fontFamily="DMSerifDisplay_Italic"
       >
         <VStack alignItems="start" gap={0}>
-          <Box px={{ base: '5', md: '6rem' }} mb="5">
+          <Box px={{ base: '5', md: '5', lg: '6rem' }} mb="5">
             <Text
               fontWeight="400"
               fontSize={{ base: '2.25rem', md: '3.75rem' }}
@@ -212,12 +212,12 @@ const DiscoverPage = () => {
           </Box>
           <VStack
             w="100%"
-            px={{ base: '5', md: '6rem' }}
+            px={{ base: '5', md: '5', lg: '6rem' }}
             gap={{ base: '3', md: 'none' }}
           >
             <HStack
               w="100%"
-              h="22rem"
+              alignItems="stretch"
               display={{ base: 'none', md: 'flex' }}
               justifyContent="space-between"
             >
@@ -226,7 +226,6 @@ const DiscoverPage = () => {
                 borderRadius="0.875rem"
                 border="0.5px solid var(--Blue-Primary, #4A6EEB);"
                 p="3"
-                h="100%"
               >
                 {ContentBox(content.visit)}
               </Box>
@@ -235,7 +234,6 @@ const DiscoverPage = () => {
                 borderRadius="0.875rem"
                 border="0.5px solid var(--Blue-Primary, #4A6EEB);"
                 p="3"
-                h="100%"
               >
                 {ContentBox(content.lifeGroup)}
               </Box>
