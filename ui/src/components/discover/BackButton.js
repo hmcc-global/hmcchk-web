@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { 
-  Box, 
-  Flex,  
-  Text,
-  Image,
-  Container
-
-} from '@chakra-ui/react';
-
-import { ArrowBackIcon } from "@chakra-ui/icons"; 
+import { Box, Flex, Text, Image, Container } from '@chakra-ui/react';
 
 const BackButton = (props) => {
   const [visible, setVisible] = useState(true);
@@ -31,10 +22,8 @@ const BackButton = (props) => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  const backIcon = `${process.env.PUBLIC_URL}/images/connect/keyboard-arrow-left.svg`;
+  const backIcon = `${process.env.PUBLIC_URL}/images/discover/keyboard-arrow-left.svg`;
   return (
-    
-
     <Box
       position="fixed" // Fix the button to the top left
       width="100%" // Adjust width as needed
@@ -44,16 +33,15 @@ const BackButton = (props) => {
       bg="rgba(255, 255, 255, 0.3)" // Optional: semi-transparent background color
       transition="opacity 0.3s" // Smooth transition
       pointerEvents={visible ? 'auto' : 'none'} // Disable pointer events when hidden
-      py={"18px"}
+      py={'18px'}
     >
       <Container maxW="container.lg">
         <Flex
-          align={"center"} // Align icon and text vertically
+          align={'center'} // Align icon and text vertically
           cursor="pointer" // Change cursor to pointer on hover
           onClick={() => window.history.back()} // Go back on click
         >
           {/* Back Icon */}
-        
 
           <Image
             src={backIcon}
@@ -61,18 +49,19 @@ const BackButton = (props) => {
             boxSize="24px" // Set the desired size
             objectFit="contain" // Maintain aspect ratio
             // border-radius= 24px;
-            borderRadius={"24px"}
-            border={"2px solid #DFE7FF"}
-            bg={"#DFE7FF"}
+            borderRadius={'24px'}
+            border={'2px solid #DFE7FF'}
+            bg={'#DFE7FF'}
           />
 
           {/* Text */}
-          <Text ml={"6"} 
-            fontSize={['0.85rem', '0.9rem', '1rem']} 
-            fontFamily={"Manrope"} 
-            color={"#4A6EEB"} 
-            letterSpacing={"2px"}  
-            fontWeight={"700"}
+          <Text
+            ml={'6'}
+            fontSize={['0.85rem', '0.9rem', '1rem']}
+            fontFamily={'Manrope'}
+            color={'#4A6EEB'}
+            letterSpacing={'2px'}
+            fontWeight={'700'}
           >
             DISCOVER HMCC
           </Text>
