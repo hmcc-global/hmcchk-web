@@ -3,36 +3,40 @@ import {
   VStack,
   Box,
   Button,
-  Stack,
   AspectRatio,
-  Link,
   Text,
   Container,
+  Grid,
+  Icon,
 } from '@chakra-ui/react';
-import { ChevronLeftIcon } from '@chakra-ui/icons';
-import RelatedSermonCard from './RelatedSermonCard';
 import { customAxios as axios } from '../helpers/customAxios';
 import { DateTime } from 'luxon';
 import { DATE_FULL } from 'luxon/src/impl/formats';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router';
-import OnlinePageTabs from './OnlinePageTabs';
 import { sermonIdMap } from '../admin/sermonNotes/SermonNotesEditorModal';
+import SermonSeriesCard from './SermonSeriesCard';
+import { FaArrowRight } from 'react-icons/fa';
+import OfflinePageTabs from './OfflinePageTabs';
+import SermonSocialMediaButtons from './SermonSocialMediaButtons';
 
 const getSermonNoteId = (sermon) => {
-  const datePreached = DateTime.fromISO(sermon.datePreached).toFormat('ddMMyyyy');
+  const datePreached = DateTime.fromISO(sermon.datePreached).toFormat(
+    'ddMMyyyy'
+  );
   const serviceTypePrefix = sermonIdMap[sermon.serviceType[0].name];
-  return `/sermons/notes/${serviceTypePrefix}-${datePreached}-1`;
-}
+  return `${serviceTypePrefix}-${datePreached}-1`;
+};
 
 const SermonDetails = (props) => {
   const [sermon, setSermon] = useState();
   const [allSermons, setAllSermons] = useState([]);
-  const [relatedSermons, setRelatedSermons] = useState([]);
+  const [sermonSeriesTitle, setSermonSeriesTitle] = useState('');
+  const [sermonTitlePrefix, setSermonTitlePrefix] = useState('');
   const [sermonUrl, setSermonUrl] = useState();
   const [sermonDate, setSermonDate] = useState();
-  const [randomSermons, setRandomSermons] = useState([]);
-  const [sermonNoteLink, setSermonNoteLink] = useState('');
+  const [sermonNoteId, setSermonNoteId] = useState('');
+  const [latestSermonSeries, setLatestSermonSeries] = useState([]);
   const currId = props.match.params.id;
   const history = useHistory();
   const { user } = props;
@@ -63,27 +67,12 @@ const SermonDetails = (props) => {
     })();
   }, [currId, getData]);
 
-  const getRelatedSermons = useCallback(() => {
-    let relatedSermon = allSermons
-      .filter((related) => {
-        return (
-          related.sermonSeries &&
-          related.sermonSeries[0].name.includes(
-            sermon.sermonSeries && sermon.sermonSeries[0].name
-          ) &&
-          related.id !== sermon.id
-        );
-      })
-      .slice(0, 5);
-    setRelatedSermons(relatedSermon);
-  }, [allSermons, sermon]);
-
   const getSermonDate = useCallback(() => {
     let sermonDate = DateTime.fromISO(sermon.datePreached).toLocaleString(
       DATE_FULL
     );
 
-    setSermonNoteLink(getSermonNoteId(sermon));
+    setSermonNoteId(getSermonNoteId(sermon));
     setSermonDate(sermonDate);
   }, [sermon]);
 
@@ -92,192 +81,177 @@ const SermonDetails = (props) => {
       sermon.sermonVideoUrl.split('/')[
         sermon.sermonVideoUrl.split('/').length - 1
       ];
-    setSermonUrl(`https://www.youtube.com/embed/${sermonVideoCode}`);
+    setSermonUrl(sermonVideoCode);
   }, [sermon]);
 
-  const randomIndex = (max) => {
-    var arr = [];
-    while (arr.length < Math.min(max, 5)) {
-      var r = Math.floor(Math.random() * max);
-      if (arr.indexOf(r) === -1) arr.push(r);
-    }
-    return arr;
-  };
-
-  const getRandomSermons = useCallback(() => {
-    let sameYearSermons = allSermons.filter(
-      (random) =>
-        DateTime.fromISO(sermon.datePreached).hasSame(
-          DateTime.fromISO(random.datePreached),
-          'year'
-        ) && random.sermonSeries[0].name !== sermon.sermonSeries[0].name
-    );
-    let randomSermons = [];
-    randomIndex(sameYearSermons.length).forEach((i) => {
-      randomSermons.push(sameYearSermons[i]);
-    });
-    randomSermons = randomSermons.sort(
-      (a, b) =>
+  const getLatestSermonSeries = useCallback(() => {
+    const sortedSermonList = allSermons.sort((a, b) => {
+      return (
         DateTime.fromISO(b.datePreached) - DateTime.fromISO(a.datePreached)
-    );
-    setRandomSermons(randomSermons);
+      );
+    });
+
+    const latestSermonSeries = sortedSermonList
+      .map((sermon) => sermon.sermonSeries[0].name)
+      .filter((sermonSeries) => sermonSeries !== sermon.sermonSeries[0].name);
+
+    setLatestSermonSeries([...new Set(latestSermonSeries)].slice(0, 4));
   }, [allSermons, sermon]);
+
+  const getSermonSeriesTitle = useCallback(() => {
+    setSermonSeriesTitle(sermon.sermonSeries[0].name);
+  }, [sermon]);
+
+  const getSermonTitlePrefix = useCallback(() => {
+    if (sermon.title.includes('Part')) {
+      setSermonTitlePrefix(sermon.sermonSeries[0].name + ' Sermon Series - ');
+    } else {
+      setSermonTitlePrefix('');
+    }
+  }, [sermon]);
 
   useEffect(() => {
     if (allSermons && sermon) {
-      getRelatedSermons();
+      getLatestSermonSeries();
       getSermonDate();
       getVideoCode();
-      getRandomSermons();
+      getSermonSeriesTitle();
+      getSermonTitlePrefix();
     }
   }, [
     allSermons,
-    getRandomSermons,
-    getRelatedSermons,
     getSermonDate,
     getVideoCode,
     sermon,
+    getLatestSermonSeries,
+    getSermonSeriesTitle,
+    getSermonTitlePrefix,
   ]);
 
   return (
     <>
       {sermon && allSermons && (
-        <Container maxW="container.xl">
-          <Box mb="20px" mt="20px">
-            <Link href="/sermons" id="sermon_details-sermons">
-              <Button
-                variant="link"
-                fontSize="lg"
-                color="black"
-                justifyContent="left"
-                leftIcon={<ChevronLeftIcon />}
-                display={{ base: 'none', md: 'flex' }}
-                mb="10px"
-              >
-                See all past sermons
-              </Button>
-            </Link>
-            <Stack
-              spacing={4}
-              direction={{ base: 'column', lg: 'row' }}
-              alignItems="flex-start"
-              mb={5}
+        <Container maxW="container.xl" mt={{ base: '0.75rem', lg: '1.75rem' }}>
+          <Box mb={{ base: '1rem', md: '2.5rem' }}>
+            <Box
+              display="flex"
+              flexDirection={{ base: 'column', lg: 'row' }}
+              alignItems={{ base: 'center', lg: 'unset' }}
+              w="100%"
+              mb={'2rem'}
             >
-              <Box w={{ base: '100%', lg: '60%' }}>
-                <AspectRatio mb="5" width="100%" ratio={16 / 9}>
+              <Box
+                w={{ base: '100%', lg: '60%' }}
+                display={'flex'}
+                flexDir={'column'}
+                gap={'1rem'}
+              >
+                <AspectRatio mb="0.5rem" width="100%" ratio={16 / 9}>
                   <iframe
                     width="560"
                     height="315"
-                    src={sermonUrl}
+                    src={`https://www.youtube.com/embed/${sermonUrl}`}
                     title="Video player"
-                    frameBorder="0"
                     allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
                     allowFullScreen
                   ></iframe>
                 </AspectRatio>
-                <Text fontWeight="bold" fontSize={{ base: 'xl', md: '3xl' }}>
-                  {sermon.title}
-                </Text>
-                <Stack spacing={8}>
-                  <Box>
-                    <Stack
-                      spacing={{ base: 'normal', md: 'auto' }}
-                      direction={{ base: 'column', md: 'row' }}
-                    >
-                      <HStack>
-                        <Text fontWeight="bold">Speaker:</Text>
-                        <Text>{sermon.speaker[0].name}</Text>
-                      </HStack>
-                      <HStack>
-                        <Text fontWeight="bold">Date: </Text>
-                        <Text>{sermonDate}</Text>
-                      </HStack>
-                      <HStack>
-                        <Text fontWeight="bold">Series: </Text>
-                        <Text>{sermon.sermonSeries[0].name}</Text>
-                      </HStack>
-                    </Stack>
-                    <Stack
-                      spacing={{ base: 'normal', md: 'auto' }}
-                      direction={{ base: 'column', md: 'row' }}
-                    >
-                      <HStack>
-                        <Text fontWeight="bold">Passage:</Text>
-                        <Text>{sermon.passage}</Text>
-                      </HStack>
-                    </Stack>
-                  </Box>
-
-                  {sermon.sermonAudioUrl && (
-                    <Box>
-                      <Text fontWeight="bold" color="#0628A3" fontSize="xl">
-                        Audio Sermon:
-                      </Text>
-                      <HStack>
-                        <audio
-                          src={sermon.sermonAudioUrl}
-                          width="100%"
-                          controls
-                          allowFullScreen=""
-                          allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                        />
-                      </HStack>
-                    </Box>
-                  )}
-                </Stack>
+                <VStack spacing={'0.5rem'} alignItems="left" mb={'1rem'}>
+                  <Text
+                    fontFamily={'DMSerifDisplay_Italic'}
+                    fontWeight={400}
+                    fontSize={{ base: '1.25rem', md: '2rem' }}
+                  >
+                    {sermonTitlePrefix + sermon.title}
+                  </Text>
+                  <HStack
+                    spacing={0}
+                    fontSize={{ base: '0.625rem', md: '0.875rem' }}
+                    alignItems="center"
+                    justifyContent="flex-start"
+                    flexWrap={'wrap'}
+                  >
+                    <Text>{'Date: ' + sermonDate}</Text>
+                    <Text px={{ base: '0.375rem', md: '1rem' }}>|</Text>
+                    <Text>{'Speaker: ' + sermon.speaker[0].name}</Text>
+                    <Text px={{ base: '0.375rem', md: '1rem' }}>|</Text>
+                    <Text>{'Passage: ' + sermon.passage}</Text>
+                  </HStack>
+                  <Text
+                    py={{ base: '0', lg: '0.75rem' }}
+                    fontSize={{ base: '0.875rem', md: '1rem' }}
+                  >
+                    {sermon.sermonDesc}
+                  </Text>
+                  <SermonSocialMediaButtons
+                    ytLink={`https://www.youtube.com/watch?v=${sermonUrl}`}
+                  />
+                </VStack>
               </Box>
               <Box
+                ml={{ base: '0px', lg: '20px' }}
                 w={{ base: '100%', lg: '40%' }}
                 overflowY="auto"
+                position="relative"
                 borderRadius={10}
-                boxShadow="0px 4px 18px rgba(0, 0, 0, 0.25)"
-                maxH={700}
               >
-                <Box w="100%" h="50%">
-                  <OnlinePageTabs
-                    sermonNotes={sermonNoteLink}
+                <Box w="100%" h="100%">
+                  <OfflinePageTabs
+                    sermonNoteId={sermonNoteId}
                     user={user}
                     history={history}
-                    isOfflineSermonNote={true}
+                    sermonSeries={sermon.sermonSeries[0].name}
                   />
                 </Box>
               </Box>
-            </Stack>
-            <VStack
-              alignItems="left"
-              alignContent="center"
-              mx={{ base: '5px', lg: '20px' }}
-            >
-              <Stack spacing={8}>
-                <Stack spacing={4}>
-                  {relatedSermons.length > 0 && (
-                    <Text fontWeight="bold" color="#0628A3" fontSize="xl">
-                      More from this series:
-                    </Text>
-                  )}
-                  {relatedSermons.length > 0 &&
-                    relatedSermons.map((sermon, i) => (
-                      <RelatedSermonCard
-                        key={sermon.id}
-                        sermonData={sermon}
-                        allSermons={allSermons}
-                      />
-                    ))}
-                </Stack>
-                <Stack spacing={4}>
-                  <Text fontWeight="bold" color="#0628A3" fontSize="xl">
-                    Other past sermons you might like:
+            </Box>
+
+            <VStack alignItems="left" alignContent="center" spacing={4}>
+              <HStack alignItems="center" justifyContent={'space-between'}>
+                <Text
+                  fontFamily={'DMSerifDisplay_Italic'}
+                  fontWeight={400}
+                  fontSize={{ base: '1.75rem', md: '2rem' }}
+                >
+                  Past Sermon Series
+                </Text>
+                <Button
+                  borderRadius="80px"
+                  border="1px solid #4A6EEB"
+                  py={{ base: '1rem', md: '1.25rem' }}
+                  px={{ base: '1.25rem', md: '1.5rem' }}
+                  fontSize="1rem"
+                  bgColor={'transparent'}
+                  onClick={() => history.push('/sermons')}
+                  color="#0C0C20"
+                  _hover={{
+                    backgroundColor: 'rgba(74, 110, 235, 0.1)',
+                    color: '#FFFFFF',
+                  }}
+                  gap="0.75rem"
+                >
+                  <Text
+                    color="#4A6EEB"
+                    fontSize={{ base: '0.75rem', md: '0.875rem' }}
+                  >
+                    See All
                   </Text>
-                  {randomSermons.length > 0 &&
-                    randomSermons.map((sermon, i) => (
-                      <RelatedSermonCard
-                        key={sermon.id}
-                        sermonData={sermon}
-                        allSermons={allSermons}
-                      />
-                    ))}
-                </Stack>
-              </Stack>
+                  <Icon as={FaArrowRight} color={'#4A6EEB'} />
+                </Button>
+              </HStack>
+              <Grid
+                templateColumns={['repeat(1, 1fr)', 'repeat(4, 1fr)']}
+                gap={[3, 6]}
+              >
+                {latestSermonSeries.length > 0 &&
+                  latestSermonSeries.map((sermonSeries) => (
+                    <SermonSeriesCard
+                      key={sermonSeries}
+                      sermonSeries={sermonSeries}
+                      allSermons={allSermons}
+                    />
+                  ))}
+              </Grid>
             </VStack>
           </Box>
         </Container>

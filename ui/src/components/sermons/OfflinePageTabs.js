@@ -6,56 +6,23 @@ import {
   TabPanels,
   TabPanel,
   Box,
-  Image,
   HStack,
   Text,
   VStack,
+  Image,
 } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
-import { useMemo, useState, useRef } from 'react';
+import { useState } from 'react';
 import SermonNotesContainer from '../sermon-notes/SermonNotesContainer';
 import SermonSeries from './SermonSeries';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
-const OnlinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
+const OfflinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
   const [noteId, setNoteId] = useState(0);
   const [tab, setTab] = useState(0);
   const [slideIndex, setSlideIndex] = useState(0);
 
-  const slider = useRef(null);
-
   const refreshSermonNotes = () => {
     setNoteId(noteId + 1);
-  };
-
-  const sliderSettings = {
-    centerMode: false,
-    dots: false,
-    infinite: false,
-    speed: 500,
-    swipeToSlide: true,
-    variableWidth: false,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          variableWidth: true,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          variableWidth: true,
-        },
-      },
-    ],
   };
 
   const slideButtons = [
@@ -63,42 +30,14 @@ const OnlinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
       text: 'Sermon Notes',
       image: '/images/sermons/sermon_icon_unclicked.svg',
     },
-
-    {
-      text: 'Need Prayer?',
-      image: '/images/sermons/prayer_icon_unclicked.svg',
-    },
-    { text: 'Giving', image: '/images/sermons/giving_icon_unclicked.svg' },
-    {
-      text: 'Upcoming Events',
-      image: '/images/sermons/event_icon_unclicked.svg',
-    },
-
     {
       text: 'More in Series',
       image: '/images/sermons/more_series_unclicked.svg',
     },
   ];
 
-  const sliderStyle = {
-    width: '100%',
-    position: 'relative',
-    height: 'auto',
-  };
-
   const handleClick = (index) => {
-    if (index === 0) {
-      setSlideIndex(index);
-    }
-    if (index === 1) {
-      window.open('https://bit.ly/hmcc-prayer', '_blank');
-    } else if (index === 2) {
-      window.open('/give', '_blank');
-    } else if (index === 3) {
-      window.open('/events', '_blank');
-    } else if (index === 4) {
-      setSlideIndex(1);
-    }
+    setSlideIndex(index);
   };
 
   return (
@@ -107,7 +46,7 @@ const OnlinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
         isFitted
         h="100%"
         onChange={(i) => setTab(i)}
-        overflowY={tab ? 'auto' : 'hidden'}
+        overflowY={'hidden'}
         display={{ base: 'none', md: 'block' }}
         maxH={700}
         borderRadius={'12px'}
@@ -180,7 +119,7 @@ const OnlinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
             >
               <RepeatIcon />
             </Button>
-            <Box height={['85vh', '90%']} paddingBottom={15} overflow="auto">
+            <Box height={'90%'} paddingBottom={15} overflow="auto">
               <SermonNotesContainer
                 sermonNoteId={sermonNoteId}
                 history={history}
@@ -188,13 +127,25 @@ const OnlinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
               />
             </Box>
           </TabPanel>
-          <TabPanel p={'1rem'}>
-            <SermonSeries sermonSeriesName={sermonSeries} />
+          <TabPanel h="100%">
+            <Box height={'90%'} overflow="auto">
+              <SermonSeries sermonSeriesName={sermonSeries} />
+            </Box>
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <VStack align="center" gap="5" display={{ base: 'block', lg: 'none' }}>
-        <Slider ref={slider} {...sliderSettings} style={sliderStyle}>
+      <VStack
+        alignItems="center"
+        spacing={'1rem'}
+        maxW="100%"
+        display={{ base: 'block', md: 'none' }}
+      >
+        <HStack
+          spacing="1rem"
+          w="100%"
+          alignItems={'center'}
+          justifyContent={'center'}
+        >
           {slideButtons.length > 0 &&
             slideButtons.map((button, i) => {
               const imageSrc =
@@ -204,33 +155,33 @@ const OnlinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
                   : process.env.PUBLIC_URL + button.image;
 
               return (
-                <Box marginRight="1em" key={i}>
-                  <Button
-                    backgroundColor={slideIndex === i ? '#4A6EEB' : '#DFE7FF'}
-                    borderRadius="30px"
+                <Button
+                  key={i}
+                  backgroundColor={slideIndex === i ? '#4A6EEB' : '#DFE7FF'}
+                  borderRadius="30px"
+                  textAlign="center"
+                  _hover={{}}
+                  onClick={() => handleClick(i)}
+                  px={'1rem'}
+                >
+                  <Image src={imageSrc} mr="2" />
+                  <Text
+                    fontFamily="Manrope"
+                    fontWeight="600"
+                    fontSize="0.625rem"
+                    textColor={slideIndex === i ? '#F6FAFF' : '#4A6EEB'}
                     textAlign="center"
-                    w="90%"
-                    _hover={{}}
-                    onClick={() => handleClick(i)}
                   >
-                    <Image src={imageSrc} mr="2" />
-                    <Text
-                      fontFamily="Manrope"
-                      fontWeight="600"
-                      fontSize="0.625rem"
-                      textColor={slideIndex === i ? '#F6FAFF' : '#4A6EEB'}
-                      textAlign="center"
-                    >
-                      {button.text}
-                    </Text>
-                  </Button>
-                </Box>
+                    {button.text}
+                  </Text>
+                </Button>
               );
             })}
-        </Slider>
+        </HStack>
+
         {slideIndex === 0 && (
           <Box
-            height={['85vh', '90%']}
+            height={'85vh'}
             paddingBottom={15}
             overflow="auto"
             borderRadius="15px"
@@ -241,14 +192,15 @@ const OnlinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
               sermonNoteId={sermonNoteId}
               history={history}
               user={user}
+              isOfflineSermonNote={true}
             />
           </Box>
         )}
         {slideIndex === 1 && (
           <Box
-            height={['85vh', '90%']}
+            height={'85vh'}
             w="100%"
-            paddingBottom={15}
+            p={'1rem'}
             overflow="auto"
             borderRadius="15px"
             borderWidth="1px"
@@ -262,4 +214,4 @@ const OnlinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
   );
 };
 
-export default OnlinePageTabs;
+export default OfflinePageTabs;

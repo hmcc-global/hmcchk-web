@@ -61,6 +61,12 @@ module.exports.policies = {
   'forms/get-submission': ['isLoggedIn', 'aboveTcNotTech'],
   'forms/get-user-submission': ['isLoggedIn'],
 
+  // Fundraise
+  'fundraise/get-fundraise': true,
+  'fundraise/admin-get-fundraise': ['isLoggedIn', 'aboveAdmin'],
+  'fundraise/create-fundraise': ['isLoggedIn', 'aboveAdmin'],
+  'fundraise/update-fundraise': ['isLoggedIn', 'aboveAdmin'],
+
   // Announcements
   'announcements/admin-get-announcements': ['isLoggedIn', 'aboveMinistry'],
   'announcements/create-announcements': ['isLoggedIn', 'aboveTc'],

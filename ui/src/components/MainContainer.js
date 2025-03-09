@@ -37,15 +37,17 @@ import AdminTestimonyContainer from './admin/testimony/AdminTestimonyContainer';
 import AdminAnnouncementContainer from './admin/announcements/AdminAnnouncementContainer';
 import AdminLeadershipTeamContainer from './admin/leadershipTeam/AdminLeadershipTeamContainer';
 import AdminSermonNotesContainer from './admin/sermonNotes/AdminSermonNotesContainer';
+import OnlineSermonNotesRedirect from './sermon-notes/OnlineSermonNotesRedirect';
 import SermonNotesContainer from './sermon-notes/SermonNotesContainer';
 import PrivacyPolicy from './screens/PrivacyPolicy';
+import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
 
 const MainContainer = () => {
   return (
     <chakra.main
       maxH="100%"
       flexGrow={1}
-      bg="#ffffff"
+      bg="#F6FAFF"
       overflowY="auto"
       id="main-container"
       overflowX="hidden"
@@ -120,6 +122,12 @@ const MainContainer = () => {
           path="/sermons/:id"
           permissions={['public']}
           component={SermonDetails}
+        />
+        <PrivateRoute
+          exact
+          path="/sermons/notes/online"
+          permissions={['public']}
+          component={OnlineSermonNotesRedirect}
         />
         <PrivateRoute
           exact
@@ -295,6 +303,12 @@ const MainContainer = () => {
           path="/admin/sermonNotes/edit/:id"
           permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
           component={AdminSermonNotesContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/fundraise"
+          permissions={['admin', 'stewardship']}
+          component={AdminFundraiseContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>

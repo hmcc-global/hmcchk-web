@@ -30,6 +30,7 @@ export default function AdminFormDataViewer(props) {
   const formName = state.name;
   const formId = state.id;
   const formFields = state.formFields;
+  const isPaymentRequired = state.isPaymentRequired;
 
   let lastUpdatedTime = useRef();
 
@@ -336,7 +337,7 @@ export default function AdminFormDataViewer(props) {
         filterParams: dateFilterParams,
         sort: 'asc',
         lockPosition: true,
-      }
+      },
     ];
 
     const createPaymentDataColumns = () => {
@@ -427,15 +428,13 @@ export default function AdminFormDataViewer(props) {
     const objectClassifier = (key) => {
       if (key === '_submissionTime') {
         return;
-      } else if (key === 'paymentData') {
-        columnDefs.push(createPaymentDataColumns());
-      }  else {
-        columnDefs.push(createFormFieldColumn(key))
+      } else {
+        columnDefs.push(createFormFieldColumn(key));
       }
     };
 
     if (formFields && formFields.length > 0) {
-      formFields.forEach(formField => objectClassifier(formField.fieldName))
+      formFields.forEach((formField) => objectClassifier(formField.fieldName));
     }
 
     columnDefs = columnDefs.concat([
@@ -474,7 +473,11 @@ export default function AdminFormDataViewer(props) {
           },
         ],
       },
-    ])
+    ]);
+
+    if (isPaymentRequired) {
+      columnDefs.push(createPaymentDataColumns());
+    }
 
     return columnDefs;
   };

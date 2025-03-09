@@ -16,8 +16,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { customAxios as axios } from '../../helpers/customAxios';
 import TiptapEditor from '../../helpers/TipTap';
-import { useHistory } from 'react-router-dom';
-
+import { useHistory, Prompt } from 'react-router-dom';
 
 // Create a object
 export const sermonIdMap = {
@@ -37,6 +36,7 @@ const SermonNotesEditorModal = (props) => {
   } = useForm();
   const toast = useToast();
   const history = useHistory();
+  const [isDirty, setIsDirty] = useState(false); //indicates unsaved changes
 
   const [sermonNoteData, setSermonNoteData] = useState({
     sermonId: '',
@@ -153,6 +153,7 @@ const SermonNotesEditorModal = (props) => {
             duration: 5000,
             isClosable: true,
           });
+          setIsDirty(false);
         }
       } else {
         const isDuplicate = await checkDuplicateTitleAndSermonLink();
@@ -262,6 +263,24 @@ const SermonNotesEditorModal = (props) => {
   useEffect(() => {
     if (actionOnEditor === 'create') onReset();
   }, [actionOnEditor]);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (isDirty) {
+        const message =
+          'You have unsaved changes. Are you sure you want to leave?';
+        event.preventDefault();
+        event.returnValue = message;
+        return message;
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [isDirty]);
   return (
     <>
       <Container
@@ -487,12 +506,13 @@ const SermonNotesEditorModal = (props) => {
                       { shouldTouch: true }
                     )
                   }
-                  onEditorChange={(json) =>
+                  onEditorChange={(json) => {
                     setSermonNoteData({
                       ...sermonNoteData,
                       originalContent: json,
-                    })
-                  }
+                    });
+                    setIsDirty(true);
+                  }}
                   existingContent={sermonNoteData.originalContent}
                   textPassage={sermonNoteData.passage}
                 />
@@ -508,12 +528,19 @@ const SermonNotesEditorModal = (props) => {
                 >
                   {editorSubmitButton(actionOnEditor)}
                 </Button>
+                <Prompt
+                  when={isDirty}
+                  message="You have unsaved changes. Are you sure you want to leave?"
+                />
                 <Button
                   bgColor="#6C7BFF"
                   color="#FFFFFF"
                   _hover={{ bgColor: '#4F5ABE' }}
                   onClick={() =>
-                    history.push(`/sermons/notes/${sermonNoteData.sermonId}`)
+                    window.open(
+                      `/sermons/notes/${sermonNoteData.sermonId}`,
+                      '_blank'
+                    )
                   }
                 >
                   Preview

@@ -334,7 +334,7 @@ const Footer = () => {
           lineHeight="21px"
           wordBreak="break-word"
         >
-          © 1996-2024 Harvest Mission Community Church. All rights reserved.
+          © 1996-2025 Harvest Mission Community Church. All rights reserved.
         </Text>
       </Box>
     </Container>

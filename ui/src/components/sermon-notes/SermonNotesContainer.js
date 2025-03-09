@@ -5,7 +5,6 @@ import {
   VStack,
   Button,
   useToast,
-  HStack,
 } from '@chakra-ui/react';
 import { customAxios as axios } from '../helpers/customAxios';
 import { useState, useEffect, useCallback, useMemo } from 'react';
@@ -18,7 +17,7 @@ import {
 } from '../helpers/SermonNotes';
 
 const SermonNotesContainer = (props) => {
-  const { user, history, sermonNoteId, isOfflineSermonNote } = props;
+  const { user, history, sermonNoteId } = props;
   const [sermonNotes, setSermonNotes] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingExistingNotes, setIsLoadingExistingNotes] = useState(false);
@@ -33,17 +32,18 @@ const SermonNotesContainer = (props) => {
   const todayId = DateTime.fromISO(new Date().toISOString()).toFormat(
     'ddMMyyyy'
   );
-  const urlPath = history.location.pathname.split('/').reverse()[0];
 
-  const sermonId = isOfflineSermonNote
-    ? sermonNoteId // If offline, use the passed sermonNoteId directly
-    : sermonNoteId && sermonNoteId !== '' && sermonNoteId !== 'online'
-    ? sermonNoteId // Use the ID from the live page
-    : sermonNoteId === 'online'
-    ? `sn-${todayId}-1` // Only works when there is just one sermon note that day
-    : urlPath; // Get the ID from the URL path as a fallback
+  const fallbackSermonId = props &&  props.match && props.match.params.id;
+
+  const sermonId = 
+    sermonNoteId === 'online'
+      ? `sn-${todayId}-1`
+      : sermonNoteId == null
+        ? fallbackSermonId
+        : sermonNoteId;
 
   const getSermonNotesParent = useCallback(async () => {
+
     try {
       setIsLoading(true);
       const { data, status } = await axios.get('/api/sermon-notes-parent/get', {
@@ -169,7 +169,7 @@ const SermonNotesContainer = (props) => {
         '/api/email-user-sermon-notes',
         {
           email: email,
-          sermonNoteData: htmlUserSermonNotes,
+          sermonNoteData: preprocessUserNotesAttribute(htmlUserSermonNotes),
         }
       );
       if (status === 200) {
@@ -192,6 +192,12 @@ const SermonNotesContainer = (props) => {
       day: 'numeric',
     });
   }, [sermonNotes]);
+
+  const preprocessUserNotesAttribute = (htmlString) => {
+    if (!htmlString) return htmlString;
+
+    return htmlString.replace(/&lt;br&gt;/g, '<br>');
+  };
 
   useEffect(() => {
     if (sermonId) {
