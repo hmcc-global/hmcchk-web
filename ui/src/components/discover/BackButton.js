@@ -57,7 +57,7 @@ const BackButton = (props) => {
           {/* Text */}
           <Text
             ml={'6'}
-            fontSize={['0.85rem', '0.9rem', '1rem']}
+            fontSize={['0.625rem', '0.9rem', '1rem']}
             fontFamily={'Manrope'}
             color={'#4A6EEB'}
             letterSpacing={'2px'}
