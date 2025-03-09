@@ -60,6 +60,8 @@ const UserProfileMobile = (props) => {
   const [userSermonNotes, setUserSermonNotes] = useState([]);
   const [sermonSeriesList, setSermonSeriesList] = useState([]);
   const [selectedSermonSeries, setSelectedSermonSeries] = useState('');
+  const [currentPageAll, setCurrentPageAll] = useState(1);
+  const [currentPageSaved, setCurrentPageSaved] = useState(1);
 
   const onModalClose = (e) => {
     setModalOpen(false);
@@ -207,6 +209,15 @@ const UserProfileMobile = (props) => {
   const handleTabChange = (e) => {
     const newIndex = Number(e.target.value); // Ensure it's a number
     setActiveIndex(newIndex);
+  };
+
+  const handleTabSwitch = (tab) => {
+    setActiveSermonNoteTab(tab);
+    if (tab === 'all') {
+      setCurrentPageSaved(1); // Reset page for the saved tab
+    } else {
+      setCurrentPageAll(1); // Reset page for the all tab
+    }
   };
 
   useEffect(() => {
@@ -365,7 +376,7 @@ const UserProfileMobile = (props) => {
                   borderRadius={30}
                   bg={activeSermonNoteTab === 'all' ? '#4A6EEB' : '#DFE7FF'}
                   color={activeSermonNoteTab === 'all' ? 'white' : '#4A6EEB'}
-                  onClick={() => setActiveSermonNoteTab('all')}
+                  onClick={() => handleTabSwitch('all')}
                   px={7}
                   _hover={{
                     bg: activeSermonNoteTab === 'all' ? '#4A6EEB' : '#DFE7FF',
@@ -380,9 +391,7 @@ const UserProfileMobile = (props) => {
                   borderRadius={30}
                   bg={activeSermonNoteTab === 'my' ? '#4A6EEB' : '#DFE7FF'}
                   color={activeSermonNoteTab === 'my' ? 'white' : '#4A6EEB'}
-                  onClick={() => {
-                    setActiveSermonNoteTab('my');
-                  }}
+                  onClick={() => handleTabSwitch('my')}
                   px={7}
                   _hover={{
                     bg: activeSermonNoteTab === 'my' ? '#4A6EEB' : '#DFE7FF',
@@ -424,7 +433,20 @@ const UserProfileMobile = (props) => {
                 </>
               )}
               {/* Pass Sermon Notes depending on the tab and also whether there is any select option */}
-              <SermonNotesPagination sermonNotes={sermonNotes} />
+              {/* Pass pagination state to SermonNotesPagination */}
+              <SermonNotesPagination
+                sermonNotes={sermonNotes}
+                currentPage={
+                  activeSermonNoteTab === 'all'
+                    ? currentPageAll
+                    : currentPageSaved
+                }
+                setCurrentPage={
+                  activeSermonNoteTab === 'all'
+                    ? setCurrentPageAll
+                    : setCurrentPageSaved
+                }
+              />
             </TabPanel>
             <TabPanel p="7%">
               <Center mb="5%">

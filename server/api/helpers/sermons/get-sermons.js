@@ -14,7 +14,9 @@ const parseHtmlText = (text) => {
   const captured = pattern.exec(decodedTitle);
 
   // eslint-disable-next-line eqeqeq
-  return captured != null && captured[1] != null && captured[1] !== '' ? captured[1] : decodedTitle;
+  return captured != null && captured[1] != null && captured[1] !== ''
+    ? captured[1]
+    : decodedTitle;
 };
 
 const convertToMarkdown = (htmlText) => {
