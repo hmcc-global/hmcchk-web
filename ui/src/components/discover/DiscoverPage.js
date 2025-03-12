@@ -6,12 +6,14 @@ import {
   Button,
   HStack,
   Image,
+  Link,
 } from '@chakra-ui/react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { Link as ReactLink } from 'react-router-dom';
 
 const DiscoverPage = () => {
   const settings = {
@@ -45,7 +47,7 @@ const DiscoverPage = () => {
       image: '/images/location.svg',
       description:
         "Sunday Celebration is HMCC's weekend gathering where everyone in the church comes together to receive God's message, worship in community and enjoy fellowship. Everybody's welcome!",
-      link: '',
+      link: '/discover/PlanAVisit',
       button_color: '#EDB115',
       hover_color: '#F5F0E0',
     },
@@ -99,21 +101,23 @@ const DiscoverPage = () => {
         >
           {content.description}
         </Text>
-        <Button
-          fontFamily="Manrope"
-          fontSize="0.9rem"
-          borderRadius="0.938rem"
-          backgroundColor={content.button_color}
-          textColor="#F6FAFF"
-          letterSpacing="0.25rem"
-          border="1px solid #0C0C20;"
-          px={{ base: '1.2rem', md: '2rem' }}
-          py={{ base: '1rem', md: '1.4rem' }}
-          fontWeight="700"
-          _hover={{ backgroundColor: content.hover_color }}
-        >
-          LEARN MORE
-        </Button>
+        <Link as={ReactLink} to={{ pathname: content.link }}>
+          <Button
+            fontFamily="Manrope"
+            fontSize="0.9rem"
+            borderRadius="0.938rem"
+            backgroundColor={content.button_color}
+            textColor="#F6FAFF"
+            letterSpacing="0.25rem"
+            border="1px solid #0C0C20;"
+            px={{ base: '1.2rem', md: '2rem' }}
+            py={{ base: '1rem', md: '1.4rem' }}
+            fontWeight="700"
+            _hover={{ backgroundColor: content.hover_color }}
+          >
+            LEARN MORE
+          </Button>
+        </Link>
       </VStack>
     );
   };
