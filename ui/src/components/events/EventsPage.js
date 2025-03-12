@@ -9,18 +9,19 @@ import {
   Select,
   Stack,
   Text,
+  Box,
 } from '@chakra-ui/react';
 import { MdArrowDropDown } from 'react-icons/md';
 import EventCard from './EventCard';
 import { DateTime } from 'luxon';
 import { getRenderDate } from '../helpers/eventsHelpers';
 import isDateInThisWeek from './getWeek';
+import EventsExporter from './EventsExport';
 
 const EventsPage = (props) => {
   const [eventsList, setEventsList] = useState([]);
   const [thisWeekList, setThisWeekList] = useState([]);
   const [featuredList, setFeaturedList] = useState([]);
-  const [moreFilterList, setMoreFilterList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [tagList, setTagList] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
@@ -163,7 +164,6 @@ const EventsPage = (props) => {
 
         setFeaturedList([...featuredEvents]);
         setThisWeekList([...thisWeekEvents]);
-        setMoreFilterList([...moreFilterEvents]);
         setTagList([...tagsList]);
 
         const sorted = new Set(
@@ -181,6 +181,9 @@ const EventsPage = (props) => {
 
   return (
     <Container maxW="container.xl">
+      <Box position="fixed" bottom="5em" right="1.5em">
+        <EventsExporter content={filteredList} />
+      </Box>
       <Heading
         as="h1"
         mb="6"
