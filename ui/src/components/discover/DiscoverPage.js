@@ -47,6 +47,7 @@ const DiscoverPage = () => {
         "Sunday Celebration is HMCC's weekend gathering where everyone in the church comes together to receive God's message, worship in community and enjoy fellowship. Everybody's welcome!",
       link: '',
       button_color: '#EDB115',
+      hover_color: '#F5F0E0',
     },
     lifeGroup: {
       title: 'Join a \n LIFE Group',
@@ -55,6 +56,7 @@ const DiscoverPage = () => {
         'There is no better way to get a taste of who we are and what we believe in then to check out one of our LIFE Groups. This is an opportunity to experience the life-changing power of Biblical community with Love, Investment, Faith, and Enjoyment.',
       link: '',
       button_color: '#D46764',
+      hover_color: '#F1E6E6',
     },
     ministry: {
       title: 'Connect with Our Ministries',
@@ -63,6 +65,7 @@ const DiscoverPage = () => {
         'At Harvest Mission Community Church, we are actively reaching out to people from all walks of life, specifically youths, college students, working adults, and families.',
       link: '',
       button_color: '#21A0A7',
+      hover_color: '#DBF1F1',
     },
   };
 
@@ -107,6 +110,7 @@ const DiscoverPage = () => {
           px={{ base: '1.2rem', md: '2rem' }}
           py={{ base: '1rem', md: '1.4rem' }}
           fontWeight="700"
+          _hover={{ backgroundColor: content.hover_color }}
         >
           LEARN MORE
         </Button>

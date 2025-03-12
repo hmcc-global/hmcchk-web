@@ -24,6 +24,16 @@ const LinkCardInfo = [
   },
 
   {
+    path: '/discover/visit-us',
+    mobileImage: 'visit-us.svg',
+    desktopImage: 'visit-us.svg',
+    title: 'Visit Us',
+    textDesktop: 'Check out our church by joining our Sunday Celebration',
+    textMobile: 'Check out our church by joining our Sunday Celebration',
+    bgPosition: ['center bottom', 'left bottom'],
+  },
+
+  {
     path: '/sermons',
     mobileImage: 'sermons-mobile.svg',
     desktopImage: 'sermons.svg',
