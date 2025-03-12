@@ -510,7 +510,7 @@ const SermonNotesEditorModal = (props) => {
                     const editorElement =
                       document.querySelector('.ProseMirror');
                     if (editorElement) {
-                      editorElement.style.outline = 'none'; // Remove outline on focus
+                      editorElement.style.outline = 'none';
                     }
                   }}
                   onEditorChange={(json) => {
