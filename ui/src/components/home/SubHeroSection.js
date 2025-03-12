@@ -24,7 +24,7 @@ const LinkCardInfo = [
   },
 
   {
-    path: '/discover/visit-us',
+    path: '/discover/PlanAVisit',
     mobileImage: 'visit-us.svg',
     desktopImage: 'visit-us.svg',
     title: 'Visit Us',
