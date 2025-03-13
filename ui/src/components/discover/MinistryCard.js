@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Link,
-  Text,
-  Image,
-} from '@chakra-ui/react';
+import { Box, Button, Flex, Text, Image } from '@chakra-ui/react';
 
 const cards = [
   {
@@ -53,7 +45,7 @@ const MinistryCard = (props) => {
       gap={6} // Spacing between cards
       maxW="1200px" // Maximum width of the container
       mx="auto" // Center the container horizontally
-      p={4} // Padding around the container
+      p={0} // Padding around the container
     >
       {cards.map((card, index) => (
         <Box
