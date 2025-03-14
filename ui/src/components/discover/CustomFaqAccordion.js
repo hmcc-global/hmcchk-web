@@ -28,7 +28,7 @@ const CustomFaqAccordion = ({ data, borderColor, bgColor, width }) => {
               <h2>
                 <AccordionButton
                   fontWeight={700}
-                  fontSize={['0.875rem', '1.25rem']}
+                  fontSize={{ base: '0.875rem', md: '1rem', lg: '1.125rem' }}
                   p={4}
                   bgColor={bgColor}
                   _hover={{ bgColor: { bgColor } }}
@@ -49,7 +49,10 @@ const CustomFaqAccordion = ({ data, borderColor, bgColor, width }) => {
                   )}
                 </AccordionButton>
               </h2>
-              <AccordionPanel py={4} fontSize={['0.875rem', '1.125rem']}>
+              <AccordionPanel
+                py={4}
+                fontSize={{ base: '0.875rem', md: '1rem', lg: '1.125rem' }}
+              >
                 {item.content.split('\n').map((line, i) => (
                   <Box key={i}>
                     {line.split(' ').map((word, j, words) => {
