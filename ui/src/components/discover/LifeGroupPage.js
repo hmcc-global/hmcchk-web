@@ -1,47 +1,54 @@
 import {
   AspectRatio,
   Box,
-  Button,
   Container,
   Heading,
   HStack,
   Icon,
   Image,
-  Link,
   SimpleGrid,
   VStack,
   Text,
   useMediaQuery,
 } from '@chakra-ui/react';
 import LifeGroupCard from './LifeGroupCard';
+import LifeGroupSignupButton from './LifeGroupSignupButton';
 import lifeGroupList from './lifegroups.json';
 import { MdPeople } from 'react-icons/md';
+import Faq from './LifeGroupFaq';
 
 const LifeGroupPage = () => {
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
   return (
     <Box bgColor="#F6FAFF">
-      <Container maxW="container.xl">
+      <Container maxW="container.xl" py={{ base: '2rem', lg: '5rem' }}>
         <Box
           id="lifegroup"
           display="flex"
           flexDir={'column'}
           alignItems={'center'}
-          gap={'4rem'}
+          gap={{ base: '1.75rem', lg: '4rem' }}
         >
-          <VStack maxWidth={'50%'}>
+          <VStack
+            maxWidth={{ base: '95%', lg: '50%' }}
+            spacing={{ base: '1rem', lg: '1.5rem' }}
+          >
             <Heading
               as="h1"
               fontSize={{ base: '2.25rem', lg: '3.75rem' }}
               fontWeight={400}
               textAlign="center"
-              mb={[0, 4]}
               fontFamily="DMSerifDisplay_Italic"
               letterSpacing={'-0.1rem'}
             >
               Join a LIFE Group
             </Heading>
+            <Image
+              src={`${process.env.PUBLIC_URL}/images/connect/life-design-mobile.png`}
+              display={{ base: 'block', lg: 'none' }}
+              maxW={{ sm: '80%', md: '60%' }}
+            />
             <Text
               fontSize={{ base: '0.875rem', lg: '1.125rem' }}
               textAlign={'center'}
@@ -55,7 +62,7 @@ const LifeGroupPage = () => {
           <Box
             display="flex"
             flexDirection={isLargerThan768 ? 'row' : 'column-reverse'}
-            alignItems={'center'}
+            alignItems={isLargerThan768 ? 'flex-end' : 'center'}
             gap={'3rem'}
           >
             <VStack
@@ -98,26 +105,13 @@ const LifeGroupPage = () => {
                 Gospel. At HMCC, we believe in the power of community and the
                 fullness of life that it offers -- which is why we believe in{' '}
               </Text>
-              <Button
-                as={Link}
-                href="https://bit.ly/LGSignup2024"
-                borderRadius={'0.9375rem'}
-                bgColor="#D46764"
-                py={'1.75rem'}
-                px={'1.75rem'}
-                fontSize={{ base: '0.875rem', lg: '1rem' }}
-                fontWeight="700"
-                _hover={{ boxShadow: 'none' }}
-                letterSpacing={'0.25rem'}
-                color={'#F6FAFF'}
-                fontFamily={'Manrope'}
-              >
-                SIGN UP FOR LIFE GROUP
-              </Button>
+              <LifeGroupSignupButton />
             </VStack>
-            <VStack flex={1} gap={'2rem'}>
+            <VStack flex={1} gap={'2rem'} w="100%">
+              {/* <LifeGroupSignupButton /> */}
               <Image
                 src={`${process.env.PUBLIC_URL}/images/connect/life-design.png`}
+                display={{ base: 'none', lg: 'block' }}
               />
               <AspectRatio ratio={16 / 9} borderRadius="20" w={'100%'}>
                 <iframe
@@ -152,6 +146,7 @@ const LifeGroupPage = () => {
                 ))}
             </SimpleGrid>
           </Box>
+          <Faq />
         </Box>
       </Container>
     </Box>
