@@ -2,9 +2,9 @@ import React from 'react';
 import { Box, Heading } from '@chakra-ui/react';
 import CustomFaqAccordion from './CustomFaqAccordion';
 
-const LifeGroupFaq = () => {
-  const bgColor = '#F1E6E6';
-  const borderColor = '#D46764';
+const ConnectMinistryFaq = () => {
+  const bgColor = '#DBF1F1';
+  const borderColor = '#21A0A7';
 
   const faqData = [
     {
@@ -62,4 +62,4 @@ const LifeGroupFaq = () => {
   );
 };
 
-export default LifeGroupFaq;
+export default ConnectMinistryFaq;
