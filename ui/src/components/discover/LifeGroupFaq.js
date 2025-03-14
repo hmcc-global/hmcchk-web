@@ -6,6 +6,7 @@ import {
   AccordionPanel,
   Box,
   Link,
+  Heading,
 } from '@chakra-ui/react';
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
 
@@ -95,47 +96,67 @@ const LifeGroupFaq = () => {
   ];
 
   return (
-    <Accordion allowMultiple allowToggle fontFamily="Manrope" width="100%">
-      {faqData.map((item, index) => (
-        <AccordionItem
-          key={index}
-          borderWidth="0.5px"
-          borderColor={borderColor}
-        >
-          {({ isExpanded }) => (
-            <>
-              <h2>
-                <AccordionButton
-                  fontWeight={700}
-                  fontSize={['0.875rem', '1.25rem']}
-                  p={4}
-                  bgColor={bgColor}
-                  _hover={{ bgColor: bgColor }}
-                >
-                  <Box
-                    as="span"
-                    flex="1"
-                    textAlign="left"
-                    overflow="hidden"
-                    whiteSpace="normal"
+    <Box
+      display="flex"
+      flexDir={'column'}
+      gap={{ base: '1rem', lg: '1.5rem' }}
+      w="100%"
+    >
+      <Heading
+        as="h1"
+        fontSize={{ base: '2rem', lg: '2.625rem' }}
+        fontWeight={400}
+        textAlign="center"
+        fontFamily="DMSerifDisplay_Italic"
+        letterSpacing={'-0.1rem'}
+      >
+        FAQs
+      </Heading>
+      <Accordion allowMultiple allowToggle fontFamily="Manrope" width="100%">
+        {faqData.map((item, index) => (
+          <AccordionItem
+            key={index}
+            borderWidth="0.5px"
+            borderColor={borderColor}
+          >
+            {({ isExpanded }) => (
+              <>
+                <h2>
+                  <AccordionButton
+                    fontWeight={700}
+                    fontSize={{ base: '0.875rem', lg: '1.25rem' }}
+                    p={4}
+                    bgColor={bgColor}
+                    _hover={{ bgColor: bgColor }}
                   >
-                    {item.question}
-                  </Box>
-                  {isExpanded ? (
-                    <MinusIcon fontSize="12px" />
-                  ) : (
-                    <AddIcon fontSize="12px" />
-                  )}
-                </AccordionButton>
-              </h2>
-              <AccordionPanel pb={4} fontSize={['0.875rem', '1.125rem']}>
-                {item.answer}
-              </AccordionPanel>
-            </>
-          )}
-        </AccordionItem>
-      ))}
-    </Accordion>
+                    <Box
+                      as="span"
+                      flex="1"
+                      textAlign="left"
+                      overflow="hidden"
+                      whiteSpace="normal"
+                    >
+                      {item.question}
+                    </Box>
+                    {isExpanded ? (
+                      <MinusIcon fontSize="12px" />
+                    ) : (
+                      <AddIcon fontSize="12px" />
+                    )}
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel
+                  py={'1rem'}
+                  fontSize={{ base: '0.875rem', lg: '1.125rem' }}
+                >
+                  {item.answer}
+                </AccordionPanel>
+              </>
+            )}
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </Box>
   );
 };
 
