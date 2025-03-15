@@ -7,7 +7,7 @@ import {
 import React, { useContext, useEffect, useState } from 'react';
 import { LastUpdatedPosContext } from './index.js';
 import { v4 as uuid } from 'uuid';
-import { Plugin } from 'prosemirror-state';
+import { Plugin, TextSelection } from 'prosemirror-state';
 
 export const UserNotesNode = Node.create({
   name: 'userNotes',
@@ -34,6 +34,25 @@ export const UserNotesNode = Node.create({
             type: 'userNotes',
             id: uuid(),
           });
+        },
+      deleteUserNotes:
+        () =>
+        ({ state, dispatch }) => {
+          const { selection } = state;
+          let { from, to } = selection;
+          let hasDeleted = false;
+
+          state.doc.nodesBetween(from, to, (node, pos) => {
+            if (node.type.name === 'userNotes') {
+              const startPos = pos;
+              const endPos = startPos + node.nodeSize;
+              dispatch(state.tr.delete(startPos, endPos));
+              hasDeleted = true;
+              return false;
+            }
+          });
+
+          return hasDeleted;
         },
     };
   },
@@ -150,16 +169,18 @@ export const UserNotesNode = Node.create({
 
       const handleBlur = () => {
         const { node, getPos } = props;
-        const { view } = props.editor;
-        const { tr } = view.state;
         const pos = getPos();
-        const transaction = tr.setNodeMarkup(pos, node.type, {
+        const transaction = props.editor.state.tr.setSelection(
+          TextSelection.near(props.editor.state.doc.resolve(pos))
+        );
+        props.editor.view.dispatch(transaction);
+
+        transaction.setNodeMarkup(pos, node.type, {
           ...node.attrs,
           userNotes: localUserNotes,
         });
-
         setLastUpdatedPos(pos);
-        view.dispatch(transaction);
+        props.editor.view.dispatch(transaction);
       };
       return (
         <NodeViewWrapper className="user-notes user-notes-full-width">
