@@ -8,22 +8,9 @@ const ConnectMinistryFaq = () => {
 
   const faqData = [
     {
-      title: 'When do LIFE Groups happen?',
-      content: `LIFE Groups happen every Tuesday or Wednesday nights across the city and university campuses! If you would like to join us, please sign-up https://bit.ly/summerLG2024, and we will contact you shortly after.`,
-    },
-    {
       title:
         "Can I join Sunday Celebration/Church Events/LIFE Groups if I'm not a Christian?",
       content: `Yes! We welcome anyone to be a part of our community! If anything, we would love to meet you in person.`,
-    },
-    {
-      title:
-        "I study at a HK university and my campus doesn't have a LIFE Group, what can I do?",
-      content: `You can still sign up for LIFE Group and we will contact you shortly to see how we can best accommodate your needs!`,
-    },
-    {
-      title: 'What is the weather policy for the LIFE Group gatherings?',
-      content: `In the case that extreme weather condition signals are hoisted by Hong Kong Observatory (e.g. T8/9/10), please contact the respective leader of each LIFE Group for more information.\n\nIf you’re not sure who the leader of the LIFE Group is, please contact us by dropping an email support@hongkong.hmcc.net.`,
     },
     {
       title: 'How do I learn more about the different ministries?',
