@@ -19,6 +19,22 @@ import LifeGroupFaq from './LifeGroupFaq';
 import BackButton from './DiscoverBackButton';
 
 const LifeGroupPage = () => {
+  const imageHeight = {
+    base: '60px',
+    sm: '75px',
+    md: '100px',
+    lg: '125px',
+  };
+
+  const gap = {
+    base: '0.5rem',
+    sm: '0.75rem',
+    md: '1rem',
+    lg: '1.25rem',
+  };
+
+  const margin = '1rem';
+
   return (
     <Box bgColor="#F6FAFF">
       <BackButton />
@@ -31,8 +47,8 @@ const LifeGroupPage = () => {
           gap={{ base: '1.75rem', md: '2.5rem', lg: '4rem' }}
         >
           <VStack
-            maxWidth={{ base: '95%', lg: '50%' }}
-            spacing={{ base: '1rem', lg: '1.5rem' }}
+            maxWidth={{ base: '95%', xl: '50%' }}
+            spacing={{ base: '1rem', xl: '1.5rem' }}
           >
             <Text
               color="#0C0C20"
@@ -46,7 +62,7 @@ const LifeGroupPage = () => {
             </Text>
             <Image
               src={`${process.env.PUBLIC_URL}/images/connect/life-design-mobile.png`}
-              display={{ base: 'block', lg: 'none' }}
+              display={{ base: 'block', xl: 'none' }}
               maxW={{ sm: '80%', md: '60%' }}
             />
             <Text
@@ -61,15 +77,15 @@ const LifeGroupPage = () => {
 
           <Box
             display="flex"
-            flexDirection={{ base: 'column-reverse', lg: 'row' }}
-            alignItems={{ base: 'center', lg: 'flex-start' }}
+            flexDirection={{ base: 'column-reverse', xl: 'row' }}
+            alignItems={{ base: 'center', xl: 'flex-start' }}
             gap={'3rem'}
           >
             <VStack
               textAlign={['center', 'left']}
               spacing={'1.25rem'}
-              alignItems={{ base: 'center', lg: 'flex-start' }}
-              maxWidth={{ base: '100%', lg: '45%' }}
+              alignItems={{ base: 'center', xl: 'flex-start' }}
+              maxWidth={{ base: '100%', xl: '45%' }}
             >
               <HStack spacing={'1rem'}>
                 <Icon
@@ -92,6 +108,7 @@ const LifeGroupPage = () => {
                 fontSize={{ base: '0.875rem', md: '1rem', lg: '1.125rem' }}
                 fontWeight={400}
                 fontFamily="Manrope"
+                textAlign={{ base: 'center', xl: 'left' }}
               >
                 There is no better way to get a taste of who we are and what we
                 believe in then to check out one of our LIFE Groups. This is an
@@ -117,7 +134,7 @@ const LifeGroupPage = () => {
                 letterSpacing={'0.25rem'}
                 color={'#F6FAFF'}
                 fontFamily={'Manrope'}
-                display={{ base: 'none', lg: 'flex' }}
+                display={{ base: 'none', xl: 'flex' }}
                 _hover={{ textDecoration: 'none' }}
                 alignItems="center"
                 justifyContent="center"
@@ -138,7 +155,7 @@ const LifeGroupPage = () => {
                 letterSpacing={'0.25rem'}
                 color={'#F6FAFF'}
                 fontFamily={'Manrope'}
-                display={{ base: 'flex', lg: 'none' }}
+                display={{ base: 'flex', xl: 'none' }}
                 _hover={{ textDecoration: 'none' }}
                 alignItems="center"
                 justifyContent="center"
@@ -147,7 +164,7 @@ const LifeGroupPage = () => {
               </Button>
               <Image
                 src={`${process.env.PUBLIC_URL}/images/connect/life-design.png`}
-                display={{ base: 'none', lg: 'block' }}
+                display={{ base: 'none', xl: 'block' }}
               />
               <AspectRatio ratio={16 / 9} borderRadius="20" w={'100%'}>
                 <iframe
@@ -158,66 +175,132 @@ const LifeGroupPage = () => {
               </AspectRatio>
             </VStack>
           </Box>
-          <Box flex={1} position="relative">
+          <Box
+            flex={1}
+            position="relative"
+            display={{ base: 'none', xl: 'flex' }}
+          >
             {/* Main Image */}
             <Image
               src={`${process.env.PUBLIC_URL}/images/connect/LG-map.png`}
               position="relative" // Ensure the main image is in the normal flow
             />
 
-            {/* TODO-YY: Change to flex after inserting correct images */}
-            <Box display={{ base: 'none', xl: 'none' }}>
-              {/* Left Side Images */}
-              <Image
-                src={`${process.env.PUBLIC_URL}/images/connect/university_students.jpg`}
-                position="absolute"
-                top="5%" // Adjust manually
-                left="-15%" // Adjust manually
-                height="125px" // Adjust size as needed
-                style={{ transform: 'translate(-50%, -50%)' }} // Center the image
-              />
-              <Image
-                src={`${process.env.PUBLIC_URL}/images/connect/university_students.jpg`}
-                position="absolute"
-                top="40%" // Adjust manually
-                left="-30%" // Adjust manually
-                height="125px" // Adjust size as needed
-                style={{ transform: 'translate(-50%, -50%)' }} // Center the image
-              />
-              <Image
-                src={`${process.env.PUBLIC_URL}/images/connect/university_students.jpg`}
-                position="absolute"
-                top="75%" // Adjust manually
-                left="-10%" // Adjust manually
-                height="125px" // Adjust size as needed
-                style={{ transform: 'translate(-50%, -50%)' }} // Center the image
-              />
+            {/* Left Side Images */}
+            <Image
+              src={`${process.env.PUBLIC_URL}/images/connect/left-1.jpg`}
+              position="absolute"
+              top="50px"
+              left="10px"
+              width="125px"
+              style={{ transform: 'translate(-50%, -50%)' }} // Center the image
+            />
+            <Image
+              src={`${process.env.PUBLIC_URL}/images/connect/left-2.jpg`}
+              position="absolute"
+              top="75px"
+              left="-150px"
+              width="150px"
+              style={{ transform: 'translate(-50%, -50%)' }} // Center the image
+            />
+            <Image
+              src={`${process.env.PUBLIC_URL}/images/connect/left-3.jpg`}
+              position="absolute"
+              top="210px"
+              left="-125px"
+              width="250px"
+              style={{ transform: 'translate(-50%, -50%)' }} // Center the image
+            />
+            <Image
+              src={`${process.env.PUBLIC_URL}/images/connect/left-4.jpg`}
+              position="absolute"
+              top="345px"
+              left="-100px"
+              width="125px"
+              style={{ transform: 'translate(-50%, -50%)' }} // Center the image
+            />
 
-              {/* Right Side Images */}
-              <Image
-                src={`${process.env.PUBLIC_URL}/images/connect/university_students.jpg`}
-                position="absolute"
-                top="5%" // Adjust manually
-                right="-10%" // Adjust manually
-                height="125px" // Adjust size as needed
-                style={{ transform: 'translate(50%, -50%)' }} // Center the image
-              />
-              <Image
-                src={`${process.env.PUBLIC_URL}/images/connect/university_students.jpg`}
-                position="absolute"
-                top="40%" // Adjust manually
-                right="-30%" // Adjust manually
-                height="125px" // Adjust size as needed
-                style={{ transform: 'translate(50%, -50%)' }} // Center the image
-              />
-              <Image
-                src={`${process.env.PUBLIC_URL}/images/connect/university_students.jpg`}
-                position="absolute"
-                top="80%" // Adjust manually
-                right="-15%" // Adjust manually
-                height="125px" // Adjust size as needed
-                style={{ transform: 'translate(50%, -50%)' }} // Center the image
-              />
+            {/* Right Side Images */}
+            <Image
+              src={`${process.env.PUBLIC_URL}/images/connect/right-1.jpg`}
+              position="absolute"
+              top="50px"
+              right="-125px"
+              width="225px"
+              style={{ transform: 'translate(50%, -50%)' }} // Center the image
+            />
+            <Image
+              src={`${process.env.PUBLIC_URL}/images/connect/right-2.jpg`}
+              position="absolute"
+              top="200px"
+              right="-75px"
+              width="190px"
+              style={{ transform: 'translate(50%, -50%)' }} // Center the image
+            />
+            <Image
+              src={`${process.env.PUBLIC_URL}/images/connect/right-3.jpg`}
+              position="absolute"
+              top="225px"
+              right="-240px"
+              width="100px"
+              style={{ transform: 'translate(50%, -50%)' }} // Center the image
+            />
+            <Image
+              src={`${process.env.PUBLIC_URL}/images/connect/right-4.jpg`}
+              position="absolute"
+              top="325px"
+              right="-100px"
+              width="125px"
+              style={{ transform: 'translate(50%, -50%)' }} // Center the image
+            />
+          </Box>
+          <Box
+            w="100%"
+            display={{ base: 'flex', xl: 'none' }}
+            flexDirection="column"
+            alignItems="center"
+          >
+            {/* Top Row: Left Side Images */}
+            <Box
+              display="flex"
+              flexDir="row"
+              justifyContent="center"
+              gap={gap}
+              mb={margin}
+              w="100%"
+            >
+              {['left-1', 'left-2', 'left-3', 'left-4'].map((image) => (
+                <Image
+                  key={image}
+                  src={`${process.env.PUBLIC_URL}/images/connect/${image}.jpg`}
+                  height={imageHeight}
+                />
+              ))}
+            </Box>
+
+            {/* Main Image */}
+            <Image
+              src={`${process.env.PUBLIC_URL}/images/connect/LG-map.png`}
+              width="100%"
+              maxWidth="600px"
+            />
+
+            {/* Bottom Row: Right Side Images */}
+            <Box
+              display="flex"
+              flexDir="row"
+              justifyContent="center"
+              gap={gap}
+              mt={margin}
+              w="100%"
+            >
+              {['right-1', 'right-2', 'right-3', 'right-4'].map((image) => (
+                <Image
+                  key={image}
+                  src={`${process.env.PUBLIC_URL}/images/connect/${image}.jpg`}
+                  height={imageHeight}
+                />
+              ))}
             </Box>
           </Box>
           <Box display="flex" flexDir="column" width={'100%'} gap={'2rem'}>
