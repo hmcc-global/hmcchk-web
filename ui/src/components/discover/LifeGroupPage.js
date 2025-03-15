@@ -158,11 +158,67 @@ const LifeGroupPage = () => {
               </AspectRatio>
             </VStack>
           </Box>
-          <Box flex={1}>
+          <Box flex={1} position="relative">
+            {/* Main Image */}
             <Image
               src={`${process.env.PUBLIC_URL}/images/connect/LG-map.png`}
-              mr={[0, 6]}
+              position="relative" // Ensure the main image is in the normal flow
             />
+
+            {/* TODO-YY: Change to flex after inserting correct images */}
+            <Box display={{ base: 'none', xl: 'none' }}>
+              {/* Left Side Images */}
+              <Image
+                src={`${process.env.PUBLIC_URL}/images/connect/university_students.jpg`}
+                position="absolute"
+                top="5%" // Adjust manually
+                left="-15%" // Adjust manually
+                height="125px" // Adjust size as needed
+                style={{ transform: 'translate(-50%, -50%)' }} // Center the image
+              />
+              <Image
+                src={`${process.env.PUBLIC_URL}/images/connect/university_students.jpg`}
+                position="absolute"
+                top="40%" // Adjust manually
+                left="-30%" // Adjust manually
+                height="125px" // Adjust size as needed
+                style={{ transform: 'translate(-50%, -50%)' }} // Center the image
+              />
+              <Image
+                src={`${process.env.PUBLIC_URL}/images/connect/university_students.jpg`}
+                position="absolute"
+                top="75%" // Adjust manually
+                left="-10%" // Adjust manually
+                height="125px" // Adjust size as needed
+                style={{ transform: 'translate(-50%, -50%)' }} // Center the image
+              />
+
+              {/* Right Side Images */}
+              <Image
+                src={`${process.env.PUBLIC_URL}/images/connect/university_students.jpg`}
+                position="absolute"
+                top="5%" // Adjust manually
+                right="-10%" // Adjust manually
+                height="125px" // Adjust size as needed
+                style={{ transform: 'translate(50%, -50%)' }} // Center the image
+              />
+              <Image
+                src={`${process.env.PUBLIC_URL}/images/connect/university_students.jpg`}
+                position="absolute"
+                top="40%" // Adjust manually
+                right="-30%" // Adjust manually
+                height="125px" // Adjust size as needed
+                style={{ transform: 'translate(50%, -50%)' }} // Center the image
+              />
+              <Image
+                src={`${process.env.PUBLIC_URL}/images/connect/university_students.jpg`}
+                position="absolute"
+                top="80%" // Adjust manually
+                right="-15%" // Adjust manually
+                height="125px" // Adjust size as needed
+                style={{ transform: 'translate(50%, -50%)' }} // Center the image
+              />
+            </Box>
           </Box>
           <Box display="flex" flexDir="column" width={'100%'} gap={'2rem'}>
             <Heading
