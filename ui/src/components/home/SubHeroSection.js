@@ -22,8 +22,9 @@ const LinkCardInfo = [
     textMobile: 'Get involved in our church community',
     bgPosition: ['center bottom', 'left bottom'],
   },
+
   {
-    path: '/visit-us',
+    path: '/discover/PlanAVisit',
     mobileImage: 'visit-us.svg',
     desktopImage: 'visit-us.svg',
     title: 'Visit Us',
@@ -31,6 +32,7 @@ const LinkCardInfo = [
     textMobile: 'Check out our church by joining our Sunday Celebration',
     bgPosition: ['center bottom', 'left bottom'],
   },
+
   {
     path: '/sermons',
     mobileImage: 'sermons-mobile.svg',

@@ -121,7 +121,7 @@ const MobileNavBar = (props) => {
                 boxSize={5}
                 as={IoMdHeart}
               />
-              <Text>Connect</Text>
+              <Text>Discover</Text>
             </Link>
           </Stack>
           <Stack dir="column" spacing="0" pl="4">

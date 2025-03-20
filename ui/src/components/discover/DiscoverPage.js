@@ -1,87 +1,281 @@
 import {
   Box,
   Container,
-  Heading,
   VStack,
-  useMediaQuery,
-  Flex,
+  Text,
+  Button,
+  HStack,
+  Image,
+  Link,
 } from '@chakra-ui/react';
-import PastorGreeting from './PastorGreeting';
-import ExperienceHmcc from './ExperienceHmcc';
-import Faq from './Faq';
-import LifeGroups from './LifeGroups';
-import { useLocation } from 'react-router-dom';
-import scrollTo from '../helpers/ScrollTo';
-import { useEffect, useRef } from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { Link as ReactLink } from 'react-router-dom';
 
-const DiscoverPage = (props) => {
-  const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
-  const { hash } = useLocation();
+const DiscoverPage = () => {
+  const settings = {
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 1500,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1.5,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
-  useEffect(() => {
-    switch (hash) {
-      case '#lifegroup':
-        scrollTo('lifegroup');
-        break;
-      case '#ministries':
-        scrollTo('ministries');
-        break;
-      default:
-        break;
-    }
-  }, [hash]);
+  const content = {
+    visit: {
+      title: 'Plan a Visit',
+      image: '/images/location.svg',
+      description:
+        "Sunday Celebration is HMCC's weekend gathering where everyone in the church comes together to receive God's message, worship in community and enjoy fellowship. Everybody's welcome!",
+      link: '/discover/PlanAVisit',
+      button_color: '#EDB115',
+      hover_color: '#F5F0E0',
+    },
+    lifeGroup: {
+      title: 'Join a \n LIFE Group',
+      image: '/images/people-community.svg',
+      description:
+        'There is no better way to get a taste of who we are and what we believe in then to check out one of our LIFE Groups. This is an opportunity to experience the life-changing power of Biblical community with Love, Investment, Faith, and Enjoyment.',
+      link: '',
+      button_color: '#D46764',
+      hover_color: '#F1E6E6',
+    },
+    ministry: {
+      title: 'Connect with Our Ministries',
+      image: '/images/compass-discover-line.svg',
+      description:
+        'At Harvest Mission Community Church, we are actively reaching out to people from all walks of life, specifically youths, college students, working adults, and families.',
+      link: '',
+      button_color: '#21A0A7',
+      hover_color: '#DBF1F1',
+    },
+  };
+
+  const ContentBox = (content) => {
+    return (
+      <VStack
+        alignItems="start"
+        justifyContent="space-between"
+        h="90%"
+        px={{ base: '1', md: '4' }}
+        my={{ base: '1', md: '3' }}
+        gap={{ base: '3', md: 'none' }}
+      >
+        <HStack justifyContent="space-between" w="100%">
+          <Text
+            fontFamily="DMSerifDisplay_Italic"
+            fontSize={{ base: '1.5rem', md: '2.625rem' }}
+            fontWeight="400"
+            whiteSpace={{ base: 'none', md: 'pre-line' }}
+            lineHeight="94%"
+            letterSpacing={{ base: '0', md: '-2px' }}
+          >
+            {content.title}
+          </Text>
+          <Image src={process.env.PUBLIC_URL + content.image} />
+        </HStack>
+        <Text
+          fontFamily="Manrope"
+          fontSize={{ base: '0.875rem', md: '1.125rem' }}
+          fontWeight="400"
+        >
+          {content.description}
+        </Text>
+        <Link as={ReactLink} to={{ pathname: content.link }}>
+          <Button
+            fontFamily="Manrope"
+            fontSize="0.9rem"
+            borderRadius="0.938rem"
+            backgroundColor={content.button_color}
+            textColor="#F6FAFF"
+            letterSpacing="0.25rem"
+            border="1px solid #0C0C20;"
+            px={{ base: '1.2rem', md: '2rem' }}
+            py={{ base: '1rem', md: '1.4rem' }}
+            fontWeight="700"
+            _hover={{ backgroundColor: content.hover_color }}
+          >
+            LEARN MORE
+          </Button>
+        </Link>
+      </VStack>
+    );
+  };
 
   return (
-    <Box background="linear-gradient(151.15deg, rgba(223, 231, 255, 1.0) 11.18%, rgba(255, 255, 255, 0.3) 42.46%, rgba(202, 220, 255, 0.3) 76.7%), linear-gradient(194.34deg, #FFE6E6 1.83%, #FFFFFF 51.22%, #D6FFEA 99.59%)">
-      <Container maxW="container.xl" py={10}>
-        <VStack spacing={[4, 7]} align="stretch">
-          <Flex
-            bgImage={
-              // `linear-gradient(90deg, rgba(231, 187, 187, 0.71) 0%, rgba(89, 168, 212, 0.62) 100%), ` +
-              `url(${process.env.PUBLIC_URL}/images/connect/connect-welcome.gif)`
-            }
-            bgSize="cover"
-            bgPosition="center"
-            borderRadius="20"
-            minHeight={['30vh', '30vh', '40vh', '60vh']}
-            alt="Connect"
-            padding={6}
-            flexDirection="column-reverse"
+    <Box>
+      <Container
+        maxW="100%"
+        paddingTop={5}
+        paddingBottom={10}
+        px={0}
+        fontFamily="DMSerifDisplay_Italic"
+      >
+        <VStack alignItems="start" gap={0}>
+          <Box px={{ base: '5', md: '5', lg: '6rem' }} mb="5">
+            <Text
+              fontWeight="400"
+              fontSize={{ base: '2.25rem', md: '3.75rem' }}
+            >
+              Discover HMCC of Hong Kong
+            </Text>
+            <Text
+              fontFamily="Manrope"
+              fontWeight="700"
+              fontSize={{ base: '0.875rem', md: '1.125rem' }}
+            >
+              New here or just wanting to discover
+            </Text>
+          </Box>
+          <Box my={4} w="100vw" minH={['13em', '40vh']} overflow="hidden">
+            <Slider {...settings}>
+              <Box px={['0.5rem', '0.5rem']}>
+                <Box
+                  bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-1.png')`}
+                  borderRadius="md"
+                  bgSize="cover"
+                  h={['11em', '15rem']}
+                  bgPosition="center"
+                ></Box>
+              </Box>
+
+              <Box px={['0.5rem', '0.5rem']}>
+                <Box
+                  bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-2.png')`}
+                  borderRadius="md"
+                  bgSize="cover"
+                  h={['11em', '15rem']}
+                  bgPosition="center"
+                ></Box>
+              </Box>
+
+              <Box px={['0.5rem', '0.5rem']}>
+                <Box
+                  bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-3.png')`}
+                  borderRadius="md"
+                  bgSize="cover"
+                  h={['11em', '15rem']}
+                  bgPosition="center"
+                ></Box>
+              </Box>
+
+              <Box px={['0.5rem', '0.5rem']}>
+                <Box
+                  bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-4.png')`}
+                  borderRadius="md"
+                  bgSize="cover"
+                  h={['11em', '15rem']}
+                  bgPosition="center"
+                ></Box>
+              </Box>
+              <Box px={['0.5rem', '0.5rem']}>
+                <Box
+                  bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-5.png')`}
+                  borderRadius="md"
+                  bgSize="cover"
+                  h={['11em', '15rem']}
+                  bgPosition="center"
+                ></Box>
+              </Box>
+              <Box px={['0.5rem', '0.5rem']}>
+                <Box
+                  bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-6.png')`}
+                  borderRadius="md"
+                  bgSize="cover"
+                  h={['11em', '15rem']}
+                  px="1em"
+                  bgPosition="center"
+                ></Box>
+              </Box>
+              <Box px={['0.5rem', '0.5rem']}>
+                <Box
+                  bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-7.png')`}
+                  borderRadius="md"
+                  bgSize="cover"
+                  h={['11em', '15rem']}
+                  bgPosition="center"
+                ></Box>
+              </Box>
+            </Slider>
+          </Box>
+          <VStack
+            w="100%"
+            px={{ base: '5', md: '5', lg: '6rem' }}
+            gap={{ base: '3', md: 'none' }}
           >
-            <Box align="left" pb="3%" color="white">
-              <Heading
-                fontFamily="DMSerifDisplay_Italic"
-                as="h3"
-                fontSize={['2.75em', '3.5em', '6em']}
-                fontWeight={800}
-                textAlign="left"
-                filter="drop-shadow(0px 4px 7px rgba(0, 0, 0, 0.44))"
-                // bgGradient="linear-gradient(90deg, #79A7FF 31.77%, #D77CD9 91.79%)"
-                // bgClip="text"
-                letterSpacing={[-1, -3]}
-                w="fit-content"
-                mb="-2"
+            <HStack
+              w="100%"
+              alignItems="stretch"
+              display={{ base: 'none', md: 'flex' }}
+              justifyContent="space-between"
+            >
+              <Box
+                w="50%"
+                borderRadius="0.875rem"
+                border="0.5px solid var(--Blue-Primary, #4A6EEB);"
+                p="3"
               >
-                Welcome!
-              </Heading>
-              <Heading
-                as="h3"
-                zIndex="1"
-                fontSize={['1.5em', '2.5em', '4em']}
-                fontWeight={700}
-                textAlign="left"
-                textShadow="0px 4px 7px rgba(0, 0, 0, 0.44)"
-                letterSpacing={-1}
-                fontFamily="DMSerifDisplay_Italic"
+                {ContentBox(content.visit)}
+              </Box>
+              <Box
+                w="50%"
+                borderRadius="0.875rem"
+                border="0.5px solid var(--Blue-Primary, #4A6EEB);"
+                p="3"
               >
-                We're so glad you're here :)
-              </Heading>
+                {ContentBox(content.lifeGroup)}
+              </Box>
+            </HStack>
+            <Box
+              display={{ base: 'flex', md: 'none' }}
+              w="100%"
+              borderRadius="0.875rem"
+              border="0.5px solid var(--Blue-Primary, #4A6EEB);"
+              p="3"
+              h="max-content"
+            >
+              {ContentBox(content.visit)}
             </Box>
-          </Flex>
-          {/* <PastorGreeting /> */}
-          <ExperienceHmcc />
-          <LifeGroups isLargerThan768={isLargerThan768} />
-          <Faq />
+            <Box
+              display={{ base: 'flex', md: 'none' }}
+              w="100%"
+              borderRadius="0.875rem"
+              border="0.5px solid var(--Blue-Primary, #4A6EEB);"
+              p="3"
+              h="max-content"
+            >
+              {ContentBox(content.lifeGroup)}
+            </Box>
+            <Box
+              w="100%"
+              borderRadius="0.875rem"
+              border="0.5px solid var(--Blue-Primary, #4A6EEB);"
+              p="3"
+              h={{ base: 'max-content', md: '15rem' }}
+            >
+              {ContentBox(content.ministry)}
+            </Box>
+          </VStack>
         </VStack>
       </Container>
     </Box>
