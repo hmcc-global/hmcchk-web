@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
 import {
+  Box,
   Button,
   Container,
   Divider,
@@ -9,6 +10,7 @@ import {
   Select,
   Stack,
   Text,
+  Wrap,
 } from '@chakra-ui/react';
 import { MdArrowDropDown } from 'react-icons/md';
 import EventCard from './EventCard';
@@ -180,101 +182,106 @@ const EventsPage = (props) => {
   };
 
   return (
-    <Container maxW="container.xl">
-      <Heading
-        as="h1"
-        mb="6"
-        size="3xl"
-        pt="16"
-        fontWeight="900"
-        textAlign="center"
-        fontFamily="DMSerifDisplay_Italic"
-      >
-        Events
-      </Heading>
-      <Text
-        fontSize={{ base: 'md', md: 'xl' }}
-        textAlign="center"
-        fontWeight="600"
-        fontFamily="Manrope"
-        mb="10"
-      >
-        Check out what's happening at HMCC of Hong Kong!
-      </Text>
-      <Stack
-        border="1px"
-        p={3}
-        borderRadius={30}
-        justifyContent="space-around"
-        flexDirection={['column', 'row']}
-        spacing={[2, 0]}
-        zIndex={999}
-        top={2}
-        position="sticky"
-        alignItems="center"
-        bg="#ffffff"
-      >
-        <Grid templateColumns="repeat(3, 1fr)" gap={[3, 9]}>
-          {tagHeader.map((tag, i) => (
-            <Button
-              width={['23vw', '14vw']}
-              borderRadius={[15, 20]}
-              key={'button' + i}
-              m="0rem"
-              _hover={{ opacity: '90%' }}
-              bg={selectedFilterIndex === i ? '#3F3F3F' : 'gray.100'}
-              color={selectedFilterIndex === i ? '#ffffff' : ''}
-              id={i}
-              onClick={onFilter}
-            >
-              <Text id={i} fontSize={{ base: '80%', sm: '100%' }}>
-                {tag}
-              </Text>
-            </Button>
-          ))}
-        </Grid>
-        <Select
-          placeholder="More Filters"
-          fontWeight="600"
-          textAlign="center"
-          width={['75vw', '14vw']}
-          borderRadius={[15, 20]}
-          rightIcon={<MdArrowDropDown />}
-          variant="filled"
-          bg={selectedOption !== '' ? '#3F3F3F' : 'gray.100'}
-          color={selectedOption !== '' ? '#ffffff' : ''}
-          _hover={{
-            opacity: '90%',
-          }}
-          _focus={{
-            bg: 'gray.100',
-            color: '#000000',
-          }}
-          cursor="pointer"
-          onChange={onSelect}
-          value={selectedOption}
+    <Box bg="#F7F9FF">
+      <Container maxW="container.xl">
+        <Heading
+          as="h1"
+          mb="6"
+          size="3xl"
+          pt="16"
+          fontWeight="400"
+          textAlign="left"
+          fontFamily="DMSerifDisplay_Italic"
         >
-          {tagList.map((tag, i) => (
-            <option value={i}>{tag}</option>
-          ))}
-        </Select>
-      </Stack>
-      <Grid
-        mt="12"
-        mb="12"
-        mr={[0, 6]}
-        templateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(1, 1fr)' }}
-        gap={[3, 6]}
-      >
-        {filteredList.length > 0 &&
-          filteredList.map((event, i) => (
-            <>
-              <EventCard key={'event' + i} eventData={event} />
-              {i !== filteredList.length - 1 && <Divider />}
-            </>
-          ))}
-      </Grid>
-    </Container>
+          Events
+        </Heading>
+        <Text
+          fontSize={{ base: 'md', md: 'xl' }}
+          textAlign="left"
+          fontWeight="600"
+          fontFamily="Manrope"
+          mb="10"
+        >
+          Check out what's happening at HMCC of Hong Kong!
+        </Text>
+        <Stack
+          border="1px"
+          borderColor="#DFE7FF"
+          p={3}
+          borderRadius={['0.938rem', '3.188rem']}
+          justifyContent="space-around"
+          flexDirection={['column', 'row']}
+          spacing={[2, 0]}
+          zIndex={999}
+          top={2}
+          position="sticky"
+          alignItems="center"
+          bg="#F6FAFF"
+        >
+          <Wrap spacing={['0.5rem', '1rem']} align="center" justify="center">
+            {tagHeader.map((tag, i) => (
+              <Button
+                width={['26vw','15vw']}
+                height={['2rem', '2.625rem']}
+                borderRadius="1.875rem"
+                key={'button' + i}
+                m="0rem"
+                _hover={{ opacity: '90%' }}
+                bg={selectedFilterIndex === i ? '#4A6EEB' : '#DFE7FF'}
+                color={selectedFilterIndex === i ? '#ffffff' : ''}
+                id={i}
+                onClick={onFilter}
+              >
+                <Text id={i} fontSize={{ base: '80%', sm: '100%' }}>
+                  {tag}
+                </Text>
+              </Button>
+            ))}
+            <Select
+              placeholder="More Filters"
+              fontSize={{ base: '80%', sm: '100%' }}
+              fontWeight="600"
+              textAlign="center"
+              width={['83vw', '15vw']}
+              height={['2rem', '2.625rem']}
+              borderRadius="1.875rem"
+              rightIcon={<MdArrowDropDown />}
+              variant="filled"
+              bg={selectedOption !== '' ? '#DFE7FF' : '#DFE7FF'}
+              _hover={{
+                opacity: '90%',
+              }}
+              _focus={{
+                bg: 'gray.100',
+                color: '#000000',
+              }}
+              cursor="pointer"
+              onChange={onSelect}
+              value={selectedOption}
+            >
+              {tagList.map((tag, i) => (
+                <option value={i}>{tag}</option>
+              ))}
+            </Select>
+          </Wrap>
+        </Stack>
+        <Grid
+          mt="12"
+          mb="12"
+          mr={[0, 6]}
+          templateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(1, 1fr)' }}
+          gap={[3, 6]}
+        >
+          {filteredList.length > 0 &&
+            filteredList.map((event, i) => (
+              <>
+                <EventCard key={'event' + i} eventData={event} />
+                {i !== filteredList.length - 1 && <Divider borderColor="#A8A8A8"/>}
+              </>
+            ))}
+        </Grid>
+      </Container>
+    </Box>
   );
 };
 
