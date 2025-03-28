@@ -131,24 +131,6 @@ const Footer = () => {
             <Stack direction={['column', 'row']}>
               <VStack px={[0, '2em']} align={['center', 'start']}>
                 <Link
-                  href="/visit-us"
-                  id="footer-visit"
-                  _hover={{
-                    textDecoration: 'underline',
-                    textDecorationColor: '#4A6EEB',
-                  }}
-                >
-                  <Text
-                    fontSize="16px"
-                    fontFamily="Manrope"
-                    fontWeight="700"
-                    color="#4A6EEB"
-                    textAlign="center"
-                  >
-                    Visit
-                  </Text>
-                </Link>
-                <Link
                   href="/online"
                   id="footer-visit-online"
                   _hover={{
@@ -198,7 +180,7 @@ const Footer = () => {
                     color="#4A6EEB"
                     textAlign="center"
                   >
-                    Connect
+                    Discover
                   </Text>
                 </Link>
                 <Link
