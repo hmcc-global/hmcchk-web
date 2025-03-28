@@ -47,7 +47,7 @@ const DiscoverPage = () => {
       image: '/images/location.svg',
       description:
         "Sunday Celebration is HMCC's weekend gathering where everyone in the church comes together to receive God's message, worship in community and enjoy fellowship. Everybody's welcome!",
-      link: '/discover/PlanAVisit',
+      link: '/discover/visit-us-page',
       button_color: '#EDB115',
       hover_color: '#F5F0E0',
     },
@@ -56,7 +56,7 @@ const DiscoverPage = () => {
       image: '/images/people-community.svg',
       description:
         'There is no better way to get a taste of who we are and what we believe in then to check out one of our LIFE Groups. This is an opportunity to experience the life-changing power of Biblical community with Love, Investment, Faith, and Enjoyment.',
-      link: '',
+      link: '/discover/life-group',
       button_color: '#D46764',
       hover_color: '#F1E6E6',
     },
@@ -65,7 +65,7 @@ const DiscoverPage = () => {
       image: '/images/compass-discover-line.svg',
       description:
         'At Harvest Mission Community Church, we are actively reaching out to people from all walks of life, specifically youths, college students, working adults, and families.',
-      link: '',
+      link: '/discover/connect-ministries',
       button_color: '#21A0A7',
       hover_color: '#DBF1F1',
     },
@@ -77,7 +77,6 @@ const DiscoverPage = () => {
         alignItems="start"
         justifyContent="space-between"
         h="90%"
-        px={{ base: '1', md: '4' }}
         my={{ base: '1', md: '3' }}
         gap={{ base: '3', md: 'none' }}
       >
@@ -123,160 +122,166 @@ const DiscoverPage = () => {
   };
 
   return (
-    <Box>
+    <Box bgColor="#F6FAFF">
       <Container
-        maxW="100%"
+        maxW="container.xl"
         paddingTop={5}
-        paddingBottom={10}
-        px={0}
+        paddingBottom={{ base: '4rem', lg: '5rem' }}
         fontFamily="DMSerifDisplay_Italic"
       >
-        <VStack alignItems="start" gap={0}>
-          <Box px={{ base: '5', md: '5', lg: '6rem' }} mb="5">
-            <Text
-              fontWeight="400"
-              fontSize={{ base: '2.25rem', md: '3.75rem' }}
-            >
-              Discover HMCC of Hong Kong
-            </Text>
-            <Text
-              fontFamily="Manrope"
-              fontWeight="700"
-              fontSize={{ base: '0.875rem', md: '1.125rem' }}
-            >
-              New here or just wanting to discover
-            </Text>
-          </Box>
-          <Box my={4} w="100vw" minH={['13em', '40vh']} overflow="hidden">
-            <Slider {...settings}>
-              <Box px={['0.5rem', '0.5rem']}>
-                <Box
-                  bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-1.png')`}
-                  borderRadius="md"
-                  bgSize="cover"
-                  h={['11em', '15rem']}
-                  bgPosition="center"
-                ></Box>
-              </Box>
-
-              <Box px={['0.5rem', '0.5rem']}>
-                <Box
-                  bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-2.png')`}
-                  borderRadius="md"
-                  bgSize="cover"
-                  h={['11em', '15rem']}
-                  bgPosition="center"
-                ></Box>
-              </Box>
-
-              <Box px={['0.5rem', '0.5rem']}>
-                <Box
-                  bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-3.png')`}
-                  borderRadius="md"
-                  bgSize="cover"
-                  h={['11em', '15rem']}
-                  bgPosition="center"
-                ></Box>
-              </Box>
-
-              <Box px={['0.5rem', '0.5rem']}>
-                <Box
-                  bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-4.png')`}
-                  borderRadius="md"
-                  bgSize="cover"
-                  h={['11em', '15rem']}
-                  bgPosition="center"
-                ></Box>
-              </Box>
-              <Box px={['0.5rem', '0.5rem']}>
-                <Box
-                  bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-5.png')`}
-                  borderRadius="md"
-                  bgSize="cover"
-                  h={['11em', '15rem']}
-                  bgPosition="center"
-                ></Box>
-              </Box>
-              <Box px={['0.5rem', '0.5rem']}>
-                <Box
-                  bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-6.png')`}
-                  borderRadius="md"
-                  bgSize="cover"
-                  h={['11em', '15rem']}
-                  px="1em"
-                  bgPosition="center"
-                ></Box>
-              </Box>
-              <Box px={['0.5rem', '0.5rem']}>
-                <Box
-                  bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-7.png')`}
-                  borderRadius="md"
-                  bgSize="cover"
-                  h={['11em', '15rem']}
-                  bgPosition="center"
-                ></Box>
-              </Box>
-            </Slider>
-          </Box>
+        <Box
+          max-width="100%"
+          display="flex"
+          flexDir={'column'}
+          alignItems={'center'}
+          gap={{ base: '1.75rem', md: '2.5rem', lg: '4rem' }}
+        >
           <VStack
-            w="100%"
-            px={{ base: '5', md: '5', lg: '6rem' }}
-            gap={{ base: '3', md: 'none' }}
+            maxWidth={{ base: '95%', lg: '100%' }}
+            spacing={{ base: '1rem', lg: '1.5rem' }}
           >
-            <HStack
-              w="100%"
-              alignItems="stretch"
-              display={{ base: 'none', md: 'flex' }}
-              justifyContent="space-between"
-            >
+            <Box mb="5" alignSelf="flex-start">
+              <Text
+                fontWeight="400"
+                fontSize={{ base: '2.25rem', md: '3.75rem' }}
+              >
+                Discover HMCC of Hong Kong
+              </Text>
+              <Text
+                fontFamily="Manrope"
+                fontWeight="700"
+                fontSize={{ base: '0.875rem', md: '1.125rem' }}
+              >
+                New here or just wanting to discover
+              </Text>
+            </Box>
+            <Box my={4} w="100vw" minH={['13em', '40vh']} overflow="hidden">
+              <Slider {...settings}>
+                <Box px={['0.5rem', '0.5rem']}>
+                  <Box
+                    bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-1.png')`}
+                    borderRadius="md"
+                    bgSize="cover"
+                    h={['11em', '15rem']}
+                    bgPosition="center"
+                  ></Box>
+                </Box>
+
+                <Box px={['0.5rem', '0.5rem']}>
+                  <Box
+                    bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-2.png')`}
+                    borderRadius="md"
+                    bgSize="cover"
+                    h={['11em', '15rem']}
+                    bgPosition="center"
+                  ></Box>
+                </Box>
+
+                <Box px={['0.5rem', '0.5rem']}>
+                  <Box
+                    bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-3.png')`}
+                    borderRadius="md"
+                    bgSize="cover"
+                    h={['11em', '15rem']}
+                    bgPosition="center"
+                  ></Box>
+                </Box>
+
+                <Box px={['0.5rem', '0.5rem']}>
+                  <Box
+                    bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-4.png')`}
+                    borderRadius="md"
+                    bgSize="cover"
+                    h={['11em', '15rem']}
+                    bgPosition="center"
+                  ></Box>
+                </Box>
+                <Box px={['0.5rem', '0.5rem']}>
+                  <Box
+                    bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-5.png')`}
+                    borderRadius="md"
+                    bgSize="cover"
+                    h={['11em', '15rem']}
+                    bgPosition="center"
+                  ></Box>
+                </Box>
+                <Box px={['0.5rem', '0.5rem']}>
+                  <Box
+                    bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-6.png')`}
+                    borderRadius="md"
+                    bgSize="cover"
+                    h={['11em', '15rem']}
+                    px="1em"
+                    bgPosition="center"
+                  ></Box>
+                </Box>
+                <Box px={['0.5rem', '0.5rem']}>
+                  <Box
+                    bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-7.png')`}
+                    borderRadius="md"
+                    bgSize="cover"
+                    h={['11em', '15rem']}
+                    bgPosition="center"
+                  ></Box>
+                </Box>
+              </Slider>
+            </Box>
+            <VStack w="100%" gap={{ base: '3', md: 'none' }}>
+              <HStack
+                w="100%"
+                alignItems="stretch"
+                display={{ base: 'none', md: 'flex' }}
+                justifyContent="space-between"
+              >
+                <Box
+                  w="50%"
+                  borderRadius="0.875rem"
+                  border="0.5px solid var(--Blue-Primary, #4A6EEB);"
+                  p="3"
+                >
+                  {ContentBox(content.visit)}
+                </Box>
+                <Box
+                  w="50%"
+                  borderRadius="0.875rem"
+                  border="0.5px solid var(--Blue-Primary, #4A6EEB);"
+                  p="3"
+                >
+                  {ContentBox(content.lifeGroup)}
+                </Box>
+              </HStack>
               <Box
-                w="50%"
+                display={{ base: 'flex', md: 'none' }}
+                w="100%"
                 borderRadius="0.875rem"
                 border="0.5px solid var(--Blue-Primary, #4A6EEB);"
                 p="3"
+                h="max-content"
               >
                 {ContentBox(content.visit)}
               </Box>
               <Box
-                w="50%"
+                display={{ base: 'flex', md: 'none' }}
+                w="100%"
                 borderRadius="0.875rem"
                 border="0.5px solid var(--Blue-Primary, #4A6EEB);"
                 p="3"
+                h="max-content"
               >
                 {ContentBox(content.lifeGroup)}
               </Box>
-            </HStack>
-            <Box
-              display={{ base: 'flex', md: 'none' }}
-              w="100%"
-              borderRadius="0.875rem"
-              border="0.5px solid var(--Blue-Primary, #4A6EEB);"
-              p="3"
-              h="max-content"
-            >
-              {ContentBox(content.visit)}
-            </Box>
-            <Box
-              display={{ base: 'flex', md: 'none' }}
-              w="100%"
-              borderRadius="0.875rem"
-              border="0.5px solid var(--Blue-Primary, #4A6EEB);"
-              p="3"
-              h="max-content"
-            >
-              {ContentBox(content.lifeGroup)}
-            </Box>
-            <Box
-              w="100%"
-              borderRadius="0.875rem"
-              border="0.5px solid var(--Blue-Primary, #4A6EEB);"
-              p="3"
-              h={{ base: 'max-content', md: '15rem' }}
-            >
-              {ContentBox(content.ministry)}
-            </Box>
+              <Box
+                w="100%"
+                borderRadius="0.875rem"
+                border="0.5px solid var(--Blue-Primary, #4A6EEB);"
+                p="3"
+                h={{ base: 'max-content', md: '15rem' }}
+              >
+                {ContentBox(content.ministry)}
+              </Box>
+            </VStack>
           </VStack>
-        </VStack>
+        </Box>
       </Container>
     </Box>
   );
