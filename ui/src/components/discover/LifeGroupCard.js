@@ -14,7 +14,8 @@ const LifeGroupCard = (props) => {
 
   return (
     <Flex
-      py={'1.75rem'}
+      py={{ base: '1.25rem', lg: '1.75rem' }}
+      px={{ base: '1rem', lg: '1.5rem' }}
       borderRadius="1.25rem"
       bgImage={`linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${process.env.PUBLIC_URL}/${imgPath}')`}
       bgPosition="center"
@@ -25,11 +26,11 @@ const LifeGroupCard = (props) => {
       flexDir="column"
       fontFamily="Manrope"
     >
-      <Text fontSize={{ base: '1.125rem', lg: '2rem' }} fontWeight={700}>
+      <Text fontSize={{ base: '1.375rem', lg: '2rem' }} fontWeight={800}>
         {name}
       </Text>
       <Text
-        fontSize={['0.75rem', '0.875rem']}
+        fontSize={{ base: '0.875rem', lg: '1.125rem' }}
         mb={4}
         fontWeight={{ base: 400, lg: 700 }}
       >
@@ -51,7 +52,7 @@ const LifeGroupCard = (props) => {
             backdropFilter="blur(3px)"
             fontWeight={700}
           >
-            <Text fontSize={{ base: '0.75rem', lg: '1.125rem' }}>
+            <Text fontSize={{ base: '0.875rem', lg: '1.125rem' }}>
               {' '}
               {igHandle}
             </Text>
