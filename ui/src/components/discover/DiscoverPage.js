@@ -49,7 +49,7 @@ const DiscoverPage = () => {
         "Sunday Celebration is HMCC's weekend gathering where everyone in the church comes together to receive God's message, worship in community and enjoy fellowship. Everybody's welcome!",
       link: '/discover/visit-us-page',
       button_color: '#EDB115',
-      hover_color: '#F5F0E0',
+      hover_color: '#BE8E11',
     },
     lifeGroup: {
       title: 'Join a \n LIFE Group',
@@ -58,7 +58,7 @@ const DiscoverPage = () => {
         'There is no better way to get a taste of who we are and what we believe in then to check out one of our LIFE Groups. This is an opportunity to experience the life-changing power of Biblical community with Love, Investment, Faith, and Enjoyment.',
       link: '/discover/life-group',
       button_color: '#D46764',
-      hover_color: '#F1E6E6',
+      hover_color: '#AA5250',
     },
     ministry: {
       title: 'Connect with Our Ministries',
@@ -67,7 +67,7 @@ const DiscoverPage = () => {
         'At Harvest Mission Community Church, we are actively reaching out to people from all walks of life, specifically youths, college students, working adults, and families.',
       link: '/discover/connect-ministries',
       button_color: '#21A0A7',
-      hover_color: '#DBF1F1',
+      hover_color: '#477A7E',
     },
   };
 
@@ -77,7 +77,7 @@ const DiscoverPage = () => {
         alignItems="start"
         justifyContent="space-between"
         h="90%"
-        my={{ base: '1', md: '3' }}
+        m={{ base: '1', md: '3' }}
         gap={{ base: '3', md: 'none' }}
       >
         <HStack justifyContent="space-between" w="100%">
@@ -100,7 +100,7 @@ const DiscoverPage = () => {
         >
           {content.description}
         </Text>
-        <Link as={ReactLink} to={{ pathname: content.link }}>
+        <Link href={content.link}>
           <Button
             fontFamily="Manrope"
             fontSize="0.9rem"

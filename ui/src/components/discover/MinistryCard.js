@@ -98,6 +98,7 @@ const MinistryCard = (props) => {
                 px={'30px'}
                 py={'22px'}
                 fontSize={['0.8rem', '0.6rem', '0.8rem']}
+                _hover={{ backgroundColor: '#477A7E' }}
               >
                 LEARN MORE →
               </Button>
