@@ -50,7 +50,7 @@ const PlanAVisit = (props) => {
     //The Header
     <Box bgColor="#F6FAFF">
       <BackButton />
-      <Container maxW="container.lg" py={10} pt="60px">
+      <Container maxW="container.xl" py={10} pt="60px">
         <VStack align="center">
           <Text
             color="#0C0C20"
