@@ -16,8 +16,6 @@ import {
 
 import { MdAccessTime, MdLocationOn } from 'react-icons/md';
 import CustomAccordion from './CustomAccordion';
-
-//borrow Kenneth's BackButton component
 import BackButton from './BackButton';
 
 const SUNDAY_CELEBRATION_GOOGLE_MAPS_EMBED =
