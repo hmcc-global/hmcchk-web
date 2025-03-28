@@ -1,6 +1,7 @@
 import {
   AspectRatio,
   Box,
+  Button,
   Container,
   Heading,
   HStack,
@@ -9,48 +10,47 @@ import {
   SimpleGrid,
   VStack,
   Text,
-  useMediaQuery,
+  Link,
 } from '@chakra-ui/react';
 import LifeGroupCard from './LifeGroupCard';
-import LifeGroupSignupButton from './LifeGroupSignupButton';
 import lifeGroupList from './lifegroups.json';
 import { MdPeople } from 'react-icons/md';
-import Faq from './LifeGroupFaq';
+import LifeGroupFaq from './LifeGroupFaq';
+import BackButton from './DiscoverBackButton';
 
 const LifeGroupPage = () => {
-  const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
-
   return (
     <Box bgColor="#F6FAFF">
-      <Container maxW="container.xl" py={{ base: '2rem', lg: '5rem' }}>
+      <BackButton />
+      <Container maxW="container.xl" py={{ base: '4rem', lg: '5rem' }}>
         <Box
           id="lifegroup"
           display="flex"
           flexDir={'column'}
           alignItems={'center'}
-          gap={{ base: '1.75rem', lg: '4rem' }}
+          gap={{ base: '1.75rem', md: '2.5rem', lg: '4rem' }}
         >
           <VStack
             maxWidth={{ base: '95%', lg: '50%' }}
             spacing={{ base: '1rem', lg: '1.5rem' }}
           >
-            <Heading
-              as="h1"
-              fontSize={{ base: '2.25rem', lg: '3.75rem' }}
+            <Text
+              color="#0C0C20"
+              fontSize={{ base: '2.25rem', md: '3rem', lg: '3.75rem' }}
               fontWeight={400}
               textAlign="center"
               fontFamily="DMSerifDisplay_Italic"
               letterSpacing={'-0.1rem'}
             >
               Join a LIFE Group
-            </Heading>
+            </Text>
             <Image
               src={`${process.env.PUBLIC_URL}/images/connect/life-design-mobile.png`}
               display={{ base: 'block', lg: 'none' }}
               maxW={{ sm: '80%', md: '60%' }}
             />
             <Text
-              fontSize={{ base: '0.875rem', lg: '1.125rem' }}
+              fontSize={{ base: '0.875rem', md: '1rem', lg: '1.125rem' }}
               textAlign={'center'}
               fontFamily={'Manrope'}
             >
@@ -61,8 +61,8 @@ const LifeGroupPage = () => {
 
           <Box
             display="flex"
-            flexDirection={isLargerThan768 ? 'row' : 'column-reverse'}
-            alignItems={isLargerThan768 ? 'flex-end' : 'center'}
+            flexDirection={{ base: 'column-reverse', lg: 'row' }}
+            alignItems={{ base: 'center', lg: 'flex-start' }}
             gap={'3rem'}
           >
             <VStack
@@ -74,12 +74,12 @@ const LifeGroupPage = () => {
               <HStack spacing={'1rem'}>
                 <Icon
                   as={MdPeople}
-                  boxSize={{ base: '1.875rem', lg: '2.5rem' }}
+                  boxSize={{ base: '1.875rem', md: '2.125rem', lg: '2.5rem' }}
                   color={'#D46764'}
                 />
                 <Heading
                   as="h2"
-                  fontSize={{ base: '2rem', lg: '2.625rem' }}
+                  fontSize={{ base: '2rem', md: '2.25rem', lg: '2.625rem' }}
                   fontWeight={400}
                   textAlign="center"
                   fontFamily="DMSerifDisplay_Italic"
@@ -89,7 +89,7 @@ const LifeGroupPage = () => {
                 </Heading>
               </HStack>
               <Text
-                fontSize={{ base: '0.875rem', lg: '1.125rem' }}
+                fontSize={{ base: '0.875rem', md: '1rem', lg: '1.125rem' }}
                 fontWeight={400}
                 fontFamily="Manrope"
               >
@@ -105,10 +105,46 @@ const LifeGroupPage = () => {
                 Gospel. At HMCC, we believe in the power of community and the
                 fullness of life that it offers -- which is why we believe in{' '}
               </Text>
-              <LifeGroupSignupButton />
+              <Button
+                as={Link}
+                href="https://bit.ly/LGSignup2024"
+                borderRadius={'0.9375rem'}
+                bgColor="#D46764"
+                py={'1.75rem'}
+                px={'1.75rem'}
+                fontSize={{ base: '0.875rem', lg: '1rem' }}
+                fontWeight="700"
+                letterSpacing={'0.25rem'}
+                color={'#F6FAFF'}
+                fontFamily={'Manrope'}
+                display={{ base: 'none', lg: 'flex' }}
+                _hover={{ textDecoration: 'none' }}
+                alignItems="center"
+                justifyContent="center"
+              >
+                SIGN UP FOR LIFE GROUP
+              </Button>
             </VStack>
             <VStack flex={1} gap={'2rem'} w="100%">
-              {/* <LifeGroupSignupButton /> */}
+              <Button
+                as={Link}
+                href="https://bit.ly/LGSignup2024"
+                borderRadius={'0.9375rem'}
+                bgColor="#D46764"
+                py={'1.75rem'}
+                px={'1.75rem'}
+                fontSize={{ base: '0.875rem', lg: '1rem' }}
+                fontWeight="700"
+                letterSpacing={'0.25rem'}
+                color={'#F6FAFF'}
+                fontFamily={'Manrope'}
+                display={{ base: 'flex', lg: 'none' }}
+                _hover={{ textDecoration: 'none' }}
+                alignItems="center"
+                justifyContent="center"
+              >
+                SIGN UP FOR LIFE GROUP
+              </Button>
               <Image
                 src={`${process.env.PUBLIC_URL}/images/connect/life-design.png`}
                 display={{ base: 'none', lg: 'block' }}
@@ -131,7 +167,7 @@ const LifeGroupPage = () => {
           <Box display="flex" flexDir="column" width={'100%'} gap={'2rem'}>
             <Heading
               textAlign="center"
-              fontSize={{ base: '0.75rem', lg: '1.25rem' }}
+              fontSize={{ base: '0.75rem', md: '1rem', lg: '1.25rem' }}
               fontFamily="Manrope"
               fontWeight={700}
               letterSpacing={{ lg: '0.25rem' }}
@@ -146,7 +182,7 @@ const LifeGroupPage = () => {
                 ))}
             </SimpleGrid>
           </Box>
-          <Faq />
+          <LifeGroupFaq />
         </Box>
       </Container>
     </Box>
