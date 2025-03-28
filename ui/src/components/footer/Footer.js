@@ -307,21 +307,21 @@ const Footer = () => {
             </VStack>
           </Flex>
         </Flex>
-      </Flex>
-      <Box w="100%">
-        <Text
-          textAlign="center"
-          color="#0C0C20"
-          fontSize="14px"
-          fontFamily="'Inter', sans-serif"
-          fontWeight="400"
-          lineHeight="21px"
-          wordBreak="break-word"
-        >
-          © 1996-2025 Harvest Mission Community Church. All rights reserved.
-        </Text>
-      </Box>
-    </Container>
+        <Box w="100%">
+          <Text
+            textAlign="center"
+            color="#0C0C20"
+            fontSize="14px"
+            fontFamily="'Inter', sans-serif"
+            fontWeight="400"
+            lineHeight="21px"
+            wordBreak="break-word"
+          >
+            © 1996-2025 Harvest Mission Community Church. All rights reserved.
+          </Text>
+        </Box>
+      </Container>
+    </Box>
   );
 };
 export default Footer;
