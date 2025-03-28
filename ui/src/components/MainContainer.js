@@ -172,7 +172,7 @@ const MainContainer = () => {
           exact
           path="/discover/connect-ministries"
           permissions={['public']}
-          component={LifeGroupPage}
+          component={ConnectMinistry}
         />
         <PrivateRoute
           exact

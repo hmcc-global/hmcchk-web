@@ -79,7 +79,7 @@ const LifeGroupPage = () => {
             display="flex"
             flexDirection={{ base: 'column-reverse', xl: 'row' }}
             alignItems={{ base: 'center', xl: 'flex-start' }}
-            gap={'3rem'}
+            gap={'2.3rem'}
           >
             <VStack
               textAlign={['center', 'left']}
@@ -134,8 +134,8 @@ const LifeGroupPage = () => {
                 letterSpacing={'0.25rem'}
                 color={'#F6FAFF'}
                 fontFamily={'Manrope'}
-                display={{ base: 'none', xl: 'flex' }}
-                _hover={{ textDecoration: 'none' }}
+                display="flex"
+                _hover={{ textDecoration: 'none', backgroundColor: '#AA5250' }}
                 alignItems="center"
                 justifyContent="center"
               >
@@ -143,25 +143,6 @@ const LifeGroupPage = () => {
               </Button>
             </VStack>
             <VStack flex={1} gap={'2rem'} w="100%">
-              <Button
-                as={Link}
-                href="https://bit.ly/LGSignup2024"
-                borderRadius={'0.9375rem'}
-                bgColor="#D46764"
-                py={'1.75rem'}
-                px={'1.75rem'}
-                fontSize={{ base: '0.875rem', lg: '1rem' }}
-                fontWeight="700"
-                letterSpacing={'0.25rem'}
-                color={'#F6FAFF'}
-                fontFamily={'Manrope'}
-                display={{ base: 'flex', xl: 'none' }}
-                _hover={{ textDecoration: 'none' }}
-                alignItems="center"
-                justifyContent="center"
-              >
-                SIGN UP FOR LIFE GROUP
-              </Button>
               <Image
                 src={`${process.env.PUBLIC_URL}/images/connect/life-design.png`}
                 display={{ base: 'none', xl: 'block' }}
@@ -306,13 +287,15 @@ const LifeGroupPage = () => {
           <Box display="flex" flexDir="column" width={'100%'} gap={'2rem'}>
             <Heading
               textAlign="center"
-              fontSize={{ base: '0.75rem', md: '1rem', lg: '1.25rem' }}
+              fontSize={{ base: '1.2rem', md: '1rem', lg: '1.25rem' }}
               fontFamily="Manrope"
               fontWeight={700}
-              letterSpacing={{ lg: '0.25rem' }}
+              letterSpacing={{ base: '0.125rem', lg: '0.25rem' }}
               textTransform={{ lg: 'uppercase' }}
+              w="80%"
+              mx="auto"
             >
-              Check out the different LIFE Groups in HMCC!
+              CHECK OUT THE DIFFERENT LIFE GROUPS IN HMCC!
             </Heading>
             <SimpleGrid columns={[2, 3]} spacing={3}>
               {lifeGroupList.length > 0 &&

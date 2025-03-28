@@ -27,7 +27,7 @@ const BackButton = () => {
     <Box
       position="fixed" // Fix the button to the top left
       width="100%" // Adjust width as needed
-      zIndex="1" // Ensure it stays above other content
+      zIndex="2" // Ensure it stays above other content
       opacity={visible ? 1 : 0} // Change opacity based on visibility
       backdropFilter="blur(10px)" // Apply the blur effect
       bg="#F6FAFF" // Optional: semi-transparent background color

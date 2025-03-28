@@ -40,19 +40,19 @@ const LifeGroupCard = (props) => {
       <LinkBox>
         <LinkOverlay href={igLink} isExternal>
           <Button
-            leftIcon={<AiOutlineInstagram size="20px" />}
+            leftIcon={<AiOutlineInstagram size="1.2rem" />}
             colorScheme="whiteAlpha"
             borderColor="#fff"
             color="#fff"
             size={['xs', 'xs', 'sm']}
             borderRadius={'0.625rem'}
-            px={{ base: '1rem', lg: '1.75rem' }}
+            px={{ base: '0.60rem', lg: '1.75rem' }}
             py={'0.375rem'}
             variant="outline"
             backdropFilter="blur(3px)"
             fontWeight={700}
           >
-            <Text fontSize={{ base: '0.875rem', lg: '1.125rem' }}>
+            <Text fontSize={{ base: '0.62rem', lg: '1.125rem' }}>
               {' '}
               {igHandle}
             </Text>

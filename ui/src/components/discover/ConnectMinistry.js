@@ -17,11 +17,10 @@ const ConnectMinistry = () => {
     lg: false,
   });
   return (
-    <Box bgColor="#F6FAFF">
+    <Box bgColor="#F6FAFF" id="connect-ministries">
       <BackButton />
       <Container maxW="container.xl" py={{ base: '4rem', lg: '5rem' }}>
         <Box
-          id="connect-ministries"
           display="flex"
           flexDir={'column'}
           alignItems={'center'}
