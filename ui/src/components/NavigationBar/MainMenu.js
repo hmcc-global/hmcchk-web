@@ -94,7 +94,7 @@ const MainMenu = ({ login, onClose }) => {
                 </Flex>
               </Link>
               <Link
-                href="/connect"
+                href="/discover"
                 onClick={onClose}
                 id="menu-connect"
                 w="100%"

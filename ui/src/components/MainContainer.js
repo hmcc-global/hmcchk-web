@@ -7,7 +7,7 @@ import LoginContainer from './auth/LoginContainer';
 import SignupContainer from './auth/SignupContainer';
 import EventsPage from './events/EventsPage';
 import VisitUsPage from './visit-us/VisitUsPage';
-import ConnectPage from './connect/ConnectPage';
+import DiscoverPage from './connect/DiscoverPage';
 import PrivateRoute from './helpers/PrivateRoute';
 import Signup from './auth/Signup';
 import HomeContainer from './home/HomeContainer';
@@ -155,9 +155,9 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/connect"
+          path="/discover"
           permissions={['public']}
-          component={ConnectPage}
+          component={DiscoverPage}
         />
         <PrivateRoute
           exact
