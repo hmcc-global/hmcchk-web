@@ -11,7 +11,7 @@ import { AddIcon, MinusIcon } from '@chakra-ui/icons';
 
 const CustomAccordion = ({ data, borderColor, bgColor, width }) => {
   return (
-    <Accordion allowMultiple allowToggle fontFamily="Manrope" maxWidth={width}>
+    <Accordion allowMultiple allowToggle fontFamily="Manrope" minWidth={width}>
       {data.map((item, index) => (
         <AccordionItem borderWidth="0.5px" borderColor={borderColor}>
           {({ isExpanded }) => (

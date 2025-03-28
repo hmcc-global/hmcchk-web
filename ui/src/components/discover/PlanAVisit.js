@@ -12,6 +12,7 @@ import {
   Spacer,
   AspectRatio,
   Center,
+  Link,
 } from '@chakra-ui/react';
 
 import { MdAccessTime, MdLocationOn } from 'react-icons/md';
@@ -204,9 +205,10 @@ const PlanAVisit = (props) => {
                 letterSpacing={['0.063rem', '0.25rem']}
                 fontSize={['0.875rem', '1rem', '1rem']}
                 borderRadius="0.938rem"
-                _hover={{ bgColor: '#BE8E11' }}
+                _hover={{ bgColor: '#BE8E11', textDecoration: 'none' }}
                 href="https://bit.ly/TCenterDirections"
                 target="_blank"
+                as = {Link}
               >
                 DIRECTIONS
               </Button>
@@ -264,9 +266,10 @@ const PlanAVisit = (props) => {
                   letterSpacing="0.25rem"
                   fontSize={['0.875rem', '1rem', '1rem']}
                   borderRadius="0.938rem"
-                  _hover={{ bgColor: '#BE8E11' }}
+                  _hover={{ bgColor: '#BE8E11', textDecoration: 'none'}}
                   href="https://hongkong.hmcc.net/online/"
                   target="_blank"
+                  as = {Link}
                 >
                   JOIN ONLINE
                 </Button>
@@ -292,7 +295,7 @@ const PlanAVisit = (props) => {
             data={accordionData}
             borderColor="#EBAC09"
             bgColor="#F5F0E0"
-            width="37.75rem"
+            width="100%"
           />
         </Flex>
       </Container>

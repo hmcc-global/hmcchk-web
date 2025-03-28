@@ -30,12 +30,12 @@ const BackButton = (props) => {
       zIndex="1" // Ensure it stays above other content
       opacity={visible ? 1 : 0} // Change opacity based on visibility
       backdropFilter="blur(10px)" // Apply the blur effect
-      bg="rgba(255, 255, 255, 0.3)" // Optional: semi-transparent background color
+      bg="#F6FAFF" // Optional: semi-transparent background color
       transition="opacity 0.3s" // Smooth transition
       pointerEvents={visible ? 'auto' : 'none'} // Disable pointer events when hidden
       py={'18px'}
     >
-      <Container maxW="container.lg">
+      <Container maxW="container.xl">
         <Flex
           align={'center'} // Align icon and text vertically
           cursor="pointer" // Change cursor to pointer on hover
