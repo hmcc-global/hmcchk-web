@@ -6,10 +6,10 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import MinistryCard from './MinistryCard';
-import FaqConnect from './FaqConnect';
-import BackButton from './BackButton';
+import ConnectMinistryFaq from './ConnectMinistryFaq';
+import BackButton from './DiscoverBackButton';
 
-const ConnectMinistry = (props) => {
+const ConnectMinistry = () => {
   const shouldRenderBr = useBreakpointValue({
     base: true,
     sm: true,
@@ -19,38 +19,41 @@ const ConnectMinistry = (props) => {
   return (
     <Box bgColor="#F6FAFF">
       <BackButton />
-      <Container maxW="container.lg" py={10} pt="60px">
-        <VStack spacing={[4, 7]} align={['center']} px={['4', '0']}>
-          <Text
-            color="#0C0C20"
-            fontFamily="DMSerifDisplay_Italic"
-            fontSize={['2.25rem', '3rem', '3.75rem']} // Responsive font size
-            fontWeight="400"
-            lineHeight="97%"
-            letterSpacing="-2px"
-            textAlign={['center', 'inherit']}
+      <Container maxW="container.xl" py={{ base: '4rem', lg: '5rem' }}>
+        <Box
+          id="connect-ministries"
+          display="flex"
+          flexDir={'column'}
+          alignItems={'center'}
+          gap={{ base: '1.75rem', md: '2.5rem', lg: '4rem' }}
+        >
+          <VStack
+            maxWidth={{ base: '95%', lg: '75%' }}
+            spacing={{ base: '1rem', lg: '1.5rem' }}
           >
-            Connect with Our {shouldRenderBr && <br />}Ministries
-          </Text>
-          <Text
-            color="#0C0C20"
-            fontFamily="Manrope"
-            fontSize={['0.875rem', '0.9rem', '1.125rem']}
-            fontStyle="normal"
-            fontWeight="400"
-            lineHeight="normal"
-            maxW="950px"
-            // mx="200px"
-            textAlign={['center']}
-          >
-            At Harvest Mission Community Church, we are actively reaching out to
-            people from all walks of life, specifically youths, college
-            students, working adults, and families.
-          </Text>
-
+            <Text
+              color="#0C0C20"
+              fontSize={{ base: '2.25rem', md: '3rem', lg: '3.75rem' }}
+              fontWeight={400}
+              textAlign="center"
+              fontFamily="DMSerifDisplay_Italic"
+              letterSpacing={'-0.1rem'}
+            >
+              Connect with Our {shouldRenderBr && <br />}Ministries
+            </Text>
+            <Text
+              fontSize={{ base: '0.875rem', md: '1rem', lg: '1.125rem' }}
+              textAlign={'center'}
+              fontFamily={'Manrope'}
+            >
+              At Harvest Mission Community Church, we are actively reaching out
+              to people from all walks of life, specifically youths, college
+              students, working adults, and families.
+            </Text>
+          </VStack>
           <MinistryCard />
-          <FaqConnect />
-        </VStack>
+          <ConnectMinistryFaq />
+        </Box>
       </Container>
     </Box>
   );
