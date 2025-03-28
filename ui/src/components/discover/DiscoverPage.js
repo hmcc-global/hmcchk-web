@@ -155,7 +155,7 @@ const DiscoverPage = () => {
                 New here or just wanting to discover
               </Text>
             </Box>
-            <Box my={4} w="100vw" minH={['13em', '40vh']} overflow="hidden">
+            <Box my={4} w="100vw" minH={['12em', '32vh']} overflow="hidden">
               <Slider {...settings}>
                 <Box px={['0.5rem', '0.5rem']}>
                   <Box
