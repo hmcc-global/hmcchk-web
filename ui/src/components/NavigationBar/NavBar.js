@@ -187,7 +187,7 @@ const NavBar = (props) => {
                     I'm new!
                   </Text>
                   <Link href="/discover" id="navbar-connect">
-                    CONNECT
+                    DISCOVER
                   </Link>
                 </Box>
                 <Box position="relative">
