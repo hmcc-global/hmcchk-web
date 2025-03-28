@@ -8,8 +8,7 @@ import {
 } from '@chakra-ui/react';
 import PastorGreeting from './PastorGreeting';
 import ExperienceHmcc from './ExperienceHmcc';
-import Faq from './Faq';
-import LifeGroups from './LifeGroups';
+
 import { useLocation } from 'react-router-dom';
 import scrollTo from '../helpers/ScrollTo';
 import { useEffect, useRef } from 'react';
@@ -80,8 +79,6 @@ const DiscoverPage = (props) => {
           </Flex>
           {/* <PastorGreeting /> */}
           <ExperienceHmcc />
-          <LifeGroups isLargerThan768={isLargerThan768} />
-          <Faq />
         </VStack>
       </Container>
     </Box>
