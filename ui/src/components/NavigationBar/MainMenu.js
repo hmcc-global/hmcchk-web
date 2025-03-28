@@ -53,26 +53,7 @@ const MainMenu = ({ login, onClose }) => {
                   <ChevronRightIcon boxSize={6} />
                 </Flex>
               </Link>
-              <Link
-                href="/visit-us"
-                onClick={onClose}
-                id="menu-visit"
-                w="100%"
-                bgColor="#4465D6"
-                borderRadius="full"
-                textDecoration="none !important"
-              >
-                <Flex
-                  dir="row"
-                  justifyContent="space-between"
-                  align="center"
-                  px="0.65em"
-                  py="1"
-                >
-                  <Text>Visit Us</Text>
-                  <ChevronRightIcon boxSize={6} />
-                </Flex>
-              </Link>
+
               <Link
                 href="/about-us"
                 onClick={onClose}
