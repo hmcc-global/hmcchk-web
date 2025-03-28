@@ -46,9 +46,8 @@ const BackButton = () => {
           <Image
             src={backIcon}
             alt="Back"
-            boxSize="24px" // Set the desired size
+            boxSize={{ base: '1.5rem', md: '2rem' }} // Set the desired size
             objectFit="contain" // Maintain aspect ratio
-            // border-radius= 24px;
             borderRadius={'24px'}
             border={'2px solid #DFE7FF'}
             bg={'#DFE7FF'}
