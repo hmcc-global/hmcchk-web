@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Flex, Text, Image, Container } from '@chakra-ui/react';
 
+import { ArrowBackIcon } from '@chakra-ui/icons';
+
 const BackButton = (props) => {
   const [visible, setVisible] = useState(true);
   let lastScrollY = window.scrollY;
@@ -55,13 +57,12 @@ const BackButton = (props) => {
           />
 
           {/* Text */}
-          <Text
-            ml={'6'}
-            fontSize={['0.625rem', '0.9rem', '1rem']}
-            fontFamily={'Manrope'}
-            color={'#4A6EEB'}
-            letterSpacing={'2px'}
-            fontWeight={'700'}
+          <Text ml={"6"} 
+            fontSize={['0.85rem', '0.9rem', '1rem']} 
+            fontFamily={"Manrope"} 
+            color={"#4A6EEB"} 
+            letterSpacing={"2px"}  
+            fontWeight={"700"}
           >
             DISCOVER HMCC
           </Text>
