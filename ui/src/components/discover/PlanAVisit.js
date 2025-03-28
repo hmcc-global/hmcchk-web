@@ -59,6 +59,7 @@ const PlanAVisit = (props) => {
             fontSize={['2.25rem', '3rem', '3.75rem']} // Responsive font size
             fontWeight="400"
             textAlign="center"
+            mt ={[6,0]}
           >
             Plan A Visit
           </Text>
