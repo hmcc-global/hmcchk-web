@@ -158,13 +158,19 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/discover/PlanAVisit"
+          path="/discover/visit-us-page"
           permissions={['public']}
           component={VisitUsPage}
         />
         <PrivateRoute
           exact
           path="/discover/life-group"
+          permissions={['public']}
+          component={LifeGroupPage}
+        />
+        <PrivateRoute
+          exact
+          path="/discover/connect-ministries"
           permissions={['public']}
           component={LifeGroupPage}
         />
