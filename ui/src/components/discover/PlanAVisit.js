@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react';
 
 import { MdAccessTime, MdLocationOn } from 'react-icons/md';
-import CustomAccordion from "./CustomAccordion";
+import CustomAccordion from './CustomAccordion';
 
 //borrow Kenneth's BackButton component
 import BackButton from './BackButton';
@@ -24,23 +24,27 @@ const SUNDAY_CELEBRATION_GOOGLE_MAPS_EMBED =
   'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.1090099217117!2d114.2256487!3d22.311716699999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404018c12b37b11%3A0x594094421f794e0b!2sHarvest%20Mission%20Community%20Church%20(HMCC)%20of%20Hong%20Kong!5e0!3m2!1sen!2shk!4v1701923920210!5m2!1sen!2shk';
 
 const PlanAVisit = (props) => {
-
   const accordionData = [
     {
-      title: "What are your services like?",
-      content: "Our services are typically about 2 hours long, and it would normally consist of some worship, message, and closing prayer time."
+      title: 'What are your services like?',
+      content:
+        'Our services are typically about 2 hours long, and it would normally consist of some worship, message, and closing prayer time.',
     },
     {
-      title: "What do I wear to church?",
-      content: "No dress code in particular! However, we would suggest bringing a light/thin jacket in case you get cold in our venue."
+      title: 'What do I wear to church?',
+      content:
+        'No dress code in particular! However, we would suggest bringing a light/thin jacket in case you get cold in our venue.',
     },
     {
-      title: "Is there a service available specifically for my kids?",
-      content: "Building Blocks is HMCC’s Children’s Ministry, specifically catered for kids ages 3 to 11 and with all learning needs, will take place alongside of our Sunday Celebrations. The children will be able to interact with one another and the teachers over a time of worship, Bible story and activities. For more information, please visit the Building Block’s page"
+      title: 'Is there a service available specifically for my kids?',
+      content:
+        'Building Blocks is HMCC’s Children’s Ministry, specifically catered for kids ages 3 to 11 and with all learning needs, will take place alongside of our Sunday Celebrations. The children will be able to interact with one another and the teachers over a time of worship, Bible story and activities. For more information, please visit the Building Block’s page https://hongkong.sub.hmcc.net/building-blocks/',
     },
     {
-      title: "Would in-person service still be available under extreme weather conditions?",
-      content: "T9 or T10 signals hoisted by the Hong Kong Observatory: Our in-person gatherings will be postponed or canceled. Note that if the signal is lowered to T8 before or at 8:30AM on Sunday morning, we still have Sunday Celebration at 10AM as scheduled. Please check our website or social media accounts for updates regarding the latest information or online sermons. T8 signal hoisted by the Hong Kong Observatory: We highly value both personal safety as well as meeting together as the body of Christ on a consistent basis. Therefore, if you are able to come safely, we will still have our gatherings as scheduled."
+      title:
+        'Would in-person service still be available under extreme weather conditions?',
+      content:
+        'T9 or T10 signals hoisted by the Hong Kong Observatory: Our in-person gatherings will be postponed or canceled. Note that if the signal is lowered to T8 before or at 8:30AM on Sunday morning, we still have Sunday Celebration at 10AM as scheduled. Please check our website or social media accounts for updates regarding the latest information or online sermons. \nT8 signal hoisted by the Hong Kong Observatory: We highly value both personal safety as well as meeting together as the body of Christ on a consistent basis. Therefore, if you are able to come safely, we will still have our gatherings as scheduled.',
     },
   ];
 
@@ -53,7 +57,7 @@ const PlanAVisit = (props) => {
           <Text
             color="#0C0C20"
             fontFamily="DMSerifDisplay_Italic"
-            fontSize={['2rem', '3rem', '3.75rem']} // Responsive font size
+            fontSize={['2.25rem', '3rem', '3.75rem']} // Responsive font size
             fontWeight="400"
             textAlign="center"
           >
@@ -63,7 +67,7 @@ const PlanAVisit = (props) => {
           <Text
             color="#0C0C20"
             fontFamily="Manrope"
-            fontSize={['0.85rem', '0.9rem', '1rem']}
+            fontSize={['0.875rem', '0.9rem', '1.25rem']}
             fontStyle="normal"
             fontWeight="400"
             lineHeight="normal"
@@ -78,7 +82,7 @@ const PlanAVisit = (props) => {
           </Text>
         </VStack>
 
-        <SimpleGrid columns={[2, null, 4]} spacing={4} mt={8} mb={6}>
+        <SimpleGrid columns={[2, null, 4]} spacing={2} mt={8} mb={6}>
           <Image
             src={process.env.PUBLIC_URL + '/images/discover/planavisit1.png'}
             alt="Event 1"
@@ -111,68 +115,104 @@ const PlanAVisit = (props) => {
             mb={[6, 0]}
             flex="1.5"
             fontFamily="Manrope"
+            fontSize={['1rem', '1rem', '1.25rem']}
           >
-            <VStack align="flex-start">
-              <HStack>
-                <Icon as={MdAccessTime} boxSize={6} color="#EDB115" />
+            <VStack align={['center', 'flex-start']} spacing={[2, 3]}>
+              <Flex
+                direction={['column', 'row']}
+                align={['center', 'flex-start']}
+              >
+                <Icon
+                  as={MdAccessTime}
+                  boxSize={6}
+                  color="#EDB115"
+                  mr={[0, 6]}
+                  mt={[0, 0.5]}
+                />
                 <Text
                   fontWeight="700"
-                  fontSize="lg"
                   color="#969696"
-                  letterSpacing="0.25rem"
+                  letterSpacing={['0.063rem', '0.25rem']}
                 >
                   TIME
                 </Text>
-              </HStack>
+              </Flex>
               <Spacer />
               <Text
                 fontWeight="700"
-                fontsize="lg"
                 color="#272727"
-                letterSpacing="0.25rem"
+                letterSpacing={['0.063rem', '0.25rem']}
               >
                 EVERY SUNDAY 10 AM
               </Text>
               <Spacer />
               <Spacer />
-              <Spacer />
-              <HStack>
-                <Icon as={MdLocationOn} boxSize={6} color="#EDB115" />
+              <Flex
+                direction={['column', 'row']}
+                align={['center', 'flex-start']}
+              >
+                <Icon
+                  as={MdLocationOn}
+                  boxSize={6}
+                  color="#EDB115"
+                  mr={[0, 6]}
+                  mt={[0, 0.5]}
+                />
                 <Text
                   fontWeight="700"
-                  fontSize="lg"
                   color="#969696"
-                  letterSpacing="0.25rem"
+                  letterSpacing={['0.063rem', '0.25rem']}
                 >
                   LOCATION
                 </Text>
-              </HStack>
+              </Flex>
               <Spacer />
               <Text
+                align={['center', 'left']}
                 fontWeight="700"
-                fontsize="lg"
                 color="#272727"
-                letterSpacing="0.25rem"
+                letterSpacing={['0.063rem', '0.25rem']}
               >
-                TRANSFORMATION CENTER <br /> <br />
-                UNIT 02, 22/F, CROCODILE CENTER <br />
-                79 HOI YUEN RD, KWUN TONG <br />
+                TRANSFORMATION CENTER <br />
               </Text>
-            </VStack>
+              <VStack spacing={0.8} alignItems={['center', 'flex-start']}>
+                <Text
+                  align={['center', 'left']}
+                  fontWeight="700"
+                  color="#272727"
+                  letterSpacing={['0.063rem', '0.25rem']}
+                  maxW={['13rem', '30rem']}
+                >
+                  UNIT 02, 22/F, CROCODILE CENTER
+                </Text>
 
-            <Button
-              mt={6}
-              mb={6}
-              p={6}
-              bgColor="#EBAC09"
-              variant="solid"
-              alignSelf="flex-start"
-              letterSpacing="0.25rem"
-              fontSize="1rem"
-              borderRadius="0.938rem"
-            >
-              DIRECTIONS
-            </Button>
+                <Text
+                  align={['center', 'justify']}
+                  fontWeight="700"
+                  color="#272727"
+                  letterSpacing={['0.063rem', '0.25rem']}
+                >
+                  79 HOI YUEN RD, KWUN TONG
+                </Text>
+              </VStack>
+            </VStack>
+            <Box display="flex" justifyContent={['center', 'flex-start']}>
+              <Button
+                mt={6}
+                mb={[0,6]}
+                p={6}
+                bgColor="#EBAC09"
+                variant="solid"
+                letterSpacing={['0.063rem', '0.25rem']}
+                fontSize={['0.875rem', '1rem', '1rem']}
+                borderRadius="0.938rem"
+                _hover={{ bgColor: '#BE8E11' }}
+                href="https://bit.ly/TCenterDirections"
+                isExternal
+              >
+                DIRECTIONS
+              </Button>
+            </Box>
           </Box>
 
           <AspectRatio
@@ -201,10 +241,11 @@ const PlanAVisit = (props) => {
             <Flex direction={['column', 'row']}>
               <Box flex={3}>
                 <Text
+                  align={['center', 'left']}
                   fontWeight="700"
-                  fontsize="lg"
+                  fontSize={['1rem', '1rem', '1.25rem']}
                   color="#272727"
-                  letterSpacing="0.25rem"
+                  letterSpacing={['0.063rem', '0.25rem']}
                   mt={2}
                   mb={[2, 0]}
                   width={['auto', '30rem']}
@@ -213,19 +254,24 @@ const PlanAVisit = (props) => {
                 </Text>
               </Box>
 
-              <Button
-                mt={2}
-                mb={2}
-                p={6}
-                bgColor="#EBAC09"
-                variant="solid"
-                alignSelf="flex-start"
-                letterSpacing="0.25rem"
-                fontSize="1rem"
-                borderRadius="0.938rem"
-              >
-                JOIN ONLINE
-              </Button>
+              <Box display="flex" justifyContent={['center', 'flex-start']}>
+                <Button
+                  mt={2}
+                  mb={2}
+                  p={6}
+                  bgColor="#EBAC09"
+                  variant="solid"
+                  alignSelf="flex-start"
+                  letterSpacing="0.25rem"
+                  fontSize={['0.875rem', '1rem', '1rem']}
+                  borderRadius="0.938rem"
+                  _hover={{ bgColor: '#BE8E11' }}
+                  href="https://hongkong.hmcc.net/online/"
+                  isExternal
+                >
+                  JOIN ONLINE
+                </Button>
+              </Box>
             </Flex>
           </Box>
         </Flex>
@@ -237,17 +283,19 @@ const PlanAVisit = (props) => {
           fontWeight="400"
           textAlign="center"
           mt={6}
+          mb={6}
         >
           FAQs
         </Text>
 
-        <Flex
-        alignItems="center"
-        justifyContent="center"
-        mb={20}>
-          <CustomAccordion data={accordionData} borderColor="#EBAC09" bgColor="#F5F0E0" width="37.75rem"/>
+        <Flex alignItems="center" justifyContent="center" mb={20}>
+          <CustomAccordion
+            data={accordionData}
+            borderColor="#EBAC09"
+            bgColor="#F5F0E0"
+            width="37.75rem"
+          />
         </Flex>
-             
       </Container>
     </Box>
   );
