@@ -14,7 +14,7 @@ import { InView } from 'react-intersection-observer';
 
 const LinkCardInfo = [
   {
-    path: '/connect',
+    path: '/discover',
     mobileImage: 'imnew-mobile.svg',
     desktopImage: 'imnew.svg',
     title: "I'm New",

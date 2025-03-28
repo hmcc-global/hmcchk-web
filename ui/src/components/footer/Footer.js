@@ -183,7 +183,7 @@ const Footer = () => {
                 </Text>
               </Link>
               <Link
-                href="/connect"
+                href="/discover"
                 id="footer-connect"
                 _hover={{
                   textDecoration: 'underline',
@@ -201,7 +201,7 @@ const Footer = () => {
                 </Text>
               </Link>
               <Link
-                href="/connect#lifegroup"
+                href="/discover#lifegroup"
                 id="footer-connect-lg"
                 _hover={{
                   textDecoration: 'underline',

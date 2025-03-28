@@ -14,7 +14,7 @@ import { useLocation } from 'react-router-dom';
 import scrollTo from '../helpers/ScrollTo';
 import { useEffect, useRef } from 'react';
 
-const ConnectPage = (props) => {
+const DiscoverPage = (props) => {
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
   const { hash } = useLocation();
 
@@ -88,4 +88,4 @@ const ConnectPage = (props) => {
   );
 };
 
-export default ConnectPage;
+export default DiscoverPage;
