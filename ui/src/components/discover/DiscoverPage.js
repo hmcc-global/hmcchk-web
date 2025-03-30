@@ -152,7 +152,7 @@ const DiscoverPage = () => {
                 fontWeight="700"
                 fontSize={{ base: '0.875rem', md: '1.125rem' }}
               >
-                New here or just wanting to discover
+                New here or just wanting to discover More about our church, find out how you can experience our church community here.
               </Text>
             </Box>
             <Box my={4} w="100vw" minH={['12em', '32vh']} overflow="hidden">
