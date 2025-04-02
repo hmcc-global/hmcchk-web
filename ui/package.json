@@ -8,6 +8,7 @@
     "@date-io/luxon": "^2.10.11",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "@fontsource-variable/lexend-peta": "^5.2.7",
     "@fontsource/dm-sans": "^4.5.9",
     "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "^1.6.1",
