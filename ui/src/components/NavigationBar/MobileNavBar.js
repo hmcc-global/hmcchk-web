@@ -113,15 +113,15 @@ const MobileNavBar = (props) => {
             </Link>
           </Stack>
           <Stack dir="column" spacing="0" pl="2">
-            <Link align="center" href="/connect" id="mnb-connect">
+            <Link align="center" href="/discover" id="mnb-connect">
               <Icon
                 opacity={
-                  !isOpen && location.pathname === '/connect' ? '1' : '0.37'
+                  !isOpen && location.pathname === '/discover' ? '1' : '0.37'
                 }
                 boxSize={5}
                 as={IoMdHeart}
               />
-              <Text>Connect</Text>
+              <Text>Discover</Text>
             </Link>
           </Stack>
           <Stack dir="column" spacing="0" pl="4">

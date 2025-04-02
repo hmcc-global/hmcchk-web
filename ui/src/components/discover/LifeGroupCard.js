@@ -1,7 +1,6 @@
 import {
   Button,
   Flex,
-  Heading,
   LinkBox,
   LinkOverlay,
   Spacer,
@@ -15,10 +14,9 @@ const LifeGroupCard = (props) => {
 
   return (
     <Flex
-      px={[3, 2]}
-      py={4}
-      borderWidth="1px"
-      borderRadius="20"
+      py={{ base: '1.25rem', lg: '1.75rem' }}
+      px={{ base: '1rem', lg: '1.5rem' }}
+      borderRadius="1.25rem"
       bgImage={`linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${process.env.PUBLIC_URL}/${imgPath}')`}
       bgPosition="center"
       bgSize="cover"
@@ -28,25 +26,36 @@ const LifeGroupCard = (props) => {
       flexDir="column"
       fontFamily="Manrope"
     >
-      <Heading as="h4" fontSize={['xl', '2xl', '3xl']} fontWeight={700}>
+      <Text fontSize={{ base: '1.375rem', lg: '2rem' }} fontWeight={800}>
         {name}
-      </Heading>
-      <Text fontSize={['.75em', '1em']} mb={4} fontWeight={[400, 700]}>
+      </Text>
+      <Text
+        fontSize={{ base: '0.875rem', lg: '1.125rem' }}
+        mb={4}
+        fontWeight={{ base: 400, lg: 700 }}
+      >
         {fullname}
       </Text>
       <Spacer />
       <LinkBox>
         <LinkOverlay href={igLink} isExternal>
           <Button
-            leftIcon={<AiOutlineInstagram size="20px" />}
+            leftIcon={<AiOutlineInstagram size="1.2rem" />}
             colorScheme="whiteAlpha"
             borderColor="#fff"
             color="#fff"
             size={['xs', 'xs', 'sm']}
-            p={[1, 2]}
+            borderRadius={'0.625rem'}
+            px={{ base: '0.60rem', lg: '1.75rem' }}
+            py={'0.375rem'}
             variant="outline"
+            backdropFilter="blur(3px)"
+            fontWeight={700}
           >
-            <Text fontSize={['xs', 'xs', 'sm']}> {igHandle}</Text>
+            <Text fontSize={{ base: '0.62rem', lg: '1.125rem' }}>
+              {' '}
+              {igHandle}
+            </Text>
           </Button>
         </LinkOverlay>
       </LinkBox>

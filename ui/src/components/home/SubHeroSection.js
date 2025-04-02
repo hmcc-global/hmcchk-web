@@ -14,7 +14,7 @@ import { InView } from 'react-intersection-observer';
 
 const LinkCardInfo = [
   {
-    path: '/connect',
+    path: '/discover',
     mobileImage: 'imnew-mobile.svg',
     desktopImage: 'imnew.svg',
     title: "I'm New",
@@ -22,8 +22,9 @@ const LinkCardInfo = [
     textMobile: 'Get involved in our church community',
     bgPosition: ['center bottom', 'left bottom'],
   },
+
   {
-    path: '/visit-us',
+    path: '/discover/visit-us-page',
     mobileImage: 'visit-us.svg',
     desktopImage: 'visit-us.svg',
     title: 'Visit Us',
@@ -31,6 +32,7 @@ const LinkCardInfo = [
     textMobile: 'Check out our church by joining our Sunday Celebration',
     bgPosition: ['center bottom', 'left bottom'],
   },
+
   {
     path: '/sermons',
     mobileImage: 'sermons-mobile.svg',

@@ -6,8 +6,8 @@ import SermonDetails from './sermons/SermonDetails';
 import LoginContainer from './auth/LoginContainer';
 import SignupContainer from './auth/SignupContainer';
 import EventsPage from './events/EventsPage';
-import VisitUsPage from './visit-us/VisitUsPage';
-import ConnectPage from './connect/ConnectPage';
+import VisitUsPage from './discover/PlanAVisit';
+import DiscoverPage from './discover/DiscoverPage';
 import PrivateRoute from './helpers/PrivateRoute';
 import Signup from './auth/Signup';
 import HomeContainer from './home/HomeContainer';
@@ -41,6 +41,8 @@ import OnlineSermonNotesRedirect from './sermon-notes/OnlineSermonNotesRedirect'
 import SermonNotesContainer from './sermon-notes/SermonNotesContainer';
 import PrivacyPolicy from './screens/PrivacyPolicy';
 import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
+import ConnectMinistry from './discover/ConnectMinistry';
+import LifeGroupPage from './discover/LifeGroupPage';
 import EasterPageContainer from './easter-2025/EasterPageContainer';
 
 const MainContainer = () => {
@@ -148,17 +150,30 @@ const MainContainer = () => {
           permissions={['public']}
           component={EventsPage}
         />
+
         <PrivateRoute
           exact
-          path="/visit-us"
+          path="/discover"
+          permissions={['public']}
+          component={DiscoverPage}
+        />
+        <PrivateRoute
+          exact
+          path="/discover/visit-us-page"
           permissions={['public']}
           component={VisitUsPage}
         />
         <PrivateRoute
           exact
-          path="/connect"
+          path="/discover/life-group"
           permissions={['public']}
-          component={ConnectPage}
+          component={LifeGroupPage}
+        />
+        <PrivateRoute
+          exact
+          path="/discover/connect-ministries"
+          permissions={['public']}
+          component={ConnectMinistry}
         />
         <PrivateRoute
           exact

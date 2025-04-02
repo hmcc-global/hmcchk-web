@@ -9,7 +9,6 @@ const EasterPageContainer = (props) => {
   return (
     <>
       <EasterHero />
-      <Box></Box>
     </>
   );
 };
