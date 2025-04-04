@@ -59,3 +59,8 @@ code {
     url('./font/DMSerifDisplay-Italic.ttf') format('truetype');
   font-weight: normal;
 }
+
+@font-face {
+  font-family: 'LexendPeta';
+  src: local('LexendPeta'), url('./font/LexendPeta.ttf') format('truetype');
+}
