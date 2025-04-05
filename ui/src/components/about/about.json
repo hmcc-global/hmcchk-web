@@ -94,11 +94,6 @@
     },
     "directors": [
       {
-        "photo": "staff-anne.jpg",
-        "name": "Anne Hu",
-        "title": ["Education & Training", "Campus Ministry"]
-      },
-      {
         "photo": "staff-joanna.jpg",
         "name": "Joanna Jing",
         "title": ["Corporate Operations & Events", "City Ministry"]
