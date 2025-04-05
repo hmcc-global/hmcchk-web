@@ -64,3 +64,8 @@ code {
   font-family: 'LexendPeta';
   src: local('LexendPeta'), url('./font/LexendPeta.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'Lexend';
+  src: local('Lexend'), url('./font/Lexend-Regular.ttf') format('truetype');
+}

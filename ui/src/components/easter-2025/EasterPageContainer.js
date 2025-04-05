@@ -1,5 +1,5 @@
 import { Box, useBreakpointValue } from '@chakra-ui/react';
-
+import YouAreInvitedSection from './YouAreInvitedSection';
 import RedeemedAndChosenSection from './RedeemedAndChosenSection';
 
 const EasterPageContainer = (props) => {
@@ -19,9 +19,9 @@ const EasterPageContainer = (props) => {
         backgroundSize="cover"
         paddingTop={{base: "350%", md: "120%"}}
       >
-      </Box> */}
+      </Box>  */}
       <RedeemedAndChosenSection />
-      
+      <YouAreInvitedSection />
     </>
   );
 };
