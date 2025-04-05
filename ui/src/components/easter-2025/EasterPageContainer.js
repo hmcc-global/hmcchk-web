@@ -21,6 +21,7 @@ const EasterPageContainer = (props) => {
       >
       </Box> */}
       <RedeemedAndChosenSection />
+      
     </>
   );
 };
