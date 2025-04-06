@@ -211,6 +211,10 @@ const NavBar = (props) => {
                   letterSpacing="-2.76px"
                   py="1"
                   px="3"
+                  _hover={{
+                    background:
+                      'linear-gradient(90deg, #004555 0%, #00262F 100%)',
+                  }}
                 >
                   <Link
                     href="/easter"
@@ -246,7 +250,7 @@ const NavBar = (props) => {
                             px={{ md: '3', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
                             _hover={{
-                              backgroundColor: '#4A6EEB',
+                              backgroundColor: 'transparent',
                               color: 'white',
                             }}
                             id="navbar-signup"
@@ -269,16 +273,13 @@ const NavBar = (props) => {
                             textAlign="center"
                             bgColor="#FFF77B"
                             color="#244E56"
-                            borderColor="#4A6EEB"
-                            borderWidth="medium"
                             h="3.5vh"
                             marginLeft="10px"
                             px={{ md: '2', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
                             _hover={{
-                              backgroundColor: '#ffffff',
-                              color: 'black',
-                              borderColor: '#ffffff',
+                              backgroundColor: '#00728C',
+                              color: 'white',
                             }}
                             borderRadius={20}
                             letterSpacing={1}
@@ -307,7 +308,7 @@ const NavBar = (props) => {
                             px={{ md: '3', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
                             _hover={{
-                              backgroundColor: '#4A6EEB',
+                              backgroundColor: 'transparent',
                               color: 'white',
                             }}
                             id="navbar-signup"
@@ -338,9 +339,8 @@ const NavBar = (props) => {
                             px={{ md: '2', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
                             _hover={{
-                              backgroundColor: '#ffffff',
-                              color: 'black',
-                              borderColor: '#ffffff',
+                              backgroundColor: '#00728C',
+                              color: '#FFF',
                             }}
                             borderRadius={20}
                             letterSpacing={1}
