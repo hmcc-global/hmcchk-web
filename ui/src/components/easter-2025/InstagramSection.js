@@ -57,7 +57,7 @@ const InstagramSection = (props) => {
           </LinkBox>
           <LinkBox>
             <LinkOverlay
-              href="https://www.instagram.com/explore/search/keyword/?q=%23hmcchk"
+              href="https://www.instagram.com/hmcc_hk/"
               isExternal
             >
               <Button
