@@ -13,6 +13,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
+  Image,
 } from '@chakra-ui/react';
 import MainMenu from './MainMenu';
 import { IoMdHome, IoMdCalendar, IoMdHeart, IoMdMore } from 'react-icons/io';
@@ -113,15 +114,24 @@ const MobileNavBar = (props) => {
             </Link>
           </Stack>
           <Stack dir="column" spacing="0" pl="2">
-            <Link align="center" href="/discover" id="mnb-connect">
-              <Icon
+            <Link align="center" href="/easter" id="mnb-connect">
+              {/* <Icon
                 opacity={
                   !isOpen && location.pathname === '/discover' ? '1' : '0.37'
                 }
                 boxSize={5}
                 as={IoMdHeart}
-              />
-              <Text>Discover</Text>
+              /> */}
+              <Box boxSize={6} marginX="auto">
+                <Image
+                  src={`${process.env.PUBLIC_URL}/images/easter-2025/discover-heart.svg`}
+                  alt="Heart Icon"
+                  width="100%"
+                  height="100%"
+                  objectFit="contain"
+                />
+              </Box>
+              <Text>Easter</Text>
             </Link>
           </Stack>
           <Stack dir="column" spacing="0" pl="4">

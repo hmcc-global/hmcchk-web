@@ -114,14 +114,14 @@ const NavBar = (props) => {
         }
       >
         <Flex
-          backgroundColor="#F6FAFF"
+          background="linear-gradient(90deg, #FFFCA2 0%, #FFF3C9 33%, #80D7EB 81%)"
           width="100%"
           h="7vh"
           align="center"
           fontFamily="Manrope"
           fontSize={{ md: '0.6rem', lg: '0.75rem' }}
           textColor="black"
-          borderBottom="1px solid"
+          borderBottom="1px solid #4A6EEB"
           borderColor="#4A6EEB"
         >
           <Container maxW="100%" padding={{ base: 4, md: 1, lg: 4 }}>
@@ -200,6 +200,30 @@ const NavBar = (props) => {
                     GIVE
                   </Link>
                 </Box>
+                <Box
+                  background="linear-gradient(90deg, #0F4E5C 0%, #0FACD0 100%)"
+                  borderRadius="80px"
+                  color="#FBF574"
+                  fontFamily="Lexend_Peta"
+                  fontSize="0.908rem"
+                  fontWeight="900"
+                  lineHeight="120.156%"
+                  letterSpacing="-2.76px"
+                  py="1"
+                  px="3"
+                  _hover={{
+                    background:
+                      'linear-gradient(90deg, #004555 0%, #00262F 100%)',
+                  }}
+                >
+                  <Link
+                    href="/easter"
+                    id="navbar-easter"
+                    _hover={{ textDecoration: 'none' }}
+                  >
+                    EASTER
+                  </Link>
+                </Box>
               </Stack>
               <Stack
                 spacing={2}
@@ -226,7 +250,7 @@ const NavBar = (props) => {
                             px={{ md: '3', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
                             _hover={{
-                              backgroundColor: '#4A6EEB',
+                              backgroundColor: 'transparent',
                               color: 'white',
                             }}
                             id="navbar-signup"
@@ -247,18 +271,15 @@ const NavBar = (props) => {
                         <LinkBox>
                           <Button
                             textAlign="center"
-                            bgColor="#4A6EEB"
-                            color="white"
-                            borderColor="#4A6EEB"
-                            borderWidth="medium"
+                            bgColor="#FFF77B"
+                            color="#244E56"
                             h="3.5vh"
                             marginLeft="10px"
                             px={{ md: '2', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
                             _hover={{
-                              backgroundColor: '#ffffff',
-                              color: 'black',
-                              borderColor: '#ffffff',
+                              backgroundColor: '#00728C',
+                              color: 'white',
                             }}
                             borderRadius={20}
                             letterSpacing={1}
@@ -280,13 +301,14 @@ const NavBar = (props) => {
                         <LinkBox>
                           <Button
                             textAlign="center"
-                            bgColor="rgba(0, 0, 0, 0)"
+                            bgColor="transparent"
+                            color="#6D6D6D"
                             h="3.5vh"
                             marginLeft="10px"
                             px={{ md: '3', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
                             _hover={{
-                              backgroundColor: '#4A6EEB',
+                              backgroundColor: 'transparent',
                               color: 'white',
                             }}
                             id="navbar-signup"
@@ -310,18 +332,15 @@ const NavBar = (props) => {
                         <LinkBox>
                           <Button
                             textAlign="center"
-                            bgColor="#4A6EEB"
-                            color="white"
-                            borderColor="#4A6EEB"
-                            borderWidth="medium"
+                            bgColor="#FFF77B;"
+                            color="#244E56"
                             h="3.5vh"
                             marginLeft="10px"
                             px={{ md: '2', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
                             _hover={{
-                              backgroundColor: '#ffffff',
-                              color: 'black',
-                              borderColor: '#ffffff',
+                              backgroundColor: '#00728C',
+                              color: '#FFF',
                             }}
                             borderRadius={20}
                             letterSpacing={1}
