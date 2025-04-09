@@ -212,7 +212,6 @@ const YouAreInvitedSection = () => {
                           target="_blank"
                           borderColor="black"
                           _hover={{
-                            opacity: 1,
                             backgroundColor: 'white',
                             textDecoration: 'none',
                           }}
