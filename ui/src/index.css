@@ -72,3 +72,13 @@ code {
     url('./font/Lexend_Peta-ExtraBold.ttf') format('truetype');
   font-weight: normal;
 }
+
+@font-face {
+  font-family: 'Lexend';
+  src: local('Lexend'), url('./font/Lexend-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'LexendPeta';
+  src: local('Lexend_Peta'), url('./font/Lexend_Peta.ttf') format('truetype');
+}
