@@ -41,9 +41,9 @@ import OnlineSermonNotesRedirect from './sermon-notes/OnlineSermonNotesRedirect'
 import SermonNotesContainer from './sermon-notes/SermonNotesContainer';
 import PrivacyPolicy from './screens/PrivacyPolicy';
 import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
+import EasterPageContainer from './easter-2025/EasterPageContainer';
 import ConnectMinistry from './discover/ConnectMinistry';
 import LifeGroupPage from './discover/LifeGroupPage';
-import EasterPageContainer from './easter-2025/EasterPageContainer';
 
 const MainContainer = () => {
   return (
