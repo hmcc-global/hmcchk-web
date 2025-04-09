@@ -63,7 +63,6 @@ const YouAreInvitedSection = () => {
           base: '0 30px 30px 0',
           md: '30px',
         }}
-        marginTop={12}
         marginBottom={12}
         padding={0}
         position="relative"
