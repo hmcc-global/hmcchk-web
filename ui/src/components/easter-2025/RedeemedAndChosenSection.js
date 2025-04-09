@@ -3,31 +3,32 @@ import { Box, Text, Flex, Image } from '@chakra-ui/react';
 
 const RedeemedAndChosenSection = () => {
   return (
-    <Box bgGradient="linear(to-r, #0FACD0, #FFFDD7, #FFDBC9)">
-      <Flex direction={{base:'column', md:'row'}} align="center">
+    <Box>
+      <Flex direction={{ base: 'column', md: 'row' }} align="center">
         <Image
-          src={process.env.PUBLIC_URL + 'images/easter-2025/redeemed-chosen-mountain.png'}
-            alt="Redeemed and Chosen"
-            width={{ base: '26.875rem', md: '30rem', xl: '60rem' }}
-            height="auto"
-            objectFit="cover"
-            marginBottom={-12}
-            marginTop={{ base: '3', md: '10' }}
-            marginRight={{ base: '7rem', md: '0' }}
-            marginLeft={{ base: '0rem', md: '-10rem', xl: '-12rem' }}
-            zIndex={1}
-            order={{ base: 2, md: 1 }}
+          src={
+            process.env.PUBLIC_URL +
+            'images/easter-2025/redeemed-chosen-mountain.png'
+          }
+          alt="Redeemed and Chosen"
+          width={{ base: '26.875rem', md: '30rem', xl: '60rem' }}
+          height="auto"
+          objectFit="cover"
+          marginBottom={-12}
+          marginTop={{ base: '3', md: '10' }}
+          marginRight={{ base: '7rem', md: '0' }}
+          marginLeft={{ base: '0rem', md: '-10rem', xl: '-12rem' }}
+          zIndex={1}
+          order={{ base: 2, md: 1 }}
         />
-        <Flex 
-            direction="column"
-            order={{ base: 1, md: 2 }}>
+        <Flex direction="column" order={{ base: 1, md: 2 }}>
           <Text
             fontFamily="LexendPeta"
             fontWeight={900}
             fontSize={{ base: '1.125rem', md: '1.5rem', xl: '2rem' }}
             letterSpacing={{ base: '-0.188rem', md: '-0.313rem' }}
             align={{ base: 'center', md: 'left' }}
-            marginBottom={{ base: '-2.5', md: '-4', xl:'-5' }}
+            marginBottom={{ base: '-2.5', md: '-4', xl: '-5' }}
             marginTop={{ base: '4', md: '0' }}
           >
             BECAUSE OF WHAT JESUS DID
