@@ -124,7 +124,8 @@ const YouAreInvitedSection = () => {
                     mb={1}
                     fontFamily="'LexendPeta', sans-serif"
                     fontWeight={400}
-                    letterSpacing={['-2.66', '-3.8px']}
+                    letterSpacing={['-2.66px', '-3.8px']}
+                    lineHeight={{ base: 1 }}
                   >
                     {event.eventDate}
                   </Text>
@@ -133,7 +134,8 @@ const YouAreInvitedSection = () => {
                     fontWeight={400}
                     mb={[1, 6]}
                     fontFamily="'LexendPeta', sans-serif"
-                    letterSpacing={['-2.66', '-3.8px']}
+                    letterSpacing={['-2.66px', '-3.8px']}
+                    lineHeight={{ base: 1 }}
                   >
                     {event.time}
                   </Text>
@@ -144,8 +146,10 @@ const YouAreInvitedSection = () => {
                         <Text
                           fontSize={['sm', 'md']}
                           mb={1}
-                          fontFamily="'Lexend', sans-serif"
-                          letterSpacing={['-0.72px', '-1.08px']}
+                          fontFamily="'LexendPeta', sans-serif"
+                          letterSpacing={['-2.66px', '-3.8px']}
+                          lineHeight={{ base: 1 }}
+                          marginBottom={2}
                         >
                           {firstPart.trim()}
                         </Text>
@@ -172,20 +176,21 @@ const YouAreInvitedSection = () => {
                           <Button
                             fontFamily="'LexendPeta', sans-serif"
                             as={Link}
-                            size={['60%', 'sm']}
-                            fontSize={['60%', 'sm']}
+                            size={['55%', 'sm']}
+                            fontSize={['55%', 'sm']}
                             variant="outline"
                             target="_blank"
                             px={[2, 4]}
                             py={[1, 2]}
                             _hover={{
-                              opacity: '90%',
+                              backgroundColor: 'white',
                               textDecoration: 'none',
                             }}
                             href={generateGoogleCalendarLink(event)}
                             rightIcon={<CiCalendar />}
                             borderRadius="full"
                             width="auto"
+                            borderColor="black"
                           >
                             ADD TO CALENDAR
                           </Button>
@@ -196,8 +201,8 @@ const YouAreInvitedSection = () => {
                           px={[2, 4]}
                           py={[1, 2]}
                           fontFamily="'LexendPeta', sans-serif"
-                          size={['60%', 'sm']}
-                          fontSize={['60%', 'sm']}
+                          size={['55%', 'sm']}
+                          fontSize={['55%', 'sm']}
                           variant="outline"
                           borderRadius="full"
                           width="auto"
@@ -205,6 +210,12 @@ const YouAreInvitedSection = () => {
                           as={Link}
                           href={generateGoogleMapsLink(event.location)}
                           target="_blank"
+                          borderColor="black"
+                          _hover={{
+                            opacity: 1,
+                            backgroundColor: 'white',
+                            textDecoration: 'none',
+                          }}
                         >
                           DIRECTIONS
                         </Button>
