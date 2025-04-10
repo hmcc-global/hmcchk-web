@@ -31,6 +31,15 @@ const EasterHero = () => {
   return (
     <Flex position="relative" w="full" h="auto" mt={[2, -3, 5]}>
       <Flex
+        w="100%"
+        h={['10vh', '10vh ', '20vh']}
+        zIndex="2"
+        background="linear-gradient(to bottom, rgba(217, 217, 217, 0) 10%, #FFFFFF 90%)"
+        position="absolute"
+        bottom="0"
+        left="0"
+      />
+      <Flex
         as="video"
         ref={vidRef}
         w={['full']}
@@ -41,6 +50,7 @@ const EasterHero = () => {
         justify="center"
         playsInline
         loop
+        zIndex="0 "
         sx={{ background: 'transparent' }}
       />
       <Text
@@ -70,16 +80,6 @@ const EasterHero = () => {
       >
         PASSION WEEK 2025
       </Text>
-      <Flex
-        w="100vw"
-        maxH={['5vh', '5vh', '20vh']}
-        zIndex="2"
-        background="linear-gradient(180deg, rgba(217, 217, 217, 0) 0%, #FFFFFF 100%)"
-        position="absolute"
-        bottom="0"
-        left="0"
-        sx={{ aspectRatio: '16/9' }}
-      />
     </Flex>
   );
 };
