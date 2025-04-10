@@ -161,7 +161,7 @@ const EasterStorySection = () => {
               justify="center"
               playsInline
               sx={{ background: 'transparent' }}
-              borderRadius="4rem"
+              borderRadius={['2rem', '4rem']}
             />
           </Box>
         </Flex>
