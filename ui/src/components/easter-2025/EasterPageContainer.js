@@ -7,23 +7,26 @@ import ShareAndInviteSection from './ShareAndInviteSection';
 
 const EasterPageContainer = (props) => {
   return (
-    <Flex direction="column" mt="-7vh">
+    <Flex
+      direction="column"
+      mt="-7vh"
+      backgroundImage={{
+        base: `${process.env.PUBLIC_URL}/images/easter-2025/BG_Mobile-sm.png`,
+        md: `${process.env.PUBLIC_URL}/images/easter-2025/web.png`,
+      }}
+      backgroundSize="cover"
+      backgroundRepeat="no-repeat"
+      backgroundPosition={{ base: '0 -245vw', md: '0 -45vw', lg: '0 -40vw' }}
+    >
       <EasterHero />
-      <Box
-        backgroundImage={
-          process.env.PUBLIC_URL + '/images/easter-2025/bg-blur.jpg'
-        }
-        backgroundSize="cover"
-        backgroundRepeat="no-repeat"
-        backgroundPosition="bottom"
-      >
+      <Box>
         <RedeemedAndChosenSection />
         <YouAreInvitedSection />
         <ShareAndInviteSection />
       </Box>
       <Flex
         direction="column"
-        mt="7vh"
+        mt="4vh"
         backgroundColor="white"
         mx="6%"
         borderRadius={24}

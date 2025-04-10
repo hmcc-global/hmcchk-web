@@ -23,6 +23,7 @@ const InstagramSection = (props) => {
         borderRadius={24}
         background="radial-gradient(155.2% 134.86% at 50% -7.08%, #A6EFFF 0%, #FFFFFF 32.51%, rgba(255, 255, 255, 0.00) 52.22%), radial-gradient(106.2% 92.28% at 50% 115.06%, #FFF8A6 0%, #FFFBEA 54.46%)"
         overflow="unset"
+        zIndex={2}
       >
         <Text
           fontFamily="Lexend_Peta_Bold"
