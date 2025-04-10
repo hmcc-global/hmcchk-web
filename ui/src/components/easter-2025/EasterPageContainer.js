@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, Image } from '@chakra-ui/react';
 import EasterHero from './EasterHero';
 import YouAreInvitedSection from './YouAreInvitedSection';
 import RedeemedAndChosenSection from './RedeemedAndChosenSection';
@@ -10,10 +10,11 @@ const EasterPageContainer = (props) => {
       <EasterHero />
       <Box
         backgroundImage={
-          process.env.PUBLIC_URL + '/images/easter-2025/bg-blur.png'
+          process.env.PUBLIC_URL + '/images/easter-2025/bg-blur.jpg'
         }
-        backgoundSize="cover"
         backgroundPosition="center"
+        backgroundSize="cover"
+        backgroundRepeat="no-repeat"
       >
         <RedeemedAndChosenSection />
         <YouAreInvitedSection />
