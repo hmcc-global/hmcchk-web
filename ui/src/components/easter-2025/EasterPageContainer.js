@@ -1,12 +1,18 @@
 import { Flex } from '@chakra-ui/react';
-import InstagramSection from './InstagramSection';
 import EasterHero from './EasterHero';
+import YouAreInvitedSection from './YouAreInvitedSection';
+import RedeemedAndChosenSection from './RedeemedAndChosenSection';
+import InstagramSection from './InstagramSection';
 
 const EasterPageContainer = (props) => {
   return (
     <Flex direction="column" mt="-7vh">
       <EasterHero />
-      <InstagramSection />
+      <RedeemedAndChosenSection />
+      <YouAreInvitedSection />
+      <Flex direction="column">
+        <InstagramSection />
+      </Flex>
     </Flex>
   );
 };
