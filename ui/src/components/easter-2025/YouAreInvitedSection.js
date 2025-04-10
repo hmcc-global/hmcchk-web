@@ -40,7 +40,7 @@ const eventData = [
     eventStartDate: '2025-04-20',
     eventStartTime: '14:00:00',
     title: 'BAPTISM CELEBRATION',
-    location: `HONG KONG MANDARIN BIBLE CHURCH, 7/F ELITE CENTER, 22 HUNG TO ROAD, KWUN TONG`,
+    location: `HONG KONG MANDARIN BAPTISM BIBLE CHURCH, 7/F ELITE CENTER, 22 HUNG TO ROAD, KWUN TONG`,
     eventInterval: 2.5,
     time: '2PM',
     eventDate: 'SUN, APRIL 20, 2025',
