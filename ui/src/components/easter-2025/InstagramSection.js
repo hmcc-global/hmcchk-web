@@ -17,7 +17,7 @@ const InstagramSection = (props) => {
   return (
     <>
       <Container
-        maxW="container.lg"
+        maxW="100%"
         py={10}
         fontFamily="Lexend_Peta"
         borderRadius={24}
@@ -56,10 +56,7 @@ const InstagramSection = (props) => {
             </LinkOverlay>
           </LinkBox>
           <LinkBox>
-            <LinkOverlay
-              href="https://www.instagram.com/hmcc_hk/"
-              isExternal
-            >
+            <LinkOverlay href="https://www.instagram.com/hmcc_hk/" isExternal>
               <Button
                 backgroundColor="#EBFCFF"
                 borderRadius="24px"
@@ -83,7 +80,7 @@ const InstagramSection = (props) => {
           mx="auto"
           lineHeight="120.156%"
         >
-          PARTICIATE IN THE{' '}
+          PARTICIPATE IN THE{' '}
           <Box display={{ base: 'block', md: 'none' }} height={0}>
             &nbsp;
           </Box>{' '}
@@ -116,6 +113,7 @@ const InstagramSection = (props) => {
                 backgroundColor="#C6F4FF"
                 color="black"
                 textAlign="center"
+                paddingTop="0.5"
                 marginRight={{ base: '1rem', md: '1em' }}
                 marginBottom={{ base: '0.8em', md: '1em' }}
                 marginTop={{ base: '0.3rem', md: '0rem' }}
@@ -186,6 +184,7 @@ const InstagramSection = (props) => {
                 backgroundColor="#C6F4FF"
                 color="black"
                 textAlign="center"
+                paddingTop="0.5"
                 marginRight={{ base: '1rem', md: '1rem' }}
                 marginBottom={{ base: '0.8em', md: '1em' }}
                 marginTop={{ base: '0.3rem', md: '0rem' }}
