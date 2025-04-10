@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Box,
   HStack,
@@ -17,6 +17,9 @@ const EasterStorySection = () => {
   const [prevIndex, setPrevIndex] = useState(0);
   const [isResetting, setIsResetting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+
+  const vidRef = useRef(null);
+  const videoSrc = `${process.env.PUBLIC_URL}/images/easter-2025/story.mp4`;
 
   const storyData = [
     {
@@ -63,15 +66,33 @@ const EasterStorySection = () => {
         );
         return nextIndex;
       });
-    }, 3000);
+    }, 4350);
 
     return () => clearInterval(interval);
   }, [isPaused, storyData.length]);
 
+  useEffect(() => {
+    const videoElement = vidRef.current;
+    if (videoElement) {
+      const handleLoadedMetadata = () => {
+        videoElement.play();
+      };
+
+      videoElement.addEventListener('loadedmetadata', handleLoadedMetadata);
+
+      return () => {
+        videoElement.removeEventListener(
+          'loadedmetadata',
+          handleLoadedMetadata
+        );
+      };
+    }
+  }, [vidRef]);
+
   const handleHover = (shouldPause) => setIsPaused(shouldPause);
 
   return (
-    <Container maxW="container.xl" py="7rem" minH="90vh">
+    <Container maxW="container.xl" py={{ base: '2rem', lg: '5rem' }}>
       <Box
         display="flex"
         flexDir={{ base: 'column-reverse', lg: 'row' }}
@@ -87,9 +108,12 @@ const EasterStorySection = () => {
             fontFamily={'LexendPeta'}
             fontSize={{ base: '1.125rem', lg: '2rem' }}
             fontWeight={800}
-            letterSpacing={'-0.35rem'}
+            letterSpacing={'-0.4rem'}
+            px="0.4rem"
             mb={{ lg: '1.25rem' }}
             display={{ base: 'none', lg: 'block' }}
+            backgroundClip="text"
+            bgGradient="linear(90deg, #39083F 0%, #005A6E 100%)"
           >
             THE STORY OF REDEMPTION
           </Text>
@@ -117,61 +141,28 @@ const EasterStorySection = () => {
           alignItems="center"
           width="100%"
           height="100%"
+          my="auto"
         >
           <Box
             position="relative"
-            mx={{ base: '10%', sm: '15%', md: '25%', lg: '3.5%' }}
-            width={{ base: '80%', sm: '70%', md: '50%', lg: '93%' }}
-            minHeight={{
-              base: '37vh',
-              sm: '50vh',
-              md: '50vh',
-              lg: '60vh',
-              xl: '50vh',
-            }}
+            my={{ base: '1rem', lg: 0 }}
+            mx={{ base: '10%', sm: '15%', md: '25%', lg: '5%' }}
+            width={{ base: '80%', sm: '70%', md: '50%', lg: '90%' }}
           >
-            <motion.div
-              key={prevIndex}
-              initial={{ opacity: 1 }}
-              animate={{ opacity: 0 }}
-              transition={{ duration: 1 }}
-              style={{
-                position: 'absolute',
-                display: 'flex',
-                width: '100%',
-                height: '100%',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Image
-                src={`${process.env.PUBLIC_URL}/images/easter-2025/${storyData[prevIndex].media}`}
-                alt={storyData[prevIndex].alt}
-                width="100%"
-                height="auto"
-              />
-            </motion.div>
-            <motion.div
-              key={activeIndex}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-              style={{
-                position: 'absolute',
-                display: 'flex',
-                width: '100%',
-                height: '100%',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Image
-                src={`${process.env.PUBLIC_URL}/images/easter-2025/${storyData[activeIndex].media}`}
-                alt={storyData[activeIndex].alt}
-                width="100%"
-                height="auto"
-              />
-            </motion.div>
+            <Flex
+              as="video"
+              ref={vidRef}
+              w={['full']}
+              h="auto"
+              src={videoSrc}
+              loop
+              muted
+              objectFit={['cover', 'cover']}
+              justify="center"
+              playsInline
+              sx={{ background: 'transparent' }}
+              borderRadius="4rem"
+            />
           </Box>
         </Flex>
 
@@ -180,8 +171,11 @@ const EasterStorySection = () => {
           fontSize={{ base: '1.125rem', lg: '2rem' }}
           display={{ base: 'block', lg: 'none' }}
           fontWeight={800}
-          letterSpacing={'-0.35rem'}
+          letterSpacing={'-0.2rem'}
+          px="0.4rem"
           mb={{ lg: '1.25rem' }}
+          backgroundClip="text"
+          bgGradient="linear(90deg, #39083F 0%, #005A6E 100%)"
         >
           THE STORY OF REDEMPTION
         </Text>
