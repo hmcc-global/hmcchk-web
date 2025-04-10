@@ -66,18 +66,24 @@ const YouAreInvitedSection = () => {
         marginBottom={12}
         padding={0}
         position="relative"
-        left={['-15px', '-2.5%']}
-        paddingLeft={['8px', '0']}
+        left={['-15px', '-6%']}
+        overflow="hidden"
       >
-        <Container maxW={['90%', '90%']} marginTop={12} mb={12} marginX="auto">
-          <Box width={['100%', '50%', '50%']} mb={[6, 4, 8]}>
+        <Container
+          maxW={['90%', '85%']}
+          marginTop={24}
+          mb={12}
+          marginRight="3%"
+        >
+          <Box width={['100%', '95%', '60%']} mb={[6, 4, 10]}>
             <Text
               fontFamily="'LexendPeta', sans-serif"
               fontWeight={900}
               bgGradient="linear(87deg, #45173C 0%, #732527 35%, #20444A 75%, #0FACD0 100%)"
               backgroundClip="text"
-              fontSize={{ base: '1.6rem', md: '2.5rem', lg: '3.5rem' }}
-              letterSpacing={['-3.42px', '-9px']}
+              fontSize={['1.6rem', '2.5rem', '3.75rem']}
+              letterSpacing={['-3.42px', '-7.8px', '-11.4px']}
+              lineHeight={[1, 1]}
             >
               YOU ARE INVITED
             </Text>
@@ -86,20 +92,24 @@ const YouAreInvitedSection = () => {
               fontWeight={900}
               background="linear-gradient(87deg, #45173C 0%, #732527 35%, #20444A 75%, #0FACD0 100%)"
               backgroundClip="text"
-              fontSize={{ base: '1.6rem', md: '2.5rem', lg: '3.5rem' }}
-              letterSpacing={['-3.42px', '-11.4px']}
+              fontSize={['1.6rem', '2.5rem', '3.75rem']}
+              letterSpacing={['-3.42px', '-7.8px', '-11.4px']}
+              lineHeight={[1, 1]}
             >
               TO JOIN US AT ...
             </Text>
           </Box>
           <Box>
-            <Flex direction={{ base: 'column', md: 'row' }}>
+            <Flex
+              direction={{ base: 'column', md: 'row' }}
+              justifyContent="space-between"
+            >
               {eventData.map((event, index) => (
                 <Box
                   key={index}
                   borderRadius={20}
                   padding={[0, 6]}
-                  width={{ base: '100%', md: '33%' }}
+                  width={{ base: '100%', md: '33%', lg: '33%' }}
                   mb={[6, 0]}
                 >
                   <Box mb={4}>
@@ -107,12 +117,12 @@ const YouAreInvitedSection = () => {
                       src={event.imageSrc}
                       alt={event.title}
                       objectFit="cover"
-                      maxHeight={50}
+                      maxHeight={55}
                     />
                   </Box>
                   <Text
                     fontWeight={700}
-                    fontSize={['md', 'xl']}
+                    fontSize={['0.875rem', '1.5rem']}
                     mb={2}
                     fontFamily="'LexendPeta', sans-serif"
                     letterSpacing={['-3.42px', '-4.56px']}
@@ -120,20 +130,22 @@ const YouAreInvitedSection = () => {
                     {event.title}
                   </Text>
                   <Text
-                    fontSize={['sm', 'md']}
-                    mb={1}
+                    fontSize={['0.875rem', '1.25rem']}
+                    mb={[1, 0]}
                     fontFamily="'LexendPeta', sans-serif"
                     fontWeight={400}
-                    letterSpacing={['-2.66', '-3.8px']}
+                    letterSpacing={['-2.66px', '-3.8px']}
+                    lineHeight="100%"
                   >
                     {event.eventDate}
                   </Text>
                   <Text
-                    fontSize={['sm', 'md']}
+                    fontSize={['0.875rem', '1.25rem']}
                     fontWeight={400}
-                    mb={[1, 6]}
+                    mb={[1, 0]}
                     fontFamily="'LexendPeta', sans-serif"
-                    letterSpacing={['-2.66', '-3.8px']}
+                    letterSpacing={['-2.66px', '-3.8px']}
+                    lineHeight={{ base: 1 }}
                   >
                     {event.time}
                   </Text>
@@ -141,23 +153,34 @@ const YouAreInvitedSection = () => {
                     const [firstPart, ...restParts] = event.location.split(',');
                     return (
                       <>
-                        <Text
-                          fontSize={['sm', 'md']}
-                          mb={1}
-                          fontFamily="'Lexend', sans-serif"
-                          letterSpacing={['-0.72px', '-1.08px']}
+                        <Box
+                          height={{ sm: 'auto', xl: 12, '2xl': 12 }}
+                          mb={3}
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="flex-end"
                         >
-                          {firstPart.trim()}
-                        </Text>
-                        <Text
-                          fontSize={['xs', 'sm']}
-                          mb={[1, 3]}
-                          fontFamily="'Lexend', sans-serif"
-                          color="#006E87"
-                          letterSpacing={['-0.72px', '-1.08px']}
-                        >
-                          {restParts.join(',').trim()}
-                        </Text>
+                          <Text
+                            fontSize={['0.875rem', '1.25rem']}
+                            fontFamily="'LexendPeta', sans-serif"
+                            letterSpacing={['-2.66px', '-3.8px']}
+                            lineHeight="110%"
+                          >
+                            {firstPart.trim()}
+                          </Text>
+                        </Box>
+                        <Box width={['60%', '90%']}>
+                          <Text
+                            fontSize={['0.75rem', '1.125rem']}
+                            mb={[3, 5]}
+                            fontFamily="'Lexend', sans-serif"
+                            color="#006E87"
+                            letterSpacing={['-0.72px', '-1.08px']}
+                            lineHeight="110%"
+                          >
+                            {restParts.join(',').trim()}
+                          </Text>
+                        </Box>
                       </>
                     );
                   })()}
@@ -165,27 +188,38 @@ const YouAreInvitedSection = () => {
                     <Flex
                       direction={['row', 'column']}
                       gap={[1, 2]}
-                      alignItems="left"
+                      alignItems={['none', 'left']}
                     >
-                      <Box width={['50%', 'auto']}>
+                      <Box>
                         {generateGoogleCalendarLink(event) && (
                           <Button
                             fontFamily="'LexendPeta', sans-serif"
                             as={Link}
-                            size={['60%', 'sm']}
-                            fontSize={['60%', 'sm']}
+                            size={{
+                              base: '55%',
+                              sm: '55%',
+                              xl: '100%',
+                            }}
+                            fontSize={{
+                              base: '0.5625rem',
+                              sm: '0.65rem',
+                              xl: '0.75rem',
+                            }}
                             variant="outline"
                             target="_blank"
-                            px={[2, 4]}
-                            py={[1, 2]}
+                            px={(2, 4)}
+                            py={(1, 2)}
                             _hover={{
-                              opacity: '90%',
+                              backgroundColor: 'white',
                               textDecoration: 'none',
                             }}
                             href={generateGoogleCalendarLink(event)}
                             rightIcon={<CiCalendar />}
                             borderRadius="full"
                             width="auto"
+                            borderColor="black"
+                            letterSpacing="-0.7px"
+                            fontWeight="semibold"
                           >
                             ADD TO CALENDAR
                           </Button>
@@ -193,11 +227,19 @@ const YouAreInvitedSection = () => {
                       </Box>
                       <Box width={['50%', 'auto']}>
                         <Button
-                          px={[2, 4]}
-                          py={[1, 2]}
+                          px={(2, 4)}
+                          py={(1, 2)}
                           fontFamily="'LexendPeta', sans-serif"
-                          size={['60%', 'sm']}
-                          fontSize={['60%', 'sm']}
+                          size={{
+                            base: '55%',
+                            sm: '55%',
+                            xl: '100%',
+                          }}
+                          fontSize={{
+                            base: '0.5625rem',
+                            sm: '0.65rem',
+                            xl: '0.75rem',
+                          }}
                           variant="outline"
                           borderRadius="full"
                           width="auto"
@@ -205,6 +247,13 @@ const YouAreInvitedSection = () => {
                           as={Link}
                           href={generateGoogleMapsLink(event.location)}
                           target="_blank"
+                          borderColor="black"
+                          _hover={{
+                            backgroundColor: 'white',
+                            textDecoration: 'none',
+                          }}
+                          letterSpacing="-0.7px"
+                          fontWeight="semibold"
                         >
                           DIRECTIONS
                         </Button>
