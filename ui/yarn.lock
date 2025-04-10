@@ -1895,6 +1895,11 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@fontsource-variable/lexend-peta@^5.2.7":
+  version "5.2.7"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/lexend-peta/-/lexend-peta-5.2.7.tgz#649f307ec2df2b6db6fe48079ba70191314c3436"
+  integrity sha512-tfdw3jS5MHBnUS0EBO4dSZORKDSh9jnaOQnWSr9L6+ihU2022tZzddZA93NPmjsuIsbb2RPA3pGLui/5EdouLA==
+
 "@fontsource/dm-sans@^4.5.9":
   version "4.5.9"
   resolved "https://registry.yarnpkg.com/@fontsource/dm-sans/-/dm-sans-4.5.9.tgz#a48f9c815728ebb47e1c58e5176a9d4aa6cb25ea"

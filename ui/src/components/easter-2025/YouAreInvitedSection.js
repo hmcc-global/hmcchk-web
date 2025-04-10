@@ -69,7 +69,7 @@ const YouAreInvitedSection = () => {
         left={['-15px', '-2.5%']}
         paddingLeft={['8px', '0']}
       >
-        <Container maxW={['100%', '90%']} marginTop={12} mb={12}>
+        <Container maxW={['90%', '90%']} marginTop={12} mb={12} marginX="auto">
           <Box width={['100%', '50%', '50%']} mb={[6, 4, 8]}>
             <Text
               fontFamily="'LexendPeta', sans-serif"
