@@ -4,6 +4,7 @@ import EasterStorySection from './EasterStorySection';
 import YouAreInvitedSection from './YouAreInvitedSection';
 import RedeemedAndChosenSection from './RedeemedAndChosenSection';
 import InstagramSection from './InstagramSection';
+import ShareAndInviteSection from './ShareAndInviteSection';
 
 const EasterPageContainer = (props) => {
   return (
@@ -22,7 +23,15 @@ const EasterPageContainer = (props) => {
         <EasterStorySection />
         <RedeemedAndChosenSection />
         <YouAreInvitedSection />
-        <Flex direction="column" mt="7vh">
+        <ShareAndInviteSection />
+        <Flex
+          direction="column"
+          mt="4vh"
+          backgroundColor="white"
+          mx="6%"
+          borderRadius={24}
+          mb="10vh"
+        >
           <InstagramSection />
         </Flex>
       </Box>
