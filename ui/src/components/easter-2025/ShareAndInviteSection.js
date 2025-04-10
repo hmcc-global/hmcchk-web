@@ -27,7 +27,7 @@ const ShareAndInviteSection = () => {
   };
   return (
     <>
-      <Container maxWidth="100%" mb={6}>
+      <Container maxWidth="100%">
         <Flex
           direction={['column', 'column', 'row']}
           justifyContent="space-between"
