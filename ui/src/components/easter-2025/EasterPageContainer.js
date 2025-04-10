@@ -11,8 +11,8 @@ const EasterPageContainer = (props) => {
       direction="column"
       mt="-7vh"
       backgroundImage={{
-        base: `${process.env.PUBLIC_URL}/images/easter-2025/BG_Mobile-sm.png`,
-        md: `${process.env.PUBLIC_URL}/images/easter-2025/web.png`,
+        base: `${process.env.PUBLIC_URL}/images/easter-2025/bg-mobile.png`,
+        md: `${process.env.PUBLIC_URL}/images/easter-2025/bg-web.png`,
       }}
       backgroundSize="cover"
       backgroundRepeat="no-repeat"
