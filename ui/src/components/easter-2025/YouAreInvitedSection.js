@@ -42,7 +42,7 @@ const eventData = [
     title: 'BAPTISM CELEBRATION',
     location: `HONG KONG MANDARIN BIBLE CHURCH, 7/F ELITE CENTER, 22 HUNG TO ROAD, KWUN TONG`,
     eventInterval: 2.5,
-    time: '2PM',
+    time: '2:30PM',
     eventDate: 'SUN, APRIL 20, 2025',
     imageSrc: process.env.PUBLIC_URL + '/images/easter-2025/baptism.png',
   },
