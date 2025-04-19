@@ -98,7 +98,7 @@ const LifeGroups = (props) => {
               target="_blank"
             >
               <LinkOverlay
-                href="https://bit.ly/LGSignup2024"
+                href="https://bit.ly/summerLG2025"
                 target="_blank"
                 backgroundImage="linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(to right, #fd7b7e, #3182ce)"
                 backgroundSize="100%"
