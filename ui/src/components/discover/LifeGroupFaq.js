@@ -9,7 +9,7 @@ const LifeGroupFaq = () => {
   const faqData = [
     {
       title: 'When do LIFE Groups happen?',
-      content: `LIFE Groups happen every Tuesday or Wednesday nights across the city and university campuses! If you would like to join us, please sign-up https://bit.ly/summerLG2024, and we will contact you shortly after.`,
+      content: `LIFE Groups happen every Tuesday or Wednesday nights across the city and university campuses! If you would like to join us, please sign-up https://bit.ly/summerLG2025, and we will contact you shortly after.`,
     },
     {
       title:

@@ -4,7 +4,7 @@ const LifeGroupSignupButton = () => {
   return (
     <Button
       as={Link}
-      href="https://bit.ly/LGSignup2024"
+      href="https://bit.ly/summerLG2025"
       borderRadius={'0.9375rem'}
       bgColor="#D46764"
       py={'1.75rem'}
