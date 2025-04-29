@@ -18,7 +18,7 @@ const EasterPageContainer = (props) => {
         <RedeemedAndChosenSection />
         <YouAreInvitedSection />
       </Box>
-      <Flex direction="column">
+      <Flex direction="column" mt="7vh">
         <InstagramSection />
       </Flex>
     </Flex>
