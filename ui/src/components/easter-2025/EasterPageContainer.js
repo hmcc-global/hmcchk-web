@@ -18,7 +18,12 @@ const EasterPageContainer = (props) => {
         }}
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
-        backgroundPosition={{ base: '0 -245vw', md: '0 -45vw', lg: '0 -40vw' }}
+        backgroundPosition={{
+          base: '0 -175vw',
+          md: '0 -39vw',
+          lg: '0 -56vw',
+          xl: '-0 -71vw',
+        }}
       >
         <EasterStorySection />
         <RedeemedAndChosenSection />
