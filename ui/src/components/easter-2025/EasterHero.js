@@ -50,8 +50,8 @@ const EasterHero = () => {
         transform="translate(-50%, -50%)"
         color="#FBF574"
         textAlign="center"
-        fontSize={['57px', '112px']}
-        letterSpacing="-0.07em"
+        fontSize={['52', '112px']}
+        letterSpacing={['-0.2em', '-0.07em']}
         fontFamily="Lexend Peta Variable"
       >
         REDEEMED
