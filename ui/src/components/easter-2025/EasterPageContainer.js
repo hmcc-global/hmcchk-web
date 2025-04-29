@@ -12,7 +12,6 @@ const EasterPageContainer = (props) => {
         backgroundImage={
           process.env.PUBLIC_URL + '/images/easter-2025/bg-blur.jpg'
         }
-        backgroundPosition="center"
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
       >
