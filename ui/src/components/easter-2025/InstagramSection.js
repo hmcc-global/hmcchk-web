@@ -42,7 +42,7 @@ const InstagramSection = (props) => {
         >
           <LinkBox>
             <LinkOverlay
-              href="https://www.instagram.com/explore/search/keyword/?q=%23hmccredeemed2025"
+              href="http://instagram.com/explore/tags/hmccredeemed2025"
               isExternal
             >
               <Button
@@ -57,7 +57,10 @@ const InstagramSection = (props) => {
             </LinkOverlay>
           </LinkBox>
           <LinkBox>
-            <LinkOverlay href="https://www.instagram.com/hmcc_hk/" isExternal>
+            <LinkOverlay
+              href="https://www.instagram.com/hmcc_hk/?hl=en"
+              isExternal
+            >
               <Button
                 backgroundColor="#EBFCFF"
                 borderRadius="24px"
@@ -200,7 +203,7 @@ const InstagramSection = (props) => {
                 fontFamily="Manrope"
                 fontSize={{ base: '0.8rem', md: '1.125rem' }}
               >
-                Include the hashtag <b>#HMCCREDEEMED 2025</b>{' '}
+                Include the hashtag <b>#HMCCREDEEMED2025</b>{' '}
                 <Box display={{ base: 'block', md: 'none' }} height={0}>
                   &nbsp;
                 </Box>{' '}
@@ -217,7 +220,7 @@ const InstagramSection = (props) => {
         >
           <LinkBox>
             <LinkOverlay
-              href="https://www.instagram.com/explore/search/keyword/?q=%23hmccredeemed2025"
+              href="http://instagram.com/explore/tags/hmccredeemed2025"
               isExternal
             >
               <Button
