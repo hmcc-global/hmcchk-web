@@ -56,6 +56,7 @@ const YouAreInvitedSection = () => {
 
   return (
     <>
+<<<<<<< HEAD
       <Box bgGradient="linear(to-l, #FFDBC9, #FFFDD7, #0FACD0)">
         <Container
           maxW="100%"
@@ -102,6 +103,68 @@ const YouAreInvitedSection = () => {
                     padding={[0, 6]}
                     width={{ base: '100%', md: '33%' }}
                     mb={[6, 0]}
+=======
+      <Container
+        maxW="100%"
+        border="1px solid black"
+        borderRadius={{
+          base: '0 30px 30px 0',
+          md: '30px',
+        }}
+        marginBottom={12}
+        padding={0}
+        position="relative"
+        left={['-15px', '-2.5%']}
+        paddingLeft={['6px', '0']} // Adjust padding for left on mobile
+      >
+        <Container maxW={['100%', '90%']} marginTop={12} mb={12}>
+          <Box width={['100%', '50%', '50%']} mb={[6, 4, 8]}>
+            <Text
+              fontFamily="'Lexend Peta', sans-serif"
+              fontWeight={900}
+              bgGradient="linear(87deg, #45173C 0%, #732527 35%, #20444A 75%, #0FACD0 100%)"
+              backgroundClip="text"
+              fontSize={{ base: '1.6rem', md: '2.5rem', lg: '3.5rem' }}
+              letterSpacing={['-4px', '-9px']}
+            >
+              YOU ARE INVITED
+            </Text>
+            <Text
+              fontFamily="'Lexend Peta', sans-serif"
+              fontWeight={900}
+              background="linear-gradient(87deg, #45173C 0%, #732527 35%, #20444A 75%, #0FACD0 100%)"
+              backgroundClip="text"
+              fontSize={{ base: '1.6rem', md: '2.5rem', lg: '3.5rem' }}
+              letterSpacing={['-4px', '-9px']}
+            >
+              TO JOIN US AT ...
+            </Text>
+          </Box>
+          <Box>
+            <Flex direction={{ base: 'column', md: 'row' }}>
+              {eventData.map((event, index) => (
+                <Box
+                  key={index}
+                  borderRadius={20}
+                  padding={[0, 6]}
+                  width={{ base: '100%', md: '33%' }}
+                  mb={[6, 0]}
+                >
+                  <Box mb={4}>
+                    <Image
+                      src={event.imageSrc}
+                      alt={event.title}
+                      objectFit="cover"
+                      maxHeight={50}
+                    />
+                  </Box>
+                  <Text
+                    fontWeight={700}
+                    fontSize={['md', 'xl']}
+                    mb={2}
+                    fontFamily="'Lexend Peta', sans-serif"
+                    letterSpacing="-2px"
+>>>>>>> d5f2c29b (GH-1180: Remove margin top)
                   >
                     <Box mb={4}>
                       <Image
