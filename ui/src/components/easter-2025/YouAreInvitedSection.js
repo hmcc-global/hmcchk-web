@@ -188,9 +188,9 @@ const YouAreInvitedSection = () => {
                     <Flex
                       direction={['row', 'column']}
                       gap={[1, 2]}
-                      alignItems="left"
+                      alignItems={['none', 'left']}
                     >
-                      <Box width={['50%', 'auto']}>
+                      <Box>
                         {generateGoogleCalendarLink(event) && (
                           <Button
                             fontFamily="'LexendPeta', sans-serif"
@@ -207,8 +207,8 @@ const YouAreInvitedSection = () => {
                             }}
                             variant="outline"
                             target="_blank"
-                            px={[4, 4]}
-                            py={[2, 2]}
+                            px={(2, 4)}
+                            py={(1, 2)}
                             _hover={{
                               backgroundColor: 'white',
                               textDecoration: 'none',
@@ -227,8 +227,8 @@ const YouAreInvitedSection = () => {
                       </Box>
                       <Box width={['50%', 'auto']}>
                         <Button
-                          px={4}
-                          py={2}
+                          px={(2, 4)}
+                          py={(1, 2)}
                           fontFamily="'LexendPeta', sans-serif"
                           size={{
                             base: '55%',
