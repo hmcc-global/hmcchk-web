@@ -219,6 +219,7 @@ const YouAreInvitedSection = () => {
                             width="auto"
                             borderColor="black"
                             letterSpacing="-0.7px"
+                            fontWeight="semibold"
                           >
                             ADD TO CALENDAR
                           </Button>
@@ -252,6 +253,7 @@ const YouAreInvitedSection = () => {
                             textDecoration: 'none',
                           }}
                           letterSpacing="-0.7px"
+                          fontWeight="semibold"
                         >
                           DIRECTIONS
                         </Button>
