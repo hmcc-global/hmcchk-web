@@ -3,6 +3,7 @@ import EasterHero from './EasterHero';
 import YouAreInvitedSection from './YouAreInvitedSection';
 import RedeemedAndChosenSection from './RedeemedAndChosenSection';
 import InstagramSection from './InstagramSection';
+import ShareAndInviteSection from './ShareAndInviteSection';
 
 const EasterPageContainer = (props) => {
   return (
@@ -18,6 +19,7 @@ const EasterPageContainer = (props) => {
       >
         <RedeemedAndChosenSection />
         <YouAreInvitedSection />
+        <ShareAndInviteSection />
       </Box>
       <Flex
         direction="column"
@@ -25,6 +27,7 @@ const EasterPageContainer = (props) => {
         backgroundColor="white"
         mx="6%"
         borderRadius={24}
+        mb="10vh"
       >
         <InstagramSection />
       </Flex>
