@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, HStack, Icon, Text, Image } from '@chakra-ui/react';
+import { Box, HStack, Icon, Text, Image, Container } from '@chakra-ui/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaCircle } from 'react-icons/fa';
 
@@ -61,68 +61,75 @@ const EasterStorySection = () => {
   const handleHover = (shouldPause) => setIsPaused(shouldPause);
 
   return (
-    <Box
-      display="flex"
-      flexDir={{ base: 'column-reverse', lg: 'row' }}
-      alignItems={{ base: 'center', lg: 'flex-start' }}
-      onMouseEnter={() => handleHover(true)}
-      onMouseLeave={() => handleHover(false)}
-      onTouchStart={() => handleHover(true)}
-      onTouchEnd={() => handleHover(false)}
-    >
-      {/* Left Panel - Keep AnimatePresence for accumulating paragraphs */}
-      <Box w={{ base: '100%', lg: '45%' }} aria-live="polite">
-        <Text
-          fontFamily={'LexendPeta'}
-          fontSize={{ base: '1.125rem', lg: '2rem' }}
-          fontWeight={800}
-          letterSpacing={'-0.35rem'}
-          mb={{ lg: '1.25rem' }}
-        >
-          THE STORY OF REDEMPTION
-        </Text>
+    <Container maxW="container.xl" py="7rem" minH="90vh">
+      <Box
+        display="flex"
+        flexDir={{ base: 'column-reverse', lg: 'row' }}
+        alignItems={{ base: 'center', lg: 'flex-start' }}
+        onMouseEnter={() => handleHover(true)}
+        onMouseLeave={() => handleHover(false)}
+        onTouchStart={() => handleHover(true)}
+        onTouchEnd={() => handleHover(false)}
+      >
+        {/* Left Panel - Keep AnimatePresence for accumulating paragraphs */}
+        <Box w={{ base: '100%', lg: '45%' }} aria-live="polite">
+          <Text
+            fontFamily={'LexendPeta'}
+            fontSize={{ base: '1.125rem', lg: '2rem' }}
+            fontWeight={800}
+            letterSpacing={'-0.35rem'}
+            mb={{ lg: '1.25rem' }}
+          >
+            THE STORY OF REDEMPTION
+          </Text>
 
-        <AnimatePresence>
-          {storyData.map(
-            (section, index) =>
-              visibleParagraphs.includes(index) &&
-              !isResetting && (
-                <StoryParagraph
-                  key={index}
-                  section={section}
-                  index={index}
-                  activeIndex={activeIndex}
-                />
-              )
-          )}
-        </AnimatePresence>
-      </Box>
+          <AnimatePresence>
+            {storyData.map(
+              (section, index) =>
+                visibleParagraphs.includes(index) &&
+                !isResetting && (
+                  <StoryParagraph
+                    key={index}
+                    section={section}
+                    index={index}
+                    activeIndex={activeIndex}
+                  />
+                )
+            )}
+          </AnimatePresence>
+        </Box>
 
-      {/* Right Panel - Simplified without AnimatePresence */}
-      <Box flex={1} display="flex" justifyContent="center" alignItems="center">
-        <motion.div
-          key={activeIndex}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          style={{
-            position: 'relative',
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
+        {/* Right Panel - Simplified without AnimatePresence */}
+        <Box
+          flex={1}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
         >
-          <Image
-            src={`${process.env.PUBLIC_URL}/images/easter-2025/${storyData[activeIndex].media}`}
-            alt={storyData[activeIndex].alt}
-            objectFit="cover"
-            width="90%"
-          />
-        </motion.div>
+          <motion.div
+            key={activeIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2, ease: 'easeIn' }}
+            style={{
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Image
+              src={`${process.env.PUBLIC_URL}/images/easter-2025/${storyData[activeIndex].media}`}
+              alt={storyData[activeIndex].alt}
+              objectFit="cover"
+              width="90%"
+            />
+          </motion.div>
+        </Box>
       </Box>
-    </Box>
+    </Container>
   );
 };
 

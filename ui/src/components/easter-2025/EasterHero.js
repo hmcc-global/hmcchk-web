@@ -70,6 +70,16 @@ const EasterHero = () => {
       >
         PASSION WEEK 2025
       </Text>
+      <Flex
+        w="full"
+        maxH={['5vh', '5vh', '20vh']}
+        zIndex="0"
+        background="linear-gradient(180deg, rgba(217, 217, 217, 0) 0%, #FFFFFF 100%)"
+        position="absolute"
+        bottom="0"
+        left="0"
+        sx={{ aspectRatio: '16/9' }}
+      />
     </Flex>
   );
 };

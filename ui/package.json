@@ -29,7 +29,7 @@
     "axios": "^0.21.1",
     "chakra-ui-autocomplete": "^1.4.5",
     "chakra-ui-markdown-renderer": "^4.0.0",
-    "framer-motion": "^4.1.17",
+    "framer-motion": "^12.6.3",
     "html-react-parser": "^1.2.7",
     "http-proxy-middleware": "^2.0.0",
     "luxon": "^1.27.0",
