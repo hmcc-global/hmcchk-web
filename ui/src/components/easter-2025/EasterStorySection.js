@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Box, HStack, Icon, Text, Image, Container } from '@chakra-ui/react';
+import {
+  Box,
+  HStack,
+  Icon,
+  Text,
+  Image,
+  Container,
+  Flex,
+} from '@chakra-ui/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaCircle } from 'react-icons/fa';
 
 const EasterStorySection = () => {
   const [visibleParagraphs, setVisibleParagraphs] = useState([0]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [prevIndex, setPrevIndex] = useState(0);
   const [isResetting, setIsResetting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -37,23 +46,24 @@ const EasterStorySection = () => {
 
     const interval = setInterval(() => {
       setActiveIndex((prev) => {
+        setPrevIndex(prev);
         const nextIndex = (prev + 1) % storyData.length;
 
-        if (nextIndex === 0) {
-          setIsResetting(true);
-          setTimeout(() => {
-            setVisibleParagraphs([0]);
-            setIsResetting(false);
-          }, 1000);
-          return 0;
-        }
+        // if (nextIndex === 0) {
+        //   setIsResetting(true);
+        //   setTimeout(() => {
+        //     setVisibleParagraphs([0]);
+        //     setIsResetting(false);
+        //   }, 1000);
+        //   return 0;
+        // }
 
         setVisibleParagraphs((prev) =>
           prev.includes(nextIndex) ? prev : [...prev, nextIndex]
         );
         return nextIndex;
       });
-    }, 10000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [isPaused, storyData.length]);
@@ -66,10 +76,10 @@ const EasterStorySection = () => {
         display="flex"
         flexDir={{ base: 'column-reverse', lg: 'row' }}
         alignItems={{ base: 'center', lg: 'flex-start' }}
-        onMouseEnter={() => handleHover(true)}
-        onMouseLeave={() => handleHover(false)}
-        onTouchStart={() => handleHover(true)}
-        onTouchEnd={() => handleHover(false)}
+        // onMouseEnter={() => handleHover(true)}
+        // onMouseLeave={() => handleHover(false)}
+        // onTouchStart={() => handleHover(true)}
+        // onTouchEnd={() => handleHover(false)}
       >
         {/* Left Panel - Keep AnimatePresence for accumulating paragraphs */}
         <Box w={{ base: '100%', lg: '45%' }} aria-live="polite">
@@ -79,6 +89,7 @@ const EasterStorySection = () => {
             fontWeight={800}
             letterSpacing={'-0.35rem'}
             mb={{ lg: '1.25rem' }}
+            display={{ base: 'none', lg: 'block' }}
           >
             THE STORY OF REDEMPTION
           </Text>
@@ -100,34 +111,80 @@ const EasterStorySection = () => {
         </Box>
 
         {/* Right Panel - Simplified without AnimatePresence */}
-        <Box
+        <Flex
           flex={1}
-          display="flex"
           justifyContent="center"
           alignItems="center"
+          width="100%"
+          height="100%"
         >
-          <motion.div
-            key={activeIndex}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 2, ease: 'easeIn' }}
-            style={{
-              position: 'relative',
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+          <Box
+            position="relative"
+            mx={{ base: '10%', sm: '15%', md: '25%', lg: '3.5%' }}
+            width={{ base: '80%', sm: '70%', md: '50%', lg: '93%' }}
+            minHeight={{
+              base: '37vh',
+              sm: '50vh',
+              md: '50vh',
+              lg: '60vh',
+              xl: '50vh',
             }}
           >
-            <Image
-              src={`${process.env.PUBLIC_URL}/images/easter-2025/${storyData[activeIndex].media}`}
-              alt={storyData[activeIndex].alt}
-              objectFit="cover"
-              width="90%"
-            />
-          </motion.div>
-        </Box>
+            <motion.div
+              key={prevIndex}
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              style={{
+                position: 'absolute',
+                display: 'flex',
+                width: '100%',
+                height: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Image
+                src={`${process.env.PUBLIC_URL}/images/easter-2025/${storyData[prevIndex].media}`}
+                alt={storyData[prevIndex].alt}
+                width="100%"
+                height="auto"
+              />
+            </motion.div>
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              style={{
+                position: 'absolute',
+                display: 'flex',
+                width: '100%',
+                height: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Image
+                src={`${process.env.PUBLIC_URL}/images/easter-2025/${storyData[activeIndex].media}`}
+                alt={storyData[activeIndex].alt}
+                width="100%"
+                height="auto"
+              />
+            </motion.div>
+          </Box>
+        </Flex>
+
+        <Text
+          fontFamily={'LexendPeta'}
+          fontSize={{ base: '1.125rem', lg: '2rem' }}
+          display={{ base: 'block', lg: 'none' }}
+          fontWeight={800}
+          letterSpacing={'-0.35rem'}
+          mb={{ lg: '1.25rem' }}
+        >
+          THE STORY OF REDEMPTION
+        </Text>
       </Box>
     </Container>
   );
@@ -149,7 +206,7 @@ const StoryParagraph = ({ section, index, activeIndex }) => (
     <HStack alignItems="center" spacing="1rem">
       <Icon as={FaCircle} color={section.color} boxSize="1rem" />
       <Text
-        fontSize={{ base: '0.9rem', md: '1rem' }}
+        fontSize={{ base: '0.9rem', lg: '1rem' }}
         fontFamily={'Manrope'}
         lineHeight={'140%'}
       >
