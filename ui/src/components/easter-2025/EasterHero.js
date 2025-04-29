@@ -40,6 +40,7 @@ const EasterHero = () => {
         objectFit={['cover', 'cover']}
         justify="center"
         playsInline
+        loop
         sx={{ background: 'transparent' }}
       />
       <Text
@@ -51,7 +52,7 @@ const EasterHero = () => {
         color="#FBF574"
         textAlign="center"
         fontSize={['52', '112px']}
-        letterSpacing={['-0.2em', '-0.07em']}
+        letterSpacing={['-0.673rem', '-1.339rem']}
         fontFamily="Lexend Peta Variable"
       >
         REDEEMED

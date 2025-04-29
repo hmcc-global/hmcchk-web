@@ -14,11 +14,18 @@ const EasterPageContainer = (props) => {
         }
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
+        backgroundPosition="bottom"
       >
         <RedeemedAndChosenSection />
         <YouAreInvitedSection />
       </Box>
-      <Flex direction="column" mt="7vh">
+      <Flex
+        direction="column"
+        mt="7vh"
+        backgroundColor="white"
+        mx="6%"
+        borderRadius={24}
+      >
         <InstagramSection />
       </Flex>
     </Flex>
