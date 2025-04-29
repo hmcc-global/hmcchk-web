@@ -126,7 +126,7 @@ const ShareAndInviteSection = () => {
                   lineHeight={['140%', '140%']}
                   fontSize={['0.875rem', '1.25rem']}
                 >
-                  SHARE AND INVITE TO PASSION WEEK EVENTS
+                  SHARE AN INVITE TO PASSION WEEK EVENTS
                 </Text>
               </Box>
               <Box>
