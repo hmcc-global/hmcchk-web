@@ -8,12 +8,13 @@ const RedeemedAndChosenSection = () => {
         <Image
           src={process.env.PUBLIC_URL + 'images/easter-2025/redeemed-chosen-mountain.png'}
             alt="Redeemed and Chosen"
-            width={{ base: '26.875rem', md: '50rem' }}
+            width={{ base: '26.875rem', md: '60rem' }}
             height="auto"
             objectFit="cover"
             marginBottom={-12}
             marginTop={{ base: '3', md: '10' }}
-            marginRight={{ base: '3rem', md: '0' }}
+            marginRight={{ base: '7rem', md: '0' }}
+            marginLeft={{ base: '0rem', md: '-12rem' }}
             zIndex={1}
             order={{ base: 2, md: 1 }}
         />
