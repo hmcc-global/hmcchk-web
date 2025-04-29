@@ -61,7 +61,7 @@ const ShareAndInviteSection = () => {
               alignItems="center"
               justifyContent="space-between"
             >
-              <Box width={['60%', '75%', '%']}>
+              <Box width={['60%', '75%']}>
                 <Text
                   fontFamily="Lexend_Peta"
                   fontWeight={900}
