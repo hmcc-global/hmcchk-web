@@ -71,9 +71,9 @@ const EasterHero = () => {
         PASSION WEEK 2025
       </Text>
       <Flex
-        w="full"
+        w="100vw"
         maxH={['5vh', '5vh', '20vh']}
-        zIndex="0"
+        zIndex="2"
         background="linear-gradient(180deg, rgba(217, 217, 217, 0) 0%, #FFFFFF 100%)"
         position="absolute"
         bottom="0"
