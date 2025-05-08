@@ -108,7 +108,7 @@ const SermonNotesEditorModal = (props) => {
         console.log(err);
         toast({
           description:
-            'There was an issue with the request, please talk to a support team member.',
+            'There was an issue with the request, please talk to a t3ch team member.',
           status: 'error',
           duration: 8000,
           isClosable: true,
