@@ -95,21 +95,28 @@ const SermonNotesEditorModal = (props) => {
     });
   };
 
-  const fetchSermonNotes = useCallback(async () => {
-    try {
-      const { data } = await axios.get('/api/sermon-notes-parent/get');
-      return data;
-    } catch (err) {
-      console.log(err);
-      toast({
-        description:
-          'There was an issue with the request, please talk to a t3ch support',
-        status: 'error',
-        duration: 8000,
-        isClosable: true,
-      });
-    }
-  }, [toast]);
+  const fetchSermonNotes = useCallback(
+    async ({ includeDeleted = false } = {}) => {
+      try {
+        const { data } = await axios.get('/api/sermon-notes-parent/get', {
+          params: {
+            includeDeleted: includeDeleted,
+          },
+        });
+        return data;
+      } catch (err) {
+        console.log(err);
+        toast({
+          description:
+            'There was an issue with the request, please talk to a support team member.',
+          status: 'error',
+          duration: 8000,
+          isClosable: true,
+        });
+      }
+    },
+    [toast]
+  );
 
   const checkDuplicateTitleAndSermonLink = async () => {
     try {
@@ -235,18 +242,24 @@ const SermonNotesEditorModal = (props) => {
   };
 
   const getData = useCallback(async () => {
-    const result = await fetchSermonNotes();
-    setSermonNotes(result);
+    try {
+      const sermonNotesWithDeleted = await fetchSermonNotes({
+        includeDeleted: true,
+      });
+      const sermonNotesResults = await fetchSermonNotes({
+        includeDeleted: false,
+      });
 
-    // Format of Sermon ID: sn-01012021-1 (Service Type - Date - Number of Sermons)
-    // Check if there are any sermon notes for the same date. This is so that we can create a unique sermon ID for the sermon notes.
-    const numberOfSermonNotes = result.filter((sermonNotes) => {
-      return sermonNotes.date === sermonNoteData.date;
-    });
-    if (numberOfSermonNotes.length > 0) {
+      setSermonNotes(sermonNotesResults);
+      // Format of Sermon ID: sn-01012021-1 (Service Type - Date - Number of Sermons)
+      // Check if there are any sermon notes for the same date. This is so that we can create a unique sermon ID for the sermon notes.
+      const numberOfSermonNotes = sermonNotesWithDeleted.filter(
+        (note) => note.date === sermonNoteData.date
+      );
+
       setNumberOfSermons(numberOfSermonNotes.length);
-    } else {
-      setNumberOfSermons(0);
+    } catch (error) {
+      console.error('Error fetching sermon notes:', error);
     }
   }, [sermonNoteData.date, fetchSermonNotes, setNumberOfSermons]);
 
