@@ -8,30 +8,42 @@ module.exports = {
       required: false,
       type: 'string',
     },
+    includeDeleted: {
+      required: false,
+      type: 'boolean',
+      defaultsTo: false,
+    },
   },
 
   exits: {
     success: {
       description: 'Sermon notes parent returned successfully',
     },
+    notFound: {
+      description: 'No sermon note parent records found',
+    },
     invalid: {
-      description: 'Failed to retrieve Sermon notes parents',
+      description: 'Failed to retrieve sermon notes parents',
     },
   },
-  fn: async function ({ sermonId }, exits) {
+
+  fn: async function ({ sermonId, includeDeleted }, exits) {
     try {
-      if (sermonId) {
-        let data = await SermonNotesParent.find({
-          sermonId: sermonId,
-          isDeleted: false,
-        });
-        if (data.length === 0) throw 'Sermon note parent record not found';
-        return exits.success(data);
+      let query = {};
+      if (!includeDeleted) {
+        query.isDeleted = false;
       }
-      // in future iterations, we should not do this for better practice
-      let data = await SermonNotesParent.find({
-        isDeleted: false,
-      });
+
+      if (sermonId) {
+        query.sermonId = sermonId;
+      }
+
+      const data = await SermonNotesParent.find(query);
+
+      if (data.length === 0) {
+        return exits.notFound();
+      }
+
       return exits.success(data);
     } catch (err) {
       sails.log(err);
