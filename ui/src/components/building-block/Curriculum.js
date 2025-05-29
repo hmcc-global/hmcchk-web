@@ -23,7 +23,6 @@ const images = [
 export default function Curriculum() {
   const [current, setCurrent] = useState(0);
   const [fade, setFade] = useState(true);
-  const isMobile = useBreakpointValue({ base: true, md: false });
 
   const prevSlide = () => {
     setFade(false);
@@ -90,40 +89,66 @@ export default function Curriculum() {
               opacity={fade ? 1 : 0}
             />
             {/* Carousel Controls */}
-            <IconButton
-              aria-label="Previous"
-              icon={<ChevronLeftIcon boxSize="2rem" color="white" />}
+            <Box
               position="absolute"
-              top="50%"
-              left="0.25rem"
-              transform="translateY(-50%)"
-              onClick={prevSlide}
-              bg="transparent"
-              _hover={{ bg: 'transparent' }}
-              zIndex={1}
+              top="0"
+              left="0"
+              h="100%"
+              w="4rem"
+              bgGradient="linear(to-r, rgba(0,0,0,0.5), transparent)"
               opacity={0}
               _groupHover={{ opacity: 1 }}
               transition="opacity 0.2s"
-              _focus={{ boxShadow: 'none', outline: 'none' }}
-              _active={{ boxShadow: 'none', outline: 'none' }}
-            />
-            <IconButton
-              aria-label="Next"
-              icon={<ChevronRightIcon boxSize="2rem" color="white" />}
+              zIndex={0}
+            >
+              <IconButton
+                aria-label="Previous"
+                icon={<ChevronLeftIcon boxSize="2rem" color="white" />}
+                position="absolute"
+                top="50%"
+                left="0.25rem"
+                transform="translateY(-50%)"
+                onClick={prevSlide}
+                bg="transparent"
+                _hover={{ bg: 'transparent' }}
+                zIndex={1}
+                opacity={0}
+                _groupHover={{ opacity: 1 }}
+                transition="opacity 0.2s"
+                _focus={{ boxShadow: 'none', outline: 'none' }}
+                _active={{ boxShadow: 'none', outline: 'none' }}
+              />
+            </Box>
+            <Box
               position="absolute"
-              top="50%"
-              right="0.25rem"
-              transform="translateY(-50%)"
-              onClick={nextSlide}
-              bg="transparent"
-              _hover={{ bg: 'transparent' }}
-              zIndex={1}
+              top="0"
+              right="0"
+              h="100%"
+              w="4rem"
+              bgGradient="linear(to-l, rgba(0,0,0,0.5), transparent)"
               opacity={0}
               _groupHover={{ opacity: 1 }}
               transition="opacity 0.2s"
-              _focus={{ boxShadow: 'none', outline: 'none' }}
-              _active={{ boxShadow: 'none', outline: 'none' }}
-            />
+              zIndex={0}
+            >
+              <IconButton
+                aria-label="Next"
+                icon={<ChevronRightIcon boxSize="2rem" color="white" />}
+                position="absolute"
+                top="50%"
+                right="0.25rem"
+                transform="translateY(-50%)"
+                onClick={nextSlide}
+                bg="transparent"
+                _hover={{ bg: 'transparent' }}
+                zIndex={1}
+                opacity={0}
+                _groupHover={{ opacity: 1 }}
+                transition="opacity 0.2s"
+                _focus={{ boxShadow: 'none', outline: 'none' }}
+                _active={{ boxShadow: 'none', outline: 'none' }}
+              />
+            </Box>
           </Box>
           {/* Dots below the carousel, grouped */}
           <HStack justify="center" spacing={2}>
