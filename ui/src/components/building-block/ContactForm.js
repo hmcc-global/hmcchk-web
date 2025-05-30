@@ -30,7 +30,7 @@ const ContactForm = ({ isOpen, onClose }) => {
   const [isBot, setIsBot] = useState(true);
   const [submitted, setSubmitted] = useState(false);
 
-  const lifestage = "Building Block";
+  const lifestage = 'Building Block';
 
   const onChange = (value) => {
     setIsBot(false);
