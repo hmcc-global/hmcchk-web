@@ -18,7 +18,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import NewHereForm from './ContactForm';
+import ContactForm from './ContactForm';
 import { useState } from 'react';
 import { InView } from 'react-intersection-observer';
 
@@ -88,7 +88,7 @@ const ContactUs = () => {
                   }}
                 >
                   <Flex w="40%">
-                    <NewHereForm isOpen={isOpen} onClose={onClose} />
+                    <ContactForm isOpen={isOpen} onClose={onClose} />
                     <Box px="1rem">
                       <Text
                         fontSize="14"
@@ -163,7 +163,7 @@ const ContactUs = () => {
                       }}
                     >
                       <Flex align="center">
-                        <NewHereForm isOpen={isOpen} onClose={onClose} />
+                        <ContactForm isOpen={isOpen} onClose={onClose} />
                         <Box px="1em">
                           <Text
                             fontSize="20px"
