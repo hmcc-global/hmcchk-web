@@ -60,7 +60,7 @@ const ContactUs = () => {
                 </Box>
                 <Box position="relative" width="100%" pb="100%">
                   <Image
-                    src={`${process.env.PUBLIC_URL}/images/BB/ContactUs.JPG`}
+                    src={`${process.env.PUBLIC_URL}/images/BB/ContactUsPic.jpeg`}
                     alt="BB"
                     position="absolute"
                     top="0"
@@ -189,7 +189,7 @@ const ContactUs = () => {
                   borderRadius="80px"
                 >
                   <Image
-                    src={`${process.env.PUBLIC_URL}/images/BB/ContactUs.JPG`}
+                    src={`${process.env.PUBLIC_URL}/images/BB/ContactUsPic.jpeg`}
                     alt="BB"
                     width="100%"
                     height="100%"
