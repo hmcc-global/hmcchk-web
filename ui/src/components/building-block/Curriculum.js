@@ -62,7 +62,7 @@ export default function Curriculum() {
     >
       <Flex
         w="100%"
-        maxW="1200px"
+        maxW="container.xl"
         bg="#F7F9FC"
         overflow="hidden"
         direction={{ base: 'column-reverse', xl:'row'}}
@@ -72,7 +72,7 @@ export default function Curriculum() {
         <VStack w={{ base: '100%', xl: '55%' }} spacing={3} align="stretch">
           <Box
             position="relative"
-            h={{ base: '18.75rem', lg: '39.25rem' }}
+            h="100%"
             minW={{ md: '35rem', lg: '40.625rem' }}
             borderRadius="5rem"
             overflow="hidden"
@@ -191,7 +191,7 @@ export default function Curriculum() {
             Curriculum
           </Heading>
           <Text
-            fontSize={{ base: '0.875rem', md: '1.25rem' }}
+            fontSize={{ base: '0.875rem', lg: '1.5rem' }}
             fontWeight="400"
             fontFamily="Manrope"
           >
