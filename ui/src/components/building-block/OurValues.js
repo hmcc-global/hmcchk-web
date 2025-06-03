@@ -29,7 +29,7 @@ const values = [
 ];
 
 const OurValues = () => (
-  <Box maxW="90rem" p={{ base: '1rem', md: '2rem' }} mb={20}>
+  <Box maxW="container.xl" p={{ base: '1rem', md: '2rem' }} mb={20}>
     <Heading
       as="h1"
       size="xl"
@@ -49,7 +49,7 @@ const OurValues = () => (
       We hope to accomplish our mission with the 3-Ds. Our prayer is for...
     </Text>
     <Stack
-      direction={{ base: 'column', xl: 'row' }}
+      direction={{ base: 'column', lg: 'row' }}
       spacing="2rem"
       align={{ base: 'center', xl: 'flex-start' }}
       justify="center"
