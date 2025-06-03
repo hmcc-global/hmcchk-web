@@ -58,7 +58,7 @@ export default function Curriculum() {
       justify="center"
       px={{ base: 2, lg: 8 }}
       py={{ lg: 8 }}
-      mb={{ base:20, lg: 12 }}
+      mb={{ base: 20, lg: 12 }}
     >
       <Flex
         w="100%"
@@ -67,6 +67,7 @@ export default function Curriculum() {
         overflow="hidden"
         direction={{ base: 'column-reverse', xl:'row'}}
         align="center"
+        marginLeft={{base: 0, xl: "8.5rem"}}
       >
         {/* Carousel Section */}
         <VStack w={{ base: '100%', xl: '55%' }} spacing={3} align="stretch">
@@ -191,7 +192,7 @@ export default function Curriculum() {
             Curriculum
           </Heading>
           <Text
-            fontSize={{ base: '0.875rem', lg: '1.5rem' }}
+            fontSize={{ base: '0.875rem', lg: '1.25rem' }}
             fontWeight="400"
             fontFamily="Manrope"
           >
