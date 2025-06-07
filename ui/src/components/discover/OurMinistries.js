@@ -157,9 +157,7 @@ const OurMinistries = (props) => {
           <Text fontWeight={400} fontSize={['xs', 'sm', 'md']} mt={[4, 6]}>
             Building Blocks is HMCC’s Children Ministry, learn more about it{' '}
             <Text as="u">
-              <Link href="https://hongkong.sub.hmcc.net/building-blocks/">
-                here ➔
-              </Link>
+              <Link href="/building-blocks">here ➔</Link>
             </Text>
           </Text>
         </Box>
