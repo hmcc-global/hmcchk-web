@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Stack, Image } from '@chakra-ui/react';
+import { Box, Heading, Text, Grid, Image } from '@chakra-ui/react';
 
 const values = [
   {
@@ -28,7 +28,7 @@ const values = [
 ];
 
 const OurValues = () => (
-  <Box maxW="container.xl" p={{ base: '1rem', md: '2rem' }} mb={20}>
+  <Box w="100%" mb={20}>
     <Heading
       as="h1"
       size="xl"
@@ -36,6 +36,7 @@ const OurValues = () => (
       fontSize={{ base: '2.25rem', lg: '2.625rem' }}
       fontFamily="DMSerifDisplay_Italic"
       fontWeight="400"
+      letterSpacing={{ base: '-0.0625rem', lg: '-0.125rem' }}
     >
       Our Values
     </Heading>
@@ -47,11 +48,14 @@ const OurValues = () => (
     >
       We hope to accomplish our mission with the 3-Ds. Our prayer is for...
     </Text>
-    <Stack
-      direction={{ base: 'column', lg: 'row' }}
-      spacing="2rem"
-      align={{ base: 'center', lg: 'flex-start' }}
-      justify="center"
+    <Grid
+      w="100%"
+      gap={{ base: '2rem', md: '3rem', lg: '4rem' }}
+      templateColumns={{
+        base: '1fr',
+        lg: 'repeat(auto-fit, minmax(250px, 1fr))',
+      }}
+      justifyItems="center"
     >
       {values.map((value) => (
         <Box
@@ -59,11 +63,12 @@ const OurValues = () => (
           bg={value.bg}
           borderRadius="3.75rem"
           boxShadow={value.shadow}
-          p={{ base: '1.5rem', md: '2rem' }}
-          minW={{ base: '17.9375rem', md: '17.9375rem', xl: '22.0625rem' }}
-          maxW={{ base: '17.9375rem', md: '22.0625rem' }}
-          maxH="24rem"
-          mx="auto"
+          p={{ base: '1.75rem', md: '2.25rem' }}
+          h="100%"
+          w="100%"
+          maxW={{ base: '17.9375rem', md: '25rem' }}
+          display="flex"
+          flexDirection="column"
         >
           <Image
             src={value.icon}
@@ -90,7 +95,7 @@ const OurValues = () => (
           </Text>
         </Box>
       ))}
-    </Stack>
+    </Grid>
   </Box>
 );
 
