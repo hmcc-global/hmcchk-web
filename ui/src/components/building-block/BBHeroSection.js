@@ -26,17 +26,11 @@ const BBHeroSection = () => {
       fontFamily="Manrope"
       gap={{ base: '1rem', md: '2rem', lg: '4rem' }}
     >
-      <Stack
-        flexDirection={{ base: 'column', md: 'row' }}
-        w="100%"
-        gap="4"
-        px={{ base: '1.5rem', md: '3rem' }}
-      >
+      <Stack flexDirection={{ base: 'column', md: 'row' }} w="100%" gap="4">
         <VStack
           w={{ base: '100%', md: '53%' }}
           justifyContent="center"
           alignItems={{ base: 'center', md: 'start' }}
-          paddingLeft="7"
           gap="5"
         >
           <Text
@@ -53,10 +47,12 @@ const BBHeroSection = () => {
             lineHeight="103%"
             fontWeight="400"
             textColor="#272727"
+            letterSpacing={{ base: '-0.0625rem', lg: '-0.125rem' }}
           >
             Welcome to <br /> Building Blocks
           </Text>
           <Text
+            w={{ base: '95%', lg: '75%' }}
             fontSize={{ base: '0.875rem', md: '0.9rem', lg: '1.125rem' }}
             textAlign={{ base: 'center', md: 'start' }}
           >
@@ -66,7 +62,6 @@ const BBHeroSection = () => {
           </Text>
           <HStack
             display={{ base: 'none', md: 'flex' }}
-            w="100%"
             justifyContent="center"
             gap="3"
           >
@@ -76,7 +71,8 @@ const BBHeroSection = () => {
               alignItems="center"
               bgColor="transparent"
               border="0.7px solid #D46764"
-              padding={{ md: '3', lg: '5' }}
+              py={{ md: '3', lg: '5' }}
+              px={{ md: '5', lg: '8' }}
               h="-moz-min-content"
               color="#D46764"
               _hover={{
@@ -140,7 +136,7 @@ const BBHeroSection = () => {
         </Box>
         <VStack
           display={{ base: 'flex', md: 'none' }}
-          gap="4"
+          gap="2"
           alignContent="center"
         >
           <Button
@@ -215,23 +211,34 @@ const BBHeroSection = () => {
           </Text>
         </Box>
         <Text
-          fontFamily="DMSerifDisplay_Italic"
+          fontFamily="DMSerifDisplay_Regular"
           fontSize={{ base: '1.25rem', md: '2.2rem', lg: '2.625rem' }}
           letterSpacing={{ md: '-0.125rem' }}
           textAlign="center"
           paddingBottom={{ base: '7rem', md: '5rem' }}
-          w="70%"
+          w={{ base: '85%', md: '80%', lg: '75%%' }}
           marginX="auto"
         >
           To lay a{' '}
-          <span style={{ color: '#EBAC09', textDecoration: 'underline' }}>
+          <span
+            style={{
+              color: '#EBAC09',
+              textDecoration: 'underline',
+              fontFamily: 'DMSerifDisplay_Italic',
+            }}
+          >
             Biblical foundation
           </span>{' '}
           that will lead children to Christ and prepare them to{' '}
           <span
-            style={{ color: '#EBAC09', textDecoration: 'underline' }}
-          ></span>
-          share their faith
+            style={{
+              color: '#EBAC09',
+              textDecoration: 'underline',
+              fontFamily: 'DMSerifDisplay_Italic',
+            }}
+          >
+            share their faith
+          </span>
         </Text>
       </Box>
       <Box
