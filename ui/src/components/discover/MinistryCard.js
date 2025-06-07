@@ -87,7 +87,7 @@ const MinistryCard = (props) => {
             <Box p={4}>
               <Button
                 as="a"
-                href="https://hongkong.sub.hmcc.net/building-blocks/"
+                href="/building-blocks"
                 bg={'#21A0A7'}
                 borderRadius={'15px'}
                 width="100%"
