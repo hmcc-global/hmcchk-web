@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Flex,
@@ -12,16 +12,17 @@ import {
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
 const images = [
-  '/images/building-blocks/carousel-1.png',
-  '/images/building-blocks/carousel-2.png',
-  '/images/building-blocks/carousel-3.png',
-  '/images/building-blocks/carousel-4.png',
-  '/images/building-blocks/carousel-5.png',
-  '/images/building-blocks/carousel-6.png',
+  '/images/buildingblock/carousel-1.png',
+  '/images/buildingblock/carousel-2.png',
+  '/images/buildingblock/carousel-3.png',
+  '/images/buildingblock/carousel-4.png',
+  '/images/buildingblock/carousel-5.png',
+  '/images/buildingblock/carousel-6.png',
 ];
 
 export default function Curriculum() {
   const [current, setCurrent] = useState(0);
+  const [reset, setReset] = useState(false);
   const [fade, setFade] = useState(true);
 
   const prevSlide = () => {
@@ -30,13 +31,16 @@ export default function Curriculum() {
       setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
       setFade(true);
     }, 400);
+    setReset(true);
   };
+
   const nextSlide = () => {
     setFade(false);
     setTimeout(() => {
       setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
       setFade(true);
     }, 400);
+    setReset(true);
   };
 
   // Auto-play carousel
@@ -48,25 +52,29 @@ export default function Curriculum() {
         setFade(true);
       }, 200);
     }, 4000);
+    if (reset === true) {
+      clearInterval(interval);
+      setReset(false);
+    }
     return () => clearInterval(interval);
-  }, []);
+  }, [reset]);
 
   return (
     <Flex
       w="100%"
       bg="#F7F9FC"
       overflow="hidden"
-      direction={{ base: 'column-reverse', xl: 'row' }}
+      direction={{ base: 'column-reverse', md: 'row' }}
       align="center"
-      marginLeft={{ base: 0, xl: '8.5rem' }}
-      py={{ base: '1.5rem', xl: '3rem' }}
+      marginLeft={{ base: 0, md: '8.5rem' }}
+      py={{ base: '1.5rem', md: '3rem' }}
     >
       {/* Carousel Section */}
-      <VStack w={{ base: '100%', xl: '55%' }} spacing={3} align="stretch">
+      <VStack w={{ base: '100%', md: '55%' }} spacing={3} align="stretch">
         <Box
           position="relative"
           h="100%"
-          minW={{ md: '35rem', lg: '40.625rem' }}
+          minW={{ md: '65%', lg: '70%' }}
           borderRadius="5rem"
           overflow="hidden"
           role="group"
@@ -168,8 +176,8 @@ export default function Curriculum() {
       {/* Text Section */}
       <Box
         flex="1"
-        px={{ xl: '6.5rem' }}
-        py={{ base: '2.5rem', xl: '2.625rem' }}
+        px={{ md: '6.5rem' }}
+        py={{ base: '2.5rem', md: '2.625rem' }}
         textAlign="left"
         fontWeight="400"
         minW={{ lg: '38rem' }}
