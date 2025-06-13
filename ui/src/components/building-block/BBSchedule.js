@@ -1,4 +1,5 @@
-import { Box, Container, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
+import { Box, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
+import { forwardRef } from 'react';
 
 const ScheduleItem = ({ time, color, description }) => (
   <>
@@ -69,7 +70,7 @@ const DecorativeSVG = ({ position, pathProps, ...boxProps }) => (
   </Box>
 );
 
-const BBSchedule = () => {
+const BBSchedule = forwardRef((props, ref) => {
   const scheduleInformation = [
     {
       time: '10:00 AM',
@@ -94,6 +95,7 @@ const BBSchedule = () => {
       minW="100%"
       alignItems="center"
       gap={{ base: '2.25rem', lg: '2.75rem' }}
+      ref={ref}
     >
       <Box
         display="flex"
@@ -102,6 +104,7 @@ const BBSchedule = () => {
         alignItems="flex-start"
         justifyContent="center"
         gap={{ base: '0.25rem', lg: '0.5rem' }}
+        ref={ref}
       >
         <Text
           fontFamily="DMSerifDisplay_Italic"
@@ -164,6 +167,6 @@ const BBSchedule = () => {
       </Box>
     </Flex>
   );
-};
+});
 
 export default BBSchedule;
