@@ -127,6 +127,12 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
+          path="/sn-online"
+          permissions={['public']}
+          component={OnlineSermonNotesRedirect}
+        />
+        <PrivateRoute
+          exact
           path="/sermons/notes/online"
           permissions={['public']}
           component={OnlineSermonNotesRedirect}

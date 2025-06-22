@@ -17,8 +17,15 @@ const OnlineSermonNotesRedirect = () => {
   }, []);
 
   useEffect(() => {
-    if (id != null)
-      history.push(id);
+    if (id != null) {
+      const onlineSermonPrefix = "/sermons/notes/online";
+      const { pathname } = history.location;
+      if (pathname == null || pathname !== onlineSermonPrefix) {
+        history.push(`/sermons/notes/${id}`);
+      } else {
+        history.push(id);
+      }
+    }
   }, [history, id]);
 
   return (
