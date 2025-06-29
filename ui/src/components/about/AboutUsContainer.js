@@ -10,6 +10,7 @@ import BeliefsSection from './BeliefsSection';
 import StaffSection from './StaffSection';
 import StorySection from './StorySection';
 import StrategySection from './StrategySection';
+import OurStrategy from './OurStrategy';
 import ValuesSection from './ValuesSection';
 import OurHeartMissions from './OurHeartMissions';
 import blurbs from './about.json';
@@ -181,7 +182,7 @@ const AboutUsContainer = (props) => {
           />
         )}
         {selected === 2 && (
-          <StrategySection blurb={blurbs.strategy} title={sections[selected]} />
+          <OurStrategy blurb={blurbs.strategy} title={sections[selected]} />
         )}
         {selected === 3 && (
           <StaffSection blurb={blurbs.staff} title={sections[selected]} />
