@@ -13,6 +13,7 @@ import StrategySection from './StrategySection';
 import ValuesSection from './ValuesSection';
 import OurHeartMissions from './OurHeartMissions';
 import blurbs from './about.json';
+import OurStaff from './OurStaff';
 import { Fragment, useState, useEffect } from 'react';
 import { Select } from '@chakra-ui/select';
 import { useLocation } from 'react-router-dom';
@@ -184,7 +185,7 @@ const AboutUsContainer = (props) => {
           <StrategySection blurb={blurbs.strategy} title={sections[selected]} />
         )}
         {selected === 3 && (
-          <StaffSection blurb={blurbs.staff} title={sections[selected]} />
+          <OurStaff blurb={blurbs.staff} title={sections[selected]} />
         )}
         {selected === 4 && (
           <BeliefsSection blurb={blurbs.beliefs} title={sections[selected]} />
