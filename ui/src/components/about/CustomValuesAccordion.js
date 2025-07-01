@@ -18,8 +18,10 @@ const CustomValuesAccordion = ({ data, borderColor, width, buttonColor }) => {
         <AccordionItem
           key={index}
           border="none"
-          mb={2} // Add margin between items
+          mb={2} 
           _focus={{ boxShadow: 'none' }}
+          _active={{ bg: bgColor }}
+          _hover={{ bg: bgColor }}
         >
           {({ isExpanded }) => (
             <Box
@@ -33,15 +35,18 @@ const CustomValuesAccordion = ({ data, borderColor, width, buttonColor }) => {
                 fontSize={{ base: '0.875rem', md: '1rem', lg: '1.125rem' }}
                 p={4}
                 _hover={{ bgColor: bgColor }}
-                borderBottomRadius={isExpanded ? "0" : "md"} // Remove bottom radius when expanded
+                borderBottomRadius={isExpanded ? "0" : "md"}
                 _focus={{ 
                   boxShadow: 'none',
-                  outline: 'none'
+                  outline: 'none',
+                  bg: bgColor
                 }}
                 _focusVisible={{ 
                   boxShadow: 'none',
-                  outline: 'none'
+                  outline: 'none',
+                  bg: bgColor
                 }}
+                _webkitTapHighlightColor="transparent"
               >
                 <Box
                   as="span"
@@ -71,7 +76,8 @@ const CustomValuesAccordion = ({ data, borderColor, width, buttonColor }) => {
 
               <AccordionPanel
                 py={4}
-                fontSize={{ base: '0.7rem', md: '0.8rem', lg: '0.9rem' }}
+                fontSize={{ base: '0.8rem', md: '0.9rem', lg: '0.9rem' }}
+                fontWeight={"400"}
                 borderTopWidth="0" 
                 borderTopColor={borderColor}
                 borderBottomRadius="md"
