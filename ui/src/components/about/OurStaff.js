@@ -38,7 +38,7 @@ const OurStaff = () => (
     >
       <Text
         color="black"
-        fontSize="16px"
+        fontSize="1rem"
         fontWeight="bold"
         fontFamily="Manrope"
         letterSpacing="2px"
@@ -50,7 +50,7 @@ const OurStaff = () => (
       fontFamily="DM Serif Display"
       fontStyle="italic"
       fontWeight="bold"
-      fontSize="36px"
+      fontSize="2.25rem"
       mb="42px"
       textAlign={{ base: 'center', md: 'left' }}
     >
@@ -62,7 +62,7 @@ const OurStaff = () => (
       <Text
         letterSpacing="4px"
         fontWeight="bold"
-        fontSize="20px"
+        fontSize="1.25rem"
         fontFamily="Manrope"
         mb={4}
       >
@@ -85,7 +85,7 @@ const OurStaff = () => (
         <Box mt={{ base: 2, md: 0 }}>
           <Text
             fontWeight="bold"
-            fontSize={{ base: '16px', md: '20px' }}
+            fontSize={{ base: '1rem', md: '1.25rem' }}
             letterSpacing={{base: "2px", md:'4px'}}
             fontFamily="Manrope"
           >
@@ -93,7 +93,7 @@ const OurStaff = () => (
           </Text>
           <Text
             fontFamily="Manrope"
-            fontSize={{ base: '14px', md: '18px' }}
+            fontSize={{ base: '0.875rem', md: '1.125rem' }}
           >
             Lead Pastor (Hong Kong)
             <br />
@@ -108,7 +108,7 @@ const OurStaff = () => (
       <Box
         bg="#DFE7FF"
         borderRadius="12px"
-        fontSize={{ base: '14px', md: '18px' }}
+        fontSize={{ base: '0.875rem', md: '1.125rem' }}
         fontFamily="Manrope"
       >
         Seth Kim has been educated and awarded degrees from the University of
@@ -136,7 +136,7 @@ const OurStaff = () => (
       <Text
         letterSpacing="4px"
         fontWeight="bold"
-        fontSize={{ base: '16px', md: '20px' }}
+        fontSize={{ base: '1rem', md: '1.25rem' }}
         fontFamily="Manrope"
         mb="19px"
       >
@@ -166,7 +166,7 @@ const OurStaff = () => (
             <Text
               fontFamily="Manrope"
               fontWeight="bold"
-              fontSize={{ base: '16px', md: '20px' }}
+              fontSize={{ base: '1rem', md: '1.25rem' }}
               letterSpacing="4px"
               textAlign={{ base: 'center', md: 'left' }}
             >
@@ -174,7 +174,7 @@ const OurStaff = () => (
             </Text>
             <Text
               fontFamily="Manrope"
-              fontSize={{ base: '14px', md: '18px' }}
+              fontSize={{ base: '0.875rem', md: '1.125rem' }}
               color="black"
               textAlign={{ base: 'center', md: 'left' }}
             >
