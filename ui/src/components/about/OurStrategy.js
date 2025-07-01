@@ -67,7 +67,7 @@ const OurStrategy = () => {
             mb="0.5rem"
           >
             <Text
-              fontSize={{ base: 'xs', md: '1rem' }}
+              fontSize="1rem"
               fontWeight="bold"
               letterSpacing="0.125rem"
               color="#090500"
@@ -80,7 +80,8 @@ const OurStrategy = () => {
             fontFamily="DM Serif Display"
             fontStyle="italic"
             fontWeight="bold"
-            fontSize={{ base: '2xl', md: '2.25rem' }}
+            fontSize="2.25rem"
+            textAlign={{ base: 'center', md: 'left' }}
           >
             Our Strategy
           </Text>
@@ -112,7 +113,7 @@ const OurStrategy = () => {
               <Text
                 fontFamily="Manrope"
                 fontWeight="700"
-                fontSize={{ base: 'md', md: '1.25rem' }}
+                fontSize={{ base: '1rem', md: '1.25rem' }}
                 letterSpacing="4px"
                 color="black"
               >
@@ -122,14 +123,14 @@ const OurStrategy = () => {
             <Text
               fontFamily="Manrope"
               fontWeight="400"
-              fontSize={{ base: 'sm', md: '1.25rem' }}
+              fontSize={{ base: '0.875rem', md: '1.25rem' }}
               color="black"
               mb="1.5rem"
               textAlign={{ base: 'center', md: 'left' }}
             >
               {section.subtitle}
             </Text>
-            <Text color="black" fontSize={{ base: 'sm', md: '18px' }}>
+            <Text color="black" fontSize={{ base: '0.875rem', md: '1.125rem' }}>
               {section.description}
             </Text>
             <List spacing={0.5} pl={4} color="black">
@@ -139,12 +140,12 @@ const OurStrategy = () => {
                     <Box
                       as="span"
                       color="black"
-                      fontSize={{ base: 'lg', md: 'xl' }}
+                      fontSize={{ base: '0.875rem', md: '1.125rem' }}
                       style={{  marginRight: '0.5rem' }}
                     >
                       •
                     </Box>
-                    <Box as="span" fontSize={{ base: 'sm', md: '18px' }}>
+                    <Box as="span" fontSize={{ base: '0.875rem', md: '1.125rem' }}>
                       {bullet}
                     </Box>
                   </Flex>
