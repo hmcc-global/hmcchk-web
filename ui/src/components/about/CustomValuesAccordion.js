@@ -33,7 +33,7 @@ const CustomValuesAccordion = ({ data, borderColor, width, buttonColor }) => {
               <AccordionButton
                 fontWeight={700}
                 fontSize={{ base: '0.875rem', md: '1rem', lg: '1.125rem' }}
-                p={4}
+                paddingTop={4}
                 _hover={{ bgColor: bgColor }}
                 borderBottomRadius={isExpanded ? "0" : "md"}
                 _focus={{ 
@@ -75,7 +75,7 @@ const CustomValuesAccordion = ({ data, borderColor, width, buttonColor }) => {
               </AccordionButton>
 
               <AccordionPanel
-                py={4}
+                pb={4}
                 fontSize={{ base: '0.8rem', md: '0.9rem', lg: '0.9rem' }}
                 fontWeight={"400"}
                 borderTopWidth="0" 

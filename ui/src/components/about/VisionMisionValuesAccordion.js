@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@chakra-ui/react';
 import CustomValuesAccordion from './CustomValuesAccordion';
 
-const ConnectMinistryFaq = () => {
+const VisionMissionValuesAccordion = () => {
   const borderColor = '#4A6EEB';
   const buttonColor = '#DFE7FF';
 
@@ -61,4 +61,4 @@ const ConnectMinistryFaq = () => {
   );
 };
 
-export default ConnectMinistryFaq;
+export default VisionMissionValuesAccordion;

@@ -25,6 +25,7 @@ import ErrorPage from './screens/ErrorPage';
 import ScrollToTop from './helpers/ScrollToTop';
 import AboutUsContainer from './about/AboutUsContainer';
 import VisionMissionValues from './about/VisionMissionValues'
+import Beliefs from './about/Beliefs'
 import OnlineSermonContainer from './sermons/OnlineSermonContainer';
 import AdminHome from './admin/AdminHome';
 import AdminUser from './admin/users/AdminUser';
@@ -198,6 +199,12 @@ const MainContainer = () => {
           path="/about-us/vision"
           permissions={['public']}
           component={VisionMissionValues}
+        />
+        <PrivateRoute
+          exact
+          path="/about-us/beliefs"
+          permissions={['public']}
+          component={Beliefs}
         />
         <PrivateRoute
           exact
