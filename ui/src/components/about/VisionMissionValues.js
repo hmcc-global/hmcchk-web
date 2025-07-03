@@ -37,6 +37,46 @@ const VisionMissionValues = (props) => {
         {/* Right Side - Main Content */}
         <Box flex={1} p={4} overflow="auto">
           <VStack spacing={6} align="stretch">
+            <Box
+              textAlign={"left"}
+            >
+              <Box
+                borderRadius="1.875em"
+                bgColor="white"
+                px="1em"
+                display={"inline-block"}
+              >
+                <Text
+                  color="#0C0C20"
+                  fontSize="0.8rem"
+                  fontFamily="Manrope"
+                  fontWeight="700"
+                  textTransform="uppercase"
+                  lineHeight="1rem"
+                  letterSpacing="2px"
+                  wordBreak="break-word"
+                  py="0.5em"
+                >
+                  ABOUT US
+                </Text>
+              </Box>
+            </Box>
+            <Box
+              textAlign={textAlign}
+            >
+
+            <Text
+                display="inline"
+                fontWeight="400"
+                lineHeight="1.6rem"
+                wordBreak="break-word"
+                fontSize="2rem"
+                // color="#4A6EEB"
+                fontFamily="DMSerifDisplay_Italic, serif"
+              >
+                  Vision, Mission & Our Values
+              </Text>
+            </Box>
             {isMobile ? 
             (
             <VStack 
