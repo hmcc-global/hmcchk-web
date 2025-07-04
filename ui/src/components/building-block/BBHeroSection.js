@@ -60,8 +60,9 @@ const BBHeroSection = ({ scheduleRef, contactRef }) => {
             textAlign={{ base: 'center', md: 'start' }}
             fontSize={{ base: '0.75rem', md: '1rem', lg: '1.25rem' }}
             fontWeight="700"
+            whiteSpace="true"
           >
-            Harvest Mission Community Church’s
+            Harvest Mission Community Church’s {''}
             <Box display={{ base: 'inline', md: 'none' }}>
               <br />
             </Box>
@@ -83,9 +84,12 @@ const BBHeroSection = ({ scheduleRef, contactRef }) => {
             fontSize={{ base: '0.875rem', md: '0.9rem', lg: '1.125rem' }}
             textAlign={{ base: 'center', md: 'start' }}
           >
-            We exist to lay a Biblical foundation to lead children to Christ and
-            to prepare them to share their faith. Children from Kindergarten to
-            Grade 5 are welcome to join our community!
+            Building Blocks serves kids from age 3 to grade 5. We partner with
+            parents to help children in loving and following Jesus. Our Sunday
+            mornings give the opportunity for kids to participate in worship,
+            Bible lessons, community building, and lots of fun! We also have
+            various activities throughout the year for community building and to
+            serve the needs in our city. We hope to see you at Building Blocks!
           </Text>
           <HStack
             display={{ base: 'none', md: 'flex' }}
