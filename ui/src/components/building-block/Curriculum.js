@@ -14,6 +14,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 const images = [
   "/images/building-blocks/carousel-1.jpg",
   "/images/building-blocks/carousel-2.jpg",
+  "/images/building-blocks/carousel-3.png"
 ];
 
 export default function Curriculum() {
@@ -69,8 +70,8 @@ export default function Curriculum() {
         <Box
           position="relative"
           w={{ base: "100%", md: "55%" }}
-          h={{ base: "300px", md: "600px" }}
-          minW={{ md: "500px" }}
+          h={{ base: "300px", md: "628px" }}
+          minW={{ md: "650px" }}
           bg="gray.200"
           borderRadius={{ base: "40px", md: "60px" }}
           overflow="hidden"
@@ -80,9 +81,10 @@ export default function Curriculum() {
             src={images[current]}
             alt="Curriculum"
             objectFit="cover"
+            objectPosition="100% 50%"
             w="100%"
             h="100%"
-            transition="opacity 0.5s"
+            transition="opacity 1.2s"
             opacity={fade ? 1 : 0}
           />
           {/* Carousel Controls */}
