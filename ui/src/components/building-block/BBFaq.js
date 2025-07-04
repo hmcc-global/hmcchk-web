@@ -51,7 +51,7 @@ const BBFaq = () => {
                 fontWeight={400}
                 textAlign="center"
                 fontFamily="DMSerifDisplay_Italic"
-                letterSpacing={'-0.1rem'}
+                letterSpacing={{ base: '-0.0625rem', lg: '-0.125rem' }}
               >
                 FAQs
               </Heading>

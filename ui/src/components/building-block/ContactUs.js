@@ -39,7 +39,7 @@ const ContactUs = () => {
                     fontWeight={400}
                     textAlign="center"
                     fontFamily="DMSerifDisplay_Italic"
-                    letterSpacing={'-0.1rem'}
+                    letterSpacing={{ base: '-0.0625rem', lg: '-0.125rem' }}
                   >
                     Contact Us
                   </Heading>
@@ -47,7 +47,7 @@ const ContactUs = () => {
                 <Box>
                   <Text
                     color="#0C0C20"
-                    fontSize={['0.875rem', '0.9rem', '1.25rem']}
+                    fontSize={{ base: '0.875rem', md: '0.9rem', lg: '1.25rem' }}
                     fontFamily="Manrope"
                     fontWeight={400}
                   >

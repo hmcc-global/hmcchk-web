@@ -8,7 +8,7 @@ import BBHeroSection from './BBHeroSection';
 
 const BBPage = () => {
   return (
-    <Container minW="100%" py={{ base: '4rem', lg: '5rem' }}>
+    <Container maxW="container.xl" w="100%" py={{ base: '3rem', lg: '5rem' }}>
       <VStack w="100%" gap={{ base: '3rem', lg: '5rem' }}>
         <BBHeroSection />
         <OurValues />
