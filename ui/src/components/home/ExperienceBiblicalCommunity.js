@@ -324,6 +324,7 @@ const ExperienceBiblicalCommunity = () => {
                       </Button>
                     </VStack>
                   </VStack>
+                  
                 ) : (
                   <VStack py="3em">
                     <VStack w="80%" paddingBottom="2em">

@@ -1,7 +1,12 @@
+import {
+  Box,
+} from '@chakra-ui/react';
 import { Container, VStack } from '@chakra-ui/react';
 import OurValues from './OurValues';
 import Curriculum from './Curriculum';
 import BBSchedule from './BBSchedule';
+import BBFaq from './BBFaq';
+import ContactUs from './ContactUs';
 
 const BBPage = () => {
   return (
@@ -10,6 +15,8 @@ const BBPage = () => {
         <OurValues />
         <Curriculum />
         <BBSchedule />
+        <BBFaq/>
+        <ContactUs/>
       </VStack>
     </Container>
   );
