@@ -17,7 +17,7 @@ const PlanAVisitFaq = () => {
     {
       title: 'Is there a service available specifically for my kids?',
       content:
-        'Building Blocks is HMCC’s Children’s Ministry, specifically catered for kids ages 3 to 11 and with all learning needs, will take place alongside of our Sunday Celebrations. The children will be able to interact with one another and the teachers over a time of worship, Bible story and activities. For more information, please visit the Building Block’s page https://hongkong.sub.hmcc.net/building-blocks/',
+        'Building Blocks is HMCC’s Children’s Ministry, specifically catered for kids ages 3 to 11 and with all learning needs, will take place alongside of our Sunday Celebrations. The children will be able to interact with one another and the teachers over a time of worship, Bible story and activities. For more information, please visit the Building Block’s page https://hongkong.hmcc.net/building-blocks/',
     },
     {
       title:

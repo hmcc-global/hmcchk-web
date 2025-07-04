@@ -183,7 +183,7 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
-          path="/building-block"
+          path="/building-blocks"
           permissions={['public']}
           component={BBPage}
         />
