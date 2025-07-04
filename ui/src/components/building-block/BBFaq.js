@@ -1,6 +1,5 @@
 import { Fade } from '@chakra-ui/react';
 
-import React from 'react';
 import { Box, Heading } from '@chakra-ui/react';
 import CustomFaqAccordion from '../discover/CustomFaqAccordion';
 import { InView } from 'react-intersection-observer';

@@ -5,7 +5,7 @@ const values = [
     title: 'Direction',
     description:
       "Children to come to a saving knowledge of Jesus Christ and be rooted in God's Word and the gospel.",
-    icon: '/images/building-blocks/DirectionIcon.png',
+    icon: '/images/buildingblock/DirectionIcon.png',
     bg: '#DBF1F1',
     shadow: '0.625rem 0.625rem 0 #77C2C6',
   },
@@ -13,7 +13,7 @@ const values = [
     title: 'Delight',
     description:
       'Children to experience the joy of being in an intimate relationship with Jesus and the church community.',
-    icon: '/images/building-blocks/DelightIcon.png',
+    icon: '/images/buildingblock/DelightIcon.png',
     bg: '#F5F0E0',
     shadow: '0.5rem 0.5rem 0 #FFE29A',
   },
@@ -21,7 +21,7 @@ const values = [
     title: 'Destiny',
     description:
       "Children to grow as a disciple of Jesus, to daily live out God's call in their lives, and raise up future disciples of Christ.",
-    icon: '/images/building-blocks/DestinyIcon.png',
+    icon: '/images/buildingblock/DestinyIcon.png',
     bg: '#F1E6E6',
     shadow: '0.5rem 0.5rem 0 #F7B2B7',
   },

@@ -12,7 +12,30 @@ import { motion } from 'framer-motion';
 
 const MotionImage = motion(Image);
 
-const BBHeroSection = () => {
+const BBHeroSection = ({ scheduleRef, contactRef }) => {
+  const offset = 60;
+  const scrollToSchedule = () => {
+    if (scheduleRef.current) {
+      const topPosition =
+        scheduleRef.current.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: topPosition - offset,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const scrollToContact = () => {
+    if (contactRef.current) {
+      const topPosition =
+        contactRef.current.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: topPosition - offset,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   const images = [
     `${process.env.PUBLIC_URL}/images/buildingblock/bb_img1.png`,
     `${process.env.PUBLIC_URL}/images/buildingblock/bb_img4.png`,
@@ -38,7 +61,11 @@ const BBHeroSection = () => {
             fontSize={{ base: '0.75rem', md: '1rem', lg: '1.25rem' }}
             fontWeight="700"
           >
-            Harvest Mission Community Church’s Children’s Ministry
+            Harvest Mission Community Church’s
+            <Box display={{ base: 'inline', md: 'none' }}>
+              <br />
+            </Box>
+            Children’s Ministry
           </Text>
           <Text
             fontFamily="DMSerifDisplay_Italic"
@@ -81,6 +108,7 @@ const BBHeroSection = () => {
                 borderColor: '#D46764',
                 textDecoration: 'none',
               }}
+              onClick={scrollToSchedule}
             >
               <Text fontSize={{ md: '1rem', lg: '1.25rem' }} fontWeight="700">
                 Schedule Information
@@ -101,6 +129,7 @@ const BBHeroSection = () => {
                 borderColor: '#D46764',
                 textDecoration: 'none',
               }}
+              onClick={scrollToContact}
             >
               <Text fontSize={{ md: '1rem', lg: '1.25rem' }} fontWeight="700">
                 Contact Us
@@ -146,6 +175,7 @@ const BBHeroSection = () => {
             border="0.7px solid #FFF"
             padding={{ md: '3', lg: '5' }}
             w="100%"
+            onClick={scrollToSchedule}
           >
             <Text
               color="#FFF"
@@ -163,6 +193,7 @@ const BBHeroSection = () => {
             border="0.7px solid #FFF"
             padding={{ md: '3', lg: '5' }}
             w="100%"
+            onClick={scrollToContact}
           >
             <Text
               color="#FFF"
@@ -179,7 +210,7 @@ const BBHeroSection = () => {
         bgImage={{
           base: `url(${
             process.env.PUBLIC_URL +
-            '/images/buildingblock/bb_mission_bg_top_base.png'
+            '/images/buildingblock/bb_mission_bg_base.png'
           })`,
           md: `url(${
             process.env.PUBLIC_URL +
@@ -188,8 +219,8 @@ const BBHeroSection = () => {
         }}
         bgRepeat="no-repeat"
         bgSize="cover"
-        bgPos="top"
-        paddingY={{ base: '3rem', md: '0.1rem', lg: '4rem' }}
+        bgPos={{ base: 'center', md: 'top' }}
+        paddingY={{ base: '4.5rem', md: '3rem', lg: '4rem' }}
       >
         <Box
           borderRadius="1.875rem"
@@ -216,7 +247,7 @@ const BBHeroSection = () => {
           letterSpacing={{ md: '-0.125rem' }}
           textAlign="center"
           paddingBottom={{ base: '7rem', md: '5rem' }}
-          w={{ base: '85%', md: '80%', lg: '75%%' }}
+          w={{ base: '85%', md: '80%', lg: '75%' }}
           marginX="auto"
         >
           To lay a{' '}
