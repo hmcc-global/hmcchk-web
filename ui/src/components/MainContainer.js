@@ -8,6 +8,7 @@ import SignupContainer from './auth/SignupContainer';
 import EventsPage from './events/EventsPage';
 import VisitUsPage from './discover/PlanAVisit';
 import DiscoverPage from './discover/DiscoverPage';
+import BBPage from './building-block/BBPage';
 import PrivateRoute from './helpers/PrivateRoute';
 import Signup from './auth/Signup';
 import HomeContainer from './home/HomeContainer';
@@ -179,6 +180,12 @@ const MainContainer = () => {
           path="/discover/connect-ministries"
           permissions={['public']}
           component={ConnectMinistry}
+        />
+        <PrivateRoute
+          exact
+          path="/building-blocks"
+          permissions={['public']}
+          component={BBPage}
         />
         <PrivateRoute
           exact

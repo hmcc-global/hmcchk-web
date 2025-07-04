@@ -68,10 +68,7 @@ const Faq = (props) => {
           alongside of our Sunday Celebrations. The children will be able to
           interact with one another and the teachers over a time of worship,
           Bible story and activities. For more information, please visit the{' '}
-          <Link
-            href="https://hongkong.sub.hmcc.net/building-blocks/"
-            color="#0E66CC"
-          >
+          <Link href="/building-blocks" color="#0E66CC">
             Building Block’s page
           </Link>
         </AccordionPanel>
