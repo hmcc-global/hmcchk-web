@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Flex,
@@ -9,13 +9,15 @@ import {
   HStack,
   VStack,
   useBreakpointValue,
-} from "@chakra-ui/react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+} from '@chakra-ui/react';
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
 const images = [
-  "/images/building-blocks/carousel-1.jpg",
-  "/images/building-blocks/carousel-2.jpg",
-  "/images/building-blocks/carousel-3.png"
+  '/images/building-blocks/carousel-1.png',
+  '/images/building-blocks/carousel-2.png',
+  '/images/building-blocks/carousel-3.png',
+  '/images/building-blocks/carousel-4.png',
+  '/images/building-blocks/carousel-5.png',
 ];
 
 export default function Curriculum() {
@@ -53,32 +55,27 @@ export default function Curriculum() {
   return (
     <Flex
       bg="#F7F9FC"
-      minH="100vh"
       align="center"
       justify="center"
-      px={{ base: 2, md: 8 }}
-      py={8}
+      px={{ base: 2, lg: 8 }}
+      py={{ lg: 8 }}
+      mb={{ base:20, lg: 12 }}
     >
       <Flex
         w="100%"
         maxW="1200px"
         bg="#F7F9FC"
         overflow="hidden"
-        direction={{ base: "column-reverse", md: "row" }}
+        direction={{ base: 'column-reverse', xl:'row'}}
         align="center"
       >
         {/* Carousel Section */}
-        <VStack
-          w={{ base: "100%", md: "55%" }}
-          spacing={3}
-          align="stretch"
-        >
+        <VStack w={{ base: '100%', xl: '55%' }} spacing={3} align="stretch">
           <Box
             position="relative"
-            h={{ base: "300px", md: "628px" }}
-            minW={{ md: "650px" }}
-            bg="gray.200"
-            borderRadius={{ base: "40px", md: "60px" }}
+            h={{ base: '18.75rem', lg: '39.25rem' }}
+            minW={{ md: '35rem', lg: '40.625rem' }}
+            borderRadius="5rem"
             overflow="hidden"
             role="group"
           >
@@ -95,14 +92,14 @@ export default function Curriculum() {
             {/* Carousel Controls */}
             <IconButton
               aria-label="Previous"
-              icon={<ChevronLeftIcon boxSize={8} color="white" />}
+              icon={<ChevronLeftIcon boxSize="2rem" color="white" />}
               position="absolute"
               top="50%"
-              left="4"
+              left="0.25rem"
               transform="translateY(-50%)"
               onClick={prevSlide}
               bg="transparent"
-              _hover={{ bg: "transparent" }}
+              _hover={{ bg: 'transparent' }}
               zIndex={1}
               opacity={0}
               _groupHover={{ opacity: 1 }}
@@ -112,14 +109,14 @@ export default function Curriculum() {
             />
             <IconButton
               aria-label="Next"
-              icon={<ChevronRightIcon boxSize={8} color="white" />}
+              icon={<ChevronRightIcon boxSize="2rem" color="white" />}
               position="absolute"
               top="50%"
-              right="4"
+              right="0.25rem"
               transform="translateY(-50%)"
               onClick={nextSlide}
               bg="transparent"
-              _hover={{ bg: "transparent" }}
+              _hover={{ bg: 'transparent' }}
               zIndex={1}
               opacity={0}
               _groupHover={{ opacity: 1 }}
@@ -136,7 +133,7 @@ export default function Curriculum() {
                 w={2}
                 h={2}
                 borderRadius="full"
-                bg={current === idx ? " #EBAC09;" : "#D9D9D9"}
+                bg={current === idx ? ' #EBAC09;' : '#D9D9D9'}
                 cursor="pointer"
                 onClick={() => {
                   setFade(false);
@@ -153,23 +150,31 @@ export default function Curriculum() {
         {/* Text Section */}
         <Box
           flex="1"
-          px={{ md: "6.5rem" }}
-          py={{ base:6, md: 12 }}
+          px={{ xl: '6.5rem' }}
+          py={{ base: '2.5rem', xl: '2.625rem' }}
           textAlign="left"
-          minW={{ md: "30rem" }}
+          fontWeight="400"
+          minW={{ lg: '38rem' }}
         >
           <Heading
             as="h2"
-            fontSize={{ base: "2xl", md: "1.25rem", lg: "4xl" }}
-            fontWeight="bold"
-            fontStyle="italic"
-            color="gray.800"
-            mb={6}
+            fontSize={{ base: '2.25rem', lg: '2.625rem' }}
+            fontWeight="400"
+            fontFamily="DMSerifDisplay_Italic"
+            mb="1rem"
           >
             Curriculum
           </Heading>
-          <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">
-            In Building Blocks, we use the curriculum <b>"The Biggest Story Curriculum"</b> by Crossway as the backbone for our lessons. The curriculum spans over the entire Bible, helping children understand that God has written this story of redeeming the world through his Son, Jesus Christ.
+          <Text
+            fontSize={{ base: '0.875rem', md: '1.25rem' }}
+            fontWeight="400"
+            fontFamily="Manrope"
+          >
+            In Building Blocks, we use the curriculum "The Biggest Story
+            Curriculum" by Crossway as the backbone for our lessons. The
+            curriculum spans over the entire Bible, helping children understand
+            that God has written this story of redeeming the world through his
+            Son, Jesus Christ.
           </Text>
         </Box>
       </Flex>
