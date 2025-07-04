@@ -8,7 +8,6 @@ import {
   IconButton,
   HStack,
   VStack,
-  useBreakpointValue,
 } from '@chakra-ui/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
