@@ -65,7 +65,7 @@ const ContactUs = forwardRef((props, ref) => {
                   </Box>
                   <Box position="relative" width="100%" pb="100%">
                     <Image
-                      src={`${process.env.PUBLIC_URL}/images/buildingblock/ContactUsPic.jpeg`}
+                      src={`${process.env.PUBLIC_URL}/images/buildingblock/ContactUsPic_mobile.jpg`}
                       alt="BB"
                       position="absolute"
                       top="0"
@@ -194,7 +194,7 @@ const ContactUs = forwardRef((props, ref) => {
                     borderRadius="80px"
                   >
                     <Image
-                      src={`${process.env.PUBLIC_URL}/images/buildingblock/ContactUsPic.jpeg`}
+                      src={`${process.env.PUBLIC_URL}/images/buildingblock/ContactUsPic.jpg`}
                       alt="BB"
                       width="100%"
                       height="100%"
