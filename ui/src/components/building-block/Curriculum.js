@@ -7,6 +7,7 @@ import {
   Heading,
   IconButton,
   HStack,
+  VStack,
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
@@ -67,69 +68,68 @@ export default function Curriculum() {
         align="center"
       >
         {/* Carousel Section */}
-        <Box
-          position="relative"
+        <VStack
           w={{ base: "100%", md: "55%" }}
-          h={{ base: "300px", md: "628px" }}
-          minW={{ md: "650px" }}
-          bg="gray.200"
-          borderRadius={{ base: "40px", md: "60px" }}
-          overflow="hidden"
-          role="group"
+          spacing={3}
+          align="stretch"
         >
-          <Image
-            src={images[current]}
-            alt="Curriculum"
-            objectFit="cover"
-            objectPosition="100% 50%"
-            w="100%"
-            h="100%"
-            transition="opacity 1.2s"
-            opacity={fade ? 1 : 0}
-          />
-          {/* Carousel Controls */}
-          <IconButton
-            aria-label="Previous"
-            icon={<ChevronLeftIcon boxSize={8} color="white" />}
-            position="absolute"
-            top="50%"
-            left="4"
-            transform="translateY(-50%)"
-            onClick={prevSlide}
-            bg="transparent"
-            _hover={{ bg: "transparent" }}
-            zIndex={1}
-            opacity={0}
-            _groupHover={{ opacity: 1 }}
-            transition="opacity 0.2s"
-            _focus={{ boxShadow: 'none', outline: 'none' }}
-            _active={{ boxShadow: 'none', outline: 'none' }}
-          />
-          <IconButton
-            aria-label="Next"
-            icon={<ChevronRightIcon boxSize={8} color="white" />}
-            position="absolute"
-            top="50%"
-            right="4"
-            transform="translateY(-50%)"
-            onClick={nextSlide}
-            bg="transparent"
-            _hover={{ bg: "transparent" }}
-            zIndex={1}
-            opacity={0}
-            _groupHover={{ opacity: 1 }}
-            transition="opacity 0.2s"
-            _focus={{ boxShadow: 'none', outline: 'none' }}
-            _active={{ boxShadow: 'none', outline: 'none' }}
-          />
-          {/* Dots overlayed at the bottom center of the carousel */}
-          <HStack
-            position="absolute"
-            bottom="4"
-            left="50%"
-            transform="translateX(-50%)"
-            spacing={2}
+          <Box
+            position="relative"
+            h={{ base: "300px", md: "628px" }}
+            minW={{ md: "650px" }}
+            bg="gray.200"
+            borderRadius={{ base: "40px", md: "60px" }}
+            overflow="hidden"
+            role="group"
           >
+            <Image
+              src={images[current]}
+              alt="Curriculum"
+              objectFit="cover"
+              objectPosition="100% 50%"
+              w="100%"
+              h="100%"
+              transition="opacity 1.2s"
+              opacity={fade ? 1 : 0}
+            />
+            {/* Carousel Controls */}
+            <IconButton
+              aria-label="Previous"
+              icon={<ChevronLeftIcon boxSize={8} color="white" />}
+              position="absolute"
+              top="50%"
+              left="4"
+              transform="translateY(-50%)"
+              onClick={prevSlide}
+              bg="transparent"
+              _hover={{ bg: "transparent" }}
+              zIndex={1}
+              opacity={0}
+              _groupHover={{ opacity: 1 }}
+              transition="opacity 0.2s"
+              _focus={{ boxShadow: 'none', outline: 'none' }}
+              _active={{ boxShadow: 'none', outline: 'none' }}
+            />
+            <IconButton
+              aria-label="Next"
+              icon={<ChevronRightIcon boxSize={8} color="white" />}
+              position="absolute"
+              top="50%"
+              right="4"
+              transform="translateY(-50%)"
+              onClick={nextSlide}
+              bg="transparent"
+              _hover={{ bg: "transparent" }}
+              zIndex={1}
+              opacity={0}
+              _groupHover={{ opacity: 1 }}
+              transition="opacity 0.2s"
+              _focus={{ boxShadow: 'none', outline: 'none' }}
+              _active={{ boxShadow: 'none', outline: 'none' }}
+            />
+          </Box>
+          {/* Dots below the carousel, grouped */}
+          <HStack justify="center" spacing={2}>
             {images.map((_, idx) => (
               <Box
                 key={idx}
@@ -148,7 +148,7 @@ export default function Curriculum() {
               />
             ))}
           </HStack>
-        </Box>
+        </VStack>
 
         {/* Text Section */}
         <Box
