@@ -1,6 +1,5 @@
 import {
   Box,
-  Container,
   Flex,
   HStack,
   Text,
@@ -10,7 +9,6 @@ import {
   Fade,
   Spacer,
   useMediaQuery,
-  Link,
   Image,
 } from '@chakra-ui/react';
 import 'slick-carousel/slick/slick.css';

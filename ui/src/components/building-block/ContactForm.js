@@ -1,22 +1,17 @@
 import {
   Box,
   Button,
-  Container,
-  Flex,
   FormControl,
   FormLabel,
-  Heading,
   Input,
   VStack,
   Modal,
   ModalOverlay,
   Text,
   ModalContent,
-  ModalHeader,
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Stack,
 } from '@chakra-ui/react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useState } from 'react';
