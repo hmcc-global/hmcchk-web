@@ -1,6 +1,4 @@
-import {
-  Box,
-} from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { Container, VStack } from '@chakra-ui/react';
 import OurValues from './OurValues';
 import Curriculum from './Curriculum';

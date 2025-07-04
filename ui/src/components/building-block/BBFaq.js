@@ -1,6 +1,4 @@
-import{
-  Fade,
-} from '@chakra-ui/react'
+import { Fade } from '@chakra-ui/react';
 
 import React from 'react';
 import { Box, Heading } from '@chakra-ui/react';
@@ -19,21 +17,20 @@ const BBFaq = () => {
         'We welcome children from age 3 through grade 5 and with all learning needs as teachers differentiate instruction to make learning meaningful for everyone.',
     },
     {
-      title: 'I’m bringing my infant/toddler to church. What’s Building Blocks like for them?',
+      title:
+        'I’m bringing my infant/toddler to church. What’s Building Blocks like for them?',
       content:
         'Currently, we do not have a program for infants and toddlers. However, we have a safe and fun space designed for them near the parent seats so you can keep an eye on them. We provide some toys and books for the children, but you are welcome to bring snacks, and toys your child likes from home.',
     },
     {
-      title:
-        'What if my child is sick?',
+      title: 'What if my child is sick?',
       content:
         'To ensure the health of other children and teachers in the classroom, we strongly advise parents to keep their children at home if they show any symptoms of illness like coughing, a runny nose, diarrhea, vomiting, and a fever. Note that children should be fever free for 24 hours without medication before you can bring them to Building Blocks. ',
     },
     {
-      title:
-        'How do I know my child will be safe?',
+      title: 'How do I know my child will be safe?',
       content:
-        'Your child\'s safety is important to us, as we understand you have entrusted your precious ones in our care. We have different structures in place for all the teachers to ensure the safety of your children: church membership; interview process; evaluation; accountability; child safety; and ongoing teacher training.',
+        "Your child's safety is important to us, as we understand you have entrusted your precious ones in our care. We have different structures in place for all the teachers to ensure the safety of your children: church membership; interview process; evaluation; accountability; child safety; and ongoing teacher training.",
     },
   ];
 
