@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Heading, Text, Stack, Image } from '@chakra-ui/react';
 
 const values = [
@@ -51,7 +50,7 @@ const OurValues = () => (
     <Stack
       direction={{ base: 'column', lg: 'row' }}
       spacing="2rem"
-      align={{ base: 'center', xl: 'flex-start' }}
+      align={{ base: 'center', lg: 'flex-start' }}
       justify="center"
     >
       {values.map((value) => (
