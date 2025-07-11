@@ -3,7 +3,6 @@ import {
   Box,
   Flex,
   Text,
-  Heading,
   Image,
   Link,
   VStack,
@@ -26,7 +25,7 @@ const ministryDirectors = [
 ];
 
 const OurStaff = () => (
-  <Box maxW={{ base: '100%', md: '820px' }} mx="auto" p={{ base: 3, md: 6 }}>
+  <Box maxW={{ base: '100%', md: '820px' }} mx="auto" p={{ base: 3, md: 6 }} pb={{ base: 8, md: 12 }}>
     {/* Title */}
     <Box
       display="inline-block"
@@ -58,7 +57,7 @@ const OurStaff = () => (
     </Text>
 
     {/* Pastoral Staff */}
-    <Box as="section" mt={8}>
+    <Box as="section" mt={10} mb={14}>
       <Text
         letterSpacing="4px"
         fontWeight="bold"
@@ -86,7 +85,7 @@ const OurStaff = () => (
           <Text
             fontWeight="bold"
             fontSize={{ base: '1rem', md: '1.25rem' }}
-            letterSpacing={{base: "2px", md:'4px'}}
+            letterSpacing={{base: "0.125rem", md: "0.25rem"}}
             fontFamily="Manrope"
           >
             REV. DR. SETH S. KIM
@@ -110,6 +109,9 @@ const OurStaff = () => (
         borderRadius="12px"
         fontSize={{ base: '0.875rem', md: '1.125rem' }}
         fontFamily="Manrope"
+        mt={6}
+        px={5}
+        py={5}
       >
         Seth Kim has been educated and awarded degrees from the University of
         Illinois, Trinity International University, and Gordon-Conwell
@@ -132,7 +134,7 @@ const OurStaff = () => (
     </Box>
 
     {/* Ministry Directors */}
-    <Box as="section" mt={12}>
+    <Box as="section" mt={10}>
       <Text
         letterSpacing="4px"
         fontWeight="bold"
@@ -142,8 +144,8 @@ const OurStaff = () => (
       >
         MINISTRY DIRECTORS
       </Text>
-      <Flex direction={{ base: 'column', md: 'row' }}>
-        {ministryDirectors.map((director) => (
+      <Flex direction={{ base: 'column', md: 'row' }} gap={{ base: 8, md: 6 }}>
+        {ministryDirectors.map((director, idx) => (
           <VStack
             key={director.name}
             borderRadius="lg"
@@ -151,7 +153,7 @@ const OurStaff = () => (
             spacing={1}
             alignItems={{ base: 'center', md: 'flex-start' }}
             textAlign={{ base: 'center', md: 'left' }}
-            mb="8"
+            mb={{ base: idx !== ministryDirectors.length - 1 ? 8 : 0, md: 0 }}
           >
             <Image
               src={director.img}
