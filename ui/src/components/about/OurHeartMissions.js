@@ -232,7 +232,7 @@ const MapWithMarkers = ({
             y={destination.y}
             label={destination.name}
             onClick={() => onMarkerClick(index)}
-            isSelected={destination.name === selectedDestination ? true : false}
+            isSelected={index === selectedDestination ? true : false}
           />
         ))}
       </Box>
@@ -241,7 +241,7 @@ const MapWithMarkers = ({
 };
 
 const MissionSection = ({ title, blurb }) => {
-  const [selectedDestination, setSelectedDestination] = useState('');
+  const [selectedDestination, setSelectedDestination] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState(null);
 
@@ -313,9 +313,9 @@ const MissionSection = ({ title, blurb }) => {
     },
   ];
 
-  const handleDestinationClick = (name) => {
-    setSelectedDestination(name);
-    setSelectedMarker(name);
+  const handleDestinationClick = (idx) => {
+    setSelectedDestination(idx);
+    setSelectedMarker(idx);
     setIsModalOpen(true);
   };
 
@@ -463,7 +463,7 @@ const MissionSection = ({ title, blurb }) => {
                 country={destination.name}
                 isSelected={index === selectedDestination}
                 minW={{ base: '100px', md: 'auto' }}
-                onClick={() => handleDestinationClick(destination.name)}
+                onClick={() => handleDestinationClick(index)}
               />
             ))}
           </Box>
