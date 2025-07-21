@@ -33,7 +33,7 @@ const CustomValuesAccordion = ({ data, borderColor, width, buttonColor }) => {
               <AccordionButton
                 fontWeight={700}
                 fontSize={{ base: '0.875rem', md: '1rem', lg: '1.125rem' }}
-                paddingTop={4}
+                py={4}
                 _hover={{ bgColor: bgColor }}
                 borderBottomRadius={isExpanded ? "0" : "md"}
                 _focus={{ 
@@ -56,7 +56,7 @@ const CustomValuesAccordion = ({ data, borderColor, width, buttonColor }) => {
                   whiteSpace="normal"
                   letterSpacing={"2px"}
                   fontFamily={"Manrope"}
-                  pl={{base:'0', md: '1rem', lg:'2rem'}}
+                  pl={{base:'0', md: '1rem', lg:'1.25rem'}}
                 >
                   {item.title}
                 </Box>
@@ -85,7 +85,7 @@ const CustomValuesAccordion = ({ data, borderColor, width, buttonColor }) => {
                 {item.content.split('\n').map((line, i) => (
                   <Box 
                     key={i} 
-                    pl={{base:'0', md: '1rem', lg:'2rem'}}>
+                    pl={{base:'0', md: '1rem', lg:'1.25rem'}}>
                       {line}
                   </Box>
                 ))}
