@@ -14,7 +14,7 @@ import { ArrowForwardIcon } from '@chakra-ui/icons';
 
 import VisionMissionValuesAccordion from './VisionMisionValuesAccordion'
 
-const VisionMissionValues = (props) => {
+const VisionMissionValuesSection = (props) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const direction = isMobile ? 'column' : 'row';
   const textAlign = isMobile ? 'center' : 'left';
@@ -31,7 +31,7 @@ const VisionMissionValues = (props) => {
               fontWeight="400"
               lineHeight="1.6rem"
               wordBreak="break-word"
-              fontSize="2rem"
+              fontSize="2.125rem"
               // color="#4A6EEB"
               fontFamily="DMSerifDisplay_Italic, serif"
             >
@@ -273,7 +273,7 @@ const VisionMissionValues = (props) => {
                     <Text
                       display="inline"
                       fontWeight="400"
-                      lineHeight={{base:"0.7rem", md:"1.5rem", lg:"1.6rem"}}
+                      lineHeight={{base:"0.4rem", md:"1.5rem", lg:"1.6rem"}}
                       wordBreak="break-word"
                       fontSize={{base:"1.1rem", md:"1.7rem", lg:"1.75rem"}}
                     >
@@ -376,9 +376,9 @@ const VisionMissionValues = (props) => {
               <Box textAlign={textAlign}>
                 <Text
                   as={"span"}
-                  display="inlinex"
+                  display="inline"
                   fontWeight="400"
-                  lineHeight={{base:"0.7rem", md:"1.5rem", lg:"1.6rem"}}
+                  lineHeight={{base:"0.4rem", md:"1.5rem", lg:"1.6rem"}}
                   wordBreak="break-word"
                   fontSize={{base:"1.1rem", md:"1.7rem", lg:"1.75rem"}}
                   whiteSpace={"normal"}
@@ -476,4 +476,4 @@ const VisionMissionValues = (props) => {
   );
 };
 
-export default VisionMissionValues;
+export default VisionMissionValuesSection;

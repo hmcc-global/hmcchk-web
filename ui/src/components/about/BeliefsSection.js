@@ -26,7 +26,7 @@ const Beliefs = (props) => {
               fontWeight="400"
               lineHeight="1.6rem"
               wordBreak="break-word"
-              fontSize="2rem"
+              fontSize="2.125rem"
               // color="#4A6EEB"
               fontFamily="DMSerifDisplay_Italic, serif"
             >

@@ -2,7 +2,7 @@ import BeliefsSection from './BeliefsSection';
 import StaffSection from './StaffSection';
 import StorySection from './StorySection';
 import StrategySection from './StrategySection';
-import ValuesSection from './ValuesSection';
+import VisionMissionSection from './VisionMissionSection'
 import OurHeartMissions from './OurHeartMissions';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -117,7 +117,7 @@ const AboutUsContainer = () => {
                 />
               )}
               {tabIndex === 1 && (
-                <ValuesSection
+                <VisionMissionSection
                   blurb={blurbs.visionMissionValues}
                   title={TAB_CONFIG[1].label}
                 />
@@ -254,7 +254,7 @@ const AboutUsContainer = () => {
                       <StorySection blurb={blurbs.story} title={tab.label} />
                     )}
                     {index === 1 && (
-                      <ValuesSection
+                      <VisionMissionSection
                         blurb={blurbs.visionMissionValues}
                         title={tab.label}
                       />
