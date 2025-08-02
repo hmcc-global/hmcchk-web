@@ -32,7 +32,7 @@ const OnlineSermonNotesRedirect = () => {
     <>
     {
       id == null ? (
-        <>Sermon Notes not available</>
+        <>Sermon note coming soon, refresh page...</>
       ) : (
         <Spinner />
       )
