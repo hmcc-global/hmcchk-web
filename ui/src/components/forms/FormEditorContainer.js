@@ -26,7 +26,8 @@ import {
 import FormEditor from './FormEditor';
 import ExternalFormEditor from './ExternalFormEditor';
 
-const isAlertTypeNone = (alertType) => alertType == null || alertType === '' || alertType === 'None';
+const isAlertTypeNone = (alertType) =>
+  alertType == null || alertType === '' || alertType === 'None';
 
 const FormEditorContainer = (props) => {
   const {
@@ -135,7 +136,10 @@ const FormEditorContainer = (props) => {
       setValue('requireMembership', data.requireMembership);
       setValue('requireBaptism', data.requireBaptism);
       setValue('alertType', data.alertType);
-      setValue('parseUserData', data.parseUserData && !isAlertTypeNone(data.alertType));
+      setValue(
+        'parseUserData',
+        data.parseUserData && !isAlertTypeNone(data.alertType)
+      );
       setValue('customAlertRecipients', data.customAlertRecipients);
       setValue('successEmailTemplate', data.successEmailTemplate);
       setValue('customEmailSubject', data.customEmailSubject);
@@ -317,6 +321,9 @@ const FormEditorContainer = (props) => {
                             placeholder="Select option"
                           >
                             {/* To add more email template, please define the value and add the template here */}
+                            <option value="email-10y-payment-success">
+                              10Y anniversary Payment Confirmation
+                            </option>
                             <option value="email-retreat-payment-success">
                               Retreat 2025 Payment Confirmation
                             </option>
@@ -445,30 +452,30 @@ const FormEditorContainer = (props) => {
                       />
                     </FormControl>
                   )}
-                  {
-                    !isAlertTypeNone(alertTypeFlag) && (
-                      <FormControl>
-                        <FormLabel>Parse User Data?</FormLabel>
-                        <FormHelperText>
-                          This will send email queries to the alert recipients above which will update the submitter's information in our database.
-                        </FormHelperText>
-                        <Controller
-                          control={control}
-                          name="parseUserData"
-                          defaultValue={false}
-                          render={({ field: { onChange, value, ref } }) => (
-                            <Switch
-                              onChange={onChange}
-                              ref={ref}
-                              isChecked={value}
-                            >
-                              {value ? 'Yes' : 'No'}
-                            </Switch>
-                          )}
-                        />
-                      </FormControl>
-                    )
-                  }
+                  {!isAlertTypeNone(alertTypeFlag) && (
+                    <FormControl>
+                      <FormLabel>Parse User Data?</FormLabel>
+                      <FormHelperText>
+                        This will send email queries to the alert recipients
+                        above which will update the submitter's information in
+                        our database.
+                      </FormHelperText>
+                      <Controller
+                        control={control}
+                        name="parseUserData"
+                        defaultValue={false}
+                        render={({ field: { onChange, value, ref } }) => (
+                          <Switch
+                            onChange={onChange}
+                            ref={ref}
+                            isChecked={value}
+                          >
+                            {value ? 'Yes' : 'No'}
+                          </Switch>
+                        )}
+                      />
+                    </FormControl>
+                  )}
                 </Stack>
                 {ftFlag === 'internal' && (
                   <Stack spacing="2">
@@ -484,6 +491,9 @@ const FormEditorContainer = (props) => {
                       >
                         {/* To add more email template, please define the value and add the template here */}
                         <option value="form-default-success">Default</option>
+                        <option value="form-10y-success">
+                          10Y Confirmation
+                        </option>
                         <option value="form-retreat-success">
                           Retreat 2025
                         </option>
@@ -492,6 +502,7 @@ const FormEditorContainer = (props) => {
                         </option>
                         <option value="form-ignite-success">!gnite</option>
                         <option value="form-deep-success">Deep retreat</option>
+
                         <option value="form-ug-retreat-success">
                           UG Retreat
                         </option>
