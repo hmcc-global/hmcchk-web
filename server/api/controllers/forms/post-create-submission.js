@@ -140,7 +140,7 @@ module.exports = {
       // Send confirmation email to user if there is email
       if (user.email || submissionData['email']) {
         await sails.helpers.sendTemplateEmail.with({
-          to: user.email ? user.email : submissionData['email'],
+          to: submissionData['email'] ? submissionData['email'] : user.email,
           subject: formRecord[0].customEmailSubject
             ? formRecord[0].customEmailSubject
             : 'Successful Submission for ' + formRecord[0].formName,
@@ -162,10 +162,15 @@ module.exports = {
             : await sails.helpers.forms.getFormAlertRecipients(
                 formId,
                 submissionData
-            );
+              );
 
         if (formRecord[0].parseUserData) {
-          await sails.helpers.parseuserquery.sendSingleUserQuery(res.id, submissionData, emailRecipients, formRecord[0].formName);
+          await sails.helpers.parseuserquery.sendSingleUserQuery(
+            res.id,
+            submissionData,
+            emailRecipients,
+            formRecord[0].formName
+          );
         } else {
           await sails.helpers.sendTemplateEmail.with({
             to: process.env.EMAIL_FROM,
