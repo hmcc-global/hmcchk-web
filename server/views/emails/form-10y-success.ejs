@@ -1,14 +1,127 @@
 <% /* Note: This is injected into `views/layouts/layout-email.ejs` */ %>
-<p style="margin-bottom: 25px">Hi,</p>
+<p style="margin-bottom: 25px">Hello, <%= fullName %></p>
 <p style="margin-bottom: 25px">
- Test mail for 10y SIGNUP sucess
+  We have received your registration information for the <i>10-Year Celebration Banquet</i> on September 13, 2025 at Hey Day Cuisine (<i>8/F, Crocodile Center, 79 Hoi Yuen Road, Kwun Tong</i>)!
 </p>
-<br />
-<p style="margin-bottom: 25px">Name: <%= fullName %></p>
-<p style="margin-bottom: 25px">Email: <%= email %></p>
-<p style="margin-bottom: 25px">Phone Number: <%= phoneNumber %></p>
-<p style="margin-bottom: 25px">Campus/Lifestage: <%= lifestage %></p>
-<p style="margin-bottom: 25px">Notes: <%= notes %></p>
-<p style="margin-bottom: 25px">Phone Number: <%= phoneNumber %></p>
-<p style="margin-bottom: 25px">Campus/Lifestage: <%= lifestage %></p>
-<br />
+<p style="margin-bottom: 25px">
+  The 10-Year Celebration Banquet will be on September 13 from 7pm-10pm. We are excited to celebrate all that God has done in and through our church the past 10 years! We are grateful whether you have been a part of or supported our church these past 10 years and look forward to celebrating with you!
+</p>
+<p style="margin-bottom: 25px">
+  Currently, your registration is <b><u>INCOMPLETE</u></b> until you have completed the payment, therefore please read the amount due and payment instructions below carefully so we can confirm your registration:
+  <ul>
+  <li>
+    <b>Registration Period</b>: Registration starts on Sunday, August 10, 2025 and closes on Sunday, <span style="color: red; font-weight: bold;">August 24, 2025 at <u>11:59PM.</u></span>
+  </li>
+  <li>
+    <b>Registration Fee</b>: HK$100 per person (i.e., if there are 5 people in your group, please make sure to pay HK$500)
+  </li>
+</ul>
+</p>
+<p style="margin-bottom: 25px">When paying, please always leave a note in the transfer remark that states:<br/>
+  <b>“10Y: [FULLNAME]”</b>
+  <ul>
+    <li>
+      Example Remark Note: 10Y: Bob Chan
+    </li>
+    <li>
+      If paying for multiple people: “10Y: NAME1, NAME2”
+    </li>
+    <li>
+      <i>Note: Please email hongkong@hongkong.hmcc.net with the appropriate name paid for and registration type if you forget to leave a remark or memo in the online giving process</i>
+    </li>
+  </ul>
+</p>
+
+<h2 style="margin-bottom: 10px"><u>Payment Methods:</u></h2>
+<ol style="margin-bottom: 15px">
+  <li>
+    <b>Faster Payment System</b>
+    <ul>
+      <li>
+        Open your mobile banking FPS interface and scan the QR code or input the FPS identifier
+        <ul>
+          <li>Name: <b>HARVEST MISSION COMMUNITY CHURCH</b></li>
+          <li>FPS ID:<b>167534304</b></li>
+          <li><a href="https://hongkong.hmcc.net/images/giving/FPSQR.png">FPS QR Code:</a></li>
+          <img
+            style="
+              align-self: center;
+              height: 100px;
+              width: auto;
+              margin-left: auto;
+              margin-right: auto;
+            " 
+            src="https://hongkong.hmcc.net/images/giving/FPSQR.png"
+          />
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <b>Direct Bank Transfer</b>
+    <ul>
+      <li>
+        Account Details
+        <ul>
+          <li>
+            Bank Name: <b>China Construction Bank (Asia) Corporation Limited</b>
+          </li>
+          <li>Bank Code: <b>009</b></li>
+          <li>Branch Code: <b>845</b></li>
+          <li>
+            Account Name:
+            <b>Harvest Mission Community Church (Hong Kong) Limited</b>
+          </li>
+          <li>Account Number: <b>013012090</b></li>
+        </ul>
+      </li>
+      <li>
+        If our account name is too long and exceeds the number of permitted
+        characters, you may shorten it as "Harvest Community Church HK"
+      </li>
+      <li>
+        <b>
+          Please email a copy of your transfer receipt along with your Full Name
+          within 2 weeks to
+          <a href="mailto:stewardship@hongkong.hmcc.net"
+            >stewardship@hongkong.hmcc.net</a
+          >
+        </b>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <b>Online Credit Card</b>
+    <ul>
+      <li>
+        Online Payment Platform:
+        <a href="https://tithe.ly/event-registration/#/7744590"
+          >https://tithe.ly/event-registration/#/7744590</a
+        >
+      </li>
+      <li>
+        Kindly note that an extra transaction fee is included for online credit
+        card transactions (3.5% + HKD $2.40 processing fee).
+      </li>
+    </ul>
+  </li>
+  <li>
+    <b>In Person Payment (Cash)</b>
+    <ul>
+      <li>
+        For cash payments, please reach out to your LG leader to assist you in transferring the funds to us. 
+      </li>
+      <li>
+        Please indicate “Faster Payment System (FPS)” under the “Payment method” field in the registration form. 
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p style="margin-bottom: 15px">
+  If you have any questions or enquiries, please contact us at
+  <a href="mailto:hongkong@hongkong.hmcc.net">hongkong@hongkong.hmcc.net</a>.
+</p>
+
+<p style="margin-bottom: 5px">God Bless,</p>
+<p style="margin-top: 0px">HMCC of HK</p>
