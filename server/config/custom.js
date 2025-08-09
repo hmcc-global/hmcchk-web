@@ -9,6 +9,9 @@
  */
 
 module.exports.custom = {
+  // Set below to false to start sending emails
+  disableSendEmails: true,
+
   /**************************************************************************
    *                                                                         *
    * The base URL to use during development.                                 *
