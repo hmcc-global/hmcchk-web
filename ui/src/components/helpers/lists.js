@@ -20,6 +20,7 @@ const ministryTeamList = [
   'FILM',
   'Hospitality',
   'Intercessory Prayer Team',
+  'Latitude',
   'T3CH',
   'Visual',
 ];
