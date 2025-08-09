@@ -212,7 +212,7 @@ const ExperienceBiblicalCommunity = () => {
                           Investment, Faith, and Enjoyment.
                         </Text>
                       </Box>
-                      <Link href="https://hongkong.hmcc.net/forms/687bdba348bd587866199d16" w="100%">
+                      <Link href="https://bit.ly/LGSignup-2025" w="100%">
                         <Button
                           w="100%"
                           pl={10.5}
@@ -356,7 +356,7 @@ const ExperienceBiblicalCommunity = () => {
                           </Text>
                         </HStack>
                         <Spacer />
-                        <Link href="https://hongkong.hmcc.net/forms/687bdba348bd587866199d16">
+                        <Link href="https://bit.ly/LGSignup-2025">
                           <Button
                             pt={6}
                             pb={6}

@@ -124,7 +124,7 @@ const LifeGroupPage = () => {
               </Text>
               <Button
                 as={Link}
-                href="https://hongkong.hmcc.net/forms/687bdba348bd587866199d16"
+                href="https://bit.ly/LGSignup-2025"
                 borderRadius={'0.9375rem'}
                 bgColor="#D46764"
                 py={'1.75rem'}

@@ -37,7 +37,7 @@ const Faq = (props) => {
           LIFE Groups happen every Tuesday or Wednesday nights across the city
           and university campuses! If you would like to join us, please sign-up{' '}
           <Link
-            href="https://hongkong.hmcc.net/forms/687bdba348bd587866199d16"
+            href="https://bit.ly/LGSignup-2025"
             fontStyle="italic"
             color="blue"
             isExternal

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { customAxios as axios } from "../helpers/customAxios";
-import { Spinner } from "@chakra-ui/react";
+import { customAxios as axios } from '../helpers/customAxios';
+import { Spinner } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 
 const OnlineSermonNotesRedirect = () => {
@@ -8,7 +8,7 @@ const OnlineSermonNotesRedirect = () => {
   const history = useHistory();
 
   const latestSermonNoteId = async () => {
-    const { data } = await axios.get("/api/sermon-notes-parent/latest");
+    const { data } = await axios.get('/api/sermon-notes-parent/latest');
     setId(data);
   };
 
@@ -18,7 +18,7 @@ const OnlineSermonNotesRedirect = () => {
 
   useEffect(() => {
     if (id != null) {
-      const onlineSermonPrefix = "/sermons/notes/online";
+      const onlineSermonPrefix = '/sermons/notes/online';
       const { pathname } = history.location;
       if (pathname == null || pathname !== onlineSermonPrefix) {
         history.push(`/sermons/notes/${id}`);
@@ -28,17 +28,7 @@ const OnlineSermonNotesRedirect = () => {
     }
   }, [history, id]);
 
-  return (
-    <>
-    {
-      id == null ? (
-        <>Sermon note coming soon, refresh page...</>
-      ) : (
-        <Spinner />
-      )
-    }
-    </>
-  );
-}
+  return <>{id == null ? <>Sermon Notes not available</> : <Spinner />}</>;
+};
 
 export default OnlineSermonNotesRedirect;
