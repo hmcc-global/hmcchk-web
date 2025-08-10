@@ -37,64 +37,80 @@ module.exports = {
       console.log(submissionIds);
       if (submissionIds.length === 0) return exits.error('No payment Ids');
       let submissions = await Submission.find({
-        _id: [...submissionIds]
+        _id: [...submissionIds],
       }).populate('paymentData', {
         where: {
           isPaid: true,
-          paymentData: { '!=': '' }
-        }
+          paymentData: { '!=': '' },
+        },
       });
 
       // sanity check
-      if (!submissions) return exits.error('No paymentData found for the given submissionIds');
-      if (submissions.some(s => s.formId !== submissions[0].formId)) return exits.error('Some submissions are not pointing to the same form');
+      if (!submissions)
+        return exits.error('No paymentData found for the given submissionIds');
+      if (submissions.some((s) => s.formId !== submissions[0].formId))
+        return exits.error(
+          'Some submissions are not pointing to the same form'
+        );
 
-      submissions = submissions.filter(i => i.paymentData && i.paymentData.length > 0);
+      submissions = submissions.filter(
+        (i) => i.paymentData && i.paymentData.length > 0
+      );
       const formObj = await Form.findOne({ _id: submissions[0].formId });
       if (!formObj) return exits.error('Form doesn not exist');
 
       const filteredSubmissions = submissions.reduce((filtered, curr) => {
-        if (curr.submissionData && curr.submissionData['email'] && curr.submissionData['email'] !== '') {
+        if (
+          curr.submissionData &&
+          curr.submissionData['email'] &&
+          curr.submissionData['email'] !== ''
+        ) {
           filtered.push(curr);
         }
         return filtered;
       }, []);
 
-      const emails = filteredSubmissions.map(i => i.submissionData['email']);
-      if (!emails || emails.length === 0) return exits.error('No emails found in the submissions');
+      const emails = filteredSubmissions.map((i) => i.submissionData['email']);
+      if (!emails || emails.length === 0)
+        return exits.error('No emails found in the submissions');
 
       await sails.helpers.sendTemplateEmail.with({
         to: process.env.EMAIL_FROM,
         subject: formObj.paymentEmailSubject,
         template: formObj.paymentConfirmationEmailTemplate,
         cc: formObj.paymentCcEmail,
-        bcc: emails
+        bcc: emails,
       });
 
-      const filterSubmissionIds = filteredSubmissions.map(i => i.id);
+      const filterSubmissionIds = filteredSubmissions.map((i) => i.id);
       const res = await PaymentData.update({
-        submissionId: [...filterSubmissionIds]
-      }).set({
-        isConfirmationEmailSent: true,
-      }).fetch();
+        submissionId: [...filterSubmissionIds],
+      })
+        .set({
+          isConfirmationEmailSent: true,
+        })
+        .fetch();
 
       if (res) {
         const modelName = `paymentData-${res[0].formId}`;
-        existing = await LastUpdated.updateOne({ modelName }).set({
-          lastUpdatedBy: this.req.user.fullName
-        }).fetch();
+        existing = await LastUpdated.updateOne({ modelName })
+          .set({
+            lastUpdatedBy: this.req.user.fullName,
+          })
+          .fetch();
 
         if (!existing) {
           existing = await LastUpdated.create({
             modelName,
-            lastUpdatedBy: this.req.user.fullName
+            lastUpdatedBy: this.req.user.fullName,
           }).fetch();
         }
 
-        if (!existing)
-          return exits.invalid();
+        if (!existing) return exits.invalid();
       } else {
-        return exits.invalid('Something went wrong when updating PaymentData email sent');
+        return exits.invalid(
+          'Something went wrong when updating PaymentData email sent'
+        );
       }
 
       // Successfully completed flow

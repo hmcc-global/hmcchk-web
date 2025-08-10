@@ -88,6 +88,7 @@ const Form = (props) => {
     delete modifiedData['addressStreet'];
     delete modifiedData['addressDistrict'];
     delete modifiedData['addressRegion'];
+    // return;
     if (formId) setSubmissionData(modifiedData);
     else console.log("this form doesn't support submission");
   };

@@ -336,6 +336,8 @@ module.exports = {
    *                                                                         *
    ***************************************************************************/
   custom: {
+    disableSendEmails: false,
+
     baseUrl: "https://hongkong.hmcc.net",
     internalEmailAddress: "support@example.com",
 
