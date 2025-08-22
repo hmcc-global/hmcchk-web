@@ -304,7 +304,7 @@ const AdminSermonNotesContainer = (props) => {
                       <Box maxW="13rem" pr={6}>
                         <Image
                           src={sermonNoteItem.imageLink}
-                          fallbackSrc="https://hongkong.sub.hmcc.net/wp-content/uploads/Screenshot-2020-09-04-at-6.39.50-PM.png"
+                          fallbackSrc="https://hongkong.sub.hmccglobal.org/wp-content/uploads/Screenshot-2020-09-04-at-6.39.50-PM.png"
                         />
                       </Box>
                       <Stack direction="column" spacing={2}>

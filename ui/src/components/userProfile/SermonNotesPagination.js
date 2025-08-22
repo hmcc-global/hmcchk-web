@@ -35,7 +35,7 @@ const SermonNotesPagination = ({
                 <Box maxW={{ base: '8rem', md: '12rem' }} mr={4}>
                   <Image
                     src={item?.imageLink}
-                    fallbackSrc="https://hongkong.sub.hmcc.net/wp-content/uploads/Screenshot-2020-09-04-at-6.39.50-PM.png"
+                    fallbackSrc="https://hongkong.sub.hmccglobal.org/wp-content/uploads/Screenshot-2020-09-04-at-6.39.50-PM.png"
                     objectFit="contain"
                   />
                 </Box>

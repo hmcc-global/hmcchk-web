@@ -25,7 +25,7 @@ module.exports.custom = {
    *                                                                         *
    **************************************************************************/
 
-  baseUrl: "http://localhost:3000",
+  baseUrl: 'http://localhost:3000',
 
   /***************************************************************************
    *                                                                          *
@@ -36,53 +36,53 @@ module.exports.custom = {
   // stripeSecret: 'sk_test_Zzd814nldl91104qor5911gjald',
   // …
   admin: {
-    email: "web@hongkong.hmcc.net",
+    email: 'web@hongkong.hmccglobal.org',
   },
 
   sermons: {
-    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/wpfc_sermon",
+    host: 'https://hongkong.sub.hmccglobal.org/wp-json/wp/v2/wpfc_sermon',
   },
 
   speakers: {
-    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/wpfc_preacher",
+    host: 'https://hongkong.sub.hmccglobal.org/wp-json/wp/v2/wpfc_preacher',
   },
 
   posts: {
-    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/posts",
+    host: 'https://hongkong.sub.hmccglobal.org/wp-json/wp/v2/posts',
   },
 
   tags: {
-    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/tags",
+    host: 'https://hongkong.sub.hmccglobal.org/wp-json/wp/v2/tags',
   },
 
   sermonSeries: {
-    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/wpfc_sermon_series",
+    host: 'https://hongkong.sub.hmccglobal.org/wp-json/wp/v2/wpfc_sermon_series',
   },
 
   serviceTypes: {
-    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/wpfc_service_type",
+    host: 'https://hongkong.sub.hmccglobal.org/wp-json/wp/v2/wpfc_service_type',
   },
 
   media: {
-    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/media",
+    host: 'https://hongkong.sub.hmccglobal.org/wp-json/wp/v2/media',
   },
 
   pages: {
-    host: "https://hongkong.sub.hmcc.net/wp-json/wp/v2/pages",
+    host: 'https://hongkong.sub.hmccglobal.org/wp-json/wp/v2/pages',
   },
 
   formAlertTypes: {
-    'LIFE Group' : ['lifeGroup'],
-    'Lifestage Only' : ['lifestage'],
-    'Campus Only' : ['campus'],
-    'Campus/Lifestage' : ['campus', 'lifestage'],
-    'Custom': [],
-    'None': [],
+    'LIFE Group': ['lifeGroup'],
+    'Lifestage Only': ['lifestage'],
+    'Campus Only': ['campus'],
+    'Campus/Lifestage': ['campus', 'lifestage'],
+    Custom: [],
+    None: [],
   },
 
   parseUserMailbox: {
-    'single': 'Single Parse User Query',
-    'batch': 'Batch Parse User Query'
+    single: 'Single Parse User Query',
+    batch: 'Batch Parse User Query',
   },
 
   // Whether to require proof of email address ownership any time a new user
@@ -94,5 +94,5 @@ module.exports.custom = {
 
   permissions: {
     viewPaymentData: ['admin', 'stewardship'],
-  }
+  },
 };

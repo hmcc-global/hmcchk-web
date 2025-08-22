@@ -81,7 +81,7 @@ module.exports = {
      * https://sailsjs.com/docs/concepts/models-and-orm/model-settings#?migrate *
      *                                                                          *
      ***************************************************************************/
-    migrate: "safe",
+    migrate: 'safe',
 
     /***************************************************************************
      *                                                                          *
@@ -226,9 +226,12 @@ module.exports = {
      *                                                                          *
      ***************************************************************************/
     onlyAllowOrigins: [
-      "https://hongkong.hmcc.net",
-      "https://hongkong.sub.hmcc.net",
-      "https://hongkong.test.hmcc.net",
+      'https://hongkong.hmcc.net',
+      'https://hongkong.sub.hmcc.net',
+      'https://hongkong.test.hmcc.net',
+      'https://hongkong.hmccglobal.org',
+      'https://hongkong.sub.hmccglobal.org',
+      'https://hongkong.test.hmccglobal.org',
     ],
 
     /***************************************************************************
@@ -264,7 +267,7 @@ module.exports = {
    *                                                                         *
    ***************************************************************************/
   log: {
-    level: "debug",
+    level: 'debug',
   },
 
   http: {
@@ -338,11 +341,11 @@ module.exports = {
   custom: {
     disableSendEmails: false,
 
-    baseUrl: "https://hongkong.hmcc.net",
-    internalEmailAddress: "support@example.com",
+    baseUrl: 'https://hongkong.hmccglobal.org',
+    internalEmailAddress: 'support@example.com',
 
     admin: {
-      email: "hongkong@hongkong.hmcc.net",
+      email: 'hongkong@hongkong.hmcc.net',
     },
     // sendgridSecret: 'SG.fake.3e0Bn0qSQVnwb1E4qNPz9JZP5vLZYqjh7sn8S93oSHU',
     // stripeSecret: 'sk_prod__fake_Nfgh82401348jaDa3lkZ0d9Hm',
