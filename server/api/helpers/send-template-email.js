@@ -197,7 +197,7 @@ module.exports = {
         return err;
       });
 
-    var dontActuallySend = sails.config.environment === 'development';
+    var dontActuallySend = sails.config.custom.disableSendEmails;
     if (dontActuallySend) {
       sails.log(
         'Skipped sending email, either because the "To" email address ended in "@example.com"\n' +

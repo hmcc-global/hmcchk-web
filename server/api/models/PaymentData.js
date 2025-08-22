@@ -7,11 +7,10 @@ module.exports = {
     },
     userId: {
       type: 'string',
-      required: true,
     },
     submissionId: {
       model: 'Submission',
-      unique: true
+      unique: true,
     },
     isPaid: {
       type: 'boolean',
@@ -41,6 +40,6 @@ module.exports = {
     },
     lastUpdatedBy: {
       type: 'string',
-    }
+    },
   },
 };

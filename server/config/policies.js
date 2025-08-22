@@ -59,7 +59,7 @@ module.exports.policies = {
   'forms/get-unsignedup-form': ['isLoggedIn'],
   'forms/post-create-submission': true,
   'forms/get-submission': ['isLoggedIn', 'aboveTcNotTech'],
-  'forms/get-user-submission': ['isLoggedIn'],
+  'forms/get-user-submission': true,
 
   // Fundraise
   'fundraise/get-fundraise': true,
