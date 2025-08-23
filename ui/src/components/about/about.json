@@ -94,14 +94,24 @@
     },
     "directors": [
       {
-        "photo": "staff-joanna.jpg",
+        "photo": "staff-joanna.jpeg",
         "name": "Joanna Jing",
         "title": ["Corporate Operations & Events", "City Ministry"]
       },
       {
-        "photo": "staff-peter.jpg",
+        "photo": "staff-peter.jpeg",
         "name": "Peter Young",
         "title": ["Youth & Families Ministry", "Worship Ministry"]
+      },
+      {
+        "photo": "staff-kieran.jpeg",
+        "name": "Kieran Ng",
+        "title": ["Campus Ministry"]
+      },
+      {
+        "photo": "staff-cha.jpeg",
+        "name": "Charissa Hung",
+        "title": ["Campus Ministry"]
       }
     ]
   },

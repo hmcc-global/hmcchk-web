@@ -7,6 +7,8 @@ import {
   Image,
   Box,
   Heading,
+  Grid,
+  GridItem,
 } from '@chakra-ui/react';
 import React from 'react';
 
@@ -130,47 +132,53 @@ const StaffSection = (props) => {
           </Heading>
         </Box>
         <Flex flexDir={['column', 'row']}>
-          {blurb.directors.length > 0 &&
-            blurb.directors.map((content, i) => (
-              <Box
-                key={'director' + i}
-                fontFamily="Manrope"
-                textAlign="center"
-                w={['90%', '100%', '100%']}
-                mb="3"
-                mx="auto"
-              >
-                <Box px={[5, 9]} mb="3">
-                  <Image
-                    src={
-                      process.env.PUBLIC_URL + 'images/about/' + content.photo
-                    }
-                    w={['80%', '100%', '100%']}
-                    objectFit="cover"
-                    margin="auto"
-                    borderRadius="7"
-                  />
-                </Box>
-
-                <Box
-                  fontSize={['md', 'md', '2xl']}
-                  fontWeight="700"
-                  color="#0628A3"
-                >
-                  {content.name}
-                </Box>
-                {content.title.length > 0 &&
-                  content.title.map((title, i) => (
-                    <Box
-                      key={'directortitle' + i}
-                      fontSize={['xs', 'xs', 'lg']}
-                      fontWeight="700"
-                    >
-                      {title}
+          <Grid templateColumns={['none', 'repeat(2, 1fr)']} gap={1}>
+            {blurb.directors.length > 0 &&
+              blurb.directors.map((content, i) => (
+                <GridItem>
+                  <Box
+                    key={'director' + i}
+                    fontFamily="Manrope"
+                    textAlign="center"
+                    w={['90%', '100%', '100%']}
+                    mb="3"
+                    mx="auto"
+                  >
+                    <Box px={[5, 9]} mb="3">
+                      <Image
+                        src={
+                          process.env.PUBLIC_URL +
+                          'images/about/' +
+                          content.photo
+                        }
+                        w={['80%', '100%', '100%']}
+                        objectFit="cover"
+                        margin="auto"
+                        borderRadius="7"
+                      />
                     </Box>
-                  ))}
-              </Box>
-            ))}
+
+                    <Box
+                      fontSize={['md', 'md', '2xl']}
+                      fontWeight="700"
+                      color="#0628A3"
+                    >
+                      {content.name}
+                    </Box>
+                    {content.title.length > 0 &&
+                      content.title.map((title, i) => (
+                        <Box
+                          key={'directortitle' + i}
+                          fontSize={['xs', 'xs', 'lg']}
+                          fontWeight="700"
+                        >
+                          {title}
+                        </Box>
+                      ))}
+                  </Box>
+                </GridItem>
+              ))}
+          </Grid>
         </Flex>
       </VStack>
       <Box></Box>
