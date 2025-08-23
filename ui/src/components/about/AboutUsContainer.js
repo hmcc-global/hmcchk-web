@@ -24,7 +24,7 @@ const sections = [
   'Our Strategy',
   'Our Staff',
   'Beliefs',
-  'Our Heart for Missions',
+  // 'Our Heart for Missions',
 ];
 
 const AboutUsContainer = (props) => {
@@ -60,10 +60,10 @@ const AboutUsContainer = (props) => {
         setSelected(4);
         scrollTo('beliefs');
         break;
-      case '#missions':
-        setSelected(5);
-        scrollTo('our-heart-for-missions');
-        break;
+      // case '#missions':
+      //   setSelected(5);
+      //   scrollTo('our-heart-for-missions');
+      //   break;
       default:
         break;
     }
@@ -189,12 +189,12 @@ const AboutUsContainer = (props) => {
         {selected === 4 && (
           <BeliefsSection blurb={blurbs.beliefs} title={sections[selected]} />
         )}
-        {selected === 5 && (
+        {/* {selected === 5 && (
           <OurHeartMissions
             blurb={blurbs.ourHeartMissions}
             title={sections[selected]}
           />
-        )}
+        )} */}
       </VStack>
     </Container>
   );
