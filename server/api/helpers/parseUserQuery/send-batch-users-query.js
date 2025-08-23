@@ -64,7 +64,7 @@ module.exports = {
         fileNamesToDelete.push(fileName);
 
         if (team.leaderEmails) {
-          const filteredEmails = team.leaderEmails.filter(x => x !== 'hongkong@hongkong.hmcc.net');
+          const filteredEmails = team.leaderEmails.filter(x => x !== 'hk@hmccglobal.org');
           await sails.helpers.sendTemplateEmail.with({
             to: filteredEmails,
             subject: `[ACTION]: LIFE Group Info Needed - ${team.lifeGroup}`,

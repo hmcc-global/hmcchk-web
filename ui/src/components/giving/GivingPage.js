@@ -153,7 +153,7 @@ const GivingPage = (props) => {
           If you have any questions, please do not hesitate to contact us:&nbsp;
         </Text>
         <Text as="i" fontWeight="bold">
-          stewardship@hongkong.hmcc.net
+          hk@hmccglobal.org
         </Text>
       </Box>
       <Box paddingBottom="10vh" fontFamily="Manrope">
@@ -231,7 +231,7 @@ const GivingPage = (props) => {
               Kong) Limited” can be exempted from income tax in Hong Kong.
               Giving receipts will be available to all donors who include their
               personal details on the offering envelope or email us at
-              stewardship@hongkong.hmcc.net to request a receipt. Members will
+              hk@hmccglobal.org to request a receipt. Members will
               receive their giving reports at the end of the Hong Kong fiscal
               year in April, in compliance with the Hong Kong SAR government.
             </AccordionPanel>

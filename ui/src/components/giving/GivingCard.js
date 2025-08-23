@@ -76,7 +76,7 @@ const RenderSwitch = (param) => {
           </Text>
           <Text fontWeight="bold">
             Please email a copy of your transfer receipt along with your Full
-            Name within 2 weeks to stewardship@hongkong.hmcc.net.
+            Name within 2 weeks to hk@hmccglobal.org.
           </Text>
         </VStack>
       );

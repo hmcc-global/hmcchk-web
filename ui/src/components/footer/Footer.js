@@ -51,7 +51,7 @@ const Footer = () => {
               </Text>
             </Stack>
             <HStack py="1em">
-              <Link href="mailto:hongkong@hmcc.net">
+              <Link href="mailto:hk@hmccglobal.org">
                 <Button
                   bg="#DBE9FF"
                   rounded="full"
@@ -74,9 +74,9 @@ const Footer = () => {
                 fontWeight="700"
                 textDecoration="underline"
                 wordBreak="break-word"
-                href="mailto:hongkong@hmcc.net"
+                href="mailto:hk@hmccglobal.org"
               >
-                hongkong@hmcc.net
+                hk@hmccglobal.org
               </Link>
             </HStack>
 

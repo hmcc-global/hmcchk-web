@@ -230,8 +230,10 @@ module.exports = {
       'https://hongkong.sub.hmcc.net',
       'https://hongkong.test.hmcc.net',
       'https://hongkong.hmccglobal.org',
-      'https://hongkong.sub.hmccglobal.org',
+      'https://hk.hmccglobal.org',
       'https://hongkong.test.hmccglobal.org',
+      'https://hk.test.hmccglobal.org',
+      'https://hongkong.sub.hmccglobal.org',
     ],
 
     /***************************************************************************
@@ -341,11 +343,11 @@ module.exports = {
   custom: {
     disableSendEmails: false,
 
-    baseUrl: 'https://hongkong.hmccglobal.org',
+    baseUrl: 'https://hk.hmccglobal.org',
     internalEmailAddress: 'support@example.com',
 
     admin: {
-      email: 'hongkong@hongkong.hmcc.net',
+      email: 'hk@hmccglobal.org',
     },
     // sendgridSecret: 'SG.fake.3e0Bn0qSQVnwb1E4qNPz9JZP5vLZYqjh7sn8S93oSHU',
     // stripeSecret: 'sk_prod__fake_Nfgh82401348jaDa3lkZ0d9Hm',

@@ -12,7 +12,7 @@ module.exports = function (app) {
   // app.use(
   //   '/api',
   //   createProxyMiddleware({
-  //     target: 'https://hongkong.hmcc.net',
+  //     target: 'https://hk.hmccglobal.org',
   //     changeOrigin: true,
   //   })
   // );

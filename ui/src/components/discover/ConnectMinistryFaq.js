@@ -14,11 +14,11 @@ const ConnectMinistryFaq = () => {
     },
     {
       title: 'How do I learn more about the different ministries?',
-      content: `To get a glimpse of what the different ministries look like, scroll up and check out the Instagram accounts of each campus ministry/ single adult (focus) ministry/ married couple (covenant) ministry. Feel free to send an Instagram direct message on the appropriate Instagram profile and/or drop an email support@hongkong.hmcc.net to learn more.`,
+      content: `To get a glimpse of what the different ministries look like, scroll up and check out the Instagram accounts of each campus ministry/ single adult (focus) ministry/ married couple (covenant) ministry. Feel free to send an Instagram direct message on the appropriate Instagram profile and/or drop an email hk@hmccglobal.org to learn more.`,
     },
     {
       title: 'How do I learn more about HMCC?',
-      content: `Head over https://hongkong.hmcc.net/about-us to learn more about our church!`,
+      content: `Head over https://hk.hmccglobal.org/about-us to learn more about our church!`,
     },
   ];
 
