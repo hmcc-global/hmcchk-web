@@ -138,7 +138,7 @@ module.exports = {
     cc,
     bcc,
     attachments,
-  }) {
+  }, exits) {
     var path = require('path');
     var url = require('url');
     var util = require('util');
@@ -217,6 +217,7 @@ module.exports = {
           '\n' +
           '-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'
       );
+      return sails.success();
     } else {
       // Otherwise, continue to actually send the email.
 
@@ -227,19 +228,16 @@ module.exports = {
         auth: {
           type: 'OAuth2',
           user: process.env.EMAIL_FROM,
-          clientId: process.env.EMAIL_CLIENT_ID,
+          clientId: process.env.GOOGLE_CLIENT_ID,
           clientSecret: process.env.EMAIL_CLIENT_SECRET,
           refreshToken: process.env.EMAIL_REFRESH_TOKEN,
-          accessToken: process.env.EMAIL_ACCESS_TOKEN,
         },
       });
 
       const subjectLinePrefix =
         sails.config.environment === 'production'
           ? ''
-          : sails.config.environment === 'uat'
-          ? '[UAT] '
-          : '';
+          : '[UAT] ';
       const mailOptions = {
         from: process.env.EMAIL_FROM, // if using Gmail, "from" gets set to the authenticated email
         to: to,
@@ -256,14 +254,11 @@ module.exports = {
         const info = await transporter.sendMail(mailOptions);
         sails.log('Email sent: ' + info.response);
         sails.log('successfully sent email!');
+        return exits.success();
       } catch (err) {
         console.log(err);
+        return exits.error(err);
       }
     }
-
-    // All done!
-    return {
-      loggedInsteadOfSending: dontActuallySend,
-    };
   },
 };
