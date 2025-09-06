@@ -96,7 +96,7 @@ const Faq = (props) => {
           If you’re not sure who the leader of the LIFE Group is, please contact
           us by dropping an email{' '}
           <Link
-            href="mailto:support@hongkong.hmcc.net"
+            href="mailto:hk@hmccglobal.org"
             fontStyle="italic"
             color="blue"
           >
@@ -121,7 +121,7 @@ const Faq = (props) => {
           to send an Instagram direct message on the appropriate Instagram
           profile and/or drop an email{' '}
           <Link
-            href="mailto:support@hongkong.hmcc.net"
+            href="mailto:hk@hmccglobal.org"
             fontStyle="italic"
             color="blue"
           >

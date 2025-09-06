@@ -20,7 +20,7 @@ const PrivacyPolicy = () => {
       <Heading as="h5" size="sm" fontFamily="DMSerifDisplay_Italic">Access of Personal Data</Heading>
       <Text>
         You may request access to the personal data about you. To do so, please kindly email to 
-        <a href="mailto:hongkong@hmcc.net"> hongkong@hmcc.net</a> 
+        <a href="mailto:hk@hmccglobal.org"> hk@hmccglobal.org</a> 
         with the subject “Data Access Request”.
       </Text>
       <Text>

@@ -23,7 +23,7 @@ const LifeGroupFaq = () => {
     },
     {
       title: 'What is the weather policy for the LIFE Group gatherings?',
-      content: `In the case that extreme weather condition signals are hoisted by Hong Kong Observatory (e.g. T8/9/10), please contact the respective leader of each LIFE Group for more information.\n\nIf you’re not sure who the leader of the LIFE Group is, please contact us by dropping an email support@hongkong.hmcc.net.`,
+      content: `In the case that extreme weather condition signals are hoisted by Hong Kong Observatory (e.g. T8/9/10), please contact the respective leader of each LIFE Group for more information.\n\nIf you’re not sure who the leader of the LIFE Group is, please contact us by dropping an email hk@hmccglobal.org.`,
     },
   ];
 

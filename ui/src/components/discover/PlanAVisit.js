@@ -249,7 +249,7 @@ const PlanAVisit = () => {
                       fontSize={['0.875rem', '1rem', '1rem']}
                       borderRadius="0.938rem"
                       _hover={{ bgColor: '#BE8E11', textDecoration: 'none' }}
-                      href="https://hongkong.hmcc.net/online/"
+                      href="https://hk.hmccglobal.org/online/"
                       target="_blank"
                       as={Link}
                     >

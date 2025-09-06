@@ -328,7 +328,7 @@ export default function AdminAnnouncementContainer(props) {
                 <Box maxW="12rem" pr={5}>
                   <Image
                     src={announcementItem.imageAdUrl}
-                    fallbackSrc="https://hongkong.sub.hmcc.net/wp-content/uploads/Screenshot-2020-09-04-at-6.39.50-PM.png"
+                    fallbackSrc="https://hongkong.sub.hmccglobal.org/wp-content/uploads/Screenshot-2020-09-04-at-6.39.50-PM.png"
                   />
                 </Box>
                 <Stack direction="column" spacing={1}>

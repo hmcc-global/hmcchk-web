@@ -9,11 +9,11 @@ const PasswordSubmitted = (props) => {
         <Flex w="100vw">
           <Box>
             <Link
-              to={{ pathname: "https://hongkong.hmcc.net" }}
+              to={{ pathname: "https://hk.hmccglobal.org" }}
               target="_blank"
             >
               <ChevronLeftIcon boxSize={10} />
-              Return to hongkong.hmcc.net
+              Return to hk.hmccglobal.org
             </Link>
           </Box>
         </Flex>

@@ -64,7 +64,7 @@ const RecoverPassword = (props) => {
             <Box>
               <Link href="/">
                 <ChevronLeftIcon boxSize={10} />
-                Return to hongkong.hmcc.net
+                Return to hk.hmccglobal.org
               </Link>
             </Box>
           </Flex>

@@ -133,7 +133,7 @@ const VisitUsPage = (props) => {
                   _hover={{ boxShadow: "none", color: "#fff" }}
                 >
                   <LinkOverlay
-                    href="https://hongkong.hmcc.net/login"
+                    href="https://hk.hmccglobal.org/login"
                     isExternal
                   >
                     Sign Up for In-person Sunday Celebration
@@ -190,7 +190,7 @@ const VisitUsPage = (props) => {
               textAlign={['center', 'right']}
             >
               <Link
-                href="https://hongkong.hmcc.net/online/"
+                href="https://hk.hmccglobal.org/online/"
                 isExternal
                 fontFamily="Manrope"
               >
@@ -208,8 +208,8 @@ const VisitUsPage = (props) => {
             fontFamily="Manrope"
           >
             Got Queries?{' '}
-            <Link href="mailto:hongkong@hmcc.net">
-              hongkong@hmcc.net <Icon as={RiChat1Line} ml={1} />
+            <Link href="mailto:hk@hmccglobal.org">
+              hk@hmccglobal.org <Icon as={RiChat1Line} ml={1} />
             </Link>
           </Heading>
         </Box>

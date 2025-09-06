@@ -19,7 +19,7 @@ module.exports = {
     const { data } = await axios.post(
       'https://www.googleapis.com/oauth2/v3/token',
       {
-        client_id: process.env.EMAIL_CLIENT_ID,
+        client_id: process.env.GOOGLE_CLIENT_ID,
         client_secret: process.env.EMAIL_CLIENT_SECRET,
         refresh_token: process.env.EMAIL_REFRESH_TOKEN,
         grant_type: 'refresh_token'
