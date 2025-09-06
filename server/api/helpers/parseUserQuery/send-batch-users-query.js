@@ -24,7 +24,7 @@ module.exports = {
     if (latestLeadershipTeams == null || latestLeadershipTeams.length === 0) return exits.success();
 
     const todayMinus3Weeks = DateTime.now().plus({ weeks: -3 });
-    // only send batch query once after 3 Saturdays have passed from season start
+    // only send batch query once after exactly 3 Saturdays have passed from season start
     const filteredTeams = latestLeadershipTeams.filter(i => DateTime.fromISO(i.seasonFrom).weekNumber === todayMinus3Weeks.weekNumber && i.lifeGroup !== 'Not Applicable');
 
     // modify Excel by populating the lifestage list
@@ -64,7 +64,7 @@ module.exports = {
         fileNamesToDelete.push(fileName);
 
         if (team.leaderEmails) {
-          const filteredEmails = team.leaderEmails.filter(x => x !== 'hk@hmccglobal.org');
+          const filteredEmails = team.leaderEmails.filter(x => x !== 'hk@hmccglobal.org' || x !== 'hongkong@hongkong.hmcc.net');
           await sails.helpers.sendTemplateEmail.with({
             to: filteredEmails,
             subject: `[ACTION]: LIFE Group Info Needed - ${team.lifeGroup}`,

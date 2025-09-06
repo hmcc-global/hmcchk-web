@@ -40,6 +40,7 @@ const parseWorksheet = (worksheet, isBatch) => {
     const userDataIndex = findStartIndex(data, 'Name') + 1;
     for (let i = userDataIndex; i < data.length && i > 0; i++) {
       if (data[i].length < 4) continue;
+      // TODO-aparedan: Handle if leaders send invalid data
 
       const userData = data[i];
       if (verifyUserData(userData)) {
@@ -63,6 +64,7 @@ const parseWorksheet = (worksheet, isBatch) => {
         campus: userData[4] || 'Not Applicable',
       });
     }
+    // TODO-aparedan: Handle if leaders send invalid data
   }
 
   return {
