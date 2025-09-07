@@ -126,4 +126,6 @@ module.exports.policies = {
 
   // Users
   'users/reset': ['isLoggedIn', 'aboveAdmin'],
+  'users/parse-user-query': ['isLoggedIn', 'aboveAdmin'],
+  'users/send-batch-users-query': ['isLoggedIn', 'aboveAdmin'],
 };

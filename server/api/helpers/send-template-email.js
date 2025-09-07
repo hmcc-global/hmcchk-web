@@ -217,7 +217,7 @@ module.exports = {
           '\n' +
           '-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'
       );
-      return sails.success();
+      return exits.success();
     } else {
       // Otherwise, continue to actually send the email.
 
@@ -234,12 +234,15 @@ module.exports = {
         },
       });
 
+      const uatPrefix = '[UAT] ';
       const subjectLinePrefix =
         sails.config.environment === 'production'
           ? ''
-          : '[UAT] ';
+          : subject.startsWith(uatPrefix)
+            ? ''
+            : uatPrefix;
       const mailOptions = {
-        from: process.env.EMAIL_FROM, // if using Gmail, "from" gets set to the authenticated email
+        from: `HMCC HK <${process.env.EMAIL_FROM}>`,
         to: to,
         cc: cc,
         bcc: bcc,

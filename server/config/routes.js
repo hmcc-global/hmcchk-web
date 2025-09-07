@@ -160,6 +160,10 @@ module.exports.routes = {
   'post /api/fundraise/create': 'fundraise/create-fundraise',
   'put /api/fundraise/update': 'fundraise/update-fundraise',
 
+  // Parse User Query
+  'get /api/admin/parseUserQuery': 'users/parse-user-query',
+  'get /api/admin/sendBatchUsersQuery': 'users/send-batch-users-query',
+
   // UI
   'get /*': {
     skipAssets: true,
