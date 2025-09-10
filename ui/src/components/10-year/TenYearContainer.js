@@ -1,12 +1,10 @@
 import { Flex, Box, VStack } from '@chakra-ui/react';
+import HeroSection from './HeroSection';
 import TenYearVideo from './TenYearVideo';
 import OfferingSection from './OfferingSection';
 import ClosingRemarks from './ClosingRemarks';
 
 import { tenYearTheme } from './theme';
-
-import HeroSection from './HeroSection';
-
 const TenYearContainer = () => {
   const backgroundImage = `${process.env.PUBLIC_URL}/images/10-year/10y_bg.png`;
 
