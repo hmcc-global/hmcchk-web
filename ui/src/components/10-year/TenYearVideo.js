@@ -74,7 +74,7 @@ const TenYearVideo = () => {
   const PLAY_ICON_SIZE = '4.375rem'; // 70px
 
   return (
-    <VStack spacing={8} w="100%">
+    <VStack spacing={12} w="100%" pb={8}>
       <VStack spacing={2}>
         <Heading
           display="flex"
@@ -89,7 +89,7 @@ const TenYearVideo = () => {
             w="auto"
             mt={-4}
           />
-          <Box as="span" {...tenYearTheme.typography.h1} ml={-8}>
+          <Box as="span" {...tenYearTheme.typography.h1} ml={-8} pb={-4}>
             Years: The Story
           </Box>
         </Heading>
@@ -116,16 +116,17 @@ We invite you to watch, remember, and rejoice in all He has done.`}
         gridTemplateColumns={{
           base: '1fr',
           lg: '1fr',
-          xl: `minmax(${THUMBS_MIN_W_MD}, 1fr) ${VIDEO_W}`,
+          xl: `minmax(${THUMBS_MIN_W_MD}, 1fr) ${VIDEO_W} 1fr`,
         }}
         gridTemplateAreas={{
           base: '"video" "pill" "thumbs"',
           lg: '"video" "pill" "thumbs"',
-          xl: '"thumbs video" ". pill"',
+          xl: '"thumbs video ." ". pill ."',
         }}
         rowGap={{ base: GAP_ROW_BASE, lg: GAP_ROW_BASE, xl: GAP_ROW_MD }}
         columnGap={{ base: 0, lg: 0, xl: GAP_COL_MD }}
         alignItems="center"
+        justifyItems={{ base: 'center', lg: 'center', xl: 'start' }}
       >
         <Flex
           gap={{ base: '1rem', lg: '2rem', xl: '3.5rem' }}
@@ -254,6 +255,7 @@ We invite you to watch, remember, and rejoice in all He has done.`}
           spacing={{ base: 0, lg: 0, xl: '1.5rem' }}
           gridArea="video"
           w="100%"
+          align="center"
         >
           <Box
             w={{ base: '100%', lg: '100%', xl: VIDEO_W }}
@@ -301,6 +303,7 @@ We invite you to watch, remember, and rejoice in all He has done.`}
                   as="video"
                   src={activeVideo.src}
                   controls
+                  controlsList="nodownload nofullscreen noremoteplayback"
                   poster={activeVideo.thumbnail}
                   bg="#0B1020"
                 />
@@ -315,6 +318,7 @@ We invite you to watch, remember, and rejoice in all He has done.`}
           bg="rgba(5, 10, 25, 0.75)"
           px={PILL_PX}
           py={PILL_PY}
+          mx="auto"
         >
           <Text
             textAlign="center"
