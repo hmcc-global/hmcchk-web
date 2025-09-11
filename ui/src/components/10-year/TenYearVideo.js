@@ -28,9 +28,9 @@ const TenYearVideo = () => {
 
   // When USE_PLACEHOLDERS === false, replace the below with real titles and video srcs
   const realVideos = [
-    { id: 'a', title: 'Video A Title', src: '' },
-    { id: 'b', title: 'Video B Title', src: '' },
-    { id: 'c', title: 'Video C Title', src: '' },
+    { id: 'a', title: '', src: '' },
+    { id: 'b', title: '', src: '' },
+    { id: 'c', title: '', src: '' },
   ];
 
   const videos = USE_PLACEHOLDERS ? placeholderVideos : realVideos;
@@ -56,7 +56,7 @@ const TenYearVideo = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
-          gap={0}
+          gap={{ base: '0.5rem', md: 0 }}
         >
           <Image
             src="/images/10-year/10.svg"
@@ -209,16 +209,20 @@ We invite you to watch, remember, and rejoice in all He has done.`}
           w="100%"
         >
           <Box
-            w={{ base: '100%', md: VIDEO_W }}
+            w={{ base: '100%', lg: '100%', xl: VIDEO_W }}
             borderRadius="0"
             overflow="hidden"
             transition="box-shadow 250ms ease"
             boxShadow={{
               base: '0 0 11.487px 0 #95CFFF',
-              md: '0 0 29.4px 0 #95CFFF',
+              lg: '0 0 11.487px 0 #95CFFF',
+              xl: '0 0 29.4px 0 #95CFFF',
             }}
           >
-            <AspectRatio w={{ base: '100%', md: VIDEO_W }} ratio={16 / 9}>
+            <AspectRatio
+              w={{ base: '100%', lg: '100%', xl: VIDEO_W }}
+              ratio={16 / 9}
+            >
               {USE_PLACEHOLDERS ? (
                 <>
                   <Image
@@ -240,8 +244,8 @@ We invite you to watch, remember, and rejoice in all He has done.`}
                     <Image
                       src="/images/10-year/playicon.svg"
                       alt="Play"
-                      w={{ base: '3.5rem', md: PLAY_ICON_SIZE }}
-                      h={{ base: '3.5rem', md: PLAY_ICON_SIZE }}
+                      w={{ base: '3.5rem', lg: '3.5rem', xl: PLAY_ICON_SIZE }}
+                      h={{ base: '3.5rem', lg: '3.5rem', xl: PLAY_ICON_SIZE }}
                     />
                   </Flex>
                 </>
