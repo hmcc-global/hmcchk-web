@@ -151,7 +151,7 @@ const InternationalContent = () => {
           onClick={copyEmailToClipboard}
           bg={'#FFFFFF'}
           borderRadius={'80px'}
-          width={{ base: '160px', md: '240px' }}
+          width="auto"
           height={{ base: '30px', md: '50px' }}
           textColor={'#012C75'}
           fontFamily={'Manrope'}
@@ -170,7 +170,7 @@ const InternationalContent = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <CopyIcon boxSize={{base:"4", md:"6"}}/>
+          <CopyIcon boxSize={{base:"4", md:"6"}} marginRight="5px"/>
           CLICK TO COPY EMAIL
         </Button>
       </Box>
