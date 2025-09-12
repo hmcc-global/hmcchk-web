@@ -128,6 +128,15 @@ export const tenYearTheme = {
       color: '#FFFFFF',
     },
 
+    hero: {
+      fontFamily: "'Abhaya Libre', serif",
+      fontWeight: 500,
+      fontSize: ['22.903px', '48.923px'],
+      letterSpacing: '-0.03em',
+      lineHeight: 1.45,
+      color: '#FFFFFF',
+    },
+
     videoTextPlaceholder: {
       fontFamily: "'Manrope', sans-serif",
       fontWeight: 700, // Bold by default; use 400 where Regular is needed
