@@ -66,7 +66,7 @@ const EventCard = (props) => {
     <>
       <Box
         overflow="hidden"
-        bg="white"
+        bg="transparent"
         onClick={onOpen}
         display="flex"
         fontFamily="Manrope"

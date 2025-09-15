@@ -45,9 +45,9 @@ const HomeContainer = (props) => {
       <EventsSection />
 
       {isMobile ? <VisionMissionSectionMobile /> : <VisionMissionSection />}
-      {isMobile ? <ChurchThemeSectionMobile /> : <ChurchThemeSection /> }
+      {/* {isMobile ? <ChurchThemeSectionMobile /> : <ChurchThemeSection /> } */}
       <ExperienceBiblicalCommunity />
-    
+
       {popup.flag && <PopupContainer props={popup} />}
     </Flex>
   );
