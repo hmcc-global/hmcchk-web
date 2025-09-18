@@ -141,6 +141,14 @@ export const tenYearTheme = {
       fontSize: ['14px', '18px', '18px'], // [mobile, tablet, desktop]
       color: '#FFFFFF',
     },
+    hero: {
+      fontFamily: "'Abhaya Libre', serif",
+      fontWeight: 500,
+      fontSize: ['22.903px', '48.923px'],
+      letterSpacing: '-0.03em',
+      lineHeight: 1.45,
+      color: '#FFFFFF',
+    },
   },
 
   // Component-specific styles
