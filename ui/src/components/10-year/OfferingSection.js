@@ -52,6 +52,8 @@ const OfferingSection = (props) => {
           position="relative"
           right={{base: "-13px",md:"-20px"}} // This moves the image to the right
           zIndex="1"
+          aria-label="10"
+          alt="10" 
           sx={{
             shapeOutside: 'circle()',
             float: 'left',
@@ -98,6 +100,8 @@ const OfferingSection = (props) => {
               height="30px"
               zIndex="1"
               opacity="0.9"
+              aria-label="T"
+              alt="T" 
             />
           ransformative 
           </Box>
@@ -116,8 +120,7 @@ const OfferingSection = (props) => {
           <span style={{ color:"#ACD9FF"}}>
           we invite you to invest in the next chapter</span>
           . <br />
-          Your generosity will enable us to respond to God's call. We pray to see more lives being transformed, LIFE Groups multiplied, churches planted, <br />
-          people being sent out for global missions, and so much more.
+          Your generosity will enable us to respond to God's call. We pray to see more lives being transformed, LIFE Groups multiplied, churches planted, people being sent out for global missions, and so much more.
         </Text>
         <Text
           as="h3"
@@ -127,7 +130,7 @@ const OfferingSection = (props) => {
           marginBottom="20px"
           maxW="1000px"
         >
-          Join us to see God transforming lives and transforming the world <br />
+          Join us to see God transforming lives and transforming the world {isMobile ? "" : <br/>}
           through HMCC-HK in the coming years! 
         </Text>
       </Box>
@@ -159,6 +162,8 @@ const OfferingSection = (props) => {
           height={"auto"}
           transform="translateY(-25%)"
           zIndex={1}
+          aria-label="Transformat10n"
+          alt="Transformat10n" 
         />
       </Box>
       <Text
