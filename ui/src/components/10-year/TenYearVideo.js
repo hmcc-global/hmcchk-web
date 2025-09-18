@@ -6,7 +6,7 @@ const TenYearVideo = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const isTablet = useBreakpointValue({ base: false, md: false, lg: true, xl: false });
   // EASY SWITCH: flip to false when real assets are ready
-  const USE_PLACEHOLDERS = false;
+  const USE_PLACEHOLDERS = true;
   const PLACEHOLDER_TITLE = '(Videos coming soon)';
   // Place the image at this path in `ui/public` (e.g. ui/public/assets/tenyear/placeholder.jpg)
   const PLACEHOLDER_IMAGE = '/images/10-year/10y_video_placeholder.png';
@@ -72,7 +72,7 @@ const TenYearVideo = () => {
             Years: The Story
           </Box>
         </Heading>
-        <Text {...tenYearTheme.typography.body} whiteSpace="pre-line" textAlign="center">
+        <Text {...tenYearTheme.typography.body} whiteSpace="pre-line" textAlign="center" px={{ base: '2.49rem', lg: 0, xl: 0 }}>
           {isMobile || isTablet
             ? `This collection of videos tells the story God has been writing in our church family.
 
@@ -156,11 +156,8 @@ We invite you to watch, remember, and rejoice in all He has done.`}
                       bg="rgba(0,0,0,0.4)"
                     >
                       <Text
-                        fontWeight={700}
-                        color={tenYearTheme.colors.text.primary}
-                        fontSize="0.625rem"
+                        {...tenYearTheme.typography.videoTextPlaceholder}
                         textAlign="center"
-                        fontFamily={tenYearTheme.fonts.giving}
                       >
                         COMING SOON
                       </Text>
@@ -179,7 +176,7 @@ We invite you to watch, remember, and rejoice in all He has done.`}
                       justify="center"
                       bg="rgba(0,0,0,0.3)"
                     >
-                      <Image src="/images/10-year/playicon.svg" alt="Play" w="1.5rem" h="1.5rem" />
+                      <Image src="/images/10-year/playicon.svg" alt="Play" w={{ base: '1.5rem', lg: '1.75rem', xl: '1.5rem' }} h={{ base: '1.5rem', lg: '1.75rem', xl: '1.5rem' }} />
                     </Flex>
                   </>
                 )}
@@ -209,7 +206,7 @@ We invite you to watch, remember, and rejoice in all He has done.`}
                     align="center"
                     justify="center"
                   >
-                    <Image src="/images/10-year/playicon.svg" alt="Play" w={{ base: '3.5rem', lg: '3.5rem', xl: PLAY_ICON_SIZE }} h={{ base: '3.5rem', lg: '3.5rem', xl: PLAY_ICON_SIZE }} />
+                    <Image src="/images/10-year/playicon.svg" alt="Play" w={{ base: '3.5rem', lg: '4rem', xl: PLAY_ICON_SIZE }} h={{ base: '3.5rem', lg: '4rem', xl: PLAY_ICON_SIZE }} />
                   </Flex>
                 </>
               ) : (
@@ -225,9 +222,9 @@ We invite you to watch, remember, and rejoice in all He has done.`}
           bg="rgba(5, 10, 25, 0.75)"
           px={PILL_PX}
           py={PILL_PY}
-          mt={{ base: '0.25rem', lg: '1rem', xl: '1rem' }}
+     
         >
-          <Text textAlign="center" {...tenYearTheme.typography.body}>
+          <Text textAlign="center" {...tenYearTheme.typography.videoTitlePlaceholder}>
             {USE_PLACEHOLDERS ? PLACEHOLDER_TITLE : activeVideo.title}
           </Text>
         </Box>
