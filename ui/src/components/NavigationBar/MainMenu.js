@@ -240,7 +240,7 @@ const MainMenu = ({ login, onClose }) => {
                     px="0.65em"
                     py="1"
                   >
-                    <Text>Sign Up</Text>
+                    <Text>hi enoch</Text>
                     <ChevronRightIcon boxSize={6} />
                   </Flex>
                 </Link>
