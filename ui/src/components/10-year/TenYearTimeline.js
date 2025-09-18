@@ -181,8 +181,9 @@ const TimelineItem = ({
 const TenYearTimeline = ({ onExit }) => {
   const timelineRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const initialPosRef = useRef({ top: 0, left: 0 });
   const pinnedRef = useRef(null);
+  const activeIndexRef = useRef(0);
+  const pinRef = useRef(null);
 
   useEffect(() => {
     // Create scroll triggers for each timeline section
@@ -197,8 +198,6 @@ const TenYearTimeline = ({ onExit }) => {
     );
 
     // Pin the "20" between the first and last timeline items
-    const firstSelector = `.timeline-item-0`;
-    const lastSelector = `.timeline-item-${timelineData.length - 1}`;
     const firstContentSelector = `.timeline-item-0 .timeline-content`;
     const lastContentSelector = `.timeline-item-${
       timelineData.length - 1
@@ -231,15 +230,26 @@ const TenYearTimeline = ({ onExit }) => {
     // Initial placement: align with first item so it scrolls in naturally
     placeRelativeToItem(0);
 
-    const setPinnedToViewportPosition = () => {
-      const el = pinnedRef.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      gsap.set(el, {
+    const positionPinnedToActive = () => {
+      const idx = activeIndexRef.current;
+      const itemEl = document.querySelector(`.timeline-item-${idx}`);
+      const suffixEl = document.querySelector(
+        `.timeline-item-${idx} .year-suffix`
+      );
+      const pinnedEl = pinnedRef.current;
+      const root = timelineRef.current;
+      if (!suffixEl || !pinnedEl || !itemEl) return;
+      if (root && pinnedEl.parentElement !== root) {
+        root.appendChild(pinnedEl);
+      }
+      const suffixRect = suffixEl.getBoundingClientRect();
+      const pinnedRect = pinnedEl.getBoundingClientRect();
+      gsap.set(pinnedEl, {
         position: 'fixed',
-        top: rect.top,
-        left: rect.left,
-        transform: 'none',
+        top: '50%',
+        left: suffixRect.left - pinnedRect.width,
+        transform: 'translateY(-50%)',
+        opacity: 1,
       });
     };
 
@@ -253,13 +263,7 @@ const TenYearTimeline = ({ onExit }) => {
       invalidateOnRefresh: true,
       onToggle: (self) => {
         if (self.isActive) {
-          // Ensure pinned element is under the timeline root for pin
-          const root = timelineRef.current;
-          const el = pinnedRef.current;
-          if (root && el && el.parentElement !== root) {
-            root.appendChild(el);
-          }
-          setPinnedToViewportPosition();
+          positionPinnedToActive();
         } else {
           // On forward unpin, attach to last item; on backward unpin, attach to first item
           if (self.direction === 1) {
@@ -270,35 +274,36 @@ const TenYearTimeline = ({ onExit }) => {
         }
       },
     });
+    pinRef.current = pinTwenty;
 
     // Keep layout responsive during viewport resizes
     const onResize = () => {
-      if (pinTwenty && pinTwenty.isActive) {
-        setPinnedToViewportPosition();
-      } else {
-        // If not pinned, ensure alignment with whichever item we're attached to
-        const el = pinnedRef.current;
-        if (el && el.parentElement) {
-          const parent = el.parentElement;
-          const match = parent.className
-            ?.toString()
-            .match(/timeline-item-(\d+)/);
-          if (match) {
-            const idx = parseInt(match[1], 10);
-            placeRelativeToItem(idx);
-          }
-        }
-      }
+      // Trigger GSAP to recalc measurements; our refresh listener will finalize placement
       ScrollTrigger.refresh();
     };
     window.addEventListener('resize', onResize);
+
+    // Ensure placement is corrected after any ScrollTrigger refresh (e.g., resize, content changes)
+    const onStRefresh = () => {
+      if (pinRef.current && pinRef.current.isActive) {
+        positionPinnedToActive();
+      } else {
+        placeRelativeToItem(activeIndexRef.current);
+      }
+    };
+    ScrollTrigger.addEventListener('refresh', onStRefresh);
 
     return () => {
       sectionTriggers.forEach((t) => t.kill());
       pinTwenty.kill();
       window.removeEventListener('resize', onResize);
+      ScrollTrigger.removeEventListener('refresh', onStRefresh);
     };
   }, []);
+
+  useEffect(() => {
+    activeIndexRef.current = activeIndex;
+  }, [activeIndex]);
 
   return (
     <Box ref={timelineRef} w="100%" position="relative">
