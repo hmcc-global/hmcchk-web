@@ -4,19 +4,12 @@ import { tenYearTheme } from './theme';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const MotionBox = motion(Box);
-const MotionHStack = motion(HStack);
 
 const SelectorBox = ({ options, defaultSelected = 0 }) => {
   const [selectedIndex, setSelectedIndex] = useState(defaultSelected);
   const [contentDirection, setContentDirection] = useState(0);
 
   const selected = options?.[selectedIndex] || options?.[0];
-
-  const handleSelect = (idx) => {
-    // Set direction for animation
-    setContentDirection(idx > selectedIndex ? 1 : -1);
-    setSelectedIndex(idx);
-  };
 
   return (
     <Box width="100%" maxW="850px" mx="auto" mt={6}>
@@ -27,7 +20,7 @@ const SelectorBox = ({ options, defaultSelected = 0 }) => {
         p="8px"
         backdropFilter="blur(24px)"
         position="relative"
-        sx={{ 
+        sx={{
           WebkitBackdropFilter: 'blur(24px)',
           '&::before': {
             content: '""',
@@ -39,19 +32,20 @@ const SelectorBox = ({ options, defaultSelected = 0 }) => {
             borderRadius: '80px',
             padding: '1px',
             background: 'linear-gradient(270deg, #0029BD 0%, #95CFFF 100%)',
-            WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+            WebkitMask:
+              'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
             WebkitMaskComposite: 'xor',
             mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
             maskComposite: 'exclude',
             zIndex: -1,
-          }
+          },
         }}
       >
         <MotionBox
           position="absolute"
           top="8px"
           bottom="8px"
-          left={"10px"}
+          left={'10px'}
           width={`${100 / options.length - 10}%`}
           bg="#95CFFF"
           borderRadius="80px"
@@ -59,10 +53,10 @@ const SelectorBox = ({ options, defaultSelected = 0 }) => {
           animate={{
             x: `${selectedIndex * 130}%`,
             transition: {
-              type: "spring",
+              type: 'spring',
               damping: 40,
-              stiffness: 500
-            }
+              stiffness: 500,
+            },
           }}
           zIndex={1} // Behind the text
         />
@@ -96,32 +90,29 @@ const SelectorBox = ({ options, defaultSelected = 0 }) => {
       <AnimatePresence mode="wait">
         <MotionBox
           key={selectedIndex}
-          initial={{ 
+          initial={{
             opacity: 0,
-            x: contentDirection > 0 ? 50 : -50 
+            x: contentDirection > 0 ? 50 : -50,
           }}
-          animate={{ 
+          animate={{
             opacity: 1,
             x: 0,
-            transition: { 
+            transition: {
               duration: 0.3,
-              delay: 0.3
-            }
+              delay: 0.3,
+            },
           }}
-          exit={{ 
+          exit={{
             opacity: 0,
             x: contentDirection > 0 ? -50 : 50,
-            transition: { duration: 0.3 }
+            transition: { duration: 0.3 },
           }}
         >
           {selected?.content}
         </MotionBox>
       </AnimatePresence>
-
     </Box>
   );
 };
 
 export default SelectorBox;
-
-
