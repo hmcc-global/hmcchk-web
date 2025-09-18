@@ -46,13 +46,12 @@ const TenYearVideo = () => {
       src: 'https://www.youtube.com/embed/8Aui--1X9p0?si=nNy8ARQctCg2P9Uz',
       thumbnail: 'https://img.youtube.com/vi/8Aui--1X9p0/maxresdefault.jpg',
     },
-    // {
-    //   id: 'c',
-    //   title: 'Transformation: 10 years of HMCC-HK',
-    //   src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-    //   thumbnail:
-    //     'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg',
-    // },
+    {
+      id: 'c',
+      title: 'Transformation: 10 years of HMCC-HK',
+      src: 'https://www.youtube.com/embed/XPkp2aeSAp0?si=EAKaBKfP84TWp5wx',
+      thumbnail: 'https://img.youtube.com/vi/XPkp2aeSAp0/maxresdefault.jpg',
+    },
   ];
 
   const videos = USE_PLACEHOLDERS ? placeholderVideos : realVideos;
