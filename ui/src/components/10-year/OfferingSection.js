@@ -1,4 +1,4 @@
-import { Flex, Heading, Text, Box, Image } from '@chakra-ui/react';
+import { Flex, Heading, Text, Box, Image, useBreakpointValue } from '@chakra-ui/react';
 import { tenYearTheme } from './theme';
 // import { ArrowForwardIcon } from '@chakra-ui/icons';
 import SelectorBox from './SelectorBox';
@@ -6,6 +6,7 @@ import { selectorOptions } from './selectorConfig';
 
 
 const OfferingSection = (props) => {
+  const isMobile = useBreakpointValue({ base: true, md: false });
   const {
     title = 'Section',
     // subtitle,
@@ -18,7 +19,7 @@ const OfferingSection = (props) => {
   const T_image = `${process.env.PUBLIC_URL}/images/10-year/t.png`;
   const ripple_image = `${process.env.PUBLIC_URL}/images/10-year/ripple.png`;
   const transformat10n_image = `${process.env.PUBLIC_URL}/images/10-year/transformat10n.png`;
-  const offering_background = `${process.env.PUBLIC_URL}/images/10-year/offeringBackground.png`;
+  const offering_background = isMobile? `${process.env.PUBLIC_URL}/images/10-year/offeringBackgroundMobile.png` : `${process.env.PUBLIC_URL}/images/10-year/offeringBackground.png`;
 
   return (
     <Flex as="section" {...tenYearTheme.components.fullPageSection} bg={bg}
@@ -27,12 +28,15 @@ const OfferingSection = (props) => {
       justifyContent="center"
       backgroundImage={`url(${offering_background})`}
       backgroundSize="cover"
+      backgroundAttachment={"fixed"}
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       width="100%"
+      minHeight={"100vh"}
       // gap= "1px"
       position="relative"
-      paddingY="24px">
+      paddingY="24px"
+      overflow="hidden">
       <Heading
         {...tenYearTheme.components.heading}
         {...tenYearTheme.typography.h1}
