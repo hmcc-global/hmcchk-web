@@ -5,6 +5,7 @@ import {
   Heading,
   VStack,
   HStack,
+  Image,
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { gsap } from 'gsap';
@@ -133,7 +134,7 @@ const TimelineItem = ({ item, index, isLast, isMobile }) => {
                 </HStack>
               ))}
             </VStack>
-            {!isLast && (
+            {!isLast && !isMobile && (
               <Box
                 mt="0.5em"
                 h="1px"
@@ -273,7 +274,7 @@ const TenYearTimeline = ({ onExit }) => {
     // Ensure GSAP can revert styles cleanly when contexts switch
     ScrollTrigger.saveStyles([
       '.pinned-year-prefix',
-      '.mobile-pinned-twenty',
+      '.pinned-year-prefix-mobile',
       '.pinned-heading',
       '.pinned-bottom-gradient',
     ]);
@@ -487,8 +488,8 @@ const TenYearTimeline = ({ onExit }) => {
       const pinTwenty = ScrollTrigger.create({
         trigger: firstItemSelector,
         endTrigger: lastItemSelector,
-        start: 'top 40%',
-        end: 'bottom 60%',
+        start: 'center center',
+        end: 'bottom 63%',
         pin: '.pinned-year-prefix',
         pinSpacing: false,
         invalidateOnRefresh: true,
@@ -602,7 +603,7 @@ const TenYearTimeline = ({ onExit }) => {
       // Resolve DOM elements up-front and hold references to triggers safely
       const triggerEl = document.querySelector(`.timeline-item-0`);
       const endEl = timelineRef.current;
-      const pinEl = document.querySelector('.mobile-pinned-twenty');
+      const pinEl = document.querySelector('.pinned-year-prefix-mobile');
       const headingEl = document.querySelector('.pinned-heading');
       let mobilePin = null;
       let pinHeading = null;
@@ -612,7 +613,9 @@ const TenYearTimeline = ({ onExit }) => {
         const suffixEl = document.querySelector(
           `.timeline-item-${idx} .year-suffix`
         );
-        const mobilePinnedEl = document.querySelector('.mobile-pinned-twenty');
+        const mobilePinnedEl = document.querySelector(
+          '.pinned-year-prefix-mobile'
+        );
         if (!mobilePinnedEl) return;
         // Only force fixed positioning when the pin is active
         if (!mobilePin || !mobilePin.isActive) {
@@ -660,17 +663,17 @@ const TenYearTimeline = ({ onExit }) => {
         endTrigger: endEl || timelineRef.current,
         start: () =>
           `top ${
-            window.matchMedia('(max-width: 29.99em)').matches ? '32%' : '35%'
+            window.matchMedia('(max-width: 29.99em)').matches ? '25%' : '30%'
           }`,
         end: 'bottom 80%',
-        pin: pinEl || '.mobile-pinned-twenty',
+        pin: pinEl || '.pinned-year-prefix-mobile',
         pinSpacing: false,
         invalidateOnRefresh: true,
         onToggle: (self) => {
           if (self.isActive) {
             positionMobilePinnedToActive();
           } else {
-            const el = document.querySelector('.mobile-pinned-twenty');
+            const el = document.querySelector('.pinned-year-prefix-mobile');
             if (el) {
               gsap.set(el, {
                 position: 'relative',
@@ -692,7 +695,7 @@ const TenYearTimeline = ({ onExit }) => {
           endTrigger: endEl,
           start: () =>
             `top ${
-              window.matchMedia('(max-width: 29.99em)').matches ? '5%' : '0%'
+              window.matchMedia('(max-width: 29.99em)').matches ? '0%' : '0%'
             }`,
           end: 'bottom 80%',
           pin: headingEl,
@@ -753,55 +756,51 @@ const TenYearTimeline = ({ onExit }) => {
 
   return (
     <Box className="timeline-section" position="relative" pb="19vh" w="100%">
-      <Box
-        className="pinned-heading"
-        position="relative"
-        w="100%"
-        bgGradient="linear(180deg, #000214 0%, #0C134A 25%, rgba(16, 24, 97, 0.70) 50%, rgba(0, 13, 146, 0.00) 100%)"
-        zIndex={2}
-        minH={['35vh', '35vh', '50vh']}
-      >
+      <Box className="pinned-heading" position="relative" w="100%" zIndex={2}>
+        <Box
+          position="absolute"
+          top={0}
+          left={0}
+          right={0}
+          h={['35vh', '35vh', '50vh']}
+          bgGradient="linear(180deg, #000214 0%, #0C134A 25%, rgba(16, 24, 97, 0.70) 50%, rgba(0, 13, 146, 0.00) 100%)"
+          zIndex={2}
+          pointerEvents="none"
+        />
         <VStack
           align="center"
           justify="center"
-          py={('0.5rem', '0.5rem', '2.5rem')}
+          pt={['2.5rem', '5rem', '4.5rem']}
+          pb={['1.35rem', '1.35rem', '7rem']}
           w="100%"
-          // h="100%"
-          spacing={['-1.25rem', '-1.75rem', '-1.25rem']}
+          spacing={['-0.3rem', '-0.5rem', '-1.25rem']}
           zIndex={3}
           position="relative"
         >
           <Heading
-            {...tenYearTheme.components.heading}
-            {...tenYearTheme.typography.h1}
-            letterSpacing={tenYearTheme.letterSpacings.tight}
             textAlign="center"
             display="flex"
             alignItems="center"
             justifyContent="center"
+            gap={0}
           >
-            <Box
-              as="img"
-              src={`${process.env.PUBLIC_URL}/images/10-year/timeline/10.svg`}
+            <Image
+              src="/images/10-year/10.svg"
               alt="10"
-              h="3.5em"
-              w="fit-content"
-              display="inline-block"
-              verticalAlign="middle"
-              mr={'-0.88em'}
+              h="3em"
+              w="auto"
+              mt={-4}
             />
-            <Text as="span" ml={0}>
+            <Box as="span" {...tenYearTheme.typography.h1} ml={-8}>
               Years: The Moments
-            </Text>
+            </Box>
           </Heading>
           <Text
-            {...tenYearTheme.components.text}
             {...tenYearTheme.typography.body}
-            fontWeight="500"
-            fontSize={['1rem', '1.2rem']}
             color="white"
             textAlign="center"
             maxW="90%"
+            whiteSpace="pre-line"
           >
             Look back at the moments and recount all that God has done in the
             past decade for our church family.
@@ -811,7 +810,7 @@ const TenYearTimeline = ({ onExit }) => {
       <Box
         ref={timelineRef}
         className="timeline-root"
-        mt={['0', '0', '-7rem']}
+        // mt={['0', '0', '-7rem']}
         w="100%"
         position="relative"
         style={{
@@ -847,13 +846,12 @@ const TenYearTimeline = ({ onExit }) => {
           </Text>
         </Box>
         <Box
-          className="mobile-pinned-twenty"
+          className="pinned-year-prefix-mobile"
           position="relative"
           w="fit-content"
           mx="auto"
           zIndex={3}
           display={{ base: 'block', md: 'none' }}
-          mt={['-8rem', '-3.5rem', 0]}
         >
           <Text
             fontSize="var(--year-font)"
@@ -868,7 +866,7 @@ const TenYearTimeline = ({ onExit }) => {
           </Text>
         </Box>
         {/* Timeline content - scrolls normally without affecting "20" */}
-        <VStack spacing={0} align="stretch">
+        <VStack spacing={[5, 5, 3]} align="stretch">
           {timelineYearData.years.map((item, index) => (
             <TimelineItem
               key={item.year}
