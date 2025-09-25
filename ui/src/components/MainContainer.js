@@ -44,6 +44,8 @@ import PrivacyPolicy from './screens/PrivacyPolicy';
 import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
 import ConnectMinistry from './discover/ConnectMinistry';
 import LifeGroupPage from './discover/LifeGroupPage';
+import HarvestGamesContainer from './harvest-games/HarvestGamesContainer';
+import AdminHarvestGamesContainer from './admin/harvest-games/AdminHarvestGamesContainer';
 
 const MainContainer = () => {
   return (
@@ -337,6 +339,18 @@ const MainContainer = () => {
           path="/admin/fundraise"
           permissions={['admin', 'stewardship']}
           component={AdminFundraiseContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/harvest-games"
+          permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
+          component={AdminHarvestGamesContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/harvest-games"
+          permissions={['public']}
+          component={HarvestGamesContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
