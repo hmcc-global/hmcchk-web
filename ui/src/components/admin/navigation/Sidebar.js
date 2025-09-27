@@ -43,6 +43,11 @@ const LinkItems = [
     icon: FiShield,
     path: '/admin/leadership-team',
   },
+  {
+    name: 'Harvest Games',
+    icon: FiShield,
+    path: '/admin/harvest-games',
+  },
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {
