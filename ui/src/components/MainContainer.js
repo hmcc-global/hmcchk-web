@@ -44,8 +44,11 @@ import PrivacyPolicy from './screens/PrivacyPolicy';
 import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
 import ConnectMinistry from './discover/ConnectMinistry';
 import LifeGroupPage from './discover/LifeGroupPage';
+import StructuredData from './seo/StructuredData';
+import { generateChurchSchema } from './seo/SchemaGenerator';
 
 const MainContainer = () => {
+  const churchSchema = generateChurchSchema();
   return (
     <chakra.main
       maxH="100%"
@@ -58,6 +61,7 @@ const MainContainer = () => {
       mt="7vh"
       mb={['6vh', '6vh', 0, 0]}
     >
+      <StructuredData schema={churchSchema} />
       <ScrollToTop />
       <Switch>
         <PrivateRoute
