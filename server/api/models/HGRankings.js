@@ -9,5 +9,9 @@ module.exports = {
     overallRanking: {
       type: 'number',
     },
+    isDeleted: {
+      type: 'boolean',
+      defaultsTo: false,
+    },
   },
 };

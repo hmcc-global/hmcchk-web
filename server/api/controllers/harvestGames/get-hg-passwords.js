@@ -1,5 +1,3 @@
-const { Sails } = require('sails');
-
 module.exports = {
   friendlyName: 'Get Harvest Games password and return image links',
 
@@ -31,7 +29,9 @@ module.exports = {
   fn: async function ({ gameId, password }, exits) {
     try {
       let data = await HGRankings.find().populateAll();
-      const filteredData = data.filter((entry) => entry.lgName === 'password');
+      const filteredData = data.filter(
+        (entry) => entry.lgName === 'password' && !entry.isDeleted
+      );
       if (data.length === 0) throw 'HG ranking not found';
 
       // Verify the password

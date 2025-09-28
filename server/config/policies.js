@@ -129,9 +129,9 @@ module.exports.policies = {
   'users/parse-user-query': ['isLoggedIn', 'aboveAdmin'],
   'users/send-batch-users-query': ['isLoggedIn', 'aboveAdmin'],
 
-    // Harvest Games
+  // Harvest Games
   'harvestGames/get-hg-rankings': true,
   'harvestGames/update-hg-rankings': ['isLoggedIn', 'aboveTech'],
   'harvestGames/get-hg-passwords': true,
-
+  'harvestGames/post-delete-rankings': ['isLoggedIn', 'aboveTech'],
 };

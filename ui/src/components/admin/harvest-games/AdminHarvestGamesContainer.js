@@ -6,6 +6,16 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { Button, ButtonGroup, Heading, Tooltip } from '@chakra-ui/react';
 import { CgUndo, CgRedo } from 'react-icons/cg';
 import { MdSave } from 'react-icons/md';
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  useDisclosure,
+} from '@chakra-ui/react';
+import { useRef } from 'react';
 
 import './style.css';
 
@@ -13,12 +23,16 @@ export default function AdminHarvestGamesContainer(props) {
   const [api, setApi] = useState();
   const [colApi, setColApi] = useState();
   const [rankings, setRankings] = useState([]);
+  const [selectedRow, setSelectedRow] = useState(null);
 
   const defaultColDef = {
     editable: true,
     sortable: true,
     resizable: true,
   };
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = useRef();
 
   const getData = async () => {
     try {
@@ -60,6 +74,22 @@ export default function AdminHarvestGamesContainer(props) {
         await saveRankingInfo(rowNode.data);
       });
     }
+  };
+
+  // Function to delete selected row
+  const deleteRow = async () => {
+    if (!selectedRow) return;
+    try {
+      await axios.post('/api/hgRankings/delete', {
+        lgRankingId: selectedRow.id,
+      });
+      await getData();
+      setSelectedRow(null);
+      alert('Successfully deleted row');
+    } catch (err) {
+      alert(err?.response?.data || 'Error deleting row');
+    }
+    onClose();
   };
 
   useEffect(() => {
@@ -229,26 +259,43 @@ export default function AdminHarvestGamesContainer(props) {
       <Heading as="h3" mb={5}>
         Harvest Games Rankings
       </Heading>
-      <ButtonGroup mb={5} variant="outline" spacing="5">
-        <Tooltip label="Add a new row">
-          <Button onClick={addNewRow} variant="solid">
-            Add Row
-          </Button>
-        </Tooltip>
-        <Tooltip label="Ctrl/Cmd + Z">
-          <Button onClick={undo} leftIcon={<CgUndo />}>
-            Undo
-          </Button>
-        </Tooltip>
-        <Tooltip label="Ctrl/Cmd + Y">
-          <Button onClick={redo} rightIcon={<CgRedo />}>
-            Redo
-          </Button>
-        </Tooltip>
-        <Button onClick={saveAllToDB} rightIcon={<MdSave />} variant="solid">
-          Save
-        </Button>
-      </ButtonGroup>
+      <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
+        <ButtonGroup mb={5} variant="outline" spacing="5">
+          <Tooltip label="Add a new row">
+            <Button onClick={addNewRow} variant="solid">
+              Add Row
+            </Button>
+          </Tooltip>
+          <Tooltip label="Ctrl/Cmd + Z">
+            <Button onClick={undo} leftIcon={<CgUndo />}>
+              Undo
+            </Button>
+          </Tooltip>
+          <Tooltip label="Ctrl/Cmd + Y">
+            <Button onClick={redo} rightIcon={<CgRedo />}>
+              Redo
+            </Button>
+          </Tooltip>
+          <Tooltip label="Save all changes to database">
+            <Button
+              onClick={saveAllToDB}
+              rightIcon={<MdSave />}
+              variant="solid"
+            >
+              Save
+            </Button>
+          </Tooltip>
+          <Tooltip label="Delete the selected row (Must already exist in DB)">
+            <Button
+              onClick={onOpen}
+              colorScheme="red"
+              isDisabled={!selectedRow}
+            >
+              Delete Selected Row
+            </Button>
+          </Tooltip>
+        </ButtonGroup>
+      </div>
       <div
         className="ag-theme-alpine"
         style={{ height: 500, backgroundColor: 'black' }}
@@ -266,8 +313,42 @@ export default function AdminHarvestGamesContainer(props) {
           undoRedoCellEditingLimit={undoRedoCellEditingLimit}
           enableCellChangeFlash={enableCellChangeFlash}
           tooltipShowDelay={0}
+          rowSelection="single"
+          onSelectionChanged={() => {
+            const selectedNodes = api.getSelectedNodes();
+            if (selectedNodes.length > 0) {
+              setSelectedRow(selectedNodes[0].data);
+            } else {
+              setSelectedRow(null);
+            }
+          }}
         />
       </div>
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+        isCentered
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader>Delete Group</AlertDialogHeader>
+            <AlertDialogBody>
+              {selectedRow
+                ? `Confirm delete the group "${selectedRow.lgName}"?`
+                : ''}
+            </AlertDialogBody>
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={onClose}>
+                Cancel
+              </Button>
+              <Button colorScheme="red" onClick={deleteRow} ml={3}>
+                Delete
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </>
   );
 }

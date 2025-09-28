@@ -21,17 +21,20 @@ module.exports = {
 
   fn: async function ({ lgRankingId }, exits) {
     try {
-      // To allow admin to view all data including password
+      // To allow admin to view all data including password but not deleted entries
       if (lgRankingId === 'AdminTest') {
         let data = await HGRankings.find().populateAll();
+        data = data.filter((entry) => !entry.isDeleted);
         if (data.length === 0) throw 'HG ranking not found';
 
         return exits.success(data);
       }
 
-      // Regular user access - filter out password
+      // Regular user access - filter out password and isDeleted is false
       let data = await HGRankings.find().populateAll();
-      const filteredData = data.filter((entry) => entry.lgName !== 'password');
+      const filteredData = data.filter(
+        (entry) => entry.lgName !== 'password' && !entry.isDeleted
+      );
       sails.log.info('Retrieving Harvest Games rankings..');
 
       return exits.success(filteredData);

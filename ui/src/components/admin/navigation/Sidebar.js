@@ -24,6 +24,7 @@ import {
   FiShield,
   FiAlertCircle,
   FiDollarSign,
+  FiFlag,
 } from 'react-icons/fi';
 import { CgNotes } from 'react-icons/cg';
 
@@ -45,7 +46,7 @@ const LinkItems = [
   },
   {
     name: 'Harvest Games',
-    icon: FiShield,
+    icon: FiFlag,
     path: '/admin/harvest-games',
   },
 ];
