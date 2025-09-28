@@ -285,15 +285,9 @@ export default function AdminHarvestGamesContainer(props) {
               Save
             </Button>
           </Tooltip>
-          <Tooltip label="Delete the selected row (Must already exist in DB)">
-            <Button
-              onClick={onOpen}
-              colorScheme="red"
-              isDisabled={!selectedRow}
-            >
-              Delete Selected Row
-            </Button>
-          </Tooltip>
+          <Button onClick={onOpen} colorScheme="red" isDisabled={!selectedRow}>
+            Delete Selected Row
+          </Button>
         </ButtonGroup>
       </div>
       <div
