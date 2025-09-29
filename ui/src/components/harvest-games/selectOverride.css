@@ -1,0 +1,25 @@
+@layer overrides {
+  .hg-select {
+    border-radius: 20px !important;
+    background: #262626 !important;
+    padding-right: 40px !important;
+  position: relative;
+  }
+
+  .hg-select option {
+    background: #262626 !important;
+    color: #ffffff !important;
+  }
+
+  .hg-select::-ms-expand {
+    display: none;
+  }
+
+.chakra-select__icon-wrapper {
+  right: 16px !important;
+  top: 50% !important;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+}
+
