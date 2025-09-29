@@ -46,38 +46,33 @@ const HarvestGamesContainer = () => {
     <Flex
       position="relative"
       minH="calc(100vh - 13vh)"
-      align="center"
+      align={{ base: 'flex-start',sm: 'center', md: 'center', lg: 'center' }}
       justify="center"
       color="white"
       overflow="hidden"
-      bg="black"
+      bgImage="url('/images/harvest-games/harvestgames_bg.png')"
+      bgSize={{ base: 'fill', sm: 'fill', md: 'fill', lg: '100%' }}
+      bgPosition="center"
       py={containerPaddingY}
-      _before={{
-        content: '""',
-        position: 'absolute',
-        inset: 0,
-        backgroundImage: "url('/images/harvest-games/harvestgames_bg.png')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
     >
       <Box
         position="absolute"
         inset={0}
-        backgroundImage="url('/images/harvest-games/harvestgames_bg_shadow.png')"
-        backgroundSize="cover"
-        backgroundPosition="center"
+        bgImage="url('/images/harvest-games/harvestgames_bg_shadow.png')"
+        bgSize={{ base: 'auto', md: '100%' }}
+        bgPosition="center"
         pointerEvents="none"
+        zIndex={1}
       />
 
       {activeContent ? (
-        <Box position="relative" zIndex={1} w="full" px={{ base: 3, sm: 6, md: 8 }}>
+        <Box position="relative" zIndex={2} w="full" px={{ base: 3, sm: 6, md: 8 }}>
           {activeContent}
         </Box>
       ) : (
         <Flex
           position="relative"
-          zIndex={1}
+          zIndex={2}
           maxW="960px"
           w="full"
           px={{ base: 4, sm: 6, md: 10 }}

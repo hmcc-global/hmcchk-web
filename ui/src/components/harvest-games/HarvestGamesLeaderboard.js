@@ -113,6 +113,7 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
           _hover={{ color: '#FFF769' }}
           justify="flex-start"
           wrap="wrap"
+          transform={{ base: 'none', md: 'translateX(calc(maxW/2))', lg: 'translateX(calc(-270px))' }}
         >
           <Flex
             w={{ base: '40px', sm: '44px', md: '48px' }}
