@@ -38,7 +38,9 @@ const HarvestGamesContainer = () => {
       <HarvestGamesInstructions onBack={() => setActiveView(null)} />
     ) : null;
 
-  const containerPaddingY = activeContent ? { base: 6, md: 10 } : { base: 10, md: 16 };
+  const containerPaddingY = activeContent
+    ? { base: 6, sm: 8, md: 10 }
+    : { base: 10, sm: 12, md: 16 };
 
   return (
     <Flex
@@ -69,7 +71,7 @@ const HarvestGamesContainer = () => {
       />
 
       {activeContent ? (
-        <Box position="relative" zIndex={1} w="full" px={{ base: 4, md: 8 }}>
+        <Box position="relative" zIndex={1} w="full" px={{ base: 3, sm: 6, md: 8 }}>
           {activeContent}
         </Box>
       ) : (
@@ -78,27 +80,35 @@ const HarvestGamesContainer = () => {
           zIndex={1}
           maxW="960px"
           w="full"
-          px={{ base: 6, md: 10 }}
+          px={{ base: 4, sm: 6, md: 10 }}
         >
           <VStack
-            spacing={{ base: 3, md: 4 }}
+            spacing={{ base: 3, sm: 4, md: 5 }}
             w="full"
             fontFamily="'CodeBold'"
             align="center"
-            transform={{ base: 'translateY(-48px)', md: 'translateY(-60px)' }}
+            transform={{
+              base: 'translateY(-32px)',
+              sm: 'translateY(-48px)',
+              md: 'translateY(-60px)',
+            }}
           >
             <Image
               src="/images/harvest-games/harvestgames_title.png"
               alt="Harvest Games title graphic"
               mx="auto"
-              w={{ base: '280px', sm: '360px', md: '620px', lg: '760px' }}
+              w={{ base: '350px', sm: '360px', md: '620px', lg: '760px' }}
             />
 
             <SimpleGrid
-              columns={{ base: 1, md: 2 }}
-              spacing={{ base: 4, md: 6 }}
+              columns={{ base: 1, sm: 1, md: 2 }}
+              spacing={{ base: 4, sm: 5, md: 6 }}
               w="full"
-              transform={{ base: 'translateY(-48px)', md: 'translateY(-120px)' }}
+              transform={{
+                base: 'translateY(-32px)',
+                sm: 'translateY(-48px)',
+                md: 'translateY(-120px)',
+              }}
             >
               {cards.map((card) => (
                 <VStack
@@ -106,12 +116,13 @@ const HarvestGamesContainer = () => {
                   as="button"
                   type="button"
                   role="group"
-                  spacing={4}
+                  spacing={{ base: 3, sm: 4 }}
                   align="center"
                   justify="center"
-                  p={{ base: 8, md: 14 }}
-                  w={{ base: '100%', md: '366px' }}
-                  h={{ base: 'auto', md: '322px' }}
+                  p={{ base: 6, sm: 8, md: 14 }}
+                  w="full"
+                  maxW={{ base: '100%', sm: '320px', md: '366px' }}
+                  h={{ base: 'auto', sm: '280px', md: '322px' }}
                   bg="rgba(0, 0, 0, 0.55)"
                   borderRadius="2xl"
                   border="1px solid rgba(255, 255, 255, 0.2)"
@@ -142,11 +153,15 @@ const HarvestGamesContainer = () => {
                     h="72px"
                     transition="all 0.3s ease"
                   >
-                    <Icon as={card.icon} fontSize="2.25rem" color="white" />
+                    <Icon
+                      as={card.icon}
+                      fontSize={{ base: '1.75rem', sm: '2rem', md: '2.25rem' }}
+                      color="white"
+                    />
                   </Flex>
                   <Text
                     fontFamily="'CodeBold'"
-                    fontSize="2xl"
+                    fontSize={{ base: 'xl', sm: '2xl' }}
                     textTransform="uppercase"
                     letterSpacing="0.12em"
                     align="center"
@@ -161,8 +176,8 @@ const HarvestGamesContainer = () => {
               textAlign="center"
               fontFamily="'CodeBold'"
               fontWeight="700"
-              fontSize="58.929px"
-              lineHeight="94.149px"
+              fontSize={{ base: '26px', sm: '48px', md: '58.9px' }}
+              lineHeight={{ base: '26px', sm: '82px', md: '94.149px' }}
               letterSpacing="4.125px"
               textTransform="uppercase"
               textShadow="0 0 4.5px #FFF769"
@@ -170,7 +185,11 @@ const HarvestGamesContainer = () => {
               bgClip="text"
               color="transparent"
               sx={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
-              transform={{ base: 'translateY(-48px)', md: 'translateY(-100px)' }}
+              transform={{
+                base: 'translateY(-20px)',
+                sm: 'translateY(-56px)',
+                md: 'translateY(-100px)',
+              }}
             >
               Harvest Games 2025
             </Text>
