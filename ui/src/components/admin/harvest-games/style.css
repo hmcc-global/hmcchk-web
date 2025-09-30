@@ -1,0 +1,11 @@
+.ag-theme-alpine .ag-header {
+  color: black; /* Optional: Change header text color */
+}
+
+.ag-theme-alpine .ag-row {
+  color: black; /* Row text color */
+}
+
+.ag-theme-alpine .ag-cell {
+  color: black; /* Cell text color */
+}

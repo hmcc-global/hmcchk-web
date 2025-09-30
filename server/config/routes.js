@@ -164,6 +164,12 @@ module.exports.routes = {
   'get /api/admin/parseUserQuery': 'users/parse-user-query',
   'get /api/admin/sendBatchUsersQuery': 'users/send-batch-users-query',
 
+  // Harvest Games APIs
+  'get /api/hgRankings/get': 'harvestGames/get-hg-rankings',
+  'put /api/hgRankings/update': 'harvestGames/update-hg-rankings',
+  'get /api/hgRankings/authenticate': 'harvestGames/get-hg-passwords',
+  'post /api/hgRankings/delete': 'harvestGames/post-delete-rankings',
+
   // UI
   'get /*': {
     skipAssets: true,
