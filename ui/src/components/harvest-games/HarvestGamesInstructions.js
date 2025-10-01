@@ -170,7 +170,6 @@ const HarvestGamesInstructions = ({ onBack }) => {
           py={{ base: 5, sm: 6, md: 7, lg: 4 }}
           color="white"
           backgroundColor="rgba(0, 0, 0, 0.5)"
-          w="full"
           textAlign="center"
           boxShadow="0 3px 19px -103px rgba(74, 74, 74, 0.20)"
         >
@@ -199,14 +198,14 @@ const HarvestGamesInstructions = ({ onBack }) => {
             w="full"
           >
             <Text
-              fontSize={{ base: 'sm', sm: 'md', md: '20px' }}
+              fontSize={{ base: '14px', sm: 'md', md: '20px' }}
               textTransform="uppercase"
-              letterSpacing="0.18em"
+              letterSpacing={{ base: '0.42px', md: '0.6px', lg: '0.6px' }}
               minW={{ base: 'auto', sm: '160px' }}
               flexShrink={0}
               color="#F8CC30"
             >
-              Select Game
+              Select Game:
             </Text>
             <Select
               value={selectedGame}
@@ -218,32 +217,22 @@ const HarvestGamesInstructions = ({ onBack }) => {
                 setErrorMessage('');
               }}
               bg="#262626"
-              border="1px solid rgba(255, 255, 255, 0.2)"
               borderRadius="60px"
-              color="white"
               fontFamily="'CodeBold'"
-              fontSize={{ base: 'sm', md: 'md', lg: '20px' }}
+              fontSize={{ base: '16px', md: 'md', lg: '22px' }}
+              letterSpacing={{ base: '0.48px', md: '0.6px', lg: '0.6px' }}
               fontWeight="700"
-              w={{ base: '100%', sm: '340px' }}
-              maxW={{ base: '100%', sm: '340px', md: '360px' }}
+              w='340px'
               flex={{ base: 'none', sm: 1 }}
               h={{ base: '42px', md: '48px' }}
-              px={{ base: 4, md: 6 }}
-              pr={{ base: 10, md: 12 }}
+              align="center"
               className="hg-select"
               icon={<Icon as={RiArrowDownSLine} />}
               iconColor="white"
               iconSize="1.1rem"
-              _focus={{
-                borderColor: '#FFF769',
-                boxShadow: '0 0 0 1px rgba(255, 247, 105, 0.6)',
-              }}
-              _hover={{ borderColor: '#FFF769' }}
-              _expanded={{ borderColor: '#FFF769' }}
+              borderColor="#262626"
+              _expanded={{ borderColor: '#FFF769', borderRadius: '60px' }}
             >
-              <option value="" disabled>
-                Select a game
-              </option>
               <option value="0">Game 1</option>
               <option value="1">Game 2</option>
               <option value="2">Game 3</option>
@@ -262,7 +251,8 @@ const HarvestGamesInstructions = ({ onBack }) => {
                 <Text
                   fontSize={{ base: 'sm', sm: 'md', md: '20px' }}
                   textTransform="uppercase"
-                  letterSpacing="0.14em"
+                  marginTop="20px"
+                  letterSpacing="0.6px"
                   textAlign={{ base: 'center', sm: 'center' }}
                 >
                   Enter password for game instructions
@@ -273,12 +263,15 @@ const HarvestGamesInstructions = ({ onBack }) => {
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                   bg="rgba(0, 0, 0, 0.45)"
-                  border="1px solid #262626"
+                  border="1px solid #474747"
+                  backgroundColor="rgba(0, 0, 0, 0.45)"
                   color="white"
                   fontFamily="'CodeBold'"
                   fontSize={{ base: 'sm', md: 'md' }}
-                  maxW={{ base: '240px', sm: '260px', md: '280px' }}
-                  _placeholder={{ color: 'rgba(255, 255, 255, 0.6)' }}
+                  maxW={{ base: '240px', sm: '260px', md: '280px', lg: '340px' }}
+                  h={{ base: '42px', md: '55px' }}
+                  _placeholder={{ color: '#7E7E7E', fontSize: '14px', letterSpacing: '0.42px', textAlign: 'center', align: 'center' }}
+                  boxShadow="0 3px 19px -103px rgba(74, 74, 74, 0.20)"
                   _focus={{
                     borderColor: '#FFF769',
                     boxShadow: '0 0 0 1px #FFF769',
@@ -292,9 +285,10 @@ const HarvestGamesInstructions = ({ onBack }) => {
                 bgGradient="linear-gradient(90deg, #EBC300 0%, #F8CC30 29.81%, #FFF2B2 47.6%, #DFBC15 100%)"
                 color="black"
                 fontFamily="'CodeBold'"
-                fontSize={{ base: 'sm', md: 'md' }}
-                px={{ base: 10, sm: 12 }}
-                py={{ base: 3, sm: 3 }}
+                fontSize={{ base: '16px', md: 'md', lg: '22px' }}
+                letterSpacing={{ base: '2.56px', md: '3.52px', lg: '3.52px' }}
+                px={{ base: 10, sm: 12, lg: 14 }}
+                py={{ base: 7, sm: 8, lg: 8 }}
                 borderRadius="30px"
                 _hover={{
                   bgGradient:
@@ -310,9 +304,12 @@ const HarvestGamesInstructions = ({ onBack }) => {
           )}
           {errorMessage ? (
             <Text
-              color="red.300"
-              fontSize={{ base: 'sm', md: 'md' }}
+              color="#F9455B"
+              fontSize={{ base: 'sm', md: 'md', lg: '14px' }}
+              letterSpacing="0.42px"
+              fontFamily="'Futura'"
               textAlign="center"
+              fontStyle="italic"
             >
               {errorMessage}
             </Text>
@@ -323,7 +320,8 @@ const HarvestGamesInstructions = ({ onBack }) => {
               spacing={5}
               mt={2}
               color="white"
-              fontSize={{ base: 'sm', md: '20px' }}
+              fontSize={{ base: '14px', md: '20px' }}
+              letterSpacing={{ base: '0.42px', md: '0.6px', lg: '0.6px' }}
               w="full"
             >
               <Text textTransform="uppercase" letterSpacing="0.1em">
@@ -355,9 +353,10 @@ const HarvestGamesInstructions = ({ onBack }) => {
                   bgGradient="linear-gradient(90deg, #EBC300 0%, #F8CC30 29.81%, #FFF2B2 47.6%, #DFBC15 100%)"
                   color="black"
                   fontFamily="'CodeBold'"
-                  fontSize={{ base: 'sm', md: 'md' }}
-                  px={{ base: 10, sm: 12 }}
-                  py={{ base: 3, sm: 3 }}
+                  fontSize={{ base: '16px', md: 'md', lg: '22px' }}
+                  letterSpacing={{ base: '2.56px', md: '3.52px', lg: '3.52px' }}
+                  px={{ base: 10, sm: 12, lg: 14 }}
+                  py={{ base: 7, sm: 8, lg: 8 }}
                   borderRadius="30px"
                   _hover={{
                     bgGradient:

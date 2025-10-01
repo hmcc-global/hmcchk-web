@@ -1,18 +1,22 @@
 @layer overrides {
   .hg-select {
-    border-radius: 20px !important;
+    border-radius: 60px !important;
     background: #262626 !important;
     padding-right: 40px !important;
-  position: relative;
+    position: relative;
+    height: 60px !important;
+    text-align: center !important;
   }
 
   .hg-select option {
     background: #262626 !important;
-    color: #ffffff !important;
+    border-radius: 60px !important;
   }
 
   .hg-select::-ms-expand {
     display: none;
+    background: #262626 !important;
+    border-radius: 60px !important;
   }
 
 .chakra-select__icon-wrapper {

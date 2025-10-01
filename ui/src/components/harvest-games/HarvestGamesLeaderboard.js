@@ -162,10 +162,10 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
               color="white"
             />
             <Text
-              fontSize={{ base: '22px', sm: '28px', md: '36px', lg: '50px' }}
+              fontSize={{ base: '29px', sm: '28px', md: '36px', lg: '50px' }}
               textTransform="uppercase"
               whiteSpace="nowrap"
-              letterSpacing="1.5px"
+              letterSpacing={{ base: '0.881px', sm: '0.5px', md: '0.6px', lg: '1.5px' }}
             >
               Leaderboard
             </Text>
@@ -190,18 +190,19 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
               overflow="hidden"
               letterSpacing={{ base: '0.45px', sm: '0.5px', md: '0.6px' }}
               minW={{ base: '100%', sm: '520px' }}
+              fontFamily="'CodeBold'"
             >
               <Thead>
                 <Tr
                   fontSize={{ base: '13px', sm: '15px', md: '18px', lg: '20px' }}
                   textTransform="uppercase"
-                  color="#B7B7B7"
                   fontFamily="'CodeBold'"
                 >
                   <Th
                     textAlign="center"
                     whiteSpace="normal"
                     wordBreak="break-word"
+                    fontFamily="'CodeBold'"
                     py={{ base: 2, sm: 3, md: 4, lg: 5 }}
                     px={{ base: 2, sm: 3, md: 4 }}
                     fontSize={{ base: '15px', sm: '15px', md: '20px', lg: '20px' }}
@@ -212,6 +213,7 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                     textAlign="center"
                     whiteSpace="normal"
                     wordBreak="break-word"
+                    fontFamily="'CodeBold'"
                     py={{ base: 2, sm: 3, md: 4, lg: 5 }}
                     px={{ base: 2, sm: 3, md: 4 }}
                     fontSize={{ base: '15px', sm: '15px', md: '20px', lg: '20px' }}
@@ -224,6 +226,7 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                     wordBreak="break-word"
                     py={{ base: 2, sm: 3, md: 4, lg: 5 }}
                     px={{ base: 2, sm: 3, md: 4 }}
+                    fontFamily="'CodeBold'"
                     fontSize={{ base: '15px', sm: '15px', md: '20px', lg: '20px' }}
                   >
                     Score
@@ -267,6 +270,7 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                       _last={{ borderBottom: 'none' }}
                     >
                       <Td
+                        color={entry.rank === 1 ? '#FFD75A' : 'inherit'}
                         textAlign="center"
                         whiteSpace="normal"
                         py={{ base: 2, sm: 3, md: 4, lg: 3}}

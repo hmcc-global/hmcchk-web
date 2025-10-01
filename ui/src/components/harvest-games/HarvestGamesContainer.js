@@ -51,7 +51,7 @@ const HarvestGamesContainer = () => {
       color="white"
       overflow="hidden"
       bgImage="url('/images/harvest-games/harvestgames_bg.png')"
-      bgSize={{ base: 'fill', sm: 'fill', md: 'fill', lg: '100%' }}
+      bgSize={{ base: 'fill', sm: '200%', md: '300%', lg: '100%' }}
       bgPosition="center"
       py={containerPaddingY}
     >
@@ -59,7 +59,7 @@ const HarvestGamesContainer = () => {
         position="absolute"
         inset={0}
         bgImage="url('/images/harvest-games/harvestgames_bg_shadow.png')"
-        bgSize={{ base: 'auto', md: '100%' }}
+        bgSize={{ base: 'auto', md: 'cover', lg: '100%' }}
         bgPosition="center"
         pointerEvents="none"
         zIndex={1}
@@ -74,35 +74,32 @@ const HarvestGamesContainer = () => {
           position="relative"
           zIndex={2}
           maxW="960px"
-          w="full"
-          px={{ base: 4, sm: 6, md: 10 }}
         >
           <VStack
-            spacing={{ base: 3, sm: 4, md: 5 }}
-            w="full"
+            spacing={{ base: 3, sm: 4, md: 5, lg: 0 }}
             fontFamily="'CodeBold'"
             align="center"
             transform={{
               base: 'translateY(-32px)',
               sm: 'translateY(-48px)',
               md: 'translateY(-60px)',
+              lg: 'translateY(-50px)',
             }}
           >
             <Image
               src="/images/harvest-games/harvestgames_title.png"
               alt="Harvest Games title graphic"
-              mx="auto"
-              w={{ base: '350px', sm: '360px', md: '620px', lg: '760px' }}
+              w={{ base: '350px', sm: '360px', md: '620px', lg: '1033px' }}
             />
 
             <SimpleGrid
               columns={{ base: 1, sm: 1, md: 2 }}
-              spacing={{ base: 4, sm: 5, md: 6 }}
-              w="full"
+              gap={{ base: 4, sm: 5, md: 8 }}
               transform={{
                 base: 'translateY(-32px)',
                 sm: 'translateY(-48px)',
-                md: 'translateY(-120px)',
+                md: 'translateY(-100px)', 
+                lg: 'translateY(-180px)',
               }}
             >
               {cards.map((card) => (
@@ -111,7 +108,7 @@ const HarvestGamesContainer = () => {
                   as="button"
                   type="button"
                   role="group"
-                  spacing={{ base: 3, sm: 4 }}
+                  spacing={{ base: 0, sm: 4, lg: 0 }}
                   align="center"
                   justify="center"
                   p={{ base: 6, sm: 8, md: 14 }}
@@ -156,9 +153,10 @@ const HarvestGamesContainer = () => {
                   </Flex>
                   <Text
                     fontFamily="'CodeBold'"
-                    fontSize={{ base: 'xl', sm: '2xl' }}
+                    fontSize={{ base: '17px', sm: '2xl', lg: '30px' }}
                     textTransform="uppercase"
-                    letterSpacing="0.12em"
+                    letterSpacing={{ base: '0.51px', sm: '0.2em', md: '0.2em', lg: '0.9px' }}
+                    fontWeight={{ base: '400', sm: '700', md: '700', lg: '700' }}
                     align="center"
                   >
                     {card.title}
@@ -179,11 +177,11 @@ const HarvestGamesContainer = () => {
               bgGradient="linear(90deg, #EBC300 0%, #F8CC30 29.81%, #FFF2B2 47.6%, #DFBC15 100%)"
               bgClip="text"
               color="transparent"
-              sx={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
               transform={{
-                base: 'translateY(-20px)',
-                sm: 'translateY(-56px)',
-                md: 'translateY(-100px)',
+                base: 'translateY(-10px)',
+                sm: 'translateY(-20px)',
+                md: 'translateY(-60px)', 
+                lg: 'translateY(-140px)'
               }}
             >
               Harvest Games 2025
