@@ -55,7 +55,6 @@ const HarvestGamesContainer = () => {
       bgPosition="center"
       py={containerPaddingY}
     >
-      
       {activeContent ? (
         <Box position="relative" zIndex={2} w="full" px={{ base: 3, sm: 6, md: 8 }}>
           {activeContent}
