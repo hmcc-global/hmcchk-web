@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import {
   Box,
   Button,
@@ -6,7 +6,11 @@ import {
   Icon,
   Image,
   Input,
-  Select,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
   Text,
   VStack,
 } from '@chakra-ui/react';
@@ -25,6 +29,13 @@ const HarvestGamesInstructions = ({ onBack }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [imageLinks, setImageLinks] = useState([]);
+  const topRef = useRef(null);
+
+  const gameOptions = [
+    { value: '0', label: 'Game 1' },
+    { value: '1', label: 'Game 2' },
+    { value: '2', label: 'Game 3' },
+  ];
 
   const handleSubmit = async () => {
     if (!selectedGame || !password) {
@@ -88,10 +99,18 @@ const HarvestGamesInstructions = ({ onBack }) => {
     setIsAuthenticated(false);
     setErrorMessage('');
     setImageLinks([]);
+
+    if (typeof window !== 'undefined') {
+      requestAnimationFrame(() => {
+        topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
   };
 
   return (
     <VStack
+      ref={topRef}
       spacing={{ base: 6, sm: 7, md: 8 }}
       w="full"
       fontFamily="'CodeBold'"
@@ -99,13 +118,13 @@ const HarvestGamesInstructions = ({ onBack }) => {
       px={{ base: 3, sm: 4, md: 6, lg: 0 }}
       py={{ base: 4, sm: 6, md: 6, lg: 0 }}
       transform={{
-        base: 'translateY(-16px)',
-        sm: 'translateY(-18px)',
-        md: 'translateY(-24px)',
-        lg: 'translateY(-30px)',
+        base: 'translateY(-1rem)',
+        sm: 'translateY(-1.125rem)',
+        md: 'translateY(-1.5rem)',
+        lg: 'translateY(-1.875rem)',
       }}
     >
-      <Box w="full" maxW="720px">
+      <Box w="full" maxW="45rem">
         <Flex
           align="center"
           gap={{ base: 3, sm: 4 }}
@@ -115,18 +134,19 @@ const HarvestGamesInstructions = ({ onBack }) => {
           _hover={{ color: '#FFF769' }}
           justify="flex-start"
           wrap="wrap"
-          transform={{
-            base: 'none',
-            sm: 'translateX(-200px)',
-            md: 'translateX(-200px)',
-            lg: 'translateX(-270px)',
+          alignSelf="flex-start"
+          ml={{
+            base: '6vw',
+            sm: '15vw',
+            md: '14vw',
+            lg: '-15vw',
           }}
         >
           <Flex
-            w={{ base: '40px', sm: '44px', md: '48px' }}
-            h={{ base: '40px', sm: '44px', md: '48px' }}
+            w={{ base: '2.5rem', sm: '2.75rem', md: '3rem' }}
+            h={{ base: '2.5rem', sm: '2.75rem', md: '3rem' }}
             borderRadius="full"
-            border="1px solid rgba(255, 255, 255, 0.35)"
+            border="0.0625rem solid rgba(255, 255, 255, 0.35)"
             bg="rgba(0, 0, 0, 0.55)"
             align="center"
             justify="center"
@@ -139,11 +159,11 @@ const HarvestGamesInstructions = ({ onBack }) => {
           <Image
             src="/images/harvest-games/harvestgames_title.png"
             alt="Harvest Games Title"
-            h={{ base: '60px', sm: '70px', md: '90px', lg: '120px' }}
+            h={{ base: '3.75rem', sm: '4.375rem', md: '5.625rem', lg: '7.5rem' }}
             maxW={{
-              base: 'calc(100% - 64px)',
-              sm: 'calc(100% - 76px)',
-              md: '420px',
+              base: 'calc(100% - 4rem)',
+              sm: 'calc(100% - 4.75rem)',
+              md: '26.25rem',
               lg: '100%',
             }}
             objectFit="contain"
@@ -154,36 +174,36 @@ const HarvestGamesInstructions = ({ onBack }) => {
       <VStack
         spacing={{ base: 4, sm: 5, md: 6, lg: 8 }}
         w="full"
-        maxW="720px"
+        maxW="45rem"
         transform={{
-          base: 'translateY(-10px)',
-          sm: 'translateY(-14px)',
-          md: 'translateY(-28px)',
-          lg: 'translateY(-40px)',
+          base: 'translateY(-0.625rem)',
+          sm: 'translateY(-0.875rem)',
+          md: 'translateY(-1.75rem)',
+          lg: 'translateY(-2.5rem)',
         }}
       >
         <Box
           bg="rgba(0, 0, 0, 0.65)"
-          border="1px solid #474747"
-          borderRadius="8px"
-          px={{ base: 5, sm: 6, md: 8, lg: 8 }}
-          py={{ base: 5, sm: 6, md: 7, lg: 4 }}
+          border="0.0625rem solid #474747"
+          borderRadius="0.5rem"
+          px={{ base: '1.25rem', sm: '1.5rem', md: '2rem', lg: '2rem' }}
+          py={{ base: '1.25rem', sm: '1.5rem', md: '1.75rem', lg: '1rem' }}
           color="white"
           backgroundColor="rgba(0, 0, 0, 0.5)"
           textAlign="center"
-          boxShadow="0 3px 19px -103px rgba(74, 74, 74, 0.20)"
+          boxShadow="0 0.1875rem 1.1875rem -6.4375rem rgba(74, 74, 74, 0.20)"
         >
           <Flex align="center" gap={{ base: 2, sm: 3 }} justify="center">
             <Icon
               as={RiGamepadLine}
-              fontSize={{ base: '22px', sm: '28px', md: '36px', lg: '50px' }}
+              fontSize={{ base: '1.375rem', sm: '1.75rem', md: '2.25rem', lg: '3.125rem' }}
               color="white"
             />
             <Text
-              fontSize={{ base: '22px', sm: '28px', md: '36px', lg: '50px' }}
+              fontSize={{ base: '1.375rem', sm: '1.75rem', md: '2.25rem', lg: '3.125rem' }}
               textTransform="uppercase"
               whiteSpace="nowrap"
-              letterSpacing="1.5px"
+              letterSpacing="0.09375rem"
             >
               Game Instructions
             </Text>
@@ -198,45 +218,85 @@ const HarvestGamesInstructions = ({ onBack }) => {
             w="full"
           >
             <Text
-              fontSize={{ base: '14px', sm: 'md', md: '20px' }}
+              fontSize={{ base: '0.875rem', sm: 'md', md: '1.25rem' }}
               textTransform="uppercase"
-              letterSpacing={{ base: '0.42px', md: '0.6px', lg: '0.6px' }}
-              minW={{ base: 'auto', sm: '160px' }}
+              letterSpacing={{ base: '0.02625rem', md: '0.0375rem', lg: '0.0375rem' }}
+              minW={{ base: 'auto', sm: '10rem' }}
               flexShrink={0}
               color="#F8CC30"
             >
               Select Game:
             </Text>
-            <Select
-              value={selectedGame}
-              onChange={(event) => {
-                setSelectedGame(event.target.value);
-                setPassword('');
-                setIsAuthenticated(false);
-                setImageLinks([]);
-                setErrorMessage('');
-              }}
-              bg="#262626"
-              borderRadius="60px"
-              fontFamily="'CodeBold'"
-              fontSize={{ base: '16px', md: 'md', lg: '22px' }}
-              letterSpacing={{ base: '0.48px', md: '0.6px', lg: '0.6px' }}
-              fontWeight="700"
-              w='340px'
-              flex={{ base: 'none', sm: 1 }}
-              h={{ base: '42px', md: '48px' }}
-              align="center"
-              className="hg-select"
-              icon={<Icon as={RiArrowDownSLine} />}
-              iconColor="white"
-              iconSize="1.1rem"
-              borderColor="#262626"
-              _expanded={{ borderColor: '#FFF769', borderRadius: '60px' }}
-            >
-              <option value="0">Game 1</option>
-              <option value="1">Game 2</option>
-              <option value="2">Game 3</option>
-            </Select>
+            <Menu isLazy matchWidth gutter={4} placement="bottom-start">
+              {({ isOpen }) => (
+                <Box  w="18.75rem">
+                  <MenuButton
+                    as={Button}
+                    w="full"
+                    fontFamily="'CodeBold'"
+                    fontWeight="700"
+                    fontSize={{ base: '1rem', md: 'md', lg: '1.375rem' }}
+                    letterSpacing={{ base: '0.03rem', md: '0.0375rem', lg: '0.0375rem' }}
+                    color="white"
+                    bg="#262626"
+                    h={{ base: '2.625rem', md: '3rem', lg: '3.4375rem' }}
+                    borderRadius="3.75rem"
+                    borderColor={isOpen ? '#FFF769' : '#262626'}
+                    px={6}
+                    _hover={{ bg: '#262626' }}
+                    _active={{ bg: '#262626' }}
+                    _focus={{ boxShadow: '0 0 0 0.125rem #FFF769' }}
+                    rightIcon={<Icon as={RiArrowDownSLine} />}
+                  >
+                    {gameOptions.find((opt) => opt.value === selectedGame)?.label ?? 'Select Game'}
+                  </MenuButton>
+                  <MenuList
+                    mt={2}
+                    bg="#262626"
+                    borderRadius="1.25rem"
+                    py={2}
+                    px={0}
+                    border="0.0625rem solid #262626"
+                    overflow="hidden"
+                  >
+                    {gameOptions.map((option, index) => (
+                      <Fragment key={option.value}>
+                        <MenuItem
+                          onClick={() => {
+                            setSelectedGame(option.value);
+                            setPassword('');
+                            setIsAuthenticated(false);
+                            setImageLinks([]);
+                            setErrorMessage('');
+                          }}
+                          borderRadius="0"
+                          fontFamily="'CodeBold'"
+                          fontWeight="700"
+                          fontSize={{ base: '1rem', md: 'md', lg: '1.375rem' }}
+                          letterSpacing={{ base: '0.03rem', md: '0.0375rem', lg: '0.0375rem' }}
+                          color="white"
+                        textAlign="center"
+                        justifyContent="center"
+                          _hover={{ bg: 'rgba(255, 255, 255, 0.12)' }}
+                          _focus={{ bg: 'rgba(255, 255, 255, 0.12)' }}
+                          px={6}
+                          py={{ base: 2, md: 1 }}
+                        >
+                          {option.label}
+                        </MenuItem>
+                        {index < gameOptions.length - 1 && (
+                          <MenuDivider
+                            borderColor="rgba(255,255,255,0.15)"
+                            borderBottomWidth="0.0625rem"
+                            mx={6}
+                          />
+                        )}
+                      </Fragment>
+                    ))}
+                  </MenuList>
+                </Box>
+              )}
+            </Menu>
           </Flex>
         </VStack>
 
@@ -249,10 +309,10 @@ const HarvestGamesInstructions = ({ onBack }) => {
                 align={{ base: 'center', sm: 'center', md: 'center' }}
               >
                 <Text
-                  fontSize={{ base: 'sm', sm: 'md', md: '20px' }}
+                  fontSize={{ base: 'sm', sm: 'md', md: '1.25rem' }}
                   textTransform="uppercase"
-                  marginTop="20px"
-                  letterSpacing="0.6px"
+                  marginTop="1.25rem"
+                  letterSpacing="0.0375rem"
                   textAlign={{ base: 'center', sm: 'center' }}
                 >
                   Enter password for game instructions
@@ -263,18 +323,18 @@ const HarvestGamesInstructions = ({ onBack }) => {
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                   bg="rgba(0, 0, 0, 0.45)"
-                  border="1px solid #474747"
+                  border="0.0625rem solid #474747"
                   backgroundColor="rgba(0, 0, 0, 0.45)"
                   color="white"
                   fontFamily="'CodeBold'"
                   fontSize={{ base: 'sm', md: 'md' }}
-                  maxW={{ base: '240px', sm: '260px', md: '280px', lg: '340px' }}
-                  h={{ base: '42px', md: '55px' }}
-                  _placeholder={{ color: '#7E7E7E', fontSize: '14px', letterSpacing: '0.42px', textAlign: 'center', align: 'center' }}
-                  boxShadow="0 3px 19px -103px rgba(74, 74, 74, 0.20)"
+                  maxW={{ base: '15rem', sm: '16.25rem', md: '17.5rem', lg: '21.25rem' }}
+                  h={{ base: '2.625rem', md: '3.4375rem' }}
+                  _placeholder={{ color: '#7E7E7E', fontSize: '0.875rem', letterSpacing: '0.02625rem', textAlign: 'center', align: 'center' }}
+                  boxShadow="0 0.1875rem 1.1875rem -6.4375rem rgba(74, 74, 74, 0.20)"
                   _focus={{
                     borderColor: '#FFF769',
-                    boxShadow: '0 0 0 1px #FFF769',
+                    boxShadow: '0 0 0 0.0625rem #FFF769',
                   }}
                   _hover={{ borderColor: '#FFF769' }}
                 />
@@ -285,11 +345,11 @@ const HarvestGamesInstructions = ({ onBack }) => {
                 bgGradient="linear-gradient(90deg, #EBC300 0%, #F8CC30 29.81%, #FFF2B2 47.6%, #DFBC15 100%)"
                 color="black"
                 fontFamily="'CodeBold'"
-                fontSize={{ base: '16px', md: 'md', lg: '22px' }}
-                letterSpacing={{ base: '2.56px', md: '3.52px', lg: '3.52px' }}
+                fontSize={{ base: '1rem', md: 'md', lg: '1.375rem' }}
+                letterSpacing={{ base: '0.16rem', md: '0.22rem', lg: '0.22rem' }}
                 px={{ base: 10, sm: 12, lg: 14 }}
                 py={{ base: 7, sm: 8, lg: 8 }}
-                borderRadius="30px"
+                borderRadius="1.875rem"
                 _hover={{
                   bgGradient:
                     'linear-gradient(90deg, #EBC300 0%, #F8CC30 29.81%, #FFF2B2 47.6%, #DFBC15 100%)',
@@ -305,8 +365,8 @@ const HarvestGamesInstructions = ({ onBack }) => {
           {errorMessage ? (
             <Text
               color="#F9455B"
-              fontSize={{ base: 'sm', md: 'md', lg: '14px' }}
-              letterSpacing="0.42px"
+              fontSize={{ base: 'sm', md: 'md', lg: '0.875rem' }}
+              letterSpacing="0.02625rem"
               fontFamily="'Futura'"
               textAlign="center"
               fontStyle="italic"
@@ -320,8 +380,8 @@ const HarvestGamesInstructions = ({ onBack }) => {
               spacing={5}
               mt={2}
               color="white"
-              fontSize={{ base: '14px', md: '20px' }}
-              letterSpacing={{ base: '0.42px', md: '0.6px', lg: '0.6px' }}
+              fontSize={{ base: '0.875rem', md: '1.25rem' }}
+              letterSpacing={{ base: '0.02625rem', md: '0.0375rem', lg: '0.0375rem' }}
               w="full"
             >
               <Text textTransform="uppercase" letterSpacing="0.1em">
@@ -333,13 +393,13 @@ const HarvestGamesInstructions = ({ onBack }) => {
                     key={index}
                     src={link}
                     alt={`Instruction ${index + 1}`}
-                    borderRadius="12px"
-                    w={{ base: '100%', sm: '90%', md: '80%', lg: '650px' }}
-                    maxW={{ base: '100%', md: '650px' }}
+                    borderRadius="0.75rem"
+                    w={{ base: '100%', sm: '90%', md: '80%', lg: '40.625rem' }}
+                    maxW={{ base: '100%', md: '40.625rem' }}
                     objectFit="contain"
                     objectPosition="center"
-                    border="1px solid rgba(255, 255, 255, 0.2)"
-                    boxShadow="0 8px 24px -12px rgba(0, 0, 0, 0.45)"
+                    border="0.0625rem solid rgba(255, 255, 255, 0.2)"
+                    boxShadow="0 0.5rem 1.5rem -0.75rem rgba(0, 0, 0, 0.45)"
                   />
                 ))
               ) : (
@@ -353,11 +413,11 @@ const HarvestGamesInstructions = ({ onBack }) => {
                   bgGradient="linear-gradient(90deg, #EBC300 0%, #F8CC30 29.81%, #FFF2B2 47.6%, #DFBC15 100%)"
                   color="black"
                   fontFamily="'CodeBold'"
-                  fontSize={{ base: '16px', md: 'md', lg: '22px' }}
-                  letterSpacing={{ base: '2.56px', md: '3.52px', lg: '3.52px' }}
+                  fontSize={{ base: '1rem', md: 'md', lg: '1.375rem' }}
+                  letterSpacing={{ base: '0.16rem', md: '0.22rem', lg: '0.22rem' }}
                   px={{ base: 10, sm: 12, lg: 14 }}
                   py={{ base: 7, sm: 8, lg: 8 }}
-                  borderRadius="30px"
+                  borderRadius="1.875rem"
                   _hover={{
                     bgGradient:
                       'linear-gradient(90deg, #EBC300 0%, #F8CC30 29.81%, #FFF2B2 47.6%, #DFBC15 100%)',

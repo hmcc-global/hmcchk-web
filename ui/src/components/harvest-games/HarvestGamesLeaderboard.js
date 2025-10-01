@@ -102,7 +102,7 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
     >
       <Box
         w="full"
-        maxW="720px"
+        maxW="45rem"
       >
         <Flex
           align="center"
@@ -113,25 +113,31 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
           _hover={{ color: '#FFF769' }}
           justify="flex-start"
           wrap="wrap"
-          transform={{ base: 'none', md: 'translateX(calc(maxW/2))', lg: 'translateX(calc(-270px))' }}
+          alignSelf="flex-start"
+          ml={{
+            base: '1vw',
+            sm: '1vw',
+            md: '1vw',
+            lg: '-18vw',
+          }}
         >
           <Flex
-            w={{ base: '40px', sm: '44px', md: '48px' }}
-            h={{ base: '40px', sm: '44px', md: '48px' }}
+            w={{ base: '2.5rem', sm: '2.75rem', md: '3rem' }}
+            h={{ base: '2.5rem', sm: '2.75rem', md: '3rem' }}
             borderRadius="full"
-            border="1px solid rgba(255, 255, 255, 0.35)"
+            border="0.0625rem solid rgba(255, 255, 255, 0.35)"
             bg="rgba(0, 0, 0, 0.55)"
             align="center"
             justify="center"
-            transform={{ base: 'none', md: 'translateY(-10px)' }}
+            transform={{ base: 'none', md: 'translateY(-0.625rem)' }}
           >
             <Icon as={RiArrowLeftLine} fontSize={{ base: 'lg', sm: 'xl', md: 'xl' }} />
           </Flex>
           <Image
             src="/images/harvest-games/harvestgames_title.png"
             alt="Harvest Games Title"
-            h={{ base: '60px', sm: '70px', md: '90px', lg: '120px' }}
-            maxW={{ base: 'calc(100% - 64px)', sm: 'calc(100% - 76px)', md: '420px', lg: '100%' }}
+            h={{ base: '3.75rem', sm: '4.375rem', md: '5.625rem', lg: '7.5rem' }}
+            maxW={{ base: 'calc(100% - 4rem)', sm: 'calc(100% - 4.75rem)', md: '26.25rem', lg: '100%' }}
             objectFit="contain"
           />
         </Flex>
@@ -140,32 +146,32 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
       <VStack
         spacing={{ base: 4, sm: 5, md: 6, lg: 8 }}
         w="full"
-        maxW="720px"
-        transform={{ base: 'translateY(-10px)', sm: 'translateY(-14px)', md: 'translateY(-28px)', lg: 'translateY(-40px)' }}
+        maxW="45rem"
+        transform={{ base: 'translateY(-0.625rem)', sm: 'translateY(-0.875rem)', md: 'translateY(-1.75rem)', lg: 'translateY(-2.5rem)' }}
       >
         <Box
           bg="rgba(0, 0, 0, 0.65)"
-          border="1px solid #474747"
-          borderRadius="8px"
-          px={{ base: 5, sm: 6, md: 8, lg: 8 }}
-          py={{ base: 5, sm: 6, md: 7, lg: 4}}
+          border="0.0625rem solid #474747"
+          borderRadius="0.5rem"
+          px={{ base: '1.25rem', sm: '1.5rem', md: '2rem', lg: '2rem' }}
+          py={{ base: '1.25rem', sm: '1.5rem', md: '1.75rem', lg: '1rem'}}
           color="white"
           backgroundColor="rgba(0, 0, 0, 0.5)"
           w="full"
           textAlign="center"
-          boxShadow="0 3px 19px -103px rgba(74, 74, 74, 0.20)"
+          boxShadow="0 0.1875rem 1.1875rem -6.4375rem rgba(74, 74, 74, 0.20)"
         >
           <Flex align="center" gap={{ base: 2, sm: 3 }} justify="center">
             <Icon
               as={RiFlagLine}
-              fontSize={{ base: '22px', sm: '28px', md: '36px', lg: '50px' }}
+              fontSize={{ base: '1.375rem', sm: '1.75rem', md: '2.25rem', lg: '3.125rem' }}
               color="white"
             />
             <Text
-              fontSize={{ base: '29px', sm: '28px', md: '36px', lg: '50px' }}
+              fontSize={{ base: '1.8125rem', sm: '1.75rem', md: '2.25rem', lg: '3.125rem' }}
               textTransform="uppercase"
               whiteSpace="nowrap"
-              letterSpacing={{ base: '0.881px', sm: '0.5px', md: '0.6px', lg: '1.5px' }}
+              letterSpacing={{ base: '0.0550625rem', sm: '0.03125rem', md: '0.0375rem', lg: '0.09375rem' }}
             >
               Leaderboard
             </Text>
@@ -174,27 +180,27 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
 
         <Box
           bg="rgba(0, 0, 0, 0.6)"
-          border="1px solid #474747"
-          borderRadius="8px"
-          px={{ base: 3, sm: 4, md: 6, lg: 8 }}
-          py={{ base: 4, sm: 5, md: 7, lg: 8 }}
+          border="0.0625rem solid #474747"
+          borderRadius="0.5rem"
+          px={{ base: '0.75rem', sm: '1rem', md: '1.5rem', lg: '2rem' }}
+          py={{ base: '1rem', sm: '1.25rem', md: '1.75rem', lg: '2rem' }}
           color="white"
           backgroundColor="rgba(0, 0, 0, 0.5)"
           w="full"
-          boxShadow="0 3px 19px -103px rgba(74, 74, 74, 0.20)"
+          boxShadow="0 0.1875rem 1.1875rem -6.4375rem rgba(74, 74, 74, 0.20)"
         >
           <Box overflowX={{ base: 'auto', md: 'visible' }}>
             <Table
               variant="unstyled"
               color="white"
               overflow="hidden"
-              letterSpacing={{ base: '0.45px', sm: '0.5px', md: '0.6px' }}
-              minW={{ base: '100%', sm: '520px' }}
+              letterSpacing={{ base: '0.028125rem', sm: '0.03125rem', md: '0.0375rem' }}
+              minW={{ base: '100%', sm: '32.5rem' }}
               fontFamily="'CodeBold'"
             >
               <Thead>
                 <Tr
-                  fontSize={{ base: '13px', sm: '15px', md: '18px', lg: '20px' }}
+                  fontSize={{ base: '0.8125rem', sm: '0.9375rem', md: '1.125rem', lg: '1.25rem' }}
                   textTransform="uppercase"
                   fontFamily="'CodeBold'"
                 >
@@ -205,7 +211,7 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                     fontFamily="'CodeBold'"
                     py={{ base: 2, sm: 3, md: 4, lg: 5 }}
                     px={{ base: 2, sm: 3, md: 4 }}
-                    fontSize={{ base: '15px', sm: '15px', md: '20px', lg: '20px' }}
+                    fontSize={{ base: '0.9375rem', sm: '0.9375rem', md: '1.25rem', lg: '1.25rem' }}
                   >
                     Rank #
                   </Th>
@@ -216,7 +222,7 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                     fontFamily="'CodeBold'"
                     py={{ base: 2, sm: 3, md: 4, lg: 5 }}
                     px={{ base: 2, sm: 3, md: 4 }}
-                    fontSize={{ base: '15px', sm: '15px', md: '20px', lg: '20px' }}
+                    fontSize={{ base: '0.9375rem', sm: '0.9375rem', md: '1.25rem', lg: '1.25rem' }}
                   >
                     Life Group Name
                   </Th>
@@ -227,7 +233,7 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                     py={{ base: 2, sm: 3, md: 4, lg: 5 }}
                     px={{ base: 2, sm: 3, md: 4 }}
                     fontFamily="'CodeBold'"
-                    fontSize={{ base: '15px', sm: '15px', md: '20px', lg: '20px' }}
+                    fontSize={{ base: '0.9375rem', sm: '0.9375rem', md: '1.25rem', lg: '1.25rem' }}
                   >
                     Score
                   </Th>
@@ -265,8 +271,8 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                   tableData.map((entry) => (
                     <Tr
                       key={entry.id}
-                      fontSize={{ base: '13px', sm: '15px', md: '17px', lg: '20px' }}
-                      borderBottom="1px solid rgba(255, 255, 255, 0.08)"
+                      fontSize={{ base: '0.8125rem', sm: '0.9375rem', md: '1.0625rem', lg: '1.25rem' }}
+                      borderBottom="0.0625rem solid rgba(255, 255, 255, 0.08)"
                       _last={{ borderBottom: 'none' }}
                     >
                       <Td
