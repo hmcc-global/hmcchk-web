@@ -273,6 +273,12 @@ const MainContainer = () => {
         />
         <PrivateRoute
           exact
+          path="/admin/announcements"
+          permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
+          component={AdminAnnouncementContainer}
+        />
+        <PrivateRoute
+          exact
           path="/admin/formViewer"
           permissions={['tc', 'admin', 'stewardship']}
           component={AdminFormDataViewer}
