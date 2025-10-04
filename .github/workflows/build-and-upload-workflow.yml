@@ -41,6 +41,12 @@ jobs:
       - name: "Create server /.env"
         run: |
           echo "${{ secrets.SERVER_ENV }}" > server/.env
+      - name: "Create robots.txt for non-PROD envs"
+        if: ${{ github.event.inputs.deploy_env != 'prod' }}
+        run: |
+          echo "# https://www.robotstxt.org/robotstxt.html" > ui/public/robots.txt
+          echo "User-agent: *" >> ui/public/robots.txt
+          echo "Disallow: /" >> ui/public/robots.txt
       - name: "Build ui/ folder"
         run: |
           cd ui && yarn run build
