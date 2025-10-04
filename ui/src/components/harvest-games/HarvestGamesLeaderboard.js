@@ -76,16 +76,20 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
         return nameA.localeCompare(nameB);
       }
 
-      return scoreB - scoreA;
+      return scoreA - scoreB;
     });
 
     return sorted.map((entry, index) => {
       const overall = Number(entry?.overallRanking);
+      const game = entry?.gameRankings;
+
       return {
         id: entry?.id || entry?._id || index,
-        rank: index + 1,
+        rank: Number.isFinite(overall) && overall >= 0 ? overall : '—',
         lgName: entry?.lgName || '—',
-        score: Number.isFinite(overall) && overall >= 0 ? overall : '—',
+        game1: Number.isFinite(game[0]) && game[0] >= 0 ? game[0] : '—',
+        game2: Number.isFinite(game[1]) && game[1] >= 0 ? game[1] : '—',
+        game3: Number.isFinite(game[2]) && game[2] >= 0 ? game[2] : '—',
       };
     });
   }, [rankings]);
@@ -98,12 +102,14 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
       align="center"
       px={{ base: 3, sm: 4, md: 6, lg: 0 }}
       py={{ base: 4, sm: 6, md: 6, lg: 0 }}
-      transform={{ base: 'translateY(-16px)', sm: 'translateY(-18px)', md: 'translateY(-24px)', lg: 'translateY(-30px)' }}
+      transform={{
+        base: 'translateY(-16px)',
+        sm: 'translateY(-18px)',
+        md: 'translateY(-24px)',
+        lg: 'translateY(-30px)',
+      }}
     >
-      <Box
-        w="full"
-        maxW="45rem"
-      >
+      <Box w="full" maxW="45rem">
         <Flex
           align="center"
           gap={{ base: 3, sm: 4 }}
@@ -131,13 +137,26 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
             justify="center"
             transform={{ base: 'none', md: 'translateY(-0.625rem)' }}
           >
-            <Icon as={RiArrowLeftLine} fontSize={{ base: 'lg', sm: 'xl', md: 'xl' }} />
+            <Icon
+              as={RiArrowLeftLine}
+              fontSize={{ base: 'lg', sm: 'xl', md: 'xl' }}
+            />
           </Flex>
           <Image
             src="/images/harvest-games/harvestgames_title.png"
             alt="Harvest Games Title"
-            h={{ base: '3.75rem', sm: '4.375rem', md: '5.625rem', lg: '7.5rem' }}
-            maxW={{ base: 'calc(100% - 4rem)', sm: 'calc(100% - 4.75rem)', md: '26.25rem', lg: '100%' }}
+            h={{
+              base: '3.75rem',
+              sm: '4.375rem',
+              md: '5.625rem',
+              lg: '7.5rem',
+            }}
+            maxW={{
+              base: 'calc(100% - 4rem)',
+              sm: 'calc(100% - 4.75rem)',
+              md: '26.25rem',
+              lg: '100%',
+            }}
             objectFit="contain"
           />
         </Flex>
@@ -147,14 +166,19 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
         spacing={{ base: 4, sm: 5, md: 6, lg: 8 }}
         w="full"
         maxW="45rem"
-        transform={{ base: 'translateY(-0.625rem)', sm: 'translateY(-0.875rem)', md: 'translateY(-1.75rem)', lg: 'translateY(-2.5rem)' }}
+        transform={{
+          base: 'translateY(-0.625rem)',
+          sm: 'translateY(-0.875rem)',
+          md: 'translateY(-1.75rem)',
+          lg: 'translateY(-2.5rem)',
+        }}
       >
         <Box
           bg="rgba(0, 0, 0, 0.65)"
           border="0.0625rem solid #474747"
           borderRadius="0.5rem"
           px={{ base: '1.25rem', sm: '1.5rem', md: '2rem', lg: '2rem' }}
-          py={{ base: '1.25rem', sm: '1.5rem', md: '1.75rem', lg: '1rem'}}
+          py={{ base: '1.25rem', sm: '1.5rem', md: '1.75rem', lg: '1rem' }}
           color="white"
           backgroundColor="rgba(0, 0, 0, 0.5)"
           w="full"
@@ -164,14 +188,29 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
           <Flex align="center" gap={{ base: 2, sm: 3 }} justify="center">
             <Icon
               as={RiFlagLine}
-              fontSize={{ base: '1.375rem', sm: '1.75rem', md: '2.25rem', lg: '3.125rem' }}
+              fontSize={{
+                base: '1.375rem',
+                sm: '1.75rem',
+                md: '2.25rem',
+                lg: '3.125rem',
+              }}
               color="white"
             />
             <Text
-              fontSize={{ base: '1.8125rem', sm: '1.75rem', md: '2.25rem', lg: '3.125rem' }}
+              fontSize={{
+                base: '1.8125rem',
+                sm: '1.75rem',
+                md: '2.25rem',
+                lg: '3.125rem',
+              }}
               textTransform="uppercase"
               whiteSpace="nowrap"
-              letterSpacing={{ base: '0.0550625rem', sm: '0.03125rem', md: '0.0375rem', lg: '0.09375rem' }}
+              letterSpacing={{
+                base: '0.0550625rem',
+                sm: '0.03125rem',
+                md: '0.0375rem',
+                lg: '0.09375rem',
+              }}
             >
               Leaderboard
             </Text>
@@ -193,14 +232,22 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
             <Table
               variant="unstyled"
               color="white"
-              overflow="hidden"
-              letterSpacing={{ base: '0.028125rem', sm: '0.03125rem', md: '0.0375rem' }}
+              letterSpacing={{
+                base: '0.028125rem',
+                sm: '0.03125rem',
+                md: '0.0375rem',
+              }}
               minW={{ base: '100%', sm: '32.5rem' }}
               fontFamily="'CodeBold'"
             >
               <Thead>
                 <Tr
-                  fontSize={{ base: '0.8125rem', sm: '0.9375rem', md: '1.125rem', lg: '1.25rem' }}
+                  fontSize={{
+                    base: '0.8125rem',
+                    sm: '0.9375rem',
+                    md: '1.125rem',
+                    lg: '1.25rem',
+                  }}
                   textTransform="uppercase"
                   fontFamily="'CodeBold'"
                 >
@@ -211,7 +258,12 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                     fontFamily="'CodeBold'"
                     py={{ base: 2, sm: 3, md: 4, lg: 5 }}
                     px={{ base: 2, sm: 3, md: 4 }}
-                    fontSize={{ base: '0.9375rem', sm: '0.9375rem', md: '1.25rem', lg: '1.25rem' }}
+                    fontSize={{
+                      base: '0.9375rem',
+                      sm: '0.9375rem',
+                      md: '1.25rem',
+                      lg: '1.25rem',
+                    }}
                   >
                     Rank #
                   </Th>
@@ -222,7 +274,12 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                     fontFamily="'CodeBold'"
                     py={{ base: 2, sm: 3, md: 4, lg: 5 }}
                     px={{ base: 2, sm: 3, md: 4 }}
-                    fontSize={{ base: '0.9375rem', sm: '0.9375rem', md: '1.25rem', lg: '1.25rem' }}
+                    fontSize={{
+                      base: '0.9375rem',
+                      sm: '0.9375rem',
+                      md: '1.25rem',
+                      lg: '1.25rem',
+                    }}
                   >
                     Life Group Name
                   </Th>
@@ -233,9 +290,46 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                     py={{ base: 2, sm: 3, md: 4, lg: 5 }}
                     px={{ base: 2, sm: 3, md: 4 }}
                     fontFamily="'CodeBold'"
-                    fontSize={{ base: '0.9375rem', sm: '0.9375rem', md: '1.25rem', lg: '1.25rem' }}
+                    fontSize={{
+                      base: '0.9375rem',
+                      sm: '0.9375rem',
+                      md: '1.25rem',
+                      lg: '1.25rem',
+                    }}
                   >
-                    Score
+                    GAME 1
+                  </Th>
+                  <Th
+                    textAlign="center"
+                    whiteSpace="normal"
+                    wordBreak="break-word"
+                    py={{ base: 2, sm: 3, md: 4, lg: 5 }}
+                    px={{ base: 2, sm: 3, md: 4 }}
+                    fontFamily="'CodeBold'"
+                    fontSize={{
+                      base: '0.9375rem',
+                      sm: '0.9375rem',
+                      md: '1.25rem',
+                      lg: '1.25rem',
+                    }}
+                  >
+                    GAME 2
+                  </Th>
+                  <Th
+                    textAlign="center"
+                    whiteSpace="normal"
+                    wordBreak="break-word"
+                    py={{ base: 2, sm: 3, md: 4, lg: 5 }}
+                    px={{ base: 2, sm: 3, md: 4 }}
+                    fontFamily="'CodeBold'"
+                    fontSize={{
+                      base: '0.9375rem',
+                      sm: '0.9375rem',
+                      md: '1.25rem',
+                      lg: '1.25rem',
+                    }}
+                  >
+                    GAME 3
                   </Th>
                 </Tr>
               </Thead>
@@ -271,7 +365,12 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                   tableData.map((entry) => (
                     <Tr
                       key={entry.id}
-                      fontSize={{ base: '0.8125rem', sm: '0.9375rem', md: '1.0625rem', lg: '1.25rem' }}
+                      fontSize={{
+                        base: '0.8125rem',
+                        sm: '0.9375rem',
+                        md: '1.0625rem',
+                        lg: '1.25rem',
+                      }}
                       borderBottom="0.0625rem solid rgba(255, 255, 255, 0.08)"
                       _last={{ borderBottom: 'none' }}
                     >
@@ -279,7 +378,7 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                         color={entry.rank === 1 ? '#FFD75A' : 'inherit'}
                         textAlign="center"
                         whiteSpace="normal"
-                        py={{ base: 2, sm: 3, md: 4, lg: 3}}
+                        py={{ base: 2, sm: 3, md: 4, lg: 3 }}
                         px={{ base: 2, sm: 3, md: 4 }}
                       >
                         {entry.rank}
@@ -302,7 +401,25 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                         py={{ base: 2, sm: 3, md: 4, lg: 3 }}
                         px={{ base: 2, sm: 3, md: 4 }}
                       >
-                        {entry.score}
+                        {entry.game1}
+                      </Td>
+                      <Td
+                        textAlign="center"
+                        color={entry.rank === 1 ? '#FFD75A' : 'inherit'}
+                        whiteSpace="normal"
+                        py={{ base: 2, sm: 3, md: 4, lg: 3 }}
+                        px={{ base: 2, sm: 3, md: 4 }}
+                      >
+                        {entry.game2}
+                      </Td>
+                      <Td
+                        textAlign="center"
+                        color={entry.rank === 1 ? '#FFD75A' : 'inherit'}
+                        whiteSpace="normal"
+                        py={{ base: 2, sm: 3, md: 4, lg: 3 }}
+                        px={{ base: 2, sm: 3, md: 4 }}
+                      >
+                        {entry.game3}
                       </Td>
                     </Tr>
                   ))

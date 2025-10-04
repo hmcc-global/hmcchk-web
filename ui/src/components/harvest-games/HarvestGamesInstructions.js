@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useRef, useState, useEffect } from 'react';
 import {
   Box,
   Button,
@@ -13,6 +13,7 @@ import {
   MenuList,
   Text,
   VStack,
+  Link,
 } from '@chakra-ui/react';
 import './selectOverride.css';
 import { customAxios as axios } from '../helpers/customAxios';
@@ -21,34 +22,77 @@ import {
   RiArrowLeftLine,
   RiGamepadLine,
 } from 'react-icons/ri';
+import Cookies from 'js-cookie';
 
 const HarvestGamesInstructions = ({ onBack }) => {
   const [selectedGame, setSelectedGame] = useState('0');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [imageLinks, setImageLinks] = useState([]);
+  const [gameType, setGameType] = useState(() => {
+    // Load gameType from cookies if available
+    const savedGameType = Cookies.get('gameType');
+    return savedGameType
+      ? JSON.parse(savedGameType)
+      : [
+          { imageLinks: [], isAuthenticated: false },
+          { imageLinks: [], isAuthenticated: false },
+          { imageLinks: [], isAuthenticated: false },
+          { googleLinks: '', isAuthenticated: false },
+          { googleLinks: '', isAuthenticated: false },
+          { googleLinks: '', isAuthenticated: false },
+        ];
+  });
+
+  const isOutDoor = [true, true, true, false, false, false];
+
   const topRef = useRef(null);
 
+  useEffect(() => {
+    Cookies.set('gameType', JSON.stringify(gameType), { expires: 1 });
+  }, [gameType]);
+
   const gameOptions = [
-    { value: '0', label: 'Game 1' },
-    { value: '1', label: 'Game 2' },
-    { value: '2', label: 'Game 3' },
+    { value: '0', label: 'OutDoor Game 1' },
+    { value: '1', label: 'OutDoor Game 2' },
+    { value: '2', label: 'OutDoor Game 3' },
+    { value: '3', label: 'InDoor Game 1' },
+    { value: '4', label: 'InDoor Game 2' },
+    { value: '5', label: 'InDoor Game 3' },
   ];
+
+  const updateGameImage = (index, newImageUrl, isAuthenticated) => {
+    setGameType((prevGameTypes) => {
+      const newGameTypes = [...prevGameTypes];
+      newGameTypes[index] = {
+        ...newGameTypes[index],
+        imageLinks: newImageUrl,
+        isAuthenticated: isAuthenticated,
+      };
+      return newGameTypes;
+    });
+  };
+
+  const updateGameLink = (index, newGoogleLink, isAuthenticated) => {
+    setGameType((prevGameTypes) => {
+      const newGameTypes = [...prevGameTypes];
+      newGameTypes[index] = {
+        ...newGameTypes[index],
+        googleLinks: newGoogleLink,
+        isAuthenticated: isAuthenticated,
+      };
+      return newGameTypes;
+    });
+  };
 
   const handleSubmit = async () => {
     if (!selectedGame || !password) {
       setErrorMessage('Please select a game and enter the password.');
-      setIsAuthenticated(false);
-      setImageLinks([]);
       return;
     }
 
     setIsSubmitting(true);
     setErrorMessage('');
-    setIsAuthenticated(false);
-    setImageLinks([]);
 
     try {
       const { data } = await axios.get('/api/hgRankings/authenticate', {
@@ -58,13 +102,13 @@ const HarvestGamesInstructions = ({ onBack }) => {
         },
       });
 
-      const imageLinkData = data?.imageLinkData ?? [];
-
-      if (Array.isArray(imageLinkData) && imageLinkData.length > 0) {
-        setImageLinks(imageLinkData);
-        setIsAuthenticated(true);
+      if (selectedGame > 2) {
+        const googleLinkData = data?.googleLinkData ?? '';
+        console.log(googleLinkData);
+        updateGameLink(Number(selectedGame), googleLinkData, true);
       } else {
-        setIsAuthenticated(true);
+        const imageLinkData = data?.imageLinkData ?? [];
+        updateGameImage(Number(selectedGame), imageLinkData, true);
       }
     } catch (err) {
       const responseMessage = err?.response?.data;
@@ -80,10 +124,14 @@ const HarvestGamesInstructions = ({ onBack }) => {
           'Unable to verify password right now. Please try again later.'
         );
       }
-      setIsAuthenticated(false);
-      setImageLinks([]);
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
     }
   };
 
@@ -92,13 +140,11 @@ const HarvestGamesInstructions = ({ onBack }) => {
     if (Number.isNaN(currentGame)) return;
 
     const nextGameId = currentGame + 1;
-    if (nextGameId > 2) return;
+    if (nextGameId > 5) return;
 
     setSelectedGame(String(nextGameId));
     setPassword('');
-    setIsAuthenticated(false);
     setErrorMessage('');
-    setImageLinks([]);
 
     if (typeof window !== 'undefined') {
       requestAnimationFrame(() => {
@@ -159,7 +205,12 @@ const HarvestGamesInstructions = ({ onBack }) => {
           <Image
             src="/images/harvest-games/harvestgames_title.png"
             alt="Harvest Games Title"
-            h={{ base: '3.75rem', sm: '4.375rem', md: '5.625rem', lg: '7.5rem' }}
+            h={{
+              base: '3.75rem',
+              sm: '4.375rem',
+              md: '5.625rem',
+              lg: '7.5rem',
+            }}
             maxW={{
               base: 'calc(100% - 4rem)',
               sm: 'calc(100% - 4.75rem)',
@@ -196,11 +247,21 @@ const HarvestGamesInstructions = ({ onBack }) => {
           <Flex align="center" gap={{ base: 2, sm: 3 }} justify="center">
             <Icon
               as={RiGamepadLine}
-              fontSize={{ base: '1.375rem', sm: '1.75rem', md: '2.25rem', lg: '3.125rem' }}
+              fontSize={{
+                base: '1.375rem',
+                sm: '1.75rem',
+                md: '2.25rem',
+                lg: '3.125rem',
+              }}
               color="white"
             />
             <Text
-              fontSize={{ base: '1.375rem', sm: '1.75rem', md: '2.25rem', lg: '3.125rem' }}
+              fontSize={{
+                base: '1.375rem',
+                sm: '1.75rem',
+                md: '2.25rem',
+                lg: '3.125rem',
+              }}
               textTransform="uppercase"
               whiteSpace="nowrap"
               letterSpacing="0.09375rem"
@@ -220,7 +281,11 @@ const HarvestGamesInstructions = ({ onBack }) => {
             <Text
               fontSize={{ base: '0.875rem', sm: 'md', md: '1.25rem' }}
               textTransform="uppercase"
-              letterSpacing={{ base: '0.02625rem', md: '0.0375rem', lg: '0.0375rem' }}
+              letterSpacing={{
+                base: '0.02625rem',
+                md: '0.0375rem',
+                lg: '0.0375rem',
+              }}
               minW={{ base: 'auto', sm: '10rem' }}
               flexShrink={0}
               color="#F8CC30"
@@ -229,14 +294,18 @@ const HarvestGamesInstructions = ({ onBack }) => {
             </Text>
             <Menu isLazy matchWidth gutter={4} placement="bottom-start">
               {({ isOpen }) => (
-                <Box  w="18.75rem">
+                <Box w="18.75rem">
                   <MenuButton
                     as={Button}
                     w="full"
                     fontFamily="'CodeBold'"
                     fontWeight="700"
                     fontSize={{ base: '1rem', md: 'md', lg: '1.375rem' }}
-                    letterSpacing={{ base: '0.03rem', md: '0.0375rem', lg: '0.0375rem' }}
+                    letterSpacing={{
+                      base: '0.03rem',
+                      md: '0.0375rem',
+                      lg: '0.0375rem',
+                    }}
                     color="white"
                     bg="#262626"
                     h={{ base: '2.625rem', md: '3rem', lg: '3.4375rem' }}
@@ -248,7 +317,8 @@ const HarvestGamesInstructions = ({ onBack }) => {
                     _focus={{ boxShadow: '0 0 0 0.125rem #FFF769' }}
                     rightIcon={<Icon as={RiArrowDownSLine} />}
                   >
-                    {gameOptions.find((opt) => opt.value === selectedGame)?.label ?? 'Select Game'}
+                    {gameOptions.find((opt) => opt.value === selectedGame)
+                      ?.label ?? 'Select Game'}
                   </MenuButton>
                   <MenuList
                     mt={2}
@@ -265,18 +335,20 @@ const HarvestGamesInstructions = ({ onBack }) => {
                           onClick={() => {
                             setSelectedGame(option.value);
                             setPassword('');
-                            setIsAuthenticated(false);
-                            setImageLinks([]);
                             setErrorMessage('');
                           }}
                           borderRadius="0"
                           fontFamily="'CodeBold'"
                           fontWeight="700"
                           fontSize={{ base: '1rem', md: 'md', lg: '1.375rem' }}
-                          letterSpacing={{ base: '0.03rem', md: '0.0375rem', lg: '0.0375rem' }}
+                          letterSpacing={{
+                            base: '0.03rem',
+                            md: '0.0375rem',
+                            lg: '0.0375rem',
+                          }}
                           color="white"
-                        textAlign="center"
-                        justifyContent="center"
+                          textAlign="center"
+                          justifyContent="center"
                           _hover={{ bg: 'rgba(255, 255, 255, 0.12)' }}
                           _focus={{ bg: 'rgba(255, 255, 255, 0.12)' }}
                           px={6}
@@ -301,7 +373,7 @@ const HarvestGamesInstructions = ({ onBack }) => {
         </VStack>
 
         <VStack spacing={{ base: 5, md: 10 }} align="stretch">
-          {!isAuthenticated && (
+          {!gameType[selectedGame].isAuthenticated && (
             <>
               <Flex
                 direction="column"
@@ -328,15 +400,28 @@ const HarvestGamesInstructions = ({ onBack }) => {
                   color="white"
                   fontFamily="'CodeBold'"
                   fontSize={{ base: 'sm', md: 'md' }}
-                  maxW={{ base: '15rem', sm: '16.25rem', md: '17.5rem', lg: '21.25rem' }}
+                  maxW={{
+                    base: '15rem',
+                    sm: '16.25rem',
+                    md: '17.5rem',
+                    lg: '21.25rem',
+                  }}
+                  textAlign="center"
                   h={{ base: '2.625rem', md: '3.4375rem' }}
-                  _placeholder={{ color: '#7E7E7E', fontSize: '0.875rem', letterSpacing: '0.02625rem', textAlign: 'center', align: 'center' }}
+                  _placeholder={{
+                    color: '#7E7E7E',
+                    fontSize: '0.875rem',
+                    letterSpacing: '0.02625rem',
+                    textAlign: 'center',
+                    align: 'center',
+                  }}
                   boxShadow="0 0.1875rem 1.1875rem -6.4375rem rgba(74, 74, 74, 0.20)"
                   _focus={{
                     borderColor: '#FFF769',
                     boxShadow: '0 0 0 0.0625rem #FFF769',
                   }}
                   _hover={{ borderColor: '#FFF769' }}
+                  onKeyDown={(e) => handleKeyDown(e)}
                 />
               </Flex>
 
@@ -346,7 +431,11 @@ const HarvestGamesInstructions = ({ onBack }) => {
                 color="black"
                 fontFamily="'CodeBold'"
                 fontSize={{ base: '1rem', md: 'md', lg: '1.375rem' }}
-                letterSpacing={{ base: '0.16rem', md: '0.22rem', lg: '0.22rem' }}
+                letterSpacing={{
+                  base: '0.16rem',
+                  md: '0.22rem',
+                  lg: '0.22rem',
+                }}
                 px={{ base: 10, sm: 12, lg: 14 }}
                 py={{ base: 7, sm: 8, lg: 8 }}
                 borderRadius="1.875rem"
@@ -374,47 +463,102 @@ const HarvestGamesInstructions = ({ onBack }) => {
               {errorMessage}
             </Text>
           ) : null}
-          {isAuthenticated && (
+          {/* OutDoor Instructions */}
+          {gameType[selectedGame].isAuthenticated && isOutDoor[selectedGame] && (
             <VStack
               align="center"
               spacing={5}
               mt={2}
               color="white"
               fontSize={{ base: '0.875rem', md: '1.25rem' }}
-              letterSpacing={{ base: '0.02625rem', md: '0.0375rem', lg: '0.0375rem' }}
+              letterSpacing={{
+                base: '0.02625rem',
+                md: '0.0375rem',
+                lg: '0.0375rem',
+              }}
               w="full"
             >
               <Text textTransform="uppercase" letterSpacing="0.1em">
                 Instructions
               </Text>
-              {imageLinks.length > 0 ? (
-                imageLinks.map((link, index) => (
-                  <Image
-                    key={index}
-                    src={link}
-                    alt={`Instruction ${index + 1}`}
-                    borderRadius="0.75rem"
-                    w={{ base: '100%', sm: '90%', md: '80%', lg: '40.625rem' }}
-                    maxW={{ base: '100%', md: '40.625rem' }}
-                    objectFit="contain"
-                    objectPosition="center"
-                    border="0.0625rem solid rgba(255, 255, 255, 0.2)"
-                    boxShadow="0 0.5rem 1.5rem -0.75rem rgba(0, 0, 0, 0.45)"
-                  />
-                ))
-              ) : (
-                <Text color="rgba(255,255,255,0.7)">
-                  Instructions will appear here once available.
-                </Text>
-              )}
-              {Number(selectedGame) < 2 && (
+              {gameType[selectedGame].imageLinks.map((link, index) => (
+                <Image
+                  key={index}
+                  src={link}
+                  alt={`Instruction ${index + 1}`}
+                  borderRadius="0.75rem"
+                  w={{ base: '100%', sm: '90%', md: '80%', lg: '40.625rem' }}
+                  maxW={{ base: '100%', md: '40.625rem' }}
+                  objectFit="contain"
+                  objectPosition="center"
+                  border="0.0625rem solid rgba(255, 255, 255, 0.2)"
+                  boxShadow="0 0.5rem 1.5rem -0.75rem rgba(0, 0, 0, 0.45)"
+                />
+              ))}
+              {Number(selectedGame) < 5 && (
                 <Button
                   mt={4}
                   bgGradient="linear-gradient(90deg, #EBC300 0%, #F8CC30 29.81%, #FFF2B2 47.6%, #DFBC15 100%)"
                   color="black"
                   fontFamily="'CodeBold'"
                   fontSize={{ base: '1rem', md: 'md', lg: '1.375rem' }}
-                  letterSpacing={{ base: '0.16rem', md: '0.22rem', lg: '0.22rem' }}
+                  letterSpacing={{
+                    base: '0.16rem',
+                    md: '0.22rem',
+                    lg: '0.22rem',
+                  }}
+                  px={{ base: 10, sm: 12, lg: 14 }}
+                  py={{ base: 7, sm: 8, lg: 8 }}
+                  borderRadius="1.875rem"
+                  _hover={{
+                    bgGradient:
+                      'linear-gradient(90deg, #EBC300 0%, #F8CC30 29.81%, #FFF2B2 47.6%, #DFBC15 100%)',
+                  }}
+                  onClick={handleNextGame}
+                >
+                  Next Game →
+                </Button>
+              )}
+            </VStack>
+          )}
+          {/* InDoor Instructions */}
+          {gameType[selectedGame].isAuthenticated && !isOutDoor[selectedGame] && (
+            <VStack
+              align="center"
+              spacing={5}
+              mt={2}
+              color="white"
+              fontSize={{ base: '0.875rem', md: '1.25rem' }}
+              letterSpacing={{
+                base: '0.02625rem',
+                md: '0.0375rem',
+                lg: '0.0375rem',
+              }}
+              w="full"
+            >
+              <Text
+                textTransform="uppercase"
+                textAlign="center"
+                letterSpacing="0.1em"
+              >
+                Click The Link Below <br /> For Instructions
+              </Text>
+              <Link href={gameType[selectedGame].googleLinks} isExternal>
+                <Text as="u">Game Instruction Link</Text>
+              </Link>
+
+              {Number(selectedGame) < 5 && (
+                <Button
+                  mt={4}
+                  bgGradient="linear-gradient(90deg, #EBC300 0%, #F8CC30 29.81%, #FFF2B2 47.6%, #DFBC15 100%)"
+                  color="black"
+                  fontFamily="'CodeBold'"
+                  fontSize={{ base: '1rem', md: 'md', lg: '1.375rem' }}
+                  letterSpacing={{
+                    base: '0.16rem',
+                    md: '0.22rem',
+                    lg: '0.22rem',
+                  }}
                   px={{ base: 10, sm: 12, lg: 14 }}
                   py={{ base: 7, sm: 8, lg: 8 }}
                   borderRadius="1.875rem"

@@ -50,7 +50,7 @@ export default function AdminHarvestGamesContainer(props) {
   const addNewRow = () => {
     const newRow = {
       lgName: '', // Default value for LIFE Group
-      gameRankings: { 0: 0, 1: 0, 2: 0 }, // Default values for games
+      gameRankings: { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }, // Default values for games
       overallRanking: 0, // Default overall ranking
     };
     setRankings((prevRankings) => [...prevRankings, newRow]);
@@ -134,6 +134,9 @@ export default function AdminHarvestGamesContainer(props) {
           params.data.gameRankings[colId] = newRanking;
           return true;
         }
+      } else if (params.data.lgName == 'ImageUrl') {
+        params.data.gameRankings[colId] = params.newValue;
+        return true;
       }
       alert('Invalid Ranking!');
       return false;
@@ -223,22 +226,43 @@ export default function AdminHarvestGamesContainer(props) {
       marryChildren: true,
       children: [
         {
-          headerName: 'Game 1',
+          headerName: 'OUT Game 1',
           colId: 0,
           valueGetter: gameRankingGetter,
           valueSetter: rankingSetter,
           valueFormatter: rankingFormatter,
         },
         {
-          headerName: 'Game 2',
+          headerName: 'OUT Game 2',
           colId: 1,
           valueGetter: gameRankingGetter,
           valueSetter: rankingSetter,
           valueFormatter: rankingFormatter,
         },
         {
-          headerName: 'Game 3',
+          headerName: 'OUT Game 3',
           colId: 2,
+          valueGetter: gameRankingGetter,
+          valueSetter: rankingSetter,
+          valueFormatter: rankingFormatter,
+        },
+        {
+          headerName: 'IN Game 1',
+          colId: 3,
+          valueGetter: gameRankingGetter,
+          valueSetter: rankingSetter,
+          valueFormatter: rankingFormatter,
+        },
+        {
+          headerName: 'IN Game 2',
+          colId: 4,
+          valueGetter: gameRankingGetter,
+          valueSetter: rankingSetter,
+          valueFormatter: rankingFormatter,
+        },
+        {
+          headerName: 'IN Game 3',
+          colId: 5,
           valueGetter: gameRankingGetter,
           valueSetter: rankingSetter,
           valueFormatter: rankingFormatter,

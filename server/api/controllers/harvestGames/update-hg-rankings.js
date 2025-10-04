@@ -12,12 +12,11 @@ module.exports = {
 
   exits: {
     success: {
-      description: 'Rankings have been updated successfully',
+      description: 'Rankings have been updated or created successfully',
     },
     invalid: {
       description: 'Failed to update rankings',
     },
-
     missingRequiredFields: {
       statusCode: 409,
       description: 'Please fill in the required fields.',
@@ -27,8 +26,9 @@ module.exports = {
   fn: async function ({ params }, exits) {
     const { id: lgRankingId, ...toUpdate } = params;
 
-    if (lgRankingId) {
-      try {
+    try {
+      if (lgRankingId) {
+        // Update existing ranking
         const data = await HGRankings.updateOne({
           _id: lgRankingId,
         }).set(toUpdate);
@@ -37,14 +37,17 @@ module.exports = {
           return exits.success(data);
         }
         return exits.invalid();
-      } catch (err) {
-        sails.log.error(err);
-        return exits.error(err);
-      }
-    }
+      } else {
+        const newRanking = await HGRankings.create(toUpdate).fetch();
 
-    sails.log.error(err);
-    sails.log.error('missingRequiredFields');
-    return exits.invalid();
+        if (newRanking) {
+          return exits.success(newRanking);
+        }
+        return exits.invalid();
+      }
+    } catch (err) {
+      sails.log.error(err);
+      return exits.error(err);
+    }
   },
 };
