@@ -44,7 +44,7 @@ const HarvestGamesInstructions = ({ onBack }) => {
         ];
   });
 
-  const isOutDoor = [true, true, true, false, false, false];
+  const isInDoor = [true, true, true, false, false, false];
 
   const topRef = useRef(null);
 
@@ -53,12 +53,12 @@ const HarvestGamesInstructions = ({ onBack }) => {
   }, [gameType]);
 
   const gameOptions = [
-    { value: '0', label: 'OutDoor Game 1' },
-    { value: '1', label: 'OutDoor Game 2' },
-    { value: '2', label: 'OutDoor Game 3' },
-    { value: '3', label: 'InDoor Game 1' },
-    { value: '4', label: 'InDoor Game 2' },
-    { value: '5', label: 'InDoor Game 3' },
+    { value: '0', label: 'InDoor Game 1' },
+    { value: '1', label: 'InDoor Game 2' },
+    { value: '2', label: 'InDoor Game 3' },
+    { value: '3', label: 'OutDoor Game 1' },
+    { value: '4', label: 'OutDoor Game 2' },
+    { value: '5', label: 'OutDoor Game 3' },
   ];
 
   const updateGameImage = (index, newImageUrl, isAuthenticated) => {
@@ -104,7 +104,6 @@ const HarvestGamesInstructions = ({ onBack }) => {
 
       if (selectedGame > 2) {
         const googleLinkData = data?.googleLinkData ?? '';
-        console.log(googleLinkData);
         updateGameLink(Number(selectedGame), googleLinkData, true);
       } else {
         const imageLinkData = data?.imageLinkData ?? [];
@@ -464,7 +463,7 @@ const HarvestGamesInstructions = ({ onBack }) => {
             </Text>
           ) : null}
           {/* OutDoor Instructions */}
-          {gameType[selectedGame].isAuthenticated && isOutDoor[selectedGame] && (
+          {gameType[selectedGame].isAuthenticated && isInDoor[selectedGame] && (
             <VStack
               align="center"
               spacing={5}
@@ -522,7 +521,7 @@ const HarvestGamesInstructions = ({ onBack }) => {
             </VStack>
           )}
           {/* InDoor Instructions */}
-          {gameType[selectedGame].isAuthenticated && !isOutDoor[selectedGame] && (
+          {gameType[selectedGame].isAuthenticated && !isInDoor[selectedGame] && (
             <VStack
               align="center"
               spacing={5}

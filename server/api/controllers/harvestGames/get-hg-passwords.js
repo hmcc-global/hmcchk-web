@@ -55,10 +55,10 @@ module.exports = {
           imageLinkData = linksString.split(',').map((link) => link.trim());
         } else if (gameId == 3) {
           googleLinkData =
-            'https://docs.google.com/document/d/1uQE-XMzjOLiMION6vYc9s0mPEPM-VGFPAwZVN45kCEs/edit?usp=drive_link';
+            'https://docs.google.com/presentation/d/18MlHHTZzeRZvVxMH99jHVbXUcVnchN-DuUZK8RGKAfg/edit?usp=drive_link';
         } else if (gameId == 4) {
           googleLinkData =
-            'https://docs.google.com/document/d/1_AR8DXJK4h-v7RTtMEHWMqtaPI-Id5TZsN0d48_Vdzk/edit?usp=drive_link';
+            'https://docs.google.com/presentation/d/1S9EOuEvTZNIHwRF9S6klc43mtGJPnpH_Ja2uFqC_900/edit?usp=drive_link';
         } else if (gameId == 5) {
           googleLinkData =
             'https://docs.google.com/presentation/d/1VJFRljKsBx3oEhOM6a5Jnx057cxNCa51xv2ZU6D9Y_w/edit?usp=drive_link';
