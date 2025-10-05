@@ -32,24 +32,40 @@ module.exports = {
       const filteredData = data.filter(
         (entry) => entry.lgName === 'password' && !entry.isDeleted
       );
-      if (data.length === 0) throw 'HG ranking not found';
+      if (filteredData.length === 0) {
+        throw 'HG ranking not found';
+      }
 
-      // Verify the password
-      if (String(password) !== String(filteredData[0].gameRankings[gameId])) {
+      const gameRanking = filteredData[0].gameRankings[gameId];
+      if (String(password) !== String(gameRanking)) {
         return exits.unauthorized('Invalid password provided');
       }
 
-      let imageLinkData = [];
+      const ImageUrlData = data.filter(
+        (entry) => entry.lgName === 'ImageUrl' && !entry.isDeleted
+      );
 
-      if (gameId == 0) {
-        imageLinkData = [];
-      } else if (gameId == 1) {
-        imageLinkData = [];
-      } else if (gameId == 2) {
-        imageLinkData = [];
+      let imageLinkData = [];
+      let googleLinkData = '';
+
+      if (ImageUrlData.length > 0) {
+        if (gameId < 3) {
+          const linksString = ImageUrlData[0].gameRankings[gameId] || ''; // Accessing the specific gameId
+
+          imageLinkData = linksString.split(',').map((link) => link.trim());
+        } else if (gameId == 3) {
+          googleLinkData =
+            'https://docs.google.com/presentation/d/1dmJ2AV_9gM2wl2M12GpomLt5EEsP0yJ5vwcP3Z_VqAw/edit?usp=sharing';
+        } else if (gameId == 4) {
+          googleLinkData =
+            'https://docs.google.com/presentation/d/1vMHiK8yhoSS2G0N8NjD9f4MSp7lZIFcI9lPoohjRSdk/edit?usp=sharing';
+        } else if (gameId == 5) {
+          googleLinkData =
+            'https://docs.google.com/presentation/d/1VJFRljKsBx3oEhOM6a5Jnx057cxNCa51xv2ZU6D9Y_w/edit?usp=drive_link';
+        }
       }
 
-      return exits.success({ imageLinkData });
+      return exits.success({ imageLinkData, googleLinkData });
     } catch (err) {
       sails.log(err);
       return exits.invalid(err);

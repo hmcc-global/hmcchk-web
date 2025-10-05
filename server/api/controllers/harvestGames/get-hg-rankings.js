@@ -33,7 +33,10 @@ module.exports = {
       // Regular user access - filter out password and isDeleted is false
       let data = await HGRankings.find().populateAll();
       const filteredData = data.filter(
-        (entry) => entry.lgName !== 'password' && !entry.isDeleted
+        (entry) =>
+          entry.lgName !== 'password' &&
+          entry.lgName !== 'ImageUrl' &&
+          !entry.isDeleted
       );
       sails.log.info('Retrieving Harvest Games rankings..');
 

@@ -1,0 +1,36 @@
+@layer overrides {
+  .hg-select {
+    border-radius: 3.75rem !important;
+    background: #262626 !important;
+    padding-right: 2.5rem !important;
+    position: relative;
+    height: 3.75rem !important;
+    text-align: center !important;
+  }
+
+  .hg-select:focus,
+  .hg-select:focus-visible,
+  .hg-select:active,
+  .hg-select[aria-expanded='true'] {
+    border-radius: 3.75rem !important;
+  }
+
+  .hg-select option {
+    background: #262626 !important;
+    border-radius: 3.75rem !important;
+  }
+
+  .hg-select::-ms-expand {
+    display: none;
+    background: #262626 !important;
+    border-radius: 3.75rem !important;
+  }
+
+.chakra-select__icon-wrapper {
+  right: 1rem !important;
+  top: 50% !important;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+}
+

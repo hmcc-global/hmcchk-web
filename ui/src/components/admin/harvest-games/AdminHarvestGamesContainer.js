@@ -3,7 +3,13 @@ import { customAxios as axios } from '../../helpers/customAxios';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { Button, ButtonGroup, Heading, Tooltip } from '@chakra-ui/react';
+import {
+  Button,
+  ButtonGroup,
+  Heading,
+  Tooltip,
+  useToast,
+} from '@chakra-ui/react';
 import { CgUndo, CgRedo } from 'react-icons/cg';
 import { MdSave } from 'react-icons/md';
 import {
@@ -33,6 +39,7 @@ export default function AdminHarvestGamesContainer(props) {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
+  const toast = useToast();
 
   const getData = async () => {
     try {
@@ -50,29 +57,43 @@ export default function AdminHarvestGamesContainer(props) {
   const addNewRow = () => {
     const newRow = {
       lgName: '', // Default value for LIFE Group
-      gameRankings: { 0: 0, 1: 0, 2: 0 }, // Default values for games
+      gameRankings: { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }, // Default values for games
       overallRanking: 0, // Default overall ranking
     };
     setRankings((prevRankings) => [...prevRankings, newRow]);
   };
 
-  // Function to save individual ranking info to DB
-  const saveRankingInfo = async (data) => {
-    const res = await axios.put('/api/hgRankings/update', {
-      params: data,
-    });
-
-    if (res.status !== 200) {
-      alert('Something went wrong, please refresh and try again..');
-    }
-  };
-
   // Save ranking info across all rows
   const saveAllToDB = async () => {
     if (api) {
-      api.forEachNode(async (rowNode) => {
-        await saveRankingInfo(rowNode.data);
+      let updatePromises = [];
+      api.forEachNode((rowNode) => {
+        console.log(rowNode.data);
+        updatePromises.push(
+          axios.put('/api/hgRankings/update', {
+            params: rowNode.data,
+          })
+        );
       });
+      const results = await Promise.all(updatePromises);
+      const allSuccessful = results.every((res) => res?.status === 200);
+
+      if (allSuccessful) {
+        await getData();
+        toast({
+          description: 'Successfully saved Harvest Games data.',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          description: 'Something went wrong. Refresh the page and try again.',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     }
   };
 
@@ -134,6 +155,9 @@ export default function AdminHarvestGamesContainer(props) {
           params.data.gameRankings[colId] = newRanking;
           return true;
         }
+      } else if (params.data.lgName == 'ImageUrl') {
+        params.data.gameRankings[colId] = params.newValue;
+        return true;
       }
       alert('Invalid Ranking!');
       return false;
@@ -223,22 +247,43 @@ export default function AdminHarvestGamesContainer(props) {
       marryChildren: true,
       children: [
         {
-          headerName: 'Game 1',
+          headerName: 'IN Game 1',
           colId: 0,
           valueGetter: gameRankingGetter,
           valueSetter: rankingSetter,
           valueFormatter: rankingFormatter,
         },
         {
-          headerName: 'Game 2',
+          headerName: 'IN Game 2',
           colId: 1,
           valueGetter: gameRankingGetter,
           valueSetter: rankingSetter,
           valueFormatter: rankingFormatter,
         },
         {
-          headerName: 'Game 3',
+          headerName: 'IN Game 3',
           colId: 2,
+          valueGetter: gameRankingGetter,
+          valueSetter: rankingSetter,
+          valueFormatter: rankingFormatter,
+        },
+        {
+          headerName: 'OUT Game 1',
+          colId: 3,
+          valueGetter: gameRankingGetter,
+          valueSetter: rankingSetter,
+          valueFormatter: rankingFormatter,
+        },
+        {
+          headerName: 'OUT Game 2',
+          colId: 4,
+          valueGetter: gameRankingGetter,
+          valueSetter: rankingSetter,
+          valueFormatter: rankingFormatter,
+        },
+        {
+          headerName: 'OUT Game 3',
+          colId: 5,
           valueGetter: gameRankingGetter,
           valueSetter: rankingSetter,
           valueFormatter: rankingFormatter,

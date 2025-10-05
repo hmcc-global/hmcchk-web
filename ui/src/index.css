@@ -59,3 +59,19 @@ code {
     url('./font/DMSerifDisplay-Italic.ttf') format('truetype');
   font-weight: normal;
 }
+
+@font-face {
+  font-family: 'CodeBold';
+  src: local('CODE BOLD'),
+  url('./font/CODE Bold.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura';
+  src: local('Futura'),
+    url('./font/Futura.ttf') format('truetype');
+  font-weight: normal;
+}
