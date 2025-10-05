@@ -259,7 +259,7 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                     py={{ base: 2, sm: 3, md: 4, lg: 5 }}
                     px={{ base: 2, sm: 3, md: 4 }}
                     fontSize={{
-                      base: '0.9375rem',
+                      base: '0.75rem',
                       sm: '0.9375rem',
                       md: '1.25rem',
                       lg: '1.25rem',
@@ -275,7 +275,7 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                     py={{ base: 2, sm: 3, md: 4, lg: 5 }}
                     px={{ base: 2, sm: 3, md: 4 }}
                     fontSize={{
-                      base: '0.9375rem',
+                      base: '0.75rem',
                       sm: '0.9375rem',
                       md: '1.25rem',
                       lg: '1.25rem',
@@ -291,7 +291,7 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                     px={{ base: 2, sm: 3, md: 4 }}
                     fontFamily="'CodeBold'"
                     fontSize={{
-                      base: '0.9375rem',
+                      base: '0.75rem',
                       sm: '0.9375rem',
                       md: '1.25rem',
                       lg: '1.25rem',
@@ -307,7 +307,7 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                     px={{ base: 2, sm: 3, md: 4 }}
                     fontFamily="'CodeBold'"
                     fontSize={{
-                      base: '0.9375rem',
+                      base: '0.75rem',
                       sm: '0.9375rem',
                       md: '1.25rem',
                       lg: '1.25rem',
@@ -323,7 +323,7 @@ const HarvestGamesLeaderboard = ({ onBack }) => {
                     px={{ base: 2, sm: 3, md: 4 }}
                     fontFamily="'CodeBold'"
                     fontSize={{
-                      base: '0.9375rem',
+                      base: '0.75rem',
                       sm: '0.9375rem',
                       md: '1.25rem',
                       lg: '1.25rem',
