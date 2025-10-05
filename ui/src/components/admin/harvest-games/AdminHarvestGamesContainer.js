@@ -68,6 +68,7 @@ export default function AdminHarvestGamesContainer(props) {
     if (api) {
       let updatePromises = [];
       api.forEachNode((rowNode) => {
+        console.log(rowNode.data);
         updatePromises.push(
           axios.put('/api/hgRankings/update', {
             params: rowNode.data,
@@ -78,6 +79,7 @@ export default function AdminHarvestGamesContainer(props) {
       const allSuccessful = results.every((res) => res?.status === 200);
 
       if (allSuccessful) {
+        await getData();
         toast({
           description: 'Successfully saved Harvest Games data.',
           status: 'success',
@@ -86,7 +88,7 @@ export default function AdminHarvestGamesContainer(props) {
         });
       } else {
         toast({
-          description: 'Something went wrong.',
+          description: 'Something went wrong. Refresh the page and try again.',
           status: 'error',
           duration: 5000,
           isClosable: true,
