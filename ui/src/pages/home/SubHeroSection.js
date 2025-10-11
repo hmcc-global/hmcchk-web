@@ -2,15 +2,12 @@ import React from 'react';
 import {
   Container,
   Grid,
-  Image,
-  Link,
   Stack,
   Text,
-  Flex,
   Fade,
 } from '@chakra-ui/react';
-import { Link as ReactLink } from 'react-router-dom';
 import { InView } from 'react-intersection-observer';
+import TitleCard from '../../components/Card/TitleCard';
 
 const LinkCardInfo = [
   {
@@ -53,71 +50,6 @@ const LinkCardInfo = [
   // },
 ];
 
-const LinkCard = (props) => {
-  return (
-    <Link
-      as={ReactLink}
-      to={{ pathname: props.path }}
-      _hover={{
-        textDecoration: 'none',
-        color: '#4A6EEB',
-      }}
-      w="100%"
-    >
-      <Flex
-        direction="column"
-        justifyContent={['none', 'space-around', 'space-between']}
-        border="1px solid #4A6EEB"
-        borderRadius="5"
-        backgroundImage={[
-          process.env.PUBLIC_URL + '/images/home/' + props.mobileImage,
-          process.env.PUBLIC_URL + '/images/home/' + props.mobileImage,
-          process.env.PUBLIC_URL + '/images/home/' + props.desktopImage,
-        ]}
-        bgPosition={props.bgPosition}
-        bgRepeat="no-repeat"
-        bgSize="contain"
-        minH={['4em', '5em', '6em', '10.75em']}
-        p={[3, 3, 5, 5]}
-        spacing="0"
-      >
-        <Stack direction="row" justifyContent="space-between">
-          <Text
-            fontSize={['1.5rem', '1.5rem', '2rem']}
-            fontFamily="DMSerifDisplay_Italic"
-          >
-            {props.title}
-          </Text>
-          <Image
-            pl="5"
-            pb={[0, 0, 0, '5']}
-            h={['2em', '2em', '2.5em', '3em']}
-            w="auto"
-            src={process.env.PUBLIC_URL + '/images/home/call-made.svg'}
-          />
-        </Stack>
-
-        <Text fontSize={{ base: '0.825rem', md: '1rem' }} color="#4A6EEB">
-          <Text
-            as="span"
-            whiteSpace="pre-wrap"
-            display={['none', 'none', 'inline-block']}
-          >
-            {props.textDesktop}
-          </Text>
-          <Text
-            as="span"
-            whiteSpace="pre-wrap"
-            display={['inline-block', 'inline-block', 'none']}
-          >
-            {props.textMobile}
-          </Text>
-        </Text>
-      </Flex>
-    </Link>
-  );
-};
-
 const SubHeroSection = () => {
   return (
     <>
@@ -157,7 +89,37 @@ const SubHeroSection = () => {
                   fontFamily="Manrope"
                 >
                   {LinkCardInfo.map((data, i) => {
-                    return <LinkCard key={'linkCardInfo' + i} {...data} />;
+                    return (
+                      <TitleCard
+                        key={'linkCardInfo' + i}
+                        title={data.title}
+                        bgDesktopImage={data.desktopImage}
+                        bgMobileImage={data.mobileImage}
+                        bgPosition={data.bgPosition}
+                        linkTo={data.path}
+                        body={
+                          <Text
+                            fontSize={{ base: '0.825rem', md: '1rem' }}
+                            color="#4A6EEB"
+                          >
+                            <Text
+                              as="span"
+                              whiteSpace="pre-wrap"
+                              display={['none', 'none', 'inline-block']}
+                            >
+                              {data.textDesktop}
+                            </Text>
+                            <Text
+                              as="span"
+                              whiteSpace="pre-wrap"
+                              display={['inline-block', 'inline-block', 'none']}
+                            >
+                              {data.textMobile}
+                            </Text>
+                          </Text>
+                        }
+                      />
+                    );
                   })}
                 </Grid>
               </Stack>

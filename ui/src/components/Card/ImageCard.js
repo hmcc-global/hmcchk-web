@@ -12,8 +12,8 @@ import BaseCard from './BaseCard';
      * @param {Event} eventData - An array of product objects.
      * @returns {React.ReactNode} The total price.
 */
-const EventCard = ({eventData}) => {
+const ImageCard = ({ eventData }) => {
   return <BaseCard title="Event" />;
 };
 
-export default EventCard;
+export default ImageCard;

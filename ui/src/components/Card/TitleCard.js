@@ -11,23 +11,78 @@ import BaseCard from './BaseCard';
  * @returns {React.ReactNode} The total price.
  */
 
-const TitleCard = ({ title, direction, bgImage, body }) => {
+const TitleCard = ({
+  title,
+  titleColor,
+  titleIconPath = '/images/home/call-made.svg',
+  direction = 'column',
+  bgDesktopImage,
+  bgMobileImage,
+  bgPosition = ['center bottom', 'left bottom'],
+  bodyColor = '#4A6EEB',
+  borderColor = '#4A6EEB',
+  body,
+  linkTo,
+}) => {
   const history = useHistory();
   return (
     <BaseCard
       title={
-        <Box>
-          <Text variant="h6">{title}</Text>
-          <Image />
+        <Box display="flex" justifyContent="space-between" direction="row">
+          <Text
+            fontSize={['1.5rem', '1.5rem', '2rem']}
+            fontFamily="DMSerifDisplay_Italic"
+            color={titleColor}
+          >
+            {title}
+          </Text>
+
+          <Image
+            pl="5"
+            pb={[0, 0, 0, '5']}
+            h={['2em', '2em', '2.5em', '3em']}
+            w="auto"
+            src={process.env.PUBLIC_URL + titleIconPath}
+          />
         </Box>
       }
       cardContainerStyles={{
         display: 'flex',
         flexDirection: direction,
-        bgImage: bgImage,
+        justifyContent: ['none', 'space-around', 'space-between'],
+        bgImage: [
+          process.env.PUBLIC_URL + '/images/home/' + bgMobileImage ||
+            bgDesktopImage,
+          process.env.PUBLIC_URL + '/images/home/' + bgMobileImage ||
+            bgDesktopImage,
+          process.env.PUBLIC_URL + '/images/home/' + bgDesktopImage,
+        ],
+        bgPosition: bgPosition,
+        bgRepeat: 'no-repeat',
+        bgSize: 'contain',
+        border: `1px solid ${borderColor}`,
+        borderRadius: '8px',
+        p: [3, 3, 5, 5],
+        minH: ['4em', '5em', '6em', '10.75em'],
+        cursor: linkTo ? 'pointer' : 'default',
       }}
-      body={body}
-      onClick={() => history.push('')}
+      body={
+        typeof body === 'string' ? (
+          <Text
+            fontSize={{ base: '0.825rem', md: '1rem' }}
+            color={bodyColor}
+            whiteSpace="pre-wrap"
+            display={['none', 'none', 'inline-block']}
+          >
+            {body}
+          </Text>
+        ) : (
+          body
+        )
+      }
+      onClick={() => {
+        history.push(linkTo);
+      }}
     />
   );
 };
