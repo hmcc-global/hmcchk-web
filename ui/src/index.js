@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from '@chakra-ui/react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import customTheme from './theme';
+import customTheme from './theme/index';
 
 const onScriptLoaded = () => {
   document.body.removeChild(document.querySelector('[src="https://accounts.google.com/gsi/client"]'));
