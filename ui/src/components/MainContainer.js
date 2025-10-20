@@ -26,6 +26,7 @@ import ErrorPage from './screens/ErrorPage';
 import ScrollToTop from './helpers/ScrollToTop';
 import AboutUsContainer from './about/AboutUsContainer';
 import OnlineSermonContainer from './sermons/OnlineSermonContainer';
+import NoOnlineStreamPage from './sermons/NoOnlineStreamPage';
 import AdminHome from './admin/AdminHome';
 import AdminUser from './admin/users/AdminUser';
 import FormManager from './forms/FormManager';
@@ -120,6 +121,12 @@ const MainContainer = () => {
           path={['/online']}
           permissions={['public']}
           component={OnlineSermonContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/online/no-stream"
+          permissions={['public']}
+          component={NoOnlineStreamPage}
         />
         <PrivateRoute
           exact

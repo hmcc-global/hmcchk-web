@@ -26,14 +26,14 @@ const OnlineSermonContainer = (props) => {
         if (current && current.streamLink) {
           setOnlineSermon(current);
         } else {
-          history.push(`/sermons/`);
+          history.push(`/online/no-stream`);
         }
       } else {
         throw Error('Something went wrong');
       }
     } catch (err) {
       console.log(err);
-      history.push(`/sermons/`);
+      history.push(`/online/no-stream`);
     }
   }, [history]);
 

@@ -110,6 +110,31 @@ export const generateChurchSchema = (pathname = '/') => {
         },
       };
 
+    case pathname === '/online/no-stream':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: 'No Live Stream Available - HMCC Hong Kong',
+        description:
+          'Live streaming is not currently available, but you can access our past sermons.',
+        url: 'https://hk.hmccglobal.org/online/no-stream',
+        publisher: baseChurch,
+        mainEntity: {
+          '@type': 'FAQPage',
+          name: 'Live Stream Information',
+          mainEntity: [
+            {
+              '@type': 'Question',
+              name: 'When are live streams available?',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Live streams are typically available during Sunday Service at 10:00 AM HKT. Head to our events page for upcoming sermons and gatherings.',
+              },
+            },
+          ],
+        },
+      };
+
     case pathname === '/events':
       return {
         '@context': 'https://schema.org',
