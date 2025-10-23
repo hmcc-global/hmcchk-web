@@ -1,13 +1,43 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { getSEOData } from './seoData';
+import { getSEOData, getSEODataSync } from './seoData';
 
 const DynamicSEO = () => {
   const location = useLocation();
+  const [seoData, setSeoData] = useState(null);
 
   useEffect(() => {
+    const loadAndUpdateSEO = async () => {
+      // Start with sync data for immediate update
+      const initialSeoData = getSEODataSync(location.pathname);
+      setSeoData(initialSeoData);
+
+      // For sermon pages with valid ID, fetch detailed data asynchronously
+      const pathParts = location.pathname.split('/');
+      const isSermonDetailPage = pathParts[1] === 'sermons' && pathParts[2];
+      const sermonId = pathParts[2];
+
+      if (isSermonDetailPage && sermonId && !isNaN(parseInt(sermonId, 10))) {
+        try {
+          const detailedSeoData = await getSEOData(location.pathname, parseInt(sermonId, 10));
+          if (detailedSeoData) {
+            setSeoData(detailedSeoData);
+          }
+        } catch (error) {
+          console.error('Error getting detailed SEO data for sermon:', error);
+          // Keep initial data on error - no need to set again
+        }
+      }
+    };
+
+    loadAndUpdateSEO();
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!seoData) return;
+
     const updateSEO = () => {
-      const { title, description, keywords } = getSEOData(location.pathname);
+      const { title, description, keywords } = seoData;
 
       // Update document title
       document.title = title;
@@ -83,7 +113,7 @@ const DynamicSEO = () => {
     };
 
     updateSEO();
-  }, [location.pathname]);
+  }, [seoData]);
 
   return null; // This component doesn't render anything
 };
