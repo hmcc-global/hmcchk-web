@@ -90,7 +90,7 @@ const DynamicSEO = () => {
 
       // Update Open Graph URL
       let ogUrl = document.querySelector('meta[property="og:url"]');
-      const currentUrl = `https://hongkong.hmcc.net${location.pathname}`;
+      const currentUrl = `https://hk.hmccglobal.org${location.pathname}`;
       if (ogUrl) {
         ogUrl.setAttribute('content', currentUrl);
       } else {
