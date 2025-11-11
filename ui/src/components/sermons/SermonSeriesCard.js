@@ -34,7 +34,7 @@ const SermonSeriesCard = ({
   useEffect(() => {
     if (sermonSeries && allSermons && allSermons.length > 0) {
       const sermonList = allSermons.filter((sermon) =>
-        sermon.sermonSeries[0].name.includes(sermonSeries)
+        sermon.sermonSeries[0].name === sermonSeries
       );
 
       if (sermonList && sermonList.length > 0) {
