@@ -51,7 +51,7 @@ const InternationalContent = () => {
         position="relative"
         flexDirection={{ base: 'column', md: 'row' }}
         marginBottom="20px"
-        height={{ base: '100%', md: '280px' }}
+        height={{ base: 'auto', md: '280px' }}
       >
         {/* Left section */}
         <Box
@@ -61,7 +61,7 @@ const InternationalContent = () => {
           flexDirection="column"
           justifyContent="space-between"
           alignItems="center"
-          minHeight={{ base: '100%', md: '290px' }}
+          minHeight={{ base: '50%', md: '290px' }}
           paddingBottom={{ base: 6, md: 0 }}
         >
           <Text {...tenYearTheme.typography.subheading} textAlign="center">
@@ -133,7 +133,7 @@ const InternationalContent = () => {
           flexDirection="column"
           justifyContent="space-between"
           alignItems="center"
-          minHeight={{ base: 'auto', md: '290px' }}
+          height={{ base: 'auto', md: '290px' }}
           gap={{ base: 4, md: 0 }}
           paddingBottom={{ base: 6, md: 0 }}
         >
