@@ -47,7 +47,7 @@ const TimelineItem = ({
 
   // Build a PUBLIC_URL-based image path from filename (without extension)
   const buildImageUrl = (filename) =>
-    `${process.env.PUBLIC_URL}/images/10-year/timeline/${filename}.png`;
+    `${process.env.PUBLIC_URL}/images/10-year/timeline/web/${filename}.png`;
 
   useEffect(() => {
     if (itemRef.current) {
@@ -182,6 +182,9 @@ const TenYearTimeline = ({ onExit }) => {
   const pinnedRef = useRef(null);
   const activeIndexRef = useRef(0);
   const pinRef = useRef(null);
+  const headingPinRef = useRef(null);
+  const bottomGradientRef = useRef(null);
+  const bottomGradientPinRef = useRef(null);
 
   useEffect(() => {
     // Create scroll triggers for each timeline section
@@ -274,6 +277,101 @@ const TenYearTimeline = ({ onExit }) => {
     });
     pinRef.current = pinTwenty;
 
+    // Pin the heading section at the top while scrolling through timeline
+    const pinHeading = ScrollTrigger.create({
+      trigger: '.pinned-heading',
+      endTrigger: lastContentSelector,
+      start: 'top 0%',
+      end: 'bottom 60%',
+      pin: '.pinned-heading',
+      pinSpacing: false,
+      invalidateOnRefresh: true,
+    });
+    headingPinRef.current = pinHeading;
+
+    // Helpers to place bottom gradient consistently relative to timeline container
+    const placeBottomGradientAtStart = () => {
+      const el = bottomGradientRef.current;
+      const root = timelineRef.current;
+      if (!el || !root) return;
+      if (el.parentElement !== root) root.appendChild(el);
+      gsap.set(el, {
+        position: 'absolute',
+        top: 'calc(70vh - 33vh)', // 30vh visible, gradient height ~33vh
+        left: 0,
+        right: 0,
+        bottom: 'auto',
+        opacity: 1,
+        zIndex: 2,
+      });
+    };
+
+    const placeBottomGradientAtEnd = () => {
+      const el = bottomGradientRef.current;
+      const root = timelineRef.current;
+      if (!el || !root) return;
+      if (el.parentElement !== root) root.appendChild(el);
+      gsap.set(el, {
+        position: 'absolute',
+        bottom: '-20vh',
+        left: 0,
+        right: 0,
+        top: 'auto',
+        opacity: 1,
+        zIndex: 2,
+      });
+    };
+
+    // Fix bottom gradient to viewport (preserve on-screen position to avoid jumps)
+    const fixBottomGradient = () => {
+      const el = bottomGradientRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const bottomOffsetPx = Math.max(0, window.innerHeight - rect.bottom);
+      gsap.set(el, {
+        position: 'fixed',
+        left: 0,
+        right: 0,
+        bottom: bottomOffsetPx,
+        top: 'auto',
+        opacity: 1,
+        zIndex: 4,
+      });
+    };
+
+    const bottomGradientTrigger = ScrollTrigger.create({
+      trigger: '.timeline-root',
+      start: () => `top ${Math.round(window.innerHeight * 0.7)}px`,
+      end: 'bottom 80%',
+      onEnter: fixBottomGradient,
+      onEnterBack: fixBottomGradient,
+      onLeave: placeBottomGradientAtEnd,
+      onLeaveBack: placeBottomGradientAtStart,
+      // markers: true,
+    });
+    bottomGradientPinRef.current = bottomGradientTrigger;
+
+    // Fade-in after 30vh threshold and fade-out near end
+    if (bottomGradientRef.current) {
+      gsap.fromTo(
+        bottomGradientRef.current,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.timeline-root',
+            start: () => `top ${Math.round(window.innerHeight * 0.7)}px`,
+            end: () => `top ${Math.round(window.innerHeight * 0.6)}px`,
+            scrub: true,
+          },
+        }
+      );
+    }
+
+    // Initial placement to avoid pop-in when loaded scrolled
+    placeBottomGradientAtStart();
+
     // Keep layout responsive during viewport resizes
     const onResize = () => {
       // Trigger GSAP to recalc measurements; our refresh listener will finalize placement
@@ -294,6 +392,8 @@ const TenYearTimeline = ({ onExit }) => {
     return () => {
       sectionTriggers.forEach((t) => t.kill());
       pinTwenty.kill();
+      pinHeading.kill();
+      bottomGradientPinRef.current && bottomGradientPinRef.current.kill();
       window.removeEventListener('resize', onResize);
       ScrollTrigger.removeEventListener('refresh', onStRefresh);
     };
@@ -305,50 +405,63 @@ const TenYearTimeline = ({ onExit }) => {
 
   return (
     <>
-      <VStack
-        align="center"
-        justify="center"
-        py={5}
+      <Box
+        className="pinned-heading"
+        position="relative"
         w="100%"
-        spacing={'-1.25rem'}
+        h="33vh"
+        bgGradient="linear(180deg, #000214 0%, #0C134A 25%, rgba(16, 24, 97, 0.70) 50%, rgba(0, 13, 146, 0.00) 100%)"
+        zIndex={2}
       >
-        <Heading
-          {...tenYearTheme.components.heading}
-          {...tenYearTheme.typography.h1}
-          letterSpacing={tenYearTheme.letterSpacings.tight}
-          textAlign="center"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
+        <VStack
+          align="center"
+          justify="center"
+          py={5}
+          w="100%"
+          h="100%"
+          spacing={'-1.25rem'}
+          zIndex={3}
+          position="relative"
         >
-          <Box
-            as="img"
-            src={`${process.env.PUBLIC_URL}/images/10-year/timeline/10.svg`}
-            alt="10"
-            h="3.5em"
-            w="fit-content"
-            display="inline-block"
-            verticalAlign="middle"
-            mr={'-0.88em'}
-          />
-          <Text as="span" ml={0}>
-            Years: The Moments
+          <Heading
+            {...tenYearTheme.components.heading}
+            {...tenYearTheme.typography.h1}
+            letterSpacing={tenYearTheme.letterSpacings.tight}
+            textAlign="center"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Box
+              as="img"
+              src={`${process.env.PUBLIC_URL}/images/10-year/timeline/10.svg`}
+              alt="10"
+              h="3.5em"
+              w="fit-content"
+              display="inline-block"
+              verticalAlign="middle"
+              mr={'-0.88em'}
+            />
+            <Text as="span" ml={0}>
+              Years: The Moments
+            </Text>
+          </Heading>
+          <Text
+            {...tenYearTheme.components.text}
+            {...tenYearTheme.typography.body}
+            fontSize={['16px', '18px']}
+            color="white"
+            textAlign="center"
+            maxW="100%"
+          >
+            Look back at the moments and recount all that God has done in the
+            past decade for our church family.
           </Text>
-        </Heading>
-        <Text
-          {...tenYearTheme.components.text}
-          {...tenYearTheme.typography.body}
-          fontSize={['16px', '18px']}
-          color="white"
-          textAlign="center"
-          maxW="100%"
-        >
-          Look back at the moments and recount all that God has done in the past
-          decade for our church family.
-        </Text>
-      </VStack>
+        </VStack>
+      </Box>
       <Box
         ref={timelineRef}
+        className="timeline-root"
         w="100%"
         position="relative"
         style={{
@@ -362,7 +475,7 @@ const TenYearTimeline = ({ onExit }) => {
           position="absolute"
           top={{ base: '1.5rem', md: '2rem' }}
           left={{ base: '1.5rem', md: '2rem' }}
-          zIndex={5}
+          zIndex={1}
           pointerEvents="none"
           className="pinned-year-prefix"
           opacity={0}
@@ -397,6 +510,19 @@ const TenYearTimeline = ({ onExit }) => {
             />
           ))}
         </VStack>
+        {/* Bottom gradient - pinned during timeline scroll */}
+        <Box
+          className="pinned-bottom-gradient"
+          ref={bottomGradientRef}
+          position="absolute"
+          bottom="0"
+          left="0"
+          right="0"
+          h="33vh"
+          bgGradient="linear(0deg, #000214 0%, #0C134A 25%, rgba(16, 24, 97, 0.70) 50%, rgba(0, 13, 146, 0.00) 100%)"
+          zIndex={2}
+          pointerEvents="none"
+        />
       </Box>
     </>
   );
