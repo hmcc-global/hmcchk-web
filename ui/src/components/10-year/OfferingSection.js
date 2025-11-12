@@ -134,7 +134,7 @@ const OfferingSection = (props) => {
           {...tenYearTheme.components.text}
           {...tenYearTheme.typography.subheading}
           color="white"
-          marginBottom="30px"
+          marginBottom="20px"
           maxW="1000px"
         >
           Your generosity will enable us to respond to God's call. We pray to
