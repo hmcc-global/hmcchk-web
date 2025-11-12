@@ -125,7 +125,7 @@ const HongKongContent = () => {
           onClick={copyEmailToClipboard}
           bg={'#FFFFFF'}
           borderRadius={'80px'}
-          width={{ base: '160px', md: '240px' }}
+          width="auto"
           height={{ base: '30px', md: '40px' }}
           textColor={'#012C75'}
           fontFamily={'Manrope'}
@@ -146,7 +146,7 @@ const HongKongContent = () => {
           marginTop={"10px"}
           paddingY={"6px"}
         >
-          <CopyIcon boxSize={{base:"4", md:"6"}}/>
+          <CopyIcon boxSize={{base:"4", md:"6"}} marginRight="5px"/>
           CLICK TO COPY FPS ID
         </Button>
       </Box>
