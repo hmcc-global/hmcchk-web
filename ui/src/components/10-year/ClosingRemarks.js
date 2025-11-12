@@ -87,7 +87,7 @@ const ClosingRemarks = () => {
           display={{ base: 'none', md: 'none', lg: 'block' }}
           {...getTypography('h1')}
         >
-          Thank you for being a part of HMCC Hong Kong in
+          Thank you for being a part of HMCC of Hong Kong in
           <br />
           the past{' '}
           <Box as="span" position="relative" display="inline-block">
@@ -122,7 +122,7 @@ const ClosingRemarks = () => {
           lineHeight="161%"
         >
           Thank you for being a<br />
-          part of HMCC Hongkong
+          part of HMCC of Hong Kong
           <br />
           in the past{' '}
           <Box as="span" position="relative" display="inline-block">
