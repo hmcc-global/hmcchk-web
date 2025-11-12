@@ -39,7 +39,7 @@ const TenYearVideo = () => {
   const activeVideo = videos[activeIndex];
 
   return (
-    <VStack spacing={8} w="100%">
+    <VStack spacing={8} w="100%" paddingY="4rem">
       <VStack spacing={2}>
         <Heading
           display="flex"
