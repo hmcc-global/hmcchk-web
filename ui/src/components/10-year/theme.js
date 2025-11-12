@@ -98,7 +98,7 @@ export const tenYearTheme = {
     subheading: {
       fontFamily: "'Abhaya Libre', serif",
       fontWeight: 800,
-      fontSize: ['1rem', '1.25rem'],
+      fontSize: ['1.25rem', '1.25rem'],
       letterSpacing: '-0.03em',
       lineHeight: 1.2,
       color: '#95CFFF',
@@ -122,7 +122,7 @@ export const tenYearTheme = {
     givingInfo: {
       fontFamily: "'Manrope', sans-serif",
       fontWeight: 700, // Bold by default; use 400 where Regular is needed
-      fontSize: ['0.55rem', '0.85rem'],
+      fontSize: ['0.85rem', '0.85rem'],
       letterSpacing: '0',
       lineHeight: 1.5,
       color: '#FFFFFF',

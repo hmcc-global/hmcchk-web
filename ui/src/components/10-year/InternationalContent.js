@@ -8,8 +8,8 @@ const InternationalContent = () => {
   const toast = useToast();
   const isMobile = useBreakpointValue({ base: true, md: false });
   
+  const email = 'hmg@hongkong.hmcc.net';
   const copyEmailToClipboard = () => {
-    const email = 'hmg@hongkong.hmcc.net';
     navigator.clipboard.writeText(email)
       .then(() => {
         toast({
@@ -145,7 +145,7 @@ const InternationalContent = () => {
           Give via Zelle
         </Text>
         <Text {...tenYearTheme.typography.givingInfo} fontWeight={700}>
-          Transfer with Zelle to email address (hmg@hongkong.hmcc.net) and input "10 Year" in the giving memo remarks field
+        Transfer with Zelle to email address ({email}) and input "10 Year" in the giving memo remarks field
         </Text>
         <Button
           onClick={copyEmailToClipboard}

@@ -119,7 +119,16 @@ const OfferingSection = (props) => {
           As we celebrate this 10-year milestone, {" "}
           <span style={{ color:"#ACD9FF"}}>
           we invite you to invest in the next chapter</span>
-          . <br />
+          .
+        </Text>
+        <Text
+          as="h3"
+          {...tenYearTheme.components.text}
+          {...tenYearTheme.typography.subheading}
+          color="white"
+          marginBottom="30px"
+          maxW="1000px"
+        >
           Your generosity will enable us to respond to God's call. We pray to see more lives being transformed, LIFE Groups multiplied, churches planted, people being sent out for global missions, and so much more.
         </Text>
         <Text
