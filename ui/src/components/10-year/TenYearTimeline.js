@@ -67,10 +67,10 @@ const TimelineItem = ({ item, index, isLast, isMobile }) => {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      py="0.5em"
+      mt={'-0.75em'}
     >
       {isMobile ? (
-        <VStack w="90vw" spacing={2} align="stretch">
+        <VStack w="90vw" spacing={5} align="stretch">
           <Box
             w="100%"
             display="flex"
@@ -242,7 +242,7 @@ const TimelineItem = ({ item, index, isLast, isMobile }) => {
             </VStack>
             {!isLast && (
               <Box
-                mt="0.5em"
+                mt={3}
                 h="1px"
                 w="100%"
                 bg="#FFFFFF"
@@ -660,7 +660,7 @@ const TenYearTimeline = ({ onExit }) => {
         endTrigger: endEl || timelineRef.current,
         start: () =>
           `top ${
-            window.matchMedia('(max-width: 29.99em)').matches ? '35%' : '40%'
+            window.matchMedia('(max-width: 29.99em)').matches ? '32%' : '35%'
           }`,
         end: 'bottom 80%',
         pin: pinEl || '.mobile-pinned-twenty',
@@ -690,7 +690,10 @@ const TenYearTimeline = ({ onExit }) => {
           id: 'mobilePinHeading',
           trigger: headingEl,
           endTrigger: endEl,
-          start: 'top 5%',
+          start: () =>
+            `top ${
+              window.matchMedia('(max-width: 29.99em)').matches ? '5%' : '0%'
+            }`,
           end: 'bottom 80%',
           pin: headingEl,
           pinSpacing: false,
@@ -764,7 +767,7 @@ const TenYearTimeline = ({ onExit }) => {
           py={('0.5rem', '0.5rem', '2.5rem')}
           w="100%"
           // h="100%"
-          spacing={'-1.25rem'}
+          spacing={['-1.25rem', '-1.75rem', '-1.25rem']}
           zIndex={3}
           position="relative"
         >
@@ -794,7 +797,8 @@ const TenYearTimeline = ({ onExit }) => {
           <Text
             {...tenYearTheme.components.text}
             {...tenYearTheme.typography.body}
-            fontSize={['16px', '18px']}
+            fontWeight="500"
+            fontSize={['1rem', '1.2rem']}
             color="white"
             textAlign="center"
             maxW="90%"
@@ -807,6 +811,7 @@ const TenYearTimeline = ({ onExit }) => {
       <Box
         ref={timelineRef}
         className="timeline-root"
+        mt={['0', '0', '-7rem']}
         w="100%"
         position="relative"
         style={{
@@ -848,7 +853,7 @@ const TenYearTimeline = ({ onExit }) => {
           mx="auto"
           zIndex={3}
           display={{ base: 'block', md: 'none' }}
-          mt={['-7rem', '-3.5rem', 0]}
+          mt={['-8rem', '-3.5rem', 0]}
         >
           <Text
             fontSize="var(--year-font)"
