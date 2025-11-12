@@ -60,3 +60,10 @@ code {
     url('./font/DMSerifDisplay-Italic.ttf') format('truetype');
   font-weight: normal;
 }
+
+@font-face {
+  font-family: 'Qindom';
+  src: local('Qindom'),
+    url('./font/Qindom.ttf') format('truetype');
+  font-weight: normal;
+}
