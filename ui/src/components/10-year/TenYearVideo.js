@@ -13,6 +13,12 @@ import { tenYearTheme } from './theme';
 
 const TenYearVideo = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
+  const isTablet = useBreakpointValue({
+    base: false,
+    md: false,
+    lg: true,
+    xl: false,
+  });
   // EASY SWITCH: flip to false when real assets are ready
   const USE_PLACEHOLDERS = false;
   const PLACEHOLDER_TITLE = '(Videos coming soon)';
@@ -92,7 +98,7 @@ const TenYearVideo = () => {
           whiteSpace="pre-line"
           textAlign="center"
         >
-          {isMobile
+          {isMobile || isTablet
             ? `This collection of videos tells the story God has been writing in our church family.
 
 We invite you to watch, remember, and rejoice in all He has done.`
@@ -108,40 +114,44 @@ We invite you to watch, remember, and rejoice in all He has done.`}
         display="grid"
         gridTemplateColumns={{
           base: '1fr',
-          md: `minmax(${THUMBS_MIN_W_MD}, 1fr) ${VIDEO_W}`,
+          lg: '1fr',
+          xl: `minmax(${THUMBS_MIN_W_MD}, 1fr) ${VIDEO_W}`,
         }}
         gridTemplateAreas={{
           base: '"video" "pill" "thumbs"',
-          md: '"thumbs video" ". pill"',
+          lg: '"video" "pill" "thumbs"',
+          xl: '"thumbs video" ". pill"',
         }}
-        rowGap={{ base: GAP_ROW_BASE, md: GAP_ROW_MD }}
-        columnGap={{ base: 0, md: GAP_COL_MD }}
+        rowGap={{ base: GAP_ROW_BASE, lg: GAP_ROW_BASE, xl: GAP_ROW_MD }}
+        columnGap={{ base: 0, lg: 0, xl: GAP_COL_MD }}
         alignItems="center"
       >
         <Flex
-          gap={{ base: '1rem', md: '3.5rem' }}
-          minW={{ base: 'auto', md: THUMBS_MIN_W_MD }}
+          gap={{ base: '1rem', lg: '2rem', xl: '3.5rem' }}
+          minW={{ base: 'auto', lg: 'auto', xl: THUMBS_MIN_W_MD }}
           align="center"
           justify="center"
           h="100%"
           gridArea="thumbs"
           alignSelf="center"
-          flexDir={{ base: 'row', md: 'column' }}
+          flexDir={{ base: 'row', lg: 'row', xl: 'column' }}
           wrap="nowrap"
-          overflowX={{ base: 'auto', md: 'visible' }}
-          px={{ base: '0.5rem', md: 0 }}
-          py={{ base: '1rem', md: 0 }}
+          overflowX={{ base: 'auto', lg: 'auto', xl: 'visible' }}
+          px={{ base: '0.5rem', lg: '3rem', xl: 0 }}
+          py={{ base: '1rem', lg: '3rem', xl: 0 }}
         >
           {videos.map((v, idx) => {
             const isActive = idx === activeIndex;
-            // Mobile: keep all thumbnails same size; Desktop: emphasize active
+            // Mobile/Tablet: keep all thumbnails same size; Desktop: emphasize active
             const width = {
               base: '6.5rem',
-              md: isActive ? '13.3rem' : '8.5rem',
+              lg: '10rem',
+              xl: isActive ? '13.3rem' : '8.5rem',
             };
             const height = {
               base: '3.7rem',
-              md: isActive ? '7.5rem' : '4.75rem',
+              lg: '5.6rem',
+              xl: isActive ? '7.5rem' : '4.75rem',
             };
             return (
               <Box
@@ -151,7 +161,7 @@ We invite you to watch, remember, and rejoice in all He has done.`}
                 w={width}
                 h={height}
                 flex="0 0 auto"
-                borderRadius={{ base: '0.5rem', md: '0' }}
+                borderRadius={{ base: '0.5rem', lg: '0.5rem', xl: '0' }}
                 borderWidth="0"
                 bg="#0B1020"
                 position="relative"
@@ -160,17 +170,20 @@ We invite you to watch, remember, and rejoice in all He has done.`}
                   isActive
                     ? {
                         base: '1px 0 10px 0.709px #95CFFF',
-                        md: '0 0 25px 4px #95CFFF',
+                        lg: '1px 0 10px 0.709px #95CFFF',
+                        xl: '0 0 25px 4px #95CFFF',
                       }
                     : {
                         base: '0 0 8px rgba(0,0,0,0.3)',
-                        md: '0 0 8px rgba(0,0,0,0.3)',
+                        lg: '0 0 8px rgba(0,0,0,0.3)',
+                        xl: '0 0 8px rgba(0,0,0,0.3)',
                       }
                 }
                 _hover={{
                   boxShadow: {
                     base: '0 0 6.951px 0.709px #95CFFF',
-                    md: '0 0 18px 1px #95CFFF',
+                    lg: '0 0 6.951px 0.709px #95CFFF',
+                    xl: '0 0 18px 1px #95CFFF',
                   },
                   transform: 'translateY(-1px)',
                 }}
@@ -240,7 +253,7 @@ We invite you to watch, remember, and rejoice in all He has done.`}
 
         <VStack
           flex={1}
-          spacing={{ base: 0, md: '1.5rem' }}
+          spacing={{ base: 0, lg: 0, xl: '1.5rem' }}
           gridArea="video"
           w="100%"
         >
@@ -299,12 +312,12 @@ We invite you to watch, remember, and rejoice in all He has done.`}
         </VStack>
         <Box
           gridArea="pill"
-          w={{ base: '100%', md: VIDEO_W }}
-          borderRadius={{ base: '2.5rem', md: PILL_RADIUS }}
+          w={{ base: '100%', lg: '100%', xl: VIDEO_W }}
+          borderRadius={{ base: '2.5rem', lg: '2.5rem', xl: PILL_RADIUS }}
           bg="rgba(5, 10, 25, 0.75)"
           px={PILL_PX}
           py={PILL_PY}
-          mt={{ base: '0.25rem', md: '1rem' }}
+          mt={{ base: '0.25rem', lg: '1rem', xl: '1rem' }}
         >
           <Text textAlign="center" {...tenYearTheme.typography.body}>
             {USE_PLACEHOLDERS ? PLACEHOLDER_TITLE : activeVideo.title}
