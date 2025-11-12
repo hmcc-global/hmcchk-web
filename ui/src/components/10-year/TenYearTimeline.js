@@ -101,7 +101,7 @@ const TimelineItem = ({
       display="flex"
       alignItems="center"
       justifyContent="center"
-      minH="100vh"
+      py={{ base: 8, md: 12 }} // Vertical padding instead of minH
     >
       <HStack
         spacing={{ base: '1em', sm: '2em', md: '3em' }}
@@ -113,6 +113,7 @@ const TimelineItem = ({
       >
         {/* Year suffix - only the last two digits, takes up actual space */}
         <Box
+          className="year-suffix"
           display="flex"
           alignItems="center"
           minW={{ base: '3rem', sm: '4rem', md: '5rem', lg: '6rem' }} // Allocate space for year suffix
@@ -134,6 +135,7 @@ const TimelineItem = ({
 
         {/* Content card - positioned to the right */}
         <Box
+          className="timeline-content"
           bg="white"
           p={{ base: 4, sm: 6, md: 8, lg: 10 }}
           borderRadius={{ base: '16px', md: '20px' }}
@@ -191,68 +193,139 @@ const TimelineItem = ({
 const TenYearTimeline = ({ onExit }) => {
   const timelineRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const initialPosRef = useRef({ top: 0, left: 0 });
+  const pinnedRef = useRef(null);
 
   useEffect(() => {
     // Create scroll triggers for each timeline section
-    const scrollTriggers = timelineData.map((_, index) => {
-      return ScrollTrigger.create({
+    const sectionTriggers = timelineData.map((_, index) =>
+      ScrollTrigger.create({
         trigger: `.timeline-item-${index}`,
         start: 'top center',
         end: 'bottom center',
-        onEnter: () => {
-          setActiveIndex(index);
-        },
-        onEnterBack: () => {
-          setActiveIndex(index);
-        },
+        onEnter: () => setActiveIndex(index),
+        onEnterBack: () => setActiveIndex(index),
+      })
+    );
+
+    // Pin the "20" between the first and last timeline items
+    const firstSelector = `.timeline-item-0`;
+    const lastSelector = `.timeline-item-${timelineData.length - 1}`;
+    const firstContentSelector = `.timeline-item-0 .timeline-content`;
+    const lastContentSelector = `.timeline-item-${
+      timelineData.length - 1
+    } .timeline-content`;
+
+    // Helpers to place the pinned element relative to a specific item
+    const placeRelativeToItem = (itemIndex) => {
+      const itemEl = document.querySelector(`.timeline-item-${itemIndex}`);
+      const suffixEl = document.querySelector(
+        `.timeline-item-${itemIndex} .year-suffix`
+      );
+      const pinnedEl = pinnedRef.current;
+      if (!itemEl || !suffixEl || !pinnedEl) return;
+      const itemRect = itemEl.getBoundingClientRect();
+      const suffixRect = suffixEl.getBoundingClientRect();
+      const pinnedRect = pinnedEl.getBoundingClientRect();
+      // Reparent to the item so it moves with it
+      if (pinnedEl.parentElement !== itemEl) {
+        itemEl.appendChild(pinnedEl);
+      }
+      gsap.set(pinnedEl, {
+        position: 'absolute',
+        top: '50%',
+        left: suffixRect.left - itemRect.left - pinnedRect.width,
+        transform: 'translateY(-50%)',
+        opacity: 1,
       });
+    };
+
+    // Initial placement: align with first item so it scrolls in naturally
+    placeRelativeToItem(0);
+
+    const setPinnedToViewportPosition = () => {
+      const el = pinnedRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      gsap.set(el, {
+        position: 'fixed',
+        top: rect.top,
+        left: rect.left,
+        transform: 'none',
+      });
+    };
+
+    const pinTwenty = ScrollTrigger.create({
+      trigger: firstContentSelector,
+      endTrigger: lastContentSelector,
+      start: 'center center',
+      end: 'center center',
+      pin: '.pinned-year-prefix',
+      pinSpacing: false,
+      invalidateOnRefresh: true,
+      onToggle: (self) => {
+        if (self.isActive) {
+          // Ensure pinned element is under the timeline root for pin
+          const root = timelineRef.current;
+          const el = pinnedRef.current;
+          if (root && el && el.parentElement !== root) {
+            root.appendChild(el);
+          }
+          setPinnedToViewportPosition();
+        } else {
+          // On forward unpin, attach to last item; on backward unpin, attach to first item
+          if (self.direction === 1) {
+            placeRelativeToItem(timelineData.length - 1);
+          } else {
+            placeRelativeToItem(0);
+          }
+        }
+      },
     });
 
-    // Control visibility of the fixed "20" prefix
-    const timelineTrigger = ScrollTrigger.create({
-      trigger: timelineRef.current,
-      start: 'top center',
-      end: 'bottom center',
-      onEnter: () => {
-        const prefixElement = document.querySelector('.fixed-year-prefix');
-        if (prefixElement)
-          gsap.to(prefixElement, { opacity: 1, duration: 0.3 });
-      },
-      onLeave: () => {
-        const prefixElement = document.querySelector('.fixed-year-prefix');
-        if (prefixElement)
-          gsap.to(prefixElement, { opacity: 0, duration: 0.3 });
-      },
-      onEnterBack: () => {
-        const prefixElement = document.querySelector('.fixed-year-prefix');
-        if (prefixElement)
-          gsap.to(prefixElement, { opacity: 1, duration: 0.3 });
-      },
-      onLeaveBack: () => {
-        const prefixElement = document.querySelector('.fixed-year-prefix');
-        if (prefixElement)
-          gsap.to(prefixElement, { opacity: 0, duration: 0.3 });
-      },
-    });
+    // Keep layout responsive during viewport resizes
+    const onResize = () => {
+      if (pinTwenty && pinTwenty.isActive) {
+        setPinnedToViewportPosition();
+      } else {
+        // If not pinned, ensure alignment with whichever item we're attached to
+        const el = pinnedRef.current;
+        if (el && el.parentElement) {
+          const parent = el.parentElement;
+          const match = parent.className
+            ?.toString()
+            .match(/timeline-item-(\d+)/);
+          if (match) {
+            const idx = parseInt(match[1], 10);
+            placeRelativeToItem(idx);
+          }
+        }
+      }
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('resize', onResize);
 
     return () => {
-      scrollTriggers.forEach((trigger) => trigger.kill());
-      timelineTrigger.kill();
+      sectionTriggers.forEach((t) => t.kill());
+      pinTwenty.kill();
+      window.removeEventListener('resize', onResize);
     };
   }, []);
 
   return (
     <Box ref={timelineRef} w="100%" position="relative">
-      {/* Fixed "20" prefix - always visible when timeline is in view */}
+      {/* "20" prefix - controlled by GSAP ScrollTrigger */}
       <Box
-        position="fixed"
-        left={{ base: '4rem', sm: '5rem', md: '6rem' }}
-        top="50%"
-        transform="translateY(-50%)"
+        ref={pinnedRef}
+        position="absolute"
+        top={{ base: '1.5rem', md: '2rem' }}
+        left={{ base: '1.5rem', md: '2rem' }}
         zIndex={5}
         pointerEvents="none"
-        className="fixed-year-prefix"
+        className="pinned-year-prefix"
         opacity={0}
+        w="fit-content"
+        h="fit-content"
       >
         <Text
           fontSize={{ base: '5xl', sm: '6xl', md: '7xl', lg: '9xl' }}
@@ -267,18 +340,20 @@ const TenYearTimeline = ({ onExit }) => {
         </Text>
       </Box>
 
-      {/* All timeline items - rendered at once with focus-based visibility */}
-      {timelineData.map((item, index) => (
-        <TimelineItem
-          key={item.year}
-          item={item}
-          index={index}
-          isActive={index === activeIndex}
-          isPassed={index < activeIndex}
-          isNext={index > activeIndex}
-          activeIndex={activeIndex}
-        />
-      ))}
+      {/* Timeline content - scrolls normally without affecting "20" */}
+      <VStack spacing={0} align="stretch">
+        {timelineData.map((item, index) => (
+          <TimelineItem
+            key={item.year}
+            item={item}
+            index={index}
+            isActive={index === activeIndex}
+            isPassed={index < activeIndex}
+            isNext={index > activeIndex}
+            activeIndex={activeIndex}
+          />
+        ))}
+      </VStack>
     </Box>
   );
 };
