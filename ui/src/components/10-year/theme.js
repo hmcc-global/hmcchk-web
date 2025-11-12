@@ -50,6 +50,8 @@ export const tenYearTheme = {
     subheading: ['14px', '18px'],
     bodyText: ['16px', '16px'],
     bodyEmphasis: ['16px', '20px'],
+    videoTextPlaceholder: ['5.41px', '10px'],
+    videoTitlePlaceholder: ['7.81px', '18px'],
     givingInfo: ['8px', '12px'],
   },
 
@@ -104,15 +106,15 @@ export const tenYearTheme = {
     body: {
       fontFamily: "'Abhaya Libre', serif",
       fontWeight: 400,
-      fontSize: ['16px', '16px'],
+      fontSize: ['16px', '16px', '16px'], // [mobile, tablet, desktop]
       letterSpacing: '0',
-      lineHeight: 1.5,
+      lineHeight: 'normal',
       color: '#FFFFFF',
     },
     bodyEmphasis: {
       fontFamily: "'Abhaya Libre', serif",
       fontWeight: 500,
-      fontSize: ['16px', '20px'],
+      fontSize: ['16px', '16px', '16px'], // [mobile, tablet, desktop]
       letterSpacing: '-0.03em',
       lineHeight: 1.45,
       color: '#FFFFFF',
@@ -120,9 +122,23 @@ export const tenYearTheme = {
     givingInfo: {
       fontFamily: "'Manrope', sans-serif",
       fontWeight: 700, // Bold by default; use 400 where Regular is needed
-      fontSize: ['8px', '12px'],
+      fontSize: ['10px', '10px', '12px'], // [mobile, tablet, desktop]
       letterSpacing: '0',
       lineHeight: 1.5,
+      color: '#FFFFFF',
+    },
+
+    videoTextPlaceholder: {
+      fontFamily: "'Manrope', sans-serif",
+      fontWeight: 700, // Bold by default; use 400 where Regular is needed
+      fontSize: ['5.41px', '10px', '10px'], // [mobile, tablet, desktop]
+      color: '#FFFFFF',
+    },
+
+    videoTitlePlaceholder: {
+      fontFamily: "'Abhaya Libre', serif",
+      fontWeight: 700, // Bold by default; use 400 where Regular is needed
+      fontSize: ['14px', '18px', '18px'], // [mobile, tablet, desktop]
       color: '#FFFFFF',
     },
   },
