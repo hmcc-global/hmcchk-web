@@ -20,8 +20,10 @@ const FakeFullPageSection = (props) => {
       </Heading>
       {subtitle && (
         <Text
-          fontSize={tenYearTheme.fontSizes.body}
+          as="h3"
           {...tenYearTheme.components.text}
+          {...tenYearTheme.typography.subheading}
+          color="white"
         >
           {subtitle}
         </Text>
