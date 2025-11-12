@@ -3,155 +3,78 @@
     {
       "year": 2015,
       "rows": [
-        [
-          { "width": "2fr", "alt": "2015 - Group outdoor gathering" },
-          { "width": "3fr", "alt": "2015 - City skyline view" }
-        ],
-        [
-          { "width": "1.5fr", "alt": "2015 - Indoor event with food" },
-          { "width": "1fr", "alt": "2015 - Group dance activity" },
-          { "width": "1.5fr", "alt": "2015 - Guitar performance" }
-        ]
+        { "width": "1fr", "alt": "2015 - 1", "image": "2015-01" },
+        { "width": "1fr", "alt": "2015 - 2", "image": "2015-02" }
       ]
     },
     {
       "year": 2016,
       "rows": [
-        [
-          { "width": "2fr", "alt": "2016 - Water baptism ceremony" },
-          { "width": "3fr", "alt": "2016 - Indoor gathering with stage" }
-        ],
-        [
-          { "width": "1fr", "alt": "2016 - Community event" },
-          { "width": "2fr", "alt": "2016 - Group discussion" },
-          { "width": "1fr", "alt": "2016 - Fellowship time" }
-        ]
+        { "width": "1fr", "alt": "2016 - 1", "image": "2015-01" },
+        { "width": "1fr", "alt": "2016 - 2", "image": "2015-02" }
       ]
     },
     {
       "year": 2017,
       "rows": [
-        [
-          { "width": "3fr", "alt": "2017 - Worship service" },
-          { "width": "2fr", "alt": "2017 - Prayer meeting" }
-        ],
-        [
-          { "width": "1fr", "alt": "2017 - Youth event" },
-          { "width": "1fr", "alt": "2017 - Bible study" },
-          { "width": "1fr", "alt": "2017 - Community outreach" }
-        ]
+        { "width": "1fr", "alt": "2017 - 1", "image": "2015-01" },
+        { "width": "1fr", "alt": "2017 - 2", "image": "2015-02" }
       ]
     },
     {
       "year": 2018,
       "rows": [
-        [
-          { "width": "2fr", "alt": "2018 - Conference event" },
-          { "width": "3fr", "alt": "2018 - Large gathering" }
-        ],
-        [
-          { "width": "1.5fr", "alt": "2018 - Ministry training" },
-          { "width": "1fr", "alt": "2018 - Small group" },
-          { "width": "1.5fr", "alt": "2018 - Celebration" }
-        ]
+        { "width": "1fr", "alt": "2018 - 1", "image": "2015-01" },
+        { "width": "1fr", "alt": "2018 - 2", "image": "2015-02" }
       ]
     },
     {
       "year": 2019,
       "rows": [
-        [
-          { "width": "1fr", "alt": "2019 - Leadership meeting" },
-          { "width": "4fr", "alt": "2019 - Major event" }
-        ],
-        [
-          { "width": "2fr", "alt": "2019 - Community service" },
-          { "width": "1fr", "alt": "2019 - Fellowship" },
-          { "width": "2fr", "alt": "2019 - Worship" }
-        ]
+        { "width": "1fr", "alt": "2019 - 1", "image": "2015-01" },
+        { "width": "1fr", "alt": "2019 - 2", "image": "2015-02" }
       ]
     },
     {
       "year": 2020,
       "rows": [
-        [
-          { "width": "3fr", "alt": "2020 - Online service" },
-          { "width": "2fr", "alt": "2020 - Virtual gathering" }
-        ],
-        [
-          { "width": "1fr", "alt": "2020 - Digital ministry" },
-          { "width": "1fr", "alt": "2020 - Online prayer" },
-          { "width": "1fr", "alt": "2020 - Virtual fellowship" }
-        ]
+        { "width": "1fr", "alt": "2020 - 1", "image": "2015-01" },
+        { "width": "1fr", "alt": "2020 - 2", "image": "2015-02" }
       ]
     },
     {
       "year": 2021,
       "rows": [
-        [
-          { "width": "2fr", "alt": "2021 - Hybrid service" },
-          { "width": "3fr", "alt": "2021 - Return to in-person" }
-        ],
-        [
-          { "width": "1.5fr", "alt": "2021 - Community rebuilding" },
-          { "width": "1fr", "alt": "2021 - New initiatives" },
-          { "width": "1.5fr", "alt": "2021 - Growth" }
-        ]
+        { "width": "1fr", "alt": "2021 - 1", "image": "2015-01" },
+        { "width": "1fr", "alt": "2021 - 2", "image": "2015-02" }
       ]
     },
     {
       "year": 2022,
       "rows": [
-        [
-          { "width": "1fr", "alt": "2022 - Expansion" },
-          { "width": "4fr", "alt": "2022 - Major milestone" }
-        ],
-        [
-          { "width": "2fr", "alt": "2022 - New programs" },
-          { "width": "1fr", "alt": "2022 - Leadership" },
-          { "width": "2fr", "alt": "2022 - Impact" }
-        ]
+        { "width": "1fr", "alt": "2022 - 1", "image": "2015-01" },
+        { "width": "1fr", "alt": "2022 - 2", "image": "2015-02" }
       ]
     },
     {
       "year": 2023,
       "rows": [
-        [
-          { "width": "3fr", "alt": "2023 - Continued growth" },
-          { "width": "2fr", "alt": "2023 - Community impact" }
-        ],
-        [
-          { "width": "1fr", "alt": "2023 - Innovation" },
-          { "width": "1fr", "alt": "2023 - Outreach" },
-          { "width": "1fr", "alt": "2023 - Fellowship" }
-        ]
+        { "width": "1fr", "alt": "2023 - 1", "image": "2015-01" },
+        { "width": "1fr", "alt": "2023 - 2", "image": "2015-02" }
       ]
     },
     {
       "year": 2024,
       "rows": [
-        [
-          { "width": "2fr", "alt": "2024 - Current year highlights" },
-          { "width": "3fr", "alt": "2024 - Recent achievements" }
-        ],
-        [
-          { "width": "1.5fr", "alt": "2024 - New initiatives" },
-          { "width": "1fr", "alt": "2024 - Community" },
-          { "width": "1.5fr", "alt": "2024 - Future vision" }
-        ]
+        { "width": "1fr", "alt": "2024 - 1", "image": "2015-01" },
+        { "width": "1fr", "alt": "2024 - 2", "image": "2015-02" }
       ]
     },
     {
       "year": 2025,
       "rows": [
-        [
-          { "width": "3fr", "alt": "2025 - Looking ahead" },
-          { "width": "2fr", "alt": "2025 - Future plans" }
-        ],
-        [
-          { "width": "1fr", "alt": "2025 - Vision" },
-          { "width": "2fr", "alt": "2025 - Goals" },
-          { "width": "1fr", "alt": "2025 - Dreams" }
-        ]
+        { "width": "1fr", "alt": "2025 - 1", "image": "2015-01" },
+        { "width": "1fr", "alt": "2025 - 2", "image": "2015-02" }
       ]
     }
   ]

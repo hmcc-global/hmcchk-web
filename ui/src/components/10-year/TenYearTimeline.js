@@ -16,45 +16,6 @@ import timelineYearData from './timelineData.json';
 // Register GSAP ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
-// Timeline milestone data
-const timelineData = [
-  {
-    year: 2015,
-    title: 'The Beginning',
-    description:
-      'HMCC Hong Kong was founded with a vision to reach the Chinese community in Hong Kong.',
-    highlight: 'Church Launch',
-  },
-  {
-    year: 2018,
-    title: 'Growing Community',
-    description:
-      'Established our first permanent location and launched multiple ministry programs.',
-    highlight: 'First Building',
-  },
-  {
-    year: 2020,
-    title: 'Digital Transformation',
-    description:
-      'Adapted to online ministry during the pandemic, reaching even more people globally.',
-    highlight: 'Online Ministry',
-  },
-  {
-    year: 2022,
-    title: 'Expansion',
-    description:
-      'Launched new campuses and expanded our reach across different districts.',
-    highlight: 'Multi-Campus',
-  },
-  {
-    year: 2025,
-    title: '10 Year Anniversary',
-    description:
-      "Celebrating a decade of God's faithfulness and looking forward to the future.",
-    highlight: 'Decade of Impact',
-  },
-];
-
 // Individual timeline item component with integrated year display
 const TimelineItem = ({
   item,
@@ -66,12 +27,16 @@ const TimelineItem = ({
   isLast,
 }) => {
   const itemRef = useRef(null);
-  const imageHeight = { base: '90px', sm: '110px', md: '140px', lg: '160px' };
-  const yearSuffixWidth = { base: '6rem', sm: '7rem', md: '8rem', lg: '10rem' };
   const yearData = timelineYearData?.years?.find((y) => y.year === item.year);
   const rows = yearData?.rows || [
-    [{ width: '2fr' }, { width: '3fr' }],
-    [{ width: '1.5fr' }, { width: '1fr' }, { width: '1.5fr' }],
+    [
+      { width: '1fr', alt: `${item.year} - 1`, image: '2015-01' },
+      { width: '1fr', alt: `${item.year} - 2`, image: '2015-02' },
+    ],
+    [
+      { width: '1fr', alt: `${item.year} - 1`, image: '2015-01' },
+      { width: '1fr', alt: `${item.year} - 2`, image: '2015-02' },
+    ],
   ];
 
   const frToFlex = (w) => {
@@ -79,6 +44,10 @@ const TimelineItem = ({
     const n = parseFloat(String(w).replace('fr', ''));
     return Number.isFinite(n) ? n : 1;
   };
+
+  // Build a PUBLIC_URL-based image path from filename (without extension)
+  const buildImageUrl = (filename) =>
+    `${process.env.PUBLIC_URL}/images/10-year/timeline/${filename}.png`;
 
   useEffect(() => {
     if (itemRef.current) {
@@ -102,7 +71,11 @@ const TimelineItem = ({
         align="center"
         w="90vw" // 90% of viewport width
         justify="flex-start"
-        pl={{ base: '6rem', sm: '7rem', md: '8rem', lg: '10rem' }} // Space for fixed "20"
+        pl={{
+          base: 'calc(var(--year-font) * 1.05)',
+          md: 'calc(var(--year-font) * 1.1)',
+          lg: 'calc(var(--year-font) * 1.15)',
+        }} // Space for fixed "20"
         pr={{ base: 4, sm: 6, md: 8 }} // Right padding for mobile
       >
         {/* Year suffix - only the last two digits, takes up actual space */}
@@ -110,12 +83,20 @@ const TimelineItem = ({
           className="year-suffix"
           display="flex"
           alignItems="center"
-          minW={yearSuffixWidth}
-          w={yearSuffixWidth}
+          minW={{
+            base: 'calc(var(--year-font) * 1.05)',
+            md: 'calc(var(--year-font) * 1.1)',
+            lg: 'calc(var(--year-font) * 1.15)',
+          }}
+          w={{
+            base: 'calc(var(--year-font) * 1.05)',
+            md: 'calc(var(--year-font) * 1.1)',
+            lg: 'calc(var(--year-font) * 1.15)',
+          }}
           justifyContent="flex-start"
         >
           <Text
-            fontSize={{ base: '5xl', sm: '6xl', md: '7xl', lg: '9xl' }}
+            fontSize="var(--year-font)"
             fontWeight="900"
             color="white"
             fontFamily={tenYearTheme.fonts.heading}
@@ -141,23 +122,40 @@ const TimelineItem = ({
           flex={1}
           w="100%"
         >
-          <VStack spacing={{ base: 1, md: 2 }} align="stretch" w="100%">
-            {rows.slice(0, 2).map((row, rowIdx) => (
+          <VStack spacing={1.5} align="stretch" w="100%" h="fit-content">
+            {(Array.isArray(rows?.[0])
+              ? rows.slice(0, 2)
+              : rows.slice(0, 2).map((item) => [item])
+            ).map((row, rowIdx) => (
               <HStack
-                key={rowIdx}
+                key={`row-${rowIdx}`}
                 spacing={{ base: 1, md: 2 }}
                 align="stretch"
                 w="100%"
+                h="var(--row-height)"
               >
-                {row.map((col, colIdx) => (
-                  <Box
-                    key={`${rowIdx}-${colIdx}`}
-                    flex={`${frToFlex(col.width)} 1 0`}
-                    h={imageHeight}
-                    bg="#E2E8F0"
-                    borderRadius={tenYearTheme.borderRadius.image}
-                  />
-                ))}
+                {row.map((col, colIdx) => {
+                  const url = col.image ? buildImageUrl(col.image) : undefined;
+                  return (
+                    <Box
+                      key={`cell-${rowIdx}-${colIdx}`}
+                      flex={`${frToFlex(col.width)} 1 0`}
+                      h="var(--row-height)"
+                      borderRadius={tenYearTheme.borderRadius.image}
+                      bg="transparent"
+                      aria-label={col.alt || `${item.year} photo ${colIdx + 1}`}
+                      {...(url
+                        ? {
+                            backgroundImage: `url('${url}')`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundColor: 'transparent',
+                          }
+                        : {})}
+                    />
+                  );
+                })}
               </HStack>
             ))}
           </VStack>
@@ -187,7 +185,7 @@ const TenYearTimeline = ({ onExit }) => {
 
   useEffect(() => {
     // Create scroll triggers for each timeline section
-    const sectionTriggers = timelineData.map((_, index) =>
+    const sectionTriggers = timelineYearData.years.map((_, index) =>
       ScrollTrigger.create({
         trigger: `.timeline-item-${index}`,
         start: 'top center',
@@ -200,7 +198,7 @@ const TenYearTimeline = ({ onExit }) => {
     // Pin the "20" between the first and last timeline items
     const firstContentSelector = `.timeline-item-0 .timeline-content`;
     const lastContentSelector = `.timeline-item-${
-      timelineData.length - 1
+      timelineYearData.years.length - 1
     } .timeline-content`;
 
     // Helpers to place the pinned element relative to a specific item
@@ -267,7 +265,7 @@ const TenYearTimeline = ({ onExit }) => {
         } else {
           // On forward unpin, attach to last item; on backward unpin, attach to first item
           if (self.direction === 1) {
-            placeRelativeToItem(timelineData.length - 1);
+            placeRelativeToItem(timelineYearData.years.length - 1);
           } else {
             placeRelativeToItem(0);
           }
@@ -306,49 +304,101 @@ const TenYearTimeline = ({ onExit }) => {
   }, [activeIndex]);
 
   return (
-    <Box ref={timelineRef} w="100%" position="relative">
-      {/* "20" prefix - controlled by GSAP ScrollTrigger */}
-      <Box
-        ref={pinnedRef}
-        position="absolute"
-        top={{ base: '1.5rem', md: '2rem' }}
-        left={{ base: '1.5rem', md: '2rem' }}
-        zIndex={5}
-        pointerEvents="none"
-        className="pinned-year-prefix"
-        opacity={0}
-        w="fit-content"
-        h="fit-content"
+    <>
+      <VStack
+        align="center"
+        justify="center"
+        py={5}
+        w="100%"
+        spacing={'-1.25rem'}
       >
-        <Text
-          fontSize={{ base: '5xl', sm: '6xl', md: '7xl', lg: '9xl' }}
-          fontWeight="900"
-          color="white"
-          fontFamily={tenYearTheme.fonts.heading}
-          fontStyle="normal"
-          lineHeight={0.8}
-          textShadow="0 0 40px rgba(255, 255, 255, 0.3)"
+        <Heading
+          {...tenYearTheme.components.heading}
+          {...tenYearTheme.typography.h1}
+          letterSpacing={tenYearTheme.letterSpacings.tight}
+          textAlign="center"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
         >
-          20
-        </Text>
-      </Box>
-
-      {/* Timeline content - scrolls normally without affecting "20" */}
-      <VStack spacing={0} align="stretch">
-        {timelineData.map((item, index) => (
-          <TimelineItem
-            key={item.year}
-            item={item}
-            index={index}
-            isActive={index === activeIndex}
-            isPassed={index < activeIndex}
-            isNext={index > activeIndex}
-            activeIndex={activeIndex}
-            isLast={index === timelineData.length - 1}
+          <Box
+            as="img"
+            src={`${process.env.PUBLIC_URL}/images/10-year/timeline/10.svg`}
+            alt="10"
+            h="3.5em"
+            w="fit-content"
+            display="inline-block"
+            verticalAlign="middle"
+            mr={'-0.88em'}
           />
-        ))}
+          <Text as="span" ml={0}>
+            Years: The Moments
+          </Text>
+        </Heading>
+        <Text
+          {...tenYearTheme.components.text}
+          {...tenYearTheme.typography.body}
+          fontSize={['16px', '18px']}
+          color="white"
+          textAlign="center"
+          maxW="100%"
+        >
+          Look back at the moments and recount all that God has done in the past
+          decade for our church family.
+        </Text>
       </VStack>
-    </Box>
+      <Box
+        ref={timelineRef}
+        w="100%"
+        position="relative"
+        style={{
+          ['--row-height']: 'clamp(100px, 11vw, 130px)',
+          ['--year-font']: 'calc(var(--row-height) * 0.95)',
+        }}
+      >
+        {/* "20" prefix - controlled by GSAP ScrollTrigger */}
+        <Box
+          ref={pinnedRef}
+          position="absolute"
+          top={{ base: '1.5rem', md: '2rem' }}
+          left={{ base: '1.5rem', md: '2rem' }}
+          zIndex={5}
+          pointerEvents="none"
+          className="pinned-year-prefix"
+          opacity={0}
+          w="fit-content"
+          h="fit-content"
+        >
+          <Text
+            fontSize="var(--year-font)"
+            fontWeight="900"
+            color="white"
+            fontFamily={tenYearTheme.fonts.heading}
+            fontStyle="normal"
+            lineHeight={0.8}
+            textShadow="0 0 40px rgba(255, 255, 255, 0.3)"
+          >
+            20
+          </Text>
+        </Box>
+
+        {/* Timeline content - scrolls normally without affecting "20" */}
+        <VStack spacing={0} align="stretch">
+          {timelineYearData.years.map((item, index) => (
+            <TimelineItem
+              key={item.year}
+              item={item}
+              index={index}
+              isActive={index === activeIndex}
+              isPassed={index < activeIndex}
+              isNext={index > activeIndex}
+              activeIndex={activeIndex}
+              isLast={index === timelineYearData.years.length - 1}
+            />
+          ))}
+        </VStack>
+      </Box>
+    </>
   );
 };
 
