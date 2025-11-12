@@ -19,10 +19,20 @@ gsap.registerPlugin(ScrollTrigger);
 const TimelineItem = ({ item, index, isLast, isMobile }) => {
   const itemRef = useRef(null);
   const yearData = timelineYearData?.years?.find((y) => y.year === item.year);
-  const rawRows = yearData?.rows || {
+  const defaultRows = {
     web: [{ width: '1fr', alt: `${item.year} - 1`, image: '2015-01' }],
     mobile: [{ width: '1fr', alt: `${item.year} - 1`, image: '2015-01' }],
   };
+  const [rawRows, setRawRows] = useState(yearData?.rows || defaultRows);
+
+  useEffect(() => {
+    setRawRows(yearData?.rows || defaultRows);
+  }, [yearData]);
+
+  useEffect(() => {
+    // Ensure ScrollTrigger recalculates when rows or breakpoint change
+    ScrollTrigger.refresh();
+  }, [rawRows, isMobile]);
 
   // Always render all rows for current breakpoint (rows is an object)
   const getRowsToRender = () => {
@@ -259,8 +269,17 @@ const TenYearTimeline = ({ onExit }) => {
   const bottomGradientRef = useRef(null);
   const bottomGradientPinRef = useRef(null);
 
+  // rows change is handled within TimelineItem via ScrollTrigger.refresh()
+
   useEffect(() => {
     const mm = gsap.matchMedia();
+    // Ensure GSAP can revert styles cleanly when contexts switch
+    ScrollTrigger.saveStyles([
+      '.pinned-year-prefix',
+      '.mobile-pinned-twenty',
+      '.pinned-heading',
+      '.pinned-bottom-gradient',
+    ]);
 
     // Shared triggers for all viewports
     mm.add('(min-width: 0px)', () => {
@@ -268,7 +287,7 @@ const TenYearTimeline = ({ onExit }) => {
       const sectionTriggers = timelineYearData.years.map((_, index) =>
         ScrollTrigger.create({
           trigger: `.timeline-item-${index}`,
-          start: 'top center',
+          start: 'center center',
           end: 'bottom center',
           onEnter: () => setActiveIndex(index),
           onEnterBack: () => setActiveIndex(index),
@@ -311,13 +330,11 @@ const TenYearTimeline = ({ onExit }) => {
       const fixBottomGradient = () => {
         const el = bottomGradientRef.current;
         if (!el) return;
-        const rect = el.getBoundingClientRect();
-        const bottomOffsetPx = Math.max(0, window.innerHeight - rect.bottom);
         gsap.set(el, {
           position: 'fixed',
           left: 0,
           right: 0,
-          bottom: bottomOffsetPx,
+          bottom: 0,
           top: 'auto',
           opacity: 1,
           zIndex: 4,
@@ -334,7 +351,18 @@ const TenYearTimeline = ({ onExit }) => {
         onLeaveBack: placeBottomGradientAtStart,
       });
 
-      // Fade-in after 30vh threshold and fade-out near end
+      // Ensure correct placement immediately and on refreshes
+      const syncBottomGradientPosition = () => {
+        if (!bottomGradientTrigger) return;
+        if (bottomGradientTrigger.isActive) {
+          fixBottomGradient();
+        } else if (bottomGradientTrigger.progress >= 1) {
+          placeBottomGradientAtEnd();
+        } else {
+          placeBottomGradientAtStart();
+        }
+      };
+
       if (bottomGradientRef.current) {
         gsap.fromTo(
           bottomGradientRef.current,
@@ -352,8 +380,8 @@ const TenYearTimeline = ({ onExit }) => {
         );
       }
 
-      // Initial placement to avoid pop-in when loaded scrolled
-      placeBottomGradientAtStart();
+      // Initial placement to match current scroll position
+      syncBottomGradientPosition();
 
       // Keep layout responsive during viewport resizes
       const onResize = () => {
@@ -361,20 +389,27 @@ const TenYearTimeline = ({ onExit }) => {
       };
       window.addEventListener('resize', onResize);
 
+      // Re-sync on ScrollTrigger refresh lifecycle
+      ScrollTrigger.addEventListener('refresh', syncBottomGradientPosition);
+
       // Cleanup for shared triggers
       return () => {
         sectionTriggers.forEach((t) => t.kill());
         bottomGradientTrigger.kill();
+        ScrollTrigger.removeEventListener(
+          'refresh',
+          syncBottomGradientPosition
+        );
         window.removeEventListener('resize', onResize);
       };
     });
 
     // Desktop / Web layout (Chakra md and up => 48em ~ 768px)
     mm.add('(min-width: 48em)', () => {
-      const firstContentSelector = `.timeline-item-0 .timeline-content`;
-      const lastContentSelector = `.timeline-item-${
+      const firstItemSelector = `.timeline-item-0`;
+      const lastItemSelector = `.timeline-item-${
         timelineYearData.years.length - 1
-      } .timeline-content`;
+      }`;
 
       const placeRelativeToItem = (itemIndex) => {
         const itemEl = document.querySelector(`.timeline-item-${itemIndex}`);
@@ -393,53 +428,105 @@ const TenYearTimeline = ({ onExit }) => {
           suffixRect.top -
           itemRect.top +
           (suffixRect.height - pinnedRect.height) / 2;
+        const leftWithinItem =
+          suffixRect.left - itemRect.left - pinnedRect.width;
         gsap.set(pinnedEl, {
           position: 'absolute',
           top: centeredTopWithinItem,
-          left: suffixRect.left - itemRect.left - pinnedRect.width,
+          left: leftWithinItem,
+          transform: 'none',
+          opacity: 1,
+        });
+      };
+
+      // Place the pinned "20" just above the given item's year suffix with a small gap
+      const placeAboveItem = (itemIndex) => {
+        const itemEl = document.querySelector(`.timeline-item-${itemIndex}`);
+        const suffixEl = document.querySelector(
+          `.timeline-item-${itemIndex} .year-suffix`
+        );
+        const pinnedEl = pinnedRef.current;
+        if (!itemEl || !suffixEl || !pinnedEl) return;
+        const itemRect = itemEl.getBoundingClientRect();
+        const suffixRect = suffixEl.getBoundingClientRect();
+        const pinnedRect = pinnedEl.getBoundingClientRect();
+        if (pinnedEl.parentElement !== itemEl) {
+          itemEl.appendChild(pinnedEl);
+        }
+        const gapPx = 8;
+        const topWithinItem =
+          suffixRect.top - itemRect.top - pinnedRect.height - gapPx;
+        const leftWithinItem =
+          suffixRect.left - itemRect.left - pinnedRect.width;
+        gsap.set(pinnedEl, {
+          position: 'absolute',
+          top: topWithinItem,
+          left: leftWithinItem,
           transform: 'none',
           opacity: 1,
         });
       };
 
       const positionPinnedToActive = () => {
-        const idx = activeIndexRef.current;
-        const itemEl = document.querySelector(`.timeline-item-${idx}`);
+        const idx = getIndexClosestToCenter();
         const suffixEl = document.querySelector(
           `.timeline-item-${idx} .year-suffix`
         );
         const pinnedEl = pinnedRef.current;
-        const root = timelineRef.current;
-        if (!suffixEl || !pinnedEl || !itemEl) return;
-        if (root && pinnedEl.parentElement !== root) {
-          root.appendChild(pinnedEl);
-        }
+        if (!suffixEl || !pinnedEl) return;
         const suffixRect = suffixEl.getBoundingClientRect();
         const pinnedRect = pinnedEl.getBoundingClientRect();
-        const centeredTop =
-          suffixRect.top + (suffixRect.height - pinnedRect.height) / 2;
+        const centerTop = window.innerHeight / 2 - pinnedRect.height / 2;
         gsap.set(pinnedEl, {
-          position: 'fixed',
-          top: centeredTop,
+          top: centerTop,
           left: suffixRect.left - pinnedRect.width,
           transform: 'none',
           opacity: 1,
         });
       };
 
-      // Initial placement: align with first item
-      placeRelativeToItem(0);
+      // Determine the item closest to the viewport center and sync active index
+      const getIndexClosestToCenter = () => {
+        const centerY = window.innerHeight / 2;
+        let closestIndex = 0;
+        let closestDist = Infinity;
+        for (let i = 0; i < timelineYearData.years.length; i += 1) {
+          const el = document.querySelector(`.timeline-item-${i}`);
+          if (!el) continue;
+          const rect = el.getBoundingClientRect();
+          const elCenter = rect.top + rect.height / 2;
+          const dist = Math.abs(elCenter - centerY);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closestIndex = i;
+          }
+        }
+        return closestIndex;
+      };
+
+      const syncActiveIndexToViewport = () => {
+        const idx = getIndexClosestToCenter();
+        activeIndexRef.current = idx;
+        setActiveIndex(idx);
+        return idx;
+      };
+
+      // Initial placement: align with the item nearest the viewport center
+      const initialIdx = syncActiveIndexToViewport();
+      placeRelativeToItem(initialIdx);
 
       const pinTwenty = ScrollTrigger.create({
-        trigger: firstContentSelector,
-        endTrigger: lastContentSelector,
-        start: 'center center',
-        end: 'center center',
+        trigger: firstItemSelector,
+        endTrigger: lastItemSelector,
+        start: 'top 40%',
+        end: 'bottom 60%',
         pin: '.pinned-year-prefix',
         pinSpacing: false,
         invalidateOnRefresh: true,
+        // No per-scroll updates to avoid snapping; compute only on toggle/refresh
         onToggle: (self) => {
           if (self.isActive) {
+            // When entering pin range, ensure the pinned element is positioned relative to the root
             positionPinnedToActive();
           } else {
             if (self.direction === 1) {
@@ -453,7 +540,7 @@ const TenYearTimeline = ({ onExit }) => {
 
       const pinHeading = ScrollTrigger.create({
         trigger: '.pinned-heading',
-        endTrigger: lastContentSelector,
+        endTrigger: lastItemSelector,
         start: 'top 0%',
         end: 'bottom 60%',
         pin: '.pinned-heading',
@@ -465,26 +552,91 @@ const TenYearTimeline = ({ onExit }) => {
         if (pinTwenty && pinTwenty.isActive) {
           positionPinnedToActive();
         } else {
-          placeRelativeToItem(activeIndexRef.current);
+          const idx = syncActiveIndexToViewport();
+          placeRelativeToItem(idx);
         }
       };
       ScrollTrigger.addEventListener('refresh', onStRefresh);
 
+      // On desktop resize, keep the pinned "20" vertically centered in the viewport
+      const onDesktopResize = () => {
+        const pinnedEl = pinnedRef.current;
+        if (!pinnedEl) return;
+        if (pinTwenty && pinTwenty.isActive) {
+          const pinnedRect = pinnedEl.getBoundingClientRect();
+          const centerTop = window.innerHeight / 2 - pinnedRect.height / 2;
+          const idx = getIndexClosestToCenter();
+          const suffixEl = document.querySelector(
+            `.timeline-item-${idx} .year-suffix`
+          );
+          let nextLeft;
+          if (suffixEl) {
+            const suffixRect = suffixEl.getBoundingClientRect();
+            nextLeft = suffixRect.left - pinnedRect.width;
+          }
+          gsap.set(pinnedEl, {
+            top: centerTop,
+            ...(typeof nextLeft === 'number' ? { left: nextLeft } : {}),
+            transform: 'none',
+            opacity: 1,
+          });
+        }
+      };
+      window.addEventListener('resize', onDesktopResize);
+
       // Ensure correct initialization after breakpoint switch
       ScrollTrigger.refresh();
+
+      // Additional initialization passes to account for async layout/font loading
+      const applyInitialPositioning = () => {
+        if (pinTwenty && pinTwenty.isActive) {
+          // Ensure we have the correct active index based on current scroll position
+          syncActiveIndexToViewport();
+          positionPinnedToActive();
+        } else {
+          const idx = syncActiveIndexToViewport();
+          placeRelativeToItem(idx);
+        }
+      };
+
+      // Next frame: after first layout
+      requestAnimationFrame(() => {
+        applyInitialPositioning();
+      });
+
+      // After fonts are ready (text metrics stabilized)
+      if (document && document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => {
+          ScrollTrigger.refresh();
+          applyInitialPositioning();
+        });
+      }
+
+      // After window load (images/backgrounds/etc.)
+      const onWindowLoad = () => {
+        ScrollTrigger.refresh();
+        applyInitialPositioning();
+      };
+      window.addEventListener('load', onWindowLoad);
 
       return () => {
         pinTwenty.kill();
         pinHeading.kill();
         ScrollTrigger.removeEventListener('refresh', onStRefresh);
+        window.removeEventListener('load', onWindowLoad);
+        window.removeEventListener('resize', onDesktopResize);
       };
     });
 
     // Mobile layout (below Chakra md)
     mm.add('(max-width: 47.99em)', () => {
-      const lastContentSelector = `.timeline-item-${
-        timelineYearData.years.length - 1
-      } .timeline-content`;
+      // Resolve DOM elements up-front and hold references to triggers safely
+      const triggerEl = document.querySelector(`.timeline-item-0`);
+      const endEl = timelineRef.current;
+      const pinEl = document.querySelector('.mobile-pinned-twenty');
+      const headingEl = document.querySelector('.pinned-heading');
+      let mobilePin = null;
+      let pinHeading = null;
 
       const positionMobilePinnedToActive = () => {
         const idx = activeIndexRef.current;
@@ -492,47 +644,105 @@ const TenYearTimeline = ({ onExit }) => {
           `.timeline-item-${idx} .year-suffix`
         );
         const mobilePinnedEl = document.querySelector('.mobile-pinned-twenty');
-        if (!suffixEl || !mobilePinnedEl) return;
+        if (!mobilePinnedEl) return;
+        // Only force fixed positioning when the pin is active
+        if (!mobilePin || !mobilePin.isActive) {
+          gsap.set(mobilePinnedEl, {
+            position: 'relative',
+            top: 0,
+            left: 'auto',
+            transform: 'none',
+            opacity: 1,
+          });
+          return;
+        }
+        if (!suffixEl) return;
         const suffixRect = suffixEl.getBoundingClientRect();
         const pinnedRect = mobilePinnedEl.getBoundingClientRect();
+        const headingEl = document.querySelector('.pinned-heading');
+        const marginPx = 8;
         const gapPx = 4;
-        const top = Math.max(0, suffixRect.top - pinnedRect.height - gapPx);
+        const defaultTop = suffixRect.top - pinnedRect.height - gapPx;
+        const minTop = headingEl
+          ? headingEl.getBoundingClientRect().bottom + marginPx
+          : marginPx;
+        const maxTop = window.innerHeight - pinnedRect.height - marginPx;
+        const safeZoneHeight = Math.max(0, maxTop - minTop);
+        // Ensure the pinned "20" never sits too high; baseline ~40% down the safe zone
+        const baselineFloor = minTop + safeZoneHeight * 0.4;
+        const clampedTop = Math.min(
+          maxTop,
+          Math.max(baselineFloor, defaultTop)
+        );
         const left =
           suffixRect.left + (suffixRect.width - pinnedRect.width) / 2;
         gsap.set(mobilePinnedEl, {
           position: 'fixed',
-          top,
+          top: clampedTop,
           left,
           transform: 'none',
           opacity: 1,
         });
       };
 
-      const mobilePin = ScrollTrigger.create({
-        trigger: `.timeline-item-0`,
-        endTrigger: lastContentSelector,
-        start: 'top 35%',
+      mobilePin = ScrollTrigger.create({
+        id: 'mobilePinTwenty',
+        trigger: triggerEl || `.timeline-item-0`,
+        endTrigger: endEl || timelineRef.current,
+        start: () =>
+          `top ${
+            window.matchMedia('(max-width: 29.99em)').matches ? '35%' : '40%'
+          }`,
         end: 'bottom 80%',
-        pin: '.mobile-pinned-twenty',
+        pin: pinEl || '.mobile-pinned-twenty',
         pinSpacing: false,
         invalidateOnRefresh: true,
         onToggle: (self) => {
           if (self.isActive) {
             positionMobilePinnedToActive();
+          } else {
+            const el = document.querySelector('.mobile-pinned-twenty');
+            if (el) {
+              gsap.set(el, {
+                position: 'relative',
+                top: 0,
+                left: 'auto',
+                transform: 'none',
+                opacity: 1,
+              });
+            }
           }
         },
         onUpdate: () => positionMobilePinnedToActive(),
       });
 
-      const pinHeading = ScrollTrigger.create({
-        trigger: '.pinned-heading',
-        endTrigger: lastContentSelector,
-        start: 'top 5%',
-        end: 'bottom 80%',
-        pin: '.pinned-heading',
-        pinSpacing: false,
-        invalidateOnRefresh: true,
-      });
+      if (headingEl && endEl) {
+        pinHeading = ScrollTrigger.create({
+          id: 'mobilePinHeading',
+          trigger: headingEl,
+          endTrigger: endEl,
+          start: 'top 5%',
+          end: 'bottom 80%',
+          pin: headingEl,
+          pinSpacing: false,
+          invalidateOnRefresh: true,
+        });
+      }
+
+      // Fade away the heading and mobile "20" near the end to hide jump
+      let fadeOutMobileUI = null;
+      if (pinEl && headingEl && endEl) {
+        fadeOutMobileUI = gsap.to([headingEl, pinEl], {
+          opacity: 0,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: endEl,
+            start: 'bottom 120%',
+            end: 'bottom 80%',
+            scrub: true,
+          },
+        });
+      }
 
       const onStRefresh = () => {
         positionMobilePinnedToActive();
@@ -546,8 +756,13 @@ const TenYearTimeline = ({ onExit }) => {
       ScrollTrigger.refresh();
 
       return () => {
-        mobilePin.kill();
-        pinHeading.kill();
+        if (mobilePin) mobilePin.kill();
+        if (pinHeading) pinHeading.kill();
+        if (fadeOutMobileUI) {
+          if (fadeOutMobileUI.scrollTrigger)
+            fadeOutMobileUI.scrollTrigger.kill();
+          fadeOutMobileUI.kill();
+        }
         ScrollTrigger.removeEventListener('refresh', onStRefresh);
       };
     });
@@ -559,6 +774,11 @@ const TenYearTimeline = ({ onExit }) => {
     activeIndexRef.current = activeIndex;
   }, [activeIndex]);
 
+  // Recalculate when breakpoint changes
+  useEffect(() => {
+    ScrollTrigger.refresh();
+  }, [isMobile]);
+
   return (
     <>
       <Box
@@ -567,11 +787,12 @@ const TenYearTimeline = ({ onExit }) => {
         w="100%"
         bgGradient="linear(180deg, #000214 0%, #0C134A 25%, rgba(16, 24, 97, 0.70) 50%, rgba(0, 13, 146, 0.00) 100%)"
         zIndex={2}
+        minH={['35vh', '35vh', '50vh']}
       >
         <VStack
           align="center"
           justify="center"
-          py={'2rem'}
+          py={('0.5rem', '0.5rem', '2.5rem')}
           w="100%"
           // h="100%"
           spacing={'-1.25rem'}
@@ -607,7 +828,7 @@ const TenYearTimeline = ({ onExit }) => {
             fontSize={['16px', '18px']}
             color="white"
             textAlign="center"
-            maxW="100%"
+            maxW="90%"
           >
             Look back at the moments and recount all that God has done in the
             past decade for our church family.
@@ -646,6 +867,7 @@ const TenYearTimeline = ({ onExit }) => {
             fontStyle="normal"
             lineHeight={0.8}
             textShadow="0 0 40px rgba(255, 255, 255, 0.3)"
+            whiteSpace="nowrap"
           >
             20
           </Text>
@@ -657,6 +879,7 @@ const TenYearTimeline = ({ onExit }) => {
           mx="auto"
           zIndex={3}
           display={{ base: 'block', md: 'none' }}
+          mt={['-7rem', '-3.5rem', 0]}
         >
           <Text
             fontSize="var(--year-font)"
@@ -665,6 +888,7 @@ const TenYearTimeline = ({ onExit }) => {
             fontFamily={tenYearTheme.fonts.heading}
             lineHeight={0.8}
             textShadow="0 0 40px rgba(255, 255, 255, 0.3)"
+            whiteSpace="nowrap"
           >
             20
           </Text>
