@@ -14,7 +14,7 @@ import { tenYearTheme } from './theme';
 const TenYearVideo = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   // EASY SWITCH: flip to false when real assets are ready
-  const USE_PLACEHOLDERS = true;
+  const USE_PLACEHOLDERS = false;
   const PLACEHOLDER_TITLE = '(Videos coming soon)';
   // Place the image at this path in `ui/public` (e.g. ui/public/assets/tenyear/placeholder.jpg)
   const PLACEHOLDER_IMAGE = '/images/10-year/10y_video_placeholder.png';
@@ -28,9 +28,27 @@ const TenYearVideo = () => {
 
   // When USE_PLACEHOLDERS === false, replace the below with real titles and video srcs
   const realVideos = [
-    { id: 'a', title: '', src: '' },
-    { id: 'b', title: '', src: '' },
-    { id: 'c', title: '', src: '' },
+    {
+      id: 'a',
+      title: 'Greetings from Guests',
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+      thumbnail:
+        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg',
+    },
+    {
+      id: 'b',
+      title: 'HMCC-HK (2015-2025)',
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+      thumbnail:
+        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg',
+    },
+    {
+      id: 'c',
+      title: 'Transformation: 10 years of HMCC-HK',
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+      thumbnail:
+        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg',
+    },
   ];
 
   const videos = USE_PLACEHOLDERS ? placeholderVideos : realVideos;
@@ -188,14 +206,32 @@ We invite you to watch, remember, and rejoice in all He has done.`}
                     </Flex>
                   </>
                 ) : (
-                  <Flex w="100%" h="100%" align="center" justify="center">
-                    <Text
-                      fontWeight={700}
-                      color={tenYearTheme.colors.text.primary}
+                  <>
+                    <Image
+                      src={v.thumbnail}
+                      alt={v.title}
+                      w="100%"
+                      h="100%"
+                      objectFit="cover"
+                    />
+                    <Flex
+                      position="absolute"
+                      top={0}
+                      left={0}
+                      w="100%"
+                      h="100%"
+                      align="center"
+                      justify="center"
+                      bg="rgba(0,0,0,0.3)"
                     >
-                      {v.title}
-                    </Text>
-                  </Flex>
+                      <Image
+                        src="/images/10-year/playicon.svg"
+                        alt="Play"
+                        w="1.5rem"
+                        h="1.5rem"
+                      />
+                    </Flex>
+                  </>
                 )}
               </Box>
             );
@@ -254,7 +290,7 @@ We invite you to watch, remember, and rejoice in all He has done.`}
                   as="video"
                   src={activeVideo.src}
                   controls
-                  poster={undefined}
+                  poster={activeVideo.thumbnail}
                   bg="#0B1020"
                 />
               )}
