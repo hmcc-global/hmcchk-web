@@ -55,11 +55,11 @@ We invite you to watch, remember, and rejoice in all He has done.`}
       </VStack>
 
       <Flex w="100%" maxW="1200px" gap={10} align="stretch" justify="center">
-        <VStack spacing={12} minW="300px" align="center">
+        <VStack spacing={14} minW="300px" align="center">
           {videos.map((v, idx) => {
             const isActive = idx === activeIndex;
-            const width = isActive ? '280px' : '220px';
-            const height = isActive ? '157px' : '124px';
+            const width = isActive ? '13.3rem' : '8.5rem';
+            const height = isActive ? '7.5rem' : '4.75rem';
             return (
               <Box
                 key={v.id}
@@ -79,7 +79,29 @@ We invite you to watch, remember, and rejoice in all He has done.`}
                 }}
               >
                 {USE_PLACEHOLDERS ? (
-                  <Image src={v.image} alt={v.title} w="100%" h="100%" objectFit="cover" />
+                  <>
+                    <Image src={v.image} alt={v.title} w="100%" h="100%" objectFit="cover" />
+                    <Flex
+                      position="absolute"
+                      top={0}
+                      left={0}
+                      w="100%"
+                      h="100%"
+                      align="center"
+                      justify="center"
+                      bg="rgba(0,0,0,0.4)"
+                    >
+                      <Text
+                        fontWeight={700}
+                        color={tenYearTheme.colors.text.primary}
+                        fontSize="0.625rem"
+                        textAlign="center"
+                        fontFamily={tenYearTheme.fonts.giving}
+                      >
+                        COMING SOON
+                      </Text>
+                    </Flex>
+                  </>
                 ) : (
                   <Flex w="100%" h="100%" align="center" justify="center">
                     <Text fontWeight={700} color={tenYearTheme.colors.text.primary}>
@@ -101,9 +123,22 @@ We invite you to watch, remember, and rejoice in all He has done.`}
             transition="box-shadow 250ms ease"
             boxShadow="0 0 36px rgba(149,207,255,0.75), 0 0 52px rgba(0,41,189,0.55)"
           >
-            <AspectRatio w="100%" ratio={16 / 9}>
+            <AspectRatio w="55rem" ratio={16 / 9}>
               {USE_PLACEHOLDERS ? (
-                <Image src={activeVideo.image} alt={activeVideo.title} w="100%" h="100%" objectFit="cover" />
+                <>
+                  <Image src={activeVideo.image} alt={activeVideo.title} w="100%" h="100%" objectFit="cover" />
+                  <Flex
+                    position="absolute"
+                    top={0}
+                    left={0}
+                    w="100%"
+                    h="100%"
+                    align="center"
+                    justify="center"
+                  >
+                    <Image src="/images/10-year/playicon.svg" alt="Play" w="70px" h="70px" />
+                  </Flex>
+                </>
               ) : (
                 <Box as="video" src={activeVideo.src} controls poster={undefined} bg="#0B1020" />
               )}
@@ -112,14 +147,13 @@ We invite you to watch, remember, and rejoice in all He has done.`}
           <Box
             w="100%"
             maxW="900px"
-            borderRadius="0"
+            borderRadius="40px"
             bg="rgba(5, 10, 25, 0.75)"
             px={6}
             py={3}
-            boxShadow="inset 0 1px 0 rgba(255,255,255,0.08), 0 6px 16px rgba(0,0,0,0.5)"
           >
-            <Text textAlign="center" {...tenYearTheme.typography.body} color={tenYearTheme.colors.text.primary}>
-              {PLACEHOLDER_TITLE}
+            <Text textAlign="center" {...tenYearTheme.typography.body}>
+              {USE_PLACEHOLDERS ? PLACEHOLDER_TITLE : activeVideo.title}
             </Text>
           </Box>
         </VStack>
