@@ -264,10 +264,7 @@ const TenYearTimeline = ({ onExit }) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const pinnedRef = useRef(null);
   const activeIndexRef = useRef(0);
-  const pinRef = useRef(null);
-  const headingPinRef = useRef(null);
   const bottomGradientRef = useRef(null);
-  const bottomGradientPinRef = useRef(null);
 
   // rows change is handled within TimelineItem via ScrollTrigger.refresh()
 
@@ -433,34 +430,6 @@ const TenYearTimeline = ({ onExit }) => {
         gsap.set(pinnedEl, {
           position: 'absolute',
           top: centeredTopWithinItem,
-          left: leftWithinItem,
-          transform: 'none',
-          opacity: 1,
-        });
-      };
-
-      // Place the pinned "20" just above the given item's year suffix with a small gap
-      const placeAboveItem = (itemIndex) => {
-        const itemEl = document.querySelector(`.timeline-item-${itemIndex}`);
-        const suffixEl = document.querySelector(
-          `.timeline-item-${itemIndex} .year-suffix`
-        );
-        const pinnedEl = pinnedRef.current;
-        if (!itemEl || !suffixEl || !pinnedEl) return;
-        const itemRect = itemEl.getBoundingClientRect();
-        const suffixRect = suffixEl.getBoundingClientRect();
-        const pinnedRect = pinnedEl.getBoundingClientRect();
-        if (pinnedEl.parentElement !== itemEl) {
-          itemEl.appendChild(pinnedEl);
-        }
-        const gapPx = 8;
-        const topWithinItem =
-          suffixRect.top - itemRect.top - pinnedRect.height - gapPx;
-        const leftWithinItem =
-          suffixRect.left - itemRect.left - pinnedRect.width;
-        gsap.set(pinnedEl, {
-          position: 'absolute',
-          top: topWithinItem,
           left: leftWithinItem,
           transform: 'none',
           opacity: 1,
@@ -780,7 +749,7 @@ const TenYearTimeline = ({ onExit }) => {
   }, [isMobile]);
 
   return (
-    <>
+    <Box className="timeline-section" position="relative" pb="19vh" w="100%">
       <Box
         className="pinned-heading"
         position="relative"
@@ -893,7 +862,6 @@ const TenYearTimeline = ({ onExit }) => {
             20
           </Text>
         </Box>
-
         {/* Timeline content - scrolls normally without affecting "20" */}
         <VStack spacing={0} align="stretch">
           {timelineYearData.years.map((item, index) => (
@@ -920,7 +888,7 @@ const TenYearTimeline = ({ onExit }) => {
           pointerEvents="none"
         />
       </Box>
-    </>
+    </Box>
   );
 };
 
