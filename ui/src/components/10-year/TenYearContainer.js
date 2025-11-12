@@ -1,5 +1,6 @@
 import { Flex, Box, VStack } from '@chakra-ui/react';
 import HeroSection from './HeroSection';
+import Testimony from './Testimony';
 import TenYearVideo from './TenYearVideo';
 import OfferingSection from './OfferingSection';
 import ClosingRemarks from './ClosingRemarks';
@@ -20,6 +21,7 @@ const TenYearContainer = () => {
       align="center"
     >
       <HeroSection />
+      <Testimony />
       <Box w="100%" px={[4, 8]}>
         <TenYearVideo />
       </Box>
