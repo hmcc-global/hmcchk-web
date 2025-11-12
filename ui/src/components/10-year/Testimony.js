@@ -21,6 +21,7 @@ const Testimony = () => {
         direction="column"
         {...tenYearTheme.components.fullPageSection}
         position="relative"
+        paddingX={['1.5rem', '2rem', '4rem']}
         zIndex={1}
       >
         <Text {...tenYearTheme.typography.h1}>
@@ -42,7 +43,7 @@ const Testimony = () => {
         </Text>
         <iframe
           src="https://padlet.com/embed/8z5rbl41cl1ji4ax"
-          width={['100%', '80%']}
+          width="100%"
           height="600"
           frameborder="0"
           allowfullscreen

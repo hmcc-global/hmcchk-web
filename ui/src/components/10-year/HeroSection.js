@@ -47,7 +47,7 @@ const HeroSection = () => {
         h="100%"
         justifyContent="space-between"
         paddingTop={['2rem', '3.5rem']}
-        paddingX={['1.5rem', '4rem']}
+        paddingX={['1.5rem', '2rem', '4rem']}
       >
         <Flex w="25%" h="25%" alignSelf="start" alignItems="start">
           <Text
@@ -93,7 +93,6 @@ const HeroSection = () => {
           </Box>
         </Flex>
         <Flex
-          w={['80%', '50%']}
           flexDir="column"
           alignSelf={['center', 'flex-end']}
           alignItems="flex-end"
@@ -124,7 +123,7 @@ const HeroSection = () => {
               position="relative"
               lineHeight="inherit"
               verticalAlign="middle"
-              display={['none', 'inline']}
+              display={['none', 'none', 'inline']}
             >
               Years of
             </Text>
@@ -133,7 +132,7 @@ const HeroSection = () => {
               position="relative"
               lineHeight="inherit"
               verticalAlign="middle"
-              display={['inline', 'none']}
+              display={['inline', 'inline', 'none']}
             >
               Years
             </Text>
@@ -144,7 +143,7 @@ const HeroSection = () => {
               position="relative"
               lineHeight="inherit"
               verticalAlign="middle"
-              display={['inline', 'none']}
+              display={['inline', 'inline', 'none']}
               left={['0', '-1rem']}
               whiteSpace="pre"
             >

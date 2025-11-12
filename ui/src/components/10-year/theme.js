@@ -74,7 +74,7 @@ export const tenYearTheme = {
     title: {
       fontFamily: "'Abhaya Libre', serif",
       fontWeight: 500,
-      fontSize: ['40px', '64px'],
+      fontSize: ['2.5rem', '3.2rem', '4rem'],
       letterSpacing: '-0.03em',
       lineHeight: 1.1,
       color: '#FFFFFF',
@@ -82,7 +82,7 @@ export const tenYearTheme = {
     h1: {
       fontFamily: "'Abhaya Libre', serif",
       fontWeight: 500,
-      fontSize: ['1.8rem', '3.125rem'],
+      fontSize: ['1.8rem', '2.7rem', '3.125rem'],
       letterSpacing: '-0.03em',
       lineHeight: 1.1,
       color: '#FFFFFF',
