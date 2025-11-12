@@ -27,26 +27,44 @@ const OfferingSection = (props) => {
     : `${process.env.PUBLIC_URL}/images/10-year/offeringBackground.png`;
 
   return (
-    <Box position="relative" w="100%" paddingTop="5rem">
-      <Flex
-        as="section"
-        {...tenYearTheme.components.fullPageSection}
-        bg={bg}
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        backgroundImage={`url(${offering_background})`}
-        backgroundSize="cover"
-        backgroundAttachment={'fixed'}
-        backgroundPosition="center"
-        backgroundRepeat="no-repeat"
+    <Box position="relative" w="100%" paddingTop="5rem" overflow="hidden">
+      <Box
+        position="absolute"
+        top="0"
+        left="0"
         width="100%"
-        minHeight={'100vh'}
-        position="relative"
-        paddingTop="2rem"
-        paddingBottom="5rem"
+        height="100%"
         overflow="hidden"
       >
+        <Box
+          position="sticky"
+          top="0"
+          left="0"
+          width="100vw"
+          height="100%"
+          backgroundImage={`url(${offering_background})`}
+          backgroundSize="cover"
+          backgroundPosition="center"
+          backgroundRepeat="repeat"
+          backgroundAttachment={"fixed"}
+          zIndex="0"
+        />
+      </Box>
+  
+      
+      {/* Content container */}
+        <Flex 
+          as="section" 
+          {...tenYearTheme.components.fullPageSection} 
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          width="100%"
+          minHeight="100vh"
+          position="relative"
+          paddingY="24px"
+          zIndex="1"
+        >
         <Heading
           display="flex"
           alignItems="center"
