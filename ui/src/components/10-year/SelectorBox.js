@@ -1,11 +1,22 @@
 import { useState } from 'react';
 import { Box, HStack } from '@chakra-ui/react';
 import { tenYearTheme } from './theme';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const MotionBox = motion(Box);
+const MotionHStack = motion(HStack);
 
 const SelectorBox = ({ options, defaultSelected = 0 }) => {
   const [selectedIndex, setSelectedIndex] = useState(defaultSelected);
+  const [contentDirection, setContentDirection] = useState(0);
 
   const selected = options?.[selectedIndex] || options?.[0];
+
+  const handleSelect = (idx) => {
+    // Set direction for animation
+    setContentDirection(idx > selectedIndex ? 1 : -1);
+    setSelectedIndex(idx);
+  };
 
   return (
     <Box width="100%" maxW="850px" mx="auto" mt={6}>
@@ -36,7 +47,26 @@ const SelectorBox = ({ options, defaultSelected = 0 }) => {
           }
         }}
       >
-        <HStack spacing={0} align="stretch">
+        <MotionBox
+          position="absolute"
+          top="8px"
+          bottom="8px"
+          left={"10px"}
+          width={`${100 / options.length - 10}%`}
+          bg="#95CFFF"
+          borderRadius="80px"
+          initial={false}
+          animate={{
+            x: `${selectedIndex * 130}%`,
+            transition: {
+              type: "spring",
+              damping: 30,
+              stiffness: 500
+            }
+          }}
+          zIndex={1} // Behind the text
+        />
+        <HStack spacing={0} align="stretch" zIndex={1}>
           {options.map((opt, idx) => {
             const isActive = idx === selectedIndex;
             return (
@@ -54,6 +84,7 @@ const SelectorBox = ({ options, defaultSelected = 0 }) => {
                 {...tenYearTheme.typography.subheading}
                 bg={isActive ? '#95CFFF' : 'transparent'}
                 color={isActive ? '#00114F' : '#95CFFF'}
+                zIndex={3}
               >
                 {opt.title}
               </Box>
@@ -62,7 +93,30 @@ const SelectorBox = ({ options, defaultSelected = 0 }) => {
         </HStack>
       </Box>
 
-      {selected?.content}
+      <AnimatePresence mode="wait">
+        <MotionBox
+          key={selectedIndex}
+          initial={{ 
+            opacity: 0,
+            x: contentDirection > 0 ? 50 : -50 
+          }}
+          animate={{ 
+            opacity: 1,
+            x: 0,
+            transition: { 
+              duration: 0.3,
+              delay: 0.2
+            }
+          }}
+          exit={{ 
+            opacity: 0,
+            x: contentDirection > 0 ? -50 : 50,
+            transition: { duration: 0.2 }
+          }}
+        >
+          {selected?.content}
+        </MotionBox>
+      </AnimatePresence>
 
     </Box>
   );

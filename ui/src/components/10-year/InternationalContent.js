@@ -1,18 +1,49 @@
-import { Box, Text, Button, Image } from '@chakra-ui/react';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { Box, Text, Button, Image, Link, useToast, useBreakpointValue } from '@chakra-ui/react';
+import { CopyIcon } from '@chakra-ui/icons';
 import { tenYearTheme } from './theme';
 
-const qr_image = `${process.env.PUBLIC_URL}/images/10-year/fpshongkong.png`;
+const qr_image = `${process.env.PUBLIC_URL}/images/10-year/internationalQR.png`;
 
-const InternationalContent = () => (
+const InternationalContent = () => {
+  const toast = useToast();
+  const isMobile = useBreakpointValue({ base: true, md: false });
+  
+  const copyEmailToClipboard = () => {
+    const email = 'hmg@hongkong.hmcc.net';
+    navigator.clipboard.writeText(email)
+      .then(() => {
+        toast({
+          title: 'Email copied to clipboard',
+          description: `${email} has been copied to your clipboard`,
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+          position: 'top',
+        });
+      })
+      .catch(err => {
+        console.error('Failed to copy: ', err);
+        toast({
+          title: 'Failed to copy',
+          description: 'Please try again or copy manually',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+          position: 'top',
+        });
+      });
+  };
+
+  return (
   <Box
-    width="100%"
-    height="auto"
+    width="auto"
+    height={{base: "auto", md: "370px"}}
     borderRadius="20px"
     padding="20px"
+    paddingBottom={"0px"}
     bgColor="rgba(0, 5, 68, 0.01)"
     display="flex"
-    flexDirection="column"
+    flexDirection={{base:"row", md: "column"}}
     position="relative"
     overflow="visible"
     alignContent={"center"}
@@ -39,138 +70,114 @@ const InternationalContent = () => (
       }
     }}
   >
-    {/* Top section - divided into left and right */}
     <Box 
       display="flex" 
       flex="1"
       position="relative"
+      flexDirection={{ base: "column", md: "row" }}
       marginBottom="20px"
+      height={{base:"auto", md:"280px"}}
     >
       {/* Left section */}
       <Box 
         flex="1" 
-        paddingRight="20px"
+        paddingRight={{base: "0", md: "20px"}}
         display="flex"
         flexDirection="column"
-        justifyContent="flex-start"
+        justifyContent="space-between"
         alignItems="center"
+        minHeight={{base: "auto", md: "290px"}}
+        // gap={{base: 4, md: 0}}
+        paddingBottom={{base: 6, md: 0}}
       >
-        <Text {...tenYearTheme.typography.subheading}>
-          Give through Fast Payment System (FPS)
+        <Text {...tenYearTheme.typography.subheading} textAlign="center">
+          Give via Credit Card
         </Text>
-        <Text mt={4} {...tenYearTheme.typography.givingInfo} fontWeight={700}>
-          FPS ID: 167534304
-        </Text>
-        <Image src={qr_image} alt="FPS QR" mt={4} width={{base: "90px", md: "130px"}} height="auto" />
+        
+        <Box display="flex" flexDirection="column" gap={2}>
+          <Text {...tenYearTheme.typography.givingInfo} fontWeight={700} textAlign="center">
+            Click on the <Link href='https://give.tithe.ly/?formId=a24ffd31-6865-11ee-90fc-1260ab546d11&locationId=10885594-3172-4336-9b5a-0e71c8da3d41&fundId=dc576b37-2abc-405c-a852-e2a8a8f0485c' color='#FFFB95'>link</Link> or scan the QR code below to give via credit card. 
+          </Text>
+        </Box>
+        <Box display="flex" flexDirection="column" gap={2}>
+          <Text {...tenYearTheme.typography.givingInfo} fontWeight={700} textAlign="center">
+            Credit card transaction fee (3.5% + HKD $2.35) will be deducted from the total amount. 
+          </Text>
+        </Box>
+        
+        <Image src={qr_image} alt="FPS QR" width={{base: "90px", md: "130px"}} height="auto" marginY={"5px"} />
       </Box>
       
       {/* Gradient divider line in the middle */}
-      <Box
-        position="absolute"
-        left="50%"
-        top="0"
-        bottom="0"
-        width="1px"
-        background="#8BC0EC87"
-        transform="translateX(-50%)"
-      />
+      {isMobile ? (
+          <Box
+            width="80%"
+            height="1px"
+            border="0.5px solid #8BC0EC87"
+            mx="auto"
+            my={4}
+          />
+        ) : (
+          <Box
+            position="absolute"
+            left="50%"
+            top="0"
+            bottom="0"
+            width="1px"
+            background="#8BC0EC87"
+            transform="translateX(-50%)"
+          />
+        )}
       
       {/* Right section */}
       <Box 
         flex="1" 
-        paddingLeft="20px"
+        paddingLeft={{base: "0", md: "20px"}}
         display="flex"
         flexDirection="column"
-        justifyContent="flex-start"
-        alignItems="flex-start"
+        justifyContent="space-between"
+        alignItems="center"
+        minHeight={{base: "auto", md: "290px"}}
+        gap={{base: 4, md: 0}}
+        paddingBottom={{base: 6, md: 0}}
       >
-        <Text {...tenYearTheme.typography.subheading} alignSelf="center" textAlign="center">
-          Give through Bank Transfer
+        <Text {...tenYearTheme.typography.subheading}>
+          Give via Zelle
         </Text>
-        <Box mt={4} textAlign="left" alignSelf="stretch">
-          <Box
-            {...tenYearTheme.typography.givingInfo}
-            alignItems="baseline"
-          >
-            <Box as="span" fontWeight={700}>Bank Name/Code:</Box> {' '}
-            <Box as="span" fontWeight={400}>China Construction Bank (Asia) Corporation Limited / 009</Box>
-          </Box>
-          <Box
-            mt={1}
-            {...tenYearTheme.typography.givingInfo}
-            alignItems="baseline"
-          >
-            <Box as="span" fontWeight={700}>Branch Code:</Box> {' '}
-            <Box as="span" fontWeight={400}>845</Box>
-          </Box>
-          <Box
-            mt={1}
-            {...tenYearTheme.typography.givingInfo}
-            alignItems="baseline"
-          >
-            <Box as="span" fontWeight={700}>Account Name:</Box> {' '}
-            <Box as="span" fontWeight={400}>Harvest Mission Community Church (Hong Kong) Limited</Box>
-          </Box>
-          <Box
-            mt={1}
-            {...tenYearTheme.typography.givingInfo}
-            alignItems="baseline"
-          >
-            <Box as="span" fontWeight={700}>Account Number:</Box> {' '}
-            <Box as="span" fontWeight={400}>013012090</Box>
-          </Box>
-          <Box
-            mt={1}
-            {...tenYearTheme.typography.givingInfo}
-            alignItems="baseline"
-          >
-            <Box as="span" fontWeight={700}>Transfer Remarks:</Box> {' '}
-            <Box as="span" fontWeight={400}>Love Offering</Box>
-          </Box>
-        </Box>
+        <Text {...tenYearTheme.typography.givingInfo} fontWeight={700}>
+          Transfer with Zelle to email address (hmg@hongkong.hmcc.net) and input "10 Year" in the giving memo remarks field
+        </Text>
+        <Button
+          onClick={copyEmailToClipboard}
+          bg={'#FFFFFF'}
+          borderRadius={'80px'}
+          width={{ base: '160px', md: '240px' }}
+          height={{ base: '30px', md: '50px' }}
+          textColor={'#012C75'}
+          fontFamily={'Manrope'}
+          fontWeight={'bold'}
+          fontSize={{ base: '0.65rem', md: '1rem' }}
+          _hover={{ 
+            backgroundColor: '#95CFFF',
+          }}
+          boxShadow="0 4px 12px rgba(0, 0, 0, 0.3)"
+          zIndex="10"
+          transition="all 0.2s ease"
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          border="0.7px solid #95CFFF"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <CopyIcon boxSize={{base:"4", md:"6"}}/>
+          CLICK TO COPY EMAIL
+        </Button>
       </Box>
     </Box>
-
-    {/* Bottom section - full width */}
-    <Box 
-      flex="0 0 auto"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      paddingTop="10px"
-      paddingBottom="12px"
-    >
-      <Button
-        as="a"
-        href="https://hk.hmccglobal.org/give"
-        bg={'#FFFFFF'}
-        borderRadius={'80px'}
-        width={{ base: '140px', md: '240px' }}
-        height={{ base: '40px', md: '50px' }}
-        textColor={'#012C75'}
-        fontFamily={'Manrope'}
-        fontWeight={'bold'}
-        fontSize={{ base: '0.8rem', md: '1.2rem' }}
-        _hover={{ 
-          backgroundColor: '#95CFFF',
-          boxShadow: '0px 4px 94px 0px #000000, 0px 0px 24.1px 0px #95CFFF',
-        }}
-        boxShadow="0 4px 12px rgba(0, 0, 0, 0.3)"
-        zIndex="10"
-        transition="all 0.2s ease"
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-        paddingX={{ base: '15px', md: '35px' }}
-        border="0.7px solid #95CFFF"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        LEARN MORE
-        <ArrowForwardIcon boxSize={{base:"4", md:"6"}}/>
-      </Button>
-    </Box>
   </Box>
-);
+)
+}
+;
 
 export default InternationalContent;
