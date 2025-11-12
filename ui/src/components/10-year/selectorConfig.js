@@ -5,12 +5,12 @@ import InternationalContent from './InternationalContent';
 
 export const selectorOptions = [
   {
-    title: "HongKong Giving Information",
+    title: "Hong Kong",
     content: <HongKongContent />,
     // button: <HongKongButton /> // This should be a JSX element, not component
   },
   {
-    title: "International Giving Information", 
+    title: "International", 
     content: <InternationalContent />,
     // button: <InternationalButton />
   }

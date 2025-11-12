@@ -18,19 +18,24 @@ const OfferingSection = (props) => {
   const T_image = `${process.env.PUBLIC_URL}/images/10-year/t.png`;
   const ripple_image = `${process.env.PUBLIC_URL}/images/10-year/ripple.png`;
   const transformat10n_image = `${process.env.PUBLIC_URL}/images/10-year/transformat10n.png`;
+  const offering_background = `${process.env.PUBLIC_URL}/images/10-year/offeringBackground.png`;
 
   return (
     <Flex as="section" {...tenYearTheme.components.fullPageSection} bg={bg}
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
+      backgroundImage={`url(${offering_background})`}
       backgroundSize="cover"
       backgroundPosition="center"
+      backgroundRepeat="no-repeat"
       width="100%"
-      position="relative">
+      // gap= "1px"
+      position="relative"
+      paddingY="24px">
       <Heading
         {...tenYearTheme.components.heading}
-        fontSize={tenYearTheme.fontSizes.hero}
+        {...tenYearTheme.typography.h1}
         color={color}
         display="flex"
         alignItems="center"
@@ -39,9 +44,9 @@ const OfferingSection = (props) => {
         <Image
           src={image_10}
           width="100%"
-          maxWidth="70px"
+          maxWidth={{ base: "55px", md: "70px" }}
           position="relative"
-          right="-20px" // This moves the image to the right
+          right={{base: "-13px",md:"-20px"}} // This moves the image to the right
           zIndex="1"
           sx={{
             shapeOutside: 'circle()',
@@ -115,7 +120,7 @@ const OfferingSection = (props) => {
           {...tenYearTheme.components.text}
           {...tenYearTheme.typography.subheading}
           color="white"
-          marginBottom="30px"
+          marginBottom="20px"
           maxW="1000px"
         >
           Join us to see God transforming lives and transforming the world <br />
@@ -123,8 +128,9 @@ const OfferingSection = (props) => {
         </Text>
       </Box>
       <Image
+        width={{ base: '60px', md: '70px' }}
+        height="100%"
         src={ripple_image}
-        marginBottom={"30px"}
       />
       <Box
         display="flex"
@@ -135,7 +141,7 @@ const OfferingSection = (props) => {
       >
         <Heading
           {...tenYearTheme.components.heading}
-          // fontSize={tenYearTheme.fontSizes.hero}
+          {...tenYearTheme.typography.h1}
           color={color}
           display="flex"
           alignItems="center"
@@ -145,10 +151,23 @@ const OfferingSection = (props) => {
         <Image
           position="relative"
           src={transformat10n_image}
+          width={{base:"230px", md:"350px"}}
+          height={"auto"}
           transform="translateY(-25%)"
           zIndex={1}
         />
       </Box>
+      <Text
+        as="h3"
+        {...tenYearTheme.components.text}
+        {...tenYearTheme.typography.subheading}
+        color="white"
+        maxW="1000px"
+        marginTop="-20px"
+        marginBottom="-20px"
+      >
+        Giving Information:
+      </Text>
       <SelectorBox 
         options={selectorOptions} 
         defaultSelected={0} // 0 for Hong Kong, 1 for International
