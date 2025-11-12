@@ -4,6 +4,7 @@ import Testimony from './Testimony';
 import TenYearVideo from './TenYearVideo';
 import OfferingSection from './OfferingSection';
 import ClosingRemarks from './ClosingRemarks';
+import TenYearTimeline from './TenYearTimeline';
 
 import { tenYearTheme } from './theme';
 const TenYearContainer = () => {
@@ -21,6 +22,7 @@ const TenYearContainer = () => {
       align="center"
     >
       <HeroSection />
+      <TenYearTimeline />
       <Testimony />
       <Box w="100%" px={[4, 8]}>
         <TenYearVideo />
