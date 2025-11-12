@@ -14,13 +14,10 @@ import { tenYearTheme, getTypography } from './theme';
 const ClosingRemarks = () => {
   return (
     <Box>
-      <VStack gap="4rem" mt='3rem' mb="5rem" mx="2rem">
+      <VStack gap="4rem" mt="3rem" mb="5rem" mx="2rem" py="4rem">
         {/* Desktop and Tablet version */}
         <Flex gap="10" align="center" display={['none', 'none', 'flex']}>
-          <Text
-            textAlign={'Center'}
-            {...getTypography('h1')}
-          >
+          <Text textAlign={'Center'} {...getTypography('h1')}>
             Celebrating a Decade of
           </Text>
           <Flex align="center" gap="2" position="relative">
@@ -53,8 +50,15 @@ const ClosingRemarks = () => {
           {...getTypography('h1')}
           lineHeight="161%"
         >
-          Celebrating a decade of<br />
-          <Flex align="center" gap="2" position="relative" justify="center" mt="2">
+          Celebrating a decade of
+          <br />
+          <Flex
+            align="center"
+            gap="2"
+            position="relative"
+            justify="center"
+            mt="2"
+          >
             <Image
               src={process.env.PUBLIC_URL + '/images/10-year/t.svg'}
               h="90px"
@@ -83,7 +87,8 @@ const ClosingRemarks = () => {
           display={['none', 'block', 'block']}
           {...getTypography('h1')}
         >
-          Thank you for being a part of HMCC Hong Kong in<br />
+          Thank you for being a part of HMCC Hong Kong in
+          <br />
           the past{' '}
           <Box as="span" position="relative" display="inline-block">
             <Image
@@ -117,7 +122,8 @@ const ClosingRemarks = () => {
           lineHeight="161%"
         >
           Thank you for being a<br />
-          part of HMCC Hongkong<br />
+          part of HMCC Hongkong
+          <br />
           in the past{' '}
           <Box as="span" position="relative" display="inline-block">
             <Image
