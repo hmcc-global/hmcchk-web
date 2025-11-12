@@ -511,7 +511,7 @@ const TenYearTimeline = ({ onExit }) => {
       const pinHeading = ScrollTrigger.create({
         trigger: '.pinned-heading',
         endTrigger: lastItemSelector,
-        start: 'top 0%',
+        start: 'top 5%',
         end: 'bottom 60%',
         pin: '.pinned-heading',
         pinSpacing: false,
@@ -661,10 +661,7 @@ const TenYearTimeline = ({ onExit }) => {
         id: 'mobilePinTwenty',
         trigger: triggerEl || `.timeline-item-0`,
         endTrigger: endEl || timelineRef.current,
-        start: () =>
-          `top ${
-            window.matchMedia('(max-width: 29.99em)').matches ? '25%' : '30%'
-          }`,
+        start: 'top 35%',
         end: 'bottom 80%',
         pin: pinEl || '.pinned-year-prefix-mobile',
         pinSpacing: false,
@@ -693,10 +690,7 @@ const TenYearTimeline = ({ onExit }) => {
           id: 'mobilePinHeading',
           trigger: headingEl,
           endTrigger: endEl,
-          start: () =>
-            `top ${
-              window.matchMedia('(max-width: 29.99em)').matches ? '0%' : '0%'
-            }`,
+          start: () => `top ${isMobile ? '5%' : '0%'}`,
           end: 'bottom 80%',
           pin: headingEl,
           pinSpacing: false,
