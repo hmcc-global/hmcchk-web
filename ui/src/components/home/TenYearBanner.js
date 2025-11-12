@@ -36,9 +36,8 @@ const TenYearBanner = () => {
             backgroundRepeat="no-repeat"
           >
             <VStack
-              w={{ base: '70%', md: '25%' }}
+              w="100%"
               justifyContent="center"
-              alignItems="flex-start"
               mx="auto"
               fontFamily="Abhaya Libre"
               textColor="#FFFFFF"
@@ -53,6 +52,7 @@ const TenYearBanner = () => {
               <Flex
                 fontSize={{ base: '5.7rem', md: '7rem' }}
                 letterSpacing="-0.03em"
+                position="relative"
               >
                 <Text
                   fontFamily="Qindom"
@@ -63,32 +63,27 @@ const TenYearBanner = () => {
                 >
                   t
                 </Text>
-                <Box
-                  marginLeft={{ base: '1.8rem', md: '1.7rem' }}
+                <Text>ransfor</Text>
+                <Text
                   position="absolute"
+                  top={['1.9rem', '2.5rem']}
+                  left="-rem"
                 >
-                  <Text position="absolute">ransfor</Text>
+                  mat
                   <Text
-                    position="absolute"
-                    top={['1.9rem', '2.5rem']}
-                    left="-2rem"
+                    fontFamily="Qindom"
+                    fontSize={['7rem', '8.5rem']}
+                    textColor="#95CFFF"
+                    display="inline"
+                    position="relative"
+                    lineHeight="inherit"
+                    verticalAlign="middle"
+                    zIndex={1}
                   >
-                    mat
-                    <Text
-                      fontFamily="Qindom"
-                      fontSize={['7rem', '8.5rem']}
-                      textColor="#95CFFF"
-                      display="inline"
-                      position="relative"
-                      lineHeight="inherit"
-                      verticalAlign="middle"
-                      zIndex={1}
-                    >
-                      10
-                    </Text>
-                    n
+                    10
                   </Text>
-                </Box>
+                  n
+                </Text>
               </Flex>
               <Box
                 width={{ base: '80%', md: '50%' }}
