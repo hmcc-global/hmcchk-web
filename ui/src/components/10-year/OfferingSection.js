@@ -26,8 +26,25 @@ const OfferingSection = (props) => {
     ? `${process.env.PUBLIC_URL}/images/10-year/offeringBackgroundMobile.png`
     : `${process.env.PUBLIC_URL}/images/10-year/offeringBackground.png`;
 
+  const backgroundImages = {
+    base: `${process.env.PUBLIC_URL}/images/10-year/more-bg-mobile.png`,
+    md: `${process.env.PUBLIC_URL}/images/10-year/more-bg-desktop.png`,
+  };
+
   return (
-    <Box position="relative" w="100%" paddingTop="5rem" overflow="hidden">
+    <Box
+      position="relative"
+      w="100%"
+      paddingTop="5rem"
+      overflow="hidden"
+      backgroundImage={{
+        base: `url(${backgroundImages.base})`,
+        md: `url(${backgroundImages.md})`,
+      }}
+      backgroundPosition="center"
+      backgroundSize="cover"
+      backgroundRepeat="no-repeat"
+    >
       <Box
         position="absolute"
         top="0"
@@ -46,25 +63,24 @@ const OfferingSection = (props) => {
           backgroundSize="cover"
           backgroundPosition="center"
           backgroundRepeat="repeat"
-          backgroundAttachment={"absolute"}
+          backgroundAttachment={'absolute'}
           zIndex="0"
         />
       </Box>
-  
-      
+
       {/* Content container */}
-        <Flex 
-          as="section" 
-          {...tenYearTheme.components.fullPageSection} 
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          width="100%"
-          minHeight="100vh"
-          position="relative"
-          paddingY="24px"
-          zIndex="1"
-        >
+      <Flex
+        as="section"
+        {...tenYearTheme.components.fullPageSection}
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        width="100%"
+        minHeight="100vh"
+        position="relative"
+        paddingY="24px"
+        zIndex="1"
+      >
         <Heading
           display="flex"
           alignItems="center"

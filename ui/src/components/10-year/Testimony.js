@@ -3,8 +3,23 @@ import { Flex, Box, Heading, Image } from '@chakra-ui/react';
 import { tenYearTheme } from './theme';
 
 const Testimony = () => {
+  const backgroundImages = {
+    base: `${process.env.PUBLIC_URL}/images/10-year/memories-bg-mobile.png`,
+    md: `${process.env.PUBLIC_URL}/images/10-year/memories-bg-desktop.png`,
+  };
+
   return (
-    <Box position="relative" w="100%">
+    <Box
+      position="relative"
+      w="100%"
+      backgroundImage={{
+        base: `url(${backgroundImages.base})`,
+        md: `url(${backgroundImages.md})`,
+      }}
+      backgroundPosition="center"
+      backgroundSize="cover"
+      backgroundRepeat="no-repeat"
+    >
       {/* Top gradient to blend with timeline section */}
       <Box
         className="testimony-top-gradient"

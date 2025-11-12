@@ -1,9 +1,23 @@
 import { Text, Box, Image, VStack, Flex } from '@chakra-ui/react';
 import { tenYearTheme, getTypography } from './theme';
 
+const backgroundImages = {
+  base: `${process.env.PUBLIC_URL}/images/10-year/closing-bg-mobile.png`,
+  md: `${process.env.PUBLIC_URL}/images/10-year/closing-bg-desktop.png`,
+};
+
 const ClosingRemarks = () => {
   return (
-    <Box w="100%">
+    <Box
+      w="100%"
+      backgroundImage={{
+        base: `url(${backgroundImages.base})`,
+        md: `url(${backgroundImages.md})`,
+      }}
+      backgroundPosition="center"
+      backgroundSize="cover"
+      backgroundRepeat="no-repeat"
+    >
       <VStack
         gap="4rem"
         mt="4rem"
