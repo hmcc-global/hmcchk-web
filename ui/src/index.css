@@ -63,7 +63,6 @@ code {
 
 @font-face {
   font-family: 'Qindom';
-  src: local('Qindom'),
-    url('./font/Qindom.ttf') format('truetype');
+  src: local('Qindom'), url('./font/Qindom.ttf') format('truetype');
   font-weight: normal;
 }

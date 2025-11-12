@@ -1,9 +1,11 @@
-import { Flex, Box } from '@chakra-ui/react';
+import { Flex, Box, VStack } from '@chakra-ui/react';
 import TenYearVideo from './TenYearVideo';
 import OfferingSection from './OfferingSection';
 import ClosingRemarks from './ClosingRemarks';
 
 import { tenYearTheme } from './theme';
+
+import HeroSection from './HeroSection';
 
 const TenYearContainer = () => {
   const backgroundImage = `${process.env.PUBLIC_URL}/images/10-year/10y_bg.png`;
@@ -19,6 +21,7 @@ const TenYearContainer = () => {
       py={10}
       align="center"
     >
+      <HeroSection />
       <Box w="100%" px={[4, 8]}>
         <TenYearVideo />
       </Box>
