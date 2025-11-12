@@ -14,7 +14,7 @@ import { tenYearTheme, getTypography } from './theme';
 const ClosingRemarks = () => {
   return (
     <Box>
-      <VStack gap="4rem" my='3rem' mx="2rem">
+      <VStack gap="4rem" mt='3rem' mb="5rem" mx="2rem">
         {/* Desktop and Tablet version */}
         <Flex gap="10" align="center" display={['none', 'none', 'flex']}>
           <Text
