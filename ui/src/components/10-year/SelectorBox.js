@@ -60,7 +60,7 @@ const SelectorBox = ({ options, defaultSelected = 0 }) => {
             x: `${selectedIndex * 130}%`,
             transition: {
               type: "spring",
-              damping: 30,
+              damping: 40,
               stiffness: 500
             }
           }}
@@ -105,13 +105,13 @@ const SelectorBox = ({ options, defaultSelected = 0 }) => {
             x: 0,
             transition: { 
               duration: 0.3,
-              delay: 0.2
+              delay: 0.3
             }
           }}
           exit={{ 
             opacity: 0,
             x: contentDirection > 0 ? -50 : 50,
-            transition: { duration: 0.2 }
+            transition: { duration: 0.3 }
           }}
         >
           {selected?.content}
