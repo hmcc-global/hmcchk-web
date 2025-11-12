@@ -11,6 +11,7 @@ import {
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { tenYearTheme } from './theme';
+import timelineYearData from './timelineData.json';
 
 // Register GSAP ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -62,35 +63,28 @@ const TimelineItem = ({
   isPassed,
   isNext,
   activeIndex,
+  isLast,
 }) => {
   const itemRef = useRef(null);
+  const imageHeight = { base: '90px', sm: '110px', md: '140px', lg: '160px' };
+  const yearSuffixWidth = { base: '6rem', sm: '7rem', md: '8rem', lg: '10rem' };
+  const yearData = timelineYearData?.years?.find((y) => y.year === item.year);
+  const rows = yearData?.rows || [
+    [{ width: '2fr' }, { width: '3fr' }],
+    [{ width: '1.5fr' }, { width: '1fr' }, { width: '1.5fr' }],
+  ];
+
+  const frToFlex = (w) => {
+    if (!w) return 1;
+    const n = parseFloat(String(w).replace('fr', ''));
+    return Number.isFinite(n) ? n : 1;
+  };
 
   useEffect(() => {
     if (itemRef.current) {
-      if (isActive) {
-        // Current year - in focus
-        gsap.to(itemRef.current, {
-          opacity: 1,
-          duration: 0.8,
-          ease: 'power2.out',
-        });
-      } else if (isPassed || isNext) {
-        // Adjacent years - faded
-        gsap.to(itemRef.current, {
-          opacity: 0.3,
-          duration: 0.8,
-          ease: 'power2.out',
-        });
-      } else {
-        // Distant years - hidden
-        gsap.to(itemRef.current, {
-          opacity: 0,
-          duration: 0.5,
-          ease: 'power2.inOut',
-        });
-      }
+      gsap.set(itemRef.current, { opacity: 1 });
     }
-  }, [isActive, isPassed, isNext, activeIndex]);
+  }, []);
 
   return (
     <Box
@@ -101,10 +95,10 @@ const TimelineItem = ({
       display="flex"
       alignItems="center"
       justifyContent="center"
-      py={{ base: 8, md: 12 }} // Vertical padding instead of minH
+      py="0.5em"
     >
       <HStack
-        spacing={{ base: '1em', sm: '2em', md: '3em' }}
+        spacing={'0.5em'}
         align="center"
         w="90vw" // 90% of viewport width
         justify="flex-start"
@@ -116,7 +110,8 @@ const TimelineItem = ({
           className="year-suffix"
           display="flex"
           alignItems="center"
-          minW={{ base: '3rem', sm: '4rem', md: '5rem', lg: '6rem' }} // Allocate space for year suffix
+          minW={yearSuffixWidth}
+          w={yearSuffixWidth}
           justifyContent="flex-start"
         >
           <Text
@@ -136,53 +131,46 @@ const TimelineItem = ({
         {/* Content card - positioned to the right */}
         <Box
           className="timeline-content"
-          bg="white"
-          p={{ base: 4, sm: 6, md: 8, lg: 10 }}
-          borderRadius={{ base: '16px', md: '20px' }}
-          boxShadow={{
-            base: '0 10px 30px rgba(6, 40, 163, 0.2)',
-            md: '0 20px 60px rgba(6, 40, 163, 0.3)',
-          }}
-          border={{ base: '2px solid', md: '3px solid' }}
-          borderColor={tenYearTheme.colors.primary}
+          bg="transparent"
+          p={0}
+          border="none"
+          borderRadius={0}
+          boxShadow="none"
           position="relative"
-          overflow="hidden"
+          overflow="visible"
           flex={1}
           w="100%"
         >
-          {/* Highlight badge */}
-          <Box
-            position="absolute"
-            top={0}
-            right={0}
-            bg={tenYearTheme.colors.primary}
-            color="white"
-            px={{ base: 2, sm: 3, md: 4 }}
-            py={{ base: 1, sm: 1.5, md: 2 }}
-            fontSize={{ base: 'xs', sm: 'sm', md: 'sm' }}
-            fontWeight="bold"
-            borderRadius={{ base: '0 16px 0 8px', md: '0 20px 0 12px' }}
-          >
-            {item.highlight}
-          </Box>
-
-          <VStack spacing={{ base: 2, sm: 3, md: 4 }} align="flex-start">
-            <Heading
-              fontSize={{ base: 'lg', sm: 'xl', md: '2xl', lg: '4xl' }}
-              color={tenYearTheme.colors.text.primary}
-              fontFamily={tenYearTheme.fonts.heading}
-              lineHeight={{ base: 1.1, md: 1.2 }}
-            >
-              {item.title}
-            </Heading>
-            <Text
-              fontSize={{ base: 'sm', sm: 'md', md: 'lg', lg: 'xl' }}
-              color={tenYearTheme.colors.text.secondary}
-              lineHeight={{ base: 1.4, md: 1.6 }}
-            >
-              {item.description}
-            </Text>
+          <VStack spacing={{ base: 1, md: 2 }} align="stretch" w="100%">
+            {rows.slice(0, 2).map((row, rowIdx) => (
+              <HStack
+                key={rowIdx}
+                spacing={{ base: 1, md: 2 }}
+                align="stretch"
+                w="100%"
+              >
+                {row.map((col, colIdx) => (
+                  <Box
+                    key={`${rowIdx}-${colIdx}`}
+                    flex={`${frToFlex(col.width)} 1 0`}
+                    h={imageHeight}
+                    bg="#E2E8F0"
+                    borderRadius={tenYearTheme.borderRadius.image}
+                  />
+                ))}
+              </HStack>
+            ))}
           </VStack>
+          {!isLast && (
+            <Box
+              mt="0.5em"
+              h="1px"
+              w="100%"
+              bg="#FFFFFF"
+              opacity={1}
+              borderRadius="full"
+            />
+          )}
         </Box>
       </HStack>
     </Box>
@@ -351,6 +339,7 @@ const TenYearTimeline = ({ onExit }) => {
             isPassed={index < activeIndex}
             isNext={index > activeIndex}
             activeIndex={activeIndex}
+            isLast={index === timelineData.length - 1}
           />
         ))}
       </VStack>
