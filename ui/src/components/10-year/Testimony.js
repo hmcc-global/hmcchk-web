@@ -1,4 +1,4 @@
-import { Flex, Box, Text } from '@chakra-ui/react';
+import { Flex, Box, Heading, Image } from '@chakra-ui/react';
 
 import { tenYearTheme } from './theme';
 
@@ -24,23 +24,23 @@ const Testimony = () => {
         paddingX={['1.5rem', '2rem', '4rem']}
         zIndex={1}
       >
-        <Text {...tenYearTheme.typography.h1}>
-          <Text
-            {...tenYearTheme.typography.hero}
-            fontFamily="Qindom"
-            fontSize={['50px', '90px']}
-            textColor="#95CFFF"
-            display="inline"
-            position="relative"
-            lineHeight="inherit"
-            verticalAlign="middle"
-            right="-0.5rem"
-            zIndex={1}
-          >
-            10
-          </Text>
-          Years The Memories
-        </Text>
+        <Heading
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          gap={0}
+        >
+          <Image
+            src="/images/10-year/10.svg"
+            alt="10"
+            h="3em"
+            w="auto"
+            mt={-4}
+          />
+          <Box as="span" {...tenYearTheme.typography.h1} ml={-8}>
+            Years: The Memories
+          </Box>
+        </Heading>
         <iframe
           src="https://padlet.com/embed/8z5rbl41cl1ji4ax"
           width="100%"

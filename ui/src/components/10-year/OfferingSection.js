@@ -46,33 +46,14 @@ const OfferingSection = (props) => {
       overflow="hidden"
     >
       <Heading
-        {...tenYearTheme.components.heading}
-        {...tenYearTheme.typography.h1}
-        color={color}
         display="flex"
         alignItems="center"
-        position="relative"
+        justifyContent="center"
+        gap={0}
       >
-        <Image
-          src={image_10}
-          width="100%"
-          maxWidth={{ base: '55px', md: '70px' }}
-          position="relative"
-          right={{ base: '-13px', md: '-20px' }} // This moves the image to the right
-          zIndex="1"
-          aria-label="10"
-          alt="10"
-          sx={{
-            shapeOutside: 'circle()',
-            float: 'left',
-          }}
-        />
-        <Box
-          position="relative"
-          zIndex="2"
-          // padding="10px 50px 10px 10px" // Extra padding on the right for the image
-        >
-          {title}
+        <Image src="/images/10-year/10.svg" alt="10" h="3em" w="auto" mt={-4} />
+        <Box as="span" {...tenYearTheme.typography.h1} ml={-8}>
+          Years: More to Come
         </Box>
       </Heading>
       <Box
