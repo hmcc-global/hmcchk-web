@@ -20,7 +20,7 @@ const TenYearVideo = () => {
     xl: false,
   });
   // EASY SWITCH: flip to false when real assets are ready
-  const USE_PLACEHOLDERS = true;
+  const USE_PLACEHOLDERS = false;
   const PLACEHOLDER_TITLE = '(Videos coming soon)';
   // Place the image at this path in `ui/public` (e.g. ui/public/assets/tenyear/placeholder.jpg)
   const PLACEHOLDER_IMAGE = '/images/10-year/10y_video_placeholder.png';
@@ -37,29 +37,27 @@ const TenYearVideo = () => {
     {
       id: 'a',
       title: 'Greetings from Guests',
-      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-      thumbnail:
-        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg',
+      src: 'https://www.youtube.com/embed/ccKszneIj6k?si=QYe3FUnXRmz8rkLe',
+      thumbnail: 'https://img.youtube.com/vi/ccKszneIj6k/maxresdefault.jpg',
     },
     {
       id: 'b',
       title: 'HMCC-HK (2015-2025)',
-      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-      thumbnail:
-        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg',
+      src: 'https://www.youtube.com/embed/8Aui--1X9p0?si=nNy8ARQctCg2P9Uz',
+      thumbnail: 'https://img.youtube.com/vi/8Aui--1X9p0/maxresdefault.jpg',
     },
-    {
-      id: 'c',
-      title: 'Transformation: 10 years of HMCC-HK',
-      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-      thumbnail:
-        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg',
-    },
+    // {
+    //   id: 'c',
+    //   title: 'Transformation: 10 years of HMCC-HK',
+    //   src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+    //   thumbnail:
+    //     'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg',
+    // },
   ];
 
   const videos = USE_PLACEHOLDERS ? placeholderVideos : realVideos;
 
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
   const activeVideo = videos[activeIndex];
   // rem-based layout constants
   const LAYOUT_MAX_W = '75rem'; // 1200px
@@ -315,6 +313,18 @@ We invite you to watch, remember, and rejoice in all He has done.`}
                     />
                   </Flex>
                 </>
+              ) : activeVideo.src.includes('youtube.com') ||
+                activeVideo.src.includes('youtu.be') ? (
+                <Box
+                  as="iframe"
+                  src={activeVideo.src}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  bg="#0B1020"
+                  w="100%"
+                  h="100%"
+                  border="none"
+                />
               ) : (
                 <Box
                   as="video"
