@@ -1,25 +1,25 @@
 const colors = {
     primary: {
-        primary_1: "#4A6EEB",
-        primary_2: "#97D0D4",
-        primary_3: "#EBBB41",
-        primary_4: "#F2A9A7",
+        1: "#4A6EEB",
+        2: "#97D0D4",
+        3: "#EBBB41",
+        4: "#F2A9A7",
     },
     secondary: {
-        secondary_1: "#DFE7FF",
-        secondary_2: "#DBF1F1",
-        secondary_3: "#F5F0E0",
-        secondary_4: "#F1E6E6",
+        1: "#DFE7FF",
+        2: "#DBF1F1",
+        3: "#F5F0E0",
+        4: "#F1E6E6",
     },
     neutral: {
-        neutral_1: "#090500",
+        1: "#090500",
     },
     background: {
-        background_1: "#F6FAFF",
+        1: "#F6FAFF",
     },
     additional: {
-        additional_1: "#D46764",
-        additional_2: "#EFFAFD",
+        1: "#D46764",
+        2: "#EFFAFD",
     }
   };
   
