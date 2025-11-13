@@ -5,23 +5,30 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from '@chakra-ui/react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import customTheme from './theme/index';
+import { customSystem } from './theme/index';
 
 const onScriptLoaded = () => {
-  document.body.removeChild(document.querySelector('[src="https://accounts.google.com/gsi/client"]'));
-  document.body.removeChild(document.querySelector('[src="https://accounts.google.com/gsi/select"]'));
+  document.body.removeChild(
+    document.querySelector('[src="https://accounts.google.com/gsi/client"]')
+  );
+  document.body.removeChild(
+    document.querySelector('[src="https://accounts.google.com/gsi/select"]')
+  );
   const scriptTag = document.createElement('script');
   const selectScriptTag = document.createElement('script');
-  scriptTag.src = "https://accounts.google.com/gsi/client?hl=en";
-  selectScriptTag.src = "https://accounts.google.com/gsi/select?hl=en";
+  scriptTag.src = 'https://accounts.google.com/gsi/client?hl=en';
+  selectScriptTag.src = 'https://accounts.google.com/gsi/select?hl=en';
   document.body.appendChild(scriptTag);
   document.body.appendChild(selectScriptTag);
 };
 
 ReactDOM.render(
-  <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID} onScriptLoadSuccess={onScriptLoaded}>
+  <GoogleOAuthProvider
+    clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+    onScriptLoadSuccess={onScriptLoaded}
+  >
     <React.StrictMode>
-      <ChakraProvider theme={customTheme}>
+      <ChakraProvider value={customSystem}>
         <App />
       </ChakraProvider>
     </React.StrictMode>

@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@chakra-ui/icons": "^1.0.15",
     "@chakra-ui/react": "^3.29.0",
+    "@chakra-ui/system": "^2.6.2",
+    "@chakra-ui/theme-tools": "^2.2.6",
     "@date-io/luxon": "^2.10.11",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.3.0",
@@ -82,9 +83,9 @@
     ]
   },
   "resolutions": {
-    "react-error-overlay": "6.0.9"
+    "react-error-overlay": "6.0.11"
   },
   "devDependencies": {
-    "react-error-overlay": "^6.0.9"
+    "react-error-overlay": "^6.0.11"
   }
 }

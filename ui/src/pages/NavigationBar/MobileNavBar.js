@@ -7,12 +7,11 @@ import {
   Link,
   Icon,
   Grid,
+  GridItem,
   Drawer,
-  DrawerBody,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
+  Portal,
   useDisclosure,
+  CloseButton,
 } from '@chakra-ui/react';
 import MainMenu from './MainMenu';
 import { IoMdHome, IoMdCalendar, IoMdHeart, IoMdMore } from 'react-icons/io';
@@ -68,6 +67,7 @@ const MobileNavBar = (props) => {
         backgroundColor="#F6FAFF"
         width="100%"
         h="8vh"
+        mb="-1px"
         border="1px solid"
         borderColor="#4A6EEB"
         borderTopLeftRadius="2xl"
@@ -86,105 +86,186 @@ const MobileNavBar = (props) => {
           fontFamily="Manrope"
           fontSize="0.65rem"
           fontWeight="700"
-          color="#4A6EEB"
           templateColumns={'repeat(6, 1fr)'}
           alignContent="center"
         >
-          <Stack dir="column" spacing="0">
-            <Link align="center" href="/" id="mnb-home">
-              <Icon
-                opacity={!isOpen && location.pathname === '/' ? '1' : '0.37'}
-                boxSize={5}
-                as={IoMdHome}
-              />
-              <Text>Home</Text>
-            </Link>
-          </Stack>
-          <Stack dir="column" spacing="0">
-            <Link align="center" href="/events" id="mnb-events">
-              <Icon
-                opacity={
-                  !isOpen && location.pathname === '/events' ? '1' : '0.37'
-                }
-                boxSize={5}
-                as={IoMdCalendar}
-              />
-              <Text>Events</Text>
-            </Link>
-          </Stack>
-          <Stack dir="column" spacing="0" pl="2">
-            <Link align="center" href="/discover" id="mnb-connect">
-              <Icon
-                opacity={
-                  !isOpen && location.pathname === '/discover' ? '1' : '0.37'
-                }
-                boxSize={5}
-                as={IoMdHeart}
-              />
-              <Text>Discover</Text>
-            </Link>
-          </Stack>
-          <Stack dir="column" spacing="0" pl="4">
-            <Link align="center" href="/sermons" id="mnb-sermons">
-              <Icon
-                opacity={
-                  !isOpen &&
-                  (location.pathname === '/sermons' ||
-                    location.pathname === '/online')
-                    ? '1'
-                    : '0.37'
-                }
-                boxSize={5}
-                as={MdOndemandVideo}
-              />
-              <Text>Sermons</Text>
-            </Link>
-          </Stack>
-          <Stack dir="column" spacing="0" pl="4">
-            <Link align="center" href="/give" id="mnb-give">
-              <Icon
-                opacity={
-                  !isOpen && location.pathname === '/give' ? '1' : '0.37'
-                }
-                pt="0.25em"
-                boxSize={5}
-                as={ImLeaf}
-              />
-              <Text>Give</Text>
-            </Link>
-          </Stack>
-          <Stack dir="column" spacing="0">
-            <Box align="center" ref={btnRef} onClick={onOpen}>
-              <Icon opacity={isOpen ? '1' : 0.37} boxSize={5} as={IoMdMore} />
-              <Text>More</Text>
-            </Box>
-          </Stack>
+          <GridItem>
+            <Flex justify="center" align="center" height="100%">
+              <Link href="/" id="mnb-home">
+                <Stack
+                  align="center"
+                  direction="column"
+                  gap="0.27rem"
+                  color="#4A6EEB"
+                >
+                  <Icon
+                    opacity={
+                      !isOpen && location.pathname === '/' ? '1' : '0.37'
+                    }
+                    boxSize={5}
+                  >
+                    <IoMdHome />
+                  </Icon>
+                  <Text>Home</Text>
+                </Stack>
+              </Link>
+            </Flex>
+          </GridItem>
+
+          <GridItem>
+            <Flex justify="center" align="center" height="100%">
+              <Link href="/events" id="mnb-events">
+                <Stack
+                  align="center"
+                  direction="column"
+                  gap="0.27rem"
+                  color="#4A6EEB"
+                >
+                  <Icon
+                    opacity={
+                      !isOpen && location.pathname === '/events' ? '1' : '0.37'
+                    }
+                    boxSize={5}
+                  >
+                    <IoMdCalendar />
+                  </Icon>
+
+                  <Text>Events</Text>
+                </Stack>
+              </Link>
+            </Flex>
+          </GridItem>
+          <GridItem>
+            <Flex justify="center" align="center" height="100%">
+              <Link href="/discover" id="mnb-connect">
+                <Stack
+                  align="center"
+                  direction="column"
+                  gap="0.27rem"
+                  pl="2"
+                  color="#4A6EEB"
+                >
+                  <Icon
+                    opacity={
+                      !isOpen && location.pathname === '/discover'
+                        ? '1'
+                        : '0.37'
+                    }
+                    boxSize={5}
+                  >
+                    <IoMdHeart />
+                  </Icon>
+                  <Text>Discover</Text>
+                </Stack>
+              </Link>
+            </Flex>
+          </GridItem>
+          <GridItem>
+            <Flex justify="center" align="center" height="100%">
+              <Link href="/sermons" id="mnb-sermons">
+                <Stack
+                  align="center"
+                  direction="column"
+                  gap="0.27rem"
+                  pl="4"
+                  color="#4A6EEB"
+                >
+                  <Icon
+                    opacity={
+                      !isOpen &&
+                      (location.pathname === '/sermons' ||
+                        location.pathname === '/online')
+                        ? '1'
+                        : '0.37'
+                    }
+                    boxSize={5}
+                  >
+                    <MdOndemandVideo />
+                  </Icon>
+                  <Text>Sermons</Text>
+                </Stack>
+              </Link>
+            </Flex>
+          </GridItem>
+
+          <GridItem>
+            <Flex justify="center" align="center" height="100%">
+              <Link href="/give" id="mnb-give">
+                <Stack
+                  align="center"
+                  direction="column"
+                  gap="0.27rem"
+                  pl="4"
+                  color="#4A6EEB"
+                >
+                  <Icon
+                    opacity={
+                      !isOpen && location.pathname === '/give' ? '1' : '0.37'
+                    }
+                    pt="0.25em"
+                    boxSize={5}
+                  >
+                    <ImLeaf />
+                  </Icon>
+
+                  <Text>Give</Text>
+                </Stack>
+              </Link>
+            </Flex>
+          </GridItem>
+
+          <GridItem>
+            <Flex justify="center" align="center" height="100%">
+              <Drawer.Root
+                open={isOpen}
+                onOpenChange={(details) => {
+                  details.open ? onOpen() : onClose();
+                }}
+                finalFocusEl={() => btnRef.current}
+                size="full"
+                placement="bottom"
+              >
+                <Drawer.Trigger asChild>
+                  <Stack
+                    align="center"
+                    direction="column"
+                    gap="0.27rem"
+                    color="#4A6EEB"
+                    ref={btnRef}
+                  >
+                    <Icon opacity={isOpen ? '1' : 0.37} boxSize={5}>
+                      <IoMdMore />
+                    </Icon>
+                    <Text>More</Text>
+                  </Stack>
+                </Drawer.Trigger>
+                <Portal>
+                  {/* <Drawer.Backdrop /> */}
+                  <Drawer.Positioner>
+                    <Drawer.Content
+                      backgroundColor="#4A6EEB"
+                      width="100%"
+                      style={{ position: 'absolute' }}
+                    >
+                      <Drawer.CloseTrigger
+                        position="absolute"
+                        right="7%"
+                        top="7%"
+                        zIndex="10"
+                      >
+                        <CloseButton size="lg" color="white" />
+                      </Drawer.CloseTrigger>
+                      <Drawer.Body>
+                        <MainMenu login={loggedIn} onClose={onClose} />
+                      </Drawer.Body>
+                    </Drawer.Content>
+                  </Drawer.Positioner>
+                </Portal>
+              </Drawer.Root>
+            </Flex>
+          </GridItem>
         </Grid>
       </Flex>
-      <Drawer
-        isOpen={isOpen}
-        size="full"
-        onClose={onClose}
-        finalFocusRef={btnRef}
-        placement="bottom"
-      >
-        <DrawerOverlay />
-        <DrawerContent
-          backgroundColor="#4A6EEB"
-          width="100%"
-          style={{ position: 'absolute' }}
-        >
-          <DrawerCloseButton
-            position="absolute"
-            right="8%"
-            top="8%"
-            color="white"
-          />
-          <DrawerBody>
-            <MainMenu login={loggedIn} onClose={onClose} />
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
     </>
   );
 };

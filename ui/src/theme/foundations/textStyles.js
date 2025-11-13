@@ -1,35 +1,35 @@
 const textStyles = {
   // Display styles (for large hero text)
   display: {
-    1: {
-      fontFamily:'DMSerifDisplay_Italic',
-      fontSize:{ base: '2.25rem', md: '3.4rem', lg: '5.625rem' },
-      fontWeight:'400',
-      letterSpacing:{ base: '-0.0625rem', lg: '-0.125rem' },
+    xl: {
+      fontFamily: 'DMSerifDisplay_Italic',
+      fontSize: { base: '2.25rem', md: '3.4rem', lg: '5.625rem' },
+      fontWeight: '400',
+      letterSpacing: { base: '-0.0625rem', lg: '-0.125rem' },
       // textColor="#272727" referenced from building block hero section
     },
   },
-  
+
   // Heading styles
   heading: {
-    1: {
-      fontFamily:'DMSerifDisplay_Italic',
-      fontSize:{ base: '2.25rem', md: '3.75rem' },
-      fontWeight:'400',
+    h1: {
+      fontFamily: 'DMSerifDisplay_Italic',
+      fontSize: { base: '2.25rem', md: '3.75rem' },
+      fontWeight: '400',
       // color:"#272727" referenced from Discover Page
     },
-    2: { 
+    h2: {
       fontFamily: 'DMSerifDisplay_Italic',
       fontSize: { base: '1.5rem', md: '2.625rem' },
-      fontWeight: "400",
-    },
-    3: {
-      fontFamily: 'DMSerifDisplay_Italic',
-      fontSize:{ base: '1.375rem', lg: '2rem' },
       fontWeight: '400',
     },
-    4: {
-      italic: { //SermonsSeriesCard Description
+    h3: {
+      fontFamily: 'DMSerifDisplay_Italic',
+      fontSize: { base: '1.375rem', lg: '2rem' },
+      fontWeight: '400',
+    },
+    h4: {
+      italic: {
         fontFamily: 'DMSerifDisplay_Italic',
         fontSize: { base: '1.25rem', md: '1.75rem' },
         fontWeight: '400',
@@ -38,30 +38,29 @@ const textStyles = {
         fontFamily: 'Manrope',
         fontSize: { base: '0.875rem', lg: '1.125rem' },
         fontWeight: '700',
-      }
+      },
     },
   },
-  
+
   // Paragraph styles
   paragraph: {
-    1: {
-      fontFamily:'Manrope',
-      fontSize:{ base: '0.875rem', lg: '1.25rem' },
-      fontWeight:'400',
-      
+    p1: {
+      fontFamily: 'Manrope',
+      fontSize: { base: '0.875rem', lg: '1.25rem' },
+      fontWeight: '400',
     },
-    2: {
-      fontFamily:'Manrope',
+    p2: {
+      fontFamily: 'Manrope',
       fontSize: { base: '0.825rem', md: '1rem' },
       fontWeight: '400',
     },
-    3: {
-      fontFamily:'Manrope',
-      fontSize:{ base: '0.875rem', md: '1rem' },
-      fontWeight:'400',
+    p3: {
+      fontFamily: 'Manrope',
+      fontSize: { base: '0.875rem', md: '1rem' },
+      fontWeight: '400',
     },
   },
-  
+
   // Specialized text styles
   dm_sans: {
     regular: {
@@ -79,7 +78,7 @@ const textStyles = {
       fontWeight: '700',
     },
   },
-  
+
   dm_serif: {
     regular: {
       fontFamily: 'DM Serif Display',
