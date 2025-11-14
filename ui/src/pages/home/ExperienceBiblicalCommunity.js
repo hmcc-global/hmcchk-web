@@ -7,7 +7,6 @@ import {
   VStack,
   Heading,
   Button,
-  Fade,
   Spacer,
   useMediaQuery,
   Link,
@@ -54,242 +53,167 @@ const ExperienceBiblicalCommunity = () => {
   return (
     <InView rootMargin="-50px" triggerOnce={true}>
       {({ inView, ref }) => (
-        <Fade transition={{ enter: { duration: 1 } }} in={inView}>
-          <Box
-            ref={ref}
-            bgSize="contain"
-            bgPos="10% 10%"
-            bgRepeat="no-repeat"
-            bgImage={
-              isMobile
-                ? ' '
-                : `url('${process.env.PUBLIC_URL}/images/home/life-bg.png')`
-            }
-            w="100%"
-          >
-            <Container maxW="container.xl" py={8}>
-              <VStack>
-                <Box w="100%" alignItems="flex-start" py="1em">
-                  <Box position="relative">
+        <Box
+          ref={ref}
+          opacity={inView ? 1 : 0}
+          transform={inView ? 'none' : 'translateY(20px)'}
+          transition="opacity 1s ease, transform 1s ease"
+          bgSize="contain"
+          bgPos="10% 10%"
+          bgRepeat="no-repeat"
+          bgImage={
+            isMobile
+              ? ' '
+              : `url('${process.env.PUBLIC_URL}/images/home/life-bg.png')`
+          }
+          w="100%"
+        >
+          <Container maxW="container.xl" py={8}>
+            <VStack>
+              <Box w="100%" alignItems="flex-start" py="1em">
+                <Box position="relative">
+                  <Box
+                    w="100%"
+                    position="absolute"
+                    h="122%"
+                    bgPos={['60% 95%', '21% 95%']}
+                    bgSize={['40%', '20%']}
+                    bgRepeat="no-repeat"
+                    bgImage={`url('${process.env.PUBLIC_URL}/images/home/vector-orange-1.svg')`}
+                  ></Box>
+                  <Heading
+                    color="#0C0C20"
+                    fontFamily="DMSerifDisplay_Italic"
+                    fontWeight="400"
+                    lineHeight="1"
+                    wordBreak="break-word"
+                    fontSize={['2rem', '2rem', '3rem', '3.75rem']}
+                  >
+                    Experience <br />
+                    Biblical Community
+                  </Heading>
+                </Box>
+              </Box>
+              <Box my={4} w="100vw" minH={['13em', '40vh']} overflow="hidden">
+                <Slider {...settings}>
+                  <Box px={['0.5em', '1em']}>
                     <Box
-                      w="100%"
-                      position="absolute"
-                      h="122%"
-                      bgPos={['60% 95%', '21% 95%']}
-                      bgSize={['40%', '20%']}
-                      bgRepeat="no-repeat"
-                      bgImage={`url('${process.env.PUBLIC_URL}/images/home/vector-orange-1.svg')`}
+                      bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-1.png')`}
+                      borderRadius="md"
+                      bgSize="cover"
+                      h={['11em', '23em']}
+                      bgPosition="center"
                     ></Box>
-                    <Heading
-                      color="#0C0C20"
-                      fontFamily="DMSerifDisplay_Italic"
-                      fontWeight="400"
-                      lineHeight="1"
-                      wordBreak="break-word"
-                      fontSize={['2rem', '2rem', '3rem', '3.75rem']}
-                    >
-                      Experience <br />
-                      Biblical Community
-                    </Heading>
                   </Box>
-                </Box>
-                <Box my={4} w="100vw" minH={['13em', '40vh']} overflow="hidden">
-                  <Slider {...settings}>
-                    <Box px={['0.5em', '1em']}>
-                      <Box
-                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-1.png')`}
-                        borderRadius="md"
-                        bgSize="cover"
-                        h={['11em', '23em']}
-                        bgPosition="center"
-                      ></Box>
-                    </Box>
 
-                    <Box px={['0.5em', '1em']}>
-                      <Box
-                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-2.png')`}
-                        borderRadius="md"
-                        bgSize="cover"
-                        h={['11em', '23em']}
-                        bgPosition="center"
-                      ></Box>
-                    </Box>
+                  <Box px={['0.5em', '1em']}>
+                    <Box
+                      bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-2.png')`}
+                      borderRadius="md"
+                      bgSize="cover"
+                      h={['11em', '23em']}
+                      bgPosition="center"
+                    ></Box>
+                  </Box>
 
-                    <Box px={['0.5em', '1em']}>
-                      <Box
-                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-3.png')`}
-                        borderRadius="md"
-                        bgSize="cover"
-                        h={['11em', '23em']}
-                        bgPosition="center"
-                      ></Box>
-                    </Box>
+                  <Box px={['0.5em', '1em']}>
+                    <Box
+                      bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-3.png')`}
+                      borderRadius="md"
+                      bgSize="cover"
+                      h={['11em', '23em']}
+                      bgPosition="center"
+                    ></Box>
+                  </Box>
 
-                    <Box px={['0.5em', '1em']}>
-                      <Box
-                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-4.png')`}
-                        borderRadius="md"
-                        bgSize="cover"
-                        h={['11em', '23em']}
-                        bgPosition="center"
-                      ></Box>
-                    </Box>
-                    <Box px={['0.5em', '1em']}>
-                      <Box
-                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-5.png')`}
-                        borderRadius="md"
-                        bgSize="cover"
-                        h={['11em', '23em']}
-                        bgPosition="center"
-                      ></Box>
-                    </Box>
-                    <Box px={['0.5em', '1em']}>
-                      <Box
-                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-6.png')`}
-                        borderRadius="md"
-                        bgSize="cover"
-                        h={['11em', '23em']}
-                        px="1em"
-                        bgPosition="center"
-                      ></Box>
-                    </Box>
-                    <Box px={['0.5em', '1em']}>
-                      <Box
-                        bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-7.png')`}
-                        borderRadius="md"
-                        bgSize="cover"
-                        h={['11em', '23em']}
-                        bgPosition="center"
-                      ></Box>
-                    </Box>
-                  </Slider>
-                </Box>
-                {isMobile ? (
-                  <VStack>
-                    <VStack w="100%">
-                      <Flex w="100%">
-                        <HStack paddingBottom="1em">
-                          <Box
-                            w="1.2em"
-                            h="1.2em"
-                            borderRadius="full"
-                            bg="black"
-                            display="flex"
-                            justifyContent="center"
-                            fontFamily="DMSerifDisplay_Regular"
-                            fontWeight="400"
-                            alignItems="center"
-                            color="white"
-                            fontSize="36"
-                          >
-                            1
-                          </Box>
-                          <Text
-                            color="black"
-                            fontSize={['1.6rem', '1.6rem', '2.4rem', '3rem']}
-                            px="0.5em"
-                            fontFamily="DMSerifDisplay_Italic"
-                            fontWeight="400"
-                            lineHeight="39.48px"
-                            wordBreak="break-word"
-                          >
-                            Join a LIFE Group
-                          </Text>
-                        </HStack>
-                      </Flex>
-                      <Box>
-                        <Text
-                          color="#0B0F19"
-                          fontSize="14"
-                          fontFamily="Manrope"
+                  <Box px={['0.5em', '1em']}>
+                    <Box
+                      bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-4.png')`}
+                      borderRadius="md"
+                      bgSize="cover"
+                      h={['11em', '23em']}
+                      bgPosition="center"
+                    ></Box>
+                  </Box>
+                  <Box px={['0.5em', '1em']}>
+                    <Box
+                      bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-5.png')`}
+                      borderRadius="md"
+                      bgSize="cover"
+                      h={['11em', '23em']}
+                      bgPosition="center"
+                    ></Box>
+                  </Box>
+                  <Box px={['0.5em', '1em']}>
+                    <Box
+                      bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-6.png')`}
+                      borderRadius="md"
+                      bgSize="cover"
+                      h={['11em', '23em']}
+                      px="1em"
+                      bgPosition="center"
+                    ></Box>
+                  </Box>
+                  <Box px={['0.5em', '1em']}>
+                    <Box
+                      bgImage={`url('${process.env.PUBLIC_URL}/images/home/community-7.png')`}
+                      borderRadius="md"
+                      bgSize="cover"
+                      h={['11em', '23em']}
+                      bgPosition="center"
+                    ></Box>
+                  </Box>
+                </Slider>
+              </Box>
+              {isMobile ? (
+                <VStack>
+                  <VStack w="100%">
+                    <Flex w="100%">
+                      <HStack paddingBottom="1em">
+                        <Box
+                          w="1.2em"
+                          h="1.2em"
+                          borderRadius="full"
+                          bg="black"
+                          display="flex"
+                          justifyContent="center"
+                          fontFamily="DMSerifDisplay_Regular"
                           fontWeight="400"
-                          wordBreak="break-word"
-                        >
-                          There is no better way to get a taste of who we are
-                          and what we believe in then to check out one of our
-                          LIFE Groups. This is an opportunity to experience the
-                          life-changing power of Biblical community with Love,
-                          Investment, Faith, and Enjoyment.
-                        </Text>
-                      </Box>
-                      <Link href="https://bit.ly/LGSignup-2025" w="100%">
-                        <Button
-                          w="100%"
-                          pl={10.5}
-                          pr={7}
-                          borderRadius={80}
-                          border="0.70px solid #D46764"
-                          justify="space-between"
-                          align="center"
-                          bgColor="#D46764"
+                          alignItems="center"
                           color="white"
-                          _active={{
-                            bg: '#D46764',
-                            color: 'white',
-                          }}
+                          fontSize="36"
                         >
-                          <Flex w="40%">
-                            <Box px="1em">
-                              <Text
-                                color="white"
-                                fontSize="14"
-                                fontFamily="Manrope"
-                                fontWeight="700"
-                                wordBreak="break-word"
-                              >
-                                Sign up now
-                              </Text>
-                            </Box>
-                            <Spacer />
-                            <ArrowForwardIcon color="white" my="auto" />
-                          </Flex>
-                        </Button>
-                      </Link>
-                    </VStack>
-                    <VStack w="100%">
-                      <Flex w="100%">
-                        <HStack py="1em">
-                          <Box
-                            w="1.2em"
-                            h="1.2em"
-                            borderRadius="full"
-                            bg="black"
-                            display="flex"
-                            justifyContent="center"
-                            fontFamily="DMSerifDisplay_Regular"
-                            fontWeight="400"
-                            alignItems="center"
-                            color="white"
-                            fontSize="36"
-                          >
-                            2
-                          </Box>
-                          <Text
-                            color="black"
-                            fontSize={['1.6rem', '1.6rem', '2.4rem', '3rem']}
-                            fontFamily="DMSerifDisplay_Italic"
-                            fontWeight="400"
-                            lineHeight="39.48px"
-                            px="0.5em"
-                            wordBreak="break-word"
-                          >
-                            Connect with Us
-                          </Text>
-                        </HStack>
-                      </Flex>
-                      <Box>
+                          1
+                        </Box>
                         <Text
-                          color="#0B0F19"
-                          fontSize="14"
-                          fontFamily="Manrope"
+                          color="black"
+                          fontSize={['1.6rem', '1.6rem', '2.4rem', '3rem']}
+                          px="0.5em"
+                          fontFamily="DMSerifDisplay_Italic"
                           fontWeight="400"
+                          lineHeight="39.48px"
                           wordBreak="break-word"
                         >
-                          New here and don’t know where to begin? Let us know
-                          your contact & we can connect you to our church
-                          community!
+                          Join a LIFE Group
                         </Text>
-                      </Box>
+                      </HStack>
+                    </Flex>
+                    <Box>
+                      <Text
+                        color="#0B0F19"
+                        fontSize="14"
+                        fontFamily="Manrope"
+                        fontWeight="400"
+                        wordBreak="break-word"
+                      >
+                        There is no better way to get a taste of who we are and
+                        what we believe in then to check out one of our LIFE
+                        Groups. This is an opportunity to experience the
+                        life-changing power of Biblical community with Love,
+                        Investment, Faith, and Enjoyment.
+                      </Text>
+                    </Box>
+                    <Link href="https://bit.ly/LGSignup-2025" w="100%">
                       <Button
                         w="100%"
                         pl={10.5}
@@ -300,142 +224,139 @@ const ExperienceBiblicalCommunity = () => {
                         align="center"
                         bgColor="#D46764"
                         color="white"
-                        onClick={onOpen}
                         _active={{
                           bg: '#D46764',
                           color: 'white',
                         }}
                       >
                         <Flex w="40%">
-                          <NewHereForm isOpen={isOpen} onClose={onClose} />
                           <Box px="1em">
                             <Text
+                              color="white"
                               fontSize="14"
                               fontFamily="Manrope"
                               fontWeight="700"
                               wordBreak="break-word"
                             >
-                              Get in touch
+                              Sign up now
                             </Text>
                           </Box>
                           <Spacer />
                           <ArrowForwardIcon color="white" my="auto" />
                         </Flex>
                       </Button>
-                    </VStack>
+                    </Link>
                   </VStack>
-                ) : (
-                  <VStack py="3em">
-                    <VStack w="80%" paddingBottom="2em">
-                      <Flex w="100%">
-                        <HStack>
-                          <Box
-                            w="2em"
-                            h="2em"
-                            borderRadius="full"
-                            bg="black"
-                            display="flex"
-                            justifyContent="center"
-                            fontFamily="DMSerifDisplay_Regular"
-                            fontWeight="400"
-                            alignItems="center"
-                            color="white"
-                            fontSize="24px"
-                          >
-                            1
-                          </Box>
-                          <Text
-                            color="black"
-                            fontSize="42px"
-                            fontFamily="DMSerifDisplay_Italic"
-                            fontWeight="400"
-                            lineHeight="39.48px"
-                            wordBreak="break-word"
-                          >
-                            Join a LIFE Group
-                          </Text>
-                        </HStack>
-                        <Spacer />
-                        <Link href="https://bit.ly/LGSignup-2025">
-                          <Button
-                            pt={6}
-                            pb={6}
-                            pl={10.5}
-                            pr={7}
-                            borderRadius={80}
-                            border="0.70px solid #D46764"
-                            justify="space-between"
-                            bgColor="transparent"
-                            align="center"
-                            color="#D46764"
-                            _hover={{
-                              bg: '#D46764',
-                              color: 'white',
-                            }}
-                          >
-                            <Flex w="100%">
-                              <Box px="1em">
-                                <Text
-                                  fontSize="20px"
-                                  fontFamily="Manrope"
-                                  fontWeight="700"
-                                  wordBreak="break-word"
-                                >
-                                  Sign up now
-                                </Text>
-                              </Box>
-                              <Spacer />
-                              <ArrowForwardIcon my="auto" />
-                            </Flex>
-                          </Button>
-                        </Link>
-                      </Flex>
-                      <Box>
-                        <Text
-                          color="#0B0F19"
-                          fontSize="20"
-                          fontFamily="Manrope"
+                  <VStack w="100%">
+                    <Flex w="100%">
+                      <HStack py="1em">
+                        <Box
+                          w="1.2em"
+                          h="1.2em"
+                          borderRadius="full"
+                          bg="black"
+                          display="flex"
+                          justifyContent="center"
+                          fontFamily="DMSerifDisplay_Regular"
                           fontWeight="400"
+                          alignItems="center"
+                          color="white"
+                          fontSize="36"
+                        >
+                          2
+                        </Box>
+                        <Text
+                          color="black"
+                          fontSize={['1.6rem', '1.6rem', '2.4rem', '3rem']}
+                          fontFamily="DMSerifDisplay_Italic"
+                          fontWeight="400"
+                          lineHeight="39.48px"
+                          px="0.5em"
                           wordBreak="break-word"
                         >
-                          There is no better way to get a taste of who we are
-                          and what we believe in then to check out one of our
-                          LIFE Groups. This is an opportunity to experience the
-                          life-changing power of Biblical community with Love,
-                          Investment, Faith, and Enjoyment.
+                          Connect with Us
                         </Text>
-                      </Box>
-                    </VStack>
-                    <VStack w="80%">
-                      <Flex w="100%">
-                        <HStack>
-                          <Box
-                            w="2em"
-                            h="2em"
-                            borderRadius="full"
-                            bg="black"
-                            display="flex"
-                            justifyContent="center"
-                            fontFamily="DMSerifDisplay_Regular"
-                            fontWeight="400"
-                            alignItems="center"
-                            color="white"
-                            fontSize="24px"
-                          >
-                            2
-                          </Box>
+                      </HStack>
+                    </Flex>
+                    <Box>
+                      <Text
+                        color="#0B0F19"
+                        fontSize="14"
+                        fontFamily="Manrope"
+                        fontWeight="400"
+                        wordBreak="break-word"
+                      >
+                        New here and don’t know where to begin? Let us know your
+                        contact & we can connect you to our church community!
+                      </Text>
+                    </Box>
+                    <Button
+                      w="100%"
+                      pl={10.5}
+                      pr={7}
+                      borderRadius={80}
+                      border="0.70px solid #D46764"
+                      justify="space-between"
+                      align="center"
+                      bgColor="#D46764"
+                      color="white"
+                      onClick={onOpen}
+                      _active={{
+                        bg: '#D46764',
+                        color: 'white',
+                      }}
+                    >
+                      <Flex w="40%">
+                        <NewHereForm isOpen={isOpen} onClose={onClose} />
+                        <Box px="1em">
                           <Text
-                            color="black"
-                            fontSize="42px"
-                            fontFamily="DMSerifDisplay_Italic"
-                            fontWeight="400"
-                            lineHeight="39.48px"
+                            fontSize="14"
+                            fontFamily="Manrope"
+                            fontWeight="700"
                             wordBreak="break-word"
                           >
-                            Connect with Us
+                            Get in touch
                           </Text>
-                        </HStack>
+                        </Box>
                         <Spacer />
+                        <ArrowForwardIcon color="white" my="auto" />
+                      </Flex>
+                    </Button>
+                  </VStack>
+                </VStack>
+              ) : (
+                <VStack py="3em">
+                  <VStack w="80%" paddingBottom="2em">
+                    <Flex w="100%">
+                      <HStack>
+                        <Box
+                          w="2em"
+                          h="2em"
+                          borderRadius="full"
+                          bg="black"
+                          display="flex"
+                          justifyContent="center"
+                          fontFamily="DMSerifDisplay_Regular"
+                          fontWeight="400"
+                          alignItems="center"
+                          color="white"
+                          fontSize="24px"
+                        >
+                          1
+                        </Box>
+                        <Text
+                          color="black"
+                          fontSize="42px"
+                          fontFamily="DMSerifDisplay_Italic"
+                          fontWeight="400"
+                          lineHeight="39.48px"
+                          wordBreak="break-word"
+                        >
+                          Join a LIFE Group
+                        </Text>
+                      </HStack>
+                      <Spacer />
+                      <Link href="https://bit.ly/LGSignup-2025">
                         <Button
                           pt={6}
                           pb={6}
@@ -444,17 +365,15 @@ const ExperienceBiblicalCommunity = () => {
                           borderRadius={80}
                           border="0.70px solid #D46764"
                           justify="space-between"
-                          align="center"
                           bgColor="transparent"
+                          align="center"
                           color="#D46764"
-                          onClick={onOpen}
                           _hover={{
                             bg: '#D46764',
                             color: 'white',
                           }}
                         >
                           <Flex w="100%">
-                            <NewHereForm isOpen={isOpen} onClose={onClose} />
                             <Box px="1em">
                               <Text
                                 fontSize="20px"
@@ -462,34 +381,113 @@ const ExperienceBiblicalCommunity = () => {
                                 fontWeight="700"
                                 wordBreak="break-word"
                               >
-                                Get in touch
+                                Sign up now
                               </Text>
                             </Box>
                             <Spacer />
                             <ArrowForwardIcon my="auto" />
                           </Flex>
                         </Button>
-                      </Flex>
-                      <Box w="100%">
-                        <Text
-                          color="#0B0F19"
-                          fontSize="20"
-                          fontFamily="Manrope"
+                      </Link>
+                    </Flex>
+                    <Box>
+                      <Text
+                        color="#0B0F19"
+                        fontSize="20"
+                        fontFamily="Manrope"
+                        fontWeight="400"
+                        wordBreak="break-word"
+                      >
+                        There is no better way to get a taste of who we are and
+                        what we believe in then to check out one of our LIFE
+                        Groups. This is an opportunity to experience the
+                        life-changing power of Biblical community with Love,
+                        Investment, Faith, and Enjoyment.
+                      </Text>
+                    </Box>
+                  </VStack>
+                  <VStack w="80%">
+                    <Flex w="100%">
+                      <HStack>
+                        <Box
+                          w="2em"
+                          h="2em"
+                          borderRadius="full"
+                          bg="black"
+                          display="flex"
+                          justifyContent="center"
+                          fontFamily="DMSerifDisplay_Regular"
                           fontWeight="400"
+                          alignItems="center"
+                          color="white"
+                          fontSize="24px"
+                        >
+                          2
+                        </Box>
+                        <Text
+                          color="black"
+                          fontSize="42px"
+                          fontFamily="DMSerifDisplay_Italic"
+                          fontWeight="400"
+                          lineHeight="39.48px"
                           wordBreak="break-word"
                         >
-                          New here and don’t know where to begin? Let us know
-                          your contact & we can connect you to our church
-                          community!
+                          Connect with Us
                         </Text>
-                      </Box>
-                    </VStack>
+                      </HStack>
+                      <Spacer />
+                      <Button
+                        pt={6}
+                        pb={6}
+                        pl={10.5}
+                        pr={7}
+                        borderRadius={80}
+                        border="0.70px solid #D46764"
+                        justify="space-between"
+                        align="center"
+                        bgColor="transparent"
+                        color="#D46764"
+                        onClick={onOpen}
+                        _hover={{
+                          bg: '#D46764',
+                          color: 'white',
+                        }}
+                      >
+                        <Flex w="100%">
+                          <NewHereForm isOpen={isOpen} onClose={onClose} />
+                          <Box px="1em">
+                            <Text
+                              fontSize="20px"
+                              fontFamily="Manrope"
+                              fontWeight="700"
+                              wordBreak="break-word"
+                            >
+                              Get in touch
+                            </Text>
+                          </Box>
+                          <Spacer />
+                          <ArrowForwardIcon my="auto" />
+                        </Flex>
+                      </Button>
+                    </Flex>
+                    <Box w="100%">
+                      <Text
+                        color="#0B0F19"
+                        fontSize="20"
+                        fontFamily="Manrope"
+                        fontWeight="400"
+                        wordBreak="break-word"
+                      >
+                        New here and don’t know where to begin? Let us know your
+                        contact & we can connect you to our church community!
+                      </Text>
+                    </Box>
                   </VStack>
-                )}
-              </VStack>
-            </Container>
-          </Box>
-        </Fade>
+                </VStack>
+              )}
+            </VStack>
+          </Container>
+        </Box>
       )}
     </InView>
   );

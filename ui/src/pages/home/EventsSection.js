@@ -9,7 +9,6 @@ import {
   Button,
   LinkOverlay,
   Image,
-  Fade,
   IconButton,
 } from '@chakra-ui/react';
 import { ChevronRightIcon, ChevronLeftIcon } from '@chakra-ui/icons';
@@ -140,8 +139,13 @@ const EventsSection = () => {
   return (
     <InView rootMargin="-50px" triggerOnce={true}>
       {({ inView, ref }) => (
-        <Fade transition={{ enter: { duration: 1 } }} in={inView}>
-          <Container maxW="container.xl" pr="0" ref={ref}>
+        <Box
+          ref={ref}
+          opacity={inView ? 1 : 0}
+          transform={inView ? 'none' : 'translateY(20px)'}
+          transition="opacity 1s ease, transform 1s ease"
+        >
+          <Container maxW="container.xl" pr="0">
             <Flex
               h="auto"
               direction={{ base: 'column', md: 'row' }}
@@ -338,7 +342,7 @@ const EventsSection = () => {
               </Button>
             </Flex>
           </Container>
-        </Fade>
+        </Box>
       )}
     </InView>
   );

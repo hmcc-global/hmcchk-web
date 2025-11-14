@@ -6,10 +6,8 @@ import {
   VStack,
   Stack,
   HStack,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalCloseButton,
+  Dialog,
+  CloseButton,
   ModalHeader,
   ModalBody,
 } from '@chakra-ui/react';
@@ -33,8 +31,8 @@ const SermonSeriesCard = ({
 
   useEffect(() => {
     if (sermonSeries && allSermons && allSermons.length > 0) {
-      const sermonList = allSermons.filter((sermon) =>
-        sermon.sermonSeries[0].name === sermonSeries
+      const sermonList = allSermons.filter(
+        (sermon) => sermon.sermonSeries[0].name === sermonSeries
       );
 
       if (sermonList && sermonList.length > 0) {
@@ -150,87 +148,97 @@ const SermonSeriesCard = ({
           </Box>
         </Stack>
       </Box>
-      <Modal isOpen={isOpen} onClose={onClose} size={'5xl'}>
-        <ModalOverlay />
-        <ModalContent borderRadius="20" p={'1rem'}>
-          <ModalCloseButton />
-          <ModalHeader>
-            <Text
-              fontFamily={'DMSerifDisplay_Italic'}
-              fontWeight={400}
-              fontSize={{ base: '1.625rem', md: '2.625rem' }}
-              textAlign={{ base: 'center', md: 'left' }}
-            >
-              {sermonSeriesTitle}
-            </Text>
-          </ModalHeader>
-
-          <ModalBody pb={'1rem'}>
-            <Box
-              display={'flex'}
-              flexDir={{ base: 'column', lg: 'row' }}
-              alignItems={{ base: 'center', lg: 'flex-start' }}
-              justifyContent={{ base: 'flex-start', lg: 'space-between' }}
-              w="100%"
-              gap={'1.5rem'}
-            >
-              <VStack
-                spacing={'1rem'}
-                alignItems="left"
-                w={{ base: '100%', lg: '45%' }}
+      <Dialog.Root
+        open={isOpen}
+        onOpenChange={(next) => {
+          if (!next) onClose();
+        }}
+        size="5xl"
+      >
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content borderRadius="20" p="1rem">
+            <Dialog.CloseTrigger asChild>
+              <CloseButton aria-label="Close" />
+            </Dialog.CloseTrigger>
+            <ModalHeader>
+              <Text
+                fontFamily={'DMSerifDisplay_Italic'}
+                fontWeight={400}
+                fontSize={{ base: '1.625rem', md: '2.625rem' }}
+                textAlign={{ base: 'center', md: 'left' }}
               >
-                <AspectRatio minW={'100%'} ratio={16 / 9}>
-                  <>
-                    <Image
-                      borderRadius="15px"
-                      src={sermonImage}
-                      objectFit="cover"
-                    />
-                  </>
-                </AspectRatio>
-                {sermonSeriesDescription &&
-                  sermonSeriesDescription.trim().length > 0 && (
-                    <VStack spacing={'0.5rem'} alignItems="left">
-                      <Text
-                        fontFamily={'DMSerifDisplay_Italic'}
-                        fontWeight={400}
-                        fontSize={{ base: '1.25rem', md: '1.75rem' }}
-                      >
-                        Description
-                      </Text>
-                      <Text
-                        fontFamily={'Manrope'}
-                        fontWeight={400}
-                        fontSize={{ base: '0.875rem', md: '1rem' }}
-                      >
-                        {sermonSeriesDescription}
-                      </Text>
-                    </VStack>
-                  )}
-              </VStack>
-              <VStack spacing={'0.5rem'} alignItems="left" flex={1}>
-                <Text
-                  fontFamily={'DMSerifDisplay_Italic'}
-                  fontWeight={400}
-                  fontSize={{ base: '1.25rem', md: '1.75rem' }}
+                {sermonSeriesTitle}
+              </Text>
+            </ModalHeader>
+
+            <ModalBody pb={'1rem'}>
+              <Box
+                display={'flex'}
+                flexDir={{ base: 'column', lg: 'row' }}
+                alignItems={{ base: 'center', lg: 'flex-start' }}
+                justifyContent={{ base: 'flex-start', lg: 'space-between' }}
+                w="100%"
+                gap={'1.5rem'}
+              >
+                <VStack
+                  spacing={'1rem'}
+                  alignItems="left"
+                  w={{ base: '100%', lg: '45%' }}
                 >
-                  Choose Sermon
-                </Text>
-                <Box
-                  display={'flex'}
-                  flexDir={'column'}
-                  gap={'1rem'}
-                  w="100%"
-                  overflowY="auto"
-                  maxHeight={{ base: '30vh', lg: '60vh' }}
-                >
-                  <SermonSeries sermonSeriesName={sermonSeries} />
-                </Box>
-              </VStack>
-            </Box>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+                  <AspectRatio minW={'100%'} ratio={16 / 9}>
+                    <>
+                      <Image
+                        borderRadius="15px"
+                        src={sermonImage}
+                        objectFit="cover"
+                      />
+                    </>
+                  </AspectRatio>
+                  {sermonSeriesDescription &&
+                    sermonSeriesDescription.trim().length > 0 && (
+                      <VStack spacing={'0.5rem'} alignItems="left">
+                        <Text
+                          fontFamily={'DMSerifDisplay_Italic'}
+                          fontWeight={400}
+                          fontSize={{ base: '1.25rem', md: '1.75rem' }}
+                        >
+                          Description
+                        </Text>
+                        <Text
+                          fontFamily={'Manrope'}
+                          fontWeight={400}
+                          fontSize={{ base: '0.875rem', md: '1rem' }}
+                        >
+                          {sermonSeriesDescription}
+                        </Text>
+                      </VStack>
+                    )}
+                </VStack>
+                <VStack spacing={'0.5rem'} alignItems="left" flex={1}>
+                  <Text
+                    fontFamily={'DMSerifDisplay_Italic'}
+                    fontWeight={400}
+                    fontSize={{ base: '1.25rem', md: '1.75rem' }}
+                  >
+                    Choose Sermon
+                  </Text>
+                  <Box
+                    display={'flex'}
+                    flexDir={'column'}
+                    gap={'1rem'}
+                    w="100%"
+                    overflowY="auto"
+                    maxHeight={{ base: '30vh', lg: '60vh' }}
+                  >
+                    <SermonSeries sermonSeriesName={sermonSeries} />
+                  </Box>
+                </VStack>
+              </Box>
+            </ModalBody>
+          </Dialog.Content>
+        </Dialog.Positioner>
+      </Dialog.Root>
     </>
   );
 };

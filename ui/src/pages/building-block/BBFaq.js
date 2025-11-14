@@ -1,5 +1,3 @@
-import { Fade } from '@chakra-ui/react';
-
 import { Box, Heading } from '@chakra-ui/react';
 import CustomFaqAccordion from '../discover/CustomFaqAccordion';
 import { InView } from 'react-intersection-observer';
@@ -37,14 +35,16 @@ const BBFaq = () => {
     <InView triggerOnce={true} rootMargin="-50px 0px" threshold={0.1}>
       {({ inView, ref }) => (
         <Box ref={ref} w="100%">
-          <Fade in={inView} transition={{ enter: { duration: 1 } }}>
-            <Box
-              display="flex"
-              flexDir={'column'}
-              gap={{ base: '1rem', lg: '1.5rem' }}
-              w="100%"
-            >
-              <Heading
+          <Box
+            display="flex"
+            flexDir={'column'}
+            gap={{ base: '1rem', lg: '1.5rem' }}
+            w="100%"
+            opacity={inView ? 1 : 0}
+            transform={inView ? 'none' : 'translateY(20px)'}
+            transition="opacity 1s ease, transform 1s ease"
+          >
+            <Heading
                 as="h1"
                 fontSize={{ base: '2rem', md: '2.25rem', lg: '2.625rem' }}
                 fontWeight={400}

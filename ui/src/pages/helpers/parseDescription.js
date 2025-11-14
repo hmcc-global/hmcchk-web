@@ -1,10 +1,4 @@
-import {
-  Text,
-  UnorderedList,
-  OrderedList,
-  ListItem,
-  Link,
-} from '@chakra-ui/react';
+import { Text, List, Link } from '@chakra-ui/react';
 import parse, { domToReact, attributesToProps } from 'html-react-parser';
 
 const options = {
@@ -13,18 +7,18 @@ const options = {
       return <Text mb="2">{domToReact(domNode.children, options)}</Text>;
     } else if (domNode.name === 'ul') {
       return (
-        <UnorderedList marginInlineStart="1.25em" mb="2">
+        <List marginInlineStart="1.25em" mb="2" styleType="disc">
           {domToReact(domNode.children, options)}
-        </UnorderedList>
+        </List>
       );
     } else if (domNode.name === 'ol') {
       return (
-        <OrderedList marginInlineStart="1.25em" mb="2">
+        <List as="ol" marginInlineStart="1.25em" mb="2" styleType="decimal">
           {domToReact(domNode.children, options)}
-        </OrderedList>
+        </List>
       );
     } else if (domNode.name === 'li') {
-      return <ListItem>{domToReact(domNode.children, options)}</ListItem>;
+      return <List.Item>{domToReact(domNode.children, options)}</List.Item>;
     } else if (domNode.name === 'a') {
       return (
         <Link color="teal.500" {...attributesToProps(domNode.attribs)}>

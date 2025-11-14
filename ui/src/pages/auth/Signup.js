@@ -6,18 +6,14 @@ import {
   Box,
   Select,
   Center,
-  UnorderedList,
-  ListItem,
+  List,
   VStack,
   Flex,
   Image,
   Text,
   Button,
   Input,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalFooter,
+  Dialog,
   useMediaQuery,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
@@ -148,31 +144,40 @@ const Signup = (props) => {
 
   return (
     <>
-      <Modal isOpen={modalOpen}>
-        <ModalOverlay />
-        <ModalContent borderRadius="20">
-          <VStack>
-            <Text
-              color="#79B71A"
-              fontSize="2xl"
-              fontWeight="700"
-              mt={6}
-              flex={1}
-              p={5}
-              textAlign="center"
-            >
-              Account created successfully, redirecting you to the login page.
-              You can now try to login!
-            </Text>
-            <Box flex={4}>
-              <Center w="100%" h="100%">
-                <CheckCircleIcon mt={5} w="70%" h="70%" color="#79B71A" />
-              </Center>
-            </Box>
-          </VStack>
-          <ModalFooter />
-        </ModalContent>
-      </Modal>
+      <Dialog.Root
+        open={modalOpen}
+        onOpenChange={(nextOpen) => {
+          if (!nextOpen) setModalOpen(false);
+        }}
+      >
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content borderRadius="20">
+            <Dialog.Title>
+              <VStack>
+                <Text
+                  color="#79B71A"
+                  fontSize="2xl"
+                  fontWeight="700"
+                  mt={6}
+                  flex={1}
+                  p={5}
+                  textAlign="center"
+                >
+                  Account created successfully, redirecting you to the login
+                  page. You can now try to login!
+                </Text>
+                <Box flex={4}>
+                  <Center w="100%" h="100%">
+                    <CheckCircleIcon mt={5} w="70%" h="70%" color="#79B71A" />
+                  </Center>
+                </Box>
+              </VStack>
+            </Dialog.Title>
+            <Dialog.Footer />
+          </Dialog.Content>
+        </Dialog.Positioner>
+      </Dialog.Root>
 
       <Box
         minH="100vh"
@@ -295,16 +300,20 @@ const Signup = (props) => {
                         <Text w="50vw" fontSize={[10, 10, 14, 14]}>
                           Your new password should consist of:
                         </Text>
-                        <UnorderedList w="300" fontSize={[10, 10, 14, 14]}>
-                          <ListItem>At least 8 characters in length</ListItem>
-                          <ListItem>
+                        <List
+                          w="300"
+                          fontSize={[10, 10, 14, 14]}
+                          styleType="disc"
+                        >
+                          <List.Item>At least 8 characters in length</List.Item>
+                          <List.Item>
                             Mixture of both uppercase and lowercase characters
-                          </ListItem>
-                          <ListItem>Contains at least one number</ListItem>
-                          <ListItem>
+                          </List.Item>
+                          <List.Item>Contains at least one number</List.Item>
+                          <List.Item>
                             Contains at least one special character
-                          </ListItem>
-                        </UnorderedList>
+                          </List.Item>
+                        </List>
                       </Box>
                     </Center>
                     <Input

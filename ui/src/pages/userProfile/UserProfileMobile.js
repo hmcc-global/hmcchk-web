@@ -3,26 +3,18 @@ import {
   Text,
   Tabs,
   HStack,
-  TabPanels,
-  TabPanel,
   Flex,
-  FormControl,
-  FormLabel,
-  FormHelperText,
+  Field,
   Input,
   InputGroup,
   Button,
   Stack,
   Center,
   Switch,
-  InputRightAddon,
   Select,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalFooter,
+  Dialog,
+  CloseButton,
   VStack,
-  ModalCloseButton,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
 import { useCallback, useEffect, useState } from 'react';
@@ -206,9 +198,8 @@ const UserProfileMobile = (props) => {
     }
   };
 
-  const handleTabChange = (e) => {
-    const newIndex = Number(e.target.value); // Ensure it's a number
-    setActiveIndex(newIndex);
+  const handleTabChange = (details) => {
+    setActiveIndex(details.value);
   };
 
   const handleTabSwitch = (tab) => {
@@ -251,30 +242,39 @@ const UserProfileMobile = (props) => {
 
   return (
     <>
-      <Modal isOpen={modalOpen} onClose={onModalClose}>
-        <ModalOverlay />
-        <ModalContent borderRadius="20">
-          <ModalCloseButton />
-          <VStack>
-            <Text
-              color="#0628A3"
-              fontSize="2xl"
-              fontWeight="700"
-              mt={6}
-              flex={1}
-              textAlign="center"
-            >
-              Edited successfully
-            </Text>
-            <Box flex={4}>
-              <Center w="100%" h="100%">
-                <CheckCircleIcon mt={5} w="50%" h="50%" color="#0628A3" />
-              </Center>
-            </Box>
-          </VStack>
-          <ModalFooter />
-        </ModalContent>
-      </Modal>
+      <Dialog.Root
+        open={modalOpen}
+        onOpenChange={(next) => {
+          if (!next) onModalClose();
+        }}
+      >
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content borderRadius="20">
+            <Dialog.CloseTrigger asChild>
+              <CloseButton aria-label="Close" />
+            </Dialog.CloseTrigger>
+            <VStack>
+              <Text
+                color="#0628A3"
+                fontSize="2xl"
+                fontWeight="700"
+                mt={6}
+                flex={1}
+                textAlign="center"
+              >
+                Edited successfully
+              </Text>
+              <Box flex={4}>
+                <Center w="100%" h="100%">
+                  <CheckCircleIcon mt={5} w="50%" h="50%" color="#0628A3" />
+                </Center>
+              </Box>
+            </VStack>
+            <Dialog.Footer />
+          </Dialog.Content>
+        </Dialog.Positioner>
+      </Dialog.Root>
       <Flex
         mt="10%"
         alignItems="center"
@@ -306,18 +306,19 @@ const UserProfileMobile = (props) => {
       </Flex>
 
       <form onSubmit={handleSubmit(handleEditUserInformation)}>
-        <Tabs
+        <Tabs.Root
           mt="7%"
           orientation="horizontal"
           variant="line"
           mb="12%"
           fontSize="0.9rem"
-          isManual
-          index={activeIndex}
+          activationMode="manual"
+          value={activeIndex}
+          onValueChange={handleTabChange}
         >
           <Select
             value={activeIndex}
-            onChange={handleTabChange}
+            onChange={(e) => handleTabChange({ value: Number(e.target.value) })}
             mb={4}
             bg="#F6FAFF"
             borderRadius={24}
@@ -332,33 +333,32 @@ const UserProfileMobile = (props) => {
             <option value={2}>Personal Profile</option>
             <option value={3}>Church Profile</option>
           </Select>
-          <TabPanels>
-            <TabPanel width="full" margin="20px 0px" p="0">
-              <Flex direction="column">
-                {formList && formList.length > 0 && (
-                  <Box>
-                    <Text
-                      fontWeight="700"
-                      fontSize="0.95rem"
-                      color="#718096"
-                      mb="2.5"
-                    >
-                      Available Signup Links:
-                    </Text>
-                    {generatePublishedFormLinks(unsignedFormList, false)}
-                    <Text
-                      fontWeight="700"
-                      fontSize="0.95rem"
-                      color="#718096"
-                      mt="2.5"
-                      mb="2.5"
-                    >
-                      Your Signups:
-                    </Text>
-                    {generatePublishedFormLinks(signedUpFormList, true)}
-                  </Box>
-                )}
-                {/* <Button
+          <Tabs.Content value={0} width="full" margin="20px 0px" p="0">
+            <Flex direction="column">
+              {formList && formList.length > 0 && (
+                <Box>
+                  <Text
+                    fontWeight="700"
+                    fontSize="0.95rem"
+                    color="#718096"
+                    mb="2.5"
+                  >
+                    Available Signup Links:
+                  </Text>
+                  {generatePublishedFormLinks(unsignedFormList, false)}
+                  <Text
+                    fontWeight="700"
+                    fontSize="0.95rem"
+                    color="#718096"
+                    mt="2.5"
+                    mb="2.5"
+                  >
+                    Your Signups:
+                  </Text>
+                  {generatePublishedFormLinks(signedUpFormList, true)}
+                </Box>
+              )}
+              {/* <Button
                   size="sm"
                   mt="8"
                   color="#0628A3"
@@ -368,402 +368,397 @@ const UserProfileMobile = (props) => {
                 >
                   Change Password
                 </Button> */}
-              </Flex>
-            </TabPanel>
-            <TabPanel width="full" margin="20px 0px" p="0">
-              <HStack gap={3} mb={5} mx={5}>
-                <Button
-                  borderRadius={30}
-                  bg={activeSermonNoteTab === 'all' ? '#4A6EEB' : '#DFE7FF'}
-                  color={activeSermonNoteTab === 'all' ? 'white' : '#4A6EEB'}
-                  onClick={() => handleTabSwitch('all')}
-                  px={7}
-                  _hover={{
-                    bg: activeSermonNoteTab === 'all' ? '#4A6EEB' : '#DFE7FF',
-                    color: activeSermonNoteTab === 'all' ? 'white' : '#4A6EEB',
-                  }}
+            </Flex>
+          </Tabs.Content>
+          <Tabs.Content value={1} width="full" margin="20px 0px" p="0">
+            <HStack gap={3} mb={5} mx={5}>
+              <Button
+                borderRadius={30}
+                bg={activeSermonNoteTab === 'all' ? '#4A6EEB' : '#DFE7FF'}
+                color={activeSermonNoteTab === 'all' ? 'white' : '#4A6EEB'}
+                onClick={() => handleTabSwitch('all')}
+                px={7}
+                _hover={{
+                  bg: activeSermonNoteTab === 'all' ? '#4A6EEB' : '#DFE7FF',
+                  color: activeSermonNoteTab === 'all' ? 'white' : '#4A6EEB',
+                }}
+              >
+                <Text fontWeight="semibold" mx={2} fontSize={12}>
+                  All Sermon Notes
+                </Text>
+              </Button>
+              <Button
+                borderRadius={30}
+                bg={activeSermonNoteTab === 'my' ? '#4A6EEB' : '#DFE7FF'}
+                color={activeSermonNoteTab === 'my' ? 'white' : '#4A6EEB'}
+                onClick={() => handleTabSwitch('my')}
+                px={7}
+                _hover={{
+                  bg: activeSermonNoteTab === 'my' ? '#4A6EEB' : '#DFE7FF',
+                  color: activeSermonNoteTab === 'my' ? 'white' : '#4A6EEB',
+                }}
+              >
+                <Text fontWeight="semibold" fontSize={12}>
+                  Saved Sermon Notes
+                </Text>
+              </Button>
+            </HStack>
+            {activeSermonNoteTab === 'all' && (
+              <>
+                <Text color="#0628A3" fontSize="1.1rem" fontWeight={700} mb={3}>
+                  Sermon Series
+                </Text>
+                <Select
+                  placeholder="Select Sermon Series"
+                  value={selectedSermonSeries}
+                  onChange={(e) => setSelectedSermonSeries(e.target.value)}
+                  mb={4}
                 >
-                  <Text fontWeight="semibold" mx={2} fontSize={12}>
-                    All Sermon Notes
+                  {sermonSeriesList.map((series) => {
+                    if (series !== '') {
+                      return (
+                        <option key={series} value={series}>
+                          {series}
+                        </option>
+                      );
+                    }
+                    return null;
+                  })}
+                </Select>
+              </>
+            )}
+            {/* Pass Sermon Notes depending on the tab and also whether there is any select option */}
+            {/* Pass pagination state to SermonNotesPagination */}
+            <SermonNotesPagination
+              sermonNotes={sermonNotes}
+              currentPage={
+                activeSermonNoteTab === 'all'
+                  ? currentPageAll
+                  : currentPageSaved
+              }
+              setCurrentPage={
+                activeSermonNoteTab === 'all'
+                  ? setCurrentPageAll
+                  : setCurrentPageSaved
+              }
+            />
+          </Tabs.Content>
+          <Tabs.Content value={2} p="7%">
+            <Center mb="5%">
+              <Button
+                size="md"
+                color="#0628A3"
+                borderColor="#0628A3"
+                borderRadius="10"
+                variant="outline"
+                type="submit"
+              >
+                Save Information
+              </Button>
+            </Center>
+
+            <Stack spacing="7%">
+              <Field.Root>
+                <Field.Label color="#2C5282">
+                  First Name (and Middle Name)
+                </Field.Label>
+                <Input
+                  size="sm"
+                  borderRadius="5"
+                  {...register('firstName', { required: true })}
+                  invalid={errors['firstName']}
+                  placeholder="Please fill in this field"
+                />
+              </Field.Root>
+              <Field.Root>
+                <Field.Label color="#2C5282">Last Name</Field.Label>
+                <Input
+                  size="sm"
+                  borderRadius="5"
+                  {...register('lastName', { required: true })}
+                  invalid={errors['lastName']}
+                  placeholder="Please fill in this field"
+                />
+                <Field.HelperText>
+                  Enter "N/A" if not applicable for you
+                </Field.HelperText>
+              </Field.Root>
+
+              <Field.Root>
+                <Field.Label color="#2C5282">Country of Origin</Field.Label>
+                <Select
+                  size="sm"
+                  borderRadius="5"
+                  {...register('countryOfOrigin', { required: true })}
+                  invalid={errors['countryOfOrigin']}
+                  placeholder="Please fill in this field"
+                >
+                  {countryList.map((item) => {
+                    return <option key={'co' + item}>{item}</option>;
+                  })}
+                </Select>
+              </Field.Root>
+              <Field.Root>
+                <Field.Label color="#2C5282">Lifestage</Field.Label>
+                <Select
+                  size="sm"
+                  borderRadius="5"
+                  {...register('lifestage', { required: true })}
+                  invalid={errors['lifestage']}
+                  placeholder="Please fill in this field"
+                >
+                  {lifestageList.map((item) => {
+                    return <option key={'life' + item}>{item}</option>;
+                  })}
+                </Select>
+              </Field.Root>
+
+              <Field.Root>
+                <Field.Label color="#2C5282">Campus</Field.Label>
+                <Select
+                  size="sm"
+                  borderRadius="5"
+                  {...register('campus')}
+                  pointerEvents="none"
+                >
+                  {campusList.map((item) => {
+                    return <option key={'ca' + item}>{item}</option>;
+                  })}
+                </Select>
+              </Field.Root>
+              <Field.Root>
+                <Field.Label color="#2C5282">Phone Number</Field.Label>
+                <Input
+                  size="sm"
+                  borderRadius="5"
+                  {...register('phoneNumber', { required: true })}
+                  invalid={errors['phoneNumber']}
+                  placeholder="Please fill in this field"
+                />
+              </Field.Root>
+
+              <Field.Root>
+                <Field.Label color="#2C5282">Birthday</Field.Label>
+                <Input
+                  size="sm"
+                  type="date"
+                  borderRadius="5"
+                  {...register('birthday')}
+                />
+              </Field.Root>
+
+              <Field.Root>
+                <Field.Label color="#2C5282">
+                  Address: Floor / Level
+                </Field.Label>
+                <Input
+                  size="sm"
+                  borderRadius="5"
+                  {...register('addressFloor')}
+                />
+              </Field.Root>
+              <Field.Root>
+                <Field.Label color="#2C5282">
+                  Address: Room / Flat / Unit / Suite
+                </Field.Label>
+                <Input
+                  size="sm"
+                  borderRadius="5"
+                  {...register('addressFlat')}
+                />
+              </Field.Root>
+              <Field.Root>
+                <Field.Label color="#2C5282">
+                  Address: Street Address
+                </Field.Label>
+                <Input
+                  size="sm"
+                  borderRadius="5"
+                  {...register('addressStreet')}
+                />
+              </Field.Root>
+
+              <Field.Root>
+                <Field.Label color="#2C5282">Address: District</Field.Label>
+                <Select
+                  size="sm"
+                  borderRadius="5"
+                  {...register('addressDistrict')}
+                >
+                  {districtList.map((item) => {
+                    return <option key={'di' + item}>{item}</option>;
+                  })}
+                </Select>
+              </Field.Root>
+              <Field.Root>
+                <Field.Label color="#2C5282">Address: Region</Field.Label>
+                <Select
+                  size="sm"
+                  borderRadius="5"
+                  {...register('addressRegion')}
+                >
+                  {regionList.map((item) => {
+                    return <option key={'re' + item}>{item}</option>;
+                  })}
+                </Select>
+              </Field.Root>
+            </Stack>
+          </Tabs.Content>
+          <Tabs.Content value={3} p="7%">
+            <Center mb="5%">
+              <Button
+                size="md"
+                color="#0628A3"
+                borderColor="#0628A3"
+                borderRadius="10"
+                variant="outline"
+                type="submit"
+              >
+                Save Information
+              </Button>
+            </Center>
+            <Stack spacing="7%">
+              <Field.Root>
+                <Field.Label color="#2C5282">LIFE Group</Field.Label>
+                <Select size="sm" borderRadius="5" {...register('lifeGroup')}>
+                  {lifegroupList.map((item) => {
+                    return <option key={'lg' + item}>{item}</option>;
+                  })}
+                </Select>
+              </Field.Root>
+              <Field.Root>
+                <Field.Label color="#2C5282">Ministry Team</Field.Label>
+                <Select
+                  size="sm"
+                  borderRadius="5"
+                  {...register('ministryTeam')}
+                >
+                  {ministryTeamList.map((item) => {
+                    return <option key={'mt' + item}>{item}</option>;
+                  })}
+                </Select>
+              </Field.Root>
+              <Field.Root>
+                <Stack direction="row">
+                  <Text flex={1} fontWeight="500" mr="3%" color="#2C5282">
+                    Church Member
                   </Text>
-                </Button>
-                <Button
-                  borderRadius={30}
-                  bg={activeSermonNoteTab === 'my' ? '#4A6EEB' : '#DFE7FF'}
-                  color={activeSermonNoteTab === 'my' ? 'white' : '#4A6EEB'}
-                  onClick={() => handleTabSwitch('my')}
-                  px={7}
-                  _hover={{
-                    bg: activeSermonNoteTab === 'my' ? '#4A6EEB' : '#DFE7FF',
-                    color: activeSermonNoteTab === 'my' ? 'white' : '#4A6EEB',
-                  }}
-                >
-                  <Text fontWeight="semibold" fontSize={12}>
-                    Saved Sermon Notes
-                  </Text>
-                </Button>
-              </HStack>
-              {activeSermonNoteTab === 'all' && (
-                <>
-                  <Text
-                    color="#0628A3"
-                    fontSize="1.1rem"
-                    fontWeight={700}
-                    mb={3}
-                  >
-                    Sermon Series
-                  </Text>
-                  <Select
-                    placeholder="Select Sermon Series"
-                    value={selectedSermonSeries}
-                    onChange={(e) => setSelectedSermonSeries(e.target.value)}
-                    mb={4}
-                  >
-                    {sermonSeriesList.map((series) => {
-                      if (series !== '') {
-                        return (
-                          <option key={series} value={series}>
-                            {series}
-                          </option>
-                        );
-                      }
-                      return null;
-                    })}
-                  </Select>
-                </>
-              )}
-              {/* Pass Sermon Notes depending on the tab and also whether there is any select option */}
-              {/* Pass pagination state to SermonNotesPagination */}
-              <SermonNotesPagination
-                sermonNotes={sermonNotes}
-                currentPage={
-                  activeSermonNoteTab === 'all'
-                    ? currentPageAll
-                    : currentPageSaved
-                }
-                setCurrentPage={
-                  activeSermonNoteTab === 'all'
-                    ? setCurrentPageAll
-                    : setCurrentPageSaved
-                }
-              />
-            </TabPanel>
-            <TabPanel p="7%">
-              <Center mb="5%">
-                <Button
-                  size="md"
-                  color="#0628A3"
-                  borderColor="#0628A3"
-                  borderRadius="10"
-                  variant="outline"
-                  type="submit"
-                >
-                  Save Information
-                </Button>
-              </Center>
-
-              <Stack spacing="7%">
-                <FormControl>
-                  <FormLabel color="#2C5282">
-                    First Name (and Middle Name)
-                  </FormLabel>
-                  <Input
-                    size="sm"
-                    borderRadius="5"
-                    {...register('firstName', { required: true })}
-                    isInvalid={errors['firstName']}
-                    placeholder="Please fill in this field"
-                  />
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#2C5282">Last Name</FormLabel>
-                  <Input
-                    size="sm"
-                    borderRadius="5"
-                    {...register('lastName', { required: true })}
-                    isInvalid={errors['lastName']}
-                    placeholder="Please fill in this field"
-                  />
-                  <FormHelperText>
-                    Enter "N/A" if not applicable for you
-                  </FormHelperText>
-                </FormControl>
-
-                <FormControl>
-                  <FormLabel color="#2C5282">Country of Origin</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
-                    {...register('countryOfOrigin', { required: true })}
-                    isInvalid={errors['countryOfOrigin']}
-                    placeholder="Please fill in this field"
-                  >
-                    {countryList.map((item) => {
-                      return <option key={'co' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#2C5282">Lifestage</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
-                    {...register('lifestage', { required: true })}
-                    isInvalid={errors['lifestage']}
-                    placeholder="Please fill in this field"
-                  >
-                    {lifestageList.map((item) => {
-                      return <option key={'life' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </FormControl>
-
-                <FormControl>
-                  <FormLabel color="#2C5282">Campus</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
-                    {...register('campus')}
-                    pointerEvents="none"
-                  >
-                    {campusList.map((item) => {
-                      return <option key={'ca' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#2C5282">Phone Number</FormLabel>
-                  <Input
-                    size="sm"
-                    borderRadius="5"
-                    {...register('phoneNumber', { required: true })}
-                    isInvalid={errors['phoneNumber']}
-                    placeholder="Please fill in this field"
-                  />
-                </FormControl>
-
-                <FormControl>
-                  <FormLabel color="#2C5282">Birthday</FormLabel>
-                  <Input
-                    size="sm"
-                    type="date"
-                    borderRadius="5"
-                    {...register('birthday')}
-                  />
-                </FormControl>
-
-                <FormControl>
-                  <FormLabel color="#2C5282">Address: Floor / Level</FormLabel>
-                  <Input
-                    size="sm"
-                    borderRadius="5"
-                    {...register('addressFloor')}
-                  />
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#2C5282">
-                    Address: Room / Flat / Unit / Suite
-                  </FormLabel>
-                  <Input
-                    size="sm"
-                    borderRadius="5"
-                    {...register('addressFlat')}
-                  />
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#2C5282">Address: Street Address</FormLabel>
-                  <Input
-                    size="sm"
-                    borderRadius="5"
-                    {...register('addressStreet')}
-                  />
-                </FormControl>
-
-                <FormControl>
-                  <FormLabel color="#2C5282">Address: District</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
-                    {...register('addressDistrict')}
-                  >
-                    {districtList.map((item) => {
-                      return <option key={'di' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#2C5282">Address: Region</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
-                    {...register('addressRegion')}
-                  >
-                    {regionList.map((item) => {
-                      return <option key={'re' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </FormControl>
-              </Stack>
-            </TabPanel>
-            <TabPanel p="7%">
-              <Center mb="5%">
-                <Button
-                  size="md"
-                  color="#0628A3"
-                  borderColor="#0628A3"
-                  borderRadius="10"
-                  variant="outline"
-                  type="submit"
-                >
-                  Save Information
-                </Button>
-              </Center>
-              <Stack spacing="7%">
-                <FormControl>
-                  <FormLabel color="#2C5282">LIFE Group</FormLabel>
-                  <Select size="sm" borderRadius="5" {...register('lifeGroup')}>
-                    {lifegroupList.map((item) => {
-                      return <option key={'lg' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#2C5282">Ministry Team</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
-                    {...register('ministryTeam')}
-                  >
-                    {ministryTeamList.map((item) => {
-                      return <option key={'mt' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </FormControl>
-                <FormControl>
-                  <Stack direction="row">
-                    <Text flex={1} fontWeight="500" mr="3%" color="#2C5282">
-                      Church Member
+                  <Box flex={1}>
+                    <Controller
+                      control={control}
+                      name={'isMember'}
+                      render={({ field: { onChange, value, ref } }) => (
+                        <Switch
+                          size="lg"
+                          onChange={onChange}
+                          ref={ref}
+                          isChecked={value}
+                          isReadOnly
+                        />
+                      )}
+                    />
+                    <Text ml="3" fontWeight="500" as="span">
+                      Yes
                     </Text>
-                    <Box flex={1}>
-                      <Controller
-                        control={control}
-                        name={'isMember'}
-                        render={({ field: { onChange, value, ref } }) => (
-                          <Switch
-                            size="lg"
-                            onChange={onChange}
-                            ref={ref}
-                            isChecked={value}
-                            isReadOnly
-                          />
-                        )}
-                      />
-                      <Text ml="3" fontWeight="500" as="span">
-                        Yes
-                      </Text>
-                    </Box>
-                  </Stack>
-                  <FormHelperText>
-                    An HMCC Covenant Signing Member is someone who has attended
-                    HMCC’s Experiencing Membership Class and has decided to sign
-                    (in-person) the Membership Declaration{' '}
-                  </FormHelperText>
-                </FormControl>
-                <Stack
-                  direction="column"
-                  border="1px solid #E2E8F0"
-                  borderRadius="6"
-                  p="4%"
-                  spacing="4%"
-                >
-                  <FormControl>
-                    <FormLabel color="#2C5282">Recognition Date</FormLabel>
-                    <InputGroup size="sm">
-                      <Input
-                        size="sm"
-                        type="date"
-                        borderRadius="5"
-                        {...register('membershipRecognitionDate')}
-                        isReadOnly
-                      />
-                      <InputRightAddon borderRadius="5">Date</InputRightAddon>
-                    </InputGroup>
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">
-                      Last Recommitment Date
-                    </FormLabel>
-                    <InputGroup size="sm">
-                      <Input
-                        size="sm"
-                        type="date"
-                        borderRadius="5"
-                        {...register('membershipRecommitmentDate')}
-                        isReadOnly
-                      />
-                      <InputRightAddon borderRadius="5">Date</InputRightAddon>
-                    </InputGroup>
-                  </FormControl>
+                  </Box>
                 </Stack>
-                <FormControl>
-                  <Stack direction="row">
-                    <Text flex={1} fontWeight="500" mr="3%" color="#2C5282">
-                      Baptised
-                    </Text>
-                    <Box flex={1}>
-                      <Controller
-                        control={control}
-                        name={'isBaptised'}
-                        render={({ field: { onChange, value, ref } }) => (
-                          <Switch
-                            size="lg"
-                            onChange={onChange}
-                            ref={ref}
-                            isChecked={value}
-                            isReadOnly
-                          />
-                        )}
-                      />
-                      <Text ml="3" fontWeight="500" as="span">
-                        Yes
-                      </Text>
-                    </Box>
-                  </Stack>
-                </FormControl>
-                <Stack
-                  direction="column"
-                  border="1px solid #E2E8F0"
-                  borderRadius="6"
-                  p="4%"
-                  spacing="4%"
-                >
-                  <FormControl>
-                    <FormLabel color="#2C5282">Baptism Place</FormLabel>
+                <Field.HelperText>
+                  An HMCC Covenant Signing Member is someone who has attended
+                  HMCC’s Experiencing Membership Class and has decided to sign
+                  (in-person) the Membership Declaration{' '}
+                </Field.HelperText>
+              </Field.Root>
+              <Stack
+                direction="column"
+                border="1px solid #E2E8F0"
+                borderRadius="6"
+                p="4%"
+                spacing="4%"
+              >
+                <Field.Root>
+                  <Field.Label color="#2C5282">Recognition Date</Field.Label>
+                  <InputGroup size="sm" endAddon="Date">
                     <Input
                       size="sm"
+                      type="date"
                       borderRadius="5"
-                      {...register('baptismPlace')}
+                      {...register('membershipRecognitionDate')}
                       isReadOnly
                     />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">Baptism Date</FormLabel>
-                    <InputGroup size="sm">
-                      <Input
-                        size="sm"
-                        type="date"
-                        borderRadius="5"
-                        {...register('baptismDate')}
-                        isReadOnly
-                      />
-                      <InputRightAddon borderRadius="5">Date</InputRightAddon>
-                    </InputGroup>
-                  </FormControl>
-                </Stack>
+                  </InputGroup>
+                </Field.Root>
+                <Field.Root>
+                  <Field.Label color="#2C5282">
+                    Last Recommitment Date
+                  </Field.Label>
+                  <InputGroup size="sm" endAddon="Date">
+                    <Input
+                      size="sm"
+                      type="date"
+                      borderRadius="5"
+                      {...register('membershipRecommitmentDate')}
+                      isReadOnly
+                    />
+                  </InputGroup>
+                </Field.Root>
               </Stack>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+              <Field.Root>
+                <Stack direction="row">
+                  <Text flex={1} fontWeight="500" mr="3%" color="#2C5282">
+                    Baptised
+                  </Text>
+                  <Box flex={1}>
+                    <Controller
+                      control={control}
+                      name={'isBaptised'}
+                      render={({ field: { onChange, value, ref } }) => (
+                        <Switch
+                          size="lg"
+                          onChange={onChange}
+                          ref={ref}
+                          isChecked={value}
+                          isReadOnly
+                        />
+                      )}
+                    />
+                    <Text ml="3" fontWeight="500" as="span">
+                      Yes
+                    </Text>
+                  </Box>
+                </Stack>
+              </Field.Root>
+              <Stack
+                direction="column"
+                border="1px solid #E2E8F0"
+                borderRadius="6"
+                p="4%"
+                spacing="4%"
+              >
+                <Field.Root>
+                  <Field.Label color="#2C5282">Baptism Place</Field.Label>
+                  <Input
+                    size="sm"
+                    borderRadius="5"
+                    {...register('baptismPlace')}
+                    isReadOnly
+                  />
+                </Field.Root>
+                <Field.Root>
+                  <Field.Label color="#2C5282">Baptism Date</Field.Label>
+                  <InputGroup size="sm" endAddon="Date">
+                    <Input
+                      size="sm"
+                      type="date"
+                      borderRadius="5"
+                      {...register('baptismDate')}
+                      isReadOnly
+                    />
+                  </InputGroup>
+                </Field.Root>
+              </Stack>
+            </Stack>
+          </Tabs.Content>
+        </Tabs.Root>
       </form>
     </>
   );

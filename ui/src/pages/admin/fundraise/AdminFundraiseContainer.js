@@ -9,7 +9,7 @@ import {
   FormControl,
   FormLabel,
   Input,
-  UnorderedList,
+  List,
   Flex,
   VStack,
   Checkbox,
@@ -252,7 +252,7 @@ export default function FundraiseContainer() {
                   Add Milestone
                 </Button>
               </VStack>
-              <UnorderedList>
+              <List spacing={2} styleType="disc">
                 {milestones.map((milestone, index) => (
                   <Box key={index} w={['100%', '100%', '50%']} my="2">
                     <Flex>
@@ -280,7 +280,7 @@ export default function FundraiseContainer() {
                     </Flex>
                   </Box>
                 ))}
-              </UnorderedList>
+              </List>
             </Box>
             <FormControl w="auto">
               <Checkbox

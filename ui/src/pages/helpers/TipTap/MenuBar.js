@@ -8,19 +8,12 @@ import {
   PopoverContent,
   PopoverBody,
   Button,
+  Separator,
 } from '@chakra-ui/react';
 import { useCallback } from 'react';
 
 const MenuBar = ({ editor }) => {
-  const StyledDivider = styled(Box)({
-    '& .divider': {
-      background: 'rgba(255,255,255, 0.25)',
-      height: '1.25rem',
-      marginLeft: '0.5rem',
-      marginRight: '0.75rem',
-      width: '1px',
-    },
-  });
+  // Use Chakra Separator for dividers instead of a styled box
 
   const dropdown = [
     {
@@ -234,15 +227,21 @@ const MenuBar = ({ editor }) => {
           </PopoverBody>
         </PopoverContent>
       </Popover>
-      <StyledDivider>
-        <div className="divider" />
-      </StyledDivider>
+      <Separator
+        orientation="vertical"
+        bg="rgba(255,255,255,0.25)"
+        height="1.25rem"
+        mx="0.75rem"
+      />
       {items.map((item, index) => (
         <Fragment key={index}>
           {item.type === 'divider' ? (
-            <StyledDivider>
-              <div className="divider" />
-            </StyledDivider>
+            <Separator
+              orientation="vertical"
+              bg="rgba(255,255,255,0.25)"
+              height="1.25rem"
+              mx="0.75rem"
+            />
           ) : (
             <MenuItem {...item} />
           )}

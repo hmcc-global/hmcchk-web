@@ -7,7 +7,6 @@ import {
   Text,
   Spacer,
   Link,
-  Fade,
   Container,
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
@@ -16,11 +15,15 @@ const VisionMissionSection = () => {
   return (
     <InView rootMargin="-50px" triggerOnce={true}>
       {({ inView, ref }) => (
-        <Fade transition={{ enter: { duration: 1 } }} in={inView}>
+        <Box
+          ref={ref}
+          opacity={inView ? 1 : 0}
+          transform={inView ? 'none' : 'translateY(20px)'}
+          transition="opacity 1s ease, transform 1s ease"
+        >
           <Container
             maxW="container.xl"
             py={10}
-            ref={ref}
             bgImage={`url('${process.env.PUBLIC_URL}/images/home/hk-green.png')`}
             bgPos="center right"
             bgSize="contain"
@@ -401,7 +404,7 @@ const VisionMissionSection = () => {
               bg
             </VStack>
           </Container>
-        </Fade>
+        </Box>
       )}
     </InView>
   );

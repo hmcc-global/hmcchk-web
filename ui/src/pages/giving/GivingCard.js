@@ -10,12 +10,12 @@ import {
   VStack,
   Flex,
   Stack,
-  Modal,
+  Dialog,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalCloseButton,
+  CloseButton,
   Center,
   Image,
   ModalFooter,
@@ -193,26 +193,43 @@ export const GivingCard = (cardinfo) => {
                     Learn More
                   </Text>
                 </Button>
-                <Modal isOpen={isOpen} size={'xl'} onClose={onClose}>
-                  <ModalOverlay />
-                  <ModalContent>
-                    <ModalHeader>
-                      <Heading
-                        as="h2"
-                        size="xl"
-                        fontWeight="bold"
-                        fontFamily="Manrope"
-                      >
-                        {cardinfo.text}
-                      </Heading>
-                    </ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody fontFamily="Manrope">
-                      <RenderSwitch ModalSelection={cardinfo.text} />
-                    </ModalBody>
-                    <ModalFooter></ModalFooter>
-                  </ModalContent>
-                </Modal>
+                <Dialog.Root
+                  open={isOpen}
+                  onOpenChange={(next) => {
+                    if (!next) onClose();
+                  }}
+                  size="xl"
+                >
+                  <Dialog.Backdrop />
+                  <Dialog.Positioner>
+                    <Dialog.Content>
+                      <ModalHeader>
+                        <Heading
+                          as="h2"
+                          size="xl"
+                          fontWeight="bold"
+                          fontFamily="Manrope"
+                        >
+                          {cardinfo.text}
+                        </Heading>
+                      </ModalHeader>
+                      <Dialog.CloseTrigger asChild>
+                        <CloseButton
+                          position="absolute"
+                          right="0"
+                          top="-10"
+                          bgColor="white"
+                          borderRadius="20"
+                          aria-label="Close"
+                        />
+                      </Dialog.CloseTrigger>
+                      <Dialog.Body fontFamily="Manrope">
+                        <RenderSwitch ModalSelection={cardinfo.text} />
+                      </Dialog.Body>
+                      <Dialog.Footer />
+                    </Dialog.Content>
+                  </Dialog.Positioner>
+                </Dialog.Root>
               </Box>
             </Center>
           </Flex>

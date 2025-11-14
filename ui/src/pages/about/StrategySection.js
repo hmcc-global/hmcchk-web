@@ -1,12 +1,4 @@
-import {
-  Flex,
-  Text,
-  Box,
-  Heading,
-  UnorderedList,
-  ListItem,
-  Stack,
-} from '@chakra-ui/react';
+import { Flex, Text, Box, Heading, List, Stack } from '@chakra-ui/react';
 
 const StrategySection = (props) => {
   const { title, blurb } = props;
@@ -64,10 +56,10 @@ const StrategySection = (props) => {
                 {blurb[0].subtitle}
               </Heading>
               <Text color="#000000">{blurb[0][0]}</Text>
-              <UnorderedList paddingTop="2">
-                <ListItem color="#000000">{blurb[0][1]}</ListItem>
-                <ListItem color="#000000">{blurb[0][2]}</ListItem>
-              </UnorderedList>
+              <List paddingTop="2" styleType="disc">
+                <List.Item color="#000000">{blurb[0][1]}</List.Item>
+                <List.Item color="#000000">{blurb[0][2]}</List.Item>
+              </List>
             </Box>
           </Flex>
           <Flex
@@ -103,10 +95,10 @@ const StrategySection = (props) => {
                 {blurb[1].subtitle}
               </Text>
               <Text color="#000000">{blurb[1][0]}</Text>
-              <UnorderedList paddingTop="2">
-                <ListItem color="#000000">{blurb[1][1]}</ListItem>
-                <ListItem color="#000000">{blurb[1][2]}</ListItem>
-              </UnorderedList>
+              <List paddingTop="2" styleType="disc">
+                <List.Item color="#000000">{blurb[1][1]}</List.Item>
+                <List.Item color="#000000">{blurb[1][2]}</List.Item>
+              </List>
             </Box>
           </Flex>
           <Flex
@@ -142,10 +134,10 @@ const StrategySection = (props) => {
                 {blurb[2].subtitle}
               </Text>
               <Text color="#000000">{blurb[2][0]}</Text>
-              <UnorderedList paddingTop="2">
-                <ListItem color="#000000">{blurb[2][1]}</ListItem>
-                <ListItem color="#000000">{blurb[2][2]}</ListItem>
-              </UnorderedList>
+              <List paddingTop="2" styleType="disc">
+                <List.Item color="#000000">{blurb[2][1]}</List.Item>
+                <List.Item color="#000000">{blurb[2][2]}</List.Item>
+              </List>
             </Box>
           </Flex>
         </Stack>

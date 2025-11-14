@@ -3,12 +3,8 @@ import { customAxios as axios } from '../../helpers/customAxios';
 import { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
 import {
-  ModalBody,
+  Dialog,
   ModalCloseButton,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalFooter,
   Container,
   Box,
   Stack,
@@ -21,7 +17,7 @@ import {
   Checkbox,
   Button,
   Grid,
-  Divider,
+  Separator,
   GridItem,
   Textarea,
   SimpleGrid,
@@ -291,282 +287,296 @@ const AnnouncementEditorModal = (props) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="full">
-      <ModalOverlay />
-      <ModalContent>
-        <ModalCloseButton />
-        <ModalBody>
-          <Container maxW="container.xl">
-            <Heading as="h2" size="lg" pb={3}>
-              {modalTitle(actionOnEditor)}
-            </Heading>
+    <Dialog.Root
+      open={isOpen}
+      onOpenChange={(nextOpen) => {
+        if (!nextOpen) {
+          onClose();
+        }
+      }}
+      size="full"
+    >
+      <Dialog.Backdrop />
+      <Dialog.Positioner>
+        <Dialog.Content>
+          <Dialog.CloseTrigger asChild>
+            <CloseButton aria-label="Close" />
+          </Dialog.CloseTrigger>
+          <Dialog.Body>
+            <Container maxW="container.xl">
+              <Heading as="h2" size="lg" pb={3}>
+                {modalTitle(actionOnEditor)}
+              </Heading>
 
-            <Box>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <Stack spacing={2}>
-                  <FormControl isInvalid={errors['title']} isRequired>
-                    <FormLabel>Title</FormLabel>
-                    <Input
-                      id="title"
-                      {...register('title', {
-                        required: ' Title is required',
-                      })}
-                      onChange={(e) => setTitle(e.target.value)}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel>Where should this announcement go?</FormLabel>
-                    <FormHelperText>
-                      Check both if it should be shared in both Web/Mobile and
-                      PPT
-                    </FormHelperText>
-                    <Stack spacing={10} direction={['column', 'row']}>
-                      <Checkbox
-                        size="lg"
-                        id="isInWeb"
-                        {...register('isInWeb')}
-                        isChecked={isInWeb}
-                        onChange={(e) => setIsInWeb(e.target.checked)}
-                      >
-                        Web/Mobile
-                      </Checkbox>
-                      <Checkbox
-                        size="lg"
-                        id="isInPpt"
-                        {...register('isInPpt')}
-                        isChecked={isInPpt}
-                        onChange={(e) => setIsInPpt(e.target.checked)}
-                      >
-                        PPT
-                      </Checkbox>
-                    </Stack>
-                  </FormControl>
-                  <Grid
-                    templateColumns={['repeat(1,1fr)', 'repeat(2, 1fr)']}
-                    gap={6}
-                  >
-                    <GridItem>
-                      <FormControl isRequired>
-                        <FormLabel>Announcement Display Start Date</FormLabel>
-                        <FormHelperText>
-                          If the announcement is for web/mobile, please input
-                          this field otherwise the announcement will not show
-                        </FormHelperText>
-                      </FormControl>
+              <Box>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <Stack spacing={2}>
+                    <FormControl isInvalid={errors['title']} isRequired>
+                      <FormLabel>Title</FormLabel>
                       <Input
-                        id="displayStartDateTime"
-                        type="datetime-local"
-                        {...register('displayStartDateTime', {
-                          required: 'Display Start Date is required',
+                        id="title"
+                        {...register('title', {
+                          required: ' Title is required',
                         })}
-                        onChange={(e) =>
-                          setDisplayStartDateTime(e.target.value)
+                        onChange={(e) => setTitle(e.target.value)}
+                      />
+                    </FormControl>
+                    <FormControl>
+                      <FormLabel>Where should this announcement go?</FormLabel>
+                      <FormHelperText>
+                        Check both if it should be shared in both Web/Mobile and
+                        PPT
+                      </FormHelperText>
+                      <Stack spacing={10} direction={['column', 'row']}>
+                        <Checkbox
+                          size="lg"
+                          id="isInWeb"
+                          {...register('isInWeb')}
+                          isChecked={isInWeb}
+                          onChange={(e) => setIsInWeb(e.target.checked)}
+                        >
+                          Web/Mobile
+                        </Checkbox>
+                        <Checkbox
+                          size="lg"
+                          id="isInPpt"
+                          {...register('isInPpt')}
+                          isChecked={isInPpt}
+                          onChange={(e) => setIsInPpt(e.target.checked)}
+                        >
+                          PPT
+                        </Checkbox>
+                      </Stack>
+                    </FormControl>
+                    <Grid
+                      templateColumns={['repeat(1,1fr)', 'repeat(2, 1fr)']}
+                      gap={6}
+                    >
+                      <GridItem>
+                        <FormControl isRequired>
+                          <FormLabel>Announcement Display Start Date</FormLabel>
+                          <FormHelperText>
+                            If the announcement is for web/mobile, please input
+                            this field otherwise the announcement will not show
+                          </FormHelperText>
+                        </FormControl>
+                        <Input
+                          id="displayStartDateTime"
+                          type="datetime-local"
+                          {...register('displayStartDateTime', {
+                            required: 'Display Start Date is required',
+                          })}
+                          onChange={(e) =>
+                            setDisplayStartDateTime(e.target.value)
+                          }
+                        />
+                      </GridItem>
+                      <GridItem>
+                        <FormControl isRequired>
+                          <FormLabel>Announcement Display End Date</FormLabel>
+                          <FormHelperText>
+                            If the announcement is for web/mobile, please input
+                            this field otherwise the announcement will not show
+                          </FormHelperText>
+                        </FormControl>
+                        <Input
+                          id="displayEndDateTime"
+                          type="datetime-local"
+                          {...register('displayEndDateTime', {
+                            required: 'Display End Date is required',
+                          })}
+                          onChange={(e) =>
+                            setDisplayEndDateTime(e.target.value)
+                          }
+                        />
+                      </GridItem>
+
+                      <GridItem>
+                        <FormControl>
+                          <FormLabel>Event Start Date</FormLabel>
+                          <FormErrorMessage>
+                            {datePeriodInvalid &&
+                              'Start and end date is invalid, please check again'}
+                          </FormErrorMessage>
+                          <Input
+                            id="eventStartDate"
+                            type="date"
+                            {...register('eventStartDate')}
+                            onChange={(e) => setEventStartDate(e.target.value)}
+                          />
+                        </FormControl>
+                      </GridItem>
+                      <GridItem>
+                        <FormControl>
+                          <FormLabel>Event Start Time</FormLabel>
+                          <Input
+                            id="eventStartTime"
+                            type="time"
+                            {...register('eventStartTime')}
+                            onChange={(e) => setEventStartTime(e.target.value)}
+                          />
+                        </FormControl>
+                      </GridItem>
+                      <GridItem>
+                        <FormControl>
+                          <FormLabel>Event End Date</FormLabel>
+                          <FormErrorMessage>
+                            {datePeriodInvalid &&
+                              'Start and end date is invalid, please check again'}
+                          </FormErrorMessage>
+                          <Input
+                            id="eventEndDate"
+                            type="date"
+                            {...register('eventEndDate')}
+                            onChange={(e) => setEventEndDate(e.target.value)}
+                          />
+                        </FormControl>
+                      </GridItem>
+                      <GridItem>
+                        <FormControl>
+                          <FormLabel>Event End Time</FormLabel>
+                          <Input
+                            id="eventEndTime"
+                            type="time"
+                            {...register('eventEndTime')}
+                            onChange={(e) => setEventEndTime(e.target.value)}
+                          />
+                        </FormControl>
+                      </GridItem>
+                    </Grid>
+                    <FormControl>
+                      <FormLabel>Event interval</FormLabel>
+                      <FormHelperText>
+                        If the event is recurring (e.g. Sunday Celebration),
+                        please set an interval. If not, leave it as 'None'.
+                      </FormHelperText>
+                      <Select
+                        id="eventInterval"
+                        {...register('eventInterval')}
+                        onChange={(e) => setEventInterval(e.target.value)}
+                      >
+                        {eventIntervalList.map((interval) => {
+                          return <option value={interval}>{interval}</option>;
+                        })}
+                      </Select>
+                    </FormControl>
+                    <Separator my={2} />
+                    <FormControl>
+                      <CUIAutoComplete
+                        label="Event type"
+                        placeholder="Classes, Resources, Others"
+                        disableCreateItem={true}
+                        items={pickerItems}
+                        tagStyleProps={{
+                          rounded: 'full',
+                          fontSize: '1rem',
+                        }}
+                        selectedItems={selectedItems}
+                        {...register('eventType')}
+                        onSelectedItemsChange={(changes) =>
+                          handleSelectedItemsChange(changes.selectedItems)
                         }
                       />
-                    </GridItem>
-                    <GridItem>
-                      <FormControl isRequired>
-                        <FormLabel>Announcement Display End Date</FormLabel>
-                        <FormHelperText>
-                          If the announcement is for web/mobile, please input
-                          this field otherwise the announcement will not show
-                        </FormHelperText>
-                      </FormControl>
-                      <Input
-                        id="displayEndDateTime"
-                        type="datetime-local"
-                        {...register('displayEndDateTime', {
-                          required: 'Display End Date is required',
-                        })}
-                        onChange={(e) => setDisplayEndDateTime(e.target.value)}
+                    </FormControl>
+                    <FormControl display="flex" alignItems="center">
+                      <FormLabel mb="0">Featured </FormLabel>
+
+                      <Switch
+                        px="1em"
+                        id="featured"
+                        {...register('featured')}
+                        onChange={(e) => setFeatured(e.target.checked)}
+                        isChecked={featured}
                       />
-                    </GridItem>
-
-                    <GridItem>
-                      <FormControl>
-                        <FormLabel>Event Start Date</FormLabel>
-                        <FormErrorMessage>
-                          {datePeriodInvalid &&
-                            'Start and end date is invalid, please check again'}
-                        </FormErrorMessage>
-                        <Input
-                          id="eventStartDate"
-                          type="date"
-                          {...register('eventStartDate')}
-                          onChange={(e) => setEventStartDate(e.target.value)}
-                        />
-                      </FormControl>
-                    </GridItem>
-                    <GridItem>
-                      <FormControl>
-                        <FormLabel>Event Start Time</FormLabel>
-                        <Input
-                          id="eventStartTime"
-                          type="time"
-                          {...register('eventStartTime')}
-                          onChange={(e) => setEventStartTime(e.target.value)}
-                        />
-                      </FormControl>
-                    </GridItem>
-                    <GridItem>
-                      <FormControl>
-                        <FormLabel>Event End Date</FormLabel>
-                        <FormErrorMessage>
-                          {datePeriodInvalid &&
-                            'Start and end date is invalid, please check again'}
-                        </FormErrorMessage>
-                        <Input
-                          id="eventEndDate"
-                          type="date"
-                          {...register('eventEndDate')}
-                          onChange={(e) => setEventEndDate(e.target.value)}
-                        />
-                      </FormControl>
-                    </GridItem>
-                    <GridItem>
-                      <FormControl>
-                        <FormLabel>Event End Time</FormLabel>
-                        <Input
-                          id="eventEndTime"
-                          type="time"
-                          {...register('eventEndTime')}
-                          onChange={(e) => setEventEndTime(e.target.value)}
-                        />
-                      </FormControl>
-                    </GridItem>
-                  </Grid>
-                  <FormControl>
-                    <FormLabel>Event interval</FormLabel>
-                    <FormHelperText>
-                      If the event is recurring (e.g. Sunday Celebration),
-                      please set an interval. If not, leave it as 'None'.
-                    </FormHelperText>
-                    <Select
-                      id="eventInterval"
-                      {...register('eventInterval')}
-                      onChange={(e) => setEventInterval(e.target.value)}
+                      <FormHelperText>
+                        Determines if it will show up as featured in our events
+                        page
+                      </FormHelperText>
+                    </FormControl>
+                    <Separator my={2} />
+                    <FormControl>
+                      <FormLabel>Location</FormLabel>
+                      <FormHelperText>
+                        Enter 'TBA' if not confirmed. If not applicable, leave
+                        it blank.
+                      </FormHelperText>
+                      <Input
+                        id="location"
+                        {...register('location')}
+                        onChange={(e) => setLocation(e.target.value)}
+                      />
+                    </FormControl>
+                    <FileUpload
+                      id="imageAdUrl"
+                      name="imageAdUrl"
+                      acceptedFileTypes="image/*"
+                      setImageUrl={setImageAdUrl}
+                      inputValue={imageAdUrl}
+                      control={control}
+                      onChange={(e) => setImageAdUrl(e.target.value)}
                     >
-                      {eventIntervalList.map((interval) => {
-                        return <option value={interval}>{interval}</option>;
-                      })}
-                    </Select>
-                  </FormControl>
-                  <Divider orientation="horizontal" />
-                  <FormControl>
-                    <CUIAutoComplete
-                      label="Event type"
-                      placeholder="Classes, Resources, Others"
-                      disableCreateItem={true}
-                      items={pickerItems}
-                      tagStyleProps={{
-                        rounded: 'full',
-                        fontSize: '1rem',
-                      }}
-                      selectedItems={selectedItems}
-                      {...register('eventType')}
-                      onSelectedItemsChange={(changes) =>
-                        handleSelectedItemsChange(changes.selectedItems)
-                      }
-                    />
-                  </FormControl>
-                  <FormControl display="flex" alignItems="center">
-                    <FormLabel mb="0">Featured </FormLabel>
-
-                    <Switch
-                      px="1em"
-                      id="featured"
-                      {...register('featured')}
-                      onChange={(e) => setFeatured(e.target.checked)}
-                      isChecked={featured}
-                    />
-                    <FormHelperText>
-                      Determines if it will show up as featured in our events
-                      page
-                    </FormHelperText>
-                  </FormControl>
-                  <Divider orientation="horizontal" />
-                  <FormControl>
-                    <FormLabel>Location</FormLabel>
-                    <FormHelperText>
-                      Enter 'TBA' if not confirmed. If not applicable, leave it
-                      blank.
-                    </FormHelperText>
-                    <Input
-                      id="location"
-                      {...register('location')}
-                      onChange={(e) => setLocation(e.target.value)}
-                    />
-                  </FormControl>
-                  <FileUpload
-                    id="imageAdUrl"
-                    name="imageAdUrl"
-                    acceptedFileTypes="image/*"
-                    setImageUrl={setImageAdUrl}
-                    inputValue={imageAdUrl}
-                    control={control}
-                    onChange={(e) => setImageAdUrl(e.target.value)}
-                  >
-                    Upload Announcements Image
-                  </FileUpload>
-                  <FormControl>
-                    <FormLabel>Announcements Sign-up link</FormLabel>
-                    <Input
-                      id="signUpUrl"
-                      {...register('signUpUrl')}
-                      onChange={(e) => setSignUpUrl(e.target.value)}
-                    />
-                  </FormControl>
-                  <FormControl isInvalid={errors['description']} isRequired>
-                    <FormLabel>Description</FormLabel>
-                    <FormHelperText>
-                      This field supports formatting, you can add it yourself.
-                      on how to use {''}
-                      <Link
-                        color="blue.500"
-                        href="https://www.markdownguide.org/cheat-sheet/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Click here
-                      </Link>{' '}
-                    </FormHelperText>
-                    <Textarea
-                      id="description"
-                      {...register('description', {
-                        required: 'Description is required',
-                      })}
-                      onChange={(e) => setDescription(e.target.value)}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel>Additional Notes</FormLabel>
-                    <FormHelperText>
-                      If there is anything that any remarks, please put it in
-                      here. Also, please put a remark in here if it's an updated
-                      image
-                    </FormHelperText>
-                    <Textarea
-                      id="additionalNotes"
-                      {...register('additionalNotes')}
-                      onChange={(e) => setAdditionalNotes(e.target.value)}
-                    />
-                  </FormControl>
-                  <Button
-                    colorScheme="blue"
-                    type="submit"
-                    onClick={onSubmitEditor}
-                  >
-                    {modalSubmitButton(actionOnEditor)}
-                  </Button>
-                  ;
-                </Stack>
-              </form>
-            </Box>
-          </Container>
-        </ModalBody>
-        <ModalFooter></ModalFooter>
-      </ModalContent>
-    </Modal>
+                      Upload Announcements Image
+                    </FileUpload>
+                    <FormControl>
+                      <FormLabel>Announcements Sign-up link</FormLabel>
+                      <Input
+                        id="signUpUrl"
+                        {...register('signUpUrl')}
+                        onChange={(e) => setSignUpUrl(e.target.value)}
+                      />
+                    </FormControl>
+                    <FormControl isInvalid={errors['description']} isRequired>
+                      <FormLabel>Description</FormLabel>
+                      <FormHelperText>
+                        This field supports formatting, you can add it yourself.
+                        on how to use {''}
+                        <Link
+                          color="blue.500"
+                          href="https://www.markdownguide.org/cheat-sheet/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Click here
+                        </Link>{' '}
+                      </FormHelperText>
+                      <Textarea
+                        id="description"
+                        {...register('description', {
+                          required: 'Description is required',
+                        })}
+                        onChange={(e) => setDescription(e.target.value)}
+                      />
+                    </FormControl>
+                    <FormControl>
+                      <FormLabel>Additional Notes</FormLabel>
+                      <FormHelperText>
+                        If there is anything that any remarks, please put it in
+                        here. Also, please put a remark in here if it's an
+                        updated image
+                      </FormHelperText>
+                      <Textarea
+                        id="additionalNotes"
+                        {...register('additionalNotes')}
+                        onChange={(e) => setAdditionalNotes(e.target.value)}
+                      />
+                    </FormControl>
+                    <Button
+                      colorScheme="blue"
+                      type="submit"
+                      onClick={onSubmitEditor}
+                    >
+                      {modalSubmitButton(actionOnEditor)}
+                    </Button>
+                    ;
+                  </Stack>
+                </form>
+              </Box>
+            </Container>
+          </Dialog.Body>
+          <Dialog.Footer />
+        </Dialog.Content>
+      </Dialog.Positioner>
+    </Dialog.Root>
   );
 };
 

@@ -9,7 +9,6 @@ import {
   useToast,
   Stack,
   List,
-  ListItem,
   Flex,
   Spacer,
   Badge,
@@ -316,7 +315,7 @@ export default function AdminAnnouncementContainer(props) {
       <List spacing="2" pt={3}>
         {/* List announcements */}
         {announcementList.map((announcementItem) => (
-          <ListItem key={announcementItem.id}>
+          <List.Item key={announcementItem.id}>
             <Box p="3" borderRadius="lg" borderWidth="1px">
               {announcementItem.featured && (
                 <Flex color="green" justifyContent="flex-end">

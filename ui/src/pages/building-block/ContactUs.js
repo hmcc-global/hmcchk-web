@@ -6,7 +6,6 @@ import {
   VStack,
   Heading,
   Button,
-  Fade,
   Spacer,
   useMediaQuery,
   Image,
@@ -31,8 +30,13 @@ const ContactUs = forwardRef((props, ref) => {
     <Box ref={ref}>
       <InView rootMargin="-50px" triggerOnce={true}>
         {({ inView, ref: inViewRef }) => (
-          <Fade transition={{ enter: { duration: 1 } }} in={inView}>
-            <Box ref={inViewRef} w="100%">
+          <Box
+            ref={inViewRef}
+            w="100%"
+            opacity={inView ? 1 : 0}
+            transform={inView ? 'none' : 'translateY(20px)'}
+            transition="opacity 1s ease, transform 1s ease"
+          >
               {isMobile ? (
                 <VStack spacing={5}>
                   <Flex w="100%">

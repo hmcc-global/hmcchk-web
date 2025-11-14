@@ -7,7 +7,6 @@ import {
   GridItem,
   Stack,
   Text,
-  Fade,
 } from '@chakra-ui/react';
 
 import { InView } from 'react-intersection-observer';
@@ -134,7 +133,12 @@ const SaturateVision = () => {
                   />
                   <InView rootMargin={FADEIN_THRESHOLD} triggerOnce={true}>
                     {({ inView, ref }) => (
-                      <Fade transition={{ enter: { duration: 1 } }} in={inView}>
+                      <Box
+                        ref={ref}
+                        opacity={inView ? 1 : 0}
+                        transform={inView ? 'none' : 'translateY(20px)'}
+                        transition="opacity 1s ease, transform 1s ease"
+                      >
                         <Flex
                           h={10}
                           display="flex"
@@ -143,7 +147,6 @@ const SaturateVision = () => {
                           top="14%"
                           left="69%"
                           position="absolute"
-                          ref={ref}
                         >
                           <Box
                             boxSize="8vw"
@@ -178,13 +181,18 @@ const SaturateVision = () => {
                             </Text>
                           </Flex>
                         </Flex>
-                      </Fade>
+                      </Box>
                     )}
                   </InView>
                 </Box>
                 <InView rootMargin={FADEIN_THRESHOLD} triggerOnce={true}>
                   {({ inView, ref }) => (
-                    <Fade transition={{ enter: { duration: 1 } }} in={inView}>
+                    <Box
+                      ref={ref}
+                      opacity={inView ? 1 : 0}
+                      transform={inView ? 'none' : 'translateY(20px)'}
+                      transition="opacity 1s ease, transform 1s ease"
+                    >
                       <Flex
                         h={10}
                         display="flex"
@@ -193,7 +201,6 @@ const SaturateVision = () => {
                         position="absolute"
                         top="34%"
                         left="82%"
-                        ref={ref}
                       >
                         <Box
                           boxSize="8vw"
@@ -226,13 +233,18 @@ const SaturateVision = () => {
                           </Text>
                         </Flex>
                       </Flex>
-                    </Fade>
+                    </Box>
                   )}
                 </InView>
               </Box>
               <InView rootMargin={FADEIN_THRESHOLD} triggerOnce={true}>
                 {({ inView, ref }) => (
-                  <Fade transition={{ enter: { duration: 1 } }} in={inView}>
+                  <Box
+                    ref={ref}
+                    opacity={inView ? 1 : 0}
+                    transform={inView ? 'none' : 'translateY(20px)'}
+                    transition="opacity 1s ease, transform 1s ease"
+                  >
                     <Flex
                       h={10}
                       display="flex"
@@ -241,7 +253,6 @@ const SaturateVision = () => {
                       position="absolute"
                       top="46%"
                       left="87%"
-                      ref={ref}
                     >
                       <Box
                         boxSize="8vw"
@@ -283,13 +294,18 @@ const SaturateVision = () => {
                         </Text>
                       </Flex>
                     </Flex>
-                  </Fade>
+                  </Box>
                 )}
               </InView>
             </Box>
             <InView rootMargin={FADEIN_THRESHOLD} triggerOnce={true}>
               {({ inView, ref }) => (
-                <Fade transition={{ enter: { duration: 1 } }} in={inView}>
+                <Box
+                  ref={ref}
+                  opacity={inView ? 1 : 0}
+                  transform={inView ? 'none' : 'translateY(20px)'}
+                  transition="opacity 1s ease, transform 1s ease"
+                >
                   <Flex
                     h={10}
                     display="flex"
@@ -298,7 +314,6 @@ const SaturateVision = () => {
                     position="absolute"
                     top="44%"
                     left="88%"
-                    ref={ref}
                   >
                     <Box
                       boxSize="8vw"
@@ -327,7 +342,7 @@ const SaturateVision = () => {
                       <Text fontFamily="DarkerGrotesque_Normal">(hubs)</Text>
                     </Flex>
                   </Flex>
-                </Fade>
+                </Box>
               )}
             </InView>
           </Box>
@@ -464,9 +479,11 @@ const SaturateVision = () => {
                     </Box>
                     <InView rootMargin={FADEIN_THRESHOLD} triggerOnce={true}>
                       {({ inView, ref }) => (
-                        <Fade
-                          transition={{ enter: { duration: 1 } }}
-                          in={inView}
+                        <Box
+                          ref={ref}
+                          opacity={inView ? 1 : 0}
+                          transform={inView ? 'none' : 'translateY(20px)'}
+                          transition="opacity 1s ease, transform 1s ease"
                         >
                           <Flex
                             h={20}
@@ -476,7 +493,6 @@ const SaturateVision = () => {
                             justifyContent="center"
                             top="30%"
                             left="80%"
-                            ref={ref}
                           >
                             <Box
                               boxSize="6.5vw"
@@ -511,13 +527,18 @@ const SaturateVision = () => {
                               </Text>
                             </Flex>
                           </Flex>
-                        </Fade>
+                        </Box>
                       )}
                     </InView>
                   </Box>
                   <InView rootMargin={FADEIN_THRESHOLD} triggerOnce={true}>
                     {({ inView, ref }) => (
-                      <Fade transition={{ enter: { duration: 1 } }} in={inView}>
+                      <Box
+                        ref={ref}
+                        opacity={inView ? 1 : 0}
+                        transform={inView ? 'none' : 'translateY(20px)'}
+                        transition="opacity 1s ease, transform 1s ease"
+                      >
                         <Flex
                           h={20}
                           display="flex"
@@ -526,7 +547,6 @@ const SaturateVision = () => {
                           position="absolute"
                           top="45%"
                           left="85%"
-                          ref={ref}
                         >
                           <Box
                             boxSize="6.5vw"
@@ -560,13 +580,18 @@ const SaturateVision = () => {
                             </Text>
                           </Flex>
                         </Flex>
-                      </Fade>
+                      </Box>
                     )}
                   </InView>
                 </Box>
                 <InView rootMargin={FADEIN_THRESHOLD} triggerOnce={true}>
                   {({ inView, ref }) => (
-                    <Fade transition={{ enter: { duration: 1 } }} in={inView}>
+                    <Box
+                      ref={ref}
+                      opacity={inView ? 1 : 0}
+                      transform={inView ? 'none' : 'translateY(20px)'}
+                      transition="opacity 1s ease, transform 1s ease"
+                    >
                       <Flex
                         h={20}
                         w="80%"
@@ -574,7 +599,6 @@ const SaturateVision = () => {
                         position="absolute"
                         top="55%"
                         left="86%"
-                        ref={ref}
                       >
                         <Box
                           borderRadius="full"
@@ -616,18 +640,22 @@ const SaturateVision = () => {
                           </Text>
                         </Flex>
                       </Flex>
-                    </Fade>
+                    </Box>
                   )}
                 </InView>
               </Box>
               <InView rootMargin={FADEIN_THRESHOLD} triggerOnce={true}>
                 {({ inView, ref }) => (
-                  <Fade transition={{ enter: { duration: 1 } }} in={inView}>
+                  <Box
+                    ref={ref}
+                    opacity={inView ? 1 : 0}
+                    transform={inView ? 'none' : 'translateY(20px)'}
+                    transition="opacity 1s ease, transform 1s ease"
+                  >
                     <Flex
                       h={20}
                       alignItems="center"
                       position="absolute"
-                      ref={ref}
                       top="62%"
                       left="87%"
                     >
@@ -658,7 +686,7 @@ const SaturateVision = () => {
                         <Text fontFamily="DarkerGrotesque_Normal">(hubs)</Text>
                       </Flex>
                     </Flex>
-                  </Fade>
+                  </Box>
                 )}
               </InView>
             </Box>

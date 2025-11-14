@@ -19,8 +19,7 @@ import {
   ButtonGroup,
   Flex,
   Stack,
-  UnorderedList,
-  ListItem,
+  List,
   Center,
   Textarea,
 } from '@chakra-ui/react';
@@ -243,14 +242,14 @@ const FormEditor = (props) => {
             Click the green button when you are done. A checklist to keep in
             mind:
           </Text>
-          <UnorderedList>
-            <ListItem>
+          <List spacing={1} styleType="disc">
+            <List.Item>
               Have you clicked on <b>'Create/Update Form</b>
-            </ListItem>
-            <ListItem>
+            </List.Item>
+            <List.Item>
               Have you clicked on <b>'Save Prefilled Fields'</b>
-            </ListItem>
-          </UnorderedList>
+            </List.Item>
+          </List>
         </Box>
         <Button
           isLoading={saveStatus}

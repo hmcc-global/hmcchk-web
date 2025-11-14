@@ -8,8 +8,7 @@ import {
   AccordionItem,
   AccordionButton,
   AccordionPanel,
-  ListItem,
-  UnorderedList,
+  List,
   AccordionIcon,
   Spacer,
   Text,
@@ -188,28 +187,28 @@ const GivingPage = (props) => {
             </h2>
             <AccordionPanel pb={4}>
               When you give, you can give under any of the following categories:
-              <UnorderedList>
-                <ListItem>Tithe: 10% of your regular income</ListItem>
-                <ListItem>
+              <List styleType="disc">
+                <List.Item>Tithe: 10% of your regular income</List.Item>
+                <List.Item>
                   Weekly Offering: offering that you give exclusive of your
                   tithe
-                </ListItem>
-                <ListItem>
+                </List.Item>
+                <List.Item>
                   Thanksgiving Offering: offering given out of a thankful heart
                   toward God
-                </ListItem>
-                <ListItem>
+                </List.Item>
+                <List.Item>
                   HMI: General Missions Fund: Offering to our church’s efforts
                   towards mission work
-                </ListItem>
-                <ListItem>
+                </List.Item>
+                <List.Item>
                   HMI-P: Giving to a specific short-term missions project team
                   or members
-                </ListItem>
-                <ListItem>
+                </List.Item>
+                <List.Item>
                   Other: any other specific offering you would like to indicate
-                </ListItem>
-              </UnorderedList>
+                </List.Item>
+              </List>
             </AccordionPanel>
           </AccordionItem>
 
@@ -231,9 +230,9 @@ const GivingPage = (props) => {
               Kong) Limited” can be exempted from income tax in Hong Kong.
               Giving receipts will be available to all donors who include their
               personal details on the offering envelope or email us at
-              hk@hmccglobal.org to request a receipt. Members will
-              receive their giving reports at the end of the Hong Kong fiscal
-              year in April, in compliance with the Hong Kong SAR government.
+              hk@hmccglobal.org to request a receipt. Members will receive their
+              giving reports at the end of the Hong Kong fiscal year in April,
+              in compliance with the Hong Kong SAR government.
             </AccordionPanel>
           </AccordionItem>
         </Accordion>
