@@ -23,7 +23,7 @@ const StrategySection = (props) => {
           spacing="10px"
           alignItems="center"
         >
-          <Flex
+          <Box
             borderRadius="7"
             shadow="lg"
             px={[9, '13.3%']}
@@ -31,9 +31,9 @@ const StrategySection = (props) => {
             m={0}
             minH={['25em', '18em']}
             w={['full']}
-            bgImage={`${process.env.PUBLIC_URL}/images/about/strat-gather.jpeg`}
-            bgPos="center"
-            bgSize="cover"
+            bgImage={`url(${process.env.PUBLIC_URL}/images/about/strat-gather.jpeg)`}
+            backgroundPosition="center"
+            backgroundSize="cover"
           >
             <Box m="auto">
               <Heading
@@ -56,12 +56,12 @@ const StrategySection = (props) => {
                 {blurb[0].subtitle}
               </Heading>
               <Text color="#000000">{blurb[0][0]}</Text>
-              <List paddingTop="2" styleType="disc">
+              <List.Root paddingTop="2" styleType="disc">
                 <List.Item color="#000000">{blurb[0][1]}</List.Item>
                 <List.Item color="#000000">{blurb[0][2]}</List.Item>
-              </List>
+              </List.Root>
             </Box>
-          </Flex>
+          </Box>
           <Flex
             borderRadius="7"
             shadow="lg"
@@ -70,9 +70,9 @@ const StrategySection = (props) => {
             m={0}
             minH={['25em', '23em']}
             w={['full']}
-            bgImage={`${process.env.PUBLIC_URL}/images/about/strat-grow.jpeg`}
-            bgPos="center"
-            bgSize="cover"
+            bgImage={`url(${process.env.PUBLIC_URL}/images/about/strat-grow.jpeg)`}
+            backgroundPosition="center"
+            backgroundSize="cover"
           >
             <Box m="auto">
               <Heading
@@ -95,10 +95,10 @@ const StrategySection = (props) => {
                 {blurb[1].subtitle}
               </Text>
               <Text color="#000000">{blurb[1][0]}</Text>
-              <List paddingTop="2" styleType="disc">
+              <List.Root paddingTop="2" styleType="disc">
                 <List.Item color="#000000">{blurb[1][1]}</List.Item>
                 <List.Item color="#000000">{blurb[1][2]}</List.Item>
-              </List>
+              </List.Root>
             </Box>
           </Flex>
           <Flex
@@ -109,9 +109,9 @@ const StrategySection = (props) => {
             m={0}
             minH={['25em', '23em']}
             w={['full']}
-            bgImage={`${process.env.PUBLIC_URL}/images/about/strat-go.jpeg`}
-            bgPos="center"
-            bgSize="cover"
+            bgImage={`url(${process.env.PUBLIC_URL}/images/about/strat-go.jpeg)`}
+            backgroundPosition="center"
+            backgroundSize="cover"
           >
             <Box m="auto">
               <Heading
@@ -134,10 +134,10 @@ const StrategySection = (props) => {
                 {blurb[2].subtitle}
               </Text>
               <Text color="#000000">{blurb[2][0]}</Text>
-              <List paddingTop="2" styleType="disc">
+              <List.Root paddingTop="2" styleType="disc">
                 <List.Item color="#000000">{blurb[2][1]}</List.Item>
                 <List.Item color="#000000">{blurb[2][2]}</List.Item>
-              </List>
+              </List.Root>
             </Box>
           </Flex>
         </Stack>

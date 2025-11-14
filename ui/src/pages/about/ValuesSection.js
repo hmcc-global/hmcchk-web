@@ -1,10 +1,4 @@
-import {
-  Accordion,
-  Text,
-  Heading,
-  Box,
-  AccordionItem,
-} from '@chakra-ui/react';
+import { Accordion, Text, Heading, Box } from '@chakra-ui/react';
 import VisionMissionSection from './VisionMissionSection';
 
 const ValuesSection = (props) => {
@@ -28,114 +22,31 @@ const ValuesSection = (props) => {
         >
           {title.slice(17, 28)}
         </Heading>
-        <Accordion allowMultiple>
-          <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
-            <h2>
-              <Accordion.ItemTrigger>
-                <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text color="#000000" fontFamily="DMSerifDisplay_Regular">
-                    {values.head[0]}
-                  </Text>
-                </Box>
-                <Accordion.ItemIndicator />
-              </Accordion.ItemTrigger>
-            </h2>
-            <Accordion.ItemContent>
-              <Text color="#000000">{values.body[0]}</Text>
-            </Accordion.ItemContent>
-          </AccordionItem>
-
-          <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
-            <h2>
-              <Accordion.ItemTrigger>
-                <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text color="#000000" fontFamily="DMSerifDisplay_Regular">
-                    {values.head[1]}
-                  </Text>
-                </Box>
-                <Accordion.ItemIndicator />
-              </Accordion.ItemTrigger>
-            </h2>
-            <Accordion.ItemContent>
-              <Text color="#000000">{values.body[1]}</Text>
-            </Accordion.ItemContent>
-          </AccordionItem>
-          <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
-            <h2>
-              <Accordion.ItemTrigger>
-                <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text color="#000000" fontFamily="DMSerifDisplay_Regular">
-                    {values.head[2]}
-                  </Text>
-                </Box>
-                <Accordion.ItemIndicator />
-              </Accordion.ItemTrigger>
-            </h2>
-            <Accordion.ItemContent>
-              <Text color="#000000">{values.body[2]}</Text>
-            </Accordion.ItemContent>
-          </AccordionItem>
-          <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
-            <h2>
-              <Accordion.ItemTrigger>
-                <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text color="#000000" fontFamily="DMSerifDisplay_Regular">
-                    {values.head[3]}
-                  </Text>
-                </Box>
-                <Accordion.ItemIndicator />
-              </Accordion.ItemTrigger>
-            </h2>
-            <Accordion.ItemContent>
-              <Text color="#000000">{values.body[3]}</Text>
-            </Accordion.ItemContent>
-          </AccordionItem>
-          <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
-            <h2>
-              <Accordion.ItemTrigger>
-                <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text color="#000000" fontFamily="DMSerifDisplay_Regular">
-                    {values.head[4]}
-                  </Text>
-                </Box>
-                <Accordion.ItemIndicator />
-              </Accordion.ItemTrigger>
-            </h2>
-            <Accordion.ItemContent>
-              <Text color="#000000">{values.body[4]}</Text>
-            </Accordion.ItemContent>
-          </AccordionItem>
-          <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
-            <h2>
-              <Accordion.ItemTrigger>
-                <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text color="#000000" fontFamily="DMSerifDisplay_Regular">
-                    {values.head[5]}
-                  </Text>
-                </Box>
-                <Accordion.ItemIndicator />
-              </Accordion.ItemTrigger>
-            </h2>
-            <Accordion.ItemContent>
-              <Text color="#000000">{values.body[5]}</Text>
-            </Accordion.ItemContent>
-          </AccordionItem>
-          <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
-            <h2>
-              <Accordion.ItemTrigger>
-                <Box flex="1" textAlign="left" fontWeight="bold">
-                  <Text color="#000000" fontFamily="DMSerifDisplay_Regular">
-                    {values.head[6]}
-                  </Text>
-                </Box>
-                <Accordion.ItemIndicator />
-              </Accordion.ItemTrigger>
-            </h2>
-            <Accordion.ItemContent>
-              <Text color="#000000">{values.body[6]}</Text>
-            </Accordion.ItemContent>
-          </AccordionItem>
-        </Accordion>
+        <Accordion.Root allowMultiple>
+          {Object.values(values.head).map((value, index) => (
+            <Accordion.Item
+              key={index}
+              value={value}
+              border="2px solid #63B3ED"
+              my="3"
+              borderRadius="5"
+            >
+              <h2>
+                <Accordion.ItemTrigger>
+                  <Box flex="1" textAlign="left" fontWeight="bold">
+                    <Text color="#000000" fontFamily="DMSerifDisplay_Regular">
+                      {values.head[index]}
+                    </Text>
+                  </Box>
+                  <Accordion.ItemIndicator />
+                </Accordion.ItemTrigger>
+              </h2>
+              <Accordion.ItemContent>
+                <Text color="#000000">{values.body[index]}</Text>
+              </Accordion.ItemContent>
+            </Accordion.Item>
+          ))}
+        </Accordion.Root>
       </Box>
     </>
   );

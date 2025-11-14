@@ -3,16 +3,16 @@ import {
   Container,
   Heading,
   HStack,
-  Select,
   Text,
   VStack,
 } from '@chakra-ui/react';
+import { Select, createListCollection } from '@chakra-ui/react';
 import BeliefsSection from './BeliefsSection';
 import StaffSection from './StaffSection';
 import StorySection from './StorySection';
 import StrategySection from './StrategySection';
 import ValuesSection from './ValuesSection';
-import OurHeartMissions from './OurHeartMissions';
+// import OurHeartMissions from './OurHeartMissions';
 import blurbs from './about.json';
 import { Fragment, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -31,7 +31,12 @@ const AboutUsContainer = (props) => {
   const [selected, setSelected] = useState(0);
   const banner = blurbs.banner;
 
-  const handleChange = (e) => setSelected(parseInt(e.target.value));
+  const sectionsCollection = createListCollection({
+    items: sections.map((section, index) => ({
+      label: section,
+      value: index.toString(),
+    })),
+  });
   const { hash } = useLocation();
 
   useEffect(() => {
@@ -150,26 +155,36 @@ const AboutUsContainer = (props) => {
               })}
           </HStack>
 
-          <Select
+          <Select.Root
+            collection={sectionsCollection}
+            value={[selected.toString()]}
+            onValueChange={(details) => setSelected(parseInt(details.value[0]))}
+            size="md"
             mt={4}
-            variant="outline"
-            borderWidth="2px"
-            borderRadius="5"
-            fontWeight="bold"
-            bgColor="white"
             display={{ base: 'block', md: 'none' }}
-            value={selected}
-            onChange={(e) => handleChange(e)}
           >
-            {sections &&
-              sections.map((e, i) => {
-                return (
-                  <option value={i} key={i}>
-                    {e}
-                  </option>
-                );
-              })}
-          </Select>
+            <Select.Control
+              borderWidth="2px"
+              borderRadius="5"
+              fontWeight="bold"
+              bgColor="white"
+            >
+              <Select.Trigger>
+                <Select.ValueText placeholder="Select a section" />
+                <Select.Indicator />
+              </Select.Trigger>
+            </Select.Control>
+            <Select.Positioner>
+              <Select.Content>
+                {sectionsCollection.items.map((item) => (
+                  <Select.Item key={item.value} item={item}>
+                    <Select.ItemText>{item.label}</Select.ItemText>
+                    <Select.ItemIndicator />
+                  </Select.Item>
+                ))}
+              </Select.Content>
+            </Select.Positioner>
+          </Select.Root>
         </Box>
         {selected === 0 && (
           <StorySection blurb={blurbs.story} title={sections[selected]} />
