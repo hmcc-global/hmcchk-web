@@ -10,7 +10,6 @@ import {
   Flex,
   Grid,
   Spacer,
-  List,
   Box,
   Image,
   HStack,
@@ -404,7 +403,7 @@ const AdminSermonNotesContainer = (props) => {
                       </Stack>
                     </Flex>
                   </Box>
-                </ListItem>
+                </List.Item>
               ))}
           </List>
         </>

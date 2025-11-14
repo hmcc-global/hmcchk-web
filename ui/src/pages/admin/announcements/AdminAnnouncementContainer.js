@@ -432,7 +432,7 @@ export default function AdminAnnouncementContainer(props) {
                 </Stack>
               </Flex>
             </Box>
-          </ListItem>
+          </List.Item>
         ))}
       </List>
       {/* announcement editor*/}

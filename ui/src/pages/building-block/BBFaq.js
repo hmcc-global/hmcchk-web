@@ -45,23 +45,22 @@ const BBFaq = () => {
             transition="opacity 1s ease, transform 1s ease"
           >
             <Heading
-                as="h1"
-                fontSize={{ base: '2rem', md: '2.25rem', lg: '2.625rem' }}
-                fontWeight={400}
-                textAlign="center"
-                fontFamily="DMSerifDisplay_Italic"
-                letterSpacing={{ base: '-0.0625rem', lg: '-0.125rem' }}
-              >
-                FAQs
-              </Heading>
-              <CustomFaqAccordion
-                data={faqData}
-                borderColor="#EBAC09"
-                bgColor="#F5F0E0"
-                width="100%"
-              />
-            </Box>
-          </Fade>
+              as="h1"
+              fontSize={{ base: '2rem', md: '2.25rem', lg: '2.625rem' }}
+              fontWeight={400}
+              textAlign="center"
+              fontFamily="DMSerifDisplay_Italic"
+              letterSpacing={{ base: '-0.0625rem', lg: '-0.125rem' }}
+            >
+              FAQs
+            </Heading>
+            <CustomFaqAccordion
+              data={faqData}
+              borderColor="#EBAC09"
+              bgColor="#F5F0E0"
+              width="100%"
+            />
+          </Box>
         </Box>
       )}
     </InView>

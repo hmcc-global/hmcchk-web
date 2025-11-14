@@ -331,20 +331,20 @@ const SaturateGoals = () => {
                   fontFamily="Be-Vietnam"
                   styleType="disc"
                 >
-                  <ListItem>
+                  <List.Item>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
                       80%{' '}
                     </span>{' '}
                     of our members going through the DMF Curriculum.
-                  </ListItem>
-                  <ListItem>
+                  </List.Item>
+                  <List.Item>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
                       75%
                     </span>{' '}
                     of our members discipling 1 other person
-                  </ListItem>
+                  </List.Item>
                 </List>
               </Box>
             </Box>
@@ -391,21 +391,21 @@ const SaturateGoals = () => {
                   fontFamily="Be-Vietnam"
                   styleType="disc"
                 >
-                  <ListItem>
+                  <List.Item>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
                       5{' '}
                     </span>{' '}
                     Missional initiatives started by 2 or more LGs collaborating
                     together to reach 5 different HK districts
-                  </ListItem>
-                  <ListItem>
+                  </List.Item>
+                  <List.Item>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
                       1{' '}
                     </span>{' '}
                     church site in another district
-                  </ListItem>
+                  </List.Item>
                 </List>
               </Box>
             </Box>
@@ -555,20 +555,20 @@ const SaturateGoals = () => {
                   fontFamily="Be-Vietnam"
                   styleType="disc"
                 >
-                  <ListItem>
+                  <List.Item>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
                       20{' '}
                     </span>{' '}
                     Campus Microchurches
-                  </ListItem>
-                  <ListItem>
+                  </List.Item>
+                  <List.Item>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
                       14{' '}
                     </span>{' '}
                     City Microchurches
-                  </ListItem>
+                  </List.Item>
                 </List>
               </Box>
             </Box>
@@ -619,21 +619,21 @@ const SaturateGoals = () => {
                   fontFamily="Be-Vietnam"
                   styleType="disc"
                 >
-                  <ListItem>
+                  <List.Item>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
                       1{' '}
                     </span>{' '}
                     Transformational Hub
-                  </ListItem>
-                  <ListItem>
+                  </List.Item>
+                  <List.Item>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
                       1{' '}
                     </span>{' '}
                     international church plant on or near a university campus in
                     an Asian international city
-                  </ListItem>
+                  </List.Item>
                 </List>
               </Box>
             </Box>

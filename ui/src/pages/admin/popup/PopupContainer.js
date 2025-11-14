@@ -5,7 +5,6 @@ import {
   Dialog,
   CloseButton,
   Image,
-  AspectRatio,
   ModalContent,
   AspectRatio,
   ModalOverlay,
