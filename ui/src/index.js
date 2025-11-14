@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ChakraProvider } from '@chakra-ui/react';
+import { Provider as ChakraProvider } from './components/ui/provider';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { customSystem } from './theme/index';
 
 const onScriptLoaded = () => {
   document.body.removeChild(
@@ -28,7 +27,7 @@ ReactDOM.render(
     onScriptLoadSuccess={onScriptLoaded}
   >
     <React.StrictMode>
-      <ChakraProvider value={customSystem}>
+      <ChakraProvider>
         <App />
       </ChakraProvider>
     </React.StrictMode>
