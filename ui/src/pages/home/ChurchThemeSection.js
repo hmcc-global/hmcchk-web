@@ -5,7 +5,6 @@ import {
   VStack,
   Text,
   Image,
-  Fade,
   Container,
   HStack,
 } from '@chakra-ui/react';
@@ -15,8 +14,13 @@ const ChurchThemeSection = () => {
   return (
     <InView rootMargin="-50px" triggerOnce={true}>
       {({ inView, ref }) => (
-        <Fade transition={{ enter: { duration: 1 } }} in={inView}>
-          <Container maxW="container.xl" py={10} ref={ref}>
+        <Box
+          ref={ref}
+          opacity={inView ? 1 : 0}
+          transform={inView ? 'none' : 'translateY(20px)'}
+          transition="opacity 1s ease, transform 1s ease"
+        >
+          <Container maxW="container.xl" py={10}>
             <VStack>
               <Box w="100%" alignItems="flex-start" paddingBottom={'1em'}>
                 <Box w="100%" position="relative">
@@ -167,7 +171,7 @@ const ChurchThemeSection = () => {
               </Flex>
             </VStack>
           </Container>
-        </Fade>
+        </Box>
       )}
     </InView>
   );

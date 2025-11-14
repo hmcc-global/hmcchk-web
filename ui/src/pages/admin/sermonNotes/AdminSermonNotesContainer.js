@@ -6,11 +6,10 @@ import {
   Text,
   Stack,
   Button,
-  ListItem,
+  List,
   Flex,
   Grid,
   Spacer,
-  List,
   Box,
   Image,
   HStack,
@@ -297,8 +296,8 @@ const AdminSermonNotesContainer = (props) => {
           <List spacing="2" pt={3}>
             {sermonNotesList
               .sort((a, b) => new Date(b.date) - new Date(a.date))
-              .map((sermonNoteItem) => (
-                <ListItem key={sermonNoteItem.sermonId}>
+            .map((sermonNoteItem) => (
+                <List.Item key={sermonNoteItem.sermonId}>
                   <Box p="3" borderRadius="lg" borderWidth="1px">
                     <Flex direction={['column', 'row']} spacing={1}>
                       <Box maxW="13rem" pr={6}>
@@ -404,7 +403,7 @@ const AdminSermonNotesContainer = (props) => {
                       </Stack>
                     </Flex>
                   </Box>
-                </ListItem>
+                </List.Item>
               ))}
           </List>
         </>

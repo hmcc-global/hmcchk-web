@@ -1,27 +1,19 @@
-import {
-  Image,
-  Text,
-  Container,
-  Box,
-  Heading,
-  Fade,
-  VStack,
-} from '@chakra-ui/react';
+import { Image, Text, Container, Box, Heading, VStack } from '@chakra-ui/react';
 import { InView } from 'react-intersection-observer';
 const VisionMissionSectionMobile = () => {
   return (
     <>
       <InView rootMargin="-50px" triggerOnce={true}>
         {({ inView, ref }) => (
-          <Fade transition={{ enter: { duration: 1 } }} in={inView}>
-            <Container maxW="container.xl" ref={ref}>
+          <Box
+            ref={ref}
+            opacity={inView ? 1 : 0}
+            transform={inView ? 'none' : 'translateY(20px)'}
+            transition="opacity 1s ease, transform 1s ease"
+          >
+            <Container maxW="container.xl">
               <VStack>
-                <Box 
-                    w="100%" 
-                    alignItems="flex-start" 
-                    py="1em"
-                    marginTop="3em"
-                >
+                <Box w="100%" alignItems="flex-start" py="1em" marginTop="3em">
                   <Box position="relative">
                     <Box
                       w="100%"
@@ -79,7 +71,6 @@ const VisionMissionSectionMobile = () => {
                     borderColor="#B9B5F4"
                     textAlign="center"
                     padding="0.5em"
-               
                   >
                     <Text
                       fontFamily="DMSerifDisplay_Italic, serif"
@@ -155,7 +146,7 @@ const VisionMissionSectionMobile = () => {
                 </VStack>
               </VStack>
             </Container>
-          </Fade>
+          </Box>
         )}
       </InView>
     </>

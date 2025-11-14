@@ -5,8 +5,7 @@ import {
   Flex,
   Stack,
   Heading,
-  UnorderedList,
-  ListItem,
+  List,
   Box,
   Text,
   Button,
@@ -99,14 +98,14 @@ const ExternalFormEditor = (props) => {
             Click the green button when you are done. A checklist to keep in
             mind:
           </Text>
-          <UnorderedList>
-            <ListItem>
+          <List styleType="disc">
+            <List.Item>
               Have you clicked on <b>'Create/Update Form</b>
-            </ListItem>
-            <ListItem>
+            </List.Item>
+            <List.Item>
               Have you clicked on <b>'Save Prefilled Fields'</b>
-            </ListItem>
-          </UnorderedList>
+            </List.Item>
+          </List>
         </Box>
         <Button
           isLoading={saveStatus}

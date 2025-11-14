@@ -7,10 +7,6 @@ import {
   HStack,
   VStack,
   Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
 } from '@chakra-ui/react';
 
 const BeliefsCard = ({ head, body }) => {
@@ -88,126 +84,126 @@ const BeliefsSection = (props) => {
           w="90%"
           fontFamily="Manrope"
         >
-          <Accordion allowMultiple>
-            <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+          <Accordion.Root allowMultiple>
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5">
               <h2>
-                <AccordionButton>
+                <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">
                     <Text color="black">{blurb.head[0]}</Text>
                   </Box>
-                  <AccordionIcon />
-                </AccordionButton>
+                  <Accordion.ItemIndicator />
+                </Accordion.ItemTrigger>
               </h2>
-              <AccordionPanel>
+              <Accordion.ItemContent>
                 <Text color="black">{blurb.body[0]}</Text>
-              </AccordionPanel>
-            </AccordionItem>
+              </Accordion.ItemContent>
+            </Accordion.Item>
 
-            <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5">
               <h2>
-                <AccordionButton>
+                <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">
                     <Text color="black">{blurb.head[1]}</Text>
                   </Box>
-                  <AccordionIcon />
-                </AccordionButton>
+                  <Accordion.ItemIndicator />
+                </Accordion.ItemTrigger>
               </h2>
-              <AccordionPanel>
+              <Accordion.ItemContent>
                 <Text color="black">{blurb.body[1]}</Text>
-              </AccordionPanel>
-            </AccordionItem>
-            <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+              </Accordion.ItemContent>
+            </Accordion.Item>
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5">
               <h2>
-                <AccordionButton>
+                <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">
                     <Text color="black">{blurb.head[2]}</Text>
                   </Box>
-                  <AccordionIcon />
-                </AccordionButton>
+                  <Accordion.ItemIndicator />
+                </Accordion.ItemTrigger>
               </h2>
-              <AccordionPanel>
+              <Accordion.ItemContent>
                 <Text color="black">{blurb.body[2]}</Text>
-              </AccordionPanel>
-            </AccordionItem>
-            <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+              </Accordion.ItemContent>
+            </Accordion.Item>
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5">
               <h2>
-                <AccordionButton>
+                <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">
                     <Text color="black">{blurb.head[3]}</Text>
                   </Box>
-                  <AccordionIcon />
-                </AccordionButton>
+                  <Accordion.ItemIndicator />
+                </Accordion.ItemTrigger>
               </h2>
-              <AccordionPanel>
+              <Accordion.ItemContent>
                 <Text color="black">{blurb.body[3]}</Text>
-              </AccordionPanel>
-            </AccordionItem>
-            <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+              </Accordion.ItemContent>
+            </Accordion.Item>
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5">
               <h2>
-                <AccordionButton>
+                <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">
                     <Text color="black">{blurb.head[4]}</Text>
                   </Box>
-                  <AccordionIcon />
-                </AccordionButton>
+                  <Accordion.ItemIndicator />
+                </Accordion.ItemTrigger>
               </h2>
-              <AccordionPanel>
+              <Accordion.ItemContent>
                 <Text color="black">{blurb.body[4]}</Text>
-              </AccordionPanel>
-            </AccordionItem>
-            <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+              </Accordion.ItemContent>
+            </Accordion.Item>
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5">
               <h2>
-                <AccordionButton>
+                <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">
                     <Text color="black">{blurb.head[5]}</Text>
                   </Box>
-                  <AccordionIcon />
-                </AccordionButton>
+                  <Accordion.ItemIndicator />
+                </Accordion.ItemTrigger>
               </h2>
-              <AccordionPanel>
+              <Accordion.ItemContent>
                 <Text color="black">{blurb.body[5]}</Text>
-              </AccordionPanel>
-            </AccordionItem>
-            <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+              </Accordion.ItemContent>
+            </Accordion.Item>
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5">
               <h2>
-                <AccordionButton>
+                <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">
                     <Text color="black">{blurb.head[6]}</Text>
                   </Box>
-                  <AccordionIcon />
-                </AccordionButton>
+                  <Accordion.ItemIndicator />
+                </Accordion.ItemTrigger>
               </h2>
-              <AccordionPanel>
+              <Accordion.ItemContent>
                 <Text color="black">{blurb.body[6]}</Text>
-              </AccordionPanel>
-            </AccordionItem>
-            <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+              </Accordion.ItemContent>
+            </Accordion.Item>
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5">
               <h2>
-                <AccordionButton>
+                <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">
                     <Text color="black">{blurb.head[7]}</Text>
                   </Box>
-                  <AccordionIcon />
-                </AccordionButton>
+                  <Accordion.ItemIndicator />
+                </Accordion.ItemTrigger>
               </h2>
-              <AccordionPanel>
+              <Accordion.ItemContent>
                 <Text color="black">{blurb.body[7]}</Text>
-              </AccordionPanel>
-            </AccordionItem>
-            <AccordionItem border="2px solid #63B3ED" my="3" borderRadius="5">
+              </Accordion.ItemContent>
+            </Accordion.Item>
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5">
               <h2>
-                <AccordionButton>
+                <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">
                     <Text color="black">{blurb.head[8]}</Text>
                   </Box>
-                  <AccordionIcon />
-                </AccordionButton>
+                  <Accordion.ItemIndicator />
+                </Accordion.ItemTrigger>
               </h2>
-              <AccordionPanel>
+              <Accordion.ItemContent>
                 <Text color="black">{blurb.body[8]}</Text>
-              </AccordionPanel>
-            </AccordionItem>
-          </Accordion>
+              </Accordion.ItemContent>
+            </Accordion.Item>
+          </Accordion.Root>
         </Box>
       </Center>
     </Flex>

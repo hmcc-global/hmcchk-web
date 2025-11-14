@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text, Divider, Image } from '@chakra-ui/react';
+import { Box, Button, Flex, Text, Image, Separator } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 const SermonNotesPagination = ({
@@ -89,7 +89,7 @@ const SermonNotesPagination = ({
               View
             </Button>
           </Flex>
-          <Divider bg="black" height={0.4} mt={2} />
+          <Separator bg="black" height={0.4} mt={2} />
         </Box>
       ))}
 

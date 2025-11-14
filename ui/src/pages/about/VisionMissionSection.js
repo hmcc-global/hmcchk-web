@@ -1,11 +1,4 @@
-import {
-  Box,
-  Container,
-  VStack,
-  Stack,
-  Text,
-  Heading,
-} from '@chakra-ui/layout';
+import { Box, Container, VStack, Stack, Text, Heading } from '@chakra-ui/react';
 import { Image, Button, Link } from '@chakra-ui/react';
 import { saturateText } from '../home/SaturateVisionSection';
 

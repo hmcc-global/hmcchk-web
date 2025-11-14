@@ -1,26 +1,31 @@
 const colors = {
-    primary: {
-        1: "#4A6EEB",
-        2: "#97D0D4",
-        3: "#EBBB41",
-        4: "#F2A9A7",
-    },
-    secondary: {
-        1: "#DFE7FF",
-        2: "#DBF1F1",
-        3: "#F5F0E0",
-        4: "#F1E6E6",
-    },
-    neutral: {
-        1: "#090500",
-    },
-    background: {
-        1: "#F6FAFF",
-    },
-    additional: {
-        1: "#D46764",
-        2: "#EFFAFD",
-    }
-  };
-  
-  export default colors;
+  /*
+      Chakra v3 uses a token-based theme. We provide semantic color tokens here.
+      Keys can be any string; consumers can reference them via the system token API
+      (e.g. "colors.primary.DEFAULT" or simply "primary.DEFAULT" depending on usage).
+    */
+  primary: {
+    DEFAULT: '#4A6EEB',
+    light: '#97D0D4',
+    accent: '#EBBB41',
+    muted: '#F2A9A7',
+  },
+  secondary: {
+    DEFAULT: '#DFE7FF',
+    light: '#DBF1F1',
+    warm: '#F5F0E0',
+    subtle: '#F1E6E6',
+  },
+  neutral: {
+    DEFAULT: '#090500',
+  },
+  background: {
+    DEFAULT: '#F6FAFF',
+  },
+  additional: {
+    danger: '#D46764',
+    pale: '#EFFAFD',
+  },
+};
+
+export default colors;

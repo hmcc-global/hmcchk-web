@@ -6,8 +6,8 @@ import {
   sentencize,
   getAllChildrenFieldIds,
 } from '../helpers/formsHelpers';
+import { Prose } from '@/components/ui/prose';
 import ReactMarkdown from 'react-markdown';
-import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 
 import {
   FormControl,
@@ -624,11 +624,9 @@ const Form = (props) => {
           {formName}
         </Heading>
         <Box key="formDescription" textAlign="justify" mb="8">
-          <ReactMarkdown
-            components={ChakraUIRenderer()}
-            children={formDescription}
-            skipHtml
-          />
+          <Prose>
+            <ReactMarkdown>{formDescription}</ReactMarkdown>
+          </Prose>
         </Box>
         <Stack direction="column" spacing={4}>
           {/* If there is a prefill field, create it's heading */}

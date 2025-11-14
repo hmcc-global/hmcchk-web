@@ -2,28 +2,18 @@ import {
   Box,
   Text,
   Tabs,
-  TabList,
-  Tab,
-  TabPanels,
-  TabPanel,
+  Field,
   Flex,
-  FormControl,
-  FormLabel,
-  FormHelperText,
   Input,
   InputGroup,
   Button,
   Stack,
   Center,
   Switch,
-  InputRightAddon,
   Select,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalFooter,
+  Dialog,
   VStack,
-  ModalCloseButton,
+  CloseButton,
   HStack,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
@@ -259,30 +249,39 @@ const UserProfileDesktop = (props) => {
 
   return (
     <>
-      <Modal isOpen={modalOpen} onClose={onModalClose}>
-        <ModalOverlay />
-        <ModalContent borderRadius="20">
-          <ModalCloseButton />
-          <VStack>
-            <Text
-              color="#0628A3"
-              fontSize="2xl"
-              fontWeight="700"
-              mt={6}
-              flex={1}
-              textAlign="center"
-            >
-              Edited successfully
-            </Text>
-            <Box flex={4}>
-              <Center w="100%" h="100%">
-                <CheckCircleIcon mt={5} w="50%" h="50%" color="#0628A3" />
-              </Center>
-            </Box>
-          </VStack>
-          <ModalFooter />
-        </ModalContent>
-      </Modal>
+      <Dialog.Root
+        open={modalOpen}
+        onOpenChange={(next) => {
+          if (!next) onModalClose();
+        }}
+      >
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content borderRadius="20">
+            <Dialog.CloseTrigger asChild>
+              <CloseButton aria-label="Close" />
+            </Dialog.CloseTrigger>
+            <VStack>
+              <Text
+                color="#0628A3"
+                fontSize="2xl"
+                fontWeight="700"
+                mt={6}
+                flex={1}
+                textAlign="center"
+              >
+                Edited successfully
+              </Text>
+              <Box flex={4}>
+                <Center w="100%" h="100%">
+                  <CheckCircleIcon mt={5} w="50%" h="50%" color="#0628A3" />
+                </Center>
+              </Box>
+            </VStack>
+            <Dialog.Footer />
+          </Dialog.Content>
+        </Dialog.Positioner>
+      </Dialog.Root>
       <Flex
         mt={{ md: '40px', lg: '60px', xl: '80px' }}
         alignItems="center"
@@ -311,31 +310,55 @@ const UserProfileDesktop = (props) => {
         </Box>
       </Flex>
       <form onSubmit={handleSubmit(handleEditUserInformation)}>
-        <Tabs mt="5%" mb="5%" orientation="vertical" variant="unstyled">
+        <Tabs.Root
+          mt="5%"
+          mb="5%"
+          orientation="vertical"
+          variant="unstyled"
+          defaultValue="signup"
+        >
           <Box flex={1}>
-            <TabList border="none" alignItems="flex-end">
-              <Tab style={tabTitle} _selected={{ md: tabText }}>
+            <Tabs.List border="none" alignItems="flex-end">
+              <Tabs.Trigger
+                value="signup"
+                style={tabTitle}
+                _selected={{ md: tabText }}
+              >
                 Signup Links
-              </Tab>
-              <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
+              </Tabs.Trigger>
+              <Tabs.Trigger
+                value="sermons"
+                style={tabTitle}
+                _selected={{ md: tabText }}
+                mt={5}
+              >
                 Sermon Notes
-              </Tab>
-              <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
+              </Tabs.Trigger>
+              <Tabs.Trigger
+                value="personal"
+                style={tabTitle}
+                _selected={{ md: tabText }}
+                mt={5}
+              >
                 Personal Profile
-              </Tab>
-              <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
+              </Tabs.Trigger>
+              <Tabs.Trigger
+                value="church"
+                style={tabTitle}
+                _selected={{ md: tabText }}
+                mt={5}
+              >
                 Church Profile
-              </Tab>
-            </TabList>
+              </Tabs.Trigger>
+            </Tabs.List>
           </Box>
-          <TabPanels
+          <div
             flex={4}
             bgColor="#ffffff"
             ml="5"
-            border="1px solid #EBEBEB"
-            borderRadius="10px"
+            style={{ border: '1px solid #EBEBEB', borderRadius: '10px' }}
           >
-            <TabPanel p="5%">
+            <Tabs.Content value="signup" p="5%">
               <Stack direction="row" spacing="5">
                 {formList && formList.length > 0 && (
                   <>
@@ -376,8 +399,8 @@ const UserProfileDesktop = (props) => {
                 </Button>
               )} */}
               </Stack>
-            </TabPanel>
-            <TabPanel p="5%">
+            </Tabs.Content>
+            <Tabs.Content value="sermons" p="5%">
               <HStack gap={5} mb={5}>
                 <Button
                   borderRadius={30}
@@ -454,79 +477,79 @@ const UserProfileDesktop = (props) => {
                     : setCurrentPageSaved
                 }
               />
-            </TabPanel>
-            <TabPanel p="7%">
+            </Tabs.Content>
+            <Tabs.Content value="personal" p="7%">
               <Stack spacing="2%">
                 <Stack direction={['column', 'row']} spacing="7%">
-                  <FormControl>
-                    <FormLabel color="#2C5282">
+                  <Field.Root>
+                    <Field.Label color="#2C5282">
                       First Name (and Middle Name)
-                    </FormLabel>
+                    </Field.Label>
                     <Input
                       size="sm"
                       borderRadius="5"
                       {...register('firstName', { required: true })}
-                      isInvalid={errors['firstName']}
+                      invalid={errors['firstName']}
                       placeholder="Please fill in this field"
                     />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">Last Name</FormLabel>
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Last Name</Field.Label>
                     <Input
                       size="sm"
                       borderRadius="5"
                       {...register('lastName', { required: true })}
-                      isInvalid={errors['lastName']}
+                      invalid={errors['lastName']}
                       placeholder="Please fill in this field"
                     />
-                    <FormHelperText>
+                    <Field.HelperText>
                       Enter "N/A" if not applicable for you
-                    </FormHelperText>
-                  </FormControl>
+                    </Field.HelperText>
+                  </Field.Root>
                 </Stack>
                 <Stack direction={['column', 'row']} spacing="7%">
-                  <FormControl>
-                    <FormLabel color="#2C5282">Country of Origin</FormLabel>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Country of Origin</Field.Label>
                     <Select
                       size="sm"
                       borderRadius="5"
                       {...register('countryOfOrigin', { required: true })}
-                      isInvalid={errors['countryOfOrigin']}
+                      invalid={errors['countryOfOrigin']}
                       placeholder="Please fill in this field"
                     >
                       {countryList.map((item) => {
                         return <option key={'co' + item}>{item}</option>;
                       })}
                     </Select>
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">Lifestage</FormLabel>
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Lifestage</Field.Label>
                     <Select
                       size="sm"
                       borderRadius="5"
                       {...register('lifestage', { required: true })}
-                      isInvalid={errors['lifestage']}
+                      invalid={errors['lifestage']}
                       placeholder="Please fill in this field"
                     >
                       {lifestageList.map((item) => {
                         return <option key={'life' + item}>{item}</option>;
                       })}
                     </Select>
-                  </FormControl>
+                  </Field.Root>
                 </Stack>
                 <Stack direction={['column', 'row']} spacing="7%">
-                  <FormControl>
-                    <FormLabel color="#2C5282">
+                  <Field.Root>
+                    <Field.Label color="#2C5282">
                       Address: Floor / Level
-                    </FormLabel>
+                    </Field.Label>
                     <Input
                       size="sm"
                       borderRadius="5"
                       {...register('addressFloor')}
                     />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">Campus</FormLabel>
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Campus</Field.Label>
                     <Select
                       size="sm"
                       borderRadius="5"
@@ -537,54 +560,54 @@ const UserProfileDesktop = (props) => {
                         return <option key={'ca' + item}>{item}</option>;
                       })}
                     </Select>
-                  </FormControl>
+                  </Field.Root>
                 </Stack>
                 <Stack direction={['column', 'row']} spacing="7%">
-                  <FormControl>
-                    <FormLabel color="#2C5282">
+                  <Field.Root>
+                    <Field.Label color="#2C5282">
                       Address: Room / Flat / Unit / Suite
-                    </FormLabel>
+                    </Field.Label>
                     <Input
                       size="sm"
                       borderRadius="5"
                       {...register('addressFlat')}
                     />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">Phone Number</FormLabel>
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Phone Number</Field.Label>
                     <Input
                       size="sm"
                       borderRadius="5"
                       {...register('phoneNumber', { required: true })}
-                      isInvalid={errors['phoneNumber']}
+                      invalid={errors['phoneNumber']}
                       placeholder="Please fill in this field"
                     />
-                  </FormControl>
+                  </Field.Root>
                 </Stack>
                 <Stack direction={['column', 'row']} spacing="7%">
-                  <FormControl>
-                    <FormLabel color="#2C5282">
+                  <Field.Root>
+                    <Field.Label color="#2C5282">
                       Address: Street Address
-                    </FormLabel>
+                    </Field.Label>
                     <Input
                       size="sm"
                       borderRadius="5"
                       {...register('addressStreet')}
                     />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">Birthday</FormLabel>
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Birthday</Field.Label>
                     <Input
                       size="sm"
                       type="date"
                       borderRadius="5"
                       {...register('birthday')}
                     />
-                  </FormControl>
+                  </Field.Root>
                 </Stack>
                 <Stack direction={['column', 'row']} spacing="7%">
-                  <FormControl flex={1}>
-                    <FormLabel color="#2C5282">Address: District</FormLabel>
+                  <Field.Root flex={1}>
+                    <Field.Label color="#2C5282">Address: District</Field.Label>
                     <Select
                       size="sm"
                       borderRadius="5"
@@ -594,12 +617,12 @@ const UserProfileDesktop = (props) => {
                         return <option key={'di' + item}>{item}</option>;
                       })}
                     </Select>
-                  </FormControl>
+                  </Field.Root>
                   <Box flex={1}></Box>
                 </Stack>
                 <Stack direction={['column', 'row']} spacing="7%">
-                  <FormControl flex={1}>
-                    <FormLabel color="#2C5282">Address: Region</FormLabel>
+                  <Field.Root flex={1}>
+                    <Field.Label color="#2C5282">Address: Region</Field.Label>
                     <Select
                       size="sm"
                       borderRadius="5"
@@ -609,7 +632,7 @@ const UserProfileDesktop = (props) => {
                         return <option key={'re' + item}>{item}</option>;
                       })}
                     </Select>
-                  </FormControl>
+                  </Field.Root>
                   <Box flex={1}></Box>
                 </Stack>
               </Stack>
@@ -624,19 +647,19 @@ const UserProfileDesktop = (props) => {
               >
                 Save Information
               </Button>
-            </TabPanel>
-            <TabPanel p="7%">
+            </Tabs.Content>
+            <Tabs.Content value="church" p="7%">
               <Stack spacing="3%">
-                <FormControl>
-                  <FormLabel color="#2C5282">LIFE Group</FormLabel>
+                <Field.Root>
+                  <Field.Label color="#2C5282">LIFE Group</Field.Label>
                   <Select size="sm" borderRadius="5" {...register('lifeGroup')}>
                     {lifegroupList.map((item) => {
                       return <option key={'lg' + item}>{item}</option>;
                     })}
                   </Select>
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#2C5282">Ministry Team</FormLabel>
+                </Field.Root>
+                <Field.Root>
+                  <Field.Label color="#2C5282">Ministry Team</Field.Label>
                   <Select
                     size="sm"
                     borderRadius="5"
@@ -646,9 +669,9 @@ const UserProfileDesktop = (props) => {
                       return <option key={'mt' + item}>{item}</option>;
                     })}
                   </Select>
-                </FormControl>
+                </Field.Root>
 
-                <FormControl>
+                <Field.Root>
                   <Stack direction="row">
                     <Text flex={1} fontWeight="500" mr="3%" color="#2C5282">
                       Church Member
@@ -672,12 +695,12 @@ const UserProfileDesktop = (props) => {
                       </Text>
                     </Box>
                   </Stack>
-                  <FormHelperText>
+                  <Field.HelperText>
                     An HMCC Covenant Signing Member is someone who has attended
                     HMCC’s Experiencing Membership Class and has decided to sign
                     (in-person) the Membership Declaration{' '}
-                  </FormHelperText>
-                </FormControl>
+                  </Field.HelperText>
+                </Field.Root>
                 <Stack
                   direction="row"
                   border="1px solid #E2E8F0"
@@ -685,9 +708,9 @@ const UserProfileDesktop = (props) => {
                   p="4%"
                   spacing="4%"
                 >
-                  <FormControl>
-                    <FormLabel color="#2C5282">Recognition Date</FormLabel>
-                    <InputGroup size="sm">
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Recognition Date</Field.Label>
+                    <InputGroup size="sm" endAddon="Date">
                       <Input
                         size="sm"
                         type="date"
@@ -695,14 +718,13 @@ const UserProfileDesktop = (props) => {
                         {...register('membershipRecognitionDate')}
                         isReadOnly
                       />
-                      <InputRightAddon borderRadius="5">Date</InputRightAddon>
                     </InputGroup>
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">
                       Last Recommitment Date
-                    </FormLabel>
-                    <InputGroup size="sm">
+                    </Field.Label>
+                    <InputGroup size="sm" endAddon="Date">
                       <Input
                         size="sm"
                         type="date"
@@ -710,11 +732,10 @@ const UserProfileDesktop = (props) => {
                         {...register('membershipRecommitmentDate')}
                         isReadOnly
                       />
-                      <InputRightAddon borderRadius="5">Date</InputRightAddon>
                     </InputGroup>
-                  </FormControl>
+                  </Field.Root>
                 </Stack>
-                <FormControl>
+                <Field.Root>
                   <Stack direction="row">
                     <Text flex={1} fontWeight="500" mr="3%" color="#2C5282">
                       Baptised
@@ -738,7 +759,7 @@ const UserProfileDesktop = (props) => {
                       </Text>
                     </Box>
                   </Stack>
-                </FormControl>
+                </Field.Root>
                 <Stack
                   direction="row"
                   border="1px solid #E2E8F0"
@@ -746,18 +767,18 @@ const UserProfileDesktop = (props) => {
                   p="4%"
                   spacing="4%"
                 >
-                  <FormControl>
-                    <FormLabel color="#2C5282">Baptism Place</FormLabel>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Baptism Place</Field.Label>
                     <Input
                       size="sm"
                       borderRadius="5"
                       {...register('baptismPlace')}
                       isReadOnly
                     />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">Baptism Date</FormLabel>
-                    <InputGroup size="sm">
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Baptism Date</Field.Label>
+                    <InputGroup size="sm" endAddon="Date">
                       <Input
                         size="sm"
                         type="date"
@@ -765,9 +786,8 @@ const UserProfileDesktop = (props) => {
                         {...register('baptismDate')}
                         isReadOnly
                       />
-                      <InputRightAddon borderRadius="5">Date</InputRightAddon>
                     </InputGroup>
-                  </FormControl>
+                  </Field.Root>
                 </Stack>
               </Stack>
               <Button
@@ -781,9 +801,9 @@ const UserProfileDesktop = (props) => {
               >
                 Save Information
               </Button>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+            </Tabs.Content>
+          </div>
+        </Tabs.Root>
       </form>
     </>
   );

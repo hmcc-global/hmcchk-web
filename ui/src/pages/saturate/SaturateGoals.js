@@ -5,8 +5,7 @@ import {
   Text,
   VStack,
   Flex,
-  UnorderedList,
-  ListItem,
+  List,
   HStack,
 } from '@chakra-ui/react';
 import { useState } from 'react';
@@ -95,22 +94,22 @@ const SaturateGoals = () => {
             </Flex>
           </Box>
           <Box pl={['2.5em', '5em']}>
-            <UnorderedList fontSize={['0.9em', '1.5em']}>
-              <ListItem>
+            <List fontSize={['0.9em', '1.5em']} styleType="disc">
+              <List.Item>
                 <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                   {' '}
                   80%{' '}
                 </span>{' '}
                 of our members going through the DMF Curriculum.
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                   {' '}
                   75%
                 </span>{' '}
                 of our members discipling 1 other person
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List>
           </Box>
         </Box>
         <Box mb="2em">
@@ -144,22 +143,22 @@ const SaturateGoals = () => {
             </Flex>
           </Box>
           <Box pl={['2.5em', '5em']}>
-            <UnorderedList fontSize={['0.9em', '1.5em']}>
-              <ListItem>
+            <List fontSize={['0.9em', '1.5em']} styleType="disc">
+              <List.Item>
                 <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                   {' '}
                   20{' '}
                 </span>{' '}
                 Campus Microchurches
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                   {' '}
                   14{' '}
                 </span>{' '}
                 City Microchurches
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List>
           </Box>
         </Box>
         <Box mb="2em">
@@ -193,23 +192,23 @@ const SaturateGoals = () => {
             </Flex>
           </Box>
           <Box pl={['2.5em', '5em']}>
-            <UnorderedList fontSize={['0.9em', '1.5em']}>
-              <ListItem>
+            <List fontSize={['0.9em', '1.5em']} styleType="disc">
+              <List.Item>
                 <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                   {' '}
                   5{' '}
                 </span>{' '}
                 Missional initiatives started by 2 or more LGs collaborating
                 together to reach 5 different HK districts
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                   {' '}
                   1{' '}
                 </span>{' '}
                 church site in another district
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List>
           </Box>
         </Box>
         <Box mb="2em">
@@ -247,23 +246,23 @@ const SaturateGoals = () => {
             </Flex>
           </Box>
           <Box pl={['2.5em', '5em']}>
-            <UnorderedList fontSize={['0.9em', '1.5em']}>
-              <ListItem>
+            <List fontSize={['0.9em', '1.5em']} styleType="disc">
+              <List.Item>
                 <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                   {' '}
                   1{' '}
                 </span>{' '}
                 Transformational Hub
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                   {' '}
                   1{' '}
                 </span>{' '}
                 international church plant on or near a university campus in an
                 Asian international city
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List>
           </Box>
         </Box>
       </Container>
@@ -327,25 +326,26 @@ const SaturateGoals = () => {
                 </Text>
               </Flex>
               <Box pl={{ sm: '3em', md: '4em', lg: '5em' }}>
-                <UnorderedList
+                <List
                   fontSize={{ sm: '1.2vw', md: '1.3vw', lg: '1.5vw' }}
                   fontFamily="Be-Vietnam"
+                  styleType="disc"
                 >
-                  <ListItem>
+                  <List.Item>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
                       80%{' '}
                     </span>{' '}
                     of our members going through the DMF Curriculum.
-                  </ListItem>
-                  <ListItem>
+                  </List.Item>
+                  <List.Item>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
                       75%
                     </span>{' '}
                     of our members discipling 1 other person
-                  </ListItem>
-                </UnorderedList>
+                  </List.Item>
+                </List>
               </Box>
             </Box>
             <Box mt="4">
@@ -386,26 +386,27 @@ const SaturateGoals = () => {
                 </Text>
               </Flex>
               <Box pl={{ sm: '3em', md: '4em', lg: '5em' }}>
-                <UnorderedList
+                <List
                   fontSize={{ sm: '1.2vw', md: '1.3vw', lg: '1.5vw' }}
                   fontFamily="Be-Vietnam"
+                  styleType="disc"
                 >
-                  <ListItem>
+                  <List.Item>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
                       5{' '}
                     </span>{' '}
                     Missional initiatives started by 2 or more LGs collaborating
                     together to reach 5 different HK districts
-                  </ListItem>
-                  <ListItem>
+                  </List.Item>
+                  <List.Item>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
                       1{' '}
                     </span>{' '}
                     church site in another district
-                  </ListItem>
-                </UnorderedList>
+                  </List.Item>
+                </List>
               </Box>
             </Box>
           </VStack>
@@ -549,25 +550,26 @@ const SaturateGoals = () => {
                 </Flex>
               </Flex>
               <Box pr="3.5em">
-                <UnorderedList
+                <List
                   fontSize={{ sm: '1.2vw', md: '1.3vw', lg: '1.5vw' }}
                   fontFamily="Be-Vietnam"
+                  styleType="disc"
                 >
-                  <ListItem>
+                  <List.Item>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
                       20{' '}
                     </span>{' '}
                     Campus Microchurches
-                  </ListItem>
-                  <ListItem>
+                  </List.Item>
+                  <List.Item>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
                       14{' '}
                     </span>{' '}
                     City Microchurches
-                  </ListItem>
-                </UnorderedList>
+                  </List.Item>
+                </List>
               </Box>
             </Box>
             <Box pt="5">
@@ -612,26 +614,27 @@ const SaturateGoals = () => {
                 </Box>
               </Flex>
               <Box pr="3.5em">
-                <UnorderedList
+                <List
                   fontSize={{ sm: '1.2vw', md: '1.3vw', lg: '1.5vw' }}
                   fontFamily="Be-Vietnam"
+                  styleType="disc"
                 >
-                  <ListItem>
+                  <List.Item>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
                       1{' '}
                     </span>{' '}
                     Transformational Hub
-                  </ListItem>
-                  <ListItem>
+                  </List.Item>
+                  <List.Item>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
                       {' '}
                       1{' '}
                     </span>{' '}
                     international church plant on or near a university campus in
                     an Asian international city
-                  </ListItem>
-                </UnorderedList>
+                  </List.Item>
+                </List>
               </Box>
             </Box>
           </VStack>

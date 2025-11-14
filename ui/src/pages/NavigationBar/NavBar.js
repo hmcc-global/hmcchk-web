@@ -114,13 +114,13 @@ const NavBar = (props) => {
         }
       >
         <Flex
-          backgroundColor="#F6FAFF"
+          bg="#F6FAFF"
           width="100%"
           h="7vh"
           align="center"
           fontFamily="Manrope"
           fontSize={{ md: '0.6rem', lg: '0.75rem' }}
-          textColor="black"
+          color="black"
           borderBottom="1px solid"
           borderColor="#4A6EEB"
         >
@@ -132,7 +132,7 @@ const NavBar = (props) => {
               h={{ md: '7vh', lg: '7vh', xl: '8.5vh' }}
               display={{ base: 'none', md: 'flex' }}
             >
-              <HStack spacing={5} display={{ base: 'none', md: 'flex' }}>
+              <HStack gap={5} display={{ base: 'none', md: 'flex' }}>
                 <LinkBox>
                   <LinkOverlay href="/">
                     <Image
@@ -146,7 +146,7 @@ const NavBar = (props) => {
                 <Link href="/">
                   <Text
                     fontSize={{ md: '0.7rem', lg: '0.875rem' }}
-                    fontWeight="bolder"
+                    fontWeight="700"
                   >
                     Harvest Mission Community Church
                   </Text>
@@ -155,17 +155,16 @@ const NavBar = (props) => {
               </HStack>
 
               <Stack
-                fontWeight="600"
-                spacing={{ md: 5, lg: 7 }}
+                gap={{ md: 5, lg: 7 }}
                 justify={['space-between', 'space-around']}
                 align="center"
                 display={{ base: 'none', md: 'flex' }}
                 marginLeft="15px"
                 marginRight={{ md: '15px', lg: '30px' }}
-                isInline
+                direction="row"
               >
                 <Box position="relative">
-                  <Link href="/about-us" id="navbar-about">
+                  <Link href="/about-us" id="navbar-about" fontWeight="600">
                     ABOUT
                   </Link>
                 </Box>
@@ -176,38 +175,39 @@ const NavBar = (props) => {
                     fontSize="xx-small"
                     marginStart={{ md: '8', lg: '10' }}
                     lineHeight="0"
-                    textColor="#4A6EEB;"
+                    color="#4A6EEB"
                     marginTop={-1}
+                    fontWeight="600"
                   >
                     I'm new!
                   </Text>
-                  <Link href="/discover" id="navbar-connect">
+                  <Link href="/discover" id="navbar-connect" fontWeight="600">
                     DISCOVER
                   </Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/events" id="navbar-events">
+                  <Link href="/events" id="navbar-events" fontWeight="600">
                     EVENTS
                   </Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/sermons" id="navbar-sermons">
+                  <Link href="/sermons" id="navbar-sermons" fontWeight="600">
                     SERMONS
                   </Link>
                 </Box>
                 <Box position="relative">
-                  <Link href="/give" id="navbar-give">
+                  <Link href="/give" id="navbar-give" fontWeight="600">
                     GIVE
                   </Link>
                 </Box>
               </Stack>
               <Stack
-                spacing={2}
+                gap={2}
                 color="black"
                 justify="right"
                 align="right"
                 alignItems="center"
-                isInline
+                direction="row"
               >
                 {!isLoading && (
                   <Box
@@ -220,15 +220,16 @@ const NavBar = (props) => {
                         <LinkBox>
                           <Button
                             textAlign="center"
-                            bgColor="rgba(0, 0, 0, 0)"
+                            bg="rgba(0, 0, 0, 0)"
                             h="3.5vh"
                             marginLeft="10px"
                             px={{ md: '3', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
                             _hover={{
-                              backgroundColor: '#4A6EEB',
+                              bg: '#4A6EEB',
                               color: 'white',
                             }}
+                            color="#1A365D"
                             id="navbar-signup"
                             letterSpacing={1}
                             borderRadius={20}
@@ -247,7 +248,7 @@ const NavBar = (props) => {
                         <LinkBox>
                           <Button
                             textAlign="center"
-                            bgColor="#4A6EEB"
+                            bg="#4A6EEB"
                             color="white"
                             borderColor="#4A6EEB"
                             borderWidth="medium"
@@ -256,7 +257,7 @@ const NavBar = (props) => {
                             px={{ md: '2', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
                             _hover={{
-                              backgroundColor: '#ffffff',
+                              bg: '#ffffff',
                               color: 'black',
                               borderColor: '#ffffff',
                             }}
@@ -280,15 +281,16 @@ const NavBar = (props) => {
                         <LinkBox>
                           <Button
                             textAlign="center"
-                            bgColor="rgba(0, 0, 0, 0)"
+                            bg="rgba(0, 0, 0, 0)"
                             h="3.5vh"
                             marginLeft="10px"
                             px={{ md: '3', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
                             _hover={{
-                              backgroundColor: '#4A6EEB',
+                              bg: '#4A6EEB',
                               color: 'white',
                             }}
+                            color="#1A365D"
                             id="navbar-signup"
                             letterSpacing={1}
                             borderRadius={20}
@@ -310,7 +312,7 @@ const NavBar = (props) => {
                         <LinkBox>
                           <Button
                             textAlign="center"
-                            bgColor="#4A6EEB"
+                            bg="#4A6EEB"
                             color="white"
                             borderColor="#4A6EEB"
                             borderWidth="medium"
@@ -319,7 +321,7 @@ const NavBar = (props) => {
                             px={{ md: '2', lg: '5' }}
                             py={{ md: '3', lg: '4' }}
                             _hover={{
-                              backgroundColor: '#ffffff',
+                              bg: '#ffffff',
                               color: 'black',
                               borderColor: '#ffffff',
                             }}

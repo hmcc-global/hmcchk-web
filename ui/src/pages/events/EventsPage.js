@@ -3,7 +3,7 @@ import { customAxios as axios } from '../helpers/customAxios';
 import {
   Button,
   Container,
-  Divider,
+  Separator,
   Grid,
   Heading,
   Select,
@@ -270,7 +270,7 @@ const EventsPage = (props) => {
           filteredList.map((event, i) => (
             <>
               <EventCard key={'event' + i} eventData={event} />
-              {i !== filteredList.length - 1 && <Divider />}
+              {i !== filteredList.length - 1 && <Separator />}
             </>
           ))}
       </Grid>

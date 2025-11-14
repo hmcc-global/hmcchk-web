@@ -5,8 +5,7 @@ import { ChevronLeftIcon } from '@chakra-ui/icons';
 
 import {
   Box,
-  UnorderedList,
-  ListItem,
+  List,
   Center,
   VStack,
   Flex,
@@ -165,20 +164,21 @@ const ResetPassword = (props) => {
                     <Text color="#FED7D7" w="50vw" fontSize={[12, 12, 12, 14]}>
                       Your new password should consist of:
                     </Text>
-                    <UnorderedList
+                    <List
                       color="#FED7D7"
                       w="300"
                       fontSize={[12, 12, 12, 14]}
+                      styleType="disc"
                     >
-                      <ListItem>At least 8 characters in length</ListItem>
-                      <ListItem>
+                      <List.Item>At least 8 characters in length</List.Item>
+                      <List.Item>
                         Mixture of both uppercase and lowercase characters
-                      </ListItem>
-                      <ListItem>Contains at least one number</ListItem>
-                      <ListItem>
+                      </List.Item>
+                      <List.Item>Contains at least one number</List.Item>
+                      <List.Item>
                         Contains at least one special character
-                      </ListItem>
-                    </UnorderedList>
+                      </List.Item>
+                    </List>
                   </Box>
                 </Center>
                 <Text>Re-enter Your New Password</Text>

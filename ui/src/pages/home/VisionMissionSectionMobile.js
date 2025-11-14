@@ -4,7 +4,6 @@ import {
   Box,
   Heading,
   Button,
-  Fade,
   Link,
   VStack,
 } from '@chakra-ui/react';
@@ -15,13 +14,17 @@ const VisionMissionSectionMobile = () => {
     <>
       <InView rootMargin="-50px" triggerOnce={true}>
         {({ inView, ref }) => (
-          <Fade transition={{ enter: { duration: 1 } }} in={inView}>
+          <Box
+            ref={ref}
+            opacity={inView ? 1 : 0}
+            transform={inView ? 'none' : 'translateY(20px)'}
+            transition="opacity 1s ease, transform 1s ease"
+          >
             <Container
               maxW="container.xl"
               bgImage={`url('${process.env.PUBLIC_URL}/images/home/hk-green.png')`}
               bgPos="center right"
               bgSize="contain"
-              ref={ref}
               bgRepeat="no-repeat"
             >
               <VStack>
@@ -373,7 +376,7 @@ const VisionMissionSectionMobile = () => {
                 </Link>
               </VStack>
             </Container>
-          </Fade>
+          </Box>
         )}
       </InView>
     </>

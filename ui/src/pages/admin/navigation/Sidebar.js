@@ -5,7 +5,6 @@ import {
   CloseButton,
   Flex,
   Icon,
-  useColorModeValue,
   Link,
   Drawer,
   DrawerContent,
@@ -26,6 +25,7 @@ import {
   FiDollarSign,
 } from 'react-icons/fi';
 import { CgNotes } from 'react-icons/cg';
+import { useColorModeValue } from '../../../components/ui/color-mode';
 
 const LinkItems = [
   { name: 'Home', icon: FiHome, path: '/admin/home' },

@@ -14,16 +14,50 @@ const MainMenu = ({ login, onClose }) => {
 
   const dispatch = useDispatch();
 
+  const LinkButton = ({ href, id, onClick, label, children, ...rest }) => {
+    return (
+      <Link
+        href={href}
+        onClick={onClick}
+        id={id}
+        display="block"
+        w="100%"
+        bg="#4465D6"
+        borderRadius="full"
+        color="white"
+        py="0.2rem"
+        {...rest}
+      >
+        <Flex
+          direction="row"
+          justifyContent="space-between"
+          align="center"
+          px="0.65em"
+          py={1}
+        >
+          <Text>{label}</Text>
+          <ChevronRightIcon
+            boxSize="1.5rem"
+            fontWeight="bold"
+            strokeWidth={2}
+          />
+        </Flex>
+        {children}
+      </Link>
+    );
+  };
+
   const MobileView = () => {
     return (
       <Container maxW="container.lg" fontFamily="Manrope" pt="8%">
         <VStack
-          spacing="7"
+          gap={7}
           color="white"
           alignItems="flex-start"
           pt="10%"
           fontWeight="bold"
           fontSize="xl"
+          w="100%"
         >
           <Image
             w="3.5em"
@@ -32,218 +66,78 @@ const MainMenu = ({ login, onClose }) => {
           />
 
           <Flex direction="column" w="100%">
-            <VStack>
-              <Link
+            <VStack w="100%">
+              <LinkButton
                 href="/"
-                onClick={onClose}
                 id="menu-home"
-                w="100%"
-                bgColor="#4465D6"
-                borderRadius="full"
-                textDecoration="none !important"
-              >
-                <Flex
-                  dir="row"
-                  justifyContent="space-between"
-                  align="center"
-                  px="0.65em"
-                  py="1"
-                >
-                  <Text>Home</Text>
-                  <ChevronRightIcon boxSize={6} />
-                </Flex>
-              </Link>
+                onClick={onClose}
+                label="Home"
+              />
 
-              <Link
+              <LinkButton
                 href="/about-us"
-                onClick={onClose}
                 id="menu-about"
-                w="100%"
-                bgColor="#4465D6"
-                borderRadius="full"
-                textDecoration="none !important"
-              >
-                <Flex
-                  dir="row"
-                  justifyContent="space-between"
-                  align="center"
-                  px="0.65em"
-                  py="1"
-                >
-                  <Text>About</Text>
-                  <ChevronRightIcon boxSize={6} />
-                </Flex>
-              </Link>
-              <Link
+                onClick={onClose}
+                label="About"
+              />
+              <LinkButton
                 href="/discover"
-                onClick={onClose}
                 id="menu-connect"
-                w="100%"
-                bgColor="#4465D6"
-                borderRadius="full"
-                textDecoration="none !important"
-              >
-                <Flex
-                  dir="row"
-                  justifyContent="space-between"
-                  align="center"
-                  px="0.65em"
-                  py="1"
-                >
-                  <Text>Discover</Text>
-                  <ChevronRightIcon boxSize={6} />
-                </Flex>
-              </Link>
-              <Link
+                onClick={onClose}
+                label="Discover"
+              />
+              <LinkButton
                 href="/events"
-                onClick={onClose}
                 id="menu-events"
-                w="100%"
-                bgColor="#4465D6"
-                borderRadius="full"
-                textDecoration="none !important"
-              >
-                <Flex
-                  dir="row"
-                  justifyContent="space-between"
-                  align="center"
-                  px="0.65em"
-                  py="1"
-                >
-                  <Text>Events</Text>
-                  <ChevronRightIcon boxSize={6} />
-                </Flex>
-              </Link>
-              <Link
+                onClick={onClose}
+                label="Events"
+              />
+              <LinkButton
                 href="/sermons"
-                onClick={onClose}
                 id="menu-sermons"
-                w="100%"
-                bgColor="#4465D6"
-                borderRadius="full"
-                textDecoration="none !important"
-              >
-                <Flex
-                  dir="row"
-                  justifyContent="space-between"
-                  align="center"
-                  px="0.65em"
-                  py="1"
-                >
-                  <Text>Sermons</Text>
-                  <ChevronRightIcon boxSize={6} />
-                </Flex>
-              </Link>
-              <Link
-                href="/give"
                 onClick={onClose}
+                label="Sermons"
+              />
+              <LinkButton
+                href="/give"
                 id="menu-give"
-                w="100%"
-                bgColor="#4465D6"
-                borderRadius="full"
-                textDecoration="none !important"
-              >
-                <Flex
-                  dir="row"
-                  justifyContent="space-between"
-                  align="center"
-                  px="0.65em"
-                  py="1"
-                >
-                  <Text>Give</Text>
-                  <ChevronRightIcon boxSize={6} />
-                </Flex>
-              </Link>
+                onClick={onClose}
+                label="Give"
+              />
             </VStack>
           </Flex>
           <Flex direction="column" w="100%">
             <VStack>
               {login && (
-                <Link
+                <LinkButton
                   href="/profile"
-                  onClick={onClose}
                   id="menu-profile"
-                  w="100%"
-                  bgColor="#4465D6"
-                  borderRadius="full"
-                  textDecoration="none !important"
-                >
-                  <Flex
-                    dir="row"
-                    justifyContent="space-between"
-                    align="center"
-                    px="0.65em"
-                    py="1"
-                  >
-                    <Text>My Profile</Text>
-                    <ChevronRightIcon boxSize={6} />
-                  </Flex>
-                </Link>
+                  onClick={onClose}
+                  label="My Profile"
+                />
               )}
               {login && (
-                <Link
+                <LinkButton
                   onClick={onLogout}
                   id="menu-logout"
-                  w="100%"
-                  bgColor="#4465D6"
-                  borderRadius="full"
-                  textDecoration="none !important"
-                >
-                  <Flex
-                    dir="row"
-                    justifyContent="space-between"
-                    align="center"
-                    px="0.65em"
-                    py="1"
-                  >
-                    <Text>Log Out</Text>
-                    <ChevronRightIcon boxSize={6} />
-                  </Flex>
-                </Link>
+                  label="Log Out"
+                />
               )}
               {!login && (
-                <Link
+                <LinkButton
                   href="/login"
-                  onClick={onClose}
                   id="menu-login"
-                  w="100%"
-                  bgColor="#4465D6"
-                  borderRadius="full"
-                  textDecoration="none !important"
-                >
-                  <Flex
-                    dir="row"
-                    justifyContent="space-between"
-                    align="center"
-                    px="0.65em"
-                    py="1"
-                  >
-                    <Text>Login</Text>
-                    <ChevronRightIcon boxSize={6} />
-                  </Flex>
-                </Link>
+                  onClick={onClose}
+                  label="Login"
+                />
               )}
               {!login && (
-                <Link
+                <LinkButton
                   href="/signup"
-                  onClick={onClose}
                   id="menu-signup"
-                  w="100%"
-                  bgColor="#4465D6"
-                  borderRadius="full"
-                  textDecoration="none !important"
-                >
-                  <Flex
-                    dir="row"
-                    justifyContent="space-between"
-                    align="center"
-                    px="0.65em"
-                    py="1"
-                  >
-                    <Text>Sign Up</Text>
-                    <ChevronRightIcon boxSize={6} />
-                  </Flex>
-                </Link>
+                  onClick={onClose}
+                  label="Sign Up"
+                />
               )}
             </VStack>
           </Flex>

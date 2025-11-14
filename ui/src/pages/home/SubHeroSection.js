@@ -7,7 +7,7 @@ import {
   Stack,
   Text,
   Flex,
-  Fade,
+  Box,
 } from '@chakra-ui/react';
 import { Link as ReactLink } from 'react-router-dom';
 import { InView } from 'react-intersection-observer';
@@ -123,13 +123,17 @@ const SubHeroSection = () => {
     <>
       <InView rootMargin="-50px" triggerOnce={true}>
         {({ inView, ref }) => (
-          <Fade transition={{ enter: { duration: 1 } }} in={inView}>
+          <Box
+            ref={ref}
+            opacity={inView ? 1 : 0}
+            transform={inView ? 'none' : 'translateY(20px)'}
+            transition="opacity 1s ease, transform 1s ease"
+          >
             <Container
               display="flex"
               maxW="container.xl"
               justifyContent="flex-start"
               my={['5', '5', '7vh']}
-              ref={ref}
             >
               <Stack w="100%" fontFamily="Manrope">
                 <Text
@@ -162,7 +166,7 @@ const SubHeroSection = () => {
                 </Grid>
               </Stack>
             </Container>
-          </Fade>
+          </Box>
         )}
       </InView>
     </>
