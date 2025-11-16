@@ -10,7 +10,7 @@ import {
   Textarea,
   Button,
   FormErrorMessage,
-  useToast,
+  createStandaloneToast,
   FormHelperText,
 } from '@chakra-ui/react';
 import { customAxios as axios } from '../../helpers/customAxios';
@@ -18,7 +18,7 @@ import PreviewOnlineSermonContainer from './PreviewOnlineSermonContainer';
 import { DateTime } from 'luxon';
 
 export default function AdminLiveSermonContainer(props) {
-  const toast = useToast();
+  const toast = createStandaloneToast();
   const { user, history } = props;
 
   const [isLoading, setIsLoading] = useState(true);

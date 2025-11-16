@@ -12,7 +12,7 @@ import {
   HStack,
   Box,
   Tooltip,
-  useToast,
+  createStandaloneToast,
 } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 import { paymentMethodList } from '../../helpers/lists';
@@ -23,7 +23,7 @@ import AdminPaymentDataModal from './AdminPaymentDataModal';
 const pollFreqInSecs = 5 * 60;
 
 export default function AdminFormDataViewer(props) {
-  const toast = useToast();
+  const toast = createStandaloneToast();
   const {
     location: { state },
   } = props;

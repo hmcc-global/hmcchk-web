@@ -16,11 +16,11 @@ import {
   Spacer,
   Button,
   FormErrorMessage,
-  useToast,
+  createStandaloneToast,
 } from '@chakra-ui/react';
 
 export default function FundraiseContainer() {
-  const toast = useToast();
+  const toast = createStandaloneToast();
   const [fundraises, setFundraises] = useState([]);
   const [selected, setSelected] = useState();
 

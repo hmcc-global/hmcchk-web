@@ -14,7 +14,7 @@ import {
   Box,
   Image,
   HStack,
-  useToast,
+  createStandaloneToast,
 } from '@chakra-ui/react';
 import SermonNotesEditorModal from './SermonNotesEditorModal';
 import { MdOutlineVideoLibrary } from 'react-icons/md';
@@ -29,7 +29,7 @@ import { useHistory } from 'react-router-dom';
 // current solution with useEffect is rly whack, no time to refactor it this cycle :)
 const AdminSermonNotesContainer = (props) => {
   const { user } = props;
-  const toast = useToast();
+  const toast = createStandaloneToast();
   const history = useHistory();
   const path = history.location.pathname.split('/');
 

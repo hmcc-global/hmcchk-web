@@ -12,12 +12,12 @@ import {
   HStack,
   Checkbox,
   Button,
-  useToast,
+  createStandaloneToast,
 } from '@chakra-ui/react';
 import TestimonyGrid from './TestimonyGrid';
 
 export default function AdminTestimonyContainer(props) {
-  const toast = useToast();
+  const toast = createStandaloneToast();
 
   //testimonies grid data
   const [testimonies, setTestimonies] = useState([]);
@@ -78,7 +78,7 @@ export default function AdminTestimonyContainer(props) {
   }, [deleted]);
 
   const updateHandler = async () => {
-    const tagsArr = tags && tags.length > 0 ? tags.split(',') : []; 
+    const tagsArr = tags && tags.length > 0 ? tags.split(',') : [];
 
     try {
       const res = await axios.put('/api/testimony/update', {

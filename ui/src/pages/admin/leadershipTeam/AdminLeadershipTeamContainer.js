@@ -2,7 +2,7 @@ import { customAxios as axios } from '../../helpers/customAxios';
 import {
   Heading,
   Box,
-  useToast,
+  createStandaloneToast,
   Container,
   Stack,
   FormControl,
@@ -29,7 +29,7 @@ import LeadershipTeamGrid from './LeadershipTeamGrid.js';
 import { AddIcon, EditIcon } from '@chakra-ui/icons';
 
 export default function AdminLeadershipTeamContainer(props) {
-  const toast = useToast();
+  const toast = createStandaloneToast();
 
   // states
   const [teams, setTeams] = useState([]);
