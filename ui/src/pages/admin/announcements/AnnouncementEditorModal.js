@@ -25,7 +25,7 @@ import {
   GridItem,
   Textarea,
   SimpleGrid,
-  createStandaloneToast,
+  useToast,
   Link,
   Switch,
   Select,
@@ -45,7 +45,7 @@ const AnnouncementEditorModal = (props) => {
   const { register, handleSubmit, reset, setValue, formState, control } =
     useForm();
   const { errors } = formState;
-  const toast = createStandaloneToast();
+  const toast = useToast();
 
   // TODO: add interval for dates to repeat events
   const [title, setTitle] = useState(undefined);

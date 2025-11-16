@@ -4,7 +4,7 @@ import {
   Text,
   VStack,
   Button,
-  createStandaloneToast,
+  useToast,
 } from '@chakra-ui/react';
 import { customAxios as axios } from '../helpers/customAxios';
 import { useState, useEffect, useCallback, useMemo } from 'react';
@@ -27,22 +27,23 @@ const SermonNotesContainer = (props) => {
   const [htmlUserSermonNotes, setHtmlUserNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
   const [heightAboveTitle, setHeightAboveTitle] = useState(false);
-  const toast = createStandaloneToast();
+  const toast = useToast();
 
   const todayId = DateTime.fromISO(new Date().toISOString()).toFormat(
     'ddMMyyyy'
   );
 
-  const fallbackSermonId = props && props.match && props.match.params.id;
+  const fallbackSermonId = props &&  props.match && props.match.params.id;
 
-  const sermonId =
+  const sermonId = 
     sermonNoteId === 'online'
       ? `sn-${todayId}-1`
       : sermonNoteId == null
-      ? fallbackSermonId
-      : sermonNoteId;
+        ? fallbackSermonId
+        : sermonNoteId;
 
   const getSermonNotesParent = useCallback(async () => {
+
     try {
       setIsLoading(true);
       const { data, status } = await axios.get('/api/sermon-notes-parent/get', {
