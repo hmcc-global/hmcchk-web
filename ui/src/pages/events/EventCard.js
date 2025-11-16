@@ -27,8 +27,7 @@ import { useState, useEffect } from 'react';
 import { getRenderDate } from '../helpers/eventsHelpers';
 import { DateTime } from 'luxon';
 import { generateGoogleCalendarLink } from '../helpers/eventsHelpers';
-import ReactMarkdown from 'react-markdown';
-import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
+import { default as ReactMarkdown } from '../../components/CustomReactMarkdown';
 
 const EventCard = (props) => {
   const { eventData } = props;
@@ -194,11 +193,7 @@ const EventCard = (props) => {
               textOverflow="ellipsis"
               w="90%"
             >
-              <ReactMarkdown
-                components={ChakraUIRenderer()}
-                children={eventData.description}
-                skipHtml
-              />{' '}
+              <ReactMarkdown children={eventData.description} skipHtml />{' '}
             </Text>
             <Icon
               as={BsFullscreen}
@@ -345,11 +340,7 @@ const EventCard = (props) => {
             </Box>
             <Box bg="#F9F9F9" borderRadius="20" mt={[2, 5]} p={4}>
               <Text fontSize={['xs', 'md']} w="100%">
-                <ReactMarkdown
-                  components={ChakraUIRenderer()}
-                  children={eventData.description}
-                  skipHtml
-                />
+                <ReactMarkdown children={eventData.description} skipHtml />
               </Text>
             </Box>
           </ModalBody>
