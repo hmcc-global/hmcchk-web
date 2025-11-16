@@ -161,7 +161,8 @@ const EventsSectionCard = (props) => {
                 fontFamily="Manrope"
                 fontWeight="bold"
                 color="black"
-                isTruncated
+                noOfLines={1}
+                wordBreak="break-all"
                 mt={[1, 1, 0]}
                 mb={[2, 2, 0]}
               >

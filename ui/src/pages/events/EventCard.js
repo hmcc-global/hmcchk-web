@@ -114,7 +114,8 @@ const EventCard = (props) => {
             mb={['2', '5']}
             size="lg"
             fontWeight="900"
-            isTruncated
+            noOfLines={1}
+            wordBreak="break-all"
           >
             {eventData.title}
           </Heading>

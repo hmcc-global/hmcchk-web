@@ -111,7 +111,6 @@ const SermonSeries = () => {
                     <Text
                       fontWeight={hoveredIndex === i ? '700' : '400'}
                       fontSize={{ base: '0.688rem', md: '0.875rem' }}
-                      isTruncated="false"
                     >
                       {sermon.title}
                     </Text>
@@ -123,14 +122,16 @@ const SermonSeries = () => {
                       <Text
                         fontSize="0.625rem"
                         textColor={hoveredIndex === i ? 'black' : '#818181'}
-                        isTruncated
+                        noOfLines={1}
+                        wordBreak="break-all"
                       >
                         Speaker: {sermon.speaker[0].name}
                       </Text>
                       <Text
                         fontSize="0.625rem"
                         textColor={hoveredIndex === i ? 'black' : '#818181'}
-                        isTruncated
+                        noOfLines={1}
+                        wordBreak="break-all"
                       >
                         Passage: {sermon.passage}
                       </Text>

@@ -61,14 +61,16 @@ const SermonCard = ({ sermonData }) => {
           <Text
             fontSize={{ base: '0.625rem', md: '0.75rem' }}
             color={isSelected ? 'black' : '#818181'}
-            isTruncated
+            noOfLines={1}
+            wordBreak="break-all"
           >
             {'Speaker: ' + sermonData.speaker[0].name}
           </Text>
           <Text
             fontSize={{ base: '0.625rem', md: '0.75rem' }}
             color={isSelected ? 'black' : '#818181'}
-            isTruncated
+            noOfLines={1}
+            wordBreak="break-all"
           >
             {'Passage: ' + sermonData.passage}
           </Text>
