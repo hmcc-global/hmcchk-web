@@ -1,5 +1,5 @@
 // Helper functions for generating sermon-specific SEO data
-
+import { seoData } from './seoData';
 /**
  * Generates a clean description from sermon content or creates a fallback
  * @param {Object} sermon - The sermon object
@@ -80,12 +80,7 @@ export const generateSermonTitle = (sermon) => {
  * @returns {Object} - Default SEO object
  */
 export const getDefaultSermonSEO = () => {
-  return {
-    title: 'Sermon | HMCC Hong Kong',
-    description:
-      'Listen to this sermon from Harvest Mission Community Church Hong Kong. Biblical teaching and spiritual encouragement for your faith journey.',
-    keywords: 'sermon, preaching, bible teaching, HMCC Hong Kong',
-  };
+  return seoData['/sermons'];
 };
 
 /**
