@@ -139,6 +139,7 @@ const HeroSection = () => {
                   fontSize={headerTextSize}
                   fontWeight={headerTextWeight}
                   letterSpacing={headerTextSpacing}
+                  fontFamily=""
                   color="black"
                   lineHeight="1.05"
                 >

@@ -4,22 +4,18 @@ import colors from './foundations/colors';
 import textStyles from './foundations/textStyles';
 import fonts from './foundations/fonts';
 import { withProse } from '@nikolovlazar/chakra-ui-prose';
-// import Button from "./components/button";
+import Button from './components/button';
 // import Input from "./components/input";
 
-const customTheme = extendTheme(
-  {
-    styles,
-    colors,
-    textStyles,
-    fonts,
-    //   components: {
-    //     Button,
-    //     Input,
-    //     // Add more components as needed
-    //   },
+const customTheme = extendTheme({
+  styles,
+  colors,
+  textStyles,
+  fonts,
+  components: {
+    Button,
+    // Add more component overrides here as needed
   },
-  withProse()
-);
+});
 
 export default customTheme;
