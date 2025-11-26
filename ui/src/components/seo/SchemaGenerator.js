@@ -1,3 +1,5 @@
+import { seoData } from './seoData';
+
 export const generateChurchSchema = (pathname = '/') => {
   // Base church organization schema
   const baseChurch = {
@@ -6,19 +8,19 @@ export const generateChurchSchema = (pathname = '/') => {
     name: 'Harvest Mission Community Church Hong Kong',
     alternateName: 'HMCC Hong Kong',
     url: 'https://hk.hmccglobal.org',
-    description:
-      'Growing disciples who plant churches that multiply movements. A welcoming Christian church community serving Hong Kong.',
-    foundingDate: '2002',
+    description: seoData['/']?.description,
+    foundingDate: '2015',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Hong Kong',
+      streetAddress: '79 Hoi Yuen Rd',
       addressRegion: 'Hong Kong',
       addressCountry: 'HK',
     },
     contactPoint: {
       '@type': 'ContactPoint',
-      contactType: 'customer service',
-      email: 'info@hk.hmccglobal.org',
+      contactType: 'information',
+      email: 'hk@hmccglobal.org',
     },
     sameAs: [
       'https://www.facebook.com/hmccofhk/',
@@ -36,8 +38,8 @@ export const generateChurchSchema = (pathname = '/') => {
         name: 'Harvest Mission Community Church Hong Kong',
         alternateName: 'HMCC Hong Kong',
         url: 'https://hk.hmccglobal.org',
-        description:
-          'Welcome to Harvest Mission Community Church - Join us for worship, community, and spiritual growth in Hong Kong. Growing disciples who plant churches that multiply movements.',
+        description: seoData['/']?.description,
+        keywords: seoData['/']?.keywords,
         publisher: baseChurch,
         potentialAction: {
           '@type': 'SearchAction',
@@ -52,8 +54,8 @@ export const generateChurchSchema = (pathname = '/') => {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
         name: 'Church Sermons - HMCC Hong Kong',
-        description:
-          'Weekly sermons and biblical teachings from Harvest Mission Community Church Hong Kong pastors and guest speakers. Grow in faith through expository preaching.',
+        description: seoData['/sermons']?.description,
+        keywords: seoData['/sermons']?.keywords,
         url: 'https://hk.hmccglobal.org/sermons',
         publisher: baseChurch,
         mainEntity: {
@@ -85,8 +87,8 @@ export const generateChurchSchema = (pathname = '/') => {
         '@context': 'https://schema.org',
         '@type': 'VideoObject',
         name: 'Sunday Service Sermon',
-        description:
-          'Weekly sermon from Harvest Mission Community Church Hong Kong',
+        description: seoData['/sermons']?.description,
+        keywords: seoData['/sermons']?.keywords,
         publisher: baseChurch,
         contentLocation: {
           '@type': 'Place',
@@ -100,8 +102,8 @@ export const generateChurchSchema = (pathname = '/') => {
         '@context': 'https://schema.org',
         '@type': 'BroadcastService',
         name: 'Online Church Service',
-        description:
-          'Join our live online worship service from Harvest Mission Community Church Hong Kong',
+        description: seoData['/online']?.description,
+        keywords: seoData['/online']?.keywords,
         publisher: baseChurch,
         broadcastOfEvent: {
           '@type': 'Event',
@@ -115,8 +117,8 @@ export const generateChurchSchema = (pathname = '/') => {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
         name: 'No Live Stream Available - HMCC Hong Kong',
-        description:
-          'Live streaming is not currently available, but you can access our past sermons.',
+        description: seoData['/online']?.description,
+        keywords: seoData['/online']?.keywords,
         url: 'https://hk.hmccglobal.org/online/no-stream',
         publisher: baseChurch,
         mainEntity: {
@@ -140,16 +142,10 @@ export const generateChurchSchema = (pathname = '/') => {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
         name: 'Church Events - HMCC Hong Kong',
-        description:
-          'Discover upcoming events, worship services, and community activities at Harvest Mission Community Church Hong Kong. Join us for fellowship and spiritual growth.',
+        description: seoData['/events']?.description,
+        keywords: seoData['/events']?.keywords,
         url: 'https://hk.hmccglobal.org/events',
         publisher: baseChurch,
-        mainEntity: {
-          '@type': 'EventSeries',
-          name: 'HMCC Hong Kong Events',
-          description: 'Regular church events and special activities',
-          organizer: baseChurch,
-        },
         breadcrumb: {
           '@type': 'BreadcrumbList',
           itemListElement: [
@@ -174,14 +170,14 @@ export const generateChurchSchema = (pathname = '/') => {
         '@context': 'https://schema.org',
         '@type': 'AboutPage',
         name: 'About Harvest Mission Community Church Hong Kong',
-        description:
-          'Learn about our church history, mission, values, and pastoral team at Harvest Mission Community Church Hong Kong. Discover what makes our church community unique.',
+        description: seoData['/about-us']?.description,
+        keywords: seoData['/about-us']?.keywords,
         url: 'https://hk.hmccglobal.org/about-us',
         publisher: baseChurch,
         mainEntity: {
           ...baseChurch,
           mission:
-            'Growing disciples who plant churches that multiply movements',
+            "To transform lost people into Christ's disciples who will then transform the world.",
           hasOfferCatalog: {
             '@type': 'OfferCatalog',
             name: 'Church Services',
@@ -229,8 +225,8 @@ export const generateChurchSchema = (pathname = '/') => {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
         name: 'Visit Harvest Mission Community Church Hong Kong',
-        description:
-          'Plan your visit to Harvest Mission Community Church Hong Kong - service times, location, and what to expect',
+        description: seoData['/discover/visit-us-page']?.description,
+        keywords: seoData['/discover/visit-us-page']?.keywords,
         publisher: baseChurch,
         mainEntity: {
           '@type': 'Place',
@@ -244,8 +240,8 @@ export const generateChurchSchema = (pathname = '/') => {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
         name: 'Give - Support HMCC Hong Kong Ministry',
-        description:
-          'Support the mission and ministry of Harvest Mission Community Church Hong Kong through tithes, offerings, and donations. Join us in growing disciples who plant churches.',
+        description: seoData['/give']?.description,
+        keywords: seoData['/give']?.keywords,
         url: 'https://hk.hmccglobal.org/give',
         publisher: baseChurch,
         potentialAction: {
@@ -278,24 +274,10 @@ export const generateChurchSchema = (pathname = '/') => {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
         name: 'Discover HMCC Hong Kong - New Visitors Welcome',
-        description:
-          'New to HMCC? Discover our church community, values, and how you can get involved. Learn about our ministries, life groups, and worship services in Hong Kong.',
+        description: seoData['/discover']?.description,
+        keywords: seoData['/discover']?.keywords,
         url: 'https://hk.hmccglobal.org/discover',
         publisher: baseChurch,
-        mainEntity: {
-          '@type': 'FAQPage',
-          name: 'New Visitor Information',
-          mainEntity: [
-            {
-              '@type': 'Question',
-              name: 'What can I expect at HMCC Hong Kong?',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'Welcoming community focused on growing disciples who plant churches that multiply movements.',
-              },
-            },
-          ],
-        },
         breadcrumb: {
           '@type': 'BreadcrumbList',
           itemListElement: [
@@ -320,8 +302,8 @@ export const generateChurchSchema = (pathname = '/') => {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
         name: 'Visit Us - Plan Your First Visit to HMCC Hong Kong',
-        description:
-          'Plan your visit to Harvest Mission Community Church Hong Kong. Find service times, location details, and what to expect during your first visit.',
+        description: seoData['/discover/visit-us-page']?.description,
+        keywords: seoData['/discover/visit-us-page']?.keywords,
         url: 'https://hk.hmccglobal.org/discover/visit-us-page',
         publisher: baseChurch,
         mainEntity: {
@@ -336,8 +318,8 @@ export const generateChurchSchema = (pathname = '/') => {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
         name: 'Life Groups - Small Group Community at HMCC Hong Kong',
-        description:
-          'Join a Life Group at HMCC Hong Kong for deeper fellowship, Bible study, and community. Discover how small groups help us grow together in faith.',
+        description: seoData['/discover/life-group']?.description,
+        keywords: seoData['/discover/life-group']?.keywords,
         url: 'https://hk.hmccglobal.org/discover/life-group',
         publisher: baseChurch,
       };
@@ -347,8 +329,8 @@ export const generateChurchSchema = (pathname = '/') => {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
         name: 'Connect with Ministries - Serve at HMCC Hong Kong',
-        description:
-          "Discover ministry opportunities at HMCC Hong Kong. Find ways to serve, connect, and use your gifts to build God's kingdom in our community.",
+        description: seoData['/discover/connect-ministries']?.description,
+        keywords: seoData['/discover/connect-ministries']?.keywords,
         url: 'https://hk.hmccglobal.org/discover/connect-ministries',
         publisher: baseChurch,
       };
@@ -356,13 +338,12 @@ export const generateChurchSchema = (pathname = '/') => {
     case pathname === '/building-blocks':
       return {
         '@context': 'https://schema.org',
-        '@type': 'Course',
-        name: 'Building Blocks - Youth Program at HMCC Hong Kong',
-        description: 'Building Blocks youth program at HMCC Hong Kong.',
+        '@type': 'WebPage',
+        name: "Building Blocks - children's ministry at HMCC Hong Kong",
+        description: seoData['/building-blocks']?.description,
+        keywords: seoData['/building-blocks']?.keywords,
         url: 'https://hk.hmccglobal.org/building-blocks',
         provider: baseChurch,
-        educationalLevel: 'Beginner to Advanced',
-        teaches: 'Christian discipleship and spiritual growth',
       };
 
     case pathname === '/saturate':
@@ -370,26 +351,10 @@ export const generateChurchSchema = (pathname = '/') => {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
         name: 'Saturate - Mission and Evangelism at HMCC Hong Kong',
-        description:
-          'Saturate mission and evangelism initiatives at HMCC Hong Kong. Join us in sharing the gospel and making disciples in Hong Kong and beyond.',
+        description: seoData['/saturate']?.description,
+        keywords: seoData['/saturate']?.keywords,
         url: 'https://hk.hmccglobal.org/saturate',
         publisher: baseChurch,
-      };
-
-    case pathname.startsWith('/witness'):
-      return {
-        '@context': 'https://schema.org',
-        '@type': 'CollectionPage',
-        name: 'Testimonies and Witness Stories - HMCC Hong Kong',
-        description:
-          'Personal testimonies and faith stories from Harvest Mission Community Church Hong Kong community members. Be encouraged by how God is working in our midst.',
-        url: 'https://hk.hmccglobal.org/witness',
-        publisher: baseChurch,
-        mainEntity: {
-          '@type': 'ItemList',
-          name: 'Community Testimonies',
-          description: 'Real stories of faith and transformation',
-        },
       };
 
     case pathname === '/privacy-policy':
@@ -397,8 +362,8 @@ export const generateChurchSchema = (pathname = '/') => {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
         name: 'Privacy Policy - HMCC Hong Kong',
-        description:
-          'Privacy policy for Harvest Mission Community Church Hong Kong website and services.',
+        description: seoData['/privacy-policy']?.description,
+        keywords: seoData['/privacy-policy']?.keywords,
         url: 'https://hk.hmccglobal.org/privacy-policy',
         publisher: baseChurch,
       };
