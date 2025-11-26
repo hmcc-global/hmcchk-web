@@ -64,14 +64,12 @@ const TabGroup = ({
           },
         }}
       >
-        {/* <MotionBox
+        <MotionBox
           position="absolute"
           top="8px"
           bottom="8px"
-          left={'10px'}
-          width={`${100 / options.length - 10}%`}
-          bg={selectorBg}
-          borderRadius="80px"
+          left="0"
+          width="100%" // Full container width
           initial={false}
           animate={{
             x: `${selectedIndex * (100 / options.length)}%`,
@@ -82,7 +80,16 @@ const TabGroup = ({
             },
           }}
           zIndex={1}
-        /> */}
+        >
+          {/* The actual highlight - takes correct percentage of the motion box */}
+          <Box
+            width={`${100 / options.length - 10}%`} // This will be 33.33% for 3 options
+            height="100%"
+            bg={selectorBg}
+            borderRadius="80px"
+            mx="8px" // Adjust horizontal margin for spacing from edges
+          />
+        </MotionBox>
         <HStack spacing={0} align="stretch" zIndex={2} position="relative">
           {options.map((opt, idx) => {
             const isActive = idx === selectedIndex;

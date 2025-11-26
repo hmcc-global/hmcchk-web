@@ -18,6 +18,18 @@ const TestingPage = () => {
       title: 'Some Other Content',
       content: <SomeOtherContent />,
     },
+    {
+      title: 'Some Other Content',
+      content: <SomeOtherContent />,
+    },
+    {
+      title: 'Some Other Content',
+      content: <SomeOtherContent />,
+    },
+    {
+      title: 'Some Other Content',
+      content: <SomeOtherContent />,
+    },
   ];
 
   return (
