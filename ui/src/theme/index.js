@@ -7,15 +7,18 @@ import { withProse } from '@nikolovlazar/chakra-ui-prose';
 import Button from './components/button';
 // import Input from "./components/input";
 
-const customTheme = extendTheme({
-  styles,
-  colors,
-  textStyles,
-  fonts,
-  components: {
-    Button,
-    // Add more component overrides here as needed
+const customTheme = extendTheme(
+  {
+    styles,
+    colors,
+    textStyles,
+    fonts,
+    components: {
+      Button,
+      // Add more component overrides here as needed
+    },
   },
-});
+  withProse()
+);
 
 export default customTheme;
