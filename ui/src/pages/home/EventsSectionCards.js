@@ -38,8 +38,7 @@ import {
 } from '../helpers/eventsHelpers';
 import { useState } from 'react';
 import TrackingUtil from '../../util/TrackingUtil';
-import ReactMarkdown from 'react-markdown';
-import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
+import { default as ReactMarkdown } from '../../components/CustomReactMarkdown';
 
 const EventsSectionCard = (props) => {
   const { width, height, event } = props;
@@ -162,7 +161,8 @@ const EventsSectionCard = (props) => {
                 fontFamily="Manrope"
                 fontWeight="bold"
                 color="black"
-                isTruncated
+                noOfLines={1}
+                wordBreak="break-all"
                 mt={[1, 1, 0]}
                 mb={[2, 2, 0]}
               >
@@ -283,11 +283,7 @@ const EventsSectionCard = (props) => {
             </Box>
             <Box bg="#F9F9F9" borderRadius="20" mt={[2, 5]} p={4}>
               <Text fontSize={['xs', 'md']} w="100%">
-                <ReactMarkdown
-                  components={ChakraUIRenderer()}
-                  children={event.description}
-                  skipHtml
-                />
+                <ReactMarkdown children={event.description} skipHtml />
               </Text>
             </Box>
           </ModalBody>
@@ -420,7 +416,6 @@ const EventsSectionCard = (props) => {
             </Stack>
             <Box fontSize="sm" mt="3">
               <ReactMarkdown
-                components={ChakraUIRenderer()}
                 children={event.description}
                 skipHtml
               />

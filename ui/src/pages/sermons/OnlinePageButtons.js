@@ -55,7 +55,8 @@ const OnlinePageButtons = () => {
         as="a"
         href="/events"
         target="_blank"
-        isTruncated
+        noOfLines={1}
+        wordBreak="break-all"
         id="online-events"
         borderColor="#4A6EEB"
         border="1px solid var(--Blue-Primary, #4A6EEB)"

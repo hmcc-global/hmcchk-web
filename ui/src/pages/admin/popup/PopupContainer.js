@@ -14,8 +14,7 @@ import {
   ButtonGroup,
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
-import ReactMarkdown from 'react-markdown';
-import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
+import { default as ReactMarkdown } from '../../../components/CustomReactMarkdown';
 
 const PopupContainer = ({ popupData, isPreviewing, setIsPreviewing }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,11 +52,7 @@ const PopupContainer = ({ popupData, isPreviewing, setIsPreviewing }) => {
         )}
         <ModalBody ml={[0, 16]} mr={[0, 16]}>
           <Box fontSize="sm" mt="5" color="#4C80A5" textAlign="justify">
-            <ReactMarkdown
-              components={ChakraUIRenderer()}
-              children={popupData.description}
-              skipHtml
-            />
+            <ReactMarkdown children={popupData.description} skipHtml />
           </Box>
         </ModalBody>
         <ModalFooter ml={[0, 16]} mr={[0, 16]}>
