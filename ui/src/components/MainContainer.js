@@ -45,6 +45,7 @@ import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
 import ConnectMinistry from './discover/ConnectMinistry';
 import LifeGroupPage from './discover/LifeGroupPage';
 import TenYearContainer from './10-year/TenYearContainer';
+import GivingTuesdayPage from './givingTuesday/GivingTuesdayPage';
 
 const MainContainer = () => {
   return (
@@ -344,6 +345,12 @@ const MainContainer = () => {
           path="/admin/fundraise"
           permissions={['admin', 'stewardship']}
           component={AdminFundraiseContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/giving-tuesday"
+          permissions={['public']}
+          component={GivingTuesdayPage}
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>
