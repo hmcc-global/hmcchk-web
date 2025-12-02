@@ -9,57 +9,72 @@ import {
   Flex,
   Stack,
 } from '@chakra-ui/react';
+import { tenYearTheme, getTypography } from './theme';
 
 const ClosingRemarks = () => {
   return (
     <Box>
-      <VStack gap="10">
+      <VStack gap={tenYearTheme.spacing.section} mt='3rem'>
         <Flex gap="10" align="center">
           <Text
-            color="#FFFFFF"
             textAlign={'Center'}
-            fontFamily="Abhaya Libre"
-            fontSize="42px"
-            fontWeight="800"
-            lineHeight="120%"
+            {...getTypography('h1')}
           >
             Celebrating a Decade of
           </Text>
-          <Text
-            color="#FFFFFF"
-            textAlign={'Center'}
-            fontFamily="Abhaya Libre"
-            fontSize="42px"
-            fontWeight="800"
-            lineHeight="120%"
-          >
-            ransformation
-          </Text>
+          <Flex align="center" gap="2" position="relative">
+            <Image
+              src={process.env.PUBLIC_URL + '/images/10-year/t.svg'}
+              h="90px"
+              w="auto"
+              alt="T"
+              transform="translateY(-10px)"
+              position="absolute"
+              zIndex="0"
+              left="-25px"
+            />
+            <Text
+              textAlign={'Center'}
+              position="relative"
+              zIndex="1"
+              ml="5px"
+              {...getTypography('h1')}
+            >
+              ransformation
+            </Text>
+          </Flex>
         </Flex>
         <Text
-          color="#FFFFFF"
           textAlign={'Center'}
-          fontFamily="Abhaya Libre"
-          fontSize="42px"
-          fontWeight="800"
-          lineHeight="120%"
+          {...getTypography('h1')}
         >
-          Thank you for being a part of HMCC Hong Kong in the past years
+          Thank you for being a part of HMCC Hong Kong in<br />
+          the past{' '}
+          <Box as="span" position="relative" display="inline-block">
+            <Image
+              src={process.env.PUBLIC_URL + '/images/10-year/10.svg'}
+              h="8rem"
+              w="auto"
+              alt="10"
+              position="absolute"
+              zIndex="0"
+              left="15%"
+              top="50%"
+              transform="translate(-50%, -50%)"
+            />
+            <Text
+              as="span"
+              position="relative"
+              zIndex="1"
+              ml="50px"
+              {...getTypography('h1')}
+            >
+              years
+            </Text>
+          </Box>
         </Text>
       </VStack>
 
-      <Text
-        color="#95CFFF"
-        textAlign={'Center'}
-        fontFamily="Qindom"
-        fontSize="98.152px"
-        fontStyle="normal"
-        fontWeight="400"
-        lineHeight="normal"
-        letterSpacing="12.807px"
-      >
-        t
-      </Text>
       <Image
         display={['none', 'none', 'block']}
         src={process.env.PUBLIC_URL + '/images/10-year/ClosingRemarks/10.svg'}
