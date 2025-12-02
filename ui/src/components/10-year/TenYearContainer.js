@@ -1,9 +1,7 @@
-import { Container } from '@chakra-ui/react';
+import { Container, Flex } from '@chakra-ui/react';
 
 const TenYearContainer = () => {
-  return (
-    <Container maxW="container.lg" py={10} fontFamily="Manrope"></Container>
-  );
+  return <Flex direction="column" bgColor="#000214" py={10}></Flex>;
 };
 
 export default TenYearContainer;
