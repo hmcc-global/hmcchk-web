@@ -32,6 +32,7 @@ const WhatIsGivingTuesday = (props) => {
               color={accentColor}
               fontWeight="900"
               fontSize={['1.4rem', '1.875rem']}
+              fontFamily="DMSerifDisplay_Italic"
             >
               What is Giving Tuesday?
             </Text>

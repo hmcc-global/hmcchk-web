@@ -105,7 +105,7 @@ const RenderSwitch = (param) => {
           </Text>
           <Text>
             Please email a copy of your transfer receipt along with your Full
-            Name within 2 weeks to <b> stewardship@hongkong.hmcc.net.</b>
+            Name within 2 weeks to <b> hk@hmccglobal.org.</b>
           </Text>
         </VStack>
       );
@@ -216,6 +216,7 @@ const WaysToGive = (props) => {
           fontWeight="800"
           fontSize={['1.4rem', '1.875rem']}
           pb={1}
+          fontFamily="DMSerifDisplay_Italic"
         >
           Ways To Give
         </Text>

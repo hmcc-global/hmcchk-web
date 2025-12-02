@@ -8,6 +8,7 @@ import HowToGive from './HowToGive';
 import WaysToGive from './WaysToGive';
 import WhatIsGivingTuesday from './WhatIsGivingTuesday';
 import { customAxios as axios } from '../helpers/customAxios';
+import GivingTuesdayPadlet from './GivingTuesdayPadlet';
 // import GlobalChurchCategories from './GlobalChurchCategories';
 
 const defaultGivingData = {
@@ -25,8 +26,8 @@ const defaultGivingData = {
       givers: -1,
     },
     {
-      name: 'Saturate',
-      key: 'saturate',
+      name: 'Tai Po',
+      key: 'taipo',
       amount: -1,
       givers: -1,
     },
@@ -44,7 +45,7 @@ const GivingTuesdayPage = (props) => {
   const [remainingTimeString, setRemainingTimeString] = useState('24:00:00');
   const [eventStatus, setEventStatus] = useState('before');
   const [givingData, setGivingData] = useState(defaultGivingData);
-  const endDate = DateTime.fromISO('2024-12-04T00:00');
+  const endDate = DateTime.fromISO('2025-12-03T00:00');
 
   const calculateTimeLeft = () => {
     return endDate.diffNow(['hours', 'seconds']);
@@ -73,7 +74,7 @@ const GivingTuesdayPage = (props) => {
     try {
       const { data, status } = await axios.get('/api/fundraise/get', {
         params: {
-          campaignName: 'Giving Tuesday 2024',
+          campaignName: 'Giving Tuesday 2025',
         },
       });
 
@@ -123,7 +124,7 @@ const GivingTuesdayPage = (props) => {
               w={['100%', '80%']}
               alignItems="center"
               h="auto"
-              src={process.env.PUBLIC_URL + '/images/givingTuesday/GT2024.png'}
+              src={process.env.PUBLIC_URL + '/images/givingTuesday/GT2025.png'}
               alt="Giving Tuesday"
             />
           </Center>
@@ -142,6 +143,7 @@ const GivingTuesdayPage = (props) => {
             </>
           )}
           {/* {eventStatus === 'during' && <LastYearGivingTuesday />} */}
+          <GivingTuesdayPadlet />
           {eventStatus === 'after' && (
             <Text
               color={accentColor}
@@ -150,7 +152,7 @@ const GivingTuesdayPage = (props) => {
               textAlign="center"
               py="2"
             >
-              Thank you for participating in Giving Tuesday 2024!
+              Thank you for participating in Giving Tuesday 2025!
             </Text>
           )}
         </Stack>

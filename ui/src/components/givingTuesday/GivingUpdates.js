@@ -34,6 +34,7 @@ const CategoryCard = (props) => {
             color="#74A0F1"
             verticalAlign="middle"
             justifyContent="center"
+            fontFamily="DMSerifDisplay_Italic"
           >
             <Center>{text[0]}</Center>
             <Center>{text[1]}</Center>
@@ -78,11 +79,11 @@ const GivingUpdates = (props) => {
   const renderSwitch = () => {
     switch (eventStatus) {
       case 'after':
-        return 'GIVING TUESDAY 2024 SUMMARY';
+        return 'GIVING TUESDAY 2025 SUMMARY';
       case 'during':
         return 'GIVING LIVE UPDATES';
       default:
-        return 'Giving Categories for Giving Tuesday 2024';
+        return 'Giving Categories for Giving Tuesday 2025';
     }
   };
 
@@ -92,32 +93,22 @@ const GivingUpdates = (props) => {
 
   const cardData = [
     {
-      iconLink:
-        process.env.PUBLIC_URL + '/images/givingTuesday/1-cityserve.png',
-      text: ['Local'],
-      desc: ['CityServe'],
+      iconLink: process.env.PUBLIC_URL + '/images/givingTuesday/locally.png',
+      text: ['Impact Locally'],
+      desc: ['Serving locally, 2nd Site'],
       givingValue:
         givingData.categories[0].amount === -1
           ? '-'
           : numberWithCommas(givingData.categories[0].amount),
     },
     {
-      iconLink: process.env.PUBLIC_URL + '/images/givingTuesday/2-global.png',
-      text: ['Global'],
-      desc: ['Missions'],
+      iconLink: process.env.PUBLIC_URL + '/images/givingTuesday/globally.png',
+      text: ['Impact Globally'],
+      desc: ['Harvest Mission Global 10-Year Commitment'],
       givingValue:
         givingData.categories[1].amount === -1
           ? '-'
           : numberWithCommas(givingData.categories[1].amount),
-    },
-    {
-      iconLink: process.env.PUBLIC_URL + '/images/givingTuesday/3-saturate.png',
-      text: ['Saturate Vision'],
-      desc: ['Multi-site, Church Planting, etc.'],
-      givingValue:
-        givingData.categories[2].amount === -1
-          ? '-'
-          : numberWithCommas(givingData.categories[2].amount),
     },
   ];
   const givingSum =
@@ -132,6 +123,7 @@ const GivingUpdates = (props) => {
           color={accentColor}
           fontWeight="900"
           fontSize={['1.4rem', '1.875rem']}
+          fontFamily="DMSerifDisplay_Italic"
         >
           {renderSwitch()}
         </Text>

@@ -24,6 +24,7 @@ const HowToGive = (props) => {
           fontWeight="900"
           fontSize={['1.3rem', '1.75rem']}
           pt={7}
+          fontFamily="DMSerifDisplay_Italic"
         >
           How to Give
         </Text>
@@ -71,9 +72,9 @@ const HowToGive = (props) => {
           </Text>
           <Text>
             Note: Please email{' '}
-            <Link href="mailto:stewardship@hongkong.hmcc.net">
+            <Link href="mailto:hk@hmccglobal.org">
               <u>
-                <i>stewardship@hongkong.hmcc.net</i>
+                <i>hk@hmccglobal.org</i>
               </u>
             </Link>{' '}
             with the appropriate category and amount allocations if you forgot
