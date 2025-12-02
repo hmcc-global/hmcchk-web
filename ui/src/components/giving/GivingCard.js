@@ -105,7 +105,7 @@ const RenderSwitch = (param) => {
               style={{
                 textDecoration: 'underline',
               }}
-              href="https://tithe.ly/give_new/www/#/tithely/give-one-time/645349"
+              href="https://give.tithe.ly/?formId=a24ffd31-6865-11ee-90fc-1260ab546d11"
               color="#319795"
             >
               here
