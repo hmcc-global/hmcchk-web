@@ -96,33 +96,49 @@ const GivingUpdates = (props) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
+  const getCategoryByKey = (key) => {
+    return (
+      givingData.categories.find((category) => category.key === key) || {
+        amount: -1,
+        givers: -1,
+      }
+    );
+  };
+
   const cardData = [
     {
       iconLink: process.env.PUBLIC_URL + '/images/givingTuesday/locally.png',
       text: ['Impact Locally'],
-      desc: [
-        'Local Needs (CityServe, Tao Po Fire Relief, Shine),',
-        'HMCC 2nd Site',
-      ],
+      desc: ['Local Needs (CityServe, Tai Po Fire Relief, Shine)'],
       givingValue:
-        givingData.categories[0].amount === -1
+        getCategoryByKey('local').amount === -1
           ? '-'
-          : numberWithCommas(givingData.categories[0].amount),
+          : numberWithCommas(getCategoryByKey('local').amount),
+    },
+    {
+      iconLink:
+        process.env.PUBLIC_URL + '/images/givingTuesday/second-site.png',
+      text: ['Impact Locally'],
+      desc: ['HMCC 2nd Site'],
+      givingValue:
+        getCategoryByKey('secondsite').amount === -1
+          ? '-'
+          : numberWithCommas(getCategoryByKey('secondsite').amount),
     },
     {
       iconLink: process.env.PUBLIC_URL + '/images/givingTuesday/globally.png',
       text: ['Impact Globally'],
       desc: ['Harvest Mission Global 10-Year Commitment'],
       givingValue:
-        givingData.categories[1].amount === -1
+        getCategoryByKey('global').amount === -1
           ? '-'
-          : numberWithCommas(givingData.categories[1].amount),
+          : numberWithCommas(getCategoryByKey('global').amount),
     },
   ];
   const givingSum =
-    givingData.categories[3].amount === -1
+    getCategoryByKey('totalgiving').amount === -1
       ? '-'
-      : givingData.categories[3].amount;
+      : getCategoryByKey('totalgiving').amount;
 
   return (
     <Stack direction="column" spacing={5}>
@@ -237,9 +253,9 @@ const GivingUpdates = (props) => {
                 fontSize={['30', '45']}
                 color="#183B5D"
               >
-                {givingData.categories[3].givers === -1
+                {getCategoryByKey('totalgiving').givers === -1
                   ? '-'
-                  : givingData.categories[3].givers}
+                  : getCategoryByKey('totalgiving').givers}
               </Text>
             </Stack>
           </Stack>

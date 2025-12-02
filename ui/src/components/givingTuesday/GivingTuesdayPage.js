@@ -20,17 +20,18 @@ const defaultGivingData = {
       givers: -1,
     },
     {
+      name: 'Secondsite',
+      key: 'secondsite',
+      amount: -1,
+      givers: -1,
+    },
+    {
       name: 'Global',
       key: 'global',
       amount: -1,
       givers: -1,
     },
-    {
-      name: 'Tai Po',
-      key: 'taipo',
-      amount: -1,
-      givers: -1,
-    },
+
     {
       name: 'Total Giving',
       key: 'totalGiving',
@@ -45,7 +46,8 @@ const GivingTuesdayPage = (props) => {
   const [remainingTimeString, setRemainingTimeString] = useState('24:00:00');
   const [eventStatus, setEventStatus] = useState('before');
   const [givingData, setGivingData] = useState(defaultGivingData);
-  const endDate = DateTime.fromISO('2025-12-03T00:00');
+  //const endDate = DateTime.fromISO('2025-12-03T00:00');
+  const endDate = DateTime.fromISO('2025-12-02T00:00');
 
   const calculateTimeLeft = () => {
     return endDate.diffNow(['hours', 'seconds']);
@@ -146,7 +148,7 @@ const GivingTuesdayPage = (props) => {
             alignItems="center"
             src={
               process.env.PUBLIC_URL +
-              '/images/givingTuesday/local-category.jpg'
+              '/images/givingTuesday/local-category.png'
             }
             alt="Giving Tuesday"
           />

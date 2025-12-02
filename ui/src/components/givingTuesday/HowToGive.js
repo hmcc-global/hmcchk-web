@@ -55,8 +55,6 @@ const HowToGive = (props) => {
                 <ListItem>
                   <b>LNE</b>: Local needs (CityServe, Shine, TaiPo)
                 </ListItem>
-              </OrderedList>
-              <OrderedList>
                 <ListItem>
                   <b>HMG</b>: 10 year commitment
                 </ListItem>
