@@ -8,7 +8,7 @@ import TenYearTimeline from './TenYearTimeline';
 
 import { tenYearTheme } from './theme';
 const TenYearContainer = () => {
-  const backgroundImage = `${process.env.PUBLIC_URL}/images/10-year/10y_bg.png`;
+  const backgroundImage = `${process.env.PUBLIC_URL}/images/10-year/10y_bg.webp`;
 
   return (
     <Flex direction="column" bgColor={tenYearTheme.colors.background}>
