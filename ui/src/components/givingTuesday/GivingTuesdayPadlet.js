@@ -33,7 +33,7 @@ const GivingTuesdayPadlet = () => {
       >
         <p style={{ padding: 0, margin: 0 }}>
           <iframe
-            src="https://padlet.com/embed/shdb83cjer9g31xy"
+            src="https://padlet.com/embed/39jq3o6qkaak396m"
             frameBorder="0"
             allow="camera;microphone;geolocation;display-capture;clipboard-write"
             style={{
