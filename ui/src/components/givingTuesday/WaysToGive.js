@@ -125,7 +125,7 @@ const GivingCard = (cardinfo) => {
       bgPosition="center"
       bgSize="cover"
       boxShadow="0px 4px 8px rgba(0, 0, 0, 0.15)"
-      fontFamily="Inter"
+      h={['125px', '100%']}
     >
       <Flex
         borderRadius="2xl"
@@ -134,25 +134,30 @@ const GivingCard = (cardinfo) => {
         justify="center"
         style={{
           backdropFilter: 'blur(2px)',
-          background: 'rgba(0, 0, 0, 0.29)',
+          background: 'rgba(255, 255, 255, 0.2)',
         }}
       >
         <Box
           py={['0vh', '3vh', '10vh']}
           px={[1, 0]}
-          minH={{ base: '7vh', sm: '12vh', md: '20vh' }}
+          minH={{ base: '7vh', sm: '7vh', md: '20vh' }}
           minW="90%"
           justifyContent="center"
           textAlign="center"
           verticalAlign="middle"
         >
-          <Flex direction={{ base: 'row', md: 'column' }} minH="100%">
+          <Flex
+            direction={{ base: 'column', md: 'column' }}
+            minH={['70%', '100%']}
+            mt={['2vh', '0vh', '0vh']}
+          >
             <Center>
               <Heading
                 as="h2"
-                fontSize={['lg', 'xl', '3xl']}
-                color="white"
-                fontWeight={{ base: '500', md: '700' }}
+                fontSize={['26', '40']}
+                fontFamily="Manrope"
+                color="#00328D"
+                fontWeight={{ base: '900', md: '900' }}
               >
                 {cardinfo.text}
               </Heading>
@@ -165,19 +170,21 @@ const GivingCard = (cardinfo) => {
                 mt={{ base: '0', md: '8' }}
               >
                 <Button
-                  w="100%"
-                  size="sm"
+                  w={['50%', '100%']}
+                  size="md"
                   variant="outline"
                   onClick={onOpen}
-                  borderRadius="xl"
+                  borderRadius="2xl"
+                  borderColor="#00328D"
                 >
                   <Text
                     align="center"
-                    fontSize={['x-small', 'sm', 'sm']}
-                    fontWeight={{ base: '500', md: '700' }}
-                    color="white"
+                    fontSize={['14', '20']}
+                    fontWeight={{ base: '700', md: '700' }}
                     pl={6}
                     pr={6}
+                    fontFamily="Manrope"
+                    color="#00328D"
                   >
                     Learn More
                   </Text>
@@ -210,57 +217,63 @@ const WaysToGive = (props) => {
   const { accentColor } = props;
   return (
     <Stack spacing={5} direction="column" pb="5">
-      <Box pt={[2, 2]} textAlign="center">
+      <Box pt={[2, 2]} textAlign="left">
         <Text
           color={accentColor}
           fontWeight="800"
-          fontSize={['1.4rem', '1.875rem']}
+          fontSize={['26', '40']}
           pb={1}
-          fontFamily="DMSerifDisplay_Italic"
+          fontFamily="DMserifText"
         >
           Ways To Give
         </Text>
         <Text
           color={accentColor}
           fontWeight="700"
-          fontSize={['0.8rem', '1.25rem']}
+          fontSize={['14', '20']}
+          fontFamily="Manrope"
         >
           There are a few different ways you can give to our church.
         </Text>
-        <Text fontSize={['0.7rem', 'md']}>
+        <Text fontSize={['14', '20']} fontFamily="Manrope">
           <i>
             *When giving, please always use your legal name and provide the same
             email address consistently.
           </i>
         </Text>
       </Box>
-      <Stack direction={{ base: 'column', md: 'row' }} spacing={[1, 4]}>
+      <Stack direction={{ base: 'column', md: 'row' }} spacing={[2, 4]}>
         <GivingCard
           text="FPS"
-          imageLink={process.env.PUBLIC_URL + '/images/giving/FPS.png'}
+          imageLink={process.env.PUBLIC_URL + '/images/givingTuesday/fps.png'}
         />
         <GivingCard
           text="Online Giving"
-          imageLink={process.env.PUBLIC_URL + '/images/giving/Online.png'}
+          imageLink={
+            process.env.PUBLIC_URL + '/images/givingTuesday/online.png'
+          }
         />
         <GivingCard
           text="Bank Transfer"
-          imageLink={process.env.PUBLIC_URL + '/images/giving/Transfer.png'}
+          imageLink={
+            process.env.PUBLIC_URL + '/images/givingTuesday/transfer.png'
+          }
         />
       </Stack>
-      <Box fontSize={['0.7rem', 'md']}>
+
+      <Box fontSize={['14', '20']} fontFamily="Manrope">
         *If you would like to give via cash, please contact your LIFE Group
         leader to help transfer the giving for you
       </Box>
-      <Box fontSize={['0.7rem', 'md']}>
+      <Box fontSize={['14', '20']} fontFamily="Manrope">
         <i>
           Personal information is kept confidential, used only for tax receipt
           purposes, and is only accessible by the Stewardship Team. If you have
           any questions, please do not hesitate to contact us:{' '}
         </i>
         <b>
-          <a href="mailto:stewardship@hongkong.hmcc.net">
-            <i>stewardship@hongkong.hmcc.net</i>
+          <a href="mailto: hk@hmccglobal.org">
+            <i>hk@hmccglobal.org</i>
           </a>
         </b>
       </Box>

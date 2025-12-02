@@ -3,18 +3,18 @@ import { Box, Stack, Text } from '@chakra-ui/react';
 const GivingTuesdayPadlet = () => {
   return (
     <Stack direction="column" spacing={5}>
-      <Box pt={[3, 3]} pb={[1]} pl={[3, 38]} pr={[3, 38]} textAlign="center">
+      <Box pt={[3, 3]} pb={[1]} textAlign="left">
         <Text
           color="#00328D"
           fontWeight="900"
-          fontSize={['1.4rem', '1.875rem']}
-          fontFamily="DMSerifDisplay_Italic"
+          fontSize={['26', '40']}
+          fontFamily="DMserifText"
         >
-          Share a Prayer or Testimony
+          Share a Prayer
         </Text>
 
         <>
-          <Text mt={3} fontSize={['0.7rem', 'md']}>
+          <Text mt={3} fontSize={['14', '20']} fontFamily="manrope">
             Join us as we commit pray for our giving this tuesday
           </Text>
         </>

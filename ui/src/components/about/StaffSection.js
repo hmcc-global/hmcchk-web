@@ -20,7 +20,7 @@ const StaffSection = (props) => {
         <Heading
           as="h2"
           fontSize={['4xl', '6xl']}
-          fontFamily="DMSerifDisplay"
+          fontFamily="DMserifText"
           fontWeight={700}
           lineHeight={1}
           textAlign="center"

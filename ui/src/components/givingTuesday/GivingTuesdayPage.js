@@ -4,7 +4,7 @@ import { DateTime } from 'luxon';
 import CountdownTimer from './CountdownTimer';
 import GivingUpdates from './GivingUpdates';
 import HowToGive from './HowToGive';
-// import LastYearGivingTuesday from './LastYearGivingTuesday';
+import LastYearGivingTuesday from './LastYearGivingTuesday';
 import WaysToGive from './WaysToGive';
 import WhatIsGivingTuesday from './WhatIsGivingTuesday';
 import { customAxios as axios } from '../helpers/customAxios';
@@ -45,7 +45,8 @@ const GivingTuesdayPage = (props) => {
   const [remainingTimeString, setRemainingTimeString] = useState('24:00:00');
   const [eventStatus, setEventStatus] = useState('before');
   const [givingData, setGivingData] = useState(defaultGivingData);
-  const endDate = DateTime.fromISO('2025-12-03T00:00');
+  // const endDate = DateTime.fromISO('2025-12-03T00:00');
+  const endDate = DateTime.fromISO('2025-10-30T00:00');
 
   const calculateTimeLeft = () => {
     return endDate.diffNow(['hours', 'seconds']);
@@ -107,8 +108,24 @@ const GivingTuesdayPage = (props) => {
   }, []);
 
   return (
-    <Box background="#DDE9FF">
-      <Container maxW="container.lg">
+    <Box bgColor="#F6FAFF">
+      <Box position="relative">
+        <Image
+          w={['100%']}
+          alignItems="center"
+          src={process.env.PUBLIC_URL + '/images/givingTuesday/GT2025.png'}
+          alt="Giving Tuesday"
+        />
+        <Box
+          position="absolute"
+          bottom="0"
+          left="0"
+          right="0"
+          h="200px"
+          background="linear-gradient(to bottom, transparent 0%, rgba(221, 233, 255, 0.3) 40%, rgba(221, 233, 255, 0.7) 70%, #DDE9FF 100%)"
+        />
+      </Box>
+      <Container maxW={['100%', '80%']}>
         <Stack spacing={5} p={[3, 5]} pb="5">
           {eventStatus === 'during' && (
             <CountdownTimer
@@ -116,20 +133,9 @@ const GivingTuesdayPage = (props) => {
               remainingTime={remainingTimeString}
             />
           )}
-          <Center>
-            <Image
-              borderRadius={20}
-              borderWidth={1}
-              borderColor="white"
-              w={['100%', '80%']}
-              alignItems="center"
-              h="auto"
-              src={process.env.PUBLIC_URL + '/images/givingTuesday/GT2025.png'}
-              alt="Giving Tuesday"
-            />
-          </Center>
+          <Center></Center>
           <WhatIsGivingTuesday accentColor={accentColor} />
-          {/* {eventStatus === 'before' && <LastYearGivingTuesday />} */}
+          {eventStatus === 'before' && <LastYearGivingTuesday />}
           <GivingUpdates
             accentColor={accentColor}
             eventStatus={eventStatus}
@@ -142,14 +148,15 @@ const GivingTuesdayPage = (props) => {
               <WaysToGive accentColor={accentColor} />
             </>
           )}
-          {/* {eventStatus === 'during' && <LastYearGivingTuesday />} */}
+          {eventStatus === 'during' && <LastYearGivingTuesday />}
           <GivingTuesdayPadlet />
           {eventStatus === 'after' && (
             <Text
               color={accentColor}
               fontWeight="900"
-              fontSize={['1.4rem', '1.875rem']}
-              textAlign="center"
+              fontSize={['26', '40']}
+              fontFamily="DMserifText"
+              textAlign="left"
               py="2"
             >
               Thank you for participating in Giving Tuesday 2025!

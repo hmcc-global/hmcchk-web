@@ -4,42 +4,26 @@ const WhatIsGivingTuesday = (props) => {
   const { accentColor } = props;
 
   return (
-    <Box
-      borderWidth={1}
-      borderRadius="3xl"
-      borderColor="white"
-      background="white"
-      pt={[3, 5]}
-      pb={[5, 8]}
-      pl={[3, 20]}
-      pr={[3, 20]}
-      shadow="md"
-    >
-      <Stack spacing={5} direction="column" textAlign="center">
-        <Center>
-          <Stack direction={['column', 'row']} spacing={[2, 5]}>
-            <Center>
-              <Image
-                src={
-                  process.env.PUBLIC_URL + '/images/givingTuesday/gt-logo.png'
-                }
-                h="1.875rem"
-                w="auto"
-                mt="0.4rem"
-              />
-            </Center>
-            <Text
-              color={accentColor}
-              fontWeight="900"
-              fontSize={['1.4rem', '1.875rem']}
-              fontFamily="DMSerifDisplay_Italic"
-            >
-              What is Giving Tuesday?
-            </Text>
-          </Stack>
-        </Center>
+    <Box borderRadius="3xl" pt={[3, 5]} pb={[5, 8]}>
+      <Stack spacing={5} direction="column" textAlign="left">
+        <Stack direction={['row', 'row']} spacing={[2, 5]}>
+          <Image
+            src={process.env.PUBLIC_URL + '/images/givingTuesday/gt-logo.png'}
+            h={['20px', '40px']}
+            w={['20px', '40px']}
+            mt="0.6rem"
+          />
+          <Text
+            color={accentColor}
+            fontWeight="900"
+            fontSize={['26', '40']}
+            fontFamily="DMserifText"
+          >
+            What is Giving Tuesday?
+          </Text>
+        </Stack>
 
-        <Text px={[2, 0]} fontSize={['0.7rem', 'md']} mt={5}>
+        <Text px={[2, 0]} fontSize={['14', '20']} mt={5} fontFamily="manrope">
           <b>Giving Tuesday</b>{' '}
           <Link href="https://www.givingtuesday.org">
             (www.givingtuesday.org)
@@ -49,7 +33,7 @@ const WhatIsGivingTuesday = (props) => {
           as a way to grow a heart for generosity as people are purchasing
           materials during Black Friday and Cyber Monday.
         </Text>
-        <Text px={[2, 0]} fontSize={['0.7rem', 'md']} mt={3} fontWeight="700">
+        <Text px={[2, 0]} fontSize={['14', '20']} mt={3} fontWeight="700">
           As a church, we want to continue to grow in a heart to give to others.
         </Text>
       </Stack>

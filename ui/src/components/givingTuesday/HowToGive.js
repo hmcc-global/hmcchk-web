@@ -9,22 +9,14 @@ import {
 
 const HowToGive = (props) => {
   return (
-    <Stack
-      direction="column"
-      spacing={0}
-      borderWidth={1}
-      borderRadius="3xl"
-      borderColor="white"
-      background="white"
-      shadow="md"
-    >
-      <Box textAlign="center">
+    <Stack direction="column" spacing={0}>
+      <Box textAlign="left">
         <Text
-          color="#F9916B"
+          color="#00328D"
           fontWeight="900"
-          fontSize={['1.3rem', '1.75rem']}
+          fontSize={['26', '40']}
           pt={7}
-          fontFamily="DMSerifDisplay_Italic"
+          fontFamily="DMserifText"
         >
           How to Give
         </Text>
@@ -36,6 +28,9 @@ const HowToGive = (props) => {
         pb={[3, 7]}
         spacing={[5, 10]}
         fontSize={{ base: '0.7rem', sm: '0.9rem', md: 'md' }}
+        borderRadius="3xl"
+        borderColor="white"
+        background="white"
       >
         <Box alignSelf="center" w={{ base: '100%', md: '45%' }}>
           <Text
@@ -45,8 +40,10 @@ const HowToGive = (props) => {
             mr={[3, 0]}
             pl={[5, 5]}
             pr={[3, '8vw']}
-            borderColor="#F9916B"
+            borderColor="#C14C44"
             borderWidth={3}
+            fontSize={['14', '20']}
+            fontFamily="Manrope"
           >
             <b>Category Codes:</b>
             <UnorderedList>
@@ -57,7 +54,7 @@ const HowToGive = (props) => {
           </Text>
         </Box>
         <Stack direction="column" flex={['1', '2']} spacing={3} p={2} pt={0}>
-          <Text>
+          <Text fontSize={['14', '20']} fontFamily="Manrope">
             <b>
               When giving, please <u>always</u> leave a note in the transfer
               remark that states:
@@ -65,12 +62,12 @@ const HowToGive = (props) => {
             <br />
             GT Local Amount1, Global Amount2, Saturate Amount 3
           </Text>
-          <Text>
+          <Text fontSize={['14', '20']} fontFamily="Manrope">
             <b>Example Remark Note:</b>
             <br />
             GT Local 1000, Global 500, Saturate 300
           </Text>
-          <Text>
+          <Text fontSize={['14', '20']} fontFamily="Manrope">
             Note: Please email{' '}
             <Link href="mailto:hk@hmccglobal.org">
               <u>

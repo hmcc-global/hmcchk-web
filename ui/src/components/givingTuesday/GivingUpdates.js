@@ -5,11 +5,6 @@ const CategoryCard = (props) => {
   const { iconLink, text, desc, givingValue, eventStatus } = props;
   return (
     <Stack
-      borderWidth={1}
-      borderRadius="2xl"
-      borderColor="white"
-      background="white"
-      shadow="md"
       flex="1"
       display="flex"
       justifyContent="space-between"
@@ -29,12 +24,12 @@ const CategoryCard = (props) => {
             spacing={0}
             flex={[4, 1]}
             fontWeight="700"
-            fontSize={['1.2rem', '1.35rem']}
+            fontSize={['1.2rem', '35']}
             textAlign="center"
-            color="#74A0F1"
+            color="#183B5D"
             verticalAlign="middle"
             justifyContent="center"
-            fontFamily="DMSerifDisplay_Italic"
+            fontFamily="DMserifText"
           >
             <Center>{text[0]}</Center>
             <Center>{text[1]}</Center>
@@ -46,11 +41,12 @@ const CategoryCard = (props) => {
         <Stack
           spacing={0}
           flex={[4, 1]}
-          fontSize={['0.7rem', '1rem']}
+          fontSize={['14', '20']}
           textAlign="center"
           color="#000000"
           verticalAlign="middle"
           justifyContent="center"
+          fontFamily="Manrope"
         >
           <Center>{desc[0]}</Center>
           <Center>{desc[1]}</Center>
@@ -58,14 +54,19 @@ const CategoryCard = (props) => {
       </Stack>
       {eventStatus === 'after' && (
         <Center
-          background="#F6B39E"
-          borderColor="#F6B39E"
+          background="#DFE7FF"
+          borderColor="#DFE7FF"
           borderWidth={1}
           borderRadius="xl"
           p={[2, 3]}
         >
-          <Text fontWeight="700" fontSize={['1.1rem', '1.25rem']} color="white">
-            HKD {givingValue}
+          <Text
+            fontWeight="700"
+            fontSize={['1.1rem', '1.25rem']}
+            fontFamily="DMSerifText"
+            color="#183B5D"
+          >
+            {givingValue}
           </Text>
         </Center>
       )}
@@ -79,9 +80,9 @@ const GivingUpdates = (props) => {
   const renderSwitch = () => {
     switch (eventStatus) {
       case 'after':
-        return 'GIVING TUESDAY 2025 SUMMARY';
+        return 'Giving Tuesday 2025 summary';
       case 'during':
-        return 'GIVING LIVE UPDATES';
+        return 'Giving Live Updates';
       default:
         return 'Giving Categories for Giving Tuesday 2025';
     }
@@ -118,33 +119,36 @@ const GivingUpdates = (props) => {
 
   return (
     <Stack direction="column" spacing={5}>
-      <Box pt={[3, 3]} pb={[1]} pl={[3, 38]} pr={[3, 38]} textAlign="center">
+      <Box pt={[3, 3]} pb={[1]}>
         <Text
           color={accentColor}
           fontWeight="900"
-          fontSize={['1.4rem', '1.875rem']}
-          fontFamily="DMSerifDisplay_Italic"
+          fontSize={['26', '40']}
+          fontFamily="DMserifText"
         >
           {renderSwitch()}
         </Text>
         {eventStatus === 'before' && (
           <>
-            <Text mt={3} fontSize={['0.7rem', 'md']}>
-              Join us as we commit to spending <b>this coming Tuesday</b> to
-              cultivate generous hearts and give towards the following causes or
-              categories:
+            <Text mt={3} fontSize={['14', '20']} fontFamily="Manrope">
+              Join us as we commit to spending{' '}
+              <Text as="b" color="#C14C44">
+                this coming Tuesday
+              </Text>{' '}
+              to cultivate generous hearts and give towards the following causes
+              or categories:
             </Text>
           </>
         )}
         {eventStatus === 'during' && (
           <>
-            <Text mt={3} fontSize={['0.7rem', 'md']}>
-              <b>
+            <Text mt={3} fontSize={['14', '20']} fontFamily="Manrope">
+              <Text as="b" color="red">
                 Join us as we commit to cultivate generous hearts and give
                 toward the following causes or categories:
-              </b>
+              </Text>
             </Text>
-            <Text fontSize={['0.5rem', 'sm']} fontWeight={400}>
+            <Text fontSize={['14', '20']} fontFamily="Manrope" fontWeight={400}>
               Numbers will be updated at 10:00, 14:00, 19:00, 22:00, 00:30
             </Text>
           </>
@@ -168,8 +172,8 @@ const GivingUpdates = (props) => {
             direction={['column', 'row']}
             borderWidth={1}
             borderRadius="2xl"
-            borderColor="#5891FB"
-            background="#5891FB"
+            borderColor="#DFE7FF"
+            background="#DFE7FF"
             color="white"
             shadow="md"
             fontSize={['1rem', '1.75rem']}
@@ -179,32 +183,53 @@ const GivingUpdates = (props) => {
             px={[5, 30]}
             py={5}
           >
-            <Stack direction={['row', 'column']} flex={1}>
+            <Stack direction={['column', 'column']} flex={1}>
               <Text
                 flex={1}
-                textAlign={['left', 'center']}
-                fontSize={['0.75rem', '1.75rem']}
+                textAlign={['center', 'center']}
+                fontSize={['14', '30']}
+                fontFamily="DMSerifText"
+                color="#183B5D"
               >
                 Total Amount Raised:
               </Text>
-              <Text flex={1} textAlign={['right', 'center']}>
-                HKD {numberWithCommas(givingSum)}
+              <Text
+                flex={1}
+                textAlign={['center', 'center']}
+                fontFamily="DMserifText"
+                fontSize={['30', '45']}
+                color="#183B5D"
+              >
+                {numberWithCommas(givingSum)}
               </Text>
             </Stack>
             <Box
               display={{ base: 'none', md: 'flex' }}
               width="1px"
-              background="white"
+              background="#183B5D"
             ></Box>
-            <Stack direction={['row', 'column']} flex={1}>
+            <Box
+              display={{ base: 'flex', md: 'none' }}
+              height="1px"
+              background="#183B5D"
+            ></Box>
+            <Stack direction={['column', 'column']} flex={1}>
               <Text
                 flex={1}
-                textAlign={['left', 'center']}
-                fontSize={['0.75rem', '1.75rem']}
+                textAlign={['center', 'center']}
+                fontSize={['14', '30']}
+                fontFamily="DMSerifText"
+                color="#183B5D"
               >
                 Number of Givers:
               </Text>
-              <Text flex={1} textAlign={['right', 'center']}>
+              <Text
+                flex={1}
+                textAlign={['center', 'center']}
+                fontFamily="DMserifText"
+                fontSize={['30', '45']}
+                color="#183B5D"
+              >
                 {givingData.categories[3].givers === -1
                   ? '-'
                   : givingData.categories[3].givers}
@@ -216,14 +241,25 @@ const GivingUpdates = (props) => {
 
       <Stack direction={['column', 'row']} spacing={[2, 4]}>
         {cardData.map((card, i) => (
-          <CategoryCard
-            key={'event' + i}
-            text={card.text}
-            desc={card.desc}
-            iconLink={card.iconLink}
-            givingValue={card.givingValue}
-            eventStatus={eventStatus}
-          />
+          <>
+            <CategoryCard
+              key={'event' + i}
+              text={card.text}
+              desc={card.desc}
+              iconLink={card.iconLink}
+              givingValue={card.givingValue}
+              eventStatus={eventStatus}
+            />
+            {i < cardData.length - 1 && (
+              <Box
+                display={{ base: 'none', md: 'flex' }}
+                height={{ base: '1px', md: 'auto' }}
+                width={{ base: 'auto', md: '1px' }}
+                background="#183B5D"
+                alignSelf="stretch"
+              />
+            )}
+          </>
         ))}
       </Stack>
     </Stack>
