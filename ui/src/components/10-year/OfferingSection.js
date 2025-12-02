@@ -18,7 +18,7 @@ const OfferingSection = (props) => {
   // const background_image = `${process.env.PUBLIC_URL}/images/10-year/10th.png`;
   const T_image = `${process.env.PUBLIC_URL}/images/10-year/t.png`;
   const ripple_image = `${process.env.PUBLIC_URL}/images/10-year/ripple.png`;
-  const transformat10n_image = `${process.env.PUBLIC_URL}/images/10-year/transformat10n.png`;
+  const transformat10n_image = `${process.env.PUBLIC_URL}/images/10-year/Transformat10n.png`;
   const offering_background = isMobile? `${process.env.PUBLIC_URL}/images/10-year/offeringBackgroundMobile.png` : `${process.env.PUBLIC_URL}/images/10-year/offeringBackground.png`;
 
   return (
