@@ -125,7 +125,7 @@ const GivingCard = (cardinfo) => {
       bgPosition="center"
       bgSize="cover"
       boxShadow="0px 4px 8px rgba(0, 0, 0, 0.15)"
-      h={['125px', '100%']}
+      h={['180px', '200px', '380px']}
     >
       <Flex
         borderRadius="2xl"

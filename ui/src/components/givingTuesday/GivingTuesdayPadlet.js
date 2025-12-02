@@ -15,7 +15,7 @@ const GivingTuesdayPadlet = () => {
 
         <>
           <Text mt={3} fontSize={['14', '20']} fontFamily="manrope">
-            Join us as we commit pray for our giving!
+            Join us as we commit to pray for our giving!
           </Text>
         </>
       </Box>
