@@ -13,7 +13,7 @@ const Testimony = () => {
         left="0"
         right="0"
         h="33vh"
-        bgGradient="linear(180deg, #000214 0%, #0C134A 25%, rgba(16, 24, 97, 0.70) 50%, rgba(0, 13, 146, 0.00) 100%)"
+        bgGradient="linear(180deg, #000214 0%, #0C134A 75%, rgba(16, 24, 97, 0.70) 85%, rgba(0, 13, 146, 0.00) 100%)"
         zIndex={0}
         pointerEvents="none"
       />
