@@ -51,7 +51,7 @@ const InternationalContent = () => {
         position="relative"
         flexDirection={{ base: 'column', md: 'row' }}
         marginBottom="20px"
-        height={{ base: 'auto', md: '280px' }}
+        height={{ base: '100%', md: '280px' }}
       >
         {/* Left section */}
         <Box
