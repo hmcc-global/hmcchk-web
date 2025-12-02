@@ -127,6 +127,18 @@ const GivingTuesdayPage = (props) => {
       </Box>
       <Container maxW={['100%', '80%']}>
         <Stack spacing={5} p={[3, 5]} pb="5">
+          {eventStatus === 'after' && (
+            <Text
+              color={accentColor}
+              fontWeight="900"
+              fontSize={['2.75rem', '5rem']}
+              fontFamily="DMserifText"
+              textAlign="center"
+              py="2"
+            >
+              Thank you for participating in Giving Tuesday 2025!
+            </Text>
+          )}
           {eventStatus === 'during' && (
             <CountdownTimer
               accentColor={accentColor}
@@ -136,11 +148,11 @@ const GivingTuesdayPage = (props) => {
           <Center></Center>
           <WhatIsGivingTuesday accentColor={accentColor} />
 
-          <GivingUpdates
+          {/* <GivingUpdates
             accentColor={accentColor}
             eventStatus={eventStatus}
             givingData={givingData}
-          />
+          /> */}
           {/* <GlobalChurchCategories /> */}
           <Image
             w={['100%']}
@@ -160,18 +172,6 @@ const GivingTuesdayPage = (props) => {
           {eventStatus === 'during' && <LastYearGivingTuesday />}
           {eventStatus === 'before' && <LastYearGivingTuesday />}
           <GivingTuesdayPadlet />
-          {eventStatus === 'after' && (
-            <Text
-              color={accentColor}
-              fontWeight="900"
-              fontSize={['26', '40']}
-              fontFamily="DMserifText"
-              textAlign="left"
-              py="2"
-            >
-              Thank you for participating in Giving Tuesday 2025!
-            </Text>
-          )}
         </Stack>
       </Container>
     </Box>
