@@ -18,7 +18,6 @@ const TenYearContainer = () => {
       backgroundSize="cover"
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
-      py={10}
       align="center"
     >
       <HeroSection />
