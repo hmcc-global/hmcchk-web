@@ -143,7 +143,7 @@ const GivingTuesdayPage = (props) => {
           {/* <GlobalChurchCategories /> */}
           {isDisplayHTG && (
             <>
-              <HowToGive />
+              {/*<HowToGive />*/}
               <WaysToGive accentColor={accentColor} />
             </>
           )}
