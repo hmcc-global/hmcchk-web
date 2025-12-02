@@ -100,7 +100,10 @@ const GivingUpdates = (props) => {
     {
       iconLink: process.env.PUBLIC_URL + '/images/givingTuesday/locally.png',
       text: ['Impact Locally'],
-      desc: ['Shine, Cityserve, 2nd Site', ' HKCNP for Tai Po Fire Relief'],
+      desc: [
+        'Local Needs (CityServe, Tao Po Fire Relief, Shine),',
+        'HMCC 2nd Site',
+      ],
       givingValue:
         givingData.categories[0].amount === -1
           ? '-'

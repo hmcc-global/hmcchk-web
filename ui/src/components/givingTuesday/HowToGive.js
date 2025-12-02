@@ -5,6 +5,7 @@ import {
   Text,
   UnorderedList,
   ListItem,
+  OrderedList,
 } from '@chakra-ui/react';
 
 const HowToGive = (props) => {
@@ -47,8 +48,19 @@ const HowToGive = (props) => {
           >
             <b>Category Codes:</b>
             <UnorderedList>
-              <ListItem>GT Local</ListItem>
-              <ListItem>GT Global</ListItem>
+              <OrderedList>
+                <ListItem>
+                  <b>2ND</b>: For second site
+                </ListItem>
+                <ListItem>
+                  <b>LNE</b>: Local needs (CityServe, Shine, TaiPo)
+                </ListItem>
+              </OrderedList>
+              <OrderedList>
+                <ListItem>
+                  <b>HMG</b>: 10 year commitment
+                </ListItem>
+              </OrderedList>
             </UnorderedList>
           </Text>
         </Box>
@@ -59,18 +71,18 @@ const HowToGive = (props) => {
               remark that states:
             </b>
             <br />
-            GT Local Amount1, Global Amount2
+            GT: 2ND $XXX, LNE $XXX, HMG $XXX
           </Text>
           <Text fontSize={['14', '20']} fontFamily="Manrope">
             <b>Example Remark Note:</b>
             <br />
-            GT Local 1000, Global 500
+            GT: 2ND 1000, LNE 2000, HMG 3000
           </Text>
           <Text fontSize={['14', '20']} fontFamily="Manrope">
             Note: Please email{' '}
-            <Link href="mailto:hk@hmccglobal.org">
+            <Link href="mailto:stewardship@hongkong.hmcc.net">
               <u>
-                <i>hk@hmccglobal.org</i>
+                <i>stewardship@hongkong.hmcc.net</i>
               </u>
             </Link>{' '}
             with the appropriate category and amount allocations if you forgot

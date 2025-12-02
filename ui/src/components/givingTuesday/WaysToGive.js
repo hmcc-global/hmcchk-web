@@ -58,10 +58,10 @@ const RenderSwitch = (param) => {
               style={{
                 textDecoration: 'underline',
               }}
-              href="https://bit.ly/hmcc-giving-cc"
+              href="https://give.tithe.ly/?formId=a24ffd31-6865-11ee-90fc-1260ab546d11"
               color="#000000"
             >
-              https://bit.ly/hmcc-giving-cc
+              HERE
             </Link>{' '}
           </Text>
           <Text>
@@ -272,8 +272,8 @@ const WaysToGive = (props) => {
           any questions, please do not hesitate to contact us:{' '}
         </i>
         <b>
-          <a href="mailto: hk@hmccglobal.org">
-            <i>hk@hmccglobal.org</i>
+          <a href="mailto:stewardship@hongkong.hmcc.net">
+            <i> stewardship@hongkong.hmcc.net</i>
           </a>
         </b>
       </Box>
