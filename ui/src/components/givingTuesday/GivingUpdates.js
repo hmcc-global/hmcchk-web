@@ -52,23 +52,27 @@ const CategoryCard = (props) => {
           <Center>{desc[1]}</Center>
         </Stack>
       </Stack>
-      {eventStatus === 'after' && (
-        <Center
-          background="#DFE7FF"
-          borderColor="#DFE7FF"
-          borderWidth={1}
-          borderRadius="xl"
-          p={[2, 3]}
-        >
-          <Text
-            fontWeight="700"
-            fontSize={['1.1rem', '1.25rem']}
-            fontFamily="DMSerifText"
-            color="#183B5D"
+      {(eventStatus === 'after' || eventStatus === 'during') && (
+        <Box>
+          <Center
+            background="#DFE7FF"
+            borderColor="#DFE7FF"
+            borderWidth={1}
+            borderRadius="xl"
+            w="50%"
+            mx="auto"
+            p={[2, 3]}
           >
-            {givingValue}
-          </Text>
-        </Center>
+            <Text
+              fontWeight="700"
+              fontSize={['30']}
+              fontFamily="DMSerifText"
+              color="#183B5D"
+            >
+              {givingValue}
+            </Text>
+          </Center>
+        </Box>
       )}
     </Stack>
   );
@@ -96,7 +100,7 @@ const GivingUpdates = (props) => {
     {
       iconLink: process.env.PUBLIC_URL + '/images/givingTuesday/locally.png',
       text: ['Impact Locally'],
-      desc: ['Shine, Cityserve, 2nd Site,HKCNP'],
+      desc: ['Shine, Cityserve, 2nd Site,HKCNP Tai Po fire relief'],
       givingValue:
         givingData.categories[0].amount === -1
           ? '-'

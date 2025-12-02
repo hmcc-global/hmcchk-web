@@ -134,7 +134,7 @@ const GivingTuesdayPage = (props) => {
           )}
           <Center></Center>
           <WhatIsGivingTuesday accentColor={accentColor} />
-          
+
           <GivingUpdates
             accentColor={accentColor}
             eventStatus={eventStatus}
@@ -142,11 +142,14 @@ const GivingTuesdayPage = (props) => {
           />
           {/* <GlobalChurchCategories /> */}
           <Image
-          w={['100%']}
-          alignItems="center"
-          src={process.env.PUBLIC_URL + '/images/givingTuesday/local-category.png'}
-          alt="Giving Tuesday"
-        />
+            w={['100%']}
+            alignItems="center"
+            src={
+              process.env.PUBLIC_URL +
+              '/images/givingTuesday/local-category.jpg'
+            }
+            alt="Giving Tuesday"
+          />
           {isDisplayHTG && (
             <>
               {/*<HowToGive />*/}

@@ -10,7 +10,7 @@ const LastYearGivingTuesday = (props) => {
         pt={7}
         fontFamily="DMserifText"
       >
-        Summary of Giving Tuesday last Year
+        Summary of Last Year's Giving Tuesday
       </Text>
 
       <Stack
