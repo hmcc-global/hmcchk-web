@@ -96,7 +96,7 @@ const GivingUpdates = (props) => {
     {
       iconLink: process.env.PUBLIC_URL + '/images/givingTuesday/locally.png',
       text: ['Impact Locally'],
-      desc: ['Shine, Cityserve, 2nd Site,hkcnp'],
+      desc: ['Shine, Cityserve, 2nd Site,HKCNP'],
       givingValue:
         givingData.categories[0].amount === -1
           ? '-'
