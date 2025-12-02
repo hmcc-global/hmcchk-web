@@ -134,7 +134,7 @@ const GivingTuesdayPage = (props) => {
           )}
           <Center></Center>
           <WhatIsGivingTuesday accentColor={accentColor} />
-          {eventStatus === 'before' && <LastYearGivingTuesday />}
+          
           <GivingUpdates
             accentColor={accentColor}
             eventStatus={eventStatus}
@@ -154,6 +154,7 @@ const GivingTuesdayPage = (props) => {
             </>
           )}
           {eventStatus === 'during' && <LastYearGivingTuesday />}
+          {eventStatus === 'before' && <LastYearGivingTuesday />}
           <GivingTuesdayPadlet />
           {eventStatus === 'after' && (
             <Text
