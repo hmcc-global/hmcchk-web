@@ -2,80 +2,168 @@
   "years": [
     {
       "year": 2015,
-      "rows": [
-        { "width": "1fr", "alt": "2015 - 1", "image": "2015-01" },
-        { "width": "1fr", "alt": "2015 - 2", "image": "2015-02" }
-      ]
+      "rows": {
+        "web": [
+          { "width": "1fr", "alt": "2015 - 1", "image": "2015-01" },
+          { "width": "1fr", "alt": "2015 - 2", "image": "2015-02" }
+        ],
+        "mobile": [
+          { "width": "1fr", "alt": "2015 - 1", "image": "2015-01" },
+          { "width": "1fr", "alt": "2015 - 2", "image": "2015-02" },
+          { "width": "1fr", "alt": "2015 - 3", "image": "2015-03" },
+          { "width": "1fr", "alt": "2015 - 4", "image": "2015-04" }
+        ]
+      }
     },
     {
       "year": 2016,
-      "rows": [
-        { "width": "1fr", "alt": "2016 - 1", "image": "2016-01" },
-        { "width": "1fr", "alt": "2016 - 2", "image": "2016-02" }
-      ]
+      "rows": {
+        "web": [
+          { "width": "1fr", "alt": "2016 - 1", "image": "2016-01" },
+          { "width": "1fr", "alt": "2016 - 2", "image": "2016-02" }
+        ],
+        "mobile": [
+          { "width": "1fr", "alt": "2016 - 1", "image": "2016-01" },
+          { "width": "1fr", "alt": "2016 - 2", "image": "2016-02" },
+          { "width": "1fr", "alt": "2016 - 3", "image": "2016-03" },
+          { "width": "1fr", "alt": "2016 - 4", "image": "2016-04" }
+        ]
+      }
     },
     {
       "year": 2017,
-      "rows": [
-        { "width": "1fr", "alt": "2017 - 1", "image": "2017-01" },
-        { "width": "1fr", "alt": "2017 - 2", "image": "2017-02" }
-      ]
+      "rows": {
+        "web": [
+          { "width": "1fr", "alt": "2017 - 1", "image": "2017-01" },
+          { "width": "1fr", "alt": "2017 - 2", "image": "2017-02" }
+        ],
+        "mobile": [
+          { "width": "1fr", "alt": "2017 - 1", "image": "2017-01" },
+          { "width": "1fr", "alt": "2017 - 2", "image": "2017-02" },
+          { "width": "1fr", "alt": "2015 - 3", "image": "2017-03" },
+          { "width": "1fr", "alt": "2015 - 4", "image": "2017-04" }
+        ]
+      }
     },
     {
       "year": 2018,
-      "rows": [
-        { "width": "1fr", "alt": "2018 - 1", "image": "2018-01" },
-        { "width": "1fr", "alt": "2018 - 2", "image": "2018-02" }
-      ]
+      "rows": {
+        "web": [
+          { "width": "1fr", "alt": "2018 - 1", "image": "2018-01" },
+          { "width": "1fr", "alt": "2018 - 2", "image": "2018-02" }
+        ],
+        "mobile": [
+          { "width": "1fr", "alt": "2018 - 1", "image": "2018-01" },
+          { "width": "1fr", "alt": "2018 - 2", "image": "2018-02" },
+          { "width": "1fr", "alt": "2015 - 3", "image": "2018-03" },
+          { "width": "1fr", "alt": "2015 - 4", "image": "2018-04" }
+        ]
+      }
     },
     {
       "year": 2019,
-      "rows": [
-        { "width": "1fr", "alt": "2019 - 1", "image": "2019-01" },
-        { "width": "1fr", "alt": "2019 - 2", "image": "2019-02" }
-      ]
+      "rows": {
+        "web": [
+          { "width": "1fr", "alt": "2019 - 1", "image": "2019-01" },
+          { "width": "1fr", "alt": "2019 - 2", "image": "2019-02" }
+        ],
+        "mobile": [
+          { "width": "1fr", "alt": "2019 - 1", "image": "2019-01" },
+          { "width": "1fr", "alt": "2019 - 2", "image": "2019-02" },
+          { "width": "1fr", "alt": "2015 - 3", "image": "2019-03" },
+          { "width": "1fr", "alt": "2015 - 4", "image": "2019-04" }
+        ]
+      }
     },
     {
       "year": 2020,
-      "rows": [
-        { "width": "1fr", "alt": "2020 - 1", "image": "2020-01" },
-        { "width": "1fr", "alt": "2020 - 2", "image": "2020-02" }
-      ]
+      "rows": {
+        "web": [
+          { "width": "1fr", "alt": "2020 - 1", "image": "2020-01" },
+          { "width": "1fr", "alt": "2020 - 2", "image": "2020-02" }
+        ],
+        "mobile": [
+          { "width": "1fr", "alt": "2020 - 1", "image": "2020-01" },
+          { "width": "1fr", "alt": "2020 - 2", "image": "2020-02" },
+          { "width": "1fr", "alt": "2015 - 3", "image": "2020-03" },
+          { "width": "1fr", "alt": "2015 - 4", "image": "2020-04" }
+        ]
+      }
     },
     {
       "year": 2021,
-      "rows": [
-        { "width": "1fr", "alt": "2021 - 1", "image": "2021-01" },
-        { "width": "1fr", "alt": "2021 - 2", "image": "2021-02" }
-      ]
+      "rows": {
+        "web": [
+          { "width": "1fr", "alt": "2021 - 1", "image": "2021-01" },
+          { "width": "1fr", "alt": "2021 - 2", "image": "2021-02" }
+        ],
+        "mobile": [
+          { "width": "1fr", "alt": "2021 - 1", "image": "2021-01" },
+          { "width": "1fr", "alt": "2021 - 2", "image": "2021-02" },
+          { "width": "1fr", "alt": "2015 - 3", "image": "2021-03" },
+          { "width": "1fr", "alt": "2015 - 4", "image": "2021-04" }
+        ]
+      }
     },
     {
       "year": 2022,
-      "rows": [
-        { "width": "1fr", "alt": "2022 - 1", "image": "2022-01" },
-        { "width": "1fr", "alt": "2022 - 2", "image": "2022-02" }
-      ]
+      "rows": {
+        "web": [
+          { "width": "1fr", "alt": "2022 - 1", "image": "2022-01" },
+          { "width": "1fr", "alt": "2022 - 2", "image": "2022-02" }
+        ],
+        "mobile": [
+          { "width": "1fr", "alt": "2022 - 1", "image": "2022-01" },
+          { "width": "1fr", "alt": "2022 - 2", "image": "2022-02" },
+          { "width": "1fr", "alt": "2015 - 3", "image": "2022-03" },
+          { "width": "1fr", "alt": "2015 - 4", "image": "2022-04" }
+        ]
+      }
     },
     {
       "year": 2023,
-      "rows": [
-        { "width": "1fr", "alt": "2023 - 1", "image": "2023-01" },
-        { "width": "1fr", "alt": "2023 - 2", "image": "2023-02" }
-      ]
+      "rows": {
+        "web": [
+          { "width": "1fr", "alt": "2023 - 1", "image": "2023-01" },
+          { "width": "1fr", "alt": "2023 - 2", "image": "2023-02" }
+        ],
+        "mobile": [
+          { "width": "1fr", "alt": "2023 - 1", "image": "2023-01" },
+          { "width": "1fr", "alt": "2023 - 2", "image": "2023-02" },
+          { "width": "1fr", "alt": "2015 - 3", "image": "2023-03" },
+          { "width": "1fr", "alt": "2015 - 4", "image": "2023-04" }
+        ]
+      }
     },
     {
       "year": 2024,
-      "rows": [
-        { "width": "1fr", "alt": "2024 - 1", "image": "2024-01" },
-        { "width": "1fr", "alt": "2024 - 2", "image": "2024-02" }
-      ]
+      "rows": {
+        "web": [
+          { "width": "1fr", "alt": "2024 - 1", "image": "2024-01" },
+          { "width": "1fr", "alt": "2024 - 2", "image": "2024-02" }
+        ],
+        "mobile": [
+          { "width": "1fr", "alt": "2024 - 1", "image": "2024-01" },
+          { "width": "1fr", "alt": "2024 - 2", "image": "2024-02" },
+          { "width": "1fr", "alt": "2015 - 3", "image": "2024-03" },
+          { "width": "1fr", "alt": "2015 - 4", "image": "2024-04" }
+        ]
+      }
     },
     {
       "year": 2025,
-      "rows": [
-        { "width": "1fr", "alt": "2025 - 1", "image": "2025-01" },
-        { "width": "1fr", "alt": "2025 - 2", "image": "2025-02" }
-      ]
+      "rows": {
+        "web": [
+          { "width": "1fr", "alt": "2025 - 1", "image": "2025-01" },
+          { "width": "1fr", "alt": "2025 - 2", "image": "2025-02" }
+        ],
+        "mobile": [
+          { "width": "1fr", "alt": "2025 - 1", "image": "2025-01" },
+          { "width": "1fr", "alt": "2025 - 2", "image": "2025-02" },
+          { "width": "1fr", "alt": "2015 - 3", "image": "2025-03" },
+          { "width": "1fr", "alt": "2015 - 4", "image": "2025-04" }
+        ]
+      }
     }
   ]
 }
