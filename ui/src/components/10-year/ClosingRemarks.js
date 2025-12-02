@@ -1,14 +1,4 @@
-import {
-  Center,
-  Text,
-  Container,
-  Fade,
-  Box,
-  Image,
-  VStack,
-  Flex,
-  Stack,
-} from '@chakra-ui/react';
+import { Text, Box, Image, VStack, Flex } from '@chakra-ui/react';
 import { tenYearTheme, getTypography } from './theme';
 
 const ClosingRemarks = () => {
@@ -16,8 +6,12 @@ const ClosingRemarks = () => {
     <Box>
       <VStack gap="4rem" mt="3rem" mb="5rem" mx="2rem" py="4rem">
         {/* Desktop and Tablet version */}
-        <Flex gap="10" align="center" display={['none', 'none', 'flex']}>
-          <Text textAlign={'Center'} {...getTypography('h1')}>
+        <Flex
+          gap="10"
+          align="center"
+          display={{ base: 'none', md: 'none', lg: 'flex' }}
+        >
+          <Text textAlign={'Center'} {...getTypography('h1')} display="inline">
             Celebrating a Decade of
           </Text>
           <Flex align="center" gap="2" position="relative">
@@ -46,7 +40,7 @@ const ClosingRemarks = () => {
         {/* Mobile version */}
         <Text
           textAlign={'Center'}
-          display={['block', 'none', 'none']}
+          display={{ base: 'block', md: 'block', lg: 'none' }}
           {...getTypography('h1')}
           lineHeight="161%"
         >
@@ -67,7 +61,7 @@ const ClosingRemarks = () => {
               transform="translateY(-2px)"
               position="absolute"
               zIndex="0"
-              left="25px"
+              left={{ base: '1rem', sm: '2.7rem', md: '3rem', lg: '25px' }}
             />
             <Text
               textAlign={'Center'}
@@ -84,7 +78,7 @@ const ClosingRemarks = () => {
         {/* Desktop and Tablet version */}
         <Text
           textAlign={'Center'}
-          display={['none', 'block', 'block']}
+          display={{ base: 'none', md: 'none', lg: 'block' }}
           {...getTypography('h1')}
         >
           Thank you for being a part of HMCC Hong Kong in
@@ -117,7 +111,7 @@ const ClosingRemarks = () => {
         {/* Mobile version */}
         <Text
           textAlign={'Center'}
-          display={['block', 'none', 'none']}
+          display={{ base: 'block', md: 'block', lg: 'none' }}
           {...getTypography('h2')}
           lineHeight="161%"
         >
