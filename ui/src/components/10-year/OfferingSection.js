@@ -40,13 +40,13 @@ const OfferingSection = (props) => {
           position="sticky"
           top="0"
           left="0"
-          width="100vw"
+          width="100%"
           height="100%"
           backgroundImage={`url(${offering_background})`}
           backgroundSize="cover"
           backgroundPosition="center"
           backgroundRepeat="repeat"
-          backgroundAttachment={"fixed"}
+          backgroundAttachment={"absolute"}
           zIndex="0"
         />
       </Box>
