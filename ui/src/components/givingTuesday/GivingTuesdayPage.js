@@ -46,8 +46,7 @@ const GivingTuesdayPage = (props) => {
   const [remainingTimeString, setRemainingTimeString] = useState('24:00:00');
   const [eventStatus, setEventStatus] = useState('before');
   const [givingData, setGivingData] = useState(defaultGivingData);
-  //const endDate = DateTime.fromISO('2025-12-03T00:00');
-  const endDate = DateTime.fromISO('2025-12-02T00:00');
+  const endDate = DateTime.fromISO('2025-12-03T00:00');
 
   const calculateTimeLeft = () => {
     return endDate.diffNow(['hours', 'seconds']);
