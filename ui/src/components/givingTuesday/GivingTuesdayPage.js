@@ -4,11 +4,11 @@ import { DateTime } from 'luxon';
 import CountdownTimer from './CountdownTimer';
 import GivingUpdates from './GivingUpdates';
 import HowToGive from './HowToGive';
-import LastYearGivingTuesday from './LastYearGivingTuesday';
+// import LastYearGivingTuesday from './LastYearGivingTuesday';
 import WaysToGive from './WaysToGive';
 import WhatIsGivingTuesday from './WhatIsGivingTuesday';
 import { customAxios as axios } from '../helpers/customAxios';
-import GlobalChurchCategories from './GlobalChurchCategories';
+// import GlobalChurchCategories from './GlobalChurchCategories';
 
 const defaultGivingData = {
   categories: [
@@ -38,7 +38,7 @@ const GivingTuesdayPage = (props) => {
   const [remainingTimeString, setRemainingTimeString] = useState('24:00:00');
   const [eventStatus, setEventStatus] = useState('before');
   const [givingData, setGivingData] = useState(defaultGivingData);
-  const endDate = DateTime.fromISO('2024-11-29T08:00');
+  const endDate = DateTime.fromISO('2024-12-04T00:00');
 
   const calculateTimeLeft = () => {
     return endDate.diffNow(['hours', 'seconds']);
@@ -110,7 +110,7 @@ const GivingTuesdayPage = (props) => {
             eventStatus={eventStatus}
             givingData={givingData}
           />
-          <GlobalChurchCategories />
+          {/* <GlobalChurchCategories /> */}
           {isDisplayHTG && (
             <>
               <HowToGive />

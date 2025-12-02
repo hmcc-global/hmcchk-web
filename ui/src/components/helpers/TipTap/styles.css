@@ -1,0 +1,149 @@
+/* Basic editor styles */
+.tiptap > * + * {
+  margin-top: 0.75em;
+}
+.tiptap ul,
+.tiptap ol {
+  padding: 0 1rem;
+}
+.tiptap h1 {
+  font-family: Inter;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.tiptap h2 {
+  font-family: Inter;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.tiptap h3 {
+  font-family: Inter;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 24px;
+}
+.tiptap h4,
+.tiptap h5,
+.tiptap h6 {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+.tiptap a {
+  color: #007bff;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.tiptap code {
+  background-color: rgba(97, 97, 97, 0.1);
+  color: #616161;
+}
+.tiptap pre {
+  background: #0d0d0d;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-family: "JetBrainsMono", monospace;
+  padding: 0.75rem 1rem;
+}
+.tiptap pre code {
+  background: none;
+  color: inherit;
+  font-size: 0.8rem;
+  padding: 0;
+}
+.tiptap mark {
+  background-color: #faf594;
+}
+.tiptap img {
+  height: auto;
+  max-width: 100%;
+}
+.tiptap hr {
+  margin: 1rem 0;
+}
+.tiptap blockquote {
+  border-left: 2px solid rgba(13, 13, 13, 0.1);
+  padding-left: 1rem;
+}
+.tiptap hr {
+  border: none;
+  border-top: 2px solid rgba(13, 13, 13, 0.1);
+  margin: 2rem 0;
+}
+.tiptap ul[data-type=taskList] {
+  list-style: none;
+  padding: 0;
+}
+.tiptap ul[data-type=taskList] li {
+  align-items: center;
+  display: flex;
+}
+.tiptap ul[data-type=taskList] li > label {
+  flex: 0 0 auto;
+  margin-right: 0.5rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.tiptap ul[data-type=taskList] li > div {
+  flex: 1 1 auto;
+}
+
+.editor {
+  background-color: #fff;
+  border: 3px solid #0d0d0d;
+  border-radius: 0.75rem;
+  color: #0d0d0d;
+  display: flex;
+  flex-direction: column;
+  max-height: 26rem;
+}
+.editor__header {
+  align-items: center;
+  background: #0d0d0d;
+  border-bottom: 3px solid #0d0d0d;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  padding: 0.25rem;
+}
+.editor__content {
+  flex: 1 1 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 1.25rem 1rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.user-notes {
+  border: 1px solid #0d0d0d;
+  border-radius: 0.5rem;
+  position: relative;
+}
+.user-notes .content {
+  padding: 0.5rem;
+}
+.user-notes .content:empty::before {
+  content: "Your notes";
+  color: #0d0d0d;
+  opacity: 0.5;
+  text-align: center;
+}
+
+.fill-in-blank {
+  width: -moz-min-content !important;
+  width: min-content !important;
+  white-space: nowrap;
+}
+
+.user-notes-full-width {
+  width: var(--tiptap-width);
+}/*# sourceMappingURL=styles.css.map */
