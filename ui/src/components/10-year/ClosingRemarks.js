@@ -4,7 +4,13 @@ import { tenYearTheme, getTypography } from './theme';
 const ClosingRemarks = () => {
   return (
     <Box w="100%">
-      <VStack gap="4rem" mt="4rem" mb="10rem" mx="2rem" py="4rem">
+      <VStack
+        gap="4rem"
+        mt="4rem"
+        mb={{ base: '3rem', md: '10rem' }}
+        mx="2rem"
+        py="4rem"
+      >
         {/* Desktop and Tablet version */}
         <Flex
           gap="10"
@@ -112,7 +118,7 @@ const ClosingRemarks = () => {
         <Text
           textAlign={'Center'}
           display={{ base: 'block', md: 'block', lg: 'none' }}
-          {...getTypography('h2')}
+          {...getTypography('h1')}
           lineHeight="161%"
         >
           Thank you for being a<br />
