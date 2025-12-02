@@ -49,7 +49,6 @@ const HowToGive = (props) => {
             <UnorderedList>
               <ListItem>GT Local</ListItem>
               <ListItem>GT Global</ListItem>
-              <ListItem>GT Saturate</ListItem>
             </UnorderedList>
           </Text>
         </Box>
@@ -60,12 +59,12 @@ const HowToGive = (props) => {
               remark that states:
             </b>
             <br />
-            GT Local Amount1, Global Amount2, Saturate Amount 3
+            GT Local Amount1, Global Amount2
           </Text>
           <Text fontSize={['14', '20']} fontFamily="Manrope">
             <b>Example Remark Note:</b>
             <br />
-            GT Local 1000, Global 500, Saturate 300
+            GT Local 1000, Global 500
           </Text>
           <Text fontSize={['14', '20']} fontFamily="Manrope">
             Note: Please email{' '}
