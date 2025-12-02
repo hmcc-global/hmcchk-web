@@ -45,8 +45,7 @@ const GivingTuesdayPage = (props) => {
   const [remainingTimeString, setRemainingTimeString] = useState('24:00:00');
   const [eventStatus, setEventStatus] = useState('before');
   const [givingData, setGivingData] = useState(defaultGivingData);
-  // const endDate = DateTime.fromISO('2025-12-03T00:00');
-  const endDate = DateTime.fromISO('2025-10-30T00:00');
+  const endDate = DateTime.fromISO('2025-12-03T00:00');
 
   const calculateTimeLeft = () => {
     return endDate.diffNow(['hours', 'seconds']);
@@ -109,7 +108,7 @@ const GivingTuesdayPage = (props) => {
 
   return (
     <Box bgColor="#F6FAFF">
-      <Box position="relative">
+      <Box position="relative" mt={['-10px', '-40px']}>
         <Image
           w={['100%']}
           alignItems="center"
