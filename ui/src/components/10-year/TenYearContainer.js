@@ -19,6 +19,7 @@ const TenYearContainer = () => {
         backgroundSize="cover"
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
+        background
         align="center"
         height="100%"
       >
