@@ -1,6 +1,7 @@
 import { Flex, Box } from '@chakra-ui/react';
 import TenYearVideo from './TenYearVideo';
 import OfferingSection from './OfferingSection';
+import ClosingRemarks from './ClosingRemarks';
 
 import { tenYearTheme } from './theme';
 
@@ -31,6 +32,8 @@ Your generosity will enable us to respond to God’s call. We pray to see more l
 
 Join us to see God transforming lives and transforming the world through HMCC-HK in the coming years! "
       />
+
+      <ClosingRemarks />
     </Flex>
   );
 };
