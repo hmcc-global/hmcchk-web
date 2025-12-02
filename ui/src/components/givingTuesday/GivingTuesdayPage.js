@@ -141,6 +141,12 @@ const GivingTuesdayPage = (props) => {
             givingData={givingData}
           />
           {/* <GlobalChurchCategories /> */}
+          <Image
+          w={['100%']}
+          alignItems="center"
+          src={process.env.PUBLIC_URL + '/images/givingTuesday/local-category.png'}
+          alt="Giving Tuesday"
+        />
           {isDisplayHTG && (
             <>
               {/*<HowToGive />*/}
