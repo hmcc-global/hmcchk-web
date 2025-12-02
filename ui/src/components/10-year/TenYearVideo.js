@@ -73,8 +73,25 @@ const TenYearVideo = () => {
   const PILL_PY = '0.75rem'; // 12px
   const PLAY_ICON_SIZE = '4.375rem'; // 70px
 
+  const backgroundImages = {
+    base: `${process.env.PUBLIC_URL}/images/10-year/stories-bg-mobile.png`,
+    md: `${process.env.PUBLIC_URL}/images/10-year/stories-bg-desktop.png`,
+  };
+
   return (
-    <VStack spacing={12} w="100%" pb={8}>
+    <VStack
+      spacing={12}
+      w="100%"
+      pb={8}
+      px={[4, 8]}
+      backgroundImage={{
+        base: `url(${backgroundImages.base})`,
+        md: `url(${backgroundImages.md})`,
+      }}
+      backgroundPosition="center"
+      backgroundSize="cover"
+      backgroundRepeat="no-repeat"
+    >
       <VStack spacing={2}>
         <Heading
           display="flex"
