@@ -107,15 +107,6 @@ const GivingUpdates = (props) => {
 
   const cardData = [
     {
-      iconLink: process.env.PUBLIC_URL + '/images/givingTuesday/locally.png',
-      text: ['Impact Locally'],
-      desc: ['Local Needs (CityServe, Tai Po Fire Relief, Shine)'],
-      givingValue:
-        getCategoryByKey('local').amount === -1
-          ? '-'
-          : numberWithCommas(getCategoryByKey('local').amount),
-    },
-    {
       iconLink:
         process.env.PUBLIC_URL + '/images/givingTuesday/second-site.png',
       text: ['Impact Locally'],
@@ -124,6 +115,15 @@ const GivingUpdates = (props) => {
         getCategoryByKey('secondsite').amount === -1
           ? '-'
           : numberWithCommas(getCategoryByKey('secondsite').amount),
+    },
+    {
+      iconLink: process.env.PUBLIC_URL + '/images/givingTuesday/locally.png',
+      text: ['Impact Locally'],
+      desc: ['Local Needs (CityServe, Tai Po Fire Relief, Shine)'],
+      givingValue:
+        getCategoryByKey('local').amount === -1
+          ? '-'
+          : numberWithCommas(getCategoryByKey('local').amount),
     },
     {
       iconLink: process.env.PUBLIC_URL + '/images/givingTuesday/globally.png',
