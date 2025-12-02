@@ -44,42 +44,7 @@ const InternationalContent = () => {
   };
 
   return (
-    <Box
-      width="auto"
-      height={{ base: 'auto', md: '370px' }}
-      borderRadius="20px"
-      padding="20px"
-      paddingBottom={'0px'}
-      bgColor="rgba(0, 5, 68, 0.01)"
-      display="flex"
-      flexDirection={{ base: 'row', md: 'column' }}
-      position="relative"
-      overflow="visible"
-      alignContent={'center'}
-      margin={'0 auto'}
-      backdropFilter="blur(12px)"
-      sx={{
-        WebkitBackdropFilter: 'blur(12px)',
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          borderRadius: '20px',
-          padding: '1px',
-          background: 'linear-gradient(270deg, #0029BD 0%, #95CFFF 100%)',
-          WebkitMask:
-            'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-          WebkitMaskComposite: 'xor',
-          mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-          maskComposite: 'exclude',
-          zIndex: 0,
-          pointerEvents: 'none',
-        },
-      }}
-    >
+    
       <Box
         display="flex"
         flex="1"
@@ -96,7 +61,7 @@ const InternationalContent = () => {
           flexDirection="column"
           justifyContent="space-between"
           alignItems="center"
-          minHeight={{ base: 'auto', md: '290px' }}
+          minHeight={{ base: '100%', md: '290px' }}
           paddingBottom={{ base: 6, md: 0 }}
         >
           <Text {...tenYearTheme.typography.subheading} textAlign="center">
@@ -205,7 +170,6 @@ const InternationalContent = () => {
           </Button>
         </Box>
       </Box>
-    </Box>
   );
 };
 export default InternationalContent;
