@@ -287,8 +287,11 @@ const AdminSermonNotesContainer = (props) => {
             Past Sermons
           </Button>
         </Box>
-        {/* TO-DO: Add a refresh button to refresh just the sermons list */}
-        <Button size="lg" onClick={() => window.location.reload()}>
+        <Button
+          size="lg"
+          onClick={() => window.location.reload()}
+          display={{ base: 'none', sm: 'block', md: 'block' }}
+        >
           <FiRefreshCw />
         </Button>
       </Stack>
@@ -343,7 +346,13 @@ const AdminSermonNotesContainer = (props) => {
                       <Stack
                         pt={[3, 0]}
                         spacing={1}
-                        direction={['column', 'row']}
+                        direction={[
+                          'column',
+                          'column',
+                          'column',
+                          'column',
+                          'row',
+                        ]}
                         alignItems="center"
                       >
                         <Button
@@ -356,7 +365,7 @@ const AdminSermonNotesContainer = (props) => {
                           }
                           onClick={onPublish}
                           disabled={isPublishDisabled()}
-                          width={['100%', '100%', '100%', 'auto']}
+                          width={['100%', '100%', '100%', '100%', 'auto']}
                         >
                           {sermonNoteItem.isPublished ? 'Unpublish' : 'Publish'}
                         </Button>
@@ -365,7 +374,7 @@ const AdminSermonNotesContainer = (props) => {
                           value={sermonNoteItem.sermonId}
                           onClick={onEdit}
                           isLoading={isLoading}
-                          width={['100%', '100%', '100%', 'auto']}
+                          width={['100%', '100%', '100%', '100%', 'auto']}
                           disabled={isPublishDisabled()}
                         >
                           Edit
@@ -376,7 +385,7 @@ const AdminSermonNotesContainer = (props) => {
                           onClick={(e) =>
                             copyPublicLinkHandler(e, sermonNoteItem)
                           }
-                          width={['100%', '100%', '100%', 'auto']}
+                          width={['100%', '100%', '100%', '100%', 'auto']}
                           disabled={isPublishDisabled()}
                         >
                           Public Link
@@ -387,7 +396,7 @@ const AdminSermonNotesContainer = (props) => {
                           onClick={onDuplicate}
                           isLoading={isLoading}
                           name="duplicate"
-                          width={['100%', '100%', '100%', 'auto']}
+                          width={['100%', '100%', '100%', '100%', 'auto']}
                         >
                           Duplicate
                         </Button>
@@ -397,7 +406,7 @@ const AdminSermonNotesContainer = (props) => {
                           onClick={onDelete}
                           disabled={isPublishDisabled()}
                           isLoading={isLoading}
-                          width={['100%', '100%', '100%', 'auto']}
+                          width={['100%', '100%', '100%', '100%', 'auto']}
                         >
                           Delete
                         </Button>

@@ -67,9 +67,7 @@ const SermonNotesEditorModal = (props) => {
     }
   };
 
-  const onSubmit = async (data) => {
-    setSermonNoteData({ ...data });
-  };
+  const onSubmit = async (data) => {};
 
   const formatDate = (date) => {
     const parts = date.split('-');
@@ -533,6 +531,7 @@ const SermonNotesEditorModal = (props) => {
               </FormControl>
               <Stack direction="row" spacing={5}>
                 <Button
+                  fontSize={{ base: 'sm', md: 'md' }}
                   bgColor="#3182CE"
                   color="#FFFFFF"
                   _hover={{ bgColor: '#3D678E' }}
@@ -546,6 +545,7 @@ const SermonNotesEditorModal = (props) => {
                   message="You have unsaved changes. Are you sure you want to leave?"
                 />
                 <Button
+                  fontSize={{ base: 'sm', md: 'md' }}
                   bgColor="#6C7BFF"
                   color="#FFFFFF"
                   _hover={{ bgColor: '#4F5ABE' }}
