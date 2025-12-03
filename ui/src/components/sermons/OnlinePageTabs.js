@@ -182,6 +182,7 @@ const OnlinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
             </Button>
             <Box height={['85vh', '90%']} paddingBottom={15} overflow="auto">
               <SermonNotesContainer
+                key={noteId}
                 sermonNoteId={sermonNoteId}
                 history={history}
                 user={user}
@@ -238,6 +239,7 @@ const OnlinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
             borderColor="#4A6EEB"
           >
             <SermonNotesContainer
+              key={noteId}
               sermonNoteId={sermonNoteId}
               history={history}
               user={user}
