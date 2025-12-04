@@ -9,7 +9,6 @@ import VisionMissionSectionMobile from './VisionMissionSectionMobile';
 import ExperienceBiblicalCommunity from './ExperienceBiblicalCommunity';
 import ChurchThemeSection from './ChurchThemeSection';
 import ChurchThemeSectionMobile from './ChurchThemeSectionMobile';
-import TenYearBanner from './TenYearBanner';
 
 const HomeContainer = (props) => {
   const { user } = props;
@@ -43,7 +42,6 @@ const HomeContainer = (props) => {
   return (
     <Flex direction="column" bgColor="#F6FAFF">
       <HeroSection />
-      <TenYearBanner />
       <EventsSection />
 
       {isMobile ? <VisionMissionSectionMobile /> : <VisionMissionSection />}
