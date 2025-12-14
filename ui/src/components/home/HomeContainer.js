@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import EventsSection from './EventsSection';
 import HeroSection from './HeroSection';
 import PopupContainer from './PopupContainer';
+import PopupXmas2025 from './PopupXmas2025';
 import { customAxios as axios } from '../helpers/customAxios';
 import VisionMissionSection from './VisionMissionSection';
 import VisionMissionSectionMobile from './VisionMissionSectionMobile';
@@ -48,7 +49,8 @@ const HomeContainer = (props) => {
       {/* {isMobile ? <ChurchThemeSectionMobile /> : <ChurchThemeSection /> } */}
       <ExperienceBiblicalCommunity />
 
-      {popup.flag && <PopupContainer props={popup} />}
+      {/* {popup.flag && <PopupContainer props={popup} />} */}
+      {<PopupXmas2025/>}
     </Flex>
   );
 };
