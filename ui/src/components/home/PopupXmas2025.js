@@ -25,7 +25,7 @@ const PopupXmas2025 = () => {
         borderRadius="20"
         alignItems={'center'}
         backgroundImage={
-          process.env.PUBLIC_URL + '/images/home/xmas-2025-bg.svg'
+          process.env.PUBLIC_URL + '/images/home/xmas-2025-bg.jpg'
         }
         backgroundSize="cover"
         backgroundPosition="center"
@@ -55,7 +55,7 @@ const PopupXmas2025 = () => {
             <Image
               width="100%"
               height="100%"
-              src={process.env.PUBLIC_URL + '/images/home/xmas-2025-header.svg'}
+              src={process.env.PUBLIC_URL + '/images/home/xmas-2025-header.png'}
               objectFit="cover"
               pointerEvents="none"
             />
