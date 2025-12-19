@@ -102,7 +102,7 @@ const PopupXmas2025 = () => {
           >
             <ReactMarkdown
               components={ChakraUIRenderer()}
-              children={`When: **December 24, Evening** \ 
+              children={`When: **December 24, 8:00PM** \ 
                 Where: **Transformation Center**`}
               skipHtml
             />
