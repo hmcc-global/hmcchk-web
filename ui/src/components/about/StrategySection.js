@@ -26,31 +26,31 @@ const COLORS = {
 
 // Constants for sizing
 const SIZING = {
-  image: { base: '275px', sm: '300px', md: '325px', lg: '400px' },
-  topSide: { base: '140px', sm: '180px', md: '220px' },
-  middleSide: { base: '130px', sm: '170px', md: '200px' },
-  bottom: { base: '160px', sm: '200px', md: '240px' },
+  image: { base: '300px', lg: '400px' },
+  topSide: { md: '180px', lg: '240px' },
+  middleSide: { md: '200px', lg: '220px' },
+  bottom: { md: '220px', lg: '240px' },
 };
 
 const DESCRIPTION_POSITIONS = {
   gather: {
-    top: { md: '-15%', lg: '-5%' },
-    right: { md: '2.5%', lg: '5%' },
+    top: { md: '-20%', lg: '-7.5%' },
+    right: { md: '5%', lg: '2.5%' },
   },
   grow: {
-    top: { md: '45%', lg: '45%' },
-    right: { md: '0%', lg: '5%' },
+    top: { md: '60%', lg: '45%' },
+    right: { md: '0%', lg: '0%' },
   },
   give: {
-    bottom: { md: '-27.5%', lg: '-20%' },
+    bottom: { md: '-40%', lg: '-25%' },
   },
   go: {
-    top: { md: '45%', lg: '45%' },
-    left: { md: '0%', lg: '5%' },
+    top: { md: '60%', lg: '45%' },
+    left: { md: '0%', lg: '0%' },
   },
   generations: {
-    top: { md: '-15%', lg: '-5%' },
-    left: { md: '2.5%', lg: '7.5%' },
+    top: { md: '-20%', lg: '-7.5%' },
+    left: { md: '5%', lg: '2.5%' },
   },
 };
 
@@ -128,7 +128,7 @@ const StrategySection = (props) => {
             >
               GENERATIONS
             </Heading>
-            <UnorderedList spacing={1} fontSize={{ base: 'xs', md: 'sm' }}>
+            <UnorderedList spacing={1} fontSize={'1rem'}>
               <ListItem>
                 <strong>Receive and invest</strong> as a disciple in
                 relationship with others
@@ -154,7 +154,7 @@ const StrategySection = (props) => {
             >
               GATHER
             </Heading>
-            <UnorderedList spacing={1} fontSize={{ base: 'xs', md: 'sm' }}>
+            <UnorderedList spacing={1} fontSize={'1rem'}>
               <ListItem>
                 Commit to community in <strong>LIFE Group</strong>
               </ListItem>
@@ -179,7 +179,7 @@ const StrategySection = (props) => {
             >
               GROW
             </Heading>
-            <UnorderedList spacing={1} fontSize={{ base: 'xs', md: 'sm' }}>
+            <UnorderedList spacing={1} fontSize={'1rem'}>
               <ListItem>
                 Cultivate a <strong>personal devotional life</strong>
               </ListItem>
@@ -207,7 +207,7 @@ const StrategySection = (props) => {
             </Heading>
             <UnorderedList
               spacing={1}
-              fontSize={{ base: 'xs', md: 'sm' }}
+              fontSize={'1rem'}
               stylePosition="inside"
               textAlign="center"
             >
@@ -234,7 +234,7 @@ const StrategySection = (props) => {
             >
               GO
             </Heading>
-            <UnorderedList spacing={1} fontSize={{ base: 'xs', md: 'sm' }}>
+            <UnorderedList spacing={1} fontSize={'1rem'}>
               <ListItem>
                 Commit to <strong>witness to one pre-Christian</strong>
               </ListItem>
@@ -268,7 +268,7 @@ const StrategySection = (props) => {
             >
               GATHER
             </Heading>
-            <UnorderedList spacing={1} fontSize={{ base: 'xs', sm: 'sm' }}>
+            <UnorderedList spacing={1} fontSize={'1rem'}>
               <ListItem>
                 Commit to community in <strong>LIFE Group</strong>
               </ListItem>
@@ -284,7 +284,7 @@ const StrategySection = (props) => {
             <Heading size={{ base: 'sm', sm: 'md' }} color={COLORS.grow} mb={2}>
               GROW
             </Heading>
-            <UnorderedList spacing={1} fontSize={{ base: 'xs', sm: 'sm' }}>
+            <UnorderedList spacing={1} fontSize={'1rem'}>
               <ListItem>
                 Cultivate a <strong>personal devotional life</strong>
               </ListItem>
@@ -299,7 +299,7 @@ const StrategySection = (props) => {
             <Heading size={{ base: 'sm', sm: 'md' }} color={COLORS.give} mb={2}>
               GIVE
             </Heading>
-            <UnorderedList spacing={1} fontSize={{ base: 'xs', sm: 'sm' }}>
+            <UnorderedList spacing={1} fontSize={'1rem'}>
               <ListItem>
                 <strong>Tithe and give</strong> faithfully
               </ListItem>
@@ -314,7 +314,7 @@ const StrategySection = (props) => {
             <Heading size={{ base: 'sm', sm: 'md' }} color={COLORS.go} mb={2}>
               GO
             </Heading>
-            <UnorderedList spacing={1} fontSize={{ base: 'xs', sm: 'sm' }}>
+            <UnorderedList spacing={1} fontSize={'1rem'}>
               <ListItem>
                 Commit to <strong>witness to one pre-Christian</strong>
               </ListItem>
@@ -332,7 +332,7 @@ const StrategySection = (props) => {
             >
               GENERATIONS
             </Heading>
-            <UnorderedList spacing={1} fontSize={{ base: 'xs', sm: 'sm' }}>
+            <UnorderedList spacing={1} fontSize={'1rem'}>
               <ListItem>
                 <strong>Receive and invest</strong> as a disciple in
                 relationship with others
