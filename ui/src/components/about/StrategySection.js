@@ -6,10 +6,15 @@ import {
   UnorderedList,
   ListItem,
   Stack,
+  Image,
 } from '@chakra-ui/react';
 
 const StrategySection = (props) => {
-  const { title, blurb } = props;
+  // TODO-YY: Remove when confirmed
+  // const { title, blurb } = props;
+  const STRATEGY_TITLE = 'The 5Gs';
+  const STRATEGY_BLURB =
+    'Here at HMCC, we believe that each and every single person should engage in these 5Gs to experience life transformation, mature as a disciple, and impact the world for Christ.';
   return (
     <Flex w="100%" direction="column">
       <Box py={[4, 6]} w="100%">
@@ -21,17 +26,38 @@ const StrategySection = (props) => {
           color="#0628A3"
           textAlign="center"
           fontFamily="DMSerifDisplay_Italic"
-          mb={4}
           id="strategy"
         >
-          {title}
+          {STRATEGY_TITLE}
         </Heading>
-        <Stack
+        {/* <Stack
           direction={{ base: 'column', lg: 'column' }}
           spacing="10px"
           alignItems="center"
+        > */}
+        <Flex
+          w="full"
+          flexDir={'column'}
+          rowGap={{ base: '1rem', md: '1.5rem' }}
+          px={{ base: 0, md: '5%', lg: '10%' }}
+          mt={'1rem'}
         >
-          <Flex
+          <Image
+            w={{ base: '80%', sm: '60%', md: '40%' }}
+            src={`${process.env.PUBLIC_URL}/images/about/strat-5gs.png`}
+            marginX="auto"
+            display={'flex'}
+          />
+          <Text
+            color="#000000"
+            textAlign={'justify'}
+            fontSize={{ base: '0.875rem', md: '1rem' }}
+          >
+            {STRATEGY_BLURB}
+          </Text>
+        </Flex>
+        {/* TODO-YY: Remove when confirmed */}
+        {/* <Flex
             borderRadius="7"
             shadow="lg"
             px={[9, '13.3%']}
@@ -147,8 +173,8 @@ const StrategySection = (props) => {
                 <ListItem color="#000000">{blurb[2][2]}</ListItem>
               </UnorderedList>
             </Box>
-          </Flex>
-        </Stack>
+          </Flex> */}
+        {/* </Stack> */}
       </Box>
     </Flex>
   );
