@@ -93,8 +93,8 @@ const StrategySection = (props) => {
         w="100%"
         maxW="900px"
         mx="auto"
-        mt={{ base: '0', md: '5rem' }}
-        mb={{ base: '0', md: '7rem' }}
+        mt={{ base: '0rem', md: '5rem' }}
+        mb={{ base: '0rem', md: '7rem' }}
         px={{ base: 4, md: 0 }}
       >
         {/* Desktop Layout - Positioned around image */}
