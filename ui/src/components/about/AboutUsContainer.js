@@ -21,7 +21,7 @@ import scrollTo from '../helpers/ScrollTo';
 const sections = [
   'Our Story',
   'Vision & Mission, Our Values',
-  'Our Strategy',
+  'The 5Gs',
   'Our Staff',
   'Beliefs',
   // 'Our Heart for Missions',
