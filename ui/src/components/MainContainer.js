@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, useLocation } from 'react-router-dom';
 import { chakra } from '@chakra-ui/react';
 import SermonContainer from './sermons/SermonContainer';
 import SermonDetails from './sermons/SermonDetails';
@@ -26,6 +26,7 @@ import ErrorPage from './screens/ErrorPage';
 import ScrollToTop from './helpers/ScrollToTop';
 import AboutUsContainer from './about/AboutUsContainer';
 import OnlineSermonContainer from './sermons/OnlineSermonContainer';
+import NoOnlineStreamPage from './sermons/NoOnlineStreamPage';
 import AdminHome from './admin/AdminHome';
 import AdminUser from './admin/users/AdminUser';
 import FormManager from './forms/FormManager';
@@ -44,8 +45,13 @@ import PrivacyPolicy from './screens/PrivacyPolicy';
 import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
 import ConnectMinistry from './discover/ConnectMinistry';
 import LifeGroupPage from './discover/LifeGroupPage';
+import StructuredData from './seo/StructuredData';
+import { generateChurchSchema } from './seo/SchemaGenerator';
+import DynamicSEO from './seo/DynamicSEO';
 
 const MainContainer = () => {
+  const location = useLocation();
+  const churchSchema = generateChurchSchema(location.pathname);
   return (
     <chakra.main
       maxH="100%"
@@ -58,6 +64,8 @@ const MainContainer = () => {
       mt="7vh"
       mb={['6vh', '6vh', 0, 0]}
     >
+      <DynamicSEO />
+      <StructuredData schema={churchSchema} />
       <ScrollToTop />
       <Switch>
         <PrivateRoute
@@ -113,6 +121,12 @@ const MainContainer = () => {
           path={['/online']}
           permissions={['public']}
           component={OnlineSermonContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/online/no-stream"
+          permissions={['public']}
+          component={NoOnlineStreamPage}
         />
         <PrivateRoute
           exact
