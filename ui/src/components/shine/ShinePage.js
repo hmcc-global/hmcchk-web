@@ -2,6 +2,7 @@ import { Flex, Box } from '@chakra-ui/react';
 import HeroSection from './HeroSection';
 import ValuesSection from './ValuesSection';
 import ApproachSection from './ApproachSection';
+import PastOpportunitiesPage from './PastOpportunitiesPage';
 
 const ShinePage = (props) => {
   return (
@@ -24,6 +25,7 @@ const ShinePage = (props) => {
           <ApproachSection />
         </Box>
         {/* Add components and content for the Shine page here */}
+        <PastOpportunitiesPage />
       </Flex>
     </Flex>
   );
