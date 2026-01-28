@@ -8,7 +8,6 @@ import {
   Heading,
   HStack,
   Image,
-  keyframes,
   Text,
   VStack,
 } from '@chakra-ui/react';
@@ -120,20 +119,16 @@ const opportunities = [
   },
 ];
 
-const rollIn = keyframes`
-  0% {
-    opacity: 0.35;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
 const PastOpportunitiesPage = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const selectedOpportunity = opportunities[selectedIndex];
+  const itemHeight = 56;
+  const itemGap = 12;
+  const visibleCount = 4;
+  const step = itemHeight + itemGap;
+  const listHeight = visibleCount * itemHeight + (visibleCount - 1) * itemGap;
+  const translateY =
+    listHeight / 2 - itemHeight / 2 - selectedIndex * step;
 
   return (
     <Container maxW="container.xl">
@@ -164,59 +159,75 @@ const PastOpportunitiesPage = () => {
                 w={{ base: '100%', md: '35%' }}
                 justifyContent="center"
               >
-                {opportunities.map((opportunity, index) => {
-                  const isSelected = index === selectedIndex;
-
-                  return (
-                    <HStack
-                      key={opportunity.title}
+                <HStack alignItems="center" spacing={3} w="100%">
+                  <Box
+                    w="0"
+                    h="0"
+                    borderTop="7px solid transparent"
+                    borderBottom="7px solid transparent"
+                    borderLeft="12px solid"
+                    borderLeftColor="teal.600"
+                    flexShrink={0}
+                  />
+                  <Box
+                    w="100%"
+                    h={{ base: 'auto', md: `${listHeight}px` }}
+                    overflow={{ base: 'visible', md: 'hidden' }}
+                  >
+                    <VStack
                       alignItems="start"
-                      spacing={3}
-                      cursor="pointer"
-                      opacity={isSelected ? 1 : 0.5}
-                      transition="opacity 0.2s ease"
-                      onClick={() => setSelectedIndex(index)}
-                      animation={isSelected ? `${rollIn} 0.35s ease` : 'none'}
+                      spacing={`${itemGap}px`}
+                      transform={{
+                        base: 'none',
+                        md: `translateY(${translateY}px)`,
+                      }}
+                      transition="transform 0.35s ease"
                     >
-                      <Box
-                        mt={1}
-                        w="0"
-                        h="0"
-                        borderTop="7px solid transparent"
-                        borderBottom="7px solid transparent"
-                        borderLeft="12px solid"
-                        borderLeftColor={isSelected ? 'teal.600' : 'transparent'}
-                      />
-                      <Box>
-                        <Text
-                          fontWeight={isSelected ? '700' : '500'}
-                          color={isSelected ? 'gray.800' : 'gray.500'}
-                        >
-                          {opportunity.title}
-                        </Text>
-                        <Text
-                          fontSize="sm"
-                          color={isSelected ? 'gray.700' : 'gray.400'}
-                        >
-                          {opportunity.date}
-                        </Text>
-                      </Box>
-                    </HStack>
-                  );
-                })}
+                      {opportunities.map((opportunity, index) => {
+                        const isSelected = index === selectedIndex;
+
+                        return (
+                          <Box
+                            key={opportunity.title}
+                            cursor="pointer"
+                            opacity={isSelected ? 1 : 0.5}
+                            onClick={() => setSelectedIndex(index)}
+                            minH={`${itemHeight}px`}
+                            display="flex"
+                            flexDirection="column"
+                            justifyContent="center"
+                          >
+                            <Text
+                              fontWeight={isSelected ? '700' : '500'}
+                              color={isSelected ? 'gray.800' : 'gray.500'}
+                            >
+                              {opportunity.title}
+                            </Text>
+                            <Text
+                              fontSize="sm"
+                              color={isSelected ? 'gray.700' : 'gray.400'}
+                            >
+                              {opportunity.date}
+                            </Text>
+                          </Box>
+                        );
+                      })}
+                    </VStack>
+                  </Box>
+                </HStack>
               </VStack>
 
               <Box w={{ base: '100%', md: '65%' }}>
-                <Fade in key={selectedOpportunity.title}>
-                  <Grid
-                    templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }}
-                    templateRows={{
-                      base: 'repeat(5, 160px)',
-                      md: 'repeat(2, 160px)',
-                    }}
-                    gap={4}
-                  >
-                    <GridItem colSpan={{ base: 1, md: 2 }} rowSpan={1}>
+                <Grid
+                  templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }}
+                  templateRows={{
+                    base: 'repeat(5, 160px)',
+                    md: 'repeat(2, 160px)',
+                  }}
+                  gap={4}
+                >
+                  <GridItem colSpan={{ base: 1, md: 2 }} rowSpan={1}>
+                    <Fade in key={`${selectedOpportunity.title}-0`}>
                       <Image
                         src={selectedOpportunity.images[0].src}
                         alt={selectedOpportunity.images[0].alt}
@@ -225,8 +236,10 @@ const PastOpportunitiesPage = () => {
                         objectFit="cover"
                         borderRadius="2xl"
                       />
-                    </GridItem>
-                    <GridItem colSpan={1}>
+                    </Fade>
+                  </GridItem>
+                  <GridItem colSpan={1}>
+                    <Fade in key={`${selectedOpportunity.title}-1`}>
                       <Image
                         src={selectedOpportunity.images[1].src}
                         alt={selectedOpportunity.images[1].alt}
@@ -235,8 +248,10 @@ const PastOpportunitiesPage = () => {
                         objectFit="cover"
                         borderRadius="2xl"
                       />
-                    </GridItem>
-                    <GridItem colSpan={1}>
+                    </Fade>
+                  </GridItem>
+                  <GridItem colSpan={1}>
+                    <Fade in key={`${selectedOpportunity.title}-2`}>
                       <Image
                         src={selectedOpportunity.images[2].src}
                         alt={selectedOpportunity.images[2].alt}
@@ -245,8 +260,10 @@ const PastOpportunitiesPage = () => {
                         objectFit="cover"
                         borderRadius="2xl"
                       />
-                    </GridItem>
-                    <GridItem colSpan={{ base: 1, md: 2 }}>
+                    </Fade>
+                  </GridItem>
+                  <GridItem colSpan={{ base: 1, md: 2 }}>
+                    <Fade in key={`${selectedOpportunity.title}-3`}>
                       <Image
                         src={selectedOpportunity.images[3].src}
                         alt={selectedOpportunity.images[3].alt}
@@ -255,8 +272,10 @@ const PastOpportunitiesPage = () => {
                         objectFit="cover"
                         borderRadius="2xl"
                       />
-                    </GridItem>
-                    <GridItem colSpan={1}>
+                    </Fade>
+                  </GridItem>
+                  <GridItem colSpan={1}>
+                    <Fade in key={`${selectedOpportunity.title}-4`}>
                       <Image
                         src={selectedOpportunity.images[4].src}
                         alt={selectedOpportunity.images[4].alt}
@@ -265,9 +284,9 @@ const PastOpportunitiesPage = () => {
                         objectFit="cover"
                         borderRadius="2xl"
                       />
-                    </GridItem>
-                  </Grid>
-                </Fade>
+                    </Fade>
+                  </GridItem>
+                </Grid>
               </Box>
             </HStack>
           </Box>
