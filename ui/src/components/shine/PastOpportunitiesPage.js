@@ -18,23 +18,23 @@ const opportunities = [
     date: 'Sunday, Jan 18, 2026',
     images: [
       {
-        src: '/images/shine/placeholder-1.jpg',
+        src: '/images/shine/placeholder-1.svg',
         alt: 'Tai Po Healthcare Outreach highlight',
       },
       {
-        src: '/images/shine/placeholder-2.jpg',
+        src: '/images/shine/placeholder-2.svg',
         alt: 'Tai Po Healthcare Outreach team',
       },
       {
-        src: '/images/shine/placeholder-3.jpg',
+        src: '/images/shine/placeholder-3.svg',
         alt: 'Tai Po Healthcare Outreach service moment',
       },
       {
-        src: '/images/shine/placeholder-4.jpg',
+        src: '/images/shine/placeholder-4.svg',
         alt: 'Tai Po Healthcare Outreach activity',
       },
       {
-        src: '/images/shine/placeholder-5.jpg',
+        src: '/images/shine/placeholder-5.svg',
         alt: 'Tai Po Healthcare Outreach volunteers',
       },
     ],
@@ -44,23 +44,23 @@ const opportunities = [
     date: 'Sunday, Jan 25, 2026',
     images: [
       {
-        src: '/images/shine/placeholder-1.jpg',
+        src: '/images/shine/placeholder-1.svg',
         alt: "Mother's Choice Family Fun Fest highlight",
       },
       {
-        src: '/images/shine/placeholder-2.jpg',
+        src: '/images/shine/placeholder-2.svg',
         alt: "Mother's Choice Family Fun Fest gathering",
       },
       {
-        src: '/images/shine/placeholder-3.jpg',
+        src: '/images/shine/placeholder-3.svg',
         alt: "Mother's Choice Family Fun Fest activity",
       },
       {
-        src: '/images/shine/placeholder-4.jpg',
+        src: '/images/shine/placeholder-4.svg',
         alt: "Mother's Choice Family Fun Fest volunteers",
       },
       {
-        src: '/images/shine/placeholder-5.jpg',
+        src: '/images/shine/placeholder-5.svg',
         alt: "Mother's Choice Family Fun Fest support",
       },
     ],
@@ -70,23 +70,23 @@ const opportunities = [
     date: 'Jan-Mar, 2026',
     images: [
       {
-        src: '/images/shine/placeholder-1.jpg',
+        src: '/images/shine/placeholder-1.svg',
         alt: 'English Academy Tutoring session',
       },
       {
-        src: '/images/shine/placeholder-2.jpg',
+        src: '/images/shine/placeholder-2.svg',
         alt: 'English Academy Tutoring classroom',
       },
       {
-        src: '/images/shine/placeholder-3.jpg',
+        src: '/images/shine/placeholder-3.svg',
         alt: 'English Academy Tutoring volunteers',
       },
       {
-        src: '/images/shine/placeholder-4.jpg',
+        src: '/images/shine/placeholder-4.svg',
         alt: 'English Academy Tutoring mentorship',
       },
       {
-        src: '/images/shine/placeholder-5.jpg',
+        src: '/images/shine/placeholder-5.svg',
         alt: 'English Academy Tutoring support',
       },
     ],
@@ -96,23 +96,23 @@ const opportunities = [
     date: 'Sunday, Feb 28, 2026',
     images: [
       {
-        src: '/images/shine/placeholder-1.jpg',
+        src: '/images/shine/placeholder-1.svg',
         alt: 'Mei Foo Healthcare Outreach highlight',
       },
       {
-        src: '/images/shine/placeholder-2.jpg',
+        src: '/images/shine/placeholder-2.svg',
         alt: 'Mei Foo Healthcare Outreach clinic',
       },
       {
-        src: '/images/shine/placeholder-3.jpg',
+        src: '/images/shine/placeholder-3.svg',
         alt: 'Mei Foo Healthcare Outreach care moment',
       },
       {
-        src: '/images/shine/placeholder-4.jpg',
+        src: '/images/shine/placeholder-4.svg',
         alt: 'Mei Foo Healthcare Outreach volunteers',
       },
       {
-        src: '/images/shine/placeholder-5.jpg',
+        src: '/images/shine/placeholder-5.svg',
         alt: 'Mei Foo Healthcare Outreach support',
       },
     ],
@@ -220,13 +220,14 @@ const PastOpportunitiesPage = () => {
               <Box w={{ base: '100%', md: '65%' }}>
                 <Grid
                   templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }}
-                  templateRows={{
-                    base: 'repeat(5, 160px)',
-                    md: 'repeat(2, 160px)',
+                  templateRows={{ base: 'repeat(5, 160px)', md: 'repeat(2, 170px)' }}
+                  templateAreas={{
+                    base: `"feature" "rightTop" "bottomLeft" "bottomMid" "rightBottom"`,
+                    md: `"feature feature rightTop" "bottomLeft bottomMid rightBottom"`,
                   }}
                   gap={4}
                 >
-                  <GridItem colSpan={{ base: 1, md: 2 }} rowSpan={1}>
+                  <GridItem area="feature">
                     <Fade in key={`${selectedOpportunity.title}-0`}>
                       <Image
                         src={selectedOpportunity.images[0].src}
@@ -238,7 +239,7 @@ const PastOpportunitiesPage = () => {
                       />
                     </Fade>
                   </GridItem>
-                  <GridItem colSpan={1}>
+                  <GridItem area="rightTop">
                     <Fade in key={`${selectedOpportunity.title}-1`}>
                       <Image
                         src={selectedOpportunity.images[1].src}
@@ -250,7 +251,7 @@ const PastOpportunitiesPage = () => {
                       />
                     </Fade>
                   </GridItem>
-                  <GridItem colSpan={1}>
+                  <GridItem area="bottomLeft">
                     <Fade in key={`${selectedOpportunity.title}-2`}>
                       <Image
                         src={selectedOpportunity.images[2].src}
@@ -262,7 +263,7 @@ const PastOpportunitiesPage = () => {
                       />
                     </Fade>
                   </GridItem>
-                  <GridItem colSpan={{ base: 1, md: 2 }}>
+                  <GridItem area="bottomMid">
                     <Fade in key={`${selectedOpportunity.title}-3`}>
                       <Image
                         src={selectedOpportunity.images[3].src}
@@ -274,7 +275,7 @@ const PastOpportunitiesPage = () => {
                       />
                     </Fade>
                   </GridItem>
-                  <GridItem colSpan={1}>
+                  <GridItem area="rightBottom">
                     <Fade in key={`${selectedOpportunity.title}-4`}>
                       <Image
                         src={selectedOpportunity.images[4].src}
