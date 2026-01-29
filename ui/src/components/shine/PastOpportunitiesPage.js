@@ -159,16 +159,21 @@ const PastOpportunitiesPage = () => {
         gap={{ base: '3', md: 'none' }}
       >
         <Box w="100%" py={{ base: 8, md: 12 }}>
-          <HStack spacing={2} mb={2} alignItems="baseline">
+          <HStack
+            spacing={2}
+            mb={2}
+            alignItems="baseline"
+            justifyContent={{ base: 'flex-start', md: 'flex-start' }}
+          >
             <Box
               as="svg"
-              width="7"
-              height="7"
+              width={{ base: '24px', md: '28px' }}
+              height={{ base: '24px', md: '28px' }}
               viewBox="0 0 36 32"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
-              mt="4px"
+              mt={{ base: '2px', md: '4px' }}
             >
               <g clipPath="url(#clip0_158_2614)">
                 <path
@@ -189,9 +194,9 @@ const PastOpportunitiesPage = () => {
               fontFamily="'DM Serif Display', serif"
               fontWeight="600"
               fontStyle="italic"
-              fontSize="42px"
+              fontSize={{ base: '32px', md: '42px' }}
               lineHeight="94%"
-              letterSpacing="-2px"
+              letterSpacing={{ base: '-1px', md: '-2px' }}
             >
               Past Opportunities
             </Heading>
@@ -202,37 +207,47 @@ const PastOpportunitiesPage = () => {
             fontFamily="Manrope, sans-serif"
             fontWeight="400"
             fontStyle="normal"
-            fontSize="20px"
+            fontSize={{ base: '16px', md: '20px' }}
             lineHeight="100%"
             letterSpacing="0px"
+            textAlign={{ base: 'left', md: 'left' }}
           >
             We hope to accomplish our mission ...
           </Text>
 
           <Box bg="#B7E0E2" borderRadius="3xl" p={{ base: 5, md: 8 }}>
             <HStack
-              alignItems="stretch"
+              alignItems={{ base: 'center', md: 'stretch' }}
               spacing={{ base: 6, md: 10 }}
               flexDirection={{ base: 'column', md: 'row' }}
             >
               <VStack
-                alignItems="start"
-                spacing={6}
+                alignItems={{ base: 'start', md: 'start' }}
+                spacing={{ base: 4, md: 6 }}
                 w={{ base: '100%', md: '35%' }}
                 justifyContent="center"
               >
-                <HStack alignItems="center" spacing={4} w="100%">
-                  <Box as={BiSolidRightArrow} color="#21A0A7" boxSize="35px" />
+                <HStack
+                  alignItems="center"
+                  spacing={{ base: 2, md: 4 }}
+                  w="100%"
+                  justifyContent={{ base: 'flex-start', md: 'flex-start' }}
+                >
+                  <Box
+                    as={BiSolidRightArrow}
+                    color="#21A0A7"
+                    boxSize={{ base: '24px', md: '35px' }}
+                  />
                   <Box
                     w="100%"
-                    h={{ base: 'auto', md: `${listHeight}px` }}
-                    overflow={{ base: 'visible', md: 'hidden' }}
+                    h={`${listHeight}px`}
+                    overflow="hidden"
                   >
                     <VStack
-                      alignItems="start"
+                      alignItems={{ base: 'start', md: 'start' }}
                       spacing={`${itemGap}px`}
                       transform={{
-                        base: 'none',
+                        base: `translateY(${translateY}px)`,
                         md: `translateY(${translateY}px)`,
                       }}
                       transition="transform 0.7s ease"
@@ -256,9 +271,10 @@ const PastOpportunitiesPage = () => {
                               color={isSelected ? 'gray.800' : 'gray.500'}
                               fontFamily="Manrope, sans-serif"
                               fontStyle="normal"
-                              fontSize="18px"
+                              fontSize={{ base: '16px', md: '18px' }}
                               lineHeight="100%"
                               letterSpacing="0px"
+                              textAlign={{ base: 'left', md: 'left' }}
                             >
                               {opportunity.title}
                             </Text>
@@ -267,10 +283,11 @@ const PastOpportunitiesPage = () => {
                               fontFamily="Manrope, sans-serif"
                               fontWeight="600"
                               fontStyle="normal"
-                              fontSize="14px"
+                              fontSize={{ base: '12px', md: '14px' }}
                               lineHeight="100%"
                               letterSpacing="0px"
-                              mt="8px"
+                              mt={{ base: '4px', md: '8px' }}
+                              textAlign={{ base: 'left', md: 'left' }}
                             >
                               {opportunity.date}
                             </Text>
@@ -282,18 +299,26 @@ const PastOpportunitiesPage = () => {
                 </HStack>
               </VStack>
 
-              <Box w={{ base: '100%', md: '65%' }}>
-                <Box bg="#E2FEFF" borderRadius="2xl" p={{ base: 4, md: 5 }}>
+              <Box
+                w={{ base: '100%', md: '65%' }}
+                maxW={{ base: '420px', md: 'none' }}
+                mx={{ base: 'auto', md: 0 }}
+              >
+                <Box
+                  bg="#E2FEFF"
+                  borderRadius="2xl"
+                  p={{ base: 3, md: 5 }}
+                  mr={{ base: 3, md: 0 }}
+                  ml={{ base: -2, md: 0 }}
+                >
                   <Grid
-                    templateColumns={{ base: 'repeat(4, 1fr)', md: 'repeat(4, 1fr)' }}
-                    templateRows={{ base: 'repeat(2, 165px)', md: 'repeat(2, 165px)' }}
+                    templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }}
+                    templateRows={{ base: 'repeat(3, 200px)', md: 'repeat(2, 165px)' }}
                     templateAreas={{
-                      base:
-                        `"feature feature rightTop rightTop2" "bottomLeft bottomMid bottomMid rightBottom"`,
-                      md:
-                        `"feature feature rightTop rightTop2" "bottomLeft bottomMid bottomMid rightBottom"`,
+                      base: `"feature rightTop" "rightTop2 bottomLeft" "bottomMid rightBottom"`,
+                      md: `"feature feature rightTop rightTop2" "bottomLeft bottomMid bottomMid rightBottom"`,
                     }}
-                    gap={{ base: 4, md: 5 }}
+                    gap={{ base: 3, md: 5 }}
                   >
                   <GridItem
                     area="feature"
@@ -318,6 +343,8 @@ const PastOpportunitiesPage = () => {
                         h="100%"
                         objectFit="cover"
                         objectPosition="center"
+                        transform={{ base: 'scale(2.65)', md: 'scale(1.65)' }}
+                        transformOrigin="center"
                       />
                     </Fade>
                   </GridItem>
@@ -344,6 +371,8 @@ const PastOpportunitiesPage = () => {
                         h="100%"
                         objectFit="cover"
                         objectPosition="center"
+                        transform={{ base: 'scale(2.65)', md: 'scale(1.65)' }}
+                        transformOrigin="center"
                       />
                     </Fade>
                   </GridItem>
@@ -370,6 +399,8 @@ const PastOpportunitiesPage = () => {
                         h="100%"
                         objectFit="cover"
                         objectPosition="center"
+                        transform={{ base: 'scale(2.65)', md: 'scale(1.65)' }}
+                        transformOrigin="center"
                       />
                     </Fade>
                   </GridItem>
@@ -396,6 +427,8 @@ const PastOpportunitiesPage = () => {
                         h="100%"
                         objectFit="cover"
                         objectPosition="center"
+                        transform={{ base: 'scale(2.65)', md: 'scale(1.65)' }}
+                        transformOrigin="center"
                       />
                     </Fade>
                   </GridItem>
@@ -422,6 +455,8 @@ const PastOpportunitiesPage = () => {
                         h="100%"
                         objectFit="cover"
                         objectPosition="center"
+                        transform={{ base: 'scale(2.65)', md: 'scale(1.65)' }}
+                        transformOrigin="center"
                       />
                     </Fade>
                   </GridItem>
@@ -448,6 +483,8 @@ const PastOpportunitiesPage = () => {
                         h="100%"
                         objectFit="cover"
                         objectPosition="center"
+                        transform={{ base: 'scale(2.65)', md: 'scale(1.65)' }}
+                        transformOrigin="center"
                       />
                     </Fade>
                   </GridItem>
