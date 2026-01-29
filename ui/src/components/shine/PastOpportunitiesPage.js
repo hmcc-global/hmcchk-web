@@ -119,6 +119,8 @@ const opportunities = [
   },
 ];
 
+const fadeTransition = { enter: { duration: 0.8 }, exit: { duration: 0.8 } };
+
 const PastOpportunitiesPage = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const selectedOpportunity = opportunities[selectedIndex];
@@ -181,7 +183,7 @@ const PastOpportunitiesPage = () => {
                         base: 'none',
                         md: `translateY(${translateY}px)`,
                       }}
-                      transition="transform 0.35s ease"
+                      transition="transform 0.7s ease"
                     >
                       {opportunities.map((opportunity, index) => {
                         const isSelected = index === selectedIndex;
@@ -228,7 +230,7 @@ const PastOpportunitiesPage = () => {
                   gap={4}
                 >
                   <GridItem area="feature">
-                    <Fade in key={`${selectedOpportunity.title}-0`}>
+                    <Fade in key={`${selectedOpportunity.title}-0`} transition={fadeTransition}>
                       <Image
                         src={selectedOpportunity.images[0].src}
                         alt={selectedOpportunity.images[0].alt}
@@ -240,7 +242,7 @@ const PastOpportunitiesPage = () => {
                     </Fade>
                   </GridItem>
                   <GridItem area="rightTop">
-                    <Fade in key={`${selectedOpportunity.title}-1`}>
+                    <Fade in key={`${selectedOpportunity.title}-1`} transition={fadeTransition}>
                       <Image
                         src={selectedOpportunity.images[1].src}
                         alt={selectedOpportunity.images[1].alt}
@@ -252,7 +254,7 @@ const PastOpportunitiesPage = () => {
                     </Fade>
                   </GridItem>
                   <GridItem area="bottomLeft">
-                    <Fade in key={`${selectedOpportunity.title}-2`}>
+                    <Fade in key={`${selectedOpportunity.title}-2`} transition={fadeTransition}>
                       <Image
                         src={selectedOpportunity.images[2].src}
                         alt={selectedOpportunity.images[2].alt}
@@ -264,7 +266,7 @@ const PastOpportunitiesPage = () => {
                     </Fade>
                   </GridItem>
                   <GridItem area="bottomMid">
-                    <Fade in key={`${selectedOpportunity.title}-3`}>
+                    <Fade in key={`${selectedOpportunity.title}-3`} transition={fadeTransition}>
                       <Image
                         src={selectedOpportunity.images[3].src}
                         alt={selectedOpportunity.images[3].alt}
@@ -276,7 +278,7 @@ const PastOpportunitiesPage = () => {
                     </Fade>
                   </GridItem>
                   <GridItem area="rightBottom">
-                    <Fade in key={`${selectedOpportunity.title}-4`}>
+                    <Fade in key={`${selectedOpportunity.title}-4`} transition={fadeTransition}>
                       <Image
                         src={selectedOpportunity.images[4].src}
                         alt={selectedOpportunity.images[4].alt}
