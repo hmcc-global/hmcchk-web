@@ -1,18 +1,21 @@
-import { Container, VStack } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
 const ShinePage = (props) => {
   return (
-    <Container maxW="container.xl">
-      <VStack
-        alignItems="start"
+    <Flex direction="column" bgColor="#F6FAFF">
+      <Flex
+        alignSelf="center"
+        direction="column"
         justifyContent="space-between"
-        h="90%"
+        w="100%"
+        maxW="container.xl"
         m={{ base: '1', md: '3' }}
-        gap={{ base: '3', md: 'none' }}
+        px={{ base: 4, md: 6, lg: 8 }}
+        gap={{ base: '3', md: '6', lg: '8' }}
       >
         {/* Add components and content for the Shine page here */}
-      </VStack>
-    </Container>
+      </Flex>
+    </Flex>
   );
 };
 

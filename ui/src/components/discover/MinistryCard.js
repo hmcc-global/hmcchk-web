@@ -33,8 +33,17 @@ const cards = [
     title: 'Children',
     description: 'Building Blocks is HMCC’s Children Ministry.',
     image: `${process.env.PUBLIC_URL}/images/connect/children.jpg`,
+    link: '/building-blocks',
     showButton: true,
   },
+  {
+    title: 'SHINE Ministry',
+    description: 'Some SHINE Ministry description here',
+    // TODO-aparedan: FINALISE THIS
+    image: `${process.env.PUBLIC_URL}/images/connect/children.jpg`,
+    link: '/shine-ministry',
+    showButton: true,
+  }
 ];
 
 const MinistryCard = (props) => {
@@ -87,7 +96,7 @@ const MinistryCard = (props) => {
             <Box p={4}>
               <Button
                 as="a"
-                href="/building-blocks"
+                href={card.link}
                 bg={'#21A0A7'}
                 borderRadius={'15px'}
                 width="100%"
