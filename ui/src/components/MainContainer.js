@@ -9,6 +9,7 @@ import EventsPage from './events/EventsPage';
 import VisitUsPage from './discover/PlanAVisit';
 import DiscoverPage from './discover/DiscoverPage';
 import BBPage from './building-block/BBPage';
+import ShinePage from './shine/ShinePage';
 import PrivateRoute from './helpers/PrivateRoute';
 import Signup from './auth/Signup';
 import HomeContainer from './home/HomeContainer';
@@ -186,6 +187,12 @@ const MainContainer = () => {
           path="/building-blocks"
           permissions={['public']}
           component={BBPage}
+        />
+        <PrivateRoute
+          exact
+          path="/shine-ministry"
+          permissions={['public']}
+          component={ShinePage}
         />
         <PrivateRoute
           exact
