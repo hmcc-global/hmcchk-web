@@ -35,7 +35,7 @@ const ChurchThemeSection = () => {
                     w="100%"
                     position="absolute"
                     h="120%"
-                    bgPos={{ md: '85% 100%', xl: '63% 100%' }}
+                    bgPos={{ md: '85% 100%', xl: '67% 100%' }}
                     bgSize="13%"
                     bgRepeat="no-repeat"
                     bgImage={`url('${process.env.PUBLIC_URL}/images/home/church-theme-overflow-vector-underline.svg')`}
