@@ -1,12 +1,4 @@
-import {
-  Box,
-  Flex,
-  Text,
-  HStack,
-  VStack,
-  Heading,
-  Spacer,
-} from '@chakra-ui/react';
+import { Box, Flex, Text, HStack, VStack, Heading } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
@@ -56,7 +48,7 @@ const ContactUs = () => {
           Contact Us
         </Heading>
       </HStack>
-      <HStack>
+      <HStack alignItems="flex-start" w="100%" justifyContent="space-between">
         <Text
           color="black"
           mb={{ base: 6, md: 8 }}
@@ -66,24 +58,50 @@ const ContactUs = () => {
           fontSize={{ base: '1rem', md: '1.25rem' }}
           lineHeight="100%"
           letterSpacing="0px"
-          textAlign={{ base: 'left', md: 'left' }}
+          textAlign="left"
         >
-          We are constantly looking and evaluating partners to work together.{' '}
-          <br />
-          If you have any suggestions or questions, please contact
-          shine@hmcc.net
+          We are constantly looking and evaluating partners to work together. If
+          you have any suggestions or questions, please contact shine@hmcc.net
         </Text>
+        <Flex
+          w="40%"
+          justifyContent="center"
+          borderWidth="2px"
+          borderColor="#4A6EEB"
+          borderStyle="solid"
+          p="0.5rem"
+          borderRadius="20px"
+          cursor="pointer"
+          onClick={onOpen}
+          display={{ base: 'none', md: 'flex' }}
+        >
+          <ContactForm isOpen={isOpen} onClose={onClose} />
+          <Box px="1rem">
+            <Text
+              fontSize="1rem"
+              fontFamily="Manrope"
+              fontWeight="700"
+              wordBreak="break-word"
+              textAlign="center"
+              color="#4A6EEB"
+            >
+              Contact Us
+            </Text>
+          </Box>
+          <ArrowForwardIcon color="#4A6EEB" my="auto" />
+        </Flex>
       </HStack>
       <Flex
-        w="90%"
+        w="100%"
         justifyContent="center"
         borderWidth="2px"
         borderColor="#4A6EEB"
         borderStyle="solid"
         p="0.5rem"
-        borderRadius="25px"
+        borderRadius="20px"
         cursor="pointer"
         onClick={onOpen}
+        display={{ base: 'flex', md: 'none' }}
       >
         <ContactForm isOpen={isOpen} onClose={onClose} />
         <Box px="1rem">

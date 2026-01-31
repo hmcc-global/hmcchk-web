@@ -17,7 +17,6 @@ import {
   ModalContent,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
   Center,
   Image,
 } from '@chakra-ui/react';
@@ -42,7 +41,6 @@ import { FaCalendarAlt } from 'react-icons/fa';
 const ShineInvolve = (props) => {
   const [ShineMinList, setShineMinList] = useState([]);
   const [slideIndex, setSlideIndex] = useState(0);
-  const [isOpen, setIsOpen] = useState(false);
 
   const slider = useRef(null);
 
@@ -467,7 +465,7 @@ const ShineInvolve = (props) => {
           lineHeight="94%"
           letterSpacing={{ base: '-1px', md: '-2px' }}
         >
-          Past Opportunities
+          Get Involved
         </Heading>
       </HStack>
       <Text
@@ -550,7 +548,7 @@ const ShineInvolve = (props) => {
           </Box>
         )}
       </VStack>
-      <Flex w="100%" flexDir="column">
+      <Flex w="100%" flexDir="column" display={{ base: 'flex', md: 'none' }}>
         <Box
           w="100%"
           boxSizing="border-box"
