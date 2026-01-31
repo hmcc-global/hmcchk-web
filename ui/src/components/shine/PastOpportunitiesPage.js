@@ -109,27 +109,27 @@ const opportunities = [
     date: 'Sunday, Feb 28, 2026',
     images: [
       {
-        src: '/images/shine/placeholder-1.svg',
+        src: '/images/shine/meifoo_healthcare_1.jpg',
         alt: 'Mei Foo Healthcare Outreach highlight',
       },
       {
-        src: '/images/shine/placeholder-2.svg',
+        src: '/images/shine/meifoo_healthcare_2.jpg',
         alt: 'Mei Foo Healthcare Outreach clinic',
       },
       {
-        src: '/images/shine/placeholder-3.svg',
+        src: '/images/shine/meifoo_healthcare_3.jpg',
         alt: 'Mei Foo Healthcare Outreach care moment',
       },
       {
-        src: '/images/shine/placeholder-4.svg',
+        src: '/images/shine/meifoo_healthcare_4.jpg',
         alt: 'Mei Foo Healthcare Outreach volunteers',
       },
       {
-        src: '/images/shine/placeholder-5.svg',
+        src: '/images/shine/meifoo_healthcare_5.jpg',
         alt: 'Mei Foo Healthcare Outreach support',
       },
       {
-        src: '/images/shine/placeholder-6.svg',
+        src: '/images/shine/meifoo_healthcare_6.jpg',
         alt: 'Mei Foo Healthcare Outreach extra moment',
       },
     ],
