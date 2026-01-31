@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card } from '@chakra-ui/react';
+import { Card, CardHeader, CardBody, Heading } from '@chakra-ui/react';
+
 /**
 
      * Renders a card with a customizable card header and card body. The header can be any valid React node.
@@ -8,8 +9,19 @@ import { Card } from '@chakra-ui/react';
      * @returns {React.ReactNode} The total price.
 */
 
-const BaseCard = ({ title }) => {
-  return <Card></Card>;
+const BaseCard = ({ title, children }) => {
+  return (
+    <Card>
+      {title && (
+        <CardHeader>
+          <Heading size="md">{title}</Heading>
+        </CardHeader>
+      )}
+      <CardBody>
+        {children}
+      </CardBody>
+    </Card>
+  );
 };
 
 export default BaseCard;
