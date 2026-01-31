@@ -1,5 +1,6 @@
 import { Flex } from '@chakra-ui/react';
 import HeroSection from './HeroSection';
+import AboutSection from './AboutSection';
 
 const ShinePage = (props) => {
   return (
@@ -15,6 +16,7 @@ const ShinePage = (props) => {
         px={{ base: 4, md: 6, lg: 8 }}
         gap={{ base: '3', md: '6', lg: '8' }}
       >
+        <AboutSection />
         {/* Add components and content for the Shine page here */}
       </Flex>
     </Flex>
