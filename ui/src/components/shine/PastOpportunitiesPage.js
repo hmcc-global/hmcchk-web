@@ -9,7 +9,14 @@ import {
   Heading,
   HStack,
   Image,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalOverlay,
   Text,
+  useBreakpointValue,
+  useDisclosure,
   VStack,
 } from '@chakra-ui/react';
 
@@ -142,7 +149,24 @@ const fadeTransition = { enter: { duration: 0.8 }, exit: { duration: 0.8 } };
 
 const PastOpportunitiesPage = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [modalImage, setModalImage] = useState(null);
   const selectedOpportunity = opportunities[selectedIndex];
+  const isMobile = useBreakpointValue({ base: true, md: false });
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const handleImageTap = (image) => {
+    if (!isMobile) {
+      return;
+    }
+
+    setModalImage(image);
+    onOpen();
+  };
+
+  const handleModalClose = () => {
+    onClose();
+    setModalImage(null);
+  };
   const itemHeight = 56;
   const itemGap = 12;
   const visibleCount = 4;
@@ -331,6 +355,19 @@ const PastOpportunitiesPage = () => {
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
+                    cursor={{ base: 'pointer', md: 'default' }}
+                    onClick={() => handleImageTap(selectedOpportunity.images[0])}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(event) => {
+                      if (
+                        isMobile &&
+                        (event.key === 'Enter' || event.key === ' ')
+                      ) {
+                        event.preventDefault();
+                        handleImageTap(selectedOpportunity.images[0]);
+                      }
+                    }}
                   >
                     <Fade
                       in
@@ -359,6 +396,19 @@ const PastOpportunitiesPage = () => {
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
+                    cursor={{ base: 'pointer', md: 'default' }}
+                    onClick={() => handleImageTap(selectedOpportunity.images[1])}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(event) => {
+                      if (
+                        isMobile &&
+                        (event.key === 'Enter' || event.key === ' ')
+                      ) {
+                        event.preventDefault();
+                        handleImageTap(selectedOpportunity.images[1]);
+                      }
+                    }}
                   >
                     <Fade
                       in
@@ -387,6 +437,19 @@ const PastOpportunitiesPage = () => {
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
+                    cursor={{ base: 'pointer', md: 'default' }}
+                    onClick={() => handleImageTap(selectedOpportunity.images[5])}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(event) => {
+                      if (
+                        isMobile &&
+                        (event.key === 'Enter' || event.key === ' ')
+                      ) {
+                        event.preventDefault();
+                        handleImageTap(selectedOpportunity.images[5]);
+                      }
+                    }}
                   >
                     <Fade
                       in
@@ -415,6 +478,19 @@ const PastOpportunitiesPage = () => {
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
+                    cursor={{ base: 'pointer', md: 'default' }}
+                    onClick={() => handleImageTap(selectedOpportunity.images[2])}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(event) => {
+                      if (
+                        isMobile &&
+                        (event.key === 'Enter' || event.key === ' ')
+                      ) {
+                        event.preventDefault();
+                        handleImageTap(selectedOpportunity.images[2]);
+                      }
+                    }}
                   >
                     <Fade
                       in
@@ -443,6 +519,19 @@ const PastOpportunitiesPage = () => {
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
+                    cursor={{ base: 'pointer', md: 'default' }}
+                    onClick={() => handleImageTap(selectedOpportunity.images[3])}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(event) => {
+                      if (
+                        isMobile &&
+                        (event.key === 'Enter' || event.key === ' ')
+                      ) {
+                        event.preventDefault();
+                        handleImageTap(selectedOpportunity.images[3]);
+                      }
+                    }}
                   >
                     <Fade
                       in
@@ -471,6 +560,19 @@ const PastOpportunitiesPage = () => {
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
+                    cursor={{ base: 'pointer', md: 'default' }}
+                    onClick={() => handleImageTap(selectedOpportunity.images[4])}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(event) => {
+                      if (
+                        isMobile &&
+                        (event.key === 'Enter' || event.key === ' ')
+                      ) {
+                        event.preventDefault();
+                        handleImageTap(selectedOpportunity.images[4]);
+                      }
+                    }}
                   >
                     <Fade
                       in
@@ -498,6 +600,23 @@ const PastOpportunitiesPage = () => {
           </Box>
         </Box>
       </VStack>
+      <Modal isOpen={isOpen} onClose={handleModalClose} size="full">
+        <ModalOverlay />
+        <ModalContent bg="blackAlpha.900">
+          <ModalCloseButton color="white" />
+          <ModalBody p={4} display="flex" alignItems="center">
+            {modalImage && (
+              <Image
+                src={modalImage.src}
+                alt={modalImage.alt}
+                w="100%"
+                h="100%"
+                objectFit="contain"
+              />
+            )}
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </Container>
   );
 };
