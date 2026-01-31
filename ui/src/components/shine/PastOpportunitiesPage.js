@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BiSolidRightArrow } from 'react-icons/bi';
 import {
+  AspectRatio,
   Box,
   Container,
   Fade,
@@ -162,6 +163,39 @@ const PastOpportunitiesPage = () => {
   const handleModalClose = () => {
     onClose();
     setModalImage(null);
+  };
+
+  const renderImageContent = (image, index) => {
+    const imageNode = (
+      <Fade
+        in
+        key={`${selectedOpportunity.title}-${index}`}
+        transition={fadeTransition}
+        w="100%"
+        h="100%"
+      >
+        <Image
+          src={image.src}
+          alt={image.alt}
+          w="100%"
+          h="100%"
+          objectFit="cover"
+          objectPosition={{ base: 'left', md: 'center' }}
+          transform={{ base: 'scale(2.65)', md: 'scale(1.65)' }}
+          transformOrigin="center"
+        />
+      </Fade>
+    );
+
+    if (!isMobile) {
+      return imageNode;
+    }
+
+    return (
+      <AspectRatio ratio={4 / 3} w="100%">
+        {imageNode}
+      </AspectRatio>
+    );
   };
   const itemHeightRem = 3.5;
   const itemGapRem = 0.75;
@@ -325,8 +359,8 @@ const PastOpportunitiesPage = () => {
 
               <Box
                 w={{ base: '100%', md: '65%' }}
-                maxW={{ base: '26.25rem', md: 'none' }}
-                mx={{ base: 'auto', md: 0 }}
+                maxW={{ base: '100%', md: 'none' }}
+                mx={{ base: '20%', md: 0 }}
               >
                 <Box
                   bg="#E2FEFF"
@@ -338,7 +372,7 @@ const PastOpportunitiesPage = () => {
                   <Grid
                     templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }}
                     templateRows={{
-                      base: 'repeat(3, 12.5rem)',
+                      base: 'repeat(3, auto)',
                       md: 'repeat(2, 10.3125rem)',
                     }}
                     templateAreas={{
@@ -369,24 +403,7 @@ const PastOpportunitiesPage = () => {
                       }
                     }}
                   >
-                    <Fade
-                      in
-                      key={`${selectedOpportunity.title}-0`}
-                      transition={fadeTransition}
-                      w="100%"
-                      h="100%"
-                    >
-                      <Image
-                        src={selectedOpportunity.images[0].src}
-                        alt={selectedOpportunity.images[0].alt}
-                        w="100%"
-                        h="100%"
-                        objectFit="cover"
-                        objectPosition="center"
-                        transform={{ base: 'scale(2.65)', md: 'scale(1.65)' }}
-                        transformOrigin="center"
-                      />
-                    </Fade>
+                    {renderImageContent(selectedOpportunity.images[0], 0)}
                   </GridItem>
                   <GridItem
                     area="rightTop"
@@ -410,24 +427,7 @@ const PastOpportunitiesPage = () => {
                       }
                     }}
                   >
-                    <Fade
-                      in
-                      key={`${selectedOpportunity.title}-1`}
-                      transition={fadeTransition}
-                      w="100%"
-                      h="100%"
-                    >
-                      <Image
-                        src={selectedOpportunity.images[1].src}
-                        alt={selectedOpportunity.images[1].alt}
-                        w="100%"
-                        h="100%"
-                        objectFit="cover"
-                        objectPosition="center"
-                        transform={{ base: 'scale(2.65)', md: 'scale(1.65)' }}
-                        transformOrigin="center"
-                      />
-                    </Fade>
+                    {renderImageContent(selectedOpportunity.images[1], 1)}
                   </GridItem>
                   <GridItem
                     area="rightTop2"
@@ -451,24 +451,7 @@ const PastOpportunitiesPage = () => {
                       }
                     }}
                   >
-                    <Fade
-                      in
-                      key={`${selectedOpportunity.title}-5`}
-                      transition={fadeTransition}
-                      w="100%"
-                      h="100%"
-                    >
-                      <Image
-                        src={selectedOpportunity.images[5].src}
-                        alt={selectedOpportunity.images[5].alt}
-                        w="100%"
-                        h="100%"
-                        objectFit="cover"
-                        objectPosition="center"
-                        transform={{ base: 'scale(2.65)', md: 'scale(1.65)' }}
-                        transformOrigin="center"
-                      />
-                    </Fade>
+                    {renderImageContent(selectedOpportunity.images[5], 5)}
                   </GridItem>
                   <GridItem
                     area="bottomLeft"
@@ -492,24 +475,7 @@ const PastOpportunitiesPage = () => {
                       }
                     }}
                   >
-                    <Fade
-                      in
-                      key={`${selectedOpportunity.title}-2`}
-                      transition={fadeTransition}
-                      w="100%"
-                      h="100%"
-                    >
-                      <Image
-                        src={selectedOpportunity.images[2].src}
-                        alt={selectedOpportunity.images[2].alt}
-                        w="100%"
-                        h="100%"
-                        objectFit="cover"
-                        objectPosition="center"
-                        transform={{ base: 'scale(2.65)', md: 'scale(1.65)' }}
-                        transformOrigin="center"
-                      />
-                    </Fade>
+                    {renderImageContent(selectedOpportunity.images[2], 2)}
                   </GridItem>
                   <GridItem
                     area="bottomMid"
@@ -533,24 +499,7 @@ const PastOpportunitiesPage = () => {
                       }
                     }}
                   >
-                    <Fade
-                      in
-                      key={`${selectedOpportunity.title}-3`}
-                      transition={fadeTransition}
-                      w="100%"
-                      h="100%"
-                    >
-                      <Image
-                        src={selectedOpportunity.images[3].src}
-                        alt={selectedOpportunity.images[3].alt}
-                        w="100%"
-                        h="100%"
-                        objectFit="cover"
-                        objectPosition="center"
-                        transform={{ base: 'scale(2.65)', md: 'scale(1.65)' }}
-                        transformOrigin="center"
-                      />
-                    </Fade>
+                    {renderImageContent(selectedOpportunity.images[3], 3)}
                   </GridItem>
                   <GridItem
                     area="rightBottom"
@@ -574,24 +523,7 @@ const PastOpportunitiesPage = () => {
                       }
                     }}
                   >
-                    <Fade
-                      in
-                      key={`${selectedOpportunity.title}-4`}
-                      transition={fadeTransition}
-                      w="100%"
-                      h="100%"
-                    >
-                      <Image
-                        src={selectedOpportunity.images[4].src}
-                        alt={selectedOpportunity.images[4].alt}
-                        w="100%"
-                        h="100%"
-                        objectFit="cover"
-                        objectPosition="center"
-                        transform={{ base: 'scale(2.65)', md: 'scale(1.65)' }}
-                        transformOrigin="center"
-                      />
-                    </Fade>
+                    {renderImageContent(selectedOpportunity.images[4], 4)}
                   </GridItem>
                   </Grid>
                 </Box>
