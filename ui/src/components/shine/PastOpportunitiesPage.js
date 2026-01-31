@@ -167,13 +167,14 @@ const PastOpportunitiesPage = () => {
     onClose();
     setModalImage(null);
   };
-  const itemHeight = 56;
-  const itemGap = 12;
+  const itemHeightRem = 3.5;
+  const itemGapRem = 0.75;
   const visibleCount = 4;
-  const step = itemHeight + itemGap;
-  const listHeight = visibleCount * itemHeight + (visibleCount - 1) * itemGap;
+  const stepRem = itemHeightRem + itemGapRem;
+  const listHeightRem =
+    visibleCount * itemHeightRem + (visibleCount - 1) * itemGapRem;
   const translateY =
-    listHeight / 2 - itemHeight / 2 - selectedIndex * step;
+    listHeightRem / 2 - itemHeightRem / 2 - selectedIndex * stepRem;
 
   return (
     <Container maxW="container.xl">
@@ -193,13 +194,13 @@ const PastOpportunitiesPage = () => {
           >
             <Box
               as="svg"
-              width={{ base: '24px', md: '28px' }}
-              height={{ base: '24px', md: '28px' }}
+              width={{ base: '1.5rem', md: '1.75rem' }}
+              height={{ base: '1.5rem', md: '1.75rem' }}
               viewBox="0 0 36 32"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
-              mt={{ base: '2px', md: '4px' }}
+              mt={{ base: '0.125rem', md: '0.25rem' }}
             >
               <g clipPath="url(#clip0_158_2614)">
                 <path
@@ -220,9 +221,9 @@ const PastOpportunitiesPage = () => {
               fontFamily="'DM Serif Display', serif"
               fontWeight="600"
               fontStyle="italic"
-              fontSize={{ base: '32px', md: '42px' }}
+              fontSize={{ base: '2rem', md: '2.625rem' }}
               lineHeight="94%"
-              letterSpacing={{ base: '-1px', md: '-2px' }}
+              letterSpacing={{ base: '-0.0625rem', md: '-0.125rem' }}
             >
               Past Opportunities
             </Heading>
@@ -233,9 +234,9 @@ const PastOpportunitiesPage = () => {
             fontFamily="Manrope, sans-serif"
             fontWeight="400"
             fontStyle="normal"
-            fontSize={{ base: '16px', md: '20px' }}
+            fontSize={{ base: '1rem', md: '1.25rem' }}
             lineHeight="100%"
-            letterSpacing="0px"
+            letterSpacing="0rem"
             textAlign={{ base: 'left', md: 'left' }}
           >
             {/* // TODO-aparedan: Please put down some description here */}
@@ -263,19 +264,19 @@ const PastOpportunitiesPage = () => {
                   <Box
                     as={BiSolidRightArrow}
                     color="#21A0A7"
-                    boxSize={{ base: '24px', md: '35px' }}
+                    boxSize={{ base: '1.5rem', md: '2.1875rem' }}
                   />
                   <Box
                     w="100%"
-                    h={`${listHeight}px`}
+                    h={`${listHeightRem}rem`}
                     overflow="hidden"
                   >
                     <VStack
                       alignItems={{ base: 'start', md: 'start' }}
-                      spacing={`${itemGap}px`}
+                      spacing={`${itemGapRem}rem`}
                       transform={{
-                        base: `translateY(${translateY}px)`,
-                        md: `translateY(${translateY}px)`,
+                        base: `translateY(${translateY}rem)`,
+                        md: `translateY(${translateY}rem)`,
                       }}
                       transition="transform 0.7s ease"
                     >
@@ -288,7 +289,7 @@ const PastOpportunitiesPage = () => {
                             cursor="pointer"
                             opacity={isSelected ? 1 : 0.5}
                             onClick={() => setSelectedIndex(index)}
-                            minH={`${itemHeight}px`}
+                            minH={`${itemHeightRem}rem`}
                             display="flex"
                             flexDirection="column"
                             justifyContent="center"
@@ -298,9 +299,9 @@ const PastOpportunitiesPage = () => {
                               color={isSelected ? 'gray.800' : 'gray.500'}
                               fontFamily="Manrope, sans-serif"
                               fontStyle="normal"
-                              fontSize={{ base: '16px', md: '18px' }}
+                              fontSize={{ base: '1rem', md: '1.125rem' }}
                               lineHeight="100%"
-                              letterSpacing="0px"
+                              letterSpacing="0rem"
                               textAlign={{ base: 'left', md: 'left' }}
                             >
                               {opportunity.title}
@@ -310,10 +311,10 @@ const PastOpportunitiesPage = () => {
                               fontFamily="Manrope, sans-serif"
                               fontWeight="600"
                               fontStyle="normal"
-                              fontSize={{ base: '12px', md: '14px' }}
+                              fontSize={{ base: '0.75rem', md: '0.875rem' }}
                               lineHeight="100%"
-                              letterSpacing="0px"
-                              mt={{ base: '4px', md: '8px' }}
+                              letterSpacing="0rem"
+                              mt={{ base: '0.25rem', md: '0.5rem' }}
                               textAlign={{ base: 'left', md: 'left' }}
                             >
                               {opportunity.date}
@@ -328,7 +329,7 @@ const PastOpportunitiesPage = () => {
 
               <Box
                 w={{ base: '100%', md: '65%' }}
-                maxW={{ base: '420px', md: 'none' }}
+                maxW={{ base: '26.25rem', md: 'none' }}
                 mx={{ base: 'auto', md: 0 }}
               >
                 <Box
@@ -340,7 +341,10 @@ const PastOpportunitiesPage = () => {
                 >
                   <Grid
                     templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }}
-                    templateRows={{ base: 'repeat(3, 200px)', md: 'repeat(2, 165px)' }}
+                    templateRows={{
+                      base: 'repeat(3, 12.5rem)',
+                      md: 'repeat(2, 10.3125rem)',
+                    }}
                     templateAreas={{
                       base: `"feature rightTop" "rightTop2 bottomLeft" "bottomMid rightBottom"`,
                       md: `"feature feature rightTop rightTop2" "bottomLeft bottomMid bottomMid rightBottom"`,
