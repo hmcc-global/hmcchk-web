@@ -35,6 +35,7 @@ const cards = [
     image: `${process.env.PUBLIC_URL}/images/connect/children.jpg`,
     link: '/building-blocks',
     showButton: true,
+    buttonColor: '#21A0A7',
   },
   {
     title: 'SHINE Ministry',
@@ -43,6 +44,7 @@ const cards = [
     image: `${process.env.PUBLIC_URL}/images/connect/children.jpg`,
     link: '/shine-ministry',
     showButton: true,
+    buttonColor: '#EBAC09'
   }
 ];
 
@@ -97,7 +99,7 @@ const MinistryCard = (props) => {
               <Button
                 as="a"
                 href={card.link}
-                bg={'#21A0A7'}
+                bg={card.buttonColor}
                 borderRadius={'15px'}
                 width="100%"
                 textColor={'white'}
