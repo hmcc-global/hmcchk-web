@@ -155,10 +155,6 @@ const PastOpportunitiesPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleImageTap = (image) => {
-    if (!isMobile) {
-      return;
-    }
-
     setModalImage(image);
     onOpen();
   };
@@ -359,7 +355,7 @@ const PastOpportunitiesPage = () => {
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
-                    cursor={{ base: 'pointer', md: 'default' }}
+                    cursor="pointer"
                     onClick={() => handleImageTap(selectedOpportunity.images[0])}
                     role="button"
                     tabIndex={0}
@@ -400,7 +396,7 @@ const PastOpportunitiesPage = () => {
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
-                    cursor={{ base: 'pointer', md: 'default' }}
+                    cursor="pointer"
                     onClick={() => handleImageTap(selectedOpportunity.images[1])}
                     role="button"
                     tabIndex={0}
@@ -441,7 +437,7 @@ const PastOpportunitiesPage = () => {
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
-                    cursor={{ base: 'pointer', md: 'default' }}
+                    cursor="pointer"
                     onClick={() => handleImageTap(selectedOpportunity.images[5])}
                     role="button"
                     tabIndex={0}
@@ -482,7 +478,7 @@ const PastOpportunitiesPage = () => {
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
-                    cursor={{ base: 'pointer', md: 'default' }}
+                    cursor="pointer"
                     onClick={() => handleImageTap(selectedOpportunity.images[2])}
                     role="button"
                     tabIndex={0}
@@ -523,7 +519,7 @@ const PastOpportunitiesPage = () => {
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
-                    cursor={{ base: 'pointer', md: 'default' }}
+                    cursor="pointer"
                     onClick={() => handleImageTap(selectedOpportunity.images[3])}
                     role="button"
                     tabIndex={0}
@@ -564,7 +560,7 @@ const PastOpportunitiesPage = () => {
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
-                    cursor={{ base: 'pointer', md: 'default' }}
+                    cursor="pointer"
                     onClick={() => handleImageTap(selectedOpportunity.images[4])}
                     role="button"
                     tabIndex={0}
@@ -604,17 +600,22 @@ const PastOpportunitiesPage = () => {
           </Box>
         </Box>
       </VStack>
-      <Modal isOpen={isOpen} onClose={handleModalClose} size="full">
+      <Modal isOpen={isOpen} onClose={handleModalClose} size="xl" isCentered>
         <ModalOverlay />
-        <ModalContent bg="blackAlpha.900">
+        <ModalContent bg="blackAlpha.900" maxW={{ base: '90vw', md: '48rem' }}>
           <ModalCloseButton color="white" />
-          <ModalBody p={4} display="flex" alignItems="center">
+          <ModalBody
+            p={4}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
             {modalImage && (
               <Image
                 src={modalImage.src}
                 alt={modalImage.alt}
                 w="100%"
-                h="100%"
+                maxH={{ base: '80vh', md: '70vh' }}
                 objectFit="contain"
               />
             )}
