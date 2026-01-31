@@ -45,6 +45,7 @@ const opportunities = [
     ],
   },
   {
+    // TODO-aparedan: Please put down some photos from the Mother's Choice event here
     title: "Mother's Choice Family Fun Fest",
     date: 'Sunday, Jan 25, 2026',
     images: [
@@ -75,6 +76,7 @@ const opportunities = [
     ],
   },
   {
+    // TODO-aparedan: Please put down some photos from the English Academy Tutoring event here
     title: 'English Academy Tutoring',
     date: 'Jan-Mar, 2026',
     images: [
@@ -212,6 +214,7 @@ const PastOpportunitiesPage = () => {
             letterSpacing="0px"
             textAlign={{ base: 'left', md: 'left' }}
           >
+            {/* // TODO-aparedan: Please put down some description here */}
             We hope to accomplish our mission ...
           </Text>
 
