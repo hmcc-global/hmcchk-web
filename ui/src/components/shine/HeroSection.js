@@ -56,7 +56,7 @@ const HeroSection = () => {
         width="100%"
         height="100%"
         zIndex="1"
-        background="linear-gradient(to top, rgb(246,250,255, 1) 10%, rgba(246,250,255,0) 25%)"
+        background="linear-gradient(to top, rgb(246,250,255, 1) 10%, rgba(21,11,6,0) 15%)"
         position="absolute"
         top="0"
         left="0"
