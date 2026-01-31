@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 
-const STRATEGY_TITLE = 'The 5Gs';
+const STRATEGY_TITLE = 'The Transformation Pathway';
 const STRATEGY_BLURB =
   'Here at HMCC, we believe that each and every single person should engage in these 5Gs to experience life transformation, mature as a disciple, and impact the world for Christ.';
 
