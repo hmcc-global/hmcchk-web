@@ -1,8 +1,10 @@
 import { Flex } from '@chakra-ui/react';
+import HeroSection from './HeroSection';
 
 const ShinePage = (props) => {
   return (
     <Flex direction="column" bgColor="#F6FAFF">
+      <HeroSection />
       <Flex
         alignSelf="center"
         direction="column"
