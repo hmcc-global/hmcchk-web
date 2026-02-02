@@ -18,7 +18,9 @@ import {
   Image,
   useDisclosure,
   Stack,
+  SimpleGrid,
 } from '@chakra-ui/react';
+import { MAX } from 'uuid';
 
 const RenderSwitch = ({ modalSelection }) => {
   switch (modalSelection) {
@@ -144,7 +146,7 @@ const GivingSection = (props) => {
     { text: 'Cheque', img: '/images/giving/Cheque.png' },
   ];
 
-  const handleLearnMoreClick = (cardText) => {
+  const LearnMore = (cardText) => {
     setSelectedCard(cardText);
     onOpen();
   };
@@ -152,14 +154,14 @@ const GivingSection = (props) => {
   const GivingContent = () => (
     <Box
       w={['100%', '100%', '100%']}
-      h="20%"
       borderRadius="lg"
       fontFamily="Manrope"
       bg="#FFFAED"
+      pt={6}
     >
       <Heading
         as="h2"
-        size="md"
+        fontSize={{ base: 'sm', md: 'xl' }}
         paddingBottom="1vw"
         color="#000000"
         fontFamily="Manrope"
@@ -187,6 +189,7 @@ const GivingSection = (props) => {
             borderRadius: '4px',
           },
         }}
+        display={{ base: 'none', md: 'block' }}
       >
         <Flex
           display="inline-flex"
@@ -253,7 +256,7 @@ const GivingSection = (props) => {
                 </Text>
 
                 <Button
-                  onClick={() => handleLearnMoreClick(card.text)}
+                  onClick={() => LearnMore(card.text)}
                   color="black"
                   fontFamily="Manrope"
                   fontWeight="medium"
@@ -270,7 +273,6 @@ const GivingSection = (props) => {
                     borderColor: '#AA7B00',
                     boxShadow: '0 0 6px 2px #FFFFFF',
                   }}
-                  transition="all 0.2s"
                   size="sm"
                   whiteSpace="nowrap"
                 >
@@ -282,16 +284,267 @@ const GivingSection = (props) => {
         </Flex>
       </Box>
 
+      <Box display={{ base: 'block', md: 'none' }}>
+        <SimpleGrid columns={2} spacing={4} mb={4}>
+          {givingCards.slice(0, 2).map((card, index) => (
+            <Box
+              key={index}
+              width="100%"
+              height="140px"
+              borderRadius="lg"
+              overflow="hidden"
+              position="relative"
+            >
+              <Box
+                position="absolute"
+                top="0"
+                left="0"
+                right="0"
+                bottom="0"
+                backgroundImage={`url(${card.img})`}
+                backgroundSize="cover"
+                backgroundPosition="center"
+                filter="blur(4px)"
+                opacity="0.5"
+              />
+              <Box
+                position="absolute"
+                top="0"
+                left="0"
+                right="0"
+                bottom="0"
+                background="linear-gradient(to top, #ede2c0b3 0%, #dec58580 30%, transparent 70%)"
+                zIndex="1"
+              />
+
+              <Box
+                position="relative"
+                zIndex="1"
+                height="100%"
+                width="100%"
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                textAlign="center"
+              >
+                <Text
+                  fontFamily="Manrope"
+                  fontWeight="bold"
+                  fontSize="md"
+                  color="black"
+                  textShadow="0px 2px 4px #FFFFFF)"
+                  mb={2}
+                  whiteSpace="normal"
+                >
+                  {card.text}
+                </Text>
+
+                <Button
+                  onClick={() => LearnMore(card.text)}
+                  color="black"
+                  fontFamily="Manrope"
+                  fontWeight="medium"
+                  fontSize="sm"
+                  bg="transparent"
+                  borderColor="black"
+                  border="1px"
+                  px={3}
+                  py={1}
+                  borderRadius="full"
+                  _hover={{
+                    bg: '#AA7B00',
+                    color: 'white',
+                    borderColor: '#AA7B00',
+                    boxShadow: '0 0 6px 2px #FFFFFF',
+                  }}
+                  size="sm"
+                  whiteSpace="nowrap"
+                >
+                  Learn more →
+                </Button>
+              </Box>
+            </Box>
+          ))}
+        </SimpleGrid>
+        <SimpleGrid columns={2} spacing={4} mb={4}>
+          {givingCards.slice(2, 4).map((card, index) => (
+            <Box
+              key={index + 2}
+              width="100%"
+              height="140px"
+              borderRadius="lg"
+              overflow="hidden"
+              position="relative"
+            >
+              <Box
+                position="absolute"
+                top="0"
+                left="0"
+                right="0"
+                bottom="0"
+                backgroundImage={`url(${card.img})`}
+                backgroundSize="cover"
+                backgroundPosition="center"
+                filter="blur(4px)"
+                opacity="0.5"
+              />
+              <Box
+                position="absolute"
+                top="0"
+                left="0"
+                right="0"
+                bottom="0"
+                background="linear-gradient(to top, #ede2c0b3 0%, #dec58580 30%, transparent 70%)"
+                zIndex="1"
+              />
+
+              <Box
+                position="relative"
+                zIndex="1"
+                height="100%"
+                width="100%"
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                textAlign="center"
+              >
+                <Text
+                  fontFamily="Manrope"
+                  fontWeight="bold"
+                  fontSize="md"
+                  color="black"
+                  textShadow="0px 2px 4px #FFFFFF)"
+                  mb={2}
+                  whiteSpace="normal"
+                >
+                  {card.text}
+                </Text>
+
+                <Button
+                  onClick={() => LearnMore(card.text)}
+                  color="black"
+                  fontFamily="Manrope"
+                  fontWeight="medium"
+                  fontSize="sm"
+                  bg="transparent"
+                  borderColor="black"
+                  border="1px"
+                  px={3}
+                  py={1}
+                  borderRadius="full"
+                  _hover={{
+                    bg: '#AA7B00',
+                    color: 'white',
+                    borderColor: '#AA7B00',
+                    boxShadow: '0 0 6px 2px #FFFFFF',
+                  }}
+                  size="sm"
+                  whiteSpace="nowrap"
+                >
+                  Learn more →
+                </Button>
+              </Box>
+            </Box>
+          ))}
+        </SimpleGrid>
+        <Flex justifyContent="center">
+          <Box
+            width="48%"
+            height="140px"
+            borderRadius="lg"
+            overflow="hidden"
+            position="relative"
+          >
+            <Box
+              position="absolute"
+              top="0"
+              left="0"
+              right="0"
+              bottom="0"
+              backgroundImage={`url(${givingCards[4].img})`}
+              backgroundSize="cover"
+              backgroundPosition="center"
+              filter="blur(4px)"
+              opacity="0.5"
+            />
+            <Box
+              position="absolute"
+              top="0"
+              left="0"
+              right="0"
+              bottom="0"
+              background="linear-gradient(to top, #ede2c0b3 0%, #dec58580 30%, transparent 70%)"
+              zIndex="1"
+            />
+
+            <Box
+              position="relative"
+              zIndex="1"
+              height="100%"
+              width="100%"
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              p={4}
+              textAlign="center"
+            >
+              <Text
+                fontFamily="Manrope"
+                fontWeight="bold"
+                fontSize="md"
+                color="black"
+                textShadow="0px 2px 4px #FFFFFF)"
+                mb={2}
+                whiteSpace="normal"
+              >
+                {givingCards[4].text}
+              </Text>
+
+              <Button
+                onClick={() => LearnMore(givingCards[4].text)}
+                color="black"
+                fontFamily="Manrope"
+                fontWeight="medium"
+                fontSize="sm"
+                bg="transparent"
+                borderColor="black"
+                border="1px"
+                px={3}
+                py={1}
+                borderRadius="full"
+                _hover={{
+                  bg: '#AA7B00',
+                  color: 'white',
+                  borderColor: '#AA7B00',
+                  boxShadow: '0 0 6px 2px #FFFFFF',
+                }}
+                size="sm"
+                whiteSpace="nowrap"
+              >
+                Learn more →
+              </Button>
+            </Box>
+          </Box>
+        </Flex>
+      </Box>
+
       <Box paddingTop="2vh">
-        <Text>
+        <Text fontSize={{ base: '0.75rem', md: 'md' }}>
           Personal information is kept confidential, used only for tax receipt
           purposes, and is only accessible by the Stewardship Team.
         </Text>
       </Box>
       <Box paddingTop="2vh">
-        <Text>
+        <Text fontSize={{ base: '0.75rem', md: 'md' }}>
           If you have any questions, please do not hesitate to contact us:&nbsp;
-          <Text as="span" fontWeight="bold">
+          <Text
+            as="span"
+            fontWeight="bold"
+            fontSize={{ base: '0.75rem', md: 'md' }}
+          >
             hk@hmccglobal.org
           </Text>
         </Text>
@@ -318,8 +571,8 @@ const GivingSection = (props) => {
     <Box fontFamily="Manrope" pt={6}>
       <Heading
         as="h2"
-        size="lg"
-        mb={12}
+        fontSize={{ base: 'sm', md: 'xl' }}
+        mb={{ base: 0, md: 12 }}
         color="#000000"
         fontFamily="Manrope"
         fontWeight="bold"
@@ -331,7 +584,7 @@ const GivingSection = (props) => {
 
       <Flex
         direction={{ base: 'column', md: 'row' }}
-        gap={8}
+        gap={{ base: 0, md: 8 }}
         position="relative"
       >
         <Box
@@ -381,7 +634,7 @@ const GivingSection = (props) => {
             ENGAGE
           </Heading>
           <Text
-            fontSize="md"
+            fontSize={{ base: 'sm', md: 'md' }}
             color="gray.700"
             textAlign="center"
             lineHeight="tall"
@@ -419,7 +672,7 @@ const GivingSection = (props) => {
             EMPOWER
           </Heading>
           <Text
-            fontSize="md"
+            fontSize={{ base: 'sm', md: 'md' }}
             color="gray.700"
             textAlign="center"
             lineHeight="tall"
@@ -457,7 +710,7 @@ const GivingSection = (props) => {
             EXHIBIT
           </Heading>
           <Text
-            fontSize="md"
+            fontSize={{ base: 'sm', md: 'md' }}
             color="gray.700"
             textAlign="center"
             lineHeight="tall"
@@ -472,15 +725,14 @@ const GivingSection = (props) => {
 
   return (
     <Container maxW="container.lg" py={8}>
-      <Box bg="#FFFAED" p={6} borderRadius="lg" mb={10}>
-        <Flex mb={10} position="relative">
+      <Box bg="#FFFAED" p={6} borderRadius="3xl" mb={10}>
+        <Flex bg="white" borderRadius="20px" p={3} gap={2} position="relative">
           <Button
             bg={activeTab === 'giving' ? '#EBAC09' : 'white'}
             variant="unstyled"
             flex={1}
             px={6}
             py={6}
-            fontSize="xl"
             fontWeight="bold"
             fontFamily="Manrope"
             color={activeTab === 'giving' ? '#FFFFFF' : 'black'}
@@ -489,6 +741,7 @@ const GivingSection = (props) => {
             borderColor="gray.200"
             display="flex"
             onClick={() => setActiveTab('giving')}
+            fontSize={{ base: '0.8rem', md: 'xl' }}
           >
             SPONSOR/GIVE
           </Button>
@@ -498,7 +751,7 @@ const GivingSection = (props) => {
             flex={1}
             px={6}
             py={6}
-            fontSize="xl"
+            fontSize={{ base: '0.8rem', md: 'xl' }}
             fontWeight="bold"
             fontFamily="Manrope"
             bg={activeTab === 'prayer' ? '#EBAC09' : 'white'}
