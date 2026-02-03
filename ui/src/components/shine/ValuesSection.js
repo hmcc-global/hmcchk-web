@@ -85,7 +85,7 @@ const ValuesSection = () => {
       </HStack>
       <Grid
         w="100%"
-        gap={{ base: '2rem', md: '3rem', lg: '4rem' }}
+        gap={{ base: '1rem', md: '3rem', lg: '4rem' }}
         templateColumns={{
           base: '1fr',
           lg: 'repeat(auto-fit, minmax(250px, 1fr))',

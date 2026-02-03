@@ -19,6 +19,7 @@ const OurMinistries = (props) => {
         mb={6}
         fontFamily="Manrope"
       >
+        {/* TODO-aparedan: Modify this to better suit inclusion of SHINE */}
         At Harvest Mission Community Church, we are actively reaching out to
         people from all walks of life, specifically college students, working
         adults, and families.
