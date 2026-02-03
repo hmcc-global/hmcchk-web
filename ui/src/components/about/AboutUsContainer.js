@@ -21,7 +21,7 @@ import scrollTo from '../helpers/ScrollTo';
 const sections = [
   'Our Story',
   'Vision & Mission, Our Values',
-  'The Transformation Pathway',
+  "HMCC's Transformation Pathways",
   'Our Staff',
   'Beliefs',
   // 'Our Heart for Missions',
