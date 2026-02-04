@@ -64,6 +64,7 @@ const DiscoverPage = () => {
       title: 'Connect with Our Ministries',
       image: '/images/compass-discover-line.svg',
       description:
+        // TODO-aparedan: Modify this to better suit inclusion of SHINE
         'At Harvest Mission Community Church, we are actively reaching out to people from all walks of life, specifically youths, college students, working adults, and families.',
       link: '/discover/connect-ministries',
       button_color: '#21A0A7',
