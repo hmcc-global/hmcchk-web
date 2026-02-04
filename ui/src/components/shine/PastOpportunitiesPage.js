@@ -181,7 +181,7 @@ const PastOpportunitiesPage = () => {
           h="100%"
           objectFit="cover"
           objectPosition={{ base: 'left', md: 'center' }}
-          transform={{ base: 'scale(2.65)', md: 'scale(1.65)' }}
+          transform={{ base: 'scale3d(1,1,1)', md: 'scale(1.65)' }}
           transformOrigin="center"
         />
       </Fade>
