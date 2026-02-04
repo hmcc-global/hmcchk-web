@@ -28,7 +28,7 @@ const ApproachSection = () => {
     <>
       <HStack
         spacing={2}
-        mb={10}
+        mb={{ base: 6, md: 10 }}
         px={2}
         alignItems="baseline"
         justifyContent={{ base: 'flex-start', md: 'flex-start' }}
@@ -62,9 +62,9 @@ const ApproachSection = () => {
           fontFamily="'DM Serif Display', serif"
           fontWeight="600"
           fontStyle="italic"
-          fontSize="32px"
+          fontSize={{ base: '2rem', md: '2.625rem' }}
           lineHeight="94%"
-          letterSpacing={{ base: '-1px', md: '-2px' }}
+          letterSpacing={{ base: '-0.0625rem', md: '-0.125rem' }}
         >
           Our Approach
         </Heading>

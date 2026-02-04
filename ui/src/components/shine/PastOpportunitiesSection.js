@@ -207,15 +207,9 @@ const PastOpportunitiesPage = () => {
     listHeightRem / 2 - itemHeightRem / 2 - selectedIndex * stepRem;
 
   return (
-    <Container maxW="container.xl">
-      <VStack
-        alignItems="start"
-        justifyContent="space-between"
-        h="90%"
-        m={{ base: '1', md: '3' }}
-        gap={{ base: '3', md: 'none' }}
-      >
-        <Box w="100%" py={{ base: 8, md: 12 }}>
+    <Box w="100%">
+      <VStack alignItems="start" justifyContent="space-between">
+        <Box w="100%">
           <HStack
             spacing={2}
             mb={2}
@@ -554,7 +548,7 @@ const PastOpportunitiesPage = () => {
           </ModalBody>
         </ModalContent>
       </Modal>
-    </Container>
+    </Box>
   );
 };
 

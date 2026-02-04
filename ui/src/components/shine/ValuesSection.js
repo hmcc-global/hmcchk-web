@@ -76,9 +76,9 @@ const ValuesSection = () => {
           fontFamily="'DM Serif Display', serif"
           fontWeight="600"
           fontStyle="italic"
-          fontSize="32px"
+          fontSize={{ base: '2rem', md: '2.625rem' }}
           lineHeight="94%"
-          letterSpacing={{ base: '-1px', md: '-2px' }}
+          letterSpacing={{ base: '-0.0625rem', md: '-0.125rem' }}
         >
           Our Values
         </Heading>
