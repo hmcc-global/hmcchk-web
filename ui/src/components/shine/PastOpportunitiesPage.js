@@ -197,9 +197,9 @@ const PastOpportunitiesPage = () => {
       </AspectRatio>
     );
   };
-  const itemHeightRem = 3.5;
-  const itemGapRem = 0.75;
-  const visibleCount = 4;
+  const itemHeightRem = isMobile ? 2.5 : 3.5;
+  const itemGapRem = isMobile ? 0.75 : 0.75;
+  const visibleCount = isMobile ? 2.5 : 4;
   const stepRem = itemHeightRem + itemGapRem;
   const listHeightRem =
     visibleCount * itemHeightRem + (visibleCount - 1) * itemGapRem;
