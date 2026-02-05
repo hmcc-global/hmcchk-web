@@ -3,9 +3,9 @@ import HeroSection from './HeroSection';
 import ValuesSection from './ValuesSection';
 import ApproachSection from './ApproachSection';
 import PastOpportunitiesSection from './PastOpportunitiesSection';
-
 import ShineInvolve from './ShineInvolve';
 import ContactUs from './ContactUs';
+import GivingSection from './GivingSection';
 
 const ShinePage = (props) => {
   return (
@@ -27,6 +27,7 @@ const ShinePage = (props) => {
         <Box marginBottom={{ base: 10, md: 20 }}>
           <ApproachSection />
         </Box>
+        <GivingSection />
         {/* Add components and content for the Shine page here */}
         <PastOpportunitiesSection />
         <ShineInvolve />
