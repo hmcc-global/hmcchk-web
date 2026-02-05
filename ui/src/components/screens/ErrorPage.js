@@ -15,6 +15,7 @@ const ErrorPage = (props) => {
   const path = history.location.pathname.split('/')[1];
   const isSermonNotes = isSermonNotesLink(path);
   const [isLoading, setIsLoading] = useState(true);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [formOpenTime, setFormOpenTime] = useState(
     history.location?.state?.availableAfter
   );
@@ -60,6 +61,12 @@ const ErrorPage = (props) => {
     setIsLoading(true);
     validate();
   }, [history, props]);
+
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => setImageLoaded(true);
+    img.src = process.env.PUBLIC_URL + 'images/default-hk-background.jpeg';
+  }, []);
 
   // Define new pages here
   const errorPages = {
@@ -188,7 +195,7 @@ const ErrorPage = (props) => {
 
   return (
     <>
-      {!isLoading && (
+      {!isLoading && imageLoaded && (
         <Box
           minH="100vh"
           bgImage={`url(${
