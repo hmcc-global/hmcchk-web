@@ -724,7 +724,20 @@ const GivingSection = (props) => {
   );
 
   return (
-    <Container maxW="container.lg" py={8}>
+    <Box width="100%" py={8}>
+      <Text
+        color="black"
+        mb={{ base: 6, md: 8 }}
+        fontFamily="Manrope, sans-serif"
+        fontWeight="400"
+        fontStyle="normal"
+        fontSize={{ base: '16px', md: '20px' }}
+        lineHeight="100%"
+        letterSpacing="0px"
+        textAlign={{ base: 'left', md: 'left' }}
+      >
+        Here's our future opportunities that you can participate in
+      </Text>
       <Box bg="#FFFAED" p={6} borderRadius="3xl" mb={10}>
         <Flex bg="white" borderRadius="20px" p={3} gap={2} position="relative">
           <Button
@@ -768,7 +781,7 @@ const GivingSection = (props) => {
 
         {activeTab === 'giving' ? <GivingContent /> : <PrayerRequestContent />}
       </Box>
-    </Container>
+    </Box>
   );
 };
 

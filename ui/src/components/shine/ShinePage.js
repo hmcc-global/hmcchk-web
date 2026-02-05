@@ -27,10 +27,9 @@ const ShinePage = (props) => {
         <Box marginBottom={{ base: 10, md: 20 }}>
           <ApproachSection />
         </Box>
-        <GivingSection />
-        {/* Add components and content for the Shine page here */}
-        <PastOpportunitiesSection />
         <ShineInvolve />
+        <GivingSection />
+        <PastOpportunitiesSection />
         <ContactUs />
       </Flex>
     </Flex>
