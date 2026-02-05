@@ -1,7 +1,6 @@
-import React from 'react';
-import BaseCard from '../ui/src/components/BaseCard';
+import BaseCard from './BaseCard';
 
-export default {
+const meta = {
   title: 'Components/BaseCard',
   component: BaseCard,
   parameters: {
@@ -14,6 +13,7 @@ export default {
     },
   },
 };
+export default meta;
 
 const Template = (args) => <BaseCard {...args}>Sample card content</BaseCard>;
 
