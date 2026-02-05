@@ -31,11 +31,13 @@ import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 
 const EventCard = (props) => {
-  const { eventData } = props;
+  const { eventData, isShineInvolve = false } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [colors, setColors] = useState([]);
   const tagArray = [];
+
+  const buttonBgColor = isShineInvolve ? '#7D5300' : '#2C5282';
 
   const onOpen = (e) => {
     if (!e.target.href) {
@@ -213,7 +215,7 @@ const EventCard = (props) => {
                 as={Link}
                 size="md"
                 target="_blank"
-                bg="#2C5282"
+                bg={buttonBgColor}
                 color="white"
                 _hover={{ opacity: '90%', textDecoration: 'none' }}
                 href={eventData.signUpUrl ? eventData.signUpUrl : null}
@@ -229,7 +231,7 @@ const EventCard = (props) => {
                 as={Link}
                 size="md"
                 target="_blank"
-                bg="#2C5282"
+                bg={buttonBgColor}
                 color="white"
                 _hover={{ opacity: '90%', textDecoration: 'none' }}
                 href={generateGoogleCalendarLink(eventData)}
@@ -367,7 +369,7 @@ const EventCard = (props) => {
                 <Button
                   as={Link}
                   target="_blank"
-                  bg="#2C5282"
+                  bg={buttonBgColor}
                   color="white"
                   _hover={{ opacity: '90%', textDecoration: 'none' }}
                   href={eventData.signUpUrl ? eventData.signUpUrl : null}
@@ -384,7 +386,7 @@ const EventCard = (props) => {
                 <Button
                   as={Link}
                   target="_blank"
-                  bg="#2C5282"
+                  bg={buttonBgColor}
                   color="white"
                   _hover={{ opacity: '90%', textDecoration: 'none' }}
                   href={generateGoogleCalendarLink(eventData)}

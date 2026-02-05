@@ -4,6 +4,9 @@ import ValuesSection from './ValuesSection';
 import ApproachSection from './ApproachSection';
 import PastOpportunitiesSection from './PastOpportunitiesSection';
 
+import ShineInvolve from './ShineInvolve';
+import ContactUs from './ContactUs';
+
 const ShinePage = (props) => {
   return (
     <Flex direction="column" bgColor="#F6FAFF">
@@ -12,7 +15,7 @@ const ShinePage = (props) => {
         alignSelf="center"
         direction="column"
         justifyContent="space-between"
-        w="100%"
+        w={{ base: '100%', md: '85%' }}
         maxW="container.xl"
         m={{ base: '1', md: '3' }}
         px={{ base: 4, md: 6, lg: 8 }}
@@ -26,6 +29,8 @@ const ShinePage = (props) => {
         </Box>
         {/* Add components and content for the Shine page here */}
         <PastOpportunitiesSection />
+        <ShineInvolve />
+        <ContactUs />
       </Flex>
     </Flex>
   );
