@@ -9,7 +9,7 @@ const bgImage = {
 
 const settings = {
   infinite: true,
-  // autoplay: true,
+  autoplay: true,
   autoplaySpeed: 1500,
   speed: 500,
   slidesToShow: 3,
@@ -33,7 +33,8 @@ const settings = {
 };
 
 const blurb = {
-  "description": "Shine Ministry serves the city of Hong Kong...... We partner with Mother’s Choice, Christian Action to help children in loving and following Jesus. ...., community building, and lots of fun!"
+  "description": "You are the light of the world. A city set on a hill cannot be hidden. Nor do people light a lamp and put it under a basket, but on a stand, and it gives light to all in the house.",
+  "subDescription": "Matthew 5:14-15"
 };
 
 const HeroSection = () => {
@@ -125,6 +126,8 @@ const HeroSection = () => {
                 textShadow="0px 1px 2px rgba(0,0,0,0.3)"
               >
                 {blurb.description}
+                <br/>
+                <span style={{fontWeight: "800"}}>{blurb.subDescription}</span>
               </Text>
 
               <Box 
@@ -139,11 +142,10 @@ const HeroSection = () => {
                   position="relative"
                 >
                   <Slider {...settings}>
-                    {[1, 2, 3, 4, 5, 6, 7].map((num) => (
+                    {[1, 2, 3, 4, 5, 6].map((num) => (
                       <Box key={num} px={{ base: "5px", md: "10px" }}>
                         <Box
-                          // TODO-aparedan: change to releveant SHINE pics
-                          bgImage={process.env.PUBLIC_URL + `/images/home/community-${num}.png`}
+                          bgImage={process.env.PUBLIC_URL + `/images/shine/hero-${num}.jpg`}
                           borderRadius="2xl"
                           bgSize="cover"
                           bgPosition="center"
@@ -220,6 +222,8 @@ const HeroSection = () => {
               textShadow="0px 1px 2px rgba(0,0,0,0.3)"
             >
               {blurb.description}
+              <br/>
+              {blurb.subDescription}
             </Text>
           </Box>
           <Box 
@@ -233,11 +237,10 @@ const HeroSection = () => {
               position="relative"
             >
               <Slider {...settings}>
-                {[1, 2, 3, 4, 5, 6, 7].map((num) => (
+                {[1, 2, 3, 4, 5, 6].map((num) => (
                   <Box key={num} px={{ base: "5px", md: "10px" }}>
                     <Box
-                      // TODO-aparedan: change to releveant SHINE pics
-                      bgImage={process.env.PUBLIC_URL + `/images/home/community-${num}.png`}
+                      bgImage={process.env.PUBLIC_URL + `/images/shine/hero-${num}.jpg`}
                       borderRadius="2xl"
                       bgSize="cover"
                       bgPosition="center"

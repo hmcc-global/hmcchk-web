@@ -1,7 +1,6 @@
 import React from 'react';
-import { HStack, Box, Heading, Grid, Image, Text } from '@chakra-ui/react';
+import { HStack, Box, Heading, Grid, Text } from '@chakra-ui/react';
 
-// TODO-aparedan: Finalise this
 const values = [
   {
     title: 'Educate',

@@ -39,9 +39,8 @@ const cards = [
   },
   {
     title: 'SHINE Ministry',
-    description: 'Some SHINE Ministry description here',
-    // TODO-aparedan: FINALISE THIS
-    image: `${process.env.PUBLIC_URL}/images/connect/children.jpg`,
+    description: 'Shining God’s light through serving our local community.',
+    image: `${process.env.PUBLIC_URL}/images/connect/shine.png`,
     link: '/shine-ministry',
     showButton: true,
     buttonColor: '#EBAC09'

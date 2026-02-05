@@ -167,7 +167,7 @@ const GivingSection = (props) => {
         fontFamily="Manrope"
         letterSpacing={'0.12em'}
       >
-        <Center>WAYS TO SPONSOR/GIVE:</Center>
+        <Center>WAYS TO GIVE:</Center>
       </Heading>
 
       <Box
@@ -606,6 +606,7 @@ const GivingSection = (props) => {
           display={{ base: 'none', md: 'block' }}
         />
 
+        {/* TODO-aparedan: Finalise these prayer requests */}
         <VStack spacing={6} align="center" p={4} flex={1}>
           <Box
             width="80px"
@@ -736,7 +737,7 @@ const GivingSection = (props) => {
         letterSpacing="0px"
         textAlign={{ base: 'left', md: 'left' }}
       >
-        Here's our future opportunities that you can participate in
+        Partner with us through support
       </Text>
       <Box bg="#FFFAED" p={6} borderRadius="3xl" mb={10}>
         <Flex bg="white" borderRadius="20px" p={3} gap={2} position="relative">
@@ -756,7 +757,7 @@ const GivingSection = (props) => {
             onClick={() => setActiveTab('giving')}
             fontSize={{ base: '0.8rem', md: 'xl' }}
           >
-            SPONSOR/GIVE
+            GIVE
           </Button>
 
           <Button
@@ -775,7 +776,7 @@ const GivingSection = (props) => {
             display="flex"
             onClick={() => setActiveTab('prayer')}
           >
-            PRAYER REQUEST
+            PRAY
           </Button>
         </Flex>
 

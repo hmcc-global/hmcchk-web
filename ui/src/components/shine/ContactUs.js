@@ -55,13 +55,12 @@ const ContactUs = () => {
           fontFamily="Manrope, sans-serif"
           fontWeight="400"
           fontStyle="normal"
-          fontSize={{ base: '1rem', md: '1.25rem' }}
+          fontSize={{ base: '0,8rem', md: '1rem' }}
           lineHeight="100%"
           letterSpacing="0px"
           textAlign="left"
         >
-          We are constantly looking and evaluating partners to work together. If
-          you have any suggestions or questions, please contact shine@hmcc.net
+          We are constantly looking for ways to serve and shine God's light to our community. Contact us if you are passionate about a cause that you would like us to explore or have any questions.
         </Text>
         <Flex
           w="40%"

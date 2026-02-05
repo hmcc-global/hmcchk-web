@@ -23,36 +23,6 @@ import {
 
 const opportunities = [
   {
-    title: 'Tai Po Healthcare Outreach',
-    date: 'Sunday, Jan 18, 2026',
-    images: [
-      {
-        src: '/images/shine/taipo_healthcare_1.jpg',
-        alt: 'Tai Po Healthcare Outreach highlight',
-      },
-      {
-        src: '/images/shine/taipo_healthcare_2.jpg',
-        alt: 'Tai Po Healthcare Outreach team',
-      },
-      {
-        src: '/images/shine/taipo_healthcare_3.jpg',
-        alt: 'Tai Po Healthcare Outreach service moment',
-      },
-      {
-        src: '/images/shine/taipo_healthcare_4.jpg',
-        alt: 'Tai Po Healthcare Outreach activity',
-      },
-      {
-        src: '/images/shine/taipo_healthcare_5.jpg',
-        alt: 'Tai Po Healthcare Outreach volunteers',
-      },
-      {
-        src: '/images/shine/taipo_healthcare_6.jpg',
-        alt: 'Tai Po Healthcare Outreach volunteers',
-      },
-    ],
-  },
-  {
     // TODO-aparedan: Please put down some photos from the Mother's Choice event here
     title: "Mother's Choice Family Fun Fest",
     date: 'Sunday, Jan 25, 2026',
@@ -84,63 +54,63 @@ const opportunities = [
     ],
   },
   {
-    // TODO-aparedan: Please put down some photos from the English Academy Tutoring event here
-    title: 'English Academy Tutoring',
-    date: 'Jan-Mar, 2026',
+    title: 'Tai Po Healthcare Outreach',
+    date: 'Sunday, Jan 18, 2026',
     images: [
       {
-        src: '/images/shine/placeholder-1.svg',
-        alt: 'English Academy Tutoring session',
+        src: '/images/shine/taipo_healthcare_1.JPG',
+        alt: 'Tai Po Healthcare Outreach highlight',
       },
       {
-        src: '/images/shine/placeholder-2.svg',
-        alt: 'English Academy Tutoring classroom',
+        src: '/images/shine/taipo_healthcare_2.JPG',
+        alt: 'Tai Po Healthcare Outreach team',
       },
       {
-        src: '/images/shine/placeholder-3.svg',
-        alt: 'English Academy Tutoring volunteers',
+        src: '/images/shine/taipo_healthcare_3.JPG',
+        alt: 'Tai Po Healthcare Outreach service moment',
       },
       {
-        src: '/images/shine/placeholder-4.svg',
-        alt: 'English Academy Tutoring mentorship',
+        src: '/images/shine/taipo_healthcare_4.JPG',
+        alt: 'Tai Po Healthcare Outreach activity',
       },
       {
-        src: '/images/shine/placeholder-5.svg',
-        alt: 'English Academy Tutoring support',
+        src: '/images/shine/taipo_healthcare_5.JPG',
+        alt: 'Tai Po Healthcare Outreach volunteers',
       },
       {
-        src: '/images/shine/placeholder-6.svg',
-        alt: 'English Academy Tutoring extra moment',
+        src: '/images/shine/taipo_healthcare_6.JPG',
+        alt: 'Tai Po Healthcare Outreach volunteers',
       },
     ],
   },
   {
-    title: 'Mei Foo Healthcare Outreach',
-    date: 'Sunday, Feb 28, 2026',
+    title: 'Tai Po Fire Donation',
+    date: 'Sunday, Dec 01, 2025',
+    // TODO-aparedan: More pics esp blood donation
     images: [
       {
-        src: '/images/shine/meifoo_healthcare_1.jpg',
-        alt: 'Mei Foo Healthcare Outreach highlight',
+        src: '/images/shine/taipo_donation_1.jpeg',
+        alt: 'Tai Po Fire Donation highlight',
       },
       {
-        src: '/images/shine/meifoo_healthcare_2.jpg',
-        alt: 'Mei Foo Healthcare Outreach clinic',
+        src: '/images/shine/taipo_donation_2.jpeg',
+        alt: 'Tai Po Fire Donation visit',
       },
       {
-        src: '/images/shine/meifoo_healthcare_3.jpg',
-        alt: 'Mei Foo Healthcare Outreach care moment',
+        src: '/images/shine/taipo_donation_3.jpeg',
+        alt: 'Tai Po Fire Donation donations',
       },
       {
-        src: '/images/shine/meifoo_healthcare_4.jpg',
-        alt: 'Mei Foo Healthcare Outreach volunteers',
+        src: '/images/shine/taipo_donation_4.jpeg',
+        alt: 'Tai Po Fire Donation team',
       },
       {
-        src: '/images/shine/meifoo_healthcare_5.jpg',
-        alt: 'Mei Foo Healthcare Outreach support',
+        src: '/images/shine/taipo_donation_5.jpeg',
+        alt: 'Tai Po Fire Blood Donation ',
       },
       {
-        src: '/images/shine/meifoo_healthcare_6.jpg',
-        alt: 'Mei Foo Healthcare Outreach extra moment',
+        src: '/images/shine/taipo_donation_6.jpeg',
+        alt: 'Tai Po Fire Donation ',
       },
     ],
   },
@@ -263,8 +233,7 @@ const PastOpportunitiesPage = () => {
             letterSpacing="0rem"
             textAlign={{ base: 'left', md: 'left' }}
           >
-            {/* // TODO-aparedan: Please put down some description here */}
-            We hope to accomplish our mission ...
+            Check out the ways God used us to serve our community
           </Text>
 
           <Box bg="#B7E0E2" borderRadius="3xl" p={{ base: 5, md: 8 }}>

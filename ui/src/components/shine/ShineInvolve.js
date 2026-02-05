@@ -479,7 +479,7 @@ const ShineInvolve = (props) => {
         letterSpacing="0px"
         textAlign={{ base: 'left', md: 'left' }}
       >
-        Here's our future opportunities that you can participate in
+        Partner with us through serving
       </Text>
       <VStack
         alignItems="flex-start"
@@ -540,9 +540,8 @@ const ShineInvolve = (props) => {
                 More Shine Opportunities Coming Soon
               </Heading>
               <Text fontSize={['sm', 'md']} color="gray.600" mb={4}>
-                We're excited to bring you more opportunities to shine your
-                light and serve our community. Stay tuned for upcoming events
-                and activities!
+                We're excited to bring you more opportunities to shine God's
+                light and serve our community. Stay tuned for upcoming opportunities!
               </Text>
             </Box>
           </Box>

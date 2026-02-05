@@ -1,12 +1,11 @@
 import React from 'react';
 import { HStack, Box, Heading, Grid, Image, Text } from '@chakra-ui/react';
 
-// TODO-aparedan: Finalise this
 const values = [
   {
     title: 'Gospel-Centered',
     description:
-      "Children to come to a saving knowledge of Jesus Christ and be rooted in God's Word and the gospel.",
+      'The Gospel is the reason why we serve. We want to show the Gospel through our serving.',
     icon: '/images/shine/gospel-centered-icon.png',
     bg: '#F5F0E0',
     shadow: '0.625rem 0.625rem 0 #EBAC09',
@@ -14,7 +13,7 @@ const values = [
   {
     title: 'Locally Rooted',
     description:
-      'Children to experience the joy of being in an intimate relationship with Jesus and the church community.',
+      'We are committed to serve our local community and finding ways to engage those around us in Hong Kong.',
     icon: '/images/shine/locally-rooted-icon.png',
     bg: '#F1E6E6',
     shadow: '0.5rem 0.5rem 0 #D46764',
@@ -22,7 +21,7 @@ const values = [
   {
     title: 'Service Oriented',
     description:
-      "Children to grow as a disciple of Jesus, to daily live out God's call in their lives, and raise up future disciples of Christ.",
+      'We want to be a visible and tangible demonstration of God’s love and care for our community.',
     icon: '/images/shine/service-oriented-icon.png',
     bg: '#D8EFEF',
     shadow: '0.5rem 0.5rem 0 #77C2C6',
@@ -30,7 +29,7 @@ const values = [
   {
     title: 'Needs Driven',
     description:
-      "Children to grow as a disciple of Jesus, to daily live out God's call in their lives, and raise up future disciples of Christ.",
+      'We identify areas of need in our community and seek to serve and meet the needs of our community.',
     icon: '/images/shine/needs-driven-icon.png',
     bg: '#E0E9F5',
     shadow: '0.5rem 0.5rem 0 #4A6EEB',
@@ -40,6 +39,20 @@ const values = [
 const ValuesSection = () => {
   return (
     <>
+      <Box
+        mb={{ base: '4rem', md: '8rem' }}
+      >
+        <Text
+          fontFamily="Manrope"
+          fontWeight="600"
+          fontSize={{ base: '2rem', md: '2.625rem' }}
+          lineHeight="94%"
+          letterSpacing={{ base: '-0.0625rem', md: '-0.125rem' }}
+          textAlign="center"
+        >
+          SHINE Ministry aims to provide avenues to engage our community through serving opportunities that will allow us to shine God's light in areas of need in Hong Kong.
+        </Text>
+      </Box>
       <HStack
         spacing={2}
         mb={10}
@@ -47,6 +60,7 @@ const ValuesSection = () => {
         alignItems="baseline"
         justifyContent={{ base: 'flex-start', md: 'flex-start' }}
       >
+
         <Box
           as="svg"
           width={{ base: '24px', md: '28px' }}
