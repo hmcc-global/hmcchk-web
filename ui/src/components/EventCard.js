@@ -1,4 +1,5 @@
 import BaseCard from './BaseCard';
+import React from 'react';
 
 /**
      * @typedef {object} Event

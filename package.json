@@ -1,11 +1,26 @@
 {
   "name": "hmcchk-web",
   "private": true,
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "storybook:build": "storybook build -o storybook-static"
+  },
   "devDependencies": {
-    "prettier": "2.3.2"
+    "@babel/core": "^7.28.6",
+    "@babel/plugin-transform-runtime": "^7.28.5",
+    "@babel/preset-env": "^7.28.6",
+    "@babel/preset-react": "^7.28.5",
+    "@storybook/addon-a11y": "^10.2.3",
+    "@storybook/react-webpack5": "^10.2.3",
+    "babel-loader": "^10.0.0",
+    "prettier": "2.3.2",
+    "storybook": "^10.2.3"
   },
   "dependencies": {
     "@fontsource/dm-sans": "^4.5.9",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-google-recaptcha": "^2.1.0",
     "react-slick": "^0.28.1",
     "uuid": "^10.0.0"
