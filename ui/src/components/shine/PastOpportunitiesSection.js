@@ -258,11 +258,7 @@ const PastOpportunitiesPage = () => {
                     color="#21A0A7"
                     boxSize={{ base: '1.5rem', md: '2.1875rem' }}
                   />
-                  <Box
-                    w="100%"
-                    h={`${listHeightRem}rem`}
-                    overflow="hidden"
-                  >
+                  <Box w="100%" h={`${listHeightRem}rem`} overflow="hidden">
                     <VStack
                       alignItems={{ base: 'start', md: 'start' }}
                       spacing={`${itemGapRem}rem`}
@@ -332,7 +328,10 @@ const PastOpportunitiesPage = () => {
                   ml={{ base: -2, md: 0 }}
                 >
                   <Grid
-                    templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }}
+                    templateColumns={{
+                      base: 'repeat(2, 1fr)',
+                      md: 'repeat(4, 1fr)',
+                    }}
                     templateRows={{
                       base: 'repeat(3, auto)',
                       md: 'repeat(2, 10.3125rem)',
@@ -343,150 +342,162 @@ const PastOpportunitiesPage = () => {
                     }}
                     gap={{ base: 3, md: 5 }}
                   >
-                  <GridItem
-                    area="feature"
-                    overflow="hidden"
-                    borderRadius="2xl"
-                    bg="white"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    cursor="pointer"
-                    onClick={() => handleImageTap(selectedOpportunity.images[0])}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(event) => {
-                      if (
-                        isMobile &&
-                        (event.key === 'Enter' || event.key === ' ')
-                      ) {
-                        event.preventDefault();
-                        handleImageTap(selectedOpportunity.images[0]);
+                    <GridItem
+                      area="feature"
+                      overflow="hidden"
+                      borderRadius="2xl"
+                      bg="white"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      cursor="pointer"
+                      onClick={() =>
+                        handleImageTap(selectedOpportunity.images[0])
                       }
-                    }}
-                  >
-                    {renderImageContent(selectedOpportunity.images[0], 0)}
-                  </GridItem>
-                  <GridItem
-                    area="rightTop"
-                    overflow="hidden"
-                    borderRadius="2xl"
-                    bg="white"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    cursor="pointer"
-                    onClick={() => handleImageTap(selectedOpportunity.images[1])}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(event) => {
-                      if (
-                        isMobile &&
-                        (event.key === 'Enter' || event.key === ' ')
-                      ) {
-                        event.preventDefault();
-                        handleImageTap(selectedOpportunity.images[1]);
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(event) => {
+                        if (
+                          isMobile &&
+                          (event.key === 'Enter' || event.key === ' ')
+                        ) {
+                          event.preventDefault();
+                          handleImageTap(selectedOpportunity.images[0]);
+                        }
+                      }}
+                    >
+                      {renderImageContent(selectedOpportunity.images[0], 0)}
+                    </GridItem>
+                    <GridItem
+                      area="rightTop"
+                      overflow="hidden"
+                      borderRadius="2xl"
+                      bg="white"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      cursor="pointer"
+                      onClick={() =>
+                        handleImageTap(selectedOpportunity.images[1])
                       }
-                    }}
-                  >
-                    {renderImageContent(selectedOpportunity.images[1], 1)}
-                  </GridItem>
-                  <GridItem
-                    area="rightTop2"
-                    overflow="hidden"
-                    borderRadius="2xl"
-                    bg="white"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    cursor="pointer"
-                    onClick={() => handleImageTap(selectedOpportunity.images[5])}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(event) => {
-                      if (
-                        isMobile &&
-                        (event.key === 'Enter' || event.key === ' ')
-                      ) {
-                        event.preventDefault();
-                        handleImageTap(selectedOpportunity.images[5]);
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(event) => {
+                        if (
+                          isMobile &&
+                          (event.key === 'Enter' || event.key === ' ')
+                        ) {
+                          event.preventDefault();
+                          handleImageTap(selectedOpportunity.images[1]);
+                        }
+                      }}
+                    >
+                      {renderImageContent(selectedOpportunity.images[1], 1)}
+                    </GridItem>
+                    <GridItem
+                      area="rightTop2"
+                      overflow="hidden"
+                      borderRadius="2xl"
+                      bg="white"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      cursor="pointer"
+                      onClick={() =>
+                        handleImageTap(selectedOpportunity.images[5])
                       }
-                    }}
-                  >
-                    {renderImageContent(selectedOpportunity.images[5], 5)}
-                  </GridItem>
-                  <GridItem
-                    area="bottomLeft"
-                    overflow="hidden"
-                    borderRadius="2xl"
-                    bg="white"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    cursor="pointer"
-                    onClick={() => handleImageTap(selectedOpportunity.images[2])}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(event) => {
-                      if (
-                        isMobile &&
-                        (event.key === 'Enter' || event.key === ' ')
-                      ) {
-                        event.preventDefault();
-                        handleImageTap(selectedOpportunity.images[2]);
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(event) => {
+                        if (
+                          isMobile &&
+                          (event.key === 'Enter' || event.key === ' ')
+                        ) {
+                          event.preventDefault();
+                          handleImageTap(selectedOpportunity.images[5]);
+                        }
+                      }}
+                    >
+                      {renderImageContent(selectedOpportunity.images[5], 5)}
+                    </GridItem>
+                    <GridItem
+                      area="bottomLeft"
+                      overflow="hidden"
+                      borderRadius="2xl"
+                      bg="white"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      cursor="pointer"
+                      onClick={() =>
+                        handleImageTap(selectedOpportunity.images[2])
                       }
-                    }}
-                  >
-                    {renderImageContent(selectedOpportunity.images[2], 2)}
-                  </GridItem>
-                  <GridItem
-                    area="bottomMid"
-                    overflow="hidden"
-                    borderRadius="2xl"
-                    bg="white"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    cursor="pointer"
-                    onClick={() => handleImageTap(selectedOpportunity.images[3])}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(event) => {
-                      if (
-                        isMobile &&
-                        (event.key === 'Enter' || event.key === ' ')
-                      ) {
-                        event.preventDefault();
-                        handleImageTap(selectedOpportunity.images[3]);
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(event) => {
+                        if (
+                          isMobile &&
+                          (event.key === 'Enter' || event.key === ' ')
+                        ) {
+                          event.preventDefault();
+                          handleImageTap(selectedOpportunity.images[2]);
+                        }
+                      }}
+                    >
+                      {renderImageContent(selectedOpportunity.images[2], 2)}
+                    </GridItem>
+                    <GridItem
+                      area="bottomMid"
+                      overflow="hidden"
+                      borderRadius="2xl"
+                      bg="white"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      cursor="pointer"
+                      onClick={() =>
+                        handleImageTap(selectedOpportunity.images[3])
                       }
-                    }}
-                  >
-                    {renderImageContent(selectedOpportunity.images[3], 3)}
-                  </GridItem>
-                  <GridItem
-                    area="rightBottom"
-                    overflow="hidden"
-                    borderRadius="2xl"
-                    bg="white"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    cursor="pointer"
-                    onClick={() => handleImageTap(selectedOpportunity.images[4])}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(event) => {
-                      if (
-                        isMobile &&
-                        (event.key === 'Enter' || event.key === ' ')
-                      ) {
-                        event.preventDefault();
-                        handleImageTap(selectedOpportunity.images[4]);
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(event) => {
+                        if (
+                          isMobile &&
+                          (event.key === 'Enter' || event.key === ' ')
+                        ) {
+                          event.preventDefault();
+                          handleImageTap(selectedOpportunity.images[3]);
+                        }
+                      }}
+                    >
+                      {renderImageContent(selectedOpportunity.images[3], 3)}
+                    </GridItem>
+                    <GridItem
+                      area="rightBottom"
+                      overflow="hidden"
+                      borderRadius="2xl"
+                      bg="white"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      cursor="pointer"
+                      onClick={() =>
+                        handleImageTap(selectedOpportunity.images[4])
                       }
-                    }}
-                  >
-                    {renderImageContent(selectedOpportunity.images[4], 4)}
-                  </GridItem>
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(event) => {
+                        if (
+                          isMobile &&
+                          (event.key === 'Enter' || event.key === ' ')
+                        ) {
+                          event.preventDefault();
+                          handleImageTap(selectedOpportunity.images[4]);
+                        }
+                      }}
+                    >
+                      {renderImageContent(selectedOpportunity.images[4], 4)}
+                    </GridItem>
                   </Grid>
                 </Box>
               </Box>
