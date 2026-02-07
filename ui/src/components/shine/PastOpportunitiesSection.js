@@ -28,27 +28,27 @@ const opportunities = [
     date: 'Sunday, Jan 25, 2026',
     images: [
       {
-        src: '/images/shine/placeholder-1.svg',
+        src: '/images/shine/motherschoice-1.jpg',
         alt: "Mother's Choice Family Fun Fest highlight",
       },
       {
-        src: '/images/shine/placeholder-2.svg',
+        src: '/images/shine/motherschoice-2.jpg',
         alt: "Mother's Choice Family Fun Fest gathering",
       },
       {
-        src: '/images/shine/placeholder-3.svg',
+        src: '/images/shine/motherschoice-3.jpg',
         alt: "Mother's Choice Family Fun Fest activity",
       },
       {
-        src: '/images/shine/placeholder-4.svg',
+        src: '/images/shine/motherschoice-4.jpg',
         alt: "Mother's Choice Family Fun Fest volunteers",
       },
       {
-        src: '/images/shine/placeholder-5.svg',
+        src: '/images/shine/motherschoice-5.jpg',
         alt: "Mother's Choice Family Fun Fest support",
       },
       {
-        src: '/images/shine/placeholder-6.svg',
+        src: '/images/shine/motherschoice-6.jpg',
         alt: "Mother's Choice Family Fun Fest extra moment",
       },
     ],
@@ -86,7 +86,6 @@ const opportunities = [
   {
     title: 'Tai Po Fire Donation',
     date: 'Sunday, Dec 01, 2025',
-    // TODO-aparedan: More pics esp blood donation
     images: [
       {
         src: '/images/shine/taipo_donation_1.jpeg',
