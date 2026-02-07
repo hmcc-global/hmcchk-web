@@ -3,7 +3,6 @@ import { BiSolidRightArrow } from 'react-icons/bi';
 import {
   AspectRatio,
   Box,
-  Container,
   Fade,
   Grid,
   GridItem,
@@ -20,6 +19,10 @@ import {
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
+
+import { typography } from './typography';
+
+const { fontSizes, fontFamilies } = typography;
 
 const opportunities = [
   {
@@ -211,10 +214,9 @@ const PastOpportunitiesPage = () => {
             </Box>
             <Heading
               as="h2"
-              fontFamily="'DM Serif Display', serif"
-              fontWeight="600"
-              fontStyle="italic"
-              fontSize={{ base: '2rem', md: '2.625rem' }}
+              fontFamily={fontFamilies.subheadings}
+              fontWeight="400"
+              fontSize={fontSizes.headings}
               lineHeight="94%"
               letterSpacing={{ base: '-0.0625rem', md: '-0.125rem' }}
             >
@@ -224,10 +226,14 @@ const PastOpportunitiesPage = () => {
           <Text
             color="gray.600"
             mb={{ base: 6, md: 8 }}
-            fontFamily="Manrope, sans-serif"
+            fontFamily={fontFamilies.primary}
             fontWeight="400"
             fontStyle="normal"
-            fontSize={{ base: '1rem', md: '1.25rem' }}
+            fontSize={{
+              base: fontSizes.base,
+              md: fontSizes.md,
+              lg: fontSizes.normal,
+            }}
             lineHeight="100%"
             letterSpacing="0rem"
             textAlign={{ base: 'left', md: 'left' }}

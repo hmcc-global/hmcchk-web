@@ -4,6 +4,10 @@ import { ArrowForwardIcon } from '@chakra-ui/icons';
 
 import ContactForm from '../building-block/ContactForm';
 
+import { typography } from './typography';
+
+const { fontSizes, fontFamilies } = typography;
+
 const ContactUs = () => {
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
@@ -38,12 +42,11 @@ const ContactUs = () => {
         </Box>
         <Heading
           as="h2"
-          fontFamily="'DM Serif Display', serif"
-          fontWeight="600"
-          fontStyle="italic"
-          fontSize={{ base: '32px', md: '42px' }}
+          fontFamily={fontFamilies.subheadings}
+          fontWeight="400"
+          fontSize={fontSizes.headings}
           lineHeight="94%"
-          letterSpacing={{ base: '-1px', md: '-2px' }}
+          letterSpacing={{ base: '-0.0625rem', md: '-0.125rem' }}
         >
           Contact Us
         </Heading>
@@ -52,18 +55,25 @@ const ContactUs = () => {
         <Text
           color="black"
           mb={{ base: 6, md: 8 }}
-          fontFamily="Manrope, sans-serif"
+          fontFamily={fontFamilies.primary}
           fontWeight="400"
           fontStyle="normal"
-          fontSize={{ base: '0,8rem', md: '1rem' }}
+          fontSize={{
+            base: fontSizes.base,
+            md: fontSizes.md,
+            lg: fontSizes.normal,
+          }}
           lineHeight="100%"
           letterSpacing="0px"
           textAlign="left"
+          w={{ base: '100%', md: '60%' }}
         >
-          We are constantly looking for ways to serve and shine God's light to our community. Contact us if you are passionate about a cause that you would like us to explore or have any questions.
+          We are constantly looking for ways to serve and shine God's light to
+          our community. Contact us if you are passionate about a cause that you
+          would like us to explore or have any questions.
         </Text>
         <Flex
-          w="40%"
+          w="30%"
           justifyContent="center"
           borderWidth="2px"
           borderColor="#4A6EEB"
@@ -73,16 +83,26 @@ const ContactUs = () => {
           cursor="pointer"
           onClick={onOpen}
           display={{ base: 'none', md: 'flex' }}
+          color="#4A6EEB"
+          _hover={{
+            bg: '#4A6EEB',
+            color: 'white',
+            borderColor: '#4A6EEB',
+            textDecoration: 'none',
+          }}
         >
           <ContactForm isOpen={isOpen} onClose={onClose} />
           <Box px="1rem">
             <Text
-              fontSize="1rem"
-              fontFamily="Manrope"
+              fontSize={{
+                base: fontSizes.base,
+                md: fontSizes.md,
+                lg: fontSizes.normal,
+              }}
+              fontFamily={fontFamilies.primary}
               fontWeight="700"
               wordBreak="break-word"
               textAlign="center"
-              color="#4A6EEB"
             >
               Contact Us
             </Text>
@@ -101,6 +121,13 @@ const ContactUs = () => {
         cursor="pointer"
         onClick={onOpen}
         display={{ base: 'flex', md: 'none' }}
+        color="#4A6EEB"
+        _hover={{
+          bg: '#4A6EEB',
+          color: 'white',
+          borderColor: '#4A6EEB',
+          textDecoration: 'none',
+        }}
       >
         <ContactForm isOpen={isOpen} onClose={onClose} />
         <Box px="1rem">
@@ -110,7 +137,6 @@ const ContactUs = () => {
             fontWeight="700"
             wordBreak="break-word"
             textAlign="center"
-            color="#4A6EEB"
           >
             Contact Us
           </Text>
