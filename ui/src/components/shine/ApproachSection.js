@@ -1,23 +1,23 @@
-import React from 'react';
 import { HStack, Box, Heading, Grid, Text } from '@chakra-ui/react';
+
+import { typography } from './typography';
+
+const { fontSizes, fontFamilies } = typography;
 
 const values = [
   {
     title: 'Educate',
-    description:
-      "the next generation",
+    description: 'the next generation',
     bg: '/images/shine/educate-bg.png',
   },
   {
     title: 'Equip',
-    description:
-      'for the future',
+    description: 'for the future',
     bg: '/images/shine/equip-bg.png',
   },
   {
     title: 'Engage',
-    description:
-      "our communities",
+    description: 'our communities',
     bg: '/images/shine/engage-bg.png',
   },
 ];
@@ -58,10 +58,10 @@ const ApproachSection = () => {
         </Box>
         <Heading
           as="h2"
-          fontFamily="'DM Serif Display', serif"
-          fontWeight="600"
+          fontFamily={fontFamilies.subheadings}
+          fontWeight="400"
           fontStyle="italic"
-          fontSize={{ base: '2rem', md: '2.625rem' }}
+          fontSize={fontSizes.headings}
           lineHeight="94%"
           letterSpacing={{ base: '-0.0625rem', md: '-0.125rem' }}
         >
@@ -70,7 +70,7 @@ const ApproachSection = () => {
       </HStack>
       <Grid
         w="100%"
-        gap={{ base: '1rem', md: '3rem', lg: '4rem' }}
+        gap={{ base: '1rem', md: '3rem', lg: '2rem' }}
         templateColumns={{
           base: '1fr',
           lg: 'repeat(auto-fit, minmax(250px, 1fr))',
@@ -110,7 +110,10 @@ const ApproachSection = () => {
               <Box
                 as="span"
                 display="block"
-                fontSize={{ base: '1.5rem', md: '1.75rem', lg: '2rem' }}
+                fontSize={{
+                  base: fontSizes.approachbase,
+                  lg: fontSizes.approach,
+                }}
                 fontFamily="DMSerifDisplay"
                 fontWeight="900"
                 lineHeight="1.2"
@@ -121,8 +124,11 @@ const ApproachSection = () => {
               <Box
                 as="span"
                 display="block"
-                fontSize={{ base: '1.5rem', md: '1.75rem', lg: '2rem' }}
-                fontFamily="DMSerifDisplay_Italic"
+                fontSize={{
+                  base: fontSizes.approachbase,
+                  lg: fontSizes.approach,
+                }}
+                fontFamily={fontFamilies.subheadings}
                 fontWeight="lighter"
                 lineHeight="1.2"
               >
@@ -134,6 +140,6 @@ const ApproachSection = () => {
       </Grid>
     </>
   );
-}
+};
 
 export default ApproachSection;

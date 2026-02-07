@@ -38,6 +38,10 @@ import { MdOutlineAddToPhotos } from 'react-icons/md';
 import { generateGoogleCalendarLink } from '../helpers/eventsHelpers';
 import { FaCalendarAlt } from 'react-icons/fa';
 
+import { typography } from './typography';
+
+const { fontSizes, fontFamilies } = typography;
+
 const ShineInvolve = (props) => {
   const [ShineMinList, setShineMinList] = useState([]);
   const [slideIndex, setSlideIndex] = useState(0);
@@ -429,7 +433,7 @@ const ShineInvolve = (props) => {
       bgColor="#F6FAFF"
       minW="100%"
       alignItems="flex-start"
-      fontFamily="Manrope"
+      fontFamily={fontFamilies.primary}
     >
       <HStack gap={2} my={{ base: 2, md: 1 }}>
         <Box
@@ -458,12 +462,12 @@ const ShineInvolve = (props) => {
         </Box>
         <Heading
           as="h2"
-          fontFamily="'DM Serif Display', serif"
-          fontWeight="600"
+          fontFamily={fontFamilies.subheadings}
+          fontWeight="400"
           fontStyle="italic"
-          fontSize={{ base: '32px', md: '42px' }}
+          fontSize={fontSizes.headings}
           lineHeight="94%"
-          letterSpacing={{ base: '-1px', md: '-2px' }}
+          letterSpacing={{ base: '-0.0625rem', md: '-0.125rem' }}
         >
           Get Involved
         </Heading>
@@ -474,12 +478,16 @@ const ShineInvolve = (props) => {
         fontFamily="Manrope, sans-serif"
         fontWeight="400"
         fontStyle="normal"
-        fontSize={{ base: '16px', md: '20px' }}
+        fontSize={{
+          base: fontSizes.base,
+          md: fontSizes.md,
+          lg: fontSizes.normal,
+        }}
         lineHeight="100%"
         letterSpacing="0px"
         textAlign={{ base: 'left', md: 'left' }}
       >
-        Partner with us through serving
+        Here’s our future opportunities that you can participate in
       </Text>
       <VStack
         alignItems="flex-start"
@@ -504,7 +512,7 @@ const ShineInvolve = (props) => {
             overflow="hidden"
             bg="transparent"
             display="flex"
-            fontFamily="Manrope"
+            fontFamily={fontFamilies.primary}
             flexDirection={['column', 'row']}
             w="100%"
             p={4}
@@ -541,7 +549,8 @@ const ShineInvolve = (props) => {
               </Heading>
               <Text fontSize={['sm', 'md']} color="gray.600" mb={4}>
                 We're excited to bring you more opportunities to shine God's
-                light and serve our community. Stay tuned for upcoming opportunities!
+                light and serve our community. Stay tuned for upcoming
+                opportunities!
               </Text>
             </Box>
           </Box>

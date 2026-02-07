@@ -1,5 +1,8 @@
-import React from 'react';
 import { HStack, Box, Heading, Grid, Image, Text } from '@chakra-ui/react';
+
+import { typography } from './typography';
+
+const { fontSizes, fontFamilies } = typography;
 
 const values = [
   {
@@ -39,9 +42,7 @@ const values = [
 const ValuesSection = () => {
   return (
     <>
-      <Box
-        mb={{ base: '4rem', md: '8rem' }}
-      >
+      <Box my={{ base: '4rem', md: '8rem' }}>
         <Text
           fontFamily="Manrope"
           fontWeight="600"
@@ -50,7 +51,9 @@ const ValuesSection = () => {
           letterSpacing={{ base: '-0.0625rem', md: '-0.125rem' }}
           textAlign="center"
         >
-          SHINE Ministry aims to provide avenues to engage our community through serving opportunities that will allow us to shine God's light in areas of need in Hong Kong.
+          SHINE Ministry aims to provide avenues to engage our community through
+          serving opportunities that will allow us to shine God's light in areas
+          of need in Hong Kong.
         </Text>
       </Box>
       <HStack
@@ -60,7 +63,6 @@ const ValuesSection = () => {
         alignItems="baseline"
         justifyContent={{ base: 'flex-start', md: 'flex-start' }}
       >
-
         <Box
           as="svg"
           width={{ base: '24px', md: '28px' }}
@@ -87,10 +89,10 @@ const ValuesSection = () => {
         </Box>
         <Heading
           as="h2"
-          fontFamily="'DM Serif Display', serif"
-          fontWeight="600"
+          fontFamily={fontFamilies.subheadings}
+          fontWeight="400"
           fontStyle="italic"
-          fontSize={{ base: '2rem', md: '2.625rem' }}
+          fontSize={fontSizes.headings}
           lineHeight="94%"
           letterSpacing={{ base: '-0.0625rem', md: '-0.125rem' }}
         >
@@ -99,7 +101,7 @@ const ValuesSection = () => {
       </HStack>
       <Grid
         w="100%"
-        gap={{ base: '1rem', md: '3rem', lg: '4rem' }}
+        gap={{ base: '1rem', md: '3rem', lg: '1.5rem' }}
         templateColumns={{
           base: '1fr',
           lg: 'repeat(auto-fit, minmax(250px, 1fr))',
@@ -119,28 +121,26 @@ const ValuesSection = () => {
             display="flex"
             flexDirection="column"
           >
-            <Image
-              src={value.icon}
-              alt={value.title + ' icon'}
-              width="3.5rem"
-              mb="1rem"
-              alignSelf="center"
-            />
+            <Box width="3.5rem" minH="4.5rem" alignSelf="center">
+              <Image src={value.icon} alt={value.title + ' icon'} mb="1rem" />
+            </Box>
             <Heading
               as="h3"
-              size="lg"
+              fontSize={{
+                base: fontSizes.valuebasesubheadings,
+                md: fontSizes.valuesubheadings,
+              }}
               fontWeight="400"
-              fontSize="1.5rem"
-              fontFamily="DMSerifDisplay_Italic"
+              fontFamily={fontFamilies.subheadings}
               mb="0.5rem"
               textAlign="center"
             >
               {value.title}
             </Heading>
             <Text
-              fontSize="0.875rem"
+              fontSize={fontSizes.base}
               fontWeight="400"
-              fontFamily="Manrope"
+              fontFamily={fontFamilies.primary}
               textAlign="center"
             >
               {value.description}
@@ -150,6 +150,6 @@ const ValuesSection = () => {
       </Grid>
     </>
   );
-}
+};
 
 export default ValuesSection;

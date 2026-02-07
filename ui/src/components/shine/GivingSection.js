@@ -22,6 +22,10 @@ import {
 } from '@chakra-ui/react';
 import { MAX } from 'uuid';
 
+import { typography } from './typography';
+
+const { fontSizes, fontFamilies } = typography;
+
 const RenderSwitch = ({ modalSelection }) => {
   switch (modalSelection) {
     case 'FPS':
@@ -155,7 +159,7 @@ const GivingSection = (props) => {
     <Box
       w={['100%', '100%', '100%']}
       borderRadius="lg"
-      fontFamily="Manrope"
+      fontFamily={fontFamilies.primary}
       bg="#FFFAED"
       pt={6}
     >
@@ -329,7 +333,7 @@ const GivingSection = (props) => {
                 textAlign="center"
               >
                 <Text
-                  fontFamily="Manrope"
+                  fontFamily={fontFamilies.primary}
                   fontWeight="bold"
                   fontSize="md"
                   color="black"
@@ -343,7 +347,7 @@ const GivingSection = (props) => {
                 <Button
                   onClick={() => LearnMore(card.text)}
                   color="black"
-                  fontFamily="Manrope"
+                  fontFamily={fontFamilies.primary}
                   fontWeight="medium"
                   fontSize="sm"
                   bg="transparent"
@@ -492,7 +496,7 @@ const GivingSection = (props) => {
               textAlign="center"
             >
               <Text
-                fontFamily="Manrope"
+                fontFamily={fontFamilies.primary}
                 fontWeight="bold"
                 fontSize="md"
                 color="black"
@@ -506,7 +510,7 @@ const GivingSection = (props) => {
               <Button
                 onClick={() => LearnMore(givingCards[4].text)}
                 color="black"
-                fontFamily="Manrope"
+                fontFamily={fontFamilies.primary}
                 fontWeight="medium"
                 fontSize="sm"
                 bg="transparent"
@@ -532,18 +536,34 @@ const GivingSection = (props) => {
       </Box>
 
       <Box paddingTop="2vh">
-        <Text fontSize={{ base: '0.75rem', md: 'md' }}>
+        <Text
+          fontSize={{
+            base: fontSizes.base,
+            md: fontSizes.md,
+            lg: fontSizes.normal,
+          }}
+        >
           Personal information is kept confidential, used only for tax receipt
           purposes, and is only accessible by the Stewardship Team.
         </Text>
       </Box>
       <Box paddingTop="2vh">
-        <Text fontSize={{ base: '0.75rem', md: 'md' }}>
+        <Text
+          fontSize={{
+            base: fontSizes.base,
+            md: fontSizes.md,
+            lg: fontSizes.normal,
+          }}
+        >
           If you have any questions, please do not hesitate to contact us:&nbsp;
           <Text
             as="span"
             fontWeight="bold"
-            fontSize={{ base: '0.75rem', md: 'md' }}
+            fontSize={{
+              base: fontSizes.base,
+              md: fontSizes.md,
+              lg: fontSizes.normal,
+            }}
           >
             hk@hmccglobal.org
           </Text>
@@ -554,12 +574,17 @@ const GivingSection = (props) => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            <Heading as="h2" size="xl" fontWeight="bold" fontFamily="Manrope">
+            <Heading
+              as="h2"
+              size="xl"
+              fontWeight="bold"
+              fontFamily={fontFamilies.primary}
+            >
               {selectedCard}
             </Heading>
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody fontFamily="Manrope" pb={8}>
+          <ModalBody fontFamily={fontFamilies.primary} pb={8}>
             {selectedCard && <RenderSwitch modalSelection={selectedCard} />}
           </ModalBody>
         </ModalContent>
@@ -568,13 +593,17 @@ const GivingSection = (props) => {
   );
 
   const PrayerRequestContent = () => (
-    <Box fontFamily="Manrope" pt={6}>
+    <Box fontFamily={fontFamilies.primary} pt={6}>
       <Heading
         as="h2"
-        fontSize={{ base: 'sm', md: 'xl' }}
+        fontSize={{
+          base: fontSizes.base,
+          md: fontSizes.md,
+          lg: fontSizes.normal,
+        }}
         mb={{ base: 0, md: 12 }}
         color="#000000"
-        fontFamily="Manrope"
+        fontFamily={fontFamilies.primary}
         fontWeight="bold"
         letterSpacing="0.12em"
         textAlign="center"
@@ -627,7 +656,7 @@ const GivingSection = (props) => {
             as="h3"
             size="md"
             color="#000000"
-            fontFamily="Manrope"
+            fontFamily={fontFamilies.primary}
             fontWeight="bold"
             textTransform="uppercase"
             textAlign="center"
@@ -729,15 +758,19 @@ const GivingSection = (props) => {
       <Text
         color="black"
         mb={{ base: 6, md: 8 }}
-        fontFamily="Manrope, sans-serif"
+        fontFamily={fontFamilies.primary}
         fontWeight="400"
         fontStyle="normal"
-        fontSize={{ base: '16px', md: '20px' }}
+        fontSize={{
+          base: fontSizes.base,
+          md: fontSizes.md,
+          lg: fontSizes.normal,
+        }}
         lineHeight="100%"
         letterSpacing="0px"
         textAlign={{ base: 'left', md: 'left' }}
       >
-        Partner with us through support
+        Here’s some other ways to support us
       </Text>
       <Box bg="#FFFAED" p={6} borderRadius="3xl" mb={10}>
         <Flex bg="white" borderRadius="20px" p={3} gap={2} position="relative">
@@ -748,7 +781,7 @@ const GivingSection = (props) => {
             px={6}
             py={6}
             fontWeight="bold"
-            fontFamily="Manrope"
+            fontFamily={fontFamilies.primary}
             color={activeTab === 'giving' ? '#FFFFFF' : 'black'}
             borderRadius="20px"
             border="1px solid"
