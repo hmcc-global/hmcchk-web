@@ -118,7 +118,16 @@ const ShineInvolve = (props) => {
           }
         });
 
-        setShineMinList([...shineMinEvents]);
+        const featureSortedShineMinEvents = shineMinEvents.sort((a, b) => {
+          if (a.featured) {
+            return -1;
+          } else if (b.featured) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        setShineMinList([...featureSortedShineMinEvents]);
       } else {
         throw Error('Something went wrong with the request');
       }
