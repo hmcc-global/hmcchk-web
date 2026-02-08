@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#F3E7EA" />
+  <rect x="40" y="40" width="1120" height="720" rx="48" fill="#E6CCD4" />
+  <text
+    x="600"
+    y="410"
+    text-anchor="middle"
+    font-family="Arial, sans-serif"
+    font-size="48"
+    fill="#92707B"
+  >
+    Placeholder 4
+  </text>
+</svg>
