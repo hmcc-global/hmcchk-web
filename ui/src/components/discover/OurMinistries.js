@@ -19,9 +19,7 @@ const OurMinistries = (props) => {
         mb={6}
         fontFamily="Manrope"
       >
-        At Harvest Mission Community Church, we are actively reaching out to
-        people from all walks of life, specifically college students, working
-        adults, and families.
+        Explore ways to get involved at our church whether through community or serving.
       </Text>
       <SimpleGrid columns={[1, 3]} spacing={4} fontFamily="Manrope">
         <Box

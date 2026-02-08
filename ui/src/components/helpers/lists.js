@@ -329,6 +329,7 @@ const eventTypeList = [
   { value: 'Events', label: 'Events', color: 'blue' },
   { value: 'Campus Ministry', label: 'Campus Ministry', color: 'purple' },
   { value: 'City Ministry', label: 'City Ministry', color: 'orange' },
+  { value: 'Shine Ministry', label: 'Shine Ministry', color: 'yellow' },
   { value: 'Others', label: 'Others', color: 'red' },
 ];
 

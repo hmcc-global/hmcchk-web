@@ -64,7 +64,7 @@ const DiscoverPage = () => {
       title: 'Connect with Our Ministries',
       image: '/images/compass-discover-line.svg',
       description:
-        'At Harvest Mission Community Church, we are actively reaching out to people from all walks of life, specifically youths, college students, working adults, and families.',
+        'Explore ways to get involved at our church through community or serving.',
       link: '/discover/connect-ministries',
       button_color: '#21A0A7',
       hover_color: '#477A7E',

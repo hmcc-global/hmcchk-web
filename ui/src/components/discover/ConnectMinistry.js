@@ -45,9 +45,7 @@ const ConnectMinistry = () => {
               textAlign={'center'}
               fontFamily={'Manrope'}
             >
-              At Harvest Mission Community Church, we are actively reaching out
-              to people from all walks of life, specifically youths, college
-              students, working adults, and families.
+              Explore ways to get involved at our church whether through community or serving.
             </Text>
           </VStack>
           <MinistryCard />
