@@ -2,7 +2,7 @@ module.exports = {
   friendlyName: 'Get not signed up form route for public use',
 
   description:
-    'Gets all forms from specified user id that the user have not signed up for, but checks if the form is published',
+    'Gets all forms from specified user id that the user have not signed up for, but checks if the form is published and is within the form availability period',
 
   inputs: {
     userId: {
@@ -69,7 +69,18 @@ module.exports = {
       );
 
       // filter out the forms that the user have signed up for
-      const final = formData.filter((i) => !sub.includes(i));
+      let userHasSignedUpFormList = formData.filter((i) => !sub.includes(i));
+      let today = new Date();
+
+      // filter out the forms that are not within the form availability period
+      let final = userHasSignedUpFormList.filter((form) => {
+        const { formAvailableFrom, formAvailableUntil } = form;
+        const fromValid =
+          !formAvailableFrom || today >= new Date(formAvailableFrom);
+        const untilValid =
+          !formAvailableUntil || today <= new Date(formAvailableUntil);
+        return fromValid && untilValid;
+      });
 
       // If no form is found return error
       if (final === null) return exits.error('unauthorized access');
