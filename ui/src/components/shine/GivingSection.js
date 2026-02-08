@@ -770,7 +770,7 @@ const GivingSection = (props) => {
         letterSpacing="0px"
         textAlign={{ base: 'left', md: 'left' }}
       >
-        Here’s some other ways to support us
+        Partner with us through support
       </Text>
       <Box bg="#FFFAED" p={6} borderRadius="3xl" mb={10}>
         <Flex bg="white" borderRadius="20px" p={3} gap={2} position="relative">

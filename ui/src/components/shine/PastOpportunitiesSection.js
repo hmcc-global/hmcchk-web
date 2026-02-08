@@ -238,7 +238,7 @@ const PastOpportunitiesPage = () => {
             letterSpacing="0rem"
             textAlign={{ base: 'left', md: 'left' }}
           >
-            Check out the ways God used us to serve our community
+            Partner with us through serving
           </Text>
 
           <Box bg="#B7E0E2" borderRadius="3xl" p={{ base: 5, md: 8 }}>
