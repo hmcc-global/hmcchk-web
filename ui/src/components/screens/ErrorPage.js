@@ -199,7 +199,7 @@ const ErrorPage = (props) => {
         <Box
           minH="100vh"
           bgImage={`url(${
-            process.env.PUBLIC_URL + 'images/default-hk-background.jpeg'
+            process.env.PUBLIC_URL + '/images/default-hk-background.jpeg'
           })`}
           w="full"
           bgRepeat="no-repeat"
