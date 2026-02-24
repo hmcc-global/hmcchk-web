@@ -33,8 +33,18 @@ const cards = [
     title: 'Children',
     description: 'Building Blocks is HMCC’s Children Ministry.',
     image: `${process.env.PUBLIC_URL}/images/connect/children.jpg`,
+    link: '/building-blocks',
     showButton: true,
+    buttonColor: '#21A0A7',
   },
+  {
+    title: 'SHINE Ministry',
+    description: 'Shining God’s light through serving our local community.',
+    image: `${process.env.PUBLIC_URL}/images/connect/shine.png`,
+    link: '/shine-ministry',
+    showButton: true,
+    buttonColor: '#EBAC09'
+  }
 ];
 
 const MinistryCard = (props) => {
@@ -87,8 +97,8 @@ const MinistryCard = (props) => {
             <Box p={4}>
               <Button
                 as="a"
-                href="/building-blocks"
-                bg={'#21A0A7'}
+                href={card.link}
+                bg={card.buttonColor}
                 borderRadius={'15px'}
                 width="100%"
                 textColor={'white'}
