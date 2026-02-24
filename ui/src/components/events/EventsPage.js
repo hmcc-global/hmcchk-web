@@ -208,7 +208,6 @@ const EventsPage = (props) => {
         justifyContent="space-around"
         flexDirection={['column', 'row']}
         spacing={[2, 0]}
-        zIndex={999}
         top={2}
         position="sticky"
         alignItems="center"
