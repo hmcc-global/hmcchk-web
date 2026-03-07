@@ -123,6 +123,7 @@ const AdminPopUpContainer = (props) => {
       selectedId,
     },
     defaultValues: DEFAULT_FORM_VALUES,
+    mode: 'onChange',
   });
 
   const watchedImage = watch('imageLink');
@@ -144,18 +145,21 @@ const AdminPopUpContainer = (props) => {
     getData();
   }, [getData]);
 
-  const handleUpdateSelectedPopup = useCallback((popup) => {
-    if (popup) {
-      setSelected(popup);
-      setSelectedId(popup.id || '');
-      reset(toFormValues(popup));
-      return;
-    }
+  const handleUpdateSelectedPopup = useCallback(
+    (popup) => {
+      if (popup) {
+        setSelected(popup);
+        setSelectedId(popup.id || '');
+        reset(toFormValues(popup));
+        return;
+      }
 
-    setSelected(undefined);
-    setSelectedId('');
-    reset(DEFAULT_FORM_VALUES);
-  }, [reset]);
+      setSelected(undefined);
+      setSelectedId('');
+      reset(DEFAULT_FORM_VALUES);
+    },
+    [reset]
+  );
 
   useEffect(() => {
     if (watchedDeleted) {
