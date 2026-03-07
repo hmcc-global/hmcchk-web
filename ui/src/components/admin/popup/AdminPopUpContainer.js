@@ -128,23 +128,17 @@ const AdminPopUpContainer = (props) => {
   const watchedImage = watch('imageLink');
   const watchedDeleted = watch('isDeleted');
 
+  //Always called when selectedId cahnges.
   const getData = useCallback(async () => {
     try {
       const { data } = await axios.get('/api/popup/get');
       if (data) {
         setPopUps(data);
-
-        if (selectedId) {
-          const refreshedSelected = data.find(
-            (popup) => popup.id === selectedId
-          );
-          if (refreshedSelected) setSelected(refreshedSelected);
-        }
       }
     } catch (err) {
       console.log(err);
     }
-  }, [selectedId]);
+  }, []);
 
   useEffect(() => {
     getData();
@@ -158,6 +152,7 @@ const AdminPopUpContainer = (props) => {
       return;
     }
 
+    setSelected(undefined);
     setSelectedId('');
     reset(DEFAULT_FORM_VALUES);
   }, [reset]);
@@ -176,7 +171,7 @@ const AdminPopUpContainer = (props) => {
       const payload = {
         id: selectedId,
         ...toFormValues(formValues),
-        isDeleted: formValues.isDeleted,
+        isDeleted: Boolean(formValues.isDeleted),
       };
 
       const res = await axios.put('/api/popup/update', {
@@ -187,7 +182,7 @@ const AdminPopUpContainer = (props) => {
     } catch (e) {
       console.log(e.response);
       toast({
-        description: e.response.data,
+        description: e.response?.data || 'Unable to update popup',
         status: 'error',
         duration: 5000,
       });
@@ -207,13 +202,15 @@ const AdminPopUpContainer = (props) => {
 
       if (res.status === 200) {
         const { data } = res;
-        if (data?.id) setSelectedId(data.id);
+        if (data?.id) {
+          setSelectedId(data.id);
+        }
         return true;
       }
     } catch (e) {
       console.log(e.response);
       toast({
-        description: e.response.data,
+        description: e.response?.data || 'Unable to create popup',
         status: 'error',
         duration: 5000,
       });
@@ -242,7 +239,7 @@ const AdminPopUpContainer = (props) => {
   const handleReset = () => {
     reset(DEFAULT_FORM_VALUES);
     setSelectedId('');
-    setSelected();
+    setSelected(undefined);
     setIsPreviewing(false);
   };
 
