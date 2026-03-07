@@ -185,22 +185,6 @@ const ContactUs = forwardRef((props, ref) => {
                     </Box>
                   </HStack>
 
-                  <Spacer />
-
-                  <Box
-                    w="70%"
-                    position="relative"
-                    overflow="hidden"
-                    borderRadius="80px"
-                  >
-                    <Image
-                      src={`${process.env.PUBLIC_URL}/images/buildingblock/ContactUsPic.jpg`}
-                      alt="BB"
-                      width="100%"
-                      height="100%"
-                      objectFit="cover"
-                    />
-                  </Box>
                 </VStack>
               )}
             </Box>
