@@ -17,7 +17,6 @@ const images = [
   '/images/buildingblock/carousel-3.png',
   '/images/buildingblock/carousel-4.png',
   '/images/buildingblock/carousel-5.png',
-  '/images/buildingblock/carousel-6.png',
 ];
 
 export default function Curriculum() {
