@@ -85,14 +85,14 @@
   "staff": {
     "directors": [
       {
-        "photo": "staff-joanna.jpeg",
-        "name": "Joanna Jing",
-        "title": ["Corporate Operations & Events", "City Ministry"]
-      },
-      {
         "photo": "staff-peter-and-karene.jpeg",
         "name": "Pastor Intern Peter Young",
         "title": ["Youth & Families Ministry"]
+      },
+      {
+        "photo": "staff-joanna.jpeg",
+        "name": "Joanna Jing",
+        "title": ["Corporate Operations & Events", "City Ministry"]
       },
       {
         "photo": "staff-kieran.jpeg",
