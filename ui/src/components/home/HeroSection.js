@@ -51,7 +51,7 @@ const HeroSection = () => {
             as="video"
             ref={vidRef}
             w="full"
-            src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
+            src={process.env.PUBLIC_URL + '/images/home/20260306_loopingvid_revamp_v3_compressed.mp4'}
             loop
             muted
             objectFit="cover"
@@ -183,7 +183,7 @@ const HeroSection = () => {
             as="video"
             w="full"
             h="auto"
-            src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
+            src={process.env.PUBLIC_URL + '/images/home/20260306_loopingvid_revamp_v3_compressed.mp4'}
             loop
             muted
             objectFit="cover"
@@ -339,7 +339,7 @@ const HeroSection = () => {
             ref={vidRefMobile}
             w="full"
             h="auto"
-            src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
+            src={process.env.PUBLIC_URL + '/images/home/20260306_loopingvid_revamp_v3_compressed.mp4'}
             loop
             muted
             objectFit="cover"
