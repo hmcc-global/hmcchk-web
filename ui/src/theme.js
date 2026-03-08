@@ -1,5 +1,9 @@
 import { extendTheme } from '@chakra-ui/react';
 import '@fontsource/dm-sans';
+import '@fontsource/dm-serif-display';
+import '@fontsource/dm-serif-display/400-italic';
+import '@fontsource/instrument-serif';
+import '@fontsource/manrope';
 
 const customTheme = extendTheme({
   fonts: {
@@ -14,6 +18,25 @@ const customTheme = extendTheme({
     dm_sans_bold: {
       fontFamily: 'DM Sans',
       fontWeight: '700',
+    },
+    dm_serif_display_italic: {
+      fontFamily: "'DM Serif Display', Georgia, serif",
+      fontStyle: 'italic',
+      fontWeight: '400',
+    },
+    instrument_serif: {
+      fontFamily: "'Instrument Serif', Georgia, serif",
+      fontStyle: 'normal',
+      fontWeight: '400',
+    },
+    instrument_serif_bold: {
+      fontFamily: "'Instrument Serif', Georgia, serif",
+      fontStyle: 'normal',
+      fontWeight: '600',
+    },
+    manrope: {
+      fontFamily: "'Manrope', sans-serif",
+      fontWeight: '400',
     },
   },
 });
