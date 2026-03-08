@@ -36,9 +36,6 @@ const EasterContainer = () => {
         >
           <GridItem>
             <Box
-              border="2px solid"
-              borderColor="yellow.300"
-              borderRadius="md"
               overflow="hidden"
               bg="gray.100"
               w="full"
