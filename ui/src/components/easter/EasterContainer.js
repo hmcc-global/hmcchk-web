@@ -5,9 +5,14 @@ const EasterContainer = () => {
   const theme = useTheme();
 
   return (
-    <Box bg="linear-gradient(135deg, #FFF8DC 0%, #F0E68C 100%)" py={8} fontFamily={theme.fonts?.body}>
+    <Box 
+      background="linear-gradient(180deg, #F6FAFF 0%, #FFF7E2 23.56%, #F9E6DB 65.87%, #F6FAFF 92.79%)"
+      minH="1800px"
+      py={8} 
+      fontFamily={theme.fonts?.body}
+    >
       <Container maxW="container.lg">
-        Easter 2026: Living Hope
+
       </Container>
     </Box>
   );

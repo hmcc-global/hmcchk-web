@@ -43,8 +43,9 @@ const HomeContainer = (props) => {
   return (
     <Flex direction="column" bgColor="#F6FAFF">
       <HeroSection />
+       <EasterContainer />
       <EventsSection />
-      <EasterContainer />
+     
 
       {isMobile ? <VisionMissionSectionMobile /> : <VisionMissionSection />}
       {isMobile ? <ChurchThemeSectionMobile /> : <ChurchThemeSection /> }
