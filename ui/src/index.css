@@ -59,3 +59,9 @@ code {
     url('./font/DMSerifDisplay-Italic.ttf') format('truetype');
   font-weight: normal;
 }
+
+@font-face {
+  font-family: 'DMSans';
+  src: local('DMSans'),
+    url('./font/DMSans.ttf') format('truetype');
+}
