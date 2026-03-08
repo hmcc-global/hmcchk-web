@@ -22,7 +22,7 @@ const EasterContainer = () => {
           letterSpacing={{ base: '-1px', lg: '-2px' }}
           bgGradient="linear(to-r, #4C004A, #A62E5E)"
           bgClip="text"
-          pb="2"
+          pb={2}
           mb={{ base: '17px', md: 8 }}
         >
           Passion Week 2026:{' '}
