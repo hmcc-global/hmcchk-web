@@ -26,7 +26,7 @@ const EasterContainer = () => {
           mb={{ base: '17px', md: 8 }}
         >
           Passion Week 2026:{' '}
-          <chakra.span display={{ base: 'block', lg: 'inline' }}>Living Hope</chakra.span>
+          <span display={{ base: 'block', lg: 'inline' }}>Living Hope</span>
         </Heading>
 
         <Grid
