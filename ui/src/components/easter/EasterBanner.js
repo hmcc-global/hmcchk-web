@@ -7,7 +7,6 @@ import {
   Image,
   Stack,
   Text,
-  chakra,
 } from '@chakra-ui/react';
 
 const EasterBanner = () => {
@@ -20,14 +19,16 @@ const EasterBanner = () => {
         fontWeight="400"
         fontSize={{ base: '2.25em', lg: '3.75em' }}
         lineHeight={{ base: '1.03', lg: '0.97' }}
-        letterSpacing={{ base: '-0.028em', lg: '-0.033em' }}
+        letterSpacing={{ base: '-0.0625rem', lg: '-0.125rem' }}
         bgGradient="linear(to-r, #4C004A, #A62E5E)"
         bgClip="text"
         pb={2}
         mb="0.5em"
       >
         Passion Week 2026:{' '}
-        <chakra.span display={{ base: 'block', lg: 'inline' }}>Living Hope</chakra.span>
+        <Box as="span" display={{ base: 'block', lg: 'inline' }}>
+          Living Hope
+        </Box>
       </Heading>
 
       <Grid
@@ -36,23 +37,17 @@ const EasterBanner = () => {
         alignItems="center"
       >
         <GridItem>
-          <Box
+          <Image
+            src={process.env.PUBLIC_URL + '/images/easter/ad.png'}
+            alt="Living Hope graphic"
             overflow="hidden"
             bg="gray.100"
+            display="block"
             w="full"
+            h="full"
             sx={{ aspectRatio: '16/9' }}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Image
-              src={process.env.PUBLIC_URL + '/images/easter/ad.png'}
-              alt="Living Hope graphic"
-              w="full"
-              h="full"
-              objectFit="cover"
-            />
-          </Box>
+            objectFit="cover"
+          />
         </GridItem>
 
         <GridItem>
@@ -61,7 +56,7 @@ const EasterBanner = () => {
               textStyle="instrument_serif_bold"
               fontSize={{ base: '1.125em', lg: '1.875em' }}
               color="#A81D4B"
-              lineHeight={{ base: 'normal', lg: '1.07' }}
+              lineHeight={{ base: 'normal', lg: '1.1em' }}
             >
               Romans 15:13 (NIV), &ldquo;May the God of hope fill you with all joy and peace as
               you trust in him, so that you may overflow with hope by the power of the Holy
