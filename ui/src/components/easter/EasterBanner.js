@@ -19,7 +19,7 @@ const EasterBanner = () => {
         fontWeight="400"
         fontSize={{ base: '2.25em', lg: '3.75em' }}
         lineHeight={{ base: '1.03', lg: '0.97' }}
-        letterSpacing={{ base: '-0.0625rem', lg: '-0.125rem' }}
+        letterSpacing={{ base: '-1px', lg: '-2px' }}
         bgGradient="linear(to-r, #4C004A, #A62E5E)"
         bgClip="text"
         pb={2}
