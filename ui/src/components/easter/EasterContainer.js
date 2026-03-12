@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Container, useTheme } from '@chakra-ui/react';
 import EasterBanner from './EasterBanner';
+import EasterTestimony from './EasterTestimony';
 
 const EasterContainer = () => {
   const theme = useTheme();
@@ -14,6 +15,7 @@ const EasterContainer = () => {
     >
       <Container maxW="container.xl" px={{ base: 6, md: 10 }}>
         <EasterBanner />
+        <EasterTestimony />
       </Container>
     </Box>
   );
