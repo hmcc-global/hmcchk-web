@@ -2,7 +2,6 @@ import React from 'react';
 import {
     Box,
     Grid,
-    GridItem,
     Heading,
     Image,
     Stack,
@@ -10,42 +9,37 @@ import {
     VStack,
     HStack,
     Button,
-    Divider,
     Link,
-    useColorModeValue,
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
-const placeholders = new Array(9).fill(null);
-
 export default function EasterTestimony() {
-    const accent = useColorModeValue('purple.700', 'purple.300');
-    const cardBg = useColorModeValue('whiteAlpha.900', 'gray.800');
-
     return (
-        <Box as="section" w="100%" py={{ base: 8, md: 16 }} px={{ base: 6, md: 12 }}>
-            <VStack spacing={8} align="stretch">
+        <Box as="section" w="100%" py={{ base: 6, md: 16 }} px={{ base: 1, md: 12 }}>
+            <VStack spacing={{ base: 6, md: 8 }} align="stretch">
                 <Box position="relative">
                     <Image
                         src={process.env.PUBLIC_URL + '/images/easter/easter_testimony_icon.png'}
                         alt="icon"
                         mx="auto"
                         display="block"
-                        w={{ base: '64px', md: '96px' }}
-                        mb={2}
+                        w={{ base: '3rem', md: '6rem' }}
+                        mb={{ base: 1, md: 2 }}
                     />
                     <Heading
                         as="h2"
                         fontFamily="Instrument Serif"
                         fontStyle="italic"
                         fontWeight={400}
-                        fontSize="40px"
+                        fontSize={{ base: '2.25rem', md: '2.5rem' }}
                         lineHeight="97%"
                         textAlign="center"
                         textTransform="uppercase"
                         background="linear-gradient(90deg, #982896 0%, #320D19 100%)"
                         backgroundClip="text"
-                        pb={2}
+                        maxW={{ base: '16.25rem', md: '100%' }}
+                        mx="auto"
+                        pb={{ base: 4, md: 2 }}
                         sx={{
                             WebkitTextStrokeWidth: '1.2px',
                             WebkitBackgroundClip: 'text',
@@ -54,28 +48,55 @@ export default function EasterTestimony() {
                     >
                         WE ARE ALSO SHARING TESTIMONIES!
                     </Heading>
-                    <Box position="absolute" left={-6} top="6%" bottom="6%" width="28px" display="flex" alignItems="center" justifyContent="center">
+                    <Box
+                        position="absolute"
+                        left={{ base: '-0.25rem', md: -6 }}
+                        top={{ base: 0, md: '6%' }}
+                        bottom={{ base: '4.5rem', md: '6%' }}
+                        width={{ base: '1rem', md: '1.75rem' }}
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                    >
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="100%" viewBox="0 0 24 521" fill="none" style={{ display: 'block' }}>
                             <path d="M23.5 0.5C10.7975 0.5 0.5 10.7974 0.5 23.5V497.5C0.5 510.203 10.7975 520.5 23.5 520.5" stroke="#A690B4" strokeWidth="1" />
                         </svg>
                     </Box>
 
-                    <Box position="absolute" right={-6} top="6%" bottom="6%" width="28px" display="flex" alignItems="center" justifyContent="center">
+                    <Box
+                        position="absolute"
+                        right={{ base: '-0.25rem', md: -6 }}
+                        top={{ base: 0, md: '6%' }}
+                        bottom={{ base: '4.5rem', md: '6%' }}
+                        width={{ base: '1rem', md: '1.75rem' }}
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                    >
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="100%" viewBox="0 0 24 521" fill="none" style={{ display: 'block', transform: 'scaleX(-1)' }}>
                             <path d="M23.5 0.5C10.7975 0.5 0.5 10.7974 0.5 23.5V497.5C0.5 510.203 10.7975 520.5 23.5 520.5" stroke="#A690B4" strokeWidth="1" />
                         </svg>
                     </Box>
 
                     <Grid templateColumns={{ base: '1fr', md: '1fr 420px' }} gap={{ base: 8, md: 12 }} alignItems="center">
-                        <Box bg="transparent" borderRadius="md" p={{ base: 6, md: 8 }}>
-                            <Stack spacing={6}>
-                                <HStack justifyContent="space-between" alignItems="start">
-                                    <VStack alignItems="flex-start">
-                                        <Text fontSize="sm" letterSpacing="widest" fontWeight="600" color="gray.600">
+                        <Box bg="transparent" borderRadius="md" p={{ base: 3, md: 8 }}>
+                            <Stack spacing={{ base: 4, md: 6 }}>
+                                <HStack justifyContent={{ base: 'center', md: 'space-between' }} alignItems="start">
+                                    <VStack alignItems={{ base: 'center', md: 'flex-start' }}>
+                                        <Text
+                                            fontSize="sm"
+                                            letterSpacing="widest"
+                                            fontWeight="600"
+                                            color="gray.600"
+                                            textTransform="uppercase"
+                                            border={{ base: '1px solid rgba(0,0,0,0.25)', md: 'none' }}
+                                            borderRadius={{ base: '999rem', md: '0' }}
+                                            px={{ base: 4, md: 0 }}
+                                            py={{ base: 1, md: 0 }}
+                                        >
                                             HOW TO PARTICIPATE
                                         </Text>
-                                        {/* divider replaced with fixed-width line */}
-                                        <Box width="518px" height="1px" bg="rgba(0,0,0,0.20)" />
+                                        <Box display={{ base: 'none', md: 'block' }} width="518px" height="1px" bg="rgba(0,0,0,0.20)" />
                                     </VStack>
                                 </HStack>
 
@@ -83,10 +104,11 @@ export default function EasterTestimony() {
                                 <Text
                                     fontFamily="Manrope"
                                     color="#161616"
-                                    fontSize="16px"
+                                    fontSize={{ base: '1rem', md: '16px' }}
                                     fontStyle="normal"
                                     fontWeight={400}
                                     lineHeight="120.156%"
+                                    textAlign={{ base: 'center', md: 'left' }}
                                 >
                                     Post a Living Hope testimony with the following prompt:
                                 </Text>
@@ -96,17 +118,18 @@ export default function EasterTestimony() {
                                     fontFamily="Instrument Serif"
                                     fontStyle="italic"
                                     fontWeight={400}
-                                    fontSize="30px"
+                                    fontSize={{ base: '2.125rem', md: '30px' }}
                                     color="#982896"
                                     lineHeight="normal"
                                     display="block"
+                                    textAlign={{ base: 'center', md: 'left' }}
                                     sx={{
                                         WebkitTextStrokeWidth: '1px',
                                         WebkitTextStrokeColor: '#982896',
                                         WebkitTextFillColor: '#982896',
                                     }}
                                 >
-                                    My hope was in ___,
+                                    My hope was in ______,
                                     <br />
                                     but now, Jesus is my Living Hope because ____.
                                 </Text>
@@ -115,16 +138,17 @@ export default function EasterTestimony() {
                                 <Text
                                     fontFamily="Manrope"
                                     color="#161616"
-                                    fontSize="16px"
+                                    fontSize={{ base: '1rem', md: '16px' }}
                                     fontStyle="normal"
                                     fontWeight={400}
                                     lineHeight="120.156%"
+                                    textAlign={{ base: 'center', md: 'left' }}
                                 >
                                     Include the hashtag <Text as="span" fontWeight={700} fontFamily="Manrope" fontSize="16px" lineHeight="120.156%">#hmcc_livinghope</Text> and <br />
                                     tag <Text as="span" fontWeight={700} fontFamily="Manrope" fontSize="16px" lineHeight="120.156%">@HMCC_HK</Text> in your Instagram post!
                                 </Text>
 
-                                <HStack pt={4}>
+                                <HStack pt={4} justifyContent={{ base: 'center', md: 'flex-start' }}>
                                     <Link href="https://www.instagram.com/" isExternal _hover={{ textDecoration: 'none' }}>
                                         <Button
                                             rightIcon={<ArrowForwardIcon />}
@@ -147,7 +171,13 @@ export default function EasterTestimony() {
                             </Stack>
                         </Box>
 
-                        <Box width={{ base: '90%', md: '80%' }} height="90%" border="none">
+                        <Box
+                            display="block"
+                            width={{ base: '100%', md: '80%' }}
+                            height={{ base: '22rem', md: '21rem' }}
+                            border="none"
+                            px={{ base: 4, md: 0 }}
+                        >
                             <iframe
                                 title="instagram"
                                 src="https://widget.taggbox.com/2163216"
@@ -163,12 +193,14 @@ export default function EasterTestimony() {
                     <Box pt={{ base: 6, md: 12 }}>
                         <Text
                             fontFamily="Instrument Serif"
-                            fontSize="40px"
+                            fontSize={{ base: '2.5rem', md: '40px' }}
                             textAlign="center"
                             color="#7586C1"
                             fontStyle="normal"
                             fontWeight={400}
-                            lineHeight="32px"
+                            lineHeight={{ base: '2.5rem', md: '32px' }}
+                            maxW={{ base: '17.5rem', md: '100%' }}
+                            mx="auto"
                             sx={{
                                 WebkitTextStrokeWidth: '0.6px',
                                 WebkitTextStrokeColor: '#7586C1',
