@@ -47,15 +47,24 @@ export default function EasterTestimony() {
                         backgroundClip="text"
                         pb={2}
                         sx={{
-                            WebkitTextStrokeWidth: '1.3px',
+                            WebkitTextStrokeWidth: '1.2px',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                         }}
                     >
                         WE ARE ALSO SHARING TESTIMONIES!
                     </Heading>
-                    <Box position="absolute" left={-6} top="6%" bottom="6%" width="28px" border="1.5px solid" borderColor="#d7bfd9" borderRadius="24px" />
-                    <Box position="absolute" right={-6} top="6%" bottom="6%" width="28px" border="1.5px solid" borderColor="#d7bfd9" borderRadius="24px" />
+                    <Box position="absolute" left={-6} top="6%" bottom="6%" width="28px" display="flex" alignItems="center" justifyContent="center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="100%" viewBox="0 0 24 521" fill="none" style={{ display: 'block' }}>
+                            <path d="M23.5 0.5C10.7975 0.5 0.5 10.7974 0.5 23.5V497.5C0.5 510.203 10.7975 520.5 23.5 520.5" stroke="#A690B4" strokeWidth="1" />
+                        </svg>
+                    </Box>
+
+                    <Box position="absolute" right={-6} top="6%" bottom="6%" width="28px" display="flex" alignItems="center" justifyContent="center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="100%" viewBox="0 0 24 521" fill="none" style={{ display: 'block', transform: 'scaleX(-1)' }}>
+                            <path d="M23.5 0.5C10.7975 0.5 0.5 10.7974 0.5 23.5V497.5C0.5 510.203 10.7975 520.5 23.5 520.5" stroke="#A690B4" strokeWidth="1" />
+                        </svg>
+                    </Box>
 
                     <Grid templateColumns={{ base: '1fr', md: '1fr 420px' }} gap={{ base: 8, md: 12 }} alignItems="center">
                         <Box bg="transparent" borderRadius="md" p={{ base: 6, md: 8 }}>
@@ -65,48 +74,70 @@ export default function EasterTestimony() {
                                         <Text fontSize="sm" letterSpacing="widest" fontWeight="600" color="gray.600">
                                             HOW TO PARTICIPATE
                                         </Text>
-                                        <Divider borderColor="gray.300" width="100%" />
+                                        {/* divider replaced with fixed-width line */}
+                                        <Box width="518px" height="1px" bg="rgba(0,0,0,0.20)" />
                                     </VStack>
                                 </HStack>
 
-                                <Text textStyle="manrope" color="gray.700">Post a Living Hope testimony with the following prompt:</Text>
+
+                                <Text
+                                    fontFamily="Manrope"
+                                    color="#161616"
+                                    fontSize="16px"
+                                    fontStyle="normal"
+                                    fontWeight={400}
+                                    lineHeight="120.156%"
+                                >
+                                    Post a Living Hope testimony with the following prompt:
+                                </Text>
 
                                 <Text
                                     as="span"
                                     fontFamily="Instrument Serif"
                                     fontStyle="italic"
-                                    fontSize={{ base: '20px', md: '28px' }}
+                                    fontWeight={400}
+                                    fontSize="30px"
                                     color="#982896"
-                                    lineHeight={{ base: '1.02', md: '0.5' }}
+                                    lineHeight="normal"
                                     display="block"
+                                    sx={{
+                                        WebkitTextStrokeWidth: '1px',
+                                        WebkitTextStrokeColor: '#982896',
+                                        WebkitTextFillColor: '#982896',
+                                    }}
                                 >
                                     My hope was in ___,
-                                </Text>
-                                <Text
-                                    as="span"
-                                    fontFamily="Instrument Serif"
-                                    fontStyle="italic"
-                                    fontSize={{ base: '20px', md: '28px' }}
-                                    color="#982896"
-                                    lineHeight={{ base: '1.02', md: '0.5' }}
-                                    display="block"
-                                >
+                                    <br />
                                     but now, Jesus is my Living Hope because ____.
                                 </Text>
 
-                                <Text textStyle="manrope" color="gray.700" fontSize={{ base: '0.95em', md: '1em' }}>
-                                    Include the hashtag <Text as="span" fontWeight="700">#hmcc_livinghope</Text> and tag <Text as="span" fontWeight="700">@HMCC_HK</Text> in your Instagram post!
+
+                                <Text
+                                    fontFamily="Manrope"
+                                    color="#161616"
+                                    fontSize="16px"
+                                    fontStyle="normal"
+                                    fontWeight={400}
+                                    lineHeight="120.156%"
+                                >
+                                    Include the hashtag <Text as="span" fontWeight={700} fontFamily="Manrope" fontSize="16px" lineHeight="120.156%">#hmcc_livinghope</Text> and <br />
+                                    tag <Text as="span" fontWeight={700} fontFamily="Manrope" fontSize="16px" lineHeight="120.156%">@HMCC_HK</Text> in your Instagram post!
                                 </Text>
 
                                 <HStack pt={4}>
                                     <Link href="https://www.instagram.com/" isExternal _hover={{ textDecoration: 'none' }}>
                                         <Button
                                             rightIcon={<ArrowForwardIcon />}
-                                            bgGradient="linear(to-r, #3A042E, #8A1F4B)"
-                                            color="white"
+                                            bgColor={"#410025"}
+                                            color="#FFF"
                                             borderRadius="full"
                                             px={6}
                                             py={5}
+                                            fontFamily="Manrope"
+                                            fontSize="16px"
+                                            fontWeight={700}
+                                            lineHeight="normal"
+                                            textAlign="center"
                                             _hover={{ opacity: 0.92 }}
                                         >
                                             View More on Instagram
@@ -116,29 +147,35 @@ export default function EasterTestimony() {
                             </Stack>
                         </Box>
 
-                        <Box>
-                            <Grid templateColumns="repeat(3, 1fr)" gap={3}>
-                                {placeholders.map((_, i) => (
-                                    <GridItem key={i} w="100%">
-                                        <Box h={{ base: '70px', md: '96px' }} bg="gray.200" borderRadius="md" overflow="hidden" display="flex" alignItems="center" justifyContent="center">
-                                            <Text color="gray.400">Image</Text>
-                                        </Box>
-                                    </GridItem>
-                                ))}
-                            </Grid>
+                        <Box width={{ base: '90%', md: '80%' }} height="90%" border="none">
+                            <iframe
+                                title="instagram"
+                                src="https://widget.taggbox.com/2163216"
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    border: 'none',
+                                }}
+                            ></iframe>
                         </Box>
                     </Grid>
 
                     <Box pt={{ base: 6, md: 12 }}>
                         <Text
                             fontFamily="Instrument Serif"
-                            fontSize={{ base: '1.25em', md: '2xl' }}
+                            fontSize="40px"
                             textAlign="center"
-                            color="#7B8ECF"
-                            fontStyle="italic"
+                            color="#7586C1"
+                            fontStyle="normal"
                             fontWeight={400}
+                            lineHeight="32px"
+                            sx={{
+                                WebkitTextStrokeWidth: '0.6px',
+                                WebkitTextStrokeColor: '#7586C1',
+                                WebkitTextFillColor: '#7586C1',
+                            }}
                         >
-                            Come experience the Living Hope we have in Jesus Christ this Passion Week!
+                            Come experience the <Text as="span" fontStyle="italic">Living Hope</Text> we have in Jesus Christ this Passion Week!
                         </Text>
                     </Box>
                 </Box>
