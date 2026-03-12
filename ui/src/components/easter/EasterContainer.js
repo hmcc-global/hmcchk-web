@@ -13,7 +13,13 @@ const EasterContainer = () => {
       py={8}
       fontFamily={theme.fonts?.body}
     >
-      <Container maxW="container.xl" px={{ base: 6, md: 10 }}>
+      <Container
+        maxW="container.xl"
+        px={{ base: 6, md: 10 }}
+        display="flex"
+        flexDirection="column"
+        gap={24}
+      >
         <EasterBanner />
         <EasterInvitationSection />
       </Container>

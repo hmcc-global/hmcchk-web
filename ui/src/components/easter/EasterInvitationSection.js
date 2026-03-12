@@ -3,23 +3,27 @@ import {
   Container,
   Heading,
   Text,
+  Stack,
   VStack,
-  HStack,
   Button,
   // Image,
   useTheme,
   Fade,
   SimpleGrid,
   GridItem,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import { InView } from 'react-intersection-observer';
 import {
   TitleText,
   DateText,
+  MobileDateTextGoodFriday,
+  MobileDateTextEaster,
   SubtitleTextGoodFriday,
   SubtitleTextEaster,
   LocationText,
   AddressText,
+  ActionButton,
 } from './styles';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
@@ -46,14 +50,22 @@ const VerticalLine = ({ position }) => {
 
 const EasterInvitationSection = () => {
   const theme = useTheme();
+  const DateTextStylesGoodFriday = useBreakpointValue({
+    base: MobileDateTextGoodFriday,
+    md: DateText,
+  });
+
+  const DateTextStylesEaster = useBreakpointValue({
+    base: MobileDateTextEaster,
+    md: DateText,
+  });
 
   return (
     <InView rootMargin="-50px" triggerOnce={true}>
       {({ inView, ref }) => (
         <Fade transition={{ enter: { duration: 1 } }} in={inView}>
           {/* <Image
-            src={process.env.PUBLIC_URL + '/images/easter/e_invite_logo.png'}
-            opacity={0.15}
+            src={process.env.PUBLIC_URL + '/images/easter/tomb_icon.png'}
           /> */}
           <Box
             ref={ref}
@@ -75,14 +87,20 @@ const EasterInvitationSection = () => {
                 <SimpleGrid
                   columns={{ base: 1, md: 3 }}
                   spacing={[6, 8, 12]}
+                  alignItems={{ base: 'center', md: 'inherit' }}
+                  textAlign={{ base: 'center', md: 'inherit' }}
                   w="full"
                   maxW="1200px"
                 >
                   {/* Good Friday Service */}
                   <GridItem>
-                    <VStack spacing={3} align="start">
-                      <Text {...DateText}>APR 3 FRI</Text>
-                      <Box borderTop="1px solid #ccc" w="full" pt={3}>
+                    <VStack spacing={[1, 3]} align={['center', 'start']}>
+                      <Text {...DateTextStylesGoodFriday}>APR 3 FRI</Text>
+                      <Box
+                        borderTop={{ base: 'none', md: '1px solid #ccc' }}
+                        w="full"
+                        pt={[1, 3]}
+                      >
                         <Heading {...SubtitleTextGoodFriday}>
                           Good Friday Service
                         </Heading>
@@ -100,10 +118,20 @@ const EasterInvitationSection = () => {
 
                   {/* Easter Celebration & Baptism Celebration */}
                   <GridItem colSpan={{ base: 1, md: 2 }}>
-                    <VStack spacing={3} align="start">
-                      <Text {...DateText}>APR 5 SUN</Text>
-                      <Box borderTop="1px solid #ccc" w="full" pt={3}>
-                        <HStack spacing={6} align="start" w="full">
+                    <VStack spacing={[1, 3]} align={['center', 'start']}>
+                      <Text {...DateTextStylesEaster}>APR 5 SUN</Text>
+                      <Box
+                        borderTop={{ base: 'none', md: '1px solid #ccc' }}
+                        w="full"
+                        pt={[1, 3]}
+                      >
+                        <Stack
+                          spacing={[3, 6]}
+                          direction={{ base: 'column', md: 'row' }}
+                          alignItems={{ base: 'center', md: 'inherit' }}
+                          align="start"
+                          w="full"
+                        >
                           {/* Easter Celebration */}
                           <Box>
                             <Heading {...SubtitleTextEaster}>
@@ -133,30 +161,25 @@ const EasterInvitationSection = () => {
                               79 Hoi Yuen Road, Kwun Tong
                             </Text>
                           </Box>
-                        </HStack>
+                        </Stack>
                       </Box>
                     </VStack>
                   </GridItem>
                 </SimpleGrid>
 
                 {/* Action Buttons */}
-                <HStack
-                  spacing={[4, 6, 8]}
-                  flexDirection={['column', 'column', 'row']}
+                <Stack
+                  spacing={[4, 8]}
+                  direction={['column', 'row']}
                   w="full"
                   justify="center"
+                  align="center"
                 >
                   <Button
+                    {...ActionButton}
                     border="2px solid #533000"
                     bg="transparent"
                     color="#533000"
-                    fontFamily="'Manrope', sans-serif"
-                    fontWeight="700"
-                    fontSize="18px"
-                    px={10}
-                    py={6}
-                    borderRadius="80px"
-                    h="55px"
                     _hover={{
                       bg: 'rgba(83, 48, 0, 0.1)',
                     }}
@@ -167,18 +190,11 @@ const EasterInvitationSection = () => {
                   >
                     Add Events to Calendar
                   </Button>
-
                   <Button
+                    {...ActionButton}
                     bg="#533000"
                     color="white"
-                    fontFamily="'Manrope', sans-serif"
-                    fontWeight="700"
-                    fontSize="18px"
-                    px={10}
-                    py={6}
-                    borderRadius="80px"
-                    h="55px"
-                    rightIcon={<ArrowForwardIcon />}
+                    rightIcon={<ArrowForwardIcon display={['none', 'block']} />}
                     _hover={{
                       bg: '#6d4000',
                     }}
@@ -188,7 +204,7 @@ const EasterInvitationSection = () => {
                   >
                     Share an E-Invite!
                   </Button>
-                </HStack>
+                </Stack>
               </VStack>
             </Container>
             <VerticalLine position="right" />
