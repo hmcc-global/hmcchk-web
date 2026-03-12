@@ -6,7 +6,7 @@ import {
   Stack,
   VStack,
   Button,
-  // Image,
+  Image,
   useTheme,
   Fade,
   SimpleGrid,
@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { InView } from 'react-intersection-observer';
 import {
+  IconStyles,
   TitleText,
   DateText,
   MobileDateTextGoodFriday,
@@ -64,20 +65,18 @@ const EasterInvitationSection = () => {
     <InView rootMargin="-50px" triggerOnce={true}>
       {({ inView, ref }) => (
         <Fade transition={{ enter: { duration: 1 } }} in={inView}>
-          {/* <Image
-            src={process.env.PUBLIC_URL + '/images/easter/tomb_icon.png'}
-          /> */}
-          <Box
-            ref={ref}
-            fontFamily={theme.fonts?.body}
-            display="flex"
-            overflow="hidden"
-          >
+          <Box ref={ref} fontFamily={theme.fonts?.body} display="flex">
             <VerticalLine position="left" />
             <Container maxW="container.xl" px={[4, 6, 8]}>
-              <VStack spacing={[10, 12, 16]} align="center">
+              <Box justify="center" align="center">
+                <Image
+                  {...IconStyles}
+                  src={process.env.PUBLIC_URL + '/images/easter/tomb_icon.png'}
+                />
+              </Box>
+              <VStack spacing={[7, 16]} align="center">
                 {/* Header Section */}
-                <VStack spacing={6} textAlign="center" maxW="4xl">
+                <VStack textAlign="center" maxW="4xl">
                   <Heading {...TitleText}>
                     You are invited to join us at...
                   </Heading>
@@ -86,7 +85,7 @@ const EasterInvitationSection = () => {
                 {/* Event Cards Section */}
                 <SimpleGrid
                   columns={{ base: 1, md: 3 }}
-                  spacing={[6, 8, 12]}
+                  spacing={[6, 12]}
                   alignItems={{ base: 'center', md: 'inherit' }}
                   textAlign={{ base: 'center', md: 'inherit' }}
                   w="full"
@@ -94,7 +93,10 @@ const EasterInvitationSection = () => {
                 >
                   {/* Good Friday Service */}
                   <GridItem>
-                    <VStack spacing={[1, 3]} align={['center', 'start']}>
+                    <VStack
+                      spacing={[1, 3]}
+                      align={{ base: 'center', md: 'start' }}
+                    >
                       <Text {...DateTextStylesGoodFriday}>APR 3 FRI</Text>
                       <Box
                         borderTop={{ base: 'none', md: '1px solid #ccc' }}
@@ -118,7 +120,10 @@ const EasterInvitationSection = () => {
 
                   {/* Easter Celebration & Baptism Celebration */}
                   <GridItem colSpan={{ base: 1, md: 2 }}>
-                    <VStack spacing={[1, 3]} align={['center', 'start']}>
+                    <VStack
+                      spacing={[1, 3]}
+                      align={{ base: 'center', md: 'start' }}
+                    >
                       <Text {...DateTextStylesEaster}>APR 5 SUN</Text>
                       <Box
                         borderTop={{ base: 'none', md: '1px solid #ccc' }}
@@ -170,7 +175,7 @@ const EasterInvitationSection = () => {
                 {/* Action Buttons */}
                 <Stack
                   spacing={[4, 8]}
-                  direction={['column', 'row']}
+                  direction={{base:'column', md:'row'}}
                   w="full"
                   justify="center"
                   align="center"

@@ -1,3 +1,10 @@
+export const IconStyles = {
+  w: ['59px', '95px'],
+  h: ['38px', '60px'],
+  mt: ['-19px', '-30px'],
+  mb: ['1em', '1.5em'],
+};
+
 export const TitleText = {
   fontFamily: 'Instrument Serif',
   fontStyle: 'italic',
