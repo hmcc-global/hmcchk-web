@@ -72,6 +72,7 @@ const EasterInvitationSection = () => {
                 <Image
                   {...IconStyles}
                   src={process.env.PUBLIC_URL + '/images/easter/tomb_icon.png'}
+                  alt="Easter tomb icon"
                 />
               </Box>
               <VStack spacing={[7, 16]} align="center">
@@ -133,8 +134,7 @@ const EasterInvitationSection = () => {
                         <Stack
                           spacing={[3, 6]}
                           direction={{ base: 'column', md: 'row' }}
-                          alignItems={{ base: 'center', md: 'inherit' }}
-                          align="start"
+                          align={{ base: 'center', md: 'flex-start' }}
                           w="full"
                         >
                           {/* Easter Celebration */}
@@ -175,7 +175,7 @@ const EasterInvitationSection = () => {
                 {/* Action Buttons */}
                 <Stack
                   spacing={[4, 8]}
-                  direction={{base:'column', md:'row'}}
+                  direction={{ base: 'column', md: 'row' }}
                   w="full"
                   justify="center"
                   align="center"

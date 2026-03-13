@@ -6,7 +6,7 @@ export const IconStyles = {
 };
 
 export const TitleText = {
-  fontFamily: 'Instrument Serif',
+  fontFamily: "'Instrument Serif', serif",
   fontStyle: 'italic',
   fontSize: ['26px', '40px'],
   color: '#512f00',
