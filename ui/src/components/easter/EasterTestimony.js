@@ -24,10 +24,11 @@ export default function EasterTestimony() {
                         mx="auto"
                         display="block"
                         w={{ base: '3rem', md: '6rem' }}
-                        mb={{ base: 1, md: 2 }}
+                        mb={{ base: 3, md: 6 }}
                     />
                     <Heading
                         as="h2"
+                        mt={{ base: 2, md: 4 }}
                         fontFamily="Instrument Serif"
                         fontStyle="italic"
                         fontWeight={400}
