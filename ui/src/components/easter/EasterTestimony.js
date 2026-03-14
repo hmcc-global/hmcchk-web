@@ -202,7 +202,7 @@ export default function EasterTestimony() {
                                 <HStack pt={4} justifyContent={{ base: 'center', md: 'flex-start' }}>
                                     <Link href="https://www.instagram.com/" isExternal _hover={{ textDecoration: 'none' }}>
                                         <Button
-                                            rightIcon = {<ArrowForwardIcon transition="transform .18s" _groupHover={{ transform: 'translateX(6px)' }} />}
+                                            rightIcon={<ArrowForwardIcon transition="transform .18s" _groupHover={{ transform: 'translateX(6px)' }} />}
                                             bgColor={"#410025"}
                                             color="#FFF"
                                             borderRadius="full"
