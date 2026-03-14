@@ -69,11 +69,10 @@ const EasterBanner = () => {
               color="black"
               lineHeight="normal"
             >
-              This Easter, we want to experience the living hope we have in
-              Jesus Christ. Let&rsquo;s believe that Jesus is the reason for our
-              hope, demonstrated through the cross and His resurrection. As we
-              have received this hope we can overflow with hope, joy, and peace
-              in our lives!
+              This Easter, we want to experience the living hope we have in Jesus Christ.
+              Jesus is the reason for our hope, demonstrated through the cross and His
+              resurrection. As we have received this hope we can overflow into others with hope,
+              joy, and peace in our lives!
             </Text>
           </Stack>
         </GridItem>
