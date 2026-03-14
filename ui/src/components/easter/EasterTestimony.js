@@ -233,7 +233,7 @@ export default function EasterTestimony() {
                         >
                             <iframe
                                 title="instagram"
-                                src="https://widget.taggbox.com/2163216"
+                                src="https://widget.tagembed.com/319774?website=11"
                                 style={{
                                     width: '100%',
                                     height: '100%',
