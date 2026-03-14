@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     Box,
     Grid,
@@ -59,29 +58,33 @@ export default function EasterTestimony() {
                         alignItems="center"
                         justifyContent="center"
                     >
-                        <Box
-                            as="svg"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="11"
-                            height="100%"
-                            viewBox="0 0 11 681"
-                            preserveAspectRatio="none"
-                            fill="none"
-                            display={{ base: 'block', md: 'none' }}
-                        >
-                            <path d="M10.5 0.5C4.97715 0.5 0.5 4.97716 0.5 10.5V670.5C0.5 676.023 4.97715 680.5 10.5 680.5" stroke="#A690B4" />
+                        <Box display={{ base: 'block', md: 'none' }}>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="11"
+                                height="100%"
+                                viewBox="0 0 11 681"
+                                preserveAspectRatio="none"
+                                fill="none"
+                                aria-hidden="true"
+                                focusable="false"
+                            >
+                                <path d="M10.5 0.5C4.97715 0.5 0.5 4.97716 0.5 10.5V670.5C0.5 676.023 4.97715 680.5 10.5 680.5" stroke="#A690B4" />
+                            </svg>
                         </Box>
-                        <Box
-                            as="svg"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="100%"
-                            viewBox="0 0 24 521"
-                            preserveAspectRatio="none"
-                            fill="none"
-                            display={{ base: 'none', md: 'block' }}
-                        >
-                            <path d="M12.5 0.5C5.87258 0.5 0.5 5.87258 0.5 12.5V508.5C0.5 515.127 5.87258 520.5 12.5 520.5" stroke="#B8A9C6" strokeWidth="1" />
+                        <Box display={{ base: 'none', md: 'block' }}>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="100%"
+                                viewBox="0 0 24 521"
+                                preserveAspectRatio="none"
+                                fill="none"
+                                aria-hidden="true"
+                                focusable="false"
+                            >
+                                <path d="M12.5 0.5C5.87258 0.5 0.5 5.87258 0.5 12.5V508.5C0.5 515.127 5.87258 520.5 12.5 520.5" stroke="#B8A9C6" strokeWidth="1" />
+                            </svg>
                         </Box>
                     </Box>
 
@@ -95,34 +98,38 @@ export default function EasterTestimony() {
                         alignItems="center"
                         justifyContent="center"
                     >
-                        <Box
-                            as="svg"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="11"
-                            height="100%"
-                            viewBox="0 0 11 681"
-                            preserveAspectRatio="none"
-                            fill="none"
-                            display={{ base: 'block', md: 'none' }}
-                        >
-                            <path d="M0 0.5C5.52285 0.5 10 4.97716 10 10.5V670.5C10 676.023 5.52285 680.5 0 680.5" stroke="#A690B4" />
+                        <Box display={{ base: 'block', md: 'none' }}>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="11"
+                                height="100%"
+                                viewBox="0 0 11 681"
+                                preserveAspectRatio="none"
+                                fill="none"
+                                aria-hidden="true"
+                                focusable="false"
+                            >
+                                <path d="M0 0.5C5.52285 0.5 10 4.97716 10 10.5V670.5C10 676.023 5.52285 680.5 0 680.5" stroke="#A690B4" />
+                            </svg>
                         </Box>
-                        <Box
-                            as="svg"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="100%"
-                            viewBox="0 0 24 521"
-                            preserveAspectRatio="none"
-                            fill="none"
-                            display={{ base: 'none', md: 'block' }}
-                            style={{ transform: 'scaleX(-1)' }}
-                        >
-                            <path d="M12.5 0.5C5.87258 0.5 0.5 5.87258 0.5 12.5V508.5C0.5 515.127 5.87258 520.5 12.5 520.5" stroke="#B8A9C6" strokeWidth="1" />
+                        <Box display={{ base: 'none', md: 'block' }}>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="100%"
+                                viewBox="0 0 24 521"
+                                preserveAspectRatio="none"
+                                fill="none"
+                                aria-hidden="true"
+                                focusable="false"
+                                style={{ transform: 'scaleX(-1)' }}
+                            >
+                                <path d="M12.5 0.5C5.87258 0.5 0.5 5.87258 0.5 12.5V508.5C0.5 515.127 5.87258 520.5 12.5 520.5" stroke="#B8A9C6" strokeWidth="1" />
+                            </svg>
                         </Box>
                     </Box>
 
-                    <Grid templateColumns={{ base: '1fr', md: '1fr 420px' }} gap={{ base: 8, md: 12 }} alignItems="center">
+                    <Grid templateColumns={{ base: '1fr', lg: '1fr 420px' }} gap={{ base: 8, md: 12 }} alignItems="center">
                         <Box bg="transparent" borderRadius="md" p={{ base: 3, md: 8 }}>
                             <Stack spacing={{ base: 4, md: 6 }}>
                                 <HStack justifyContent={{ base: 'center', md: 'space-between' }} alignItems="start">
@@ -195,7 +202,7 @@ export default function EasterTestimony() {
                                 <HStack pt={4} justifyContent={{ base: 'center', md: 'flex-start' }}>
                                     <Link href="https://www.instagram.com/" isExternal _hover={{ textDecoration: 'none' }}>
                                         <Button
-                                            rightIcon={<ArrowForwardIcon />}
+                                            rightIcon = {<ArrowForwardIcon transition="transform .18s" _groupHover={{ transform: 'translateX(6px)' }} />}
                                             bgColor={"#410025"}
                                             color="#FFF"
                                             borderRadius="full"
@@ -206,7 +213,9 @@ export default function EasterTestimony() {
                                             fontWeight={700}
                                             lineHeight="normal"
                                             textAlign="center"
-                                            _hover={{ opacity: 0.92 }}
+                                            transition="transform .18s ease, background-color .18s ease, box-shadow .18s ease"
+                                            _hover={{ opacity: 0.95, transform: 'translateY(-3px)', bg: '#5a002a', boxShadow: 'lg' }}
+                                            role="group"
                                         >
                                             View More on Instagram
                                         </Button>
@@ -217,7 +226,7 @@ export default function EasterTestimony() {
 
                         <Box
                             display="block"
-                            width={{ base: '100%', md: '80%' }}
+                            width={{ base: '100%', lg: '80%' }}
                             height={{ base: '22rem', md: '21rem' }}
                             border="none"
                             px={{ base: 4, md: 0 }}
