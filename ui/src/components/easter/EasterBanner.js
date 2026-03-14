@@ -11,7 +11,7 @@ import {
 
 const EasterBanner = () => {
   return (
-    <>
+    <Box>
       <Heading
         as="h1"
         fontFamily="'DM Serif Display', Georgia, serif"
@@ -58,9 +58,9 @@ const EasterBanner = () => {
               color="#A81D4B"
               lineHeight={{ base: 'normal', lg: '1.1em' }}
             >
-              Romans 15:13 (NIV), &ldquo;May the God of hope fill you with all joy and peace as
-              you trust in him, so that you may overflow with hope by the power of the Holy
-              Spirit.&rdquo;
+              Romans 15:13 (NIV), &ldquo;May the God of hope fill you with all
+              joy and peace as you trust in him, so that you may overflow with
+              hope by the power of the Holy Spirit.&rdquo;
             </Text>
 
             <Text
@@ -69,15 +69,16 @@ const EasterBanner = () => {
               color="black"
               lineHeight="normal"
             >
-              This Easter, we want to experience the living hope we have in Jesus Christ.
-              Let&rsquo;s believe that Jesus is the reason for our hope, demonstrated through the
-              cross and His resurrection. As we have received this hope we can overflow with hope,
-              joy, and peace in our lives!
+              This Easter, we want to experience the living hope we have in
+              Jesus Christ. Let&rsquo;s believe that Jesus is the reason for our
+              hope, demonstrated through the cross and His resurrection. As we
+              have received this hope we can overflow with hope, joy, and peace
+              in our lives!
             </Text>
           </Stack>
         </GridItem>
       </Grid>
-    </>
+    </Box>
   );
 };
 
