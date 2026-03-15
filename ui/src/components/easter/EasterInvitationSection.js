@@ -6,6 +6,7 @@ import {
   Stack,
   VStack,
   Button,
+  Link,
   Image,
   useTheme,
   Fade,
@@ -27,6 +28,9 @@ import {
   ActionButton,
 } from './styles';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
+
+const easterCalendarUrl =
+  'https://calendar.google.com/calendar/u/8?cid=Y19hNzY3ODEwOGYzMjE3ZTJjNDc4MTgzMWZjZjQ0Y2IyZjg3MTk3MzhiNTY2NzliMWVlMWIzMGIwNDgxOGZkN2YyQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20';
 
 /* Decorative vertical lines */
 const VerticalLine = ({ position }) => {
@@ -182,15 +186,16 @@ const EasterInvitationSection = () => {
                 >
                   <Button
                     {...ActionButton}
+                    as={Link}
+                    href={easterCalendarUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     border="2px solid #533000"
                     bg="transparent"
                     color="#533000"
                     _hover={{
                       bg: 'rgba(83, 48, 0, 0.1)',
-                    }}
-                    onClick={() => {
-                      // Placeholder link - to be updated
-                      console.log('Add Events to Calendar clicked');
+                      textDecoration: 'none',
                     }}
                   >
                     Add Events to Calendar
