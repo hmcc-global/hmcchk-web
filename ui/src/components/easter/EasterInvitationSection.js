@@ -14,6 +14,7 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { InView } from 'react-intersection-observer';
+import { useState } from 'react';
 import {
   IconStyles,
   TitleText,
@@ -27,6 +28,7 @@ import {
   ActionButton,
 } from './styles';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
+import EInvitePopup from './EInvitePopup';
 
 /* Decorative vertical lines */
 const VerticalLine = ({ position }) => {
@@ -51,6 +53,8 @@ const VerticalLine = ({ position }) => {
 
 const EasterInvitationSection = () => {
   const theme = useTheme();
+  const [isEInvitePopupOpen, setIsEInvitePopupOpen] = useState(false);
+
   const DateTextStylesGoodFriday = useBreakpointValue({
     base: MobileDateTextGoodFriday,
     md: DateText,
@@ -208,7 +212,7 @@ const EasterInvitationSection = () => {
                       bg: '#6d4000',
                     }}
                     onClick={() => {
-                      console.log('Share an E-Invite clicked');
+                      setIsEInvitePopupOpen(true);
                     }}
                   >
                     Share an E-Invite!
@@ -218,6 +222,10 @@ const EasterInvitationSection = () => {
             </Container>
             <VerticalLine position="right" />
           </Box>
+          <EInvitePopup
+            isOpen={isEInvitePopupOpen}
+            onClose={() => setIsEInvitePopupOpen(false)}
+          />
         </Fade>
       )}
     </InView>
