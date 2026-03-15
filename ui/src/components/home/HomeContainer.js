@@ -1,7 +1,7 @@
 import { Flex, useBreakpointValue, Box } from '@chakra-ui/react';
 import { useState, useEffect, useRef } from 'react';
 import EventsSection from './EventsSection';
-import HeroSection from './HeroSection';
+import HeroSection, { EASTER_SECTION_ID } from './HeroSection';
 import PopupContainer from './PopupContainer';
 import { customAxios as axios } from '../helpers/customAxios';
 import VisionMissionSection from './VisionMissionSection';
@@ -43,14 +43,13 @@ const HomeContainer = (props) => {
   return (
     <Flex direction="column" bgColor="#F6FAFF">
       <HeroSection />
-      <Box id="easter-2026">
+      <Box id={EASTER_SECTION_ID}>
         <EasterContainer />
       </Box>
       <EventsSection />
-     
 
       {isMobile ? <VisionMissionSectionMobile /> : <VisionMissionSection />}
-      {isMobile ? <ChurchThemeSectionMobile /> : <ChurchThemeSection /> }
+      {isMobile ? <ChurchThemeSectionMobile /> : <ChurchThemeSection />}
       <ExperienceBiblicalCommunity />
 
       {popup.flag && <PopupContainer props={popup} />}
