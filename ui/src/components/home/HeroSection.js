@@ -12,6 +12,38 @@ import { SocialIcon } from 'react-social-icons';
 import { useEffect, useRef } from 'react';
 import SubHeroSection from './SubHeroSection';
 
+const scrollToEasterSection = () => {
+  const easterSection = document.getElementById('easter-2026');
+  if (!easterSection) {
+    return;
+  }
+
+  const elementPosition =
+    easterSection.getBoundingClientRect().top + window.pageYOffset;
+  const offsetPosition = elementPosition - 50;
+  const startPosition = window.pageYOffset;
+  const distance = offsetPosition - startPosition;
+  const duration = 1200;
+  let startTime = null;
+
+  function ease(t, b, c, d) {
+    t /= d / 2;
+    if (t < 1) return (c / 2) * t * t + b;
+    t--;
+    return (-c / 2) * (t * (t - 2) - 1) + b;
+  }
+
+  function scrollAnimation(currentTime) {
+    if (startTime === null) startTime = currentTime;
+    const timeElapsed = currentTime - startTime;
+    const run = ease(timeElapsed, startPosition, distance, duration);
+    window.scrollTo(0, run);
+    if (timeElapsed < duration) requestAnimationFrame(scrollAnimation);
+  }
+
+  requestAnimationFrame(scrollAnimation);
+};
+
 const HeroSection = () => {
   const vidRef = useRef();
   const vidRefMobile = useRef();
@@ -419,34 +451,7 @@ const HeroSection = () => {
                 _active={{
                   bg: 'linear-gradient(90deg, #5A1A2F 0%, #C26A7D 100%)',
                 }}
-                onClick={() => {
-                  const easterSection = document.getElementById('easter-2026');
-                  if (easterSection) {
-                    const elementPosition = easterSection.getBoundingClientRect().top + window.pageYOffset;
-                    const offsetPosition = elementPosition - 50;
-                    const startPosition = window.pageYOffset;
-                    const distance = offsetPosition - startPosition;
-                    const duration = 1200; 
-                    let startTime = null;
-                    
-                    function scrollAnimation(currentTime) {
-                      if (startTime === null) startTime = currentTime;
-                      const timeElapsed = currentTime - startTime;
-                      const run = ease(timeElapsed, startPosition, distance, duration);
-                      window.scrollTo(0, run);
-                      if (timeElapsed < duration) requestAnimationFrame(scrollAnimation);
-                    }
-                    
-                    function ease(t, b, c, d) {
-                      t /= d / 2;
-                      if (t < 1) return c / 2 * t * t + b;
-                      t--;
-                      return -c / 2 * (t * (t - 2) - 1) + b;
-                    }
-                    
-                    requestAnimationFrame(scrollAnimation);
-                  }
-                }}
+                onClick={scrollToEasterSection}
               >
                 <Text
                   textAlign="center"
