@@ -412,10 +412,12 @@ const HeroSection = () => {
 
                 transition="transform .18s ease, background-color .18s ease, box-shadow .18s ease"
                 _hover={{
-                  bg: "linear-gradient(90deg, #6B1F38 0%, #D67E8E 100%) ",transform: 'translateY(-3px)', boxShadow: 'lg'
+                  bg: 'linear-gradient(90deg, #6B1F38 0%, #D67E8E 100%)',
+                  transform: 'translateY(-3px)',
+                  boxShadow: 'lg',
                 }}
                 _active={{
-                  bg: "linear-gradient(90deg, #5A1A2F 0%, #C26A7D 100%)"
+                  bg: 'linear-gradient(90deg, #5A1A2F 0%, #C26A7D 100%)',
                 }}
                 onClick={() => {
                   const easterSection = document.getElementById('easter-2026');
