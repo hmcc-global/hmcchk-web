@@ -1,4 +1,5 @@
 import {
+  Box,
   Modal,
   ModalContent,
   ModalBody,
@@ -6,7 +7,6 @@ import {
   Button,
   Heading,
   VStack,
-  useBreakpointValue,
 } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { PopupButton } from './styles';
@@ -14,7 +14,6 @@ import { PopupButton } from './styles';
 const EInvitePopup = ({ isOpen, onClose }) => {
   const INVITE_LINK =
     'https://drive.google.com/file/d/1hGR992prfRQLLMz0LLryksG01H4xCZCx/view';
-  const modalSize = useBreakpointValue({ base: 'full', md: 'full' });
 
   const handleSaveImage = () => {
     window.open(INVITE_LINK, '_blank', 'noopener,noreferrer');
@@ -24,7 +23,7 @@ const EInvitePopup = ({ isOpen, onClose }) => {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      size={modalSize}
+      size="full"
       isCentered
       motionPreset="slideInBottom"
     >
@@ -40,21 +39,24 @@ const EInvitePopup = ({ isOpen, onClose }) => {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          h="100vh"
+          h="100%"
+          overflowY="auto"
         >
-          <Button
-            {...PopupButton}
-            bg="transparent"
-            color="black"
-            w="100%"
-            mb={{base: 4, md: 8}}
-            leftIcon={<ArrowBackIcon />}
-            _hover={{ bg: 'rgba(255,255,255,0.1)' }}
-            onClick={onClose}
-            justifyContent="flex-start"
-          >
-            Back
-          </Button>
+          <Box width="100%">
+            <Button
+              {...PopupButton}
+              pl={0}
+              bg="transparent"
+              color="black"
+              mb={{ base: 4, md: 8 }}
+              leftIcon={<ArrowBackIcon />}
+              _hover={{ bg: 'rgba(255,255,255,0.1)' }}
+              onClick={onClose}
+              justifyContent="flex-start"
+            >
+              Back
+            </Button>
+          </Box>
           <VStack spacing={8} align="center" w="full">
             <Heading
               textAlign="center"
@@ -68,7 +70,7 @@ const EInvitePopup = ({ isOpen, onClose }) => {
               Share an E-Invite to a friend!
             </Heading>
             <Image
-              height="488px"
+              height={{ base: '360px', md: '488px' }}
               src={process.env.PUBLIC_URL + '/images/easter/e-invite.jpg'}
               alt="E-Invite Preview"
             />

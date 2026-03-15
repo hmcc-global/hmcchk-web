@@ -103,8 +103,8 @@ export const ActionButton = {
 };
 
 export const PopupButton = {
-  fontFamily: 'Manrope',
-  fontWeight: 'bold',
+  fontFamily: "'Manrope', sans-serif",
+  fontWeight: '700',
   fontSize: { base: '0.875em', md: '1.125em' },
   borderRadius: '80px',
   px: 6,
