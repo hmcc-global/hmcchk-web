@@ -14,7 +14,6 @@ import EasterContainer from '../easter/EasterContainer';
 const HomeContainer = (props) => {
   const { user } = props;
   const sermonRef = useRef(null);
-  const easterRef = useRef(null);
   const isMobile = useBreakpointValue({ base: true, md: false });
   const [popupInfo, setPopupInfo] = useState([]);
   const getData = async () => {
@@ -44,7 +43,7 @@ const HomeContainer = (props) => {
   return (
     <Flex direction="column" bgColor="#F6FAFF">
       <HeroSection />
-      <Box id="easter-2026" ref={easterRef}>
+      <Box id="easter-2026">
         <EasterContainer />
       </Box>
       <EventsSection />
