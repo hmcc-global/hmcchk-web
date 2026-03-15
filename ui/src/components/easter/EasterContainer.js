@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Container, Fade, useTheme } from '@chakra-ui/react';
 import { InView } from 'react-intersection-observer';
 import EasterBanner from './EasterBanner';
+import EasterInvitationSection from './EasterInvitationSection';
 
 const EasterContainer = () => {
   const theme = useTheme();
@@ -17,8 +18,9 @@ const EasterContainer = () => {
             fontFamily={theme.fonts?.body}
             ref={ref}
           >
-            <Container maxW="container.xl" px={{ base: 6, md: 10 }}>
+            <Container maxW="container.xl" gap={8} px={{ base: 6, md: 10 }}>
               <EasterBanner />
+              <EasterInvitationSection />
             </Container>
           </Box>
         </Fade>
