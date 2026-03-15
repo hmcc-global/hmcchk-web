@@ -1,4 +1,4 @@
-import { Flex, useBreakpointValue } from '@chakra-ui/react';
+import { Flex, useBreakpointValue, Box } from '@chakra-ui/react';
 import { useState, useEffect, useRef } from 'react';
 import EventsSection from './EventsSection';
 import HeroSection from './HeroSection';
@@ -14,6 +14,7 @@ import EasterContainer from '../easter/EasterContainer';
 const HomeContainer = (props) => {
   const { user } = props;
   const sermonRef = useRef(null);
+  const easterRef = useRef(null);
   const isMobile = useBreakpointValue({ base: true, md: false });
   const [popupInfo, setPopupInfo] = useState([]);
   const getData = async () => {
@@ -43,7 +44,9 @@ const HomeContainer = (props) => {
   return (
     <Flex direction="column" bgColor="#F6FAFF">
       <HeroSection />
-       <EasterContainer />
+      <Box id="easter-2026" ref={easterRef}>
+        <EasterContainer />
+      </Box>
       <EventsSection />
      
 
