@@ -6,11 +6,11 @@ import {
   Heading,
   Container,
   Text,
+  Button,
 } from '@chakra-ui/react';
 import { SocialIcon } from 'react-social-icons';
 import { useEffect, useRef } from 'react';
 import SubHeroSection from './SubHeroSection';
-import { Button } from '@chakra-ui/react';
 
 const HeroSection = () => {
   const vidRef = useRef();
