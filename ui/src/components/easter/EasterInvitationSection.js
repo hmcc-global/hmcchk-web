@@ -120,7 +120,10 @@ const EasterInvitationSection = () => {
                   </GridItem>
 
                   {/* Easter Celebration & Baptism Celebration */}
-                  <GridItem colSpan={{ base: 1, md: 2 }}>
+                  <GridItem
+                    colSpan={{ base: 1, md: 2 }}
+                    ml={{ base: 0, md: 6 }}
+                  >
                     <VStack
                       spacing={[1, 3]}
                       align={{ base: 'center', md: 'start' }}
@@ -135,6 +138,7 @@ const EasterInvitationSection = () => {
                           spacing={[3, 6]}
                           direction={{ base: 'column', md: 'row' }}
                           align={{ base: 'center', md: 'flex-start' }}
+                          justify={{ base: 'center', md: 'space-between' }}
                           w="full"
                         >
                           {/* Easter Celebration */}
