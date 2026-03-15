@@ -190,11 +190,23 @@ const EasterInvitationSection = () => {
                     href={easterCalendarUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    rightIcon={
+                      <ArrowForwardIcon
+                        display={['none', 'block']}
+                        transition="transform .18s"
+                        _groupHover={{ transform: 'translateX(6px)' }}
+                      />
+                    }
                     border="2px solid #533000"
                     bg="transparent"
                     color="#533000"
+                    transition="transform .18s ease, background-color .18s ease, box-shadow .18s ease"
+                    role="group"
                     _hover={{
+                      opacity: 0.95,
+                      transform: 'translateY(-3px)',
                       bg: 'rgba(83, 48, 0, 0.1)',
+                      boxShadow: 'lg',
                       textDecoration: 'none',
                     }}
                   >
