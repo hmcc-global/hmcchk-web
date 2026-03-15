@@ -47,10 +47,9 @@ const HomeContainer = (props) => {
         <EasterContainer />
       </Box>
       <EventsSection />
-     
 
       {isMobile ? <VisionMissionSectionMobile /> : <VisionMissionSection />}
-      {isMobile ? <ChurchThemeSectionMobile /> : <ChurchThemeSection /> }
+      {isMobile ? <ChurchThemeSectionMobile /> : <ChurchThemeSection />}
       <ExperienceBiblicalCommunity />
 
       {popup.flag && <PopupContainer props={popup} />}

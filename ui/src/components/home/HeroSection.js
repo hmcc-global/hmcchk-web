@@ -18,30 +18,16 @@ const scrollToEasterSection = () => {
     return;
   }
 
-  const elementPosition =
-    easterSection.getBoundingClientRect().top + window.pageYOffset;
-  const offsetPosition = elementPosition - 50;
-  const startPosition = window.pageYOffset;
-  const distance = offsetPosition - startPosition;
-  const duration = 1200;
-  let startTime = null;
-
-  function ease(t, b, c, d) {
-    t /= d / 2;
-    if (t < 1) return (c / 2) * t * t + b;
-    t--;
-    return (-c / 2) * (t * (t - 2) - 1) + b;
-  }
-
-  function scrollAnimation(currentTime) {
-    if (startTime === null) startTime = currentTime;
-    const timeElapsed = currentTime - startTime;
-    const run = ease(timeElapsed, startPosition, distance, duration);
-    window.scrollTo(0, run);
-    if (timeElapsed < duration) requestAnimationFrame(scrollAnimation);
-  }
-
-  requestAnimationFrame(scrollAnimation);
+  const offset = 50;
+  const topPosition =
+    easterSection.getBoundingClientRect().top + window.scrollY;
+  const prefersReducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+  window.scrollTo({
+    top: topPosition - offset,
+    behavior: prefersReducedMotion ? 'auto' : 'smooth',
+  });
 };
 
 const HeroSection = () => {
@@ -431,124 +417,103 @@ const HeroSection = () => {
                   url="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q"
                 />
               </Stack>
-            <Flex w="40%" display={['none', 'none', 'flex']}>
-              <Button
-                px="40px"
-                py="25px"
-                my="auto"
-                bg="linear-gradient(90deg, #842A48 0%, #EC93A1 100%)"
-                borderRadius="80px"
-                display="inline-flex"
-                justifyContent="center"
-                alignItems="center"
-
-                transition="transform .18s ease, background-color .18s ease, box-shadow .18s ease"
-                _hover={{
-                  bg: 'linear-gradient(90deg, #6B1F38 0%, #D67E8E 100%)',
-                  transform: 'translateY(-3px)',
-                  boxShadow: 'lg',
-                }}
-                _active={{
-                  bg: 'linear-gradient(90deg, #5A1A2F 0%, #C26A7D 100%)',
-                }}
-                onClick={scrollToEasterSection}
-              >
-                <Text
-                  textAlign="center"
-                  color="white"
-                  fontSize="18px"
-                  fontFamily="Manrope"
-                  fontWeight="700"
-                  wordBreak="break-word"
+              <Flex w="40%" display={['none', 'none', 'flex']}>
+                <Button
+                  px="40px"
+                  py="25px"
+                  my="auto"
+                  bg="linear-gradient(90deg, #842A48 0%, #EC93A1 100%)"
+                  borderRadius="80px"
+                  display="inline-flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  transition="transform .18s ease, background-color .18s ease, box-shadow .18s ease"
+                  _hover={{
+                    bg: 'linear-gradient(90deg, #6B1F38 0%, #D67E8E 100%)',
+                    transform: 'translateY(-3px)',
+                    boxShadow: 'lg',
+                  }}
+                  _active={{
+                    bg: 'linear-gradient(90deg, #5A1A2F 0%, #C26A7D 100%)',
+                  }}
+                  onClick={scrollToEasterSection}
                 >
-                  CHECK OUT PASSION WEEK 2026
-                </Text>
-              </Button>
-              <Stack
-                spacing={[0, 0, -3]}
-                pl={[0, 0, '20%']}
-                flexDir={['row', 'row', 'column']}
-                justifyContent={['flex-end', 'flex-end', 'flex-start']}
-              >
-                <SocialIcon
-                  target="_blank"
-                  bgColor="none"
-                  fgColor="#4A6EEB"
-                  url="https://www.instagram.com/hmcc_hk/?hl=en"
-                />
-                <SocialIcon
-                  target="_blank"
-                  bgColor="none"
-                  fgColor="#4A6EEB"
-                  url="https://open.spotify.com/user/hmccofhk?si=bd64100596904a95"
-                />
-                <SocialIcon
-                  target="_blank"
-                  bgColor="none"
-                  fgColor="#4A6EEB"
-                  url="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q"
-                />
-              </Stack>
+                  <Text
+                    textAlign="center"
+                    color="white"
+                    fontSize="18px"
+                    fontFamily="Manrope"
+                    fontWeight="700"
+                    wordBreak="break-word"
+                  >
+                    CHECK OUT PASSION WEEK 2026
+                  </Text>
+                </Button>
+                <Stack
+                  spacing={[0, 0, -3]}
+                  pl={[0, 0, '20%']}
+                  flexDir={['row', 'row', 'column']}
+                  justifyContent={['flex-end', 'flex-end', 'flex-start']}
+                >
+                  <SocialIcon
+                    target="_blank"
+                    bgColor="none"
+                    fgColor="#4A6EEB"
+                    url="https://www.instagram.com/hmcc_hk/?hl=en"
+                  />
+                  <SocialIcon
+                    target="_blank"
+                    bgColor="none"
+                    fgColor="#4A6EEB"
+                    url="https://open.spotify.com/user/hmccofhk?si=bd64100596904a95"
+                  />
+                  <SocialIcon
+                    target="_blank"
+                    bgColor="none"
+                    fgColor="#4A6EEB"
+                    url="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q"
+                  />
+                </Stack>
               </Flex>
-              <Flex w="100%" display={['flex', 'flex', 'none']} direction={'column'} align="center" py="5px">
-              <Button
-              w="90%"
-                px="40px"
-                py="22px"
-                my="auto"
-                bg="linear-gradient(90deg, #842A48 0%, #EC93A1 100%)"
-                borderRadius="80px"
-                display="inline-flex"
-                justifyContent="center"
-                alignItems="center"
-                 transition="transform .18s ease, background-color .18s ease, box-shadow .18s ease"
-                _hover={{
-                  bg: "linear-gradient(90deg, #6B1F38 0%, #D67E8E 100%) ",transform: 'translateY(-3px)', boxShadow: 'lg'
-                }}
-                _active={{
-                  bg: "linear-gradient(90deg, #5A1A2F 0%, #C26A7D 100%)"
-                }}
-                onClick={() => {
-                  const easterSection = document.getElementById('easter-2026');
-                  if (easterSection) {
-                    const elementPosition = easterSection.getBoundingClientRect().top + window.pageYOffset;
-                    const offsetPosition = elementPosition - 50;
-                    const startPosition = window.pageYOffset;
-                    const distance = offsetPosition - startPosition;
-                    const duration = 1200; 
-                    let startTime = null;
-                    
-                    function scrollAnimation(currentTime) {
-                      if (startTime === null) startTime = currentTime;
-                      const timeElapsed = currentTime - startTime;
-                      const run = ease(timeElapsed, startPosition, distance, duration);
-                      window.scrollTo(0, run);
-                      if (timeElapsed < duration) requestAnimationFrame(scrollAnimation);
-                    }
-                    
-                    function ease(t, b, c, d) {
-                      t /= d / 2;
-                      if (t < 1) return c / 2 * t * t + b;
-                      t--;
-                      return -c / 2 * (t * (t - 2) - 1) + b;
-                    }
-                    
-                    requestAnimationFrame(scrollAnimation);
-                  }
-                }}
+              <Flex
+                w="100%"
+                display={['flex', 'flex', 'none']}
+                direction={'column'}
+                align="center"
+                py="5px"
               >
-                <Text
-                  textAlign="center"
-                  color="white"
-                  fontSize="18px"
-                  fontFamily="Manrope"
-                  fontWeight="700"
-                  wordBreak="break-word"
+                <Button
+                  w="90%"
+                  px="40px"
+                  py="22px"
+                  my="auto"
+                  bg="linear-gradient(90deg, #842A48 0%, #EC93A1 100%)"
+                  borderRadius="80px"
+                  display="inline-flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  transition="transform .18s ease, background-color .18s ease, box-shadow .18s ease"
+                  _hover={{
+                    bg: 'linear-gradient(90deg, #6B1F38 0%, #D67E8E 100%)',
+                    transform: 'translateY(-3px)',
+                    boxShadow: 'lg',
+                  }}
+                  _active={{
+                    bg: 'linear-gradient(90deg, #5A1A2F 0%, #C26A7D 100%)',
+                  }}
+                  onClick={scrollToEasterSection}
                 >
-                  CHECK OUT PASSION WEEK 2026
-                </Text>
-              </Button>
-              
+                  <Text
+                    textAlign="center"
+                    color="white"
+                    fontSize="18px"
+                    fontFamily="Manrope"
+                    fontWeight="700"
+                    wordBreak="break-word"
+                  >
+                    CHECK OUT PASSION WEEK 2026
+                  </Text>
+                </Button>
               </Flex>
             </Stack>
           </Container>
