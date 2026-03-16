@@ -1,4 +1,4 @@
-import { Flex, useBreakpointValue } from '@chakra-ui/react';
+import { Flex, useBreakpointValue, Box } from '@chakra-ui/react';
 import { useState, useEffect, useRef } from 'react';
 import EventsSection from './EventsSection';
 import HeroSection from './HeroSection';
@@ -43,7 +43,9 @@ const HomeContainer = (props) => {
   return (
     <Flex direction="column" bgColor="#F6FAFF">
       <HeroSection />
-       <EasterContainer />
+      <Box id="easter-2026">
+        <EasterContainer />
+      </Box>
       <EventsSection />
      
 

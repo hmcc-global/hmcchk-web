@@ -1,3 +1,5 @@
+import { ArrowForwardIcon } from '@chakra-ui/icons';
+
 export const IconStyles = {
   w: ['59px', '95px'],
   h: ['38px', '60px'],
@@ -100,6 +102,16 @@ export const ActionButton = {
   py: [3, 4],
   borderRadius: '80px',
   height: 'auto',
+  transition:
+    'transform .18s ease, background-color .18s ease, box-shadow .18s ease',
+  role: 'group',
+  rightIcon: (
+    <ArrowForwardIcon
+      display={['none', 'block']}
+      transition="transform .18s"
+      _groupHover={{ transform: 'translateX(6px)' }}
+    />
+  ),
 };
 
 export const PopupButton = {
