@@ -134,8 +134,10 @@ const StrategySection = (props) => {
                 relationship with others
               </ListItem>
               <ListItem>
-                Participate in <strong>OCR</strong> (Operation Campus/City
-                Reach)
+                Participate in{' '}
+                <i>
+                  <strong>OCR</strong> (Operation Campus/City Reach)
+                </i>
               </ListItem>
             </UnorderedList>
           </Box>
@@ -156,11 +158,16 @@ const StrategySection = (props) => {
             </Heading>
             <UnorderedList spacing={1} fontSize={'1rem'}>
               <ListItem>
-                Commit to community in <strong>LIFE Group</strong>
+                Commit to community in{' '}
+                <strong>
+                  <i>LIFE Group</i>
+                </strong>
               </ListItem>
               <ListItem>
                 <strong>Gather corporately</strong> through{' '}
-                <strong>Sunday Celebration</strong>
+                <strong>
+                  <i>Sunday Celebration</i>
+                </strong>
               </ListItem>
             </UnorderedList>
           </Box>
@@ -184,7 +191,10 @@ const StrategySection = (props) => {
                 Cultivate a <strong>personal devotional life</strong>
               </ListItem>
               <ListItem>
-                Participate in <strong>The Transformed Life Curriculum</strong>
+                Participate in{' '}
+                <strong>
+                  <i>The Transformed Life Curriculum</i>
+                </strong>
               </ListItem>
             </UnorderedList>
           </Box>
@@ -270,11 +280,16 @@ const StrategySection = (props) => {
             </Heading>
             <UnorderedList spacing={1} fontSize={'1rem'}>
               <ListItem>
-                Commit to community in <strong>LIFE Group</strong>
+                Commit to community in{' '}
+                <strong>
+                  <i>LIFE Group</i>
+                </strong>
               </ListItem>
               <ListItem>
                 <strong>Gather corporately</strong> through{' '}
-                <strong>Sunday Celebration</strong>
+                <strong>
+                  <i>Sunday Celebration</i>
+                </strong>
               </ListItem>
             </UnorderedList>
           </Box>
@@ -289,7 +304,10 @@ const StrategySection = (props) => {
                 Cultivate a <strong>personal devotional life</strong>
               </ListItem>
               <ListItem>
-                Participate in <strong>The Transformed Life Curriculum</strong>
+                Participate in{' '}
+                <strong>
+                  <i>The Transformed Life Curriculum</i>
+                </strong>
               </ListItem>
             </UnorderedList>
           </Box>
@@ -338,8 +356,10 @@ const StrategySection = (props) => {
                 relationship with others
               </ListItem>
               <ListItem>
-                Participate in <strong>OCR</strong> (Operation Campus/City
-                Reach)
+                Participate in{' '}
+                <i>
+                  <strong>OCR</strong> (Operation Campus/City Reach)
+                </i>
               </ListItem>
             </UnorderedList>
           </Box>
