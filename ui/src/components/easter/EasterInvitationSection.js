@@ -15,6 +15,7 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { InView } from 'react-intersection-observer';
+import { useState } from 'react';
 import {
   IconStyles,
   TitleText,
@@ -28,6 +29,7 @@ import {
   ActionButton,
 } from './styles';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
+import EInvitePopup from './EInvitePopup';
 
 const easterCalendarUrl =
   'https://calendar.google.com/calendar/u/8?cid=Y19hNzY3ODEwOGYzMjE3ZTJjNDc4MTgzMWZjZjQ0Y2IyZjg3MTk3MzhiNTY2NzliMWVlMWIzMGIwNDgxOGZkN2YyQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20';
@@ -55,6 +57,8 @@ const VerticalLine = ({ position }) => {
 
 const EasterInvitationSection = () => {
   const theme = useTheme();
+  const [isEInvitePopupOpen, setIsEInvitePopupOpen] = useState(false);
+
   const DateTextStylesGoodFriday = useBreakpointValue({
     base: MobileDateTextGoodFriday,
     md: DateText,
@@ -124,7 +128,10 @@ const EasterInvitationSection = () => {
                   </GridItem>
 
                   {/* Easter Celebration & Baptism Celebration */}
-                  <GridItem colSpan={{ base: 1, md: 2 }}>
+                  <GridItem
+                    colSpan={{ base: 1, md: 2 }}
+                    ml={{ base: 0, md: 6 }}
+                  >
                     <VStack
                       spacing={[1, 3]}
                       align={{ base: 'center', md: 'start' }}
@@ -139,6 +146,7 @@ const EasterInvitationSection = () => {
                           spacing={[3, 6]}
                           direction={{ base: 'column', md: 'row' }}
                           align={{ base: 'center', md: 'flex-start' }}
+                          justify={{ base: 'center', md: 'space-between' }}
                           w="full"
                         >
                           {/* Easter Celebration */}
@@ -221,7 +229,7 @@ const EasterInvitationSection = () => {
                       bg: '#6d4000',
                     }}
                     onClick={() => {
-                      console.log('Share an E-Invite clicked');
+                      setIsEInvitePopupOpen(true);
                     }}
                   >
                     Share an E-Invite!
@@ -231,6 +239,10 @@ const EasterInvitationSection = () => {
             </Container>
             <VerticalLine position="right" />
           </Box>
+          <EInvitePopup
+            isOpen={isEInvitePopupOpen}
+            onClose={() => setIsEInvitePopupOpen(false)}
+          />
         </Fade>
       )}
     </InView>

@@ -101,3 +101,13 @@ export const ActionButton = {
   borderRadius: '80px',
   height: 'auto',
 };
+
+export const PopupButton = {
+  fontFamily: "'Manrope', sans-serif",
+  fontWeight: '700',
+  fontSize: { base: '0.875em', md: '1.125em' },
+  borderRadius: '80px',
+  px: 6,
+  py: 2,
+  h: '55px',
+};
