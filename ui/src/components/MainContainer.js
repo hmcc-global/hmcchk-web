@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, useLocation } from 'react-router-dom';
 import { chakra } from '@chakra-ui/react';
 import SermonContainer from './sermons/SermonContainer';
 import SermonDetails from './sermons/SermonDetails';
@@ -49,7 +49,8 @@ import StructuredData from './seo/StructuredData';
 import { generateChurchSchema } from './seo/SchemaGenerator';
 
 const MainContainer = () => {
-  const churchSchema = generateChurchSchema();
+  const location = useLocation();
+  const churchSchema = generateChurchSchema(location.pathname);
   return (
     <chakra.main
       maxH="100%"
@@ -276,12 +277,6 @@ const MainContainer = () => {
           path="/admin/forms"
           permissions={['tc', 't3ch', 'admin', 'stewardship']}
           component={FormManager}
-        />
-        <PrivateRoute
-          exact
-          path="/admin/announcements"
-          permissions={['ministry', 'tc', 't3ch', 'admin', 'stewardship']}
-          component={AdminAnnouncementContainer}
         />
         <PrivateRoute
           exact
