@@ -38,14 +38,13 @@ const EInvitePopup = ({ isOpen, onClose }) => {
           display="flex"
           flexDirection="column"
           alignItems="center"
-          justifyContent="center"
+          justifyContent="space-evenly"
           h="100%"
           overflowY="auto"
         >
           <Box width="100%">
             <Button
               {...PopupButton}
-              pl={0}
               bg="transparent"
               color="black"
               mb={{ base: 4, md: 8 }}
@@ -86,6 +85,7 @@ const EInvitePopup = ({ isOpen, onClose }) => {
               Save Image
             </Button>
           </VStack>
+          <Box />
         </ModalBody>
       </ModalContent>
     </Modal>
