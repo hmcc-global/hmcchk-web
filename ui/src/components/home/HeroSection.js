@@ -434,7 +434,7 @@ const HeroSection = () => {
               <SocialMediaStack display={['flex', 'flex', 'none']} />
               <Flex w="40%" display={['none', 'none', 'flex']}>
                 <PassionWeek2026Button />
-                <SocialMediaStack />
+                <SocialMediaStack pl={[0, 0, '40%']} />
               </Flex>
               <Flex
                 w="100%"
