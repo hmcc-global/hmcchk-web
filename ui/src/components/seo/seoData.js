@@ -1,79 +1,71 @@
 // Consolidated SEO configuration for meta tags
 export const seoData = {
   '/': {
-    title: 'Home | Harvest Mission Community Church Hong Kong',
-    description: 'Welcome to Harvest Mission Community Church Hong Kong',
+    title: 'HMCC HK | English-speaking International Church',
+    description:
+      'We are an international church in Hong Kong that values transculturalism. We actively reach out to students, working adults, and families.',
     keywords:
-      'HMCC Hong Kong, church, worship, community, home, christian church hong kong, Kwun Tong church',
+      'Hong Kong church, English church in hk, English speaking church hong kong, international church',
   },
   '/sermons': {
-    title: 'Sermons | HMCC Hong Kong',
+    title: 'HMCC HK | Sermons',
     description:
-      'Weekly sermons and biblical teachings from Harvest Mission Community Church Hong Kong pastors and guest speakers. Grow in faith through expository preaching.',
-    keywords:
-      'sermons, preaching, bible, teachings, HMCC Hong Kong, christian sermons',
+      'Explore the latest & past sermons at HMCC HK, featuring sermons enriched with Biblical illustrations delivered by our Pastor to deepen your faith.',
+    keywords: 'sermons, pastor, Biblical illustrations',
   },
   '/events': {
-    title: 'Events | HMCC Hong Kong',
+    title: 'HMCC HK | Upcoming Church & Community Events',
     description:
-      'Discover upcoming events, worship services, and community activities at Harvest Mission Community Church Hong Kong. Join us for fellowship and spiritual growth.',
-    keywords:
-      'church events, gatherings, activities, HMCC Hong Kong, christian events',
+      'Discover upcoming community events at HMCC HK, such as prayer sessions, classes, and other church activities that strengthen faith and fellowship.',
+    keywords: 'community events',
   },
   '/about-us': {
-    title: 'About Us | HMCC Hong Kong',
+    title: 'HMCC HK | About Us | Vision & Mission',
     description:
-      "Learn about HMCC Hong Kong's history, mission, vision, and leadership team. Discover what makes our church community unique and how we're growing disciples.",
-    keywords:
-      'about HMCC, church history, mission, vision, leadership, Hong Kong church',
+      "HMCC HK aims to multiply churches to transform the next generation and lost people into Christ's disciples who will transform the world.",
+    keywords: 'Missions hong kong',
   },
   '/discover': {
-    title: 'Discover HMCC | Hong Kong Church',
+    title: 'HMCC HK | International Christian Fellowship',
     description:
-      'New to HMCC? Discover our church community, values, and how you can get involved. Learn about our ministries, life groups, and worship services in Hong Kong.',
-    keywords:
-      'new to church, discover, about HMCC, Hong Kong church, new visitors',
+      'New here or just wanting to discover more about our church, find out how you can experience our church community here.',
+    keywords: 'international Christian fellowship',
   },
   '/discover/visit-us-page': {
-    title: 'Visit Us | Plan Your First Visit | HMCC Hong Kong',
+    title: 'HMCC HK | Church in Kwun Tong',
     description:
-      'Plan your visit to Harvest Mission Community Church Hong Kong. Find service times, location details, and what to expect during your first visit.',
-    keywords:
-      'visit church, first time, service times, location, HMCC Hong Kong',
+      'We are an English-speaking church located in Kwun Tong, Hong Kong.',
+    keywords: 'church in hk, kwun tong church',
   },
   '/discover/life-group': {
-    title: 'Life Groups | Small Group Community | HMCC Hong Kong',
+    title: 'HMCC HK | Church Fellowship',
     description:
-      'Join a Life Group at HMCC Hong Kong for deeper fellowship, Bible study, and community. Discover how small groups help us grow together in faith.',
-    keywords:
-      'life groups, small groups, bible study, fellowship, community, HMCC Hong Kong',
+      'LIFE Groups are our main avenue for church fellowship. Come join us to experience Christian community together!',
+    keywords: 'cell groups, church fellowship, Christian community',
   },
   '/discover/connect-ministries': {
-    title: 'Connect with Ministries | Serve at HMCC Hong Kong',
+    title: 'HMCC HK | Church Ministry',
     description:
-      "Discover ministry opportunities at HMCC Hong Kong. Find ways to serve, connect, and use your gifts to build God's kingdom in our community.",
-    keywords:
-      'ministries, serve, volunteer, connect, church ministry, HMCC Hong Kong',
+      'We reach out to people from all walks of life, specifically youths, college students, working adults, and families.',
+    keywords: 'Church ministry',
   },
   '/building-blocks': {
-    title: 'Building Blocks | Discipleship Program | HMCC Hong Kong',
+    title: 'HMCC HK | Children Ministry',
     description:
-      'Building Blocks discipleship program at HMCC Hong Kong. Learn the fundamentals of Christian faith and grow as a disciple of Jesus Christ.',
-    keywords:
-      'building blocks, discipleship, christian education, faith formation, HMCC Hong Kong',
+      "Building Blocks is part of HMCC HK’s Children's ministry, where we hold Sunday school lessons for kids.",
+    keywords: 'childrens ministry, sunday school lessons for kids',
   },
   '/give': {
-    title: 'Give | Support HMCC Hong Kong Ministry',
+    title: 'HMCC HK | Tithes and Offerings',
     description:
-      'Support the mission and ministry of Harvest Mission Community Church Hong Kong through tithes, offerings, and donations. Join us in growing disciples who plant churches.',
-    keywords: 'giving, donation, support, tithe, HMCC Hong Kong, church giving',
+      'Support HMCC HK’s mission to saturate the earth by giving through FPS, bank transfer, cheque, and credit card. Tax deductions are available.',
+    keywords: 'tithe, tithes and offering, church giving',
   },
   '/online': {
-    title: 'Online Service | Watch Live | HMCC Hong Kong',
+    title: 'HMCC HK | Online Sunday Church Service & Worship',
     description:
-      'Join our live online worship service from Harvest Mission Community Church Hong Kong. Watch live sermons and participate in online community.',
-    keywords:
-      'online service, live stream, watch online, HMCC Hong Kong, online church',
+      'Watch live and join us for Sunday celebration online, where you can worship and listen to God’s word. Our services are available both in person and online.',
+    keywords: 'Sunday service, church services, online church, worship online',
   },
   '/saturate': {
     title: 'Saturate | Mission & Evangelism | HMCC Hong Kong',
@@ -115,33 +107,6 @@ export const getSEOData = (pathname) => {
       description:
         'Listen to this sermon from Harvest Mission Community Church Hong Kong. Biblical teaching and spiritual encouragement for your faith journey.',
       keywords: 'sermon, preaching, bible teaching, HMCC Hong Kong',
-    };
-  }
-
-  if (pathname.startsWith('/witness')) {
-    return {
-      title: 'Testimonies | Witness Stories | HMCC Hong Kong',
-      description:
-        'Personal testimonies and faith stories from Harvest Mission Community Church Hong Kong community members. Be encouraged by how God is working.',
-      keywords: 'testimonies, witness stories, faith stories, HMCC Hong Kong',
-    };
-  }
-
-  if (pathname.startsWith('/admin')) {
-    return {
-      title: 'Admin | HMCC Hong Kong',
-      description:
-        'Church administration portal for Harvest Mission Community Church Hong Kong staff and leadership.',
-      keywords: 'admin, church administration, HMCC Hong Kong',
-    };
-  }
-
-  if (pathname.startsWith('/forms/')) {
-    return {
-      title: 'Church Form | HMCC Hong Kong',
-      description:
-        'Church registration and information form for HMCC Hong Kong community members and visitors.',
-      keywords: 'church form, registration, HMCC Hong Kong',
     };
   }
 

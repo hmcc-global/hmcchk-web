@@ -367,16 +367,6 @@ export const generateChurchSchema = (pathname = '/') => {
         },
       };
 
-    case pathname.startsWith('/forms/'):
-      return {
-        '@context': 'https://schema.org',
-        '@type': 'WebPage',
-        name: 'Church Forms - HMCC Hong Kong',
-        description:
-          'Church registration and information forms for HMCC Hong Kong community members and visitors.',
-        publisher: baseChurch,
-      };
-
     case pathname === '/privacy-policy':
       return {
         '@context': 'https://schema.org',
@@ -386,16 +376,6 @@ export const generateChurchSchema = (pathname = '/') => {
           'Privacy policy for Harvest Mission Community Church Hong Kong website and services.',
         url: 'https://hk.hmccglobal.org/privacy-policy',
         publisher: baseChurch,
-      };
-
-    // Admin pages - basic WebPage schema
-    case pathname.startsWith('/admin'):
-      return {
-        '@context': 'https://schema.org',
-        '@type': 'WebPage',
-        name: 'Church Administration',
-        publisher: baseChurch,
-        isAccessibleForFree: false,
       };
 
     // Default church page schema
