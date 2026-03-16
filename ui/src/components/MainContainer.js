@@ -47,6 +47,7 @@ import ConnectMinistry from './discover/ConnectMinistry';
 import LifeGroupPage from './discover/LifeGroupPage';
 import StructuredData from './seo/StructuredData';
 import { generateChurchSchema } from './seo/SchemaGenerator';
+import DynamicSEO from './seo/DynamicSEO';
 
 const MainContainer = () => {
   const location = useLocation();
@@ -63,6 +64,7 @@ const MainContainer = () => {
       mt="7vh"
       mb={['6vh', '6vh', 0, 0]}
     >
+      <DynamicSEO />
       <StructuredData schema={churchSchema} />
       <ScrollToTop />
       <Switch>
