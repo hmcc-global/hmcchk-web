@@ -4,9 +4,9 @@ import { generateSermonSEO } from './sermonSeoHelpers';
 // Consolidated SEO configuration for meta tags
 export const seoData = {
   '/': {
-    title: 'HMCC HK | English-speaking International Church',
+    title: 'HMCC HK | International Church',
     description:
-      'We are an international church in Hong Kong that values transculturalism. We actively reach out to students, working adults, and families.',
+      'We are an international church in Hong Kong that values transculturalism. We believe in transforming lives through the Gospel so that we can then transform the world. We actively reach out to students, working adults, and families and welcome anyone who would like to join us.',
     keywords:
       'Hong Kong church, English church in hk, English speaking church hong kong, international church',
   },
@@ -32,7 +32,8 @@ export const seoData = {
     title: 'HMCC HK | International Christian Fellowship',
     description:
       'New here or just wanting to discover more about our church, find out how you can experience our church community here.',
-    keywords: 'international Christian fellowship',
+    keywords:
+      'international Christian fellowship, international christian community',
   },
   '/discover/visit-us-page': {
     title: 'HMCC HK | Church in Kwun Tong',
@@ -55,7 +56,7 @@ export const seoData = {
   '/building-blocks': {
     title: 'HMCC HK | Children Ministry',
     description:
-      "Building Blocks is part of HMCC HK’s Children's ministry, where we hold Sunday school lessons for kids.",
+      "Building Blocks is HMCC HK’s Children's ministry, where we hold Sunday school lessons for kids.",
     keywords: 'childrens ministry, sunday school lessons for kids',
   },
   '/give': {
@@ -136,12 +137,7 @@ export const getSEOData = async (pathname, sermonId = null) => {
   }
 
   // Default fallback
-  return {
-    title: 'HMCC Hong Kong | Harvest Mission Community Church',
-    description:
-      'Harvest Mission Community Church Hong Kong - Growing disciples who plant churches that multiply movements. Join our vibrant Christian community.',
-    keywords: 'HMCC, Hong Kong, church, community, faith, christian',
-  };
+  return seoData['/'];
 };
 
 // Helper function to get sermon SEO directly by ID (without pathname)
@@ -169,9 +165,10 @@ export const getSEODataSync = (pathname) => {
 
   // Default fallback
   return {
-    title: 'HMCC Hong Kong | Harvest Mission Community Church',
+    title: 'HMCC HK | International Church',
     description:
-      'Harvest Mission Community Church Hong Kong - Growing disciples who plant churches that multiply movements. Join our vibrant Christian community.',
-    keywords: 'HMCC, Hong Kong, church, community, faith, christian',
+      'We are an international church in Hong Kong that values transculturalism. We believe in transforming lives through the Gospel so that we can then transform the world. We actively reach out to students, working adults, and families and welcome anyone who would like to join us.',
+    keywords:
+      'Hong Kong church, English church in hk, English speaking church hong kong, international church',
   };
 };

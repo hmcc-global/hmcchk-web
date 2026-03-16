@@ -42,11 +42,6 @@ const NoOnlineStreamPage = () => {
                 No Live Stream Available
               </Heading>
 
-              <Text fontSize="lg" color="gray.600" maxW="md" lineHeight="tall">
-                We're not currently streaming live, but don't worry! You can
-                still access our collection of past sermons
-              </Text>
-
               <Text fontSize="md" color="gray.500">
                 Our live streams typically happen during:
               </Text>
@@ -58,6 +53,11 @@ const NoOnlineStreamPage = () => {
                   gatherings
                 </Text>
               </VStack>
+
+              <Text fontSize="lg" color="gray.600" maxW="md" lineHeight="tall">
+                But don't worry! You can still access our collection of past
+                sermons
+              </Text>
             </VStack>
           </Box>
 
