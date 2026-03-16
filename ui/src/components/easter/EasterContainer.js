@@ -18,7 +18,13 @@ const EasterContainer = () => {
             fontFamily={theme.fonts?.body}
             ref={ref}
           >
-            <Container maxW="container.xl" gap={8} px={{ base: 6, md: 10 }}>
+            <Container
+              maxW="container.xl"
+              gap={{ base: '3em', md: '6em' }}
+              display="flex"
+              flexDirection="column"
+              px={{ base: 6, md: 10 }}
+            >
               <EasterBanner />
               <EasterInvitationSection />
             </Container>
