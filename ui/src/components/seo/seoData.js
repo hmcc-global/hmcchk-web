@@ -1,3 +1,6 @@
+import { customAxios as axios } from '../helpers/customAxios';
+import { generateSermonSEO } from './sermonSeoHelpers';
+
 // Consolidated SEO configuration for meta tags
 export const seoData = {
   '/': {
@@ -93,21 +96,75 @@ export const seoData = {
   },
 };
 
-// Get SEO data for a given pathname
-export const getSEOData = (pathname) => {
+// Helper function to fetch sermon data by ID
+const fetchSermonById = async (sermonId) => {
+  try {
+    const { data, status } = await axios.get('/api/sermons/get-sermons');
+    if (status === 200 && Array.isArray(data)) {
+      const sermon = data.find(({ id }) => id === parseInt(sermonId, 10));
+      return sermon || null;
+    }
+    return null;
+  } catch (error) {
+    console.error('Error fetching sermon data for SEO:', error);
+    return null;
+  }
+};
+
+// Get SEO data for a given pathname, with optional sermon ID for dynamic sermon pages
+export const getSEOData = async (pathname, sermonId = null) => {
   // Check for exact matches first
   if (seoData[pathname]) {
     return seoData[pathname];
   }
 
-  // Handle dynamic routes
+  // Handle dynamic sermon routes
+  if (pathname.startsWith('/sermons/') && sermonId) {
+    try {
+      const sermon = await fetchSermonById(sermonId);
+      return generateSermonSEO(sermon);
+    } catch (error) {
+      console.error('Error generating sermon SEO:', error);
+      // Fallback to default sermon SEO
+      return generateSermonSEO(null);
+    }
+  }
+
+  // Fallback for sermon pages without ID (shouldn't happen in normal flow)
   if (pathname.startsWith('/sermons/')) {
-    return {
-      title: 'Sermon | HMCC Hong Kong',
-      description:
-        'Listen to this sermon from Harvest Mission Community Church Hong Kong. Biblical teaching and spiritual encouragement for your faith journey.',
-      keywords: 'sermon, preaching, bible teaching, HMCC Hong Kong',
-    };
+    return generateSermonSEO(null);
+  }
+
+  // Default fallback
+  return {
+    title: 'HMCC Hong Kong | Harvest Mission Community Church',
+    description:
+      'Harvest Mission Community Church Hong Kong - Growing disciples who plant churches that multiply movements. Join our vibrant Christian community.',
+    keywords: 'HMCC, Hong Kong, church, community, faith, christian',
+  };
+};
+
+// Helper function to get sermon SEO directly by ID (without pathname)
+export const getSermonSEOData = async (sermonId) => {
+  try {
+    const sermon = await fetchSermonById(sermonId);
+    return generateSermonSEO(sermon);
+  } catch (error) {
+    console.error('Error generating sermon SEO:', error);
+    return generateSermonSEO(null);
+  }
+};
+
+// Synchronous version for cases where async is not possible
+export const getSEODataSync = (pathname) => {
+  // Check for exact matches first
+  if (seoData[pathname]) {
+    return seoData[pathname];
+  }
+
+  // Handle dynamic routes with default fallback
+  if (pathname.startsWith('/sermons/')) {
+    return generateSermonSEO(null);
   }
 
   // Default fallback
