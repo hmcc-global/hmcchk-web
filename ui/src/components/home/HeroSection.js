@@ -19,39 +19,22 @@ const scrollToEasterSection = () => {
   }
 
   const elementPosition =
-    easterSection.getBoundingClientRect().top + window.pageYOffset;
+    easterSection.getBoundingClientRect().top + window.scrollY;
   const offsetPosition = elementPosition - 50;
-  const startPosition = window.pageYOffset;
-  const distance = offsetPosition - startPosition;
-  const duration = 1200;
-  let startTime = null;
-
-  function ease(t, b, c, d) {
-    t /= d / 2;
-    if (t < 1) return (c / 2) * t * t + b;
-    t--;
-    return (-c / 2) * (t * (t - 2) - 1) + b;
-  }
-
-  function scrollAnimation(currentTime) {
-    if (startTime === null) startTime = currentTime;
-    const timeElapsed = currentTime - startTime;
-    const run = ease(timeElapsed, startPosition, distance, duration);
-    window.scrollTo(0, run);
-    if (timeElapsed < duration) requestAnimationFrame(scrollAnimation);
-  }
-
-  requestAnimationFrame(scrollAnimation);
+  window.scrollTo({
+    top: offsetPosition,
+    behavior: 'smooth',
+  });
 };
 
 const SocialMediaStack = (props) => {
   return (
     <Stack
-      {...props}
       spacing={[0, 0, -3]}
       pl={[0, 0, '20%']}
       flexDir={['row', 'row', 'column']}
       justifyContent={['flex-end', 'flex-end', 'flex-start']}
+      {...props}
     >
       <SocialIcon
         target="_blank"
@@ -317,31 +300,7 @@ const HeroSection = () => {
                 <Text fontWeight="bold">Transformation Center</Text>
                 <Text>Unit 2, 22/F Crocodile Center, Kwun Tong & Online</Text>
               </Text>
-              <Stack
-                spacing={[0, 0, -3]}
-                pl={[0, 0, '40%']}
-                flexDir={['row', 'row', 'column']}
-                justifyContent={['flex-end', 'flex-end', 'flex-start']}
-              >
-                <SocialIcon
-                  target="_blank"
-                  bgColor="none"
-                  fgColor="#4A6EEB"
-                  url="https://www.instagram.com/hmcc_hk/?hl=en"
-                />
-                <SocialIcon
-                  target="_blank"
-                  bgColor="none"
-                  fgColor="#4A6EEB"
-                  url="https://open.spotify.com/user/hmccofhk?si=bd64100596904a95"
-                />
-                <SocialIcon
-                  target="_blank"
-                  bgColor="none"
-                  fgColor="#4A6EEB"
-                  url="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q"
-                />
-              </Stack>
+              <SocialMediaStack pl={[0, 0, '40%']} />
             </Stack>
           </Container>
         </Flex>
