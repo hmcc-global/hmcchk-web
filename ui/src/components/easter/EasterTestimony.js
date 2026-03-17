@@ -17,31 +17,40 @@ export default function EasterTestimony() {
     const bracketContainerRef = useRef(null);
     const iconRef = useRef(null);
     const iframeContainerRef = useRef(null);
-    const [mobileBracketBounds, setMobileBracketBounds] = useState({ top: 0, bottom: 0 });
+    const [bracketBounds, setBracketBounds] = useState({ top: 0, bottom: 0 });
 
     useEffect(() => {
-        const updateMobileBracketBounds = () => {
+        const updateBracketBounds = () => {
             if (!bracketContainerRef.current || !iconRef.current || !iframeContainerRef.current) return;
 
-            const containerRect = bracketContainerRef.current.getBoundingClientRect();
-            const iconRect = iconRef.current.getBoundingClientRect();
-            const iframeRect = iframeContainerRef.current.getBoundingClientRect();
+            const containerEl = bracketContainerRef.current;
+            const iconEl = iconRef.current;
+            const iframeEl = iframeContainerRef.current;
 
-            const nextTop = Math.max(0, iconRect.top - containerRect.top);
-            const nextBottom = Math.max(0, containerRect.bottom - iframeRect.bottom);
+            const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0;
+            const iconHeight = iconEl.offsetHeight || 0;
+            const topOffsetFactor =
+                viewportWidth >= 1280 ? 4 : viewportWidth >= 992 ? 0.8 : viewportWidth >= 768 ? 0.6 : viewportWidth >= 400 ? 5 : 3;
+            const dynamicTopOffset = Math.round(iconHeight * topOffsetFactor);
 
-            setMobileBracketBounds((prev) => {
+            const nextTop = Math.max(0, iconEl.offsetTop + dynamicTopOffset);
+            const nextBottom = Math.max(
+                0,
+                containerEl.offsetHeight - (iframeEl.offsetTop + iframeEl.offsetHeight)
+            );
+
+            setBracketBounds((prev) => {
                 if (prev.top === nextTop && prev.bottom === nextBottom) return prev;
                 return { top: nextTop, bottom: nextBottom };
             });
         };
 
-        updateMobileBracketBounds();
+        updateBracketBounds();
 
         let observer;
         if (typeof ResizeObserver !== 'undefined') {
             observer = new ResizeObserver(() => {
-                updateMobileBracketBounds();
+                updateBracketBounds();
             });
 
             if (bracketContainerRef.current) observer.observe(bracketContainerRef.current);
@@ -49,16 +58,16 @@ export default function EasterTestimony() {
             if (iframeContainerRef.current) observer.observe(iframeContainerRef.current);
         }
 
-        window.addEventListener('resize', updateMobileBracketBounds);
+        window.addEventListener('resize', updateBracketBounds);
         return () => {
-            window.removeEventListener('resize', updateMobileBracketBounds);
+            window.removeEventListener('resize', updateBracketBounds);
             if (observer) observer.disconnect();
         };
     }, []);
 
     return (
-        <Box as="section" w="100%" py={{ base: 6, md: 16 }} px={{ base: 1, md: 12 }}>
-            <VStack spacing={{ base: 6, md: 8 }} align="stretch">
+        <Box as="section" w="100%" py={{ base: 6, md: 10, lg: 16 }} px={{ base: 1, md: 6, lg: 12 }}>
+            <VStack spacing={{ base: 6, md: 7, lg: 8 }} align="stretch">
                 <Box position="relative" ref={bracketContainerRef}>
                     <Image
                         ref={iconRef}
@@ -66,26 +75,26 @@ export default function EasterTestimony() {
                         alt="icon"
                         mx="auto"
                         display="block"
-                        w={{ base: '3rem', md: '6rem' }}
-                        mb={{ base: 3, md: 6 }}
+                        w={{ base: '3rem', md: '4.5rem', lg: '6rem' }}
+                        mb={{ base: 3, md: 4, lg: 6 }}
                     />
                     <Heading
                         as="h2"
-                        mt={{ base: 2, md: 4 }}
+                        mt={{ base: 2, md: 3, lg: 4 }}
                         fontFamily="Instrument Serif"
                         fontStyle="italic"
                         fontWeight={400}
-                        fontSize={{ base: '2.25rem', md: '2.5rem' }}
+                        fontSize={{ base: '2.25rem', md: '2.375rem', lg: '2.5rem' }}
                         lineHeight="97%"
                         textAlign="center"
                         textTransform="uppercase"
                         background="linear-gradient(90deg, #982896 0%, #320D19 100%)"
                         backgroundClip="text"
-                        maxW={{ base: '100%', md: '100%' }}
+                        maxW={{ base: '100%', md: '36rem', lg: '100%' }}
                         mx="auto"
-                        pb={{ base: 4, md: 2 }}
+                        pb={{ base: 4, md: 3, lg: 2 }}
                         sx={{
-                            WebkitTextStrokeWidth: '1.2px',
+                            WebkitTextStrokeWidth: '0.075rem',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                         }}
@@ -94,10 +103,10 @@ export default function EasterTestimony() {
                     </Heading>
                     <Box
                         position="absolute"
-                        left={{ base: 0, md: -6 }}
-                        top={{ base: `${mobileBracketBounds.top}px`, md: '-2rem' }}
-                        bottom={{ base: `${mobileBracketBounds.bottom}px`, md: '-3.75rem' }}
-                        width={{ base: '0.6875rem', md: '1.75rem' }}
+                        left={{ base: 0, md: -2, lg: -4, xl: -6 }}
+                        top={`${bracketBounds.top / 16}rem`}
+                        bottom={`${bracketBounds.bottom / 16}rem`}
+                        width={{ base: '0.6875rem', md: '1rem', lg: '1.25rem', xl: '1.75rem' }}
                         display="flex"
                         alignItems="center"
                         justifyContent="center"
@@ -120,7 +129,7 @@ export default function EasterTestimony() {
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
-                                height="80%"
+                                height="100%"
                                 viewBox="0 0 24 581"
                                 preserveAspectRatio="none"
                                 fill="none"
@@ -134,10 +143,10 @@ export default function EasterTestimony() {
 
                     <Box
                         position="absolute"
-                        right={{ base: 0, md: -6 }}
-                        top={{ base: `${mobileBracketBounds.top}px`, md: '-2rem' }}
-                        bottom={{ base: `${mobileBracketBounds.bottom}px`, md: '-3.75rem' }}
-                        width={{ base: '0.6875rem', md: '1.75rem' }}
+                        right={{ base: 0, md: -2, lg: -4, xl: -6 }}
+                        top={`${bracketBounds.top / 16}rem`}
+                        bottom={`${bracketBounds.bottom / 16}rem`}
+                        width={{ base: '0.6875rem', md: '1rem', lg: '1.25rem', xl: '1.75rem' }}
                         display="flex"
                         alignItems="center"
                         justifyContent="center"
@@ -175,12 +184,12 @@ export default function EasterTestimony() {
 
                     <Grid
                         position="relative"
-                        templateColumns={{ base: '1fr', lg: '1fr 420px' }}
-                        gap={{ base: 8, md: 12 }}
-                        alignItems="center"
+                        templateColumns={{ base: '1fr', xl: '1fr 26.25rem' }}
+                        gap={{ base: 8, md: 10, lg: 12 }}
+                        alignItems={{ base: 'center', md: 'start' }}
                     >
-                        <Box bg="transparent" borderRadius="md" p={{ base: 3, md: 8 }}>
-                            <Stack spacing={{ base: 4, md: 6 }}>
+                        <Box bg="transparent" borderRadius="md" p={{ base: 3, md: 6, lg: 8 }}>
+                            <Stack spacing={{ base: 4, md: 5, lg: 6 }}>
                                 <HStack justifyContent={{ base: 'center', md: 'space-between' }} alignItems="start">
                                     <VStack alignItems={{ base: 'center', md: 'flex-start' }}>
                                         <Text
@@ -189,14 +198,14 @@ export default function EasterTestimony() {
                                             fontWeight="600"
                                             color="gray.600"
                                             textTransform="uppercase"
-                                            border={{ base: '1px solid #7D736E', md: 'none' }}
-                                            borderRadius={{ base: '9px', md: '0' }}
+                                            border={{ base: '0.0625rem solid #7D736E', md: 'none' }}
+                                            borderRadius={{ base: '0.5625rem', md: '0' }}
                                             px={{ base: 4, md: 0 }}
                                             py={{ base: 1, md: 0 }}
                                         >
                                             HOW TO PARTICIPATE
                                         </Text>
-                                        <Box display={{ base: 'none', md: 'block' }} width="518px" height="1px" bg="rgba(0,0,0,0.20)" />
+                                        <Box display={{ base: 'none', md: 'block' }} width={{ md: '100%', lg: '32.375rem' }} height="0.0625rem" bg="rgba(0,0,0,0.20)" />
                                     </VStack>
                                 </HStack>
 
@@ -204,7 +213,7 @@ export default function EasterTestimony() {
                                 <Text
                                     fontFamily="Manrope"
                                     color="#161616"
-                                    fontSize={{ base: '1rem', md: '16px' }}
+                                    fontSize={{ base: '1rem', md: '1rem' }}
                                     fontStyle="normal"
                                     fontWeight={400}
                                     lineHeight="120.156%"
@@ -218,13 +227,13 @@ export default function EasterTestimony() {
                                     fontFamily="Instrument Serif"
                                     fontStyle="italic"
                                     fontWeight={400}
-                                    fontSize={{ base: '2.125rem', md: '30px' }}
+                                    fontSize={{ base: '2.125rem', md: '2rem', lg: '1.875rem' }}
                                     color="#982896"
                                     lineHeight="normal"
                                     display="block"
                                     textAlign={{ base: 'center', md: 'left' }}
                                     sx={{
-                                        WebkitTextStrokeWidth: '1px',
+                                        WebkitTextStrokeWidth: '0.0625rem',
                                         WebkitTextStrokeColor: '#982896',
                                         WebkitTextFillColor: '#982896',
                                     }}
@@ -238,14 +247,14 @@ export default function EasterTestimony() {
                                 <Text
                                     fontFamily="Manrope"
                                     color="#161616"
-                                    fontSize={{ base: '1rem', md: '16px' }}
+                                    fontSize={{ base: '1rem', md: '1rem' }}
                                     fontStyle="normal"
                                     fontWeight={400}
                                     lineHeight="120.156%"
                                     textAlign={{ base: 'center', md: 'left' }}
                                 >
-                                    Include the hashtag <Text as="span" fontWeight={700} fontFamily="Manrope" fontSize="16px" lineHeight="120.156%">#hmcc_livinghope</Text> and <br />
-                                    tag <Text as="span" fontWeight={700} fontFamily="Manrope" fontSize="16px" lineHeight="120.156%">@HMCC_HK</Text> in your Instagram post!
+                                    Include the hashtag <Text as="span" fontWeight={700} fontFamily="Manrope" fontSize="1rem" lineHeight="120.156%">#hmcc_livinghope</Text> and <br />
+                                    tag <Text as="span" fontWeight={700} fontFamily="Manrope" fontSize="1rem" lineHeight="120.156%">@HMCC_HK</Text> in your Instagram post!
                                     <br /><br />
                                     *Make your account public so that people can see your testimony from the hashtag!
                                 </Text>
@@ -253,19 +262,19 @@ export default function EasterTestimony() {
                                 <HStack pt={4} justifyContent={{ base: 'center', md: 'flex-start' }}>
                                     <Link href="https://www.instagram.com/" isExternal _hover={{ textDecoration: 'none' }}>
                                         <Button
-                                            rightIcon={<ArrowForwardIcon transition="transform .18s" _groupHover={{ transform: 'translateX(6px)' }} />}
+                                            rightIcon={<ArrowForwardIcon transition="transform .18s" _groupHover={{ transform: 'translateX(0.375rem)' }} />}
                                             bgColor={"#410025"}
                                             color="#FFF"
                                             borderRadius="full"
                                             px={6}
                                             py={5}
                                             fontFamily="Manrope"
-                                            fontSize="16px"
+                                            fontSize="1rem"
                                             fontWeight={700}
                                             lineHeight="normal"
                                             textAlign="center"
                                             transition="transform .18s ease, background-color .18s ease, box-shadow .18s ease"
-                                            _hover={{ opacity: 0.95, transform: 'translateY(-3px)', bg: '#5a002a', boxShadow: 'lg' }}
+                                            _hover={{ opacity: 0.95, transform: 'translateY(-0.1875rem)', bg: '#5a002a', boxShadow: 'lg' }}
                                             role="group"
                                         >
                                             View More on Instagram
@@ -278,10 +287,12 @@ export default function EasterTestimony() {
                         <Box
                             ref={iframeContainerRef}
                             display="block"
-                            width={{ base: '100%', lg: '80%' }}
-                            height={{ base: '22rem', md: '21rem' }}
+                            width={{ base: '100%', md: '58%', lg: '52%', xl: '80%' }}
+                            height={{ base: '24rem', md: '20rem', lg: '22rem', xl: '22rem' }}
                             border="none"
-                            px={{ base: 4, md: 0 }}
+                            px={{ base: 2, md: 0 }}
+                            mt={{ base: 0, xl: 8 }}
+                            mx="auto"
                         >
                             <iframe
                                 title="instagram"
@@ -297,23 +308,26 @@ export default function EasterTestimony() {
 
                 </Box>
 
-                <Box>
+                <Box pt={{ base: 0, md: 8 }}>
                     <Text
                         fontFamily="Instrument Serif"
-                        fontSize={{ base: '1.5rem', md: '40px' }}
+                        fontSize={{ base: '1.5rem', md: '2.25rem', lg: '2.5rem' }}
                         textAlign="center"
                         color="#7586C1"
                         fontStyle="normal"
                         fontWeight={400}
+                        lineHeight={{ base: '1.9rem', md: '2.5rem', lg: '2rem' }}
                         maxW={{ base: '100%', md: '100%' }}
                         mx="auto"
                         sx={{
-                            WebkitTextStrokeWidth: '0.6px',
+                            WebkitTextStrokeWidth: '0.0375rem',
                             WebkitTextStrokeColor: '#7586C1',
                             WebkitTextFillColor: '#7586C1',
                         }}
                     >
-                        Come experience the <Text as="span" fontStyle="italic">Living Hope</Text> <br/> we have in Jesus Christ this Passion Week!
+                        Come experience the <Text as="span" fontStyle="italic">Living Hope</Text>
+                        <Box as="br" display={{ base: 'block', md: 'none' }} />
+                        {' '}we have in Jesus Christ this Passion Week!
                     </Text>
                 </Box>
             </VStack>
