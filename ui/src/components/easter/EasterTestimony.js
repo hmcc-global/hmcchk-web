@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import {
     Box,
     Grid,
@@ -13,11 +14,54 @@ import {
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
 export default function EasterTestimony() {
+    const bracketContainerRef = useRef(null);
+    const iconRef = useRef(null);
+    const iframeContainerRef = useRef(null);
+    const [mobileBracketBounds, setMobileBracketBounds] = useState({ top: 0, bottom: 0 });
+
+    useEffect(() => {
+        const updateMobileBracketBounds = () => {
+            if (!bracketContainerRef.current || !iconRef.current || !iframeContainerRef.current) return;
+
+            const containerRect = bracketContainerRef.current.getBoundingClientRect();
+            const iconRect = iconRef.current.getBoundingClientRect();
+            const iframeRect = iframeContainerRef.current.getBoundingClientRect();
+
+            const nextTop = Math.max(0, iconRect.top - containerRect.top);
+            const nextBottom = Math.max(0, containerRect.bottom - iframeRect.bottom);
+
+            setMobileBracketBounds((prev) => {
+                if (prev.top === nextTop && prev.bottom === nextBottom) return prev;
+                return { top: nextTop, bottom: nextBottom };
+            });
+        };
+
+        updateMobileBracketBounds();
+
+        let observer;
+        if (typeof ResizeObserver !== 'undefined') {
+            observer = new ResizeObserver(() => {
+                updateMobileBracketBounds();
+            });
+
+            if (bracketContainerRef.current) observer.observe(bracketContainerRef.current);
+            if (iconRef.current) observer.observe(iconRef.current);
+            if (iframeContainerRef.current) observer.observe(iframeContainerRef.current);
+        }
+
+        window.addEventListener('resize', updateMobileBracketBounds);
+        return () => {
+            window.removeEventListener('resize', updateMobileBracketBounds);
+            if (observer) observer.disconnect();
+        };
+    }, []);
+
     return (
         <Box as="section" w="100%" py={{ base: 6, md: 16 }} px={{ base: 1, md: 12 }}>
             <VStack spacing={{ base: 6, md: 8 }} align="stretch">
-                <Box position="relative">
+                <Box position="relative" ref={bracketContainerRef}>
                     <Image
+                        ref={iconRef}
                         src={process.env.PUBLIC_URL + '/images/easter/easter_testimony_icon.png'}
                         alt="icon"
                         mx="auto"
@@ -51,8 +95,8 @@ export default function EasterTestimony() {
                     <Box
                         position="absolute"
                         left={{ base: 0, md: -6 }}
-                        top={{ base: '-17rem', md: '-2rem' }}
-                        bottom={{ base: '-33rem', md: '-3.75rem' }}
+                        top={{ base: `${mobileBracketBounds.top}px`, md: '-2rem' }}
+                        bottom={{ base: `${mobileBracketBounds.bottom}px`, md: '-3.75rem' }}
                         width={{ base: '0.6875rem', md: '1.75rem' }}
                         display="flex"
                         alignItems="center"
@@ -63,13 +107,13 @@ export default function EasterTestimony() {
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="11"
                                 height="100%"
-                                viewBox="0 0 11 681"
+                                viewBox="0 0 11 961"
                                 preserveAspectRatio="none"
                                 fill="none"
                                 aria-hidden="true"
                                 focusable="false"
                             >
-                                <path d="M10.5 0.5C4.97715 0.5 0.5 4.97716 0.5 10.5V670.5C0.5 676.023 4.97715 680.5 10.5 680.5" stroke="#A690B4" />
+                                <path d="M10.5 0.5C4.97715 0.5 0.5 4.97716 0.5 10.5V950.5C0.5 956.023 4.97715 960.5 10.5 960.5" stroke="#A690B4" />
                             </svg>
                         </Box>
                         <Box display={{ base: 'none', md: 'block' }}>
@@ -91,8 +135,8 @@ export default function EasterTestimony() {
                     <Box
                         position="absolute"
                         right={{ base: 0, md: -6 }}
-                        top={{ base: '-17rem', md: '-2rem' }}
-                        bottom={{ base: '-33rem', md: '-3.75rem' }}
+                        top={{ base: `${mobileBracketBounds.top}px`, md: '-2rem' }}
+                        bottom={{ base: `${mobileBracketBounds.bottom}px`, md: '-3.75rem' }}
                         width={{ base: '0.6875rem', md: '1.75rem' }}
                         display="flex"
                         alignItems="center"
@@ -103,13 +147,13 @@ export default function EasterTestimony() {
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="11"
                                 height="100%"
-                                viewBox="0 0 11 681"
+                                viewBox="0 0 11 961"
                                 preserveAspectRatio="none"
                                 fill="none"
                                 aria-hidden="true"
                                 focusable="false"
                             >
-                                <path d="M0 0.5C5.52285 0.5 10 4.97716 10 10.5V670.5C10 676.023 5.52285 680.5 0 680.5" stroke="#A690B4" />
+                                <path d="M0 0.5C5.52285 0.5 10 4.97716 10 10.5V950.5C10 956.023 5.52285 960.5 0 960.5" stroke="#A690B4" />
                             </svg>
                         </Box>
                         <Box display={{ base: 'none', md: 'block' }}>
@@ -232,6 +276,7 @@ export default function EasterTestimony() {
                         </Box>
 
                         <Box
+                            ref={iframeContainerRef}
                             display="block"
                             width={{ base: '100%', lg: '80%' }}
                             height={{ base: '22rem', md: '21rem' }}
