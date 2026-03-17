@@ -16,7 +16,7 @@ export default function EasterTestimony() {
     return (
         <Box as="section" w="100%" py={{ base: 6, md: 16 }} px={{ base: 1, md: 12 }}>
             <VStack spacing={{ base: 6, md: 8 }} align="stretch">
-                <Box position="relative">
+                <Box position="relative" sx={{ marginLeft: "-12px", marginRight: "-12px" }}>
                     <Image
                         src={process.env.PUBLIC_URL + '/images/easter/easter_testimony_icon.png'}
                         alt="icon"
@@ -31,7 +31,7 @@ export default function EasterTestimony() {
                         fontFamily="Instrument Serif"
                         fontStyle="italic"
                         fontWeight={400}
-                        fontSize={{ base: '26px', md: '2.5rem' }}
+                        fontSize={{ base: '1.625rem', md: '2.5rem' }}
                         lineHeight="97%"
                         textAlign="center"
                         textTransform="uppercase"
@@ -161,7 +161,7 @@ export default function EasterTestimony() {
                                 <Text
                                     fontFamily="Manrope"
                                     color="#161616"
-                                    fontSize={{ base: '12px', md: '16px' }}
+                                    fontSize={{ base: '0.875rem', md: '1rem' }}
                                     fontStyle="normal"
                                     fontWeight={400}
                                     lineHeight="120.156%"
@@ -175,7 +175,7 @@ export default function EasterTestimony() {
                                     fontFamily="Instrument Serif"
                                     fontStyle="italic"
                                     fontWeight={400}
-                                    fontSize={{ base: '24px', md: '30px' }}
+                                    fontSize={{ base: '1.25rem', md: '1.875rem' }}
                                     color="#982896"
                                     lineHeight={{ base: '26px', md: 'normal' }}
                                     display="block"
@@ -195,7 +195,7 @@ export default function EasterTestimony() {
                                 <Text
                                     fontFamily="Manrope"
                                     color="#161616"
-                                    fontSize={{ base: '12px', md: '17px' }}
+                                    fontSize={{ base: '0.875rem', md: '1.0625rem' }}
                                     fontStyle="normal"
                                     fontWeight={400}
                                     lineHeight="120.156%"
@@ -208,7 +208,7 @@ export default function EasterTestimony() {
                                 <Text
                                     fontFamily="Manrope"
                                     color="#161616"
-                                    fontSize={{ base: '13px', md: '13px' }}
+                                    fontSize={{ base: '0.812rem', md: '0.8125rem' }}
                                     fontStyle="normal"
                                     fontWeight={400}
                                     lineHeight="120.156%"
@@ -229,7 +229,7 @@ export default function EasterTestimony() {
                                             px={6}
                                             py={5}
                                             fontFamily="Manrope"
-                                            fontSize="16px"
+                                            fontSize="1rem"
                                             fontWeight={700}
                                             lineHeight="normal"
                                             textAlign="center"
@@ -268,7 +268,7 @@ export default function EasterTestimony() {
                     <Box pt={{ base: 3, md: 12 }} display={{ base: 'block', md: 'block' }}>
                         <Text
                             fontFamily="Instrument Serif"
-                            fontSize={{ base: '1.75rem', md: '40px' }}
+                            fontSize={{ base: '1.725rem', md: '2.5rem' }}
                             textAlign="center"
                             color="#7586C1"
                             fontStyle="normal"
