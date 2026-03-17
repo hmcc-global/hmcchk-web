@@ -51,10 +51,10 @@ export default function EasterTestimony() {
                     <Box
                         position="absolute"
                         left={{ base: 0, md: -6 }}
-                        top={{ base: 0, md: '6%' }}
-                        bottom={{ base: 0, md: '6%' }}
+                        top={{ base: '-17rem', md: '-2rem' }}
+                        bottom={{ base: '-33rem', md: '-3.75rem' }}
                         width={{ base: '0.6875rem', md: '1.75rem' }}
-                        display={{ base: 'none', md: 'flex' }}
+                        display="flex"
                         alignItems="center"
                         justifyContent="center"
                     >
@@ -76,14 +76,14 @@ export default function EasterTestimony() {
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
-                                height="100%"
-                                viewBox="0 0 24 521"
+                                height="80%"
+                                viewBox="0 0 24 581"
                                 preserveAspectRatio="none"
                                 fill="none"
                                 aria-hidden="true"
                                 focusable="false"
                             >
-                                <path d="M12.5 0.5C5.87258 0.5 0.5 5.87258 0.5 12.5V508.5C0.5 515.127 5.87258 520.5 12.5 520.5" stroke="#B8A9C6" strokeWidth="1" />
+                                <path d="M23.5 0.5C10.7975 0.5 0.5 10.7974 0.5 23.5V557.5C0.5 570.203 10.7975 580.5 23.5 580.5" stroke="#B8A9C6" strokeWidth="1" />
                             </svg>
                         </Box>
                     </Box>
@@ -91,10 +91,10 @@ export default function EasterTestimony() {
                     <Box
                         position="absolute"
                         right={{ base: 0, md: -6 }}
-                        top={{ base: 0, md: '6%' }}
-                        bottom={{ base: 0, md: '6%' }}
+                        top={{ base: '-17rem', md: '-2rem' }}
+                        bottom={{ base: '-33rem', md: '-3.75rem' }}
                         width={{ base: '0.6875rem', md: '1.75rem' }}
-                        display={{ base: 'none', md: 'flex' }}
+                        display="flex"
                         alignItems="center"
                         justifyContent="center"
                     >
@@ -117,14 +117,14 @@ export default function EasterTestimony() {
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
                                 height="100%"
-                                viewBox="0 0 24 521"
+                                viewBox="0 0 24 581"
                                 preserveAspectRatio="none"
                                 fill="none"
                                 aria-hidden="true"
                                 focusable="false"
                                 style={{ transform: 'scaleX(-1)' }}
                             >
-                                <path d="M12.5 0.5C5.87258 0.5 0.5 5.87258 0.5 12.5V508.5C0.5 515.127 5.87258 520.5 12.5 520.5" stroke="#B8A9C6" strokeWidth="1" />
+                                <path d="M23.5 0.5C10.7975 0.5 0.5 10.7974 0.5 23.5V557.5C0.5 570.203 10.7975 580.5 23.5 580.5" stroke="#B8A9C6" strokeWidth="1" />
                             </svg>
                         </Box>
                     </Box>
@@ -135,54 +135,6 @@ export default function EasterTestimony() {
                         gap={{ base: 8, md: 12 }}
                         alignItems="center"
                     >
-                        <Box
-                            position="absolute"
-                            left={0}
-                            top={0}
-                            bottom={0}
-                            width="0.6875rem"
-                            display={{ base: 'flex', md: 'none' }}
-                            alignItems="center"
-                            justifyContent="center"
-                            pointerEvents="none"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="11"
-                                height="100%"
-                                viewBox="0 0 11 681"
-                                preserveAspectRatio="none"
-                                fill="none"
-                                aria-hidden="true"
-                                focusable="false"
-                            >
-                                <path d="M10.5 0.5C4.97715 0.5 0.5 4.97716 0.5 10.5V670.5C0.5 676.023 4.97715 680.5 10.5 680.5" stroke="#A690B4" />
-                            </svg>
-                        </Box>
-                        <Box
-                            position="absolute"
-                            right={0}
-                            top={0}
-                            bottom={0}
-                            width="0.6875rem"
-                            display={{ base: 'flex', md: 'none' }}
-                            alignItems="center"
-                            justifyContent="center"
-                            pointerEvents="none"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="11"
-                                height="100%"
-                                viewBox="0 0 11 681"
-                                preserveAspectRatio="none"
-                                fill="none"
-                                aria-hidden="true"
-                                focusable="false"
-                            >
-                                <path d="M0 0.5C5.52285 0.5 10 4.97716 10 10.5V670.5C10 676.023 5.52285 680.5 0 680.5" stroke="#A690B4" />
-                            </svg>
-                        </Box>
                         <Box bg="transparent" borderRadius="md" p={{ base: 3, md: 8 }}>
                             <Stack spacing={{ base: 4, md: 6 }}>
                                 <HStack justifyContent={{ base: 'center', md: 'space-between' }} alignItems="start">
