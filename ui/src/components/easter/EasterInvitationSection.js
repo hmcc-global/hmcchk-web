@@ -149,12 +149,12 @@ const EasterInvitationSection = () => {
                               Baptism Celebration
                             </Heading>
                             <Text {...LocationText}>
-                              2PM, TRANSFORMATION CENTER
+                              2:30PM, HK MANDARIN BIBLE CHURCH
                             </Text>
                             <Text {...AddressText}>
-                              Unit 2202, Crocodile Center
+                              7/F, Elite Center, 22 Hung To Road,
                               <br />
-                              79 Hoi Yuen Road, Kwun Tong
+                              Kwun Tong
                             </Text>
                           </Box>
                         </Stack>
