@@ -4,6 +4,7 @@ import '@fontsource/dm-serif-display';
 import '@fontsource/dm-serif-display/400-italic';
 import '@fontsource/instrument-serif';
 import '@fontsource/manrope';
+import '@fontsource/instrument-serif/400-italic';
 
 const customTheme = extendTheme({
   fonts: {
@@ -27,6 +28,11 @@ const customTheme = extendTheme({
     instrument_serif: {
       fontFamily: "'Instrument Serif', Georgia, serif",
       fontStyle: 'normal',
+      fontWeight: '400',
+    },
+    instrument_serif_italic: {
+      fontFamily: "'Instrument Serif', Georgia, serif",
+      fontStyle: 'italic',
       fontWeight: '400',
     },
     instrument_serif_bold: {

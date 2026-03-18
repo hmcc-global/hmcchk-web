@@ -29,30 +29,10 @@ import {
   ActionButton,
 } from './styles';
 import EInvitePopup from './EInvitePopup';
+import EasterVerticalLine from './EasterVerticalLine';
 
 const easterCalendarUrl =
   'https://calendar.google.com/calendar/u/8?cid=Y19hNzY3ODEwOGYzMjE3ZTJjNDc4MTgzMWZjZjQ0Y2IyZjg3MTk3MzhiNTY2NzliMWVlMWIzMGIwNDgxOGZkN2YyQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20';
-
-/* Decorative vertical lines */
-const VerticalLine = ({ position }) => {
-  return position === 'right' ? (
-    <Box
-      h="auto"
-      w="3em"
-      borderColor="#B8B09B"
-      borderRight="1px solid"
-      borderRadius="24px"
-    />
-  ) : (
-    <Box
-      h="auto"
-      w="3em"
-      borderColor="#B8B09B"
-      borderLeft="1px solid"
-      borderRadius="24px"
-    />
-  );
-};
 
 const EasterInvitationSection = () => {
   const theme = useTheme();
@@ -73,7 +53,7 @@ const EasterInvitationSection = () => {
       {({ inView, ref }) => (
         <Fade transition={{ enter: { duration: 1 } }} in={inView}>
           <Box ref={ref} fontFamily={theme.fonts?.body} display="flex">
-            <VerticalLine position="left" />
+            <EasterVerticalLine position="left" />
             <Container maxW="container.xl" px={[4, 6, 8]}>
               <Box justify="center" align="center">
                 <Image
@@ -230,7 +210,7 @@ const EasterInvitationSection = () => {
                 </Stack>
               </VStack>
             </Container>
-            <VerticalLine position="right" />
+            <EasterVerticalLine position="right" />
           </Box>
           <EInvitePopup
             isOpen={isEInvitePopupOpen}
