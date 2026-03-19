@@ -6,10 +6,94 @@ import {
   Heading,
   Container,
   Text,
+  Button,
 } from '@chakra-ui/react';
 import { SocialIcon } from 'react-social-icons';
 import { useEffect, useRef } from 'react';
 import SubHeroSection from './SubHeroSection';
+
+const scrollToEasterSection = () => {
+  const easterSection = document.getElementById('easter-2026');
+  if (!easterSection) {
+    return;
+  }
+
+  const elementPosition =
+    easterSection.getBoundingClientRect().top + window.scrollY;
+  const offsetPosition = elementPosition - 50;
+  window.scrollTo({
+    top: offsetPosition,
+    behavior: 'smooth',
+  });
+};
+
+const SocialMediaStack = (props) => {
+  return (
+    <Stack
+      spacing={[0, 0, -3]}
+      pl={[0, 0, '20%']}
+      flexDir={['row', 'row', 'column']}
+      justifyContent={['flex-end', 'flex-end', 'flex-start']}
+      {...props}
+    >
+      <SocialIcon
+        target="_blank"
+        bgColor="none"
+        fgColor="#4A6EEB"
+        url="https://www.instagram.com/hmcc_hk/?hl=en"
+      />
+      <SocialIcon
+        target="_blank"
+        bgColor="none"
+        fgColor="#4A6EEB"
+        url="https://open.spotify.com/user/hmccofhk?si=bd64100596904a95"
+      />
+      <SocialIcon
+        target="_blank"
+        bgColor="none"
+        fgColor="#4A6EEB"
+        url="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q"
+      />
+    </Stack>
+  );
+};
+
+const PassionWeek2026Button = () => {
+  return (
+    <Button
+      w={['90%', '100%']}
+      px={['40px', '90px']}
+      py="25px"
+      my="auto"
+      bg="linear-gradient(90deg, #842A48 0%, #EC93A1 100%)"
+      borderRadius="80px"
+      display="inline-flex"
+      justifyContent="center"
+      alignItems="center"
+      transition="transform .18s ease, background-color .18s ease, box-shadow .18s ease"
+      _hover={{
+        bg: 'linear-gradient(90deg, #6B1F38 0%, #D67E8E 100%)',
+        transform: 'translateY(-3px)',
+        boxShadow: 'lg',
+      }}
+      _active={{
+        bg: 'linear-gradient(90deg, #5A1A2F 0%, #C26A7D 100%)',
+      }}
+      onClick={scrollToEasterSection}
+    >
+      <Text
+        textAlign="center"
+        color="white"
+        fontSize="18px"
+        fontFamily="Manrope"
+        fontWeight="700"
+        wordBreak="break-word"
+      >
+        CHECK OUT PASSION WEEK 2026
+      </Text>
+    </Button>
+  );
+};
 
 const HeroSection = () => {
   const vidRef = useRef();
@@ -216,31 +300,7 @@ const HeroSection = () => {
                 <Text fontWeight="bold">Transformation Center</Text>
                 <Text>Unit 2, 22/F Crocodile Center, Kwun Tong & Online</Text>
               </Text>
-              <Stack
-                spacing={[0, 0, -3]}
-                pl={[0, 0, '40%']}
-                flexDir={['row', 'row', 'column']}
-                justifyContent={['flex-end', 'flex-end', 'flex-start']}
-              >
-                <SocialIcon
-                  target="_blank"
-                  bgColor="none"
-                  fgColor="#4A6EEB"
-                  url="https://www.instagram.com/hmcc_hk/?hl=en"
-                />
-                <SocialIcon
-                  target="_blank"
-                  bgColor="none"
-                  fgColor="#4A6EEB"
-                  url="https://open.spotify.com/user/hmccofhk?si=bd64100596904a95"
-                />
-                <SocialIcon
-                  target="_blank"
-                  bgColor="none"
-                  fgColor="#4A6EEB"
-                  url="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q"
-                />
-              </Stack>
+              <SocialMediaStack pl={[0, 0, '40%']} />
             </Stack>
           </Container>
         </Flex>
@@ -371,31 +431,20 @@ const HeroSection = () => {
                 <Text fontWeight="bold">Transformation Center</Text>
                 <Text>Unit 2, 22/F Crocodile Center, Kwun Tong & Online</Text>
               </Text>
-              <Stack
-                spacing={[0, 0, -3]}
-                pl={[0, 0, '40%']}
-                flexDir={['row', 'row', 'column']}
-                justifyContent={['flex-end', 'flex-end', 'flex-start']}
+              <SocialMediaStack display={['flex', 'flex', 'none']} />
+              <Flex w="40%" display={['none', 'none', 'flex']}>
+                <PassionWeek2026Button />
+                <SocialMediaStack pl={[0, 0, '25%']} />
+              </Flex>
+              <Flex
+                w="100%"
+                display={['flex', 'flex', 'none']}
+                direction={'column'}
+                align="center"
+                py="5px"
               >
-                <SocialIcon
-                  target="_blank"
-                  bgColor="none"
-                  fgColor="#4A6EEB"
-                  url="https://www.instagram.com/hmcc_hk/?hl=en"
-                />
-                <SocialIcon
-                  target="_blank"
-                  bgColor="none"
-                  fgColor="#4A6EEB"
-                  url="https://open.spotify.com/user/hmccofhk?si=bd64100596904a95"
-                />
-                <SocialIcon
-                  target="_blank"
-                  bgColor="none"
-                  fgColor="#4A6EEB"
-                  url="https://www.youtube.com/channel/UC1O1T7RaKWTGHd7R_0KMZ8Q"
-                />
-              </Stack>
+                <PassionWeek2026Button />
+              </Flex>
             </Stack>
           </Container>
         </Flex>
