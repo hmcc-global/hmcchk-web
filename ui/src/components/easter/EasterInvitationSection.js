@@ -31,7 +31,7 @@ import {
 import EInvitePopup from './EInvitePopup';
 
 const easterCalendarUrl =
-  'https://calendar.google.com/calendar/u/8?cid=Y19hNzY3ODEwOGYzMjE3ZTJjNDc4MTgzMWZjZjQ0Y2IyZjg3MTk3MzhiNTY2NzliMWVlMWIzMGIwNDgxOGZkN2YyQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20';
+  'https://calendar.google.com/calendar/u/4?cid=Y19iYmNhYzhiNWVjZDAzYjNlYTk1YjZhMWIzMGNmZmY4NDk5ZGE4YmRhM2UxZTQ2ZmQ2NWVjZjQyMGY4NGUyMWJmQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20';
 
 /* Decorative vertical lines */
 const VerticalLine = ({ position }) => {
