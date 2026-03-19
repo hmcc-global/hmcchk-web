@@ -10,16 +10,16 @@ import {
     Button,
     Link,
     Container,
-  useBreakpointValue,
+    useBreakpointValue,
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import EasterVerticalLine from './EasterVerticalLine';
 
 export default function EasterTestimony() {
-  const testimonyButtonIcon = useBreakpointValue({
-    base: undefined,
-    md: <ArrowForwardIcon transition="transform .18s" _groupHover={{ transform: 'translateX(0.375rem)' }} />,
-  });
+    const testimonyButtonIcon = useBreakpointValue({
+        base: undefined,
+        md: <ArrowForwardIcon transition="transform .18s" _groupHover={{ transform: 'translateX(0.375rem)' }} />,
+    });
 
     return (
         <Box
@@ -156,9 +156,10 @@ export default function EasterTestimony() {
                                     </Text>
 
                                     <HStack pt={4} justifyContent={{ base: 'center', md: 'flex-start' }}>
-                                        <Link href="https://www.instagram.com/" isExternal _hover={{ textDecoration: 'none' }}>
+                                        <Link href="https://www.instagram.com/explore/search/keyword/?q=%23hmcc_livinghope" isExternal _hover={{ textDecoration: 'none' }}>
+
                                             <Button
-                        rightIcon={testimonyButtonIcon}
+                                                rightIcon={testimonyButtonIcon}
                                                 bgColor="#410025"
                                                 color="#FFF"
                                                 borderRadius="full"
