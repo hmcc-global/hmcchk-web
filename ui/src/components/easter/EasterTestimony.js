@@ -157,7 +157,6 @@ export default function EasterTestimony() {
 
                                     <HStack pt={4} justifyContent={{ base: 'center', md: 'flex-start' }}>
                                         <Link href="https://www.instagram.com/explore/search/keyword/?q=%23hmcc_livinghope" isExternal _hover={{ textDecoration: 'none' }}>
-
                                             <Button
                                                 rightIcon={testimonyButtonIcon}
                                                 bgColor="#410025"
