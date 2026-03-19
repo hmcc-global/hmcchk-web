@@ -61,8 +61,8 @@ const SocialMediaStack = (props) => {
 const PassionWeek2026Button = () => {
   return (
     <Button
-      w="90%"
-      px="40px"
+      w={['90%', '100%']}
+      px={['40px', '90px']}
       py="25px"
       my="auto"
       bg="linear-gradient(90deg, #842A48 0%, #EC93A1 100%)"
@@ -434,7 +434,7 @@ const HeroSection = () => {
               <SocialMediaStack display={['flex', 'flex', 'none']} />
               <Flex w="40%" display={['none', 'none', 'flex']}>
                 <PassionWeek2026Button />
-                <SocialMediaStack pl={[0, 0, '40%']} />
+                <SocialMediaStack pl={[0, 0, '25%']} />
               </Flex>
               <Flex
                 w="100%"
