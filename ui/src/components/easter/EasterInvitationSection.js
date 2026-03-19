@@ -32,7 +32,7 @@ import EInvitePopup from './EInvitePopup';
 import EasterVerticalLine from './EasterVerticalLine';
 
 const easterCalendarUrl =
-  'https://calendar.google.com/calendar/u/4?cid=Y19iYmNhYzhiNWVjZDAzYjNlYTk1YjZhMWIzMGNmZmY4NDk5ZGE4YmRhM2UxZTQ2ZmQ2NWVjZjQyMGY4NGUyMWJmQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20';
+  'https://calendar.google.com/calendar?cid=Y19iYmNhYzhiNWVjZDAzYjNlYTk1YjZhMWIzMGNmZmY4NDk5ZGE4YmRhM2UxZTQ2ZmQ2NWVjZjQyMGY4NGUyMWJmQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20';
 
 const EasterInvitationSection = () => {
   const theme = useTheme();
