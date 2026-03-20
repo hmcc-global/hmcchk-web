@@ -8,24 +8,12 @@ import {
   VStack,
   HStack,
   Button,
-  Link,
   Container,
-  useBreakpointValue,
 } from '@chakra-ui/react';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { ActionButton } from './styles';
 import EasterVerticalLine from './EasterVerticalLine';
 
 export default function EasterTestimony() {
-  const testimonyButtonIcon = useBreakpointValue({
-    base: undefined,
-    md: (
-      <ArrowForwardIcon
-        transition="transform .18s"
-        _groupHover={{ transform: 'translateX(0.375rem)' }}
-      />
-    ),
-  });
-
   return (
     <Box
       as="section"
@@ -35,7 +23,8 @@ export default function EasterTestimony() {
     >
       <Box display="flex">
         <EasterVerticalLine position="left" color="#A690B4" />
-        <Container maxW="container.xl" px={[0, 6, 8]}>
+        {/* test 1 */}
+        <Container maxW="container.xl" px={[4, 6, 8]}>
           <Box position="relative">
             <Image
               src={
@@ -140,10 +129,8 @@ export default function EasterTestimony() {
                     }}
                   >
                     My hope was in ______,
-                    <br />
-                    but now, Jesus is
-                    <Box as="br" display={{ base: 'block', md: 'none' }} /> my
-                    Living Hope because ____.
+                    <Box as="br" display={{ base: 'block', md: 'block' }} />
+                    but now, Jesus is my Living Hope because ______.
                   </Text>
 
                   <Text
@@ -187,49 +174,27 @@ export default function EasterTestimony() {
                     pt={4}
                     justifyContent={{ base: 'center', md: 'flex-start' }}
                   >
-                    <Link
-                      href="https://www.instagram.com/explore/search/keyword/?q=%23hmcc_livinghope"
-                      isExternal
-                      _hover={{ textDecoration: 'none' }}
+                    <Button
+                      {...ActionButton}
+                      bg="#5a002a"
+                      color="white"
+                      _hover={{
+                        opacity: 0.95,
+                        transform: 'translateY(-3px)',
+                        bg: '#5a002a',
+                        boxShadow: 'lg',
+                        textDecoration: 'none',
+                      }}
+                      onClick={() => {
+                        window.open(
+                          'https://www.instagram.com/explore/tags/hmcc_livinghope/',
+                          '_blank',
+                          'noopener,noreferrer'
+                        );
+                      }}
                     >
-                      <Button
-                        rightIcon={testimonyButtonIcon}
-                        bg="#410025"
-                        color="#FFF"
-                        borderRadius="80px"
-                        display="inline-flex"
-                        h="55px"
-                        p="8px 30px 8px 40px"
-                        justifyContent="center"
-                        alignItems="center"
-                        gap="20px"
-                        fontFamily="Manrope"
-                        fontSize="18px"
-                        fontWeight={700}
-                        lineHeight="normal"
-                        textAlign="center"
-                        transition="transform .18s ease, background-color .18s ease, box-shadow .18s ease"
-                        _hover={{
-                          opacity: 0.95,
-                          transform: 'translateY(-0.1875rem)',
-                          bg: '#5a002a',
-                          boxShadow: 'lg',
-                        }}
-                        role="group"
-                      >
-                        <Text
-                          color="#FFF"
-                          textAlign="center"
-                          fontFamily="Manrope"
-                          fontSize="18px"
-                          fontStyle="normal"
-                          fontWeight={700}
-                          lineHeight="normal"
-                        >
-                          View More on Instagram
-                        </Text>
-                      </Button>
-                    </Link>
+                      View More on Instagram
+                    </Button>
                   </HStack>
                 </Stack>
               </Box>
@@ -272,7 +237,7 @@ export default function EasterTestimony() {
         <Box pt={{ base: 0, md: 8 }}>
           <Text
             fontFamily="Instrument Serif"
-            fontSize={{ base: '1.5rem', md: '2.25rem', lg: '2.5rem' }}
+            fontSize={{ base: '1.45rem', md: '2.25rem', lg: '2.5rem' }}
             textAlign="center"
             color="#7586C1"
             fontStyle="normal"
@@ -290,7 +255,7 @@ export default function EasterTestimony() {
             <Text as="span" fontStyle="italic">
               Living Hope
             </Text>
-            <Box as="br" display={{ base: 'block', md: 'none' }} /> we have in
+            <Box as="br" display={{ base: 'none', md: 'none' }} /> we have in
             Jesus Christ this Passion Week!
           </Text>
         </Box>
