@@ -62,14 +62,21 @@ const PassionWeek2026Button = () => {
   return (
     <Button
       w={['90%', '100%']}
-      px={['40px', '90px']}
-      py="25px"
+      px={['16px', '24px']}
+      py={["12px", "12px"]}
+      h="auto"
       my="auto"
       bg="linear-gradient(90deg, #842A48 0%, #EC93A1 100%)"
       borderRadius="80px"
       display="inline-flex"
       justifyContent="center"
       alignItems="center"
+      textAlign="center"
+      color="white"
+      fontSize="18px"
+      fontFamily="Manrope"
+      fontWeight="700"
+      whiteSpace="normal"
       transition="transform .18s ease, background-color .18s ease, box-shadow .18s ease"
       _hover={{
         bg: 'linear-gradient(90deg, #6B1F38 0%, #D67E8E 100%)',
@@ -81,16 +88,7 @@ const PassionWeek2026Button = () => {
       }}
       onClick={scrollToEasterSection}
     >
-      <Text
-        textAlign="center"
-        color="white"
-        fontSize="18px"
-        fontFamily="Manrope"
-        fontWeight="700"
-        wordBreak="break-word"
-      >
-        CHECK OUT PASSION WEEK 2026
-      </Text>
+      CHECK OUT PASSION WEEK 2026
     </Button>
   );
 };
@@ -434,7 +432,7 @@ const HeroSection = () => {
               <SocialMediaStack display={['flex', 'flex', 'none']} />
               <Flex w="40%" display={['none', 'none', 'flex']}>
                 <PassionWeek2026Button />
-                <SocialMediaStack pl={[0, 0, '25%']} />
+                <SocialMediaStack pl={[0, 0, '10%']} />
               </Flex>
               <Flex
                 w="100%"

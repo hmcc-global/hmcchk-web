@@ -6,6 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import NavBar from './components/NavigationBar/NavBar';
 import { Flex } from '@chakra-ui/react';
 import MobileNavBar from './components/NavigationBar/MobileNavBar';
+import FloatingEasterButton from './components/shared/FloatingEasterButton';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
               <NavBar />
               <MainContainer />
               <MobileNavBar />
+              <FloatingEasterButton />
             </>
           </BrowserRouter>
         </PersistGate>
