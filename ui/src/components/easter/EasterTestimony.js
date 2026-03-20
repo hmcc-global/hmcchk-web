@@ -10,13 +10,10 @@ import {
   Button,
   Container,
 } from '@chakra-ui/react';
-import {
-  ActionButton
-} from './styles';
+import { ActionButton } from './styles';
 import EasterVerticalLine from './EasterVerticalLine';
 
 export default function EasterTestimony() {
-
   return (
     <Box
       as="section"
@@ -133,8 +130,7 @@ export default function EasterTestimony() {
                   >
                     My hope was in ______,
                     <Box as="br" display={{ base: 'block', md: 'block' }} />
-                    but now, Jesus is
-                    my Living Hope because ______.
+                    but now, Jesus is my Living Hope because ______.
                   </Text>
 
                   <Text
@@ -178,24 +174,27 @@ export default function EasterTestimony() {
                     pt={4}
                     justifyContent={{ base: 'center', md: 'flex-start' }}
                   >
-
-                      <Button
-                        {...ActionButton}
-                        bg='#5a002a'
-                        color="white"
-                        _hover={{
-                          opacity: 0.95,
-                          transform: 'translateY(-3px)',
-                          bg: '#5a002a',
-                          boxShadow: 'lg',
-                          textDecoration: 'none',
-                        }}
-                        onClick={() => {
-                            window.open('https://www.instagram.com/explore/tags/hmcc_livinghope/', '_blank', 'noopener,noreferrer');
-                        }}
-                      >
-                        View More on Instagram
-                      </Button>
+                    <Button
+                      {...ActionButton}
+                      bg="#5a002a"
+                      color="white"
+                      _hover={{
+                        opacity: 0.95,
+                        transform: 'translateY(-3px)',
+                        bg: '#5a002a',
+                        boxShadow: 'lg',
+                        textDecoration: 'none',
+                      }}
+                      onClick={() => {
+                        window.open(
+                          'https://www.instagram.com/explore/tags/hmcc_livinghope/',
+                          '_blank',
+                          'noopener,noreferrer'
+                        );
+                      }}
+                    >
+                      View More on Instagram
+                    </Button>
                   </HStack>
                 </Stack>
               </Box>
@@ -252,10 +251,9 @@ export default function EasterTestimony() {
               WebkitTextFillColor: '#7586C1',
             }}
           >
-            Come experience the
-            {' '}
+            Come experience the{' '}
             <Text as="span" fontStyle="italic">
-                Living Hope
+              Living Hope
             </Text>
             <Box as="br" display={{ base: 'none', md: 'none' }} /> we have in
             Jesus Christ this Passion Week!
