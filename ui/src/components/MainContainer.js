@@ -45,6 +45,7 @@ import PrivacyPolicy from './screens/PrivacyPolicy';
 import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
 import ConnectMinistry from './discover/ConnectMinistry';
 import LifeGroupPage from './discover/LifeGroupPage';
+import TestingPage from './testing/TestingPage';
 
 const MainContainer = () => {
   return (
@@ -163,6 +164,12 @@ const MainContainer = () => {
           path="/discover"
           permissions={['public']}
           component={DiscoverPage}
+        />
+        <PrivateRoute
+          exact
+          path="/testing"
+          permissions={['public']}
+          component={TestingPage}
         />
         <PrivateRoute
           exact
