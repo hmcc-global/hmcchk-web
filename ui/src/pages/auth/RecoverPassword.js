@@ -11,13 +11,13 @@ import {
   Text,
   Stack,
   Link,
-  createStandaloneToast,
+  useToast,
   Button,
 } from '@chakra-ui/react';
 
 const RecoverPassword = (props) => {
   const { register, handleSubmit } = useForm();
-  const toast = createStandaloneToast();
+  const toast = useToast();
   const onSubmit = async (data) => {
     await axios.post('/api/auth/forgot-password', data);
 

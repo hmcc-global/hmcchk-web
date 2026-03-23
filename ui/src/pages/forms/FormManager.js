@@ -9,14 +9,14 @@ import {
   Text,
   Badge,
   Stack,
-  createStandaloneToast,
+  useToast,
   HStack,
   SimpleGrid,
 } from '@chakra-ui/react';
 import FormEditorContainer from './FormEditorContainer';
 
 const FormManager = (props) => {
-  const toast = createStandaloneToast();
+  const toast = useToast();
 
   const { user } = props;
   const [isEditorOpen, setIsEditorOpen] = useState(false);

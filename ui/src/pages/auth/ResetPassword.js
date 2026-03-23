@@ -14,7 +14,7 @@ import {
   Text,
   Stack,
   Link,
-  createStandaloneToast,
+  useToast,
 } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 
@@ -30,7 +30,7 @@ const ResetPassword = (props) => {
     watch,
   } = useForm();
   const query = useQuery();
-  const toast = createStandaloneToast();
+  const toast = useToast();
 
   const onSubmit = async (data) => {
     try {

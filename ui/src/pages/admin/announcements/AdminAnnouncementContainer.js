@@ -6,7 +6,7 @@ import {
   Text,
   Box,
   Container,
-  createStandaloneToast,
+  useToast,
   Stack,
   List,
   ListItem,
@@ -29,7 +29,7 @@ import AnnouncementEditorModal from './AnnouncementEditorModal';
 import { DateTime } from 'luxon';
 
 export default function AdminAnnouncementContainer(props) {
-  const toast = createStandaloneToast();
+  const toast = useToast();
   const { user } = props;
   const today = new DateTime.now();
 
