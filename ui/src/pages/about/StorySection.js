@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Stack, VStack, Text } from '@chakra-ui/layout';
+import { Box, Flex, Heading, Stack, VStack, Text } from '@chakra-ui/react';
 
 const PictureStory = ({ image, text }) => {
   return (

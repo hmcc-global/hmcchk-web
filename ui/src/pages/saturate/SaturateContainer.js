@@ -4,15 +4,11 @@ import {
   Image,
   Text,
   VStack,
-  keyframes,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import SaturateGoals from './SaturateGoals';
 import SaturateVision from './SaturateVision';
 
-const animationKeyframes = keyframes`
-  0% { transform: opacity: [1, 0, 1] ; }
-`;
 
 const continuousAnimation = {
   opacity: [1, 0.3, 1], // Animating opacity from 1 to 0 and back to 1

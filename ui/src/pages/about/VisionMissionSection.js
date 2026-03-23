@@ -5,7 +5,7 @@ import {
   Stack,
   Text,
   Heading,
-} from '@chakra-ui/layout';
+} from '@chakra-ui/react';
 import { Image, Button, Link } from '@chakra-ui/react';
 import { saturateText } from '../home/SaturateVisionSection';
 

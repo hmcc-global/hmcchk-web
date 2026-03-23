@@ -3,9 +3,10 @@ import {
   Container,
   Heading,
   HStack,
+  Select,
   Text,
   VStack,
-} from '@chakra-ui/layout';
+} from '@chakra-ui/react';
 import BeliefsSection from './BeliefsSection';
 import StaffSection from './StaffSection';
 import StorySection from './StorySection';
@@ -14,7 +15,6 @@ import ValuesSection from './ValuesSection';
 import OurHeartMissions from './OurHeartMissions';
 import blurbs from './about.json';
 import { Fragment, useState, useEffect } from 'react';
-import { Select } from '@chakra-ui/select';
 import { useLocation } from 'react-router-dom';
 import scrollTo from '../helpers/ScrollTo';
 
