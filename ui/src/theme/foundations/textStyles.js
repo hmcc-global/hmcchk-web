@@ -15,6 +15,31 @@ const textStyles = {
       fontSize: '1.125rem',
       lineHeight: '1.75',
     },
+    Display_1: {
+
+    },
+    Heading_1: {
+
+    },
+    Heading_2: {
+
+    },
+    Heading_3: {
+
+    },
+    Heading_4: {
+
+    },
+    Paragraph_1: {
+
+    },
+    Paragraph_2: {
+
+    },
+    Paragraph_3: {
+      
+    }
+
   };
   
   export default textStyles;
