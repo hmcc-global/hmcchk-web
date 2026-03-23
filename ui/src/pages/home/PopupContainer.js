@@ -14,8 +14,7 @@ import {
   ButtonGroup,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
+import { default as ReactMarkdown } from '../../components/CustomReactMarkdown';
 import TrackingUtil from '../../util/TrackingUtil';
 
 const PopupContainer = ({ props }) => {
@@ -51,11 +50,7 @@ const PopupContainer = ({ props }) => {
         )}
         <ModalBody ml={[0, 16]} mr={[0, 16]}>
           <Box fontSize="sm" mt="5" color="#4C80A5" textAlign="justify">
-            <ReactMarkdown
-              components={ChakraUIRenderer()}
-              children={popupData.description}
-              skipHtml
-            />
+            <ReactMarkdown children={popupData.description} skipHtml />
           </Box>
         </ModalBody>
         <ModalFooter ml={[0, 16]} mr={[0, 16]}>
@@ -88,7 +83,9 @@ const PopupContainer = ({ props }) => {
                     wordWrap: 'break-word',
                   }}
                   colorScheme="teal"
-                  id={`popup-check-${TrackingUtil.generateIdFromTitle(popupData.title)}`}
+                  id={`popup-check-${TrackingUtil.generateIdFromTitle(
+                    popupData.title
+                  )}`}
                 >
                   {buttonTextItem}
                 </Button>

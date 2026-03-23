@@ -32,7 +32,6 @@ import {
 } from '@chakra-ui/react';
 import { eventIntervalList, eventTypeList } from '../../helpers/lists';
 import FileUpload from '../../helpers/components/FileUpload';
-import { CUIAutoComplete } from 'chakra-ui-autocomplete';
 
 const AnnouncementEditorModal = (props) => {
   const {
@@ -453,7 +452,8 @@ const AnnouncementEditorModal = (props) => {
                   </FormControl>
                   <Divider orientation="horizontal" />
                   <FormControl>
-                    <CUIAutoComplete
+                    {/* TODO: Update the Input to autocomplete when chakra is updated to v3 */}
+                    <Input
                       label="Event type"
                       placeholder="Classes, Resources, Others"
                       disableCreateItem={true}
