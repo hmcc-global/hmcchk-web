@@ -13,7 +13,7 @@ import {
   Checkbox,
   Button,
   FormErrorMessage,
-  useToast,
+  createStandaloneToast,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import PopUpGrid from './PopUpGrid';
@@ -21,7 +21,7 @@ import PopupContainer from './PopupContainer';
 import FileUpload from '../../helpers/components/FileUpload';
 
 export default function AdminPopUpContainer(props) {
-  const toast = useToast();
+  const toast = createStandaloneToast();
 
   const { control } = useForm();
 

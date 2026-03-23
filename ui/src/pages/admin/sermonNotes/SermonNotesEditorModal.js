@@ -8,7 +8,7 @@ import {
   Grid,
   Stack,
   Button,
-  useToast,
+  createStandaloneToast,
   Select,
   FormErrorMessage,
   FormHelperText,
@@ -34,7 +34,7 @@ const SermonNotesEditorModal = (props) => {
     setValue,
     formState: { touchedFields },
   } = useForm();
-  const toast = useToast();
+  const toast = createStandaloneToast();
   const history = useHistory();
   const [isDirty, setIsDirty] = useState(false); //indicates unsaved changes
 
