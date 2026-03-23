@@ -1,6 +1,4 @@
-// theme/styles.js
 import { mode } from "@chakra-ui/theme-tools";
-import '@fontsource/dm-sans';
 
 const styles = {
   global: (props) => ({
@@ -21,5 +19,3 @@ const styles = {
 };
 
 export default styles;
-
-

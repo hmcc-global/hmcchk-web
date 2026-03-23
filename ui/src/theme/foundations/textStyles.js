@@ -1,45 +1,96 @@
 const textStyles = {
-    dm_sans: {
-      fontFamily: 'DM Sans',
-      fontWeight: '500',
+  // Display styles (for large hero text)
+  display: {
+    1: {
+      fontFamily:'DMSerifDisplay_Italic',
+      fontSize:{ base: '2.25rem', md: '3.4rem', lg: '5.625rem' },
+      fontWeight:'400',
+      letterSpacing:{ base: '-0.0625rem', lg: '-0.125rem' },
+      // textColor="#272727" referenced from building block hero section
     },
-    dm_sans_bold: {
-      fontFamily: 'DM Serif Display',
+  },
+  
+  // Heading styles
+  heading: {
+    1: {
+      fontFamily:'DMSerifDisplay_Italic',
+      fontSize:{ base: '2.25rem', md: '3.75rem' },
+      fontWeight:'400',
+      // color:"#272727" referenced from Discover Page
+    },
+    2: { 
+      fontFamily: 'DMSerifDisplay_Italic',
+      fontSize: { base: '1.5rem', md: '2.625rem' },
+      fontWeight: "400",
+    },
+    3: {
+      fontFamily: 'DMSerifDisplay_Italic',
+      fontSize:{ base: '1.375rem', lg: '2rem' },
       fontWeight: '400',
-      fontSize: '5rem'
     },
-    // You can add more text styles
-    dm_sans_medium: {
+    4: {
+      italic: { //SermonsSeriesCard Description
+        fontFamily: 'DMSerifDisplay_Italic',
+        fontSize: { base: '1.25rem', md: '1.75rem' },
+        fontWeight: '400',
+      },
+      bold: {
+        fontFamily: 'Manrope',
+        fontSize: { base: '0.875rem', lg: '1.125rem' },
+        fontWeight: '700',
+      }
+    },
+  },
+  
+  // Paragraph styles
+  paragraph: {
+    1: {
+      fontFamily:'Manrope',
+      fontSize:{ base: '0.875rem', lg: '1.25rem' },
+      fontWeight:'400',
+      
+    },
+    2: {
+      fontFamily:'Manrope',
+      fontSize: { base: '0.825rem', md: '1rem' },
+      fontWeight: '400',
+    },
+    3: {
+      fontFamily:'Manrope',
+      fontSize:{ base: '0.875rem', md: '1rem' },
+      fontWeight:'400',
+    },
+  },
+  
+  // Specialized text styles
+  dm_sans: {
+    regular: {
+      fontFamily: 'DM Sans',
+      fontWeight: '400',
+    },
+    medium: {
       fontFamily: 'DM Sans',
       fontWeight: '500',
       fontSize: '1.125rem',
       lineHeight: '1.75',
     },
-    Display_1: {
-
+    bold: {
+      fontFamily: 'DM Sans',
+      fontWeight: '700',
     },
-    Heading_1: {
-
-    },
-    Heading_2: {
-
-    },
-    Heading_3: {
-
-    },
-    Heading_4: {
-
-    },
-    Paragraph_1: {
-
-    },
-    Paragraph_2: {
-
-    },
-    Paragraph_3: {
-      
-    }
-
-  };
+  },
   
-  export default textStyles;
+  dm_serif: {
+    regular: {
+      fontFamily: 'DM Serif Display',
+      fontWeight: '400',
+    },
+    italic: {
+      fontFamily: 'DM Serif Display',
+      fontWeight: '400',
+      fontStyle: 'italic',
+    },
+  },
+};
+
+export default textStyles;
