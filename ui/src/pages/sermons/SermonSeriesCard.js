@@ -33,8 +33,8 @@ const SermonSeriesCard = ({
 
   useEffect(() => {
     if (sermonSeries && allSermons && allSermons.length > 0) {
-      const sermonList = allSermons.filter((sermon) =>
-        sermon.sermonSeries[0].name === sermonSeries
+      const sermonList = allSermons.filter(
+        (sermon) => sermon.sermonSeries[0].name === sermonSeries
       );
 
       if (sermonList && sermonList.length > 0) {
@@ -118,7 +118,8 @@ const SermonSeriesCard = ({
                         ? { base: '0.875rem', md: '1rem' }
                         : { base: '0.75rem', md: '0.875rem' }
                     }
-                    isTruncated
+                    noOfLines={1}
+                    wordBreak="break-all"
                   >
                     {sermonSeriesYear}
                   </Text>
@@ -129,7 +130,8 @@ const SermonSeriesCard = ({
                         ? { base: '0.875rem', md: '1rem' }
                         : { base: '0.75rem', md: '0.875rem' }
                     }
-                    isTruncated
+                    noOfLines={1}
+                    wordBreak="break-all"
                   >
                     {sermonCount + ' Sermons'}
                   </Text>
@@ -142,7 +144,8 @@ const SermonSeriesCard = ({
                     : { base: '0.75rem', md: '0.875rem' }
                 }
                 display={isSermonsPage ? 'none' : 'block'}
-                isTruncated
+                noOfLines={1}
+                wordBreak="break-all"
               >
                 {sermonSpeaker}
               </Text>

@@ -27,7 +27,7 @@ const RelatedSermonCard = ({ sermonData, allSermons }) => {
       <Link
         style={sermonCardStyle}
         to={{
-          pathname: (isOnline ? '/online' : `/sermons/${sermonData.id}`),
+          pathname: isOnline ? '/online' : `/sermons/${sermonData.id}`,
           state: { sermonData: sermonData, allSermons: allSermons },
         }}
       >
@@ -40,21 +40,34 @@ const RelatedSermonCard = ({ sermonData, allSermons }) => {
               <Text
                 fontWeight="600"
                 fontSize={{ base: 'sm', md: 'md' }}
-                isTruncated
+                noOfLines={1}
+                wordBreak="break-all"
               >
                 {sermonData.title}
               </Text>
-              <Text fontSize={{ base: 'xs', md: 'md' }} isTruncated>
+              <Text
+                fontSize={{ base: 'xs', md: 'md' }}
+                noOfLines={1}
+                wordBreak="break-all"
+              >
                 {sermonData.sermonSeries[0].name}
               </Text>
               <Stack
                 spacing={{ base: 1, md: 'auto' }}
                 direction={{ base: 'column', md: 'row' }}
               >
-                <Text fontSize={{ base: 'xs', md: 'md' }} isTruncated>
+                <Text
+                  fontSize={{ base: 'xs', md: 'md' }}
+                  noOfLines={1}
+                  wordBreak="break-all"
+                >
                   {sermonData.speaker[0].name}
                 </Text>
-                <Text fontSize={{ base: 'xs', md: 'md' }} isTruncated>
+                <Text
+                  fontSize={{ base: 'xs', md: 'md' }}
+                  noOfLines={1}
+                  wordBreak="break-all"
+                >
                   {sermonDate}
                 </Text>
               </Stack>
