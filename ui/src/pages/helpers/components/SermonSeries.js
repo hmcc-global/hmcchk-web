@@ -89,7 +89,7 @@ const SermonSeries = () => {
                 <HStack gap="3">
                   <AspectRatio ratio={16 / 9} minW="25%">
                     <Image
-                      borderRadius="10"
+                      borderRadius="10px"
                       src={sermon.sermonSeries[0].image.sourceUrl}
                       objectFit="cover"
                     />

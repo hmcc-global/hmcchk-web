@@ -153,7 +153,7 @@ const DiscoverPage = () => {
                     borderRadius="md"
                     bgSize="cover"
                     h={['11em', '15rem']}
-                    bgPosition="center"
+                    backgroundPosition="center"
                   ></Box>
                 </Box>
 
@@ -163,7 +163,7 @@ const DiscoverPage = () => {
                     borderRadius="md"
                     bgSize="cover"
                     h={['11em', '15rem']}
-                    bgPosition="center"
+                    backgroundPosition="center"
                   ></Box>
                 </Box>
 
@@ -173,7 +173,7 @@ const DiscoverPage = () => {
                     borderRadius="md"
                     bgSize="cover"
                     h={['11em', '15rem']}
-                    bgPosition="center"
+                    backgroundPosition="center"
                   ></Box>
                 </Box>
 
@@ -183,7 +183,7 @@ const DiscoverPage = () => {
                     borderRadius="md"
                     bgSize="cover"
                     h={['11em', '15rem']}
-                    bgPosition="center"
+                    backgroundPosition="center"
                   ></Box>
                 </Box>
                 <Box px={['0.5rem', '0.5rem']}>
@@ -192,7 +192,7 @@ const DiscoverPage = () => {
                     borderRadius="md"
                     bgSize="cover"
                     h={['11em', '15rem']}
-                    bgPosition="center"
+                    backgroundPosition="center"
                   ></Box>
                 </Box>
                 <Box px={['0.5rem', '0.5rem']}>
@@ -202,7 +202,7 @@ const DiscoverPage = () => {
                     bgSize="cover"
                     h={['11em', '15rem']}
                     px="1em"
-                    bgPosition="center"
+                    backgroundPosition="center"
                   ></Box>
                 </Box>
                 <Box px={['0.5rem', '0.5rem']}>
@@ -211,7 +211,7 @@ const DiscoverPage = () => {
                     borderRadius="md"
                     bgSize="cover"
                     h={['11em', '15rem']}
-                    bgPosition="center"
+                    backgroundPosition="center"
                   ></Box>
                 </Box>
               </Slider>

@@ -17,9 +17,9 @@ const GivingPage = (props) => {
     <Container maxW="container.lg">
       <VStack w="100%" gap="3vw" py="3vw">
         <Box
-          borderRadius="20"
+          borderRadius="20px"
           bgImage={`url('${process.env.PUBLIC_URL}/images/giving/Banner.png')`}
-          bgPosition="center"
+          backgroundPosition="center"
           bgSize="cover"
           fontFamily="Manrope"
         >

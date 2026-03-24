@@ -154,7 +154,7 @@ const NewHereForm = ({ isOpen, onClose }) => {
                     color="#3864EB"
                     borderWidth="1px"
                     variant="outline"
-                    borderRadius="62"
+                    borderRadius="62px"
                     width="full"
                     _hover={{
                       bg: '#3864EB',

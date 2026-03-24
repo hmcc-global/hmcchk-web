@@ -7,7 +7,7 @@ const Picture = ({ image, year, text }) => {
         w="100%"
         h="5em"
         bgImage={image}
-        bgPos="center"
+        backgroundPosition="center"
         bgSize="contain"
         bgRepeat="no-repeat"
       ></Box>
@@ -56,7 +56,7 @@ const MissionSection = (props) => {
         <Container
           backgroundColor="rgba(238, 250, 255, 1)"
           maxW="container.lg"
-          borderRadius="7"
+          borderRadius="7px"
         >
           <Box backgroundColor="rgba(238, 250, 255, 1)" px={{ base: 1, md: 3 }}>
             <Heading
@@ -77,7 +77,7 @@ const MissionSection = (props) => {
         <Container
           backgroundColor="rgba(243, 243, 243, 1)"
           maxW="container.lg"
-          borderRadius="7"
+          borderRadius="7px"
         >
           <Box px={{ base: 1, md: 3 }}>
             <Heading
@@ -214,7 +214,7 @@ const MissionSection = (props) => {
           <Box
             maxW="100%"
             backgroundImage={process.env.PUBLIC_URL + 'images/about/ignite.svg'}
-            bgPos="center"
+            backgroundPosition="center"
             bgSize="cover"
             h={{ base: '4em', sm: '6em', md: '10em' }}
             mx={{ base: 1, md: 3 }}

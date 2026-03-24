@@ -35,7 +35,7 @@ const PastorGreeting = (props) => {
         maxW={['100%', '100%', '66%']}
         ratio={16 / 9}
         mx="auto"
-        borderRadius="20"
+        borderRadius="20px"
         borderWidth="1px"
         overflow="hidden"
       >

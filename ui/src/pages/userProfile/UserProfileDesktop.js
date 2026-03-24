@@ -259,7 +259,7 @@ const UserProfileDesktop = (props) => {
 
           <Dialog.Backdrop />
           <Dialog.Positioner>
-            <Dialog.Content borderRadius="20">
+            <Dialog.Content borderRadius="20px">
               <Dialog.CloseTrigger />
               <VStack>
                 <Text
@@ -370,7 +370,7 @@ const UserProfileDesktop = (props) => {
                   mt="8"
                   color="#0628A3"
                   borderColor="#0628A3"
-                  borderRadius="10"
+                  borderRadius="10px"
                   variant="outline"
                 >
                   Change Password
@@ -467,7 +467,7 @@ const UserProfileDesktop = (props) => {
                     </Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       {...register('firstName', { required: true })}
                       invalid={errors['firstName']}
                       placeholder="Please fill in this field"
@@ -477,7 +477,7 @@ const UserProfileDesktop = (props) => {
                     <Field.Label color="#2C5282">Last Name</Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       {...register('lastName', { required: true })}
                       invalid={errors['lastName']}
                       placeholder="Please fill in this field"
@@ -493,7 +493,7 @@ const UserProfileDesktop = (props) => {
                     <NativeSelect.Root>
                       <NativeSelect.Field
                         size="sm"
-                        borderRadius="5"
+                        borderRadius="5px"
                         {...register('countryOfOrigin', { required: true })}
                         invalid={errors['countryOfOrigin']}
                         placeholder="Please fill in this field">
@@ -509,7 +509,7 @@ const UserProfileDesktop = (props) => {
                     <NativeSelect.Root>
                       <NativeSelect.Field
                         size="sm"
-                        borderRadius="5"
+                        borderRadius="5px"
                         {...register('lifestage', { required: true })}
                         invalid={errors['lifestage']}
                         placeholder="Please fill in this field">
@@ -528,14 +528,14 @@ const UserProfileDesktop = (props) => {
                     </Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       {...register('addressFloor')}
                     />
                   </Field.Root>
                   <Field.Root>
                     <Field.Label color="#2C5282">Campus</Field.Label>
                     <NativeSelect.Root>
-                      <NativeSelect.Field size="sm" borderRadius="5" {...register('campus')} pointerEvents="none">
+                      <NativeSelect.Field size="sm" borderRadius="5px" {...register('campus')} pointerEvents="none">
                         {campusList.map((item) => {
                           return <option key={'ca' + item}>{item}</option>;
                         })}
@@ -551,7 +551,7 @@ const UserProfileDesktop = (props) => {
                     </Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       {...register('addressFlat')}
                     />
                   </Field.Root>
@@ -559,7 +559,7 @@ const UserProfileDesktop = (props) => {
                     <Field.Label color="#2C5282">Phone Number</Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       {...register('phoneNumber', { required: true })}
                       invalid={errors['phoneNumber']}
                       placeholder="Please fill in this field"
@@ -573,7 +573,7 @@ const UserProfileDesktop = (props) => {
                     </Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       {...register('addressStreet')}
                     />
                   </Field.Root>
@@ -582,7 +582,7 @@ const UserProfileDesktop = (props) => {
                     <Input
                       size="sm"
                       type="date"
-                      borderRadius="5"
+                      borderRadius="5px"
                       {...register('birthday')}
                     />
                   </Field.Root>
@@ -591,7 +591,7 @@ const UserProfileDesktop = (props) => {
                   <Field.Root flex={1}>
                     <Field.Label color="#2C5282">Address: District</Field.Label>
                     <NativeSelect.Root>
-                      <NativeSelect.Field size="sm" borderRadius="5" {...register('addressDistrict')}>
+                      <NativeSelect.Field size="sm" borderRadius="5px" {...register('addressDistrict')}>
                         {districtList.map((item) => {
                           return <option key={'di' + item}>{item}</option>;
                         })}
@@ -605,7 +605,7 @@ const UserProfileDesktop = (props) => {
                   <Field.Root flex={1}>
                     <Field.Label color="#2C5282">Address: Region</Field.Label>
                     <NativeSelect.Root>
-                      <NativeSelect.Field size="sm" borderRadius="5" {...register('addressRegion')}>
+                      <NativeSelect.Field size="sm" borderRadius="5px" {...register('addressRegion')}>
                         {regionList.map((item) => {
                           return <option key={'re' + item}>{item}</option>;
                         })}
@@ -621,7 +621,7 @@ const UserProfileDesktop = (props) => {
                 mt="5%"
                 color="#0628A3"
                 borderColor="#0628A3"
-                borderRadius="10"
+                borderRadius="10px"
                 variant="outline"
                 type="submit"
               >
@@ -633,7 +633,7 @@ const UserProfileDesktop = (props) => {
                 <Field.Root>
                   <Field.Label color="#2C5282">LIFE Group</Field.Label>
                   <NativeSelect.Root>
-                    <NativeSelect.Field size="sm" borderRadius="5" {...register('lifeGroup')}>
+                    <NativeSelect.Field size="sm" borderRadius="5px" {...register('lifeGroup')}>
                       {lifegroupList.map((item) => {
                         return <option key={'lg' + item}>{item}</option>;
                       })}
@@ -644,7 +644,7 @@ const UserProfileDesktop = (props) => {
                 <Field.Root>
                   <Field.Label color="#2C5282">Ministry Team</Field.Label>
                   <NativeSelect.Root>
-                    <NativeSelect.Field size="sm" borderRadius="5" {...register('ministryTeam')}>
+                    <NativeSelect.Field size="sm" borderRadius="5px" {...register('ministryTeam')}>
                       {ministryTeamList.map((item) => {
                         return <option key={'mt' + item}>{item}</option>;
                       })}
@@ -686,7 +686,7 @@ const UserProfileDesktop = (props) => {
                 <Stack
                   direction="row"
                   border="1px solid #E2E8F0"
-                  borderRadius="6"
+                  borderRadius="6px"
                   p="4%"
                   gap="4%"
                 >
@@ -696,7 +696,7 @@ const UserProfileDesktop = (props) => {
                       <Input
                         size="sm"
                         type="date"
-                        borderRadius="5"
+                        borderRadius="5px"
                         {...register('membershipRecognitionDate')}
                         readOnly
                       />
@@ -710,7 +710,7 @@ const UserProfileDesktop = (props) => {
                       <Input
                         size="sm"
                         type="date"
-                        borderRadius="5"
+                        borderRadius="5px"
                         {...register('membershipRecommitmentDate')}
                         readOnly
                       />
@@ -745,7 +745,7 @@ const UserProfileDesktop = (props) => {
                 <Stack
                   direction="row"
                   border="1px solid #E2E8F0"
-                  borderRadius="6"
+                  borderRadius="6px"
                   p="4%"
                   gap="4%"
                 >
@@ -753,7 +753,7 @@ const UserProfileDesktop = (props) => {
                     <Field.Label color="#2C5282">Baptism Place</Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       {...register('baptismPlace')}
                       readOnly
                     />
@@ -764,7 +764,7 @@ const UserProfileDesktop = (props) => {
                       <Input
                         size="sm"
                         type="date"
-                        borderRadius="5"
+                        borderRadius="5px"
                         {...register('baptismDate')}
                         readOnly
                       />
@@ -777,7 +777,7 @@ const UserProfileDesktop = (props) => {
                 mt="5%"
                 color="#0628A3"
                 borderColor="#0628A3"
-                borderRadius="10"
+                borderRadius="10px"
                 variant="outline"
                 type="submit"
               >

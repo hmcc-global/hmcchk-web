@@ -24,7 +24,7 @@ const SaturateContainer = () => {
         <Box
           display="flex"
           bgImage={process.env.PUBLIC_URL + '/images/saturate/Saturate_bg.svg'}
-          bgPosition="center"
+          backgroundPosition="center"
           bgSize="cover"
           textAlign="center"
           justifyContent="center"

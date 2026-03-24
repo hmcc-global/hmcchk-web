@@ -177,7 +177,7 @@ const EventCard = (props) => {
           </Stack>
           <Box
             bg="#F9F9F9"
-            borderRadius="20"
+            borderRadius="20px"
             mt={['2', '5']}
             p={4}
             display="flex"
@@ -230,7 +230,7 @@ const EventCard = (props) => {
 
           <Dialog.Backdrop />
           <Dialog.Positioner>
-            <Dialog.Content borderRadius="20" justifyContent="center" p={[0, 5]}>
+            <Dialog.Content borderRadius="20px" justifyContent="center" p={[0, 5]}>
               {isMobile ? (
                 <Center mt={4} mb={2}>
                   <Box w={10} h={1} bgColor="#A8A8A8" borderRadius={20} />
@@ -241,7 +241,7 @@ const EventCard = (props) => {
                   right="0"
                   top="-10"
                   bgColor="white"
-                  borderRadius="20"
+                  borderRadius="20px"
                 />
               )}
               <AspectRatio ratio={16 / 9} m={[2, 0]}>
@@ -328,7 +328,7 @@ const EventCard = (props) => {
                     </Text>
                   )}
                 </Box>
-                <Box bg="#F9F9F9" borderRadius="20" mt={[2, 5]} p={4}>
+                <Box bg="#F9F9F9" borderRadius="20px" mt={[2, 5]} p={4}>
                   <Text fontSize={['xs', 'md']} w="100%">
                     <ReactMarkdown children={eventData.description} skipHtml />
                   </Text>

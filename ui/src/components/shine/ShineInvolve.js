@@ -237,7 +237,7 @@ const ShineInvolve = (props) => {
           </Stack>
           <Box
             bg="#EBF0F9"
-            borderRadius="10"
+            borderRadius="10px"
             mt={['2', '5']}
             display="flex"
             flexDirection="row"
@@ -294,7 +294,7 @@ const ShineInvolve = (props) => {
 
             <Dialog.Backdrop />
             <Dialog.Positioner>
-              <Dialog.Content borderRadius="20" justifyContent="center" p={[0, 5]}>
+              <Dialog.Content borderRadius="20px" justifyContent="center" p={[0, 5]}>
                 <Center mt={4} mb={2}>
                   <Box w={10} h={1} bgColor="#A8A8A8" borderRadius={20} />
                 </Center>
@@ -368,7 +368,7 @@ const ShineInvolve = (props) => {
                       </Text>
                     )}
                   </Box>
-                  <Box bg="#F9F9F9" borderRadius="20" mt={[2, 5]} p={4}>
+                  <Box bg="#F9F9F9" borderRadius="20px" mt={[2, 5]} p={4}>
                     <Text fontSize={['xs', 'md']} w="100%">
                       <ReactMarkdown
         

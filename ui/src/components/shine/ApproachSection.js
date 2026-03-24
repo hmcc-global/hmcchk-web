@@ -81,7 +81,7 @@ const ApproachSection = () => {
           <Box
             key={value.title}
             bgImage={`url(${value.bg})`} // Use bgImage instead of bg
-            bgPosition="center"
+            backgroundPosition="center"
             bgSize="cover"
             bgRepeat="no-repeat"
             borderRadius={{ base: '1.5rem', md: '2rem' }} // Adjusted for rectangles

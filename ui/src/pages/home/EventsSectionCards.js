@@ -184,7 +184,7 @@ const EventsSectionCard = (props) => {
           <Dialog.Backdrop />
           <Dialog.Positioner>
             <Dialog.Content
-              borderRadius="20"
+              borderRadius="20px"
               justifyContent="center"
               p={[0, 5]}
             >
@@ -198,7 +198,7 @@ const EventsSectionCard = (props) => {
                   right="0"
                   top="-10"
                   bgColor="white"
-                  borderRadius="20"
+                  borderRadius="20px"
                 />
               )}
               <AspectRatio ratio={16 / 9} m={[2, 0]}>
@@ -297,7 +297,7 @@ const EventsSectionCard = (props) => {
                     </Text>
                   )}
                 </Box>
-                <Box bg="#F9F9F9" borderRadius="20" mt={[2, 5]} p={4}>
+                <Box bg="#F9F9F9" borderRadius="20px" mt={[2, 5]} p={4}>
                   <Text fontSize={['xs', 'md']} w="100%">
                     <ReactMarkdown children={event.description} skipHtml />
                   </Text>
@@ -360,7 +360,7 @@ const EventsSectionCard = (props) => {
       </Dialog.Root>
       {/* <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent borderRadius="20" fontFamily="Manrope">
+        <ModalContent borderRadius="20px" fontFamily="Manrope">
           <AspectRatio width="100%" ratio={16 / 9}>
             <Image
               borderTopLeftRadius="20"

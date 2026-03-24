@@ -57,13 +57,13 @@ const LinkCard = (props) => {
             direction="column"
             justifyContent={['none', 'space-around', 'space-between']}
             border="1px solid #4A6EEB"
-            borderRadius="5"
+            borderRadius="5px"
             backgroundImage={[
               process.env.PUBLIC_URL + '/images/home/' + props.mobileImage,
               process.env.PUBLIC_URL + '/images/home/' + props.mobileImage,
               process.env.PUBLIC_URL + '/images/home/' + props.desktopImage,
             ]}
-            bgPosition={props.bgPosition}
+            backgroundPosition={props.bgPosition}
             bgRepeat="no-repeat"
             bgSize="contain"
             minH={['4em', '5em', '6em', '10.75em']}

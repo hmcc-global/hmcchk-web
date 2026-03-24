@@ -17,9 +17,9 @@ const ExperienceHmcc = (props) => {
         <Box
           flex={1}
           borderWidth="1px"
-          borderRadius="20"
+          borderRadius="20px"
           bgImage={`linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${process.env.PUBLIC_URL}/images/connect/sunday-celebration.JPG')`}
-          bgPosition="center"
+          backgroundPosition="center"
           bgSize="cover"
           shadow="lg"
           color="white"
@@ -68,9 +68,9 @@ const ExperienceHmcc = (props) => {
         <Box
           flex={1}
           borderWidth="1px"
-          borderRadius="20"
+          borderRadius="20px"
           bgImage={`linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${process.env.PUBLIC_URL}/images/connect/upcoming-events.jpg')`}
-          bgPosition="center"
+          backgroundPosition="center"
           bgSize="cover"
           shadow="lg"
           color="white"

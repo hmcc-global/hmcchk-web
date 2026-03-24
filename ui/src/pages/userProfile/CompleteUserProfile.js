@@ -160,7 +160,7 @@ const CompleteUserProfileContainer = (props) => {
         <Portal>
           <Dialog.Backdrop />
           <Dialog.Positioner>
-            <Dialog.Content borderRadius="20">
+            <Dialog.Content borderRadius="20px">
               <Dialog.CloseTrigger />
               <Dialog.Header>
                 <Center>
@@ -182,7 +182,7 @@ const CompleteUserProfileContainer = (props) => {
                   size="sm"
                   color="#FFFFFF"
                   background="#0628A3"
-                  borderRadius="10"
+                  borderRadius="10px"
                   variant="solid"
                   w="100%"
                   _hover={{
@@ -290,7 +290,7 @@ const CompleteUserProfileContainer = (props) => {
                     </Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       {...registerA('firstName', formValidation)}
                       invalid={errorsA['firstName']}
                       placeholder="Please fill in this field"
@@ -305,7 +305,7 @@ const CompleteUserProfileContainer = (props) => {
                     </Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       {...registerA('lastName', formValidation)}
                       invalid={errorsA['lastName']}
                       placeholder="Please fill in this field"
@@ -323,7 +323,7 @@ const CompleteUserProfileContainer = (props) => {
                     <Input
                       type="date"
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       {...registerA('birthday', formValidation)}
                       invalid={errorsA['birthday']}
                       placeholder="Please fill in this field"
@@ -339,7 +339,7 @@ const CompleteUserProfileContainer = (props) => {
                     <NativeSelect.Root>
                       <NativeSelect.Field
                         size="sm"
-                        borderRadius="5"
+                        borderRadius="5px"
                         {...registerA('countryOfOrigin', formValidation)}
                         invalid={errorsA['countryOfOrigin']}
                         placeholder="Please fill in this field"
@@ -363,7 +363,7 @@ const CompleteUserProfileContainer = (props) => {
                     <NativeSelect.Root>
                       <NativeSelect.Field
                         size="sm"
-                        borderRadius="5"
+                        borderRadius="5px"
                         {...registerA('lifestage', formValidation)}
                         invalid={errorsA['lifestage']}
                         placeholder="Please fill in this field"
@@ -385,7 +385,7 @@ const CompleteUserProfileContainer = (props) => {
                     <NativeSelect.Root>
                       <NativeSelect.Field
                         size="sm"
-                        borderRadius="5"
+                        borderRadius="5px"
                         {...registerA('campus', formValidation)}
                         invalid={errorsA['campus']}
                         placeholder="Please fill in this field"
@@ -405,7 +405,7 @@ const CompleteUserProfileContainer = (props) => {
                     </Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       {...registerA('phoneNumber')}
                     />
                   </Field.Root>
@@ -418,7 +418,7 @@ const CompleteUserProfileContainer = (props) => {
                     </Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       {...registerA('addressFloor')}
                       placeholder="This field is optional"
                     />
@@ -429,7 +429,7 @@ const CompleteUserProfileContainer = (props) => {
                     </Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       {...registerA('addressFlat')}
                       placeholder="This field is optional"
                     />
@@ -442,7 +442,7 @@ const CompleteUserProfileContainer = (props) => {
                     </Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       {...registerA('addressStreet')}
                       placeholder="This field is optional"
                     />
@@ -454,7 +454,7 @@ const CompleteUserProfileContainer = (props) => {
                     <NativeSelect.Root>
                       <NativeSelect.Field
                         size="sm"
-                        borderRadius="5"
+                        borderRadius="5px"
                         {...registerA('addressDistrict')}
                         placeholder="This field is optional"
                       >
@@ -472,7 +472,7 @@ const CompleteUserProfileContainer = (props) => {
                     <NativeSelect.Root>
                       <NativeSelect.Field
                         size="sm"
-                        borderRadius="5"
+                        borderRadius="5px"
                         {...registerA('addressRegion')}
                         placeholder="This field is optional"
                       >
@@ -491,7 +491,7 @@ const CompleteUserProfileContainer = (props) => {
                     mt="5%"
                     color="#0628A3"
                     borderColor="#0628A3"
-                    borderRadius="10"
+                    borderRadius="10px"
                     variant="outline"
                     minW={['10%', '20%']}
                     type="submit"
@@ -516,7 +516,7 @@ const CompleteUserProfileContainer = (props) => {
                     <NativeSelect.Root>
                       <NativeSelect.Field
                         size="sm"
-                        borderRadius="5"
+                        borderRadius="5px"
                         {...registerB('lifeGroup', formValidation)}
                         invalid={errorsB['lifeGroup']}
                         placeholder="Please fill in this field"
@@ -541,7 +541,7 @@ const CompleteUserProfileContainer = (props) => {
                     <NativeSelect.Root>
                       <NativeSelect.Field
                         size="sm"
-                        borderRadius="5"
+                        borderRadius="5px"
                         {...registerB('ministryTeam', formValidation)}
                         invalid={errorsB['ministryTeam']}
                         placeholder="Please fill in this field"
@@ -601,7 +601,7 @@ const CompleteUserProfileContainer = (props) => {
                       direction={['column', 'row']}
                       gap="4%"
                       border="1px solid #E2E8F0"
-                      borderRadius="6"
+                      borderRadius="6px"
                       p={['5%', '3%']}
                       pt={['5%', '2%']}
                       flex={[1, 4]}
@@ -613,7 +613,7 @@ const CompleteUserProfileContainer = (props) => {
                         <Input
                           size="sm"
                           type="date"
-                          borderRadius="5"
+                          borderRadius="5px"
                           {...registerB('membershipRecognitionDate')}
                           placeholder="This field is optional"
                         />
@@ -625,7 +625,7 @@ const CompleteUserProfileContainer = (props) => {
                         <Input
                           size="sm"
                           type="date"
-                          borderRadius="5"
+                          borderRadius="5px"
                           {...registerB('membershipRecommitmentDate')}
                           placeholder="Please fill in this field"
                         />
@@ -675,7 +675,7 @@ const CompleteUserProfileContainer = (props) => {
                       direction={['column', 'row']}
                       gap="4%"
                       border="1px solid #E2E8F0"
-                      borderRadius="6"
+                      borderRadius="6px"
                       p={['5%', '3%']}
                       pt={['5%', '2%']}
                       flex={[1, 4]}
@@ -684,7 +684,7 @@ const CompleteUserProfileContainer = (props) => {
                         <Field.Label color="#2C5282">Baptism Place</Field.Label>
                         <Input
                           size="sm"
-                          borderRadius="5"
+                          borderRadius="5px"
                           {...registerB('baptismPlace')}
                           placeholder="Optional but please fill in if you can!"
                         />
@@ -699,7 +699,7 @@ const CompleteUserProfileContainer = (props) => {
                         <Input
                           size="sm"
                           type="date"
-                          borderRadius="5"
+                          borderRadius="5px"
                           {...registerB('baptismDate')}
                         />
                         <Field.HelperText>
@@ -716,7 +716,7 @@ const CompleteUserProfileContainer = (props) => {
                     mt="1"
                     color="#0628A3"
                     borderColor="#0628A3"
-                    borderRadius="10"
+                    borderRadius="10px"
                     variant="outline"
                     minW={['50%', '20%']}
                     onClick={() => {
@@ -731,7 +731,7 @@ const CompleteUserProfileContainer = (props) => {
                     mt="1"
                     color="#FFFFFF"
                     background="#0628A3"
-                    borderRadius="10"
+                    borderRadius="10px"
                     variant="solid"
                     minW={['50%', '20%']}
                     type="submit"
@@ -755,7 +755,7 @@ const CompleteUserProfileContainer = (props) => {
                     </Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       readOnly
                       {...reviewRegister('firstName')}
                     />
@@ -764,7 +764,7 @@ const CompleteUserProfileContainer = (props) => {
                     <Field.Label color={formLabelColor}>Last Name</Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       readOnly
                       {...reviewRegister('lastName')}
                     />
@@ -776,7 +776,7 @@ const CompleteUserProfileContainer = (props) => {
                     <Input
                       type="date"
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       readOnly
                       {...reviewRegister('birthday')}
                     />
@@ -788,7 +788,7 @@ const CompleteUserProfileContainer = (props) => {
                     <NativeSelect.Root>
                       <NativeSelect.Field
                         size="sm"
-                        borderRadius="5"
+                        borderRadius="5px"
                         pointerEvents="none"
                         {...reviewRegister('countryOfOrigin')}
                       >
@@ -806,7 +806,7 @@ const CompleteUserProfileContainer = (props) => {
                     <NativeSelect.Root>
                       <NativeSelect.Field
                         size="sm"
-                        borderRadius="5"
+                        borderRadius="5px"
                         pointerEvents="none"
                         {...reviewRegister('lifestage')}
                       >
@@ -822,7 +822,7 @@ const CompleteUserProfileContainer = (props) => {
                     <NativeSelect.Root>
                       <NativeSelect.Field
                         size="sm"
-                        borderRadius="5"
+                        borderRadius="5px"
                         pointerEvents="none"
                         {...reviewRegister('campus')}
                       >
@@ -841,7 +841,7 @@ const CompleteUserProfileContainer = (props) => {
                     </Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       readOnly
                       {...reviewRegister('phoneNumber')}
                     />
@@ -855,7 +855,7 @@ const CompleteUserProfileContainer = (props) => {
                     </Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       readOnly
                       {...reviewRegister('addressFloor')}
                     />
@@ -866,7 +866,7 @@ const CompleteUserProfileContainer = (props) => {
                     </Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       readOnly
                       {...reviewRegister('addressFlat')}
                     />
@@ -879,7 +879,7 @@ const CompleteUserProfileContainer = (props) => {
                     </Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       readOnly
                       {...reviewRegister('addressStreet')}
                     />
@@ -891,7 +891,7 @@ const CompleteUserProfileContainer = (props) => {
                     <NativeSelect.Root>
                       <NativeSelect.Field
                         size="sm"
-                        borderRadius="5"
+                        borderRadius="5px"
                         pointerEvents="none"
                         {...reviewRegister('addressDistrict')}
                       >
@@ -909,7 +909,7 @@ const CompleteUserProfileContainer = (props) => {
                     <NativeSelect.Root>
                       <NativeSelect.Field
                         size="sm"
-                        borderRadius="5"
+                        borderRadius="5px"
                         pointerEvents="none"
                         {...reviewRegister('addressRegion')}
                       >
@@ -928,7 +928,7 @@ const CompleteUserProfileContainer = (props) => {
                     <NativeSelect.Root>
                       <NativeSelect.Field
                         size="sm"
-                        borderRadius="5"
+                        borderRadius="5px"
                         pointerEvents="none"
                         {...reviewRegister('lifeGroup')}
                       >
@@ -949,7 +949,7 @@ const CompleteUserProfileContainer = (props) => {
                     <NativeSelect.Root>
                       <NativeSelect.Field
                         size="sm"
-                        borderRadius="5"
+                        borderRadius="5px"
                         pointerEvents="none"
                         {...reviewRegister('ministryTeam')}
                       >
@@ -1006,7 +1006,7 @@ const CompleteUserProfileContainer = (props) => {
                       direction={['column', 'row']}
                       gap="4%"
                       border="1px solid #E2E8F0"
-                      borderRadius="6"
+                      borderRadius="6px"
                       p={['5%', '3%']}
                       pt={['5%', '2%']}
                       flex={[1, 4]}
@@ -1018,7 +1018,7 @@ const CompleteUserProfileContainer = (props) => {
                         <Input
                           size="sm"
                           type="date"
-                          borderRadius="5"
+                          borderRadius="5px"
                           readOnly
                           {...reviewRegister('membershipRecognitionDate')}
                         />
@@ -1030,7 +1030,7 @@ const CompleteUserProfileContainer = (props) => {
                         <Input
                           size="sm"
                           type="date"
-                          borderRadius="5"
+                          borderRadius="5px"
                           readOnly
                           {...reviewRegister('membershipRecommitmentDate')}
                         />
@@ -1078,7 +1078,7 @@ const CompleteUserProfileContainer = (props) => {
                       direction={['column', 'row']}
                       gap="4%"
                       border="1px solid #E2E8F0"
-                      borderRadius="6"
+                      borderRadius="6px"
                       p={['5%', '3%']}
                       pt={['5%', '2%']}
                       flex={[1, 4]}
@@ -1087,7 +1087,7 @@ const CompleteUserProfileContainer = (props) => {
                         <Field.Label color="#2C5282">Baptism Place</Field.Label>
                         <Input
                           size="sm"
-                          borderRadius="5"
+                          borderRadius="5px"
                           readOnly
                           {...reviewRegister('baptismPlace')}
                         />
@@ -1102,7 +1102,7 @@ const CompleteUserProfileContainer = (props) => {
                         <Input
                           size="sm"
                           type="date"
-                          borderRadius="5"
+                          borderRadius="5px"
                           readOnly
                           {...reviewRegister('baptismDate')}
                         />
@@ -1120,7 +1120,7 @@ const CompleteUserProfileContainer = (props) => {
                     mt="1"
                     color="#0628A3"
                     borderColor="#0628A3"
-                    borderRadius="10"
+                    borderRadius="10px"
                     variant="outline"
                     minW={['50%', '20%']}
                     onClick={() => {
@@ -1135,7 +1135,7 @@ const CompleteUserProfileContainer = (props) => {
                     mt="1"
                     color="#FFFFFF"
                     background="#0628A3"
-                    borderRadius="10"
+                    borderRadius="10px"
                     variant="solid"
                     minW={['50%', '20%']}
                     _hover={{

@@ -39,7 +39,7 @@ const LifeGroups = (props) => {
         ratio={16 / 9}
         mb={10}
         mx="auto"
-        borderRadius="20"
+        borderRadius="20px"
         borderWidth="1px"
         overflow="hidden"
       >

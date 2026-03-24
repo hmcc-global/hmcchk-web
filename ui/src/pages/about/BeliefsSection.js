@@ -4,7 +4,7 @@ const BeliefsCard = ({ head, body }) => {
   return (
     <Box
       border="1px solid #CDDCE0"
-      borderRadius="7"
+      borderRadius="7px"
       shadow="lg"
       bg="#EEFAFF"
       px="8"
@@ -76,7 +76,7 @@ const BeliefsSection = (props) => {
           fontFamily="Manrope"
         >
           <Accordion.Root multiple>
-            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5" value='item-0'>
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5px" value='item-0'>
               <h2>
                 <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">
@@ -90,7 +90,7 @@ const BeliefsSection = (props) => {
                 </Accordion.ItemBody></Accordion.ItemContent>
             </Accordion.Item>
 
-            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5" value='item-1'>
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5px" value='item-1'>
               <h2>
                 <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">
@@ -103,7 +103,7 @@ const BeliefsSection = (props) => {
                   <Text color="black">{blurb.body[1]}</Text>
                 </Accordion.ItemBody></Accordion.ItemContent>
             </Accordion.Item>
-            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5" value='item-2'>
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5px" value='item-2'>
               <h2>
                 <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">
@@ -116,7 +116,7 @@ const BeliefsSection = (props) => {
                   <Text color="black">{blurb.body[2]}</Text>
                 </Accordion.ItemBody></Accordion.ItemContent>
             </Accordion.Item>
-            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5" value='item-3'>
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5px" value='item-3'>
               <h2>
                 <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">
@@ -129,7 +129,7 @@ const BeliefsSection = (props) => {
                   <Text color="black">{blurb.body[3]}</Text>
                 </Accordion.ItemBody></Accordion.ItemContent>
             </Accordion.Item>
-            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5" value='item-4'>
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5px" value='item-4'>
               <h2>
                 <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">
@@ -142,7 +142,7 @@ const BeliefsSection = (props) => {
                   <Text color="black">{blurb.body[4]}</Text>
                 </Accordion.ItemBody></Accordion.ItemContent>
             </Accordion.Item>
-            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5" value='item-5'>
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5px" value='item-5'>
               <h2>
                 <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">
@@ -155,7 +155,7 @@ const BeliefsSection = (props) => {
                   <Text color="black">{blurb.body[5]}</Text>
                 </Accordion.ItemBody></Accordion.ItemContent>
             </Accordion.Item>
-            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5" value='item-6'>
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5px" value='item-6'>
               <h2>
                 <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">
@@ -168,7 +168,7 @@ const BeliefsSection = (props) => {
                   <Text color="black">{blurb.body[6]}</Text>
                 </Accordion.ItemBody></Accordion.ItemContent>
             </Accordion.Item>
-            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5" value='item-7'>
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5px" value='item-7'>
               <h2>
                 <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">
@@ -181,7 +181,7 @@ const BeliefsSection = (props) => {
                   <Text color="black">{blurb.body[7]}</Text>
                 </Accordion.ItemBody></Accordion.ItemContent>
             </Accordion.Item>
-            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5" value='item-8'>
+            <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5px" value='item-8'>
               <h2>
                 <Accordion.ItemTrigger>
                   <Box flex="1" textAlign="left" fontWeight="bold">

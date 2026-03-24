@@ -357,7 +357,7 @@ const StrategySection = (props) => {
       </Box>
       {/* TODO-YY: Remove when confirmed */}
       {/* <Flex
-            borderRadius="7"
+            borderRadius="7px"
             shadow="lg"
             px={[9, '13.3%']}
             py={[9, 6]}
@@ -365,7 +365,7 @@ const StrategySection = (props) => {
             minH={['25em', '18em']}
             w={['full']}
             bgImage={`${process.env.PUBLIC_URL}/images/about/strat-gather.jpeg`}
-            bgPos="center"
+            backgroundPosition="center"
             bgSize="cover"
           >
             <Box m="auto">
@@ -396,7 +396,7 @@ const StrategySection = (props) => {
             </Box>
           </Flex>
           <Flex
-            borderRadius="7"
+            borderRadius="7px"
             shadow="lg"
             px={[9, '13.3%']}
             py={[9, 6]}
@@ -404,7 +404,7 @@ const StrategySection = (props) => {
             minH={['25em', '23em']}
             w={['full']}
             bgImage={`${process.env.PUBLIC_URL}/images/about/strat-grow.jpeg`}
-            bgPos="center"
+            backgroundPosition="center"
             bgSize="cover"
           >
             <Box m="auto">
@@ -435,7 +435,7 @@ const StrategySection = (props) => {
             </Box>
           </Flex>
           <Flex
-            borderRadius="7"
+            borderRadius="7px"
             shadow="lg"
             px={[9, '13.3%']}
             py={[9, 6]}
@@ -443,7 +443,7 @@ const StrategySection = (props) => {
             minH={['25em', '23em']}
             w={['full']}
             bgImage={`${process.env.PUBLIC_URL}/images/about/strat-go.jpeg`}
-            bgPos="center"
+            backgroundPosition="center"
             bgSize="cover"
           >
             <Box m="auto">

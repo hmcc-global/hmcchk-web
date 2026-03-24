@@ -15,7 +15,7 @@ const SaturateVisionSection = () => {
         process.env.PUBLIC_URL + '/images/home/saturate-bg.png'
       })`}
       bgSize="cover"
-      bgPosition="center"
+      backgroundPosition="center"
     >
       <Container
         maxW="container.lg"

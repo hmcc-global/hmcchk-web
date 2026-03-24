@@ -158,7 +158,7 @@ const SermonSeriesCard = ({
 
           <Dialog.Backdrop />
           <Dialog.Positioner>
-            <Dialog.Content borderRadius="20" p={'1rem'}>
+            <Dialog.Content borderRadius="20px" p={'1rem'}>
               <Dialog.CloseTrigger />
               <Dialog.Header>
                 <Text

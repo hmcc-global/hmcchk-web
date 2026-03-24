@@ -158,7 +158,7 @@ const HeroSection = () => {
                           }
                           borderRadius="2xl"
                           bgSize="cover"
-                          bgPosition="center"
+                          backgroundPosition="center"
                           height="8em"
                           transition="transform 0.3s ease"
                           _hover={{ transform: 'scale(1.02)' }}
@@ -256,7 +256,7 @@ const HeroSection = () => {
                       }
                       borderRadius="2xl"
                       bgSize="cover"
-                      bgPosition="center"
+                      backgroundPosition="center"
                       height="8em"
                       transition="transform 0.3s ease"
                       _hover={{ transform: 'scale(1.02)' }}

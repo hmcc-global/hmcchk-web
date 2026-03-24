@@ -39,7 +39,7 @@ const SaturateVision = () => {
             bgImage={
               process.env.PUBLIC_URL + '/images/saturate/Saturate_vision_bg.png'
             }
-            bgPosition="center"
+            backgroundPosition="center"
             bgSize="cover"
           >
             <Flex flexDirection="column" p={10} alignItems="left">
@@ -338,7 +338,7 @@ const SaturateVision = () => {
             bgImage={
               process.env.PUBLIC_URL + '/images/saturate/Saturate_vision_bg.png'
             }
-            bgPosition="center"
+            backgroundPosition="center"
             bgSize="cover"
           >
             <Grid padding={20} templateColumns="1fr 3fr" gap={3}>

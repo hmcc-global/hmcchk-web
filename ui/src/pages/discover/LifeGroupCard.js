@@ -11,7 +11,7 @@ const LifeGroupCard = (props) => {
       px={{ base: '1rem', lg: '1.5rem' }}
       borderRadius="1.25rem"
       bgImage={`linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${process.env.PUBLIC_URL}/${imgPath}')`}
-      bgPosition="center"
+      backgroundPosition="center"
       bgSize="cover"
       shadow="lg"
       color="#fff"

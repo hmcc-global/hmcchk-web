@@ -61,7 +61,7 @@ const ExperienceBiblicalCommunity = () => {
         >
           <Box
             bgSize="contain"
-            bgPos="10% 10%"
+            backgroundPosition="10% 10%"
             bgRepeat="no-repeat"
             bgImage={
               isMobile
@@ -78,7 +78,7 @@ const ExperienceBiblicalCommunity = () => {
                       w="100%"
                       position="absolute"
                       h="122%"
-                      bgPos={['60% 95%', '21% 95%']}
+                      backgroundPosition={['60% 95%', '21% 95%']}
                       bgSize={['40%', '20%']}
                       bgRepeat="no-repeat"
                       bgImage={`url('${process.env.PUBLIC_URL}/images/home/vector-orange-1.svg')`}
@@ -104,7 +104,7 @@ const ExperienceBiblicalCommunity = () => {
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
-                        bgPosition="center"
+                        backgroundPosition="center"
                       ></Box>
                     </Box>
 
@@ -114,7 +114,7 @@ const ExperienceBiblicalCommunity = () => {
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
-                        bgPosition="center"
+                        backgroundPosition="center"
                       ></Box>
                     </Box>
 
@@ -124,7 +124,7 @@ const ExperienceBiblicalCommunity = () => {
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
-                        bgPosition="center"
+                        backgroundPosition="center"
                       ></Box>
                     </Box>
 
@@ -134,7 +134,7 @@ const ExperienceBiblicalCommunity = () => {
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
-                        bgPosition="center"
+                        backgroundPosition="center"
                       ></Box>
                     </Box>
                     <Box px={['0.5em', '1em']}>
@@ -143,7 +143,7 @@ const ExperienceBiblicalCommunity = () => {
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
-                        bgPosition="center"
+                        backgroundPosition="center"
                       ></Box>
                     </Box>
                     <Box px={['0.5em', '1em']}>
@@ -153,7 +153,7 @@ const ExperienceBiblicalCommunity = () => {
                         bgSize="cover"
                         h={['11em', '23em']}
                         px="1em"
-                        bgPosition="center"
+                        backgroundPosition="center"
                       ></Box>
                     </Box>
                     <Box px={['0.5em', '1em']}>
@@ -162,7 +162,7 @@ const ExperienceBiblicalCommunity = () => {
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
-                        bgPosition="center"
+                        backgroundPosition="center"
                       ></Box>
                     </Box>
                   </Slider>

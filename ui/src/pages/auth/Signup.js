@@ -151,7 +151,7 @@ const Signup = (props) => {
 
           <Dialog.Backdrop />
           <Dialog.Positioner>
-            <Dialog.Content borderRadius="20">
+            <Dialog.Content borderRadius="20px">
               <VStack>
                 <Text
                   color="#79B71A"

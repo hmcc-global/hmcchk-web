@@ -22,10 +22,10 @@ const VisionMissionCard = ({ title, message }) => {
         h={['12em', '7em']}
         minH="5em"
         borderWidth="1px"
-        borderRadius="7"
+        borderRadius="7px"
         shadow="md"
         bgImage={`url('${process.env.PUBLIC_URL}/images/about/water.jpeg')`}
-        bgPosition="center"
+        backgroundPosition="center"
         bgSize="cover"
         display="flex"
         flexDir="column"
@@ -75,10 +75,10 @@ const VisionMissionSection = (props) => {
           <Box
             w="100%"
             borderWidth="1px"
-            borderRadius="7"
+            borderRadius="7px"
             shadow="md"
             bgImage={`url('${process.env.PUBLIC_URL}/images/home/saturate-bg.png')`}
-            bgPosition="center"
+            backgroundPosition="center"
             bgSize="cover"
             display="flex"
             flexDir="column"

@@ -19,7 +19,7 @@ const PopupContainer = ({ props }) => {
 
         <Dialog.Backdrop />
         <Dialog.Positioner>
-          <Dialog.Content borderRadius="20">
+          <Dialog.Content borderRadius="20px">
             {popupData.image && (
               <AspectRatio mb="5" width="100%" ratio={16 / 9}>
                 <Image

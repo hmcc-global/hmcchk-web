@@ -143,7 +143,7 @@ const LifeGroupPage = () => {
                 src={`${process.env.PUBLIC_URL}/images/connect/life-design.png`}
                 display={{ base: 'none', xl: 'block' }}
               />
-              <AspectRatio ratio={16 / 9} borderRadius="20" w={'100%'}>
+              <AspectRatio ratio={16 / 9} borderRadius="20px" w={'100%'}>
                 <iframe
                   src="https://www.youtube.com/embed/tainVHwAWt0"
                   title="YouTube video player"

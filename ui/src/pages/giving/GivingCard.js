@@ -135,7 +135,7 @@ export const GivingCard = (cardinfo) => {
       borderRadius="lg"
       my={['0.6em', '0.6em', '0']}
       bgImage={cardinfo.imageLink}
-      bgPosition="center"
+      backgroundPosition="center"
       bgSize="cover"
       boxShadow="0px 4px 8px rgba(0, 0, 0, 0.15)"
       fontFamily="Manrope"

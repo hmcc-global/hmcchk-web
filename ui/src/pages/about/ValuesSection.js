@@ -23,7 +23,7 @@ const ValuesSection = (props) => {
           {title.slice(17, 28)}
         </Heading>
         <Accordion.Root multiple>
-          <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5" value='item-0'>
+          <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5px" value='item-0'>
             <h2>
               <Accordion.ItemTrigger>
                 <Box flex="1" textAlign="left" fontWeight="bold">
@@ -39,7 +39,7 @@ const ValuesSection = (props) => {
               </Accordion.ItemBody></Accordion.ItemContent>
           </Accordion.Item>
 
-          <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5" value='item-1'>
+          <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5px" value='item-1'>
             <h2>
               <Accordion.ItemTrigger>
                 <Box flex="1" textAlign="left" fontWeight="bold">
@@ -54,7 +54,7 @@ const ValuesSection = (props) => {
                 <Text color="#000000">{values.body[1]}</Text>
               </Accordion.ItemBody></Accordion.ItemContent>
           </Accordion.Item>
-          <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5" value='item-2'>
+          <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5px" value='item-2'>
             <h2>
               <Accordion.ItemTrigger>
                 <Box flex="1" textAlign="left" fontWeight="bold">
@@ -69,7 +69,7 @@ const ValuesSection = (props) => {
                 <Text color="#000000">{values.body[2]}</Text>
               </Accordion.ItemBody></Accordion.ItemContent>
           </Accordion.Item>
-          <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5" value='item-3'>
+          <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5px" value='item-3'>
             <h2>
               <Accordion.ItemTrigger>
                 <Box flex="1" textAlign="left" fontWeight="bold">
@@ -84,7 +84,7 @@ const ValuesSection = (props) => {
                 <Text color="#000000">{values.body[3]}</Text>
               </Accordion.ItemBody></Accordion.ItemContent>
           </Accordion.Item>
-          <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5" value='item-4'>
+          <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5px" value='item-4'>
             <h2>
               <Accordion.ItemTrigger>
                 <Box flex="1" textAlign="left" fontWeight="bold">
@@ -99,7 +99,7 @@ const ValuesSection = (props) => {
                 <Text color="#000000">{values.body[4]}</Text>
               </Accordion.ItemBody></Accordion.ItemContent>
           </Accordion.Item>
-          <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5" value='item-5'>
+          <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5px" value='item-5'>
             <h2>
               <Accordion.ItemTrigger>
                 <Box flex="1" textAlign="left" fontWeight="bold">
@@ -114,7 +114,7 @@ const ValuesSection = (props) => {
                 <Text color="#000000">{values.body[5]}</Text>
               </Accordion.ItemBody></Accordion.ItemContent>
           </Accordion.Item>
-          <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5" value='item-6'>
+          <Accordion.Item border="2px solid #63B3ED" my="3" borderRadius="5px" value='item-6'>
             <h2>
               <Accordion.ItemTrigger>
                 <Box flex="1" textAlign="left" fontWeight="bold">

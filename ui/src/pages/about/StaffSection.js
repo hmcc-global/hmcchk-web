@@ -67,7 +67,7 @@ const StaffSection = (props) => {
                         w={['80%', '100%', '100%']}
                         objectFit="cover"
                         margin="auto"
-                        borderRadius="7"
+                        borderRadius="7px"
                       />
                     </Box>
 

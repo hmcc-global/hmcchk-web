@@ -214,7 +214,7 @@ const BBHeroSection = ({ scheduleRef, contactRef }) => {
         }}
         bgRepeat="no-repeat"
         bgSize="cover"
-        bgPos={{ base: 'center', md: 'top' }}
+        backgroundPosition={{ base: 'center', md: 'top' }}
         paddingY={{ base: '4.5rem', md: '3rem', lg: '4rem' }}
       >
         <Box
@@ -280,7 +280,7 @@ const BBHeroSection = ({ scheduleRef, contactRef }) => {
         }}
         bgRepeat="no-repeat"
         bgSize="cover"
-        bgPos="bottom"
+        backgroundPosition="bottom"
         paddingBottom={{ base: '7rem', md: '7rem', lg: '10rem' }}
         w="100%"
       >

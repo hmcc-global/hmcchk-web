@@ -6,7 +6,7 @@ const TestimonyCard = (props) => {
   return (
     <Box
       borderWidth="1px"
-      borderRadius="20"
+      borderRadius="20px"
       shadow="lg"
       px={[6, 10]}
       pt={[6, 10]}

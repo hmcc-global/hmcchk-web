@@ -29,7 +29,7 @@ const VisionMissionSectionMobile = () => {
                       w="100%"
                       position="absolute"
                       h="122%"
-                      bgPos="42% 90%"
+                      backgroundPosition="42% 90%"
                       bgSize="26%"
                       bgRepeat="no-repeat"
                       bgImage={`url('${process.env.PUBLIC_URL}/images/home/church-theme-overflow-vector-underline.svg')`}

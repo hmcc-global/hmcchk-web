@@ -14,7 +14,7 @@ const VisionMissionSectionMobile = () => {
             <Container
               maxW="container.xl"
               bgImage={`url('${process.env.PUBLIC_URL}/images/home/hk-green.png')`}
-              bgPos="center right"
+              backgroundPosition="center right"
               bgSize="contain"
               bgRepeat="no-repeat"
             >
@@ -25,7 +25,7 @@ const VisionMissionSectionMobile = () => {
                       w="100%"
                       position="absolute"
                       h="122%"
-                      bgPos="55% 100%"
+                      backgroundPosition="55% 100%"
                       bgSize="70%"
                       bgRepeat="no-repeat"
                       bgImage={`url('${process.env.PUBLIC_URL}/images/home/vector-green-3.svg')`}
@@ -307,7 +307,7 @@ const VisionMissionSectionMobile = () => {
                       pt="0.75em"
                       pb="1.25em"
                       bgColor="white"
-                      borderRadius="12"
+                      borderRadius="12px"
                     >
                       <Box w="100%" p="0.6em" bgColor="white">
                         <Text

@@ -170,7 +170,7 @@ const EventsSection = () => {
                       w={{ base: '105%', md: '100%' }}
                       position="absolute"
                       h={{ base: '115%', md: '110%' }}
-                      bgPos={{ base: '100% 100%', md: '0% 100%' }}
+                      backgroundPosition={{ base: '100% 100%', md: '0% 100%' }}
                       bgSize={{ base: '40%', md: '56%' }}
                       bgRepeat="no-repeat"
                       bgImage={`url('${process.env.PUBLIC_URL}/images/home/vector-yellow-1.svg')`}

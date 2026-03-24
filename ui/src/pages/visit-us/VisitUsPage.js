@@ -29,9 +29,9 @@ const VisitUsPage = (props) => {
       <VStack gap={[4, 10]} align="stretch">
         <Box
           borderWidth="1px"
-          borderRadius="20"
+          borderRadius="20px"
           bgImage={`url('${process.env.PUBLIC_URL}/images/visitus/header-banner.jpeg')`}
-          bgPosition="center"
+          backgroundPosition="center"
           bgSize="cover"
           px={[6, 12, 28]}
           py={[8, 16, 20]}
@@ -147,7 +147,7 @@ const VisitUsPage = (props) => {
             <AspectRatio
               flex={5.75}
               ratio={16 / 9}
-              borderRadius="20"
+              borderRadius="20px"
               borderWidth="1px"
               overflow="hidden"
             >
@@ -161,9 +161,9 @@ const VisitUsPage = (props) => {
         </Box>
         <Box
           borderWidth="1px"
-          borderRadius="20"
+          borderRadius="20px"
           bgImage={`url('${process.env.PUBLIC_URL}/images/visitus/join-us-online.png')`}
-          bgPosition="center"
+          backgroundPosition="center"
           bgSize="cover"
           px={6}
           pt={[4, 6]}
