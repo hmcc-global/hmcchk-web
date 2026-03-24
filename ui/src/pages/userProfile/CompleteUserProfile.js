@@ -4,28 +4,17 @@ import {
   Box,
   Text,
   Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
   Stack,
   Input,
-  FormControl,
-  FormLabel,
-  FormHelperText,
-  Select,
+  NativeSelect,
   Button,
   Switch,
   Flex,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
+  Field,
+  Icon,
+  Dialog,
+  Portal,
 } from '@chakra-ui/react';
-import { CheckCircleIcon } from '@chakra-ui/icons';
 import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import {
@@ -42,6 +31,7 @@ import {
   updateUserDataRequest,
 } from '../helpers/userInformationHelpers';
 import { customAxios as axios } from '../helpers/customAxios';
+import { LuCircleCheck } from 'react-icons/lu';
 
 const CompleteUserProfileContainer = (props) => {
   const { user, history, staticData } = props;
@@ -49,7 +39,7 @@ const CompleteUserProfileContainer = (props) => {
 
   const formLabelColor = '#2C5282';
   const formValidation = { required: true };
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState('tab-0');
   const [modalOpen, setModalOpen] = useState(false);
 
   const onModalClose = (e) => {
@@ -60,14 +50,14 @@ const CompleteUserProfileContainer = (props) => {
     for (let key in data) {
       reviewSetValue(key, data[key]);
     }
-    setTabIndex(1);
+    setTabIndex('tab-1');
   };
 
   const submitPartB = (data) => {
     for (let key in data) {
       reviewSetValue(key, data[key]);
     }
-    setTabIndex(2);
+    setTabIndex('tab-2');
   };
 
   const submitValidatedData = async (data) => {
@@ -159,44 +149,56 @@ const CompleteUserProfileContainer = (props) => {
 
   return (
     <>
-      <Modal isOpen={modalOpen} onClose={onModalClose}>
-        <ModalOverlay />
-        <ModalContent borderRadius="20">
-          <ModalCloseButton />
-          <ModalHeader>
-            <Center>
-              <CheckCircleIcon mt={5} w="15%" h="15%" color="#0628A3" />
-            </Center>
-          </ModalHeader>
-
-          <ModalBody>
-            <Center fontSize="md" fontWeight="600" color="#171923">
-              Your HMCC Profile is all set
-            </Center>
-            <Center fontSize="sm" color="#718096" textAlign="center">
-              Thanks for sharing your information with us, welcome onboard!
-            </Center>
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              size="sm"
-              color="#FFFFFF"
-              background="#0628A3"
-              borderRadius="10"
-              variant="solid"
-              w="100%"
-              _hover={{
-                background: '#062286',
-              }}
-              onClick={() => {
-                history.push('/');
-              }}
-            >
-              Return to homepage
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <Dialog.Root
+        open={modalOpen}
+        onOpenChange={(e) => {
+          if (!e.open) {
+            onModalClose();
+          }
+        }}
+      >
+        <Portal>
+          <Dialog.Backdrop />
+          <Dialog.Positioner>
+            <Dialog.Content borderRadius="20">
+              <Dialog.CloseTrigger />
+              <Dialog.Header>
+                <Center>
+                  <Icon mt={5} w="15%" h="15%" color="#0628A3" asChild>
+                    <LuCircleCheck />
+                  </Icon>
+                </Center>
+              </Dialog.Header>
+              <Dialog.Body>
+                <Center fontSize="md" fontWeight="600" color="#171923">
+                  Your HMCC Profile is all set
+                </Center>
+                <Center fontSize="sm" color="#718096" textAlign="center">
+                  Thanks for sharing your information with us, welcome onboard!
+                </Center>
+              </Dialog.Body>
+              <Dialog.Footer>
+                <Button
+                  size="sm"
+                  color="#FFFFFF"
+                  background="#0628A3"
+                  borderRadius="10"
+                  variant="solid"
+                  w="100%"
+                  _hover={{
+                    background: '#062286',
+                  }}
+                  onClick={() => {
+                    history.push('/');
+                  }}
+                >
+                  Return to homepage
+                </Button>
+              </Dialog.Footer>
+            </Dialog.Content>
+          </Dialog.Positioner>
+        </Portal>
+      </Dialog.Root>
       <Container maxW="container.lg">
         <Center
           textAlign="center"
@@ -207,16 +209,17 @@ const CompleteUserProfileContainer = (props) => {
         >
           Completing your HMCC Profile
         </Center>
-        <Tabs
+        <Tabs.Root
           border="1px solid #E2E8F0"
           borderRadius="4px"
           p="4%"
-          variant="unstyled"
+          unstyled
           mb="5%"
-          index={tabIndex}
+          value={tabIndex}
         >
-          <TabList border="none" pointerEvents="none">
-            <Tab
+          <Tabs.List border="none" pointerEvents="none">
+            <Tabs.Trigger
+              value="tab-0"
               flex={1}
               fontSize="sm"
               fontWeight="500"
@@ -233,8 +236,9 @@ const CompleteUserProfileContainer = (props) => {
               <Text fontSize={['xs', 'sm']} color="#2D3748">
                 Personal Profile
               </Text>
-            </Tab>
-            <Tab
+            </Tabs.Trigger>
+            <Tabs.Trigger
+              value="tab-1"
               flex={1}
               fontSize="sm"
               fontWeight="500"
@@ -251,8 +255,9 @@ const CompleteUserProfileContainer = (props) => {
               <Text fontSize={['xs', 'sm']} color="#2D3748">
                 Church Profile
               </Text>
-            </Tab>
-            <Tab
+            </Tabs.Trigger>
+            <Tabs.Trigger
+              value="tab-2"
               flex={1}
               fontSize="sm"
               fontWeight="500"
@@ -269,174 +274,185 @@ const CompleteUserProfileContainer = (props) => {
               <Text fontSize={['xs', 'sm']} color="#2D3748">
                 Review
               </Text>
-            </Tab>
-          </TabList>
+            </Tabs.Trigger>
+          </Tabs.List>
 
-          <TabPanels>
-            <TabPanel>
-              <form onSubmit={handleSubmitA(submitPartA)}>
-                <Stack spacing="2%">
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>
-                        First Name (and Middle Name)
-                        <Text as="span" color="red">
-                          *
-                        </Text>
-                      </FormLabel>
-                      <Input
-                        size="sm"
-                        borderRadius="5"
-                        {...registerA('firstName', formValidation)}
-                        isInvalid={errorsA['firstName']}
-                        placeholder="Please fill in this field"
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>
-                        Last Name
-                        <Text as="span" color="red">
-                          *
-                        </Text>
-                      </FormLabel>
-                      <Input
-                        size="sm"
-                        borderRadius="5"
-                        {...registerA('lastName', formValidation)}
-                        isInvalid={errorsA['lastName']}
-                        placeholder="Please fill in this field"
-                      />
-                    </FormControl>
-                  </Stack>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>
-                        Birthday
-                        <Text as="span" color="red">
-                          *
-                        </Text>
-                      </FormLabel>
-                      <Input
-                        type="date"
-                        size="sm"
-                        borderRadius="5"
-                        {...registerA('birthday', formValidation)}
-                        isInvalid={errorsA['birthday']}
-                        placeholder="Please fill in this field"
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>
-                        Country of Origin
-                        <Text as="span" color="red">
-                          *
-                        </Text>
-                      </FormLabel>
-                      <Select
+          <Tabs.Content value="tab-0">
+            <form onSubmit={handleSubmitA(submitPartA)}>
+              <Stack gap="2%">
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>
+                      First Name (and Middle Name)
+                      <Text as="span" color="red">
+                        *
+                      </Text>
+                    </Field.Label>
+                    <Input
+                      size="sm"
+                      borderRadius="5"
+                      {...registerA('firstName', formValidation)}
+                      invalid={errorsA['firstName']}
+                      placeholder="Please fill in this field"
+                    />
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>
+                      Last Name
+                      <Text as="span" color="red">
+                        *
+                      </Text>
+                    </Field.Label>
+                    <Input
+                      size="sm"
+                      borderRadius="5"
+                      {...registerA('lastName', formValidation)}
+                      invalid={errorsA['lastName']}
+                      placeholder="Please fill in this field"
+                    />
+                  </Field.Root>
+                </Stack>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>
+                      Birthday
+                      <Text as="span" color="red">
+                        *
+                      </Text>
+                    </Field.Label>
+                    <Input
+                      type="date"
+                      size="sm"
+                      borderRadius="5"
+                      {...registerA('birthday', formValidation)}
+                      invalid={errorsA['birthday']}
+                      placeholder="Please fill in this field"
+                    />
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>
+                      Country of Origin
+                      <Text as="span" color="red">
+                        *
+                      </Text>
+                    </Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field
                         size="sm"
                         borderRadius="5"
                         {...registerA('countryOfOrigin', formValidation)}
-                        isInvalid={errorsA['countryOfOrigin']}
+                        invalid={errorsA['countryOfOrigin']}
                         placeholder="Please fill in this field"
                       >
                         {countryList.map((item) => {
                           return <option key={'co' + item}>{item}</option>;
                         })}
-                      </Select>
-                    </FormControl>
-                  </Stack>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>
-                        Lifestage
-                        <Text as="span" color="red">
-                          *
-                        </Text>
-                      </FormLabel>
-                      <Select
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
+                </Stack>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>
+                      Lifestage
+                      <Text as="span" color="red">
+                        *
+                      </Text>
+                    </Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field
                         size="sm"
                         borderRadius="5"
                         {...registerA('lifestage', formValidation)}
-                        isInvalid={errorsA['lifestage']}
+                        invalid={errorsA['lifestage']}
                         placeholder="Please fill in this field"
                       >
                         {lifestageList.map((item) => {
                           return <option key={'life' + item}>{item}</option>;
                         })}
-                      </Select>
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>
-                        Campus
-                        <Text as="span" color="red">
-                          *
-                        </Text>
-                      </FormLabel>
-                      <Select
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>
+                      Campus
+                      <Text as="span" color="red">
+                        *
+                      </Text>
+                    </Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field
                         size="sm"
                         borderRadius="5"
                         {...registerA('campus', formValidation)}
-                        isInvalid={errorsA['campus']}
+                        invalid={errorsA['campus']}
                         placeholder="Please fill in this field"
                       >
                         {campusList.map((item) => {
                           return <option key={'ca' + item}>{item}</option>;
                         })}
-                      </Select>
-                    </FormControl>
-                  </Stack>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl flex={1}>
-                      <FormLabel color={formLabelColor}>Phone Number</FormLabel>
-                      <Input
-                        size="sm"
-                        borderRadius="5"
-                        {...registerA('phoneNumber')}
-                      />
-                    </FormControl>
-                    <Box flex={[0, 1]}></Box>
-                  </Stack>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>
-                        Address: Floor / Level
-                      </FormLabel>
-                      <Input
-                        size="sm"
-                        borderRadius="5"
-                        {...registerA('addressFloor')}
-                        placeholder="This field is optional"
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>
-                        Address: Room / Flat / Unit / Suite
-                      </FormLabel>
-                      <Input
-                        size="sm"
-                        borderRadius="5"
-                        {...registerA('addressFlat')}
-                        placeholder="This field is optional"
-                      />
-                    </FormControl>
-                  </Stack>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>
-                        Address: Street Address
-                      </FormLabel>
-                      <Input
-                        size="sm"
-                        borderRadius="5"
-                        {...registerA('addressStreet')}
-                        placeholder="This field is optional"
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>
-                        Address: District
-                      </FormLabel>
-                      <Select
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
+                </Stack>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root flex={1}>
+                    <Field.Label color={formLabelColor}>
+                      Phone Number
+                    </Field.Label>
+                    <Input
+                      size="sm"
+                      borderRadius="5"
+                      {...registerA('phoneNumber')}
+                    />
+                  </Field.Root>
+                  <Box flex={[0, 1]}></Box>
+                </Stack>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>
+                      Address: Floor / Level
+                    </Field.Label>
+                    <Input
+                      size="sm"
+                      borderRadius="5"
+                      {...registerA('addressFloor')}
+                      placeholder="This field is optional"
+                    />
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>
+                      Address: Room / Flat / Unit / Suite
+                    </Field.Label>
+                    <Input
+                      size="sm"
+                      borderRadius="5"
+                      {...registerA('addressFlat')}
+                      placeholder="This field is optional"
+                    />
+                  </Field.Root>
+                </Stack>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>
+                      Address: Street Address
+                    </Field.Label>
+                    <Input
+                      size="sm"
+                      borderRadius="5"
+                      {...registerA('addressStreet')}
+                      placeholder="This field is optional"
+                    />
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>
+                      Address: District
+                    </Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field
                         size="sm"
                         borderRadius="5"
                         {...registerA('addressDistrict')}
@@ -445,13 +461,16 @@ const CompleteUserProfileContainer = (props) => {
                         {districtList.map((item) => {
                           return <option key={'di' + item}>{item}</option>;
                         })}
-                      </Select>
-                    </FormControl>
-                  </Stack>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl flex={1}>
-                      <FormLabel color="#2C5282">Address: Region</FormLabel>
-                      <Select
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
+                </Stack>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root flex={1}>
+                    <Field.Label color="#2C5282">Address: Region</Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field
                         size="sm"
                         borderRadius="5"
                         {...registerA('addressRegion')}
@@ -460,305 +479,314 @@ const CompleteUserProfileContainer = (props) => {
                         {regionList.map((item) => {
                           return <option key={'re' + item}>{item}</option>;
                         })}
-                      </Select>
-                    </FormControl>
-                    <Box flex={[0, 1]}></Box>
-                  </Stack>
-                  <Center>
-                    <Button
-                      size="sm"
-                      mt="5%"
-                      color="#0628A3"
-                      borderColor="#0628A3"
-                      borderRadius="10"
-                      variant="outline"
-                      minW={['10%', '20%']}
-                      type="submit"
-                    >
-                      Next
-                    </Button>
-                  </Center>
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
+                  <Box flex={[0, 1]}></Box>
                 </Stack>
-              </form>
-            </TabPanel>
-            <TabPanel>
-              <form onSubmit={handleSubmitB(submitPartB)}>
-                <Stack spacing={['4%', '2%']}>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl flex={2}>
-                      <FormLabel color={formLabelColor}>
-                        LIFE Group
-                        <Text as="span" color="red">
-                          *
-                        </Text>
-                      </FormLabel>
-                      <Select
+                <Center>
+                  <Button
+                    size="sm"
+                    mt="5%"
+                    color="#0628A3"
+                    borderColor="#0628A3"
+                    borderRadius="10"
+                    variant="outline"
+                    minW={['10%', '20%']}
+                    type="submit"
+                  >
+                    Next
+                  </Button>
+                </Center>
+              </Stack>
+            </form>
+          </Tabs.Content>
+          <Tabs.Content value="tab-1">
+            <form onSubmit={handleSubmitB(submitPartB)}>
+              <Stack gap={['4%', '2%']}>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root flex={2}>
+                    <Field.Label color={formLabelColor}>
+                      LIFE Group
+                      <Text as="span" color="red">
+                        *
+                      </Text>
+                    </Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field
                         size="sm"
                         borderRadius="5"
                         {...registerB('lifeGroup', formValidation)}
-                        isInvalid={errorsB['lifeGroup']}
+                        invalid={errorsB['lifeGroup']}
                         placeholder="Please fill in this field"
                       >
                         {lifegroupList.map((item) => {
                           return <option key={'li' + item}>{item}</option>;
                         })}
-                      </Select>
-                    </FormControl>
-                    <Box flex={1} display={['none', 'block']}></Box>
-                  </Stack>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl flex={2}>
-                      <FormLabel color={formLabelColor}>
-                        Ministry Team
-                        <Text as="span" color="red">
-                          *
-                        </Text>
-                      </FormLabel>
-                      <Select
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
+                  <Box flex={1} display={['none', 'block']}></Box>
+                </Stack>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root flex={2}>
+                    <Field.Label color={formLabelColor}>
+                      Ministry Team
+                      <Text as="span" color="red">
+                        *
+                      </Text>
+                    </Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field
                         size="sm"
                         borderRadius="5"
                         {...registerB('ministryTeam', formValidation)}
-                        isInvalid={errorsB['ministryTeam']}
+                        invalid={errorsB['ministryTeam']}
                         placeholder="Please fill in this field"
                       >
                         {ministryTeamList.map((item) => {
                           return <option key={'mt' + item}>{item}</option>;
                         })}
-                      </Select>
-                    </FormControl>
-                    <Box flex={1} display={['none', 'block']}></Box>
-                  </Stack>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl flex={[1, 4]}>
-                      <Stack direction="row">
-                        <Text
-                          flex={[3, 1]}
-                          fontWeight="500"
-                          mr="3%"
-                          color="#2C5282"
-                        >
-                          HMCC Covenant Signing Member
-                          <Text as="span" color="red">
-                            *
-                          </Text>
-                        </Text>
-                        <Box flex={[2, 1]}>
-                          <Controller
-                            control={controlB}
-                            name={'isMember'}
-                            render={({ field: { onChange, value, ref } }) => (
-                              <Switch
-                                onChange={onChange}
-                                ref={ref}
-                                isChecked={value}
-                                defaultChecked={false}
-                              />
-                            )}
-                          />
-                          <Text ml="3" fontWeight="500" as="span">
-                            {isMember ? 'Yes' : 'No'}
-                          </Text>
-                        </Box>
-                      </Stack>
-                      <FormHelperText>
-                        An HMCC Covenant Signing Member is someone who has
-                        attended HMCC’s Experiencing Membership Class and has
-                        decided to sign (in-person) the Membership Declaration.
-                      </FormHelperText>
-                    </FormControl>
-                    <Box flex={[0, 1]}></Box>
-                  </Stack>
-                  {isMember && (
-                    <Stack direction={['column', 'row']} spacing="4%">
-                      <Stack
-                        direction={['column', 'row']}
-                        spacing="4%"
-                        border="1px solid #E2E8F0"
-                        borderRadius="6"
-                        p={['5%', '3%']}
-                        pt={['5%', '2%']}
-                        flex={[1, 4]}
-                      >
-                        <FormControl>
-                          <FormLabel color="#2C5282">
-                            Recognition Date
-                          </FormLabel>
-                          <Input
-                            size="sm"
-                            type="date"
-                            borderRadius="5"
-                            {...registerB('membershipRecognitionDate')}
-                            placeholder="This field is optional"
-                          />
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel color="#2C5282">
-                            Last Recommitment Date
-                          </FormLabel>
-                          <Input
-                            size="sm"
-                            type="date"
-                            borderRadius="5"
-                            {...registerB('membershipRecommitmentDate')}
-                            placeholder="Please fill in this field"
-                          />
-                        </FormControl>
-                      </Stack>
-                      <Box flex={[0, 1]}></Box>
-                    </Stack>
-                  )}
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl flex={[1, 4]}>
-                      <Stack direction="row">
-                        <Text
-                          flex={[3, 1]}
-                          fontWeight="500"
-                          mr="3%"
-                          color="#2C5282"
-                        >
-                          Baptised
-                          <Text as="span" color="red">
-                            *
-                          </Text>
-                        </Text>
-                        <Box flex={[2, 1]}>
-                          <Controller
-                            control={controlB}
-                            name={'isBaptised'}
-                            render={({ field: { onChange, value, ref } }) => (
-                              <Switch
-                                onChange={onChange}
-                                ref={ref}
-                                isChecked={value}
-                                defaultValue={false}
-                              />
-                            )}
-                          />
-                          <Text ml="3" fontWeight="500" as="span">
-                            {isBaptised ? 'Yes' : 'No'}
-                          </Text>
-                        </Box>
-                      </Stack>
-                    </FormControl>
-                    <Box flex={[0, 1]}></Box>
-                  </Stack>
-                  {isBaptised && (
-                    <Stack direction={['column', 'row']} spacing="4%">
-                      <Stack
-                        direction={['column', 'row']}
-                        spacing="4%"
-                        border="1px solid #E2E8F0"
-                        borderRadius="6"
-                        p={['5%', '3%']}
-                        pt={['5%', '2%']}
-                        flex={[1, 4]}
-                      >
-                        <FormControl>
-                          <FormLabel color="#2C5282">Baptism Place</FormLabel>
-                          <Input
-                            size="sm"
-                            borderRadius="5"
-                            {...registerB('baptismPlace')}
-                            placeholder="Optional but please fill in if you can!"
-                          />
-                          <FormHelperText>
-                            ‘HMCC Hong Kong’ if you are baptised with us,
-                            otherwise state where you were baptised or the name
-                            of your previous home church.
-                          </FormHelperText>
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel color="#2C5282">Baptism Date</FormLabel>
-                          <Input
-                            size="sm"
-                            type="date"
-                            borderRadius="5"
-                            {...registerB('baptismDate')}
-                          />
-                          <FormHelperText>
-                            To the best of your memory :)
-                          </FormHelperText>
-                        </FormControl>
-                      </Stack>
-                      <Box flex={[0, 1]}></Box>
-                    </Stack>
-                  )}
-                  <Flex>
-                    <Button
-                      size="sm"
-                      mt="1"
-                      color="#0628A3"
-                      borderColor="#0628A3"
-                      borderRadius="10"
-                      variant="outline"
-                      minW={['50%', '20%']}
-                      onClick={() => {
-                        setTabIndex(0);
-                      }}
-                    >
-                      Previous Page
-                    </Button>
-                    <Button
-                      size="sm"
-                      ml="2%"
-                      mt="1"
-                      color="#FFFFFF"
-                      background="#0628A3"
-                      borderRadius="10"
-                      variant="solid"
-                      minW={['50%', '20%']}
-                      type="submit"
-                      _hover={{
-                        background: '#062286',
-                      }}
-                    >
-                      Review
-                    </Button>
-                  </Flex>
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
+                  <Box flex={1} display={['none', 'block']}></Box>
                 </Stack>
-              </form>
-            </TabPanel>
-            <TabPanel>
-              <form onSubmit={reviewHandleSubmit(submitValidatedData)}>
-                <Stack spacing="2%">
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>
-                        First Name (and Middle Name)
-                      </FormLabel>
-                      <Input
-                        size="sm"
-                        borderRadius="5"
-                        isReadOnly
-                        {...reviewRegister('firstName')}
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>Last Name</FormLabel>
-                      <Input
-                        size="sm"
-                        borderRadius="5"
-                        isReadOnly
-                        {...reviewRegister('lastName')}
-                      />
-                    </FormControl>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root flex={[1, 4]}>
+                    <Stack direction="row">
+                      <Text
+                        flex={[3, 1]}
+                        fontWeight="500"
+                        mr="3%"
+                        color="#2C5282"
+                      >
+                        HMCC Covenant Signing Member
+                        <Text as="span" color="red">
+                          *
+                        </Text>
+                      </Text>
+                      <Box flex={[2, 1]}>
+                        <Controller
+                          control={controlB}
+                          name={'isMember'}
+                          render={({ field: { onChange, value, ref } }) => (
+                            <Switch
+                              onValueChange={onChange}
+                              ref={ref}
+                              checked={value}
+                              defaultChecked={false}
+                            />
+                          )}
+                        />
+                        <Text ml="3" fontWeight="500" as="span">
+                          {isMember ? 'Yes' : 'No'}
+                        </Text>
+                      </Box>
+                    </Stack>
+                    <Field.HelperText>
+                      An HMCC Covenant Signing Member is someone who has
+                      attended HMCC’s Experiencing Membership Class and has
+                      decided to sign (in-person) the Membership Declaration.
+                    </Field.HelperText>
+                  </Field.Root>
+                  <Box flex={[0, 1]}></Box>
+                </Stack>
+                {isMember && (
+                  <Stack direction={['column', 'row']} gap="4%">
+                    <Stack
+                      direction={['column', 'row']}
+                      gap="4%"
+                      border="1px solid #E2E8F0"
+                      borderRadius="6"
+                      p={['5%', '3%']}
+                      pt={['5%', '2%']}
+                      flex={[1, 4]}
+                    >
+                      <Field.Root>
+                        <Field.Label color="#2C5282">
+                          Recognition Date
+                        </Field.Label>
+                        <Input
+                          size="sm"
+                          type="date"
+                          borderRadius="5"
+                          {...registerB('membershipRecognitionDate')}
+                          placeholder="This field is optional"
+                        />
+                      </Field.Root>
+                      <Field.Root>
+                        <Field.Label color="#2C5282">
+                          Last Recommitment Date
+                        </Field.Label>
+                        <Input
+                          size="sm"
+                          type="date"
+                          borderRadius="5"
+                          {...registerB('membershipRecommitmentDate')}
+                          placeholder="Please fill in this field"
+                        />
+                      </Field.Root>
+                    </Stack>
+                    <Box flex={[0, 1]}></Box>
                   </Stack>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>Birthday</FormLabel>
-                      <Input
-                        type="date"
-                        size="sm"
-                        borderRadius="5"
-                        isReadOnly
-                        {...reviewRegister('birthday')}
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>
-                        Country of Origin
-                      </FormLabel>
-                      <Select
+                )}
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root flex={[1, 4]}>
+                    <Stack direction="row">
+                      <Text
+                        flex={[3, 1]}
+                        fontWeight="500"
+                        mr="3%"
+                        color="#2C5282"
+                      >
+                        Baptised
+                        <Text as="span" color="red">
+                          *
+                        </Text>
+                      </Text>
+                      <Box flex={[2, 1]}>
+                        <Controller
+                          control={controlB}
+                          name={'isBaptised'}
+                          render={({ field: { onChange, value, ref } }) => (
+                            <Switch
+                              onValueChange={onChange}
+                              ref={ref}
+                              checked={value}
+                              defaultValue={false}
+                            />
+                          )}
+                        />
+                        <Text ml="3" fontWeight="500" as="span">
+                          {isBaptised ? 'Yes' : 'No'}
+                        </Text>
+                      </Box>
+                    </Stack>
+                  </Field.Root>
+                  <Box flex={[0, 1]}></Box>
+                </Stack>
+                {isBaptised && (
+                  <Stack direction={['column', 'row']} gap="4%">
+                    <Stack
+                      direction={['column', 'row']}
+                      gap="4%"
+                      border="1px solid #E2E8F0"
+                      borderRadius="6"
+                      p={['5%', '3%']}
+                      pt={['5%', '2%']}
+                      flex={[1, 4]}
+                    >
+                      <Field.Root>
+                        <Field.Label color="#2C5282">Baptism Place</Field.Label>
+                        <Input
+                          size="sm"
+                          borderRadius="5"
+                          {...registerB('baptismPlace')}
+                          placeholder="Optional but please fill in if you can!"
+                        />
+                        <Field.HelperText>
+                          ‘HMCC Hong Kong’ if you are baptised with us,
+                          otherwise state where you were baptised or the name of
+                          your previous home church.
+                        </Field.HelperText>
+                      </Field.Root>
+                      <Field.Root>
+                        <Field.Label color="#2C5282">Baptism Date</Field.Label>
+                        <Input
+                          size="sm"
+                          type="date"
+                          borderRadius="5"
+                          {...registerB('baptismDate')}
+                        />
+                        <Field.HelperText>
+                          To the best of your memory :)
+                        </Field.HelperText>
+                      </Field.Root>
+                    </Stack>
+                    <Box flex={[0, 1]}></Box>
+                  </Stack>
+                )}
+                <Flex>
+                  <Button
+                    size="sm"
+                    mt="1"
+                    color="#0628A3"
+                    borderColor="#0628A3"
+                    borderRadius="10"
+                    variant="outline"
+                    minW={['50%', '20%']}
+                    onClick={() => {
+                      setTabIndex('tab-0');
+                    }}
+                  >
+                    Previous Page
+                  </Button>
+                  <Button
+                    size="sm"
+                    ml="2%"
+                    mt="1"
+                    color="#FFFFFF"
+                    background="#0628A3"
+                    borderRadius="10"
+                    variant="solid"
+                    minW={['50%', '20%']}
+                    type="submit"
+                    _hover={{
+                      background: '#062286',
+                    }}
+                  >
+                    Review
+                  </Button>
+                </Flex>
+              </Stack>
+            </form>
+          </Tabs.Content>
+          <Tabs.Content value="tab-2">
+            <form onSubmit={reviewHandleSubmit(submitValidatedData)}>
+              <Stack gap="2%">
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>
+                      First Name (and Middle Name)
+                    </Field.Label>
+                    <Input
+                      size="sm"
+                      borderRadius="5"
+                      readOnly
+                      {...reviewRegister('firstName')}
+                    />
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>Last Name</Field.Label>
+                    <Input
+                      size="sm"
+                      borderRadius="5"
+                      readOnly
+                      {...reviewRegister('lastName')}
+                    />
+                  </Field.Root>
+                </Stack>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>Birthday</Field.Label>
+                    <Input
+                      type="date"
+                      size="sm"
+                      borderRadius="5"
+                      readOnly
+                      {...reviewRegister('birthday')}
+                    />
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>
+                      Country of Origin
+                    </Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field
                         size="sm"
                         borderRadius="5"
                         pointerEvents="none"
@@ -767,13 +795,16 @@ const CompleteUserProfileContainer = (props) => {
                         {countryList.map((item) => {
                           return <option key={'co' + item}>{item}</option>;
                         })}
-                      </Select>
-                    </FormControl>
-                  </Stack>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>Lifestage</FormLabel>
-                      <Select
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
+                </Stack>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>Lifestage</Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field
                         size="sm"
                         borderRadius="5"
                         pointerEvents="none"
@@ -782,11 +813,14 @@ const CompleteUserProfileContainer = (props) => {
                         {lifestageList.map((item) => {
                           return <option key={'life' + item}>{item}</option>;
                         })}
-                      </Select>
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>Campus</FormLabel>
-                      <Select
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>Campus</Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field
                         size="sm"
                         borderRadius="5"
                         pointerEvents="none"
@@ -795,62 +829,67 @@ const CompleteUserProfileContainer = (props) => {
                         {campusList.map((item) => {
                           return <option key={'ca' + item}>{item}</option>;
                         })}
-                      </Select>
-                    </FormControl>
-                  </Stack>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl flex={1}>
-                      <FormLabel color={formLabelColor}>Phone Number</FormLabel>
-                      <Input
-                        size="sm"
-                        borderRadius="5"
-                        isReadOnly
-                        {...reviewRegister('phoneNumber')}
-                      />
-                    </FormControl>
-                    <Box flex={1}></Box>
-                  </Stack>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>
-                        Address: Floor / Level
-                      </FormLabel>
-                      <Input
-                        size="sm"
-                        borderRadius="5"
-                        isReadOnly
-                        {...reviewRegister('addressFloor')}
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>
-                        Address: Room / Flat / Unit / Suite
-                      </FormLabel>
-                      <Input
-                        size="sm"
-                        borderRadius="5"
-                        isReadOnly
-                        {...reviewRegister('addressFlat')}
-                      />
-                    </FormControl>
-                  </Stack>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>
-                        Address: Street Address
-                      </FormLabel>
-                      <Input
-                        size="sm"
-                        borderRadius="5"
-                        isReadOnly
-                        {...reviewRegister('addressStreet')}
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel color={formLabelColor}>
-                        Address: District
-                      </FormLabel>
-                      <Select
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
+                </Stack>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root flex={1}>
+                    <Field.Label color={formLabelColor}>
+                      Phone Number
+                    </Field.Label>
+                    <Input
+                      size="sm"
+                      borderRadius="5"
+                      readOnly
+                      {...reviewRegister('phoneNumber')}
+                    />
+                  </Field.Root>
+                  <Box flex={1}></Box>
+                </Stack>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>
+                      Address: Floor / Level
+                    </Field.Label>
+                    <Input
+                      size="sm"
+                      borderRadius="5"
+                      readOnly
+                      {...reviewRegister('addressFloor')}
+                    />
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>
+                      Address: Room / Flat / Unit / Suite
+                    </Field.Label>
+                    <Input
+                      size="sm"
+                      borderRadius="5"
+                      readOnly
+                      {...reviewRegister('addressFlat')}
+                    />
+                  </Field.Root>
+                </Stack>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>
+                      Address: Street Address
+                    </Field.Label>
+                    <Input
+                      size="sm"
+                      borderRadius="5"
+                      readOnly
+                      {...reviewRegister('addressStreet')}
+                    />
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color={formLabelColor}>
+                      Address: District
+                    </Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field
                         size="sm"
                         borderRadius="5"
                         pointerEvents="none"
@@ -859,13 +898,16 @@ const CompleteUserProfileContainer = (props) => {
                         {districtList.map((item) => {
                           return <option key={'di' + item}>{item}</option>;
                         })}
-                      </Select>
-                    </FormControl>
-                  </Stack>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl flex={1}>
-                      <FormLabel color="#2C5282">Address: Region</FormLabel>
-                      <Select
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
+                </Stack>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root flex={1}>
+                    <Field.Label color="#2C5282">Address: Region</Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field
                         size="sm"
                         borderRadius="5"
                         pointerEvents="none"
@@ -874,14 +916,17 @@ const CompleteUserProfileContainer = (props) => {
                         {regionList.map((item) => {
                           return <option key={'re' + item}>{item}</option>;
                         })}
-                      </Select>
-                    </FormControl>
-                    <Box flex={[0, 1]}></Box>
-                  </Stack>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl flex={2}>
-                      <FormLabel color={formLabelColor}>LIFE Group</FormLabel>
-                      <Select
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
+                  <Box flex={[0, 1]}></Box>
+                </Stack>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root flex={2}>
+                    <Field.Label color={formLabelColor}>LIFE Group</Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field
                         size="sm"
                         borderRadius="5"
                         pointerEvents="none"
@@ -890,16 +935,19 @@ const CompleteUserProfileContainer = (props) => {
                         {lifegroupList.map((item) => {
                           return <option key={'li' + item}>{item}</option>;
                         })}
-                      </Select>
-                    </FormControl>
-                    <Box flex={1}></Box>
-                  </Stack>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl flex={[1, 2]}>
-                      <FormLabel color={formLabelColor}>
-                        Ministry Team
-                      </FormLabel>
-                      <Select
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
+                  <Box flex={1}></Box>
+                </Stack>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root flex={[1, 2]}>
+                    <Field.Label color={formLabelColor}>
+                      Ministry Team
+                    </Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field
                         size="sm"
                         borderRadius="5"
                         pointerEvents="none"
@@ -908,199 +956,200 @@ const CompleteUserProfileContainer = (props) => {
                         {ministryTeamList.map((item) => {
                           return <option key={'mt' + item}>{item}</option>;
                         })}
-                      </Select>
-                    </FormControl>
-                    <Box flex={1}></Box>
-                  </Stack>
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl flex={[1, 4]}>
-                      <Stack direction="row">
-                        <Text
-                          flex={[3, 1]}
-                          fontWeight="500"
-                          mr="3%"
-                          color="#2C5282"
-                        >
-                          HMCC Covenant Signing Member
-                        </Text>
-                        <Box flex={[2, 1]}>
-                          <Controller
-                            control={reviewControl}
-                            name={'isMember'}
-                            render={({ field: { onChange, value, ref } }) => (
-                              <Switch
-                                onChange={onChange}
-                                ref={ref}
-                                isChecked={value}
-                                defaultChecked={false}
-                                isReadOnly
-                              />
-                            )}
-                          />
-                          <Text ml="3" fontWeight="500" as="span">
-                            {isMember ? 'Yes' : 'No'}
-                          </Text>
-                        </Box>
-                      </Stack>
-                      <FormHelperText>
-                        An HMCC Covenant Signing Member is someone who has
-                        attended HMCC’s Experiencing Membership Class and has
-                        decided to sign (in-person) the Membership Declaration{' '}
-                      </FormHelperText>
-                    </FormControl>
-                    <Box flex={[0, 1]}></Box>
-                  </Stack>
-                  {isMember && (
-                    <Stack direction={['column', 'row']} spacing="4%">
-                      <Stack
-                        direction={['column', 'row']}
-                        spacing="4%"
-                        border="1px solid #E2E8F0"
-                        borderRadius="6"
-                        p={['5%', '3%']}
-                        pt={['5%', '2%']}
-                        flex={[1, 4]}
-                      >
-                        <FormControl>
-                          <FormLabel color="#2C5282">
-                            Recognition Date
-                          </FormLabel>
-                          <Input
-                            size="sm"
-                            type="date"
-                            borderRadius="5"
-                            isReadOnly
-                            {...reviewRegister('membershipRecognitionDate')}
-                          />
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel color="#2C5282">
-                            Last Recommitment Date
-                          </FormLabel>
-                          <Input
-                            size="sm"
-                            type="date"
-                            borderRadius="5"
-                            isReadOnly
-                            {...reviewRegister('membershipRecommitmentDate')}
-                          />
-                        </FormControl>
-                      </Stack>
-                      <Box flex={[0, 1]}></Box>
-                    </Stack>
-                  )}
-                  <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl flex={[1, 4]}>
-                      <Stack direction="row">
-                        <Text
-                          flex={[3, 1]}
-                          fontWeight="500"
-                          mr="3%"
-                          color="#2C5282"
-                        >
-                          Baptised
-                        </Text>
-                        <Box flex={[2, 1]}>
-                          <Controller
-                            control={reviewControl}
-                            name={'isBaptised'}
-                            render={({ field: { onChange, value, ref } }) => (
-                              <Switch
-                                onChange={onChange}
-                                ref={ref}
-                                isChecked={value}
-                                defaultChecked={false}
-                                isReadOnly
-                              />
-                            )}
-                          />
-                          <Text ml="3" fontWeight="500" as="span">
-                            {isBaptised ? 'Yes' : 'No'}
-                          </Text>
-                        </Box>
-                      </Stack>
-                    </FormControl>
-                    <Box flex={[0, 1]}></Box>
-                  </Stack>
-                  {isBaptised && (
-                    <Stack direction={['column', 'row']} spacing="4%">
-                      <Stack
-                        direction={['column', 'row']}
-                        spacing="4%"
-                        border="1px solid #E2E8F0"
-                        borderRadius="6"
-                        p={['5%', '3%']}
-                        pt={['5%', '2%']}
-                        flex={[1, 4]}
-                      >
-                        <FormControl>
-                          <FormLabel color="#2C5282">Baptism Place</FormLabel>
-                          <Input
-                            size="sm"
-                            borderRadius="5"
-                            isReadOnly
-                            {...reviewRegister('baptismPlace')}
-                          />
-                          <FormHelperText>
-                            ‘HMCC Hong Kong’ if you are baptised with us,
-                            otherwise state where you were baptised or the name
-                            of your previous home church.
-                          </FormHelperText>
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel color="#2C5282">Baptism Date</FormLabel>
-                          <Input
-                            size="sm"
-                            type="date"
-                            borderRadius="5"
-                            isReadOnly
-                            {...reviewRegister('baptismDate')}
-                          />
-                          <FormHelperText>
-                            To the best of your memory :)
-                          </FormHelperText>
-                        </FormControl>
-                      </Stack>
-                      <Box flex={[0, 1]}></Box>
-                    </Stack>
-                  )}
-                  <Flex>
-                    <Button
-                      size="sm"
-                      mt="1"
-                      color="#0628A3"
-                      borderColor="#0628A3"
-                      borderRadius="10"
-                      variant="outline"
-                      minW={['50%', '20%']}
-                      onClick={() => {
-                        setTabIndex(1);
-                      }}
-                    >
-                      Previous Page
-                    </Button>
-                    <Button
-                      size="sm"
-                      ml="2%"
-                      mt="1"
-                      color="#FFFFFF"
-                      background="#0628A3"
-                      borderRadius="10"
-                      variant="solid"
-                      minW={['50%', '20%']}
-                      _hover={{
-                        background: '#062286',
-                      }}
-                      type="submit"
-                    >
-                      Save Profile
-                    </Button>
-                  </Flex>
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
+                  <Box flex={1}></Box>
                 </Stack>
-              </form>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root flex={[1, 4]}>
+                    <Stack direction="row">
+                      <Text
+                        flex={[3, 1]}
+                        fontWeight="500"
+                        mr="3%"
+                        color="#2C5282"
+                      >
+                        HMCC Covenant Signing Member
+                      </Text>
+                      <Box flex={[2, 1]}>
+                        <Controller
+                          control={reviewControl}
+                          name={'isMember'}
+                          render={({ field: { onChange, value, ref } }) => (
+                            <Switch
+                              onValueChange={onChange}
+                              ref={ref}
+                              checked={value}
+                              defaultChecked={false}
+                              readOnly
+                            />
+                          )}
+                        />
+                        <Text ml="3" fontWeight="500" as="span">
+                          {isMember ? 'Yes' : 'No'}
+                        </Text>
+                      </Box>
+                    </Stack>
+                    <Field.HelperText>
+                      An HMCC Covenant Signing Member is someone who has
+                      attended HMCC’s Experiencing Membership Class and has
+                      decided to sign (in-person) the Membership Declaration{' '}
+                    </Field.HelperText>
+                  </Field.Root>
+                  <Box flex={[0, 1]}></Box>
+                </Stack>
+                {isMember && (
+                  <Stack direction={['column', 'row']} gap="4%">
+                    <Stack
+                      direction={['column', 'row']}
+                      gap="4%"
+                      border="1px solid #E2E8F0"
+                      borderRadius="6"
+                      p={['5%', '3%']}
+                      pt={['5%', '2%']}
+                      flex={[1, 4]}
+                    >
+                      <Field.Root>
+                        <Field.Label color="#2C5282">
+                          Recognition Date
+                        </Field.Label>
+                        <Input
+                          size="sm"
+                          type="date"
+                          borderRadius="5"
+                          readOnly
+                          {...reviewRegister('membershipRecognitionDate')}
+                        />
+                      </Field.Root>
+                      <Field.Root>
+                        <Field.Label color="#2C5282">
+                          Last Recommitment Date
+                        </Field.Label>
+                        <Input
+                          size="sm"
+                          type="date"
+                          borderRadius="5"
+                          readOnly
+                          {...reviewRegister('membershipRecommitmentDate')}
+                        />
+                      </Field.Root>
+                    </Stack>
+                    <Box flex={[0, 1]}></Box>
+                  </Stack>
+                )}
+                <Stack direction={['column', 'row']} gap="4%">
+                  <Field.Root flex={[1, 4]}>
+                    <Stack direction="row">
+                      <Text
+                        flex={[3, 1]}
+                        fontWeight="500"
+                        mr="3%"
+                        color="#2C5282"
+                      >
+                        Baptised
+                      </Text>
+                      <Box flex={[2, 1]}>
+                        <Controller
+                          control={reviewControl}
+                          name={'isBaptised'}
+                          render={({ field: { onChange, value, ref } }) => (
+                            <Switch
+                              onValueChange={onChange}
+                              ref={ref}
+                              checked={value}
+                              defaultChecked={false}
+                              readOnly
+                            />
+                          )}
+                        />
+                        <Text ml="3" fontWeight="500" as="span">
+                          {isBaptised ? 'Yes' : 'No'}
+                        </Text>
+                      </Box>
+                    </Stack>
+                  </Field.Root>
+                  <Box flex={[0, 1]}></Box>
+                </Stack>
+                {isBaptised && (
+                  <Stack direction={['column', 'row']} gap="4%">
+                    <Stack
+                      direction={['column', 'row']}
+                      gap="4%"
+                      border="1px solid #E2E8F0"
+                      borderRadius="6"
+                      p={['5%', '3%']}
+                      pt={['5%', '2%']}
+                      flex={[1, 4]}
+                    >
+                      <Field.Root>
+                        <Field.Label color="#2C5282">Baptism Place</Field.Label>
+                        <Input
+                          size="sm"
+                          borderRadius="5"
+                          readOnly
+                          {...reviewRegister('baptismPlace')}
+                        />
+                        <Field.HelperText>
+                          ‘HMCC Hong Kong’ if you are baptised with us,
+                          otherwise state where you were baptised or the name of
+                          your previous home church.
+                        </Field.HelperText>
+                      </Field.Root>
+                      <Field.Root>
+                        <Field.Label color="#2C5282">Baptism Date</Field.Label>
+                        <Input
+                          size="sm"
+                          type="date"
+                          borderRadius="5"
+                          readOnly
+                          {...reviewRegister('baptismDate')}
+                        />
+                        <Field.HelperText>
+                          To the best of your memory :)
+                        </Field.HelperText>
+                      </Field.Root>
+                    </Stack>
+                    <Box flex={[0, 1]}></Box>
+                  </Stack>
+                )}
+                <Flex>
+                  <Button
+                    size="sm"
+                    mt="1"
+                    color="#0628A3"
+                    borderColor="#0628A3"
+                    borderRadius="10"
+                    variant="outline"
+                    minW={['50%', '20%']}
+                    onClick={() => {
+                      setTabIndex('tab-1');
+                    }}
+                  >
+                    Previous Page
+                  </Button>
+                  <Button
+                    size="sm"
+                    ml="2%"
+                    mt="1"
+                    color="#FFFFFF"
+                    background="#0628A3"
+                    borderRadius="10"
+                    variant="solid"
+                    minW={['50%', '20%']}
+                    _hover={{
+                      background: '#062286',
+                    }}
+                    type="submit"
+                  >
+                    Save Profile
+                  </Button>
+                </Flex>
+              </Stack>
+            </form>
+          </Tabs.Content>
+        </Tabs.Root>
       </Container>
     </>
   );

@@ -1,10 +1,4 @@
-import {
-  Box,
-  Container,
-  Image,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Container, Image, Text, VStack } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import SaturateGoals from './SaturateGoals';
 import SaturateVision from './SaturateVision';

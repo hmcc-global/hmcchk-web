@@ -1,17 +1,10 @@
-import {
-  Box,
-  Container,
-  VStack,
-  Stack,
-  Text,
-  Heading,
-} from '@chakra-ui/react';
+import { Box, Container, VStack, Stack, Text, Heading } from '@chakra-ui/react';
 import { Image, Button, Link } from '@chakra-ui/react';
 import { saturateText } from '../home/SaturateVisionSection';
 
 const VisionMissionCard = ({ title, message }) => {
   return (
-    <Stack spacing="5" w="100%">
+    <Stack gap="5" w="100%">
       <Heading
         as="h2"
         fontSize={['3xl', '5xl']}
@@ -76,7 +69,7 @@ const VisionMissionSection = (props) => {
           height="100%"
           alignItems="center"
           justifyContent="center"
-          spacing="5"
+          gap="5"
           id="vision-mission"
         >
           <Box
@@ -97,9 +90,9 @@ const VisionMissionSection = (props) => {
               direction={['column', 'row']}
               justify="center"
               alignItems="center"
-              spacing={[6, null]}
+              gap={[6, null]}
             >
-              <VStack w={['85%', '35%']} align="center" spacing={[6, 8]}>
+              <VStack w={['85%', '35%']} align="center" gap={[6, 8]}>
                 <Image
                   src={
                     process.env.PUBLIC_URL + '/images/home/saturate-logo.png'
@@ -107,7 +100,7 @@ const VisionMissionSection = (props) => {
                   w={['90%']}
                 />
               </VStack>
-              <VStack maxW={['100%', '50%']} align="center" spacing={[6, 8]}>
+              <VStack maxW={['100%', '50%']} align="center" gap={[6, 8]}>
                 <Text
                   fontSize={['0.9em', '1.0em']}
                   textAlign={['justify']}

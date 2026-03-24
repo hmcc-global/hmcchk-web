@@ -2,31 +2,21 @@ import {
   Box,
   Text,
   Tabs,
-  TabList,
-  Tab,
-  TabPanels,
-  TabPanel,
   Flex,
-  FormControl,
-  FormLabel,
-  FormHelperText,
   Input,
   InputGroup,
   Button,
   Stack,
   Center,
   Switch,
-  InputRightAddon,
-  Select,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalFooter,
+  NativeSelect,
   VStack,
-  ModalCloseButton,
   HStack,
+  Field,
+  Icon,
+  Dialog,
+  Portal,
 } from '@chakra-ui/react';
-import { CheckCircleIcon } from '@chakra-ui/icons';
 import { customAxios as axios } from '../helpers/customAxios';
 import { useEffect, useState, useCallback } from 'react';
 import { useForm, Controller } from 'react-hook-form';
@@ -45,6 +35,7 @@ import {
   generatePublishedFormLinks,
 } from '../helpers/userInformationHelpers';
 import SermonNotesPagination from './SermonNotesPagination';
+import { LuCircleCheck } from 'react-icons/lu';
 
 const UserProfileDesktop = (props) => {
   const { user, staticData } = props;
@@ -259,30 +250,40 @@ const UserProfileDesktop = (props) => {
 
   return (
     <>
-      <Modal isOpen={modalOpen} onClose={onModalClose}>
-        <ModalOverlay />
-        <ModalContent borderRadius="20">
-          <ModalCloseButton />
-          <VStack>
-            <Text
-              color="#0628A3"
-              fontSize="2xl"
-              fontWeight="700"
-              mt={6}
-              flex={1}
-              textAlign="center"
-            >
-              Edited successfully
-            </Text>
-            <Box flex={4}>
-              <Center w="100%" h="100%">
-                <CheckCircleIcon mt={5} w="50%" h="50%" color="#0628A3" />
-              </Center>
-            </Box>
-          </VStack>
-          <ModalFooter />
-        </ModalContent>
-      </Modal>
+      <Dialog.Root open={modalOpen} onOpenChange={e => {
+        if (!e.open) {
+          onModalClose();
+        }
+      }}>
+        <Portal>
+
+          <Dialog.Backdrop />
+          <Dialog.Positioner>
+            <Dialog.Content borderRadius="20">
+              <Dialog.CloseTrigger />
+              <VStack>
+                <Text
+                  color="#0628A3"
+                  fontSize="2xl"
+                  fontWeight="700"
+                  mt={6}
+                  flex={1}
+                  textAlign="center"
+                >
+                  Edited successfully
+                </Text>
+                <Box flex={4}>
+                  <Center w="100%" h="100%">
+                    <Icon mt={5} w="50%" h="50%" color="#0628A3" asChild><LuCircleCheck /></Icon>
+                  </Center>
+                </Box>
+              </VStack>
+              <Dialog.Footer />
+            </Dialog.Content>
+          </Dialog.Positioner>
+
+        </Portal>
+      </Dialog.Root>
       <Flex
         mt={{ md: '40px', lg: '60px', xl: '80px' }}
         alignItems="center"
@@ -311,32 +312,32 @@ const UserProfileDesktop = (props) => {
         </Box>
       </Flex>
       <form onSubmit={handleSubmit(handleEditUserInformation)}>
-        <Tabs mt="5%" mb="5%" orientation="vertical" variant="unstyled">
+        <Tabs.Root mt="5%" mb="5%" orientation="vertical" unstyled defaultValue="tab-0">
           <Box flex={1}>
-            <TabList border="none" alignItems="flex-end">
-              <Tab style={tabTitle} _selected={{ md: tabText }}>
+            <Tabs.List border="none" alignItems="flex-end">
+              <Tabs.Trigger value="tab-0" style={tabTitle} _selected={{ md: tabText }}>
                 Signup Links
-              </Tab>
-              <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
+              </Tabs.Trigger>
+              <Tabs.Trigger value="tab-1" style={tabTitle} _selected={{ md: tabText }} mt={5}>
                 Sermon Notes
-              </Tab>
-              <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
+              </Tabs.Trigger>
+              <Tabs.Trigger value="tab-2" style={tabTitle} _selected={{ md: tabText }} mt={5}>
                 Personal Profile
-              </Tab>
-              <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
+              </Tabs.Trigger>
+              <Tabs.Trigger value="tab-3" style={tabTitle} _selected={{ md: tabText }} mt={5}>
                 Church Profile
-              </Tab>
-            </TabList>
+              </Tabs.Trigger>
+            </Tabs.List>
           </Box>
-          <TabPanels
+          <Box
             flex={4}
             bgColor="#ffffff"
             ml="5"
             border="1px solid #EBEBEB"
             borderRadius="10px"
           >
-            <TabPanel p="5%">
-              <Stack direction="row" spacing="5">
+            <Tabs.Content value="tab-0" p="5%">
+              <Stack direction="row" gap="5">
                 {formList && formList.length > 0 && (
                   <>
                     <Box width="50%">
@@ -376,8 +377,8 @@ const UserProfileDesktop = (props) => {
                 </Button>
               )} */}
               </Stack>
-            </TabPanel>
-            <TabPanel p="5%">
+            </Tabs.Content>
+            <Tabs.Content value="tab-1" p="5%">
               <HStack gap={5} mb={5}>
                 <Button
                   borderRadius={30}
@@ -419,24 +420,26 @@ const UserProfileDesktop = (props) => {
                   >
                     Sermon Series
                   </Text>
-                  <Select
-                    placeholder="Select Sermon Series"
-                    value={selectedSermonSeries}
-                    onChange={(e) => setSelectedSermonSeries(e.target.value)}
-                    width="50%"
-                    mb={4}
-                  >
-                    {sermonSeriesList.map((series) => {
-                      if (series !== '') {
-                        return (
-                          <option key={series} value={series}>
-                            {series}
-                          </option>
-                        );
-                      }
-                      return null;
-                    })}
-                  </Select>
+                  <NativeSelect.Root>
+                    <NativeSelect.Field
+                      placeholder="Select Sermon Series"
+                      value={selectedSermonSeries}
+                      onValueChange={(e) => setSelectedSermonSeries(e.target.value)}
+                      width="50%"
+                      mb={4}>
+                      {sermonSeriesList.map((series) => {
+                        if (series !== '') {
+                          return (
+                            <option key={series} value={series}>
+                              {series}
+                            </option>
+                          );
+                        }
+                        return null;
+                      })}
+                    </NativeSelect.Field>
+                    <NativeSelect.Indicator />
+                  </NativeSelect.Root>
                 </>
               )}
 
@@ -454,162 +457,162 @@ const UserProfileDesktop = (props) => {
                     : setCurrentPageSaved
                 }
               />
-            </TabPanel>
-            <TabPanel p="7%">
-              <Stack spacing="2%">
-                <Stack direction={['column', 'row']} spacing="7%">
-                  <FormControl>
-                    <FormLabel color="#2C5282">
+            </Tabs.Content>
+            <Tabs.Content value="tab-2" p="7%">
+              <Stack gap="2%">
+                <Stack direction={['column', 'row']} gap="7%">
+                  <Field.Root>
+                    <Field.Label color="#2C5282">
                       First Name (and Middle Name)
-                    </FormLabel>
+                    </Field.Label>
                     <Input
                       size="sm"
                       borderRadius="5"
                       {...register('firstName', { required: true })}
-                      isInvalid={errors['firstName']}
+                      invalid={errors['firstName']}
                       placeholder="Please fill in this field"
                     />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">Last Name</FormLabel>
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Last Name</Field.Label>
                     <Input
                       size="sm"
                       borderRadius="5"
                       {...register('lastName', { required: true })}
-                      isInvalid={errors['lastName']}
+                      invalid={errors['lastName']}
                       placeholder="Please fill in this field"
                     />
-                    <FormHelperText>
+                    <Field.HelperText>
                       Enter "N/A" if not applicable for you
-                    </FormHelperText>
-                  </FormControl>
+                    </Field.HelperText>
+                  </Field.Root>
                 </Stack>
-                <Stack direction={['column', 'row']} spacing="7%">
-                  <FormControl>
-                    <FormLabel color="#2C5282">Country of Origin</FormLabel>
-                    <Select
-                      size="sm"
-                      borderRadius="5"
-                      {...register('countryOfOrigin', { required: true })}
-                      isInvalid={errors['countryOfOrigin']}
-                      placeholder="Please fill in this field"
-                    >
-                      {countryList.map((item) => {
-                        return <option key={'co' + item}>{item}</option>;
-                      })}
-                    </Select>
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">Lifestage</FormLabel>
-                    <Select
-                      size="sm"
-                      borderRadius="5"
-                      {...register('lifestage', { required: true })}
-                      isInvalid={errors['lifestage']}
-                      placeholder="Please fill in this field"
-                    >
-                      {lifestageList.map((item) => {
-                        return <option key={'life' + item}>{item}</option>;
-                      })}
-                    </Select>
-                  </FormControl>
+                <Stack direction={['column', 'row']} gap="7%">
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Country of Origin</Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field
+                        size="sm"
+                        borderRadius="5"
+                        {...register('countryOfOrigin', { required: true })}
+                        invalid={errors['countryOfOrigin']}
+                        placeholder="Please fill in this field">
+                        {countryList.map((item) => {
+                          return <option key={'co' + item}>{item}</option>;
+                        })}
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Lifestage</Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field
+                        size="sm"
+                        borderRadius="5"
+                        {...register('lifestage', { required: true })}
+                        invalid={errors['lifestage']}
+                        placeholder="Please fill in this field">
+                        {lifestageList.map((item) => {
+                          return <option key={'life' + item}>{item}</option>;
+                        })}
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
                 </Stack>
-                <Stack direction={['column', 'row']} spacing="7%">
-                  <FormControl>
-                    <FormLabel color="#2C5282">
+                <Stack direction={['column', 'row']} gap="7%">
+                  <Field.Root>
+                    <Field.Label color="#2C5282">
                       Address: Floor / Level
-                    </FormLabel>
+                    </Field.Label>
                     <Input
                       size="sm"
                       borderRadius="5"
                       {...register('addressFloor')}
                     />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">Campus</FormLabel>
-                    <Select
-                      size="sm"
-                      borderRadius="5"
-                      {...register('campus')}
-                      pointerEvents="none"
-                    >
-                      {campusList.map((item) => {
-                        return <option key={'ca' + item}>{item}</option>;
-                      })}
-                    </Select>
-                  </FormControl>
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Campus</Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field size="sm" borderRadius="5" {...register('campus')} pointerEvents="none">
+                        {campusList.map((item) => {
+                          return <option key={'ca' + item}>{item}</option>;
+                        })}
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
                 </Stack>
-                <Stack direction={['column', 'row']} spacing="7%">
-                  <FormControl>
-                    <FormLabel color="#2C5282">
+                <Stack direction={['column', 'row']} gap="7%">
+                  <Field.Root>
+                    <Field.Label color="#2C5282">
                       Address: Room / Flat / Unit / Suite
-                    </FormLabel>
+                    </Field.Label>
                     <Input
                       size="sm"
                       borderRadius="5"
                       {...register('addressFlat')}
                     />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">Phone Number</FormLabel>
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Phone Number</Field.Label>
                     <Input
                       size="sm"
                       borderRadius="5"
                       {...register('phoneNumber', { required: true })}
-                      isInvalid={errors['phoneNumber']}
+                      invalid={errors['phoneNumber']}
                       placeholder="Please fill in this field"
                     />
-                  </FormControl>
+                  </Field.Root>
                 </Stack>
-                <Stack direction={['column', 'row']} spacing="7%">
-                  <FormControl>
-                    <FormLabel color="#2C5282">
+                <Stack direction={['column', 'row']} gap="7%">
+                  <Field.Root>
+                    <Field.Label color="#2C5282">
                       Address: Street Address
-                    </FormLabel>
+                    </Field.Label>
                     <Input
                       size="sm"
                       borderRadius="5"
                       {...register('addressStreet')}
                     />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">Birthday</FormLabel>
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Birthday</Field.Label>
                     <Input
                       size="sm"
                       type="date"
                       borderRadius="5"
                       {...register('birthday')}
                     />
-                  </FormControl>
+                  </Field.Root>
                 </Stack>
-                <Stack direction={['column', 'row']} spacing="7%">
-                  <FormControl flex={1}>
-                    <FormLabel color="#2C5282">Address: District</FormLabel>
-                    <Select
-                      size="sm"
-                      borderRadius="5"
-                      {...register('addressDistrict')}
-                    >
-                      {districtList.map((item) => {
-                        return <option key={'di' + item}>{item}</option>;
-                      })}
-                    </Select>
-                  </FormControl>
+                <Stack direction={['column', 'row']} gap="7%">
+                  <Field.Root flex={1}>
+                    <Field.Label color="#2C5282">Address: District</Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field size="sm" borderRadius="5" {...register('addressDistrict')}>
+                        {districtList.map((item) => {
+                          return <option key={'di' + item}>{item}</option>;
+                        })}
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
                   <Box flex={1}></Box>
                 </Stack>
-                <Stack direction={['column', 'row']} spacing="7%">
-                  <FormControl flex={1}>
-                    <FormLabel color="#2C5282">Address: Region</FormLabel>
-                    <Select
-                      size="sm"
-                      borderRadius="5"
-                      {...register('addressRegion')}
-                    >
-                      {regionList.map((item) => {
-                        return <option key={'re' + item}>{item}</option>;
-                      })}
-                    </Select>
-                  </FormControl>
+                <Stack direction={['column', 'row']} gap="7%">
+                  <Field.Root flex={1}>
+                    <Field.Label color="#2C5282">Address: Region</Field.Label>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field size="sm" borderRadius="5" {...register('addressRegion')}>
+                        {regionList.map((item) => {
+                          return <option key={'re' + item}>{item}</option>;
+                        })}
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </Field.Root>
                   <Box flex={1}></Box>
                 </Stack>
               </Stack>
@@ -624,31 +627,33 @@ const UserProfileDesktop = (props) => {
               >
                 Save Information
               </Button>
-            </TabPanel>
-            <TabPanel p="7%">
-              <Stack spacing="3%">
-                <FormControl>
-                  <FormLabel color="#2C5282">LIFE Group</FormLabel>
-                  <Select size="sm" borderRadius="5" {...register('lifeGroup')}>
-                    {lifegroupList.map((item) => {
-                      return <option key={'lg' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#2C5282">Ministry Team</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
-                    {...register('ministryTeam')}
-                  >
-                    {ministryTeamList.map((item) => {
-                      return <option key={'mt' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </FormControl>
+            </Tabs.Content>
+            <Tabs.Content value="tab-3" p="7%">
+              <Stack gap="3%">
+                <Field.Root>
+                  <Field.Label color="#2C5282">LIFE Group</Field.Label>
+                  <NativeSelect.Root>
+                    <NativeSelect.Field size="sm" borderRadius="5" {...register('lifeGroup')}>
+                      {lifegroupList.map((item) => {
+                        return <option key={'lg' + item}>{item}</option>;
+                      })}
+                    </NativeSelect.Field>
+                    <NativeSelect.Indicator />
+                  </NativeSelect.Root>
+                </Field.Root>
+                <Field.Root>
+                  <Field.Label color="#2C5282">Ministry Team</Field.Label>
+                  <NativeSelect.Root>
+                    <NativeSelect.Field size="sm" borderRadius="5" {...register('ministryTeam')}>
+                      {ministryTeamList.map((item) => {
+                        return <option key={'mt' + item}>{item}</option>;
+                      })}
+                    </NativeSelect.Field>
+                    <NativeSelect.Indicator />
+                  </NativeSelect.Root>
+                </Field.Root>
 
-                <FormControl>
+                <Field.Root>
                   <Stack direction="row">
                     <Text flex={1} fontWeight="500" mr="3%" color="#2C5282">
                       Church Member
@@ -660,10 +665,10 @@ const UserProfileDesktop = (props) => {
                         render={({ field: { onChange, value, ref } }) => (
                           <Switch
                             size="lg"
-                            onChange={onChange}
+                            onValueChange={onChange}
                             ref={ref}
-                            isChecked={value}
-                            isReadOnly
+                            checked={value}
+                            readOnly
                           />
                         )}
                       />
@@ -672,49 +677,47 @@ const UserProfileDesktop = (props) => {
                       </Text>
                     </Box>
                   </Stack>
-                  <FormHelperText>
+                  <Field.HelperText>
                     An HMCC Covenant Signing Member is someone who has attended
                     HMCC’s Experiencing Membership Class and has decided to sign
                     (in-person) the Membership Declaration{' '}
-                  </FormHelperText>
-                </FormControl>
+                  </Field.HelperText>
+                </Field.Root>
                 <Stack
                   direction="row"
                   border="1px solid #E2E8F0"
                   borderRadius="6"
                   p="4%"
-                  spacing="4%"
+                  gap="4%"
                 >
-                  <FormControl>
-                    <FormLabel color="#2C5282">Recognition Date</FormLabel>
-                    <InputGroup size="sm">
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Recognition Date</Field.Label>
+                    <InputGroup size="sm" endAddon="Date">
                       <Input
                         size="sm"
                         type="date"
                         borderRadius="5"
                         {...register('membershipRecognitionDate')}
-                        isReadOnly
+                        readOnly
                       />
-                      <InputRightAddon borderRadius="5">Date</InputRightAddon>
                     </InputGroup>
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">
                       Last Recommitment Date
-                    </FormLabel>
-                    <InputGroup size="sm">
+                    </Field.Label>
+                    <InputGroup size="sm" endAddon="Date">
                       <Input
                         size="sm"
                         type="date"
                         borderRadius="5"
                         {...register('membershipRecommitmentDate')}
-                        isReadOnly
+                        readOnly
                       />
-                      <InputRightAddon borderRadius="5">Date</InputRightAddon>
                     </InputGroup>
-                  </FormControl>
+                  </Field.Root>
                 </Stack>
-                <FormControl>
+                <Field.Root>
                   <Stack direction="row">
                     <Text flex={1} fontWeight="500" mr="3%" color="#2C5282">
                       Baptised
@@ -726,10 +729,10 @@ const UserProfileDesktop = (props) => {
                         render={({ field: { onChange, value, ref } }) => (
                           <Switch
                             size="lg"
-                            onChange={onChange}
+                            onValueChange={onChange}
                             ref={ref}
-                            isChecked={value}
-                            isReadOnly
+                            checked={value}
+                            readOnly
                           />
                         )}
                       />
@@ -738,36 +741,35 @@ const UserProfileDesktop = (props) => {
                       </Text>
                     </Box>
                   </Stack>
-                </FormControl>
+                </Field.Root>
                 <Stack
                   direction="row"
                   border="1px solid #E2E8F0"
                   borderRadius="6"
                   p="4%"
-                  spacing="4%"
+                  gap="4%"
                 >
-                  <FormControl>
-                    <FormLabel color="#2C5282">Baptism Place</FormLabel>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Baptism Place</Field.Label>
                     <Input
                       size="sm"
                       borderRadius="5"
                       {...register('baptismPlace')}
-                      isReadOnly
+                      readOnly
                     />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">Baptism Date</FormLabel>
-                    <InputGroup size="sm">
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Baptism Date</Field.Label>
+                    <InputGroup size="sm" endAddon="Date">
                       <Input
                         size="sm"
                         type="date"
                         borderRadius="5"
                         {...register('baptismDate')}
-                        isReadOnly
+                        readOnly
                       />
-                      <InputRightAddon borderRadius="5">Date</InputRightAddon>
                     </InputGroup>
-                  </FormControl>
+                  </Field.Root>
                 </Stack>
               </Stack>
               <Button
@@ -781,9 +783,9 @@ const UserProfileDesktop = (props) => {
               >
                 Save Information
               </Button>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+            </Tabs.Content>
+          </Box>
+        </Tabs.Root>
       </form>
     </>
   );

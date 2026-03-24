@@ -9,7 +9,7 @@ import EventsPage from './events/EventsPage';
 import VisitUsPage from './discover/PlanAVisit';
 import DiscoverPage from './discover/DiscoverPage';
 import BBPage from './building-block/BBPage';
-import ShinePage from './shine/ShinePage';
+import ShinePage from '../components/shine/ShinePage';
 import PrivateRoute from './helpers/PrivateRoute';
 import Signup from './auth/Signup';
 import HomeContainer from './home/HomeContainer';

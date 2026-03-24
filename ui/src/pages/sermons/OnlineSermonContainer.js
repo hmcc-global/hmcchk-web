@@ -1,13 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
-import {
-  HStack,
-  VStack,
-  Box,
-  AspectRatio,
-  Text,
-  Container,
-} from '@chakra-ui/react';
+import { HStack, VStack, Box, AspectRatio, Text, Container } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 import OnlinePageButtons from './OnlinePageButtons';
 import OnlinePageTabs from './OnlinePageTabs';
@@ -80,7 +73,7 @@ const OnlineSermonContainer = (props) => {
                     allowFullScreen
                   ></iframe>
                 </AspectRatio>
-                <VStack spacing={'0.5rem'} alignItems="left" mb={'1rem'}>
+                <VStack gap={'0.5rem'} alignItems="left" mb={'1rem'}>
                   <Text
                     fontWeight="400"
                     fontSize={{ base: '1.125rem', md: '2rem' }}
@@ -89,7 +82,7 @@ const OnlineSermonContainer = (props) => {
                     {onlineSermon.title}
                   </Text>
                   <HStack
-                    spacing={0}
+                    gap={0}
                     fontSize={{ base: '0.625rem', md: '0.875rem' }}
                     alignItems="center"
                     justifyContent="flex-start"

@@ -16,16 +16,16 @@ const TestimonyCard = (props) => {
       w={["18em", "47em"]}
       bg={backgroundStyle}
     >
-      <Stack direction={["column", "row"]} spacing={6}>
+      <Stack direction={["column", "row"]} gap={6}>
         <Image
           src={imageUrl}
-          fit="contain"
+          objectFit="contain"
           borderRadius={10}
           h={["10em", "15em"]}
           ml={"auto"}
         />
 
-        <VStack align="stretch" spacing={0}>
+        <VStack align="stretch" gap={0}>
           <Heading mt={[-5, -1]} fontSize={["lg", "2xl"]}>
             {name}
           </Heading>

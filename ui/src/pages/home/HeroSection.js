@@ -1,12 +1,4 @@
-import {
-  Flex,
-  Stack,
-  Image,
-  Box,
-  Heading,
-  Container,
-  Text,
-} from '@chakra-ui/react';
+import { Flex, Stack, Image, Box, Heading, Container, Text } from '@chakra-ui/react';
 import { SocialIcon } from 'react-social-icons';
 import { useEffect, useRef } from 'react';
 import SubHeroSection from './SubHeroSection';
@@ -48,28 +40,31 @@ const HeroSection = () => {
           position="absolute"
         >
           <Flex
-            as="video"
-            ref={vidRef}
             w="full"
-            src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
-            loop
-            muted
             objectFit="cover"
             justify="center"
-            playsInline
-            sx={{ aspectRatio: '16/9' }}
+            css={{
+              aspectRatio: '16/9'
+            }}
             zIndex="0"
             position="absolute"
             top="0"
             left="350"
-          />
+            asChild><video
+              ref={vidRef}
+              src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
+              loop
+              muted
+              playsInline /></Flex>
           <Flex
             w="full"
             minH="95.1vh"
             zIndex="0"
             background="linear-gradient(to right, rgb(246,250,255,1) 45%, rgba(246,250,255,0) 68%)"
             position="absolute"
-            sx={{ aspectRatio: '16/9' }}
+            css={{
+              aspectRatio: '16/9'
+            }}
             top="0"
             left="0"
           />
@@ -79,7 +74,9 @@ const HeroSection = () => {
             zIndex="0"
             background="linear-gradient(to top, rgb(246,250,255, 1) 10%, rgba(246,250,255,0) 25%)"
             position="absolute"
-            sx={{ aspectRatio: '16/9' }}
+            css={{
+              aspectRatio: '16/9'
+            }}
             top="0"
             left="0"
           />
@@ -105,7 +102,7 @@ const HeroSection = () => {
           >
             <Stack
               w="100%"
-              spacing={[1, 1, 5]}
+              gap={[1, 1, 5]}
               align="flex-start"
               justifyContent="start"
               fontFamily="Manrope"
@@ -130,7 +127,7 @@ const HeroSection = () => {
 
               {/* Hide the text with exclusion effect*/}
               <Stack
-                spacing={[1, 0]}
+                gap={[1, 0]}
                 px={['11%', '5%', '0']}
                 w="full"
                 textAlign={['center', 'center', 'left']}
@@ -180,18 +177,19 @@ const HeroSection = () => {
           </Container>
           <Flex
             display={['flex', 'flex', 'none']}
-            as="video"
             w="full"
             h="auto"
-            src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
-            loop
-            muted
             objectFit="cover"
             justify="center"
-            playsInline
-            sx={{ aspectRatio: '16/9' }}
+            css={{
+              aspectRatio: '16/9'
+            }}
             mt={[7, 7, 5]}
-          ></Flex>
+            asChild><video
+              src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
+              loop
+              muted
+              playsInline /></Flex>
           <Container
             display="flex"
             maxW="container.xl"
@@ -202,7 +200,7 @@ const HeroSection = () => {
           >
             <Stack
               w="100%"
-              spacing={[1, 1, 5]}
+              gap={[1, 1, 5]}
               fontFamily="Manrope"
               fontSize={bodyTextSize}
               textAlign={['right', 'right', 'left']}
@@ -217,7 +215,7 @@ const HeroSection = () => {
                 <Text>Unit 2, 22/F Crocodile Center, Kwun Tong & Online</Text>
               </Text>
               <Stack
-                spacing={[0, 0, -3]}
+                gap={[0, 0, -3]}
                 pl={[0, 0, '40%']}
                 flexDir={['row', 'row', 'column']}
                 justifyContent={['flex-end', 'flex-end', 'flex-start']}
@@ -262,7 +260,7 @@ const HeroSection = () => {
           >
             <Stack
               w="100%"
-              spacing={[1, 1, 5]}
+              gap={[1, 1, 5]}
               align="flex-start"
               justifyContent="start"
               fontFamily="Manrope"
@@ -285,7 +283,7 @@ const HeroSection = () => {
 
               {/* Hide the text with exclusion effect*/}
               <Stack
-                spacing={[1, 0]}
+                gap={[1, 0]}
                 px={['11%', '5%', '0']}
                 w="full"
                 textAlign={['center', 'center', 'left']}
@@ -335,19 +333,20 @@ const HeroSection = () => {
           </Container>
           <Flex
             display={['flex', 'flex', 'none']}
-            as="video"
-            ref={vidRefMobile}
             w="full"
             h="auto"
-            src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
-            loop
-            muted
             objectFit="cover"
             justify="center"
-            playsInline
-            sx={{ aspectRatio: '16/9' }}
+            css={{
+              aspectRatio: '16/9'
+            }}
             mt={[2, -3, 5]}
-          ></Flex>
+            asChild><video
+              ref={vidRefMobile}
+              src={process.env.PUBLIC_URL + '/images/home/Homepage_Video.mp4'}
+              loop
+              muted
+              playsInline /></Flex>
           <Container
             display="flex"
             maxW="container.xl"
@@ -357,7 +356,7 @@ const HeroSection = () => {
           >
             <Stack
               w="100%"
-              spacing={[1, 1, 5]}
+              gap={[1, 1, 5]}
               fontFamily="Manrope"
               fontSize={bodyTextSize}
               textAlign={['right', 'right', 'left']}
@@ -372,7 +371,7 @@ const HeroSection = () => {
                 <Text>Unit 2, 22/F Crocodile Center, Kwun Tong & Online</Text>
               </Text>
               <Stack
-                spacing={[0, 0, -3]}
+                gap={[0, 0, -3]}
                 pl={[0, 0, '40%']}
                 flexDir={['row', 'row', 'column']}
                 justifyContent={['flex-end', 'flex-end', 'flex-start']}

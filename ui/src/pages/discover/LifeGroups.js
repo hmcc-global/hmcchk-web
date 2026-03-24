@@ -81,7 +81,6 @@ const LifeGroups = (props) => {
           <Center>
             <LinkBox
               style={{ backgroundOrigin: 'border-box' }}
-              as="button"
               transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
               boxShadow={['none', '2px 1000px 1px #fff inset']}
               boxSizing="border-box"
@@ -96,19 +95,20 @@ const LifeGroups = (props) => {
               fontWeight="600"
               _hover={{ boxShadow: 'none' }}
               target="_blank"
-            >
-              <LinkOverlay
-                href="https://bit.ly/LGSignup-2025"
-                target="_blank"
-                backgroundImage="linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(to right, #fd7b7e, #3182ce)"
-                backgroundSize="100%"
-                backgroundClip="text"
-                color={['white', 'transparent']}
-                _hover={{ color: 'white' }}
-              >
-                TRY OUT A LIFE GROUP
-              </LinkOverlay>
-            </LinkBox>
+              asChild
+            ><button>
+                <LinkOverlay
+                  href="https://bit.ly/LGSignup-2025"
+                  target="_blank"
+                  backgroundImage="linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(to right, #fd7b7e, #3182ce)"
+                  backgroundSize="100%"
+                  backgroundClip="text"
+                  color={['white', 'transparent']}
+                  _hover={{ color: 'white' }}
+                >
+                  TRY OUT A LIFE GROUP
+                </LinkOverlay>
+              </button></LinkBox>
           </Center>
         </Stack>
       </Flex>
@@ -122,7 +122,7 @@ const LifeGroups = (props) => {
         >
           Check out the different LIFE Groups in HMCC!
         </Heading>
-        <SimpleGrid columns={[2, 3]} spacing={3}>
+        <SimpleGrid columns={[2, 3]} gap={3}>
           {lifeGroupList.length > 0 &&
             lifeGroupList.map((lifeGroupInfo, i) => (
               <LifeGroupCard key={'lg' + i} lifeGroupInfo={lifeGroupInfo} />

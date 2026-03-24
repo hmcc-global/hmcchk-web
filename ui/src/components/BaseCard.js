@@ -9,7 +9,7 @@ import { Card } from '@chakra-ui/react';
 */
 
 const BaseCard = ({ title }) => {
-  return <Card></Card>;
+  return <Card.Root></Card.Root>;
 };
 
 export default BaseCard;

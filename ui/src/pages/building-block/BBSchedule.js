@@ -50,7 +50,6 @@ const ScheduleItem = ({ time, color, description }) => (
 
 const DecorativeSVG = ({ position, pathProps, ...boxProps }) => (
   <Box
-    as="svg"
     position="absolute"
     width={{
       base: '6rem',
@@ -65,9 +64,9 @@ const DecorativeSVG = ({ position, pathProps, ...boxProps }) => (
     fill="none"
     preserveAspectRatio="xMidYMid meet"
     {...boxProps}
-  >
-    <path {...pathProps} />
-  </Box>
+    asChild><svg>
+      <path {...pathProps} />
+    </svg></Box>
 );
 
 const BBSchedule = forwardRef((props, ref) => {

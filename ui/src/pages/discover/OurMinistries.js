@@ -21,7 +21,7 @@ const OurMinistries = (props) => {
       >
         Explore ways to get involved at our church whether through community or serving.
       </Text>
-      <SimpleGrid columns={[1, 3]} spacing={4} fontFamily="Manrope">
+      <SimpleGrid columns={[1, 3]} gap={4} fontFamily="Manrope">
         <Box
           h={[141, 340]}
           p={2}
@@ -104,7 +104,7 @@ const OurMinistries = (props) => {
         ml={[0, 20, 40]}
         mr={[0, 20, 40]}
         mt={4}
-        spacing={4}
+        gap={4}
       >
         <Box
           h={[141, 340]}
@@ -154,9 +154,9 @@ const OurMinistries = (props) => {
           </Heading>
           <Text fontWeight={400} fontSize={['xs', 'sm', 'md']} mt={[4, 6]}>
             Building Blocks is HMCC’s Children Ministry, learn more about it{' '}
-            <Text as="u">
-              <Link href="/building-blocks">here ➔</Link>
-            </Text>
+            <Text asChild><u>
+                <Link href="/building-blocks">here ➔</Link>
+              </u></Text>
           </Text>
         </Box>
       </SimpleGrid>

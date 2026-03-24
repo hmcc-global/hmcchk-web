@@ -26,7 +26,7 @@ const SUNDAY_CELEBRATION_GOOGLE_MAPS_EMBED =
 const VisitUsPage = (props) => {
   return (
     <Container maxW="container.lg" py={10}>
-      <VStack spacing={[4, 10]} align="stretch">
+      <VStack gap={[4, 10]} align="stretch">
         <Box
           borderWidth="1px"
           borderRadius="20"
@@ -109,10 +109,10 @@ const VisitUsPage = (props) => {
                 <Link
                   href="https://bit.ly/TCenterDirections"
                   color="#0E66CC"
-                  isExternal
                   fontWeight={700}
-                >
-                  <Text as="u">bit.ly/TCenterDirections</Text>
+                  target='_blank'
+                  rel='noopener noreferrer'>
+                  <Text asChild><u>bit.ly/TCenterDirections</u></Text>
                 </Link>
               </Text>
               <Spacer />
@@ -169,7 +169,7 @@ const VisitUsPage = (props) => {
           pt={[4, 6]}
           pb={4}
         >
-          <VStack align="stretch" spacing={12}>
+          <VStack align="stretch" gap={12}>
             <Heading
               as="h3"
               fontSize={['2xl', '4xl']}
@@ -191,9 +191,9 @@ const VisitUsPage = (props) => {
             >
               <Link
                 href="https://hk.hmccglobal.org/online/"
-                isExternal
                 fontFamily="Manrope"
-              >
+                target='_blank'
+                rel='noopener noreferrer'>
                 Join us ONLINE
               </Link>
             </Heading>
@@ -209,7 +209,7 @@ const VisitUsPage = (props) => {
           >
             Got Queries?{' '}
             <Link href="mailto:hk@hmccglobal.org">
-              hk@hmccglobal.org <Icon as={RiChat1Line} ml={1} />
+              hk@hmccglobal.org <Icon ml={1} asChild><RiChat1Line /></Icon>
             </Link>
           </Heading>
         </Box>

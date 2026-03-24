@@ -1,16 +1,16 @@
 import React from 'react';
+import { useColorModeValue } from "../../../components/ui/color-mode";
 import {
   IconButton,
   Box,
   CloseButton,
   Flex,
   Icon,
-  useColorModeValue,
   Link,
   Drawer,
-  DrawerContent,
   Text,
   useDisclosure,
+  Portal,
 } from '@chakra-ui/react';
 import {
   FiHome,
@@ -125,10 +125,7 @@ const MobileNav = ({ onOpen }) => {
         display={{ base: 'flex', md: 'none' }}
         onClick={onOpen}
         variant="outline"
-        aria-label="open menu"
-        icon={<FiMenu />}
-      />
-
+        aria-label="open menu"><FiMenu /></IconButton>
       <Text
         display={{ base: 'flex', md: 'none' }}
         fontSize="2xl"
@@ -143,7 +140,7 @@ const MobileNav = ({ onOpen }) => {
 
 export default function SidebarWithHeader(props) {
   const { children } = props;
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
 
   return (
     <>
@@ -151,19 +148,26 @@ export default function SidebarWithHeader(props) {
         onClose={() => onClose}
         display={{ base: 'none', md: 'block' }}
       />
-      <Drawer
-        autoFocus={true}
-        isOpen={isOpen}
-        placement="left"
-        onClose={onClose}
-        returnFocusOnClose={false}
-        onOverlayClick={onClose}
-        size="full"
-      >
-        <DrawerContent>
-          <SidebarContent onClose={onClose} />
-        </DrawerContent>
-      </Drawer>
+      <Drawer.Root
+        open={open}
+        placement='start'
+        onInteractOutside={onClose}
+        size='full'
+        onOpenChange={e => {
+          if (!e.open) {
+            onClose();
+          }
+        }}>
+        <Portal>
+
+          <Drawer.Positioner>
+            <Drawer.Content>
+              <SidebarContent onClose={onClose} />
+            </Drawer.Content>
+          </Drawer.Positioner>
+
+        </Portal>
+</Drawer.Root>
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {children}

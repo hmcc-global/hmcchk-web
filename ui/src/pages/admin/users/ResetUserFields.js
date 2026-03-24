@@ -1,17 +1,6 @@
 import React, { useState, useRef } from 'react';
-import {
-  Button,
-  Select,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
-  useDisclosure,
-} from '@chakra-ui/react';
+import { Button, NativeSelect, useDisclosure, Dialog, Portal } from '@chakra-ui/react';
 import { customAxios as axios } from '../../helpers/customAxios';
-import { TriangleDownIcon } from '@chakra-ui/icons';
 
 const fieldMapping = {
   address: 'Address',
@@ -25,7 +14,7 @@ const fieldMapping = {
 const ResetUserFields = (props) => {
   const [value, setValue] = useState('');
   const cancelRef = useRef();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
 
   const handleChange = (e) => {
     if (e.target.value !== '') {
@@ -47,56 +36,65 @@ const ResetUserFields = (props) => {
   };
   return (
     <>
-      <Select
-        placeholder="Reset"
-        width="45%"
-        icon={<TriangleDownIcon />}
-        variant="filled"
-        value={value}
-        onChange={handleChange}
-      >
-        <option value="address">{fieldMapping['address']}</option>
-        <option value="campus">{fieldMapping['campus']}</option>
-        <option value="ministryTeam">{fieldMapping['ministryTeam']}</option>
-        <option value="lifeGroup">{fieldMapping['lifeGroup']}</option>
-        <option value="lifestage">{fieldMapping['lifestage']}</option>
-        <option value="countryOfOrigin">
-          {fieldMapping['countryOfOrigin']}
-        </option>
-      </Select>
-      <AlertDialog
-        isOpen={isOpen}
-        leastDestructiveRef={cancelRef}
-        onClose={onClose}
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Reset
-            </AlertDialogHeader>
+      <NativeSelect.Root>
+        <NativeSelect.Field
+          placeholder="Reset"
+          width="45%"
+          variant="filled"
+          value={value}
+          onValueChange={handleChange}>
+          <option value="address">{fieldMapping['address']}</option>
+          <option value="campus">{fieldMapping['campus']}</option>
+          <option value="ministryTeam">{fieldMapping['ministryTeam']}</option>
+          <option value="lifeGroup">{fieldMapping['lifeGroup']}</option>
+          <option value="lifestage">{fieldMapping['lifestage']}</option>
+          <option value="countryOfOrigin">
+            {fieldMapping['countryOfOrigin']}
+          </option>
+        </NativeSelect.Field>
+        <NativeSelect.Indicator />
+      </NativeSelect.Root>
+      <Dialog.Root
+        open={open}
+        initialFocusEl={() => cancelRef.current}
+        role='alertdialog'
+        onOpenChange={e => {
+          if (!e.open) {
+            onClose();
+          }
+        }}>
+        <Portal>
 
-            <AlertDialogBody>
-              Are you sure you want to reset <b>{fieldMapping[value]}</b>?{' '}
-              <p style={{ color: 'red' }}>
-                You can't undo this action afterwards.
-              </p>
-            </AlertDialogBody>
+          <Dialog.Backdrop>
+            <Dialog.Positioner>
+              <Dialog.Content>
+                <Dialog.Header fontSize="lg" fontWeight="bold">
+                  Reset
+                </Dialog.Header>
+                <Dialog.Body>
+                  Are you sure you want to reset <b>{fieldMapping[value]}</b>?{' '}
+                  <p style={{ color: 'red' }}>
+                    You can't undo this action afterwards.
+                  </p>
+                </Dialog.Body>
+                <Dialog.Footer>
+                  <Button ref={cancelRef} onClick={onClose}>
+                    Cancel
+                  </Button>
+                  <Button
+                    colorPalette="red"
+                    onClick={() => resetUsers(value)}
+                    ml={3}
+                  >
+                    Reset
+                  </Button>
+                </Dialog.Footer>
+              </Dialog.Content>
+            </Dialog.Positioner>
+          </Dialog.Backdrop>
 
-            <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onClose}>
-                Cancel
-              </Button>
-              <Button
-                colorScheme="red"
-                onClick={() => resetUsers(value)}
-                ml={3}
-              >
-                Reset
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
+        </Portal>
+</Dialog.Root>
     </>
   );
 };

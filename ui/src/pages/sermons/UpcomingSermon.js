@@ -70,7 +70,7 @@ const UpcomingSermon = ({ upcoming }) => {
         zIndex="sticky"
       >
         <Stack direction="column">
-          <Stack direction="row" spacing="auto">
+          <Stack direction="row" gap="auto">
             <Text
               color="#0628A3"
               fontWeight="bold"
@@ -89,7 +89,7 @@ const UpcomingSermon = ({ upcoming }) => {
             <Box maxW="55%">
               <Text
                 fontSize="sm"
-                noOfLines={5}
+                lineClamp={5}
                 dangerouslySetInnerHTML={{ __html: sermonDesc }}
               />
             </Box>
@@ -97,18 +97,15 @@ const UpcomingSermon = ({ upcoming }) => {
           <Button
             alignSelf="flex-end"
             height="auto"
-            as={Link}
             p="2"
             background="#0628A3"
             color="#ffffff"
             width="30%"
             backdropFilter="blur(6px)"
             borderRadius="10px"
-            href="/events"
             id="sermon-events"
-          >
-            Learn More
-          </Button>
+            asChild><Link href="/events">Learn More
+                      </Link></Button>
         </Stack>
       </Box>
     );
@@ -127,7 +124,7 @@ const UpcomingSermon = ({ upcoming }) => {
         zIndex="sticky"
       >
         <Stack direction="column">
-          <Stack direction="column" spacing={4}>
+          <Stack direction="column" gap={4}>
             <CloseButton onClick={closeModal} size="lg" alignSelf="flex-end" />
             <Text color="#0628A3" fontWeight="900" fontSize="xl" align="center">
               Upcoming Sermon Series!
@@ -147,16 +144,13 @@ const UpcomingSermon = ({ upcoming }) => {
           <Center>
             <Button
               width="70vw"
-              as={Link}
               backgroundColor="#0628A3"
               color="white"
               borderRadius="10px"
               marginTop="20px"
-              href="/events"
               id="sermon-events"
-            >
-              Learn More
-            </Button>
+              asChild><Link href="/events">Learn More
+                          </Link></Button>
           </Center>
         </Stack>
       </Box>

@@ -1,22 +1,19 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import {
   Container,
-  FormControl,
   Box,
-  FormLabel,
   Input,
   Grid,
   Stack,
   Button,
-  useToast,
-  Select,
-  FormErrorMessage,
-  FormHelperText,
+  NativeSelect,
+  Field,
 } from '@chakra-ui/react';
+import { toaster } from '../../../components/ui/toaster';
 import { useForm } from 'react-hook-form';
 import { customAxios as axios } from '../../helpers/customAxios';
 import TiptapEditor from '../../helpers/TipTap';
-import { useHistory, Prompt } from 'react-router-dom';
+import { Prompt } from 'react-router-dom';
 
 // Create a object
 export const sermonIdMap = {
@@ -34,8 +31,6 @@ const SermonNotesEditorModal = (props) => {
     setValue,
     formState: { touchedFields },
   } = useForm();
-  const toast = useToast();
-  const history = useHistory();
   const [isDirty, setIsDirty] = useState(false); //indicates unsaved changes
 
   const [sermonNoteData, setSermonNoteData] = useState({
@@ -106,7 +101,7 @@ const SermonNotesEditorModal = (props) => {
         return data;
       } catch (err) {
         console.log(err);
-        toast({
+        toaster.create({
           description:
             'There was an issue with the request, please talk to a t3ch team member.',
           status: 'error',
@@ -115,7 +110,7 @@ const SermonNotesEditorModal = (props) => {
         });
       }
     },
-    [toast]
+    []
   );
 
   const checkDuplicateTitleAndSermonLink = async () => {
@@ -153,7 +148,7 @@ const SermonNotesEditorModal = (props) => {
           sermonId: editSermonNotesData.sermonId,
         });
         if (status === 200) {
-          toast({
+          toaster.create({
             title: 'Sermon Note Updated',
             description: 'Your Sermon Note has been updated.',
             status: 'success',
@@ -165,7 +160,7 @@ const SermonNotesEditorModal = (props) => {
       } else {
         const isDuplicate = await checkDuplicateTitleAndSermonLink();
         if (isDuplicate === 'both') {
-          toast({
+          toaster.create({
             title: 'Duplicated Sermon Title and Sermon Link',
             description:
               'A sermon note with the same title and sermon link already exists. Please rename the title and sermon link.',
@@ -175,7 +170,7 @@ const SermonNotesEditorModal = (props) => {
           });
           return;
         } else if (isDuplicate === 'title') {
-          toast({
+          toaster.create({
             title: 'Duplicated Sermon Title',
             description:
               'A sermon note with the same title already exists.Please rename the title.',
@@ -185,7 +180,7 @@ const SermonNotesEditorModal = (props) => {
           });
           return;
         } else if (isDuplicate === 'sermonLink') {
-          toast({
+          toaster.create({
             title: 'Duplicated Sermon Link',
             description:
               'A sermon note with the same sermon link already exists. Please rename the sermon link.',
@@ -208,7 +203,7 @@ const SermonNotesEditorModal = (props) => {
         });
         if (actionOnEditor === 'duplicate') {
           if (status === 200) {
-            toast({
+            toaster.create({
               title: 'Sermon Note Duplicated',
               description: 'Your sermon note has been duplicated.',
               status: 'success',
@@ -218,7 +213,7 @@ const SermonNotesEditorModal = (props) => {
           }
         } else {
           if (status === 200) {
-            toast({
+            toaster.create({
               title: 'Sermon Note Created',
               description: 'Your sermon note has been created.',
               status: 'success',
@@ -231,7 +226,7 @@ const SermonNotesEditorModal = (props) => {
       }
     } catch (err) {
       console.log('Error');
-      toast({
+      toaster.create({
         title: 'Error',
         description: 'An error occurred. Please try again later.',
         status: 'error',
@@ -306,211 +301,213 @@ const SermonNotesEditorModal = (props) => {
         <Box>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack gap={6}>
-              <FormControl
-                isRequired
-                isInvalid={sermonNoteData.title === '' && touchedFields.title}
+              <Field.Root
+                required
+                invalid={sermonNoteData.title === '' && touchedFields.title}
               >
-                <FormLabel color="#656565" fontWeight="bold">
+                <Field.Label color="#656565" fontWeight="bold">
                   Title
-                </FormLabel>
+                </Field.Label>
                 <Input
                   id="title"
                   {...register('title', {
                     required: 'Title is required',
                   })}
                   value={sermonNoteData.title}
-                  onChange={(e) =>
+                  onValueChange={(e) =>
                     setSermonNoteData({
                       ...sermonNoteData,
                       title: e.target.value,
                     })
                   }
                 />
-                <FormErrorMessage>Title is required</FormErrorMessage>
-              </FormControl>
+                <Field.ErrorText>Title is required</Field.ErrorText>
+              </Field.Root>
               <Grid
                 templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)']}
                 gap={6}
               >
-                <FormControl>
-                  <FormLabel color="#656565" fontWeight="bold">
+                <Field.Root>
+                  <Field.Label color="#656565" fontWeight="bold">
                     Subtitle
-                  </FormLabel>
+                  </Field.Label>
                   <Input
                     id="subtitle"
                     value={sermonNoteData.subtitle}
                     {...register('subtitle')}
-                    onChange={(e) =>
+                    onValueChange={(e) =>
                       setSermonNoteData({
                         ...sermonNoteData,
                         subtitle: e.target.value,
                       })
                     }
                   />
-                </FormControl>
-                <FormControl
-                  isRequired
-                  isInvalid={
+                </Field.Root>
+                <Field.Root
+                  required
+                  invalid={
                     sermonNoteData.serviceType === '' &&
                     touchedFields.serviceType
                   }
                 >
-                  <FormLabel color="#656565" fontWeight="bold">
+                  <Field.Label color="#656565" fontWeight="bold">
                     Service Type
-                  </FormLabel>
-                  <Select
-                    value={sermonNoteData.serviceType}
-                    id="serviceType"
-                    {...register('serviceType', {
-                      required: 'Service type is required',
-                    })}
-                    onChange={(e) =>
-                      setSermonNoteData({
-                        ...sermonNoteData,
-                        serviceType: e.target.value,
-                      })
-                    }
-                    placeholder="Select Service Type"
-                  >
-                    <option value="Sunday Celebration">
-                      Sunday Celebration
-                    </option>
-                    <option value="Vision Sunday">Vision Sunday</option>
-                    <option value="Special Events">Special Events</option>
-                    <option value="Encounter">Encounter</option>
-                  </Select>
-                  <FormErrorMessage>Service Type is required</FormErrorMessage>
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#656565" fontWeight="bold">
+                  </Field.Label>
+                  <NativeSelect.Root>
+                    <NativeSelect.Field
+                      value={sermonNoteData.serviceType}
+                      id="serviceType"
+                      {...register('serviceType', {
+                        required: 'Service type is required',
+                      })}
+                      onValueChange={(e) =>
+                        setSermonNoteData({
+                          ...sermonNoteData,
+                          serviceType: e.target.value,
+                        })
+                      }
+                      placeholder="Select Service Type">
+                      <option value="Sunday Celebration">
+                        Sunday Celebration
+                      </option>
+                      <option value="Vision Sunday">Vision Sunday</option>
+                      <option value="Special Events">Special Events</option>
+                      <option value="Encounter">Encounter</option>
+                    </NativeSelect.Field>
+                    <NativeSelect.Indicator />
+                  </NativeSelect.Root>
+                  <Field.ErrorText>Service Type is required</Field.ErrorText>
+                </Field.Root>
+                <Field.Root>
+                  <Field.Label color="#656565" fontWeight="bold">
                     Sermon Series
-                  </FormLabel>
+                  </Field.Label>
                   <Input
                     id="sermonSeries"
                     value={sermonNoteData.sermonSeries}
                     {...register('sermonSeries')}
-                    onChange={(e) =>
+                    onValueChange={(e) =>
                       setSermonNoteData({
                         ...sermonNoteData,
                         sermonSeries: e.target.value,
                       })
                     }
                   />
-                </FormControl>
-                <FormControl
-                  isRequired
-                  isInvalid={
+                </Field.Root>
+                <Field.Root
+                  required
+                  invalid={
                     sermonNoteData.passage === '' && touchedFields.passage
                   }
                 >
-                  <FormLabel color="#656565" fontWeight="bold">
+                  <Field.Label color="#656565" fontWeight="bold">
                     Service Verse
-                  </FormLabel>
+                  </Field.Label>
                   <Input
                     id="passage"
                     value={sermonNoteData.passage}
                     {...register('passage', { required: 'Verse is required' })}
-                    onChange={(e) =>
+                    onValueChange={(e) =>
                       setSermonNoteData({
                         ...sermonNoteData,
                         passage: e.target.value,
                       })
                     }
                   ></Input>
-                  <FormErrorMessage>Verse is required</FormErrorMessage>
-                </FormControl>
-                <FormControl
-                  isRequired
-                  isInvalid={
+                  <Field.ErrorText>Verse is required</Field.ErrorText>
+                </Field.Root>
+                <Field.Root
+                  required
+                  invalid={
                     sermonNoteData.speaker === '' && touchedFields.speaker
                   }
                 >
-                  <FormLabel color="#656565" fontWeight="bold">
+                  <Field.Label color="#656565" fontWeight="bold">
                     Speaker
-                  </FormLabel>
+                  </Field.Label>
                   <Input
                     id="speaker"
                     value={sermonNoteData.speaker}
                     {...register('speaker', {
                       required: 'Speaker is required',
                     })}
-                    onChange={(e) =>
+                    onValueChange={(e) =>
                       setSermonNoteData({
                         ...sermonNoteData,
                         speaker: e.target.value,
                       })
                     }
                   ></Input>
-                  <FormErrorMessage>Speaker is required</FormErrorMessage>
-                </FormControl>
-                <FormControl
-                  isRequired
-                  isInvalid={sermonNoteData.date === '' && touchedFields.date}
+                  <Field.ErrorText>Speaker is required</Field.ErrorText>
+                </Field.Root>
+                <Field.Root
+                  required
+                  invalid={sermonNoteData.date === '' && touchedFields.date}
                 >
-                  <FormLabel color="#656565" fontWeight="bold">
+                  <Field.Label color="#656565" fontWeight="bold">
                     Sermon Date
-                  </FormLabel>
+                  </Field.Label>
                   <Input
                     id="date"
                     value={sermonNoteData.date}
                     type="date"
                     {...register('date', { required: 'Date is required' })}
-                    onChange={(e) =>
+                    onValueChange={(e) =>
                       setSermonNoteData({
                         ...sermonNoteData,
                         date: e.target.value,
                       })
                     }
                   />
-                  <FormErrorMessage>Date is required</FormErrorMessage>
-                </FormControl>
+                  <Field.ErrorText>Date is required</Field.ErrorText>
+                </Field.Root>
                 {/* TO-DO: Implement sermon link shortener / custom link */}
-                <FormControl>
-                  <FormLabel color="#656565" fontWeight="bold">
+                <Field.Root>
+                  <Field.Label color="#656565" fontWeight="bold">
                     Sermon Link
-                  </FormLabel>
+                  </Field.Label>
                   <Input
                     id="sermonLink"
                     value={sermonNoteData.sermonLink}
                     {...register('sermonLink')}
-                    onChange={(e) =>
+                    onValueChange={(e) =>
                       setSermonNoteData({
                         ...sermonNoteData,
                         sermonLink: e.target.value,
                       })
                     }
                   />
-                  <FormHelperText>
+                  <Field.HelperText>
                     Please follow the usual format 'sn-jul06'
-                  </FormHelperText>
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#656565" fontWeight="bold">
+                  </Field.HelperText>
+                </Field.Root>
+                <Field.Root>
+                  <Field.Label color="#656565" fontWeight="bold">
                     Image Link
-                  </FormLabel>
+                  </Field.Label>
                   <Input
                     id="imageLink"
                     value={sermonNoteData.imageLink}
                     {...register('imageLink')}
-                    onChange={(e) =>
+                    onValueChange={(e) =>
                       setSermonNoteData({
                         ...sermonNoteData,
                         imageLink: e.target.value,
                       })
                     }
                   />
-                </FormControl>
+                </Field.Root>
               </Grid>
-              <FormControl
-                isRequired
-                isInvalid={
+              <Field.Root
+                required
+                invalid={
                   sermonNoteData.originalContent === '' &&
                   touchedFields.originalContent
                 }
               >
-                <FormLabel color="#656565" fontWeight="bold">
+                <Field.Label color="#656565" fontWeight="bold">
                   Rich Text Editor Sermon Notes
-                </FormLabel>
+                </Field.Label>
                 <TiptapEditor
                   onFocus={() =>
                     setValue(
@@ -529,9 +526,9 @@ const SermonNotesEditorModal = (props) => {
                   existingContent={sermonNoteData.originalContent}
                   textPassage={sermonNoteData.passage}
                 />
-                <FormErrorMessage>Sermon Notes are required</FormErrorMessage>
-              </FormControl>
-              <Stack direction="row" spacing={5}>
+                <Field.ErrorText>Sermon Notes are required</Field.ErrorText>
+              </Field.Root>
+              <Stack direction="row" gap={5}>
                 <Button
                   bgColor="#3182CE"
                   color="#FFFFFF"

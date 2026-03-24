@@ -1,11 +1,11 @@
-import { Prose } from '@nikolovlazar/chakra-ui-prose';
+import { Box } from '@chakra-ui/react';
 import ReactMarkdown from 'react-markdown';
 
 const CustomReactMarkdown = (props) => {
   return (
-    <Prose>
+    <Box className="prose">
       <ReactMarkdown {...props} />
-    </Prose>
+    </Box>
   );
 };
 

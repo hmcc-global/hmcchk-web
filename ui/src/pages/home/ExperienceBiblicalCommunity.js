@@ -7,23 +7,23 @@ import {
   VStack,
   Heading,
   Button,
-  Fade,
   Spacer,
   useMediaQuery,
   Link,
+  Icon,
 } from '@chakra-ui/react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import NewHereForm from './NewHereForm';
 import { useState } from 'react';
 import { InView } from 'react-intersection-observer';
+import { LuArrowRight } from 'react-icons/lu';
 
 const ExperienceBiblicalCommunity = () => {
-  const [isMobile] = useMediaQuery('(max-width: 768px)');
+  const [isMobile] = useMediaQuery(['(max-width: 768px)']);
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const onOpen = () => setIsOpen(true);
@@ -54,9 +54,12 @@ const ExperienceBiblicalCommunity = () => {
   return (
     <InView rootMargin="-50px" triggerOnce={true}>
       {({ inView, ref }) => (
-        <Fade transition={{ enter: { duration: 1 } }} in={inView}>
+        <Box
+          ref={ref}
+          opacity={inView ? 1 : 0}
+          transition="opacity 1s ease-in-out"
+        >
           <Box
-            ref={ref}
             bgSize="contain"
             bgPos="10% 10%"
             bgRepeat="no-repeat"
@@ -241,7 +244,7 @@ const ExperienceBiblicalCommunity = () => {
                               </Text>
                             </Box>
                             <Spacer />
-                            <ArrowForwardIcon color="white" my="auto" />
+                            <Icon color="white" my="auto" asChild><LuArrowRight /></Icon>
                           </Flex>
                         </Button>
                       </Link>
@@ -319,7 +322,7 @@ const ExperienceBiblicalCommunity = () => {
                             </Text>
                           </Box>
                           <Spacer />
-                          <ArrowForwardIcon color="white" my="auto" />
+                          <Icon color="white" my="auto" asChild><LuArrowRight /></Icon>
                         </Flex>
                       </Button>
                     </VStack>
@@ -385,7 +388,7 @@ const ExperienceBiblicalCommunity = () => {
                                 </Text>
                               </Box>
                               <Spacer />
-                              <ArrowForwardIcon my="auto" />
+                              <Icon my="auto" asChild><LuArrowRight /></Icon>
                             </Flex>
                           </Button>
                         </Link>
@@ -466,7 +469,7 @@ const ExperienceBiblicalCommunity = () => {
                               </Text>
                             </Box>
                             <Spacer />
-                            <ArrowForwardIcon my="auto" />
+                            <Icon my="auto" asChild><LuArrowRight /></Icon>
                           </Flex>
                         </Button>
                       </Flex>
@@ -489,7 +492,7 @@ const ExperienceBiblicalCommunity = () => {
               </VStack>
             </Container>
           </Box>
-        </Fade>
+        </Box>
       )}
     </InView>
   );

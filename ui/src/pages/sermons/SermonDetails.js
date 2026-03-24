@@ -31,7 +31,7 @@ const getSermonNoteId = (sermon) => {
 const SermonDetails = (props) => {
   const [sermon, setSermon] = useState();
   const [allSermons, setAllSermons] = useState([]);
-  const [sermonSeriesTitle, setSermonSeriesTitle] = useState('');
+  const [, setSermonSeriesTitle] = useState('');
   const [sermonTitlePrefix, setSermonTitlePrefix] = useState('');
   const [sermonUrl, setSermonUrl] = useState();
   const [sermonDate, setSermonDate] = useState();
@@ -156,7 +156,7 @@ const SermonDetails = (props) => {
                     allowFullScreen
                   ></iframe>
                 </AspectRatio>
-                <VStack spacing={'0.5rem'} alignItems="left" mb={'1rem'}>
+                <VStack gap={'0.5rem'} alignItems="left" mb={'1rem'}>
                   <Text
                     fontFamily={'DMSerifDisplay_Italic'}
                     fontWeight={400}
@@ -165,7 +165,7 @@ const SermonDetails = (props) => {
                     {sermonTitlePrefix + sermon.title}
                   </Text>
                   <HStack
-                    spacing={0}
+                    gap={0}
                     fontSize={{ base: '0.625rem', md: '0.875rem' }}
                     alignItems="center"
                     justifyContent="flex-start"
@@ -206,7 +206,7 @@ const SermonDetails = (props) => {
               </Box>
             </Box>
 
-            <VStack alignItems="left" alignContent="center" spacing={4}>
+            <VStack alignItems="left" alignContent="center" gap={4}>
               <HStack alignItems="center" justifyContent={'space-between'}>
                 <Text
                   fontFamily={'DMSerifDisplay_Italic'}
@@ -236,7 +236,7 @@ const SermonDetails = (props) => {
                   >
                     See All
                   </Text>
-                  <Icon as={FaArrowRight} color={'#4A6EEB'} />
+                  <Icon color={'#4A6EEB'} asChild><FaArrowRight /></Icon>
                 </Button>
               </HStack>
               <Grid

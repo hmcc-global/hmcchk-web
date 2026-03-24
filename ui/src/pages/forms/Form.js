@@ -9,10 +9,6 @@ import {
 import { default as ReactMarkdown } from '../../components/CustomReactMarkdown';
 
 import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Button,
   Input,
   Heading,
@@ -21,14 +17,13 @@ import {
   Image,
   Textarea,
   Checkbox,
-  Select,
+  NativeSelect,
   RadioGroup,
-  Radio,
   Stack,
   Center,
   Alert,
-  AlertIcon,
   Link,
+  Field,
 } from '@chakra-ui/react';
 import {
   countryList,
@@ -153,12 +148,12 @@ const Form = (props) => {
 
     // Generate a label
     let label = (
-      <FormLabel key={fieldName + 'label'} id={fieldName + 'label'}>
+      <Field.Label key={fieldName + 'label'} id={fieldName + 'label'}>
         {fieldName === 'lifeGroup' ? 'LIFE Group' : sentencize(fieldName)}
         <Text key={fieldName + 'alert'} as="span" color="red">
           *
         </Text>
-      </FormLabel>
+      </Field.Label>
     );
 
     // Generate the field itself
@@ -166,97 +161,107 @@ const Form = (props) => {
     switch (fieldName) {
       case 'countryOfOrigin':
         field = (
-          <Select
-            {...register('countryOfOrigin', { required: true })}
-            onChange={(e) => {
-              if (!fieldData.conditional) return;
-              const temp = JSON.parse(JSON.stringify(renderChildren));
-              temp[fieldData.id] = e.target.value;
-              setRenderChildren(temp);
-            }}
-            key={fieldData.id}
-            placeholder="Select option"
-          >
-            {countryList.map((item) => {
-              return <option key={'co' + item}>{item}</option>;
-            })}
-          </Select>
+          <NativeSelect.Root>
+            <NativeSelect.Field
+              {...register('countryOfOrigin', { required: true })}
+              onValueChange={(e) => {
+                if (!fieldData.conditional) return;
+                const temp = JSON.parse(JSON.stringify(renderChildren));
+                temp[fieldData.id] = e.target.value;
+                setRenderChildren(temp);
+              }}
+              key={fieldData.id}
+              placeholder="Select option">
+              {countryList.map((item) => {
+                return <option key={'co' + item}>{item}</option>;
+              })}
+            </NativeSelect.Field>
+            <NativeSelect.Indicator />
+          </NativeSelect.Root>
         );
         break;
       case 'lifestage':
         field = (
-          <Select
-            {...register('lifestage', { required: true })}
-            onChange={(e) => {
-              if (!fieldData.conditional) return;
-              const temp = JSON.parse(JSON.stringify(renderChildren));
-              temp[fieldData.id] = e.target.value;
-              setRenderChildren(temp);
-            }}
-            key={fieldData.id}
-            placeholder="Select option"
-          >
-            {lifestageList.map((item) => {
-              return <option key={'li' + item}>{item}</option>;
-            })}
-          </Select>
+          <NativeSelect.Root>
+            <NativeSelect.Field
+              {...register('lifestage', { required: true })}
+              onValueChange={(e) => {
+                if (!fieldData.conditional) return;
+                const temp = JSON.parse(JSON.stringify(renderChildren));
+                temp[fieldData.id] = e.target.value;
+                setRenderChildren(temp);
+              }}
+              key={fieldData.id}
+              placeholder="Select option">
+              {lifestageList.map((item) => {
+                return <option key={'li' + item}>{item}</option>;
+              })}
+            </NativeSelect.Field>
+            <NativeSelect.Indicator />
+          </NativeSelect.Root>
         );
         break;
       case 'campus':
         field = (
-          <Select
-            {...register('campus', { required: true })}
-            onChange={(e) => {
-              if (!fieldData.conditional) return;
-              const temp = JSON.parse(JSON.stringify(renderChildren));
-              temp[fieldData.id] = e.target.value;
-              setRenderChildren(temp);
-            }}
-            key={fieldData.id}
-            placeholder="Select option"
-          >
-            {campusList.map((item) => {
-              return <option key={'ca' + item}>{item}</option>;
-            })}
-          </Select>
+          <NativeSelect.Root>
+            <NativeSelect.Field
+              {...register('campus', { required: true })}
+              onValueChange={(e) => {
+                if (!fieldData.conditional) return;
+                const temp = JSON.parse(JSON.stringify(renderChildren));
+                temp[fieldData.id] = e.target.value;
+                setRenderChildren(temp);
+              }}
+              key={fieldData.id}
+              placeholder="Select option">
+              {campusList.map((item) => {
+                return <option key={'ca' + item}>{item}</option>;
+              })}
+            </NativeSelect.Field>
+            <NativeSelect.Indicator />
+          </NativeSelect.Root>
         );
         break;
       case 'lifeGroup':
         field = (
-          <Select
-            {...register('lifeGroup', { required: true })}
-            onChange={(e) => {
-              if (!fieldData.conditional) return;
-              const temp = JSON.parse(JSON.stringify(renderChildren));
-              temp[fieldData.id] = e.target.value;
-              setRenderChildren(temp);
-            }}
-            key={fieldData.id}
-            placeholder="Select option"
-          >
-            {lifegroupList.map((item) => {
-              return <option key={'lg' + item}>{item}</option>;
-            })}
-          </Select>
+          <NativeSelect.Root>
+            <NativeSelect.Field
+              {...register('lifeGroup', { required: true })}
+              onValueChange={(e) => {
+                if (!fieldData.conditional) return;
+                const temp = JSON.parse(JSON.stringify(renderChildren));
+                temp[fieldData.id] = e.target.value;
+                setRenderChildren(temp);
+              }}
+              key={fieldData.id}
+              placeholder="Select option">
+              {lifegroupList.map((item) => {
+                return <option key={'lg' + item}>{item}</option>;
+              })}
+            </NativeSelect.Field>
+            <NativeSelect.Indicator />
+          </NativeSelect.Root>
         );
         break;
       case 'ministryTeam':
         field = (
-          <Select
-            {...register('ministryTeam', { required: true })}
-            onChange={(e) => {
-              if (!fieldData.conditional) return;
-              const temp = JSON.parse(JSON.stringify(renderChildren));
-              temp[fieldData.id] = e.target.value;
-              setRenderChildren(temp);
-            }}
-            key={fieldData.id}
-            placeholder="Select option"
-          >
-            {ministryTeamList.map((item) => {
-              return <option key={'mt' + item}>{item}</option>;
-            })}
-          </Select>
+          <NativeSelect.Root>
+            <NativeSelect.Field
+              {...register('ministryTeam', { required: true })}
+              onValueChange={(e) => {
+                if (!fieldData.conditional) return;
+                const temp = JSON.parse(JSON.stringify(renderChildren));
+                temp[fieldData.id] = e.target.value;
+                setRenderChildren(temp);
+              }}
+              key={fieldData.id}
+              placeholder="Select option">
+              {ministryTeamList.map((item) => {
+                return <option key={'mt' + item}>{item}</option>;
+              })}
+            </NativeSelect.Field>
+            <NativeSelect.Indicator />
+          </NativeSelect.Root>
         );
         break;
       case 'address':
@@ -284,26 +289,28 @@ const Form = (props) => {
                 />
               </Box>
               <Box flex={1}>
-                <Select
-                  placeholder="District"
-                  {...register('addressDistrict', { required: true })}
-                >
-                  {districtList.map((item) => {
-                    return <option key={'di' + item}>{item}</option>;
-                  })}
-                </Select>
+                <NativeSelect.Root>
+                  <NativeSelect.Field
+                    placeholder="District"
+                    {...register('addressDistrict', { required: true })}>
+                    {districtList.map((item) => {
+                      return <option key={'di' + item}>{item}</option>;
+                    })}
+                  </NativeSelect.Field>
+                  <NativeSelect.Indicator />
+                </NativeSelect.Root>
               </Box>
             </Stack>
             <Stack direction={['column', 'row']} w="100%">
               <Box flex={1}>
-                <Select
-                  placeholder="Region"
-                  {...register('addressRegion', { required: true })}
-                >
-                  {regionList.map((item) => {
-                    return <option key={'re' + item}>{item}</option>;
-                  })}
-                </Select>
+                <NativeSelect.Root>
+                  <NativeSelect.Field placeholder="Region" {...register('addressRegion', { required: true })}>
+                    {regionList.map((item) => {
+                      return <option key={'re' + item}>{item}</option>;
+                    })}
+                  </NativeSelect.Field>
+                  <NativeSelect.Indicator />
+                </NativeSelect.Root>
               </Box>
               <Box flex={1} display={['none', 'flex']}></Box>
             </Stack>
@@ -346,9 +353,9 @@ const Form = (props) => {
 
     if (fieldName === 'address') {
       return (
-        <FormControl
+        <Field.Root
           key={fieldName + 'Controller'}
-          isInvalid={
+          invalid={
             errors['addressFloor'] ||
             errors['addressFlat'] ||
             errors['addressStreet'] ||
@@ -358,38 +365,38 @@ const Form = (props) => {
         >
           {label}
           {field}
-          <FormErrorMessage key={fieldName + 'errorMessage'}>
+          <Field.ErrorText key={fieldName + 'errorMessage'}>
             {(errors['addressFloor'] ||
               errors['addressFlat'] ||
               errors['addressStreet'] ||
               errors['addressDistrict'] ||
               errors['addressRegion']) &&
               'Please fill in all of the fields!'}
-          </FormErrorMessage>
-        </FormControl>
+          </Field.ErrorText>
+        </Field.Root>
       );
     } else if (fieldName === 'email') {
       return (
-        <FormControl
+        <Field.Root
           key={fieldName + 'Controller'}
-          isInvalid={errors[fieldName]}
+          invalid={errors[fieldName]}
         >
           {label}
           {field}
-          <FormHelperText>Please don't use your HMCC email</FormHelperText>
+          <Field.HelperText>Please don't use your HMCC email</Field.HelperText>
           {error}
-        </FormControl>
+        </Field.Root>
       );
     } else {
       return (
-        <FormControl
+        <Field.Root
           key={fieldName + 'Controller'}
-          isInvalid={errors[fieldName]}
+          invalid={errors[fieldName]}
         >
           {label}
           {field}
           {error}
-        </FormControl>
+        </Field.Root>
       );
     }
   };
@@ -406,12 +413,12 @@ const Form = (props) => {
     }
 
     return (
-      <FormControl
+      <Field.Root
         key={fieldData.fieldName + i}
-        isInvalid={errors[fieldData.fieldName]}
+        invalid={errors[fieldData.fieldName]}
       >
         {!['header', 'prefill', 'checkbox'].includes(fieldData.fieldType) && (
-          <FormLabel
+          <Field.Label
             key={fieldData.fieldName + 'label'}
             id={camelize(fieldData.fieldName + 'label')}
           >
@@ -421,18 +428,18 @@ const Form = (props) => {
                 *
               </Text>
             )}
-          </FormLabel>
+          </Field.Label>
         )}
         {createFormInput(fieldData)}
         {fieldData.fieldDescription !== '' && (
-          <FormHelperText
+          <Field.HelperText
             key={fieldData.fieldName + 'description'}
             id={camelize(fieldData.fieldName + 'description')}
           >
             {fieldData.fieldDescription}
-          </FormHelperText>
+          </Field.HelperText>
         )}
-      </FormControl>
+      </Field.Root>
     );
   };
 
@@ -466,34 +473,36 @@ const Form = (props) => {
         });
 
         inputField.push(
-          <Select
-            id={camelize(fieldName)}
-            key={fieldName}
-            placeholder="Select option"
-            {...register(fieldName, { required: required })}
-            onChange={(e) => {
-              if (!fieldData.conditional) return;
-              const temp = JSON.parse(JSON.stringify(renderChildren));
-              temp[fieldData.id] = e.target.value;
-              setRenderChildren(temp);
-            }}
-          >
-            {items}
-          </Select>
+          <NativeSelect.Root>
+            <NativeSelect.Field
+              id={camelize(fieldName)}
+              key={fieldName}
+              placeholder="Select option"
+              {...register(fieldName, { required: required })}
+              onValueChange={(e) => {
+                if (!fieldData.conditional) return;
+                const temp = JSON.parse(JSON.stringify(renderChildren));
+                temp[fieldData.id] = e.target.value;
+                setRenderChildren(temp);
+              }}>
+              {items}
+            </NativeSelect.Field>
+            <NativeSelect.Indicator />
+          </NativeSelect.Root>
         );
         break;
       case 'radio':
         let radioOptions = [];
         opts.map((option) => {
           let o = (
-            <Radio
+            <RadioGroup.Item
               key={fieldName + option}
-              type="radio"
               value={option}
-              {...register(fieldName, { required: required })}
             >
-              {option}
-            </Radio>
+              <RadioGroup.ItemHiddenInput />
+              <RadioGroup.ItemIndicator />
+              <RadioGroup.ItemText>{option}</RadioGroup.ItemText>
+            </RadioGroup.Item>
           );
           radioOptions.push(o);
           return true;
@@ -504,9 +513,9 @@ const Form = (props) => {
             control={control}
             name={fieldName}
             render={({ field: { onChange } }) => (
-              <RadioGroup onChange={onChange}>
+              <RadioGroup.Root onValueChange={onChange}>
                 <Stack direction="row">{radioOptions}</Stack>
-              </RadioGroup>
+              </RadioGroup.Root>
             )}
           />
         );
@@ -535,9 +544,9 @@ const Form = (props) => {
             key={fieldName}
             defaultValue={false}
             render={({ field: { onChange, value, ref } }) => (
-              <Checkbox onChange={onChange} ref={ref} isChecked={value}>
+              <Checkbox.Root onCheckedChange={onChange} ref={ref} checked={value}><Checkbox.HiddenInput /><Checkbox.Control><Checkbox.Indicator /></Checkbox.Control><Checkbox.Label>
                 {fieldName}
-              </Checkbox>
+              </Checkbox.Label></Checkbox.Root>
             )}
           />
         );
@@ -568,7 +577,7 @@ const Form = (props) => {
 
   const createConditionalFormField = (parentFieldData) => {
     return (
-      <Stack spacing="3">
+      <Stack gap="3">
         {Object.entries(parentFieldData.children).map((kv) => {
           // kv[0] = option
           // kv[1] = childrenFieldsIdOrders when kv[0] is selected
@@ -594,9 +603,9 @@ const Form = (props) => {
 
   const createErrorNotifier = (fieldName) => {
     return (
-      <FormErrorMessage key={fieldName + 'errorMessage'}>
+      <Field.ErrorText key={fieldName + 'errorMessage'}>
         {errors[fieldName] && 'Please fill in this field correctly'}
-      </FormErrorMessage>
+      </Field.ErrorText>
     );
   };
 
@@ -625,7 +634,7 @@ const Form = (props) => {
         <Box key="formDescription" textAlign="justify" mb="8">
           <ReactMarkdown children={formDescription} skipHtml />
         </Box>
-        <Stack direction="column" spacing={4}>
+        <Stack direction="column" gap={4}>
           {/* If there is a prefill field, create it's heading */}
           {formFields &&
             formFields.length > 1 &&
@@ -664,8 +673,8 @@ const Form = (props) => {
           })}
         </Stack>
         {!user.id && (
-          <Alert status="info" mt={4}>
-            <AlertIcon />
+          <Alert.Root status="info" mt={4}>
+            <Alert.Indicator />
             <Text>
               This form submission will be a one-off entry. However, if you want
               an auto-fill feature to be enabled for you for this and all future
@@ -674,16 +683,16 @@ const Form = (props) => {
                 you can create an HMCC account right over here
               </Link>
             </Text>
-          </Alert>
+          </Alert.Root>
         )}
         <Center>
           <Button
             mt={4}
             width="25%"
             variant="outline"
-            colorScheme="blackAlpha"
+            colorPalette="blackAlpha"
             type="submit"
-            isLoading={submitStatus}
+            loading={submitStatus}
             loadingText="Submitting"
           >
             Submit

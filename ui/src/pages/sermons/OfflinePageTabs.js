@@ -1,24 +1,20 @@
 import {
   Button,
   Tabs,
-  Tab,
-  TabList,
-  TabPanels,
-  TabPanel,
   Box,
   HStack,
   Text,
   VStack,
   Image,
 } from '@chakra-ui/react';
-import { RepeatIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 import SermonNotesContainer from '../sermon-notes/SermonNotesContainer';
 import SermonSeries from './SermonSeries';
+import { LuRepeat } from 'react-icons/lu';
 
 const OfflinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
   const [noteId, setNoteId] = useState(0);
-  const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState('tab-0');
   const [slideIndex, setSlideIndex] = useState(0);
 
   const refreshSermonNotes = () => {
@@ -42,10 +38,11 @@ const OfflinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
 
   return (
     <>
-      <Tabs
-        isFitted
+      <Tabs.Root
+        fitted
         h="100%"
-        onChange={(i) => setTab(i)}
+        defaultValue="tab-0"
+        onValueChange={(details) => setTab(details.value)}
         overflowY={'hidden'}
         display={{ base: 'none', md: 'block' }}
         maxH={700}
@@ -53,8 +50,9 @@ const OfflinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
         borderWidth={'1px'}
         borderColor="#4A6EEB"
       >
-        <TabList orientation="horizontal">
-          <Tab
+        <Tabs.List orientation="horizontal">
+          <Tabs.Trigger
+            value="tab-0"
             p={0}
             _selected={{
               bgColor: '#4A6EEB',
@@ -65,10 +63,10 @@ const OfflinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
             bgColor={'#EAF0FF'}
             color={'#4A6EEB'}
           >
-            <HStack alignItems="center" spacing={'0.75rem'} py="0.75rem">
+            <HStack alignItems="center" gap={'0.75rem'} py="0.75rem">
               <Image
                 src={
-                  tab === 1
+                  tab === 'tab-1'
                     ? process.env.PUBLIC_URL +
                       '/images/sermons/sermon_icon_unclicked.svg'
                     : process.env.PUBLIC_URL +
@@ -79,8 +77,9 @@ const OfflinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
                 Sermon Notes
               </Text>
             </HStack>
-          </Tab>
-          <Tab
+          </Tabs.Trigger>
+          <Tabs.Trigger
+            value="tab-1"
             p={0}
             _selected={{
               bgColor: '#4A6EEB',
@@ -91,10 +90,10 @@ const OfflinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
             bgColor={'#EAF0FF'}
             color={'#4A6EEB'}
           >
-            <HStack alignItems="center" spacing={'0.75rem'} py="0.375rem">
+            <HStack alignItems="center" gap={'0.75rem'} py="0.375rem">
               <Image
                 src={
-                  tab === 0
+                  tab === 'tab-0'
                     ? process.env.PUBLIC_URL +
                       '/images/sermons/more_series_unclicked.svg'
                     : process.env.PUBLIC_URL +
@@ -105,10 +104,9 @@ const OfflinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
                 More in Series
               </Text>
             </HStack>
-          </Tab>
-        </TabList>
-        <TabPanels h="100%">
-          <TabPanel h="100%">
+          </Tabs.Trigger>
+        </Tabs.List>
+          <Tabs.Content value="tab-0" h="100%">
             <Button
               mb={3}
               fontWeight="bold"
@@ -117,7 +115,7 @@ const OfflinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
               fontSize="md"
               onClick={refreshSermonNotes}
             >
-              <RepeatIcon />
+              <LuRepeat />
             </Button>
             <Box height={'90%'} paddingBottom={15} overflow="auto">
               <SermonNotesContainer
@@ -126,22 +124,21 @@ const OfflinePageTabs = ({ user, history, sermonNoteId, sermonSeries }) => {
                 user={user}
               />
             </Box>
-          </TabPanel>
-          <TabPanel h="100%">
+          </Tabs.Content>
+          <Tabs.Content value="tab-1" h="100%">
             <Box height={'90%'} overflow="auto">
               <SermonSeries sermonSeriesName={sermonSeries} />
             </Box>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+          </Tabs.Content>
+      </Tabs.Root>
       <VStack
         alignItems="center"
-        spacing={'1rem'}
+        gap={'1rem'}
         maxW="100%"
         display={{ base: 'block', md: 'none' }}
       >
         <HStack
-          spacing="1rem"
+          gap="1rem"
           w="100%"
           alignItems={'center'}
           justifyContent={'center'}

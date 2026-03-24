@@ -1,13 +1,4 @@
-import {
-  Stack,
-  AspectRatio,
-  Image,
-  Box,
-  VStack,
-  Text,
-  HStack,
-  Link,
-} from '@chakra-ui/react';
+import { Stack, AspectRatio, Image, Box, VStack, Text, HStack, Link } from '@chakra-ui/react';
 import { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { customAxios as axios } from '../customAxios';
@@ -105,7 +96,7 @@ const SermonSeries = () => {
                   </AspectRatio>
                   <VStack
                     alignItems="left"
-                    spacing={{ base: 1, md: 2 }}
+                    gap={{ base: 1, md: 2 }}
                     w="70%"
                   >
                     <Text
@@ -116,13 +107,13 @@ const SermonSeries = () => {
                     </Text>
 
                     <VStack
-                      spacing={{ base: 1, md: 'auto' }}
+                      gap={{ base: 1, md: 'auto' }}
                       alignItems="flex-start"
                     >
                       <Text
                         fontSize="0.625rem"
                         textColor={hoveredIndex === i ? 'black' : '#818181'}
-                        noOfLines={1}
+                        lineClamp={1}
                         wordBreak="break-all"
                       >
                         Speaker: {sermon.speaker[0].name}
@@ -130,7 +121,7 @@ const SermonSeries = () => {
                       <Text
                         fontSize="0.625rem"
                         textColor={hoveredIndex === i ? 'black' : '#818181'}
-                        noOfLines={1}
+                        lineClamp={1}
                         wordBreak="break-all"
                       >
                         Passage: {sermon.passage}

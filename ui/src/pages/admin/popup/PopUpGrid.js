@@ -10,7 +10,6 @@ export default function PopUpGrid(props) {
   const [showDeleted, setShowDeleted] = useState(false);
   const [filtered, setFiltered] = useState(popUps);
   const [api, setApi] = useState();
-  const [colApi, setColApi] = useState();
 
   useEffect(() => {
     if (popUps) {
@@ -36,7 +35,6 @@ export default function PopUpGrid(props) {
   // Ag-Grid Functions
   const onGridReady = (params) => {
     if (params.api) setApi(params.api);
-    if (params.columnApi) setColApi(params.columnApi);
   };
 
   const onRowClicked = ({data}) => {
@@ -66,7 +64,7 @@ export default function PopUpGrid(props) {
     <Container w="100%" maxW="100%">
       <HStack justifyContent="space-between">
         <Heading s="md" size="md">Pop Ups</Heading>
-        <Switch value={showDeleted} onChange={e => setShowDeleted(e.target.checked) }>Show deleted</Switch>
+        <Switch value={showDeleted} onValueChange={e => setShowDeleted(e.target.checked) }>Show deleted</Switch>
       </HStack>
       <div className="ag-theme-alpine" style={{ height: 800, width: '100%', marginTop: '0.7em' }}>
         <AgGridReact

@@ -49,9 +49,7 @@ const ExperienceHmcc = (props) => {
             Worship In-person and Online
           </Text>
           <Button
-            as={Link}
             size="md"
-            href="/discover"
             variant="outline"
             w={[200, 240]}
             borderRadius={10}
@@ -64,9 +62,8 @@ const ExperienceHmcc = (props) => {
               textDecoration: 'none',
             }}
             id="connect-visit"
-          >
-            Learn more
-          </Button>
+            asChild><Link href="/discover">Learn more
+                      </Link></Button>
         </Box>
         <Box
           flex={1}
@@ -103,9 +100,7 @@ const ExperienceHmcc = (props) => {
             and get connected!
           </Text>
           <Button
-            as={Link}
             size="md"
-            href="/events"
             variant="outline"
             w={[200, 240]}
             borderRadius={10}
@@ -118,9 +113,8 @@ const ExperienceHmcc = (props) => {
               textDecoration: 'none',
             }}
             id="connect-events"
-          >
-            Check them out
-          </Button>
+            asChild><Link href="/events">Check them out
+                      </Link></Button>
         </Box>
       </Flex>
     </Box>

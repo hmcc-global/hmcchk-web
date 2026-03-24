@@ -1,15 +1,4 @@
-import {
-  Flex,
-  Text,
-  Box,
-  Heading,
-  UnorderedList,
-  ListItem,
-  Stack,
-  Image,
-  Container,
-  VStack,
-} from '@chakra-ui/react';
+import { Flex, Text, Box, Heading, Image, List } from '@chakra-ui/react';
 import React from 'react';
 
 const STRATEGY_TITLE = "HMCC's Transformation Pathways";
@@ -128,18 +117,18 @@ const StrategySection = (props) => {
             >
               GENERATIONS
             </Heading>
-            <UnorderedList spacing={1} fontSize={'1rem'}>
-              <ListItem>
+            <List.Root as="ul" gap={1} fontSize={'1rem'}>
+              <List.Item>
                 <strong>Receive and invest</strong> as a disciple in
                 relationship with others
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 Participate in{' '}
                 <i>
                   <strong>OCR</strong> (Operation Campus/City Reach)
                 </i>
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List.Root>
           </Box>
 
           {/* GATHER - Top Right */}
@@ -156,20 +145,20 @@ const StrategySection = (props) => {
             >
               GATHER
             </Heading>
-            <UnorderedList spacing={1} fontSize={'1rem'}>
-              <ListItem>
+            <List.Root as="ul" gap={1} fontSize={'1rem'}>
+              <List.Item>
                 Commit to community in{' '}
                 <strong>
                   <i>LIFE Group</i>
                 </strong>
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <strong>Gather corporately</strong> through{' '}
                 <strong>
                   <i>Sunday Celebration</i>
                 </strong>
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List.Root>
           </Box>
 
           {/* GROW - Middle Right */}
@@ -186,17 +175,17 @@ const StrategySection = (props) => {
             >
               GROW
             </Heading>
-            <UnorderedList spacing={1} fontSize={'1rem'}>
-              <ListItem>
+            <List.Root as="ul" gap={1} fontSize={'1rem'}>
+              <List.Item>
                 Cultivate a <strong>personal devotional life</strong>
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 Participate in{' '}
                 <strong>
                   <i>The Transformed Life Curriculum</i>
                 </strong>
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List.Root>
           </Box>
 
           {/* GIVE - Bottom */}
@@ -215,19 +204,20 @@ const StrategySection = (props) => {
             >
               GIVE
             </Heading>
-            <UnorderedList
-              spacing={1}
+            <List.Root
+              as="ul"
+              gap={1}
               fontSize={'1rem'}
-              stylePosition="inside"
+              listStylePosition="inside"
               textAlign="center"
             >
-              <ListItem>
+              <List.Item>
                 <strong>Tithe and give</strong> faithfully
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <strong>Serve</strong> on a ministry team
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List.Root>
           </Box>
 
           {/* GO - Middle Left */}
@@ -244,14 +234,14 @@ const StrategySection = (props) => {
             >
               GO
             </Heading>
-            <UnorderedList spacing={1} fontSize={'1rem'}>
-              <ListItem>
+            <List.Root as="ul" gap={1} fontSize={'1rem'}>
+              <List.Item>
                 Commit to <strong>witness to one pre-Christian</strong>
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 Participate in <strong>Missions/Service projects</strong>
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List.Root>
           </Box>
         </Box>
       </Box>
@@ -278,20 +268,20 @@ const StrategySection = (props) => {
             >
               GATHER
             </Heading>
-            <UnorderedList spacing={1} fontSize={'1rem'}>
-              <ListItem>
+            <List.Root as="ul" gap={1} fontSize={'1rem'}>
+              <List.Item>
                 Commit to community in{' '}
                 <strong>
                   <i>LIFE Group</i>
                 </strong>
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <strong>Gather corporately</strong> through{' '}
                 <strong>
                   <i>Sunday Celebration</i>
                 </strong>
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List.Root>
           </Box>
 
           {/* GROW */}
@@ -299,17 +289,17 @@ const StrategySection = (props) => {
             <Heading size={{ base: 'sm', sm: 'md' }} color={COLORS.grow} mb={2}>
               GROW
             </Heading>
-            <UnorderedList spacing={1} fontSize={'1rem'}>
-              <ListItem>
+            <List.Root as="ul" gap={1} fontSize={'1rem'}>
+              <List.Item>
                 Cultivate a <strong>personal devotional life</strong>
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 Participate in{' '}
                 <strong>
                   <i>The Transformed Life Curriculum</i>
                 </strong>
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List.Root>
           </Box>
 
           {/* GIVE */}
@@ -317,14 +307,14 @@ const StrategySection = (props) => {
             <Heading size={{ base: 'sm', sm: 'md' }} color={COLORS.give} mb={2}>
               GIVE
             </Heading>
-            <UnorderedList spacing={1} fontSize={'1rem'}>
-              <ListItem>
+            <List.Root as="ul" gap={1} fontSize={'1rem'}>
+              <List.Item>
                 <strong>Tithe and give</strong> faithfully
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <strong>Serve</strong> on a ministry team
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List.Root>
           </Box>
 
           {/* GO */}
@@ -332,14 +322,14 @@ const StrategySection = (props) => {
             <Heading size={{ base: 'sm', sm: 'md' }} color={COLORS.go} mb={2}>
               GO
             </Heading>
-            <UnorderedList spacing={1} fontSize={'1rem'}>
-              <ListItem>
+            <List.Root as="ul" gap={1} fontSize={'1rem'}>
+              <List.Item>
                 Commit to <strong>witness to one pre-Christian</strong>
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 Participate in <strong>Missions/Service projects</strong>
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List.Root>
           </Box>
           {/* GENERATIONS */}
           <Box>
@@ -350,18 +340,18 @@ const StrategySection = (props) => {
             >
               GENERATIONS
             </Heading>
-            <UnorderedList spacing={1} fontSize={'1rem'}>
-              <ListItem>
+            <List.Root as="ul" gap={1} fontSize={'1rem'}>
+              <List.Item>
                 <strong>Receive and invest</strong> as a disciple in
                 relationship with others
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 Participate in{' '}
                 <i>
                   <strong>OCR</strong> (Operation Campus/City Reach)
                 </i>
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List.Root>
           </Box>
         </Flex>
       </Box>

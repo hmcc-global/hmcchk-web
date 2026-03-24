@@ -1,10 +1,4 @@
-import {
-  Box,
-  Container,
-  VStack,
-  Text,
-  useBreakpointValue,
-} from '@chakra-ui/react';
+import { Box, Container, VStack, Text, useBreakpointValue } from '@chakra-ui/react';
 import MinistryCard from './MinistryCard';
 import ConnectMinistryFaq from './ConnectMinistryFaq';
 import BackButton from './DiscoverBackButton';
@@ -28,7 +22,7 @@ const ConnectMinistry = () => {
         >
           <VStack
             maxWidth={{ base: '95%', lg: '75%' }}
-            spacing={{ base: '1rem', lg: '1.5rem' }}
+            gap={{ base: '1rem', lg: '1.5rem' }}
           >
             <Text
               color="#0C0C20"

@@ -28,7 +28,7 @@ const PastorGreeting = (props) => {
         mb={[4, 5]}
         justifyContent="center"
       >
-        <Icon as={IoPlayCircleOutline} boxSize={[6, 8, 10]} />
+        <Icon boxSize={[6, 8, 10]} asChild><IoPlayCircleOutline /></Icon>
         <Text>A welcome message from our Pastor Seth Kim</Text>
       </HStack>
       <AspectRatio

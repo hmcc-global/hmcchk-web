@@ -62,7 +62,6 @@ const HeroSection = () => {
         backgroundSize="cover"
         zIndex="0"
       />
-
       <Flex
         width="100%"
         height="10%"
@@ -110,7 +109,6 @@ const HeroSection = () => {
 
           <Box flex="1" minWidth={{ lg: '50%' }}>
             <VStack
-              spacing="24px"
               alignItems="flex-start"
               justifyContent="center"
               height="100%"

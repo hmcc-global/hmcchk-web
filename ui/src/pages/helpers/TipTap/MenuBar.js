@@ -1,14 +1,7 @@
 import React, { Fragment } from 'react';
 import MenuItem from './MenuItem.js';
 import styled from '@emotion/styled';
-import {
-  Box,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverBody,
-  Button,
-} from '@chakra-ui/react';
+import { Box, HoverCard, Button } from '@chakra-ui/react';
 import { useCallback } from 'react';
 
 const MenuBar = ({ editor }) => {
@@ -214,8 +207,8 @@ const MenuBar = ({ editor }) => {
 
   return (
     <div className="editor__header">
-      <Popover trigger="hover">
-        <PopoverTrigger>
+      <HoverCard.Root>
+        <HoverCard.Trigger asChild>
           <Button
             variant="ghost"
             style={{ color: 'white', backgroundColor: 'black' }}
@@ -223,17 +216,17 @@ const MenuBar = ({ editor }) => {
           >
             Text Style
           </Button>
-        </PopoverTrigger>
-        <PopoverContent>
-          <PopoverBody>
-            {dropdown.map((item, index) => (
-              <Box key={index} onClick={item.action}>
-                {item.title}
-              </Box>
-            ))}
-          </PopoverBody>
-        </PopoverContent>
-      </Popover>
+        </HoverCard.Trigger>
+        <HoverCard.Positioner>
+          <HoverCard.Content>
+              {dropdown.map((item, index) => (
+                <Box key={index} onClick={item.action}>
+                  {item.title}
+                </Box>
+              ))}
+          </HoverCard.Content>
+        </HoverCard.Positioner>
+      </HoverCard.Root>
       <StyledDivider>
         <div className="divider" />
       </StyledDivider>

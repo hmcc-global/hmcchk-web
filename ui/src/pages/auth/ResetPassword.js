@@ -1,12 +1,8 @@
 import React, { useRef } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
 import { useForm } from 'react-hook-form';
-import { ChevronLeftIcon } from '@chakra-ui/icons';
-
 import {
   Box,
-  UnorderedList,
-  ListItem,
   Center,
   VStack,
   Flex,
@@ -14,9 +10,13 @@ import {
   Text,
   Stack,
   Link,
-  useToast,
+  Icon,
+  List,
 } from '@chakra-ui/react';
+import { toaster } from '../../components/ui/toaster';
+
 import { useLocation } from 'react-router-dom';
+import { LuChevronLeft } from 'react-icons/lu';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -30,8 +30,6 @@ const ResetPassword = (props) => {
     watch,
   } = useForm();
   const query = useQuery();
-  const toast = useToast();
-
   const onSubmit = async (data) => {
     try {
       const token = query.get('token');
@@ -45,7 +43,7 @@ const ResetPassword = (props) => {
       );
 
       if (isSuccess) {
-        toast({
+        toaster.create({
           title: 'Password Reset.',
           description: 'Password successfully reset! Please login again.',
           status: 'success',
@@ -55,7 +53,7 @@ const ResetPassword = (props) => {
 
         props.history.push('/login');
       } else {
-        toast({
+        toaster.create({
           title: 'Password Reset.',
           description: 'Password could not be reset.',
           status: 'error',
@@ -66,7 +64,7 @@ const ResetPassword = (props) => {
     } catch (err) {
       if (err.response?.status === 498) {
         // invalid token error code
-        toast({
+        toaster.create({
           title: 'Password Reset.',
           description: 'Password reset token invalid or expired.',
           status: 'error',
@@ -114,13 +112,13 @@ const ResetPassword = (props) => {
               to={{ pathname: 'https://hk.hmccglobal.org' }}
               target="_blank"
             >
-              <ChevronLeftIcon boxSize={10} />
+              <Icon boxSize={10} asChild><LuChevronLeft /></Icon>
               Return to hk.hmccglobal.org
             </Link>
           </Box>
         </Flex>
         <Flex justifyContent="center">
-          <VStack justify="center" align="center" spacing={['3vh']} py="5vh">
+          <VStack justify="center" align="center" gap={['3vh']} py="5vh">
             <Image
               marginBottom="15px"
               h={{ base: '6vh', sm: '8vh', md: '10vh', lg: '12vh', xl: '15vh' }}
@@ -165,20 +163,16 @@ const ResetPassword = (props) => {
                     <Text color="#FED7D7" w="50vw" fontSize={[12, 12, 12, 14]}>
                       Your new password should consist of:
                     </Text>
-                    <UnorderedList
-                      color="#FED7D7"
-                      w="300"
-                      fontSize={[12, 12, 12, 14]}
-                    >
-                      <ListItem>At least 8 characters in length</ListItem>
-                      <ListItem>
+                    <List.Root as='ul' color="#FED7D7" w="300" fontSize={[12, 12, 12, 14]}>
+                      <List.Item>At least 8 characters in length</List.Item>
+                      <List.Item>
                         Mixture of both uppercase and lowercase characters
-                      </ListItem>
-                      <ListItem>Contains at least one number</ListItem>
-                      <ListItem>
+                      </List.Item>
+                      <List.Item>Contains at least one number</List.Item>
+                      <List.Item>
                         Contains at least one special character
-                      </ListItem>
-                    </UnorderedList>
+                      </List.Item>
+                    </List.Root>
                   </Box>
                 </Center>
                 <Text>Re-enter Your New Password</Text>

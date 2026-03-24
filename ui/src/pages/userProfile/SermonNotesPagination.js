@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text, Divider, Image } from '@chakra-ui/react';
+import { Box, Button, Flex, Text, Image, Separator } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 const SermonNotesPagination = ({
@@ -33,11 +33,7 @@ const SermonNotesPagination = ({
             <Box>
               <Flex direction="row" alignItems="center">
                 <Box maxW={{ base: '8rem', md: '12rem' }} mr={4}>
-                  <Image
-                    src={item?.imageLink}
-                    fallbackSrc="https://hongkong.sub.hmccglobal.org/wp-content/uploads/Screenshot-2020-09-04-at-6.39.50-PM.png"
-                    objectFit="contain"
-                  />
+                  <Image src={item?.imageLink} objectFit="contain" />
                 </Box>
                 <Box>
                   <Text
@@ -80,26 +76,22 @@ const SermonNotesPagination = ({
               </Flex>
             </Box>
             <Button
-              as={Link}
-              to={`/sermons/notes/${item.sermonId}`}
               bg="#ADCFFF"
               color="#00377C"
               height={{ base: '2rem', md: '3.5rem' }}
-            >
-              View
-            </Button>
+              asChild><Link to={`/sermons/notes/${item.sermonId}`}>View
+                          </Link></Button>
           </Flex>
-          <Divider bg="black" height={0.4} mt={2} />
+          <Separator bg="black" height={0.4} mt={2} />
         </Box>
       ))}
-
       {/* Pagination Controls */}
       <Flex justifyContent="flex-end" alignItems="center" mt={4}>
         <Button
           onClick={() =>
             setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))
           }
-          isDisabled={validCurrentPage === 1}
+          disabled={validCurrentPage === 1}
         >
           &lt;
         </Button>
@@ -110,7 +102,7 @@ const SermonNotesPagination = ({
           onClick={() =>
             setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))
           }
-          isDisabled={validCurrentPage === totalPages}
+          disabled={validCurrentPage === totalPages}
         >
           &gt;
         </Button>

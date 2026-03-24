@@ -214,7 +214,7 @@ const ErrorPage = (props) => {
               py={['7']}
               minW={['95%', '30%']}
               maxW={['95%', '100%']}
-              spacing="3"
+              gap="3"
               textAlign="center"
             >
               <Icon

@@ -10,10 +10,10 @@ import {
   Text,
   Container,
 } from '@chakra-ui/react';
-import { ChevronLeftIcon } from '@chakra-ui/icons';
 import OnlinePageButtons from '../../sermons/OnlinePageButtons';
 import OnlinePageTabs from '../../sermons/OnlinePageTabs';
 import { DateTime } from 'luxon';
+import { LuChevronLeft } from 'react-icons/lu';
 
 const PreviewOnlineSermonContainer = (props) => {
   const { isPreviewing, setIsPreviewing, data, user, history } = props;
@@ -59,15 +59,12 @@ const PreviewOnlineSermonContainer = (props) => {
       <VStack>
         <Link alignSelf="baseline">
           <Button
-            variant="link"
+            variant='plain'
             fontSize="lg"
             color="black"
             justifyContent="left"
-            leftIcon={<ChevronLeftIcon />}
-            display={{ base: 'none', md: 'flex' }}
-          >
-            See all past sermons
-          </Button>
+            display={{ base: 'none', md: 'flex' }}><LuChevronLeft />See all past sermons
+                      </Button>
         </Link>
         <Box
           display="flex"
@@ -97,10 +94,10 @@ const PreviewOnlineSermonContainer = (props) => {
               <Text fontWeight="bold" fontSize={{ base: 'xl', md: '3xl' }}>
                 {title}
               </Text>
-              <Stack spacing={8}>
+              <Stack gap={8}>
                 <Box>
                   <Stack
-                    spacing={{ base: 'normal', md: 'auto' }}
+                    gap={{ base: 'normal', md: 'auto' }}
                     direction={{ base: 'column', md: 'row' }}
                   >
                     <HStack>
@@ -117,7 +114,7 @@ const PreviewOnlineSermonContainer = (props) => {
                     </HStack>
                   </Stack>
                   <Stack
-                    spacing={{ base: 'normal', md: 'auto' }}
+                    gap={{ base: 'normal', md: 'auto' }}
                     direction={{ base: 'column', md: 'row' }}
                   >
                     <HStack>

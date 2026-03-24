@@ -5,24 +5,20 @@ import {
   Heading,
   Stack,
   Box,
-  FormControl,
-  FormLabel,
   Input,
   Textarea,
   HStack,
   Checkbox,
   Button,
-  FormErrorMessage,
-  useToast,
+  Field,
 } from '@chakra-ui/react';
+import { toaster } from '../../../components/ui/toaster';
 import { useForm } from 'react-hook-form';
 import PopUpGrid from './PopUpGrid';
 import PopupContainer from './PopupContainer';
 import FileUpload from '../../helpers/components/FileUpload';
 
 export default function AdminPopUpContainer(props) {
-  const toast = useToast();
-
   const { control } = useForm();
 
   const [popUps, setPopUps] = useState([]);
@@ -110,7 +106,7 @@ export default function AdminPopUpContainer(props) {
       if (res.status === 200) return true;
     } catch (e) {
       console.log(e.response);
-      toast({
+      toaster.create({
         description: e.response.data,
         status: 'error',
         duration: 5000,
@@ -142,7 +138,7 @@ export default function AdminPopUpContainer(props) {
       }
     } catch (e) {
       console.log(e.response);
-      toast({
+      toaster.create({
         description: e.response.data,
         status: 'error',
         duration: 5000,
@@ -165,7 +161,7 @@ export default function AdminPopUpContainer(props) {
     }
 
     if (success) {
-      toast({
+      toaster.create({
         description: 'Saved',
         status: 'success',
         duration: 5000,
@@ -221,32 +217,32 @@ export default function AdminPopUpContainer(props) {
       <Stack direction={['column', 'row']} w="100%">
         <Box w={['100%', '50%']}>
           <form onSubmit={onSubmit}>
-            <FormControl isRequired isInvalid={nameCheck()}>
-              <FormLabel>Name</FormLabel>
+            <Field.Root required invalid={nameCheck()}>
+              <Field.Label>Name</Field.Label>
               <Input
                 type="text"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onValueChange={(e) => setName(e.target.value)}
               />
-              <FormErrorMessage>
+              <Field.ErrorText>
                 Another PopUp with the same name already exists
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl>
-              <FormLabel>Title</FormLabel>
+              </Field.ErrorText>
+            </Field.Root>
+            <Field.Root>
+              <Field.Label>Title</Field.Label>
               <Input
                 type="text"
                 value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                onValueChange={(e) => setTitle(e.target.value)}
               />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Desc</FormLabel>
+            </Field.Root>
+            <Field.Root>
+              <Field.Label>Desc</Field.Label>
               <Textarea
                 value={desc}
-                onChange={(e) => setDesc(e.target.value)}
+                onValueChange={(e) => setDesc(e.target.value)}
               />
-            </FormControl>
+            </Field.Root>
 
             <FileUpload
               name="image"
@@ -259,52 +255,50 @@ export default function AdminPopUpContainer(props) {
               Image URL
             </FileUpload>
 
-            <FormControl>
-              <FormLabel>Button Text</FormLabel>
+            <Field.Root>
+              <Field.Label>Button Text</Field.Label>
               <Input
                 type="text"
                 value={buttonTexts}
-                onChange={(e) => setButtonTextsStr(e.target.value)}
+                onValueChange={(e) => setButtonTextsStr(e.target.value)}
               />
-            </FormControl>
-            <FormControl isInvalid={buttonLinkCheck()}>
-              <FormLabel>Button Links</FormLabel>
+            </Field.Root>
+            <Field.Root invalid={buttonLinkCheck()}>
+              <Field.Label>Button Links</Field.Label>
               <Input
                 type="text"
                 value={buttonLinks}
-                onChange={(e) => setButtonLinksStr(e.target.value)}
+                onValueChange={(e) => setButtonLinksStr(e.target.value)}
               />
-              <FormErrorMessage>
+              <Field.ErrorText>
                 Number of button links cannot exceed number of button texts
-              </FormErrorMessage>
-            </FormControl>
-            <HStack spacing={5} justifyContent="flex-end">
-              <FormControl w="auto" isDisabled={deleted}>
-                <Checkbox
-                  isChecked={published}
-                  onChange={(e) => setPublished(e.target.checked)}
-                >
-                  Publish?
-                </Checkbox>
-              </FormControl>
-              <FormControl w="auto">
-                <Checkbox
-                  isChecked={deleted}
-                  onChange={(e) => setDeleted(e.target.checked)}
-                >
-                  Delete?
-                </Checkbox>
-              </FormControl>
+              </Field.ErrorText>
+            </Field.Root>
+            <HStack gap={5} justifyContent="flex-end">
+              <Field.Root w="auto" disabled={deleted}>
+                <Checkbox.Root
+                  onCheckedChange={(e) => setPublished(e.target.checked)}
+                  checked={published}
+                ><Checkbox.HiddenInput /><Checkbox.Control><Checkbox.Indicator /></Checkbox.Control><Checkbox.Label>Publish?
+                                    </Checkbox.Label></Checkbox.Root>
+              </Field.Root>
+              <Field.Root w="auto">
+                <Checkbox.Root
+                  onCheckedChange={(e) => setDeleted(e.target.checked)}
+                  checked={deleted}
+                ><Checkbox.HiddenInput /><Checkbox.Control><Checkbox.Indicator /></Checkbox.Control><Checkbox.Label>Delete?
+                                    </Checkbox.Label></Checkbox.Root>
+              </Field.Root>
             </HStack>
-            <FormControl mt={5}>
-              <Button type="submit" w="full" isLoading={isLoading}>
+            <Field.Root mt={5}>
+              <Button type="submit" w="full" loading={isLoading}>
                 {id && id.length > 0 ? 'UPDATE' : 'SAVE'}
               </Button>
-            </FormControl>
-            <Button colorScheme="red" w="full" mt={5} onClick={resetHandler}>
+            </Field.Root>
+            <Button colorPalette="red" w="full" mt={5} onClick={resetHandler}>
               RESET
             </Button>
-            <Button colorScheme="blue" w="full" mt={5} onClick={previewHandler}>
+            <Button colorPalette="blue" w="full" mt={5} onClick={previewHandler}>
               PREVIEW
             </Button>
           </form>

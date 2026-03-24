@@ -28,16 +28,6 @@ const NavBar = (props) => {
   const [userObj, setUserObj] = useState();
   const location = useLocation();
 
-  const liveScStyle = {
-    border: '5px',
-    backgroundColor: '#D46764',
-    color: 'white',
-    fontWeight: '800',
-    align: 'center',
-    fontFamily: 'Manrope',
-    letterSpacing: '0.1px',
-  };
-
   const onLogout = () => {
     dispatch(signout());
     localStorage.clear();
@@ -132,7 +122,7 @@ const NavBar = (props) => {
               h={{ md: '7vh', lg: '7vh', xl: '8.5vh' }}
               display={{ base: 'none', md: 'flex' }}
             >
-              <HStack spacing={5} display={{ base: 'none', md: 'flex' }}>
+              <HStack gap={5} display={{ base: 'none', md: 'flex' }}>
                 <LinkBox>
                   <LinkOverlay href="/">
                     <Image
@@ -156,10 +146,11 @@ const NavBar = (props) => {
 
               <Stack
                 fontWeight="600"
-                spacing={{ md: 5, lg: 7 }}
+                gap={{ md: 5, lg: 7 }}
                 justify={['space-between', 'space-around']}
                 align="center"
                 display={{ base: 'none', md: 'flex' }}
+                flexDirection={{ base: 'column', md: 'row' }}
                 marginLeft="15px"
                 marginRight={{ md: '15px', lg: '30px' }}
                 isInline
@@ -202,7 +193,7 @@ const NavBar = (props) => {
                 </Box>
               </Stack>
               <Stack
-                spacing={2}
+                gap={2}
                 color="black"
                 justify="right"
                 align="right"

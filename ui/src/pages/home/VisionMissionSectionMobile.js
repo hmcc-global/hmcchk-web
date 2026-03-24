@@ -1,27 +1,21 @@
-import {
-  Text,
-  Container,
-  Box,
-  Heading,
-  Button,
-  Fade,
-  Link,
-  VStack,
-} from '@chakra-ui/react';
+import { Text, Container, Box, Heading, Button, Link, VStack, Icon } from '@chakra-ui/react';
 import { InView } from 'react-intersection-observer';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { LuArrowRight } from 'react-icons/lu';
 const VisionMissionSectionMobile = () => {
   return (
     <>
       <InView rootMargin="-50px" triggerOnce={true}>
         {({ inView, ref }) => (
-          <Fade transition={{ enter: { duration: 1 } }} in={inView}>
+          <Box
+            ref={ref}
+            opacity={inView ? 1 : 0}
+            transition="opacity 1s ease-in-out"
+          >
             <Container
               maxW="container.xl"
               bgImage={`url('${process.env.PUBLIC_URL}/images/home/hk-green.png')`}
               bgPos="center right"
               bgSize="contain"
-              ref={ref}
               bgRepeat="no-repeat"
             >
               <VStack>
@@ -364,16 +358,12 @@ const VisionMissionSectionMobile = () => {
                     >
                       About Us
                     </Text>
-                    <ArrowForwardIcon
-                      color="black"
-                      transform="rotate(315deg)"
-                      boxSize="30px"
-                    />
+                    <Icon color="black" transform="rotate(315deg)" boxSize="30px" asChild><LuArrowRight /></Icon>
                   </Button>
                 </Link>
               </VStack>
             </Container>
-          </Fade>
+          </Box>
         )}
       </InView>
     </>

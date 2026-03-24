@@ -2,26 +2,19 @@ import { useState } from 'react';
 import {
   Box,
   Center,
-  Container,
   Flex,
   Heading,
   Text,
   VStack,
   Link,
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
   Image,
   useDisclosure,
   Stack,
   SimpleGrid,
+  Dialog,
+  Portal,
 } from '@chakra-ui/react';
-import { MAX } from 'uuid';
-
 import { typography } from './typography';
 
 const { fontSizes, fontFamilies } = typography;
@@ -52,7 +45,7 @@ const RenderSwitch = ({ modalSelection }) => {
       );
     case 'Bank Transfer':
       return (
-        <VStack spacing="3vh" align="start">
+        <VStack gap="3vh" align="start">
           <Box py="1em">
             <Text fontWeight="bold">
               You may use the following information:
@@ -72,7 +65,6 @@ const RenderSwitch = ({ modalSelection }) => {
               (e.g. Weekly Offering 2019-11-03)
             </Text>
           </Box>
-
           <Text fontWeight="bold">
             If our account name is too long and exceeds the number of permitted
             characters, you may shorten it as "Harvest Mission Community Church
@@ -140,7 +132,7 @@ const RenderSwitch = ({ modalSelection }) => {
 const GivingSection = (props) => {
   const [activeTab, setActiveTab] = useState('giving');
   const [selectedCard, setSelectedCard] = useState(null);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
 
   const givingCards = [
     { text: 'FPS', img: '/images/giving/FPS.png' },
@@ -180,18 +172,20 @@ const GivingSection = (props) => {
         whiteSpace="nowrap"
         mb={8}
         py={2}
-        sx={{
-          '&::-webkit-scrollbar': {
+        css={{
+          '& &::-webkit-scrollbar': {
             height: '8px',
           },
-          '&::-webkit-scrollbar-track': {
+
+          '& &::-webkit-scrollbar-track': {
             background: '#f1f1f1',
             borderRadius: '4px',
           },
-          '&::-webkit-scrollbar-thumb': {
+
+          '& &::-webkit-scrollbar-thumb': {
             background: '#D9D9D9',
             borderRadius: '4px',
-          },
+          }
         }}
         display={{ base: 'none', md: 'block' }}
       >
@@ -289,7 +283,7 @@ const GivingSection = (props) => {
       </Box>
 
       <Box display={{ base: 'block', md: 'none' }}>
-        <SimpleGrid columns={2} spacing={4} mb={4}>
+        <SimpleGrid columns={2} gap={4} mb={4}>
           {givingCards.slice(0, 2).map((card, index) => (
             <Box
               key={index}
@@ -371,7 +365,7 @@ const GivingSection = (props) => {
             </Box>
           ))}
         </SimpleGrid>
-        <SimpleGrid columns={2} spacing={4} mb={4}>
+        <SimpleGrid columns={2} gap={4} mb={4}>
           {givingCards.slice(2, 4).map((card, index) => (
             <Box
               key={index + 2}
@@ -570,25 +564,35 @@ const GivingSection = (props) => {
         </Text>
       </Box>
 
-      <Modal isOpen={isOpen} size={'xl'} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            <Heading
-              as="h2"
-              size="xl"
-              fontWeight="bold"
-              fontFamily={fontFamilies.primary}
-            >
-              {selectedCard}
-            </Heading>
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody fontFamily={fontFamilies.primary} pb={8}>
-            {selectedCard && <RenderSwitch modalSelection={selectedCard} />}
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      <Dialog.Root open={open} size='xl' onOpenChange={e => {
+        if (!e.open) {
+          onClose();
+        }
+      }}>
+        <Portal>
+
+          <Dialog.Backdrop />
+          <Dialog.Positioner>
+            <Dialog.Content>
+              <Dialog.Header>
+                <Heading
+                  as="h2"
+                  size="xl"
+                  fontWeight="bold"
+                  fontFamily={fontFamilies.primary}
+                >
+                  {selectedCard}
+                </Heading>
+              </Dialog.Header>
+              <Dialog.CloseTrigger />
+              <Dialog.Body fontFamily={fontFamilies.primary} pb={8}>
+                {selectedCard && <RenderSwitch modalSelection={selectedCard} />}
+              </Dialog.Body>
+            </Dialog.Content>
+          </Dialog.Positioner>
+
+        </Portal>
+      </Dialog.Root>
     </Box>
   );
 
@@ -636,7 +640,7 @@ const GivingSection = (props) => {
         />
 
         {/* TODO-aparedan: Finalise these prayer requests */}
-        <VStack spacing={6} align="center" p={4} flex={1}>
+        <VStack gap={6} align="center" p={4} flex={1}>
           <Box
             width="80px"
             height="80px"
@@ -674,7 +678,7 @@ const GivingSection = (props) => {
           </Text>
         </VStack>
 
-        <VStack spacing={6} align="center" p={4} flex={1}>
+        <VStack gap={6} align="center" p={4} flex={1}>
           <Box
             width="80px"
             height="80px"
@@ -712,7 +716,7 @@ const GivingSection = (props) => {
           </Text>
         </VStack>
 
-        <VStack spacing={6} align="center" p={4} flex={1}>
+        <VStack gap={6} align="center" p={4} flex={1}>
           <Box
             width="80px"
             height="80px"
@@ -776,7 +780,6 @@ const GivingSection = (props) => {
         <Flex bg="white" borderRadius="20px" p={3} gap={2} position="relative">
           <Button
             bg={activeTab === 'giving' ? '#EBAC09' : 'white'}
-            variant="unstyled"
             flex={1}
             px={6}
             py={6}
@@ -789,12 +792,12 @@ const GivingSection = (props) => {
             display="flex"
             onClick={() => setActiveTab('giving')}
             fontSize={{ base: '0.8rem', md: 'xl' }}
+            unstyled
           >
             GIVE
           </Button>
 
           <Button
-            variant="unstyled"
             flex={1}
             px={6}
             py={6}
@@ -808,6 +811,7 @@ const GivingSection = (props) => {
             borderColor="gray.200"
             display="flex"
             onClick={() => setActiveTab('prayer')}
+            unstyled
           >
             PRAY
           </Button>

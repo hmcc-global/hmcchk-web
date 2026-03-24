@@ -1,9 +1,7 @@
 import {
   Flex,
-  Text,
   Center,
   VStack,
-  Stack,
   Image,
   Box,
   Heading,

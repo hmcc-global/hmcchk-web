@@ -71,7 +71,7 @@ const SermonSeriesCardList = ({ allSermons }) => {
     <>
       <Box>
         {/* Header with Filter Button */}
-        <HStack marginTop={[4, 8]} spacing="auto">
+        <HStack marginTop={[4, 8]} gap="auto">
           <Text
             fontFamily="DMSerifDisplay_Italic"
             fontWeight="400"

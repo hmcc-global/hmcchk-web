@@ -49,19 +49,19 @@ const SermonCard = ({ sermonData }) => {
         bg={isSelected ? '#DFE7FF' : 'transparent'}
         _hover={{ borderColor: '#4A6EEB' }}
       >
-        <Icon as={MdOutlineSmartDisplay} boxSize="2rem" color={'#4A6EEB'} />
-        <VStack alignItems={'left'} spacing={'0.25rem'}>
+        <Icon boxSize="2rem" color={'#4A6EEB'} asChild><MdOutlineSmartDisplay /></Icon>
+        <VStack alignItems={'left'} gap={'0.25rem'}>
           <Text
             fontSize={{ base: '0.75rem', md: '0.875rem' }}
             fontWeight={isSelected ? 700 : 400}
-            noOfLines={2}
+            lineClamp={2}
           >
             {sermonTitlePrefix + sermonData.title}
           </Text>
           <Text
             fontSize={{ base: '0.625rem', md: '0.75rem' }}
             color={isSelected ? 'black' : '#818181'}
-            noOfLines={1}
+            lineClamp={1}
             wordBreak="break-all"
           >
             {'Speaker: ' + sermonData.speaker[0].name}
@@ -69,7 +69,7 @@ const SermonCard = ({ sermonData }) => {
           <Text
             fontSize={{ base: '0.625rem', md: '0.75rem' }}
             color={isSelected ? 'black' : '#818181'}
-            noOfLines={1}
+            lineClamp={1}
             wordBreak="break-all"
           >
             {'Passage: ' + sermonData.passage}

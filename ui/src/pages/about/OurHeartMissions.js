@@ -1,13 +1,4 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  Stack,
-  VStack,
-  Text,
-  Container,
-  HStack,
-} from '@chakra-ui/react';
+import { Box, Flex, Heading, Stack, VStack, Text, Container, HStack } from '@chakra-ui/react';
 
 const Picture = ({ image, year, text }) => {
   return (
@@ -45,7 +36,7 @@ const MissionSection = (props) => {
   const { title, blurb } = props;
   return (
     <Flex maxW="container.lg">
-      <VStack justifyContent="space-around" spacing="2em">
+      <VStack justifyContent="space-around" gap="2em">
         <Box>
           <Heading
             textAlign="center"

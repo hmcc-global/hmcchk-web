@@ -10,7 +10,6 @@ export default function AdminFundraiseGrid(props) {
   const [showDeleted, setShowDeleted] = useState(false);
   const [filtered, setFiltered] = useState(fundraises);
   const [api, setApi] = useState();
-  const [colApi, setColApi] = useState();
 
   const objectListValueFormatter = (objects) => {
     const objectString = objects
@@ -41,7 +40,6 @@ export default function AdminFundraiseGrid(props) {
   // Ag-Grid Functions
   const onGridReady = (params) => {
     if (params.api) setApi(params.api);
-    if (params.columnApi) setColApi(params.columnApi);
   };
 
   const onRowClicked = ({ data }) => {
@@ -77,7 +75,7 @@ export default function AdminFundraiseGrid(props) {
         </Heading>
         <Switch
           value={showDeleted}
-          onChange={(e) => setShowDeleted(e.target.checked)}
+          onValueChange={(e) => setShowDeleted(e.target.checked)}
         >
           Show deleted
         </Switch>

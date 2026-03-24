@@ -1,11 +1,4 @@
-import {
-  Button,
-  Flex,
-  LinkBox,
-  LinkOverlay,
-  Spacer,
-  Text,
-} from '@chakra-ui/react';
+import { Button, Flex, LinkBox, LinkOverlay, Spacer, Text } from '@chakra-ui/react';
 import { AiOutlineInstagram } from 'react-icons/ai';
 
 const LifeGroupCard = (props) => {
@@ -38,10 +31,9 @@ const LifeGroupCard = (props) => {
       </Text>
       <Spacer />
       <LinkBox>
-        <LinkOverlay href={igLink} isExternal>
+        <LinkOverlay href={igLink} target='_blank' rel='noopener noreferrer'>
           <Button
-            leftIcon={<AiOutlineInstagram size="1.2rem" />}
-            colorScheme="whiteAlpha"
+            colorPalette="whiteAlpha"
             borderColor="#fff"
             color="#fff"
             size={['xs', 'xs', 'sm']}
@@ -50,13 +42,10 @@ const LifeGroupCard = (props) => {
             py={'0.375rem'}
             variant="outline"
             backdropFilter="blur(3px)"
-            fontWeight={700}
-          >
-            <Text fontSize={{ base: '0.62rem', lg: '1.125rem' }}>
+            fontWeight={700}><AiOutlineInstagram size="1.2rem" /><Text fontSize={{ base: '0.62rem', lg: '1.125rem' }}>
               {' '}
               {igHandle}
-            </Text>
-          </Button>
+            </Text></Button>
         </LinkOverlay>
       </LinkBox>
     </Flex>

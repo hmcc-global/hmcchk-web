@@ -1,8 +1,8 @@
 import React from 'react';
-import { Flex, VStack, Text, Link, Container, Image } from '@chakra-ui/react';
-import { ChevronRightIcon } from '@chakra-ui/icons';
+import { Flex, VStack, Text, Link, Container, Image, Icon } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { signout } from '../../reducers/userSlice';
+import { LuChevronRight } from 'react-icons/lu';
 
 const MainMenu = ({ login, onClose }) => {
   const onLogout = () => {
@@ -18,7 +18,7 @@ const MainMenu = ({ login, onClose }) => {
     return (
       <Container maxW="container.lg" fontFamily="Manrope" pt="8%">
         <VStack
-          spacing="7"
+          gap="7"
           color="white"
           alignItems="flex-start"
           pt="10%"
@@ -50,7 +50,7 @@ const MainMenu = ({ login, onClose }) => {
                   py="1"
                 >
                   <Text>Home</Text>
-                  <ChevronRightIcon boxSize={6} />
+                  <Icon boxSize={6} asChild><LuChevronRight /></Icon>
                 </Flex>
               </Link>
 
@@ -71,7 +71,7 @@ const MainMenu = ({ login, onClose }) => {
                   py="1"
                 >
                   <Text>About</Text>
-                  <ChevronRightIcon boxSize={6} />
+                  <Icon boxSize={6} asChild><LuChevronRight /></Icon>
                 </Flex>
               </Link>
               <Link
@@ -91,7 +91,7 @@ const MainMenu = ({ login, onClose }) => {
                   py="1"
                 >
                   <Text>Discover</Text>
-                  <ChevronRightIcon boxSize={6} />
+                  <Icon boxSize={6} asChild><LuChevronRight /></Icon>
                 </Flex>
               </Link>
               <Link
@@ -111,7 +111,7 @@ const MainMenu = ({ login, onClose }) => {
                   py="1"
                 >
                   <Text>Events</Text>
-                  <ChevronRightIcon boxSize={6} />
+                  <Icon boxSize={6} asChild><LuChevronRight /></Icon>
                 </Flex>
               </Link>
               <Link
@@ -131,7 +131,7 @@ const MainMenu = ({ login, onClose }) => {
                   py="1"
                 >
                   <Text>Sermons</Text>
-                  <ChevronRightIcon boxSize={6} />
+                  <Icon boxSize={6} asChild><LuChevronRight /></Icon>
                 </Flex>
               </Link>
               <Link
@@ -151,7 +151,7 @@ const MainMenu = ({ login, onClose }) => {
                   py="1"
                 >
                   <Text>Give</Text>
-                  <ChevronRightIcon boxSize={6} />
+                  <Icon boxSize={6} asChild><LuChevronRight /></Icon>
                 </Flex>
               </Link>
             </VStack>
@@ -176,7 +176,7 @@ const MainMenu = ({ login, onClose }) => {
                     py="1"
                   >
                     <Text>My Profile</Text>
-                    <ChevronRightIcon boxSize={6} />
+                    <Icon boxSize={6} asChild><LuChevronRight /></Icon>
                   </Flex>
                 </Link>
               )}
@@ -197,7 +197,7 @@ const MainMenu = ({ login, onClose }) => {
                     py="1"
                   >
                     <Text>Log Out</Text>
-                    <ChevronRightIcon boxSize={6} />
+                    <Icon boxSize={6} asChild><LuChevronRight /></Icon>
                   </Flex>
                 </Link>
               )}
@@ -219,7 +219,7 @@ const MainMenu = ({ login, onClose }) => {
                     py="1"
                   >
                     <Text>Login</Text>
-                    <ChevronRightIcon boxSize={6} />
+                    <Icon boxSize={6} asChild><LuChevronRight /></Icon>
                   </Flex>
                 </Link>
               )}
@@ -241,7 +241,7 @@ const MainMenu = ({ login, onClose }) => {
                     py="1"
                   >
                     <Text>Sign Up</Text>
-                    <ChevronRightIcon boxSize={6} />
+                    <Icon boxSize={6} asChild><LuChevronRight /></Icon>
                   </Flex>
                 </Link>
               )}

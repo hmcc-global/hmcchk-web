@@ -1,18 +1,8 @@
 import { useEffect, useState } from 'react';
-import {
-  Stack,
-  Text,
-  Box,
-  AspectRatio,
-  Image,
-  Button,
-  HStack,
-  Icon,
-} from '@chakra-ui/react';
+import { Stack, Text, Box, AspectRatio, Image, Button, HStack, Icon } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 import { FaArrowRight } from 'react-icons/fa';
 import LiveButton from '../helpers/components/LiveButton';
-import SermonSocialMediaButtons from './SermonSocialMediaButtons';
 import { DateTime } from 'luxon';
 import { DATE_FULL } from 'luxon/src/impl/formats';
 
@@ -82,9 +72,9 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
       }
       _hover={{ backgroundColor: 'rgba(74, 110, 235, 0.9)' }}
     >
-      <HStack spacing="1rem" alignItems="center" justifyContent={'center'}>
+      <HStack gap="1rem" alignItems="center" justifyContent={'center'}>
         <Text>Watch Now</Text>
-        <Icon as={FaArrowRight} boxSize="1rem" />
+        <Icon boxSize="1rem" asChild><FaArrowRight /></Icon>
       </HStack>
     </Button>
   );
@@ -99,77 +89,73 @@ const CurrentSermon = ({ currentSermon, isOnline }) => {
     }
   };
 
-  return (
-    currentSermon && (
-      <Box boxSizing="border-box">
-        <Stack
-          direction={{ base: 'column', md: 'row' }}
-          alignItems={{ base: 'center', lg: 'center' }}
-        >
-          <Text
-            fontWeight={400}
-            fontSize={'1.5rem'}
-            color="#272727"
-            fontFamily="DMSerifDisplay_Italic"
-            display={{ base: 'block', md: 'none' }}
-          >
-            {header}
-          </Text>
-          <MediaDisplay isOnline={isOnline} mediaUrl={mediaUrl} />
+  return (currentSermon && (<Box boxSizing="border-box">
+    <Stack
+      direction={{ base: 'column', md: 'row' }}
+      alignItems={{ base: 'center', lg: 'center' }}
+    >
+      <Text
+        fontWeight={400}
+        fontSize={'1.5rem'}
+        color="#272727"
+        fontFamily="DMSerifDisplay_Italic"
+        display={{ base: 'block', md: 'none' }}
+      >
+        {header}
+      </Text>
+      <MediaDisplay isOnline={isOnline} mediaUrl={mediaUrl} />
 
-          <Stack
-            pl={{ base: '0', md: '1.5rem' }}
-            alignItems={{ base: 'center', lg: 'flex-start' }}
-            flex="1"
-            direction="column"
-            gap="0.5rem"
+      <Stack
+        pl={{ base: '0', md: '1.5rem' }}
+        alignItems={{ base: 'center', lg: 'flex-start' }}
+        flex="1"
+        direction="column"
+        gap="0.5rem"
+      >
+        <Text
+          fontWeight={400}
+          fontSize={{ base: '1.875rem', md: '2.625rem' }}
+          color="#272727"
+          fontFamily="DMSerifDisplay_Italic"
+          display={{ base: 'none', md: 'block' }}
+        >
+          {header}
+        </Text>
+        <HStack gap="0.5rem" alignItems="center">
+          {isOnline && <LiveButton />}
+          <Text
+            fontWeight="bold"
+            fontSize={{ base: '1rem', md: '1.125rem' }}
           >
-            <Text
-              fontWeight={400}
-              fontSize={{ base: '1.875rem', md: '2.625rem' }}
-              color="#272727"
-              fontFamily="DMSerifDisplay_Italic"
-              display={{ base: 'none', md: 'block' }}
-            >
-              {header}
-            </Text>
-            <HStack spacing="0.5rem" alignItems="center">
-              {isOnline && <LiveButton />}
-              <Text
-                fontWeight="bold"
-                fontSize={{ base: '1rem', md: '1.125rem' }}
-              >
-                {sermonSeriesName}
-              </Text>
-            </HStack>
-            {isOnline && (
-              <HStack
-                spacing={0}
-                fontSize={{ base: '0.625rem', md: '0.875rem' }}
-                alignItems="center"
-                justifyContent="flex-start"
-                flexWrap={'wrap'}
-              >
-                <Text>{'Date: ' + getSermonDate()}</Text>
-                <Text px={{ base: '0.375rem', md: '1rem' }}>|</Text>
-                <Text>{'Speaker: ' + currentSermon.speaker}</Text>
-                <Text px={{ base: '0.375rem', md: '1rem' }}>|</Text>
-                <Text>{'Passage: ' + currentSermon.sermonPassage}</Text>
-              </HStack>
-            )}
-            <Text
-              fontSize={{ base: '0.875rem', md: '1rem' }}
-              fontWeight={500}
-              pb={{ base: '0', lg: '1rem' }}
-            >
-              {sermonDesc}
-            </Text>
-            <WatchButton />
-          </Stack>
-        </Stack>
-      </Box>
-    )
-  );
+            {sermonSeriesName}
+          </Text>
+        </HStack>
+        {isOnline && (
+          <HStack
+            gap={0}
+            fontSize={{ base: '0.625rem', md: '0.875rem' }}
+            alignItems="center"
+            justifyContent="flex-start"
+            flexWrap={'wrap'}
+          >
+            <Text>{'Date: ' + getSermonDate()}</Text>
+            <Text px={{ base: '0.375rem', md: '1rem' }}>|</Text>
+            <Text>{'Speaker: ' + currentSermon.speaker}</Text>
+            <Text px={{ base: '0.375rem', md: '1rem' }}>|</Text>
+            <Text>{'Passage: ' + currentSermon.sermonPassage}</Text>
+          </HStack>
+        )}
+        <Text
+          fontSize={{ base: '0.875rem', md: '1rem' }}
+          fontWeight={500}
+          pb={{ base: '0', lg: '1rem' }}
+        >
+          {sermonDesc}
+        </Text>
+        <WatchButton />
+      </Stack>
+    </Stack>
+  </Box>));
 };
 
 export default CurrentSermon;

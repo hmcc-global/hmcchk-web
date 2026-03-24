@@ -10,7 +10,6 @@ export default function TestimonyGrid(props) {
   const [showDeleted, setShowDeleted] = useState(false);
   const [filtered, setFiltered] = useState(testimonies);
   const [api, setApi] = useState();
-  const [colApi, setColApi] = useState();
 
   useEffect(() => {
     if (testimonies) {
@@ -35,7 +34,6 @@ export default function TestimonyGrid(props) {
   // Ag-Grid Functions
   const onGridReady = (params) => {
     if (params.api) setApi(params.api);
-    if (params.columnApi) setColApi(params.columnApi);
   };
 
   const onRowClicked = ({ data }) => {
@@ -66,7 +64,7 @@ export default function TestimonyGrid(props) {
         </Heading>
         <Switch
           value={showDeleted}
-          onChange={(e) => setShowDeleted(e.target.checked)}
+          onValueChange={(e) => setShowDeleted(e.target.checked)}
         >
           Show deleted
         </Switch>

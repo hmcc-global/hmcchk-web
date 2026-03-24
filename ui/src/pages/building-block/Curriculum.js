@@ -1,15 +1,6 @@
 import { useState, useEffect } from 'react';
-import {
-  Box,
-  Flex,
-  Image,
-  Text,
-  Heading,
-  IconButton,
-  HStack,
-  VStack,
-} from '@chakra-ui/react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import { Box, Flex, Image, Text, Heading, IconButton, HStack, VStack, Icon } from '@chakra-ui/react';
+import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 
 const images = [
   '/images/buildingblock/carousel-1.png',
@@ -69,7 +60,7 @@ export default function Curriculum() {
       py={{ base: '1.5rem', md: '3rem' }}
     >
       {/* Carousel Section */}
-      <VStack w={{ base: '100%', md: '55%' }} spacing={3} align="stretch">
+      <VStack w={{ base: '100%', md: '55%' }} gap={3} align="stretch">
         <Box
           position="relative"
           h="100%"
@@ -103,7 +94,6 @@ export default function Curriculum() {
           >
             <IconButton
               aria-label="Previous"
-              icon={<ChevronLeftIcon boxSize="2rem" color="white" />}
               position="absolute"
               top="50%"
               left="0.25rem"
@@ -116,8 +106,7 @@ export default function Curriculum() {
               _groupHover={{ opacity: 1 }}
               transition="opacity 0.2s"
               _focus={{ boxShadow: 'none', outline: 'none' }}
-              _active={{ boxShadow: 'none', outline: 'none' }}
-            />
+              _active={{ boxShadow: 'none', outline: 'none' }}><Icon boxSize="2rem" color="white" asChild><LuChevronLeft /></Icon></IconButton>
           </Box>
           <Box
             position="absolute"
@@ -133,7 +122,6 @@ export default function Curriculum() {
           >
             <IconButton
               aria-label="Next"
-              icon={<ChevronRightIcon boxSize="2rem" color="white" />}
               position="absolute"
               top="50%"
               right="0.25rem"
@@ -146,12 +134,11 @@ export default function Curriculum() {
               _groupHover={{ opacity: 1 }}
               transition="opacity 0.2s"
               _focus={{ boxShadow: 'none', outline: 'none' }}
-              _active={{ boxShadow: 'none', outline: 'none' }}
-            />
+              _active={{ boxShadow: 'none', outline: 'none' }}><Icon boxSize="2rem" color="white" asChild><LuChevronRight /></Icon></IconButton>
           </Box>
         </Box>
         {/* Dots below the carousel, grouped */}
-        <HStack justify="center" spacing={2}>
+        <HStack justify="center" gap={2}>
           {images.map((_, idx) => (
             <Box
               key={idx}
@@ -171,7 +158,6 @@ export default function Curriculum() {
           ))}
         </HStack>
       </VStack>
-
       {/* Text Section */}
       <Box
         flex="1"

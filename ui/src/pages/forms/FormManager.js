@@ -9,15 +9,13 @@ import {
   Text,
   Badge,
   Stack,
-  useToast,
   HStack,
   SimpleGrid,
 } from '@chakra-ui/react';
+import { toaster } from '../../components/ui/toaster';
 import FormEditorContainer from './FormEditorContainer';
 
 const FormManager = (props) => {
-  const toast = useToast();
-
   const { user } = props;
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -76,7 +74,7 @@ const FormManager = (props) => {
     const formTarget = e.target.value;
 
     navigator?.clipboard?.writeText(`${host}/forms/${formTarget}`);
-    toast({
+    toaster.create({
       description: 'Public Link Copied to clipboard!',
       status: 'success',
       duration: 5000,
@@ -85,7 +83,7 @@ const FormManager = (props) => {
 
   const copyPublicLinkHandlerForExternalForms = (e) => {
     navigator?.clipboard?.writeText(e.target.value);
-    toast({
+    toaster.create({
       description: 'Public Link Copied to clipboard!',
       status: 'success',
       duration: 5000,
@@ -159,11 +157,11 @@ const FormManager = (props) => {
 
   return (
     <Container maxW="container.xl" pt={10} minH="100vh">
-      <Stack spacing="5">
+      <Stack gap="5">
         <Heading as="h1" size="xl">
           Form Management System
         </Heading>
-        <Button colorScheme="blue" onClick={onCreate}>
+        <Button colorPalette="blue" onClick={onCreate}>
           Create a new form
         </Button>
         <Box borderRadius="lg">
@@ -172,12 +170,12 @@ const FormManager = (props) => {
               Existing Forms
             </Heading>
           </HStack>
-          <SimpleGrid spacing="2" columns={[1, 2]}>
+          <SimpleGrid gap="2" columns={[1, 2]}>
             {formList.map((formItem) => (
               <Box key={formItem.id}>
                 <Box p="3" borderRadius="lg" borderWidth="1px">
                   <Text mb="3">
-                    <Badge colorScheme={formItem.isPublished ? 'green' : 'red'}>
+                    <Badge colorPalette={formItem.isPublished ? 'green' : 'red'}>
                       {formItem.isPublished ? 'LIVE' : 'PRIVATE'}
                     </Badge>{' '}
                     <Badge>
@@ -187,27 +185,27 @@ const FormManager = (props) => {
                   </Text>
                   <Stack
                     direction={['column', 'column', 'column', 'column', 'row']}
-                    spacing={1}
+                    gap={1}
                   >
                     <Button
-                      colorScheme="blue"
+                      colorPalette="blue"
                       onClick={onEdit}
                       value={formItem.id}
-                      isLoading={isLoading}
+                      loading={isLoading}
                     >
                       Edit
                     </Button>
                     <Button
-                      colorScheme="blue"
+                      colorPalette="blue"
                       onClick={onPublish}
                       value={formItem.id}
-                      isLoading={isLoading}
+                      loading={isLoading}
                     >
                       {formItem.isPublished ? 'Unpublish' : 'Publish'}
                     </Button>
                     {formItem.formType === 'external' && (
                       <Button
-                        colorScheme="blue"
+                        colorPalette="blue"
                         onClick={copyPublicLinkHandlerForExternalForms}
                         value={formItem.externalFormLink}
                       >
@@ -216,7 +214,7 @@ const FormManager = (props) => {
                     )}
                     {formItem.formType !== 'external' && (
                       <Button
-                        colorScheme="blue"
+                        colorPalette="blue"
                         onClick={copyPublicLinkHandler}
                         value={formItem.id}
                       >
@@ -226,7 +224,7 @@ const FormManager = (props) => {
 
                     {formItem.formType === 'external' && (
                       <Button
-                        colorScheme="blue"
+                        colorPalette="blue"
                         onClick={onClickRedirectExternal}
                         value={formItem.externalFormLink}
                       >
@@ -235,7 +233,7 @@ const FormManager = (props) => {
                     )}
                     {formItem.formType !== 'external' && (
                       <Button
-                        colorScheme="blue"
+                        colorPalette="blue"
                         onClick={onClickRedirect}
                         value={formItem.id}
                       >
@@ -244,7 +242,7 @@ const FormManager = (props) => {
                     )}
 
                     <Button
-                      colorScheme="blue"
+                      colorPalette="blue"
                       onClick={() => onClickHandler(formItem)}
                       disabled={
                         noViewPermission(formItem) ||
@@ -254,10 +252,10 @@ const FormManager = (props) => {
                       View Data
                     </Button>
                     <Button
-                      colorScheme="red"
+                      colorPalette="red"
                       onClick={onDelete}
                       value={formItem.id}
-                      isLoading={isLoading}
+                      loading={isLoading}
                     >
                       Delete
                     </Button>

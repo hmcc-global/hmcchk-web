@@ -1,13 +1,4 @@
-import {
-  HStack,
-  VStack,
-  Stack,
-  Box,
-  Text,
-  SimpleGrid,
-  Image,
-  Button,
-} from '@chakra-ui/react';
+import { HStack, VStack, Stack, Box, Text, SimpleGrid, Image, Button } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 
 const MotionImage = motion(Image);

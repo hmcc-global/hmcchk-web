@@ -40,7 +40,7 @@ root.render(
     onScriptLoadSuccess={onScriptLoaded}
   >
     <React.StrictMode>
-      <ChakraProvider theme={customTheme}>
+      <ChakraProvider value={customTheme}>
         <App />
       </ChakraProvider>
     </React.StrictMode>

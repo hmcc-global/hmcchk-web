@@ -4,24 +4,22 @@ import { customAxios as axios } from '../helpers/customAxios';
 import ReCAPTCHA from 'react-google-recaptcha';
 import {
   Box,
-  Select,
+  NativeSelect,
   Center,
-  UnorderedList,
-  ListItem,
   VStack,
   Flex,
   Image,
   Text,
   Button,
   Input,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalFooter,
   useMediaQuery,
+  Icon,
+  List,
+  Dialog,
+  Portal,
 } from '@chakra-ui/react';
-import { CheckCircleIcon } from '@chakra-ui/icons';
 import { countryList } from '../helpers/lists';
+import { LuCircleCheck } from 'react-icons/lu';
 
 const Signup = (props) => {
   const {
@@ -36,7 +34,7 @@ const Signup = (props) => {
   const { lifestageList } = staticData;
   const googleEmail = props.history.location.state?.email;
   const googleFullName = props.history.location.state?.fullName;
-  const [isLargerThan480] = useMediaQuery('(min-width: 480px)');
+  const [isLargerThan480] = useMediaQuery(['(min-width: 480px)']);
 
   const [error, setError] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
@@ -148,32 +146,37 @@ const Signup = (props) => {
 
   return (
     <>
-      <Modal isOpen={modalOpen}>
-        <ModalOverlay />
-        <ModalContent borderRadius="20">
-          <VStack>
-            <Text
-              color="#79B71A"
-              fontSize="2xl"
-              fontWeight="700"
-              mt={6}
-              flex={1}
-              p={5}
-              textAlign="center"
-            >
-              Account created successfully, redirecting you to the login page.
-              You can now try to login!
-            </Text>
-            <Box flex={4}>
-              <Center w="100%" h="100%">
-                <CheckCircleIcon mt={5} w="70%" h="70%" color="#79B71A" />
-              </Center>
-            </Box>
-          </VStack>
-          <ModalFooter />
-        </ModalContent>
-      </Modal>
+      <Dialog.Root open={modalOpen}>
+        <Portal>
 
+          <Dialog.Backdrop />
+          <Dialog.Positioner>
+            <Dialog.Content borderRadius="20">
+              <VStack>
+                <Text
+                  color="#79B71A"
+                  fontSize="2xl"
+                  fontWeight="700"
+                  mt={6}
+                  flex={1}
+                  p={5}
+                  textAlign="center"
+                >
+                  Account created successfully, redirecting you to the login page.
+                  You can now try to login!
+                </Text>
+                <Box flex={4}>
+                  <Center w="100%" h="100%">
+                    <Icon mt={5} w="70%" h="70%" color="#79B71A" asChild><LuCircleCheck /></Icon>
+                  </Center>
+                </Box>
+              </VStack>
+              <Dialog.Footer />
+            </Dialog.Content>
+          </Dialog.Positioner>
+
+        </Portal>
+      </Dialog.Root>
       <Box
         minH="100vh"
         w="full"
@@ -238,7 +241,7 @@ const Signup = (props) => {
                   id="email"
                   name="email"
                   type="email"
-                  isReadOnly={googleEmail ? true : false}
+                  readOnly={googleEmail ? true : false}
                   placeholder="e.g. chantaiman@gmail.com"
                   style={inputBox}
                   h={['40px', '40px', '60px', '60px']}
@@ -295,16 +298,16 @@ const Signup = (props) => {
                         <Text w="50vw" fontSize={[10, 10, 14, 14]}>
                           Your new password should consist of:
                         </Text>
-                        <UnorderedList w="300" fontSize={[10, 10, 14, 14]}>
-                          <ListItem>At least 8 characters in length</ListItem>
-                          <ListItem>
+                        <List.Root as='ul' w="300" fontSize={[10, 10, 14, 14]}>
+                          <List.Item>At least 8 characters in length</List.Item>
+                          <List.Item>
                             Mixture of both uppercase and lowercase characters
-                          </ListItem>
-                          <ListItem>Contains at least one number</ListItem>
-                          <ListItem>
+                          </List.Item>
+                          <List.Item>Contains at least one number</List.Item>
+                          <List.Item>
                             Contains at least one special character
-                          </ListItem>
-                        </UnorderedList>
+                          </List.Item>
+                        </List.Root>
                       </Box>
                     </Center>
                     <Input
@@ -338,7 +341,7 @@ const Signup = (props) => {
                   id="firstName"
                   type="text"
                   name="firstName"
-                  isReadOnly={googleEmail ? true : false}
+                  readOnly={googleEmail ? true : false}
                   placeholder="First name"
                   style={inputBox}
                   h={['40px', '40px', '60px', '60px']}
@@ -358,7 +361,7 @@ const Signup = (props) => {
                   id="lastName"
                   type="text"
                   name="lastName"
-                  isReadOnly={googleEmail ? true : false}
+                  readOnly={googleEmail ? true : false}
                   placeholder="Last Name"
                   style={inputBox}
                   h={['40px', '40px', '60px', '60px']}
@@ -399,19 +402,21 @@ const Signup = (props) => {
                   </Text>
                 )}
                 <Text>Country of Origin</Text>
-                <Select
-                  boxSizing="border-box"
-                  style={selectBox}
-                  h={['40px', '40px', '60px', '60px']}
-                  {...register('countryOfOrigin')}
-                  isInvalid={errors['countryOfOrigin']}
-                  placeholder="Please fill in this field"
-                  _placeholder={{ color: '#718096' }}
-                >
-                  {countryList.map((result) => (
-                    <option value={result}>{result}</option>
-                  ))}
-                </Select>
+                <NativeSelect.Root>
+                  <NativeSelect.Field
+                    boxSizing="border-box"
+                    style={selectBox}
+                    h={['40px', '40px', '60px', '60px']}
+                    {...register('countryOfOrigin')}
+                    invalid={errors['countryOfOrigin']}
+                    placeholder="Please fill in this field"
+                    _placeholder={{ color: '#718096' }}>
+                    {countryList.map((result) => (
+                      <option value={result}>{result}</option>
+                    ))}
+                  </NativeSelect.Field>
+                  <NativeSelect.Indicator />
+                </NativeSelect.Root>
 
                 {errors.country && (
                   <Text
@@ -423,18 +428,20 @@ const Signup = (props) => {
                   </Text>
                 )}
                 <Text>Life Stage</Text>
-                <Select
-                  style={selectBox}
-                  h={['40px', '40px', '60px', '60px']}
-                  {...register('lifestage')}
-                  isInvalid={errors['lifestage']}
-                  placeholder="Please fill in this field"
-                  _placeholder={{ color: '#718096' }}
-                >
-                  {lifestageList.map((lifestage) => (
-                    <option value={lifestage}>{lifestage}</option>
-                  ))}
-                </Select>
+                <NativeSelect.Root>
+                  <NativeSelect.Field
+                    style={selectBox}
+                    h={['40px', '40px', '60px', '60px']}
+                    {...register('lifestage')}
+                    invalid={errors['lifestage']}
+                    placeholder="Please fill in this field"
+                    _placeholder={{ color: '#718096' }}>
+                    {lifestageList.map((lifestage) => (
+                      <option value={lifestage}>{lifestage}</option>
+                    ))}
+                  </NativeSelect.Field>
+                  <NativeSelect.Indicator />
+                </NativeSelect.Root>
                 {errors.lifestage && (
                   <Text
                     color="#ED4337"

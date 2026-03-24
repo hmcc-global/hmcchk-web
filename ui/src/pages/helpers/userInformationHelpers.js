@@ -2,7 +2,6 @@ import { customAxios as axios } from '../helpers/customAxios';
 import {
   Box,
   Button,
-  Divider,
   Flex,
   Image,
   Text,
@@ -10,6 +9,7 @@ import {
   Spacer,
   Grid,
   GridItem,
+  Separator,
 } from '@chakra-ui/react';
 
 // Only allow setting field values that are defined here
@@ -146,7 +146,7 @@ const generatePublishedFormLinks = (forms, signedUp) => {
               >
                 <Grid h="inherit" templateColumns="repeat(24, 1fr)">
                   <GridItem colSpan={9} display="flex">
-                    <Image src={item['formImage']} fit="contain" w="100%" />
+                    <Image src={item['formImage']} objectFit="contain" w="100%" />
                   </GridItem>
                   <GridItem colSpan={12} display="flex" alignItems="center">
                     <Text margin="0px 15px">
@@ -190,7 +190,7 @@ const generatePublishedFormLinks = (forms, signedUp) => {
                 </Grid>
               </Flex>
               {index !== forms.length - 1 && (
-                <Divider margin="15px 0px" backgroundColor="black" />
+                <Separator margin="15px 0px" backgroundColor="black" />
               )}
             </>
           );

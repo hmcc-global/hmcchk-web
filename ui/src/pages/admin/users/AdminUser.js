@@ -4,7 +4,8 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { Button, ButtonGroup, Heading, Tooltip } from '@chakra-ui/react';
+import { Button, ButtonGroup, Heading } from '@chakra-ui/react';
+import { Tooltip } from '../../../components/ui/tooltip';
 import { DateTime } from 'luxon';
 import CustomDateEditor from '../ag-grid-editors/CustomDateEditor.js';
 import {
@@ -872,16 +873,14 @@ export default function AdminUser(props) {
       <Heading as="h3" mb={5}>
         Users
       </Heading>
-      <ButtonGroup mb={5} variant="outline" spacing="5">
-        <Tooltip label="Ctrl/Cmd + Z">
-          <Button onClick={undo} leftIcon={<CgUndo />}>
-            Undo
-          </Button>
+      <ButtonGroup mb={5} variant="outline" gap="5">
+        <Tooltip content="Ctrl/Cmd + Z">
+          <Button onClick={undo}><CgUndo />Undo
+                      </Button>
         </Tooltip>
-        <Tooltip label="Ctrl/Cmd + Y">
-          <Button onClick={redo} rightIcon={<CgRedo />}>
-            Redo
-          </Button>
+        <Tooltip content="Ctrl/Cmd + Y">
+          <Button onClick={redo}>Redo
+                      <CgRedo /></Button>
         </Tooltip>
         <ResetUserFields checkIfUpdated={checkIfUpdated} />
         <Button onClick={exportHandler} variant="outline">

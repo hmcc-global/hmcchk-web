@@ -9,10 +9,9 @@ import {
   Button,
   LinkOverlay,
   Image,
-  Fade,
   IconButton,
+  Icon,
 } from '@chakra-ui/react';
-import { ChevronRightIcon, ChevronLeftIcon } from '@chakra-ui/icons';
 import { InView } from 'react-intersection-observer';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -22,6 +21,7 @@ import { DateTime } from 'luxon';
 import { useEffect, useRef, useState, React } from 'react';
 import { getRenderDate } from '../helpers/eventsHelpers';
 import EventsSectionCard from './EventsSectionCards';
+import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 
 const EventsSection = () => {
   const [events, setEvents] = useState([]);
@@ -140,8 +140,12 @@ const EventsSection = () => {
   return (
     <InView rootMargin="-50px" triggerOnce={true}>
       {({ inView, ref }) => (
-        <Fade transition={{ enter: { duration: 1 } }} in={inView}>
-          <Container maxW="container.xl" pr="0" ref={ref}>
+        <Box
+          ref={ref}
+          opacity={inView ? 1 : 0}
+          transition="opacity 1s ease-in-out"
+        >
+          <Container maxW="container.xl" pr="0">
             <Flex
               h="auto"
               direction={{ base: 'column', md: 'row' }}
@@ -159,7 +163,7 @@ const EventsSection = () => {
                   fontFamily="Manrope"
                   alignItems="flex-start"
                   color="black"
-                  spacing={[3, 3, 10]}
+                  gap={[3, 3, 10]}
                 >
                   <Box position="relative">
                     <Box
@@ -284,9 +288,7 @@ const EventsSection = () => {
                     bgColor={
                       (slideIndex != 0 ? '#EBBB41' : 'gray') + ' !important'
                     }
-                    mr={10}
-                    icon={<ChevronLeftIcon boxSize={7} color="white" />}
-                  />
+                    mr={10}><Icon boxSize={7} color="white" asChild><LuChevronLeft /></Icon></IconButton>
                   <IconButton
                     onClick={() => {
                       return slideIndex < events.length - 2
@@ -297,9 +299,7 @@ const EventsSection = () => {
                     bgColor={
                       (slideIndex < events.length - 2 ? '#EBBB41' : 'gray') +
                       ' !important'
-                    }
-                    icon={<ChevronRightIcon boxSize={7} color="white" />}
-                  />
+                    }><Icon boxSize={7} color="white" asChild><LuChevronRight /></Icon></IconButton>
                 </Flex>
               </Flex>
 
@@ -338,7 +338,7 @@ const EventsSection = () => {
               </Button>
             </Flex>
           </Container>
-        </Fade>
+        </Box>
       )}
     </InView>
   );

@@ -6,7 +6,6 @@ import {
   Text,
   Stack,
   Button,
-  ListItem,
   Flex,
   Grid,
   Spacer,
@@ -14,8 +13,8 @@ import {
   Box,
   Image,
   HStack,
-  useToast,
 } from '@chakra-ui/react';
+import { toaster } from '../../../components/ui/toaster';
 import SermonNotesEditorModal from './SermonNotesEditorModal';
 import { MdOutlineVideoLibrary } from 'react-icons/md';
 import { BiDonateHeart } from 'react-icons/bi';
@@ -29,7 +28,6 @@ import { useHistory } from 'react-router-dom';
 // current solution with useEffect is rly whack, no time to refactor it this cycle :)
 const AdminSermonNotesContainer = (props) => {
   const { user } = props;
-  const toast = useToast();
   const history = useHistory();
   const path = history.location.pathname.split('/');
 
@@ -61,7 +59,7 @@ const AdminSermonNotesContainer = (props) => {
       setSermonNotesList(data);
     } catch (err) {
       console.log(err);
-      toast({
+      toaster.create({
         description:
           'There was an issue with the request, please talk to t3ch support',
         status: 'warning',
@@ -69,7 +67,7 @@ const AdminSermonNotesContainer = (props) => {
         isClosable: true,
       });
     }
-  }, [toast, setSermonNotesList]); // add empty dependency array to useCallback
+  }, [setSermonNotesList]);
 
   const getExistingSermonNotes = useCallback(
     async (id) => {
@@ -98,7 +96,7 @@ const AdminSermonNotesContainer = (props) => {
           sermonId: e.target.value,
         });
         if (status === 200) {
-          toast({
+          toaster.create({
             description: 'Sermon Notes has been deleted',
             status: 'success',
             duration: 8000,
@@ -110,7 +108,7 @@ const AdminSermonNotesContainer = (props) => {
       setIsLoading(false);
     } catch (err) {
       console.log(err);
-      toast({
+      toaster.create({
         description:
           'There was an issue with the request, please talk to t3ch support',
         status: 'warning',
@@ -133,7 +131,7 @@ const AdminSermonNotesContainer = (props) => {
       publicLink = `${host}/sermons/notes/${sermonNoteItem.sermonId}`;
     }
     navigator?.clipboard?.writeText(publicLink);
-    toast({
+    toaster.create({
       description: 'Sermon Notes Public Link Copied to clipboard!',
       status: 'success',
       duration: 5000,
@@ -154,7 +152,7 @@ const AdminSermonNotesContainer = (props) => {
       setIsLoading(false);
     } catch (err) {
       console.log(err);
-      toast({
+      toaster.create({
         description:
           'There was an issue with the request, please talk to t3ch support',
         status: 'warning',
@@ -184,14 +182,14 @@ const AdminSermonNotesContainer = (props) => {
         isPublished: !sermonNotesData.isPublished,
       });
       if (status === 200) {
-        toast({
+        toaster.create({
           description: 'Sermon Notes has been updated',
           status: 'success',
           duration: 8000,
           isClosable: true,
         });
       } else {
-        toast({
+        toaster.create({
           description: 'There was an issue with the request',
           status: 'error',
           duration: 8000,
@@ -203,7 +201,7 @@ const AdminSermonNotesContainer = (props) => {
       setIsLoading(false);
     } catch (err) {
       console.log(err);
-      toast({
+      toaster.create({
         description:
           'There was an issue with the request, please talk to t3ch support',
         status: 'warning',
@@ -227,7 +225,7 @@ const AdminSermonNotesContainer = (props) => {
       setIsLoading(false);
     } catch (err) {
       console.log(err);
-      toast({
+      toaster.create({
         description:
           'There was an issue with the request, please talk to t3ch support',
         status: 'warning',
@@ -260,7 +258,7 @@ const AdminSermonNotesContainer = (props) => {
       <Stack direction="row" mb={5} justifyContent="space-between">
         <Box gap={4} display="flex">
           <Button
-            colorScheme="blue"
+            colorPalette="blue"
             variant={isEditorOpen ? 'solid' : 'outline'}
             borderColor="#3182CE"
             borderWidth={3}
@@ -274,7 +272,7 @@ const AdminSermonNotesContainer = (props) => {
             Add New
           </Button>
           <Button
-            colorScheme="blue"
+            colorPalette="blue"
             variant={isEditorOpen ? 'outline' : 'solid'}
             borderColor="#3182CE"
             borderWidth={3}
@@ -294,20 +292,17 @@ const AdminSermonNotesContainer = (props) => {
       </Stack>
       {!isEditorOpen && (
         <>
-          <List spacing="2" pt={3}>
+          <List.Root gap="2" pt={3}>
             {sermonNotesList
               .sort((a, b) => new Date(b.date) - new Date(a.date))
               .map((sermonNoteItem) => (
-                <ListItem key={sermonNoteItem.sermonId}>
+                <List.Item key={sermonNoteItem.sermonId}>
                   <Box p="3" borderRadius="lg" borderWidth="1px">
-                    <Flex direction={['column', 'row']} spacing={1}>
+                    <Flex direction={['column', 'row']} gap={1}>
                       <Box maxW="13rem" pr={6}>
-                        <Image
-                          src={sermonNoteItem.imageLink}
-                          fallbackSrc="https://hongkong.sub.hmccglobal.org/wp-content/uploads/Screenshot-2020-09-04-at-6.39.50-PM.png"
-                        />
+                        <Image src={sermonNoteItem.imageLink} />
                       </Box>
-                      <Stack direction="column" spacing={2}>
+                      <Stack direction="column" gap={2}>
                         <Heading size="md">{sermonNoteItem.title}</Heading>
                         <Grid
                           templateColumns={['repeat(1,2fr)', 'repeat(2,2fr)']}
@@ -342,7 +337,7 @@ const AdminSermonNotesContainer = (props) => {
                       <Spacer />
                       <Stack
                         pt={[3, 0]}
-                        spacing={1}
+                        gap={1}
                         direction={['column', 'row']}
                         alignItems="center"
                       >
@@ -361,17 +356,17 @@ const AdminSermonNotesContainer = (props) => {
                           {sermonNoteItem.isPublished ? 'Unpublish' : 'Publish'}
                         </Button>
                         <Button
-                          colorScheme="blue"
+                          colorPalette="blue"
                           value={sermonNoteItem.sermonId}
                           onClick={onEdit}
-                          isLoading={isLoading}
+                          loading={isLoading}
                           width={['100%', '100%', '100%', 'auto']}
                           disabled={isPublishDisabled()}
                         >
                           Edit
                         </Button>
                         <Button
-                          colorScheme="blue"
+                          colorPalette="blue"
                           value={sermonNoteItem.sermonLink}
                           onClick={(e) =>
                             copyPublicLinkHandler(e, sermonNoteItem)
@@ -382,21 +377,21 @@ const AdminSermonNotesContainer = (props) => {
                           Public Link
                         </Button>
                         <Button
-                          colorScheme="blue"
+                          colorPalette="blue"
                           value={sermonNoteItem.sermonId}
                           onClick={onDuplicate}
-                          isLoading={isLoading}
+                          loading={isLoading}
                           name="duplicate"
                           width={['100%', '100%', '100%', 'auto']}
                         >
                           Duplicate
                         </Button>
                         <Button
-                          colorScheme="red"
+                          colorPalette="red"
                           value={sermonNoteItem.sermonId}
                           onClick={onDelete}
                           disabled={isPublishDisabled()}
-                          isLoading={isLoading}
+                          loading={isLoading}
                           width={['100%', '100%', '100%', 'auto']}
                         >
                           Delete
@@ -404,9 +399,9 @@ const AdminSermonNotesContainer = (props) => {
                       </Stack>
                     </Flex>
                   </Box>
-                </ListItem>
+                </List.Item>
               ))}
-          </List>
+          </List.Root>
         </>
       )}
       {isEditorOpen && (

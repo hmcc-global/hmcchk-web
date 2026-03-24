@@ -1,19 +1,9 @@
-import {
-  Box,
-  Container,
-  VStack,
-  Text,
-  Button,
-  HStack,
-  Image,
-  Link,
-} from '@chakra-ui/react';
+import { Box, Container, VStack, Text, Button, HStack, Image, Link } from '@chakra-ui/react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Link as ReactLink } from 'react-router-dom';
 
 const DiscoverPage = () => {
   const settings = {
@@ -138,7 +128,7 @@ const DiscoverPage = () => {
         >
           <VStack
             maxWidth={{ base: '95%', lg: '100%' }}
-            spacing={{ base: '1rem', lg: '1.5rem' }}
+            gap={{ base: '1rem', lg: '1.5rem' }}
           >
             <Box mb="5" alignSelf="flex-start">
               <Text

@@ -6,23 +6,23 @@ import {
   VStack,
   Heading,
   Button,
-  Fade,
   Spacer,
   useMediaQuery,
   Image,
+  Icon,
 } from '@chakra-ui/react';
 import { forwardRef } from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ContactForm from './ContactForm';
 import { useState } from 'react';
 import { InView } from 'react-intersection-observer';
+import { LuArrowRight } from 'react-icons/lu';
 
 const ContactUs = forwardRef((props, ref) => {
-  const [isMobile] = useMediaQuery('(max-width: 768px)');
+  const [isMobile] = useMediaQuery(['(max-width: 768px)']);
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const onOpen = () => setIsOpen(true);
@@ -31,10 +31,14 @@ const ContactUs = forwardRef((props, ref) => {
     <Box ref={ref}>
       <InView rootMargin="-50px" triggerOnce={true}>
         {({ inView, ref: inViewRef }) => (
-          <Fade transition={{ enter: { duration: 1 } }} in={inView}>
-            <Box ref={inViewRef} w="100%">
+          <Box
+            ref={inViewRef}
+            opacity={inView ? 1 : 0}
+            transition="opacity 1s ease-in-out"
+          >
+            <Box w="100%">
               {isMobile ? (
-                <VStack spacing={5}>
+                <VStack gap={5}>
                   <Flex w="100%">
                     <Heading
                       as="h1"
@@ -105,13 +109,15 @@ const ContactUs = forwardRef((props, ref) => {
                         </Text>
                       </Box>
                       <Spacer />
-                      <ArrowForwardIcon color="white" my="auto" />
+                      <Icon color="white" my="auto" asChild>
+                        <LuArrowRight />
+                      </Icon>
                     </Flex>
                   </Button>
                 </VStack>
               ) : (
-                <VStack w="100%" align="center" spacing={7}>
-                  <HStack align={'stretch'} spacing={0} width={'100%'}>
+                <VStack w="100%" align="center" gap={7}>
+                  <HStack align={'stretch'} gap={0} width={'100%'}>
                     <Box
                       flex="7" // 70% of available space
                       display="flex"
@@ -123,7 +129,7 @@ const ContactUs = forwardRef((props, ref) => {
                         align="flex-start"
                         w="100%"
                         textAlign="left"
-                        spacing={6}
+                        gap={6}
                       >
                         <Heading
                           as="h1"
@@ -179,16 +185,15 @@ const ContactUs = forwardRef((props, ref) => {
                               Get in touch
                             </Text>
                           </Box>
-                          <ArrowForwardIcon />
+                          <LuArrowRight />
                         </Flex>
                       </Button>
                     </Box>
                   </HStack>
-
                 </VStack>
               )}
             </Box>
-          </Fade>
+          </Box>
         )}
       </InView>
     </Box>

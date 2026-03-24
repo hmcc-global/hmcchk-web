@@ -6,22 +6,15 @@ import {
   Container,
   Heading,
   Button,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
   Textarea,
-  FormHelperText,
   Switch,
-  Select,
+  NativeSelect,
   Input,
-  Modal,
-  ModalOverlay,
-  ModalCloseButton,
-  ModalBody,
-  ModalContent,
-  Divider,
   Alert,
-  AlertIcon,
+  Separator,
+  Field,
+  Dialog,
+  Portal,
 } from '@chakra-ui/react';
 import FormEditor from './FormEditor';
 import ExternalFormEditor from './ExternalFormEditor';
@@ -199,390 +192,409 @@ const FormEditorContainer = (props) => {
   const alertTypeFlag = watch('alertType');
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="full">
-      <ModalOverlay />
-      <ModalContent>
-        <ModalCloseButton />
-        <ModalBody>
-          <Container maxW="container.xl" mt="9" mb="9">
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Stack
-                borderRadius="lg"
-                p="5"
-                borderWidth="1px"
-                mb="5"
-                spacing={5}
-              >
-                <Stack spacing="2">
-                  <Heading as="h2" mb="3" size="lg">
-                    Form Information
-                  </Heading>
-                  <FormControl>
-                    <FormLabel>Form Type</FormLabel>
-                    <Select {...register('formType', { required: true })}>
-                      <option value="internal">Internal</option>
-                      <option value="external">
-                        External (Google or other external form links)
-                      </option>
-                    </Select>
-                  </FormControl>
-                  <FormControl isInvalid={errors['formName']}>
-                    <FormLabel>Form Name</FormLabel>
-                    <Input
-                      id="formName"
-                      {...register('formName', {
-                        required: 'Form name is required',
-                      })}
-                    />
-                    <FormErrorMessage>
-                      {errors['formName'] && 'Form name is required'}
-                    </FormErrorMessage>
-                  </FormControl>
-                  <FormControl isInvalid={errors['formImage']}>
-                    <FormLabel>Form Image Link</FormLabel>
-                    <Input id="formImage" {...register('formImage')} />
-                  </FormControl>
-                  <FormControl isInvalid={errors['formDescription']}>
-                    <FormLabel>Form Description</FormLabel>
-                    <Textarea
-                      id="formDescription"
-                      {...register('formDescription')}
-                    />
-                    <FormHelperText>
-                      This field supports markdown. Just write it in somewhere
-                      else and then paste it in and see the magic happen
-                    </FormHelperText>
-                  </FormControl>
-                  <FormControl isInvalid={formPeriodInvalid}>
-                    <FormLabel>Form Availability Period</FormLabel>
-                    <FormErrorMessage>
-                      {formPeriodInvalid &&
-                        'Availability Period is invalid, please check again'}
-                    </FormErrorMessage>
-                    Starting Time
-                    <Input
-                      type="datetime-local"
-                      {...register('formAvailableFrom')}
-                    />
-                    Ending Time
-                    <Input
-                      type="datetime-local"
-                      {...register('formAvailableUntil')}
-                    />
-                  </FormControl>
-                </Stack>
-                {ftFlag === 'internal' && (
-                  <Stack spacing="2">
-                    <Divider />
-                    <Heading as="h4" size="md">
-                      Paid Event Details
-                    </Heading>
-                    <Alert status="info">
-                      <AlertIcon />
-                      This setting is not changeable after form is created, a
-                      paid event will always be a paid event!
-                    </Alert>
+    <Dialog.Root open={isOpen} size='full' onOpenChange={e => {
+      if (!e.open) {
+        onClose();
+      }
+    }}>
+      <Portal>
 
-                    <FormControl>
-                      <FormLabel> Is Payment Required? </FormLabel>
-                      <Controller
-                        control={control}
-                        name="isPaymentRequired"
-                        defaultValue={false}
-                        render={({ field: { onChange, value, ref } }) => (
-                          <Switch
-                            onChange={(e) => {
-                              setIsPaymentRequired(e.target.checked);
-                              onChange(e);
-                            }}
-                            ref={ref}
-                            isChecked={value}
-                            disabled={formName != null}
-                          >
-                            {value ? 'Yes' : 'No'}
-                          </Switch>
-                        )}
-                      />
-                    </FormControl>
-                    {isPaymentRequired && (
-                      <>
-                        <FormControl
-                          isInvalid={errors['paymentConfirmationEmailTemp']}
-                          isRequired={isPaymentRequired}
-                        >
-                          <FormLabel>
-                            {' '}
-                            Payment Confirmation Email Template
-                          </FormLabel>
-                          <Select
-                            {...register('paymentConfirmationEmailTemplate', {
-                              required: isPaymentRequired,
-                            })}
-                            placeholder="Select option"
-                          >
-                            {/* To add more email template, please define the value and add the template here */}
-                            <option value="email-10y-payment-success">
-                              10Y anniversary Payment Confirmation
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content>
+            <Dialog.CloseTrigger />
+            <Dialog.Body>
+              <Container maxW="container.xl" mt="9" mb="9">
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <Stack
+                    borderRadius="lg"
+                    p="5"
+                    borderWidth="1px"
+                    mb="5"
+                    gap={5}
+                  >
+                    <Stack gap="2">
+                      <Heading as="h2" mb="3" size="lg">
+                        Form Information
+                      </Heading>
+                      <Field.Root>
+                        <Field.Label>Form Type</Field.Label>
+                        <NativeSelect.Root>
+                          <NativeSelect.Field {...register('formType', { required: true })}>
+                            <option value="internal">Internal</option>
+                            <option value="external">
+                              External (Google or other external form links)
                             </option>
-                            <option value="email-retreat-payment-success">
-                              Retreat 2025 Payment Confirmation
-                            </option>
-                            <option value="email-retreat-donation-payment-success">
-                              Retreat 2025 Donation Payment Confirmation
-                            </option>
-                            <option value="email-ignite-payment-success">
-                              !gnite 2023 Payment Confirmation
-                            </option>
-                            <option value="email-deep-payment-success">
-                              Deep Retreat Payment Confirmation
-                            </option>
-                            <option value="email-ug-retreat-payment-success">
-                              UG Retreat Payment Confirmation
-                            </option>
-                          </Select>
-                          <FormErrorMessage>
-                            {errors['paymentConfirmationEmailTemplate'] &&
-                              'Field type is required'}
-                          </FormErrorMessage>
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel>Payment Email Subject</FormLabel>
-                          <Input {...register('paymentEmailSubject')} />
-                          <FormHelperText>
-                            If you need a custom subject for the payment email
-                          </FormHelperText>
-                        </FormControl>
-                        <FormControl
-                          isInvalid={errors['paymentCcEmail']}
-                          isRequired={isPaymentRequired}
-                        >
-                          <FormLabel>Payment CC Email</FormLabel>
-                          <Input
-                            {...register('paymentCcEmail')}
-                            placeholder={'john@gmail.com;doe@gmail.com'}
+                          </NativeSelect.Field>
+                          <NativeSelect.Indicator />
+                        </NativeSelect.Root>
+                      </Field.Root>
+                      <Field.Root invalid={errors['formName']}>
+                        <Field.Label>Form Name</Field.Label>
+                        <Input
+                          id="formName"
+                          {...register('formName', {
+                            required: 'Form name is required',
+                          })}
+                        />
+                        <Field.ErrorText>
+                          {errors['formName'] && 'Form name is required'}
+                        </Field.ErrorText>
+                      </Field.Root>
+                      <Field.Root invalid={errors['formImage']}>
+                        <Field.Label>Form Image Link</Field.Label>
+                        <Input id="formImage" {...register('formImage')} />
+                      </Field.Root>
+                      <Field.Root invalid={errors['formDescription']}>
+                        <Field.Label>Form Description</Field.Label>
+                        <Textarea
+                          id="formDescription"
+                          {...register('formDescription')}
+                        />
+                        <Field.HelperText>
+                          This field supports markdown. Just write it in somewhere
+                          else and then paste it in and see the magic happen
+                        </Field.HelperText>
+                      </Field.Root>
+                      <Field.Root invalid={formPeriodInvalid}>
+                        <Field.Label>Form Availability Period</Field.Label>
+                        <Field.ErrorText>
+                          {formPeriodInvalid &&
+                            'Availability Period is invalid, please check again'}
+                        </Field.ErrorText>
+                        Starting Time
+                        <Input
+                          type="datetime-local"
+                          {...register('formAvailableFrom')}
+                        />
+                        Ending Time
+                        <Input
+                          type="datetime-local"
+                          {...register('formAvailableUntil')}
+                        />
+                      </Field.Root>
+                    </Stack>
+                    {ftFlag === 'internal' && (
+                      <Stack gap="2">
+                        <Separator />
+                        <Heading as="h4" size="md">
+                          Paid Event Details
+                        </Heading>
+                        <Alert.Root status="info">
+                          <Alert.Indicator />
+                          This setting is not changeable after form is created, a
+                          paid event will always be a paid event!
+                        </Alert.Root>
+
+                        <Field.Root>
+                          <Field.Label> Is Payment Required? </Field.Label>
+                          <Controller
+                            control={control}
+                            name="isPaymentRequired"
+                            defaultValue={false}
+                            render={({ field: { onChange, value, ref } }) => (
+                              <Switch
+                                onValueChange={(e) => {
+                                  setIsPaymentRequired(e.target.checked);
+                                  onChange(e);
+                                }}
+                                ref={ref}
+                                checked={value}
+                                disabled={formName != null}
+                              >
+                                {value ? 'Yes' : 'No'}
+                              </Switch>
+                            )}
                           />
-                          <FormHelperText>
-                            *All Payment emails will be CC'ed to these emails
-                            (addressees will be BCC'ed). Separate CC emails with
-                            ;
-                          </FormHelperText>
-                        </FormControl>
-                      </>
+                        </Field.Root>
+                        {isPaymentRequired && (
+                          <>
+                            <Field.Root
+                              invalid={errors['paymentConfirmationEmailTemp']}
+                              required={isPaymentRequired}
+                            >
+                              <Field.Label>
+                                {' '}
+                                Payment Confirmation Email Template
+                              </Field.Label>
+                              <NativeSelect.Root>
+                                <NativeSelect.Field
+                                  {...register('paymentConfirmationEmailTemplate', {
+                                    required: isPaymentRequired,
+                                  })}
+                                  placeholder="Select option">
+                                  {/* To add more email template, please define the value and add the template here */}
+                                  <option value="email-10y-payment-success">
+                                    10Y anniversary Payment Confirmation
+                                  </option>
+                                  <option value="email-retreat-payment-success">
+                                    Retreat 2025 Payment Confirmation
+                                  </option>
+                                  <option value="email-retreat-donation-payment-success">
+                                    Retreat 2025 Donation Payment Confirmation
+                                  </option>
+                                  <option value="email-ignite-payment-success">
+                                    !gnite 2023 Payment Confirmation
+                                  </option>
+                                  <option value="email-deep-payment-success">
+                                    Deep Retreat Payment Confirmation
+                                  </option>
+                                  <option value="email-ug-retreat-payment-success">
+                                    UG Retreat Payment Confirmation
+                                  </option>
+                                </NativeSelect.Field>
+                                <NativeSelect.Indicator />
+                              </NativeSelect.Root>
+                              <Field.ErrorText>
+                                {errors['paymentConfirmationEmailTemplate'] &&
+                                  'Field type is required'}
+                              </Field.ErrorText>
+                            </Field.Root>
+                            <Field.Root>
+                              <Field.Label>Payment Email Subject</Field.Label>
+                              <Input {...register('paymentEmailSubject')} />
+                              <Field.HelperText>
+                                If you need a custom subject for the payment email
+                              </Field.HelperText>
+                            </Field.Root>
+                            <Field.Root
+                              invalid={errors['paymentCcEmail']}
+                              required={isPaymentRequired}
+                            >
+                              <Field.Label>Payment CC Email</Field.Label>
+                              <Input
+                                {...register('paymentCcEmail')}
+                                placeholder={'john@gmail.com;doe@gmail.com'}
+                              />
+                              <Field.HelperText>
+                                *All Payment emails will be CC'ed to these emails
+                                (addressees will be BCC'ed). Separate CC emails with
+                                ;
+                              </Field.HelperText>
+                            </Field.Root>
+                          </>
+                        )}
+                      </Stack>
                     )}
+                    {ftFlag === 'internal' && (
+                      <Stack gap="2">
+                        <Heading as="h4" size="md">
+                          Form Prerequisites
+                        </Heading>
+                        <Field.Root>
+                          <Field.Label>Require login?</Field.Label>
+                          <Controller
+                            control={control}
+                            name="requireLogin"
+                            defaultValue={true}
+                            render={({ field: { onChange, value, ref } }) => (
+                              <Switch
+                                onValueChange={onChange}
+                                ref={ref}
+                                checked={value}
+                              >
+                                {value ? 'Yes' : 'No'}
+                              </Switch>
+                            )}
+                          />
+                        </Field.Root>
+                        <Field.Root>
+                          <Field.Label>Require membership?</Field.Label>
+                          <Controller
+                            control={control}
+                            name="requireMembership"
+                            defaultValue={true}
+                            render={({ field: { onChange, value, ref } }) => (
+                              <Switch
+                                onValueChange={onChange}
+                                ref={ref}
+                                checked={value}
+                              >
+                                {value ? 'Yes' : 'No'}
+                              </Switch>
+                            )}
+                          />
+                        </Field.Root>
+                        <Field.Root>
+                          <Field.Label>Require baptism?</Field.Label>
+                          <Controller
+                            control={control}
+                            name="requireBaptism"
+                            defaultValue={true}
+                            render={({ field: { onChange, value, ref } }) => (
+                              <Switch
+                                onValueChange={onChange}
+                                ref={ref}
+                                checked={value}
+                              >
+                                {value ? 'Yes' : 'No'}
+                              </Switch>
+                            )}
+                          />
+                        </Field.Root>
+                        <Separator />
+                      </Stack>
+                    )}
+                    <Stack gap="2">
+                      <Heading as="h4" size="md">
+                        New Sign Up Notification
+                      </Heading>
+                      <Field.Root>
+                        <Field.Label>Alert Type</Field.Label>
+                        <NativeSelect.Root>
+                          <NativeSelect.Field {...register('alertType', { required: true })}>
+                            {formAlertTypes.map((val, i) => (
+                              <option key={i}>{val}</option>
+                            ))}
+                          </NativeSelect.Field>
+                          <NativeSelect.Indicator />
+                        </NativeSelect.Root>
+                      </Field.Root>
+                      {alertTypeFlag === 'Custom' && (
+                        <Field.Root>
+                          <Field.Label>Custom Email Recipients</Field.Label>
+                          <Input
+                            type="text"
+                            {...register('customAlertRecipients')}
+                            placeholder="first@person.com;second@person.com"
+                          />
+                        </Field.Root>
+                      )}
+                      {!isAlertTypeNone(alertTypeFlag) && (
+                        <Field.Root>
+                          <Field.Label>Parse User Data?</Field.Label>
+                          <Field.HelperText>
+                            This will send email queries to the alert recipients
+                            above which will update the submitter's information in
+                            our database.
+                          </Field.HelperText>
+                          <Controller
+                            control={control}
+                            name="parseUserData"
+                            defaultValue={false}
+                            render={({ field: { onChange, value, ref } }) => (
+                              <Switch
+                                onValueChange={onChange}
+                                ref={ref}
+                                checked={value}
+                              >
+                                {value ? 'Yes' : 'No'}
+                              </Switch>
+                            )}
+                          />
+                        </Field.Root>
+                      )}
+                    </Stack>
+                    {ftFlag === 'internal' && (
+                      <Stack gap="2">
+                        <Heading as="h4" size="md">
+                          Custom Autoreply Settings
+                        </Heading>
+                        <Field.Root invalid={errors['successEmailTemplate']}>
+                          <Field.Label>Select an email template</Field.Label>
+                          <NativeSelect.Root>
+                            <NativeSelect.Field
+                              {...register('successEmailTemplate', {
+                                required: true,
+                              })}>
+                              {/* To add more email template, please define the value and add the template here */}
+                              <option value="form-default-success">Default</option>
+                              <option value="form-10y-success">
+                                10Y Confirmation
+                              </option>
+                              <option value="form-retreat-success">
+                                Retreat 2025
+                              </option>
+                              <option value="form-retreat-donation-success">
+                                Retreat 2025 Donation
+                              </option>
+                              <option value="form-ignite-success">!gnite</option>
+                              <option value="form-deep-success">Deep retreat</option>
+                              <option value="form-ug-retreat-success">
+                                UG Retreat
+                              </option>
+                            </NativeSelect.Field>
+                            <NativeSelect.Indicator />
+                          </NativeSelect.Root>
+                          <Field.ErrorText>
+                            {errors['successEmailTemplate'] &&
+                              'Field type is required'}
+                          </Field.ErrorText>
+                        </Field.Root>
+                        <Field.Root>
+                          <Field.Label>Custom Email Subject</Field.Label>
+                          <Input {...register('customEmailSubject')} />
+                          <Field.HelperText>
+                            If you need a custom subject for the success email
+                          </Field.HelperText>
+                        </Field.Root>
+                      </Stack>
+                    )}
+                    <Stack gap="2">
+                      <Field.Root pt="3">
+                        <Field.Label>
+                          If you updated the fields above please click here again
+                          before saving to DB
+                        </Field.Label>
+                        <Button colorPalette="blue" type="submit">
+                          {!formName ? 'Create' : 'Update'} Form
+                        </Button>
+                      </Field.Root>
+                    </Stack>
                   </Stack>
-                )}
-                {ftFlag === 'internal' && (
-                  <Stack spacing="2">
-                    <Heading as="h4" size="md">
-                      Form Prerequisites
-                    </Heading>
-                    <FormControl>
-                      <FormLabel>Require login?</FormLabel>
-                      <Controller
-                        control={control}
-                        name="requireLogin"
-                        defaultValue={true}
-                        render={({ field: { onChange, value, ref } }) => (
-                          <Switch
-                            onChange={onChange}
-                            ref={ref}
-                            isChecked={value}
-                          >
-                            {value ? 'Yes' : 'No'}
-                          </Switch>
-                        )}
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>Require membership?</FormLabel>
-                      <Controller
-                        control={control}
-                        name="requireMembership"
-                        defaultValue={true}
-                        render={({ field: { onChange, value, ref } }) => (
-                          <Switch
-                            onChange={onChange}
-                            ref={ref}
-                            isChecked={value}
-                          >
-                            {value ? 'Yes' : 'No'}
-                          </Switch>
-                        )}
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>Require baptism?</FormLabel>
-                      <Controller
-                        control={control}
-                        name="requireBaptism"
-                        defaultValue={true}
-                        render={({ field: { onChange, value, ref } }) => (
-                          <Switch
-                            onChange={onChange}
-                            ref={ref}
-                            isChecked={value}
-                          >
-                            {value ? 'Yes' : 'No'}
-                          </Switch>
-                        )}
-                      />
-                    </FormControl>
-                    <Divider />
-                  </Stack>
-                )}
-                <Stack spacing="2">
-                  <Heading as="h4" size="md">
-                    New Sign Up Notification
-                  </Heading>
-                  <FormControl>
-                    <FormLabel>Alert Type</FormLabel>
-                    <Select {...register('alertType', { required: true })}>
-                      {formAlertTypes.map((val, i) => (
-                        <option key={i}>{val}</option>
-                      ))}
-                    </Select>
-                  </FormControl>
-                  {alertTypeFlag === 'Custom' && (
-                    <FormControl>
-                      <FormLabel>Custom Email Recipients</FormLabel>
-                      <Input
-                        type="text"
-                        {...register('customAlertRecipients')}
-                        placeholder="first@person.com;second@person.com"
-                      />
-                    </FormControl>
-                  )}
-                  {!isAlertTypeNone(alertTypeFlag) && (
-                    <FormControl>
-                      <FormLabel>Parse User Data?</FormLabel>
-                      <FormHelperText>
-                        This will send email queries to the alert recipients
-                        above which will update the submitter's information in
-                        our database.
-                      </FormHelperText>
-                      <Controller
-                        control={control}
-                        name="parseUserData"
-                        defaultValue={false}
-                        render={({ field: { onChange, value, ref } }) => (
-                          <Switch
-                            onChange={onChange}
-                            ref={ref}
-                            isChecked={value}
-                          >
-                            {value ? 'Yes' : 'No'}
-                          </Switch>
-                        )}
-                      />
-                    </FormControl>
-                  )}
-                </Stack>
-                {ftFlag === 'internal' && (
-                  <Stack spacing="2">
-                    <Heading as="h4" size="md">
-                      Custom Autoreply Settings
-                    </Heading>
-                    <FormControl isInvalid={errors['successEmailTemplate']}>
-                      <FormLabel>Select an email template</FormLabel>
-                      <Select
-                        {...register('successEmailTemplate', {
-                          required: true,
-                        })}
-                      >
-                        {/* To add more email template, please define the value and add the template here */}
-                        <option value="form-default-success">Default</option>
-                        <option value="form-10y-success">
-                          10Y Confirmation
-                        </option>
-                        <option value="form-retreat-success">
-                          Retreat 2025
-                        </option>
-                        <option value="form-retreat-donation-success">
-                          Retreat 2025 Donation
-                        </option>
-                        <option value="form-ignite-success">!gnite</option>
-                        <option value="form-deep-success">Deep retreat</option>
+                </form>
 
-                        <option value="form-ug-retreat-success">
-                          UG Retreat
-                        </option>
-                      </Select>
-                      <FormErrorMessage>
-                        {errors['successEmailTemplate'] &&
-                          'Field type is required'}
-                      </FormErrorMessage>
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>Custom Email Subject</FormLabel>
-                      <Input {...register('customEmailSubject')} />
-                      <FormHelperText>
-                        If you need a custom subject for the success email
-                      </FormHelperText>
-                    </FormControl>
-                  </Stack>
+                {formName && formType === 'internal' && (
+                  <FormEditor
+                    formInformation={{
+                      formName: formName,
+                      isPaymentRequired: isPaymentRequired,
+                      formDescription: formDescription,
+                      formImage: formImage,
+                      formType: formType,
+                      requireLogin: requireLogin,
+                      requireMembership: requireMembership,
+                      requireBaptism: requireBaptism,
+                      alertType: alertType,
+                      parseUserData: parseUserData,
+                      customAlertRecipients: customAlertRecipients,
+                      successEmailTemplate: successEmailTemplate,
+                      customEmailSubject: customEmailSubject,
+                      formAvailableFrom: formAvailableFrom,
+                      formAvailableUntil: formAvailableUntil,
+                      paymentConfirmationEmailTemplate:
+                        paymentConfirmationEmailTemplate,
+                      paymentEmailSubject: paymentEmailSubject,
+                      paymentCcEmail: paymentCcEmail,
+                    }}
+                    existingFormFieldsData={editFormData}
+                    resetFormEditorCallback={resetFormEditorCallback}
+                    user={user}
+                    staticData={props.staticData}
+                  />
                 )}
-                <Stack spacing="2">
-                  <FormControl pt="3">
-                    <FormLabel>
-                      If you updated the fields above please click here again
-                      before saving to DB
-                    </FormLabel>
-                    <Button colorScheme="blue" type="submit">
-                      {!formName ? 'Create' : 'Update'} Form
-                    </Button>
-                  </FormControl>
-                </Stack>
-              </Stack>
-            </form>
 
-            {formName && formType === 'internal' && (
-              <FormEditor
-                formInformation={{
-                  formName: formName,
-                  isPaymentRequired: isPaymentRequired,
-                  formDescription: formDescription,
-                  formImage: formImage,
-                  formType: formType,
-                  requireLogin: requireLogin,
-                  requireMembership: requireMembership,
-                  requireBaptism: requireBaptism,
-                  alertType: alertType,
-                  parseUserData: parseUserData,
-                  customAlertRecipients: customAlertRecipients,
-                  successEmailTemplate: successEmailTemplate,
-                  customEmailSubject: customEmailSubject,
-                  formAvailableFrom: formAvailableFrom,
-                  formAvailableUntil: formAvailableUntil,
-                  paymentConfirmationEmailTemplate:
-                    paymentConfirmationEmailTemplate,
-                  paymentEmailSubject: paymentEmailSubject,
-                  paymentCcEmail: paymentCcEmail,
-                }}
-                existingFormFieldsData={editFormData}
-                resetFormEditorCallback={resetFormEditorCallback}
-                user={user}
-                staticData={props.staticData}
-              />
-            )}
+                {formName && formType === 'external' && (
+                  <ExternalFormEditor
+                    formInformation={{
+                      formName: formName,
+                      formDescription: formDescription,
+                      formImage: formImage,
+                      formType: formType,
+                      formAvailableFrom: formAvailableFrom,
+                      formAvailableUntil: formAvailableUntil,
+                    }}
+                    existingFormData={editFormData}
+                    resetFormEditorCallback={resetFormEditorCallback}
+                  />
+                )}
+              </Container>
+            </Dialog.Body>
+          </Dialog.Content>
+        </Dialog.Positioner>
 
-            {formName && formType === 'external' && (
-              <ExternalFormEditor
-                formInformation={{
-                  formName: formName,
-                  formDescription: formDescription,
-                  formImage: formImage,
-                  formType: formType,
-                  formAvailableFrom: formAvailableFrom,
-                  formAvailableUntil: formAvailableUntil,
-                }}
-                existingFormData={editFormData}
-                resetFormEditorCallback={resetFormEditorCallback}
-              />
-            )}
-          </Container>
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+      </Portal>
+    </Dialog.Root>
   );
 };
 
