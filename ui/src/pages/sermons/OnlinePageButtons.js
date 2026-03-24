@@ -10,7 +10,6 @@ const OnlinePageButtons = () => {
       my="5"
     >
       <Button
-        variant="outline"
         width={['100%', '25%']}
         style={{
           whiteSpace: 'normal',
@@ -20,7 +19,7 @@ const OnlinePageButtons = () => {
         borderColor="#4A6EEB"
         border="1px solid var(--Blue-Primary, #4A6EEB)"
         borderRadius="15px"
-        bgColor="transparent"
+        variant="ghost"
         fontSize="0.8rem"
         letterSpacing="0.185rem"
         fontWeight="700"
@@ -34,7 +33,7 @@ const OnlinePageButtons = () => {
         borderColor="#4A6EEB"
         border="1px solid var(--Blue-Primary, #4A6EEB)"
         borderRadius="15px"
-        bgColor="transparent"
+        variant="ghost"
         fontSize="0.8rem"
         letterSpacing="0.185rem"
         fontWeight="700"
@@ -50,7 +49,7 @@ const OnlinePageButtons = () => {
         borderColor="#4A6EEB"
         border="1px solid var(--Blue-Primary, #4A6EEB)"
         borderRadius="15px"
-        bgColor="transparent"
+        variant="ghost"
         fontSize="0.8rem"
         letterSpacing="0.185rem"
         fontWeight="700"
@@ -64,7 +63,7 @@ const OnlinePageButtons = () => {
         borderColor="#4A6EEB"
         border="1px solid var(--Blue-Primary, #4A6EEB)"
         borderRadius="15px"
-        bgColor="transparent"
+        variant="ghost"
         fontSize="0.8rem"
         letterSpacing="0.185rem"
         fontWeight="700"

@@ -91,7 +91,7 @@ const BBHeroSection = ({ scheduleRef, contactRef }) => {
               borderRadius="5rem"
               justifyContent="space-between"
               alignItems="center"
-              bgColor="transparent"
+              variant="ghost"
               border="0.7px solid #D46764"
               py={{ md: '3', lg: '5' }}
               px={{ md: '5', lg: '8' }}
@@ -113,7 +113,7 @@ const BBHeroSection = ({ scheduleRef, contactRef }) => {
               borderRadius="5rem"
               justifyContent="space-between"
               alignItems="center"
-              bgColor="transparent"
+              variant="ghost"
               border="0.7px solid #D46764"
               padding={{ md: '3', lg: '5' }}
               h="-moz-min-content"

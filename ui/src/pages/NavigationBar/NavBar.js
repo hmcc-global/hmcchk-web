@@ -211,7 +211,7 @@ const NavBar = (props) => {
                         <LinkBox>
                           <Button
                             textAlign="center"
-                            bgColor="rgba(0, 0, 0, 0)"
+                            variant="ghost"
                             h="3.5vh"
                             marginLeft="10px"
                             px={{ md: '3', lg: '5' }}
@@ -271,7 +271,7 @@ const NavBar = (props) => {
                         <LinkBox>
                           <Button
                             textAlign="center"
-                            bgColor="rgba(0, 0, 0, 0)"
+                            variant="ghost"
                             h="3.5vh"
                             marginLeft="10px"
                             px={{ md: '3', lg: '5' }}

@@ -77,7 +77,7 @@ const VisionMissionSectionMobile = () => {
                       The 3 specific areas for us to overflow from:
                     </Text>
                     <Box
-                      borderRadius="10"
+                      borderRadius="10px"
                       border="1px solid"
                       borderColor="#B9B5F4"
                       textAlign="center"
@@ -103,7 +103,7 @@ const VisionMissionSectionMobile = () => {
                       </Text>
                     </Box>
                     <Box
-                      borderRadius="10"
+                      borderRadius="10px"
                       border="1px solid"
                       borderColor="#B9B5F4"
                       textAlign="center"
@@ -129,7 +129,7 @@ const VisionMissionSectionMobile = () => {
                       </Text>
                     </Box>
                     <Box
-                      borderRadius="10"
+                      borderRadius="10px"
                       border="1px solid"
                       borderColor="#B9B5F4"
                       textAlign="center"
@@ -158,7 +158,7 @@ const VisionMissionSectionMobile = () => {
                   </VStack>
                   <IconButton
                     onClick={onExpandClick}
-                    isRound
+                    borderRadius="full"
                     fontSize={'24px'}
                     bg={'rgba(76, 120, 157, 0.2)'}
                     color="#5F5F5F">{isExpanded ? <MdExpandLess /> : <MdExpandMore />}</IconButton>

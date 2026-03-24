@@ -368,7 +368,7 @@ const ExperienceBiblicalCommunity = () => {
                             borderRadius={80}
                             border="0.70px solid #D46764"
                             justify="space-between"
-                            bgColor="transparent"
+                            variant="ghost"
                             align="center"
                             color="#D46764"
                             _hover={{
@@ -448,7 +448,7 @@ const ExperienceBiblicalCommunity = () => {
                           border="0.70px solid #D46764"
                           justify="space-between"
                           align="center"
-                          bgColor="transparent"
+                          variant="ghost"
                           color="#D46764"
                           onClick={onOpen}
                           _hover={{

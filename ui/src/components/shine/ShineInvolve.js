@@ -586,7 +586,7 @@ const ShineInvolve = (props) => {
             onClick={() => {
               return slideIndex != 0 ? slider?.current?.slickPrev() : '';
             }}
-            isRound={true}
+            borderRadius="full"
             bgColor={(slideIndex != 0 ? '#EBAC09' : 'gray') + ' !important'}
             mr={10}><Icon boxSize={7} color="white" asChild><LuChevronLeft /></Icon></IconButton>
           <IconButton
@@ -595,7 +595,7 @@ const ShineInvolve = (props) => {
                 ? slider?.current?.slickNext()
                 : '';
             }}
-            isRound={true}
+            borderRadius="full"
             bgColor={
               (slideIndex < ShineMinList.length - 1 ? '#EBAC09' : 'gray') +
               ' !important'

@@ -165,7 +165,7 @@ const ContactUs = forwardRef((props, ref) => {
                         pr={7}
                         borderRadius={80}
                         border="0.70px solid #D46764"
-                        bgColor="transparent"
+                        variant="ghost"
                         color="#D46764"
                         onClick={onOpen}
                         _hover={{

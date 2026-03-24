@@ -179,6 +179,7 @@ const EventsSection = () => {
                       fontFamily="DMSerifDisplay_Italic"
                       fontSize={['2rem', '2rem', '3rem', '3.75rem']}
                       fontWeight={400}
+                      lineHeight="1.2"
                     >
                       Upcoming Events
                     </Heading>
@@ -205,7 +206,7 @@ const EventsSection = () => {
                     display={{ base: 'none', md: 'block' }}
                   >
                     <Button
-                      color="#black"
+                      color="black"
                       bgColor="#EBBB41"
                       borderRadius="20em"
                       border="1px solid #F6FAFF"
@@ -284,7 +285,7 @@ const EventsSection = () => {
                         ? slider?.current?.slickPrev()
                         : '';
                     }}
-                    isRound={true}
+                    borderRadius="full"
                     bgColor={
                       (slideIndex != 0 ? '#EBBB41' : 'gray') + ' !important'
                     }
@@ -295,7 +296,7 @@ const EventsSection = () => {
                         ? slider?.current?.slickNext()
                         : '';
                     }}
-                    isRound={true}
+                    borderRadius="full"
                     bgColor={
                       (slideIndex < events.length - 2 ? '#EBBB41' : 'gray') +
                       ' !important'

@@ -295,6 +295,7 @@ const VisionMissionSection = () => {
                         paddingLeft="10em"
                       >
                         <Button
+                          color="black"
                           bgColor={'#DBF1F1'}
                           _hover={{ color: 'white', bgColor: 'black' }}
                           borderRadius="5rem"
@@ -339,7 +340,7 @@ const VisionMissionSection = () => {
                         borderRadius="2.75rem"
                         _hover={{ bg: '#4A6EEB', color: 'white' }}
                         textColor="#4A6EEB"
-                        bgColor="transparent"
+                        variant="ghost"
                         px="2.4em"
                         py="1.6em"
                       >

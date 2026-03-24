@@ -98,7 +98,7 @@ const ChurchThemeSection = () => {
                         </Box>
                       </Flex>
                       <Box
-                        borderRadius="10"
+                        borderRadius="10px"
                         w="80%"
                         border="1px solid"
                         borderColor="#B9B5F4"
@@ -124,7 +124,7 @@ const ChurchThemeSection = () => {
                         </Text>
                       </Box>
                       <Box
-                        borderRadius="10"
+                        borderRadius="10px"
                         w="80%"
                         border="1px solid"
                         borderColor="#B9B5F4"
@@ -150,7 +150,7 @@ const ChurchThemeSection = () => {
                         </Text>
                       </Box>
                       <Box
-                        borderRadius="10"
+                        borderRadius="10px"
                         w="80%"
                         border="1px solid"
                         borderColor="#B9B5F4"
@@ -189,7 +189,7 @@ const ChurchThemeSection = () => {
                   </HStack>
                   <IconButton
                     onClick={onExpandClick}
-                    isRound
+                    borderRadius="full"
                     fontSize={'28px'}
                     bg={'rgba(76, 120, 157, 0.2)'}
                     color="#5F5F5F">{isExpanded ? <MdExpandLess /> : <MdExpandMore />}</IconButton>
