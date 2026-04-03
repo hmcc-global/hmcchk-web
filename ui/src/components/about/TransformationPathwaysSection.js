@@ -11,7 +11,7 @@ import React from 'react';
 
 const SECTION_TITLE = "HMCC's Transformation Pathways";
 const SECTION_BLURB =
-  'The Transformation Pathways are how everything we do at HMCC works together to see transformed people who will transform the world.';
+  'The Transformation Pathways connect everything we do at HMCC, for members to experience gospel transformation, to then transform the world.';
 
 const COLORS = {
   gather: '#64CDB4',
