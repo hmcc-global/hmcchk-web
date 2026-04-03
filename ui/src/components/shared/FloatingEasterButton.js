@@ -20,6 +20,35 @@ const pulse = keyframes`
   }
 `;
 
+// Class to organize button styling parameters
+class ButtonStyles {
+  static props = {
+    size: 'lg',
+    isRound: true,
+    color: 'white',
+    width: { base: '80px', md: '100px' },
+    height: { base: '80px', md: '100px' },
+    background:
+      'linear-gradient(180deg, rgba(246, 250, 255, 0.20) 0%, rgba(255, 247.06, 225.87, 0.20) 24%, rgba(249.05, 229.52, 219.01, 0.20) 66%, rgba(246, 250, 255, 0.20) 93%)',
+    animation: `${pulse} 3s infinite`,
+    _hover: {
+      background:
+        'linear-gradient(180deg, rgba(246, 250, 255, 0.30) 0%, rgba(255, 247.06, 225.87, 0.30) 24%, rgba(249.05, 229.52, 219.01, 0.30) 66%, rgba(246, 250, 255, 0.30) 93%)',
+      transform: 'scale(1.05)',
+    },
+    _active: {
+      background:
+        'linear-gradient(180deg, rgba(246, 250, 255, 0.40) 0%, rgba(255, 247.06, 225.87, 0.40) 24%, rgba(249.05, 229.52, 219.01, 0.40) 66%, rgba(246, 250, 255, 0.40) 93%)',
+      transform: 'scale(0.98)',
+    },
+    boxShadow: '3.28px 0.55px 6.06px rgba(119, 130, 133, 0.30)',
+    'aria-label': 'Go to Easter section',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
+}
+
 const FloatingEasterButton = () => {
   const location = useLocation();
   const history = useHistory();
@@ -78,31 +107,7 @@ const FloatingEasterButton = () => {
       >
         Check it out!
       </Text>
-      <IconButton
-        onClick={handleClick}
-        size="lg"
-        isRound={true}
-        color="white"
-        width={{ base: '80px', md: '100px' }}
-        height={{ base: '80px', md: '100px' }}
-        background="linear-gradient(180deg, rgba(246, 250, 255, 0.20) 0%, rgba(255, 247.06, 225.87, 0.20) 24%, rgba(249.05, 229.52, 219.01, 0.20) 66%, rgba(246, 250, 255, 0.20) 93%)"
-        animation={`${pulse} 3s infinite`}
-        _hover={{
-          background:
-            'linear-gradient(180deg, rgba(246, 250, 255, 0.30) 0%, rgba(255, 247.06, 225.87, 0.30) 24%, rgba(249.05, 229.52, 219.01, 0.30) 66%, rgba(246, 250, 255, 0.30) 93%)',
-          transform: 'scale(1.05)',
-        }}
-        _active={{
-          background:
-            'linear-gradient(180deg, rgba(246, 250, 255, 0.40) 0%, rgba(255, 247.06, 225.87, 0.40) 24%, rgba(249.05, 229.52, 219.01, 0.40) 66%, rgba(246, 250, 255, 0.40) 93%)',
-          transform: 'scale(0.98)',
-        }}
-        boxShadow="3.28px 0.55px 6.06px rgba(119, 130, 133, 0.30)"
-        aria-label="Go to Easter section"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-      >
+      <IconButton {...ButtonStyles.props} onClick={handleClick}>
         <Image
           src={livingHopeIcon}
           alt="Living Hope"
