@@ -1,0 +1,49 @@
+name: opencode-review
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  pull_request_review_comment:
+    types: [created]
+
+jobs:
+  review:
+    if: |
+      github.event_name == 'pull_request' ||
+      (contains(fromJSON('["issue_comment", "pull_request_review_comment"]'), github.event_name) &&
+        (contains(github.event.comment.body, ' /oc') ||
+        startsWith(github.event.comment.body, '/oc') ||
+        contains(github.event.comment.body, ' /opencode') ||
+        startsWith(github.event.comment.body, '/opencode'))
+      )
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: read
+      issues: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Run opencode
+        uses: anomalyco/opencode/github@latest
+        env:
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+        with:
+          model: opencode/minimax-m2.5-free
+          prompt: |
+            Review this pull request using the below parameters:
+            - Check for code quality issues
+            - Check for code style adherence
+            - Identify potential bugs or logical errors
+            - Identify potential vulnerabilities
+            - Identify for performance bottlenecks
+            - Check for unnecessary console log or comments or typos
+            - Check for unused imports
+
+            Give a summary to explain the overall purpose of the pull request and summarise your findings with actionable suggestions.
