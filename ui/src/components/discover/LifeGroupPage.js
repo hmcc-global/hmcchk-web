@@ -119,8 +119,7 @@ const LifeGroupPage = () => {
                 LIFE Group is more than just a weekly Bible study group. It is
                 about Loving one another, Investing in the community, growing in
                 our Faith, and Enjoying life together as a family living out the
-                Gospel. At HMCC, we believe in the power of community and the
-                fullness of life that it offers -- which is why we believe in{' '}
+                Gospel.
               </Text>
               <Button
                 as={Link}

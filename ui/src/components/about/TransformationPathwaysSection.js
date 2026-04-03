@@ -5,16 +5,13 @@ import {
   Heading,
   UnorderedList,
   ListItem,
-  Stack,
   Image,
-  Container,
-  VStack,
 } from '@chakra-ui/react';
 import React from 'react';
 
-const STRATEGY_TITLE = "HMCC's Transformation Pathways";
-const STRATEGY_BLURB =
-  'Here at HMCC, we believe that each and every single person should engage in these 5Gs to experience life transformation, mature as a disciple, and impact the world for Christ.';
+const SECTION_TITLE = "HMCC's Transformation Pathways";
+const SECTION_BLURB =
+  'The Transformation Pathways are how everything we do at HMCC works together to see transformed people who will transform the world.';
 
 const COLORS = {
   gather: '#64CDB4',
@@ -54,7 +51,7 @@ const DESCRIPTION_POSITIONS = {
   },
 };
 
-const StrategySection = (props) => {
+const TransformationPathwaysSection = (props) => {
   // TODO-YY: Remove when confirmed
   // const { title, blurb } = props;
 
@@ -69,9 +66,9 @@ const StrategySection = (props) => {
         color="#0628A3"
         textAlign="center"
         fontFamily="DMSerifDisplay_Italic"
-        id="strategy"
+        id="transformation-pathways"
       >
-        {STRATEGY_TITLE}
+        {SECTION_TITLE}
       </Heading>
       {/* <Stack
           direction={{ base: 'column', lg: 'column' }}
@@ -84,7 +81,7 @@ const StrategySection = (props) => {
           textAlign={'justify'}
           fontSize={{ base: '0.875rem', md: '1rem' }}
         >
-          {STRATEGY_BLURB}
+          {SECTION_BLURB}
         </Text>
       </Flex>
       {/* Gospel Circle Diagram - with proper spacing */}
@@ -261,7 +258,7 @@ const StrategySection = (props) => {
         <Box w={SIZING.image} mx="auto" mb={6}>
           <Image
             src={`${process.env.PUBLIC_URL}/images/about/strat-5gs.png`}
-            alt="The 5Gs Gospel Circle - a visual representation of HMCC's discipleship strategy showing Generations, Gather, Grow, Give, and Go"
+            alt="The 5Gs Gospel Circle - a visual representation of HMCC's discipleship transformation pathways showing Generations, Gather, Grow, Give, and Go"
             w="100%"
             h="100%"
             objectFit="contain"
@@ -489,4 +486,4 @@ const StrategySection = (props) => {
   );
 };
 
-export default StrategySection;
+export default TransformationPathwaysSection;
