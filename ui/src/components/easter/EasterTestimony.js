@@ -24,7 +24,7 @@ export default function EasterTestimony() {
       <Box display="flex">
         <EasterVerticalLine position="left" color="#A690B4" />
         {/* test 1 */}
-        <Container maxW="container.xl" px={[4, 6, 8]}>
+        <Container maxW="container.xl" px={[0, 6, 8]}>
           <Box position="relative">
             <Image
               src={
@@ -70,7 +70,8 @@ export default function EasterTestimony() {
               <Box
                 bg="transparent"
                 borderRadius="md"
-                p={{ base: 3, md: 6, lg: 8 }}
+                px={{ base: 0, md: 6, lg: 8 }}
+                py={{ base: 3, md: 6, lg: 8 }}
               >
                 <Stack spacing={{ base: 4, md: 5, lg: 6 }}>
                   <HStack
@@ -128,9 +129,13 @@ export default function EasterTestimony() {
                       WebkitTextFillColor: '#982896',
                     }}
                   >
-                    My hope was in ______,
+                    My hope was in ______
                     <Box as="br" display={{ base: 'block', md: 'block' }} />
-                    but now, Jesus is my Living Hope because ______.
+                    but now, Jesus is
+                    <Box as="br" display={{ base: 'block', md: 'none' }} />
+                    <Text as="span" display={{ base: 'block', md: 'inline' }}>
+                      my Living Hope because ______.
+                    </Text>
                   </Text>
 
                   <Text
