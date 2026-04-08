@@ -1,12 +1,10 @@
-import { Flex, useBreakpointValue } from '@chakra-ui/react';
-import HeroSection from './HeroSection';
+import { Flex } from '@chakra-ui/react';
+import TenYearHeroSection from './TenYearHeroSection';
 
 const TenYearCommitmentContainer = (props) => {
-  const isMobile = useBreakpointValue({ base: true, md: false });
-
   return (
-    <Flex direction="column" bgColor="#F6FAFF">
-      <HeroSection />
+    <Flex direction="column">
+      <TenYearHeroSection />
     </Flex>
   );
 };
