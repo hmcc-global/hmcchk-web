@@ -1,6 +1,5 @@
 import React from 'react';
-import { Select, Container, Grid } from '@chakra-ui/react';
-import { FaCaretDown } from 'react-icons/fa';
+import { NativeSelect, Container, Grid } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 
 // Utility function to get unique values
@@ -17,31 +16,32 @@ const getUniqueValues = (items, keyExtractor) => {
 
 // Reusable FilterOption component
 const FilterOption = ({ name, placeholder, options, onChange, value }) => (
-  <Select
-    style={{
-      overflowY: 'scroll',
-      textAlign: 'center',
-      color: '#4A6EEB',
-      fontWeight: '700',
-    }}
-    fontSize={{ base: '0.875rem', md: '1rem' }}
-    icon={<FaCaretDown />}
-    iconColor="#4A6EEB"
-    iconSize="1rem"
-    borderRadius="30px"
-    borderColor="#4A6EEB"
-    _hover={{ borderColor: '#4A6EEB', bgColor: 'rgba(74, 110, 235, 0.1)' }}
-    name={name}
-    placeholder={placeholder}
-    onChange={onChange}
-    value={value}
-  >
-    {options.map((option, index) => (
-      <option key={index} value={option}>
-        {option}
-      </option>
-    ))}
-  </Select>
+  <NativeSelect.Root>
+    <NativeSelect.Field
+      style={{
+        overflowY: 'scroll',
+        textAlign: 'center',
+        color: '#4A6EEB',
+        fontWeight: '700',
+      }}
+      fontSize={{ base: '0.875rem', md: '1rem' }}
+      iconColor="#4A6EEB"
+      iconSize="1rem"
+      borderRadius="30px"
+      borderColor="#4A6EEB"
+      _hover={{ borderColor: '#4A6EEB', bgColor: 'rgba(74, 110, 235, 0.1)' }}
+      name={name}
+      placeholder={placeholder}
+      onValueChange={onChange}
+      value={value}>
+      {options.map((option, index) => (
+        <option key={index} value={option}>
+          {option}
+        </option>
+      ))}
+    </NativeSelect.Field>
+    <NativeSelect.Indicator />
+  </NativeSelect.Root>
 );
 
 const FilterSermon = ({ allSermons, filterSermon, filterData }) => {

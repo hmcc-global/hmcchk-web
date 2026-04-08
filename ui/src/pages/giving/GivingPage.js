@@ -5,26 +5,21 @@ import {
   Flex,
   Heading,
   Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  ListItem,
-  UnorderedList,
-  AccordionIcon,
   Spacer,
   Text,
   VStack,
+  List,
 } from '@chakra-ui/react';
 import GivingCard from './GivingCard.js';
 
 const GivingPage = (props) => {
   return (
     <Container maxW="container.lg">
-      <VStack w="100%" spacing="3vw" py="3vw">
+      <VStack w="100%" gap="3vw" py="3vw">
         <Box
-          borderRadius="20"
+          borderRadius="20px"
           bgImage={`url('${process.env.PUBLIC_URL}/images/giving/Banner.png')`}
-          bgPosition="center"
+          backgroundPosition="center"
           bgSize="cover"
           fontFamily="Manrope"
         >
@@ -102,10 +97,9 @@ const GivingPage = (props) => {
             >
               There are a few different ways you can give to our church
             </Text>
-            <Text as="i" color="#319795" fontSize="12">
-              *When giving, please always use your legal name and provide the
-              same email address consistently.
-            </Text>
+            <Text color="#319795" fontSize="12" asChild><i>*When giving, please always use your legal name and provide the
+                            same email address consistently.
+                          </i></Text>
           </Box>
           <Spacer />
           <GivingCard
@@ -119,7 +113,6 @@ const GivingPage = (props) => {
           />
         </Flex>
       </Center>
-
       <Center>
         <Flex
           direction={['column', 'column', 'row']}
@@ -143,18 +136,15 @@ const GivingPage = (props) => {
         </Flex>
       </Center>
       <Box paddingTop="2vh">
-        <Text as="i">
-          Personal information is kept confidential, used only for tax receipt
-          purposes, and is only accessible by the Stewardship Team.
-        </Text>
+        <Text asChild><i>Personal information is kept confidential, used only for tax receipt
+                    purposes, and is only accessible by the Stewardship Team.
+                  </i></Text>
       </Box>
       <Box paddingTop="2vh">
-        <Text as="i">
-          If you have any questions, please do not hesitate to contact us:&nbsp;
-        </Text>
-        <Text as="i" fontWeight="bold">
-          hk@hmccglobal.org
-        </Text>
+        <Text asChild><i>If you have any questions, please do not hesitate to contact us: 
+                  </i></Text>
+        <Text fontWeight="bold" asChild><i>hk@hmccglobal.org
+                  </i></Text>
       </Box>
       <Box paddingBottom="10vh" fontFamily="Manrope">
         <Box display={{ base: 'none', md: 'block', lg: 'block' }}>
@@ -174,69 +164,67 @@ const GivingPage = (props) => {
           </Heading>
         </Box>
 
-        <Accordion allowMultiple>
-          <AccordionItem>
+        <Accordion.Root multiple>
+          <Accordion.Item value='item-0'>
             <h2>
-              <AccordionButton>
+              <Accordion.ItemTrigger>
                 <Box flex="1" textAlign="left">
                   <Heading as="h4" size="md" py="4" minw="100%">
                     Giving Categories
                   </Heading>
                 </Box>
-                <AccordionIcon />
-              </AccordionButton>
+                <Accordion.ItemIndicator />
+              </Accordion.ItemTrigger>
             </h2>
-            <AccordionPanel pb={4}>
-              When you give, you can give under any of the following categories:
-              <UnorderedList>
-                <ListItem>Tithe: 10% of your regular income</ListItem>
-                <ListItem>
-                  Weekly Offering: offering that you give exclusive of your
-                  tithe
-                </ListItem>
-                <ListItem>
-                  Thanksgiving Offering: offering given out of a thankful heart
-                  toward God
-                </ListItem>
-                <ListItem>
-                  HMI: General Missions Fund: Offering to our church’s efforts
-                  towards mission work
-                </ListItem>
-                <ListItem>
-                  HMI-P: Giving to a specific short-term missions project team
-                  or members
-                </ListItem>
-                <ListItem>
-                  Other: any other specific offering you would like to indicate
-                </ListItem>
-              </UnorderedList>
-            </AccordionPanel>
-          </AccordionItem>
+            <Accordion.ItemContent pb={4}><Accordion.ItemBody>When you give, you can give under any of the following categories:
+                              <List.Root as='ul'>
+                  <List.Item>Tithe: 10% of your regular income</List.Item>
+                  <List.Item>
+                    Weekly Offering: offering that you give exclusive of your
+                    tithe
+                  </List.Item>
+                  <List.Item>
+                    Thanksgiving Offering: offering given out of a thankful heart
+                    toward God
+                  </List.Item>
+                  <List.Item>
+                    HMI: General Missions Fund: Offering to our church’s efforts
+                    towards mission work
+                  </List.Item>
+                  <List.Item>
+                    HMI-P: Giving to a specific short-term missions project team
+                    or members
+                  </List.Item>
+                  <List.Item>
+                    Other: any other specific offering you would like to indicate
+                  </List.Item>
+                </List.Root>
+              </Accordion.ItemBody></Accordion.ItemContent>
+          </Accordion.Item>
 
-          <AccordionItem>
+          <Accordion.Item value='item-1'>
             <h2>
-              <AccordionButton>
+              <Accordion.ItemTrigger>
                 <Box flex="1" textAlign="left">
                   <Heading as="h4" size="md" py="4">
                     Tax Exemption
                   </Heading>
                 </Box>
-                <AccordionIcon />
-              </AccordionButton>
+                <Accordion.ItemIndicator />
+              </Accordion.ItemTrigger>
             </h2>
-            <AccordionPanel pb={4}>
-              Harvest Mission Community Church (Hong Kong) Limited is a
-              registered charity recognized by the Inland Revenue Department in
-              Hong Kong. Donations to “Harvest Mission Community Church (Hong
-              Kong) Limited” can be exempted from income tax in Hong Kong.
-              Giving receipts will be available to all donors who include their
-              personal details on the offering envelope or email us at
-              hk@hmccglobal.org to request a receipt. Members will
-              receive their giving reports at the end of the Hong Kong fiscal
-              year in April, in compliance with the Hong Kong SAR government.
-            </AccordionPanel>
-          </AccordionItem>
-        </Accordion>
+            <Accordion.ItemContent pb={4}><Accordion.ItemBody>Harvest Mission Community Church (Hong Kong) Limited is a
+                              registered charity recognized by the Inland Revenue Department in
+                              Hong Kong. Donations to “Harvest Mission Community Church (Hong
+                              Kong) Limited” can be exempted from income tax in Hong Kong.
+                              Giving receipts will be available to all donors who include their
+                              personal details on the offering envelope or email us at
+                              hk@hmccglobal.org to request a receipt. Members will
+                              receive their giving reports at the end of the Hong Kong fiscal
+                              year in April, in compliance with the Hong Kong SAR government.
+                            </Accordion.ItemBody></Accordion.ItemContent>
+          </Accordion.Item>
+        </Accordion.Root>
       </Box>
     </Container>
   );

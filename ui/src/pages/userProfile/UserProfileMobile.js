@@ -3,28 +3,20 @@ import {
   Text,
   Tabs,
   HStack,
-  TabPanels,
-  TabPanel,
   Flex,
-  FormControl,
-  FormLabel,
-  FormHelperText,
   Input,
   InputGroup,
   Button,
   Stack,
   Center,
   Switch,
-  InputRightAddon,
-  Select,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalFooter,
+  NativeSelect,
   VStack,
-  ModalCloseButton,
+  Field,
+  Icon,
+  Dialog,
+  Portal,
 } from '@chakra-ui/react';
-import { CheckCircleIcon } from '@chakra-ui/icons';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { customAxios as axios } from '../helpers/customAxios';
@@ -43,6 +35,7 @@ import {
   generatePublishedFormLinks,
 } from '../helpers/userInformationHelpers';
 import SermonNotesPagination from './SermonNotesPagination';
+import { LuCircleCheck } from 'react-icons/lu';
 
 const UserProfileMobile = (props) => {
   const { user, staticData } = props;
@@ -55,7 +48,7 @@ const UserProfileMobile = (props) => {
   const [unsignedFormList, setUnsignedFormList] = useState([]);
   const [signedUpFormList, setSignedUpFormList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState('tab-0');
   const [activeSermonNoteTab, setActiveSermonNoteTab] = useState('all');
   const [userSermonNotes, setUserSermonNotes] = useState([]);
   const [sermonSeriesList, setSermonSeriesList] = useState([]);
@@ -207,8 +200,7 @@ const UserProfileMobile = (props) => {
   };
 
   const handleTabChange = (e) => {
-    const newIndex = Number(e.target.value); // Ensure it's a number
-    setActiveIndex(newIndex);
+    setActiveIndex(`tab-${e.target.value}`);
   };
 
   const handleTabSwitch = (tab) => {
@@ -241,40 +233,42 @@ const UserProfileMobile = (props) => {
     textAlign: 'center',
   };
 
-  const tabTitle = {
-    padding: '0.5px',
-    fontWeight: '700',
-    fontSize: 'inherit',
-    color: '#0628A3',
-    _selected: { borderColor: '#0628A3', color: '#000000' },
-  };
-
   return (
     <>
-      <Modal isOpen={modalOpen} onClose={onModalClose}>
-        <ModalOverlay />
-        <ModalContent borderRadius="20">
-          <ModalCloseButton />
-          <VStack>
-            <Text
-              color="#0628A3"
-              fontSize="2xl"
-              fontWeight="700"
-              mt={6}
-              flex={1}
-              textAlign="center"
-            >
-              Edited successfully
-            </Text>
-            <Box flex={4}>
-              <Center w="100%" h="100%">
-                <CheckCircleIcon mt={5} w="50%" h="50%" color="#0628A3" />
-              </Center>
-            </Box>
-          </VStack>
-          <ModalFooter />
-        </ModalContent>
-      </Modal>
+      <Dialog.Root open={modalOpen} onOpenChange={e => {
+        if (!e.open) {
+          onModalClose();
+        }
+      }}>
+        <Portal>
+
+          <Dialog.Backdrop />
+          <Dialog.Positioner>
+            <Dialog.Content borderRadius="20px">
+              <Dialog.CloseTrigger />
+              <VStack>
+                <Text
+                  color="#0628A3"
+                  fontSize="2xl"
+                  fontWeight="700"
+                  mt={6}
+                  flex={1}
+                  textAlign="center"
+                >
+                  Edited successfully
+                </Text>
+                <Box flex={4}>
+                  <Center w="100%" h="100%">
+                    <Icon mt={5} w="50%" h="50%" color="#0628A3" asChild><LuCircleCheck /></Icon>
+                  </Center>
+                </Box>
+              </VStack>
+              <Dialog.Footer />
+            </Dialog.Content>
+          </Dialog.Positioner>
+
+        </Portal>
+      </Dialog.Root>
       <Flex
         mt="10%"
         alignItems="center"
@@ -304,36 +298,37 @@ const UserProfileMobile = (props) => {
           />
         </Box>
       </Flex>
-
       <form onSubmit={handleSubmit(handleEditUserInformation)}>
-        <Tabs
+        <Tabs.Root
           mt="7%"
           orientation="horizontal"
-          variant="line"
+          variant='line'
           mb="12%"
           fontSize="0.9rem"
-          isManual
-          index={activeIndex}
+          activationMode='manual'
+          value={activeIndex}
+          onValueChange={(val) => setActiveIndex(val)}
         >
-          <Select
-            value={activeIndex}
-            onChange={handleTabChange}
-            mb={4}
-            bg="#F6FAFF"
-            borderRadius={24}
-            borderWidth={3}
-            borderColor="#4A6EBB"
-            width="70%"
-            mx="auto"
-            fontWeight="semibold"
-          >
-            <option value={0}>Signup Links</option>
-            <option value={1}>Sermon Notes</option>
-            <option value={2}>Personal Profile</option>
-            <option value={3}>Church Profile</option>
-          </Select>
-          <TabPanels>
-            <TabPanel width="full" margin="20px 0px" p="0">
+          <NativeSelect.Root>
+            <NativeSelect.Field
+              value={activeIndex.replace('tab-', '')}
+              onChange={handleTabChange}
+              mb={4}
+              bg="#F6FAFF"
+              borderRadius={24}
+              borderWidth={3}
+              borderColor="#4A6EBB"
+              width="70%"
+              mx="auto"
+              fontWeight="semibold">
+              <option value={0}>Signup Links</option>
+              <option value={1}>Sermon Notes</option>
+              <option value={2}>Personal Profile</option>
+              <option value={3}>Church Profile</option>
+            </NativeSelect.Field>
+            <NativeSelect.Indicator />
+          </NativeSelect.Root>
+            <Tabs.Content value="tab-0" width="full" margin="20px 0px" p="0">
               <Flex direction="column">
                 {formList && formList.length > 0 && (
                   <Box>
@@ -363,14 +358,14 @@ const UserProfileMobile = (props) => {
                   mt="8"
                   color="#0628A3"
                   borderColor="#0628A3"
-                  borderRadius="10"
+                  borderRadius="10px"
                   variant="outline"
                 >
                   Change Password
                 </Button> */}
               </Flex>
-            </TabPanel>
-            <TabPanel width="full" margin="20px 0px" p="0">
+            </Tabs.Content>
+            <Tabs.Content value="tab-1" width="full" margin="20px 0px" p="0">
               <HStack gap={3} mb={5} mx={5}>
                 <Button
                   borderRadius={30}
@@ -413,23 +408,25 @@ const UserProfileMobile = (props) => {
                   >
                     Sermon Series
                   </Text>
-                  <Select
-                    placeholder="Select Sermon Series"
-                    value={selectedSermonSeries}
-                    onChange={(e) => setSelectedSermonSeries(e.target.value)}
-                    mb={4}
-                  >
-                    {sermonSeriesList.map((series) => {
-                      if (series !== '') {
-                        return (
-                          <option key={series} value={series}>
-                            {series}
-                          </option>
-                        );
-                      }
-                      return null;
-                    })}
-                  </Select>
+                  <NativeSelect.Root>
+                    <NativeSelect.Field
+                      placeholder="Select Sermon Series"
+                      value={selectedSermonSeries}
+                      onValueChange={(e) => setSelectedSermonSeries(e.target.value)}
+                      mb={4}>
+                      {sermonSeriesList.map((series) => {
+                        if (series !== '') {
+                          return (
+                            <option key={series} value={series}>
+                              {series}
+                            </option>
+                          );
+                        }
+                        return null;
+                      })}
+                    </NativeSelect.Field>
+                    <NativeSelect.Indicator />
+                  </NativeSelect.Root>
                 </>
               )}
               {/* Pass Sermon Notes depending on the tab and also whether there is any select option */}
@@ -447,14 +444,14 @@ const UserProfileMobile = (props) => {
                     : setCurrentPageSaved
                 }
               />
-            </TabPanel>
-            <TabPanel p="7%">
+            </Tabs.Content>
+            <Tabs.Content value="tab-2" p="7%">
               <Center mb="5%">
                 <Button
                   size="md"
                   color="#0628A3"
                   borderColor="#0628A3"
-                  borderRadius="10"
+                  borderRadius="10px"
                   variant="outline"
                   type="submit"
                 >
@@ -462,184 +459,186 @@ const UserProfileMobile = (props) => {
                 </Button>
               </Center>
 
-              <Stack spacing="7%">
-                <FormControl>
-                  <FormLabel color="#2C5282">
+              <Stack gap="7%">
+                <Field.Root>
+                  <Field.Label color="#2C5282">
                     First Name (and Middle Name)
-                  </FormLabel>
+                  </Field.Label>
                   <Input
                     size="sm"
-                    borderRadius="5"
+                    borderRadius="5px"
                     {...register('firstName', { required: true })}
-                    isInvalid={errors['firstName']}
+                    invalid={errors['firstName']}
                     placeholder="Please fill in this field"
                   />
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#2C5282">Last Name</FormLabel>
+                </Field.Root>
+                <Field.Root>
+                  <Field.Label color="#2C5282">Last Name</Field.Label>
                   <Input
                     size="sm"
-                    borderRadius="5"
+                    borderRadius="5px"
                     {...register('lastName', { required: true })}
-                    isInvalid={errors['lastName']}
+                    invalid={errors['lastName']}
                     placeholder="Please fill in this field"
                   />
-                  <FormHelperText>
+                  <Field.HelperText>
                     Enter "N/A" if not applicable for you
-                  </FormHelperText>
-                </FormControl>
+                  </Field.HelperText>
+                </Field.Root>
 
-                <FormControl>
-                  <FormLabel color="#2C5282">Country of Origin</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
-                    {...register('countryOfOrigin', { required: true })}
-                    isInvalid={errors['countryOfOrigin']}
-                    placeholder="Please fill in this field"
-                  >
-                    {countryList.map((item) => {
-                      return <option key={'co' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#2C5282">Lifestage</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
-                    {...register('lifestage', { required: true })}
-                    isInvalid={errors['lifestage']}
-                    placeholder="Please fill in this field"
-                  >
-                    {lifestageList.map((item) => {
-                      return <option key={'life' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </FormControl>
+                <Field.Root>
+                  <Field.Label color="#2C5282">Country of Origin</Field.Label>
+                  <NativeSelect.Root>
+                    <NativeSelect.Field
+                      size="sm"
+                      borderRadius="5px"
+                      {...register('countryOfOrigin', { required: true })}
+                      invalid={errors['countryOfOrigin']}
+                      placeholder="Please fill in this field">
+                      {countryList.map((item) => {
+                        return <option key={'co' + item}>{item}</option>;
+                      })}
+                    </NativeSelect.Field>
+                    <NativeSelect.Indicator />
+                  </NativeSelect.Root>
+                </Field.Root>
+                <Field.Root>
+                  <Field.Label color="#2C5282">Lifestage</Field.Label>
+                  <NativeSelect.Root>
+                    <NativeSelect.Field
+                      size="sm"
+                      borderRadius="5px"
+                      {...register('lifestage', { required: true })}
+                      invalid={errors['lifestage']}
+                      placeholder="Please fill in this field">
+                      {lifestageList.map((item) => {
+                        return <option key={'life' + item}>{item}</option>;
+                      })}
+                    </NativeSelect.Field>
+                    <NativeSelect.Indicator />
+                  </NativeSelect.Root>
+                </Field.Root>
 
-                <FormControl>
-                  <FormLabel color="#2C5282">Campus</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
-                    {...register('campus')}
-                    pointerEvents="none"
-                  >
-                    {campusList.map((item) => {
-                      return <option key={'ca' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#2C5282">Phone Number</FormLabel>
+                <Field.Root>
+                  <Field.Label color="#2C5282">Campus</Field.Label>
+                  <NativeSelect.Root>
+                    <NativeSelect.Field size="sm" borderRadius="5px" {...register('campus')} pointerEvents="none">
+                      {campusList.map((item) => {
+                        return <option key={'ca' + item}>{item}</option>;
+                      })}
+                    </NativeSelect.Field>
+                    <NativeSelect.Indicator />
+                  </NativeSelect.Root>
+                </Field.Root>
+                <Field.Root>
+                  <Field.Label color="#2C5282">Phone Number</Field.Label>
                   <Input
                     size="sm"
-                    borderRadius="5"
+                    borderRadius="5px"
                     {...register('phoneNumber', { required: true })}
-                    isInvalid={errors['phoneNumber']}
+                    invalid={errors['phoneNumber']}
                     placeholder="Please fill in this field"
                   />
-                </FormControl>
+                </Field.Root>
 
-                <FormControl>
-                  <FormLabel color="#2C5282">Birthday</FormLabel>
+                <Field.Root>
+                  <Field.Label color="#2C5282">Birthday</Field.Label>
                   <Input
                     size="sm"
                     type="date"
-                    borderRadius="5"
+                    borderRadius="5px"
                     {...register('birthday')}
                   />
-                </FormControl>
+                </Field.Root>
 
-                <FormControl>
-                  <FormLabel color="#2C5282">Address: Floor / Level</FormLabel>
+                <Field.Root>
+                  <Field.Label color="#2C5282">Address: Floor / Level</Field.Label>
                   <Input
                     size="sm"
-                    borderRadius="5"
+                    borderRadius="5px"
                     {...register('addressFloor')}
                   />
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#2C5282">
+                </Field.Root>
+                <Field.Root>
+                  <Field.Label color="#2C5282">
                     Address: Room / Flat / Unit / Suite
-                  </FormLabel>
+                  </Field.Label>
                   <Input
                     size="sm"
-                    borderRadius="5"
+                    borderRadius="5px"
                     {...register('addressFlat')}
                   />
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#2C5282">Address: Street Address</FormLabel>
+                </Field.Root>
+                <Field.Root>
+                  <Field.Label color="#2C5282">Address: Street Address</Field.Label>
                   <Input
                     size="sm"
-                    borderRadius="5"
+                    borderRadius="5px"
                     {...register('addressStreet')}
                   />
-                </FormControl>
+                </Field.Root>
 
-                <FormControl>
-                  <FormLabel color="#2C5282">Address: District</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
-                    {...register('addressDistrict')}
-                  >
-                    {districtList.map((item) => {
-                      return <option key={'di' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#2C5282">Address: Region</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
-                    {...register('addressRegion')}
-                  >
-                    {regionList.map((item) => {
-                      return <option key={'re' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </FormControl>
+                <Field.Root>
+                  <Field.Label color="#2C5282">Address: District</Field.Label>
+                  <NativeSelect.Root>
+                    <NativeSelect.Field size="sm" borderRadius="5px" {...register('addressDistrict')}>
+                      {districtList.map((item) => {
+                        return <option key={'di' + item}>{item}</option>;
+                      })}
+                    </NativeSelect.Field>
+                    <NativeSelect.Indicator />
+                  </NativeSelect.Root>
+                </Field.Root>
+                <Field.Root>
+                  <Field.Label color="#2C5282">Address: Region</Field.Label>
+                  <NativeSelect.Root>
+                    <NativeSelect.Field size="sm" borderRadius="5px" {...register('addressRegion')}>
+                      {regionList.map((item) => {
+                        return <option key={'re' + item}>{item}</option>;
+                      })}
+                    </NativeSelect.Field>
+                    <NativeSelect.Indicator />
+                  </NativeSelect.Root>
+                </Field.Root>
               </Stack>
-            </TabPanel>
-            <TabPanel p="7%">
+            </Tabs.Content>
+            <Tabs.Content value="tab-3" p="7%">
               <Center mb="5%">
                 <Button
                   size="md"
                   color="#0628A3"
                   borderColor="#0628A3"
-                  borderRadius="10"
+                  borderRadius="10px"
                   variant="outline"
                   type="submit"
                 >
                   Save Information
                 </Button>
               </Center>
-              <Stack spacing="7%">
-                <FormControl>
-                  <FormLabel color="#2C5282">LIFE Group</FormLabel>
-                  <Select size="sm" borderRadius="5" {...register('lifeGroup')}>
-                    {lifegroupList.map((item) => {
-                      return <option key={'lg' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </FormControl>
-                <FormControl>
-                  <FormLabel color="#2C5282">Ministry Team</FormLabel>
-                  <Select
-                    size="sm"
-                    borderRadius="5"
-                    {...register('ministryTeam')}
-                  >
-                    {ministryTeamList.map((item) => {
-                      return <option key={'mt' + item}>{item}</option>;
-                    })}
-                  </Select>
-                </FormControl>
-                <FormControl>
+              <Stack gap="7%">
+                <Field.Root>
+                  <Field.Label color="#2C5282">LIFE Group</Field.Label>
+                  <NativeSelect.Root>
+                    <NativeSelect.Field size="sm" borderRadius="5px" {...register('lifeGroup')}>
+                      {lifegroupList.map((item) => {
+                        return <option key={'lg' + item}>{item}</option>;
+                      })}
+                    </NativeSelect.Field>
+                    <NativeSelect.Indicator />
+                  </NativeSelect.Root>
+                </Field.Root>
+                <Field.Root>
+                  <Field.Label color="#2C5282">Ministry Team</Field.Label>
+                  <NativeSelect.Root>
+                    <NativeSelect.Field size="sm" borderRadius="5px" {...register('ministryTeam')}>
+                      {ministryTeamList.map((item) => {
+                        return <option key={'mt' + item}>{item}</option>;
+                      })}
+                    </NativeSelect.Field>
+                    <NativeSelect.Indicator />
+                  </NativeSelect.Root>
+                </Field.Root>
+                <Field.Root>
                   <Stack direction="row">
                     <Text flex={1} fontWeight="500" mr="3%" color="#2C5282">
                       Church Member
@@ -651,10 +650,10 @@ const UserProfileMobile = (props) => {
                         render={({ field: { onChange, value, ref } }) => (
                           <Switch
                             size="lg"
-                            onChange={onChange}
+                            onValueChange={onChange}
                             ref={ref}
-                            isChecked={value}
-                            isReadOnly
+                            checked={value}
+                            readOnly
                           />
                         )}
                       />
@@ -663,49 +662,47 @@ const UserProfileMobile = (props) => {
                       </Text>
                     </Box>
                   </Stack>
-                  <FormHelperText>
+                  <Field.HelperText>
                     An HMCC Covenant Signing Member is someone who has attended
                     HMCC’s Experiencing Membership Class and has decided to sign
                     (in-person) the Membership Declaration{' '}
-                  </FormHelperText>
-                </FormControl>
+                  </Field.HelperText>
+                </Field.Root>
                 <Stack
                   direction="column"
                   border="1px solid #E2E8F0"
-                  borderRadius="6"
+                  borderRadius="6px"
                   p="4%"
-                  spacing="4%"
+                  gap="4%"
                 >
-                  <FormControl>
-                    <FormLabel color="#2C5282">Recognition Date</FormLabel>
-                    <InputGroup size="sm">
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Recognition Date</Field.Label>
+                    <InputGroup size="sm" endAddon="Date">
                       <Input
                         size="sm"
                         type="date"
-                        borderRadius="5"
+                        borderRadius="5px"
                         {...register('membershipRecognitionDate')}
-                        isReadOnly
+                        readOnly
                       />
-                      <InputRightAddon borderRadius="5">Date</InputRightAddon>
                     </InputGroup>
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">
                       Last Recommitment Date
-                    </FormLabel>
-                    <InputGroup size="sm">
+                    </Field.Label>
+                    <InputGroup size="sm" endAddon="Date">
                       <Input
                         size="sm"
                         type="date"
-                        borderRadius="5"
+                        borderRadius="5px"
                         {...register('membershipRecommitmentDate')}
-                        isReadOnly
+                        readOnly
                       />
-                      <InputRightAddon borderRadius="5">Date</InputRightAddon>
                     </InputGroup>
-                  </FormControl>
+                  </Field.Root>
                 </Stack>
-                <FormControl>
+                <Field.Root>
                   <Stack direction="row">
                     <Text flex={1} fontWeight="500" mr="3%" color="#2C5282">
                       Baptised
@@ -717,10 +714,10 @@ const UserProfileMobile = (props) => {
                         render={({ field: { onChange, value, ref } }) => (
                           <Switch
                             size="lg"
-                            onChange={onChange}
+                            onValueChange={onChange}
                             ref={ref}
-                            isChecked={value}
-                            isReadOnly
+                            checked={value}
+                            readOnly
                           />
                         )}
                       />
@@ -729,41 +726,39 @@ const UserProfileMobile = (props) => {
                       </Text>
                     </Box>
                   </Stack>
-                </FormControl>
+                </Field.Root>
                 <Stack
                   direction="column"
                   border="1px solid #E2E8F0"
-                  borderRadius="6"
+                  borderRadius="6px"
                   p="4%"
-                  spacing="4%"
+                  gap="4%"
                 >
-                  <FormControl>
-                    <FormLabel color="#2C5282">Baptism Place</FormLabel>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Baptism Place</Field.Label>
                     <Input
                       size="sm"
-                      borderRadius="5"
+                      borderRadius="5px"
                       {...register('baptismPlace')}
-                      isReadOnly
+                      readOnly
                     />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel color="#2C5282">Baptism Date</FormLabel>
-                    <InputGroup size="sm">
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label color="#2C5282">Baptism Date</Field.Label>
+                    <InputGroup size="sm" endAddon="Date">
                       <Input
                         size="sm"
                         type="date"
-                        borderRadius="5"
+                        borderRadius="5px"
                         {...register('baptismDate')}
-                        isReadOnly
+                        readOnly
                       />
-                      <InputRightAddon borderRadius="5">Date</InputRightAddon>
                     </InputGroup>
-                  </FormControl>
+                  </Field.Root>
                 </Stack>
               </Stack>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+            </Tabs.Content>
+        </Tabs.Root>
       </form>
     </>
   );

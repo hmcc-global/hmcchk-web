@@ -7,22 +7,25 @@ import {
   Text,
   Spacer,
   Link,
-  Fade,
   Container,
+  Icon,
 } from '@chakra-ui/react';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { InView } from 'react-intersection-observer';
+import { LuArrowRight } from 'react-icons/lu';
 const VisionMissionSection = () => {
   return (
     <InView rootMargin="-50px" triggerOnce={true}>
       {({ inView, ref }) => (
-        <Fade transition={{ enter: { duration: 1 } }} in={inView}>
+        <Box
+          ref={ref}
+          opacity={inView ? 1 : 0}
+          transition="opacity 1s ease-in-out"
+        >
           <Container
             maxW="container.xl"
             py={10}
-            ref={ref}
             bgImage={`url('${process.env.PUBLIC_URL}/images/home/hk-green.png')`}
-            bgPos="center right"
+            backgroundPosition="center right"
             bgSize="contain"
             bgRepeat="no-repeat"
           >
@@ -33,7 +36,7 @@ const VisionMissionSection = () => {
                     w="100%"
                     position="absolute"
                     h="100%"
-                    bgPos="45% 50%"
+                    backgroundPosition="45% 50%"
                     bgSize="40%"
                     bgRepeat="no-repeat"
                     bgImage={`url('${process.env.PUBLIC_URL}/images/home/vector-green-1.svg')`}
@@ -42,7 +45,7 @@ const VisionMissionSection = () => {
                     w="100%"
                     position="absolute"
                     h="107%"
-                    bgPos="30% 100%"
+                    backgroundPosition="30% 100%"
                     bgSize="50%"
                     bgRepeat="no-repeat"
                     bgImage={`url('${process.env.PUBLIC_URL}/images/home/vector-green-2.svg')`}
@@ -61,7 +64,7 @@ const VisionMissionSection = () => {
               </Box>
               <Flex minH="12em">
                 <VStack
-                  borderRadius="10"
+                  borderRadius="10px"
                   w="49%"
                   border="1px solid"
                   borderColor="#97D0D4"
@@ -160,7 +163,7 @@ const VisionMissionSection = () => {
                 </VStack>
                 <Spacer />
                 <VStack
-                  borderRadius="10"
+                  borderRadius="10px"
                   border="1px solid"
                   borderColor="#97D0D4"
                   p="10"
@@ -263,7 +266,7 @@ const VisionMissionSection = () => {
                     flexDir="column"
                     justifyContent="space-between"
                   >
-                    <VStack spacing="3">
+                    <VStack gap="3">
                       <Box textAlign="left">
                         <Text
                           color="#0C0C20"
@@ -292,6 +295,7 @@ const VisionMissionSection = () => {
                         paddingLeft="10em"
                       >
                         <Button
+                          color="black"
                           bgColor={'#DBF1F1'}
                           _hover={{ color: 'white', bgColor: 'black' }}
                           borderRadius="5rem"
@@ -300,7 +304,7 @@ const VisionMissionSection = () => {
                           py="1.75em"
                           px="1.25em"
                         >
-                          <ArrowForwardIcon boxSize={6} />
+                          <Icon boxSize={6} asChild><LuArrowRight /></Icon>
                         </Button>
                       </Link>
                     </Flex>
@@ -313,7 +317,7 @@ const VisionMissionSection = () => {
                   border="1px solid"
                   borderColor="#97D0D4"
                   p="2em"
-                  spacing="1.5em"
+                  gap="1.5em"
                 >
                   <Flex h="full" justifyContent="space-between">
                     <Box w="65%">
@@ -336,7 +340,7 @@ const VisionMissionSection = () => {
                         borderRadius="2.75rem"
                         _hover={{ bg: '#4A6EEB', color: 'white' }}
                         textColor="#4A6EEB"
-                        bgColor="transparent"
+                        variant="ghost"
                         px="2.4em"
                         py="1.6em"
                       >
@@ -354,7 +358,7 @@ const VisionMissionSection = () => {
                           >
                             Learn More
                           </Text>
-                          <ArrowForwardIcon boxSize={6} my="auto" />
+                          <Icon boxSize={6} my="auto" asChild><LuArrowRight /></Icon>
                         </Flex>
                       </Button>
                     </Link>
@@ -363,7 +367,7 @@ const VisionMissionSection = () => {
                     bgColor="white"
                     borderRadius="0.5rem"
                     p="1.25em"
-                    spacing="0.75em"
+                    gap="0.75em"
                   >
                     <Box textAlign="left" w="100%">
                       <Text
@@ -401,7 +405,7 @@ const VisionMissionSection = () => {
               bg
             </VStack>
           </Container>
-        </Fade>
+        </Box>
       )}
     </InView>
   );

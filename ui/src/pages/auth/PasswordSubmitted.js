@@ -1,6 +1,6 @@
 import React from "react";
-import { ChevronLeftIcon } from "@chakra-ui/icons";
-import { Box, VStack, Flex, Image, Text, Stack, Link } from "@chakra-ui/react";
+import { Box, VStack, Flex, Image, Text, Stack, Link, Icon } from "@chakra-ui/react";
+import { LuChevronLeft } from 'react-icons/lu';
 
 const PasswordSubmitted = (props) => {
   return (
@@ -12,13 +12,13 @@ const PasswordSubmitted = (props) => {
               to={{ pathname: "https://hk.hmccglobal.org" }}
               target="_blank"
             >
-              <ChevronLeftIcon boxSize={10} />
+              <Icon boxSize={10} asChild><LuChevronLeft /></Icon>
               Return to hk.hmccglobal.org
             </Link>
           </Box>
         </Flex>
         <Flex justifyContent="center">
-          <VStack justify="center" align="center" spacing={["3vh"]} py="5vh">
+          <VStack justify="center" align="center" gap={["3vh"]} py="5vh">
             <Image
               marginBottom="15px"
               h={{ base: "6vh", sm: "8vh", md: "10vh", lg: "12vh", xl: "15vh" }}

@@ -1,13 +1,4 @@
-import {
-  Button,
-  Container,
-  Flex,
-  Heading,
-  Image,
-  Stack,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Button, Container, Flex, Heading, Image, Stack, Text, VStack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 export const saturateText = {
@@ -24,7 +15,7 @@ const SaturateVisionSection = () => {
         process.env.PUBLIC_URL + '/images/home/saturate-bg.png'
       })`}
       bgSize="cover"
-      bgPosition="center"
+      backgroundPosition="center"
     >
       <Container
         maxW="container.lg"
@@ -37,13 +28,13 @@ const SaturateVisionSection = () => {
           direction={['column', 'row']}
           justify="center"
           alignItems={['left', 'center']}
-          spacing={[6, null]}
+          gap={[6, null]}
           mx={[6, 0]}
         >
           <VStack
             w={['100%', '55%']}
             align={['center', 'baseline']}
-            spacing={[6, 8]}
+            gap={[6, 8]}
           >
             <Image
               src={process.env.PUBLIC_URL + '/images/home/saturate-logo.png'}
@@ -53,7 +44,7 @@ const SaturateVisionSection = () => {
           <VStack
             w={['100%', '55%']}
             align={['center', 'baseline']}
-            spacing={[6, 8]}
+            gap={[6, 8]}
           >
             <Heading
               as="h1"

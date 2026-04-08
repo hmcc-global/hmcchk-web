@@ -33,7 +33,7 @@ const PlanAVisit = () => {
         >
           <VStack
             maxWidth={{ base: '95%', lg: '75%' }}
-            spacing={{ base: '1rem', lg: '1.5rem' }}
+            gap={{ base: '1rem', lg: '1.5rem' }}
           >
             <Text
               color="#0C0C20"
@@ -64,7 +64,7 @@ const PlanAVisit = () => {
             </Text>
           </VStack>
 
-          <SimpleGrid columns={[2, null, 4]} spacing={2} w={'100%'}>
+          <SimpleGrid columns={[2, null, 4]} gap={2} w={'100%'}>
             <Image
               src={process.env.PUBLIC_URL + '/images/discover/planavisit1.png'}
               alt="Event 1"
@@ -99,18 +99,12 @@ const PlanAVisit = () => {
                 fontFamily="Manrope"
                 fontSize={['1rem', '1rem', '1.25rem']}
               >
-                <VStack align={['center', 'flex-start']} spacing={[2, 3]}>
+                <VStack align={['center', 'flex-start']} gap={[2, 3]}>
                   <Flex
                     direction={['column', 'row']}
                     align={['center', 'flex-start']}
                   >
-                    <Icon
-                      as={MdAccessTime}
-                      boxSize={6}
-                      color="#EDB115"
-                      mr={[0, 6]}
-                      mt={[0, 0.5]}
-                    />
+                    <Icon boxSize={6} color="#EDB115" mr={[0, 6]} mt={[0, 0.5]} asChild><MdAccessTime /></Icon>
                     <Text
                       fontWeight="700"
                       color="#969696"
@@ -133,13 +127,7 @@ const PlanAVisit = () => {
                     direction={['column', 'row']}
                     align={['center', 'flex-start']}
                   >
-                    <Icon
-                      as={MdLocationOn}
-                      boxSize={6}
-                      color="#EDB115"
-                      mr={[0, 6]}
-                      mt={[0, 0.5]}
-                    />
+                    <Icon boxSize={6} color="#EDB115" mr={[0, 6]} mt={[0, 0.5]} asChild><MdLocationOn /></Icon>
                     <Text
                       fontWeight="700"
                       color="#969696"
@@ -157,7 +145,7 @@ const PlanAVisit = () => {
                   >
                     TRANSFORMATION CENTER <br />
                   </Text>
-                  <VStack spacing={0.8} alignItems={['center', 'flex-start']}>
+                  <VStack gap={0.8} alignItems={['center', 'flex-start']}>
                     <Text
                       align={['center', 'left']}
                       fontWeight="700"
@@ -189,12 +177,8 @@ const PlanAVisit = () => {
                     fontSize={['0.875rem', '1rem', '1rem']}
                     borderRadius="0.938rem"
                     _hover={{ bgColor: '#BE8E11', textDecoration: 'none' }}
-                    href="https://bit.ly/TCenterDirections"
-                    target="_blank"
-                    as={Link}
-                  >
-                    DIRECTIONS
-                  </Button>
+                    asChild><Link href="https://bit.ly/TCenterDirections" target="_blank">DIRECTIONS
+                                      </Link></Button>
                 </Box>
               </Box>
 
@@ -249,12 +233,8 @@ const PlanAVisit = () => {
                       fontSize={['0.875rem', '1rem', '1rem']}
                       borderRadius="0.938rem"
                       _hover={{ bgColor: '#BE8E11', textDecoration: 'none' }}
-                      href="https://hk.hmccglobal.org/online/"
-                      target="_blank"
-                      as={Link}
-                    >
-                      JOIN ONLINE
-                    </Button>
+                      asChild><Link href="https://hk.hmccglobal.org/online/" target="_blank">JOIN ONLINE
+                                          </Link></Button>
                   </Box>
                 </Flex>
               </Box>

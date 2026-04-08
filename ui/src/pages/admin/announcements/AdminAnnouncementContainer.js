@@ -6,30 +6,21 @@ import {
   Text,
   Box,
   Container,
-  useToast,
   Stack,
   List,
-  ListItem,
   Flex,
   Spacer,
   Badge,
   Image,
   Grid,
+  Icon,
 } from '@chakra-ui/react';
-import {
-  CalendarIcon,
-  TimeIcon,
-  InfoOutlineIcon,
-  ChatIcon,
-  ViewIcon,
-  EditIcon,
-  StarIcon,
-} from '@chakra-ui/icons';
+import { toaster } from '../../../components/ui/toaster';
 import AnnouncementEditorModal from './AnnouncementEditorModal';
 import { DateTime } from 'luxon';
+import { LuCalendar, LuClock, LuEye, LuInfo, LuMessageCircle, LuPencil, LuStar } from 'react-icons/lu';
 
 export default function AdminAnnouncementContainer(props) {
-  const toast = useToast();
   const { user } = props;
   const today = new DateTime.now();
 
@@ -78,7 +69,7 @@ export default function AdminAnnouncementContainer(props) {
       }
     } catch (err) {
       console.log(err);
-      toast({
+      toaster.create({
         description:
           'There was an issue with the request, please talk to a t3ch support',
         status: 'error',
@@ -114,7 +105,7 @@ export default function AdminAnnouncementContainer(props) {
       });
 
       if (status !== 200) {
-        toast({
+        toaster.create({
           description:
             'There was an issue with the request, please talk to a t3ch support',
           status: 'warning',
@@ -128,7 +119,7 @@ export default function AdminAnnouncementContainer(props) {
       setIsLoading(false);
     } catch (err) {
       console.log(err);
-      toast({
+      toaster.create({
         description:
           'There was an issue with the request, please talk to a t3ch support',
         status: 'warning',
@@ -147,7 +138,7 @@ export default function AdminAnnouncementContainer(props) {
       });
 
       if (status !== 200) {
-        toast({
+        toaster.create({
           description:
             'There was an issue with the request, please talk to a t3ch support',
           status: 'warning',
@@ -161,7 +152,7 @@ export default function AdminAnnouncementContainer(props) {
       setIsLoading(false);
     } catch (err) {
       console.log(err);
-      toast({
+      toaster.create({
         description:
           'There was an issue with the request, please talk to a t3ch support',
         status: 'warning',
@@ -181,7 +172,7 @@ export default function AdminAnnouncementContainer(props) {
           isDeleted: true,
         });
         if (status === 200) {
-          toast({
+          toaster.create({
             description: 'Announcement has been deleted',
             status: 'success',
             duration: 8000,
@@ -194,7 +185,7 @@ export default function AdminAnnouncementContainer(props) {
       setIsLoading(false);
     } catch (err) {
       console.log(err);
-      toast({
+      toaster.create({
         description:
           'There was an issue with the request, please talk to a t3ch support',
         status: 'warning',
@@ -219,14 +210,14 @@ export default function AdminAnnouncementContainer(props) {
       });
 
       if (status === 200) {
-        toast({
+        toaster.create({
           description: 'Announcement has been updated',
           status: 'success',
           duration: 8000,
           isClosable: true,
         });
       } else {
-        toast({
+        toaster.create({
           description: 'There was an issue with the request',
           status: 'error',
           duration: 8000,
@@ -238,7 +229,7 @@ export default function AdminAnnouncementContainer(props) {
       setIsLoading(false);
     } catch (err) {
       console.log(err);
-      toast({
+      toaster.create({
         description:
           'There was an issue with the request, please talk to a t3ch support',
         status: 'warning',
@@ -295,14 +286,14 @@ export default function AdminAnnouncementContainer(props) {
       </Heading>
       <Stack direction="row">
         <Button
-          colorScheme="blue"
+          colorPalette="blue"
           size="lg"
           onClick={onCreate}
           disabled={isCreateDisabled()}
         >
           Add New
         </Button>
-        <Button colorScheme="blue" size="lg" onClick={toggleAnnouncementsView}>
+        <Button colorPalette="blue" size="lg" onClick={toggleAnnouncementsView}>
           {isCurrentAnnouncements
             ? 'Past Announcements'
             : 'Current Announcements'}
@@ -313,32 +304,29 @@ export default function AdminAnnouncementContainer(props) {
           ? 'Current Announcements'
           : 'Past Announcements'}
       </Heading>
-      <List spacing="2" pt={3}>
+      <List.Root gap="2" pt={3}>
         {/* List announcements */}
         {announcementList.map((announcementItem) => (
-          <ListItem key={announcementItem.id}>
+          <List.Item key={announcementItem.id}>
             <Box p="3" borderRadius="lg" borderWidth="1px">
               {announcementItem.featured && (
                 <Flex color="green" justifyContent="flex-end">
-                  <StarIcon my="auto" />
+                  <Icon my="auto" asChild><LuStar /></Icon>
                   <Text px="0.5em">Featured</Text>
                 </Flex>
               )}
-              <Flex direction={['column', 'row']} spacing={1}>
+              <Flex direction={['column', 'row']} gap={1}>
                 <Box maxW="12rem" pr={5}>
-                  <Image
-                    src={announcementItem.imageAdUrl}
-                    fallbackSrc="https://hongkong.sub.hmccglobal.org/wp-content/uploads/Screenshot-2020-09-04-at-6.39.50-PM.png"
-                  />
+                  <Image src={announcementItem.imageAdUrl} />
                 </Box>
-                <Stack direction="column" spacing={1}>
+                <Stack direction="column" gap={1}>
                   <Heading size="md">{announcementItem.title}</Heading>
                   <Grid
                     templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)']}
                     gap={1}
                   >
                     <Text>
-                      <CalendarIcon /> Date:{' '}
+                      <LuCalendar /> Date:{' '}
                       {showProperDate(
                         announcementItem.eventStartDate,
                         announcementItem.eventEndDate,
@@ -346,31 +334,31 @@ export default function AdminAnnouncementContainer(props) {
                       )}
                     </Text>
                     <Text>
-                      <TimeIcon /> Time:{' '}
+                      <LuClock /> Time:{' '}
                       {showProperTime(
                         announcementItem.eventStartTime,
                         announcementItem.eventEndTime
                       )}
                     </Text>
                     <Text>
-                      <InfoOutlineIcon /> Location:{' '}
+                      <LuInfo /> Location:{' '}
                       {announcementItem.location || '-'}
                     </Text>
                     <Text>
-                      <ChatIcon /> Submitter: {announcementItem.submittedBy}
+                      <LuMessageCircle /> Submitter: {announcementItem.submittedBy}
                     </Text>
                     <Text>
-                      <ViewIcon /> Announce in:{' '}
+                      <LuEye /> Announce in:{' '}
                       {announcementItem.isInWeb && (
-                        <Badge colorScheme="teal">Web</Badge>
+                        <Badge colorPalette="teal">Web</Badge>
                       )}{' '}
                       &nbsp;
                       {announcementItem.isInPpt && (
-                        <Badge colorScheme="orange">PPT</Badge>
+                        <Badge colorPalette="orange">PPT</Badge>
                       )}
                     </Text>
                     <Text>
-                      <EditIcon /> Last updated by:{' '}
+                      <LuPencil /> Last updated by:{' '}
                       {announcementItem.lastUpdatedBy || '-'}
                     </Text>
                   </Grid>
@@ -379,7 +367,7 @@ export default function AdminAnnouncementContainer(props) {
                 {/* Buttons to publish, edit, duplicate, delete */}
                 <Stack
                   pt={[3, 0]}
-                  spacing={1}
+                  gap={1}
                   direction={{ base: 'column', lg: 'row' }}
                   alignItems="center"
                 >
@@ -393,7 +381,7 @@ export default function AdminAnnouncementContainer(props) {
                       color="white"
                       value={announcementItem.id}
                       onClick={onPublish}
-                      isLoading={isLoading}
+                      loading={isLoading}
                       disabled={isPublishDisabled()}
                       width={{ base: '100%', lg: 'auto' }}
                     >
@@ -401,19 +389,19 @@ export default function AdminAnnouncementContainer(props) {
                     </Button>
                   )}
                   <Button
-                    colorScheme="blue"
+                    colorPalette="blue"
                     value={announcementItem.id}
                     onClick={onEdit}
-                    isLoading={isLoading}
+                    loading={isLoading}
                     width={{ base: '100%', lg: 'auto' }}
                   >
                     Edit
                   </Button>
                   <Button
-                    colorScheme="blue"
+                    colorPalette="blue"
                     value={announcementItem.id}
                     onClick={onDuplicate}
-                    isLoading={isLoading}
+                    loading={isLoading}
                     disabled={isCreateDisabled()}
                     actionOnEditor="duplicate"
                     width={{ base: '100%', lg: 'auto' }}
@@ -421,11 +409,11 @@ export default function AdminAnnouncementContainer(props) {
                     Duplicate
                   </Button>
                   <Button
-                    colorScheme="red"
+                    colorPalette="red"
                     value={announcementItem.id}
                     onClick={onDelete}
                     disabled={isPublishDisabled()}
-                    isLoading={isLoading}
+                    loading={isLoading}
                     width={{ base: '100%', lg: 'auto' }}
                   >
                     Delete
@@ -433,9 +421,9 @@ export default function AdminAnnouncementContainer(props) {
                 </Stack>
               </Flex>
             </Box>
-          </ListItem>
+          </List.Item>
         ))}
-      </List>
+      </List.Root>
       {/* announcement editor*/}
       <AnnouncementEditorModal
         user={user}

@@ -21,13 +21,13 @@ const OurMinistries = (props) => {
       >
         Explore ways to get involved at our church whether through community or serving.
       </Text>
-      <SimpleGrid columns={[1, 3]} spacing={4} fontFamily="Manrope">
+      <SimpleGrid columns={[1, 3]} gap={4} fontFamily="Manrope">
         <Box
           h={[141, 340]}
           p={2}
-          borderRadius="20"
+          borderRadius="20px"
           bgImage={`linear-gradient(180deg, rgba(118, 228, 247, 0.7) 0%, rgba(44, 82, 130, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/undergrad.jpg')`}
-          bgPosition="center"
+          backgroundPosition="center"
           bgSize="cover"
           shadow="lg"
           color="white"
@@ -50,9 +50,9 @@ const OurMinistries = (props) => {
         <Box
           h={[141, 340]}
           p={[3]}
-          borderRadius="20"
+          borderRadius="20px"
           bgImage={`linear-gradient(180deg, rgba(198, 246, 213, 0.7) 0%, rgba(11, 128, 73, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/city.jpg')`}
-          bgPosition="center"
+          backgroundPosition="center"
           bgSize="cover"
           shadow="lg"
           color="white"
@@ -77,9 +77,9 @@ const OurMinistries = (props) => {
           h={[141, 340]}
           p={3}
           borderWidth="1px"
-          borderRadius="20"
+          borderRadius="20px"
           bgImage={`linear-gradient(180deg, rgba(252, 129, 129, 0.7) 0%, rgba(151, 38, 109, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/married.jpg')`}
-          bgPosition="center"
+          backgroundPosition="center"
           bgSize="cover"
           shadow="lg"
           color="white"
@@ -104,15 +104,15 @@ const OurMinistries = (props) => {
         ml={[0, 20, 40]}
         mr={[0, 20, 40]}
         mt={4}
-        spacing={4}
+        gap={4}
       >
         <Box
           h={[141, 340]}
           p={[4, 6, 8, 10]}
           borderWidth="1px"
-          borderRadius="20"
+          borderRadius="20px"
           bgImage={`linear-gradient(180deg, rgba(191, 201, 254, 0.7) 0%, rgba(115, 37, 176, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/youth.jpg')`}
-          bgPosition="center"
+          backgroundPosition="center"
           bgSize="cover"
           shadow="lg"
           color="white"
@@ -136,9 +136,9 @@ const OurMinistries = (props) => {
           h={[141, 340]}
           p={[0, 2, 4, 8]}
           borderWidth="1px"
-          borderRadius="20"
+          borderRadius="20px"
           bgImage={`linear-gradient(180deg, rgba(233, 223, 132, 0.7) 0%, rgba(170, 102, 0, 0.7) 100%), url('${process.env.PUBLIC_URL}/images/connect/kid.jpg')`}
-          bgPosition="center"
+          backgroundPosition="center"
           bgSize="cover"
           shadow="lg"
           color="white"
@@ -154,9 +154,9 @@ const OurMinistries = (props) => {
           </Heading>
           <Text fontWeight={400} fontSize={['xs', 'sm', 'md']} mt={[4, 6]}>
             Building Blocks is HMCC’s Children Ministry, learn more about it{' '}
-            <Text as="u">
-              <Link href="/building-blocks">here ➔</Link>
-            </Text>
+            <Text asChild><u>
+                <Link href="/building-blocks">here ➔</Link>
+              </u></Text>
           </Text>
         </Box>
       </SimpleGrid>

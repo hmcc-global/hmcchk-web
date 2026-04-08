@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
 import { GoogleLogin } from '@react-oauth/google';
-import { ArrowBackIcon } from '@chakra-ui/icons';
-import { Box, VStack, Flex, Image, Text, Button, Link } from '@chakra-ui/react';
+import { Box, VStack, Flex, Image, Text, Button, Link, Icon } from '@chakra-ui/react';
+import { LuArrowLeft } from 'react-icons/lu';
 
 const SignupContainer = (props) => {
-  const [invalidLogin, setInvalidLogin] = useState('');
+  const [, setInvalidLogin] = useState('');
   const { history } = props;
 
   const onGoogleSuccessSignup = async ({ credential }) => {
@@ -65,7 +65,7 @@ const SignupContainer = (props) => {
         >
           <Box width="100%" alignSelf="flex-start" mb="5" color="#FFF">
             <Link href="../" justify="center" fontSize="inherit">
-              <ArrowBackIcon boxSize={7} mr="2" />
+              <Icon boxSize={7} mr="2" asChild><LuArrowLeft /></Icon>
               Back
             </Link>
           </Box>

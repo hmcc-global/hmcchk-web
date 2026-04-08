@@ -7,9 +7,9 @@ const PictureStory = ({ image, text }) => {
         w="100%"
         h="13em"
         borderWidth="1px"
-        borderRadius="20"
+        borderRadius="20px"
         bgImage={image}
-        bgPosition="center"
+        backgroundPosition="center"
         bgSize="cover"
         minWidth="unset"
         mb={3}

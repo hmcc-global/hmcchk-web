@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import remixiconUrl from 'remixicon/fonts/remixicon.symbol.svg';
-import { Box, Button } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
 const StyledButton = styled(Box)({
   backgroundColor: 'transparent',

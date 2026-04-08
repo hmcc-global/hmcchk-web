@@ -17,9 +17,9 @@ const ExperienceHmcc = (props) => {
         <Box
           flex={1}
           borderWidth="1px"
-          borderRadius="20"
+          borderRadius="20px"
           bgImage={`linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${process.env.PUBLIC_URL}/images/connect/sunday-celebration.JPG')`}
-          bgPosition="center"
+          backgroundPosition="center"
           bgSize="cover"
           shadow="lg"
           color="white"
@@ -49,9 +49,7 @@ const ExperienceHmcc = (props) => {
             Worship In-person and Online
           </Text>
           <Button
-            as={Link}
             size="md"
-            href="/discover"
             variant="outline"
             w={[200, 240]}
             borderRadius={10}
@@ -64,16 +62,15 @@ const ExperienceHmcc = (props) => {
               textDecoration: 'none',
             }}
             id="connect-visit"
-          >
-            Learn more
-          </Button>
+            asChild><Link href="/discover">Learn more
+                      </Link></Button>
         </Box>
         <Box
           flex={1}
           borderWidth="1px"
-          borderRadius="20"
+          borderRadius="20px"
           bgImage={`linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${process.env.PUBLIC_URL}/images/connect/upcoming-events.jpg')`}
-          bgPosition="center"
+          backgroundPosition="center"
           bgSize="cover"
           shadow="lg"
           color="white"
@@ -103,9 +100,7 @@ const ExperienceHmcc = (props) => {
             and get connected!
           </Text>
           <Button
-            as={Link}
             size="md"
-            href="/events"
             variant="outline"
             w={[200, 240]}
             borderRadius={10}
@@ -118,9 +113,8 @@ const ExperienceHmcc = (props) => {
               textDecoration: 'none',
             }}
             id="connect-events"
-          >
-            Check them out
-          </Button>
+            asChild><Link href="/events">Check them out
+                      </Link></Button>
         </Box>
       </Flex>
     </Box>

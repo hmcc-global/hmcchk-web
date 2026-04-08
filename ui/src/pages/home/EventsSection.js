@@ -9,10 +9,9 @@ import {
   Button,
   LinkOverlay,
   Image,
-  Fade,
   IconButton,
+  Icon,
 } from '@chakra-ui/react';
-import { ChevronRightIcon, ChevronLeftIcon } from '@chakra-ui/icons';
 import { InView } from 'react-intersection-observer';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -22,6 +21,7 @@ import { DateTime } from 'luxon';
 import { useEffect, useRef, useState, React } from 'react';
 import { getRenderDate } from '../helpers/eventsHelpers';
 import EventsSectionCard from './EventsSectionCards';
+import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 
 const EventsSection = () => {
   const [events, setEvents] = useState([]);
@@ -140,8 +140,12 @@ const EventsSection = () => {
   return (
     <InView rootMargin="-50px" triggerOnce={true}>
       {({ inView, ref }) => (
-        <Fade transition={{ enter: { duration: 1 } }} in={inView}>
-          <Container maxW="container.xl" pr="0" ref={ref}>
+        <Box
+          ref={ref}
+          opacity={inView ? 1 : 0}
+          transition="opacity 1s ease-in-out"
+        >
+          <Container maxW="container.xl" pr="0">
             <Flex
               h="auto"
               direction={{ base: 'column', md: 'row' }}
@@ -159,14 +163,14 @@ const EventsSection = () => {
                   fontFamily="Manrope"
                   alignItems="flex-start"
                   color="black"
-                  spacing={[3, 3, 10]}
+                  gap={[3, 3, 10]}
                 >
                   <Box position="relative">
                     <Box
                       w={{ base: '105%', md: '100%' }}
                       position="absolute"
                       h={{ base: '115%', md: '110%' }}
-                      bgPos={{ base: '100% 100%', md: '0% 100%' }}
+                      backgroundPosition={{ base: '100% 100%', md: '0% 100%' }}
                       bgSize={{ base: '40%', md: '56%' }}
                       bgRepeat="no-repeat"
                       bgImage={`url('${process.env.PUBLIC_URL}/images/home/vector-yellow-1.svg')`}
@@ -175,6 +179,7 @@ const EventsSection = () => {
                       fontFamily="DMSerifDisplay_Italic"
                       fontSize={['2rem', '2rem', '3rem', '3.75rem']}
                       fontWeight={400}
+                      lineHeight="1.2"
                     >
                       Upcoming Events
                     </Heading>
@@ -201,7 +206,7 @@ const EventsSection = () => {
                     display={{ base: 'none', md: 'block' }}
                   >
                     <Button
-                      color="#black"
+                      color="black"
                       bgColor="#EBBB41"
                       borderRadius="20em"
                       border="1px solid #F6FAFF"
@@ -280,26 +285,22 @@ const EventsSection = () => {
                         ? slider?.current?.slickPrev()
                         : '';
                     }}
-                    isRound={true}
+                    borderRadius="full"
                     bgColor={
                       (slideIndex != 0 ? '#EBBB41' : 'gray') + ' !important'
                     }
-                    mr={10}
-                    icon={<ChevronLeftIcon boxSize={7} color="white" />}
-                  />
+                    mr={10}><Icon boxSize={7} color="white" asChild><LuChevronLeft /></Icon></IconButton>
                   <IconButton
                     onClick={() => {
                       return slideIndex < events.length - 2
                         ? slider?.current?.slickNext()
                         : '';
                     }}
-                    isRound={true}
+                    borderRadius="full"
                     bgColor={
                       (slideIndex < events.length - 2 ? '#EBBB41' : 'gray') +
                       ' !important'
-                    }
-                    icon={<ChevronRightIcon boxSize={7} color="white" />}
-                  />
+                    }><Icon boxSize={7} color="white" asChild><LuChevronRight /></Icon></IconButton>
                 </Flex>
               </Flex>
 
@@ -338,7 +339,7 @@ const EventsSection = () => {
               </Button>
             </Flex>
           </Container>
-        </Fade>
+        </Box>
       )}
     </InView>
   );

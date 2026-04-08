@@ -4,21 +4,17 @@ import {
   Heading,
   Stack,
   Box,
-  FormControl,
-  FormLabel,
   Input,
   Textarea,
   Button,
-  FormErrorMessage,
-  useToast,
-  FormHelperText,
+  Field,
 } from '@chakra-ui/react';
+import { toaster } from '../../../components/ui/toaster';
 import { customAxios as axios } from '../../helpers/customAxios';
 import PreviewOnlineSermonContainer from './PreviewOnlineSermonContainer';
 import { DateTime } from 'luxon';
 
 export default function AdminLiveSermonContainer(props) {
-  const toast = useToast();
   const { user, history } = props;
 
   const [isLoading, setIsLoading] = useState(true);
@@ -80,7 +76,7 @@ export default function AdminLiveSermonContainer(props) {
         return true;
       }
     } catch (err) {
-      toast({
+      toaster.create({
         description: err,
         status: 'error',
         duration: 5000,
@@ -108,7 +104,7 @@ export default function AdminLiveSermonContainer(props) {
       });
       if (res.status === 200) return true;
     } catch (err) {
-      toast({
+      toaster.create({
         description: err,
         status: 'error',
         duration: 5000,
@@ -122,7 +118,7 @@ export default function AdminLiveSermonContainer(props) {
     event.preventDefault();
 
     if (sanityCheckFailed) {
-      toast({
+      toaster.create({
         description: 'Some fields are not valid, please check again.',
         status: 'error',
         duration: 5000,
@@ -139,7 +135,7 @@ export default function AdminLiveSermonContainer(props) {
     }
 
     if (success) {
-      toast({
+      toaster.create({
         description: 'Saved',
         status: 'success',
         duration: 5000,
@@ -193,7 +189,7 @@ export default function AdminLiveSermonContainer(props) {
         setIsPreviewing(true);
       }
     } catch (err) {
-      toast({
+      toaster.create({
         description: err,
         status: 'error',
         duration: 5000,
@@ -202,7 +198,7 @@ export default function AdminLiveSermonContainer(props) {
     } finally {
       setIsLoading(false);
     }
-  }, [toast]);
+  }, []);
 
   useEffect(() => {
     getData();
@@ -231,120 +227,120 @@ export default function AdminLiveSermonContainer(props) {
           <Stack direction={['column', 'row']} w="100%">
             <Box w={['100%', '40%']}>
               <form onSubmit={onSubmit}>
-                <FormControl isRequired isInvalid={title === ''}>
-                  <FormLabel>Title</FormLabel>
+                <Field.Root required invalid={title === ''}>
+                  <Field.Label>Title</Field.Label>
                   <Input
                     type="text"
                     value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    onValueChange={(e) => setTitle(e.target.value)}
                   />
-                  <FormErrorMessage>Sermon Title is required</FormErrorMessage>
-                </FormControl>
-                <FormControl isRequired isInvalid={sermonDescription === ''}>
-                  <FormLabel>Description</FormLabel>
+                  <Field.ErrorText>Sermon Title is required</Field.ErrorText>
+                </Field.Root>
+                <Field.Root required invalid={sermonDescription === ''}>
+                  <Field.Label>Description</Field.Label>
                   <Textarea
                     value={sermonDescription}
-                    onChange={(e) => setSermonDescription(e.target.value)}
+                    onValueChange={(e) => setSermonDescription(e.target.value)}
                   />
-                  <FormErrorMessage>Description is required</FormErrorMessage>
-                </FormControl>
-                <FormControl isRequired isInvalid={streamLink === ''}>
-                  <FormLabel>Stream Link</FormLabel>
+                  <Field.ErrorText>Description is required</Field.ErrorText>
+                </Field.Root>
+                <Field.Root required invalid={streamLink === ''}>
+                  <Field.Label>Stream Link</Field.Label>
                   <Input
                     type="url"
                     value={streamLink}
-                    onChange={(e) => setStreamLink(e.target.value)}
+                    onValueChange={(e) => setStreamLink(e.target.value)}
                   />
-                  <FormErrorMessage>
+                  <Field.ErrorText>
                     Stream Link is required/invalid
-                  </FormErrorMessage>
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Sermon Notes</FormLabel>
+                  </Field.ErrorText>
+                </Field.Root>
+                <Field.Root>
+                  <Field.Label>Sermon Notes</Field.Label>
                   <Input
                     type="text"
                     value={sermonNotes}
-                    onChange={(e) => setSermonNotes(e.target.value)}
+                    onValueChange={(e) => setSermonNotes(e.target.value)}
                   />
-                  <FormHelperText>
+                  <Field.HelperText>
                     /online only works properly if there is only 1 sermon per
                     day. Please input the sermon link if there are more than 1
                     sermon in 1 day.
-                  </FormHelperText>
-                </FormControl>
-                <FormControl isRequired isInvalid={speaker === ''}>
-                  <FormLabel>Speaker</FormLabel>
+                  </Field.HelperText>
+                </Field.Root>
+                <Field.Root required invalid={speaker === ''}>
+                  <Field.Label>Speaker</Field.Label>
                   <Input
                     type="text"
                     value={speaker}
                     placeholder="e.g. Pastor Bo Zhu, Pastor Seth S. Kim"
-                    onChange={(e) => setSpeaker(e.target.value)}
+                    onValueChange={(e) => setSpeaker(e.target.value)}
                   />
-                </FormControl>
-                <FormControl isRequired isInvalid={sermonSeries === ''}>
-                  <FormLabel>Series</FormLabel>
+                </Field.Root>
+                <Field.Root required invalid={sermonSeries === ''}>
+                  <Field.Label>Series</Field.Label>
                   <Input
                     type="text"
                     value={sermonSeries}
-                    onChange={(e) => setSermonSeries(e.target.value)}
+                    onValueChange={(e) => setSermonSeries(e.target.value)}
                   />
-                </FormControl>
-                <FormControl isRequired isInvalid={sermonSeriesUrl === ''}>
-                  <FormLabel>Series Image</FormLabel>
+                </Field.Root>
+                <Field.Root required invalid={sermonSeriesUrl === ''}>
+                  <Field.Label>Series Image</Field.Label>
                   <Input
                     type="url"
                     value={sermonSeriesUrl}
-                    onChange={(e) => setSermonSeriesUrl(e.target.value)}
+                    onValueChange={(e) => setSermonSeriesUrl(e.target.value)}
                   />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Sermon Passage</FormLabel>
+                </Field.Root>
+                <Field.Root>
+                  <Field.Label>Sermon Passage</Field.Label>
                   <Input
                     type="text"
                     value={sermonPassage}
-                    onChange={(e) => setSermonPassage(e.target.value)}
+                    onValueChange={(e) => setSermonPassage(e.target.value)}
                   />
-                </FormControl>
-                <FormControl isRequired isInvalid={sermonDateTime === ''}>
-                  <FormLabel>Date &#38; Time</FormLabel>
+                </Field.Root>
+                <Field.Root required invalid={sermonDateTime === ''}>
+                  <Field.Label>Date &#38; Time</Field.Label>
                   <Input
                     type="datetime-local"
                     value={sermonDateTime}
-                    onChange={(e) => setSermonDateTime(e.target.value)}
+                    onValueChange={(e) => setSermonDateTime(e.target.value)}
                   />
-                </FormControl>
-                <FormControl isInvalid={streamPeriodInvalid} isRequired>
-                  <FormLabel> Stream Period </FormLabel>
-                  <FormErrorMessage>
+                </Field.Root>
+                <Field.Root invalid={streamPeriodInvalid} required>
+                  <Field.Label> Stream Period </Field.Label>
+                  <Field.ErrorText>
                     {streamPeriodInvalid &&
                       'Stream Period is invalid, please check again'}
-                  </FormErrorMessage>
+                  </Field.ErrorText>
                   Starting Time
                   <Input
                     type="datetime-local"
                     value={streamStartTime}
-                    onChange={(e) => setStreamStartTime(e.target.value)}
+                    onValueChange={(e) => setStreamStartTime(e.target.value)}
                   />
                   Ending Time
                   <Input
                     type="datetime-local"
                     value={streamEndTime}
-                    onChange={(e) => setStreamEndTime(e.target.value)}
+                    onValueChange={(e) => setStreamEndTime(e.target.value)}
                   />
-                </FormControl>
-                <FormControl mt={5}>
+                </Field.Root>
+                <Field.Root mt={5}>
                   <Button
-                    colorScheme="green"
+                    colorPalette="green"
                     type="submit"
                     w="full"
-                    isLoading={isSaving}
-                    isDisabled={sanityCheckFailed}
+                    loading={isSaving}
+                    disabled={sanityCheckFailed}
                   >
                     {id && id !== '' ? 'UPDATE' : 'CREATE'}
                   </Button>
-                </FormControl>
+                </Field.Root>
                 <Button
-                  colorScheme="red"
+                  colorPalette="red"
                   w="full"
                   mt={5}
                   onClick={resetHandler}
@@ -355,7 +351,7 @@ export default function AdminLiveSermonContainer(props) {
                   CLEAR
                 </Button>
                 <Button
-                  colorScheme="blue"
+                  colorPalette="blue"
                   w="full"
                   mt={5}
                   onClick={previewHandler}

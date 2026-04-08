@@ -5,7 +5,6 @@ import {
   VStack,
   Text,
   Image,
-  Fade,
   Container,
   HStack,
   IconButton,
@@ -26,8 +25,12 @@ const ChurchThemeSection = () => {
   return (
     <InView rootMargin="-50px" triggerOnce={true}>
       {({ inView, ref }) => (
-        <Fade transition={{ enter: { duration: 1 } }} in={inView}>
-          <Container maxW="container.xl" py={10} ref={ref}>
+        <Box
+          ref={ref}
+          opacity={inView ? 1 : 0}
+          transition="opacity 1s ease-in-out"
+        >
+          <Container maxW="container.xl" py={10}>
             <VStack>
               <Box w="100%" alignItems="flex-start" paddingBottom={'1em'}>
                 <Box w="100%" position="relative">
@@ -35,7 +38,7 @@ const ChurchThemeSection = () => {
                     w="100%"
                     position="absolute"
                     h="120%"
-                    bgPos={{ md: '85% 100%', xl: '67% 100%' }}
+                    backgroundPosition={{ md: '85% 100%', xl: '67% 100%' }}
                     bgSize="13%"
                     bgRepeat="no-repeat"
                     bgImage={`url('${process.env.PUBLIC_URL}/images/home/church-theme-overflow-vector-underline.svg')`}
@@ -95,7 +98,7 @@ const ChurchThemeSection = () => {
                         </Box>
                       </Flex>
                       <Box
-                        borderRadius="10"
+                        borderRadius="10px"
                         w="80%"
                         border="1px solid"
                         borderColor="#B9B5F4"
@@ -121,7 +124,7 @@ const ChurchThemeSection = () => {
                         </Text>
                       </Box>
                       <Box
-                        borderRadius="10"
+                        borderRadius="10px"
                         w="80%"
                         border="1px solid"
                         borderColor="#B9B5F4"
@@ -147,7 +150,7 @@ const ChurchThemeSection = () => {
                         </Text>
                       </Box>
                       <Box
-                        borderRadius="10"
+                        borderRadius="10px"
                         w="80%"
                         border="1px solid"
                         borderColor="#B9B5F4"
@@ -186,12 +189,10 @@ const ChurchThemeSection = () => {
                   </HStack>
                   <IconButton
                     onClick={onExpandClick}
-                    icon={isExpanded ? <MdExpandLess /> : <MdExpandMore />}
-                    isRound
+                    borderRadius="full"
                     fontSize={'28px'}
                     bg={'rgba(76, 120, 157, 0.2)'}
-                    color="#5F5F5F"
-                  />
+                    color="#5F5F5F">{isExpanded ? <MdExpandLess /> : <MdExpandMore />}</IconButton>
                 </VStack>
                 {isExpanded && (
                   <Box
@@ -210,7 +211,7 @@ const ChurchThemeSection = () => {
               </Flex>
             </VStack>
           </Container>
-        </Fade>
+        </Box>
       )}
     </InView>
   );

@@ -5,24 +5,20 @@ import Form from './Form';
 import FormField from './class/FormField';
 import ConditionalFormFieldEditor from './ConditionalFormFieldEditor';
 import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Button,
   Input,
   Checkbox,
   Heading,
   Text,
   Box,
-  Select,
+  NativeSelect,
   ButtonGroup,
   Flex,
   Stack,
-  UnorderedList,
-  ListItem,
   Center,
   Textarea,
+  Field,
+  List,
 } from '@chakra-ui/react';
 
 const FormEditor = (props) => {
@@ -234,7 +230,7 @@ const FormEditor = (props) => {
       borderWidth="1px"
       p="3"
     >
-      <Stack flex="2" spacing="3" p="3">
+      <Stack flex="2" gap="3" p="3">
         <Heading size="xl">
           Currently editing: {formInformation.formName}
         </Heading>
@@ -243,20 +239,20 @@ const FormEditor = (props) => {
             Click the green button when you are done. A checklist to keep in
             mind:
           </Text>
-          <UnorderedList>
-            <ListItem>
+          <List.Root as='ul'>
+            <List.Item>
               Have you clicked on <b>'Create/Update Form</b>
-            </ListItem>
-            <ListItem>
+            </List.Item>
+            <List.Item>
               Have you clicked on <b>'Save Prefilled Fields'</b>
-            </ListItem>
-          </UnorderedList>
+            </List.Item>
+          </List.Root>
         </Box>
         <Button
-          isLoading={saveStatus}
+          loading={saveStatus}
           loadingText="Saving"
           mt={4}
-          colorScheme="green"
+          colorPalette="green"
           onClick={onSaveToDB}
         >
           Finalize and save
@@ -268,21 +264,21 @@ const FormEditor = (props) => {
               Prefillable Fields
             </Heading>
             {prefillableField.map((fieldInfo, i) => (
-              <FormControl>
+              <Field.Root>
                 <Controller
                   control={controlPrefill}
                   name={fieldInfo[0]}
                   key={fieldInfo[0]}
                   defaultValue={false}
                   render={({ field: { onChange, value, ref } }) => (
-                    <Checkbox onChange={onChange} ref={ref} isChecked={value}>
+                    <Checkbox.Root onCheckedChange={onChange} ref={ref} checked={value}><Checkbox.HiddenInput /><Checkbox.Control><Checkbox.Indicator /></Checkbox.Control><Checkbox.Label>
                       {fieldInfo[1]}
-                    </Checkbox>
+                    </Checkbox.Label></Checkbox.Root>
                   )}
                 />
-              </FormControl>
+              </Field.Root>
             ))}
-            <Button mt={2} colorScheme="blue" type="submit">
+            <Button mt={2} colorPalette="blue" type="submit">
               Save Prefilled Fields
             </Button>
           </form>
@@ -301,10 +297,10 @@ const FormEditor = (props) => {
               }
             })
             .map((fieldData, i) => (
-              <FormControl key={fieldData.fieldName}>
+              <Field.Root key={fieldData.fieldName}>
                 <Flex p="1">
                   <Center flex="2">{fieldData.fieldName}</Center>
-                  <ButtonGroup flex="1" colorScheme="blue">
+                  <ButtonGroup flex="1" colorPalette="blue">
                     {/* offset index with the # of prefillable fields to correctly edit */}
                     <Button
                       value={i + getNumberOfPrefillFields(formFields)}
@@ -320,7 +316,7 @@ const FormEditor = (props) => {
                     </Button>
                   </ButtonGroup>
                 </Flex>
-              </FormControl>
+              </Field.Root>
             ))}
         </Box>
 
@@ -334,68 +330,70 @@ const FormEditor = (props) => {
                 Currently editing field: {formFields[editData].fieldName}{' '}
               </Text>
             )}
-            <FormControl isInvalid={errors['fieldName']}>
-              <FormLabel>
+            <Field.Root invalid={errors['fieldName']}>
+              <Field.Label>
                 {ft === 'header' ? 'Header Text' : 'Field Name'}
-              </FormLabel>
+              </Field.Label>
               <Input {...register('fieldName', { required: true })} />
-              <FormHelperText>
+              <Field.HelperText>
                 Please <b>DO NOT</b> have an apostrophe (') or double quote ("),
                 it will crash the site
-              </FormHelperText>
-              <FormErrorMessage>
+              </Field.HelperText>
+              <Field.ErrorText>
                 {errors['fieldName'] && 'Field name is required'}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl isInvalid={errors['fieldType']}>
-              <FormLabel>Field Type</FormLabel>
-              <Select {...register('fieldType', { required: true })}>
-                <option value="text">Text</option>
-                <option value="select">Select</option>
-                <option value="checkbox">Checkbox</option>
-                <option value="radio">Radio</option>
-                <option value="textarea">Text Area</option>
-                <option value="date">Datepicker</option>
-                <option value="header">Header</option>
-              </Select>
-              <FormErrorMessage>
+              </Field.ErrorText>
+            </Field.Root>
+            <Field.Root invalid={errors['fieldType']}>
+              <Field.Label>Field Type</Field.Label>
+              <NativeSelect.Root>
+                <NativeSelect.Field {...register('fieldType', { required: true })}>
+                  <option value="text">Text</option>
+                  <option value="select">Select</option>
+                  <option value="checkbox">Checkbox</option>
+                  <option value="radio">Radio</option>
+                  <option value="textarea">Text Area</option>
+                  <option value="date">Datepicker</option>
+                  <option value="header">Header</option>
+                </NativeSelect.Field>
+                <NativeSelect.Indicator />
+              </NativeSelect.Root>
+              <Field.ErrorText>
                 {errors['fieldType'] && 'Field type is required'}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl>
-              <FormLabel>
+              </Field.ErrorText>
+            </Field.Root>
+            <Field.Root>
+              <Field.Label>
                 Field Description (describe what this field is for)
-              </FormLabel>
+              </Field.Label>
               <Textarea {...register('fieldDescription')} />
-              <FormHelperText>Leave blank if not needed</FormHelperText>
-            </FormControl>
+              <Field.HelperText>Leave blank if not needed</Field.HelperText>
+            </Field.Root>
             {(ft === 'select' || ft === 'radio') && (
-              <FormControl>
-                <FormLabel>Options</FormLabel>
+              <Field.Root>
+                <Field.Label>Options</Field.Label>
                 <Input id="options" {...register('options')} />
-                <FormHelperText htmlFor="options">
+                <Field.HelperText htmlFor="options">
                   Enter options separated by ;
-                </FormHelperText>
-              </FormControl>
+                </Field.HelperText>
+              </Field.Root>
             )}
             {ft !== 'header' && (
-              <FormControl>
-                <FormLabel>Do you want this field to be required?</FormLabel>
+              <Field.Root>
+                <Field.Label>Do you want this field to be required?</Field.Label>
                 <Controller
                   control={control}
                   name="required"
                   key="required"
                   defaultValue={false}
                   render={({ field: { onChange, value, ref } }) => (
-                    <Checkbox onChange={onChange} ref={ref} isChecked={value}>
-                      Required
-                    </Checkbox>
+                    <Checkbox.Root onCheckedChange={onChange} ref={ref} checked={value}><Checkbox.HiddenInput /><Checkbox.Control><Checkbox.Indicator /></Checkbox.Control><Checkbox.Label>Required
+                                            </Checkbox.Label></Checkbox.Root>
                   )}
                 />
-              </FormControl>
+              </Field.Root>
             )}
 
-            <Button mt={4} colorScheme="blue" type="submit">
+            <Button mt={4} colorPalette="blue" type="submit">
               Save Custom Field
             </Button>
           </form>
@@ -408,7 +406,6 @@ const FormEditor = (props) => {
           />
         </Box>
       </Stack>
-
       <Box flex="3" p="2" borderWidth="1px" borderRadius="lg">
         <Heading size="xl">Form Preview</Heading>
         <Form

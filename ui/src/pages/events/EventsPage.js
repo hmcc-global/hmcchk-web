@@ -3,12 +3,12 @@ import { customAxios as axios } from '../helpers/customAxios';
 import {
   Button,
   Container,
-  Divider,
   Grid,
   Heading,
-  Select,
+  NativeSelect,
   Stack,
   Text,
+  Separator,
 } from '@chakra-ui/react';
 import { MdArrowDropDown } from 'react-icons/md';
 import EventCard from './EventCard';
@@ -20,7 +20,7 @@ const EventsPage = (props) => {
   const [eventsList, setEventsList] = useState([]);
   const [thisWeekList, setThisWeekList] = useState([]);
   const [featuredList, setFeaturedList] = useState([]);
-  const [moreFilterList, setMoreFilterList] = useState([]);
+  const [, setMoreFilterList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [tagList, setTagList] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
@@ -207,7 +207,7 @@ const EventsPage = (props) => {
         borderRadius={30}
         justifyContent="space-around"
         flexDirection={['column', 'row']}
-        spacing={[2, 0]}
+        gap={[2, 0]}
         top={2}
         position="sticky"
         alignItems="center"
@@ -232,31 +232,33 @@ const EventsPage = (props) => {
             </Button>
           ))}
         </Grid>
-        <Select
-          placeholder="More Filters"
-          fontWeight="600"
-          textAlign="center"
-          width={['75vw', '14vw']}
-          borderRadius={[15, 20]}
-          rightIcon={<MdArrowDropDown />}
-          variant="filled"
-          bg={selectedOption !== '' ? '#3F3F3F' : 'gray.100'}
-          color={selectedOption !== '' ? '#ffffff' : ''}
-          _hover={{
-            opacity: '90%',
-          }}
-          _focus={{
-            bg: 'gray.100',
-            color: '#000000',
-          }}
-          cursor="pointer"
-          onChange={onSelect}
-          value={selectedOption}
-        >
-          {tagList.map((tag, i) => (
-            <option value={i}>{tag}</option>
-          ))}
-        </Select>
+        <NativeSelect.Root>
+          <NativeSelect.Field
+            placeholder="More Filters"
+            fontWeight="600"
+            textAlign="center"
+            width={['75vw', '14vw']}
+            borderRadius={[15, 20]}
+            rightIcon={<MdArrowDropDown />}
+            variant="filled"
+            bg={selectedOption !== '' ? '#3F3F3F' : 'gray.100'}
+            color={selectedOption !== '' ? '#ffffff' : ''}
+            _hover={{
+              opacity: '90%',
+            }}
+            _focus={{
+              bg: 'gray.100',
+              color: '#000000',
+            }}
+            cursor="pointer"
+            onValueChange={onSelect}
+            value={selectedOption}>
+            {tagList.map((tag, i) => (
+              <option value={i}>{tag}</option>
+            ))}
+          </NativeSelect.Field>
+          <NativeSelect.Indicator />
+        </NativeSelect.Root>
       </Stack>
       <Grid
         mt="12"
@@ -269,7 +271,7 @@ const EventsPage = (props) => {
           filteredList.map((event, i) => (
             <>
               <EventCard key={'event' + i} eventData={event} />
-              {i !== filteredList.length - 1 && <Divider />}
+              {i !== filteredList.length - 1 && <Separator />}
             </>
           ))}
       </Grid>

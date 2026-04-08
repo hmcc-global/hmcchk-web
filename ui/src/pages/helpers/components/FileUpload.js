@@ -1,15 +1,6 @@
 import { useRef, useState } from 'react';
 import axios from 'axios';
-import {
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Input,
-  InputGroup,
-  Stack,
-  Progress,
-  Button,
-} from '@chakra-ui/react';
+import { Input, InputGroup, Stack, Progress, Button, Field } from '@chakra-ui/react';
 import { useController } from 'react-hook-form';
 import { FiFile } from 'react-icons/fi';
 
@@ -91,8 +82,8 @@ const FileUpload = (props) => {
 
   return (
     <Stack direction={['row']} align={'end'}>
-      <FormControl isInvalid={invalid} isRequired>
-        <FormLabel htmlFor="writeUpFile">{children}</FormLabel>
+      <Field.Root invalid={invalid} required>
+        <Field.Label htmlFor="writeUpFile">{children}</Field.Label>
 
         <InputGroup>
           <input
@@ -107,22 +98,20 @@ const FileUpload = (props) => {
           <Input
             placeholder={placeholder || ''}
             value={inputValue}
-            onChange={handleTextChange}
+            onValueChange={handleTextChange}
           />
-          <Button
-            leftIcon={<FiFile />}
-            colorScheme="green"
-            onClick={() => inputRef.current.click()}
-            ml={2}
-          >
-            Upload
-          </Button>
+          <Button colorPalette="green" onClick={() => inputRef.current.click()} ml={2}><FiFile />Upload
+                      </Button>
         </InputGroup>
         {isUploading && (
-          <Progress colorScheme="blue" value={progress} min="0" max="100" />
+          <Progress.Root colorPalette="blue" value={progress} min="0" max="100">
+            <Progress.Track>
+              <Progress.Range />
+            </Progress.Track>
+          </Progress.Root>
         )}
-        <FormErrorMessage>{invalid}</FormErrorMessage>
-      </FormControl>
+        <Field.ErrorText>{invalid}</Field.ErrorText>
+      </Field.Root>
     </Stack>
   );
 };

@@ -94,10 +94,8 @@ const MinistryCard = (props) => {
           </Box>
 
           {card.showButton && ( // Only render the button if `showButton` is true
-            <Box p={4}>
+            (<Box p={4}>
               <Button
-                as="a"
-                href={card.link}
                 bg={card.buttonColor}
                 borderRadius={'15px'}
                 width="100%"
@@ -109,10 +107,9 @@ const MinistryCard = (props) => {
                 py={'22px'}
                 fontSize={['0.8rem', '0.6rem', '0.8rem']}
                 _hover={{ backgroundColor: '#477A7E' }}
-              >
-                LEARN MORE →
-              </Button>
-            </Box>
+                asChild><a href={card.link}>LEARN MORE →
+                              </a></Button>
+            </Box>)
           )}
         </Box>
       ))}

@@ -1,20 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { customAxios as axios } from '../helpers/customAxios';
-import {
-  Flex,
-  Stack,
-  Heading,
-  UnorderedList,
-  ListItem,
-  Box,
-  Text,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  FormErrorMessage,
-} from '@chakra-ui/react';
+import { Flex, Stack, Heading, Box, Text, Button, Input, Field, List } from '@chakra-ui/react';
 
 const ExternalFormEditor = (props) => {
   const { formInformation, existingFormData, resetFormEditorCallback } = props;
@@ -90,7 +77,7 @@ const ExternalFormEditor = (props) => {
       borderWidth="1px"
       p="3"
     >
-      <Stack flex="2" spacing="3" p="3">
+      <Stack flex="2" gap="3" p="3">
         <Heading size="xl">
           Currently editing: {formInformation.formName}
         </Heading>
@@ -99,37 +86,37 @@ const ExternalFormEditor = (props) => {
             Click the green button when you are done. A checklist to keep in
             mind:
           </Text>
-          <UnorderedList>
-            <ListItem>
+          <List.Root as='ul'>
+            <List.Item>
               Have you clicked on <b>'Create/Update Form</b>
-            </ListItem>
-            <ListItem>
+            </List.Item>
+            <List.Item>
               Have you clicked on <b>'Save Prefilled Fields'</b>
-            </ListItem>
-          </UnorderedList>
+            </List.Item>
+          </List.Root>
         </Box>
         <Button
-          isLoading={saveStatus}
+          loading={saveStatus}
           loadingText="Saving"
           mt={4}
-          colorScheme="green"
+          colorPalette="green"
           onClick={onSaveToDB}
         >
           Finalize and save
         </Button>
         <Box>
           <form onSubmit={handleSubmit(onFormSubmit)}>
-            <FormControl isInvalid={errors['externalFormLink']}>
-              <FormLabel>External Form Link</FormLabel>
+            <Field.Root invalid={errors['externalFormLink']}>
+              <Field.Label>External Form Link</Field.Label>
               <Input
                 id="externalFormLink"
                 {...register('externalFormLink', { required: true })}
               />
-              <FormErrorMessage>
+              <Field.ErrorText>
                 {errors['externalFormLink'] && 'External Form Link is required'}
-              </FormErrorMessage>
-            </FormControl>
-            <Button mt={4} colorScheme="blue" type="submit">
+              </Field.ErrorText>
+            </Field.Root>
+            <Button mt={4} colorPalette="blue" type="submit">
               Save External Form Link
             </Button>
           </form>

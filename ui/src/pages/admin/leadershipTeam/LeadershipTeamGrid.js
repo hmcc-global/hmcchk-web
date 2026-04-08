@@ -85,7 +85,7 @@ export default function LeadershipTeamGrid(props) {
   };
 
   const onRowClicked = (params) => {
-    const { data, api } = params;
+    const { data } = params;
     if (data) setSelected(data);
   };
 
@@ -200,7 +200,7 @@ export default function LeadershipTeamGrid(props) {
         </Heading>
         <Switch
           value={showDeleted}
-          onChange={(e) => setShowDeleted(e.target.checked)}
+          onValueChange={(e) => setShowDeleted(e.target.checked)}
         >
           Show deleted
         </Switch>

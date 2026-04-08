@@ -6,21 +6,18 @@ import {
   Heading,
   Stack,
   Box,
-  FormControl,
-  FormLabel,
   Input,
-  UnorderedList,
   Flex,
   VStack,
   Checkbox,
   Spacer,
   Button,
-  FormErrorMessage,
-  useToast,
+  Field,
+  List,
 } from '@chakra-ui/react';
+import { toaster } from '../../../components/ui/toaster';
 
 export default function FundraiseContainer() {
-  const toast = useToast();
   const [fundraises, setFundraises] = useState([]);
   const [selected, setSelected] = useState();
 
@@ -80,7 +77,7 @@ export default function FundraiseContainer() {
       if (res.status === 200) return true;
     } catch (e) {
       console.log(e.response);
-      toast({
+      toaster.create({
         description: e.response.data,
         status: 'error',
         duration: 5000,
@@ -107,7 +104,7 @@ export default function FundraiseContainer() {
       }
     } catch (e) {
       console.log(e.response);
-      toast({
+      toaster.create({
         description: e.response.data,
         status: 'error',
         duration: 5000,
@@ -128,7 +125,7 @@ export default function FundraiseContainer() {
     }
 
     if (success) {
-      toast({
+      toaster.create({
         description: 'Saved',
         status: 'success',
         duration: 5000,
@@ -179,80 +176,80 @@ export default function FundraiseContainer() {
       <Stack direction={['column', 'row']} w="100%">
         <Box w={['100%', '50%']}>
           <form onSubmit={onSubmit}>
-            <FormControl isRequired>
-              <FormLabel>Campaign Name</FormLabel>
+            <Field.Root required>
+              <Field.Label>Campaign Name</Field.Label>
               <Input
                 type="text"
                 value={campaignName}
-                onChange={(e) => setCampaignName(e.target.value)}
+                onValueChange={(e) => setCampaignName(e.target.value)}
               />
-              <FormErrorMessage>
+              <Field.ErrorText>
                 Another fundraising campaign with the same name already exists
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel>Category Name</FormLabel>
+              </Field.ErrorText>
+            </Field.Root>
+            <Field.Root required>
+              <Field.Label>Category Name</Field.Label>
               <Input
                 type="text"
                 value={categoryName}
-                onChange={(e) => setCategoryName(e.target.value)}
+                onValueChange={(e) => setCategoryName(e.target.value)}
               />
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel>Category Key</FormLabel>
+            </Field.Root>
+            <Field.Root required>
+              <Field.Label>Category Key</Field.Label>
               <Input
                 type="text"
                 value={categoryKey}
-                onChange={(e) => setCategoryKey(e.target.value)}
+                onValueChange={(e) => setCategoryKey(e.target.value)}
               />
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel>Amount</FormLabel>
+            </Field.Root>
+            <Field.Root required>
+              <Field.Label>Amount</Field.Label>
               <Input
                 type="number"
                 value={amount}
-                onChange={(e) => setAmount(e.target.value)}
+                onValueChange={(e) => setAmount(e.target.value)}
               />
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel>Givers</FormLabel>
+            </Field.Root>
+            <Field.Root required>
+              <Field.Label>Givers</Field.Label>
               <Input
                 type="number"
                 value={givers}
-                onChange={(e) => setGivers(e.target.value)}
+                onValueChange={(e) => setGivers(e.target.value)}
               />
-            </FormControl>
+            </Field.Root>
             <Box borderWidth="1px" borderRadius="xl" m="2" py="3">
-              <VStack spacing={4} align="start" m="2">
-                <FormControl>
-                  <FormLabel>Milestone Name</FormLabel>
+              <VStack gap={4} align="start" m="2">
+                <Field.Root>
+                  <Field.Label>Milestone Name</Field.Label>
                   <Input
                     type="text"
                     value={milestoneName}
-                    onChange={(e) => setMilestoneName(e.target.value)}
+                    onValueChange={(e) => setMilestoneName(e.target.value)}
                   />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Milestone Amount</FormLabel>
+                </Field.Root>
+                <Field.Root>
+                  <Field.Label>Milestone Amount</Field.Label>
                   <Input
                     type="number"
                     value={milestoneAmount}
-                    onChange={(e) => setMilestoneAmount(e.target.value)}
+                    onValueChange={(e) => setMilestoneAmount(e.target.value)}
                   />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Milestone Deadline</FormLabel>
+                </Field.Root>
+                <Field.Root>
+                  <Field.Label>Milestone Deadline</Field.Label>
                   <Input
                     type="text"
                     value={milestoneDeadline}
-                    onChange={(e) => setMilestoneDeadline(e.target.value)}
+                    onValueChange={(e) => setMilestoneDeadline(e.target.value)}
                   />
-                </FormControl>
-                <Button colorScheme="blue" onClick={handleAddMilestones}>
+                </Field.Root>
+                <Button colorPalette="blue" onClick={handleAddMilestones}>
                   Add Milestone
                 </Button>
               </VStack>
-              <UnorderedList>
+              <List.Root as='ul'>
                 {milestones.map((milestone, index) => (
                   <Box key={index} w={['100%', '100%', '50%']} my="2">
                     <Flex>
@@ -269,7 +266,7 @@ export default function FundraiseContainer() {
                       </Box>
                       <Spacer />
                       <Button
-                        colorScheme="red"
+                        colorPalette="red"
                         size="sm"
                         onClick={() => handleRemoveMilestones(index)}
                         ml={2}
@@ -280,22 +277,21 @@ export default function FundraiseContainer() {
                     </Flex>
                   </Box>
                 ))}
-              </UnorderedList>
+              </List.Root>
             </Box>
-            <FormControl w="auto">
-              <Checkbox
-                isChecked={deleted}
-                onChange={(e) => setDeleted(e.target.checked)}
-              >
-                Delete?
-              </Checkbox>
-            </FormControl>
-            <FormControl mt={5}>
-              <Button type="submit" w="full" isLoading={isLoading}>
+            <Field.Root w="auto">
+              <Checkbox.Root
+                onCheckedChange={(e) => setDeleted(e.target.checked)}
+                checked={deleted}
+              ><Checkbox.HiddenInput /><Checkbox.Control><Checkbox.Indicator /></Checkbox.Control><Checkbox.Label>Delete?
+                                </Checkbox.Label></Checkbox.Root>
+            </Field.Root>
+            <Field.Root mt={5}>
+              <Button type="submit" w="full" loading={isLoading}>
                 {id && id.length > 0 ? 'UPDATE' : 'SAVE'}
               </Button>
-            </FormControl>
-            <Button colorScheme="red" w="full" mt={5} onClick={resetHandler}>
+            </Field.Root>
+            <Button colorPalette="red" w="full" mt={5} onClick={resetHandler}>
               RESET
             </Button>
           </form>

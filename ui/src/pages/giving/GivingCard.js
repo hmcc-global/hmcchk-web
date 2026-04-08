@@ -10,15 +10,10 @@ import {
   VStack,
   Flex,
   Stack,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
   Center,
   Image,
-  ModalFooter,
+  Dialog,
+  Portal,
 } from '@chakra-ui/react';
 const RenderSwitch = (param) => {
   switch (param.ModalSelection) {
@@ -48,7 +43,7 @@ const RenderSwitch = (param) => {
       );
     case 'Bank Transfer':
       return (
-        <VStack spacing="3vh">
+        <VStack gap="3vh">
           <Box py="1em">
             <Text fontWeight="bold">
               You may use the following information:
@@ -68,7 +63,6 @@ const RenderSwitch = (param) => {
               (e.g. Weekly Offering 2019-11-03)
             </Text>
           </Box>
-
           <Text fontWeight="bold">
             If our account name is too long and exceeds the number of permitted
             characters, you may shorten it as “Harvest Mission Community Church
@@ -134,14 +128,14 @@ const RenderSwitch = (param) => {
 };
 
 export const GivingCard = (cardinfo) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
   return (
     <Box
       w={['100%', '100%', '32%']}
       borderRadius="lg"
       my={['0.6em', '0.6em', '0']}
       bgImage={cardinfo.imageLink}
-      bgPosition="center"
+      backgroundPosition="center"
       bgSize="cover"
       boxShadow="0px 4px 8px rgba(0, 0, 0, 0.15)"
       fontFamily="Manrope"
@@ -193,26 +187,38 @@ export const GivingCard = (cardinfo) => {
                     Learn More
                   </Text>
                 </Button>
-                <Modal isOpen={isOpen} size={'xl'} onClose={onClose}>
-                  <ModalOverlay />
-                  <ModalContent>
-                    <ModalHeader>
-                      <Heading
-                        as="h2"
-                        size="xl"
-                        fontWeight="bold"
-                        fontFamily="Manrope"
-                      >
-                        {cardinfo.text}
-                      </Heading>
-                    </ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody fontFamily="Manrope">
-                      <RenderSwitch ModalSelection={cardinfo.text} />
-                    </ModalBody>
-                    <ModalFooter></ModalFooter>
-                  </ModalContent>
-                </Modal>
+                <Dialog.Root
+                  open={open}
+                  size="xl"
+                  onOpenChange={(e) => {
+                    if (!e.open) {
+                      onClose();
+                    }
+                  }}
+                >
+                  <Portal>
+                    <Dialog.Backdrop />
+                    <Dialog.Positioner>
+                      <Dialog.Content>
+                        <Dialog.Header>
+                          <Heading
+                            as="h2"
+                            size="xl"
+                            fontWeight="bold"
+                            fontFamily="Manrope"
+                          >
+                            {cardinfo.text}
+                          </Heading>
+                        </Dialog.Header>
+                        <Dialog.CloseTrigger />
+                        <Dialog.Body fontFamily="Manrope">
+                          <RenderSwitch ModalSelection={cardinfo.text} />
+                        </Dialog.Body>
+                        <Dialog.Footer></Dialog.Footer>
+                      </Dialog.Content>
+                    </Dialog.Positioner>
+                  </Portal>
+                </Dialog.Root>
               </Box>
             </Center>
           </Flex>

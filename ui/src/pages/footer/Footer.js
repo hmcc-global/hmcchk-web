@@ -10,12 +10,13 @@ import {
   Box,
   Spacer,
   HStack,
+  Icon,
 } from '@chakra-ui/react';
 import './SocialIcon.css';
-import { EmailIcon } from '@chakra-ui/icons';
 import { SocialIcon } from 'react-social-icons';
-
 import { useLocation } from 'react-router-dom';
+
+import { LuMail } from 'react-icons/lu';
 
 const Footer = () => {
   const location = useLocation();
@@ -64,7 +65,7 @@ const Footer = () => {
                     color: '#DBE9FF',
                   }}
                 >
-                  <EmailIcon h="1.3em" w="1.3em" />
+                  <Icon h="1.3em" w="1.3em" asChild><LuMail /></Icon>
                 </Button>
               </Link>
               <Link

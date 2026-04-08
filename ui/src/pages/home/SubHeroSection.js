@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  Container,
-  Grid,
-  Image,
-  Link,
-  Stack,
-  Text,
-  Flex,
-  Fade,
-} from '@chakra-ui/react';
+import { Container, Grid, Image, Link, Stack, Text, Flex, Box } from '@chakra-ui/react';
 import { Link as ReactLink } from 'react-router-dom';
 import { InView } from 'react-intersection-observer';
 
@@ -56,65 +47,63 @@ const LinkCardInfo = [
 const LinkCard = (props) => {
   return (
     <Link
-      as={ReactLink}
-      to={{ pathname: props.path }}
       _hover={{
         textDecoration: 'none',
         color: '#4A6EEB',
       }}
       w="100%"
-    >
-      <Flex
-        direction="column"
-        justifyContent={['none', 'space-around', 'space-between']}
-        border="1px solid #4A6EEB"
-        borderRadius="5"
-        backgroundImage={[
-          process.env.PUBLIC_URL + '/images/home/' + props.mobileImage,
-          process.env.PUBLIC_URL + '/images/home/' + props.mobileImage,
-          process.env.PUBLIC_URL + '/images/home/' + props.desktopImage,
-        ]}
-        bgPosition={props.bgPosition}
-        bgRepeat="no-repeat"
-        bgSize="contain"
-        minH={['4em', '5em', '6em', '10.75em']}
-        p={[3, 3, 5, 5]}
-        spacing="0"
-      >
-        <Stack direction="row" justifyContent="space-between">
-          <Text
-            fontSize={['1.5rem', '1.5rem', '2rem']}
-            fontFamily="DMSerifDisplay_Italic"
+      asChild><ReactLink to={{ pathname: props.path }}>
+          <Flex
+            direction="column"
+            justifyContent={['none', 'space-around', 'space-between']}
+            border="1px solid #4A6EEB"
+            borderRadius="5px"
+            backgroundImage={[
+              process.env.PUBLIC_URL + '/images/home/' + props.mobileImage,
+              process.env.PUBLIC_URL + '/images/home/' + props.mobileImage,
+              process.env.PUBLIC_URL + '/images/home/' + props.desktopImage,
+            ]}
+            backgroundPosition={props.bgPosition}
+            bgRepeat="no-repeat"
+            bgSize="contain"
+            minH={['4em', '5em', '6em', '10.75em']}
+            p={[3, 3, 5, 5]}
+            gap="0"
           >
-            {props.title}
-          </Text>
-          <Image
-            pl="5"
-            pb={[0, 0, 0, '5']}
-            h={['2em', '2em', '2.5em', '3em']}
-            w="auto"
-            src={process.env.PUBLIC_URL + '/images/home/call-made.svg'}
-          />
-        </Stack>
+            <Stack direction="row" justifyContent="space-between">
+              <Text
+                fontSize={['1.5rem', '1.5rem', '2rem']}
+                fontFamily="DMSerifDisplay_Italic"
+              >
+                {props.title}
+              </Text>
+              <Image
+                pl="5"
+                pb={[0, 0, 0, '5']}
+                h={['2em', '2em', '2.5em', '3em']}
+                w="auto"
+                src={process.env.PUBLIC_URL + '/images/home/call-made.svg'}
+              />
+            </Stack>
 
-        <Text fontSize={{ base: '0.825rem', md: '1rem' }} color="#4A6EEB">
-          <Text
-            as="span"
-            whiteSpace="pre-wrap"
-            display={['none', 'none', 'inline-block']}
-          >
-            {props.textDesktop}
-          </Text>
-          <Text
-            as="span"
-            whiteSpace="pre-wrap"
-            display={['inline-block', 'inline-block', 'none']}
-          >
-            {props.textMobile}
-          </Text>
-        </Text>
-      </Flex>
-    </Link>
+            <Text fontSize={{ base: '0.825rem', md: '1rem' }} color="#4A6EEB">
+              <Text
+                as="span"
+                whiteSpace="pre-wrap"
+                display={['none', 'none', 'inline-block']}
+              >
+                {props.textDesktop}
+              </Text>
+              <Text
+                as="span"
+                whiteSpace="pre-wrap"
+                display={['inline-block', 'inline-block', 'none']}
+              >
+                {props.textMobile}
+              </Text>
+            </Text>
+          </Flex>
+        </ReactLink></Link>
   );
 };
 
@@ -123,13 +112,16 @@ const SubHeroSection = () => {
     <>
       <InView rootMargin="-50px" triggerOnce={true}>
         {({ inView, ref }) => (
-          <Fade transition={{ enter: { duration: 1 } }} in={inView}>
+          <Box
+            ref={ref}
+            opacity={inView ? 1 : 0}
+            transition="opacity 1s ease-in-out"
+          >
             <Container
               display="flex"
               maxW="container.xl"
               justifyContent="flex-start"
               my={['5', '5', '7vh']}
-              ref={ref}
             >
               <Stack w="100%" fontFamily="Manrope">
                 <Text
@@ -162,7 +154,7 @@ const SubHeroSection = () => {
                 </Grid>
               </Stack>
             </Container>
-          </Fade>
+          </Box>
         )}
       </InView>
     </>

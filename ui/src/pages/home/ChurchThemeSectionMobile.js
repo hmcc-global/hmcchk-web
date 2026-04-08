@@ -1,13 +1,4 @@
-import {
-  Image,
-  Text,
-  Container,
-  Box,
-  Heading,
-  Fade,
-  VStack,
-  IconButton,
-} from '@chakra-ui/react';
+import { Image, Text, Container, Box, Heading, VStack, IconButton } from '@chakra-ui/react';
 import { useState } from 'react';
 import { MdExpandLess, MdExpandMore } from 'react-icons/md';
 import { InView } from 'react-intersection-observer';
@@ -25,8 +16,12 @@ const VisionMissionSectionMobile = () => {
     <>
       <InView rootMargin="-50px" triggerOnce={true}>
         {({ inView, ref }) => (
-          <Fade transition={{ enter: { duration: 1 } }} in={inView}>
-            <Container maxW="container.xl" ref={ref}>
+          <Box
+            ref={ref}
+            opacity={inView ? 1 : 0}
+            transition="opacity 1s ease-in-out"
+          >
+            <Container maxW="container.xl">
               <VStack>
                 <Box w="100%" alignItems="flex-start" py="1em" marginTop="3em">
                   <Box position="relative">
@@ -34,7 +29,7 @@ const VisionMissionSectionMobile = () => {
                       w="100%"
                       position="absolute"
                       h="122%"
-                      bgPos="42% 90%"
+                      backgroundPosition="42% 90%"
                       bgSize="26%"
                       bgRepeat="no-repeat"
                       bgImage={`url('${process.env.PUBLIC_URL}/images/home/church-theme-overflow-vector-underline.svg')`}
@@ -57,7 +52,7 @@ const VisionMissionSectionMobile = () => {
                   borderColor="#E7F4FF"
                   bgColor="#E7F4FF"
                   p="1em"
-                  spacing="16px"
+                  gap="16px"
                 >
                   <VStack>
                     <Image
@@ -82,7 +77,7 @@ const VisionMissionSectionMobile = () => {
                       The 3 specific areas for us to overflow from:
                     </Text>
                     <Box
-                      borderRadius="10"
+                      borderRadius="10px"
                       border="1px solid"
                       borderColor="#B9B5F4"
                       textAlign="center"
@@ -108,7 +103,7 @@ const VisionMissionSectionMobile = () => {
                       </Text>
                     </Box>
                     <Box
-                      borderRadius="10"
+                      borderRadius="10px"
                       border="1px solid"
                       borderColor="#B9B5F4"
                       textAlign="center"
@@ -134,7 +129,7 @@ const VisionMissionSectionMobile = () => {
                       </Text>
                     </Box>
                     <Box
-                      borderRadius="10"
+                      borderRadius="10px"
                       border="1px solid"
                       borderColor="#B9B5F4"
                       textAlign="center"
@@ -163,12 +158,10 @@ const VisionMissionSectionMobile = () => {
                   </VStack>
                   <IconButton
                     onClick={onExpandClick}
-                    icon={isExpanded ? <MdExpandLess /> : <MdExpandMore />}
-                    isRound
+                    borderRadius="full"
                     fontSize={'24px'}
                     bg={'rgba(76, 120, 157, 0.2)'}
-                    color="#5F5F5F"
-                  />
+                    color="#5F5F5F">{isExpanded ? <MdExpandLess /> : <MdExpandMore />}</IconButton>
                 </VStack>
                 {isExpanded && (
                   <Box
@@ -185,7 +178,7 @@ const VisionMissionSectionMobile = () => {
                 )}
               </VStack>
             </Container>
-          </Fade>
+          </Box>
         )}
       </InView>
     </>

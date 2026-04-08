@@ -1,10 +1,8 @@
-import { Button, Link, useMediaQuery } from '@chakra-ui/react';
+import { Button, Link } from '@chakra-ui/react';
 
 const LifeGroupSignupButton = () => {
   return (
     <Button
-      as={Link}
-      href="https://bit.ly/LGSignup-2025"
       borderRadius={'0.9375rem'}
       bgColor="#D46764"
       py={'1.75rem'}
@@ -15,9 +13,8 @@ const LifeGroupSignupButton = () => {
       letterSpacing={'0.25rem'}
       color={'#F6FAFF'}
       fontFamily={'Manrope'}
-    >
-      SIGN UP FOR LIFE GROUP
-    </Button>
+      asChild><Link href="https://bit.ly/LGSignup-2025">SIGN UP FOR LIFE GROUP
+            </Link></Button>
   );
 };
 

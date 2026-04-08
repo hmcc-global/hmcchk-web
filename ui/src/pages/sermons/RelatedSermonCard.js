@@ -36,36 +36,36 @@ const RelatedSermonCard = ({ sermonData, allSermons }) => {
             <Image borderLeftRadius="20" src={sermonImage} objectFit="cover" />
           </AspectRatio>
           <Box overflow="hidden" p={[2, 6]} minW={{ base: '67%', md: '82%' }}>
-            <VStack alignItems="left" spacing={{ base: 1, md: 2 }}>
+            <VStack alignItems="left" gap={{ base: 1, md: 2 }}>
               <Text
                 fontWeight="600"
                 fontSize={{ base: 'sm', md: 'md' }}
-                noOfLines={1}
+                lineClamp={1}
                 wordBreak="break-all"
               >
                 {sermonData.title}
               </Text>
               <Text
                 fontSize={{ base: 'xs', md: 'md' }}
-                noOfLines={1}
+                lineClamp={1}
                 wordBreak="break-all"
               >
                 {sermonData.sermonSeries[0].name}
               </Text>
               <Stack
-                spacing={{ base: 1, md: 'auto' }}
+                gap={{ base: 1, md: 'auto' }}
                 direction={{ base: 'column', md: 'row' }}
               >
                 <Text
                   fontSize={{ base: 'xs', md: 'md' }}
-                  noOfLines={1}
+                  lineClamp={1}
                   wordBreak="break-all"
                 >
                   {sermonData.speaker[0].name}
                 </Text>
                 <Text
                   fontSize={{ base: 'xs', md: 'md' }}
-                  noOfLines={1}
+                  lineClamp={1}
                   wordBreak="break-all"
                 >
                   {sermonDate}

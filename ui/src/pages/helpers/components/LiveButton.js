@@ -19,7 +19,7 @@ const LiveButton = () => {
         paddingRight="3"
         style={liveScStyle}
         lineHeight="0"
-        borderRadius="6"
+        borderRadius="6px"
         fontSize={{ base: '0.75rem', md: '0.6rem', lg: '0.75rem' }}
       >
         <Box

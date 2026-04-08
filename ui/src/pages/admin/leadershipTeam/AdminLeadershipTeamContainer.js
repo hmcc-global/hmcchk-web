@@ -2,35 +2,27 @@ import { customAxios as axios } from '../../helpers/customAxios';
 import {
   Heading,
   Box,
-  useToast,
   Container,
   Stack,
-  FormControl,
-  FormLabel,
   Input,
   Button,
   Checkbox,
   Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  DrawerHeader,
-  DrawerBody,
-  DrawerFooter,
   useDisclosure,
   Flex,
   Spacer,
+  Portal,
+  Field,
 } from '@chakra-ui/react';
+import { toaster } from '../../../components/ui/toaster';
 import { useState, useCallback, useEffect, useRef } from 'react';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import LeadershipTeamGrid from './LeadershipTeamGrid.js';
-import { AddIcon, EditIcon } from '@chakra-ui/icons';
+import { LuPencil, LuPlus } from 'react-icons/lu';
 
 export default function AdminLeadershipTeamContainer(props) {
-  const toast = useToast();
-
   // states
   const [teams, setTeams] = useState([]);
   const [selected, setSelected] = useState();
@@ -81,7 +73,7 @@ export default function AdminLeadershipTeamContainer(props) {
     }
   }, [selected, setLeaderEmails]);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
 
   const createHandler = async () => {
@@ -105,7 +97,7 @@ export default function AdminLeadershipTeamContainer(props) {
       if (res.status === 200) return true;
     } catch (e) {
       console.log(e.response);
-      toast({
+      toaster.create({
         description: e.response.data,
         status: 'error',
         duration: 5000,
@@ -136,7 +128,7 @@ export default function AdminLeadershipTeamContainer(props) {
       if (res.status === 200) return true;
     } catch (e) {
       console.log(e.response);
-      toast({
+      toaster.create({
         description: e.response.data,
         status: 'error',
         duration: 5000,
@@ -153,7 +145,7 @@ export default function AdminLeadershipTeamContainer(props) {
       });
 
       if (status !== 200) {
-        toast({
+        toaster.create({
           description:
             'There was an issue with the request, please talk to a t3ch support',
           status: 'warning',
@@ -175,7 +167,7 @@ export default function AdminLeadershipTeamContainer(props) {
     } catch (err) {
       console.log(err);
 
-      toast({
+      toaster.create({
         description:
           'There was an issue with the request, please talk to a t3ch support',
         status: 'warning',
@@ -214,7 +206,7 @@ export default function AdminLeadershipTeamContainer(props) {
     }
 
     if (success) {
-      toast({
+      toaster.create({
         description: 'Saved!',
         status: 'success',
         duration: 5000,
@@ -242,133 +234,132 @@ export default function AdminLeadershipTeamContainer(props) {
         >
           <Stack direction={['column', 'row']}>
             <Button
-              colorScheme="blue"
+              colorPalette="blue"
               onClick={unselectHandler}
               mr={['0', '2']}
-              isDisabled={id === ''}
+              disabled={id === ''}
             >
               UNSELECT
             </Button>
-            <Button
-              leftIcon={id !== '' ? <EditIcon /> : <AddIcon />}
-              colorScheme="teal"
-              onClick={onOpen}
-            >
-              {id !== '' ? 'EDIT' : 'ADD'}
-            </Button>
+            <Button colorPalette="teal" onClick={onOpen}>{id !== '' ? <LuPencil /> : <LuPlus />}{id !== '' ? 'EDIT' : 'ADD'}</Button>
           </Stack>
         </Box>
       </Flex>
-
       <Stack direction={['column']} w="100%">
         <Box w={['100%']}>
           <LeadershipTeamGrid teams={teams} setSelected={setSelected} />
         </Box>
 
-        <Drawer
-          isOpen={isOpen}
-          placement="right"
-          onClose={onClose}
-          initialFocusRef={firstField}
-          size="lg"
+        <Drawer.Root
+          open={open}
+          placement='end'
+          initialFocusEl={() => firstField.current}
+          size='lg'
+          onOpenChange={e => {
+            if (!e.open) {
+              onClose();
+            }
+          }}
         >
-          <DrawerOverlay />
-          <DrawerContent>
-            <DrawerCloseButton />
+          <Portal>
 
-            <DrawerHeader></DrawerHeader>
+            <Drawer.Backdrop />
+            <Drawer.Positioner>
+              <Drawer.Content>
+                <Drawer.CloseTrigger />
+                <Drawer.Header></Drawer.Header>
+                <Drawer.Body>
+                  <form id="lt-form" onSubmit={onSubmit}>
+                    <Field.Root required>
+                      <Field.Label>Season From</Field.Label>
+                      <Input
+                        ref={firstField}
+                        type="date"
+                        value={seasonFrom}
+                        onValueChange={(e) => setSeasonFrom(e.target.value)}
+                      />
+                    </Field.Root>
 
-            <DrawerBody>
-              <form id="lt-form" onSubmit={onSubmit}>
-                <FormControl isRequired>
-                  <FormLabel>Season From</FormLabel>
-                  <Input
-                    ref={firstField}
-                    type="date"
-                    value={seasonFrom}
-                    onChange={(e) => setSeasonFrom(e.target.value)}
-                  />
-                </FormControl>
+                    <Field.Root required>
+                      <Field.Label>Season To</Field.Label>
+                      <Input
+                        type="date"
+                        value={seasonTo}
+                        onValueChange={(e) => setSeasonTo(e.target.value)}
+                      />
+                    </Field.Root>
 
-                <FormControl isRequired>
-                  <FormLabel>Season To</FormLabel>
-                  <Input
-                    type="date"
-                    value={seasonTo}
-                    onChange={(e) => setSeasonTo(e.target.value)}
-                  />
-                </FormControl>
+                    <Field.Root required>
+                      <Field.Label>Campus</Field.Label>
+                      <Input
+                        type="text"
+                        value={campus}
+                        onValueChange={(e) => setCampus(e.target.value)}
+                      />
+                    </Field.Root>
 
-                <FormControl isRequired>
-                  <FormLabel>Campus</FormLabel>
-                  <Input
-                    type="text"
-                    value={campus}
-                    onChange={(e) => setCampus(e.target.value)}
-                  />
-                </FormControl>
+                    <Field.Root required>
+                      <Field.Label>Lifestage</Field.Label>
+                      <Input
+                        type="text"
+                        value={lifestage}
+                        onValueChange={(e) => setLifestage(e.target.value)}
+                      />
+                    </Field.Root>
 
-                <FormControl isRequired>
-                  <FormLabel>Lifestage</FormLabel>
-                  <Input
-                    type="text"
-                    value={lifestage}
-                    onChange={(e) => setLifestage(e.target.value)}
-                  />
-                </FormControl>
+                    <Field.Root required>
+                      <Field.Label>LIFE Group</Field.Label>
+                      <Input
+                        type="text"
+                        value={lifeGroup}
+                        onValueChange={(e) => setLifeGroup(e.target.value)}
+                      />
+                    </Field.Root>
 
-                <FormControl isRequired>
-                  <FormLabel>LIFE Group</FormLabel>
-                  <Input
-                    type="text"
-                    value={lifeGroup}
-                    onChange={(e) => setLifeGroup(e.target.value)}
-                  />
-                </FormControl>
+                    <Field.Root>
+                      <Field.Label>Leader Emails</Field.Label>
+                      <Input
+                        type="text"
+                        value={leaderEmails}
+                        onValueChange={(e) => setLeaderEmailsStr(e.target.value)}
+                      />
+                    </Field.Root>
 
-                <FormControl>
-                  <FormLabel>Leader Emails</FormLabel>
-                  <Input
-                    type="text"
-                    value={leaderEmails}
-                    onChange={(e) => setLeaderEmailsStr(e.target.value)}
-                  />
-                </FormControl>
+                    <Field.Root w="auto">
+                      <Checkbox.Root
+                        onCheckedChange={(e) => setDeleted(e.target.checked)}
+                        checked={deleted}
+                      ><Checkbox.HiddenInput /><Checkbox.Control><Checkbox.Indicator /></Checkbox.Control><Checkbox.Label>Delete?
+                                            </Checkbox.Label></Checkbox.Root>
+                    </Field.Root>
+                  </form>
+                </Drawer.Body>
+                <Drawer.Footer>
+                  <Stack w="full" direction={['column', 'row']} gap={2}>
+                    <Button
+                      w={['100%', '50%']}
+                      form="lt-form"
+                      type="submit"
+                      loading={isLoading}
+                    >
+                      {id && id.length > 0 ? 'UPDATE' : 'SAVE'}
+                    </Button>
+                    <Button
+                      w={['100%', '50%']}
+                      colorPalette="blue"
+                      value={id}
+                      onClick={duplicateHandler}
+                      disabled={!id && id.length === 0}
+                    >
+                      DUPLICATE
+                    </Button>
+                  </Stack>
+                </Drawer.Footer>
+              </Drawer.Content>
+            </Drawer.Positioner>
 
-                <FormControl w="auto">
-                  <Checkbox
-                    isChecked={deleted}
-                    onChange={(e) => setDeleted(e.target.checked)}
-                  >
-                    Delete?
-                  </Checkbox>
-                </FormControl>
-              </form>
-            </DrawerBody>
-
-            <DrawerFooter>
-              <Stack w="full" direction={['column', 'row']} spacing={2}>
-                <Button
-                  w={['100%', '50%']}
-                  form="lt-form"
-                  type="submit"
-                  isLoading={isLoading}
-                >
-                  {id && id.length > 0 ? 'UPDATE' : 'SAVE'}
-                </Button>
-                <Button
-                  w={['100%', '50%']}
-                  colorScheme="blue"
-                  value={id}
-                  onClick={duplicateHandler}
-                  isDisabled={!id && id.length === 0}
-                >
-                  DUPLICATE
-                </Button>
-              </Stack>
-            </DrawerFooter>
-          </DrawerContent>
-        </Drawer>
+          </Portal>
+        </Drawer.Root>
       </Stack>
     </Container>
   );

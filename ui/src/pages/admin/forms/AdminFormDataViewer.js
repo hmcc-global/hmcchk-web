@@ -4,16 +4,9 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import {
-  Button,
-  Heading,
-  Text,
-  Input,
-  HStack,
-  Box,
-  Tooltip,
-  useToast,
-} from '@chakra-ui/react';
+import { Button, Heading, Text, Input, HStack, Box } from '@chakra-ui/react';
+import { toaster } from '../../../components/ui/toaster';
+import { Tooltip } from '../../../components/ui/tooltip';
 import { DateTime } from 'luxon';
 import { paymentMethodList } from '../../helpers/lists';
 import CustomDateEditor from '../ag-grid-editors/CustomDateEditor';
@@ -23,7 +16,6 @@ import AdminPaymentDataModal from './AdminPaymentDataModal';
 const pollFreqInSecs = 5 * 60;
 
 export default function AdminFormDataViewer(props) {
-  const toast = useToast();
   const {
     location: { state },
   } = props;
@@ -122,7 +114,7 @@ export default function AdminFormDataViewer(props) {
       return true;
     }
 
-    toast({
+    toaster.create({
       description: 'Invalid payment date',
       status: 'error',
       duration: 5000,
@@ -247,7 +239,7 @@ export default function AdminFormDataViewer(props) {
   useEffect(() => {
     if (api) {
       if (startDate !== '' && endDate !== '' && startDate > endDate) {
-        toast({
+        toaster.create({
           description: 'Start Date should be before End Date',
           status: 'error',
           duration: 5000,
@@ -263,7 +255,7 @@ export default function AdminFormDataViewer(props) {
         api.onFilterChanged();
       }
     }
-  }, [startDate, endDate, api, getFilterType, toast]);
+  }, [startDate, endDate, api, getFilterType]);
 
   useEffect(() => {
     if (api && colApi) {
@@ -503,7 +495,7 @@ export default function AdminFormDataViewer(props) {
     });
 
     if (res.status !== 200) {
-      toast({
+      toaster.create({
         description: 'Something went wrong, please refresh and try again..',
         status: 'error',
         duration: 5000,
@@ -547,7 +539,7 @@ export default function AdminFormDataViewer(props) {
         submissionIds: submissionIds,
       });
       if (res.status === 200) {
-        toast({
+        toaster.create({
           description: 'Emails sent',
           status: 'success',
           duration: 5000,
@@ -555,7 +547,7 @@ export default function AdminFormDataViewer(props) {
         await getData();
       }
     } catch (err) {
-      toast({
+      toaster.create({
         description: 'Something went wrong sending the emails',
         status: 'error',
         duration: 5000,
@@ -657,20 +649,20 @@ export default function AdminFormDataViewer(props) {
             w="12em"
             type="date"
             value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
+            onValueChange={(e) => setStartDate(e.target.value)}
           />
           <Text>To:</Text>
           <Input
             w="12em"
             type="date"
             value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
+            onValueChange={(e) => setEndDate(e.target.value)}
           />
           <Button
             onClick={exportHandler}
             variant="outline"
             mx="2"
-            colorScheme="teal"
+            colorPalette="teal"
           >
             Export
           </Button>
@@ -685,15 +677,13 @@ export default function AdminFormDataViewer(props) {
         <div>
           {isPaidForm ? (
             <HStack m="2" w="100%">
-              <Tooltip label="Ctrl/Cmd + Z">
-                <Button onClick={undo} leftIcon={<CgUndo />}>
-                  Undo
-                </Button>
+              <Tooltip content="Ctrl/Cmd + Z">
+                <Button onClick={undo}><CgUndo />Undo
+                                  </Button>
               </Tooltip>
-              <Tooltip label="Ctrl/Cmd + Y">
-                <Button onClick={redo} rightIcon={<CgRedo />}>
-                  Redo
-                </Button>
+              <Tooltip content="Ctrl/Cmd + Y">
+                <Button onClick={redo}>Redo
+                                  <CgRedo /></Button>
               </Tooltip>
             </HStack>
           ) : null}

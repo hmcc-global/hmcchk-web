@@ -1,11 +1,5 @@
-import {
-  Container,
-  Box,
-  Text,
-  VStack,
-  Button,
-  useToast,
-} from '@chakra-ui/react';
+import { Container, Box, Text, VStack, Button } from '@chakra-ui/react';
+import { toaster } from '../../components/ui/toaster';
 import { customAxios as axios } from '../helpers/customAxios';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDebounce } from 'react-use';
@@ -17,7 +11,7 @@ import {
 } from '../helpers/SermonNotes';
 
 const SermonNotesContainer = (props) => {
-  const { user, history, sermonNoteId } = props;
+  const { user, sermonNoteId } = props;
   const [sermonNotes, setSermonNotes] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingExistingNotes, setIsLoadingExistingNotes] = useState(false);
@@ -27,8 +21,6 @@ const SermonNotesContainer = (props) => {
   const [htmlUserSermonNotes, setHtmlUserNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
   const [heightAboveTitle, setHeightAboveTitle] = useState(false);
-  const toast = useToast();
-
   const todayId = DateTime.fromISO(new Date().toISOString()).toFormat(
     'ddMMyyyy'
   );
@@ -106,7 +98,7 @@ const SermonNotesContainer = (props) => {
         );
         if (status === 200) {
           setUserSermonNotes(data);
-          toast({
+          toaster.create({
             title: 'Sermon Notes Saved',
             status: 'success',
             duration: 2000,
@@ -152,7 +144,7 @@ const SermonNotesContainer = (props) => {
     let email = user.email || window.prompt('Input Email Address');
 
     if (email && !isValidEmail(email)) {
-      toast({
+      toaster.create({
         title: 'Error in Email Address',
         status: 'error',
         duration: 2000,
@@ -165,7 +157,7 @@ const SermonNotesContainer = (props) => {
 
   const emailSermonNote = async (email) => {
     try {
-      const { data, status } = await axios.post(
+      const { status } = await axios.post(
         '/api/email-user-sermon-notes',
         {
           email: email,
@@ -173,7 +165,7 @@ const SermonNotesContainer = (props) => {
         }
       );
       if (status === 200) {
-        toast({
+        toaster.create({
           title: 'Emailed Sermon Note',
           status: 'success',
           duration: 2000,
@@ -308,7 +300,7 @@ const SermonNotesContainer = (props) => {
                 padding="16px"
                 backgroundColor="rgba(0, 0, 0, 0.5)"
               >
-                <VStack height="100%" justifyContent="center" spacing={4}>
+                <VStack height="100%" justifyContent="center" gap={4}>
                   <Text
                     color="white"
                     fontWeight={700}
@@ -355,8 +347,8 @@ const SermonNotesContainer = (props) => {
                   <Button
                     display={!user?.id ? 'none' : 'sticky'}
                     width="45%"
-                    isLoading={isSubmitting}
-                    colorScheme="teal"
+                    loading={isSubmitting}
+                    colorPalette="teal"
                     onClick={updateUserSermonNotes}
                     zIndex={3}
                   >
@@ -366,8 +358,8 @@ const SermonNotesContainer = (props) => {
                     pos="sticky"
                     display={!user?.id ? 'none' : 'sticky'}
                     width="45%"
-                    isLoading={isSubmitting}
-                    colorScheme="teal"
+                    loading={isSubmitting}
+                    colorPalette="teal"
                     onClick={emailCheck}
                     zIndex={3}
                   >

@@ -1,7 +1,6 @@
 import React from 'react';
 import { customAxios as axios } from '../helpers/customAxios';
 import { useForm } from 'react-hook-form';
-import { ChevronLeftIcon } from '@chakra-ui/icons';
 import {
   Box,
   Container,
@@ -11,18 +10,19 @@ import {
   Text,
   Stack,
   Link,
-  useToast,
   Button,
+  Icon,
 } from '@chakra-ui/react';
+import { toaster } from '../../components/ui/toaster';
+import { LuChevronLeft } from 'react-icons/lu';
 
 const RecoverPassword = (props) => {
   const { register, handleSubmit } = useForm();
-  const toast = useToast();
   const onSubmit = async (data) => {
     await axios.post('/api/auth/forgot-password', data);
 
     // Send toast regardless to prevent email sniffing.
-    toast({
+    toaster.create({
       title: 'Password Recovery.',
       description: 'Email Sent!.',
       status: 'success',
@@ -63,13 +63,13 @@ const RecoverPassword = (props) => {
           <Flex w="100%">
             <Box>
               <Link href="/">
-                <ChevronLeftIcon boxSize={10} />
+                <Icon boxSize={10} asChild><LuChevronLeft /></Icon>
                 Return to hk.hmccglobal.org
               </Link>
             </Box>
           </Flex>
           <Flex justifyContent="center">
-            <VStack justify="center" align="center" spacing={['3vh']} py="5vh">
+            <VStack justify="center" align="center" gap={['3vh']} py="5vh">
               <Image
                 marginBottom="15px"
                 h={{
@@ -90,7 +90,7 @@ const RecoverPassword = (props) => {
                 instructions to reset your password
               </Text>
               <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-                <VStack spacing={['3vh']}>
+                <VStack gap={['3vh']}>
                   <input
                     {...register('email', { required: true })}
                     placeholder="Email"

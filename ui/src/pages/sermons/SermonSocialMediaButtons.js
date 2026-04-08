@@ -10,7 +10,7 @@ const SermonSocialMediaButtons = ({
     <HStack
       alignItems={'center'}
       justifyContent={{ base: 'center', lg: 'flex-start' }}
-      spacing={{ base: '0.5rem', lg: iconsOnly ? '0.5rem' : '2.5rem' }}
+      gap={{ base: '0.5rem', lg: iconsOnly ? '0.5rem' : '2.5rem' }}
     >
       <Link
         _hover={{ textDecoration: 'none' }}
@@ -30,7 +30,7 @@ const SermonSocialMediaButtons = ({
           justifyContent={{ base: 'center', lg: 'flex-start' }}
           gap={{ base: 0, lg: '0.5rem' }}
         >
-          <Icon as={FaSpotify} boxSize={{ base: '2rem', lg: '1.5rem' }} />
+          <Icon boxSize={{ base: '2rem', lg: '1.5rem' }} asChild><FaSpotify /></Icon>
           {!iconsOnly && (
             <Text
               display={{ base: 'none', lg: 'flex' }}
@@ -56,7 +56,7 @@ const SermonSocialMediaButtons = ({
           justifyContent={{ base: 'center', lg: 'flex-start' }}
           gap={{ base: 0, lg: '0.5rem' }}
         >
-          <Icon as={FaYoutube} boxSize={{ base: '2rem', lg: '1.5rem' }} />
+          <Icon boxSize={{ base: '2rem', lg: '1.5rem' }} asChild><FaYoutube /></Icon>
           {!iconsOnly && (
             <Text
               display={{ base: 'none', lg: 'flex' }}

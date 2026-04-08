@@ -10,85 +10,67 @@ const OnlinePageButtons = () => {
       my="5"
     >
       <Button
-        variant="outline"
         width={['100%', '25%']}
         style={{
           whiteSpace: 'normal',
           wordWrap: 'break-word',
         }}
         align="center"
-        as="a"
-        href="https://bit.ly/hmcc-prayer"
-        target="_blank"
         borderColor="#4A6EEB"
         border="1px solid var(--Blue-Primary, #4A6EEB)"
         borderRadius="15px"
-        bgColor="transparent"
+        variant="ghost"
         fontSize="0.8rem"
         letterSpacing="0.185rem"
         fontWeight="700"
         height="2.813rem"
         _hover={{ bgColor: '#DFE7FF' }}
-      >
-        NEED PRAYER?
-      </Button>
+        asChild><a href="https://bit.ly/hmcc-prayer" target="_blank">NEED PRAYER?
+              </a></Button>
       <Button
         width={['100%', '25%']}
-        as="a"
-        href="/give"
-        target="_blank"
         id="online-give"
         borderColor="#4A6EEB"
         border="1px solid var(--Blue-Primary, #4A6EEB)"
         borderRadius="15px"
-        bgColor="transparent"
+        variant="ghost"
         fontSize="0.8rem"
         letterSpacing="0.185rem"
         fontWeight="700"
         height="2.813rem"
         _hover={{ bgColor: '#DFE7FF' }}
-      >
-        GIVING
-      </Button>
+        asChild><a href="/give" target="_blank">GIVING
+              </a></Button>
       <Button
         width={['100%', '25%']}
-        as="a"
-        href="/events"
-        target="_blank"
-        noOfLines={1}
+        lineClamp={1}
         wordBreak="break-all"
         id="online-events"
         borderColor="#4A6EEB"
         border="1px solid var(--Blue-Primary, #4A6EEB)"
         borderRadius="15px"
-        bgColor="transparent"
+        variant="ghost"
         fontSize="0.8rem"
         letterSpacing="0.185rem"
         fontWeight="700"
         height="2.813rem"
         _hover={{ bgColor: '#DFE7FF' }}
-      >
-        UPCOMING EVENTS
-      </Button>
-
+        asChild><a href="/events" target="_blank">UPCOMING EVENTS
+              </a></Button>
       <Button
         width={['100%', '25%']}
-        as="a"
-        href="/sermons"
-        target="_blank"
         id="past-sermons"
         borderColor="#4A6EEB"
         border="1px solid var(--Blue-Primary, #4A6EEB)"
         borderRadius="15px"
-        bgColor="transparent"
+        variant="ghost"
         fontSize="0.8rem"
         letterSpacing="0.185rem"
         fontWeight="700"
         height="2.813rem"
         _hover={{ bgColor: '#DFE7FF' }}
-      >
-        PAST SERMONS
-      </Button>
+        asChild><a href="/sermons" target="_blank">PAST SERMONS
+              </a></Button>
     </Stack>
   );
 };

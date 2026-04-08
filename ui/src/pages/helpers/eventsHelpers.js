@@ -115,8 +115,7 @@ const EndDateElement = ({
 
   return (
     <Text fontSize={['sm', isModal ? 'md' : 'lg']} fontWeight="bold">
-      <Icon mr={2} as={RiCalendarEventFill} />
-      End Date: {endDate.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
+      <Icon mr={2} asChild><RiCalendarEventFill /></Icon>End Date: {endDate.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
     </Text>
   );
 };

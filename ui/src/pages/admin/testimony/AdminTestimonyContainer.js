@@ -5,20 +5,17 @@ import {
   Heading,
   Stack,
   Box,
-  FormControl,
-  FormLabel,
   Input,
   Textarea,
   HStack,
   Checkbox,
   Button,
-  useToast,
+  Field,
 } from '@chakra-ui/react';
+import { toaster } from '../../../components/ui/toaster';
 import TestimonyGrid from './TestimonyGrid';
 
 export default function AdminTestimonyContainer(props) {
-  const toast = useToast();
-
   //testimonies grid data
   const [testimonies, setTestimonies] = useState([]);
   const [selected, setSelected] = useState();
@@ -96,7 +93,7 @@ export default function AdminTestimonyContainer(props) {
       if (res.status === 200) return true;
     } catch (e) {
       console.log(e.response);
-      toast({
+      toaster.create({
         description: e.response.data,
         status: 'error',
         duration: 5000,
@@ -115,7 +112,7 @@ export default function AdminTestimonyContainer(props) {
     }
 
     if (success) {
-      toast({
+      toaster.create({
         description: 'Saved',
         status: 'success',
         duration: 5000,
@@ -146,78 +143,76 @@ export default function AdminTestimonyContainer(props) {
       <Stack direction={['column', 'row']} w="100%">
         <Box w={['100%', '50%']}>
           <form onSubmit={onSubmit}>
-            <FormControl isRequired>
-              <FormLabel>Theme</FormLabel>
+            <Field.Root required>
+              <Field.Label>Theme</Field.Label>
               <Textarea
                 type="text"
                 value={theme}
-                onChange={(e) => setTheme(e.target.value)}
+                onValueChange={(e) => setTheme(e.target.value)}
               />
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel>Testimony</FormLabel>
+            </Field.Root>
+            <Field.Root required>
+              <Field.Label>Testimony</Field.Label>
               <Textarea
                 type="text"
                 value={testimony}
-                onChange={(e) => setTestimony(e.target.value)}
+                onValueChange={(e) => setTestimony(e.target.value)}
               />
-            </FormControl>
-            <FormControl isReadOnly>
-              <FormLabel>Name</FormLabel>
+            </Field.Root>
+            <Field.Root readOnly>
+              <Field.Label>Name</Field.Label>
               <Input
                 type="text"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onValueChange={(e) => setName(e.target.value)}
               />
-            </FormControl>
-            <FormControl isReadOnly>
-              <FormLabel>Campus/Lifestage</FormLabel>
+            </Field.Root>
+            <Field.Root readOnly>
+              <Field.Label>Campus/Lifestage</Field.Label>
               <Input
                 type="text"
                 value={lifestage}
-                onChange={(e) => setLifestage(e.target.value)}
+                onValueChange={(e) => setLifestage(e.target.value)}
               />
-            </FormControl>
-            <FormControl isReadOnly>
-              <FormLabel>Email</FormLabel>
+            </Field.Root>
+            <Field.Root readOnly>
+              <Field.Label>Email</Field.Label>
               <Input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onValueChange={(e) => setEmail(e.target.value)}
               />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Tags</FormLabel>
+            </Field.Root>
+            <Field.Root>
+              <Field.Label>Tags</Field.Label>
               <Input
                 type="text"
                 value={tags}
-                onChange={(e) => setTagsStr(e.target.value)}
+                onValueChange={(e) => setTagsStr(e.target.value)}
               />
-            </FormControl>
-            <HStack spacing={5} justifyContent="flex-end">
-              <FormControl w="auto" isDisabled={deleted}>
-                <Checkbox
-                  isChecked={published}
-                  onChange={(e) => setPublished(e.target.checked)}
-                >
-                  Publish?
-                </Checkbox>
-              </FormControl>
-              <FormControl w="auto">
-                <Checkbox
-                  isChecked={deleted}
-                  onChange={(e) => setDeleted(e.target.checked)}
-                >
-                  Delete?
-                </Checkbox>
-              </FormControl>
+            </Field.Root>
+            <HStack gap={5} justifyContent="flex-end">
+              <Field.Root w="auto" disabled={deleted}>
+                <Checkbox.Root
+                  onCheckedChange={(e) => setPublished(e.target.checked)}
+                  checked={published}
+                ><Checkbox.HiddenInput /><Checkbox.Control><Checkbox.Indicator /></Checkbox.Control><Checkbox.Label>Publish?
+                                    </Checkbox.Label></Checkbox.Root>
+              </Field.Root>
+              <Field.Root w="auto">
+                <Checkbox.Root
+                  onCheckedChange={(e) => setDeleted(e.target.checked)}
+                  checked={deleted}
+                ><Checkbox.HiddenInput /><Checkbox.Control><Checkbox.Indicator /></Checkbox.Control><Checkbox.Label>Delete?
+                                    </Checkbox.Label></Checkbox.Root>
+              </Field.Root>
             </HStack>
-            <FormControl mt={5}>
-              <Button type="submit" w="full" isLoading={isLoading}>
+            <Field.Root mt={5}>
+              <Button type="submit" w="full" loading={isLoading}>
                 SAVE
               </Button>
-            </FormControl>
-            <Button colorScheme="red" w="full" mt={5} onClick={resetHandler}>
+            </Field.Root>
+            <Button colorPalette="red" w="full" mt={5} onClick={resetHandler}>
               RESET
             </Button>
           </form>

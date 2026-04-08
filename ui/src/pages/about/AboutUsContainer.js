@@ -1,18 +1,9 @@
-import {
-  Box,
-  Container,
-  Heading,
-  HStack,
-  Select,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Container, Heading, HStack, NativeSelect, Text, VStack } from '@chakra-ui/react';
 import BeliefsSection from './BeliefsSection';
 import StaffSection from './StaffSection';
 import StorySection from './StorySection';
 import StrategySection from './StrategySection';
 import ValuesSection from './ValuesSection';
-import OurHeartMissions from './OurHeartMissions';
 import blurbs from './about.json';
 import { Fragment, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -76,9 +67,9 @@ const AboutUsContainer = (props) => {
       <VStack>
         <Box
           borderWidth="1px"
-          borderRadius="20"
+          borderRadius="20px"
           bgImage={`url('${process.env.PUBLIC_URL}/images/about/headerBg.jpg')`}
-          bgPosition="center"
+          backgroundPosition="center"
           bgSize="cover"
           px={{ base: 29, sm: 29, md: 15, lg: 29 }}
           py={5}
@@ -136,7 +127,6 @@ const AboutUsContainer = (props) => {
                     </Text>
                     {i < sections.length - 1 ? (
                       <Text
-                        mx={[1, 4]}
                         color="rgba(255, 255, 255, 1)"
                         fontSize={['sm', 'xl']}
                         verticalAlign="baseline"
@@ -150,26 +140,28 @@ const AboutUsContainer = (props) => {
               })}
           </HStack>
 
-          <Select
-            mt={4}
-            variant="outline"
-            borderWidth="2px"
-            borderRadius="5"
-            fontWeight="bold"
-            bgColor="white"
-            display={{ base: 'block', md: 'none' }}
-            value={selected}
-            onChange={(e) => handleChange(e)}
-          >
-            {sections &&
-              sections.map((e, i) => {
-                return (
-                  <option value={i} key={i}>
-                    {e}
-                  </option>
-                );
-              })}
-          </Select>
+          <NativeSelect.Root>
+            <NativeSelect.Field
+              mt={4}
+              variant="outline"
+              borderWidth="2px"
+              borderRadius="5px"
+              fontWeight="bold"
+              bgColor="white"
+              display={{ base: 'block', md: 'none' }}
+              value={selected}
+              onValueChange={(e) => handleChange(e)}>
+              {sections &&
+                sections.map((e, i) => {
+                  return (
+                    <option value={i} key={i}>
+                      {e}
+                    </option>
+                  );
+                })}
+            </NativeSelect.Field>
+            <NativeSelect.Indicator />
+          </NativeSelect.Root>
         </Box>
         {selected === 0 && (
           <StorySection blurb={blurbs.story} title={sections[selected]} />

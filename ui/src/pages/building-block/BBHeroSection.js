@@ -1,13 +1,4 @@
-import {
-  HStack,
-  VStack,
-  Stack,
-  Box,
-  Text,
-  SimpleGrid,
-  Image,
-  Button,
-} from '@chakra-ui/react';
+import { HStack, VStack, Stack, Box, Text, SimpleGrid, Image, Button } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 
 const MotionImage = motion(Image);
@@ -100,7 +91,7 @@ const BBHeroSection = ({ scheduleRef, contactRef }) => {
               borderRadius="5rem"
               justifyContent="space-between"
               alignItems="center"
-              bgColor="transparent"
+              variant="ghost"
               border="0.7px solid #D46764"
               py={{ md: '3', lg: '5' }}
               px={{ md: '5', lg: '8' }}
@@ -122,7 +113,7 @@ const BBHeroSection = ({ scheduleRef, contactRef }) => {
               borderRadius="5rem"
               justifyContent="space-between"
               alignItems="center"
-              bgColor="transparent"
+              variant="ghost"
               border="0.7px solid #D46764"
               padding={{ md: '3', lg: '5' }}
               h="-moz-min-content"
@@ -223,7 +214,7 @@ const BBHeroSection = ({ scheduleRef, contactRef }) => {
         }}
         bgRepeat="no-repeat"
         bgSize="cover"
-        bgPos={{ base: 'center', md: 'top' }}
+        backgroundPosition={{ base: 'center', md: 'top' }}
         paddingY={{ base: '4.5rem', md: '3rem', lg: '4rem' }}
       >
         <Box
@@ -289,7 +280,7 @@ const BBHeroSection = ({ scheduleRef, contactRef }) => {
         }}
         bgRepeat="no-repeat"
         bgSize="cover"
-        bgPos="bottom"
+        backgroundPosition="bottom"
         paddingBottom={{ base: '7rem', md: '7rem', lg: '10rem' }}
         w="100%"
       >

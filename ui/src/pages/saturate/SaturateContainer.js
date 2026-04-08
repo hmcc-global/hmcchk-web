@@ -1,10 +1,4 @@
-import {
-  Box,
-  Container,
-  Image,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Container, Image, Text, VStack } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import SaturateGoals from './SaturateGoals';
 import SaturateVision from './SaturateVision';
@@ -30,7 +24,7 @@ const SaturateContainer = () => {
         <Box
           display="flex"
           bgImage={process.env.PUBLIC_URL + '/images/saturate/Saturate_bg.svg'}
-          bgPosition="center"
+          backgroundPosition="center"
           bgSize="cover"
           textAlign="center"
           justifyContent="center"

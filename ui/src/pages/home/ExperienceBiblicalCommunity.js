@@ -7,23 +7,23 @@ import {
   VStack,
   Heading,
   Button,
-  Fade,
   Spacer,
   useMediaQuery,
   Link,
+  Icon,
 } from '@chakra-ui/react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import NewHereForm from './NewHereForm';
 import { useState } from 'react';
 import { InView } from 'react-intersection-observer';
+import { LuArrowRight } from 'react-icons/lu';
 
 const ExperienceBiblicalCommunity = () => {
-  const [isMobile] = useMediaQuery('(max-width: 768px)');
+  const [isMobile] = useMediaQuery(['(max-width: 768px)']);
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const onOpen = () => setIsOpen(true);
@@ -54,11 +54,14 @@ const ExperienceBiblicalCommunity = () => {
   return (
     <InView rootMargin="-50px" triggerOnce={true}>
       {({ inView, ref }) => (
-        <Fade transition={{ enter: { duration: 1 } }} in={inView}>
+        <Box
+          ref={ref}
+          opacity={inView ? 1 : 0}
+          transition="opacity 1s ease-in-out"
+        >
           <Box
-            ref={ref}
             bgSize="contain"
-            bgPos="10% 10%"
+            backgroundPosition="10% 10%"
             bgRepeat="no-repeat"
             bgImage={
               isMobile
@@ -75,7 +78,7 @@ const ExperienceBiblicalCommunity = () => {
                       w="100%"
                       position="absolute"
                       h="122%"
-                      bgPos={['60% 95%', '21% 95%']}
+                      backgroundPosition={['60% 95%', '21% 95%']}
                       bgSize={['40%', '20%']}
                       bgRepeat="no-repeat"
                       bgImage={`url('${process.env.PUBLIC_URL}/images/home/vector-orange-1.svg')`}
@@ -101,7 +104,7 @@ const ExperienceBiblicalCommunity = () => {
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
-                        bgPosition="center"
+                        backgroundPosition="center"
                       ></Box>
                     </Box>
 
@@ -111,7 +114,7 @@ const ExperienceBiblicalCommunity = () => {
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
-                        bgPosition="center"
+                        backgroundPosition="center"
                       ></Box>
                     </Box>
 
@@ -121,7 +124,7 @@ const ExperienceBiblicalCommunity = () => {
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
-                        bgPosition="center"
+                        backgroundPosition="center"
                       ></Box>
                     </Box>
 
@@ -131,7 +134,7 @@ const ExperienceBiblicalCommunity = () => {
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
-                        bgPosition="center"
+                        backgroundPosition="center"
                       ></Box>
                     </Box>
                     <Box px={['0.5em', '1em']}>
@@ -140,7 +143,7 @@ const ExperienceBiblicalCommunity = () => {
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
-                        bgPosition="center"
+                        backgroundPosition="center"
                       ></Box>
                     </Box>
                     <Box px={['0.5em', '1em']}>
@@ -150,7 +153,7 @@ const ExperienceBiblicalCommunity = () => {
                         bgSize="cover"
                         h={['11em', '23em']}
                         px="1em"
-                        bgPosition="center"
+                        backgroundPosition="center"
                       ></Box>
                     </Box>
                     <Box px={['0.5em', '1em']}>
@@ -159,7 +162,7 @@ const ExperienceBiblicalCommunity = () => {
                         borderRadius="md"
                         bgSize="cover"
                         h={['11em', '23em']}
-                        bgPosition="center"
+                        backgroundPosition="center"
                       ></Box>
                     </Box>
                   </Slider>
@@ -241,7 +244,7 @@ const ExperienceBiblicalCommunity = () => {
                               </Text>
                             </Box>
                             <Spacer />
-                            <ArrowForwardIcon color="white" my="auto" />
+                            <Icon color="white" my="auto" asChild><LuArrowRight /></Icon>
                           </Flex>
                         </Button>
                       </Link>
@@ -319,7 +322,7 @@ const ExperienceBiblicalCommunity = () => {
                             </Text>
                           </Box>
                           <Spacer />
-                          <ArrowForwardIcon color="white" my="auto" />
+                          <Icon color="white" my="auto" asChild><LuArrowRight /></Icon>
                         </Flex>
                       </Button>
                     </VStack>
@@ -365,7 +368,7 @@ const ExperienceBiblicalCommunity = () => {
                             borderRadius={80}
                             border="0.70px solid #D46764"
                             justify="space-between"
-                            bgColor="transparent"
+                            variant="ghost"
                             align="center"
                             color="#D46764"
                             _hover={{
@@ -385,7 +388,7 @@ const ExperienceBiblicalCommunity = () => {
                                 </Text>
                               </Box>
                               <Spacer />
-                              <ArrowForwardIcon my="auto" />
+                              <Icon my="auto" asChild><LuArrowRight /></Icon>
                             </Flex>
                           </Button>
                         </Link>
@@ -445,7 +448,7 @@ const ExperienceBiblicalCommunity = () => {
                           border="0.70px solid #D46764"
                           justify="space-between"
                           align="center"
-                          bgColor="transparent"
+                          variant="ghost"
                           color="#D46764"
                           onClick={onOpen}
                           _hover={{
@@ -466,7 +469,7 @@ const ExperienceBiblicalCommunity = () => {
                               </Text>
                             </Box>
                             <Spacer />
-                            <ArrowForwardIcon my="auto" />
+                            <Icon my="auto" asChild><LuArrowRight /></Icon>
                           </Flex>
                         </Button>
                       </Flex>
@@ -489,7 +492,7 @@ const ExperienceBiblicalCommunity = () => {
               </VStack>
             </Container>
           </Box>
-        </Fade>
+        </Box>
       )}
     </InView>
   );

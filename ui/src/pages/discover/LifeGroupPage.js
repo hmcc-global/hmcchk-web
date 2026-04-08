@@ -48,7 +48,7 @@ const LifeGroupPage = () => {
         >
           <VStack
             maxWidth={{ base: '95%', xl: '50%' }}
-            spacing={{ base: '1rem', xl: '1.5rem' }}
+            gap={{ base: '1rem', xl: '1.5rem' }}
           >
             <Text
               color="#0C0C20"
@@ -83,16 +83,15 @@ const LifeGroupPage = () => {
           >
             <VStack
               textAlign={['center', 'left']}
-              spacing={'1.25rem'}
+              gap={'1.25rem'}
               alignItems={{ base: 'center', xl: 'flex-start' }}
               maxWidth={{ base: '100%', xl: '45%' }}
             >
-              <HStack spacing={'1rem'}>
+              <HStack gap={'1rem'}>
                 <Icon
-                  as={MdPeople}
                   boxSize={{ base: '1.875rem', md: '2.125rem', lg: '2.5rem' }}
                   color={'#D46764'}
-                />
+                  asChild><MdPeople /></Icon>
                 <Heading
                   as="h2"
                   fontSize={{ base: '2rem', md: '2.25rem', lg: '2.625rem' }}
@@ -123,8 +122,6 @@ const LifeGroupPage = () => {
                 fullness of life that it offers -- which is why we believe in{' '}
               </Text>
               <Button
-                as={Link}
-                href="https://bit.ly/LGSignup-2025"
                 borderRadius={'0.9375rem'}
                 bgColor="#D46764"
                 py={'1.75rem'}
@@ -138,16 +135,15 @@ const LifeGroupPage = () => {
                 _hover={{ textDecoration: 'none', backgroundColor: '#AA5250' }}
                 alignItems="center"
                 justifyContent="center"
-              >
-                SIGN UP FOR LIFE GROUP
-              </Button>
+                asChild><Link href="https://bit.ly/LGSignup-2025">SIGN UP FOR LIFE GROUP
+                              </Link></Button>
             </VStack>
             <VStack flex={1} gap={'2rem'} w="100%">
               <Image
                 src={`${process.env.PUBLIC_URL}/images/connect/life-design.png`}
                 display={{ base: 'none', xl: 'block' }}
               />
-              <AspectRatio ratio={16 / 9} borderRadius="20" w={'100%'}>
+              <AspectRatio ratio={16 / 9} borderRadius="20px" w={'100%'}>
                 <iframe
                   src="https://www.youtube.com/embed/tainVHwAWt0"
                   title="YouTube video player"
@@ -297,7 +293,7 @@ const LifeGroupPage = () => {
             >
               CHECK OUT THE DIFFERENT LIFE GROUPS IN HMCC!
             </Heading>
-            <SimpleGrid columns={[2, 3]} spacing={3}>
+            <SimpleGrid columns={[2, 3]} gap={3}>
               {lifeGroupList.length > 0 &&
                 lifeGroupList.map((lifeGroupInfo, i) => (
                   <LifeGroupCard key={'lg' + i} lifeGroupInfo={lifeGroupInfo} />

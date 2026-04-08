@@ -1,25 +1,25 @@
 const colors = {
     primary: {
-        1: "#4A6EEB",
-        2: "#97D0D4",
-        3: "#EBBB41",
-        4: "#F2A9A7",
+        1: { value: "#4A6EEB" },
+        2: { value: "#97D0D4" },
+        3: { value: "#EBBB41" },
+        4: { value: "#F2A9A7" },
     },
     secondary: {
-        1: "#DFE7FF",
-        2: "#DBF1F1",
-        3: "#F5F0E0",
-        4: "#F1E6E6",
+        1: { value: "#DFE7FF" },
+        2: { value: "#DBF1F1" },
+        3: { value: "#F5F0E0" },
+        4: { value: "#F1E6E6" },
     },
     neutral: {
-        1: "#090500",
+        1: { value: "#090500" },
     },
     background: {
-        1: "#F6FAFF",
+        1: { value: "#F6FAFF" },
     },
     additional: {
-        1: "#D46764",
-        2: "#EFFAFD",
+        1: { value: "#D46764" },
+        2: { value: "#EFFAFD" },
     }
   };
   

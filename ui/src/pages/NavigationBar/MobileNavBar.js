@@ -8,11 +8,8 @@ import {
   Icon,
   Grid,
   Drawer,
-  DrawerBody,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
   useDisclosure,
+  Portal,
 } from '@chakra-ui/react';
 import MainMenu from './MainMenu';
 import { IoMdHome, IoMdCalendar, IoMdHeart, IoMdMore } from 'react-icons/io';
@@ -24,11 +21,11 @@ import { useLocation } from 'react-router-dom';
 
 const MobileNavBar = (props) => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [, setIsLoading] = useState(true);
   const [userObj, setUserObj] = useState();
 
   const btnRef = React.useRef();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
   const user = useSelector((state) => state.user);
 
   const location = useLocation();
@@ -90,101 +87,119 @@ const MobileNavBar = (props) => {
           templateColumns={'repeat(6, 1fr)'}
           alignContent="center"
         >
-          <Stack dir="column" spacing="0">
+          <Stack dir="column" gap="0">
             <Link align="center" href="/" id="mnb-home">
               <Icon
-                opacity={!isOpen && location.pathname === '/' ? '1' : '0.37'}
+                opacity={!open && location.pathname === '/' ? '1' : '0.37'}
                 boxSize={5}
-                as={IoMdHome}
-              />
+                asChild
+              >
+                <IoMdHome />
+              </Icon>
               <Text>Home</Text>
             </Link>
           </Stack>
-          <Stack dir="column" spacing="0">
+          <Stack dir="column" gap="0">
             <Link align="center" href="/events" id="mnb-events">
               <Icon
                 opacity={
-                  !isOpen && location.pathname === '/events' ? '1' : '0.37'
+                  !open && location.pathname === '/events' ? '1' : '0.37'
                 }
                 boxSize={5}
-                as={IoMdCalendar}
-              />
+                asChild
+              >
+                <IoMdCalendar />
+              </Icon>
               <Text>Events</Text>
             </Link>
           </Stack>
-          <Stack dir="column" spacing="0" pl="2">
+          <Stack dir="column" gap="0" pl="2">
             <Link align="center" href="/discover" id="mnb-connect">
               <Icon
                 opacity={
-                  !isOpen && location.pathname === '/discover' ? '1' : '0.37'
+                  !open && location.pathname === '/discover' ? '1' : '0.37'
                 }
                 boxSize={5}
-                as={IoMdHeart}
-              />
+                asChild
+              >
+                <IoMdHeart />
+              </Icon>
               <Text>Discover</Text>
             </Link>
           </Stack>
-          <Stack dir="column" spacing="0" pl="4">
+          <Stack dir="column" gap="0" pl="4">
             <Link align="center" href="/sermons" id="mnb-sermons">
               <Icon
                 opacity={
-                  !isOpen &&
+                  !open &&
                   (location.pathname === '/sermons' ||
                     location.pathname === '/online')
                     ? '1'
                     : '0.37'
                 }
                 boxSize={5}
-                as={MdOndemandVideo}
-              />
+                asChild
+              >
+                <MdOndemandVideo />
+              </Icon>
               <Text>Sermons</Text>
             </Link>
           </Stack>
-          <Stack dir="column" spacing="0" pl="4">
+          <Stack dir="column" gap="0" pl="4">
             <Link align="center" href="/give" id="mnb-give">
               <Icon
-                opacity={
-                  !isOpen && location.pathname === '/give' ? '1' : '0.37'
-                }
+                opacity={!open && location.pathname === '/give' ? '1' : '0.37'}
                 pt="0.25em"
                 boxSize={5}
-                as={ImLeaf}
-              />
+                asChild
+              >
+                <ImLeaf />
+              </Icon>
               <Text>Give</Text>
             </Link>
           </Stack>
-          <Stack dir="column" spacing="0">
+          <Stack dir="column" gap="0">
             <Box align="center" ref={btnRef} onClick={onOpen}>
-              <Icon opacity={isOpen ? '1' : 0.37} boxSize={5} as={IoMdMore} />
+              <Icon opacity={open ? '1' : 0.37} boxSize={5} asChild>
+                <IoMdMore />
+              </Icon>
               <Text>More</Text>
             </Box>
           </Stack>
         </Grid>
       </Flex>
-      <Drawer
-        isOpen={isOpen}
+      <Drawer.Root
+        open={open}
         size="full"
-        onClose={onClose}
-        finalFocusRef={btnRef}
+        finalFocusEl={() => btnRef.current}
         placement="bottom"
+        onOpenChange={(e) => {
+          if (!e.open) {
+            onClose();
+          }
+        }}
       >
-        <DrawerOverlay />
-        <DrawerContent
-          backgroundColor="#4A6EEB"
-          width="100%"
-          style={{ position: 'absolute' }}
-        >
-          <DrawerCloseButton
-            position="absolute"
-            right="8%"
-            top="8%"
-            color="white"
-          />
-          <DrawerBody>
-            <MainMenu login={loggedIn} onClose={onClose} />
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+        <Portal>
+          <Drawer.Backdrop />
+          <Drawer.Positioner>
+            <Drawer.Content
+              backgroundColor="#4A6EEB"
+              width="100%"
+              style={{ position: 'absolute' }}
+            >
+              <Drawer.CloseTrigger
+                position="absolute"
+                right="8%"
+                top="8%"
+                color="white"
+              />
+              <Drawer.Body>
+                <MainMenu login={loggedIn} onClose={onClose} />
+              </Drawer.Body>
+            </Drawer.Content>
+          </Drawer.Positioner>
+        </Portal>
+      </Drawer.Root>
     </>
   );
 };

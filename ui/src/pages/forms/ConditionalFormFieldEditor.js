@@ -5,16 +5,7 @@ import {
   getFieldById,
   getFieldIndexById,
 } from '../helpers/formsHelpers';
-import {
-  FormControl,
-  FormLabel,
-  Button,
-  Select,
-  Box,
-  Stack,
-  Heading,
-  Text,
-} from '@chakra-ui/react';
+import { Button, NativeSelect, Box, Stack, Heading, Text, Field } from '@chakra-ui/react';
 
 import {
   countryList,
@@ -104,7 +95,7 @@ const ConditionalFormFieldEditor = (props) => {
   ]);
 
   return (
-    <Stack spacing="3">
+    <Stack gap="3">
       <Box>
         <Heading as="h3" size="md">
           Conditional Field Settings
@@ -143,47 +134,49 @@ const ConditionalFormFieldEditor = (props) => {
           Conditional Field Editor
         </Heading>
         <Stack>
-          <FormControl>
-            <FormLabel>Parent Field</FormLabel>
-            <Select
-              placeholder="Select parent"
-              {...register('conditionalFieldParent')}
-            >
-              {formFields
-                .filter((obj) => {
-                  if (obj.fieldType === 'select') {
-                    return obj;
-                  } else if (
-                    obj.fieldType === 'prefill' &&
-                    conditionalEnabledPrefillFields.includes(obj.fieldName)
-                  ) {
-                    return obj;
-                  } else {
-                    return false;
-                  }
-                })
-                .map((fieldData, i) => (
-                  <option key={`${fieldData}+${i}`} value={fieldData.id}>
-                    {sentencize(fieldData.fieldName)}
-                  </option>
-                ))}
-            </Select>
-          </FormControl>
-          {conditionalFieldParent && (
-            <FormControl>
-              <Select
-                placeholder="Select option to create condition for"
-                {...register('conditionalFieldOption')}
-              >
-                {getFieldOptions(conditionalFieldParent, formFields).map(
-                  (opt, i) => (
-                    <option key={`${opt + i}`} value={opt}>
-                      {opt}
+          <Field.Root>
+            <Field.Label>Parent Field</Field.Label>
+            <NativeSelect.Root>
+              <NativeSelect.Field placeholder="Select parent" {...register('conditionalFieldParent')}>
+                {formFields
+                  .filter((obj) => {
+                    if (obj.fieldType === 'select') {
+                      return obj;
+                    } else if (
+                      obj.fieldType === 'prefill' &&
+                      conditionalEnabledPrefillFields.includes(obj.fieldName)
+                    ) {
+                      return obj;
+                    } else {
+                      return false;
+                    }
+                  })
+                  .map((fieldData, i) => (
+                    <option key={`${fieldData}+${i}`} value={fieldData.id}>
+                      {sentencize(fieldData.fieldName)}
                     </option>
-                  )
-                )}
-              </Select>
-            </FormControl>
+                  ))}
+              </NativeSelect.Field>
+              <NativeSelect.Indicator />
+            </NativeSelect.Root>
+          </Field.Root>
+          {conditionalFieldParent && (
+            <Field.Root>
+              <NativeSelect.Root>
+                <NativeSelect.Field
+                  placeholder="Select option to create condition for"
+                  {...register('conditionalFieldOption')}>
+                  {getFieldOptions(conditionalFieldParent, formFields).map(
+                    (opt, i) => (
+                      <option key={`${opt + i}`} value={opt}>
+                        {opt}
+                      </option>
+                    )
+                  )}
+                </NativeSelect.Field>
+                <NativeSelect.Indicator />
+              </NativeSelect.Root>
+            </Field.Root>
           )}
           {conditionalFieldParent && conditionalFieldOption && (
             <ConditionalFormFieldMapper

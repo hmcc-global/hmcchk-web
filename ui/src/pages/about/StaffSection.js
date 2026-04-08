@@ -1,9 +1,7 @@
 import {
   Flex,
-  Text,
   Center,
   VStack,
-  Stack,
   Image,
   Box,
   Heading,
@@ -69,7 +67,7 @@ const StaffSection = (props) => {
                         w={['80%', '100%', '100%']}
                         objectFit="cover"
                         margin="auto"
-                        borderRadius="7"
+                        borderRadius="7px"
                       />
                     </Box>
 

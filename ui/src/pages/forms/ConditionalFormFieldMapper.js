@@ -1,12 +1,4 @@
-import {
-  FormControl,
-  FormLabel,
-  Button,
-  Box,
-  Stack,
-  Input,
-  Text,
-} from '@chakra-ui/react';
+import { Button, Box, Stack, Input, Text, Field } from '@chakra-ui/react';
 import { useEffect } from 'react';
 
 import { useForm } from 'react-hook-form';
@@ -25,8 +17,6 @@ const ConditionalFormFieldMapper = (props) => {
     reset,
     setValue,
     handleSubmit,
-    control,
-    formState: { errors },
   } = useForm();
 
   const onMappingSubmit = (data) => {
@@ -79,10 +69,10 @@ const ConditionalFormFieldMapper = (props) => {
               else return field;
             })
             .map((field, j) => (
-              <FormControl>
-                <FormLabel>{field.fieldName}</FormLabel>
+              <Field.Root>
+                <Field.Label>{field.fieldName}</Field.Label>
                 <Input {...register(field.id)} />
-              </FormControl>
+              </Field.Root>
             ))}
         </Box>
         <Button mt="3" type="submit">

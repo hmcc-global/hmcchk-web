@@ -1,4 +1,6 @@
-import { Flex, Heading, useColorModeValue } from "@chakra-ui/react";
+import { Flex, Heading } from "@chakra-ui/react";
+
+import { useColorModeValue } from "../../components/ui/color-mode";
 
 export default function App(props) {
   return (

@@ -1,5 +1,5 @@
 import { Flex, useBreakpointValue } from '@chakra-ui/react';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import EventsSection from './EventsSection';
 import HeroSection from './HeroSection';
 import PopupContainer from './PopupContainer';
@@ -12,7 +12,6 @@ import ChurchThemeSectionMobile from './ChurchThemeSectionMobile';
 
 const HomeContainer = (props) => {
   const { user } = props;
-  const sermonRef = useRef(null);
   const isMobile = useBreakpointValue({ base: true, md: false });
   const [popupInfo, setPopupInfo] = useState([]);
   const getData = async () => {
@@ -24,7 +23,7 @@ const HomeContainer = (props) => {
     }
   };
 
-  const [_isOpen, setIsOpen] = useState(true);
+  const [, setIsOpen] = useState(true);
   useEffect(() => {
     if (Object.keys(user).length !== 0) setIsOpen(false);
     getData();
