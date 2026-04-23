@@ -123,7 +123,7 @@ const LifeGroupPage = () => {
               </Text>
               <Button
                 as={Link}
-                href="https://bit.ly/LGSignup-2025"
+                href="https://bit.ly/summerLG26"
                 borderRadius={'0.9375rem'}
                 bgColor="#D46764"
                 py={'1.75rem'}
