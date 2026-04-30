@@ -46,6 +46,7 @@ import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
 import ConnectMinistry from './discover/ConnectMinistry';
 import LifeGroupPage from './discover/LifeGroupPage';
 import TenYearCommitmentContainer from './10y-commitment/TenYearCommitmentContainer';
+import TenYearCommitmentPage from './10y-commitment/TenYearCommitmentPage';
 
 const MainContainer = () => {
   return (
@@ -206,6 +207,12 @@ const MainContainer = () => {
           path="/about-us"
           permissions={['public']}
           component={AboutUsContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/10-year-commitment"
+          permissions={['public']}
+          component={TenYearCommitmentPage}
         />
         <PrivateRoute
           exact
