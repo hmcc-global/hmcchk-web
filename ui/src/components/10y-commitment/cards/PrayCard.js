@@ -8,13 +8,6 @@ import React from 'react';
 import BaseCard from './BaseCard';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
-/**
- * PrayCard Component
- * "Pray: Fuel the Vision - Become a Prayer Partner"
- * 
- * This card represents the prayer commitment aspect of the 10-Year vision.
- * Customize the content, images, and layout as needed based on the Figma design.
- */
 const PrayCard = () => {
   return (
     <BaseCard

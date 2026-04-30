@@ -8,20 +8,13 @@ import React from 'react';
 import BaseCard from './BaseCard';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
-/**
- * GiveCard Component
- * "Give: Sow into the Vision - Give to the Vision Fund"
- * 
- * This card represents the financial giving commitment aspect of the 10-Year vision.
- * Aligned with PrayCard structure and styling.
- */
+
 const GiveCard = () => {
   return (
     <BaseCard
       title="Give: Sow into the Vision"
       subtitle="Give to the Vision Fund"
     >
-      {/* Custom content for Give card */}
       <VStack spacing="1rem" align="stretch" flex={1}>
         <Text
           fontSize={{ base: "0.813rem" , md: "1rem" }}

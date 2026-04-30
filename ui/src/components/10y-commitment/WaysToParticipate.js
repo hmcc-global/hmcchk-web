@@ -75,7 +75,6 @@ const WaysToParticipate = (props) => {
       </VStack>
 
       {isMobile ? (
-        // Mobile Carousel with indicators and controls
         <Flex
           position="relative"
           w="100vw" 
@@ -83,12 +82,10 @@ const WaysToParticipate = (props) => {
           h="650px"
           direction="column"
         >
-          {/* Card Container */}
           <Box flex={1}>
             {cards[currentCardIndex]}
           </Box>
 
-          {/* Blob Indicators - Centered Layer */}
           <Flex
             position="absolute"
             bottom="1rem"
@@ -116,7 +113,6 @@ const WaysToParticipate = (props) => {
             </HStack>
           </Flex>
 
-          {/* Play/Pause Button - Right Layer */}
           <Flex
             position="absolute"
             bottom="1rem"

@@ -6,14 +6,6 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 
-/**
- * BaseCard Component
- * Provides the common structure for all participation cards:
- * - Title (e.g., "Pray")
- * - Title Suffix (e.g., "Fuel the Vision")
- * - Subtitle (e.g., "Become a Prayer Partner")
- * - Customizable content area (passed as children)
- */
 const BaseCard = ({
   title,
   titleSuffix,
@@ -29,7 +21,6 @@ const BaseCard = ({
       align="stretch"
       h="100%"
     >
-      {/* Card Header - Common across all cards */}
       <VStack spacing={{base: "0.75rem", md: "1.5rem"}} align="center">
         <Heading
             as="h4"
@@ -53,7 +44,6 @@ const BaseCard = ({
         </Text>
       </VStack>
 
-      {/* Custom Content for each card */}
       {children}
     </VStack>
   );
