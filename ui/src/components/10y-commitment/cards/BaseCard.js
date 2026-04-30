@@ -32,12 +32,11 @@ const BaseCard = ({
       {/* Card Header - Common across all cards */}
       <VStack spacing={{base: "0.75rem", md: "1.5rem"}} align="center">
         <Heading
-        as="h4"
-        fontSize={{ base: '1.56rem', md: '1.75rem' }}
-        fontWeight={700}
-        color="#FFFFFF"
-        fontFamily="DM Serif Display"
-        fontStyle="italic"
+            as="h4"
+            fontSize={{ base: '1.56rem', md: '1.75rem' }}
+            fontWeight={700}
+            color="#FFFFFF"
+            fontFamily="DMSerifDisplay_Italic"
         >
         {title}
         </Heading>

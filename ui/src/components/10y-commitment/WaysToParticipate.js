@@ -21,8 +21,6 @@ const WaysToParticipate = (props) => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-rotate cards every 5 seconds on mobile
-
   const cards = [
     <PrayCard key="pray" />,
     <GiveCard key="give" />,
@@ -54,8 +52,8 @@ const WaysToParticipate = (props) => {
       <VStack spacing={{ base: '1rem', md: '1.5rem' }} align="center" w="100%">
         <Heading
           as="h3"
-          fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}
-          fontWeight={700}
+          fontSize={{ base: '2rem', md: '2.813rem' }}
+          fontWeight={400}
           textAlign="center"
           color="#0025a3"
           fontFamily="DMSerifDisplay_Italic"
@@ -63,7 +61,9 @@ const WaysToParticipate = (props) => {
           Ways to Participate
         </Heading>
         <Text
-          fontSize={{ base: 'sm', md: 'base' }}
+          fontSize={{ base: "0.813rem" , md: "1rem" }}
+          fontWeight={500}
+          fontFamily={"Manrope"}
           textAlign="center"
           color="#333"
           maxW="600px"
@@ -80,7 +80,7 @@ const WaysToParticipate = (props) => {
           position="relative"
           w="100vw" 
           ml="calc(-50vw + 50%)" 
-          h="600px"
+          h="650px"
           direction="column"
         >
           {/* Card Container */}
@@ -95,7 +95,7 @@ const WaysToParticipate = (props) => {
             left="50%"
             transform="translateX(-50%)"
             align="center"
-            pointerEvents="none"
+            pointerEvents="auto"
             zIndex={1}
           >
             <HStack spacing="0.75rem">
@@ -108,6 +108,9 @@ const WaysToParticipate = (props) => {
                   bg={index === currentCardIndex ? "#9CB5FF" : "#5B6177"}
                   transition="all 0.3s ease"
                   flexShrink={0}
+                  cursor="pointer"
+                  onClick={() => setCurrentCardIndex(index)}
+                  _hover={{ opacity: 0.8 }}
                 />
               ))}
             </HStack>
@@ -135,7 +138,7 @@ const WaysToParticipate = (props) => {
           </Flex>
       ) : (
         <Grid
-          templateColumns='1fr'
+          templateColumns='repeat(3, 1fr)'
           gap={{ base: '1.5rem', md: '2rem' }}
           w="100%"
           maxW="1200px"
