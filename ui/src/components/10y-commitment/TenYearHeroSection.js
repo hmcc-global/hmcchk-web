@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 
 const TenYearHeroSection = () => {
-  const bodyTextSize = { base: '0.925rem', md: '1.2rem' };
+
 
   return (
     <>
