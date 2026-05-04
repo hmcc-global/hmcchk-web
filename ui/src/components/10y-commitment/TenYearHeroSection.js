@@ -9,8 +9,6 @@ import {
 } from '@chakra-ui/react';
 
 const TenYearHeroSection = () => {
-
-
   return (
     <>
       <Box
