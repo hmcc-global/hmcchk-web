@@ -1,7 +1,7 @@
 import { Flex } from '@chakra-ui/react';
 import TenYearHeroSection from './TenYearHeroSection';
 
-const TenYearCommitmentContainer = (props) => {
+const TenYearCommitmentContainer = () => {
   return (
     <Flex direction="column">
       <TenYearHeroSection />

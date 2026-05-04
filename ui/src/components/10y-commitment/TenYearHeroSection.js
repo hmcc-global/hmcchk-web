@@ -7,8 +7,6 @@ import {
   Container,
   Text,
 } from '@chakra-ui/react';
-import { SocialIcon } from 'react-social-icons';
-import { useEffect, useRef } from 'react';
 
 const TenYearHeroSection = () => {
   const bodyTextSize = { base: '0.925rem', md: '1.2rem' };
@@ -41,7 +39,7 @@ const TenYearHeroSection = () => {
               as="h1"
               fontSize={{ base: '1.0625rem', lg: '2.5rem' }}
               fontWeight={700}
-              fontFamily={'DMSans'}
+              fontFamily={'DMSans_Regular'}
               textTransform={'uppercase'}
             >
               Harvest Mission Global
