@@ -20,7 +20,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 import { useEffect, useRef, useState, React } from 'react';
-import { getRenderDate } from '../helpers/eventsHelpers';
+import { getRenderDate, sortEvents } from '../helpers/eventsHelpers';
 import EventsSectionCard from './EventsSectionCards';
 
 const EventsSection = () => {
@@ -61,22 +61,7 @@ const EventsSection = () => {
             return endDate > DateTime.now() && DateTime.now() > startDate;
           } else return false;
         });
-        filteredEndDate.sort((a, b) => {
-          const hasFeaturedA = a.featured;
-          const hasFeaturedB = b.featured;
-          const hasResourcesA = a.eventType?.some(
-            (type) => type.value === 'Resources'
-          );
-          const hasResourcesB = b.eventType?.some(
-            (type) => type.value === 'Resources'
-          );
-
-          if (hasFeaturedA && !hasFeaturedB) return -1;
-          if (!hasFeaturedA && hasFeaturedB) return 1;
-          if (hasResourcesA && !hasResourcesB) return 1;
-          if (!hasResourcesA && hasResourcesB) return -1;
-          return a.renderDate < b.renderDate ? -1 : 1;
-        });
+        sortEvents(filteredEndDate);
         filtered.push(...filteredEndDate);
         setEvents(filtered);
       } else {
