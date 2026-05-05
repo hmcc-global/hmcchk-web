@@ -61,31 +61,21 @@ const EventsSection = () => {
             return endDate > DateTime.now() && DateTime.now() > startDate;
           } else return false;
         });
-        filteredEndDate.sort((a, b) =>
-          a.renderDate === ''
-            ? 1
-            : b.renderDate === ''
-            ? -1
-            : a.renderDate < b.renderDate
-            ? -1
-            : 1
-        );
-        // Resources are last in the list
         filteredEndDate.sort((a, b) => {
-          const hasOthersA = a.eventType?.some(
+          const hasFeaturedA = a.featured;
+          const hasFeaturedB = b.featured;
+          const hasResourcesA = a.eventType?.some(
             (type) => type.value === 'Resources'
           );
-          const hasOthersB = b.eventType?.some(
+          const hasResourcesB = b.eventType?.some(
             (type) => type.value === 'Resources'
           );
 
-          if (hasOthersA && !hasOthersB) {
-            return 1;
-          } else if (!hasOthersA && hasOthersB) {
-            return -1;
-          } else {
-            return a.renderDate < b.renderDate ? -1 : 1;
-          }
+          if (hasFeaturedA && !hasFeaturedB) return -1;
+          if (!hasFeaturedA && hasFeaturedB) return 1;
+          if (hasResourcesA && !hasResourcesB) return 1;
+          if (!hasResourcesA && hasResourcesB) return -1;
+          return a.renderDate < b.renderDate ? -1 : 1;
         });
         filtered.push(...filteredEndDate);
         setEvents(filtered);
