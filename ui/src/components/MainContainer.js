@@ -45,6 +45,7 @@ import PrivacyPolicy from './screens/PrivacyPolicy';
 import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
 import ConnectMinistry from './discover/ConnectMinistry';
 import LifeGroupPage from './discover/LifeGroupPage';
+import TenYearCommitmentContainer from './10y-commitment/TenYearCommitmentContainer';
 
 const MainContainer = () => {
   return (
@@ -247,6 +248,12 @@ const MainContainer = () => {
           path="/saturate"
           permissions={['public']}
           component={SaturateContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/10y-commitment"
+          permissions={['public']}
+          component={TenYearCommitmentContainer}
         />
         {/* Admin items */}
         <PrivateRoute
