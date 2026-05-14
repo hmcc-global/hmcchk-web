@@ -5,6 +5,7 @@ import {
   Image,
 } from '@chakra-ui/react';
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import BaseCard from './BaseCard';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
@@ -37,8 +38,8 @@ const GiveCard = () => {
 
 
         <Button
-          as="a"
-          href="/give"
+          as={RouterLink}
+          to="/give"
           w="100%"
           bg="linear-gradient(90deg, white, #9CB5FF)"
           color="#0025a3"

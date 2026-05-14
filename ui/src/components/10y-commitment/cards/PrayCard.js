@@ -57,24 +57,24 @@ const PrayCard = () => {
         </Text>
 
         <Button
-            as="a"
-            href={prayerCalendarLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            w="100%"
-            bg="linear-gradient(90deg, white, #9CB5FF)"
-            color="#0025a3"
-            _hover={{ opacity: 0.9 }}
-            fontSize={{ base: 'sm', md: 'base' }}
-            py={{ base: '0.5rem', md: '0.75rem' }}
-            fontWeight={700}
-            borderRadius="80px"
-            rightIcon={<ArrowForwardIcon />}
-            justifyContent="space-between"
-            px={{ base: '1rem', md: '1.5rem' }}
-            fontFamily="Manrope"
-            >
-            <Text>Add to Calendar</Text>
+          as="a"
+          href={prayerCalendarLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          w="100%"
+          bg="linear-gradient(90deg, white, #9CB5FF)"
+          color="#0025a3"
+          _hover={{ opacity: 0.9 }}
+          fontSize={{ base: 'sm', md: 'base' }}
+          py={{ base: '0.5rem', md: '0.75rem' }}
+          fontWeight={700}
+          borderRadius="80px"
+          rightIcon={<ArrowForwardIcon />}
+          justifyContent="space-between"
+          px={{ base: '1rem', md: '1.5rem' }}
+          fontFamily="Manrope"
+        >
+          <Text>Add to Calendar</Text>
         </Button>
       </VStack>
     </BaseCard>
