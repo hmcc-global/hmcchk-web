@@ -3,12 +3,25 @@ import {
   Text,
   Button,
   Image,
+  Link,
 } from '@chakra-ui/react';
 import React from 'react';
 import BaseCard from './BaseCard';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
 const PrayCard = () => {
+  const prayerCalendarLink =
+    'https://calendar.google.com/calendar/r/eventedit?text=' +
+    encodeURIComponent('10-Year Vision Prayer Gathering') +
+    '&details=' +
+    encodeURIComponent(
+      'Join us on the 10th of each month to pray for the 10-year commitment and church planting vision.'
+    ) +
+    '&location=' +
+    encodeURIComponent('HMCC of Hong Kong') +
+    '&recur=' +
+    encodeURIComponent('RRULE:FREQ=MONTHLY;BYMONTHDAY=10');
+
   return (
     <BaseCard
       title="Pray: Fuel the Vision"
@@ -20,7 +33,7 @@ const PrayCard = () => {
           color="#FFFFFF"
           fontFamily="Manrope"
           fontWeight={500}
-          align="center"
+          textAlign="center"
         >
           Commit to praying regularly for the 10-year vision: for the churches, the disciples, the funds, and the people being sent out.
         </Text>
@@ -39,12 +52,16 @@ const PrayCard = () => {
           color="#FFFFFF"
           fontFamily="Manrope"
           fontWeight={500}
-          align="center"
+          textAlign="center"
         >
           Join us on the 10th of each month, we gather as a church family to pray for our commitment and the 10 cities God placed on our hearts.
         </Text>
 
         <Button
+            as={Link}
+            href={prayerCalendarLink}
+            target="_blank"
+            rel="noopener noreferrer"
             w="100%"
             bg="linear-gradient(90deg, white, #9CB5FF)"
             color="#0025a3"

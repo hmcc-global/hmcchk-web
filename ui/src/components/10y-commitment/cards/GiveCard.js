@@ -3,6 +3,7 @@ import {
   Text,
   Button,
   Image,
+  Link,
 } from '@chakra-ui/react';
 import React from 'react';
 import BaseCard from './BaseCard';
@@ -21,7 +22,7 @@ const GiveCard = () => {
           color="#FFFFFF"
           fontFamily="Manrope"
           fontWeight={500}
-          align="center"
+          textAlign="center"
         >
           Your financial seeds will directly fuel church plants across the globe. Every dollar brings us closer to seeing a church in the 10 cities.
         </Text>
@@ -37,6 +38,8 @@ const GiveCard = () => {
 
 
         <Button
+          as={Link}
+          href="/give"
           w="100%"
           bg="linear-gradient(90deg, white, #9CB5FF)"
           color="#0025a3"
