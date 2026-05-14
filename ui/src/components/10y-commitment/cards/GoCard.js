@@ -49,6 +49,10 @@ const GoCard = () => {
 
         <HStack spacing="0.75rem" w="100%" mt="auto">
           <Button
+            as="a"
+            href="https://atx.hmccglobal.org/"
+            target="_blank"
+            rel="noopener noreferrer"
             w="100%"
             bg="linear-gradient(90deg, white, #9CB5FF)"
             color="#0025a3"
@@ -61,10 +65,15 @@ const GoCard = () => {
             justifyContent="space-between"
             px={{ base: '1rem', md: '1.5rem' }}
             fontFamily="Manrope"
+            
           >
             <Text>Austin</Text>
           </Button>
           <Button
+            as="a"
+            href="https://hk.hmccglobal.org/"
+            target="_blank"
+            rel="noopener noreferrer"
             w="100%"
             bg="linear-gradient(90deg, white, #9CB5FF)"
             color="#0025a3"
