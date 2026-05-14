@@ -32,6 +32,7 @@ const GiveCard = () => {
           marginX="auto"
           display="flex"
           borderRadius={10}
+          alt="Hands giving and receiving"
         />
 
 

@@ -9,6 +9,7 @@ import {
   useBreakpointValue,
   HStack,
   IconButton,
+  Button,
 } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import { FaPlay, FaPause } from 'react-icons/fa';
@@ -97,17 +98,19 @@ const WaysToParticipate = (props) => {
           >
             <HStack spacing="0.75rem">
               {cards.map((_, index) => (
-                <Box
+                <Button
                   key={index}
                   w={index === currentCardIndex ? "28px" : "10px"}
                   h="10px"
+                  minW={index === currentCardIndex ? "28px" : "10px"}
                   borderRadius="full"
                   bg={index === currentCardIndex ? "#9CB5FF" : "#5B6177"}
                   transition="all 0.3s ease"
                   flexShrink={0}
-                  cursor="pointer"
                   onClick={() => setCurrentCardIndex(index)}
                   _hover={{ opacity: 0.8 }}
+                  aria-label={`Go to slide ${index + 1}`}
+                  p={0}
                 />
               ))}
             </HStack>

@@ -31,6 +31,7 @@ const PrayCard = () => {
             marginX="auto"
             display="flex"
             borderRadius={10}
+            alt="People praying together"
         />
 
         <Text

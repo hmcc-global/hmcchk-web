@@ -2,13 +2,7 @@ import {
   VStack,
   Text,
   Button,
-  Box,
-  Grid,
-  GridItem,
-  Flex,
-  Center,
   Image,
-  useBreakpointValue,
   HStack,
 } from '@chakra-ui/react';
 import React from 'react';
@@ -16,8 +10,6 @@ import BaseCard from './BaseCard';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
 const GoCard = () => {
-  const isMobile = useBreakpointValue({ base: true, md: false });
-
   return (
     <BaseCard
       title="Go: Be the Vision"
@@ -41,6 +33,7 @@ const GoCard = () => {
           marginX="auto"
           display="flex"
           borderRadius={10}
+          alt="People participating in mission work"
         />
 
         <Text
@@ -95,6 +88,7 @@ const GoCard = () => {
           marginX="auto"
           display="flex"
           borderRadius={10}
+          alt="Map showing 10 cities for church planting"
         />
         
       </VStack>
