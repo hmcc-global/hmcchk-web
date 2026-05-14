@@ -1,6 +1,5 @@
 import {
   VStack,
-  HStack,
   Heading,
   Text,
 } from '@chakra-ui/react';
