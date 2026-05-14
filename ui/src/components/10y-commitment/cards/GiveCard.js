@@ -3,7 +3,6 @@ import {
   Text,
   Button,
   Image,
-  Link,
 } from '@chakra-ui/react';
 import React from 'react';
 import BaseCard from './BaseCard';
@@ -38,7 +37,7 @@ const GiveCard = () => {
 
 
         <Button
-          as={Link}
+          as="a"
           href="/give"
           w="100%"
           bg="linear-gradient(90deg, white, #9CB5FF)"

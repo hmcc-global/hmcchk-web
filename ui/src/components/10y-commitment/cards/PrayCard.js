@@ -3,7 +3,6 @@ import {
   Text,
   Button,
   Image,
-  Link,
 } from '@chakra-ui/react';
 import React from 'react';
 import BaseCard from './BaseCard';
@@ -58,7 +57,7 @@ const PrayCard = () => {
         </Text>
 
         <Button
-            as={Link}
+            as="a"
             href={prayerCalendarLink}
             target="_blank"
             rel="noopener noreferrer"
