@@ -17,7 +17,7 @@ import PrayCard from './cards/PrayCard';
 import GiveCard from './cards/GiveCard';
 import GoCard from './cards/GoCard';
 
-const WaysToParticipate = (props) => {
+const WaysToParticipate = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
