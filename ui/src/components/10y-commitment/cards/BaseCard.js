@@ -7,7 +7,6 @@ import React from 'react';
 
 const BaseCard = ({
   title,
-  titleSuffix,
   subtitle,
   children,
 }) => {
