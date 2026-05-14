@@ -22,7 +22,7 @@ const GoCard = () => {
           color="#FFFFFF"
           fontFamily="Manrope"
           fontWeight={500}
-          align="center"
+          textAlign="center"
         >
           Is God stirring your heart to be a part of the vision? Begin praying now about the cities and growing as a disciple of Christ!
         </Text>
