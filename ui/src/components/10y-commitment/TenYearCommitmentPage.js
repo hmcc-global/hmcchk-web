@@ -1,7 +1,7 @@
 import { Container, VStack } from '@chakra-ui/react';
 import WaysToParticipate from './WaysToParticipate';
 
-const TenYearCommitmentPage = (props) => {
+const TenYearCommitmentPage = () => {
   return (
     <Container maxW="container.xl" py={10}>
       <VStack direction="column" gap={10}>
