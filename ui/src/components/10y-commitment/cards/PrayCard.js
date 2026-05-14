@@ -9,17 +9,13 @@ import BaseCard from './BaseCard';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
 const PrayCard = () => {
-  const prayerCalendarLink =
-    'https://calendar.google.com/calendar/r/eventedit?text=' +
-    encodeURIComponent('10-Year Vision Prayer Gathering') +
-    '&details=' +
-    encodeURIComponent(
-      'Join us on the 10th of each month to pray for the 10-year commitment and church planting vision.'
-    ) +
-    '&location=' +
-    encodeURIComponent('HMCC of Hong Kong') +
-    '&recur=' +
-    encodeURIComponent('RRULE:FREQ=MONTHLY;BYMONTHDAY=10');
+  const prayerCalendarLink = `https://calendar.google.com/calendar/r/eventedit?text=${encodeURIComponent(
+    '10-Year Vision Prayer Gathering'
+  )}&details=${encodeURIComponent(
+    'Join us on the 10th of each month to pray for the 10-year commitment and church planting vision.'
+  )}&location=${encodeURIComponent(
+    'HMCC of Hong Kong'
+  )}&recur=${encodeURIComponent('RRULE:FREQ=MONTHLY;BYMONTHDAY=10')}`;
 
   return (
     <BaseCard
