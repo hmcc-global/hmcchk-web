@@ -8,10 +8,8 @@ import {
 } from '@chakra-ui/layout';
 import BeliefsSection from './BeliefsSection';
 import StaffSection from './StaffSection';
-import StorySection from './StorySection';
 import TransformationPathwaysSection from './TransformationPathwaysSection';
 import ValuesSection from './ValuesSection';
-import OurHeartMissions from './OurHeartMissions';
 import blurbs from './about.json';
 import { Fragment, useState, useEffect } from 'react';
 import { Select } from '@chakra-ui/select';
@@ -19,7 +17,6 @@ import { useLocation } from 'react-router-dom';
 import scrollTo from '../helpers/ScrollTo';
 
 const sections = [
-  'Our Story',
   'Vision & Mission, Our Values',
   "HMCC's Transformation Pathways",
   'Our Staff',
@@ -27,7 +24,7 @@ const sections = [
   // 'Our Heart for Missions',
 ];
 
-const AboutUsContainer = (props) => {
+const AboutUsContainer = () => {
   const [selected, setSelected] = useState(0);
   const banner = blurbs.banner;
 
@@ -36,40 +33,34 @@ const AboutUsContainer = (props) => {
 
   useEffect(() => {
     switch (hash) {
-      case '#our-story':
-        setSelected(0);
-        scrollTo('our-story');
-        break;
       case '#vision-mission':
-        setSelected(1);
+        setSelected(0);
         scrollTo('vision-mission');
         break;
       case '#values':
-        setSelected(1);
+        setSelected(0);
         scrollTo('our-values');
         break;
       case '#strategy':
-        setSelected(2);
+        setSelected(1);
         scrollTo('strategy');
         break;
       case '#staff':
-        setSelected(3);
+        setSelected(2);
         scrollTo('staff');
         break;
       case '#beliefs':
-        setSelected(4);
+        setSelected(3);
         scrollTo('beliefs');
         break;
       // case '#missions':
-      //   setSelected(5);
+      //   setSelected(4);
       //   scrollTo('our-heart-for-missions');
       //   break;
       default:
         break;
     }
   }, [hash, setSelected]);
-
-  //To do: implement navbar, menu and footer links to individual sections("our story", "vision mision" etc)
 
   return (
     <Container maxW="container.lg" py={10} fontFamily="Manrope">
@@ -172,27 +163,24 @@ const AboutUsContainer = (props) => {
           </Select>
         </Box>
         {selected === 0 && (
-          <StorySection blurb={blurbs.story} title={sections[selected]} />
-        )}
-        {selected === 1 && (
           <ValuesSection
             blurb={blurbs.visionMissionValues}
             title={sections[selected]}
           />
         )}
-        {selected === 2 && (
+        {selected === 1 && (
           <TransformationPathwaysSection
             blurb={blurbs.strategy}
             title={sections[selected]}
           />
         )}
-        {selected === 3 && (
+        {selected === 2 && (
           <StaffSection blurb={blurbs.staff} title={sections[selected]} />
         )}
-        {selected === 4 && (
+        {selected === 3 && (
           <BeliefsSection blurb={blurbs.beliefs} title={sections[selected]} />
         )}
-        {/* {selected === 5 && (
+        {/* {selected === 4 && (
           <OurHeartMissions
             blurb={blurbs.ourHeartMissions}
             title={sections[selected]}

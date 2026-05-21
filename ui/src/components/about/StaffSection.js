@@ -1,21 +1,47 @@
 import {
-  Flex,
-  Text,
-  Center,
-  VStack,
-  Stack,
-  Image,
   Box,
-  Heading,
+  Center,
+  Flex,
   Grid,
   GridItem,
+  Heading,
+  VStack,
 } from '@chakra-ui/react';
-import React from 'react';
+import StaffMember from './StaffMember';
 
-const StaffSection = (props) => {
-  const { title, blurb } = props;
+const TierHeading = ({ children, id }) => (
+  <Heading
+    as="h3"
+    fontSize={['2xl', '3xl', '4xl']}
+    fontFamily="DMSerifDisplay_Italic"
+    fontWeight={700}
+    lineHeight={1}
+    textAlign="left"
+    color="#0628A3"
+    w="full"
+    mb={[3, 5]}
+    mt={[6, 10]}
+    id={id}
+  >
+    {children}
+  </Heading>
+);
+
+const TwoColumnGrid = ({ children }) => (
+  <Grid templateColumns="repeat(2, 1fr)" gap={[2, 6, 8]}>
+    {children}
+  </Grid>
+);
+
+const StaffSection = ({ title, blurb }) => {
+  const { pastor, executiveDirector, ministryDirectors, executiveTeam } = blurb;
+
+  const sortedExecTeam = [...(executiveTeam || [])].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
   return (
-    <Flex direction="column">
+    <Flex direction="column" w="full">
       <Center padding="5">
         <Heading
           as="h2"
@@ -31,72 +57,67 @@ const StaffSection = (props) => {
           {title}
         </Heading>
       </Center>
-      <VStack>
-        <Box w="full" mb={[5, 10]}>
-          <Heading
-            as="h3"
-            fontSize={['3xl', '4xl']}
-            fontFamily="DMSerifDisplay_Italic"
-            fontWeight={700}
-            lineHeight={1}
-            textAlign="left"
-            color="#0628A3"
-            id="staff"
-          >
-            Ministry Directors
-          </Heading>
-        </Box>
-        <Flex flexDir={['column', 'row']}>
-          <Grid templateColumns={['none', 'repeat(2, 1fr)']} gap={1}>
-            {blurb.directors.length > 0 &&
-              blurb.directors.map((content, i) => (
-                <GridItem>
-                  <Box
-                    key={'director' + i}
-                    fontFamily="Manrope"
-                    textAlign="center"
-                    w={['90%', '100%', '100%']}
-                    mb="3"
-                    mx="auto"
-                  >
-                    <Box px={[5, 9]} mb="3">
-                      <Image
-                        src={
-                          process.env.PUBLIC_URL +
-                          'images/about/' +
-                          content.photo
-                        }
-                        w={['80%', '100%', '100%']}
-                        objectFit="cover"
-                        margin="auto"
-                        borderRadius="7"
-                      />
-                    </Box>
 
-                    <Box
-                      fontSize={['md', 'md', '2xl']}
-                      fontWeight="700"
-                      color="#0628A3"
-                    >
-                      {content.name}
-                    </Box>
-                    {content.title.length > 0 &&
-                      content.title.map((title, i) => (
-                        <Box
-                          key={'directortitle' + i}
-                          fontSize={['xs', 'xs', 'lg']}
-                          fontWeight="700"
-                        >
-                          {title}
-                        </Box>
-                      ))}
-                  </Box>
+      <VStack w="full" spacing={[4, 8]}>
+        {(pastor || executiveDirector) && (
+          <Box w="full">
+            <TwoColumnGrid>
+              {pastor && (
+                <GridItem>
+                  <StaffMember
+                    name={pastor.name}
+                    title={pastor.title}
+                    photo={pastor.photo}
+                  />
+                </GridItem>
+              )}
+              {executiveDirector && (
+                <GridItem>
+                  <StaffMember
+                    name={executiveDirector.name}
+                    title={executiveDirector.title}
+                    photo={executiveDirector.photo}
+                  />
+                </GridItem>
+              )}
+            </TwoColumnGrid>
+          </Box>
+        )}
+
+        {ministryDirectors && ministryDirectors.length > 0 && (
+          <Box w="full">
+            <TierHeading id="ministry-directors">Ministry Directors</TierHeading>
+            <TwoColumnGrid>
+              {ministryDirectors.map((m, i) => (
+                <GridItem key={`director-${i}`}>
+                  <StaffMember
+                    name={m.name}
+                    title={m.title}
+                    photo={m.photo}
+                  />
                 </GridItem>
               ))}
-          </Grid>
-        </Flex>
+            </TwoColumnGrid>
+          </Box>
+        )}
+
+        {sortedExecTeam.length > 0 && (
+          <Box w="full">
+            <TierHeading id="executive-team">Executive Team</TierHeading>
+            <TwoColumnGrid>
+              {sortedExecTeam.map((m, i) => (
+                <GridItem key={`exec-${i}`}>
+                  <StaffMember
+                    name={m.name}
+                    title={m.title}
+                    photo={m.photo}
+                  />
+                </GridItem>
+              ))}
+            </TwoColumnGrid>
+          </Box>
+        )}
       </VStack>
-      <Box></Box>
     </Flex>
   );
 };
