@@ -30,7 +30,7 @@ const StaffMember = ({ name, title, photo }) => {
         {photo ? (
           <AspectRatio ratio={1} w="100%">
             <Image
-              src={`${process.env.PUBLIC_URL}images/about/${photo}`}
+              src={`${process.env.PUBLIC_URL}/images/about/${photo}`}
               alt={name}
               objectFit="cover"
               objectPosition="center"
