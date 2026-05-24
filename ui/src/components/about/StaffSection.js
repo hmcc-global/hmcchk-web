@@ -9,6 +9,8 @@ import {
 } from '@chakra-ui/react';
 import StaffMember from './StaffMember';
 
+const LANDSCAPE_RATIO = 3484 / 2853;
+
 const TierHeading = ({ children, id }) => (
   <Heading
     as="h3"
@@ -68,6 +70,7 @@ const StaffSection = ({ title, blurb }) => {
                     name={pastor.name}
                     title={pastor.title}
                     photo={pastor.photo}
+                    aspectRatio={LANDSCAPE_RATIO}
                   />
                 </GridItem>
               )}
@@ -77,6 +80,7 @@ const StaffSection = ({ title, blurb }) => {
                     name={executiveDirector.name}
                     title={executiveDirector.title}
                     photo={executiveDirector.photo}
+                    aspectRatio={LANDSCAPE_RATIO}
                   />
                 </GridItem>
               )}
@@ -94,6 +98,7 @@ const StaffSection = ({ title, blurb }) => {
                     name={m.name}
                     title={m.title}
                     photo={m.photo}
+                    aspectRatio={LANDSCAPE_RATIO}
                   />
                 </GridItem>
               ))}

@@ -4,8 +4,8 @@ const NAME_FONT_SIZE = ['md', 'xl', '2xl'];
 const TITLE_FONT_SIZE = ['xs', 'sm', 'md'];
 const CARD_PX = [1, 3, 5];
 
-const PhotoPlaceholder = () => (
-  <AspectRatio ratio={1} w="100%">
+const PhotoPlaceholder = ({ ratio }) => (
+  <AspectRatio ratio={ratio} w="100%">
     <Box borderRadius="7" bgColor="#E9E9E9">
       <Text color="#9AA0A6" fontSize="sm">
         Photo coming soon
@@ -14,7 +14,7 @@ const PhotoPlaceholder = () => (
   </AspectRatio>
 );
 
-const StaffMember = ({ name, title, photo }) => {
+const StaffMember = ({ name, title, photo, aspectRatio = 1 }) => {
   const titles = Array.isArray(title) ? title : title ? [title] : [];
 
   return (
@@ -28,7 +28,7 @@ const StaffMember = ({ name, title, photo }) => {
     >
       <Box w="100%" px={CARD_PX}>
         {photo ? (
-          <AspectRatio ratio={1} w="100%">
+          <AspectRatio ratio={aspectRatio} w="100%">
             <Image
               src={`${process.env.PUBLIC_URL}/images/about/${photo}`}
               alt={name}
@@ -38,7 +38,7 @@ const StaffMember = ({ name, title, photo }) => {
             />
           </AspectRatio>
         ) : (
-          <PhotoPlaceholder />
+          <PhotoPlaceholder ratio={aspectRatio} />
         )}
       </Box>
 
