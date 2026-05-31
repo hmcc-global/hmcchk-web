@@ -125,7 +125,7 @@ const HeroSection = () => {
                 fontWeight="bold"
                 opacity="0"
               >
-                Harvest Mission Community Church of Hong Kong
+                 Mission Community Church of Hong Kong
               </Text>
 
               {/* Hide the text with exclusion effect*/}
@@ -280,7 +280,7 @@ const HeroSection = () => {
                 textAlign="center"
                 fontWeight="bold"
               >
-                Harvest Mission Community Church of Hong Kong
+                 Mission Community Church of Hong Kong
               </Text>
 
               {/* Hide the text with exclusion effect*/}
