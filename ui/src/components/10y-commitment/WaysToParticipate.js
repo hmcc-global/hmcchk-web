@@ -62,9 +62,10 @@ const WaysToParticipate = () => {
           Ways to Participate
         </Heading>
         <Text
-          fontSize={{ base: "0.813rem" , md: "1rem" }}
+          fontSize={{ base: "0.813rem" , md: "1.25rem" }}
           fontWeight={500}
           fontFamily={"Manrope"}
+          letterSpacing="0.0125rem"
           textAlign="center"
           color="#333"
           maxW="600px"

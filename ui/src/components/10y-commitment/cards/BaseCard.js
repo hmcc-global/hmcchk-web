@@ -15,28 +15,28 @@ const BaseCard = ({
       spacing={{base: "0.75rem", md: "1.5rem"}}
       p={{ base: '1.5rem', md: '2rem' }}
       bg="linear-gradient(180deg, #506AC4, #010B2D)"
-      borderRadius="12px"
+      borderRadius="1.25rem"
       align="stretch"
       h="100%"
     >
       <VStack spacing={{base: "0.75rem", md: "1.5rem"}} align="center">
         <Heading
             as="h4"
-            fontSize={{ base: '1.56rem', md: '1.75rem' }}
-            fontWeight={700}
+            fontSize={{ base: '1.56rem', md: '1.875rem' }}
+            fontWeight={600}
             color="#FFFFFF"
             fontFamily="DMSerifDisplay_Italic"
         >
         {title}
         </Heading>
         <Text
-          fontSize={{ base: '0.813rem', md: '1.125rem' }}
+          fontSize={{ base: '0.813rem', md: '1.25rem' }}
           fontWeight={800}
           color="#ABD8FF"
           fontFamily="Manrope"
           textTransform="uppercase"
           textAlign="center"
-          letterSpacing="0.1rem"
+          letterSpacing="0.125rem"
         >
           {subtitle}
         </Text>

@@ -1,13 +1,12 @@
 import {
   VStack,
   Text,
-  Button,
   Image,
   HStack,
 } from '@chakra-ui/react';
 import React from 'react';
 import BaseCard from './BaseCard';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
+import ParticipateButton from './ParticipateButton';
 
 const GoCard = () => {
   return (
@@ -18,10 +17,11 @@ const GoCard = () => {
       {/* Custom content for Go card */}
       <VStack spacing="1rem" align="stretch" flex={1} color="white">
         <Text
-          fontSize={{ base: "0.813rem" , md: "1rem" }}
+          fontSize={{ base: '0.813rem', md: '1.25rem' }}
           color="#FFFFFF"
           fontFamily="Manrope"
           fontWeight={500}
+          letterSpacing="0.0125rem"
           textAlign="center"
         >
           Is God stirring your heart to be a part of the vision? Begin praying now about the cities and growing as a disciple of Christ!
@@ -37,58 +37,30 @@ const GoCard = () => {
         />
 
         <Text
-          fontSize={{ base: 'xs', md: 'sm' }}
+          fontSize={{ base: '0.813rem', md: '1.25rem' }}
           color="white"
           textAlign="center"
           mt="0.5rem"
           fontFamily="Manrope"
           fontWeight={500}
+          letterSpacing="0.0125rem"
         >
           See events and classes for more locations
         </Text>
 
         <HStack spacing="0.75rem" w="100%" mt="auto">
-          <Button
-            as="a"
+          <ParticipateButton
             href="https://atx.hmccglobal.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            w="100%"
-            bg="linear-gradient(90deg, white, #9CB5FF)"
-            color="#0025a3"
-            _hover={{ opacity: 0.9 }}
-            fontSize={{ base: 'sm', md: 'base' }}
-            py={{ base: '0.5rem', md: '0.75rem' }}
-            fontWeight={700}
-            borderRadius="80px"
-            rightIcon={<ArrowForwardIcon />}
-            justifyContent="space-between"
-            px={{ base: '1rem', md: '1.5rem' }}
-            fontFamily="Manrope"
-            
+            flex={1}
           >
-            <Text>Austin</Text>
-          </Button>
-          <Button
-            as="a"
+            Austin
+          </ParticipateButton>
+          <ParticipateButton
             href="https://hk.hmccglobal.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            w="100%"
-            bg="linear-gradient(90deg, white, #9CB5FF)"
-            color="#0025a3"
-            _hover={{ opacity: 0.9 }}
-            fontSize={{ base: 'sm', md: 'base' }}
-            py={{ base: '0.5rem', md: '0.75rem' }}
-            fontWeight={700}
-            borderRadius="80px"
-            rightIcon={<ArrowForwardIcon />}
-            justifyContent="space-between"
-            px={{ base: '1rem', md: '1.5rem' }}
-            fontFamily="Manrope"
+            flex={1}
           >
-            <Text>Hong Kong</Text>
-          </Button>
+            Hong Kong
+          </ParticipateButton>
         </HStack>
 
         <Image
@@ -99,7 +71,7 @@ const GoCard = () => {
           borderRadius={10}
           alt="Map showing 10 cities for church planting"
         />
-        
+
       </VStack>
     </BaseCard>
   );
