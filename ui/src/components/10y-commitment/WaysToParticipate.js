@@ -16,29 +16,35 @@ import { FaPlay, FaPause } from 'react-icons/fa';
 import PrayCard from './cards/PrayCard';
 import GiveCard from './cards/GiveCard';
 import GoCard from './cards/GoCard';
+import { COLORS } from './constants';
+
+// Single source of truth for the cards — used by both the mobile carousel
+// and the desktop grid so the two never drift out of sync.
+const CARDS = [
+  { key: 'pray', Component: PrayCard },
+  { key: 'give', Component: GiveCard },
+  { key: 'go', Component: GoCard },
+];
 
 const WaysToParticipate = () => {
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = useBreakpointValue(
+    { base: true, md: false },
+    { fallback: 'md' }
+  );
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  const cards = [
-    <PrayCard key="pray" />,
-    <GiveCard key="give" />,
-    <GoCard key="go" />,
-  ];
-
   useEffect(() => {
-    if (!isMobile || isPaused) return;
+    if (!isMobile || isPaused) return undefined;
 
     const interval = setInterval(() => {
-      setCurrentCardIndex((prev) => (prev + 1) % cards.length);
+      setCurrentCardIndex((prev) => (prev + 1) % CARDS.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [isMobile, isPaused, cards.length]);
+  }, [isMobile, isPaused]);
 
-  
+  const ActiveCard = CARDS[currentCardIndex].Component;
 
   return (
     <Flex
@@ -47,7 +53,8 @@ const WaysToParticipate = () => {
       gap={{ base: '2rem', md: '3rem' }}
       py={{ base: '2rem', md: '4rem' }}
       px={{ base: '1rem', md: '2rem' }}
-      bg="#F6FAFF"
+      bg={COLORS.sectionBg}
+      overflowX="clip"
     >
       {/* Section Header */}
       <VStack spacing={{ base: '1rem', md: '1.5rem' }} align="center" w="100%">
@@ -56,7 +63,7 @@ const WaysToParticipate = () => {
           fontSize={{ base: '2rem', md: '2.813rem' }}
           fontWeight={400}
           textAlign="center"
-          color="#0025a3"
+          color={COLORS.brandBlue}
           fontFamily="DMSerifDisplay_Italic"
         >
           Ways to Participate
@@ -67,7 +74,7 @@ const WaysToParticipate = () => {
           fontFamily={"Manrope"}
           letterSpacing="0.0125rem"
           textAlign="center"
-          color="#333"
+          color={COLORS.bodyText}
           maxW="600px"
           lineHeight="1.6"
         >
@@ -79,13 +86,16 @@ const WaysToParticipate = () => {
       {isMobile ? (
         <Flex
           position="relative"
-          w="100vw" 
-          ml="calc(-50vw + 50%)" 
-          h="650px"
+          w="100vw"
+          ml="calc(-50vw + 50%)"
+          minH="650px"
           direction="column"
+          role="group"
+          aria-roledescription="carousel"
+          aria-label="Ways to participate"
         >
-          <Box flex={1}>
-            {cards[currentCardIndex]}
+          <Box flex={1} aria-live="polite" pb="3.5rem">
+            <ActiveCard />
           </Box>
 
           <Flex
@@ -98,19 +108,20 @@ const WaysToParticipate = () => {
             zIndex={1}
           >
             <HStack spacing="0.75rem">
-              {cards.map((_, index) => (
+              {CARDS.map((card, index) => (
                 <Button
-                  key={index}
+                  key={card.key}
                   w={index === currentCardIndex ? "28px" : "10px"}
                   h="10px"
                   minW={index === currentCardIndex ? "28px" : "10px"}
                   borderRadius="full"
-                  bg={index === currentCardIndex ? "#9CB5FF" : "#5B6177"}
+                  bg={index === currentCardIndex ? COLORS.accentBlue : COLORS.dotInactive}
                   transition="all 0.3s ease"
                   flexShrink={0}
                   onClick={() => setCurrentCardIndex(index)}
                   _hover={{ opacity: 0.8 }}
                   aria-label={`Go to slide ${index + 1}`}
+                  aria-current={index === currentCardIndex}
                   p={0}
                 />
               ))}
@@ -128,14 +139,14 @@ const WaysToParticipate = () => {
               icon={isPaused ? <FaPlay /> : <FaPause />}
               onClick={() => setIsPaused(!isPaused)}
               variant="ghost"
-              bgColor="#5B6177"
-              color="#9CB5FF"
+              bgColor={COLORS.dotInactive}
+              color={COLORS.accentBlue}
               aria-label={isPaused ? 'Play carousel' : 'Pause carousel'}
               size="sm"
               borderRadius="full"
             />
           </Flex>
-          </Flex>
+        </Flex>
       ) : (
         <Grid
           templateColumns='repeat(3, 1fr)'
@@ -144,15 +155,11 @@ const WaysToParticipate = () => {
           maxW="1200px"
           mx="auto"
         >
-          <GridItem>
-            <PrayCard />
-          </GridItem>
-          <GridItem>
-            <GiveCard />
-          </GridItem>
-          <GridItem>
-            <GoCard />
-          </GridItem>
+          {CARDS.map(({ key, Component }) => (
+            <GridItem key={key}>
+              <Component />
+            </GridItem>
+          ))}
         </Grid>
       )}
     </Flex>

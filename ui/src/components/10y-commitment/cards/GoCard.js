@@ -7,6 +7,7 @@ import {
 import React from 'react';
 import BaseCard from './BaseCard';
 import ParticipateButton from './ParticipateButton';
+import { GO_LINKS } from '../constants';
 
 const GoCard = () => {
   return (
@@ -29,7 +30,7 @@ const GoCard = () => {
 
         <Image
           w="100%"
-          src={`${process.env.PUBLIC_URL}/images/10y-commitment/goParticipate.png`}
+          src={`${process.env.PUBLIC_URL}/images/10y-commitment/goParticipate.jpg`}
           marginX="auto"
           display="flex"
           borderRadius={10}
@@ -49,23 +50,17 @@ const GoCard = () => {
         </Text>
 
         <HStack spacing="0.75rem" w="100%" mt="auto">
-          <ParticipateButton
-            href="https://atx.hmccglobal.org/"
-            flex={1}
-          >
+          <ParticipateButton href={GO_LINKS.austin} flex={1}>
             Austin
           </ParticipateButton>
-          <ParticipateButton
-            href="https://hk.hmccglobal.org/"
-            flex={1}
-          >
+          <ParticipateButton href={GO_LINKS.hongKong} flex={1}>
             Hong Kong
           </ParticipateButton>
         </HStack>
 
         <Image
           w="100%"
-          src={`${process.env.PUBLIC_URL}/images/10y-commitment/10cities.png`}
+          src={`${process.env.PUBLIC_URL}/images/10y-commitment/10cities.jpg`}
           marginX="auto"
           display="flex"
           borderRadius={10}

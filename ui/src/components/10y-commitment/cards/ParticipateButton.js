@@ -2,20 +2,26 @@ import { Button, Text } from '@chakra-ui/react';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { COLORS } from '../constants';
 
 // Shared CTA used across the Ways to Participate cards.
 // Pass `to` for an internal route (react-router) or `href` for an external link.
 const ParticipateButton = ({ to, href, children, ...rest }) => {
-  const linkProps = to
-    ? { as: RouterLink, to }
-    : { as: 'a', href, target: '_blank', rel: 'noopener noreferrer' };
+  let linkProps;
+  if (to) {
+    linkProps = { as: RouterLink, to };
+  } else if (href) {
+    linkProps = { as: 'a', href, target: '_blank', rel: 'noopener noreferrer' };
+  } else {
+    linkProps = { as: 'button', type: 'button' };
+  }
 
   return (
     <Button
       {...linkProps}
       w="100%"
-      bg="linear-gradient(90deg, #F3F6FF, #9CB5FF)"
-      color="#0025a3"
+      bg={COLORS.buttonGradient}
+      color={COLORS.brandBlue}
       _hover={{ opacity: 0.9 }}
       fontFamily="Manrope"
       fontWeight={700}

@@ -4,6 +4,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import React from 'react';
+import { COLORS } from '../constants';
 
 const BaseCard = ({
   title,
@@ -14,7 +15,7 @@ const BaseCard = ({
     <VStack
       spacing={{base: "0.75rem", md: "1.5rem"}}
       p={{ base: '1.5rem', md: '2rem' }}
-      bg="linear-gradient(180deg, #506AC4, #010B2D)"
+      bg={COLORS.cardGradient}
       borderRadius="1.25rem"
       align="stretch"
       h="100%"
@@ -32,7 +33,7 @@ const BaseCard = ({
         <Text
           fontSize={{ base: '0.813rem', md: '1.25rem' }}
           fontWeight={800}
-          color="#ABD8FF"
+          color={COLORS.lightBlue}
           fontFamily="Manrope"
           textTransform="uppercase"
           textAlign="center"
