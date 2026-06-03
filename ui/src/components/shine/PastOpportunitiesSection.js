@@ -27,39 +27,39 @@ const { fontSizes, fontFamilies } = typography;
 const opportunities = [
   {
     // TODO-aparedan: Please put down some photos from the Mother's Choice event here
-    title: "Mother's Choice Workshop",
-    date: 'Sunday, Jan 25, 2026',
+    title: "Mother's Choice Self Discovery Workshop",
+    date: 'Sunday, Apr 25, 2026',
     images: [
       {
-        src: '/images/shine/motherschoice-1.jpg',
-        alt: "Mother's Choice Family Fun Fest highlight",
+        src: '/images/shine/mothers-choice-self-discovery-workshop-group.jpg',
+        alt: "Group photo of participants at the Mother's Choice self-discovery workshop.",
       },
       {
-        src: '/images/shine/motherschoice-2.jpg',
-        alt: "Mother's Choice Family Fun Fest gathering",
+        src: '/images/shine/mothers-choice-self-discovery-workshop-learning.jpg',
+        alt: "Attendees learning during the Mother's Choice self-discovery session.",
       },
       {
-        src: '/images/shine/motherschoice-3.jpg',
-        alt: "Mother's Choice Family Fun Fest activity",
+        src: '/images/shine/mothers-choice-workshop-speaker-sharing.jpg',
+        alt: "Guest speaker sharing insights at the Mother's Choice workshop.",
       },
       {
-        src: '/images/shine/motherschoice-4.jpg',
-        alt: "Mother's Choice Family Fun Fest volunteers",
+        src: '/images/shine/mothers-choice-workshop-group-discussion.jpg',
+        alt: "Participants engaging in a workshop group discussion.",
       },
       {
-        src: '/images/shine/motherschoice-5.jpg',
-        alt: "Mother's Choice Family Fun Fest support",
+        src: '/images/shine/mothers-choice-workshop-team-activity.jpg',
+        alt: "Another group of attendees collaborating during the self-discovery session.",
       },
       {
-        src: '/images/shine/motherschoice-6.jpg',
-        alt: "Mother's Choice Family Fun Fest extra moment",
+        src: '/images/shine/mothers-choice-workshop-speaker-insights.jpg',
+        alt: "Speaker sharing a presentation slide with the workshop audience.",
       },
     ],
   },
   {
     // TODO-aparedan: Please put down some photos from the Mother's Choice event here
     title: "English Academy",
-    date: 'Sunday, Jan 25, 2026',
+    date: 'Mar - Jun, 2026',
     images: [
       {
         src: '/images/shine/motherschoice-1.jpg',
@@ -90,31 +90,31 @@ const opportunities = [
   {
     // TODO-aparedan: Please put down some photos from the Mother's Choice event here
     title: "CityServe 2026",
-    date: 'Sunday, Jan 25, 2026',
+    date: 'Mar 20-22, 2026',
     images: [
       {
-        src: '/images/shine/cityserve-2026-1.jpeg',
-        alt: "CityServe 2026 highlight",
+        src: '/images/shine/cityserve-2026-kids-arts-crafts.jpg',
+        alt: 'Kids arts and crafts at CityServe 2026.',
       },
       {
-        src: '/images/shine/motherschoice-2.jpg',
-        alt: "Mother's Choice Family Fun Fest gathering",
+        src: '/images/shine/cityserve-2026-community-outreach.jpg',
+        alt: 'Volunteers on a CityServe 2026 community outreach visit.',
       },
       {
-        src: '/images/shine/motherschoice-3.jpg',
-        alt: "Mother's Choice Family Fun Fest activity",
+        src: '/images/shine/cityserve-2026-helper-appreciation.jpg',
+        alt: 'Domestic helper appreciation event at CityServe 2026.',
       },
       {
-        src: '/images/shine/motherschoice-4.jpg',
-        alt: "Mother's Choice Family Fun Fest volunteers",
+        src: '/images/shine/cityserve-2026-kids-coloring.jpg',
+        alt: 'Children coloring at the CityServe 2026 workshop.',
       },
       {
-        src: '/images/shine/motherschoice-5.jpg',
-        alt: "Mother's Choice Family Fun Fest support",
+        src: '/images/shine/cityserve-2026-kids-painting.jpg',
+        alt: 'Kids painting at the CityServe 2026 art booth.',
       },
       {
-        src: '/images/shine/motherschoice-6.jpg',
-        alt: "Mother's Choice Family Fun Fest extra moment",
+        src: '/images/shine/cityserve-2026-children-group.jpg',
+        alt: 'Group of kids with their CityServe 2026 art projects.',
       },
     ],
   },
@@ -176,36 +176,6 @@ const opportunities = [
       {
         src: '/images/shine/taipo_healthcare_6.JPG',
         alt: 'Tai Po Healthcare Outreach volunteers',
-      },
-    ],
-  },
-  {
-    title: 'Tai Po Fire Donation',
-    date: 'Sunday, Dec 01, 2025',
-    images: [
-      {
-        src: '/images/shine/taipo_donation_1.jpeg',
-        alt: 'Tai Po Fire Donation highlight',
-      },
-      {
-        src: '/images/shine/taipo_donation_2.jpeg',
-        alt: 'Tai Po Fire Donation visit',
-      },
-      {
-        src: '/images/shine/taipo_donation_3.jpeg',
-        alt: 'Tai Po Fire Donation donations',
-      },
-      {
-        src: '/images/shine/taipo_donation_4.jpeg',
-        alt: 'Tai Po Fire Donation team',
-      },
-      {
-        src: '/images/shine/taipo_donation_5.jpeg',
-        alt: 'Tai Po Fire Blood Donation ',
-      },
-      {
-        src: '/images/shine/taipo_donation_6.jpeg',
-        alt: 'Tai Po Fire Donation ',
       },
     ],
   },
