@@ -69,13 +69,12 @@ const WaysToParticipate = () => {
           Ways to Participate
         </Heading>
         <Text
-          fontSize={{ base: "0.813rem" , md: "1.25rem" }}
+          fontSize={{ base: '0.813rem', md: '1.25rem' }}
           fontWeight={500}
-          fontFamily={"Manrope"}
+          fontFamily={'Manrope'}
           letterSpacing="0.0125rem"
           textAlign="center"
           color={COLORS.bodyText}
-          maxW="600px"
           lineHeight="1.6"
         >
           This is not a commitment for a few, but a call for the entire church.
@@ -111,11 +110,15 @@ const WaysToParticipate = () => {
               {CARDS.map((card, index) => (
                 <Button
                   key={card.key}
-                  w={index === currentCardIndex ? "28px" : "10px"}
+                  w={index === currentCardIndex ? '28px' : '10px'}
                   h="10px"
-                  minW={index === currentCardIndex ? "28px" : "10px"}
+                  minW={index === currentCardIndex ? '28px' : '10px'}
                   borderRadius="full"
-                  bg={index === currentCardIndex ? COLORS.accentBlue : COLORS.dotInactive}
+                  bg={
+                    index === currentCardIndex
+                      ? COLORS.accentBlue
+                      : COLORS.dotInactive
+                  }
                   transition="all 0.3s ease"
                   flexShrink={0}
                   onClick={() => setCurrentCardIndex(index)}
@@ -149,8 +152,8 @@ const WaysToParticipate = () => {
         </Flex>
       ) : (
         <Grid
-          templateColumns='repeat(3, 1fr)'
-          gap={{ base: '1.5rem', md: '2rem' }}
+          templateColumns="repeat(3, 1fr)"
+          gap={{ base: '1.5rem', md: '1rem' }}
           w="100%"
           maxW="1200px"
           mx="auto"

@@ -1,34 +1,27 @@
-import {
-  VStack,
-  Heading,
-  Text,
-} from '@chakra-ui/react';
+import { VStack, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 import { COLORS } from '../constants';
 
-const BaseCard = ({
-  title,
-  subtitle,
-  children,
-}) => {
+const BaseCard = ({ title, subtitle, children }) => {
   return (
     <VStack
-      spacing={{base: "0.75rem", md: "1.5rem"}}
-      p={{ base: '1.5rem', md: '2rem' }}
+      spacing={{ base: '0.75rem', md: '1.25rem' }}
+      p={{ base: '1.5rem', md: '1.5rem' }}
       bg={COLORS.cardGradient}
       borderRadius="1.25rem"
       align="stretch"
       h="100%"
     >
-      <VStack spacing={{base: "0.75rem", md: "1.5rem"}} align="center">
+      <VStack spacing={{ base: '0.75rem', md: '1.5rem' }} align="center">
         <Heading
-            as="h4"
-            fontSize={{ base: '1.56rem', md: '1.875rem' }}
-            fontWeight={600}
-            color="#FFFFFF"
-            fontFamily="DMSerifDisplay_Italic"
+          as="h4"
+          fontSize={{ base: '1.56rem', md: '1.75rem' }}
+          fontWeight={400}
+          color="#FFFFFF"
+          fontFamily="DMSerifDisplay_Italic"
+          textAlign="center"
         >
-        {title}
+          {title}
         </Heading>
         <Text
           fontSize={{ base: '0.813rem', md: '1.25rem' }}

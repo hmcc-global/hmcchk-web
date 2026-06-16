@@ -1,8 +1,4 @@
-import {
-  VStack,
-  Text,
-  Image,
-} from '@chakra-ui/react';
+import { VStack, Text, Image } from '@chakra-ui/react';
 import React from 'react';
 import BaseCard from './BaseCard';
 import ParticipateButton from './ParticipateButton';
@@ -13,7 +9,13 @@ const GiveCard = () => {
       title="Give: Sow into the Vision"
       subtitle="Give to the Vision Fund"
     >
-      <VStack spacing="1rem" align="stretch" flex={1}>
+      <VStack
+        spacing="1rem"
+        align="center"
+        height="100%"
+        justifyContent="space-between"
+        flex={1}
+      >
         <Text
           fontSize={{ base: '0.813rem', md: '1.25rem' }}
           color="#FFFFFF"
@@ -22,7 +24,9 @@ const GiveCard = () => {
           letterSpacing="0.0125rem"
           textAlign="center"
         >
-          Your financial seeds will directly fuel church plants across the globe. Every dollar brings us closer to seeing a church in the 10 cities.
+          Your financial seeds will directly fuel church plants across the
+          globe. Every dollar brings us closer to seeing a church in the 10
+          cities.
         </Text>
 
         <Image
