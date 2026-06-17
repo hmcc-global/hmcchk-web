@@ -37,7 +37,6 @@ const WaysToParticipate = () => {
   const [isPaused, setIsPaused] = useState(false);
   const carouselRef = useRef(null);
   const touchStart = useRef(null);
-
   useEffect(() => {
     if (!isMobile) return undefined;
 
@@ -69,10 +68,7 @@ const WaysToParticipate = () => {
       const dy = e.changedTouches[0].clientY - touchStart.current.y;
       touchStart.current = null;
 
-      if (
-        Math.abs(dx) < SWIPE_THRESHOLD_PX ||
-        Math.abs(dx) < Math.abs(dy)
-      ) {
+      if (Math.abs(dx) < SWIPE_THRESHOLD_PX || Math.abs(dx) < Math.abs(dy)) {
         return;
       }
 
@@ -154,7 +150,7 @@ const WaysToParticipate = () => {
       py={{ base: '2rem', md: '4rem' }}
       px={{ base: '1rem', md: '2rem' }}
       bg={COLORS.sectionBg}
-      overflowX="clip"
+      overflowX="hidden"
     >
       {/* Section Header */}
       <VStack spacing={{ base: '1rem', md: '1.5rem' }} align="center" w="100%">

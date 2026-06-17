@@ -1,3 +1,4 @@
+import React from 'react';
 import { Flex } from '@chakra-ui/react';
 import TenYearHeroSection from './TenYearHeroSection';
 import TenYearHeartSection from './TenYearHeartContainer';
