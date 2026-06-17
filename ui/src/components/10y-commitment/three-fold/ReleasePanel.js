@@ -1,6 +1,7 @@
 import { AspectRatio, Box, Image, Text } from '@chakra-ui/react';
 import React from 'react';
 import CommitmentPanel from './CommitmentPanel';
+import { MotionBox } from './motion';
 import {
   px,
   RELEASE_VIEW,
@@ -13,8 +14,9 @@ import {
 const REGION_BLUE = '#4169eb';
 
 // A circular city photo pinned at its geographic location, name overlaid.
+// Sits statically and lifts (scales + deeper shadow) only on hover.
 const CityCircle = ({ name, img, x, y, w, h }) => (
-  <Box
+  <MotionBox
     position="absolute"
     left={px(x, RELEASE_VIEW.w)}
     top={px(y, RELEASE_VIEW.h)}
@@ -25,6 +27,11 @@ const CityCircle = ({ name, img, x, y, w, h }) => (
     bg="#D7E0F5"
     border="2px solid #FFFFFF"
     boxShadow="0 3px 14px rgba(80,80,80,0.45)"
+    whileHover={{
+      scale: 1.12,
+      zIndex: 5,
+      boxShadow: '0 10px 28px rgba(40,60,160,0.55)',
+    }}
   >
     <Image src={`${RELEASE_IMG}/${img}`} alt={name} w="100%" h="100%" objectFit="cover" loading="lazy" />
     {/* legibility scrim + name */}
@@ -47,7 +54,7 @@ const CityCircle = ({ name, img, x, y, w, h }) => (
     >
       {name}
     </Text>
-  </Box>
+  </MotionBox>
 );
 
 const ReleasePanel = () => {
