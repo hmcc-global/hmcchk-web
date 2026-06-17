@@ -35,7 +35,7 @@ jobs:
         env:
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
         with:
-          model: opencode/minimax-m2.5-free
+          model: opencode/big-pickle
           prompt: |
             Review this pull request using the below parameters:
             - Check for code quality issues
