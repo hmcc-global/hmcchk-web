@@ -13,7 +13,7 @@ import {
 import { MdArrowDropDown } from 'react-icons/md';
 import EventCard from './EventCard';
 import { DateTime } from 'luxon';
-import { getRenderDate } from '../helpers/eventsHelpers';
+import { getRenderDate, sortEvents } from '../helpers/eventsHelpers';
 import isDateInThisWeek from './getWeek';
 
 const EventsPage = (props) => {
@@ -101,32 +101,7 @@ const EventsPage = (props) => {
             return endDate > DateTime.now() && DateTime.now() > startDate;
           } else return false;
         });
-        filteredEndDate.sort((a, b) =>
-          a.renderDate === ''
-            ? 1
-            : b.renderDate === ''
-            ? -1
-            : a.renderDate < b.renderDate
-            ? -1
-            : 1
-        );
-        // Resources are last in the list
-        filteredEndDate.sort((a, b) => {
-          const hasOthersA = a.eventType?.some(
-            (type) => type.value === 'Resources'
-          );
-          const hasOthersB = b.eventType?.some(
-            (type) => type.value === 'Resources'
-          );
-
-          if (hasOthersA && !hasOthersB) {
-            return 1;
-          } else if (!hasOthersA && hasOthersB) {
-            return -1;
-          } else {
-            return a.renderDate < b.renderDate ? -1 : 1;
-          }
-        });
+        sortEvents(filteredEndDate);
         filtered.push(...filteredEndDate);
         filtered.forEach((data) => {
           if (data.eventType === null || data.eventType === undefined) {

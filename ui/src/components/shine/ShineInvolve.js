@@ -23,7 +23,7 @@ import {
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { DateTime } from 'luxon';
-import { getRenderDate } from '../helpers/eventsHelpers';
+import { getRenderDate, sortEvents } from '../helpers/eventsHelpers';
 import EventCard from '../events/EventCard';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -95,15 +95,6 @@ const ShineInvolve = (props) => {
             return endDate > DateTime.now() && DateTime.now() > startDate;
           } else return false;
         });
-        filteredEndDate.sort((a, b) =>
-          a.renderDate === ''
-            ? 1
-            : b.renderDate === ''
-            ? -1
-            : a.renderDate < b.renderDate
-            ? -1
-            : 1
-        );
         const shineMinEvents = [];
         filteredEndDate.forEach((data) => {
           if (data.eventType === null || data.eventType === undefined) {
@@ -118,16 +109,8 @@ const ShineInvolve = (props) => {
           }
         });
 
-        const featureSortedShineMinEvents = shineMinEvents.sort((a, b) => {
-          if (a.featured) {
-            return -1;
-          } else if (b.featured) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
-        setShineMinList([...featureSortedShineMinEvents]);
+        sortEvents(shineMinEvents);
+        setShineMinList([...shineMinEvents]);
       } else {
         throw Error('Something went wrong with the request');
       }
