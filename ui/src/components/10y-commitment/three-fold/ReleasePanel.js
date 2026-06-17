@@ -1,6 +1,7 @@
 import { AspectRatio, Box, Image, Text } from '@chakra-ui/react';
 import React from 'react';
 import CommitmentPanel from './CommitmentPanel';
+import { MotionBox } from './motion';
 import {
   px,
   COLORS,
@@ -11,12 +12,10 @@ import {
   RELEASE_IMG,
 } from '../constants';
 
-// A circular city photo pinned at its geographic location. The city name is
-// baked into the image (exported from Figma), so we only clip it to a circle
-// and add the drop shadow here.
-// Memoized since RELEASE_CITIES is static — avoids re-rendering all circles.
-const CityCircle = React.memo(({ name, img, x, y, w, h }) => (
-  <Box
+// A circular city photo pinned at its geographic location, name overlaid.
+// Sits statically and lifts (scales + deeper shadow) only on hover.
+const CityCircle = ({ name, img, x, y, w, h }) => (
+  <MotionBox
     position="absolute"
     left={px(x, RELEASE_VIEW.w)}
     top={px(y, RELEASE_VIEW.h)}
@@ -25,11 +24,35 @@ const CityCircle = React.memo(({ name, img, x, y, w, h }) => (
     borderRadius="full"
     overflow="hidden"
     boxShadow="0 3px 14px rgba(80,80,80,0.45)"
+    whileHover={{
+      scale: 1.12,
+      zIndex: 5,
+      boxShadow: '0 10px 28px rgba(40,60,160,0.55)',
+    }}
   >
     <Image src={`${RELEASE_IMG}/${img}`} alt={name} w="100%" h="100%" objectFit="cover" loading="lazy" />
-  </Box>
-));
-CityCircle.displayName = 'CityCircle';
+    {/* legibility scrim + name */}
+    <Box position="absolute" inset={0} bgGradient="linear(to-b, transparent 45%, rgba(0,0,0,0.55))" />
+    <Text
+      position="absolute"
+      bottom="14%"
+      left="50%"
+      transform="translateX(-50%)"
+      color="#FFFFFF"
+      fontFamily="Manrope"
+      fontWeight={700}
+      fontSize={{ base: '0.5rem', sm: '0.6rem', md: '0.75rem' }}
+      lineHeight="1.1"
+      letterSpacing="0.03em"
+      textTransform="uppercase"
+      textAlign="center"
+      w="92%"
+      textShadow="0 1px 3px rgba(0,0,0,0.6)"
+    >
+      {name}
+    </Text>
+  </MotionBox>
+);
 
 const ReleasePanel = () => {
   return (
