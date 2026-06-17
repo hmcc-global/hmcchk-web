@@ -45,6 +45,46 @@ const WaysToParticipate = () => {
   }, [isMobile, isPaused]);
 
   const ActiveCard = CARDS[currentCardIndex].Component;
+  const carouselControls = (
+    <Flex w="100%" align="center">
+      <Box flex={1} />
+      <HStack spacing="0.75rem">
+        {CARDS.map((card, index) => (
+          <Button
+            key={card.key}
+            w={index === currentCardIndex ? '28px' : '10px'}
+            h="10px"
+            minW={index === currentCardIndex ? '28px' : '10px'}
+            borderRadius="full"
+            bg={
+              index === currentCardIndex
+                ? COLORS.accentBlue
+                : COLORS.dotInactive
+            }
+            transition="all 0.3s ease"
+            flexShrink={0}
+            onClick={() => setCurrentCardIndex(index)}
+            _hover={{ opacity: 0.8 }}
+            aria-label={`Go to slide ${index + 1}`}
+            aria-current={index === currentCardIndex}
+            p={0}
+          />
+        ))}
+      </HStack>
+      <Flex flex={1} justify="flex-end">
+        <IconButton
+          icon={isPaused ? <FaPlay /> : <FaPause />}
+          onClick={() => setIsPaused(!isPaused)}
+          variant="ghost"
+          bgColor={COLORS.dotInactive}
+          color={COLORS.accentBlue}
+          aria-label={isPaused ? 'Play carousel' : 'Pause carousel'}
+          size="sm"
+          borderRadius="full"
+        />
+      </Flex>
+    </Flex>
+  );
 
   return (
     <Flex
@@ -83,77 +123,20 @@ const WaysToParticipate = () => {
       </VStack>
 
       {isMobile ? (
-        <Flex
-          position="relative"
+        <Box
           w="100vw"
           ml="calc(-50vw + 50%)"
-          minH="650px"
-          direction="column"
+          aria-live="polite"
           role="group"
           aria-roledescription="carousel"
           aria-label="Ways to participate"
         >
-          <Box flex={1} aria-live="polite" pb="3.5rem">
-            <ActiveCard />
-          </Box>
-
-          <Flex
-            position="absolute"
-            bottom="1rem"
-            left="50%"
-            transform="translateX(-50%)"
-            align="center"
-            pointerEvents="auto"
-            zIndex={1}
-          >
-            <HStack spacing="0.75rem">
-              {CARDS.map((card, index) => (
-                <Button
-                  key={card.key}
-                  w={index === currentCardIndex ? '28px' : '10px'}
-                  h="10px"
-                  minW={index === currentCardIndex ? '28px' : '10px'}
-                  borderRadius="full"
-                  bg={
-                    index === currentCardIndex
-                      ? COLORS.accentBlue
-                      : COLORS.dotInactive
-                  }
-                  transition="all 0.3s ease"
-                  flexShrink={0}
-                  onClick={() => setCurrentCardIndex(index)}
-                  _hover={{ opacity: 0.8 }}
-                  aria-label={`Go to slide ${index + 1}`}
-                  aria-current={index === currentCardIndex}
-                  p={0}
-                />
-              ))}
-            </HStack>
-          </Flex>
-
-          <Flex
-            position="absolute"
-            bottom="1rem"
-            right="1rem"
-            pointerEvents="auto"
-            zIndex={2}
-          >
-            <IconButton
-              icon={isPaused ? <FaPlay /> : <FaPause />}
-              onClick={() => setIsPaused(!isPaused)}
-              variant="ghost"
-              bgColor={COLORS.dotInactive}
-              color={COLORS.accentBlue}
-              aria-label={isPaused ? 'Play carousel' : 'Pause carousel'}
-              size="sm"
-              borderRadius="full"
-            />
-          </Flex>
-        </Flex>
+          <ActiveCard footer={carouselControls} />
+        </Box>
       ) : (
         <Grid
           templateColumns="repeat(3, 1fr)"
-          gap={{ base: '1.5rem', md: '1rem' }}
+          gap={{ base: '1.5rem', md: '2rem' }}
           w="100%"
           maxW="1200px"
           mx="auto"

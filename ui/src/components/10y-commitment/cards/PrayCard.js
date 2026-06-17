@@ -7,7 +7,7 @@ import React from 'react';
 import BaseCard from './BaseCard';
 import ParticipateButton from './ParticipateButton';
 
-const PrayCard = () => {
+const PrayCard = ({ footer }) => {
   const prayerCalendarLink = `https://calendar.google.com/calendar/r/eventedit?text=${encodeURIComponent(
     '10-Year Vision Prayer Gathering'
   )}&details=${encodeURIComponent(
@@ -20,6 +20,7 @@ const PrayCard = () => {
     <BaseCard
       title="Pray: Fuel the Vision"
       subtitle="Become a Prayer Partner"
+      footer={footer}
     >
       <VStack spacing="1rem" align="stretch" flex={1}>
         <Text

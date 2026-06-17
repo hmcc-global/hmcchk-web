@@ -9,11 +9,12 @@ import BaseCard from './BaseCard';
 import ParticipateButton from './ParticipateButton';
 import { GO_LINKS } from '../constants';
 
-const GoCard = () => {
+const GoCard = ({ footer }) => {
   return (
     <BaseCard
       title="Go: Be the Vision"
       subtitle="Prepare to Be Sent"
+      footer={footer}
     >
       {/* Custom content for Go card */}
       <VStack spacing="1rem" align="stretch" flex={1} color="white">

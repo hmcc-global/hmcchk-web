@@ -1,8 +1,18 @@
-import { VStack, Heading, Text } from '@chakra-ui/react';
+import {
+  VStack,
+  Box,
+  Heading,
+  Text,
+} from '@chakra-ui/react';
 import React from 'react';
 import { COLORS } from '../constants';
 
-const BaseCard = ({ title, subtitle, children }) => {
+const BaseCard = ({
+  title,
+  subtitle,
+  children,
+  footer,
+}) => {
   return (
     <VStack
       spacing={{ base: '0.75rem', md: '1.25rem' }}
@@ -37,6 +47,12 @@ const BaseCard = ({ title, subtitle, children }) => {
       </VStack>
 
       {children}
+
+      {footer && (
+        <Box w="100%" mt="auto" pt={{ base: '1rem', md: '1.5rem' }}>
+          {footer}
+        </Box>
+      )}
     </VStack>
   );
 };

@@ -3,11 +3,12 @@ import React from 'react';
 import BaseCard from './BaseCard';
 import ParticipateButton from './ParticipateButton';
 
-const GiveCard = () => {
+const GiveCard = ({ footer }) => {
   return (
     <BaseCard
       title="Give: Sow into the Vision"
       subtitle="Give to the Vision Fund"
+      footer={footer}
     >
       <VStack
         spacing="1rem"
