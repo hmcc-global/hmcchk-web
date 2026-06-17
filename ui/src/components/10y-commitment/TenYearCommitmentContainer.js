@@ -5,7 +5,7 @@ import WaysToParticipate from './WaysToParticipate';
 
 const TenYearCommitmentContainer = () => {
   return (
-    <Flex direction="column">
+    <Flex direction="column" sx={{ overscrollBehaviorX: 'none' }}>
       <TenYearHeroSection />
       <TenYearHeartSection />
       <WaysToParticipate />

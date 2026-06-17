@@ -11,7 +11,7 @@ import {
   IconButton,
   Button,
 } from '@chakra-ui/react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaPlay, FaPause } from 'react-icons/fa';
 import PrayCard from './cards/PrayCard';
 import GiveCard from './cards/GiveCard';
@@ -26,6 +26,8 @@ const CARDS = [
   { key: 'go', Component: GoCard },
 ];
 
+const SWIPE_THRESHOLD_PX = 50;
+
 const WaysToParticipate = () => {
   const isMobile = useBreakpointValue(
     { base: true, md: false },
@@ -33,6 +35,64 @@ const WaysToParticipate = () => {
   );
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const carouselRef = useRef(null);
+  const touchStart = useRef(null);
+
+  useEffect(() => {
+    if (!isMobile) return undefined;
+
+    const el = carouselRef.current;
+    if (!el) return undefined;
+
+    const onTouchStart = (e) => {
+      touchStart.current = {
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+      };
+    };
+
+    const onTouchMove = (e) => {
+      if (!touchStart.current) return;
+
+      const dx = e.touches[0].clientX - touchStart.current.x;
+      const dy = e.touches[0].clientY - touchStart.current.y;
+
+      if (Math.abs(dx) > Math.abs(dy)) {
+        e.preventDefault();
+      }
+    };
+
+    const onTouchEnd = (e) => {
+      if (!touchStart.current) return;
+
+      const dx = e.changedTouches[0].clientX - touchStart.current.x;
+      const dy = e.changedTouches[0].clientY - touchStart.current.y;
+      touchStart.current = null;
+
+      if (
+        Math.abs(dx) < SWIPE_THRESHOLD_PX ||
+        Math.abs(dx) < Math.abs(dy)
+      ) {
+        return;
+      }
+
+      setCurrentCardIndex((prev) =>
+        dx < 0
+          ? (prev + 1) % CARDS.length
+          : (prev - 1 + CARDS.length) % CARDS.length
+      );
+    };
+
+    el.addEventListener('touchstart', onTouchStart, { passive: true });
+    el.addEventListener('touchmove', onTouchMove, { passive: false });
+    el.addEventListener('touchend', onTouchEnd, { passive: true });
+
+    return () => {
+      el.removeEventListener('touchstart', onTouchStart);
+      el.removeEventListener('touchmove', onTouchMove);
+      el.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [isMobile]);
 
   useEffect(() => {
     if (!isMobile || isPaused) return undefined;
@@ -124,12 +184,14 @@ const WaysToParticipate = () => {
 
       {isMobile ? (
         <Box
-          w="100vw"
-          ml="calc(-50vw + 50%)"
+          ref={carouselRef}
+          mx={{ base: '-1rem', md: 0 }}
+          w={{ base: 'calc(100% + 2rem)', md: 'auto' }}
           aria-live="polite"
           role="group"
           aria-roledescription="carousel"
           aria-label="Ways to participate"
+          touchAction="pan-y"
         >
           <ActiveCard footer={carouselControls} />
         </Box>
