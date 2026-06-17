@@ -1,9 +1,4 @@
-import {
-  VStack,
-  Text,
-  Image,
-  HStack,
-} from '@chakra-ui/react';
+import { VStack, Text, Image, HStack } from '@chakra-ui/react';
 import React from 'react';
 import BaseCard from './BaseCard';
 import ParticipateButton from './ParticipateButton';
@@ -17,7 +12,7 @@ const GoCard = ({ footer }) => {
       footer={footer}
     >
       {/* Custom content for Go card */}
-      <VStack spacing="1rem" align="stretch" flex={1} color="white">
+      <VStack spacing="1rem" align="stretch" flex={1} minW={0} color="white">
         <Text
           fontSize={{ base: '0.813rem', md: '1.25rem' }}
           color="#FFFFFF"
@@ -26,7 +21,8 @@ const GoCard = ({ footer }) => {
           letterSpacing="0.0125rem"
           textAlign="center"
         >
-          Is God stirring your heart to be a part of the vision? Begin praying now about the cities and growing as a disciple of Christ!
+          Is God stirring your heart to be a part of the vision? Begin praying
+          now about the cities and growing as a disciple of Christ!
         </Text>
 
         <Image
@@ -50,7 +46,7 @@ const GoCard = ({ footer }) => {
           See events and classes for more locations
         </Text>
 
-        <HStack spacing="0.75rem" w="100%" mt="auto">
+        <HStack spacing="0.75rem" w="100%" minW={0} mt="auto">
           <ParticipateButton href={GO_LINKS.austin} flex={1}>
             Austin
           </ParticipateButton>
@@ -67,7 +63,6 @@ const GoCard = ({ footer }) => {
           borderRadius={10}
           alt="Map showing 10 cities for church planting"
         />
-
       </VStack>
     </BaseCard>
   );

@@ -1,4 +1,4 @@
-import { Button, Text } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
@@ -25,15 +25,18 @@ const ParticipateButton = ({ to, href, children, ...rest }) => {
       _hover={{ opacity: 0.9 }}
       fontFamily="Manrope"
       fontWeight={700}
-      fontSize={{ base: 'sm', md: '1.125rem' }}
+      fontSize={{ base: '1rem', lg: '1rem' }}
       borderRadius="80px"
-      px={{ base: '1rem', md: '1.75rem' }}
-      py={{ base: '0.5rem', md: '0.625rem' }}
-      rightIcon={<ArrowForwardIcon />}
+      px={{ base: '0.75rem', md: '1.5rem' }}
+      py={{ base: '0.5rem', md: '1rem' }}
+      rightIcon={
+        <ArrowForwardIcon fontSize={{ base: '1.25rem', lg: '1rem' }} />
+      }
       justifyContent="space-between"
+      lineHeight="1"
       {...rest}
     >
-      <Text>{children}</Text>
+      {children}
     </Button>
   );
 };

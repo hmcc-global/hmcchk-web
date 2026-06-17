@@ -52,9 +52,9 @@ const WaysToParticipate = () => {
         {CARDS.map((card, index) => (
           <Button
             key={card.key}
-            w={index === currentCardIndex ? '28px' : '10px'}
-            h="10px"
-            minW={index === currentCardIndex ? '28px' : '10px'}
+            h="1rem"
+            w={index === currentCardIndex ? '2.5rem' : '1rem'}
+            minW={index === currentCardIndex ? '2.5rem' : '1rem'}
             borderRadius="full"
             bg={
               index === currentCardIndex
@@ -135,14 +135,14 @@ const WaysToParticipate = () => {
         </Box>
       ) : (
         <Grid
-          templateColumns="repeat(3, 1fr)"
-          gap={{ base: '1.5rem', md: '2rem' }}
+          templateColumns="repeat(3, minmax(0, 1fr))"
+          gap={{ base: '1rem' }}
           w="100%"
           maxW="1200px"
           mx="auto"
         >
           {CARDS.map(({ key, Component }) => (
-            <GridItem key={key}>
+            <GridItem key={key} minW={0}>
               <Component />
             </GridItem>
           ))}
