@@ -55,19 +55,18 @@ export const RELEASE_REGION_LABELS = [
   { name: 'Southeast Asia', x: 491.01, y: 375.3 },
 ];
 
-// TODO: Fundraising progress for the Raise commitment. The water level fills to
-// RAISE_FILL_RATIO of the vessel (raised ÷ goal), e.g. 250k of 500k = half.
-export const RAISE_RAISED_USD = 250000;
+// Fundraising progress for the Raise commitment (animation TODO).
+export const RAISE_RAISED_USD = 0;
 export const RAISE_GOAL_USD = 500000;
-export const RAISE_FILL_RATIO = RAISE_RAISED_USD / RAISE_GOAL_USD;
 
 // Fundraising goal for the Raise commitment.
 export const RAISE_GOAL = '$500,000 USD';
 
-// Raise panel: the vessel silhouette's box as percentages of the original
-// 796 x 433 Figma artboard. The water-fill layer shares this exact box (and
-// masks itself to the same SVG) so the water sits inside the silhouette at any
-// size. (left/top/w/h passed straight to Chakra style props.)
+// Raise panel layers, positioned as percentages of the original 796 x 433
+// Figma artboard so the blue fill and goal label line up with the church
+// silhouette at any size. (left/top/w/h passed straight to Chakra style props.)
 export const RAISE_LAYOUT = {
   vessel: { left: '8%', top: '6.6%', w: '84%', h: '88.3%' },
+  fill: { left: '7.9%', top: '68.4%', w: '84.2%', h: '26.5%' },
+  goalTop: '62%',
 };
