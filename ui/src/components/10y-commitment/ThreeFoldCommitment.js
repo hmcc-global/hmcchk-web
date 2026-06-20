@@ -23,7 +23,7 @@ const TABS = [
   { key: 'raise', label: 'Raise', Panel: RaisePanel },
 ];
 
-const ACTIVE_UNDERLINE = '#7094ff';
+const ACTIVE_UNDERLINE = COLORS.tabUnderline;
 
 const ThreeFoldCommitment = () => {
   return (

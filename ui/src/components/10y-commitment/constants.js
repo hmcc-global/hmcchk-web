@@ -10,6 +10,8 @@ export const COLORS = {
   dotInactive: '#5B6177',
   cardGradient: 'linear-gradient(180deg, #506AC4, #010B2D)',
   buttonGradient: 'linear-gradient(90deg, #F3F6FF, #9CB5FF)',
+  tabUnderline: '#7094ff',
+  regionLabel: '#4169eb',
 };
 
 export const GO_LINKS = {

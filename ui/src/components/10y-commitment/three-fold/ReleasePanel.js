@@ -3,6 +3,7 @@ import React from 'react';
 import CommitmentPanel from './CommitmentPanel';
 import {
   px,
+  COLORS,
   RELEASE_VIEW,
   RELEASE_MAP,
   RELEASE_CITIES,
@@ -10,10 +11,9 @@ import {
   RELEASE_IMG,
 } from '../constants';
 
-const REGION_BLUE = '#4169eb';
-
 // A circular city photo pinned at its geographic location, name overlaid.
-const CityCircle = ({ name, img, x, y, w, h }) => (
+// Memoized since RELEASE_CITIES is static — avoids re-rendering all 10 circles.
+const CityCircle = React.memo(({ name, img, x, y, w, h }) => (
   <Box
     position="absolute"
     left={px(x, RELEASE_VIEW.w)}
@@ -48,7 +48,8 @@ const CityCircle = ({ name, img, x, y, w, h }) => (
       {name}
     </Text>
   </Box>
-);
+));
+CityCircle.displayName = 'CityCircle';
 
 const ReleasePanel = () => {
   return (
@@ -91,7 +92,7 @@ const ReleasePanel = () => {
                 position="absolute"
                 left={px(r.x, RELEASE_VIEW.w)}
                 top={px(r.y, RELEASE_VIEW.h)}
-                color={REGION_BLUE}
+                color={COLORS.regionLabel}
                 fontFamily="Manrope"
                 fontWeight={800}
                 fontSize={{ base: '0.6rem', sm: '0.8rem', md: '1.1rem' }}
