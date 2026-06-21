@@ -221,10 +221,10 @@ const NavBar = (props) => {
                           <Button
                             textAlign="center"
                             bgColor="rgba(0, 0, 0, 0)"
-                            h="3.5vh"
+                            h="36px"
                             marginLeft="10px"
                             px={{ md: '3', lg: '5' }}
-                            py={{ md: '3', lg: '4' }}
+                            py={2}
                             _hover={{
                               backgroundColor: '#4A6EEB',
                               color: 'white',
@@ -251,10 +251,10 @@ const NavBar = (props) => {
                             color="white"
                             borderColor="#4A6EEB"
                             borderWidth="medium"
-                            h="3.5vh"
+                            h="36px"
                             marginLeft="10px"
                             px={{ md: '2', lg: '5' }}
-                            py={{ md: '3', lg: '4' }}
+                            py={2}
                             _hover={{
                               backgroundColor: '#ffffff',
                               color: 'black',
@@ -281,10 +281,10 @@ const NavBar = (props) => {
                           <Button
                             textAlign="center"
                             bgColor="rgba(0, 0, 0, 0)"
-                            h="3.5vh"
+                            h="36px"
                             marginLeft="10px"
                             px={{ md: '3', lg: '5' }}
-                            py={{ md: '3', lg: '4' }}
+                            py={2}
                             _hover={{
                               backgroundColor: '#4A6EEB',
                               color: 'white',
@@ -314,10 +314,10 @@ const NavBar = (props) => {
                             color="white"
                             borderColor="#4A6EEB"
                             borderWidth="medium"
-                            h="3.5vh"
+                            h="36px"
                             marginLeft="10px"
                             px={{ md: '2', lg: '5' }}
-                            py={{ md: '3', lg: '4' }}
+                            py={2}
                             _hover={{
                               backgroundColor: '#ffffff',
                               color: 'black',
