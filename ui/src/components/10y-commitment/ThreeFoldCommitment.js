@@ -11,7 +11,6 @@ import {
   TabPanels,
   TabPanel,
 } from '@chakra-ui/react';
-import React from 'react';
 import { COLORS, TYC_IMG } from './constants';
 import ReleasePanel from './three-fold/ReleasePanel';
 import ReproducePanel from './three-fold/ReproducePanel';

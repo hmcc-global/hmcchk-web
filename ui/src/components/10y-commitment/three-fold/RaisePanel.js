@@ -6,7 +6,7 @@ const RaisePanel = () => {
   return (
     <CommitmentPanel
       heading={`Raise ${RAISE_GOAL}`}
-      body="We will raise $500,000 USD that will be used to resource the vision. This money is intended to provide ready capital for church plants, covering costs like facility rentals, so the church can act quickly when opportunities arise."
+      body={`We will raise ${RAISE_GOAL} that will be used to resource the vision. This money is intended to provide ready capital for church plants, covering costs like facility rentals, so the church can act quickly when opportunities arise.`}
     >
       <AspectRatio ratio={796 / 433} w="100%" maxW="620px">
         <Box position="relative">
