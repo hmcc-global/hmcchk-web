@@ -1,5 +1,4 @@
 import { AspectRatio, Box, Image, Text } from '@chakra-ui/react';
-import React from 'react';
 import CommitmentPanel from './CommitmentPanel';
 import { COLORS, RAISE_GOAL, RAISE_LAYOUT, TYC_IMG } from '../constants';
 
