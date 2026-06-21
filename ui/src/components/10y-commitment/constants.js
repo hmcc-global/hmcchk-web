@@ -4,6 +4,7 @@
 export const COLORS = {
   brandBlue: '#0025a3',
   accentBlue: '#9CB5FF',
+  activeBlue: '#003CFF',
   lightBlue: '#ABD8FF',
   sectionBg: '#F6FAFF',
   bodyText: '#333',
