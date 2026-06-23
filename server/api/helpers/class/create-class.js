@@ -1,0 +1,67 @@
+/* eslint-disable linebreak-style */
+module.exports = {
+  friendlyName: 'Create class payment tracking',
+
+  description:
+    'Create the PaymentData record and update LastUpdated for payment-required submissions',
+
+  inputs: {
+    formId: {
+      type: 'string',
+      required: true,
+    },
+    userId: {
+      type: 'string',
+      required: false,
+    },
+    submissionId: {
+      type: 'string',
+      required: true,
+    },
+    updatedBy: {
+      type: 'string',
+      required: false,
+      defaultsTo: 't3chTeam',
+    },
+  },
+
+  exits: {
+    success: {
+      description: 'Payment tracking created successfully.',
+    },
+    invalid: {
+      description: 'Payment tracking could not be created.',
+    },
+  },
+
+  fn: async function ({ formId, userId, submissionId, updatedBy }, exits) {
+    try {
+      let existing = await PaymentData.create({
+        formId,
+        userId,
+        submissionId,
+      }).fetch();
+
+      if (!existing) return exits.invalid('PaymentData failed to create');
+
+      const modelName = `paymentData-${formId}`;
+      existing = await LastUpdated.updateOne({ modelName }).set({
+        lastUpdatedBy: updatedBy,
+      });
+
+      if (!existing) {
+        existing = await LastUpdated.create({
+          modelName,
+          lastUpdatedBy: updatedBy,
+        }).fetch();
+      }
+
+      if (!existing) return exits.invalid('LastUpdated failed to update');
+
+      return exits.success(existing);
+    } catch (err) {
+      sails.log(err);
+      return exits.error(err);
+    }
+  },
+};

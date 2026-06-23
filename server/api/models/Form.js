@@ -20,6 +20,10 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false,
     },
+    isClass: {
+      type: 'boolean',
+      defaultsTo: false,
+    },
     isDeleted: {
       type: 'boolean',
       defaultsTo: false,
