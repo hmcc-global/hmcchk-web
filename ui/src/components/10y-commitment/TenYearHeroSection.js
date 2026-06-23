@@ -1,12 +1,4 @@
-import {
-  Flex,
-  Stack,
-  Image,
-  Box,
-  Heading,
-  Container,
-  Text,
-} from '@chakra-ui/react';
+import { Stack, Image, Box, Heading, Text } from '@chakra-ui/react';
 
 const TenYearHeroSection = () => {
   return (
@@ -52,7 +44,8 @@ const TenYearHeroSection = () => {
             </Heading>
           </Stack>
           <Image
-            src={process.env.PUBLIC_URL + 'images/ripple.png'}
+            src={process.env.PUBLIC_URL + '/images/ripple.png'}
+            alt="Ripple graphic"
             w={{ base: '30%', lg: '10%' }}
             margin="auto"
             borderRadius="7"
