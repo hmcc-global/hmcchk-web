@@ -51,7 +51,7 @@ module.exports = {
         submissionData: submissionData,
       }).fetch();
 
-      if (formRecord[0].isPaymentRequired) {
+      if (formRecord[0].isClass) {
         const existing = await sails.helpers.class.createClass.with({
           formId,
           userId,
@@ -60,7 +60,36 @@ module.exports = {
         });
 
         if (!existing) {
-          return exits.invalid('Payment tracking failed to create');
+          return exits.invalid('classTracking failed to create');
+        }
+      }
+
+      if (formRecord[0].isPaymentRequired) {
+        let existing = await PaymentData.create({
+          formId: formId,
+          userId: userId,
+          submissionId: res.id,
+        }).fetch();
+
+        if (existing) {
+          const modelName = `paymentData-${formId}`;
+          existing = await LastUpdated.updateOne({ modelName })
+            .set({
+              lastUpdatedBy: 't3chTeam',
+            })
+            .fetch();
+
+          if (!existing) {
+            existing = await LastUpdated.create({
+              modelName,
+              lastUpdatedBy: 't3chTeam',
+            }).fetch();
+          }
+
+          if (!existing) {
+            console.log('here');
+            return exits.invalid('LastUpdated failed to update');
+          }
         }
       }
 

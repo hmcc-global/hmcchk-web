@@ -1,9 +1,9 @@
 /* eslint-disable linebreak-style */
 module.exports = {
-  friendlyName: 'Create class payment tracking',
+  friendlyName: 'Create class tracking',
 
   description:
-    'Create the PaymentData record and update LastUpdated for payment-required submissions',
+    'Create the ClassTracking record and update LastUpdated for class-required submissions',
 
   inputs: {
     formId: {
@@ -27,24 +27,24 @@ module.exports = {
 
   exits: {
     success: {
-      description: 'Payment tracking created successfully.',
+      description: 'Class tracking created successfully.',
     },
     invalid: {
-      description: 'Payment tracking could not be created.',
+      description: 'Class tracking could not be created.',
     },
   },
 
   fn: async function ({ formId, userId, submissionId, updatedBy }, exits) {
     try {
-      let existing = await PaymentData.create({
+      let existing = await ClassTracking.create({
         formId,
         userId,
         submissionId,
       }).fetch();
 
-      if (!existing) return exits.invalid('PaymentData failed to create');
+      if (!existing) return exits.invalid('classTracking failed to create');
 
-      const modelName = `paymentData-${formId}`;
+      const modelName = `classTracking-${formId}`;
       existing = await LastUpdated.updateOne({ modelName }).set({
         lastUpdatedBy: updatedBy,
       });
