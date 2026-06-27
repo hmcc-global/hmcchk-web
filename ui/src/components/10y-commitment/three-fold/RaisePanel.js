@@ -1,9 +1,15 @@
-import { AspectRatio, Box, Image, Text } from '@chakra-ui/react';
+import {
+  AspectRatio,
+  Box,
+  Image,
+  Text,
+  usePrefersReducedMotion,
+} from '@chakra-ui/react';
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 import CommitmentPanel from './CommitmentPanel';
 import WaterFill from './WaterFill';
-import { useCountUp } from './motion';
+import { MotionBox, useCountUp } from './motion';
 import { useRaiseProgress } from './useRaiseProgress';
 import {
   COLORS,
@@ -16,9 +22,27 @@ const vesselTop = parseFloat(RAISE_LAYOUT.vessel.top);
 const vesselHeight = parseFloat(RAISE_LAYOUT.vessel.h);
 const usd = (n) => `$${n.toLocaleString('en-US')} USD`;
 
+// The number reads in the brand blue above the waterline and flips to white
+// where it's submerged (design spec: the water colour overlays the text as
+// the fill rises through it).
+const ABOVE_WATER = COLORS.brandBlue;
+const UNDER_WATER = '#FFFFFF';
+
+// Shared so the two stacked copies (base + submerged) line up exactly.
+const labelStyle = {
+  position: 'absolute',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  fontFamily: 'Manrope',
+  fontWeight: 800,
+  fontSize: { base: '1.25rem', md: '2.2rem' },
+  whiteSpace: 'nowrap',
+};
+
 const RaisePanel = () => {
-  // Live raised amount + goal from the Fundraise table (falls back to
-  // constants while loading or on error).
+  const prefersReduced = usePrefersReducedMotion();
+
+  // Live raised amount + goal from the Fundraise table.
   const { raised, goal } = useRaiseProgress();
 
   // Until anything is raised, show the goal amount and a token fill so the
@@ -27,15 +51,22 @@ const RaisePanel = () => {
   const fillRatio = hasRaised
     ? Math.min(raised / goal, 1)
     : RAISE_EMPTY_FILL_RATIO;
+  const target = hasRaised ? raised : goal;
   const goalLabel = usd(goal);
 
-  // Float the amount label just above the water surface (which sits at
-  // `fillRatio` of the vessel box, itself offset within the artboard).
-  const labelTop = `${vesselTop + (1 - fillRatio) * vesselHeight - 9}%`;
+  // The waterline as a % of the panel box; the number is centred on it so the
+  // fill rises through the digits. The submerged copy is clipped to the water
+  // region (everything below the waterline) and revealed in sync with the fill.
+  const waterlineTop = vesselTop + (1 - fillRatio) * vesselHeight;
+  const clipEmpty = 'inset(100% 0 0 0)';
+  const clipToWater = `inset(${waterlineTop}% 0 0 0)`;
+  const waterTransition = prefersReduced
+    ? { duration: 0 }
+    : { duration: 1.8, ease: [0.22, 1, 0.36, 1] };
 
   // Trigger the fill + count-up when the visual scrolls into view.
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.4 });
-  const amount = useCountUp(hasRaised, { start: inView });
+  const amount = useCountUp(target, { start: inView });
 
   return (
     <CommitmentPanel
@@ -54,20 +85,24 @@ const RaisePanel = () => {
           />
           {/* Animated water, masked to the silhouette, filled to the ratio */}
           <WaterFill ratio={fillRatio} start={inView} />
-          {/* Raised-amount label floating just above the waterline */}
-          <Text
-            position="absolute"
-            top={labelTop}
-            left="50%"
-            transform="translateX(-50%)"
-            fontFamily="Manrope"
-            fontWeight={800}
-            fontSize={{ base: '1.25rem', md: '2.2rem' }}
-            color={COLORS.brandBlue}
-            whiteSpace="nowrap"
-          >
+          {/* Base copy: the whole number in the above-water colour. */}
+          <Text {...labelStyle} top={`${waterlineTop}%`} color={ABOVE_WATER}>
             {usd(amount)}
           </Text>
+          {/* Submerged copy: same number, clipped to the water region and
+              revealed as the fill rises, painting the underwater part white. */}
+          <MotionBox
+            position="absolute"
+            inset={0}
+            pointerEvents="none"
+            initial={{ clipPath: clipEmpty }}
+            animate={{ clipPath: inView ? clipToWater : clipEmpty }}
+            transition={waterTransition}
+          >
+            <Text {...labelStyle} top={`${waterlineTop}%`} color={UNDER_WATER}>
+              {usd(amount)}
+            </Text>
+          </MotionBox>
         </Box>
       </AspectRatio>
     </CommitmentPanel>
