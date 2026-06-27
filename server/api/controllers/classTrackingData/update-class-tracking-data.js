@@ -10,14 +10,17 @@ module.exports = {
     id: {
       required: true,
       type: 'string',
+      description: 'ClassTrackingData record id',
     },
     courseId: {
       required: true,
       type: 'string',
+      description: 'Id of the course entry within the record to update',
     },
     field: {
       required: true,
       type: 'string',
+      description: 'Which progress field on the course entry to update',
       // Platform/type are a snapshot set once at submission time, not
       // progress an admin should hand-edit per registrant - so only
       // progress fields are updatable through this endpoint.
@@ -26,6 +29,7 @@ module.exports = {
     value: {
       required: false,
       type: 'json',
+      description: 'New value for the field',
     },
   },
 
@@ -45,6 +49,7 @@ module.exports = {
     const user = this.req.user.fullName;
     sails.log.info(`${user}: Updating class tracking data`);
 
+    let resolvedValue = value;
     if ((field === 'startedAt' || field === 'completedAt') && value) {
       const dateFormat = 'yyyy-MM-dd';
       const parsedDate = DateTime.fromFormat(value, dateFormat);
@@ -52,7 +57,7 @@ module.exports = {
       if (!parsedDate.isValid) {
         return exits.invalidDate('Invalid Date');
       } else {
-        value = parsedDate.toISO();
+        resolvedValue = parsedDate.toISO();
       }
     }
 
@@ -70,7 +75,9 @@ module.exports = {
       }
 
       const courses = record.courses.map((course) =>
-        course.courseId === courseId ? { ...course, [field]: value } : course
+        course.courseId === courseId
+          ? { ...course, [field]: resolvedValue }
+          : course
       );
 
       const res = await ClassTrackingData.updateOne({ id }).set({
@@ -78,23 +85,25 @@ module.exports = {
         lastUpdatedBy: user,
       });
 
-      if (res) {
-        const modelName = `classTracking-${res.formId}`;
-        let existing = await LastUpdated.updateOne({ modelName })
-          .set({
-            lastUpdatedBy: user,
-          })
-          .fetch();
-
-        if (!existing) {
-          existing = await LastUpdated.create({
-            modelName,
-            lastUpdatedBy: user,
-          }).fetch();
-        }
-
-        if (!existing) return exits.invalid();
+      if (!res) {
+        return exits.invalid('Class tracking record not found during update');
       }
+
+      const modelName = `classTracking-${res.formId}`;
+      let existing = await LastUpdated.updateOne({ modelName })
+        .set({
+          lastUpdatedBy: user,
+        })
+        .fetch();
+
+      if (!existing) {
+        existing = await LastUpdated.create({
+          modelName,
+          lastUpdatedBy: user,
+        }).fetch();
+      }
+
+      if (!existing) return exits.invalid();
 
       return exits.success(res);
     } catch (err) {

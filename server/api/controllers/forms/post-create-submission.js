@@ -40,7 +40,7 @@ module.exports = {
         isPublished: true,
       });
 
-      if (formRecord === null) {
+      if (formRecord.length === 0) {
         return exits.invalid();
       }
 
@@ -74,7 +74,6 @@ module.exports = {
           }
 
           if (!existing) {
-            console.log('here');
             return exits.invalid('LastUpdated failed to update');
           }
         }

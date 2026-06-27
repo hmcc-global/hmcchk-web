@@ -188,7 +188,7 @@ export default function AdminFormDataViewer(props) {
 
   const getUserData = async () => {
     try {
-      const { data } = await axios.get('/api/users/get'); // destruct assignment
+      const { data } = await axios.get('/api/users/get'); // destructuring assignment
       return data;
     } catch (err) {
       console.log(err);
@@ -289,9 +289,10 @@ export default function AdminFormDataViewer(props) {
   useEffect(() => {
     getData();
     checkIfUpdated(false);
-    setInterval(() => {
+    const intervalId = setInterval(() => {
       checkIfUpdated();
     }, pollFreqInSecs * 1000);
+    return () => clearInterval(intervalId);
   }, [checkIfUpdated, getData]);
 
   useEffect(() => {
@@ -830,7 +831,7 @@ export default function AdminFormDataViewer(props) {
           </Button>
         </HStack>
         <Box my="4">
-          <Text color="Teal">
+          <Text color="teal">
             *date filter indicates midnight of (eg. from 20/01 00:00 to 21/01
             00:00)
           </Text>
@@ -870,12 +871,14 @@ export default function AdminFormDataViewer(props) {
           suppressRowClickSelection={true}
           sideBar={{ toolPanels: ['columns', 'filters'] }}
         />
-        <Text>
-          Last updated:{' '}
-          {DateTime.fromISO(lastUpdatedTime.current).toFormat(
-            'dd MMM yyyy, HH:mm:ss'
-          )}
-        </Text>
+        {lastUpdatedTime.current && (
+          <Text>
+            Last updated:{' '}
+            {DateTime.fromISO(lastUpdatedTime.current).toFormat(
+              'dd MMM yyyy, HH:mm:ss'
+            )}
+          </Text>
+        )}
       </div>
     </>
   );
