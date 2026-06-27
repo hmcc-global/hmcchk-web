@@ -22,6 +22,15 @@ import AdminPaymentDataModal from './AdminPaymentDataModal';
 
 const pollFreqInSecs = 5 * 60;
 
+const classStatusList = ['Not Started', 'In Progress', 'Completed'];
+
+// colId is built as `course_${courseId}_${field}`; courseId is a uuid (hyphens, no
+// underscores) so splitting on '_' always yields exactly these three parts.
+const parseCourseColId = (colId) => {
+  const parts = colId.split('_');
+  return { courseId: parts[1], field: parts[2] };
+};
+
 export default function AdminFormDataViewer(props) {
   const toast = useToast();
   const {
@@ -31,6 +40,8 @@ export default function AdminFormDataViewer(props) {
   const formId = state.id;
   const formFields = state.formFields;
   const isPaymentRequired = state.isPaymentRequired;
+  const isClass = state.isClass ?? false;
+  const courses = state.courses ?? [];
 
   let lastUpdatedTime = useRef();
 
@@ -130,6 +141,27 @@ export default function AdminFormDataViewer(props) {
     return false;
   };
 
+  // Per-course getters/setters - course progress lives in classTrackingData.courses,
+  // keyed by courseId (not a flat dot-path), since each submission snapshots its own
+  // course list independently of the form's current course config.
+  const classFieldGetter = (courseId, field) => (params) => {
+    const course = params?.data?.classTrackingData?.courses?.find(
+      (c) => c.courseId === courseId
+    );
+    return course ? course[field] : undefined;
+  };
+
+  const classFieldSetter = (courseId, field) => (params) => {
+    const course = params?.data?.classTrackingData?.courses?.find(
+      (c) => c.courseId === courseId
+    );
+    if (course) {
+      course[field] = params.newValue;
+      return true;
+    }
+    return false;
+  };
+
   // Custom Editors
   const MediumTextEditorProps = {
     cellEditorPopup: true,
@@ -194,6 +226,11 @@ export default function AdminFormDataViewer(props) {
           temp['paymentData'] = item.paymentData[0];
         }
 
+        // Populate form data with class tracking data if form is a class
+        if (item.classTrackingData && item.classTrackingData.length > 0) {
+          temp['classTrackingData'] = item.classTrackingData[0];
+        }
+
         if ('address' in temp) {
           let addressString = [];
           for (const property in temp['address']) {
@@ -220,20 +257,33 @@ export default function AdminFormDataViewer(props) {
   const checkIfUpdated = useCallback(
     async (updateData = true) => {
       try {
-        const modelName = `paymentData-${formId}`;
-        const { data } = await axios.get('/api/last-updated', {
-          params: { modelName },
-        });
-        const dateObj = DateTime.fromISO(data);
-        if (!lastUpdatedTime.current || dateObj > lastUpdatedTime.current) {
+        const modelNames = [];
+        if (isPaymentRequired) modelNames.push(`paymentData-${formId}`);
+        if (isClass) modelNames.push(`classTracking-${formId}`);
+        if (modelNames.length === 0) return;
+
+        let latest = lastUpdatedTime.current;
+        let changed = false;
+        for (const modelName of modelNames) {
+          const { data } = await axios.get('/api/last-updated', {
+            params: { modelName },
+          });
+          const dateObj = DateTime.fromISO(data);
+          if (!latest || dateObj > latest) {
+            latest = dateObj;
+            changed = true;
+          }
+        }
+
+        if (changed) {
           updateData && getData();
-          lastUpdatedTime.current = dateObj;
+          lastUpdatedTime.current = latest;
         }
       } catch (err) {
         console.log(err);
       }
     },
-    [formId, getData]
+    [formId, getData, isPaymentRequired, isClass]
   );
 
   useEffect(() => {
@@ -425,6 +475,75 @@ export default function AdminFormDataViewer(props) {
       };
     };
 
+    const createClassTrackerColumns = () => {
+      return {
+        headerName: 'Class Tracking',
+        children: courses.map((course) => ({
+          headerName: course.isActive
+            ? course.name
+            : `${course.name} (Archived)`,
+          marryChildren: true,
+          children: [
+            {
+              headerName: 'Status',
+              colId: `course_${course.courseId}_status`,
+              valueGetter: classFieldGetter(course.courseId, 'status'),
+              valueSetter: classFieldSetter(course.courseId, 'status'),
+              cellEditor: 'agSelectCellEditor',
+              cellEditorParams: { values: classStatusList },
+              editable: course.isActive,
+            },
+            {
+              // Display-only: platform is a snapshot captured at submission
+              // time, not progress an admin should hand-edit per registrant.
+              headerName: 'Platform',
+              colId: `course_${course.courseId}_platform`,
+              valueGetter: classFieldGetter(course.courseId, 'platform'),
+              columnGroupShow: 'closed',
+              editable: false,
+            },
+            {
+              // Display-only, same reasoning as Platform above.
+              headerName: 'Type',
+              colId: `course_${course.courseId}_type`,
+              valueGetter: classFieldGetter(course.courseId, 'type'),
+              columnGroupShow: 'closed',
+              editable: false,
+            },
+            {
+              ...DateCellProps,
+              headerName: 'Started At',
+              colId: `course_${course.courseId}_startedAt`,
+              valueGetter: classFieldGetter(course.courseId, 'startedAt'),
+              valueSetter: classFieldSetter(course.courseId, 'startedAt'),
+              valueFormatter: dateFormatter,
+              columnGroupShow: 'closed',
+              editable: course.isActive,
+            },
+            {
+              ...DateCellProps,
+              headerName: 'Completed At',
+              colId: `course_${course.courseId}_completedAt`,
+              valueGetter: classFieldGetter(course.courseId, 'completedAt'),
+              valueSetter: classFieldSetter(course.courseId, 'completedAt'),
+              valueFormatter: dateFormatter,
+              columnGroupShow: 'closed',
+              editable: course.isActive,
+            },
+            {
+              ...MediumTextEditorProps,
+              headerName: 'Remarks',
+              colId: `course_${course.courseId}_remarks`,
+              valueGetter: classFieldGetter(course.courseId, 'remarks'),
+              valueSetter: classFieldSetter(course.courseId, 'remarks'),
+              columnGroupShow: 'closed',
+              editable: course.isActive,
+            },
+          ],
+        })),
+      };
+    };
+
     const objectClassifier = (key) => {
       if (key === '_submissionTime') {
         return;
@@ -479,6 +598,10 @@ export default function AdminFormDataViewer(props) {
       columnDefs.push(createPaymentDataColumns());
     }
 
+    if (isClass) {
+      columnDefs.push(createClassTrackerColumns());
+    }
+
     return columnDefs;
   };
 
@@ -511,8 +634,39 @@ export default function AdminFormDataViewer(props) {
     }
   };
 
+  // Call API to update class tracking data
+  const updateClassTrackingData = async (data) => {
+    const res = await axios.put('/api/classTrackingData/update', {
+      ...data,
+    });
+
+    if (res.status !== 200) {
+      toast({
+        description: 'Something went wrong, please refresh and try again..',
+        status: 'error',
+        duration: 5000,
+      });
+    }
+  };
+
   const onCellValueChanged = async (p) => {
-    if (p && p.colDef) {
+    if (!p || !p.colDef) return;
+
+    if (p.colDef.colId && p.colDef.colId.startsWith('course_')) {
+      if (p.data.classTrackingData) {
+        const { courseId, field } = parseCourseColId(p.colDef.colId);
+        const payload = {
+          id: p.data.classTrackingData.id,
+          courseId,
+          field,
+          value: p.newValue,
+        };
+        await updateClassTrackingData(payload);
+      }
+      return;
+    }
+
+    if (p.data.paymentData) {
       const payload = {
         id: p.data.paymentData.id,
         [p.colDef.colId]: p.newValue,
@@ -681,9 +835,9 @@ export default function AdminFormDataViewer(props) {
             00:00)
           </Text>
         </Box>
-        {/* Enable Undo / Redo if is a Paid Form */}
+        {/* Enable Undo / Redo if is a Paid Form or a Class form */}
         <div>
-          {isPaidForm ? (
+          {isPaidForm || isClass ? (
             <HStack m="2" w="100%">
               <Tooltip label="Ctrl/Cmd + Z">
                 <Button onClick={undo} leftIcon={<CgUndo />}>
