@@ -52,11 +52,13 @@ module.exports = {
 
       let data;
       if (viewPaymentDataPermission.includes(accessType)) {
-        data = await Submission.find(whereClause).populate('paymentData');
+        data = await Submission.find(whereClause)
+          .populate('paymentData')
+          .populate('classTrackingData');
         return exits.success(data);
       }
 
-      data = await Submission.find(whereClause);
+      data = await Submission.find(whereClause).populate('classTrackingData');
       return exits.success(data);
     } catch (err) {
       sails.log(err);

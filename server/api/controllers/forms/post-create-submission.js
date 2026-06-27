@@ -80,6 +80,48 @@ module.exports = {
         }
       }
 
+      if (formRecord[0].isClass) {
+        const activeCourses = (formRecord[0].courses || []).filter(
+          (course) => course.isActive
+        );
+
+        let existing = await ClassTrackingData.create({
+          formId: formId,
+          userId: userId,
+          submissionId: res.id,
+          courses: activeCourses.map((course) => ({
+            courseId: course.courseId,
+            name: course.name,
+            platform: course.platform,
+            type: course.type,
+            status: 'Not Started',
+            startedAt: '',
+            completedAt: '',
+            remarks: '',
+          })),
+        }).fetch();
+
+        if (existing) {
+          const modelName = `classTracking-${formId}`;
+          existing = await LastUpdated.updateOne({ modelName })
+            .set({
+              lastUpdatedBy: 't3chTeam',
+            })
+            .fetch();
+
+          if (!existing) {
+            existing = await LastUpdated.create({
+              modelName,
+              lastUpdatedBy: 't3chTeam',
+            }).fetch();
+          }
+
+          if (!existing) {
+            return exits.invalid('LastUpdated failed to update');
+          }
+        }
+      }
+
       // Store the user object if any
       let user = {};
 
