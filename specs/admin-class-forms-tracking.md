@@ -1,6 +1,6 @@
 # Class Tracking for Admin Forms
 
-**Issue:** #1386 · **Status:** Implemented, pending live QA · **Updated:** 2026-06-27
+**Issue:** #1386 · **Status:** Implemented, pending live QA · **Updated:** 2026-06-28
 
 ## Summary
 
@@ -20,8 +20,14 @@ data can't be deleted, only archived.
 
 **Tracking progress** — Open the submission grid for a class form. Each course is a group of
 columns, one row per registrant. Admins edit Status, Started At, Completed At, and Remarks
-inline; edits save immediately. Platform and Type are shown but read-only (they're a snapshot,
-not something to hand-edit per row).
+inline; edits save immediately.
+
+Read-only affordances in the grid:
+- **Platform and Type** are shown but read-only (a snapshot, not per-row config). They render in
+  muted text, their header carries a tooltip explaining where to change them, and double-clicking
+  one shows an info message pointing the admin to the Form Editor.
+- **Archived courses** render in muted text and are **collapsed by default** — only their Status
+  column shows, with an expand toggle to reveal the rest. Their data is read-only.
 
 ## Data model
 
@@ -64,6 +70,11 @@ data is no more sensitive than other submission data.
 - Removing a course archives it instead of deleting, to preserve history.
 - Platform/type are locked in at signup and read-only in the grid; only progress fields are
   editable. Tradeoff: a mis-seeded snapshot can't currently be corrected from the UI (rare).
+- Read-only cells (platform/type, and all of an archived course) are de-emphasised with muted
+  text rather than disabled-looking; a double-click on platform/type nudges the admin to the
+  Form Editor instead of silently doing nothing.
+- Archived courses collapse to just their Status column by default to reduce clutter, since
+  they're historical and read-only.
 - Class data follows existing form-data access rather than getting a dedicated tier.
 
 ## Test checklist
@@ -71,9 +82,9 @@ data is no more sensitive than other submission data.
 - [ ] `cd server && yarn lint` passes; `cd ui && yarn build` succeeds.
 - [ ] Create a class form with 2 courses, submit as a user, confirm a tracking row appears.
 - [ ] Edit status/dates/remarks inline and confirm they persist; confirm platform/type aren't
-      editable.
-- [ ] Archive a course + add a new one — prior submission keeps the archived course (read-only),
-      new submissions get the new course.
+      editable, render muted, and double-clicking one shows the "edit in Form Editor" message.
+- [ ] Archive a course + add a new one — prior submission keeps the archived course (read-only,
+      muted, collapsed to just Status until expanded), new submissions get the new course.
 - [ ] Change a course's platform — prior submissions keep the old value, new ones get the new.
 - [ ] Try to remove (not archive) a course with data — update is rejected.
 
@@ -84,4 +95,5 @@ data is no more sensitive than other submission data.
 `classTrackingData/update-class-tracking-data.js` (new), `config/routes.js`, `config/policies.js`
 
 **Frontend:** `forms/FormEditorContainer.js`, `forms/FormEditor.js`, `forms/FormManager.js`,
-`admin/forms/AdminFormDataViewer.js`
+`admin/forms/AdminFormDataViewer.js`, `admin/forms/classTrackingColumns.js` (new — class
+tracking column defs + read-only/archived grid affordances)
