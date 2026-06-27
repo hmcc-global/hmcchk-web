@@ -52,6 +52,10 @@ module.exports.routes = {
   'put /api/paymentData/update': 'paymentData/update-payment-data',
   'put /api/paymentData/send-email': 'paymentData/post-send-payment-email',
 
+  // Class Tracking Data APIs
+  'put /api/classTrackingData/update':
+    'classTrackingData/update-class-tracking-data',
+
   // Announcement APIs
   'get /api/announcements/get-announcements': 'announcements/get-announcements',
 

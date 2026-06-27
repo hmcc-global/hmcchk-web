@@ -78,5 +78,16 @@ module.exports = {
     externalFormLink: {
       type: 'string',
     },
+    isClass: {
+      type: 'boolean',
+      defaultsTo: false,
+    },
+    courses: {
+      type: 'json',
+      defaultsTo: [],
+      description:
+        "Template/config for this Form's courses. Each item: " +
+        '{ courseId, name, platform, type, order, isActive }',
+    },
   },
 };

@@ -176,6 +176,8 @@ const FormEditor = (props) => {
           formInformation.paymentConfirmationEmailTemplate,
         paymentEmailSubject: formInformation.paymentEmailSubject,
         paymentCcEmail: paymentCcEmail,
+        isClass: formInformation.isClass,
+        courses: formInformation.courses,
         formDescription: formInformation.formDescription,
         formImage: formInformation.formImage,
         requireLogin: formInformation.requireLogin,
