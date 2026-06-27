@@ -561,6 +561,26 @@ export default function AdminFormDataViewer(props) {
     }
   };
 
+  // Platform/type course cells are read-only (set at sign-up). If an admin
+  // double-clicks one to edit it, nudge them toward the Form Editor instead.
+  const onCellDoubleClicked = (e) => {
+    const colId = e?.colDef?.colId;
+    if (!colId || !colId.startsWith('course_')) return;
+
+    const { field } = parseCourseColId(colId);
+    if (field === 'platform' || field === 'type') {
+      toast({
+        title: "This field can't be edited here",
+        description:
+          "Platform and type are recorded when the registrant signs up. To " +
+          "change a course's platform or type, edit the form in the Form Editor.",
+        status: 'info',
+        duration: 8000,
+        isClosable: true,
+      });
+    }
+  };
+
   const onCellValueChanged = async (p) => {
     if (!p || !p.colDef) return;
 
@@ -775,6 +795,7 @@ export default function AdminFormDataViewer(props) {
           tooltipShowDelay={0}
           onFirstDataRendered={onFirstDataRendered}
           onCellValueChanged={onCellValueChanged}
+          onCellDoubleClicked={onCellDoubleClicked}
           undoRedoCellEditing={undoRedoCellEditing}
           undoRedoCellEditingLimit={undoRedoCellEditingLimit}
           enableCellChangeFlash={enableCellChangeFlash}

@@ -1,5 +1,14 @@
 const classStatusList = ['Not Started', 'In Progress', 'Completed'];
 
+// Muted styling that signals a cell is read-only. Applied to platform/type
+// (always read-only) and to every column of an archived course.
+const readOnlyCellStyle = {
+  color: '#767676',
+};
+
+const readOnlyHeaderTooltip =
+  "Recorded at sign-up. To change a course's platform or type, edit the form in the Form Editor.";
+
 // colId is built as `course_${courseId}_${field}`; courseId is a uuid (hyphens, no
 // underscores) so splitting on '_' always yields exactly these three parts.
 export const parseCourseColId = (colId) => {
@@ -39,66 +48,84 @@ export const createClassTrackerColumns = ({
 }) => {
   return {
     headerName: 'Class Tracking',
-    children: courses.map((course) => ({
-      headerName: course.isActive ? course.name : `${course.name} (Archived)`,
-      marryChildren: true,
-      children: [
-        {
-          headerName: 'Status',
-          colId: `course_${course.courseId}_status`,
-          valueGetter: classFieldGetter(course.courseId, 'status'),
-          valueSetter: classFieldSetter(course.courseId, 'status'),
-          cellEditor: 'agSelectCellEditor',
-          cellEditorParams: { values: classStatusList },
-          editable: course.isActive,
-        },
-        {
-          // Display-only: platform is a snapshot captured at submission
-          // time, not progress an admin should hand-edit per registrant.
-          headerName: 'Platform',
-          colId: `course_${course.courseId}_platform`,
-          valueGetter: classFieldGetter(course.courseId, 'platform'),
-          columnGroupShow: 'closed',
-          editable: false,
-        },
-        {
-          // Display-only, same reasoning as Platform above.
-          headerName: 'Type',
-          colId: `course_${course.courseId}_type`,
-          valueGetter: classFieldGetter(course.courseId, 'type'),
-          columnGroupShow: 'closed',
-          editable: false,
-        },
-        {
-          ...dateCellProps,
-          headerName: 'Started At',
-          colId: `course_${course.courseId}_startedAt`,
-          valueGetter: classFieldGetter(course.courseId, 'startedAt'),
-          valueSetter: classFieldSetter(course.courseId, 'startedAt'),
-          valueFormatter: dateFormatter,
-          columnGroupShow: 'closed',
-          editable: course.isActive,
-        },
-        {
-          ...dateCellProps,
-          headerName: 'Completed At',
-          colId: `course_${course.courseId}_completedAt`,
-          valueGetter: classFieldGetter(course.courseId, 'completedAt'),
-          valueSetter: classFieldSetter(course.courseId, 'completedAt'),
-          valueFormatter: dateFormatter,
-          columnGroupShow: 'closed',
-          editable: course.isActive,
-        },
-        {
-          ...mediumTextEditorProps,
-          headerName: 'Remarks',
-          colId: `course_${course.courseId}_remarks`,
-          valueGetter: classFieldGetter(course.courseId, 'remarks'),
-          valueSetter: classFieldSetter(course.courseId, 'remarks'),
-          columnGroupShow: 'closed',
-          editable: course.isActive,
-        },
-      ],
-    })),
+    children: courses.map((course) => {
+      const isArchived = !course.isActive;
+      // Active courses show their detail columns by default ('closed' = visible
+      // when the group is collapsed). Archived courses collapse to just Status
+      // and reveal details only when the group is expanded ('open').
+      const detailGroupShow = isArchived ? 'open' : 'closed';
+      // Every column of an archived course is read-only, so grey them all out.
+      const archivedStyle = isArchived ? readOnlyCellStyle : undefined;
+
+      return {
+        headerName: isArchived ? `${course.name} (Archived)` : course.name,
+        marryChildren: true,
+        children: [
+          {
+            headerName: 'Status',
+            colId: `course_${course.courseId}_status`,
+            valueGetter: classFieldGetter(course.courseId, 'status'),
+            valueSetter: classFieldSetter(course.courseId, 'status'),
+            cellEditor: 'agSelectCellEditor',
+            cellEditorParams: { values: classStatusList },
+            editable: course.isActive,
+            cellStyle: archivedStyle,
+          },
+          {
+            // Display-only: platform is a snapshot captured at submission
+            // time, not progress an admin should hand-edit per registrant.
+            headerName: 'Platform',
+            colId: `course_${course.courseId}_platform`,
+            valueGetter: classFieldGetter(course.courseId, 'platform'),
+            columnGroupShow: detailGroupShow,
+            editable: false,
+            headerTooltip: readOnlyHeaderTooltip,
+            cellStyle: readOnlyCellStyle,
+          },
+          {
+            // Display-only, same reasoning as Platform above.
+            headerName: 'Type',
+            colId: `course_${course.courseId}_type`,
+            valueGetter: classFieldGetter(course.courseId, 'type'),
+            columnGroupShow: detailGroupShow,
+            editable: false,
+            headerTooltip: readOnlyHeaderTooltip,
+            cellStyle: readOnlyCellStyle,
+          },
+          {
+            ...dateCellProps,
+            headerName: 'Started At',
+            colId: `course_${course.courseId}_startedAt`,
+            valueGetter: classFieldGetter(course.courseId, 'startedAt'),
+            valueSetter: classFieldSetter(course.courseId, 'startedAt'),
+            valueFormatter: dateFormatter,
+            columnGroupShow: detailGroupShow,
+            editable: course.isActive,
+            cellStyle: archivedStyle,
+          },
+          {
+            ...dateCellProps,
+            headerName: 'Completed At',
+            colId: `course_${course.courseId}_completedAt`,
+            valueGetter: classFieldGetter(course.courseId, 'completedAt'),
+            valueSetter: classFieldSetter(course.courseId, 'completedAt'),
+            valueFormatter: dateFormatter,
+            columnGroupShow: detailGroupShow,
+            editable: course.isActive,
+            cellStyle: archivedStyle,
+          },
+          {
+            ...mediumTextEditorProps,
+            headerName: 'Remarks',
+            colId: `course_${course.courseId}_remarks`,
+            valueGetter: classFieldGetter(course.courseId, 'remarks'),
+            valueSetter: classFieldSetter(course.courseId, 'remarks'),
+            columnGroupShow: detailGroupShow,
+            editable: course.isActive,
+            cellStyle: archivedStyle,
+          },
+        ],
+      };
+    }),
   };
 };
