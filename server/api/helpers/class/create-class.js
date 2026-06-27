@@ -23,6 +23,11 @@ module.exports = {
       required: false,
       defaultsTo: 't3chTeam',
     },
+    classTrackingBlueprint: {
+      type: 'json',
+      required: false,
+      defaultsTo: null,
+    },
   },
 
   exits: {
@@ -34,12 +39,30 @@ module.exports = {
     },
   },
 
-  fn: async function ({ formId, userId, submissionId, updatedBy }, exits) {
+  fn: async function (
+    { formId, userId, submissionId, updatedBy, classTrackingBlueprint },
+    exits
+  ) {
     try {
+      const normalizedCourses = Array.isArray(classTrackingBlueprint?.courses)
+        ? classTrackingBlueprint.courses.map((course) => ({
+            ...course,
+            platform: course.platform || null,
+            type: course.type || 'online',
+            status: course.status || 'Not Started',
+            startedAt: course.startedAt || null,
+            completedAt: course.completedAt || null,
+            lastAccessedAt: course.lastAccessedAt || null,
+          }))
+        : [];
+
       let existing = await ClassTracking.create({
         formId,
         userId,
         submissionId,
+        tracker: {
+          courses: normalizedCourses,
+        },
       }).fetch();
 
       if (!existing) return exits.invalid('classTracking failed to create');

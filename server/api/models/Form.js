@@ -24,6 +24,10 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false,
     },
+    classTrackingBlueprint: {
+      type: 'json',
+      defaultsTo: null,
+    },
     isDeleted: {
       type: 'boolean',
       defaultsTo: false,

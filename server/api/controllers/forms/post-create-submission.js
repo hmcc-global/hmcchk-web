@@ -56,7 +56,7 @@ module.exports = {
           formId,
           userId,
           submissionId: res.id,
-          updatedBy: 't3chTeam',
+          classTrackingBlueprint: formRecord[0].classTrackingBlueprint,
         });
 
         if (!existing) {
