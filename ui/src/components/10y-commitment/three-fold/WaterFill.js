@@ -6,15 +6,17 @@ import { RAISE_LAYOUT, TYC_IMG } from '../constants';
 const WATER_COLOR = '#4169EB';
 const TILE = 80; // px width of one repeating wave tile
 
-// One seamless, gentle wave period as an inline SVG. The bottom half is solid
-// so it joins the water body; the top edge is the (small-amplitude) crest.
-const WAVE = `<svg xmlns='http://www.w3.org/2000/svg' width='40' height='12' viewBox='0 0 40 12' preserveAspectRatio='none'><path d='M0 6 q 10 -5 20 0 t 20 0 V12 H0 Z' fill='${WATER_COLOR}'/></svg>`;
+// One seamless wave period as an inline SVG. The bottom half is solid so it
+// joins the water body; the top edge is a tall, pronounced crest.
+const WAVE = `<svg xmlns='http://www.w3.org/2000/svg' width='40' height='24' viewBox='0 0 40 24' preserveAspectRatio='none'><path d='M0 13 q 10 -11 20 0 t 20 0 V24 H0 Z' fill='${WATER_COLOR}'/></svg>`;
 const WAVE_URI = `data:image/svg+xml,${encodeURIComponent(WAVE)}`;
 
 // Scroll the wave horizontally by one tile for continuous, looping motion.
+// Use the standard `background-position` shorthand (the `-x` longhand isn't
+// reliably animatable across browsers).
 const waveScroll = keyframes`
-  from { background-position-x: 0px; }
-  to   { background-position-x: ${TILE}px; }
+  from { background-position: 0px 0; }
+  to   { background-position: ${TILE}px 0; }
 `;
 
 // A blue water layer masked to the vessel silhouette. It rises to `ratio` of
@@ -60,7 +62,7 @@ const WaterFill = ({ ratio, start }) => {
           bottom="100%"
           left={0}
           right={0}
-          h={{ base: '8px', md: '12px' }}
+          h={{ base: '16px', md: '24px' }}
           mb="-1px"
           backgroundImage={`url("${WAVE_URI}")`}
           backgroundRepeat="repeat-x"

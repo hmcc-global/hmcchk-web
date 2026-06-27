@@ -57,14 +57,18 @@ export const RELEASE_REGION_LABELS = [
   { name: 'Southeast Asia', x: 491.01, y: 375.3 },
 ];
 
-// TODO: Fundraising progress for the Raise commitment. The water level fills to
-// RAISE_FILL_RATIO of the vessel (raised ÷ goal), e.g. 250k of 500k = half.
-export const RAISE_RAISED_USD = 250000;
-export const RAISE_GOAL_USD = 500000;
-export const RAISE_FILL_RATIO = RAISE_RAISED_USD / RAISE_GOAL_USD;
+// The Raise commitment is a live fundraising campaign stored in the Fundraise
+// table (server/api/models/Fundraise.js). RaisePanel reads the raised amount
+// and goal at runtime via useRaiseProgress, which queries
+// GET /api/fundraise/get?campaignName=<RAISE_CAMPAIGN_NAME> and picks the row
+// whose categoryKey is RAISE_CATEGORY_KEY. In that row: `amount` is the live
+// raised total and milestones[0].milestoneAmount is the goal.
+export const RAISE_CAMPAIGN_NAME = '10Y Commitment';
+export const RAISE_CATEGORY_KEY = 'raise';
 
-// Fundraising goal for the Raise commitment.
-export const RAISE_GOAL = '$500,000 USD';
+// When nothing has been raised yet, fill the vessel to this fraction so it
+// doesn't render empty (and the panel shows the goal amount instead of $0).
+export const RAISE_EMPTY_FILL_RATIO = 1 / 3;
 
 // Raise panel: the vessel silhouette's box as percentages of the original
 // 796 x 433 Figma artboard. The water-fill layer shares this exact box (and

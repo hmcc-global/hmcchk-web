@@ -12,8 +12,9 @@ import {
   RELEASE_IMG,
 } from '../constants';
 
-// A circular city photo pinned at its geographic location, name overlaid.
-// Sits statically and lifts (scales + deeper shadow) only on hover.
+// A circular city photo pinned at its geographic location. The city name is
+// already legible in the photo, so it is not overlaid here (kept only as alt
+// text). Sits statically and lifts (scales + deeper shadow) only on hover.
 const CityCircle = ({ name, img, x, y, w, h }) => (
   <MotionBox
     position="absolute"
@@ -31,26 +32,6 @@ const CityCircle = ({ name, img, x, y, w, h }) => (
     }}
   >
     <Image src={`${RELEASE_IMG}/${img}`} alt={name} w="100%" h="100%" objectFit="cover" loading="lazy" />
-    {/* legibility scrim + name */}
-    <Box position="absolute" inset={0} bgGradient="linear(to-b, transparent 45%, rgba(0,0,0,0.55))" />
-    <Text
-      position="absolute"
-      bottom="14%"
-      left="50%"
-      transform="translateX(-50%)"
-      color="#FFFFFF"
-      fontFamily="Manrope"
-      fontWeight={700}
-      fontSize={{ base: '0.5rem', sm: '0.6rem', md: '0.75rem' }}
-      lineHeight="1.1"
-      letterSpacing="0.03em"
-      textTransform="uppercase"
-      textAlign="center"
-      w="92%"
-      textShadow="0 1px 3px rgba(0,0,0,0.6)"
-    >
-      {name}
-    </Text>
   </MotionBox>
 );
 
