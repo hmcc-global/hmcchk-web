@@ -19,17 +19,12 @@ import { paymentMethodList } from '../../helpers/lists';
 import CustomDateEditor from '../ag-grid-editors/CustomDateEditor';
 import { CgUndo, CgRedo } from 'react-icons/cg';
 import AdminPaymentDataModal from './AdminPaymentDataModal';
+import {
+  createClassTrackerColumns,
+  parseCourseColId,
+} from './classTrackingColumns';
 
 const pollFreqInSecs = 5 * 60;
-
-const classStatusList = ['Not Started', 'In Progress', 'Completed'];
-
-// colId is built as `course_${courseId}_${field}`; courseId is a uuid (hyphens, no
-// underscores) so splitting on '_' always yields exactly these three parts.
-const parseCourseColId = (colId) => {
-  const parts = colId.split('_');
-  return { courseId: parts[1], field: parts[2] };
-};
 
 export default function AdminFormDataViewer(props) {
   const toast = useToast();
@@ -138,27 +133,6 @@ export default function AdminFormDataViewer(props) {
       status: 'error',
       duration: 5000,
     });
-    return false;
-  };
-
-  // Per-course getters/setters - course progress lives in classTrackingData.courses,
-  // keyed by courseId (not a flat dot-path), since each submission snapshots its own
-  // course list independently of the form's current course config.
-  const classFieldGetter = (courseId, field) => (params) => {
-    const course = params?.data?.classTrackingData?.courses?.find(
-      (c) => c.courseId === courseId
-    );
-    return course ? course[field] : undefined;
-  };
-
-  const classFieldSetter = (courseId, field) => (params) => {
-    const course = params?.data?.classTrackingData?.courses?.find(
-      (c) => c.courseId === courseId
-    );
-    if (course) {
-      course[field] = params.newValue;
-      return true;
-    }
     return false;
   };
 
@@ -476,75 +450,6 @@ export default function AdminFormDataViewer(props) {
       };
     };
 
-    const createClassTrackerColumns = () => {
-      return {
-        headerName: 'Class Tracking',
-        children: courses.map((course) => ({
-          headerName: course.isActive
-            ? course.name
-            : `${course.name} (Archived)`,
-          marryChildren: true,
-          children: [
-            {
-              headerName: 'Status',
-              colId: `course_${course.courseId}_status`,
-              valueGetter: classFieldGetter(course.courseId, 'status'),
-              valueSetter: classFieldSetter(course.courseId, 'status'),
-              cellEditor: 'agSelectCellEditor',
-              cellEditorParams: { values: classStatusList },
-              editable: course.isActive,
-            },
-            {
-              // Display-only: platform is a snapshot captured at submission
-              // time, not progress an admin should hand-edit per registrant.
-              headerName: 'Platform',
-              colId: `course_${course.courseId}_platform`,
-              valueGetter: classFieldGetter(course.courseId, 'platform'),
-              columnGroupShow: 'closed',
-              editable: false,
-            },
-            {
-              // Display-only, same reasoning as Platform above.
-              headerName: 'Type',
-              colId: `course_${course.courseId}_type`,
-              valueGetter: classFieldGetter(course.courseId, 'type'),
-              columnGroupShow: 'closed',
-              editable: false,
-            },
-            {
-              ...DateCellProps,
-              headerName: 'Started At',
-              colId: `course_${course.courseId}_startedAt`,
-              valueGetter: classFieldGetter(course.courseId, 'startedAt'),
-              valueSetter: classFieldSetter(course.courseId, 'startedAt'),
-              valueFormatter: dateFormatter,
-              columnGroupShow: 'closed',
-              editable: course.isActive,
-            },
-            {
-              ...DateCellProps,
-              headerName: 'Completed At',
-              colId: `course_${course.courseId}_completedAt`,
-              valueGetter: classFieldGetter(course.courseId, 'completedAt'),
-              valueSetter: classFieldSetter(course.courseId, 'completedAt'),
-              valueFormatter: dateFormatter,
-              columnGroupShow: 'closed',
-              editable: course.isActive,
-            },
-            {
-              ...MediumTextEditorProps,
-              headerName: 'Remarks',
-              colId: `course_${course.courseId}_remarks`,
-              valueGetter: classFieldGetter(course.courseId, 'remarks'),
-              valueSetter: classFieldSetter(course.courseId, 'remarks'),
-              columnGroupShow: 'closed',
-              editable: course.isActive,
-            },
-          ],
-        })),
-      };
-    };
-
     const objectClassifier = (key) => {
       if (key === '_submissionTime') {
         return;
@@ -600,7 +505,14 @@ export default function AdminFormDataViewer(props) {
     }
 
     if (isClass) {
-      columnDefs.push(createClassTrackerColumns());
+      columnDefs.push(
+        createClassTrackerColumns({
+          courses,
+          dateFormatter,
+          dateCellProps: DateCellProps,
+          mediumTextEditorProps: MediumTextEditorProps,
+        })
+      );
     }
 
     return columnDefs;
