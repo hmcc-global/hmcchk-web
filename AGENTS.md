@@ -5,7 +5,7 @@ This document provides guidelines for AI agents working on the HMCCHK web applic
 ## Project Overview
 
 - **Frontend**: React 18 with Chakra UI, Redux, react-router-dom
-- **Backend**: Node.js with Express (in `api/` folder)
+- **Backend**: Sails.js v1 (Node 16), MongoDB via `sails-mongo` — lives in the `server/` folder (actions/models/helpers under `server/api/`)
 - **Build Tool**: Create React App (react-scripts)
 
 ## Commands
