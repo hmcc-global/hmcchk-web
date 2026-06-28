@@ -15,12 +15,12 @@ module.exports = {
       model: 'Submission',
       unique: true,
     },
-    createdAt: {
-      type: 'string',
-    },
-    updatedAt: {
-      type: 'string',
-    },
+    // createdAt: {
+    //   type: 'string',
+    // },
+    // updatedAt: {
+    //   type: 'string',
+    // },
     tracker: {
       type: 'json',
       courses: {
