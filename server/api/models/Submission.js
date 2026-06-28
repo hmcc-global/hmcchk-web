@@ -15,7 +15,7 @@ module.exports = {
       collection: 'PaymentData',
       via: 'submissionId'
     },
-    ClassTracking: {
+    classTracking: {
       collection: 'ClassTracking',
       via: 'submissionId'
     },
