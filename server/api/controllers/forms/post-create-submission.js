@@ -56,7 +56,7 @@ module.exports = {
           formId,
           userId,
           submissionId: res.id,
-          classTrackingBlueprint: formRecord[0].classTrackingBlueprint,
+          classTemplate: formRecord[0].classTemplate,
         });
 
         if (!existing) {

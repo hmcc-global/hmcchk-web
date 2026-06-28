@@ -23,7 +23,7 @@ module.exports = {
       required: false,
       defaultsTo: 't3chTeam',
     },
-    classTrackingBlueprint: {
+    classTemplate: {
       type: 'json',
       required: false,
       defaultsTo: null,
@@ -40,21 +40,25 @@ module.exports = {
   },
 
   fn: async function (
-    { formId, userId, submissionId, updatedBy, classTrackingBlueprint },
+    { formId, userId, submissionId, updatedBy, classTemplate },
     exits
   ) {
     try {
-      const normalizedCourses = Array.isArray(classTrackingBlueprint?.courses)
-        ? classTrackingBlueprint.courses.map((course) => ({
-            ...course,
-            platform: course.platform || null,
-            type: course.type || 'online',
-            status: course.status || 'Not Started',
-            startedAt: course.startedAt || null,
-            completedAt: course.completedAt || null,
-            lastAccessedAt: course.lastAccessedAt || null,
-          }))
+      const blueprintCourses = Array.isArray(classTemplate?.tracker?.courses)
+        ? classTemplate.tracker.courses
+        : Array.isArray(classTemplate?.courses)
+        ? classTemplate.courses
         : [];
+
+      const normalizedCourses = blueprintCourses.map((course) => ({
+        ...course,
+        platform: course.platform || null,
+        type: course.type || 'online',
+        status: course.status || 'Not Started',
+        startedAt: course.startedAt || null,
+        completedAt: course.completedAt || null,
+        lastAccessedAt: course.lastAccessedAt || null,
+      }));
 
       let existing = await ClassTracking.create({
         formId,

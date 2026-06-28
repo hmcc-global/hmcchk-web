@@ -24,9 +24,13 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false,
     },
-    classTrackingBlueprint: {
+    classTemplate: {
       type: 'json',
-      defaultsTo: null,
+      defaultsTo: {
+        tracker: {
+          courses: [],
+        },
+      },
     },
     isDeleted: {
       type: 'boolean',
