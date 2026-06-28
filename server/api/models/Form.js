@@ -20,6 +20,18 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false,
     },
+    isClass: {
+      type: 'boolean',
+      defaultsTo: false,
+    },
+    classTemplate: {
+      type: 'json',
+      defaultsTo: {
+        tracker: {
+          courses: [],
+        },
+      },
+    },
     isDeleted: {
       type: 'boolean',
       defaultsTo: false,

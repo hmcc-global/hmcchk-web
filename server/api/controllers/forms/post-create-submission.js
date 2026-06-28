@@ -51,6 +51,19 @@ module.exports = {
         submissionData: submissionData,
       }).fetch();
 
+      if (formRecord[0].isClass) {
+        const existing = await sails.helpers.class.createClass.with({
+          formId,
+          userId,
+          submissionId: res.id,
+          classTemplate: formRecord[0].classTemplate,
+        });
+
+        if (!existing) {
+          return exits.invalid('classTracking failed to create');
+        }
+      }
+
       if (formRecord[0].isPaymentRequired) {
         let existing = await PaymentData.create({
           formId: formId,

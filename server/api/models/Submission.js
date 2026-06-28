@@ -15,6 +15,10 @@ module.exports = {
       collection: 'PaymentData',
       via: 'submissionId'
     },
+    classTracking: {
+      collection: 'ClassTracking',
+      via: 'submissionId'
+    },
     isDeleted: {
       type: 'boolean',
       defaultsTo: false,
