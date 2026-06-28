@@ -37,6 +37,9 @@ module.exports = {
     invalid: {
       description: 'Class tracking could not be created.',
     },
+    error: {
+      description: 'An unexpected error occurred while creating class tracking.',
+    },
   },
 
   fn: async function (
