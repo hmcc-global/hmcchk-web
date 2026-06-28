@@ -3,15 +3,13 @@ module.exports = {
   attributes: {
     userId: {
       type: 'string',
-      unique: true,
     },
-    classId: {
-      type: 'string',
-      unique: true,
-    },
+    // classId: {
+    //   type: 'string',
+    //   unique: true,
+    // },
     formId: {
       type: 'string',
-      unique: true,
     },
     submissionId: {
       model: 'Submission',
