@@ -43,7 +43,7 @@ const SaturateVision = () => {
   }, []);
 
   return (
-    <Container maxW="100%" m={0} p={0}>
+    <Container maxW="100%" m={0} p={0} bgColor="#ffffff">
       {isMobile ? (
         <Stack>
           <Box

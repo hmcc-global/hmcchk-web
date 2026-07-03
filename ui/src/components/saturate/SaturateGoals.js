@@ -46,7 +46,13 @@ const SaturateGoals = () => {
 
   return (
     <>
-      <Container maxW="100%" m={0} p={0} display={['block', 'none']}>
+      <Container
+        maxW="100%"
+        m={0}
+        p={0}
+        display={['block', 'none']}
+        bgColor="#ffffff"
+      >
         <Flex justifyContent="flex-end" alignItems="center" mb="0.8em">
           <Box>
             <Text
@@ -64,7 +70,7 @@ const SaturateGoals = () => {
             boxSize={['3em', '10em']}
           ></Image>
         </Flex>
-        <Box mb="2em">
+        <Box pb="2em">
           <Box bg="#0053A4" height={['2.5em', '4em']} mb="1em" pl="0.5em">
             <Flex>
               <Box
@@ -113,7 +119,7 @@ const SaturateGoals = () => {
             </UnorderedList>
           </Box>
         </Box>
-        <Box mb="2em">
+        <Box pb="2em">
           <Box bg="#3B8AD7" height={['2.5em', '4em']} mb="1em" pl="0.5em">
             <Flex>
               <Box
@@ -162,7 +168,7 @@ const SaturateGoals = () => {
             </UnorderedList>
           </Box>
         </Box>
-        <Box mb="2em">
+        <Box pb="2em">
           <Box bg="#81B1E1" height={['2.5em', '4em']} mb="1em" pl="0.5em">
             <Flex>
               <Box
@@ -212,7 +218,7 @@ const SaturateGoals = () => {
             </UnorderedList>
           </Box>
         </Box>
-        <Box mb="2em">
+        <Box pb="2em">
           <Box bg="#C3E0FD" height={['2.5em', '4em']} mb="1em" pl="0.5em">
             <Flex>
               <Box
@@ -277,10 +283,11 @@ const SaturateGoals = () => {
       ></Container>
       <Container
         maxWidth="100%"
-        my={5}
+        py={5}
         p={0}
         overflow="clip"
         display={['none', 'block']}
+        bgColor="#ffffff"
       >
         <HStack>
           <VStack

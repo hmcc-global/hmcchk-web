@@ -132,9 +132,7 @@ const SaturateContainer = () => {
       <SaturateVision />
       <SaturateGoals />
 
-      <Container maxW="100%" m={0} p={0}></Container>
-
-      <Container maxW="100%" p={[0, 10]} centerContent></Container>
+      <Container maxW="100%" p={[5, 20]} bgColor="#ffffff" />
     </>
   );
 };
