@@ -6,6 +6,7 @@ import {
   VStack,
   keyframes,
 } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SaturateGoals from './SaturateGoals';
 import SaturateVision from './SaturateVision';
@@ -22,12 +23,30 @@ const continuousAnimation = {
   },
 };
 
+const CURSOR_URL =
+  process.env.PUBLIC_URL + '/images/saturate/Saturate_cursor.svg';
+// SVG is 50×45; hotspot at center for accurate pointing on desktop
+const CURSOR_HOTSPOT = '30 28';
+
 const SaturateContainer = () => {
-  const positionElement = (e) => {
-    document.documentElement.style.cursor =
-      "url('/images/saturate/Saturate_cursor.svg') 1 1, auto";
-  };
-  window.addEventListener('mousemove', positionElement);
+  useEffect(() => {
+    const desktopQuery = window.matchMedia('(min-width: 30em)');
+
+    const applyCursor = () => {
+      document.documentElement.style.cursor = desktopQuery.matches
+        ? `url('${CURSOR_URL}') ${CURSOR_HOTSPOT}, auto`
+        : '';
+    };
+
+    applyCursor();
+    desktopQuery.addEventListener('change', applyCursor);
+
+    return () => {
+      desktopQuery.removeEventListener('change', applyCursor);
+      document.documentElement.style.cursor = '';
+    };
+  }, []);
+
   return (
     <>
       <Container maxW="100%" m={0} p={0}>
@@ -113,9 +132,7 @@ const SaturateContainer = () => {
       <SaturateVision />
       <SaturateGoals />
 
-      <Container maxW="100%" m={0} p={0}></Container>
-
-      <Container maxW="100%" p={[0, 10]} centerContent></Container>
+      <Container maxW="100%" p={[5, 20]} bgColor="#ffffff" />
     </>
   );
 };
