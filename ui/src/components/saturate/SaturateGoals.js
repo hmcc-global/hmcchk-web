@@ -9,39 +9,49 @@ import {
   ListItem,
   HStack,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+
+// ring bands as fraction of outer radius (40vw) — matches nested box sizes
+const RING_BANDS = [
+  { ring: 1, min: 0.85, max: 1 },
+  { ring: 2, min: 0.7, max: 0.85 },
+  { ring: 3, min: 0.55, max: 0.7 },
+  { ring: 4, min: 0.46, max: 0.55 },
+];
 
 const SaturateGoals = () => {
+  const ringRef = useRef(null);
   const [outerRing1Hover, setouterRing1Hover] = useState(false);
   const [outerRing2Hover, setouterRing2Hover] = useState(false);
   const [outerRing3Hover, setouterRing3Hover] = useState(false);
   const [outerRing4Hover, setouterRing4Hover] = useState(false);
 
-  const onOuterRing1 = (e) => {
-    onDropHover();
-    setouterRing1Hover(true);
+  const setRingHover = (ring) => {
+    setouterRing1Hover(ring === 1);
+    setouterRing2Hover(ring === 2);
+    setouterRing3Hover(ring === 3);
+    setouterRing4Hover(ring === 4);
   };
 
-  const onOuterRing2 = (e) => {
-    onDropHover();
-    setouterRing2Hover(true);
-  };
+  const onOuterRing1 = () => setRingHover(1);
+  const onOuterRing2 = () => setRingHover(2);
+  const onOuterRing3 = () => setRingHover(3);
+  const onOuterRing4 = () => setRingHover(4);
 
-  const onOuterRing3 = (e) => {
-    onDropHover();
-    setouterRing3Hover(true);
-  };
+  const onDropHover = () => setRingHover(0);
 
-  const onOuterRing4 = (e) => {
-    onDropHover();
-    setouterRing4Hover(true);
-  };
-
-  const onDropHover = (e) => {
-    setouterRing1Hover(false);
-    setouterRing2Hover(false);
-    setouterRing3Hover(false);
-    setouterRing4Hover(false);
+  // hit-test by pointer hotspot distance from center, not nested box bounds
+  const handleRingPointerMove = (e) => {
+    const el = ringRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const dist = Math.hypot(
+      e.clientX - (rect.left + rect.width / 2),
+      e.clientY - (rect.top + rect.height / 2)
+    );
+    const t = dist / (rect.width / 2);
+    const band = RING_BANDS.find((b) => t > b.min && t <= b.max);
+    setRingHover(band?.ring ?? 0);
   };
 
   return (
@@ -425,8 +435,6 @@ const SaturateGoals = () => {
             p="0"
             borderRadius="full"
             border="1.8vw solid white"
-            onMouseEnter={onDropHover}
-            onMouseLeave={onDropHover}
             style={{ shapeOutside: 'circle(50%)' }}
             float="left"
             bgColor="white"
@@ -434,12 +442,13 @@ const SaturateGoals = () => {
             zIndex="1"
           >
             <Box
+              ref={ringRef}
               borderRadius="full"
               width="40vw"
               height="40vw"
               display="flex"
-              onMouseEnter={onOuterRing1}
-              onMouseLeave={onOuterRing1}
+              onMouseMove={handleRingPointerMove}
+              onMouseLeave={onDropHover}
               justifyContent="center"
               alignItems="center"
               border="1.8vw solid"
@@ -452,8 +461,6 @@ const SaturateGoals = () => {
                 width="34vw"
                 height="34vw"
                 display="flex"
-                onMouseEnter={onOuterRing2}
-                onMouseLeave={onOuterRing2}
                 justifyContent="center"
                 alignItems="center"
                 border="1.8vw solid"
@@ -466,8 +473,6 @@ const SaturateGoals = () => {
                   width="28vw"
                   height="28vw"
                   display="flex"
-                  onMouseEnter={onOuterRing3}
-                  onMouseLeave={onOuterRing3}
                   justifyContent="center"
                   alignItems="center"
                   border="1.8vw solid"
@@ -480,8 +485,6 @@ const SaturateGoals = () => {
                     width="22vw"
                     height="22vw"
                     display="flex"
-                    onMouseEnter={onOuterRing4}
-                    onMouseLeave={onOuterRing4}
                     alignItems="center"
                     justifyContent="center"
                     textAlign="center"
