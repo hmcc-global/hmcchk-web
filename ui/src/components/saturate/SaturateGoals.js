@@ -297,6 +297,7 @@ const SaturateGoals = () => {
                 height={{ sm: '1.5em', md: '2.4em', lg: '2.8em' }}
                 width={{ sm: '150%', lg: '130%' }}
                 alignItems="center"
+                transition="background-color 0.3s ease-in-out"
               >
                 <Flex
                   bg="white"
@@ -306,6 +307,7 @@ const SaturateGoals = () => {
                   justifyContent="center"
                   alignItems="center"
                   mr="0.4em"
+                  transition="border-color 0.3s ease-in-out"
                 >
                   <Image
                     src={
@@ -356,6 +358,7 @@ const SaturateGoals = () => {
                 height={{ sm: '1.5em', md: '2.4em', lg: '2.8em' }}
                 width={{ sm: '150%', lg: '130%' }}
                 alignItems="center"
+                transition="background-color 0.3s ease-in-out"
               >
                 <Flex
                   bg="white"
@@ -365,6 +368,7 @@ const SaturateGoals = () => {
                   justifyContent="center"
                   alignItems="center"
                   mr="0.4em"
+                  transition="border-color 0.3s ease-in-out"
                 >
                   <Image
                     src={
@@ -431,12 +435,10 @@ const SaturateGoals = () => {
               onMouseLeave={onOuterRing1}
               justifyContent="center"
               alignItems="center"
-              style={{
-                shapeOutside: 'circle()',
-                border: outerRing1Hover
-                  ? '1.8vw solid #c3e0fd'
-                  : '1.8vw solid #D9D9D9',
-              }}
+              border="1.8vw solid"
+              borderColor={outerRing1Hover ? '#c3e0fd' : '#D9D9D9'}
+              transition="border-color 0.3s ease-in-out"
+              style={{ shapeOutside: 'circle()' }}
             >
               <Box
                 borderRadius="full"
@@ -447,12 +449,10 @@ const SaturateGoals = () => {
                 onMouseLeave={onOuterRing2}
                 justifyContent="center"
                 alignItems="center"
-                style={{
-                  shapeOutside: 'circle()',
-                  border: outerRing2Hover
-                    ? '1.8vw solid #81b1e1'
-                    : '1.8vw solid #D9D9D9',
-                }}
+                border="1.8vw solid"
+                borderColor={outerRing2Hover ? '#81b1e1' : '#D9D9D9'}
+                transition="border-color 0.3s ease-in-out"
+                style={{ shapeOutside: 'circle()' }}
               >
                 <Box
                   borderRadius="full"
@@ -463,12 +463,10 @@ const SaturateGoals = () => {
                   onMouseLeave={onOuterRing3}
                   justifyContent="center"
                   alignItems="center"
-                  style={{
-                    shapeOutside: 'circle()',
-                    border: outerRing3Hover
-                      ? '1.8vw solid #3b8ad7'
-                      : '1.8vw solid #D9D9D9',
-                  }}
+                  border="1.8vw solid"
+                  borderColor={outerRing3Hover ? '#3b8ad7' : '#D9D9D9'}
+                  transition="border-color 0.3s ease-in-out"
+                  style={{ shapeOutside: 'circle()' }}
                 >
                   <Box
                     borderRadius="full"
@@ -480,12 +478,10 @@ const SaturateGoals = () => {
                     alignItems="center"
                     justifyContent="center"
                     textAlign="center"
-                    style={{
-                      shapeOutside: 'circle()',
-                      border: outerRing4Hover
-                        ? '1.8vw solid #0053A4'
-                        : '1.8vw solid #D9D9D9',
-                    }}
+                    border="1.8vw solid"
+                    borderColor={outerRing4Hover ? '#0053A4' : '#D9D9D9'}
+                    transition="border-color 0.3s ease-in-out"
+                    style={{ shapeOutside: 'circle()' }}
                   >
                     <Text
                       fontSize="4.5vw"
@@ -517,6 +513,7 @@ const SaturateGoals = () => {
                 ml={{ sm: '-50%', md: '-20%', lg: '-30%' }}
                 alignItems="center"
                 justifyContent="space-between"
+                transition="background-color 0.3s ease-in-out"
               >
                 <Text
                   color="white"
@@ -536,6 +533,7 @@ const SaturateGoals = () => {
                   alignItems="center"
                   pos="sticky"
                   right="0.4em"
+                  transition="border-color 0.3s ease-in-out"
                 >
                   <Image
                     src={
@@ -580,6 +578,7 @@ const SaturateGoals = () => {
                 justifyContent="space-between"
                 width={{ sm: '150%', md: '120%', lg: '120%' }}
                 ml={{ sm: '-50%', md: '-20%', lg: '-20%' }}
+                transition="background-color 0.3s ease-in-out"
               >
                 <Text
                   color={outerRing1Hover ? '#0053A4' : 'white'}
@@ -587,10 +586,11 @@ const SaturateGoals = () => {
                   fontWeight="700"
                   fontFamily="DarkerGrotesque"
                   pl={{ sm: '35%', md: '17%', lg: '17%' }}
+                  transition="color 0.3s ease-in-out"
                 >
                   LAUNCH
                 </Text>
-                <Box
+                <Flex
                   bg="white"
                   borderColor={outerRing1Hover ? '#C3E0FD' : '#D9D9D9'}
                   borderWidth="5px"
@@ -599,6 +599,7 @@ const SaturateGoals = () => {
                   alignItems="center"
                   pos="sticky"
                   right="0.4em"
+                  transition="border-color 0.3s ease-in-out"
                 >
                   <Image
                     src={
@@ -609,7 +610,7 @@ const SaturateGoals = () => {
                     m="2"
                     boxSize="3.5vw"
                   ></Image>
-                </Box>
+                </Flex>
               </Flex>
               <Box pr="3.5em">
                 <UnorderedList
