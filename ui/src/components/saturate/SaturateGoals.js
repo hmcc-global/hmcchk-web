@@ -547,7 +547,7 @@ const SaturateGoals = () => {
                       process.env.PUBLIC_URL +
                       '/images/saturate/Saturate_Impact.svg'
                     }
-                    orderRadius="full"
+                    borderRadius="full"
                     m="2"
                     boxSize="3.5vw"
                   ></Image>
