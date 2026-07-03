@@ -173,6 +173,7 @@ const SaturateVision = () => {
                             display="flex"
                             alignItems="center"
                             justifyContent="center"
+                            ml="-1"
                           />
 
                           <Flex fontSize={[13, 20, 30, 35, 40]} gap={2}>
@@ -223,6 +224,7 @@ const SaturateVision = () => {
                           display="flex"
                           alignItems="center"
                           justifyContent="center"
+                          ml="-1"
                         />
 
                         <Flex fontSize={[13, 20, 30, 35, 40]} gap={2}>
@@ -264,12 +266,13 @@ const SaturateVision = () => {
                         L
                       </Box>
                       <Box
-                        w="12vw"
+                        w="12.25vw"
                         h={1}
                         borderRadius={'0 20px 20px 0'}
                         bgColor="#81B1E1"
                         alignItems="center"
                         justifyContent="center"
+                        ml="-1"
                       />
                       <Flex
                         width={[
@@ -308,7 +311,7 @@ const SaturateVision = () => {
                     ref={ref}
                   >
                     <Box
-                      boxSize="8vw"
+                      boxSize="8.3vw"
                       borderRadius="full"
                       bgColor="#C3E0FD"
                       display="flex"
@@ -328,6 +331,7 @@ const SaturateVision = () => {
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
+                      ml="-1"
                     />
                     <Flex fontSize={[13, 20, 30, 35, 40]} gap={2}>
                       <span /> <Text fontFamily="DarkerGrotesque">LAUNCH</Text>
