@@ -96,7 +96,6 @@ const SaturateVision = () => {
             <Box
               marginLeft="-50%"
               marginTop="-30%"
-              transition={'border 2s ease-in'}
               style={{
                 border: '3vw solid #C3E0FD',
               }}
@@ -108,7 +107,6 @@ const SaturateVision = () => {
               p="3vw"
             >
               <Box
-                transition={'border 1.5s ease-in'}
                 style={{
                   border: '3vw solid #81B1E1',
                 }}
@@ -120,7 +118,6 @@ const SaturateVision = () => {
                 p="4vw"
               >
                 <Box
-                  transition={'border 1s ease-in'}
                   style={{
                     border: '3vw solid #3B8AD7',
                   }}
@@ -132,7 +129,6 @@ const SaturateVision = () => {
                   p="21vw"
                 >
                   <Box
-                    transition={'border 0.5s ease-in'}
                     style={{
                       border: '3vw solid #0053A4',
                     }}
@@ -392,7 +388,6 @@ const SaturateVision = () => {
               position="relative"
             >
               <Box
-                transition={'border 2s ease-in'}
                 style={{
                   border: '3vw solid #C3E0FD',
                 }}
@@ -404,7 +399,6 @@ const SaturateVision = () => {
                 position="relative"
               >
                 <Box
-                  transition={'border 1.5s ease-in'}
                   style={{
                     border: '3vw solid #81B1E1',
                   }}
@@ -416,7 +410,6 @@ const SaturateVision = () => {
                   position="relative"
                 >
                   <Box
-                    transition={'border 1s ease-in'}
                     style={{
                       border: '3vw solid #3B8AD7',
                     }}
@@ -428,7 +421,6 @@ const SaturateVision = () => {
                     position="relative"
                   >
                     <Box
-                      transition={'border 0.5s ease-in'}
                       style={{
                         border: '3vw solid #0053A4',
                       }}
