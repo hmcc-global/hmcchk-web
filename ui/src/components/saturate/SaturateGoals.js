@@ -253,7 +253,7 @@ const SaturateGoals = () => {
                   {' '}
                   1{' '}
                 </span>{' '}
-                Transformational Hub
+                Transformation Hub
               </ListItem>
               <ListItem>
                 <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
@@ -621,7 +621,7 @@ const SaturateGoals = () => {
                       {' '}
                       1{' '}
                     </span>{' '}
-                    Transformational Hub
+                    Transformation Hub
                   </ListItem>
                   <ListItem>
                     <span style={{ color: '#0053A4', fontWeight: 'bold' }}>
