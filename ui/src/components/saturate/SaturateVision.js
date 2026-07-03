@@ -498,6 +498,7 @@ const SaturateVision = () => {
                               flexShrink={0}
                               borderRadius="0 20px 20px 0"
                               bgColor="#0053A4"
+                              ml="-1"
                             />
                             <Flex
                               alignItems="center"
@@ -549,6 +550,7 @@ const SaturateVision = () => {
                             flexShrink={0}
                             borderRadius="0 20px 20px 0"
                             bgColor="#3B8AD7"
+                            ml="-1"
                           />
                           <Flex
                             alignItems="center"
@@ -599,6 +601,7 @@ const SaturateVision = () => {
                           flexShrink={0}
                           borderRadius="0 20px 20px 0"
                           bgColor="#81B1E1"
+                          ml="-1"
                         />
                         <Flex
                           alignItems="center"
@@ -643,11 +646,12 @@ const SaturateVision = () => {
                         L
                       </Flex>
                       <Box
-                        w="10vw"
+                        w="10.25vw"
                         h={DESKTOP_FILL.line}
                         flexShrink={0}
                         borderRadius="0 20px 20px 0"
                         bgColor="#C3E0FD"
+                        ml="-1"
                       />
                       <Flex
                         alignItems="center"
