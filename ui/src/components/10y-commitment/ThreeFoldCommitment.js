@@ -53,7 +53,7 @@ const ThreeFoldCommitment = () => {
       {/* Section Header */}
       <MotionVStack
         ref={ref}
-        spacing={{ base: '0.75rem', md: '1rem' }}
+        spacing={{ base: '0.75rem', md: '2.5rem' }}
         align="center"
         w="100%"
         variants={staggerContainer}
@@ -76,11 +76,11 @@ const ThreeFoldCommitment = () => {
           <Text
             fontFamily="Manrope"
             fontWeight={500}
-            fontSize={{ base: '0.875rem', md: '1.25rem' }}
+            fontSize={{ base: '0.875rem', md: '1.125rem' }}
             letterSpacing="0.0125rem"
             color="#000000"
             textAlign="center"
-            maxW="760px"
+            maxW="1080px"
             mx="auto"
           >
             This commitment consists of three components, each essential to
@@ -96,10 +96,10 @@ const ThreeFoldCommitment = () => {
         isLazy
         lazyBehavior="unmount"
         w="100%"
-        maxW="1100px"
+        maxW="1166px"
         mx="auto"
       >
-        <TabList position="relative">
+        <TabList position="relative" maxW="1026px" mx="auto">
           {TABS.map(({ key, label }) => (
             <Tab
               key={key}
@@ -176,9 +176,12 @@ const ThreeFoldCommitment = () => {
         </TabList>
 
         <TabPanels>
-          {TABS.map(({ key, Panel }) => (
-            <TabPanel key={key} px={0}>
-              <Panel />
+          {TABS.map(({ key, Panel }, i) => (
+            <TabPanel key={key} p={0}>
+              <Panel
+                onPrev={i > 0 ? () => setIndex(i - 1) : undefined}
+                onNext={i < TABS.length - 1 ? () => setIndex(i + 1) : undefined}
+              />
             </TabPanel>
           ))}
         </TabPanels>

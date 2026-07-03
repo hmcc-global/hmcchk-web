@@ -2,10 +2,12 @@ import { AspectRatio, Box, Image } from '@chakra-ui/react';
 import CommitmentPanel from './CommitmentPanel';
 import { TYC_IMG } from '../constants';
 
-const ReproducePanel = () => {
+const ReproducePanel = ({ onPrev, onNext }) => {
   return (
     <CommitmentPanel
       heading="Reproduce 1,000 Disciples"
+      onPrev={onPrev}
+      onNext={onNext}
       body="We will intentionally raise up 1,000 faithful followers of Christ, men and women, who are equipped to serve and go wherever God calls them."
     >
       {/* The SVG is exported with preserveAspectRatio="none", so it must live in a

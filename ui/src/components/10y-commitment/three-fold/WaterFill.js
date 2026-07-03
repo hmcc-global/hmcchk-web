@@ -11,17 +11,19 @@ const VB_H = 24;
 const REST = 15;
 
 // Build one seamless wave-period tile as an inline SVG. `tile` is the
-// wavelength (px); `crest` is the peak height in viewBox units. The path is
-// one full period (so it repeats with no seam) and is solid below the resting
-// line so it joins the water body underneath.
-const waveURI = (tile, crest) => {
+// wavelength (px); `crest`/`trough` are the up/down control offsets in viewBox
+// units. Making them unequal gives each period an asymmetric hump-then-dip
+// profile so the surface reads as water rather than a uniform sine. The path
+// is one full period (so it repeats with no seam) and is solid below the
+// resting line so it joins the water body underneath.
+const waveURI = (tile, crest, trough) => {
   const half = tile / 2;
   const q = tile / 4;
   const svg =
     `<svg xmlns='http://www.w3.org/2000/svg' width='${tile}' height='${VB_H}' ` +
     `viewBox='0 0 ${tile} ${VB_H}' preserveAspectRatio='none'>` +
-    `<path d='M0 ${REST} q ${q} ${-crest} ${half} 0 t ${half} 0 V${VB_H} H0 Z' ` +
-    `fill='${WATER_COLOR}'/></svg>`;
+    `<path d='M0 ${REST} q ${q} ${-crest} ${half} 0 q ${q} ${trough} ${half} 0 ` +
+    `V${VB_H} H0 Z' fill='${WATER_COLOR}'/></svg>`;
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
 };
 
@@ -38,16 +40,19 @@ const bobKeys = (dy) => keyframes`
 `;
 
 // Three superimposed wave layers. The wavelengths/durations are deliberately
-// non-multiples of each other and the directions alternate, so the layers
-// drift out of phase and the surface never visibly repeats. Back layers are
-// flatter and more transparent for depth; the front layer is the solid water.
+// non-multiples of each other, the directions alternate, and each layer has a
+// different crest/trough asymmetry, so the layers drift out of phase and the
+// surface never visibly repeats. Crests are kept small: tall waves read as
+// uniform ripples and clash with the vessel mask where its outline slopes.
+// Back layers are flatter and more transparent for depth; the front layer is
+// the solid water.
 const LAYERS = [
-  { tile: 97, crest: 8, opacity: 0.4, dur: 11, dir: 1, bob: 2, bobDur: 7 },
-  { tile: 71, crest: 13, opacity: 0.6, dur: 8, dir: -1, bob: 1.5, bobDur: 5.5 },
-  { tile: 53, crest: 18, opacity: 1, dur: 6, dir: 1, bob: 1, bobDur: 4.5 },
+  { tile: 149, crest: 3.5, trough: 2, opacity: 0.35, dur: 14, dir: 1, bob: 1.4, bobDur: 8.1 },
+  { tile: 97, crest: 5, trough: 2.5, opacity: 0.55, dur: 10, dir: -1, bob: 1, bobDur: 6.3 },
+  { tile: 67, crest: 6.5, trough: 3, opacity: 1, dur: 7.5, dir: 1, bob: 0.7, bobDur: 4.9 },
 ].map((l) => ({
   ...l,
-  uri: waveURI(l.tile, l.crest),
+  uri: waveURI(l.tile, l.crest, l.trough),
   scroll: scrollKeys(l.dir * l.tile),
   bobKf: bobKeys(l.bob),
 }));
@@ -95,7 +100,7 @@ const WaterFill = ({ ratio, start }) => {
           bottom="100%"
           left={0}
           right={0}
-          h={{ base: '18px', md: '26px' }}
+          h={{ base: '10px', md: '15px' }}
           mb="-1px"
         >
           {LAYERS.map((l, i) => (

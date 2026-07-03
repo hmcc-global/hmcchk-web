@@ -57,6 +57,42 @@ export const RELEASE_REGION_LABELS = [
   { name: 'Southeast Asia', x: 491.01, y: 375.3 },
 ];
 
+// Pill-shaped city tags floating near their region. Hovering a tag highlights
+// the matching photo circle (see ReleasePanel). Same Figma pixel space.
+export const RELEASE_TAGS = [
+  { name: 'Houston', x: 56.43, y: 259.97 },
+  { name: 'London', x: 298.74, y: 155.99 },
+  { name: 'Shanghai', x: 504.9, y: 181.8 },
+  { name: 'Shenzhen', x: 586.71, y: 181.8 },
+  { name: 'Seoul', x: 498.6, y: 207 },
+  { name: 'Tokyo', x: 558.46, y: 207 },
+  { name: 'Taipei', x: 618.67, y: 207 },
+  { name: 'Kuala Lumpur', x: 563.91, y: 320.4 },
+  { name: 'Singapore', x: 457.98, y: 311.18 },
+  { name: 'Jakarta', x: 484.8, y: 338.01 },
+];
+
+// Small scatter dots between the tags/circles (decorative, from Figma).
+export const RELEASE_DOT_SIZE = 4.585;
+export const RELEASE_DOTS = [
+  { x: 136.47, y: 265.55 },
+  { x: 142.11, y: 268.73 },
+  { x: 335.72, y: 205.25 },
+  { x: 569.54, y: 281.42 },
+  { x: 617.14, y: 254.27 },
+  { x: 596.69, y: 251.8 },
+  { x: 583.29, y: 282.83 },
+  { x: 563.89, y: 281.07 },
+  { x: 553.67, y: 343.49 },
+  { x: 548.38, y: 326.56 },
+  { x: 543.79, y: 321.27 },
+  { x: 582.94, y: 264.14 },
+];
+
+// Blues used on the release map pills/dots (Figma Tag_city component).
+export const RELEASE_TAG_BLUE = '#244DD2';
+export const RELEASE_TAG_BG = '#E8EEFF';
+
 // The Raise commitment is a live fundraising campaign stored in the Fundraise
 // table (server/api/models/Fundraise.js). RaisePanel reads the raised amount
 // and goal at runtime via useRaiseProgress, which queries
@@ -68,7 +104,7 @@ export const RAISE_CATEGORY_KEY = 'raise';
 
 // When nothing has been raised yet, fill the vessel to this fraction so it
 // doesn't render empty (and the panel shows the goal amount instead of $0).
-export const RAISE_EMPTY_FILL_RATIO = 1 / 3;
+export const RAISE_EMPTY_FILL_RATIO = 1 / 4;
 
 // Raise panel: the vessel silhouette's box as percentages of the original
 // 796 x 433 Figma artboard. The water-fill layer shares this exact box (and

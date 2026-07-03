@@ -1,18 +1,11 @@
-import {
-  AspectRatio,
-  Box,
-  Image,
-  Text,
-  usePrefersReducedMotion,
-} from '@chakra-ui/react';
+import { AspectRatio, Box, Image, Text } from '@chakra-ui/react';
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 import CommitmentPanel from './CommitmentPanel';
 import WaterFill from './WaterFill';
-import { MotionBox, useCountUp } from './motion';
+import { useCountUp } from './motion';
 import { useRaiseProgress } from './useRaiseProgress';
 import {
-  COLORS,
   RAISE_EMPTY_FILL_RATIO,
   RAISE_LAYOUT,
   TYC_IMG,
@@ -22,26 +15,7 @@ const vesselTop = parseFloat(RAISE_LAYOUT.vessel.top);
 const vesselHeight = parseFloat(RAISE_LAYOUT.vessel.h);
 const usd = (n) => `$${n.toLocaleString('en-US')} USD`;
 
-// The number reads in the brand blue above the waterline and flips to white
-// where it's submerged (design spec: the water colour overlays the text as
-// the fill rises through it).
-const ABOVE_WATER = COLORS.brandBlue;
-const UNDER_WATER = '#FFFFFF';
-
-// Shared so the two stacked copies (base + submerged) line up exactly.
-const labelStyle = {
-  position: 'absolute',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  fontFamily: 'Manrope',
-  fontWeight: 800,
-  fontSize: { base: '1.25rem', md: '2.2rem' },
-  whiteSpace: 'nowrap',
-};
-
-const RaisePanel = () => {
-  const prefersReduced = usePrefersReducedMotion();
-
+const RaisePanel = ({ onPrev, onNext }) => {
   // Live raised amount + goal from the Fundraise table.
   const { raised, goal } = useRaiseProgress();
 
@@ -54,15 +28,14 @@ const RaisePanel = () => {
   const target = hasRaised ? raised : goal;
   const goalLabel = usd(goal);
 
-  // The waterline as a % of the panel box; the number is centred on it so the
-  // fill rises through the digits. The submerged copy is clipped to the water
-  // region (everything below the waterline) and revealed in sync with the fill.
-  const waterlineTop = vesselTop + (1 - fillRatio) * vesselHeight;
-  const clipEmpty = 'inset(100% 0 0 0)';
-  const clipToWater = `inset(${waterlineTop}% 0 0 0)`;
-  const waterTransition = prefersReduced
-    ? { duration: 0 }
-    : { duration: 1.8, ease: [0.22, 1, 0.36, 1] };
+  // The water surface sits at `fillRatio` of the vessel box, itself offset
+  // within the artboard. The label is anchored at that line, then shifted up
+  // by the *dry* fraction of its own height via translateY — CSS resolves a
+  // translateY percentage against the element's own box, not the container,
+  // so this submerges exactly `fillRatio` of the glyphs with no JS
+  // measurement: fillRatio 0.2 wets the bottom 20%, 0.8 wets the bottom 80%.
+  const waterlineTop = `${vesselTop + (1 - fillRatio) * vesselHeight}%`;
+  const dryShift = `${-(1 - fillRatio) * 100}%`;
 
   // Trigger the fill + count-up when the visual scrolls into view.
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.4 });
@@ -71,6 +44,8 @@ const RaisePanel = () => {
   return (
     <CommitmentPanel
       heading={`Raise ${goalLabel}`}
+      onPrev={onPrev}
+      onNext={onNext}
       body={`We will raise ${goalLabel} that will be used to resource the vision. This money is intended to provide ready capital for church plants, covering costs like facility rentals, so the church can act quickly when opportunities arise.`}
     >
       <AspectRatio ref={ref} ratio={796 / 433} w="100%" maxW="620px">
@@ -85,24 +60,25 @@ const RaisePanel = () => {
           />
           {/* Animated water, masked to the silhouette, filled to the ratio */}
           <WaterFill ratio={fillRatio} start={inView} />
-          {/* Base copy: the whole number in the above-water colour. */}
-          <Text {...labelStyle} top={`${waterlineTop}%`} color={ABOVE_WATER}>
+          {/* Raised-amount label centered on the waterline. Figma paints it
+              gold with mix-blend-mode: difference, which is what produces the
+              two-tone split — deep blue against the light card above water,
+              pink-purple against the blue water below — and lets the moving
+              wave crests re-colour the letters as they pass. */}
+          <Text
+            position="absolute"
+            top={waterlineTop}
+            left="50%"
+            transform={`translate(-50%, ${dryShift})`}
+            fontFamily="Manrope"
+            fontWeight={800}
+            fontSize={{ base: '1.25rem', md: '2.2rem' }}
+            color="#EBB733"
+            sx={{ mixBlendMode: 'difference' }}
+            whiteSpace="nowrap"
+          >
             {usd(amount)}
           </Text>
-          {/* Submerged copy: same number, clipped to the water region and
-              revealed as the fill rises, painting the underwater part white. */}
-          <MotionBox
-            position="absolute"
-            inset={0}
-            pointerEvents="none"
-            initial={{ clipPath: clipEmpty }}
-            animate={{ clipPath: inView ? clipToWater : clipEmpty }}
-            transition={waterTransition}
-          >
-            <Text {...labelStyle} top={`${waterlineTop}%`} color={UNDER_WATER}>
-              {usd(amount)}
-            </Text>
-          </MotionBox>
         </Box>
       </AspectRatio>
     </CommitmentPanel>
