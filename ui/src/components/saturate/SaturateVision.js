@@ -333,7 +333,7 @@ const SaturateVision = () => {
           </Box>
         </Stack>
       ) : (
-        <Stack>
+        <Stack spacing={0}>
           <Box
             bgColor="#0053A4"
             bgImage={
