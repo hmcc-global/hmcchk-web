@@ -12,9 +12,20 @@ import {
 
 import { InView } from 'react-intersection-observer';
 
+const FADEIN_THRESHOLD = '-50px';
+
+// Desktop FILL callout rows — all vw so circles, letters, lines, and labels scale together.
+const DESKTOP_FILL = {
+  circle: '6.5vw',
+  letter: '4.2vw',
+  line: '1vw',
+  label: '3.2vw',
+  labelGap: '1vw',
+  labelBarGap: '2.5vw',
+};
+
 const SaturateVision = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const FADEIN_THRESHOLD = '-50px';
 
   useEffect(() => {
     function handleResize() {
@@ -469,40 +480,41 @@ const SaturateVision = () => {
                           in={inView}
                         >
                           <Flex
-                            h={20}
-                            display="flex"
                             position="absolute"
                             alignItems="center"
-                            justifyContent="center"
                             top="30%"
                             left="80%"
                             ref={ref}
                           >
-                            <Box
-                              boxSize="6.5vw"
+                            <Flex
+                              boxSize={DESKTOP_FILL.circle}
                               borderRadius="full"
                               bgColor="#0053A4"
-                              display="flex"
                               alignItems="center"
                               justifyContent="center"
-                              fontSize={[80, 60, 70, 80, 80, 90]}
+                              flexShrink={0}
+                              fontSize={DESKTOP_FILL.letter}
+                              lineHeight="1"
                               color="white"
                               fontFamily="DarkerGrotesque"
-                              pb="2"
                             >
                               F
-                            </Box>
+                            </Flex>
                             <Box
                               w="29vw"
-                              h={3}
-                              borderRadius={'0 20px 20px 0'}
+                              h={DESKTOP_FILL.line}
+                              flexShrink={0}
+                              borderRadius="0 20px 20px 0"
                               bgColor="#0053A4"
-                              display="flex"
-                              alignItems="center"
-                              justifyContent="center"
                             />
-                            <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
-                              <span />{' '}
+                            <Flex
+                              alignItems="center"
+                              fontSize={DESKTOP_FILL.label}
+                              lineHeight="1"
+                              gap={DESKTOP_FILL.labelGap}
+                              ml={DESKTOP_FILL.labelBarGap}
+                              whiteSpace="nowrap"
+                            >
                               <Text fontFamily="DarkerGrotesque">
                                 FOUNDATIONS
                               </Text>
@@ -519,41 +531,41 @@ const SaturateVision = () => {
                     {({ inView, ref }) => (
                       <Fade transition={{ enter: { duration: 1 } }} in={inView}>
                         <Flex
-                          h={20}
-                          display="flex"
                           alignItems="center"
-                          justifyContent="center"
                           position="absolute"
                           top="45%"
                           left="85%"
                           ref={ref}
                         >
-                          <Box
-                            boxSize="6.5vw"
+                          <Flex
+                            boxSize={DESKTOP_FILL.circle}
                             borderRadius="full"
                             bgColor="#3B8AD7"
-                            display="flex"
                             alignItems="center"
                             justifyContent="center"
-                            fontSize={[80, 60, 70, 80, 90]}
+                            flexShrink={0}
+                            fontSize={DESKTOP_FILL.letter}
+                            lineHeight="1"
                             color="white"
                             fontFamily="DarkerGrotesque"
-                            pb="3"
                           >
                             I
-                          </Box>
+                          </Flex>
                           <Box
                             w="22vw"
-                            h={3}
-                            borderRadius={'0 20px 20px 0'}
+                            h={DESKTOP_FILL.line}
+                            flexShrink={0}
+                            borderRadius="0 20px 20px 0"
                             bgColor="#3B8AD7"
-                            display="flex"
-                            alignItems="center"
-                            justifyContent="center"
                           />
-
-                          <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
-                            <span />{' '}
+                          <Flex
+                            alignItems="center"
+                            fontSize={DESKTOP_FILL.label}
+                            lineHeight="1"
+                            gap={DESKTOP_FILL.labelGap}
+                            ml={DESKTOP_FILL.labelBarGap}
+                            whiteSpace="nowrap"
+                          >
                             <Text fontFamily="DarkerGrotesque">IMPACT</Text>
                             <Text fontFamily="DarkerGrotesque_Normal">
                               (microchurches)
@@ -568,7 +580,6 @@ const SaturateVision = () => {
                   {({ inView, ref }) => (
                     <Fade transition={{ enter: { duration: 1 } }} in={inView}>
                       <Flex
-                        h={20}
                         w="80%"
                         alignItems="center"
                         position="absolute"
@@ -576,42 +587,37 @@ const SaturateVision = () => {
                         left="86%"
                         ref={ref}
                       >
-                        <Box
+                        <Flex
+                          boxSize={DESKTOP_FILL.circle}
                           borderRadius="full"
-                          boxSize="6.5vw"
                           bgColor="#81B1E1"
-                          display="flex"
                           alignItems="center"
                           justifyContent="center"
-                          fontSize={[80, 60, 70, 80, 90]}
+                          flexShrink={0}
+                          fontSize={DESKTOP_FILL.letter}
+                          lineHeight="1"
                           color="white"
                           fontFamily="DarkerGrotesque"
-                          pb="3"
                         >
                           L
-                        </Box>
+                        </Flex>
                         <Box
-                          w="16vw"
-                          h={3}
-                          borderRadius={'0 20px 20px 0'}
+                          w="16.5vw"
+                          h={DESKTOP_FILL.line}
+                          flexShrink={0}
+                          borderRadius="0 20px 20px 0"
                           bgColor="#81B1E1"
-                          display="flex"
-                          alignItems="center"
-                          justifyContent="center"
                         />
-
-                        <Flex display="-webkit-inline-box" gap={3}>
-                          <span />{' '}
-                          <Text
-                            fontSize={[20, 20, 30, 35, 40]}
-                            fontFamily="DarkerGrotesque"
-                          >
-                            LINK UP
-                          </Text>
-                          <Text
-                            fontSize={[20, 20, 30, 35, 40]}
-                            fontFamily="DarkerGrotesque_Normal"
-                          >
+                        <Flex
+                          alignItems="center"
+                          fontSize={DESKTOP_FILL.label}
+                          lineHeight="1"
+                          gap={DESKTOP_FILL.labelGap}
+                          ml={DESKTOP_FILL.labelBarGap}
+                          whiteSpace="nowrap"
+                        >
+                          <Text fontFamily="DarkerGrotesque">LINK UP</Text>
+                          <Text fontFamily="DarkerGrotesque_Normal">
                             (district churches)
                           </Text>
                         </Flex>
@@ -624,36 +630,41 @@ const SaturateVision = () => {
                 {({ inView, ref }) => (
                   <Fade transition={{ enter: { duration: 1 } }} in={inView}>
                     <Flex
-                      h={20}
                       alignItems="center"
                       position="absolute"
                       ref={ref}
                       top="62%"
                       left="87%"
                     >
-                      <Box
+                      <Flex
+                        boxSize={DESKTOP_FILL.circle}
                         borderRadius="full"
-                        boxSize="6.5vw"
                         bgColor="#C3E0FD"
-                        display="flex"
                         alignItems="center"
                         justifyContent="center"
-                        fontSize={[80, 60, 70, 80, 90]}
+                        flexShrink={0}
+                        fontSize={DESKTOP_FILL.letter}
+                        lineHeight="1"
                         color="white"
                         fontFamily="DarkerGrotesque"
-                        pb="3"
                       >
                         L
-                      </Box>
+                      </Flex>
                       <Box
-                        w="9.5vw"
-                        h={3}
-                        borderRadius={'0 20px 20px 0'}
+                        w="10vw"
+                        h={DESKTOP_FILL.line}
+                        flexShrink={0}
+                        borderRadius="0 20px 20px 0"
                         bgColor="#C3E0FD"
-                        display="flex"
                       />
-                      <Flex fontSize={[20, 20, 30, 35, 40]} gap={3}>
-                        <span />{' '}
+                      <Flex
+                        alignItems="center"
+                        fontSize={DESKTOP_FILL.label}
+                        lineHeight="1"
+                        gap={DESKTOP_FILL.labelGap}
+                        ml={DESKTOP_FILL.labelBarGap}
+                        whiteSpace="nowrap"
+                      >
                         <Text fontFamily="DarkerGrotesque">LAUNCH</Text>
                         <Text fontFamily="DarkerGrotesque_Normal">(hubs)</Text>
                       </Flex>
