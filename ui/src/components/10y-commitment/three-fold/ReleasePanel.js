@@ -1,4 +1,4 @@
-import { Box, Image, Text } from '@chakra-ui/react';
+import { Box, Grid, Image, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import CommitmentPanel from './CommitmentPanel';
 import { MotionBox } from './motion';
@@ -11,6 +11,9 @@ import {
   RELEASE_TAGS,
   RELEASE_DOTS,
   RELEASE_DOT_SIZE,
+  RELEASE_MOBILE_LABELS,
+  RELEASE_MOBILE_DOTS,
+  RELEASE_MOBILE_ORDER,
   RELEASE_TAG_BLUE,
   RELEASE_TAG_BG,
   RELEASE_IMG,
@@ -96,7 +99,8 @@ const ReleasePanel = ({ onPrev, onNext }) => {
         </>
       }
     >
-      <Box w="100%" maxW="797px">
+      {/* Desktop: the full Figma map with photo circles and city tags. */}
+      <Box w="100%" maxW="797px" display={{ base: 'none', md: 'block' }}>
         {/* Aspect-ratio box built with the padding-bottom trick instead of
             Chakra's AspectRatio, which forces overflow:hidden on its child and
             clips circles that scale up on hover at the map's edges. */}
@@ -166,6 +170,71 @@ const ReleasePanel = ({ onPrev, onNext }) => {
             ))}
           </Box>
         </Box>
+      </Box>
+
+      {/* Mobile (Figma section-release_v2): a small static map with location
+          dots and region labels, then the city photos as a 5-column grid. */}
+      <Box w="100%" display={{ base: 'block', md: 'none' }}>
+        <Box
+          position="relative"
+          w="71%"
+          mx="auto"
+          pb={`${(RELEASE_MAP.h / RELEASE_MAP.w) * 71}%`}
+        >
+          <Image
+            src={`${RELEASE_IMG}/map.svg`}
+            alt="World map highlighting the 10 target cities"
+            position="absolute"
+            top={0}
+            left={0}
+            w="100%"
+            h="100%"
+          />
+          {RELEASE_MOBILE_LABELS.map((r) => (
+            <Text
+              key={r.name}
+              position="absolute"
+              left={`${r.x}%`}
+              top={`${r.y}%`}
+              color={COLORS.regionLabel}
+              fontFamily="Manrope"
+              fontWeight={800}
+              fontSize="0.5rem"
+              textTransform="uppercase"
+              whiteSpace="nowrap"
+            >
+              {r.name}
+            </Text>
+          ))}
+          {RELEASE_MOBILE_DOTS.map((d, i) => (
+            <Box
+              key={i}
+              position="absolute"
+              left={`${d.x}%`}
+              top={`${d.y}%`}
+              w="4px"
+              h="4px"
+              borderRadius="full"
+              bg={RELEASE_TAG_BLUE}
+            />
+          ))}
+        </Box>
+        <Grid templateColumns="repeat(5, 1fr)" gap="0.625rem" mt="1.5rem">
+          {RELEASE_MOBILE_ORDER.map((name) => {
+            const city = RELEASE_CITIES.find((c) => c.name === name);
+            return (
+              <Image
+                key={name}
+                src={`${RELEASE_IMG}/${city.img}`}
+                alt={name}
+                w="100%"
+                borderRadius="full"
+                boxShadow="0px 2px 12px rgba(145, 145, 145, 0.9)"
+                loading="lazy"
+              />
+            );
+          })}
+        </Grid>
       </Box>
     </CommitmentPanel>
   );

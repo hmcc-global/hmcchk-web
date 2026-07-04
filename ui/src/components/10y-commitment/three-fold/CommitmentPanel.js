@@ -5,15 +5,17 @@ import { TYC_IMG } from '../constants';
 
 // One round arrow button pinned to a card edge. `flip` mirrors the (rightward
 // pointing) icon to make a "previous" affordance without a second asset.
+// Desktop-only per Figma — on mobile the tabs are the only way to switch.
 const NavArrow = ({ onClick, side, flip }) => (
   <Box
     as="button"
     type="button"
     onClick={onClick}
     aria-label={flip ? 'Previous commitment' : 'Next commitment'}
+    display={{ base: 'none', md: 'block' }}
     position="absolute"
     top="50%"
-    {...{ [side]: { base: '0.5rem', md: '-17px' } }}
+    {...{ [side]: '-17px' }}
     transform="translateY(-50%)"
     w="34px"
     h="34px"

@@ -7,6 +7,7 @@ import { useCountUp } from './motion';
 import { useRaiseProgress } from './useRaiseProgress';
 import {
   RAISE_EMPTY_FILL_RATIO,
+  RAISE_FALLBACK_GOAL,
   RAISE_LAYOUT,
   TYC_IMG,
 } from '../constants';
@@ -16,8 +17,11 @@ const vesselHeight = parseFloat(RAISE_LAYOUT.vessel.h);
 const usd = (n) => `$${n.toLocaleString('en-US')} USD`;
 
 const RaisePanel = ({ onPrev, onNext }) => {
-  // Live raised amount + goal from the Fundraise table.
-  const { raised, goal } = useRaiseProgress();
+  // Live raised amount + goal from the Fundraise table. The goal falls back
+  // to the campaign default while the row loads (or if its milestone is
+  // missing), so the heading and fill ratio never see a zero goal.
+  const { raised, goal: liveGoal } = useRaiseProgress();
+  const goal = liveGoal > 0 ? liveGoal : RAISE_FALLBACK_GOAL;
 
   // Until anything is raised, show the goal amount and a token fill so the
   // vessel isn't empty; once funds come in, show the real raised ÷ goal.

@@ -100,7 +100,7 @@ const ThreeFoldCommitment = () => {
         mx="auto"
       >
         <TabList position="relative" maxW="1026px" mx="auto">
-          {TABS.map(({ key, label }) => (
+          {TABS.map(({ key, label }, i) => (
             <Tab
               key={key}
               flex={1}
@@ -111,29 +111,33 @@ const ThreeFoldCommitment = () => {
               opacity={0.4}
               transition="opacity 0.2s ease"
               _focus={{ boxShadow: 'none' }}
-              _focusVisible={{
-                boxShadow: `0 0 0 3px ${ACTIVE_UNDERLINE}80`,
-                borderRadius: '6px',
-              }}
               sx={{
                 '&[aria-selected="true"]': { opacity: 1 },
                 '&:hover:not([aria-selected="true"])': { opacity: 0.75 },
                 '&:hover:not([aria-selected="true"]) .tab-underline': {
                   backgroundColor: HOVER_UNDERLINE,
                 },
+                // Keyboard-only focus indicator. :focus-visible doesn't match
+                // on mouse clicks, so this never draws the ring box that used
+                // to appear when clicking a tab.
+                '&:focus-visible': {
+                  outline: `2px solid ${ACTIVE_UNDERLINE}`,
+                  outlineOffset: '2px',
+                  borderRadius: '6px',
+                },
               }}
             >
               <VStack spacing={{ base: '0.5rem', md: '0.75rem' }} w="100%">
                 <Image
-                  src={`${TYC_IMG}/tabs/${key}.svg`}
+                  src={`${TYC_IMG}/tabs/${key}${index === i ? '-active' : ''}.svg`}
                   alt=""
                   aria-hidden="true"
-                  boxSize={{ base: '2.25rem', md: '3.25rem' }}
+                  boxSize={{ base: '3rem', md: '3.25rem' }}
                 />
                 <Text
                   fontFamily="DMSans_Regular"
                   fontWeight={700}
-                  fontSize={{ base: '1rem', md: '1.5rem' }}
+                  fontSize={{ base: '0.875rem', md: '1.5rem' }}
                   textTransform="uppercase"
                   color="#000000"
                 >
