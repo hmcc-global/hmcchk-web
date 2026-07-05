@@ -1,6 +1,6 @@
 import { Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { customAxios as axios } from "../helpers/customAxios";
+import { customAxios as axios } from "utils/customAxios";
 
 const ClearCache = () => {
   const [loading, setLoading] = useState(true);

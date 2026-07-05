@@ -6,15 +6,15 @@ import {
   Button,
   useToast,
 } from '@chakra-ui/react';
-import { customAxios as axios } from '../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDebounce } from 'react-use';
-import TiptapOutput from '../helpers/TipTap/TiptapOutput';
+import TiptapOutput from 'components/TipTap/TiptapOutput';
 import { DateTime } from 'luxon';
 import {
   getAllUserSermonNotes,
   deepUpdateUserNotes,
-} from '../helpers/SermonNotes';
+} from 'utils/SermonNotes';
 
 const SermonNotesContainer = (props) => {
   const { user, history, sermonNoteId } = props;

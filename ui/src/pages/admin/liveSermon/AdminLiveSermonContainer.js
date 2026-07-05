@@ -13,7 +13,7 @@ import {
   useToast,
   FormHelperText,
 } from '@chakra-ui/react';
-import { customAxios as axios } from '../../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import PreviewOnlineSermonContainer from './PreviewOnlineSermonContainer';
 import { DateTime } from 'luxon';
 

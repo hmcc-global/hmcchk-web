@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
-import { customAxios as axios } from '../../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
@@ -15,7 +15,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
-import { paymentMethodList } from '../../helpers/lists';
+import { paymentMethodList } from 'utils/lists';
 import CustomDateEditor from '../ag-grid-editors/CustomDateEditor';
 import { CgUndo, CgRedo } from 'react-icons/cg';
 import AdminPaymentDataModal from './AdminPaymentDataModal';

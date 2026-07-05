@@ -33,15 +33,15 @@ import {
   districtList,
   ministryTeamList,
   regionList,
-} from '../helpers/lists';
+} from 'utils/lists';
 import {
   fixAddress,
   fixName,
   purgeFormFields,
   splitFullName,
   updateUserDataRequest,
-} from '../helpers/userInformationHelpers';
-import { customAxios as axios } from '../helpers/customAxios';
+} from 'utils/userInformationHelpers';
+import { customAxios as axios } from 'utils/customAxios';
 
 const CompleteUserProfileContainer = (props) => {
   const { user, history, staticData } = props;

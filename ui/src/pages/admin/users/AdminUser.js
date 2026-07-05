@@ -1,5 +1,5 @@
 import React from 'react';
-import { customAxios as axios } from '../../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
@@ -13,7 +13,7 @@ import {
   districtList,
   regionList,
   countryList,
-} from '../../helpers/lists';
+} from 'utils/lists';
 import { CgUndo, CgRedo } from 'react-icons/cg';
 import ResetUserFields from './ResetUserFields';
 

@@ -3,11 +3,11 @@ import { Link, useHistory } from 'react-router-dom';
 import { MdErrorOutline } from 'react-icons/md';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { useEffect, useState } from 'react';
-import { validateForm } from '../helpers/formsHelpers';
+import { validateForm } from 'utils/formsHelpers';
 import {
   getSermonNotesFromShortLink,
   isSermonNotesLink,
-} from '../helpers/SermonNotes';
+} from 'utils/SermonNotes';
 
 const ErrorPage = (props) => {
   // Add new cases corresponding to the errorPages definition

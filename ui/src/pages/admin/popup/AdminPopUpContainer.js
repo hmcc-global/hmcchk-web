@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { customAxios as axios } from '../../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import {
   Container,
   Heading,
@@ -18,7 +18,7 @@ import {
 import { useForm } from 'react-hook-form';
 import PopUpGrid from './PopUpGrid';
 import PopupContainer from './PopupContainer';
-import FileUpload from '../../helpers/components/FileUpload';
+import FileUpload from 'components/FileUpload';
 
 export default function AdminPopUpContainer(props) {
   const toast = useToast();

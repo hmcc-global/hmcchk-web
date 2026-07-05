@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { customAxios as axios } from '../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import ReCAPTCHA from 'react-google-recaptcha';
 import {
   Box,
@@ -21,7 +21,7 @@ import {
   useMediaQuery,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
-import { countryList } from '../helpers/lists';
+import { countryList } from 'utils/lists';
 
 const Signup = (props) => {
   const {

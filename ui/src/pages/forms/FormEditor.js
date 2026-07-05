@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { customAxios as axios } from '../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import Form from './Form';
 import FormField from './class/FormField';
 import ConditionalFormFieldEditor from './ConditionalFormFieldEditor';

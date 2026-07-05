@@ -16,7 +16,7 @@ import blurbs from './about.json';
 import { Fragment, useState, useEffect } from 'react';
 import { Select } from '@chakra-ui/select';
 import { useLocation } from 'react-router-dom';
-import scrollTo from '../helpers/ScrollTo';
+import scrollTo from 'utils/ScrollTo';
 
 const sections = [
   'Our Story',

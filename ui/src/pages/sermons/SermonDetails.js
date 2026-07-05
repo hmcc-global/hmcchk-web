@@ -9,7 +9,7 @@ import {
   Grid,
   Icon,
 } from '@chakra-ui/react';
-import { customAxios as axios } from '../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import { DateTime } from 'luxon';
 import { DATE_FULL } from 'luxon/src/impl/formats';
 import React, { useState, useEffect, useCallback } from 'react';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Form from './Form';
 import { Container } from '@chakra-ui/react';
-import { validateForm } from '../helpers/formsHelpers';
+import { validateForm } from 'utils/formsHelpers';
 
 const UserFormContainer = (props) => {
   const [formData, setFormData] = useState(null);

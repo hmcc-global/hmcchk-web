@@ -27,7 +27,7 @@ import {
   HStack,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
-import { customAxios as axios } from '../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import { useEffect, useState, useCallback } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import {
@@ -35,7 +35,7 @@ import {
   districtList,
   countryList,
   regionList,
-} from '../helpers/lists';
+} from 'utils/lists';
 import {
   settableDataFields,
   userDataCleanup,
@@ -43,7 +43,7 @@ import {
   updateUserDataRequest,
   getLoginOnlyFormsRequest,
   generatePublishedFormLinks,
-} from '../helpers/userInformationHelpers';
+} from 'utils/userInformationHelpers';
 import SermonNotesPagination from './SermonNotesPagination';
 
 const UserProfileDesktop = (props) => {

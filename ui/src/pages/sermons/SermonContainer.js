@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { customAxios as axios } from '../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import { Box, Container, Heading, Text } from '@chakra-ui/react';
 import UpcomingSermon from './UpcomingSermon';
 import SermonSeriesCardList from './SermonSeriesCardList';
 import CurrentSermon from './CurrentSermon';
 import { DateTime } from 'luxon';
-import { getRenderDate } from '../helpers/eventsHelpers';
+import { getRenderDate } from 'utils/eventsHelpers';
 
 const SermonContainer = (props) => {
   const [sermons, setSermons] = useState([]);

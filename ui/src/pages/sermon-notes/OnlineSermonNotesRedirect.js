@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { customAxios as axios } from '../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import { Spinner } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 

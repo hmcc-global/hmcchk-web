@@ -16,7 +16,7 @@ import {
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
-import TrackingUtil from '../../util/TrackingUtil';
+import TrackingUtil from 'utils/TrackingUtil';
 
 const PopupContainer = ({ props }) => {
   const popupData = props;
