@@ -14,7 +14,7 @@ import {
   Button,
   FormErrorMessage,
   useToast,
-} from '@chakra-ui/react';
+} from 'components';
 import { useForm } from 'react-hook-form';
 import PopUpGrid from './PopUpGrid';
 import PopupContainer from './PopupContainer';

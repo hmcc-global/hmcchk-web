@@ -22,7 +22,7 @@ import {
   Divider,
   Alert,
   AlertIcon,
-} from '@chakra-ui/react';
+} from 'components';
 import FormEditor from './FormEditor';
 import ExternalFormEditor from './ExternalFormEditor';
 

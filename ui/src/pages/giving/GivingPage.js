@@ -14,7 +14,7 @@ import {
   Spacer,
   Text,
   VStack,
-} from '@chakra-ui/react';
+} from 'components';
 import GivingCard from './GivingCard.js';
 
 const GivingPage = (props) => {

@@ -10,7 +10,7 @@ import {
   Spacer,
   Grid,
   GridItem,
-} from '@chakra-ui/react';
+} from 'components';
 
 // Only allow setting field values that are defined here
 const settableDataFields = [

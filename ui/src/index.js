@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider } from 'components';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import customTheme from './theme';
 

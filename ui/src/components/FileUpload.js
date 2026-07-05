@@ -9,7 +9,7 @@ import {
   Stack,
   Progress,
   Button,
-} from '@chakra-ui/react';
+} from 'components/chakra';
 import { useController } from 'react-hook-form';
 import { FiFile } from 'react-icons/fi';
 

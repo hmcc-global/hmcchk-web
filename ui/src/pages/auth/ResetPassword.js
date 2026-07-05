@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { customAxios as axios } from 'utils/customAxios';
 import { useForm } from 'react-hook-form';
-import { ChevronLeftIcon } from '@chakra-ui/icons';
+import { ChevronLeftIcon } from 'components/icons';
 
 import {
   Box,
@@ -15,7 +15,7 @@ import {
   Stack,
   Link,
   useToast,
-} from '@chakra-ui/react';
+} from 'components';
 import { useLocation } from 'react-router-dom';
 
 function useQuery() {

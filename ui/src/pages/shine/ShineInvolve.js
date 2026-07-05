@@ -19,7 +19,7 @@ import {
   ModalBody,
   Center,
   Image,
-} from '@chakra-ui/react';
+} from 'components';
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { DateTime } from 'luxon';
@@ -28,7 +28,7 @@ import EventCard from '../events/EventCard';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { ChevronRightIcon, ChevronLeftIcon } from '@chakra-ui/icons';
+import { ChevronRightIcon, ChevronLeftIcon } from 'components/icons';
 import { RiCalendarEventFill } from 'react-icons/ri';
 import { BsClockFill, BsFullscreen } from 'react-icons/bs';
 import { ImLocation2 } from 'react-icons/im';

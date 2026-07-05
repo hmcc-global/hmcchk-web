@@ -12,7 +12,7 @@ import {
   ModalCloseButton,
   ModalHeader,
   ModalBody,
-} from '@chakra-ui/react';
+} from 'components';
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
 import SermonSeries from './SermonSeries';

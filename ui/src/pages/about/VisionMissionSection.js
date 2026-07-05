@@ -5,8 +5,8 @@ import {
   Stack,
   Text,
   Heading,
-} from '@chakra-ui/layout';
-import { Image, Button, Link } from '@chakra-ui/react';
+} from 'components';
+import { Image, Button, Link } from 'components';
 import { saturateText } from '../home/SaturateVisionSection';
 
 const VisionMissionCard = ({ title, message }) => {

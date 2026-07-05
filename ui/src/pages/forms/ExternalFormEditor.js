@@ -14,7 +14,7 @@ import {
   FormLabel,
   Input,
   FormErrorMessage,
-} from '@chakra-ui/react';
+} from 'components';
 
 const ExternalFormEditor = (props) => {
   const { formInformation, existingFormData, resetFormEditorCallback } = props;

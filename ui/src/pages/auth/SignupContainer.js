@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { customAxios as axios } from 'utils/customAxios';
 import { GoogleLogin } from '@react-oauth/google';
-import { ArrowBackIcon } from '@chakra-ui/icons';
-import { Box, VStack, Flex, Image, Text, Button, Link } from '@chakra-ui/react';
+import { ArrowBackIcon } from 'components/icons';
+import { Box, VStack, Flex, Image, Text, Button, Link } from 'components';
 
 const SignupContainer = (props) => {
   const [invalidLogin, setInvalidLogin] = useState('');

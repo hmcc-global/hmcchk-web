@@ -7,7 +7,7 @@ import {
   Text,
   HStack,
   Link,
-} from '@chakra-ui/react';
+} from 'components/chakra';
 import { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { customAxios as axios } from 'utils/customAxios';

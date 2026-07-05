@@ -15,7 +15,7 @@ import {
   Image,
   HStack,
   useToast,
-} from '@chakra-ui/react';
+} from 'components';
 import SermonNotesEditorModal from './SermonNotesEditorModal';
 import { MdOutlineVideoLibrary } from 'react-icons/md';
 import { BiDonateHeart } from 'react-icons/bi';

@@ -9,7 +9,7 @@ import {
   Heading,
   Grid,
   GridItem,
-} from '@chakra-ui/react';
+} from 'components';
 import React from 'react';
 
 const StaffSection = (props) => {

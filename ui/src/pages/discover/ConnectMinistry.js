@@ -4,7 +4,7 @@ import {
   VStack,
   Text,
   useBreakpointValue,
-} from '@chakra-ui/react';
+} from 'components';
 import MinistryCard from './MinistryCard';
 import ConnectMinistryFaq from './ConnectMinistryFaq';
 import BackButton from './DiscoverBackButton';

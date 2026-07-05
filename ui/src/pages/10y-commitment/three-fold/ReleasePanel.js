@@ -1,4 +1,4 @@
-import { Box, Grid, Image, Text } from '@chakra-ui/react';
+import { Box, Grid, Image, Text } from 'components';
 import React, { useState } from 'react';
 import CommitmentPanel from './CommitmentPanel';
 import { MotionBox } from './motion';

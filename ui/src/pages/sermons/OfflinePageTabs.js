@@ -10,8 +10,8 @@ import {
   Text,
   VStack,
   Image,
-} from '@chakra-ui/react';
-import { RepeatIcon } from '@chakra-ui/icons';
+} from 'components';
+import { RepeatIcon } from 'components/icons';
 import { useState } from 'react';
 import SermonNotesContainer from '../sermon-notes/SermonNotesContainer';
 import SermonSeries from './SermonSeries';

@@ -9,9 +9,9 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
   useDisclosure,
-} from '@chakra-ui/react';
+} from 'components';
 import { customAxios as axios } from 'utils/customAxios';
-import { TriangleDownIcon } from '@chakra-ui/icons';
+import { TriangleDownIcon } from 'components/icons';
 
 const fieldMapping = {
   address: 'Address',

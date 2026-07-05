@@ -7,7 +7,7 @@ import {
   Text,
   Container,
   HStack,
-} from '@chakra-ui/react';
+} from 'components';
 
 const Picture = ({ image, year, text }) => {
   return (

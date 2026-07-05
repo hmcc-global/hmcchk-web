@@ -1,4 +1,4 @@
-import { AspectRatio, Box } from '@chakra-ui/react';
+import { AspectRatio, Box } from 'components';
 import React, { useEffect, useRef } from 'react';
 import { COLORS } from '../constants';
 

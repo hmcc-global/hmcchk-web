@@ -9,8 +9,8 @@ import {
   Link,
   Fade,
   Container,
-} from '@chakra-ui/react';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
+} from 'components';
+import { ArrowForwardIcon } from 'components/icons';
 import { InView } from 'react-intersection-observer';
 const VisionMissionSection = () => {
   return (

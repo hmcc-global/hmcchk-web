@@ -1,4 +1,4 @@
-import { Flex, useBreakpointValue } from '@chakra-ui/react';
+import { Flex, useBreakpointValue } from 'components';
 import { useState, useEffect, useRef } from 'react';
 import EventsSection from './EventsSection';
 import HeroSection from './HeroSection';

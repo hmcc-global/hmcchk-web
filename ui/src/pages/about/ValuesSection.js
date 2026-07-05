@@ -7,7 +7,7 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-} from '@chakra-ui/react';
+} from 'components';
 import VisionMissionSection from './VisionMissionSection';
 
 const ValuesSection = (props) => {

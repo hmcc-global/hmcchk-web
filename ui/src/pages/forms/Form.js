@@ -30,7 +30,7 @@ import {
   Alert,
   AlertIcon,
   Link,
-} from '@chakra-ui/react';
+} from 'components';
 import {
   countryList,
   districtList,

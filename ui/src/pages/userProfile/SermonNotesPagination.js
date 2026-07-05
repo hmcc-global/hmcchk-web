@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text, Divider, Image } from '@chakra-ui/react';
+import { Box, Button, Flex, Text, Divider, Image } from 'components';
 import { Link } from 'react-router-dom';
 
 const SermonNotesPagination = ({

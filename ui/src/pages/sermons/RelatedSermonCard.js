@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Image, Text, Stack, VStack } from '@chakra-ui/react';
+import { AspectRatio, Box, Image, Text, Stack, VStack } from 'components';
 import { Link } from 'react-router-dom';
 import { DateTime } from 'luxon';
 import React from 'react';

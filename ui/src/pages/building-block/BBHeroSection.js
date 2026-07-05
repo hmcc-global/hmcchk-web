@@ -7,7 +7,7 @@ import {
   SimpleGrid,
   Image,
   Button,
-} from '@chakra-ui/react';
+} from 'components';
 import { motion } from 'framer-motion';
 
 const MotionImage = motion(Image);

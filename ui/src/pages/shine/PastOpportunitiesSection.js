@@ -18,7 +18,7 @@ import {
   useBreakpointValue,
   useDisclosure,
   VStack,
-} from '@chakra-ui/react';
+} from 'components';
 
 import { typography } from './typography';
 

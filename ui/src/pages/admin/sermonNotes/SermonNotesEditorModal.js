@@ -12,7 +12,7 @@ import {
   Select,
   FormErrorMessage,
   FormHelperText,
-} from '@chakra-ui/react';
+} from 'components';
 import { useForm } from 'react-hook-form';
 import { customAxios as axios } from 'utils/customAxios';
 import TiptapEditor from 'components/TipTap';

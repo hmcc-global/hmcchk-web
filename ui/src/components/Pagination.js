@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Box, HStack, Text, Button } from '@chakra-ui/react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import { Box, HStack, Text, Button } from 'components/chakra';
+import { ChevronLeftIcon, ChevronRightIcon } from './icons';
 
 const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
   const maxPageNumbers = Math.ceil(totalItems / itemsPerPage);

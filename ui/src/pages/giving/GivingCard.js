@@ -19,7 +19,7 @@ import {
   Center,
   Image,
   ModalFooter,
-} from '@chakra-ui/react';
+} from 'components';
 const RenderSwitch = (param) => {
   switch (param.ModalSelection) {
     case 'FPS':

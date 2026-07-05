@@ -7,9 +7,9 @@ import {
   Fade,
   Link,
   VStack,
-} from '@chakra-ui/react';
+} from 'components';
 import { InView } from 'react-intersection-observer';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { ArrowForwardIcon } from 'components/icons';
 const VisionMissionSectionMobile = () => {
   return (
     <>

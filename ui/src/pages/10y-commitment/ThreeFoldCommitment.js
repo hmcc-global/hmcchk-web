@@ -10,7 +10,7 @@ import {
   Tab,
   TabPanels,
   TabPanel,
-} from '@chakra-ui/react';
+} from 'components';
 import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { COLORS, TYC_IMG } from './constants';

@@ -12,7 +12,7 @@ import {
   ModalBody,
   ModalFooter,
   ButtonGroup,
-} from '@chakra-ui/react';
+} from 'components';
 import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';

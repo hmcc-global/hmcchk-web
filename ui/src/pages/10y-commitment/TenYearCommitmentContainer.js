@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex } from '@chakra-ui/react';
+import { Flex } from 'components';
 import TenYearHeroSection from './TenYearHeroSection';
 import ThreeFoldCommitment from './ThreeFoldCommitment';
 import TenYearHeartSection from './TenYearHeartContainer';

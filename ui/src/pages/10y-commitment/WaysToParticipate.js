@@ -10,7 +10,7 @@ import {
   HStack,
   IconButton,
   Button,
-} from '@chakra-ui/react';
+} from 'components';
 import React, { useState, useEffect, useRef } from 'react';
 import { FaPlay, FaPause } from 'react-icons/fa';
 import PrayCard from './cards/PrayCard';

@@ -1,4 +1,4 @@
-import { Image, Box } from '@chakra-ui/react';
+import { Image, Box } from 'components';
 
 const BackgroundElements = () => {
   return (

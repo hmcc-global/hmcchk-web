@@ -12,7 +12,7 @@ import {
   useToast,
   HStack,
   SimpleGrid,
-} from '@chakra-ui/react';
+} from 'components';
 import FormEditorContainer from './FormEditorContainer';
 
 const FormManager = (props) => {

@@ -8,7 +8,7 @@ import {
   Stack,
   Text,
   Fade,
-} from '@chakra-ui/react';
+} from 'components';
 
 import { InView } from 'react-intersection-observer';
 

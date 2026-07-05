@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Image, Text } from '@chakra-ui/react';
+import { AspectRatio, Box, Image, Text } from 'components';
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 import CommitmentPanel from './CommitmentPanel';

@@ -8,7 +8,7 @@ import {
   UnorderedList,
   ListItem,
   HStack,
-} from '@chakra-ui/react';
+} from 'components';
 import { useState } from 'react';
 
 const SaturateGoals = () => {

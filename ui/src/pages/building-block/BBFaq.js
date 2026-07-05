@@ -1,6 +1,6 @@
-import { Fade } from '@chakra-ui/react';
+import { Fade } from 'components';
 
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Heading } from 'components';
 import CustomFaqAccordion from '../discover/CustomFaqAccordion';
 import { InView } from 'react-intersection-observer';
 const BBFaq = () => {

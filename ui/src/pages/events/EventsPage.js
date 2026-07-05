@@ -9,7 +9,7 @@ import {
   Select,
   Stack,
   Text,
-} from '@chakra-ui/react';
+} from 'components';
 import { MdArrowDropDown } from 'react-icons/md';
 import EventCard from './EventCard';
 import { DateTime } from 'luxon';

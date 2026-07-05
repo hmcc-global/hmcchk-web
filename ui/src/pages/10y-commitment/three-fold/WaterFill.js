@@ -1,4 +1,4 @@
-import { Box, keyframes, usePrefersReducedMotion } from '@chakra-ui/react';
+import { Box, keyframes, usePrefersReducedMotion } from 'components';
 import React from 'react';
 import { MotionBox } from './motion';
 import { RAISE_LAYOUT, TYC_IMG } from '../constants';

@@ -14,7 +14,7 @@ import {
   Input,
   Button,
   Link,
-} from '@chakra-ui/react';
+} from 'components';
 
 const LoginContainer = (props) => {
   const [invalidLogin, setInvalidLogin] = useState('');

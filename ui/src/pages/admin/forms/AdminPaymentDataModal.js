@@ -9,7 +9,7 @@ import {
   ModalCloseButton,
   ModalBody,
   Input,
-} from '@chakra-ui/react';
+} from 'components';
 
 export default function AdminPaymentDataModal(props) {
   const { modalOpen, setModalOpen, modalType, modalTitle, handler } = props;

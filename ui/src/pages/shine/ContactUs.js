@@ -1,6 +1,6 @@
-import { Box, Flex, Text, HStack, VStack, Heading } from '@chakra-ui/react';
+import { Box, Flex, Text, HStack, VStack, Heading } from 'components';
 import { useState } from 'react';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { ArrowForwardIcon } from 'components/icons';
 
 import ContactForm from '../building-block/ContactForm';
 

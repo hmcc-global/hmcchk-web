@@ -8,7 +8,7 @@ import {
   Text,
   Flex,
   Fade,
-} from '@chakra-ui/react';
+} from 'components';
 import { Link as ReactLink } from 'react-router-dom';
 import { InView } from 'react-intersection-observer';
 

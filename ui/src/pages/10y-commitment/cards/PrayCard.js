@@ -2,7 +2,7 @@ import {
   VStack,
   Text,
   Image,
-} from '@chakra-ui/react';
+} from 'components';
 import React from 'react';
 import BaseCard from './BaseCard';
 import ParticipateButton from './ParticipateButton';

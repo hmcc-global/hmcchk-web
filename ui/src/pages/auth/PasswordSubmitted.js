@@ -1,6 +1,6 @@
 import React from "react";
-import { ChevronLeftIcon } from "@chakra-ui/icons";
-import { Box, VStack, Flex, Image, Text, Stack, Link } from "@chakra-ui/react";
+import { ChevronLeftIcon } from "components/icons";
+import { Box, VStack, Flex, Image, Text, Stack, Link } from "components";
 
 const PasswordSubmitted = (props) => {
   return (

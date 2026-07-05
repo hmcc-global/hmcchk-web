@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Grid, Image } from '@chakra-ui/react';
+import { Box, Heading, Text, Grid, Image } from 'components';
 
 const values = [
   {

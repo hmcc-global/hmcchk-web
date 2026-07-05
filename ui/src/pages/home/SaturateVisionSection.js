@@ -7,7 +7,7 @@ import {
   Stack,
   Text,
   VStack,
-} from '@chakra-ui/react';
+} from 'components';
 import { Link } from 'react-router-dom';
 
 export const saturateText = {

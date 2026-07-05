@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { Button, ButtonGroup, Heading, Tooltip } from '@chakra-ui/react';
+import { Button, ButtonGroup, Heading, Tooltip } from 'components';
 import { DateTime } from 'luxon';
 import CustomDateEditor from '../ag-grid-editors/CustomDateEditor.js';
 import {

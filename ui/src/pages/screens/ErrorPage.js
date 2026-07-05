@@ -1,4 +1,4 @@
-import { Center, Icon, Text, VStack, Box, Button } from '@chakra-ui/react';
+import { Center, Icon, Text, VStack, Box, Button } from 'components';
 import { Link, useHistory } from 'react-router-dom';
 import { MdErrorOutline } from 'react-icons/md';
 import { AiFillCheckCircle } from 'react-icons/ai';

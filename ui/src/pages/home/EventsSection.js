@@ -11,8 +11,8 @@ import {
   Image,
   Fade,
   IconButton,
-} from '@chakra-ui/react';
-import { ChevronRightIcon, ChevronLeftIcon } from '@chakra-ui/icons';
+} from 'components';
+import { ChevronRightIcon, ChevronLeftIcon } from 'components/icons';
 import { InView } from 'react-intersection-observer';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';

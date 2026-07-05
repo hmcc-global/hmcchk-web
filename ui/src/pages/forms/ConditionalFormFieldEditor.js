@@ -14,7 +14,7 @@ import {
   Stack,
   Heading,
   Text,
-} from '@chakra-ui/react';
+} from 'components';
 
 import {
   countryList,

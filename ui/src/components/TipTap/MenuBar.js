@@ -8,7 +8,7 @@ import {
   PopoverContent,
   PopoverBody,
   Button,
-} from '@chakra-ui/react';
+} from 'components/chakra';
 import { useCallback } from 'react';
 
 const MenuBar = ({ editor }) => {

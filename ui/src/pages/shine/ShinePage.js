@@ -1,4 +1,4 @@
-import { Flex, Box } from '@chakra-ui/react';
+import { Flex, Box } from 'components';
 import HeroSection from './HeroSection';
 import ValuesSection from './ValuesSection';
 import ApproachSection from './ApproachSection';

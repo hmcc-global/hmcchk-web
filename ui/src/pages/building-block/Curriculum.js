@@ -8,8 +8,8 @@ import {
   IconButton,
   HStack,
   VStack,
-} from '@chakra-ui/react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+} from 'components';
+import { ChevronLeftIcon, ChevronRightIcon } from 'components/icons';
 
 const images = [
   '/images/buildingblock/carousel-1.png',

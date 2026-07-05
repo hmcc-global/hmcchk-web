@@ -5,7 +5,7 @@ import {
   Text,
   VStack,
   keyframes,
-} from '@chakra-ui/react';
+} from 'components';
 import { motion } from 'framer-motion';
 import SaturateGoals from './SaturateGoals';
 import SaturateVision from './SaturateVision';

@@ -9,7 +9,7 @@ import {
   Image,
   Container,
   VStack,
-} from '@chakra-ui/react';
+} from 'components';
 import React from 'react';
 
 const STRATEGY_TITLE = "HMCC's Transformation Pathways";
