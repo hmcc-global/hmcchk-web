@@ -124,4 +124,19 @@ export {
 } from './chakra';
 
 // ---- App-owned components ----
-// (populated as shared components are relocated into this library)
+// Explicit named re-exports (duplicate names vs the Chakra block above fail
+// the build loudly — that's intentional; e.g. Chakra v2+ adds `Card`).
+export { default as Footer } from './Footer/Footer';
+export { default as NavBar } from './NavigationBar/NavBar';
+export { default as MobileNavBar } from './NavigationBar/MobileNavBar';
+export { default as MainMenu } from './NavigationBar/MainMenu';
+export { default as Card } from './Card';
+export { default as FileUpload } from './FileUpload';
+export { default as LiveButton } from './LiveButton';
+export { default as SermonSeries } from './SermonSeries';
+export { default as Pagination } from './Pagination';
+export { default as AudioEmbed } from './AudioEmbed';
+export { default as VideoEmbed } from './VideoEmbed';
+export { BibleVerseAccordion } from './BibleVerseAccordion';
+export { parseDescription } from './parseDescription';
+export { default as TiptapEditor, useTextContext } from './TipTap';
