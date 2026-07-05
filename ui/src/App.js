@@ -4,7 +4,7 @@ import { store, persistor } from './store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import NavBar from './pages/NavigationBar/NavBar';
-import { Flex } from '@chakra-ui/react';
+import { Flex } from 'components';
 import MobileNavBar from './pages/NavigationBar/MobileNavBar';
 
 const App = () => {
