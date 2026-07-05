@@ -5,11 +5,12 @@
  * Everything else imports UI primitives from 'components' (the library barrel),
  * or — for files inside src/components/ — from this module directly.
  *
- * Why: when Chakra is upgraded (v1 → v2/v3 renames and removes exports),
- * the breakage is absorbed HERE with named overrides instead of across the
+ * Why: any change to the underlying UI library — the planned migration to
+ * Tailwind, or a Chakra version bump — is absorbed HERE instead of across the
  * whole app. An explicit `export const X = ...` or `export { Y as X } from ...`
- * below takes precedence over the star re-export, so shims can be added
- * per-export without touching consumers.
+ * below takes precedence over the star re-export, so primitives can be
+ * replaced one at a time (e.g. a Tailwind-based Box) without touching
+ * consumers. When every export is app-owned, delete the @chakra-ui packages.
  */
 export * from '@chakra-ui/react';
 
