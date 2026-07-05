@@ -25,8 +25,8 @@ import {
   VStack,
   ModalCloseButton,
   HStack,
-} from '@chakra-ui/react';
-import { CheckCircleIcon } from '@chakra-ui/icons';
+} from 'components';
+import { CheckCircleIcon } from 'components/icons';
 import { customAxios as axios } from 'utils/customAxios';
 import { useEffect, useState, useCallback } from 'react';
 import { useForm, Controller } from 'react-hook-form';

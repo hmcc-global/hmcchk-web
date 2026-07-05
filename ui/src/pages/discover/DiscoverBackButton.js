@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Flex, Text, Image, Container } from '@chakra-ui/react';
+import { Box, Flex, Text, Image, Container } from 'components';
 
 const BackButton = () => {
   const [visible, setVisible] = useState(true);

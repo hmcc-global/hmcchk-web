@@ -9,7 +9,7 @@ import {
   Image,
   Link,
   Text,
-} from '@chakra-ui/react';
+} from 'components';
 import { DateTime } from 'luxon';
 
 const UpcomingSermon = ({ upcoming }) => {

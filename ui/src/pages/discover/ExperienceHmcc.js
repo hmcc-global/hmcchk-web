@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Link, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Link, Text } from 'components';
 
 const ExperienceHmcc = (props) => {
   return (

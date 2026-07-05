@@ -24,8 +24,8 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-} from '@chakra-ui/react';
-import { CheckCircleIcon } from '@chakra-ui/icons';
+} from 'components';
+import { CheckCircleIcon } from 'components/icons';
 import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import {

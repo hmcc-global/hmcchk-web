@@ -1,4 +1,4 @@
-import { Spinner } from "@chakra-ui/react";
+import { Spinner } from "components";
 import { useEffect, useState } from "react";
 import { customAxios as axios } from "utils/customAxios";
 

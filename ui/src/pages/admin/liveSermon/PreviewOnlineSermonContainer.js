@@ -9,8 +9,8 @@ import {
   Link,
   Text,
   Container,
-} from '@chakra-ui/react';
-import { ChevronLeftIcon } from '@chakra-ui/icons';
+} from 'components';
+import { ChevronLeftIcon } from 'components/icons';
 import OnlinePageButtons from '../../sermons/OnlinePageButtons';
 import OnlinePageTabs from '../../sermons/OnlinePageTabs';
 import { DateTime } from 'luxon';

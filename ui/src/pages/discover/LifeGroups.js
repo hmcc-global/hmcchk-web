@@ -10,7 +10,7 @@ import {
   SimpleGrid,
   Stack,
   Text,
-} from '@chakra-ui/react';
+} from 'components';
 import LifeGroupCard from './LifeGroupCard';
 import lifeGroupList from './lifegroups.json';
 import OurMinistries from './OurMinistries';

@@ -7,7 +7,7 @@ import {
   HStack,
   Image,
   Link,
-} from '@chakra-ui/react';
+} from 'components';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';

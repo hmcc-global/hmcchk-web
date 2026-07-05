@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { Text, Icon } from '@chakra-ui/react';
+import { Text, Icon } from 'components';
 import { RiCalendarEventFill } from 'react-icons/ri';
 
 const getStartDate = (eventData) => {

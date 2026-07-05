@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { customAxios as axios } from 'utils/customAxios';
-import { Box, Container, Heading, Text } from '@chakra-ui/react';
+import { Box, Container, Heading, Text } from 'components';
 import UpcomingSermon from './UpcomingSermon';
 import SermonSeriesCardList from './SermonSeriesCardList';
 import CurrentSermon from './CurrentSermon';

@@ -17,7 +17,7 @@ import {
   ModalBody,
   ModalCloseButton,
   Stack,
-} from '@chakra-ui/react';
+} from 'components';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useState } from 'react';
 import axios from 'axios';

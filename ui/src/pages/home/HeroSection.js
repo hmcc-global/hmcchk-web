@@ -6,7 +6,7 @@ import {
   Heading,
   Container,
   Text,
-} from '@chakra-ui/react';
+} from 'components';
 import { SocialIcon } from 'react-social-icons';
 import { useEffect, useRef } from 'react';
 import SubHeroSection from './SubHeroSection';

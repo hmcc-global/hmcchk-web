@@ -6,7 +6,7 @@ import {
   GridItem,
   Heading,
   VStack,
-} from '@chakra-ui/react';
+} from 'components';
 import StaffMember from './StaffMember';
 
 const LANDSCAPE_RATIO = 3484 / 2853;

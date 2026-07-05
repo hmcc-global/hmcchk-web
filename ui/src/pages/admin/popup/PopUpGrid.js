@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { Heading, Container, Switch, HStack } from '@chakra-ui/react';
+import { Heading, Container, Switch, HStack } from 'components';
 
 export default function PopUpGrid(props) {
   const { popUps, setSelected } = props;

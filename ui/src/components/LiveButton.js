@@ -1,4 +1,4 @@
-import { Box, Link, Button } from '@chakra-ui/react';
+import { Box, Link, Button } from 'components/chakra';
 
 const liveScStyle = {
   border: '5px',

@@ -19,8 +19,8 @@ import {
   ModalContent,
   ModalFooter,
   useMediaQuery,
-} from '@chakra-ui/react';
-import { CheckCircleIcon } from '@chakra-ui/icons';
+} from 'components';
+import { CheckCircleIcon } from 'components/icons';
 import { countryList } from 'utils/lists';
 
 const Signup = (props) => {

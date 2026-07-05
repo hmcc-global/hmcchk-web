@@ -1,4 +1,4 @@
-import { Flex, Box, Container, Image, Text, VStack } from '@chakra-ui/react';
+import { Flex, Box, Container, Image, Text, VStack } from 'components';
 import Slider from 'react-slick';
 
 import { typography } from './typography';

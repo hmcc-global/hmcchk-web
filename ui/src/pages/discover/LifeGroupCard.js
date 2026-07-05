@@ -5,7 +5,7 @@ import {
   LinkOverlay,
   Spacer,
   Text,
-} from '@chakra-ui/react';
+} from 'components';
 import { AiOutlineInstagram } from 'react-icons/ai';
 
 const LifeGroupCard = (props) => {

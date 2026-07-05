@@ -11,7 +11,7 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-} from '@chakra-ui/react';
+} from 'components';
 
 const BeliefsCard = ({ head, body }) => {
   return (

@@ -13,7 +13,7 @@ import {
   Box,
   Tooltip,
   useToast,
-} from '@chakra-ui/react';
+} from 'components';
 import { DateTime } from 'luxon';
 import { paymentMethodList } from 'utils/lists';
 import CustomDateEditor from '../ag-grid-editors/CustomDateEditor';

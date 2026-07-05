@@ -29,7 +29,7 @@ import {
   Link,
   Switch,
   Select,
-} from '@chakra-ui/react';
+} from 'components';
 import { eventIntervalList, eventTypeList } from 'utils/lists';
 import FileUpload from 'components/FileUpload';
 import { CUIAutoComplete } from 'chakra-ui-autocomplete';

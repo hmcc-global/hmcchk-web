@@ -17,7 +17,7 @@ import {
   Button,
   FormErrorMessage,
   useToast,
-} from '@chakra-ui/react';
+} from 'components';
 
 export default function FundraiseContainer() {
   const toast = useToast();

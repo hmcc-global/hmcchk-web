@@ -1,4 +1,4 @@
-import { Heading, HStack, Container, Switch } from '@chakra-ui/react';
+import { Heading, HStack, Container, Switch } from 'components';
 import { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
 import { AgGridReact } from 'ag-grid-react';

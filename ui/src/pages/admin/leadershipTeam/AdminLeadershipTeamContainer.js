@@ -20,13 +20,13 @@ import {
   useDisclosure,
   Flex,
   Spacer,
-} from '@chakra-ui/react';
+} from 'components';
 import { useState, useCallback, useEffect, useRef } from 'react';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import LeadershipTeamGrid from './LeadershipTeamGrid.js';
-import { AddIcon, EditIcon } from '@chakra-ui/icons';
+import { AddIcon, EditIcon } from 'components/icons';
 
 export default function AdminLeadershipTeamContainer(props) {
   const toast = useToast();

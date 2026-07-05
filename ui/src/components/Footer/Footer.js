@@ -10,9 +10,9 @@ import {
   Box,
   Spacer,
   HStack,
-} from '@chakra-ui/react';
+} from 'components/chakra';
 import './SocialIcon.css';
-import { EmailIcon } from '@chakra-ui/icons';
+import { EmailIcon } from '../icons';
 import { SocialIcon } from 'react-social-icons';
 
 import { useLocation } from 'react-router-dom';

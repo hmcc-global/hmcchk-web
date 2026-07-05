@@ -8,7 +8,7 @@ import {
   Button,
   HStack,
   Icon,
-} from '@chakra-ui/react';
+} from 'components';
 import { useHistory } from 'react-router';
 import { FaArrowRight } from 'react-icons/fa';
 import LiveButton from 'components/LiveButton';

@@ -1,4 +1,4 @@
-import { HStack, Box, Heading, Grid, Image, Text } from '@chakra-ui/react';
+import { HStack, Box, Heading, Grid, Image, Text } from 'components';
 
 import { typography } from './typography';
 

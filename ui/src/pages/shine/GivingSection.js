@@ -19,7 +19,7 @@ import {
   useDisclosure,
   Stack,
   SimpleGrid,
-} from '@chakra-ui/react';
+} from 'components';
 import { MAX } from 'uuid';
 
 import { typography } from './typography';

@@ -11,7 +11,7 @@ import {
   Spacer,
   AspectRatio,
   Link,
-} from '@chakra-ui/react';
+} from 'components';
 import { MdAccessTime, MdLocationOn } from 'react-icons/md';
 import BackButton from './DiscoverBackButton';
 import PlanAVisitFaq from './PlanAVisitFaq';

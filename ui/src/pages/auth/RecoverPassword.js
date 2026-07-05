@@ -1,7 +1,7 @@
 import React from 'react';
 import { customAxios as axios } from 'utils/customAxios';
 import { useForm } from 'react-hook-form';
-import { ChevronLeftIcon } from '@chakra-ui/icons';
+import { ChevronLeftIcon } from 'components/icons';
 import {
   Box,
   Container,
@@ -13,7 +13,7 @@ import {
   Link,
   useToast,
   Button,
-} from '@chakra-ui/react';
+} from 'components';
 
 const RecoverPassword = (props) => {
   const { register, handleSubmit } = useForm();

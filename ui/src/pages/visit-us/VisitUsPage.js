@@ -9,7 +9,7 @@ import {
   Spacer,
   Text,
   VStack,
-} from '@chakra-ui/react';
+} from 'components';
 import { RiChat1Line } from 'react-icons/ri';
 import Faq from './Faq';
 

@@ -7,7 +7,7 @@ import {
   AccordionIcon,
   AccordionPanel,
   Box,
-} from '@chakra-ui/react';
+} from 'components/chakra';
 import { useTextContext } from './TipTap';
 export const BibleVerseAccordion = ({ bibleVerse, actionText }) => {
   const [passage, setPassage] = useState('');

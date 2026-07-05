@@ -1,4 +1,4 @@
-import { Box, Icon, Text, VStack } from '@chakra-ui/react';
+import { Box, Icon, Text, VStack } from 'components';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';

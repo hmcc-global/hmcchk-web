@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
+import { Box, Flex, Grid, GridItem, Text } from 'components';
 import { forwardRef } from 'react';
 
 const ScheduleItem = ({ time, color, description }) => (

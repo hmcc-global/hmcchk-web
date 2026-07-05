@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Form from './Form';
-import { Container } from '@chakra-ui/react';
+import { Container } from 'components';
 import { validateForm } from 'utils/formsHelpers';
 
 const UserFormContainer = (props) => {

@@ -6,7 +6,7 @@ import {
   Stack,
   Input,
   Text,
-} from '@chakra-ui/react';
+} from 'components';
 import { useEffect } from 'react';
 
 import { useForm } from 'react-hook-form';

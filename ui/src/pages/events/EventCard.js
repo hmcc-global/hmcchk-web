@@ -17,7 +17,7 @@ import {
   ModalCloseButton,
   ButtonGroup,
   Tag,
-} from '@chakra-ui/react';
+} from 'components';
 import { RiCalendarEventFill } from 'react-icons/ri';
 import { BsClockFill, BsFullscreen } from 'react-icons/bs';
 import { ImLocation2 } from 'react-icons/im';

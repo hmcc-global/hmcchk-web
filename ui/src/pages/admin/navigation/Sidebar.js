@@ -11,7 +11,7 @@ import {
   DrawerContent,
   Text,
   useDisclosure,
-} from '@chakra-ui/react';
+} from 'components';
 import {
   FiHome,
   FiUsers,

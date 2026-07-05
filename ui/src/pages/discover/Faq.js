@@ -7,7 +7,7 @@ import {
   Box,
   Heading,
   Link,
-} from '@chakra-ui/react';
+} from 'components';
 import { AiFillPlusCircle } from 'react-icons/ai';
 
 const Faq = (props) => {

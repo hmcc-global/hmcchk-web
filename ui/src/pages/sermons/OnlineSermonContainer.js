@@ -7,7 +7,7 @@ import {
   AspectRatio,
   Text,
   Container,
-} from '@chakra-ui/react';
+} from 'components';
 import { DateTime } from 'luxon';
 import OnlinePageButtons from './OnlinePageButtons';
 import OnlinePageTabs from './OnlinePageTabs';

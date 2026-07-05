@@ -12,7 +12,7 @@ import {
   LinkOverlay,
   HStack,
   Spacer,
-} from '@chakra-ui/react';
+} from 'components/chakra';
 import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../reducers/userSlice';
 import { customAxios as axios } from 'utils/customAxios';

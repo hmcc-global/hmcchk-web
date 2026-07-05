@@ -15,7 +15,7 @@ import {
   Badge,
   Image,
   Grid,
-} from '@chakra-ui/react';
+} from 'components';
 import {
   CalendarIcon,
   TimeIcon,
@@ -24,7 +24,7 @@ import {
   ViewIcon,
   EditIcon,
   StarIcon,
-} from '@chakra-ui/icons';
+} from 'components/icons';
 import AnnouncementEditorModal from './AnnouncementEditorModal';
 import { DateTime } from 'luxon';
 

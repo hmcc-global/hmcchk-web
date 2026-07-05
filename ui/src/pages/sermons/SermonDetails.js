@@ -8,7 +8,7 @@ import {
   Container,
   Grid,
   Icon,
-} from '@chakra-ui/react';
+} from 'components';
 import { customAxios as axios } from 'utils/customAxios';
 import { DateTime } from 'luxon';
 import { DATE_FULL } from 'luxon/src/impl/formats';

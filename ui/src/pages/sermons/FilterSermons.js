@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select, Container, Grid } from '@chakra-ui/react';
+import { Select, Container, Grid } from 'components';
 import { FaCaretDown } from 'react-icons/fa';
 import { DateTime } from 'luxon';
 

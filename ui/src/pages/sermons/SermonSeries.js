@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box } from 'components';
 import { useState, useEffect, useCallback } from 'react';
 import { customAxios as axios } from 'utils/customAxios';
 import SermonCard from './SermonCard';

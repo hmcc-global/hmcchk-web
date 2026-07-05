@@ -12,7 +12,7 @@ import {
   Icon,
   Text,
   HStack,
-} from '@chakra-ui/react';
+} from 'components';
 import './_connect.scss';
 import { IoPlayCircleOutline } from 'react-icons/io5';
 

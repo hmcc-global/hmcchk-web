@@ -5,7 +5,7 @@ import {
   VStack,
   Button,
   useToast,
-} from '@chakra-ui/react';
+} from 'components';
 import { customAxios as axios } from 'utils/customAxios';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDebounce } from 'react-use';

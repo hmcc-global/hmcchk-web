@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Grid, Box, HStack, Text } from '@chakra-ui/react';
+import { Grid, Box, HStack, Text } from 'components';
 import Pagination from 'components/Pagination';
 import FilterSermon from './FilterSermons';
 import SermonSeriesCard from './SermonSeriesCard';

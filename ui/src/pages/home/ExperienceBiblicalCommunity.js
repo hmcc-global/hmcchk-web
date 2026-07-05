@@ -11,11 +11,11 @@ import {
   Spacer,
   useMediaQuery,
   Link,
-} from '@chakra-ui/react';
+} from 'components';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { ArrowForwardIcon } from 'components/icons';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import NewHereForm from './NewHereForm';

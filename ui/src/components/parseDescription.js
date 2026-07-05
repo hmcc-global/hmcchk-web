@@ -4,7 +4,7 @@ import {
   OrderedList,
   ListItem,
   Link,
-} from '@chakra-ui/react';
+} from 'components/chakra';
 import parse, { domToReact, attributesToProps } from 'html-react-parser';
 
 const options = {

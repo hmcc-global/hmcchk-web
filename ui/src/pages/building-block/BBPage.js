@@ -1,4 +1,4 @@
-import { Container, VStack } from '@chakra-ui/react';
+import { Container, VStack } from 'components';
 import { useRef } from 'react';
 
 import OurValues from './OurValues';

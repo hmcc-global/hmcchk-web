@@ -8,7 +8,7 @@ import {
   UnorderedList,
   ListItem,
   HStack,
-} from '@chakra-ui/react';
+} from 'components';
 import { useRef, useState } from 'react';
 
 // ring bands as fraction of outer radius (40vw) — matches nested box sizes

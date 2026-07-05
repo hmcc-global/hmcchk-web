@@ -7,7 +7,7 @@ import {
   Fade,
   VStack,
   IconButton,
-} from '@chakra-ui/react';
+} from 'components';
 import { useState } from 'react';
 import { MdExpandLess, MdExpandMore } from 'react-icons/md';
 import { InView } from 'react-intersection-observer';

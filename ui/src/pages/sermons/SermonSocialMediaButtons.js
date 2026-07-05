@@ -1,4 +1,4 @@
-import { Button, HStack, Icon, Link, Text } from '@chakra-ui/react';
+import { Button, HStack, Icon, Link, Text } from 'components';
 import { FaSpotify, FaYoutube } from 'react-icons/fa';
 
 const SermonSocialMediaButtons = ({

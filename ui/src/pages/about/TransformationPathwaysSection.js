@@ -6,7 +6,7 @@ import {
   UnorderedList,
   ListItem,
   Image,
-} from '@chakra-ui/react';
+} from 'components';
 import React from 'react';
 
 const SECTION_TITLE = "HMCC's Transformation Pathways";

@@ -11,7 +11,7 @@ import {
   VStack,
   Text,
   Link,
-} from '@chakra-ui/react';
+} from 'components';
 import LifeGroupCard from './LifeGroupCard';
 import lifeGroupList from './lifegroups.json';
 import { MdPeople } from 'react-icons/md';

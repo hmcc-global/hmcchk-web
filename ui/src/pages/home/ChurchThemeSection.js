@@ -9,7 +9,7 @@ import {
   Container,
   HStack,
   IconButton,
-} from '@chakra-ui/react';
+} from 'components';
 import { InView } from 'react-intersection-observer';
 import { MdExpandLess, MdExpandMore } from 'react-icons/md';
 import { useState } from 'react';

@@ -1,4 +1,4 @@
-import { Button, Link, useMediaQuery } from '@chakra-ui/react';
+import { Button, Link, useMediaQuery } from 'components';
 
 const LifeGroupSignupButton = () => {
   return (

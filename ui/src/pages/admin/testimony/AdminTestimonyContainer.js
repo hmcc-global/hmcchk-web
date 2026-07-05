@@ -13,7 +13,7 @@ import {
   Checkbox,
   Button,
   useToast,
-} from '@chakra-ui/react';
+} from 'components';
 import TestimonyGrid from './TestimonyGrid';
 
 export default function AdminTestimonyContainer(props) {

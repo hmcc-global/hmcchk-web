@@ -1,4 +1,4 @@
-import { Box, Heading, Link, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, Heading, Link, SimpleGrid, Text } from 'components';
 
 const OurMinistries = (props) => {
   return (

@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text, Image } from '@chakra-ui/react';
+import { Box, Button, Flex, Text, Image } from 'components';
 
 const cards = [
   {

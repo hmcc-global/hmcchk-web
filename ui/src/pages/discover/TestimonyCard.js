@@ -1,4 +1,4 @@
-import { Box, Heading, Image, Stack, Text, VStack } from "@chakra-ui/react";
+import { Box, Heading, Image, Stack, Text, VStack } from "components";
 
 const TestimonyCard = (props) => {
   const { testimonyInfo } = props;

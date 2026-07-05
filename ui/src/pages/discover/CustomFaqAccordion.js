@@ -5,8 +5,8 @@ import {
   AccordionPanel,
   Box,
   Link,
-} from '@chakra-ui/react';
-import { AddIcon, MinusIcon } from '@chakra-ui/icons';
+} from 'components';
+import { AddIcon, MinusIcon } from 'components/icons';
 
 const CustomFaqAccordion = ({ data, borderColor, bgColor, width }) => {
   // Function to detect email addresses

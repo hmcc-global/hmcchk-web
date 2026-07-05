@@ -13,7 +13,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
-} from '@chakra-ui/react';
+} from 'components/chakra';
 import MainMenu from './MainMenu';
 import { IoMdHome, IoMdCalendar, IoMdHeart, IoMdMore } from 'react-icons/io';
 import { ImLeaf } from 'react-icons/im';

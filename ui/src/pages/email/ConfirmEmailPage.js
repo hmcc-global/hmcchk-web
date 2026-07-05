@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { customAxios as axios } from "utils/customAxios";
-import { Box, Container, Text } from "@chakra-ui/react";
+import { Box, Container, Text } from "components";
 
 const ConfirmEmailPage = (props) => {
   const [isConfirmed, setIsConfirmed] = useState(false);

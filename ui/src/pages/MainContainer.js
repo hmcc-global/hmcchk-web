@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, useLocation } from 'react-router-dom';
-import { chakra } from '@chakra-ui/react';
+import { chakra } from 'components';
 import SermonContainer from './sermons/SermonContainer';
 import SermonDetails from './sermons/SermonDetails';
 import LoginContainer from './auth/LoginContainer';

@@ -23,7 +23,7 @@ import {
   ListItem,
   Center,
   Textarea,
-} from '@chakra-ui/react';
+} from 'components';
 
 const FormEditor = (props) => {
   const { user } = props;
