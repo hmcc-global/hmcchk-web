@@ -67,6 +67,30 @@
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "rules": {
+      "no-restricted-imports": [
+        "error",
+        {
+          "patterns": [
+            {
+              "group": ["@chakra-ui/*"],
+              "message": "Import UI from 'components' (or 'components/icons') instead. @chakra-ui/* is only allowed inside src/components/chakra/ and src/components/icons.js — see ui/src/components/README.md."
+            }
+          ]
+        }
+      ]
+    },
+    "overrides": [
+      {
+        "files": [
+          "src/components/chakra/**",
+          "src/components/icons.js"
+        ],
+        "rules": {
+          "no-restricted-imports": "off"
+        }
+      }
     ]
   },
   "browserslist": {
