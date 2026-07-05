@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { customAxios as axios } from '../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import {
   camelize,
   sentencize,
   getAllChildrenFieldIds,
-} from '../helpers/formsHelpers';
+} from 'utils/formsHelpers';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 
@@ -36,7 +36,7 @@ import {
   districtList,
   regionList,
   ministryTeamList,
-} from '../helpers/lists';
+} from 'utils/lists';
 
 const Form = (props) => {
   const {

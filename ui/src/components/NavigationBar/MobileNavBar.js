@@ -19,7 +19,7 @@ import { IoMdHome, IoMdCalendar, IoMdHeart, IoMdMore } from 'react-icons/io';
 import { ImLeaf } from 'react-icons/im';
 import { MdOndemandVideo } from 'react-icons/md';
 import { useSelector } from 'react-redux';
-import { customAxios as axios } from '../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import { useLocation } from 'react-router-dom';
 
 const MobileNavBar = (props) => {

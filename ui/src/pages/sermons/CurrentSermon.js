@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 import { FaArrowRight } from 'react-icons/fa';
-import LiveButton from '../helpers/components/LiveButton';
+import LiveButton from 'components/LiveButton';
 import SermonSocialMediaButtons from './SermonSocialMediaButtons';
 import { DateTime } from 'luxon';
 import { DATE_FULL } from 'luxon/src/impl/formats';

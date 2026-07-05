@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { customAxios as axios } from '../../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
 import {
@@ -30,8 +30,8 @@ import {
   Switch,
   Select,
 } from '@chakra-ui/react';
-import { eventIntervalList, eventTypeList } from '../../helpers/lists';
-import FileUpload from '../../helpers/components/FileUpload';
+import { eventIntervalList, eventTypeList } from 'utils/lists';
+import FileUpload from 'components/FileUpload';
 import { CUIAutoComplete } from 'chakra-ui-autocomplete';
 
 const AnnouncementEditorModal = (props) => {

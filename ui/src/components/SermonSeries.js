@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { customAxios as axios } from '../customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 
 const SermonSeries = () => {
   const [sermon, setSermon] = useState(null);

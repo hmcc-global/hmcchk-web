@@ -23,7 +23,7 @@ import {
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { DateTime } from 'luxon';
-import { getRenderDate } from '../helpers/eventsHelpers';
+import { getRenderDate } from 'utils/eventsHelpers';
 import EventCard from '../events/EventCard';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -35,7 +35,7 @@ import { ImLocation2 } from 'react-icons/im';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 import ReactMarkdown from 'react-markdown';
 import { MdOutlineAddToPhotos } from 'react-icons/md';
-import { generateGoogleCalendarLink } from '../helpers/eventsHelpers';
+import { generateGoogleCalendarLink } from 'utils/eventsHelpers';
 import { FaCalendarAlt } from 'react-icons/fa';
 
 import { typography } from './typography';

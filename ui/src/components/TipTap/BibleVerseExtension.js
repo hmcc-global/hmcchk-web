@@ -5,7 +5,7 @@ import {
   nodePasteRule,
 } from '@tiptap/core';
 import { NodeViewWrapper, ReactNodeViewRenderer } from '@tiptap/react';
-import { BibleVerseAccordion } from '../components/BibleVerseAccordion.js';
+import { BibleVerseAccordion } from 'components/BibleVerseAccordion';
 import React from 'react';
 
 export const BibleVerseNode = Node.create({

@@ -14,8 +14,8 @@ import {
   FormHelperText,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
-import { customAxios as axios } from '../../helpers/customAxios';
-import TiptapEditor from '../../helpers/TipTap';
+import { customAxios as axios } from 'utils/customAxios';
+import TiptapEditor from 'components/TipTap';
 import { useHistory, Prompt } from 'react-router-dom';
 
 // Create a object

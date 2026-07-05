@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { customAxios as axios } from '../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import { GoogleLogin } from '@react-oauth/google';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Box, VStack, Flex, Image, Text, Button, Link } from '@chakra-ui/react';

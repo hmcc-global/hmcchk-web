@@ -35,9 +35,9 @@ import {
   getStartDate,
   getRenderDate,
   EndDateElement,
-} from '../helpers/eventsHelpers';
+} from 'utils/eventsHelpers';
 import { useState } from 'react';
-import TrackingUtil from '../../util/TrackingUtil';
+import TrackingUtil from 'utils/TrackingUtil';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 

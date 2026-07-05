@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import EventsSection from './EventsSection';
 import HeroSection from './HeroSection';
 import PopupContainer from './PopupContainer';
-import { customAxios as axios } from '../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import VisionMissionSection from './VisionMissionSection';
 import VisionMissionSectionMobile from './VisionMissionSectionMobile';
 import ExperienceBiblicalCommunity from './ExperienceBiblicalCommunity';

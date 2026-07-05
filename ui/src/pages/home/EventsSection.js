@@ -20,7 +20,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 import { useEffect, useRef, useState, React } from 'react';
-import { getRenderDate } from '../helpers/eventsHelpers';
+import { getRenderDate } from 'utils/eventsHelpers';
 import EventsSectionCard from './EventsSectionCards';
 
 const EventsSection = () => {

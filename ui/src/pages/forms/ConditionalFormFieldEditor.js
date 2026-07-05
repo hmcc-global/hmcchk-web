@@ -4,7 +4,7 @@ import {
   sentencize,
   getFieldById,
   getFieldIndexById,
-} from '../helpers/formsHelpers';
+} from 'utils/formsHelpers';
 import {
   FormControl,
   FormLabel,
@@ -19,7 +19,7 @@ import {
 import {
   countryList,
   ministryTeamList,
-} from '../helpers/lists';
+} from 'utils/lists';
 
 import ConditionalFormFieldMapper from './ConditionalFormFieldMapper';
 

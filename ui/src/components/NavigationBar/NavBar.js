@@ -15,9 +15,9 @@ import {
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../reducers/userSlice';
-import { customAxios as axios } from '../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import { useLocation } from 'react-router-dom';
-import LiveButton from '../helpers/components/LiveButton';
+import LiveButton from 'components/LiveButton';
 
 const NavBar = (props) => {
   const [isLive, setIsLive] = useState(false);

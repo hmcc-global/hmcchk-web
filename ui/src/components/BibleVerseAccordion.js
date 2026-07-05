@@ -1,4 +1,4 @@
-import { getBiblePassage } from '../SermonNotes';
+import { getBiblePassage } from 'utils/SermonNotes';
 import React, { useState } from 'react';
 import {
   Accordion,
@@ -8,7 +8,7 @@ import {
   AccordionPanel,
   Box,
 } from '@chakra-ui/react';
-import { useTextContext } from '../TipTap';
+import { useTextContext } from './TipTap';
 export const BibleVerseAccordion = ({ bibleVerse, actionText }) => {
   const [passage, setPassage] = useState('');
   const textPassage = useTextContext();

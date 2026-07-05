@@ -1,13 +1,13 @@
 import { Route } from 'react-router-dom';
-import ErrorPage from '../screens/ErrorPage';
-import HomeContainer from '../home/HomeContainer';
+import ErrorPage from './screens/ErrorPage';
+import HomeContainer from './home/HomeContainer';
 import { useSelector } from 'react-redux';
-import { updateAxiosClient } from './customAxios';
+import { updateAxiosClient } from 'utils/customAxios';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import UserProfileContainer from '../userProfile/UserProfileContainer';
-import CompleteUserProfileContainer from '../userProfile/CompleteUserProfile';
-import SidebarWithHeader from '../admin/navigation/Sidebar';
+import UserProfileContainer from './userProfile/UserProfileContainer';
+import CompleteUserProfileContainer from './userProfile/CompleteUserProfile';
+import SidebarWithHeader from './admin/navigation/Sidebar';
 
 const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
   const user = useSelector((state) => state.user);

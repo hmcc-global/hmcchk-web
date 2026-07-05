@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { customAxios as axios } from '../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import {
   Button,
   Container,
@@ -13,7 +13,7 @@ import {
 import { MdArrowDropDown } from 'react-icons/md';
 import EventCard from './EventCard';
 import { DateTime } from 'luxon';
-import { getRenderDate } from '../helpers/eventsHelpers';
+import { getRenderDate } from 'utils/eventsHelpers';
 import isDateInThisWeek from './getWeek';
 
 const EventsPage = (props) => {

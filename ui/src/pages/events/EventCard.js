@@ -24,9 +24,9 @@ import { ImLocation2 } from 'react-icons/im';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { MdOutlineAddToPhotos } from 'react-icons/md';
 import { useState, useEffect } from 'react';
-import { getRenderDate } from '../helpers/eventsHelpers';
+import { getRenderDate } from 'utils/eventsHelpers';
 import { DateTime } from 'luxon';
-import { generateGoogleCalendarLink } from '../helpers/eventsHelpers';
+import { generateGoogleCalendarLink } from 'utils/eventsHelpers';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 
