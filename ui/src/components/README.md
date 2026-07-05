@@ -32,5 +32,10 @@ import { ChevronLeftIcon } from 'components/icons';
    module-initialization cycle.
 4. **Only cross-page components live here.** A component used by a single page
    stays in that page's folder.
-5. **Upgrading Chakra?** Do it here: bump the package, then add named overrides
-   in `chakra/index.js` for renamed/removed exports. Consumers don't change.
+5. **Changing the UI library?** (e.g. the planned Tailwind migration, or a
+   Chakra version bump) Do it here, one export at a time: replace a re-export
+   in `chakra/index.js` / `index.js` with an app-owned implementation of the
+   same name and props. Consumers never change — that is the whole point of
+   this folder. A Tailwind migration becomes: reimplement `Box`, `Flex`,
+   `Text`, … inside this library, delete the `@chakra-ui` packages when the
+   list runs dry.

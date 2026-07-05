@@ -52,8 +52,9 @@ npx prettier --write "ui/src/**/*.{js,jsx}"
 - **Components library**: `ui/src/components/` - the single import source for UI
   - `components/chakra/` is the ONLY place allowed to import `@chakra-ui/react`
     (enforced by ESLint `no-restricted-imports`); `components/icons.js` is the
-    only place for `@chakra-ui/icons`. Chakra upgrades are absorbed there via
-    named overrides — see `ui/src/components/README.md`
+    only place for `@chakra-ui/icons`. UI-library changes (the planned Tailwind
+    migration, or any Chakra bump) are absorbed there via named overrides —
+    see `ui/src/components/README.md`
   - Reusable (2+ pages) components live here: `import { Box } from 'components'`,
     `import FileUpload from 'components/FileUpload'`
 - **Utils**: `ui/src/utils/` - non-UI shared logic (customAxios, domain helpers) - camelCase filenames
