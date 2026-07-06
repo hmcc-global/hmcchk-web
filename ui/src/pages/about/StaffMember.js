@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Image, Text, VStack } from '@chakra-ui/react';
+import { AspectRatio, Box, Image, Text, VStack } from 'components';
 
 const NAME_FONT_SIZE = ['md', 'xl', '2xl'];
 const TITLE_FONT_SIZE = ['xs', 'sm', 'md'];

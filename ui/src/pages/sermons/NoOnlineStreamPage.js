@@ -8,7 +8,7 @@ import {
   Box,
   Icon,
   useColorModeValue,
-} from '@chakra-ui/react';
+} from 'components';
 import { useHistory } from 'react-router-dom';
 import { MdVideoLibrary, MdSchedule } from 'react-icons/md';
 

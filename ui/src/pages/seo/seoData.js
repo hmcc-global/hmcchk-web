@@ -1,4 +1,4 @@
-import { customAxios as axios } from '../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import { generateSermonSEO } from './sermonSeoHelpers';
 
 // Consolidated SEO configuration for meta tags
