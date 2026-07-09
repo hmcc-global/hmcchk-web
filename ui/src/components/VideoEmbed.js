@@ -2,7 +2,8 @@ import { Box } from "components/chakra";
 
 const VideoEmbed = (props) => {
   const { videoUrl } = props;
-  const url = videoUrl.replace("youtu.be", "youtube.com/embed");
+  console.log(videoUrl);
+  let url = videoUrl.replace("youtu.be", "youtube.com/embed");
 
   return (
     <Box overflow="hidden" pb="56.25%" pos="relative" height={10}>
