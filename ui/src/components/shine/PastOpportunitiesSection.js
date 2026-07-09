@@ -175,6 +175,36 @@ const opportunities = [
       },
     ],
   },
+  {
+    title: 'Tai Po Fire Donation',
+    date: 'Sunday, Dec 01, 2025',
+    images: [
+      {
+        src: '/images/shine/taipo_donation_1.jpeg',
+        alt: 'Tai Po Fire Donation highlight',
+      },
+      {
+        src: '/images/shine/taipo_donation_2.jpeg',
+        alt: 'Tai Po Fire Donation visit',
+      },
+      {
+        src: '/images/shine/taipo_donation_3.jpeg',
+        alt: 'Tai Po Fire Donation donations',
+      },
+      {
+        src: '/images/shine/taipo_donation_4.jpeg',
+        alt: 'Tai Po Fire Donation team',
+      },
+      {
+        src: '/images/shine/taipo_donation_5.jpeg',
+        alt: 'Tai Po Fire Blood Donation ',
+      },
+      {
+        src: '/images/shine/taipo_donation_6.jpeg',
+        alt: 'Tai Po Fire Donation ',
+      },
+    ],
+  },
 ];
 
 const fadeTransition = { enter: { duration: 0.8 }, exit: { duration: 0.8 } };
