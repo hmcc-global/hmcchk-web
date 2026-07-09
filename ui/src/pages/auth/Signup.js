@@ -376,8 +376,7 @@ const Signup = (props) => {
                 <Text>Phone Number</Text>
                 <Input
                   id="phoneNumber"
-                  type="number"
-                  name="password"
+                  type="tel"
                   placeholder="Phone Number"
                   style={inputBox}
                   h={['40px', '40px', '60px', '60px']}

@@ -5,14 +5,14 @@ import { useDispatch } from 'react-redux';
 import { signout } from '../../reducers/userSlice';
 
 const MainMenu = ({ login, onClose }) => {
+  const dispatch = useDispatch();
+
   const onLogout = () => {
     onClose();
     dispatch(signout());
     localStorage.clear();
     window.location.reload();
   };
-
-  const dispatch = useDispatch();
 
   const MobileView = () => {
     return (

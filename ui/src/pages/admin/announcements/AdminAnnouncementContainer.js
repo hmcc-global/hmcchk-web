@@ -190,7 +190,7 @@ export default function AdminAnnouncementContainer(props) {
         }
       }
 
-      await getAnnouncementList;
+      await getAnnouncementList();
       setIsLoading(false);
     } catch (err) {
       console.log(err);

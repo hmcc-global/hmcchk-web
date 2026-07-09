@@ -90,7 +90,6 @@ const NavBar = (props) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // console.log(window.scrollY);
       setYPosition(window.scrollY);
     };
     window.addEventListener('scroll', handleScroll);

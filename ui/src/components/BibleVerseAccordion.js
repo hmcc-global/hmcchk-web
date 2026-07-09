@@ -1,5 +1,5 @@
 import { getBiblePassage } from 'utils/SermonNotes';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Accordion,
   AccordionItem,
@@ -12,10 +12,12 @@ import { useTextContext } from './TipTap';
 export const BibleVerseAccordion = ({ bibleVerse, actionText }) => {
   const [passage, setPassage] = useState('');
   const textPassage = useTextContext();
-  (async () => {
-    const res = await getBiblePassage(bibleVerse, textPassage);
-    setPassage(res);
-  })();
+  useEffect(() => {
+    (async () => {
+      const res = await getBiblePassage(bibleVerse, textPassage);
+      setPassage(res);
+    })();
+  }, [bibleVerse, textPassage]);
   return (
     <Accordion allowToggle>
       <AccordionItem style={{ border: 'none' }}>

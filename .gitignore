@@ -17,8 +17,3 @@ yarn-error.log*
 .playwright-mcp
 .serena
 MEMORY
-*.sh
-
-.github
-.dockerignore
-Dockerfile
