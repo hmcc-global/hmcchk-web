@@ -26,8 +26,7 @@ const { fontSizes, fontFamilies } = typography;
 
 const opportunities = [
   {
-    // TODO-aparedan: Please put down some photos from the Mother's Choice event here
-    title: "Mother’s Choice Self Discovery Workshop",
+    title: 'Mother’s Choice Self Discovery Workshop',
     date: 'Saturday, Apr 25, 2026',
     images: [
       {
@@ -44,21 +43,20 @@ const opportunities = [
       },
       {
         src: '/images/shine/mothers-choice-workshop-group-discussion.jpg',
-        alt: "Participants engaging in a workshop group discussion.",
+        alt: 'Participants engaging in a workshop group discussion.',
       },
       {
         src: '/images/shine/mothers-choice-workshop-team-activity.jpg',
-        alt: "Another group of attendees collaborating during the self-discovery session.",
+        alt: 'Another group of attendees collaborating during the self-discovery session.',
       },
       {
         src: '/images/shine/mothers-choice-workshop-speaker-insights.jpg',
-        alt: "Speaker sharing a presentation slide with the workshop audience.",
+        alt: 'Speaker sharing a presentation slide with the workshop audience.',
       },
     ],
   },
   {
-    // TODO-aparedan: Please put down some photos from the Mother's Choice event here
-    title: "English Academy",
+    title: 'English Academy',
     date: 'Mar - Jun, 2026',
     images: [
       {
@@ -88,8 +86,7 @@ const opportunities = [
     ],
   },
   {
-    // TODO-aparedan: Please put down some photos from the Mother's Choice event here
-    title: "CityServe",
+    title: 'CityServe',
     date: 'Mar 20-22, 2026',
     images: [
       {
@@ -119,7 +116,6 @@ const opportunities = [
     ],
   },
   {
-    // TODO-aparedan: Please put down some photos from the Mother's Choice event here
     title: "Mother's Choice Family Fun Fest",
     date: 'Sunday, Jan 25, 2026',
     images: [
