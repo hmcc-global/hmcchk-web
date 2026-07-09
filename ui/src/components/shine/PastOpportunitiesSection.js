@@ -27,8 +27,8 @@ const { fontSizes, fontFamilies } = typography;
 const opportunities = [
   {
     // TODO-aparedan: Please put down some photos from the Mother's Choice event here
-    title: "Mother's Choice Self Discovery Workshop",
-    date: 'Sunday, Apr 25, 2026',
+    title: "Mother’s Choice Self Discovery Workshop",
+    date: 'Saturday, Apr 25, 2026',
     images: [
       {
         src: '/images/shine/mothers-choice-self-discovery-workshop-group.jpg',
@@ -62,34 +62,34 @@ const opportunities = [
     date: 'Mar - Jun, 2026',
     images: [
       {
-        src: '/images/shine/motherschoice-1.jpg',
-        alt: "Mother's Choice Family Fun Fest highlight",
+        src: '/images/shine/english-academy-2026-kids-vocabulary-lesson.jpg',
+        alt: 'Children learning new vocabulary words at English Academy 2026.',
       },
       {
-        src: '/images/shine/motherschoice-2.jpg',
-        alt: "Mother's Choice Family Fun Fest gathering",
+        src: '/images/shine/english-academy-2026-kids-english-worksheet.jpg',
+        alt: 'Students completing an English grammar worksheet in class.',
       },
       {
-        src: '/images/shine/motherschoice-3.jpg',
-        alt: "Mother's Choice Family Fun Fest activity",
+        src: '/images/shine/english-academy-2026-children-group-activity.jpg',
+        alt: 'Group of children participating in a classroom learning activity.',
       },
       {
-        src: '/images/shine/motherschoice-4.jpg',
-        alt: "Mother's Choice Family Fun Fest volunteers",
+        src: '/images/shine/english-academy-2026-adult-digital-literacy.jpg',
+        alt: 'Adults learning essential tech and computer skills at English Academy.',
       },
       {
-        src: '/images/shine/motherschoice-5.jpg',
-        alt: "Mother's Choice Family Fun Fest support",
+        src: '/images/shine/english-academy-2026-children-prayer-time.jpg',
+        alt: 'Children gathering for a moment of prayer during the academy.',
       },
       {
-        src: '/images/shine/motherschoice-6.jpg',
-        alt: "Mother's Choice Family Fun Fest extra moment",
+        src: '/images/shine/english-academy-2026-kids-creative-crafts.jpg',
+        alt: 'Kids working on creative arts and crafts projects.',
       },
     ],
   },
   {
     // TODO-aparedan: Please put down some photos from the Mother's Choice event here
-    title: "CityServe 2026",
+    title: "CityServe",
     date: 'Mar 20-22, 2026',
     images: [
       {
