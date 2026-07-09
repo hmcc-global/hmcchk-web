@@ -27,6 +27,99 @@ const { fontSizes, fontFamilies } = typography;
 const opportunities = [
   {
     // TODO-aparedan: Please put down some photos from the Mother's Choice event here
+    title: "Mother's Choice Workshop",
+    date: 'Sunday, Jan 25, 2026',
+    images: [
+      {
+        src: '/images/shine/motherschoice-1.jpg',
+        alt: "Mother's Choice Family Fun Fest highlight",
+      },
+      {
+        src: '/images/shine/motherschoice-2.jpg',
+        alt: "Mother's Choice Family Fun Fest gathering",
+      },
+      {
+        src: '/images/shine/motherschoice-3.jpg',
+        alt: "Mother's Choice Family Fun Fest activity",
+      },
+      {
+        src: '/images/shine/motherschoice-4.jpg',
+        alt: "Mother's Choice Family Fun Fest volunteers",
+      },
+      {
+        src: '/images/shine/motherschoice-5.jpg',
+        alt: "Mother's Choice Family Fun Fest support",
+      },
+      {
+        src: '/images/shine/motherschoice-6.jpg',
+        alt: "Mother's Choice Family Fun Fest extra moment",
+      },
+    ],
+  },
+  {
+    // TODO-aparedan: Please put down some photos from the Mother's Choice event here
+    title: "English Academy",
+    date: 'Sunday, Jan 25, 2026',
+    images: [
+      {
+        src: '/images/shine/motherschoice-1.jpg',
+        alt: "Mother's Choice Family Fun Fest highlight",
+      },
+      {
+        src: '/images/shine/motherschoice-2.jpg',
+        alt: "Mother's Choice Family Fun Fest gathering",
+      },
+      {
+        src: '/images/shine/motherschoice-3.jpg',
+        alt: "Mother's Choice Family Fun Fest activity",
+      },
+      {
+        src: '/images/shine/motherschoice-4.jpg',
+        alt: "Mother's Choice Family Fun Fest volunteers",
+      },
+      {
+        src: '/images/shine/motherschoice-5.jpg',
+        alt: "Mother's Choice Family Fun Fest support",
+      },
+      {
+        src: '/images/shine/motherschoice-6.jpg',
+        alt: "Mother's Choice Family Fun Fest extra moment",
+      },
+    ],
+  },
+  {
+    // TODO-aparedan: Please put down some photos from the Mother's Choice event here
+    title: "CityServe 2026",
+    date: 'Sunday, Jan 25, 2026',
+    images: [
+      {
+        src: '/images/shine/cityserve-2026-1.jpeg',
+        alt: "CityServe 2026 highlight",
+      },
+      {
+        src: '/images/shine/motherschoice-2.jpg',
+        alt: "Mother's Choice Family Fun Fest gathering",
+      },
+      {
+        src: '/images/shine/motherschoice-3.jpg',
+        alt: "Mother's Choice Family Fun Fest activity",
+      },
+      {
+        src: '/images/shine/motherschoice-4.jpg',
+        alt: "Mother's Choice Family Fun Fest volunteers",
+      },
+      {
+        src: '/images/shine/motherschoice-5.jpg',
+        alt: "Mother's Choice Family Fun Fest support",
+      },
+      {
+        src: '/images/shine/motherschoice-6.jpg',
+        alt: "Mother's Choice Family Fun Fest extra moment",
+      },
+    ],
+  },
+  {
+    // TODO-aparedan: Please put down some photos from the Mother's Choice event here
     title: "Mother's Choice Family Fun Fest",
     date: 'Sunday, Jan 25, 2026',
     images: [
