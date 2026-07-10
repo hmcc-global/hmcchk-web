@@ -26,7 +26,7 @@ jobs:
       - name: "Setup Node"
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 20.19.0 # Vite 7 engine floor is ^20.19.0; bare "20" can resolve older from toolcache
       - name: "Install Dependencies in root folder"
         run: yarn install
       - name: "Install Dependencies in server/ folder"
