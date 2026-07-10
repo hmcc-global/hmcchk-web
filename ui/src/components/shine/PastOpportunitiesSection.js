@@ -26,7 +26,96 @@ const { fontSizes, fontFamilies } = typography;
 
 const opportunities = [
   {
-    // TODO-aparedan: Please put down some photos from the Mother's Choice event here
+    title: 'Mother’s Choice Self Discovery Workshop',
+    date: 'Saturday, Apr 25, 2026',
+    images: [
+      {
+        src: '/images/shine/mothers-choice-self-discovery-workshop-group.jpg',
+        alt: "Group photo of participants at the Mother's Choice self-discovery workshop.",
+      },
+      {
+        src: '/images/shine/mothers-choice-self-discovery-workshop-learning.jpg',
+        alt: "Attendees learning during the Mother's Choice self-discovery session.",
+      },
+      {
+        src: '/images/shine/mothers-choice-workshop-speaker-sharing.jpg',
+        alt: "Guest speaker sharing insights at the Mother's Choice workshop.",
+      },
+      {
+        src: '/images/shine/mothers-choice-workshop-group-discussion.jpg',
+        alt: 'Participants engaging in a workshop group discussion.',
+      },
+      {
+        src: '/images/shine/mothers-choice-workshop-team-activity.jpg',
+        alt: 'Another group of attendees collaborating during the self-discovery session.',
+      },
+      {
+        src: '/images/shine/mothers-choice-workshop-speaker-insights.jpg',
+        alt: 'Speaker sharing a presentation slide with the workshop audience.',
+      },
+    ],
+  },
+  {
+    title: 'English Academy',
+    date: 'Mar - Jun, 2026',
+    images: [
+      {
+        src: '/images/shine/english-academy-2026-kids-vocabulary-lesson.jpg',
+        alt: 'Children learning new vocabulary words at English Academy 2026.',
+      },
+      {
+        src: '/images/shine/english-academy-2026-kids-english-worksheet.jpg',
+        alt: 'Students completing an English grammar worksheet in class.',
+      },
+      {
+        src: '/images/shine/english-academy-2026-children-group-activity.jpg',
+        alt: 'Group of children participating in a classroom learning activity.',
+      },
+      {
+        src: '/images/shine/english-academy-2026-adult-digital-literacy.jpg',
+        alt: 'Adults learning essential tech and computer skills at English Academy.',
+      },
+      {
+        src: '/images/shine/english-academy-2026-children-prayer-time.jpg',
+        alt: 'Children gathering for a moment of prayer during the academy.',
+      },
+      {
+        src: '/images/shine/english-academy-2026-kids-creative-crafts.jpg',
+        alt: 'Kids working on creative arts and crafts projects.',
+      },
+    ],
+  },
+  {
+    title: 'CityServe',
+    date: 'Mar 20-22, 2026',
+    images: [
+      {
+        src: '/images/shine/cityserve-2026-kids-arts-crafts.jpg',
+        alt: 'Kids arts and crafts at CityServe 2026.',
+      },
+      {
+        src: '/images/shine/cityserve-2026-community-outreach.jpg',
+        alt: 'Volunteers on a CityServe 2026 community outreach visit.',
+      },
+      {
+        src: '/images/shine/cityserve-2026-helper-appreciation.jpg',
+        alt: 'Domestic helper appreciation event at CityServe 2026.',
+      },
+      {
+        src: '/images/shine/cityserve-2026-kids-coloring.jpg',
+        alt: 'Children coloring at the CityServe 2026 workshop.',
+      },
+      {
+        src: '/images/shine/cityserve-2026-kids-painting.jpg',
+        alt: 'Kids painting at the CityServe 2026 art booth.',
+      },
+      {
+        src: '/images/shine/cityserve-2026-children-group.jpg',
+        alt: 'Group of kids with their CityServe 2026 art projects.',
+      },
+    ],
+  },
+  {
     title: "Mother's Choice Family Fun Fest",
     date: 'Sunday, Jan 25, 2026',
     images: [
