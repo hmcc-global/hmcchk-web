@@ -12,6 +12,8 @@ Run these from `ui/` (install deps first with `yarn`):
 
 Starts the Vite dev server at [http://localhost:3000](http://localhost:3000) with hot module replacement / Fast Refresh. `/api/*` requests are proxied to the Sails backend on `:1337` (see `server.proxy` in `vite.config.js` — this replaced CRA's `src/setupProxy.js`).
 
+To point the proxy at a different backend (e.g. production — **don't do this unless you know what you're doing**), temporarily change the `server.proxy` entry to `{ target: 'https://<backend-host>', changeOrigin: true }`. Don't commit that change.
+
 ### `yarn build`
 
 Production build into `ui/build/` (kept as `build/` rather than Vite's default `dist/` so CI's `mv ui/build/* server/client` step is unchanged).
