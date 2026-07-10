@@ -19,7 +19,7 @@ const onScriptLoaded = () => {
 };
 
 ReactDOM.render(
-  <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID} onScriptLoadSuccess={onScriptLoaded}>
+  <GoogleOAuthProvider clientId={import.meta.env.REACT_APP_GOOGLE_CLIENT_ID} onScriptLoadSuccess={onScriptLoaded}>
     <React.StrictMode>
       <ChakraProvider theme={customTheme}>
         <App />

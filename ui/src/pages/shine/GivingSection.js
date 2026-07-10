@@ -2,7 +2,6 @@ import { useState } from 'react';
 import {
   Box,
   Center,
-  Container,
   Flex,
   Heading,
   Text,
@@ -20,7 +19,6 @@ import {
   Stack,
   SimpleGrid,
 } from 'components';
-import { MAX } from 'uuid';
 
 import { typography } from './typography';
 
