@@ -20,7 +20,6 @@ import {
   Stack,
   SimpleGrid,
 } from '@chakra-ui/react';
-import { MAX } from 'uuid';
 
 import { typography } from './typography';
 

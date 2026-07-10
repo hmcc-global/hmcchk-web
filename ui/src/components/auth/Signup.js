@@ -447,7 +447,7 @@ const Signup = (props) => {
               </VStack>
               <VStack align="center">
                 <ReCAPTCHA
-                  sitekey={process.env.REACT_APP_CAPTCHA}
+                  sitekey={import.meta.env.REACT_APP_CAPTCHA}
                   style={recaptchaStyle()}
                 />
                 {error && (
