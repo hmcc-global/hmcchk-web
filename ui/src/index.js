@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -18,15 +18,15 @@ const onScriptLoaded = () => {
   document.body.appendChild(selectScriptTag);
 };
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root'));
+root.render(
   <GoogleOAuthProvider clientId={import.meta.env.REACT_APP_GOOGLE_CLIENT_ID} onScriptLoadSuccess={onScriptLoaded}>
     <React.StrictMode>
       <ChakraProvider theme={customTheme}>
         <App />
       </ChakraProvider>
     </React.StrictMode>
-  </GoogleOAuthProvider>,
-  document.getElementById('root')
+  </GoogleOAuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
