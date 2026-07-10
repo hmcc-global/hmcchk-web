@@ -22,12 +22,8 @@ export default defineConfig({
   server: {
     port: 3000, // keep CRA's dev port
     proxy: {
-      '/api': 'http://localhost:1337', // replaces src/setupProxy.js
-      // To connect to production backend. DON'T USE THIS IN DEV UNLESS YOU KNOW WHAT YOU'RE DOING
-      // '/api': {
-      //   target: 'https://hk.hmccglobal.org',
-      //   changeOrigin: true,
-      // },
+      // replaces src/setupProxy.js — see ui/README.md for proxying to another backend
+      '/api': 'http://localhost:1337',
     },
   },
   define: {

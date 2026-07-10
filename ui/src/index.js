@@ -8,8 +8,12 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import customTheme from './theme';
 
 const onScriptLoaded = () => {
-  document.body.removeChild(document.querySelector('[src="https://accounts.google.com/gsi/client"]'));
-  document.body.removeChild(document.querySelector('[src="https://accounts.google.com/gsi/select"]'));
+  // querySelector can return null (e.g. the gsi/select script is never present) —
+  // removeChild on null throws, so guard each removal
+  const gsiClient = document.querySelector('[src="https://accounts.google.com/gsi/client"]');
+  const gsiSelect = document.querySelector('[src="https://accounts.google.com/gsi/select"]');
+  if (gsiClient) document.body.removeChild(gsiClient);
+  if (gsiSelect) document.body.removeChild(gsiSelect);
   const scriptTag = document.createElement('script');
   const selectScriptTag = document.createElement('script');
   scriptTag.src = "https://accounts.google.com/gsi/client?hl=en";

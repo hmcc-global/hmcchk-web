@@ -20,11 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout Git to branch: ${{ github.ref_name }}"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: "${{ github.ref_name }}"
       - name: "Setup Node"
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20.19.0 # Vite 7 engine floor is ^20.19.0; bare "20" can resolve older from toolcache
       - name: "Install Dependencies in root folder"
@@ -34,7 +34,7 @@ jobs:
           cd server && yarn install
       - name: "Install Dependencies in ui/ folder"
         run: |
-         cd ui && yarn install
+          cd ui && yarn install
       - name: "Create ui/ .env"
         run: |
           echo "${{ secrets.UI_ENV }}" > ui/.env
