@@ -139,6 +139,8 @@ const FormManager = (props) => {
         id: formItem.id,
         formFields: formItem.formFields,
         isPaymentRequired: formItem.isPaymentRequired,
+        isClass: formItem.isClass,
+        courses: formItem.courses,
       },
     });
   };

@@ -19,6 +19,10 @@ import { paymentMethodList } from '../../helpers/lists';
 import CustomDateEditor from '../ag-grid-editors/CustomDateEditor';
 import { CgUndo, CgRedo } from 'react-icons/cg';
 import AdminPaymentDataModal from './AdminPaymentDataModal';
+import {
+  createClassTrackerColumns,
+  parseCourseColId,
+} from './classTrackingColumns';
 
 const pollFreqInSecs = 5 * 60;
 
@@ -31,6 +35,8 @@ export default function AdminFormDataViewer(props) {
   const formId = state.id;
   const formFields = state.formFields;
   const isPaymentRequired = state.isPaymentRequired;
+  const isClass = state.isClass ?? false;
+  const courses = state.courses ?? [];
 
   let lastUpdatedTime = useRef();
 
@@ -156,7 +162,7 @@ export default function AdminFormDataViewer(props) {
 
   const getUserData = async () => {
     try {
-      const { data } = await axios.get('/api/users/get'); // destruct assignment
+      const { data } = await axios.get('/api/users/get'); // destructuring assignment
       return data;
     } catch (err) {
       console.log(err);
@@ -194,6 +200,11 @@ export default function AdminFormDataViewer(props) {
           temp['paymentData'] = item.paymentData[0];
         }
 
+        // Populate form data with class tracking data if form is a class
+        if (item.classTrackingData && item.classTrackingData.length > 0) {
+          temp['classTrackingData'] = item.classTrackingData[0];
+        }
+
         if ('address' in temp) {
           let addressString = [];
           for (const property in temp['address']) {
@@ -220,28 +231,42 @@ export default function AdminFormDataViewer(props) {
   const checkIfUpdated = useCallback(
     async (updateData = true) => {
       try {
-        const modelName = `paymentData-${formId}`;
-        const { data } = await axios.get('/api/last-updated', {
-          params: { modelName },
-        });
-        const dateObj = DateTime.fromISO(data);
-        if (!lastUpdatedTime.current || dateObj > lastUpdatedTime.current) {
+        const modelNames = [];
+        if (isPaymentRequired) modelNames.push(`paymentData-${formId}`);
+        if (isClass) modelNames.push(`classTracking-${formId}`);
+        if (modelNames.length === 0) return;
+
+        let latest = lastUpdatedTime.current;
+        let changed = false;
+        for (const modelName of modelNames) {
+          const { data } = await axios.get('/api/last-updated', {
+            params: { modelName },
+          });
+          const dateObj = DateTime.fromISO(data);
+          if (!latest || dateObj > latest) {
+            latest = dateObj;
+            changed = true;
+          }
+        }
+
+        if (changed) {
           updateData && getData();
-          lastUpdatedTime.current = dateObj;
+          lastUpdatedTime.current = latest;
         }
       } catch (err) {
         console.log(err);
       }
     },
-    [formId, getData]
+    [formId, getData, isPaymentRequired, isClass]
   );
 
   useEffect(() => {
     getData();
     checkIfUpdated(false);
-    setInterval(() => {
+    const intervalId = setInterval(() => {
       checkIfUpdated();
     }, pollFreqInSecs * 1000);
+    return () => clearInterval(intervalId);
   }, [checkIfUpdated, getData]);
 
   useEffect(() => {
@@ -479,6 +504,17 @@ export default function AdminFormDataViewer(props) {
       columnDefs.push(createPaymentDataColumns());
     }
 
+    if (isClass) {
+      columnDefs.push(
+        createClassTrackerColumns({
+          courses,
+          dateFormatter,
+          dateCellProps: DateCellProps,
+          mediumTextEditorProps: MediumTextEditorProps,
+        })
+      );
+    }
+
     return columnDefs;
   };
 
@@ -511,8 +547,59 @@ export default function AdminFormDataViewer(props) {
     }
   };
 
+  // Call API to update class tracking data
+  const updateClassTrackingData = async (data) => {
+    const res = await axios.put('/api/classTrackingData/update', {
+      ...data,
+    });
+
+    if (res.status !== 200) {
+      toast({
+        description: 'Something went wrong, please refresh and try again..',
+        status: 'error',
+        duration: 5000,
+      });
+    }
+  };
+
+  // Platform/type course cells are read-only (set at sign-up). If an admin
+  // double-clicks one to edit it, nudge them toward the Form Editor instead.
+  const onCellDoubleClicked = (e) => {
+    const colId = e?.colDef?.colId;
+    if (!colId || !colId.startsWith('course_')) return;
+
+    const { field } = parseCourseColId(colId);
+    if (field === 'platform' || field === 'type') {
+      toast({
+        title: "This field can't be edited here",
+        description:
+          "Platform and type are recorded when the registrant signs up. To " +
+          "change a course's platform or type, edit the form in the Form Editor.",
+        status: 'info',
+        duration: 8000,
+        isClosable: true,
+      });
+    }
+  };
+
   const onCellValueChanged = async (p) => {
-    if (p && p.colDef) {
+    if (!p || !p.colDef) return;
+
+    if (p.colDef.colId && p.colDef.colId.startsWith('course_')) {
+      if (p.data.classTrackingData) {
+        const { courseId, field } = parseCourseColId(p.colDef.colId);
+        const payload = {
+          id: p.data.classTrackingData.id,
+          courseId,
+          field,
+          value: p.newValue,
+        };
+        await updateClassTrackingData(payload);
+      }
+      return;
+    }
+
+    if (p.data.paymentData) {
       const payload = {
         id: p.data.paymentData.id,
         [p.colDef.colId]: p.newValue,
@@ -676,14 +763,14 @@ export default function AdminFormDataViewer(props) {
           </Button>
         </HStack>
         <Box my="4">
-          <Text color="Teal">
+          <Text color="teal">
             *date filter indicates midnight of (eg. from 20/01 00:00 to 21/01
             00:00)
           </Text>
         </Box>
-        {/* Enable Undo / Redo if is a Paid Form */}
+        {/* Enable Undo / Redo if is a Paid Form or a Class form */}
         <div>
-          {isPaidForm ? (
+          {isPaidForm || isClass ? (
             <HStack m="2" w="100%">
               <Tooltip label="Ctrl/Cmd + Z">
                 <Button onClick={undo} leftIcon={<CgUndo />}>
@@ -709,6 +796,7 @@ export default function AdminFormDataViewer(props) {
           tooltipShowDelay={0}
           onFirstDataRendered={onFirstDataRendered}
           onCellValueChanged={onCellValueChanged}
+          onCellDoubleClicked={onCellDoubleClicked}
           undoRedoCellEditing={undoRedoCellEditing}
           undoRedoCellEditingLimit={undoRedoCellEditingLimit}
           enableCellChangeFlash={enableCellChangeFlash}
@@ -716,12 +804,14 @@ export default function AdminFormDataViewer(props) {
           suppressRowClickSelection={true}
           sideBar={{ toolPanels: ['columns', 'filters'] }}
         />
-        <Text>
-          Last updated:{' '}
-          {DateTime.fromISO(lastUpdatedTime.current).toFormat(
-            'dd MMM yyyy, HH:mm:ss'
-          )}
-        </Text>
+        {lastUpdatedTime.current && (
+          <Text>
+            Last updated:{' '}
+            {DateTime.fromISO(lastUpdatedTime.current).toFormat(
+              'dd MMM yyyy, HH:mm:ss'
+            )}
+          </Text>
+        )}
       </div>
     </>
   );

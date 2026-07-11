@@ -1,6 +1,7 @@
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
+import { v4 as uuidv4 } from 'uuid';
 import {
   Stack,
   Container,
@@ -22,12 +23,24 @@ import {
   Divider,
   Alert,
   AlertIcon,
+  HStack,
+  IconButton,
+  Text,
 } from '@chakra-ui/react';
+import { FiTrash2, FiPlus } from 'react-icons/fi';
 import FormEditor from './FormEditor';
 import ExternalFormEditor from './ExternalFormEditor';
 
 const isAlertTypeNone = (alertType) =>
   alertType == null || alertType === '' || alertType === 'None';
+
+const newCourse = () => ({
+  courseId: uuidv4(),
+  name: '',
+  platform: '',
+  type: 'Online',
+  isActive: true,
+});
 
 const FormEditorContainer = (props) => {
   const {
@@ -72,6 +85,10 @@ const FormEditorContainer = (props) => {
   const [paymentEmailSubject, setPaymentEmailSubject] = useState('');
   const [paymentCcEmail, setPaymentCcEmail] = useState('');
 
+  // Class variables
+  const [isClass, setIsClass] = useState(false);
+  const [courses, setCourses] = useState([]);
+
   const resetFormEditorCallback = () => {
     reset();
     setValue('formName', null);
@@ -79,6 +96,7 @@ const FormEditorContainer = (props) => {
     setValue('paymentConfirmationEmailTemplate', '');
     setValue('paymentEmailSubject', '');
     setValue('paymentCcEmail', '');
+    setValue('isClass', false);
     setValue('formDescription', null);
     setValue('formImage', null);
     setValue('formType', null);
@@ -97,6 +115,8 @@ const FormEditorContainer = (props) => {
     setPaymentConfirmationEmailTemplate(null);
     setPaymentEmailSubject('');
     setPaymentCcEmail('');
+    setIsClass(false);
+    setCourses([]);
     setFormDescription('');
     setFormImage(null);
     setFormType('internal');
@@ -129,6 +149,7 @@ const FormEditorContainer = (props) => {
       );
       setValue('paymentEmailSubject', data.paymentEmailSubject);
       setValue('paymentCcEmail', paymentCcEmail);
+      setValue('isClass', data.isClass);
       setValue('formDescription', data.formDescription);
       setValue('formImage', data.formImage);
       setValue('formType', data.formType);
@@ -154,6 +175,13 @@ const FormEditorContainer = (props) => {
       );
       setPaymentEmailSubject(data.paymentEmailSubject);
       setPaymentCcEmail(paymentCcEmail);
+      setIsClass(data.isClass);
+      // courses isn't a react-hook-form field (it's edited directly via
+      // addCourse/removeCourse/updateCourseField), so data.courses is only
+      // ever populated when this runs off a loaded editFormData record, not
+      // off the top form's onSubmit. Fall back to the current state instead
+      // of [] so clicking "Create/Update Form" doesn't wipe staged courses.
+      setCourses(data.courses ?? courses);
       setFormDescription(data.formDescription);
       setFormImage(data.formImage);
       setFormType(data.formType);
@@ -172,6 +200,28 @@ const FormEditorContainer = (props) => {
 
   const onSubmit = (data, e) => {
     setFormManagerElements(data);
+  };
+
+  const addCourse = () => {
+    setCourses([...courses, newCourse()]);
+  };
+
+  const removeCourse = (courseId) => {
+    if (
+      window.confirm(
+        'Are you sure? If this course already has registrant tracking data, the server will reject this removal — deactivate the course instead.'
+      )
+    ) {
+      setCourses(courses.filter((course) => course.courseId !== courseId));
+    }
+  };
+
+  const updateCourseField = (courseId, field, value) => {
+    setCourses(
+      courses.map((course) =>
+        course.courseId === courseId ? { ...course, [field]: value } : course
+      )
+    );
   };
 
   const onClose = () => {
@@ -373,6 +423,122 @@ const FormEditorContainer = (props) => {
                 )}
                 {ftFlag === 'internal' && (
                   <Stack spacing="2">
+                    <Divider />
+                    <Heading as="h4" size="md">
+                      Class Details
+                    </Heading>
+                    <Alert status="info">
+                      <AlertIcon />
+                      Course count can only grow — once registrants have
+                      tracking data on a course, it can only be deactivated
+                      (archived), never removed.
+                    </Alert>
+
+                    <FormControl>
+                      <FormLabel>Is this a Class?</FormLabel>
+                      <Controller
+                        control={control}
+                        name="isClass"
+                        defaultValue={false}
+                        render={({ field: { onChange, value, ref } }) => (
+                          <Switch
+                            onChange={(e) => {
+                              setIsClass(e.target.checked);
+                              onChange(e);
+                            }}
+                            ref={ref}
+                            isChecked={value}
+                          >
+                            {value ? 'Yes' : 'No'}
+                          </Switch>
+                        )}
+                      />
+                    </FormControl>
+                    {isClass && (
+                      <Stack spacing="3">
+                        {courses.map((course) => (
+                          <HStack
+                            key={course.courseId}
+                            borderWidth="1px"
+                            borderRadius="md"
+                            p="2"
+                          >
+                            <Input
+                              placeholder="Course name"
+                              value={course.name}
+                              onChange={(e) =>
+                                updateCourseField(
+                                  course.courseId,
+                                  'name',
+                                  e.target.value
+                                )
+                              }
+                            />
+                            <Input
+                              placeholder="Platform (e.g. Coassemble)"
+                              value={course.platform}
+                              onChange={(e) =>
+                                updateCourseField(
+                                  course.courseId,
+                                  'platform',
+                                  e.target.value
+                                )
+                              }
+                            />
+                            <Select
+                              value={course.type}
+                              onChange={(e) =>
+                                updateCourseField(
+                                  course.courseId,
+                                  'type',
+                                  e.target.value
+                                )
+                              }
+                            >
+                              <option value="Online">Online</option>
+                              <option value="Offline">Offline</option>
+                            </Select>
+                            <FormLabel m="0" whiteSpace="nowrap">
+                              Active
+                            </FormLabel>
+                            <Switch
+                              isChecked={course.isActive}
+                              onChange={(e) =>
+                                updateCourseField(
+                                  course.courseId,
+                                  'isActive',
+                                  e.target.checked
+                                )
+                              }
+                            />
+                            <IconButton
+                              aria-label="Remove course"
+                              icon={<FiTrash2 />}
+                              onClick={() => removeCourse(course.courseId)}
+                              variant="ghost"
+                              colorScheme="red"
+                            />
+                          </HStack>
+                        ))}
+                        <Button
+                          onClick={addCourse}
+                          leftIcon={<FiPlus />}
+                          alignSelf="start"
+                        >
+                          Add Course
+                        </Button>
+                        {courses.length === 0 && (
+                          <Text color="gray.500">
+                            No courses yet — add at least one course for this
+                            class.
+                          </Text>
+                        )}
+                      </Stack>
+                    )}
+                  </Stack>
+                )}
+                {ftFlag === 'internal' && (
+                  <Stack spacing="2">
                     <Heading as="h4" size="md">
                       Form Prerequisites
                     </Heading>
@@ -557,6 +723,8 @@ const FormEditorContainer = (props) => {
                     paymentConfirmationEmailTemplate,
                   paymentEmailSubject: paymentEmailSubject,
                   paymentCcEmail: paymentCcEmail,
+                  isClass: isClass,
+                  courses: courses,
                 }}
                 existingFormFieldsData={editFormData}
                 resetFormEditorCallback={resetFormEditorCallback}
