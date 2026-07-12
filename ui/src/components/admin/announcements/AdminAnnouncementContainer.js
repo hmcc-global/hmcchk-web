@@ -31,7 +31,7 @@ import { DateTime } from 'luxon';
 export default function AdminAnnouncementContainer(props) {
   const toast = useToast();
   const { user } = props;
-  const today = new DateTime.now();
+  const today = DateTime.now();
 
   const [announcementList, setAnnouncementList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
