@@ -1,6 +1,6 @@
 import React from 'react';
-import { Flex, VStack, Text, Link, Container, Image } from '@chakra-ui/react';
-import { ChevronRightIcon } from '@chakra-ui/icons';
+import { Flex, VStack, Text, Link, Container, Image } from 'components/chakra';
+import { ChevronRightIcon } from '../icons';
 import { useDispatch } from 'react-redux';
 import { signout } from '../../reducers/userSlice';
 

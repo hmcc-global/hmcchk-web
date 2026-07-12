@@ -1,11 +1,11 @@
 import { BrowserRouter } from 'react-router-dom';
-import MainContainer from './components/MainContainer';
+import MainContainer from './pages/MainContainer';
 import { store, persistor } from './store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import NavBar from './components/NavigationBar/NavBar';
-import { Flex } from '@chakra-ui/react';
-import MobileNavBar from './components/NavigationBar/MobileNavBar';
+import NavBar from 'components/NavigationBar/NavBar';
+import { Flex } from 'components';
+import MobileNavBar from 'components/NavigationBar/MobileNavBar';
 
 const App = () => {
   return (

@@ -46,25 +46,39 @@ npx prettier --write "ui/src/**/*.{js,jsx}"
 
 ### File Organization
 
-- **Components**: `ui/src/components/` - organized by feature/folder
+- **Pages**: `ui/src/pages/` - routed pages, organized by feature/folder
   - PascalCase filenames: `HomeContainer.js`, `HeroSection.js`
-- **Helpers/Utils**: `ui/src/components/helpers/` - camelCase filenames
+  - Components used by only ONE page stay inside that page's folder
+- **Components library**: `ui/src/components/` - the single import source for UI
+  - `components/chakra/` is the ONLY place allowed to import `@chakra-ui/react`
+    (enforced by ESLint `no-restricted-imports`); `components/icons.js` is the
+    only place for `@chakra-ui/icons`. UI-library changes (the planned Tailwind
+    migration, or any Chakra bump) are absorbed there via named overrides —
+    see `ui/src/components/README.md`
+  - Reusable (2+ pages) components live here: `import { Box } from 'components'`,
+    `import FileUpload from 'components/FileUpload'`
+- **Utils**: `ui/src/utils/` - non-UI shared logic (customAxios, domain helpers) - camelCase filenames
 - **Constants**: Use dedicated files or constants at top of files
+- Absolute imports resolve from `ui/src` via `ui/jsconfig.json` (`baseUrl: "src"`)
 
 ### Imports
 
 ```javascript
-// 1. External packages (React, Chakra UI, etc.)
-import { Flex, Box } from '@chakra-ui/react';
+// 1. External packages (React, etc.) and the components library
+import { Flex, Box, useToast } from 'components';
+import { ChevronLeftIcon } from 'components/icons';
 import { useState, useEffect } from 'react';
 
-// 2. Relative imports (local components)
+// 2. Shared utils (absolute from src) and relative imports (local components)
+import { customAxios as axios } from 'utils/customAxios';
 import HeroSection from './HeroSection';
-import { customAxios as axios } from '../helpers/customAxios';
 
 // 3. Assets/resources
 import logo from './assets/logo.png';
 ```
+
+Never import `@chakra-ui/react` or `@chakra-ui/icons` directly — always go
+through `components` / `components/icons`.
 
 ### Component Structure
 
