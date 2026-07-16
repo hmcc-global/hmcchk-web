@@ -12,6 +12,7 @@ import {
   Button,
 } from '@chakra-ui/react';
 import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaPlay, FaPause } from 'react-icons/fa';
 import PrayCard from './cards/PrayCard';
 import GiveCard from './cards/GiveCard';
@@ -28,6 +29,15 @@ const CARDS = [
 
 const SWIPE_THRESHOLD_PX = 50;
 
+// Slide direction is a ref (not state) since it only needs to be read at the
+// moment the next AnimatePresence render picks it up via `custom` — bumping
+// it doesn't need to trigger its own re-render.
+const slideVariants = {
+  enter: (direction) => ({ x: direction > 0 ? 48 : -48, opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: (direction) => ({ x: direction > 0 ? -48 : 48, opacity: 0 }),
+};
+
 const WaysToParticipate = () => {
   const isMobile = useBreakpointValue(
     { base: true, md: false },
@@ -37,6 +47,12 @@ const WaysToParticipate = () => {
   const [isPaused, setIsPaused] = useState(false);
   const carouselRef = useRef(null);
   const touchStart = useRef(null);
+  const direction = useRef(1);
+
+  const goToCard = (index) => {
+    direction.current = index >= currentCardIndex ? 1 : -1;
+    setCurrentCardIndex(index);
+  };
   useEffect(() => {
     if (!isMobile) return undefined;
 
@@ -72,6 +88,7 @@ const WaysToParticipate = () => {
         return;
       }
 
+      direction.current = dx < 0 ? 1 : -1;
       setCurrentCardIndex((prev) =>
         dx < 0
           ? (prev + 1) % CARDS.length
@@ -94,6 +111,7 @@ const WaysToParticipate = () => {
     if (!isMobile || isPaused) return undefined;
 
     const interval = setInterval(() => {
+      direction.current = 1;
       setCurrentCardIndex((prev) => (prev + 1) % CARDS.length);
     }, 5000);
 
@@ -119,7 +137,7 @@ const WaysToParticipate = () => {
             }
             transition="all 0.3s ease"
             flexShrink={0}
-            onClick={() => setCurrentCardIndex(index)}
+            onClick={() => goToCard(index)}
             _hover={{ opacity: 0.8 }}
             aria-label={`Go to slide ${index + 1}`}
             aria-current={index === currentCardIndex}
@@ -183,13 +201,30 @@ const WaysToParticipate = () => {
           ref={carouselRef}
           mx={{ base: '-1rem', md: 0 }}
           w={{ base: 'calc(100% + 2rem)', md: 'auto' }}
+          overflow="hidden"
           aria-live="polite"
           role="group"
           aria-roledescription="carousel"
           aria-label="Ways to participate"
-          touchAction="pan-y"
+          sx={{ touchAction: 'pan-y' }}
         >
-          <ActiveCard footer={carouselControls} />
+          {/* This project's framer-motion (v4) predates the `mode` prop —
+              `exitBeforeEnter` is the v4 equivalent. Without it, the
+              outgoing and incoming cards render simultaneously in normal
+              flow, briefly doubling the container's height. */}
+          <AnimatePresence exitBeforeEnter custom={direction.current} initial={false}>
+            <motion.div
+              key={currentCardIndex}
+              custom={direction.current}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.35, ease: 'easeInOut' }}
+            >
+              <ActiveCard footer={carouselControls} />
+            </motion.div>
+          </AnimatePresence>
         </Box>
       ) : (
         <Grid

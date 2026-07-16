@@ -17,6 +17,7 @@ const TenYearHeroSection = () => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
+        position="relative"
       >
         <Stack
           spacing={'1rem'}
@@ -26,16 +27,17 @@ const TenYearHeroSection = () => {
         >
           <Stack spacing={'0'} alignItems="center" textAlign="center">
             <Heading
-              as="h1"
+              as="h2"
               fontSize={{ base: '1.0625rem', lg: '2.5rem' }}
               fontWeight={700}
               fontFamily={'DMSans_Regular'}
               textTransform={'uppercase'}
+              letterSpacing={{ base: '0.03em', lg: '0.08em' }}
             >
               Harvest Mission Global
             </Heading>
             <Heading
-              as="h4"
+              as="h1"
               fontSize={{ base: '2.375rem', lg: '5.625rem' }}
               fontFamily={'DMSerifDisplay_Italic'}
               fontWeight={400}
@@ -62,6 +64,18 @@ const TenYearHeroSection = () => {
             make disciples, and reach the nations over the next 10 years.
           </Text>
         </Stack>
+
+        {/* Fades the hero photo into the white background of the next
+            section instead of cutting off with a hard edge. */}
+        <Box
+          position="absolute"
+          bottom={0}
+          left={0}
+          right={0}
+          h={{ base: '6rem', lg: '10rem' }}
+          bgGradient="linear(to-b, transparent, white)"
+          pointerEvents="none"
+        />
       </Box>
     </>
   );
