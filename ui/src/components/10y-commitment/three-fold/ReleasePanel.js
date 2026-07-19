@@ -24,7 +24,7 @@ import {
 // already legible in the photo, so it is not overlaid here (kept only as alt
 // text). Lifts (scales + deeper shadow) when hovered directly or when its
 // matching city tag is hovered.
-const CityCircle = ({ name, img, x, y, w, h, isHighlighted }) => (
+const CityCircle = ({ name, img, x, y, w, h, isHighlighted, onHover }) => (
   <MotionBox
     position="absolute"
     left={px(x, RELEASE_VIEW.w)}
@@ -41,19 +41,22 @@ const CityCircle = ({ name, img, x, y, w, h, isHighlighted }) => (
       boxShadow: '0 10px 28px rgba(40,60,160,0.55)',
     }}
     zIndex={isHighlighted ? 5 : undefined}
+    onMouseEnter={() => onHover(name)}
+    onMouseLeave={() => onHover(null)}
   >
     <Image src={`${RELEASE_IMG}/${img}`} alt={name} w="100%" h="100%" objectFit="cover" loading="lazy" />
   </MotionBox>
 );
 
-// Pill-shaped city tag (Figma Tag_city). Hovering turns it white with a
-// shadow and highlights the matching photo circle.
-const CityTag = ({ name, x, y, onHover }) => (
+// Pill-shaped city tag (Figma Tag_city). Hovering (either the tag itself or
+// its matching photo circle) turns it white with a shadow.
+const CityTag = ({ name, x, y, onHover, isHighlighted }) => (
   <Box
     position="absolute"
     left={px(x, RELEASE_VIEW.w)}
     top={px(y, RELEASE_VIEW.h)}
-    bg={RELEASE_TAG_BG}
+    bg={isHighlighted ? 'white' : RELEASE_TAG_BG}
+    boxShadow={isHighlighted ? '1px 1px 3.25px rgba(0,0,0,0.5)' : undefined}
     border={`1px solid ${RELEASE_TAG_BLUE}`}
     borderRadius="2.5rem"
     px={{ base: '0.35rem', md: '0.6rem' }}
@@ -157,7 +160,12 @@ const ReleasePanel = ({ onPrev, onNext }) => {
 
             {/* City tag pills */}
             {RELEASE_TAGS.map((t) => (
-              <CityTag key={t.name} {...t} onHover={setHoveredCity} />
+              <CityTag
+                key={t.name}
+                {...t}
+                onHover={setHoveredCity}
+                isHighlighted={hoveredCity === t.name}
+              />
             ))}
 
             {/* City photo circles */}
@@ -165,6 +173,7 @@ const ReleasePanel = ({ onPrev, onNext }) => {
               <CityCircle
                 key={c.name}
                 {...c}
+                onHover={setHoveredCity}
                 isHighlighted={hoveredCity === c.name}
               />
             ))}

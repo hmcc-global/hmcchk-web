@@ -4,17 +4,47 @@ import {
   Image,
 } from '@chakra-ui/react';
 import React from 'react';
+import { DateTime } from 'luxon';
 import BaseCard from './BaseCard';
 import ParticipateButton from './ParticipateButton';
 
-const PrayCard = ({ footer }) => {
-  const prayerCalendarLink = `https://calendar.google.com/calendar/r/eventedit?text=${encodeURIComponent(
+// The gathering always falls on the 10th, so the link should open on whichever
+// 10th is coming up next rather than "today" — once the 10th has passed this
+// month, that's next month's.
+const getNextTenth = () => {
+  const now = DateTime.now().setZone('Asia/Hong_Kong');
+  let nextTenth = now.set({
+    day: 10,
+    hour: 0,
+    minute: 0,
+    second: 0,
+    millisecond: 0,
+  });
+  if (now.day > 10) {
+    nextTenth = nextTenth.plus({ months: 1 });
+  }
+  return nextTenth;
+};
+
+const buildPrayerCalendarLink = () => {
+  const nextTenth = getNextTenth();
+  const dates = `${nextTenth.toFormat('yyyyMMdd')}/${nextTenth
+    .plus({ days: 1 })
+    .toFormat('yyyyMMdd')}`;
+
+  return `https://calendar.google.com/calendar/r/eventedit?text=${encodeURIComponent(
     '10-Year Vision Prayer Gathering'
-  )}&details=${encodeURIComponent(
+  )}&dates=${encodeURIComponent(dates)}&details=${encodeURIComponent(
     'Join us on the 10th of each month to pray for the 10-year commitment and church planting vision.'
   )}&location=${encodeURIComponent(
     'HMCC of Hong Kong'
-  )}&recur=${encodeURIComponent('RRULE:FREQ=MONTHLY;BYMONTHDAY=10')}`;
+  )}&recur=${encodeURIComponent(
+    'RRULE:FREQ=MONTHLY;BYMONTHDAY=10'
+  )}&ctz=${encodeURIComponent('Asia/Hong_Kong')}`;
+};
+
+const PrayCard = ({ footer }) => {
+  const prayerCalendarLink = buildPrayerCalendarLink();
 
   return (
     <BaseCard

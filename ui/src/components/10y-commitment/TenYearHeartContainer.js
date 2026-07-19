@@ -42,6 +42,7 @@ const TenYearHeartSection = () => {
           <Heading
             as="h2"
             fontFamily="DMSerifDisplay_Italic"
+            fontWeight={400}
             fontSize={{ base: '2.375rem', lg: '2.8125rem' }}
             letterSpacing="0.0125rem"
             lineHeight={1}

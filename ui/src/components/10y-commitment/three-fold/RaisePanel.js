@@ -64,11 +64,8 @@ const RaisePanel = ({ onPrev, onNext }) => {
           />
           {/* Animated water, masked to the silhouette, filled to the ratio */}
           <WaterFill ratio={fillRatio} start={inView} />
-          {/* Raised-amount label centered on the waterline. Figma paints it
-              gold with mix-blend-mode: difference, which is what produces the
-              two-tone split — deep blue against the light card above water,
-              pink-purple against the blue water below — and lets the moving
-              wave crests re-colour the letters as they pass. */}
+          {/* Raised-amount label centered on the waterline, per Figma (node
+              55:1697): solid white, no blend effects. */}
           <Text
             position="absolute"
             top={waterlineTop}
@@ -77,8 +74,7 @@ const RaisePanel = ({ onPrev, onNext }) => {
             fontFamily="Manrope"
             fontWeight={800}
             fontSize={{ base: '1.25rem', md: '2.2rem' }}
-            color="#EBB733"
-            sx={{ mixBlendMode: 'difference' }}
+            color="white"
             whiteSpace="nowrap"
           >
             {usd(amount)}
