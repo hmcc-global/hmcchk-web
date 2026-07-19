@@ -173,7 +173,7 @@ const WaysToParticipate = () => {
       {/* Section Header */}
       <VStack spacing={{ base: '1rem', md: '1.5rem' }} align="center" w="100%">
         <Heading
-          as="h3"
+          as="h2"
           fontSize={{ base: '2rem', md: '2.813rem' }}
           fontWeight={400}
           textAlign="center"
@@ -212,7 +212,11 @@ const WaysToParticipate = () => {
               `exitBeforeEnter` is the v4 equivalent. Without it, the
               outgoing and incoming cards render simultaneously in normal
               flow, briefly doubling the container's height. */}
-          <AnimatePresence exitBeforeEnter custom={direction.current} initial={false}>
+          <AnimatePresence
+            exitBeforeEnter
+            custom={direction.current}
+            initial={false}
+          >
             <motion.div
               key={currentCardIndex}
               custom={direction.current}
