@@ -6,40 +6,45 @@ import ThreeFoldCommitment from './ThreeFoldCommitment';
 import TenYearHeartSection from './TenYearHeartContainer';
 import WaysToParticipate from './WaysToParticipate';
 
+const EMBED_CHROME_IDS = [
+  'site-navbar',
+  'site-mobile-navbar',
+  'site-footer',
+];
+
 const TenYearCommitmentContainer = () => {
   const { search } = useLocation();
   const isEmbed = new URLSearchParams(search).get('embed') === '1';
 
-  // ponytail: DOM hide assumes App sibling order NavBar → #main-container → MobileNavBar
-  // and Footer as last child of main; revisit if that layout changes
   useLayoutEffect(() => {
     if (!isEmbed) return;
 
     const main = document.getElementById('main-container');
-    if (!main) return;
-
-    const chrome = [
-      main.previousElementSibling,
-      main.nextElementSibling,
-      main.lastElementChild,
-    ].filter(Boolean);
+    const chrome = EMBED_CHROME_IDS.map((id) =>
+      document.getElementById(id)
+    ).filter(Boolean);
 
     chrome.forEach((el) => {
       el.dataset.prevDisplay = el.style.display;
       el.style.display = 'none';
     });
-    const prevMt = main.style.marginTop;
-    const prevMb = main.style.marginBottom;
-    main.style.marginTop = '0';
-    main.style.marginBottom = '0';
+
+    const prevMt = main?.style.marginTop;
+    const prevMb = main?.style.marginBottom;
+    if (main) {
+      main.style.marginTop = '0';
+      main.style.marginBottom = '0';
+    }
 
     return () => {
       chrome.forEach((el) => {
         el.style.display = el.dataset.prevDisplay || '';
         delete el.dataset.prevDisplay;
       });
-      main.style.marginTop = prevMt;
-      main.style.marginBottom = prevMb;
+      if (main) {
+        main.style.marginTop = prevMt;
+        main.style.marginBottom = prevMb;
+      }
     };
   }, [isEmbed]);
 
