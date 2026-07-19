@@ -49,6 +49,7 @@ import LifeGroupPage from './discover/LifeGroupPage';
 import StructuredData from './seo/StructuredData';
 import { generateChurchSchema } from './seo/SchemaGenerator';
 import DynamicSEO from './seo/DynamicSEO';
+import TenYearCommitmentContainer from './10y-commitment/TenYearCommitmentContainer';
 
 const MainContainer = () => {
   const location = useLocation();
@@ -261,6 +262,12 @@ const MainContainer = () => {
           path="/saturate"
           permissions={['public']}
           component={SaturateContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/10y-commitment"
+          permissions={['public']}
+          component={TenYearCommitmentContainer}
         />
         {/* Admin items */}
         <PrivateRoute
