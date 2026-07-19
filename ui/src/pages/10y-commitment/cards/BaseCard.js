@@ -1,4 +1,4 @@
-import { VStack, Box, Heading, Text } from '@chakra-ui/react';
+import { VStack, Box, Heading, Text } from 'components';
 import React from 'react';
 import { COLORS } from '../constants';
 

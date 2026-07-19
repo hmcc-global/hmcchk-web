@@ -1,4 +1,4 @@
-import { Box, VStack, usePrefersReducedMotion } from '@chakra-ui/react';
+import { Box, VStack, usePrefersReducedMotion } from 'components';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 

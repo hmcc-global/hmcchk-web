@@ -10,7 +10,7 @@ import {
   HStack,
   IconButton,
   Button,
-} from '@chakra-ui/react';
+} from 'components';
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaPlay, FaPause } from 'react-icons/fa';

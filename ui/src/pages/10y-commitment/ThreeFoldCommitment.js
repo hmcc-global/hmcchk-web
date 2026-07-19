@@ -10,7 +10,7 @@ import {
   Tab,
   TabPanels,
   TabPanel,
-} from '@chakra-ui/react';
+} from 'components';
 import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { COLORS, TYC_IMG } from './constants';
@@ -129,7 +129,9 @@ const ThreeFoldCommitment = () => {
             >
               <VStack spacing={{ base: '0.5rem', md: '0.75rem' }} w="100%">
                 <Image
-                  src={`${TYC_IMG}/tabs/${key}${index === i ? '-active' : ''}.svg`}
+                  src={`${TYC_IMG}/tabs/${key}${
+                    index === i ? '-active' : ''
+                  }.svg`}
                   alt=""
                   aria-hidden="true"
                   boxSize={{ base: '3rem', md: '3.25rem' }}

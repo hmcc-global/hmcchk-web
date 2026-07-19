@@ -1,4 +1,4 @@
-import { Box, Grid, Image, Text } from '@chakra-ui/react';
+import { Box, Grid, Image, Text } from 'components';
 import React, { useState } from 'react';
 import CommitmentPanel from './CommitmentPanel';
 import { MotionBox } from './motion';
@@ -44,7 +44,14 @@ const CityCircle = ({ name, img, x, y, w, h, isHighlighted, onHover }) => (
     onMouseEnter={() => onHover(name)}
     onMouseLeave={() => onHover(null)}
   >
-    <Image src={`${RELEASE_IMG}/${img}`} alt={name} w="100%" h="100%" objectFit="cover" loading="lazy" />
+    <Image
+      src={`${RELEASE_IMG}/${img}`}
+      alt={name}
+      w="100%"
+      h="100%"
+      objectFit="cover"
+      loading="lazy"
+    />
   </MotionBox>
 );
 

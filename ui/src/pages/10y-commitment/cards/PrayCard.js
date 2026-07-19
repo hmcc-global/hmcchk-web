@@ -1,8 +1,4 @@
-import {
-  VStack,
-  Text,
-  Image,
-} from '@chakra-ui/react';
+import { VStack, Text, Image } from 'components';
 import React from 'react';
 import { DateTime } from 'luxon';
 import BaseCard from './BaseCard';
@@ -61,16 +57,17 @@ const PrayCard = ({ footer }) => {
           letterSpacing="0.0125rem"
           textAlign="center"
         >
-          Commit to praying regularly for the 10-year vision: for the churches, the disciples, the funds, and the people being sent out.
+          Commit to praying regularly for the 10-year vision: for the churches,
+          the disciples, the funds, and the people being sent out.
         </Text>
 
         <Image
-            w="100%"
-            src={`${process.env.PUBLIC_URL}/images/10y-commitment/prayParticipate.jpg`}
-            marginX="auto"
-            display="flex"
-            borderRadius={10}
-            alt="People praying together"
+          w="100%"
+          src={`${process.env.PUBLIC_URL}/images/10y-commitment/prayParticipate.jpg`}
+          marginX="auto"
+          display="flex"
+          borderRadius={10}
+          alt="People praying together"
         />
 
         <Text
@@ -81,7 +78,8 @@ const PrayCard = ({ footer }) => {
           letterSpacing="0.0125rem"
           textAlign="center"
         >
-          Join us on the 10th of each month, we gather as a church family to pray for our commitment and the 10 cities God placed on our hearts.
+          Join us on the 10th of each month, we gather as a church family to
+          pray for our commitment and the 10 cities God placed on our hearts.
         </Text>
 
         <ParticipateButton href={prayerCalendarLink}>

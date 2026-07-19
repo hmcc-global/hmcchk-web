@@ -1,4 +1,4 @@
-import { VStack, Text, Image, HStack } from '@chakra-ui/react';
+import { VStack, Text, Image, HStack } from 'components';
 import React from 'react';
 import BaseCard from './BaseCard';
 import ParticipateButton from './ParticipateButton';

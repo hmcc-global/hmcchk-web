@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Heading, Text, VStack } from '@chakra-ui/react';
+import { Box, Container, Heading, Text, VStack } from 'components';
 
 const OVERLAY_COLOR = 'rgba(13, 27, 90, 0.82)';
 const TITLE_COLOR = '#CAD6FF';

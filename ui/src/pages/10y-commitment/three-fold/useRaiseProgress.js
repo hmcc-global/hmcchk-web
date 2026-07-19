@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { customAxios as axios } from '../../helpers/customAxios';
+import { customAxios as axios } from 'utils/customAxios';
 import { RAISE_CAMPAIGN_NAME, RAISE_CATEGORY_KEY } from '../constants';
 
 // Reads the live "Raise" fundraising figures from the Fundraise table.

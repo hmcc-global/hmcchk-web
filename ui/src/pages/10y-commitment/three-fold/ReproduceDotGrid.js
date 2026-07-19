@@ -1,4 +1,4 @@
-import { AspectRatio, Box } from '@chakra-ui/react';
+import { AspectRatio, Box } from 'components';
 import React, { useEffect, useRef } from 'react';
 import { COLORS } from '../constants';
 
@@ -124,8 +124,15 @@ const ReproduceDotGrid = () => {
       });
       candidates.sort((a, b) => a.score - b.score);
       const count = resting
-        ? REST_SPOKES_MIN + Math.floor(hashRand(hubIdx * 2 + 5, 11) * (REST_SPOKES_MAX - REST_SPOKES_MIN + 1))
-        : MIN_SPOKES + Math.floor(hashRand(hubIdx * 2 + 3, 7) * (MAX_SPOKES - MIN_SPOKES + 1));
+        ? REST_SPOKES_MIN +
+          Math.floor(
+            hashRand(hubIdx * 2 + 5, 11) *
+              (REST_SPOKES_MAX - REST_SPOKES_MIN + 1)
+          )
+        : MIN_SPOKES +
+          Math.floor(
+            hashRand(hubIdx * 2 + 3, 7) * (MAX_SPOKES - MIN_SPOKES + 1)
+          );
       return candidates.slice(0, count).map((c) => c.i);
     };
 
@@ -187,7 +194,10 @@ const ReproduceDotGrid = () => {
         // dot under the cursor is always the biggest and its size stays steady as
         // the cursor moves within a cell. Other dots ease down by distance, with
         // jitter that vanishes near the cursor and grows outward to randomise the rim.
-        const fw = i === hubIdx ? 1 : Math.max(0, 1 - Math.hypot(n.x - fx, n.y - fy) / focusR);
+        const fw =
+          i === hubIdx
+            ? 1
+            : Math.max(0, 1 - Math.hypot(n.x - fx, n.y - fy) / focusR);
         const jitter = i === hubIdx ? 1 : 1 - n.rand * (1 - fw) * 0.6;
         n.r = Math.max(0.9, (0.7 + fw ** 1.3 * 6.3) * jitter);
         n.idleAlpha = 0.28 + fw * 0.55;
@@ -198,7 +208,13 @@ const ReproduceDotGrid = () => {
       // dots crossfaded to blue on top, so they never change size.
       const litness = new Map([[hubIdx, 1]]);
       conns.forEach((c, to) => {
-        litness.set(to, Math.max(litness.get(to) || 0, easeOutCubic(c.progress) * lineAlpha(c)));
+        litness.set(
+          to,
+          Math.max(
+            litness.get(to) || 0,
+            easeOutCubic(c.progress) * lineAlpha(c)
+          )
+        );
       });
 
       // Idle cluster dots, faded; size from the cursor spotlight.

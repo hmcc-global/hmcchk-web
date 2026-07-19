@@ -1,7 +1,7 @@
-import { Button } from '@chakra-ui/react';
+import { Button } from 'components';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { ArrowForwardIcon } from 'components/icons';
 import { COLORS } from '../constants';
 
 // Shared CTA used across the Ways to Participate cards.

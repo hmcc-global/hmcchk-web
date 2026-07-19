@@ -1,4 +1,4 @@
-import { Box, Heading, Image, Text } from '@chakra-ui/react';
+import { Box, Heading, Image, Text } from 'components';
 import React from 'react';
 import { MotionBox, MotionVStack, fadeUp, staggerContainer } from './motion';
 import { TYC_IMG } from '../constants';

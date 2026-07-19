@@ -1,4 +1,4 @@
-import { Box, keyframes, usePrefersReducedMotion } from '@chakra-ui/react';
+import { Box, keyframes, usePrefersReducedMotion } from 'components';
 import React from 'react';
 import { MotionBox } from './motion';
 import { RAISE_LAYOUT, TYC_IMG } from '../constants';
@@ -45,9 +45,36 @@ const bobKeys = (dy) => keyframes`
 // surface never visibly repeats. Back layers are flatter and more transparent
 // for depth; the front layer is the solid water.
 const LAYERS = [
-  { tile: 149, crest: 6, trough: 3.5, opacity: 0.5, dur: 14, dir: 1, bob: 2, bobDur: 8.1 },
-  { tile: 97, crest: 8, trough: 4.5, opacity: 0.72, dur: 10, dir: -1, bob: 1.5, bobDur: 6.3 },
-  { tile: 67, crest: 10, trough: 5.5, opacity: 1, dur: 7.5, dir: 1, bob: 1, bobDur: 4.9 },
+  {
+    tile: 149,
+    crest: 6,
+    trough: 3.5,
+    opacity: 0.5,
+    dur: 14,
+    dir: 1,
+    bob: 2,
+    bobDur: 8.1,
+  },
+  {
+    tile: 97,
+    crest: 8,
+    trough: 4.5,
+    opacity: 0.72,
+    dur: 10,
+    dir: -1,
+    bob: 1.5,
+    bobDur: 6.3,
+  },
+  {
+    tile: 67,
+    crest: 10,
+    trough: 5.5,
+    opacity: 1,
+    dur: 7.5,
+    dir: 1,
+    bob: 1,
+    bobDur: 4.9,
+  },
 ].map((l) => ({
   ...l,
   uri: waveURI(l.tile, l.crest, l.trough),

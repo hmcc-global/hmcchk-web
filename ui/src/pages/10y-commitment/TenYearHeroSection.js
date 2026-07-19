@@ -1,4 +1,4 @@
-import { Stack, Image, Box, Heading, Text } from '@chakra-ui/react';
+import { Stack, Image, Box, Heading, Text } from 'components';
 
 const TenYearHeroSection = () => {
   return (
