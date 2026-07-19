@@ -149,6 +149,10 @@ export const RAISE_EMPTY_FILL_RATIO = 1 / 4;
 // 796 x 433 Figma artboard. The water-fill layer shares this exact box (and
 // masks itself to the same SVG) so the water sits inside the silhouette at any
 // size. (left/top/w/h passed straight to Chakra style props.)
+// The amount label's vertical center, as a percentage of the full
+// AspectRatio box (not the vessel sub-box), per Figma node 55:1976 - a fixed
+// point in the artwork that does not move with the raised/goal ratio.
 export const RAISE_LAYOUT = {
   vessel: { left: '8%', top: '6.6%', w: '84%', h: '88.3%' },
+  amountAnchorTop: '82%',
 };

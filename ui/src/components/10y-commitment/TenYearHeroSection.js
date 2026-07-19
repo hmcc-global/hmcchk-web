@@ -65,15 +65,13 @@ const TenYearHeroSection = () => {
           </Text>
         </Stack>
 
-        {/* Fades the hero photo into the white background of the next
-            section instead of cutting off with a hard edge. */}
         <Box
           position="absolute"
           bottom={0}
           left={0}
           right={0}
-          h={{ base: '6rem', lg: '10rem' }}
-          bgGradient="linear(to-b, transparent, white)"
+          h={{ base: '20vh', lg: '10vh' }}
+          bgGradient="linear(to-b, rgba(255,255,255,0) 0%, rgba(255,255,255,0.06) 15%, rgba(255,255,255,0.22) 30%, rgba(255,255,255,0.43) 45%, rgba(255,255,255,0.65) 60%, rgba(255,255,255,0.84) 75%, rgba(255,255,255,0.97) 90%, rgba(255,255,255,1) 100%)"
           pointerEvents="none"
         />
       </Box>
