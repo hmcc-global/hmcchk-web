@@ -11,9 +11,17 @@ const jsFastRefreshHint = {
   enforce: 'pre',
   apply: 'serve',
   transform(code, id) {
-    if (/\/src\/.*\.js$/.test(id) && !id.includes('node_modules')) {
+    // strip Vite's query suffix (?v=, ?import, …) before matching, and skip if the
+    // hint is already present so re-transforms don't append it twice
+    const path = id.split('?')[0];
+    if (
+      /\/src\/.*\.js$/.test(path) &&
+      !path.includes('node_modules') &&
+      !code.includes('// react/jsx-runtime')
+    ) {
       return { code: code + '\n// react/jsx-runtime', map: null };
     }
+    return null;
   },
 };
 
