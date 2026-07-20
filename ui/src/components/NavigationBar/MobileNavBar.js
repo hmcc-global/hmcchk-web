@@ -65,6 +65,7 @@ const MobileNavBar = (props) => {
   return (
     <>
       <Flex
+        id="site-mobile-navbar"
         backgroundColor="#F6FAFF"
         width="100%"
         h="8vh"
