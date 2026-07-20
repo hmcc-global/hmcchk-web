@@ -41,6 +41,11 @@ jobs:
       - name: "Create server /.env"
         run: |
           echo "${{ secrets.SERVER_ENV }}" > server/.env
+      - name: "Lint ui/ folder"
+        # vite build (unlike react-scripts build) does not run ESLint, so lint explicitly.
+        # `yarn lint` is `eslint src` — fails on errors, tolerates the pre-existing warnings.
+        run: |
+          cd ui && yarn run lint
       - name: "Build ui/ folder"
         run: |
           cd ui && yarn run build

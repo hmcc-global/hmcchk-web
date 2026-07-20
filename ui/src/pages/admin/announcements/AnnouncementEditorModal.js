@@ -41,6 +41,12 @@ const toEventTypeItems = (value) =>
     ? value
         .map((t) => (typeof t === 'string' ? { label: t, value: t } : t))
         .filter((t) => t && typeof t.value === 'string')
+        // object records can carry a value but no (or non-string) label — CUIAutoComplete
+        // needs both, so backfill label from value when it's missing
+        .map((t) => ({
+          ...t,
+          label: typeof t.label === 'string' ? t.label : t.value,
+        }))
     : [];
 
 const AnnouncementEditorModal = (props) => {
