@@ -30,44 +30,42 @@
     "chakra-ui-markdown-renderer": "^4.0.0",
     "framer-motion": "^4.1.17",
     "html-react-parser": "^1.2.7",
-    "http-proxy-middleware": "^2.0.0",
     "luxon": "^1.27.0",
     "react": "^18.2.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
     "react-google-button": "^0.7.2",
     "react-google-recaptcha": "^2.1.0",
+    "react-helmet": "^6.1.0",
     "react-hook-form": "^7.51.2",
     "react-icons": "^5.5.0",
     "react-intersection-observer": "^9.13.0",
-    "react-helmet": "^6.1.0",
     "react-markdown": "^7.1.2",
     "react-property": "^1.0.1",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^5.0.1",
     "react-slick": "^0.29.0",
     "react-social-icons": "^6.17.0",
     "react-table": "^7.7.0",
     "react-use": "^17.5.0",
     "redux-persist": "^6.0.0",
     "remixicon": "^4.2.0",
-    "sass": "^1.53.0",
+    "sass": "^1.80.0",
     "slick-carousel": "^1.8.1",
     "use-debounce": "^10.0.0",
     "uuid": "^9.0.1",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "lint": "eslint src"
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {
@@ -82,10 +80,12 @@
       "last 1 safari version"
     ]
   },
-  "resolutions": {
-    "react-error-overlay": "6.0.9"
-  },
   "devDependencies": {
-    "react-error-overlay": "^6.0.9"
+    "@vitejs/plugin-react": "^4",
+    "eslint": "^8",
+    "eslint-config-react-app": "^7.0.1",
+    "jsdom": "^29.1.1",
+    "vite": "^7",
+    "vitest": "^3"
   }
 }

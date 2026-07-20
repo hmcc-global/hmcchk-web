@@ -75,15 +75,15 @@ const ShineInvolve = (props) => {
       if (status === 200) {
         const filteredEndDate = data.filter((item) => {
           if (item.displayStartDateTime) {
-            let displayStartDate = new DateTime.fromISO(
+            let displayStartDate = DateTime.fromISO(
               item.displayStartDateTime
             );
             if (displayStartDate > DateTime.now()) return false;
           }
 
           if (item.displayEndDateTime !== '') {
-            let endDate = new DateTime.fromISO(item.displayEndDateTime);
-            let startDate = new DateTime.fromISO(item.displayStartDateTime);
+            let endDate = DateTime.fromISO(item.displayEndDateTime);
+            let startDate = DateTime.fromISO(item.displayStartDateTime);
             const renderDate = getRenderDate(
               item.eventStartDate,
               item.eventEndDate,
