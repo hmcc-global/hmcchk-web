@@ -46,7 +46,7 @@ const TenYearCommitmentContainer = () => {
 
   // Start at the top when landing here (the global ScrollToTop only resets
   // #main-container, but this app scrolls the window).
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 

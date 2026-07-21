@@ -12,6 +12,7 @@ const TenYearCommitmentBanner = () => {
     <Link
       to={{ pathname: '/10y-commitment' }}
       style={{ textDecoration: 'none', display: 'block', width: '100%' }}
+      aria-label="Learn about our 10 Year Commitment as a Global Family of Churches"
     >
       <Box
         w="100%"
@@ -28,12 +29,7 @@ const TenYearCommitmentBanner = () => {
           boxShadow: '0 10px 30px rgba(1, 22, 96, 0.35)',
         }}
       >
-        <VStack
-          spacing={[1, '10px']}
-          py={[9, 16]}
-          px={[6, 10]}
-          textAlign="center"
-        >
+        <VStack spacing={[2]} py={[9, 16]} px={[6, 10]} textAlign="center">
           <Text
             color="white"
             fontFamily="DMSans_Regular, 'DM Sans', sans-serif"
