@@ -1,5 +1,14 @@
-import { Box, Container, VStack, Stack, Text, Heading } from 'components';
-import { Image, Button, Link } from 'components';
+import {
+  Box,
+  Container,
+  VStack,
+  Stack,
+  Text,
+  Heading,
+  Image,
+  Button,
+  Link,
+} from 'components';
 import { saturateText } from '../home/SaturateVisionSection';
 import TenYearCommitmentBanner from './TenYearCommitmentBanner';
 
@@ -73,6 +82,12 @@ const VisionMissionSection = (props) => {
           spacing="5"
           id="vision-mission"
         >
+          {blurb && blurb.vision && (
+            <VisionMissionCard title="VISION" message={blurb.vision} />
+          )}
+          {blurb && blurb.mission && (
+            <VisionMissionCard title="MISSION" message={blurb.mission} />
+          )}
           <Box
             w="100%"
             borderWidth="1px"
@@ -132,12 +147,6 @@ const VisionMissionSection = (props) => {
               </VStack>
             </Stack>
           </Box>
-          {blurb && blurb.vision && (
-            <VisionMissionCard title="VISION" message={blurb.vision} />
-          )}
-          {blurb && blurb.mission && (
-            <VisionMissionCard title="MISSION" message={blurb.mission} />
-          )}
           <TenYearCommitmentBanner />
         </Stack>
       </VStack>
