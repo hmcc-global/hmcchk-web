@@ -1,13 +1,7 @@
-import {
-  Box,
-  Container,
-  VStack,
-  Stack,
-  Text,
-  Heading,
-} from 'components';
+import { Box, Container, VStack, Stack, Text, Heading } from 'components';
 import { Image, Button, Link } from 'components';
 import { saturateText } from '../home/SaturateVisionSection';
+import TenYearCommitmentBanner from './TenYearCommitmentBanner';
 
 const VisionMissionCard = ({ title, message }) => {
   return (
@@ -144,6 +138,7 @@ const VisionMissionSection = (props) => {
           {blurb && blurb.mission && (
             <VisionMissionCard title="MISSION" message={blurb.mission} />
           )}
+          <TenYearCommitmentBanner />
         </Stack>
       </VStack>
     </Container>
