@@ -74,7 +74,7 @@ const VisionMissionSection = (props) => {
     <Container w="100vw" maxW="container.lg">
       <VStack height="100%" justifyContent="center" padding={1}>
         <Stack
-          direction={{ base: 'column', md: 'column' }}
+          direction={'column'}
           w="100%"
           height="100%"
           alignItems="center"

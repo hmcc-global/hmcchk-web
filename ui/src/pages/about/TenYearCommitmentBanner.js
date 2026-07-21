@@ -29,7 +29,7 @@ const TenYearCommitmentBanner = () => {
           boxShadow: '0 10px 30px rgba(1, 22, 96, 0.35)',
         }}
       >
-        <VStack spacing={[2]} py={[9, 16]} px={[6, 10]} textAlign="center">
+        <VStack spacing={2} py={[9, 16]} px={[6, 10]} textAlign="center">
           <Text
             color="white"
             fontFamily="DMSans_Regular, 'DM Sans', sans-serif"

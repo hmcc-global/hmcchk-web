@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { Flex } from 'components';
 import { useLocation } from 'react-router-dom';
 import TenYearHeroSection from './TenYearHeroSection';
