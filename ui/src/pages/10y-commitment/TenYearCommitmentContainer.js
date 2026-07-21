@@ -51,7 +51,7 @@ const TenYearCommitmentContainer = () => {
   }, []);
 
   return (
-    <Flex direction="column" sx={{ overscrollBehaviorX: 'none' }}>
+    <Flex direction="column" sx={{ overscrollBehaviorX: 'none' }} bg="white">
       <TenYearHeroSection />
       <ThreeFoldCommitment />
       <TenYearHeartSection />

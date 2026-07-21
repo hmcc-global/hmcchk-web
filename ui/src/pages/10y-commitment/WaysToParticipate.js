@@ -167,7 +167,6 @@ const WaysToParticipate = () => {
       gap={{ base: '2rem', md: '3rem' }}
       py={{ base: '2rem', md: '4rem' }}
       px={{ base: '1rem', md: '2rem' }}
-      bg={COLORS.sectionBg}
       overflowX="hidden"
     >
       {/* Section Header */}
