@@ -6,11 +6,7 @@ import ThreeFoldCommitment from './ThreeFoldCommitment';
 import TenYearHeartSection from './TenYearHeartContainer';
 import WaysToParticipate from './WaysToParticipate';
 
-const EMBED_CHROME_IDS = [
-  'site-navbar',
-  'site-mobile-navbar',
-  'site-footer',
-];
+const EMBED_CHROME_IDS = ['site-navbar', 'site-mobile-navbar', 'site-footer'];
 
 const TenYearCommitmentContainer = () => {
   const { search } = useLocation();
@@ -47,6 +43,12 @@ const TenYearCommitmentContainer = () => {
       }
     };
   }, [isEmbed]);
+
+  // Start at the top when landing here (the global ScrollToTop only resets
+  // #main-container, but this app scrolls the window).
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Flex direction="column" sx={{ overscrollBehaviorX: 'none' }}>
