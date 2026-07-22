@@ -1,5 +1,5 @@
 import { Box, Grid, Image, Text } from 'components';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import CommitmentPanel from './CommitmentPanel';
 import { MotionBox } from './motion';
 import {
@@ -91,8 +91,34 @@ const CityTag = ({ name, x, y, onHover, isHighlighted }) => (
   </Box>
 );
 
+const AUTO_CITY_MS = 3667;
+
 const ReleasePanel = ({ onPrev, onNext }) => {
   const [hoveredCity, setHoveredCity] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const hoveredRef = useRef(null);
+
+  const handleCityHover = (name) => {
+    hoveredRef.current = name;
+    setHoveredCity(name);
+    if (!name) setSelectedCity(null);
+  };
+
+  useEffect(() => {
+    const names = RELEASE_CITIES.map((c) => c.name);
+    let nextIdx = Math.floor(Math.random() * names.length);
+
+    const pick = () => {
+      if (hoveredRef.current) return;
+      setSelectedCity(names[nextIdx]);
+      nextIdx = Math.floor(Math.random() * names.length);
+    };
+
+    const id = setInterval(pick, AUTO_CITY_MS);
+    return () => clearInterval(id);
+  }, []);
+
+  const activeCity = hoveredCity ?? selectedCity;
 
   return (
     <CommitmentPanel
@@ -170,8 +196,8 @@ const ReleasePanel = ({ onPrev, onNext }) => {
               <CityTag
                 key={t.name}
                 {...t}
-                onHover={setHoveredCity}
-                isHighlighted={hoveredCity === t.name}
+                onHover={handleCityHover}
+                isHighlighted={activeCity === t.name}
               />
             ))}
 
@@ -180,8 +206,8 @@ const ReleasePanel = ({ onPrev, onNext }) => {
               <CityCircle
                 key={c.name}
                 {...c}
-                onHover={setHoveredCity}
-                isHighlighted={hoveredCity === c.name}
+                onHover={handleCityHover}
+                isHighlighted={activeCity === c.name}
               />
             ))}
           </Box>
