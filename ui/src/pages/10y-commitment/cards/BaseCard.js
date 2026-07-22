@@ -10,6 +10,7 @@ const BaseCard = ({ title, subtitle, children, footer }) => {
       bg={COLORS.cardGradient}
       borderRadius="1.25rem"
       align="stretch"
+      flex={1}
       h="100%"
       w="100%"
       minW={0}
@@ -38,7 +39,9 @@ const BaseCard = ({ title, subtitle, children, footer }) => {
         </Text>
       </VStack>
 
-      {children}
+      <Box flex={1} w="100%" display="flex" flexDirection="column" minH={0}>
+        {children}
+      </Box>
 
       {footer && (
         <Box w="100%" mt="auto" pt={{ base: '1rem', md: '1.5rem' }}>

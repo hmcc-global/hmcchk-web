@@ -12,7 +12,7 @@ const GoCard = ({ footer }) => {
       footer={footer}
     >
       {/* Custom content for Go card */}
-      <VStack spacing="1rem" align="stretch" flex={1} minW={0} color="white">
+      <VStack spacing="1rem" align="stretch" flex={1} h="100%" minW={0} color="white">
         <Text
           fontSize={{ base: '0.813rem', md: '1.25rem' }}
           color="#FFFFFF"

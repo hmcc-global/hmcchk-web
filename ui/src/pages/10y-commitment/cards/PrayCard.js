@@ -48,7 +48,7 @@ const PrayCard = ({ footer }) => {
       subtitle="Become a Prayer Partner"
       footer={footer}
     >
-      <VStack spacing="1rem" align="stretch" flex={1}>
+      <VStack spacing="1rem" align="stretch" flex={1} h="100%">
         <Text
           fontSize={{ base: '0.813rem', md: '1.25rem' }}
           color="#FFFFFF"
@@ -82,7 +82,7 @@ const PrayCard = ({ footer }) => {
           pray for our commitment and the 10 cities God placed on our hearts.
         </Text>
 
-        <ParticipateButton href={prayerCalendarLink}>
+        <ParticipateButton href={prayerCalendarLink} mt="auto">
           Add to Calendar
         </ParticipateButton>
       </VStack>

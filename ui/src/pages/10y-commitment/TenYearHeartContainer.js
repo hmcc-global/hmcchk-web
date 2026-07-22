@@ -74,9 +74,12 @@ const TenYearHeartSection = () => {
               fontFamily="DMSerifDisplay_Italic"
               fontSize={{ base: '0.875rem', lg: '1.25rem' }}
             >
-              Our heart is captured by the prayer of Jabez in 1 Chronicles 4:10:
+              Our heart is captured by the prayer of Jabez in
+              <Box as="br" display={{ base: 'block', md: 'none' }} />{' '}
+              <Box as="span" whiteSpace="nowrap">
+                1 Chronicles 4:10:
+              </Box>
               <br />
-              <Box as="br" display={{ base: 'block', md: 'none' }} />
               'Oh, that you would bless me and enlarge my territory! Let your
               hand be with me, and keep me from harm so that I will be free from
               pain.'

@@ -32,10 +32,11 @@ const SWIPE_THRESHOLD_PX = 50;
 // Slide direction is a ref (not state) since it only needs to be read at the
 // moment the next AnimatePresence render picks it up via `custom` — bumping
 // it doesn't need to trigger its own re-render.
+// Full-width push; exit fades so the outgoing card softens while sliding out.
 const slideVariants = {
-  enter: (direction) => ({ x: direction > 0 ? 48 : -48, opacity: 0 }),
+  enter: (direction) => ({ x: direction > 0 ? '100%' : '-100%', opacity: 1 }),
   center: { x: 0, opacity: 1 },
-  exit: (direction) => ({ x: direction > 0 ? -48 : 48, opacity: 0 }),
+  exit: (direction) => ({ x: direction > 0 ? '-100%' : '100%', opacity: 0 }),
 };
 
 const WaysToParticipate = () => {
@@ -45,9 +46,18 @@ const WaysToParticipate = () => {
   );
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [slideHeight, setSlideHeight] = useState(undefined);
   const carouselRef = useRef(null);
   const touchStart = useRef(null);
   const direction = useRef(1);
+
+  // Absolute slides need an explicit height or the container collapses.
+  // Keep the tallest so shorter cards don't shrink the carousel.
+  const measureSlide = (node) => {
+    if (!node) return;
+    const next = Math.max(node.offsetHeight, node.scrollHeight);
+    setSlideHeight((prev) => (prev == null ? next : Math.max(prev, next)));
+  };
 
   const goToCard = (index) => {
     direction.current = index >= currentCardIndex ? 1 : -1;
@@ -113,7 +123,7 @@ const WaysToParticipate = () => {
     const interval = setInterval(() => {
       direction.current = 1;
       setCurrentCardIndex((prev) => (prev + 1) % CARDS.length);
-    }, 5000);
+    }, 12500);
 
     return () => clearInterval(interval);
   }, [isMobile, isPaused]);
@@ -198,32 +208,32 @@ const WaysToParticipate = () => {
       {isMobile ? (
         <Box
           ref={carouselRef}
-          mx={{ base: '-1rem', md: 0 }}
-          w={{ base: 'calc(100% + 2rem)', md: 'auto' }}
+          position="relative"
           overflow="hidden"
+          h={slideHeight}
           aria-live="polite"
           role="group"
           aria-roledescription="carousel"
           aria-label="Ways to participate"
           sx={{ touchAction: 'pan-y' }}
         >
-          {/* This project's framer-motion (v4) predates the `mode` prop —
-              `exitBeforeEnter` is the v4 equivalent. Without it, the
-              outgoing and incoming cards render simultaneously in normal
-              flow, briefly doubling the container's height. */}
-          <AnimatePresence
-            exitBeforeEnter
-            custom={direction.current}
-            initial={false}
-          >
+          <AnimatePresence custom={direction.current} initial={false}>
             <motion.div
               key={currentCardIndex}
+              ref={measureSlide}
               custom={direction.current}
               variants={slideVariants}
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.35, ease: 'easeInOut' }}
+              transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                top: 0,
+                left: 0,
+              }}
             >
               <ActiveCard footer={carouselControls} />
             </motion.div>
@@ -238,7 +248,7 @@ const WaysToParticipate = () => {
           mx="auto"
         >
           {CARDS.map(({ key, Component }) => (
-            <GridItem key={key} minW={0}>
+            <GridItem key={key} minW={0} display="flex">
               <Component />
             </GridItem>
           ))}

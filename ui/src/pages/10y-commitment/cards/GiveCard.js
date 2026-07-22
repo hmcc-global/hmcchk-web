@@ -13,9 +13,8 @@ const GiveCard = ({ footer }) => {
       <VStack
         spacing="1rem"
         align="center"
-        height="100%"
-        justifyContent="space-between"
         flex={1}
+        h="100%"
       >
         <Text
           fontSize={{ base: '0.813rem', md: '1.25rem' }}
