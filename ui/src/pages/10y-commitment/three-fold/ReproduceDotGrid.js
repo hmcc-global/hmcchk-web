@@ -2,52 +2,38 @@ import { AspectRatio, Box } from 'components';
 import React, { useEffect, useRef } from 'react';
 import { COLORS } from '../constants';
 
-// Interactive replacement for the static reproduce/diagram.svg. The original art
-// is a diamond-shaped cluster of #9CB5FF dots that shrink toward the edges, with a
-// single #003CFF hub radiating spokes to a handful of nearby (but not strictly
-// adjacent) nodes. Here the hub is whichever node sits closest to the cursor.
-//
-// There is always exactly ONE centre dot — the grid dot nearest the cursor — and
-// every live line runs from that single centre out to an outer dot. As the cursor
-// moves to the next dot the lines re-anchor to it (the previous dot stops being a
-// centre), so connections accumulate and the star reaches further as you move.
-// Each outer connection carries its own lifespan: the ones the current centre keeps
-// choosing stay refreshed, while those inherited from earlier positions start their
-// timer the moment the cursor moves on and fade out after a few seconds. Every grid
-// Dot sizes follow the cursor rather than the grid: the dot under the cursor is
-// the biggest and brightest, easing down (with per-dot randomness) toward the
-// edges, so a soft spotlight tracks the pointer. Canvas + a single rAF loop
-// because we animate lots of lines and resize every dot each frame.
+// Diamond dot cluster. Idle: overlapping webs — a hub lights, then spokes grow,
+// while the next hub starts before the last fades. Hover: single cursor hub.
 
-// Denser, larger cluster than the source SVG so the accumulating web has room to
-// grow and fill out instead of saturating a handful of dots.
 const COLS = 17;
 const ROWS = 15;
-const DIAMOND_CLIP = 1.08; // keep nodes inside a slightly soft rhombus
+const DIAMOND_CLIP = 1.08;
 
-// Neighbour selection (in grid cells). A spoke can reach anywhere in this ring,
-// so lengths and angles vary instead of locking onto the 8 immediate neighbours.
 const MIN_REACH = 1.0;
 const MAX_REACH = 4.0;
 const MIN_SPOKES = 1;
 const MAX_SPOKES = 3;
 
-// While the cursor is moving, a hub draws only MIN..MAX_SPOKES so the trail stays
-// light. Once the cursor has been still for REST_DELAY_MS the current hub blooms
-// out to REST_SPOKES_MIN..MAX so it settles into a fuller star instead of a stub.
 const REST_SPOKES_MIN = 5;
 const REST_SPOKES_MAX = 7;
 const REST_DELAY_MS = 160;
 
-// Spoke timing, in ms. GROW_MS is how long a spoke takes to extend to its dot.
-// LIFE_MS is how long a spoke stays after it was last touched by the cursor; over
-// the final FADE_MS of that life it fades out before being removed.
+const AUTO_HIGHLIGHT_MS = 380;
+const AUTO_HOLD_MS = 900;
+const AUTO_SPAWN_MS = 1500;
+const AUTO_MAX_WEBS = 3;
+const AUTO_SPOKES_MIN = 3;
+const AUTO_SPOKES_MAX = 5;
+
+const RIPPLE_MS = 950;
+const SIZE_SMOOTH_MS = 140;
+const HUB_BLEND_MS = 500; // cursor hub crossfade / bloom in
+
 const GROW_MS = 280;
 const LIFE_MS = 1000;
 const FADE_MS = 1400;
+const CURSOR_MAX_CONNS = 12;
 
-// Deterministic pseudo-random in [0,1) from two ints, so a given hub always picks
-// the same web (no flicker) while different hubs look different.
 const hashRand = (a, b) => {
   const v = Math.sin(a * 127.1 + b * 311.7) * 43758.5453;
   return v - Math.floor(v);
@@ -67,15 +53,22 @@ const ReproduceDotGrid = () => {
     let width = 0;
     let height = 0;
     let cell = 0;
-    let focusR = 0; // radius over which the cursor's size spotlight falls off
+    let focusR = 0;
     let centerIdx = 0;
-    let pointer = null; // { x, y } in CSS px, or null at rest
-    // Outer connections keyed by their outer dot index -> { progress, life }. They
-    // all anchor to the current hub, so only the outer end is stored.
+    let pointer = null;
+    // Spokes keyed `${from}:${to}`. Cursor rewrites `from` to the live hub.
     let conns = new Map();
-    let lastWanted = new Set(); // outer indices refreshed by the current hub
-    let idleMs = 0; // ms since the cursor last moved (reset on every pointermove)
-    let restingNow = false; // true once idle past REST_DELAY_MS -> hub blooms
+    let connSeq = 0;
+    let lastWanted = new Set();
+    let idleMs = 0;
+    let restingNow = false;
+    let webs = []; // { hub, phase, phaseMs, age }
+    let spawnMs = 0;
+    let focusHub = 0;
+    let lastHub = -1; // previous cursor hub for crossfade
+    let cursorHubAge = 0;
+    let prevHub = -1;
+    let prevHubFade = 0;
     let rafId = null;
     let lastTime = 0;
 
@@ -85,34 +78,33 @@ const ReproduceDotGrid = () => {
       ctx.fill();
     };
 
-    // Build the diamond cluster once in normalised space. weight is 1 at the centre
-    // and falls to 0 at the rim; it drives the dot-size/opacity falloff. baseR adds
-    // a little per-dot randomness so the cluster isn't a rigid gradient.
     const buildNodes = () => {
       nodes = [];
       let best = -1;
       for (let row = 0; row < ROWS; row += 1) {
         for (let col = 0; col < COLS; col += 1) {
-          const nx = (col / (COLS - 1)) * 2 - 1; // -1..1
+          const nx = (col / (COLS - 1)) * 2 - 1;
           const ny = (row / (ROWS - 1)) * 2 - 1;
           if (Math.abs(nx) + Math.abs(ny) > DIAMOND_CLIP) continue;
-          const weight = Math.max(0, 1 - Math.hypot(nx, ny));
-          // rand is a stable per-dot random factor; actual radius is computed each
-          // frame from the dot's distance to the cursor (see draw), not baked here.
-          const rand = hashRand(col + 1, row + 1);
-          nodes.push({ nx, ny, weight, rand, x: 0, y: 0, r: 0, idleAlpha: 0 });
-          if (weight > best) {
-            best = weight;
+          const w = Math.max(0, 1 - Math.hypot(nx, ny));
+          nodes.push({
+            nx,
+            ny,
+            rand: hashRand(col + 1, row + 1),
+            x: 0,
+            y: 0,
+            r: 0,
+            idleAlpha: 0,
+          });
+          if (w > best) {
+            best = w;
             centerIdx = nodes.length - 1;
           }
         }
       }
     };
 
-    // The node indices a hub connects to: a stable, varied pick from the reachable
-    // ring. The resting set is a superset of the moving set (same sorted prefix),
-    // so blooming on stop only adds spokes — it never reshuffles existing ones.
-    const spokesFor = (hubIdx, resting) => {
+    const spokesFor = (hubIdx, mode) => {
       const hub = nodes[hubIdx];
       const candidates = [];
       nodes.forEach((n, i) => {
@@ -123,21 +115,35 @@ const ReproduceDotGrid = () => {
         }
       });
       candidates.sort((a, b) => a.score - b.score);
-      const count = resting
-        ? REST_SPOKES_MIN +
-          Math.floor(
-            hashRand(hubIdx * 2 + 5, 11) *
-              (REST_SPOKES_MAX - REST_SPOKES_MIN + 1)
-          )
-        : MIN_SPOKES +
-          Math.floor(
-            hashRand(hubIdx * 2 + 3, 7) * (MAX_SPOKES - MIN_SPOKES + 1)
-          );
+      let lo = MIN_SPOKES;
+      let hi = MAX_SPOKES;
+      let salt = 7;
+      if (mode === 'rest') {
+        lo = REST_SPOKES_MIN;
+        hi = REST_SPOKES_MAX;
+        salt = 11;
+      } else if (mode === 'auto') {
+        lo = AUTO_SPOKES_MIN;
+        hi = AUTO_SPOKES_MAX;
+        salt = 13;
+      }
+      const count =
+        lo + Math.floor(hashRand(hubIdx * 2 + 3, salt) * (hi - lo + 1));
       return candidates.slice(0, count).map((c) => c.i);
     };
 
-    const currentHub = () => {
-      if (!pointer) return centerIdx;
+    const pickAutoHub = (avoid) => {
+      if (nodes.length < 2) return 0;
+      let idx = Math.floor(Math.random() * nodes.length);
+      let tries = 0;
+      while (avoid && avoid.has(idx) && tries < 8) {
+        idx = Math.floor(Math.random() * nodes.length);
+        tries += 1;
+      }
+      return idx;
+    };
+
+    const cursorHub = () => {
       let best = Infinity;
       let idx = centerIdx;
       nodes.forEach((n, i) => {
@@ -150,96 +156,239 @@ const ReproduceDotGrid = () => {
       return idx;
     };
 
-    const step = (dt) => {
-      // The current hub picks its outer dots; those connections get their life
-      // topped up (so they persist while the cursor rests here) and any that are
-      // brand new grow in. Connections the hub no longer chooses — including all the
-      // ones inherited from the previous dot — age and fade out. Every connection,
-      // old or new, is drawn from this one hub, so the lines follow the cursor.
+    const ageConns = (dt, liveKeys) => {
+      conns.forEach((c, key) => {
+        if (c.progress < 1) c.progress = Math.min(1, c.progress + dt / GROW_MS);
+        if (!liveKeys.has(key)) c.life -= dt;
+        if (c.life <= 0) conns.delete(key);
+      });
+    };
+
+    const spawnWeb = () => {
+      const used = new Set(webs.map((w) => w.hub));
+      webs.push({
+        hub: pickAutoHub(used),
+        phase: 'highlight',
+        phaseMs: 0,
+        age: 0,
+      });
+      spawnMs = 0;
+    };
+
+    const stepCursor = (dt) => {
       idleMs += dt;
       restingNow = idleMs >= REST_DELAY_MS;
-      const hubIdx = currentHub();
-      conns.delete(hubIdx); // a dot can't connect to itself once it's the centre
-      const wanted = new Set();
-      spokesFor(hubIdx, restingNow).forEach((to) => {
+      const hubIdx = cursorHub();
+      if (hubIdx !== lastHub) {
+        if (lastHub >= 0) {
+          prevHub = lastHub;
+          prevHubFade = 1;
+        }
+        lastHub = hubIdx;
+        cursorHubAge = 0;
+      }
+      cursorHubAge += dt;
+      if (prevHubFade > 0) {
+        prevHubFade = Math.max(0, prevHubFade - dt / HUB_BLEND_MS);
+        if (prevHubFade <= 0) prevHub = -1;
+      }
+      focusHub = hubIdx;
+
+      // Re-anchor every spoke to the live hub (single-hub cursor mode).
+      [...conns.entries()].forEach(([key, c]) => {
+        if (c.from === hubIdx) return;
+        conns.delete(key);
+        c.from = hubIdx;
+        conns.set(`${hubIdx}:${c.to}`, c);
+      });
+
+      const liveKeys = new Set();
+      spokesFor(hubIdx, restingNow ? 'rest' : 'move').forEach((to) => {
         if (to === hubIdx) return;
-        wanted.add(to);
-        const c = conns.get(to);
-        if (c) c.life = LIFE_MS;
-        else conns.set(to, { progress: 0, life: LIFE_MS });
+        const key = `${hubIdx}:${to}`;
+        liveKeys.add(key);
+        connSeq += 1;
+        const c = conns.get(key);
+        if (c) {
+          c.life = LIFE_MS;
+          c.seq = connSeq;
+        } else {
+          conns.set(key, {
+            from: hubIdx,
+            to,
+            progress: 0,
+            life: LIFE_MS,
+            seq: connSeq,
+          });
+        }
       });
-      conns.forEach((c, to) => {
-        if (c.progress < 1) c.progress = Math.min(1, c.progress + dt / GROW_MS);
-        if (!wanted.has(to)) c.life -= dt;
-        if (c.life <= 0) conns.delete(to);
+      ageConns(dt, liveKeys);
+
+      if (conns.size > CURSOR_MAX_CONNS) {
+        [...conns.entries()]
+          .sort((a, b) => {
+            const aLive = liveKeys.has(a[0]) ? 1 : 0;
+            const bLive = liveKeys.has(b[0]) ? 1 : 0;
+            if (aLive !== bLive) return aLive - bLive;
+            return (a[1].seq || 0) - (b[1].seq || 0);
+          })
+          .slice(0, conns.size - CURSOR_MAX_CONNS)
+          .forEach(([key]) => conns.delete(key));
+      }
+      lastWanted = liveKeys;
+    };
+
+    const stepAuto = (dt) => {
+      spawnMs += dt;
+      if (
+        webs.length === 0 ||
+        (spawnMs >= AUTO_SPAWN_MS && webs.length < AUTO_MAX_WEBS)
+      ) {
+        spawnWeb();
+      }
+
+      const liveKeys = new Set();
+      const next = [];
+
+      webs.forEach((w) => {
+        w.age += dt;
+        w.phaseMs += dt;
+        let keep = true;
+
+        if (w.phase === 'highlight') {
+          if (w.phaseMs >= AUTO_HIGHLIGHT_MS) {
+            w.phase = 'connect';
+            w.phaseMs = 0;
+          }
+        } else if (w.phase === 'connect' || w.phase === 'hold') {
+          const outs = spokesFor(w.hub, 'auto');
+          if (!outs.length) {
+            keep = false;
+          } else {
+            outs.forEach((to) => {
+              if (to === w.hub) return;
+              const key = `${w.hub}:${to}`;
+              liveKeys.add(key);
+              const c = conns.get(key);
+              if (c) c.life = LIFE_MS;
+              else
+                conns.set(key, {
+                  from: w.hub,
+                  to,
+                  progress: 0,
+                  life: LIFE_MS,
+                });
+            });
+            if (w.phase === 'connect') {
+              let grown = true;
+              outs.forEach((to) => {
+                const c = conns.get(`${w.hub}:${to}`);
+                if (!c || c.progress < 1) grown = false;
+              });
+              if (grown) {
+                w.phase = 'hold';
+                w.phaseMs = 0;
+              }
+            } else if (w.phaseMs >= AUTO_HOLD_MS) {
+              keep = false;
+            }
+          }
+        }
+
+        if (keep) next.push(w);
       });
-      lastWanted = wanted;
-      return hubIdx;
+
+      webs = next;
+      focusHub = webs.length ? webs[webs.length - 1].hub : focusHub;
+      ageConns(dt, liveKeys);
+      lastWanted = liveKeys;
     };
 
     const lineAlpha = (c) => Math.min(1, c.life / FADE_MS);
 
-    const draw = (hubIdx) => {
+    // Expanding disk from a hub, 0..1 by distance and age.
+    const rippleAt = (hx, hy, age, x, y) => {
+      const t = Math.min(1, age / RIPPLE_MS);
+      if (t <= 0) return 0;
+      const reach = easeOutCubic(t) * focusR;
+      const dist = Math.hypot(x - hx, y - hy);
+      return dist <= reach ? Math.max(0, 1 - dist / focusR) : 0;
+    };
+
+    const easeToward = (cur, target, dt, ms) =>
+      cur + (target - cur) * Math.min(1, dt / ms);
+
+    const draw = (hubIdx, dt) => {
       ctx.clearRect(0, 0, width, height);
       const hub = nodes[hubIdx];
       const fx = pointer ? pointer.x : hub.x;
       const fy = pointer ? pointer.y : hub.y;
 
-      // Size + brightness track the cursor: the dot under it is biggest/brightest,
-      // easing down toward the edges. Jitter (stable per dot) barely touches dots
-      // near the cursor and grows outward, so the focus is steady while the rim is
-      // randomly sized. Cached on each node for the lines/overlay below.
       nodes.forEach((n, i) => {
-        // The hub is treated as full focus (no distance penalty, no jitter) so the
-        // dot under the cursor is always the biggest and its size stays steady as
-        // the cursor moves within a cell. Other dots ease down by distance, with
-        // jitter that vanishes near the cursor and grows outward to randomise the rim.
-        const fw =
-          i === hubIdx
-            ? 1
-            : Math.max(0, 1 - Math.hypot(n.x - fx, n.y - fy) / focusR);
-        const jitter = i === hubIdx ? 1 : 1 - n.rand * (1 - fw) * 0.6;
-        n.r = Math.max(0.9, (0.7 + fw ** 1.3 * 6.3) * jitter);
-        n.idleAlpha = 0.28 + fw * 0.55;
+        let fw;
+        if (pointer) {
+          const bloom = easeOutCubic(Math.min(1, cursorHubAge / HUB_BLEND_MS));
+          fw = Math.max(0, 1 - Math.hypot(n.x - fx, n.y - fy) / focusR);
+          if (i === hubIdx) fw = Math.max(fw, bloom);
+          if (i === prevHub && prevHubFade > 0) {
+            fw = Math.max(fw, prevHubFade * 0.85);
+          }
+        } else {
+          fw = 0;
+          webs.forEach((w) => {
+            const h = nodes[w.hub];
+            fw = Math.max(fw, rippleAt(h.x, h.y, w.age, n.x, n.y));
+          });
+        }
+        const jitter = fw > 0.85 ? 1 : 1 - n.rand * (1 - fw) * 0.6;
+        const targetR = Math.max(0.9, (0.7 + fw ** 1.3 * 6.3) * jitter);
+        const targetA = 0.28 + fw * 0.55;
+        n.r = easeToward(n.r, targetR, dt, SIZE_SMOOTH_MS);
+        n.idleAlpha = easeToward(n.idleAlpha, targetA, dt, SIZE_SMOOTH_MS);
       });
 
-      // How "lit" each node is (0..1): the one centre is full; each connected outer
-      // dot gets its line's grown-and-faded strength. Lit dots are the same accent
-      // dots crossfaded to blue on top, so they never change size.
-      const litness = new Map([[hubIdx, 1]]);
-      conns.forEach((c, to) => {
-        litness.set(
-          to,
-          Math.max(
-            litness.get(to) || 0,
-            easeOutCubic(c.progress) * lineAlpha(c)
-          )
-        );
+      const litness = new Map();
+      if (pointer) {
+        const bloom = easeOutCubic(Math.min(1, cursorHubAge / HUB_BLEND_MS));
+        litness.set(hubIdx, bloom);
+        if (prevHub >= 0 && prevHubFade > 0) {
+          litness.set(prevHub, prevHubFade);
+        }
+      } else {
+        webs.forEach((w) => {
+          const bloom = easeOutCubic(Math.min(1, w.age / (RIPPLE_MS * 0.28)));
+          litness.set(w.hub, Math.max(litness.get(w.hub) || 0, bloom));
+        });
+      }
+      conns.forEach((c) => {
+        const a = easeOutCubic(c.progress) * lineAlpha(c);
+        litness.set(c.from, Math.max(litness.get(c.from) || 0, a));
+        litness.set(c.to, Math.max(litness.get(c.to) || 0, a));
       });
 
-      // Idle cluster dots, faded; size from the cursor spotlight.
       ctx.fillStyle = COLORS.accentBlue;
       nodes.forEach((n) => {
         ctx.globalAlpha = n.idleAlpha;
         dot(n.x, n.y, n.r);
       });
 
-      // Lines from the single hub out to each connected dot, drawn as far as they've
-      // grown and faded by their remaining life.
       ctx.strokeStyle = COLORS.activeBlue;
       ctx.lineWidth = 1.6;
       ctx.lineCap = 'round';
-      conns.forEach((c, to) => {
-        const end = nodes[to];
+      conns.forEach((c) => {
+        const start = pointer ? nodes[hubIdx] : nodes[c.from];
+        const end = nodes[c.to];
         const p = easeOutCubic(c.progress);
         ctx.globalAlpha = lineAlpha(c);
         ctx.beginPath();
-        ctx.moveTo(hub.x, hub.y);
-        ctx.lineTo(hub.x + (end.x - hub.x) * p, hub.y + (end.y - hub.y) * p);
+        ctx.moveTo(start.x, start.y);
+        ctx.lineTo(
+          start.x + (end.x - start.x) * p,
+          start.y + (end.y - start.y) * p
+        );
         ctx.stroke();
       });
 
-      // Blue overlay on lit nodes, alpha = litness, same radius as the idle dot.
       ctx.fillStyle = COLORS.activeBlue;
       litness.forEach((lit, i) => {
         ctx.globalAlpha = lit;
@@ -248,13 +397,12 @@ const ReproduceDotGrid = () => {
       ctx.globalAlpha = 1;
     };
 
-    // Keep ticking until the cursor has been still long enough to bloom AND the
-    // bloomed star is fully grown with nothing left fading — only then is it static.
     const settled = () => {
-      if (!restingNow) return false;
+      if (!pointer || !restingNow) return false;
+      if (cursorHubAge < HUB_BLEND_MS || prevHubFade > 0) return false;
       let still = true;
-      conns.forEach((c, to) => {
-        if (c.progress < 1 || !lastWanted.has(to)) still = false;
+      conns.forEach((c, key) => {
+        if (c.progress < 1 || !lastWanted.has(key)) still = false;
       });
       return still;
     };
@@ -262,8 +410,9 @@ const ReproduceDotGrid = () => {
     const frame = (time) => {
       const dt = lastTime ? Math.min(time - lastTime, 64) : 16;
       lastTime = time;
-      const hubIdx = step(dt);
-      draw(hubIdx);
+      if (pointer) stepCursor(dt);
+      else stepAuto(dt);
+      draw(focusHub, dt);
       if (!settled()) {
         rafId = requestAnimationFrame(frame);
       } else {
@@ -304,16 +453,33 @@ const ReproduceDotGrid = () => {
 
     const onMove = (e) => {
       const rect = canvas.getBoundingClientRect();
+      const wasIdle = !pointer;
       pointer = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-      idleMs = 0; // moving keeps the trail light; bloom only after we stop
+      idleMs = 0;
+      if (wasIdle) {
+        webs = [];
+        conns.clear();
+        lastHub = -1;
+        prevHub = -1;
+        prevHubFade = 0;
+        cursorHubAge = 0;
+      }
       kick();
     };
     const onLeave = () => {
       pointer = null;
+      conns.clear();
+      webs = [];
+      lastHub = -1;
+      prevHub = -1;
+      prevHubFade = 0;
+      spawnMs = AUTO_SPAWN_MS;
       kick();
     };
 
     buildNodes();
+    focusHub = centerIdx;
+    spawnMs = AUTO_SPAWN_MS;
     layout();
 
     const resizeObserver = new ResizeObserver(layout);
