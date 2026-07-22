@@ -43,29 +43,9 @@ const WaysToParticipate = () => {
   const [isMobile] = useMediaQuery('(max-width: 47.99em)');
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [slideHeight, setSlideHeight] = useState(undefined);
   const carouselRef = useRef(null);
   const swipeStart = useRef(null);
   const direction = useRef(1);
-  const slideResizeObserver = useRef(null);
-
-  // Absolute slides need an explicit height or the container collapses.
-  // Keep the tallest so shorter cards don't shrink the carousel.
-  const measureSlide = (node) => {
-    slideResizeObserver.current?.disconnect();
-    if (!node) return;
-
-    const update = () => {
-      const next = Math.max(node.offsetHeight, node.scrollHeight);
-      setSlideHeight((prev) => (prev == null ? next : Math.max(prev, next)));
-    };
-
-    update();
-    slideResizeObserver.current = new ResizeObserver(update);
-    slideResizeObserver.current.observe(node);
-  };
-
-  useEffect(() => () => slideResizeObserver.current?.disconnect(), []);
 
   const goToCard = (index) => {
     direction.current = index >= currentCardIndex ? 1 : -1;
@@ -225,35 +205,47 @@ const WaysToParticipate = () => {
       {isMobile ? (
         <Box
           ref={carouselRef}
-          position="relative"
+          display="grid"
           overflow="hidden"
-          h={slideHeight}
           aria-live="polite"
           role="group"
           aria-roledescription="carousel"
           aria-label="Ways to participate"
           sx={{ touchAction: 'pan-y' }}
         >
-          <AnimatePresence custom={direction.current} initial={false}>
-            <motion.div
-              key={currentCardIndex}
-              ref={measureSlide}
-              custom={direction.current}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
-              style={{
-                position: 'absolute',
-                width: '100%',
-                top: 0,
-                left: 0,
-              }}
+          {CARDS.map(({ key, Component }) => (
+            <Box
+              key={`sizer-${key}`}
+              gridArea="1 / 1"
+              visibility="hidden"
+              pointerEvents="none"
+              aria-hidden="true"
+              w="100%"
             >
-              <ActiveCard footer={carouselControls} />
-            </motion.div>
-          </AnimatePresence>
+              <Component footer={carouselControls} />
+            </Box>
+          ))}
+          <Box gridArea="1 / 1" position="relative" overflow="hidden" w="100%">
+            <AnimatePresence custom={direction.current} initial={false}>
+              <motion.div
+                key={currentCardIndex}
+                custom={direction.current}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
+                style={{
+                  position: 'absolute',
+                  width: '100%',
+                  top: 0,
+                  left: 0,
+                }}
+              >
+                <ActiveCard footer={carouselControls} />
+              </motion.div>
+            </AnimatePresence>
+          </Box>
         </Box>
       ) : (
         <Grid

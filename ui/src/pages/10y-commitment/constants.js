@@ -27,7 +27,7 @@ export const TYC_BODY_TEXT = {
   fontFamily: 'Manrope',
   fontWeight: 500,
   letterSpacing: '0.0125rem',
-  fontSize: { base: '0.875rem', md: '1.25rem' },
+  fontSize: { base: '0.85rem', md: '1.25rem' },
 };
 
 // Manrope bold CTA — Figma: 14px mobile, 18px desktop.
@@ -115,16 +115,72 @@ export const RELEASE_MAP = { x: 0, y: 0, w: 725.4, h: 478.208 };
 // cropped off (the old JPG exports baked the shadow into the image, which
 // showed as a brown/gray crescent inside the circle).
 export const RELEASE_CITIES = [
-  { name: 'Houston', img: 'houston.png', x: 21.6, y: 294.3, w: 89.841, h: 85.028 },
+  {
+    name: 'Houston',
+    img: 'houston.png',
+    x: 21.6,
+    y: 294.3,
+    w: 89.841,
+    h: 85.028,
+  },
   { name: 'London', img: 'london.png', x: 229.5, y: 180, w: 90.643, h: 85.028 },
-  { name: 'Shanghai', img: 'shanghai.png', x: 455.91, y: 56.01, w: 83.7, h: 83.7 },
-  { name: 'Shenzhen', img: 'shenzhen.png', x: 554.91, y: 3.6, w: 89.039, h: 85.028 },
+  {
+    name: 'Shanghai',
+    img: 'shanghai.png',
+    x: 455.91,
+    y: 56.01,
+    w: 83.7,
+    h: 83.7,
+  },
+  {
+    name: 'Shenzhen',
+    img: 'shenzhen.png',
+    x: 554.91,
+    y: 3.6,
+    w: 89.039,
+    h: 85.028,
+  },
   { name: 'Seoul', img: 'seoul.png', x: 661.02, y: 24.3, w: 88.237, h: 85.028 },
-  { name: 'Tokyo', img: 'tokyo.png', x: 707.58, y: 112.5, w: 89.039, h: 85.028 },
-  { name: 'Taipei', img: 'taipei.png', x: 685.41, y: 198, w: 89.039, h: 85.028 },
-  { name: 'Kuala Lumpur', img: 'kualalumpur.png', x: 674.61, y: 306.9, w: 89.841, h: 85.028 },
-  { name: 'Jakarta', img: 'jakarta.png', x: 493.2, y: 408.6, w: 89.841, h: 85.028 },
-  { name: 'Singapore', img: 'singapore.png', x: 395.1, y: 377.1, w: 89.841, h: 85.028 },
+  {
+    name: 'Tokyo',
+    img: 'tokyo.png',
+    x: 707.58,
+    y: 112.5,
+    w: 89.039,
+    h: 85.028,
+  },
+  {
+    name: 'Taipei',
+    img: 'taipei.png',
+    x: 685.41,
+    y: 198,
+    w: 89.039,
+    h: 85.028,
+  },
+  {
+    name: 'Kuala Lumpur',
+    img: 'kualalumpur.png',
+    x: 674.61,
+    y: 306.9,
+    w: 89.841,
+    h: 85.028,
+  },
+  {
+    name: 'Jakarta',
+    img: 'jakarta.png',
+    x: 493.2,
+    y: 408.6,
+    w: 89.841,
+    h: 85.028,
+  },
+  {
+    name: 'Singapore',
+    img: 'singapore.png',
+    x: 395.1,
+    y: 377.1,
+    w: 89.841,
+    h: 85.028,
+  },
 ];
 
 // Floating region labels near each city cluster.
@@ -197,8 +253,16 @@ export const RELEASE_MOBILE_DOTS = [
 ];
 // Grid order matches the Figma mobile design, row by row.
 export const RELEASE_MOBILE_ORDER = [
-  'London', 'Shanghai', 'Shenzhen', 'Seoul', 'Taipei',
-  'Houston', 'Singapore', 'Jakarta', 'Kuala Lumpur', 'Tokyo',
+  'London',
+  'Shanghai',
+  'Shenzhen',
+  'Seoul',
+  'Taipei',
+  'Houston',
+  'Singapore',
+  'Jakarta',
+  'Kuala Lumpur',
+  'Tokyo',
 ];
 
 // The Raise commitment is a live fundraising campaign stored in the Fundraise
