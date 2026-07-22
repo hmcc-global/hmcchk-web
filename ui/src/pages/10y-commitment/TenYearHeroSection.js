@@ -1,4 +1,5 @@
 import { Stack, Image, Box, Heading, Text } from 'components';
+import { TYC_BODY_TEXT, TYC_HERO_EYEBROW, TYC_HERO_TITLE } from './constants';
 
 const TenYearHeroSection = () => {
   return (
@@ -26,22 +27,10 @@ const TenYearHeroSection = () => {
           gap="0rem"
         >
           <Stack spacing={'0'} alignItems="center" textAlign="center">
-            <Heading
-              as="h2"
-              fontSize={{ base: '1.0625rem', lg: '2.5rem' }}
-              fontWeight={700}
-              fontFamily={'DMSans_Regular'}
-              textTransform={'uppercase'}
-              letterSpacing={{ base: '0.03em', lg: '0.08em' }}
-            >
+            <Heading as="h2" {...TYC_HERO_EYEBROW}>
               Harvest Mission Global
             </Heading>
-            <Heading
-              as="h1"
-              fontSize={{ base: '2.375rem', lg: '5.625rem' }}
-              fontFamily={'DMSerifDisplay_Italic'}
-              fontWeight={400}
-            >
+            <Heading as="h1" {...TYC_HERO_TITLE}>
               10-Year Commitment
             </Heading>
           </Stack>
@@ -53,13 +42,7 @@ const TenYearHeroSection = () => {
             borderRadius="7"
             py={{ base: '1rem', lg: '2.5rem' }}
           />
-          <Text
-            mt={[1, 5]}
-            fontWeight={500}
-            fontSize={{ base: '0.875rem', lg: '1.25rem' }}
-            fontFamily={'Manrope'}
-            maxW={{ base: '90%', lg: '50%' }}
-          >
+          <Text {...TYC_BODY_TEXT} mt={[1, 5]} maxW={{ base: '90%', lg: '50%' }}>
             Join us as we embark on a God-sized commitment to plant churches,
             make disciples, and reach the nations over the next 10 years.
           </Text>

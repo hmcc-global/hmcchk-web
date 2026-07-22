@@ -3,6 +3,7 @@ import React from 'react';
 import { DateTime } from 'luxon';
 import BaseCard from './BaseCard';
 import ParticipateButton from './ParticipateButton';
+import { TYC_BODY_TEXT } from '../constants';
 
 // The gathering always falls on the 10th, so the link should open on whichever
 // 10th is coming up next rather than "today" — once the 10th has passed this
@@ -49,14 +50,7 @@ const PrayCard = ({ footer }) => {
       footer={footer}
     >
       <VStack spacing="1rem" align="stretch" flex={1} h="100%">
-        <Text
-          fontSize={{ base: '0.813rem', md: '1.25rem' }}
-          color="#FFFFFF"
-          fontFamily="Manrope"
-          fontWeight={500}
-          letterSpacing="0.0125rem"
-          textAlign="center"
-        >
+        <Text {...TYC_BODY_TEXT} color="#FFFFFF" textAlign="center">
           Commit to praying regularly for the 10-year vision: for the churches,
           the disciples, the funds, and the people being sent out.
         </Text>
@@ -70,14 +64,7 @@ const PrayCard = ({ footer }) => {
           alt="People praying together"
         />
 
-        <Text
-          fontSize={{ base: '0.813rem', md: '1.25rem' }}
-          color="#FFFFFF"
-          fontFamily="Manrope"
-          fontWeight={500}
-          letterSpacing="0.0125rem"
-          textAlign="center"
-        >
+        <Text {...TYC_BODY_TEXT} color="#FFFFFF" textAlign="center">
           Join us on the 10th of each month, we gather as a church family to
           pray for our commitment and the 10 cities God placed on our hearts.
         </Text>

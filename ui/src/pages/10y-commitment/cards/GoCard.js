@@ -2,7 +2,7 @@ import { VStack, Text, Image, HStack } from 'components';
 import React from 'react';
 import BaseCard from './BaseCard';
 import ParticipateButton from './ParticipateButton';
-import { GO_LINKS } from '../constants';
+import { GO_LINKS, TYC_BODY_TEXT } from '../constants';
 
 const GoCard = ({ footer }) => {
   return (
@@ -13,14 +13,7 @@ const GoCard = ({ footer }) => {
     >
       {/* Custom content for Go card */}
       <VStack spacing="1rem" align="stretch" flex={1} h="100%" minW={0} color="white">
-        <Text
-          fontSize={{ base: '0.813rem', md: '1.25rem' }}
-          color="#FFFFFF"
-          fontFamily="Manrope"
-          fontWeight={500}
-          letterSpacing="0.0125rem"
-          textAlign="center"
-        >
+        <Text {...TYC_BODY_TEXT} color="#FFFFFF" textAlign="center">
           Is God stirring your heart to be a part of the vision? Begin praying
           now about the cities and growing as a disciple of Christ!
         </Text>
@@ -34,15 +27,7 @@ const GoCard = ({ footer }) => {
           alt="People participating in mission work"
         />
 
-        <Text
-          fontSize={{ base: '0.813rem', md: '1.25rem' }}
-          color="white"
-          textAlign="center"
-          mt="0.5rem"
-          fontFamily="Manrope"
-          fontWeight={500}
-          letterSpacing="0.0125rem"
-        >
+        <Text {...TYC_BODY_TEXT} color="#FFFFFF" textAlign="center" mt="0.5rem">
           See events and classes for more locations
         </Text>
 

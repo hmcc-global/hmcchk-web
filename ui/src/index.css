@@ -63,5 +63,6 @@ code {
 @font-face {
   font-family: 'DMSans_Regular';
   src: local('DMSans_Regular'), url('./font/DMSans.ttf') format('truetype');
-  font-weight: normal;
+  font-weight: 100 900;
+  font-style: normal;
 }

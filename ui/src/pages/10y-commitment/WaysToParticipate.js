@@ -6,7 +6,7 @@ import {
   VStack,
   Grid,
   GridItem,
-  useBreakpointValue,
+  useMediaQuery,
   HStack,
   IconButton,
   Button,
@@ -17,7 +17,7 @@ import { FaPlay, FaPause } from 'react-icons/fa';
 import PrayCard from './cards/PrayCard';
 import GiveCard from './cards/GiveCard';
 import GoCard from './cards/GoCard';
-import { COLORS } from './constants';
+import { COLORS, TYC_BODY_TEXT, TYC_SECTION_HEADING } from './constants';
 
 // Single source of truth for the cards — used by both the mobile carousel
 // and the desktop grid so the two never drift out of sync.
@@ -40,24 +40,32 @@ const slideVariants = {
 };
 
 const WaysToParticipate = () => {
-  const isMobile = useBreakpointValue(
-    { base: true, md: false },
-    { fallback: 'md' }
-  );
+  const [isMobile] = useMediaQuery('(max-width: 47.99em)');
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [slideHeight, setSlideHeight] = useState(undefined);
   const carouselRef = useRef(null);
-  const touchStart = useRef(null);
+  const swipeStart = useRef(null);
   const direction = useRef(1);
+  const slideResizeObserver = useRef(null);
 
   // Absolute slides need an explicit height or the container collapses.
   // Keep the tallest so shorter cards don't shrink the carousel.
   const measureSlide = (node) => {
+    slideResizeObserver.current?.disconnect();
     if (!node) return;
-    const next = Math.max(node.offsetHeight, node.scrollHeight);
-    setSlideHeight((prev) => (prev == null ? next : Math.max(prev, next)));
+
+    const update = () => {
+      const next = Math.max(node.offsetHeight, node.scrollHeight);
+      setSlideHeight((prev) => (prev == null ? next : Math.max(prev, next)));
+    };
+
+    update();
+    slideResizeObserver.current = new ResizeObserver(update);
+    slideResizeObserver.current.observe(node);
   };
+
+  useEffect(() => () => slideResizeObserver.current?.disconnect(), []);
 
   const goToCard = (index) => {
     direction.current = index >= currentCardIndex ? 1 : -1;
@@ -69,30 +77,33 @@ const WaysToParticipate = () => {
     const el = carouselRef.current;
     if (!el) return undefined;
 
-    const onTouchStart = (e) => {
-      touchStart.current = {
-        x: e.touches[0].clientX,
-        y: e.touches[0].clientY,
-      };
+    const onPointerDown = (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      swipeStart.current = { x: e.clientX, y: e.clientY, id: e.pointerId };
+      el.setPointerCapture(e.pointerId);
     };
 
-    const onTouchMove = (e) => {
-      if (!touchStart.current) return;
+    const onPointerMove = (e) => {
+      if (!swipeStart.current || e.pointerId !== swipeStart.current.id) return;
 
-      const dx = e.touches[0].clientX - touchStart.current.x;
-      const dy = e.touches[0].clientY - touchStart.current.y;
+      const dx = e.clientX - swipeStart.current.x;
+      const dy = e.clientY - swipeStart.current.y;
 
       if (Math.abs(dx) > Math.abs(dy)) {
         e.preventDefault();
       }
     };
 
-    const onTouchEnd = (e) => {
-      if (!touchStart.current) return;
+    const onPointerUp = (e) => {
+      if (!swipeStart.current || e.pointerId !== swipeStart.current.id) return;
 
-      const dx = e.changedTouches[0].clientX - touchStart.current.x;
-      const dy = e.changedTouches[0].clientY - touchStart.current.y;
-      touchStart.current = null;
+      const dx = e.clientX - swipeStart.current.x;
+      const dy = e.clientY - swipeStart.current.y;
+      swipeStart.current = null;
+
+      if (el.hasPointerCapture(e.pointerId)) {
+        el.releasePointerCapture(e.pointerId);
+      }
 
       if (Math.abs(dx) < SWIPE_THRESHOLD_PX || Math.abs(dx) < Math.abs(dy)) {
         return;
@@ -106,14 +117,24 @@ const WaysToParticipate = () => {
       );
     };
 
-    el.addEventListener('touchstart', onTouchStart, { passive: true });
-    el.addEventListener('touchmove', onTouchMove, { passive: false });
-    el.addEventListener('touchend', onTouchEnd, { passive: true });
+    const onPointerCancel = (e) => {
+      if (swipeStart.current?.id !== e.pointerId) return;
+      swipeStart.current = null;
+      if (el.hasPointerCapture(e.pointerId)) {
+        el.releasePointerCapture(e.pointerId);
+      }
+    };
+
+    el.addEventListener('pointerdown', onPointerDown);
+    el.addEventListener('pointermove', onPointerMove, { passive: false });
+    el.addEventListener('pointerup', onPointerUp);
+    el.addEventListener('pointercancel', onPointerCancel);
 
     return () => {
-      el.removeEventListener('touchstart', onTouchStart);
-      el.removeEventListener('touchmove', onTouchMove);
-      el.removeEventListener('touchend', onTouchEnd);
+      el.removeEventListener('pointerdown', onPointerDown);
+      el.removeEventListener('pointermove', onPointerMove);
+      el.removeEventListener('pointerup', onPointerUp);
+      el.removeEventListener('pointercancel', onPointerCancel);
     };
   }, [isMobile]);
 
@@ -183,19 +204,15 @@ const WaysToParticipate = () => {
       <VStack spacing={{ base: '1rem', md: '1.5rem' }} align="center" w="100%">
         <Heading
           as="h2"
+          {...TYC_SECTION_HEADING}
           fontSize={{ base: '2rem', md: '2.813rem' }}
-          fontWeight={400}
           textAlign="center"
           color={COLORS.brandBlue}
-          fontFamily="DMSerifDisplay_Italic"
         >
           Ways to Participate
         </Heading>
         <Text
-          fontSize={{ base: '0.813rem', md: '1.25rem' }}
-          fontWeight={500}
-          fontFamily={'Manrope'}
-          letterSpacing="0.0125rem"
+          {...TYC_BODY_TEXT}
           textAlign="center"
           color={COLORS.bodyText}
           lineHeight="1.6"
@@ -230,7 +247,6 @@ const WaysToParticipate = () => {
               style={{
                 position: 'absolute',
                 width: '100%',
-                height: '100%',
                 top: 0,
                 left: 0,
               }}

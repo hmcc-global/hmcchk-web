@@ -15,6 +15,80 @@ export const COLORS = {
   regionLabel: '#4169eb',
 };
 
+// --- Typography (Figma TYC) ---
+
+const serifItalic = {
+  fontFamily: 'DMSerifDisplay_Italic',
+  fontWeight: 400,
+};
+
+// Manrope medium body — 14px mobile, 20px desktop.
+export const TYC_BODY_TEXT = {
+  fontFamily: 'Manrope',
+  fontWeight: 500,
+  letterSpacing: '0.0125rem',
+  fontSize: { base: '0.875rem', md: '1.25rem' },
+};
+
+// Manrope bold CTA — Figma: 14px mobile, 18px desktop.
+export const TYC_CTA_TEXT = {
+  fontFamily: 'Manrope',
+  fontWeight: 700,
+  fontSize: { base: '0.875rem', md: '1.125rem' },
+  lineHeight: '1',
+};
+
+export const TYC_CTA_ICON_SIZE = { base: '1.125rem', md: '1.5rem' };
+
+export const TYC_SECTION_HEADING = {
+  ...serifItalic,
+};
+
+export const TYC_PANEL_HEADING = {
+  ...serifItalic,
+  fontSize: { base: '1.5rem', md: '1.875rem' },
+  textTransform: 'capitalize',
+};
+
+export const TYC_CARD_TITLE = {
+  ...serifItalic,
+  fontSize: { base: '1.56rem', md: '1.75rem' },
+};
+
+export const TYC_CARD_SUBTITLE = {
+  fontFamily: 'Manrope',
+  fontWeight: 800,
+  fontSize: { base: '0.875rem', md: '1.25rem' },
+  textTransform: 'uppercase',
+  letterSpacing: '0.125rem',
+};
+
+export const TYC_TAB_LABEL = {
+  fontFamily: 'DMSans_Regular',
+  fontWeight: 700,
+  fontSize: { base: '0.875rem', md: '1.5rem' },
+  textTransform: 'uppercase',
+};
+
+export const TYC_HERO_EYEBROW = {
+  fontFamily: 'DMSans_Regular',
+  fontWeight: 700,
+  fontSize: { base: '1.0625rem', md: '2.5rem' },
+  textTransform: 'uppercase',
+  letterSpacing: { base: '0.03em', md: '0.08em' },
+};
+
+export const TYC_HERO_TITLE = {
+  ...serifItalic,
+  fontSize: { base: '2.375rem', md: '5.625rem' },
+};
+
+export const TYC_RAISE_AMOUNT = {
+  fontFamily: 'Manrope',
+  fontWeight: 800,
+  fontSize: { base: '1.25rem', md: '2.2rem' },
+};
+
 export const GO_LINKS = {
   austin: 'https://atx.hmccglobal.org/',
   hongKong: 'https://hk.hmccglobal.org/',

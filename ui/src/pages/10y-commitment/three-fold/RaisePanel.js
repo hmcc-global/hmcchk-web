@@ -10,6 +10,7 @@ import {
   RAISE_FALLBACK_GOAL,
   RAISE_LAYOUT,
   TYC_IMG,
+  TYC_RAISE_AMOUNT,
 } from '../constants';
 
 const usd = (n) => `$${n.toLocaleString('en-US')} USD`;
@@ -61,9 +62,7 @@ const RaisePanel = ({ onPrev, onNext }) => {
             top={RAISE_LAYOUT.amountAnchorTop}
             left="50%"
             transform="translate(-50%, -50%)"
-            fontFamily="Manrope"
-            fontWeight={800}
-            fontSize={{ base: '1.25rem', md: '2.2rem' }}
+            {...TYC_RAISE_AMOUNT}
             color="white"
             whiteSpace="nowrap"
           >

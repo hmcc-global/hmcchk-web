@@ -13,7 +13,7 @@ import {
 } from 'components';
 import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { COLORS, TYC_IMG } from './constants';
+import { COLORS, TYC_BODY_TEXT, TYC_IMG, TYC_SECTION_HEADING, TYC_TAB_LABEL } from './constants';
 import ReleasePanel from './three-fold/ReleasePanel';
 import ReproducePanel from './three-fold/ReproducePanel';
 import RaisePanel from './three-fold/RaisePanel';
@@ -63,8 +63,7 @@ const ThreeFoldCommitment = () => {
         <MotionBox variants={fadeUp} w="100%">
           <Heading
             as="h2"
-            fontFamily="DMSerifDisplay_Italic"
-            fontWeight={400}
+            {...TYC_SECTION_HEADING}
             fontSize={{ base: '2rem', md: '2.375rem' }}
             color={COLORS.brandBlue}
             textAlign="center"
@@ -74,10 +73,7 @@ const ThreeFoldCommitment = () => {
         </MotionBox>
         <MotionBox variants={fadeUp} w="100%">
           <Text
-            fontFamily="Manrope"
-            fontWeight={500}
-            fontSize={{ base: '0.875rem', md: '1.125rem' }}
-            letterSpacing="0.0125rem"
+            {...TYC_BODY_TEXT}
             color="#000000"
             textAlign="center"
             maxW="1080px"
@@ -136,13 +132,7 @@ const ThreeFoldCommitment = () => {
                   aria-hidden="true"
                   boxSize={{ base: '3rem', md: '3.25rem' }}
                 />
-                <Text
-                  fontFamily="DMSans_Regular"
-                  fontWeight={700}
-                  fontSize={{ base: '0.875rem', md: '1.5rem' }}
-                  textTransform="uppercase"
-                  color="#000000"
-                >
+                <Text {...TYC_TAB_LABEL} color="#000000">
                   {label}
                 </Text>
                 {/* Reserves space + shows a faint underline on hover; the solid

@@ -2,7 +2,7 @@ import { Button } from 'components';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { ArrowForwardIcon } from 'components/icons';
-import { COLORS } from '../constants';
+import { COLORS, TYC_CTA_ICON_SIZE, TYC_CTA_TEXT } from '../constants';
 
 // Shared CTA used across the Ways to Participate cards.
 // Pass `to` for an internal route (react-router) or `href` for an external link.
@@ -20,20 +20,17 @@ const ParticipateButton = ({ to, href, children, ...rest }) => {
     <Button
       {...linkProps}
       w="100%"
+      minW={0}
+      overflow="hidden"
       bg={COLORS.buttonGradient}
       color={COLORS.brandBlue}
       _hover={{ opacity: 0.9 }}
-      fontFamily="Manrope"
-      fontWeight={700}
-      fontSize={{ base: '1rem', lg: '1rem' }}
+      {...TYC_CTA_TEXT}
       borderRadius="80px"
-      px={{ base: '0.75rem', md: '1.5rem' }}
-      py={{ base: '0.5rem', md: '1rem' }}
-      rightIcon={
-        <ArrowForwardIcon fontSize={{ base: '1.25rem', lg: '1rem' }} />
-      }
+      px="1.25rem"
+      py="0.625rem"
+      rightIcon={<ArrowForwardIcon fontSize={TYC_CTA_ICON_SIZE} />}
       justifyContent="space-between"
-      lineHeight="1"
       {...rest}
     >
       {children}

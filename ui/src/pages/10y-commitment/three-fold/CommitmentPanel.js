@@ -1,7 +1,7 @@
 import { Box, Heading, Image, Text } from 'components';
 import React from 'react';
 import { MotionBox, MotionVStack, fadeUp, staggerContainer } from './motion';
-import { TYC_IMG } from '../constants';
+import { TYC_BODY_TEXT, TYC_IMG, TYC_PANEL_HEADING } from '../constants';
 
 // One round arrow button pinned to a card edge. `flip` mirrors the (rightward
 // pointing) icon to make a "previous" affordance without a second asset.
@@ -61,24 +61,13 @@ const CommitmentPanel = ({ heading, body, onPrev, onNext, children }) => {
         animate="show"
       >
         <MotionBox variants={fadeUp} w="100%">
-          <Heading
-            as="h3"
-            fontFamily="DMSerifDisplay_Italic"
-            fontWeight={400}
-            textTransform="capitalize"
-            fontSize={{ base: '1.5rem', md: '1.875rem' }}
-            color="#000000"
-            textAlign="center"
-          >
+          <Heading as="h3" {...TYC_PANEL_HEADING} color="#000000" textAlign="center">
             {heading}
           </Heading>
         </MotionBox>
         <MotionBox variants={fadeUp} w="100%">
           <Text
-            fontFamily="Manrope"
-            fontWeight={500}
-            fontSize={{ base: '0.875rem', md: '1.125rem' }}
-            letterSpacing="0.0125rem"
+            {...TYC_BODY_TEXT}
             color="#000000"
             textAlign="center"
             maxW="966px"
