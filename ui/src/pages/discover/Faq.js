@@ -9,6 +9,7 @@ import {
   Link,
 } from 'components';
 import { AiFillPlusCircle } from 'react-icons/ai';
+import { LIFE_GROUP_SIGNUP_PATH } from 'utils/constants';
 
 const Faq = (props) => {
   // TODO: verify expand icon
@@ -37,7 +38,7 @@ const Faq = (props) => {
           LIFE Groups happen every Tuesday or Wednesday nights across the city
           and university campuses! If you would like to join us, please sign-up{' '}
           <Link
-            href="https://bit.ly/summerLG26"
+            href={LIFE_GROUP_SIGNUP_PATH}
             fontStyle="italic"
             color="blue"
             isExternal

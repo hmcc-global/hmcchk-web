@@ -56,10 +56,15 @@ const CustomFaqAccordion = ({ data, borderColor, bgColor, width }) => {
                 {item.content.split('\n').map((line, i) => (
                   <Box key={i}>
                     {line.split(' ').map((word, j, words) => {
-                      // Check if the word is a URL
-                      if (word.startsWith('http')) {
+                      // Check if the word is a URL or an internal /go/ path
+                      if (word.startsWith('http') || word.startsWith('/go/')) {
                         return (
-                          <Link key={j} href={word} isExternal color="teal.500">
+                          <Link
+                            key={j}
+                            href={word}
+                            isExternal={word.startsWith('http')}
+                            color="teal.500"
+                          >
                             here{' '}
                           </Link>
                         );

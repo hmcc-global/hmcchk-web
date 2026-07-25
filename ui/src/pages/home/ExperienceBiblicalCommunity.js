@@ -12,6 +12,7 @@ import {
   useMediaQuery,
   Link,
 } from 'components';
+import { LIFE_GROUP_SIGNUP_PATH } from 'utils/constants';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -212,7 +213,7 @@ const ExperienceBiblicalCommunity = () => {
                           Investment, Faith, and Enjoyment.
                         </Text>
                       </Box>
-                      <Link href="https://bit.ly/summerLG26" w="100%">
+                      <Link href={LIFE_GROUP_SIGNUP_PATH} w="100%">
                         <Button
                           w="100%"
                           pl={10.5}
@@ -356,7 +357,7 @@ const ExperienceBiblicalCommunity = () => {
                           </Text>
                         </HStack>
                         <Spacer />
-                        <Link href="https://bit.ly/summerLG26">
+                        <Link href={LIFE_GROUP_SIGNUP_PATH}>
                           <Button
                             pt={6}
                             pb={6}
