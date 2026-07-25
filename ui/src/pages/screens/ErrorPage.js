@@ -108,6 +108,14 @@ const ErrorPage = (props) => {
       buttonLink: '/',
       buttonText: 'Back to Homepage',
     },
+    'link-unavailable': {
+      type: 'error',
+      primaryText: 'This registration or link is currently unavailable.',
+      boldedText:
+        'Please check back later, or contact us at hk@hmccglobal.org',
+      buttonLink: '/',
+      buttonText: 'Back to Homepage',
+    },
     'form-is-closed': {
       type: 'error',
       primaryText:
@@ -176,6 +184,8 @@ const ErrorPage = (props) => {
           return 'need-baptized-member';
         case '/form-unavailable':
           return 'form-unavailable';
+        case '/link-unavailable':
+          return 'link-unavailable';
         case '/form-is-closed':
           return 'form-is-closed';
         case '/form-will-open':

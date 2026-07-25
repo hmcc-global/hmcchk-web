@@ -38,4 +38,45 @@ module.exports.bootstrap = async function () {
     '0 0 21 * * *',
     async () => sails.helpers.parseuserquery.parseUserQuery()
   );
+
+  // Seed the permanent life-group Site Link, preserving the currently deployed
+  // destination so /go/life-group works the moment this deploys. Look up by slug
+  // regardless of isDeleted so an accidental soft-delete is repaired, not blocked
+  // by the unique slug/key constraint.
+  try {
+    let lifeGroupLink = await SiteLink.findOne({ slug: 'life-group' });
+    if (!lifeGroupLink) {
+      lifeGroupLink = await SiteLink.create({
+        key: 'life-group',
+        label: 'LIFE Group Signup',
+        slug: 'life-group',
+        isEnabled: true,
+      }).fetch();
+      sails.log.info('Seeded life-group site link');
+    } else if (lifeGroupLink.isDeleted || !lifeGroupLink.isEnabled) {
+      lifeGroupLink = await SiteLink.updateOne({ id: lifeGroupLink.id }).set({
+        isDeleted: false,
+        isEnabled: true,
+      });
+      sails.log.info('Re-enabled life-group site link');
+    }
+
+    const targetCount = await SiteLinkTarget.count({
+      siteLink: lifeGroupLink.id,
+      isDeleted: false,
+    });
+    if (targetCount === 0) {
+      await SiteLinkTarget.create({
+        siteLink: lifeGroupLink.id,
+        destinationType: 'url',
+        destinationUrl: 'https://bit.ly/summerLG26',
+        activeFrom: '',
+        activeUntil: '',
+        updatedBy: 'system-seed',
+      });
+      sails.log.info('Seeded life-group default target');
+    }
+  } catch (err) {
+    sails.log.error('Failed to seed life-group site link', err);
+  }
 };
