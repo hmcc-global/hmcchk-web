@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Heading } from 'components';
 import CustomFaqAccordion from './CustomFaqAccordion';
+import { LIFE_GROUP_SIGNUP_PATH } from 'utils/constants';
 
 const LifeGroupFaq = () => {
   const bgColor = '#F1E6E6';
@@ -9,7 +10,7 @@ const LifeGroupFaq = () => {
   const faqData = [
     {
       title: 'When do LIFE Groups happen?',
-      content: `LIFE Groups happen every Tuesday or Wednesday nights across the city and university campuses! If you would like to join us, please sign-up https://bit.ly/summerLG26 , and we will contact you shortly after.`,
+      content: `LIFE Groups happen every Tuesday or Wednesday nights across the city and university campuses! If you would like to join us, please sign-up ${LIFE_GROUP_SIGNUP_PATH} and we will contact you shortly after.`,
     },
     {
       title:

@@ -12,6 +12,7 @@ import {
   Text,
   Link,
 } from 'components';
+import { LIFE_GROUP_SIGNUP_PATH } from 'utils/constants';
 import LifeGroupCard from './LifeGroupCard';
 import lifeGroupList from './lifegroups.json';
 import { MdPeople } from 'react-icons/md';
@@ -123,7 +124,7 @@ const LifeGroupPage = () => {
               </Text>
               <Button
                 as={Link}
-                href="https://bit.ly/summerLG26"
+                href={LIFE_GROUP_SIGNUP_PATH}
                 borderRadius={'0.9375rem'}
                 bgColor="#D46764"
                 py={'1.75rem'}

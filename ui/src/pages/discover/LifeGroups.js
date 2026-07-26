@@ -11,6 +11,7 @@ import {
   Stack,
   Text,
 } from 'components';
+import { LIFE_GROUP_SIGNUP_PATH } from 'utils/constants';
 import LifeGroupCard from './LifeGroupCard';
 import lifeGroupList from './lifegroups.json';
 import OurMinistries from './OurMinistries';
@@ -98,7 +99,7 @@ const LifeGroups = (props) => {
               target="_blank"
             >
               <LinkOverlay
-                href="https://bit.ly/summerLG26"
+                href={LIFE_GROUP_SIGNUP_PATH}
                 target="_blank"
                 backgroundImage="linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(to right, #fd7b7e, #3182ce)"
                 backgroundSize="100%"
