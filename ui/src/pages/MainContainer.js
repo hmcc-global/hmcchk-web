@@ -44,6 +44,7 @@ import OnlineSermonNotesRedirect from './sermon-notes/OnlineSermonNotesRedirect'
 import SermonNotesContainer from './sermon-notes/SermonNotesContainer';
 import PrivacyPolicy from './screens/PrivacyPolicy';
 import AdminFundraiseContainer from './admin/fundraise/AdminFundraiseContainer';
+import AdminSiteLinksContainer from './admin/site-links/AdminSiteLinksContainer';
 import ConnectMinistry from './discover/ConnectMinistry';
 import LifeGroupPage from './discover/LifeGroupPage';
 import StructuredData from './seo/StructuredData';
@@ -358,6 +359,12 @@ const MainContainer = () => {
           path="/admin/fundraise"
           permissions={['admin', 'stewardship']}
           component={AdminFundraiseContainer}
+        />
+        <PrivateRoute
+          exact
+          path="/admin/site-links"
+          permissions={['tc', 't3ch', 'admin', 'stewardship']}
+          component={AdminSiteLinksContainer}
         />
         <PrivateRoute path="*" permissions={['public']} component={ErrorPage} />
       </Switch>

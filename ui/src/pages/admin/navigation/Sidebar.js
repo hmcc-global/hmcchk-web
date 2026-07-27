@@ -24,6 +24,7 @@ import {
   FiShield,
   FiAlertCircle,
   FiDollarSign,
+  FiLink,
 } from 'react-icons/fi';
 import { CgNotes } from 'react-icons/cg';
 
@@ -43,6 +44,7 @@ const LinkItems = [
     icon: FiShield,
     path: '/admin/leadership-team',
   },
+  { name: 'Site Links', icon: FiLink, path: '/admin/site-links' },
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {
