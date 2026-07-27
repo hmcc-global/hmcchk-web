@@ -24,7 +24,8 @@ module.exports = {
     },
     destinationUrl: {
       type: 'string',
-      description: 'Direct https URL or safe internal path; required when destinationType=url.',
+      description:
+        'Direct https URL or safe internal path; required when destinationType=url.',
     },
     activeFrom: {
       type: 'ref',
@@ -38,7 +39,8 @@ module.exports = {
     },
     updatedBy: {
       type: 'string',
-      description: 'Full name of the authenticated user who last saved this target.',
+      description:
+        'Full name of the authenticated user who last saved this target.',
     },
     isDeleted: {
       type: 'boolean',

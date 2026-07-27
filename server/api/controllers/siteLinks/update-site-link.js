@@ -1,7 +1,8 @@
 module.exports = {
   friendlyName: 'Update site link',
 
-  description: 'Update a Site Link label, enable/disable it, or soft-delete it.',
+  description:
+    'Update a Site Link label, enable/disable it, or soft-delete it.',
 
   inputs: {
     id: { type: 'string', required: true },

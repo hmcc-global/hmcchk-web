@@ -34,47 +34,33 @@ module.exports.bootstrap = async function () {
 
   sails.log('Initialising Parse User Query Emails Cron');
   // every EOD at 9PM
-  schedule.scheduleJob(
-    '0 0 21 * * *',
-    async () => sails.helpers.parseuserquery.parseUserQuery()
+  schedule.scheduleJob('0 0 21 * * *', async () =>
+    sails.helpers.parseuserquery.parseUserQuery()
   );
 
-  // Seed the permanent life-group Site Link, preserving the currently deployed
-  // destination so /go/life-group works the moment this deploys. Look up by slug
-  // regardless of isDeleted so an accidental soft-delete is repaired, not blocked
-  // by the unique slug/key constraint.
+  // Seed the permanent LIFE Group Site Link only when it does not exist. Once
+  // created, admin changes are authoritative and must survive deploys/restarts.
   try {
-    let lifeGroupLink = await SiteLink.findOne({ slug: 'life-group' });
-    if (!lifeGroupLink) {
-      lifeGroupLink = await SiteLink.create({
+    const existingLifeGroupLink = await SiteLink.findOne({
+      slug: 'life-group',
+    });
+    if (!existingLifeGroupLink) {
+      const lifeGroupLink = await SiteLink.create({
         key: 'life-group',
         label: 'LIFE Group Signup',
         slug: 'life-group',
         isEnabled: true,
       }).fetch();
-      sails.log.info('Seeded life-group site link');
-    } else if (lifeGroupLink.isDeleted || !lifeGroupLink.isEnabled) {
-      lifeGroupLink = await SiteLink.updateOne({ id: lifeGroupLink.id }).set({
-        isDeleted: false,
-        isEnabled: true,
-      });
-      sails.log.info('Re-enabled life-group site link');
-    }
 
-    const targetCount = await SiteLinkTarget.count({
-      siteLink: lifeGroupLink.id,
-      isDeleted: false,
-    });
-    if (targetCount === 0) {
       await SiteLinkTarget.create({
         siteLink: lifeGroupLink.id,
         destinationType: 'url',
-        destinationUrl: 'https://bit.ly/summerLG26',
+        destinationUrl: 'https://bit.ly/lifegroup2627',
         activeFrom: '',
         activeUntil: '',
         updatedBy: 'system-seed',
       });
-      sails.log.info('Seeded life-group default target');
+      sails.log.info('Seeded life-group site link and default target');
     }
   } catch (err) {
     sails.log.error('Failed to seed life-group site link', err);

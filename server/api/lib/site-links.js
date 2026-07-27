@@ -21,7 +21,8 @@ const isSafeUrl = (value) => {
   if (!url || CONTROL_CHARS.test(url)) return false;
   const lower = url.toLowerCase();
   if (UNSAFE_PROTOCOLS.some((proto) => lower.startsWith(proto))) return false;
-  if (url.charAt(0) === '/') return url.charAt(1) !== '/' && !url.includes('\\');
+  if (url.charAt(0) === '/')
+    return url.charAt(1) !== '/' && !url.includes('\\');
   try {
     return new URL(url).protocol === 'https:';
   } catch (unusedErr) {
@@ -33,6 +34,20 @@ const isValidSlug = (slug) =>
   typeof slug === 'string' && SLUG_PATTERN.test(slug);
 
 // A form is available when published, not deleted, and now is within its window.
+// Waterline criteria equivalent to isFormAvailable, shared with /forms/:id.
+const getFormAvailabilityCriteria = (now) => ({
+  isPublished: true,
+  isDeleted: false,
+  or: [
+    {
+      formAvailableFrom: { '<=': now },
+      formAvailableUntil: { '>=': now },
+    },
+    { formAvailableFrom: { '<=': now }, formAvailableUntil: '' },
+    { formAvailableFrom: '', formAvailableUntil: { '>=': now } },
+    { formAvailableFrom: '', formAvailableUntil: '' },
+  ],
+});
 const isFormAvailable = (form, now) => {
   if (!form || form.isPublished !== true || form.isDeleted === true) {
     return false;
@@ -140,6 +155,7 @@ const validateTarget = (payload, siblings, excludeId) => {
 module.exports = {
   isSafeUrl,
   isValidSlug,
+  getFormAvailabilityCriteria,
   isFormAvailable,
   findActiveTarget,
   resolveDestination,

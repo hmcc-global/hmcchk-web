@@ -1,4 +1,7 @@
-const { findActiveTarget, resolveDestination } = require('../../lib/site-links');
+const {
+  findActiveTarget,
+  resolveDestination,
+} = require('../../lib/site-links');
 
 const UNAVAILABLE_PATH = '/link-unavailable';
 
