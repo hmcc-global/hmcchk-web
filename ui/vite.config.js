@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 // plugin-react only enables Fast Refresh for .js files when the raw code already
 // references the JSX runtime (it can't know the file contains JSX otherwise).
@@ -26,7 +27,11 @@ const jsFastRefreshHint = {
 };
 
 export default defineConfig({
-  plugins: [jsFastRefreshHint, react()],
+  // reads jsconfig.json's baseUrl: "src" — the same config CRA used to resolve
+  // bare imports like `from 'components'` or `from 'pages/screens/ClearCache'`.
+  // Rollup has no equivalent built in, so without this every bare-from-src
+  // import fails to resolve.
+  plugins: [tsconfigPaths(), jsFastRefreshHint, react()],
   server: {
     port: 3000, // keep CRA's dev port
     proxy: {
