@@ -23,7 +23,7 @@ export const sermonIdMap = {
   'Sunday Celebration': 'sn',
   'Vision Sunday': 'vs',
   'Special Events': 'se',
-  Encounter: 'en',
+  'Encounter': 'en',
 };
 
 const SermonNotesEditorModal = (props) => {

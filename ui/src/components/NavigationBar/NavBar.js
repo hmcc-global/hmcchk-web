@@ -103,6 +103,7 @@ const NavBar = (props) => {
   return (
     <>
       <Flex
+        id="site-navbar"
         position="fixed"
         top="0"
         width="100%"

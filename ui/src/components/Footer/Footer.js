@@ -21,7 +21,12 @@ const Footer = () => {
   const location = useLocation();
 
   return (
-    <Box bgColor={'#F6FAFF'} borderTop="2px solid" borderColor="#4A6EEB">
+    <Box
+      id="site-footer"
+      bgColor={'#F6FAFF'}
+      borderTop="2px solid"
+      borderColor="#4A6EEB"
+    >
       <Container maxW="container.xl" py="2em">
         <Flex
           display={location.pathname.includes('/admin') ? 'none' : 'flex'}
