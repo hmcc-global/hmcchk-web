@@ -57,7 +57,7 @@ const FileUpload = (props) => {
         Authorization:
           'Basic ' +
           btoa(
-            `${process.env.REACT_APP_WP_USERNAME}:${process.env.REACT_APP_WP_PASSWORD}`
+            `${import.meta.env.REACT_APP_WP_USERNAME}:${import.meta.env.REACT_APP_WP_PASSWORD}`
           ),
       };
 
@@ -69,7 +69,7 @@ const FileUpload = (props) => {
 
       try {
         const response = await axios.post(
-          process.env.REACT_APP_WP_MEDIA_API,
+          import.meta.env.REACT_APP_WP_MEDIA_API,
           formData,
           { ...config, headers }
         );
