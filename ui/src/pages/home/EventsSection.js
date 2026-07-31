@@ -40,7 +40,7 @@ const EventsSection = () => {
         const filtered = [];
         const filteredEndDate = data.filter((item) => {
           if (item.displayStartDateTime) {
-            let displayStartDate = new DateTime.fromISO(
+            let displayStartDate = DateTime.fromISO(
               item.displayStartDateTime
             );
             if (displayStartDate > DateTime.now()) return false;
@@ -48,8 +48,8 @@ const EventsSection = () => {
 
           if (item.displayEndDateTime !== '') {
             // Add one day to offset end date to end of day
-            let endDate = new DateTime.fromISO(item.displayEndDateTime);
-            let startDate = new DateTime.fromISO(item.displayStartDateTime);
+            let endDate = DateTime.fromISO(item.displayEndDateTime);
+            let startDate = DateTime.fromISO(item.displayStartDateTime);
             const renderDate = getRenderDate(
               item.eventStartDate,
               item.eventEndDate,
