@@ -25,12 +25,15 @@ module.exports = {
 
   fn: async function ({ id, formToSave }, exits) {
     try {
-      if (formToSave.courses) {
+      if (
+        formToSave.classTrackingTemplate &&
+        formToSave.classTrackingTemplate.courses
+      ) {
         const existingForm = await Form.findOne({ id });
-        const existingCourseIds = (existingForm.courses || []).map(
-          (course) => course.courseId
-        );
-        const newCourseIds = formToSave.courses.map(
+        const existingCourseIds = (
+          (existingForm.classTrackingTemplate || {}).courses || []
+        ).map((course) => course.courseId);
+        const newCourseIds = formToSave.classTrackingTemplate.courses.map(
           (course) => course.courseId
         );
         const removedCourseIds = existingCourseIds.filter(

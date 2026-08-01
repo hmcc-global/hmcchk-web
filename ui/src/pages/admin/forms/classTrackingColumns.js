@@ -46,9 +46,19 @@ export const createClassTrackerColumns = ({
   dateCellProps,
   mediumTextEditorProps,
 }) => {
+  // Archived courses trail after the active ones so current-season work stays
+  // on the left. Sort a copy (sort mutates) and rely on it being stable to keep
+  // the configured order within each group. Purely presentational - every cell
+  // read/write is keyed by courseId, not by position.
+  // Boolean() so a missing isActive sorts as archived, matching how isArchived
+  // reads it below (a raw Number(undefined) is NaN and would leave it in place).
+  const orderedCourses = [...courses].sort(
+    (a, b) => Number(Boolean(b.isActive)) - Number(Boolean(a.isActive))
+  );
+
   return {
     headerName: 'Class Tracking',
-    children: courses.map((course) => {
+    children: orderedCourses.map((course) => {
       const isArchived = !course.isActive;
       // Active courses show their detail columns by default ('closed' = visible
       // when the group is collapsed). Archived courses collapse to just Status

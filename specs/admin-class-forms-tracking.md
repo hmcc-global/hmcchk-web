@@ -33,9 +33,11 @@ Read-only affordances in the grid:
 
 Two layers — a mutable template on the form, an immutable snapshot per registrant.
 
-**Form template** (`Form.isClass`, `Form.courses[]`): each course is
+**Form template** (`Form.isClass`, `Form.classTrackingTemplate.courses[]`): each course is
 `{ courseId, name, platform, type, isActive }`. `courseId` (a UUID) is the stable link to
 registrant records. Archiving a course sets `isActive: false` — never a hard delete.
+`classTrackingTemplate` is a JSON object (`{ courses: [...] }`) rather than a flat field so
+future column types can live alongside `courses` without adding more top-level Form fields.
 
 **Per-registrant snapshot** (`ClassTrackingData`, 1:1 with a submission, mirrors `PaymentData`):
 ```

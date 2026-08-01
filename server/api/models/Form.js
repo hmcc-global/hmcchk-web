@@ -82,12 +82,13 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false,
     },
-    courses: {
+    classTrackingTemplate: {
       type: 'json',
-      defaultsTo: [],
+      defaultsTo: { courses: [] },
       description:
-        "Template/config for this Form's courses. Each item: " +
-        '{ courseId, name, platform, type, order, isActive }',
+        "Template/config for this Form's class tracking, grouped so future " +
+        'column types can share this object. { courses: [...] } — each ' +
+        'course: { courseId, name, platform, type, order, isActive }',
     },
   },
 };
