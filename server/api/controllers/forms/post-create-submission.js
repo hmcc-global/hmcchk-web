@@ -80,9 +80,9 @@ module.exports = {
       }
 
       if (formRecord[0].isClass) {
-        const activeCourses = (formRecord[0].courses || []).filter(
-          (course) => course.isActive
-        );
+        const activeCourses = (
+          (formRecord[0].classTrackingTemplate || {}).courses || []
+        ).filter((course) => course.isActive);
 
         let existing = await ClassTrackingData.create({
           formId: formId,

@@ -23,9 +23,17 @@ import {
   Divider,
   Alert,
   AlertIcon,
+  Box,
   HStack,
+  SimpleGrid,
   IconButton,
   Text,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Checkbox,
 } from 'components';
 import { FiTrash2, FiPlus } from 'react-icons/fi';
 import FormEditor from './FormEditor';
@@ -88,6 +96,10 @@ const FormEditorContainer = (props) => {
   // Class variables
   const [isClass, setIsClass] = useState(false);
   const [courses, setCourses] = useState([]);
+  const [persistedCourseIds, setPersistedCourseIds] = useState([]);
+
+  // Which tracking tab (Payment / Class) is open in the editor
+  const [trackingTabIndex, setTrackingTabIndex] = useState(0);
 
   const resetFormEditorCallback = () => {
     reset();
@@ -117,6 +129,8 @@ const FormEditorContainer = (props) => {
     setPaymentCcEmail('');
     setIsClass(false);
     setCourses([]);
+    setPersistedCourseIds([]);
+    setTrackingTabIndex(0);
     setFormDescription('');
     setFormImage(null);
     setFormType('internal');
@@ -177,11 +191,12 @@ const FormEditorContainer = (props) => {
       setPaymentCcEmail(paymentCcEmail);
       setIsClass(data.isClass);
       // courses isn't a react-hook-form field (it's edited directly via
-      // addCourse/removeCourse/updateCourseField), so data.courses is only
-      // ever populated when this runs off a loaded editFormData record, not
-      // off the top form's onSubmit. Fall back to the current state instead
-      // of [] so clicking "Create/Update Form" doesn't wipe staged courses.
-      setCourses(data.courses ?? courses);
+      // addCourse/removeCourse/updateCourseField), so
+      // data.classTrackingTemplate.courses is only ever populated when this
+      // runs off a loaded editFormData record, not off the top form's
+      // onSubmit. Fall back to the current state instead of [] so clicking
+      // "Create/Update Form" doesn't wipe staged courses.
+      setCourses(data.classTrackingTemplate?.courses ?? courses);
       setFormDescription(data.formDescription);
       setFormImage(data.formImage);
       setFormType(data.formType);
@@ -207,11 +222,9 @@ const FormEditorContainer = (props) => {
   };
 
   const removeCourse = (courseId) => {
-    if (
-      window.confirm(
-        'Are you sure? If this course already has registrant tracking data, the server will reject this removal — deactivate the course instead.'
-      )
-    ) {
+    // Only ever called on a course added this session (not yet persisted),
+    // so it can't have registrant tracking data — a plain confirm is enough.
+    if (window.confirm('Are you sure you want to remove this course?')) {
       setCourses(courses.filter((course) => course.courseId !== courseId));
     }
   };
@@ -230,6 +243,12 @@ const FormEditorContainer = (props) => {
 
   useEffect(() => {
     setFormManagerElements(editFormData);
+    setPersistedCourseIds(
+      (editFormData?.classTrackingTemplate?.courses ?? []).map(
+        (course) => course.courseId
+      )
+    );
+    setTrackingTabIndex(editFormData?.isClass ? 1 : 0);
   }, [editFormData]);
 
   useEffect(() => {
@@ -305,294 +324,342 @@ const FormEditorContainer = (props) => {
                   </FormControl>
                   <FormControl isInvalid={formPeriodInvalid}>
                     <FormLabel>Form Availability Period</FormLabel>
+                    <SimpleGrid columns={[1, 2]} spacing="3">
+                      <Box>
+                        <FormLabel
+                          htmlFor="formAvailableFrom"
+                          fontSize="sm"
+                          fontWeight="normal"
+                          mb="1"
+                        >
+                          Starting Time
+                        </FormLabel>
+                        <Input
+                          id="formAvailableFrom"
+                          type="datetime-local"
+                          {...register('formAvailableFrom')}
+                        />
+                      </Box>
+                      <Box>
+                        <FormLabel
+                          htmlFor="formAvailableUntil"
+                          fontSize="sm"
+                          fontWeight="normal"
+                          mb="1"
+                        >
+                          Ending Time
+                        </FormLabel>
+                        <Input
+                          id="formAvailableUntil"
+                          type="datetime-local"
+                          {...register('formAvailableUntil')}
+                        />
+                      </Box>
+                    </SimpleGrid>
                     <FormErrorMessage>
                       {formPeriodInvalid &&
                         'Availability Period is invalid, please check again'}
                     </FormErrorMessage>
-                    Starting Time
-                    <Input
-                      type="datetime-local"
-                      {...register('formAvailableFrom')}
-                    />
-                    Ending Time
-                    <Input
-                      type="datetime-local"
-                      {...register('formAvailableUntil')}
-                    />
                   </FormControl>
                 </Stack>
                 {ftFlag === 'internal' && (
                   <Stack spacing="2">
                     <Divider />
                     <Heading as="h4" size="md">
-                      Paid Event Details
+                      Tracking
                     </Heading>
                     <Alert status="info">
                       <AlertIcon />
-                      This setting is not changeable after form is created, a
-                      paid event will always be a paid event!
+                      Tracking settings cannot be changed after the form is
+                      created. A paid event will always be a paid event, 
+                      and a class will always be a class!
                     </Alert>
-
-                    <FormControl>
-                      <FormLabel> Is Payment Required? </FormLabel>
-                      <Controller
-                        control={control}
-                        name="isPaymentRequired"
-                        defaultValue={false}
-                        render={({ field: { onChange, value, ref } }) => (
-                          <Switch
-                            onChange={(e) => {
-                              setIsPaymentRequired(e.target.checked);
-                              onChange(e);
-                            }}
-                            ref={ref}
-                            isChecked={value}
-                            disabled={formName != null}
-                          >
-                            {value ? 'Yes' : 'No'}
-                          </Switch>
-                        )}
-                      />
-                    </FormControl>
-                    {isPaymentRequired && (
-                      <>
-                        <FormControl
-                          isInvalid={errors['paymentConfirmationEmailTemp']}
-                          isRequired={isPaymentRequired}
-                        >
-                          <FormLabel>
-                            {' '}
-                            Payment Confirmation Email Template
-                          </FormLabel>
-                          <Select
-                            {...register('paymentConfirmationEmailTemplate', {
-                              required: isPaymentRequired,
-                            })}
-                            placeholder="Select option"
-                          >
-                            {/* To add more email template, please define the value and add the template here */}
-                            <option value="email-10y-payment-success">
-                              10Y anniversary Payment Confirmation
-                            </option>
-                            <option value="email-retreat-payment-success">
-                              Retreat 2025 Payment Confirmation
-                            </option>
-                            <option value="email-retreat-donation-payment-success">
-                              Retreat 2025 Donation Payment Confirmation
-                            </option>
-                            <option value="email-ignite-payment-success">
-                              !gnite 2023 Payment Confirmation
-                            </option>
-                            <option value="email-deep-payment-success">
-                              Deep Retreat Payment Confirmation
-                            </option>
-                            <option value="email-ug-retreat-payment-success">
-                              UG Retreat Payment Confirmation
-                            </option>
-                          </Select>
-                          <FormErrorMessage>
-                            {errors['paymentConfirmationEmailTemplate'] &&
-                              'Field type is required'}
-                          </FormErrorMessage>
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel>Payment Email Subject</FormLabel>
-                          <Input {...register('paymentEmailSubject')} />
-                          <FormHelperText>
-                            If you need a custom subject for the payment email
-                          </FormHelperText>
-                        </FormControl>
-                        <FormControl
-                          isInvalid={errors['paymentCcEmail']}
-                          isRequired={isPaymentRequired}
-                        >
-                          <FormLabel>Payment CC Email</FormLabel>
-                          <Input
-                            {...register('paymentCcEmail')}
-                            placeholder={'john@gmail.com;doe@gmail.com'}
-                          />
-                          <FormHelperText>
-                            *All Payment emails will be CC'ed to these emails
-                            (addressees will be BCC'ed). Separate CC emails with
-                            ;
-                          </FormHelperText>
-                        </FormControl>
-                      </>
-                    )}
+                    <Tabs index={trackingTabIndex} onChange={setTrackingTabIndex}>
+                      <TabList>
+                        <Tab>Payment</Tab>
+                        <Tab>Class</Tab>
+                      </TabList>
+                      <TabPanels>
+                        <TabPanel px="0">
+                          <Stack spacing="2">
+                            <FormControl display="flex" alignItems="center">
+                              <FormLabel htmlFor="isPaymentRequired" mb="0">
+                                Is Payment Required?
+                              </FormLabel>
+                              <Controller
+                                control={control}
+                                name="isPaymentRequired"
+                                defaultValue={false}
+                                render={({ field: { onChange, value, ref } }) => (
+                                  <Switch
+                                    id="isPaymentRequired"
+                                    onChange={(e) => {
+                                      setIsPaymentRequired(e.target.checked);
+                                      onChange(e);
+                                    }}
+                                    ref={ref}
+                                    isChecked={value}
+                                    isDisabled={formName != null}
+                                  >
+                                    {value ? 'Yes' : 'No'}
+                                  </Switch>
+                                )}
+                              />
+                            </FormControl>
+                            {isPaymentRequired && (
+                              <>
+                                <FormControl
+                                  isInvalid={
+                                    errors['paymentConfirmationEmailTemp']
+                                  }
+                                  isRequired={isPaymentRequired}
+                                >
+                                  <FormLabel>
+                                    {' '}
+                                    Payment Confirmation Email Template
+                                  </FormLabel>
+                                  <Select
+                                    {...register(
+                                      'paymentConfirmationEmailTemplate',
+                                      {
+                                        required: isPaymentRequired,
+                                      }
+                                    )}
+                                    placeholder="Select option"
+                                  >
+                                    {/* To add more email template, please define the value and add the template here */}
+                                    <option value="email-10y-payment-success">
+                                      10Y anniversary Payment Confirmation
+                                    </option>
+                                    <option value="email-retreat-payment-success">
+                                      Retreat 2025 Payment Confirmation
+                                    </option>
+                                    <option value="email-retreat-donation-payment-success">
+                                      Retreat 2025 Donation Payment
+                                      Confirmation
+                                    </option>
+                                    <option value="email-ignite-payment-success">
+                                      !gnite 2023 Payment Confirmation
+                                    </option>
+                                    <option value="email-deep-payment-success">
+                                      Deep Retreat Payment Confirmation
+                                    </option>
+                                    <option value="email-ug-retreat-payment-success">
+                                      UG Retreat Payment Confirmation
+                                    </option>
+                                  </Select>
+                                  <FormErrorMessage>
+                                    {errors['paymentConfirmationEmailTemplate'] &&
+                                      'Field type is required'}
+                                  </FormErrorMessage>
+                                </FormControl>
+                                <FormControl>
+                                  <FormLabel>Payment Email Subject</FormLabel>
+                                  <Input {...register('paymentEmailSubject')} />
+                                  <FormHelperText>
+                                    If you need a custom subject for the
+                                    payment email
+                                  </FormHelperText>
+                                </FormControl>
+                                <FormControl
+                                  isInvalid={errors['paymentCcEmail']}
+                                  isRequired={isPaymentRequired}
+                                >
+                                  <FormLabel>Payment CC Email</FormLabel>
+                                  <Input
+                                    {...register('paymentCcEmail')}
+                                    placeholder={'john@gmail.com;doe@gmail.com'}
+                                  />
+                                  <FormHelperText>
+                                    *All Payment emails will be CC'ed to these
+                                    emails (addressees will be BCC'ed).
+                                    Separate CC emails with ;
+                                  </FormHelperText>
+                                </FormControl>
+                              </>
+                            )}
+                          </Stack>
+                        </TabPanel>
+                        <TabPanel px="0">
+                          <Stack spacing="5">
+                            <FormControl display="flex" alignItems="center">
+                              <FormLabel htmlFor="isClass" mb="0">
+                                Is this a Class?
+                              </FormLabel>
+                              <Controller
+                                control={control}
+                                name="isClass"
+                                defaultValue={false}
+                                render={({ field: { onChange, value, ref } }) => (
+                                  <Switch
+                                    id="isClass"
+                                    onChange={(e) => {
+                                      setIsClass(e.target.checked);
+                                      onChange(e);
+                                    }}
+                                    ref={ref}
+                                    isChecked={value}
+                                  >
+                                    {value ? 'Yes' : 'No'}
+                                  </Switch>
+                                )}
+                              />
+                            </FormControl>
+                            {isClass && (
+                              <Stack spacing="3">
+                                <Heading as="h5" size="sm">
+                                  Courses{courses.length > 0 && ` (${courses.length})`}
+                                </Heading>
+                                <Alert status="info">
+                                  <AlertIcon />
+                                  Courses cannot be deleted (to persist historical 
+                                  data), it can only be deactivated.
+                                </Alert>
+                                {courses.map((course) => (
+                                  <HStack
+                                    key={course.courseId}
+                                    borderWidth="1px"
+                                    borderRadius="md"
+                                    p="2"
+                                  >
+                                    <Input
+                                      placeholder="Course name"
+                                      value={course.name}
+                                      onChange={(e) =>
+                                        updateCourseField(
+                                          course.courseId,
+                                          'name',
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                    <Input
+                                      placeholder="Platform (e.g. Coassemble)"
+                                      value={course.platform}
+                                      onChange={(e) =>
+                                        updateCourseField(
+                                          course.courseId,
+                                          'platform',
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                    <Select
+                                      value={course.type}
+                                      onChange={(e) =>
+                                        updateCourseField(
+                                          course.courseId,
+                                          'type',
+                                          e.target.value
+                                        )
+                                      }
+                                    >
+                                      <option value="Online">Online</option>
+                                      <option value="In-Person">In-Person</option>
+                                    </Select>
+                                    <Checkbox
+                                      whiteSpace="nowrap"
+                                      isChecked={course.isActive}
+                                      onChange={(e) =>
+                                        updateCourseField(
+                                          course.courseId,
+                                          'isActive',
+                                          e.target.checked
+                                        )
+                                      }
+                                    >
+                                      Active
+                                    </Checkbox>
+                                    {!persistedCourseIds.includes(
+                                      course.courseId
+                                    ) && (
+                                      <IconButton
+                                        aria-label="Remove course"
+                                        icon={<FiTrash2 />}
+                                        onClick={() =>
+                                          removeCourse(course.courseId)
+                                        }
+                                        variant="ghost"
+                                        colorScheme="red"
+                                      />
+                                    )}
+                                  </HStack>
+                                ))}
+                                {courses.length === 0 && (
+                                  <Text color="gray.500">
+                                    No courses yet — add at least one course
+                                    for this class.
+                                  </Text>
+                                )}
+                                <Button
+                                  onClick={addCourse}
+                                  leftIcon={<FiPlus />}
+                                  alignSelf="start"
+                                >
+                                  Add Course
+                                </Button>
+                              </Stack>
+                            )}
+                          </Stack>
+                        </TabPanel>
+                      </TabPanels>
+                    </Tabs>
                   </Stack>
                 )}
                 {ftFlag === 'internal' && (
                   <Stack spacing="2">
-                    <Divider />
-                    <Heading as="h4" size="md">
-                      Class Details
-                    </Heading>
-                    <Alert status="info">
-                      <AlertIcon />
-                      Course count can only grow — once registrants have
-                      tracking data on a course, it can only be deactivated
-                      (archived), never removed.
-                    </Alert>
-
-                    <FormControl>
-                      <FormLabel>Is this a Class?</FormLabel>
-                      <Controller
-                        control={control}
-                        name="isClass"
-                        defaultValue={false}
-                        render={({ field: { onChange, value, ref } }) => (
-                          <Switch
-                            onChange={(e) => {
-                              setIsClass(e.target.checked);
-                              onChange(e);
-                            }}
-                            ref={ref}
-                            isChecked={value}
-                          >
-                            {value ? 'Yes' : 'No'}
-                          </Switch>
-                        )}
-                      />
-                    </FormControl>
-                    {isClass && (
-                      <Stack spacing="3">
-                        {courses.map((course) => (
-                          <HStack
-                            key={course.courseId}
-                            borderWidth="1px"
-                            borderRadius="md"
-                            p="2"
-                          >
-                            <Input
-                              placeholder="Course name"
-                              value={course.name}
-                              onChange={(e) =>
-                                updateCourseField(
-                                  course.courseId,
-                                  'name',
-                                  e.target.value
-                                )
-                              }
-                            />
-                            <Input
-                              placeholder="Platform (e.g. Coassemble)"
-                              value={course.platform}
-                              onChange={(e) =>
-                                updateCourseField(
-                                  course.courseId,
-                                  'platform',
-                                  e.target.value
-                                )
-                              }
-                            />
-                            <Select
-                              value={course.type}
-                              onChange={(e) =>
-                                updateCourseField(
-                                  course.courseId,
-                                  'type',
-                                  e.target.value
-                                )
-                              }
-                            >
-                              <option value="Online">Online</option>
-                              <option value="Offline">Offline</option>
-                            </Select>
-                            <FormLabel m="0" whiteSpace="nowrap">
-                              Active
-                            </FormLabel>
-                            <Switch
-                              isChecked={course.isActive}
-                              onChange={(e) =>
-                                updateCourseField(
-                                  course.courseId,
-                                  'isActive',
-                                  e.target.checked
-                                )
-                              }
-                            />
-                            <IconButton
-                              aria-label="Remove course"
-                              icon={<FiTrash2 />}
-                              onClick={() => removeCourse(course.courseId)}
-                              variant="ghost"
-                              colorScheme="red"
-                            />
-                          </HStack>
-                        ))}
-                        <Button
-                          onClick={addCourse}
-                          leftIcon={<FiPlus />}
-                          alignSelf="start"
-                        >
-                          Add Course
-                        </Button>
-                        {courses.length === 0 && (
-                          <Text color="gray.500">
-                            No courses yet — add at least one course for this
-                            class.
-                          </Text>
-                        )}
-                      </Stack>
-                    )}
-                  </Stack>
-                )}
-                {ftFlag === 'internal' && (
-                  <Stack spacing="2">
-                    <Heading as="h4" size="md">
+                    <Heading as="h4" size="md" id="formPrerequisitesLabel">
                       Form Prerequisites
                     </Heading>
-                    <FormControl>
-                      <FormLabel>Require login?</FormLabel>
+                    <Stack
+                      direction={['column', 'row']}
+                      spacing="4"
+                      role="group"
+                      aria-labelledby="formPrerequisitesLabel"
+                    >
                       <Controller
                         control={control}
                         name="requireLogin"
                         defaultValue={true}
                         render={({ field: { onChange, value, ref } }) => (
-                          <Switch
+                          <Checkbox
                             onChange={onChange}
                             ref={ref}
                             isChecked={value}
                           >
-                            {value ? 'Yes' : 'No'}
-                          </Switch>
+                            Require login
+                          </Checkbox>
                         )}
                       />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>Require membership?</FormLabel>
                       <Controller
                         control={control}
                         name="requireMembership"
-                        defaultValue={true}
+                        defaultValue={false}
                         render={({ field: { onChange, value, ref } }) => (
-                          <Switch
+                          <Checkbox
                             onChange={onChange}
                             ref={ref}
                             isChecked={value}
                           >
-                            {value ? 'Yes' : 'No'}
-                          </Switch>
+                            Require membership
+                          </Checkbox>
                         )}
                       />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>Require baptism?</FormLabel>
                       <Controller
                         control={control}
                         name="requireBaptism"
-                        defaultValue={true}
+                        defaultValue={false}
                         render={({ field: { onChange, value, ref } }) => (
-                          <Switch
+                          <Checkbox
                             onChange={onChange}
                             ref={ref}
                             isChecked={value}
                           >
-                            {value ? 'Yes' : 'No'}
-                          </Switch>
+                            Require baptism
+                          </Checkbox>
                         )}
                       />
-                    </FormControl>
+                    </Stack>
                     <Divider />
                   </Stack>
                 )}
@@ -620,26 +687,25 @@ const FormEditorContainer = (props) => {
                   )}
                   {!isAlertTypeNone(alertTypeFlag) && (
                     <FormControl>
-                      <FormLabel>Parse User Data?</FormLabel>
-                      <FormHelperText>
-                        This will send email queries to the alert recipients
-                        above which will update the submitter's information in
-                        our database.
-                      </FormHelperText>
                       <Controller
                         control={control}
                         name="parseUserData"
                         defaultValue={false}
                         render={({ field: { onChange, value, ref } }) => (
-                          <Switch
+                          <Checkbox
                             onChange={onChange}
                             ref={ref}
                             isChecked={value}
                           >
-                            {value ? 'Yes' : 'No'}
-                          </Switch>
+                            Parse user data
+                          </Checkbox>
                         )}
                       />
+                      <FormHelperText>
+                        This will send email queries to the alert recipients
+                        above which will update the submitter's information in
+                        our database.
+                      </FormHelperText>
                     </FormControl>
                   )}
                 </Stack>

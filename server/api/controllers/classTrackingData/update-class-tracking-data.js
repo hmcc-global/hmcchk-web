@@ -43,6 +43,9 @@ module.exports = {
     invalid: {
       description: 'Failed to update class tracking data',
     },
+    courseInactive: {
+      description: 'Cannot update tracking data for an archived course',
+    },
   },
 
   fn: async function ({ id, courseId, field, value }, exits) {
@@ -72,6 +75,18 @@ module.exports = {
       );
       if (!courseExists) {
         return exits.invalid('Course not found on this record');
+      }
+
+      const form = await Form.findOne({ id: record.formId });
+      const templateCourse = (
+        (form && form.classTrackingTemplate
+          ? form.classTrackingTemplate.courses
+          : []) || []
+      ).find((course) => course.courseId === courseId);
+      if (templateCourse && !templateCourse.isActive) {
+        return exits.courseInactive(
+          'Cannot update tracking data for an archived course'
+        );
       }
 
       const courses = record.courses.map((course) =>

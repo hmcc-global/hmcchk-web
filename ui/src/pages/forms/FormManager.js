@@ -140,7 +140,7 @@ const FormManager = (props) => {
         formFields: formItem.formFields,
         isPaymentRequired: formItem.isPaymentRequired,
         isClass: formItem.isClass,
-        courses: formItem.courses,
+        courses: formItem.classTrackingTemplate?.courses,
       },
     });
   };

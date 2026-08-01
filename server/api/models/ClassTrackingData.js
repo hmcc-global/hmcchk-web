@@ -15,7 +15,8 @@ module.exports = {
       type: 'json',
       defaultsTo: [],
       description:
-        'Snapshot of course progress, seeded from Form.courses at submission time. ' +
+        'Snapshot of course progress, seeded from Form.classTrackingTemplate.courses ' +
+        'at submission time. ' +
         'Each item: { courseId, name, platform, type, status, startedAt, completedAt, remarks }',
     },
     lastUpdatedBy: {
