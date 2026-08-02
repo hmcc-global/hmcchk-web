@@ -109,6 +109,9 @@ module.exports.policies = {
   // PaymentData
   'paymentData/*': ['isLoggedIn', 'aboveAdmin'],
 
+  // ClassTrackingData
+  'classTrackingData/*': ['isLoggedIn', 'aboveTcNotTech'],
+
   // PopUp
   'popup/get-published-popup': true,
   'popup/create-popup': ['isLoggedIn', 'aboveTech'],

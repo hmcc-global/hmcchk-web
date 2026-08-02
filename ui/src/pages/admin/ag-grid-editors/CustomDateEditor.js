@@ -11,6 +11,10 @@ export default forwardRef((props, ref) => {
 
   // Date Formatting
   // Initialize State
+  // props.value arrives in either format: ISO when it came from the server
+  // (dates are persisted with toISO()), or yyyy-MM-dd when the row still holds
+  // a value this editor wrote earlier in the session. Handle both here - this
+  // is the only place the incoming value is parsed.
   const dateFromFormat = 'yyyy-MM-dd';
   const dateObj = props.value
     ? ISOFormatCheck(props.value)
@@ -45,17 +49,10 @@ export default forwardRef((props, ref) => {
         }
         return dateString;
       },
+      // Nothing was picked, so there is no edit to commit - cancel instead of
+      // writing null over the existing value.
       isCancelAfterEnd: () => {
         return !selectedDate;
-      },
-      afterGuiAttached: () => {
-        if (!props.value) {
-          return;
-        }
-        const tempDate =
-          props.value && DateTime.fromFormat(props.value, dateFromFormat);
-        const dateObj = tempDate && tempDate.toJSDate();
-        setSelectedDate(dateObj);
       },
     };
   });
