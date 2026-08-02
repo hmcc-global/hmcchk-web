@@ -1,5 +1,9 @@
 const { DateTime } = require('luxon');
 
+const CLASS_STATUS_LIST = ['Not Started', 'In Progress', 'Completed'];
+const REMARKS_MAX_LENGTH = 100;
+const DATE_FORMAT = 'yyyy-MM-dd';
+
 module.exports = {
   friendlyName: 'Update Class Tracking Data',
 
@@ -43,6 +47,9 @@ module.exports = {
     invalid: {
       description: 'Failed to update class tracking data',
     },
+    invalidValue: {
+      description: 'The supplied value is not valid for this field',
+    },
     courseInactive: {
       description: 'Cannot update tracking data for an archived course',
     },
@@ -52,19 +59,44 @@ module.exports = {
     const user = this.req.user.fullName;
     sails.log.info(`${user}: Updating class tracking data`);
 
-    let resolvedValue = value;
-    if ((field === 'startedAt' || field === 'completedAt') && value) {
-      const dateFormat = 'yyyy-MM-dd';
-      const parsedDate = DateTime.fromFormat(value, dateFormat);
-
-      if (!parsedDate.isValid) {
-        return exits.invalidDate('Invalid Date');
-      } else {
-        resolvedValue = parsedDate.toISO();
-      }
-    }
-
     try {
+      // `field` is whitelisted by the isIn above, but `value` arrives as free-form
+      // json - validate it per field so the grid can't write junk into a snapshot.
+      const isBlank = value === null || value === undefined || value === '';
+      let resolvedValue = value;
+
+      if (field === 'status') {
+        if (!CLASS_STATUS_LIST.includes(value)) {
+          return exits.invalidValue(
+            `Status must be one of: ${CLASS_STATUS_LIST.join(', ')}`
+          );
+        }
+      } else if (field === 'remarks') {
+        // Clearing remarks is legitimate.
+        if (isBlank) {
+          resolvedValue = '';
+        } else if (typeof value !== 'string') {
+          return exits.invalidValue('Remarks must be text');
+        } else if (value.length > REMARKS_MAX_LENGTH) {
+          return exits.invalidValue(
+            `Remarks must be ${REMARKS_MAX_LENGTH} characters or fewer`
+          );
+        }
+      } else {
+        // startedAt / completedAt - clearing a date is legitimate.
+        if (isBlank) {
+          resolvedValue = '';
+        } else if (typeof value !== 'string') {
+          return exits.invalidDate('Invalid Date');
+        } else {
+          const parsedDate = DateTime.fromFormat(value, DATE_FORMAT);
+          if (!parsedDate.isValid) {
+            return exits.invalidDate('Invalid Date');
+          }
+          resolvedValue = parsedDate.toISO();
+        }
+      }
+
       const record = await ClassTrackingData.findOne({ id });
       if (!record) {
         return exits.invalid('Class tracking record not found');

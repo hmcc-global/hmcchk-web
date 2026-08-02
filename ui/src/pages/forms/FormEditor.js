@@ -177,7 +177,16 @@ const FormEditor = (props) => {
         paymentEmailSubject: formInformation.paymentEmailSubject,
         paymentCcEmail: paymentCcEmail,
         isClass: formInformation.isClass,
-        classTrackingTemplate: { courses: formInformation.courses },
+        // Only sent for class forms - writing an empty template onto every form
+        // would pollute non-class documents and make post-update-form run its
+        // course-removal guard on every single save.
+        ...(formInformation.isClass
+          ? {
+              classTrackingTemplate: {
+                courses: formInformation.courses || [],
+              },
+            }
+          : {}),
         formDescription: formInformation.formDescription,
         formImage: formInformation.formImage,
         requireLogin: formInformation.requireLogin,

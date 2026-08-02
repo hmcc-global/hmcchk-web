@@ -10,9 +10,15 @@ const readOnlyHeaderTooltip =
   "Recorded at sign-up. To change a course's platform or type, edit the form in the Form Editor.";
 
 // colId is built as `course_${courseId}_${field}`; courseId is a uuid (hyphens, no
-// underscores) so splitting on '_' always yields exactly these three parts.
+// underscores) so splitting on '_' yields exactly these three parts. Returns null
+// on anything else rather than silently resolving a wrong courseId/field, so a
+// future id format that breaks the assumption fails loudly instead of writing to
+// the wrong course.
 export const parseCourseColId = (colId) => {
-  const parts = colId.split('_');
+  const parts = typeof colId === 'string' ? colId.split('_') : [];
+  if (parts.length !== 3 || parts[0] !== 'course' || !parts[1] || !parts[2]) {
+    return null;
+  }
   return { courseId: parts[1], field: parts[2] };
 };
 
