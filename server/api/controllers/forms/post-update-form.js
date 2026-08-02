@@ -30,6 +30,10 @@ module.exports = {
         formToSave.classTrackingTemplate.courses
       ) {
         const existingForm = await Form.findOne({ id });
+        if (!existingForm) {
+          return exits.error('Invalid id');
+        }
+
         const existingCourseIds = (
           (existingForm.classTrackingTemplate || {}).courses || []
         ).map((course) => course.courseId);

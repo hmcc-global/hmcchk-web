@@ -56,8 +56,11 @@ module.exports = {
   },
 
   fn: async function ({ id, courseId, field, value }, exits) {
-    const user = this.req.user.fullName;
-    sails.log.info(`${user}: Updating class tracking data`);
+    // Fall back rather than writing `undefined` into lastUpdatedBy. Logged at
+    // verbose (this fires on every cell edit) and without the name, since the
+    // record itself already carries who made the change.
+    const user = this.req.user.fullName || 'Unknown';
+    sails.log.verbose(`Updating class tracking data ${id} (${field})`);
 
     try {
       // `field` is whitelisted by the isIn above, but `value` arrives as free-form
