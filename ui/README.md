@@ -1,39 +1,70 @@
-# HMCC HK — UI
+# Getting Started with Create React App
 
-React SPA built with [Vite](https://vite.dev) (migrated from Create React App in GH-1404).
-
-**Requires Node 20+** (CI builds on Node 20). If you were on Node 16 for the old CRA setup, upgrade before running the commands below.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
-Run these from `ui/` (install deps first with `yarn`):
+In the project directory, you can run:
 
 ### `yarn start`
 
-Starts the Vite dev server at [http://localhost:3000](http://localhost:3000) with hot module replacement / Fast Refresh. `/api/*` requests are proxied to the Sails backend on `:1337` (see `server.proxy` in `vite.config.js` — this replaced CRA's `src/setupProxy.js`).
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-To point the proxy at a different backend (e.g. production — **don't do this unless you know what you're doing**), temporarily change the `server.proxy` entry to `{ target: 'https://<backend-host>', changeOrigin: true }`. Don't commit that change.
-
-### `yarn build`
-
-Production build into `ui/build/` (kept as `build/` rather than Vite's default `dist/` so CI's `mv ui/build/* server/client` step is unchanged).
-
-### `yarn preview`
-
-Serves the production build locally for a quick smoke test.
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
 ### `yarn test`
 
-Runs [Vitest](https://vitest.dev) (jsdom + Testing Library, setup in `src/setupTests.js`). Use `yarn test --run` for a single non-watch pass.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn lint`
+### `yarn build`
 
-Runs ESLint over `src/` with the same `react-app` config CRA used (now installed explicitly since `react-scripts` no longer provides it).
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## Vite migration notes (GH-1404)
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-- **JSX lives in `.js` files.** Vite only parses JSX in `.jsx` by default, so `vite.config.js` configures the esbuild `loader: 'jsx'` for `src/**/*.js` (no mass rename). This recipe is esbuild-specific — it is why we pin **Vite 7**; Vite 8 (Rolldown/Oxc) has no documented equivalent yet. Renaming `.js` → `.jsx` is the real long-term fix before a Vite 8 upgrade.
-- **Fast Refresh on `.js` files** is enabled by the small `js-fast-refresh-hint` plugin in `vite.config.js` — `@vitejs/plugin-react` only instruments files it can tell contain JSX.
-- **Env vars keep the `REACT_APP_` prefix** (`envPrefix` in `vite.config.js`), so `ui/.env` and the CI `UI_ENV` secret are unchanged. In code they are read via `import.meta.env.REACT_APP_*` instead of `process.env.REACT_APP_*`.
-- **`process.env.PUBLIC_URL`** (used in ~150 places for public asset paths) is defined to `""` — assets are served from the site root. In dev, Vite injects it as a runtime global; in builds it is inlined.
-- **`index.html` lives at `ui/index.html`** (Vite convention), not `ui/public/index.html`. Everything else in `public/` is still copied to the build root as before.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `yarn eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `yarn build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

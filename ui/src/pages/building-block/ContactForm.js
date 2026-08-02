@@ -111,7 +111,7 @@ const ContactForm = ({ isOpen, onClose }) => {
               </FormControl>
               <Box pb={[0, 3]} transform={['scale(0.77)', 'scale(1)']}>
                 <ReCAPTCHA
-                  sitekey={import.meta.env.REACT_APP_CAPTCHA}
+                  sitekey={process.env.REACT_APP_CAPTCHA}
                   onChange={onChange}
                 />
               </Box>

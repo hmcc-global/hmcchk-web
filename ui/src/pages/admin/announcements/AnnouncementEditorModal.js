@@ -34,21 +34,6 @@ import { eventIntervalList, eventTypeList } from 'utils/lists';
 import FileUpload from 'components/FileUpload';
 import { CUIAutoComplete } from 'chakra-ui-autocomplete';
 
-// eventType drifted across old records: many are missing/null, and CUIAutoComplete
-// requires an array of { label, value } — feeding it anything else crashes the page
-const toEventTypeItems = (value) =>
-  Array.isArray(value)
-    ? value
-        .map((t) => (typeof t === 'string' ? { label: t, value: t } : t))
-        .filter((t) => t && typeof t.value === 'string')
-        // object records can carry a value but no (or non-string) label — CUIAutoComplete
-        // needs both, so backfill label from value when it's missing
-        .map((t) => ({
-          ...t,
-          label: typeof t.label === 'string' ? t.label : t.value,
-        }))
-    : [];
-
 const AnnouncementEditorModal = (props) => {
   const {
     isOpen,
@@ -106,7 +91,7 @@ const AnnouncementEditorModal = (props) => {
     setValue('formSignupLink', undefined);
     setValue('additionalNotes', undefined);
 
-    setSelectedItems([]);
+    setSelectedItems(undefined);
 
     setTitle(undefined);
     setIsInWeb(false);
@@ -153,7 +138,7 @@ const AnnouncementEditorModal = (props) => {
       setValue('signUpUrl', data.signUpUrl);
       setValue('additionalNotes', data.additionalNotes);
 
-      setSelectedItems(toEventTypeItems(data.eventType));
+      setSelectedItems(data.eventType);
 
       setTitle(data.title);
       setIsInWeb(data.isInWeb);
