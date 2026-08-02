@@ -102,11 +102,10 @@ module.exports = {
 
         if (existing) {
           const modelName = `classTracking-${formId}`;
-          existing = await LastUpdated.updateOne({ modelName })
-            .set({
-              lastUpdatedBy: 't3chTeam',
-            })
-            .fetch();
+          // No .fetch() - updateOne() already returns the affected record.
+          existing = await LastUpdated.updateOne({ modelName }).set({
+            lastUpdatedBy: 't3chTeam',
+          });
 
           if (!existing) {
             existing = await LastUpdated.create({
