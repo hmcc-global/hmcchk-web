@@ -38,9 +38,12 @@ const classFieldSetter = (courseId, field) => (params) => {
   );
   if (course) {
     course[field] = params.newValue;
-    return true;
   }
-  return false;
+  // Always report a change, even when the course is missing (a submission made
+  // before the form became a class). AG Grid skips onCellValueChanged entirely
+  // when a valueSetter returns false, which would swallow the edit silently -
+  // returning true lets the handler run and tell the admin what happened.
+  return true;
 };
 
 // Builds the "Class Tracking" AG-Grid column group, one sub-group per course.
