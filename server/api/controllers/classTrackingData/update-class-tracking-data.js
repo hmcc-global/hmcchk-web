@@ -137,11 +137,11 @@ module.exports = {
       }
 
       const modelName = `classTracking-${res.formId}`;
-      let existing = await LastUpdated.updateOne({ modelName })
-        .set({
-          lastUpdatedBy: user,
-        })
-        .fetch();
+      // No .fetch() - updateOne() already returns the affected record, and
+      // asking for it again makes Waterline log a warning on every edit.
+      let existing = await LastUpdated.updateOne({ modelName }).set({
+        lastUpdatedBy: user,
+      });
 
       if (!existing) {
         existing = await LastUpdated.create({
