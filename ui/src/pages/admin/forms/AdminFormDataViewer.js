@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useRef,
+} from 'react';
 import { customAxios as axios } from 'utils/customAxios';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
@@ -36,7 +42,9 @@ export default function AdminFormDataViewer(props) {
   const formFields = state.formFields;
   const isPaymentRequired = state.isPaymentRequired;
   const isClass = state.isClass ?? false;
-  const courses = state.courses ?? [];
+  // Memoised so the `?? []` fallback doesn't produce a new array identity on
+  // every render, which would defeat the columnDefs memo below.
+  const courses = useMemo(() => state.courses ?? [], [state.courses]);
 
   let lastUpdatedTime = useRef();
 
@@ -518,6 +526,19 @@ export default function AdminFormDataViewer(props) {
     return columnDefs;
   };
 
+  // Built once per relevant input rather than on every render - without this the
+  // whole column set (N courses x 6 columns) is rebuilt on each poll refresh.
+  // createColumnDefs is redefined every render but only reads the values listed
+  // here, so depending on it directly would defeat the memo.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const columnDefs = useMemo(createColumnDefs, [
+    formFields,
+    isPaidForm,
+    isPaymentRequired,
+    isClass,
+    courses,
+  ]);
+
   // Ag-Grid Functions
   // Initialize Grid API states
   const onGridReady = (params) => {
@@ -547,18 +568,25 @@ export default function AdminFormDataViewer(props) {
     }
   };
 
-  // Call API to update class tracking data
+  // Call API to update class tracking data. customAxios rejects on any non-2xx,
+  // so failures must be caught here - and because the valueSetter has already
+  // written the new value into the row, we re-fetch so the grid stops showing an
+  // edit the server never accepted.
   const updateClassTrackingData = async (data) => {
-    const res = await axios.put('/api/classTrackingData/update', {
-      ...data,
-    });
-
-    if (res.status !== 200) {
+    try {
+      await axios.put('/api/classTrackingData/update', {
+        ...data,
+      });
+    } catch (err) {
+      console.log(err);
       toast({
-        description: 'Something went wrong, please refresh and try again..',
+        description:
+          "That change couldn't be saved. The value has been reverted - please" +
+          ' try again.',
         status: 'error',
         duration: 5000,
       });
+      await getData();
     }
   };
 
@@ -568,12 +596,14 @@ export default function AdminFormDataViewer(props) {
     const colId = e?.colDef?.colId;
     if (!colId || !colId.startsWith('course_')) return;
 
-    const { field } = parseCourseColId(colId);
-    if (field === 'platform' || field === 'type') {
+    const parsed = parseCourseColId(colId);
+    if (!parsed) return;
+
+    if (parsed.field === 'platform' || parsed.field === 'type') {
       toast({
         title: "This field can't be edited here",
         description:
-          "Platform and type are recorded when the registrant signs up. To " +
+          'Platform and type are recorded when the registrant signs up. To ' +
           "change a course's platform or type, edit the form in the Form Editor.",
         status: 'info',
         duration: 8000,
@@ -586,16 +616,28 @@ export default function AdminFormDataViewer(props) {
     if (!p || !p.colDef) return;
 
     if (p.colDef.colId && p.colDef.colId.startsWith('course_')) {
-      if (p.data.classTrackingData) {
-        const { courseId, field } = parseCourseColId(p.colDef.colId);
-        const payload = {
-          id: p.data.classTrackingData.id,
-          courseId,
-          field,
-          value: p.newValue,
-        };
-        await updateClassTrackingData(payload);
+      const parsed = parseCourseColId(p.colDef.colId);
+
+      // A submission made before the form became a class has no tracking record,
+      // so there is nothing to write to. Say so rather than dropping the edit.
+      if (!p.data.classTrackingData || !parsed) {
+        toast({
+          description:
+            'This registrant has no class tracking record, so the change was' +
+            ' not saved.',
+          status: 'warning',
+          duration: 5000,
+        });
+        await getData();
+        return;
       }
+
+      await updateClassTrackingData({
+        id: p.data.classTrackingData.id,
+        courseId: parsed.courseId,
+        field: parsed.field,
+        value: p.newValue,
+      });
       return;
     }
 
@@ -788,7 +830,7 @@ export default function AdminFormDataViewer(props) {
 
         <AgGridReact
           defaultColDef={defaultColDef}
-          columnDefs={createColumnDefs()}
+          columnDefs={columnDefs}
           enterMovesDownAfterEdit={true}
           onGridReady={onGridReady}
           stopEditingWhenCellsLoseFocus={true}

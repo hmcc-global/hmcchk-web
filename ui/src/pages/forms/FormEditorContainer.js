@@ -371,10 +371,13 @@ const FormEditorContainer = (props) => {
                     <Alert status="info">
                       <AlertIcon />
                       Tracking settings cannot be changed after the form is
-                      created. A paid event will always be a paid event, 
-                      and a class will always be a class!
+                      created. A paid event will always be a paid event, and a
+                      class will always be a class!
                     </Alert>
-                    <Tabs index={trackingTabIndex} onChange={setTrackingTabIndex}>
+                    <Tabs
+                      index={trackingTabIndex}
+                      onChange={setTrackingTabIndex}
+                    >
                       <TabList>
                         <Tab>Payment</Tab>
                         <Tab>Class</Tab>
@@ -390,7 +393,9 @@ const FormEditorContainer = (props) => {
                                 control={control}
                                 name="isPaymentRequired"
                                 defaultValue={false}
-                                render={({ field: { onChange, value, ref } }) => (
+                                render={({
+                                  field: { onChange, value, ref },
+                                }) => (
                                   <Switch
                                     id="isPaymentRequired"
                                     onChange={(e) => {
@@ -435,8 +440,7 @@ const FormEditorContainer = (props) => {
                                       Retreat 2025 Payment Confirmation
                                     </option>
                                     <option value="email-retreat-donation-payment-success">
-                                      Retreat 2025 Donation Payment
-                                      Confirmation
+                                      Retreat 2025 Donation Payment Confirmation
                                     </option>
                                     <option value="email-ignite-payment-success">
                                       !gnite 2023 Payment Confirmation
@@ -449,16 +453,17 @@ const FormEditorContainer = (props) => {
                                     </option>
                                   </Select>
                                   <FormErrorMessage>
-                                    {errors['paymentConfirmationEmailTemplate'] &&
-                                      'Field type is required'}
+                                    {errors[
+                                      'paymentConfirmationEmailTemplate'
+                                    ] && 'Field type is required'}
                                   </FormErrorMessage>
                                 </FormControl>
                                 <FormControl>
                                   <FormLabel>Payment Email Subject</FormLabel>
                                   <Input {...register('paymentEmailSubject')} />
                                   <FormHelperText>
-                                    If you need a custom subject for the
-                                    payment email
+                                    If you need a custom subject for the payment
+                                    email
                                   </FormHelperText>
                                 </FormControl>
                                 <FormControl
@@ -472,8 +477,8 @@ const FormEditorContainer = (props) => {
                                   />
                                   <FormHelperText>
                                     *All Payment emails will be CC'ed to these
-                                    emails (addressees will be BCC'ed).
-                                    Separate CC emails with ;
+                                    emails (addressees will be BCC'ed). Separate
+                                    CC emails with ;
                                   </FormHelperText>
                                 </FormControl>
                               </>
@@ -490,7 +495,9 @@ const FormEditorContainer = (props) => {
                                 control={control}
                                 name="isClass"
                                 defaultValue={false}
-                                render={({ field: { onChange, value, ref } }) => (
+                                render={({
+                                  field: { onChange, value, ref },
+                                }) => (
                                   <Switch
                                     id="isClass"
                                     onChange={(e) => {
@@ -499,6 +506,7 @@ const FormEditorContainer = (props) => {
                                     }}
                                     ref={ref}
                                     isChecked={value}
+                                    isDisabled={formName != null}
                                   >
                                     {value ? 'Yes' : 'No'}
                                   </Switch>
@@ -508,12 +516,13 @@ const FormEditorContainer = (props) => {
                             {isClass && (
                               <Stack spacing="3">
                                 <Heading as="h5" size="sm">
-                                  Courses{courses.length > 0 && ` (${courses.length})`}
+                                  Courses
+                                  {courses.length > 0 && ` (${courses.length})`}
                                 </Heading>
                                 <Alert status="info">
                                   <AlertIcon />
-                                  Courses cannot be deleted (to persist historical 
-                                  data), it can only be deactivated.
+                                  Courses cannot be deleted (to persist
+                                  historical data), it can only be deactivated.
                                 </Alert>
                                 {courses.map((course) => (
                                   <HStack
@@ -555,7 +564,9 @@ const FormEditorContainer = (props) => {
                                       }
                                     >
                                       <option value="Online">Online</option>
-                                      <option value="In-Person">In-Person</option>
+                                      <option value="In-Person">
+                                        In-Person
+                                      </option>
                                     </Select>
                                     <Checkbox
                                       whiteSpace="nowrap"
@@ -587,8 +598,8 @@ const FormEditorContainer = (props) => {
                                 ))}
                                 {courses.length === 0 && (
                                   <Text color="gray.500">
-                                    No courses yet — add at least one course
-                                    for this class.
+                                    No courses yet — add at least one course for
+                                    this class.
                                   </Text>
                                 )}
                                 <Button
