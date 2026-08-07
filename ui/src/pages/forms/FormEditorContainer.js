@@ -97,6 +97,7 @@ const FormEditorContainer = (props) => {
   const [isClass, setIsClass] = useState(false);
   const [courses, setCourses] = useState([]);
   const [persistedCourseIds, setPersistedCourseIds] = useState([]);
+  const [classEndingTime, setClassEndingTime] = useState('');
 
   // Which tracking tab (Payment / Class) is open in the editor
   const [trackingTabIndex, setTrackingTabIndex] = useState(0);
@@ -122,6 +123,7 @@ const FormEditorContainer = (props) => {
     setValue('customEmailSubject', '');
     setValue('formAvailableFrom', '');
     setValue('formAvailableUntil', '');
+    setValue('classEndingTime', '');
     setFormName(null);
     setIsPaymentRequired(false);
     setPaymentConfirmationEmailTemplate(null);
@@ -180,12 +182,19 @@ const FormEditorContainer = (props) => {
       setValue('customEmailSubject', data.customEmailSubject);
       setValue('formAvailableFrom', data.formAvailableFrom);
       setValue('formAvailableUntil', data.formAvailableUntil);
+      setValue(
+        'classEndingTime',
+        data.classTrackingTemplate?.classEndingTime ?? data.classEndingTime
+      );
 
       // Update React State for child props
       setFormName(data.formName);
       setIsPaymentRequired(data.isPaymentRequired);
       setPaymentConfirmationEmailTemplate(
         data.paymentConfirmationEmailTemplate
+      );
+      setClassEndingTime(
+        data.classTrackingTemplate?.classEndingTime ?? data.classEndingTime ?? ''
       );
       setPaymentEmailSubject(data.paymentEmailSubject);
       setPaymentCcEmail(paymentCcEmail);
@@ -609,6 +618,21 @@ const FormEditorContainer = (props) => {
                                 >
                                   Add Course
                                 </Button>
+                                <Box>
+                                  <FormLabel
+                                    htmlFor="classEndingTime"
+                                    fontSize="sm"
+                                    fontWeight="normal"
+                                    mb="1"
+                                  >
+                                    Class Ending Time
+                                  </FormLabel>
+                                  <Input
+                                    id="classEndingTime"
+                                    type="datetime-local"
+                                    {...register('classEndingTime')}
+                                  />
+                                </Box>
                               </Stack>
                             )}
                           </Stack>
@@ -801,6 +825,7 @@ const FormEditorContainer = (props) => {
                   paymentEmailSubject: paymentEmailSubject,
                   paymentCcEmail: paymentCcEmail,
                   isClass: isClass,
+                  classEndingTime: classEndingTime,
                   courses: courses,
                 }}
                 existingFormFieldsData={editFormData}
