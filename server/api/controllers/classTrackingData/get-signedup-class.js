@@ -71,16 +71,30 @@ module.exports = {
         if (!isWithinActiveWindow) continue;
 
         // There should be one ClassTrackingData record per submission; find the
-        // record for this user and form. If none exists, skip.
-        const classDataFetch = await ClassTrackingData.findOne({
+        // record(s) for this user and form. If none exists, skip.
+        const classDataFetchList = await ClassTrackingData.find({
           formId: form.id,
           userId,
         });
-        if (!classDataFetch) continue;
+        if (!classDataFetchList || classDataFetchList.length === 0) continue;
+
+        if (classDataFetchList.length > 1) {
+          const duplicateIds = classDataFetchList.map((record) => record.id);
+          sails.log.warn(
+            'Multiple ClassTrackingData records found for user:',
+            userId,
+            'form:',
+            form.id,
+            'record ids:',
+            duplicateIds.join(', '),
+            'using first record:',
+            classDataFetchList[0].id
+          );
+        }
 
         results.push({
           formName: form.formName,
-          classTrackingData: classDataFetch,
+          classTrackingData: classDataFetchList[0],
         });
       }
 
