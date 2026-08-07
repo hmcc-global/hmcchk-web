@@ -84,11 +84,11 @@ module.exports = {
     },
     classTrackingTemplate: {
       type: 'json',
-      defaultsTo: { courses: [] },
+      defaultsTo: { courses: [], classEndingTime: '' },
       description:
         "Template/config for this Form's class tracking, grouped so future " +
-        'column types can share this object. { courses: [...] } — each ' +
-        'course: { courseId, name, platform, type, order, isActive }',
+        'column types can share this object. { courses: [...], classEndingTime } ' +
+        '— each course: { courseId, name, platform, type, order, isActive }',
     },
   },
 };

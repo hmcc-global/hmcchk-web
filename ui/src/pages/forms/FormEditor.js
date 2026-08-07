@@ -186,6 +186,7 @@ const FormEditor = (props) => {
           ? {
               classTrackingTemplate: {
                 courses: formInformation.courses || [],
+                classEndingTime: formInformation.classEndingTime || '',
               },
             }
           : {}),
