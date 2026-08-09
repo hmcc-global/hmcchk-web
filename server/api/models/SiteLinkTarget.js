@@ -3,7 +3,13 @@
  *
  * One scheduled destination for a SiteLink. Exactly one of `formId` (when
  * destinationType is `form`) or `destinationUrl` (when `url`) is populated.
- * Timestamps are stored in UTC and displayed in the admin UI in HK time.
+ *
+ * Schedule bounds are Hong Kong wall-clock time carrying a literal `Z` suffix —
+ * they are NOT real UTC instants. The resolver compares them against
+ * sails.helpers.datetime.getOffsettedTime(), which is also HK wall clock, so the
+ * two sides agree. This is a convention, not a constraint: a value written with a
+ * real timezone offset would be read eight hours out, so writers must send the
+ * same shape the admin UI does.
  */
 
 module.exports = {
@@ -28,14 +34,15 @@ module.exports = {
         'Direct https URL or safe internal path; required when destinationType=url.',
     },
     activeFrom: {
-      type: 'ref',
-      columnType: 'datetime',
-      description: 'UTC start; empty = immediately active.',
+      type: 'string',
+      columnType: 'date',
+      description:
+        'HK wall-clock start labelled Z; empty = immediately active.',
     },
     activeUntil: {
-      type: 'ref',
-      columnType: 'datetime',
-      description: 'UTC end; empty = open-ended.',
+      type: 'string',
+      columnType: 'date',
+      description: 'HK wall-clock end labelled Z; empty = open-ended.',
     },
     updatedBy: {
       type: 'string',

@@ -64,7 +64,10 @@ module.exports = {
       if (validationError) return exits.invalid(validationError);
 
       if (payload.destinationType === 'form') {
-        const form = await Form.findOne({ id: payload.formId });
+        const form = await Form.findOne({
+          id: payload.formId,
+          isDeleted: false,
+        });
         if (!form) return exits.notFound('Selected form not found.');
       }
 

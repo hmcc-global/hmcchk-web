@@ -14,7 +14,8 @@ const toTime = (value) => {
 };
 
 // A safe redirect destination is an absolute https URL or an internal path with
-// a single leading slash. Rejects javascript:/data:/protocol-relative/etc.
+// a single leading slash. Rejects javascript:/data:/protocol-relative/etc, and
+// /go/ paths, which would make one managed link redirect to another forever.
 const isSafeUrl = (value) => {
   if (typeof value !== 'string') return false;
   const url = value.trim();
@@ -22,7 +23,9 @@ const isSafeUrl = (value) => {
   const lower = url.toLowerCase();
   if (UNSAFE_PROTOCOLS.some((proto) => lower.startsWith(proto))) return false;
   if (url.charAt(0) === '/')
-    return url.charAt(1) !== '/' && !url.includes('\\');
+    return (
+      url.charAt(1) !== '/' && !url.includes('\\') && !lower.startsWith('/go/')
+    );
   try {
     return new URL(url).protocol === 'https:';
   } catch (unusedErr) {

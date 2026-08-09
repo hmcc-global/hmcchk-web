@@ -65,7 +65,10 @@ module.exports = {
 
       return exits.success(resolved.url);
     } catch (err) {
-      sails.log(err);
+      // Still send the visitor somewhere friendly, but log at error level: an
+      // infrastructure failure here is otherwise indistinguishable from a link
+      // that simply has no active target.
+      sails.log.error(`Site link /go/${slug} failed to resolve`, err);
       return exits.success(UNAVAILABLE_PATH);
     }
   },
