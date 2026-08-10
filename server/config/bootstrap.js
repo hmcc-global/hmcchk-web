@@ -34,8 +34,44 @@ module.exports.bootstrap = async function () {
 
   sails.log('Initialising Parse User Query Emails Cron');
   // every EOD at 9PM
-  schedule.scheduleJob(
-    '0 0 21 * * *',
-    async () => sails.helpers.parseuserquery.parseUserQuery()
+  schedule.scheduleJob('0 0 21 * * *', async () =>
+    sails.helpers.parseuserquery.parseUserQuery()
   );
+
+  // Seed the permanent LIFE Group Site Link only when it does not exist. Once
+  // created, admin changes are authoritative and must survive deploys/restarts.
+  try {
+    let lifeGroupLink = await SiteLink.findOne({ slug: 'life-group' });
+    if (!lifeGroupLink) {
+      lifeGroupLink = await SiteLink.create({
+        key: 'life-group',
+        label: 'LIFE Group Signup',
+        slug: 'life-group',
+        isEnabled: true,
+      }).fetch();
+      sails.log.info('Seeded life-group site link');
+    }
+
+    // Checked separately from the link so a failure between the two is repaired
+    // on the next lift. Targets are soft-deleted, so a schedule the admin has
+    // emptied still counts as seeded and is never refilled.
+    if (!lifeGroupLink.isDeleted) {
+      const targetCount = await SiteLinkTarget.count({
+        siteLink: lifeGroupLink.id,
+      });
+      if (targetCount === 0) {
+        await SiteLinkTarget.create({
+          siteLink: lifeGroupLink.id,
+          destinationType: 'url',
+          destinationUrl: 'https://bit.ly/lifegroup2627',
+          activeFrom: '',
+          activeUntil: '',
+          updatedBy: 'system-seed',
+        });
+        sails.log.info('Seeded default life-group site link target');
+      }
+    }
+  } catch (err) {
+    sails.log.error('Failed to seed life-group site link', err);
+  }
 };

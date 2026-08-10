@@ -164,6 +164,15 @@ module.exports.routes = {
   'get /api/admin/parseUserQuery': 'users/parse-user-query',
   'get /api/admin/sendBatchUsersQuery': 'users/send-batch-users-query',
 
+  // Site Link admin APIs
+  'get /api/site-links/admin-get': 'siteLinks/admin-get-site-links',
+  'put /api/site-links/update': 'siteLinks/update-site-link',
+  'post /api/site-links/create-target': 'siteLinks/create-site-link-target',
+  'put /api/site-links/update-target': 'siteLinks/update-site-link-target',
+
+  // Site Link public redirect (must stay before the SPA catch-all below)
+  'get /go/:slug': 'siteLinks/get-redirect',
+
   // UI
   'get /*': {
     skipAssets: true,
