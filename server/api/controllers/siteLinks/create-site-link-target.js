@@ -72,7 +72,9 @@ module.exports = {
         siteLink,
         destinationType,
         formId: destinationType === 'form' ? formId : '',
-        destinationUrl: destinationType === 'url' ? destinationUrl : '',
+        // Trimmed to match what validation checked, so no stored row carries
+        // whitespace the safety check never saw.
+        destinationUrl: destinationType === 'url' ? destinationUrl.trim() : '',
         activeFrom: payload.activeFrom,
         activeUntil: payload.activeUntil,
         updatedBy: user,

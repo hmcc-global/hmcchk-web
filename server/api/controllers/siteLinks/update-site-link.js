@@ -15,6 +15,10 @@ module.exports = {
     success: {
       description: 'Site link updated.',
     },
+    invalid: {
+      statusCode: 400,
+      description: 'No fields were supplied to update.',
+    },
     notFound: {
       statusCode: 404,
       description: 'Site link not found.',
@@ -33,6 +37,12 @@ module.exports = {
       if (label !== undefined) changes.label = label;
       if (isEnabled !== undefined) changes.isEnabled = isEnabled;
       if (isDeleted !== undefined) changes.isDeleted = isDeleted;
+
+      // Fail fast rather than reporting success for a request that changes
+      // nothing, which otherwise reads as a saved edit to the caller.
+      if (Object.keys(changes).length === 0) {
+        return exits.invalid('No fields were supplied to update.');
+      }
 
       const updated = await SiteLink.updateOne({ id }).set(changes);
       if (!updated) return exits.notFound('Site link not found.');

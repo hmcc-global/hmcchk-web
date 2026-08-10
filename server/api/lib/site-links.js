@@ -64,20 +64,25 @@ const isFormAvailable = (form, now) => {
   return true;
 };
 
-// The active target's [activeFrom, activeUntil] window contains now (empty bound
-// = open); the latest-starting wins if several overlap.
+// The active window is half-open — activeFrom <= now < activeUntil — matching
+// rangesOverlap, so back-to-back schedules hand over cleanly instead of both
+// being active at the shared instant. An empty bound is open. Latest start wins.
 const findActiveTarget = (targets, now) => {
   const nowT = toTime(now);
   const active = (targets || []).filter((target) => {
     const from = toTime(target.activeFrom);
     const until = toTime(target.activeUntil);
-    return (from === null || nowT >= from) && (until === null || nowT <= until);
+    return (from === null || nowT >= from) && (until === null || nowT < until);
   });
-  active.sort(
-    (a, b) =>
-      (toTime(a.activeFrom) === null ? -Infinity : toTime(a.activeFrom)) -
-      (toTime(b.activeFrom) === null ? -Infinity : toTime(b.activeFrom))
-  );
+  // Open starts sort first; equal starts keep their relative order.
+  active.sort((a, b) => {
+    const aFrom = toTime(a.activeFrom);
+    const bFrom = toTime(b.activeFrom);
+    if (aFrom === bFrom) return 0;
+    if (aFrom === null) return -1;
+    if (bFrom === null) return 1;
+    return aFrom - bFrom;
+  });
   return active.length ? active[active.length - 1] : null;
 };
 

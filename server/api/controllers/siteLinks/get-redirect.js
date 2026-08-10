@@ -1,5 +1,6 @@
 const {
   findActiveTarget,
+  isValidSlug,
   resolveDestination,
 } = require('../../lib/site-links');
 
@@ -29,6 +30,10 @@ module.exports = {
     // Never cache a redirect, so a newly scheduled season is picked up at once.
     res.set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
     res.set('Pragma', 'no-cache');
+
+    // Reject anything that cannot be a real slug before it reaches the database
+    // or the log lines below, so a crafted path can neither probe nor forge.
+    if (!isValidSlug(slug)) return exits.success(UNAVAILABLE_PATH);
 
     try {
       const siteLink = await SiteLink.findOne({

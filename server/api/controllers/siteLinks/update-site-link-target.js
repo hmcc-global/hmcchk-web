@@ -74,8 +74,12 @@ module.exports = {
       const updated = await SiteLinkTarget.updateOne({ id }).set({
         destinationType: payload.destinationType,
         formId: payload.destinationType === 'form' ? payload.formId : '',
+        // Trimmed to match what validation checked, so no stored row carries
+        // whitespace the safety check never saw.
         destinationUrl:
-          payload.destinationType === 'url' ? payload.destinationUrl : '',
+          payload.destinationType === 'url'
+            ? payload.destinationUrl.trim()
+            : '',
         activeFrom: payload.activeFrom,
         activeUntil: payload.activeUntil,
         isDeleted: pick(isDeleted, existing.isDeleted),
