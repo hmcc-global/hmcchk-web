@@ -43,9 +43,10 @@ import {
   generatePublishedFormLinks,
 } from 'utils/userInformationHelpers';
 import SermonNotesPagination from './SermonNotesPagination';
+import { PROFILE_TABS } from './profileTabs';
 
 const UserProfileMobile = (props) => {
-  const { user, staticData } = props;
+  const { user, staticData, activeTabIndex, onTabChange } = props;
   const { lifegroupList, lifestageList, campusList } = staticData;
 
   const { register, control, handleSubmit, setValue, formState } = useForm();
@@ -55,7 +56,6 @@ const UserProfileMobile = (props) => {
   const [unsignedFormList, setUnsignedFormList] = useState([]);
   const [signedUpFormList, setSignedUpFormList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
   const [activeSermonNoteTab, setActiveSermonNoteTab] = useState('all');
   const [userSermonNotes, setUserSermonNotes] = useState([]);
   const [sermonSeriesList, setSermonSeriesList] = useState([]);
@@ -207,8 +207,7 @@ const UserProfileMobile = (props) => {
   };
 
   const handleTabChange = (e) => {
-    const newIndex = Number(e.target.value); // Ensure it's a number
-    setActiveIndex(newIndex);
+    onTabChange(Number(e.target.value));
   };
 
   const handleTabSwitch = (tab) => {
@@ -313,10 +312,10 @@ const UserProfileMobile = (props) => {
           mb="12%"
           fontSize="0.9rem"
           isManual
-          index={activeIndex}
+          index={activeTabIndex}
         >
           <Select
-            value={activeIndex}
+            value={activeTabIndex}
             onChange={handleTabChange}
             mb={4}
             bg="#F6FAFF"
@@ -327,10 +326,11 @@ const UserProfileMobile = (props) => {
             mx="auto"
             fontWeight="semibold"
           >
-            <option value={0}>Signup Links</option>
-            <option value={1}>Sermon Notes</option>
-            <option value={2}>Personal Profile</option>
-            <option value={3}>Church Profile</option>
+            {PROFILE_TABS.map((tab, index) => (
+              <option key={tab.slug} value={index}>
+                {tab.label}
+              </option>
+            ))}
           </Select>
           <TabPanels>
             <TabPanel width="full" margin="20px 0px" p="0">

@@ -246,7 +246,7 @@ const MainContainer = () => {
           />
           <PrivateRoute
             exact
-            path="/profile"
+            path="/profile/:tab?"
             permissions={[
               'unsigned',
               'signed',
