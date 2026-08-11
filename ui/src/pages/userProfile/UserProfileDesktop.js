@@ -45,9 +45,10 @@ import {
   generatePublishedFormLinks,
 } from 'utils/userInformationHelpers';
 import SermonNotesPagination from './SermonNotesPagination';
+import { PROFILE_TABS } from './profileTabs';
 
 const UserProfileDesktop = (props) => {
-  const { user, staticData } = props;
+  const { user, staticData, activeTabIndex, onTabChange } = props;
   const { lifegroupList, lifestageList, campusList } = staticData;
 
   const { register, control, handleSubmit, setValue, formState } = useForm();
@@ -311,21 +312,26 @@ const UserProfileDesktop = (props) => {
         </Box>
       </Flex>
       <form onSubmit={handleSubmit(handleEditUserInformation)}>
-        <Tabs mt="5%" mb="5%" orientation="vertical" variant="unstyled">
+        <Tabs
+          mt="5%"
+          mb="5%"
+          orientation="vertical"
+          variant="unstyled"
+          index={activeTabIndex}
+          onChange={onTabChange}
+        >
           <Box flex={1}>
             <TabList border="none" alignItems="flex-end">
-              <Tab style={tabTitle} _selected={{ md: tabText }}>
-                Signup Links
-              </Tab>
-              <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
-                Sermon Notes
-              </Tab>
-              <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
-                Personal Profile
-              </Tab>
-              <Tab style={tabTitle} _selected={{ md: tabText }} mt={5}>
-                Church Profile
-              </Tab>
+              {PROFILE_TABS.map((tab, index) => (
+                <Tab
+                  key={tab.slug}
+                  style={tabTitle}
+                  _selected={{ md: tabText }}
+                  mt={index === 0 ? 0 : 5}
+                >
+                  {tab.label}
+                </Tab>
+              ))}
             </TabList>
           </Box>
           <TabPanels
