@@ -25,6 +25,20 @@ module.exports = {
 
   fn: async function ({ id, formToSave }, exits) {
     try {
+      const classPlatformTypes = sails.config.custom.classPlatformTypes;
+      if (
+        formToSave.classTrackingTemplate &&
+        formToSave.classTrackingTemplate.courses
+      ) {
+        formToSave.classTrackingTemplate.courses =
+          formToSave.classTrackingTemplate.courses.map((course) => {
+            if (course.platform && classPlatformTypes[course.platform]) {
+              return { ...course, type: classPlatformTypes[course.platform] };
+            }
+            return course;
+          });
+      }
+
       if (
         formToSave.classTrackingTemplate &&
         formToSave.classTrackingTemplate.courses

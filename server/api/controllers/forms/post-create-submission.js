@@ -92,7 +92,7 @@ module.exports = {
             name: course.name,
             platform: course.platform,
             type: course.type,
-            status: 'Not Started',
+            status: sails.config.custom.classProgressStatuses[0],
             startedAt: '',
             completedAt: '',
             remarks: '',

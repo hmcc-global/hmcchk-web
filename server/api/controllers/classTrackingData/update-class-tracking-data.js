@@ -1,6 +1,6 @@
 const { DateTime } = require('luxon');
 
-const CLASS_STATUS_LIST = ['Not Started', 'In Progress', 'Completed'];
+const CLASS_STATUS_LIST = sails.config.custom.classProgressStatuses;
 const REMARKS_MAX_LENGTH = 100;
 const DATE_FORMAT = 'yyyy-MM-dd';
 

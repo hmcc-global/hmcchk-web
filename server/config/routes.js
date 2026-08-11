@@ -55,6 +55,10 @@ module.exports.routes = {
   // Class Tracking Data APIs
   'put /api/classTrackingData/update':
     'classTrackingData/update-class-tracking-data',
+  'get /api/classTrackingData/all-progress-statuses':
+    'classTrackingData/get-all-class-progress-statuses',
+  'get /api/classTrackingData/all-platform-types':
+    'classTrackingData/get-all-class-platform-types',
 
   // Announcement APIs
   'get /api/announcements/get-announcements': 'announcements/get-announcements',

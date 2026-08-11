@@ -1,5 +1,3 @@
-const classStatusList = ['Not Started', 'In Progress', 'Completed'];
-
 // Muted styling that signals a cell is read-only. Applied to platform/type
 // (always read-only) and to every column of an archived course.
 const readOnlyCellStyle = {
@@ -51,6 +49,7 @@ const classFieldSetter = (courseId, field) => (params) => {
 // of the grid, so they're passed in rather than redefined here.
 export const createClassTrackerColumns = ({
   courses,
+  classStatusList,
   dateFormatter,
   dateCellProps,
   mediumTextEditorProps,

@@ -34,6 +34,7 @@ const pollFreqInSecs = 5 * 60;
 
 export default function AdminFormDataViewer(props) {
   const toast = useToast();
+  const { classProgressStatuses } = props.staticData;
   const {
     location: { state },
   } = props;
@@ -516,6 +517,7 @@ export default function AdminFormDataViewer(props) {
       columnDefs.push(
         createClassTrackerColumns({
           courses,
+          classStatusList: classProgressStatuses,
           dateFormatter,
           dateCellProps: DateCellProps,
           mediumTextEditorProps: MediumTextEditorProps,

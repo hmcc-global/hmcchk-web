@@ -59,8 +59,9 @@ const FormEditorContainer = (props) => {
     formManagerCallback,
     staticData,
   } = props;
-  const { formAlertTypeList } = staticData;
+  const { formAlertTypeList, classPlatformTypes } = staticData;
   const formAlertTypes = Object.keys(formAlertTypeList);
+  const classPlatforms = Object.keys(classPlatformTypes);
 
   // React forms basics
   const { register, reset, handleSubmit, setValue, watch, control, formState } =
@@ -233,6 +234,23 @@ const FormEditorContainer = (props) => {
     setCourses(
       courses.map((course) =>
         course.courseId === courseId ? { ...course, [field]: value } : course
+      )
+    );
+  };
+
+  // A single state write sets both platform and its derived type, so the two
+  // can never disagree. (Two separate updateCourseField calls would each read
+  // the same stale `courses` closure and the second would clobber the first.)
+  const updateCoursePlatform = (courseId, platform) => {
+    setCourses(
+      courses.map((course) =>
+        course.courseId === courseId
+          ? {
+              ...course,
+              platform,
+              type: classPlatformTypes[platform] ?? course.type,
+            }
+          : course
       )
     );
   };
@@ -542,25 +560,30 @@ const FormEditorContainer = (props) => {
                                         )
                                       }
                                     />
-                                    <Input
-                                      placeholder="Platform (e.g. Coassemble)"
+                                    <Select
+                                      placeholder="Select platform"
                                       value={course.platform}
                                       onChange={(e) =>
-                                        updateCourseField(
+                                        updateCoursePlatform(
                                           course.courseId,
-                                          'platform',
                                           e.target.value
                                         )
                                       }
-                                    />
+                                    >
+                                      {classPlatforms.map((platform) => (
+                                        <option
+                                          key={platform}
+                                          value={platform}
+                                        >
+                                          {platform}
+                                        </option>
+                                      ))}
+                                    </Select>
                                     <Select
-                                      value={course.type}
-                                      onChange={(e) =>
-                                        updateCourseField(
-                                          course.courseId,
-                                          'type',
-                                          e.target.value
-                                        )
+                                      isDisabled
+                                      value={
+                                        classPlatformTypes[course.platform] ??
+                                        course.type
                                       }
                                     >
                                       <option value="Online">Online</option>
