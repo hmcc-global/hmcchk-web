@@ -9,6 +9,8 @@ module.exports = {
   exits: {},
 
   fn: async function (_, exits) {
-    return exits.success(await sails.helpers.classTrackingData.getAllClassProgressStatuses());
+    return exits.success(
+      await sails.helpers.classtrackingdata.getAllClassProgressStatuses()
+    );
   },
 };

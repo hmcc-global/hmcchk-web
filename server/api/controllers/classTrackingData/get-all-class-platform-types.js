@@ -10,7 +10,7 @@ module.exports = {
 
   fn: async function (_, exits) {
     return exits.success(
-      await sails.helpers.classTrackingData.getAllClassPlatformTypes()
+      await sails.helpers.classtrackingdata.getAllClassPlatformTypes()
     );
   },
 };
