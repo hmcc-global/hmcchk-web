@@ -40,7 +40,7 @@ module.exports = {
         isPublished: true,
       });
 
-      if (formRecord === null) {
+      if (formRecord.length === 0) {
         return exits.invalid();
       }
 
@@ -60,11 +60,10 @@ module.exports = {
 
         if (existing) {
           const modelName = `paymentData-${formId}`;
-          existing = await LastUpdated.updateOne({ modelName })
-            .set({
-              lastUpdatedBy: 't3chTeam',
-            })
-            .fetch();
+          // No .fetch() - updateOne() already returns the affected record.
+          existing = await LastUpdated.updateOne({ modelName }).set({
+            lastUpdatedBy: 't3chTeam',
+          });
 
           if (!existing) {
             existing = await LastUpdated.create({
@@ -74,7 +73,47 @@ module.exports = {
           }
 
           if (!existing) {
-            console.log('here');
+            return exits.invalid('LastUpdated failed to update');
+          }
+        }
+      }
+
+      if (formRecord[0].isClass) {
+        const activeCourses = (
+          (formRecord[0].classTrackingTemplate || {}).courses || []
+        ).filter((course) => course.isActive);
+
+        let existing = await ClassTrackingData.create({
+          formId: formId,
+          userId: userId,
+          submissionId: res.id,
+          courses: activeCourses.map((course) => ({
+            courseId: course.courseId,
+            name: course.name,
+            platform: course.platform,
+            type: course.type,
+            status: sails.config.custom.classProgressStatuses[0],
+            startedAt: '',
+            completedAt: '',
+            remarks: '',
+          })),
+        }).fetch();
+
+        if (existing) {
+          const modelName = `classTracking-${formId}`;
+          // No .fetch() - updateOne() already returns the affected record.
+          existing = await LastUpdated.updateOne({ modelName }).set({
+            lastUpdatedBy: 't3chTeam',
+          });
+
+          if (!existing) {
+            existing = await LastUpdated.create({
+              modelName,
+              lastUpdatedBy: 't3chTeam',
+            }).fetch();
+          }
+
+          if (!existing) {
             return exits.invalid('LastUpdated failed to update');
           }
         }

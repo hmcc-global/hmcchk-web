@@ -16,10 +16,62 @@ module.exports = {
     },
   },
 
-  exits: {},
+  exits: {
+    invalidCourseRemoval: {
+      description:
+        "Cannot remove a course that already has class tracking data; deactivate it instead",
+    },
+  },
 
   fn: async function ({ id, formToSave }, exits) {
     try {
+      const classPlatformTypes = sails.config.custom.classPlatformTypes;
+      if (
+        formToSave.classTrackingTemplate &&
+        formToSave.classTrackingTemplate.courses
+      ) {
+        formToSave.classTrackingTemplate.courses =
+          formToSave.classTrackingTemplate.courses.map((course) => {
+            if (course.platform && classPlatformTypes[course.platform]) {
+              return { ...course, type: classPlatformTypes[course.platform] };
+            }
+            return course;
+          });
+      }
+
+      if (
+        formToSave.classTrackingTemplate &&
+        formToSave.classTrackingTemplate.courses
+      ) {
+        const existingForm = await Form.findOne({ id });
+        if (!existingForm) {
+          return exits.error('Invalid id');
+        }
+
+        const existingCourseIds = (
+          (existingForm.classTrackingTemplate || {}).courses || []
+        ).map((course) => course.courseId);
+        const newCourseIds = formToSave.classTrackingTemplate.courses.map(
+          (course) => course.courseId
+        );
+        const removedCourseIds = existingCourseIds.filter(
+          (courseId) => !newCourseIds.includes(courseId)
+        );
+
+        if (removedCourseIds.length > 0) {
+          const trackedCount = await ClassTrackingData.count({
+            formId: id,
+            'courses.courseId': { in: removedCourseIds },
+          });
+
+          if (trackedCount > 0) {
+            return exits.invalidCourseRemoval(
+              'Cannot remove a course that already has class tracking data; deactivate it instead'
+            );
+          }
+        }
+      }
+
       const updatedForm = await Form.updateOne(id).set(formToSave);
       if (!updatedForm) {
         return exits.error("Invalid id");

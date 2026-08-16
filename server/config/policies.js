@@ -109,6 +109,11 @@ module.exports.policies = {
   // PaymentData
   'paymentData/*': ['isLoggedIn', 'aboveAdmin'],
 
+  // ClassTrackingData
+  'classTrackingData/*': ['isLoggedIn', 'aboveTcNotTech'],
+  'classTrackingData/get-all-class-progress-statuses': true,
+  'classTrackingData/get-all-class-platform-types': true,
+
   // PopUp
   'popup/get-published-popup': true,
   'popup/create-popup': ['isLoggedIn', 'aboveTech'],

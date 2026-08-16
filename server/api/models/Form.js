@@ -78,5 +78,17 @@ module.exports = {
     externalFormLink: {
       type: 'string',
     },
+    isClass: {
+      type: 'boolean',
+      defaultsTo: false,
+    },
+    classTrackingTemplate: {
+      type: 'json',
+      defaultsTo: { courses: [] },
+      description:
+        "Template/config for this Form's class tracking, grouped so future " +
+        'column types can share this object. { courses: [...] } — each ' +
+        'course: { courseId, name, platform, type, order, isActive }',
+    },
   },
 };
