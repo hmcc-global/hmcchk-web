@@ -35,9 +35,10 @@ module.exports = {
         if (data) {
           let existing;
 
+          // No .fetch() - updateOne() already returns the affected record.
           existing = await LastUpdated.updateOne({ modelName: modelName }).set({
             lastUpdatedBy: this.req.user.fullName
-          }).fetch();
+          });
 
           if (!existing) {
             existing = await LastUpdated.create({

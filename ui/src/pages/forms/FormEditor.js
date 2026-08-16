@@ -23,9 +23,11 @@ import {
   ListItem,
   Center,
   Textarea,
+  useToast,
 } from 'components';
 
 const FormEditor = (props) => {
+  const toast = useToast();
   const { user } = props;
   const { formInformation, existingFormFieldsData, resetFormEditorCallback } =
     props;
@@ -176,6 +178,17 @@ const FormEditor = (props) => {
           formInformation.paymentConfirmationEmailTemplate,
         paymentEmailSubject: formInformation.paymentEmailSubject,
         paymentCcEmail: paymentCcEmail,
+        isClass: formInformation.isClass,
+        // Only sent for class forms - writing an empty template onto every form
+        // would pollute non-class documents and make post-update-form run its
+        // course-removal guard on every single save.
+        ...(formInformation.isClass
+          ? {
+              classTrackingTemplate: {
+                courses: formInformation.courses || [],
+              },
+            }
+          : {}),
         formDescription: formInformation.formDescription,
         formImage: formInformation.formImage,
         requireLogin: formInformation.requireLogin,
@@ -204,6 +217,17 @@ const FormEditor = (props) => {
     } catch (err) {
       setSaveStatus(false);
       console.log(err);
+      // The server rejects removing a course that already has tracking data;
+      // surface that (and any other save failure) instead of failing silently.
+      toast({
+        title: 'Form could not be saved',
+        description:
+          err?.response?.data ||
+          'Something went wrong saving the form. Please try again.',
+        status: 'error',
+        duration: 8000,
+        isClosable: true,
+      });
     }
   };
 
