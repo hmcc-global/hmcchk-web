@@ -80,6 +80,14 @@ module.exports.custom = {
     None: [],
   },
 
+  classProgressStatuses: ['Not Started', 'In Progress', 'Completed'],
+
+  classPlatformTypes: {
+    Coassemble: 'Online',
+    'T-Center': 'In-Person',
+    'Google Forms': 'Online',
+  },
+
   parseUserMailbox: {
     single: 'Single Parse User Query',
     batch: 'Batch Parse User Query',
