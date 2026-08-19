@@ -1,5 +1,11 @@
 const { DateTime } = require('luxon');
 
+const isCurrentSeason = (dateTime, start, end) => {
+  const afterStart = start.isValid ? dateTime >= start : true;
+  const beforeEnd = end.isValid ? dateTime <= end : true;
+  return afterStart && beforeEnd;
+};
+
 module.exports = {
   friendlyName: 'Get signed up classes for user',
 
@@ -31,7 +37,7 @@ module.exports = {
     try {
       // 1. Find submissions for the user to know which forms they've signed up for
       const submissions = await Submission.find({
-        userId: userId,
+        userId,
         isDeleted: false,
       });
 
@@ -39,7 +45,13 @@ module.exports = {
         return exits.success([]);
       }
 
-      const formIds = [...new Set(submissions.map((s) => s.formId))];
+      const submissionsByFormId = new Map();
+      for (const submission of submissions) {
+        const list = submissionsByFormId.get(submission.formId) || [];
+        list.push(submission);
+        submissionsByFormId.set(submission.formId, list);
+      }
+      const formIds = [...submissionsByFormId.keys()];
 
       // 2. Load only class forms referenced by those submissions
       const forms = await Form.find({
@@ -60,41 +72,48 @@ module.exports = {
           form.classTrackingTemplate?.classEndingTime || ''
         );
 
-        const afterFormOpen = availableFrom.isValid
-          ? now >= availableFrom
-          : true;
-        const beforeClassEnd = classEndingTime.isValid
-          ? now <= classEndingTime
-          : true;
-        const isWithinActiveWindow = afterFormOpen && beforeClassEnd;
+        if (!isCurrentSeason(now, availableFrom, classEndingTime)) continue;
 
-        if (!isWithinActiveWindow) continue;
-
-        // There should be one ClassTrackingData record per submission; find the
-        // record(s) for this user and form. If none exists, skip.
+        // A user can have ClassTrackingData from older seasons of the
+        // same reused form, so fetch all and narrow to this season
         const classDataFetchList = await ClassTrackingData.find({
           formId: form.id,
           userId,
         });
         if (!classDataFetchList || classDataFetchList.length === 0) continue;
 
-        if (classDataFetchList.length > 1) {
-          const duplicateIds = classDataFetchList.map((record) => record.id);
+        const seasonClassData = classDataFetchList.filter((c) =>
+          isCurrentSeason(
+            DateTime.fromJSDate(new Date(c.createdAt)),
+            availableFrom,
+            classEndingTime
+          )
+        );
+
+        if (seasonClassData.length === 0) continue;
+
+        if (seasonClassData.length > 1) {
+          // Shouldn't happen if sign-ups are blocked per season, but log a warning and return the earliest data
+          // Sort ascending by createdAt so the earliest record is always used
+          seasonClassData.sort(
+            (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+          );
+
           sails.log.warn(
-            'Multiple ClassTrackingData records found for user:',
+            'Multiple ClassTrackingData records found within active season for user:',
             userId,
             'form:',
             form.id,
             'record ids:',
-            duplicateIds.join(', '),
-            'using first record:',
-            classDataFetchList[0].id
+            seasonClassData.map((c) => c.id).join(', '),
+            'using earliest record:',
+            seasonClassData[0].id
           );
         }
 
         results.push({
           formName: form.formName,
-          classTrackingData: classDataFetchList[0],
+          classTrackingData: seasonClassData[0],
         });
       }
 
