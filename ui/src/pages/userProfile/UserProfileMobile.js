@@ -43,6 +43,7 @@ import {
   generatePublishedFormLinks,
 } from 'utils/userInformationHelpers';
 import SermonNotesPagination from './SermonNotesPagination';
+import SignedUpFormsList from './SignedUpFormsList';
 
 const UserProfileMobile = (props) => {
   const { user, staticData } = props;
@@ -54,6 +55,7 @@ const UserProfileMobile = (props) => {
   const [formList, setFormList] = useState(null);
   const [unsignedFormList, setUnsignedFormList] = useState([]);
   const [signedUpFormList, setSignedUpFormList] = useState([]);
+  const [classProgressList, setClassProgressList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeSermonNoteTab, setActiveSermonNoteTab] = useState('all');
@@ -97,6 +99,17 @@ const UserProfileMobile = (props) => {
 
     if (status === 200) {
       setSignedUpFormList([...data]);
+    }
+  }, [user.id]);
+
+  const fetchClassProgress = useCallback(async () => {
+    const { data, status } = await axios.get(
+      '/api/classTrackingData/get-signedup-class',
+      { params: { userId: user.id } }
+    );
+
+    if (status === 200) {
+      setClassProgressList(data);
     }
   }, [user.id]);
 
@@ -228,6 +241,10 @@ const UserProfileMobile = (props) => {
     fetchUserSermonNotes();
   }, []);
 
+  useEffect(() => {
+    fetchClassProgress();
+  }, [fetchClassProgress]);
+
   const inputBox = {
     color: '#718096',
     background: '#EDF2F7',
@@ -355,7 +372,10 @@ const UserProfileMobile = (props) => {
                     >
                       Your Signups:
                     </Text>
-                    {generatePublishedFormLinks(signedUpFormList, true)}
+                    <SignedUpFormsList
+                      forms={signedUpFormList}
+                      classProgressList={classProgressList}
+                    />
                   </Box>
                 )}
                 {/* <Button

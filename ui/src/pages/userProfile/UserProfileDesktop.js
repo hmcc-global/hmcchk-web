@@ -45,6 +45,7 @@ import {
   generatePublishedFormLinks,
 } from 'utils/userInformationHelpers';
 import SermonNotesPagination from './SermonNotesPagination';
+import SignedUpFormsList from './SignedUpFormsList';
 
 const UserProfileDesktop = (props) => {
   const { user, staticData } = props;
@@ -56,6 +57,7 @@ const UserProfileDesktop = (props) => {
   const [formList, setFormList] = useState(null);
   const [unsignedFormList, setUnsignedFormList] = useState([]);
   const [signedUpFormList, setSignedUpFormList] = useState([]);
+  const [classProgressList, setClassProgressList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [activeSermonNoteTab, setActiveSermonNoteTab] = useState('all');
   const [userSermonNotes, setUserSermonNotes] = useState([]);
@@ -122,6 +124,17 @@ const UserProfileDesktop = (props) => {
         setUserData(data[0]);
         setUserInformationFields(data[0]);
       }
+    }
+  }, [user.id]);
+
+  const fetchClassProgress = useCallback(async () => {
+    const { data, status } = await axios.get(
+      '/api/classTrackingData/get-signedup-class',
+      { params: { userId: user.id } }
+    );
+
+    if (status === 200) {
+      setClassProgressList(data);
     }
   }, [user.id]);
 
@@ -219,12 +232,14 @@ const UserProfileDesktop = (props) => {
     fetchUserData();
     fetchPublishedForms();
     fetchSignedUpForms();
+    fetchClassProgress();
     fetchUnsignedUpForms();
     fetchUserSermonNotes();
   }, [
     fetchUserData,
     fetchPublishedForms,
     fetchSignedUpForms,
+    fetchClassProgress,
     fetchUnsignedUpForms,
     fetchUserSermonNotes,
   ]);
@@ -359,7 +374,10 @@ const UserProfileDesktop = (props) => {
                       >
                         Your Signups:
                       </Text>
-                      {generatePublishedFormLinks(signedUpFormList, true)}
+                      <SignedUpFormsList
+                        forms={signedUpFormList}
+                        classProgressList={classProgressList}
+                      />
                     </Box>
                   </>
                 )}

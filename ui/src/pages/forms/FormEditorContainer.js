@@ -47,6 +47,7 @@ const newCourse = () => ({
   name: '',
   platform: '',
   type: 'Online',
+  courseLink: '',
   isActive: true,
 });
 
@@ -588,6 +589,17 @@ const FormEditorContainer = (props) => {
                                         </option>
                                       ))}
                                     </Select>
+                                    <Input
+                                      placeholder="Course link (https://...)"
+                                      value={course.courseLink ?? ''}
+                                      onChange={(e) =>
+                                        updateCourseField(
+                                          course.courseId,
+                                          'courseLink',
+                                          e.target.value
+                                        )
+                                      }
+                                    />
                                     <Select
                                       isDisabled
                                       value={
