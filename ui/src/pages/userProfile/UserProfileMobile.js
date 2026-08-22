@@ -40,10 +40,10 @@ import {
   getUserDataRequest,
   updateUserDataRequest,
   getLoginOnlyFormsRequest,
-  generatePublishedFormLinks,
 } from 'utils/userInformationHelpers';
 import SermonNotesPagination from './SermonNotesPagination';
 import SignedUpFormsList from './SignedUpFormsList';
+import AvailableSignupLinksList from './AvailableSignupLinksList';
 
 const UserProfileMobile = (props) => {
   const { user, staticData } = props;
@@ -362,7 +362,7 @@ const UserProfileMobile = (props) => {
                     >
                       Available Signup Links:
                     </Text>
-                    {generatePublishedFormLinks(unsignedFormList, false)}
+                    <AvailableSignupLinksList forms={unsignedFormList} />
                     <Text
                       fontWeight="700"
                       fontSize="0.95rem"
