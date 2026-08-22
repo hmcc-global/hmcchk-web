@@ -5,6 +5,7 @@ import {
   Button,
   Divider,
   Flex,
+  Image,
   Link,
   Progress,
   Text,
@@ -22,7 +23,8 @@ const isSafeCourseLink = (courseLink) =>
 const getProgressCourses = (form, classProgress) => {
   const templateCourses = form.classTrackingTemplate?.courses ?? [];
   const snapshotCourses = classProgress?.classTrackingData?.courses ?? [];
-  const courses = templateCourses.length > 0 ? templateCourses : snapshotCourses;
+  const courses =
+    templateCourses.length > 0 ? templateCourses : snapshotCourses;
 
   return courses.map((course) => {
     const snapshotCourse = snapshotCourses.find(
@@ -68,7 +70,14 @@ const SignedUpFormsList = ({ forms = [], classProgressList = [] }) => {
               textAlign="left"
               py="2"
             >
-              <Box flex="1" minW="0">
+              <Image
+                src={form.formImage}
+                alt=""
+                fit="contain"
+                w={{ base: '28%', md: '30%' }}
+                maxH="72px"
+              />
+              <Box flex="1" minW="0" px="3">
                 <Text>{form.formName}</Text>
               </Box>
               {isClass ? (
@@ -76,9 +85,7 @@ const SignedUpFormsList = ({ forms = [], classProgressList = [] }) => {
                   size="sm"
                   variant="outline"
                   colorScheme="blue"
-                  onClick={() =>
-                    setExpandedFormId(isExpanded ? null : form.id)
-                  }
+                  onClick={() => setExpandedFormId(isExpanded ? null : form.id)}
                 >
                   {isExpanded ? 'Hide Progress' : 'View Progress'}
                 </Button>
@@ -125,7 +132,9 @@ const SignedUpFormsList = ({ forms = [], classProgressList = [] }) => {
                       ) : (
                         <Text>{course.name}</Text>
                       )}
-                      <Badge colorScheme={statusColors[course.status] || 'gray'}>
+                      <Badge
+                        colorScheme={statusColors[course.status] || 'gray'}
+                      >
                         {course.status}
                       </Badge>
                     </Flex>

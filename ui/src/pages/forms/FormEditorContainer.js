@@ -196,7 +196,9 @@ const FormEditorContainer = (props) => {
         data.paymentConfirmationEmailTemplate
       );
       setClassEndingTime(
-        data.classTrackingTemplate?.classEndingTime ?? data.classEndingTime ?? ''
+        data.classTrackingTemplate?.classEndingTime ??
+          data.classEndingTime ??
+          ''
       );
       setPaymentEmailSubject(data.paymentEmailSubject);
       setPaymentCcEmail(paymentCcEmail);
@@ -581,10 +583,7 @@ const FormEditorContainer = (props) => {
                                       }
                                     >
                                       {classPlatforms.map((platform) => (
-                                        <option
-                                          key={platform}
-                                          value={platform}
-                                        >
+                                        <option key={platform} value={platform}>
                                           {platform}
                                         </option>
                                       ))}
