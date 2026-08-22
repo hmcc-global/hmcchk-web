@@ -10,29 +10,31 @@ import {
   Link,
   Progress,
   Text,
+  Grid,
+  GridItem,
 } from 'components';
 import { FiExternalLink } from 'react-icons/fi';
+import { signUpButton } from './AvailableSignupLinksList';
 
-const progressButtonStyle = {
-  borderRadius: '3px',
-  fontWeight: '600',
-  w: { base: '100px', md: '112px' },
-  minW: { base: '100px', md: '112px' },
-  flexShrink: 0,
-  h: '8',
-  px: '2',
-  fontSize: 'xs',
-  whiteSpace: 'nowrap',
-};
-
-const signedUpButtonStyle = {
-  ...progressButtonStyle,
+const signedUpButton = {
   backgroundColor: '#C4C4C4',
   color: '#4E4F50',
+  fontSize: 'inherit',
+  borderRadius: '3px',
+  padding: '20px 10px',
+  textAlign: 'center',
   cursor: 'default',
+  minWidth: '100%',
 };
 
-const courseTitleFontSize = 'xs';
+const hideProgressButton = {
+  ...signUpButton,
+  backgroundColor: '#CCE1FF',
+};
+
+const cardHeaderFontSize = '0.875rem';
+const courseTitleFontSize = '0.8rem';
+const statusTagFontSize = '0.65rem';
 
 const statusColors = {
   'Not Started': 'gray',
@@ -46,9 +48,8 @@ const isSafeCourseLink = (courseLink) =>
 const getProgressCourses = (form, classProgress) => {
   const templateCourses = form.classTrackingTemplate?.courses ?? [];
   const snapshotCourses = classProgress?.classTrackingData?.courses ?? [];
-  const courses = (templateCourses.length > 0
-    ? templateCourses
-    : snapshotCourses
+  const courses = (
+    templateCourses.length > 0 ? templateCourses : snapshotCourses
   ).filter((course) => course.isActive !== false);
 
   return courses.map((course) => {
@@ -89,62 +90,56 @@ const SignedUpFormsList = ({ forms = [], classProgressList = [] }) => {
             <Flex
               direction="row"
               align="center"
-              w="100%"
-              display="grid"
-              gridTemplateColumns={{
-                base: '25% minmax(0, 1fr) auto',
-                md: '28% minmax(0, 1fr) auto',
-              }}
-              fontSize={{ base: '0.7rem', md: '0.8rem' }}
+              w={['100%', '90%', '90%', '80%', '80%']}
+              fontSize={['0.6rem', '0.8rem']}
               fontWeight="700"
               textAlign="left"
-              py="2"
             >
-              <Image
-                src={form.formImage}
-                alt=""
-                fit="contain"
-                w="100%"
-                maxH="72px"
-              />
-              <Box minW="0" px={{ base: '3', md: '4' }}>
-                <Text fontSize="xs" lineHeight="short">
-                  {form.formName}
-                </Text>
-              </Box>
-              {isClass ? (
-                <Button
-                  size="sm"
-                  variant={isExpanded ? 'outline' : 'solid'}
-                  colorScheme="blue"
-                  sx={progressButtonStyle}
-                  onClick={() => setExpandedFormId(isExpanded ? null : form.id)}
-                >
-                  {isExpanded ? 'Hide Progress' : 'View Progress'}
-                </Button>
-              ) : (
-                <Button
-                  size="sm"
-                  sx={signedUpButtonStyle}
-                  isDisabled
-                >
-                  Signed Up
-                </Button>
-              )}
+              <Grid h="inherit" w="100%" templateColumns="repeat(24, 1fr)">
+                <GridItem colSpan={8} display="flex">
+                  <Image src={form.formImage} fit="contain" w="100%" />
+                </GridItem>
+                <GridItem colSpan={12} display="flex" alignItems="center">
+                  <Text margin="0px 15px">{form.formName}</Text>
+                </GridItem>
+                <GridItem colSpan={4} display="flex" alignItems="center">
+                  <Flex>
+                    {isClass ? (
+                      <Button
+                        style={isExpanded ? hideProgressButton : signUpButton}
+                        _hover={{
+                          color: '#00377C',
+                          textDecoration: 'underline',
+                          bg: '#CCE1FF',
+                        }}
+                        onClick={() =>
+                          setExpandedFormId(isExpanded ? null : form.id)
+                        }
+                      >
+                        {isExpanded ? 'Hide Progress' : 'View Progress'}
+                      </Button>
+                    ) : (
+                      <Button style={signedUpButton} disabled>
+                        Signed Up
+                      </Button>
+                    )}
+                  </Flex>
+                </GridItem>
+              </Grid>
             </Flex>
             {isClass && isExpanded && (
-              <Box bg="gray.50" borderRadius="md" p="4" mb="3">
+              <Box bg="gray.50" borderRadius="md" p="4" mt="3" mb="3">
                 <Flex justify="space-between" mb="2">
-                  <Text fontSize="sm" fontWeight="600">
+                  <Text fontSize={cardHeaderFontSize} fontWeight="600">
                     Overall Progress
                   </Text>
-                  <Text fontSize="sm" fontWeight="600">
+                  <Text fontSize={cardHeaderFontSize} fontWeight="600">
                     {completedCourses} / {courses.length}
                   </Text>
                 </Flex>
                 <Progress value={progress} colorScheme="blue" mb="4" />
                 {courses.length === 0 ? (
-                  <Text fontSize="sm" color="gray.600">
+                  <Text fontSize={cardHeaderFontSize} color="gray.600">
                     Progress is not available yet.
                   </Text>
                 ) : (
@@ -161,7 +156,7 @@ const SignedUpFormsList = ({ forms = [], classProgressList = [] }) => {
                           href={course.courseLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          color="blue.600"
+                          color="#0628A3"
                           textDecoration="underline"
                           title="Open course link in a new tab"
                         >
@@ -181,7 +176,7 @@ const SignedUpFormsList = ({ forms = [], classProgressList = [] }) => {
                         colorScheme={statusColors[course.status] || 'gray'}
                         px="3"
                         py="1"
-                        fontSize="xs"
+                        fontSize={statusTagFontSize}
                       >
                         {course.status}
                       </Badge>
