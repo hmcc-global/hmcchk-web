@@ -6,10 +6,33 @@ import {
   Divider,
   Flex,
   Image,
+  Icon,
   Link,
   Progress,
   Text,
 } from 'components';
+import { FiExternalLink } from 'react-icons/fi';
+
+const progressButtonStyle = {
+  borderRadius: '3px',
+  fontWeight: '600',
+  w: { base: '100px', md: '112px' },
+  minW: { base: '100px', md: '112px' },
+  flexShrink: 0,
+  h: '8',
+  px: '2',
+  fontSize: 'xs',
+  whiteSpace: 'nowrap',
+};
+
+const signedUpButtonStyle = {
+  ...progressButtonStyle,
+  backgroundColor: '#C4C4C4',
+  color: '#4E4F50',
+  cursor: 'default',
+};
+
+const courseTitleFontSize = 'xs';
 
 const statusColors = {
   'Not Started': 'gray',
@@ -23,8 +46,10 @@ const isSafeCourseLink = (courseLink) =>
 const getProgressCourses = (form, classProgress) => {
   const templateCourses = form.classTrackingTemplate?.courses ?? [];
   const snapshotCourses = classProgress?.classTrackingData?.courses ?? [];
-  const courses =
-    templateCourses.length > 0 ? templateCourses : snapshotCourses;
+  const courses = (templateCourses.length > 0
+    ? templateCourses
+    : snapshotCourses
+  ).filter((course) => course.isActive !== false);
 
   return courses.map((course) => {
     const snapshotCourse = snapshotCourses.find(
@@ -65,6 +90,11 @@ const SignedUpFormsList = ({ forms = [], classProgressList = [] }) => {
               direction="row"
               align="center"
               w="100%"
+              display="grid"
+              gridTemplateColumns={{
+                base: '25% minmax(0, 1fr) auto',
+                md: '28% minmax(0, 1fr) auto',
+              }}
               fontSize={{ base: '0.7rem', md: '0.8rem' }}
               fontWeight="700"
               textAlign="left"
@@ -74,23 +104,30 @@ const SignedUpFormsList = ({ forms = [], classProgressList = [] }) => {
                 src={form.formImage}
                 alt=""
                 fit="contain"
-                w={{ base: '28%', md: '30%' }}
+                w="100%"
                 maxH="72px"
               />
-              <Box flex="1" minW="0" px="3">
-                <Text>{form.formName}</Text>
+              <Box minW="0" px={{ base: '3', md: '4' }}>
+                <Text fontSize="xs" lineHeight="short">
+                  {form.formName}
+                </Text>
               </Box>
               {isClass ? (
                 <Button
                   size="sm"
-                  variant="outline"
+                  variant={isExpanded ? 'outline' : 'solid'}
                   colorScheme="blue"
+                  sx={progressButtonStyle}
                   onClick={() => setExpandedFormId(isExpanded ? null : form.id)}
                 >
                   {isExpanded ? 'Hide Progress' : 'View Progress'}
                 </Button>
               ) : (
-                <Button size="sm" isDisabled>
+                <Button
+                  size="sm"
+                  sx={signedUpButtonStyle}
+                  isDisabled
+                >
                   Signed Up
                 </Button>
               )}
@@ -126,14 +163,25 @@ const SignedUpFormsList = ({ forms = [], classProgressList = [] }) => {
                           rel="noopener noreferrer"
                           color="blue.600"
                           textDecoration="underline"
+                          title="Open course link in a new tab"
                         >
-                          {course.name}
+                          <Flex align="center" gap="1">
+                            <Text fontSize={courseTitleFontSize}>
+                              {course.name}
+                            </Text>
+                            <Icon as={FiExternalLink} aria-hidden="true" />
+                          </Flex>
                         </Link>
                       ) : (
-                        <Text>{course.name}</Text>
+                        <Text fontSize={courseTitleFontSize}>
+                          {course.name}
+                        </Text>
                       )}
                       <Badge
                         colorScheme={statusColors[course.status] || 'gray'}
+                        px="3"
+                        py="1"
+                        fontSize="xs"
                       >
                         {course.status}
                       </Badge>
