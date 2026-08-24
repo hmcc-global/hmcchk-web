@@ -39,7 +39,6 @@ export default function AdminLiveSermonContainer(props) {
   const [streamStartTime, setStreamStartTime] = useState('');
   const [streamEndTime, setStreamEndTime] = useState('');
   const [streamPeriodInvalid, setStreamPeriodInvalid] = useState(false);
-  const [isLoadingPassage, setIsLoadingPassage] = useState(false);
 
   const initLiveSermonValues = (data) => {
     setId(data.id);
@@ -209,40 +208,6 @@ export default function AdminLiveSermonContainer(props) {
     getData();
   }, [getData]);
 
-  // The bible passage mirrors the sermon notes published for the same service
-  // date. Several notes can exist for one date; the extras are test records, so
-  // only published ones count and the newest sermonId wins.
-  const getPassageFromSermonNotes = useCallback(async (dateTime) => {
-    const serviceDate = DateTime.fromISO(dateTime);
-    if (!serviceDate.isValid) return;
-
-    setIsLoadingPassage(true);
-    try {
-      const { data } = await axios.get('/api/sermon-notes-parent/get', {
-        params: {
-          date: serviceDate.toFormat('yyyy-MM-dd'),
-          isPublished: true,
-        },
-      });
-      const [latest] = [...data].sort((a, b) =>
-        (b.sermonId ?? '').localeCompare(a.sermonId ?? '')
-      );
-      if (latest && latest.passage) {
-        setSermonPassage(latest.passage);
-      }
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoadingPassage(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (sermonDateTime) {
-      getPassageFromSermonNotes(sermonDateTime);
-    }
-  }, [sermonDateTime, getPassageFromSermonNotes]);
-
   useEffect(() => {
     if (streamStartTime && streamEndTime) {
       const startTime = DateTime.fromISO(streamStartTime);
@@ -337,12 +302,11 @@ export default function AdminLiveSermonContainer(props) {
                   <Input
                     type="text"
                     value={sermonPassage}
-                    isDisabled={isLoadingPassage}
                     onChange={(e) => setSermonPassage(e.target.value)}
                   />
                   <FormHelperText>
-                    Filled in from the published sermon notes for the selected
-                    date. Edit it here to override.
+                    /online shows the passage from the published sermon notes
+                    for this date. This is only used when there are none.
                   </FormHelperText>
                 </FormControl>
                 <FormControl isRequired isInvalid={sermonDateTime === ''}>

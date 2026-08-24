@@ -45,6 +45,10 @@ module.exports = {
       }).sort('updatedAt DESC');
 
       if (data && data[0]) {
+        data[0].sermonPassage = await sails.helpers.sermonNotes.resolvePassage(
+          data[0].sermonDateTime,
+          data[0].sermonPassage
+        );
         return exits.success(data);
       }
       return exits.success([]);

@@ -8,15 +8,6 @@ module.exports = {
       required: false,
       type: 'string',
     },
-    date: {
-      required: false,
-      type: 'string',
-      description: 'Service date in yyyy-MM-dd format',
-    },
-    isPublished: {
-      required: false,
-      type: 'boolean',
-    },
     includeDeleted: {
       required: false,
       type: 'boolean',
@@ -36,7 +27,7 @@ module.exports = {
     },
   },
 
-  fn: async function ({ sermonId, date, isPublished, includeDeleted }, exits) {
+  fn: async function ({ sermonId, includeDeleted }, exits) {
     try {
       let query = {};
       if (!includeDeleted) {
@@ -45,14 +36,6 @@ module.exports = {
 
       if (sermonId) {
         query.sermonId = sermonId;
-      }
-
-      if (date) {
-        query.date = date;
-      }
-
-      if (isPublished !== undefined) {
-        query.isPublished = isPublished;
       }
 
       const data = await SermonNotesParent.find(query);
