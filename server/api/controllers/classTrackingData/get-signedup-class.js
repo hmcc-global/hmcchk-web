@@ -65,7 +65,7 @@ module.exports = {
       const now = DateTime.now();
       const results = [];
 
-      // 3. For each class form, check active window and load ClassTrackingData
+      // 3. For each class form, check if current season and load ClassTrackingData
       for (const form of forms) {
         const availableFrom = DateTime.fromISO(form.formAvailableFrom || '');
         const classEndingTime = DateTime.fromISO(
@@ -75,45 +75,23 @@ module.exports = {
         if (!isCurrentSeason(now, availableFrom, classEndingTime)) continue;
 
         // A user can have ClassTrackingData from older seasons of the
-        // same reused form, so fetch all and narrow to this season
-        const classDataFetchList = await ClassTrackingData.find({
+        // same reused form, so fetch the most recent data for the current season only
+        const [latestClassData] = await ClassTrackingData.find({
           formId: form.id,
           userId,
-        });
-        if (!classDataFetchList || classDataFetchList.length === 0) continue;
+          createdAt: {
+            '>=': availableFrom.toJSDate(),
+            '<=': classEndingTime.toJSDate(),
+          },
+        })
+          .sort('createdAt DESC')
+          .limit(1);
 
-        const seasonClassData = classDataFetchList.filter((c) =>
-          isCurrentSeason(
-            DateTime.fromJSDate(new Date(c.createdAt)),
-            availableFrom,
-            classEndingTime
-          )
-        );
-
-        if (seasonClassData.length === 0) continue;
-
-        if (seasonClassData.length > 1) {
-          // Shouldn't happen if sign-ups are blocked per season, but log a warning and return the earliest data
-          // Sort ascending by createdAt so the earliest record is always used
-          seasonClassData.sort(
-            (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
-          );
-
-          sails.log.warn(
-            'Multiple ClassTrackingData records found within active season for user:',
-            userId,
-            'form:',
-            form.id,
-            'record ids:',
-            seasonClassData.map((c) => c.id).join(', '),
-            'using earliest record:',
-            seasonClassData[0].id
-          );
-        }
+        if (!latestClassData) continue;
 
         results.push({
           formName: form.formName,
-          classTrackingData: seasonClassData[0],
+          classTrackingData: latestClassData,
         });
       }
 
