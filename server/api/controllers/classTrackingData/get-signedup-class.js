@@ -12,13 +12,7 @@ module.exports = {
   description:
     'Gets all classes a user has signed up for and returns each class status based on form availability and ending time',
 
-  inputs: {
-    userId: {
-      type: 'string',
-      required: true,
-      description: 'User',
-    },
-  },
+  inputs: {},
 
   exits: {
     success: {
@@ -33,8 +27,10 @@ module.exports = {
     },
   },
 
-  fn: async function ({ userId }, exits) {
+  fn: async function (inputs, exits) {
     try {
+      const userId = this.req.user.id;
+
       // 1. Find submissions for the user to know which forms they've signed up for
       const submissions = await Submission.find({
         userId,
