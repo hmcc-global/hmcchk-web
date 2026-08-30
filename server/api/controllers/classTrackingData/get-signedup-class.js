@@ -58,32 +58,49 @@ module.exports = {
 
       if (!forms || forms.length === 0) return exits.success([]);
 
+      const classDataList = await ClassTrackingData.find({
+        formId: { in: formIds },
+        userId,
+      }).sort('createdAt DESC');
+
+      // A user can have ClassTrackingData from older seasons of the
+      // same reused form, so fetch the most recent data for the current season only
+      const latestClassDataByFormId = new Map();
+      for (const classData of classDataList) {
+        if (!latestClassDataByFormId.has(classData.formId)) {
+          latestClassDataByFormId.set(classData.formId, classData);
+        }
+      }
+
       const now = DateTime.now();
       const results = [];
 
       // 3. For each class form, check if current season and load ClassTrackingData
       for (const form of forms) {
-        const availableFrom = DateTime.fromISO(form.formAvailableFrom || '');
-        const classEndingTime = DateTime.fromISO(
-          form.classTrackingTemplate?.classEndingTime || ''
-        );
+        const availableFrom = form.formAvailableFrom
+          ? DateTime.fromJSDate(new Date(form.formAvailableFrom))
+          : DateTime.invalid('missing formAvailableFrom');
+
+        const rawClassEndingTime = form.classTrackingTemplate?.classEndingTime;
+        const classEndingTime = rawClassEndingTime
+          ? DateTime.fromJSDate(new Date(rawClassEndingTime))
+          : DateTime.invalid('missing classEndingTime');
 
         if (!isCurrentSeason(now, availableFrom, classEndingTime)) continue;
 
-        // A user can have ClassTrackingData from older seasons of the
-        // same reused form, so fetch the most recent data for the current season only
-        const [latestClassData] = await ClassTrackingData.find({
-          formId: form.id,
-          userId,
-          createdAt: {
-            '>=': availableFrom.toJSDate(),
-            '<=': classEndingTime.toJSDate(),
-          },
-        })
-          .sort('createdAt DESC')
-          .limit(1);
-
+        const latestClassData = latestClassDataByFormId.get(form.id);
         if (!latestClassData) continue;
+
+        const createdAt = DateTime.fromJSDate(
+          new Date(latestClassData.createdAt)
+        );
+        const afterStart = availableFrom.isValid
+          ? createdAt >= availableFrom
+          : true;
+        const beforeEnd = classEndingTime.isValid
+          ? createdAt <= classEndingTime
+          : true;
+        if (!afterStart || !beforeEnd) continue;
 
         results.push({
           formName: form.formName,
