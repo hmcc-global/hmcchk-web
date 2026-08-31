@@ -149,7 +149,7 @@ const LifeGroupPage = () => {
               />
               <AspectRatio ratio={16 / 9} borderRadius="20" w={'100%'}>
                 <iframe
-                  src="https://www.youtube.com/embed/tainVHwAWt0"
+                  src="https://www.youtube.com/embed/H43t9jLZdGs?si=MbPlxA6XnrqiPavt"
                   title="YouTube video player"
                   allowFullScreen
                 />
