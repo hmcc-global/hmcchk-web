@@ -305,8 +305,9 @@ export default function AdminLiveSermonContainer(props) {
                     onChange={(e) => setSermonPassage(e.target.value)}
                   />
                   <FormHelperText>
-                    /online shows the passage from the published sermon notes
-                    for this date. This is only used when there are none.
+                    /online shows the passage from the published sermon notes for
+                    this date. This field is only used when there are no
+                    published sermon notes.
                   </FormHelperText>
                 </FormControl>
                 <FormControl isRequired isInvalid={sermonDateTime === ''}>
