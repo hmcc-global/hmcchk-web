@@ -31,37 +31,14 @@ module.exports = {
     try {
       const userId = this.req.user.id;
 
-      // 1. Find submissions for the user to know which forms they've signed up for
-      const submissions = await Submission.find({
-        userId,
-        isDeleted: false,
-      });
-
-      if (!submissions || submissions.length === 0) {
-        return exits.success([]);
-      }
-
-      const submissionsByFormId = new Map();
-      for (const submission of submissions) {
-        const list = submissionsByFormId.get(submission.formId) || [];
-        list.push(submission);
-        submissionsByFormId.set(submission.formId, list);
-      }
-      const formIds = [...submissionsByFormId.keys()];
-
-      // 2. Load only class forms referenced by those submissions
-      const forms = await Form.find({
-        id: formIds,
-        isClass: true,
-        isDeleted: false,
-      });
-
-      if (!forms || forms.length === 0) return exits.success([]);
-
+      // 1. Get all class tracking data for the user
       const classDataList = await ClassTrackingData.find({
-        formId: { in: formIds },
         userId,
       }).sort('createdAt DESC');
+
+      if (!classDataList || classDataList.length === 0) {
+        return exits.success([]);
+      }
 
       // A user can have ClassTrackingData from older seasons of the
       // same reused form, so fetch the most recent data for the current season only
@@ -71,11 +48,21 @@ module.exports = {
           latestClassDataByFormId.set(classData.formId, classData);
         }
       }
+      const formIds = [...latestClassDataByFormId.keys()];
+
+      // 2. Get all forms that are class forms based on classTrackingData
+      const forms = await Form.find({
+        id: formIds,
+        isClass: true,
+        isDeleted: false,
+      });
+
+      if (!forms || forms.length === 0) return exits.success([]);
 
       const now = DateTime.now();
       const results = [];
 
-      // 3. For each class form, check if current season and load ClassTrackingData
+      // 2. For each class form, check if current season and load ClassTrackingData
       for (const form of forms) {
         const availableFrom = form.formAvailableFrom
           ? DateTime.fromJSDate(new Date(form.formAvailableFrom))
