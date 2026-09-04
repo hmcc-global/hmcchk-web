@@ -59,6 +59,8 @@ module.exports.routes = {
     'classTrackingData/get-all-class-progress-statuses',
   'get /api/classTrackingData/all-platform-types':
     'classTrackingData/get-all-class-platform-types',
+  'get /api/classTrackingData/get-signedup-class':
+    'classTrackingData/get-signedup-class',
 
   // Announcement APIs
   'get /api/announcements/get-announcements': 'announcements/get-announcements',
