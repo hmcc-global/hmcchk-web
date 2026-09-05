@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import {
   Box,
   Button,
@@ -34,10 +35,9 @@ const AvailableSignupLinksList = ({ forms }) => {
     <Box>
       {forms.map((item, index) => {
         return (
-          <>
+          <Fragment key={'fl' + item['formName']}>
             <Flex
               direction="row"
-              key={'fl' + item['formName']}
               align="center"
               w={['100%', '90%', '90%', '80%', '80%']}
               fontSize={['0.6rem', '0.8rem']}
@@ -84,7 +84,7 @@ const AvailableSignupLinksList = ({ forms }) => {
             {index !== forms.length - 1 && (
               <Divider margin="15px 0px" backgroundColor="black" />
             )}
-          </>
+          </Fragment>
         );
       })}
     </Box>

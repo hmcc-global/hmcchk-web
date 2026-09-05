@@ -42,6 +42,7 @@ import {
   getUserDataRequest,
   updateUserDataRequest,
   getLoginOnlyFormsRequest,
+  getSignedUpClassRequest,
 } from 'utils/userInformationHelpers';
 import SermonNotesPagination from './SermonNotesPagination';
 import SignedUpFormsList from './SignedUpFormsList';
@@ -128,15 +129,16 @@ const UserProfileDesktop = (props) => {
   }, [user.id]);
 
   const fetchClassProgress = useCallback(async () => {
-    const { data, status } = await axios.get(
-      '/api/classTrackingData/get-signedup-class',
-      { params: { userId: user.id } }
-    );
+    try {
+      const { data, status } = await getSignedUpClassRequest();
 
-    if (status === 200) {
-      setClassProgressList(data);
+      if (status === 200) {
+        setClassProgressList(data);
+      }
+    } catch (err) {
+      console.log(err);
     }
-  }, [user.id]);
+  }, []);
 
   const fetchPublishedForms = useCallback(async () => {
     //get all forms
@@ -160,7 +162,7 @@ const UserProfileDesktop = (props) => {
   }, [user.id]);
 
   const fetchUnsignedUpForms = useCallback(async () => {
-    //get signed up forms
+    //get unsigned up forms
     const { data, status } = await axios.get('/api/forms/get-unsignedup-form', {
       params: {
         userId: user.id,

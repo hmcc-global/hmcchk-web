@@ -29,7 +29,8 @@ const signedUpButton = {
 
 const hideProgressButton = {
   ...signUpButton,
-  backgroundColor: '#CCE1FF',
+  backgroundColor: 'transparent',
+  border: '1px solid #ADCFFF',
 };
 
 const cardHeaderFontSize = '0.875rem';
@@ -37,7 +38,6 @@ const courseTitleFontSize = '0.8rem';
 const statusTagFontSize = '0.65rem';
 
 const statusColors = {
-  'Not Started': 'gray',
   'In Progress': 'blue',
   Completed: 'green',
 };
@@ -45,23 +45,25 @@ const statusColors = {
 const isSafeCourseLink = (courseLink) =>
   typeof courseLink === 'string' && /^https?:\/\//i.test(courseLink);
 
+// The user's snapshot is the source of truth for which courses are shown
+// (archived/template-only courses the user never signed up for are excluded).
+// The live template is used only to enrich display details like name/link.
 const getProgressCourses = (form, classProgress) => {
   const templateCourses = form.classTrackingTemplate?.courses ?? [];
   const snapshotCourses = classProgress?.classTrackingData?.courses ?? [];
-  const courses = (
-    templateCourses.length > 0 ? templateCourses : snapshotCourses
-  ).filter((course) => course.isActive !== false);
 
-  return courses.map((course) => {
-    const snapshotCourse = snapshotCourses.find(
-      (item) => item.courseId === course.courseId
+  return snapshotCourses.map((snapshotCourse) => {
+    const templateCourse = templateCourses.find(
+      (course) => course.courseId === snapshotCourse.courseId
     );
 
     return {
-      ...course,
+      ...templateCourse,
       ...snapshotCourse,
-      courseLink: course.courseLink,
-      status: snapshotCourse?.status ?? 'Not Started',
+      // Prefer the template's link so admins can update course links after
+      // sign-up; fall back to the link captured at submission time.
+      courseLink: templateCourse?.courseLink ?? snapshotCourse.courseLink ?? '',
+      status: snapshotCourse.status ?? 'Not Started',
     };
   });
 };
@@ -69,11 +71,16 @@ const getProgressCourses = (form, classProgress) => {
 const SignedUpFormsList = ({ forms = [], classProgressList = [] }) => {
   const [expandedFormId, setExpandedFormId] = useState(null);
 
+  // get-signedup-form returns undefined entries for submissions whose form
+  // is unpublished/expired — drop them before rendering, which also keeps
+  // the divider count correct.
+  const visibleForms = (forms || []).filter(Boolean);
+
   return (
     <Box>
-      {forms.map((form, index) => {
+      {visibleForms.map((form, index) => {
         const classProgress = classProgressList.find(
-          (item) => item.formName === form.formName
+          (item) => item.formId === form.id
         );
         const isClass = Boolean(form.isClass);
         const courses = isClass ? getProgressCourses(form, classProgress) : [];
@@ -159,6 +166,7 @@ const SignedUpFormsList = ({ forms = [], classProgressList = [] }) => {
                           color="#0628A3"
                           textDecoration="underline"
                           title="Open course link in a new tab"
+                          aria-label={`Open ${course.name} course link in a new tab`}
                         >
                           <Flex align="center" gap="1">
                             <Text fontSize={courseTitleFontSize}>
@@ -185,7 +193,7 @@ const SignedUpFormsList = ({ forms = [], classProgressList = [] }) => {
                 )}
               </Box>
             )}
-            {index !== forms.length - 1 && (
+            {index !== visibleForms.length - 1 && (
               <Divider margin="15px 0px" backgroundColor="black" />
             )}
           </Box>

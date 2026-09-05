@@ -91,6 +91,12 @@ const getLoginOnlyFormsRequest = async () => {
   });
 };
 
+const getSignedUpClassRequest = async () => {
+  // The server derives the user from the authenticated session, so no
+  // userId param is sent here.
+  return await axios.get('/api/classTrackingData/get-signedup-class');
+};
+
 export {
   splitFullName,
   settableDataFields,
@@ -98,6 +104,7 @@ export {
   getUserDataRequest,
   updateUserDataRequest,
   getLoginOnlyFormsRequest,
+  getSignedUpClassRequest,
   fixName,
   fixAddress,
   purgeFormFields,

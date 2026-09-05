@@ -34,6 +34,7 @@ import {
   Tab,
   TabPanel,
   Checkbox,
+  useToast,
 } from 'components';
 import { FiTrash2, FiPlus } from 'react-icons/fi';
 import FormEditor from './FormEditor';
@@ -63,6 +64,7 @@ const FormEditorContainer = (props) => {
   const { formAlertTypeList, classPlatformTypes } = staticData;
   const formAlertTypes = Object.keys(formAlertTypeList);
   const classPlatforms = Object.keys(classPlatformTypes);
+  const toast = useToast();
 
   // React forms basics
   const { register, reset, handleSubmit, setValue, watch, control, formState } =
@@ -99,6 +101,7 @@ const FormEditorContainer = (props) => {
   const [isClass, setIsClass] = useState(false);
   const [courses, setCourses] = useState([]);
   const [persistedCourseIds, setPersistedCourseIds] = useState([]);
+  const [classStartTime, setClassStartTime] = useState('');
   const [classEndingTime, setClassEndingTime] = useState('');
 
   // Which tracking tab (Payment / Class) is open in the editor
@@ -125,6 +128,7 @@ const FormEditorContainer = (props) => {
     setValue('customEmailSubject', '');
     setValue('formAvailableFrom', '');
     setValue('formAvailableUntil', '');
+    setValue('classStartTime', '');
     setValue('classEndingTime', '');
     setFormName(null);
     setIsPaymentRequired(false);
@@ -148,6 +152,8 @@ const FormEditorContainer = (props) => {
     setCustomEmailSubject('');
     setFormAvailableFrom('');
     setFormAvailableUntil('');
+    setClassStartTime('');
+    setClassEndingTime('');
     setIsOpen(false);
     formManagerCallback();
   };
@@ -185,6 +191,10 @@ const FormEditorContainer = (props) => {
       setValue('formAvailableFrom', data.formAvailableFrom);
       setValue('formAvailableUntil', data.formAvailableUntil);
       setValue(
+        'classStartTime',
+        data.classTrackingTemplate?.classStartTime ?? data.classStartTime
+      );
+      setValue(
         'classEndingTime',
         data.classTrackingTemplate?.classEndingTime ?? data.classEndingTime
       );
@@ -194,6 +204,9 @@ const FormEditorContainer = (props) => {
       setIsPaymentRequired(data.isPaymentRequired);
       setPaymentConfirmationEmailTemplate(
         data.paymentConfirmationEmailTemplate
+      );
+      setClassStartTime(
+        data.classTrackingTemplate?.classStartTime ?? data.classStartTime ?? ''
       );
       setClassEndingTime(
         data.classTrackingTemplate?.classEndingTime ??
@@ -227,6 +240,24 @@ const FormEditorContainer = (props) => {
   };
 
   const onSubmit = (data, e) => {
+    // Class forms need at least one course with a name before the payload is
+    // built; courses aren't react-hook-form fields, so block here instead.
+    if (data.isClass) {
+      const missingName = courses.some(
+        (course) => !course.name || !course.name.trim()
+      );
+      if (courses.length === 0 || missingName) {
+        toast({
+          title: 'Invalid class setup',
+          description:
+            'Add at least one course and give every course a name before saving.',
+          status: 'error',
+          duration: 6000,
+          isClosable: true,
+        });
+        return;
+      }
+    }
     setFormManagerElements(data);
   };
 
@@ -654,6 +685,29 @@ const FormEditorContainer = (props) => {
                                 </Button>
                                 <Box>
                                   <FormLabel
+                                    htmlFor="classStartTime"
+                                    fontSize="sm"
+                                    fontWeight="normal"
+                                    mb="1"
+                                  >
+                                    Class Starting Time
+                                  </FormLabel>
+                                  <Input
+                                    id="classStartTime"
+                                    type="datetime-local"
+                                    {...register('classStartTime', {
+                                      required:
+                                        isClass &&
+                                        'Class starting time is required',
+                                    })}
+                                  />
+                                  <FormErrorMessage>
+                                    {errors['classStartTime'] &&
+                                      'Class starting time is required'}
+                                  </FormErrorMessage>
+                                </Box>
+                                <Box>
+                                  <FormLabel
                                     htmlFor="classEndingTime"
                                     fontSize="sm"
                                     fontWeight="normal"
@@ -664,8 +718,16 @@ const FormEditorContainer = (props) => {
                                   <Input
                                     id="classEndingTime"
                                     type="datetime-local"
-                                    {...register('classEndingTime')}
+                                    {...register('classEndingTime', {
+                                      required:
+                                        isClass &&
+                                        'Class ending time is required',
+                                    })}
                                   />
+                                  <FormErrorMessage>
+                                    {errors['classEndingTime'] &&
+                                      'Class ending time is required'}
+                                  </FormErrorMessage>
                                 </Box>
                               </Stack>
                             )}
@@ -859,6 +921,7 @@ const FormEditorContainer = (props) => {
                   paymentEmailSubject: paymentEmailSubject,
                   paymentCcEmail: paymentCcEmail,
                   isClass: isClass,
+                  classStartTime: classStartTime,
                   classEndingTime: classEndingTime,
                   courses: courses,
                 }}
