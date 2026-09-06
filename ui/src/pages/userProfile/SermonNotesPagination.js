@@ -8,7 +8,7 @@ const SermonNotesPagination = ({
 }) => {
   const itemsPerPage = 5; // Fixed at 5 items per page
 
-  const totalPages = Math.ceil(sermonNotes.length / itemsPerPage);
+  const totalPages = Math.max(1, Math.ceil(sermonNotes.length / itemsPerPage));
 
   const validCurrentPage = Math.min(currentPage, totalPages);
 
@@ -52,7 +52,7 @@ const SermonNotesPagination = ({
                     fontSize={{ base: 'sm', md: 'md' }}
                     color="gray.600"
                   >
-                    {`${item?.speaker || 'Unknown'} | ${
+                    {`${item?.speaker?.trim() || 'Unknown'} | ${
                       item?.date
                         ? new Date(item.date).toLocaleDateString('en-GB', {
                             day: '2-digit',
