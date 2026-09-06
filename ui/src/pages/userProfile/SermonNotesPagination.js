@@ -52,7 +52,7 @@ const SermonNotesPagination = ({
                     fontSize={{ base: 'sm', md: 'md' }}
                     color="gray.600"
                   >
-                    {`Pastor ${item?.speaker || 'Unknown'} | ${
+                    {`${item?.speaker || 'Unknown'} | ${
                       item?.date
                         ? new Date(item.date).toLocaleDateString('en-GB', {
                             day: '2-digit',
