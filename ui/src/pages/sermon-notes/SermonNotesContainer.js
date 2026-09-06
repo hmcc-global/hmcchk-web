@@ -17,8 +17,11 @@ import TiptapOutput from 'components/TipTap/TiptapOutput';
 import { DateTime } from 'luxon';
 import { getAllUserSermonNotes, deepUpdateUserNotes } from 'utils/SermonNotes';
 
+const ACTION_BTN_BG = '#526de3';
+const ACTION_BTN_HOVER = '#4459c4';
+
 const SermonNotesContainer = (props) => {
-  const { user, history, sermonNoteId } = props;
+  const { user, sermonNoteId } = props;
   const [sermonNotes, setSermonNotes] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingExistingNotes, setIsLoadingExistingNotes] = useState(false);
@@ -154,8 +157,9 @@ const SermonNotesContainer = (props) => {
 
   const emailCheck = async () => {
     let email = user?.email || window.prompt('Input Email Address');
+    if (!email) return;
 
-    if (email && !isValidEmail(email)) {
+    if (!isValidEmail(email)) {
       toast({
         title: 'Error in Email Address',
         status: 'error',
@@ -210,12 +214,7 @@ const SermonNotesContainer = (props) => {
     }
   }, [sermonId, getSermonNotesParent, getUserSermonNotes]);
 
-  // Float the action buttons at the viewport bottom while the notes scroll;
-  // pin them in flow at the container's end. The wrapper always reserves the
-  // space, and the toggle fires exactly when the wrapper's natural position
-  // reaches the floating position, so the switch is seamless with no
-  // per-frame transform tracking.
-  // (position:sticky won't work here — ancestors use overflow auto/hidden.)
+  // Float/pin action buttons; sticky won't work — ancestors use overflow auto/hidden.
   useEffect(() => {
     const handleScroll = () => {
       const wrap = actionsWrapperRef.current;
@@ -223,10 +222,15 @@ const SermonNotesContainer = (props) => {
       const offset =
         window.innerWidth < 768 ? window.innerHeight * 0.08 + 16 : 24;
       const rect = wrap.getBoundingClientRect();
-      setActionsRight(window.innerWidth - rect.right);
-      setPinActions(rect.bottom <= window.innerHeight - offset);
-      if (actionsRef.current) {
-        setActionsHeight(actionsRef.current.offsetHeight);
+      const nextRight = window.innerWidth - rect.right;
+      const nextPin = rect.bottom <= window.innerHeight - offset;
+      const nextHeight = actionsRef.current
+        ? actionsRef.current.offsetHeight
+        : null;
+      setActionsRight((prev) => (prev === nextRight ? prev : nextRight));
+      setPinActions((prev) => (prev === nextPin ? prev : nextPin));
+      if (nextHeight != null) {
+        setActionsHeight((prev) => (prev === nextHeight ? prev : nextHeight));
       }
     };
     handleScroll();
@@ -237,7 +241,9 @@ const SermonNotesContainer = (props) => {
     // recompute when async content (notes, images) changes the layout
     const wrap = actionsWrapperRef.current;
     const observer =
-      wrap && wrap.parentElement ? new ResizeObserver(handleScroll) : null;
+      typeof ResizeObserver !== 'undefined' && wrap && wrap.parentElement
+        ? new ResizeObserver(handleScroll)
+        : null;
     if (observer) observer.observe(wrap.parentElement);
     return () => {
       window.removeEventListener('scroll', handleScroll, true);
@@ -390,7 +396,7 @@ const SermonNotesContainer = (props) => {
                   {user?.id && (
                     <Button
                       isLoading={isSubmitting}
-                      bgColor="#526de3"
+                      bgColor={ACTION_BTN_BG}
                       color="white"
                       borderRadius={20}
                       px={5}
@@ -398,7 +404,7 @@ const SermonNotesContainer = (props) => {
                       leftIcon={<Icon as={MdSave} />}
                       aria-label="Save Notes"
                       pointerEvents="auto"
-                      _hover={{ bgColor: '#4459c4' }}
+                      _hover={{ bgColor: ACTION_BTN_HOVER }}
                       onClick={updateUserSermonNotes}
                     >
                       SAVE
@@ -406,14 +412,14 @@ const SermonNotesContainer = (props) => {
                   )}
                   <Button
                     isLoading={isSubmitting}
-                    bgColor="#526de3"
+                    bgColor={ACTION_BTN_BG}
                     color="white"
                     borderRadius={20}
                     px={3}
                     boxShadow="md"
                     aria-label="Email"
                     pointerEvents="auto"
-                    _hover={{ bgColor: '#4459c4' }}
+                    _hover={{ bgColor: ACTION_BTN_HOVER }}
                     onClick={emailCheck}
                   >
                     <Icon as={FaPaperPlane} />
