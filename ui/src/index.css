@@ -21,6 +21,15 @@ code {
   background-color: #ffffff !important;
 }
 
+/* Chakra v1 has no :focus-visible support - give the events filter bar and
+   the inline ministry panel a flat, visible keyboard-focus outline */
+.events-filter button:focus-visible,
+#ministry-panel button:focus-visible {
+  outline: 2px solid rgba(74, 110, 235, 0.6);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
 @font-face {
   font-family: 'Manrope';
   src: local('Manrope'), url('./font/Manrope.ttf') format('truetype');

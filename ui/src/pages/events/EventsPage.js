@@ -1,17 +1,19 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { customAxios as axios } from 'utils/customAxios';
 import {
+  Box,
   Button,
   Container,
   Divider,
   Grid,
   Heading,
-  Select,
+  HStack,
   Stack,
   Text,
 } from 'components';
-import { MdArrowDropDown } from 'react-icons/md';
+import { FaCheck } from 'react-icons/fa';
 import EventCard from './EventCard';
+import MinistryFilter from './MinistryFilter';
 import { DateTime } from 'luxon';
 import { getRenderDate } from 'utils/eventsHelpers';
 import isDateInThisWeek from './getWeek';
@@ -25,12 +27,15 @@ const EventsPage = (props) => {
   const [tagList, setTagList] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
   const [selectedFilterIndex, setSelectedFilterIndex] = useState(0);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
 
   const tagHeader = ['All', 'This Week', 'Featured'];
 
   const onFilter = (e) => {
     let index = parseInt(e.target.id);
     setSelectedFilterIndex(index);
+    setSelectedOption('');
+    setIsMoreOpen(false);
     if (index === 1) {
       setFilteredList([...thisWeekList]);
     } else if (index === 2) {
@@ -40,16 +45,9 @@ const EventsPage = (props) => {
     }
   };
 
-  const onSelect = (e) => {
-    if (e.target.value === '') {
-      setFilteredList([...eventsList]);
-      setSelectedOption('');
-      return;
-    }
-    const selectedValue = e.target.value;
-    setSelectedOption(selectedValue);
+  const filterByMinistry = (indexStr) => {
+    let tag = tagList[Number(indexStr)];
     const filtered = [];
-    let tag = tagList[selectedValue];
     eventsList.forEach((data) => {
       if (data.eventType) {
         for (let i = 0; i < data.eventType.length; i++) {
@@ -60,8 +58,110 @@ const EventsPage = (props) => {
         }
       }
     });
-    setFilteredList([...filtered]);
+    return filtered;
   };
+
+  const handlePickMinistry = (indexStr) => {
+    setSelectedOption(indexStr);
+    setSelectedFilterIndex(-1);
+    setIsMoreOpen(false);
+    setFilteredList(filterByMinistry(indexStr));
+  };
+
+  const isAllFilter = selectedOption === '' && selectedFilterIndex === 0;
+
+  const clearMinistry = () => {
+    setSelectedOption('');
+    setSelectedFilterIndex(0);
+    setIsMoreOpen(false);
+    setFilteredList([...eventsList]);
+  };
+
+  const toggleMore = () => setIsMoreOpen((open) => !open);
+
+  const renderMinistryPanel = (id, w = '100%') => (
+    <Box
+      id={id}
+      w={w}
+      position="absolute"
+      top="calc(100% + 12px)"
+      right={0}
+      zIndex={2}
+      border="1px solid"
+      borderColor="#E2E8F0"
+      borderRadius={20}
+      bg="white"
+      boxShadow="0 12px 32px rgba(26, 32, 44, 0.14)"
+      p={{ base: 2, md: 2 }}
+    >
+      <Stack direction="column" spacing={{ base: 1, md: 1.5 }}>
+        <Button
+          key="ministry-all"
+          w="100%"
+          h="40px"
+          borderRadius={14}
+          px={{ base: 2, md: 3 }}
+          justifyContent="space-between"
+          bg={isAllFilter ? '#4A6EEB' : 'transparent'}
+          color={isAllFilter ? 'white' : '#1A202C'}
+          fontWeight={isAllFilter ? 700 : 600}
+          _hover={
+            isAllFilter
+              ? { bg: '#5C7BF0' }
+              : { bgColor: 'rgba(74, 110, 235, 0.1)' }
+          }
+          type="button"
+          aria-pressed={isAllFilter}
+          onClick={clearMinistry}
+        >
+          <Text fontSize={{ base: 'xs', md: 'md' }}>All events</Text>
+          {isAllFilter && <FaCheck />}
+        </Button>
+        {tagList.length === 0 ? (
+          <Button
+            w="100%"
+            h="40px"
+            borderRadius={14}
+            px={{ base: 2, md: 3 }}
+            justifyContent="flex-start"
+            isDisabled
+          >
+            <Text fontSize={{ base: 'xs', md: 'sm' }}>No ministries yet</Text>
+          </Button>
+        ) : (
+          tagList.map((tag, i) => {
+            const isActive = selectedOption === String(i);
+            return (
+              <Button
+                key={'ministry-' + i}
+                w="100%"
+                h="40px"
+                borderRadius={14}
+                px={{ base: 2, md: 3 }}
+                justifyContent="space-between"
+                bg={isActive ? '#4A6EEB' : 'transparent'}
+                color={isActive ? 'white' : '#1A202C'}
+                fontWeight={isActive ? 700 : 600}
+                _hover={
+                  isActive
+                    ? { bg: '#5C7BF0' }
+                    : { bgColor: 'rgba(74, 110, 235, 0.1)' }
+                }
+                type="button"
+                aria-pressed={isActive}
+                onClick={() =>
+                  isActive ? clearMinistry() : handlePickMinistry(String(i))
+                }
+              >
+                <Text fontSize={{ base: 'xs', md: 'md' }}>{tag}</Text>
+                {isActive && <FaCheck />}
+              </Button>
+            );
+          })
+        )}
+      </Stack>
+    </Box>
+  );
 
   useEffect(() => {
     getEventsListFromDatabase();
@@ -80,9 +180,7 @@ const EventsPage = (props) => {
         const tagsList = new Set([]);
         const filteredEndDate = data.filter((item) => {
           if (item.displayStartDateTime) {
-            let displayStartDate = DateTime.fromISO(
-              item.displayStartDateTime
-            );
+            let displayStartDate = DateTime.fromISO(item.displayStartDateTime);
             if (displayStartDate > DateTime.now()) return false;
           }
 
@@ -179,6 +277,29 @@ const EventsPage = (props) => {
     }
   };
 
+  const chipProps = (i) => ({
+    variant: 'outline',
+    borderRadius: 30,
+    h: { base: '36px', md: '40px' },
+    px: 2,
+    transition: 'all 0.18s',
+    borderColor: '#4A6EEB',
+    bg: selectedFilterIndex === i ? '#4A6EEB' : 'transparent',
+    color: selectedFilterIndex === i ? 'white' : '#4A6EEB',
+    _hover:
+      selectedFilterIndex === i
+        ? { bg: '#5C7BF0', color: 'white', borderColor: '#5C7BF0' }
+        : {
+            borderColor: '#4A6EEB',
+            bgColor: 'rgba(74, 110, 235, 0.1)',
+            color: '#4A6EEB',
+          },
+    type: 'button',
+    'aria-pressed': selectedFilterIndex === i,
+    id: i,
+    onClick: onFilter,
+  });
+
   return (
     <Container maxW="container.xl">
       <Heading
@@ -202,61 +323,70 @@ const EventsPage = (props) => {
         Check out what's happening at HMCC of Hong Kong!
       </Text>
       <Stack
-        border="1px"
-        p={3}
+        className="events-filter"
         borderRadius={30}
-        justifyContent="space-around"
         flexDirection={['column', 'row']}
         spacing={[2, 0]}
         top={2}
+        zIndex={1}
         position="sticky"
         alignItems="center"
-        bg="#ffffff"
       >
-        <Grid templateColumns="repeat(3, 1fr)" gap={[3, 9]}>
+        <HStack
+          w="100%"
+          justify="space-between"
+          spacing={2}
+          display={{ base: 'flex', md: 'none' }}
+        >
           {tagHeader.map((tag, i) => (
-            <Button
-              width={['23vw', '14vw']}
-              borderRadius={[15, 20]}
-              key={'button' + i}
-              m="0rem"
-              _hover={{ opacity: '90%' }}
-              bg={selectedFilterIndex === i ? '#3F3F3F' : 'gray.100'}
-              color={selectedFilterIndex === i ? '#ffffff' : ''}
-              id={i}
-              onClick={onFilter}
-            >
-              <Text id={i} fontSize={{ base: '80%', sm: '100%' }}>
+            <Button key={'button-mobile-' + i} flex="1" {...chipProps(i)}>
+              <Text id={i} fontSize={{ base: 'xs', md: 'md' }}>
                 {tag}
               </Text>
             </Button>
           ))}
-        </Grid>
-        <Select
-          placeholder="More Filters"
-          fontWeight="600"
-          textAlign="center"
-          width={['75vw', '14vw']}
-          borderRadius={[15, 20]}
-          rightIcon={<MdArrowDropDown />}
-          variant="filled"
-          bg={selectedOption !== '' ? '#3F3F3F' : 'gray.100'}
-          color={selectedOption !== '' ? '#ffffff' : ''}
-          _hover={{
-            opacity: '90%',
-          }}
-          _focus={{
-            bg: 'gray.100',
-            color: '#000000',
-          }}
-          cursor="pointer"
-          onChange={onSelect}
-          value={selectedOption}
+          <MinistryFilter
+            compact
+            flex="1"
+            panelId="ministry-panel-mobile"
+            open={isMoreOpen}
+            selected={selectedOption}
+            tagList={tagList}
+            onToggle={toggleMore}
+            onClear={clearMinistry}
+          />
+          {isMoreOpen && renderMinistryPanel('ministry-panel-mobile', '240px')}
+        </HStack>
+        <HStack
+          w="100%"
+          justify="space-between"
+          spacing={3}
+          display={{ base: 'none', md: 'flex' }}
         >
-          {tagList.map((tag, i) => (
-            <option value={i}>{tag}</option>
+          {tagHeader.map((tag, i) => (
+            <Button
+              key={'button-desktop-' + i}
+              width="calc((100% - 36px) / 4)"
+              {...chipProps(i)}
+            >
+              <Text id={i} fontSize={{ base: 'sm', md: 'md' }}>
+                {tag}
+              </Text>
+            </Button>
           ))}
-        </Select>
+          <Box width="calc((100% - 36px) / 4)" position="relative">
+            <MinistryFilter
+              w="100%"
+              panelId="ministry-panel-desktop"
+              open={isMoreOpen}
+              selected={selectedOption}
+              tagList={tagList}
+              onToggle={toggleMore}
+              onClear={clearMinistry}
+            />
+            {isMoreOpen && renderMinistryPanel('ministry-panel-desktop')}
+          </Box>
+        </HStack>
       </Stack>
       <Grid
         mt="12"
@@ -267,10 +397,10 @@ const EventsPage = (props) => {
       >
         {filteredList.length > 0 &&
           filteredList.map((event, i) => (
-            <>
-              <EventCard key={'event' + i} eventData={event} />
+            <Fragment key={'event' + i}>
+              <EventCard eventData={event} />
               {i !== filteredList.length - 1 && <Divider />}
-            </>
+            </Fragment>
           ))}
       </Grid>
     </Container>

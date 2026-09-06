@@ -181,7 +181,7 @@ const EventCard = (props) => {
             )}
           </Stack>
           <Box
-            bg="#F9F9F9"
+            bg="#FFFFFF"
             borderRadius="20"
             mt={['2', '5']}
             p={4}
