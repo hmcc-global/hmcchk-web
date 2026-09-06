@@ -317,6 +317,7 @@ const UserProfileDesktop = (props) => {
           mb="5%"
           orientation="vertical"
           variant="unstyled"
+          isManual
           index={activeTabIndex}
           onChange={onTabChange}
         >
