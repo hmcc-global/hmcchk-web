@@ -1,5 +1,5 @@
 import { useForm, Controller } from 'react-hook-form';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { DateTime } from 'luxon';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -158,86 +158,95 @@ const FormEditorContainer = (props) => {
     formManagerCallback();
   };
 
-  const setFormManagerElements = (data) => {
-    if (data) {
-      let paymentCcEmail = data.paymentCcEmail;
-      if (data.paymentCcEmail && Array.isArray(data.paymentCcEmail)) {
-        paymentCcEmail = data.paymentCcEmail.join(';');
+  const setFormManagerElements = useCallback(
+    (data) => {
+      if (data) {
+        let paymentCcEmail = data.paymentCcEmail;
+        if (data.paymentCcEmail && Array.isArray(data.paymentCcEmail)) {
+          paymentCcEmail = data.paymentCcEmail.join(';');
+        }
+
+        setValue('formName', data.formName);
+        setValue('isPaymentRequired', data.isPaymentRequired);
+        setValue(
+          'paymentConfirmationEmailTemplate',
+          data.paymentConfirmationEmailTemplate
+        );
+        setValue('paymentEmailSubject', data.paymentEmailSubject);
+        setValue('paymentCcEmail', paymentCcEmail);
+        setValue('isClass', data.isClass);
+        setValue('formDescription', data.formDescription);
+        setValue('formImage', data.formImage);
+        setValue('formType', data.formType);
+        setValue('requireLogin', data.requireLogin);
+        setValue('requireMembership', data.requireMembership);
+        setValue('requireBaptism', data.requireBaptism);
+        setValue('alertType', data.alertType);
+        setValue(
+          'parseUserData',
+          data.parseUserData && !isAlertTypeNone(data.alertType)
+        );
+        setValue('customAlertRecipients', data.customAlertRecipients);
+        setValue('successEmailTemplate', data.successEmailTemplate);
+        setValue('customEmailSubject', data.customEmailSubject);
+        setValue('formAvailableFrom', data.formAvailableFrom);
+        setValue('formAvailableUntil', data.formAvailableUntil);
+        setValue(
+          'classStartTime',
+          data.classTrackingTemplate?.classStartTime ?? data.classStartTime
+        );
+        setValue(
+          'classEndingTime',
+          data.classTrackingTemplate?.classEndingTime ?? data.classEndingTime
+        );
+
+        // Update React State for child props
+        setFormName(data.formName);
+        setIsPaymentRequired(data.isPaymentRequired);
+        setPaymentConfirmationEmailTemplate(
+          data.paymentConfirmationEmailTemplate
+        );
+        setClassStartTime(
+          data.classTrackingTemplate?.classStartTime ??
+            data.classStartTime ??
+            ''
+        );
+        setClassEndingTime(
+          data.classTrackingTemplate?.classEndingTime ??
+            data.classEndingTime ??
+            ''
+        );
+        setPaymentEmailSubject(data.paymentEmailSubject);
+        setPaymentCcEmail(paymentCcEmail);
+        setIsClass(data.isClass);
+        // courses isn't a react-hook-form field (it's edited directly via
+        // addCourse/removeCourse/updateCourseField), so
+        // data.classTrackingTemplate.courses is only ever populated when this
+        // runs off a loaded editFormData record, not off the top form's
+        // onSubmit. Fall back to the current state instead of [] so clicking
+        // "Create/Update Form" doesn't wipe staged courses.
+        setCourses(
+          (prevCourses) => data.classTrackingTemplate?.courses ?? prevCourses
+        );
+        setFormDescription(data.formDescription);
+        setFormImage(data.formImage);
+        setFormType(data.formType);
+        setRequireLogin(data.requireLogin);
+        setRequireMembership(data.requireMembership);
+        setRequireBaptism(data.requireBaptism);
+        setParseUserData(
+          data.parseUserData && !isAlertTypeNone(data.alertType)
+        );
+        setAlertType(data.alertType);
+        setCustomAlertRecipients(data.customAlertRecipients);
+        setSuccessEmailTemplate(data.successEmailTemplate);
+        setCustomEmailSubject(data.customEmailSubject);
+        setFormAvailableFrom(data.formAvailableFrom);
+        setFormAvailableUntil(data.formAvailableUntil);
       }
-
-      setValue('formName', data.formName);
-      setValue('isPaymentRequired', data.isPaymentRequired);
-      setValue(
-        'paymentConfirmationEmailTemplate',
-        data.paymentConfirmationEmailTemplate
-      );
-      setValue('paymentEmailSubject', data.paymentEmailSubject);
-      setValue('paymentCcEmail', paymentCcEmail);
-      setValue('isClass', data.isClass);
-      setValue('formDescription', data.formDescription);
-      setValue('formImage', data.formImage);
-      setValue('formType', data.formType);
-      setValue('requireLogin', data.requireLogin);
-      setValue('requireMembership', data.requireMembership);
-      setValue('requireBaptism', data.requireBaptism);
-      setValue('alertType', data.alertType);
-      setValue(
-        'parseUserData',
-        data.parseUserData && !isAlertTypeNone(data.alertType)
-      );
-      setValue('customAlertRecipients', data.customAlertRecipients);
-      setValue('successEmailTemplate', data.successEmailTemplate);
-      setValue('customEmailSubject', data.customEmailSubject);
-      setValue('formAvailableFrom', data.formAvailableFrom);
-      setValue('formAvailableUntil', data.formAvailableUntil);
-      setValue(
-        'classStartTime',
-        data.classTrackingTemplate?.classStartTime ?? data.classStartTime
-      );
-      setValue(
-        'classEndingTime',
-        data.classTrackingTemplate?.classEndingTime ?? data.classEndingTime
-      );
-
-      // Update React State for child props
-      setFormName(data.formName);
-      setIsPaymentRequired(data.isPaymentRequired);
-      setPaymentConfirmationEmailTemplate(
-        data.paymentConfirmationEmailTemplate
-      );
-      setClassStartTime(
-        data.classTrackingTemplate?.classStartTime ?? data.classStartTime ?? ''
-      );
-      setClassEndingTime(
-        data.classTrackingTemplate?.classEndingTime ??
-          data.classEndingTime ??
-          ''
-      );
-      setPaymentEmailSubject(data.paymentEmailSubject);
-      setPaymentCcEmail(paymentCcEmail);
-      setIsClass(data.isClass);
-      // courses isn't a react-hook-form field (it's edited directly via
-      // addCourse/removeCourse/updateCourseField), so
-      // data.classTrackingTemplate.courses is only ever populated when this
-      // runs off a loaded editFormData record, not off the top form's
-      // onSubmit. Fall back to the current state instead of [] so clicking
-      // "Create/Update Form" doesn't wipe staged courses.
-      setCourses(data.classTrackingTemplate?.courses ?? courses);
-      setFormDescription(data.formDescription);
-      setFormImage(data.formImage);
-      setFormType(data.formType);
-      setRequireLogin(data.requireLogin);
-      setRequireMembership(data.requireMembership);
-      setRequireBaptism(data.requireBaptism);
-      setParseUserData(data.parseUserData && !isAlertTypeNone(data.alertType));
-      setAlertType(data.alertType);
-      setCustomAlertRecipients(data.customAlertRecipients);
-      setSuccessEmailTemplate(data.successEmailTemplate);
-      setCustomEmailSubject(data.customEmailSubject);
-      setFormAvailableFrom(data.formAvailableFrom);
-      setFormAvailableUntil(data.formAvailableUntil);
-    }
-  };
+    },
+    [setValue]
+  );
 
   const onSubmit = (data, e) => {
     // Class forms need at least one course with a name before the payload is
@@ -310,7 +319,7 @@ const FormEditorContainer = (props) => {
       )
     );
     setTrackingTabIndex(editFormData?.isClass ? 1 : 0);
-  }, [editFormData]);
+  }, [editFormData, setFormManagerElements]);
 
   useEffect(() => {
     if (formAvailableFrom && formAvailableUntil) {
@@ -346,8 +355,8 @@ const FormEditorContainer = (props) => {
     return (
       endDate >= boundDate ||
       (formAvailableUntilFlag
-        ? 'Class Ending Time cannot be before the form availability end'
-        : 'Class Ending Time cannot be before the form availability start')
+        ? 'Class end time cannot be before the form availability end'
+        : 'Class end time cannot be before the form availability start')
     );
   };
 
@@ -706,59 +715,62 @@ const FormEditorContainer = (props) => {
                                 >
                                   Add Course
                                 </Button>
-                                <Box>
-                                  <FormLabel
-                                    htmlFor="classStartTime"
-                                    fontSize="sm"
-                                    fontWeight="normal"
-                                    mb="1"
-                                  >
-                                    Class Starting Time
-                                  </FormLabel>
-                                  <Input
-                                    id="classStartTime"
-                                    type="datetime-local"
-                                    {...register('classStartTime', {
-                                      required:
-                                        isClass &&
-                                        'Class starting time is required',
-                                    })}
-                                  />
-                                  <FormErrorMessage>
-                                    {errors['classStartTime'] &&
-                                      'Class starting time is required'}
-                                  </FormErrorMessage>
-                                </Box>
-                                <Box>
-                                  <FormLabel
-                                    htmlFor="classEndingTime"
-                                    fontSize="sm"
-                                    fontWeight="normal"
-                                    mb="1"
-                                  >
-                                    Class Ending Time
-                                  </FormLabel>
-                                  <Input
-                                    id="classEndingTime"
-                                    type="datetime-local"
-                                    {...register('classEndingTime', {
-                                      required:
-                                        isClass &&
-                                        'Class ending time is required',
-                                      validate: classEndingTimeValidate,
-                                    })}
-                                  />
-                                  <FormErrorMessage>
-                                    {errors['classEndingTime'] &&
-                                      'Class ending time is required'}
-                                  </FormErrorMessage>
-                                </Box>
+                                <SimpleGrid columns={[1, 2]} spacing="3">
+                                  <Box>
+                                    <FormLabel
+                                      htmlFor="classStartTime"
+                                      fontSize="sm"
+                                      fontWeight="normal"
+                                      mb="1"
+                                    >
+                                      Class Start Time
+                                    </FormLabel>
+                                    <Input
+                                      id="classStartTime"
+                                      type="datetime-local"
+                                      {...register('classStartTime', {
+                                        required:
+                                          isClass &&
+                                          'Class start time is required',
+                                      })}
+                                    />
+                                    <FormErrorMessage>
+                                      {errors['classStartTime'] &&
+                                        'Class start time is required'}
+                                    </FormErrorMessage>
+                                  </Box>
+                                  <Box>
+                                    <FormLabel
+                                      htmlFor="classEndingTime"
+                                      fontSize="sm"
+                                      fontWeight="normal"
+                                      mb="1"
+                                    >
+                                      Class End Time
+                                    </FormLabel>
+                                    <Input
+                                      id="classEndingTime"
+                                      type="datetime-local"
+                                      {...register('classEndingTime', {
+                                        required:
+                                          isClass &&
+                                          'Class end time is required',
+                                        validate: classEndingTimeValidate,
+                                      })}
+                                    />
+                                    <FormErrorMessage>
+                                      {errors['classEndingTime'] &&
+                                        'Class end time is required'}
+                                    </FormErrorMessage>
+                                  </Box>
+                                </SimpleGrid>
                               </Stack>
                             )}
                           </Stack>
                         </TabPanel>
                       </TabPanels>
                     </Tabs>
+                    <Divider />
                   </Stack>
                 )}
                 {ftFlag === 'internal' && (
