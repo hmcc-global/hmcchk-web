@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import UserProfileContainer from './userProfile/UserProfileContainer';
 import CompleteUserProfileContainer from './userProfile/CompleteUserProfile';
+import { DEFAULT_PROFILE_TAB } from './userProfile/profileTabs';
 import SidebarWithHeader from './admin/navigation/Sidebar';
 
 const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
@@ -98,7 +99,7 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
               switch (props.location.pathname) {
                 case '/login':
                   if (user) {
-                    props.history.push('/profile');
+                    props.history.push(`/profile/${DEFAULT_PROFILE_TAB}`);
                     return <UserProfileContainer {...props} user={userObj} />;
                   }
                   break;
@@ -116,7 +117,7 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
               pathname === '/complete-profile' &&
               userObj.hasFilledProfileForm
             ) {
-              props.history.push('/profile');
+              props.history.push(`/profile/${DEFAULT_PROFILE_TAB}`);
               return <UserProfileContainer {...props} user={userObj} />;
             }
 

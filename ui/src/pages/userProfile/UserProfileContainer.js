@@ -19,6 +19,7 @@ const UserProfileContainer = (props) => {
   }
 
   const handleTabChange = (index) => {
+    if (index === activeTabIndex) return;
     history.push(`/profile/${getProfileTabSlug(index)}`);
   };
 
