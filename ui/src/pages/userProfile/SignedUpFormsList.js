@@ -38,7 +38,7 @@ const courseTitleFontSize = '0.8rem';
 const statusTagFontSize = '0.65rem';
 
 const statusColors = {
-  'In Progress': 'blue',
+  'In Progress': 'yellow',
   Completed: 'green',
 };
 

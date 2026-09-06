@@ -67,8 +67,16 @@ const FormEditorContainer = (props) => {
   const toast = useToast();
 
   // React forms basics
-  const { register, reset, handleSubmit, setValue, watch, control, formState } =
-    useForm();
+  const {
+    register,
+    reset,
+    handleSubmit,
+    setValue,
+    watch,
+    control,
+    formState,
+    setError,
+  } = useForm();
   const { errors } = formState;
 
   // State variables
@@ -248,6 +256,25 @@ const FormEditorContainer = (props) => {
     [setValue]
   );
 
+  // Class End Time must not fall before the form availability window ends,
+  // otherwise the class season ([formAvailableFrom, classEndingTime]) closes
+  // while the form is still accepting signups. Prefer the form end time; fall
+  // back to the start time when the form never closes.
+  const getClassEndTimeError = (endTime, formEnd, formStart) => {
+    const endDate = DateTime.fromISO(endTime ?? '');
+    if (!endDate.isValid) return null;
+
+    const boundIso = formEnd || formStart;
+    if (!boundIso) return null;
+    const boundDate = DateTime.fromISO(boundIso);
+    if (!boundDate.isValid) return null;
+
+    if (endDate >= boundDate) return null;
+    return formEnd
+      ? 'Class end time cannot be before the form availability end'
+      : 'Class end time cannot be before the form availability start';
+  };
+
   const onSubmit = (data, e) => {
     // Class forms need at least one course with a name before the payload is
     // built; courses aren't react-hook-form fields, so block here instead.
@@ -260,6 +287,26 @@ const FormEditorContainer = (props) => {
           title: 'Invalid class setup',
           description:
             'Add at least one course and give every course a name before saving.',
+          status: 'error',
+          duration: 6000,
+          isClosable: true,
+        });
+        return;
+      }
+
+      const classEndTimeError = getClassEndTimeError(
+        data.classEndingTime,
+        data.formAvailableUntil,
+        data.formAvailableFrom
+      );
+      if (classEndTimeError) {
+        setError('classEndingTime', {
+          type: 'manual',
+          message: classEndTimeError,
+        });
+        toast({
+          title: 'Invalid class setup',
+          description: classEndTimeError,
           status: 'error',
           duration: 6000,
           isClosable: true,
@@ -336,29 +383,6 @@ const FormEditorContainer = (props) => {
   // Watch this to conditionally render custom things
   const ftFlag = watch('formType');
   const alertTypeFlag = watch('alertType');
-  const formAvailableFromFlag = watch('formAvailableFrom');
-  const formAvailableUntilFlag = watch('formAvailableUntil');
-
-  // Class Ending Time must not fall before the form availability window ends,
-  // otherwise the class season ([formAvailableFrom, classEndingTime]) closes
-  // while the form is still accepting signups. Prefer the form end time; fall
-  // back to the start time when the form never closes.
-  const classEndingTimeValidate = (value) => {
-    const endDate = value ? DateTime.fromISO(value) : null;
-    if (!endDate || !endDate.isValid) return true;
-
-    const boundIso = formAvailableUntilFlag || formAvailableFromFlag;
-    if (!boundIso) return true;
-    const boundDate = DateTime.fromISO(boundIso);
-    if (!boundDate.isValid) return true;
-
-    return (
-      endDate >= boundDate ||
-      (formAvailableUntilFlag
-        ? 'Class end time cannot be before the form availability end'
-        : 'Class end time cannot be before the form availability start')
-    );
-  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="full">
@@ -755,12 +779,10 @@ const FormEditorContainer = (props) => {
                                         required:
                                           isClass &&
                                           'Class end time is required',
-                                        validate: classEndingTimeValidate,
                                       })}
                                     />
                                     <FormErrorMessage>
-                                      {errors['classEndingTime'] &&
-                                        'Class end time is required'}
+                                      {errors['classEndingTime']?.message}
                                     </FormErrorMessage>
                                   </Box>
                                 </SimpleGrid>
