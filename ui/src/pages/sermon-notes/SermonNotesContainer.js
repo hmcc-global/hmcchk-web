@@ -3,18 +3,19 @@ import {
   Box,
   Text,
   VStack,
+  HStack,
   Button,
   useToast,
+  Icon,
 } from 'components';
 import { customAxios as axios } from 'utils/customAxios';
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useDebounce } from 'react-use';
+import { MdSave } from 'react-icons/md';
+import { FaPaperPlane } from 'react-icons/fa';
 import TiptapOutput from 'components/TipTap/TiptapOutput';
 import { DateTime } from 'luxon';
-import {
-  getAllUserSermonNotes,
-  deepUpdateUserNotes,
-} from 'utils/SermonNotes';
+import { getAllUserSermonNotes, deepUpdateUserNotes } from 'utils/SermonNotes';
 
 const SermonNotesContainer = (props) => {
   const { user, history, sermonNoteId } = props;
@@ -26,24 +27,27 @@ const SermonNotesContainer = (props) => {
   const [userSermonNotes, setUserSermonNotes] = useState();
   const [htmlUserSermonNotes, setHtmlUserNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
-  const [heightAboveTitle, setHeightAboveTitle] = useState(false);
+  const [pinActions, setPinActions] = useState(false);
+  const [actionsRight, setActionsRight] = useState(16);
+  const [actionsHeight, setActionsHeight] = useState(40);
+  const actionsWrapperRef = useRef(null);
+  const actionsRef = useRef(null);
   const toast = useToast();
 
   const todayId = DateTime.fromISO(new Date().toISOString()).toFormat(
     'ddMMyyyy'
   );
 
-  const fallbackSermonId = props &&  props.match && props.match.params.id;
+  const fallbackSermonId = props && props.match && props.match.params.id;
 
-  const sermonId = 
+  const sermonId =
     sermonNoteId === 'online'
       ? `sn-${todayId}-1`
       : sermonNoteId == null
-        ? fallbackSermonId
-        : sermonNoteId;
+      ? fallbackSermonId
+      : sermonNoteId;
 
   const getSermonNotesParent = useCallback(async () => {
-
     try {
       setIsLoading(true);
       const { data, status } = await axios.get('/api/sermon-notes-parent/get', {
@@ -149,7 +153,7 @@ const SermonNotesContainer = (props) => {
   };
 
   const emailCheck = async () => {
-    let email = user.email || window.prompt('Input Email Address');
+    let email = user?.email || window.prompt('Input Email Address');
 
     if (email && !isValidEmail(email)) {
       toast({
@@ -206,27 +210,43 @@ const SermonNotesContainer = (props) => {
     }
   }, [sermonId, getSermonNotesParent, getUserSermonNotes]);
 
+  // Float the action buttons at the viewport bottom while the notes scroll;
+  // pin them in flow at the container's end. The wrapper always reserves the
+  // space, and the toggle fires exactly when the wrapper's natural position
+  // reaches the floating position, so the switch is seamless with no
+  // per-frame transform tracking.
+  // (position:sticky won't work here — ancestors use overflow auto/hidden.)
   useEffect(() => {
     const handleScroll = () => {
-      if (window.innerHeight * 0.32 < window.scrollY) {
-        setHeightAboveTitle(true);
-      } else {
-        setHeightAboveTitle(false);
+      const wrap = actionsWrapperRef.current;
+      if (!wrap) return;
+      const offset =
+        window.innerWidth < 768 ? window.innerHeight * 0.08 + 16 : 24;
+      const rect = wrap.getBoundingClientRect();
+      setActionsRight(window.innerWidth - rect.right);
+      setPinActions(rect.bottom <= window.innerHeight - offset);
+      if (actionsRef.current) {
+        setActionsHeight(actionsRef.current.offsetHeight);
       }
     };
-    window.addEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerHeight * 0.32 < window.scrollY) {
-        setHeightAboveTitle(true);
-      } else {
-        setHeightAboveTitle(false);
-      }
+    handleScroll();
+    // capture phase: the app scrolls inside nested overflow containers,
+    // and scroll events don't bubble
+    window.addEventListener('scroll', handleScroll, true);
+    window.addEventListener('resize', handleScroll);
+    // recompute when async content (notes, images) changes the layout
+    const wrap = actionsWrapperRef.current;
+    const observer =
+      wrap && wrap.parentElement ? new ResizeObserver(handleScroll) : null;
+    if (observer) observer.observe(wrap.parentElement);
+    return () => {
+      window.removeEventListener('scroll', handleScroll, true);
+      window.removeEventListener('resize', handleScroll);
+      if (observer) observer.disconnect();
     };
-    window.addEventListener('scroll', handleScroll);
-  }, []);
+    // isLoading gates the early return, so the wrapper only exists after it
+    // flips; isLoadingExistingNotes swaps the notes content in
+  }, [isLoading, isLoadingExistingNotes]);
 
   useEffect(() => {
     if (sermonId) {
@@ -327,54 +347,14 @@ const SermonNotesContainer = (props) => {
             </Box>
 
             <Container my={[4, 8]} width="100%">
-              <Container
+              <Text
+                fontStyle="italic"
+                textColor="#B2BEB5"
+                display={!user?.id ? 'block' : 'none'}
                 mb="3"
-                zIndex={3}
-                pos={!user?.id ? 'relative' : 'sticky'}
               >
-                <Text
-                  fontStyle="italic"
-                  textColor="#B2BEB5"
-                  display={!user?.id ? 'block' : 'none'}
-                >
-                  Please log into your HMCC account to get the save notes
-                  feature.
-                </Text>
-                <Container
-                  pos={heightAboveTitle ? 'fixed' : 'relative'}
-                  top={heightAboveTitle ? '10vh' : '0'}
-                  display="flex"
-                  flexDir="row"
-                  w="100%"
-                  m="auto"
-                  left={0}
-                  right={0}
-                  justifyContent="space-around"
-                  zIndex={2}
-                >
-                  <Button
-                    display={!user?.id ? 'none' : 'sticky'}
-                    width="45%"
-                    isLoading={isSubmitting}
-                    colorScheme="teal"
-                    onClick={updateUserSermonNotes}
-                    zIndex={3}
-                  >
-                    Save Notes
-                  </Button>
-                  <Button
-                    pos="sticky"
-                    display={!user?.id ? 'none' : 'sticky'}
-                    width="45%"
-                    isLoading={isSubmitting}
-                    colorScheme="teal"
-                    onClick={emailCheck}
-                    zIndex={3}
-                  >
-                    Email
-                  </Button>
-                </Container>
-              </Container>
+                Please log into your HMCC account to get the save notes feature.
+              </Text>
 
               {isLoadingExistingNotes ? (
                 <Text>Loading</Text>
@@ -388,6 +368,58 @@ const SermonNotesContainer = (props) => {
                   />
                 </Container>
               )}
+
+              <Box
+                ref={actionsWrapperRef}
+                position="relative"
+                w="100%"
+                mt={4}
+                h={`${actionsHeight}px`}
+              >
+                <HStack
+                  ref={actionsRef}
+                  spacing={2}
+                  zIndex={10}
+                  pointerEvents="none"
+                  position={pinActions ? 'absolute' : 'fixed'}
+                  bottom={
+                    pinActions ? 0 : { base: 'calc(8vh + 16px)', md: '24px' }
+                  }
+                  right={pinActions ? 0 : `${actionsRight}px`}
+                >
+                  {user?.id && (
+                    <Button
+                      isLoading={isSubmitting}
+                      bgColor="#526de3"
+                      color="white"
+                      borderRadius={20}
+                      px={5}
+                      boxShadow="md"
+                      leftIcon={<Icon as={MdSave} />}
+                      aria-label="Save Notes"
+                      pointerEvents="auto"
+                      _hover={{ bgColor: '#4459c4' }}
+                      onClick={updateUserSermonNotes}
+                    >
+                      SAVE
+                    </Button>
+                  )}
+                  <Button
+                    isLoading={isSubmitting}
+                    bgColor="#526de3"
+                    color="white"
+                    borderRadius={20}
+                    px={3}
+                    boxShadow="md"
+                    aria-label="Email"
+                    pointerEvents="auto"
+                    _hover={{ bgColor: '#4459c4' }}
+                    onClick={emailCheck}
+                  >
+                    <Icon as={FaPaperPlane} />
+                  </Button>
+                </HStack>
+              </Box>
             </Container>
           </Container>
         </>
