@@ -62,6 +62,7 @@ const UserProfileMobile = (props) => {
   const [selectedSermonSeries, setSelectedSermonSeries] = useState('');
   const [currentPageAll, setCurrentPageAll] = useState(1);
   const [currentPageSaved, setCurrentPageSaved] = useState(1);
+  const [sermonSeriesImages, setSermonSeriesImages] = useState({});
 
   const onModalClose = (e) => {
     setModalOpen(false);
@@ -126,6 +127,20 @@ const UserProfileMobile = (props) => {
       setSermonSeriesList(uniqueSeries);
     }
   }, [user.id]);
+
+  const fetchSermonSeries = useCallback(async () => {
+    const { data, status } = await axios.get('/api/sermons/get-sermon-series');
+
+    if (status === 200 && Array.isArray(data)) {
+      const imagesMap = {};
+      data.forEach((series) => {
+        if (series.image && series.image.sourceUrl) {
+          imagesMap[series.name] = series.image.sourceUrl;
+        }
+      });
+      setSermonSeriesImages(imagesMap);
+    }
+  }, []);
 
   const extractUniqueSermonSeries = (notes) => {
     const seriesSet = new Set(notes.map((note) => note.sermonSeries));
@@ -225,6 +240,7 @@ const UserProfileMobile = (props) => {
     fetchSignedUpForms();
     fetchUnsignedUpForms();
     fetchUserSermonNotes();
+    fetchSermonSeries();
   }, []);
 
   const inputBox = {
@@ -436,6 +452,7 @@ const UserProfileMobile = (props) => {
               {/* Pass pagination state to SermonNotesPagination */}
               <SermonNotesPagination
                 sermonNotes={sermonNotes}
+                sermonSeriesImages={sermonSeriesImages}
                 currentPage={
                   activeSermonNoteTab === 'all'
                     ? currentPageAll

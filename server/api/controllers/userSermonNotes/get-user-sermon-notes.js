@@ -31,8 +31,7 @@ module.exports = {
           userId: userId,
           isDeleted: false,
         });
-        if (!data && data.length === 0) throw 'user sermon note not found';
-        return exits.success(data);
+        return exits.success(data || null);
       }
 
       let data = await UserSermonNotes.find({
