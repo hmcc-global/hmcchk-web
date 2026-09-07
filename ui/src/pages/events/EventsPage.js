@@ -8,176 +8,55 @@ import {
   Grid,
   Heading,
   HStack,
-  Stack,
   Text,
 } from 'components';
-import { FaCheck } from 'react-icons/fa';
 import EventCard from './EventCard';
-import MinistryFilter from './MinistryFilter';
+import EventTypeFilter from './EventTypeFilter';
 import { DateTime } from 'luxon';
 import { getRenderDate } from 'utils/eventsHelpers';
 import isDateInThisWeek from './getWeek';
 
-const EventsPage = (props) => {
+const TAG_CHIPS = ['All', 'This Week', 'Featured'];
+
+const EventsPage = () => {
   const [eventsList, setEventsList] = useState([]);
   const [thisWeekList, setThisWeekList] = useState([]);
   const [featuredList, setFeaturedList] = useState([]);
-  const [moreFilterList, setMoreFilterList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [tagList, setTagList] = useState([]);
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedTag, setSelectedTag] = useState('');
   const [selectedFilterIndex, setSelectedFilterIndex] = useState(0);
-  const [isMoreOpen, setIsMoreOpen] = useState(false);
 
-  const tagHeader = ['All', 'This Week', 'Featured'];
+  const listsByChip = [eventsList, thisWeekList, featuredList];
 
-  const onFilter = (e) => {
-    let index = parseInt(e.target.id);
+  // Quick filters (All / This Week / Featured). Clears any eventType tag selection.
+  const onFilter = (index) => {
     setSelectedFilterIndex(index);
-    setSelectedOption('');
-    setIsMoreOpen(false);
-    if (index === 1) {
-      setFilteredList([...thisWeekList]);
-    } else if (index === 2) {
-      setFilteredList([...featuredList]);
-    } else if (index === 0) {
-      setFilteredList([...eventsList]);
-    }
+    setSelectedTag('');
+    setFilteredList([...listsByChip[index]]);
   };
 
-  const filterByMinistry = (indexStr) => {
-    let tag = tagList[Number(indexStr)];
-    const filtered = [];
-    eventsList.forEach((data) => {
-      if (data.eventType) {
-        for (let i = 0; i < data.eventType.length; i++) {
-          if (data.eventType[i].value === tag) {
-            filtered.push(data);
-            break;
-          }
-        }
-      }
-    });
-    return filtered;
-  };
-
-  const handlePickMinistry = (indexStr) => {
-    setSelectedOption(indexStr);
+  // Filter by announcement.eventType value (e.g. "Campus Ministry", "Classes").
+  const onSelectTag = (tag) => {
+    setSelectedTag(tag);
     setSelectedFilterIndex(-1);
-    setIsMoreOpen(false);
-    setFilteredList(filterByMinistry(indexStr));
+    setFilteredList(
+      eventsList.filter((data) =>
+        data.eventType?.some((type) => type.value === tag)
+      )
+    );
   };
-
-  const isAllFilter = selectedOption === '' && selectedFilterIndex === 0;
-
-  const clearMinistry = () => {
-    setSelectedOption('');
-    setSelectedFilterIndex(0);
-    setIsMoreOpen(false);
-    setFilteredList([...eventsList]);
-  };
-
-  const toggleMore = () => setIsMoreOpen((open) => !open);
-
-  const renderMinistryPanel = (id, w = '100%') => (
-    <Box
-      id={id}
-      w={w}
-      position="absolute"
-      top="calc(100% + 12px)"
-      right={0}
-      zIndex={2}
-      border="1px solid"
-      borderColor="#E2E8F0"
-      borderRadius={20}
-      bg="white"
-      boxShadow="0 12px 32px rgba(26, 32, 44, 0.14)"
-      p={{ base: 2, md: 2 }}
-    >
-      <Stack direction="column" spacing={{ base: 1, md: 1.5 }}>
-        <Button
-          key="ministry-all"
-          w="100%"
-          h="40px"
-          borderRadius={14}
-          px={{ base: 2, md: 3 }}
-          justifyContent="space-between"
-          bg={isAllFilter ? '#4A6EEB' : 'transparent'}
-          color={isAllFilter ? 'white' : '#1A202C'}
-          fontWeight={isAllFilter ? 700 : 600}
-          _hover={
-            isAllFilter
-              ? { bg: '#5C7BF0' }
-              : { bgColor: 'rgba(74, 110, 235, 0.1)' }
-          }
-          type="button"
-          aria-pressed={isAllFilter}
-          onClick={clearMinistry}
-        >
-          <Text fontSize={{ base: 'xs', md: 'md' }}>All events</Text>
-          {isAllFilter && <FaCheck />}
-        </Button>
-        {tagList.length === 0 ? (
-          <Button
-            w="100%"
-            h="40px"
-            borderRadius={14}
-            px={{ base: 2, md: 3 }}
-            justifyContent="flex-start"
-            isDisabled
-          >
-            <Text fontSize={{ base: 'xs', md: 'sm' }}>No ministries yet</Text>
-          </Button>
-        ) : (
-          tagList.map((tag, i) => {
-            const isActive = selectedOption === String(i);
-            return (
-              <Button
-                key={'ministry-' + i}
-                w="100%"
-                h="40px"
-                borderRadius={14}
-                px={{ base: 2, md: 3 }}
-                justifyContent="space-between"
-                bg={isActive ? '#4A6EEB' : 'transparent'}
-                color={isActive ? 'white' : '#1A202C'}
-                fontWeight={isActive ? 700 : 600}
-                _hover={
-                  isActive
-                    ? { bg: '#5C7BF0' }
-                    : { bgColor: 'rgba(74, 110, 235, 0.1)' }
-                }
-                type="button"
-                aria-pressed={isActive}
-                onClick={() =>
-                  isActive ? clearMinistry() : handlePickMinistry(String(i))
-                }
-              >
-                <Text fontSize={{ base: 'xs', md: 'md' }}>{tag}</Text>
-                {isActive && <FaCheck />}
-              </Button>
-            );
-          })
-        )}
-      </Stack>
-    </Box>
-  );
 
   useEffect(() => {
     getEventsListFromDatabase();
-    const id = props.match.params;
-    if (id != null) {
-      // call function to open eventcard
-    }
-  }, [props]);
+  }, []);
 
   const getEventsListFromDatabase = async () => {
     try {
       const { data, status } = await axios.get('/api/announcement/get');
 
       if (status === 200) {
-        const filtered = [];
-        const tagsList = new Set([]);
+        const tagsList = new Set();
         const filteredEndDate = data.filter((item) => {
           if (item.displayStartDateTime) {
             let displayStartDate = DateTime.fromISO(item.displayStartDateTime);
@@ -225,24 +104,15 @@ const EventsPage = (props) => {
             return a.renderDate < b.renderDate ? -1 : 1;
           }
         });
-        filtered.push(...filteredEndDate);
-        filtered.forEach((data) => {
-          if (data.eventType === null || data.eventType === undefined) {
-            console.log('data.eventType is null or undefined');
-          } else if (data.eventType.length > 0) {
-            data.eventType.forEach((tag) => {
-              if (!tagsList.has(tag.value)) {
-                tagsList.add(tag.value);
-              }
-            });
-          }
+        filteredEndDate.forEach((data) => {
+          data.eventType?.forEach((tag) => tagsList.add(tag.value));
         });
 
         const featuredEvents = [];
         const thisWeekEvents = [];
         const moreFilterEvents = [];
 
-        filtered.forEach((data) => {
+        filteredEndDate.forEach((data) => {
           if (data.featured) {
             featuredEvents.push(data);
           }
@@ -259,9 +129,8 @@ const EventsPage = (props) => {
           }
         });
 
-        setFeaturedList([...featuredEvents]);
-        setThisWeekList([...thisWeekEvents]);
-        setMoreFilterList([...moreFilterEvents]);
+        setFeaturedList(featuredEvents);
+        setThisWeekList(thisWeekEvents);
         setTagList([...tagsList]);
 
         const sorted = new Set(
@@ -276,29 +145,6 @@ const EventsPage = (props) => {
       console.log(err);
     }
   };
-
-  const chipProps = (i) => ({
-    variant: 'outline',
-    borderRadius: 30,
-    h: { base: '36px', md: '40px' },
-    px: 2,
-    transition: 'all 0.18s',
-    borderColor: '#4A6EEB',
-    bg: selectedFilterIndex === i ? '#4A6EEB' : 'transparent',
-    color: selectedFilterIndex === i ? 'white' : '#4A6EEB',
-    _hover:
-      selectedFilterIndex === i
-        ? { bg: '#5C7BF0', color: 'white', borderColor: '#5C7BF0' }
-        : {
-            borderColor: '#4A6EEB',
-            bgColor: 'rgba(74, 110, 235, 0.1)',
-            color: '#4A6EEB',
-          },
-    type: 'button',
-    'aria-pressed': selectedFilterIndex === i,
-    id: i,
-    onClick: onFilter,
-  });
 
   return (
     <Container maxW="container.xl">
@@ -322,72 +168,44 @@ const EventsPage = (props) => {
       >
         Check out what's happening at HMCC of Hong Kong!
       </Text>
-      <Stack
-        className="events-filter"
-        borderRadius={30}
-        flexDirection={['column', 'row']}
-        spacing={[2, 0]}
-        top={2}
-        zIndex={1}
-        position="sticky"
-        alignItems="center"
-      >
-        <HStack
-          w="100%"
-          justify="space-between"
-          spacing={2}
-          display={{ base: 'flex', md: 'none' }}
-        >
-          {tagHeader.map((tag, i) => (
-            <Button key={'button-mobile-' + i} flex="1" {...chipProps(i)}>
-              <Text id={i} fontSize={{ base: 'xs', md: 'md' }}>
-                {tag}
-              </Text>
-            </Button>
-          ))}
-          <MinistryFilter
-            compact
-            flex="1"
-            panelId="ministry-panel-mobile"
-            open={isMoreOpen}
-            selected={selectedOption}
+      {/* Sticky must live on a block wrapper — HStack is flex and won't stick. */}
+      <Box className="events-filter" position="sticky" top={2} zIndex={1}>
+        <HStack w="100%" justify="space-between" spacing={{ base: 2, md: 3 }}>
+          {TAG_CHIPS.map((tag, i) => {
+            const isActive = selectedFilterIndex === i;
+            return (
+              <Button
+                key={tag}
+                flex="1"
+                variant="outline"
+                borderRadius={30}
+                h={{ base: '36px', md: '40px' }}
+                px={2}
+                borderColor="#4A6EEB"
+                bg={isActive ? '#4A6EEB' : 'white'}
+                color={isActive ? 'white' : '#4A6EEB'}
+                _hover={
+                  isActive
+                    ? { bg: '#5C7BF0', color: 'white', borderColor: '#5C7BF0' }
+                    : { bg: '#DFE7FF' }
+                }
+                type="button"
+                aria-pressed={isActive}
+                onClick={() => onFilter(i)}
+              >
+                <Text fontSize={{ base: 'xs', md: 'md' }}>{tag}</Text>
+              </Button>
+            );
+          })}
+          <EventTypeFilter
             tagList={tagList}
-            onToggle={toggleMore}
-            onClear={clearMinistry}
+            selectedTag={selectedTag}
+            isAllActive={selectedFilterIndex === 0}
+            onSelect={onSelectTag}
+            onClear={() => onFilter(0)}
           />
-          {isMoreOpen && renderMinistryPanel('ministry-panel-mobile', '240px')}
         </HStack>
-        <HStack
-          w="100%"
-          justify="space-between"
-          spacing={3}
-          display={{ base: 'none', md: 'flex' }}
-        >
-          {tagHeader.map((tag, i) => (
-            <Button
-              key={'button-desktop-' + i}
-              width="calc((100% - 36px) / 4)"
-              {...chipProps(i)}
-            >
-              <Text id={i} fontSize={{ base: 'sm', md: 'md' }}>
-                {tag}
-              </Text>
-            </Button>
-          ))}
-          <Box width="calc((100% - 36px) / 4)" position="relative">
-            <MinistryFilter
-              w="100%"
-              panelId="ministry-panel-desktop"
-              open={isMoreOpen}
-              selected={selectedOption}
-              tagList={tagList}
-              onToggle={toggleMore}
-              onClear={clearMinistry}
-            />
-            {isMoreOpen && renderMinistryPanel('ministry-panel-desktop')}
-          </Box>
-        </HStack>
-      </Stack>
+      </Box>
       <Grid
         mt="12"
         mb="12"
