@@ -28,7 +28,7 @@ import {
 } from 'components';
 import { CheckCircleIcon } from 'components/icons';
 import { customAxios as axios } from 'utils/customAxios';
-import { useEffect, useState, useCallback } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import {
   ministryTeamList,
@@ -194,19 +194,21 @@ const UserProfileDesktop = (props) => {
     return [...seriesSet];
   };
 
-  const sermonNotes = userSermonNotes.filter((note) => {
-    if (activeSermonNoteTab === 'all') {
-      return selectedSermonSeries
-        ? note.sermonSeries === selectedSermonSeries
-        : true;
-    }
+  const sermonNotes = useMemo(() => {
+    return userSermonNotes.filter((note) => {
+      if (activeSermonNoteTab === 'all') {
+        return selectedSermonSeries
+          ? note.sermonSeries === selectedSermonSeries
+          : true;
+      }
 
-    if (activeSermonNoteTab === 'my') {
-      return note.isSaved;
-    }
+      if (activeSermonNoteTab === 'my') {
+        return note.isSaved;
+      }
 
-    return true;
-  });
+      return true;
+    });
+  }, [userSermonNotes, activeSermonNoteTab, selectedSermonSeries]);
 
   // Implementation needs some component specific customization
   const handleEditUserInformation = async (data, e) => {

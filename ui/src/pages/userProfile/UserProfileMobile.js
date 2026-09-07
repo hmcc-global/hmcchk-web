@@ -25,7 +25,7 @@ import {
   ModalCloseButton,
 } from 'components';
 import { CheckCircleIcon } from 'components/icons';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { customAxios as axios } from 'utils/customAxios';
 import {
@@ -147,19 +147,21 @@ const UserProfileMobile = (props) => {
     return [...seriesSet];
   };
 
-  const sermonNotes = userSermonNotes.filter((note) => {
-    if (activeSermonNoteTab === 'all') {
-      return selectedSermonSeries
-        ? note.sermonSeries === selectedSermonSeries
-        : true;
-    }
+  const sermonNotes = useMemo(() => {
+    return userSermonNotes.filter((note) => {
+      if (activeSermonNoteTab === 'all') {
+        return selectedSermonSeries
+          ? note.sermonSeries === selectedSermonSeries
+          : true;
+      }
 
-    if (activeSermonNoteTab === 'my') {
-      return note.isSaved;
-    }
+      if (activeSermonNoteTab === 'my') {
+        return note.isSaved;
+      }
 
-    return true;
-  });
+      return true;
+    });
+  }, [userSermonNotes, activeSermonNoteTab, selectedSermonSeries]);
 
   const setUserInformationFields = (userData) => {
     for (let key in userData) {
