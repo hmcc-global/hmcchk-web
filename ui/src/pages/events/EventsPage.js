@@ -182,12 +182,16 @@ const EventsPage = () => {
                 h={{ base: '36px', md: '40px' }}
                 px={2}
                 borderColor="#4A6EEB"
-                bg={isActive ? '#4A6EEB' : 'white'}
+                bgColor={isActive ? '#4A6EEB' : 'white'}
                 color={isActive ? 'white' : '#4A6EEB'}
                 _hover={
                   isActive
-                    ? { bg: '#5C7BF0', color: 'white', borderColor: '#5C7BF0' }
-                    : { bg: '#DFE7FF' }
+                    ? {
+                        bgColor: '#5C7BF0',
+                        color: 'white',
+                        borderColor: '#5C7BF0',
+                      }
+                    : { bgColor: '#DFE7FF' }
                 }
                 type="button"
                 aria-pressed={isActive}
