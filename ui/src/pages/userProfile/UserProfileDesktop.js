@@ -64,6 +64,7 @@ const UserProfileDesktop = (props) => {
   const [selectedSermonSeries, setSelectedSermonSeries] = useState('');
   const [currentPageAll, setCurrentPageAll] = useState(1);
   const [currentPageSaved, setCurrentPageSaved] = useState(1);
+  const [sermonSeriesImages, setSermonSeriesImages] = useState({});
 
   const setUserInformationFields = (userData) => {
     for (let key in userData) {
@@ -174,6 +175,20 @@ const UserProfileDesktop = (props) => {
     }
   }, [user.id]);
 
+  const fetchSermonSeries = useCallback(async () => {
+    const { data, status } = await axios.get('/api/sermons/get-sermon-series');
+
+    if (status === 200 && Array.isArray(data)) {
+      const imagesMap = {};
+      data.forEach((series) => {
+        if (series.image && series.image.sourceUrl) {
+          imagesMap[series.name] = series.image.sourceUrl;
+        }
+      });
+      setSermonSeriesImages(imagesMap);
+    }
+  }, []);
+
   const extractUniqueSermonSeries = (notes) => {
     const seriesSet = new Set(notes.map((note) => note.sermonSeries));
     return [...seriesSet];
@@ -222,12 +237,14 @@ const UserProfileDesktop = (props) => {
     fetchSignedUpForms();
     fetchUnsignedUpForms();
     fetchUserSermonNotes();
+    fetchSermonSeries();
   }, [
     fetchUserData,
     fetchPublishedForms,
     fetchSignedUpForms,
     fetchUnsignedUpForms,
     fetchUserSermonNotes,
+    fetchSermonSeries,
   ]);
 
   const inputBox = {
@@ -337,7 +354,7 @@ const UserProfileDesktop = (props) => {
           </Box>
           <TabPanels
             flex={4}
-            bgColor="#ffffff"
+            bgColor="#fafcff"
             ml="5"
             border="1px solid #EBEBEB"
             borderRadius="10px"
@@ -450,6 +467,7 @@ const UserProfileDesktop = (props) => {
               {/* Pass pagination state to SermonNotesPagination */}
               <SermonNotesPagination
                 sermonNotes={sermonNotes}
+                sermonSeriesImages={sermonSeriesImages}
                 currentPage={
                   activeSermonNoteTab === 'all'
                     ? currentPageAll

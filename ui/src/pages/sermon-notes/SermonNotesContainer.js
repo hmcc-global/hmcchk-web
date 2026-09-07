@@ -79,7 +79,7 @@ const SermonNotesContainer = (props) => {
           sermonId: sermonId,
         },
       });
-      if (status === 200) {
+      if (status === 200 && data && typeof data === 'object' && data.id) {
         setUserSermonNotes(data);
       }
     } catch (error) {
