@@ -124,20 +124,19 @@ const EventsSectionCard = (props) => {
   return (
     <>
       <Box w={width} h={height} px={2}>
-        <Box border="1px solid #8C8C8C" borderRadius={10}>
+        <Box
+          border="1px solid #8C8C8C"
+          borderRadius={10}
+          onClick={onOpen}
+          cursor="pointer"
+        >
           <VStack
             justifyContent="space-between"
             alignItems="center"
             spacing={[2, 2, 5]}
             p={['3%', '3%', '5%']}
           >
-            <AspectRatio
-              width="100%"
-              ratio={16 / 9}
-              onClick={onOpen}
-              cursor="pointer"
-              zIndex={5}
-            >
+            <AspectRatio width="100%" ratio={16 / 9}>
               <Image
                 borderRadius={10}
                 objectFit="cover"
@@ -155,10 +154,8 @@ const EventsSectionCard = (props) => {
               fontSize={{ base: 'sm', md: 'md' }}
             >
               <Heading
-                onClick={onOpen}
                 maxWidth={'100%'}
                 fontSize={['lg', '2xl']}
-                cursor="pointer"
                 fontFamily="Manrope"
                 fontWeight="bold"
                 color="black"
@@ -181,9 +178,11 @@ const EventsSectionCard = (props) => {
           </VStack>
         </Box>
       </Box>
-      <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent borderRadius="20" justifyContent="center" p={[0, 5]}>
+      {/* Same as EventCard: mount only while open so Chakra exit can't stick RemoveScroll. */}
+      {isOpen && (
+        <Modal size="3xl" isOpen onClose={onClose} motionPreset="none">
+          <ModalOverlay />
+          <ModalContent borderRadius="20" justifyContent="center" p={[0, 5]}>
           {isMobile ? (
             <Center mt={4} mb={2}>
               <Box w={10} h={1} bgColor="#A8A8A8" borderRadius={20} />
@@ -336,8 +335,9 @@ const EventsSectionCard = (props) => {
               )}
             </ButtonGroup>
           </ModalFooter>
-        </ModalContent>
-      </Modal>
+          </ModalContent>
+        </Modal>
+      )}
       {/* <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent borderRadius="20" fontFamily="Manrope">
