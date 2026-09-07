@@ -9,7 +9,7 @@ import {
   Icon,
 } from 'components';
 import { customAxios as axios } from 'utils/customAxios';
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDebounce } from 'react-use';
 import { MdSave } from 'react-icons/md';
 import { FaPaperPlane } from 'react-icons/fa';
@@ -30,11 +30,6 @@ const SermonNotesContainer = (props) => {
   const [userSermonNotes, setUserSermonNotes] = useState();
   const [htmlUserSermonNotes, setHtmlUserNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
-  const [pinActions, setPinActions] = useState(false);
-  const [actionsRight, setActionsRight] = useState(16);
-  const [actionsHeight, setActionsHeight] = useState(40);
-  const actionsWrapperRef = useRef(null);
-  const actionsRef = useRef(null);
   const toast = useToast();
 
   const todayId = DateTime.fromISO(new Date().toISOString()).toFormat(
@@ -214,46 +209,6 @@ const SermonNotesContainer = (props) => {
     }
   }, [sermonId, getSermonNotesParent, getUserSermonNotes]);
 
-  // Float/pin action buttons; sticky won't work — ancestors use overflow auto/hidden.
-  useEffect(() => {
-    const handleScroll = () => {
-      const wrap = actionsWrapperRef.current;
-      if (!wrap) return;
-      const offset =
-        window.innerWidth < 768 ? window.innerHeight * 0.08 + 16 : 24;
-      const rect = wrap.getBoundingClientRect();
-      const nextRight = window.innerWidth - rect.right;
-      const nextPin = rect.bottom <= window.innerHeight - offset;
-      const nextHeight = actionsRef.current
-        ? actionsRef.current.offsetHeight
-        : null;
-      setActionsRight((prev) => (prev === nextRight ? prev : nextRight));
-      setPinActions((prev) => (prev === nextPin ? prev : nextPin));
-      if (nextHeight != null) {
-        setActionsHeight((prev) => (prev === nextHeight ? prev : nextHeight));
-      }
-    };
-    handleScroll();
-    // capture phase: the app scrolls inside nested overflow containers,
-    // and scroll events don't bubble
-    window.addEventListener('scroll', handleScroll, true);
-    window.addEventListener('resize', handleScroll);
-    // recompute when async content (notes, images) changes the layout
-    const wrap = actionsWrapperRef.current;
-    const observer =
-      typeof ResizeObserver !== 'undefined' && wrap && wrap.parentElement
-        ? new ResizeObserver(handleScroll)
-        : null;
-    if (observer) observer.observe(wrap.parentElement);
-    return () => {
-      window.removeEventListener('scroll', handleScroll, true);
-      window.removeEventListener('resize', handleScroll);
-      if (observer) observer.disconnect();
-    };
-    // isLoading gates the early return, so the wrapper only exists after it
-    // flips; isLoadingExistingNotes swaps the notes content in
-  }, [isLoading, isLoadingExistingNotes]);
-
   useEffect(() => {
     if (sermonId) {
       const localUserNotes = localStorage.getItem(`sermonNotes-${sermonId}`);
@@ -375,57 +330,45 @@ const SermonNotesContainer = (props) => {
                 </Container>
               )}
 
-              <Box
-                ref={actionsWrapperRef}
-                position="relative"
-                w="100%"
+              <HStack
+                position="sticky"
+                bottom={{ base: '2rem', md: '1.25rem' }}
+                justify="flex-end"
+                spacing={2}
                 mt={4}
-                h={`${actionsHeight}px`}
+                mb={{ base: '2rem', md: 0 }}
+                zIndex={10}
               >
-                <HStack
-                  ref={actionsRef}
-                  spacing={2}
-                  zIndex={10}
-                  pointerEvents="none"
-                  position={pinActions ? 'absolute' : 'fixed'}
-                  bottom={
-                    pinActions ? 0 : { base: 'calc(8vh + 16px)', md: '24px' }
-                  }
-                  right={pinActions ? 0 : `${actionsRight}px`}
-                >
-                  {user?.id && (
-                    <Button
-                      isLoading={isSubmitting}
-                      bgColor={ACTION_BTN_BG}
-                      color="white"
-                      borderRadius={20}
-                      px={5}
-                      boxShadow="md"
-                      leftIcon={<Icon as={MdSave} />}
-                      aria-label="Save Notes"
-                      pointerEvents="auto"
-                      _hover={{ bgColor: ACTION_BTN_HOVER }}
-                      onClick={updateUserSermonNotes}
-                    >
-                      SAVE
-                    </Button>
-                  )}
+                {user?.id && (
                   <Button
                     isLoading={isSubmitting}
                     bgColor={ACTION_BTN_BG}
                     color="white"
                     borderRadius={20}
-                    px={3}
+                    px={5}
                     boxShadow="md"
-                    aria-label="Email"
-                    pointerEvents="auto"
+                    leftIcon={<Icon as={MdSave} />}
+                    aria-label="Save Notes"
                     _hover={{ bgColor: ACTION_BTN_HOVER }}
-                    onClick={emailCheck}
+                    onClick={updateUserSermonNotes}
                   >
-                    <Icon as={FaPaperPlane} />
+                    SAVE
                   </Button>
-                </HStack>
-              </Box>
+                )}
+                <Button
+                  isLoading={isSubmitting}
+                  bgColor={ACTION_BTN_BG}
+                  color="white"
+                  borderRadius={20}
+                  px={3}
+                  boxShadow="md"
+                  aria-label="Email"
+                  _hover={{ bgColor: ACTION_BTN_HOVER }}
+                  onClick={emailCheck}
+                >
+                  <Icon as={FaPaperPlane} />
+                </Button>
+              </HStack>
             </Container>
           </Container>
         </>
