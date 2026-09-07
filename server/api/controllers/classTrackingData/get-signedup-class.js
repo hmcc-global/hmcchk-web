@@ -64,16 +64,17 @@ module.exports = {
 
       // 2. For each class form, check if current season and load ClassTrackingData
       for (const form of forms) {
-        const availableFrom = form.formAvailableFrom
-          ? DateTime.fromJSDate(new Date(form.formAvailableFrom))
-          : DateTime.invalid('missing formAvailableFrom');
+        const rawClassStartTime = form.classTrackingTemplate?.classStartTime;
+        const classStartTime = rawClassStartTime
+          ? DateTime.fromJSDate(new Date(rawClassStartTime))
+          : DateTime.invalid('missing classStartTime');
 
         const rawClassEndingTime = form.classTrackingTemplate?.classEndingTime;
         const classEndingTime = rawClassEndingTime
           ? DateTime.fromJSDate(new Date(rawClassEndingTime))
           : DateTime.invalid('missing classEndingTime');
 
-        if (!isCurrentSeason(now, availableFrom, classEndingTime)) continue;
+        if (!isCurrentSeason(now, classStartTime, classEndingTime)) continue;
 
         const latestClassData = latestClassDataByFormId.get(form.id);
         if (!latestClassData) continue;
@@ -81,8 +82,8 @@ module.exports = {
         const createdAt = DateTime.fromJSDate(
           new Date(latestClassData.createdAt)
         );
-        const afterStart = availableFrom.isValid
-          ? createdAt >= availableFrom
+        const afterStart = classStartTime.isValid
+          ? createdAt >= classStartTime
           : true;
         const beforeEnd = classEndingTime.isValid
           ? createdAt <= classEndingTime
