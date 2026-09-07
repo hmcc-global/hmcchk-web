@@ -1,88 +1,65 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { customAxios as axios } from 'utils/customAxios';
 import {
+  Box,
   Button,
   Container,
   Divider,
   Grid,
   Heading,
-  Select,
-  Stack,
+  HStack,
   Text,
 } from 'components';
-import { MdArrowDropDown } from 'react-icons/md';
 import EventCard from './EventCard';
+import EventTypeFilter from './EventTypeFilter';
 import { DateTime } from 'luxon';
 import { getRenderDate } from 'utils/eventsHelpers';
 import isDateInThisWeek from './getWeek';
 
-const EventsPage = (props) => {
+const TAG_CHIPS = ['All', 'This Week', 'Featured'];
+
+const EventsPage = () => {
   const [eventsList, setEventsList] = useState([]);
   const [thisWeekList, setThisWeekList] = useState([]);
   const [featuredList, setFeaturedList] = useState([]);
-  const [moreFilterList, setMoreFilterList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [tagList, setTagList] = useState([]);
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedTag, setSelectedTag] = useState('');
   const [selectedFilterIndex, setSelectedFilterIndex] = useState(0);
 
-  const tagHeader = ['All', 'This Week', 'Featured'];
+  const listsByChip = [eventsList, thisWeekList, featuredList];
 
-  const onFilter = (e) => {
-    let index = parseInt(e.target.id);
+  // Quick filters (All / This Week / Featured). Clears any eventType tag selection.
+  const onFilter = (index) => {
     setSelectedFilterIndex(index);
-    if (index === 1) {
-      setFilteredList([...thisWeekList]);
-    } else if (index === 2) {
-      setFilteredList([...featuredList]);
-    } else if (index === 0) {
-      setFilteredList([...eventsList]);
-    }
+    setSelectedTag('');
+    setFilteredList([...listsByChip[index]]);
   };
 
-  const onSelect = (e) => {
-    if (e.target.value === '') {
-      setFilteredList([...eventsList]);
-      setSelectedOption('');
-      return;
-    }
-    const selectedValue = e.target.value;
-    setSelectedOption(selectedValue);
-    const filtered = [];
-    let tag = tagList[selectedValue];
-    eventsList.forEach((data) => {
-      if (data.eventType) {
-        for (let i = 0; i < data.eventType.length; i++) {
-          if (data.eventType[i].value === tag) {
-            filtered.push(data);
-            break;
-          }
-        }
-      }
-    });
-    setFilteredList([...filtered]);
+  // Filter by announcement.eventType value (e.g. "Campus Ministry", "Classes").
+  const onSelectTag = (tag) => {
+    setSelectedTag(tag);
+    setSelectedFilterIndex(-1);
+    setFilteredList(
+      eventsList.filter((data) =>
+        data.eventType?.some((type) => type.value === tag)
+      )
+    );
   };
 
   useEffect(() => {
     getEventsListFromDatabase();
-    const id = props.match.params;
-    if (id != null) {
-      // call function to open eventcard
-    }
-  }, [props]);
+  }, []);
 
   const getEventsListFromDatabase = async () => {
     try {
       const { data, status } = await axios.get('/api/announcement/get');
 
       if (status === 200) {
-        const filtered = [];
-        const tagsList = new Set([]);
+        const tagsList = new Set();
         const filteredEndDate = data.filter((item) => {
           if (item.displayStartDateTime) {
-            let displayStartDate = DateTime.fromISO(
-              item.displayStartDateTime
-            );
+            let displayStartDate = DateTime.fromISO(item.displayStartDateTime);
             if (displayStartDate > DateTime.now()) return false;
           }
 
@@ -127,24 +104,15 @@ const EventsPage = (props) => {
             return a.renderDate < b.renderDate ? -1 : 1;
           }
         });
-        filtered.push(...filteredEndDate);
-        filtered.forEach((data) => {
-          if (data.eventType === null || data.eventType === undefined) {
-            console.log('data.eventType is null or undefined');
-          } else if (data.eventType.length > 0) {
-            data.eventType.forEach((tag) => {
-              if (!tagsList.has(tag.value)) {
-                tagsList.add(tag.value);
-              }
-            });
-          }
+        filteredEndDate.forEach((data) => {
+          data.eventType?.forEach((tag) => tagsList.add(tag.value));
         });
 
         const featuredEvents = [];
         const thisWeekEvents = [];
         const moreFilterEvents = [];
 
-        filtered.forEach((data) => {
+        filteredEndDate.forEach((data) => {
           if (data.featured) {
             featuredEvents.push(data);
           }
@@ -161,9 +129,8 @@ const EventsPage = (props) => {
           }
         });
 
-        setFeaturedList([...featuredEvents]);
-        setThisWeekList([...thisWeekEvents]);
-        setMoreFilterList([...moreFilterEvents]);
+        setFeaturedList(featuredEvents);
+        setThisWeekList(thisWeekEvents);
         setTagList([...tagsList]);
 
         const sorted = new Set(
@@ -201,63 +168,48 @@ const EventsPage = (props) => {
       >
         Check out what's happening at HMCC of Hong Kong!
       </Text>
-      <Stack
-        border="1px"
-        p={3}
-        borderRadius={30}
-        justifyContent="space-around"
-        flexDirection={['column', 'row']}
-        spacing={[2, 0]}
-        top={2}
-        position="sticky"
-        alignItems="center"
-        bg="#ffffff"
-      >
-        <Grid templateColumns="repeat(3, 1fr)" gap={[3, 9]}>
-          {tagHeader.map((tag, i) => (
-            <Button
-              width={['23vw', '14vw']}
-              borderRadius={[15, 20]}
-              key={'button' + i}
-              m="0rem"
-              _hover={{ opacity: '90%' }}
-              bg={selectedFilterIndex === i ? '#3F3F3F' : 'gray.100'}
-              color={selectedFilterIndex === i ? '#ffffff' : ''}
-              id={i}
-              onClick={onFilter}
-            >
-              <Text id={i} fontSize={{ base: '80%', sm: '100%' }}>
-                {tag}
-              </Text>
-            </Button>
-          ))}
-        </Grid>
-        <Select
-          placeholder="More Filters"
-          fontWeight="600"
-          textAlign="center"
-          width={['75vw', '14vw']}
-          borderRadius={[15, 20]}
-          rightIcon={<MdArrowDropDown />}
-          variant="filled"
-          bg={selectedOption !== '' ? '#3F3F3F' : 'gray.100'}
-          color={selectedOption !== '' ? '#ffffff' : ''}
-          _hover={{
-            opacity: '90%',
-          }}
-          _focus={{
-            bg: 'gray.100',
-            color: '#000000',
-          }}
-          cursor="pointer"
-          onChange={onSelect}
-          value={selectedOption}
-        >
-          {tagList.map((tag, i) => (
-            <option value={i}>{tag}</option>
-          ))}
-        </Select>
-      </Stack>
+      {/* Sticky must live on a block wrapper — HStack is flex and won't stick. */}
+      <Box className="events-filter" position="sticky" top={2} zIndex={1}>
+        <HStack w="100%" justify="space-between" spacing={{ base: 2, md: 3 }}>
+          {TAG_CHIPS.map((tag, i) => {
+            const isActive = selectedFilterIndex === i;
+            return (
+              <Button
+                key={tag}
+                flex="1"
+                variant="outline"
+                borderRadius={30}
+                h={{ base: '36px', md: '40px' }}
+                px={2}
+                borderColor="#4A6EEB"
+                bgColor={isActive ? '#4A6EEB' : 'white'}
+                color={isActive ? 'white' : '#4A6EEB'}
+                _hover={
+                  isActive
+                    ? {
+                        bgColor: '#5C7BF0',
+                        color: 'white',
+                        borderColor: '#5C7BF0',
+                      }
+                    : { bgColor: '#DFE7FF' }
+                }
+                type="button"
+                aria-pressed={isActive}
+                onClick={() => onFilter(i)}
+              >
+                <Text fontSize={{ base: 'xs', md: 'md' }}>{tag}</Text>
+              </Button>
+            );
+          })}
+          <EventTypeFilter
+            tagList={tagList}
+            selectedTag={selectedTag}
+            isAllActive={selectedFilterIndex === 0}
+            onSelect={onSelectTag}
+            onClear={() => onFilter(0)}
+          />
+        </HStack>
+      </Box>
       <Grid
         mt="12"
         mb="12"
@@ -267,10 +219,10 @@ const EventsPage = (props) => {
       >
         {filteredList.length > 0 &&
           filteredList.map((event, i) => (
-            <>
-              <EventCard key={'event' + i} eventData={event} />
+            <Fragment key={'event' + i}>
+              <EventCard eventData={event} />
               {i !== filteredList.length - 1 && <Divider />}
-            </>
+            </Fragment>
           ))}
       </Grid>
     </Container>

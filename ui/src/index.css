@@ -1,4 +1,13 @@
 @import url('https://rsms.me/inter/inter.css');
+
+/* Needed so App h="100%" / MainContainer maxH="100%" actually constrain;
+   otherwise the window scrolls and position:sticky under main's overflow-x:hidden fails. */
+html,
+body,
+#root {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
@@ -19,6 +28,13 @@ code {
 
 .ag-tooltip {
   background-color: #ffffff !important;
+}
+
+/* Chakra v1 has no :focus-visible support - give the events filter bar a flat, visible keyboard-focus outline */
+.events-filter button:focus-visible {
+  outline: 2px solid rgba(74, 110, 235, 0.6);
+  outline-offset: 2px;
+  box-shadow: none;
 }
 
 @font-face {
