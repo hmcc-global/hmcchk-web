@@ -96,11 +96,7 @@ const Faq = (props) => {
           <br />
           If you’re not sure who the leader of the LIFE Group is, please contact
           us by dropping an email{' '}
-          <Link
-            href="mailto:hk@hmccglobal.org"
-            fontStyle="italic"
-            color="blue"
-          >
+          <Link href="mailto:hk@hmccglobal.org" fontStyle="italic" color="blue">
             here
           </Link>
         </AccordionPanel>
@@ -121,11 +117,7 @@ const Faq = (props) => {
           adult (focus) ministry/ married couple (covenant) ministry. Feel free
           to send an Instagram direct message on the appropriate Instagram
           profile and/or drop an email{' '}
-          <Link
-            href="mailto:hk@hmccglobal.org"
-            fontStyle="italic"
-            color="blue"
-          >
+          <Link href="mailto:hk@hmccglobal.org" fontStyle="italic" color="blue">
             here
           </Link>{' '}
           to learn more.
