@@ -35,9 +35,7 @@ const SermonNotesContainer = (props) => {
   const tipTapRef = useRef(null);
   const toast = useToast();
 
-  const todayId = DateTime.fromISO(new Date().toISOString()).toFormat(
-    'ddMMyyyy'
-  );
+  const todayId = DateTime.now().toFormat('ddMMyyyy');
 
   const fallbackSermonId = props && props.match && props.match.params.id;
 
@@ -188,7 +186,7 @@ const SermonNotesContainer = (props) => {
     if (isEmailing) return;
     setIsEmailing(true);
     try {
-      const { data, status } = await axios.post(
+      const { status } = await axios.post(
         '/api/email-user-sermon-notes',
         {
           email: email,
@@ -336,7 +334,8 @@ const SermonNotesContainer = (props) => {
                 display={!user?.id ? 'block' : 'none'}
                 mb="3"
               >
-                Please log into your HMCC account to get the save notes feature.
+                Please log into your HMCC account to save notes. You can still
+                email notes to yourself without an account.
               </Text>
 
               {isLoadingExistingNotes ? (
@@ -370,10 +369,11 @@ const SermonNotesContainer = (props) => {
                     px={5}
                     boxShadow="md"
                     leftIcon={<Icon as={MdSave} />}
+                    textTransform="uppercase"
                     _hover={{ bgColor: ACTION_BTN_HOVER }}
                     onClick={updateUserSermonNotes}
                   >
-                    SAVE
+                    Save
                   </Button>
                 )}
                 <Button
@@ -382,7 +382,7 @@ const SermonNotesContainer = (props) => {
                   bgColor={ACTION_BTN_BG}
                   color="white"
                   borderRadius={20}
-                  px={3}
+                  px={5}
                   boxShadow="md"
                   aria-label="Email"
                   _hover={{ bgColor: ACTION_BTN_HOVER }}
