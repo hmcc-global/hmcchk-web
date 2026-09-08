@@ -34,6 +34,7 @@ const TiptapOutput = forwardRef(
       ],
     });
 
+    // Parent (Email button) pulls HTML on demand — we don't mirror getHTML() into React state.
     useImperativeHandle(
       ref,
       () => ({
@@ -48,6 +49,7 @@ const TiptapOutput = forwardRef(
       }
     }, [editor]);
 
+    // JSON only: keeps editUserSermonNotes in sync for Save / localStorage.
     useEffect(() => {
       if (editor && lastUpdatedPos !== null) {
         const setNotes = () => {

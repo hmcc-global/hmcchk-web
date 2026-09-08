@@ -31,6 +31,7 @@ const SermonNotesContainer = (props) => {
   // In General, userSermonNotes comes from db, editUserSermonNotes comes from localStorage
   const [userSermonNotes, setUserSermonNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
+  // TipTap exposes getHTML() via this ref; Email reads it at click time (not mirrored state).
   const tipTapRef = useRef(null);
   const toast = useToast();
 
@@ -157,6 +158,7 @@ const SermonNotesContainer = (props) => {
   };
 
   const emailCheck = async () => {
+    // Snapshot TipTap HTML now — email template needs HTML; Save uses JSON separately.
     const html = tipTapRef.current?.getHTML();
     if (!html) {
       toast({
