@@ -19,6 +19,7 @@ import { getAllUserSermonNotes, deepUpdateUserNotes } from 'utils/SermonNotes';
 
 const ACTION_BTN_BG = '#526de3';
 const ACTION_BTN_HOVER = '#4459c4';
+const GUEST_HINT_TEXT = '#B2BEB5';
 
 const SermonNotesContainer = (props) => {
   const { user, sermonNoteId } = props;
@@ -318,7 +319,7 @@ const SermonNotesContainer = (props) => {
             <Container my={[4, 8]} width="100%">
               <Text
                 fontStyle="italic"
-                textColor="#B2BEB5"
+                textColor={GUEST_HINT_TEXT}
                 display={!user?.id ? 'block' : 'none'}
                 mb="3"
               >
