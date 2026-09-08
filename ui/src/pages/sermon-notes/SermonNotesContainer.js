@@ -38,12 +38,14 @@ const SermonNotesContainer = (props) => {
 
   const fallbackSermonId = props && props.match && props.match.params.id;
 
-  const sermonId =
-    sermonNoteId === 'online'
-      ? `sn-${todayId}-1`
-      : sermonNoteId == null
-      ? fallbackSermonId
-      : sermonNoteId;
+  let sermonId;
+  if (sermonNoteId === 'online') {
+    sermonId = `sn-${todayId}-1`;
+  } else if (sermonNoteId == null) {
+    sermonId = fallbackSermonId;
+  } else {
+    sermonId = sermonNoteId;
+  }
 
   const getSermonNotesParent = useCallback(async () => {
     try {
@@ -88,56 +90,58 @@ const SermonNotesContainer = (props) => {
   // send update to the localstorage 1 seconds after the user stops typing
   // send update to db when user click save
   const updateUserSermonNotes = useCallback(async () => {
+    if (isSubmitting) return;
     if (document.activeElement) {
       document.activeElement.blur();
     }
+    if (!user?.id) return;
     setIsSubmitting(true);
-    if (!user?.id) {
+    try {
+      if (userSermonNotes) {
+        try {
+          const { data, status } = await axios.put(
+            '/api/user-sermon-notes/update',
+            {
+              userId: user?.id || '',
+              sermonId: sermonId,
+              editedContent: editUserSermonNotes,
+            }
+          );
+          if (status === 200) {
+            setUserSermonNotes(data);
+            toast({
+              title: 'Sermon Notes Saved',
+              status: 'success',
+              duration: 2000,
+              isClosable: true,
+            });
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        try {
+          const { data, status } = await axios.post(
+            '/api/user-sermon-notes/create',
+            {
+              userId: user?.id || '',
+              sermonId: sermonId,
+              editedContent: editUserSermonNotes,
+            }
+          );
+          if (status === 200) {
+            setUserSermonNotes(data);
+          }
+        } catch (error) {
+          console.log(error);
+          getUserSermonNotes();
+        }
+      }
+    } finally {
       setIsSubmitting(false);
-      return;
     }
-    if (userSermonNotes) {
-      try {
-        const { data, status } = await axios.put(
-          '/api/user-sermon-notes/update',
-          {
-            userId: user?.id || '',
-            sermonId: sermonId,
-            editedContent: editUserSermonNotes,
-          }
-        );
-        if (status === 200) {
-          setUserSermonNotes(data);
-          toast({
-            title: 'Sermon Notes Saved',
-            status: 'success',
-            duration: 2000,
-            isClosable: true,
-          });
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      try {
-        const { data, status } = await axios.post(
-          '/api/user-sermon-notes/create',
-          {
-            userId: user?.id || '',
-            sermonId: sermonId,
-            editedContent: editUserSermonNotes,
-          }
-        );
-        if (status === 200) {
-          setUserSermonNotes(data);
-        }
-      } catch (error) {
-        console.log(error);
-        getUserSermonNotes();
-      }
-    }
-    setIsSubmitting(false);
   }, [
+    isSubmitting,
     user?.id,
     sermonId,
     editUserSermonNotes,
@@ -167,6 +171,8 @@ const SermonNotesContainer = (props) => {
   };
 
   const emailSermonNote = async (email) => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     try {
       const { data, status } = await axios.post(
         '/api/email-user-sermon-notes',
@@ -185,6 +191,8 @@ const SermonNotesContainer = (props) => {
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -241,7 +249,7 @@ const SermonNotesContainer = (props) => {
     const isEditUserSermonNotesExist =
       editUserSermonNotes && editUserSermonNotes.content;
     // We are passing the notes manually like this, in the event we need to edit the notes mid sermon.
-    // User notes would still be properly refelcted
+    // User notes would still be properly reflected
     if (isUserSermonNotesExist || isEditUserSermonNotesExist) {
       const currentUserNotes = isEditUserSermonNotesExist
         ? editUserSermonNotes
