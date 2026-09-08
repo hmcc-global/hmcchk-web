@@ -1,6 +1,6 @@
 import './styles.scss';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, forwardRef, useImperativeHandle } from 'react';
 import Highlight from '@tiptap/extension-highlight';
 import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
@@ -14,78 +14,63 @@ import { TextContext, LastUpdatedPosContext } from './index.js';
 import { FillInBlankNode } from './FillInBlank.js';
 import { FontSize } from './FontSizeExtension.js';
 
-const TiptapOutput = ({
-  input,
-  textPassage,
-  setUserSermonNotes,
-  setHtmlUserNotes,
-}) => {
-  const [lastUpdatedPos, setLastUpdatedPos] = useState(null);
-  const editor = useEditor({
-    editable: false,
-    content: input,
-    extensions: [
-      StarterKit,
-      Highlight,
-      TaskList,
-      TaskItem,
-      Link,
-      BibleVerseNode,
-      UserNotesNode,
-      FillInBlankNode,
-      FontSize,
-      TextStyle,
-    ],
-    onCreate: ({ editor }) => {
-      const setEmailNotes = () => {
-        setHtmlUserNotes(editor.getHTML());
-      };
+const TiptapOutput = forwardRef(
+  ({ input, textPassage, setUserSermonNotes }, ref) => {
+    const [lastUpdatedPos, setLastUpdatedPos] = useState(null);
+    const editor = useEditor({
+      editable: false,
+      content: input,
+      extensions: [
+        StarterKit,
+        Highlight,
+        TaskList,
+        TaskItem,
+        Link,
+        BibleVerseNode,
+        UserNotesNode,
+        FillInBlankNode,
+        FontSize,
+        TextStyle,
+      ],
+    });
 
-      setEmailNotes();
-    },
-  });
+    useImperativeHandle(
+      ref,
+      () => ({
+        getHTML: () => (editor ? editor.getHTML() : null),
+      }),
+      [editor]
+    );
 
-  useEffect(() => {
-    if (editor) {
-      editor.commands.focus();
-      const setEmailNotes = () => {
-        setHtmlUserNotes(editor.getHTML());
-        console.log(editor.getHTML());
-      };
+    useEffect(() => {
+      if (editor) {
+        editor.commands.focus();
+      }
+    }, [editor]);
 
-      editor.on('create', setEmailNotes);
-      editor.on('create', () => {
-        console.log('Create event triggered');
-      });
+    useEffect(() => {
+      if (editor && lastUpdatedPos !== null) {
+        const setNotes = () => {
+          setUserSermonNotes(editor.getJSON());
+        };
+        editor.on('transaction', setNotes);
 
-      return () => {
-        editor.off('create', setEmailNotes);
-      };
-    }
-  }, [editor, setHtmlUserNotes]);
+        return () => {
+          editor.off('transaction', setNotes);
+        };
+      }
+    }, [editor, lastUpdatedPos, setUserSermonNotes]);
 
-  useEffect(() => {
-    if (editor && lastUpdatedPos !== null) {
-      const setNotes = () => {
-        setUserSermonNotes(editor.getJSON());
-        setHtmlUserNotes(editor.getHTML());
-      };
-      editor.on('transaction', setNotes);
-
-      return () => {
-        editor.off('transaction', setNotes);
-      };
-    }
-  }, [editor, lastUpdatedPos, setUserSermonNotes, setHtmlUserNotes]);
-  return (
-    <LastUpdatedPosContext.Provider
-      value={{ lastUpdatedPos, setLastUpdatedPos }}
-    >
-      <TextContext.Provider value={textPassage}>
-        <EditorContent editor={editor} />
-      </TextContext.Provider>
-    </LastUpdatedPosContext.Provider>
-  );
-};
+    return (
+      <LastUpdatedPosContext.Provider
+        value={{ lastUpdatedPos, setLastUpdatedPos }}
+      >
+        <TextContext.Provider value={textPassage}>
+          <EditorContent editor={editor} />
+        </TextContext.Provider>
+      </LastUpdatedPosContext.Provider>
+    );
+  }
+);
 
 export default TiptapOutput;

@@ -9,7 +9,7 @@ import {
   Icon,
 } from 'components';
 import { customAxios as axios } from 'utils/customAxios';
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useDebounce } from 'react-use';
 import { MdSave } from 'react-icons/md';
 import { FaPaperPlane } from 'react-icons/fa';
@@ -27,10 +27,11 @@ const SermonNotesContainer = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingExistingNotes, setIsLoadingExistingNotes] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isEmailing, setIsEmailing] = useState(false);
   // In General, userSermonNotes comes from db, editUserSermonNotes comes from localStorage
   const [userSermonNotes, setUserSermonNotes] = useState();
-  const [htmlUserSermonNotes, setHtmlUserNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
+  const tipTapRef = useRef(null);
   const toast = useToast();
 
   const todayId = DateTime.fromISO(new Date().toISOString()).toFormat(
@@ -156,6 +157,16 @@ const SermonNotesContainer = (props) => {
   };
 
   const emailCheck = async () => {
+    const html = tipTapRef.current?.getHTML();
+    if (!html) {
+      toast({
+        title: 'Notes still loading',
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      });
+      return;
+    }
     let email = user?.email || window.prompt('Input Email Address');
     if (!email) return;
 
@@ -168,18 +179,18 @@ const SermonNotesContainer = (props) => {
       });
       return;
     }
-    await emailSermonNote(email);
+    await emailSermonNote(email, html);
   };
 
-  const emailSermonNote = async (email) => {
-    if (isSubmitting) return;
-    setIsSubmitting(true);
+  const emailSermonNote = async (email, html) => {
+    if (isEmailing) return;
+    setIsEmailing(true);
     try {
       const { data, status } = await axios.post(
         '/api/email-user-sermon-notes',
         {
           email: email,
-          sermonNoteData: preprocessUserNotesAttribute(htmlUserSermonNotes),
+          sermonNoteData: preprocessUserNotesAttribute(html),
         }
       );
       if (status === 200) {
@@ -193,7 +204,7 @@ const SermonNotesContainer = (props) => {
     } catch (err) {
       console.log(err);
     } finally {
-      setIsSubmitting(false);
+      setIsEmailing(false);
     }
   };
 
@@ -331,10 +342,10 @@ const SermonNotesContainer = (props) => {
               ) : (
                 <Container>
                   <TiptapOutput
+                    ref={tipTapRef}
                     input={originalContentWithUserNotes}
                     textPassage={sermonNotes.passage}
                     setUserSermonNotes={setEditUserSermonNotes}
-                    setHtmlUserNotes={setHtmlUserNotes}
                   />
                 </Container>
               )}
@@ -357,7 +368,6 @@ const SermonNotesContainer = (props) => {
                     px={5}
                     boxShadow="md"
                     leftIcon={<Icon as={MdSave} />}
-                    aria-label="Save Notes"
                     _hover={{ bgColor: ACTION_BTN_HOVER }}
                     onClick={updateUserSermonNotes}
                   >
@@ -365,7 +375,8 @@ const SermonNotesContainer = (props) => {
                   </Button>
                 )}
                 <Button
-                  isLoading={isSubmitting}
+                  isLoading={isEmailing}
+                  isDisabled={isLoadingExistingNotes}
                   bgColor={ACTION_BTN_BG}
                   color="white"
                   borderRadius={20}
