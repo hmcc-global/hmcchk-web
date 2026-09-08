@@ -75,7 +75,7 @@ const SermonNotesContainer = (props) => {
     try {
       const { data, status } = await axios.get('/api/user-sermon-notes/get', {
         params: {
-          userId: user?.id || '',
+          userId: user.id,
           sermonId: sermonId,
         },
       });
@@ -103,7 +103,7 @@ const SermonNotesContainer = (props) => {
           const { data, status } = await axios.put(
             '/api/user-sermon-notes/update',
             {
-              userId: user?.id || '',
+              userId: user.id,
               sermonId: sermonId,
               editedContent: editUserSermonNotes,
             }
@@ -125,7 +125,7 @@ const SermonNotesContainer = (props) => {
           const { data, status } = await axios.post(
             '/api/user-sermon-notes/create',
             {
-              userId: user?.id || '',
+              userId: user.id,
               sermonId: sermonId,
               editedContent: editUserSermonNotes,
             }
@@ -167,7 +167,7 @@ const SermonNotesContainer = (props) => {
       });
       return;
     }
-    let email = user?.email || window.prompt('Input Email Address');
+    const email = user?.email || window.prompt('Input Email Address');
     if (!email) return;
 
     if (!isValidEmail(email)) {
@@ -186,13 +186,10 @@ const SermonNotesContainer = (props) => {
     if (isEmailing) return;
     setIsEmailing(true);
     try {
-      const { status } = await axios.post(
-        '/api/email-user-sermon-notes',
-        {
-          email: email,
-          sermonNoteData: preprocessUserNotesAttribute(html),
-        }
-      );
+      const { status } = await axios.post('/api/email-user-sermon-notes', {
+        email: email,
+        sermonNoteData: preprocessUserNotesAttribute(html),
+      });
       if (status === 200) {
         toast({
           title: 'Emailed Sermon Note',
@@ -203,6 +200,28 @@ const SermonNotesContainer = (props) => {
       }
     } catch (err) {
       console.log(err);
+      // Map server 429 bodies to user-facing toasts (guest pool vs other caps).
+      const status = err.response?.status;
+      const raw = err.response?.data;
+      const body =
+        typeof raw === 'string'
+          ? raw
+          : raw?.message || raw?.problems?.join?.(' ') || '';
+      const bodyText = String(body);
+
+      let title = 'Failed to email sermon notes';
+      if (status === 429 && bodyText.includes('Log in')) {
+        title = 'Too many guest emails. Log in to keep using email.';
+      } else if (status === 429 || bodyText.includes('Too many')) {
+        title = 'Too many emails. Try again in 15 minutes.';
+      }
+
+      toast({
+        title,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
     } finally {
       setIsEmailing(false);
     }
@@ -363,6 +382,7 @@ const SermonNotesContainer = (props) => {
                 {user?.id && (
                   <Button
                     isLoading={isSubmitting}
+                    isDisabled={isLoadingExistingNotes}
                     bgColor={ACTION_BTN_BG}
                     color="white"
                     borderRadius={20}
