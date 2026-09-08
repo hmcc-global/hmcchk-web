@@ -268,7 +268,7 @@ const SermonNotesContainer = (props) => {
         JSON.stringify(editUserSermonNotes)
       );
     },
-    1000,
+    0,
     [editUserSermonNotes]
   );
 
