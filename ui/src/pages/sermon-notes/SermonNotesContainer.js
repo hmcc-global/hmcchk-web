@@ -155,6 +155,12 @@ const SermonNotesContainer = (props) => {
     return emailAddress.test(email);
   };
 
+  const preprocessUserNotesAttribute = (htmlString) => {
+    if (!htmlString) return htmlString;
+
+    return htmlString.replace(/&lt;br&gt;/g, '<br>');
+  };
+
   const emailCheck = async () => {
     // Snapshot TipTap HTML now — email template needs HTML; Save uses JSON separately.
     const html = tipTapRef.current?.getHTML();
@@ -235,12 +241,6 @@ const SermonNotesContainer = (props) => {
     });
   }, [sermonNotes]);
 
-  const preprocessUserNotesAttribute = (htmlString) => {
-    if (!htmlString) return htmlString;
-
-    return htmlString.replace(/&lt;br&gt;/g, '<br>');
-  };
-
   useEffect(() => {
     if (sermonId) {
       getSermonNotesParent();
@@ -268,7 +268,7 @@ const SermonNotesContainer = (props) => {
         JSON.stringify(editUserSermonNotes)
       );
     },
-    0,
+    1000,
     [editUserSermonNotes]
   );
 
