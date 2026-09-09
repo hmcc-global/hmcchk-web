@@ -6,8 +6,6 @@ const UPLOAD_URL_EXPIRY_SECONDS = 15 * 60;
 const CACHE_CONTROL = 'public, max-age=31536000, immutable';
 const MB = 1024 * 1024;
 
-const ALLOWED_FOLDERS = ['announcements', 'popups', 'testimonies', 'sermons'];
-
 const MAX_BYTES_BY_CONTENT_TYPE = {
   'image/png': 25 * MB,
   'image/jpeg': 25 * MB,
@@ -21,7 +19,7 @@ const toSafeFileName = (fileName) =>
   fileName
     .toLowerCase()
     .replace(/[^a-z0-9._-]+/g, '-')
-    .replace(/^-+|-+$/g, '');
+    .replace(/^-+|-+$/g, '') || 'file';
 
 module.exports = {
   friendlyName: 'Presign R2 upload',
@@ -47,13 +45,16 @@ module.exports = {
     folder: {
       type: 'string',
       required: true,
-      isIn: ALLOWED_FOLDERS,
     },
   },
 
   exits: {
     success: {
       description: '{ uploadUrl, key, publicUrl, cacheControl }',
+    },
+    invalidFolder: {
+      description:
+        'folder is not in sails.config.custom.permissions.r2UploadFolders',
     },
     fileTooLarge: {
       description: 'fileSize exceeds the limit for this content type',
@@ -65,6 +66,10 @@ module.exports = {
 
     if (!R2_BUCKET || !R2_PUBLIC_BASE_URL) {
       throw new Error('R2_BUCKET and R2_PUBLIC_BASE_URL must be set');
+    }
+
+    if (!sails.config.custom.permissions.r2UploadFolders[folder]) {
+      return exits.invalidFolder();
     }
 
     const maxBytes = MAX_BYTES_BY_CONTENT_TYPE[contentType];

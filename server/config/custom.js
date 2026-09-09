@@ -94,5 +94,11 @@ module.exports.custom = {
 
   permissions: {
     viewPaymentData: ['admin', 'stewardship'],
+    r2UploadFolders: {
+      announcements: ['ministry', 'tc', 't3ch', 'admin', 'stewardship'],
+      popups: ['t3ch', 'admin', 'stewardship'],
+      testimonies: ['t3ch', 'admin', 'stewardship'],
+      sermons: ['t3ch', 'admin', 'stewardship'],
+    },
   },
 };

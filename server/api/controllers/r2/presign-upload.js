@@ -30,12 +30,26 @@ module.exports = {
       responseType: 'badRequest',
       description: 'Unsupported folder or content type, or file too large',
     },
+    forbidden: {
+      responseType: 'forbidden',
+      description: 'User access type may not upload to this folder',
+    },
     error: {
       description: 'Error',
     },
   },
 
   fn: async function (inputs, exits) {
+    const allowedAccessTypes =
+      sails.config.custom.permissions.r2UploadFolders[inputs.folder];
+
+    if (!allowedAccessTypes) {
+      return exits.badRequest(`Unsupported folder: ${inputs.folder}`);
+    }
+    if (!allowedAccessTypes.includes(this.req.user.accessType)) {
+      return exits.forbidden();
+    }
+
     try {
       const result = await sails.helpers.r2.presignUpload.with(inputs);
       return exits.success(result);
