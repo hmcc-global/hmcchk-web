@@ -41,18 +41,14 @@ module.exports = {
       }
 
       // A user can have ClassTrackingData from older seasons of the
-      // same reused form, so fetch the most recent data for the current season only
-      const latestClassDataByFormId = new Map();
-      for (const classData of classDataList) {
-        if (!latestClassDataByFormId.has(classData.formId)) {
-          latestClassDataByFormId.set(classData.formId, classData);
-        }
-      }
-      const formIds = [...latestClassDataByFormId.keys()];
+      // same reused form, so only records that fall within the form's current
+      // season window should count, then keep the most recent one per formId
+      const formIds = [...new Set(classDataList.map((cd) => cd.formId))];
 
       // 2. Get all forms that are class forms based on classTrackingData
       const forms = await Form.find({
         id: formIds,
+        isPublished: true,
         isClass: true,
         isDeleted: false,
       });
@@ -62,7 +58,8 @@ module.exports = {
       const now = DateTime.now();
       const results = [];
 
-      // 2. For each class form, check if current season and load ClassTrackingData
+      // 3. For each class form, check the current season window, then pick the
+      // latest ClassTrackingData whose createdAt falls inside that window
       for (const form of forms) {
         const rawClassStartTime = form.classTrackingTemplate?.classStartTime;
         const classStartTime = rawClassStartTime
@@ -74,21 +71,23 @@ module.exports = {
           ? DateTime.fromJSDate(new Date(rawClassEndingTime))
           : DateTime.invalid('missing classEndingTime');
 
+        // Skip forms whose season window does not cover the current moment
         if (!isCurrentSeason(now, classStartTime, classEndingTime)) continue;
 
-        const latestClassData = latestClassDataByFormId.get(form.id);
-        if (!latestClassData) continue;
-
-        const createdAt = DateTime.fromJSDate(
-          new Date(latestClassData.createdAt)
+        // classDataList is sorted createdAt DESC, so the first in-window record
+        // encountered for a formId is the most recent one. Filtering before
+        // deduping avoids dropping a valid in-window record that an older
+        // season's newer record would otherwise shadow.
+        const latestClassData = classDataList.find(
+          (classData) =>
+            classData.formId === form.id &&
+            isCurrentSeason(
+              DateTime.fromJSDate(new Date(classData.createdAt)),
+              classStartTime,
+              classEndingTime
+            )
         );
-        const afterStart = classStartTime.isValid
-          ? createdAt >= classStartTime
-          : true;
-        const beforeEnd = classEndingTime.isValid
-          ? createdAt <= classEndingTime
-          : true;
-        if (!afterStart || !beforeEnd) continue;
+        if (!latestClassData) continue;
 
         results.push({
           formId: form.id,
