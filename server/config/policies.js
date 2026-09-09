@@ -97,7 +97,6 @@ module.exports.policies = {
 
   // R2 object storage
   'r2/presign-upload': ['isLoggedIn', 'aboveMinistry'],
-  'r2/presign-download': true,
 
   // Misc
   'misc/get-env': true,

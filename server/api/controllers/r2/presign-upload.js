@@ -12,30 +12,37 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    fileSize: {
+      type: 'number',
+      required: true,
+    },
     folder: {
       type: 'string',
-      required: false,
+      required: true,
     },
   },
 
   exits: {
     success: {
-      description: '{ uploadUrl, key, publicUrl }',
+      description: '{ uploadUrl, key, publicUrl, cacheControl }',
+    },
+    badRequest: {
+      responseType: 'badRequest',
+      description: 'Unsupported folder or content type, or file too large',
     },
     error: {
       description: 'Error',
     },
   },
 
-  fn: async function ({ fileName, contentType, folder }, exits) {
+  fn: async function (inputs, exits) {
     try {
-      const result = await sails.helpers.r2.presignUpload.with({
-        fileName,
-        contentType,
-        folder,
-      });
+      const result = await sails.helpers.r2.presignUpload.with(inputs);
       return exits.success(result);
     } catch (err) {
+      if (err.exit === 'fileTooLarge' || err.code === 'E_INVALID_ARGINS') {
+        return exits.badRequest(err.raw || err.message);
+      }
       sails.log(err);
       return exits.error(err);
     }

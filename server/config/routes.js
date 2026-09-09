@@ -89,7 +89,6 @@ module.exports.routes = {
 
   // R2 object storage APIs
   'post /api/r2/presign-upload': 'r2/presign-upload',
-  'get /api/r2/presign-download': 'r2/presign-download',
 
   // Auth APIs
   'post /api/auth/login': 'auth/post-login',
