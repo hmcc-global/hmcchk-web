@@ -208,6 +208,9 @@ const AnnouncementEditorModal = (props) => {
   };
 
   const onSubmitEditor = async (e) => {
+    if (isImageUploading) {
+      return;
+    }
     try {
       const announcementToSave = {
         title,
@@ -514,7 +517,6 @@ const AnnouncementEditorModal = (props) => {
                     />
                   </FormControl>
                   <R2FileUpload
-                    id="imageAdUrl"
                     name="imageAdUrl"
                     acceptedFileTypes="image/*"
                     folder="announcements"

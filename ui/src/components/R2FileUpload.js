@@ -59,6 +59,7 @@ const R2FileUpload = (props) => {
     }
 
     const result = await upload(file);
+    inputRef.current.value = '';
     if (result) {
       applyUrl(result.publicUrl);
     }
@@ -80,6 +81,7 @@ const R2FileUpload = (props) => {
             accept={acceptedFileTypes}
             name={name}
             ref={inputRef}
+            disabled={isUploading}
             {...inputProps}
             style={{ display: 'none' }}
           />
@@ -101,7 +103,9 @@ const R2FileUpload = (props) => {
         {isUploading && (
           <Progress colorScheme="blue" value={progress} min="0" max="100" />
         )}
-        <FormErrorMessage>{error || invalid}</FormErrorMessage>
+        <FormErrorMessage>
+          {error || (invalid && 'This field is required')}
+        </FormErrorMessage>
       </FormControl>
     </Stack>
   );
