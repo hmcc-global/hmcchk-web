@@ -31,7 +31,7 @@ import {
   Select,
 } from 'components';
 import { eventIntervalList, eventTypeList } from 'utils/lists';
-import FileUpload from 'components/FileUpload';
+import R2FileUpload from 'components/R2FileUpload';
 import { CUIAutoComplete } from 'chakra-ui-autocomplete';
 
 // eventType drifted across old records: many are missing/null, and CUIAutoComplete
@@ -512,17 +512,18 @@ const AnnouncementEditorModal = (props) => {
                       onChange={(e) => setLocation(e.target.value)}
                     />
                   </FormControl>
-                  <FileUpload
+                  <R2FileUpload
                     id="imageAdUrl"
                     name="imageAdUrl"
                     acceptedFileTypes="image/*"
+                    folder="announcements"
                     setImageUrl={setImageAdUrl}
                     inputValue={imageAdUrl}
                     control={control}
                     onChange={(e) => setImageAdUrl(e.target.value)}
                   >
                     Upload Announcements Image
-                  </FileUpload>
+                  </R2FileUpload>
                   <FormControl>
                     <FormLabel>Announcements Sign-up link</FormLabel>
                     <Input
