@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import {
   Button,
   FormControl,
@@ -23,11 +23,12 @@ const R2FileUpload = (props) => {
     isRequired = false,
     setImageUrl,
     inputValue,
-    folder = 'uploads',
+    folder,
+    onUploadingChange,
   } = props;
 
   const inputRef = useRef();
-  const { upload, isUploading, progress } = useR2Upload({ folder });
+  const { upload, isUploading, progress, error } = useR2Upload({ folder });
 
   const {
     field: { ref, onChange, value, ...inputProps },
@@ -38,7 +39,18 @@ const R2FileUpload = (props) => {
     rules: { required: isRequired },
   });
 
-  const handleTextChange = (event) => setImageUrl(event.target.value);
+  useEffect(() => {
+    if (onUploadingChange) {
+      onUploadingChange(isUploading);
+    }
+  }, [isUploading, onUploadingChange]);
+
+  const applyUrl = (url) => {
+    setImageUrl(url);
+    onChange(url);
+  };
+
+  const handleTextChange = (event) => applyUrl(event.target.value);
 
   const handleFileChange = async () => {
     const file = inputRef.current.files[0];
@@ -48,17 +60,21 @@ const R2FileUpload = (props) => {
 
     const result = await upload(file);
     if (result) {
-      setImageUrl(result.publicUrl);
+      applyUrl(result.publicUrl);
     }
   };
 
   return (
     <Stack direction={['row']} align={'end'}>
-      <FormControl isInvalid={invalid} isRequired>
+      <FormControl
+        isInvalid={invalid || Boolean(error)}
+        isRequired={isRequired}
+      >
         <FormLabel htmlFor={name}>{children}</FormLabel>
 
         <InputGroup>
           <input
+            id={name}
             type="file"
             onChange={handleFileChange}
             accept={acceptedFileTypes}
@@ -85,7 +101,7 @@ const R2FileUpload = (props) => {
         {isUploading && (
           <Progress colorScheme="blue" value={progress} min="0" max="100" />
         )}
-        <FormErrorMessage>{invalid}</FormErrorMessage>
+        <FormErrorMessage>{error || invalid}</FormErrorMessage>
       </FormControl>
     </Stack>
   );
