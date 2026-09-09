@@ -3,47 +3,52 @@ import {
   Box,
   Text,
   VStack,
+  HStack,
   Button,
   useToast,
+  Icon,
 } from 'components';
 import { customAxios as axios } from 'utils/customAxios';
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useDebounce } from 'react-use';
+import { MdSave } from 'react-icons/md';
+import { FaPaperPlane } from 'react-icons/fa';
 import TiptapOutput from 'components/TipTap/TiptapOutput';
 import { DateTime } from 'luxon';
-import {
-  getAllUserSermonNotes,
-  deepUpdateUserNotes,
-} from 'utils/SermonNotes';
+import { getAllUserSermonNotes, deepUpdateUserNotes } from 'utils/SermonNotes';
+
+const ACTION_BTN_BG = '#526de3';
+const ACTION_BTN_HOVER = '#4459c4';
+const GUEST_HINT_TEXT = '#B2BEB5';
 
 const SermonNotesContainer = (props) => {
-  const { user, history, sermonNoteId } = props;
+  const { user, sermonNoteId } = props;
   const [sermonNotes, setSermonNotes] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingExistingNotes, setIsLoadingExistingNotes] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isEmailing, setIsEmailing] = useState(false);
   // In General, userSermonNotes comes from db, editUserSermonNotes comes from localStorage
   const [userSermonNotes, setUserSermonNotes] = useState();
-  const [htmlUserSermonNotes, setHtmlUserNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
-  const [heightAboveTitle, setHeightAboveTitle] = useState(false);
+  // TipTap exposes getHTML() via this ref; Email reads it at click time (not mirrored state).
+  const tipTapRef = useRef(null);
   const toast = useToast();
 
-  const todayId = DateTime.fromISO(new Date().toISOString()).toFormat(
-    'ddMMyyyy'
-  );
+  const todayId = DateTime.now().toFormat('ddMMyyyy');
 
-  const fallbackSermonId = props &&  props.match && props.match.params.id;
+  const fallbackSermonId = props && props.match && props.match.params.id;
 
-  const sermonId = 
-    sermonNoteId === 'online'
-      ? `sn-${todayId}-1`
-      : sermonNoteId == null
-        ? fallbackSermonId
-        : sermonNoteId;
+  let sermonId;
+  if (sermonNoteId === 'online') {
+    sermonId = `sn-${todayId}-1`;
+  } else if (sermonNoteId == null) {
+    sermonId = fallbackSermonId;
+  } else {
+    sermonId = sermonNoteId;
+  }
 
   const getSermonNotesParent = useCallback(async () => {
-
     try {
       setIsLoading(true);
       const { data, status } = await axios.get('/api/sermon-notes-parent/get', {
@@ -70,7 +75,7 @@ const SermonNotesContainer = (props) => {
     try {
       const { data, status } = await axios.get('/api/user-sermon-notes/get', {
         params: {
-          userId: user?.id || '',
+          userId: user.id,
           sermonId: sermonId,
         },
       });
@@ -83,59 +88,61 @@ const SermonNotesContainer = (props) => {
     setIsLoadingExistingNotes(false);
   }, [user, sermonId]);
 
-  // send update to the localstorage 1 seconds after the user stops typing
+  // save updates to local storage as user types
   // send update to db when user click save
   const updateUserSermonNotes = useCallback(async () => {
+    if (isSubmitting) return;
     if (document.activeElement) {
       document.activeElement.blur();
     }
+    if (!user?.id) return;
     setIsSubmitting(true);
-    if (!user?.id) {
+    try {
+      if (userSermonNotes) {
+        try {
+          const { data, status } = await axios.put(
+            '/api/user-sermon-notes/update',
+            {
+              userId: user.id,
+              sermonId: sermonId,
+              editedContent: editUserSermonNotes,
+            }
+          );
+          if (status === 200) {
+            setUserSermonNotes(data);
+            toast({
+              title: 'Sermon Notes Saved',
+              status: 'success',
+              duration: 2000,
+              isClosable: true,
+            });
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        try {
+          const { data, status } = await axios.post(
+            '/api/user-sermon-notes/create',
+            {
+              userId: user.id,
+              sermonId: sermonId,
+              editedContent: editUserSermonNotes,
+            }
+          );
+          if (status === 200) {
+            setUserSermonNotes(data);
+          }
+        } catch (error) {
+          console.log(error);
+          getUserSermonNotes();
+        }
+      }
+    } finally {
       setIsSubmitting(false);
-      return;
     }
-    if (userSermonNotes) {
-      try {
-        const { data, status } = await axios.put(
-          '/api/user-sermon-notes/update',
-          {
-            userId: user?.id || '',
-            sermonId: sermonId,
-            editedContent: editUserSermonNotes,
-          }
-        );
-        if (status === 200) {
-          setUserSermonNotes(data);
-          toast({
-            title: 'Sermon Notes Saved',
-            status: 'success',
-            duration: 2000,
-            isClosable: true,
-          });
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      try {
-        const { data, status } = await axios.post(
-          '/api/user-sermon-notes/create',
-          {
-            userId: user?.id || '',
-            sermonId: sermonId,
-            editedContent: editUserSermonNotes,
-          }
-        );
-        if (status === 200) {
-          setUserSermonNotes(data);
-        }
-      } catch (error) {
-        console.log(error);
-        getUserSermonNotes();
-      }
-    }
-    setIsSubmitting(false);
   }, [
+    isSubmitting,
     user?.id,
     sermonId,
     editUserSermonNotes,
@@ -148,10 +155,28 @@ const SermonNotesContainer = (props) => {
     return emailAddress.test(email);
   };
 
-  const emailCheck = async () => {
-    let email = user.email || window.prompt('Input Email Address');
+  const preprocessUserNotesAttribute = (htmlString) => {
+    if (!htmlString) return htmlString;
 
-    if (email && !isValidEmail(email)) {
+    return htmlString.replace(/&lt;br&gt;/g, '<br>');
+  };
+
+  const emailCheck = async () => {
+    // Snapshot TipTap HTML now — email template needs HTML; Save uses JSON separately.
+    const html = tipTapRef.current?.getHTML();
+    if (!html) {
+      toast({
+        title: 'Notes still loading',
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      });
+      return;
+    }
+    const email = user?.email || window.prompt('Input Email Address');
+    if (!email) return;
+
+    if (!isValidEmail(email)) {
       toast({
         title: 'Error in Email Address',
         status: 'error',
@@ -160,18 +185,17 @@ const SermonNotesContainer = (props) => {
       });
       return;
     }
-    await emailSermonNote(email);
+    await emailSermonNote(email, html);
   };
 
-  const emailSermonNote = async (email) => {
+  const emailSermonNote = async (email, html) => {
+    if (isEmailing) return;
+    setIsEmailing(true);
     try {
-      const { data, status } = await axios.post(
-        '/api/email-user-sermon-notes',
-        {
-          email: email,
-          sermonNoteData: preprocessUserNotesAttribute(htmlUserSermonNotes),
-        }
-      );
+      const { status } = await axios.post('/api/email-user-sermon-notes', {
+        email: email,
+        sermonNoteData: preprocessUserNotesAttribute(html),
+      });
       if (status === 200) {
         toast({
           title: 'Emailed Sermon Note',
@@ -182,6 +206,30 @@ const SermonNotesContainer = (props) => {
       }
     } catch (err) {
       console.log(err);
+      // Map server 429 bodies to user-facing toasts (guest pool vs other caps).
+      const status = err.response?.status;
+      const raw = err.response?.data;
+      const body =
+        typeof raw === 'string'
+          ? raw
+          : raw?.message || raw?.problems?.join?.(' ') || '';
+      const bodyText = String(body);
+
+      let title = 'Failed to email sermon notes';
+      if (status === 429 && bodyText.includes('Log in')) {
+        title = 'Too many guest emails. Log in to keep using email.';
+      } else if (status === 429 || bodyText.includes('Too many')) {
+        title = 'Too many emails. Try again in 15 minutes.';
+      }
+
+      toast({
+        title,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setIsEmailing(false);
     }
   };
 
@@ -193,40 +241,12 @@ const SermonNotesContainer = (props) => {
     });
   }, [sermonNotes]);
 
-  const preprocessUserNotesAttribute = (htmlString) => {
-    if (!htmlString) return htmlString;
-
-    return htmlString.replace(/&lt;br&gt;/g, '<br>');
-  };
-
   useEffect(() => {
     if (sermonId) {
       getSermonNotesParent();
       getUserSermonNotes();
     }
   }, [sermonId, getSermonNotesParent, getUserSermonNotes]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerHeight * 0.32 < window.scrollY) {
-        setHeightAboveTitle(true);
-      } else {
-        setHeightAboveTitle(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerHeight * 0.32 < window.scrollY) {
-        setHeightAboveTitle(true);
-      } else {
-        setHeightAboveTitle(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     if (sermonId) {
@@ -260,7 +280,7 @@ const SermonNotesContainer = (props) => {
     const isEditUserSermonNotesExist =
       editUserSermonNotes && editUserSermonNotes.content;
     // We are passing the notes manually like this, in the event we need to edit the notes mid sermon.
-    // User notes would still be properly refelcted
+    // User notes would still be properly reflected
     if (isUserSermonNotesExist || isEditUserSermonNotesExist) {
       const currentUserNotes = isEditUserSermonNotesExist
         ? editUserSermonNotes
@@ -327,67 +347,70 @@ const SermonNotesContainer = (props) => {
             </Box>
 
             <Container my={[4, 8]} width="100%">
-              <Container
+              <Text
+                fontStyle="italic"
+                textColor={GUEST_HINT_TEXT}
+                display={!user?.id ? 'block' : 'none'}
                 mb="3"
-                zIndex={3}
-                pos={!user?.id ? 'relative' : 'sticky'}
               >
-                <Text
-                  fontStyle="italic"
-                  textColor="#B2BEB5"
-                  display={!user?.id ? 'block' : 'none'}
-                >
-                  Please log into your HMCC account to get the save notes
-                  feature.
-                </Text>
-                <Container
-                  pos={heightAboveTitle ? 'fixed' : 'relative'}
-                  top={heightAboveTitle ? '10vh' : '0'}
-                  display="flex"
-                  flexDir="row"
-                  w="100%"
-                  m="auto"
-                  left={0}
-                  right={0}
-                  justifyContent="space-around"
-                  zIndex={2}
-                >
-                  <Button
-                    display={!user?.id ? 'none' : 'sticky'}
-                    width="45%"
-                    isLoading={isSubmitting}
-                    colorScheme="teal"
-                    onClick={updateUserSermonNotes}
-                    zIndex={3}
-                  >
-                    Save Notes
-                  </Button>
-                  <Button
-                    pos="sticky"
-                    display={!user?.id ? 'none' : 'sticky'}
-                    width="45%"
-                    isLoading={isSubmitting}
-                    colorScheme="teal"
-                    onClick={emailCheck}
-                    zIndex={3}
-                  >
-                    Email
-                  </Button>
-                </Container>
-              </Container>
+                Please log into your HMCC account to save notes. You can still
+                email notes to yourself without an account.
+              </Text>
 
               {isLoadingExistingNotes ? (
                 <Text>Loading</Text>
               ) : (
                 <Container>
                   <TiptapOutput
+                    ref={tipTapRef}
                     input={originalContentWithUserNotes}
                     textPassage={sermonNotes.passage}
                     setUserSermonNotes={setEditUserSermonNotes}
-                    setHtmlUserNotes={setHtmlUserNotes}
                   />
                 </Container>
               )}
+
+              <HStack
+                position="sticky"
+                bottom={{ base: '2rem', md: '1.25rem' }}
+                justify="flex-end"
+                spacing={2}
+                mt={4}
+                mb={{ base: '2rem', md: 0 }}
+                zIndex={10}
+              >
+                {user?.id && (
+                  <Button
+                    isLoading={isSubmitting}
+                    isDisabled={isLoadingExistingNotes}
+                    bgColor={ACTION_BTN_BG}
+                    color="white"
+                    borderRadius={20}
+                    px={5}
+                    boxShadow="md"
+                    leftIcon={<Icon as={MdSave} />}
+                    textTransform="uppercase"
+                    _hover={{ bgColor: ACTION_BTN_HOVER }}
+                    onClick={updateUserSermonNotes}
+                  >
+                    Save
+                  </Button>
+                )}
+                <Button
+                  isLoading={isEmailing}
+                  isDisabled={isLoadingExistingNotes}
+                  bgColor={ACTION_BTN_BG}
+                  color="white"
+                  borderRadius={20}
+                  px={5}
+                  boxShadow="md"
+                  aria-label="Email"
+                  _hover={{ bgColor: ACTION_BTN_HOVER }}
+                  onClick={emailCheck}
+                >
+                  <Icon as={FaPaperPlane} />
+                </Button>
+              </HStack>
             </Container>
           </Container>
         </>
