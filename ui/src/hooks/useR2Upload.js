@@ -59,5 +59,7 @@ export const useR2Upload = ({ folder }) => {
     [folder]
   );
 
-  return { upload, isUploading, progress, error };
+  const clearError = useCallback(() => setError(null), []);
+
+  return { upload, isUploading, progress, error, clearError };
 };

@@ -518,7 +518,7 @@ const AnnouncementEditorModal = (props) => {
                   </FormControl>
                   <R2FileUpload
                     name="imageAdUrl"
-                    acceptedFileTypes="image/*"
+                    acceptedFileTypes="image/png,image/jpeg,image/webp,image/gif"
                     folder="announcements"
                     isRequired
                     setImageUrl={setImageAdUrl}
