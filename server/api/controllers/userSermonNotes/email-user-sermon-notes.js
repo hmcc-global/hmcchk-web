@@ -59,7 +59,7 @@ module.exports = {
             if (user && user.id) {
               userId = user.id;
             }
-          } catch (err) {
+          } catch (unused) {
             // Invalid/expired token → guest quota, not 401.
           }
         }

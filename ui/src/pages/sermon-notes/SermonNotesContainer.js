@@ -88,7 +88,7 @@ const SermonNotesContainer = (props) => {
     setIsLoadingExistingNotes(false);
   }, [user, sermonId]);
 
-  // send update to the localstorage 1 seconds after the user stops typing
+  // save updates to local storage as user types
   // send update to db when user click save
   const updateUserSermonNotes = useCallback(async () => {
     if (isSubmitting) return;
