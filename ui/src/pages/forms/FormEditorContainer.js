@@ -256,6 +256,20 @@ const FormEditorContainer = (props) => {
     [setValue]
   );
 
+  // Class Start Time must not fall before the form opens, otherwise the class
+  // season starts while the form is still closed to signups.
+  const getClassStartTimeError = (startTime, formStart) => {
+    const startDate = DateTime.fromISO(startTime ?? '');
+    if (!startDate.isValid) return null;
+
+    if (!formStart) return null;
+    const formStartDate = DateTime.fromISO(formStart);
+    if (!formStartDate.isValid) return null;
+
+    if (startDate >= formStartDate) return null;
+    return 'Class start time cannot be before the form availability start';
+  };
+
   // Class End Time must not fall before the form availability window ends,
   // otherwise the class season ([formAvailableFrom, classEndingTime]) closes
   // while the form is still accepting signups. Prefer the form end time; fall
@@ -287,6 +301,46 @@ const FormEditorContainer = (props) => {
           title: 'Invalid class setup',
           description:
             'Add at least one course and give every course a name before saving.',
+          status: 'error',
+          duration: 6000,
+          isClosable: true,
+        });
+        return;
+      }
+
+      // Match the display-side isSafeCourseLink check so a link that would
+      // render as plain text never gets saved without admin feedback.
+      const isSafeCourseLink = (courseLink) =>
+        typeof courseLink === 'string' && /^https?:\/\//i.test(courseLink);
+      const invalidCourseLink = courses.find(
+        (course) =>
+          course.courseLink &&
+          typeof course.courseLink === 'string' &&
+          !isSafeCourseLink(course.courseLink)
+      );
+      if (invalidCourseLink) {
+        toast({
+          title: 'Invalid course link',
+          description: `Course link for "${invalidCourseLink.name}" must start with http:// or https://.`,
+          status: 'error',
+          duration: 6000,
+          isClosable: true,
+        });
+        return;
+      }
+
+      const classStartTimeError = getClassStartTimeError(
+        data.classStartTime,
+        data.formAvailableFrom
+      );
+      if (classStartTimeError) {
+        setError('classStartTime', {
+          type: 'manual',
+          message: classStartTimeError,
+        });
+        toast({
+          title: 'Invalid class setup',
+          description: classStartTimeError,
           status: 'error',
           duration: 6000,
           isClosable: true,
@@ -759,8 +813,7 @@ const FormEditorContainer = (props) => {
                                       })}
                                     />
                                     <FormErrorMessage>
-                                      {errors['classStartTime'] &&
-                                        'Class start time is required'}
+                                      {errors['classStartTime']?.message}
                                     </FormErrorMessage>
                                   </Box>
                                   <Box>

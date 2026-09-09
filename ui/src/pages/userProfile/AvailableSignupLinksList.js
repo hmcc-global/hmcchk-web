@@ -35,7 +35,7 @@ const AvailableSignupLinksList = ({ forms }) => {
     <Box>
       {forms.map((item, index) => {
         return (
-          <Fragment key={'fl' + item['formName']}>
+          <Fragment key={item['id']}>
             <Flex
               direction="row"
               align="center"
