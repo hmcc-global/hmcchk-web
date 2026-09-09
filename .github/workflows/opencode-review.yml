@@ -37,7 +37,7 @@ jobs:
         with:
           model: opencode/big-pickle
           prompt: |
-            Review this pull request using the below parameters:
+            Review the commits on this pull request using the below parameters:
             - Check for code quality issues
             - Check for code style adherence
             - Identify potential bugs or logical errors
@@ -47,3 +47,4 @@ jobs:
             - Check for unused imports
 
             Give a summary to explain the overall purpose of the pull request and summarise your findings with actionable suggestions.
+            Also, give a summary list of the commits that you reviewed.
