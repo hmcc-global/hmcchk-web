@@ -31,6 +31,7 @@ module.exports = {
     fileName: {
       type: 'string',
       required: true,
+      maxLength: 255,
     },
     contentType: {
       type: 'string',
@@ -80,9 +81,9 @@ module.exports = {
     const suffix = randomUUID().slice(0, 8);
     const key = `${folder}/${Date.now()}-${suffix}-${toSafeFileName(fileName)}`;
 
-    // The presigner unsigns Content-Type by default; signing it and Content-Length
-    // makes R2 reject a PUT whose type or size differ from what was approved here.
-    // Cache-Control is only stored if the browser sends it, so it is returned too.
+    // The presigner unsigns Content-Type by default; signing it, Content-Length and
+    // Cache-Control makes R2 reject a PUT whose headers differ from what was approved
+    // here, so the browser must send cacheControl back verbatim.
     const uploadUrl = await getSignedUrl(
       sails.helpers.r2.getClient(),
       new PutObjectCommand({
@@ -94,7 +95,11 @@ module.exports = {
       }),
       {
         expiresIn: UPLOAD_URL_EXPIRY_SECONDS,
-        signableHeaders: new Set(['content-type', 'content-length']),
+        signableHeaders: new Set([
+          'cache-control',
+          'content-length',
+          'content-type',
+        ]),
       }
     );
 

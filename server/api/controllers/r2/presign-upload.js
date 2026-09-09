@@ -7,6 +7,7 @@ module.exports = {
     fileName: {
       type: 'string',
       required: true,
+      maxLength: 255,
     },
     contentType: {
       type: 'string',
@@ -43,7 +44,7 @@ module.exports = {
     const allowedAccessTypes =
       sails.config.custom.permissions.r2UploadFolders[inputs.folder];
 
-    if (!allowedAccessTypes) {
+    if (!Array.isArray(allowedAccessTypes)) {
       return exits.badRequest(`Unsupported folder: ${inputs.folder}`);
     }
     if (!allowedAccessTypes.includes(this.req.user.accessType)) {
@@ -52,6 +53,9 @@ module.exports = {
 
     try {
       const result = await sails.helpers.r2.presignUpload.with(inputs);
+      sails.log.info(
+        `R2 upload URL issued to user ${this.req.user.id} for ${result.key}`
+      );
       return exits.success(result);
     } catch (err) {
       if (err.exit === 'fileTooLarge' || err.code === 'E_INVALID_ARGINS') {
