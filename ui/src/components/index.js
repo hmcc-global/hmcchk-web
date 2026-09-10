@@ -132,6 +132,7 @@ export { default as MobileNavBar } from './NavigationBar/MobileNavBar';
 export { default as MainMenu } from './NavigationBar/MainMenu';
 export { default as Card } from './Card';
 export { default as FileUpload } from './FileUpload';
+export { default as R2FileUpload } from './R2FileUpload';
 export { default as LiveButton } from './LiveButton';
 export { default as SermonSeries } from './SermonSeries';
 export { default as Pagination } from './Pagination';
