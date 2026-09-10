@@ -41,13 +41,17 @@ module.exports = {
   },
 
   fn: async function (inputs, exits) {
-    const allowedAccessTypes =
-      sails.config.custom.permissions.r2UploadFolders[inputs.folder];
+    const folderRules = Object.hasOwn(
+      sails.config.custom.permissions.r2UploadFolders,
+      inputs.folder
+    )
+      ? sails.config.custom.permissions.r2UploadFolders[inputs.folder]
+      : undefined;
 
-    if (!Array.isArray(allowedAccessTypes)) {
+    if (!folderRules) {
       return exits.badRequest(`Unsupported folder: ${inputs.folder}`);
     }
-    if (!allowedAccessTypes.includes(this.req.user.accessType)) {
+    if (!folderRules.accessTypes.includes(this.req.user.accessType)) {
       return exits.forbidden();
     }
 
@@ -58,7 +62,11 @@ module.exports = {
       );
       return exits.success(result);
     } catch (err) {
-      if (err.exit === 'fileTooLarge' || err.code === 'E_INVALID_ARGINS') {
+      if (
+        err.exit === 'fileTooLarge' ||
+        err.exit === 'invalidContentType' ||
+        err.code === 'E_INVALID_ARGINS'
+      ) {
         return exits.badRequest(err.raw || err.message);
       }
       sails.log(err);

@@ -57,6 +57,9 @@ module.exports = {
       description:
         'folder is not in sails.config.custom.permissions.r2UploadFolders',
     },
+    invalidContentType: {
+      description: 'contentType is not allowed for this folder',
+    },
     fileTooLarge: {
       description: 'fileSize exceeds the limit for this content type',
     },
@@ -69,8 +72,15 @@ module.exports = {
       throw new Error('R2_BUCKET and R2_PUBLIC_BASE_URL must be set');
     }
 
-    if (!sails.config.custom.permissions.r2UploadFolders[folder]) {
+    const folders = sails.config.custom.permissions.r2UploadFolders;
+    const folderRules = Object.hasOwn(folders, folder)
+      ? folders[folder]
+      : undefined;
+    if (!folderRules) {
       return exits.invalidFolder();
+    }
+    if (!folderRules.contentTypes.includes(contentType)) {
+      return exits.invalidContentType({ allowed: folderRules.contentTypes });
     }
 
     const maxBytes = MAX_BYTES_BY_CONTENT_TYPE[contentType];

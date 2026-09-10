@@ -95,10 +95,22 @@ module.exports.custom = {
   permissions: {
     viewPaymentData: ['admin', 'stewardship'],
     r2UploadFolders: {
-      announcements: ['ministry', 'tc', 't3ch', 'admin', 'stewardship'],
-      popups: ['t3ch', 'admin', 'stewardship'],
-      testimonies: ['t3ch', 'admin', 'stewardship'],
-      sermons: ['t3ch', 'admin', 'stewardship'],
+      announcements: {
+        accessTypes: ['ministry', 'tc', 't3ch', 'admin', 'stewardship'],
+        contentTypes: ['image/png', 'image/jpeg', 'image/webp', 'image/gif'],
+      },
+      popups: {
+        accessTypes: ['t3ch', 'admin', 'stewardship'],
+        contentTypes: ['image/png', 'image/jpeg', 'image/webp', 'image/gif'],
+      },
+      testimonies: {
+        accessTypes: ['t3ch', 'admin', 'stewardship'],
+        contentTypes: ['image/png', 'image/jpeg', 'image/webp', 'image/gif'],
+      },
+      sermons: {
+        accessTypes: ['t3ch', 'admin', 'stewardship'],
+        contentTypes: ['audio/mpeg', 'audio/mp3'],
+      },
     },
   },
 };
