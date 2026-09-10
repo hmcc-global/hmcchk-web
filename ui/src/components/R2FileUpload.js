@@ -97,6 +97,7 @@ const R2FileUpload = (props) => {
             aria-label="File URL"
             placeholder={placeholder || ''}
             value={inputValue ?? ''}
+            isDisabled={isUploading}
             onChange={handleTextChange}
           />
           <Button
