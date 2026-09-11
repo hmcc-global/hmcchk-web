@@ -73,169 +73,184 @@ const SermonNotesPagination = ({
 
   return (
     <Box>
-      {currentSermonNotes.map((item) => {
-        const imageSrc =
-          sermonSeriesImages[item?.sermonSeries] || item?.imageLink;
-
-        const media = medias[item.sermonId] || {};
-        const currentSrc =
-          media.failedSrc === imageSrc
-            ? FALLBACK_IMAGE
-            : imageSrc || FALLBACK_IMAGE;
-
-        const savedDate = item.isSaved
-          ? new Date(item.childUpdatedAt).toLocaleDateString('default', {
-              day: '2-digit',
-              month: 'short',
-              year: 'numeric',
-            })
-          : null;
-
-        const dateString = item?.date
-          ? new Date(item.date).toLocaleDateString('default', {
-              day: '2-digit',
-              month: 'short', // This will give "Sep"
-              year: 'numeric',
-            })
-          : '';
-
-        return (
-          <Box
-            as={Link}
-            to={`/sermons/notes/${item.sermonId}`}
-            key={item.sermonId}
-            bgColor="white"
-            border="1px solid"
-            borderColor="#EDF2F7"
-            borderRadius="12px"
-            boxShadow="0 1px 3px rgba(0,0,0,0.06)"
-            p={{ base: 2, md: 4 }}
-            pr={{ base: 3, md: 4 }}
-            mb={{ base: 3, md: 4 }}
-            display="block"
-            cursor="pointer"
-            transition="all 0.15s"
-            _hover={{ borderColor: '#4A6EEB' }}
-            _focusVisible={{
-              boxShadow: '0 0 0 3px rgba(74,110,235,0.4)',
-            }}
-          >
-            <Flex
-              direction="row"
-              alignItems="center"
-              flex="1"
-              minW={0}
-              gap={{ base: 3, md: 4 }}
-            >
-              <AspectRatio
-                ratio={16 / 9}
-                w={{ base: '84px', md: '120px' }}
-                flexShrink={0}
-                borderRadius="8px"
-                overflow="hidden"
-                bgColor="white"
-              >
-                <chakra.img
-                  src={currentSrc}
-                  alt=""
-                  style={{
-                    objectFit: media.fit === 'contain' ? 'contain' : 'cover',
-                    objectPosition: '50% 50%',
-                  }}
-                  bgColor="white"
-                  onLoad={(e) =>
-                    handleImageLoad(e.currentTarget, item.sermonId)
-                  }
-                  onError={() => {
-                    setMedias((prev) => {
-                      const cur = prev[item.sermonId] || {};
-                      if (cur.failedSrc === imageSrc) return prev;
-                      return {
-                        ...prev,
-                        [item.sermonId]: { ...cur, failedSrc: imageSrc },
-                      };
-                    });
-                  }}
-                  w="100%"
-                  h="100%"
-                />
-              </AspectRatio>
-              <Box minW={0}>
-                <Text
-                  fontWeight="bold"
-                  fontSize={{ base: '15px', md: 'lg' }}
-                  mb={1}
-                  color="#1A202C"
-                >
-                  {item?.title || ''}
-                </Text>
-
-                {/* Mobile: compact rows (date + saved status on their own lines) */}
-                <Box display={{ base: 'block', md: 'none' }}>
-                  <SpeakerDate
-                    speaker={item?.speaker}
-                    dateString={dateString}
-                    fontSize="13px"
-                  />
-                  <SavedStatus savedDate={savedDate} fontSize="13px" />
-                </Box>
-
-                {/* Desktop: combined meta line + saved row */}
-                <Box display={{ base: 'none', md: 'block' }}>
-                  <SpeakerDate
-                    speaker={item?.speaker}
-                    dateString={dateString}
-                    fontSize="sm"
-                    noOfLines={1}
-                  />
-                  <SavedStatus savedDate={savedDate} fontSize="sm" />
-                </Box>
-              </Box>
-            </Flex>
-          </Box>
-        );
-      })}
-
-      {/* Pagination Controls */}
-      <Flex justifyContent="flex-end" alignItems="center" mt={4} gap={2}>
-        <Button
-          onClick={() =>
-            setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))
-          }
-          isDisabled={validCurrentPage === 1}
-          borderRadius="full"
-          bg="#EDF2F7"
-          color="gray.700"
-          _hover={{ bg: '#E2E8F0' }}
-          _disabled={{
-            bg: '#EDF2F7',
-            color: 'gray.400',
-            cursor: 'not-allowed',
-          }}
-        >
-          &lt;
-        </Button>
-        <Text mx={2} textAlign="center" fontWeight="semibold" color="gray.700">
-          {validCurrentPage}/{totalPages}
+      {currentSermonNotes.length === 0 ? (
+        <Text color="gray.500" textAlign="center" py={6}>
+          No sermon notes yet.
         </Text>
-        <Button
-          onClick={() =>
-            setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))
-          }
-          isDisabled={validCurrentPage === totalPages}
-          borderRadius="full"
-          bg="#4A6EEB"
-          color="white"
-          _hover={{ bg: '#3D5CD9' }}
-          _disabled={{
-            bg: '#DFE7FF',
-            color: 'gray.500',
-            cursor: 'not-allowed',
-          }}
-        >
-          &gt;
-        </Button>
-      </Flex>
+      ) : (
+        <>
+          {currentSermonNotes.map((item) => {
+            const imageSrc =
+              sermonSeriesImages[item?.sermonSeries] || item?.imageLink;
+
+            const media = medias[item.sermonId] || {};
+            const currentSrc =
+              media.failedSrc === imageSrc
+                ? FALLBACK_IMAGE
+                : imageSrc || FALLBACK_IMAGE;
+
+            const savedDate =
+              item.isSaved && item.childUpdatedAt
+                ? new Date(item.childUpdatedAt).toLocaleDateString('default', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric',
+                  })
+                : null;
+
+            const dateString = item?.date
+              ? new Date(item.date).toLocaleDateString('default', {
+                  day: '2-digit',
+                  month: 'short', // This will give "Sep"
+                  year: 'numeric',
+                })
+              : '';
+
+            return (
+              <Box
+                as={Link}
+                to={`/sermons/notes/${item.sermonId}`}
+                key={item.sermonId}
+                bgColor="white"
+                border="1px solid"
+                borderColor="#EDF2F7"
+                borderRadius="12px"
+                boxShadow="0 1px 3px rgba(0,0,0,0.06)"
+                p={{ base: 2, md: 4 }}
+                pr={{ base: 3, md: 4 }}
+                mb={{ base: 3, md: 4 }}
+                display="block"
+                cursor="pointer"
+                transition="all 0.15s"
+                _hover={{ borderColor: '#4A6EEB' }}
+                _focusVisible={{
+                  boxShadow: '0 0 0 3px rgba(74,110,235,0.4)',
+                }}
+              >
+                <Flex
+                  direction="row"
+                  alignItems="center"
+                  flex="1"
+                  minW={0}
+                  gap={{ base: 3, md: 4 }}
+                >
+                  <AspectRatio
+                    ratio={16 / 9}
+                    w={{ base: '84px', md: '120px' }}
+                    flexShrink={0}
+                    borderRadius="8px"
+                    overflow="hidden"
+                    bgColor="white"
+                  >
+                    <chakra.img
+                      src={currentSrc}
+                      alt=""
+                      style={{
+                        objectFit:
+                          media.fit === 'contain' ? 'contain' : 'cover',
+                        objectPosition: '50% 50%',
+                      }}
+                      bgColor="white"
+                      onLoad={(e) =>
+                        handleImageLoad(e.currentTarget, item.sermonId)
+                      }
+                      onError={() => {
+                        setMedias((prev) => {
+                          const cur = prev[item.sermonId] || {};
+                          if (cur.failedSrc === imageSrc) return prev;
+                          return {
+                            ...prev,
+                            [item.sermonId]: { ...cur, failedSrc: imageSrc },
+                          };
+                        });
+                      }}
+                      w="100%"
+                      h="100%"
+                    />
+                  </AspectRatio>
+                  <Box minW={0}>
+                    <Text
+                      fontWeight="bold"
+                      fontSize={{ base: '15px', md: 'lg' }}
+                      mb={1}
+                      color="#1A202C"
+                    >
+                      {item?.title || ''}
+                    </Text>
+
+                    {/* Mobile: compact rows (date + saved status on their own lines) */}
+                    <Box display={{ base: 'block', md: 'none' }}>
+                      <SpeakerDate
+                        speaker={item?.speaker}
+                        dateString={dateString}
+                        fontSize="13px"
+                      />
+                      <SavedStatus savedDate={savedDate} fontSize="13px" />
+                    </Box>
+
+                    {/* Desktop: combined meta line + saved row */}
+                    <Box display={{ base: 'none', md: 'block' }}>
+                      <SpeakerDate
+                        speaker={item?.speaker}
+                        dateString={dateString}
+                        fontSize="sm"
+                        noOfLines={1}
+                      />
+                      <SavedStatus savedDate={savedDate} fontSize="sm" />
+                    </Box>
+                  </Box>
+                </Flex>
+              </Box>
+            );
+          })}
+
+          {/* Pagination Controls */}
+          <Flex justifyContent="flex-end" alignItems="center" mt={4} gap={2}>
+            <Button
+              onClick={() =>
+                setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))
+              }
+              isDisabled={validCurrentPage === 1}
+              borderRadius="full"
+              bg="#EDF2F7"
+              color="gray.700"
+              _hover={{ bg: '#E2E8F0' }}
+              _disabled={{
+                bg: '#EDF2F7',
+                color: 'gray.400',
+                cursor: 'not-allowed',
+              }}
+            >
+              &lt;
+            </Button>
+            <Text
+              mx={2}
+              textAlign="center"
+              fontWeight="semibold"
+              color="gray.700"
+            >
+              {validCurrentPage}/{totalPages}
+            </Text>
+            <Button
+              onClick={() =>
+                setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))
+              }
+              isDisabled={validCurrentPage === totalPages}
+              borderRadius="full"
+              bg="#4A6EEB"
+              color="white"
+              _hover={{ bg: '#3D5CD9' }}
+              _disabled={{
+                bg: '#DFE7FF',
+                color: 'gray.500',
+                cursor: 'not-allowed',
+              }}
+            >
+              &gt;
+            </Button>
+          </Flex>
+        </>
+      )}
     </Box>
   );
 };
