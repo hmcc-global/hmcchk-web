@@ -37,12 +37,12 @@ import {
   regionList,
 } from 'utils/lists';
 import {
-  settableDataFields,
   userDataCleanup,
   getUserDataRequest,
   updateUserDataRequest,
   getLoginOnlyFormsRequest,
   generatePublishedFormLinks,
+  setUserInformationFields,
 } from 'utils/userInformationHelpers';
 import SermonNotesPagination from './SermonNotesPagination';
 import { PROFILE_TABS } from './profileTabs';
@@ -66,52 +66,6 @@ const UserProfileDesktop = (props) => {
   const [currentPageSaved, setCurrentPageSaved] = useState(1);
   const [sermonSeriesImages, setSermonSeriesImages] = useState({});
 
-  const setUserInformationFields = (userData) => {
-    for (let key in userData) {
-      if (settableDataFields.includes(key)) {
-        switch (key) {
-          case 'fullName':
-            let nameParts = userData.fullName.split(' ');
-            let lastName = nameParts.pop(-1);
-            let firstName = nameParts.join(' ');
-            setValue('firstName', firstName);
-            setValue('lastName', lastName);
-            break;
-          case 'address':
-            if (userData[key]) {
-              setValue('addressFloor', userData[key]['floor']);
-              setValue('addressFlat', userData[key]['flat']);
-              setValue('addressStreet', userData[key]['street']);
-              setValue('addressDistrict', userData[key]['district']);
-              setValue('addressRegion', userData[key]['region']);
-            }
-            break;
-          case 'baptismInfo':
-            if (userData[key] && userData[key][0]) {
-              setValue('baptismDate', userData[key][0]['baptismDate']);
-              setValue('baptismPlace', userData[key][0]['baptismPlace']);
-            }
-            break;
-          case 'membershipInfo':
-            if (userData[key] && userData[key][0]) {
-              setValue(
-                'membershipRecognitionDate',
-                userData[key][0]['recognitionDate']
-              );
-              setValue(
-                'membershipRecommitmentDate',
-                userData[key][0]['recommitmentDate']
-              );
-            }
-            break;
-          default:
-            setValue(key, userData[key]);
-            break;
-        }
-      }
-    }
-  };
-
   const onModalClose = (e) => {
     setModalOpen(false);
   };
@@ -122,10 +76,10 @@ const UserProfileDesktop = (props) => {
 
       if (status === 200) {
         setUserData(data[0]);
-        setUserInformationFields(data[0]);
+        setUserInformationFields(data[0], setValue);
       }
     }
-  }, [user.id]);
+  }, [user.id, setValue]);
 
   const fetchPublishedForms = useCallback(async () => {
     //get all forms
@@ -176,16 +130,22 @@ const UserProfileDesktop = (props) => {
   }, [user.id]);
 
   const fetchSermonSeries = useCallback(async () => {
-    const { data, status } = await axios.get('/api/sermons/get-sermon-series');
+    try {
+      const { data, status } = await axios.get(
+        '/api/sermons/get-sermon-series'
+      );
 
-    if (status === 200 && Array.isArray(data)) {
-      const imagesMap = {};
-      data.forEach((series) => {
-        if (series.image && series.image.sourceUrl) {
-          imagesMap[series.name] = series.image.sourceUrl;
-        }
-      });
-      setSermonSeriesImages(imagesMap);
+      if (status === 200 && Array.isArray(data)) {
+        const imagesMap = {};
+        data.forEach((series) => {
+          if (series.image && series.image.sourceUrl) {
+            imagesMap[series.name] = series.image.sourceUrl;
+          }
+        });
+        setSermonSeriesImages(imagesMap);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }, []);
 
@@ -389,18 +349,6 @@ const UserProfileDesktop = (props) => {
                     </Box>
                   </>
                 )}
-                {/* {user.password !== "" && (
-                <Button
-                  size="sm"
-                  mt="8"
-                  color="#0628A3"
-                  borderColor="#0628A3"
-                  borderRadius="10"
-                  variant="outline"
-                >
-                  Change Password
-                </Button>
-              )} */}
               </Stack>
             </TabPanel>
             <TabPanel p="5%">
