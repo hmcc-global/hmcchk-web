@@ -20,7 +20,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 import { useEffect, useRef, useState, React } from 'react';
-import { getRenderDate } from 'utils/eventsHelpers';
+import { getRenderDate, sortEvents } from 'utils/eventsHelpers';
 import EventsSectionCard from './EventsSectionCards';
 
 const EventsSection = () => {
@@ -37,7 +37,6 @@ const EventsSection = () => {
       const { data, status } = await axios.get('/api/announcement/get');
 
       if (status === 200) {
-        const filtered = [];
         const filteredEndDate = data.filter((item) => {
           if (item.displayStartDateTime) {
             let displayStartDate = DateTime.fromISO(
@@ -61,34 +60,8 @@ const EventsSection = () => {
             return endDate > DateTime.now() && DateTime.now() > startDate;
           } else return false;
         });
-        filteredEndDate.sort((a, b) =>
-          a.renderDate === ''
-            ? 1
-            : b.renderDate === ''
-            ? -1
-            : a.renderDate < b.renderDate
-            ? -1
-            : 1
-        );
-        // Resources are last in the list
-        filteredEndDate.sort((a, b) => {
-          const hasOthersA = a.eventType?.some(
-            (type) => type.value === 'Resources'
-          );
-          const hasOthersB = b.eventType?.some(
-            (type) => type.value === 'Resources'
-          );
-
-          if (hasOthersA && !hasOthersB) {
-            return 1;
-          } else if (!hasOthersA && hasOthersB) {
-            return -1;
-          } else {
-            return a.renderDate < b.renderDate ? -1 : 1;
-          }
-        });
-        filtered.push(...filteredEndDate);
-        setEvents(filtered);
+        const sorted = sortEvents(filteredEndDate);
+        setEvents(sorted);
       } else {
         throw Error('Something went wrong with the request');
       }

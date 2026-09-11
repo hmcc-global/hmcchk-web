@@ -12,7 +12,6 @@ const getStartDate = (eventData) => {
       ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
 };
 
-
 const getRenderDate = (startDate, endDate, interval, startTime) => {
   // parse the interval to number
   let start = DateTime.fromISO(startDate);
@@ -77,7 +76,9 @@ const generateGoogleCalendarLink = (eventData) => {
 
   let eventDate = DateTime.fromISO(eventData.renderDate.toISO());
 
-  eventDate = eventDate.plus(DateTime.fromISO(eventTime) - DateTime.fromISO('00:00'));
+  eventDate = eventDate.plus(
+    DateTime.fromISO(eventTime) - DateTime.fromISO('00:00')
+  );
 
   let startTime = filterISOStringForGoogleCalendar(eventDate.toISO());
   let endTime = eventDate.plus({ hours: 2 });
@@ -121,10 +122,37 @@ const EndDateElement = ({
   );
 };
 
+// Canonical event ordering (all surfaces):
+// 1. Featured first — featured+Resources events rank as featured (intentional)
+// 2. renderDate ascending; empty renderDate sorts last
+// 3. Resources events last
+// Pure: returns a new sorted array, does not mutate the input.
+const sortEvents = (events) => {
+  return [...events].sort((a, b) => {
+    const hasResourcesA = a.eventType?.some(
+      (type) => type.value === 'Resources'
+    );
+    const hasResourcesB = b.eventType?.some(
+      (type) => type.value === 'Resources'
+    );
+
+    if (a.featured && !b.featured) return -1;
+    if (!a.featured && b.featured) return 1;
+
+    if (hasResourcesA && !hasResourcesB) return 1;
+    if (!hasResourcesA && hasResourcesB) return -1;
+
+    if (a.renderDate === '') return 1;
+    if (b.renderDate === '') return -1;
+    return a.renderDate < b.renderDate ? -1 : 1;
+  });
+};
+
 export {
   getStartDate,
   getRenderDate,
   filterISOStringForGoogleCalendar,
   generateGoogleCalendarLink,
   EndDateElement,
+  sortEvents,
 };

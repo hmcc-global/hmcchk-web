@@ -13,7 +13,7 @@ import {
 import EventCard from './EventCard';
 import EventTypeFilter from './EventTypeFilter';
 import { DateTime } from 'luxon';
-import { getRenderDate } from 'utils/eventsHelpers';
+import { getRenderDate, sortEvents } from 'utils/eventsHelpers';
 import isDateInThisWeek from './getWeek';
 
 const TAG_CHIPS = ['All', 'This Week', 'Featured'];
@@ -78,33 +78,8 @@ const EventsPage = () => {
             return endDate > DateTime.now() && DateTime.now() > startDate;
           } else return false;
         });
-        filteredEndDate.sort((a, b) =>
-          a.renderDate === ''
-            ? 1
-            : b.renderDate === ''
-            ? -1
-            : a.renderDate < b.renderDate
-            ? -1
-            : 1
-        );
-        // Resources are last in the list
-        filteredEndDate.sort((a, b) => {
-          const hasOthersA = a.eventType?.some(
-            (type) => type.value === 'Resources'
-          );
-          const hasOthersB = b.eventType?.some(
-            (type) => type.value === 'Resources'
-          );
-
-          if (hasOthersA && !hasOthersB) {
-            return 1;
-          } else if (!hasOthersA && hasOthersB) {
-            return -1;
-          } else {
-            return a.renderDate < b.renderDate ? -1 : 1;
-          }
-        });
-        filteredEndDate.forEach((data) => {
+        const sorted = sortEvents(filteredEndDate);
+        sorted.forEach((data) => {
           data.eventType?.forEach((tag) => tagsList.add(tag.value));
         });
 
@@ -112,7 +87,7 @@ const EventsPage = () => {
         const thisWeekEvents = [];
         const moreFilterEvents = [];
 
-        filteredEndDate.forEach((data) => {
+        sorted.forEach((data) => {
           if (data.featured) {
             featuredEvents.push(data);
           }
@@ -133,11 +108,11 @@ const EventsPage = () => {
         setThisWeekList(thisWeekEvents);
         setTagList([...tagsList]);
 
-        const sorted = new Set(
+        const deduped = new Set(
           featuredEvents.concat(thisWeekEvents, moreFilterEvents)
         );
-        setEventsList([...sorted]);
-        setFilteredList([...sorted]);
+        setEventsList([...deduped]);
+        setFilteredList([...deduped]);
       } else {
         throw Error('Something went wrong with the request');
       }

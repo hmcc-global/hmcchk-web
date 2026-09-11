@@ -23,7 +23,7 @@ import {
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { DateTime } from 'luxon';
-import { getRenderDate } from 'utils/eventsHelpers';
+import { getRenderDate, sortEvents } from 'utils/eventsHelpers';
 import EventCard from '../events/EventCard';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -95,39 +95,15 @@ const ShineInvolve = (props) => {
             return endDate > DateTime.now() && DateTime.now() > startDate;
           } else return false;
         });
-        filteredEndDate.sort((a, b) =>
-          a.renderDate === ''
-            ? 1
-            : b.renderDate === ''
-            ? -1
-            : a.renderDate < b.renderDate
-            ? -1
-            : 1
-        );
         const shineMinEvents = [];
         filteredEndDate.forEach((data) => {
-          if (data.eventType === null || data.eventType === undefined) {
-            console.log('data.eventType is null or undefined');
-          } else if (data.eventType.length > 0) {
-            const hasShineMinistry = data.eventType.some(
-              (type) => type.value === 'Shine Ministry'
-            );
-            if (hasShineMinistry) {
-              shineMinEvents.push(data);
-            }
+          if (data.eventType?.some((type) => type.value === 'Shine Ministry')) {
+            shineMinEvents.push(data);
           }
         });
 
-        const featureSortedShineMinEvents = shineMinEvents.sort((a, b) => {
-          if (a.featured) {
-            return -1;
-          } else if (b.featured) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
-        setShineMinList([...featureSortedShineMinEvents]);
+        const shineSorted = sortEvents(shineMinEvents);
+        setShineMinList(shineSorted);
       } else {
         throw Error('Something went wrong with the request');
       }
