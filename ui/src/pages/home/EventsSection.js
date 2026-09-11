@@ -37,7 +37,6 @@ const EventsSection = () => {
       const { data, status } = await axios.get('/api/announcement/get');
 
       if (status === 200) {
-        const filtered = [];
         const filteredEndDate = data.filter((item) => {
           if (item.displayStartDateTime) {
             let displayStartDate = DateTime.fromISO(
@@ -61,9 +60,8 @@ const EventsSection = () => {
             return endDate > DateTime.now() && DateTime.now() > startDate;
           } else return false;
         });
-        sortEvents(filteredEndDate);
-        filtered.push(...filteredEndDate);
-        setEvents(filtered);
+        const sorted = sortEvents(filteredEndDate);
+        setEvents(sorted);
       } else {
         throw Error('Something went wrong with the request');
       }

@@ -122,8 +122,13 @@ const EndDateElement = ({
   );
 };
 
+// Canonical event ordering (all surfaces):
+// 1. Featured first — featured+Resources events rank as featured (intentional)
+// 2. renderDate ascending; empty renderDate sorts last
+// 3. Resources events last
+// Pure: returns a new sorted array, does not mutate the input.
 const sortEvents = (events) => {
-  return events.sort((a, b) => {
+  return [...events].sort((a, b) => {
     const hasResourcesA = a.eventType?.some(
       (type) => type.value === 'Resources'
     );

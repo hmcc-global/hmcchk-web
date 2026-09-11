@@ -78,8 +78,8 @@ const EventsPage = () => {
             return endDate > DateTime.now() && DateTime.now() > startDate;
           } else return false;
         });
-        sortEvents(filteredEndDate);
-        filteredEndDate.forEach((data) => {
+        const sorted = sortEvents(filteredEndDate);
+        sorted.forEach((data) => {
           data.eventType?.forEach((tag) => tagsList.add(tag.value));
         });
 
@@ -87,7 +87,7 @@ const EventsPage = () => {
         const thisWeekEvents = [];
         const moreFilterEvents = [];
 
-        filteredEndDate.forEach((data) => {
+        sorted.forEach((data) => {
           if (data.featured) {
             featuredEvents.push(data);
           }
@@ -108,11 +108,11 @@ const EventsPage = () => {
         setThisWeekList(thisWeekEvents);
         setTagList([...tagsList]);
 
-        const sorted = new Set(
+        const deduped = new Set(
           featuredEvents.concat(thisWeekEvents, moreFilterEvents)
         );
-        setEventsList([...sorted]);
-        setFilteredList([...sorted]);
+        setEventsList([...deduped]);
+        setFilteredList([...deduped]);
       } else {
         throw Error('Something went wrong with the request');
       }

@@ -97,20 +97,13 @@ const ShineInvolve = (props) => {
         });
         const shineMinEvents = [];
         filteredEndDate.forEach((data) => {
-          if (data.eventType === null || data.eventType === undefined) {
-            console.log('data.eventType is null or undefined');
-          } else if (data.eventType.length > 0) {
-            const hasShineMinistry = data.eventType.some(
-              (type) => type.value === 'Shine Ministry'
-            );
-            if (hasShineMinistry) {
-              shineMinEvents.push(data);
-            }
+          if (data.eventType?.some((type) => type.value === 'Shine Ministry')) {
+            shineMinEvents.push(data);
           }
         });
 
-        sortEvents(shineMinEvents);
-        setShineMinList([...shineMinEvents]);
+        const shineSorted = sortEvents(shineMinEvents);
+        setShineMinList(shineSorted);
       } else {
         throw Error('Something went wrong with the request');
       }
