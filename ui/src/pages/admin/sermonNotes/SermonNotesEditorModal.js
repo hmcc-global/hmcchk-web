@@ -30,7 +30,6 @@ const SermonNotesEditorModal = (props) => {
   const { editSermonNotesData, actionOnEditor, setIsEditorOpen } = props;
   const {
     register,
-    handleSubmit,
     setValue,
     formState: { touchedFields },
   } = useForm();
@@ -65,10 +64,6 @@ const SermonNotesEditorModal = (props) => {
       case 'duplicate':
         return 'Duplicate Sermon Notes';
     }
-  };
-
-  const onSubmit = async (data) => {
-    setSermonNoteData({ ...data });
   };
 
   const formatDate = (date) => {
@@ -304,7 +299,7 @@ const SermonNotesEditorModal = (props) => {
         p={6}
       >
         <Box>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={(e) => e.preventDefault()}>
             <Stack gap={6}>
               <FormControl
                 isRequired
@@ -533,10 +528,11 @@ const SermonNotesEditorModal = (props) => {
               </FormControl>
               <Stack direction="row" spacing={5}>
                 <Button
+                  fontSize={{ base: 'sm', md: 'md' }}
                   bgColor="#3182CE"
                   color="#FFFFFF"
                   _hover={{ bgColor: '#3D678E' }}
-                  type="submit"
+                  type="button"
                   onClick={onSubmitSermonNotes}
                 >
                   {editorSubmitButton(actionOnEditor)}
@@ -546,6 +542,7 @@ const SermonNotesEditorModal = (props) => {
                   message="You have unsaved changes. Are you sure you want to leave?"
                 />
                 <Button
+                  fontSize={{ base: 'sm', md: 'md' }}
                   bgColor="#6C7BFF"
                   color="#FFFFFF"
                   _hover={{ bgColor: '#4F5ABE' }}
