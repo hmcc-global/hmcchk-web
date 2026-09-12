@@ -290,7 +290,7 @@ const AdminSermonNotesContainer = (props) => {
         <Button
           size="lg"
           onClick={() => window.location.reload()}
-          display={{ base: 'none', sm: 'block', md: 'block' }}
+          display={{ base: 'none', sm: 'block' }}
         >
           <FiRefreshCw />
         </Button>

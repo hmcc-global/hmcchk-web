@@ -30,7 +30,6 @@ const SermonNotesEditorModal = (props) => {
   const { editSermonNotesData, actionOnEditor, setIsEditorOpen } = props;
   const {
     register,
-    handleSubmit,
     setValue,
     formState: { touchedFields },
   } = useForm();
@@ -66,8 +65,6 @@ const SermonNotesEditorModal = (props) => {
         return 'Duplicate Sermon Notes';
     }
   };
-
-  const onSubmit = async (data) => {};
 
   const formatDate = (date) => {
     const parts = date.split('-');
@@ -302,7 +299,7 @@ const SermonNotesEditorModal = (props) => {
         p={6}
       >
         <Box>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={(e) => e.preventDefault()}>
             <Stack gap={6}>
               <FormControl
                 isRequired
@@ -535,7 +532,7 @@ const SermonNotesEditorModal = (props) => {
                   bgColor="#3182CE"
                   color="#FFFFFF"
                   _hover={{ bgColor: '#3D678E' }}
-                  type="submit"
+                  type="button"
                   onClick={onSubmitSermonNotes}
                 >
                   {editorSubmitButton(actionOnEditor)}
