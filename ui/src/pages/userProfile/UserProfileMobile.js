@@ -41,10 +41,13 @@ import {
   getLoginOnlyFormsRequest,
   generatePublishedFormLinks,
   setUserInformationFields,
+  getSignedUpClassProgress,
 } from 'utils/userInformationHelpers';
 import { getSermonSeriesImages } from 'utils/SermonNotes';
 import SermonNotesPagination from './SermonNotesPagination';
 import { PROFILE_TABS } from './profileTabs';
+import SignedUpFormsList from './SignedUpFormsList';
+import AvailableSignupLinksList from './AvailableSignupLinksList';
 
 const UserProfileMobile = (props) => {
   const { user, staticData, activeTabIndex, onTabChange } = props;
@@ -56,6 +59,7 @@ const UserProfileMobile = (props) => {
   const [formList, setFormList] = useState(null);
   const [unsignedFormList, setUnsignedFormList] = useState([]);
   const [signedUpFormList, setSignedUpFormList] = useState([]);
+  const [classProgressList, setClassProgressList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [activeSermonNoteTab, setActiveSermonNoteTab] = useState('all');
   const [userSermonNotes, setUserSermonNotes] = useState([]);
@@ -78,7 +82,11 @@ const UserProfileMobile = (props) => {
         setUserInformationFields(data[0], setValue);
       }
     }
+<<<<<<< HEAD
   }, [user.id, setValue]);
+=======
+  }, [user.id]);
+>>>>>>> 1d671139 (1423: added api for calling user signed up class tracking (#1424))
 
   const fetchPublishedForms = useCallback(async () => {
     //get all forms
@@ -102,8 +110,12 @@ const UserProfileMobile = (props) => {
     }
   }, [user.id]);
 
+  const fetchClassProgress = useCallback(() => {
+    getSignedUpClassProgress(setClassProgressList);
+  }, []);
+
   const fetchUnsignedUpForms = useCallback(async () => {
-    //get signed up forms
+    //get unsigned up forms
     const { data, status } = await axios.get('/api/forms/get-unsignedup-form', {
       params: {
         userId: user.id,
@@ -182,13 +194,21 @@ const UserProfileMobile = (props) => {
     fetchPublishedForms();
     fetchSignedUpForms();
     fetchUnsignedUpForms();
+    fetchClassProgress();
     fetchUserSermonNotes();
+<<<<<<< HEAD
     getSermonSeriesImages().then(setSermonSeriesImages);
+=======
+>>>>>>> 1d671139 (1423: added api for calling user signed up class tracking (#1424))
   }, [
     fetchUserData,
     fetchPublishedForms,
     fetchSignedUpForms,
     fetchUnsignedUpForms,
+<<<<<<< HEAD
+=======
+    fetchClassProgress,
+>>>>>>> 1d671139 (1423: added api for calling user signed up class tracking (#1424))
     fetchUserSermonNotes,
   ]);
 
@@ -302,7 +322,7 @@ const UserProfileMobile = (props) => {
                     >
                       Available Signup Links:
                     </Text>
-                    {generatePublishedFormLinks(unsignedFormList, false)}
+                    <AvailableSignupLinksList forms={unsignedFormList} />
                     <Text
                       fontWeight="700"
                       fontSize="0.95rem"
@@ -312,7 +332,10 @@ const UserProfileMobile = (props) => {
                     >
                       Your Signups:
                     </Text>
-                    {generatePublishedFormLinks(signedUpFormList, true)}
+                    <SignedUpFormsList
+                      forms={signedUpFormList}
+                      classProgressList={classProgressList}
+                    />
                   </Box>
                 )}
               </Flex>

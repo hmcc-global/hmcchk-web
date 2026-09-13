@@ -1,5 +1,5 @@
 import { useForm, Controller } from 'react-hook-form';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { DateTime } from 'luxon';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -34,6 +34,7 @@ import {
   Tab,
   TabPanel,
   Checkbox,
+  useToast,
 } from 'components';
 import { FiTrash2, FiPlus } from 'react-icons/fi';
 import FormEditor from './FormEditor';
@@ -47,6 +48,7 @@ const newCourse = () => ({
   name: '',
   platform: '',
   type: 'Online',
+  courseLink: '',
   isActive: true,
 });
 
@@ -62,10 +64,19 @@ const FormEditorContainer = (props) => {
   const { formAlertTypeList, classPlatformTypes } = staticData;
   const formAlertTypes = Object.keys(formAlertTypeList);
   const classPlatforms = Object.keys(classPlatformTypes);
+  const toast = useToast();
 
   // React forms basics
-  const { register, reset, handleSubmit, setValue, watch, control, formState } =
-    useForm();
+  const {
+    register,
+    reset,
+    handleSubmit,
+    setValue,
+    watch,
+    control,
+    formState,
+    setError,
+  } = useForm();
   const { errors } = formState;
 
   // State variables
@@ -98,6 +109,8 @@ const FormEditorContainer = (props) => {
   const [isClass, setIsClass] = useState(false);
   const [courses, setCourses] = useState([]);
   const [persistedCourseIds, setPersistedCourseIds] = useState([]);
+  const [classStartTime, setClassStartTime] = useState('');
+  const [classEndingTime, setClassEndingTime] = useState('');
 
   // Which tracking tab (Payment / Class) is open in the editor
   const [trackingTabIndex, setTrackingTabIndex] = useState(0);
@@ -123,6 +136,8 @@ const FormEditorContainer = (props) => {
     setValue('customEmailSubject', '');
     setValue('formAvailableFrom', '');
     setValue('formAvailableUntil', '');
+    setValue('classStartTime', '');
+    setValue('classEndingTime', '');
     setFormName(null);
     setIsPaymentRequired(false);
     setPaymentConfirmationEmailTemplate(null);
@@ -145,76 +160,214 @@ const FormEditorContainer = (props) => {
     setCustomEmailSubject('');
     setFormAvailableFrom('');
     setFormAvailableUntil('');
+    setClassStartTime('');
+    setClassEndingTime('');
     setIsOpen(false);
     formManagerCallback();
   };
 
-  const setFormManagerElements = (data) => {
-    if (data) {
-      let paymentCcEmail = data.paymentCcEmail;
-      if (data.paymentCcEmail && Array.isArray(data.paymentCcEmail)) {
-        paymentCcEmail = data.paymentCcEmail.join(';');
+  const setFormManagerElements = useCallback(
+    (data) => {
+      if (data) {
+        let paymentCcEmail = data.paymentCcEmail;
+        if (data.paymentCcEmail && Array.isArray(data.paymentCcEmail)) {
+          paymentCcEmail = data.paymentCcEmail.join(';');
+        }
+
+        setValue('formName', data.formName);
+        setValue('isPaymentRequired', data.isPaymentRequired);
+        setValue(
+          'paymentConfirmationEmailTemplate',
+          data.paymentConfirmationEmailTemplate
+        );
+        setValue('paymentEmailSubject', data.paymentEmailSubject);
+        setValue('paymentCcEmail', paymentCcEmail);
+        setValue('isClass', data.isClass);
+        setValue('formDescription', data.formDescription);
+        setValue('formImage', data.formImage);
+        setValue('formType', data.formType);
+        setValue('requireLogin', data.requireLogin);
+        setValue('requireMembership', data.requireMembership);
+        setValue('requireBaptism', data.requireBaptism);
+        setValue('alertType', data.alertType);
+        setValue(
+          'parseUserData',
+          data.parseUserData && !isAlertTypeNone(data.alertType)
+        );
+        setValue('customAlertRecipients', data.customAlertRecipients);
+        setValue('successEmailTemplate', data.successEmailTemplate);
+        setValue('customEmailSubject', data.customEmailSubject);
+        setValue('formAvailableFrom', data.formAvailableFrom);
+        setValue('formAvailableUntil', data.formAvailableUntil);
+        setValue(
+          'classStartTime',
+          data.classTrackingTemplate?.classStartTime ?? data.classStartTime
+        );
+        setValue(
+          'classEndingTime',
+          data.classTrackingTemplate?.classEndingTime ?? data.classEndingTime
+        );
+
+        // Update React State for child props
+        setFormName(data.formName);
+        setIsPaymentRequired(data.isPaymentRequired);
+        setPaymentConfirmationEmailTemplate(
+          data.paymentConfirmationEmailTemplate
+        );
+        setClassStartTime(
+          data.classTrackingTemplate?.classStartTime ??
+            data.classStartTime ??
+            ''
+        );
+        setClassEndingTime(
+          data.classTrackingTemplate?.classEndingTime ??
+            data.classEndingTime ??
+            ''
+        );
+        setPaymentEmailSubject(data.paymentEmailSubject);
+        setPaymentCcEmail(paymentCcEmail);
+        setIsClass(data.isClass);
+        // courses isn't a react-hook-form field (it's edited directly via
+        // addCourse/removeCourse/updateCourseField), so
+        // data.classTrackingTemplate.courses is only ever populated when this
+        // runs off a loaded editFormData record, not off the top form's
+        // onSubmit. Fall back to the current state instead of [] so clicking
+        // "Create/Update Form" doesn't wipe staged courses.
+        setCourses(
+          (prevCourses) => data.classTrackingTemplate?.courses ?? prevCourses
+        );
+        setFormDescription(data.formDescription);
+        setFormImage(data.formImage);
+        setFormType(data.formType);
+        setRequireLogin(data.requireLogin);
+        setRequireMembership(data.requireMembership);
+        setRequireBaptism(data.requireBaptism);
+        setParseUserData(
+          data.parseUserData && !isAlertTypeNone(data.alertType)
+        );
+        setAlertType(data.alertType);
+        setCustomAlertRecipients(data.customAlertRecipients);
+        setSuccessEmailTemplate(data.successEmailTemplate);
+        setCustomEmailSubject(data.customEmailSubject);
+        setFormAvailableFrom(data.formAvailableFrom);
+        setFormAvailableUntil(data.formAvailableUntil);
       }
+    },
+    [setValue]
+  );
 
-      setValue('formName', data.formName);
-      setValue('isPaymentRequired', data.isPaymentRequired);
-      setValue(
-        'paymentConfirmationEmailTemplate',
-        data.paymentConfirmationEmailTemplate
-      );
-      setValue('paymentEmailSubject', data.paymentEmailSubject);
-      setValue('paymentCcEmail', paymentCcEmail);
-      setValue('isClass', data.isClass);
-      setValue('formDescription', data.formDescription);
-      setValue('formImage', data.formImage);
-      setValue('formType', data.formType);
-      setValue('requireLogin', data.requireLogin);
-      setValue('requireMembership', data.requireMembership);
-      setValue('requireBaptism', data.requireBaptism);
-      setValue('alertType', data.alertType);
-      setValue(
-        'parseUserData',
-        data.parseUserData && !isAlertTypeNone(data.alertType)
-      );
-      setValue('customAlertRecipients', data.customAlertRecipients);
-      setValue('successEmailTemplate', data.successEmailTemplate);
-      setValue('customEmailSubject', data.customEmailSubject);
-      setValue('formAvailableFrom', data.formAvailableFrom);
-      setValue('formAvailableUntil', data.formAvailableUntil);
+  // Class Start Time must not fall before the form opens, otherwise the class
+  // season starts while the form is still closed to signups.
+  const getClassStartTimeError = (startTime, formStart) => {
+    const startDate = DateTime.fromISO(startTime ?? '');
+    if (!startDate.isValid) return null;
 
-      // Update React State for child props
-      setFormName(data.formName);
-      setIsPaymentRequired(data.isPaymentRequired);
-      setPaymentConfirmationEmailTemplate(
-        data.paymentConfirmationEmailTemplate
-      );
-      setPaymentEmailSubject(data.paymentEmailSubject);
-      setPaymentCcEmail(paymentCcEmail);
-      setIsClass(data.isClass);
-      // courses isn't a react-hook-form field (it's edited directly via
-      // addCourse/removeCourse/updateCourseField), so
-      // data.classTrackingTemplate.courses is only ever populated when this
-      // runs off a loaded editFormData record, not off the top form's
-      // onSubmit. Fall back to the current state instead of [] so clicking
-      // "Create/Update Form" doesn't wipe staged courses.
-      setCourses(data.classTrackingTemplate?.courses ?? courses);
-      setFormDescription(data.formDescription);
-      setFormImage(data.formImage);
-      setFormType(data.formType);
-      setRequireLogin(data.requireLogin);
-      setRequireMembership(data.requireMembership);
-      setRequireBaptism(data.requireBaptism);
-      setParseUserData(data.parseUserData && !isAlertTypeNone(data.alertType));
-      setAlertType(data.alertType);
-      setCustomAlertRecipients(data.customAlertRecipients);
-      setSuccessEmailTemplate(data.successEmailTemplate);
-      setCustomEmailSubject(data.customEmailSubject);
-      setFormAvailableFrom(data.formAvailableFrom);
-      setFormAvailableUntil(data.formAvailableUntil);
-    }
+    if (!formStart) return null;
+    const formStartDate = DateTime.fromISO(formStart);
+    if (!formStartDate.isValid) return null;
+
+    if (startDate >= formStartDate) return null;
+    return 'Class start time cannot be before the form availability start';
+  };
+
+  // Class End Time must not fall before the form availability window ends,
+  // otherwise the class season ([formAvailableFrom, classEndingTime]) closes
+  // while the form is still accepting signups. Prefer the form end time; fall
+  // back to the start time when the form never closes.
+  const getClassEndTimeError = (endTime, formEnd, formStart) => {
+    const endDate = DateTime.fromISO(endTime ?? '');
+    if (!endDate.isValid) return null;
+
+    const boundIso = formEnd || formStart;
+    if (!boundIso) return null;
+    const boundDate = DateTime.fromISO(boundIso);
+    if (!boundDate.isValid) return null;
+
+    if (endDate >= boundDate) return null;
+    return formEnd
+      ? 'Class end time cannot be before the form availability end'
+      : 'Class end time cannot be before the form availability start';
   };
 
   const onSubmit = (data, e) => {
+    // Class forms need at least one course with a name before the payload is
+    // built; courses aren't react-hook-form fields, so block here instead.
+    if (data.isClass) {
+      const missingName = courses.some(
+        (course) => !course.name || !course.name.trim()
+      );
+      if (courses.length === 0 || missingName) {
+        toast({
+          title: 'Invalid class setup',
+          description:
+            'Add at least one course and give every course a name before saving.',
+          status: 'error',
+          duration: 6000,
+          isClosable: true,
+        });
+        return;
+      }
+
+      // Match the display-side isSafeCourseLink check so a link that would
+      // render as plain text never gets saved without admin feedback.
+      const isSafeCourseLink = (courseLink) =>
+        typeof courseLink === 'string' && /^https?:\/\//i.test(courseLink);
+      const invalidCourseLink = courses.find(
+        (course) =>
+          course.courseLink &&
+          typeof course.courseLink === 'string' &&
+          !isSafeCourseLink(course.courseLink)
+      );
+      if (invalidCourseLink) {
+        toast({
+          title: 'Invalid course link',
+          description: `Course link for "${invalidCourseLink.name}" must start with http:// or https://.`,
+          status: 'error',
+          duration: 6000,
+          isClosable: true,
+        });
+        return;
+      }
+
+      const classStartTimeError = getClassStartTimeError(
+        data.classStartTime,
+        data.formAvailableFrom
+      );
+      if (classStartTimeError) {
+        setError('classStartTime', {
+          type: 'manual',
+          message: classStartTimeError,
+        });
+        toast({
+          title: 'Invalid class setup',
+          description: classStartTimeError,
+          status: 'error',
+          duration: 6000,
+          isClosable: true,
+        });
+        return;
+      }
+
+      const classEndTimeError = getClassEndTimeError(
+        data.classEndingTime,
+        data.formAvailableUntil,
+        data.formAvailableFrom
+      );
+      if (classEndTimeError) {
+        setError('classEndingTime', {
+          type: 'manual',
+          message: classEndTimeError,
+        });
+        toast({
+          title: 'Invalid class setup',
+          description: classEndTimeError,
+          status: 'error',
+          duration: 6000,
+          isClosable: true,
+        });
+        return;
+      }
+    }
     setFormManagerElements(data);
   };
 
@@ -267,7 +420,7 @@ const FormEditorContainer = (props) => {
       )
     );
     setTrackingTabIndex(editFormData?.isClass ? 1 : 0);
-  }, [editFormData]);
+  }, [editFormData, setFormManagerElements]);
 
   useEffect(() => {
     if (formAvailableFrom && formAvailableUntil) {
@@ -571,14 +724,22 @@ const FormEditorContainer = (props) => {
                                       }
                                     >
                                       {classPlatforms.map((platform) => (
-                                        <option
-                                          key={platform}
-                                          value={platform}
-                                        >
+                                        <option key={platform} value={platform}>
                                           {platform}
                                         </option>
                                       ))}
                                     </Select>
+                                    <Input
+                                      placeholder="Course link (https://...)"
+                                      value={course.courseLink ?? ''}
+                                      onChange={(e) =>
+                                        updateCourseField(
+                                          course.courseId,
+                                          'courseLink',
+                                          e.target.value
+                                        )
+                                      }
+                                    />
                                     <Select
                                       isDisabled
                                       value={
@@ -632,12 +793,59 @@ const FormEditorContainer = (props) => {
                                 >
                                   Add Course
                                 </Button>
+                                <SimpleGrid columns={[1, 2]} spacing="3">
+                                  <Box>
+                                    <FormLabel
+                                      htmlFor="classStartTime"
+                                      fontSize="sm"
+                                      fontWeight="normal"
+                                      mb="1"
+                                    >
+                                      Class Start Time
+                                    </FormLabel>
+                                    <Input
+                                      id="classStartTime"
+                                      type="datetime-local"
+                                      {...register('classStartTime', {
+                                        required:
+                                          isClass &&
+                                          'Class start time is required',
+                                      })}
+                                    />
+                                    <FormErrorMessage>
+                                      {errors['classStartTime']?.message}
+                                    </FormErrorMessage>
+                                  </Box>
+                                  <Box>
+                                    <FormLabel
+                                      htmlFor="classEndingTime"
+                                      fontSize="sm"
+                                      fontWeight="normal"
+                                      mb="1"
+                                    >
+                                      Class End Time
+                                    </FormLabel>
+                                    <Input
+                                      id="classEndingTime"
+                                      type="datetime-local"
+                                      {...register('classEndingTime', {
+                                        required:
+                                          isClass &&
+                                          'Class end time is required',
+                                      })}
+                                    />
+                                    <FormErrorMessage>
+                                      {errors['classEndingTime']?.message}
+                                    </FormErrorMessage>
+                                  </Box>
+                                </SimpleGrid>
                               </Stack>
                             )}
                           </Stack>
                         </TabPanel>
                       </TabPanels>
                     </Tabs>
+                    <Divider />
                   </Stack>
                 )}
                 {ftFlag === 'internal' && (
@@ -824,6 +1032,8 @@ const FormEditorContainer = (props) => {
                   paymentEmailSubject: paymentEmailSubject,
                   paymentCcEmail: paymentCcEmail,
                   isClass: isClass,
+                  classStartTime: classStartTime,
+                  classEndingTime: classEndingTime,
                   courses: courses,
                 }}
                 existingFormFieldsData={editFormData}
