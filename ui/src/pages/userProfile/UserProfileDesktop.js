@@ -42,9 +42,11 @@ import {
   getUserDataRequest,
   updateUserDataRequest,
   getLoginOnlyFormsRequest,
-  generatePublishedFormLinks,
+  getSignedUpClassProgress,
 } from 'utils/userInformationHelpers';
 import SermonNotesPagination from './SermonNotesPagination';
+import SignedUpFormsList from './SignedUpFormsList';
+import AvailableSignupLinksList from './AvailableSignupLinksList';
 
 const UserProfileDesktop = (props) => {
   const { user, staticData } = props;
@@ -56,6 +58,7 @@ const UserProfileDesktop = (props) => {
   const [formList, setFormList] = useState(null);
   const [unsignedFormList, setUnsignedFormList] = useState([]);
   const [signedUpFormList, setSignedUpFormList] = useState([]);
+  const [classProgressList, setClassProgressList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [activeSermonNoteTab, setActiveSermonNoteTab] = useState('all');
   const [userSermonNotes, setUserSermonNotes] = useState([]);
@@ -125,6 +128,10 @@ const UserProfileDesktop = (props) => {
     }
   }, [user.id]);
 
+  const fetchClassProgress = useCallback(() => {
+    getSignedUpClassProgress(setClassProgressList);
+  }, []);
+
   const fetchPublishedForms = useCallback(async () => {
     //get all forms
     const { data, status } = await getLoginOnlyFormsRequest();
@@ -147,7 +154,7 @@ const UserProfileDesktop = (props) => {
   }, [user.id]);
 
   const fetchUnsignedUpForms = useCallback(async () => {
-    //get signed up forms
+    //get unsigned up forms
     const { data, status } = await axios.get('/api/forms/get-unsignedup-form', {
       params: {
         userId: user.id,
@@ -219,12 +226,14 @@ const UserProfileDesktop = (props) => {
     fetchUserData();
     fetchPublishedForms();
     fetchSignedUpForms();
+    fetchClassProgress();
     fetchUnsignedUpForms();
     fetchUserSermonNotes();
   }, [
     fetchUserData,
     fetchPublishedForms,
     fetchSignedUpForms,
+    fetchClassProgress,
     fetchUnsignedUpForms,
     fetchUserSermonNotes,
   ]);
@@ -335,31 +344,34 @@ const UserProfileDesktop = (props) => {
             border="1px solid #EBEBEB"
             borderRadius="10px"
           >
-            <TabPanel p="5%">
+            <TabPanel p="24px">
               <Stack direction="row" spacing="5">
                 {formList && formList.length > 0 && (
                   <>
                     <Box width="50%">
                       <Text
-                        fontSize="1.1rem"
+                        fontSize="1rem"
                         fontWeight="700"
                         color="#718096"
                         mb="5"
                       >
                         Available Signup Links:
                       </Text>
-                      {generatePublishedFormLinks(unsignedFormList, false)}
+                      <AvailableSignupLinksList forms={unsignedFormList} />
                     </Box>
                     <Box width="50%">
                       <Text
-                        fontSize="1.1rem"
+                        fontSize="1rem"
                         fontWeight="700"
                         color="#718096"
                         mb="5"
                       >
                         Your Signups:
                       </Text>
-                      {generatePublishedFormLinks(signedUpFormList, true)}
+                      <SignedUpFormsList
+                        forms={signedUpFormList}
+                        classProgressList={classProgressList}
+                      />
                     </Box>
                   </>
                 )}
@@ -377,7 +389,7 @@ const UserProfileDesktop = (props) => {
               )} */}
               </Stack>
             </TabPanel>
-            <TabPanel p="5%">
+            <TabPanel p="24px">
               <HStack gap={5} mb={5}>
                 <Button
                   borderRadius={30}
@@ -455,7 +467,7 @@ const UserProfileDesktop = (props) => {
                 }
               />
             </TabPanel>
-            <TabPanel p="7%">
+            <TabPanel p="24px">
               <Stack spacing="2%">
                 <Stack direction={['column', 'row']} spacing="7%">
                   <FormControl>
@@ -625,7 +637,7 @@ const UserProfileDesktop = (props) => {
                 Save Information
               </Button>
             </TabPanel>
-            <TabPanel p="7%">
+            <TabPanel p="24px">
               <Stack spacing="3%">
                 <FormControl>
                   <FormLabel color="#2C5282">LIFE Group</FormLabel>

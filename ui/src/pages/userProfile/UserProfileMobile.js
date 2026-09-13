@@ -40,9 +40,11 @@ import {
   getUserDataRequest,
   updateUserDataRequest,
   getLoginOnlyFormsRequest,
-  generatePublishedFormLinks,
+  getSignedUpClassProgress,
 } from 'utils/userInformationHelpers';
 import SermonNotesPagination from './SermonNotesPagination';
+import SignedUpFormsList from './SignedUpFormsList';
+import AvailableSignupLinksList from './AvailableSignupLinksList';
 
 const UserProfileMobile = (props) => {
   const { user, staticData } = props;
@@ -54,6 +56,7 @@ const UserProfileMobile = (props) => {
   const [formList, setFormList] = useState(null);
   const [unsignedFormList, setUnsignedFormList] = useState([]);
   const [signedUpFormList, setSignedUpFormList] = useState([]);
+  const [classProgressList, setClassProgressList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeSermonNoteTab, setActiveSermonNoteTab] = useState('all');
@@ -67,7 +70,7 @@ const UserProfileMobile = (props) => {
     setModalOpen(false);
   };
 
-  const fetchUserData = async () => {
+  const fetchUserData = useCallback(async () => {
     if (user.id) {
       const { data, status } = await getUserDataRequest(user.id);
 
@@ -76,7 +79,7 @@ const UserProfileMobile = (props) => {
         setUserInformationFields(data[0]);
       }
     }
-  };
+  }, [user.id]);
 
   const fetchPublishedForms = useCallback(async () => {
     //get all forms
@@ -100,8 +103,12 @@ const UserProfileMobile = (props) => {
     }
   }, [user.id]);
 
+  const fetchClassProgress = useCallback(() => {
+    getSignedUpClassProgress(setClassProgressList);
+  }, []);
+
   const fetchUnsignedUpForms = useCallback(async () => {
-    //get signed up forms
+    //get unsigned up forms
     const { data, status } = await axios.get('/api/forms/get-unsignedup-form', {
       params: {
         userId: user.id,
@@ -225,8 +232,16 @@ const UserProfileMobile = (props) => {
     fetchPublishedForms();
     fetchSignedUpForms();
     fetchUnsignedUpForms();
+    fetchClassProgress();
     fetchUserSermonNotes();
-  }, []);
+  }, [
+    fetchUserData,
+    fetchPublishedForms,
+    fetchSignedUpForms,
+    fetchUnsignedUpForms,
+    fetchClassProgress,
+    fetchUserSermonNotes,
+  ]);
 
   const inputBox = {
     color: '#718096',
@@ -345,7 +360,7 @@ const UserProfileMobile = (props) => {
                     >
                       Available Signup Links:
                     </Text>
-                    {generatePublishedFormLinks(unsignedFormList, false)}
+                    <AvailableSignupLinksList forms={unsignedFormList} />
                     <Text
                       fontWeight="700"
                       fontSize="0.95rem"
@@ -355,7 +370,10 @@ const UserProfileMobile = (props) => {
                     >
                       Your Signups:
                     </Text>
-                    {generatePublishedFormLinks(signedUpFormList, true)}
+                    <SignedUpFormsList
+                      forms={signedUpFormList}
+                      classProgressList={classProgressList}
+                    />
                   </Box>
                 )}
                 {/* <Button
