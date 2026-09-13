@@ -87,6 +87,9 @@ module.exports.routes = {
   // Media APIs
   'get /api/media/get-media': 'media/get-media',
 
+  // R2 object storage APIs
+  'post /api/r2/presign-upload': 'r2/presign-upload',
+
   // Auth APIs
   'post /api/auth/login': 'auth/post-login',
   'post /api/auth/login-google': 'auth/post-login-google',
