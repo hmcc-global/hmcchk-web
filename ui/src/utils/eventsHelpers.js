@@ -93,7 +93,9 @@ const generateGoogleCalendarLink = (eventData) => {
      '00:00' on an event running to midnight) yields a zero/negative-length
      event that Google rejects — default to a 2-hour duration instead */
   if (eventEndDate <= eventDate) {
-    eventEndDate = eventDate.plus({ hours: 2 });
+    eventEndDate = eventData.eventEndTime
+      ? eventEndDate.plus({ days: 1 })
+      : eventDate.plus({ hours: 2 });
   }
 
   // Google Calendar's dates param expects YYYYMMDDTHHMMSS
