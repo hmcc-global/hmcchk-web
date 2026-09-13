@@ -52,6 +52,16 @@ module.exports.routes = {
   'put /api/paymentData/update': 'paymentData/update-payment-data',
   'put /api/paymentData/send-email': 'paymentData/post-send-payment-email',
 
+  // Class Tracking Data APIs
+  'put /api/classTrackingData/update':
+    'classTrackingData/update-class-tracking-data',
+  'get /api/classTrackingData/all-progress-statuses':
+    'classTrackingData/get-all-class-progress-statuses',
+  'get /api/classTrackingData/all-platform-types':
+    'classTrackingData/get-all-class-platform-types',
+  'get /api/classTrackingData/get-signedup-class':
+    'classTrackingData/get-signedup-class',
+
   // Announcement APIs
   'get /api/announcements/get-announcements': 'announcements/get-announcements',
 
