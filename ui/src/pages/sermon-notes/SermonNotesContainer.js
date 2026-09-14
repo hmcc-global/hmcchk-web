@@ -167,12 +167,6 @@ const SermonNotesContainer = (props) => {
     return emailAddress.test(email);
   };
 
-  const preprocessUserNotesAttribute = (htmlString) => {
-    if (!htmlString) return htmlString;
-
-    return htmlString.replace(/&lt;br&gt;/g, '<br>');
-  };
-
   const emailCheck = async () => {
     // Snapshot TipTap HTML now — email template needs HTML; Save uses JSON separately.
     const html = tipTapRef.current?.getHTML();
@@ -206,7 +200,7 @@ const SermonNotesContainer = (props) => {
     try {
       const { status } = await axios.post('/api/email-user-sermon-notes', {
         email: email,
-        sermonNoteData: preprocessUserNotesAttribute(html),
+        sermonNoteData: html,
       });
       if (status === 200) {
         toast({
