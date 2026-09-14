@@ -210,7 +210,7 @@ const EventCard = (props) => {
             />
           </Box>
           <Stack mt={['2', '5']} direction="row" spacing={4}>
-            {eventData.signUpUrl.length > 0 && (
+            {eventData.signUpUrl?.length > 0 && (
               <Button
                 as={Link}
                 size="md"
@@ -219,7 +219,7 @@ const EventCard = (props) => {
                 color="white"
                 _hover={{ opacity: '90%', textDecoration: 'none' }}
                 href={eventData.signUpUrl ? eventData.signUpUrl : null}
-                isDisabled={eventData.signUpUrl.length <= 0}
+                isDisabled={!eventData.signUpUrl?.length}
                 fontSize={['xs', 'md']}
                 rightIcon={<MdOutlineAddToPhotos />}
               >
@@ -369,7 +369,7 @@ const EventCard = (props) => {
                 colorScheme="gray"
                 alignItems="center"
               >
-                {eventData.signUpUrl.length > 0 && (
+                {eventData.signUpUrl?.length > 0 && (
                   <Button
                     as={Link}
                     target="_blank"

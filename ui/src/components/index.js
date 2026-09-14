@@ -27,6 +27,8 @@ export {
   Stack,
   HStack,
   VStack,
+  Wrap,
+  WrapItem,
   AspectRatio,
   // Typography
   Heading,
@@ -51,6 +53,7 @@ export {
   FormLabel,
   Input,
   InputGroup,
+  InputLeftElement,
   InputRightAddon,
   Radio,
   RadioGroup,
@@ -70,6 +73,7 @@ export {
   AlertIcon,
   Progress,
   Spinner,
+  Skeleton,
   Tooltip,
   // Disclosure
   Accordion,
@@ -82,6 +86,11 @@ export {
   TabPanel,
   TabPanels,
   Tabs,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuDivider,
   // Overlay
   AlertDialog,
   AlertDialogBody,
