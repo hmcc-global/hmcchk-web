@@ -1,3 +1,5 @@
+const sanitizeHtml = require('sanitize-html');
+
 module.exports = {
   friendlyName: 'Email user sermon note',
 
@@ -96,13 +98,28 @@ module.exports = {
         }
       }
 
-      // TipTap HTML is intentional unescaped content for the email template (<%- data %>).
+      // TipTap HTML is rendered unescaped by the email template (<%- data %>),
+      // so it must be sanitized here at the trust boundary: this endpoint is
+      // public and sermonNoteData is user-supplied HTML. Allowlist covers
+      // TipTap markup; images are stripped (notes contain no images) along
+      // with scripts, event handlers and javascript: URLs.
+      const safeHtml = sanitizeHtml(sermonNoteData, {
+        allowedTags: sanitizeHtml.defaults.allowedTags
+          .filter((tag) => tag !== 'img')
+          .concat(['span']),
+        allowedAttributes: {
+          '*': ['style', 'class'],
+          a: ['href'],
+        },
+        allowedSchemes: ['http', 'https', 'mailto'],
+      });
+
       await sails.helpers.sendTemplateEmail.with({
         to: email,
         subject: 'Sermon Note',
         template: 'email-user-sermon-note',
         templateData: {
-          data: sermonNoteData,
+          data: safeHtml,
         },
       });
 
