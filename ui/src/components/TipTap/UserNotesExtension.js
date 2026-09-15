@@ -111,16 +111,18 @@ export const UserNotesNode = Node.create({
   },
 
   renderHTML({ node, HTMLAttributes }) {
-    return [
-      'div',
-      {
-        class: 'userNotes',
-        id: node.attrs.id || '',
-        style: 'background-color:#f4f4f4;',
-        ...HTMLAttributes,
-      },
-      node.content.size > 0 ? 0 : node.attrs.userNotes || '',
-    ];
+    // Return a real DOM node so the user's HTML is kept as markup instead of
+    // being emitted as a string child, which ProseMirror escapes into text.
+    const dom = document.createElement('div');
+    dom.setAttribute('class', 'userNotes');
+    dom.setAttribute('id', node.attrs.id || '');
+    dom.setAttribute('style', 'background-color:#f4f4f4;');
+    Object.entries(HTMLAttributes).forEach(([name, value]) => {
+      if (value != null) dom.setAttribute(name, value);
+    });
+    dom.setAttribute('usernotes', node.attrs.userNotes || '');
+    dom.innerHTML = node.attrs.userNotes || '';
+    return dom;
   },
   addNodeView() {
     return ReactNodeViewRenderer((props) => {
