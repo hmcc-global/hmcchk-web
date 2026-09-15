@@ -42,6 +42,7 @@ import {
   generatePublishedFormLinks,
   setUserInformationFields,
 } from 'utils/userInformationHelpers';
+import { getSermonSeriesImages } from 'utils/SermonNotes';
 import SermonNotesPagination from './SermonNotesPagination';
 import { PROFILE_TABS } from './profileTabs';
 
@@ -128,26 +129,6 @@ const UserProfileMobile = (props) => {
     }
   }, [user.id]);
 
-  const fetchSermonSeries = useCallback(async () => {
-    try {
-      const { data, status } = await axios.get(
-        '/api/sermons/get-sermon-series'
-      );
-
-      if (status === 200 && Array.isArray(data)) {
-        const imagesMap = {};
-        data.forEach((series) => {
-          if (series.image && series.image.sourceUrl) {
-            imagesMap[series.name] = series.image.sourceUrl;
-          }
-        });
-        setSermonSeriesImages(imagesMap);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
   const extractUniqueSermonSeries = (notes) => {
     const seriesSet = new Set(notes.map((note) => note.sermonSeries));
     return [...seriesSet];
@@ -202,14 +183,13 @@ const UserProfileMobile = (props) => {
     fetchSignedUpForms();
     fetchUnsignedUpForms();
     fetchUserSermonNotes();
-    fetchSermonSeries();
+    getSermonSeriesImages().then(setSermonSeriesImages);
   }, [
     fetchUserData,
     fetchPublishedForms,
     fetchSignedUpForms,
     fetchUnsignedUpForms,
     fetchUserSermonNotes,
-    fetchSermonSeries,
   ]);
 
   const inputBox = {
