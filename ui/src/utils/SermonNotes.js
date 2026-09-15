@@ -1,4 +1,25 @@
 import axios from 'axios';
+import { customAxios } from 'utils/customAxios';
+
+export const getSermonSeriesImages = async () => {
+  try {
+    const { data, status } = await customAxios.get(
+      '/api/sermons/get-sermon-series'
+    );
+    if (status !== 200 || !Array.isArray(data)) return {};
+
+    const imagesMap = {};
+    data.forEach((series) => {
+      if (series.image && series.image.sourceUrl) {
+        imagesMap[series.name] = series.image.sourceUrl;
+      }
+    });
+    return imagesMap;
+  } catch (error) {
+    console.log(error);
+    return {};
+  }
+};
 
 export const getBiblePassage = async (passage, currentText) => {
   try {

@@ -34,6 +34,9 @@ const SermonNotesContainer = (props) => {
   // TipTap exposes getHTML() via this ref; Email reads it at click time (not mirrored state).
   const tipTapRef = useRef(null);
   const toast = useToast();
+  // Tracks the latest sermon this editor is bound to, so stale async responses
+  // from a previous sermon never overwrite the current one.
+  const latestSermonIdRef = useRef(null);
 
   const todayId = DateTime.now().toFormat('ddMMyyyy');
 
@@ -56,13 +59,16 @@ const SermonNotesContainer = (props) => {
           sermonId: sermonId,
         },
       });
+      if (sermonId !== latestSermonIdRef.current) return;
       if (status === 200) {
         setSermonNotes(data[0]);
         setIsLoading(false);
       }
     } catch (error) {
       console.log(error);
-      setIsLoading(false);
+      if (sermonId === latestSermonIdRef.current) {
+        setIsLoading(false);
+      }
     }
   }, [sermonId]);
 
@@ -79,13 +85,19 @@ const SermonNotesContainer = (props) => {
           sermonId: sermonId,
         },
       });
+      if (sermonId !== latestSermonIdRef.current) return;
       if (status === 200) {
-        setUserSermonNotes(data);
+        setUserSermonNotes(
+          data && typeof data === 'object' && data.id ? data : null
+        );
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      if (sermonId === latestSermonIdRef.current) {
+        setIsLoadingExistingNotes(false);
+      }
     }
-    setIsLoadingExistingNotes(false);
   }, [user, sermonId]);
 
   // save updates to local storage as user types
@@ -243,6 +255,7 @@ const SermonNotesContainer = (props) => {
 
   useEffect(() => {
     if (sermonId) {
+      latestSermonIdRef.current = sermonId;
       getSermonNotesParent();
       getUserSermonNotes();
     }
@@ -257,12 +270,15 @@ const SermonNotesContainer = (props) => {
         localUserNotes
       ) {
         setEditUserSermonNotes(JSON.parse(localUserNotes));
+      } else {
+        setEditUserSermonNotes(undefined);
       }
     }
   }, [sermonId]);
 
   useDebounce(
     () => {
+      if (!editUserSermonNotes) return;
       localStorage.setItem(
         `sermonNotes-${sermonId}`,
         JSON.stringify(editUserSermonNotes)
@@ -363,6 +379,7 @@ const SermonNotesContainer = (props) => {
                 <Container>
                   <TiptapOutput
                     ref={tipTapRef}
+                    key={sermonId}
                     input={originalContentWithUserNotes}
                     textPassage={sermonNotes.passage}
                     setUserSermonNotes={setEditUserSermonNotes}

@@ -51,6 +51,51 @@ const splitFullName = (fullName) => {
   return { firstName, lastName };
 };
 
+// Populates a react-hook-form instance from a user record
+const setUserInformationFields = (userData, setValue) => {
+  for (let key in userData) {
+    if (settableDataFields.includes(key)) {
+      switch (key) {
+        case 'fullName':
+          const { firstName, lastName } = splitFullName(userData.fullName);
+          setValue('firstName', firstName);
+          setValue('lastName', lastName);
+          break;
+        case 'address':
+          if (userData[key]) {
+            setValue('addressFloor', userData[key]['floor']);
+            setValue('addressFlat', userData[key]['flat']);
+            setValue('addressStreet', userData[key]['street']);
+            setValue('addressDistrict', userData[key]['district']);
+            setValue('addressRegion', userData[key]['region']);
+          }
+          break;
+        case 'baptismInfo':
+          if (userData[key] && userData[key][0]) {
+            setValue('baptismDate', userData[key][0]['baptismDate']);
+            setValue('baptismPlace', userData[key][0]['baptismPlace']);
+          }
+          break;
+        case 'membershipInfo':
+          if (userData[key] && userData[key][0]) {
+            setValue(
+              'membershipRecognitionDate',
+              userData[key][0]['recognitionDate']
+            );
+            setValue(
+              'membershipRecommitmentDate',
+              userData[key][0]['recommitmentDate']
+            );
+          }
+          break;
+        default:
+          setValue(key, userData[key]);
+          break;
+      }
+    }
+  }
+};
+
 // Must be called when using forms
 const purgeFormFields = (data) => {
   delete data['addressFloor'];
@@ -203,6 +248,7 @@ const generatePublishedFormLinks = (forms, signedUp) => {
 export {
   splitFullName,
   settableDataFields,
+  setUserInformationFields,
   userDataCleanup,
   getUserDataRequest,
   updateUserDataRequest,
