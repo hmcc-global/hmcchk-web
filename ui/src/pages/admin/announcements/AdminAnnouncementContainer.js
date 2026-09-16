@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { customAxios as axios } from 'utils/customAxios';
 import {
   Button,
@@ -9,21 +9,12 @@ import {
   useToast,
   Stack,
   Flex,
-  Badge,
-  Image,
-  Grid,
   HStack,
   ButtonGroup,
   Divider,
   Input,
   InputGroup,
   InputLeftElement,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  IconButton,
   Skeleton,
   Tooltip,
   AlertDialog,
@@ -35,24 +26,21 @@ import {
   Wrap,
   WrapItem,
 } from 'components';
-import {
-  CalendarIcon,
-  TimeIcon,
-  InfoOutlineIcon,
-  SearchIcon,
-  StarIcon,
-  ChatIcon,
-} from 'components/icons';
-import { FiMoreVertical } from 'react-icons/fi';
+import { SearchIcon } from 'components/icons';
+import { FiPlus } from 'react-icons/fi';
 import AnnouncementEditorModal from './AnnouncementEditorModal';
+import AdminAnnouncementCard from './AdminAnnouncementCard';
 import { DateTime } from 'luxon';
-import { pastRecencyMs } from './announcementListHelpers';
+import { BRAND_BLUE, pastRecencyMs } from './announcementListHelpers';
 
 const FilterChip = ({ label, isActive, onClick }) => (
   <Button
     size="sm"
     variant={isActive ? 'solid' : 'outline'}
-    colorScheme={isActive ? 'blue' : 'gray'}
+    bg={isActive ? BRAND_BLUE : 'transparent'}
+    color={isActive ? 'white' : BRAND_BLUE}
+    borderColor={BRAND_BLUE}
+    _hover={isActive ? { opacity: '90%' } : { bg: '#F6FAFF' }}
     onClick={onClick}
     aria-pressed={isActive}
   >
@@ -70,18 +58,6 @@ const isCurrentItem = (item, now) => {
     if (end.isValid) return end.endOf('day') > now;
   }
   return true;
-};
-
-const formatDisplayWindow = (item) => {
-  const fmt = (value) => {
-    if (!value) return null;
-    const dt = DateTime.fromISO(value);
-    return dt.isValid ? dt.toFormat('dd MMM yyyy HH:mm') : value;
-  };
-  const start = fmt(item.displayStartDateTime);
-  const end = fmt(item.displayEndDateTime);
-  if (!start && !end) return 'No display window';
-  return `${start || '…'} – ${end || '…'}`;
 };
 
 const DESTINATION_OPTIONS = [
@@ -115,7 +91,7 @@ export default function AdminAnnouncementContainer(props) {
   );
   const canPublish = ['t3ch', 'admin', 'stewardship'].includes(user.accessType);
 
-  const getAnnouncementList = async () => {
+  const getAnnouncementList = useCallback(async () => {
     try {
       const { data, status } = await axios.get('/api/announcement/admin-get');
       if (status !== 200) {
@@ -133,7 +109,7 @@ export default function AdminAnnouncementContainer(props) {
     } finally {
       setListLoading(false);
     }
-  };
+  }, [toast]);
 
   useEffect(() => {
     getAnnouncementList();
@@ -150,39 +126,45 @@ export default function AdminAnnouncementContainer(props) {
     setEditAnnouncementData(null);
   };
 
-  const loadForEditor = async (id, action) => {
-    const gen = ++loadGen.current;
-    setBusyId(id);
-    try {
-      const { data, status } = await axios.get('/api/announcement/admin-get', {
-        params: { id },
-      });
-      if (gen !== loadGen.current) return;
-      if (status !== 200 || !data[0]) {
+  const loadForEditor = useCallback(
+    async (id, action) => {
+      const gen = ++loadGen.current;
+      setBusyId(id);
+      try {
+        const { data, status } = await axios.get(
+          '/api/announcement/admin-get',
+          {
+            params: { id },
+          }
+        );
+        if (gen !== loadGen.current) return;
+        if (status !== 200 || !data[0]) {
+          toast({
+            description: 'Could not open this announcement. Please try again.',
+            status: 'warning',
+            duration: 8000,
+            isClosable: true,
+          });
+          return;
+        }
+        setIsEditorOpen(true);
+        setActionOnEditor(action);
+        setEditAnnouncementData(data[0]);
+      } catch (err) {
+        console.log(err);
+        if (gen !== loadGen.current) return;
         toast({
           description: 'Could not open this announcement. Please try again.',
           status: 'warning',
           duration: 8000,
           isClosable: true,
         });
-        return;
+      } finally {
+        if (gen === loadGen.current) setBusyId(null);
       }
-      setIsEditorOpen(true);
-      setActionOnEditor(action);
-      setEditAnnouncementData(data[0]);
-    } catch (err) {
-      console.log(err);
-      if (gen !== loadGen.current) return;
-      toast({
-        description: 'Could not open this announcement. Please try again.',
-        status: 'warning',
-        duration: 8000,
-        isClosable: true,
-      });
-    } finally {
-      if (gen === loadGen.current) setBusyId(null);
-    }
-  };
+    },
+    [toast]
+  );
 
   const confirmDelete = async () => {
     const id = pendingDelete && pendingDelete.id;
@@ -223,68 +205,64 @@ export default function AdminAnnouncementContainer(props) {
     }
   };
 
-  const onPublish = async (id) => {
-    const announcementData = allAnnouncements.find((item) => item.id === id);
-    if (!announcementData) return;
-    setBusyId(id);
-    try {
-      const { status } = await axios.put('/api/announcement/update', {
-        id,
-        isPublished: !announcementData.isPublished,
-      });
-      if (status === 200) {
+  const onPublish = useCallback(
+    async (id) => {
+      const announcementData = allAnnouncements.find((item) => item.id === id);
+      if (!announcementData) return;
+      setBusyId(id);
+      try {
+        const { status } = await axios.put('/api/announcement/update', {
+          id,
+          isPublished: !announcementData.isPublished,
+        });
+        if (status === 200) {
+          toast({
+            description: announcementData.isPublished
+              ? 'Announcement unpublished'
+              : 'Announcement published',
+            status: 'success',
+            duration: 8000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            description: 'There was an issue with the request',
+            status: 'error',
+            duration: 8000,
+            isClosable: true,
+          });
+        }
+        await getAnnouncementList();
+      } catch (err) {
+        console.log(err);
         toast({
-          description: announcementData.isPublished
-            ? 'Announcement unpublished'
-            : 'Announcement published',
-          status: 'success',
+          description: 'Could not update publish state. Please try again.',
+          status: 'warning',
           duration: 8000,
           isClosable: true,
         });
-      } else {
-        toast({
-          description: 'There was an issue with the request',
-          status: 'error',
-          duration: 8000,
-          isClosable: true,
-        });
+      } finally {
+        setBusyId(null);
       }
-      await getAnnouncementList();
-    } catch (err) {
-      console.log(err);
-      toast({
-        description: 'Could not update publish state. Please try again.',
-        status: 'warning',
-        duration: 8000,
-        isClosable: true,
-      });
-    } finally {
-      setBusyId(null);
-    }
-  };
+    },
+    [allAnnouncements, getAnnouncementList, toast]
+  );
 
-  const showProperDate = (startDate, endDate) => {
-    if (startDate && endDate) {
-      return `${startDate} - ${endDate}`;
-    }
-    if (startDate && !endDate) {
-      return startDate;
-    }
-    if (!startDate && !endDate) {
-      return '-';
-    }
-    return startDate;
-  };
-
-  const showProperTime = (startTime, endTime) => {
-    if (startTime && endTime) {
-      return `${startTime} - ${endTime}`;
-    }
-    if (!startTime && !endTime) {
-      return '-';
-    }
-    return startTime;
-  };
+  // Stable per-action handlers (id in, side effect out) so the memoized
+  // AdminAnnouncementCard skips re-renders while filtering/searching.
+  const editItem = useCallback(
+    (id) => loadForEditor(id, 'edit'),
+    [loadForEditor]
+  );
+  const duplicateItem = useCallback(
+    (id) => loadForEditor(id, 'duplicate'),
+    [loadForEditor]
+  );
+  const publishItem = useCallback((id) => onPublish(id), [onPublish]);
+  const deleteItem = useCallback(
+    (id) => setPendingDelete(allAnnouncements.find((item) => item.id === id)),
+    [allAnnouncements]
+  );
 
   const matchesDestination = (item) => {
     if (destinationFilter === 'web') return !!item.isInWeb;
@@ -299,7 +277,7 @@ export default function AdminAnnouncementContainer(props) {
     if (query && !title.includes(query.trim().toLowerCase())) return false;
     if (!matchesDestination(item)) return false;
     if (featuredOnly && !item.featured) return false;
-    if (unpublishedOnly && !(item.isInWeb && !item.isPublished)) return false;
+    if (unpublishedOnly && item.isPublished) return false;
     return true;
   });
   if (!isCurrentAnnouncements) {
@@ -328,16 +306,30 @@ export default function AdminAnnouncementContainer(props) {
             </Heading>
             <ButtonGroup size="sm" isAttached variant="outline">
               <Button
-                colorScheme={isCurrentAnnouncements ? 'blue' : 'gray'}
                 variant={isCurrentAnnouncements ? 'solid' : 'outline'}
+                bg={isCurrentAnnouncements ? BRAND_BLUE : 'transparent'}
+                color={isCurrentAnnouncements ? 'white' : BRAND_BLUE}
+                borderColor={BRAND_BLUE}
+                _hover={
+                  isCurrentAnnouncements
+                    ? { opacity: '90%' }
+                    : { bg: '#F6FAFF' }
+                }
                 aria-pressed={isCurrentAnnouncements}
                 onClick={() => setIsCurrentAnnouncements(true)}
               >
                 Current
               </Button>
               <Button
-                colorScheme={!isCurrentAnnouncements ? 'blue' : 'gray'}
                 variant={!isCurrentAnnouncements ? 'solid' : 'outline'}
+                bg={!isCurrentAnnouncements ? BRAND_BLUE : 'transparent'}
+                color={!isCurrentAnnouncements ? 'white' : BRAND_BLUE}
+                borderColor={BRAND_BLUE}
+                _hover={
+                  !isCurrentAnnouncements
+                    ? { opacity: '90%' }
+                    : { bg: '#F6FAFF' }
+                }
                 aria-pressed={!isCurrentAnnouncements}
                 onClick={() => setIsCurrentAnnouncements(false)}
               >
@@ -352,11 +344,14 @@ export default function AdminAnnouncementContainer(props) {
           >
             <Box>
               <Button
-                colorScheme="blue"
+                leftIcon={<FiPlus />}
+                bg={BRAND_BLUE}
+                color="white"
+                _hover={{ opacity: '90%' }}
                 onClick={onCreate}
                 isDisabled={!canCreate}
               >
-                Add new
+                New Announcement
               </Button>
             </Box>
           </Tooltip>
@@ -407,7 +402,7 @@ export default function AdminAnnouncementContainer(props) {
               </WrapItem>
               <WrapItem>
                 <FilterChip
-                  label="Web unpublished"
+                  label="Unpublished"
                   isActive={unpublishedOnly}
                   onClick={() => setUnpublishedOnly(!unpublishedOnly)}
                 />
@@ -418,9 +413,8 @@ export default function AdminAnnouncementContainer(props) {
 
         {listLoading && (
           <Stack>
-            <Skeleton height="96px" />
-            <Skeleton height="96px" />
-            <Skeleton height="96px" />
+            <Skeleton height="400px" />
+            <Skeleton height="400px" />
           </Stack>
         )}
 
@@ -432,197 +426,36 @@ export default function AdminAnnouncementContainer(props) {
                 : 'No announcements match these filters.'}
             </Text>
             {allAnnouncements.length === 0 && canCreate && (
-              <Button colorScheme="blue" onClick={onCreate}>
-                Add new
+              <Button
+                leftIcon={<FiPlus />}
+                bg={BRAND_BLUE}
+                color="white"
+                _hover={{ opacity: '90%' }}
+                onClick={onCreate}
+              >
+                New Announcement
               </Button>
             )}
           </Box>
         )}
 
         {!listLoading && filtered.length > 0 && (
-          <Stack spacing={3}>
-            {filtered.map((announcementItem) => {
-              const busy = busyId === announcementItem.id;
-              return (
-                <Box
-                  key={announcementItem.id}
-                  p={4}
-                  borderRadius="lg"
-                  borderWidth="1px"
-                >
-                  <Flex
-                    direction={{ base: 'column', md: 'row' }}
-                    align={{ md: 'flex-start' }}
-                    gap={4}
-                  >
-                    <Box maxW="12rem" w="100%" flexShrink={0}>
-                      <Image
-                        src={announcementItem.imageAdUrl}
-                        alt={announcementItem.title || ''}
-                        fallbackSrc="https://hongkong.sub.hmccglobal.org/wp-content/uploads/Screenshot-2020-09-04-at-6.39.50-PM.png"
-                        borderRadius="md"
-                      />
-                    </Box>
-                    <Stack spacing={2} flex={1} minW={0}>
-                      <HStack spacing={2} flexWrap="wrap">
-                        <Heading size="md">{announcementItem.title}</Heading>
-                        {announcementItem.featured && (
-                          <HStack color="green.600" spacing={1}>
-                            <StarIcon />
-                            <Text fontSize="sm">Featured</Text>
-                          </HStack>
-                        )}
-                      </HStack>
-                      <HStack spacing={2} flexWrap="wrap">
-                        {announcementItem.isInWeb && (
-                          <Badge colorScheme="teal">Web</Badge>
-                        )}
-                        {announcementItem.isInPpt && (
-                          <Badge colorScheme="orange">PPT</Badge>
-                        )}
-                        {announcementItem.isInWeb && (
-                          <Badge
-                            colorScheme={
-                              announcementItem.isPublished ? 'green' : 'gray'
-                            }
-                          >
-                            {announcementItem.isPublished
-                              ? 'Published'
-                              : 'Unpublished'}
-                          </Badge>
-                        )}
-                      </HStack>
-                      <Text fontSize="sm" color="gray.600">
-                        Display: {formatDisplayWindow(announcementItem)}
-                      </Text>
-                      <Grid
-                        templateColumns={{
-                          base: '1fr',
-                          md: 'repeat(2, 1fr)',
-                        }}
-                        gap={1}
-                        fontSize="sm"
-                      >
-                        <Text>
-                          <CalendarIcon /> Date:{' '}
-                          {showProperDate(
-                            announcementItem.eventStartDate,
-                            announcementItem.eventEndDate
-                          )}
-                        </Text>
-                        <Text>
-                          <TimeIcon /> Time:{' '}
-                          {showProperTime(
-                            announcementItem.eventStartTime,
-                            announcementItem.eventEndTime
-                          )}
-                        </Text>
-                        <Text>
-                          <InfoOutlineIcon /> Location:{' '}
-                          {announcementItem.location || '-'}
-                        </Text>
-                        <Text>
-                          <ChatIcon /> Submitter:{' '}
-                          {announcementItem.submittedBy || '-'}
-                        </Text>
-                        <Text>
-                          Last updated by:{' '}
-                          {announcementItem.lastUpdatedBy || '-'}
-                        </Text>
-                      </Grid>
-                    </Stack>
-                    <HStack
-                      spacing={2}
-                      flexWrap="wrap"
-                      alignSelf={{ base: 'stretch', md: 'flex-start' }}
-                    >
-                      <Button
-                        size="sm"
-                        colorScheme="blue"
-                        onClick={() =>
-                          loadForEditor(announcementItem.id, 'edit')
-                        }
-                        isLoading={busy}
-                      >
-                        Edit
-                      </Button>
-                      {announcementItem.isInWeb && (
-                        <Tooltip
-                          label={publishDisabledReason}
-                          isDisabled={!publishDisabledReason}
-                          hasArrow
-                        >
-                          <Box>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              colorScheme={
-                                announcementItem.isPublished ? 'gray' : 'green'
-                              }
-                              isDisabled={!canPublish || busy}
-                              isLoading={busy}
-                              onClick={() => {
-                                if (canPublish) onPublish(announcementItem.id);
-                              }}
-                            >
-                              {announcementItem.isPublished
-                                ? 'Unpublish'
-                                : 'Publish'}
-                            </Button>
-                          </Box>
-                        </Tooltip>
-                      )}
-                      <Menu>
-                        <MenuButton
-                          as={IconButton}
-                          aria-label={`More actions for ${announcementItem.title}`}
-                          icon={<FiMoreVertical />}
-                          variant="ghost"
-                          size="sm"
-                          isDisabled={busy}
-                        />
-                        <MenuList>
-                          {canCreate ? (
-                            <MenuItem
-                              onClick={() =>
-                                loadForEditor(announcementItem.id, 'duplicate')
-                              }
-                            >
-                              Duplicate
-                            </MenuItem>
-                          ) : (
-                            <Tooltip label={createDisabledReason} hasArrow>
-                              <Box>
-                                <MenuItem isDisabled>Duplicate</MenuItem>
-                              </Box>
-                            </Tooltip>
-                          )}
-                          <MenuDivider />
-                          <Tooltip
-                            label={publishDisabledReason}
-                            isDisabled={!publishDisabledReason}
-                            hasArrow
-                          >
-                            <Box>
-                              <MenuItem
-                                color="red.500"
-                                isDisabled={!canPublish}
-                                onClick={() => {
-                                  if (canPublish)
-                                    setPendingDelete(announcementItem);
-                                }}
-                              >
-                                Delete
-                              </MenuItem>
-                            </Box>
-                          </Tooltip>
-                        </MenuList>
-                      </Menu>
-                    </HStack>
-                  </Flex>
-                </Box>
-              );
-            })}
+          <Stack spacing={6}>
+            {filtered.map((announcementItem) => (
+              <AdminAnnouncementCard
+                key={announcementItem.id}
+                item={announcementItem}
+                busy={busyId === announcementItem.id}
+                canCreate={canCreate}
+                canPublish={canPublish}
+                createDisabledReason={createDisabledReason}
+                publishDisabledReason={publishDisabledReason}
+                onEdit={editItem}
+                onDuplicate={duplicateItem}
+                onPublish={publishItem}
+                onDelete={deleteItem}
+              />
+            ))}
           </Stack>
         )}
       </Stack>

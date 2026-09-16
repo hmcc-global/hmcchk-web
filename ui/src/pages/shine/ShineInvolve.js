@@ -24,7 +24,7 @@ import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 import { getRenderDate, sortEvents } from 'utils/eventsHelpers';
-import EventCard from '../events/EventCard';
+import EventCard from 'components/EventCard';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -75,9 +75,7 @@ const ShineInvolve = (props) => {
       if (status === 200) {
         const filteredEndDate = data.filter((item) => {
           if (item.displayStartDateTime) {
-            let displayStartDate = DateTime.fromISO(
-              item.displayStartDateTime
-            );
+            let displayStartDate = DateTime.fromISO(item.displayStartDateTime);
             if (displayStartDate > DateTime.now()) return false;
           }
 

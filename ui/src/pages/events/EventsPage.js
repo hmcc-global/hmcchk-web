@@ -10,7 +10,7 @@ import {
   HStack,
   Text,
 } from 'components';
-import EventCard from './EventCard';
+import EventCard from 'components/EventCard';
 import EventTypeFilter from './EventTypeFilter';
 import { DateTime } from 'luxon';
 import { getRenderDate, sortEvents } from 'utils/eventsHelpers';

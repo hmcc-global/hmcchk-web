@@ -140,6 +140,7 @@ export { default as NavBar } from './NavigationBar/NavBar';
 export { default as MobileNavBar } from './NavigationBar/MobileNavBar';
 export { default as MainMenu } from './NavigationBar/MainMenu';
 export { default as Card } from './Card';
+export { default as EventCard } from './EventCard';
 export { default as FileUpload } from './FileUpload';
 export { default as LiveButton } from './LiveButton';
 export { default as SermonSeries } from './SermonSeries';

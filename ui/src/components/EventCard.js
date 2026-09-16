@@ -16,53 +16,86 @@ import {
   ModalBody,
   ModalCloseButton,
   ButtonGroup,
+  IconButton,
   Tag,
-} from 'components';
+} from './chakra';
 import { RiCalendarEventFill } from 'react-icons/ri';
 import { BsClockFill, BsFullscreen } from 'react-icons/bs';
 import { ImLocation2 } from 'react-icons/im';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { MdOutlineAddToPhotos } from 'react-icons/md';
-import { useState, useEffect } from 'react';
-import { getRenderDate } from 'utils/eventsHelpers';
+import { useState } from 'react';
+import { getRenderDate, generateGoogleCalendarLink } from 'utils/eventsHelpers';
 import { DateTime } from 'luxon';
-import { generateGoogleCalendarLink } from 'utils/eventsHelpers';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
+
+const formatTime = (time) =>
+  DateTime.fromISO(time).toLocaleString({
+    hour: 'numeric',
+    minute: 'numeric',
+    hourCycle: 'h12',
+  });
+
+const renderDateString = (eventData) => {
+  const occurrence = eventData.renderDate
+    ? eventData.renderDate
+    : getRenderDate(
+        eventData.eventStartDate,
+        eventData.eventEndDate,
+        eventData.eventInterval,
+        eventData.eventStartTime
+      );
+  let text = occurrence.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
+  if (
+    eventData.eventEndDate &&
+    eventData.eventInterval === 'None' &&
+    occurrence.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY) !==
+      DateTime.fromISO(eventData.eventEndDate).toLocaleString(
+        DateTime.DATE_MED_WITH_WEEKDAY
+      )
+  ) {
+    text +=
+      ' - ' +
+      DateTime.fromISO(eventData.eventEndDate).toLocaleString(
+        DateTime.DATE_MED_WITH_WEEKDAY
+      );
+  }
+  return text;
+};
+
+const renderTimeString = (eventData) => {
+  if (!eventData.eventStartTime) return '';
+  let text = formatTime(eventData.eventStartTime);
+  if (
+    eventData.eventEndTime &&
+    eventData.eventStartTime !== eventData.eventEndTime
+  ) {
+    text += ' - ' + formatTime(eventData.eventEndTime);
+  }
+  return text;
+};
 
 const EventCard = (props) => {
   const { eventData, isShineInvolve = false } = props;
   const [isOpen, setIsOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [colors, setColors] = useState([]);
-  const tagArray = [];
 
-  const buttonBgColor = isShineInvolve ? '#7D5300' : '#2C5282';
+  const buttonBgColor = isShineInvolve ? '#7D5300' : 'blue.700';
+
+  const eventTags = [
+    ...(eventData.eventType ?? []),
+    ...(eventData.featured ? [{ value: 'Featured', color: 'yellow' }] : []),
+  ];
 
   const onOpen = (e) => {
-    if (!e.target.href) {
+    if (!e.target.closest('a')) {
       setIsOpen(true);
     }
   };
 
-  const onClose = (e) => {
+  const onClose = () => {
     setIsOpen(false);
   };
-
-  useEffect(() => {
-    const handleChange = () => {
-      if (window.innerWidth < 750) {
-        setIsMobile(true);
-      } else {
-        setIsMobile(false);
-      }
-    };
-    window.addEventListener('resize', handleChange);
-
-    return () => {
-      window.removeEventListener('resize', handleChange);
-    };
-  }, []);
 
   return (
     <>
@@ -76,9 +109,11 @@ const EventCard = (props) => {
       >
         <AspectRatio mb="5" width={['100%', '50%']} ratio={16 / 9}>
           <img
-            alt="event-img"
+            alt={eventData.title || ''}
             src={eventData.imageAdUrl}
             objectFit="cover"
+            loading="lazy"
+            decoding="async"
             style={{ borderRadius: '10px' }}
           />
         </AspectRatio>
@@ -89,15 +124,7 @@ const EventCard = (props) => {
           width={['100%', '55%']}
         >
           <Stack spacing={[2, 4]} direction="row" mb={['2', '5']}>
-            {eventData.eventType?.length > 0 &&
-              eventData.eventType.map((tag) => {
-                tagArray.push({ value: tag.value, color: tag.color });
-              })}
-
-            {eventData.featured &&
-              tagArray.push({ value: 'Featured', color: 'yellow' })}
-
-            {tagArray.map((tag, i) => (
+            {eventTags.map((tag, i) => (
               <Tag
                 key={'event' + i}
                 borderRadius={50}
@@ -113,7 +140,7 @@ const EventCard = (props) => {
             ))}
           </Stack>
           <Heading
-            as="h4"
+            as="h2"
             mb={['2', '5']}
             size="lg"
             fontWeight="900"
@@ -125,52 +152,13 @@ const EventCard = (props) => {
             {eventData.eventStartDate && (
               <Text fontSize={['sm', 'lg']} fontWeight="bold">
                 <Icon mr={2} as={RiCalendarEventFill} />
-                Date:{' '}
-                {eventData.renderDate
-                  ? eventData.renderDate.toLocaleString(
-                      DateTime.DATE_MED_WITH_WEEKDAY
-                    )
-                  : getRenderDate(
-                      eventData.eventStartDate,
-                      eventData.eventEndDate,
-                      eventData.eventInterval,
-                      eventData.eventStartTime
-                    ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
-                {eventData.eventEndDate &&
-                  getRenderDate(
-                    eventData.eventStartDate,
-                    eventData.eventEndDate,
-                    eventData.eventInterval,
-                    eventData.eventStartTime
-                  ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY) !==
-                    DateTime.fromISO(eventData.eventEndDate).toLocaleString(
-                      DateTime.DATE_MED_WITH_WEEKDAY
-                    ) &&
-                  eventData.eventInterval === 'None' &&
-                  ' - ' +
-                    DateTime.fromISO(eventData.eventEndDate).toLocaleString(
-                      DateTime.DATE_MED_WITH_WEEKDAY
-                    )}
+                Date: {renderDateString(eventData)}
               </Text>
             )}
             {eventData.eventStartTime && (
               <Text fontSize={['sm', 'lg']} fontWeight="bold">
                 <Icon mr={2} as={BsClockFill} />
-                Time:{' '}
-                {DateTime.fromISO(eventData.eventStartTime).toLocaleString({
-                  hour: 'numeric',
-                  minute: 'numeric',
-                  hourCycle: 'h12',
-                })}
-                {eventData.eventEndTime &&
-                eventData.eventStartTime !== eventData.eventEndTime
-                  ? ' - ' +
-                    DateTime.fromISO(eventData.eventEndTime).toLocaleString({
-                      hour: 'numeric',
-                      minute: 'numeric',
-                      hourCycle: 'h12',
-                    })
-                  : ''}
+                Time: {renderTimeString(eventData)}
               </Text>
             )}
             {eventData.location && (
@@ -181,7 +169,7 @@ const EventCard = (props) => {
             )}
           </Stack>
           <Box
-            bg="#FFFFFF"
+            bg="white"
             borderRadius="20"
             mt={['2', '5']}
             p={4}
@@ -202,11 +190,14 @@ const EventCard = (props) => {
                 skipHtml
               />{' '}
             </Text>
-            <Icon
-              as={BsFullscreen}
+            <IconButton
+              aria-label="View details"
+              icon={<Icon as={BsFullscreen} />}
+              size="sm"
+              variant="ghost"
               position="absolute"
               right="6"
-              cursor="pointer"
+              onClick={onOpen}
             />
           </Box>
           <Stack mt={['2', '5']} direction="row" spacing={4}>
@@ -250,25 +241,26 @@ const EventCard = (props) => {
         <Modal size="3xl" isOpen onClose={onClose} motionPreset="none">
           <ModalOverlay />
           <ModalContent borderRadius="20" justifyContent="center" p={[0, 5]}>
-            {isMobile ? (
-              <Center mt={4} mb={2}>
-                <Box w={10} h={1} bgColor="#A8A8A8" borderRadius={20} />
-              </Center>
-            ) : (
-              <ModalCloseButton
-                position="absolute"
-                right="0"
-                top="-10"
-                bgColor="white"
-                borderRadius="20"
-              />
-            )}
+            <Center mt={4} mb={2} display={{ base: 'flex', md: 'none' }}>
+              <Box w={10} h={1} bgColor="#A8A8A8" borderRadius={20} />
+            </Center>
+            <ModalCloseButton
+              position="absolute"
+              right="0"
+              top="-10"
+              bgColor="white"
+              borderRadius="20"
+            />
             <AspectRatio ratio={16 / 9} m={[2, 0]}>
-              <Image borderRadius={10} src={eventData.imageAdUrl} />
+              <Image
+                borderRadius={10}
+                src={eventData.imageAdUrl}
+                alt={eventData.title || ''}
+              />
             </AspectRatio>
             <ModalBody ml={[-2, 0]} p={1} my={1} w={['90%', '100%']} m="auto">
               <Stack spacing={4} direction="row" mt={[0, 2]} mb="3">
-                {tagArray.map((tag, i) => (
+                {eventTags.map((tag, i) => (
                   <Tag
                     key={'event' + i}
                     borderRadius={20}
@@ -284,7 +276,7 @@ const EventCard = (props) => {
                 ))}
               </Stack>
               {eventData.title && (
-                <Heading as="h4" size="lg" fontWeight="900" mb="3">
+                <Heading as="h2" size="lg" fontWeight="900" mb="3">
                   {eventData.title}
                 </Heading>
               )}
@@ -292,54 +284,13 @@ const EventCard = (props) => {
                 {eventData.eventStartDate && (
                   <Text fontSize={['sm', 'md']} fontWeight="bold">
                     <Icon mr={2} as={RiCalendarEventFill} />
-                    Date:{' '}
-                    {eventData.renderDate
-                      ? eventData.renderDate.toLocaleString(
-                          DateTime.DATE_MED_WITH_WEEKDAY
-                        )
-                      : getRenderDate(
-                          eventData.eventStartDate,
-                          eventData.eventEndDate,
-                          eventData.eventInterval,
-                          eventData.eventStartTime
-                        ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
-                    {eventData.eventEndDate &&
-                      getRenderDate(
-                        eventData.eventStartDate,
-                        eventData.eventEndDate,
-                        eventData.eventInterval,
-                        eventData.eventStartTime
-                      ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY) !==
-                        DateTime.fromISO(eventData.eventEndDate).toLocaleString(
-                          DateTime.DATE_MED_WITH_WEEKDAY
-                        ) &&
-                      eventData.eventInterval === 'None' &&
-                      ' - ' +
-                        DateTime.fromISO(eventData.eventEndDate).toLocaleString(
-                          DateTime.DATE_MED_WITH_WEEKDAY
-                        )}
+                    Date: {renderDateString(eventData)}
                   </Text>
                 )}
                 {eventData.eventStartTime && (
                   <Text fontSize={['sm', 'md']} fontWeight="bold">
                     <Icon mr={2} as={BsClockFill} />
-                    Time:{' '}
-                    {DateTime.fromISO(eventData.eventStartTime).toLocaleString({
-                      hour: 'numeric',
-                      minute: 'numeric',
-                      hourCycle: 'h12',
-                    })}
-                    {eventData.eventEndTime &&
-                    eventData.eventStartTime !== eventData.eventEndTime
-                      ? ' - ' +
-                        DateTime.fromISO(eventData.eventEndTime).toLocaleString(
-                          {
-                            hour: 'numeric',
-                            minute: 'numeric',
-                            hourCycle: 'h12',
-                          }
-                        )
-                      : ''}
+                    Time: {renderTimeString(eventData)}
                   </Text>
                 )}
                 {eventData.location && (
