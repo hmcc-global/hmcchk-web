@@ -711,6 +711,26 @@ export default function AdminFormDataViewer(props) {
 
   const getContextMenuItems = (params) => {
     const selectedNodes = params.api.getSelectedNodes();
+    // Batch status updates for class tracking courses, one sub-menu per active
+    // course. Mirrors the "Set Payment Status As" pattern - the selected value
+    // is written through contextMenuSetter (per-node setDataValue), which flows
+    // through onCellValueChanged into the regular single-record update endpoint.
+    const classCourseStatusItems = isClass
+      ? courses
+          .filter((course) => course.isActive !== false)
+          .map((course) => ({
+            name: course.name,
+            subMenu: classProgressStatuses.map((status) => ({
+              name: status,
+              action: () =>
+                contextMenuSetter(
+                  selectedNodes,
+                  status,
+                  `course_${course.courseId}_status`
+                ),
+            })),
+          }))
+      : [];
     let result = [
       // Default functions
       'copy',
@@ -758,6 +778,16 @@ export default function AdminFormDataViewer(props) {
           action: () => contextMenuSetter(selectedNodes, i, 'paymentMethod'),
         })),
       },
+      ...(classCourseStatusItems.length > 0
+        ? [
+            'separator',
+            {
+              name: 'Set Course Status',
+              disabled: selectedNodes.length === 0,
+              subMenu: classCourseStatusItems,
+            },
+          ]
+        : []),
       'separator',
       {
         name: 'Send Confirmation Email',
