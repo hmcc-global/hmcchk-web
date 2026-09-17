@@ -27,7 +27,7 @@ const UserProfileContainer = (props) => {
 
   return (
     <Box>
-      {/* Breaks footer... commenting out until fixable */}
+      {/* logo replacement spot - breaks footer... commenting out until fixable */}
       {/* <Image
         position="absolute"
         top="35%"

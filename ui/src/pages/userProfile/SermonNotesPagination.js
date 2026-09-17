@@ -2,8 +2,7 @@ import { AspectRatio, Box, Button, chakra, Flex, Text } from 'components';
 import { CheckIcon } from 'components/icons';
 import { Link } from 'react-router-dom';
 
-const FALLBACK_IMAGE =
-  'https://hongkong.sub.hmccglobal.org/wp-content/uploads/Screenshot-2020-09-04-at-6.39.50-PM.png';
+const FALLBACK_IMAGE = '/images/sermons/placeholder.svg';
 const BRAND_BLUE = '#4A6EEB';
 const BRAND_BLUE_HOVER = '#3D5CD9';
 

@@ -4,7 +4,6 @@ import {
   Stack,
   Box,
   Text,
-  Image,
   Button,
   Container,
   Link,
@@ -135,12 +134,13 @@ const NavBar = (props) => {
               <HStack spacing={5} display={{ base: 'none', md: 'flex' }}>
                 <LinkBox>
                   <LinkOverlay href="/">
-                    <Image
+                    {/* logo replacement spot */}
+                    {/* <Image
                       w="3.5em"
                       minW="3.5em"
                       src={process.env.PUBLIC_URL + '/images/ripple-black.png'}
                       alt="Logo of HMCC"
-                    />
+                    /> */}
                   </LinkOverlay>
                 </LinkBox>
                 <Link href="/">
@@ -385,13 +385,14 @@ const NavBar = (props) => {
                 >
                   <LinkBox>
                     <LinkOverlay href="/">
-                      <Image
-                        w="4em"
-                        src={
-                          process.env.PUBLIC_URL + '/images/ripple-black.png'
-                        }
-                        alt="Logo of HMCC"
-                      />
+                        {/* logo replacement spot */}
+                        {/* <Image
+                          w="4em"
+                          src={
+                            process.env.PUBLIC_URL + '/images/ripple-black.png'
+                          }
+                          alt="Logo of HMCC"
+                        /> */}
                     </LinkOverlay>
                   </LinkBox>
                 </Box>

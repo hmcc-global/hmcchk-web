@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, VStack, Text, Link, Container, Image } from 'components/chakra';
+import { Flex, VStack, Text, Link, Container, Box } from 'components/chakra';
 import { ChevronRightIcon } from '../icons';
 import { useDispatch } from 'react-redux';
 import { signout } from '../../reducers/userSlice';
@@ -25,11 +25,13 @@ const MainMenu = ({ login, onClose }) => {
           fontWeight="bold"
           fontSize="xl"
         >
-          <Image
+          {/* logo replacement spot - spacer keeps layout stable until a new logo is added */}
+          <Box h="3.5em" w="3.5em" />
+          {/* <Image
             w="3.5em"
             src={process.env.PUBLIC_URL + '/images/ripple.svg'}
             alt="Logo of HMCC"
-          />
+          /> */}
 
           <Flex direction="column" w="100%">
             <VStack>

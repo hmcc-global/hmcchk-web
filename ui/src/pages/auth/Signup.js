@@ -10,7 +10,6 @@ import {
   ListItem,
   VStack,
   Flex,
-  Image,
   Text,
   Button,
   Input,
@@ -201,13 +200,14 @@ const Signup = (props) => {
             fontWeight="500"
           >
             <VStack justify="center" align="center" mb="2.5">
-              <Image
+              {/* logo replacement spot */}
+              {/* <Image
                 marginBottom={{ base: '15px', md: '20px' }}
                 h={['4.5vh', '5.5vh', '6.5vh', '7.5vh', '8.5vh']}
                 src={`${process.env.PUBLIC_URL}/images/ripple.png`}
                 alt="Logo of HMCC"
                 style={{ filter: 'invert(0.6)' }}
-              />
+              /> */}
               <Text
                 fontWeight="700"
                 fontSize={['0.7rem', '0.8rem', '0.95rem', '1rem', '1.05rem']}

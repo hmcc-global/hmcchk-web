@@ -1,6 +1,6 @@
 import React from "react";
 import { ChevronLeftIcon } from "components/icons";
-import { Box, VStack, Flex, Image, Text, Stack, Link } from "components";
+import { Box, VStack, Flex, Text, Stack, Link } from "components";
 
 const PasswordSubmitted = (props) => {
   return (
@@ -19,12 +19,13 @@ const PasswordSubmitted = (props) => {
         </Flex>
         <Flex justifyContent="center">
           <VStack justify="center" align="center" spacing={["3vh"]} py="5vh">
-            <Image
+            {/* logo replacement spot */}
+            {/* <Image
               marginBottom="15px"
               h={{ base: "6vh", sm: "8vh", md: "10vh", lg: "12vh", xl: "15vh" }}
               src={`${process.env.PUBLIC_URL}/images/ripple.png`}
               alt="Logo of HMCC"
-            />
+            /> */}
             <Text fontSize={[24, 24, 28, 32]} fontWeight="bold">
               You're all set!
             </Text>

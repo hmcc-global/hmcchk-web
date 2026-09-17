@@ -10,7 +10,6 @@ import {
   Center,
   VStack,
   Flex,
-  Image,
   Text,
   Stack,
   Link,
@@ -121,12 +120,13 @@ const ResetPassword = (props) => {
         </Flex>
         <Flex justifyContent="center">
           <VStack justify="center" align="center" spacing={['3vh']} py="5vh">
-            <Image
+            {/* logo replacement spot */}
+            {/* <Image
               marginBottom="15px"
               h={{ base: '6vh', sm: '8vh', md: '10vh', lg: '12vh', xl: '15vh' }}
               src={`${process.env.PUBLIC_URL}/images/ripple.png`}
               alt="Logo of HMCC"
-            />
+            /> */}
 
             <Text
               fontSize={[24, 24, 28, 32]}
