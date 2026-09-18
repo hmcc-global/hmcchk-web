@@ -10,7 +10,6 @@ import {
   ListItem,
   VStack,
   Flex,
-  Image,
   Text,
   Button,
   Input,
@@ -19,6 +18,7 @@ import {
   ModalContent,
   ModalFooter,
   useMediaQuery,
+  Image,
 } from 'components';
 import { CheckCircleIcon } from 'components/icons';
 import { countryList } from 'utils/lists';
@@ -201,12 +201,12 @@ const Signup = (props) => {
             fontWeight="500"
           >
             <VStack justify="center" align="center" mb="2.5">
+              {/* temp 2026 logo — swap when final assets arrive */}
               <Image
                 marginBottom={{ base: '15px', md: '20px' }}
-                h={['4.5vh', '5.5vh', '6.5vh', '7.5vh', '8.5vh']}
-                src={`${process.env.PUBLIC_URL}/images/ripple.png`}
+                h={['2.25vh', '2.75vh', '3.25vh', '3.75vh', '4.25vh']}
+                src={`${process.env.PUBLIC_URL}/images/logo-blue.svg`}
                 alt="Logo of HMCC"
-                style={{ filter: 'invert(0.6)' }}
               />
               <Text
                 fontWeight="700"

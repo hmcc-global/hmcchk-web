@@ -10,11 +10,11 @@ import {
   Center,
   VStack,
   Flex,
-  Image,
   Text,
   Stack,
   Link,
   useToast,
+  Image,
 } from 'components';
 import { useLocation } from 'react-router-dom';
 
@@ -121,10 +121,11 @@ const ResetPassword = (props) => {
         </Flex>
         <Flex justifyContent="center">
           <VStack justify="center" align="center" spacing={['3vh']} py="5vh">
+            {/* temp 2026 logo — swap when final assets arrive */}
             <Image
               marginBottom="15px"
-              h={{ base: '6vh', sm: '8vh', md: '10vh', lg: '12vh', xl: '15vh' }}
-              src={`${process.env.PUBLIC_URL}/images/ripple.png`}
+              h={{ base: '9vh', sm: '12vh', md: '15vh', lg: '18vh', xl: '22.5vh' }}
+              src={`${process.env.PUBLIC_URL}/images/logo-blue.svg`}
               alt="Logo of HMCC"
             />
 

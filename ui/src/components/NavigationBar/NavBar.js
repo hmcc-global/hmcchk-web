@@ -4,7 +4,6 @@ import {
   Stack,
   Box,
   Text,
-  Image,
   Button,
   Container,
   Link,
@@ -133,16 +132,6 @@ const NavBar = (props) => {
               display={{ base: 'none', md: 'flex' }}
             >
               <HStack spacing={5} display={{ base: 'none', md: 'flex' }}>
-                <LinkBox>
-                  <LinkOverlay href="/">
-                    <Image
-                      w="3.5em"
-                      minW="3.5em"
-                      src={process.env.PUBLIC_URL + '/images/ripple-black.png'}
-                      alt="Logo of HMCC"
-                    />
-                  </LinkOverlay>
-                </LinkBox>
                 <Link href="/">
                   <Text
                     fontSize={{ md: '0.7rem', lg: '0.875rem' }}
@@ -372,26 +361,6 @@ const NavBar = (props) => {
                       >
                         Harvest Mission Community Church
                       </Text>
-                    </LinkOverlay>
-                  </LinkBox>
-                </Box>
-                <Box
-                  transition="opacity 0.5s"
-                  style={{ opacity: Math.max((yPosition - 100) / 400, 0) }}
-                  position="absolute"
-                  top="50%"
-                  left="50%"
-                  transform="translate(-50%, -50%)"
-                >
-                  <LinkBox>
-                    <LinkOverlay href="/">
-                      <Image
-                        w="4em"
-                        src={
-                          process.env.PUBLIC_URL + '/images/ripple-black.png'
-                        }
-                        alt="Logo of HMCC"
-                      />
                     </LinkOverlay>
                   </LinkBox>
                 </Box>

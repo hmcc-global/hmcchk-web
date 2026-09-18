@@ -1,7 +1,6 @@
 import {
   Flex,
   Stack,
-  Image,
   Box,
   Heading,
   Container,
@@ -113,12 +112,6 @@ const HeroSection = () => {
               letterSpacing="-0.02em"
               color="#4A6EEB"
             >
-              <Image
-                display={['none', 'none', 'block']}
-                src={process.env.PUBLIC_URL + '/images/home/ripple-blue.png'}
-                h="2em"
-                opacity="0"
-              />
               <Text
                 display={['none', 'none', 'block']}
                 textAlign="center"
@@ -270,11 +263,6 @@ const HeroSection = () => {
               letterSpacing="-0.02em"
               color="#4A6EEB"
             >
-              <Image
-                display={['none', 'none', 'block']}
-                src={process.env.PUBLIC_URL + '/images/home/ripple-blue.png'}
-                h="2em"
-              />
               <Text
                 display={['none', 'none', 'block']}
                 textAlign="center"

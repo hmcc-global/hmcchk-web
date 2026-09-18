@@ -226,9 +226,6 @@ module.exports = {
      *                                                                          *
      ***************************************************************************/
     onlyAllowOrigins: [
-      'https://hongkong.hmcc.net',
-      'https://hongkong.sub.hmcc.net',
-      'https://hongkong.test.hmcc.net',
       'https://hongkong.hmccglobal.org',
       'https://hk.hmccglobal.org',
       'https://hongkong.test.hmccglobal.org',

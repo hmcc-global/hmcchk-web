@@ -25,9 +25,10 @@ const MainMenu = ({ login, onClose }) => {
           fontWeight="bold"
           fontSize="xl"
         >
+          {/* temp 2026 logo — swap when final assets arrive */}
           <Image
             w="3.5em"
-            src={process.env.PUBLIC_URL + '/images/ripple.svg'}
+            src={process.env.PUBLIC_URL + '/images/logo.png'}
             alt="Logo of HMCC"
           />
 

@@ -1,4 +1,4 @@
-import { Container, Box } from 'components';
+import { Container, Box, Image } from 'components';
 import { Redirect } from 'react-router-dom';
 import UserProfileDesktop from './UserProfileDesktop';
 import UserProfileMobile from './UserProfileMobile';
@@ -26,17 +26,17 @@ const UserProfileContainer = (props) => {
   const tabProps = { activeTabIndex, onTabChange: handleTabChange };
 
   return (
-    <Box>
-      {/* Breaks footer... commenting out until fixable */}
-      {/* <Image
+    <Box position="relative" overflow="hidden">
+      {/* temp 2026 logo — swap when final assets arrive (re-test footer after re-adding) */}
+      <Image
         position="absolute"
         top="35%"
         left="0"
         w="75%"
         zIndex="0"
-        src={process.env.PUBLIC_URL + '/userProfile/hmcc-ripple-white.png'}
+        src={process.env.PUBLIC_URL + '/userProfile/logo-white.png'}
         display={['none', 'block']}
-      /> */}
+      />
       <Container
         maxW="container.lg"
         zIndex="2"

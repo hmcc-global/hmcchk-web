@@ -7,12 +7,12 @@ import {
   Container,
   VStack,
   Flex,
-  Image,
   Text,
   Stack,
   Link,
   useToast,
   Button,
+  Image,
 } from 'components';
 
 const RecoverPassword = (props) => {
@@ -70,18 +70,19 @@ const RecoverPassword = (props) => {
           </Flex>
           <Flex justifyContent="center">
             <VStack justify="center" align="center" spacing={['3vh']} py="5vh">
-              <Image
-                marginBottom="15px"
-                h={{
-                  base: '6vh',
-                  sm: '8vh',
-                  md: '10vh',
-                  lg: '12vh',
-                  xl: '15vh',
-                }}
-                src={`${process.env.PUBLIC_URL}/images/ripple.png`}
-                alt="Logo of HMCC"
-              />
+                {/* temp 2026 logo — swap when final assets arrive */}
+                <Image
+                  marginBottom="15px"
+                  h={{
+                    base: '18vh',
+                    sm: '24vh',
+                    md: '30vh',
+                    lg: '36vh',
+                    xl: '45vh',
+                  }}
+                  src={`${process.env.PUBLIC_URL}/images/logo-blue.svg`}
+                  alt="Logo of HMCC"
+                />
               <Text fontSize={[24, 24, 28, 32]} fontWeight="bold">
                 Recover Password
               </Text>

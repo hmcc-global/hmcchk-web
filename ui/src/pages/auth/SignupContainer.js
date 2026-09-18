@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { customAxios as axios } from 'utils/customAxios';
 import { GoogleLogin } from '@react-oauth/google';
 import { ArrowBackIcon } from 'components/icons';
-import { Box, VStack, Flex, Image, Text, Button, Link } from 'components';
+import { Box, VStack, Flex, Text, Button, Link } from 'components';
 
 const SignupContainer = (props) => {
   const [invalidLogin, setInvalidLogin] = useState('');
@@ -79,13 +79,6 @@ const SignupContainer = (props) => {
             fontWeight="500"
           >
             <VStack justify="center" align="center" mb="5">
-              <Image
-                marginBottom={{ base: '10px', md: '15px' }}
-                h={['5vh', '6vh', '7vh', '8vh', '10vh']}
-                src={`${process.env.PUBLIC_URL}/images/ripple.png`}
-                alt="Logo of HMCC"
-                style={{ filter: 'invert(0.6)' }}
-              />
               <Text
                 fontWeight="700"
                 fontSize={['0.7rem', '0.8rem', '0.95rem', '1rem', '1.05rem']}
