@@ -120,14 +120,6 @@ const LoginContainer = (props) => {
             fontWeight="500"
           >
             <VStack justify="center" align="center" mb="5">
-              {/* logo replacement spot */}
-              {/* <Image
-                marginBottom={{ base: '10px', md: '15px' }}
-                h={['5vh', '6vh', '7vh', '8vh', '9vh']}
-                src={`${process.env.PUBLIC_URL}/images/ripple.png`}
-                alt="Logo of HMCC"
-                style={{ filter: 'invert(0.6)' }}
-              /> */}
               <Text
                 fontWeight="700"
                 fontSize={['0.65rem', '0.8rem', '0.95rem', '1rem', '1.05rem']}

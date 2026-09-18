@@ -112,8 +112,6 @@ const HeroSection = () => {
               letterSpacing="-0.02em"
               color="#4A6EEB"
             >
-              {/* logo replacement spot - spacer keeps layout stable until a new logo is added */}
-              <Box display={['none', 'none', 'block']} h="2em" opacity="0" />
               <Text
                 display={['none', 'none', 'block']}
                 textAlign="center"
@@ -265,8 +263,6 @@ const HeroSection = () => {
               letterSpacing="-0.02em"
               color="#4A6EEB"
             >
-              {/* logo replacement spot - spacer keeps layout stable until a new logo is added */}
-              <Box display={['none', 'none', 'block']} h="2em" />
               <Text
                 display={['none', 'none', 'block']}
                 textAlign="center"

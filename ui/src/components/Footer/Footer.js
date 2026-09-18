@@ -30,15 +30,6 @@ const Footer = () => {
         >
           <VStack w={['100%', '40%']} alignItems={['center', 'flex-start']}>
             <Stack flexDir="column">
-              <Link href="/">
-                {/* logo replacement spot */}
-                {/* <Image
-                  src={`${process.env.PUBLIC_URL}/images/ripple_blue.svg`}
-                  alt="Logo of HMCC"
-                  h="2em"
-                  mx={['auto', '0']}
-                /> */}
-              </Link>
               <Text
                 color="#4A6EEB"
                 fontSize="16"
