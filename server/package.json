@@ -30,7 +30,8 @@
     "sails-hook-organics": "^2.2.0",
     "sails-hook-orm": "^3.0.2",
     "sails-hook-sockets": "^2.0.0",
-    "sails-mongo": "^2.0.0"
+    "sails-mongo": "^2.0.0",
+    "sanitize-html": "2.17.5"
   },
   "devDependencies": {
     "eslint": "5.16.0",
