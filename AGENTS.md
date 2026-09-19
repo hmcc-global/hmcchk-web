@@ -48,9 +48,9 @@ Tracking is GitHub Issues. Commits are `GH-<issue#>: …`, branches `<issue#>-<d
 - Do what has been asked; nothing more, nothing less.
 - NEVER create files unless they're absolutely necessary for achieving your goal. Prefer editing an existing file.
 - NEVER proactively create documentation files or READMEs unless asked.
-- NEVER add test files. This repo has no test suite by practice (`server/yarn test` runs lint; the UI has one skipped placeholder). Verify with lint, build, and the browser.
+- Do not add test files unless the issue asks for them. There is no test suite yet (`server/yarn test` runs lint; the UI has one skipped placeholder). Verify with lint, build, and the browser.
 - Reuse existing pages and components before inventing new ones (see `#working-in-a-messy-codebase`).
-- Use **yarn**, never npm. Node 20+ for the UI (Vite 7's floor; CI pins 20.19.0).
+- Use **yarn**, never npm or npx: `yarn` to install, `yarn <script>` to run, `yarn prettier` for binaries. The only `npx` in these docs is `npx gitnexus` (`#gitnexus-setup`), a per-machine tool that is not a project dependency and never touches `package.json` or `yarn.lock`. Node 20+ for the UI (Vite 7's floor; CI pins 20.19.0).
 
 ## Working in a Messy Codebase
 
@@ -77,23 +77,25 @@ cd ui && yarn start             # Vite on :3000, proxies /api → :1337
 yarn build                      # production build → ui/build (CI moves it to server/client)
 yarn preview                    # serve the production build
 yarn lint                       # eslint src — 0 errors required; 78 pre-existing warnings, don't add to them
-yarn test --run                 # Vitest; only a skipped placeholder exists — do not add tests
+yarn test --run                 # Vitest; only a skipped placeholder exists — do not add tests unless the issue asks
 
 # Server (in server/)
 yarn lint                       # eslint . --max-warnings=0 on errors; 0 errors required
 yarn start                      # NODE_ENV=production node app.js
 
 # Format (from repo root, touched files only)
-npx prettier --write "ui/src/<path>"
+yarn prettier --write "ui/src/<path>"
 ```
 
 Prettier config: `.prettierrc.json` — 2-space, single quotes, semicolons, `trailingComma: 'es5'`.
 
 ## Technology Stack
 
-- **UI**: React 18, plain JavaScript (`.js` files containing JSX; Vite's esbuild loader is configured for it, so no `.jsx` and no TypeScript), Vite 7 (pinned; Vite 8 has no equivalent JSX-in-.js recipe), Chakra UI **1.6** + Emotion, framer-motion 4, Redux Toolkit + redux-persist, react-router-dom **5**, axios, react-hook-form, TipTap 2, AG Grid 27 (community + enterprise), luxon 1, react-datepicker, html-react-parser, react-markdown, ExcelJS
+- **UI**: React 18, plain JavaScript (`.js` files containing JSX; Vite's esbuild loader is configured for it, so no `.jsx` and no TypeScript), Vite 7 (pinned; Vite 8 has no equivalent JSX-in-.js recipe), Chakra UI **1** + Emotion, framer-motion 4, Redux Toolkit + redux-persist, react-router-dom **5**, axios, react-hook-form, TipTap 2, AG Grid 27 (community + enterprise), luxon 1, react-datepicker, html-react-parser, react-markdown, ExcelJS
 - **Server**: Sails 1, `sails-mongo`, `node-schedule`, `node-cache`, `jsonwebtoken`, `google-auth-library`, `imapflow` + `mailparser`, Nodemailer over Gmail OAuth2
 - **Content source**: WordPress REST API at `hongkong.sub.hmccglobal.org` for sermons, speakers, series, posts, media, pages
+
+Majors only. `ui/package.json` and `server/package.json` are the source of truth for exact versions; check them before relying on an API.
 
 ## Architecture
 
