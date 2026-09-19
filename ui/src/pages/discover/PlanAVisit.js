@@ -189,7 +189,7 @@ const PlanAVisit = () => {
                     fontSize={['0.875rem', '1rem', '1rem']}
                     borderRadius="0.938rem"
                     _hover={{ bgColor: '#BE8E11', textDecoration: 'none' }}
-                    href="https://bit.ly/TCenterDirections"
+                    href="https://hongkong.sub.hmccglobal.org/wp-content/uploads/Directions-to-TRANSFORMATION-CENTER.pdf"
                     target="_blank"
                     as={Link}
                   >
