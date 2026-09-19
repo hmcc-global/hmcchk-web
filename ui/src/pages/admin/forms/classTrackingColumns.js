@@ -45,14 +45,19 @@ const classFieldSetter = (courseId, field) => (params) => {
 };
 
 // Builds the "Class Tracking" AG-Grid column group, one sub-group per course.
-// dateFormatter, dateCellProps and mediumTextEditorProps are shared with the rest
-// of the grid, so they're passed in rather than redefined here.
+// mediumTextEditorProps is shared with the rest of the grid, so it's passed in
+// rather than redefined here.
 export const createClassTrackerColumns = ({
   courses,
   classStatusList,
+  mediumTextEditorProps,
+  // dateFormatter / dateCellProps feed only the commented-out Started At and
+  // Completed At columns below, but are kept in the signature (and passed by
+  // AdminFormDataViewer.js) so re-enabling those columns is a pure uncomment.
+  /* eslint-disable no-unused-vars */
   dateFormatter,
   dateCellProps,
-  mediumTextEditorProps,
+  /* eslint-enable no-unused-vars */
 }) => {
   // Archived courses trail after the active ones so current-season work stays
   // on the left. Sort a copy (sort mutates) and rely on it being stable to keep
@@ -110,6 +115,13 @@ export const createClassTrackerColumns = ({
             headerTooltip: readOnlyHeaderTooltip,
             cellStyle: readOnlyCellStyle,
           },
+          // DISABLED: "Started At" / "Completed At" columns - not part of the
+          // course-tracking workflow right now and cluttering the grid, so they're
+          // commented out rather than deleted. The backend still accepts these
+          // fields. To re-enable, remove the comment delimiters and their
+          // dateFormatter / dateCellProps deps are already wired up (signature +
+          // AdminFormDataViewer.js call) so no other changes are needed.
+          /*
           {
             ...dateCellProps,
             headerName: 'Started At',
@@ -132,6 +144,7 @@ export const createClassTrackerColumns = ({
             editable: course.isActive,
             cellStyle: archivedStyle,
           },
+          */
           {
             ...mediumTextEditorProps,
             headerName: 'Remarks',

@@ -1,11 +1,5 @@
 const { DateTime } = require('luxon');
 
-const isCurrentSeason = (dateTime, start, end) => {
-  const afterStart = start.isValid ? dateTime >= start : true;
-  const beforeEnd = end.isValid ? dateTime <= end : true;
-  return afterStart && beforeEnd;
-};
-
 module.exports = {
   friendlyName: 'Get signed up classes for user',
 
@@ -40,9 +34,11 @@ module.exports = {
         return exits.success([]);
       }
 
-      // A user can have ClassTrackingData from older seasons of the
-      // same reused form, so only records that fall within the form's current
-      // season window should count, then keep the most recent one per formId
+      // A user can have ClassTrackingData from older seasons of the same
+      // reused form. A record belongs to the current season only if it was
+      // created while the form's sign-up window was open, so enforce that as
+      // the season boundary instead of the class schedule (sign-ups typically
+      // happen before the class starts).
       const formIds = [...new Set(classDataList.map((cd) => cd.formId))];
 
       // 2. Get all forms that are class forms based on classTrackingData
@@ -58,34 +54,31 @@ module.exports = {
       const now = DateTime.now();
       const results = [];
 
-      // 3. For each class form, check the current season window, then pick the
-      // latest ClassTrackingData whose createdAt falls inside that window
+      // 3. For each class form, gate visibility on the class having begun,
+      // then pick the most recent ClassTrackingData from the current season.
       for (const form of forms) {
         const rawClassStartTime = form.classTrackingTemplate?.classStartTime;
         const classStartTime = rawClassStartTime
           ? DateTime.fromJSDate(new Date(rawClassStartTime))
           : DateTime.invalid('missing classStartTime');
 
-        const rawClassEndingTime = form.classTrackingTemplate?.classEndingTime;
-        const classEndingTime = rawClassEndingTime
-          ? DateTime.fromJSDate(new Date(rawClassEndingTime))
-          : DateTime.invalid('missing classEndingTime');
+        // Don't surface progress before the class starts. Once it has begun -
+        // or when no start time is configured - keep showing it even after the
+        // class ends so users can review their final statuses.
+        if (classStartTime.isValid && now < classStartTime) continue;
 
-        // Skip forms whose season window does not cover the current moment
-        if (!isCurrentSeason(now, classStartTime, classEndingTime)) continue;
+        // classDataList is sorted createdAt DESC, so the first record that
+        // matches keeps the most recent sign-up. A record created before the
+        // form's sign-up window opened belongs to an older, reused season.
+        const availableFrom = new Date(form.formAvailableFrom);
+        const hasAvailableFrom =
+          availableFrom instanceof Date && !isNaN(availableFrom);
 
-        // classDataList is sorted createdAt DESC, so the first in-window record
-        // encountered for a formId is the most recent one. Filtering before
-        // deduping avoids dropping a valid in-window record that an older
-        // season's newer record would otherwise shadow.
         const latestClassData = classDataList.find(
           (classData) =>
             classData.formId === form.id &&
-            isCurrentSeason(
-              DateTime.fromJSDate(new Date(classData.createdAt)),
-              classStartTime,
-              classEndingTime
-            )
+            (!hasAvailableFrom ||
+              new Date(classData.createdAt) >= availableFrom)
         );
         if (!latestClassData) continue;
 
