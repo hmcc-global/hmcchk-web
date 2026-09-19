@@ -27,8 +27,8 @@ const UserProfileContainer = (props) => {
 
   return (
     <Box position="relative" overflow="hidden">
-      {/* temp 2026 logo — swap when final assets arrive (re-test footer after re-adding) */}
-      <Image
+      {/* logo disabled to be added later */}
+      {/* <Image
         position="absolute"
         top="35%"
         left="0"
@@ -36,7 +36,7 @@ const UserProfileContainer = (props) => {
         zIndex="0"
         src={process.env.PUBLIC_URL + '/userProfile/logo-white.png'}
         display={['none', 'block']}
-      />
+      /> */}
       <Container
         maxW="container.lg"
         zIndex="2"
