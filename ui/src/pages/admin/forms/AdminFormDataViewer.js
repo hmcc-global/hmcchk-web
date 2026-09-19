@@ -359,15 +359,19 @@ export default function AdminFormDataViewer(props) {
       };
     };
 
+    // Checkboxes batch-select rows: paid forms to set payment values, class
+    // forms to bulk-update course statuses.
+    const hasRowSelection = isPaidForm || isClass;
+
     let columnDefs = [
       {
         headerName: '_submissionTime',
         field: '_submissionTime',
         valueFormatter: dateTimeFormatter,
         filter: 'agDateColumnFilter',
-        checkboxSelection: isPaidForm,
-        headerCheckboxSelection: isPaidForm,
-        headerCheckboxSelectionFilteredOnly: isPaidForm,
+        checkboxSelection: hasRowSelection,
+        headerCheckboxSelection: hasRowSelection,
+        headerCheckboxSelectionFilteredOnly: hasRowSelection,
         filterParams: dateFilterParams,
         sort: 'asc',
         lockPosition: true,
@@ -731,54 +735,57 @@ export default function AdminFormDataViewer(props) {
             })),
           }))
       : [];
-    let result = [
-      // Default functions
-      'copy',
-      'separator',
-      // Custom functions
-      {
-        name: 'Set Payment Status As',
-        disabled: selectedNodes.length === 0,
-        subMenu: [
+    // Payment grid actions only make sense when the form takes payments -
+    // keep them out of class-only forms (which only get course statuses).
+    const paymentStatusItems = isPaidForm
+      ? [
           {
-            name: 'Paid',
-            action: () => contextMenuSetter(selectedNodes, true, 'isPaid'),
+            name: 'Set Payment Status As',
+            disabled: selectedNodes.length === 0,
+            subMenu: [
+              {
+                name: 'Paid',
+                action: () => contextMenuSetter(selectedNodes, true, 'isPaid'),
+              },
+              {
+                name: 'Not Paid',
+                action: () => contextMenuSetter(selectedNodes, false, 'isPaid'),
+              },
+            ],
           },
           {
-            name: 'Not Paid',
-            action: () => contextMenuSetter(selectedNodes, false, 'isPaid'),
+            name: 'Set Payment Date',
+            disabled: selectedNodes.length === 0,
+            action: () => {
+              setIsModalOpen(true);
+              setModalTitle('Set Payment Date');
+              setModalColId('paymentDateTime');
+              setModalType('date');
+            },
           },
-        ],
-      },
-      {
-        name: 'Set Payment Date',
-        disabled: selectedNodes.length === 0,
-        action: () => {
-          setIsModalOpen(true);
-          setModalTitle('Set Payment Date');
-          setModalColId('paymentDateTime');
-          setModalType('date');
-        },
-      },
-      {
-        name: 'Set Payment Type',
-        disabled: selectedNodes.length === 0,
-        action: () => {
-          setIsModalOpen(true);
-          setModalTitle('Set Payment Type');
-          setModalColId('paymentType');
-          setModalType('text');
-        },
-      },
-      {
-        name: 'Set Payment Method As',
-        disabled: selectedNodes.length === 0,
-        subMenu: paymentMethodList.map((i) => ({
-          name: i,
-          action: () => contextMenuSetter(selectedNodes, i, 'paymentMethod'),
-        })),
-      },
-      ...(classCourseStatusItems.length > 0
+          {
+            name: 'Set Payment Type',
+            disabled: selectedNodes.length === 0,
+            action: () => {
+              setIsModalOpen(true);
+              setModalTitle('Set Payment Type');
+              setModalColId('paymentType');
+              setModalType('text');
+            },
+          },
+          {
+            name: 'Set Payment Method As',
+            disabled: selectedNodes.length === 0,
+            subMenu: paymentMethodList.map((i) => ({
+              name: i,
+              action: () => contextMenuSetter(selectedNodes, i, 'paymentMethod'),
+            })),
+          },
+        ]
+      : [];
+
+    const classCourseStatusGroup =
+      classCourseStatusItems.length > 0
         ? [
             'separator',
             {
@@ -787,13 +794,27 @@ export default function AdminFormDataViewer(props) {
               subMenu: classCourseStatusItems,
             },
           ]
-        : []),
+        : [];
+
+    const sendConfirmationEmailGroup = isPaidForm
+      ? [
+          'separator',
+          {
+            name: 'Send Confirmation Email',
+            disabled: selectedNodes.length === 0,
+            action: () => sendConfirmationEmail(selectedNodes),
+          },
+        ]
+      : [];
+
+    const result = [
+      // Default functions
+      'copy',
       'separator',
-      {
-        name: 'Send Confirmation Email',
-        disabled: selectedNodes.length === 0,
-        action: () => sendConfirmationEmail(selectedNodes),
-      },
+      // Custom functions
+      ...paymentStatusItems,
+      ...classCourseStatusGroup,
+      ...sendConfirmationEmailGroup,
     ];
 
     return result;
