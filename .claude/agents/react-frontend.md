@@ -14,7 +14,7 @@ Your isolated context does not inherit the repo instructions. As your FIRST step
 Much of `ui/src/pages/` was written by junior volunteers over several years. Expect 400-line page files, inline hex colours, hard-coded pixel widths, duplicated `*Mobile.js` variants, mixed quote styles, and components that do the same thing three different ways. Treat that as the starting point, not the standard:
 
 - **Match the file you are in for small edits.** A one-line fix in a messy file follows that file's style. Do not reformat or restructure surrounding code you were not asked to touch.
-- **Write new code to the conventions below.** New files and new components are where the standard is raised. Never copy a bad pattern into a new file because a neighbour does it.
+- **Write new code to the conventions in this file.** The `Project context` through `Routing and access` sections, plus `#frontend-code-standards` in `AGENTS.md`, are the standard. New files and new components are where the standard is raised. Never copy a bad pattern into a new file because a neighbour does it.
 - **Search before you build.** `ui/src/components/` is small, so read its barrel and folder before creating anything reusable. Check the sibling page folder too; a component may already exist under a different name.
 - **Do not invent abstractions to clean up one page.** Extract into `ui/src/components/` only when a second page needs it.
 - **Cite precedent when you pick a pattern.** When two existing implementations conflict, name which file you followed and why. If neither is fit, say so and propose the smaller fix.
@@ -22,13 +22,14 @@ Much of `ui/src/pages/` was written by junior volunteers over several years. Exp
 ## Project context
 
 - React 18, plain JavaScript (`.js` files, JSX inside; Vite's esbuild loader handles it). No TypeScript, no `.jsx`.
-- Vite 7 dev server on :3000 proxies `/api` to Sails on :1337. Node 20+. Yarn, never npm.
-- Chakra UI **v1.6** with Emotion; custom theme in `ui/src/theme.js` (Inter body/heading, `dm_sans` / `dm_sans_bold` text styles). Icons from `@chakra-ui/icons` and `react-icons`.
+- Vite 7 dev server on :3000 proxies `/api` to Sails on :1337. Node 20+. Yarn for installs, scripts, and binaries; never npm or npx.
+- Chakra UI **v1** on Emotion (`@emotion/react` and `@emotion/styled` are its peer deps; the TipTap menu components import Emotion directly); custom theme in `ui/src/theme.js` (Inter body/heading, `dm_sans` / `dm_sans_bold` text styles). Icons from `@chakra-ui/icons` and `react-icons`.
 - Redux Toolkit + redux-persist with a single `userSlice` holding the JWT string. Everything else is local component state.
 - react-router-dom **v5**: `<Switch>`, `props.history.push`, render-prop routes. Do not use v6 APIs (`useNavigate`, `Routes`, `element=`).
 - Absolute imports resolve from `ui/src` (`jsconfig.json` `baseUrl: "src"`): `from 'components'`, `from 'utils/customAxios'`, `from 'pages/...'`.
 - Env vars are `import.meta.env.REACT_APP_*` (Vite with the CRA prefix kept). `process.env.PUBLIC_URL` is defined to `''` and still used for public asset paths.
 - Heavier deps in play: TipTap (rich text in forms and sermon notes), AG Grid community + enterprise (admin tables), react-hook-form, react-datepicker + luxon, html-react-parser + react-markdown (WordPress sermon HTML), ExcelJS via `utils/arrayToExcel.js`.
+- Majors only above. `ui/package.json` is the source of truth for exact versions; check it before relying on an API.
 
 ## Folder rules
 
@@ -83,10 +84,10 @@ try {
 
 ## Verification
 
-- There is no frontend test suite by repo practice. Do not add `*.test.js` files.
+- There is no frontend test suite yet. Do not add `*.test.js` files unless the issue asks for them.
 - Verify in the browser: open the page, both widths, click the flow, check the console. Say exactly what you opened and what you saw.
 - `yarn lint` must show 0 errors (78 pre-existing warnings; do not add to them). `yarn build` must pass. Run both from `ui/`.
-- Prettier from the repo root: `npx prettier --write "ui/src/<touched files>"`. Format only the files you touched.
+- Prettier from the repo root: `yarn prettier --write "ui/src/<touched files>"`. Format only the files you touched.
 
 ## Data handling
 
