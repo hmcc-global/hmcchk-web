@@ -1,5 +1,5 @@
 import { useForm, Controller } from 'react-hook-form';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { DateTime } from 'luxon';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -114,6 +114,8 @@ const FormEditorContainer = (props) => {
 
   // Which tracking tab (Payment / Class) is open in the editor
   const [trackingTabIndex, setTrackingTabIndex] = useState(0);
+
+  const addCourseButtonRef = useRef();
 
   const resetFormEditorCallback = () => {
     reset();
@@ -379,6 +381,9 @@ const FormEditorContainer = (props) => {
     // Only ever called on a course added this session (not yet persisted),
     // so it can't have registrant tracking data — a plain confirm is enough.
     if (window.confirm('Are you sure you want to remove this course?')) {
+      // Move focus off the trash button before its row unmounts. Otherwise
+      // focus falls to <body> and the modal body jumps back to the top.
+      addCourseButtonRef.current?.focus();
       setCourses(courses.filter((course) => course.courseId !== courseId));
     }
   };
@@ -788,6 +793,7 @@ const FormEditorContainer = (props) => {
                                 )}
                                 <Button
                                   onClick={addCourse}
+                                  ref={addCourseButtonRef}
                                   leftIcon={<FiPlus />}
                                   alignSelf="start"
                                 >
