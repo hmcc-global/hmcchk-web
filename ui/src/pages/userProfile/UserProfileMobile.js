@@ -82,11 +82,7 @@ const UserProfileMobile = (props) => {
         setUserInformationFields(data[0], setValue);
       }
     }
-<<<<<<< HEAD
   }, [user.id, setValue]);
-=======
-  }, [user.id]);
->>>>>>> 1d671139 (1423: added api for calling user signed up class tracking (#1424))
 
   const fetchPublishedForms = useCallback(async () => {
     //get all forms
@@ -196,19 +192,13 @@ const UserProfileMobile = (props) => {
     fetchUnsignedUpForms();
     fetchClassProgress();
     fetchUserSermonNotes();
-<<<<<<< HEAD
     getSermonSeriesImages().then(setSermonSeriesImages);
-=======
->>>>>>> 1d671139 (1423: added api for calling user signed up class tracking (#1424))
   }, [
     fetchUserData,
     fetchPublishedForms,
     fetchSignedUpForms,
     fetchUnsignedUpForms,
-<<<<<<< HEAD
-=======
     fetchClassProgress,
->>>>>>> 1d671139 (1423: added api for calling user signed up class tracking (#1424))
     fetchUserSermonNotes,
   ]);
 
