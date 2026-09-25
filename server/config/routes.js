@@ -164,6 +164,9 @@ module.exports.routes = {
   'get /api/admin/parseUserQuery': 'users/parse-user-query',
   'get /api/admin/sendBatchUsersQuery': 'users/send-batch-users-query',
 
+  // Site Link public redirect (must stay before the SPA catch-all below)
+  'get /go/:slug': 'siteLinks/get-redirect',
+
   // UI
   'get /*': {
     skipAssets: true,

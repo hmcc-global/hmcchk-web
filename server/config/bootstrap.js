@@ -1,5 +1,8 @@
 require('dotenv').config();
 const schedule = require('node-schedule');
+
+// A fixed id makes the seed insert idempotent when several instances lift at once.
+const LIFE_GROUP_SEED_TARGET_ID = '000000000000000000001416';
 /**
  * Seed Function
  * (sails.config.bootstrap)
@@ -34,8 +37,66 @@ module.exports.bootstrap = async function () {
 
   sails.log('Initialising Parse User Query Emails Cron');
   // every EOD at 9PM
-  schedule.scheduleJob(
-    '0 0 21 * * *',
-    async () => sails.helpers.parseuserquery.parseUserQuery()
+  schedule.scheduleJob('0 0 21 * * *', async () =>
+    sails.helpers.parseuserquery.parseUserQuery()
   );
+
+  // migrate: 'safe' never builds indexes, so the model's unique constraints are
+  // installed here.
+  try {
+    const siteLinks = SiteLink.getDatastore().manager.collection(
+      SiteLink.tableName
+    );
+    await siteLinks.createIndex({ key: 1 }, { unique: true });
+    await siteLinks.createIndex({ slug: 1 }, { unique: true });
+  } catch (err) {
+    sails.log.error('Failed to create site link indexes', err);
+  }
+
+  // Seed the permanent LIFE Group Site Link only when it does not exist. Once
+  // created, admin changes are authoritative and must survive deploys/restarts.
+  try {
+    let lifeGroupLink = await SiteLink.findOne({ slug: 'life-group' });
+    if (!lifeGroupLink) {
+      try {
+        lifeGroupLink = await SiteLink.create({
+          key: 'life-group',
+          label: 'LIFE Group Signup',
+          slug: 'life-group',
+          isEnabled: true,
+        }).fetch();
+        sails.log.info('Seeded life-group site link');
+      } catch (err) {
+        if (err.code !== 'E_UNIQUE') throw err;
+        lifeGroupLink = await SiteLink.findOne({ slug: 'life-group' });
+      }
+    }
+
+    // Checked separately from the link so a failure between the two is repaired
+    // on the next lift. Targets are soft-deleted, so a schedule the admin has
+    // emptied still counts as seeded and is never refilled.
+    if (!lifeGroupLink.isDeleted) {
+      const targetCount = await SiteLinkTarget.count({
+        siteLink: lifeGroupLink.id,
+      });
+      if (targetCount === 0) {
+        try {
+          await SiteLinkTarget.create({
+            id: LIFE_GROUP_SEED_TARGET_ID,
+            siteLink: lifeGroupLink.id,
+            destinationType: 'url',
+            destinationUrl: 'https://bit.ly/lifegroup2627',
+            activeFrom: '',
+            activeUntil: '',
+            updatedBy: 'system-seed',
+          });
+          sails.log.info('Seeded default life-group site link target');
+        } catch (err) {
+          if (err.code !== 'E_UNIQUE') throw err;
+        }
+      }
+    }
+  } catch (err) {
+    sails.log.error('Failed to seed life-group site link', err);
+  }
 };

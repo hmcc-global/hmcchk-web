@@ -1,3 +1,5 @@
+const { getFormAvailabilityCriteria } = require('../../lib/site-links');
+
 module.exports = {
   friendlyName: 'Get form route for public use',
 
@@ -20,19 +22,7 @@ module.exports = {
 
       const data = await Form.find({
         _id: id,
-        isPublished: true,
-        isDeleted: false,
-        or: [
-          {
-            formAvailableFrom: { '<=': now },
-            formAvailableUntil: { '>=': now },
-          },
-          { formAvailableFrom: { '<=': now }, formAvailableUntil: '' },
-          {
-            formAvailableFrom: '',
-            formAvailableUntil: '',
-          },
-        ],
+        ...getFormAvailabilityCriteria(now),
       });
 
       // If no form is found return error
