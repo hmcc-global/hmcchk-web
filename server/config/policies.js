@@ -129,6 +129,10 @@ module.exports.policies = {
   'sitelink/*': false,
   'sitelinktarget/*': false,
   'siteLinks/get-redirect': true,
+  'siteLinks/admin-get-site-links': ['isLoggedIn', 'aboveTc'],
+  'siteLinks/update-site-link': ['isLoggedIn', 'aboveTc'],
+  'siteLinks/create-site-link-target': ['isLoggedIn', 'aboveTc'],
+  'siteLinks/update-site-link-target': ['isLoggedIn', 'aboveTc'],
 
   // Users
   'users/reset': ['isLoggedIn', 'aboveAdmin'],
