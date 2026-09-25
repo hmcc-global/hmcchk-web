@@ -124,6 +124,12 @@ module.exports.policies = {
   // LeadershipTeam
   'leadershipTeam/*': ['isLoggedIn', 'aboveAdmin'],
 
+  // Site Links
+  // Sails binds REST blueprint routes for every model; deny them for these two.
+  'sitelink/*': false,
+  'sitelinktarget/*': false,
+  'siteLinks/get-redirect': true,
+
   // Users
   'users/reset': ['isLoggedIn', 'aboveAdmin'],
   'users/parse-user-query': ['isLoggedIn', 'aboveAdmin'],
