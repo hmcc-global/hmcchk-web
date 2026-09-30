@@ -81,12 +81,12 @@ module.exports.policies = {
   'liveSermon/update-live-sermon': ['isLoggedIn', 'aboveTech'],
 
   // User Sermon Note
-  'userSermonNotes/get-user-sermon-notes': true,
-  'userSermonNotes/create-user-sermon-notes': ['isLoggedIn', 'aboveTech'],
-  'userSermonNotes/update-user-sermon-notes': ['isLoggedIn', 'aboveTech'],
+  'userSermonNotes/get-user-sermon-notes': ['isLoggedIn'],
+  'userSermonNotes/create-user-sermon-notes': ['isLoggedIn'],
+  'userSermonNotes/update-user-sermon-notes': ['isLoggedIn'],
   'userSermonNotes/email-user-sermon-notes': true,
 
-  // User Sermon Note
+  // Sermon Notes Parent
   'sermonNotesParent/*': true,
 
   // Sermons page
