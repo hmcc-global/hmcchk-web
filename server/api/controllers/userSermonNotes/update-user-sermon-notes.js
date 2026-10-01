@@ -8,10 +8,6 @@ module.exports = {
       type: 'string',
       required: true,
     },
-    userId: {
-      type: 'string',
-      required: true,
-    },
     editedContent: {
       type: 'json',
     },
@@ -22,7 +18,6 @@ module.exports = {
       type: 'json',
       defaultsTo: [],
     },
-    isDeleted: { type: 'boolean' },
   },
 
   exits: {
@@ -40,9 +35,10 @@ module.exports = {
   },
 
   fn: async function (
-    { sermonId, userId, editedContent, themes, stickyNote, isDeleted },
+    { sermonId, editedContent, themes, stickyNote },
     exits
   ) {
+    const userId = this.req.user.id;
     const user = this.req.user.fullName;
     sails.log.info(`${user}: Updating user sermon note: ${sermonId}`);
 
@@ -52,7 +48,7 @@ module.exports = {
           sermonId: sermonId,
           userId: userId,
           isDeleted: false,
-        }).set({ editedContent, themes, stickyNote, isDeleted });
+        }).set({ editedContent, themes, stickyNote });
         if (data) {
           return exits.success(data);
         }
