@@ -9,10 +9,6 @@ module.exports = {
       required: true,
       type: 'string',
     },
-    userId: {
-      required: true,
-      type: 'string',
-    },
   },
 
   exits: {
@@ -23,7 +19,8 @@ module.exports = {
       description: 'Failed to retrieve user sermon note',
     },
   },
-  fn: async function ({ sermonId, userId }, exits) {
+  fn: async function ({ sermonId }, exits) {
+    const userId = this.req.user.id;
     try {
       if (sermonId && userId) {
         let data = await UserSermonNotes.findOne({

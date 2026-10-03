@@ -8,10 +8,6 @@ module.exports = {
       type: 'string',
       required: true,
     },
-    userId: {
-      type: 'string',
-      required: true,
-    },
     editedContent: {
       type: 'json',
     },
@@ -38,9 +34,10 @@ module.exports = {
   },
 
   fn: async function (
-    { sermonId, userId, editedContent, themes, stickyNote },
+    { sermonId, editedContent, themes, stickyNote },
     exits
   ) {
+    const userId = this.req.user.id;
     const user = this.req.user.fullName;
     sails.log.info(`${user}: Creating user sermon note: ${sermonId}`);
 

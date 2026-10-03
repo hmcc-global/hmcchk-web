@@ -39,7 +39,6 @@ import {
   getUserDataRequest,
   updateUserDataRequest,
   getLoginOnlyFormsRequest,
-  generatePublishedFormLinks,
   setUserInformationFields,
   getSignedUpClassProgress,
 } from 'utils/userInformationHelpers';
