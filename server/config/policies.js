@@ -84,6 +84,7 @@ module.exports.policies = {
   'userSermonNotes/get-user-sermon-notes': ['isLoggedIn'],
   'userSermonNotes/create-user-sermon-notes': ['isLoggedIn'],
   'userSermonNotes/update-user-sermon-notes': ['isLoggedIn'],
+  'userSermonNotes/delete-user-sermon-notes': ['isLoggedIn'],
   'userSermonNotes/email-user-sermon-notes': true,
 
   // Sermon Notes Parent

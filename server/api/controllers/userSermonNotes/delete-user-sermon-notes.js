@@ -8,10 +8,6 @@ module.exports = {
       required: true,
       type: 'string',
     },
-    userId: {
-      required: true,
-      type: 'string',
-    },
   },
 
   exits: {
@@ -28,7 +24,8 @@ module.exports = {
     },
   },
 
-  fn: async function ({ sermonId, userId }, exits) {
+  fn: async function ({ sermonId }, exits) {
+    const userId = this.req.user.id;
     if (sermonId && userId) {
       try {
         let data = await UserSermonNotes.updateOne({
