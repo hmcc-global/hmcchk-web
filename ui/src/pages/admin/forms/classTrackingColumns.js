@@ -1,11 +1,11 @@
-// Muted styling that signals a cell is read-only. Applied to platform/type
+// Muted styling that signals a cell is read-only. Applied to platform
 // (always read-only) and to every column of an archived course.
 const readOnlyCellStyle = {
   color: '#767676',
 };
 
 const readOnlyHeaderTooltip =
-  "Recorded at sign-up. To change a course's platform or type, edit the form in the Form Editor.";
+  "Recorded at sign-up. To change a course's platform, edit the form in the Form Editor.";
 
 // colId is built as `course_${courseId}_${field}`; courseId is a uuid (hyphens, no
 // underscores) so splitting on '_' yields exactly these three parts. Returns null
@@ -108,16 +108,6 @@ export const createClassTrackerColumns = ({
             headerName: 'Platform',
             colId: `course_${course.courseId}_platform`,
             valueGetter: classFieldGetter(course.courseId, 'platform'),
-            columnGroupShow: detailGroupShow,
-            editable: false,
-            headerTooltip: readOnlyHeaderTooltip,
-            cellStyle: readOnlyCellStyle,
-          },
-          {
-            // Display-only, same reasoning as Platform above.
-            headerName: 'Type',
-            colId: `course_${course.courseId}_type`,
-            valueGetter: classFieldGetter(course.courseId, 'type'),
             columnGroupShow: detailGroupShow,
             editable: false,
             headerTooltip: readOnlyHeaderTooltip,

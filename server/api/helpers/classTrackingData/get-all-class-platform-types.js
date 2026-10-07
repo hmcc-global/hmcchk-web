@@ -1,7 +1,7 @@
 module.exports = {
   friendlyName: 'Get All Class Platform Types',
 
-  description: 'Get All Class Platform Types',
+  description: 'Get the list of platforms a class course can run on',
 
   inputs: {
   },
@@ -9,6 +9,8 @@ module.exports = {
   exits: {},
 
   fn: async function (_, exits) {
-    return exits.success(sails.config.custom.classPlatformTypes);
+    // Keeps its "platform types" name so the existing endpoint path is
+    // unchanged; it now returns a plain list of platform names.
+    return exits.success(sails.config.custom.classPlatforms);
   },
 };

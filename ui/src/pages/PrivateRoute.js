@@ -52,7 +52,7 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
       const { data: classProgressStatuses } = await axios.get(
         '/api/classTrackingData/all-progress-statuses'
       );
-      const { data: classPlatformTypes } = await axios.get(
+      const { data: classPlatforms } = await axios.get(
         '/api/classTrackingData/all-platform-types'
       );
       const data = {
@@ -61,7 +61,7 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
         lifestageList,
         formAlertTypeList,
         classProgressStatuses,
-        classPlatformTypes,
+        classPlatforms,
       };
       setStaticData(data);
     }
