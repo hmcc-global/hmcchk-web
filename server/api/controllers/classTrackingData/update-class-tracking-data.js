@@ -41,17 +41,22 @@ module.exports = {
     nonSuccess: {
       description: 'Error updating class tracking data',
     },
+    // Exits without a statusCode reach the client as a 500, which made bad input
+    // look like a server crash. The input-validation exits are 400s.
     invalidDate: {
       description: 'Invalid date string',
+      statusCode: 400,
     },
     invalid: {
       description: 'Failed to update class tracking data',
     },
     invalidValue: {
       description: 'The supplied value is not valid for this field',
+      statusCode: 400,
     },
     courseInactive: {
       description: 'Cannot update tracking data for an archived course',
+      statusCode: 400,
     },
   },
 
@@ -105,13 +110,6 @@ module.exports = {
         return exits.invalid('Class tracking record not found');
       }
 
-      const courseExists = record.courses.some(
-        (course) => course.courseId === courseId
-      );
-      if (!courseExists) {
-        return exits.invalid('Course not found on this record');
-      }
-
       const form = await Form.findOne({ id: record.formId });
       const templateCourse = (
         (form && form.classTrackingTemplate
@@ -124,7 +122,29 @@ module.exports = {
         );
       }
 
-      const courses = record.courses.map((course) =>
+      // A record only holds the courses that were active when the person signed
+      // up, so a course added (or reactivated) on the form later is missing
+      // here. Add it from the form template before editing; otherwise the grid
+      // shows a column for it that can never be saved.
+      let recordCourses = Array.isArray(record.courses) ? record.courses : [];
+      const courseExists = recordCourses.some(
+        (course) => course.courseId === courseId
+      );
+      if (!courseExists) {
+        if (!templateCourse) {
+          return exits.invalid('Course not found on this record');
+        }
+        sails.log.verbose(
+          `Adding course ${courseId} to class tracking data ${id}`
+        );
+        const [newEntry] =
+          await sails.helpers.classtrackingdata.buildCourseEntries([
+            templateCourse,
+          ]);
+        recordCourses = [...recordCourses, newEntry];
+      }
+
+      const courses = recordCourses.map((course) =>
         course.courseId === courseId
           ? { ...course, [field]: resolvedValue }
           : course

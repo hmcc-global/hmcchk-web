@@ -31,16 +31,24 @@ const classFieldGetter = (courseId, field) => (params) => {
 };
 
 const classFieldSetter = (courseId, field) => (params) => {
-  const course = params?.data?.classTrackingData?.courses?.find(
-    (c) => c.courseId === courseId
-  );
+  const trackingData = params?.data?.classTrackingData;
+  const course = trackingData?.courses?.find((c) => c.courseId === courseId);
   if (course) {
     course[field] = params.newValue;
+  } else if (trackingData) {
+    // The course was added to the form after this person signed up, so their
+    // record has no entry for it yet. AG Grid re-reads the cell through the
+    // valueGetter and sends that as newValue, so without a local entry the
+    // edit goes out as undefined. The server adds the real entry on save.
+    trackingData.courses = [
+      ...(Array.isArray(trackingData.courses) ? trackingData.courses : []),
+      { courseId, [field]: params.newValue },
+    ];
   }
-  // Always report a change, even when the course is missing (a submission made
-  // before the form became a class). AG Grid skips onCellValueChanged entirely
-  // when a valueSetter returns false, which would swallow the edit silently -
-  // returning true lets the handler run and tell the admin what happened.
+  // Always report a change, even with no tracking record at all (a submission
+  // made before the form became a class). AG Grid skips onCellValueChanged
+  // entirely when a valueSetter returns false, which would swallow the edit
+  // silently - returning true lets the handler run and tell the admin.
   return true;
 };
 
