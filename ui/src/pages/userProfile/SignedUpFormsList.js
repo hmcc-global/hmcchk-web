@@ -69,7 +69,7 @@ const getProgressCourses = (form, classProgress) => {
 
     return {
       // Spread order matters: the template lands last so the current display
-      // values (name, platform, type) win over what was recorded at sign-up.
+      // values (name, platform) win over what was recorded at sign-up.
       ...snapshotCourse,
       ...templateCourse,
       // The template's link is deliberately preferred so admins can update

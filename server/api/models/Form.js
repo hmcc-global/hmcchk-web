@@ -89,7 +89,7 @@ module.exports = {
         'Template/config for this Form\'s class tracking, grouped so future ' +
         'column types can share this object. ' +
         '{ courses: [...], classStartTime, classEndingTime } — each course: ' +
-        '{ courseId, name, platform, type, order, isActive, courseLink }',
+        '{ courseId, name, platform, order, isActive, courseLink }',
     },
   },
 };

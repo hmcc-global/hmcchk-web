@@ -47,7 +47,6 @@ const newCourse = () => ({
   courseId: uuidv4(),
   name: '',
   platform: '',
-  type: 'Online',
   courseLink: '',
   isActive: true,
 });
@@ -61,9 +60,11 @@ const FormEditorContainer = (props) => {
     formManagerCallback,
     staticData,
   } = props;
-  const { formAlertTypeList, classPlatformTypes } = staticData;
+  const { formAlertTypeList } = staticData;
   const formAlertTypes = Object.keys(formAlertTypeList);
-  const classPlatforms = Object.keys(classPlatformTypes);
+  const classPlatforms = Array.isArray(staticData.classPlatforms)
+    ? staticData.classPlatforms
+    : [];
   const toast = useToast();
 
   // React forms basics
@@ -396,19 +397,10 @@ const FormEditorContainer = (props) => {
     );
   };
 
-  // A single state write sets both platform and its derived type, so the two
-  // can never disagree. (Two separate updateCourseField calls would each read
-  // the same stale `courses` closure and the second would clobber the first.)
   const updateCoursePlatform = (courseId, platform) => {
     setCourses(
       courses.map((course) =>
-        course.courseId === courseId
-          ? {
-              ...course,
-              platform,
-              type: classPlatformTypes[platform] ?? course.type,
-            }
-          : course
+        course.courseId === courseId ? { ...course, platform } : course
       )
     );
   };
@@ -745,18 +737,6 @@ const FormEditorContainer = (props) => {
                                         )
                                       }
                                     />
-                                    <Select
-                                      isDisabled
-                                      value={
-                                        classPlatformTypes[course.platform] ??
-                                        course.type
-                                      }
-                                    >
-                                      <option value="Online">Online</option>
-                                      <option value="In-Person">
-                                        In-Person
-                                      </option>
-                                    </Select>
                                     <Checkbox
                                       whiteSpace="nowrap"
                                       isChecked={course.isActive}

@@ -23,18 +23,16 @@ module.exports = {
 
   fn: async function ({ formToSave }, exits) {
     try {
-      const classPlatformTypes = sails.config.custom.classPlatformTypes;
+      // Courses no longer have a type (Online/In-Person). A form copied from
+      // an older one can still carry it, so strip it rather than store it.
       if (
         formToSave.classTrackingTemplate &&
-        formToSave.classTrackingTemplate.courses
+        Array.isArray(formToSave.classTrackingTemplate.courses)
       ) {
         formToSave.classTrackingTemplate.courses =
-          formToSave.classTrackingTemplate.courses.map((course) => {
-            if (course.platform && classPlatformTypes[course.platform]) {
-              return { ...course, type: classPlatformTypes[course.platform] };
-            }
-            return course;
-          });
+          formToSave.classTrackingTemplate.courses.map((course) =>
+            _.omit(course, 'type')
+          );
       }
 
       const createdForm = await Form.create(formToSave);

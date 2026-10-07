@@ -25,7 +25,7 @@ module.exports = {
       required: true,
       type: 'string',
       description: 'Which progress field on the course entry to update',
-      // Platform/type are a snapshot set once at submission time, not
+      // Platform is a snapshot set once at submission time, not
       // progress an admin should hand-edit per registrant - so only
       // progress fields are updatable through this endpoint.
       isIn: ['status', 'startedAt', 'completedAt', 'remarks'],
