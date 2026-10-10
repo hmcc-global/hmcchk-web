@@ -25,19 +25,6 @@ module.exports = {
 
   fn: async function ({ id, formToSave }, exits) {
     try {
-      // Courses no longer have a type (Online/In-Person). Forms created before
-      // it was removed still send it back when edited, so strip it here and
-      // each old form drops it on its next save.
-      if (
-        formToSave.classTrackingTemplate &&
-        Array.isArray(formToSave.classTrackingTemplate.courses)
-      ) {
-        formToSave.classTrackingTemplate.courses =
-          formToSave.classTrackingTemplate.courses.map((course) =>
-            _.omit(course, 'type')
-          );
-      }
-
       if (
         formToSave.classTrackingTemplate &&
         formToSave.classTrackingTemplate.courses

@@ -23,18 +23,6 @@ module.exports = {
 
   fn: async function ({ formToSave }, exits) {
     try {
-      // Courses no longer have a type (Online/In-Person). A form copied from
-      // an older one can still carry it, so strip it rather than store it.
-      if (
-        formToSave.classTrackingTemplate &&
-        Array.isArray(formToSave.classTrackingTemplate.courses)
-      ) {
-        formToSave.classTrackingTemplate.courses =
-          formToSave.classTrackingTemplate.courses.map((course) =>
-            _.omit(course, 'type')
-          );
-      }
-
       const createdForm = await Form.create(formToSave);
       return exits.success();
     } catch (err) {
