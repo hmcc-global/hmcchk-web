@@ -88,7 +88,7 @@ module.exports.policies = {
   'userSermonNotes/email-user-sermon-notes': true,
 
   // Sermon Notes Parent
-  'sermonNotesParent/*': true,
+  'sermonNotesParent/*': ['isLoggedIn', 'aboveMinistry'],
 
   // Sermons page
   'sermons/get-sermons': true,
