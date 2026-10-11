@@ -5,7 +5,7 @@ const readOnlyCellStyle = {
 };
 
 const readOnlyHeaderTooltip =
-  "Recorded at sign-up. To change a course's platform, edit the form in the Form Editor.";
+  "Set on the form. To change a course's platform, edit the form in the Form Editor.";
 
 // colId is built as `course_${courseId}_${field}`; courseId is a uuid (hyphens, no
 // underscores) so splitting on '_' yields exactly these three parts. Returns null
@@ -28,6 +28,20 @@ const classFieldGetter = (courseId, field) => (params) => {
     (c) => c.courseId === courseId
   );
   return course ? course[field] : undefined;
+};
+
+// Platform is course setup, not per-person progress, so it doesn't have to wait
+// for the registrant's record to have an entry (a course added after sign-up
+// has none until its first edit). Active courses show the form's current
+// platform; archived ones keep what was recorded, matching the member profile.
+const platformGetter = (templateCourse) => {
+  const getRecorded = classFieldGetter(templateCourse.courseId, 'platform');
+  return (params) => {
+    const recorded = getRecorded(params);
+    return templateCourse.isActive
+      ? templateCourse.platform ?? recorded
+      : recorded ?? templateCourse.platform;
+  };
 };
 
 const classFieldSetter = (courseId, field) => (params) => {
@@ -103,11 +117,11 @@ export const createClassTrackerColumns = ({
             cellStyle: archivedStyle,
           },
           {
-            // Display-only: platform is a snapshot captured at submission
-            // time, not progress an admin should hand-edit per registrant.
+            // Display-only: platform is set on the form, not progress an admin
+            // should hand-edit per registrant.
             headerName: 'Platform',
             colId: `course_${course.courseId}_platform`,
-            valueGetter: classFieldGetter(course.courseId, 'platform'),
+            valueGetter: platformGetter(course),
             columnGroupShow: detailGroupShow,
             editable: false,
             headerTooltip: readOnlyHeaderTooltip,
