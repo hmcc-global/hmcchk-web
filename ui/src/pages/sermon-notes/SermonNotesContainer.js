@@ -51,6 +51,15 @@ const SermonNotesContainer = (props) => {
     sermonId = sermonNoteId;
   }
 
+  // Guests have no id to key on, so their draft lives under the sermon alone.
+  // Scoping the key by user id is what stops one member's notes showing up for
+  // the next member to sign in on the same browser; the guest key is claimed
+  // and cleared in the draft effect below once someone signs in.
+  const guestDraftKey = `sermonNotes-${sermonId}`;
+  const draftKey = user?.id
+    ? `sermonNotes-${user.id}-${sermonId}`
+    : guestDraftKey;
+
   const getSermonNotesParent = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -108,6 +117,11 @@ const SermonNotesContainer = (props) => {
       document.activeElement.blur();
     }
     if (!user?.id) return;
+    // Read the editor live rather than from the callback closure: UserNotesExtension
+    // commits typed text on blur/click, so editUserSermonNotes is still a frame behind
+    // on the first tap after typing and would save a pre-typing snapshot.
+    const json = tipTapRef.current?.getJSON();
+    if (!json) return;
     setIsSubmitting(true);
     try {
       if (userSermonNotes) {
@@ -117,7 +131,7 @@ const SermonNotesContainer = (props) => {
             {
               userId: user.id,
               sermonId: sermonId,
-              editedContent: editUserSermonNotes,
+              editedContent: json,
             }
           );
           if (status === 200) {
@@ -139,11 +153,17 @@ const SermonNotesContainer = (props) => {
             {
               userId: user.id,
               sermonId: sermonId,
-              editedContent: editUserSermonNotes,
+              editedContent: json,
             }
           );
           if (status === 200) {
             setUserSermonNotes(data);
+            toast({
+              title: 'Sermon Notes Saved',
+              status: 'success',
+              duration: 2000,
+              isClosable: true,
+            });
           }
         } catch (error) {
           console.log(error);
@@ -153,14 +173,7 @@ const SermonNotesContainer = (props) => {
     } finally {
       setIsSubmitting(false);
     }
-  }, [
-    isSubmitting,
-    user?.id,
-    sermonId,
-    editUserSermonNotes,
-    userSermonNotes,
-    getUserSermonNotes,
-  ]);
+  }, [isSubmitting, user?.id, sermonId, userSermonNotes, getUserSermonNotes]);
 
   const isValidEmail = (email) => {
     const emailAddress = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -256,30 +269,33 @@ const SermonNotesContainer = (props) => {
   }, [sermonId, getSermonNotesParent, getUserSermonNotes]);
 
   useEffect(() => {
-    if (sermonId) {
-      const localUserNotes = localStorage.getItem(`sermonNotes-${sermonId}`);
-      if (
-        localUserNotes !== 'null' &&
-        localUserNotes !== 'undefined' &&
-        localUserNotes
-      ) {
-        setEditUserSermonNotes(JSON.parse(localUserNotes));
-      } else {
-        setEditUserSermonNotes(undefined);
+    if (!sermonId) return;
+    const isUsable = (value) =>
+      value && value !== 'null' && value !== 'undefined';
+
+    let stored = localStorage.getItem(draftKey);
+
+    // A guest who took notes and then signed in should still have them waiting
+    // to be saved, so claim their draft for the account that just arrived.
+    if (user?.id && !isUsable(stored)) {
+      const guestDraft = localStorage.getItem(guestDraftKey);
+      if (isUsable(guestDraft)) {
+        stored = guestDraft;
+        localStorage.setItem(draftKey, guestDraft);
+        localStorage.removeItem(guestDraftKey);
       }
     }
-  }, [sermonId]);
+
+    setEditUserSermonNotes(isUsable(stored) ? JSON.parse(stored) : undefined);
+  }, [sermonId, user?.id, draftKey, guestDraftKey]);
 
   useDebounce(
     () => {
-      if (!editUserSermonNotes) return;
-      localStorage.setItem(
-        `sermonNotes-${sermonId}`,
-        JSON.stringify(editUserSermonNotes)
-      );
+      if (!editUserSermonNotes || !sermonId) return;
+      localStorage.setItem(draftKey, JSON.stringify(editUserSermonNotes));
     },
     0,
-    [editUserSermonNotes]
+    [editUserSermonNotes, draftKey, sermonId]
   );
 
   const originalContentWithUserNotes = useMemo(() => {
