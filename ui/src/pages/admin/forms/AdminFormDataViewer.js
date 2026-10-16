@@ -609,7 +609,7 @@ export default function AdminFormDataViewer(props) {
       toast({
         title: "This field can't be edited here",
         description:
-          "Platform is set on the form. To change a course's platform, edit " +
+          "Platform is set on the form. To change a step's platform, edit " +
           'the form in the Form Editor.',
         status: 'info',
         duration: 8000,
@@ -789,7 +789,7 @@ export default function AdminFormDataViewer(props) {
         ? [
             'separator',
             {
-              name: 'Set Course Status',
+              name: 'Set Step Status',
               disabled: selectedNodes.length === 0,
               subMenu: classCourseStatusItems,
             },
