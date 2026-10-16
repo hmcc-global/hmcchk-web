@@ -52,7 +52,7 @@ module.exports = {
 
           if (trackedCount > 0) {
             return exits.invalidCourseRemoval(
-              'Cannot remove a course that already has class tracking data; deactivate it instead'
+              'Cannot remove a step that already has class tracking data; deactivate it instead'
             );
           }
         }

@@ -178,8 +178,8 @@ const SignedUpFormsList = ({ forms = [], classProgressList = [] }) => {
                           rel="noopener noreferrer"
                           color="#0628A3"
                           textDecoration="underline"
-                          title="Open course link in a new tab"
-                          aria-label={`Open ${course.name} course link in a new tab`}
+                          title="Open step link in a new tab"
+                          aria-label={`Open ${course.name} step link in a new tab`}
                         >
                           <Flex align="center" gap="1">
                             <Text fontSize={courseTitleFontSize}>

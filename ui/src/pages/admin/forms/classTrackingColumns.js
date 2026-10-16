@@ -5,7 +5,7 @@ const readOnlyCellStyle = {
 };
 
 const readOnlyHeaderTooltip =
-  "Set on the form. To change a course's platform, edit the form in the Form Editor.";
+  "Set on the form. To change a step's platform, edit the form in the Form Editor.";
 
 // colId is built as `course_${courseId}_${field}`; courseId is a uuid (hyphens, no
 // underscores) so splitting on '_' yields exactly these three parts. Returns null
