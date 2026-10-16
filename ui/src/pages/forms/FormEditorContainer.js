@@ -47,7 +47,6 @@ const newCourse = () => ({
   courseId: uuidv4(),
   name: '',
   platform: '',
-  type: 'Online',
   courseLink: '',
   isActive: true,
 });
@@ -61,9 +60,11 @@ const FormEditorContainer = (props) => {
     formManagerCallback,
     staticData,
   } = props;
-  const { formAlertTypeList, classPlatformTypes } = staticData;
+  const { formAlertTypeList } = staticData;
   const formAlertTypes = Object.keys(formAlertTypeList);
-  const classPlatforms = Object.keys(classPlatformTypes);
+  const classPlatforms = Array.isArray(staticData.classPlatforms)
+    ? staticData.classPlatforms
+    : [];
   const toast = useToast();
 
   // React forms basics
@@ -302,7 +303,7 @@ const FormEditorContainer = (props) => {
         toast({
           title: 'Invalid class setup',
           description:
-            'Add at least one course and give every course a name before saving.',
+            'Add at least one step and give every step a name before saving.',
           status: 'error',
           duration: 6000,
           isClosable: true,
@@ -322,8 +323,8 @@ const FormEditorContainer = (props) => {
       );
       if (invalidCourseLink) {
         toast({
-          title: 'Invalid course link',
-          description: `Course link for "${invalidCourseLink.name}" must start with http:// or https://.`,
+          title: 'Invalid step link',
+          description: `Step link for "${invalidCourseLink.name}" must start with http:// or https://.`,
           status: 'error',
           duration: 6000,
           isClosable: true,
@@ -380,7 +381,7 @@ const FormEditorContainer = (props) => {
   const removeCourse = (courseId) => {
     // Only ever called on a course added this session (not yet persisted),
     // so it can't have registrant tracking data — a plain confirm is enough.
-    if (window.confirm('Are you sure you want to remove this course?')) {
+    if (window.confirm('Are you sure you want to remove this step?')) {
       // Move focus off the trash button before its row unmounts. Otherwise
       // focus falls to <body> and the modal body jumps back to the top.
       addCourseButtonRef.current?.focus();
@@ -396,19 +397,10 @@ const FormEditorContainer = (props) => {
     );
   };
 
-  // A single state write sets both platform and its derived type, so the two
-  // can never disagree. (Two separate updateCourseField calls would each read
-  // the same stale `courses` closure and the second would clobber the first.)
   const updateCoursePlatform = (courseId, platform) => {
     setCourses(
       courses.map((course) =>
-        course.courseId === courseId
-          ? {
-              ...course,
-              platform,
-              type: classPlatformTypes[platform] ?? course.type,
-            }
-          : course
+        course.courseId === courseId ? { ...course, platform } : course
       )
     );
   };
@@ -692,13 +684,13 @@ const FormEditorContainer = (props) => {
                             {isClass && (
                               <Stack spacing="3">
                                 <Heading as="h5" size="sm">
-                                  Courses
+                                  Steps
                                   {courses.length > 0 && ` (${courses.length})`}
                                 </Heading>
                                 <Alert status="info">
                                   <AlertIcon />
-                                  Courses cannot be deleted (to persist
-                                  historical data), it can only be deactivated.
+                                  Steps cannot be deleted (to persist historical
+                                  data), it can only be deactivated.
                                 </Alert>
                                 {courses.map((course) => (
                                   <HStack
@@ -708,7 +700,7 @@ const FormEditorContainer = (props) => {
                                     p="2"
                                   >
                                     <Input
-                                      placeholder="Course name"
+                                      placeholder="Step name"
                                       value={course.name}
                                       onChange={(e) =>
                                         updateCourseField(
@@ -735,7 +727,7 @@ const FormEditorContainer = (props) => {
                                       ))}
                                     </Select>
                                     <Input
-                                      placeholder="Course link (https://...)"
+                                      placeholder="Step link (https://...)"
                                       value={course.courseLink ?? ''}
                                       onChange={(e) =>
                                         updateCourseField(
@@ -745,18 +737,6 @@ const FormEditorContainer = (props) => {
                                         )
                                       }
                                     />
-                                    <Select
-                                      isDisabled
-                                      value={
-                                        classPlatformTypes[course.platform] ??
-                                        course.type
-                                      }
-                                    >
-                                      <option value="Online">Online</option>
-                                      <option value="In-Person">
-                                        In-Person
-                                      </option>
-                                    </Select>
                                     <Checkbox
                                       whiteSpace="nowrap"
                                       isChecked={course.isActive}
@@ -774,7 +754,7 @@ const FormEditorContainer = (props) => {
                                       course.courseId
                                     ) && (
                                       <IconButton
-                                        aria-label="Remove course"
+                                        aria-label="Remove step"
                                         icon={<FiTrash2 />}
                                         onClick={() =>
                                           removeCourse(course.courseId)
@@ -787,7 +767,7 @@ const FormEditorContainer = (props) => {
                                 ))}
                                 {courses.length === 0 && (
                                   <Text color="gray.500">
-                                    No courses yet — add at least one course for
+                                    No steps yet — add at least one step for
                                     this class.
                                   </Text>
                                 )}
@@ -797,7 +777,7 @@ const FormEditorContainer = (props) => {
                                   leftIcon={<FiPlus />}
                                   alignSelf="start"
                                 >
-                                  Add Course
+                                  Add Step
                                 </Button>
                                 <SimpleGrid columns={[1, 2]} spacing="3">
                                   <Box>

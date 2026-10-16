@@ -17,7 +17,7 @@ module.exports = {
       description:
         'Snapshot of course progress, seeded from Form.classTrackingTemplate.courses ' +
         'at submission time. ' +
-        'Each item: { courseId, name, platform, type, status, startedAt, completedAt, remarks }',
+        'Each item: { courseId, name, platform, status, startedAt, completedAt, remarks }',
     },
     lastUpdatedBy: {
       type: 'string',

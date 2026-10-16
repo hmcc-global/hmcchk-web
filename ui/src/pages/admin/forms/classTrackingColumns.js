@@ -1,11 +1,11 @@
-// Muted styling that signals a cell is read-only. Applied to platform/type
+// Muted styling that signals a cell is read-only. Applied to platform
 // (always read-only) and to every column of an archived course.
 const readOnlyCellStyle = {
   color: '#767676',
 };
 
 const readOnlyHeaderTooltip =
-  "Recorded at sign-up. To change a course's platform or type, edit the form in the Form Editor.";
+  "Set on the form. To change a step's platform, edit the form in the Form Editor.";
 
 // colId is built as `course_${courseId}_${field}`; courseId is a uuid (hyphens, no
 // underscores) so splitting on '_' yields exactly these three parts. Returns null
@@ -30,17 +30,39 @@ const classFieldGetter = (courseId, field) => (params) => {
   return course ? course[field] : undefined;
 };
 
+// Platform is course setup, not per-person progress, so it doesn't have to wait
+// for the registrant's record to have an entry (a course added after sign-up
+// has none until its first edit). Active courses show the form's current
+// platform; archived ones keep what was recorded, matching the member profile.
+const platformGetter = (templateCourse) => {
+  const getRecorded = classFieldGetter(templateCourse.courseId, 'platform');
+  return (params) => {
+    const recorded = getRecorded(params);
+    return templateCourse.isActive
+      ? templateCourse.platform ?? recorded
+      : recorded ?? templateCourse.platform;
+  };
+};
+
 const classFieldSetter = (courseId, field) => (params) => {
-  const course = params?.data?.classTrackingData?.courses?.find(
-    (c) => c.courseId === courseId
-  );
+  const trackingData = params?.data?.classTrackingData;
+  const course = trackingData?.courses?.find((c) => c.courseId === courseId);
   if (course) {
     course[field] = params.newValue;
+  } else if (trackingData) {
+    // The course was added to the form after this person signed up, so their
+    // record has no entry for it yet. AG Grid re-reads the cell through the
+    // valueGetter and sends that as newValue, so without a local entry the
+    // edit goes out as undefined. The server adds the real entry on save.
+    trackingData.courses = [
+      ...(Array.isArray(trackingData.courses) ? trackingData.courses : []),
+      { courseId, [field]: params.newValue },
+    ];
   }
-  // Always report a change, even when the course is missing (a submission made
-  // before the form became a class). AG Grid skips onCellValueChanged entirely
-  // when a valueSetter returns false, which would swallow the edit silently -
-  // returning true lets the handler run and tell the admin what happened.
+  // Always report a change, even with no tracking record at all (a submission
+  // made before the form became a class). AG Grid skips onCellValueChanged
+  // entirely when a valueSetter returns false, which would swallow the edit
+  // silently - returning true lets the handler run and tell the admin.
   return true;
 };
 
@@ -95,21 +117,11 @@ export const createClassTrackerColumns = ({
             cellStyle: archivedStyle,
           },
           {
-            // Display-only: platform is a snapshot captured at submission
-            // time, not progress an admin should hand-edit per registrant.
+            // Display-only: platform is set on the form, not progress an admin
+            // should hand-edit per registrant.
             headerName: 'Platform',
             colId: `course_${course.courseId}_platform`,
-            valueGetter: classFieldGetter(course.courseId, 'platform'),
-            columnGroupShow: detailGroupShow,
-            editable: false,
-            headerTooltip: readOnlyHeaderTooltip,
-            cellStyle: readOnlyCellStyle,
-          },
-          {
-            // Display-only, same reasoning as Platform above.
-            headerName: 'Type',
-            colId: `course_${course.courseId}_type`,
-            valueGetter: classFieldGetter(course.courseId, 'type'),
+            valueGetter: platformGetter(course),
             columnGroupShow: detailGroupShow,
             editable: false,
             headerTooltip: readOnlyHeaderTooltip,

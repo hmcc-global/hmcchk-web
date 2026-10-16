@@ -1,7 +1,7 @@
 module.exports = {
   friendlyName: 'Get All Class Platform Types',
 
-  description: 'Get All Class Platform Types',
+  description: 'Get the list of platforms a class course can run on',
 
   inputs: {
   },
