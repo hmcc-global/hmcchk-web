@@ -82,11 +82,7 @@ module.exports.custom = {
 
   classProgressStatuses: ['Not Started', 'In Progress', 'Completed'],
 
-  classPlatformTypes: {
-    Coassemble: 'Online',
-    'T-Center': 'In-Person',
-    'Google Forms': 'Online',
-  },
+  classPlatforms: ['Coassemble', 'T-Center', 'Google Forms'],
 
   parseUserMailbox: {
     single: 'Single Parse User Query',

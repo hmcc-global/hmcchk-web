@@ -87,17 +87,9 @@ module.exports = {
           formId: formId,
           userId: userId,
           submissionId: res.id,
-          courses: activeCourses.map((course) => ({
-            courseId: course.courseId,
-            name: course.name,
-            platform: course.platform,
-            type: course.type,
-            courseLink: course.courseLink || '',
-            status: sails.config.custom.classProgressStatuses[0],
-            startedAt: '',
-            completedAt: '',
-            remarks: '',
-          })),
+          courses: await sails.helpers.classtrackingdata.buildCourseEntries(
+            activeCourses
+          ),
         }).fetch();
 
         if (existing) {

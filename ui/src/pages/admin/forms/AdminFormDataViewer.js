@@ -596,7 +596,7 @@ export default function AdminFormDataViewer(props) {
     }
   };
 
-  // Platform/type course cells are read-only (set at sign-up). If an admin
+  // Platform course cells are read-only (set on the form). If an admin
   // double-clicks one to edit it, nudge them toward the Form Editor instead.
   const onCellDoubleClicked = (e) => {
     const colId = e?.colDef?.colId;
@@ -605,12 +605,12 @@ export default function AdminFormDataViewer(props) {
     const parsed = parseCourseColId(colId);
     if (!parsed) return;
 
-    if (parsed.field === 'platform' || parsed.field === 'type') {
+    if (parsed.field === 'platform') {
       toast({
         title: "This field can't be edited here",
         description:
-          'Platform and type are recorded when the registrant signs up. To ' +
-          "change a course's platform or type, edit the form in the Form Editor.",
+          "Platform is set on the form. To change a step's platform, edit " +
+          'the form in the Form Editor.',
         status: 'info',
         duration: 8000,
         isClosable: true,
@@ -789,7 +789,7 @@ export default function AdminFormDataViewer(props) {
         ? [
             'separator',
             {
-              name: 'Set Course Status',
+              name: 'Set Step Status',
               disabled: selectedNodes.length === 0,
               subMenu: classCourseStatusItems,
             },
