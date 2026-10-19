@@ -108,6 +108,11 @@ const SermonNotesContainer = (props) => {
       document.activeElement.blur();
     }
     if (!user?.id) return;
+    // Read the editor live rather than from the callback closure: UserNotesExtension
+    // commits typed text on blur/click, so editUserSermonNotes is still a frame behind
+    // on the first tap after typing and would save a pre-typing snapshot.
+    const json = tipTapRef.current?.getJSON();
+    if (!json) return;
     setIsSubmitting(true);
     try {
       if (userSermonNotes) {
@@ -117,7 +122,7 @@ const SermonNotesContainer = (props) => {
             {
               userId: user.id,
               sermonId: sermonId,
-              editedContent: editUserSermonNotes,
+              editedContent: json,
             }
           );
           if (status === 200) {
@@ -139,11 +144,17 @@ const SermonNotesContainer = (props) => {
             {
               userId: user.id,
               sermonId: sermonId,
-              editedContent: editUserSermonNotes,
+              editedContent: json,
             }
           );
           if (status === 200) {
             setUserSermonNotes(data);
+            toast({
+              title: 'Sermon Notes Saved',
+              status: 'success',
+              duration: 2000,
+              isClosable: true,
+            });
           }
         } catch (error) {
           console.log(error);
@@ -153,14 +164,7 @@ const SermonNotesContainer = (props) => {
     } finally {
       setIsSubmitting(false);
     }
-  }, [
-    isSubmitting,
-    user?.id,
-    sermonId,
-    editUserSermonNotes,
-    userSermonNotes,
-    getUserSermonNotes,
-  ]);
+  }, [isSubmitting, user?.id, sermonId, userSermonNotes, getUserSermonNotes]);
 
   const isValidEmail = (email) => {
     const emailAddress = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -256,8 +260,10 @@ const SermonNotesContainer = (props) => {
   }, [sermonId, getSermonNotesParent, getUserSermonNotes]);
 
   useEffect(() => {
-    if (sermonId) {
-      const localUserNotes = localStorage.getItem(`sermonNotes-${sermonId}`);
+    if (sermonId && user?.id) {
+      const localUserNotes = localStorage.getItem(
+        `sermonNotes-${user.id}-${sermonId}`
+      );
       if (
         localUserNotes !== 'null' &&
         localUserNotes !== 'undefined' &&
@@ -268,18 +274,18 @@ const SermonNotesContainer = (props) => {
         setEditUserSermonNotes(undefined);
       }
     }
-  }, [sermonId]);
+  }, [sermonId, user?.id]);
 
   useDebounce(
     () => {
-      if (!editUserSermonNotes) return;
+      if (!editUserSermonNotes || !user?.id) return;
       localStorage.setItem(
-        `sermonNotes-${sermonId}`,
+        `sermonNotes-${user.id}-${sermonId}`,
         JSON.stringify(editUserSermonNotes)
       );
     },
     0,
-    [editUserSermonNotes]
+    [editUserSermonNotes, user?.id]
   );
 
   const originalContentWithUserNotes = useMemo(() => {
