@@ -51,6 +51,15 @@ const SermonNotesContainer = (props) => {
     sermonId = sermonNoteId;
   }
 
+  // Guests have no id to key on, so their draft lives under the sermon alone.
+  // Scoping the key by user id is what stops one member's notes showing up for
+  // the next member to sign in on the same browser; the guest key is claimed
+  // and cleared in the draft effect below once someone signs in.
+  const guestDraftKey = `sermonNotes-${sermonId}`;
+  const draftKey = user?.id
+    ? `sermonNotes-${user.id}-${sermonId}`
+    : guestDraftKey;
+
   const getSermonNotesParent = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -260,32 +269,33 @@ const SermonNotesContainer = (props) => {
   }, [sermonId, getSermonNotesParent, getUserSermonNotes]);
 
   useEffect(() => {
-    if (sermonId && user?.id) {
-      const localUserNotes = localStorage.getItem(
-        `sermonNotes-${user.id}-${sermonId}`
-      );
-      if (
-        localUserNotes !== 'null' &&
-        localUserNotes !== 'undefined' &&
-        localUserNotes
-      ) {
-        setEditUserSermonNotes(JSON.parse(localUserNotes));
-      } else {
-        setEditUserSermonNotes(undefined);
+    if (!sermonId) return;
+    const isUsable = (value) =>
+      value && value !== 'null' && value !== 'undefined';
+
+    let stored = localStorage.getItem(draftKey);
+
+    // A guest who took notes and then signed in should still have them waiting
+    // to be saved, so claim their draft for the account that just arrived.
+    if (user?.id && !isUsable(stored)) {
+      const guestDraft = localStorage.getItem(guestDraftKey);
+      if (isUsable(guestDraft)) {
+        stored = guestDraft;
+        localStorage.setItem(draftKey, guestDraft);
+        localStorage.removeItem(guestDraftKey);
       }
     }
-  }, [sermonId, user?.id]);
+
+    setEditUserSermonNotes(isUsable(stored) ? JSON.parse(stored) : undefined);
+  }, [sermonId, user?.id, draftKey, guestDraftKey]);
 
   useDebounce(
     () => {
-      if (!editUserSermonNotes || !user?.id) return;
-      localStorage.setItem(
-        `sermonNotes-${user.id}-${sermonId}`,
-        JSON.stringify(editUserSermonNotes)
-      );
+      if (!editUserSermonNotes || !sermonId) return;
+      localStorage.setItem(draftKey, JSON.stringify(editUserSermonNotes));
     },
     0,
-    [editUserSermonNotes, user?.id]
+    [editUserSermonNotes, draftKey, sermonId]
   );
 
   const originalContentWithUserNotes = useMemo(() => {
