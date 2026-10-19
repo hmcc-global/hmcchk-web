@@ -1,11 +1,6 @@
 import './styles.scss';
 
-import React, {
-  useEffect,
-  useState,
-  forwardRef,
-  useImperativeHandle,
-} from 'react';
+import React, { useEffect, forwardRef, useImperativeHandle } from 'react';
 import Highlight from '@tiptap/extension-highlight';
 import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
@@ -15,13 +10,12 @@ import TextStyle from '@tiptap/extension-text-style';
 import { BibleVerseNode } from './BibleVerseExtension.js';
 import { UserNotesNode } from './UserNotesExtension.js';
 import { EditorContent, useEditor } from '@tiptap/react';
-import { TextContext, LastUpdatedPosContext } from './index.js';
+import { TextContext } from './index.js';
 import { FillInBlankNode } from './FillInBlank.js';
 import { FontSize } from './FontSizeExtension.js';
 
 const TiptapOutput = forwardRef(
   ({ input, textPassage, setUserSermonNotes }, ref) => {
-    const [lastUpdatedPos, setLastUpdatedPos] = useState(null);
     const editor = useEditor({
       editable: false,
       content: input,
@@ -39,11 +33,13 @@ const TiptapOutput = forwardRef(
       ],
     });
 
-    // Parent (Email button) pulls HTML on demand — we don't mirror getHTML() into React state.
+    // Parent pulls HTML (Email) / JSON (Save) on demand — we don't mirror either
+    // into React state, so the payload is read live at click time.
     useImperativeHandle(
       ref,
       () => ({
         getHTML: () => (editor ? editor.getHTML() : null),
+        getJSON: () => (editor ? editor.getJSON() : null),
       }),
       [editor]
     );
@@ -54,11 +50,16 @@ const TiptapOutput = forwardRef(
       }
     }, [editor]);
 
-    // JSON only: keeps editUserSermonNotes in sync for Save / localStorage.
+    // JSON only: keeps editUserSermonNotes in sync for the localStorage draft.
+    // The event payload is { editor, transaction }, so read docChanged off the
+    // transaction. Selection-only transactions carry no content and would
+    // otherwise re-serialize the whole document on every cursor move.
     useEffect(() => {
-      if (editor && lastUpdatedPos !== null) {
-        const setNotes = () => {
-          setUserSermonNotes(editor.getJSON());
+      if (editor) {
+        const setNotes = ({ transaction }) => {
+          if (transaction.docChanged) {
+            setUserSermonNotes(editor.getJSON());
+          }
         };
         editor.on('transaction', setNotes);
 
@@ -66,16 +67,12 @@ const TiptapOutput = forwardRef(
           editor.off('transaction', setNotes);
         };
       }
-    }, [editor, lastUpdatedPos, setUserSermonNotes]);
+    }, [editor, setUserSermonNotes]);
 
     return (
-      <LastUpdatedPosContext.Provider
-        value={{ lastUpdatedPos, setLastUpdatedPos }}
-      >
-        <TextContext.Provider value={textPassage}>
-          <EditorContent editor={editor} />
-        </TextContext.Provider>
-      </LastUpdatedPosContext.Provider>
+      <TextContext.Provider value={textPassage}>
+        <EditorContent editor={editor} />
+      </TextContext.Provider>
     );
   }
 );
