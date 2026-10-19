@@ -124,51 +124,27 @@ const SermonNotesContainer = (props) => {
     if (!json) return;
     setIsSubmitting(true);
     try {
-      if (userSermonNotes) {
-        try {
-          const { data, status } = await axios.put(
-            '/api/user-sermon-notes/update',
-            {
-              userId: user.id,
-              sermonId: sermonId,
-              editedContent: json,
-            }
-          );
-          if (status === 200) {
-            setUserSermonNotes(data);
-            toast({
-              title: 'Sermon Notes Saved',
-              status: 'success',
-              duration: 2000,
-              isClosable: true,
-            });
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      } else {
-        try {
-          const { data, status } = await axios.post(
-            '/api/user-sermon-notes/create',
-            {
-              userId: user.id,
-              sermonId: sermonId,
-              editedContent: json,
-            }
-          );
-          if (status === 200) {
-            setUserSermonNotes(data);
-            toast({
-              title: 'Sermon Notes Saved',
-              status: 'success',
-              duration: 2000,
-              isClosable: true,
-            });
-          }
-        } catch (error) {
-          console.log(error);
-          getUserSermonNotes();
-        }
+      const payload = {
+        userId: user.id,
+        sermonId: sermonId,
+        editedContent: json,
+      };
+      const { data, status } = userSermonNotes
+        ? await axios.put('/api/user-sermon-notes/update', payload)
+        : await axios.post('/api/user-sermon-notes/create', payload);
+      if (status === 200) {
+        setUserSermonNotes(data);
+        toast({
+          title: 'Sermon Notes Saved',
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      if (!userSermonNotes) {
+        getUserSermonNotes();
       }
     } finally {
       setIsSubmitting(false);
@@ -286,7 +262,15 @@ const SermonNotesContainer = (props) => {
       }
     }
 
-    setEditUserSermonNotes(isUsable(stored) ? JSON.parse(stored) : undefined);
+    let parsedDraft;
+    if (isUsable(stored)) {
+      try {
+        parsedDraft = JSON.parse(stored);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    setEditUserSermonNotes(parsedDraft);
   }, [sermonId, user?.id, draftKey, guestDraftKey]);
 
   useDebounce(
