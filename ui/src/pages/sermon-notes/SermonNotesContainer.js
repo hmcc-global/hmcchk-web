@@ -143,6 +143,12 @@ const SermonNotesContainer = (props) => {
       }
     } catch (error) {
       console.log(error);
+      toast({
+        title: 'Failed to save sermon notes',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
       if (!userSermonNotes) {
         getUserSermonNotes();
       }
