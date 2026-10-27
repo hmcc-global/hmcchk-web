@@ -36,11 +36,9 @@ import {
   regionList,
 } from 'utils/lists';
 import {
-  fixAddress,
-  fixName,
-  purgeFormFields,
   splitFullName,
   updateUserDataRequest,
+  userDataCleanup,
 } from 'utils/userInformationHelpers';
 import { customAxios as axios } from 'utils/customAxios';
 
@@ -75,19 +73,16 @@ const CompleteUserProfileContainer = (props) => {
   const submitValidatedData = async (data) => {
     const reqErr = Error('there was a request failure');
     try {
-      fixName(data);
-      fixAddress(data);
-      data.isBaptised = data.isBaptised ? true : false;
-      data.isMember = data.isMember ? true : false;
-
       const {
+        isBaptised,
+        isMember,
         baptismDate,
         baptismPlace,
         membershipRecognitionDate,
         membershipRecommitmentDate,
       } = data;
 
-      purgeFormFields(data);
+      userDataCleanup(data);
 
       // set user id
       data.id = user.id;
@@ -95,7 +90,7 @@ const CompleteUserProfileContainer = (props) => {
       const { status } = await updateUserDataRequest(data);
       if (status !== 200) throw reqErr;
 
-      if (data.isBaptised) {
+      if (isBaptised) {
         const { status: baptismRes } = await axios.post('/api/baptism/create', {
           userId: user.id,
           officialName: data.fullName,
@@ -105,7 +100,7 @@ const CompleteUserProfileContainer = (props) => {
 
         if (baptismRes !== 200) throw reqErr;
       }
-      if (data.isMember) {
+      if (isMember) {
         const { status: membershipRes } = await axios.post(
           '/api/membership/create',
           {
