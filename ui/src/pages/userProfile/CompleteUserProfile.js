@@ -604,12 +604,19 @@ const CompleteUserProfileContainer = (props) => {
                         <FormControl>
                           <FormLabel color="#2C5282">
                             Recognition Date
+                            <Text as="span" color="red">
+                              *
+                            </Text>
                           </FormLabel>
                           <Input
                             size="sm"
                             type="date"
                             borderRadius="5"
-                            {...registerB('membershipRecognitionDate')}
+                            {...registerB('membershipRecognitionDate', {
+                              validate: (value, formValues) =>
+                                !formValues.isMember || !!value,
+                            })}
+                            isInvalid={errorsB['membershipRecognitionDate']}
                             placeholder="This field is optional"
                           />
                         </FormControl>
@@ -690,12 +697,21 @@ const CompleteUserProfileContainer = (props) => {
                           </FormHelperText>
                         </FormControl>
                         <FormControl>
-                          <FormLabel color="#2C5282">Baptism Date</FormLabel>
+                          <FormLabel color="#2C5282">
+                            Baptism Date
+                            <Text as="span" color="red">
+                              *
+                            </Text>
+                          </FormLabel>
                           <Input
                             size="sm"
                             type="date"
                             borderRadius="5"
-                            {...registerB('baptismDate')}
+                            {...registerB('baptismDate', {
+                              validate: (value, formValues) =>
+                                !formValues.isBaptised || !!value,
+                            })}
+                            isInvalid={errorsB['baptismDate']}
                           />
                           <FormHelperText>
                             To the best of your memory :)
