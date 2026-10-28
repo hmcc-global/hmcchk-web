@@ -35,7 +35,7 @@ jobs:
         env:
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
         with:
-          model: opencode/big-pickle
+          model: open/deepseek-v4.1-flash-free
           prompt: |
             Review the commits on this pull request using the below parameters:
             - Check for code quality issues
