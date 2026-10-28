@@ -36,6 +36,7 @@ jobs:
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
         with:
           model: opencode/deepseek-v4.1-flash-free
+          small_model: opencode/deepseek-v4.1-flash-free
           prompt: |
             Review the commits on this pull request using the below parameters:
             - Check for code quality issues
