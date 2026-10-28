@@ -21,6 +21,29 @@ const ACTION_BTN_BG = '#526de3';
 const ACTION_BTN_HOVER = '#4459c4';
 const GUEST_HINT_TEXT = '#B2BEB5';
 
+const parseStoredDraft = (value) => {
+  if (!value || value === 'null' || value === 'undefined') return undefined;
+  try {
+    return JSON.parse(value);
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+};
+
+const isBlankNoteHtml = (html) =>
+  typeof html !== 'string' ||
+  !html
+    .replace(/<br\s*\/?>/gi, '')
+    .replace(/&nbsp;/gi, ' ')
+    .trim();
+
+const mergeNoteHtml = (savedHtml, guestHtml) => {
+  if (isBlankNoteHtml(savedHtml)) return guestHtml || '';
+  if (isBlankNoteHtml(guestHtml) || savedHtml === guestHtml) return savedHtml;
+  return `${savedHtml}<br>${guestHtml}`;
+};
+
 const SermonNotesContainer = (props) => {
   const { user, sermonNoteId } = props;
   const [sermonNotes, setSermonNotes] = useState();
@@ -51,7 +74,7 @@ const SermonNotesContainer = (props) => {
     sermonId = sermonNoteId;
   }
 
-  // Guests key by sermon only; the draft effect claims it into the user key on sign-in.
+  // Guests key by sermon only; on sign-in the draft is claimed or merged into the user key.
   const guestDraftKey = `sermonNotes-${sermonId}`;
   const draftKey = user?.id
     ? `sermonNotes-${user.id}-${sermonId}`
@@ -78,6 +101,46 @@ const SermonNotesContainer = (props) => {
     }
   }, [sermonId]);
 
+  const claimOrMergeGuestDraft = useCallback(
+    (savedNotes) => {
+      if (!user?.id) return;
+      const storedDraft = parseStoredDraft(localStorage.getItem(draftKey));
+      if (storedDraft?.content) return;
+
+      const guestDraft = parseStoredDraft(localStorage.getItem(guestDraftKey));
+      if (!guestDraft?.content) return;
+
+      let draft = guestDraft;
+      if (savedNotes) {
+        const savedNoteNodes = getAllUserSermonNotes(
+          savedNotes.editedContent?.content || []
+        );
+        const guestNoteNodes = getAllUserSermonNotes(guestDraft.content);
+        const noteCount = Math.max(
+          savedNoteNodes.length,
+          guestNoteNodes.length
+        );
+        draft = {
+          type: 'doc',
+          content: Array.from({ length: noteCount }, (_, index) => ({
+            type: 'userNotes',
+            attrs: {
+              userNotes: mergeNoteHtml(
+                savedNoteNodes[index]?.attrs?.userNotes,
+                guestNoteNodes[index]?.attrs?.userNotes
+              ),
+            },
+          })),
+        };
+      }
+
+      localStorage.setItem(draftKey, JSON.stringify(draft));
+      localStorage.removeItem(guestDraftKey);
+      setEditUserSermonNotes(draft);
+    },
+    [user?.id, draftKey, guestDraftKey]
+  );
+
   const getUserSermonNotes = useCallback(async () => {
     setIsLoadingExistingNotes(true);
     if (!user?.id) {
@@ -93,9 +156,10 @@ const SermonNotesContainer = (props) => {
       });
       if (sermonId !== latestSermonIdRef.current) return;
       if (status === 200) {
-        setUserSermonNotes(
-          data && typeof data === 'object' && data.id ? data : null
-        );
+        const savedNotes =
+          data && typeof data === 'object' && data.id ? data : null;
+        setUserSermonNotes(savedNotes);
+        claimOrMergeGuestDraft(savedNotes);
       }
     } catch (error) {
       console.log(error);
@@ -104,7 +168,7 @@ const SermonNotesContainer = (props) => {
         setIsLoadingExistingNotes(false);
       }
     }
-  }, [user, sermonId]);
+  }, [user, sermonId, claimOrMergeGuestDraft]);
 
   // save updates to local storage as user types
   // send update to db when user click save
@@ -247,30 +311,8 @@ const SermonNotesContainer = (props) => {
 
   useEffect(() => {
     if (!sermonId) return;
-    const isUsable = (value) =>
-      value && value !== 'null' && value !== 'undefined';
-
-    let stored = localStorage.getItem(draftKey);
-
-    if (user?.id && !isUsable(stored)) {
-      const guestDraft = localStorage.getItem(guestDraftKey);
-      if (isUsable(guestDraft)) {
-        stored = guestDraft;
-        localStorage.setItem(draftKey, guestDraft);
-        localStorage.removeItem(guestDraftKey);
-      }
-    }
-
-    let parsedDraft;
-    if (isUsable(stored)) {
-      try {
-        parsedDraft = JSON.parse(stored);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    setEditUserSermonNotes(parsedDraft);
-  }, [sermonId, user?.id, draftKey, guestDraftKey]);
+    setEditUserSermonNotes(parseStoredDraft(localStorage.getItem(draftKey)));
+  }, [sermonId, draftKey]);
 
   useDebounce(
     () => {
