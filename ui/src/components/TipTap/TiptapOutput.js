@@ -33,8 +33,6 @@ const TiptapOutput = forwardRef(
       ],
     });
 
-    // Parent pulls HTML (Email) / JSON (Save) on demand — we don't mirror either
-    // into React state, so the payload is read live at click time.
     useImperativeHandle(
       ref,
       () => ({
@@ -50,10 +48,7 @@ const TiptapOutput = forwardRef(
       }
     }, [editor]);
 
-    // JSON only: keeps editUserSermonNotes in sync for the localStorage draft.
-    // The event payload is { editor, transaction }, so read docChanged off the
-    // transaction. Selection-only transactions carry no content and would
-    // otherwise re-serialize the whole document on every cursor move.
+    // The event payload is { editor, transaction }; read docChanged off transaction.
     useEffect(() => {
       if (editor) {
         const setNotes = ({ transaction }) => {

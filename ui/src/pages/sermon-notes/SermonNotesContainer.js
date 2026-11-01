@@ -132,7 +132,15 @@ const SermonNotesContainer = (props) => {
     }
     if (!user?.id) return;
     const json = tipTapRef.current?.getJSON();
-    if (!json) return;
+    if (!json) {
+      toast({
+        title: 'Notes still loading',
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      });
+      return;
+    }
     setIsSubmitting(true);
     try {
       const payload = {
@@ -166,7 +174,14 @@ const SermonNotesContainer = (props) => {
     } finally {
       setIsSubmitting(false);
     }
-  }, [isSubmitting, user?.id, sermonId, userSermonNotes, getUserSermonNotes]);
+  }, [
+    isSubmitting,
+    user?.id,
+    sermonId,
+    userSermonNotes,
+    getUserSermonNotes,
+    toast,
+  ]);
 
   const isValidEmail = (email) => {
     const emailAddress = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
