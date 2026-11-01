@@ -31,19 +31,6 @@ const parseStoredDraft = (value) => {
   }
 };
 
-const isBlankNoteHtml = (html) =>
-  typeof html !== 'string' ||
-  !html
-    .replace(/<br\s*\/?>/gi, '')
-    .replace(/&nbsp;/gi, ' ')
-    .trim();
-
-const mergeNoteHtml = (savedHtml, guestHtml) => {
-  if (isBlankNoteHtml(savedHtml)) return guestHtml || '';
-  if (isBlankNoteHtml(guestHtml) || savedHtml === guestHtml) return savedHtml;
-  return `${savedHtml}<br>${guestHtml}`;
-};
-
 const SermonNotesContainer = (props) => {
   const { user, sermonNoteId } = props;
   const [sermonNotes, setSermonNotes] = useState();
@@ -54,11 +41,8 @@ const SermonNotesContainer = (props) => {
   // In General, userSermonNotes comes from db, editUserSermonNotes comes from localStorage
   const [userSermonNotes, setUserSermonNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
-  // TipTap exposes getHTML()/getJSON() via this ref; actions read it at click time.
   const tipTapRef = useRef(null);
   const toast = useToast();
-  // Tracks the latest sermon this editor is bound to, so stale async responses
-  // from a previous sermon never overwrite the current one.
   const latestSermonIdRef = useRef(null);
 
   const todayId = DateTime.now().toFormat('ddMMyyyy');
@@ -74,7 +58,6 @@ const SermonNotesContainer = (props) => {
     sermonId = sermonNoteId;
   }
 
-  // Guests key by sermon only; on sign-in the draft is claimed or merged into the user key.
   const guestDraftKey = `sermonNotes-${sermonId}`;
   const draftKey = user?.id
     ? `sermonNotes-${user.id}-${sermonId}`
@@ -101,46 +84,6 @@ const SermonNotesContainer = (props) => {
     }
   }, [sermonId]);
 
-  const claimOrMergeGuestDraft = useCallback(
-    (savedNotes) => {
-      if (!user?.id) return;
-      const storedDraft = parseStoredDraft(localStorage.getItem(draftKey));
-      if (storedDraft?.content) return;
-
-      const guestDraft = parseStoredDraft(localStorage.getItem(guestDraftKey));
-      if (!guestDraft?.content) return;
-
-      let draft = guestDraft;
-      if (savedNotes) {
-        const savedNoteNodes = getAllUserSermonNotes(
-          savedNotes.editedContent?.content || []
-        );
-        const guestNoteNodes = getAllUserSermonNotes(guestDraft.content);
-        const noteCount = Math.max(
-          savedNoteNodes.length,
-          guestNoteNodes.length
-        );
-        draft = {
-          type: 'doc',
-          content: Array.from({ length: noteCount }, (_, index) => ({
-            type: 'userNotes',
-            attrs: {
-              userNotes: mergeNoteHtml(
-                savedNoteNodes[index]?.attrs?.userNotes,
-                guestNoteNodes[index]?.attrs?.userNotes
-              ),
-            },
-          })),
-        };
-      }
-
-      localStorage.setItem(draftKey, JSON.stringify(draft));
-      localStorage.removeItem(guestDraftKey);
-      setEditUserSermonNotes(draft);
-    },
-    [user?.id, draftKey, guestDraftKey]
-  );
-
   const getUserSermonNotes = useCallback(async () => {
     setIsLoadingExistingNotes(true);
     if (!user?.id) {
@@ -159,7 +102,17 @@ const SermonNotesContainer = (props) => {
         const savedNotes =
           data && typeof data === 'object' && data.id ? data : null;
         setUserSermonNotes(savedNotes);
-        claimOrMergeGuestDraft(savedNotes);
+        if (!savedNotes) {
+          const storedDraft = parseStoredDraft(localStorage.getItem(draftKey));
+          const guestDraft = parseStoredDraft(
+            localStorage.getItem(guestDraftKey)
+          );
+          if (!storedDraft?.content && guestDraft?.content) {
+            localStorage.setItem(draftKey, JSON.stringify(guestDraft));
+            localStorage.removeItem(guestDraftKey);
+            setEditUserSermonNotes(guestDraft);
+          }
+        }
       }
     } catch (error) {
       console.log(error);
@@ -168,7 +121,7 @@ const SermonNotesContainer = (props) => {
         setIsLoadingExistingNotes(false);
       }
     }
-  }, [user, sermonId, claimOrMergeGuestDraft]);
+  }, [user, sermonId, draftKey, guestDraftKey]);
 
   // save updates to local storage as user types
   // send update to db when user click save
@@ -178,7 +131,6 @@ const SermonNotesContainer = (props) => {
       document.activeElement.blur();
     }
     if (!user?.id) return;
-    // Read live: editUserSermonNotes lags a commit behind the first tap after typing.
     const json = tipTapRef.current?.getJSON();
     if (!json) return;
     setIsSubmitting(true);
