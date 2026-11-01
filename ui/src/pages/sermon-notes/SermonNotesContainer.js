@@ -107,7 +107,9 @@ const SermonNotesContainer = (props) => {
           const guestDraft = parseStoredDraft(
             localStorage.getItem(guestDraftKey)
           );
-          if (!storedDraft?.content && guestDraft?.content) {
+          if (storedDraft?.content) {
+            setEditUserSermonNotes(storedDraft);
+          } else if (guestDraft?.content) {
             localStorage.setItem(draftKey, JSON.stringify(guestDraft));
             localStorage.removeItem(guestDraftKey);
             setEditUserSermonNotes(guestDraft);
