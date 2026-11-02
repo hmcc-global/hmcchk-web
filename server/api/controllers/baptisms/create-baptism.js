@@ -43,7 +43,7 @@ module.exports = {
       }).fetch();
 
       // update user if baptised
-      if (baptismDate !== null && baptismPlace !== '') {
+      if (baptismDate !== null) {
         await User.updateOne({ id: userId, isDeleted: false }).set({
           isBaptised: true,
         });

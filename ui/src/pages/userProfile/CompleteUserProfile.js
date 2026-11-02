@@ -13,6 +13,7 @@ import {
   FormControl,
   FormLabel,
   FormHelperText,
+  FormErrorMessage,
   Select,
   Button,
   Switch,
@@ -24,6 +25,7 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
+  useToast,
 } from 'components';
 import { CheckCircleIcon } from 'components/icons';
 import { useEffect, useState } from 'react';
@@ -35,11 +37,9 @@ import {
   regionList,
 } from 'utils/lists';
 import {
-  fixAddress,
-  fixName,
-  purgeFormFields,
   splitFullName,
   updateUserDataRequest,
+  userDataCleanup,
 } from 'utils/userInformationHelpers';
 import { customAxios as axios } from 'utils/customAxios';
 
@@ -51,6 +51,7 @@ const CompleteUserProfileContainer = (props) => {
   const formValidation = { required: true };
   const [tabIndex, setTabIndex] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
+  const toast = useToast();
 
   const onModalClose = (e) => {
     setModalOpen(false);
@@ -73,46 +74,58 @@ const CompleteUserProfileContainer = (props) => {
   const submitValidatedData = async (data) => {
     const reqErr = Error('there was a request failure');
     try {
-      fixName(data);
-      fixAddress(data);
-      data.isBaptised = data.isBaptised ? true : false;
-      data.isMember = data.isMember ? true : false;
+      const {
+        isBaptised,
+        isMember,
+        baptismDate,
+        baptismPlace,
+        membershipRecognitionDate,
+        membershipRecommitmentDate,
+      } = data;
 
-      if (data.isBaptised) {
+      userDataCleanup(data);
+
+      // set user id
+      data.id = user.id;
+
+      if (isBaptised) {
         const { status: baptismRes } = await axios.post('/api/baptism/create', {
           userId: user.id,
           officialName: data.fullName,
-          baptismDate: data.baptismDate,
-          baptismPlace: data.baptismPlace,
+          baptismDate,
+          baptismPlace,
         });
 
         if (baptismRes !== 200) throw reqErr;
       }
-      if (data.isMember) {
+      if (isMember) {
         const { status: membershipRes } = await axios.post(
           '/api/membership/create',
           {
             userId: user.id,
             officialName: data.fullName,
-            recognitionDate: data.membershipRecognitionDate,
-            recommitmentDate: data.membershipRecommitmentDate,
+            recognitionDate: membershipRecognitionDate,
+            recommitmentDate: membershipRecommitmentDate,
           }
         );
 
         if (membershipRes !== 200) throw reqErr;
       }
 
-      purgeFormFields(data);
-
-      // set user id
-      data.id = user.id;
       data.hasFilledProfileForm = true;
       const { status } = await updateUserDataRequest(data);
+      if (status !== 200) throw reqErr;
 
-      if (status === 200) setModalOpen(true);
-      else throw reqErr;
+      setModalOpen(true);
     } catch (err) {
       console.log(err);
+      toast({
+        description:
+          'Something went wrong, please try again and check if the information has been properly filled. If the error persists, please contact please contact hk@hmccglobal.org.',
+        status: 'error',
+        duration: 8000,
+        isClosable: true,
+      });
     }
   };
 
@@ -141,6 +154,7 @@ const CompleteUserProfileContainer = (props) => {
     control: reviewControl,
     handleSubmit: reviewHandleSubmit,
     setValue: reviewSetValue,
+    formState: { isSubmitting: isReviewSubmitting },
   } = useForm();
 
   let isMember = watchB('isMember');
@@ -386,13 +400,29 @@ const CompleteUserProfileContainer = (props) => {
                     </FormControl>
                   </Stack>
                   <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl flex={1}>
-                      <FormLabel color={formLabelColor}>Phone Number</FormLabel>
+                    <FormControl flex={1} isInvalid={errorsA['phoneNumber']}>
+                      <FormLabel color={formLabelColor}>
+                        Phone Number
+                        <Text as="span" color="red">
+                          *
+                        </Text>
+                      </FormLabel>
                       <Input
+                        type="number"
                         size="sm"
                         borderRadius="5"
-                        {...registerA('phoneNumber')}
+                        {...registerA('phoneNumber', {
+                          required: 'Please enter your phone number',
+                          pattern: {
+                            value: /^[0-9]+$/,
+                            message: 'Numbers only, no spaces or symbols',
+                          },
+                        })}
+                        placeholder="Numbers only"
                       />
+                      <FormErrorMessage>
+                        {errorsA.phoneNumber?.message}
+                      </FormErrorMessage>
                     </FormControl>
                     <Box flex={[0, 1]}></Box>
                   </Stack>
@@ -579,17 +609,29 @@ const CompleteUserProfileContainer = (props) => {
                         pt={['5%', '2%']}
                         flex={[1, 4]}
                       >
-                        <FormControl>
+                        <FormControl
+                          isInvalid={errorsB['membershipRecognitionDate']}
+                        >
                           <FormLabel color="#2C5282">
                             Recognition Date
+                            <Text as="span" color="red">
+                              *
+                            </Text>
                           </FormLabel>
                           <Input
                             size="sm"
                             type="date"
                             borderRadius="5"
-                            {...registerB('membershipRecognitionDate')}
-                            placeholder="This field is optional"
+                            {...registerB('membershipRecognitionDate', {
+                              validate: (value, formValues) =>
+                                !formValues.isMember ||
+                                !!value ||
+                                'Please enter your recognition date',
+                            })}
                           />
+                          <FormErrorMessage>
+                            {errorsB.membershipRecognitionDate?.message}
+                          </FormErrorMessage>
                         </FormControl>
                         <FormControl>
                           <FormLabel color="#2C5282">
@@ -667,14 +709,27 @@ const CompleteUserProfileContainer = (props) => {
                             of your previous home church.
                           </FormHelperText>
                         </FormControl>
-                        <FormControl>
-                          <FormLabel color="#2C5282">Baptism Date</FormLabel>
+                        <FormControl isInvalid={errorsB['baptismDate']}>
+                          <FormLabel color="#2C5282">
+                            Baptism Date
+                            <Text as="span" color="red">
+                              *
+                            </Text>
+                          </FormLabel>
                           <Input
                             size="sm"
                             type="date"
                             borderRadius="5"
-                            {...registerB('baptismDate')}
+                            {...registerB('baptismDate', {
+                              validate: (value, formValues) =>
+                                !formValues.isBaptised ||
+                                !!value ||
+                                'Please enter your baptism date',
+                            })}
                           />
+                          <FormErrorMessage>
+                            {errorsB.baptismDate?.message}
+                          </FormErrorMessage>
                           <FormHelperText>
                             To the best of your memory :)
                           </FormHelperText>
@@ -1092,6 +1147,7 @@ const CompleteUserProfileContainer = (props) => {
                         background: '#062286',
                       }}
                       type="submit"
+                      isLoading={isReviewSubmitting}
                     >
                       Save Profile
                     </Button>
