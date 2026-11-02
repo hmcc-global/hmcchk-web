@@ -21,6 +21,16 @@ const ACTION_BTN_BG = '#526de3';
 const ACTION_BTN_HOVER = '#4459c4';
 const GUEST_HINT_TEXT = '#B2BEB5';
 
+const parseStoredDraft = (value) => {
+  if (!value || value === 'null' || value === 'undefined') return undefined;
+  try {
+    return JSON.parse(value);
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+};
+
 const SermonNotesContainer = (props) => {
   const { user, sermonNoteId } = props;
   const [sermonNotes, setSermonNotes] = useState();
@@ -31,11 +41,8 @@ const SermonNotesContainer = (props) => {
   // In General, userSermonNotes comes from db, editUserSermonNotes comes from localStorage
   const [userSermonNotes, setUserSermonNotes] = useState();
   const [editUserSermonNotes, setEditUserSermonNotes] = useState();
-  // TipTap exposes getHTML() via this ref; Email reads it at click time (not mirrored state).
   const tipTapRef = useRef(null);
   const toast = useToast();
-  // Tracks the latest sermon this editor is bound to, so stale async responses
-  // from a previous sermon never overwrite the current one.
   const latestSermonIdRef = useRef(null);
 
   const todayId = DateTime.now().toFormat('ddMMyyyy');
@@ -50,6 +57,11 @@ const SermonNotesContainer = (props) => {
   } else {
     sermonId = sermonNoteId;
   }
+
+  const guestDraftKey = `sermonNotes-${sermonId}`;
+  const draftKey = user?.id
+    ? `sermonNotes-${user.id}-${sermonId}`
+    : guestDraftKey;
 
   const getSermonNotesParent = useCallback(async () => {
     try {
@@ -87,9 +99,22 @@ const SermonNotesContainer = (props) => {
       });
       if (sermonId !== latestSermonIdRef.current) return;
       if (status === 200) {
-        setUserSermonNotes(
-          data && typeof data === 'object' && data.id ? data : null
-        );
+        const savedNotes =
+          data && typeof data === 'object' && data.id ? data : null;
+        setUserSermonNotes(savedNotes);
+        if (!savedNotes) {
+          const storedDraft = parseStoredDraft(localStorage.getItem(draftKey));
+          const guestDraft = parseStoredDraft(
+            localStorage.getItem(guestDraftKey)
+          );
+          if (storedDraft?.content) {
+            setEditUserSermonNotes(storedDraft);
+          } else if (guestDraft?.content) {
+            localStorage.setItem(draftKey, JSON.stringify(guestDraft));
+            localStorage.removeItem(guestDraftKey);
+            setEditUserSermonNotes(guestDraft);
+          }
+        }
       }
     } catch (error) {
       console.log(error);
@@ -98,7 +123,7 @@ const SermonNotesContainer = (props) => {
         setIsLoadingExistingNotes(false);
       }
     }
-  }, [user, sermonId]);
+  }, [user, sermonId, draftKey, guestDraftKey]);
 
   // save updates to local storage as user types
   // send update to db when user click save
@@ -108,47 +133,45 @@ const SermonNotesContainer = (props) => {
       document.activeElement.blur();
     }
     if (!user?.id) return;
+    const json = tipTapRef.current?.getJSON();
+    if (!json) {
+      toast({
+        title: 'Notes still loading',
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      });
+      return;
+    }
     setIsSubmitting(true);
     try {
-      if (userSermonNotes) {
-        try {
-          const { data, status } = await axios.put(
-            '/api/user-sermon-notes/update',
-            {
-              userId: user.id,
-              sermonId: sermonId,
-              editedContent: editUserSermonNotes,
-            }
-          );
-          if (status === 200) {
-            setUserSermonNotes(data);
-            toast({
-              title: 'Sermon Notes Saved',
-              status: 'success',
-              duration: 2000,
-              isClosable: true,
-            });
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      } else {
-        try {
-          const { data, status } = await axios.post(
-            '/api/user-sermon-notes/create',
-            {
-              userId: user.id,
-              sermonId: sermonId,
-              editedContent: editUserSermonNotes,
-            }
-          );
-          if (status === 200) {
-            setUserSermonNotes(data);
-          }
-        } catch (error) {
-          console.log(error);
-          getUserSermonNotes();
-        }
+      const payload = {
+        userId: user.id,
+        sermonId: sermonId,
+        editedContent: json,
+      };
+      const { data, status } = userSermonNotes
+        ? await axios.put('/api/user-sermon-notes/update', payload)
+        : await axios.post('/api/user-sermon-notes/create', payload);
+      if (status === 200) {
+        setUserSermonNotes(data);
+        toast({
+          title: 'Sermon Notes Saved',
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: 'Failed to save sermon notes',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      if (!userSermonNotes) {
+        getUserSermonNotes();
       }
     } finally {
       setIsSubmitting(false);
@@ -157,9 +180,9 @@ const SermonNotesContainer = (props) => {
     isSubmitting,
     user?.id,
     sermonId,
-    editUserSermonNotes,
     userSermonNotes,
     getUserSermonNotes,
+    toast,
   ]);
 
   const isValidEmail = (email) => {
@@ -256,27 +279,14 @@ const SermonNotesContainer = (props) => {
   }, [sermonId, getSermonNotesParent, getUserSermonNotes]);
 
   useEffect(() => {
-    if (sermonId) {
-      const localUserNotes = localStorage.getItem(`sermonNotes-${sermonId}`);
-      if (
-        localUserNotes !== 'null' &&
-        localUserNotes !== 'undefined' &&
-        localUserNotes
-      ) {
-        setEditUserSermonNotes(JSON.parse(localUserNotes));
-      } else {
-        setEditUserSermonNotes(undefined);
-      }
-    }
-  }, [sermonId]);
+    if (!sermonId) return;
+    setEditUserSermonNotes(parseStoredDraft(localStorage.getItem(draftKey)));
+  }, [sermonId, draftKey]);
 
   useDebounce(
     () => {
-      if (!editUserSermonNotes) return;
-      localStorage.setItem(
-        `sermonNotes-${sermonId}`,
-        JSON.stringify(editUserSermonNotes)
-      );
+      if (!editUserSermonNotes || !sermonId) return;
+      localStorage.setItem(draftKey, JSON.stringify(editUserSermonNotes));
     },
     0,
     [editUserSermonNotes]

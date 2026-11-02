@@ -4,8 +4,7 @@ import {
   ReactNodeViewRenderer,
   NodeViewContent,
 } from '@tiptap/react';
-import React, { useContext, useEffect, useState } from 'react';
-import { LastUpdatedPosContext } from './index.js';
+import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { Plugin, TextSelection } from 'prosemirror-state';
 
@@ -126,7 +125,6 @@ export const UserNotesNode = Node.create({
   },
   addNodeView() {
     return ReactNodeViewRenderer((props) => {
-      const { setLastUpdatedPos } = useContext(LastUpdatedPosContext);
       const userInput = props.node.attrs.userNotes;
       const [localUserNotes, setLocalUserNotes] = useState(userInput);
 
@@ -181,7 +179,6 @@ export const UserNotesNode = Node.create({
           ...node.attrs,
           userNotes: localUserNotes,
         });
-        setLastUpdatedPos(pos);
         props.editor.view.dispatch(transaction);
       };
       return (
