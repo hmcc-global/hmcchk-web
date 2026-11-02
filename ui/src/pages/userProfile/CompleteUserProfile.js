@@ -86,9 +86,6 @@ const CompleteUserProfileContainer = (props) => {
 
       // set user id
       data.id = user.id;
-      data.hasFilledProfileForm = true;
-      const { status } = await updateUserDataRequest(data);
-      if (status !== 200) throw reqErr;
 
       if (isBaptised) {
         const { status: baptismRes } = await axios.post('/api/baptism/create', {
@@ -113,6 +110,10 @@ const CompleteUserProfileContainer = (props) => {
 
         if (membershipRes !== 200) throw reqErr;
       }
+
+      data.hasFilledProfileForm = true;
+      const { status } = await updateUserDataRequest(data);
+      if (status !== 200) throw reqErr;
 
       setModalOpen(true);
     } catch (err) {
@@ -152,6 +153,7 @@ const CompleteUserProfileContainer = (props) => {
     control: reviewControl,
     handleSubmit: reviewHandleSubmit,
     setValue: reviewSetValue,
+    formState: { isSubmitting: isReviewSubmitting },
   } = useForm();
 
   let isMember = watchB('isMember');
@@ -1130,6 +1132,7 @@ const CompleteUserProfileContainer = (props) => {
                         background: '#062286',
                       }}
                       type="submit"
+                      isLoading={isReviewSubmitting}
                     >
                       Save Profile
                     </Button>
