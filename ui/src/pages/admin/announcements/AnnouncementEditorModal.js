@@ -1,258 +1,360 @@
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { customAxios as axios } from 'utils/customAxios';
-import { useState, useEffect } from 'react';
+import { FiX } from 'react-icons/fi';
+import { CUIAutoComplete } from 'chakra-ui-autocomplete';
 import { DateTime } from 'luxon';
 import {
-  ModalBody,
-  ModalCloseButton,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalFooter,
-  Container,
   Box,
-  Stack,
-  Heading,
+  Button,
+  Checkbox,
+  Flex,
   FormControl,
-  FormLabel,
-  Input,
   FormErrorMessage,
   FormHelperText,
-  Checkbox,
-  Button,
-  Grid,
-  Divider,
-  GridItem,
-  Textarea,
-  SimpleGrid,
-  useToast,
+  FormLabel,
+  Heading,
+  Icon,
+  IconButton,
+  Input,
   Link,
-  Switch,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalOverlay,
   Select,
+  FileUpload,
+  Text,
+  Textarea,
+  useToast,
 } from 'components';
+import { customAxios as axios } from 'utils/customAxios';
 import { eventIntervalList, eventTypeList } from 'utils/lists';
-import FileUpload from 'components/FileUpload';
-import { CUIAutoComplete } from 'chakra-ui-autocomplete';
+import {
+  ADMIN_FONT,
+  DISPLAY_DATE_ERROR,
+  announcementColors,
+  buildInitialForm,
+  datePairSx,
+  editorContainerSx,
+  editorNote,
+  nextPublishedValue,
+  primaryButtonProps,
+  quietButtonProps,
+  saveToast,
+  serializeForm,
+  textInputProps,
+  toEventTypeItems,
+} from './announcementShared';
 
-// eventType drifted across old records: many are missing/null, and CUIAutoComplete
-// requires an array of { label, value } — feeding it anything else crashes the page
-const toEventTypeItems = (value) =>
-  Array.isArray(value)
-    ? value
-        .map((t) => (typeof t === 'string' ? { label: t, value: t } : t))
-        .filter((t) => t && typeof t.value === 'string')
-        // object records can carry a value but no (or non-string) label — CUIAutoComplete
-        // needs both, so backfill label from value when it's missing
-        .map((t) => ({
-          ...t,
-          label: typeof t.label === 'string' ? t.label : t.value,
-        }))
-    : [];
+const clusterProps = {
+  bg: announcementColors.wash,
+  borderRadius: '12px',
+  p: '14px',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '14px',
+};
+
+const EditorField = (props) => {
+  const { id, label, hint, error, required, children } = props;
+  return (
+    <FormControl isInvalid={Boolean(error)}>
+      <FormLabel
+        htmlFor={id}
+        display="flex"
+        alignItems="baseline"
+        flexWrap="wrap"
+        gap="6px"
+        mb="6px"
+        fontFamily={ADMIN_FONT}
+        fontWeight="600"
+        fontSize="14px"
+        color={announcementColors.ink}
+      >
+        {label}
+        {required ? (
+          <Text
+            as="span"
+            fontFamily={ADMIN_FONT}
+            fontWeight="500"
+            fontSize="12px"
+            color={announcementColors.muted}
+          >
+            Required
+          </Text>
+        ) : null}
+      </FormLabel>
+      {children}
+      {hint ? (
+        <FormHelperText
+          fontFamily={ADMIN_FONT}
+          color={announcementColors.muted}
+          fontSize="13px"
+        >
+          {hint}
+        </FormHelperText>
+      ) : null}
+      <FormErrorMessage fontFamily={ADMIN_FONT}>{error}</FormErrorMessage>
+    </FormControl>
+  );
+};
+
+const checkboxSx = {
+  '.chakra-checkbox__control': {
+    borderColor: announcementColors.line,
+    mt: '3px',
+    _checked: {
+      bg: announcementColors.blue,
+      borderColor: announcementColors.blue,
+    },
+  },
+};
+
+const DestinationCheck = (props) => {
+  const { isChecked, onChange, label, hint } = props;
+  return (
+    <Checkbox
+      isChecked={isChecked}
+      onChange={onChange}
+      alignItems="flex-start"
+      sx={checkboxSx}
+    >
+      <Box mt="-2px">
+        <Text
+          fontFamily={ADMIN_FONT}
+          fontWeight="600"
+          fontSize="14px"
+          color={announcementColors.ink}
+        >
+          {label}
+        </Text>
+        <Text
+          fontFamily={ADMIN_FONT}
+          fontWeight="500"
+          fontSize="13px"
+          color={announcementColors.muted}
+        >
+          {hint}
+        </Text>
+      </Box>
+    </Checkbox>
+  );
+};
 
 const AnnouncementEditorModal = (props) => {
   const {
+    layout,
     isOpen,
-    setIsOpen,
-    editAnnouncementData,
-    announcementListCallback,
-    actionOnEditor,
+    editorSession,
+    focusRequest,
+    onRequestClose,
+    onDirtyChange,
+    onSaved,
   } = props;
-  const { register, handleSubmit, reset, setValue, formState, control } =
-    useForm();
-  const { errors } = formState;
   const toast = useToast();
+  const { control } = useForm();
+  const titleRef = useRef(null);
+  const displayStartRef = useRef(null);
+  const displayEndRef = useRef(null);
+  const descriptionRef = useRef(null);
 
-  // TODO: add interval for dates to repeat events
-  const [title, setTitle] = useState(undefined);
-  const [isInWeb, setIsInWeb] = useState(false);
-  const [isInPpt, setIsInPpt] = useState(false);
-  const [description, setDescription] = useState(undefined);
-  const [imageAdUrl, setImageAdUrl] = useState(undefined);
-  const [location, setLocation] = useState(undefined);
-  const [directionsUrl, setDirectionsUrl] = useState(undefined);
-  const [displayStartDateTime, setDisplayStartDateTime] = useState(undefined);
-  const [displayEndDateTime, setDisplayEndDateTime] = useState(undefined);
-  const [eventStartDate, setEventStartDate] = useState(undefined);
-  const [eventStartTime, setEventStartTime] = useState(undefined);
-  const [eventEndDate, setEventEndDate] = useState(undefined);
-  const [eventEndTime, setEventEndTime] = useState(undefined);
-  const [eventInterval, setEventInterval] = useState('None');
-  const [eventType, setEventType] = useState(undefined);
-  const [featured, setFeatured] = useState(false);
+  const [form, setForm] = useState(() => buildInitialForm('create', null));
+  const [snapshot, setSnapshot] = useState(() =>
+    serializeForm(buildInitialForm('create', null))
+  );
+  const [errors, setErrors] = useState({});
+  const [wasOnWeb, setWasOnWeb] = useState(false);
+  const [wasPublished, setWasPublished] = useState(false);
   const [datePeriodInvalid, setDatePeriodInvalid] = useState(false);
-  const [formId, setFormId] = useState(undefined);
-  const [signUpUrl, setSignUpUrl] = useState(undefined);
-  const [additionalNotes, setAdditionalNotes] = useState(undefined);
+  const [isSaving, setIsSaving] = useState(false);
+  const [appliedToken, setAppliedToken] = useState(0);
+  const [appliedFocus, setAppliedFocus] = useState(0);
 
-  const resetAnnouncementEditorCallback = () => {
-    reset();
-    setValue('title', undefined);
-    setValue('isInWeb', false);
-    setValue('isInPpt', false);
-    setValue('description', undefined);
-    setValue('imageAdUrl', undefined);
-    setValue('location', undefined);
-    setValue('directionsUrl', undefined);
-    setValue('displayStartDateTime', undefined);
-    setValue('displayEndDateTime', undefined);
-    setValue('eventStartDate', undefined);
-    setValue('eventStartTime', undefined);
-    setValue('eventEndDate', undefined);
-    setValue('eventEndTime', undefined);
-    setValue('eventInterval', 'None');
-    setValue('eventType', undefined);
-    setValue('featured', false);
-    setValue('formId', undefined);
-    setValue('formSignupLink', undefined);
-    setValue('additionalNotes', undefined);
+  const sessionToken = editorSession?.token ?? 0;
+  const action = editorSession?.action || 'create';
 
-    setSelectedItems([]);
+  if (isOpen && editorSession && sessionToken !== appliedToken) {
+    const nextForm = buildInitialForm(action, editorSession.announcement);
+    setAppliedToken(sessionToken);
+    setForm(nextForm);
+    setSnapshot(serializeForm(nextForm));
+    setWasOnWeb(
+      action === 'edit' && editorSession.announcement?.isInWeb === true
+    );
+    setWasPublished(
+      action === 'edit' && editorSession.announcement?.isPublished === true
+    );
+    setErrors(
+      editorSession.pendingError?.message
+        ? { display: editorSession.pendingError.message }
+        : {}
+    );
+    setDatePeriodInvalid(false);
+  }
 
-    setTitle(undefined);
-    setIsInWeb(false);
-    setIsInPpt(false);
-    setDescription(undefined);
-    setImageAdUrl(undefined);
-    setLocation(undefined);
-    setDirectionsUrl(undefined);
-    setDisplayStartDateTime(undefined);
-    setDisplayEndDateTime(undefined);
-    setEventStartDate(undefined);
-    setEventStartTime(undefined);
-    setEventEndDate(undefined);
-    setEventEndTime(undefined);
-    setEventInterval('None');
-    setEventType(undefined);
-    setFeatured(false);
-    setFormId(undefined);
-    setSignUpUrl(undefined);
-    setAdditionalNotes(undefined);
-    setIsOpen(false);
-    announcementListCallback();
-  };
+  const focusToken = focusRequest?.token ?? 0;
+  if (isOpen && focusRequest && focusToken !== appliedFocus) {
+    setAppliedFocus(focusToken);
+    setErrors({ display: focusRequest.message });
+  }
 
-  const setAnnouncementEditorData = (data) => {
-    if (data) {
-      setValue('title', data.title);
-      setValue('isInWeb', data.isInWeb);
-      setValue('isInPpt', data.isInPpt);
-      setValue('description', data.description);
-      setValue('imageAdUrl', data.imageAdUrl);
-      setValue('location', data.location);
-      setValue('directionsUrl', data.directionsUrl);
-      setValue('displayStartDateTime', data.displayStartDateTime);
-      setValue('displayEndDateTime', data.displayEndDateTime);
-      setValue('eventStartDate', data.eventStartDate);
-      setValue('eventStartTime', data.eventStartTime);
-      setValue('eventEndDate', data.eventEndDate);
-      setValue('eventEndTime', data.eventEndTime);
-      setValue('eventInterval', data.eventInterval);
-      setValue('eventType', data.eventType);
-      setValue('featured', data.featured);
-      setValue('formId', data.formId);
-      setValue('signUpUrl', data.signUpUrl);
-      setValue('additionalNotes', data.additionalNotes);
+  useEffect(() => {
+    onDirtyChange(isOpen && serializeForm(form) !== snapshot);
+  }, [form, snapshot, isOpen, onDirtyChange]);
 
-      setSelectedItems(toEventTypeItems(data.eventType));
-
-      setTitle(data.title);
-      setIsInWeb(data.isInWeb);
-      setIsInPpt(data.isInPpt);
-      setDescription(data.description);
-      setImageAdUrl(data.imageAdUrl);
-      setLocation(data.location);
-      setDirectionsUrl(data.directionsUrl);
-      setDisplayStartDateTime(data.displayStartDateTime);
-      setDisplayEndDateTime(data.displayEndDateTime);
-      setEventStartDate(data.eventStartDate);
-      setEventStartTime(data.eventStartTime);
-      setEventEndDate(data.eventEndDate);
-      setEventEndTime(data.eventEndTime);
-      setEventInterval(data.eventInterval);
-      setEventType(data.eventType);
-      setFeatured(data.featured);
-      setFormId(data.formId);
-      setSignUpUrl(data.signUpUrl);
-      setAdditionalNotes(data.additionalNotes);
-    }
-  };
-  const [pickerItems, setPickerItems] = useState(eventTypeList);
-  const [selectedItems, setSelectedItems] = useState([]);
-
-  const handleSelectedItemsChange = (selectedItems) => {
-    if (selectedItems) {
-      setSelectedItems(selectedItems);
-      setEventType(
-        [...selectedItems].sort((a, b) => a.value.localeCompare(b.value))
-      );
-    }
-  };
-  const onSubmit = async (data, e) => {
-    setAnnouncementEditorData(data);
-  };
-
-  const saveAnnouncementDataToDB = async (data) => {
-    if (actionOnEditor === 'edit') {
-      const { status } = await axios.put('/api/announcement/update', {
-        id: editAnnouncementData.id,
-        ...data,
-      });
-      return status;
-    } else {
-      const { status } = await axios.post('/api/announcement/create', {
-        ...data,
-      });
-      return status;
-    }
-  };
-
-  const onSubmitEditor = async (e) => {
-    try {
-      const announcementToSave = {
-        title,
-        isInWeb,
-        isInPpt,
-        description,
-        imageAdUrl,
-        location,
-        directionsUrl,
-        displayStartDateTime,
-        displayEndDateTime,
-        eventStartDate,
-        eventStartTime,
-        eventEndDate,
-        eventEndTime,
-        eventInterval,
-        eventType,
-        featured,
-        formId,
-        signUpUrl,
-        additionalNotes,
-      };
-
-      const statusCode = await saveAnnouncementDataToDB(announcementToSave);
-      if (statusCode === 200) {
-        if (actionOnEditor === 'edit') {
-          toast({
-            title: 'Announcement Saved',
-            description: 'Your announcement has been saved.',
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-          });
-        } else {
-          toast({
-            title: 'Announcement Created',
-            description: 'Your announcement has been created.',
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-          });
-        }
+  useEffect(() => {
+    if (form.eventStartDate && form.eventEndDate) {
+      const start = DateTime.fromISO(form.eventStartDate);
+      const end = DateTime.fromISO(form.eventEndDate);
+      if (start.isValid && end.isValid && end <= start) {
+        setDatePeriodInvalid(true);
+        return;
       }
+    }
+    setDatePeriodInvalid(false);
+  }, [form.eventStartDate, form.eventEndDate]);
 
-      setIsOpen(false);
-      resetAnnouncementEditorCallback();
+  useEffect(() => {
+    if (!isOpen || !appliedToken) return undefined;
+    const field =
+      focusRequest?.field || editorSession?.pendingError?.field || '';
+    const handle = window.setTimeout(() => {
+      const node =
+        field === 'displayEnd'
+          ? displayEndRef.current
+          : field === 'displayStart'
+          ? displayStartRef.current
+          : titleRef.current;
+      if (node && typeof node.focus === 'function') {
+        node.focus();
+        node.scrollIntoView({ block: 'center' });
+      }
+    }, 40);
+    return () => window.clearTimeout(handle);
+  }, [appliedToken, appliedFocus, isOpen, editorSession, focusRequest]);
+
+  const updateField = (key, value) => {
+    setForm((current) => ({ ...current, [key]: value }));
+    setErrors((current) => {
+      const next = { ...current };
+      if (key === 'title') delete next.title;
+      if (key === 'description') delete next.description;
+      if (key === 'displayStartDateTime' || key === 'displayEndDateTime') {
+        delete next.display;
+      }
+      return next;
+    });
+  };
+
+  const handleSave = async (event) => {
+    if (event && typeof event.preventDefault === 'function') {
+      event.preventDefault();
+    }
+    const title = form.title.trim();
+    const description = form.description.trim();
+    const nextErrors = {};
+    if (!title) {
+      nextErrors.title =
+        'Add a title so people know what this announcement is.';
+    }
+    if (!description) {
+      nextErrors.description =
+        'Add a description. This is the text people read.';
+    }
+    if (
+      form.isInWeb &&
+      (!form.displayStartDateTime || !form.displayEndDateTime)
+    ) {
+      nextErrors.display = DISPLAY_DATE_ERROR;
+    }
+    if (Object.keys(nextErrors).length || datePeriodInvalid) {
+      setErrors(nextErrors);
+      const node = nextErrors.title
+        ? titleRef.current
+        : nextErrors.description
+        ? descriptionRef.current
+        : nextErrors.display
+        ? form.displayStartDateTime
+          ? displayEndRef.current
+          : displayStartRef.current
+        : document.getElementById('announcement-event-end');
+      if (node && typeof node.focus === 'function') node.focus();
+      return;
+    }
+
+    const isPublished = nextPublishedValue({
+      action,
+      isInWeb: form.isInWeb,
+      wasOnWeb,
+      wasPublished,
+    });
+    const eventType = toEventTypeItems(form.eventType).sort((left, right) =>
+      left.value.localeCompare(right.value)
+    );
+    const payload = {
+      title,
+      isInWeb: form.isInWeb,
+      isInPpt: form.isInPpt,
+      description,
+      imageAdUrl: form.imageAdUrl,
+      location: form.location.trim(),
+      directionsUrl: form.directionsUrl,
+      displayStartDateTime: form.displayStartDateTime,
+      displayEndDateTime: form.displayEndDateTime,
+      eventStartDate: form.eventStartDate,
+      eventStartTime: form.eventStartTime,
+      eventEndDate: form.eventEndDate,
+      eventEndTime: form.eventEndTime,
+      eventInterval: form.eventInterval || 'None',
+      eventType,
+      featured: form.featured,
+      formId: form.formId,
+      signUpUrl: form.signUpUrl.trim(),
+      additionalNotes: form.additionalNotes.trim(),
+      isPublished,
+    };
+
+    // The update action treats isPublished without approvedBy as a fresh Publish
+    // and skips lastUpdatedBy. A save of an announcement that is already live
+    // must send the approver it already has.
+    const existingApprover = editorSession?.announcement?.approvedBy;
+    if (
+      action === 'edit' &&
+      isPublished &&
+      wasOnWeb &&
+      wasPublished &&
+      typeof existingApprover === 'string' &&
+      existingApprover
+    ) {
+      payload.approvedBy = existingApprover;
+    }
+
+    setIsSaving(true);
+    try {
+      const response =
+        action === 'edit'
+          ? await axios.put('/api/announcement/update', {
+              id: editorSession?.announcement?.id,
+              ...payload,
+            })
+          : await axios.post('/api/announcement/create', payload);
+      if (response.status !== 200) {
+        throw new Error('save');
+      }
+      setSnapshot(serializeForm({ ...form, title, description }));
+      toast({
+        description: saveToast({
+          isInWeb: form.isInWeb,
+          isInPpt: form.isInPpt,
+          isPublished,
+          action,
+        }),
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+      onSaved({ isInWeb: form.isInWeb, isPublished, action });
+      onRequestClose({ force: true });
     } catch (err) {
       console.log(err);
       toast({
@@ -262,326 +364,597 @@ const AnnouncementEditorModal = (props) => {
         duration: 5000,
         isClosable: true,
       });
+    } finally {
+      setIsSaving(false);
     }
   };
 
-  const onClose = () => {
-    resetAnnouncementEditorCallback();
-  };
+  const note = editorNote({
+    action,
+    isInWeb: form.isInWeb,
+    isInPpt: form.isInPpt,
+    wasOnWeb,
+    wasPublished,
+  });
+  const heading =
+    action === 'edit'
+      ? 'Edit announcement'
+      : action === 'duplicate'
+      ? 'Duplicate announcement'
+      : 'New announcement';
+  const showDisplay = form.isInWeb || Boolean(errors.display);
+  const intervalOptions = eventIntervalList.includes(form.eventInterval)
+    ? eventIntervalList
+    : [form.eventInterval, ...eventIntervalList].filter(Boolean);
 
-  useEffect(() => {
-    setAnnouncementEditorData(editAnnouncementData);
-  }, [editAnnouncementData]);
+  const fields = (
+    <Box
+      as="form"
+      id="announcement-editor-form"
+      onSubmit={handleSave}
+      display="flex"
+      flexDirection="column"
+      gap="18px"
+    >
+      <EditorField
+        id="announcement-title"
+        label="Title"
+        required
+        error={errors.title}
+      >
+        <Input
+          id="announcement-title"
+          ref={titleRef}
+          value={form.title}
+          autoComplete="off"
+          aria-required="true"
+          aria-invalid={errors.title ? true : undefined}
+          onChange={(event) => updateField('title', event.target.value)}
+          {...textInputProps}
+          borderColor={
+            errors.title ? announcementColors.danger : announcementColors.line
+          }
+        />
+      </EditorField>
 
-  useEffect(() => {
-    if (eventStartDate && eventEndDate) {
-      if (DateTime.fromISO(eventEndDate) <= DateTime.fromISO(eventStartDate)) {
-        setDatePeriodInvalid(true);
-        return;
-      }
-    }
-    setDatePeriodInvalid(false);
-  }, [eventStartDate, eventEndDate]);
+      <Box as="fieldset" border="0" m="0" p="0">
+        <Text
+          as="legend"
+          mb="10px"
+          fontFamily={ADMIN_FONT}
+          fontWeight="600"
+          fontSize="14px"
+        >
+          Where should this announcement go?
+        </Text>
+        <Flex direction="column" gap="10px">
+          <DestinationCheck
+            isChecked={form.isInWeb}
+            onChange={(event) => updateField('isInWeb', event.target.checked)}
+            label="Website"
+            hint="People can read this on the church website."
+          />
+          <DestinationCheck
+            isChecked={form.isInPpt}
+            onChange={(event) => updateField('isInPpt', event.target.checked)}
+            label="Sunday slides"
+            hint="Shown with the Sunday slides. Tick both if it belongs in both places."
+          />
+        </Flex>
+      </Box>
 
-  const modalTitle = (actionOnEditor) => {
-    switch (actionOnEditor) {
-      default:
-        return 'New Announcement';
-      case 'edit':
-        return 'Edit Announcement';
-      case 'duplicate':
-        return 'Duplicate Announcement';
-    }
-  };
+      {showDisplay ? (
+        <Box {...clusterProps}>
+          <Text fontFamily={ADMIN_FONT} fontSize="13px" fontWeight="700">
+            When it shows on the website{' '}
+            <Text
+              as="span"
+              fontWeight="500"
+              fontSize="12px"
+              color={announcementColors.muted}
+            >
+              Required for the website
+            </Text>
+          </Text>
+          <Text
+            fontFamily={ADMIN_FONT}
+            fontSize="13px"
+            color={announcementColors.muted}
+          >
+            These decide when people can see it on the website. They are not the
+            time of the gathering.
+          </Text>
+          <Box sx={datePairSx}>
+            <EditorField id="announcement-display-start" label="Display start">
+              <Input
+                id="announcement-display-start"
+                ref={displayStartRef}
+                type="datetime-local"
+                value={form.displayStartDateTime}
+                aria-required={form.isInWeb ? 'true' : 'false'}
+                aria-invalid={errors.display ? true : undefined}
+                onChange={(event) =>
+                  updateField('displayStartDateTime', event.target.value)
+                }
+                {...textInputProps}
+                borderColor={
+                  errors.display
+                    ? announcementColors.danger
+                    : announcementColors.line
+                }
+              />
+            </EditorField>
+            <EditorField
+              id="announcement-display-end"
+              label="Display end"
+              hint="After this, it leaves Showing now."
+            >
+              <Input
+                id="announcement-display-end"
+                ref={displayEndRef}
+                type="datetime-local"
+                value={form.displayEndDateTime}
+                aria-required={form.isInWeb ? 'true' : 'false'}
+                aria-invalid={errors.display ? true : undefined}
+                onChange={(event) =>
+                  updateField('displayEndDateTime', event.target.value)
+                }
+                {...textInputProps}
+                borderColor={
+                  errors.display
+                    ? announcementColors.danger
+                    : announcementColors.line
+                }
+              />
+            </EditorField>
+          </Box>
+          {errors.display ? (
+            <Text
+              role="alert"
+              fontFamily={ADMIN_FONT}
+              fontSize="13px"
+              color={announcementColors.danger}
+            >
+              {errors.display}
+            </Text>
+          ) : null}
+        </Box>
+      ) : null}
 
-  const modalSubmitButton = (actionOnEditor) => {
-    switch (actionOnEditor) {
-      default:
-        return 'Create Announcement';
-      case 'edit':
-        return 'Save Changes';
-      case 'duplicate':
-        return 'Duplicate Announcement';
-    }
-  };
+      <Flex direction="column" gap="18px">
+        <Box {...clusterProps}>
+          <Text fontFamily={ADMIN_FONT} fontSize="13px" fontWeight="700">
+            The event
+          </Text>
+          <Text
+            fontFamily={ADMIN_FONT}
+            fontSize="13px"
+            color={announcementColors.muted}
+          >
+            This is when people should show up. Leave a box blank if you do not
+            know it yet.
+          </Text>
+          <Box sx={datePairSx}>
+            <EditorField id="announcement-event-start" label="Event start date">
+              <Input
+                id="announcement-event-start"
+                type="date"
+                value={form.eventStartDate}
+                onChange={(event) =>
+                  updateField('eventStartDate', event.target.value)
+                }
+                {...textInputProps}
+              />
+            </EditorField>
+            <EditorField
+              id="announcement-event-start-time"
+              label="Event start time"
+            >
+              <Input
+                id="announcement-event-start-time"
+                type="time"
+                value={form.eventStartTime}
+                onChange={(event) =>
+                  updateField('eventStartTime', event.target.value)
+                }
+                {...textInputProps}
+              />
+            </EditorField>
+          </Box>
+          <Box sx={datePairSx}>
+            <EditorField id="announcement-event-end" label="Event end date">
+              <Input
+                id="announcement-event-end"
+                type="date"
+                value={form.eventEndDate}
+                aria-invalid={datePeriodInvalid ? true : undefined}
+                onChange={(event) =>
+                  updateField('eventEndDate', event.target.value)
+                }
+                {...textInputProps}
+                borderColor={
+                  datePeriodInvalid
+                    ? announcementColors.danger
+                    : announcementColors.line
+                }
+              />
+            </EditorField>
+            <EditorField
+              id="announcement-event-end-time"
+              label="Event end time"
+            >
+              <Input
+                id="announcement-event-end-time"
+                type="time"
+                value={form.eventEndTime}
+                onChange={(event) =>
+                  updateField('eventEndTime', event.target.value)
+                }
+                {...textInputProps}
+              />
+            </EditorField>
+          </Box>
+          {datePeriodInvalid ? (
+            <Text
+              role="alert"
+              fontFamily={ADMIN_FONT}
+              fontSize="13px"
+              color={announcementColors.danger}
+            >
+              Start and end date is invalid, please check again
+            </Text>
+          ) : null}
+          <EditorField
+            id="announcement-interval"
+            label="Event interval"
+            hint="For a repeating event, such as Sunday Celebration. Otherwise leave it as None."
+          >
+            <Select
+              id="announcement-interval"
+              value={form.eventInterval}
+              onChange={(event) =>
+                updateField('eventInterval', event.target.value)
+              }
+              {...textInputProps}
+            >
+              {intervalOptions.map((interval) => (
+                <option key={interval} value={interval}>
+                  {interval}
+                </option>
+              ))}
+            </Select>
+          </EditorField>
+          <Box>
+            <CUIAutoComplete
+              key={`event-type-${appliedToken}`}
+              label="Event type"
+              placeholder="Classes, Resources, Others"
+              disableCreateItem
+              items={eventTypeList}
+              selectedItems={
+                Array.isArray(form.eventType) ? form.eventType : []
+              }
+              tagStyleProps={{ rounded: 'full', fontSize: '1rem' }}
+              onSelectedItemsChange={(changes) => {
+                const next = Array.isArray(changes?.selectedItems)
+                  ? changes.selectedItems
+                  : [];
+                updateField('eventType', next);
+              }}
+            />
+            <Text
+              mt="6px"
+              fontFamily={ADMIN_FONT}
+              fontSize="13px"
+              color={announcementColors.muted}
+            >
+              A category, such as Classes, Resources, or Others. Not a second
+              title.
+            </Text>
+          </Box>
+          <DestinationCheck
+            isChecked={form.featured}
+            onChange={(event) => updateField('featured', event.target.checked)}
+            label="Featured"
+            hint="Pins this near the top of the announcements on the website."
+          />
+          <EditorField
+            id="announcement-location"
+            label="Location"
+            hint="Write TBA if it is not confirmed. Leave blank if there is no place."
+          >
+            <Input
+              id="announcement-location"
+              value={form.location}
+              autoComplete="off"
+              onChange={(event) => updateField('location', event.target.value)}
+              {...textInputProps}
+            />
+          </EditorField>
+        </Box>
+
+        <Box {...clusterProps}>
+          <Text fontFamily={ADMIN_FONT} fontSize="13px" fontWeight="700">
+            What people see
+          </Text>
+          <Box>
+            <FileUpload
+              key={`image-${appliedToken}`}
+              id="imageAdUrl"
+              name="imageAdUrl"
+              acceptedFileTypes="image/*"
+              setImageUrl={(url) =>
+                updateField('imageAdUrl', typeof url === 'string' ? url : '')
+              }
+              inputValue={form.imageAdUrl}
+              control={control}
+            >
+              Image link
+            </FileUpload>
+            <Text
+              mt="6px"
+              fontFamily={ADMIN_FONT}
+              fontSize="13px"
+              color={announcementColors.muted}
+            >
+              Paste the link to the picture, or upload one. Leave blank and the
+              list shows No image.
+            </Text>
+          </Box>
+          <EditorField
+            id="announcement-signup"
+            label="Sign-up link"
+            hint="Example: https://hongkong.hmccglobal.org/signup"
+          >
+            <Input
+              id="announcement-signup"
+              value={form.signUpUrl}
+              autoComplete="off"
+              inputMode="url"
+              onChange={(event) => updateField('signUpUrl', event.target.value)}
+              {...textInputProps}
+            />
+          </EditorField>
+          <EditorField
+            id="announcement-description"
+            label="Description"
+            required
+            error={errors.description}
+            hint={
+              <>
+                What people read. This is the public text, not an internal note.
+                This field supports formatting.{' '}
+                <Link
+                  color={announcementColors.blueLight}
+                  href="https://www.markdownguide.org/cheat-sheet/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Formatting guide
+                </Link>
+              </>
+            }
+          >
+            <Textarea
+              id="announcement-description"
+              ref={descriptionRef}
+              value={form.description}
+              minH="88px"
+              resize="vertical"
+              aria-required="true"
+              aria-invalid={errors.description ? true : undefined}
+              borderColor={
+                errors.description
+                  ? announcementColors.danger
+                  : announcementColors.line
+              }
+              fontFamily={ADMIN_FONT}
+              borderRadius="8px"
+              onChange={(event) =>
+                updateField('description', event.target.value)
+              }
+            />
+          </EditorField>
+        </Box>
+      </Flex>
+
+      <EditorField
+        id="announcement-notes"
+        label="Additional notes"
+        hint="Internal remarks, including when the image was updated. People on the website do not see this."
+      >
+        <Textarea
+          id="announcement-notes"
+          value={form.additionalNotes}
+          minH="88px"
+          resize="vertical"
+          fontFamily={ADMIN_FONT}
+          borderRadius="8px"
+          borderColor={announcementColors.line}
+          onChange={(event) =>
+            updateField('additionalNotes', event.target.value)
+          }
+        />
+      </EditorField>
+    </Box>
+  );
+
+  const footer = (
+    <Flex
+      align="center"
+      gap="8px"
+      w="100%"
+      pt="16px"
+      pb="20px"
+      px="24px"
+      borderTop="1px solid"
+      borderColor={announcementColors.line}
+    >
+      {layout === 'dialog' ? (
+        <IconButton
+          aria-label="Close editor"
+          icon={<Icon as={FiX} boxSize="18px" />}
+          onClick={() => onRequestClose()}
+          {...quietButtonProps}
+          w="44px"
+          h="44px"
+          minW="44px"
+        />
+      ) : null}
+      <Button
+        type="button"
+        onClick={() => onRequestClose()}
+        {...quietButtonProps}
+      >
+        Cancel
+      </Button>
+      <Button
+        type="submit"
+        form="announcement-editor-form"
+        ml="auto"
+        isLoading={isSaving}
+        {...primaryButtonProps}
+      >
+        Save
+      </Button>
+    </Flex>
+  );
+
+  const openEditor = (
+    <>
+      <Box
+        position="relative"
+        px="24px"
+        pt="22px"
+        pb="16px"
+        pr={layout === 'dock' ? '64px' : '24px'}
+      >
+        <Heading
+          as="h2"
+          id="announcement-editor-title"
+          fontFamily={ADMIN_FONT}
+          fontSize="20px"
+          fontWeight="600"
+          letterSpacing="-0.03em"
+        >
+          {heading}
+        </Heading>
+        <Text
+          mt="4px"
+          fontFamily={ADMIN_FONT}
+          fontSize="14px"
+          color={announcementColors.muted}
+        >
+          {note}
+        </Text>
+        {layout === 'dock' ? (
+          <IconButton
+            aria-label="Close editor"
+            icon={<Icon as={FiX} boxSize="18px" />}
+            onClick={() => onRequestClose()}
+            position="absolute"
+            top="18px"
+            right="16px"
+            {...quietButtonProps}
+            w="40px"
+            h="40px"
+            minW="40px"
+          />
+        ) : null}
+      </Box>
+      <Box flex="1" minH="0" overflow="auto" px="24px" py="20px">
+        {fields}
+      </Box>
+      {footer}
+    </>
+  );
+
+  if (layout === 'dialog') {
+    return (
+      <Modal
+        isOpen={isOpen}
+        onClose={() => onRequestClose()}
+        size="full"
+        blockScrollOnMount
+        trapFocus
+      >
+        <ModalOverlay bg="rgba(20, 23, 28, 0.28)" />
+        <ModalContent
+          m="0"
+          h="100vh"
+          maxW="100%"
+          borderRadius="0"
+          display="flex"
+          flexDirection="column"
+          bg={announcementColors.paper}
+          fontFamily={ADMIN_FONT}
+          color={announcementColors.ink}
+          sx={editorContainerSx}
+          aria-labelledby="announcement-editor-title"
+        >
+          <ModalBody
+            p="0"
+            display="flex"
+            flexDirection="column"
+            flex="1"
+            minH="0"
+            overflow="hidden"
+          >
+            {isOpen ? openEditor : null}
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    );
+  }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="full">
-      <ModalOverlay />
-      <ModalContent>
-        <ModalCloseButton />
-        <ModalBody>
-          <Container maxW="container.xl">
-            <Heading as="h2" size="lg" pb={3}>
-              {modalTitle(actionOnEditor)}
-            </Heading>
-
-            <Box>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <Stack spacing={2}>
-                  <FormControl isInvalid={errors['title']} isRequired>
-                    <FormLabel>Title</FormLabel>
-                    <Input
-                      id="title"
-                      {...register('title', {
-                        required: ' Title is required',
-                      })}
-                      onChange={(e) => setTitle(e.target.value)}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel>Where should this announcement go?</FormLabel>
-                    <FormHelperText>
-                      Check both if it should be shared in both Web/Mobile and
-                      PPT
-                    </FormHelperText>
-                    <Stack spacing={10} direction={['column', 'row']}>
-                      <Checkbox
-                        size="lg"
-                        id="isInWeb"
-                        {...register('isInWeb')}
-                        isChecked={isInWeb}
-                        onChange={(e) => setIsInWeb(e.target.checked)}
-                      >
-                        Web/Mobile
-                      </Checkbox>
-                      <Checkbox
-                        size="lg"
-                        id="isInPpt"
-                        {...register('isInPpt')}
-                        isChecked={isInPpt}
-                        onChange={(e) => setIsInPpt(e.target.checked)}
-                      >
-                        PPT
-                      </Checkbox>
-                    </Stack>
-                  </FormControl>
-                  <Grid
-                    templateColumns={['repeat(1,1fr)', 'repeat(2, 1fr)']}
-                    gap={6}
-                  >
-                    <GridItem>
-                      <FormControl isRequired>
-                        <FormLabel>Announcement Display Start Date</FormLabel>
-                        <FormHelperText>
-                          If the announcement is for web/mobile, please input
-                          this field otherwise the announcement will not show
-                        </FormHelperText>
-                      </FormControl>
-                      <Input
-                        id="displayStartDateTime"
-                        type="datetime-local"
-                        {...register('displayStartDateTime', {
-                          required: 'Display Start Date is required',
-                        })}
-                        onChange={(e) =>
-                          setDisplayStartDateTime(e.target.value)
-                        }
-                      />
-                    </GridItem>
-                    <GridItem>
-                      <FormControl isRequired>
-                        <FormLabel>Announcement Display End Date</FormLabel>
-                        <FormHelperText>
-                          If the announcement is for web/mobile, please input
-                          this field otherwise the announcement will not show
-                        </FormHelperText>
-                      </FormControl>
-                      <Input
-                        id="displayEndDateTime"
-                        type="datetime-local"
-                        {...register('displayEndDateTime', {
-                          required: 'Display End Date is required',
-                        })}
-                        onChange={(e) => setDisplayEndDateTime(e.target.value)}
-                      />
-                    </GridItem>
-
-                    <GridItem>
-                      <FormControl>
-                        <FormLabel>Event Start Date</FormLabel>
-                        <FormErrorMessage>
-                          {datePeriodInvalid &&
-                            'Start and end date is invalid, please check again'}
-                        </FormErrorMessage>
-                        <Input
-                          id="eventStartDate"
-                          type="date"
-                          {...register('eventStartDate')}
-                          onChange={(e) => setEventStartDate(e.target.value)}
-                        />
-                      </FormControl>
-                    </GridItem>
-                    <GridItem>
-                      <FormControl>
-                        <FormLabel>Event Start Time</FormLabel>
-                        <Input
-                          id="eventStartTime"
-                          type="time"
-                          {...register('eventStartTime')}
-                          onChange={(e) => setEventStartTime(e.target.value)}
-                        />
-                      </FormControl>
-                    </GridItem>
-                    <GridItem>
-                      <FormControl>
-                        <FormLabel>Event End Date</FormLabel>
-                        <FormErrorMessage>
-                          {datePeriodInvalid &&
-                            'Start and end date is invalid, please check again'}
-                        </FormErrorMessage>
-                        <Input
-                          id="eventEndDate"
-                          type="date"
-                          {...register('eventEndDate')}
-                          onChange={(e) => setEventEndDate(e.target.value)}
-                        />
-                      </FormControl>
-                    </GridItem>
-                    <GridItem>
-                      <FormControl>
-                        <FormLabel>Event End Time</FormLabel>
-                        <Input
-                          id="eventEndTime"
-                          type="time"
-                          {...register('eventEndTime')}
-                          onChange={(e) => setEventEndTime(e.target.value)}
-                        />
-                      </FormControl>
-                    </GridItem>
-                  </Grid>
-                  <FormControl>
-                    <FormLabel>Event interval</FormLabel>
-                    <FormHelperText>
-                      If the event is recurring (e.g. Sunday Celebration),
-                      please set an interval. If not, leave it as 'None'.
-                    </FormHelperText>
-                    <Select
-                      id="eventInterval"
-                      {...register('eventInterval')}
-                      onChange={(e) => setEventInterval(e.target.value)}
-                    >
-                      {eventIntervalList.map((interval) => {
-                        return <option value={interval}>{interval}</option>;
-                      })}
-                    </Select>
-                  </FormControl>
-                  <Divider orientation="horizontal" />
-                  <FormControl>
-                    <CUIAutoComplete
-                      label="Event type"
-                      placeholder="Classes, Resources, Others"
-                      disableCreateItem={true}
-                      items={pickerItems}
-                      tagStyleProps={{
-                        rounded: 'full',
-                        fontSize: '1rem',
-                      }}
-                      selectedItems={selectedItems}
-                      {...register('eventType')}
-                      onSelectedItemsChange={(changes) =>
-                        handleSelectedItemsChange(changes.selectedItems)
-                      }
-                    />
-                  </FormControl>
-                  <FormControl display="flex" alignItems="center">
-                    <FormLabel mb="0">Featured </FormLabel>
-
-                    <Switch
-                      px="1em"
-                      id="featured"
-                      {...register('featured')}
-                      onChange={(e) => setFeatured(e.target.checked)}
-                      isChecked={featured}
-                    />
-                    <FormHelperText>
-                      Determines if it will show up as featured in our events
-                      page
-                    </FormHelperText>
-                  </FormControl>
-                  <Divider orientation="horizontal" />
-                  <FormControl>
-                    <FormLabel>Location</FormLabel>
-                    <FormHelperText>
-                      Enter 'TBA' if not confirmed. If not applicable, leave it
-                      blank.
-                    </FormHelperText>
-                    <Input
-                      id="location"
-                      {...register('location')}
-                      onChange={(e) => setLocation(e.target.value)}
-                    />
-                  </FormControl>
-                  <FileUpload
-                    id="imageAdUrl"
-                    name="imageAdUrl"
-                    acceptedFileTypes="image/*"
-                    setImageUrl={setImageAdUrl}
-                    inputValue={imageAdUrl}
-                    control={control}
-                    onChange={(e) => setImageAdUrl(e.target.value)}
-                  >
-                    Upload Announcements Image
-                  </FileUpload>
-                  <FormControl>
-                    <FormLabel>Announcements Sign-up link</FormLabel>
-                    <Input
-                      id="signUpUrl"
-                      {...register('signUpUrl')}
-                      onChange={(e) => setSignUpUrl(e.target.value)}
-                    />
-                  </FormControl>
-                  <FormControl isInvalid={errors['description']} isRequired>
-                    <FormLabel>Description</FormLabel>
-                    <FormHelperText>
-                      This field supports formatting, you can add it yourself.
-                      on how to use {''}
-                      <Link
-                        color="blue.500"
-                        href="https://www.markdownguide.org/cheat-sheet/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Click here
-                      </Link>{' '}
-                    </FormHelperText>
-                    <Textarea
-                      id="description"
-                      {...register('description', {
-                        required: 'Description is required',
-                      })}
-                      onChange={(e) => setDescription(e.target.value)}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel>Additional Notes</FormLabel>
-                    <FormHelperText>
-                      If there is anything that any remarks, please put it in
-                      here. Also, please put a remark in here if it's an updated
-                      image
-                    </FormHelperText>
-                    <Textarea
-                      id="additionalNotes"
-                      {...register('additionalNotes')}
-                      onChange={(e) => setAdditionalNotes(e.target.value)}
-                    />
-                  </FormControl>
-                  <Button
-                    colorScheme="blue"
-                    type="submit"
-                    onClick={onSubmitEditor}
-                  >
-                    {modalSubmitButton(actionOnEditor)}
-                  </Button>
-                  ;
-                </Stack>
-              </form>
-            </Box>
-          </Container>
-        </ModalBody>
-        <ModalFooter></ModalFooter>
-      </ModalContent>
-    </Modal>
+    <Flex
+      as="aside"
+      aria-labelledby="announcement-editor-title"
+      direction="column"
+      flex="0 0 560px"
+      w="560px"
+      maxW="100%"
+      alignSelf="flex-start"
+      position="sticky"
+      top="0"
+      maxH="calc(100vh - 7vh - 48px)"
+      bg={announcementColors.paper}
+      border="1px solid"
+      borderColor={announcementColors.line}
+      borderRadius="16px"
+      boxShadow={announcementColors.shadow}
+      overflow="hidden"
+      fontFamily={ADMIN_FONT}
+      color={announcementColors.ink}
+      sx={editorContainerSx}
+    >
+      {isOpen ? (
+        openEditor
+      ) : (
+        <Box p="28px" px="24px" maxW="36ch">
+          <Heading
+            as="h2"
+            id="announcement-editor-title"
+            fontFamily={ADMIN_FONT}
+            fontSize="20px"
+            fontWeight="600"
+            letterSpacing="-0.03em"
+          >
+            Announcement
+          </Heading>
+          <Text
+            mt="8px"
+            fontFamily={ADMIN_FONT}
+            fontSize="15px"
+            color={announcementColors.muted}
+          >
+            Select an announcement to see and edit it. The list stays beside
+            this column, so you can tell which one you are changing.
+          </Text>
+        </Box>
+      )}
+    </Flex>
   );
 };
 
