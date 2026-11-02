@@ -16,11 +16,8 @@ module.exports = {
 
   fn: async function ({ id }, exits) {
     try {
-      const data = await Announcement.find({
-        _id: id,
-        isInWeb: true,
-        isPublished: true,
-        isDeleted: false,
+      const data = await sails.helpers.announcements.findPublished.with({
+        criteria: { _id: id },
       });
 
       // If no form is found return error

@@ -12,7 +12,13 @@ const getStartDate = (eventData) => {
       ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
 };
 
-const getRenderDate = (startDate, endDate, interval, startTime) => {
+const getRenderDate = (
+  startDate,
+  endDate,
+  interval,
+  startTime,
+  now = DateTime.now()
+) => {
   // parse the interval to number
   const start = DateTime.fromISO(startDate).startOf('day');
   const end = DateTime.fromISO(endDate);
@@ -45,7 +51,7 @@ const getRenderDate = (startDate, endDate, interval, startTime) => {
       days: recur * i,
       milliseconds: timeOffset,
     });
-    if (DateTime.now() < occurrence) return occurrence;
+    if (now < occurrence) return occurrence;
   }
   /* every occurrence has passed: show the last one. when the dates make
      nRecurrence invalid (NaN/negative, e.g. missing endDate) fall back to

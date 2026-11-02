@@ -21,6 +21,7 @@ export const seoData = {
     description:
       'Discover upcoming community events at HMCC HK, such as prayer sessions, classes, and other church activities that strengthen faith and fellowship.',
     keywords: 'community events',
+    image: '/images/event_banner.png',
   },
   '/about-us': {
     title: 'HMCC HK | About Us | Vision & Mission',
@@ -112,11 +113,17 @@ const fetchSermonById = async (sermonId) => {
   }
 };
 
+// /events/ and /events are the same page; the server renders both from the
+// same SEO entry, so the lookup must not fall through to the default copy.
+const findSEO = (pathname) =>
+  seoData[pathname] || seoData[pathname.replace(/\/+$/, '')];
+
 // Get SEO data for a given pathname, with optional sermon ID for dynamic sermon pages
 export const getSEOData = async (pathname, sermonId = null) => {
   // Check for exact matches first
-  if (seoData[pathname]) {
-    return seoData[pathname];
+  const match = findSEO(pathname);
+  if (match) {
+    return match;
   }
 
   // Handle dynamic sermon routes
@@ -154,8 +161,9 @@ export const getSermonSEOData = async (sermonId) => {
 // Synchronous version for cases where async is not possible
 export const getSEODataSync = (pathname) => {
   // Check for exact matches first
-  if (seoData[pathname]) {
-    return seoData[pathname];
+  const match = findSEO(pathname);
+  if (match) {
+    return match;
   }
 
   // Handle dynamic routes with default fallback

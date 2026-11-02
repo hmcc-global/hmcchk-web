@@ -78,8 +78,7 @@ const EventCard = (props) => {
           <img
             alt="event-img"
             src={eventData.imageAdUrl}
-            objectFit="cover"
-            style={{ borderRadius: '10px' }}
+            style={{ borderRadius: '10px', objectFit: 'cover' }}
           />
         </AspectRatio>
         <Box
@@ -189,7 +188,7 @@ const EventCard = (props) => {
             flexDirection="row"
             alignItems="center"
           >
-            <Text
+            <Box
               fontSize={['xs', 'md']}
               overflow="hidden"
               noOfLines={2}
@@ -201,7 +200,7 @@ const EventCard = (props) => {
                 children={eventData.description}
                 skipHtml
               />{' '}
-            </Text>
+            </Box>
             <Icon
               as={BsFullscreen}
               position="absolute"
@@ -210,7 +209,7 @@ const EventCard = (props) => {
             />
           </Box>
           <Stack mt={['2', '5']} direction="row" spacing={4}>
-            {eventData.signUpUrl.length > 0 && (
+            {eventData.signUpUrl?.length > 0 && (
               <Button
                 as={Link}
                 size="md"
@@ -219,7 +218,7 @@ const EventCard = (props) => {
                 color="white"
                 _hover={{ opacity: '90%', textDecoration: 'none' }}
                 href={eventData.signUpUrl ? eventData.signUpUrl : null}
-                isDisabled={eventData.signUpUrl.length <= 0}
+                isDisabled={!eventData.signUpUrl?.length}
                 fontSize={['xs', 'md']}
                 rightIcon={<MdOutlineAddToPhotos />}
               >
@@ -350,13 +349,13 @@ const EventCard = (props) => {
                 )}
               </Box>
               <Box bg="#F9F9F9" borderRadius="20" mt={[2, 5]} p={4}>
-                <Text fontSize={['xs', 'md']} w="100%">
+                <Box fontSize={['xs', 'md']} w="100%">
                   <ReactMarkdown
                     components={ChakraUIRenderer()}
                     children={eventData.description}
                     skipHtml
                   />
-                </Text>
+                </Box>
               </Box>
             </ModalBody>
             <ModalFooter>
@@ -369,7 +368,7 @@ const EventCard = (props) => {
                 colorScheme="gray"
                 alignItems="center"
               >
-                {eventData.signUpUrl.length > 0 && (
+                {eventData.signUpUrl?.length > 0 && (
                   <Button
                     as={Link}
                     target="_blank"
