@@ -13,6 +13,7 @@ import {
   FormControl,
   FormLabel,
   FormHelperText,
+  FormErrorMessage,
   Select,
   Button,
   Switch,
@@ -120,7 +121,7 @@ const CompleteUserProfileContainer = (props) => {
       console.log(err);
       toast({
         description:
-          'Something went wrong, please try again and check if the information has been properly filled. If the error persists, please contact hk.global@hongkong.hmcc.net.',
+          'Something went wrong, please try again and check if the information has been properly filled. If the error persists, please contact please contact hk@hmccglobal.org.',
         status: 'error',
         duration: 8000,
         isClosable: true,
@@ -399,7 +400,7 @@ const CompleteUserProfileContainer = (props) => {
                     </FormControl>
                   </Stack>
                   <Stack direction={['column', 'row']} spacing="4%">
-                    <FormControl flex={1}>
+                    <FormControl flex={1} isInvalid={errorsA['phoneNumber']}>
                       <FormLabel color={formLabelColor}>
                         Phone Number
                         <Text as="span" color="red">
@@ -411,12 +412,17 @@ const CompleteUserProfileContainer = (props) => {
                         size="sm"
                         borderRadius="5"
                         {...registerA('phoneNumber', {
-                          required: true,
-                          pattern: /^[0-9]+$/,
+                          required: 'Please enter your phone number',
+                          pattern: {
+                            value: /^[0-9]+$/,
+                            message: 'Numbers only, no spaces or symbols',
+                          },
                         })}
-                        isInvalid={errorsA['phoneNumber']}
                         placeholder="Numbers only"
                       />
+                      <FormErrorMessage>
+                        {errorsA.phoneNumber?.message}
+                      </FormErrorMessage>
                     </FormControl>
                     <Box flex={[0, 1]}></Box>
                   </Stack>
@@ -603,7 +609,9 @@ const CompleteUserProfileContainer = (props) => {
                         pt={['5%', '2%']}
                         flex={[1, 4]}
                       >
-                        <FormControl>
+                        <FormControl
+                          isInvalid={errorsB['membershipRecognitionDate']}
+                        >
                           <FormLabel color="#2C5282">
                             Recognition Date
                             <Text as="span" color="red">
@@ -616,11 +624,14 @@ const CompleteUserProfileContainer = (props) => {
                             borderRadius="5"
                             {...registerB('membershipRecognitionDate', {
                               validate: (value, formValues) =>
-                                !formValues.isMember || !!value,
+                                !formValues.isMember ||
+                                !!value ||
+                                'Please enter your recognition date',
                             })}
-                            isInvalid={errorsB['membershipRecognitionDate']}
-                            placeholder="This field is optional"
                           />
+                          <FormErrorMessage>
+                            {errorsB.membershipRecognitionDate?.message}
+                          </FormErrorMessage>
                         </FormControl>
                         <FormControl>
                           <FormLabel color="#2C5282">
@@ -698,7 +709,7 @@ const CompleteUserProfileContainer = (props) => {
                             of your previous home church.
                           </FormHelperText>
                         </FormControl>
-                        <FormControl>
+                        <FormControl isInvalid={errorsB['baptismDate']}>
                           <FormLabel color="#2C5282">
                             Baptism Date
                             <Text as="span" color="red">
@@ -711,10 +722,14 @@ const CompleteUserProfileContainer = (props) => {
                             borderRadius="5"
                             {...registerB('baptismDate', {
                               validate: (value, formValues) =>
-                                !formValues.isBaptised || !!value,
+                                !formValues.isBaptised ||
+                                !!value ||
+                                'Please enter your baptism date',
                             })}
-                            isInvalid={errorsB['baptismDate']}
                           />
+                          <FormErrorMessage>
+                            {errorsB.baptismDate?.message}
+                          </FormErrorMessage>
                           <FormHelperText>
                             To the best of your memory :)
                           </FormHelperText>
