@@ -20,9 +20,6 @@ module.exports = {
         criteria: { _id: id },
       });
 
-      // If no form is found return error
-      if (data === null) return exits.error('unauthorized access');
-
       return exits.success(data);
     } catch (err) {
       sails.log(err);

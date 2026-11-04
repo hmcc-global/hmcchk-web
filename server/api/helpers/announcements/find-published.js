@@ -1,3 +1,36 @@
+// Only what the public site renders. The rest of the record (submitter and
+// approver names, PPT flags, additional notes, form ids) must not leave the
+// server through the public API or the SSR HTML.
+const PUBLIC_EVENT_FIELDS = [
+  'id',
+  'title',
+  'description',
+  'imageAdUrl',
+  'displayStartDateTime',
+  'displayEndDateTime',
+  'eventStartDate',
+  'eventStartTime',
+  'eventEndDate',
+  'eventEndTime',
+  'eventInterval',
+  'eventType',
+  'featured',
+  'location',
+  'signUpUrl',
+  'directionsUrl',
+];
+
+// Datetime fields can come back from sails-mongo as Date objects. Normalise
+// them so every consumer gets an ISO string for luxon.
+const toPublicEvent = (record) =>
+  PUBLIC_EVENT_FIELDS.reduce((publicEvent, field) => {
+    const value = record[field];
+    if (value !== undefined) {
+      publicEvent[field] = value instanceof Date ? value.toISOString() : value;
+    }
+    return publicEvent;
+  }, {});
+
 // The visibility rule for announcements shown on the public site. Shared by the
 // public API and the server-rendered events page so they cannot disagree.
 module.exports = {
@@ -31,7 +64,9 @@ module.exports = {
         isDeleted: false,
       });
 
-      return exits.success(data);
+      // No `.select()`: the model is `schema: false`, so Waterline rejects a
+      // custom select. The whitelist projection happens on the records.
+      return exits.success(data.map(toPublicEvent));
     } catch (err) {
       sails.log(err);
       return exits.error(err);

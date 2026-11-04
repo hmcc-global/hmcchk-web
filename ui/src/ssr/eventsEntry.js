@@ -31,7 +31,8 @@ const escapeForScript = (value) =>
 const renderEventsPage = ({ pathname, data }) => {
   const cache = createCache({ key: 'css' });
   const { renderStylesToString } = createEmotionServer(cache);
-  const store = configureStore({ reducer: { user: userReducer } });
+  // Match ui/src/store.js, where the slice reducer is the root reducer.
+  const store = configureStore({ reducer: userReducer });
 
   const html = renderStylesToString(
     renderToString(

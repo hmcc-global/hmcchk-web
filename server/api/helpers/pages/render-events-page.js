@@ -20,19 +20,24 @@ const INDEX_HTML_PATH = path.join(
 const SITE_URL = 'https://hk.hmccglobal.org';
 
 let eventRenderer;
+let hasWarnedAboutBundle = false;
 
 // A failed load is not cached: the bundle can appear after the first request
 // (deploy race, or a build that skipped build:ssr), and SSR should recover
-// without a restart.
+// without a restart. The warning is logged once per process, not per request.
 const loadRenderer = () => {
   if (eventRenderer) return eventRenderer;
 
   try {
     eventRenderer = require(SSR_BUNDLE_PATH);
+    hasWarnedAboutBundle = false;
   } catch (err) {
-    sails.log.warn(
-      `Could not load the events SSR bundle, the page will fall back to the SPA: ${err.message}`
-    );
+    if (!hasWarnedAboutBundle) {
+      sails.log.warn(
+        `Could not load the events SSR bundle, the page will fall back to the SPA: ${err.message}`
+      );
+      hasWarnedAboutBundle = true;
+    }
     return null;
   }
 

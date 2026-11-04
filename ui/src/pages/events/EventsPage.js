@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import { customAxios as axios } from 'utils/customAxios';
 import {
   Box,
@@ -48,17 +48,15 @@ const EventsPage = () => {
     setSelectedTag(tag);
     setSelectedFilterIndex(-1);
     setFilteredList(
-      eventsList.filter((data) =>
-        data.eventType?.some((type) => type.value === tag)
+      eventsList.filter(
+        (data) =>
+          Array.isArray(data.eventType) &&
+          data.eventType.some((type) => type.value === tag)
       )
     );
   };
 
-  useEffect(() => {
-    if (!initialData) getEventsListFromDatabase();
-  }, [initialData]);
-
-  const getEventsListFromDatabase = async () => {
+  const getEventsListFromDatabase = useCallback(async () => {
     try {
       const { data, status } = await axios.get('/api/announcement/get');
 
@@ -75,7 +73,14 @@ const EventsPage = () => {
     } catch (err) {
       console.log(err);
     }
-  };
+  }, []);
+
+  // SSR data only seeds the first paint — refetch on every mount, because the
+  // cached payload in EventsInitialData never expires and would otherwise serve
+  // stale events on a client-side return to /events.
+  useEffect(() => {
+    getEventsListFromDatabase();
+  }, [getEventsListFromDatabase]);
 
   return (
     <Container maxW="container.xl">

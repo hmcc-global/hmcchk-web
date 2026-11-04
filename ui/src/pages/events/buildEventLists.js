@@ -20,7 +20,7 @@ const buildEventLists = (events, now) => {
         if (displayStartDate > now) return false;
       }
 
-      if (item.displayEndDateTime !== '') {
+      if (item.displayEndDateTime) {
         const endDate = DateTime.fromISO(item.displayEndDateTime);
         const startDate = DateTime.fromISO(item.displayStartDateTime);
         return endDate > now && now > startDate;
@@ -40,7 +40,11 @@ const buildEventLists = (events, now) => {
 
   const sorted = sortEvents(visibleEvents);
   sorted.forEach((item) => {
-    item.eventType?.forEach((tag) => tagList.add(tag.value));
+    // Old records can carry eventType as a string or have no tags at all.
+    const eventTags = Array.isArray(item.eventType) ? item.eventType : [];
+    eventTags.forEach((tag) => {
+      if (tag?.value) tagList.add(tag.value);
+    });
   });
 
   const featuredList = [];
