@@ -5,40 +5,30 @@ import { DateTime } from 'luxon';
 import { customAxios as axios } from 'utils/customAxios';
 import {
   ADMIN_FONT,
+  adminFocusRing,
   adminNavGroups,
   adminShellColors,
+  suppressAdminMouseFocus,
 } from './navigation/adminNav';
+
+const parseDate = (value) => {
+  if (!value) return null;
+  const date = DateTime.fromISO(String(value));
+  return date.isValid ? date : null;
+};
 
 const isShowingNow = (item, now) => {
   if (!item || typeof item !== 'object') return false;
-  if (item.displayEndDateTime) {
-    const end = DateTime.fromISO(String(item.displayEndDateTime));
-    return end.isValid && end > now;
-  }
-  if (item.eventEndDate) {
-    const end = DateTime.fromISO(String(item.eventEndDate));
-    return end.isValid && end > now;
-  }
-  if (item.eventStartDate && !item.eventEndDate) {
-    const start = DateTime.fromISO(String(item.eventStartDate));
-    return start.isValid && start < now;
-  }
+  const displayStart = parseDate(item.displayStartDateTime);
+  const displayEnd = parseDate(item.displayEndDateTime);
+  const eventStart = parseDate(item.eventStartDate);
+  const eventEnd = parseDate(item.eventEndDate);
+
+  if (displayStart && displayStart > now) return false;
+  if (displayEnd) return displayEnd > now;
+  if (eventEnd) return eventEnd > now;
+  if (eventStart) return eventStart < now;
   return true;
-};
-
-const focusRing = {
-  '&:focus': {
-    outline: 'none',
-    boxShadow: 'none',
-  },
-  '&:focus-visible': {
-    outline: `2px solid ${adminShellColors.blue}`,
-    outlineOffset: '2px',
-  },
-};
-
-const suppressMouseFocus = (event) => {
-  event.preventDefault();
 };
 
 const ToolTile = (props) => {
@@ -63,7 +53,7 @@ const homeGroups = adminNavGroups
   .map((group) => ({
     ...group,
     items: (Array.isArray(group.items) ? group.items : []).filter(
-      (item) => item.id !== 'home' && item.job
+      (item) => item.id !== 'home'
     ),
   }))
   .filter((group) => group.items.length > 0);
@@ -78,9 +68,8 @@ const AdminHome = () => {
       try {
         const { data, status } = await axios.get('/api/announcement/admin-get');
         if (!isCurrent || status !== 200 || !Array.isArray(data)) return;
-        const showingNow = data.filter((item) =>
-          isShowingNow(item, DateTime.now())
-        );
+        const now = DateTime.now();
+        const showingNow = data.filter((item) => isShowingNow(item, now));
         if (!showingNow.length) return;
         const liveCount = showingNow.filter(
           (item) => item?.isInWeb === true && item?.isPublished === true
@@ -163,7 +152,7 @@ const AdminHome = () => {
                     as={RouterLink}
                     to={item.path}
                     display="flex"
-                    alignItems="flex-start"
+                    alignItems={item.job ? 'flex-start' : 'center'}
                     gap="14px"
                     w="100%"
                     p="14px"
@@ -175,8 +164,8 @@ const AdminHome = () => {
                       bg: adminShellColors.cardHover,
                     }}
                     _focus={{ boxShadow: 'none', outline: 'none' }}
-                    sx={focusRing}
-                    onMouseDown={suppressMouseFocus}
+                    sx={adminFocusRing}
+                    onMouseDown={suppressAdminMouseFocus}
                   >
                     <ToolTile icon={item.icon} />
                     <Box minW="0">
@@ -192,15 +181,17 @@ const AdminHome = () => {
                       >
                         {item.name}
                       </Text>
-                      <Text
-                        mt="2px"
-                        fontFamily={ADMIN_FONT}
-                        fontSize="14px"
-                        fontWeight="500"
-                        color={adminShellColors.muted}
-                      >
-                        {item.job}
-                      </Text>
+                      {item.job && (
+                        <Text
+                          mt="2px"
+                          fontFamily={ADMIN_FONT}
+                          fontSize="14px"
+                          fontWeight="500"
+                          color={adminShellColors.muted}
+                        >
+                          {item.job}
+                        </Text>
+                      )}
                       {item.id === 'announcements' && announcementCount && (
                         <Text
                           mt="2px"

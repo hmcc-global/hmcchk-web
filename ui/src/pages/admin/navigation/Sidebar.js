@@ -1,6 +1,7 @@
 import {
   Box,
   Drawer,
+  DrawerCloseButton,
   DrawerContent,
   DrawerOverlay,
   Flex,
@@ -16,9 +17,11 @@ import { useEffect, useRef, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import {
   ADMIN_FONT,
+  adminFocusRing,
   adminNavGroups,
   adminShellColors,
   isAdminNavItemActive,
+  suppressAdminMouseFocus,
 } from './adminNav';
 
 const WIDE_ADMIN_QUERY = '(min-width: 1280px)';
@@ -42,21 +45,6 @@ const useIsWideAdmin = () => {
   }, []);
 
   return isWide;
-};
-
-const focusRing = {
-  '&:focus': {
-    outline: 'none',
-    boxShadow: 'none',
-  },
-  '&:focus-visible': {
-    outline: `2px solid ${adminShellColors.blue}`,
-    outlineOffset: '2px',
-  },
-};
-
-const suppressMouseFocus = (event) => {
-  event.preventDefault();
 };
 
 const NavGroups = (props) => {
@@ -110,8 +98,8 @@ const NavGroups = (props) => {
                 color: isActive ? adminShellColors.blue : adminShellColors.ink,
               }}
               _focus={{ boxShadow: 'none', outline: 'none' }}
-              sx={focusRing}
-              onMouseDown={suppressMouseFocus}
+              sx={adminFocusRing}
+              onMouseDown={suppressAdminMouseFocus}
               onClick={onNavigate}
             >
               {item.icon && (
@@ -184,7 +172,7 @@ const SidebarPanel = (props) => {
             color={adminShellColors.muted}
             _hover={{ bg: adminShellColors.wash, color: adminShellColors.ink }}
             _focus={{ boxShadow: 'none', outline: 'none' }}
-            sx={focusRing}
+            sx={adminFocusRing}
           />
         )}
       </Flex>
@@ -299,7 +287,7 @@ const SidebarWithHeader = (props) => {
         </Flex>
       ) : (
         <>
-          <Flex px="4" pt="3">
+          <Flex align="center" gap="12px" px="4" pt="3">
             <IconButton
               ref={menuButtonRef}
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
@@ -317,8 +305,27 @@ const SidebarWithHeader = (props) => {
               minW="40px"
               _hover={{ bg: adminShellColors.wash }}
               _focus={{ boxShadow: 'none', outline: 'none' }}
-              sx={focusRing}
+              sx={adminFocusRing}
             />
+            <Flex align="center" gap="8px">
+              <Text
+                fontFamily={ADMIN_FONT}
+                fontSize="18px"
+                fontWeight="700"
+                letterSpacing="-0.03em"
+                color={adminShellColors.ink}
+              >
+                HMCC
+              </Text>
+              <Text
+                fontFamily={ADMIN_FONT}
+                fontSize="14px"
+                fontWeight="600"
+                color={adminShellColors.muted}
+              >
+                Admin
+              </Text>
+            </Flex>
           </Flex>
           <Drawer
             isOpen={isOpen}
@@ -326,19 +333,31 @@ const SidebarWithHeader = (props) => {
             onClose={onClose}
             finalFocusRef={menuButtonRef}
           >
-            <DrawerOverlay bg="rgba(20, 23, 28, 0.28)" />
+            <DrawerOverlay bg={adminShellColors.overlay} />
             <DrawerContent
+              aria-label="Admin navigation"
               w={SIDEBAR_WIDTH}
               maxW={SIDEBAR_WIDTH}
               bg={adminShellColors.paper}
             >
+              <DrawerCloseButton
+                color={adminShellColors.muted}
+                borderRadius="8px"
+                _hover={{
+                  bg: adminShellColors.wash,
+                  color: adminShellColors.ink,
+                }}
+                _focus={{ boxShadow: 'none', outline: 'none' }}
+                sx={adminFocusRing}
+                onMouseDown={suppressAdminMouseFocus}
+              />
               <Box
                 display="flex"
                 flexDirection="column"
                 h="100%"
                 minH="0"
                 px="14px"
-                pt="22px"
+                pt="48px"
                 pb="16px"
               >
                 <SidebarPanel
