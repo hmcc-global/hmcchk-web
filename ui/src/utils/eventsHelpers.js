@@ -12,7 +12,13 @@ const getStartDate = (eventData) => {
       ).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
 };
 
-const getRenderDate = (startDate, endDate, interval, startTime) => {
+const getRenderDate = (
+  startDate,
+  endDate,
+  interval,
+  startTime,
+  now = DateTime.now()
+) => {
   // parse the interval to number
   const start = DateTime.fromISO(startDate).startOf('day');
   const end = DateTime.fromISO(endDate);
@@ -45,7 +51,7 @@ const getRenderDate = (startDate, endDate, interval, startTime) => {
       days: recur * i,
       milliseconds: timeOffset,
     });
-    if (DateTime.now() < occurrence) return occurrence;
+    if (now < occurrence) return occurrence;
   }
   /* every occurrence has passed: show the last one. when the dates make
      nRecurrence invalid (NaN/negative, e.g. missing endDate) fall back to
@@ -151,12 +157,12 @@ const EndDateElement = ({
 // Pure: returns a new sorted array, does not mutate the input.
 const sortEvents = (events) => {
   return [...events].sort((a, b) => {
-    const hasResourcesA = a.eventType?.some(
-      (type) => type.value === 'Resources'
-    );
-    const hasResourcesB = b.eventType?.some(
-      (type) => type.value === 'Resources'
-    );
+    const hasResourcesA =
+      Array.isArray(a.eventType) &&
+      a.eventType.some((type) => type.value === 'Resources');
+    const hasResourcesB =
+      Array.isArray(b.eventType) &&
+      b.eventType.some((type) => type.value === 'Resources');
 
     if (a.featured && !b.featured) return -1;
     if (!a.featured && b.featured) return 1;

@@ -39,6 +39,10 @@ module.exports.custom = {
     email: 'hk@hmccglobal.org',
   },
 
+  // Shared by the events page renderer and the announcement write actions, so
+  // a rename cannot leave the invalidation pointing at a key nobody reads.
+  eventsPageCacheKey: 'events-page-html',
+
   sermons: {
     host: 'https://hongkong.sub.hmccglobal.org/wp-json/wp/v2/wpfc_sermon',
   },

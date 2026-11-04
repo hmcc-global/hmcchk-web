@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import { customAxios as axios } from 'utils/customAxios';
 import {
   Box,
@@ -13,17 +13,24 @@ import {
 import EventCard from './EventCard';
 import EventTypeFilter from './EventTypeFilter';
 import { DateTime } from 'luxon';
-import { getRenderDate, sortEvents } from 'utils/eventsHelpers';
-import isDateInThisWeek from './getWeek';
+import buildEventLists, { emptyEventLists } from './buildEventLists';
+import { useEventsInitialData } from './EventsInitialData';
 
 const TAG_CHIPS = ['All', 'This Week', 'Featured'];
 
 const EventsPage = () => {
-  const [eventsList, setEventsList] = useState([]);
-  const [thisWeekList, setThisWeekList] = useState([]);
-  const [featuredList, setFeaturedList] = useState([]);
-  const [filteredList, setFilteredList] = useState([]);
-  const [tagList, setTagList] = useState([]);
+  const serverData = useEventsInitialData();
+  const [initialData] = useState(serverData);
+  const [initialLists] = useState(() =>
+    initialData
+      ? buildEventLists(initialData.events, DateTime.fromISO(initialData.now))
+      : emptyEventLists()
+  );
+  const [eventsList, setEventsList] = useState(initialLists.eventsList);
+  const [thisWeekList, setThisWeekList] = useState(initialLists.thisWeekList);
+  const [featuredList, setFeaturedList] = useState(initialLists.featuredList);
+  const [filteredList, setFilteredList] = useState(initialLists.eventsList);
+  const [tagList, setTagList] = useState(initialLists.tagList);
   const [selectedTag, setSelectedTag] = useState('');
   const [selectedFilterIndex, setSelectedFilterIndex] = useState(0);
 
@@ -41,85 +48,44 @@ const EventsPage = () => {
     setSelectedTag(tag);
     setSelectedFilterIndex(-1);
     setFilteredList(
-      eventsList.filter((data) =>
-        data.eventType?.some((type) => type.value === tag)
+      eventsList.filter(
+        (data) =>
+          Array.isArray(data.eventType) &&
+          data.eventType.some((type) => type.value === tag)
       )
     );
   };
 
-  useEffect(() => {
-    getEventsListFromDatabase();
-  }, []);
-
-  const getEventsListFromDatabase = async () => {
+  const getEventsListFromDatabase = useCallback(async () => {
     try {
       const { data, status } = await axios.get('/api/announcement/get');
 
       if (status === 200) {
-        const tagsList = new Set();
-        const filteredEndDate = data.filter((item) => {
-          if (item.displayStartDateTime) {
-            let displayStartDate = DateTime.fromISO(item.displayStartDateTime);
-            if (displayStartDate > DateTime.now()) return false;
-          }
-
-          if (item.displayEndDateTime !== '') {
-            // Add one day to offset end date to end of day
-            let endDate = DateTime.fromISO(item.displayEndDateTime);
-            let startDate = DateTime.fromISO(item.displayStartDateTime);
-            const renderDate = getRenderDate(
-              item.eventStartDate,
-              item.eventEndDate,
-              item.eventInterval,
-              item.eventStartTime
-            );
-            item.renderDate = renderDate;
-
-            return endDate > DateTime.now() && DateTime.now() > startDate;
-          } else return false;
-        });
-        const sorted = sortEvents(filteredEndDate);
-        sorted.forEach((data) => {
-          data.eventType?.forEach((tag) => tagsList.add(tag.value));
-        });
-
-        const featuredEvents = [];
-        const thisWeekEvents = [];
-        const moreFilterEvents = [];
-
-        sorted.forEach((data) => {
-          if (data.featured) {
-            featuredEvents.push(data);
-          }
-          if (
-            isDateInThisWeek(data.eventStartDate) ||
-            isDateInThisWeek(data.eventEndDate) ||
-            isDateInThisWeek(
-              data.renderDate.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)
-            )
-          ) {
-            thisWeekEvents.push(data);
-          } else {
-            moreFilterEvents.push(data);
-          }
-        });
-
-        setFeaturedList(featuredEvents);
-        setThisWeekList(thisWeekEvents);
-        setTagList([...tagsList]);
-
-        const deduped = new Set(
-          featuredEvents.concat(thisWeekEvents, moreFilterEvents)
-        );
-        setEventsList([...deduped]);
-        setFilteredList([...deduped]);
+        const lists = buildEventLists(data, DateTime.now());
+        setFeaturedList(lists.featuredList);
+        setThisWeekList(lists.thisWeekList);
+        setTagList(lists.tagList);
+        setEventsList(lists.eventsList);
+        // The fresh list replaces every filtered list, so any chip/tag the
+        // user tapped while the request was in flight no longer matches what
+        // is shown; fall back to "All" for both.
+        setSelectedFilterIndex(0);
+        setSelectedTag('');
+        setFilteredList(lists.eventsList);
       } else {
         throw Error('Something went wrong with the request');
       }
     } catch (err) {
       console.log(err);
     }
-  };
+  }, []);
+
+  // SSR data only seeds the first paint — refetch on every mount, because the
+  // cached payload in EventsInitialData never expires and would otherwise serve
+  // stale events on a client-side return to /events.
+  useEffect(() => {
+    getEventsListFromDatabase();
+  }, [getEventsListFromDatabase]);
 
   return (
     <Container maxW="container.xl">

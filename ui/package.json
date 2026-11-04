@@ -60,6 +60,7 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
+    "build:ssr": "vite build --config vite.ssr.config.js",
     "preview": "vite preview",
     "test": "vitest",
     "lint": "eslint src"
@@ -109,6 +110,8 @@
     ]
   },
   "devDependencies": {
+    "@emotion/cache": "^11",
+    "@emotion/server": "^11",
     "@vitejs/plugin-react": "^4",
     "eslint": "^8",
     "eslint-config-react-app": "^7.0.1",
