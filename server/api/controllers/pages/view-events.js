@@ -23,8 +23,10 @@ const secondsUntil = (dateTime, now) =>
   Math.ceil(dateTime.diff(now, 'seconds').seconds);
 
 // A recurring event's render date jumps to its next occurrence when one
-// starts. Step the series start forward by the interval to find the next
-// occurrence after `now`; occurrences past the series end don't count.
+// starts. Jump straight to it (no loop): the step arithmetic mirrors
+// getRenderDate in ui/src/utils/eventsHelpers.js — a "monthly" event advances
+// by the start month's day count, not by calendar months; occurrences past
+// the series end don't count.
 const nextRecurringBoundary = (event, now) => {
   const date = DateTime.fromISO(event.eventStartDate, {
     zone: 'Asia/Hong_Kong',
@@ -36,22 +38,25 @@ const nextRecurringBoundary = (event, now) => {
   });
   const end = DateTime.fromISO(event.eventEndDate, { zone: 'Asia/Hong_Kong' });
 
-  let step;
-  if (event.eventInterval === 'Daily') step = { days: 1 };
-  else if (event.eventInterval === 'Weekly') step = { days: 7 };
-  else if (event.eventInterval === 'Monthly') step = { months: 1 };
+  let stepDays;
+  if (event.eventInterval === 'Daily') stepDays = 1;
+  else if (event.eventInterval === 'Weekly') stepDays = 7;
+  else if (event.eventInterval === 'Monthly') stepDays = date.daysInMonth;
   else return null;
 
   let boundary = time.isValid
     ? date.set({ hour: time.hour, minute: time.minute })
     : date.startOf('day');
 
-  for (let i = 0; i < 400; i += 1) {
-    if (end.isValid && boundary > end.endOf('day')) return null;
-    if (boundary > now) return boundary;
-    boundary = boundary.plus(step);
+  const elapsedDays = now.diff(boundary, 'days').days;
+  if (elapsedDays > 0) {
+    boundary = boundary.plus({
+      days: stepDays * Math.ceil(elapsedDays / stepDays),
+    });
   }
-  return null;
+
+  if (end.isValid && boundary > end.endOf('day')) return null;
+  return boundary > now ? boundary : null;
 };
 
 // The cached page must not outlive a change in what is visible: an event's
@@ -179,9 +184,13 @@ module.exports = {
 
       return sendPage(await renderInFlight);
     } catch (err) {
-      sails.log.warn(
-        `Events page SSR failed, serving the SPA shell instead: ${err.message}`
-      );
+      // A missing bundle was already logged once by the render helper;
+      // repeating the same warning on every request is just noise.
+      if (err.message !== 'SSR bundle unavailable') {
+        sails.log.warn(
+          `Events page SSR failed, serving the SPA shell instead: ${err.message}`
+        );
+      }
       try {
         return sendPage(await readShell());
       } catch (readErr) {

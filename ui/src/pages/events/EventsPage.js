@@ -66,6 +66,11 @@ const EventsPage = () => {
         setThisWeekList(lists.thisWeekList);
         setTagList(lists.tagList);
         setEventsList(lists.eventsList);
+        // The fresh list replaces every filtered list, so any chip/tag the
+        // user tapped while the request was in flight no longer matches what
+        // is shown; fall back to "All" for both.
+        setSelectedFilterIndex(0);
+        setSelectedTag('');
         setFilteredList(lists.eventsList);
       } else {
         throw Error('Something went wrong with the request');

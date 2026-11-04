@@ -146,7 +146,6 @@ module.exports = {
 
       return exits.success({
         page: buildPage(indexHtml, rendered),
-        seo: rendered.seo,
       });
     } catch (err) {
       return exits.error(err);

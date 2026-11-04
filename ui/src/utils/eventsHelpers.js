@@ -157,12 +157,12 @@ const EndDateElement = ({
 // Pure: returns a new sorted array, does not mutate the input.
 const sortEvents = (events) => {
   return [...events].sort((a, b) => {
-    const hasResourcesA = a.eventType?.some(
-      (type) => type.value === 'Resources'
-    );
-    const hasResourcesB = b.eventType?.some(
-      (type) => type.value === 'Resources'
-    );
+    const hasResourcesA =
+      Array.isArray(a.eventType) &&
+      a.eventType.some((type) => type.value === 'Resources');
+    const hasResourcesB =
+      Array.isArray(b.eventType) &&
+      b.eventType.some((type) => type.value === 'Resources');
 
     if (a.featured && !b.featured) return -1;
     if (!a.featured && b.featured) return 1;
