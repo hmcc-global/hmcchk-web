@@ -100,6 +100,9 @@ module.exports.policies = {
   // Media
   'media/*': true,
 
+  // R2 object storage
+  'r2/presign-upload': ['isLoggedIn', 'aboveMinistry'],
+
   // Misc
   'misc/get-env': true,
   'misc/get-current-time': true,
