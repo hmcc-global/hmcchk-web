@@ -327,48 +327,51 @@ const SidebarWithHeader = (props) => {
               </Text>
             </Flex>
           </Flex>
-          <Drawer
-            isOpen={isOpen}
-            placement="left"
-            onClose={onClose}
-            finalFocusRef={menuButtonRef}
-          >
-            <DrawerOverlay bg={adminShellColors.overlay} />
-            <DrawerContent
-              aria-label="Admin navigation"
-              w={SIDEBAR_WIDTH}
-              maxW={SIDEBAR_WIDTH}
-              bg={adminShellColors.paper}
+          {/* Drop the drawer on close. Its exit animation never finishes, so the invisible layer and the scroll lock stay put. */}
+          {isOpen && (
+            <Drawer
+              isOpen
+              placement="left"
+              onClose={onClose}
+              finalFocusRef={menuButtonRef}
             >
-              <DrawerCloseButton
-                color={adminShellColors.muted}
-                borderRadius="8px"
-                _hover={{
-                  bg: adminShellColors.wash,
-                  color: adminShellColors.ink,
-                }}
-                _focus={{ boxShadow: 'none', outline: 'none' }}
-                sx={adminFocusRing}
-                onMouseDown={suppressAdminMouseFocus}
-              />
-              <Box
-                display="flex"
-                flexDirection="column"
-                h="100%"
-                minH="0"
-                px="14px"
-                pt="48px"
-                pb="16px"
+              <DrawerOverlay bg={adminShellColors.overlay} />
+              <DrawerContent
+                aria-label="Admin navigation"
+                w={SIDEBAR_WIDTH}
+                maxW={SIDEBAR_WIDTH}
+                bg={adminShellColors.paper}
               >
-                <SidebarPanel
-                  isCollapsed={false}
-                  showCollapse={false}
-                  onNavigate={onClose}
-                  user={user}
+                <DrawerCloseButton
+                  color={adminShellColors.muted}
+                  borderRadius="8px"
+                  _hover={{
+                    bg: adminShellColors.wash,
+                    color: adminShellColors.ink,
+                  }}
+                  _focus={{ boxShadow: 'none', outline: 'none' }}
+                  sx={adminFocusRing}
+                  onMouseDown={suppressAdminMouseFocus}
                 />
-              </Box>
-            </DrawerContent>
-          </Drawer>
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  h="100%"
+                  minH="0"
+                  px="14px"
+                  pt="48px"
+                  pb="16px"
+                >
+                  <SidebarPanel
+                    isCollapsed={false}
+                    showCollapse={false}
+                    onNavigate={onClose}
+                    user={user}
+                  />
+                </Box>
+              </DrawerContent>
+            </Drawer>
+          )}
         </>
       )}
       <Box
