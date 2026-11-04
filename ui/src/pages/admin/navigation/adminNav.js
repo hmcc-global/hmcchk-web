@@ -10,7 +10,7 @@ import {
   FiUsers,
   FiVolume2,
 } from 'react-icons/fi';
-import { CgNotes } from 'react-icons/cg';
+import { LuFilePen } from 'react-icons/lu';
 
 export const ADMIN_FONT = 'Manrope, sans-serif';
 
@@ -19,6 +19,7 @@ export const adminShellColors = {
   muted: '#3e4a5c',
   line: '#e3e6ec',
   wash: '#f4f6f8',
+  page: '#f5f9ff',
   blue: '#17356b',
   blueLight: '#24508f',
   blueSoft: '#e7eef8',
@@ -67,7 +68,7 @@ export const adminNavGroups = [
         id: 'sermon-notes',
         name: 'Sermon notes',
         path: '/admin/sermonNotes',
-        icon: CgNotes,
+        icon: LuFilePen,
         job: 'Update the notes for a Sunday message.',
       },
       {

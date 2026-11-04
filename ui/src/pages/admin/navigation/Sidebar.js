@@ -45,10 +45,18 @@ const useIsWideAdmin = () => {
 };
 
 const focusRing = {
+  '&:focus': {
+    outline: 'none',
+    boxShadow: 'none',
+  },
   '&:focus-visible': {
     outline: `2px solid ${adminShellColors.blue}`,
     outlineOffset: '2px',
   },
+};
+
+const suppressMouseFocus = (event) => {
+  event.preventDefault();
 };
 
 const NavGroups = (props) => {
@@ -101,7 +109,9 @@ const NavGroups = (props) => {
                   : adminShellColors.wash,
                 color: isActive ? adminShellColors.blue : adminShellColors.ink,
               }}
+              _focus={{ boxShadow: 'none', outline: 'none' }}
               sx={focusRing}
+              onMouseDown={suppressMouseFocus}
               onClick={onNavigate}
             >
               {item.icon && (
@@ -173,6 +183,7 @@ const SidebarPanel = (props) => {
             borderRadius="8px"
             color={adminShellColors.muted}
             _hover={{ bg: adminShellColors.wash, color: adminShellColors.ink }}
+            _focus={{ boxShadow: 'none', outline: 'none' }}
             sx={focusRing}
           />
         )}
@@ -227,7 +238,7 @@ const SidebarWithHeader = (props) => {
       position="relative"
       direction={isWide ? 'row' : 'column'}
       align="stretch"
-      bg={adminShellColors.wash}
+      bg={adminShellColors.page}
       minH="100%"
       p={isWide ? '12px' : 0}
       gap={isWide ? '12px' : 0}
@@ -305,6 +316,7 @@ const SidebarWithHeader = (props) => {
               h="40px"
               minW="40px"
               _hover={{ bg: adminShellColors.wash }}
+              _focus={{ boxShadow: 'none', outline: 'none' }}
               sx={focusRing}
             />
           </Flex>

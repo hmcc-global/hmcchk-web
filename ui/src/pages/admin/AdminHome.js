@@ -27,10 +27,18 @@ const isShowingNow = (item, now) => {
 };
 
 const focusRing = {
+  '&:focus': {
+    outline: 'none',
+    boxShadow: 'none',
+  },
   '&:focus-visible': {
     outline: `2px solid ${adminShellColors.blue}`,
     outlineOffset: '2px',
   },
+};
+
+const suppressMouseFocus = (event) => {
+  event.preventDefault();
 };
 
 const ToolTile = (props) => {
@@ -166,7 +174,9 @@ const AdminHome = () => {
                       textDecoration: 'none',
                       bg: adminShellColors.cardHover,
                     }}
+                    _focus={{ boxShadow: 'none', outline: 'none' }}
                     sx={focusRing}
+                    onMouseDown={suppressMouseFocus}
                   >
                     <ToolTile icon={item.icon} />
                     <Box minW="0">
