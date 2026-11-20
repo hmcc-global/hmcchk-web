@@ -613,6 +613,10 @@ const FormEditorContainer = (props) => {
                                     <option value="email-here-to-witness-retreat-payment-success">
                                       Here To Witness 2027 Payment Confirmation
                                     </option>
+                                    <option value="email-here-to-witness-retreat-donation-payment-success">
+                                      Here To Witness 2027 Donation Payment
+                                      Confirmation
+                                    </option>
                                     <option value="email-ignite-payment-success">
                                       !gnite 2023 Payment Confirmation
                                     </option>
@@ -965,6 +969,9 @@ const FormEditorContainer = (props) => {
                         </option>
                         <option value="form-here-to-witness-retreat-success">
                           Here To Witness Retreat 2027
+                        </option>
+                        <option value="form-here-to-witness-retreat-donation-success">
+                          Here To Witness Retreat 2027 Donation
                         </option>
                         <option value="form-ignite-success">!gnite</option>
                         <option value="form-deep-success">Deep retreat</option>
