@@ -3,7 +3,7 @@
   "mcp": {
     "gitnexus": {
       "type": "local",
-      "command": ["npx", "-y", "gitnexus@latest", "mcp"]
+      "command": ["npx", "-y", "gitnexus@1.6.12", "mcp"]
     }
   }
 }

@@ -22,7 +22,7 @@ If your work involves the task below, read the corresponding document/section fi
 - handle member, form-submission, or profile data → `#data-handling`
 - find where something lives, or add a new file → `.claude/docs/architecture.md`
 - touch CI workflows, deploys, or env vars → `.claude/docs/ci-and-env.md`
-- review a branch or PR → the `/code-review` or `/deep-review` skill
+- review a branch or PR → the `/code-review` or `/deep-review` skill, plus the docs above for every area the diff touches
 - execute a plan or issue checklist → the `/gh-execute` skill
 
 ### Required Compliance-line format (the rule text comes from the doc, not from here)
@@ -76,15 +76,15 @@ Everything you read stays in your context for the rest of the session and pushes
 
 ## Using GitNexus
 
-GitNexus is this repo's code map: it answers "where is this", "what calls this", and "what breaks if I change this" without reading whole files. Use it before grep and before opening files.
+GitNexus is this repo's code map: it answers "where is this", "what calls this", and "what breaks if I change this" without reading whole files. Use it before grep and before opening files. It needs Node 22.18 or newer, and every command below uses the version pinned in `opencode.json` (`gitnexus@1.6.12`) so the index and the tools always match.
 
-1. **Check it at the start of the session.** Call the MCP tool `list_repos`, or run `node .gitnexus/run.cjs status` (no `run.cjs`? use `npx gitnexus status`). If it is not `up-to-date`, re-index with `node .gitnexus/run.cjs analyze --skip-agents-md` (about 15 seconds). A stale index answers "not found" or "0 impacted" for code that exists.
+1. **Check it at the start of the session.** Run `npx -y gitnexus@1.6.12 status`. If it says "not indexed" or anything other than `up-to-date`, run `npx -y gitnexus@1.6.12 analyze --index-only` (about 15 seconds; it changes no tracked files). A stale index answers "not found" or "0 impacted" for code that exists.
 2. **Find code** with `query({search_query: "retreat signup form"})` and `context({name: "PrivateRoute"})`. Use `rg` only for exact text such as copy, CSS values, or template names.
 3. **Before editing any existing function or component**, run `impact({target: "<name>", direction: "upstream"})` and put the risk level and the number of affected callers in your reply. HIGH or CRITICAL: stop and tell the user before editing.
-4. **Before committing**, run `detect_changes({scope: "compare", base_ref: "<base branch>"})` and confirm only the symbols you meant to change appear.
-5. **No GitNexus MCP tools in this session?** The CLI does the same: `node .gitnexus/run.cjs query "<concept>"`, `… context <name>`, `… impact <name> -f <file>`, `… detect-changes -s compare -b <base branch>`. Pipe through `| head -80`.
+4. **Before committing**, stage your changes and run `detect_changes({scope: "staged"})`; confirm only the symbols you meant to change appear. When reviewing a branch, use `detect_changes({scope: "compare", base_ref: "<base branch>"})` instead.
+5. **No GitNexus MCP tools in this session?** The CLI does the same: `npx -y gitnexus@1.6.12 query "<concept>"`, `… context <name>`, `… impact <name> -f <file>`, `… detect-changes -s staged`. Pipe through `| head -80`.
 
-New files, EJS templates, and copy-only edits have no callers: say "new file, nothing existing affected" instead of running `impact`. If GitNexus is not installed at all, say so at the start and fall back to `rg`; never claim an impact result you did not run.
+These steps override the commands in the auto-generated GitNexus block further down. New files, EJS templates, and copy-only edits have no callers: say "new file, nothing existing affected" instead of running `impact`. If GitNexus cannot run at all, say so at the start and fall back to `rg`; never claim an impact result you did not run.
 
 ## Working in a Messy Codebase
 
@@ -167,11 +167,11 @@ Read `.claude/docs/commit-convention.md` and `.claude/docs/pr-description.md` be
 GitNexus gives the agent a call graph of this repo (impact analysis, execution flows, safe renames). Two one-time steps per clone:
 
 ```bash
-npx gitnexus analyze        # builds the local index into .gitnexus/ (gitignored, ~60 MB) and writes .gitnexus/run.cjs
-npx gitnexus setup          # registers the MCP server in your coding tool (Claude Code, Cursor, Codex, …); add -c <tool> to pick one
+npx -y gitnexus@1.6.12 analyze --index-only   # builds the local index into .gitnexus/ (gitignored, ~60 MB); needs Node 22.18+
+npx -y gitnexus@1.6.12 setup                  # registers the MCP server in your coding tool (Claude Code, Cursor, Codex, …); add -c <tool> to pick one
 ```
 
-OpenCode and OpenChamber skip `setup`: the repo's `opencode.json` registers the GitNexus MCP server, and CI builds a fresh index before the opencode review.
+OpenCode and OpenChamber skip `setup`: the repo's `opencode.json` registers the GitNexus MCP server at the same pinned version. Bump the version in `opencode.json` and this file together.
 
 Re-run `analyze` after pulling large changes or when `status` reports the index is stale. On npm 11 an `npx` install crash (`node.target is null`) is a known issue; `npm i -g gitnexus` then `gitnexus analyze` works around it. Never commit `.gitnexus/`; it contains absolute paths and a machine-local database.
 
