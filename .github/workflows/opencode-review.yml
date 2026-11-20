@@ -30,6 +30,14 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Set up Node for GitNexus
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+
+      - name: Build GitNexus index
+        run: npx -y gitnexus@latest analyze --index-only
+
       - name: Run opencode
         uses: anomalyco/opencode/github@latest
         env:
