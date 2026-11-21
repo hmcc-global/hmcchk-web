@@ -51,6 +51,10 @@ jobs:
           cd ui && yarn run build
         env:
           CI: false
+      - name: "Build events SSR bundle"
+        # Writes server/ssr/events.cjs; must run before ui/ is deleted below.
+        run: |
+          cd ui && yarn run build:ssr
       - name: "Move build files to Sails client folder"
         run: |
           mkdir server/client && mv ui/build/* server/client

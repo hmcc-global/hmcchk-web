@@ -19,7 +19,10 @@ const DynamicSEO = () => {
 
       if (isSermonDetailPage && sermonId && !isNaN(parseInt(sermonId, 10))) {
         try {
-          const detailedSeoData = await getSEOData(location.pathname, parseInt(sermonId, 10));
+          const detailedSeoData = await getSEOData(
+            location.pathname,
+            parseInt(sermonId, 10)
+          );
           if (detailedSeoData) {
             setSeoData(detailedSeoData);
           }
@@ -88,9 +91,11 @@ const DynamicSEO = () => {
         document.head.appendChild(ogDescription);
       }
 
-      // Update Open Graph URL
+      // Update Open Graph URL. Drop a trailing slash ("/events/" → "/events")
+      // so client-written tags match the server-rendered ones on /events.
       let ogUrl = document.querySelector('meta[property="og:url"]');
-      const currentUrl = `https://hk.hmccglobal.org${location.pathname}`;
+      const canonicalPath = location.pathname.replace(/\/+$/, '') || '/';
+      const currentUrl = `https://hk.hmccglobal.org${canonicalPath}`;
       if (ogUrl) {
         ogUrl.setAttribute('content', currentUrl);
       } else {

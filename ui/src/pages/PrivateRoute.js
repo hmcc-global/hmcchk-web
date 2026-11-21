@@ -10,7 +10,12 @@ import CompleteUserProfileContainer from './userProfile/CompleteUserProfile';
 import { DEFAULT_PROFILE_TAB } from './userProfile/profileTabs';
 import SidebarWithHeader from './admin/navigation/Sidebar';
 
-const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
+const PrivateRoute = ({
+  component: Component,
+  permissions,
+  skipAuthGate,
+  ...rest
+}) => {
   const user = useSelector((state) => state.user);
   const [userObj, setUserObj] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +41,8 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
   };
 
   useEffect(() => {
+    if (skipAuthGate) return;
+
     async function getStatic() {
       const { data: lifegroupList } = await axios.get(
         '/api/misc/get-latest-lifegroup-list'
@@ -67,9 +74,11 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
     }
 
     getStatic();
-  }, []);
+  }, [skipAuthGate]);
 
   useEffect(() => {
+    if (skipAuthGate) return;
+
     // useEffects are meant to be synchronous, this helps to remove the warning
     async function fetch() {
       let obj = await checkIfTokenExists(user);
@@ -77,7 +86,7 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
     }
 
     fetch();
-  }, [user]);
+  }, [user, skipAuthGate]);
 
   // check if Token exists in redux store
   const noTokenExists = Object.keys(user).length === 0;
@@ -92,10 +101,14 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
         p === userObj.accessType
     );
 
+  // A server-rendered public page paints before verify-token and the static
+  // lists resolve, so its first render matches the HTML the server sent.
+  const canRender = skipAuthGate
+    ? isPublic
+    : !isLoading && userObj != null && staticData != null;
+
   return (
-    !isLoading &&
-    userObj != null &&
-    staticData != null && (
+    canRender && (
       <Route
         {...rest}
         render={(props) => {

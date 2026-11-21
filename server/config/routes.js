@@ -175,6 +175,9 @@ module.exports.routes = {
   'get /api/admin/sendBatchUsersQuery': 'users/send-batch-users-query',
 
   // UI
+  // /events is rendered on the server; everything else is the SPA shell
+  'get /events': 'pages/view-events',
+  'get /events/': 'pages/view-events',
   'get /*': {
     skipAssets: true,
     fn: function (req, res) {
