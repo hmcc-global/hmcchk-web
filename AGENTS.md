@@ -171,7 +171,7 @@ npx -y gitnexus@1.6.12 analyze --index-only   # builds the local index into .git
 npx -y gitnexus@1.6.12 setup                  # registers the MCP server in your coding tool (Claude Code, Cursor, Codex, …); add -c <tool> to pick one
 ```
 
-OpenCode and OpenChamber skip `setup`: the repo's `opencode.json` registers the GitNexus MCP server at the same pinned version. Bump the version in `opencode.json` and this file together.
+OpenCode and OpenChamber skip `setup`: the repo's `opencode.json` registers the GitNexus MCP server at the same pinned version, with a two-minute startup timeout because the first launch downloads the package. Bump the version in `opencode.json` and this file together.
 
 Re-run `analyze` after pulling large changes or when `status` reports the index is stale. On npm 11 an `npx` install crash (`node.target is null`) is a known issue; `npm i -g gitnexus` then `gitnexus analyze` works around it. Never commit `.gitnexus/`; it contains absolute paths and a machine-local database.
 
@@ -222,23 +222,20 @@ This project is indexed by GitNexus as **hmcchk-web** (2232 symbols, 3907 relati
 
 ## Reply Format
 
-End **every** reply with this block. Write it in plain English for someone who does not code: no code, file paths, or jargon unless they ask. When you are planning rather than building, "What I did" becomes "What I plan to do".
+End **every** reply with these three short lines, in plain English for someone who does not code: no code, file paths, or jargon.
 
-**What I did** — 1 to 3 bullets, described as what a visitor or admin will see.
-**How I checked** — what you ran or opened and the result, the risk to existing pages (from GitNexus `impact`), and what you did not check. Say plainly if something failed or was skipped.
-**What you need to do** — numbered steps for them, including any unticked manual check in the PR, or "Nothing — ready for review."
-**Questions** — only when you need a decision from them; otherwise leave this line out.
+**Done** — one or two sentences on what changed, as a visitor or admin will see it. When planning, call it **Plan** and describe what will change.
+**Checked** — one sentence: what you tested, the risk to existing pages, and anything you could not check or that failed.
+**Next** — exactly one of:
+- a single question when you need their decision, with the options to pick from;
+- one thing only they can do in the website or on GitHub, such as trying the page or approving the PR;
+- in plan mode, "Switch to Build mode and I'll make this change.";
+- "Nothing — ready for review."
+
+You do all the coding, commands, and file changes yourself. Never ask them to edit code, run a command, or open a file.
 
 Example:
 
-> **What I did**
-> - Added the 2027 retreat sign-up confirmation email and made it selectable in the form editor.
->
-> **How I checked**
-> - Previewed the email in the browser at desktop and phone width; lint and build pass.
-> - Risk to existing pages: none, these are new files.
-> - Not checked: a real send, because sending is switched off locally.
->
-> **What you need to do**
-> 1. In the admin form editor, pick the new template for the retreat form.
-> 2. Submit one test entry with a dummy name and check the email that comes back.
+> **Done** — Retreat sign-ups now get a confirmation email.
+> **Checked** — Previewed the email on desktop and phone; no existing pages affected. A real send was not tested because email is switched off locally.
+> **Next** — Submit one test sign-up with a dummy name and check the email arrives.
