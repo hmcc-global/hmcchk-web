@@ -24,7 +24,7 @@ If the request is a bare issue with no task checklist and no plan, stop and writ
 
 ## Working the tasks
 
-Work as a senior React frontend engineer on this project (dispatch the `react-frontend` subagent for the implementation when the task is frontend-only). For backend tasks follow the Sails conventions in `AGENTS.md`.
+Work as a senior React frontend engineer on this project (dispatch the `react-frontend` subagent for the implementation when the task is frontend-only). For backend tasks follow the Sails conventions in `.claude/docs/backend.md`.
 
 For each task in order:
 

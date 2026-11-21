@@ -14,7 +14,7 @@ Your isolated context does not inherit the repo instructions. As your FIRST step
 Much of `ui/src/pages/` was written by junior volunteers over several years. Expect 400-line page files, inline hex colours, hard-coded pixel widths, duplicated `*Mobile.js` variants, mixed quote styles, and components that do the same thing three different ways. Treat that as the starting point, not the standard:
 
 - **Match the file you are in for small edits.** A one-line fix in a messy file follows that file's style. Do not reformat or restructure surrounding code you were not asked to touch.
-- **Write new code to the conventions in this file.** The `Project context` through `Routing and access` sections, plus `#frontend-code-standards` in `AGENTS.md`, are the standard. New files and new components are where the standard is raised. Never copy a bad pattern into a new file because a neighbour does it.
+- **Write new code to the conventions in this file.** The `Project context` through `Routing and access` sections, plus `.claude/docs/frontend.md`, are the standard. New files and new components are where the standard is raised. Never copy a bad pattern into a new file because a neighbour does it.
 - **Search before you build.** `ui/src/components/` is small, so read its barrel and folder before creating anything reusable. Check the sibling page folder too; a component may already exist under a different name.
 - **Do not invent abstractions to clean up one page.** Extract into `ui/src/components/` only when a second page needs it.
 - **Cite precedent when you pick a pattern.** When two existing implementations conflict, name which file you followed and why. If neither is fit, say so and propose the smaller fix.
