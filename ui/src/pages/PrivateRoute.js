@@ -136,7 +136,7 @@ const PrivateRoute = ({ component: Component, permissions, ...rest }) => {
 
             if (props.location.pathname.includes('admin'))
               return (
-                <SidebarWithHeader>
+                <SidebarWithHeader user={userObj}>
                   <Component {...props} user={userObj} />
                 </SidebarWithHeader>
               );

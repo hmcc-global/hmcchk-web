@@ -15,7 +15,6 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../reducers/userSlice';
 import { customAxios as axios } from 'utils/customAxios';
-import { useLocation } from 'react-router-dom';
 import LiveButton from 'components/LiveButton';
 
 const NavBar = (props) => {
@@ -25,7 +24,6 @@ const NavBar = (props) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [userObj, setUserObj] = useState();
-  const location = useLocation();
 
   const liveScStyle = {
     border: '5px',
@@ -106,11 +104,7 @@ const NavBar = (props) => {
         top="0"
         width="100%"
         zIndex="9"
-        display={
-          location.pathname.includes('/admin')
-            ? ['none', 'none', 'flex']
-            : 'flex'
-        }
+        display="flex"
       >
         <Flex
           backgroundColor="#F6FAFF"
