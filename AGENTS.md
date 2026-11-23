@@ -10,18 +10,19 @@
 5. Only then continue with your task.
 
 ### Trigger Table
-If your work involves the task below, read the corresponding document/section first:
+If your work involves the task below, read the corresponding document/section first. Paths are files; `#name` is a section of this file.
+- plan a change, or change any existing code → `#using-gitnexus` and `#smallest-complete-change`
 - write a commit message, branch name, or PR title/description → `.claude/docs/commit-convention.md` and `.claude/docs/pr-description.md`
-- write or change any frontend code → the `react-frontend` skill (or subagent), `#frontend-code-standards`, `#working-in-a-messy-codebase`, and `#common-gotchas`
-- add or change component styling or layout → `#chakra-and-styling`
-- fetch data or call the API from the UI → `#data-and-api`
-- add or change a route, or gate a page on access type → `#routing-and-access`
-- write or change any backend code → `#backend-sails`
-- add or change an API endpoint → `#backend-sails` (routes, policies, and the action shape)
-- touch auth, JWT, or the bearer header → `#auth-flow`
-- send or template an email → `#email`
+- write or change any frontend code, styling, or layout → the `react-frontend` skill (or subagent), `.claude/docs/frontend.md`, `#working-in-a-messy-codebase`, and `#common-gotchas`
+- fetch data or call the API from the UI → `.claude/docs/data-and-api.md`
+- add or change a route, or gate a page on access type → `.claude/docs/routing-and-access.md`
+- write or change any backend code, or add or change an API endpoint → `.claude/docs/backend.md`
+- touch auth, JWT, or the bearer header → `.claude/docs/auth-flow.md`
+- send or template an email → `.claude/docs/email.md`
 - handle member, form-submission, or profile data → `#data-handling`
-- review a branch or PR → the `/code-review` or `/deep-review` skill
+- find where something lives, or add a new file → `.claude/docs/architecture.md`
+- touch CI workflows, deploys, or env vars → `.claude/docs/ci-and-env.md`
+- review a branch or PR → the `/code-review` or `/deep-review` skill, plus the docs above for every area the diff touches
 - execute a plan or issue checklist → the `/gh-execute` skill
 
 ### Required Compliance-line format (the rule text comes from the doc, not from here)
@@ -41,23 +42,56 @@ The HMCC Hong Kong church website. Two independent packages in one repo, no work
 - `server/` — Sails.js v1 backend, MongoDB via `sails-mongo`
 - Root `package.json` holds Prettier and a few shared deps only
 
+Sermons, speakers, and series come from WordPress, not Mongo. The full stack and folder map are in `.claude/docs/architecture.md`.
+
 Tracking is GitHub Issues. Commits are `GH-<issue#>: …`, branches `<issue#>-<description>`, PRs merge `feature` → `release-<topic>` → `main`. See `.claude/docs/commit-convention.md`.
 
-## Important Instruction Reminder
+## Smallest Complete Change
 
-- Do what has been asked; nothing more, nothing less.
-- NEVER create files unless they're absolutely necessary for achieving your goal. Prefer editing an existing file.
-- NEVER proactively create documentation files or READMEs unless asked.
+Solve the whole request with the least new code. Take the first option that fully works:
+
+1. **Does it need to exist?** Skip features, options, and flexibility nobody asked for, and name what you skipped in one line.
+2. **Is it already in this repo?** A component, helper, page, or email template that does the job: reuse it the way the surrounding code does.
+3. **Is it a platform feature or an installed dependency?** Use it. Never add a dependency for a few lines.
+4. **Otherwise**, write the minimum code that works.
+
+- Be lazy about the solution, never about the change: finish every caller, export, dropdown entry, and config line your change needs.
+- No wrapper, abstraction, option, or "for later" code nobody asked for. Deleting beats adding.
+- Bug fix: find every caller first (`#using-gitnexus`), then fix the root cause once in the shared code.
+- Between options of equal size, take the one that is correct on edge cases.
+- Never cut: validation of user input, error handling that prevents data loss, security, accessibility, or anything the user asked for.
+- Do what has been asked; nothing more, nothing less. Prefer editing an existing file over creating one, and never create documentation files or READMEs unless asked.
 - Do not add test files unless the issue asks for them. There is no test suite yet (`server/yarn test` runs lint; the UI has one skipped placeholder). Verify with lint, build, and the browser.
-- Reuse existing pages and components before inventing new ones (see `#working-in-a-messy-codebase`).
 - Use **yarn**, never npm or npx: `yarn` to install, `yarn <script>` to run, `yarn prettier` for binaries. The only `npx` in these docs is `npx gitnexus` (`#gitnexus-setup`), a per-machine tool that is not a project dependency and never touches `package.json` or `yarn.lock`. Node 20+ for the UI (Vite 7's floor; CI pins 20.19.0).
+
+## Reading Code Efficiently
+
+Everything you read stays in your context for the rest of the session and pushes these instructions further away. Read the least that answers the question.
+
+- **Find, then read.** Locate code with GitNexus (`#using-gitnexus`) or `rg -n "<exact text>" ui/src server`, then read only the lines around the match (offset and limit), not the whole file.
+- **Check the size first.** Run `wc -l <file>`; over 300 lines, read only the part you need. Many page files here run past 400 lines.
+- **Never open** `node_modules/`, `yarn.lock`, `ui/build/`, `server/client/`, `.gitnexus/`, images, or minified files.
+- **Filter command output.** `yarn lint --quiet` in `ui/` prints errors only; pipe other long output through `| tail -40`. Use `git diff --stat` before `git diff`, `gh pr diff <n> --name-only` before the full diff, and `gh … --json <fields> --jq '<filter>'` instead of full JSON.
+- **Read once.** Do not re-read a file you already read this session unless it changed.
+
+## Using GitNexus
+
+GitNexus is this repo's code map: it answers "where is this", "what calls this", and "what breaks if I change this" without reading whole files. Use it before grep and before opening files. It needs Node 22.18 or newer, and every command below uses the version pinned in `opencode.json` (`gitnexus@1.6.12`) so the index and the tools always match.
+
+1. **Check it at the start of the session.** Run `npx -y gitnexus@1.6.12 status`. If it says "not indexed" or anything other than `up-to-date`, run `npx -y gitnexus@1.6.12 analyze --index-only` (about 15 seconds; it changes no tracked files). A stale index answers "not found" or "0 impacted" for code that exists.
+2. **Find code** with `query({search_query: "retreat signup form"})` and `context({name: "PrivateRoute"})`. Use `rg` only for exact text such as copy, CSS values, or template names.
+3. **Before editing any existing function or component**, run `impact({target: "<name>", direction: "upstream"})` and put the risk level and the number of affected callers in your reply. HIGH or CRITICAL: stop and tell the user before editing.
+4. **Before committing**, stage your changes and run `detect_changes({scope: "staged"})`; confirm only the symbols you meant to change appear. When reviewing a branch, use `detect_changes({scope: "compare", base_ref: "<base branch>"})` instead.
+5. **No GitNexus MCP tools in this session?** The CLI does the same: `npx -y gitnexus@1.6.12 query "<concept>"`, `… context <name>`, `… impact <name> -f <file>`, `… detect-changes -s staged`. Pipe through `| head -80`.
+
+These steps override the commands in the auto-generated GitNexus block further down. New files, EJS templates, and copy-only edits have no callers: say "new file, nothing existing affected" instead of running `impact`. If GitNexus cannot run at all, say so at the start and fall back to `rg`; never claim an impact result you did not run.
 
 ## Working in a Messy Codebase
 
 Much of `ui/src/pages/` was written by junior volunteers over several years and it shows: 400-line page files, inline hex colours and pixel widths, separate `*Mobile.js` twins of desktop components, mixed quote styles, and three ways of doing the same thing. That is the starting point, not the standard.
 
 - **Small edits match the file they are in.** Do not reformat, rename, or restructure code you were not asked to touch. A diff that mixes a fix with a cleanup is harder to review and to revert.
-- **New code follows the standards in this file.** New files and components are where the bar is raised. Never copy a bad pattern into a new file because a neighbour has it.
+- **New code follows the standards in this file and `.claude/docs/`.** New files and components are where the bar is raised. Never copy a bad pattern into a new file because a neighbour has it.
 - **Search before you build.** `ui/src/components/` is small; read its barrel and folder, then the sibling page folder. A component may exist under a different name.
 - **Extract only on the second use.** A component moves to `ui/src/components/` when a second page needs it, not to tidy one page.
 - **Name your precedent.** When two existing implementations conflict, say which file you followed and why. If neither is fit, say so and propose the smaller change.
@@ -89,225 +123,6 @@ yarn prettier --write "ui/src/<path>"
 
 Prettier config: `.prettierrc.json` — 2-space, single quotes, semicolons, `trailingComma: 'es5'`.
 
-## Technology Stack
-
-- **UI**: React 18, plain JavaScript (`.js` files containing JSX; Vite's esbuild loader is configured for it, so no `.jsx` and no TypeScript), Vite 7 (pinned; Vite 8 has no equivalent JSX-in-.js recipe), Chakra UI **1** + Emotion, framer-motion 4, Redux Toolkit + redux-persist, react-router-dom **5**, axios, react-hook-form, TipTap 2, AG Grid 27 (community + enterprise), luxon 1, react-datepicker, html-react-parser, react-markdown, ExcelJS
-- **Server**: Sails 1, `sails-mongo`, `node-schedule`, `node-cache`, `jsonwebtoken`, `google-auth-library`, `imapflow` + `mailparser`, Nodemailer over Gmail OAuth2
-- **Content source**: WordPress REST API at `hongkong.sub.hmccglobal.org` for sermons, speakers, series, posts, media, pages
-
-Majors only. `ui/package.json` and `server/package.json` are the source of truth for exact versions; check them before relying on an API.
-
-## Architecture
-
-### Frontend (`ui/src/`)
-
-| Path | Role |
-| --- | --- |
-| `index.js` | Entry: `GoogleOAuthProvider` → `StrictMode` → `ChakraProvider`; React 18 `createRoot` |
-| `App.js` | Redux `Provider` → `PersistGate` → `BrowserRouter`; renders `NavBar`, `MainContainer`, `MobileNavBar` |
-| `pages/MainContainer.js` | The entire `<Switch>`. Every route is a `<PrivateRoute>` |
-| `pages/PrivateRoute.js` | Token verification, axios rebuild, static data, admin shell, profile redirects |
-| `pages/<feature>/` | Routed pages plus components used only by that page. PascalCase files |
-| `pages/admin/` | Management UI (`users/`, `forms/`, `announcements/`, `popup/`, `liveSermon/`, `testimony/`, `leadershipTeam/`, `sermonNotes/`, `fundraise/`, `follow-up/`, `navigation/`, `site-links/`, `ag-grid-editors/`) |
-| `components/` | The components library and the **only** import source for UI |
-| `components/chakra/index.js` | The single file allowed to import `@chakra-ui/react` |
-| `components/icons.js` | The single file allowed to import `@chakra-ui/icons` |
-| `components/index.js` | Barrel: explicit named re-exports of the Chakra surface plus app components |
-| `components/TipTap/` | Rich-text editor wrappers |
-| `utils/` | Non-UI shared logic, camelCase files: `customAxios.js`, `constants.js`, `lists.js`, `eventsHelpers.js`, `formsHelpers.js`, `arrayToExcel.js`, `TrackingUtil.js` |
-| `reducers/userSlice.js` | The only Redux slice: `{ user: <jwt string> }` with `signin` / `signout` |
-| `theme.js` | Chakra theme: Inter for heading/body, `dm_sans` / `dm_sans_bold` text styles |
-
-Absolute imports resolve from `ui/src` via `jsconfig.json` (`baseUrl: "src"`) and `vite-tsconfig-paths`: `from 'components'`, `from 'utils/customAxios'`, `from 'pages/...'`.
-
-### Backend (`server/api/`)
-
-| Path | Role |
-| --- | --- |
-| `controllers/<feature>/<action>.js` | One file per action, grouped by feature folder |
-| `models/` | Waterline models on MongoDB, each exporting `{ attributes }` |
-| `helpers/<folder>/<name>.js` | Business logic, called as `sails.helpers.<folder>.<camelCaseName>()` |
-| `policies/` | Auth middleware wired in `config/policies.js` |
-| `responses/` | Custom responses (`unauthorized.js`) |
-| `views/emails/` | EJS email templates |
-
-`config/routes.js` declares every route explicitly. `config/policies.js` maps actions to policies. `config/bootstrap.js` loads `.env`, creates `sails.cache`, and schedules cron jobs.
-
-## Frontend Code Standards
-
-### File organisation
-
-- Pages and page-only components in `pages/<feature>/`. Reusable (2+ pages) components in `components/`.
-- Never import `@chakra-ui/react` or `@chakra-ui/icons` outside the two boundary files. ESLint `no-restricted-imports` fails the build on it. Need a Chakra export the barrel lacks? Add one explicit line to `components/index.js`. Never `export *` there: colliding names are silently dropped.
-- Files inside `components/` import from `./chakra` (relative), never from the `components` barrel (module-init cycle).
-- Changing the UI library (Chakra bump, Tailwind) happens inside `components/` one export at a time; consumers never change. See `ui/src/components/README.md`.
-
-### Imports
-
-```javascript
-// 1. External packages and the components library
-import { Box, Flex, useToast } from 'components';
-import { ChevronLeftIcon } from 'components/icons';
-import { useEffect, useState } from 'react';
-
-// 2. Shared utils (absolute from src) and local relative imports
-import { customAxios as axios } from 'utils/customAxios';
-import HeroSection from './HeroSection';
-
-// 3. Assets
-import logo from './assets/logo.png';
-```
-
-### Component shape
-
-```javascript
-const ComponentName = (props) => {
-  const { title, onSubmit } = props;
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    // effect
-  }, []);
-
-  const handleClick = () => {};
-
-  return <Box>{title}</Box>;
-};
-
-export default ComponentName;
-```
-
-### Naming
-
-- Components `PascalCase`; functions, props, and callbacks `camelCase`; true constants `UPPER_SNAKE_CASE`.
-- Booleans `is/has/should`; event props `on*`; handlers `handle*`.
-- `.js` for everything.
-
-### Preferences
-
-- Functional components with hooks; arrow functions; `const`/`let`.
-- Ternary for either/or rendering, `&&` only for render-if-true, complex conditions extracted to a named `const`.
-- Single quotes (older files use double; leave them unless you are already editing that line).
-- **No type checker exists.** Guard every `.map`, `.length`, and nested property on fetched data. Backend records are inconsistent (old announcements lack `eventType`, speakers may be null, arrays sometimes arrive as strings). One unguarded access white-screens the page silently because of the catch-and-log convention. `Array.isArray` and `?.` are cheap.
-- luxon under Vite is ESM: `DateTime.fromISO(...)`, never `new DateTime.fromISO(...)`.
-- Env vars: `import.meta.env.REACT_APP_*` (Vite with the CRA prefix kept). `process.env.PUBLIC_URL` is defined to `''` and still prefixes public asset paths.
-- Default to no comments. If a line needs explaining, rename the symbol. A comment is for a *why* the code cannot say.
-
-## Chakra and Styling
-
-- Chakra **v1** API only. No v2/v3 names (`colorPalette`, `asChild`, Chakra's `Card`; the repo has its own `components/Card.js`).
-- Responsive props over media queries: `w={{ base: '100%', md: '50%' }}`; `useBreakpointValue({ base: true, md: false })` for logic.
-- Semantic layout: `Flex`, `Box`, `VStack`, `HStack`, `Container`, `SimpleGrid`. `bgColor` not `background`. `_hover` / `_active` for pseudo-states.
-- Prefer theme scale values (`teal.500`, spacing `4`, `textStyle="dm_sans"`) over raw hex and pixels. When matching a Figma token with no theme equivalent, hoist the raw value into one `const` at the top of the file rather than repeating it inline.
-- Every page renders on desktop and mobile. Check both before calling a layout done. Prefer one responsive component over a new `*Mobile.js` twin; when you must edit an existing twin, edit both.
-- `sass` is installed for a few legacy `.scss` files; do not add new ones.
-
-## Data and API
-
-```javascript
-import { customAxios as axios } from 'utils/customAxios';
-
-const fetchData = async () => {
-  try {
-    const { data } = await axios.get('/api/endpoint');
-    setData(data);
-  } catch (err) {
-    console.log(err);
-  }
-};
-```
-
-- `customAxios` is a singleton (`export let customAxios`) rebuilt by `updateAxiosClient(token)` from `PrivateRoute` whenever the token changes. It sets the **`Authorisation`** header (British spelling, see `#auth-flow`). Never rename or "fix" it.
-- Unauthenticated calls (`verify-token`, `forgot-password`) use bare `axios`, as `PrivateRoute` does.
-- `console.log(err)` in catch is the convention. When the user needs feedback (submit, save, email), add a `useToast` with generic text; never render the raw server error.
-- Sermons, series, speakers, posts, and pages come from WordPress through `/api/sermons/*` and arrive as WordPress-shaped HTML; render with `html-react-parser`. Only `UserSermonNotes` and `SermonNotesParent` are in Mongo.
-- Two announcement APIs exist: `/api/announcements/*` (legacy plural) and `/api/announcement/*` (new singular), a migration in progress. Pick deliberately and say which.
-
-## Routing and Access
-
-- react-router-dom **v5**: `<Switch>`, render-prop `<Route render={…}>`, `props.history.push`. Never `useNavigate`, `Routes`, `element=`, or `Navigate`.
-- Every route lives in `pages/MainContainer.js` as `<PrivateRoute permissions={[...]}>`, public ones included. Never a bare `<Route>`.
-- `permissions` values: `'public'` (anyone), `'noUser'` (only when logged out), or an access type: `stewardship`, `admin`, `alumni`, `t3ch`, `signed`, `unsigned`, `ministry`, `tc`. `t3ch` is spelled with a 3; it is the stored value.
-- `PrivateRoute` on mount and on `user` change: calls `/api/auth/verify-token`, clears localStorage and reloads on `token-expired`, rebuilds `customAxios`, loads static lists (lifegroup, campus, lifestage, formAlertType) into `props.staticData`, wraps paths containing `admin` in `SidebarWithHeader`, and redirects `/profile` ↔ `/complete-profile` on `hasFilledProfileForm`.
-- Those redirects match `pathname` by exact string. Adding a sub-route under a gated path (e.g. `/profile/<tab>`) silently bypasses the gate; widen the check to `pathname === '/x' || pathname.startsWith('/x/')` in the same change.
-- Frontend gating is UX only. `server/config/policies.js` is the real check.
-
-## Backend (Sails)
-
-### Action shape
-
-Controllers and helpers share one shape. Do not drift from it.
-
-```javascript
-module.exports = {
-  friendlyName: 'Create form',
-  description: 'Create a new form',
-  inputs: { formToSave: { type: 'json', required: true } },
-  exits: {
-    success: { description: 'Created' },
-    error: { description: 'Failed' },
-  },
-  fn: async function ({ formToSave }, exits) {
-    try {
-      await Form.create(formToSave);
-      return exits.success();
-    } catch (err) {
-      sails.log(err);
-      return exits.error(err);
-    }
-  },
-};
-```
-
-Models are globals: `User.findOne(…)`, no import.
-
-### Routes and policies
-
-- No blueprints, no auto-routing. A new endpoint needs a line in `config/routes.js` **and** an entry in `config/policies.js`, or the default `'*': 'isLoggedIn'` applies.
-- Policies map to access-type sets:
-
-| Policy | Allowed access types |
-| --- | --- |
-| `isLoggedIn` | any logged-in user |
-| `aboveMinistry` | `ministry, tc, t3ch, admin, stewardship` |
-| `aboveTc` | `tc, t3ch, admin, stewardship` |
-| `aboveTcNotTech` | `tc, admin, stewardship` |
-| `aboveTech` | `t3ch, admin, stewardship` |
-| `aboveAdmin` | `admin, stewardship` |
-| `isStewardship` | `stewardship` |
-
-- The catch-all `get /*` serves `server/client/index.html`, the built SPA. That folder exists only after CI builds `ui/` and moves `ui/build/*` there. Route-resolution changes need a real build to test, not `yarn start`.
-
-### Models
-
-- `sails-mongo`; connection in `config/datastores.js` from `MONGODB_*` env vars. `migrate: 'safe'` always.
-- Implicit attributes on every model: `id` (`columnName: '_id'`), `createdAt`, `updatedAt`, **`isDeleted`** (default false). Soft-delete is the convention: filter `isDeleted: false` in queries.
-- `dataEncryptionKeys.default` in `config/models.js` is hard-coded. Leave it unless rotating keys.
-- Models: `User`, `Form`, `Submission`, `Baptism`, `Membership`, `LeadershipTeam`, `Giving`, `PaymentData`, `Announcement`, `PopUp`, `Testimonies`, `Fundraise`, `LiveSermon`, `SermonNotesParent`, `UserSermonNotes`, `LastUpdated`, `ResetPwdToken`.
-
-### Bootstrap and cron (`config/bootstrap.js`)
-
-- `sails.cache` is a `node-cache` with 24h TTL, used via `sails.helpers.cache.cacheLatest()`.
-- Cron via `node-schedule`: `0 0 9 * * *` `cacheLatest()` (also once 1s after lift); `0 0 7 * * 6` `sendBatchUsersQuery()`; `0 0 21 * * *` `parseUserQuery()`.
-
-### Server lint
-
-`yarn lint` in `server/` must show 0 errors before a commit. There are hundreds of pre-existing warnings; do not add to them and do not run `--fix` across files you did not touch.
-
-## Auth Flow
-
-- JWT signed with `process.env.JWT_KEY`. `custom.js` says `tokenExpiryHours: 1`, but `helpers/auth/generate-jwt.js` issues `expiresIn: 24*60*60*7*8` (about 2 months). The helper wins.
-- **The bearer header is spelled `Authorisation`.** `isLoggedIn.js` reads `req.headers.authorisation`; `customAxios.js` sends `Authorisation: 'Bearer ' + token`. The conventional spelling silently 401s. Never correct it on one side only.
-- `verifyJwt` returns the full User minus password and `emailProofToken`; on expiry it exits `'token-expired'`, which `PrivateRoute` watches for.
-- Google OAuth (`auth/post-login-google`) is a separate sign-in path that ends in the same JWT.
-
-## Email
-
-- Templates in `server/views/emails/` as `email-*.ejs` (and `form-*.ejs` for form-success bodies); layout `views/layouts/layout-email.ejs`.
-- Send with `sails.helpers.sendTemplateEmail.with({ template, templateData, to, subject })`.
-- `disableSendEmails: true` in `custom.js` logs the rendered HTML instead of sending. Production flips it. Changing it affects real members.
-- SMTP is Gmail OAuth2: `EMAIL_FROM`, `GOOGLE_CLIENT_ID`, `EMAIL_CLIENT_SECRET`, `EMAIL_REFRESH_TOKEN`. Non-production subjects get a `[UAT]` prefix.
-
 ## Data Handling
 
 Member profiles, life group and campus assignments, form submissions, giving records, and sermon notes are personal data about real congregation members.
@@ -316,17 +131,6 @@ Member profiles, life group and campus assignments, form submissions, giving rec
 - Server log lines carry IDs, not names or emails.
 - `REACT_APP_*` values are inlined into the public bundle; never put a secret there.
 - No credentials in code. Both `.env` files come from GitHub secrets in CI.
-
-## Environment Variables
-
-- `server/.env` (loaded by `dotenv` in `bootstrap.js`): `JWT_KEY`, `EMAIL_FROM`, `GOOGLE_CLIENT_ID`, `EMAIL_CLIENT_SECRET`, `EMAIL_REFRESH_TOKEN`, `MONGODB_*`.
-- `ui/.env`: `REACT_APP_*` only (Vite `envPrefix`). Known: `REACT_APP_GOOGLE_CLIENT_ID`. Required for `yarn build`.
-
-## CI / Deploy (`.github/workflows/`)
-
-- `build-and-upload-workflow.yml` (manual, `uat` or `prod`): installs all three packages, writes env files from `UI_ENV` / `SERVER_ENV` secrets, runs `yarn lint` then `yarn build` in `ui/`, moves `ui/build/*` → `server/client/`, deletes `ui/`, zips, uploads. Node 20.19.0.
-- `deploy-and-delete-workflow.yml` deploys that artifact. `docker-build-deploy.yml`, `pr-preview.yml`, `pr-cleanup.yml` handle container and preview flows.
-- `opencode-review.yml` runs an automated review on every PR open/push and on `/oc` comments. Its findings are addressed as `GH-<issue#>: address opencode comments`.
 
 ## PR and Commit References
 
@@ -354,22 +158,22 @@ Read `.claude/docs/commit-convention.md` and `.claude/docs/pr-description.md` be
 
 - `gh` CLI for issues and PRs: `gh issue view <n> --comments`, `gh pr view --json baseRefName`, `gh pr create --base <branch>`.
 - Skills in `.claude/skills/` (also reachable as `.agents/skills/`): `react-frontend`, `code-review`, `deep-review`, `gh-execute`, plus the `gitnexus/*` set. Every tool that supports `SKILL.md` finds them there.
-- GitNexus is expected in this repo (see `#gitnexus-setup` and the block at the end of this file). The committed parts are the skills and that block; the index itself is per-machine.
+- GitNexus is expected in this repo (see `#using-gitnexus`, `#gitnexus-setup`, and the block below). The committed parts are the skills and these sections; the index itself is per-machine.
 - Agent persona in `.claude/agents/react-frontend.md`. Claude Code dispatches it as a subagent, OpenCode via `.opencode/agent/react-frontend.md`, Cursor via `.cursor/agents/react-frontend.md`, and every other tool through the `react-frontend` skill, which points at the same file. Edit the `.claude/agents/` file only; the other three are pointers.
-- Docs in `.claude/docs/`: `commit-convention.md`, `pr-description.md`.
+- Docs in `.claude/docs/`, read on demand through the trigger table: `commit-convention.md`, `pr-description.md`, `architecture.md`, `frontend.md`, `data-and-api.md`, `routing-and-access.md`, `backend.md`, `auth-flow.md`, `email.md`, `ci-and-env.md`.
 
 ## GitNexus Setup
 
-GitNexus gives the agent a call graph of this repo (impact analysis, execution flows, safe renames). The rules in the block below assume it is running. Two one-time steps per clone:
+GitNexus gives the agent a call graph of this repo (impact analysis, execution flows, safe renames). Two one-time steps per clone:
 
 ```bash
-npx gitnexus analyze        # builds the local index into .gitnexus/ (gitignored, ~60 MB) and writes .gitnexus/run.cjs
-npx gitnexus setup          # registers the MCP server in your coding tool (Claude Code, Cursor, OpenCode, Codex, …); add -c <tool> to pick one
+npx -y gitnexus@1.6.12 analyze --index-only   # builds the local index into .gitnexus/ (gitignored, ~60 MB); needs Node 22.18+
+npx -y gitnexus@1.6.12 setup                  # registers the MCP server in your coding tool (Claude Code, Cursor, Codex, …); add -c <tool> to pick one
 ```
 
-Re-run `analyze` after pulling large changes or when a tool reports the index is stale. On npm 11 an `npx` install crash (`node.target is null`) is a known issue; `npm i -g gitnexus` then `gitnexus analyze` works around it. Never commit `.gitnexus/`; it contains absolute paths and a machine-local database.
+OpenCode and OpenChamber skip `setup`: the repo's `opencode.json` registers the GitNexus MCP server at the same pinned version, with a two-minute startup timeout because the first launch downloads the package. Bump the version in `opencode.json` and this file together.
 
-If GitNexus is not installed yet, say so at the start of the task and fall back to grep and file reads; do not pretend to have run `impact`.
+Re-run `analyze` after pulling large changes or when `status` reports the index is stale. On npm 11 an `npx` install crash (`node.target is null`) is a known issue; `npm i -g gitnexus` then `gitnexus analyze` works around it. Never commit `.gitnexus/`; it contains absolute paths and a machine-local database.
 
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
@@ -415,3 +219,23 @@ This project is indexed by GitNexus as **hmcchk-web** (2232 symbols, 3907 relati
 | Index, status, clean, wiki CLI commands | `.claude/skills/gitnexus/gitnexus-cli/SKILL.md` |
 
 <!-- gitnexus:end -->
+
+## Reply Format
+
+End **every** reply with these three short lines, in plain English for someone who does not code: no code, file paths, or jargon.
+
+**Done** — one or two sentences on what changed, as a visitor or admin will see it. When planning, call it **Plan** and describe what will change.
+**Checked** — one sentence: what you tested, the risk to existing pages, and anything you could not check or that failed.
+**Next** — exactly one of:
+- a single question when you need their decision, with the options to pick from;
+- one thing only they can do in the website or on GitHub, such as trying the page or approving the PR;
+- in plan mode, "Switch to Build mode and I'll make this change.";
+- "Nothing — ready for review."
+
+You do all the coding, commands, and file changes yourself. Never ask them to edit code, run a command, or open a file.
+
+Example:
+
+> **Done** — Retreat sign-ups now get a confirmation email.
+> **Checked** — Previewed the email on desktop and phone; no existing pages affected. A real send was not tested because email is switched off locally.
+> **Next** — Submit one test sign-up with a dummy name and check the email arrives.
