@@ -173,6 +173,7 @@ const MainContainer = () => {
             path="/events/"
             permissions={['public']}
             component={EventsPage}
+            skipAuthGate
           />
 
           <PrivateRoute

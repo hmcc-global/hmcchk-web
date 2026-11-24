@@ -25,3 +25,6 @@ Dockerfile
 # AI tooling (per-machine)
 .claude/settings.local.json
 .gitnexus/
+
+# events SSR build output
+/server/ssr

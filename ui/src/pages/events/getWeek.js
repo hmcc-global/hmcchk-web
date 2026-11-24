@@ -1,14 +1,22 @@
-export default function isDateInThisWeek(date) {
-  const todayObj = new Date();
-  const eventDate = new Date(new Date(date).toDateString());
-  const todayDay = todayObj.getDay();
+import { DateTime } from 'luxon';
 
-  const firstDayOfWeek = new Date(
-    todayObj.setDate(todayObj.getDate() - todayDay + (todayDay === 0 ? -6 : 1))
+const toDateTime = (value) => {
+  if (DateTime.isDateTime(value)) return value;
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return null;
+  return DateTime.fromJSDate(parsed);
+};
+
+export default function isDateInThisWeek(value, now = DateTime.now()) {
+  const eventDate = toDateTime(value);
+  if (!eventDate) return false;
+
+  // weekday is 1 for Monday, matching the old Date-based start of week
+  const firstDayOfWeek = now.startOf('day').minus({ days: now.weekday - 1 });
+  const lastDayOfWeek = firstDayOfWeek.plus({ days: 6 });
+
+  return (
+    eventDate.startOf('day') >= firstDayOfWeek &&
+    eventDate.startOf('day') <= lastDayOfWeek
   );
-  const lastDayOfWeek = new Date(firstDayOfWeek);
-  lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
-  const endOfWeek = new Date(lastDayOfWeek.toDateString());
-
-  return eventDate >= firstDayOfWeek && eventDate <= endOfWeek;
 }

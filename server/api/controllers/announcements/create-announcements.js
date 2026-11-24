@@ -109,6 +109,8 @@ module.exports = {
         return exits.nonSuccess(err);
       }
 
+      sails.cache.del(sails.config.custom.eventsPageCacheKey);
+
       return exits.success();
     } catch (err) {
       sails.log(err);
