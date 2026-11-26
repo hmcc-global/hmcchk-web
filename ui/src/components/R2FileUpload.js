@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Button,
   FormControl,
   FormErrorMessage,
+  FormHelperText,
   FormLabel,
   Input,
   InputGroup,
@@ -28,6 +29,8 @@ const R2FileUpload = (props) => {
   } = props;
 
   const inputRef = useRef();
+  const [uploadedUrl, setUploadedUrl] = useState(null);
+  const isUploadComplete = uploadedUrl && uploadedUrl === inputValue;
   const { upload, isUploading, progress, error, clearError } = useR2Upload({
     folder,
   });
@@ -54,6 +57,7 @@ const R2FileUpload = (props) => {
 
   const handleTextChange = (event) => {
     clearError();
+    setUploadedUrl(null);
     applyUrl(event.target.value);
   };
 
@@ -63,6 +67,7 @@ const R2FileUpload = (props) => {
       return;
     }
 
+    setUploadedUrl(null);
     const result = await upload(file);
     if (!inputRef.current) {
       return;
@@ -70,6 +75,7 @@ const R2FileUpload = (props) => {
     inputRef.current.value = '';
     if (result) {
       applyUrl(result.publicUrl);
+      setUploadedUrl(result.publicUrl);
     }
   };
 
@@ -112,6 +118,11 @@ const R2FileUpload = (props) => {
         </InputGroup>
         {isUploading && (
           <Progress colorScheme="blue" value={progress} min="0" max="100" />
+        )}
+        {isUploadComplete && (
+          <FormHelperText color="green.600">
+            Upload completed successfully.
+          </FormHelperText>
         )}
         <FormErrorMessage>
           {error || (invalid && 'This field is required')}

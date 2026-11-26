@@ -46,6 +46,7 @@ export const useR2Upload = ({ folder }) => {
           },
         });
 
+        console.info('R2 file upload completed successfully');
         return { key: data.key, publicUrl: data.publicUrl };
       } catch (err) {
         console.log(err);
