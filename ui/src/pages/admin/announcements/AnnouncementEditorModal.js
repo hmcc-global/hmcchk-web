@@ -29,9 +29,9 @@ import {
   Link,
   Switch,
   Select,
+  R2FileUpload,
 } from 'components';
 import { eventIntervalList, eventTypeList } from 'utils/lists';
-import FileUpload from 'components/FileUpload';
 import { CUIAutoComplete } from 'chakra-ui-autocomplete';
 
 // eventType drifted across old records: many are missing/null, and CUIAutoComplete
@@ -68,6 +68,7 @@ const AnnouncementEditorModal = (props) => {
   const [isInPpt, setIsInPpt] = useState(false);
   const [description, setDescription] = useState(undefined);
   const [imageAdUrl, setImageAdUrl] = useState(undefined);
+  const [isImageUploading, setIsImageUploading] = useState(false);
   const [location, setLocation] = useState(undefined);
   const [directionsUrl, setDirectionsUrl] = useState(undefined);
   const [displayStartDateTime, setDisplayStartDateTime] = useState(undefined);
@@ -207,6 +208,9 @@ const AnnouncementEditorModal = (props) => {
   };
 
   const onSubmitEditor = async (e) => {
+    if (isImageUploading) {
+      return;
+    }
     try {
       const announcementToSave = {
         title,
@@ -512,17 +516,18 @@ const AnnouncementEditorModal = (props) => {
                       onChange={(e) => setLocation(e.target.value)}
                     />
                   </FormControl>
-                  <FileUpload
-                    id="imageAdUrl"
+                  <R2FileUpload
                     name="imageAdUrl"
-                    acceptedFileTypes="image/*"
+                    acceptedFileTypes="image/png,image/jpeg,image/webp,image/gif"
+                    folder="announcements"
+                    isRequired
                     setImageUrl={setImageAdUrl}
                     inputValue={imageAdUrl}
                     control={control}
-                    onChange={(e) => setImageAdUrl(e.target.value)}
+                    onUploadingChange={setIsImageUploading}
                   >
                     Upload Announcements Image
-                  </FileUpload>
+                  </R2FileUpload>
                   <FormControl>
                     <FormLabel>Announcements Sign-up link</FormLabel>
                     <Input
@@ -570,10 +575,10 @@ const AnnouncementEditorModal = (props) => {
                     colorScheme="blue"
                     type="submit"
                     onClick={onSubmitEditor}
+                    isDisabled={isImageUploading}
                   >
                     {modalSubmitButton(actionOnEditor)}
                   </Button>
-                  ;
                 </Stack>
               </form>
             </Box>

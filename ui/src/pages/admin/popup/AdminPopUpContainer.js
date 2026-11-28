@@ -14,11 +14,11 @@ import {
   Button,
   FormErrorMessage,
   useToast,
+  R2FileUpload,
 } from 'components';
 import { useForm } from 'react-hook-form';
 import PopUpGrid from './PopUpGrid';
 import PopupContainer from './PopupContainer';
-import FileUpload from 'components/FileUpload';
 
 export default function AdminPopUpContainer(props) {
   const toast = useToast();
@@ -30,6 +30,7 @@ export default function AdminPopUpContainer(props) {
   const [selected, setSelected] = useState();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isImageUploading, setIsImageUploading] = useState(false);
   const [id, setId] = useState('');
   const [name, setName] = useState('');
   const [title, setTitle] = useState('');
@@ -154,7 +155,15 @@ export default function AdminPopUpContainer(props) {
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    if (!name || name.length === 0 || nameCheck() || buttonLinkCheck()) return;
+    if (
+      isImageUploading ||
+      !name ||
+      name.length === 0 ||
+      nameCheck() ||
+      buttonLinkCheck()
+    ) {
+      return;
+    }
 
     setIsLoading(true);
     let success = false;
@@ -248,16 +257,17 @@ export default function AdminPopUpContainer(props) {
               />
             </FormControl>
 
-            <FileUpload
+            <R2FileUpload
               name="image"
-              acceptedFileTypes="image/*"
+              acceptedFileTypes="image/png,image/jpeg,image/webp,image/gif"
+              folder="popups"
               setImageUrl={setImage}
               inputValue={image}
               control={control}
-              onChange={(e) => setImage(e.target.value)}
+              onUploadingChange={setIsImageUploading}
             >
               Image URL
-            </FileUpload>
+            </R2FileUpload>
 
             <FormControl>
               <FormLabel>Button Text</FormLabel>
@@ -297,7 +307,12 @@ export default function AdminPopUpContainer(props) {
               </FormControl>
             </HStack>
             <FormControl mt={5}>
-              <Button type="submit" w="full" isLoading={isLoading}>
+              <Button
+                type="submit"
+                w="full"
+                isLoading={isLoading}
+                isDisabled={isImageUploading}
+              >
                 {id && id.length > 0 ? 'UPDATE' : 'SAVE'}
               </Button>
             </FormControl>
